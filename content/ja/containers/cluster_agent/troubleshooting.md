@@ -29,8 +29,20 @@ title: Cluster Agent のトラブルシューティング
 - [Datadog Cluster Agent](#datadog-cluster-agent)
 - [Node Agent](#node-agent)
 - [カスタムメトリクスサーバー](#custom-metrics-server)
+  - [Cluster Agent のステータスとフレア](#cluster-agent-status-and-flare)
+  - [HPA マニフェストの記述](#describing-the-hpa-manifest)
+  - [Datadog と Kubernetes の価値の違い](#differences-of-value-between-datadog-and-kubernetes)
 - [クラスターチェック](#cluster-checks)
+  - [Kubernetes: リーダー Cluster Agent を探す](#kubernetes-find-the-leader-cluster-agent)
+  - [Cluster Agent のオートディスカバリー](#autodiscovery-in-the-cluster-agent)
+  - [Cluster Agent のディスパッチロジック](#dispatching-logic-in-the-cluster-agent)
+  - [ノードベース Agent のオートディスカバリー](#autodiscovery-in-the-node-based-agent)
+  - [Agent ステータス](#agent-status)
 - [エンドポイントチェック](#endpoint-checks)
+  - [Node Agent のオートディスカバリー](#autodiscovery-in-the-node-agent)
+  - [Agent ステータス](#agent-status-1)
+  - [Cluster Agent のオートディスカバリー](#autodiscovery-in-the-cluster-agent-1)
+- [参考文献](#further-reading)
 
 ## Datadog Cluster Agent
 
@@ -165,7 +177,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 
 または、次のようなエラーログを探します。
 
-```shell
+```text
 2018-06-10 08:03:02 UTC | ERROR | Could not initialize the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
 ```
 
@@ -178,13 +190,13 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 * 集計レイヤーと証明書が設定されていることを確認します。
 * 自動スケーリングするメトリクスが利用可能であることを確認します。HPA を作成すると、Datadog Cluster Agent はマニフェストを解析し、Datadog にクエリしてメトリクスの取得を試みます。メトリクス名に表記上の問題がある場合、またはメトリクスが Datadog アプリケーション内に存在しない場合、次のエラーが発生します。
 
-    ```shell
+    ```text
     2018-07-03 13:47:56 UTC | ERROR | (datadogexternal.go:45 in queryDatadogExternal) | Returned series slice empty
     ```
 
 `datadog-cluster-agent status` コマンドを実行して、External Metrics Provider プロセスのステータスを確認します。
 
-```shell
+```text
   Custom Metrics Provider
   =======================
   External Metrics
@@ -197,7 +209,7 @@ root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-coll
 
 この flare コマンドは、`custom-metrics-provider.log` を含む zip ファイルを生成します。このファイルには、次のような出力が表示されます。
 
-```
+```text
   Custom Metrics Provider
   =======================
   External Metrics

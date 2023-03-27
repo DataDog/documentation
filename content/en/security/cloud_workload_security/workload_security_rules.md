@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
 further_reading:
-- link: "/security/cloud_workload_security/getting_started"
+- link: "/security/cloud_workload_security/setup"
   tag: "Documentation"
   text: "Get Started with Cloud Workload Security"
 - link: "/security/cloud_workload_security/agent_expressions"
@@ -32,7 +32,7 @@ A full set of rules for the Agent is called a policy. Datadog provides you with 
 
 ### Agent expressions
 
-Agent expressions define behavior based on activity in your hosts and containers. For example, if you want to detect the following behavior, “the passwd command executed”, there are a few attributes to note.
+Agent expressions define behavior based on activity in your hosts and containers. For example, if you want to detect the following behavior, "the passwd command executed", there are a few attributes to note.
 
 `passwd` is a Unix utility, whose file is `/usr/bin/passwd` (assumed for a first implementation). Execution events include `exec`, `execve`, `fork`, and other system calls. In the Cloud Workload Security environment, all of these events are identified by the `exec` symbol.
 
@@ -40,15 +40,15 @@ Putting it all together, the rule expression is `exec.file.path == "/usr/bin/pas
 
 This example is an actual default rule that is present in the default Cloud Workload Security policy. However, Agent expressions can also be more advanced. For instance, you can define rules that match on process ancestors or use wildcards for broader detections.
 
-For example, if you want to detect the following behavior: “When a PHP or Nginx process launches bash”, there are a few attributes to note.
+For example, if you want to detect the following behavior: "When a PHP or Nginx process launches bash", there are a few attributes to note.
 
 `bash` is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). Like in the previous example, to detect execution, include in your rule: `exec.file.path == "/usr/bin/bash"`. This ensures the rule isn't only accounting for the execution of the bash, but also bash as a child process of PHP or Nginx.
 
 A process ancestor’s filename in Cloud Workload Security is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. **Note**: Use the tilde when using wildcards.
 
-Putting it all together, the rule expression is: `exec.file.path == “/usr/bin/bash”  && (process.ancestors.file.name == “nginx” || process.ancestors.file.name =~ "php*")`
+Putting it all together, the rule expression is: `exec.file.path == "/usr/bin/bash"  && (process.ancestors.file.name == "nginx" || process.ancestors.file.name =~ "php*")`
 
-This is one part of a default rule present when using Cloud Workload Security out-of-the-box, which checks a variety of shells, shell utilities, web servers, and language engines using lists. The right side of an equality can be a list of the form `[“a”, “b”, “c”, ...]`.
+This is one part of a default rule present when using Cloud Workload Security out-of-the-box, which checks a variety of shells, shell utilities, web servers, and language engines using lists. The right side of an equality can be a list of the form `["a", "b", "c", ...]`.
 
 At some point, you may want to write your own custom rules for the Agent to use. Below are guidelines for writing efficient rules and step-by-step instructions on how to create custom rules in Datadog.
 

@@ -111,3 +111,8 @@ outputFormats:
     isPlainText: true
     mediaType: "application/json"
     notAlternative: true
+  Redirects:
+    baseName: "redirects"
+    isPlainText: true
+    mediaType: "text/plain"
+    notAlternative: true

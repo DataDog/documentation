@@ -221,11 +221,39 @@
       "description": "Create an incident attachment returns \"OK\" response"
     }
   ],
+  "CreateIncidentIntegration": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident integration metadata returns \"CREATED\" response"
+    }
+  ],
   "CreateIncident": [
     {
       "group": "incidents",
       "suffix": "",
       "description": "Create an incident returns \"CREATED\" response"
+    }
+  ],
+  "CreateIncidentTodo": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident todo returns \"CREATED\" response"
+    }
+  ],
+  "UpdateIncidentIntegration": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an existing incident integration metadata returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentTodo": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an incident todo returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [

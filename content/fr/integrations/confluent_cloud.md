@@ -1,24 +1,27 @@
 ---
 categories:
-  - web
-ddtype: crawler
+- web
 dependencies: []
-description: "Recueille des métriques sur les connecteurs et les clusters Kafka depuis Confluent\_Cloud."
+description: Recueille des métriques sur les connecteurs et les clusters Kafka depuis
+  Confluent Cloud.
 doc_link: https://docs.datadoghq.com/integrations/confluent_cloud/
 draft: false
 git_integration_title: confluent_cloud
 has_logo: true
 integration_id: ''
-integration_title: "Confluent\_Cloud"
+integration_title: Confluent Cloud
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: confluent_cloud
-public_title: "Intégration Datadog/Confluent\_Cloud"
-short_description: "Recueille des métriques sur les connecteurs et les clusters Kafka depuis Confluent\_Cloud."
+public_title: Intégration Datadog/Confluent Cloud
+short_description: Recueille des métriques sur les connecteurs et les clusters Kafka
+  depuis Confluent Cloud.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 {{< site-region region="gov" >}}
@@ -37,9 +40,9 @@ Installez l'intégration avec le [carré d'intégration Confluent Cloud de Data
 ### Configuration
 
 1. Dans le carré d'intégration, accédez à l'onglet **Configuration**.
-2. Cliquez sur **+ Add API Key** pour saisir votre [clé d'API et votre secret d'API Confluent Cloud](clé-et-secret-d-api).
+2. Cliquez sur **+ Add API Key** pour saisir votre [clé d'API et votre secret d'API Confluent Cloud](#clé-et-secret-d-api).
 3. Cliquez sur **Save**. Datadog recherche alors tous les comptes associés aux informations fournies.
-4. Ajoutez votre [ID de cluster](id-de-cluster) ou votre [ID de connecteur](id-de-connecteur) Confluent Cloud. Datadog récupère les métriques Confluent Cloud et les affiche après quelques minutes.
+4. Ajoutez votre [ID de cluster](id-de-cluster) ou votre [ID de connecteur](#id-de-connecteur) Confluent Cloud. Datadog récupère les métriques Confluent Cloud et les affiche après quelques minutes.
 
 #### Clé et secret d'API
 

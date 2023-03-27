@@ -12,7 +12,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-Feature Flag data collection in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
+Feature Flag analysis for RUM is in private beta. To request access, contact Support at support@datadoghq.com. In the meantime, follow the instructions below to enrich your RUM events with feature flag context.
 {{< /callout >}}
 
 ## Overview
@@ -26,9 +26,11 @@ Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM
 You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners. 
 
 We currently support integrations with:
-- [LaunchDarkly](#launchdarkly-integration)
-- [Split](#split-integration)
-- [Flagsmith](#flagsmith-integration)
+
+{{< partial name="rum/rum-feature-flag-tracking.html" >}}
+
+
+</br>
 
 ### Custom feature flag management
 

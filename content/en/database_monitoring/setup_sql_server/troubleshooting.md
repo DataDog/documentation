@@ -51,7 +51,7 @@ TCP connection issues are common when there is a setup misconfiguration with the
 
 For example, the following error is because the TCP connection failed:
 
-```shell
+```bash
 TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could not open database requested by login
 ```
 
@@ -73,7 +73,7 @@ To troubleshoot:
 
 2. Try to login manually using sqlcmd and see if there’s an issue with the configured database. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
-####  Due to “Invalid connection string attribute”
+####  Due to "Invalid connection string attribute"
 
 The following ADO Providers are supported on Windows: `SQLOLEDB`, `MSOLEDBSQL`, `MSOLEDBSQL19`, `SQLNCLI11`.
 
@@ -317,7 +317,7 @@ The `user` tag is no longer supported for Query Metrics and Plan Samples due to 
 
 The `user` tag is available for Query Activity events and Database Load metrics.
 
-### Why are there so many “CREATE PROCEDURE” queries?
+### Why are there so many "CREATE PROCEDURE" queries?
 
 In versions of the agent older than 7.40.0, there exists a bug where `PROCEDURE` statistics are over counted. This leads to seeing many executions of `CREATE PROCEDURE...` in the database-monitoring Query Metrics UI. In order to fix this issue, please upgrade to the latest version of the Datadog agent.
 

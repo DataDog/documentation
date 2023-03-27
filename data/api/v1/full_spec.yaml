@@ -697,7 +697,8 @@ components:
       description: Cancel downtimes according to scope.
       properties:
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -1742,7 +1743,8 @@ components:
         recurrence:
           $ref: '#/components/schemas/DowntimeRecurrence'
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -1876,7 +1878,8 @@ components:
         recurrence:
           $ref: '#/components/schemas/DowntimeRecurrence'
         scope:
-          description: 'The scope(s) to which the downtime applies. For example, `host:app2`.
+          description: 'The scope(s) to which the downtime applies and must be in
+            `key:value` format. For example, `host:app2`.
 
             Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
 
@@ -3815,6 +3818,7 @@ components:
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
+      - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
       - cws_hosts_usage
@@ -3846,6 +3850,7 @@ components:
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
+      - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_USAGE
@@ -4300,8 +4305,10 @@ components:
       - logs_stream
       - audit_stream
       - ci_pipeline_stream
+      - ci_test_stream
       - rum_issue_stream
       - apm_issue_stream
+      - logs_issue_stream
       - logs_pattern_stream
       - logs_transaction_stream
       - event_stream
@@ -4311,8 +4318,10 @@ components:
       - LOGS_STREAM
       - AUDIT_STREAM
       - CI_PIPELINE_STREAM
+      - CI_TEST_STREAM
       - RUM_ISSUE_STREAM
       - APM_ISSUE_STREAM
+      - LOGS_ISSUE_STREAM
       - LOGS_PATTERN_STREAM
       - LOGS_TRANSACTION_STREAM
       - EVENT_STREAM
@@ -7279,6 +7288,8 @@ components:
       - cspm_hosts_usage
       - custom_timeseries_usage
       - custom_timeseries_percentage
+      - custom_ingested_timeseries_usage
+      - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
       - cws_hosts_percentage
@@ -7340,6 +7351,8 @@ components:
       - CSPM_HOSTS_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
+      - CUSTOM_INGESTED_TIMESERIES_USAGE
+      - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_PERCENTAGE
@@ -7464,12 +7477,20 @@ components:
           description: The CSPM host usage by tag(s).
           format: double
           type: number
+        custom_ingested_timeseries_percentage:
+          description: The percentage of ingested custom metrics usage by tag(s).
+          format: double
+          type: number
+        custom_ingested_timeseries_usage:
+          description: The ingested custom metrics usage by tag(s).
+          format: double
+          type: number
         custom_timeseries_percentage:
-          description: The percentage of custom metrics usage by tag(s).
+          description: The percentage of indexed custom metrics usage by tag(s).
           format: double
           type: number
         custom_timeseries_usage:
-          description: The custom metrics usage by tag(s).
+          description: The indexed custom metrics usage by tag(s).
           format: double
           type: number
         cws_containers_percentage:
@@ -16006,7 +16027,7 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
-        application_security_host_top99:
+        application_security_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17275,6 +17296,11 @@ components:
             the current date for all organizations.
           format: int64
           type: integer
+        audit_trail_enabled_hwm:
+          description: Shows the number of organizations that had Audit Trail enabled
+            in the current date.
+          format: int64
+          type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
@@ -17659,6 +17685,11 @@ components:
         audit_logs_lines_indexed_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        audit_trail_enabled_hwm:
+          description: Shows whether Audit Trail is enabled for the current date for
+            the given org.
           format: int64
           type: integer
         avg_profiled_fargate_tasks:
@@ -18048,6 +18079,11 @@ components:
         audit_logs_lines_indexed_agg_sum:
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        audit_trail_enabled_hwm_sum:
+          description: Shows the total number of organizations that had Audit Trail
+            enabled over a specific number of months.
           format: int64
           type: integer
         avg_profiled_fargate_tasks_sum:
@@ -21402,6 +21438,12 @@ paths:
         required: false
         schema:
           type: boolean
+      - description: Return creator information.
+        in: query
+        name: with_creator
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
@@ -22097,14 +22139,14 @@ paths:
         name: metric_query
         schema:
           type: string
-      - description: The POSIX timestamp of the start of the query.
+      - description: The POSIX timestamp of the start of the query in seconds.
         in: query
         name: start
         required: true
         schema:
           format: int64
           type: integer
-      - description: The POSIX timestamp of the end of the query.
+      - description: The POSIX timestamp of the end of the query in seconds.
         in: query
         name: end
         required: true

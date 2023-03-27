@@ -37,7 +37,7 @@ Choose between an **APM Metrics** or a **Trace Analytics** monitor:
 
 ### Select monitor scope
 
-Choose your [primary tags][1], [service][2], and [resource][3] from the drop-down menus.
+Choose your [primary tags][1], [service][2], and [resource][3] from the dropdown menus.
 
 ### Set alert conditions
 
@@ -91,7 +91,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 {{< img src="monitors/monitor_types/apm/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
 
-**Note:** Analytics monitors can only be created based on [Indexed Spans][4].
+**Note:** Analytics monitors can only be created based on spans retained by [custom retention filters][6] (not the intelligent retention filter).
 
 ### Select alert conditions
 
@@ -113,6 +113,7 @@ For detailed instructions on the advanced alert options (evaluation delay, etc.)
 [3]: /tracing/trace_explorer/query_syntax/#numerical-values
 [4]: /tracing/glossary/#indexed-span
 [5]: /monitors/configuration/#advanced-alert-conditions
+[6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 {{% /tab %}}
 {{< /tabs >}}
 

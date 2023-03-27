@@ -39,13 +39,13 @@ public_title: LaunchDarkly
 short_description: 機能リリースとインフラストラクチャーの変更を自信を持ってコントロールすることができます。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Notification
   - Offering::UI Extension

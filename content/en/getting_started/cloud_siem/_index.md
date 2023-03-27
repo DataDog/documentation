@@ -55,7 +55,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 2. Explore [security signals][11]. When a threat is detected with a detection rule, a security signal is generated. See the [security signals][12] documentation for more information.
 
-    - [Set up notification rules][13] to alert when signals are generated. You can alert using Slack, Jira, email, or webhooks. See the [notification rules][14] documentation for more information.
+    - [Set up notification rules][13] to alert when signals are generated. You can alert using Slack, Jira, email, webhooks, and other integrations. See the [notification rules][14] documentation for more information.
 
 ## Phase 3: Investigation
 

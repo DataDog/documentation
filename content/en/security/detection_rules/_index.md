@@ -40,7 +40,7 @@ The [Detection Rules][9] page lets you search all detection rules by rule type. 
 
 ### Finding detection rules
 
-The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no “Search” button to click.
+The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no "Search" button to click.
 
 #### Filter by facet
 
@@ -79,7 +79,7 @@ Use granular access controls to limit the [roles][10] that may edit a single rul
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles that may edit the security rule.
+1. Use the dropdown to select one or more roles that may edit the security rule.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**

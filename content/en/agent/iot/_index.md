@@ -85,23 +85,23 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
    ```
 
 4. Update `apt` and install the IoT Agent:
-    ```bash
+    ```shell
     sudo apt-get update
     sudo apt-get install datadog-iot-agent datadog-signing-keys
     ```
 
 5. Copy the example config and plug in your API key:
-    ```bash
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 6. Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 7. Start the IoT Agent:
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
@@ -131,23 +131,23 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
     - ARMv7 - `https://yum.datadoghq.com/stable/7/armv7hl/`
 
 2. Update your local yum repo and install the Agent:
-    ```
+    ```shell
     sudo yum makecache
     sudo yum install datadog-iot-agent
     ```
 
 3. Copy the example config and plug in your API key:
-    ```
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 4. Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 5. Start the IoT Agent:
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 

@@ -4458,7 +4458,7 @@ __metadata:
     eslint-plugin-react-hooks: ^2.5.0
     eslint-plugin-standard: ^4.0.0
     fancy-log: ^1.3.3
-    hugo-bin: 0.97.0
+    hugo-bin: 0.99.3
     instantsearch.js: ^4.49.1
     jest: ^25.3.0
     jquery: 3.5.1
@@ -6300,9 +6300,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hugo-bin@npm:0.97.0":
-  version: 0.97.0
-  resolution: "hugo-bin@npm:0.97.0"
+"hugo-bin@npm:0.99.3":
+  version: 0.99.3
+  resolution: "hugo-bin@npm:0.99.3"
   dependencies:
     bin-wrapper: ^4.1.0
     picocolors: ^1.0.0
@@ -6310,7 +6310,7 @@ __metadata:
     rimraf: ^3.0.2
   bin:
     hugo: cli.js
-  checksum: 225023036f2374aca187b3c4d3b7cd9561630be3803d92e36439b6184520d4b064583e555f151e9392bc8be10b4ef0a10acd018e009d7bac8480af57d6798e37
+  checksum: e6a0af29ad039bfd07409e296ba4221614070faa0f778a6e0a6333b95311b1a6333ef8437f884918bd6061e299237d03db81beb376865a0a3d455dec9354267f
   languageName: node
   linkType: hard
 

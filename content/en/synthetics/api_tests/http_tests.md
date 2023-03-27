@@ -66,7 +66,7 @@ After choosing to create an `HTTP` test, define your test's request.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
    * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
-     For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+     For "Single Chunk" transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).  
    
    {{% /tab %}}
@@ -169,7 +169,7 @@ Location uptime is computed on a per-evaluation basis (whether the last test res
 
 A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
 
-1. [Similar to how you configure monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the drop-down box.
+1. [Similar to how you configure monitors][7], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the dropdown box.
 
 2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][8] and supports the following [conditional variables][9]:
 
@@ -190,39 +190,15 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 For more information, see [Using Synthetic Test Monitors][10].
 
-## Variables
-
-### Create local variables
-
-To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
-
-`{{ numeric(n) }}`
-: Generates a numeric string with `n` digits.
-
-`{{ alphabetic(n) }}`
-: Generates an alphabetic string with `n` letters.
-
-`{{ alphanumeric(n) }}`
-: Generates an alphanumeric string with `n` characters.
-
-`{{ uuid }}`
-: Generates a version 4 universally unique identifier (UUID).
-
-`{{ date(n unit, format) }}`
-: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
-
-`{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
-
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
+{{% synthetics-variables %}}
 
 ### Use variables
 
-You can use the [global variables defined in the `Settings`][11] in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined on the **Settings** page][11] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="Using Variables in API tests" video="true" width="90%" >}}
+{{< img src="synthetics/api_tests/http_use_variable.mp4" alt="Using variables in an HTTP test" video="true" width="100%" >}}
 
 ## Test failure
 

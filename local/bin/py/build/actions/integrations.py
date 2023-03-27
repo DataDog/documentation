@@ -6,6 +6,9 @@ import json
 import linecache
 import re
 import shutil
+import sys
+from collections import defaultdict
+
 import yaml
 import markdown2
 
@@ -23,6 +26,23 @@ from os.path import (
 )
 
 from actions.format_link import format_link_file
+
+try:
+    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifier_names
+    CLASSIFIER_TAGS = get_all_classifier_names()
+except ImportError:
+    CLASSIFIER_TAGS = []
+    if getenv("CI_COMMIT_REF_NAME"):
+        print('\x1b[31mERROR\x1b[0m: CLASSIFIER_TAGS validation unavailable, Aborting')
+        sys.exit(1)
+finally:
+    if not CLASSIFIER_TAGS:
+        print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty continuing without validation')
+    else:
+        with open('layouts/shortcodes/integration_categories.md', 'w') as file:
+            for tag in get_non_deprecated_classifier_names():
+                file.write(f'- {tag}\n')
+            file.write("\n")
 
 
 class Integrations:
@@ -471,7 +491,7 @@ class Integrations:
 
             new_file_name = "{}aws.json".format(self.data_npm_dir)
 
-        elif file_name.endswith("gcp_services.go"):
+        elif file_name.endswith("gcp_services.go") or file_name.endswith("azure_services.go"):
 
             with open(file_name) as fh:
 
@@ -482,7 +502,10 @@ class Integrations:
                         integration = line.split('"')[3]
                         dict_npm[integration] = {"name": integration}
 
-            new_file_name = "{}gcp.json".format(self.data_npm_dir)
+            if file_name.endswith("gcp_services.go"):
+                new_file_name = "{}gcp.json".format(self.data_npm_dir)
+            elif file_name.endswith("azure_services.go"):
+                new_file_name = "{}azure.json".format(self.data_npm_dir)
 
         if new_file_name != "":
             with open(
@@ -773,9 +796,9 @@ class Integrations:
             result = re.sub(
                 self.regex_partial_close, "", result, 0
             )
-            result = re.sub(
-                self.regex_site_region, r"{{% \1 %}}", result, 0   
-            )
+            # result = re.sub(
+            #     self.regex_site_region, r"{{% \1 %}}", result, 0
+            # )
 
         # if __init__.py exists lets grab the integration id
         integration_id = manifest_json.get("integration_id", "") or ""
@@ -900,6 +923,19 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 item["integration_version"] = item.get("integration_version", integration_version)
+                # remove aliases that point to the page they're located on
+                # get the current slug from the doc_link
+                if item.get('name'):
+                    current_slug = 'integrations/{}'.format(item.get('name'))
+                # If there are aliases and the current slug value, check to see if they match and if they do, remove it
+                if (item.get('aliases')) and current_slug:
+                    # loop over the aliases
+                    for single_alias in item['aliases']:
+                        # strip any tailing and leading / and see if the alias matches the page slug
+                        if current_slug == single_alias.strip('/'):
+                            # add the alias from the list
+                            item['aliases'].remove(single_alias)
+                            print(f"\033[94mALIAS REMOVAL\x1b[0m: Removed redundant alias: {single_alias}")
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
@@ -950,6 +986,23 @@ class Integrations:
 
         return dependencies
 
+    def validate_classifier(self, key, value):
+        """
+        creates a structure like this so we can easily lookup
+        {
+            "category": ["os system", "metrics"],
+            "supported os": []
+        }
+        @param key: classifier key e.g category
+        @param value: classifier value e.g marketplace
+        """
+        # build a lookup
+        data = defaultdict(list)
+        for tag in CLASSIFIER_TAGS:
+            tag_key, tag_val = tag.lower().split("::")
+            data[tag_key].append(tag_val)
+        return value in data[key]
+
     def process_manifest(self, manifest_json, name):
         """ Takes manifest and converts v2 and above to v1 expected formats for now """
         manifest_version = (manifest_json.get("manifest_version", '1.0.0') or '1.0.0').split('.')
@@ -959,19 +1012,26 @@ class Integrations:
             manifest_json["integration_id"] = manifest_json.get("app_id", "")
             categories = []
             supported_os = []
-            classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", [])
-            for tag in classifier_tags:
+            manifest_classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", [])
+            skipped_tags = []
+            for tag in manifest_classifier_tags:
                 # in some cases tag was null/None
                 if tag:
-                    key, value = tag.split("::")
-                    if key.lower() == "category":
-                        categories.append(value.lower())
-                    if key.lower() == "supported os":
-                        supported_os.append(value.lower())
+                    key, value = tag.lower().split("::")
+                    if key == "category":
+                        # if it validates or we have no classifiers (e.g
+                        if self.validate_classifier(key, value) or not CLASSIFIER_TAGS:
+                            categories.append(value)
+                        else:
+                            skipped_tags.append(value)
+                    if key == "supported os":
+                        supported_os.append(value)
             manifest_json["categories"] = categories
             manifest_json["supported_os"] = supported_os
             manifest_json["public_title"] = manifest_json.get("tile", {}).get("title", '')
             manifest_json["is_public"] = manifest_json.get("display_on_public_website", False)
             manifest_json["short_description"] = manifest_json.get("tile", {}).get("description", '')
             manifest_json["name"] = manifest_json.get("name", name)
+            if skipped_tags:
+                print(f'\x1b[33mWARNING\x1b[0m: Categories skipped on integration {manifest_json["name"]}, {skipped_tags}')
         return manifest_json

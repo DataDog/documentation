@@ -165,7 +165,7 @@ disable_edit: true
        - `external_ipv6`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `externalIpv6`<br>
-        **説明**: このインスタンスに関連付けられた外部 IPv6 範囲の最初の IPv6 アドレス。プレフィックスの長さは ipv6AccessConfig の externalIpv6PrefixLength に格納されます。このフィールドは出力のみで、インスタンスに関連付けられたサブネットワークからの IPv6 アドレスは、動的に割り当てられます。<br>
+        **説明**: このインスタンスに関連する外部 IPv6 範囲の最初の IPv6 アドレスで、プレフィックス長は ipv6AccessConfig の externalIpv6PrefixLength に格納されます。静的な外部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、GCP はインスタンスのサブネットワークから外部 IPv6 アドレスを自動的に割り当てます。<br>
        - `external_ipv6_prefix_length`<br>
         **タイプ**: `INT32`<br>
         **プロバイダー名**: `externalIpv6PrefixLength`<br>
@@ -229,7 +229,7 @@ disable_edit: true
        - `external_ipv6`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `externalIpv6`<br>
-        **説明**: このインスタンスに関連付けられた外部 IPv6 範囲の最初の IPv6 アドレス。プレフィックスの長さは ipv6AccessConfig の externalIpv6PrefixLength に格納されます。このフィールドは出力のみで、インスタンスに関連付けられたサブネットワークからの IPv6 アドレスは、動的に割り当てられます。<br>
+        **説明**: このインスタンスに関連する外部 IPv6 範囲の最初の IPv6 アドレスで、プレフィックス長は ipv6AccessConfig の externalIpv6PrefixLength に格納されます。静的な外部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、GCP はインスタンスのサブネットワークから外部 IPv6 アドレスを自動的に割り当てます。<br>
        - `external_ipv6_prefix_length`<br>
         **タイプ**: `INT32`<br>
         **プロバイダー名**: `externalIpv6PrefixLength`<br>
@@ -280,7 +280,7 @@ disable_edit: true
    - `ipv6_address`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `ipv6Address`<br>
-    **説明**: このネットワークインターフェイスの IPv6 内部ネットワークアドレス。<br>
+    **説明**: このネットワークインターフェイスの IPv6 内部ネットワークアドレス。静的な内部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、GCP はインスタンスのサブネットワークから内部 IPv6 アドレスを自動的に割り当てます。<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
     **Provider name**: `kind`<br>
@@ -293,6 +293,10 @@ disable_edit: true
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `network`<br>
     **説明**: このインスタンスの VPC ネットワークリソースの URL。インスタンスの作成時に、ネットワークもサブネットワークも指定しなかった場合、デフォルトのネットワーク global/networks/default が使用されます。選択したプロジェクトにデフォルトのネットワークがない場合、ネットワークまたはサブネットを指定する必要があります。ネットワークが指定されておらず、サブネットワークが指定されている場合、そのネットワークが推論されます。このプロパティを指定する場合、ネットワークを完全な URL または部分的な URL として指定することができます。たとえば、以下はすべて有効な URL です: - https://www.googleapis.com/compute/v1/projects/project/global/networks/ network - projects/project/global/networks/network - global/networks/default<br>
+   - `network_attachment`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `networkAttachment`<br>
+    **説明**: projects/{project_number}/regions/{region_name}/networkAttachments/{network_attachment_name} の形式の、このインターフェイスが接続すべきネットワークアタッチの URL。<br>
    - `network_ip`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `networkIP`<br>
@@ -496,7 +500,7 @@ disable_edit: true
 **説明**: マシンイメージからインスタンスを作成する際の、ソースマシンイメージの暗号化キー。<br>
    - `kms_key_name`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `kmsKeyName`<br>
+    **プロバイダー名**: `kmsKeyName`<br>
     **説明**: Google Cloud KMS に保存される暗号化キーの名前。例: "kmsKeyName": "projects/kms_project_id/locations/region/keyRings/key_region/cryptoKeys/key<br>
    - `kms_key_service_account`<br>
     **タイプ**: `STRING`<br>

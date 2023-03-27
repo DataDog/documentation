@@ -174,6 +174,51 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 
 [1]: /ja/real_user_monitoring/ios/
 {{% /tab %}}
+{{% tab "React Native RUM" %}}
+
+1.  [RUM React Native モニタリング][1]を設定します。
+
+2.  `firstPartyHosts` の初期化パラメーターを設定して、React Native アプリケーションが呼び出す内部のファーストパーティオリジンのリストを定義します。
+    ```javascript
+    const config = new DatadogProviderConfiguration(
+        // ...
+    );
+    config.firstPartyHosts = ["example.com", "api.yourdomain.com"];
+    ```
+
+    デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
+
+3. _(オプション)_ `resourceTracingSamplingRate` 初期化パラメーターを設定して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。
+
+     バックエンドトレースの 100% を保持する場合:
+    ```javascript
+    const config = new DatadogProviderConfiguration(
+        // ...
+    );
+    config.resourceTracingSamplingRate = 100;
+    ```
+
+   **注**: `resourceTracingSamplingRate` は RUM セッションのサンプリングには影響**しません**。バックエンドのトレースのみがサンプリングされます。
+
+[1]: /ja/real_user_monitoring/reactnative/
+{{% /tab %}}
+{{% tab "Flutter RUM" %}}
+
+1. [RUM Flutter モニタリング][1]を設定します。
+
+2. [Automatic Resource Tracking][2] の説明に従って、Datadog Tracking HTTP Client パッケージを含め、HTTP 追跡を有効にします。これには、Flutter アプリケーションによって呼び出される内部、ファーストパーティーのオリジンのリストを追加するために、初期化に対する以下の変更が含まれます。
+    ```dart
+    final configuration = DdSdkConfiguration(
+      // ...
+      // added configuration
+      firstPartyHosts: ['example.com', 'api.yourdomain.com'],
+    )..enableHttpTracking()
+    ```
+
+[1]: /ja/real_user_monitoring/flutter/
+[2]: /ja/real_user_monitoring/flutter/#automatic-resource-tracking
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## サポートされるライブラリ
@@ -269,7 +314,56 @@ RUM は、OpenTelemetry ライブラリを使ってインスツルメントさ�
       - `.B3`: [B3 シングルヘッダー](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `.B3MULTI`: [B3 マルチヘッダー](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
-{{% /tab %}} {{< /tabs >}}
+{{% /tab %}}
+
+{{% tab "React Native RUM" %}}
+1. RUM を [APM と接続](#setup-rum)するように設定します。
+
+2. 内部のファーストパーティオリジンのリストと、使用するトレーシングヘッダータイプを指定して、次のように RUM SDK を構成します。
+    ```javascript
+    const config = new DatadogProviderConfiguration(
+        // ...
+    );
+    config.firstPartyHosts = [
+        {match: "example.com", propagatorTypes: PropagatorType.TRACECONTEXT},
+        {match: "example.com", propagatorTypes: PropagatorType.DATADOG}
+    ];
+    ```
+
+   `PropagatorType` は列挙型で、次のトレーシングヘッダータイプを表します。
+      - `PropagatorType.DATADOG`: Datadog のプロパゲーター (`x-datadog-*`)
+      - `PropagatorType.TRACECONTEXT`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `PropagatorType.B3`: [B3 シングルヘッダー](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
+      - `PropagatorType.B3MULTI`: [B3 マルチヘッダー](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
+
+{{% /tab %}} 
+
+{{% tab "Flutter RUM" %}}
+1. 上記に従い、RUM を APM に接続するためのセットアップを行います。
+
+2. 以下のように、`firstPartyHosts` の代わりに `firstPartyHostsWithTracingHeaders` を使用します。
+    ```dart
+    final configuration = DdSdkConfiguration(
+      // ...
+      // added configuration
+      firstPartyHostsWithTracingHeaders: {
+        'example.com': { TracingHeaderType.tracecontext },
+      },
+    )..enableHttpTracking()
+    ```
+
+   `firstPartyHostsWithTracingHeaders` には `Map<String, Set<TracingHeaderType>>` をパラメーターとして指定します。キーはホスト、値はサポートされるサポートトレーシングヘッダータイプのリストになります。
+
+    `TracingHeaderType` は列挙型で、次のトレーシングヘッダータイプを表します。
+      - `TracingHeaderType.datadog`: Datadog のプロパゲーター (`x-datadog-*`)
+      - `TracingHeaderType.tracecontext`: [W3C Trace Context](https://www.w3.org/TR/trace-context/) (`traceparent`)
+      - `TracingHeaderType.b3`: [B3 シングルヘッダー](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
+      - `TracingHeaderType.b3multi`: [B3 マルチヘッダー](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 ## RUM リソースはどのようにトレースにリンクされていますか？
 

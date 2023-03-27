@@ -1,6 +1,5 @@
 ---
 aliases:
-- /ja/security/tracing
 - /ja/tracing/security
 - /ja/tracing/guide/security
 - /ja/tracing/guide/agent_obfuscation
@@ -178,12 +177,6 @@ apm_config:
 
 Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、[スパンタグのセマンティクス][3]を参照してください。
 
-### クライアント IP ヘッダーの構成
-
-Datadog は自動的に、`X-Forwarded-For` のようなよく知られたヘッダーから、`http.client_ip` を解決しようとします。もし、このフィールドにカスタムヘッダーを使用したり、解決アルゴリズムをバイパスしたい場合は、`DD_TRACE_CLIENT_IP_HEADER` 環境変数を設定すると、ライブラリはクライアント IP の指定されたヘッダーのみを検索します。
-
-クライアントの IP 値を収集したくない場合は、`DD_TRACE_CLIENT_IP_HEADER_DISABLED` 環境変数を `true` に設定します。デフォルトでは `false` になっています。
-
 ### URL のクエリを編集する
 
 `http.url` タグには、クエリ文字列を含む完全な URL 値が割り当てられます。クエリ文字列は機密データを含む可能性があるため、デフォルトで Datadog はこれをパースし、疑わしい値を削除します。この編集プロセスは構成可能です。編集に使われる正規表現を変更するには、`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` 環境変数に有効な正規表現を設定します。有効な正規表現はプラットフォームに依存します。この正規表現は疑わしいキーと値のペアを見つけると、それを `<redacted>` に置き換えます。
@@ -214,28 +207,41 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 ```yaml
 apm_config:
   replace_tags:
-    # タグ "http.url" 内で、文字列 `token/` で始まるすべての文字を "?" で置換します:
+    # タグ "http.url" 内で、文字列 `token/` で始まるすべての文字を "?" で置換します
     - name: "http.url"
       pattern: "token/(.*)"
       repl: "?"
-    # "bar" を持つタグに存在するすべての "foo" を置換します:
+    # リソース名の末尾の "/" 文字を削除します
+    - name: "resource.name"
+      pattern: "(.*)\/$"
+      repl: "$1"
+    # "bar" を持つタグに存在するすべての "foo" を置換します
     - name: "*"
       pattern: "foo"
       repl: "bar"
-    # すべての "error.stack" タグの値を削除します。
+    # すべての "error.stack" タグの値を削除します
     - name: "error.stack"
       pattern: "(?s).*"
+    # エラーメッセージの連番を置換します
+    - name: "error.msg"
+      pattern: "[0-9]{10}"
+      repl: "[REDACTED]"
 ```
 
 {{% /tab %}}
 {{% tab "環境変数" %}}
 
-```shell
+```json
 DD_APM_REPLACE_TAGS=[
       {
         "name": "http.url",
         "pattern": "token/(.*)",
         "repl": "?"
+      },
+      {
+        "name": "resource.name",
+        "pattern": "(.*)\/$",
+        "repl": "$1"
       },
       {
         "name": "*",
@@ -245,6 +251,11 @@ DD_APM_REPLACE_TAGS=[
       {
         "name": "error.stack",
         "pattern": "(?s).*"
+      },
+      {
+        "name": "error.msg",
+        "pattern": "[0-9]{10}",
+        "repl": "[REDACTED]"
       }
 ]
 ```
@@ -252,7 +263,7 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-**注**: 推奨の [Daemonset コンフィギュレーション][1]を使用している場合は、この環境変数を trace-agent コンテナに挿入します。
+この環境変数は、[daemonset configuration][1] を使用している場合は trace-agent コンテナに、[helm chart][2] を使用している場合は `values.yaml` ファイル内の `agents.containers.traceAgent.env` に記述してください。
 
 ```datadog-agent.yaml
 - name: DD_APM_REPLACE_TAGS
@@ -263,6 +274,11 @@ DD_APM_REPLACE_TAGS=[
               "repl": "?"
             },
             {
+              "name": "resource.name",
+              "pattern": "(.*)\/$",
+              "repl": "$1"
+            },
+            {
               "name": "*",
               "pattern": "foo",
               "repl": "bar"
@@ -270,16 +286,22 @@ DD_APM_REPLACE_TAGS=[
             {
               "name": "error.stack",
               "pattern": "(?s).*"
+            },
+            {
+              "name": "error.msg",
+              "pattern": "[0-9]{10}",
+              "repl": "[REDACTED]"
             }
           ]'
 ```
 
-[1]: /ja/agent/kubernetes/?tab=daemonset
+[1]: /ja/containers/kubernetes/installation/?tab=daemonset
+[2]: /ja/containers/kubernetes/installation/?tab=helm
 {{% /tab %}}
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
 ```
 
 {{% /tab %}}
@@ -319,6 +341,40 @@ DD_APM_REPLACE_TAGS=[
 Datadog は、お客様のトレーシングライブラリに関する環境情報や診断情報を収集して処理することがあります。これには、アプリケーションを実行しているホスト、オペレーティングシステム、プログラミング言語とランタイム、使用する APM インテグレーション、およびアプリケーションの依存関係に関する情報が含まれる場合があります。さらに、Datadog は、診断ログ、難読化されたスタックトレースを含むクラッシュダンプ、および様々なシステムパフォーマンスメトリクスなどの情報を収集する場合があります。
 
 このテレメトリー収集を無効にするには、インスツルメンテーションを行うアプリケーションで `DD_INSTRUMENTATION_TELEMETRY_ENABLED` 環境変数を `false` に設定してください。
+
+## APM における PCI DSS 準拠
+
+{{< site-region region="us" >}}
+
+<div class="alert alert-warning">
+APM の PCI 準拠は、<a href="/getting_started/site/">US1 サイト</a>で作成された新しい Datadog 組織でのみ利用可能です。
+</div>
+
+APM の PCI 準拠は、Datadog の組織を新規に作成する際に利用できます。PCI 準拠の Datadog 組織をセットアップするには、以下の手順に従います。
+
+1. [US1 サイト][1]に新しい Datadog 組織をセットアップします。PCI DSS 準拠は、US1 で作成された新しい組織にのみサポートされています。
+2. [Datadog サポート][2]または[カスタマーサクセスマネージャー][3]に連絡し、新しい組織を PCI 準拠の組織として構成するようリクエストします。
+3. 新しい組織で[監査証跡][4]を有効にします。PCI DSS 準拠のため、監査証跡を有効にし、有効なままにする必要があります。
+4. Datadog サポートまたはカスタマーサクセスが新しい組織が PCI DSS に準拠していることを確認した後、PCI 準拠の専用エンドポイント (`https://trace-pci.agent.datadoghq.com`) にスパンを送信するように Agent コンフィギュレーションファイルを構成します。
+    ```
+    apm_config:
+      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
+    ```
+
+ログ で PCI 準拠を実現するためには、[ログ管理の PCI DSS 準拠][5]を参照してください。
+
+[1]: /ja/getting_started/site/
+[2]: /ja/help/
+[3]: mailto:success@datadoghq.com
+[4]: /ja/account_management/audit_trail/
+[5]: /ja/data_security/logs/#pci-dss-compliance-for-log-management
+
+
+{{< /site-region >}}
+
+{{< site-region region="us2,us3,us5,eu,gov" >}}
+APM の PCI 準拠は、{{< region-param key="dd_site_name" >}} サイトではご利用いただけません。
+{{< /site-region >}}
 
 [1]: /ja/help/
 [2]: /ja/tracing/glossary/#trace

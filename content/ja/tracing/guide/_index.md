@@ -25,17 +25,35 @@ cascade:
 {{< /whatsnext >}}
 
 <br>
-{{< whatsnext desc="チュートリアル: トレースの有効化" >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Datadog Agent と同じホスト上の Python アプリケーションでトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}コンテナ内の Python アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}コンテナ内の Python アプリケーションとホスト上の Agent のトレースを有効にする{{< /nextlink >}}
+
+### チュートリアル: トレースの有効化
+
+このチュートリアルでは、自動およびカスタム/手動のインスツルメンテーションを備えたサンプルマルチサービスアプリケーションをセットアップし、Datadog APM でトレースを確認するまでのスタックを構成する方法を説明します。チュートリアルは全て同じことを行いますが、プログラミング言語とインフラストラクチャーのセットアップが異なります。あなたの開発・デプロイ環境に最も近いものを選び、APM を始めるための基本を学んでください。
+
+{{< whatsnext desc="言語と環境を選択してください。" >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホスト上の Python アプリケーションでトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> コンテナ内の Python アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> コンテナ内の Python アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホスト上の Java アプリケーションでトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> コンテナ内の Java アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> コンテナ内の Java アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> GKE で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> AWS EKS で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> AWS ECS with EC2 で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> AWS ECS with Fargate で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
-
 
 {{< whatsnext desc="APM インテグレーションのアクション" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Kafka キューをトレースする{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}PHP CLI スクリプトをトレースする{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
+{{< whatsnext desc="取り込みサンプリングの構成" >}}
+    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによるスパン取り込み量の制御{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}取り込みサンプリングのユースケース{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 
@@ -51,6 +69,4 @@ cascade:
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
-     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによる取り込み量の制御{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
 {{< /whatsnext >}}
