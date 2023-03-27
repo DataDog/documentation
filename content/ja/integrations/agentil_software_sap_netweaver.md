@@ -3,8 +3,13 @@ app_id: agentil-software-sap-netweaver
 app_uuid: 5b070928-c509-4826-93db-8b5e9206c355
 assets:
   dashboards:
+    ABAP transactions response times: assets/dashboards/agentil_software_abap_transactions_response_times.json
+    SAP ABAP Transactions Details: assets/dashboards/agentil_software_abap_transactions_details.json
     SAP Netweaver overview: assets/dashboards/agentil_software_sap_global_overview.json
     SAP Netweaver system dashboard: assets/dashboards/agentil_software_sap_netweaver_system.json
+    SAP System IDOCS: assets/dashboards/agentil_software_system_idocs.json
+    SAP System Shortdumps: assets/dashboards/agentil_software_system_shortdumps.json
+    SAP jobs details: assets/dashboards/agentil_software_sap_jobs_details.json
   integration:
     configuration: {}
     events:
@@ -75,9 +80,22 @@ tile:
   - caption: SAP NetWeaver のジョブログ
     image_url: images/logs_example_jobs.png
     media_type: image
+  - caption: SAP ABAP トランザクション時間
+    image_url: images/abap_transaction_response_time.png
+    media_type: image
+  - caption: SAP ABAP トランザクションの詳細
+    image_url: images/abap_transaction_details.png
+    media_type: image
+  - caption: SAP IDOC メッセージ
+    image_url: images/abap_idocs.png
+    media_type: image
+  - caption: SAP バックグラウンドジョブ
+    image_url: images/abap_background_jobs.png
+    media_type: image
   overview: README.md#Overview
   support: README.md#Support
   title: SAP S/4HANA & NetWeaver
+  uninstallation: README.md#Uninstallation
 ---
 
 

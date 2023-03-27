@@ -24,7 +24,7 @@ title: 認証が必要なアプリケーションでテストを実行する
 ログイン後に配置されているユーザージャーニーを監視する必要がある場合、Datadog のブラウザテストでアプリケーションのログイン手順を実行しログイン後のページ検証を実行するには 2 つの方法があります。
 
 - [ブラウザテストの記録にログイン手順を含める](#include-the-login-steps-in-your-recording)
-- [ブラウザテストの高度なオプションを活用する](#leverage-test-configuration-options)
+- [ブラウザテストの高度なオプションを活用する](#leverage-browser-test-configuration-options)
 
 認証情報をアプリケーション全体で確実に難読化し安全に保存するには、[難読化されたグローバル変数](#account-security)を使用します。
 
@@ -84,13 +84,15 @@ Datadog のブラウザテストがアプリケーションにログインでき
 
 ### 認証データの安全性を確保
 
-認証情報を[グローバル変数][6]として保存 (たとえば、ユーザー名に 1 つのグローバル変数、パスワードに別のグローバル変数) し、この変数を難読化と設定して Datadog のインスタンスにアクセスが可能なすべてのユーザーに対して隠します。
+資格情報を[グローバル変数][6]として保存し (例えば、ユーザー名用のグローバル変数とパスワード用のグローバル変数)、**Hide and obfuscate variable value** を選択してテスト結果からその値を隠します。Datadog のインスタンスにアクセスできる個人に対して、ブラウザテストの権限を制限することができます。
 
 難読化された変数を作成したら、ブラウザテストに[そのグローバル変数をインポート][7]して、ログイン手順に利用します。
 
 **注:** Datadog のグローバル変数は安全に保存され暗号化されますが、テストの一般的なベストプラクティスとして、ダミーの資格情報に紐づけられたテスト用のアカウントを使用することを強くお勧めします。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+アカウントセキュリティについては、[Synthetic モニタリングのデータセキュリティ][8]を参照してください。
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -101,3 +103,4 @@ Datadog のブラウザテストがアプリケーションにログインでき
 [5]: /ja/synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
 [6]: /ja/synthetics/settings/?tab=specifyvalue#global-variables
 [7]: /ja/synthetics/browser_tests/actions#a-global-variable
+[8]: /ja/data_security/synthetics

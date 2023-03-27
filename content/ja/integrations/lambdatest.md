@@ -19,7 +19,7 @@ assets:
     source: lambdatest
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: LambdaTest
   sales_email: prateeksaini@lambdatest.com
   support_email: prateeksaini@lambdatest.com
 categories:
@@ -66,6 +66,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: LambdaTest
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -95,13 +96,17 @@ LambdaTest でできることは以下の通りです。
 
 LambdaTest を使用して Datadog でインシデントを追跡する方法を紹介します。
 
-1. LambdaTest の Web サイトで、LambdaTest のアカウントにログインします。
-2. メニューバーから設定を選択します。
-3. 設定の下にあるインテグレーションをクリックします。
-4. Datadog を統合するには、Push to Datadog の隣にある install をクリックします。
-5. [Datadog API とアプリケーションキー][2]を入力します。
-6. 確認メールが送信されます。メールに記載されているインテグレーション内容を確認します。
-7. Datadog が LambdaTest アカウントと統合されたら、バグのログを取り、クロスブラウザテストを開始します。
+1. LambdaTest の Login ページから LambdaTest インテグレーションの認可を開始するには、**Connect Accounts** をクリックします。
+2. LambdaTest の Web サイトで LambdaTest のアカウントにログインすると、Datadog の認可ページにリダイレクトされます。
+3. **Authorize** をクリックし、インテグレーションを完了します。
+4. インテグレーション構成が完了すると、確認メールが送信されます。
+5. Datadog が LambdaTest アカウントと統合されたら、バグのログを取り、クロスブラウザテストを開始します。
+
+## アンインストール
+
+このインテグレーションをアンインストールすると、それまでの認可はすべて取り消されます。
+
+さらに、このインテグレーションに関連するすべての API キーが無効になっていることを、[API キー管理ページ][2]でインテグレーション名を検索して確認してください。
 
 ## サポート
 
@@ -112,4 +117,4 @@ LambdaTest を使用して Datadog でインシデントを追跡する方法を
 Web サイト: https://www.lambdatest.com/
 
 [1]: https://www.lambdatest.com/support/docs/datadog-integration/
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[2]: https://app.datadoghq.com/organization-settings/api-keys?filter=LambdaTest
