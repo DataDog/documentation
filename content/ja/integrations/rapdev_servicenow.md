@@ -33,7 +33,7 @@ display_on_public_website: true
 draft: false
 git_integration_title: rapdev_servicenow
 integration_id: rapdev-servicenow
-integration_title: ServiceNow
+integration_title: ServiceNow Performance Monitoring
 integration_version: ''
 is_public: true
 kind: integration
@@ -51,17 +51,17 @@ pricing:
   tag: instance_name
   unit_label: ServiceNow インスタンス
   unit_price: 1000
-public_title: ServiceNow インテグレーション
+public_title: ServiceNow Performance Monitoring
 short_description: ServiceNow インスタンスのパフォーマンスと ITSM インシデントを監視する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud
@@ -78,13 +78,13 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: ServiceNow インテグレーション
+  title: ServiceNow Performance Monitoring
   uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
 
-ServiceNow インテグレーションは、トランザクション、ジョブ、データベース、キャッシュメトリクスに関する豊富な洞察を使用して、ServiceNow インスタンスの状態とパフォーマンスを監視します。このインテグレーションにより、未解決の ITSM インシデントも追跡され、SLA とビジネスに影響を与えるインシデントの年齢の両方に関する実用的なデータポイントが提供されます。
+ServiceNow Performance Monitoring インテグレーションは、トランザクション、ジョブ、データベース、キャッシュメトリクスに関する豊富な洞察を使用して、ServiceNow インスタンスの状態とパフォーマンスを監視します。このインテグレーションにより、未解決の ITSM インシデントも追跡され、SLA とビジネスに影響を与えるインシデントの年齢の両方に関する実用的なデータポイントが提供されます。
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。

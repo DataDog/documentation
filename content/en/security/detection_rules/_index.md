@@ -40,7 +40,7 @@ The [Detection Rules][9] page lets you search all detection rules by rule type. 
 
 ### Finding detection rules
 
-The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no “Search” button to click.
+The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no "Search" button to click.
 
 #### Filter by facet
 

@@ -6,9 +6,9 @@ further_reading:
 - link: /security/application_security/
   tag: ドキュメント
   text: Datadog Application Security Management で脅威から守る
-- link: /security/application_security/getting_started/
+- link: /security/application_security/enabling/
   tag: ドキュメント
-  text: サービスの ASM の有効化を始める
+  text: サービスの ASM を有効にする
 - link: /security/default_rules/#cat-application-security
   tag: ドキュメント
   text: すぐに使える Application Security Management ルール
