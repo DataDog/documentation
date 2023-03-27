@@ -59,7 +59,7 @@ Investigate and triage security signals in the [Security Signals Explorer][8]. V
 [4]: /security/notifications/#notification-channels
 [5]: /security/notifications/#detection-rule-notifications
 [6]: /security/cloud_workload_security/agent_expressions
-[7]: /security/cloud_workload_security/getting_started
+[7]: /security/cloud_workload_security/setup
 [8]: /security/explorer
 [9]: /network_monitoring/performance/
 [10]: /security/cloud_workload_security/security_profiles

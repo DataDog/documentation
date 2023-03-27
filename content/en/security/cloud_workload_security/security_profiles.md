@@ -2,9 +2,12 @@
 title: CWS Workload Security Profiles
 kind: documentation
 further_reading:
-  - link: "/security/cloud_workload_security/getting_started"
+  - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"
     text: "Setting Up CWS"
+  - link: "/security/cloud_workload_security/workload_security_rules"
+    tag: "Documentation"
+    text: "Managing Cloud Workload Security Rules"
 ---
 
 Workload Security Profiles provide a baseline of expected workload activity via a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
@@ -72,4 +75,4 @@ To accept the suggestion, click **Suppress Signals**, then click **Add Suppressi
 [1]: /security/cloud_workload_security/setup
 [2]: https://app.datadoghq.com/security/workload/profiles
 [3]: /security/explorer
-[4]: /security/cloud_workload_security/getting_started
+[4]: /security/cloud_workload_security/setup
