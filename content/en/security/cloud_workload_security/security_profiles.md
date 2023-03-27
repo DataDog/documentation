@@ -19,10 +19,6 @@ Workload Security Profiles are generated when [activity snapshots](#activity-sna
 
 Each security profile acts as a [behavior model](#behavior-learning-model) for a given workload image to identify known, acceptable behavior that is expected to be consistent across all containers versus previously unseen, anomalous behavior that may be unique to a single container or small number of containers.
 
-The following diagram shows a high-level representation of how activity snapshots from multiple containers are merged into a single Workload Security Profile. The commonality score represents how likely a given process or file activity is normal, known behavior.
-
-**PLACEHOLDER FOR DIAGRAM**
-
 ### Activity snapshots
 
 Activity snapshots are the building blocks of Workload Security Profiles. They provide a reasonably accurate representation of expected workload behavior. Each snapshot captures kernel-level activity on a container, including process, network, and file access details. This information is collected by the Agent in 30 minute intervals and sent to the Datadog backend.
