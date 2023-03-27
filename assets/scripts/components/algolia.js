@@ -48,12 +48,12 @@ function loadInstantSearch(asyncLoad) {
         searchResultsPage = false;
     }
 
-    if (pageLanguage !== 'en') {
-        basePathName += `${pageLanguage}/`;
-    }
-
     if (document.documentElement.dataset.commitRef) {
         basePathName += `${document.documentElement.dataset.commitRef}/`;
+    }
+
+    if (pageLanguage !== 'en') {
+        basePathName += `${pageLanguage}/`;
     }
 
     if (searchResultsPage) {
