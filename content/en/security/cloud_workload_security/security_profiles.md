@@ -26,7 +26,7 @@ Each security profile acts as a [behavior model](#behavior-learning-model) for a
 
 Activity snapshots are the building blocks of Workload Security Profiles. They provide a reasonably accurate representation of expected workload behavior. Each snapshot captures kernel-level activity on a container, including process, network, and file access details. This information is collected by the Agent in 30 minute intervals and sent to the Datadog backend.
 
-When you configure the Agent and enable activity dumps, it automatically starts capturing snapshots for any running cgroups, including those already running when you start the Agent. It also captures snapshots for any new containers in your cloud native environments that use the Linux kernel control groups or cgroups. 
+When you configure the Agent and enable activity dumps, it automatically starts capturing snapshots for any running cgroups, including those already running when you start the Agent. It also captures snapshots for any new containers in your cloud native environments that use the Linux kernel control groups or cgroups.
 
 Each Agent can profile multiple containers on the host system simultaneously. To minimize performance overhead, no more than five containers are profiled at any given time.
 
