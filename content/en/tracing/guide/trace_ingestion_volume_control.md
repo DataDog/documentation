@@ -84,7 +84,7 @@ Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 
 ### Independently configure the ingestion sampling rate for services at the library level
 
-By configuring sampling rates for a few high-throughput services, most of the “exceeding” ingestion volume can be lowered.
+By configuring sampling rates for a few high-throughput services, most of the "exceeding" ingestion volume can be lowered.
 
 Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
 

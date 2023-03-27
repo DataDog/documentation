@@ -43,7 +43,7 @@ To create a new notification rule, follow the instructions below.
 
 {{< img src="security/notification-profiles-setup.png" alt="Setup of a notification rule" style="width:100%;" >}}
 
-If the notification rule is associated with a Security Detection Rule, you can view the rule's trigger conditions in the “Set severity and notifications” section in your rules.
+If the notification rule is associated with a Security Detection Rule, you can view the rule's trigger conditions in the **Set severity and notifications** section in your rules.
 
 If the notification rule matches set conditions, the resulting notification includes details about the matched notification rule in the notification footer.
 

@@ -54,9 +54,9 @@ You can create multiple metrics using the same query by selecting the **Create A
 
 After a metric is created, the following fields can be updated:
 
-- Filter query: Add or remove tags from the ‘Filter by’ field to change the set of matching processes for which metrics are generated.
-- Aggregation groups: Add or remove tags from the ‘Group by’ field to break down your metrics in different ways, or manage their cardinality.
-- Percentile selection: Check or uncheck the ‘Include percentile aggregations’ box to remove or generate percentile metrics.
+- Filter query: Add or remove tags from the 'Filter by' field to change the set of matching processes for which metrics are generated.
+- Aggregation groups: Add or remove tags from the 'Group by' field to break down your metrics in different ways, or manage their cardinality.
+- Percentile selection: Check or uncheck the 'Include percentile aggregations' box to remove or generate percentile metrics.
 
 To change the metric type or name, a new metric must be created.
 

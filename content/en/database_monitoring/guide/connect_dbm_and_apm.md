@@ -46,6 +46,9 @@ Data privacy
 |          | [Npgsql][16]                   | {{< X >}}   |             |
 |          | [MySql.Data][17]               |             | {{< X >}}   |
 |          | [MySqlConnector][18]           |             | {{< X >}}   |
+| **PHP**  [dd-trace-php][19] >= 0.86.0 ||             |             |
+|          | [pdo][20]                       | {{< X >}}  | {{< X >}}   |
+|          | [MySQLi][21]                   |             | {{< X >}}   |
 | **Java**     |                            |             |             |
 |          | jdbc                           | Coming soon | Coming soon |
 
@@ -287,6 +290,23 @@ Enable the database monitoring propagation feature by setting the following envi
 
 {{% /tab %}}
 
+{{% tab "PHP" %}}
+
+<div class="alert alert-warning">
+This features requires the tracer extension to be enabled for your PHP service.
+</div>
+
+Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library. For example, `PDO`.
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Explore the APM Connection
@@ -328,3 +348,6 @@ On the APM Service Page, view the direct downstream database dependencies of the
 [16]: https://www.nuget.org/packages/npgsql
 [17]: https://www.nuget.org/packages/MySql.Data
 [18]: https://www.nuget.org/packages/MySqlConnector
+[19]: https://github.com/DataDog/dd-trace-php
+[20]: https://www.php.net/manual/en/book.pdo.php
+[21]: https://www.php.net/manual/en/book.mysqli.php

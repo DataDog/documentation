@@ -10,6 +10,9 @@ further_reading:
 - link: /tracing/version_tracking
   tag: ドキュメント
   text: Datadog APM 内の Version タグを使用してデプロイを監視する
+- link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking
+  tag: ブログ
+  text: RUM のデプロイメント追跡でフロントエンドの不具合をトラブルシュートする
 kind: ガイド
 title: RUM デプロイメント追跡の概要
 ---
@@ -133,7 +136,7 @@ datadogRum.init({
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison-error.png" alt="ブラウザデプロイメント追跡の比較エラー" style="width:75%;">}}
 
 ### RUM デプロイメント追跡パワーパックを確認する
-ダッシュボードのパワーパックメニューから “Deployment Version Tracking” パワーパックを検索して、RUM サービスのデプロイメント追跡をダッシュボードに追加することができます。その後、繰り返し、他のウィジェットをダッシュボードに追加して、チームが新機能を安全にリリースできるようにすることができます。
+ダッシュボードのパワーパックメニューから "Deployment Version Tracking" パワーパックを検索して、RUM サービスのデプロイメント追跡をダッシュボードに追加することができます。その後、繰り返し、他のウィジェットをダッシュボードに追加して、チームが新機能を安全にリリースできるようにすることができます。
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-powerpack.png" alt="ブラウザデプロイメント追跡パワーパック" style="width:75%;">}}
 
@@ -180,7 +183,7 @@ datadogRum.init({
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison-error.png" alt="モバイルデプロイメント追跡の比較エラー" style="width:75%;">}}
 
 ### RUM デプロイメント追跡パワーパックを確認する
-ダッシュボードのパワーパックメニューから “Deployment Version Tracking” パワーパックを検索して、RUM サービスのデプロイメント追跡をダッシュボードに追加することができます。その後、繰り返し、他のウィジェットをダッシュボードに追加して、チームが新機能を安全にリリースできるようにすることができます。
+ダッシュボードのパワーパックメニューから "Deployment Version Tracking" パワーパックを検索して、RUM サービスのデプロイメント追跡をダッシュボードに追加することができます。その後、繰り返し、他のウィジェットをダッシュボードに追加して、チームが新機能を安全にリリースできるようにすることができます。
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-powerpack.png" alt="ブラウザデプロイメント追跡パワーパック" style="width:75%;">}}
 

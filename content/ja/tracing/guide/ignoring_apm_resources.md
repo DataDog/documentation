@@ -135,7 +135,7 @@ apm_config:
 | `rpc.grpc.kind`                | `grpc.method.kind` - Python、Node.js、Go、.NET                                                          |
 | `rpc.grpc.path`                | `rpc.grpc.path` - Python、Node.js、Go、.NET                                                             |
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python、Node.js<br>`rpc.grpc.request.metadata` - Go                         |
-| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python、Node.js        
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python、Node.js
 
 #### エラー
 
@@ -219,7 +219,7 @@ Datadog Agent コンテナの環境変数のリストに、以下の例のよう
 
 Datadog Agent をスピンアップするための docker run コマンドに、`DD_APM_IGNORE_RESOURCES` を追加します。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
               --pid host \
@@ -313,7 +313,7 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
 
 代わりに、`helm install` コマンドで `agents.containers.traceAgent.env` を設定することもできます。　
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 helm install dd-agent -f values.yaml \
   --set datadog.apiKeyExistingSecret="datadog-secret" \
   --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
