@@ -51,40 +51,23 @@ Datadog では、これらの資格情報をユーザーに直接リクエスト
 
 ## Datadog Development Toolkit をインストールして構成する
 
-Datadog Development Toolkit (`ddev`) を使用すると、インテグレーションに必要なディレクトリ構造、アセット、メタデータを生成することができます。
+Agent Integration Developer Tool を使用すると、インテグレーションを開発する際に、インテグレーションタイルのアセットとメタデータのスケルトンを生成して、スキャフォールディングを作成することができます。ツールのインストール方法については、[Datadog Agent Integration Developer Tool をインストールする][23]を参照してください。
 
-始める前に、以下の前提条件を満たしていることを確認してください。
+Developer ツールをインストールしたら、`integrations-extras` リポジトリ用に構成します。
 
-- [Python v3.8 以降][18]
-- 環境の競合を避けるために、Python の仮想環境を使用することをお勧めします。以下の説明では、ほとんどの OS で Python v3.3 以降に同梱されている `venv` を使用します。
+デフォルトの作業用リポジトリとして `integrations-extras` を設定します。
 
-Development Toolkit をインストールして構成します。
+{{< code-block lang="shell" >}}
+ddev config set extras $HOME/dd/integrations-extras
+ddev config set repo extras
+{{< /code-block >}}
 
-1. `integrations-extras` ディレクトリの中にいることを確認します。
-   {{< code-block lang="shell" >}}cd $HOME/dd/integrations-extras{{< /code-block >}}
+integrations-extras ディレクトリの複製に `$HOME/dd` 以外のディレクトリを使用した場合は、以下のコマンドを使用して作業リポジトリを設定します。
 
-2. Python の仮想環境を構築します。
-   {{< code-block lang="shell" >}}
-   python3 -m venv venv
-   . venv/bin/activate{{< /code-block >}}
-
-   仮想環境は `deactivate` を実行することでいつでも終了させることができます。
-
-3. [Developer Toolkit][19] をインストールします。
-   {{< code-block lang="shell" >}}pip3 install "datadog-checks-dev[cli]"{{< /code-block >}}
-
-   Z Shell を使用している場合は、`pip3 install datadog-checks-dev\[cli\]` を実行して、エスケープされた文字を使用する必要があるかもしれません。
-
-4. デフォルトの作業用リポジトリとして `integrations-extras` を設定します。
-   {{< code-block lang="shell" >}}
-   ddev config set integrations-extras $HOME/dd/integrations-extras
-   ddev config set repo integrations-extras{{< /code-block >}}
-
-   `integrations-extras` ディレクトリの複製に `$HOME/dd` 以外のディレクトリを使用した場合は、以下のコマンドを使用して作業リポジトリを設定します。
-
-   {{< code-block lang="shell" >}}
-   ddev config set integrations-extras <PATH/TO/INTEGRATIONS-EXTRAS>
-   ddev config set repo integrations-extras{{< /code-block >}}
+{{< code-block lang="shell" >}}
+ddev config set extras <PATH/TO/INTEGRATIONS_EXTRAS>
+ddev config set repo extras
+{{< /code-block >}}
 
 ## インテグレーションタイルスキャフォールディングにデータを入力する
 
@@ -175,7 +158,7 @@ Development Toolkit をインストールして構成します。
 フィードバックに対応し、レビューを再要求すると、これらのレビュアーがプルリクエストを承認します。
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
@@ -204,3 +187,4 @@ Development Toolkit をインストールして構成します。
 [20]: https://docs.datadoghq.com/ja/developers/integrations/check_references/#manifest-file
 [21]: https://github.com/DataDog/integrations-extras/
 [22]: https://app.datadoghq.com/integrations
+[23]: /ja/developers/integrations/python

@@ -12,11 +12,9 @@
 - Category::Data Store
 - Category::Developer Tools
 - Category::Event Management
-- Category::Exceptions
 - Category::Google Cloud
 - Category::Incidents
 - Category::IOT
-- Category::ISP
 - Category::Issue Tracking
 - Category::Kubernetes
 - Category::Languages
@@ -26,14 +24,11 @@
 - Category::Messaging
 - Category::Metrics
 - Category::Mobile
-- Category::Monitoring
 - Category::Network
 - Category::Notification
 - Category::Oracle
 - Category::Orchestration
 - Category::OS & System
-- Category::Processing
-- Category::Profiling
 - Category::Provisioning
 - Category::SAP
 - Category::Security
@@ -41,7 +36,6 @@
 - Category::Source Control
 - Category::Testing
 - Category::Tracing
-- Category::Web
 - Offering::Integration
 - Offering::Professional Service
 - Offering::Software License
@@ -66,6 +60,4 @@
 - Supported OS::macOS
 - Supported OS::Solaris
 - Supported OS::Windows
-- Supported OS::Mac OS
-- Category::OS System
 

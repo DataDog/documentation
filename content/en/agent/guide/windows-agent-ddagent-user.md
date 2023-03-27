@@ -10,10 +10,10 @@ Starting with release `6.11.0`, the Core and APM/Trace components of the Windows
 The Agent installer creates a new account by default (`ddagentuser`) but it can also use a user-supplied account.
 The account is assigned to the following groups during installation:
 
-* It becomes a member of the “Performance Monitor Users” group
+* It becomes a member of the "Performance Monitor Users" group
   * Necessary to access WMI information
   * Necessary to access Windows performance counter data
-* It becomes a member of the “Event Log Readers” group
+* It becomes a member of the "Event Log Readers" group
 
 **Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
 

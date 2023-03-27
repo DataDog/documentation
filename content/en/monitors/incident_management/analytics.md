@@ -51,7 +51,7 @@ To configure your graph using Incident Management Analytics data, follow these s
 3. Measure: `Customer Impact Duration`
 4. Aggregation: `avg`
 5. Rollup: `1w`
-6. Filter: `severity:(“SEV-1” OR “SEV-2”)`
+6. Filter: `severity:("SEV-1" OR "SEV-2")`
 7. Group: `Services`, limit to top 5
 
 {{< img src="monitors/incidents/incident_analytics_query_example.jpeg" alt="Incident Analytics Query Example" style="width:80%;">}}

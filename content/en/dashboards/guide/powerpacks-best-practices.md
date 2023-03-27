@@ -58,9 +58,9 @@ Powerpacks appear in the dashboard widget tray and you can find them through key
 
 {{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with the keyword resource" style="width:60%;" >}}
 
-To ensure the right users find your Powerpack, include keywords your users might search (such as “performance”) in the title or description, and tag key technologies.
+To ensure the right users find your Powerpack, include keywords your users might search (such as "performance") in the title or description, and tag key technologies.
 
-Descriptions are limited to 80 characters. A good description provides a brief summary of what a pack is for and how someone can use it. For example, “View usage patterns for a UI action on a specific app page” for `RUM Feature Usage` describes what the Powerpack tracks, what it expects as an input (a specific app page), and includes keywords like “usage,” “UI,” and “app”.
+Descriptions are limited to 80 characters. A good description provides a brief summary of what a pack is for and how someone can use it. For example, "View usage patterns for a UI action on a specific app page" for `RUM Feature Usage` describes what the Powerpack tracks, what it expects as an input (a specific app page), and includes keywords like "usage," "UI," and "app".
 
 #### Tagging Powerpacks
 

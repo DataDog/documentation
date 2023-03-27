@@ -71,7 +71,7 @@ During the creation of a historical view, you can use the built-in template vari
 
 #### From the historical view page
 
-After selecting “Rehydrate from Archive,” the historical view is marked as “pending” until its content is ready to be queried.
+After selecting "Rehydrate from Archive," the historical view is marked as "pending" until its content is ready to be queried.
 
 Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the log explorer.
 
