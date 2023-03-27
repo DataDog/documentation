@@ -204,17 +204,19 @@ The example below shows how to obtain the root span and add the relevant user mo
 
 ```php
 <?php
-$rootSpan = \DDTrace\root_span();
+\DDTrace\set_user(
+    // Required unique identifier of the user.
+    '123456789',
 
- // Required unique identifier of the user.
-$rootSpan->meta['usr.id'] = '123456789';
-
-// All other fields are optional.
-$rootSpan->meta['usr.name'] = 'Jean Example';
-$rootSpan->meta['usr.email'] = 'jean.example@example.com';
-$rootSpan->meta['usr.session_id'] = '987654321';
-$rootSpan->meta['usr.role'] = 'admin';
-$rootSpan->meta['usr.scope'] = 'read:message, write:files';
+    // All other fields are optional.
+    [
+        'name' =>  'Jean Example',
+        'email' => 'jean.example@example.com',
+        'session_id' => '987654321',
+        'role' => 'admin',
+        'scope' => 'read:message, write:files',
+    ]
+);
 ?>
 ```
 
