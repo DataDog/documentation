@@ -539,9 +539,6 @@
             - link: '/logs/log_collection/javascript/'
               tag: 'Documentation'
               text: 'Learn about the Datadog Browser SDK for Logs'
-          algolia:
-            tags:
-              - 'browser logs'
     - action: pull-and-push-file
       branch: main
       globs:
@@ -555,6 +552,9 @@
           kind: documentation
           aliases:
           - /logs/log_collection/web_browser
+          algolia:
+            tags:
+              - 'browser logs'
   - repo_name: dd-sdk-android-gradle-plugin
     contents:
     - action: pull-and-push-file
