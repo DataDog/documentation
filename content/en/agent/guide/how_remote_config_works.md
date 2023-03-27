@@ -17,7 +17,7 @@ further_reading:
   text: "Dynamic Instrumentation"
 - link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
   tag: "Documentation"
-  text: "Getting Started with Cloud Workload Security"
+  text: "Setting Up Cloud Workload Security"
 
 ---
 {{< site-region region="gov" >}}
@@ -72,7 +72,7 @@ The following products and features are supported with Remote Config:
 
 ### Cloud Workload Security (CWS)
 
-- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Getting Started with Cloud Workload Security][9] for more information.
+- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][9] for more information.
 
 ## Security Considerations
  
@@ -151,7 +151,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
 [8]: /security/application_security/how-appsec-works/#built-in-protection
-[9]: /security/cloud_workload_security/getting_started
+[9]: /security/cloud_workload_security/setup
 
 {{< /site-region >}}
 
