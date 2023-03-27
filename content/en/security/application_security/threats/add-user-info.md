@@ -205,7 +205,7 @@ The example below shows how to obtain the root span and add the relevant user mo
 ```php
 <?php
 \DDTrace\set_user(
-    // Required unique identifier of the user.
+    // A unique identifier of the user is required.
     '123456789',
 
     // All other fields are optional.
