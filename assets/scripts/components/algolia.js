@@ -39,7 +39,7 @@ function loadInstantSearch(asyncLoad) {
     const hitsContainer = document.querySelector('#hits');
     const filtersDocs = `language: ${pageLanguage}`;
     let searchResultsPage = document.querySelector('.search_results_page');
-    let basePathName = '';
+    let basePathName = '/';
     let numHits = 5;
     let hitComponent = searchbarHits;
 
@@ -48,8 +48,12 @@ function loadInstantSearch(asyncLoad) {
         searchResultsPage = false;
     }
 
+    if (pageLanguage !== 'en') {
+        basePathName += `${pageLanguage}/`;
+    }
+
     if (document.documentElement.dataset.commitRef) {
-        basePathName = `/${document.documentElement.dataset.commitRef}/`;
+        basePathName += `${document.documentElement.dataset.commitRef}/`;
     }
 
     if (searchResultsPage) {
