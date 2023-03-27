@@ -223,7 +223,7 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% tab "Node.js" %}}
 
 <div class="alert alert-warning">
-Node is in alpha release and may not work as expected. 
+Node is in alpha release and may be unstable. 
 </div>
 
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
