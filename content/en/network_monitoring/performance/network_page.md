@@ -74,7 +74,7 @@ To learn more, see the [search syntax][1] documentation.
 
 {{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
 
-Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source :
+Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
 * **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 * **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
@@ -213,7 +213,7 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 ### Security
 
-The **Security** tab highlights network threats detected by [Cloud Workload Security (CWS)][6]. These signals are based on network [security detection rules][7]. If Datadog detects a threat that matches a security rule, a signal is generated.
+The **Security** tab highlights potential network threats and findings detected by [Cloud Workload Security][6] and [Cloud Security Posture Management][8]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][9].
 
 ## Further Reading
 
@@ -226,3 +226,6 @@ The **Security** tab highlights network threats detected by [Cloud Workload Secu
 [5]: /logs/explorer/saved_views/
 [6]: /security/cloud_workload_security/
 [7]: /security/detection_rules/
+[8]: /security/cspm/
+[9]: /security/detection_rules/
+[10]: /security/explorer
