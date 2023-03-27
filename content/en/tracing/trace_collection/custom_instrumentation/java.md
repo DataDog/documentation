@@ -71,7 +71,7 @@ java -javaagent:<DD-JAVA-AGENT-PATH>.jar \
 
 ### Set errors on a span
 
-To customize an error associated with one of your spans, set the error tag on the span and use `Span.log()` to set an “error event”.  The error event is a `Map<String,Object>` containing a `Fields.ERROR_OBJECT->Throwable` entry, a `Fields.MESSAGE->String`, or both.
+To customize an error associated with one of your spans, set the error tag on the span and use `Span.log()` to set an "error event". The error event is a `Map<String,Object>` containing a `Fields.ERROR_OBJECT->Throwable` entry, a `Fields.MESSAGE->String`, or both.
 
 ```java
 import io.opentracing.Span;

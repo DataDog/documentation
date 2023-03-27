@@ -11,7 +11,8 @@ title: CI の表示に関するトラブルシューティング
 
 1. 1 つ以上のパイプラインが実行を完了していることを確認します。パイプラインの実行情報は、パイプラインが完了しないと送信されません。
 2. Datadog Agent ホストが適切に構成されており、Datadog プラグインから到達可能であることを確認してください。Jenkins プラグインコンフィギュレーション UI の **Check connectivity with the Datadog Agent** (Datadog Agent との接続を確認する) ボタンをクリックすると、接続をテストできます。
-3. それでも結果が表示されない場合は、[サポートまでお問い合わせ][1]ください。トラブルシューティングのお手伝いをします。
+3. Jenkins のログにエラーがないか確認します。Datadog プラグインのデバッグレベルのログを有効にするには、[`logging.properties` ファイルを作成][13]して、`org.datadog.level = ALL` という行を追加します。
+4. それでも結果が表示されない場合は、[サポートまでお問い合わせ][1]ください。トラブルシューティングのお手伝いをします。
 
 ### テストがインスツルメントされていますが、Datadog にデータが表示されていません
 
@@ -32,9 +33,13 @@ title: CI の表示に関するトラブルシューティング
 2. 次に、トレーサーはローカルの `.git` フォルダがあれば、そこで `git` コマンドを実行して Git のメタデータを取得します。これは、コミットメッセージや作者、コミッターなどの Git のメタデータフィールドをすべて取得します。`.git` フォルダが存在し、`git` バイナリがインストールされていて、`$PATH` に入っていることを確認してください。この情報は、前のステップで検出されなかった属性を入力するために使用されます。
 3. また、環境変数を使用して手動で Git 情報を提供することもできます。この環境変数は、前の手順のいずれかで検出された情報を上書きします。Git 情報を提供するためにサポートされている環境変数は以下の通りです。
 
-   `DD_GIT_REPOSITORY_URL`
+   `DD_GIT_REPOSITORY_URL` **(必須)**
    : コードが格納されているリポジトリの URL。HTTP と SSH の両方の URL に対応しています。<br/>
    **例**: `git@github.com:MyCompany/MyApp.git`、`https://github.com/MyCompany/MyApp.git`
+
+   `DD_GIT_COMMIT_SHA` **(必須)**
+   : フル (40 文字長の SHA1) コミットハッシュ。<br/>
+   **例**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
    `DD_GIT_BRANCH`
    : テスト中の Git ブランチ。タグ情報を指定する場合は、空のままにしておきます。<br/>
@@ -43,10 +48,6 @@ title: CI の表示に関するトラブルシューティング
    `DD_GIT_TAG`
    : テスト中の Git タグ (該当する場合)。ブランチ情報を指定する場合は、空のままにしておきます。<br/>
    **例**: `1.0.1`
-
-   `DD_GIT_COMMIT_SHA`
-   : フルコミットハッシュ。<br/>
-   **例**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
 
    `DD_GIT_COMMIT_MESSAGE`
    : コミットメッセージ。<br/>
@@ -148,18 +149,45 @@ Ruby の [timecop][7] や Python の [FreezeGun][8] など、時間に依存す�
 
 管理者権限をお持ちの方は、[リポジトリ設定ページ][11]から更新することができます。
 
+### Intelligent Test Runner が動作していない
+
+[Intelligent Test Runner][12] は、コミット履歴と過去のテスト実行時のコードカバレッジ情報を分析し、どのテストを実行する必要があり、どのテストをスキップするのが安全かを判断することで動作します。Intelligent Test Runner が正しく動作するためには、最小限の情報が存在する必要があります。
+
+- リポジトリには、過去 1 か月間に少なくとも 2 回のコミット履歴が必要です。
+- 過去のコミットでテストコードカバレッジを収集している必要があり、これは Intelligent Test Runner が有効になっているテスト実行で発生します。
+- git クローンにはコミット履歴とツリー履歴が含まれている必要があります。シャロー git クローン (`git clone --depth=0`) はサポートされていません。
+
+これらの制限により、Intelligent Test Runner を初めて有効にした場合、スキップされたテストが確認できず、コードカバレッジが自動的に収集されるため、テストの実行時間が通常より遅くなる場合があります。
+
+Intelligent Test Runner は、過去 1 か月間のコミット履歴とテストコードカバレッジ情報のみを考慮します。さらに、コミット後 1 週間以上経過したコードカバレッジ情報は考慮されません。
+
+CI ジョブがシャロー git クローンを使用している場合、コマンド `git clone --filter=blob:none` を使用して部分的な git クローンを使用するように変更することができます。
+
+### Intelligent Test Runner が誤ってテストをスキップしてしまう
+
+Intelligent Test Runner は、コードカバレッジに基づいてテストの影響度分析を行い、あるコミットやコミッ トのセットによってどのテストが影響を受けるかを判断します。この戦略は大部分のテストに有効ですが、Intelligent Test Runner が実行すべきテストをスキップしてしまうシナリオも知られています。
+
+- ライブラリの依存関係の変更。
+- コンパイラーオプションの変更。
+- 外部サービスの変更。
+- データ駆動型テストにおけるデータファイルの変更。
+
+これらのケースを含むコミットを認可する場合、Git のコミットメッセージのどこかに `ITR:NoSkip` (大文字小文字を区別しません) を追加すれば、Intelligent Test Runner でテストスキップを強制的に無効にすることができます。
+
 ### さらにサポートが必要ですか？
 
 さらにヘルプが必要な場合は、[Datadog サポート][1]までお問い合わせください。
 
 [1]: /ja/help/
-[2]: /ja/continuous_integration/setup_tests/
+[2]: /ja/continuous_integration/tests/
 [3]: https://app.datadoghq.com/ci/test-runs
 [4]: https://app.datadoghq.com/ci/test-services
 [5]: /ja/tracing/troubleshooting/tracer_debug_logs
-[6]: /ja/continuous_integration/setup_tests/containers/
+[6]: /ja/continuous_integration/tests/containers/
 [7]: https://github.com/travisjeffery/timecop
 [8]: https://github.com/spulec/freezegun
-[9]: https://docs.datadoghq.com/ja/continuous_integration/setup_tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
-[10]: https://docs.datadoghq.com/ja/continuous_integration/setup_tests/
+[9]: /ja/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
+[10]: /ja/continuous_integration/tests/
 [11]: https://app.datadoghq.com/ci/settings/repository
+[12]: /ja/continuous_integration/intelligent_test_runner/
+[13]: https://www.jenkins.io/doc/book/system-administration/viewing-logs/

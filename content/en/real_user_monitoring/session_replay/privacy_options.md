@@ -105,7 +105,7 @@ In order to protect end-user privacy, regardless of your privacy configuration, 
 
 `hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text.
 
-If you are concerned about the number of visible elements in sensitive fields, enable ‘hidden’ for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
+If you are concerned about the number of visible elements in sensitive fields, enable `hidden` for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
@@ -117,7 +117,7 @@ To obscure the default action name and update the naming convention for individu
 
 You can rename the default action name by overriding the name of a specific HTML element with a more general name. By default, Datadog displays the custom override name.
 
-For example, override the following name with `<div data-dd-action-name="Address" > → Action: “Click on Address”`.
+For example, override the following name with `<div data-dd-action-name="Address" > → Action: "Click on Address"`.
 
 Additional use cases to override the default action name include masking sensitive data in the RUM Explorer and streamlining your analytics and search with custom naming conventions.
 
