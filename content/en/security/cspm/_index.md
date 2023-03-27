@@ -15,7 +15,7 @@ Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and v
 
 ## Detect misconfigurations across your cloud resources
 
-Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box detection rules](#manage-out-of-the-box-and-custom-detection-rules). 
+Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#manage-out-of-the-box-and-custom-detection-rules). 
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][2].
 
@@ -23,17 +23,17 @@ View a high-level overview of your security posture on the [Overview page][1]. E
 
 ## Maintain compliance with industry frameworks and benchmarks
 
-CSPM comes with more than 400 out-of-the-box detection rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
+CSPM comes with more than 400 out-of-the-box compliance rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
 {{< img src="security/cspm/compliance_frameworks.png" alt="Cloud Security Posture Management compliance frameworks" width="100%">}}
 
-## Manage out-of-the-box and custom detection rules
+## Manage out-of-the-box and custom compliance rules
 
-[Out-of-the-box detection rules][4] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][5] by defining how each rule scans your environment, [create custom rules][6], and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
+[Out-of-the-box compliance rules][4] surface the most important risks so that you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account. [Customize the rules][5] by defining how each rule scans your environment, [create custom rules][6], and [set up real-time notifications for failed findings](#set-up-real-time-notifications).
 
-{{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management detection rules" width="100%">}}
+{{< img src="security/cspm/detection_rules.png" alt="Cloud Security Posture Management compliance rules" width="100%">}}
 
 ## Set up real-time notifications
 
@@ -45,14 +45,14 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 ## Review and remediate findings
 
-Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
+Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
 
 {{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
 ## Glossary
 
 Security posture score
-: Percentage of your environment that satisfies all of your active Datadog OOTB [Cloud][4] and [Infrastructure][11] detection rules. Formula: `(# of evaluation:pass findings) / (total # of findings)`. Datadog then weighs this formula by severity: low severity detection rules have a weighting of "1" and critical severity detection rules have a weighting of "5". This means critical severity detection rules impact scores five times more than low severity detection rules to put greater emphasis on the detection rules that pose greater security risk. The score is also normalized to treat all resource types and resource volumes the same (for example, 500 failing containers are weighted the same as three failing S3 buckets in the computed score). This normalization factor allows scores to be comparable across your cloud accounts, without the risk that they are heavily skewed if one account has more containers, or another has fewer storage buckets.
+: Percentage of your environment that satisfies all of your active Datadog OOTB [Cloud][4] and [Infrastructure][11] compliance rules. Formula: `(# of evaluation:pass findings) / (total # of findings)`. Datadog then weighs this formula by severity: low severity compliance rules have a weighting of "1" and critical severity compliance rules have a weighting of "5". This means critical severity compliance rules impact scores five times more than low severity compliance rules to put greater emphasis on the compliance rules that pose greater security risk. The score is also normalized to treat all resource types and resource volumes the same (for example, 500 failing containers are weighted the same as three failing S3 buckets in the computed score). This normalization factor allows scores to be comparable across your cloud accounts, without the risk that they are heavily skewed if one account has more containers, or another has fewer storage buckets.
 
 Requirement
 : A group of controls representing a single technical or operational topic, such as _Access Management_ or _Networking_. The regulatory framework PCI DSS, for example, has [12 requirements][12].
@@ -77,8 +77,8 @@ Framework
 {{< whatsnext >}}
   {{< nextlink href="/security/cspm/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud detection rules{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure detection rules{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud compliance rules{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure compliance rules{{< /nextlink >}}
   {{< nextlink href="/security/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/">}} Improve the compliance and security posture of your Google Cloud environment{{< /nextlink >}}

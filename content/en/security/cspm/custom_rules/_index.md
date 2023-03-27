@@ -7,7 +7,7 @@ further_reading:
   text: "Start writing your own Rego rules"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default Posture Management cloud configuration detection rules"
+  text: "Explore default Posture Management cloud configuration compliance rules"
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
@@ -26,14 +26,14 @@ Creating and using custom CSPM rules is a beta feature, available for select Ama
 
 ## Overview
 
-To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch.
+To extend the rules being applied to your environment to evaluate your security posture, you can clone compliance rules and edit the copies, and you can create your own rules from scratch.
 
 ## Cloning rules
 
 To clone a rule:
 
 1. Find the rule you want to copy one of the following ways:
-   - Navigate to [**Security > Posture Management** and click **Detection Rules**][1]. Select a rule you want to copy to open its details page.
+   - Navigate to [**Security > Posture Management** and click **Compliance Rules**][1]. Select a rule you want to copy to open its details page.
    - Navigate to [**Security > Posture Management** and click **Findings**][2]. Select a finding to open its details, and select **Edit Rule** from the **Rule** menu.
 2. Make any changes you want for your new rule.
 3. Scroll to the bottom of the details page and click **Clone Rule**.
@@ -42,7 +42,7 @@ To clone a rule:
 
 To create a rule from scratch:
 
-1. In Datadog, navigate to [**Security > Posture Management** and click **Detection Rules**][1].
+1. In Datadog, navigate to [**Security > Posture Management** and click **Compliance Rules**][1].
 2. Click **New Rule** in the upper-right.
 3. Select **Cloud Configuration** as the rule type.
 4. Specify the cloud resource types you are writing the rule for.
@@ -62,7 +62,7 @@ To create a rule from scratch:
 
 ## Tagging findings
 
-When you create, clone, or modify CSPM detection rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
+When you create, clone, or modify CSPM compliance rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
 
 You can assign almost any key-value as a tag. The following table shows tags that are useful in common security scenarios.
 

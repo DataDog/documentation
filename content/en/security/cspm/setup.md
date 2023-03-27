@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default cloud configuration detection rules"
+  text: "Explore default cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore CSPM findings"
@@ -175,13 +175,13 @@ To view the findings for your cloud resources, go to the [CSPM homepage][1].
 
 {{< img src="security/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
 
-## Explore default detection rules
+## Explore default compliance rules
 
-CSPM comes with a set of [out-of-the-box detection rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration detection rules are added, they are automatically imported into your account.
+CSPM comes with a set of [out-of-the-box compliance rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration compliance rules are added, they are automatically imported into your account.
 
-To filter the default detection rules by cloud provider:
+To filter the default detectcomplianceion rules by cloud provider:
 
-1. Navigate to **Security** > **Detection Rules**.
+1. Navigate to **Security** > **Posture Management** > **Compliance Rules**.
 2. Choose one of the following values from the **Tag** facet.
     - **AWS**: cloud_provider:aws
     - **Azure**: cloud_provider:azure
@@ -189,7 +189,7 @@ To filter the default detection rules by cloud provider:
     - **Docker**: framework:cis-docker
     - **Kubernetes**: framework:cis-kubernetes
 
-After you explore the default detection rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment][4], and [set up notification targets][5].
+After you explore the default compliance rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment][4], and [set up notification targets][5].
 
 ## Disable CSPM
 

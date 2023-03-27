@@ -1,5 +1,5 @@
 ---
-title: Managing CSPM Detection Rules
+title: Managing CSPM Compliance Rules
 kind: documentation
 aliases:
   - /security_platform/cspm/configuration_rules
@@ -22,14 +22,14 @@ Cloud Security Posture Management is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) [out-of-the-box detection rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
+Cloud Security Posture Management (CSPM) [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
 
-The detection rules follow the same [conditional logic][2] as all Datadog Security detection rules. For CSPM, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
+The compliance rules follow the same [conditional logic][2] as all Datadog Security compliance rules. For CSPM, each rule maps to controls within one or more [compliance frameworks or industry benchmarks][4].
 
 CSPM uses the following rule types to validate the configuration of your cloud infrastructure:
 
-- [**Cloud configuration**][1]: These detection rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an AWS Cloudfront distribution's configuration for encrypted status.
-- [**Infrastructure configuration**][5]: These detection rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the CIS compliance benchmarks for Docker and Kubernetes. For example, the [/etc/default/docker file permissions are set to 644 or more restrictively][6] rule evaluates Docker file permissions running on a host.
+- [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an AWS Cloudfront distribution's configuration for encrypted status.
+- [**Infrastructure configuration**][5]: These compliance rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the CIS compliance benchmarks for Docker and Kubernetes. For example, the [/etc/default/docker file permissions are set to 644 or more restrictively][6] rule evaluates Docker file permissions running on a host.
 
 ## Customize how your environment is scanned by each rule
 
@@ -43,7 +43,7 @@ After you customize a rule, click **Update Rule** at the bottom of the page to a
 
 {{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding-2.png" alt="Customize how your environment is scanned by selecting tags to include or exclude from a rule's scope" >}}
 
-## Set notification targets for detection rules
+## Set notification targets for compliance rules
 
 You can send real-time notifications when a new misconfiguration is detected in your environment by adding notification targets. The available notification options are:
 
@@ -55,9 +55,9 @@ You can send real-time notifications when a new misconfiguration is detected in 
 - [Webhooks][19]
 - Email
 
-On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for detailed instructions on configuring notifications for detection rules.
+On the [Rules][13] page, select a rule to open its details page. In the **Set severity and notifications** section, configure zero or more notification targets for each rule case. You cannot edit the preset severity. See [Notifications][7] for detailed instructions on configuring notifications for compliance rules.
 
-Alternatively, create [notification rules][21] that span across multiple detection rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual detection rules.
+Alternatively, create [notification rules][21] that span across multiple compliance rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual compliance rules.
 
 **Note**: If a misconfiguration is detected for a rule with notifications enabled, the failed finding also appears on the [Signals Explorer][22].
 
@@ -65,13 +65,13 @@ Alternatively, create [notification rules][21] that span across multiple detecti
 
 ## Create custom rules
 
-You can create custom rules to extend the rules being applied to your environment to evaluate your security posture. You can also clone the default detection rules and edit the copies (GCP only). See [Custom Rules][20] for more information.
+You can create custom rules to extend the rules being applied to your environment to evaluate your security posture. You can also clone the default compliance rules and edit the copies (GCP only). See [Custom Rules][20] for more information.
 
 <div class="alert alert-warning">Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources.</div>
 
 ## Rule deprecation
 
-Regular audits of all detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
+Regular audits of all compliance rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
 
 The rule deprecation process is as follows:
 
