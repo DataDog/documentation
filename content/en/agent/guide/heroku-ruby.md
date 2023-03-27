@@ -35,7 +35,7 @@ which psql
 /usr/local/bin/psql
 ```
 
-Get the code from the sample application and deploy it, as-is, to a new Heroku application. 
+Get the code from the sample application and deploy it, as-is, to a new Heroku application.
 
 ```shell
 # Decide a name for your application and export it as an environment variable
@@ -91,7 +91,7 @@ git push heroku main
 
 Once the build finishes, the Datadog Agent is running in your application. Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure everything is running correctly. You should look out for the following section:
 
-```shell
+```bash
 [...]
   API Keys status
   ===============
@@ -108,7 +108,7 @@ If you open the [Host Map in Datadog][12] you can see that your dyno is reportin
 
 ## Setting up integrations
 
-Datadog comes with more than 400 turn-key integrations that collect metrics from different tech stacks. The Datadog buildpack allows you to enable these integrations for your Heroku application. 
+Datadog comes with more than 400 turn-key integrations that collect metrics from different tech stacks. The Datadog buildpack allows you to enable these integrations for your Heroku application.
 
 Four commonly-used Heroku integration configuration examples are listed below.
 
@@ -122,7 +122,7 @@ heroku addons -a $APPNAME
 You should get the following output:
 
 
-```shell
+```bash
 Add-on                                         Plan       Price  State
 ─────────────────────────────────────────────  ─────────  ─────  ───────
 heroku-postgresql (postgresql-infinite-14462)  hobby-dev  free   created
@@ -137,7 +137,7 @@ Your example application already uses that database in its code, but you haven�
 heroku run rake db:migrate -a $APPNAME
 ```
 
-```shell
+```bash
 Running `rake db:migrate` attached to terminal... up, run.3559
 Migrating to CreateWidgets (20140707111715)
 == 20140707111715 CreateWidgets: migrating ====================================
@@ -148,10 +148,9 @@ Migrating to CreateWidgets (20140707111715)
 
 After, you can successfully see the `/widgets` endpoint of your application, which uses that database.
 
-To enable the Postgres Datadog integration, retrieve the database credentials from Heroku:
+To enable the Postgres Datadog integration, retrieve the database credentials from Heroku. Run the following command from the `psql` terminal
 
 ```shell
-# Enter in the psql terminal
 heroku pg:credentials:url DATABASE -a $APPNAME
 ```
 Integrations are enabled in a particular way when using the Datadog buildpack. You can learn how to enable any of the integrations in the [buildpack documentation][13].
@@ -159,9 +158,7 @@ Integrations are enabled in a particular way when using the Datadog buildpack. Y
 Create a `datadog/conf.d` folder at the root of your application:
 
 ```shell
-# Ensure that you are in the root directory of your application
 cd ruby-getting-started
-
 # Create the folder for the integrations configuration in your application code
 mkdir -p datadog/conf.d/
 ```
@@ -182,7 +179,7 @@ instances:
 
 Instead of manually updating the configuration, you can set up your Postgres integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Update the Postgres configuration from above using the Heroku application environment variable
@@ -201,7 +198,6 @@ fi
 Deploy to Heroku:
 
 ```shell
-# Deploy to Heroku 
 git add .
 git commit -m "Enable postgres integration"
 git push heroku main
@@ -209,7 +205,7 @@ git push heroku main
 
 Once the build finishes, the Datadog Agent starts the Postgres check. Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the Postgres check is running correctly. You should look out for the following section:
 
-```shell
+```bash
 
 [...]
 
@@ -263,7 +259,7 @@ heroku addons:info REDIS
 
 You should get an output similar to the following:
 
-```shell
+```bash
 === redis-cylindrical-59589
 Attachments:  ruby-heroku-datadog::REDIS
 Installed at: Wed Nov 17 2021 14:14:13 GMT+0100 (Central European Standard Time)
@@ -292,7 +288,7 @@ instances:
 
 Instead of manually updating the configuration, you can set up your Redis integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Update the Redis configuration from above using the Heroku application environment variable
@@ -315,11 +311,11 @@ git commit -m "Enable redis integration"
 git push heroku main
 ```
 
-Once the build finishes, the Datadog Agent starts the Redis check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Redis check is running correctly. 
+Once the build finishes, the Datadog Agent starts the Redis check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Redis check is running correctly.
 
 The following output displays:
 
-```
+```bash
 
 [...]
 
@@ -390,7 +386,7 @@ If you are using Sidekiq Enterprise and want to collect historical metrics, incl
 
 Add the following to your [`datadog/prerun.sh`][14] script:
 
-```
+```bash
 cat << 'EOF' >> "$DATADOG_CONF"
 
 dogstatsd_mapper_profiles:
@@ -416,7 +412,6 @@ EOF
 Deploy to Heroku:
 
 ```shell
-# Deploy to Heroku
 git add .
 git commit -m "Enable sidekiq integration"
 git push heroku main
@@ -428,7 +423,7 @@ Once the build finishes, the Datadog Agent starts the Sidekiq check. [Run the Da
 
 Memcached is a distributed memory object caching system that is popular in Rails applications. In this example, you can attach the [Heroku Memcached Cloud add on][17] to your Heroku application:
 
-```
+```shell
 heroku addons:create memcachedcloud:30
 ```
 
@@ -440,7 +435,7 @@ heroku addons | grep -A2 memcachedcloud
 
 The following output displays:
 
-```shell
+```bash
 memcachedcloud (memcachedcloud-fluffy-34783)   30         free   created
  └─ as MEMCACHEDCLOUD
 ```
@@ -455,7 +450,7 @@ Create a configuration file named `/datadog/conf.d/mcache.yaml` at the root of y
 
 ```yaml
 instances:
-  - url: <YOUR_MCACHE_HOST> 
+  - url: <YOUR_MCACHE_HOST>
     port: <YOUR_MCACHE_PORT>
     username: <YOUR_MCACHE_USERNAME>
     password: <YOUR_MCACHE_PASSWORD>
@@ -463,7 +458,7 @@ instances:
 
 Instead of manually updating the configuration, you can set up your Memcached integration based on Heroku environment variables using the [prerun script][14] to replace those values before starting the Datadog Agent:
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Update the Memcached configuration from above using the Heroku application environment variable
@@ -481,17 +476,16 @@ fi
 Deploy to Heroku:
 
 ```shell
-# Deploy to Heroku
 git add .
 git commit -m "Enable memcached integration"
 git push heroku main
 ```
 
-Once the build finishes, the Datadog Agent starts the Memcached check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Memcached check is running correctly. 
+Once the build finishes, the Datadog Agent starts the Memcached check. [Run the Datadog Agent status](#appendix-getting-the-datadog-agent-status) to make sure the Memcached check is running correctly.
 
 The following output displays:
 
-```
+```bash
 
 [...]
 
@@ -529,8 +523,9 @@ Collector
 
 To get distributed tracing from your Heroku Ruby application, enable instrumentation.
 
+Ensure that you are in the folder with the application code:
+
 ```shell
-# Ensure that you are in the folder with the application code
 cd ruby-getting-started
 ```
 
@@ -563,7 +558,6 @@ heroku config:add DD_SERVICE=$APPNAME -a $APPNAME
 Commit your changes and push to Heroku:
 
 ```shell
-# Deploy to Heroku 
 git add .
 git commit -m "Enable distributed tracing"
 git push heroku main
@@ -571,7 +565,7 @@ git push heroku main
 
 During the build, error messages are displayed about the tracer not being able to reach the Datadog APM Agent endpoint. This is normal, as during the build process, the Datadog Agent hasn’t started yet. You can ignore these messages:
 
-```
+```bash
 remote:        Download Yarn at https://yarnpkg.com/en/docs/install
 remote:        E, [2021-05-14T10:21:27.664244 #478] ERROR -- ddtrace: [ddtrace] (/tmp/build_d5cedb1c/vendor/bundle/ruby/2.6.0/gems/ddtrace-0.48.0/lib/ddtrace/transport/http/client.rb:35:in `rescue in send_request') Internal error during HTTP transport request. Cause: Failed to open TCP connection to 127.0.0.1:8126 (Connection refused - connect(2) for "127.0.0.1" port 8126) Location: /tmp/build_d5cedb1c/vendor/ruby-2.6.6/lib/ruby/2.6.0/net/http.rb:949:in `rescue in block in connect'
 ```
@@ -580,7 +574,7 @@ Once the build finishes, your application sends traces to Datadog. You can start
 
 Run the Datadog Agent status as explained in the [appendix section](#appendix-getting-the-datadog-agent-status) to make sure the APM agent is running correctly and sending traces to Datadog. You should look out for the following section:
 
-```shell
+```bash
 [...]
 
 =========
@@ -613,7 +607,7 @@ APM Agent
 [...]
 ```
 
-That output shows that the APM Agent is running correctly and sending traces to Datadog. 
+That output shows that the APM Agent is running correctly and sending traces to Datadog.
 
 Navigate to the [APM traces section][19] to see your traces:
 
@@ -634,8 +628,8 @@ When using log drain, all logs arrive in Datadog from the same `ddsource` (usual
 
 To configure your Rails logs, Datadog recommends using Lograge. For this sample application, set it so that logs and traces are correlated.
 
+Ensure that you are in the folder with the application code:
 ```shell
-# Ensure that you are in the folder with the application code
 cd ruby-getting-started
 ```
 
@@ -691,7 +685,6 @@ end
 Deploy to Heroku:
 
 ```shell
-# Deploy to Heroku
 git add .
 git commit -m "Add lograge"
 git push heroku main
@@ -699,7 +692,7 @@ git push heroku main
 
 ### Setting up Heroku log drain
 
-Heroku has a native log router called log drain, which collects logs from all the dynos running in your application and sends them to Heroku. The logs include your application logs, the Heroku router logs, and the Heroku system dyno logs. You can set the log drain to route these logs to Datadog. The log drain sends Heroku system logs to Datadog from `ddsource=heroku`. 
+Heroku has a native log router called log drain, which collects logs from all the dynos running in your application and sends them to Heroku. The logs include your application logs, the Heroku router logs, and the Heroku system dyno logs. You can set the log drain to route these logs to Datadog. The log drain sends Heroku system logs to Datadog from `ddsource=heroku`.
 
 {{< img src="agent/guide/heroku_ruby/heroku_logs.png" alt="Heroku logs view" >}}
 
@@ -738,7 +731,7 @@ As seen, the Heroku router logs get parsed automatically. With the Heroku integr
 
 You can generate a latency metric based on those parsed parameters.
 
-Navigate to Logs -> Generate Metrics and click on the “+ New Metric” button:
+Navigate to Logs -> Generate Metrics and click on the "+ New Metric" button:
 
 {{< img src="agent/guide/heroku_ruby/new_custom_metric.png" alt="New log based metric" >}}
 
@@ -748,7 +741,7 @@ Finally, add a name for your metric and click **Create Metric**:
 
 {{< img src="agent/guide/heroku_ruby/custom_metric.png" alt="Creation of a new log based metric" >}}
 
-Once the rule has been created, wait for a few minutes to gather the new metrics. Then, click on “See in Metric Explorer” to have a look to your new metric:
+Once the rule has been created, wait for a few minutes to gather the new metrics. Then, click on "See in Metric Explorer" to have a look to your new metric:
 
 {{< img src="agent/guide/heroku_ruby/generated_metric.png" alt="Log based available metrics" >}}
 {{< img src="agent/guide/heroku_ruby/metrics_explorer.png" alt="Metrics Explorer view" >}}
@@ -779,7 +772,7 @@ Follow the same steps explained on the previous section to generate metrics with
 
 #### Correlating logs and traces
 
-If you follow the configuration instructions above, logs sent from the Heroku log drain are correlated to traces. 
+If you follow the configuration instructions above, logs sent from the Heroku log drain are correlated to traces.
 
 <div class="alert alert-info">
 <strong>Note</strong>: Heroku router and system logs are generated by Heroku, and correlating them to traces is not possible.

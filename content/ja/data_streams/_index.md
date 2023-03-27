@@ -27,7 +27,7 @@ Data Streams Monitoring は、大規模なパイプラインを理解し管理�
 
 | ランタイム | 対応テクノロジー |
 |---|----|
-| Java | Kafka (セルフホスティング、Amazon MSK)、RabbitMQ、HTTP、gRPC |
+| Java | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC |
 | Go | 全て ([手動インスツルメンテーション][1]で) |
 | .NET | Kafka (セルフホスティング、Amazon MSK) |
 
@@ -42,8 +42,9 @@ Data Streams Monitoring を構成すると、非同期システム内の任意�
 |---|---|-----|
 | dd.stream.edge_latency | `service`、`upstream_service`、`topic`、`partition` | クライアントでメッセージを生成してから、コンシューマーサービスでメッセージを受信するまでの経過時間。 |
 | dd.stream.latency_from_origin | `service`、`upstream_service`、`hash` | メッセージを発信してから、選択したサービスでメッセージを受信するまでの経過時間。 |
+| dd.stream.kafka.lag_seconds | `consumer_group`、`partition`、`topic`、`env` | コンシューマーとブローカとの間のラグ (秒単位)。Java Agent v1.9.0 以降が必要。 |
 
-Datadog では、Data Streams Monitoring で任意のサービスの **Pipeline Health** タブを使用して、エンドツーエンドのレイテンシーに関する SLO またはモニターを作成することを推奨しています。
+Datadog では、Data Streams Monitoring で任意のサービスの **Pipeline SLOs** タブを使用して、エンドツーエンドのレイテンシーに関する SLO またはモニターを作成することを推奨しています。
 
 {{< img src="data_streams/data_streams_create_slo.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
@@ -58,6 +59,20 @@ Datadog では、Data Streams Monitoring で任意のサービスの **Pipeline 
 {{< img src="data_streams/data_streams_throughput_tab.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring の任意のサービスやキューで **Throughput** タブをクリックすると、スループットの変化と、その変化がどの上流または下流のサービスに起因するものかを迅速に検出できます。[サービスカタログ][2]を構成すると、対応するチームの Slack チャンネルやオンコールエンジニアにすぐにピボットすることができます。
+
+単一の Kafka または RabbitMQ クラスターにフィルターをかけることで、そのクラスター上で動作するすべての検出されたトピックまたはキューについて、送受信トラフィックの変化を検出することができます。
+
+{{< img src="data_streams/data_streams_cluster_throughput.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
+
+### パイプラインの健全性から最も遅い個別メッセージへのピボット
+
+パイプラインの遅延は、コンシューマーサービス内でのメッセージ処理のレイテンシーの増大が原因である場合もあります。デプロイの欠陥やメッセージ形式の予期せぬ変更により、エンドツーエンドのレイテンシーの急上昇が引き起こされる可能性があります。
+
+{{< img src="data_streams/data_streams_service_health_tab.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
+
+Data Streams Monitoring 内の任意のサービスの **Service Health** タブをクリックすると、処理のレイテンシーの変化を素早く検知し、どのタイプのメッセージが影響を受けているかを特定し、このサービスによって処理される最も遅い個別メッセージにピボットできます。
+
+**注:** この機能は現在 Java でのみサポートされており、Java Agent v1.6.0 以降で APM を有効にしておく必要があります。
 
 ## その他の参考資料
 

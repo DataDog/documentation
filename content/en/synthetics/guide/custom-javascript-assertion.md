@@ -11,7 +11,7 @@ further_reading:
   text: 'Learn how to configure advanced options for test steps'
 - link: '/synthetics/guide/popup/#moving-popups'
   tag: 'Documentation'
-  text: 'Learn how to handle popups triggered at unknown times'
+  text: 'Learn how to handle pop-ups triggered at unknown times'
 ---
 
 ## Overview
@@ -61,7 +61,7 @@ return true
 For example, to set the number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC to "mytime":
 
 {{< code-block lang="javascript" >}}
-localStorage.setItem(“mytime”, Date.now());
+localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 

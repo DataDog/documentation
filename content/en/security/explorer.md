@@ -65,8 +65,8 @@ Datadog automatically implements threat intelligence by analyzing all ingested l
 
 The query to see all threat intelligence matches in the Security Signals Explorer is `@threat_intel.indicators_matched:*`. The following are additional attributes to query for threat intelligence:
 
-* `@threat_intel.results.category “anonymizer”, “scanner”`
-* `@threat_intel.results.intention “malicious”, “unknown”`
+* `@threat_intel.results.category "anonymizer", "scanner"`
+* `@threat_intel.results.intention "malicious", "unknown"`
 * `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
     **Note**: Proxy, Tor, and VPN subcategory attributes are provided only by threat intelligence partner IPinfo.
 
