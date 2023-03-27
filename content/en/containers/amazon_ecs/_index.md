@@ -2,8 +2,8 @@
 title: Amazon ECS
 kind: documentation
 aliases:
-  - /integrations/amazon_ecs/
   - /agent/amazon_ecs/
+  - /containers/amazon_ecs/data_collected
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
@@ -11,9 +11,6 @@ further_reading:
 - link: "/agent/amazon_ecs/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/amazon_ecs/data_collected/#metrics"
-  tag: "Documentation"
-  text: "Collect ECS metrics"
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"

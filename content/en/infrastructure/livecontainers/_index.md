@@ -109,7 +109,7 @@ The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-You can switch between the “Scatter Plot” and “Timeseries” tabs in the collapsible **Summary Graphs** section in the Containers page:
+You can switch between the "Scatter Plot” and "Timeseries" tabs in the collapsible **Summary Graphs** section in the Containers page:
 
 {{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter plot selection" style="width:80%;">}}
 
@@ -129,7 +129,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **StatefulSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
+If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **StatefulSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the "Select a resource" dropdown menu in the top left corner of the page.
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
@@ -137,7 +137,7 @@ Each of these views includes a data table to help you better organize your data 
 
 #### Group by functionality and facets
 
-Group pods by tags or Kubernetes labels to get an aggregated view which allows you to find information quicker. You can perform a group by using the “Group by” bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
+Group pods by tags or Kubernetes labels to get an aggregated view which allows you to find information quicker. You can perform a group by using the "Group by" bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
 
 {{< img src="infrastructure/livecontainers/group-by.mp4" alt="An example of grouping by team" video=true style="width:80%;">}}
 

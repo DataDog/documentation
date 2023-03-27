@@ -4,9 +4,12 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/
 further_reading:
-  - link: /observability_pipelines/installation/
+  - link: /getting_started/observability_pipelines/
     tag: Documentation
-    text: Set up Observability Pipelines 
+    text: Install the Observability Pipelines Worker
+  - link: /getting_started/observability_pipelines/
+    tag: Documentation
+    text: Get started with Observability Pipelines and Datadog
   - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
     tag: Blog
     text: Take control of your telemetry data with Observability Pipelines
