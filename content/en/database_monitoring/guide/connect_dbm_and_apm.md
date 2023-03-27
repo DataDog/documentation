@@ -34,7 +34,7 @@ Data privacy
 |          | [database/sql][4]              |  {{< X >}}  |  {{< X >}}  |
 |          | [sqlx][5]                      |  {{< X >}}  |  {{< X >}}  |
 | **Java**     |                            |             |             |
-|          | jdbc                           |  {{< X >}}  |  {{< X >}}  |
+|          | [jdbc][22]                     |  {{< X >}}  |  {{< X >}}  |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
 |          | [pg][8]                        | {{< X >}}   |             |
 |          | [mysql2][7]                    |             | {{< X >}}   |
@@ -145,7 +145,7 @@ Enable the database monitoring propagation feature using one of the following me
 2. Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
 
 Full example:
-```shell
+```
 # start the java agent with the required system properties
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
 ```
@@ -396,3 +396,4 @@ On the APM Service Page, view the direct downstream database dependencies of the
 [19]: https://github.com/DataDog/dd-trace-php
 [20]: https://www.php.net/manual/en/book.pdo.php
 [21]: https://www.php.net/manual/en/book.mysqli.php
+[22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
