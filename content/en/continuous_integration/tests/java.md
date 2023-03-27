@@ -61,7 +61,7 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 {{% /tab %}}
 {{% tab "On-Premises CI provider (Datadog Agent)" %}}
 
-If you are running tests on an on-premises CI provider such as Jenkins or self-managed GitLab CI, you can install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. Datadog recommends running CI Visibility with Agentless mode.
+If you are running tests on an on-premises CI provider such as Jenkins or self-managed GitLab CI, you can install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. You can also run CI Visibility on an on-premises CI provider with Agentless mode.
 
 If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, because `localhost` inside the build references the container itself, not the underlying worker node where the Datadog Agent is running.
 
@@ -294,7 +294,7 @@ In the tracer arguments, specify the following:
 
 * CI Visibility is enabled by setting the `dd.civisibility.enabled` property to `true`.
 * The environment where tests are being run (for example, `local` when running tests on a developer workstation or `ci` when running them on a CI provider) is defined in the `dd.env` property.
-* The name of the service or library under `test` is defined in the `dd.service` property.
+* The name of the service or library that is being tested is defined in the `dd.service` property.
 
 For example:
 
@@ -315,7 +315,7 @@ In the tracer arguments, specify the following:
 
 * CI Visibility is enabled by setting the `dd.civisibility.enabled` property to `true`.
 * The environment where tests are being run (for example, `local` when running tests on a developer workstation or `ci` when running them on a CI provider) is defined in the `dd.env` property.
-* The name of the service or library under `test` is defined in the `dd.service` property.
+* The name of the service or library that is being tested is defined in the `dd.service` property.
 
 For example:
 
