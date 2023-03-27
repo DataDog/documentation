@@ -28,7 +28,7 @@ With the browser logs SDK, you can send logs directly to Datadog from web browse
 
 | Installation method        | Use case                                                                                                                                                                                                                                                                                                                                                                   |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| npm (node package manager) | This method is recommended for modern web applications. The browser logs SDK gets packaged with the rest of your front-end javascript code. It has no impact on page load performance. However, the SDK might miss errors, resources and user actions triggered before the SDK is initialized. **Note:** it is recommended to use a matching version with RUM SDK if used. |
+| npm (node package manager) | This method is recommended for modern web applications. The browser logs SDK gets packaged with the rest of your front-end javascript code. It has no impact on page load performance. However, the SDK might miss errors, resources and user actions triggered before the SDK is initialized. **Note**: it is recommended to use a matching version with RUM SDK if used. |
 | CDN async                  | This method is recommended for web applications with performance targets. The browser logs SDK is loaded from our CDN asynchronously: this method ensures the SDK download does not impact page load performance. However, the SDK might miss errors, resources and user actions triggered before the SDK is initialized.                                                  |
 | CDN sync                   | This method is recommended for collecting all RUM events. The browser logs SDK is loaded from our CDN synchronously: this method ensures the SDK is loaded first and collects all errors, resources and user actions. This method might impact page load performance.                                                                                                      |
 
@@ -75,7 +75,7 @@ Load and configure the SDK in the head section of your pages.
 </html>
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ### CDN sync
 
@@ -153,7 +153,7 @@ Options that must have a matching configuration when using the `RUM` SDK:
 After the Datadog browser logs SDK is initialized, send a custom log entry directly to Datadog with the API:
 
 ```
-logger.debug | info | warn | error (message: string, messageContext = Context)
+logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
 ```
 
 #### NPM
@@ -172,7 +172,7 @@ DD_LOGS.onReady(function () {
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 #### CDN sync
 
@@ -184,7 +184,7 @@ window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id
 
 #### Results
 
-The results are the same when using NPM, CDN async or CDN sync:
+The results are the same when using NPM, CDN async, or CDN sync:
 
 ```json
 {
@@ -224,12 +224,84 @@ The Datadog backend adds more fields, like:
 - `http.useragent`
 - `network.client.ip`
 
-### Status parameter
+### Error tracking
 
-After the Datadog browser logs SDK is initialized, send a custom log entry to Datadog with the API using the status as a parameter:
+The Datadog browser logs SDK allows for manual error tracking by using the optional `error` parameter (Available in SDK v4.36.0+). When an instance of a [JavaScript Error][10] is provided, the SDK extracts relevant information (kind, message, stack trace) from the error.
 
 ```
-log (message: string, messageContext: Context, status? = 'debug' | 'info' | 'warn' | 'error')
+logger.debug | info | warn | error (message: string, messageContext?: Context, error?: Error)
+```
+
+#### NPM
+
+```javascript
+import { datadogLogs } from '@datadog/browser-logs'
+
+try {
+  ...
+  throw new Error('Wrong behavior')
+  ...
+} catch (ex) {
+  datadogLogs.logger.error('Error occurred', {}, ex)
+}
+```
+
+#### CDN async
+
+```javascript
+try {
+  ...
+  throw new Error('Wrong behavior')
+  ...
+} catch (ex) {
+  DD_LOGS.onReady(function () {
+    DD_LOGS.logger.error('Error occurred', {}, ex)
+  })
+}
+```
+
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+
+#### CDN sync
+
+```javascript
+try {
+  ...
+  throw new Error('Wrong behavior')
+  ...
+} catch (ex) {
+    window.DD_LOGS && DD_LOGS.logger.error('Error occurred', {}, ex)
+}
+```
+
+**Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
+
+#### Results
+
+The results are the same when using NPM, CDN async, or CDN sync:
+
+```json
+{
+  "status": "error",
+  "session_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "message": "Error occurred",
+  "date": 1234567890000,
+  "origin": "logger",
+  "error" : {
+    "message": "Wrong behavior",
+    "kind" : "Error",
+    "stack" : "Error: Wrong behavior at <anonymous> @ <anonymous>:1:1"
+  },
+  ...
+}
+```
+
+### Generic logger function
+
+The Datadog browser logs SDK adds shorthand functions (`.debug`, `.info`, `.warn`, `.error`) to the loggers for convenience. A generic logger function is also available, exposing the `status` parameter:
+
+```
+log (message: string, messageContext?: Context, status? = 'debug' | 'info' | 'warn' | 'error', error?: Error)
 ```
 
 #### NPM
@@ -239,7 +311,7 @@ For NPM, use:
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs';
 
-datadogLogs.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
+datadogLogs.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 ```
 
 #### CDN async
@@ -248,18 +320,18 @@ For CDN async, use:
 
 ```javascript
 DD_LOGS.onReady(function() {
-  DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
+  DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 #### CDN sync
 
 For CDN sync, use:
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>);
+window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 ```
 
 #### Placeholders
@@ -271,6 +343,7 @@ The placeholders in the examples above are described below:
 | `<MESSAGE>`         | The message of your log that is fully indexed by Datadog.                               |
 | `<JSON_ATTRIBUTES>` | A valid JSON object, which includes all attributes attached to the `<MESSAGE>`.         |
 | `<STATUS>`          | The status of your log; accepted status values are `debug`, `info`, `warn`, or `error`. |
+| `<ERROR>`           | An instance of a [JavaScript Error][10] object.                                         |
 
 ## Advanced usage
 
@@ -456,7 +529,7 @@ DD_LOGS.onReady(function () {
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
@@ -554,7 +627,7 @@ DD_LOGS.onReady(function () {
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
@@ -642,7 +715,7 @@ DD_LOGS.onReady(function () {
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
@@ -699,7 +772,7 @@ DD_LOGS.onReady(function () {
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
@@ -743,7 +816,7 @@ DD_LOGS.onReady(function () {
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
@@ -789,7 +862,7 @@ DD_LOGS.onReady(function () {
 })
 ```
 
-**Note:** Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
@@ -851,3 +924,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [7]: https://docs.datadoghq.com/getting_started/tagging/#defining-tags
 [8]: https://developer.mozilla.org/en-US/docs/Web/API/Reporting_API
 [9]: https://docs.datadoghq.com/getting_started/site/
+[10]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
