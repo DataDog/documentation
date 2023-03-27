@@ -445,8 +445,8 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 {{< site-region region="us,us3,us5,eu" >}}
 
 Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
-      * Install the [Azure integration][1] for visibility into Azure load balancers and NAT gateways.
-      * Install the [AWS Integration][2] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+- Install the [Azure integration][1] for visibility into Azure load balancers and NAT gateways.
+- Install the [AWS Integration][2] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
 For additional information around these capabilities, please see [Cloud service enhanced resolution][3].
 
