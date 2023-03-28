@@ -1006,6 +1006,14 @@ components:
             description: A role UUID.
             type: string
           type: array
+        tags:
+          description: List of team names representing ownership of a dashboard.
+          items:
+            description: The name of a Datadog team of the form `team:<name>`
+            type: string
+          maxItems: 5
+          nullable: true
+          type: array
         template_variable_presets:
           description: Array of template variables saved views.
           items:
