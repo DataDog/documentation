@@ -585,7 +585,7 @@ If you need to sample a specific span, but don’t need the full trace to be ava
 
 For example, if you are building [metrics from spans][6] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
 
-**Note**: This feature is available from the version [7.40.0][19] of the Datadog Agent.
+**Note**: This feature is available from version [7.40.0][19] of the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Java" %}}
