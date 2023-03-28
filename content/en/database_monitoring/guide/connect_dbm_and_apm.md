@@ -134,19 +134,18 @@ func main() {
 
 {{% tab "Java" %}}
 
-Follow the [java tracing][1] instrumentation instructions and install the `1.11.0` version, or greater, of the agent.
+Follow the [Java tracing][1] instrumentation instructions and install the `1.11.0` version, or greater, of the Agent.
 
-In addition to this, it is required to enable the `jdbc-datastore` [instrumentation][2].
+You must also enable the `jdbc-datastore` [instrumentation][2].
 
-Enable the database monitoring propagation feature using one of the following methods:
+Enable the database monitoring propagation feature using **one** of the following methods:
 
-1. Set the system property `dd.dbm.propagation.mode=full`
-
-2. Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
+- Set the system property `dd.dbm.propagation.mode=full`
+- Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
 
 Full example:
 ```
-# start the java agent with the required system properties
+# Start the Java Agent with the required system properties
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
 ```
 
