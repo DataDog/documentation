@@ -46,7 +46,7 @@ Error Budget
 
 ## Setup
 
-Use Datadog's [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO Summary widgets][2] to your dashboards to visualize your SLO statuses at a glance.
+Use Datadog's [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO widgets](#slo-widgets) to your dashboards to visualize your SLO statuses at a glance.
 
 ### Configuration
 
@@ -107,7 +107,7 @@ To maintain your edit access to the SLO, the system requires you to include at l
 
 **Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][11] or the [guide on how to set up RBAC for Monitors][12].
 
-## Searching and viewing SLOs
+## Searching SLOs
 
 The [Service Level Objectives status page][1] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
 
@@ -121,7 +121,11 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
-To edit an individual SLO, hover over it and use the buttons that appear at the right of its row: **Edit**, **Clone**, **Delete**. To see more details on an SLO, click its table row to open its details side panel.
+## Viewing SLOs
+
+Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how the total number of SLOs are in each state (breached, warning, OK, and no data) grouped by context. 
+
+Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
 **Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][13], available on the [Apple App Store][14] and [Google Play Store][15].
 
@@ -201,9 +205,9 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][18] to notify you when events corresponding to certain tags occur.
+After creating your SLO, you can use the SLO Summary widget to visualize the status of a single SLO or an SLO List widget to visualize a set of SLOs.For more information about SLO Widgets, see the [SLO Summary][2] and [SLO List][22] widget pages.
 
-After creating your SLO, you can use the SLO Summary dashboard widget to visualize the status of an SLO along with your dashboard metrics, logs and APM data. For more information about SLO Widgets, see the [SLO Widgets documentation][2] page.
+To proactively manage the configurations of your SLOs, set an [Event Monitor][18] to notify you when events corresponding to certain tags occur.
 
 ## SLO status corrections
 
@@ -276,3 +280,4 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [19]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [20]: /api/latest/service-level-objective-corrections/
 [21]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[22]: /dashboards/widgets/slo_list/
