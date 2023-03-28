@@ -30,7 +30,7 @@ Sensitive Data Scanner is a stream-based, pattern matching service that you can 
 
 Sensitive Data Scanner can be found under [Organization Settings][1].
 
-{{< img src="logs/sensitive_data_scanner/sds_main_apr_22.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_main_28_03_23.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
 
 ### Setup
 
@@ -62,12 +62,12 @@ Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following 
 - **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position (start/end) and length (# of characters) to redact within matching values. Redaction, partial redaction, and hashing are all irreversible actions.
 - **Name the rule:** Provide a human-readable name for the rule.
 
-{{< img src="logs/sensitive_data_scanner/sds_rule_apr_22.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_rules_28_03_23.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 
 ### Out-of-the-box Scanning Rules
 
 The Scanning Rule Library contains an evergrowing collection of predefined rules maintained by Datadog for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
-{{< img src="logs/sensitive_data_scanner/sds_library_apr_22.png" alt="Scanning Rule Library"  style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds_library_28_03_23.png" alt="Scanning Rule Library"  style="width:90%;">}}
 
 ### Permissions
 
