@@ -24,7 +24,7 @@
 {{ end }}
 
 <!--
-    build array ($engMenuChildren) of english menu items with parents from `menus.en.yaml`. 
+    build array ($engMenuChildren) of english menu items with parents from "menus.en.yaml". 
     for use in providing english names for anchoring the nav-links (.nav-link)
 -->
 {{ if ne $currentPage.Lang "en" }}
@@ -56,8 +56,8 @@
                         {{$identifier := .Identifier}}
                         
                         <!-- 
-                            lookup english equivalent of non-english menu item .identifier attr.  
-                            pull the .name attr and plug into anchor href.
+                            lookup english equivalent of non-english menu item identifier attr.  
+                            pull the name attr and plug into anchor href.
                         -->
                         {{ if ne $currentPage.Lang "en" }}
                         {{ range $engMenuItem := $engMenuChildren  }}
