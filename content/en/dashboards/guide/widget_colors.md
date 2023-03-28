@@ -72,8 +72,4 @@ Datadog offers accessible color modes for graphs to cater to visual needs, inclu
 
 {{< img src="dashboards/guide/colors/visual_accessibility.png" alt="Available visual accessibility options: Default, protanopia (difficulty distinguishing greens and reds), deuteranopia (difficulty distinguishing between reds, greens, and yellows), tritanopia (difficulty distinguishing blues and greens), high contrast (increased separation between colors for lower visual acuity), low saturation (decreased contrast for visual contrast sensitivity)." style="width:90%;" >}}
 
-## Supported Tag keys
-
-{{% semantic-color %}}
-
 [1]: https://app.datadoghq.com/personal-settings/preferences
