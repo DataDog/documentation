@@ -118,6 +118,17 @@ Datadog may collect [environmental and diagnostic information about your system]
 Enable client IP collection from relevant IP headers in HTTP request spans.
 Added in version 1.47.0 
 
+`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
+: **Default**: `false` <br>
+Enable generation of 128-bit trace IDs. By default, only 64-bit IDs are generated.
+
+`DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
+: **Default**: `false` <br>
+Enable printing of the full 128-bit ID when formatting a span with '%v'.
+When false (default), only the low 64-bits of the traceID are printed, formatted as an integer. This means if the Trace ID is only 64 bits, the full ID is printed.
+When true, the TraceID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+
+
 ## Configure APM environment name
 
 The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
