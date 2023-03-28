@@ -474,8 +474,6 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 
 `datadogRum.clearUser()`
 
-<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `clearUser` and deprecated `removeUser`</div>
-
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
@@ -555,8 +553,6 @@ For a sampled out session, all page views and associated telemetry for that sess
 
 After RUM is initialized, add extra context to all RUM events collected from your application with the `setGlobalContextProperty(key: string, value: any)` API:
 
-<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContextProperty` and deprecated `addRumGlobalContext`</div>
-
 {{< tabs >}}
 {{% tab "NPM" %}}
 ```javascript
@@ -599,23 +595,13 @@ window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
 {{% /tab %}}
 {{< /tabs >}}
 
-Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
-
 ### Remove global context property
 
 You can remove a previously defined global context property.
 
-<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `removeGlobalContextProperty` and deprecated `removeRumGlobalContext`</div>
-
-Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
-
 ### Replace global context
 
 Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API:
-
-<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `setGlobalContext` and deprecated `setRumGlobalContext`</div>
-
-Follow the [Datadog naming convention][16] for a better correlation of your data across the product.
 
 ### Clear global context
 
@@ -624,8 +610,6 @@ You can clear the global context by using `clearGlobalContext`.
 ### Read global context
 
 Once RUM is initialized, read the global context with the `getGlobalContext()` API:
-
-<div class="alert alert-info">The RUM Browser SDK v4.17.0 introduced `getGlobalContext` and deprecated `getRumGlobalContext`</div>
 
 ## Further Reading
 
