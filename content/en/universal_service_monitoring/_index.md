@@ -88,7 +88,7 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
 
 **Note:** Datadog Operator v1.0.0 or greater is required.
 
-<div class="alert alert-info">Support for GKE clusters running Google Container-Optimized OS (COS) is coming soon! An upcoming feature of Datadog Operator is introspection to automatically detect the cluster type, allowing for seamless configuration and greater ease of use.</div>
+<div class="alert alert-info">Support for GKE clusters running Google Container-Optimized OS (COS) is coming soon. An upcoming feature of Datadog Operator is introspection to automatically detect the cluster type, allowing for seamless configuration and greater ease of use.</div>
 
 [1]: https://github.com/DataDog/datadog-operator
 
