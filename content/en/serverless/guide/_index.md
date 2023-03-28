@@ -10,12 +10,13 @@ cascade:
         subcategory: Serverless Monitoring Guides
 ---
 
-## Monitor your serverless applications
+## General serverless guides
 
 {{< whatsnext desc="Best practices for monitoring your serverless applications" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Deeper visibility into resources invoking Lambda functions{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Install using the Datadog Forwarder
