@@ -63,6 +63,86 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 Enable Universal Service Monitoring in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
 
 {{< tabs >}}
+{{% tab "Operator" %}}
+<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+
+[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+
+## Prerequisites
+
+Using the Datadog Operator requires the following prerequisites:
+
+- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
+- [`Helm`][2] for deploying the `datadog-operator`.
+- [`Kubectl` CLI][3] for installing the `datadog-agent`.
+
+## Deploy an Agent with the Operator
+
+To deploy the Datadog Agent with the operator in the minimum number of steps, see the [`datadog-operator`][4] Helm chart. Here are the steps:
+
+1. Install the [Datadog Operator][5]:
+
+   ```shell
+   helm repo add datadog https://helm.datadoghq.com
+   helm install my-datadog-operator datadog/datadog-operator
+   ```
+
+2. Create a Kubernetes secret with your API and app keys
+
+   ```shell
+   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
+   ```
+   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][6]
+
+2. Create a file with the spec of your Datadog Agent deployment configuration. The simplest configuration with Universal Service Monitoring enabled is as follows:
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+<div class="alert alert-info">Support for GKE clusters running Google Container-Optimized OS (COS) is coming soon! In the Datadog Operator roadmap is introspection to automatically detect the cluster type allowing for seamless configuration and ease of use.</div>
+
+3. Deploy the Datadog Agent with the above configuration file:
+   ```shell
+   kubectl apply -f /path/to/your/datadog-agent.yaml
+   ```
+
+## Cleanup
+
+The following command deletes all the Kubernetes resources created by the above instructions:
+
+```shell
+kubectl delete datadogagent datadog
+helm delete my-datadog-operator
+```
+
+For further details on setting up Operator, including information about using tolerations, refer to the [Datadog Operator advanced setup guide][7].
+
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://helm.sh
+[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
+[5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /agent/guide/operator-advanced
+
+{{% /tab %}}
 {{% tab "Helm" %}}
 
 Using the Datadog chart version >= 2.26.2, add the following to your values file:
