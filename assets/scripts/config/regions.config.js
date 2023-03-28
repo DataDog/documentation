@@ -114,7 +114,7 @@ export default {
       us3: 'The US3 lambda endpoint is not supported.',
       us5: 'lambda endpoint not supported',
       eu: 'lambda-intake.logs.datadoghq.eu',
-      ap1: 'lambda-intake.logs.ap1.datadoghq.com',
+      ap1: 'The AP1 lambda endpoint is not supported.',
       gov: 'The GOV lambda endpoint is not supported.'
     },
     lambda_port: {
@@ -122,7 +122,7 @@ export default {
       us3: 'The US3 lambda endpoint port is not supported.',
       us5: 'The US5 lambda endpoint port is not supported.',
       eu: '443',
-      ap1: '443',
+      ap1: 'The AP1 lambda endpoint port is not supported.',
       gov: 'The GOV lambda endpoint port is not supported.'
     },
     lambda_http_endpoint: {

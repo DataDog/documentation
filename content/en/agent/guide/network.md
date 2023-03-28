@@ -136,6 +136,18 @@ Other: See [logs endpoints][3]
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
+Other: See [logs endpoints][3]
+
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
 {{< site-region region="gov" >}}
 
 [Logs][1] & [HIPAA logs][2]
