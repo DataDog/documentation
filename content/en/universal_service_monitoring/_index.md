@@ -65,7 +65,7 @@ Enable Universal Service Monitoring in your Agent by using one of the following 
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest with the setting `spec.features.usm.enabled` set to `true` in the DatadogAgent resource:
+To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
@@ -86,9 +86,9 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
          enabled: true
    ```
 
-Note: Datadog Operator v1.0.0 or greater is required.
+**Note:** Datadog Operator v1.0.0 or greater is required.
 
-<div class="alert alert-info">Support for GKE clusters running Google Container-Optimized OS (COS) is coming soon! In the Datadog Operator roadmap is introspection to automatically detect the cluster type allowing for seamless configuration and greater ease of use.</div>
+<div class="alert alert-info">Support for GKE clusters running Google Container-Optimized OS (COS) is coming soon! An upcoming feature of Datadog Operator is introspection to automatically detect the cluster type, allowing for seamless configuration and greater ease of use.</div>
 
 [1]: https://github.com/DataDog/datadog-operator
 
