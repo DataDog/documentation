@@ -47,10 +47,10 @@ If you have opened at least one Datadog support ticket, follow this process to a
 
 3. After you receive the password in your email, log in and click **Manage your tickets** to see your requests:
   {{< img src="help/my_activities.png" alt="my activities"  >}}
-5. If you don't see the **My Activities** page after logging in, click on your name in the upper right corner, and then click **My Activities**.
+4. If you don't see the **My Activities** page after logging in, click on your name in the upper right corner, and then click **My Activities**.
 
 {{% site-region region="us,us3,us5,eu" %}}
-6. If you would like to view your entire organization's tickets, submit a request to [Datadog support][1].
+5. If you would like to view your entire organization's tickets, submit a request to [Datadog support][1].
 
 [1]: https://help.datadoghq.com
 {{% /site-region %}}
