@@ -1,58 +1,52 @@
 ---
-title: Containers FAQ
-kind: faq
-cascade: 
-  - private: true
-disable_sidebar: true
+title: Container Troubleshooting
+kind: documentation
+description: Troubleshooting containers-related issues
 ---
 
-When deploying the Agent in a containerized environment, Datadog recommends following the documentation provided on this site. There are three methods of deploying the Agent:
+This page provides troubleshooting information for container monitoring.
+
+
+There are three methods of deploying the Agent:
+1. As a [**container in a runtime**][1] 
+
+2. In a **cloud environment**, such as [Amazon ECS][2] [Fargate in an Amazon ECS environment][3], or [Amazon EKS][4]
+
+3. In a [Kubernetes environment][2]
+
+These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
+
+For details on Agent release updates or changes, refer to Datadog’s [release notes][7].
 
  
 
-[As a container in a runtime](https://docs.datadoghq.com/containers/docker/?tab=standard) 
+## General issues
 
-In a Cloud environment => Common cloud environments are [Amazon ECS](https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli) [Fargate in an Amazon ECS environment](https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#), and [Amazon EKS](https://docs.datadoghq.com/integrations/eks_fargate/#pagetitle).
+### Environment variables are not being set, and tags are not injected
 
-[In a Kubernetes environment](https://docs.datadoghq.com/containers/kubernetes/)
+A useful way to inject [environment variables][8] or to configure a DogStatsD library is to implement the [Admission Controller][9] feature on the Cluster Agent. **Note**: The Cluster Agent must be deployed and running _before_ the application is deployed.
 
- 
+### Metrics are not appearing on the Datadog Web Platform
 
-As these processes may present unique deployment challenges, investigate this guide and use it as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support](https://docs.datadoghq.com/help/) for further assistance. For details on Agent release updates or changes, please refer to Datadog’s Releases page (not specific to the Containers product area). 
+Verify that the following are true:
 
- 
+- The metrics endpoint is exposed and is open for the the Agent to reach.
 
-## General Issues: 
+- There are no proxies or firewalls that might impede the Agent from accessing the endpoint. 
 
- 
+- Agent has [Autodiscovery](10] enabled.
 
-**[Environment Variables](https://docs.datadoghq.com/agent/guide/environment-variables/#overview) are not being set and tags are not injected:**
 
- A useful way to inject environment variables or to configure a DogStatsD library is to implement the Admissions Controller feature on the Cluster Agent. Please note that the Cluster Agent must be deployed and running BEFORE the application is deployed.
+### Logs are not collected
 
- 
+There are two [environment variables][8] that can impact if logs will be collected and from which containers:
 
-**Metrics are not appearing on the Datadog Web Platform:**
+- Set `DD_LOGS_ENABLED` to `true` to collect logs. 
+- Additionally, set `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true` to collect all logs from all containers.
 
-This can be due to many different factors, but it is important to ensure that the:
+To exclude logs (and other features) from collection, see the [Container Discovery Management guide][11].
 
- - Metrics endpoint is exposed and is open for the the Agent to reach.
-
- - There are no proxies or firewalls that might impede the Agent from accessing the endpoint. 
-
- - Agent has [Autodiscovery](https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736#overview) enabled.
-
- 
-
-**Not getting logs:**
-
-There are two [environment variables](https://docs.datadoghq.com/agent/guide/environment-variables/#overview) that can impact if logs will be collected and, if so, from which containers. The first variable is `DD_LOGS_ENABLED`, which must be enabled. To collect all logs from all containers, you can set the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true`.
-
-To exclude logs (and other features) from collection, please refer to Datadog’s [Container Discovery Management page](https://docs.datadoghq.com/agent/guide/autodiscovery-management/?tab=containerizedagent#pagetitle) for more insight.
-
-                                                                           
-
-**Cannot connect to the Kubelet:**
+### Cannot connect to the Kubelet
 
 The most common error that prevents connection to the Kubelet API is the verification of the Kubelet TLS certificate.
 
@@ -60,22 +54,17 @@ TLS verification is enabled by default, and may prevent the Agent from connectin
 
  - Set `TLS_VERIFY` to `false`.
 
+### HPA metrics are not appearing or are not aligning with the expected value
 
- 
+First, ensure that the Cluster Agent is deployed and able to send data to the node Agent.
 
-**HPA metrics are not appearing or are not alining with the expected value.**
+Then, review the query used to scale the external metrics in the Metrics Summary. Only valid queries autoscale. If there are multiple queries, **all** queries are ignored if **any** of the queries are invalid.
 
-- Ensure that the Cluster Agent is deployed and able to send data to the Node Agent
-
-- Review the query used to scale the external metrics in the Metrics Summary. Only valid queries will autoscale, and if there are multiple queries, ALL will be ignored if **ANY** of the queries are invalid.
-
-- To further assist Datadog Support in such issues, please provide Support with:
-
+When reaching out for further assistance for HPA metrics, provide the following to [Datadog support][6]:
   - A `describe` output of the HPA manifest:
 
 
       > kubectl describe hpa > hpa.log
-
 
   - A `describe` output of the DatadogMetric Custom Resource Definition:
 
@@ -208,3 +197,15 @@ If you are experiencing missing or inaccurate metrics, Datadog Support may ask f
     {{< nextlink href="agent/faq/docker-hub" >}}Docker Hub{{< /nextlink >}}
     {{< nextlink href="containers/faq/build_cluster_agent" >}}How do I build the Cluster Agent?{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: https://docs.datadoghq.com/containers/docker/?tab=standard
+[2]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli
+[3]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#
+[4]: https://docs.datadoghq.com/integrations/eks_fargate
+[5]: https://docs.datadoghq.com/containers/kubernetes/
+[6]: https://docs.datadoghq.com/help/
+[7]: https://app.datadoghq.com/release-notes
+[8]: https://docs.datadoghq.com/agent/guide/environment-variables/#overview
+[9]: https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=operator
+[10]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[11]: https://docs.datadoghq.com/agent/guide/autodiscovery-management/?tab=containerizedagent
