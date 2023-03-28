@@ -93,7 +93,7 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 1. In the search modal, enter the name of the workflow you want to run. Select the workflow. 
 1. If your workflow requires input parameters, enter the values as required. You can copy the values from the Signal object JSON displayed next to the input parameters, and paste them into the parameter fields.
 1. Click **Run**.
-1. You can see the workflow run status in the **Workflow Response** section of the security signal  
+1. You can see the workflow run status in the **Workflow Response** section of the Security Signal.
 
 ## Trigger a workflow on a schedule
 
