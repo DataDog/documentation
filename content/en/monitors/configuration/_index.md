@@ -245,11 +245,12 @@ The option is available with multi alert mode.
 
 #### Evaluation delay
 
+<div class="alert alert-info"> Datadog recommends a 15-minute delay for cloud metrics, which are backfilled by service providers. Additionally, when using a division formula, a 60-second delay is helpful to ensure your monitor evaluates on complete values. See the <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
+">Cloud Metric Delay</a> page for estimated delay times.</div>
+
 Delay evaluation by `N` seconds.
 
 The time (in seconds) to delay evaluation. This should be a non-negative integer. So, if the delay is set to 900 seconds (15 minutes), the monitor evaluation is during the last `5 minutes`, and the time is 7:00, the monitor evaluates data from 6:40 to 6:45. The maximum configurable evaluation delay is 86400 seconds (24 hours).
-
-**Note**: A 15 minute delay is recommended for cloud metrics which are backfilled by service providers. Additionally, when using a division formula, a 60 second delay is helpful to ensure your monitor evaluates on complete values.
 
 ## Notify your team
 
