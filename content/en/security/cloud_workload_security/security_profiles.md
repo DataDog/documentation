@@ -34,7 +34,7 @@ Each Agent can profile multiple containers on the host system simultaneously. To
 
 A Workload Security Profile is a behavior model for a specific workload image. Capturing and comparing activity snapshots from individual containers enables each security profile to provide a model of the aggregate workload behavior of similar containers. This representation results in a more precise behavior model for a specific workload as more containers are profiled. Since containerized workloads are expected to be immutable, there should be few variations between workloads that share common image name and image version tags.
 
-A visual representation of the behavior model, including process nodes and file and network activity relationships is shown on the security profile details page. The [profile visualization](#explore-security-profiles) displays how consistent or common these relationships are across the various containers that have been profiled.
+A visual representation of the behavior model, including process nodes and file and network activity relationships is shown on the [security profile details page](#explore-security-profiles). The profile visualization displays how consistent or common these relationships are across the various containers that have been profiled.
 
 #### Model status
 
