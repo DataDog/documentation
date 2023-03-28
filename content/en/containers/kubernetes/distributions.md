@@ -94,7 +94,7 @@ spec:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-AKS requires a specific configuration for the `Kubelet` integration due to how AKS has setup the SSL Certificates. Additionally the optional [Admission Controller][3] feature requires a specific configuration to prevent an error when reconciling the webhook.
+AKS requires a specific configuration for the `Kubelet` integration due to how AKS has setup the SSL Certificates. Additionally, the optional [Admission Controller][3] feature requires a specific configuration to prevent an error when reconciling the webhook.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -151,9 +151,9 @@ The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERI
 
 ### AKS Kubelet certificate
 
-There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35 it became required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
+There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
 
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][4]. As well as update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
+If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][4]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
