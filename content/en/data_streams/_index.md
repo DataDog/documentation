@@ -14,6 +14,12 @@ further_reading:
 The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
 </div>
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
