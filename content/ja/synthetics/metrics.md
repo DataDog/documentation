@@ -7,18 +7,22 @@ further_reading:
 - link: /synthetics/guide/using-synthetic-metrics/
   tag: ドキュメント
   text: Synthetic メトリクスのモニターでの使用について
+- link: /continuous_testing/settings
+  tag: Documentation
+  text: Continuous Testing のための並列化について
 kind: ドキュメント
-title: Synthetic モニタリングメトリクス
+title: Synthetic Monitoring & Continuous Testing メトリクス
 ---
 
 ## 概要
 
-次のメトリクスは、Synthetics モニタリングテストによって生成されます。
+次のメトリクスは、Synthetic Monitoring テストと Continuous Testing 設定によって生成されます。
 
 メトリクスが
 
 * `synthetics.test_runs` で始まる場合、すべての Synthetic テストから取得されます
 * `datadog.estimated_usage.synthetics.*` で始まる場合、Synthetic テストから関連する使用状況データを返します
+* `synthetics.on_demand` は、[Continuous Testing](#continuous-testing) に関連する使用量データを返します。
 
 メトリクスが
 
@@ -84,6 +88,12 @@ API テストのタイミングについて、詳しくは [API テストのタ�
 
 {{< get-metrics-from-git "synthetics" "synthetics.pl.worker" >}}
 
+### Continuous Testing
+
+{{< get-metrics-from-git "synthetics" "synthetics.on_demand.concurrency" >}}
+
+並列化については、[Continuous Testing の設定][13]を参照してください。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -100,3 +110,4 @@ API テストのタイミングについて、詳しくは [API テストのタ�
 [10]: /ja/synthetics/browser_tests/
 [11]: /ja/synthetics/private_locations/
 [12]: /ja/synthetics/guide/api_test_timing_variations/
+[13]: /ja/continuous_testing/settings/#parallelization

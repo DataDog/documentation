@@ -167,7 +167,7 @@ IPC-based configurable circuit breaker max consecutive failures.
 `DD_TRACE_AGENT_PORT`
 : **INI**: `datadog.trace.agent_port`<br>
 **Default**: `8126`<br>
-The Agent port number. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+The Agent port number. If the [Agent configuration][5] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_TRACE_AGENT_TIMEOUT`
 : **INI**: `datadog.trace.agent_timeout`<br>
@@ -177,7 +177,7 @@ The Agent request transfer timeout (in milliseconds).
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **Default**: `null`<br>
-The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. For example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Added in version `0.47.1`.
+The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. For example: `https://localhost:8126`. If the [Agent configuration][5] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Added in version `0.47.1`.
 
 `DD_DOGSTATSD_URL`
 : **INI**: `datadog.dogstatsd_url`<br>
@@ -267,7 +267,7 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
 **Default**: `0`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][5] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][6] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
 `DD_TRACE_SAMPLE_RATE`
@@ -295,7 +295,7 @@ The maximum number of spans that are generated within one trace. If the maximum 
 **Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
 **Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][6].<br>
+For more information, see [Ingestion Mechanisms][7].<br>
 
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
@@ -341,9 +341,9 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 **Default**: `tracecontext,Datadog`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [tracecontext][10]
-  - [b3multi][7]
-  - [B3 single header][8]
+  - [tracecontext][8]
+  - [b3multi][9]
+  - [B3 single header][10]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
@@ -351,10 +351,18 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
 **Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [tracecontext][10]
-  - [b3multi][7]
-  - [B3 single header][8]
+  - [tracecontext][8]
+  - [b3multi][9]
+  - [B3 single header][10]
   - Datadog
+
+`DD_DBM_PROPAGATION_MODE`
+: **INI**: `datadog.dbm_propagation_mode`<br>
+**Default**: `'disabled'`<br>
+Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
+The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
+The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+
 
 #### Integration names
 
@@ -446,12 +454,12 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][9] and [W3C][8] headers extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
@@ -479,10 +487,10 @@ If multiple extraction styles are enabled, the extraction attempt is completed w
 [2]: https://httpd.apache.org/docs/2.4/mod/mod_env.html#setenv
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
 [4]: /profiler/enabling/php/
-[5]: https://github.com/mind04/mod-ruid2
-[6]: /tracing/trace_pipeline/ingestion_mechanisms/
-[7]: https://github.com/openzipkin/b3-propagation
-[8]: https://github.com/openzipkin/b3-propagation#single-header
-[9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
-[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
-[13]: /agent/guide/network/#configure-ports
+[5]: /agent/guide/network/#configure-ports
+[6]: https://github.com/mind04/mod-ruid2
+[7]: /tracing/trace_pipeline/ingestion_mechanisms/
+[8]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[9]: https://github.com/openzipkin/b3-propagation
+[10]: https://github.com/openzipkin/b3-propagation#single-header
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

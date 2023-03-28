@@ -37,10 +37,10 @@ The Datadog Docker Agent is the containerized version of the host [Agent][1]. Th
 
 Images are available for 64-bit x86 and Arm v8 architectures.
 
-| Docker Hub     | GCR          |ECR-Public         |
+| ECR-Public    | Docker Hub          | GCR        |
 |----------------|--------------|-----------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
-| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
+| [Agent v6+][3]<br>`docker pull public.ecr.aws/datadog/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][4]<br>`docker pull gcr.io/datadoghq/agent`          |
+ |[Agent v5][5]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][7]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
@@ -278,11 +278,11 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 [1]: /agent/
 [2]: https://hub.docker.com/r/datadog/agent
-[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
-[4]: https://gallery.ecr.aws/datadog/agent
-[5]: https://hub.docker.com/r/datadog/docker-dd-agent
-[6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
-[7]: https://gallery.ecr.aws/datadog/docker-dd-agent
+[3]: https://gallery.ecr.aws/datadog/agent
+[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
+[5]: https://gallery.ecr.aws/datadog/docker-dd-agent
+[6]: https://hub.docker.com/r/datadog/docker-dd-agent
+[7]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [8]: https://app.datadoghq.com/account/settings#agent/docker
 [9]: /agent/basic_agent_usage/#supported-os-versions
 [10]: https://app.datadoghq.com/organization-settings/api-keys

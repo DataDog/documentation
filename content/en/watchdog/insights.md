@@ -80,6 +80,15 @@ Watchdog Insights appear in the Kubernetes Explorer tab in [Live Containers][5].
 4. Choose one of the Kubernetes resource types in the **Select Resources** box.
 5. A list of your Kubernetes resources appears, with the Watchdog Insights panel at the top.
 
+#### Live Processes
+
+Watchdog Insights appear in [Live Processes][6].
+
+1. In the left navigation, hover over **Infrastructure**.
+2. Click **Processes**.
+
+A list of your Processes and associated data appears, with the Watchdog Insights panel at the top. 
+
 #### Serverless
 
 For serverless infrastructures, Watchdog surfaces the following insights:
@@ -95,10 +104,10 @@ For serverless infrastructures, Watchdog surfaces the following insights:
 ### APM
 
 Watchdog Insights appear on several pages within APM:
-- [Trace Explorer][6]
-- [Continuous Profiler][7]
-- [Service Page][8]
-- [Resource Page][9]
+- [Trace Explorer][7]
+- [Continuous Profiler][8]
+- [Service Page][9]
+- [Resource Page][10]
 
 ### Log Management
 
@@ -108,7 +117,7 @@ To locate Watchdog Insights in the Log Management UI, take the following steps:
 
 The pink Watchdog Insights banner appears in the middle of your screen, above your logs.
 
-For more information, see [Watchdog Insights for Logs][10].
+For more information, see [Watchdog Insights for Logs][11].
 
 ### RUM
 
@@ -119,7 +128,7 @@ To locate Watchdog Insights in the RUM UI, take the following steps:
 
 The pink Watchdog Insights banner appears in the middle of your screen, above your views.
 
-For more information, see [Watchdog Insights for RUM][11].
+For more information, see [Watchdog Insights for RUM][12].
 
 ## Further reading
 
@@ -130,9 +139,10 @@ For more information, see [Watchdog Insights for RUM][11].
 [3]: https://app.datadoghq.com/logs
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /infrastructure/livecontainers/#kubernetes-resources-view
-[6]: /tracing/trace_explorer/
-[7]: /tracing/profiler/
-[8]: /tracing/services/service_page/
-[9]: /tracing/services/resource_page/
-[10]: /logs/explorer/watchdog_insights/
-[11]: /real_user_monitoring/explorer/watchdog_insights/
+[6]: /infrastructure/process
+[7]: /tracing/trace_explorer/
+[8]: /tracing/profiler/
+[9]: /tracing/services/service_page/
+[10]: /tracing/services/resource_page/
+[11]: /logs/explorer/watchdog_insights/
+[12]: /real_user_monitoring/explorer/watchdog_insights/

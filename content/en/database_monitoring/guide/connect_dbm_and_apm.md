@@ -36,18 +36,19 @@ Data privacy
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
 |          | [pg][7]                        | {{< X >}}   |             |
 |          | [mysql2][8]                    |             | {{< X >}}   |
-| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
-|          | [postgres][10]                 | {{< X >}}   |             |
-|          | [mysql][11]                    |             | {{< X >}}   |
-|          | [mysql2][12]                   |             | {{< X >}}   |
-| **Python:** [dd-trace-py][13] >= 1.9.0 |  |             |             |
-|          | [psycopg2][14]                 | {{< X >}}   |             |
-| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||             |             |
-|          | [Npgsql][16]                   | {{< X >}}   |             |
-|          | [MySql.Data][17]               |             | {{< X >}}   |
-|          | [MySqlConnector][18]           |             | {{< X >}}   |
-| **Java**     |                            |             |             |
-|          | jdbc                           | Coming soon | Coming soon |
+| **Python:** [dd-trace-py][9] >= 1.9.0 |  |             |             |
+|          | [psycopg2][10]                 | {{< X >}}   |             |
+| **.NET** [dd-trace-dotnet][11] >= 2.26.0 ||             |             |
+|          | [Npgsql][12]                   | {{< X >}}   |             |
+|          | [MySql.Data][13]               |             | {{< X >}}   |
+|          | [MySqlConnector][14]           |             | {{< X >}}   |
+| **PHP**  [dd-trace-php][15] >= 0.86.0     |             |             |
+|          | [pdo][16]                      | {{< X >}}   | {{< X >}}   |
+|          | [MySQLi][17]                   |             | {{< X >}}   |
+| **Node:** [dd-trace-js][18] >= 3.13.0 |    |             |             |
+|          | [postgres][19]                 | Alpha |             |
+|          | [mysql][20]                    |             | Alpha |
+|          | [mysql2][21]                   |             | Alpha |
 
 
 
@@ -221,6 +222,10 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% tab "Node.js" %}}
 
+<div class="alert alert-warning">
+Node is in alpha release and may be unstable. 
+</div>
+
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
 
 ```
@@ -287,6 +292,23 @@ Enable the database monitoring propagation feature by setting the following envi
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
 {{% /tab %}}
 
+{{% tab "PHP" %}}
+
+<div class="alert alert-warning">
+This features requires the tracer extension to be enabled for your PHP service.
+</div>
+
+Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library. For example, `PDO`.
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Explore the APM Connection
@@ -316,15 +338,18 @@ On the APM Service Page, view the direct downstream database dependencies of the
 [4]: https://pkg.go.dev/database/sql
 [5]: https://pkg.go.dev/github.com/jmoiron/sqlx
 [6]: https://github.com/dataDog/dd-trace-rb
-[7]: https://github.com/ged/ruby-pg
-[8]: https://github.com/brianmario/mysql2
-[9]: https://github.com/DataDog/dd-trace-js
-[10]: https://node-postgres.com/
-[11]: https://github.com/mysqljs/mysql
-[12]: https://github.com/sidorares/node-mysql2
-[13]: https://github.com/DataDog/dd-trace-py
-[14]: https://www.psycopg.org/docs/index.html
-[15]: https://github.com/DataDog/dd-trace-dotnet
-[16]: https://www.nuget.org/packages/npgsql
-[17]: https://www.nuget.org/packages/MySql.Data
-[18]: https://www.nuget.org/packages/MySqlConnector
+[7]: https://github.com/brianmario/mysql2
+[8]: https://github.com/ged/ruby-pg
+[9]: https://github.com/mysqljs/mysql
+[10]: https://github.com/sidorares/node-mysql2
+[11]: https://github.com/DataDog/dd-trace-dotnet
+[12]: https://www.nuget.org/packages/npgsql
+[13]: https://www.nuget.org/packages/MySql.Data
+[14]: https://www.nuget.org/packages/MySqlConnector
+[15]: https://github.com/DataDog/dd-trace-php
+[16]: https://www.php.net/manual/en/book.pdo.php
+[17]: https://www.php.net/manual/en/book.mysqli.php
+[18]: https://github.com/DataDog/dd-trace-js
+[19]: https://node-postgres.com/
+[20]: https://github.com/DataDog/dd-trace-py
+[21]: https://www.psycopg.org/docs/index.html
