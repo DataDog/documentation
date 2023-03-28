@@ -5,6 +5,7 @@
     "private": true,
     "scripts": {
         "algolia:config": "node ./local/bin/js/algolia-config.js",
+        "algolia:sync": "node ./local/bin/js/algolia-index-sync.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public && npx hugo mod clean",
         "docker:start": "/usr/local/bin/hugo server -D -d ./public -s ./ --port 1313 --navigateToChanged --noHTTPCache --bind 0.0.0.0",
@@ -47,9 +48,9 @@
         "algoliasearch": "4.14.2",
         "bootstrap": "^5.2",
         "del": "4.1.1",
-        "docsearch.js": "^2.6.3",
         "fancy-log": "^1.3.3",
         "hugo-bin": "0.99.3",
+        "instantsearch.js": "^4.49.1",
         "jquery": "3.5.1",
         "js-cookie": "^2.2.1",
         "js-yaml": "^3.14.1",

@@ -1,8 +1,13 @@
 ---
 disable_toc: true
-kind: ガイド
+kind: guide
 private: true
 title: ログガイド
+cascade:
+    algolia:
+        rank: 20
+        category: ガイド
+        subcategory: ログガイド
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}

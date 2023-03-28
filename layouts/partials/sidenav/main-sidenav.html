@@ -5,7 +5,11 @@
         <div class="col">
 
             <p class="h4 text-brand-primary"><a class="text-primary" href="{{ "" | absLangURL  }}">{{ i18n "datadog_docs" }}</a></p>
+            {{ if ne $dot.File.ContentBaseName "search" }}
             {{ partial "search.html" . }}
+            {{ else }}
+            <div id="async-searchbar-mount"></div>
+            {{ end}}
 
             <div class="sidenav-nav sidenav-nav-main">
                 {{ partialCached "nav/left-nav.html" . .Section }}

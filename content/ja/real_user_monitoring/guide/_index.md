@@ -1,8 +1,13 @@
 ---
 disable_toc: true
-kind: ガイド
+kind: guide
 private: true
 title: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
+cascade:
+    algolia:
+        rank: 20
+        category: ガイド
+        subcategory: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
 ---
 
 {{< whatsnext desc="RUM 全般:" >}}

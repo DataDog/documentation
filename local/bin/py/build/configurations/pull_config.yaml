@@ -555,6 +555,8 @@
               kind: documentation
               aliases:
               - /logs/log_collection/web_browser
+              algolia:
+                tags: ['browser logs']
       - repo_name: dd-sdk-android-gradle-plugin
         contents:
         - action: pull-and-push-file

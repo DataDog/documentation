@@ -3,6 +3,11 @@ title: Integration Guides
 kind: guide
 disable_toc: true
 private: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Integration Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}

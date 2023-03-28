@@ -1,6 +1,11 @@
 ---
-kind: ガイド
+kind: guide
 title: サーバーレスモニタリングガイド
+cascade:
+    algolia:
+        rank: 20
+        category: ガイド
+        subcategory: サーバーレスモニタリングガイド
 ---
 
 ## サーバーレスアプリケーションを監視する
