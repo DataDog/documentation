@@ -35,9 +35,25 @@ Supported build systems:
 To report test results to Datadog, you need to configure the Datadog Java library:
 
 {{< tabs >}}
+
+{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+
+If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
+
+If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, as using `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
+
+If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
+
+
+[1]: /agent/
+[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+{{% /tab %}}
+
 {{% tab "Cloud CI provider (Agentless)" %}}
 
-Datadog recommends configuring the library to use the Agentless mode so certain features such as Test Session Level Visibility are available. For this, set the following environment variables:
+<div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
+
+If you are using a cloud CI provider without access to the underlying worker nodes, such as GitHub Actions or CircleCI, configure the library to use the Agentless mode. For this, set the following environment variables:
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
 : Enables or disables Agentless mode.<br/>
@@ -57,21 +73,8 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /getting_started/site/
-
 {{% /tab %}}
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
 
-If you are running tests on an on-premises CI provider such as Jenkins or self-managed GitLab CI, you can install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. You can also run CI Visibility on an on-premises CI provider with Agentless mode.
-
-If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, because `localhost` inside the build references the container itself, not the underlying worker node where the Datadog Agent is running.
-
-If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the `DD_AGENT_HOST` environment variable in the build pods to communicate with the local Datadog Agent.
-
-
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
-
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Installing the Java tracer
