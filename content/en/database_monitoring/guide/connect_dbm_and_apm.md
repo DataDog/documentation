@@ -28,29 +28,29 @@ Data privacy
 
 **Supported tracers**
 
-| Language | Library or Framework           |  Postgres   |    MySQL    |
-| :----    | :----                          |:-----------:|:-----------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0 |      |             |             |
-|          | [database/sql][4]              |  {{< X >}}  |  {{< X >}}  |
-|          | [sqlx][5]                      |  {{< X >}}  |  {{< X >}}  |
-| **Java**     |                            |             |             |
-|          | [jdbc][22]                     |  {{< X >}}  |  {{< X >}}  |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
-|          | [pg][8]                        | {{< X >}}   |             |
-|          | [mysql2][7]                    |             | {{< X >}}   |
-| **Python:** [dd-trace-py][11] >= 1.9.0 |  |             |             |
-|          | [psycopg2][12]                 |  {{< X >}}  |             |
-| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||             |             |
-|          | [Npgsql][16]                   | {{< X >}}   |             |
-|          | [MySql.Data][17]               |             | {{< X >}}   |
-|          | [MySqlConnector][18]           |             | {{< X >}}   |
-| **PHP**  [dd-trace-php][19] >= 0.86.0     |             |             |
-|          | [pdo][20]                      | {{< X >}}   | {{< X >}}   |
-|          | [MySQLi][21]                   |             | {{< X >}}   |
-| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
-|          | [postgres][10]                 | Alpha |             |
-|          | [mysql][13]                    |             | Alpha |
-|          | [mysql2][14]                   |             | Alpha |
+| Language                                 | Library or Framework | Postgres  |   MySQL   |
+|:-----------------------------------------|:---------------------|:---------:|:---------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |
+|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} |
+|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |
+|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |
+|                                          | [pg][8]              | {{< X >}} |           |
+|                                          | [mysql2][7]          |           | {{< X >}} |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |
+|                                          | [psycopg2][12]       | {{< X >}} |           |
+| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||                      |           |
+|                                          | [Npgsql][16]         | {{< X >}} |           |
+|                                          | [MySql.Data][17]     |           | {{< X >}} |
+|                                          | [MySqlConnector][18] |           | {{< X >}} |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |
+|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
+|                                          | [MySQLi][21]         |           | {{< X >}} |
+| **Node:** [dd-trace-js][9] >= 3.13.0     |                      |           |           |
+|                                          | [postgres][10]       |   Alpha   |           |
+|                                          | [mysql][13]          |           |   Alpha   |
+|                                          | [mysql2][14]         |           |   Alpha   |
 
 
 
@@ -397,3 +397,4 @@ On the APM Service Page, view the direct downstream database dependencies of the
 [20]: https://www.php.net/manual/en/book.pdo.php
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
+[23]: https://github.com/DataDog/dd-trace-java
