@@ -9,14 +9,14 @@ Datadog Cloud Workload Security (CWS) monitors file, network, and process activi
 
 ## Detects threats to your production workloads in real-time
 
-Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as AWS EC2 instances, Docker containers, and Kubernetes clusters. Combine CWS with [Network Performance Monitoring][9] and detect suspicious activity at the network-level before workload compromise.
+Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as AWS EC2 instances, Docker containers, and Kubernetes clusters.
 
 CWS uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
 1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
 2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
-4. **Kernel Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
+4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
 {{< img src="security/cws/cws_overview.png" alt="Cloud Workload Security overview page" width="100%">}}
 

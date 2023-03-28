@@ -52,7 +52,7 @@ In general, installing CWS involves the following steps:
 
 [Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CWS, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
 
-To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [setup instructions][5] for more information.
+To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
 
 **Notes**:
 

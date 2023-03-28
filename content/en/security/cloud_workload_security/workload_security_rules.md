@@ -6,7 +6,7 @@ aliases:
 further_reading:
 - link: "/security/cloud_workload_security/setup"
   tag: "Documentation"
-  text: "Get Started with Cloud Workload Security"
+  text: "Setting Up Cloud Workload Security"
 - link: "/security/cloud_workload_security/agent_expressions"
   tag: "Documentation"
   text: "Agent Expressions"
@@ -23,6 +23,8 @@ further_reading:
 With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior.
 
 When you enable [Remote Configuration][7], you automatically receive new and updated CWS Agent rules when they're released. These bundled Agent rules are used in the [default signal rules][1]. You can also write your own custom Agent rules. This guide covers Agent rules, how to create them, and how to use them to generate security signals.
+
+**Note**: At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
 
 ### Agent rules
 
@@ -183,4 +185,4 @@ To finalize your setup, restart the [Datadog Agent][6].
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
 [6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[7]: /security/cloud_workload_security/getting_started#remote-configuration
+[7]: /security/cloud_workload_security/setup#remote-configuration
