@@ -65,7 +65,7 @@ Enable Universal Service Monitoring in your Agent by using one of the following 
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-To enable Universal Service Monitoring with the Datadog Operator[1], update your `datadog-agent.yaml` manifest with the setting `spec.features.usm.enabled` set to `true` in the DatadogAgent resource:
+To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest with the setting `spec.features.usm.enabled` set to `true` in the DatadogAgent resource:
 
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
