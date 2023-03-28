@@ -89,7 +89,7 @@ Each time the Notification Rule fires, it triggers a workflow run.
 
 You can manually kickoff a workflow from a Cloud SIEM Security Signal.
 
-1. On the Cloud SIEM Security Signal click on **Run a Workflow**.
+1. In the **Response Workflows** section of the Cloud SIEM Security Signal panel, click **Run a Workflow**.
 1. Search and select for the workflow you would like to run from the search modal. 
 1. If your workflow requires input parameters then go ahead and enter the values as required. _You can copy values from the security signal context displayed next to the input parameters_
 1. Click on **Run**
