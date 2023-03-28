@@ -1,6 +1,6 @@
 ---
 title: API Reference
-type: api
+type: documentation
 further_reading:
   - link: /api/latest/using-the-api/
     tag: Documentation
