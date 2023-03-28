@@ -27,6 +27,7 @@
     build array ($engMenuChildren) of english menu items with parents from `menus.en.yaml`. 
     for use in providing english names for anchoring the nav-links (.nav-link)
 -->
+{{ if ne $currentPage.Lang "en" }}
 {{$engMenu := (index .Sites.First.Menus $apiMenu) }}
 {{$dot.Scratch.Set "engMenuChildren" slice}}
 {{ range $engMenu }}
@@ -36,6 +37,8 @@
         {{ end }}
     {{ end }}
 {{ end }}
+{{ end }}
+
 {{$engMenuChildren := $dot.Scratch.Get "engMenuChildren"}}
 
 <ul class="list-unstyled">
@@ -56,12 +59,13 @@
                             lookup english equivalent of non-english menu item .identifier attr.  
                             pull the .name attr and plug into anchor href.
                         -->
+                        {{ if ne $currentPage.Lang "en" }}
                         {{ range $engMenuItem := $engMenuChildren  }}
                             {{ if eq $engMenuItem.Identifier $identifier }}
                             {{$dot.Scratch.Set "name" $engMenuItem.Name}}
                             {{ end }}
                         {{ end }}
-
+                        {{ end }}
                         {{$engName := $dot.Scratch.Get "name"}}
                         <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
