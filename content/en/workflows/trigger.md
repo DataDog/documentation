@@ -65,7 +65,7 @@ To trigger a workflow from a Monitor:
 
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
-## Trigger a workflow from a Security
+## Trigger a workflow from a Security Signal
 
 You can trigger a Workflow automatically from any Security Signal, or manually from a Cloud SIEM Security Signal.
 
