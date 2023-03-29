@@ -268,17 +268,19 @@ Use this section to configure notifications to your team and configure how to se
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
+{{< img src="/monitors/create/notification-aggregation.png" alt="Configure Monitor Notification Aggregation" video=true style="width:90%;">}}
+
 #### Simple alert
 
 `Simple Alert` mode aggregates over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions.
 
 #### Multi alert
 
-`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.  
+`Multi Alert` mode applies the alert to each source according to your group parameters. You receive an alert for **each group** that meets the set conditions. For example, you could group a query looking at a capacity metric by `host` and `device` to receive a separate alert for each host device that is running out of space.
 
 Customize which dimensions trigger alerts to reduce the noise and focus on the queries that matter most to you. If you group your query by `host` and `device` but only want alerts to be sent when the `host` attribute meets the threshold, remove the `device` attribute from your multi alert options and reduce the number of notifications that are sent.
 
-**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor. 
+**Note**: If your metric is only reporting by `host` with no `device` tag, it is not detected by the monitor. Metrics with both `host` and `device` tags are detected by the monitor.
 
 If you configure tags or dimensions in your query, these values are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context. See [Attribute and tag variables][8] to learn how to reference tag values in the notification message.
 
