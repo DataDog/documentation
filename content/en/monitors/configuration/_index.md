@@ -202,8 +202,8 @@ The selected behavior is applied when a monitor's query does not return any data
 
 The `Evaluate as zero` and `Show last known status` options are displayed based on the query type:
 
-- **Evaluate as zero:** This option is available for monitors using `Count` queries.
-- **Show last known status:** This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`.
+- **Evaluate as zero:** This option is available for monitors using `Count` queries without the default_zero() function.
+- **Show last known status:** This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with default_zero().
 
 {{% /tab %}}
 {{< /tabs >}}
