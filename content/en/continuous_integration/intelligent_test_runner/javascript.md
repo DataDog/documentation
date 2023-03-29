@@ -20,10 +20,10 @@ Intelligent Test Runner is only supported in the following versions and testing 
   * Only `jsdom` and `node` are supported as test environments.
 * `mocha>=5.2.0`
   * From `dd-trace>=3.16.0` or `dd-trace>=2.29.0`.
-  * Use [`nyc`][1] to run mocha with enabled code coverage.
+  * Run mocha with [`nyc`][1] to enable code coverage.
 * `cucumber-js>=7.0.0`
   * From `dd-trace>=3.16.0` or `dd-trace>=2.29.0`.
-  * Use [`nyc`][1] to run cucumber-js with enabled code coverage.
+  * Run cucumber-js with [`nyc`][1] to enable code coverage.
 
 ## Setup
 
