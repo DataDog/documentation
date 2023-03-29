@@ -28,7 +28,7 @@ Datadog의 어드미션 컨트롤러는 `MutatingAdmissionWebhook` 유형입니�
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Datadog 오퍼레이터를 위해 어드미션 컨트롤러를 활성화하려면 사용자 지정 리소스에서 매개 변수`clusterAgent.config.admissionController.enabled`를 `true`로  설정합니다:
+Datadog 오퍼레이터를 위해 어드미션 컨트롤러를 활성화하려면 사용자 지정 리소스에서 매개 변수`clusterAgent.config.admissionController.enabled`를 `true`로 설정합니다:
 
 {{< code-block lang="yaml" disable_copy="false" >}}
 [...]
