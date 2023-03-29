@@ -10,21 +10,28 @@ further_reading:
     text: "Managing Cloud Workload Security Rules"
 ---
 
-Workload Security Profiles provide a baseline of expected workload activity via a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
+Workload Security Profiles provides a baseline of expected workload activity through a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts. For example:
+- [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior.
+- Identifying previously unseen, anomalous behavior.
 
 ## Compatibility
 
-For Workload Security Profiles to be compatible with your Datadog configuration, you must have [CWS enabled][1], use Datadog Agent 7.44 or later, and have activity dumps enabled. Workload Security Profiles are enabled by default and support containerized workloads only.
+For Workload Security Profiles to be compatible with your Datadog configuration, you must have the following:
+1. [CWS enabled][1].
+2. Use Datadog Agent 7.44 or later.
+3. Have activity dumps enabled. 
+
+Workload Security Profiles are enabled by default and support containerized workloads only.
 
 ## How Workload Security Profiles are generated
 
-Workload Security Profiles are generated when [activity snapshots](#activity-snapshots) from containers sharing a common image name and image tag (version) are merged together to form a security profile. A different security profile is generated for each version of a container image. As a result, one profile is generated per `{ image-name, image-version}` tag combination.
+Workload Security Profiles are generated when [activity snapshots](#activity-snapshots) from containers sharing a common image name and image version tag are merged together to form a security profile. A different security profile is generated for each version of a container image. As a result, one profile is generated per `{ image-name, image-version}` tag combination.
 
-Each security profile acts as a [behavior model](#behavior-learning-model) for a given workload image to identify known, acceptable behavior that is expected to be consistent across all containers versus previously unseen, anomalous behavior that may be unique to a single container or small number of containers.
+Each security profile acts as a [behavior model](#behavior-learning-model) for a given workload image to identify known, acceptable behavior. The security profile uses the behavior model as a template for expected behavior that is consistent across all containers.  
 
 ### Activity snapshots
 
-Activity snapshots are the building blocks of Workload Security Profiles. They provide a reasonably accurate representation of expected workload behavior. Each snapshot captures kernel-level activity on a container, including process, network, and file access details. This information is collected by the Agent in 30 minute intervals and sent to the Datadog backend.
+Activity snapshots are the building blocks of Workload Security Profiles. They provide a representation of expected workload behavior. Each snapshot captures kernel-level activity on a container, including process, network, and file access details. This information is collected by the Agent in 30 minute intervals and sent to the Datadog backend.
 
 When you configure the Agent and enable activity dumps, it automatically starts capturing snapshots for any running cgroups, including those already running when you start the Agent. It also captures snapshots for any new containers in your cloud native environments that use the Linux kernel control groups or cgroups.
 
@@ -32,7 +39,7 @@ Each Agent can profile multiple containers on the host system simultaneously. To
 
 ### Behavior learning model
 
-A Workload Security Profile is a behavior model for a specific workload image. Capturing and comparing activity snapshots from individual containers enables each security profile to provide a model of the aggregate workload behavior of similar containers. This representation results in a more precise behavior model for a specific workload as more containers are profiled. Since containerized workloads are expected to be immutable, there should be few variations between workloads that share common image name and image version tags.
+A Workload Security Profile is a behavior model for a specific workload image. Capturing and comparing activity snapshots from individual containers enables each security profile to provide a model of the aggregate workload behavior of similar containers. As more containers are profiled, this representation results in a more precise behavior model for a specific workload. Since containerized workloads are expected to be immutable, there should be few variations between workloads that share common image name and image version tags.
 
 A visual representation of the behavior model, including process nodes and file and network activity relationships is shown on the [security profile details page](#explore-security-profiles). The profile visualization displays how consistent or common these relationships are across the various containers that have been profiled.
 
@@ -50,7 +57,7 @@ Select a security profile to view its details page. Explore the processes that m
 
 ### Commonality score
 
-The **Behavior Commonality** score at the top of the page shows how common the activity is across all workload instances monitored. In general, the higher the commonality score, the more likely that a given process or file activity is normal, known behavior. Scores may fluctuate over time as more workloads are merged into the profile, or the composition of the individual workloads change over time.
+The **Behavior Commonality** score at the top of the page shows how common the activity is across all monitored workload instances. In general, the higher the commonality score, the more likely that a given process or file activity is normal, known behavior. Scores may fluctuate over time as more workloads are merged into the profile, or the composition of the individual workloads change over time.
 
 {{< img src="security/cws/security_profiles/security-profile.png" alt="CWS security profile details page" width="100%">}}
 
@@ -64,7 +71,7 @@ Security profile details also appear in the signal panel in the [Security Signal
 
 If a signal matches known workload behavior for a security profile, a suppression suggestion is displayed on the security signal side panel. You can view the corresponding security profile and the process triggering the signal before choosing whether to accept the suggestion.
 
-To accept the suggestion, click **Suppress Signals**, then click **Add Suppression to Rule**. This creates a suppression query for the rule that excludes the process from triggering future security signals.
+To accept the suggestion, click **Suppress Signals**, then click **Add Suppression to Rule**. This creates a suppression query for the rule which prevents the process from triggering future security signals.
 
 {{< img src="security/cws/security_profiles/suppression-suggestion.png" alt="The security signal panel showing a suppression suggestion" width="80%">}}
 
