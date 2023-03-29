@@ -14,7 +14,7 @@ This page provides troubleshooting information for container monitoring.
 There are three methods of deploying the Agent:
 1. As a [**container in a runtime**][1] 
 
-2. In a **cloud environment**, such as [Amazon ECS][2] [Fargate in an Amazon ECS environment][3], or [Amazon EKS][4]
+2. In a **cloud environment**, such as [Amazon ECS][2], [Fargate in an Amazon ECS environment][3], or [Amazon EKS][4]
 
 3. In a [Kubernetes environment][2]
 
