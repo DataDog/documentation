@@ -414,4 +414,3 @@ Now, run the [node Agent's `status` subcommand][14] and look for the check name 
 [12]: /integrations/nginx/
 [13]: /containers/cluster_agent/troubleshooting/#dispatching-logic-in-the-cluster-agent
 [14]: /containers/cluster_agent/commands/#cluster-agent-commands
-[15]: /containers/cluster_agent/troubleshooting/
