@@ -22,7 +22,6 @@ These different methods present unique deployment challenges. Use this page as a
 
 For details on Agent release updates or changes, refer to Datadog’s [release notes][7].
 
-
 ## General issues
 
 ### Environment variables are not being set, and tags are not injected
@@ -65,15 +64,13 @@ Then, review the query used to scale the external metrics in the Metrics Summary
 
 When reaching out for further assistance for HPA metrics, provide the following to [Datadog support][6]:
   - A `describe` output of the HPA manifest:
-
-
-      > kubectl describe hpa > hpa.log
-
+      ```
+      $ kubectl describe hpa > hpa.log
+      ```
   - A `describe` output of the DatadogMetric Custom Resource Definition:
-
-
-      > kubectl describe DatadogMetric > DatadogMetric.log
-
+      ```
+      $ kubectl describe DatadogMetric > DatadogMetric.log
+      ```
 
 
 ## Runtime
@@ -116,19 +113,24 @@ You can use the [`flare`][15] command to send troubleshooting information to Dat
 
 **Node Agent flare**
 
-> kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID> 
+```
+$ kubectl exec <AGENT_POD_NAME> -it agent flare <CASE_ID> 
+```
 
 **Cluster Agent flare**
 
-> kubectl exec <CLUSTER_AGENT_POD_NAME> -it agent flare <CASE_ID>
-
+```
+$ kubectl exec <CLUSTER_AGENT_POD_NAME> -it agent flare <CASE_ID>
+```
  
 
 ### Describe Pod output 
 
 This provides the team with insight on how the node or Cluster Agent was deployed, what the most recent events were for the pod, and if some qualities (such as custom tags) were injected and applied to host metrics. The `> <FILENAME>.yaml` section of the command creates a file output that can be sent to Datadog support as an attachment: 
 
-> kubectl describe pod <POD_NAME> > <FILENAME>.yaml
+```
+$ kubectl describe pod <POD_NAME> > <FILENAME>.yaml
+```
 
 ### Manifest/deployment 
 
@@ -142,11 +144,13 @@ The three most common deployment methods are: Helm chart, DaemonSet, and Operato
 
 If you are experiencing missing or inaccurate metrics, Datadog support may ask for the result of a cURL output of the node Agent trying to reach the metric endpoint. This is done by running the command from inside the Agent container, and can inform support if the Agent has access to the metrics. **Note**: This is not possible in a Fargate or managed services: 
 
+```
+$ kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""
+```
 
-> kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""
-
-> docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
-
+```
+$ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
+```
 [1]: https://docs.datadoghq.com/containers/docker/?tab=standard
 [2]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli
 [3]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#
