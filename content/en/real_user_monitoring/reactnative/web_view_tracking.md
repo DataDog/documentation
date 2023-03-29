@@ -25,13 +25,15 @@ Add `react-native-webview` to your application following the [official installat
 
 ### Instrument your web views
 
-Import `WebView` from `@datadog/mobile-react-native` instead of `react-native-webview`:
+Import `WebView` from `@datadog/mobile-react-native-webview` instead of `react-native-webview`:
 
 ```javascript
-import { WebView } from '@datadog/mobile-react-native';
+import { WebView } from '@datadog/mobile-react-native-webview';
+// or
+import WebView from '@datadog/mobile-react-native-webview';
 ```
 
-You can use all existing functionalities from `react-native-webview` as the `WebView` component from `@datadog/mobile-react-native` wraps the `react-native-webview` component.
+You can use all existing functionalities from `react-native-webview` as the `WebView` component from `@datadog/mobile-react-native-webview` wraps the `react-native-webview` component.
 
 Provide the list of hosts to be tracked by Datadog inside the web view by using the `allowedHosts` prop of your `WebView` component:
 
