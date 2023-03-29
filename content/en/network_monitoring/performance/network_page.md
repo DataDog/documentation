@@ -213,7 +213,7 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 ### Security
 
-The **Security** tab highlights potential network threats and findings detected by [Cloud Workload Security][6] and [Cloud Security Posture Management][8]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][9].
+The **Security** tab highlights potential network threats and findings detected by [Cloud Workload Security][6] and [Cloud Security Posture Management][8]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][9], or if there are other threats and misconfigurations related to the selected network flow.
 
 ## Further Reading
 
