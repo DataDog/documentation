@@ -54,19 +54,19 @@
             <ul class="nav">
                 {{ range sort .Children ".Params.order" "asc"  }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
-                        {{/*  {{$identifier := .Identifier}}  */}}
-                        
+                        {{$identifier := .Identifier}}
+
                         {{/*                           
                             lookup english equivalent of non-english menu item identifier attr.  
                             pull the name attr and plug into anchor href.
                         */}}
-                        {{/*  {{ if ne $currePntage.Lang "en" }}
-                        {{ range $engMenuItem := $engMenuChildren  }}
-                            {{ if eq $engMenuItem.Identifier $identifier }}
-                            {{$dot.Scratch.Set "name" $engMenuItem.Name}}
-                            {{ end }}
+                        {{ if ne $currentPage.Lang "en" }}
+                        {{ range $engMenuChild := $engMenuChildren  }}
+                            {{/*  {{ if eq $engMenuChild.Identifier $identifier }}
+                            {{$dot.Scratch.Set "name" $engMenuChild.Name}}
+                            {{ end }}  */}}
                         {{ end }}
-                        {{ end }}  */}}
+                        {{ end }}
                         {{/*  {{$engName := $dot.Scratch.Get "name"}}  */}}
                         {{/*  <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">  */}}
                         <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
