@@ -126,24 +126,25 @@ NPM automatically maps
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
 
 ### Cloud service enhanced resolution
-If you have [setup][1] enhanced resolution for AWS or Azure, you will be able to filter and group network traffic with resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. These are explored below.
+If you have [setup][1] enhanced resolution for AWS or Azure, you will be able to filter and group network traffic with resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers will currently only apply user-defined tags. For AWS, we have additional tags that will be applied, which are defined below.
 
  #### Amazon Web Services
  {{< tabs >}}
  {{% tab "Loadbalancers" %}}
  - name
  - loadbalancer
- - custom (user-defined) tags
  - load_balancer_arn
- - scheme
  - dns_name (format loadbalancer/dns:)
  - region
  - account_id
+ - scheme
+ - custom (user-defined) tags applied to AWS Loadbalancers
  {{% /tab %}}
 
  {{% tab "NAT Gateways" %}}
  - gateway_id
- - aws_internet_gateway_id
+ - gateway_type
+ - aws_nat_gateway_id
  - aws_nat_gateway_public_ip
  - aws_account
  - availability-zone
@@ -151,16 +152,25 @@ If you have [setup][1] enhanced resolution for AWS or Azure, you will be able to
  - custom (user) tags applied to AWS Nat Gateways
  {{% /tab %}}
 
- {{< /tabs >}}
-
- #### Azure
- {{< tabs >}}
- {{% tab "Loadbalancers" %}}
- - Custom (user) tags applied to Azure Loadbalancers
+ {{% tab "VPC Internet Gateway" %}}
+ - gateway_id
+ - gateway_type
+ - aws_internet_gateway_id
+ - aws_account
+ - region
+ - custom (user) tags applied to VPC Internet Gateways
  {{% /tab %}}
- {{< /tabs >}}
- This is a test to see what happens
 
+{{% tab "VPC Internet Endpoint" %}}
+ - gateway_id
+ - gateway_type
+ - aws_vpc_endpoint_id
+ - custom (user) tags applied to VPC Internet Endpoints
+ {{% /tab %}}
+
+
+
+ {{< /tabs >}}
 
  [1]: /network_monitoring/performance/setup/#enhanced-resolution
 
