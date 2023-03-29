@@ -3,7 +3,7 @@ title: Connect to Datadog over AWS PrivateLink
 kind: guide
 ---
 
-{{< site-region region="us3,us5,eu,gov, ap1" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 <div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{< /site-region >}}
 
