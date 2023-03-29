@@ -125,8 +125,8 @@ Enable generation of 128-bit trace IDs. By default, only 64-bit IDs are generate
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **Default**: `false` <br>
 Enable printing of the full 128-bit ID when formatting a span with '%v'.
-When false (default), only the low 64-bits of the traceID are printed, formatted as an integer. This means if the Trace ID is only 64 bits, the full ID is printed.
-When true, the TraceID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
+When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
 
 ## Configure APM environment name
