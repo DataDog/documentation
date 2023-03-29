@@ -28,27 +28,14 @@
     build array ($engMenuChildren) of english menu items with parents from "menus.en.yaml". 
     for use in providing english names for anchoring the nav-links (.nav-link)  
 */}}
-
-{{/*  {{ if ne $currentPage.Lang "en" }}
-{{$engMenu := (index .Sites.First.Menus $apiMenu) }}
-{{$dot.Scratch.Set "engMenuChildren" slice}}
-{{ range $engMenu }}
-    {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/") }}
-        {{ range .Children }}
-            {{$dot.Scratch.Add "engMenuChildren" .}}
-        {{ end }}
-    {{ end }}
-{{ end }}
-{{ end }}  */}}
-
 {{ if ne $currentPage.Lang "en" }}
 {{$engMenu := (index .Sites.First.Menus $apiMenu) }}
 {{$dot.Scratch.Set "engMenuChildren" slice}}
 {{ range $engMenu }}
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/") }}
-        {{ range .Children }}
-            {{$dot.Scratch.Add "engMenuChildren" (dict "identifier" .Identifier "name" .Name) }}
-        {{ end }}
+    {{ range .Children }}
+        {{$dot.Scratch.Add "engMenuChildren" (dict "identifier" .Identifier "name" .Name) }}
+    {{ end }}
     {{ end }}
 {{ end }}
 {{ end }}
@@ -72,19 +59,13 @@
                             pull the name attr and plug into anchor href.
                         */}}
                         {{ if ne $currentPage.Lang "en" }}
-                        {{/*  {{ range $engMenuChild := $engMenuChildren  }}
-                            {{ if eq $engMenuChild.identifier $identifier }}
-                            {{$dot.Scratch.Set "name" $engMenuChild.name}}
-                            {{ end }}
-                        {{ end }}  */}}
                         {{ range where $engMenuChildren "identifier" $identifier  }}
                             {{$dot.Scratch.Set "name" .name}}
                         {{ end }}
                         {{ end }}
 
-                        {{/*  {{$engName := $dot.Scratch.Get "name"}}  */}}
-                        {{/*  <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">  */}}
-                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
+                        {{$engName := $dot.Scratch.Get "name"}}
+                        <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
                           <span class="d-inline-block">{{ .Name }}</span>
                         </a>
                     </li>
