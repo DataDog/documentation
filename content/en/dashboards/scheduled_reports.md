@@ -94,7 +94,7 @@ Users with the Admin role or **Org Management** permission can enable or disable
 [2]: /dashboards/widgets/distribution/
 [3]: /dashboards/widgets/geomap/
 [4]: /dashboards/widgets/group/
-[5]: /dashboards/widgets/heat_map/
+[5]: /dashboards/widgets/heatmap/
 [6]: /dashboards/widgets/monitor_summary/
 [7]: /dashboards/widgets/note/
 [8]: /dashboards/widgets/query_value/

@@ -76,7 +76,7 @@ The dedicated [widget JSON schema definition][4] for the distribution widget is:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /dashboards/widgets/heat_map/
+[1]: /dashboards/widgets/heatmap/
 [2]: /dashboards/widgets/#full-screen
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

@@ -5,6 +5,7 @@ description: "Build temporal heat map over a given metric."
 widget_type: "heatmap"
 aliases:
     - /graphing/widgets/heat_map/
+    - /dashboards/widgets/heat_map/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
