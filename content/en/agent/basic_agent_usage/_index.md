@@ -18,6 +18,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
   tag: "Blog"
   text: "Performance Improvements in the Datadog Agent Metrics Pipeline"
+cascade:
+    algolia:
+        rank: 50
+        category: Documentation
+        subcategory: Datadog Agent
 ---
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}

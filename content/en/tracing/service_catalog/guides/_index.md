@@ -2,6 +2,11 @@
 title: Service Catalog Guides
 kind: guide
 private: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Service Catalog Guides
 ---
 
 

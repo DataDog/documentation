@@ -22,6 +22,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/service-catalog-setup/"
   tag: "Blog"
   text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+cascade:
+    algolia:
+        rank: 50
+        category: Documentation
+        subcategory: Application Performance Monitoring
 ---
 
 
