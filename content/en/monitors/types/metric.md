@@ -209,5 +209,3 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
 [8]: /monitors/configuration/?tab=thresholdalert#notify-your-team
-
-https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#alert-grouping

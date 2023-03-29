@@ -268,7 +268,7 @@ Use this section to configure notifications to your team and configure how to se
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
-{{< img src="/monitors/create/notification-aggregation.png" alt="Configure Monitor Notification Aggregation" video=true style="width:90%;">}}
+{{< img src="/monitors/create/notification-aggregation.png" alt="Configurations options for monitor notification aggregation" style="width:100%;">}}
 
 #### Simple alert
 
