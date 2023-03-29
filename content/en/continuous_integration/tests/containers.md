@@ -123,6 +123,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILDKITE_BUILD_AUTHOR_EMAIL`
 - `BUILDKITE_BUILD_CREATOR`
 - `BUILDKITE_BUILD_CREATOR_EMAIL`
+- `BUILDKITE_AGENT_ID`
+- `BUILDKITE_AGENT_META_DATA_*`
 
 [Full list of build environment variables provided by Buildkite][1]
 
@@ -192,6 +194,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `CI_JOB_STAGE`
 - `CI_JOB_NAME`
 - `CI_JOB_URL`
+- `CI_RUNNER_ID`
+- `CI_RUNNER_TAGS`
 - `CI_REPOSITORY_URL`
 - `CI_COMMIT_SHA`
 - `CI_COMMIT_REF_NAME`
@@ -219,6 +223,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
+- `NODE_NAME`
+- `NODE_LABELS`
 - `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
 - `DD_CUSTOM_PARENT_ID` (idem)
 

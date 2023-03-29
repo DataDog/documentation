@@ -9,7 +9,6 @@ aliases:
     - /logs/analytics
     - /logs/explorer/list
     - /logs/explorer/patterns
-    - /logs/explorer/analytics
     - /logs/explorer/transactions/
 further_reading:
     - link: 'logs/explorer/live_tail'

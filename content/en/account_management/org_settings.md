@@ -88,7 +88,7 @@ To rename your organization, click the **Edit** button in the **Preferences** ta
 
 #### Out-of-contract retention periods for log indexes
 
-Users with `Org Management` permission can enable the out-of-contract retention periods feature for log indexes.
+Users with `Org Management` permission can enable the out-of-contract retention periods feature for log indexes. This feature is enabled on a per-org basis. This means that if a user enables the feature on a parent org, the feature is not automatically enabled for all child orgs.
 
 {{< img src="account_management/out-of-contract-retention.png" alt="The out-of-contract retention periods for log indexes setting showing enabled." style="width:70%;" >}}
 
