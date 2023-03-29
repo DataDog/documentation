@@ -47,7 +47,7 @@
 {{ range $engMenu }}
     {{ if and (.HasChildren) (ne $currentPage.CurrentSection.RelPermalink "/api/") }}
         {{ range .Children }}
-            {{$dot.Scratch.Add "engMenuChildren" (dict "identifier" .Identifier "name" .Name)}}
+            {{$dot.Scratch.Add "engMenuChildren" (dict "identifier" .Identifier "name" .Name) }}
         {{ end }}
     {{ end }}
 {{ end }}
@@ -67,19 +67,21 @@
                 {{ range sort .Children ".Params.order" "asc"  }}
                     <li class="row nav-item {{ if $currentPage.IsMenuCurrent $apiMenu . }}active{{ end }}">
                         {{$identifier := .Identifier}}
-
                         {{/*                           
                             lookup english equivalent of non-english menu item identifier attr.  
                             pull the name attr and plug into anchor href.
                         */}}
                         {{ if ne $currentPage.Lang "en" }}
-                        {{ range $engMenuChild := $engMenuChildren  }}
-                            {{/*  <h1>Child: {{$engMenuChild.identifier}}</h1>  */}}
+                        {{/*  {{ range $engMenuChild := $engMenuChildren  }}
                             {{ if eq $engMenuChild.identifier $identifier }}
                             {{$dot.Scratch.Set "name" $engMenuChild.name}}
                             {{ end }}
+                        {{ end }}  */}}
+                        {{ range where $engMenuChildren "identifier" $identifier  }}
+                            {{$dot.Scratch.Set "name" .name}}
                         {{ end }}
                         {{ end }}
+
                         {{/*  {{$engName := $dot.Scratch.Get "name"}}  */}}
                         {{/*  <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ default (.Name | anchorize) ($engName | anchorize) }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">  */}}
                         <a class="col nav-link d-inline-block" href='{{ if hasPrefix .URL "#" }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-bs-target="#{{.Identifier}}">
