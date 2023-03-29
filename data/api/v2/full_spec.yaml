@@ -12307,6 +12307,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/ServiceDefinitionV1'
       - $ref: '#/components/schemas/ServiceDefinitionV2'
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       type: object
     ServiceDefinitionV1:
       deprecated: true
@@ -12537,6 +12538,209 @@ components:
       - name
       - url
       type: object
+    ServiceDefinitionV2Dot1:
+      description: Service definition v2.1 for providing service metadata and integrations.
+      properties:
+        application:
+          description: Identifier for a group of related services serving a product
+            feature, which the service is a part of.
+          example: my-app
+          type: string
+        contacts:
+          description: A list of contacts related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Dot1Contact'
+          type: array
+        dd-service:
+          description: Unique identifier of the service. Must be unique across all
+            services and is used to match with a service in Datadog.
+          example: my-service
+          type: string
+        description:
+          description: A short description of the service.
+          example: My service description
+          type: string
+        extensions:
+          additionalProperties: {}
+          description: Extensions to v2.1 schema.
+          example:
+            myorg/extension: extensionValue
+          type: object
+        integrations:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Integrations'
+        lifecycle:
+          description: The current life cycle phase of the service.
+          example: sandbox
+          type: string
+        links:
+          description: A list of links related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Dot1Link'
+          type: array
+        schema-version:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Version'
+        tags:
+          description: A set of custom tags.
+          example:
+          - my:tag
+          - service:tag
+          items:
+            type: string
+          type: array
+        team:
+          description: Team that owns the service. It is used to locate a team defined
+            in Datadog Teams if it exists.
+          example: my-team
+          type: string
+        tier:
+          description: Importance of the service.
+          example: High
+          type: string
+      required:
+      - schema-version
+      - dd-service
+      type: object
+    ServiceDefinitionV2Dot1Contact:
+      description: Service owner's contacts information.
+      oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1Email'
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1Slack'
+    ServiceDefinitionV2Dot1Email:
+      description: Service owner's email.
+      properties:
+        contact:
+          description: Contact value.
+          example: contact@datadoghq.com
+          format: email
+          type: string
+        name:
+          description: Contact email.
+          example: Team Email
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1EmailType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2Dot1EmailType:
+      description: Contact type.
+      enum:
+      - email
+      example: email
+      type: string
+      x-enum-varnames:
+      - EMAIL
+    ServiceDefinitionV2Dot1Integrations:
+      description: Third party integrations that Datadog supports.
+      properties:
+        opsgenie:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Opsgenie'
+        pagerduty:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Pagerduty'
+      type: object
+    ServiceDefinitionV2Dot1Link:
+      description: Service's external links.
+      properties:
+        name:
+          description: Link name.
+          example: Runbook
+          type: string
+        provider:
+          description: Link provider.
+          example: Github
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1LinkType'
+        url:
+          description: Link URL.
+          example: https://my-runbook
+          type: string
+      required:
+      - name
+      - type
+      - url
+      type: object
+    ServiceDefinitionV2Dot1LinkType:
+      description: Link type.
+      enum:
+      - doc
+      - repo
+      - runbook
+      - dashboard
+      - other
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - DOC
+      - REPO
+      - RUNBOOK
+      - DASHBOARD
+      - OTHER
+    ServiceDefinitionV2Dot1Opsgenie:
+      description: Opsgenie integration for the service.
+      properties:
+        region:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1OpsgenieRegion'
+        service-url:
+          description: Opsgenie service url.
+          example: https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000
+          type: string
+      required:
+      - service-url
+      type: object
+    ServiceDefinitionV2Dot1OpsgenieRegion:
+      description: Opsgenie instance region.
+      enum:
+      - US
+      - EU
+      example: US
+      type: string
+      x-enum-varnames:
+      - US
+      - EU
+    ServiceDefinitionV2Dot1Pagerduty:
+      description: PagerDuty integration for the service.
+      properties:
+        service-url:
+          description: PagerDuty service url.
+          example: https://my-org.pagerduty.com/service-directory/PMyService
+          type: string
+      type: object
+    ServiceDefinitionV2Dot1Slack:
+      description: Service owner's Slack channel.
+      properties:
+        contact:
+          description: Slack Channel.
+          example: https://yourcompany.slack.com/archives/channel123
+          type: string
+        name:
+          description: Contact Slack.
+          example: Team Slack
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1SlackType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2Dot1SlackType:
+      description: Contact type.
+      enum:
+      - slack
+      example: slack
+      type: string
+      x-enum-varnames:
+      - SLACK
+    ServiceDefinitionV2Dot1Version:
+      default: v2.1
+      description: Schema version being used.
+      enum:
+      - v2.1
+      example: v2.1
+      type: string
+      x-enum-varnames:
+      - V2_1
     ServiceDefinitionV2Email:
       description: Service owner's email.
       properties:
@@ -12695,6 +12899,7 @@ components:
     ServiceDefinitionsCreateRequest:
       description: Create service definitions request.
       oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionRaw'
     ServiceDefinitionsListResponse:
@@ -22186,7 +22391,7 @@ paths:
         service_definition:
           parameters:
           - name: body
-            value: "{\n  \"dd-service\": \"service-{{ unique}}\",\n  \"dd-team\":
+            value: "{\n  \"dd-service\": \"service-{{ unique_lower_alnum }}\",\n  \"dd-team\":
               \"my-team\",\n  \"docs\": [{\"name\": \"Architecture\",\n            \"provider\":
               \"google drive\",\n            \"url\": \"https://gdrive/mygivedoc\"}],\n
               \ \"extensions\": {\"frogextension\": \"extensionfrogvalue\"},\n  \"integrations\":
