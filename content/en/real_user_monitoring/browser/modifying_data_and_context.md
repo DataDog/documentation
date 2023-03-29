@@ -601,7 +601,51 @@ You can remove a previously defined global context property.
 
 ### Replace global context
 
-Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API:
+Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```
+import { datadogRum } from '@datadog/browser-rum';
+datadogRum.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// Code example
+datadogRum.setGlobalContext({
+    codeVersion: 34,
+});
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+    DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+})
+
+// Code example
+DD_RUM.onReady(function() {
+    DD_RUM.setGlobalContext({
+        codeVersion: 34,
+    })
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+window.DD_RUM &&
+    DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+
+// Code example
+window.DD_RUM &&
+    DD_RUM.setGlobalContext({
+        codeVersion: 34,
+    });
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Clear global context
 
@@ -609,7 +653,33 @@ You can clear the global context by using `clearGlobalContext`.
 
 ### Read global context
 
-Once RUM is initialized, read the global context with the `getGlobalContext()` API:
+Once RUM is initialized, read the global context with the `getGlobalContext()` API.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```
+import { datadogRum } from '@datadog/browser-rum';
+
+const context = datadogRum.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```
+DD_RUM.onReady(function() {
+  var context = DD_RUM.getRumGlobalContext();
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```
+var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
