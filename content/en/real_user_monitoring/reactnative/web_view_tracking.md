@@ -44,13 +44,13 @@ Provide the list of hosts to be tracked by Datadog inside the web view by using 
 
 ## Access your web views
 
-Your web views appear in the [RUM Explorer][2] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application’s platform, such as React Native.
+Your web views appear in the [RUM Explorer][2] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as React Native.
 
 Filter on your React Native applications, and click a session. A side panel with a list of events in the session appears.
 
 {{< img src="real_user_monitoring/react_native/reactnative_webview_session.png" alt="webview session example" >}}
 
-Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view’s **Performance** tab.
+Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/browser/#npm
 [2]: https://app.datadoghq.com/rum/explorer?_gl=1*1ftt3v2*_gcl_aw*R0NMLjE2NzE1MzAwMzUuQ2owS0NRaUExNFdkQmhEOEFSSXNBTmFvMDdnVzZFSGZaVXQ0dGRFY3ZwcERPVkpFUTJEWEZHYVhSd0djQmNGdDRnZ0pra0xGbW5uUjFHQWFBcjlZRUFMd193Y0I.*_ga*MTkyMzQ5MTc1MC4xNjc4MjczMTI3*_ga_KN80RDFSQK*MTY3ODI3OTIzNC4yLjAuMTY3ODI3OTIzNC42MC4wLjA.
