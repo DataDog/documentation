@@ -15,11 +15,11 @@ further_reading:
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
 
 * `jest>=24.8.0`
-  * From `dd-trace>=3.11.0` or `dd-trace>=2.24.0`
+  * From `dd-trace>=3.16.0` or `dd-trace>=2.29.0`
   * Only `jest-circus/runner` is supported as `testRunner`.
   * Only `jsdom` and `node` are supported as test environments.
 * `mocha>=5.2.0`
-  * From `dd-trace>=3.11.0` or `dd-trace>=2.24.0`
+  * From `dd-trace>=3.16.0` or `dd-trace>=2.29.0`
 
 ## Setup
 
@@ -31,15 +31,10 @@ To enable Intelligent Test Runner, set the following environment variables:
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
 **Default**: `(empty)`
 
-`DD_CIVISIBILITY_ITR_ENABLED=true` (Required)
-: Flag to enable test skipping. <br/>
-**Default**: `false`<br/>
-**Note**: Required only during Beta
-
 After setting these environment variables, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_APPLICATION_KEY=$APP_KEY DD_CIVISIBILITY_ITR_ENABLED=true yarn test
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_APPLICATION_KEY=$APP_KEY yarn test
 {{< /code-block >}}
 
 
