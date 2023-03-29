@@ -21,13 +21,21 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 
 ### Configuration
 
-1. On the dashboard page, add an SLO Summary widget.
-2. Select an SLO from the dropdown menu.
+1. Select an SLO from the dropdown menu.
+2. You can filter your query with tags. For Metrics-based SLOs, leverage [template variables][100] to dynamically scope your results.
 3. Select up to three different time windows.
 
-**Note:** The `Global Time` allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days. Additionally, you can specify an optional unique SLO target for the arbitrary time period. Specifying an SLO target is required to display an error budget and for being able to color code the SLO status value as green or red. If no SLO target is specified only the SLO status is shown and the font color remains gray.
-
 ### Options
+
+#### Set the time window
+
+Select up to three different rolling time windows. Optionally, you can select a calendar time window or select the Global Time.
+
+The `Global Time` allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days. 
+
+You can specify an optional unique SLO target for the arbitrary time period. To display an error budget and to color code the SLO status value as green or red, you need to specify an SLO target. 
+
+**Note**: If the SLO input target is not specified, only the SLO status is shown and the font color remains gray.
 
 #### Display preferences
 
@@ -47,14 +55,6 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
 
 {{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="view mode"  >}}
 
-#### Title
-
-Display a custom title for your widget by checking the `Show a title` check box:
-
-{{< img src="dashboards/widgets/slo/slo_summary-show_title.png" alt="widget title"  >}}
-
-You can optionally define the title’s size and alignment.
-
 ## API
 
 This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
@@ -68,5 +68,6 @@ The dedicated [widget JSON schema definition][3] for the SLO Summary widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/service_level_objectives/
-[2]: /api/v1/dashboards/
+[2]: /api/latest/dashboards/
 [3]: /dashboards/graphing_json/widget_json/
+[100]: /dashboards/template_variables/
