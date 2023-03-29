@@ -41,7 +41,7 @@ Verify that the following are true:
 
 ### Logs are not collected
 
-There are two [environment variables][8] that can impact if logs will be collected and from which containers:
+There are two [environment variables][8] that can effect whether logs are collected and from which containers:
 
 - Set `DD_LOGS_ENABLED` to `true` to collect logs. 
 - Additionally, set `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true` to collect all logs from all containers.
