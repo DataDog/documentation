@@ -36,7 +36,7 @@ Verify that the following are true:
 
 - There are no proxies or firewalls that might impede the Agent from accessing the endpoint. 
 
-- Agent has [Autodiscovery](10] enabled.
+- Agent has [Autodiscovery][10] enabled.
 
 
 ### Logs are not collected
@@ -88,8 +88,7 @@ Ensure that your IAM policy is updated.
   - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Kinesis Data Firehose][14]. Using Kinesis Data Firehose to collect logs requires the successful implementation of the Kinesis Data Firehose delivery stream, as well as some command line tools. 
  
 
-## Kubernetes:
- 
+## Kubernetes
 
 ### Container not deploying or collecting metrics
 
@@ -151,6 +150,11 @@ $ kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""
 ```
 $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.datadoghq.com/containers/docker/?tab=standard
 [2]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli
 [3]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#
