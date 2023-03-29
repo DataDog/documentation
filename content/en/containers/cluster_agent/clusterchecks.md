@@ -396,10 +396,6 @@ Now, run the [node Agent's `status` subcommand][14] and look for the check name 
       Average Execution Time : 90ms
 ```
 
-## Troubleshooting
-
-* [Cluster Agent Troubleshooting][15]
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
