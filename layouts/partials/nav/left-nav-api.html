@@ -29,7 +29,7 @@
     for use in providing english names for anchoring the nav-links (.nav-link)  
 */}}
 
-{{/*  {{ if ne $currentPage.Lang "en" }}
+{{ if ne $currentPage.Lang "en" }}
 {{$engMenu := (index .Sites.First.Menus $apiMenu) }}
 {{$dot.Scratch.Set "engMenuChildren" slice}}
 {{ range $engMenu }}
@@ -39,9 +39,9 @@
         {{ end }}
     {{ end }}
 {{ end }}
-{{ end }}  */}}
+{{ end }}
 
-{{/*  {{$engMenuChildren := $dot.Scratch.Get "engMenuChildren"}}  */}}
+{{$engMenuChildren := $dot.Scratch.Get "engMenuChildren"}}
 
 <ul class="list-unstyled">
 {{ range $menu }}
