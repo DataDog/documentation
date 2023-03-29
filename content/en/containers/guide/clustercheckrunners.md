@@ -32,27 +32,25 @@ Then, deploy the cluster check runner using either [Datadog Operator][4] or [Hel
 Using the Operator, you can launch and manage all of these resources with a single manifest. For example:
 
 ```
-apiVersion: datadoghq.com/v1alpha1
+apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-    token: <DATADOG_CLUSTER_AGENT_TOKEN>
-  agent:
-    config:
-      tolerations:
-      - operator: Exists
-  clusterAgent:
-    config:
-      externalMetrics:
-        enabled: true
-      clusterChecksEnabled: true
-    replicas: 2
-  clusterChecksRunner:
-    enabled: true
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterAgentToken: <DATADOG_CLUSTER_AGENT_TOKEN>
+  features:
+    clusterChecks:
+      enabled: true
+      useClusterChecksRunners: true
+    externalMetricsServer:
+      enabled: true
+  override:
+    clusterAgent:
+      replicas: 2
 ```
 
 Deploy these resources into your cluster:
