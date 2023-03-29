@@ -14,11 +14,11 @@ further_reading:
   text: "Visualize user behavior with Datadog Heatmaps"
 ---
 
+{{< img src="dashboards/widgets/heatmap/heatmap.png" alt="Example heatmap graph visualization" style="width:100%;">}}
+
 The heatmap visualization shows metrics aggregated across multiple tags. The heatmap supports distribution metrics, high resolution and data display. You can visualize OpenTelemetry histograms as heatmaps out of the box by using the 'counters' histogram mode.
 
 ## Setup
-
-{{< img src="dashboards/widgets/heat_map/heatmap_config.png" alt="Example heatmap setup for kubernetes.memory.usage_pct metric grouped by host, cluster-location, and kube_service tags with purple color scheme" style="width:100%;">}}
 
 ### Configuration
 
