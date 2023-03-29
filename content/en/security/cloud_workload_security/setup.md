@@ -29,7 +29,7 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
-Cloud Workload Security (CWS) monitors file and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
+Cloud Workload Security (CWS) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Prerequisites
 
@@ -80,17 +80,6 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
       securityAgent:
         runtime:
           enabled: true
-
-      agents:
-        containers:
-          agent: 
-            env:
-              - name: DD_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
-          systemProbe:
-            env:
-              - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
-                value: "true"
     ```
 
 3. Restart the Agent.
