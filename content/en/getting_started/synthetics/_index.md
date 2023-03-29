@@ -20,8 +20,12 @@ further_reading:
 - link: '/continuous_testing/cicd_integrations'
   tag: 'Documentation'
   text: 'Learn about running Synthetic tests in a CI pipeline'
-algolia:
-  tags: ["synthetics"]
+cascade:
+    algolia:
+        rank: 70
+        category: Getting Started
+        subcategory: Getting Started with Synthetic Monitoring
+        tags: ["synthetics"]
 ---
 
 ## Overview

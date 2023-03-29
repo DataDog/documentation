@@ -75,6 +75,11 @@ const updateSynonyms = (index) => {
             synonyms: ['RUM', 'rum', 'real user monitoring']
         },
         {
+            objectID: 'synthetics',
+            type: 'synonym',
+            synonyms: ['synthetics', 'synthetic monitoring']
+        },
+        {
             objectID: 'permissions',
             type: 'synonym',
             synonyms: ['permissions', 'Role Permissions']
