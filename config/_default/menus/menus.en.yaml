@@ -3097,16 +3097,21 @@ main:
     parent: rum_reactnative
     identifier: rum_reactnative_mobile_vitals
     weight: 402
+  - name: Web View Tracking
+    url: real_user_monitoring/reactnative/web_view_tracking/
+    parent: rum_reactnative
+    identifier: rum_reactnative_web_view_tracking
+    weight: 403
   - name: Expo
     url: real_user_monitoring/reactnative/expo/
     parent: rum_reactnative
     identifier: rum_reactnative_expo
-    weight: 403
+    weight: 404
   - name: CodePush
     url: real_user_monitoring/reactnative/codepush/
     parent: rum_reactnative
     identifier: rum_reactnative_codepush
-    weight: 404
+    weight: 405
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
