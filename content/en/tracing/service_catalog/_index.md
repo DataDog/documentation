@@ -26,7 +26,7 @@ cascade:
     algolia:
         rank: 50
         category: Documentation
-        subcategory: Application Performance Monitoring
+        subcategory: Service Catalog
 ---
 
 
