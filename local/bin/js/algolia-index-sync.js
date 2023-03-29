@@ -85,6 +85,11 @@ const updateSynonyms = (index) => {
             synonyms: ['dbm', 'database monitoring']
         },
         {
+            objectID: 'usm',
+            type: 'synonym',
+            synonyms: ['usm', 'universal service monitoring']
+        },
+        {
             objectID: 'npm',
             type: 'synonym',
             synonyms: ['npm', 'network performance monitoring']

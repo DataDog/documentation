@@ -19,6 +19,10 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+algolia:
+  rank: 50  # We want the product landing page for USM to appear as the first search result
+  category: Documentation
+  subcategory: Universal Service Monitoring
 ---
 
 ## Overview
