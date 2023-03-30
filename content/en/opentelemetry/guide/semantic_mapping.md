@@ -58,4 +58,4 @@ For more information, see [Unified Service Tagging][2].
 | `k8s.pod.name` | `pod_name` |
 
 [1]: https://opentelemetry.io/docs/concepts/semantic-conventions/
-[2]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging
+[2]: /getting_started/tagging/unified_service_tagging
