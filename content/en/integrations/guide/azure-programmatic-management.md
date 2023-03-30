@@ -1,5 +1,5 @@
 ---
-title: Azure integration programmatic management guide
+title: Azure Integration Programmatic Management Guide
 kind: guide
 description: "Steps for programmatically managing the Azure integration with Datadog"
 further_reading:
@@ -86,6 +86,10 @@ resource "datadog_integration_azure" "sandbox" {
 [2]: https://docs.datadoghq.com/integrations/terraform/#overview
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 {{% /site-region %}}
+
+#### Managing multiple subscriptions or tenants
+
+You can use multiple provider blocks with aliases to manage Terraform resources across multiple subscriptions or tenants. Read [Provider Configuration][9] for more information.
 
 ### API
 
@@ -176,3 +180,4 @@ Datadog provides monitoring capabilities for serverless resources with the [Micr
 [6]: /agent/basic_agent_usage/ansible/
 [7]: /integrations/azure_container_service/
 [8]: /api/latest/azure-integration/
+[9]: https://developer.hashicorp.com/terraform/language/providers/configuration
