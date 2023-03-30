@@ -196,14 +196,15 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-Use the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
+The PHP tracer provides the `\DDTrace\set_user()` function, which allows you to monitor and block authenticated requests.
 
-User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+`\DDTrace\set_user()` adds the relevant user tags and metadata to the the trace and automatically performs user blocking.
 
-The example below shows how to obtain the root span and add the relevant user monitoring tags:
+The example below shows how to set user monitoring tags, and enable user blocking capability:
 
 ```php
 <?php
+// Blocking is performed internally through the set_user call.
 \DDTrace\set_user(
     // A unique identifier of the user is required.
     '123456789',
