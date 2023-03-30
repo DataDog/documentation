@@ -1,6 +1,8 @@
 ---
 title: Cloud Cost Monitor
 kind: documentation
+private: "true"
+is_beta: "true"
 description: "Monitor costs associated with cloud platforms."
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
