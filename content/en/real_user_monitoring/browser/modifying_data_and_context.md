@@ -668,14 +668,14 @@ const context = datadogRum.getRumGlobalContext();
 {{% tab "CDN async" %}}
 ```javascript
 DD_RUM.onReady(function() {
-  var context = DD_RUM.getRumGlobalContext();
+  const context = DD_RUM.getRumGlobalContext();
 });
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```javascript
-var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
+const context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 ```
 
 {{% /tab %}}
