@@ -175,6 +175,35 @@ spec:
               - <INSTANCES_CONFIG>
 ```
 
+Alternatively, you can create a ConfigMap to store the static configuration file and mount this ConfigMap to the Cluster Agent using the `spec.override.clusterAgent.extraConfd.configMap` field:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configMap:
+          name: "<NAME>-config-map"
+          items:
+            - key: <INTEGRATION_NAME>-config
+              path: <INTEGRATION_NAME>.yaml
+```
+
+```yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "<NAME>-config-map"
+data:
+  <INTEGRATION_NAME>-config: |-
+    cluster_check: true
+    init_config:
+      <INIT_CONFIG>
+    instances:
+      <INSTANCES_CONFIG>
+```
+
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 With the manual approach you must create a ConfigMap to store the desired static configuration files, and then mount this ConfigMap into the corresponding `/conf.d` file of the Cluster Agent container. This follows the same approach for [mounting ConfigMaps into the Agent container][1]. For example:
@@ -253,7 +282,7 @@ Use the `clusterAgent.confd` field to define your check configuration:
 #(...)
 clusterAgent:
   confd:
-    <INTEGRATION_NAME>.yaml: |-
+    http_check.yaml: |-
       advanced_ad_identifiers:
         - kube_service:
             name: "<SERVICE_NAME>"
@@ -276,7 +305,7 @@ spec:
     clusterAgent:
       extraConfd:
         configDataMap:
-          <INTEGRATION_NAME>.yaml: |-
+          http_check.yaml: |-
             advanced_ad_identifiers:
               - kube_service:
                   name: "<SERVICE_NAME>"
