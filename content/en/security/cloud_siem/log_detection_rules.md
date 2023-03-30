@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-To create a new log detection rule in Datadog, navigate to the [**Detection Rules**][6] page and select the **New Rule** button in the top right corner of the page.
+To create a log detection rule in Datadog, navigate to the [**Detection Rules** page][6] and click **New Rule**.
 
 ## Rule Type
 

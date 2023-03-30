@@ -42,7 +42,7 @@ To clone a rule:
 
 To create a rule from scratch:
 
-1. In Datadog, navigate to [**Security > Posture Management** and click **Compliance Rules**][1].
+1. In Datadog, navigate to [**Security** > **Posture Management**][1] and click **Compliance Rules**.
 2. Click **New Rule** in the upper-right.
 3. Select **Cloud Configuration** as the rule type.
 4. Specify the cloud resource types you are writing the rule for.
