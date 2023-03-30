@@ -61,7 +61,7 @@ If a metric, `const_1{*}`, is a constant with the value of `1`, then `cumsum(con
 
 Cumulative sum should be avoided in monitor queries, because the cumulative sum function is a visual function. When used in a dashboard or notebook, the points will reflect values based on the selected timeframe. This doesn’t translate well in a monitor as the monitor doesn’t have a sense of which timeframe to use.
 
-In subsitute, configure [Cumulative Time Windows][1] in your monitor evaluation period.
+Instead, configure [Cumulative Time Windows][1] in your monitor evaluation period.
 
 ## Integral
 
