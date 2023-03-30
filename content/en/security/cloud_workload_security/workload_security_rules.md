@@ -88,7 +88,7 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 First, create a default policy file to load to the Agent by following the instructions below.
 
-1. In Datadog, navigate to the [Agent Configuration page][4] under **Setup & Configuration**.
+1. In Datadog, navigate to the [Agent Configuration page][4].
 
 2. Click **Add an Agent Rule** in the top right.
 
