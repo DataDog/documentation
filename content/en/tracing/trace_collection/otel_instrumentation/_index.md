@@ -27,4 +27,4 @@ This custom instrumentation provides an alternate way to custom (manually) instr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-1: /opentelemetry/otel_tracing/
+[1]: /opentelemetry/otel_tracing/
