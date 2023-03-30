@@ -9402,6 +9402,70 @@ api:
         - ListServiceDefinitions
       unstable: []
       order: 1
+  - name: Spans Metrics
+    url: /api/latest/spans-metrics/
+    identifier: spans-metrics
+    generated: true
+  - name: Update a span-based metric
+    url: '#update-a-span-based-metric'
+    identifier: spans-metrics-update-a-span-based-metric
+    parent: spans-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSpansMetric
+      unstable: []
+      order: 4
+  - name: Get a span-based metric
+    url: '#get-a-span-based-metric'
+    identifier: spans-metrics-get-a-span-based-metric
+    parent: spans-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSpansMetric
+      unstable: []
+      order: 3
+  - name: Delete a span-based metric
+    url: '#delete-a-span-based-metric'
+    identifier: spans-metrics-delete-a-span-based-metric
+    parent: spans-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSpansMetric
+      unstable: []
+      order: 5
+  - name: Create a span-based metric
+    url: '#create-a-span-based-metric'
+    identifier: spans-metrics-create-a-span-based-metric
+    parent: spans-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSpansMetric
+      unstable: []
+      order: 2
+  - name: Get all span-based metrics
+    url: '#get-all-span-based-metrics'
+    identifier: spans-metrics-get-all-span-based-metrics
+    parent: spans-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSpansMetrics
+      unstable: []
+      order: 1
   - name: Teams
     url: /api/latest/teams/
     identifier: teams
