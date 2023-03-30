@@ -9,7 +9,7 @@ further_reading:
   tag: Documentation
   text: AWS Lambda インテグレーション
 kind: ドキュメント
-title: サーバーレスモニタリングのインストール
+title: AWS Lambda のためのサーバーレスモニタリングのインストール
 ---
 
 ## クイックスタート
