@@ -193,7 +193,7 @@ There are many other environment variables and settings supported in the Datadog
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_OTLP_ENDPOINT
-      value: "http://$(HOST_IP):4317" # sends to gRPC receiver on port 4317
+      value: "grpc://$(HOST_IP):4317" # sends to gRPC receiver on port 4317
    ```
 
    For HTTP:
