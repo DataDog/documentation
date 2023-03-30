@@ -63,6 +63,7 @@ The following products and features are supported with Remote Config:
 ### Application Performance Monitoring (APM)
 <div class="alert alert-info">This feature is in private beta.</div>
 
+- **Remotely instrument your Kubernetes services with APM**: Remotely instrument your services in Kubernetes with Datadog APM via Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications.
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. 
 
 ### Dynamic Instrumentation
