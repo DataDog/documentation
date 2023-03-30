@@ -23,13 +23,13 @@ further_reading:
 If you have not yet read the instructions for auto-instrumentation and setup, please start with the <a href="https://docs.datadoghq.com/tracing/setup/nodejs/">Node.js Setup Instructions</a>.
 </div>
 
-If you aren’t using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
+If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
 
 You may also want to extend the functionality of the `dd-trace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
 
 ## Adding tags
 
-The built-in instrumentation and your own custom instrumentation will create
+The built-in instrumentation and your own custom instrumentation create
 spans around meaningful operations.
 
 {{< tabs >}}
@@ -41,7 +41,7 @@ You can access the active span in order to include meaningful data by adding tag
 const span = tracer.scope().active()
 ```
 
-API details for `Scope` can be found [here][1].
+To learn more, read [API details for `Scope`][1].
 
 You can add tags to a span using the `setTag` or `addTags` method on a span. Supported value types are string, number, and object.
 
@@ -86,7 +86,7 @@ tracer.init({
 
 {{% tab "Component" %}}
 
-Some of our integrations support span hooks that can be used to update the span right before it's finished. This is useful to modify or add tags to a span that is otherwise inaccessible from your code.
+Some Datadog integrations support span hooks that can be used to update the span right before it's finished. This is useful to modify or add tags to a span that is otherwise inaccessible from your code.
 
 ```javascript
 // at the top of the entry point right after tracer.init()
@@ -100,7 +100,7 @@ tracer.use('express', {
 })
 ```
 
-API details for individual plugins can be found [here][1].
+To learn more, read [API details for individual plugins][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
@@ -108,7 +108,7 @@ API details for individual plugins can be found [here][1].
 
 {{% tab "Errors" %}}
 
-Errors can be added to a span with the special `error` tag that supports error objects. This will split the error into three tags: `error.type`, `error.msg` and `error.stack`.
+Errors can be added to a span with the special `error` tag that supports error objects. This splits the error into three tags: `error.type`, `error.msg`, and `error.stack`.
 
 ```javascript
 try {
@@ -133,7 +133,7 @@ Within your web request (for example, `/make-sandwich`), you may perform several
 {{< tabs >}}
 {{% tab "Synchronous" %}}
 
-Synchronous code can be traced with `tracer.trace()` which will automatically finish the span when its callback returns and capture any thrown error automatically.
+Synchronous code can be traced with `tracer.trace()` which automatically finishes the span when its callback returns and captures any thrown error automatically.
 
 ```javascript
 app.get('/make-sandwich', (req, res) => {
@@ -151,7 +151,7 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-API details for `tracer.trace()` can be found [here][1].
+To learn more, read [API details for `tracer.trace()`][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
@@ -159,7 +159,7 @@ API details for `tracer.trace()` can be found [here][1].
 
 {{% tab "Promises" %}}
 
-Promises can be traced with `tracer.trace()` which will automatically finish the span when the returned promise resolves and capture any rejection error automatically.
+Promises can be traced with `tracer.trace()` which automatically finishes the span when the returned promise resolves, and captures any rejection error automatically.
 
 ```javascript
 const getIngredients = () => {
@@ -180,7 +180,7 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-API details for `tracer.trace()` can be found [here][1].
+To learn more, read [API details for `tracer.trace()`][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
@@ -188,7 +188,7 @@ API details for `tracer.trace()` can be found [here][1].
 
 {{% tab "Async/await" %}}
 
-Async/await can be traced with `tracer.trace()` which will automatically finish the span when the returned promise resolves and capture any rejection error automatically.
+Async/await can be traced with `tracer.trace()` which automatically finishes the span when the returned promise resolves, and captures any rejection error automatically.
 
 ```javascript
 app.get('/make-sandwich', async (req, res) => {
@@ -206,7 +206,7 @@ app.get('/make-sandwich', async (req, res) => {
 })
 ```
 
-API details for `tracer.trace()` can be found [here][1].
+To learn more, read [API details for `tracer.trace()`][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
@@ -214,7 +214,7 @@ API details for `tracer.trace()` can be found [here][1].
 
 {{% tab "Wrapper" %}}
 
-It's also possible to wrap an existing function without changing its code. This is useful to trace functions for which you don't control the code. This can be done with `tracer.wrap()` which takes the same arguments as `tracer.trace()` except its last argument which is the function to wrap instead of a callback.
+You can wrap an existing function without changing its code. This is useful to trace functions for which you don't control the code. This can be done with `tracer.wrap()` which takes the same arguments as `tracer.trace()` except its last argument which is the function to wrap instead of a callback.
 
 ```javascript
 
@@ -235,7 +235,7 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-API details for `tracer.trace()` can be found [here][1].
+To learn more, read [API details for `tracer.trace()`][1].
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap

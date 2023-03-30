@@ -1,19 +1,18 @@
 ---
-title: Go Open Standards
+title: Go OpenTracing Instrumentation
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/go
-description: 'Open Standards for Go'
+description: 'OpenTracing Instrumentation for Go'
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
 ---
 
-## OpenTracing
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][1], or see the setup information below.
+Datadog supports the OpenTracing standard. For more details and information, view the [OpenTracing API][1], or see the setup information below.
 
-### Setup
+## Setup
 
 Import the [`opentracer` package][2] to expose the Datadog tracer as an [OpenTracing][3] compatible tracer.
 

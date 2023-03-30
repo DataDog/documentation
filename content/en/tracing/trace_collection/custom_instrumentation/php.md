@@ -300,7 +300,7 @@ For example, the following snippet traces the `CustomDriver::doWork` method and 
 
 ## Accessing active spans
 
-The built-in instrumentation and your own custom instrumentation will create spans around meaningful operations. You can access the active span in order to include meaningful data.
+The built-in instrumentation and your own custom instrumentation creates spans around meaningful operations. You can access the active span in order to include meaningful data.
 
 {{< tabs >}}
 {{% tab "Current span" %}}
@@ -342,7 +342,7 @@ When you set tags, to avoid overwriting existing tags automatically added by the
 {{< tabs >}}
 {{% tab "Locally" %}}
 
-Add tags to a span via the `DDTrace\SpanData::$meta` array.
+Add tags to a span by using the `DDTrace\SpanData::$meta` array.
 
 ```php
 <?php
@@ -440,7 +440,7 @@ function processIncomingQueueMessage($message) {
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][3] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][3] page.
 
 ## API reference
 
@@ -533,7 +533,7 @@ var_dump(argsByRef($foo));
 // int(11)
 ```
 
-On PHP 7, the tracing closure has access to the same arguments passed to the instrumented call. If the instrumented call mutates an argument, including arguments passed by value, the `posthook` tracing closure will receive the mutated argument.
+On PHP 7, the tracing closure has access to the same arguments passed to the instrumented call. If the instrumented call mutates an argument, including arguments passed by value, the `posthook` tracing closure receives the mutated argument.
 
 This is the expected behavior of arguments in PHP 7 as illustrated in the following example:
 
@@ -582,7 +582,7 @@ If an argument needs to be accessed before mutation, the tracing closure [can be
 
 #### Parameter 3: `mixed $retval`
 
-The third parameter of the tracing closure is the return value of the instrumented call. Functions or methods that declare a `void` return type or ones that do not return a value will have a value of `null`.
+The third parameter of the tracing closure is the return value of the instrumented call. Functions or methods that declare a `void` return type or ones that do not return a value have a value of `null`.
 
 ```php
 <?php
@@ -668,7 +668,7 @@ An optimization was added starting in **0.46.0** to ignore all internal function
 
 ### Running the tracing closure before the instrumented call
 
-By default, tracing closures are treated as `posthook` closures meaning they will be executed _after_ the instrumented call. Some cases require running the tracing closure _before_ the instrumented call. In that case, tracing closures are marked as `prehook` using an associative configuration array.
+By default, tracing closures are treated as `posthook` closures meaning they are executed _after_ the instrumented call. Some cases require running the tracing closure _before_ the instrumented call. In that case, tracing closures are marked as `prehook` using an associative configuration array.
 
 ```php
 \DDTrace\trace_function('foo', [

@@ -60,7 +60,7 @@ def make_sandwich_request(request):
       return
 ```
 
-API details for the decorator can be found for `ddtrace.Tracer.wrap()` [here][1].
+To learn more, read [API details for the decorator for `ddtrace.Tracer.wrap()`][1].
 
 
 [1]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
@@ -89,7 +89,7 @@ def make_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-Full API details for `ddtrace.Tracer()` can be found [here][2]
+To learn more, read the full [API details for `ddtrace.Tracer()`][2]
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
@@ -107,7 +107,7 @@ def make_sandwich_request(request):
     span.finish()  # remember to finish the span
 ```
 
-API details of the decorator can be found in the `ddtrace.Tracer.trace` [documentation][2] or the `ddtrace.Span.finish`[documentation][3].
+For more API details of the decorator, read the [`ddtrace.Tracer.trace` documentation][2] or the [`ddtrace.Span.finish` documentation][3].
 
 
 
@@ -175,7 +175,7 @@ def make_sandwich_request(request):
 {{% /tab %}}
 {{% tab "Globally" %}}
 
-Tags can be globally set on the tracer. These tags will be applied to every span that is created.
+Tags can be globally set on the tracer. These tags are be applied to every span that is created.
 
 ```python
 from ddtrace import tracer

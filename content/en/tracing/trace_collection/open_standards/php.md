@@ -1,17 +1,15 @@
 ---
-title: PHP Open Standards
+title: PHP OpenTracing Instrumentation
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/php
-description: 'Open Standards for PHP'
+description: 'OpenTracing instrumentation for PHP'
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 50
 ---
 
-## OpenTracing
-
-The PHP tracer supports OpenTracing via the [**opentracing/opentracing** library][1] which is installed with Composer:
+The PHP tracer supports OpenTracing through the [**opentracing/opentracing** library][1] which is installed with Composer:
 
 ```bash
 composer require opentracing/opentracing:1.0.0-beta5

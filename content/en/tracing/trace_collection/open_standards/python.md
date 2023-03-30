@@ -1,15 +1,13 @@
 ---
-title: Python Open Standards
+title: Python OpenTracing instrumentation
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/python
-description: 'Open Standards for Python'
+description: 'OpenTracing instrumentation for Python'
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
 ---
-
-## OpenTracing
 
 OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package:
 

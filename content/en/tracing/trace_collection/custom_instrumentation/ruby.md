@@ -19,14 +19,14 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 <div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, please start with the <a href="https://docs.datadoghq.com/tracing/setup/ruby/">Ruby Setup Instructions</a>.
+If you have not yet read the instructions for auto-instrumentation and setup, read the <a href="https://docs.datadoghq.com/tracing/setup/ruby/">Ruby Setup Instructions</a>.
 </div>
 
-This page details common use cases for adding and customizing observability with Datadog APM.
+This page details describes use cases for adding and customizing observability with Datadog APM.
 
 ## Adding tags
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 ### Add custom span tags
 
@@ -34,7 +34,7 @@ Add custom tags to your spans corresponding to any dynamic value within your app
 
 {{< tabs >}}
 {{% tab "Active Span" %}}
-Access the current active [span][1] from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
+Access the current active [span][1] from any method within your code. **Note**: If the method is called and there is no active span, `active_span` is `nil`.
 
 ```ruby
 require 'ddtrace'
@@ -89,13 +89,13 @@ Datadog.configure do |c|
 end
 ```
 
-You can also use the `DD_TAGS` environment variable to set tags on all spans for an application. For more information on Ruby environment variables, refer to the [setup documentation][3].
+You can also use the `DD_TAGS` environment variable to set tags on all spans for an application. For more information on Ruby environment variables, read the [setup documentation][3].
 
 ### Setting errors on a span
 
-There are two ways to set an error on a span
+There are two ways to set an error on a span:
 
-- The first is to call `span.set_error` and pass in the Exception Object. This automatically extracts the error type, message, and backtrace.
+- Call `span.set_error` and pass in the Exception Object. This automatically extracts the error type, message, and backtrace.
 
 ```ruby
 require 'ddtrace'
@@ -116,12 +116,9 @@ end
 example_method()
 ```
 
-- The second is to use `tracer.trace` which by default sets the error type, message, and backtrace.
-- To configure this behavior you can use the `on_error` option, which is the Handler invoked when a block is provided to `trace`, and the block raises an error.
-- The Proc is provided `span` and `error` as arguments.
-- By default, `on_error` Sets error on the span.
+- Or, use `tracer.trace` which by default sets the error type, message, and backtrace. To configure this behavior you can use the `on_error` option, which is the Handler invoked when a block is provided to `trace`, and the block raises an error. The Proc is provided `span` and `error` as arguments. By default, `on_error` sets error on the span.
 
-Default Behavior: `on_error`
+Default behavior for `on_error`:
 
 ```ruby
 require 'ddtrace'
@@ -138,7 +135,7 @@ Datadog::Tracing.trace('example.trace') do |span|
 end
 ```
 
-Custom Behavior: `on_error`
+Custom behavior for `on_error`:
 
 ```ruby
 require 'ddtrace'
@@ -162,7 +159,7 @@ end
 
 ## Adding spans
 
-If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog::Tracing.trace` method, which you can wrap around any Ruby code:
+If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog::Tracing.trace` method, which you can wrap around any Ruby code.
 
 To trace any Ruby code, you can use the `Datadog::Tracing.trace` method:
 
@@ -237,7 +234,7 @@ Datadog::Tracing.before_flush(
 
 #### Custom processor
 
-Processors can be any object that responds to `#call` accepting `trace` as an argument (which is an `Array` of `Datadog::Span`s.)
+Processors can be any object that responds to `#call` accepting `trace` as an argument (which is an `Array` of `Datadog::Span`.)
 
 For example, using the short-hand block syntax:
 

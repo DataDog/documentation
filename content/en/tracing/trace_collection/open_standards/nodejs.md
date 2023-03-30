@@ -1,15 +1,13 @@
 ---
-title: Node.js Open Standards
+title: Node.js OpenTracing Instrumentation
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/nodejs
-description: 'Open Standards for Node.js'
+description: 'OpenTracing instrumentation for Node.js'
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
 ---
-
-## OpenTracing
 
 OpenTracing support is included in the `dd-trace` package.
 
@@ -20,7 +18,7 @@ const opentracing = require('opentracing')
 opentracing.initGlobalTracer(tracer)
 ```
 
-The tracer can now be used like in any other OpenTracing application.
+Use the tracer like in any other OpenTracing application.
 
 The following tags are available to override Datadog specific options:
 

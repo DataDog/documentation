@@ -24,9 +24,9 @@ If you have not yet read the setup instructions, start with the <a href="https:/
 
 ## Add tags
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-C++ tracing uses "common tags".  These tags can be sourced from both [Datadog specific tags][3] or [OpenTracing tags][4], and included via the below:
+C++ tracing uses "common tags". These tags can be sourced from both [Datadog specific tags][3] or [OpenTracing tags][4], and included like this:
 
 ```cpp
 #include <opentracing/ext/tags.h>
