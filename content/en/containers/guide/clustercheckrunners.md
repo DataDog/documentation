@@ -46,8 +46,6 @@ spec:
     clusterChecks:
       enabled: true
       useClusterChecksRunners: true
-    externalMetricsServer:
-      enabled: true
   override:
     clusterAgent:
       replicas: 2
