@@ -10,9 +10,7 @@ further_reading:
     text: "Managing Cloud Workload Security Rules"
 ---
 
-Workload Security Profiles provides a baseline of expected workload activity through a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts. For example:
-- [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior.
-- Identifying previously unseen, anomalous behavior.
+Workload Security Profiles provides a baseline of expected workload activity through a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
 
 ## Compatibility
 
