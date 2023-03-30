@@ -46,7 +46,7 @@ Notebook authors receive email notifications for new comments on their notebooks
 
 ### View mode
 
-{{< img src="notebooks/read_mode.png" alt="View mode drop down menu" style="width:100%;">}}
+{{< img src="notebooks/read_mode.png" alt="View mode dropdown menu" style="width:100%;">}}
 
 You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
@@ -166,17 +166,18 @@ Graphs in notebooks support all Datadog data sources: metrics, log events, Index
 * [Query value][13]
 * [Funnel][14]
 * [Pie][15]
+* [SLO Summary][16]
 
 ### Limit edit access
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][16] that may edit a particular notebook:
+Use granular access controls to limit the [roles][17] that may edit a particular notebook:
 1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles that may edit the notebook.
+1. Use the dropdown to select one or more roles that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
@@ -208,4 +209,5 @@ To restore general access to a notebook with restricted access, follow the steps
 [13]: /dashboards/widgets/query_value/
 [14]: /dashboards/widgets/funnel/
 [15]: /dashboards/widgets/pie_chart/
-[16]: /account_management/rbac/
+[16]: /dashboards/widgets/slo/
+[17]: /account_management/rbac/

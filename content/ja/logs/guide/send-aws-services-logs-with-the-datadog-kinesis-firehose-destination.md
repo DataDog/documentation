@@ -13,7 +13,7 @@ further_reading:
   tag: GitHub
   text: Amazon VPC フローログを Amazon Kinesis Data Firehose と Datadog に送信する
 kind: ドキュメント
-title: Datadog Kinesis Firehose Destination を使用して AWS サービスログを送信する
+title: Datadog Kinesis Firehose Destination を使用して AWS AWS Services Logs を送信する
 ---
 
 ## 概要
@@ -33,7 +33,7 @@ Datadog は、Datadog Kinesis 宛先を使用する場合、入力として Kine
 2. [新しい配信ストリーム][2]を作成します。
    a. ソースを設定します。
       - ログが Kinesis データストリームから取得されている場合は、`Amazon Kinesis Data Streams`
-      - ログが CloudWatch のロググループから直接送られてくる場合は、`Direct PUT or other sources`
+      - ログが CloudWatch のロググループから直接送られてくる場合は、`Direct PUT`
 
    b. 宛先を `Datadog` にします。 
    c. 配信ストリームの名前を指定します。

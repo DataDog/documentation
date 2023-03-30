@@ -43,9 +43,14 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ## Autocomplete
 
-Use the search bar's autocomplete feature to complete your query using existing values:
+Use the search bar's autocomplete feature to complete your query using:
+    - Existing keys and values in your logs
+    - Recent searches per user
+    - Saved views
 
-{{< img src="logs/explorer/search/search_bar_autocomplete.jpg" alt="search bar autocomplete " style="width:80%;">}}
+{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
+
+Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example, if you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
 
 ## Escaping of special characters
 
@@ -54,27 +59,6 @@ The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `
 
 ## Attributes search
 
-{{< site-region region="gov,us3,us5" >}}
-To search on a specific attribute, first [add it as a facet][1] and then add `@` to specify you are searching on a facet.
-
-For instance, if your attribute name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter:
-
-```
-@url:www.datadoghq.com
-```
-
-**Notes**:
-
-1. Facet searches are case sensitive. Use free text search to get case insensitive results. Another option is to use the lowercase filter with your Grok parser while parsing to get case insensitive results during search.
-
-2. Searching for a facet value that contains special characters requires escaping or double quotes.
-    - For example, for a facet `my_facet` with the value `hello:world`, search using: `@my_facet:hello\:world` or `@my_facet:"hello:world"`.
-    - To match a single special character or space, use the `?` wildcard. For example, for a facet `my_facet` with the value `hello world`, search using: `@my_facet:hello?world`.
-
-[1]: /logs/explorer/facets/
-
-{{< /site-region >}}
-{{< site-region region="us,eu" >}}
 To search on a specific attribute, add `@` to specify you are searching on an attribute.
 
 For instance, if your attribute name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter:
@@ -93,7 +77,6 @@ For instance, if your attribute name is **url** and you want to filter on the **
 3. Searching for an attribute value that contains special characters requires escaping or double quotes.
     - For example, for an attribute `my_attribute` with the value `hello:world`, search using: `@my_attribute:hello\:world` or `@my_attribute:"hello:world"`.
     - To match a single special character or space, use the `?` wildcard. For example, for an attribute `my_attribute` with the value `hello world`, search using: `@my_attribute:hello?world`.
-{{< /site-region >}}
 
 Examples:
 
@@ -113,17 +96,10 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`
 * `*web` matches all log messages that end with `web`
 
-**Note**: Wildcards only work as wildcards outside of double quotes. For example, `”*test*”` matches a log which has the string `*test*` in its message. `*test*` matches a log which has the string test anywhere in its message.
+**Note**: Wildcards only work as wildcards outside of double quotes. For example, `"*test*"` matches a log which has the string `*test*` in its message. `*test*` matches a log which has the string test anywhere in its message.
 
-{{< site-region region="gov,us3,us5" >}}
-Wildcard searches work within facets with this syntax. This query returns all the services that end with the string `mongo`:
-<p> </p>
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
 Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
 <p> </p>
-{{< /site-region >}}
 <p></p>
 
 ```
@@ -140,15 +116,8 @@ However, this search term does not return logs that contain the string `NETWORK`
 
 ### Search wildcard
 
-{{< site-region region="gov,us3,us5" >}}
-When searching for a facet value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for a facet `my_facet` with the value `hello world`: `@my_facet:hello?world`.
-<p> </p>
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
 When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`: `@my_attribute:hello?world`.
 <p> </p>
-{{< /site-region >}}
 
 ## Numerical values
 
@@ -184,8 +153,6 @@ In the below example, clicking on the `Peter` value in the facet returns all the
 
 {{< img src="logs/explorer/search/array_search.png" alt="Array and Facets" style="width:80%;">}}
 
-{{< site-region region="us,eu" >}}
-
 **Note**: Search can also be used on non-faceted array attributes using an equivalent syntax.
 
 In the following example, CloudWatch logs for Windows contain an array of JSON objects under `@Event.EventData.Data`. You cannot create a facet on array of JSON objects, but you can search using the following syntax.
@@ -194,7 +161,6 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 
 {{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Facetless query on array of JSON objects" style="width:80%;">}}
 <p> </p>
-{{< /site-region >}}
 
 ## Saved searches
 

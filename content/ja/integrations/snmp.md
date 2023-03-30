@@ -19,6 +19,7 @@ assets:
     source_type_name: SNMP
   monitors:
     '[SNMP] Device Down Alert': assets/monitors/device_down.json
+    '[SNMP] Device Unreachable Alert': assets/monitors/device_unreachable.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,7 +29,6 @@ categories:
 - monitoring
 - notification
 - network
-- autodiscovery
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp/README.md
@@ -37,7 +37,7 @@ draft: false
 git_integration_title: snmp
 integration_id: snmp
 integration_title: SNMP
-integration_version: 5.10.0
+integration_version: 5.11.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -58,7 +58,6 @@ tile:
   - Category::モニタリング
   - Category::通知
   - Category::ネットワーク
-  - Category::オートディスカバリー
   - Category::SNMP
   configuration: README.md#Setup
   description: ネットワークデバイスから SNMP メトリクスを収集。

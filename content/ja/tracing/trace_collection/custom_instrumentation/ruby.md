@@ -123,8 +123,6 @@ example_method()
 
 デフォルトの動作: `on_error`
 
-{{% tab "ルートスパン" %}}
-
 カスタムの動作: `on_error`
 
 ```ruby

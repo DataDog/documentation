@@ -166,7 +166,7 @@ See the sample [manifest with logs and metrics collection enabled][1] for a comp
 Then apply the new configuration:
 
 ```shell
-$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
 ## Unprivileged
@@ -486,8 +486,8 @@ The following configuration defines the integration template for Redis container
         - redis
       logs:
         - source: redis
-        - service: redis
-        - tags: env:prod
+          service: redis
+          tags: env:prod
   ```
 
 **Note**: The above configuration collects only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.

@@ -235,11 +235,25 @@
       "description": "Create an incident returns \"CREATED\" response"
     }
   ],
+  "CreateIncidentTodo": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Create an incident todo returns \"CREATED\" response"
+    }
+  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
       "suffix": "",
       "description": "Update an existing incident integration metadata returns \"OK\" response"
+    }
+  ],
+  "UpdateIncidentTodo": [
+    {
+      "group": "incidents",
+      "suffix": "",
+      "description": "Update an incident todo returns \"OK\" response"
     }
   ],
   "CreateAPIKey": [
@@ -670,8 +684,13 @@
   "CreateOrUpdateServiceDefinitions": [
     {
       "group": "service_definition",
-      "suffix": "",
-      "description": "Create or update service definition returns \"CREATED\" response"
+      "suffix": "_1808735248",
+      "description": "Create or update service definition using schema v2 returns \"CREATED\" response"
+    },
+    {
+      "group": "service_definition",
+      "suffix": "_2619874414",
+      "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
     }
   ],
   "SetOnDemandConcurrencyCap": [

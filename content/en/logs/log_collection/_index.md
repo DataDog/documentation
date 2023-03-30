@@ -218,19 +218,28 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 
 {{< site-region region="us" >}}
 
-Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
-```text
-telnet intake.logs.datadoghq.com 10514
-<DATADOG_API_KEY> Log sent directly via TCP
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-Your payload, or `Log sent directly via TCP` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
+For OpenSSL, run the following command:
+
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
-telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
 
 [1]: /account_management/api-app-keys/#api-keys
 
@@ -238,17 +247,27 @@ telnet intake.logs.datadoghq.com 10514
 
 {{< site-region region="eu" >}}
 
-Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
-```text
-telnet agent-intake.logs.datadoghq.eu 443
-<DATADOG_API_KEY> Log sent directly via TCP
+```shell
+gnutls-cli tcp-intake.logs.datadoghq.eu:443
 ```
 
-Your payload, or `Log sent directly via TCP` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
+For OpenSSL, run the following command:
+
+```shell
+openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
+```
+
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
-telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
