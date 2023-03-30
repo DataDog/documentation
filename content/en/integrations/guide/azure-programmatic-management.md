@@ -111,9 +111,14 @@ To get started, click the button below and fill in the form on Azure Portal. The
 
 Use the Azure CLI to create diagnostic settings that forward logs to your event hub:
 
+{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
+
 az monitor diagnostic-settings create --name
                                       --resource
                                       [--event-hub]
+                                      
+{{< /code-block >}}
+
 
 See the [az monitor diagnostic-settings create][1] section in the Azure CLI reference for more information.
 
