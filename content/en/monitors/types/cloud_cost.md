@@ -1,8 +1,7 @@
 ---
 title: Cloud Cost Monitor
 kind: documentation
-private: "true"
-is_beta: "true"
+private: true
 description: "Monitor costs associated with cloud platforms."
 further_reading:
 - link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
@@ -40,7 +39,6 @@ Choose between a **Compare Costs Over Time** or a **Set Daily Cost Threshold** m
 ## Specify which costs to track
 
 Any cost type reporting to Datadog is available for monitors. For more information, see the [Cloud Cost Management][1] page. Use the editor to define the cost types or exports. 
-
 
 | Step                              | Required | Default              | Example             |
 |-----------------------------------|----------|----------------------|---------------------|
