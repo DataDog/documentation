@@ -606,7 +606,7 @@ Replace the default context for all your RUM events with the `setGlobalContext(c
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 datadogRum.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
@@ -618,7 +618,7 @@ datadogRum.setGlobalContext({
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
     DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
@@ -633,7 +633,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```
+```javascript
 window.DD_RUM &&
     DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
@@ -658,7 +658,7 @@ Once RUM is initialized, read the global context with the `getGlobalContext()` A
 {{< tabs >}}
 {{% tab "NPM" %}}
 
-```
+```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
 const context = datadogRum.getRumGlobalContext();
@@ -666,7 +666,7 @@ const context = datadogRum.getRumGlobalContext();
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```
+```javascript
 DD_RUM.onReady(function() {
   var context = DD_RUM.getRumGlobalContext();
 });
@@ -674,7 +674,7 @@ DD_RUM.onReady(function() {
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```
+```javascript
 var context = window.DD_RUM && DD_RUM.getRumGlobalContext();
 ```
 
