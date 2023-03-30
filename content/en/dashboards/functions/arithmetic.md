@@ -88,4 +88,4 @@ Instead, configure [Cumulative Time Windows][1] in your monitor evaluation perio
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /monitors/types/configuration/?tab=thresholdalert#cumulative-time-windows
+[1]: /monitors/configuration/?tab=thresholdalert#cumulative-time-windows
