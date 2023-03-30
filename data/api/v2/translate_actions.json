@@ -1010,6 +1010,84 @@
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
   },
+  "GetAllTeams": {
+    "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",
+    "summary": "Get all teams"
+  },
+  "CreateTeam": {
+    "description": "Create a new team.\nUser IDs passed through the `users` relationship field are added to the team.",
+    "summary": "Create a team",
+    "request_description": "",
+    "request_schema_description": "Request to create a team"
+  },
+  "RemoveTeam": {
+    "description": "Remove a team using the team's `id`.",
+    "summary": "Remove a team"
+  },
+  "GetTeam": {
+    "description": "Get a single team using the team's `id`.",
+    "summary": "Get a team"
+  },
+  "UpdateTeam": {
+    "description": "Update a team using the team's `id`.\nIf the `team_links` relationship is present, the associated links are updated to be in the order they appear in the array, and any existing team links not present are removed.",
+    "summary": "Update a team",
+    "request_description": "",
+    "request_schema_description": "Team update request"
+  },
+  "GetTeamLinks": {
+    "description": "Get all links for a given team.",
+    "summary": "Get links for a team"
+  },
+  "CreateTeamLink": {
+    "description": "Add a new link to a team.",
+    "summary": "Create a team link",
+    "request_description": "",
+    "request_schema_description": "Team link create request"
+  },
+  "RemoveTeamLink": {
+    "description": "Remove a link from a team.",
+    "summary": "Remove a team link"
+  },
+  "GetTeamLink": {
+    "description": "Get a single link for a team.",
+    "summary": "Get a team link"
+  },
+  "UpdateTeamLink": {
+    "description": "Update a team link.",
+    "summary": "Update a team link",
+    "request_description": "",
+    "request_schema_description": "Team link create request"
+  },
+  "GetTeamMemberships": {
+    "description": "Get a paginated list of members for a team",
+    "summary": "Get team memberships"
+  },
+  "CreateTeamMembership": {
+    "description": "Add a user to a team.",
+    "summary": "Add a user to a team",
+    "request_description": "",
+    "request_schema_description": "Team membership request"
+  },
+  "RemoveTeamMembership": {
+    "description": "Remove a user from a team.",
+    "summary": "Remove a user from a team"
+  },
+  "UpdateTeamMembership": {
+    "description": "Update a user's membership attributes on a team.",
+    "summary": "Update a user's membership attributes on a team",
+    "request_description": "",
+    "request_schema_description": "Team membership request"
+  },
+  "GetTeamPermissionSettings": {
+    "description": "Get all permission settings for a given team.",
+    "summary": "Get permission settings for a team"
+  },
+  "UpdateTeamPermissionSetting": {
+    "description": "Update a team permission setting for a given team.",
+    "summary": "Update permission setting for team",
+    "request_description": "",
+    "request_schema_description": "Team permission setting update request"
+  },
   "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",
     "summary": "Get a list of all incident teams"

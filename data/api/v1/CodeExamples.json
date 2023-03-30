@@ -258,6 +258,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2064651578",
+      "description": "Create a new dashboard with team tags returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_858397694",
       "description": "Create a new dashboard with template variable defaults returns \"OK\" response"
     },
@@ -321,6 +326,11 @@
       "group": "dashboards",
       "suffix": "",
       "description": "Update a dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3454865944",
+      "description": "Update a dashboard with tags returns \"OK\" response"
     }
   ],
   "CancelDowntimesByScope": [

@@ -54,7 +54,7 @@ The **Application Keys** tab in **Personal Settings** allows you to manage your 
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
 
-To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you’ve set at the OS level.
+To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you've set at the OS level.
 
 ## Connecting to GitHub
 
