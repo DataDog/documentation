@@ -24,6 +24,8 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- 構成 & デプロイ
+- developer tools
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -49,16 +51,18 @@ public_title: Terraform インテグレーション
 short_description: terraform アカウントと失敗した実行を監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
   - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: terraform アカウントと失敗した実行を監視する
   media:
