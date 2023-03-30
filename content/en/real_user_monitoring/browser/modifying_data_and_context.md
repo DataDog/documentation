@@ -690,6 +690,32 @@ window.DD_RUM &&
 
 You can clear the global context by using `clearGlobalContext`.
 
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.clearGlobalContext();
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+  DD_RUM.clearGlobalContext();
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM && DD_RUM.clearGlobalContext();
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Read global context
 
 Once RUM is initialized, read the global context with the `getGlobalContext()` API.
