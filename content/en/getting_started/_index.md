@@ -13,7 +13,6 @@ cascade:
     algolia:
         rank: 70
         category: Getting Started
-        subcategory: Documentation
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}

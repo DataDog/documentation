@@ -10,7 +10,7 @@ cascade:
     algolia:
         rank: 20
         category: Guide
-        subcategory: Tracing Guides
+        subcategory: APM Guides
 ---
 
 

@@ -7,7 +7,7 @@ cascade:
     algolia:
         rank: 20
         category: Guide
-        subcategory: Integration Guides
+        subcategory: Integrations Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}
