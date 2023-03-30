@@ -198,9 +198,9 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 The PHP tracer provides the `\DDTrace\set_user()` function, which allows you to monitor and block authenticated requests.
 
-`\DDTrace\set_user()` adds the relevant user tags and metadata to the the trace and automatically performs user blocking.
+`\DDTrace\set_user()` adds the relevant user tags and metadata to the trace and automatically performs user blocking.
 
-The example below shows how to set user monitoring tags, and enable user blocking capability:
+The following example shows how to set user monitoring tags and enable user blocking:
 
 ```php
 <?php
