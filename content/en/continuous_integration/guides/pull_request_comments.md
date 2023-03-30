@@ -36,7 +36,7 @@ You can enable test summaries in pull requests with the following steps:
 1. Install the [GitHub integration][1]:
    1. Navigate to the **Configuration** tab on the [GitHub integration tile][2] and click **+ Create GitHub App**.
    2. Give the application read and write permissions for pull requests.
-2. Enable test summaries for one or more test services. It can be done from the Test Service Settings page or from the commit/branch page.
+2. Enable test summaries for one or more test services. It can be done from the [Test Service Settings page][3] or from the commit/branch page.
 
 ### Test service settings page
 
