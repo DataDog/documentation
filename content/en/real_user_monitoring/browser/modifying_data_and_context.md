@@ -599,6 +599,45 @@ window.DD_RUM && window.DD_RUM.setGlobalContextProperty('activity', {
 
 You can remove a previously defined global context property.
 
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+datadogRum.removeGlobalContextProperty('<CONTEXT_KEY>');
+
+// Code example
+datadogRum.removeGlobalContextProperty('codeVersion');
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+DD_RUM.onReady(function() {
+    DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
+})
+
+// Code example
+DD_RUM.onReady(function() {
+    DD_RUM.removeGlobalContextProperty('codeVersion');
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
+
+// Code example
+window.DD_RUM &&
+    DD_RUM.removeGlobalContextProperty('codeVersion');;
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
 ### Replace global context
 
 Replace the default context for all your RUM events with the `setGlobalContext(context: Context)` API.
