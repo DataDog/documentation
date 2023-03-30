@@ -80,7 +80,7 @@ window.DD_RUM &&
 
 2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version.
 
-   - View: Defaults to the page URL path.
+   - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
    - Version: Defaults to the default version specified when creating your RUM application.
 
