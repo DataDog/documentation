@@ -631,7 +631,7 @@ window.DD_RUM &&
 
 // Code example
 window.DD_RUM &&
-    DD_RUM.removeGlobalContextProperty('codeVersion');;
+    DD_RUM.removeGlobalContextProperty('codeVersion');
 ```
 
 {{% /tab %}}
