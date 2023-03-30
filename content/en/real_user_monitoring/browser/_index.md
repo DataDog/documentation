@@ -1151,12 +1151,12 @@ The service name for your application. Follows the [tag syntax requirements][15]
 `env`
 : Optional<br/>
 **Type**: String<br/>
-The application’s environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][15].
+The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][15].
 
 `version`
 : Optional<br/>
 **Type**: String<br/>
-The application’s version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][15].
+The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][15].
 
 `trackViewsManually`
 : Optional<br/>
