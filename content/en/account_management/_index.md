@@ -60,9 +60,9 @@ To adapt to your computer's appearance setting, select the *System* option. This
 
 If you have installed the [GitHub integration][9] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
 
-## Disabling your organisation account
+## Disabling your organization's account
 
-To disable your Datadog organisation account, contact [Datadog support][10].
+To disable your Datadog organization account, contact [Datadog support][10].
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en
