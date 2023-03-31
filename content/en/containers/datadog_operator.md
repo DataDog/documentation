@@ -11,7 +11,7 @@ further_reading:
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Advanced Installation'
-  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md'
+  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Configuration'
 ---
@@ -58,4 +58,4 @@ For all installation and configuration options, see the detailed [installation][
 [5]: https://github.com/DataDog/extendeddaemonset
 [6]: /getting_started/containers/datadog_operator
 [7]: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
-[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

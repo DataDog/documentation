@@ -362,22 +362,21 @@ If you already have the [Agent running with a manifest][4]:
 [4]: /agent/kubernetes/
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-warning">The Datadog Operator is now Generally Available with the `1.0.0` version and it reconciles `v2alpha1.DatadogAgent`. </div>
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
 To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
   namespace: placeholder
 spec:
-  # (...)
   features:
-    networkMonitoring:
+    npm:
       enabled: true
 ```
 

@@ -53,15 +53,14 @@ This enables the cluster check setup in the Cluster Agent and allows it to proce
 {{% tab "Operator" %}}
 Cluster check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  # (...)
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+  features:
+    clusterChecks:
+      enabled: true
 ```
 
 This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes service annotations (`kube_services`).
