@@ -27,6 +27,10 @@ In order to configure Cloud Cost monitors, you need to have [Cloud Cost Manageme
 
 To create a Cloud Cost monitor in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Cloud Cost**.
 
+You can also create Cloud Cost monitors from [Cloud Costs Analytics][2]. Click on **+Export to Monitor** above the table of costs.
+
+{{< img src="/monitors/monitor_types/cloud_cost/cloud_cost_analytics.png" alt="'Export to Monitor' button in Cloud Costs Analytics page" style="width:100%;" >}}
+
 ## Select a cost monitor type
 
 Choose between a **Compare Costs Over Time** or a **Set Daily Cost Threshold** monitor type.
@@ -57,11 +61,12 @@ Example: alert when there is a cost change above 5% for any change that is above
 
 ## Notify your team
 
-For detailed instructions on the  **Notify your team** section, see the [Notifications][2] page.
+For detailed instructions on the  **Notify your team** section, see the [Notifications][3] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/cloud_cost_management/
-[2]: /monitors/notify/
+[2]: https://app.datadoghq.com/cost/analytics
+[3]: /monitors/notify/
