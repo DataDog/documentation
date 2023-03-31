@@ -90,7 +90,7 @@ try (Scope scope = tracer.activateSpan(span)) {
 For more information, see [Setting up Java and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/java/#opentracing
+[1]: /tracing/trace_collection/opentracing/java/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -109,7 +109,7 @@ span.finish()
 For more information, see [Setting up Python and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/python/#opentracing
+[1]: /tracing/trace_collection/opentracing/python/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -123,7 +123,7 @@ end
 For more information, see [Setting up Ruby and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/ruby/#opentracing
+[1]: /tracing/trace_collection/opentracing/ruby/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -135,7 +135,7 @@ opentracing.StartSpan("http.request", opentracer.ResourceName("/user/profile"))
 For more information, see [Setting up Go and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/go/#opentracing
+[1]: /tracing/trace_collection/opentracing/go/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -151,7 +151,7 @@ span.finish();
 For more information, see [Setting up Node.js and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/nodejs/#opentracing
+[1]: /tracing/trace_collection/opentracing/nodejs/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -171,7 +171,7 @@ using (var scope = GlobalTracer.Instance.BuildSpan("http.request").StartActive(f
 For more information, see [Setting up .NET and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/dotnet/#opentracing
+[1]: /tracing/trace_collection/opentracing/dotnet/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -199,7 +199,7 @@ $scope->close();
 For more information, see [Setting up PHP and OpenTracing][1].
 
 
-[1]: /tracing/trace_collection/open_standards/php/#opentracing
+[1]: /tracing/trace_collection/opentracing/php/#opentracing
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 

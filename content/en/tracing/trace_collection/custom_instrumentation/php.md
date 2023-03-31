@@ -723,5 +723,5 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [5]: https://www.php.net/func_get_args
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[8]: /tracing/trace_collection/open_standards/php#opentracing
+[8]: /tracing/trace_collection/opentracing/php#opentracing
 [9]: /tracing/trace_collection/trace_context_propagation/php

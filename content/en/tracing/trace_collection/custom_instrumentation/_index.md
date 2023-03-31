@@ -45,5 +45,5 @@ If you use an open standard to instrument your code, see [Instrumenting with Ope
 
 [1]: /tracing/guide/add_span_md_and_graph_it/
 [2]: /tracing/glossary
-[3]: /tracing/trace_collection/open_standards/
+[3]: /tracing/trace_collection/opentracing/
 [4]: /tracing/trace_collection/otel_instrumentation

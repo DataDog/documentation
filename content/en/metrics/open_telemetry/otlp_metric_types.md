@@ -5,7 +5,7 @@ further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
       text: 'Learn more about distributions'
-    - link: 'tracing/trace_collection/open_standards/'
+    - link: 'opentelemetry/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
     - link: '/opentelemetry/guide/otlp_delta_temporality/'
