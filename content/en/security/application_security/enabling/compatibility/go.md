@@ -8,8 +8,6 @@ code_lang_weight: 20
 
 ## Language and framework compatibility
 
-ASM follows the same language and framework support as APM. See the [APM Go Compatibility][9] page more details. 
-
 ### Supported Go versions
 
 The Datadog Go tracing library supports Go version 1.14 and greater, on the following architectures:
@@ -18,7 +16,6 @@ The Datadog Go tracing library supports Go version 1.14 and greater, on the foll
 - macOS (Darwin) x86-64
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
-
 
 ### Supported frameworks
 
@@ -30,6 +27,8 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 - [Echo][5]
 - [Chi][6]
 - [HttpRouter][7]
+
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
 
 ### Enabling CGO
 
@@ -53,8 +52,6 @@ To install the above requirements:
 
 ## ASM capabilities support
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities in the following table, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
-
 The following ASM capabilities are supported in the Go library, for the specified tracer version:
 
 | ASM capability                   | Minimum Go tracer version |
@@ -64,6 +61,9 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
 
 The minimum tracer version to get all supported ASM capabilities for Go is y.y.
+
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server

@@ -8,8 +8,6 @@ code_lang_weight: 50
 
 ## Language and framework compatibility
 
-ASM follows the same language and framework support as APM. See the [APM NodeJS Compatibility][1] page more details. 
-
 ### Supported Node.js versions
 
 The Datadog Node.js library supports the following Node.js versions:
@@ -31,10 +29,9 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 | ----------------------- | --------------------------- |
 | Express                 | 4.0                         |
 
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
 
 ## ASM capabilities support
-
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities in the following table, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
 
 The following ASM capabilities are supported in the NodeJS library, for the specified tracer version:
 
@@ -45,5 +42,8 @@ The following ASM capabilities are supported in the NodeJS library, for the spec
 | Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ <br/>x.x<br/>x.x |
 
 The minimum tracer version to get all supported ASM capabilities for NodeJS is y.y.
+
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+
 
 [1]: /tracing/trace_collection/compatibility/nodejs/

@@ -10,8 +10,6 @@ code_lang_weight: 90
 
 ## Language and framework compatibility
 
-ASM follows the same language and framework support as [Serverless distributed tracing][1]. 
-
 ### Supported cloud environments
 
 - AWS Lambda (beta)
@@ -47,8 +45,6 @@ The following ASM capabilities are not supported for Lambda functions:
 
 ## ASM capabilities support
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities in the following table, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
-
 The following ASM capabilities are supported for Serverless, for the specified Datadog lambda extension version:
 
 | ASM capability                   | Minimum extension version |
@@ -59,6 +55,7 @@ The following ASM capabilities are supported for Serverless, for the specified D
 
 The minimum Datadog lambda extension version to get all supported ASM capabilities for Serverless is y.y.
 
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
 
 ## Supported trigger types
 
