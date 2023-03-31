@@ -28,7 +28,7 @@ package.json              @DataDog/corpweb @DataDog/documentation
 /content/en/partners/                                   @DataDog/partner-tech-solutions @DataDog/documentation
 
 # Marketplace
-/content/en/developers/marketplace/                     @Datadog/marketplace-product-management @DataDog/documentation
+/content/en/developers/integrations/marketplace_offering/                     @Datadog/marketplace-product-management @DataDog/documentation
 /layouts/shortcodes/integration-assets.md               @Datadog/marketplace-product-management @DataDog/documentation
 
 # Websites
