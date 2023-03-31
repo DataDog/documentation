@@ -4,15 +4,19 @@ aliases:
 - /ja/serverless/libraries_integrations/lambda_code_signing
 - /ja/serverless/guide/forwarder_extension_migration/
 - /ja/serverless/guide/extension_private_link/
+- /ja/serverless/configuration
 further_reading:
 - link: /serverless/installation/
-  tag: ドキュメント
-  text: サーバーレスモニタリングのインストール
+  tag: Documentation
+  text: AWS Lambda のためのサーバーレスモニタリングのインストール
 - link: /serverless/troubleshooting/
-  tag: ドキュメント
-  text: サーバーレスモニタリングのトラブルシューティング
+  tag: Documentation
+  text: AWS Lambda のためのサーバーレスモニタリングのトラブルシューティング
+- link: /integrations/github
+  tag: Documentation
+  text: Datadog GitHub インテグレーション
 kind: documentation
-title: サーバーレスモニタリングの構成
+title: AWS Lambda のためのサーバーレスモニタリングの構成
 ---
 
 まず、Datadog サーバーレスモニタリングを[インストール][1]し、メトリクス、トレース、ログの収集を開始します。インストールが完了したら、以下のトピックを参照して、モニタリングのニーズに合わせてインストールを構成します。
@@ -144,7 +148,7 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
 
 ## リクエストとレスポンスのペイロードを収集する
 
-<div class="alert alert-info">この機能は現在、Python、Node.js、.NET でサポートされています。</div>
+<div class="alert alert-info">この機能は、Python、Node.js、Go、.NET でサポートされています。</div>
 
 Datadog は [AWS Lambda 関数の JSON リクエストとレスポンスのペイロードを収集し可視化する][5]ことで、サーバーレスアプリケーションへの深い洞察と Lambda 関数障害のトラブルシューティングを支援することが可能です。
 
@@ -282,7 +286,7 @@ Datadog は、Lambda 関数をトリガーする AWS マネージドリソース
 - SNS (SQS で配信される SNS メッセージにも対応)
 - Kinesis Streams (データが JSON 文字列または base64 エンコードされた JSON 文字列の場合)
 - EventBridge (カスタムイベント。`Details` は JSON 文字列)
-- S3
+- **注**: 2 つ以上のソースにサブスクライブする場合、このセットアップを完了後、新しい Kinesis ストリームにサブスクライブすることができます。
 - DynamoDB
 
 この機能を無効にするには、`DD_TRACE_MANAGED_SERVICES` を `false` に設定します。
@@ -458,14 +462,14 @@ Lambda 関数で環境変数 `DD_TRACE_ENABLED` を `false` に設定します�
 
 ## ソースコードにエラーをリンクする
 
-<div class="alert alert-info">この機能は、Go と Java でサポートされています。</div>
+<div class="alert alert-info">この機能は、Go、Java、Python、JavaScript でサポートされています。</div>
 
 [Datadog ソースコードインテグレーション][26]では、GitHub で Lambda 関数のソースコードにテレメトリー (スタックトレースなど) をリンクさせることができます。以下の手順で機能を有効化してください。**注**: ダーティでもリモートより先でもない、ローカルの Git リポジトリからデプロイする必要があります。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-`datadog-ci lambda instrument` を `--source-code-integration true` で実行すると、現在のローカルディレクトリの Git メタデータが自動的に送信され、Lambda 関数に必要なタグが追加されます。
+`datadog-ci lambda instrument` を `--source-code-integration=true` で実行すると、現在のローカルディレクトリの Git メタデータが自動的に送信され、Lambda 関数に必要なタグが追加されます。
 
 **注**: Git のメタデータをアップロードするためには、環境変数 `DATADOG_API_KEY` を `datadog-ci` に設定する必要があります。`DATADOG_API_KEY` は、テレメトリーを送信する Lambda 関数にも設定されますが、 `DATADOG_API_KEY_SECRET_ARN` も定義されている場合は、`DATADOG_API_KEY` より優先的に設定されます。
 
@@ -480,7 +484,7 @@ export DATADOG_API_KEY=<DATADOG_API_KEY>
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 
 datadog-ci lambda instrument \
-    --source-code-integration true
+    --source-code-integration=true
     # ... その他の必要な引数 (関数名など)
 ```
 {{% /tab %}}
@@ -536,7 +540,7 @@ export class ExampleStack extends cdk.Stack {
 3. オプションで、[GitHub アプリをインストール][2]すると、インラインでソースコードのスニペットを表示することができます。
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[2]: https://app.datadoghq.com/account/settings#integrations/github-apps
+[2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -546,13 +550,63 @@ export class ExampleStack extends cdk.Stack {
 
 ## PrivateLink またはプロキシ経由でテレメトリーを送信する
 
-Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][29] には [AWS PrivateLink 経由でデータを送信][28]し、それ以外のサイトには [datadog.yaml を使ってプロキシ経由でデータを送信][30]することができます。
+Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][29] には [AWS PrivateLink 経由でデータを送信][28]し、それ以外のサイトには[プロキシ経由でデータを送信][30]することができます。
 
 Datadog Forwarder を使用している場合は、こちらの[手順][31]に従ってください。
 
 ## 複数の Datadog 組織にテレメトリーを送信する
 
-複数の Datadog 組織にデータを送信したい場合は、[デュアルシッピング][32]の手順に従って、プロジェクトのルートディレクトリに `datadog.yaml` ファイルを含めます。
+複数の組織にデータを送信したい場合は、平文の API キー、AWS Secrets Manager、または AWS KMS を使用してデュアルシッピングを有効にすることができます。
+
+{{< tabs >}}
+{{% tab "平文の API キー" %}}
+
+Lambda 関数に次の環境変数を設定することで、平文の API キーを使用してデュアルシッピングを有効にすることができます。
+
+```bash
+# メトリクスでデュアルシッピングを有効にします
+DD_ADDITIONAL_ENDPOINTS={"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}
+# APM (トレース) でデュアルシッピングを有効にします
+DD_APM_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# APM (プロファイリング) でデュアルシッピングを有効にします
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS={"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}
+# ログでデュアルシッピングを有効にします
+DD_LOGS_CONFIG_USE_HTTP=true
+DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]
+```
+
+{{% /tab %}}
+{{% tab "AWS Secrets Manager" %}}
+
+Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任意の環境変数について、[AWS Secrets Manager][40] の値の自動取得をサポートしています。これを利用することで、環境変数を Secrets Manager に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
+
+1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_USE_HTTP=true` を設定します。
+2. Lambda 関数の IAM ロールの権限に `secretsmanager:GetSecretValue` の権限を追加します。
+3. Secrets Manager に、メトリクスのデュアルシッピング用の環境変数を格納するための新しいシークレットを作成します。その内容は、`{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}`と似た内容になります。
+4. Lambda 関数の環境変数 `DD_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN を設定します。
+5. Secrets Manager に、APM (トレース) のデュアルシッピング用の環境変数を格納するための新しいシークレットを作成します。その内容は、`{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`と**似た**内容になります。
+6. Lambda 関数の環境変数 `DD_APM_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN と同じ値を設定します。
+7. Secrets Manager に、APM (プロファイリング) のデュアルシッピング用の環境変数を格納するための新しいシークレットを作成します。その内容は、`{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}`と**似た**内容になります。
+8. Lambda 関数の環境変数 `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN と同じ値を設定します。
+9. Secrets Manager に、ログのデュアルシッピング用の環境変数を格納するための新しいシークレットを作成します。その内容は、`[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`と**似た**内容になります。
+10. Lambda 関数の環境変数 `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN と同じ値を設定します。
+
+{{% /tab %}}
+{{% tab "AWS KMS" %}}
+
+Datadog 拡張機能は、`_KMS_ENCRYPTED` のプレフィックスが付いた任意の環境変数について、[AWS KMS][41] の値の自動復号化をサポートしています。これを利用することで、環境変数を KMS に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
+
+1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_USE_HTTP=true` を設定します。
+2. Lambda 関数の IAM ロールの権限に `kms:GenerateDataKey` と `kms:Decrypt` の権限を追加します。
+3. メトリクスのデュアルシッピングの場合は、KMS を使用して`{"https://app.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://app.datadoghq.eu": ["<your_api_key_4>"]}` を暗号化し、`DD_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
+4. トレースのデュアルシッピングの場合は、KMS を使用して  `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` を暗号化し、`DD_APM_ADDITIONAL_KMS_ENCRYPTED` 環境変数にその値を設定します。
+5. プロファイリングのデュアルシッピングの場合は、KMS を使用して  `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` を暗号化し、`DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
+5. ログのデュアルシッピングの場合は、KMS を使用して `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` を暗号化し、`DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+より高度な使用方法については、[デュアルシッピングガイド][32]を参照してください。
 
 ## AWS リソース上でトレースコンテキストを伝播させる
 
@@ -581,6 +635,14 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 移行するには、[Datadog Lambda 拡張機能を使ったインストール手順][1]と [Datadog Forwarder を使った手順][38]を比較してみてください。ご参考までに、主な相違点を以下にまとめます。
 
 **注**: Datadog では、まず開発用とステージング用のアプリケーションを移行し、本番用のアプリケーションを 1 つずつ移行していくことを推奨しています。
+
+## Datadog Lambda 拡張機能で x86 と arm64 の切り替えを行う
+
+Datadog 拡張機能はコンパイル済みのバイナリコードで、x86 と rm64 の2種類が用意されています。CDK、Serverless Framework、SAM などのデプロイメントツールを使用して x86 の Lambda 関数を arm64 に移行 (または arm64 を x86 に移行) する場合、サービスインテグレーション (API Gateway、SNS、Kinesisなど) が Lambda 関数のバージョンまたはエイリアスを使用する構成になっていることを確認してください。この確認を怠ると、デプロイ中に関数が約 10 秒間利用できなくなる可能性があります。
+
+この現象が起きるのは、x86 から arm64 への Lambda 関数の移行が、`updateFunction` と `updateFunctionConfiguration` という並列で実行される 2 つの API 呼び出しで構成されているからです。これらの呼び出し中に短時間のずれが生じ、Lambda の `updateFunction` の呼び出しが完了して新しいアーキテクチャを使用するようコードが更新されても、 `updateFunctionConfiguration` の呼び出しがまだ完了せず、拡張機能で引き続き古いアーキテクチャを使用する構成が残ってしまいます。
+
+Layer のバージョンを利用できない場合、Datadog では、アーキテクチャの移行プロセス中に [Datadog Forwarder][38] の構成を行うことを推奨しています。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -679,9 +741,9 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 [30]: /ja/agent/proxy/
 [31]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#aws-privatelink-support
 [32]: /ja/agent/guide/dual-shipping/
-[33]: /ja/serverless/distributed_tracing/serverless_trace_propagation/
+[33]: /ja/serverless/distributed_tracing/#trace-propagation
 [34]: /ja/integrations/amazon_xray/
-[35]: /ja/serverless/distributed_tracing/serverless_trace_merging
+[35]: /ja/serverless/distributed_tracing/#trace-merging
 [36]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
 [37]: /ja/serverless/guide/extension_motivation/
 [38]: /ja/serverless/guide#install-using-the-datadog-forwarder

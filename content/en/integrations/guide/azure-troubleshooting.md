@@ -66,7 +66,7 @@ For example, use the -EventhubName flag to change the default name of the Eventh
 
 ### Unregistered resource provider
 
-If your script execution is failing due to the error **The subscription is not registered to use namespace ‘Microsoft.EventHub’**:
+If your script execution is failing due to the error **The subscription is not registered to use namespace 'Microsoft.EventHub'**:
 
 Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell. 
 

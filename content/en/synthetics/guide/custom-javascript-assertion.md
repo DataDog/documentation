@@ -29,7 +29,7 @@ For more information about assertions, see [Browser Test Steps][2].
 
 ## Assert that an element is not on the page
 
-To verify that an element with a specific ID is *not* on the page, use `return !document.getElementById("<ELEMENT_ID>”);`.
+To verify that an element with a specific ID is *not* on the page, use `return !document.getElementById("<ELEMENT_ID>");`.
 
 To verify that elements are *not* on the page and return the number of elements in the console error, add the following in the body assertion:
 
@@ -61,7 +61,7 @@ return true
 For example, to set the number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC to "mytime":
 
 {{< code-block lang="javascript" >}}
-localStorage.setItem(“mytime”, Date.now());
+localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 
