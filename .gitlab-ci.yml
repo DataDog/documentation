@@ -173,8 +173,6 @@ missing_tms_preview:
   environment: "preview"
   allow_failure: true
   cache: {}
-  variables:
-    GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
