@@ -29,6 +29,8 @@ The IP allowlist feature does not block access to the following:
 
 ### Functionality
 
+Only users with the **Org Management** permission can configure the IP allowlist.
+
 With the IP allowlist API or UI, you can:
 - Check the status of the IP allowlist. Whether the IP allowlist is on or off determines whether your organization is restricting requests by IP address allowlist membership.
 - Turn the IP allowlist on and off.
@@ -76,11 +78,8 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 See the IP allowlist [public API][2].
 
-## Permissions
-
-Only users with the **Org Management** permission can configure the IP allowlist.
 
 [1]: /api/latest/
-[2]: /api/latest/authentication/#validate-api-key
+[2]: /api/latest/ip-allowlist/
 [3]: /dashboards/sharing/
 [4]: https://app.datadoghq.com/organization-settings/ip-allowlist
