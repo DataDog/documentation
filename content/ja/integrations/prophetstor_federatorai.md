@@ -22,8 +22,9 @@ author:
   vendor_id: prophetstor
 categories:
 - containers
-- orchestration
+- kubernetes
 - マーケットプレイス
+- orchestration
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -51,11 +52,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Containers
-  - Category::Orchestration
+  - Category::Kubernetes
   - Category::Marketplace
+  - Category::Orchestration
   - Offering::Software License
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Kubernetes アプリケーションを最適化するための Federator.ai ライセンス
   media:

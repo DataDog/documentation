@@ -94,7 +94,7 @@ spec:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-AKS では、AKS 証明書の設定のため、`Kubelet` インテグレーション向けの特殊なコンフィギュレーションが必要となります。
+AKS では、SSL 証明書の設定方法によって、`Kubelet` インテグレーションに特定の構成が必要です。また、オプションの [Admission Controller][3] 機能では、Webhook の照合時にエラーが発生しないよう、特定の構成が必要です。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -105,8 +105,76 @@ AKS では、AKS 証明書の設定のため、`Kubelet` インテグレーシ�
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
+  # Agent 7.35 から必要です。以下の Kubelet 証明書に関する注記を参照してください。
   kubelet:
-    tlsVerify: false # Agent 7.35 で必須になりました。注意事項をご覧ください。
+    tlsVerify: false
+
+providers:
+  aks:
+    enabled: true
+```
+
+`providers.aks.enabled` オプションは、必要な環境変数 `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS=true` を設定します。
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+DatadogAgent Kubernetes Resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  credentials:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+  agent:
+    config:
+      # Agent 7.35 から必要です。以下の Kubelet 証明書に関する注記を参照してください。
+      kubelet:
+        tlsVerify: false
+  clusterAgent:
+    config:
+      admissionController:
+        enabled: true
+      env:
+        - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+          value: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+`kubelet.tlsVerify=false` は、環境変数 `DD_KUBELET_TLS_VERIFY=false` を設定して、サーバー証明書の検証を無効化することができます。
+
+### AKS Kubelet 証明書
+
+古いノードイメージのバージョンでは、AKS Kubelet 証明書のフォーマットに既知の問題があります。Agent 7.35 では、証明書に有効な Subject Alternative Name (SAN) が含まれていないため、`tlsVerify: false` を使用することが必要です。
+
+AKS クラスター内のすべてのノードがサポートされているノードイメージのバージョンを使用している場合、Kubelet TLS Verification を使用できます。バージョンは、[2022-10-30 リリースについてここに記載されているバージョン][4]以上である必要があります。また、カスタム証明書パスのアドレスとマップにノード名を使用するように、Kubelet 構成を更新する必要があります。
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+カスタム `values.yaml`:
+
+```yaml
+datadog:
+  apiKey: <DATADOG_API_KEY>
+  appKey: <DATADOG_APP_KEY>
+  # サポートされているノードイメージのバージョンが必要です
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+
+providers:
+  aks:
+    enabled: true
 ```
 
 {{% /tab %}}
@@ -125,40 +193,25 @@ spec:
     appKey: <DATADOG_APP_KEY>
   agent:
     config:
+      # サポートされているノードイメージのバージョンが必要です
       kubelet:
-        tlsVerify: false # Agent 7.35 で必須になりました。注意事項をご覧ください。
+        host:
+          fieldRef:
+            fieldPath: spec.nodeName
+        hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
   clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
     config:
-      externalMetrics:
-        enabled: false
       admissionController:
-        enabled: false
+        enabled: true
+      env:
+        - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+          value: true
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**:
-
-- Agent 7.35 では、AKS の Kubelet 証明書には SAN (Subject Alternative Name) が設定されていないため、`tlsVerify: false` が必須となります。
-
-- 一部の設定では、ポッド内における `spec.nodeName` のDNS 解決が AKS で動作しない場合があります。これはすべての AKS Windows ノード、および Linux ノードでカスタム DNS を使用してクラスターを Virtual Network で設定した場合に報告されています。この場合、`agent.config.kubelet.host` フィールド (デフォルトで `status.hostIP`) を削除し、`tlsVerify: false` を使用することが**必要です**。`DD_KUBELET_TLS_VERIFY=false` の環境変数を使用することでも、この問題を解決できます。これらのオプションは両方とも、サーバー証明書の検証を無効にします。
-
-  ```yaml
-  env:
-    - name: DD_KUBELET_TLS_VERIFY
-      value: "false"
-  ```
-- AKS 上の Admission Controller の関数では、Webhook の照合時にエラーが発生しないように、セレクターの追加を構成する必要があります。
-
-```yaml
-clusterAgent:
-  env:
-    - name: "DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS"
-      value: "true"
-```
+一部のセットアップで、ポッド内の `spec.nodeName` に対する DNS 解決が AKS で機能しないことがあります。これは、すべての AKS Windows ノードで報告されており、Linux ノードでカスタム DNS を使用して仮想ネットワークでクラスターをセットアップする場合です。この場合、最初に提供された AKS 構成を使用してください。Kubelet ホストパスの設定をすべて削除し (デフォルトは `status.hostIP`)、`tlsVerify: false` を使用します。この設定は**必須**です。
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
@@ -175,7 +228,6 @@ Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーショ�
 
 **注**: COS (Container Optimized OS) を使用する場合、eBPF ベースの `OOM Kill` と `TCP Queue Length` チェックが Helm チャートのバージョン 3.0.1 以降でサポートされるようになりました。これらのチェックを有効にするには、以下の設定を行います。
 - `datadog.systemProbe.enableDefaultKernelHeadersPaths` を `false` にします。
-- `datadog.systemProbe.enableKernelHeaderDownload` を `true` にします。
 
 ### Autopilot
 
@@ -561,3 +613,5 @@ spec:
 
 [1]: https://github.com/DataDog/helm-charts/tree/master/examples/datadog
 [2]: https://github.com/DataDog/datadog-operator/tree/master/examples/datadogagent
+[3]: /ja/containers/cluster_agent/admission_controller
+[4]: https://github.com/Azure/AKS/releases/tag/2022-10-30

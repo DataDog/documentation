@@ -33,9 +33,9 @@ author:
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
-- マーケットプレイス
+- キャッシュ
 - data store
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -63,18 +63,18 @@ public_title: Dell EMC Isilon
 short_description: Dell EMC Isilon クラスターのパフォーマンスと使用量の監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
+  - Category::Caching
   - Category::Data Store
-  - Category::Monitoring
+  - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Dell EMC Isilon クラスターのパフォーマンスと使用量の監視
   media:
