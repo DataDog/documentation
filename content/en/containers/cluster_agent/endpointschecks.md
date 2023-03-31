@@ -83,7 +83,7 @@ By design, endpoint checks are dispatched to Agents that run on the same node as
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `features.config.clusterChecks.enabled` configuration key:
+Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `features.clusterChecks.enabled` configuration key:
 ```yaml
 kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1

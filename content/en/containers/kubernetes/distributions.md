@@ -71,7 +71,6 @@ kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
-  creationTimestamp: null
 spec:
   features:
     admissionController:
@@ -127,7 +126,6 @@ kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
-  creationTimestamp: null
 spec:
   features:
     admissionController:
@@ -444,7 +442,6 @@ kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
-  creationTimestamp: null
 spec:
   features:
     logCollection:
@@ -487,9 +484,6 @@ spec:
         - key: node-role.kubernetes.io/etcd
           operator: Exists
           effect: NoExecute
-status:
-  conditions: null
-
 ```
 
 {{% /tab %}}
@@ -589,7 +583,6 @@ kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
-  creationTimestamp: null
 spec:
   features:
     eventCollection:

@@ -67,26 +67,26 @@ datadog:
 DatadogAgent Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  agent:
-    config:
-      criSocket:
-        criSocketPath: /run/dockershim.sock
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+  features:
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    criSocketPath: /run/dockershim.sock
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 {{% /tab %}}
@@ -114,7 +114,7 @@ providers:
     enabled: true
 ```
 
-`providers.aks.enabled` オプションは、必要な環境変数 `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS=true` を設定します。
+`providers.aks.enabled` オプションは、必要な環境変数 `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` を設定します。
 
 {{% /tab %}}
 {{% tab "Operator" %}}
@@ -122,26 +122,28 @@ providers:
 DatadogAgent Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  agent:
-    config:
+  features:
+    admissionController:
+      enabled: true
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    kubelet:
       # Agent 7.35 から必要です。以下の Kubelet 証明書に関する注記を参照してください。
-      kubelet:
-        tlsVerify: false
-  clusterAgent:
-    config:
-      admissionController:
-        enabled: true
-      env:
-        - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
-          value: true
+      tlsVerify: false
+  override:
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+              value: "true"
 ```
 
 {{% /tab %}}
@@ -183,29 +185,31 @@ providers:
 DatadogAgent Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  agent:
-    config:
-      # サポートされているノードイメージのバージョンが必要です
-      kubelet:
-        host:
-          fieldRef:
-            fieldPath: spec.nodeName
-        hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-  clusterAgent:
-    config:
-      admissionController:
-        enabled: true
-      env:
-        - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
-          value: true
+  features:
+    admissionController:
+      enabled: true
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    # サポートされているノードイメージのバージョンが必要です
+    kubelet:
+      host:
+        fieldRef:
+          fieldPath: spec.nodeName
+      hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+  override:
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+              value: "true"
 ```
 
 {{% /tab %}}
@@ -347,56 +351,55 @@ OpenShift で Datadog Operator を使用する場合、OperatorHub または Red
 以下のコンフィギュレーションは、(SCC/ServiceAccountの設定のため)、この設定と合わせて、Agent が Datadog Operator と同じネームスペースにインストールされている場合を前提として動作します。
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
+  features:
+    logCollection:
+      enabled: false
+    liveProcessCollection:
+      enabled: false
+    liveContainerCollection:
+      enabled: true
     apm:
       enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
+    cspm:
       enabled: false
-    systemProbe:
+    cws:
       enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
-    rbac:
+    npm:
+      enabled: false
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+      port: 8443
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+    criSocketPath: /var/run/crio/crio.sock
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
       serviceAccountName: datadog-agent-scc
-    config:
-      kubelet:
-        tlsVerify: false
-      criSocket:
-        criSocketPath: /var/run/crio/crio.sock
-        useCriSocketVolume: true
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Exists
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/infra
-        operator: Exists
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-        port: 8443
-      admissionController:
-        enabled: false
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/infra
+          operator: Exists
+          effect: NoSchedule
 ```
 
 {{% /tab %}}
@@ -436,50 +439,52 @@ agents:
 DatadogAgent Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
+  features:
+    logCollection:
+      enabled: false
+    liveProcessCollection:
+      enabled: false
+    liveContainerCollection:
+      enabled: true
     apm:
       enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
+    cspm:
       enabled: false
-    systemProbe:
+    cws:
       enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
-    config:
-      kubelet:
-        tlsVerify: false
+    npm:
+      enabled: false
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/controlplane
-        operator: Exists
-      - effect: NoExecute
-        key: node-role.kubernetes.io/etcd
-        operator: Exists
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+        - key: node-role.kubernetes.io/controlplane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/etcd
+          operator: Exists
+          effect: NoExecute
 ```
 
 {{% /tab %}}
@@ -512,26 +517,26 @@ datadog:
 DatadogAgent Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  agent:
-    config:
-      criSocket:
-        criSocketPath: /run/dockershim.sock
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+  features:
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    criSocketPath: /run/dockershim.sock
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 {{% /tab %}}
@@ -575,34 +580,31 @@ agents:
 DatadogAgent Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiSecret:
-      secretName: datadog-secret
-      keyName: api-key
-    appSecret:
-      secretName: datadog-secret
-      keyName: app-key
   features:
-    # 新しい `kubernetes_state_core` のチェックを有効にします。
+    eventCollection:
+      collectKubernetesEvents: true
     kubeStateMetricsCore:
       enabled: true
-  agent:
-    config:
-      kubelet:
-        # Kubelet の証明書は自己署名なので、tlsVerify を false に設定します
-        tlsVerify: false
-      # コントロールプレーンノードで Agent をスケジュールできるように許容範囲を追加します。
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+    kubelet:
+      tlsVerify: false
+  override:
+    nodeAgent:
       tolerations:
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
-  clusterAgent:
-    config:
-      collectEvents: true
 ```
 
 {{% /tab %}}

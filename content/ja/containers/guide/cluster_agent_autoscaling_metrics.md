@@ -66,18 +66,21 @@ Helm の Cluster Agent で外部メトリクスサーバーを有効にするに
 Datadog Operator で管理する Cluster Agent で外部メトリクスサーバーを有効にするには、まず [Datadog Operator をセットアップします][1]。次に、`DatadogAgent` カスタムリソースで `clusterAgent.config.externalMetrics.enabled` を `true` に設定します。
 
   ```yaml
-  apiVersion: datadoghq.com/v1alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  features:
+    externalMetricsServer:
+      enabled: true
+      useDatadogMetrics: false
+  global:
     credentials:
       apiKey: <DATADOG_API_KEY>
-  clusterAgent:
-    config:
-      externalMetrics:
-        enabled: true
-    replicas: 2
+  override:
+    clusterAgent:
+      replicas: 2
   ```
 
 Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Kubernetes が利用可能な `Service` と `APIService` がそれぞれ設定されます。
@@ -221,21 +224,23 @@ Helm、Datadog Operator または Daemonset を使用して `DatadogMetric` を�
 
 `DatadogMetric` CRD の使用をアクティブにするには、`DatadogAgent` カスタムリソースを更新し、`clusterAgent.config.externalMetrics.useDatadogMetrics` を ` true` に設定します。
 
-  ```yaml
-  apiVersion: datadoghq.com/v1alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  features:
+    externalMetricsServer:
+      enabled: true
+      useDatadogMetrics: true
+  global:
     credentials:
       apiKey: <DATADOG_API_KEY>
-  clusterAgent:
-    config:
-      externalMetrics:
-        enabled: true
-        useDatadogMetrics: true
-    replicas: 2
-  ```
+  override:
+    clusterAgent:
+      replicas: 2
+```
 
 Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Cluster Agent に `DatadogMetric` リソースを介してこれらの HPA クエリを管理するよう指示します。
 

@@ -82,26 +82,28 @@ Datadog Operator を使用するには、次の前提条件が必要です。
 
 2. Datadog Agent のデプロイコンフィギュレーションを使用してファイルを作成します。最も単純なコンフィギュレーションは次のとおりです。
 
-   ```yaml
-   apiVersion: datadoghq.com/v1alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     credentials:
-       apiSecret:
-         secretName: datadog-secret
-         keyName: api-key
-       appSecret:
-         secretName: datadog-secret
-         keyName: app-key
-     agent:
-       image:
-         name: "gcr.io/datadoghq/agent:latest"
-     clusterAgent:
-       image:
-         name: "gcr.io/datadoghq/cluster-agent:latest"
-   ```
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
+```
 
 3. 上記のコンフィギュレーションファイルを使用して Datadog Agent をデプロイします。
    ```shell
@@ -124,12 +126,18 @@ helm delete my-datadog-operator
 (オプション) 非特権インストールを実行するには、[Datadog カスタムリソース (CR)][8] に以下を追加します。
 
 ```yaml
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: placeholder
+  namespace: placeholder
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 1 # <USER_ID>
+        supplementalGroups:
+          - 123 # "<DOCKER_GROUP_ID>"
 ```
 
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。

@@ -90,20 +90,21 @@ helm delete datadog
 Mettez à jour votre fichier `datadog-agent.yaml` avec la configuration suivante pour ajouter la tolérance dans le `Daemonset.spec.template` de votre `DaemonSet` :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: "<CLÉ_API_DATADOG>"
-    appKey: "<CLÉ_APPLICATION_DATADOG>"
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    config:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  override:
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-       - operator: Exists
+        - operator: Exists
 ```
 
 Appliquez cette nouvelle configuration :

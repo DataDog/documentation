@@ -66,26 +66,26 @@ datadog:
 Ressource Kubernetes DatadogAgent :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
-  agent:
-    config:
-      criSocket:
-        criSocketPath: /run/dockershim.sock
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+  features:
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+  global:
+    credentials:
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
+    criSocketPath: /run/dockershim.sock
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 {{% /tab %}}
@@ -114,26 +114,27 @@ datadog:
 Ressource Kubernetes DatadogAgent :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
-  agent:
-    config:
-      kubelet:
-        tlsVerify: false # Obligatoire à partir de l'Agent 7.35. Voir la section Remarques.
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+  features:
+    admissionController:
+      enabled: true
+  global:
+    credentials:
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
+    kubelet:
+      tlsVerify: false # Obligatoire à partir de l'Agent 7.35. Voir la section Remarques.
+  override:
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+              value: "true"
 ```
 
 {{% /tab %}}
@@ -292,56 +293,55 @@ kube-state-metrics:
 Si vous utilisez l'Operator Datadog dans OpenShift, il est conseillé de l'installer par l'intermédiaire d'OperatorHub ou du Marketplace Redhat. La configuration ci-dessous a été conçue pour un environnement où l'Agent est installé dans le même espace de nommage que l'Operator Datadog (en raison des paramètres SCC/ServiceAccount).
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
-  clusterName: <NOM_CLUSTER>
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
+  features:
+    logCollection:
+      enabled: false
+    liveProcessCollection:
+      enabled: false
+    liveContainerCollection:
+      enabled: true
     apm:
       enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
+    cspm:
       enabled: false
-    systemProbe:
+    cws:
       enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
-    rbac:
+    npm:
+      enabled: false
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+      port: 8443
+  global:
+    credentials:
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
+    clusterName: <NOM_CLUSTER>
+    kubelet:
+      tlsVerify: false
+    criSocketPath: /var/run/crio/crio.sock
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
       serviceAccountName: datadog-agent-scc
-    config:
-      kubelet:
-        tlsVerify: false
-      criSocket:
-        criSocketPath: /var/run/crio/crio.sock
-        useCriSocketVolume: true
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Exists
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/infra
-        operator: Exists
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-        port: 8443
-      admissionController:
-        enabled: false
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/infra
+          operator: Exists
+          effect: NoSchedule
 ```
 
 {{% /tab %}}
@@ -381,50 +381,52 @@ agents:
 Ressource Kubernetes DatadogAgent :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
-  clusterName: <NOM_CLUSTER>
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
+  features:
+    logCollection:
+      enabled: false
+    liveProcessCollection:
+      enabled: false
+    liveContainerCollection:
+      enabled: true
     apm:
       enabled: false
-    process:
-      enabled: true
-      processCollectionEnabled: false
-    log:
+    cspm:
       enabled: false
-    systemProbe:
+    cws:
       enabled: false
-    security:
-      compliance:
-        enabled: false
-      runtime:
-        enabled: false
-    config:
-      kubelet:
-        tlsVerify: false
+    npm:
+      enabled: false
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+  global:
+    credentials:
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
+    clusterName: <NOM_CLUSTER>
+    kubelet:
+      tlsVerify: false
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/controlplane
-        operator: Exists
-      - effect: NoExecute
-        key: node-role.kubernetes.io/etcd
-        operator: Exists
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+        - key: node-role.kubernetes.io/controlplane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/etcd
+          operator: Exists
+          effect: NoExecute
 ```
 
 {{% /tab %}}
@@ -457,26 +459,26 @@ datadog:
 Ressource Kubernetes DatadogAgent :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
-  agent:
-    config:
-      criSocket:
-        criSocketPath: /run/dockershim.sock
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      externalMetrics:
-        enabled: false
-      admissionController:
-        enabled: false
+  features:
+    admissionController:
+      enabled: false
+    externalMetricsServer:
+      enabled: false
+      useDatadogMetrics: false
+  global:
+    credentials:
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
+    criSocketPath: /run/dockershim.sock
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
 ```
 
 {{% /tab %}}
@@ -519,34 +521,34 @@ agents:
 Ressource Kubernetes DatadogAgent :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiSecret:
-      secretName: datadog-secret
-      keyName: api-key
-    appSecret:
-      secretName: datadog-secret
-      keyName: app-key
   features:
-    # Activer le nouveau check `kubernetes_state_core`.
+    eventCollection:
+      collectKubernetesEvents: true
     kubeStateMetricsCore:
+      # Activer le nouveau check `kubernetes_state_core`.
       enabled: true
-  agent:
-    config:
-      kubelet:
-        # Définir tlsVerify sur false étant donné que les certificats Kubelet sont autosignés
-        tlsVerify: false
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+    kubelet:
+      # Définir tlsVerify sur false étant donné que les certificats Kubelet sont autosignés
+      tlsVerify: false
+  override:
+    nodeAgent:
       # Ajouter une tolérance pour que l'Agent puisse être planifié sur les nœuds du plan de contrôle.
       tolerations:
         - key: node-role.kubernetes.io/master
           effect: NoSchedule
-  clusterAgent:
-    config:
-      collectEvents: true
 ```
 
 {{% /tab %}}
@@ -555,5 +557,5 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/helm-charts/tree/master/examples/datadog
-[2]: https://github.com/DataDog/datadog-operator/tree/master/examples/datadogagent
+[1]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
+[2]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent

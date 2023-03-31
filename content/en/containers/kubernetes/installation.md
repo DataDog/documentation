@@ -50,7 +50,7 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-<div class="alert alert-warning">The Datadog Operator is now Generally Available with the `1.0.0` version and it reconciles `v2alpha1.DatadogAgent`. </div>
+<div class="alert alert-warning">The Datadog Operator is now Generally Available with the `1.0.0` version and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 

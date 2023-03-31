@@ -63,17 +63,17 @@ To update your registry while deploying the Datadog Agent (or Datadog Cluster Ag
 
 1. Update the Datadog Agent manifest file to override the default registry (`gcr.io/datadoghq`). For example, with  `public.ecr.aws/datadog`:
 
-    ```yaml
-    apiVersion: datadoghq.com/v2alpha1
-    kind: DatadogAgent
-    metadata:
-      name: datadog
-    spec:
-      global:
-        registry: gcr.io/datadoghq
-      // ..
-    ```
-2. Remove any overrides for the `spec.override.nodeAgent.image.name`, `spec.override.clusterAgent.image.name`, and `sspec.override.clusterChecksRunner.image.name` fields.
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    registry: gcr.io/datadoghq
+  // ..
+```
+2. Remove any overrides for the `spec.override.nodeAgent.image.name`, `spec.override.clusterAgent.image.name`, and `spec.override.clusterChecksRunner.image.name` fields.
 
 For more information about the Datadog Operator, see [Deploying an Agent with the Operator][4].
 
