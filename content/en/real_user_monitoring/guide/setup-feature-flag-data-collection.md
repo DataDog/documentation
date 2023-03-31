@@ -11,9 +11,10 @@ further_reading:
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Feature Flag analysis for RUM is in private beta. To request access, contact Support at support@datadoghq.com. In the meantime, follow the instructions below to enrich your RUM events with feature flag context.
-{{< /callout >}}
+<div class="alert alert-warning">
+    Feature Flag Tracking is currently in beta.
+</div>
+
 
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
