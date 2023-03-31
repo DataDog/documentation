@@ -4,16 +4,16 @@ kind: documentation
 disable_toc: false
 private: true
 further_reading:
-- link: "logs/processing/pipelines"
+- link: "https://docs.datadoghq.com/cloud_cost_management/?tab=aws#overview"
   tag: "Documentation"
-  text: "Log processing pipelines"
+  text: "Cloud Cost Management"
 ---
 
 {{< jqmath-vanilla >}}
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in Kubernetes and ECS clusters to individual pods and tasks running in those clusters.
+Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in Kubernetes and ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
 ## Prerequisites
 
@@ -43,11 +43,11 @@ Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR
 
 ### Kubernetes
 
-For Kubernetes allocation, we first join a Kubernetes node with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
+For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
-Next, we look at all of the pods running on that node for the day. Based on the resources the pod had reserved and the length of time it ran, we assign the appropriate portion of the node's cost to that pod. This calculated cost is enriched with all of the pod's tags.
+Next, we look at all of the pods running on that node for the day. Based on the resources the pod had reserved and the length of time it ran, the appropriate portion of the node's cost is assigned to that pod. This calculated cost is enriched with all of the pod's tags.
 
-Once all pods have been assigned a cost based on their resource reservations, there will be some node cost leftover. This is the cost of unreserved resources, which we call **Cluster Idle cost**. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources that can be scheduled but Kubernetes did not reserve for any pods.
+Once all pods have been assigned a cost based on their resource reservations, there will be some node cost leftover. This is the cost of unreserved resources, which we call **Cluster Idle cost**. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources that can be scheduled but Kubernetes did not reserve for any pods. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
 
 ### ECS on EC2
 
@@ -55,8 +55,7 @@ For ECS allocation, we determine which tasks ran on each EC2 instance used for E
 
 Based on the CPU or memory usage of each task (as reported in the CUR), we assign the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) for containers running in the task.
 
-Once all tasks have been assigned a cost based on their resource reservations, there will be some instance cost leftover. This is the cost of unreserved resources, which we call **Cluster Idle** cost. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources not reserved by any ECS tasks.
-
+Once all tasks have been assigned a cost based on their resource reservations, there will be some instance cost leftover. This is the cost of unreserved resources, which we call **Cluster Idle** cost. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources not reserved by any ECS tasks. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
 
 ### ECS on Fargate
 
@@ -72,9 +71,9 @@ There is no specific cost associated with CPU and memory since EC2 instances are
   - Once based solely on CPU requests, generating `aws.cost.amortized.cpu.allocated`.
   - Once based solely on memory requests, generating `aws.cost.amortized.mem.allocated`.
 
-If your workloads are CPU-constrained, exclusively using cpu.allocated may work for you. Similarly, using exclusively mem.allocated may work for memory-constrained workloads.
+If your workloads are CPU-constrained, exclusively using `cpu.allocated` may work for you. Similarly, using exclusively `mem.allocated` may work for memory-constrained workloads.
 
-If you have a mix of CPU- and memory-intensive workloads, or you simply want a consistent way to visualize the costs ofconsidering all resources, you can use formulas and functions to create your own equation to combine CPU and memory costs. For example, for a 50/50 split, you can plot:
+If you have a mix of CPU and memory-intensive workloads, or you simply want a consistent way to visualize the costs of considering all resources, you can use formulas and functions to create your own equation to combine CPU and memory costs. For example, for a 50/50 split, you can plot:
 
 $$\text"a " = \text" sum(aws.cost.amortized.cpu.allocated) by {team}"$$
 
@@ -84,19 +83,46 @@ $$\text"mixed_cost" = (0.5 * \text"a") + (0.5 * \text"b")$$
 
 As long as the multipliers are positive and sum to 1, the formula will generate coherent costs.
 
-Note that for costs that are not related to containers on EC2, all three metrics are equal:
-
-`aws.cost.amortized` == `aws.cost.amortized.cpu.allocated`== `aws.cost.amortized.mem.allocated`
+**Note**: For costs that are not related to containers on EC2, all three metrics are equal:
+  - `aws.cost.amortized` 
+  - `aws.cost.amortized.cpu.allocated`
+  - `aws.cost.amortized.mem.allocated`
 
 ## Understanding cluster idle cost
 
 Cluster idle cost is the cost of CPU or memory resources not reserved by any workloads.
 
-You can visualize this cost at the Kubernetes node, ECS host, or cluster level, using the `is_cluster_idle` tag. All costs allocated to scheduled pods or tasks will have `is_cluster_idle: N/A`, while all compute costs not assigned to any pods or tasks will show as `is_cluster_idle: true`.
+You can visualize this cost at the Kubernetes node, ECS host, or cluster level, using the `is_cluster_idle` tag. All costs allocated to scheduled pods or tasks have `is_cluster_idle: N/A`, while all compute costs not assigned to any pods or tasks have the tag `is_cluster_idle: true`.
 
+Here is a sample query that displays all Kubernetes cluster cost, broken down by cluster name and cluster idle cost:
+    `sum:aws.cost.amortized.cpu.allocated{is_kubernetes:true} by {kube_cluster_name, is_cluster_idle}`
+
+## Tags
+
+### Kubernetes
+
+Datadog adds the following out of the box tags to all Kubernetes nodes and pods where the container costs are allocated:
+
+| Out of the box tag  |  Description |
+| ---                 | ------------ | 
+| `kube_cluster_name` | The name of the kubernetes cluster. |
+| `is_kubernetes`     | All EC2 compute costs associated with running Kubernetes nodes. |
+| `is_cluster_idle`   | The cost of unreserved CPU or memory on Kubernetes nodes. |
+
+### ECS
+
+Datadog adds the following out of the box tags to all ECS tasks where the container costs are allocated. **Note**: tags are not applied to all ECS containers.
+
+| Out of the box tag      |  Description |
+| ---                     | ------------ | 
+| `ecs_cluster_name`      | The name of the ECS cluster. |
+| `is_aws_ecs`            | All costs associated with running ECS. |
+| `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
+| `is_cluster_idle`       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. |
+| `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
 
 ## Further reading
-aws.cost.amortized.cpu.allocated
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/setup
