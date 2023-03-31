@@ -91,7 +91,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-devin.ford_tm-script-testing
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-14529003
   tags:
     - "arch:amd64"
   rules:
@@ -378,8 +378,6 @@ test_missing_tms_live:
   stage: post-deploy
   cache: {}
   environment: "live"
-  variables:
-    GIT_STRATEGY: none
   dependencies:
     - build_live
   script:
@@ -446,7 +444,7 @@ set_redirect_metadata_preview:
   dependencies:
     - build_preview
   script:
-    - run_update_redirect_metadata
+    - in-isolation run_update_redirect_metadata
   interruptible: true
   allow_failure: true
 
@@ -461,5 +459,5 @@ set_redirect_metadata_live:
   dependencies:
     - build_live
   script:
-    - run_update_redirect_metadata
+    - in-isolation run_update_redirect_metadata
   interruptible: true
