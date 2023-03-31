@@ -72,9 +72,9 @@ window.DD_RUM &&
 ```
 </details>
 
-You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners.
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
 
-We currently support integrations with:
+Datadog supports integrations with:
 
 [1]: /real_user_monitoring/browser#setup
 {{% /tab %}}
@@ -82,9 +82,9 @@ We currently support integrations with:
 
 Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners.
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
 
-We currently support integrations with:
+Datadog supports integrations with:
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
@@ -92,9 +92,9 @@ We currently support integrations with:
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
 
-You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners.
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
 
-We currently support integrations with:
+Datadog supports integrations with:
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
 {{% /tab %}}
@@ -102,9 +102,9 @@ We currently support integrations with:
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners.
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
 
-We currently support integrations with:
+Datadog supports integrations with:
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/flutter/
 {{% /tab %}}
@@ -120,7 +120,7 @@ We currently support integrations with:
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key, value);
@@ -147,14 +147,14 @@ Each time a feature flag is evaluated, add the following function to send the fe
 {{% /tab %}}
 {{< /tabs >}}
 
-### LaunchDarkly Integration
+### LaunchDarkly integration
 
 {{< tabs >}}
 {{% tab "Browser" %}}
 
 Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code shown below.
 
- For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][1].
+ For more information about initializing LaunchDarkly's SDK, see [LaunchDarkly's JavaScript SDK documentation][1].
 
 ```javascript
 const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -181,9 +181,9 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize Split's SDK and and create an impression listener reporting feature flags evaluations to Datadog using the following snippet of code
+Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
-For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][1].
+For more information about initializing Split's SDK, see Split's [JavaScript SDK documentation][1].
 
 ```javascript
 const factory = SplitFactory({
@@ -210,9 +210,9 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
 
-For more information about initializing Split's SDK, check out Split's [iOS SDK documentation][1].
+For more information about initializing Split's SDK, see Split's [iOS SDK documentation][1].
 
 ```javascript
   let config = SplitClientConfig()
@@ -230,9 +230,9 @@ For more information about initializing Split's SDK, check out Split's [iOS SDK 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
 
-For more information about initializing Split's SDK, check out Split's [Android SDK documentation][1].
+For more information about initializing Split's SDK, see Split's [Android SDK documentation][1].
 
 ```javascript
   internal class DatadogSplitImpressionListener : ImpressionListener {
@@ -265,7 +265,7 @@ For more information about initializing Split's SDK, check out Split's [Android 
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
+Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flag evaluations to Datadog using the snippet of code shown below.
 
    Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
 
