@@ -87,7 +87,7 @@ To account for modern web applications, loading time watches for network request
 - **Initial Load**: Loading Time is equal to _whichever is longer_:
 
   - The difference between `navigationStart` and `loadEventEnd`, or
-  - The difference between `navigationStart` and the first time the page has no activity for 100ms (with activity defined as ongoing network requests or a DOM mutation). Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
+  - The difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 - **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
