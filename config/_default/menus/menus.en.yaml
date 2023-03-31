@@ -3467,7 +3467,7 @@ main:
     identifier: dev_tools_integrations
     weight: 4
   - name: Create an Agent-based Integration
-    url: developers/integrations/new_check_howto/
+    url: developers/integrations/agent_integration/
     parent: dev_tools_integrations
     weight: 401
   - name: Create an API Integration
@@ -3478,85 +3478,85 @@ main:
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
     weight: 403
+  - name: Build a Marketplace Offering
+    url: developers/integrations/marketplace_offering/
+    parent: dev_tools_integrations
+    identifier: dev_tools__integrations_marketplace_offering
+    weight: 404
+  - name: Create a Tile
+    url: developers/integrations/create_a_tile/
+    parent: dev_tools_integrations
+    identifier: dev_tools_integrations_tile
+    weight: 405
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 404
+    weight: 406
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 405
+    weight: 407
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 406
+    weight: 408
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 407
-  - name: Marketplace
-    url: developers/marketplace/
-    parent: dev_tools
-    identifier: dev_tools_marketplace
-    weight: 5
-  - name: Develop A Marketplace Offering
-    url: developers/marketplace/offering
-    parent: dev_tools_marketplace
-    identifier: dev_tools_marketplace_offering
-    weight: 501
+    weight: 409
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
     identifier: dev_tools_datadog_apps
-    weight: 6
+    weight: 5
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check
-    weight: 7
+    weight: 6
   - name: 'Submission - Agent Check '
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
-    weight: 701
+    weight: 601
   - name: Submission - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
-    weight: 702
+    weight: 602
   - name: Submission - API
     url: api/v1/service-checks/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
-    weight: 703
+    weight: 603
   - name: IDE Integrations
     url: developers/ide_integrations/
     parent: dev_tools
     identifier: ide_integrations
-    weight: 8
+    weight: 7
   - name: IntelliJ IDEA
     url: developers/ide_integrations/idea/
     parent: ide_integrations
     identifier: ide_integrations_idea
-    weight: 801
+    weight: 701
   - name: Community
     url: developers/community/
     parent: dev_tools
     identifier: dev_community
-    weight: 9
+    weight: 8
   - name: Libraries
     url: developers/community/libraries/
     parent: dev_community
-    weight: 901
+    weight: 801
   - name: Community Office Hours
     url: developers/community/office_hours/
     parent: dev_community
-    weight: 902
+    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
-    weight: 10
+    weight: 9
   - name: API
     url: api/
     pre: api

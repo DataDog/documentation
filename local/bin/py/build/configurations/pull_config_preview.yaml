@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -85,15 +85,47 @@
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
+        - action: pull-and-push-file
+          branch: alai97/add-marketplace-documentation
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/developers/integrations/'
+            file_name: '_index.md'
+
+        - action: pull-and-push-file
+          branch: alai97/add-marketplace-documentation
+          globs:
+          - 'docs/dev/create_a_tile.md'
+          options:
+            dest_path: '/developers/integrations/'
+            file_name: 'create_a_tile.md'
+
+        - action: pull-and-push-file
+          branch: alai97/add-marketplace-documentation
+          globs:
+          - 'docs/dev/marketplace_offering.md'
+          options:
+            dest_path: '/developers/integrations/'
+            file_name: 'marketplace_offering.md'
+
+        - action: pull-and-push-file
+          branch: alai97/add-marketplace-documentation
+          globs:
+          - 'docs/dev/agent_integration.md'
+          options:
+            dest_path: '/developers/integrations/'
+            file_name: 'agent_integration.md'
+
         - action: pull-and-push-folder
-          branch: master
+          branch: alai97/add-marketplace-documentation
           globs:
           - docs/dev/*.md
           options:
             dest_dir: '/developers/integrations/'
             path_to_remove: 'docs/dev/'
             front_matters:
-              dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
+              dependencies: [ "https://github.com/DataDog/integrations-core/blob/alai97/add-marketplace-documentation/docs/dev/" ]
 
       - repo_name: integrations-extras
         contents:
