@@ -99,9 +99,9 @@ The RUM Browser SDK tracks the page activity to estimate the time until the inte
 - Performance resource timing entries are emitted by the browser (loading end of js, css, and such)
 - DOM mutations are emitted by the browser
 
-The page activity is considered ended when the page don't have activity for 100ms.
+The page activity is considered to have ended when it hasn't had any activity for 100ms.
 
-**Note**: only activity happening after the SDK init is taken into account.
+**Note**: Only activity occurring after the SDK initialization is taken into account.
 
 **Caveats:**
 
