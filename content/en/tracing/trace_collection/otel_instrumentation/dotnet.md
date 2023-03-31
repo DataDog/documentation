@@ -11,3 +11,4 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
+{{% otel-custom-instrumentation %}}

@@ -11,7 +11,4 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-<div class="alert alert-info">
-If you have not yet read the setup instructions, start with the <a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ Setup Instructions</a>.
-</div>
-
+{{% otel-custom-instrumentation %}}
