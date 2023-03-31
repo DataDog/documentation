@@ -1,7 +1,6 @@
 ---
-title: Python OTel Custom Instrumentation
+title: Propagating Python Trace Context
 kind: documentation
-description: 'Manually instrument your Python application with OTel API to send custom traces to Datadog.'
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10

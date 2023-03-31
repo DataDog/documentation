@@ -1,7 +1,6 @@
 ---
-title: Java OTel Custom Instrumentation
+title: Propagating Java Trace Context
 kind: documentation
-description: 'Custom instrument your Java application with OTel API to send traces to Datadog.'
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0

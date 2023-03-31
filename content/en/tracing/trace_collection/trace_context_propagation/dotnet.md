@@ -1,10 +1,9 @@
 ---
-title: .NET OTel Custom Instrumentation
+title: Propagating .NET Trace Context
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80
-description: 'Manually instrument your .NET application with OTel API, to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

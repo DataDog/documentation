@@ -1,7 +1,6 @@
 ---
-title: Ruby OTel Custom Instrumentation
+title: Propagating Ruby Trace Context
 kind: documentation
-description: 'Manually instrument your Ruby application with OTel API to send custom traces to Datadog.'
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20

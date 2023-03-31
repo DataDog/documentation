@@ -1,7 +1,6 @@
 ---
-title: Node.js OTel Custom Instrumentation
+title: Propagating Node.js Trace Context
 kind: documentation
-description: 'Manually instrument your Node.js application with OTel API to send custom traces to Datadog.'
 code_lang: nodejs
 code_lang_weight: 40
 type: multi-code-lang

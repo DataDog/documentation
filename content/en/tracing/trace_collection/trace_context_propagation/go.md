@@ -1,7 +1,6 @@
 ---
-title: Go OTel Custom Instrumentation
+title: Propagating Go Trace Context
 kind: documentation
-description: 'Custom instrument your Go application with OTel API to send traces to Datadog'
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
