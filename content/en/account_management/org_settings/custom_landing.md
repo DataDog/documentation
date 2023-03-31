@@ -20,7 +20,7 @@ To set a custom landing page, follow the steps below:
 1. Navigate to [Organization settings][1].
 2. From the tabs on the left, select **Preferences**.
 3. In the Datadog Homepage section, click the **Dashboard** button.
-4. Use the drop-down list to select a dashboard.
+4. Use the dropdown list to select a dashboard.
 5. Click the **Save** button.
 
 ## Use the default landing page

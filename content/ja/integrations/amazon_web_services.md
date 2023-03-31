@@ -229,7 +229,7 @@ AWS インテグレーションに関する問題解決は、[AWS インテグ�
 [28]: https://docs.datadoghq.com/ja/integrations/amazon_ebs/
 [29]: https://docs.datadoghq.com/ja/integrations/amazon_ec2/
 [30]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
-[31]: https://docs.datadoghq.com/ja/integrations/amazon_eks/
+[31]: https://docs.datadoghq.com/ja/integrations/amazon_efs/
 [32]: https://docs.datadoghq.com/ja/integrations/amazon_elasticache/
 [33]: https://docs.datadoghq.com/ja/integrations/amazon_elasticbeanstalk/
 [34]: https://docs.datadoghq.com/ja/integrations/amazon_elb/

@@ -163,9 +163,11 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 - オペレーティングシステムのタイプとバージョン (例: Linux Ubuntu 20.04)
 - ランタイムのタイプ、バージョン、ベンダー (例: Python 3.9.5)
 
+その他のガイダンスについては、Python APM クライアントの[トラブルシューティングドキュメント][3]を参照してください。
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
+[3]: https://ddtrace.readthedocs.io/en/stable/troubleshooting.html
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -212,10 +214,41 @@ Datadog 例外プロファイラは通常の条件下では、フットプリン
 
 Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロファイラに影響を与える非互換性があることが知られています ([アップストリーム Ruby レポート][6]、[`dd-trace-rb` バグレポート][7])。その結果、次のようなエラーメッセージが表示されることがあります: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken.” (Ruby VM ジャストインタイムヘッダーのコンパイルに失敗したため、あなたの ddtrace インストールには Continuous Profiler のサポートが欠けています。C コンパイラまたは Ruby VM ジャストインタイムコンパイラが壊れているようです。)
 
-
 これを解決するには、オペレーティングシステムまたは Docker イメージを更新して、GCC のバージョンが v4.8 よりも新しいものになるようにしてください。
 
 この問題についての更なるヘルプは、[サポートにお問い合わせ][2]の上、`DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` と結果の `mkmf.log` ファイルを実行したときの出力を含めてお送りください。
+
+## バックトレースが非常に深い場合、フレームが省略される
+
+Ruby プロファイラーでは、プロファイリングデータを収集する際に、深いバックトレースを切り捨てています。切り捨てられたバックトレースは呼び出し元の関数の一部が欠落しているため、ルートコールフレームにリンクすることが不可能になります。その結果、切り捨てられたバックトレースは `N frames omitted` というフレームにまとめられます。
+
+環境変数 `DD_PROFILING_MAX_FRAMES`、または次のコードで、最大深度を増やすことができます。
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.max_frames = 500
+end
+```
+
+## `dd-trace-rb` 1.11.0+ でネイティブ拡張機能を使用する Ruby gems からの予期しないランタイム失敗やエラー
+
+`dd-trace-rb` 1.11.0 から、プロファイラー "CPU Profiling 2.0" が、Ruby アプリケーションに unix シグナル `SIGPROF` を送ることでデータを集め、よりきめ細かいデータ収集が可能になりました。
+
+`SIGPROF` の送信は一般的なプロファイリング手法であり、ネイティブ拡張機能/ライブラリからのシステムコールがシステムの [`EINTR` エラーコード][8]で中断されることがあります。
+まれに、ネイティブ拡張機能またはネイティブ拡張機能から呼び出されたライブラリの `EINTR` エラーコードに対するエラー処理が欠けていたり、不正確な場合があります。
+
+この問題の既知の例として、`mysql2` gem と [8.0.0 より古い][9]バージョンの libmysqlclient を一緒に使用した場合です。影響を受ける libmysqlclient のバージョンは、Ubuntu 18.04 に存在することが知られていますが、20.04 およびそれ以降のリリースには存在しません。この場合、プロファイラーが `mysql2` gem が使用されていることを自動検出し、以下に説明する解決策を自動で適用します。
+
+ネイティブ拡張機能を使用した Ruby gems でランタイム失敗やエラーが発生した場合、`SIGPROF` シグナルを使用しないレガシープロファイラーに戻すことができます。レガシープロファイラーに戻すには、`DD_PROFILING_FORCE_ENABLE_LEGACY` 環境変数を `true` に設定するか、コードで以下を設定します。
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.force_enable_legacy_profiler = true
+end
+```
+
+このような非互換性を見つけたり疑ったりした場合は、[サポートチケット][2]で弊社チームにお知らせください。
+そうすることで、Datadog はそれらを自動検出リストに追加し、gem/ライブラリの作者と協力して問題を解決することができます。
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
@@ -224,6 +257,8 @@ Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロフ�
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 [6]: https://bugs.ruby-lang.org/issues/18073
 [7]: https://github.com/DataDog/dd-trace-rb/issues/1799
+[8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
+[9]: https://bugs.mysql.com/bug.php?id=83109
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -267,7 +302,7 @@ Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロフ�
 
    2. `/var/log/datadog` フォルダにある `DD-DotNet-Profiler-Native-<Application Name>-<pid>` のログファイルを開きます。
 
-   3. `libddprof error: Failed to send profile.` エントリーを探してください。このメッセージは、Agent にコンタクトできないことを意味します。
+   3. `libddprof error: Failed to send profile.` エントリーを探します。このメッセージは、Agent にコンタクトできないことを意味します。`DD_TRACE_AGENT_URL` が正しい Agent の URL に設定されていることを確認します。詳細については、[.NET プロファイラーの有効化-構成][1]を参照してください。
 
    4. もし、`Failed to send profile` というメッセージがない場合は、`The profile was sent. Success?` というエントリーを探します。
 
@@ -278,21 +313,37 @@ Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロフ�
 
    5. API キーが無効な場合、403 などのエラーの可能性がありますので、他の HTTP コードを確認してください。
 
+4. CPU または Wall タイムのプロファイルがない場合のみ、スタックウォーク用の Datadog シグナルハンドラーが置き換えられていないことを確認します。
+
+   1. `/var/log/datadog` フォルダにある `DD-DotNet-Profiler-Native-<Application Name>-<pid>` のログファイルを開きます。
+
+   2. この 2 つのメッセージを探してみてください。
+      - `Profiler signal handler was replaced again. It will not be restored: the profiler is disabled.`
+      - `Fail to restore profiler signal handler.`
+
+   3. これらのメッセージの 1 つが存在する場合、アプリケーションコードまたはサードパーティコードが、Datadog シグナルハンドラーの上に自身のシグナルハンドラーを繰り返し再インストールしていることを意味します。これ以上の衝突を避けるため、CPU と Wall タイムプロファイラーを無効にしています。
+
+   なお、`Profiler signal handler has been replaced. Restoring it.` というメッセージが表示されることがありますが、Datadog のプロファイリングには影響しません。これは、Datadog のシグナルハンドラーが上書きされたときに再インストールされることだけを示しています。
+
+[1]: /ja/profiler/enabling/dotnet/?tab=linux#configuration
+
 {{% /tab %}}
 
 {{% tab "Windows" %}}
+
+デフォルトのプロファイラーログディレクトリは `%ProgramData%\Datadog .NET Tracer\logs\` です。v2.24 以前は、デフォルトのディレクトリは `%ProgramData%\Datadog-APM\logs\DotNet` でした。
 
 1. Agent がインストールされ、起動していること、および Windows サービスパネルに表示されていることを確認します。
 
 2. ローダーログからプロファイラーが読み込まれたことを確認します。
 
-   1. `%ProgramData%\Datadog-APM\logs\DotNet` フォルダにある `dotnet-native-loader-<Application Name>-<pid>` ログファイルを開きます。
+   1. デフォルトのログフォルダから `dotnet-native-loader-<Application Name>-<pid>` のログファイルを開きます。
 
    2. 最後のほうにある `CorProfiler::Initialize: Continuous Profiler initialized successfully.` を探してください。`initialized successfully` メッセージがない場合、アプリケーションの環境変数 `DD_TRACE_DEBUG` を設定して、デバッグログを有効にしてください。
 
    3. アプリケーションを再起動します。
 
-   4. `%ProgramData%\Datadog-APM\logs\DotNet` フォルダにある `dotnet-native-loader-<Application Name>-<pid>` ログファイルを開きます。
+   4. デフォルトのログフォルダから `dotnet-native-loader-<Application Name>-<pid>` のログファイルを開きます。
 
    5. `#Profiler` エントリーを探してください。
 
@@ -312,9 +363,9 @@ Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロフ�
 
    1. ステップ 2.2 でデバッグログを有効にしなかった場合、アプリケーションの `DD_TRACE_DEBUG` 環境変数を `true` に設定し、アプリケーションを再起動します。
 
-   2. `%ProgramData%\Datadog-APM\logs\DotNet` フォルダにある `DD-DotNet-Profiler-Native-<Application Name>-<pid>` ログファイルを開きます。
+   2. デフォルトのログフォルダから、`DD-DotNet-Profiler-Native-<Application Name>-<pid>` のログファイルを開きます。
 
-   3. `libddprof error: Failed to send profile.` エントリーを探してください。このメッセージは、Agent にコンタクトできないことを意味します。
+   3. `libddprof error: Failed to send profile.` エントリーを探します。このメッセージは、Agent にコンタクトできないことを意味します。`DD_TRACE_AGENT_URL` が正しい Agent の URL に設定されていることを確認します。詳細については、[.NET プロファイラーの有効化-構成][1]を参照してください。
 
    4. もし、`Failed to send profile` というメッセージがない場合は、`The profile was sent. Success?` というエントリーを探します。
 
@@ -324,6 +375,8 @@ Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロフ�
       ```
 
    5. API キーが無効な場合、403 などのエラーの可能性がありますので、他の HTTP コードを確認してください。
+
+[1]: /ja/profiler/enabling/dotnet/?tab=linux#configuration
 
 {{% /tab %}}
 
@@ -335,10 +388,48 @@ Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロフ�
 - アプリケーションのタイプ (例: IIS で動作する Web アプリケーション)。
 
 
-## プロファイラを有効にすると CPU 使用率が高くなる
+## プロファイラー使用時のオーバーヘッドを削減する
 
-プロファイラーには固定オーバーヘッドがあります。正確な値は変動する可能性がありますが、この固定コストは、非常に小さなコンテナではプロファイラーの相対的なオーバーヘッドが大きくなる可能性があることを意味します。この状況を避けるため、プロファイラーは 1 コア未満のコンテナでは無効化されます。
-環境変数 `DD_PROFILING_MIN_CORES_THRESHOLD` に 1 より小さい値を設定することで、1 コアというしきい値をオーバーライドできます。 たとえば、`0.5` という値を設定すると、少なくとも 0.5 コアのあるコンテナでプロファイラーが実行されるようになります。
+### プロファイラーをマシン全体で有効にする
+
+プロファイラーには、プロファイルされたアプリケーションごとに固定されたオーバーヘッドがあるため、Datadog では、マシンレベルで、またはすべての IIS アプリケーションプールでプロファイラーを有効にすることを推奨しません。プロファイラーが使用するリソース量を削減するためには、以下の方法があります。
+- CPU コアを増やすなど、割り当てられたリソースを増やす。
+- アプリケーションを直接実行するのではなく、バッチファイルに環境を設定することで、特定のアプリケーションだけをプロファイルする。
+- プロファイルされる IIS プールの数を減らす (IIS 10 以降でのみ可能)。
+- `DD_PROFILING_WALLTIME_ENABLED=0` の設定により、ウォールタイムプロファイリングを無効にする。
+
+### Linux コンテナ
+
+プロファイラーには固定オーバーヘッドがあります。正確な値は変動する可能性がありますが、この固定コストは、非常に小さなコンテナではプロファイラーの相対的なオーバーヘッドが大きくなる可能性があることを意味します。この状況を避けるため、プロファイラーは 1 コア未満のコンテナでは無効化されます。環境変数 `DD_PROFILING_MIN_CORES_THRESHOLD` に 1 より小さい値を設定することで、1 コアというしきい値をオーバーライドできます。 たとえば、`0.5` という値を設定すると、少なくとも 0.5 コアのあるコンテナでプロファイラーが実行されるようになります。
+
+### プロファイラーを無効にする
+
+APM のトレースも CLR プロファイリング API に依存しているため、.NET プロファイルの収集を停止し、.NET トレースの受信を継続したい場合は、以下の環境変数を設定してプロファイリングのみを無効にしてください。
+
+```
+ DD_PROFILING_ENABLED=0 
+ CORECLR_ENABLE_PROFILING=1
+```
+
+## Linux 上のアプリケーションがハングアップしているため、CPU や Wall タイムがない
+
+Linux でアプリケーションがハングアップするなどして無反応になり、CPU や Wall タイムサンプルが利用できなくなった場合は、以下の手順で対応します。
+
+1. `/var/log/datadog/dotnet` フォルダにある `DD-DotNet-Profiler-Native-<Application Name>-<pid>` のログファイルを開きます。
+
+2. `StackSamplerLoopManager::WatcherLoopIteration - Deadlock intervention still in progress for thread ...` を検索してください。このメッセージがない場合、残りは適用されません。
+
+3. このメッセージが見つかった場合、スタックウォーキングメカニズムがデッドロックに陥っている可能性があることを意味します。この問題を調査するには、アプリケーション内のすべてのスレッドのコールスタックをダンプしてください。例えば、gdb デバッガーでこれを行うには
+
+   1. gdb をインストールします。
+
+   2. 次のコマンドを実行します。
+      ```
+      gdb -p <process id> -batch -ex "thread apply all bt full" -ex "detach" -ex "quit"
+      ```
+
+   3. 得られた出力を [Datadog サポート][2]に送信します。
+
 
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/

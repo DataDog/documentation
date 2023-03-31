@@ -44,7 +44,7 @@ To create a service account, perform the following steps:
 
 1. Click **New Service Account**. A dialog box appears.
 2. Enter a name and email address for your service account.
-3. Use the **Assign Roles** drop-down menu to choose one or more roles for your service account.
+3. Use the **Assign Roles** dropdown menu to choose one or more roles for your service account.
 4. To save, click **Create Service Account**.
 
 Unlike the email addresses for Datadog users, service account email addresses do not need to be unique across an organization.

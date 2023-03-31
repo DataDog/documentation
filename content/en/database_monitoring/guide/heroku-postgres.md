@@ -92,7 +92,7 @@ instances:
 
 Using the environment variable that was created when the `datadog` credential was attached to the application (in the example below, this is assumed to be `HEROKU_POSTGRESQL_PINK_URL`) add the following to the [prerun script][5] to replace those values before starting the Datadog Agent:
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Update the Postgres configuration from above using the Heroku application environment variable

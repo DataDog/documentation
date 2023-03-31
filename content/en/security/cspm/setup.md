@@ -14,6 +14,9 @@ further_reading:
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
+- link: "/getting_started/cloud_security_management"
+  tag: "Documentation"
+  text: "Getting Started with Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}
@@ -39,11 +42,11 @@ If you haven't already, set up the [Amazon Web Services integration][1]. For CSP
 
 Use one of the following methods to enable CSPM for your AWS accounts:
 
-#### Security Setup & Configuration
+#### Security Setup
 
-1. Navigate to **Security** > **Setup & Configuration**.
+1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
-3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[AWS][4]** tile.
+3. On the **Setup** > **Cloud Providers** tab, click the **[AWS][4]** tile.
 4. To enable CSPM for an AWS account, turn on the **Collect Resources** toggle.
 
 #### AWS integration tile
@@ -69,11 +72,11 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 
 Use one of the following methods to enable CSPM for your Azure subscriptions:
 
-#### Security Setup & Configuration
+#### Security Setup
 
-1. Navigate to **Security** > **Setup & Configuration**.
+1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][2] to activate CSPM for your account.
-3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[Azure][3]** tile.
+3. On the **Setup** > **Cloud Providers** tab, click the **[Azure][3]** tile.
 4. Enable CSPM for your Azure subscriptions by turning on the **CSPM Enabled** toggle.
 
 #### Azure integration tile
@@ -98,11 +101,11 @@ If you haven't already, set up the [Google Cloud Platform integration][1] and ma
 
 Use one of the following methods to enable CSPM for your GCP projects:
 
-### Security Setup & Configuration
+### Security Setup
 
-1. Navigate to **Security** > **Setup & Configuration**.
+1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
-3. On the **Setup & Configuration** > **Cloud Providers** tab, click the **[GCP][4]** tile.
+3. On the **Setup** > **Cloud Providers** tab, click the **[GCP][4]** tile.
 4. Enable CSPM for your GCP projects by turning on the **CSPM Enabled** toggle.
 
 **Note**: If you do not see any data on the CSPM overview page, you may not have set up your GCP integration correctly. See the [GCP metric collection][2] instructions for more information.
@@ -124,9 +127,9 @@ Use one of the following methods to enable CSPM for your GCP projects:
 
 ### Enable CSPM for Docker
 
-1. Navigate to **Security** > **Setup & Configuration**.
+1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][1] to activate CSPM for your account.
-3. On the **Setup & Configuration** > **Host and containers** tab, click the **[Docker][2]** tile.
+3. On the **Setup** > **Host and containers** tab, click the **[Docker][2]** tile.
 4. Click **Select API key** to choose the API key you want to use with CSPM.
 5. Copy the automatically generated command and run it in your Docker environment to enable CSPM.
 
@@ -140,7 +143,7 @@ Use one of the following methods to enable CSPM for your GCP projects:
 ### Enable CSPM for Kubernetes
 
 1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
-2. Navigate to **Security** > **Setup & Configuration**.
+2. Navigate to **Security** > **Setup**.
 3. Follow the [in-app instructions][2] to activate CSPM for your account.
 4. Add the following to the `datadog` section of the `values.yaml` file:
     ```yaml
@@ -178,7 +181,7 @@ CSPM comes with a set of [out-of-the-box detection rules][2] that evaluate the c
 
 To filter the default detection rules by cloud provider:
 
-1. Navigate to **Security** > **Detection Rules**.
+1. Navigate to **Security** > **Posture Management** > **Compliance Rules**.
 2. Choose one of the following values from the **Tag** facet.
     - **AWS**: cloud_provider:aws
     - **Azure**: cloud_provider:azure
@@ -194,9 +197,9 @@ Once you've disabled CSPM, your previous findings and the homepage are still ava
 
 To disable CSPM for your cloud providers:
 
-- **AWS**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts. 
-- **Azure**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
-- **GCP**: On the **Setup & Configuration** > **Cloud Providers** tab, click the **GCP** tile, and turn off the **CSPM Enabled** toggle for your GCP projects.
+- **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts. 
+- **Azure**: On the **Setup** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.
+- **GCP**: On the **Setup** > **Cloud Providers** tab, click the **GCP** tile, and turn off the **CSPM Enabled** toggle for your GCP projects.
 - **Docker**: Set `DD_COMPLIANCE_CONFIG_ENABLED` to `false` in your Docker configuration.
 - **Kubernetes**: In the `datadog` section of the `values.yaml` file, set `compliance` > `enabled` to `false`.
 

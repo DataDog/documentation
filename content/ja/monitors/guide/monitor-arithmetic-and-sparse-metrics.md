@@ -1,6 +1,4 @@
 ---
-aliases:
-- /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics
 kind: ガイド
 title: 演算メトリクスと疎なメトリクスの監視
 ---

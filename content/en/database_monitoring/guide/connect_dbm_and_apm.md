@@ -12,7 +12,7 @@ private: true
 The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
 </div>
 
-This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2].
+This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
 
 ## Before you begin
 
@@ -28,28 +28,41 @@ Data privacy
 
 **Supported tracers**
 
-| Language | Library or Framework           | Postgres    | MySQL       |
-| :----    | :----                          | :----:      |  :----:     |
-| **Go:** [dd-trace-go][3] >= 1.44.0 |      |             |             |
-|          | [database/sql][4]              | {{< X >}}   | {{< X >}}   |
-|          | [sqlx][5]                      | {{< X >}}   | {{< X >}}   |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0 |     |             |             |
-|          | [pg][8]                        | {{< X >}}   |             |
-|          | [mysql2][7]                    |             | {{< X >}}   |
-| **Node:** [dd-trace-js][9] >= 3.13.0 |    |             |             |
-|          | [postgres][10]                 | {{< X >}}   |             |
-|          | [mysql][13]                    |             | {{< X >}}   |
-|          | [mysql2][14]                   |             | {{< X >}}   |
-| **Python:** [dd-trace-py][11] >= 1.7.0 |  |             |             |
-|          | [psycopg2][12]                 | {{< X >}}   |             |
-| **Java**     |                            |             |             |
-|          | jdbc                           | Coming soon | Coming soon |
-| **.NET**     |                            |             |             |
-|          |                                | Coming soon | Coming soon |
+| Language                                 | Library or Framework | Postgres  |   MySQL   |
+|:-----------------------------------------|:---------------------|:---------:|:---------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |
+|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} |
+|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |
+|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |
+|                                          | [pg][8]              | {{< X >}} |           |
+|                                          | [mysql2][7]          |           | {{< X >}} |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |
+|                                          | [psycopg2][12]       | {{< X >}} |           |
+| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||                      |           |
+|                                          | [Npgsql][16]         | {{< X >}} |           |
+|                                          | [MySql.Data][17]     |           | {{< X >}} |
+|                                          | [MySqlConnector][18] |           | {{< X >}} |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |
+|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
+|                                          | [MySQLi][21]         |           | {{< X >}} |
+| **Node:** [dd-trace-js][9] >= 3.13.0     |                      |           |           |
+|                                          | [postgres][10]       |   Alpha   |           |
+|                                          | [mysql][13]          |           |   Alpha   |
+|                                          | [mysql2][14]         |           |   Alpha   |
+
 
 
 
 ## Setup
+For the best user experience, ensure the following environment variables are set in your application:
+
+```
+DD_SERVICE=(application name)
+DD_ENV=(application environment)
+DD_VERSION=(application version)
+```
 
 {{< tabs >}}
 {{% tab "Go" %}}
@@ -119,6 +132,47 @@ func main() {
 
 {{% /tab %}}
 
+{{% tab "Java" %}}
+
+Follow the [Java tracing][1] instrumentation instructions and install the `1.11.0` version, or greater, of the Agent.
+
+You must also enable the `jdbc-datastore` [instrumentation][2].
+
+Enable the database monitoring propagation feature using **one** of the following methods:
+
+- Set the system property `dd.dbm.propagation.mode=full`
+- Set the environment variable `DD_DBM_PROPAGATION_MODE=full`
+
+Full example:
+```
+# Start the Java Agent with the required system properties
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.dbm.propagation.mode=full -Ddd.integration.jdbc-datasource.enabled=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
+```
+
+Test the feature in your application:
+```java
+public class Application {
+    public static void main(String[] args) {
+        try {
+            Connection connection = DriverManager
+                    .getConnection("jdbc:postgresql://127.0.0.1/foobar?preferQueryMode=simple", "user", "password");
+            Statement stmt = connection.createStatement();
+            String sql = "SELECT * FROM foo";
+            stmt.execute(sql);
+            stmt.close();
+            connection.close();
+        } catch (SQLException exception) {
+            //  exception logic
+        }
+    }
+}
+```
+
+[1]: /tracing/trace_collection/dd_libraries/java/
+[2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
+
+{{% /tab %}}
+
 {{% tab "Ruby" %}}
 
 In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greater:
@@ -180,19 +234,13 @@ pip install psycopg2
 ```
 
 Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_TRACE_SQL_COMMENT_INJECTION_MODE=full`
-
-For the best user experience ensure the following environment variables are set in your application:
-   - `DD_SERVICE=(application name)`
-   - `DD_ENV=(application environment)`
-   - `DD_VERSION=(application version)`
+   - `DD_DBM_PROPAGATION_MODE=full`
 
 Full example:
 ```python
 
 import psycopg2
 
-#TODO: update postgres configurations
 POSTGRES_CONFIG = {
     "host": "127.0.0.1",
     "port": 5432,
@@ -215,6 +263,10 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
+
+<div class="alert alert-warning">
+Node is in alpha release and may be unstable.
+</div>
 
 Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
 
@@ -264,6 +316,41 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 {{% /tab %}}
 
+{{% tab ".NET" %}}
+
+<div class="alert alert-warning">
+This features requires automatic instrumentation to be enabled for your .NET service.
+</div>
+
+Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library (e.g. `Npgsql`).
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+
+<div class="alert alert-warning">
+This features requires the tracer extension to be enabled for your PHP service.
+</div>
+
+Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library. For example, `PDO`.
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Explore the APM Connection
@@ -278,13 +365,13 @@ Break down active connections for a given host by the upstream APM services maki
 
 {{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Preview the sampled APM trace that the query sample being inspected was generated from.">}}
 
-When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.  
+When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.
 
-### Identify the downstream database hosts of APM services 
+### Identify the downstream database hosts of APM services
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
-On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.  
+On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
 
 [1]: /database_monitoring/#getting-started
@@ -301,3 +388,12 @@ On the APM Service Page, view the direct downstream database dependencies of the
 [12]: https://www.psycopg.org/docs/index.html
 [13]: https://github.com/mysqljs/mysql
 [14]: https://github.com/sidorares/node-mysql2
+[15]: https://github.com/DataDog/dd-trace-dotnet
+[16]: https://www.nuget.org/packages/npgsql
+[17]: https://www.nuget.org/packages/MySql.Data
+[18]: https://www.nuget.org/packages/MySqlConnector
+[19]: https://github.com/DataDog/dd-trace-php
+[20]: https://www.php.net/manual/en/book.pdo.php
+[21]: https://www.php.net/manual/en/book.mysqli.php
+[22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
+[23]: https://github.com/DataDog/dd-trace-java

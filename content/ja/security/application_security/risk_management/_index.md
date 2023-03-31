@@ -3,9 +3,9 @@ further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Datadog におけるアプリケーションセキュリティの仕組み
-- link: /security/application_security/getting_started/
+- link: /security/application_security/enabling/
   tag: ドキュメント
-  text: サービスでアプリケーションセキュリティを有効にすることから始めましょう
+  text: サービスでアプリケーションセキュリティを有効にする
 kind: documentation
 title: Application Risk Management
 ---

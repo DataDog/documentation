@@ -54,7 +54,7 @@ The Datadog extension for Azure App Service provides additional monitoring capab
     - Azure App Service Web Apps
     - Function Apps hosted on Basic, Standard, and Premium plans.
 
-    <div class="alert alert-warning">Function Apps on consumption plans and out-of-process (isolated) functions are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
+    <div class="alert alert-warning">Function Apps on consumption plans are not supported. Interested in support for other App Service resource types or runtimes? <a href="https://forms.gle/n4nQcxEyLqDBMCDA7">Sign up</a> to be notified when a beta becomes available.</div>
 
 3. The Datadog .NET APM extension supports the following .NET runtimes in both x64 and x86 architectures when running on Windows OS (AAS does not yet support extensions on Linux). For more details about automatically instrumented libraries, see the [Tracer documentation][2].
 
@@ -224,7 +224,7 @@ To send metrics use this code:
 ```java
 // Configure your DogStatsd client and configure any tags
 StatsDClient client = new NonBlockingStatsDClientBuilder()
-                            .constantTags(“app:sample.service”)
+                            .constantTags("app:sample.service")
                             .build();
 // Send a metric
 client.Increment("sample.startup");

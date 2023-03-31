@@ -196,25 +196,28 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-Use the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
+The PHP tracer provides the `\DDTrace\set_user()` function, which allows you to monitor and block authenticated requests.
 
-User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+`\DDTrace\set_user()` adds the relevant user tags and metadata to the trace and automatically performs user blocking.
 
-The example below shows how to obtain the root span and add the relevant user monitoring tags:
+The following example shows how to set user monitoring tags and enable user blocking:
 
 ```php
 <?php
-$rootSpan = \DDTrace\root_span();
+// Blocking is performed internally through the set_user call.
+\DDTrace\set_user(
+    // A unique identifier of the user is required.
+    '123456789',
 
- // Required unique identifier of the user.
-$rootSpan->meta['usr.id'] = ‘123456789’;
-
-// All other fields are optional.
-$rootSpan->meta['usr.name'] = ‘Jean Example’;
-$rootSpan->meta['usr.email'] = ‘jean.example@example.com’;
-$rootSpan->meta['usr.session_id'] = ‘987654321’;
-$rootSpan->meta['usr.role'] = ‘admin’;
-$rootSpan->meta['usr.scope'] = ‘read:message, write:files’;
+    // All other fields are optional.
+    [
+        'name' =>  'Jean Example',
+        'email' => 'jean.example@example.com',
+        'session_id' => '987654321',
+        'role' => 'admin',
+        'scope' => 'read:message, write:files',
+    ]
+);
 ?>
 ```
 
@@ -501,6 +504,8 @@ Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user 
 
 The following examples show how to track login events or custom events (using signup as an example).
 
+Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
+
 {{< tabs >}}
 {{% tab "Login success" %}}
 ```ruby
@@ -562,7 +567,7 @@ The following examples show how to track login events or custom events (using si
 {{% tab "Custom business logic" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event(‘users.signup’, [‘id’ => $id, 'email' => $email]);
+\datadog\appsec\track_custom_event('users.signup', ['id' => $id, 'email' => $email]);
 ?>
 ```
 {{% /tab %}}
