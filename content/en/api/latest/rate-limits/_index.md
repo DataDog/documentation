@@ -1,6 +1,6 @@
 ---
 title: Rate Limits
-type: api
+type: documentation
 ---
 
 {{< h2 >}}Rate Limits{{< /h2 >}}
