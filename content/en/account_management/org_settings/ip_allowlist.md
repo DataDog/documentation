@@ -9,15 +9,14 @@ The IP allowlist feature is available for enterprise-level customers only. Reque
 
 ## Overview
 
-The IP allowlist grants control over which networks can be used to access your data in Datadog. By limiting allowed networks, you can protect your resources from data exfiltration and insider threats.
+The IP allowlist controls which networks can be used to access your data in Datadog. By limiting allowed networks, you can protect your resources from data exfiltration and insider threats.
 
 When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI. 
 
 ### Blocked and allowed resources
 
-The IP allowlist blocks access to specific resources if the user’s IP is not contained in the allowlist. 
+If a user's IP is not contained in the IP allowlist, they are effectively blocked from accessing and using:
 
-The blocked resources include:
 - Datadog’s web UI
 - Datadog’s public [API][1], including both documented and unpublished endpoints
 - Datadog’s mobile apps (iOS, Android)
@@ -30,23 +29,23 @@ The IP allowlist feature does not block access to the following:
 
 ### Functionality
 
-The IP allowlist supports the following capabilities through both the API and the UI:
-- Checking the status of the IP allowlist. Whether the IP allowlist is on or off determines whether your organization is restricting requests by IP address allowlist membership.
-- Toggling the IP allowlist on and off.
-- Showing the IP addresses (as CIDR ranges) that are covered by your IP allowlist.
-- Adding IP addresses (IPv4 or IPv6) or CIDR ranges to the IP allowlist with an optional note.
-- Editing the note for an IP address already in the IP allowlist.
-- Deleting a single entry from the IP allowlist.
-- Wholly replacing the IP allowlist with new entries (only available through the API).
+With the IP allowlist API or UI, you can:
+- Check the status of the IP allowlist. Whether the IP allowlist is on or off determines whether your organization is restricting requests by IP address allowlist membership.
+- Turn the IP allowlist on and off.
+- Show the IP addresses (as CIDR ranges) that are covered by your IP allowlist.
+- Add IP addresses (IPv4 or IPv6) or CIDR ranges to the IP allowlist with an optional note.
+- Edit the note for an IP address already in the IP allowlist.
+- Delete a single entry from the IP allowlist.
+- Replace the whole IP allowlist with new entries (only available through the API).
 
-## Navigation
+## Managing the IP allowlist in the UI
 
 To find the [IP allowlist UI][4]:
 
 1. Navigate to **Organization Settings** from your account menu.
 1. Under **Access**, select **IP Allowlist**.
 
-In a table in the center of the page, the IP allowlist UI lists the CIDR ranges contained in the IP allowlist.
+The IP allowlist table lists the CIDR ranges contained in the IP allowlist.
 
 ### Enable and disable the IP allowlist
 
@@ -54,28 +53,26 @@ A banner at the top of the page shows the enabled or disabled status of the IP a
 
 To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
-### Add IP address or CIDR range
+### Add IP addresses or CIDR ranges
 
-1. Click the **Add IP** button at the top right of the page. A dialog box appears.
+1. Click the **Add IP** button at the top right of the page. 
 1. Enter a valid IP address or CIDR range.
-1. Optionally, add a note.
+1. Optionally, add a note, for example, to remind yourself why you are allowing access to or blocking certain addresses.
 1. Click **Confirm**.
 
-### Edit IP address or CIDR range
+### Edit IP addresses or CIDR ranges
 
-1. In the IP allowlist table, hover over the row you wish to edit. An action tray appears on the right.
-1. Click the pencil (**Edit**) icon. A dialog box appears.
+1. In the IP allowlist table, hover over the row you wish to edit. 
+1. Click the pencil (**Edit**) icon. 
 1. Change the descriptive **Note** text.
 1. Click **Confirm**.
 
-### Delete IP address or CIDR range
+### Delete IP addresses or CIDR ranges
 
-1. In the IP allowlist table, hover over the row you wish to delete. An action tray appears on the right.
-1. Click the trash can (**Delete**) icon. The action tray updates to ask **Are you sure?**
-1. Click **Delete**. The page refreshes.
-1. An alert pops up informing you that the CIDR range was successfully deleted.
+1. In the IP allowlist table, hover over the row you wish to delete. 
+1. Click the trash can (**Delete**) icon and confirm you want to delete it. 
 
-## API
+## Managing the IP allowlist with the API
 
 See the IP allowlist [public API][2].
 
