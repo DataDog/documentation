@@ -93,12 +93,15 @@ To account for modern web applications, loading time watches for network request
 
 ### How page activity is calculated
 
-The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page activity tracker is calculated through the following process:
+The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
 
-- Check ongoing `xhr` or `fetch` requests
-- Check if resources (js, css, and such) ended in a 100ms sliding window
+- `xhr` or `fetch` requests are in progress
+- Performance resource timing entries are emitted by the browser (loading end of js, css, and such)
+- DOM mutations are emitted by the browser
 
- The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
+The page activity is considered ended when the page don't have activity for 100ms.
+
+**Note**: only activity happening after the SDK init is taken into account.
 
 **Caveats:**
 
