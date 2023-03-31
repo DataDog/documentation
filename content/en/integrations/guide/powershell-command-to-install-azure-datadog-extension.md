@@ -7,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/migrate-to-azure-with-the-microsoft-cloud-adoption-framework/"
   tag: "Blog"
   text: "Successfully migrate to Azure with the Microsoft Cloud Adoption Framework and Datadog"
+- link: "https://www.datadoghq.com/blog/azure-arc-integration/"
+  tag: "Blog"
+  text: "Monitor your Azure Arc hybrid infrastructure with Datadog"
 ---
 
 ## Install on Azure
