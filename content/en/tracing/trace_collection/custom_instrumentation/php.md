@@ -413,30 +413,9 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Distributed tracing
+## Context propagation for distributed traces
 
-When a new PHP script is launched, the tracer automatically checks for the presence of datadog headers for distributed tracing:
-- `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
-- `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
-- `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
-- `x-datadog-tags` (environment variable: `HTTP_X_DATADOG_TAGS`)
-
-To manually set this information in a CLI script on new traces or an existing trace a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
-
-```php
-<?php
-
-function processIncomingQueueMessage($message) {
-}
-
-\DDTrace\trace_function(
-    'processIncomingQueueMessage',
-    function(\DDTrace\SpanData $span, $args) {
-        $message = $args[0];
-        \DDTrace\set_distributed_tracing_context($message->trace_id, $message->parent_id);
-    }
-);
-```
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.
 
 ## Resource filtering
 
@@ -745,3 +724,4 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [8]: /tracing/trace_collection/open_standards/php#opentracing
+[9]: /tracing/trace_collection/trace_context_propagation/php

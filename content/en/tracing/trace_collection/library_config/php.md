@@ -459,26 +459,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The PHP Tracer supports the following styles:
-
-- Datadog: `Datadog`
-- W3C: `tracecontext`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
-- B3 Single Header: `B3 single header`
-
-You can use the following environment variables to configure injection and extraction styles. For instance:
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
-
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `tracecontext` and `Datadog` injection styles are enabled.
-
-If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then B3.
-
+Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context. 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -493,4 +474,5 @@ If multiple extraction styles are enabled, the extraction attempt is completed w
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[11]: /tracing/trace_collection/trace_context_propagation/php/
 [13]: /agent/guide/network/#configure-ports

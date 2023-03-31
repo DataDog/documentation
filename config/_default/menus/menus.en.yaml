@@ -1528,21 +1528,66 @@ main:
     parent: tracing_open_standards
     identifier: tracing_open_standards_dotnet
     weight: 108
+  - name: Propagating Trace Context
+    url: tracing/trace_collection/trace_context_propagation/
+    parent: tracing_trace_collection
+    identifier: tracing_context
+    weight: 108
+  - name: Java
+    url: tracing/trace_collection/trace_context_propagation/java/
+    parent: tracing_context
+    identifier: tracing_context_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/trace_context_propagation/python/
+    parent: tracing_context
+    identifier: tracing_context_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/trace_context_propagation/ruby/
+    parent: tracing_context
+    identifier: tracing_context_ruby
+    weight: 103
+  - name: Go
+    url: tracing/trace_collection/trace_context_propagation/go/
+    parent: tracing_context
+    identifier: tracing_context_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/trace_collection/trace_context_propagation/nodejs/
+    parent: tracing_context
+    identifier: tracing_context_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/trace_collection/trace_context_propagation/php/
+    parent: tracing_context
+    identifier: tracing_context_php
+    weight: 106
+  - name: C++
+    url: tracing/trace_collection/trace_context_propagation/cpp/
+    parent: tracing_context
+    identifier: tracing_context_cpp
+    weight: 107
+  - name: .NET
+    url: tracing/trace_collection/trace_context_propagation/dotnet/
+    parent: tracing_context
+    identifier: tracing_context_dotnet
+    weight: 107
   - name: Tracing Serverless Applications
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
-    weight: 107
+    weight: 109
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 108
+    weight: 110
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 109
+    weight: 111
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
