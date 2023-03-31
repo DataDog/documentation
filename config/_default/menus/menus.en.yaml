@@ -379,11 +379,16 @@ main:
     identifier: agent_guides
     parent: agent
     weight: 12
+  - name: Aggregating Agents
+    url: getting_started/observability_pipelines/
+    parent: agent
+    identifier: opw_aggregation
+    weight: 13
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 13
+    weight: 14
   - name: Containers
     url: containers/
     identifier: containers
