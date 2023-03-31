@@ -14,7 +14,7 @@ further_reading:
 {{% otel-custom-instrumentation %}}
 
 
-## Requirements
+## Requirements and limitations
 
 - Datadog Ruby tracing library `dd-trace-rb` version 1.9.0 or greater
 - Gem version support 1.1.0 or greater
@@ -30,9 +30,9 @@ The following OTel features are not implemented by the Datadog Trace Provider:
 | Trace/span [ID generators][4]         | Special     | ID generation is performed by `ddtrace`.           |
 
 
-## Steps
+## Configuring OTel to use the Datadog trace provider
 
-1. Add your desired manual OTel instrumentation to your Ruby code following the [OTel Ruby Manual Instrumentation documentation][4].
+1. Add your desired manual OTel instrumentation to your Ruby code following the [OTel Ruby Manual Instrumentation documentation][5].
 1. Add the `ddtrace` gem to your Gemfile:
 
     ```ruby
