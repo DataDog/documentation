@@ -1,8 +1,6 @@
 ---
 aliases:
 - /ja/real_user_monitoring/setup
-dependencies:
-- https://github.com/DataDog/browser-sdk/blob/main/packages/rum/README.md
 further_reading:
 - link: /real_user_monitoring/explorer/
   tag: ドキュメント
@@ -13,6 +11,7 @@ further_reading:
 kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---
+
 ## 概要
 
 Datadog Real User Monitoring (RUM) を使用すると、アプリケーションの個々のユーザーのパフォーマンスとユーザージャーニーをリアルタイムで視覚化して分析することができます。イベントを収集するには、RUM ブラウザ SDK をブラウザアプリケーションに追加し、初期化パラメーターを使用して収集するデータの種類を構成します。
@@ -24,12 +23,12 @@ RUM ブラウザ SDK は、IE11 を含むすべてのモダンなデスクトッ
 RUM ブラウザモニタリングを設定するには、RUM アプリケーションを作成します。
 
 1. Datadog で、[**RUM Applications** ページ][1]に移動し、**New Application** ボタンをクリックします。
-   - アプリケーションの名前を入力し、**Generate Client Token** をクリックします。これにより、アプリケーションの `clientToken` と `applicationId` が生成されます。
-   - RUM ブラウザ SDK のインストールタイプを選択します。[npm](#npm)、またはホストバージョン ([CDN 非同期](#cdn-async)または [CDN 同期](#cdn-sync)) のいずれかを選択します。
-   - [RUM とセッションリプレイ][19]の統合サービスタグ付けを使用するために、アプリケーションの環境名とサービス名を定義します。初期化スニペットで、デプロイされたアプリケーションのバージョン番号を設定します。詳しくは、[タグ付け](#tagging)を参照してください。
-   - 収集した総ユーザーセッションのサンプリングレートを設定し、スライダーで収集した総 [Browser RUM & セッションリプレイ][11]セッションのパーセンテージを設定します。Browser RUM & セッションリプレイセッションには、リソースやロングタスク、リプレイ記録が含まれます。ユーザーセッションの総量から収集される Browser RUM & セッションリプレイセッションの割合の構成については、[ブラウザおよび Browser RUM & セッションリプレイサンプリングのセットアップを構成する][21]を参照してください。
-   - **Session Replay Enabled** をクリックすると、[セッションリプレイ][17]でリプレイ録画にアクセスできます。
-   - ドロップダウンメニューから、セッションリプレイの[プライバシー設定][18]を選択します。
+  - アプリケーションの名前を入力し、**Generate Client Token** をクリックします。これにより、アプリケーションの `clientToken` と `applicationId` が生成されます。
+  - RUM ブラウザ SDK のインストールタイプを選択します。[npm](#npm)、またはホストバージョン ([CDN 非同期](#cdn-async)または [CDN 同期](#cdn-sync)) のいずれかを選択します。
+  - [RUM とセッションリプレイ][19]の統合サービスタグ付けを使用するために、アプリケーションの環境名とサービス名を定義します。初期化スニペットで、デプロイされたアプリケーションのバージョン番号を設定します。詳しくは、[タグ付け](#tagging)を参照してください。
+  - 収集した総ユーザーセッションのサンプリングレートを設定し、スライダーで収集した総 [Browser RUM & セッションリプレイ][11]セッションのパーセンテージを設定します。Browser RUM & セッションリプレイセッションには、リソースやロングタスク、リプレイ記録が含まれます。ユーザーセッションの総量から収集される Browser RUM & セッションリプレイセッションの割合の構成については、[ブラウザおよび Browser RUM & セッションリプレイサンプリングのセットアップを構成する][21]を参照してください。
+  - **Session Replay Enabled** をクリックすると、[セッションリプレイ][17]でリプレイ録画にアクセスできます。
+  - ドロップダウンメニューから、セッションリプレイの[プライバシー設定][18]を選択します。
 2. 変更をアプリケーションにデプロイします。実行が開始されると、ユーザーのブラウザから Datadog によってイベントが収集されます。
 3. [収集したデータ][2]を[ダッシュボード][3]で視覚化したり、[RUM エクスプローラー][16]で検索クエリを作成したりします。
 
@@ -644,26 +643,24 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-<!-- 注: URL はすべて絶対値でなければなりません -->
-
 [1]: https://app.datadoghq.com/rum/list
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/data_collected/
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/dashboards/
+[2]: /ja/real_user_monitoring/data_collected/
+[3]: /ja/real_user_monitoring/dashboards/
 [4]: https://www.npmjs.com/package/@datadog/browser-rum
-[5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions
-[7]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/proxy-rum-data/
+[5]: /ja/account_management/api-app-keys/#client-tokens
+[6]: /ja/real_user_monitoring/browser/tracking_user_actions
+[7]: /ja/real_user_monitoring/guide/proxy-rum-data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[9]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[10]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[9]: /ja/real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
+[10]: /ja/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-[12]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
-[13]: https://docs.datadoghq.com/ja/real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
-[14]: https://docs.datadoghq.com/ja/getting_started/site/
-[15]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags
-[16]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[17]: https://docs.datadoghq.com/ja/real_user_monitoring/session_replay/
-[18]: https://docs.datadoghq.com/ja/real_user_monitoring/session_replay/privacy_options
-[19]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags
-[20]: https://docs.datadoghq.com/ja/real_user_monitoring/frustration_signals/
-[21]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/sampling-browser-plans/
+[12]: /ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[13]: /ja/real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
+[14]: /ja/getting_started/site/
+[15]: /ja/getting_started/tagging/#defining-tags
+[16]: /ja/real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[17]: /ja/real_user_monitoring/session_replay/
+[18]: /ja/real_user_monitoring/session_replay/privacy_options
+[19]: /ja/getting_started/tagging/using_tags
+[20]: /ja/real_user_monitoring/frustration_signals/
+[21]: /ja/real_user_monitoring/guide/sampling-browser-plans/

@@ -217,7 +217,7 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 
 {{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
 
-**Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][12] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][13]に応じて収集された他の種類のメトリクス用です。
+**Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][7] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][8]に応じて収集された他の種類のメトリクス用です。
 
 ## その他の参考資料
 
@@ -229,5 +229,5 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
-[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
