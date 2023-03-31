@@ -99,9 +99,11 @@ Here is a sample query that displays all Kubernetes cluster cost, broken down by
 
 ## Tags
 
+Datadog applies additional tags to cost metrics where container costs are allocated.
+
 ### Kubernetes
 
-Datadog adds the following out of the box tags to all Kubernetes nodes and pods where the container costs are allocated:
+In addition to Kubernetes pod and Kubernetes node tags, the following out of the box tags are applied to cost metrics:
 
 | Out of the box tag  |  Description |
 | ---                 | ------------ | 
@@ -111,7 +113,7 @@ Datadog adds the following out of the box tags to all Kubernetes nodes and pods 
 
 ### ECS
 
-Datadog adds the following out of the box tags to all ECS tasks where the container costs are allocated. **Note**: tags are not applied to all ECS containers.
+In addition to ECS task tags, the following out of the box tags are applied to cost metrics. **Note**: most tags from ECS container (excluding `container_name`) are applied.
 
 | Out of the box tag      |  Description |
 | ---                     | ------------ | 
