@@ -20,16 +20,15 @@ further_reading:
 
 The Datadog extension for Visual Studio Code helps you improve your code reliability by allowing you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in the IDE. The extension ensures that any potential issue resulting from code changes is identified and addressed before the code is deployed into production and impacts your end users.
 
-// big image here
+{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="The Datadog Extension in Visual Studio Code" style="width:100%;" >}}
 
-In addition to running Synthetic tests on your local environments, you can use the Datadog extension to:
+You can use the Datadog extension to:
 
+- Run Synthetic tests on your local environments.
 - Set custom parameters without altering the original test definition.
 - See test results locally in Visual Studio Code and in Datadog to access additional information.
 - Test only what matters by executing relevant tests at the same time.
 - Create a list of most frequently used Synthetic tests by adding them to **Favorites**. 
-
-// image of settings page
 
 ## Requirements
 
@@ -38,16 +37,14 @@ In addition to running Synthetic tests on your local environments, you can use t
 
 ## Setup
 
-You can install the extension from the [VSCode Extensions Marketplace][6].
-
-// Magic VSCode download button
+You can install the [Datadog extension][6] from the [Visual Studio Code Marketplace][10].
 
 ## Run Synthetic tests locally
 
 1. After installing the Datadog extension, log in to Datadog.
 2. Select a Synthetic test to execute. You can search for specific tests by clicking the **Search** icon.
 3. To run a test in a local environment, update a Synthetic test's configuration by changing the test's start URL to `localhost`.
-4. Execute the test.
+4. Run a test.
 
 // image of test configuration panel with start URL modified to localhost
 
@@ -59,7 +56,7 @@ If you are using the [custom role feature][8], add your user to any custom role 
 
 ## Feedback
 
-To share your feedback, email [team-ide-integrations@datadoghq.com][9].
+To share your feedback, email [team-ide-integration@datadoghq.com][9].
 
 ## Further Reading
 
@@ -70,7 +67,8 @@ To share your feedback, email [team-ide-integrations@datadoghq.com][9].
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /getting_started/synthetics/api_test
 [5]: /getting_started/synthetics/browser_test
-[6]: TBD
+[6]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode
 [7]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [8]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[9]: mailto:team-ide-integrations@datadoghq.com
+[9]: mailto:team-ide-integration@datadoghq.com
+[10]: https://marketplace.visualstudio.com/vscode
