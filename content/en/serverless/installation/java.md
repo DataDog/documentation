@@ -124,8 +124,12 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
+The Datadog CDK Construct only supports instrumenting Java Lambda functions for AWS CDK apps written in Node.js and Python.
+
+{{% tab "Node.js AWS CDK App" %}}
 1. Install the Datadog CDK constructs library
 
+    
     ```sh
     # For AWS CDK v1
     npm install datadog-cdk-constructs --save-dev
@@ -155,6 +159,47 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+
+    More information and additional parameters can be found on the [Datadog CDK documentation][1].
+
+[1]: https://github.com/DataDog/datadog-cdk-constructs
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{% tab "Python AWS CDK App" %}}
+
+The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+
+1. Install the Datadog CDK constructs library
+
+    ```sh
+    # For AWS CDK v1
+    pip install datadog-cdk-constructs
+
+    # For AWS CDK v2
+    pip install datadog-cdk-constructs-v2
+    ```
+
+2. Instrument your Lambda functions
+
+    ```python
+    # For AWS CDK v1
+    from datadog_cdk_constructs import Datadog
+
+    # For AWS CDK v2
+    from datadog_cdk_constructs_v2 import Datadog
+
+    datadog = Datadog(self, "Datadog",
+        java_layer_version={{< latest-lambda-layer-version layer="dd-trace-java" >}},
+        extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
+        site="<DATADOG_SITE>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
+      )
+    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
+    ```
+
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
