@@ -17,9 +17,8 @@ author:
   vendor_id: insightfinder
 categories:
 - アラート設定
-- モニタリング
-- notification
 - マーケットプレイス
+- notification
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -47,19 +46,18 @@ public_title: InsightFinder
 short_description: インシデント調査・予防のための人間中心型 AI プラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Alerting
-  - Category::Monitoring
-  - Category::Notification
   - Category::Marketplace
+  - Category::Notification
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: インシデント調査・予防のための人間中心型 AI プラットフォーム
   media:
@@ -85,8 +83,16 @@ tile:
 
 ## サポート
 
-[Datadog サポート][4]にお問い合わせいただくか、[InsightFinder サポート][5]にメールしてください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから InsightFinder にお問い合わせください。
 
+- メール: [support@insightfinder.com][5]
+- [Datadog のサポートチーム][4]までお問い合わせください。
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の InsightFinder の製品を使って、インシデントを迅速に特定し、解決する][7]
 
 [1]: https://insightfinder.com/
 [2]: https://app.datadoghq.com/integrations/insightfinder
@@ -94,5 +100,6 @@ tile:
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: mailto:support@insightfinder.com
 [6]: mailto:info@insightfinder.com
+[7]: https://www.datadoghq.com/blog/resolve-incidents-faster-with-insightfinder/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/insightfinder-insightfinder-license" target="_blank">こちらをクリック</a>してください。
