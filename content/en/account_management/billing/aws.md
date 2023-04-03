@@ -31,7 +31,7 @@ You can also limit AWS metrics using the [API][4].
 
 When adding limits to existing AWS accounts within the integration page, the previously discovered instances could stay in the [Infrastructure List][5] up to 2 hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 
-Hosts with a running Agent still display and are included in billing. Using the limit option is only applicable to EC2 instances collected from AWS and limiting aws.ec2.* metric collection from AWS.
+Hosts with a running Agent still display and are included in billing. Use the limit option to restrict `aws.ec2.*` metrics collection from AWS and restrict the AWS resource EC2 isntance hosts.
 
 ## Troubleshooting
 
