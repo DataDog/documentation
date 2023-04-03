@@ -81,7 +81,7 @@ function loadInstantSearch(asyncLoad) {
                     }
                 }
             },
-            // if query or no query on search page
+            // Handle hitting algolia API based on query and page
             searchFunction(helper) {
                 if (helper.state.query) {
                     helper.search();

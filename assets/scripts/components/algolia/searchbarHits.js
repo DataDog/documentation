@@ -54,7 +54,7 @@ const renderHits = (renderOptions, isFirstRender) => {
         appendChildElements(containerDiv, hitsContainer);
     };
 
-    const handleNRender = (containerDiv, allJoinedListItemsArray) => {
+    const handleNRender = (containerDiv, allJoinedListItemsArray, numHits) => {
         // On non-first renders, add organized hits to applicable divs
         const addHitsToEmptyElements = () => {
             allJoinedListItemsArray.forEach((joinedList, index) => {
@@ -64,6 +64,7 @@ const renderHits = (renderOptions, isFirstRender) => {
 
         const hideOrShowElements = () => {
             const finalHitsLists = document.querySelectorAll('.ais-Hits-list');
+
             finalHitsLists.forEach((list) => {
                 if (list.childElementCount) {
                     list.classList.remove('no-hits');
@@ -71,6 +72,10 @@ const renderHits = (renderOptions, isFirstRender) => {
                     list.classList.add('no-hits');
                 }
             });
+
+            numHits === 0
+                ? document.querySelector('#hits').classList.add('no-hits')
+                : document.querySelector('#hits').classList.remove('no-hits');
         };
 
         addHitsToEmptyElements();
@@ -123,7 +128,7 @@ const renderHits = (renderOptions, isFirstRender) => {
     if (isFirstRender) {
         handleFirstRender(container);
     } else {
-        handleNRender(container, allJoinedListItemsHTML);
+        handleNRender(container, allJoinedListItemsHTML, hits.length);
     }
 };
 
