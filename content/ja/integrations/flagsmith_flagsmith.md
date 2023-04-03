@@ -9,11 +9,9 @@ author:
   support_email: support@flagsmith.com
   vendor_id: flagsmith
 categories:
-- マーケットプレイス
-- クラウド
 - 構成 & デプロイ
+- マーケットプレイス
 - テスト
-- web
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -46,15 +44,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Configuration & Deployment
+  - Category::Marketplace
+  - Category::Testing
+  - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Marketplace
-  - Category::Cloud
-  - Category::Configuration & Deployment
-  - Category::Testing
-  - Category::Web
-  - Offering::Software License
   configuration: README.md#Setup
   description: Flagsmith は、オープンソースの機能フラグおよびリモート構成サービスです。
   media:

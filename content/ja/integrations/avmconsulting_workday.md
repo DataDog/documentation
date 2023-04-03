@@ -26,9 +26,8 @@ author:
   support_email: integrations@avmconsulting.net
   vendor_id: avmconsulting
 categories:
-- マーケットプレイス
 - ログの収集
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -56,18 +55,17 @@ public_title: Workday インテグレーション
 short_description: Workday インテグレーションのステータスを監視できるようになります
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Log Collection
-  - Category::Monitoring
+  - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Workday インテグレーションのステータスを監視できるようになります
   media:
@@ -80,6 +78,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Workday インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -107,13 +106,20 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AVM Consulting にお問い合わせください。
 
- - メール: integrations@avmconsulting.net 
+ - メール: [integrations@avmconsulting.net][6] 
  - 電話: 855-AVM-0555 
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の AVM コンサルティングのインテグレーションで Workday を監視する][5]
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
-
+[5]: https://www.datadoghq.com/blog/workday-monitoring-with-avm-and-datadog/
+[6]: mailto:integrations@avmconsulting.net
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/avmconsulting-workday" target="_blank">こちらをクリック</a>してください。

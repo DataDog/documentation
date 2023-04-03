@@ -379,11 +379,16 @@ main:
     identifier: agent_guides
     parent: agent
     weight: 12
+  - name: Aggregating Agents
+    url: getting_started/observability_pipelines/
+    parent: agent
+    identifier: opw_aggregation
+    weight: 13
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 13
+    weight: 14
   - name: Containers
     url: containers/
     identifier: containers
@@ -2180,6 +2185,12 @@ main:
     parent: usm_parent
     identifier: universal_service_monitoring_guides
     weight: 1
+  - name: Data Streams Monitoring
+    url: data_streams/
+    pre: datastreams-monitoring
+    identifier: data_streams
+    parent: apm_heading
+    weight: 170000
   - name: Log Management
     url: logs/
     pre: log
