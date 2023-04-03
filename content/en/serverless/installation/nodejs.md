@@ -257,7 +257,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-<div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
+<div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
 
 1. Install the Datadog Lambda library
 
