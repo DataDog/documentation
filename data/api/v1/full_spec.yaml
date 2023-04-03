@@ -1006,6 +1006,14 @@ components:
             description: A role UUID.
             type: string
           type: array
+        tags:
+          description: List of team names representing ownership of a dashboard.
+          items:
+            description: The name of a Datadog team of the form `team:<name>`
+            type: string
+          maxItems: 5
+          nullable: true
+          type: array
         template_variable_presets:
           description: Array of template variables saved views.
           items:
@@ -3818,6 +3826,7 @@ components:
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
+      - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
       - cws_hosts_usage
@@ -3849,6 +3858,7 @@ components:
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
+      - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_USAGE
@@ -7286,6 +7296,8 @@ components:
       - cspm_hosts_usage
       - custom_timeseries_usage
       - custom_timeseries_percentage
+      - custom_ingested_timeseries_usage
+      - custom_ingested_timeseries_percentage
       - cws_containers_percentage
       - cws_containers_usage
       - cws_hosts_percentage
@@ -7347,6 +7359,8 @@ components:
       - CSPM_HOSTS_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_PERCENTAGE
+      - CUSTOM_INGESTED_TIMESERIES_USAGE
+      - CUSTOM_INGESTED_TIMESERIES_PERCENTAGE
       - CWS_CONTAINERS_PERCENTAGE
       - CWS_CONTAINERS_USAGE
       - CWS_HOSTS_PERCENTAGE
@@ -7471,12 +7485,20 @@ components:
           description: The CSPM host usage by tag(s).
           format: double
           type: number
+        custom_ingested_timeseries_percentage:
+          description: The percentage of ingested custom metrics usage by tag(s).
+          format: double
+          type: number
+        custom_ingested_timeseries_usage:
+          description: The ingested custom metrics usage by tag(s).
+          format: double
+          type: number
         custom_timeseries_percentage:
-          description: The percentage of custom metrics usage by tag(s).
+          description: The percentage of indexed custom metrics usage by tag(s).
           format: double
           type: number
         custom_timeseries_usage:
-          description: The custom metrics usage by tag(s).
+          description: The indexed custom metrics usage by tag(s).
           format: double
           type: number
         cws_containers_percentage:
@@ -21421,6 +21443,12 @@ paths:
       - description: Only return downtimes that are active when the request is made.
         in: query
         name: current_only
+        required: false
+        schema:
+          type: boolean
+      - description: Return creator information.
+        in: query
+        name: with_creator
         required: false
         schema:
           type: boolean

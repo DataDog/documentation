@@ -9,7 +9,7 @@ title: FAQ del Agent
 ---
 
 {{< whatsnext desc="Lista de preguntas frecuentes:">}}
-    {{< nextlink href="agent/faq/host-metrics-with-the-container-agent" >}}Alojar métricas con el Agent de Contenedor{{< /nextlink >}}
+    {{< nextlink href="agent/faq/host-metrics-with-the-container-agent" >}}Alojar métricas con el Agent del contenedor{{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-downgrade-major" >}}Cambiar a una versión principal anterior del Agent{{< /nextlink >}}
     {{< nextlink href="agent/faq/agent-downgrade-minor" >}}Cambiar a una versión secundaria anterior del Agent{{< /nextlink >}}
     {{< nextlink href="agent/faq/how-datadog-agent-determines-the-hostname" >}}¿Cómo determina Datadog el nombre de host del Agent?{{< /nextlink >}}

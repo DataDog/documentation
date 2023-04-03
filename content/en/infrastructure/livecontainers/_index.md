@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
   tag: "Blog"
   text: "Expedite infrastructure investigations with Kubernetes Anomalies"
+- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+  tag: "Blog"
+  text: "Practical tips for rightsizing your Kubernetes workloads"
 ---
 
 ## Overview
@@ -109,7 +112,7 @@ The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-You can switch between the "Scatter Plot” and "Timeseries" tabs in the collapsible **Summary Graphs** section in the Containers page:
+You can switch between the "Scatter Plot" and "Timeseries" tabs in the collapsible **Summary Graphs** section in the Containers page:
 
 {{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter plot selection" style="width:80%;">}}
 

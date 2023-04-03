@@ -10,13 +10,14 @@ author:
   vendor_id: circleci
 categories:
 - 自動化
-- マーケットプレイス
 - クラウド
 - 構成 & デプロイ
+- developer tools
+- マーケットプレイス
 - orchestration
+- プロビジョニング
 - ソースコントロール
 - テスト
-- web
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -41,23 +42,24 @@ public_title: CircleCI
 short_description: CircleCI を使用して、コードのビルド、テスト、およびデプロイを行う
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Offering::Software License
   - Category::Automation
-  - Category::Marketplace
   - Category::Cloud
   - Category::Configuration & Deployment
+  - Category::Developer Tools
+  - Category::Marketplace
   - Category::Orchestration
+  - Category::Provisioning
   - カテゴリ::ソースコントロール
   - Category::Testing
-  - Category::Web
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: CircleCI を使用して、コードのビルド、テスト、およびデプロイを行う
   media:
@@ -130,16 +132,31 @@ macOS、Linux、Windows にまたがる、あらゆる言語でのコーディ�
 
 このプランは、Datadog Marketplace を通じて、月額 2,000 ドルで利用することができます。
 
-ボリュームディスカウントや他のプランにご興味のある方は、プライベートオファーのご相談を承りますので、[お問い合わせ](mailto:partners@circleci.com)ください。
+ボリュームディスカウントや他のプランに興味がある方は、[support@circleci.com][2] までご連絡ください。プライベートオファーについてもご相談ください。
 
 
 
 ## サポート
-サポートについては、[ドキュメント][1]をご覧いただくか、サポートチーム [support@circleci.com][2] までお気軽にメールしてください。また、当社のプライバシーポリシーは、[当社のウェブサイト][3]でご覧いただけます。
+
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから CircleCI にお問い合わせください。
+
+- メール: [support@circleci.com][2]
+
+CircleCI のプライバシーポリシーは、[CircleCI Web サイト][3]をご覧ください。
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog で CircleCI 環境を監視する][5]
+- [Datadog CircleCI orb を使用して、CI/CD パイプラインで Synthetic テストを実行する][6]
+- [CircleCI ドキュメント][1]
 
 [1]: https://circleci.com/docs
 [2]: mailto:support@circleci.com
 [3]: https://privacy.circleci.com/
-
+[4]: https://circleci.com/vcs-authorize/
+[5]: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
+[6]: https://www.datadoghq.com/blog/run-synthetic-tests-in-circeci-pipelines-with-datadog/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/circleci-circleci" target="_blank">こちらをクリック</a>してください。

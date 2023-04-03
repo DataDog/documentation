@@ -83,6 +83,34 @@ providers:
 ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+**Note:** Datadog Operator v1.0.0 or greater is required.
+
+[1]: https://github.com/DataDog/datadog-operator
+
+{{% /tab %}}
 {{% tab "Kubernetes without Helm" %}}
 
 1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:

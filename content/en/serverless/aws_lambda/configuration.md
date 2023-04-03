@@ -16,6 +16,7 @@ aliases:
     - /serverless/libraries_integrations/lambda_code_signing
     - /serverless/guide/forwarder_extension_migration/
     - /serverless/guide/extension_private_link/
+    - /serverless/configuration
 ---
 
 First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, traces, and logs. After installation is complete, refer to the following topics to configure your installation to suit your monitoring needs.

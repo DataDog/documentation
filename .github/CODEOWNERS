@@ -25,7 +25,7 @@ package.json              @DataDog/corpweb @DataDog/documentation
 /content/en/agent/proxy.md                              @DataDog/agent-shared-components @DataDog/documentation
 
 # Partners
-/content/en/partners/                                   @KateYoak @DataDog/documentation
+/content/en/partners/                                   @DataDog/partner-tech-solutions @DataDog/documentation
 
 # Marketplace
 /content/en/developers/marketplace/                     @Datadog/marketplace-product-management @DataDog/documentation
@@ -41,7 +41,7 @@ docker-compose-docs.yml                                 @DataDog/corpweb
 .htmltest.yml                                           @DataDog/corpweb
 
 # Cloud Cost Management
-documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility
+documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility @DataDog/documentation
 
 # Browser SDK
 content/en/real_user_monitoring/browser/                       @Datadog/rum-browser @DataDog/documentation

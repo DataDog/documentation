@@ -11,7 +11,7 @@ Datadog は、ホストとカスタムメトリクスの数を毎時間測定し
 
 ### ホスト
 
-ホストとは、Datadog で監視する実際のまたはバーチャルの OS インスタンスで、サーバー、VM、ノード（Kubernetes の場合）、または App Service Plan インスタンス（Azure App Service の場合）などがあります。Datadog Agent がインストールされているすべてのインスタンスのほか、Datadog インテグレーションを使用して監視されているすべての AWS EC2、GCP、Azure、vSphere VM がホストになり得ます。Agent がインストールされている EC2 または VM は、1 つのインスタンスとしてカウントされます (二重課金されません)。
+ホストとは、Datadog で監視する実際のまたはバーチャルの OS インスタンスで、サーバー、VM、ノード (Kubernetes の場合)、App Service Plan インスタンス (Azure App Service の場合)、または  Heroku dyno (Heroku プラットフォームの場合)  などがあります。Datadog Agent がインストールされているすべてのインスタンスのほか、Datadog インテグレーションを使用して監視されているすべての AWS EC2、GCP、Azure、vSphere VM がホストになり得ます。Agent がインストールされている EC2 または VM は、1 つのインスタンスとしてカウントされます (二重課金されません)。
 
 報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `???`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
 
@@ -102,7 +102,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
     {{< nextlink href="account_management/billing/log_management/" >}}ログ管理{{< /nextlink >}}
     {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (分散型トレーシング & 継続的プロファイリング){{< /nextlink >}}
     {{< nextlink href="account_management/billing/serverless/" >}}サーバーレス{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}RUM とセッションリプレイ{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}リアルユーザーモニタリング{{< /nextlink >}}
     {{< nextlink href="account_management/billing/aws/" >}}AWS インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/azure/" >}}Azure インテグレーション{{< /nextlink >}}
     {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba インテグレーション{{< /nextlink >}}

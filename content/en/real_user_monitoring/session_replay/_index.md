@@ -36,45 +36,25 @@ To reduce Session Replay's network impact and ensure the Session Replay recorder
 
 Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK.
 
-### Enable Session Replay
+<div class="alert alert-info">You must be on the latest version of the SDK (v3.6.0 or later)</div>
 
-Change the npm package name or CDN URL, depending on your chosen installation method:
-
-### npm
-
-Replace the `@datadog/browser-rum` package with a version >3.6.0 of [`@datadog/browser-rum`][5]. To start the recording, call `datadogRum.startSessionReplayRecording()`.
-
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.init({
-    applicationId: '<DATADOG_APPLICATION_ID>',
-    clientToken: '<DATADOG_CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
-    //  service: 'my-web-application',
-    //  env: 'production',
-    //  version: '1.0.0',
-    sessionSampleRate: 100,
-    sessionReplaySampleRate: 100,
-    trackResources: true,
-    trackLongTasks: true,
-    trackUserInteractions: true
-});
-
-datadogRum.startSessionReplayRecording();
-```
-
-### CDN
-
-Replace the RUM Browser SDK URL `https://www.datadoghq-browser-agent.com/datadog-rum.js` with `https://www.datadoghq-browser-agent.com/datadog-rum-v4.js`. When `DD_RUM.init()` is called, the Session Replay recording does not start until `DD_RUM.startSessionReplayRecording()` is also called.
-
-## Configuration
-
-You can use the RUM Browser SDK's [initialization parameters][6].
+## Usage
 
 The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example, to only record authenticated user sessions:
 
 ```javascript
+DD_RUM.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  //  service: 'my-web-application',
+  //  env: 'production',
+  //  version: '1.0.0',
+  sessionSampleRate: 100,
+  sessionReplaySampleRate: 100, // if not included, the default is 100
+  ...
+});
+
 if (user.isAuthenticated) {
     DD_RUM.startSessionReplayRecording();
 }
@@ -84,9 +64,7 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
 ### Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for [Browser RUM & Session Replay plan][7], which includes replays.
-
-In order to apply these configurations, upgrade the [RUM Browser SDK][5] to a version >= 3.6.
+To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for [Browser RUM & Session Replay plan][5], which includes replays.
 
 ## Further Reading
 
@@ -96,6 +74,4 @@ In order to apply these configurations, upgrade the [RUM Browser SDK][5] to a ve
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [4]: /real_user_monitoring/browser/#setup
-[5]: https://www.npmjs.com/package/@datadog/browser-rum
-[6]: /real_user_monitoring/browser/#initialization-parameters
-[7]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
+[5]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay

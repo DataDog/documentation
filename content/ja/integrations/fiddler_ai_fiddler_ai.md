@@ -10,7 +10,6 @@ author:
   vendor_id: fiddler
 categories:
 - アラート設定
-- モニタリング
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -36,18 +35,17 @@ public_title: Fiddler AI
 short_description: AI に信頼を築く - Fiddler のモデルパフォーマンスマネジメントプラットフォーム
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Alerting
-  - Category::Monitoring
   - Category::Marketplace
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: AI に信頼を築く - Fiddler のモデルパフォーマンスマネジメントプラットフォーム
   media:

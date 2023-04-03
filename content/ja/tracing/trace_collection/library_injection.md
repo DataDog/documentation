@@ -10,7 +10,7 @@ title: ライブラリの挿入
 
 アプリケーションのインスツルメンテーションには、2 つの方法があります。
 * このページで説明されているように、インスツルメンテーションライブラリを挿入する、または
-* [アプリケーションでインスツルメンテーションライブラリを手動で追加する][2]。
+* [アプリケーションでインスツルメンテーションライブラリを手動で追加する][1]。
 
 アプリケーションのコードに全く触れずにライブラリを挿入する方法は、Agent とアプリケーションがインストールされている場所と方法によって異なります。お使いの環境を表すシナリオを選択してください。
 
@@ -21,12 +21,12 @@ title: ライブラリの挿入
 
 <div class="alert alert-warning">ライブラリ挿入は新しいポッドにのみ適用され、実行中のポッドには影響を与えません。</div>
 
-Kubernetes Admission Controller の詳細については、[Kubernetes Admission Controllers リファレンス][3]をご覧ください。
+Kubernetes Admission Controller の詳細については、[Kubernetes Admission Controllers リファレンス][2]をご覧ください。
 
 ## 要件
 
 * Kubernetes v1.14+
-* Datadog Admission Controller を有効化した Datadog [Cluster Agent v7.40+][4]。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
+* Datadog Admission Controller を有効化した Datadog [Cluster Agent v7.40+][3]。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
 * サポートされているアーキテクチャを持つ Linux 上にデプロイされた Java、JavaScript、Python のアプリケーション。言語ごとにサポートされているアーキテクチャの完全なリストについては、[対応するコンテナレジストリ](#container-registries)を確認してください。
 
 
@@ -35,9 +35,9 @@ Kubernetes Admission Controller の詳細については、[Kubernetes Admission
 Datadog は、インスツルメンテーションライブラリのイメージを gcr.io、Docker Hub、AWS ECR で公開しています。
 | 言語   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
-| Java       | [gcr.io/datadoghq/dd-lib-java-init][5]   | [hub.docker.com/r/datadog/dd-lib-java-init][6]   | [gallery.ecr.aws/datadog/dd-lib-java-init][7]   |
-| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][8]     | [hub.docker.com/r/datadog/dd-lib-js-init][9]     | [gallery.ecr.aws/datadog/dd-lib-js-init][10]     |
-| Python     | [gcr.io/datadoghq/dd-lib-python-init][11] | [hub.docker.com/r/datadog/dd-lib-python-init][12] | [gallery.ecr.aws/datadog/dd-lib-python-init][13] |
+| Java       | [gcr.io/datadoghq/dd-lib-java-init][4]   | [hub.docker.com/r/datadog/dd-lib-java-init][5]   | [gallery.ecr.aws/datadog/dd-lib-java-init][6]   |
+| JavaScript | [gcr.io/datadoghq/dd-lib-js-init][7]     | [hub.docker.com/r/datadog/dd-lib-js-init][8]     | [gallery.ecr.aws/datadog/dd-lib-js-init][9]     |
+| Python     | [gcr.io/datadoghq/dd-lib-python-init][10] | [hub.docker.com/r/datadog/dd-lib-python-init][11] | [gallery.ecr.aws/datadog/dd-lib-python-init][12] |
 
 Datadog Cluster Agent の構成にある `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` 環境変数は、Admission Controller が使用するレジストリを指定します。デフォルト値は、`gcr.io/datadoghq` です。
 
@@ -90,9 +90,9 @@ template:
 | Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
 
 利用可能なライブラリのバージョンは、各コンテナレジストリ、および各言語のトレーサーソースレジストリに記載されています。
-- [Java][17]
-- [Javascript][18]
-- [Python][19]
+- [Java][13]
+- [Javascript][14]
+- [Python][15]
 
 **注**: ライブラリのバージョン X を使用してインストルメンテーションを行ったアプリケーションで、ライブラリ挿入を使用して同じトレーサーライブラリのバージョン Y を使用してインストルメンテーションを行う場合、トレーサーは中断されません。むしろ、最初にロードされたライブラリのバージョンが使用されます。ライブラリ挿入は実行前にアドミッションコントローラレベルで行われるため、手動で構成されたライブラリよりも優先されます。
 
@@ -119,7 +119,7 @@ template:
 
 ### ステップ 3 - 統合サービスタグ付けによるポッドへのタグ付け
 
-[統合サービスタグ付け][14]を使用すると、Datadog のテレメトリーを結びつけ、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートすることができます。デプロイメントオブジェクトとポッドテンプレートの両方の仕様に、統合サービスタグ付けを設定します。
+[統合サービスタグ付け][16]を使用すると、Datadog のテレメトリーを結びつけ、一貫したタグでトレース、メトリクス、ログをシームレスにナビゲートすることができます。デプロイメントオブジェクトとポッドテンプレートの両方の仕様に、統合サービスタグ付けを設定します。
 以下のラベルを使用して、統合サービスタグを設定します。
 
 ```yaml
@@ -173,28 +173,26 @@ template:
 
 または、`kubectl describe pod <my-pod>` を実行すると、`datadog-lib-init` init コンテナがリストアップされます。
 
-インスツルメンテーションは、Datadog へのテレメトリーの送信も開始します (例えば、[APM][15] へのトレースなど)。
+インスツルメンテーションは、Datadog へのテレメトリーの送信も開始します (例えば、[APM][17] へのトレースなど)。
+
 
 [1]: /ja/containers/cluster_agent/admission_controller/
-[2]: /ja/tracing/trace_collection/
-[3]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
-[4]: /ja/containers/kubernetes/installation/?tab=helm
-[5]: http://gcr.io/datadoghq/dd-lib-java-init
-[6]: http://hub.docker.com/r/datadog/dd-lib-java-init
-[7]: http://gallery.ecr.aws/datadog/dd-lib-java-init
-[8]: http://gcr.io/datadoghq/dd-lib-js-init
-[9]: http://hub.docker.com/r/datadog/dd-lib-js-init
-[10]: http://gallery.ecr.aws/datadog/dd-lib-js-init
-[11]: http://gcr.io/datadoghq/dd-lib-python-init
-[12]: http://hub.docker.com/r/datadog/dd-lib-python-init
-[13]: http://gallery.ecr.aws/datadog/dd-lib-python-init
-[14]: /ja/getting_started/tagging/unified_service_tagging/
-[15]: https://app.datadoghq.com/apm/traces
-[16]: /ja/tracing/trace_collection/library_config/
-[17]: https://github.com/DataDog/dd-trace-java/releases
-[18]: https://github.com/DataDog/dd-trace-js/releases
-[19]: https://github.com/DataDog/dd-trace-py/releases
-
+[2]: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
+[3]: /ja/containers/kubernetes/installation/?tab=helm
+[4]: http://gcr.io/datadoghq/dd-lib-java-init
+[5]: http://hub.docker.com/r/datadog/dd-lib-java-init
+[6]: http://gallery.ecr.aws/datadog/dd-lib-java-init
+[7]: http://gcr.io/datadoghq/dd-lib-js-init
+[8]: http://hub.docker.com/r/datadog/dd-lib-js-init
+[9]: http://gallery.ecr.aws/datadog/dd-lib-js-init
+[10]: http://gcr.io/datadoghq/dd-lib-python-init
+[11]: http://hub.docker.com/r/datadog/dd-lib-python-init
+[12]: http://gallery.ecr.aws/datadog/dd-lib-python-init
+[13]: https://github.com/DataDog/dd-trace-java/releases
+[14]: https://github.com/DataDog/dd-trace-js/releases
+[15]: https://github.com/DataDog/dd-trace-py/releases
+[16]: /ja/getting_started/tagging/unified_service_tagging/
+[17]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "Host" %}}
@@ -210,7 +208,7 @@ Agent とお客様のサービスの両方が、現実または仮想のホス�
 **注**: arm64 での挿入、Alpine Linux のコンテナイメージでの `musl` による挿入はサポートされていません。
 ## プリロードライブラリのインストール
 
-1. [Agent が実行している][6]ことを確認します。
+1. [Agent が実行している][2]ことを確認します。
 
 2. 次のコマンド セットのいずれかを使用してライブラリをインストールします。ここで、`<LANG>` は `java`、`js`、`dotnet`、または `all` のいずれかです。
 
@@ -337,7 +335,7 @@ tracing_log_level: debug
 
 このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
 
-次の表は、挿入構成値が対応する[トレーシングライブラリ構成オプション][2]にどのように対応するかを示しています。
+次の表は、挿入構成値が対応する[トレーシングライブラリ構成オプション][4]にどのように対応するかを示しています。
 
 | 挿入可否 | Java トレーサー | NodeJS トレーサー | .NET トレーサー |
 | --------- | ----------- | ------------- | ----------- |
@@ -394,15 +392,14 @@ DD_CONFIG_SOURCES=BASIC dotnet <SERVICE_1>.dll &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC dotnet <SERVICE_2>.dll &
 ```
 
-アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][4]として見ることができます。
+アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][5]として見ることができます。
+
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: /ja/tracing/trace_collection/library_config/
+[2]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
-[4]: https://app.datadoghq.com/apm/traces
-[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-[6]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-
+[4]: /ja/tracing/trace_collection/library_config/
+[5]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "ホスト上の Agent、コンテナ内のアプリ" %}}
@@ -423,7 +420,7 @@ Agent がホスト上で実行しており、サービスがコンテナで実�
 
 ## プリロードライブラリのインストール
 
-1. [Agent が実行している][6]ことを確認します。
+1. [Agent が実行している][3]ことを確認します。
 
 2. 次のコマンド セットのいずれかを使用してライブラリをインストールします。ここで、`<LANG>` は `java`、`js`、`dotnet`、または `all` のいずれかです。
 
@@ -544,7 +541,7 @@ tracing_log_level: debug
 
 このコンフィギュレーションファイルでは、`version` の値は常に `1` です。これは、コンテンツのバージョンではなく、使用する構成スキーマのバージョンを指しています。
 
-次の表は、挿入構成値が対応する[トレーシングライブラリ構成オプション][3]にどのように対応するかを示しています。
+次の表は、挿入構成値が対応する[トレーシングライブラリ構成オプション][4]にどのように対応するかを示しています。
 
 | 挿入可否 | Java トレーサー | NodeJS トレーサー | .NET トレーサー |
 | --------- | ----------- | ------------- | ----------- |
@@ -589,16 +586,15 @@ tracing_rate_limit: 1
 
 Agent を起動し、通常通りコンテナ化されたサービスを起動します。
 
-アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][4]として見ることができます。
+アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][5]として見ることができます。
+
 
 
 [1]: https://app.datadoghq.com/account/settings#agent/overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
-[3]: /ja/tracing/trace_collection/library_config/
-[4]: https://app.datadoghq.com/apm/traces
-[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-[6]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
-
+[3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
+[4]: /ja/tracing/trace_collection/library_config/
+[5]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "別々のコンテナ内の Agent とアプリ" %}}
@@ -611,7 +607,7 @@ Agent とサービスが同じホストの別々の Datadog コンテナで実�
 
 ## 要件
 
-- [Docker Engine][2]
+- [Docker Engine][1]
 
 **注**: arm64 での挿入、Alpine Linux のコンテナイメージでの `musl` による挿入はサポートされていません。
 
@@ -650,7 +646,7 @@ Agent とサービスが同じホストの別々の Datadog コンテナで実�
    repo_gpgcheck=1
    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
    ```
-   **注**: [dnf のバグ][5]により、RedHat/CentOS 8.1 では `1` の代わりに `repo_gpgcheck=0` を設定してください。
+   **注**: [dnf のバグ][2]により、RedHat/CentOS 8.1 では `1` の代わりに `repo_gpgcheck=0` を設定してください。
 
 2. yum キャッシュを更新して、ライブラリをインストールします。
    ```sh
@@ -856,11 +852,11 @@ docker-compose up -d dd-agent
 アプリケーションを実行すると、テレメトリーデータが生成され、[APM のトレース][4]として見ることができます。
 
 
-[2]: https://docs.docker.com/engine/install/ubuntu/
+
+[1]: https://docs.docker.com/engine/install/ubuntu/
+[2]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
 [3]: /ja/tracing/trace_collection/library_config/
 [4]: https://app.datadoghq.com/apm/traces
-[5]: https://bugzilla.redhat.com/show_bug.cgi?id=1792506
-
 {{% /tab %}}
 
 
@@ -869,9 +865,9 @@ docker-compose up -d dd-agent
 
 ## ライブラリの構成
 
-トレーシングライブラリのサポートされる機能や構成オプションは、他のインストール方法と同様に、ライブラリ挿入でも環境変数で設定することが可能です。詳しくは、お使いの言語の [Datadog ライブラリの構成ページ][16]をお読みください。
+トレーシングライブラリのサポートされる機能や構成オプションは、他のインストール方法と同様に、ライブラリ挿入でも環境変数で設定することが可能です。詳しくは、お使いの言語の [Datadog ライブラリの構成ページ][2]をお読みください。
 
-例えば、[Application Security Monitoring][4] や [Continuous Profiler][3] をオンにすることができ、それぞれ請求の影響が出る可能性があります。
+例えば、[Application Security Monitoring][3] や [Continuous Profiler][4] をオンにすることができ、それぞれ請求の影響が出る可能性があります。
 
 - **Kubernetes** の場合は、`DD_APPSEC_ENABLED` または `DD_PROFILING_ENABLED` コンテナ環境変数に `true` を設定します。
 
@@ -888,7 +884,7 @@ docker-compose up -d dd-agent
   挿入構成ソースの `additional_environment_variables` セクションに設定できるのは、`DD_` で始まる構成キーのみです。
 
 
-[2]: /ja/tracing/trace_collection/
-[3]: /ja/profiler/enabling/java/?tab=environmentvariables#installation
-[4]: /ja/security/application_security/enabling/java/?tab=kubernetes#get-started
-[16]: /ja/tracing/trace_collection/library_config/
+[1]: /ja/tracing/trace_collection/
+[2]: /ja/tracing/trace_collection/library_config/
+[3]: /ja/security/application_security/enabling/java/?tab=kubernetes#get-started
+[4]: /ja/profiler/enabling/java/?tab=environmentvariables#installation
