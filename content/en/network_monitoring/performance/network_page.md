@@ -161,7 +161,7 @@ If you have [setup][1] enhanced resolution for AWS or Azure, NPM can filter and 
  - custom (user) tags applied to VPC Internet Gateways
  {{% /tab %}}
 
-{{% tab "VPC Internet Endpoint" %}}
+{{% tab "VPC Endpoint" %}}
  - gateway_id
  - gateway_type
  - aws_vpc_endpoint_id
