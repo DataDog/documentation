@@ -18,7 +18,7 @@ To get started with heatmaps:
 
 - You must be on the latest version of the SDK (v4.20.0 or later)
 - Enable [Session Replay][1].
-- Enabled the tracking of actions by setting `trackUserInteractions: true` in the SDK initialisation
+- Set`trackUserInteractions: true` in the SDK initialization to enable action tracking.
 - While heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
 
 ```json
