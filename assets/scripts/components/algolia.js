@@ -179,15 +179,14 @@ function loadInstantSearch(asyncLoad) {
         // Pages that aren't homepage or search page need to move the searchbar on mobile
         if (!homepage && !searchResultsPage) {
             const handleResize = () => {
-                console.log('Run handleResize');
                 const searchBoxWrapper = document.querySelector('.nav-search-wrapper');
                 const searchBoxWrapperMobile = document.querySelector('.mobile-nav-search-wrapper');
 
                 if (window.innerWidth <= 991) {
-                    searchBoxWrapperMobile.appendChild(searchBoxContainerContainer);
+                    searchBoxWrapperMobile?.appendChild(searchBoxContainerContainer);
                     closeMobileNav();
                 } else {
-                    searchBoxWrapper.appendChild(searchBoxContainerContainer);
+                    searchBoxWrapper?.appendChild(searchBoxContainerContainer);
                 }
             };
 
