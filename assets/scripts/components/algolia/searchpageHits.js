@@ -28,12 +28,11 @@ const renderHits = (renderOptions, isFirstRender) => {
         return hitsArray
             .map((item) => {
                 const link = item.full_url;
-                const hitData = item._highlightResult;
-                const title = item.title;
+                const title = item.title ? item.title : item.type;
                 const subcategory = item.subcategory ? item.subcategory : title;
                 const sectionHeader = item.section_header ? item.section_header : null;
-                const content = hitData.content.value;
-                let category = item.category ? item.category : 'Documentation';
+                const content = item._highlightResult.content.value;
+                const category = item.category ? item.category : 'Documentation';
 
                 const displayTitle = sectionHeader ? sectionHeader : title;
                 const displayContent = truncateContent(content, 100);
