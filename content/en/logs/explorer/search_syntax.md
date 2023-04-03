@@ -44,9 +44,9 @@ To combine multiple terms into a complex query, you can use any of the following
 ## Autocomplete
 
 Use the search bar's autocomplete feature to complete your query using:
-    - Existing keys and values in your logs
-    - Recent searches per user
-    - Saved views
+- Existing keys and values in your logs
+- Recent searches per user
+- Saved views
 
 {{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
 
