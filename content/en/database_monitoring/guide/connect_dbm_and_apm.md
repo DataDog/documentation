@@ -9,7 +9,7 @@ private: true
 {{< /site-region >}}
 
 <div class="alert alert-warning">
-The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
+The features described on this page are in beta. Contact your Customer Success Manager to learn more.
 </div>
 
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
@@ -353,7 +353,7 @@ Enable the database monitoring propagation feature by setting the following envi
 
 {{< /tabs >}}
 
-## Explore the APM Connection
+## Explore the APM Connection in DBM
 
 ### Attribute active database connections to the calling APM services
 
@@ -361,18 +361,29 @@ Enable the database monitoring propagation feature by setting the following envi
 
 Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
 
+### See upstream APM service dependencies for each database host and query
+
+{{< img src="database_monitoring/dbm_SOMETHING.png" alt="See a list of upstream APM service dependencies for each database host and query.">}}
+
+{{< img src="database_monitoring/dbm_SOMETHING.png" alt="Filter the Databases List for specific APM calling services.">}}
+
 ### View the associated trace for a query sample
 
 {{< img src="database_monitoring/dbm_query_sample_trace_preview.png" alt="Preview the sampled APM trace that the query sample being inspected was generated from.">}}
 
 When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.
 
-### Identify the downstream database hosts of APM services
+## Explore the DBM Connection in APM
+
+### Visualize the downstream database hosts of APM services
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
 On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
+### Identify inefficiencies using explain plans for database queries within traces 
+
+{{< img src="database_monitoring/dbm_SOMETHING.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/
