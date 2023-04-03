@@ -361,11 +361,9 @@ Enable the database monitoring propagation feature by setting the following envi
 
 Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
 
-### See upstream APM service dependencies for each database host and query
+### Filter the Databases List for specific APM calling services.
 
-{{< img src="database_monitoring/dbm_SOMETHING.png" alt="See a list of upstream APM service dependencies for each database host and query.">}}
-
-{{< img src="database_monitoring/dbm_SOMETHING.png" alt="Filter the Databases List for specific APM calling services.">}}
+{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter the Databases List for specific APM calling services.">}}
 
 ### View the associated trace for a query sample
 
@@ -381,9 +379,9 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
-### Identify inefficiencies using explain plans for database queries within traces 
+### Identify inefficiencies using explain plans for database queries in traces 
 
-{{< img src="database_monitoring/dbm_SOMETHING.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
+{{< img src="database_monitoring/dbm_explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/
