@@ -126,7 +126,7 @@ NPM automatically maps
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
 
 ### Cloud service enhanced resolution
-If you have [setup][1] enhanced resolution for AWS or Azure, you will be able to filter and group network traffic with resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers will currently only apply user-defined tags. For AWS, we have additional tags that will be applied, which are defined below.
+If you have [setup][1] enhanced resolution for AWS or Azure, can filter and group network traffic with resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers currently only have user-defined tags. For AWS, Datadog applies the tags defined below in addition to the user-defined tags.
 
  #### Amazon Web Services
  {{< tabs >}}
