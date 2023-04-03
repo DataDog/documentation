@@ -51,10 +51,10 @@ clusterAgent:
 This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes service annotations (`kube_services`).
 {{% /tab %}}
 {{% tab "Operator" %}}
-Cluster check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
+Cluster check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `spec.features.clusterChecks.enabled` configuration key:
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
 metadata:
   name: datadog
 spec:
@@ -139,7 +139,7 @@ In Cluster Agent v1.18.0+, you can use `advanced_ad_identifiers` and [Autodiscov
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-With Helm, these configuration files can be created within the `clusterAgent.confd` section. 
+With Helm, these configuration files can be created within the `clusterAgent.confd` section.
 
 ```yaml
 #(...)
@@ -154,6 +154,55 @@ clusterAgent:
 ```
 
 **Note**: This is separate from the `datadog.confd` section, where the files are created in the node-based Agents. The `<INTEGRATION_NAME>` must exactly match the desired integration check you want to run.
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+With the Datadog Operator, these configuration files can be created within the `spec.override.clusterAgent.extraConfd.configDataMap` section:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            init_config:
+              - <INIT_CONFIG>
+            instances:
+              - <INSTANCES_CONFIG>
+```
+
+Alternatively, you can create a ConfigMap to store the static configuration file and mount this ConfigMap to the Cluster Agent using the `spec.override.clusterAgent.extraConfd.configMap` field:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configMap:
+          name: "<NAME>-config-map"
+          items:
+            - key: <INTEGRATION_NAME>-config
+              path: <INTEGRATION_NAME>.yaml
+```
+
+```yaml
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "<NAME>-config-map"
+data:
+  <INTEGRATION_NAME>-config: |-
+    cluster_check: true
+    init_config:
+      <INIT_CONFIG>
+    instances:
+      <INSTANCES_CONFIG>
+```
+
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 With the manual approach you must create a ConfigMap to store the desired static configuration files, and then mount this ConfigMap into the corresponding `/conf.d` file of the Cluster Agent container. This follows the same approach for [mounting ConfigMaps into the Agent container][1]. For example:
@@ -232,7 +281,7 @@ Use the `clusterAgent.confd` field to define your check configuration:
 #(...)
 clusterAgent:
   confd:
-    <INTEGRATION_NAME>.yaml: |-
+    http_check.yaml: |-
       advanced_ad_identifiers:
         - kube_service:
             name: "<SERVICE_NAME>"
@@ -244,6 +293,28 @@ clusterAgent:
           name: "<EXAMPLE_NAME>"
 ```
 
+{{% /tab %}}
+{{% tab "Operator" %}}
+Use the `spec.override.clusterAgent.extraConfd.configDataMap` field to define your check configuration:
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          http_check.yaml: |-
+            advanced_ad_identifiers:
+              - kube_service:
+                  name: "<SERVICE_NAME>"
+                  namespace: "<SERVICE_NAMESPACE>"
+            cluster_check: true
+            init_config:
+            instances:
+              - url: "http://%%host%%"
+                name: "<EXAMPLE_NAME>"
+```
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 Mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
@@ -312,6 +383,47 @@ spec:
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
 
+## Validation
+
+The Datadog Cluster Agent dispatches each cluster check to a node Agent to run. Run the [Datadog Cluster Agent's `clusterchecks` subcommand][13] and look for the check name under the node Agent's hostname:
+
+```
+# kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
+(...)
+===== Checks on default-pool-bce5cd34-ttw6.c.sandbox.internal =====
+
+=== http_check check ===
+Source: kubernetes-services
+Instance ID: http_check:My service:5b948dee172af830
+empty_default_hostname: true
+name: My service
+tags:
+- kube_namespace:default
+- kube_service:my-nginx
+- cluster_name:example
+timeout: 1
+url: http://10.15.246.109
+~
+Init Config:
+{}
+===
+```
+
+Now, run the [node Agent's `status` subcommand][14] and look for the check name under the Checks section.
+
+```
+# kubectl exec <NODE_AGENT_POD_NAME> agent status
+...
+    http_check (3.1.1)
+    ------------------
+      Instance ID: http_check:My service:5b948dee172af830 [OK]
+      Total Runs: 234
+      Metric Samples: Last Run: 3, Total: 702
+      Events: Last Run: 0, Total: 0
+      Service Checks: Last Run: 1, Total: 234
+      Average Execution Time : 90ms
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -328,3 +440,5 @@ In addition, each Pod should be monitored with the [NGINX check][12], as it enab
 [10]: /integrations/http_check/
 [11]: /agent/faq/template_variables/
 [12]: /integrations/nginx/
+[13]: /containers/cluster_agent/troubleshooting/#dispatching-logic-in-the-cluster-agent
+[14]: /containers/cluster_agent/commands/#cluster-agent-commands
