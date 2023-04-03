@@ -120,13 +120,15 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
-{{% tab "Node.js AWS CDK App" %}}
+{{% tab "AWS CDK" %}}
 
-The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+<div class="alert alert-info">Instrumenting Java functions through the Datadog CDK Construct is only available for AWS CDK apps written in Node.js and Python.</div>
+
+The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension. 
 
 1. Install the Datadog CDK constructs library
 
-    
+    **Node.js**:
     ```sh
     # For AWS CDK v1
     npm install datadog-cdk-constructs --save-dev
@@ -135,8 +137,18 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     npm install datadog-cdk-constructs-v2 --save-dev
     ```
 
+    **Python**:
+    ```sh
+    # For AWS CDK v1
+    pip install datadog-cdk-constructs
+
+    # For AWS CDK v2
+    pip install datadog-cdk-constructs-v2
+    ```
+
 2. Instrument your Lambda functions
 
+    **Node.js**:
     ```javascript
     // For AWS CDK v1
     import { Datadog } from "datadog-cdk-constructs";
@@ -153,31 +165,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
     ```
 
-    To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
-
-    More information and additional parameters can be found on the [Datadog CDK documentation][1].
-
-[1]: https://github.com/DataDog/datadog-cdk-constructs
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Python AWS CDK App" %}}
-
-The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
-
-1. Install the Datadog CDK constructs library
-
-    ```sh
-    # For AWS CDK v1
-    pip install datadog-cdk-constructs
-
-    # For AWS CDK v2
-    pip install datadog-cdk-constructs-v2
-    ```
-
-2. Instrument your Lambda functions
-
+    **Python**:
     ```python
     # For AWS CDK v1
     from datadog_cdk_constructs import Datadog
@@ -196,13 +184,13 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     To fill in the placeholders:
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob).The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
 
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-{{< /tab >}}
+{{% /tab %}}
 {{% tab "Container image" %}}
 
 1. Install the Datadog Lambda Extension
