@@ -1,3 +1,5 @@
+import { getHitData } from './getHitData';
+import { truncateContent } from '../../helpers/truncateContent';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
 const renderHits = (renderOptions, isFirstRender) => {
@@ -15,37 +17,26 @@ const renderHits = (renderOptions, isFirstRender) => {
         container.querySelector('.ais-Hits-list').innerHTML = joinedListItemsHTML;
     };
 
-    const truncateContent = (content, length) => {
-        if (content.length > length) {
-            return `${content.slice(0, length)} ...`;
-        } else {
-            return content;
-        }
-    };
-
     // Returns a bunch of <li>s
     const generateJoinedHits = (hitsArray) => {
         return hitsArray
             .map((item) => {
-                const link = item.full_url;
-                const title = item.title ? item.title : item.type;
-                const subcategory = item.subcategory ? item.subcategory : title;
-                const sectionHeader = item.section_header ? item.section_header : null;
-                const content = item._highlightResult.content.value;
-                const category = item.category ? item.category : 'Documentation';
-
-                const displayTitle = sectionHeader ? sectionHeader : title;
-                const displayContent = truncateContent(content, 100);
+                const hit = getHitData(item);
+                const displayContent = truncateContent(hit.content, 100);
 
                 return `
                     <li class="ais-Hits-item">
-                        <a href="${link}" target="_blank" rel="noopener noreferrer">
+                        <a href="${hit.link}" target="_blank" rel="noopener noreferrer">
                             <div class="ais-Hits-row">
-                                <p class="ais-Hits-category">${category}</p>
-                                <span class="ais-Hits-category-spacer">&#187;</span>   
-                                <p class="ais-Hits-subcategory">${subcategory}</p>
+                                <p class="ais-Hits-category">${hit.category}</p>
+                                
                                 <span class="ais-Hits-category-spacer">&#187;</span>
-                                <p class="ais-Hits-title">${displayTitle}</p>
+
+                                ${
+                                    hit.subcategory === hit.title
+                                        ? `<p class="ais-Hits-title">${hit.title}</p>`
+                                        : `<p class="ais-Hits-subcategory">${hit.subcategory}</p><span class="ais-Hits-category-spacer">&#187;</span><p class="ais-Hits-title">${hit.title}</p>`
+                                }   
                             </div>
                             <div class="ais-Hits-row">
                                 <p class="ais-Hits-content">${displayContent}</p>

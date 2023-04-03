@@ -1,3 +1,5 @@
+import { getHitData } from './getHitData';
+import { truncateContent } from '../../helpers/truncateContent';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
 const renderHits = (renderOptions, isFirstRender) => {
@@ -77,31 +79,17 @@ const renderHits = (renderOptions, isFirstRender) => {
 
     // Returns a bunch of <li>s
     const generateJoinedHits = (hitsArray, category) => {
-        const truncateContent = (content, length) => {
-            if (content.length > length) {
-                return `${content.slice(0, length)} ...`;
-            } else {
-                return content;
-            }
-        };
-
         const joinedListItems = hitsArray
             .map((item) => {
-                const link = item.full_url;
-                const title = item.title ? item.title : item.type;
-                const subcategory = item.subcategory ? item.subcategory : title;
-                const sectionHeader = item.section_header ? item.section_header : null;
-                const content = item._highlightResult.content.value;
-
-                const displayTitle = sectionHeader ? sectionHeader : title;
-                const displayContent = truncateContent(content, 145);
+                const hit = getHitData(item);
+                const displayContent = truncateContent(hit.content, 145);
 
                 return `
                     <li class="ais-Hits-item">
-                        <a href="${link}" target="_blank" rel="noopener noreferrer">
-                            <p class="ais-Hits-subcategory">${subcategory}</p>
+                        <a href="${hit.link}" target="_blank" rel="noopener noreferrer">
+                            <p class="ais-Hits-subcategory">${hit.subcategory}</p>
                             <div>
-                                <p class="ais-Hits-title"><strong>${displayTitle}</strong></p>
+                                <p class="ais-Hits-title"><strong>${hit.title}</strong></p>
                                 <p class="ais-Hits-content">${displayContent}</p>
                             </div>
                         </a>
