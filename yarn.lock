@@ -2172,6 +2172,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/dom-speech-recognition@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@types/dom-speech-recognition@npm:0.0.1"
+  checksum: 8b34af73c311580fa17842d72025a6d9d3eb0768f03e8eac91d2699566800efb6e99cba8138c0b44f16a00822ba8a6da00f830aff504cbf996bc86bbe4834fc2
+  languageName: node
+  linkType: hard
+
 "@types/glob@npm:^7.1.1":
   version: 7.1.3
   resolution: "@types/glob@npm:7.1.3"
@@ -2455,14 +2462,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"algoliasearch-helper@npm:^3.11.1":
-  version: 3.11.1
-  resolution: "algoliasearch-helper@npm:3.11.1"
+"algoliasearch-helper@npm:^3.11.3":
+  version: 3.12.0
+  resolution: "algoliasearch-helper@npm:3.12.0"
   dependencies:
     "@algolia/events": ^4.0.1
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: 207616ca4549e2d06a278357ce478951a37c606f40f5b39b8e2d13bba143023a10814f065cd89629e5f2c121935d61a97d96bfb687ae7a98ef25b63da37fcf70
+  checksum: 177ead2a04c60f1005a9ccac4096714cd992f0f158b91791deb719765f9a94ea67efc782f29cf5182e9a8ce75bcf7461bb8bf8bab9846b5fa1b9ed1f8a2b902f
   languageName: node
   linkType: hard
 
@@ -4459,7 +4466,7 @@ __metadata:
     eslint-plugin-standard: ^4.0.0
     fancy-log: ^1.3.3
     hugo-bin: 0.99.3
-    instantsearch.js: ^4.49.1
+    instantsearch.js: ^4.53.0
     jest: ^25.3.0
     jquery: 3.5.1
     js-cookie: ^2.2.1
@@ -6500,17 +6507,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"instantsearch.js@npm:^4.49.1":
-  version: 4.49.1
-  resolution: "instantsearch.js@npm:4.49.1"
+"instantsearch.js@npm:^4.53.0":
+  version: 4.53.0
+  resolution: "instantsearch.js@npm:4.53.0"
   dependencies:
     "@algolia/events": ^4.0.1
     "@algolia/ui-components-highlight-vdom": ^1.2.1
     "@algolia/ui-components-shared": ^1.2.1
+    "@types/dom-speech-recognition": ^0.0.1
     "@types/google.maps": ^3.45.3
     "@types/hogan.js": ^3.0.0
     "@types/qs": ^6.5.3
-    algoliasearch-helper: ^3.11.1
+    algoliasearch-helper: ^3.11.3
     hogan.js: ^3.0.2
     htm: ^3.0.0
     preact: ^10.10.0
@@ -6518,7 +6526,7 @@ __metadata:
     search-insights: ^2.1.0
   peerDependencies:
     algoliasearch: ">= 3.1 < 6"
-  checksum: f965fb53f078287c80fb422f325055705b203131b3b828ea5177f1ab4a1830f8838bbd4fae64c0830f1aa50b95090b8085d9b2ada3b37cf288ce278793a8bb2e
+  checksum: b27699ce6f3750118e18c814c3276b4216c3c984c6265aa7a8c6f02d59fc774cf9401dbea65b708339eb3edc7f3a5a5e0b1ac32e2642a388269a19661f549594
   languageName: node
   linkType: hard
 

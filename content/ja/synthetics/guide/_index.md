@@ -8,7 +8,7 @@ title: Synthetic モニタリングガイド
 cascade:
     algolia:
         rank: 20
-        category: ガイド
+        category: Guide
         subcategory: Synthetic モニタリングガイド
 ---
 

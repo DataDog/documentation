@@ -6,7 +6,7 @@ title: データベースモニタリングガイド
 cascade:
     algolia:
         rank: 20
-        category: ガイド
+        category: Guide
         subcategory: データベースモニタリングガイド
 ---
 {{< site-region region="gov" >}}

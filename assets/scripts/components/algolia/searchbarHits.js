@@ -106,13 +106,11 @@ const renderHits = (renderOptions, isFirstRender) => {
     const { widgetParams, hits } = renderOptions;
     const { container } = widgetParams;
 
-    const gettingStartedHitsArray = hits.filter((hit) => hit.category === 'Getting Started');
-    const docsHitsArray = hits.filter((hit) => hit.category === 'Documentation' || hit.category === null);
-    const integrationsHitsArray = hits.filter(
-        (hit) => hit.category === 'Integrations' || hit.category === 'Intégrations'
-    );
-    const guidesHitsArray = hits.filter((hit) => hit.category === 'Guide' || hit.category === 'ガイド');
-    const apiHitsArray = hits.filter((hit) => hit.category === 'API');
+    const gettingStartedHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'getting started');
+    const docsHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'documentation' || hit.category === null);
+    const integrationsHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'integrations');
+    const guidesHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'guide');
+    const apiHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'api');
 
     const allJoinedListItemsHTML = [
         generateJoinedHits(gettingStartedHitsArray, 'Getting Started'),

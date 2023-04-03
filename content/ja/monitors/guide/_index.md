@@ -6,7 +6,7 @@ title: モニターガイド
 cascade:
     algolia:
         rank: 20
-        category: ガイド
+        category: Guide
         subcategory: モニターガイド
 ---
 

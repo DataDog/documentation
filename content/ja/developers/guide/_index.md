@@ -5,7 +5,7 @@ title: 開発者ガイド
 cascade:
     algolia:
         rank: 20
-        category: ガイド
+        category: Guide
         subcategory: 開発者ガイド
 ---
 

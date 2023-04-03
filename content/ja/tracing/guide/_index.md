@@ -9,7 +9,7 @@ title: トレースガイド
 cascade:
     algolia:
         rank: 20
-        category: ガイド
+        category: Guide
         subcategory: トレースガイド
 ---
 
