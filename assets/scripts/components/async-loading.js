@@ -57,7 +57,7 @@ function loadPage(newUrl) {
             const currentPageIsSearchPage = document.documentElement.dataset.relpermalink.includes("search");
             const newPageIsSearchPage = httpRequest.responseXML.querySelector("html").dataset.relpermalink.includes("search");
 
-            // This logic is for going from the search page (/search) where no sidenav searchbar is mounted, to another page asynchronously and the sidenav searchbar is required
+            // For going from search page (/search) with no sidenav searchbar, to another page with sidenav searchbar
             if (currentPageIsSearchPage && !newPageIsSearchPage) {
                 const sidenavSearchbarMount = document.querySelector('#async-searchbar-mount');
 

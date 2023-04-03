@@ -6,7 +6,6 @@ import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/algolia';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
-import { getQueryParameterByName } from './helpers/browser';
 import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
@@ -48,13 +47,8 @@ $(document).ready(function () {
         }
     });
 
-    // algolia
-    const searchParam = getQueryParameterByName('s');
     // load algolia instant search for the first time
     loadInstantSearch(asyncLoad=false);
-    if (searchParam) {
-        $('.sidenav-search input[name="s"]').val(searchParam);
-    }
 
     if (!document.body.classList.contains('api')){
         $(window).on('resize scroll', function() {
