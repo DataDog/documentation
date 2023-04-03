@@ -177,7 +177,7 @@ This automatically updates the necessary RBAC files and directs the Cluster Agen
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `clusterAgent.config.externalMetrics.useDatadogMetrics` to `true`.
+To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `features.externalMetricsServer.enabled` to `true`.
 
   ```yaml
 kind: DatadogAgent

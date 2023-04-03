@@ -222,7 +222,7 @@ Helm、Datadog Operator または Daemonset を使用して `DatadogMetric` を�
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-`DatadogMetric` CRD の使用をアクティブにするには、`DatadogAgent` カスタムリソースを更新し、`clusterAgent.config.externalMetrics.useDatadogMetrics` を ` true` に設定します。
+`DatadogMetric` CRD の使用をアクティブにするには、`DatadogAgent` カスタムリソースを更新し、`features.externalMetrics.useDatadogMetrics` を ` true` に設定します。
 
 ```yaml
 kind: DatadogAgent

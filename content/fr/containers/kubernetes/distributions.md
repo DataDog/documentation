@@ -558,4 +558,4 @@ spec:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
-[2]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent
+[2]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1

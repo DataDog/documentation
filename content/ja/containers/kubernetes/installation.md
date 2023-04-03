@@ -149,7 +149,7 @@ spec:
 [5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /ja/agent/guide/operator-advanced
-[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
+[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 {{% /tab %}}
 {{% tab "Helm" %}}
 

@@ -84,7 +84,7 @@ spec:
       appKey: <DATADOG_APP_KEY>
 ```
 
-注: Datadog Operator v0.7.0 以降が必要です。
+注: Datadog Operator v1.0.0 以降が必要です。
 
 {{% /tab %}}
 {{< /tabs >}}
