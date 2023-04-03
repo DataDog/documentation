@@ -2,13 +2,12 @@
 title: Connecting DBM and APM
 kind: guide
 beta: true
-private: true
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">
+<div class="alert alert-info">
 The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
@@ -47,7 +46,7 @@ Data privacy
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |
 |                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
 |                                          | [MySQLi][21]         |           | {{< X >}} |
-| **Node:** [dd-trace-js][9] >= 3.13.0     |                      |           |           |
+| **Node.js:** [dd-trace-js][9] >= 3.13.0     |                      |           |           |
 |                                          | [postgres][10]       |   Alpha   |           |
 |                                          | [mysql][13]          |           |   Alpha   |
 |                                          | [mysql2][14]         |           |   Alpha   |
@@ -262,16 +261,51 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 
 {{% /tab %}}
 
+{{% tab ".NET" %}}
+
+<div class="alert alert-warning">
+This feature requires automatic instrumentation to be enabled for your .NET service.
+</div>
+
+Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library. For example, `Npgsql`.
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+
+<div class="alert alert-warning">
+This feature requires the tracer extension to be enabled for your PHP service.
+</div>
+
+Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library. For example, `PDO`.
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
+
+{{% /tab %}}
+
 {{% tab "Node.js" %}}
 
 <div class="alert alert-warning">
-Node is in alpha release and may be unstable.
+DBM-APM linking for Node.js is in alpha release and may be unstable.
 </div>
 
-Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
+Install or update [dd-trace-js][1] to a version greater than `3.13.0` (or `2.22.0` if using end-of-life Node.js version 12):
 
 ```
-npm install dd-trace@^3.9.0
+npm install dd-trace@^3.13.0
 ```
 
 Update your code to import and initialize the tracer:
@@ -313,41 +347,6 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 ```
 
 [1]: https://github.com/DataDog/dd-trace-js
-
-{{% /tab %}}
-
-{{% tab ".NET" %}}
-
-<div class="alert alert-warning">
-This features requires automatic instrumentation to be enabled for your .NET service.
-</div>
-
-Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
-
-Ensure that you are using a supported client library (e.g. `Npgsql`).
-
-Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_DBM_PROPAGATION_MODE=full`
-
-[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
-[2]: /tracing/trace_collection/dd_libraries/dotnet-core
-
-{{% /tab %}}
-
-{{% tab "PHP" %}}
-
-<div class="alert alert-warning">
-This features requires the tracer extension to be enabled for your PHP service.
-</div>
-
-Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
-
-Ensure that you are using a supported client library. For example, `PDO`.
-
-Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_DBM_PROPAGATION_MODE=full`
-
-[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
 
 {{% /tab %}}
 
