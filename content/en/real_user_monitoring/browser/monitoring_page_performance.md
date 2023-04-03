@@ -95,9 +95,9 @@ To account for modern web applications, loading time watches for network request
 
 The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
 
-- `xhr` or `fetch` requests are in progress
-- Performance resource timing entries are emitted by the browser (loading end of js, css, and such)
-- DOM mutations are emitted by the browser
+- `xhr` or `fetch` requests are in progress.
+- The browser emits performance resource timing entries (loading end of JS, CSS, etc.).
+- The browser emits DOM mutations.
 
 The page activity is considered to have ended when it hasn't had any activity for 100ms.
 
