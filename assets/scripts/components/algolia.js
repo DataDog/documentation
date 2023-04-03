@@ -1,4 +1,4 @@
-import configDocs from '../config/config-docs';
+import { getConfig } from '../helpers/getConfig';
 import algoliasearch from 'algoliasearch/lite';
 import instantsearch from 'instantsearch.js';
 import { configure, searchBox } from 'instantsearch.js/es/widgets';
@@ -6,14 +6,7 @@ import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
 import { closeMobileNav } from '../components/mobile-nav';
-
-function getConfig(environment) {
-    if (environment === 'live') {
-        return configDocs['live'];
-    } else if (environment === 'preview') {
-        return configDocs['preview'];
-    } else return configDocs['development'];
-}
+import { debounce } from '../utils/debounce';
 
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
@@ -38,6 +31,8 @@ function loadInstantSearch(asyncLoad) {
     const searchBoxContainer = document.querySelector('#searchbox');
     const hitsContainerContainer = document.querySelector('.hits-container');
     const hitsContainer = document.querySelector('#hits');
+    const paginationContainer = document.querySelector('#pagination');
+    const pageTitleScrollTo = document.querySelector('#pagetitle');
     const filtersDocs = `language: ${pageLanguage}`;
     const homepage = document.querySelector('.kind-home');
     let searchResultsPage = document.querySelector('.search_results_page');
@@ -68,6 +63,7 @@ function loadInstantSearch(asyncLoad) {
         const search = instantsearch({
             indexName,
             searchClient,
+            // routing handles search state URL sync
             routing: {
                 stateMapping: {
                     stateToRoute(uiState) {
@@ -85,6 +81,7 @@ function loadInstantSearch(asyncLoad) {
                     }
                 }
             },
+            // if query or no query on search page
             searchFunction(helper) {
                 if (helper.state.query) {
                     helper.search();
@@ -130,25 +127,35 @@ function loadInstantSearch(asyncLoad) {
 
             customPagination({
                 isNotSearchPage: !searchResultsPage,
-                container: document.querySelector('#pagination'),
-                scrollTo: document.querySelector('#pagetitle'),
+                container: paginationContainer,
+                scrollTo: pageTitleScrollTo,
                 padding: 5
             })
         ]);
 
+        // Start up frontend search
         search.start();
 
+        // Handle clicks for non-search page
         if (!searchResultsPage) {
+            const aisSearchBoxInput = document.querySelector('.ais-SearchBox-input');
+            const aisSearchBoxSubmit = document.querySelector('.ais-SearchBox-submit');
+            const searchPathname = `${basePathName}search`;
+
             const handleSearchbarKeydown = (e) => {
                 if (e.code === 'Enter') {
                     e.preventDefault();
-                    window.location.pathname = `${basePathName}search`;
+
+                    // Give query-url sync 500ms to update
+                    setTimeout(() => {
+                        window.location.pathname = searchPathname;
+                    }, 500);
                 }
             };
 
             const handleSearchbarSubmitClick = () => {
-                if (document.querySelector('.ais-SearchBox-input').value) {
-                    window.location.pathname = `${basePathName}search`;
+                if (aisSearchBoxInput.value) {
+                    window.location.pathname = searchPathname;
                 }
             };
 
@@ -164,14 +171,15 @@ function loadInstantSearch(asyncLoad) {
                 hitsContainerContainer.classList.add('d-none');
             };
 
-            document.querySelector('.ais-SearchBox-input').addEventListener('keydown', handleSearchbarKeydown);
-            document.querySelector('.ais-SearchBox-submit').addEventListener('click', handleSearchbarSubmitClick);
+            aisSearchBoxInput.addEventListener('keydown', handleSearchbarKeydown);
+            aisSearchBoxSubmit.addEventListener('click', handleSearchbarSubmitClick);
             document.addEventListener('click', handleOutsideSearchbarClick);
         }
 
         // Pages that aren't homepage or search page need to move the searchbar on mobile
         if (!homepage && !searchResultsPage) {
             const handleResize = () => {
+                console.log('Run handleResize');
                 const searchBoxWrapper = document.querySelector('.nav-search-wrapper');
                 const searchBoxWrapperMobile = document.querySelector('.mobile-nav-search-wrapper');
 
@@ -183,17 +191,7 @@ function loadInstantSearch(asyncLoad) {
                 }
             };
 
-            const debounce = (cb, delay) => {
-                let timeout;
-                return () => {
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        cb();
-                    }, delay);
-                };
-            };
-
-            const handleResizeDebounced = debounce(handleResize, 500);
+            const handleResizeDebounced = debounce(handleResize, 500, false);
 
             window.addEventListener('resize', handleResizeDebounced);
 
