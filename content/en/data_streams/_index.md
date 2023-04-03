@@ -10,9 +10,15 @@ further_reading:
       text: 'Service Catalog'
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
-{{< /site-region >}}
+<div class="alert alert-warning">
+The features discussed on this page are in public beta.
+</div>
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
 
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 

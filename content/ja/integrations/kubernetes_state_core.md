@@ -20,6 +20,10 @@ kind: インテグレーション
 name: kubernetes_state_core
 public_title: Datadog-Kubernetes State Metrics Core インテグレーション
 short_description: Kubernetes オブジェクトのステータスを追跡し、マイクロサービスメトリクスを相互に関連付けます。
+supported_os:
+- linux
+- mac_os
+- windows
 title: Kubernetes State Metrics Core
 ---
 
@@ -38,7 +42,7 @@ Kubernetes State Metrics Core は、より詳細なメトリクスとタグを�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメージに含まれているため、Kubernetes サーバーに他に何もインストールする必要はありません。
 
@@ -134,6 +138,9 @@ Kubernetes State Metrics Core チェックには後方互換性がありませ�
 
 `kube_job`
 : `kubernetes_state` では、`Job` が `CronJob` をオーナーとしていた場合は `kube_job` タグの値が `CronJob` 名となり、それ以外の場合は `Job` 名となります。`kubernetes_state_core` では、`kube_job` タグの値は常に `Job` 名となり、新たに `kube_cronjob` タグキーが追加されて `CronJob` 名をタグ値として持つようになります。`kubernetes_state_core` に移行する場合、クエリフィルターには新しいタグか `kube_job:foo*` (`foo` は `CronJob` 名) を使用することが推奨されます。
+
+`kubernetes_state.job.succeeded`
+: `kubernetes_state` では `kuberenetes.job.succeeded` は `count` 型でした。`kubernetes_state_core` では `gauge` 型です。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -549,7 +556,7 @@ Cluster Agent コンテナ内で [Cluster Agent の `status` サブコマンド�
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

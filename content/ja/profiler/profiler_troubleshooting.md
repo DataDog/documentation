@@ -230,6 +230,26 @@ Datadog.configure do |c|
 end
 ```
 
+## `dd-trace-rb` 1.11.0+ でネイティブ拡張機能を使用する Ruby gems からの予期しないランタイム失敗やエラー
+
+`dd-trace-rb` 1.11.0 から、プロファイラー "CPU Profiling 2.0" が、Ruby アプリケーションに unix シグナル `SIGPROF` を送ることでデータを集め、よりきめ細かいデータ収集が可能になりました。
+
+`SIGPROF` の送信は一般的なプロファイリング手法であり、ネイティブ拡張機能/ライブラリからのシステムコールがシステムの [`EINTR` エラーコード][8]で中断されることがあります。
+まれに、ネイティブ拡張機能またはネイティブ拡張機能から呼び出されたライブラリの `EINTR` エラーコードに対するエラー処理が欠けていたり、不正確な場合があります。
+
+この問題の既知の例として、`mysql2` gem と [8.0.0 より古い][9]バージョンの libmysqlclient を一緒に使用した場合です。影響を受ける libmysqlclient のバージョンは、Ubuntu 18.04 に存在することが知られていますが、20.04 およびそれ以降のリリースには存在しません。この場合、プロファイラーが `mysql2` gem が使用されていることを自動検出し、以下に説明する解決策を自動で適用します。
+
+ネイティブ拡張機能を使用した Ruby gems でランタイム失敗やエラーが発生した場合、`SIGPROF` シグナルを使用しないレガシープロファイラーに戻すことができます。レガシープロファイラーに戻すには、`DD_PROFILING_FORCE_ENABLE_LEGACY` 環境変数を `true` に設定するか、コードで以下を設定します。
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.force_enable_legacy_profiler = true
+end
+```
+
+このような非互換性を見つけたり疑ったりした場合は、[サポートチケット][2]で弊社チームにお知らせください。
+そうすることで、Datadog はそれらを自動検出リストに追加し、gem/ライブラリの作者と協力して問題を解決することができます。
+
 [1]: /ja/tracing/troubleshooting/#tracer-debug-logs
 [2]: /ja/help/
 [3]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.54.0
@@ -237,6 +257,8 @@ end
 [5]: https://github.com/resque/resque/blob/v2.0.0/docs/HOOKS.md#worker-hooks
 [6]: https://bugs.ruby-lang.org/issues/18073
 [7]: https://github.com/DataDog/dd-trace-rb/issues/1799
+[8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
+[9]: https://bugs.mysql.com/bug.php?id=83109
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -305,7 +327,7 @@ end
 
 [1]: /ja/profiler/enabling/dotnet/?tab=linux#configuration
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Windows" %}}
 

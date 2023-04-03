@@ -54,15 +54,15 @@ The **Application Keys** tab in **Personal Settings** allows you to manage your 
 
 View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
 
-To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you’ve set at the OS level.
+To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you've set at the OS level.
 
 ## Connecting to GitHub
 
 If you have installed the [GitHub integration][9] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
 
-## Deleting your account
+## Disabling your organization's account
 
-To delete your Datadog account completely, contact [Datadog support][10].
+To disable your Datadog organization account, contact [Datadog support][10].
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en
