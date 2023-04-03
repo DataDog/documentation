@@ -22,8 +22,6 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- cloud
-- コラボレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,18 +46,16 @@ public_title: Backup Automator
 short_description: Datadog ダッシュボード、Synthetic、モニター、ノートブックをバックアップします
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Collaboration
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog ダッシュボード、Synthetic、モニター、ノートブックをバックアップします
   media: []

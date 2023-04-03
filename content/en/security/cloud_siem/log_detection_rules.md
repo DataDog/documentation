@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-To create a new log detection rule in Datadog, hover over **Security**, select **Detection Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a log detection rule in Datadog, navigate to the [**Detection Rules** page][6] and click **New Rule**.
 
 ## Rule Type
 
@@ -290,3 +290,4 @@ The rule deprecation process is as follows:
 [3]: /security/default_rules/#cat-cloud-siem-log-detection
 [4]: /security/detection_rules/#rule-and-generated-signal-options
 [5]: https://app.datadoghq.com/security/configuration/siem/rules/view/nkq-b6q-h8c?query=type%3A%28log_detection%20OR%20signal_correlation%29%20guardduty&product=siem
+[6]: https://app.datadoghq.com/security/configuration/siem/rules
