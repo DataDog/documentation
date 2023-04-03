@@ -9526,7 +9526,7 @@ api:
       versions:
         - v2
       operationids:
-        - RemoveTeamMembership
+        - DeleteTeamMembership
       unstable: []
       order: 8
   - name: Add a user to a team
@@ -9586,7 +9586,7 @@ api:
       versions:
         - v2
       operationids:
-        - RemoveTeamLink
+        - DeleteTeamLink
       unstable: []
       order: 14
   - name: Create a team link
@@ -9646,7 +9646,7 @@ api:
       versions:
         - v2
       operationids:
-        - RemoveTeam
+        - DeleteTeam
       unstable: []
       order: 5
   - name: Create a team
@@ -9670,6 +9670,6 @@ api:
       versions:
         - v2
       operationids:
-        - GetAllTeams
+        - ListTeams
       unstable: []
       order: 1
