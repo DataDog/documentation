@@ -17,8 +17,6 @@ Les [clés d'application][2] sont utilisées conjointement avec la clé d'API de
 
 ### Portées
 
-<div class="alert alert-info">Les portées d'autorisation pour les clés d'application sont une fonctionnalité en version bêta privée. Contactez l'<a href="https://www.datadoghq.com/support/">assistance Datadog</a> pour demander l'activation des portées de clés d'application pour votre organisation.</div>
-
 Afin de mieux protéger et sécuriser vos applications, vous avez la possibilité d'appliquer des [portées d'autorisation][3] à vos clés d'application de façon à définir des autorisations plus granulaires et à limiter les données auxquelles les applications ont accès. Vous pourrez ainsi contrôler les accès de vos applications avec plus de précision et réduire les failles de sécurité en limitant les accès superflus. Par exemple, une application qui se contente de lire des dashboards n'a pas besoin de pouvoir gérer les utilisateurs ou de supprimer les données de votre organisation.
 
 Lorsque vous appliquez des portées à des clés d'application, il est recommandé d'accorder uniquement les privilèges et les autorisations dont l'application a besoin pour fonctionner correctement. Seules les portées spécifiées par l'utilisateur sont appliquées à la clé d'application : aucune autre autorisation n'est accordée. Vous pouvez modifier la portée d'autorisation d'une clé d'application à tout moment, mais il est essentiel de réfléchir à l'impact que ces modifications auront sur le fonctionnement de votre application et les données auxquelles elle pourra accéder.
