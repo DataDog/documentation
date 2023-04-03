@@ -9,11 +9,13 @@ author:
   support_email: support@sedai.io
   vendor_id: sedai
 categories:
-- notification
 - 自動化
 - クラウド
 - コスト管理
 - マーケットプレイス
+- notification
+- orchestration
+- プロビジョニング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,20 +40,22 @@ public_title: Sedai
 short_description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Notification
   - Category::Automation
   - Category::Cloud
   - Category::Cost Management
   - Category::Marketplace
+  - Category::Notification
+  - Category::Orchestration
+  - Category::Provisioning
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
   media:
@@ -98,13 +102,21 @@ Sedai は、本番環境をプロアクティブに管理し、問題を防止�
 
 ## サポート
 
-このインテグレーションに関するヘルプは、[support@sedai.io][1] にメールをお送りください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Sedai にお問い合わせください。
 
+- メール: [support@sedai.io][5]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Sedai と Datadog で AWS Lambda のデプロイを自律的に最適化][6]
 
 [1]: mailto:support@sedai.io
 [2]: https://app.datadoghq.com/integrations/sedai
 [3]: https://www.sedai.io/
 [4]: mailto:sales@sedai.io
-
+[5]: mailto:support@sedai.io
+[6]: https://www.datadoghq.com/blog/autonomous-cloud-management-aws-lambda-sedai-datadog/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/sedai-sedai-license" target="_blank">こちらをクリック</a>してください。

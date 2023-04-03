@@ -34,8 +34,6 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- cloud
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -63,18 +61,16 @@ public_title: Nutanix インテグレーション
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
   media:

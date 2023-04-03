@@ -196,14 +196,15 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-Use the PHP tracer's API for adding custom tags to a root span, and add user information so that you can monitor authenticated requests in the application.
+The PHP tracer provides the `\DDTrace\set_user()` function, which allows you to monitor and block authenticated requests.
 
-User monitoring tags are applied to the `meta` section of the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user’s name.
+`\DDTrace\set_user()` adds the relevant user tags and metadata to the trace and automatically performs user blocking.
 
-The example below shows how to obtain the root span and add the relevant user monitoring tags:
+The following example shows how to set user monitoring tags and enable user blocking:
 
 ```php
 <?php
+// Blocking is performed internally through the set_user call.
 \DDTrace\set_user(
     // A unique identifier of the user is required.
     '123456789',
@@ -268,21 +269,12 @@ Monitor authenticated requests by adding user information to the trace with the 
 This example shows how to set user monitoring tags and enable user blocking capability:
 
 ```python
-from ddtrace.appsec.trace_utils import should_block_user
-from ddtrace.appsec.trace_utils import block_request
-from ddtrace.appsec.trace_utils import block_request_if_user_blocked
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
 # Call set_user() to trace the currently authenticated user id
 user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
-# Call is_user_blocked() to possibly block the authenticated user when in the denylist
-if should_block_user(user_id):
-    block_request()
-# Also the utility function that checks and blocks if needed:
-block_request_if_user_blocked(tracer, user_id)
-    block_request()
 ```
 
 {{< /programming-lang >}}

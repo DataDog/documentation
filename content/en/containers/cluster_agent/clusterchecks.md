@@ -58,7 +58,6 @@ kind: DatadogAgent
 metadata:
   name: datadog
 spec:
-  # (...)
   features:
     clusterChecks:
       enabled: true

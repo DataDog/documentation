@@ -196,7 +196,7 @@ spec:
           command:
             - "/otelcol-contrib"
             - "--config=/conf/otel-agent-config.yaml"
-          image: otel/opentelemetry-collector-contrib:0.61.0
+          image: otel/opentelemetry-collector-contrib:0.71.0
           env:
             - name: POD_IP
               valueFrom:

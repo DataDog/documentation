@@ -44,7 +44,8 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [S3][29]                          | [Enable AWS S3 logs][30]                                                                       | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection. |
 | [SNS][32]                         | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS Service. | [Manual][33] log collection.                                                |
 | [RedShift][34]                    | [Enable AWS Redshift logs][35]                                                                 | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection. |
-| [VPC][37]                         | [Enable AWS VPC logs][38]                                                                      | [Manual][39] log collection.                                                |
+| [Verified Access][37]             | [Enable Verified Access logs][38]                                                              | [Manual][39] log collection.                                                |
+| [VPC][40]                         | [Enable AWS VPC logs][41]                                                                      | [Manual][42] log collection.                                                |
 
 ## Set up triggers
 
@@ -71,7 +72,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 **Note**: `SubscriptionFilter` is not created automatically.
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
-2. Ensure the policy of the IAM role used for [Datadog-AWS integration][40] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
+2. Ensure the policy of the IAM role used for [Datadog-AWS integration][43] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
 
     ```text
     "cloudfront:GetDistributionConfig",
@@ -111,14 +112,14 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | Lists the subscription filters for the specified log group.                  |
 
-3. In the [AWS Integration page][41], select the AWS Account to collect logs from and click on the **Log Collection** tab.  
+3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.  
    {{< img src="logs/aws/aws_log_setup_step1.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with instructions to send AWS Services logs and a textbox to autosubscribe the Forwarder Lambda function by entering the ARN of the Forwarder Lambda function" popup="true" style="width:90%;" >}}
 4. Enter the ARN of the Lambda created in the previous section and click **Add**.
 5. Select the services from which you'd like to collect logs and click **Save**. To stop collecting logs from a particular service, deselect the log source.
    {{< img src="logs/aws/aws_log_setup_step2.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with one Lambda function successfully entered under Included ARNs and some of the services enabled under Log Sources" popup="true" style="width:90%;" >}}
 6. If you have logs across multiple regions, you must create additional Lambda functions in those regions and enter them in this page.
 7. To stop collecting all AWS logs, hover over a Lambda and click the Delete icon. All triggers for that function are removed.
-8. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][42].
+8. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][45].
 
 ### Manually set up triggers
 
@@ -241,8 +242,8 @@ Resources:
 
 ## Scrubbing and filtering
 
-You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][43].
-You can also exclude or send only those logs that match a specific pattern by using the [filtering option][44].
+You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][46].
+You can also exclude or send only those logs that match a specific pattern by using the [filtering option][47].
 
 [1]: /serverless/forwarder/
 [2]: /serverless/forwarder#aws-privatelink-support
@@ -280,11 +281,14 @@ You can also exclude or send only those logs that match a specific pattern by us
 [34]: /integrations/amazon_redshift/
 [35]: /integrations/amazon_redshift/#enable-aws-redshift-logging
 [36]: /integrations/amazon_redshift/#log-collection
-[37]: /integrations/amazon_vpc/
-[38]: /integrations/amazon_vpc/#enable-vpc-flow-log-logging
-[39]: /integrations/amazon_vpc/#log-collection
-[40]: /integrations/amazon_web_services/
-[41]: https://app.datadoghq.com/integrations/amazon-web-services
-[42]: https://app.datadoghq.com/logs
-[43]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
-[44]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[37]: /integrations/amazon_verified_access/
+[38]: /integrations/amazon_verified_access/#enable-verified-access-logs
+[39]: /integrations/amazon_verified_access/#log-collection
+[40]: /integrations/amazon_vpc/
+[41]: /integrations/amazon_vpc/#enable-vpc-flow-log-logging
+[42]: /integrations/amazon_vpc/#log-collection
+[43]: /integrations/amazon_web_services/
+[44]: https://app.datadoghq.com/integrations/amazon-web-services
+[45]: https://app.datadoghq.com/logs
+[46]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
+[47]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional

@@ -23,10 +23,11 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- marketplace
 - cloud
 - log collection
+- marketplace
 - metrics
+- notification
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -54,19 +55,20 @@ public_title: Intégration Box
 short_description: Surveillez vos utilisateurs et votre stockage dans Box Enterprise
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Log Collection
+  - Category::Marketplace
   - Category::Metrics
+  - Category::Notification
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Surveillez vos utilisateurs et votre stockage dans Box Enterprise
   media:
