@@ -290,7 +290,7 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 
 {{< /programming-lang-wrapper >}}
 
-## Adding user events (login success, login failure, any business logic) to traces
+## Adding business logic information (login success, login failure, any business logic) to traces
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
