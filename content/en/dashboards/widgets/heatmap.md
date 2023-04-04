@@ -17,13 +17,13 @@ further_reading:
 
 {{< img src="dashboards/widgets/heatmap/heatmap.png" alt="Example heatmap graph visualization" style="width:100%;">}}
 
-The heatmap visualization shows metrics aggregated across multiple tags. The heatmap supports distribution metrics, high resolution and data display. You can visualize OpenTelemetry histograms as heatmaps out of the box by using the 'counters' histogram mode.
+The heatmap visualization shows metrics aggregated across multiple tags. Use heatmap to visualize OpenTelemetry histograms, distribution metrics, high resolution and data display.
 
 ## Setup
 
 ### Configuration
 
-Configure your metric query as usual. 
+Configure your metric query as usual. Graph OpenTelemetry histograms by using the 'counters' histogram mode.
 
 Make a selection in the "`avg`/`max`/`min`/`sum by`/etc." control to see your data across the associated tags.
 
