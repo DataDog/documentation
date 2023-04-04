@@ -52,7 +52,7 @@ const renderHits = (renderOptions, isFirstRender) => {
     const { widgetParams, hits } = renderOptions;
     const { container, basePathName } = widgetParams;
 
-    const joinedListItemsHTML = generateJoinedHits(hits, null);
+    const joinedListItemsHTML = generateJoinedHits(hits);
 
     const aisHits = document.createElement('div');
     const aisHitsList = document.createElement('ol');
