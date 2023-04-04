@@ -83,7 +83,7 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 : Bucket count in the time window for the bucket with the specified lower and upper bounds.<br>
 **Datadog In-App Type**: COUNT
 
-- If the `send_count_sum_metrics` flag is enabled, the following metrics are produced:
+- If the `send_aggregation_metrics` flag is enabled, the following metrics are produced:
 
 `<METRIC_NAME>.sum`
 : Sum of the values submitted during the time window.<br>
@@ -93,7 +93,15 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 : Number of values submitted during the time window.<br>
 **Datadog In-App Type**: COUNT
 
-**Note**: `send_count_sum_metrics` is useful only when not using the distributions mode.
+`<METRIC_NAME>.min`
+: Minimum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: Datadog exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0. <br>
+**Datadog In-App Type**: GAUGE
+
+`<METRIC_NAME>.max`
+: Maximum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: Datadog exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0.<br>
+**Datadog In-App Type**: GAUGE
+
+**Note**: `send_aggregation_metrics` is useful only when not using the distributions mode. Before the Datadog exporter v0.75.0 and the Datadog Agent v6.45.0 and v7.45.0 use `send_count_sum_metrics` instead.
 
 [1]: /metrics/distributions
 [2]: /dashboards/functions/arithmetic/#cumulative-sum
