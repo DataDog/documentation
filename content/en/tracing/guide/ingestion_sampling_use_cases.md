@@ -98,7 +98,9 @@ In addition to head-based sampled traces, you can increase the error sampling ra
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Error Sampling" style="width:100%;" >}}
 
-**Note:** Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
+**Notes:** 
+- Distributed pieces of the trace chunks might not be ingested as the sampling happens locally at the Datadog Agent level.
+- Starting with **Datadog Agent 6/7.41.0 and higher**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` can be set include spans dropped by tracing library rules or `manual.drop`. More details can be found in the [Error traces section of the Ingestion Mechanisms doc.][1]
 
 #### Configuring error sampling
 
