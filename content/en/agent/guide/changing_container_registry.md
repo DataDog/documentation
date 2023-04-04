@@ -3,7 +3,7 @@ title: Changing Your Container Registry
 kind: guide
 ---
 
-Datadog publishes container images in Google’s gcr.io, AWS’ ECR, and on Docker Hub:
+Datadog publishes container images in Google's gcr.io, AWS' ECR, and on Docker Hub:
 
 | dockerhub.io                               | gcr.io                                              | public.ecr.aws                                            |
 |--------------------------------------------|-----------------------------------------------------|-----------------------------------------------------------|
@@ -112,9 +112,9 @@ The next time the task starts, it pulls from `public.ecr.aws` instead of Docker 
 
 ## Cluster Agent
 
-If you’re using the Helm chart to deploy the Datadog Agent and the Datadog Cluster Agent, follow the instructions in [Kubernetes with Helm chart](#kubernetes-with-helm-chart), and no other updates are needed. The change to the Helm `values.yaml` outlined above changes the repository that both the Cluster Agent and the Datadog Agent are pulled from.
+If you're using the Helm chart to deploy the Datadog Agent and the Datadog Cluster Agent, follow the instructions in [Kubernetes with Helm chart](#kubernetes-with-helm-chart), and no other updates are needed. The change to the Helm `values.yaml` outlined above changes the repository that both the Cluster Agent and the Datadog Agent are pulled from.
 
-If you’re using the Datadog Operator to deploy the Datadog Cluster Agent, follow the instructions in [Kubernetes with the Datadog Operator](#kubernetes-with-the-datadog-operator), and no other updates are needed. The instructions for updating the Operator configuration updates the repository that both the Cluster Agent and the Datadog Agent are pulled from.
+If you're using the Datadog Operator to deploy the Datadog Cluster Agent, follow the instructions in [Kubernetes with the Datadog Operator](#kubernetes-with-the-datadog-operator), and no other updates are needed. The instructions for updating the Operator configuration updates the repository that both the Cluster Agent and the Datadog Agent are pulled from.
 
 For more information about the Datadog Cluster Agent, see the [Cluster Agent docs][9], and the [setup docs][10].
 
