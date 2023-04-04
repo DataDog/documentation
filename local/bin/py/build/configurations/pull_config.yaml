@@ -65,7 +65,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: cswatt/experiment
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
