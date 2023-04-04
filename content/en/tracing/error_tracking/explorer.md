@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a group of similar errors that have the same _fingerprint_ and which might need to be fixed depending on how critical it is. 
+The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a group of similar errors that have the same _fingerprint_ and which might need to be fixed depending on how critical they are. 
 
 {{< img src="tracing/error_tracking/error_tracking_explore_inspect.png" alt="Error Tracking Explorer" style="width:100%;" >}}
 

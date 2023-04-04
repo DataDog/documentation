@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="real_user_monitoring/error_tracking/page.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/page.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile applications' crash reports" style="width:100%;" >}}
 
 The Error Tracking Explorer allows you to explore all your different issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
 

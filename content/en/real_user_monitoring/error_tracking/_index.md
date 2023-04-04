@@ -27,9 +27,9 @@ further_reading:
 
 It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging crashes, you can minimize the impact of fatal errors on your web and mobile applications' user experience.
 
-{{< img src="real_user_monitoring/error_tracking/rum_error_tracking.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum_error_tracking.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile applications' crash reports" style="width:100%;" >}}
 
-Once you have set up RUM for **Web and Mobile Apps** error tracking, the issue list populates with cards. You can view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your web and mobile applications.
+Once you have set up RUM for **Web and Mobile Apps** error tracking, the issue list populates with cards. You can view open, ignored, or all issues; sort issues by volume or age; and filter issues by all custom and default facets on your web and mobile applications.
 
 Error Tracking enables you to:
 
