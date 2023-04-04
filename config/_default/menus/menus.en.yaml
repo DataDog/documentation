@@ -2328,7 +2328,7 @@ main:
     url: logs/explorer/live_tail/
     parent: log_explorer
     weight: 501
-  - name: Search
+  - name: Search Logs
     url: logs/explorer/search/
     parent: log_explorer
     weight: 502

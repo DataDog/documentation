@@ -7,14 +7,16 @@ aliases:
 further_reading:
     - link: 'logs/explorer/search'
       tag: 'Documentation'
-      text: 'Filter logs'
-    - link: 'logs/explorer/group'
+      text: 'Learn how to filter logs'
+    - link: 'logs/explorer/analytics'
       tag: 'Documentation'
-      text: 'Group queried logs'
+      text: 'Learn how to group logs'
     - link: 'logs/explorer/visualize'
       tag: 'Documentation'
       text: 'Create visualizations from logs'
 ---
+
+## Overview
 
 At any moment, and depending on your current aggregation, **export** your log exploration as a:
 
@@ -31,6 +33,8 @@ At any moment, and depending on your current aggregation, **export** your log ex
 You can also export your Log Explorer view to reuse later or in different contexts. For example, download a List view or Table view in a CSV file to do offline processing of your logs or share the results of your query with your teammates.
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
