@@ -3719,28 +3719,6 @@ components:
           nullable: true
           type: array
       type: object
-    GetAllTeamsInclude:
-      description: Included related resources optionally requested.
-      enum:
-      - team_links
-      - user_team_permissions
-      type: string
-      x-enum-varnames:
-      - TEAM_LINKS
-      - USER_TEAM_PERMISSIONS
-    GetAllTeamsSort:
-      description: Specifies the order of the returned teams
-      enum:
-      - name
-      - -name
-      - user_count
-      - -user_count
-      type: string
-      x-enum-varnames:
-      - NAME
-      - _NAME
-      - USER_COUNT
-      - _USER_COUNT
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
       enum:
@@ -5806,6 +5784,28 @@ components:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
       type: object
+    ListTeamsInclude:
+      description: Included related resources optionally requested.
+      enum:
+      - team_links
+      - user_team_permissions
+      type: string
+      x-enum-varnames:
+      - TEAM_LINKS
+      - USER_TEAM_PERMISSIONS
+    ListTeamsSort:
+      description: Specifies the order of the returned teams
+      enum:
+      - name
+      - -name
+      - user_count
+      - -user_count
+      type: string
+      x-enum-varnames:
+      - NAME
+      - _NAME
+      - USER_COUNT
+      - _USER_COUNT
     Log:
       description: Object description of a log after being processed and stored by
         Datadog.
@@ -23699,7 +23699,7 @@ paths:
 
         Can be used to search for teams using the `filter[keyword]` and `filter[me]`
         query parameters.'
-      operationId: GetAllTeams
+      operationId: ListTeams
       parameters:
       - $ref: '#/components/parameters/PageNumber'
       - $ref: '#/components/parameters/PageSize'
@@ -23707,14 +23707,14 @@ paths:
         in: query
         name: sort
         schema:
-          $ref: '#/components/schemas/GetAllTeamsSort'
+          $ref: '#/components/schemas/ListTeamsSort'
       - description: 'Included related resources optionally requested. Allowed enum
           values: `team_links, user_team_permissions`'
         in: query
         name: include
         schema:
           items:
-            $ref: '#/components/schemas/GetAllTeamsInclude'
+            $ref: '#/components/schemas/ListTeamsInclude'
           type: array
       - description: Search query. Can be team name, team handle, or email of team
           member
@@ -23792,7 +23792,7 @@ paths:
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
-        operationId: RemoveTeam
+        operationId: DeleteTeam
         parameters:
         - name: team_id
           source: data.id
@@ -23800,7 +23800,7 @@ paths:
   /api/v2/team/{team_id}:
     delete:
       description: Remove a team using the team's `id`.
-      operationId: RemoveTeam
+      operationId: DeleteTeam
       parameters:
       - description: None
         in: path
@@ -24020,7 +24020,7 @@ paths:
           step: there is a valid "team_link" in the system
       x-menu-order: 11
       x-undo:
-        operationId: RemoveTeamLink
+        operationId: DeleteTeamLink
         parameters:
         - name: team_id
           source: data.attributes.team_id
@@ -24030,7 +24030,7 @@ paths:
   /api/v2/team/{team_id}/links/{link_id}:
     delete:
       description: Remove a link from a team.
-      operationId: RemoveTeamLink
+      operationId: DeleteTeamLink
       parameters:
       - description: None
         in: path
@@ -24263,7 +24263,7 @@ paths:
           step: there is a valid "team_membership" in the system
       x-menu-order: 7
       x-undo:
-        operationId: RemoveTeamMembership
+        operationId: DeleteTeamMembership
         parameters:
         - name: team_id
           template: '{{team.data.id}}'
@@ -24273,7 +24273,7 @@ paths:
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
       description: Remove a user from a team.
-      operationId: RemoveTeamMembership
+      operationId: DeleteTeamMembership
       parameters:
       - description: None
         in: path
