@@ -1721,7 +1721,7 @@ main:
     parent: service_catalog
     identifier: service_catalog_setup
     weight: 901
-  - name: Registering Services through the API
+  - name: Service Catalog API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
