@@ -1034,7 +1034,7 @@
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
   },
-  "GetAllTeams": {
+  "ListTeams": {
     "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",
     "summary": "Get all teams"
   },
@@ -1044,7 +1044,7 @@
     "request_description": "",
     "request_schema_description": "Request to create a team"
   },
-  "RemoveTeam": {
+  "DeleteTeam": {
     "description": "Remove a team using the team's `id`.",
     "summary": "Remove a team"
   },
@@ -1068,7 +1068,7 @@
     "request_description": "",
     "request_schema_description": "Team link create request"
   },
-  "RemoveTeamLink": {
+  "DeleteTeamLink": {
     "description": "Remove a link from a team.",
     "summary": "Remove a team link"
   },
@@ -1092,7 +1092,7 @@
     "request_description": "",
     "request_schema_description": "Team membership request"
   },
-  "RemoveTeamMembership": {
+  "DeleteTeamMembership": {
     "description": "Remove a user from a team.",
     "summary": "Remove a user from a team"
   },

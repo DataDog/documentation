@@ -56,7 +56,7 @@ AWS インテグレーションを手動で設定するには、AWS アカウン
 
 1. [AWS インテグレーション構成ページ][1]で、**Add AWS Account** をクリックし、** Manually** を選択します。
 2. アクセスタイプで `Role Delegation` を選択し、`AWS External ID` をコピーします。外部 ID の詳細については、[IAM ユーザーガイド][2]をご参照ください。
-  **注: 外部 ID の値がリセットされるため、インテグレーションタイルや Datadog サイトを閉じないでください。**
+  **注:** 外部 ID は、ユーザーにより明示的に変更されたり、別の AWS アカウントが Datadog に追加されたりしない限り、48 時間は利用可能な状態となり、再生成されません。その時間内に **Add New AWS Account** ページに戻り、アカウントの追加プロセスを完了すれば、外部 ID が変更されることはありません。
 
 ### Datadog のための AWS IAM ポリシー
 Datadog が提供するすべての AWS インテグレーションを利用するために、AWS アカウントの Datadog ロールに[必要な権限](#aws-integration-iam-policy)を持つ IAM ポリシーを作成します。インテグレーションに他のコンポーネントが追加されると、これらの権限は変更される可能性があります。
@@ -96,7 +96,7 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
 [4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: /ja/security_platform/cspm
+[5]: /ja/security/cspm
 [6]: /ja/integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
 {{% tab "Access keys (GovCloud or China Only)" %}}
