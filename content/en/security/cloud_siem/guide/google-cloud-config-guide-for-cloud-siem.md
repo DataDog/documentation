@@ -38,7 +38,7 @@ This guide walks you through the following steps so that you can start detecting
 
 If a new Google Cloud service is added, it inherits your [default audit configuration][7].
 
-To ensure that Data Access audit logs are captured for new Google Cloud service, modify your default audit configuration:
+To ensure that Data Access audit logs are captured for new Google Cloud services, modify your default audit configuration:
 
 1. Navigate to the **IAM & Admin Console > [Audit Log][6]**.
 1. Enable **Admin Read**, **Data Read**, and **Data Write**.
@@ -62,7 +62,7 @@ To ensure that Data Access audit logs are captured for new Google Cloud service,
 1. Configure any additional options for your use case.
 1. Click **Create**.
 
-The Pub/Sub is ready to receive logs from Google Cloud Logging and forward them to Datadog.
+The pub/sub is ready to receive logs from Google Cloud Logging and forward them to Datadog.
 
 ## Export logs from Google Cloud Logging to the pub/sub
 
@@ -76,12 +76,12 @@ The Pub/Sub is ready to receive logs from Google Cloud Logging and forward them 
 1. In the **Select a Cloud Pub/Sub topic**, select the Pub/Sub created earlier.
 1. Click **Create Sink**.
 
-**Note**: It is possible to create several exports from Google Cloud Logging to the same Pub/Sub with different sinks.
+**Note**: It is possible to create several exports from Google Cloud Logging to the same pub/sub with different sinks.
 
-**Warning**: Pub/Subs are subject to [Google Cloud quotas and limitations][10]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][11] for information on how to set up a monitor to notify when you are close to those limits.
+**Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][10]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][11] for information on how to set up a monitor to notify when you are close to those limits.
 ## Use Cloud SIEM to triage Security Signals
 
-Cloud SIEM applies out of the box detection rules to all processed logs, including the Google Cloud audit logs you have just set up. When a threat is detected with a Detection Rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
+Cloud SIEM applies out-of-the-box detection rules to all processed logs, including the Google Cloud audit logs you have just set up. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
 
 - Go to the [Cloud SIEM Signals Explorer][12] to view and triage threats. See Security Signals Explorer for further details.
 - You can also use the [Google Cloud Audit Log dashboard][13] to investigate anomalous activity.
