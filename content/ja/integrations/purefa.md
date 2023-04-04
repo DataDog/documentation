@@ -23,7 +23,7 @@ author:
   sales_email: sales@purestorage.com
   support_email: pure-observability@purestorage.com
 categories:
-- os system
+- OS & システム
 - data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md
@@ -50,7 +50,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS System
+  - Category::OS & System
   - Category::Data Store
   - Offering::Integration
   configuration: README.md#Setup

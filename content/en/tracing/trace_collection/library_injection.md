@@ -26,7 +26,8 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 ## Requirements
 
 * Kubernetes v1.14+
-* Datadog [Cluster Agent v7.40+][3] with Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
+* Datadog [Cluster Agent v7.40+][3]
+* Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * Applications in Java, JavaScript, or Python deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 
@@ -85,9 +86,9 @@ To select your pods for library injection, annotate them with the following, cor
 
 | Language   | Pod annotation                                              |
 |------------|-------------------------------------------------------------|
-| Java       | `admission.datadoghq.com/java-lib.version: "<lib-version>"`   |
-| JavaScript | `admission.datadoghq.com/js-lib.version: "<lib-version>"`     |
-| Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
+| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
+| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
 - [Java][13]
@@ -112,7 +113,7 @@ template:
     labels:
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods in this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
+        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
   containers:
   -  ...
 ```
@@ -153,7 +154,7 @@ template:
         tags.datadoghq.com/version: "1.1" # Unified service tag - Pod Version tag
         admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
     annotations:
-        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
+        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
   containers:
   -  ...
 ```

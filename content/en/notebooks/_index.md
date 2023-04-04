@@ -203,7 +203,7 @@ To restore general access to a notebook with restricted access, follow the steps
 [7]: /dashboards/widgets/timeseries/
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/table/
-[10]: /dashboards/widgets/heat_map/
+[10]: /dashboards/widgets/heatmap/
 [11]: /dashboards/widgets/distribution/
 [12]: /dashboards/widgets/list/
 [13]: /dashboards/widgets/query_value/

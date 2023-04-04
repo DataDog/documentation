@@ -184,7 +184,7 @@ agent:
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -486,8 +486,8 @@ The following configuration defines the integration template for Redis container
         - redis
       logs:
         - source: redis
-        - service: redis
-        - tags: env:prod
+          service: redis
+          tags: env:prod
   ```
 
 **Note**: The above configuration collects only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.
