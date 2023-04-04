@@ -18,7 +18,7 @@ There are three methods of deploying the Agent:
 
 3. In a [Kubernetes environment][2]
 
-These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
+These different methods may present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
 
 For details on Agent release updates or changes, refer to Datadog’s [release notes][7].
 
@@ -144,7 +144,7 @@ The three most common deployment methods are: Helm chart, DaemonSet, and Operato
 If you are experiencing missing or inaccurate metrics, Datadog support may ask for the result of a cURL output of the node Agent trying to reach the metric endpoint. This is done by running the command from inside the Agent container, and can inform support if the Agent has access to the metrics. **Note**: This is not possible in a Fargate or managed services: 
 
 ```
-$ kubectl exec -it <AGENT_POD_NAME> curl -k -v ""<METRIC_ENDPOINT>""
+$ kubectl exec -it <AGENT_POD_NAME> curl -k -v "<METRIC_ENDPOINT>"
 ```
 
 ```
