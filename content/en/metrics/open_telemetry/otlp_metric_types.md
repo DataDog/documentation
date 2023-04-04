@@ -194,12 +194,14 @@ Suppose you are using an OpenTelemetry Histogram instrument, `request.response_t
 
 [Read more about distributions][1] to understand how to configure further aggregations.
 
-Alternatively, if you are using the `counters` mode and enabling the `send_count_sum_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
+Alternatively, if you are using the `counters` mode and enabling the `send_aggregation_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
 
 | Metric Name                                 | Value  | Tags                                | Datadog In-App Type |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`  | `8`    | n/a                                 | COUNT               |
 | `request.response_time.distribution.sum`    | `15`   | n/a                                 | COUNT               |
+| `request.response_time.distribution.max`    | `3`    | n/a                                 | GAUGE               |
+| `request.response_time.distribution.min `   | `1`    | n/a                                 | GAUGE               |
 | `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`, `upper_bound:2` | GAUGE               |
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
