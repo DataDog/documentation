@@ -194,7 +194,7 @@ Suppose you are using an OpenTelemetry Histogram instrument, `request.response_t
 
 [Read more about distributions][1] to understand how to configure further aggregations.
 
-Alternatively, if you are using the `counters` mode and enabling the `send_aggregation_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
+Alternatively, if you are using the `counters` mode, the `send_aggregation_metrics` flag is enabled, and the histogram bucket boundaries are set to `[-inf, 2, inf]`, the following metrics are reported:
 
 | Metric Name                                 | Value  | Tags                                | Datadog In-App Type |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
