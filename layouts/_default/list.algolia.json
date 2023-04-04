@@ -9,7 +9,7 @@
             {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
             {{ $object_id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}
-            {{ $content := $page.Plain | truncate 10000 | htmlUnescape | safeHTML }}
+            {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
             {{ $category := $page.Params.algolia.category | default "Documentation" }}
             {{ $subcategory := $page.Params.algolia.subcategory | default $page.Title }}
