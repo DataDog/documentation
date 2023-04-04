@@ -30,6 +30,8 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * Applications in Java, JavaScript, or Python deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
+**Note:** Python uWSGI applications are not supported.
+
 
 ## Container registries
 
