@@ -1,5 +1,5 @@
 ---
-title: Python Custom Instrumentation
+title: Python Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/opentracing/python

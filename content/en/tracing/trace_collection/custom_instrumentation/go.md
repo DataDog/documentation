@@ -1,5 +1,5 @@
 ---
-title: Go Custom Instrumentation
+title: Go Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/opentracing/go

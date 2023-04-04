@@ -1408,7 +1408,7 @@ main:
     parent: tracing_library_config
     identifier: tracing_library_config_dotnet_framework
     weight: 109
-  - name: Custom Instrumentation with dd-trace
+  - name: Custom Instrumentation with Datadog Libraries
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
@@ -1453,7 +1453,7 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: Custom Instrumentation with OTel
+  - name: Instrumenting with OpenTelemetry
     url: tracing/trace_collection/otel_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_otel_inst

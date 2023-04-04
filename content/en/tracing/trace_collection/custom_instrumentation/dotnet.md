@@ -1,5 +1,5 @@
 ---
-title: .NET Custom Instrumentation
+title: .NET Custom Instrumentation with Datadog Library
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang

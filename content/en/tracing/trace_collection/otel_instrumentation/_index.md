@@ -1,8 +1,8 @@
 ---
-title: Custom Instrumentation with OpenTelemetry
+title: Instrumenting with OpenTelemetry
 kind: documentation
 type: multi-code-lang
-description: 'Set up custom OpenTelemetry instrumentation to work with Datadog tracing'
+description: 'Set up OpenTelemetry instrumentation to work with Datadog tracing'
 aliases:
 further_reading:
     - link: 'tracing/glossary/'

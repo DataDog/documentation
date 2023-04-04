@@ -1,7 +1,7 @@
 ---
-title: Go OTel Custom Instrumentation
+title: Go OpenTelemetry Instrumentation
 kind: documentation
-description: 'Custom instrument your Go application with OTel API to send traces to Datadog'
+description: 'Instrument your Go application with OTel API to send traces to Datadog'
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -17,15 +17,15 @@ further_reading:
 
 tktk Go Requirements
 
-The following OTel features are not implemented by the Datadog Trace Provider:
+The following OTel features implemented in the Datadog library as noted:
 
-| Feature                               | Support?    | Notes                       |
+| Feature                               | Support notes                       |
 |---------------------------------------|-------------|-----------------------------|
-| [OTel Context propagation][1]         | Unsupported | [Datadog distributed header format][9] is used instead. | 
-| [Span processors][2]                  | Unsupported |                                                    | 
-| [Span Exporters][3]                   | Unsupported |                                                    |
-| `OpenTelemetry.logger`                | Special     | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. |
-| Trace/span [ID generators][4]         | Special     | ID generation is performed by `ddtrace`.           |
+| [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [Span processors][2]                  | Unsupported                                          | 
+| [Span Exporters][3]                   | Unsupported                                            |
+| `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through [custom logging][10]. |
+| Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
 ## Configuring OTel to use the Datadog trace provider

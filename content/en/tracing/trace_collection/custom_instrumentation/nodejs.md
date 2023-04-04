@@ -1,5 +1,5 @@
 ---
-title: Node.js Custom Instrumentation
+title: Node.js Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/opentracing/nodejs

@@ -1,5 +1,5 @@
 ---
-title: PHP Custom Instrumentation
+title: PHP Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/manual_instrumentation/php
