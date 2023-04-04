@@ -9,7 +9,7 @@ private: true
 {{< /site-region >}}
 
 <div class="alert alert-warning">
-The features described on this page are in beta. Contact your Customer Success Manager to learn more.
+The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
 </div>
 
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
@@ -361,9 +361,9 @@ Enable the database monitoring propagation feature by setting the following envi
 
 Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
 
-### Filter the Databases List for specific APM calling services.
+### Filter your database hosts by the APM services that call them
 
-{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter the Databases List for specific APM calling services.">}}
+{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
 
 Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream  dependencies have blocking activity that may be impacting service performance.   
 
