@@ -17,13 +17,13 @@ You can identify which site you are on by matching your Datadog website URL to t
 
 {{< img src="getting_started/site/site.png" alt="The site URL in your browser tab" style="width:40%" >}}
 
-| Site    | Site URL                    | Site Parameter      | Location |
-|---------|-----------------------------|---------------------|----------|
-| US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       |
-| US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       |
-| US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
-| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       |
-| US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
+| Site    | Site URL                    | Site Parameter      | Location | Cloud       |
+|---------|-----------------------------|---------------------|----------|-------------|
+| US1     | `https://app.datadoghq.com` | `datadoghq.com`     | US       | AWS         |
+| US3     | `https://us3.datadoghq.com` | `us3.datadoghq.com` | US       | Azure       |
+| US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       | GCP         |
+| EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       | GCP         |
+| US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       | AWS Federal |
 
 
 ## Real User Monitoring (RUM) domains
