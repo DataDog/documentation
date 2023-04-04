@@ -19,7 +19,10 @@ Datadog provides an Azure extension to assist with Agent deployment on Azure ins
 * [Introducing Azure monitoring with one-click Datadog deployment][1]
 * [Azure integration documentation][2]
 
-An alternative to the GUI installation is the command line.
+You can install the extension through the CLI or Terraform.
+
+### CLI
+
 To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment. Replace `<SITE_PARAMETER>` with your Datadog account **site parameter** value in the [Datadog sites page][3], and `<DATADOG_API_KEY>` with your [Datadog API key][4]. 
 
 {{< tabs >}}
@@ -114,6 +117,67 @@ az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --ver
 {{% /tab %}}
 {{< /tabs >}}
 
+### Terraform
+
+You can use Terraform to create and manage the Datadog Agent extension. Follow these steps to install and configure the Agent on a single machine, and then upload a zipped configuration file to blob storage to be referenced in your VM Extension Terraform block.
+
+1. [Install the Agent][8].
+2. Apply any desired [Agent configurations][9].
+3. For Windows Server 2008, Vista and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
+4. Upload the file to blob storage.
+5. Reference the blob storage URL in the Terraform block to create the VM extension:
+
+{{< tabs >}}
+{{% tab "Windows" %}}
+
+```
+  resource "azurerm_virtual_machine_extension" "example" {
+  name                 = "DDAgentExtension"
+  virtual_machine_id   = azurerm_virtual_machine.example.id
+  publisher            = "Datadog.Agent"
+  type                 = "DatadogWindowsAgent"
+  type_handler_version = "2.0"
+
+   settings = <<SETTINGS
+  {
+    "site":"<DATADOG_SITE>"
+  }
+  SETTINGS
+
+   protected_settings = <<PROTECTED_SETTINGS
+  {
+    "DATADOG_API_KEY": "<DATADOG_API_KEY_VALUE>"
+  }
+  PROTECTED_SETTINGS
+```
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+```
+  resource "azurerm_virtual_machine_extension" "example" {
+  name                 = "DDAgentExtension"
+  virtual_machine_id   = azurerm_virtual_machine.example.id
+  publisher            = "Datadog.Agent"
+  type                 = "DatadogLinuxAgent"
+  type_handler_version = "2.0"
+
+   settings = <<SETTINGS
+  {
+    "site":"<DATADOG_SITE>"
+  }
+  SETTINGS
+
+   protected_settings = <<PROTECTED_SETTINGS
+  {
+    "DATADOG_API_KEY": "<DATADOG_API_KEY_VALUE>"
+  }
+  PROTECTED_SETTINGS
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+See the [Virtual Machine Extension resource][7] in the Terraform registry for more information about the available arguments.
+
 ## Install on Azure Arc
 
 To run the Datadog Agent in your [Azure Arc][5] instances as an extension, use the command that matches your environment.
@@ -147,3 +211,6 @@ More information on the syntax to set Azure `connectedmachine` extensions can be
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /integrations/azure_arc/
 [6]: https://learn.microsoft.com/en-us/cli/azure/connectedmachine/extension
+[7]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
+[8]: https://app.datadoghq.com/account/settings#agent
+[9]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7
