@@ -88,10 +88,11 @@ const renderHits = (renderOptions, isFirstRender) => {
             .map((item) => {
                 const hit = getHitData(item);
                 const displayContent = truncateContent(hit.content, 145);
+                const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
 
                 return `
                     <li class="ais-Hits-item">
-                        <a href="${hit.link}" target="_blank" rel="noopener noreferrer">
+                        <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
                             <p class="ais-Hits-subcategory">${hit.subcategory}</p>
                             <div>
                                 <p class="ais-Hits-title"><strong>${hit.title}</strong></p>
@@ -109,7 +110,7 @@ const renderHits = (renderOptions, isFirstRender) => {
     };
 
     const { widgetParams, hits } = renderOptions;
-    const { container } = widgetParams;
+    const { container, basePathName } = widgetParams;
 
     const gettingStartedHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'getting started');
     const docsHitsArray = hits.filter((hit) => hit.category.toLowerCase() === 'documentation' || hit.category === null);

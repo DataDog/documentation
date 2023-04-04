@@ -122,7 +122,8 @@ function loadInstantSearch(asyncLoad) {
             }),
 
             hitComponent({
-                container: hitsContainer
+                container: hitsContainer,
+                basePathName: basePathName
             }),
 
             customPagination({

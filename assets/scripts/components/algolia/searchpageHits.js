@@ -23,10 +23,11 @@ const renderHits = (renderOptions, isFirstRender) => {
             .map((item) => {
                 const hit = getHitData(item);
                 const displayContent = truncateContent(hit.content, 100);
+                const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
 
                 return `
                     <li class="ais-Hits-item">
-                        <a href="${hit.link}" target="_blank" rel="noopener noreferrer">
+                        <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
                             <div class="ais-Hits-row">
                                 <p class="ais-Hits-category">${hit.category}</p>
                                 
@@ -49,7 +50,7 @@ const renderHits = (renderOptions, isFirstRender) => {
     };
 
     const { widgetParams, hits } = renderOptions;
-    const { container } = widgetParams;
+    const { container, basePathName } = widgetParams;
 
     const joinedListItemsHTML = generateJoinedHits(hits, null);
 
