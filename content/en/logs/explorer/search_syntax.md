@@ -52,9 +52,9 @@ Clear error states inform you which part of the query contains syntax errors and
 
 ## Escape special characters and spaces
 
-The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, while spaces and `/` require escaping with the `\` character. 
+The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
 
-Instead of searching for special characters in a log message, you can search for special characters when they are inside of an attribute. 
+You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
 
 To search for special characters, parse them into an attribute with the [Grok Parser][1], and search for logs that contain that attribute.
 

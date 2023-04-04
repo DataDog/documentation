@@ -69,4 +69,4 @@ To learn how to export your log queries and visualizations, see [Export Logs][8]
 [6]: /logs/explorer/analytics
 [7]: /logs/explorer/visualize
 [8]: /logs/explorer/export
-[9]: /watchdog/
+[9]: /watchdog/insights
