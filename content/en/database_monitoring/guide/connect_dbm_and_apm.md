@@ -365,7 +365,7 @@ Break down active connections for a given host by the upstream APM services maki
 
 {{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
 
-Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream  dependencies have blocking activity that may be impacting service performance.   
+Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream dependencies have blocking activity that may impact service performance.   
 
 ### View the associated trace for a query sample
 
@@ -383,9 +383,9 @@ On the APM Service Page, view the direct downstream database dependencies of the
 
 ### Identify potential optimizations using explain plans for database queries in traces 
 
-{{< img src="database_monitoring/dbm_explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
+{{< img src="database_monitoring/explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
-View historical performance of similar queries to those executed in your trace, including sampled wait events, average latency, and recently captured explain plans, to contextualize how a query is expected to perform. Determine if the behavior is abnormal and continue the investigation by pivoting to Database Monitoring for additional context about the underlying database host(s).
+View historical performance of similar queries to those executed in your trace, including sampled wait events, average latency, and recently captured explain plans, to contextualize how a query is expected to perform. Determine if the behavior is abnormal and continue the investigation by pivoting to Database Monitoring for additional context about the underlying database hosts.
 
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/
