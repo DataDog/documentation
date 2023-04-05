@@ -185,4 +185,4 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage
-[21]: https://docs.datadoghq.com/account_management/org_settings/#out-of-contract-retention-periods-for-log-indexes
+[21]: /account_management/org_settings/#out-of-contract-retention-periods-for-log-indexes
