@@ -9,7 +9,7 @@ aliases:
 description: Gather data from all of your systems, apps, & services
 cascade:
     algolia:
-        rank: 40
+        rank: 50
         category: Documentation
         subcategory: Integrations
 ---

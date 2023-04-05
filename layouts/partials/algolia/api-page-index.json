@@ -21,6 +21,7 @@
 {{ $section_header := $action_data.summary }}
 {{ $section_content := $action_data.description }}
 {{ $full_url := print $permalink "#" ($section_header | anchorize) }}
+{{ $rel_permalink := print $relpermalink "#" ($section_header | anchorize) }}
 
 {{/* API actions can have both v1 and v2 endpoints, which should be reflected in search results with updated links */}}
 {{ if eq $api_version "v1" }}
@@ -29,10 +30,12 @@
     {{ if ne $v2_version nil }}
         {{ $hugo_context.Scratch.Add "duplicate_operation_ids" $operationId }}
         {{ $full_url = print $full_url "-v1" }}
+        {{ $rel_permalink = print $rel_permalink "-v1" }}
     {{ end }}
 {{ else if eq $api_version "v2" }}
     {{ if in ($hugo_context.Scratch.Get "duplicate_operation_ids") $operationId }}
         {{ $full_url = print $full_url "-v2" }}
+        {{ $rel_permalink = print $rel_permalink "-v2" }}
     {{ end }}
 {{ end }}
 
