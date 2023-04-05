@@ -191,7 +191,7 @@ Three types of SLO audit events appear in the Event Explorer:
 
 To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
-You can also query the Event Explorer programmatically using the [Datadog Events API][17].
+You can also query the Event Explorer programmatically using the [Datadog Events API][16].
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
@@ -203,9 +203,9 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
-After creating your SLO, you can use the SLO Summary widget to visualize the status of a single SLO or an SLO List widget to visualize a set of SLOs.For more information about SLO Widgets, see the [SLO Summary][18] and [SLO List][19] widget pages.
+After creating your SLO, you can use the SLO Summary widget to visualize the status of a single SLO or an SLO List widget to visualize a set of SLOs.For more information about SLO Widgets, see the [SLO Summary][17] and [SLO List][18] widget pages.
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][20] to notify you when events corresponding to certain tags occur.
+To proactively manage the configurations of your SLOs, set an [Event Monitor][19] to notify you when events corresponding to certain tags occur.
 
 ## SLO status corrections
 
@@ -218,7 +218,7 @@ When you apply a correction, the time period you specify is dropped from the SLO
 - For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][21]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][20]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
@@ -235,7 +235,7 @@ The 90-day limits per SLO are as follows:
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][22], or a [Terraform resource][23].
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][21], or a [Terraform resource][22].
 
 {{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
 
@@ -272,11 +272,10 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
 [15]: /monitors/service_level_objectives/#saved-views
-[16]: https://docs.datadoghq.com/account_management/teams/#associate-resources-with-team-handles
-[17]: /api/latest/events/
-[18]: /dashboards/widgets/slo/
-[19]: /dashboards/widgets/slo_list/
-[20]: /monitors/types/event/
-[21]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[22]: /api/latest/service-level-objective-corrections/
-[23]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[16]: /api/latest/events/
+[17]: /dashboards/widgets/slo/
+[18]: /dashboards/widgets/slo_list/
+[19]: /monitors/types/event/
+[20]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[21]: /api/latest/service-level-objective-corrections/
+[22]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
