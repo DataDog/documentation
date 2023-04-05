@@ -161,9 +161,7 @@ You can make the following change to fix it:
 
 ## Infinite loop-like error messages
 
-If you run into an issue such as [this one][5], where your React Native project displays a stream of error messages and significantly raises your CPU usage.
-
-To resolve this issue, try creating a new React Native project.
+If you run into an issue such as [this one][5], where your React Native project displays a stream of error messages and significantly raises your CPU usage, try creating a new React Native project.
 
 [1]: /help
 [2]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
