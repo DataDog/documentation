@@ -3846,7 +3846,6 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
-      - universal_service_monitoring_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3879,7 +3878,6 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
-      - UNIVERSAL_SERVICE_MONITORING_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7336,8 +7334,6 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
-      - universal_service_monitoring_usage
-      - universal_service_monitoring_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7401,8 +7397,6 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
-      - UNIVERSAL_SERVICE_MONITORING_USAGE
-      - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7650,14 +7644,6 @@ components:
           type: number
         snmp_usage:
           description: The network device usage by tag(s).
-          format: double
-          type: number
-        universal_service_monitoring_percentage:
-          description: The percentage of universal service monitoring usage by tag(s).
-          format: double
-          type: number
-        universal_service_monitoring_usage:
-          description: The universal service monitoring usage by tag(s).
           format: double
           type: number
       type: object
@@ -17669,11 +17655,6 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
-        universal_service_monitoring_host_top99p:
-          description: Shows the 99th percentile of all universal service management
-            hosts over all hours in the current date for the given org.
-          format: int64
-          type: integer
         vsphere_host_top99p:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current date for all organizations.
@@ -18066,11 +18047,6 @@ components:
         twol_ingested_events_bytes_sum:
           description: Shows the sum of all ingested APM span bytes over all hours
             in the current date for the given org.
-          format: int64
-          type: integer
-        universal_service_monitoring_host_top99p:
-          description: Shows the 99th percentile of all Universal Service Monitoring
-            hosts over all hours in the current date for the given org.
           format: int64
           type: integer
         vsphere_host_top99p:
@@ -18506,11 +18482,6 @@ components:
         twol_ingested_events_bytes_agg_sum:
           description: Shows the sum of all ingested APM span bytes over all hours
             in the current months for all organizations.
-          format: int64
-          type: integer
-        universal_service_monitoring_host_top99p_sum:
-          description: Shows the 99th percentile of all Universal Service Monitoring
-            hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         usage:
