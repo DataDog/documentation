@@ -24,7 +24,7 @@ Sometimes, no data gets sent due to a small misstep in the configuration. Here a
 - Set `config.verbosity = SdkVerbosity.DEBUG` (import `SdkVerbosity` from `@datadog/mobile-react-native`)
 - Logs will appear in the Javascript console, you should expect to see an output like this one:
 
-  ```java
+  ```
   INFO  DATADOG: Datadog SDK was initialized
   INFO  DATADOG: Datadog SDK is tracking interactions
   INFO  DATADOG: Datadog SDK is tracking XHR resources
@@ -69,7 +69,7 @@ You can filter logs by "DATADOG" and look for any error.
 
 If you are indeed sending events, you should see the following logs:
 
-```java
+```
 [DATADOG SDK] 🐶 → 10:02:47.398 [DEBUG] ⏳ (rum) Uploading batch...
 [DATADOG SDK] 🐶 → 10:02:47.538 [DEBUG]    → (rum) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: AAAABBBB-1111-2222-3333-777788883333]
 ```
@@ -80,7 +80,7 @@ The first log indicates that some data is being sent, and the second log that th
 
 If you see the log below, it means that you have called a RUM method before initializing the SDK.
 
-```java
+```
 [DATADOG SDK] 🐶 → 10:09:13.621 [WARN] The `Global.rum` was called but no `RUMMonitor` is registered. Configure and register the RUM Monitor globally before invoking the feature:
 ```
 
@@ -128,7 +128,7 @@ You can see in the example above that the last log indicates the batch of RUM da
 
 If you see the following error message:
 
-```java
+```
 Undefined symbols for architecture x86_64:
   "static Foundation.JSONEncoder.OutputFormatting.withoutEscapingSlashes.getter : Foundation.JSONEncoder.OutputFormatting", referenced from:
       static (extension in Datadog):Foundation.JSONEncoder.default() -> Foundation.JSONEncoder in libDatadogSDK.a(JSONEncoder.o)
