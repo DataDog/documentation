@@ -21,20 +21,8 @@ The Node.js Tracer supports the following styles:
 - W3C Trace Context: `tracecontext`
 - B3 Single Header: `B3 single header`
 
-`DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Configuration**: `tracePropagationStyle.inject`<br>
-**Default**: `Datadog,tracecontext`<br>
-A comma-separated list of header formats to include to propagate distributed traces between services.
+For more information about the context propagation settings and other configuration, read [Node.js Tracing Library Configuration][1].
 
-`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Configuration**: `tracePropagationStyle.extract`<br>
-**Default**: `Datadog,tracecontext`<br>
-A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.
-
-`DD_TRACE_PROPAGATION_STYLE`
-: **Configuration**: `tracePropagationStyle`<br>
-**Default**: `Datadog,tracecontext`<br>
-A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
-
+[1]: /tracing/trace_collection/library_config/nodejs/#headers-extraction-and-injection
 [5]: https://github.com/openzipkin/b3-propagation
 [6]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
