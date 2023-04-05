@@ -33,7 +33,7 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 | `aws.cost.amortized.mem.allocated`   | EC2 costs allocated by memory requested by a pod or ECS task. <br> *Based on `aws.cost.amortized`* | 
 | `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory requested by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
 | `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU requested by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU requested by a pod or ECS task <br> *Based on `aws.cost.net.amortized`* |
+| `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU requested by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
 
 These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
 
@@ -120,7 +120,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out of the
 
 ### ECS
 
-In addition to ECS task tags, the following out of the box tags are applied to cost metrics. **Note**: most tags from ECS container (excluding `container_name`) are applied.
+In addition to ECS task tags, the following out of the box tags are applied to cost metrics. **Note**: most tags from ECS containers (excluding `container_name`) are applied.
 
 | Out of the box tag      |  Description |
 | ---                     | ------------ | 
