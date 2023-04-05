@@ -47,7 +47,7 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 
 ## Setup
 
-If you haven’t installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10].
+If you haven't installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10].
 
 {{< tabs >}}
 {{% tab "Standard" %}}
