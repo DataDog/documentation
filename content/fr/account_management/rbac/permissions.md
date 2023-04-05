@@ -12,7 +12,7 @@ further_reading:
 kind: documentation
 title: Autorisations des rôles Datadog
 algolia:
-    rank: 60
+    rank: 80
     category: Documentation
     subcategory: Autorisations des rôles Datadog
 ---

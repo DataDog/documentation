@@ -12,7 +12,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
 algolia:
-    rank: 60
+    rank: 80
     category: Documentation
     subcategory: Datadog Role Permissions
 ---

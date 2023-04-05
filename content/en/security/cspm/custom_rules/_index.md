@@ -14,6 +14,7 @@ further_reading:
 is_beta: true
 cascade:
     algolia:
+        rank: 30
         subcategory: Cloud Security Posture Management
 ---
 

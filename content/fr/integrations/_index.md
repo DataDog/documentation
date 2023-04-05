@@ -9,7 +9,7 @@ aliases:
 description: Rassembler des données de tous vos systèmes, toutes vos applications et tous vos services
 cascade:
     algolia:
-        rank: 40
+        rank: 60
         category: Documentation
         subcategory: Integrations
 ---

@@ -11,7 +11,7 @@ further_reading:
     text: Datadog 入門
 cascade:
     algolia:
-        rank: 70
+        rank: 90
         category: Getting Started
         subcategory: Documentation
 ---

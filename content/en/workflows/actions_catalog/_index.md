@@ -7,6 +7,8 @@ is_beta: true
 cascade:
   disable_sidebar: true
   type: actioncatalog
+  algolia:
+      rank: 40
 ---
 
 {{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}

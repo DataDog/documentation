@@ -10,7 +10,7 @@ aliases:
 disable_sidebar: true
 cascade:
     algolia:
-        rank: 30
+        rank: 50
         category: Documentation
         subcategory: Security Detection Rules
 ---

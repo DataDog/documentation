@@ -13,7 +13,7 @@ kind: ドキュメント
 title: Datadog ロールのアクセス許可
 cascade:
     algolia:
-        rank: 60
+        rank: 80
         category: Documentation
         subcategory: Datadog ロールのアクセス許可
 ---
