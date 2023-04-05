@@ -23,7 +23,7 @@ further_reading:
 
 
 ## Overview
-As teams iterate quickly and deploy code, it can be difficult to find the exact change that caused a spike in errors or slower page load times. RUM Deployment Tracking enables you to identify when a recent deployment or release is causing performance issues within your application and help you identify the source of the problem. 
+As teams iterate quickly and deploy code, it can be difficult to find the exact change that caused a spike in errors or slower page load times. RUM Deployment Tracking enables you to identify when a recent deployment or release is causing performance issues within your application and help you identify the source of the problem.
 
 ## Setup
 You can use the `version` tag to monitor deployments and service behavior in support of your software deployment strategy. To get started with RUM Deployment tracking you must add RUM versions to your application.
@@ -46,36 +46,26 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-  DD_RUM.onReady(function() {
+```javascript
+DD_RUM.onReady(function() {
     DD_RUM.init({
       ...
       version: '1.0.0',
       ...
     })
-  })
-</script>
+})
 ```
 
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
-```html
-<script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
+```javascript
+window.DD_RUM &&
     window.DD_RUM.init({
       ...
       version: '1.0.0',
       ...
     })
-</script>
 ```
 {{% /tab %}}
 {{< /tabs >}}
@@ -97,7 +87,7 @@ The version tag is captured automatically from the application’s app’s `info
 
 ### Using version tags on the Application Overview page
 
-An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval. 
+An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval.
 
 This enables you to roll back release candidates as soon as you notice an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easier to identify problems in your application before they turn into serious issues.
 
@@ -124,19 +114,19 @@ Click on any version row in the **List of Versions*** table to open a version co
 
 Similar to the graphs on the **Application Overview** page, the **User Sessions**, **Core Web Vitals**, and **Errors** graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
 
-As you are monitoring your release, this helps you to compare the performance of code deployments against existing live code to verify that new code is performing properly, and that no new errors have surfaced in between versions. 
+As you are monitoring your release, this helps you to compare the performance of code deployments against existing live code to verify that new code is performing properly, and that no new errors have surfaced in between versions.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Browser Deployment Tracking Comparison" style="width:75%;">}}
 
 The **Issues** tab lists differences in errors detected for each of the two versions, highlighting:
-- Error Count by Version 
-- % of Views with Errors by Version 
+- Error Count by Version
+- % of Views with Errors by Version
 - Error Tracking issues
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison-error.png" alt="Browser Deployment Tracking Comparison Errors" style="width:75%;">}}
 
 ### Explore the RUM deployment tracking powerpacks
-You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the “Deployment Version Tracking” powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 
@@ -145,7 +135,7 @@ You can add deployment tracking for your RUM services to dashboards using the po
 
 ### Using version tags on the Application Overview page
 
-An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval. 
+An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval.
 
 This enables you to quickly roll back release candidates as soon as you spot an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easier to identify problems in your application before they turn into serious issues.
 
@@ -171,19 +161,19 @@ Click on any version row in the **List of Versions** table to open a version com
 
 Similar to the graphs on the **Application Overview** page, the **User Sessions**, **Mobile Vitals**, and **Errors** graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
 
-As you are monitoring your release, this makes it easy for you to compare the performance of code deployments against existing live code to verify that new code is performing properly and that no new errors have surfaced in between versions. 
+As you are monitoring your release, this makes it easy for you to compare the performance of code deployments against existing live code to verify that new code is performing properly and that no new errors have surfaced in between versions.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison.png" alt="Mobile Deployment Tracking Comparison" style="width:75%;">}}
 
 The **Issues** tab lists differences in errors detected for each of the two versions, highlighting:
-- Error Count by Version 
-- % of Views with Errors by Version 
+- Error Count by Version
+- % of Views with Errors by Version
 - Error Tracking issues
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison-error.png" alt="Mobile Deployment Tracking Comparison Errors" style="width:75%;">}}
 
 ### Explore the RUM Deployment Tracking Powerpacks
-You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the “Deployment Version Tracking” powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 

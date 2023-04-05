@@ -369,15 +369,14 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 Operator でネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
   namespace: placeholder
 spec:
-  # (...)
   features:
-    networkMonitoring:
+    npm:
       enabled: true
 ```
 

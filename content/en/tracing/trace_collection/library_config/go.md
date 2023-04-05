@@ -91,7 +91,7 @@ For more information, see [Ingestion Mechanisms][5].<br>
 
 `DD_TAGS`
 : **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`.
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
 
 `DD_TRACE_STARTUP_LOGS`
 : **Default**: `true` <br>
@@ -117,6 +117,17 @@ Datadog may collect [environmental and diagnostic information about your system]
 : **Default**: `false` <br>
 Enable client IP collection from relevant IP headers in HTTP request spans.
 Added in version 1.47.0 
+
+`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
+: **Default**: `false` <br>
+Enable generation of 128-bit trace IDs. By default, only 64-bit IDs are generated.
+
+`DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
+: **Default**: `false` <br>
+Enable printing of the full 128-bit ID when formatting a span with '%v'.
+When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
+When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+
 
 ## Configure APM environment name
 

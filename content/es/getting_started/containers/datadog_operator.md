@@ -35,12 +35,18 @@ El [Datadog Operator][1] es un [operador de Kubernetes][2] de código abierto qu
   Reemplaza `<DATADOG_API_KEY>` y `<DATADOG_APP_KEY>` por tu [API de Datadog API y las claves de tu aplicación][5].
 
 3. Crea un archivo `datadog-agent.yaml` con las especificaciones de la configuración de despliegue del `DatadogAgent`. La configuración del siguiente ejemplo activa las métricas, los logs y la herramienta APM:
-  ```yaml
-  apiVersion: datadoghq.com/v1alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  features:
+    logCollection:
+      enabled: true
+    apm:
+      enabled: true
+  global:
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -48,12 +54,7 @@ El [Datadog Operator][1] es un [operador de Kubernetes][2] de código abierto qu
       appSecret:
         secretName: datadog-secret
         keyName: app-key
-    agent:
-      apm:
-        enabled: true
-      log:
-        enabled: true
-  ```
+```
 
 4. Despliega el Datadog Agent:
   ```bash

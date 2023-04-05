@@ -1,53 +1,47 @@
 ---
 title: Search Logs
 kind: documentation
-description: 'Filter logs; to narrow down, broaden, or shift your focus on the subset of logs of current interest.'
+description: 'Filter logs to narrow down, broaden, or shift your focus on the subset of logs of current interest.'
 aliases:
     - /logs/search
 further_reading:
-    - link: 'logs/explorer/group'
+    - link: 'logs/explorer/analytics'
       tag: 'Documentation'
-      text: 'Group queried logs'
+      text: 'Learn how to group logs'
     - link: 'logs/explorer/visualize'
       tag: 'Documentation'
       text: 'Create visualizations from logs'
     - link: '/logs/explorer/export'
       tag: 'Documentation'
-      text: 'Export Log Explorer views'
+      text: 'Export views from the Log Explorer'
 ---
 
 ## Overview
 
-Log Explorer search consists of a time range and a search query, mixing `key:value` and full-text search.
+While information from individual logs can be useful visualized as a list, sometimes valuable information can be accessed through aggregation. To access this information, search for logs in the [Log Explorer][5] and display them as timeseries, top lists, tree maps, pie charts, or tables.
 
-### Search query
+Log Explorer search consists of a time range and a search query, mixing `key:value` and full-text search. 
 
-For example, to filter on logs produced by a specific service, with a specific status, over the past five minutes, you can create a custom query such as `service:payment status:error rejected` and set the time range to the `Past 5 minutes`:
+## Search query
 
-{{< img src="logs/explorer/search_filter.jpg" alt="Search Filter" style="width:100%;" >}}
+For example, to filter on logs produced by a web store service, with an error status, over the past fifteen minutes, create a custom query like `service:payment status:error rejected` and set the time range to the `Past 15 minutes`:
 
-[Indexed Logs][3] support both full-text search and `key:value` search queries.
+{{< img src="logs/explorer/search_filter.png" alt="Create a search query in the Log Explorer that filters for error logs of rejected payments for a web store service" style="width:100%;" >}}
 
-{{< site-region region="gov,us3,us5" >}}
-**Note**: `key:value` queries require that you [declare a facet][1] beforehand.
+[Indexed Logs][1] support both full-text search and `key:value` search queries.
 
-[1]: /logs/explorer/facets/
-{{< /site-region >}}
+**Note**: `key:value` queries **do not** require that you [declare a facet][2] beforehand.
 
-{{< site-region region="us,eu" >}}
-**Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
+## Search syntax
 
-[1]: /logs/explorer/facets/
-{{< /site-region >}}
-
-### Search syntax
-
-To begin searching for logs in Log Explorer, see the [Log Search Syntax documentation][1] and read the [time frame documentation][2] for more details on custom time frames.
+To start searching for logs and customizing the time frame in the Log Explorer, read the [Search Syntax documentation][3] and the [Custom Time Frames documentation][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /logs/search-syntax
-[2]: /dashboards/guide/custom_time_frames
-[3]: /logs/indexes
+[1]: /logs/indexes
+[2]: /logs/explorer/facets/
+[3]: /logs/search-syntax
+[4]: /dashboards/guide/custom_time_frames
+[5]: /logs/explorer/

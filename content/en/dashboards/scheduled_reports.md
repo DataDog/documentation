@@ -33,7 +33,7 @@ The following widget types are supported:
 - [Distribution][2]
 - [Geomap][3]
 - [Group][4]
-- [Heat Map][5]
+- [Heatmap][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
 - [Pie Chart][16]
@@ -94,7 +94,7 @@ Users with the Admin role or **Org Management** permission can enable or disable
 [2]: /dashboards/widgets/distribution/
 [3]: /dashboards/widgets/geomap/
 [4]: /dashboards/widgets/group/
-[5]: /dashboards/widgets/heat_map/
+[5]: /dashboards/widgets/heatmap/
 [6]: /dashboards/widgets/monitor_summary/
 [7]: /dashboards/widgets/note/
 [8]: /dashboards/widgets/query_value/

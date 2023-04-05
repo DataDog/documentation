@@ -598,7 +598,7 @@ Datadog monitors every aspect of your Istio environment, so you can:
 
 To learn more about monitoring your Istio environment with Datadog, [see the Istio blog][3].
 
-Datadog APM is available for Istio v1.1.3+ on Kubernetes clusters.
+Datadog APM is available for [supported Istio releases][13].
 
 ## Datadog Agent installation
 
@@ -760,6 +760,7 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [10]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration-1
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
+[13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
 {{% /tab %}}
 {{< /tabs >}}
 

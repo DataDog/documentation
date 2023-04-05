@@ -241,4 +241,3 @@ With the event overlay, you can quickly see how actions within the organization 
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
 [14]: /logs/explorer/search_syntax/
 [15]: /dashboards/widgets/timeseries/#event-overlay
-[16]: /dashboards/widgets/heat_map/#event-overlays

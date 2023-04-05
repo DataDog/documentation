@@ -11,12 +11,10 @@ author:
   support_email: support@zigiwave.com
   vendor_id: zigiwave
 categories:
-- メトリクス
-- マーケットプレイス
-- コラボレーション
 - event management
-- モニタリング
 - インシデント
+- マーケットプレイス
+- メトリクス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -45,14 +43,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Event Management
+  - Category::Incidents
+  - Category::Marketplace
+  - Category::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Metrics
-  - Category::Marketplace
-  - Category::Collaboration
-  - Category::Event Management
-  - Category::Monitoring
-  - Category::Incidents
   configuration: README.md#Setup
   description: Datadog と OpsBridge のノーコードインテグレーション
   media:

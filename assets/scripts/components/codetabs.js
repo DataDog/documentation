@@ -76,15 +76,17 @@ const initCodeTabs = () => {
     }
 
     const activateTabsOnLoad = () => {
+        const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
             const selectedLanguageTab = document.querySelector(`a[data-lang="${tabQueryParameter}"]`);
 
             if (selectedLanguageTab) {
                 selectedLanguageTab.click()
+            }else{
+                activateCodeTab(firstTab)
             }
         } else {
             if (codeTabsList.length > 0) {
-                const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
                 activateCodeTab(firstTab)
             }
         }
@@ -95,7 +97,6 @@ const initCodeTabs = () => {
 
         allTabLinksNodeList.forEach(link => {
             link.addEventListener('click', () => {
-                event.preventDefault()
                 activateCodeTab(link)
             })
         })

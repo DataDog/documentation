@@ -166,12 +166,13 @@ Graphs in notebooks support all Datadog data sources: metrics, log events, Index
 * [Query value][13]
 * [Funnel][14]
 * [Pie][15]
+* [SLO Summary][16]
 
 ### Limit edit access
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][16] that may edit a particular notebook:
+Use granular access controls to limit the [roles][17] that may edit a particular notebook:
 1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
@@ -202,10 +203,11 @@ To restore general access to a notebook with restricted access, follow the steps
 [7]: /dashboards/widgets/timeseries/
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/table/
-[10]: /dashboards/widgets/heat_map/
+[10]: /dashboards/widgets/heatmap/
 [11]: /dashboards/widgets/distribution/
 [12]: /dashboards/widgets/list/
 [13]: /dashboards/widgets/query_value/
 [14]: /dashboards/widgets/funnel/
 [15]: /dashboards/widgets/pie_chart/
-[16]: /account_management/rbac/
+[16]: /dashboards/widgets/slo/
+[17]: /account_management/rbac/

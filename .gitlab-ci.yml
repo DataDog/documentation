@@ -91,7 +91,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-13890255
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-14529003
   tags:
     - "arch:amd64"
   rules:
@@ -173,8 +173,6 @@ missing_tms_preview:
   environment: "preview"
   allow_failure: true
   cache: {}
-  variables:
-    GIT_STRATEGY: none
   dependencies:
     - build_preview
   script:
@@ -380,8 +378,6 @@ test_missing_tms_live:
   stage: post-deploy
   cache: {}
   environment: "live"
-  variables:
-    GIT_STRATEGY: none
   dependencies:
     - build_live
   script:
@@ -441,14 +437,14 @@ set_redirect_metadata_preview:
   <<: *preview_rules
   variables:
     BUCKET: "datadog-docs-preview"
-    IS_REDIRECT_JOB: "true" 
+    SET_REDIRECTS_PREVIEW: "true"
   stage: post-deploy
   cache: []
   environment: "preview"
   dependencies:
     - build_preview
   script:
-    - in-isolation update_redirect_metadata
+    - in-isolation run_update_redirect_metadata
   interruptible: true
   allow_failure: true
 
@@ -457,12 +453,11 @@ set_redirect_metadata_live:
   <<: *live_rules
   variables:
     BUCKET: "datadog-docs-live-hugo"
-    IS_REDIRECT_JOB: "true" 
   stage: post-deploy
   cache: []
   environment: "live"
   dependencies:
     - build_live
   script:
-    - in-isolation update_redirect_metadata
+    - in-isolation run_update_redirect_metadata
   interruptible: true

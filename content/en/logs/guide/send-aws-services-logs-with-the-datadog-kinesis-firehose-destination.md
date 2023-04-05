@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. It is possible to subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams. 
+It is possible to subscribe to AWS service logs stored in CloudWatch Log groups and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams. 
 
 AWS fully manages Amazon Kinesis Data Firehose, so you don't need to maintain any additional infrastructure or forwarding configurations for streaming logs. You can set up a Kinesis Firehose Delivery Stream in the AWS Firehose console, or automatically set up the destination using a CloudFormation template.
 
@@ -40,6 +40,7 @@ Datadog recommends using a Kinesis data stream as input when using the Datadog K
    d. In the **Destination settings**, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
    e. Paste your API key into the **API key** field. You can get or create an API key from the [Datadog API Keys page][3].  
    f. Optionally, configure the **Retry duration**, the buffer settings, or add **Parameters**, which are attached as tags to your logs.  
+   **Note**: Datadog recommends setting the **Buffer size** to `2 MiB` if the logs are single line messages.  
    g. In the **Backup settings**, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
      **Note**: To ensure that logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
    h. Click **Create delivery stream**.
@@ -109,6 +110,8 @@ To populate all logs by ARN:
 
 1. Go to the [Logs Explorer][5] in Datadog to see all of your subscribed logs.
 2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Kinesis Data Firehose ARN, and press **Enter**.
+
+**Note**: A single Kinesis payload must not be be more than 65,000 log messages. Log messages after that limit are dropped.
 
 ## Further Reading
 
