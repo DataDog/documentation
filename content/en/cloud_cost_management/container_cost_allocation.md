@@ -15,11 +15,13 @@ further_reading:
 
 Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in Kubernetes and ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
+{{< img src="cloud_cost/container_cost_allocation/cost_allocation_table.png" alt="Your image description" style="width:100%;" >}}
+
 ## Prerequisites
 
 1. Set up and configure [AWS Cloud Cost integration][1].
-1. At least one of the following:
-    - [**Datadog Kubernetes agent**][2] running in a Kubernetes environment using EC2 instances. 
+1. At least one of the following must be running:
+    - [**Datadog Kubernetes agent**][2] in a Kubernetes environment using EC2 instances. 
     - **Datadog container monitoring** in containers running in ECS tasks. The container agent must be configured to use [orchestrator tag cardinality][3].
 
 ## Cost metrics
@@ -35,7 +37,7 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 
 These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
 
-For example, let's say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group will include the S3 and RDS costs for that team, as well as the cost of compute resources reserved by the tagged pods.
+For example, say you have the tag `team` on S3 buckets, RDS stores, and Kubernetes pods. You can use one of the new metrics to group cost by `team`, and each group then includes the S3 and RDS costs for that team, as well as the cost of compute resources reserved by the tagged pods.
 
 ## Cost allocation
 
@@ -43,19 +45,19 @@ Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR
 
 ### Kubernetes
 
-For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
+For the Kubernetes allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
-Next, we look at all of the pods running on that node for the day. Based on the resources the pod had reserved and the length of time it ran, the appropriate portion of the node's cost is assigned to that pod. This calculated cost is enriched with all of the pod's tags.
+Next, Datadog looks at all of the pods running on that node for the day. Based on the resources the pod has reserved and the length of time it ran, the appropriate portion of the node's cost is assigned to that pod. This calculated cost is enriched with all of the pod's tags.
 
-Once all pods have been assigned a cost based on their resource reservations, there will be some node cost leftover. This is the cost of unreserved resources, which we call **Cluster Idle cost**. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources that can be scheduled but Kubernetes did not reserve for any pods. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
+Once all pods have been assigned a cost based on their resource reservations, some node cost is leftover. This is the cost of unreserved resources, which we call **Cluster Idle cost**. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources that can be scheduled but are not reserved for any pods. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
 
 ### ECS on EC2
 
-For ECS allocation, we determine which tasks ran on each EC2 instance used for ECS.
+For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS.
 
-Based on the CPU or memory usage of each task (as reported in the CUR), we assign the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) for containers running in the task.
+Based on the CPU or memory usage of each task (as reported in the CUR), Datadog assigns the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) for containers running in the task.
 
-Once all tasks have been assigned a cost based on their resource reservations, there will be some instance cost leftover. This is the cost of unreserved resources, which we call **Cluster Idle** cost. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources not reserved by any ECS tasks. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
+Once all tasks have been assigned a cost based on their resource reservations, some instance cost is leftover. This is the cost of unreserved resources, which we call **Cluster Idle** cost. This cost is assigned the `is_cluster_idle` tag, and it represents the cost of resources not reserved by any ECS tasks. For more information, see the [Understanding cluster idle cost](#understanding-cluster-idle-cost) section.
 
 ### ECS on Fargate
 
@@ -71,9 +73,11 @@ There is no specific cost associated with CPU and memory since EC2 instances are
   - Once based solely on CPU requests, generating `aws.cost.amortized.cpu.allocated`.
   - Once based solely on memory requests, generating `aws.cost.amortized.mem.allocated`.
 
-If your workloads are CPU-constrained, exclusively using `cpu.allocated` may work for you. Similarly, using exclusively `mem.allocated` may work for memory-constrained workloads.
+### Understand which metrics provide the best insight into your costs
 
-If you have a mix of CPU and memory-intensive workloads, or you simply want a consistent way to visualize the costs of considering all resources, you can use formulas and functions to create your own equation to combine CPU and memory costs. For example, for a 50/50 split, you can plot:
+- If your workloads are CPU-constrained, only using `cpu.allocated` may work for you. 
+- If your workloads are memory-constrained, exclusively using `mem.allocated` might meet your use case.
+- If you have a mix of CPU and memory-intensive workloads, or you simply want a consistent way to visualize the costs of considering all resources, you can use formulas and functions to create your own equation to combine CPU and memory costs. For example, for a 50/50 split, you can plot:
 
 $$\text"a " = \text" sum(aws.cost.amortized.cpu.allocated) by {team}"$$
 
@@ -90,12 +94,15 @@ As long as the multipliers are positive and sum to 1, the formula will generate 
 
 ## Understanding cluster idle cost
 
-Cluster idle cost is the cost of CPU or memory resources not reserved by any workloads.
+Cluster idle cost is the cost of CPU or memory resources that are not reserved by any workloads.
 
 You can visualize this cost at the Kubernetes node, ECS host, or cluster level, using the `is_cluster_idle` tag. All costs allocated to scheduled pods or tasks have `is_cluster_idle: N/A`, while all compute costs not assigned to any pods or tasks have the tag `is_cluster_idle: true`.
 
 Here is a sample query that displays all Kubernetes cluster cost, broken down by cluster name and cluster idle cost:
-    `sum:aws.cost.amortized.cpu.allocated{is_kubernetes:true} by {kube_cluster_name, is_cluster_idle}`
+   
+`sum:aws.cost.amortized.cpu.allocated{is_kubernetes:true} by {kube_cluster_name, is_cluster_idle}`
+
+  {{< img src="/cloud_cost/container_cost_allocation/cost_allocation_editor_config.png" alt="Example configuration for mixed resources with break down by cluster name and cluster idle cost tags" style="width:100%;" >}}
 
 ## Tags
 
