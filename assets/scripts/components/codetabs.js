@@ -97,7 +97,8 @@ const initCodeTabs = () => {
         const allTabLinksNodeList = document.querySelectorAll('.code-tabs .nav-tabs li a')
 
         allTabLinksNodeList.forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
                 activateCodeTab(link)
             })
         })
