@@ -683,7 +683,7 @@ track_custom_event(tracer, event_name, metadata)
 
 [1]: /tracing/trace_collection/custom_instrumentation/
 [2]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
-[3]: /security/application_security/threats/add-user-info/#adding-user-events-login-success-login-failure-any-business-logic-to-traces
+[3]: /security/application_security/threats/add-user-info/#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [4]: /security/default_rules/bl-rate-limiting/
 [5]: /security/default_rules/bl-privilege-violation/
 [6]: /security/default_rules/appsec-ato-groupby-ip/
