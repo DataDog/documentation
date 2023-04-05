@@ -25,6 +25,7 @@ const initCodeTabs = () => {
                     const lang = tabPane.getAttribute('data-lang')
                     const li = document.createElement('li')
                     const anchor = document.createElement('a')
+                    anchor.addEventListener("click", e => e.preventDefault(), false);
                     anchor.dataset.lang = lang
                     anchor.href = '#'
                     anchor.innerText = title
@@ -96,7 +97,8 @@ const initCodeTabs = () => {
         const allTabLinksNodeList = document.querySelectorAll('.code-tabs .nav-tabs li a')
 
         allTabLinksNodeList.forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
                 activateCodeTab(link)
             })
         })
