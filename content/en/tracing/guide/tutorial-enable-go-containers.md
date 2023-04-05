@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Go application installed on a container. In this scenario, the Datadog Agent is also installed in a container..
+This tutorial walks you through the steps for enabling tracing on a sample Go application installed on a container. In this scenario, the Datadog Agent is also installed in a container.
 
 For other scenarios, including the application and Agent on a host, the application and Agent on cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
@@ -234,7 +234,7 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project Compose file that you set up earlier includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+You can configure the tracing library to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
 {{< code-block lang="go" filename="docker/all-docker-compose.yaml" disable_copy="true" >}}
 environment:
