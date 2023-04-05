@@ -21,7 +21,7 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 [1]: /logs/
 [2]: /glossary/#span
-[3]: /glossary/#retention_filters
+[3]: /glossary/#retention-filters
 [4]: /tracing/trace_explorer/search
 [5]: /getting_started/tagging
 [6]: /tracing/guide/add_span_md_and_graph_it/
