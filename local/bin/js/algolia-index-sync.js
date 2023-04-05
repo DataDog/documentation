@@ -102,7 +102,7 @@ const updateReplicas = (client, indexName) => {
 
     replicas[`${indexName}_api`] = {
         ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
-        customRanking: ['desc(rank)']
+        customRanking: ['asc(rank)']
     };
 
     Object.entries(replicas).forEach(([replicaIndexName, replicaSettings]) => {
