@@ -11,6 +11,9 @@ code_lang: nodejs
 code_lang_weight: 40
 type: multi-code-lang
 further_reading:
+    - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"
+      tag: "Documentation"
+      text: "Propagating trace context"
     - link: 'tracing/other_telemetry/connect_logs_and_traces'
       tag: 'Documentation'
       text: 'Connect your Logs and Traces together'

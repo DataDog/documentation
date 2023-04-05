@@ -11,27 +11,53 @@ further_reading:
 ---
 
 
-Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][13] and [W3C (TraceParent)][14] header extraction and injection for distributed tracing.
 
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
+You can configure injection and extraction styles for distributed headers.
 
-- Datadog: `Datadog`
-- B3: `B3`
+The Java Tracer supports the following styles:
 
-Injection styles can be configured using:
+- Datadog: `datadog`
+- B3 Multi Header: `b3multi` (`b3` alias is deprecated)
+- W3C Trace Context: `tracecontext` (Available since 1.11.0)
+- B3 Single Header: `b3 single header`
 
-- System Property: `-Ddd.propagation.style.inject=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+`dd.trace.propagation.style.inject`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Available since version 1.9.0
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
+`dd.trace.propagation.style.extract`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Available since version 1.9.0
 
-Extraction styles can be configured using:
+`dd.trace.propagation.style`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
+Available since version 1.9.0
 
-- System Property: `-Ddd.propagation.style.extract=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+#### Deprecated extraction and injection settings
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
+These extraction and and injection settings are deprecated since version 1.9.0.
 
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+- B3: `b3` (both B3 multi header and B3 single header)
 
-[8]: https://github.com/openzipkin/b3-propagation
+`dd.propagation.style.inject`
+: **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Deprecated since version 1.9.0
+
+`dd.propagation.style.extract`
+: **Environment Variable**: `DD_PROPAGATION_STYLE_EXTRACT`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Deprecated since version 1.9.0
+
+
+[13]: https://github.com/openzipkin/b3-propagation
+[14]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
