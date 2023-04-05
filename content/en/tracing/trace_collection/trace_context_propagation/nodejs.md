@@ -21,7 +21,7 @@ The Node.js Tracer supports the following styles:
 - W3C Trace Context: `tracecontext`
 - B3 Single Header: `B3 single header`
 
-For more information about the context propagation settings and other configuration, read [Node.js Tracing Library Configuration][1].
+For more information about the context propagation settings, read [Node.js Tracing Library Configuration][1].
 
 [1]: /tracing/trace_collection/library_config/nodejs/#headers-extraction-and-injection
 [5]: https://github.com/openzipkin/b3-propagation
