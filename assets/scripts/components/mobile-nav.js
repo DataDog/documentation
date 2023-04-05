@@ -97,5 +97,9 @@ export function setMobileNav () {
         }else if (parentMenu){
             openMenu(parentMenu)
         }
-    }
+    }else if(!mobileSelection && dataPath === 'api/latest'){
+        // set default mobile nav to open "Overview" dropdown menu
+        const firstMobileNavDropdown = document.querySelector('#mobile-nav .dropdown-menu')
+        openMenu(firstMobileNavDropdown)
+    } 
 }
