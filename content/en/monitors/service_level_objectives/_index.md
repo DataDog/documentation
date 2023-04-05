@@ -123,10 +123,6 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 ## Viewing SLOs
 
-Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how the total number of SLOs are in each state (breached, warning, OK, and no data) grouped by context. 
-
-{{< img src="/monitors/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
-
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
 **Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google Play Store][14].
@@ -136,8 +132,6 @@ Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs ne
 ### SLO tags
 
 When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][15].
-
-Add tags to SLOs in bulk with the *Edit Tags* and the *[Edit Teams][16]* dropdown options at the top of the SLO list.
 
 ### SLO default view
 
