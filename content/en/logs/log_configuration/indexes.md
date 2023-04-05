@@ -137,9 +137,11 @@ In the following example:
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
-To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`.
+To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`. 
 
 {{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
+
+To use retentions which are not in your current contract, [the option][20] must be enabled by an admin in your organisation settings.
 
 ## Set daily quota
 
@@ -183,3 +185,4 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage
+[21]: https://docs.datadoghq.com/account_management/org_settings/#out-of-contract-retention-periods-for-log-indexes
