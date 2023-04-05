@@ -306,9 +306,9 @@ If you wish to rehydrate from archives in another access tier, you must first mo
 
 ##### SSE-S3
 
-The default encryption of an Amazon S3 bucket is automatically enabled and set to server-side encryption with Amazon S3 management keys ([SSE-S3][1]). 
+The default encryption for Amazon S3 buckets is server-side encryption with Amazon S3 management keys ([SSE-S3][1]).
 
-To confirm this:
+To confirm your S3 bucket is encrypted with SSE-S3:
 
 1. Navigate to your S3 bucket.
 1. Click the **Properties** tab.
