@@ -137,7 +137,7 @@ Undefined symbols for architecture x86_64:
 
 Open Xcode and go to `Build Settings` of your project (not your app target) then make sure Library Search Paths is the following:
 
-```java
+```shell
 LIBRARY_SEARCH_PATHS = (
   "\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
   "\"/usr/lib/swift\"",
@@ -151,7 +151,7 @@ If you see an undefined _RCTModule symbol, it may be related to this change in [
 
 You can make the following change to fix it:
 
-```java
+```objectivec
 // DdSdk.m
 // instead of
 #import <React/RCTBridgeModule.h>
