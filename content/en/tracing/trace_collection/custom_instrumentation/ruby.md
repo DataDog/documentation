@@ -282,28 +282,10 @@ In both cases, the processor method *must* return the `trace` object; this retur
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-### B3 headers extraction and injection
+### Propagating context with headers extraction and injection
 
-Datadog APM tracer supports [B3 headers extraction][6] and injection for distributed tracing.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][6] for information.
 
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
-
-- Datadog: `Datadog`
-- B3: `B3`
-
-Injection styles can be configured using:
-
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-The value of the environment variable is a comma separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
-
-Extraction styles can be configured using:
-
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The value of the environment variable is a comma separated list of header styles that are enabled for extraction. By default Datadog and B3 extraction style are enabled.
-
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
 ### Resource filtering
 
@@ -318,5 +300,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [3]: /tracing/setup/ruby/#environment-and-tags
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
-[6]: https://github.com/openzipkin/b3-propagation
+[6]: /tracing/trace_collection/trace_context_propagation/ruby/
 [7]: /tracing/security

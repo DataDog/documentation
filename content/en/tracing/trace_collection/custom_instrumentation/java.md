@@ -326,30 +326,9 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-### B3 headers extraction and injection
+### Propagating context with headers extraction and injection
 
-Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
-
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
-
-- Datadog: `Datadog`
-- B3: `B3`
-
-Injection styles can be configured using:
-
-- System Property: `-Ddd.propagation.style.inject=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
-
-Extraction styles can be configured using:
-
-- System Property: `-Ddd.propagation.style.extract=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
-
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][8] for information.
 
 ### Resource filtering
 
@@ -366,6 +345,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [5]: /tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: https://github.com/openzipkin/b3-propagation
+[8]: /tracing/trace_collection/trace_context_propagation/java/
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
