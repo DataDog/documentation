@@ -18,6 +18,7 @@
 
         {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
             {{ $full_url := print $page.Permalink "#" ($section_header | anchorize) }}
+            {{ $relpermalink := print $page.RelPermalink "#" ($section_header | anchorize) }}
             {{ $object_id := md5 $full_url }}
 
             {{
@@ -27,7 +28,7 @@
                     "section_header" $section_header
                     "content" $section_content
                     "type" $page.Type
-                    "relpermalink" $page.RelPermalink
+                    "relpermalink" $relpermalink
                     "full_url" $full_url
                     "language" $page.Language.Lang
                     "category" $category
