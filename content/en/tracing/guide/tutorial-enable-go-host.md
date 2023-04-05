@@ -197,14 +197,14 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-The tracing library enables the use of tags to help compile and display data accurately in the Datadog dashboard. This is done by enabling a few environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+You can configure the tracing library to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
 {{< code-block lang="go" filename="Makefile" disable_copy="true" collapsible="true" >}}
 run: build
   DD_TRACE_SAMPLE_RATE=1 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.0.1 ./cmd/notes/notes &
 {{< /code-block >}}
 
-<div class="alert alert-warning">The <code>Makefile</code> also sets the environment variable <code>DD_TRACE_SAMPLE_RATE</code> to <code>1</code>, which represents a 100% sample rate. The guide sets a 100% sample rate to ensure that all requests to the notes service are sent to the Datadog backend for analysis and display. Avoid changing the sample rate in a production or high-volume environment. Setting a high sample rate in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
+<div class="alert alert-warning">The <code>Makefile</code> also sets the <code>DD_TRACE_SAMPLE_RATE</code> environment variable to <code>1</code>, which represents a 100% sample rate. A 100% sample rate ensures that all requests to the notes service are sent to the Datadog backend for analysis and display for the purposes of this tutorial. In an actual production or high-volume environment, you wouldn't specify this high of a rate. Setting a high sample rate with this variable in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
 
 For more information on available configuration options, see [Configuring the Go Tracing Library][14].
 
@@ -282,7 +282,7 @@ func doLongRunningProcess(ctx context.Context) {
 }
 {{< /code-block >}}
 
-The `privateMethod1` function demonstates creating a completely separate service from a context:
+The `privateMethod1` function demonstrates creating a completely separate service from a context:
 
 {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
 func privateMethod1(ctx context.Context) {
