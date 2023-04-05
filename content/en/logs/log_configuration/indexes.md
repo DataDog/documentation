@@ -141,7 +141,7 @@ To add retentions that are not in your current contract, contact Customer Succes
 
 {{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
 
-To use retentions which are not in your current contract, [the option][20] must be enabled by an admin in your organisation settings.
+**Note**: To use retentions which are not in your current contract, [the option][21] must be enabled by an admin in your organisation settings.
 
 ## Set daily quota
 
