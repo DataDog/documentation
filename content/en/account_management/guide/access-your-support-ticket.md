@@ -10,7 +10,7 @@ aliases:
 
 To create a new support ticket, click on the appropriate Site link and click **Submit a request** to fill out a ticket form. 
 
-{{< whatsnext desc="Support Page by Datadog Site:">}}
+{{< whatsnext desc="Support page by Datadog site:">}}
     {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
