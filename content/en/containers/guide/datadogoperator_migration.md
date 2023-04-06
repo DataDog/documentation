@@ -1,34 +1,39 @@
 ## Migrating to the version 1.0 of the Datadog Operator
 
-### Disclaimer
 
-As part of the General Availability release of the Datadog Operator, we are offering a migration path for our early adopters to migrate to the GA version of the custom resource, `v2alpha1/DatadogAgent`.
+This guide describes how to migrate to the `v2alpha1/DatadogAgent` custom resource from `v1alpha1/DatadogAgent`.
 
-The Datadog Operator v1.X reconciles the version `v2alpha1` of the DatadogAgent custom resource, while the v0.X reconciles `v1alpha1`.
+Datadog Operator v1.X reconciles the version `v2alpha1` of the DatadogAgent custom resource, while the v0.X reconciles `v1alpha1`.
 
 ### Requirements
 
-If you are using the v1alpha1 with a v0.X version of the Datadog Operator and would like to upgrade, you will need to use the Conversion Webhook feature.
+If you are using `v1alpha1` with a 0.X version of the Datadog Operator and would like to upgrade, you need to use the conversion webhook feature.
 
-Start by ensuring that you have the minimum required version of the chart and it's dependencies:
+Start by ensuring that you have the minimum required version of the chart and its dependencies:
 
 ```
 NAME                	CHART VERSION	APP VERSION	DESCRIPTION
 datadog/datadog-crds	1.0.0        	1          	Datadog Kubernetes CRDs chart
 ```
 
-and for the Datadog Operator chart:
+For the Datadog Operator chart:
 
 ```
 NAME                    	CHART VERSION	APP VERSION	DESCRIPTION
 datadog/datadog-operator	1.0.0        	1.0.0      	Datadog Operator
 ```
 
-Then you will need to install the cert manager if you don't have it already, add the chart:
+#### Install cert manager
+If you do not already have the cert manager, install it with Helm.
+
+Add the chart:
+
 ```
 helm repo add jetstack https://charts.jetstack.io
 ```
-and then install it:
+
+Then, install it:
+
 ```
  helm install \
   cert-manager jetstack/cert-manager \
@@ -38,7 +43,7 @@ and then install it:
 
 ### Migration
 
-You can update with the following:
+Run the following command to redeploy the Datadog Operator and configure Kubernetes to store version `v2alpha1` of the DatadogAgent:
 
 ```
 helm upgrade \
@@ -49,46 +54,41 @@ helm upgrade \
     --set datadogCRDs.migration.datadogAgents.conversionWebhook.enabled=true
 ```
 
-This command will redeploy the Datadog Operator and configure Kubernetes to store the version v2alpha1 of the DatadogAgent.
-With the above process, existing DatadogAgent objects will be converted thanks to the Conversion Webhook server ran by the Datadog Operator.
+With this, the conversion webhook server (run by the Datadog Operator) converts existing DatadogAgent objects.
 
-If you have v1alpha1 versions and migrate, we recommend you save the converted version and start solely deploying this. Once you only deploy v2alpha1 DatadogAgent, you will be able to disable the ConversionWebhook.
+If you have `v1alpha1` versions and migrate, it is recommended that you save the converted version and start solely deploying the converted version. Once you deploy only the `v2alpha1` DatadogAgent, you can disable the conversion webhook.
 
 ### Notes
 
-Starting at the version 1.0.0 of the datadog-operator chart, the fields `image.tag` has a default values of `1.0.0` and `datadogCRDs.migration.datadogAgents.version` is `v2alpha1`.
+Starting at the version 1.0.0 of the `datadog-operator` chart, the field `image.tag` has a default values of `1.0.0`, and `datadogCRDs.migration.datadogAgents.version` is `v2alpha1`.
 
-We set them in the command here to illustrate the migration of going from a Datadog Operator version < 1.0.0 with a stored version of `v1alpha1` to the GA version of `1.0.0` with a stored version of `v2alpha1`.
+These are set in the command here to illustrate the migration of going from a Datadog Operator version < 1.0.0 with a stored version of `v1alpha1` to the GA version of `1.0.0` with a stored version of `v2alpha1`.
 
 ### Implementation details
 
-This will create a self-signed `Certificate` (using an `Issuer`) that will be used by the Certificate Manager to mutate the DatadogAgent CRD to document the `caBundle` that the API Server will use to contact the Conversion Webhook.
+This creates a self-signed Certificate (using an Issuer) that is used by the Certificate Manager to mutate the DatadogAgent CRD to document the `caBundle` that the API Server uses to contact the conversion webhook.
 
-The Datadog Operator will be running the new reconciler for `v2alpha1` object and will also start a Conversion Webhook Server, exposed on port 9443. This server is the one the API Server will be using to convert v1alpha1 DatadogAgent into v2alpha1.
+The Datadog Operator is running the reconciler for `v2alpha1` object and starts a conversion webhook server, exposed on port 9443. The API Server uses this server to convert `v1alpha1` DatadogAgent to `v2alpha1`.
 
 ### Lifecycle
 
-The conversionWebhook is not supposed to be an ever running process, we recommend using it to migrate your objects as a transition.
+The conversion webhook is not meant to run indefinitely. Datadog only recommends it to migrate your objects during a transitional period.
 
-Once converted, you can store the new version of your DatadogAgent, deactivate the conversion and simply deploy v2alpha1 objects.
-
-### Roadmap
-
-Upon releasing the v2 version of the DatadogAgent object, we will remove v1alpha1 from the CRD as part of a major update of the charts (datadog-crds and datadog-operator).
+Once converted, you can store the new version of your DatadogAgent, deactivate the conversion, and deploy only `v2alpha1` objects.
 
 ### Troubleshooting
 
-* I don't see v2alpha1 version of the DatadogAgent resource
+#### I don't see the `v2alpha1` version of the DatadogAgent resource.
 
-The v1alpha1 and the v2alpha1 are `served` so you might need to specify which version you want to see:
+Because `v1alpha1` and `v2alpha1` are _served_, you might need to specify which version you want to see:
 
 ```
 kubectl get datadogagents.v2alpha1.datadoghq.com datadog-agent
 ```
 
-* The Conversion is not working
+#### The conversion is not working.
 
-The logs of the Datadog Operator pod should show that the conversion webhook is enabled, the server is running, the certificates are watched.
+The logs of the Datadog Operator pod should show that the conversion webhook is enabled, the server is running, and the certificates are watched.
 
 ```
 kubectl logs datadog-operator-XXX-YYY
@@ -105,7 +105,7 @@ kubectl logs datadog-operator-XXX-YYY
 [...]
 ```
 
-* Check the service registered for the conversion for a registered Endpoint
+#### How do I check the service registered for the conversion for a registered endpoint?
 
 ```
 kubectl describe service datadog-operator-webhook-service
@@ -120,7 +120,7 @@ TargetPort:        9443/TCP
 Endpoints:         10.88.3.28:9443
 ```
 
-* Verify the registered service for the conversion webhook
+#### How do I verify the registered service for the conversion webhook?
 
 ```
 kubectl describe crd datadogagents.datadoghq.com
@@ -139,9 +139,9 @@ kubectl describe crd datadogagents.datadoghq.com
         v1
 ```
 
-* The CRD does not have the `caBundle`
+#### The CRD does not have the `caBundle`.
 
-Make sure that the CRD has the correct annotation: `cert-manager.io/inject-ca-from: default/datadog-operator-serving-cert` and check the logs of the `cert-manager-cainjector` pod.
+Make sure that the CRD has the correct annotation: `cert-manager.io/inject-ca-from: default/datadog-operator-serving-cert`. Also, check the logs of the `cert-manager-cainjector` pod.
 
 If you do not see anything standing out, setting the log level to 5 (debug) might help:
 
@@ -165,12 +165,12 @@ I0217 08:25:24.989209       1 sources.go:98] cert-manager/certificate/customreso
 ```
 ### Rollback
 
-If you migrated to the new version of the Datadog Operator using v2alpha1 but want to rollback to the former version, we recommend:
+If you migrated to the new version of the Datadog Operator using `v2alpha1` but want to roll back to the former version, Datadog recommends:
 - Scaling the Datadog Operator deployment to 0 replicas.
   ```
   kubectl scale deploy datadog-operator --replicas=0
   ```
-- Upgrading the chart to have v1alpha1 stored and for the Datadog Operator to use the 0.8.X image.
+- Upgrading the chart to have `v1alpha1` stored and for the Datadog Operator to use the 0.8.X image.
   ```
   helm upgrade \
     datadog-operator datadog/datadog-operator \
@@ -179,6 +179,6 @@ If you migrated to the new version of the Datadog Operator using v2alpha1 but wa
     --set datadogCRDs.migration.datadogAgents.useCertManager=false \
     --set datadogCRDs.migration.datadogAgents.conversionWebhook.enabled=false
   ```
-- Redeploy the previous DatadogAgent v1alpha1 object.
+- Redeploy the previous DatadogAgent `v1alpha1` object.
 
-Note: The Daemonset of the Datadog Agents will be rolled out in the process.
+**Note**: The DaemonSet of the Datadog Agents is rolled back in the process.
