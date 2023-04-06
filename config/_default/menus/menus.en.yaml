@@ -1408,11 +1408,51 @@ main:
     parent: tracing_library_config
     identifier: tracing_library_config_dotnet_framework
     weight: 109
+  - name: Custom Instrumentation with OpenTelemetry
+    url: tracing/trace_collection/otel_instrumentation/
+    parent: tracing_trace_collection
+    identifier: tracing_otel_inst
+    weight: 105
+  - name: Java
+    url: tracing/trace_collection/otel_instrumentation/java/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/otel_instrumentation/python/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/otel_instrumentation/ruby/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_ruby
+    weight: 103
+  - name: Go
+    url: tracing/trace_collection/otel_instrumentation/go/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/trace_collection/otel_instrumentation/nodejs/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_nodejs
+    weight: 105
+  - name: C++
+    url: tracing/trace_collection/otel_instrumentation/cpp/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_cpp
+    weight: 107
+  - name: .NET
+    url: tracing/trace_collection/otel_instrumentation/dotnet/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_dotnet
+    weight: 108
   - name: Custom Instrumentation with Datadog Libraries
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 105
+    weight: 106
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1453,47 +1493,7 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: Instrumenting with OpenTelemetry
-    url: tracing/trace_collection/otel_instrumentation/
-    parent: tracing_trace_collection
-    identifier: tracing_otel_inst
-    weight: 106
-  - name: Java
-    url: tracing/trace_collection/otel_instrumentation/java/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_java
-    weight: 101
-  - name: Python
-    url: tracing/trace_collection/otel_instrumentation/python/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_python
-    weight: 102
-  - name: Ruby
-    url: tracing/trace_collection/otel_instrumentation/ruby/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_ruby
-    weight: 103
-  - name: Go
-    url: tracing/trace_collection/otel_instrumentation/go/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_go
-    weight: 104
-  - name: NodeJS
-    url: tracing/trace_collection/otel_instrumentation/nodejs/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_nodejs
-    weight: 105
-  - name: C++
-    url: tracing/trace_collection/otel_instrumentation/cpp/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_cpp
-    weight: 107
-  - name: .NET
-    url: tracing/trace_collection/otel_instrumentation/dotnet/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_dotnet
-    weight: 108
-  - name: Instrumenting with OpenTracing
+  - name: Custom Instrumentation with OpenTracing
     url: tracing/trace_collection/opentracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
