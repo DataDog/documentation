@@ -52,3 +52,4 @@ For more information about trace context propagation configuration, read [the Di
 
 [1]: /tracing/trace_collection/dd_libraries/ruby/#distributed-tracing
 [6]: https://github.com/openzipkin/b3-propagation
+[7]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
