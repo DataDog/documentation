@@ -210,6 +210,8 @@ If your level of detail is resource or span, some widget types also require you 
 
 ### Event overlays
 
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
+
 View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][14].
 
 The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
@@ -220,7 +222,29 @@ With the event overlay, you can quickly see how actions within the organization 
 - Correlating egress traffic with suspicious login activity
 - Correlating any timeseries data with monitor alerts to ensure that Datadog has been configured with the appropriate alerts
 
-{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
+
+### Split graph
+
+With split graph, you can see your metric visualizations broken out by tags. 
+
+{{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the widget fullscreen" style="width:100%;" >}}
+
+1. Access this feature through the following ways:
+    - From the Dashboard, click on the widget ellipsis menu and select the **Split graph** option.
+    - Open up an existing metric widget and from the full-screen graph, click the **Split Graph** tab. 
+    - In the Metrics Explorer, click on the **Split Graph** button.
+1. You can change the *sort by* metric to see the relationship between the data you are graphing and other metrics. 
+1. Limit the number of graphs that are displayed by changing *limit to* value.
+1. To change the visualization type, go to the graph editor and select your visualization. 
+    - Timeseries
+    - Query Value
+    - Top List
+    - Table
+    - Tree Map
+    - Pie Chart
+    - Geomap
+    - Scatter Plot
+    - Change
 
 ## Further Reading
 
