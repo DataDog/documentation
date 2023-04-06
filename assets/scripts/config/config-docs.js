@@ -4,8 +4,8 @@ module.exports = {
         ddApplicationId: '3493b4e7-ab12-4852-8836-ba96af7bc745',
         loggingHandler: 'http',
         algoliaConfig: {
-            index: 'docsearch_docs_prod',
-            api_index: 'docsearch_docs_prod_api',
+            index: 'docs_prod',
+            api_index: 'docs_prod_api',
             appId: 'EOIG7V0A2O',
             apiKey: 'c7ec32b3838892b10610af30d06a4e42'
         },
