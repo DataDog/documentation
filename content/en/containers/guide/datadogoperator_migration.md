@@ -1,9 +1,8 @@
-## Migrating to the version 1.0 of the Datadog Operator
+## Migrating to version 1.0 of the Datadog Operator
 
+Datadog Operator v0.X uses `v1alpha1` of the DatadogAgent custom resource. Datadog Operator v1.X reconciles `v2alpha1`.
 
 This guide describes how to migrate to the `v2alpha1/DatadogAgent` custom resource from `v1alpha1/DatadogAgent`.
-
-Datadog Operator v1.X reconciles the version `v2alpha1` of the DatadogAgent custom resource, while the v0.X reconciles `v1alpha1`.
 
 ### Requirements
 
