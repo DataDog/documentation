@@ -739,6 +739,7 @@ class Integrations:
                 result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
+                print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                 sys.exit(1)
         else:
             with open(file_name, 'r+') as f:
@@ -883,6 +884,7 @@ class Integrations:
                             final_file.write(final_text)
                     except Exception as e:
                         print(e)
+                        print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
                         sys.exit(1)
             else:
                 if exists(out_name):
