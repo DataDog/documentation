@@ -6,6 +6,34 @@
 {{- $body := .body -}}
 {{- $title := .title -}}
 {{- $contentEncoding := "" -}}
+{{- $exampleDefinition := .exampleDefinition -}}
+{{- $exampleId := .exampleId -}}
+
+{{/* Determine contentencoding */}}
+{{- with $parameters.headerParams -}}
+  {{- range . -}}
+    {{- if eq .name "Content-Encoding" -}}
+      {{- $def := "" -}}
+      {{- range $enumVal := .schema.enum -}}
+        {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
+      {{- end -}}
+      {{- if gt (len $def) 0 -}}
+        {{- $contentEncoding = $def -}}
+      {{- else if (or (and (isset .schema "example") (.required | default false)) (in $title "compression") ) -}}
+        {{- $contentEncoding = (.example | default .schema.example) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if ne $contentEncoding "deflate" -}}
+
+{{- with $exampleDefinition -}}
+## {{ default $exampleId .summary }}
+{{- range split .description "\n" }}
+# {{ . }}
+{{- end }}
+{{- end -}}
 
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
@@ -34,23 +62,6 @@
             <span class="kn">export</span> <span class="n">{{ $name }}</span><span class="o">=</span><span class="s1">"{{ $example }}"</span><br/>
         {{- end -}}
     {{- end -}}
-{{- end -}}
-
-{{/* Determine contentencoding */}}
-{{- with $parameters.headerParams -}}
-  {{- range . -}}
-    {{- if eq .name "Content-Encoding" -}}
-      {{- $def := "" -}}
-      {{- range $enumVal := .schema.enum -}}
-        {{- if in $title $enumVal -}}{{- $def = $enumVal -}}{{- end -}}
-      {{- end -}}
-      {{- if gt (len $def) 0 -}}
-        {{- $contentEncoding = $def -}}
-      {{- else if (or (and (isset .schema "example") (.required | default false)) (in $title "compression") ) -}}
-        {{- $contentEncoding = (.example | default .schema.example) -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
 {{- end -}}
 
 <span class="c1"># Curl command</span><br/>
@@ -145,3 +156,6 @@
 <span class="n">EOF</span>
 {{- end -}}
 <br/>
+{{- else -}}
+See one of the other client libraries for examples of deflate compression.<br/>
+{{- end -}}

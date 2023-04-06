@@ -155,11 +155,7 @@
                             {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                         {{- end -}}
                       {{- end -}}
-## {{ default $exampleId $exampleDefinition.summary }}
-  {{- range split $exampleDefinition.description "\n" }}
-# {{ . }}
-  {{- end }}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
                   {{- end -}}
               {{- else -}}
 {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
@@ -211,11 +207,7 @@
                           {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                       {{- end -}}
                     {{- end -}}
-## {{ default $exampleId $exampleDefinition.summary }}
-{{- range split $exampleDefinition.description "\n" }}
-# {{ . }}
-{{- end }}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
                 {{- end -}}
             {{- else -}}
 {{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
