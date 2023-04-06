@@ -12,6 +12,13 @@ cascade:
         rank: 60
         category: Documentation
         subcategory: Integrations
+    _target:
+        path: /integrations/azure
+    algolia:
+        rank: 60
+        category: Documentation
+        subcategory: Integrations
+        tags: ['azure']
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
