@@ -97,8 +97,8 @@ export function setMobileNav () {
         }else if (parentMenu){
             openMenu(parentMenu)
         }
-    }else if(!mobileSelection && dataPath === 'api/latest'){
-        // set default mobile nav to open "Overview" dropdown menu
+    }else if(!mobileSelection && dataPath.match(/api\/latest$/)){
+        // open "Overview" mobile nav dropdown menu by default
         const firstMobileNavDropdown = document.querySelector('#mobile-nav .dropdown-menu')
         console.log('first->',firstMobileNavDropdown)
         openMenu(firstMobileNavDropdown)
