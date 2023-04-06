@@ -53,7 +53,7 @@ After updating your configuration, you can override elements of your HTML docume
 
 Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
-{{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="Mask user input mode" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="Mask user input mode" style="width:70%;">}}
 
 **Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay, which means all input fields are automatically masked.
 

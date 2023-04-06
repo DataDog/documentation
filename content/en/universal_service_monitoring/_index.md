@@ -364,12 +364,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
