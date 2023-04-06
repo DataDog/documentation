@@ -237,7 +237,7 @@ Follow [these instructions][2] to install and configure the Java tracing library
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
-#### Instructions
+#### 
 
 Follow the instructions to install and configure the [.NET Core tracing library][1] and the [.NET Framework tracing library][2]. 
 
