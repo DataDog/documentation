@@ -21,7 +21,7 @@ Service Catalog relies on the `DD_SERVICE` tag in all telemetry types (infrastru
 
 ## Can't add metadata for RUM services
 
-Adding metadata for RUM services is not currently supported. 
+Adding metadata for RUM services is not supported. 
 
 ## Further reading
 
