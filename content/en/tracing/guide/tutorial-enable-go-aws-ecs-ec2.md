@@ -227,7 +227,7 @@ To enable tracing support:
     privateMethod1(ctx)
   }{{< /code-block >}}
 
-1. The `privateMethod1` function demonstates creating a completely separate service from a context. Remove the comments to enable it:
+1. The `privateMethod1` function demonstrates creating a completely separate service from a context. Remove the comments to enable it:
 
    {{< code-block lang="go" filename="notes/notesHelper.go" disable_copy="true" collapsible="true" >}}
    func privateMethod1(ctx context.Context) {

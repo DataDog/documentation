@@ -305,6 +305,22 @@ Uncomment the following imports:
   "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 {{< /code-block >}}
 
+Launch the application with `make runNotes` and try the `curl` commands again to observe the custom spans and traces you've just configured:
+
+`curl localhost:8080/notes`
+: `[]`
+
+`curl -X POST 'localhost:8080/notes?desc=hello'`
+: `{"id":1,"description":"hello"}`
+
+`curl localhost:8080/notes/1`
+: `{"id":1,"description":"hello"}`
+
+`curl localhost:8080/notes`
+: `[{"id":1,"description":"hello"}]`
+
+{{< img src="tracing/guide/tutorials/privatemethod1.png" alt="A flame graph displaying custom traces for privteMethod1 and doLongRunningProcess" style="width:100%;" >}}
+
 For more information on custom tracing, see [Go Custom Instrumentation][12].
 
 ## Examine distributed traces
@@ -329,7 +345,7 @@ To enable tracing in the calendar application, uncomment the following lines in 
   r.Use(chitrace.Middleware(chitrace.WithServiceName("calendar")))
 {{< /code-block >}}
 
-1. If the notes application is still running, use make exitNotes to stop it.
+1. If the notes application is still running, use `make exitNotes` to stop it.
 1. Run `make run` to start the sample application.
 1. Send a POST request with the `add_date` parameter:
    {{< code-block lang="shell">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}
