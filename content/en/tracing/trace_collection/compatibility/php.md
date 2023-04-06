@@ -164,7 +164,7 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 ### PCNTL
 
-Datadog does support tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created and the forked process will be instrumented. This can be disabled by using `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
+Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
 
 If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
