@@ -180,4 +180,4 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
 [8]: https://man7.org/linux/man-pages/man2/unshare.2.html
-[9]: /tracing/library_config/php/#environment-variable-configuration
+[9]: tracing/trace_collection/library_config/php/#environment-variable-configuration
