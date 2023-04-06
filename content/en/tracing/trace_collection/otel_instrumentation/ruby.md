@@ -30,7 +30,7 @@ The following OTel features implemented in the Datadog library as noted:
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog trace provider
+## Configuring OTel to use the Datadog tracing library
 
 1. Add your desired manual OTel instrumentation to your Ruby code following the [OTel Ruby Manual Instrumentation documentation][5].
 1. Add the `ddtrace` gem to your Gemfile:
