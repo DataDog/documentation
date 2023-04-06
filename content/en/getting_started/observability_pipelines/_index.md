@@ -76,7 +76,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm update --install \
+helm upgrade --install \
     opw datadog/observability-pipelines-worker \
     -f aws_eks.yaml
 ```
