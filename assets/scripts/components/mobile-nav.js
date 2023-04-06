@@ -87,7 +87,7 @@ export function setMobileNav () {
         mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
     }
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
-
+    console.log('before->',mobileSelection, dataPath)
     if (mobileSelection) {
         const parentMenu = mobileSelection.parentElement || false
     
@@ -100,7 +100,7 @@ export function setMobileNav () {
     }else if(!mobileSelection && dataPath === 'api/latest'){
         // set default mobile nav to open "Overview" dropdown menu
         const firstMobileNavDropdown = document.querySelector('#mobile-nav .dropdown-menu')
-        console.log(firstMobileNavDropdown)
+        console.log('first->',firstMobileNavDropdown)
         openMenu(firstMobileNavDropdown)
     } 
 }
