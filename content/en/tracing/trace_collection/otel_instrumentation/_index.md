@@ -1,8 +1,8 @@
 ---
-title: Instrumenting with OpenTelemetry
+title: Custom Instrumentation with the OpenTelemetry API
 kind: documentation
 type: multi-code-lang
-description: 'Set up OpenTelemetry instrumentation to work with Datadog tracing'
+description: 'Sending spans from custom instrumentation through the OpenTelemetry API to the Datadog tracing libraries.'
 aliases:
 further_reading:
     - link: '/opentelemetry/'

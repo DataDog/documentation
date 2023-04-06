@@ -1,5 +1,5 @@
 ---
-title: Java OpenTelemetry Instrumentation
+title: Custom Instrumentation of Java Applications with the OpenTelemetry API
 kind: documentation
 description: 'Instrument your Java application with OTel API to send traces to Datadog.'
 code_lang: java

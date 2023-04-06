@@ -1,5 +1,5 @@
 ---
-title: C++ OpenTelemetry Instrumentation
+title: Custom Instrumentation of C++ Applications with the OpenTelemetry API
 kind: documentation
 description: 'Instrument your C++ application with OTel API, to send traces to Datadog.'
 code_lang: cpp

@@ -1,5 +1,5 @@
 ---
-title: Go OpenTelemetry Instrumentation
+title: Custom Instrumentation of Go Applications with the OpenTelemetry API
 kind: documentation
 description: 'Instrument your Go application with OTel API to send traces to Datadog'
 code_lang: go

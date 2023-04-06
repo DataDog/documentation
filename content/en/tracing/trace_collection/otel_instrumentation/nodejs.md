@@ -1,5 +1,5 @@
 ---
-title: Node.js OpenTelemetry Instrumentation
+title: Custom Instrumentation of Node.js Applications with the OpenTelemetry API
 kind: documentation
 description: 'Instrument your Node.js application with OTel API to send traces to Datadog.'
 code_lang: nodejs
