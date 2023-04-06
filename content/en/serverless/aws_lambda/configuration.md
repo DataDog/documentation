@@ -666,7 +666,7 @@ arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProf
 
 {{< site-region region="ap1" >}}
 ```
-arn:aws:signer:us-east-1:417141415827:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
+arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
 {{< /site-region >}}
 
