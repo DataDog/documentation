@@ -10,8 +10,9 @@ code_lang_weight: 70
 description: 'OpenTracing instrumentation for .NET'
 ---
 
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/dotnet/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
-Datadog also supports the OpenTracing standard. For more details and information, view the [OpenTracing API][1].
+For more details and information, view the [OpenTracing API][1].
 
 ## Setup
 For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][2] to your application. During application start-up, initialize the OpenTracing SDK:
