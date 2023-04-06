@@ -37,13 +37,15 @@ Alternatively, when you view a service details page in APM, the Security tab als
 
 The Vulnerability Explorer shows a complete list of vulnerabilities detected by ASM Risk Management, ordering the vulnerabilities based on their severity, and offering filtering capabilities so you can investigate and prioritize problems. It also shows the number of affected libraries, the language of the affected library, and the last time that vulnerability was detected.
 
-{{< img src="security/application_security/appsec-vuln-explorer.png" alt="ASM Risk Management Vulnerability Explorer page." style="width:100%;" >}}
+{{< img src="security/application_security/appsec-vuln-explorer2.png" alt="ASM Risk Management Vulnerability Explorer page." style="width:100%;" >}}
 
 Select a specific vulnerability to see its details, including which services are affected. From here you can explore what containers and infrastructure are potentially affected by the vulnerability, so you know more about the extent of a risk. This provides valuable information for prioritizing remediation tasks.
 
-The explorer also offers remediation recommendations for detected vulnerabilities and shows a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
+Each vulnerability includes a score that dynamically updates based on the presence or lack thereof of attacks in the last month.
 
-{{< img src="security/application_security/appsec-vuln-details.png" alt="ASM Risk Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
+The explorer also offers remediation recommendations for detected vulnerabilities that enable you to change the status of a vulnerability, and assign it to a team member for further review. It also includes a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
+
+{{< img src="security/application_security/appsec-vuln-details2.png" alt="ASM Risk Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
 
 ## Detect known open source vulnerabilities
 
