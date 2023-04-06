@@ -52,15 +52,15 @@ You can control three ingestion mechanisms by configuring sampling in the Datado
 
 **Note**: The `Other Ingestion Reasons` (gray) section of the pie chart represents other ingestion reasons which _are not configurable_ at the Datadog Agent level.
 
-### Remotely configure Agent ingestion configurations
+### Remotely configure Agent ingestion settings
 
-<div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
+<div class="alert alert-warning"> Remote configuration for ingestion configuration is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
 
-You can remotely configure these parameters if your using the Agent version [7.42.0][13] or higher. Follow the [documentation][14] to enable remote configuration in your Agents.
+You can remotely configure these parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
 
-With remote configuration, you are able to change the parameter without having to restart the Datadog Agent. Click `Apply` to save the configuration changes, and the new configuration will take effect immediately.
+With remote configuration, you can change parameters without having to restart the Agent. Click `Apply` to save the configuration changes, and the new configuration takes effect immediately.
 
-**Note**: Remotely configured parameters take precedence over local configurations - environment variables and `datadog.yaml` configuration.
+**Note**: Remotely configured parameters take precedence over local configurations such as environment variables and `datadog.yaml` configuration.
 
 ## Managing ingestion for an individual service at the library level
 
