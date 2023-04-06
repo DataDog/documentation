@@ -46,9 +46,9 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 #### Remote configuration
 
-<div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
+<div class="alert alert-warning">Remote configuration for ingestion configuration in the Agent is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
 
-This variable is controllable remotely from the version [7.42.0][20] of the Datadog Agent. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter without having to restart the Datadog Agent.
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
 
 #### Local configuration
 
