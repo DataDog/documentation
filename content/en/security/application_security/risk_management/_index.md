@@ -35,7 +35,7 @@ Alternatively, when you view a service details page in APM, the Security tab als
 
 ## Explore vulnerabilities and remediation
 
-The Vulnerability Explorer shows a complete list of vulnerabilities detected by ASM Risk Management, ordering the vulnerabilities based on their severity, and offering filtering capabilities so you can investigate and prioritize problems. It also shows the number of affected libraries, the language of the affected library, and the last time that vulnerability was detected.
+The Vulnerability Explorer shows a complete list of vulnerabilities detected by ASM Risk Management, ordering the vulnerabilities based on their severity, and offering grouping and filtering capabilities so you can investigate and prioritize problems. It also shows the number of affected libraries, the language of the affected library, and the last time that vulnerability was detected.
 
 {{< img src="security/application_security/appsec-vuln-explorer2.png" alt="ASM Risk Management Vulnerability Explorer page." style="width:100%;" >}}
 
