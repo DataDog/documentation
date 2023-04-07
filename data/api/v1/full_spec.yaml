@@ -16855,6 +16855,11 @@ components:
           description: Contains the number of log bytes ingested.
           format: int64
           type: integer
+        logs_forwarding_events_bytes:
+          description: Contains the number of logs forwarded bytes (data available
+            as of April 1st 2023)
+          format: int64
+          type: integer
         logs_live_indexed_count:
           description: Contains the number of live log events indexed (data available
             as of December 1, 2020).
@@ -17481,6 +17486,11 @@ components:
             current date for all organizations.
           format: int64
           type: integer
+        forwarding_events_bytes_sum:
+          description: Shows the sum of all log bytes forwarded over all hours in
+            the current date for all organizations.
+          format: int64
+          type: integer
         gcp_host_top99p:
           description: Shows the 99th percentile of all GCP hosts over all hours in
             the current date for all organizations.
@@ -17871,6 +17881,11 @@ components:
         fargate_tasks_count_hwm:
           description: Shows the high-water mark of all Fargate tasks over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        forwarding_events_bytes_sum:
+          description: Shows the sum of all log bytes forwarded over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         gcp_host_top99p:
@@ -18282,6 +18297,12 @@ components:
         fargate_tasks_count_hwm_sum:
           description: Shows the sum of the high-water marks of all Fargate tasks
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        forwarding_events_bytes_agg_sum:
+          description: Shows the sum of all logs forwarding bytes over all hours in
+            the current months for all organizations (data available as of April 1,
+            2023)
           format: int64
           type: integer
         gcp_host_top99p_sum:
