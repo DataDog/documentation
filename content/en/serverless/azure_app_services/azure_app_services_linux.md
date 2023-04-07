@@ -15,9 +15,11 @@ This instrumentation method provides the following additional monitoring capabil
 The solution uses the startup command setting and Application Settings for Linux Azure App Service to instrument the application and manage its configuration. 
 
 ### Setup
+
+#### Set application settings
 To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings. 
 
-{{< img src="serverless/azure_app_service/storms-nodejs.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP."  style="width:80%;" >}}
+{{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Four settings are listed: DD_API_KEY, DD_CUSTOM_METRICS_ENABLEDstaDD_SERVICE, and DD_START_APP."  style="width:80%;" >}}
 
 - `DD_API_KEY` is your Datadog API key.
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
@@ -26,13 +28,38 @@ To instrument your application, begin by adding the following key-value pairs un
 
 **Note**: The application restarts when new settings are saved. 
 
+#### Set general settings
+
+{{< tabs >}}
+{{% tab "Node, .NET, PHP, Python" %}}
 Next, go to **General settings** and add the following to the **Startup Command** field:
 
 ```
 curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-extension/linux-v0.1.4-beta/linux/datadog_wrapper | bash
 ```
 
-{{< img src="serverless/azure_app_service/startup-command.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command."  style="width:80%;" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+Download the `datadog_wrapper` file from the releases and upload it to your application with the [Azure CLI command][1]:
+
+```
+az webapp deploy --resource-group <group-name> --name <app-name> --src-path <path-to-datadog-wrapper> --type=startup
+```
+
+Alternatively, you can upload this script as part of your application and set the **Startup Command** in **General Settings** as its location. For example: `/home/site/wwwroot/datadog_wrapper`
+
+If you are already using a startup script, add the following curl command to the end of your script:
+
+```
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datadog_wrapper | bash
+```
+
+[1]: https://learn.microsoft.com/en-us/azure/app-service/deploy-zip?tabs=cli#deploy-a-startup-script
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command."  style="width:80%;" >}}
 
 
 ### Viewing traces
