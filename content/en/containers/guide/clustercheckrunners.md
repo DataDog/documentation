@@ -31,7 +31,7 @@ Then, deploy the cluster check runner using either [Datadog Operator][4] or [Hel
 
 Using the Operator, you can launch and manage all of these resources with a single manifest. For example:
 
-```
+```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -72,15 +72,17 @@ See the [Datadog Operator repo][1] for more information about the Datadog Operat
 
 You can update the relevant sections of the chart to enable cluster checks, the Cluster Agent, and the cluster check runner at the same time. For example:
 
-```
-[...]
+```yaml
+datadog:
   clusterChecks:
     enabled: true
-[...]
- clusterAgent:
+  #(...)
+
+clusterAgent:
   enabled: true
-[...]
- clusterChecksRunner:
+  #(...)
+
+clusterChecksRunner:
   enabled: true
   replicas: 2
 ```
