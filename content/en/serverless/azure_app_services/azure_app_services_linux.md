@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads:
+This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service Web Apps:
 
 - Fully distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
@@ -12,7 +12,7 @@ This instrumentation method provides the following additional monitoring capabil
 - `Trace_ID` injection into application logs.
 - Support for submitting custom metrics using [DogStatsD][1].
 
-This solution uses the startup command setting and Application Settings for Linux Azure App Service to instrument the application and manage its configuration. Java, Node, .NET, PHP, and Python are supported.
+This solution uses the startup command setting and Application Settings for Linux Azure App Service Web Apps to instrument the application and manage its configuration. Java, Node, .NET, PHP, and Python are supported.
 
 ### Setup
 
