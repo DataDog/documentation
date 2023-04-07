@@ -99,6 +99,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | CodeIgniter    | 3.x                  | PHP 7+                     | Generic web tracing             |
 | Drupal         |                      | All supported PHP versions | Generic web tracing             |
 | FuelPHP        | 1.1                  | PHP 7+                     | Generic web tracing             |
+| Laminas        |                      | All supported PHP versions | Framework-level instrumentation |     
 | Laravel        | 4.2, 5.x, 6.x        | All supported PHP versions | Framework-level instrumentation |
 | Laravel 8      | 8.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
 | Lumen          |   5.2+                 | All supported PHP versions | Framework-level instrumentation |
@@ -107,7 +108,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Phalcon        | 1.3, 3.4             | All supported PHP versions | Generic web tracing             |
 | RoadRunner     | 2.x                  | All supported PHP versions | Framework-level instrumentationq |
 | Slim           | 2.x, 3.x, 4.x        | All supported PHP versions | Framework-level instrumentation |
-| Symfony        | 3.3, 3.4, 4.x, 5.x, 6.x | All supported PHP versions | Framework-level instrumentation |
+| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x | All supported PHP versions | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-level instrumentation |
 | Yii            | 1.1, 2.0             | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 1.12                 | All supported PHP versions | Framework-level instrumentation |
@@ -124,7 +125,8 @@ Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI s
 | Module          | Versions | Support Type    |
 |:----------------|:---------|:----------------|
 | CakePHP Console | 2.x      | Fully Supported |
-| Laravel Artisan | 5.x      | Fully Supported |
+| Laravel Artisan | 5.x, 8.x | Fully Supported |
+| Symfony CLI     | 4.x, 5.x, 6.x | Fully Supported |
 
 To request support for additional CLI libraries, contact our awesome [support team][3].
 
@@ -135,6 +137,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | Fully Supported |
 | Elasticsearch                                                           | 1+                         | Fully Supported |
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
+| Memcache                                                                | *(Any Supported PHP)*      | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB - via [mongo][4] extension                                      | 1.4.x                      | Fully Supported |
 | MySQLi                                                                  | *(Any Supported PHP)*      | Fully Supported |
@@ -148,9 +151,10 @@ To request support for additional datastores, contact our awesome [support team]
 
 | Module     | Versions              | Support Type    |
 |:-----------|:----------------------|:----------------|
+| Amqp       | 2.x, 3.x              | PHP 7.1+        |
 | Curl       | *(Any Supported PHP)* | Fully Supported |
-| Guzzle     | 5.x                   | Fully Supported |
-| Guzzle     | 6.x                   | Fully Supported |
+| Guzzle     | 5.x, 6.x, 7.x         | Fully Supported |
+
 
 To request support for additional libraries, contact our awesome [support team][3].
 
