@@ -179,48 +179,31 @@ missing_tms_preview:
     - check_missing_tms
   interruptible: true
 
-algolia_sync_preview:
+algolia_sync_preview:manual:
   <<: *base_template
-  <<: *preview_rules
   stage: post-deploy
   environment: "preview"
   allow_failure: true
   interruptible: true
   script:
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:sync
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
-    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"' 
-      when: on_success
+    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ $PREVIEW_PATTERN'
+      when: manual
 
-# algolia_sync_preview:
-#   <<: *base_template
-#   <<: *preview_rules
-#   stage: post-deploy
-#   environment: "preview"
-#   allow_failure: true
-#   interruptible: true
-#   script:
-#     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-#     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
-#   rules:
-#     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-#       when: never
-#     - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"' 
-#       when: on_success
-
-# algolia_sync_live:
-#   <<: *base_template
-#   <<: *live_rules
-#   stage: post-deploy
-#   environment: "live"
-#   allow_failure: true
-#   interruptible: true
-#   script:
-#     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
-#     - ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key') yarn run algolia:sync
+algolia_sync_live:
+  <<: *base_template
+  <<: *live_rules
+  stage: post-deploy
+  environment: "live"
+  allow_failure: true
+  interruptible: true
+  script:
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
+    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:sync
 
 sourcemaps_preview:
   <<: *base_template

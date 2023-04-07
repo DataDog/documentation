@@ -10,8 +10,7 @@ const getIndexName = () => {
             algoliaIndexName = configDocs['live'].algoliaConfig.index;
             break;
         case 'preview':
-            // algoliaIndexName = configDocs['preview'].algoliaConfig.index;
-            algoliaIndexName = 'docs_prod'
+            algoliaIndexName = configDocs['preview'].algoliaConfig.index;
             break;
         default:
             algoliaIndexName = '';
@@ -41,8 +40,7 @@ const updateSettings = (index) => {
         minWordSizefor2Typos: 7,
         ignorePlurals: true,
         optionalWords: ['the', 'without'],
-        separatorsToIndex: '_@.#',
-        // exactOnSingleWordQuery: 'word'
+        separatorsToIndex: '_@.#'
     };
 
     return index.setSettings(settings, { forwardToReplicas: true });
