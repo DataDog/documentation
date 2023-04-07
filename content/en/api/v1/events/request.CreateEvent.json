@@ -1,7 +1,7 @@
 {
-  "title": "Example-Event",
+  "title": "Example-Post_an_event_returns_OK_response",
   "text": "A text message.",
   "tags": [
-    "test:ExampleEvent"
+    "test:ExamplePostaneventreturnsOKresponse"
   ]
 }

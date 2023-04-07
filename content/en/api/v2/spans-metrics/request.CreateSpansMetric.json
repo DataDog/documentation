@@ -16,7 +16,7 @@
         }
       ]
     },
-    "id": "ExampleSpansMetric",
+    "id": "ExampleCreateaspanbasedmetricreturnsOKresponse",
     "type": "spans_metrics"
   }
 }

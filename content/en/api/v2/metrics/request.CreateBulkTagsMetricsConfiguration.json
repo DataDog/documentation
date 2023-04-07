@@ -6,7 +6,7 @@
       ],
       "tags": [
         "test",
-        "examplemetric"
+        "exampleconfiguretagsformultiplemetricsreturnsacceptedresponse"
       ]
     },
     "id": "system.load.1",
