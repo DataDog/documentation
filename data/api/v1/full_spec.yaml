@@ -14500,6 +14500,10 @@ components:
             example: ''
             type: string
           type: array
+        compressedJsonDescriptor:
+          description: A protobuf JSON descriptor that needs to be gzipped first then
+            base64 encoded.
+          type: string
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
