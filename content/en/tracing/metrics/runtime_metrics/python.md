@@ -20,7 +20,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in public beta
+This feature is in public beta.
 </div>
 
 ## Automatic configuration
