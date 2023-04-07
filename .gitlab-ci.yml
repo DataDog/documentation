@@ -191,7 +191,7 @@ algolia_sync_preview:manual:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
-    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ $PREVIEW_PATTERN'
+    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"' 
       when: manual
 
 algolia_sync_live:
