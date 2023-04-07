@@ -56,10 +56,10 @@ After a few days of usage, you typically get your first security signals. If you
 
 {{< code-block lang="sh" >}}
 for ((i=1;i<=200;i++)); do
-# Target existing service’s routes
+# Target existing service's routes
 curl https://your-application-url/<EXISTING ROUTE> -A
 'dd-test-scanner-log';
-# Target non existing service’s routes
+# Target non existing service's routes
 curl https://your-application-url/<NON-EXISTING ROUTE> -A
 'dd-test-scanner-log';
 done{{< /code-block >}}
