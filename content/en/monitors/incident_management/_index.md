@@ -9,6 +9,9 @@ further_reading:
   - link: "dashboards/querying/#incident-management-analytics"
     tag: "Documentation"
     text: "Incident Management Analytics"
+  - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+    tag: 'Blog'
+    text: 'More efficient pair programming with Datadog CoScreen'
   - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
     tag: 'Blog'
     text: 'Best practices for writing incident postmortems'

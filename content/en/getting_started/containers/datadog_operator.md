@@ -8,7 +8,7 @@ further_reading:
   - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Advanced Installation'
-  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md'
+  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
     tag: 'GitHub'
     text: 'Datadog Operator: Configuration'
 ---
@@ -17,7 +17,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
 ## Prerequisites
 
-- Kubernetes v1.14.X+
+- Kubernetes v1.20.X+
 - [Helm][3] for deploying the Datadog Operator
 - The Kubernetes command-line tool, [kubectl][4], for installing the Datadog Agent
 
@@ -36,11 +36,16 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
   ```yaml
-  apiVersion: datadoghq.com/v1alpha1
+  apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
   metadata:
     name: datadog
   spec:
+    features:
+      apm:
+        enabled: true
+      logCollection:
+        enabled: true
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -48,11 +53,6 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
       appSecret:
         secretName: datadog-secret
         keyName: app-key
-    agent:
-      apm:
-        enabled: true
-      log:
-        enabled: true
   ```
 
 4. Deploy the Datadog Agent:
