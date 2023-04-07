@@ -39,15 +39,21 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 
 1. Kubernetes >v1.10: you must register the External Metrics Provider resource against the API server.
 2. Enable the Kubernetes [aggregation layer][3].
+3. A valid [Datadog API Key **and** Application Key][8].
 
 ### Installation
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To enable the external metrics server with your Cluster Agent in Helm, update your [values.yaml][1] file with the following Cluster Agent configuration. After you set `clusterAgent.metricsProvider.enabled` to `true`, redeploy your Datadog Helm chart:
+To enable the external metrics server with your Cluster Agent in Helm, update your [values.yaml][1] file with the following configurations. Provide a valid Datadog API Key, Application Key, and set the `clusterAgent.metricsProvider.enabled` to `true`. Once done redeploy your Datadog Helm chart:
 
   ```yaml
+  datadog:
+    apiKey: <DATADOG_API_KEY>
+    appKey: <DATADOG_APP_KEY>
+    #(...)
+
   clusterAgent:
     enabled: true
     # Enable the metricsProvider to be able to scale based on metrics in Datadog
@@ -59,31 +65,50 @@ To enable the external metrics server with your Cluster Agent in Helm, update yo
 
 This automatically updates the necessary RBAC configurations and sets up the corresponding `Service` and `APIService` for Kubernetes to use.
 
+The keys can alternatively be set by referencing the names of pre-created `Secrets` containing the data keys `api-key` and `app-key`  with the configurations `datadog.apiKeyExistingSecret` and `datadog.appKeyExistingSecret`.
+
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, first [set up the Datadog Operator][1]. Then, set `features.externalMetricsServer.enabled` to `true` in the `DatadogAgent` custom resource:
+To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, first [set up the Datadog Operator][1]. Then, provide a valid Datadog API Key, Application Key, and set the `features.externalMetricsServer.enabled` to `true` in your `DatadogAgent` custom resource:
 
   ```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  features:
-    externalMetricsServer:
-      enabled: true
-      useDatadogMetrics: false
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-  override:
-    clusterAgent:
-      replicas: 2
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_API_KEY>
+
+      externalMetricsServer:
+        enabled: true
   ```
 
 The Operator automatically updates the necessary RBAC configurations and sets the corresponding `Service` and `APIService` for Kubernetes to use.
+
+The keys can alternatively be set by referencing the names of pre-created `Secrets` and the data keys storing your Datadog API and Application Keys.
+  ```yaml
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiSecret:
+          secretName: <SECRET_NAME>
+          keyName: <KEY_FOR_DATADOG_API_KEY>
+        appSecret:
+          secretName: <SECRET_NAME>
+          keyName: <KEY_FOR_DATADOG_APP_KEY>
+
+      externalMetricsServer:
+        enabled: true
+  ```
 
 [1]: /agent/guide/operator-advanced
 {{% /tab %}}
@@ -177,24 +202,20 @@ This automatically updates the necessary RBAC files and directs the Cluster Agen
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `features.externalMetricsServer.enabled` to `true`.
+To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `features.externalMetricsServer.useDatadogMetrics` to `true`.
 
   ```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  features:
-    externalMetricsServer:
-      enabled: true
-      useDatadogMetrics: true
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-  override:
-    clusterAgent:
-      replicas: 2
+  kind: DatadogAgent
+  apiVersion: datadoghq.com/v2alpha1
+  metadata:
+    name: datadog
+  spec:
+    global:
+      #(...)
+    features:
+      externalMetricsServer:
+        enabled: true
+        useDatadogMetrics: true
   ```
 
 The Operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
@@ -489,3 +510,4 @@ For `apiVersion: autoscaling/v2beta1` the respective options are `targetValue` a
 [5]: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-multiple-metrics
 [6]: https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/#customresourcedefinitions
 [7]: /integrations/guide/cloud-metric-delay
+[8]: /account_management/api-app-keys/
