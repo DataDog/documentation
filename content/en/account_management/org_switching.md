@@ -5,6 +5,8 @@ kind: documentation
 
 In cases where you belong to multiple Datadog organizations, the org switcher at the bottom left of the nav bar allows you to toggle between organizations. You can also view all organizations and switch between them by using the **Organizations** tab in **Personal Settings**.
 
+{{< img src="/static/images/org_switching.png" alt="2 ways of switching organizations" >}}
+
 For security purposes, you must have a valid session for each org you switch to. In cases where you don't have an active session, you are asked to authenticate with a username and password or SAML.
 
 1. **Mixed auth approaches**: In cases where you have both SAML and username and password authentication, you must log in with the type required by the organization (username and password or SAML) as opposed to logging into one and getting access to all.
