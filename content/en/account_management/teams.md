@@ -61,7 +61,6 @@ Datadog supports associating the following resources with team handles:
 - [Incidents][3]
 - [Monitors][4]
 - [Service Catalog][5]
-- [Service Level Objectives][6]
 
 ## Filter
 
