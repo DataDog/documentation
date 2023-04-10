@@ -2426,6 +2426,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
@@ -2560,6 +2562,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentResourceRequestData:
       description: JSON:API request for updating a Confluent resource.
