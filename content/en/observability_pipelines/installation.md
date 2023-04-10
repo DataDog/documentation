@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< tabs >}}
-{{% tab "Linux" %}}
+{{% tab "APT-based Linux" %}}
 
 ## Overview
 
@@ -64,19 +64,17 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-4. Save your Observability Pipelines configuration:
+4. Add your keys to the Worker's bootstrap file:
 
     ```
-    echo "<DD_OP_CONFIG>" > /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
+    sudo sed -i -e 's/${DD_API_KEY}/<API_KEY>/' /etc/observability-pipelines-worker/bootstrap.yaml
+    sudo sed -i -e 's/${DD_OP_CONFIG_KEY}/<CONFIG_KEY>/' /etc/observability-pipelines-worker/bootstrap.yaml
+    sudo sed -i -e 's/${DD_SITE.*}/<DD_SITE>/' /etc/observability-pipelines-worker/bootstrap.yaml
     ```
 
-    Where `DD_OP_CONFIG` is the content of your Observability Pipeline configuration that you created in the [Observability Pipelines UI][6].
-
-
-5. Start the Worker:
-
+5. Start the worker:
     ```
-    DD_API_KEY=<DD_API_KEY> DD_OP_CONFIG_KEY=<DD_OP_CONFIG_KEY> observability-pipelines-worker run /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
+    sudo systemctl restart observability-pipelines-worker
     ```
 
 <!--
@@ -110,6 +108,85 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 [7]: /observability_pipelines/configurations/
 [8]: /observability_pipelines/working_with_data/
 {{% /tab %}}
+{{% tab "RPM-based Linux" %}}
+
+## Overview
+
+Install the Observability Pipelines Worker with the [RPM Package Manager][1] (RPM), a free package manager that handles the installation and removal of software on [RedHat Enterprise Linux][2], [CentOS][3], and other [Linux][4] distributions.
+
+## Prerequisites
+
+Before installing, make sure you:
+
+1. Are using one of the supported Linux architectures: x86_64 or AMD64
+2. Have a valid [Datadog API key][5].
+3. Have an [Observability Pipelines Configuration][6].
+
+## Installation
+
+### Manual
+
+1. Run the following commands to set up the Datadog `rpm` repo on your system:
+
+    ```
+    cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
+    [observability-pipelines-worker]
+    name = Observability Pipelines Worker
+    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/x86_64/
+    enabled=1
+    gpgcheck=1
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+    EOF
+    ```
+
+**Note:** If yo uare running RHEL/CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration above.
+
+2. Update your packages and install the Worker:
+
+    ```
+    sudo yum makecache
+    sudo yum install observability-pipelines-worker
+    ```
+
+3. Run the following commands to update your local `apt` repo and install the Worker:
+
+    ```
+    sudo apt-get update
+    sudo apt-get install observability-pipelines-worker datadog-signing-keys
+    ```
+
+4. Add your keys to the Worker's bootstrap file:
+
+    ```
+    sudo sed -i -e 's/${DD_API_KEY}/<API_KEY>/' /etc/observability-pipelines-worker/bootstrap.yaml
+    sudo sed -i -e 's/${DD_OP_CONFIG_KEY}/<CONFIG_KEY>/' /etc/observability-pipelines-worker/bootstrap.yaml
+    sudo sed -i -e 's/${DD_SITE.*}/<DD_SITE>/' /etc/observability-pipelines-worker/bootstrap.yaml
+    ```
+
+5. Start the worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+    After a minute, you should see your new pipeline active in Datadog Observability Pipelines.
+
+## Configuration
+
+- The configuration file for the Worker is located at `/etc/observability-pipelines-worker/observability-pipelines-worker.yaml`.
+- See [Configuration Reference][7] for all configuration options.
+- See [Working with Data][8] and Configuration Reference for configuration examples.
+
+[1]: https://en.wikipedia.org/wiki/RPM_Package_Manager
+[2]: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
+[3]: https://www.centos.org/
+[4]: https://linux.org/
+[5]: /account_management/api-app-keys/#api-keys
+[6]: https://app.datadoghq.com/observability-pipelines
+[7]: /observability_pipelines/configurations/
+[8]: /observability_pipelines/working_with_data/
+{{% /tab %}}
 {{% tab "Helm" %}}
 
 ## Overview
@@ -128,7 +205,7 @@ Before installing, make sure you have:
 
 ## Installation
 
-1. Run the following commands to add Datadog Observability Pipelines Worker repository to your Helm repositories: 
+1. Run the following commands to add Datadog Observability Pipelines Worker repository to your Helm repositories:
 
     ```
     helm repo add datadog https://helm.datadoghq.com
@@ -200,4 +277,3 @@ See [this table][5] for the the list of values.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
