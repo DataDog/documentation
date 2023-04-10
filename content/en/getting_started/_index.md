@@ -6,9 +6,9 @@ aliases:
     - /overview
     - /getting_started/faq/
 further_reading:
-    - link: 'https://learn.datadoghq.com/course/view.php?id=18'
+    - link: 'https://learn.datadoghq.com/'
       tag: 'Learning Center'
-      text: 'Introduction to Datadog'
+      text: 'Take a course to get started with Datadog'
 cascade:
     algolia:
         rank: 90
