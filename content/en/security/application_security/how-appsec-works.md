@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into any bad actors targeting your systems.
+Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems.
 
 In addition, ASM detects the risks built into your applications, for example through vulnerable libraries and dependencies the application uses at runtime.
 
-Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic. ASM flags attack attempts based on suspicious requests that match known attack patterns, or [tags business logic information][25]. Security signals are automatically created when Datadog detects application attacks or business logic abuse impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. Because ASM is embedded in the application, it has access to trace data, making it more effective at pinpointing and classifying threats. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal-to-noise ratio, lowering false positives.
 
@@ -153,3 +153,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /security/cloud_siem/
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
+[25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces

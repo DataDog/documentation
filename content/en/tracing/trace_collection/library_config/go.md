@@ -91,7 +91,7 @@ For more information, see [Ingestion Mechanisms][5].<br>
 
 `DD_TAGS`
 : **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake` or `layer:api team:intake`.
+A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
 
 `DD_TRACE_STARTUP_LOGS`
 : **Default**: `true` <br>
@@ -110,7 +110,7 @@ Enable web framework and library instrumentation. When false, the application co
 Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **Default**: `false` <br>
+: **Default**: `true` <br>
 Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
 `DD_TRACE_CLIENT_IP_ENABLED`

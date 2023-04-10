@@ -22,7 +22,7 @@ Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more deta
 
 ## Requirements
 
-- Datadog Cluster Agent v7.39+
+- Datadog Cluster Agent v7.40+
 
 ## Configuration
 {{< tabs >}}

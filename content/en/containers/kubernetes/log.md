@@ -184,13 +184,13 @@ agent:
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
 **Warning**: When running an unprivileged installation, the agent needs to be able to read the log files in `/var/log/pods`.
 With `containerd`, the log files in `/var/log/pods` are readable by members of the `root` group. With the above instructions, the `agent` is still running with the `root` group so, it works.
-With `docker`, the logs files in `/var/log/pods` are symbolic links to `/var/lib/docker/containers` which is traversable only by the `root` user. As a consequence, with `docker`, it’s not possible for a non-`root` agent to read pod logs in `/var/log/pods`. The docker socket must be mounted in the agent container so that it can get pods logs through the docker daemon.
+With `docker`, the logs files in `/var/log/pods` are symbolic links to `/var/lib/docker/containers` which is traversable only by the `root` user. As a consequence, with `docker`, it's not possible for a non-`root` agent to read pod logs in `/var/log/pods`. The docker socket must be mounted in the agent container so that it can get pods logs through the docker daemon.
 
 **Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
 
