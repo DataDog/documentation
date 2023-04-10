@@ -21,7 +21,7 @@ code_lang_weight: 90
 
 ### Supported languages and their requirements
 
-Node
+Node.js
 : If you are bundling using webpack or esbuild, [mark the Datadog libraries as external][4].
 
 Python
@@ -49,11 +49,10 @@ The following ASM capabilities are supported for Serverless, for the specified D
 
 | ASM capability                   | Minimum extension version |
 | -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
+| Threat Detection <br/> --> Business logic API  | Supported for Node.js, Java, Python, Go, and .NET with Lambda Extension version 39 and Serverless plugin version 5.20.0. <br/> --> Business logic capabilities follow the language-specific versions in which the service is built. |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/>     |
 | Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/> |
 
-The minimum Datadog lambda extension version to get all supported ASM capabilities for Serverless is y.y.
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
 
