@@ -46,7 +46,7 @@ Data privacy
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |
 |                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
 |                                          | [MySQLi][21]         |           | {{< X >}} |
-| **Node.js:** [dd-trace-js][9] >= 3.13.0     |                      |           |           |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |
 |                                          | [postgres][10]       |   Alpha   |           |
 |                                          | [mysql][13]          |           |   Alpha   |
 |                                          | [mysql2][14]         |           |   Alpha   |
@@ -302,10 +302,10 @@ Enable the database monitoring propagation feature by setting the following envi
 DBM-APM linking for Node.js is in alpha release and may be unstable.
 </div>
 
-Install or update [dd-trace-js][1] to a version greater than `3.13.0` (or `2.22.0` if using end-of-life Node.js version 12):
+Install or update [dd-trace-js][1] to a version greater than `3.17.0` (or `2.30.0` if using end-of-life Node.js version 12):
 
 ```
-npm install dd-trace@^3.13.0
+npm install dd-trace@^3.17.0
 ```
 
 Update your code to import and initialize the tracer:
