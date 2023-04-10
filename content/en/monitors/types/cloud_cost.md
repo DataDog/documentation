@@ -19,7 +19,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
+The feature discussed on this page is in private beta. Contact your Customer Success Manager to learn more about it.
 </div>
 
 ## Overview
