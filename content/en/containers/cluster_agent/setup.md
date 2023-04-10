@@ -49,26 +49,7 @@ When set manually, this token must be 32 alphanumeric characters.
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-The Cluster Agent is enabled by default since Datadog Operator v0.7.0.
-
-It can be managed explicitly by the `DatadogAgent` configuration:
-
-  ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      credentials:
-        apiKey: <DATADOG_API_KEY>
-
-    override:
-      clusterAgent:
-        disabled: false
-  ```
-
-The Operator creates the necessary RBACs, deploys the Cluster Agent, and modifies the Agent DaemonSet configuration.
+The Cluster Agent is enabled by default since Datadog Operator v0.7.0. The Operator creates the necessary RBACs, deploys the Cluster Agent, and modifies the Agent DaemonSet configuration.
 
 This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token by setting the `global.clusterAgentToken` field. You can alternatively set this by referencing the name of an existing `Secret` and the data key containing this token.
 
@@ -88,6 +69,7 @@ This also automatically generates a random token in a `Secret` shared by both th
 
 When set manually, this token must be 32 alphanumeric characters.
 
+[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
