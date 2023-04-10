@@ -23,7 +23,7 @@ further_reading:
 
 The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
-For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
+For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
 ## Installation and getting started
 
