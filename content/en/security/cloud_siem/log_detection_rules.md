@@ -79,7 +79,7 @@ Add additional queries with the Add Query button.
 
 In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
 
-In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 #### Joining queries
 
