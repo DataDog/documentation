@@ -14,28 +14,70 @@ This error usually indicates an issue with the trust policy associated with the 
 Check the following points for the AWS account mentioned in the error:
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
-1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
-    {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-review.png" alt="AWS Create IAM Role Review page with DatadogAWSIntegrationRole entered for Role name, account 464622532012 listed for Trusted entities, and DatadogAWSIntegrationPolicy listed for Policies" >}}
+1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
 
-2. Ensure Datadog's account ID `464622532012` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
-    {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-configuration.png" alt="AWS Create IAM Role page with Another AWS Account selected under type of trusted entity, 464622532012 entered for account ID, and the require MFA button unchecked" >}}
+2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured as below:
+
+{{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::464622532012:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "<YOUR_AWS_EXTERNAL_ID>"
+                }
+            }
+        }
+    ]
+}
+
+{{< /code-block >}}
+
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
 {{< site-region region="ap1" >}}
-1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
-    {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-review.png" alt="AWS Create IAM Role Review page with DatadogAWSIntegrationRole entered for Role name, account 417141415827 listed for Trusted entities, and DatadogAWSIntegrationPolicy listed for Policies" >}}
+1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
 
-2. Ensure Datadog's account ID `417141415827` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
-    {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-configuration.png" alt="AWS Create IAM Role page with Another AWS Account selected under type of trusted entity, 417141415827 entered for account ID, and the require MFA button unchecked" >}}
+2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured as below:
+
+{{< code-block lang="json" filename="" disable_copy="true" collapsible="false" >}}
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::417141415827:root"
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "<YOUR_AWS_EXTERNAL_ID>"
+                }
+            }
+        }
+    ]
+}
+
+{{< /code-block >}}
 
 [2]: https://ap1.datadoghq.com/integrations/amazon-web-services
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
-3. Generate a new AWS External ID under **Account Details** in the [Datadog AWS Integration page][2] and click **Save**:
-  {{< img src="integrations/guide/aws_error_sts_assume_role/datadog-aws-integration-page.png" alt="Datadog AWS integration page with the AWS Role Name and AWS External ID fields and Generate New ID button" >}}
 
-4. Add the newly generated AWS External ID to your AWS trust policy:
+3. The AWS External ID on the role page needs to match the AWS External ID value on the **Account Details** tab of the [AWS integration page][2]. Update the IAM role in AWS with the AWS External ID value from the integration page in Datadog, or generate a new AWS External ID and click **Save**:
+  {{< img src="integrations/guide/aws_error_sts_assume_role/new-aws-external-id.png" alt="Datadog AWS integration page with the AWS Role Name and AWS External ID fields and Generate New ID button" >}}
+
+4. If you generated a new AWS External ID, add it to your AWS trust policy:
   {{< img src="integrations/guide/aws_error_sts_assume_role/aws-trust-policy-document.png" alt="AWS Trust Policy document with the sts:ExternalId parameter highlighted" >}}
 
 Note that the error **may** persist in the UI for a few hours while the changes propagate.
