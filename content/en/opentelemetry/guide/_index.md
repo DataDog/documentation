@@ -12,4 +12,5 @@ aliases:
     {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Producing Delta Temporality Metrics with OpenTelemetry{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/semantic_mapping/" >}}Mapping OpenTelemetry semantic conventions to Datadog conventions{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Visualizing OTLP Histograms as heatmaps{{< /nextlink >}}
 {{< /whatsnext >}}
