@@ -19,10 +19,11 @@ author:
   sales_email: it@squadcast.com
   support_email: it@squadcast.com
 categories:
-- 問題追跡
+- アラート設定
 - コラボレーション
+- インシデント
+- 問題追跡
 - notification
-- モニター
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md
 display_on_public_website: true
@@ -40,18 +41,19 @@ public_title: Squadcast
 short_description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Issue Tracking
+  - Category::Alerting
   - Category::Collaboration
+  - Category::Incidents
+  - Category::Issue Tracking
   - Category::Notification
-  - Category::Monitoring
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
   media: []

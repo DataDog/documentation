@@ -21,7 +21,6 @@ author:
   sales_email: hello@unitq.com
   support_email: hello@unitq.com
 categories:
-- モニタリング
 - メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unitq/README.md
@@ -40,17 +39,16 @@ public_title: unitQ
 short_description: ユーザーの声を品質向上に役立てます。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
   - Category::Metrics
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ユーザーの声を品質向上に役立てます。
   media: []

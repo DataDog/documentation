@@ -18,7 +18,6 @@ author:
   support_email: support@isdown.app
 categories:
 - notification
-- モニタリング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/isdown/README.md
 display_on_public_website: true
@@ -41,13 +40,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Notification
+  - Offering::Integration
+  - Submitted Data Type::Events
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
-  - Category::Notification
-  - Category::Monitoring
-  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: IsDown は、企業がすべてのサードパーティのステータスページを一元的に監視することを支援します
   media:

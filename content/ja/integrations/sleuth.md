@@ -20,9 +20,9 @@ author:
   sales_email: support@sleuth.io
   support_email: support@sleuth.io
 categories:
-- orchestration
+- 構成 & デプロイ
 - 問題追跡
-- コラボレーション
+- orchestration
 - ソースコントロール
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md
@@ -41,18 +41,18 @@ public_title: Sleuth
 short_description: Sleuth Deployment Tracker
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
+  - Category::Configuration & Deployment
   - Category::Issue Tracking
-  - Category::Collaboration
+  - Category::Orchestration
   - カテゴリ::ソースコントロール
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Sleuth Deployment Tracker
   media: []

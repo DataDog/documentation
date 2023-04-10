@@ -19,7 +19,8 @@ author:
   name: コミュニティ
   sales_email: melchior.moulin@blablacar.com
   support_email: melchior.moulin@blablacar.com
-categories: []
+categories:
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/fluxcd/README.md
 display_on_public_website: true
@@ -37,14 +38,15 @@ public_title: fluxcd
 short_description: Fluxcd の openmetric v2 とのインテグレーション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Kubernetes
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Fluxcd の openmetric v2 とのインテグレーション
   media: []
@@ -63,7 +65,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 fluxcd チェックをホストにインストールするには
 
