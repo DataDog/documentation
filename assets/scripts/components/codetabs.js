@@ -9,8 +9,8 @@ const initCodeTabs = () => {
         renderCodeTabElements()
         addEventListeners()
         activateTabsOnLoad()
-        addObserversToCodeTabs()
         getContentTabHeight()
+        addObserversToCodeTabs()
     }
 
     /**
