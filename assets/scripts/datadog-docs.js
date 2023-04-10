@@ -214,7 +214,7 @@ function getPathElement(event = null) {
     }
 }
 
-// remove open class from li elements and active class from a elements
+// remove open class from li elements and active class from <a> elements
 function closeNav(){
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
     const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
@@ -387,10 +387,12 @@ window.addEventListener('click', (event) => {
     rulesListClickHandler(event, 'default_rules');
 });
 
-window.onload = function () {
-    getPathElement();
-    setMobileNav();
-};
+if(!document.body.classList.contains('api')){
+    window.onload = function () {
+        getPathElement();
+        setMobileNav();
+    };
+}
 
 // remove branch name from path
 function replacePath(inputPath) {
@@ -416,6 +418,7 @@ function replaceURL(inputUrl) {
 window.addEventListener(
     'popstate',
     function (event) {
+        setMobileNav()
         const domain = replaceURL(window.location.origin);
         if (event.state) {
             loadPage(window.location.href);

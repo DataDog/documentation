@@ -153,10 +153,3 @@ if (document.body.classList.contains('api')) {
         apiSideNav.scrollTop = distanceToTop - 100;
     }
 }
-
-
-if(document.body.classList.contains('api') && window.location.hash){
-    window.addEventListener('hashchange', () => {
-        setMobileNav()
-    })
-}
