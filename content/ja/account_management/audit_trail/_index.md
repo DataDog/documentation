@@ -178,5 +178,5 @@ Datadog 監査証跡には、インデックス保持の変更、ログパイプ
 [8]: /ja/dashboards/widgets/top_list/
 [9]: /ja/dashboards/widgets/timeseries/
 [10]: /ja/dashboards/widgets/list/
-[11]: /ja/dashboards/querying/#choose-the-metric-to-graph/
+[11]: /ja/dashboards/querying/#define-the-metric/
 [12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

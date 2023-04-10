@@ -449,6 +449,13 @@ components:
       required: true
       schema:
         type: string
+    SpansMetricIDParameter:
+      description: The name of the span-based metric.
+      in: path
+      name: metric_id
+      required: true
+      schema:
+        type: string
     UserID:
       description: The ID of the user.
       in: path
@@ -2419,6 +2426,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
@@ -2553,6 +2562,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentResourceRequestData:
       description: JSON:API request for updating a Confluent resource.
@@ -3712,6 +3723,27 @@ components:
           nullable: true
           type: array
       type: object
+    GetTeamMembershipsSort:
+      description: Specifies the order of returned team memberships
+      enum:
+      - manager_name
+      - -manager_name
+      - name
+      - -name
+      - handle
+      - -handle
+      - email
+      - -email
+      type: string
+      x-enum-varnames:
+      - MANAGER_NAME
+      - _MANAGER_NAME
+      - NAME
+      - _NAME
+      - HANDLE
+      - _HANDLE
+      - EMAIL
+      - _EMAIL
     GroupScalarColumn:
       description: A column containing the tag keys and values in a group.
       properties:
@@ -4749,6 +4781,8 @@ components:
             $ref: '#/components/schemas/IncidentResponseIncludedItem'
           readOnly: true
           type: array
+        meta:
+          $ref: '#/components/schemas/IncidentSearchResponseMeta'
       required:
       - data
       type: object
@@ -4864,6 +4898,13 @@ components:
           $ref: '#/components/schemas/IncidentResponseData'
       required:
       - data
+      type: object
+    IncidentSearchResponseMeta:
+      description: The metadata object containing pagination metadata.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/IncidentResponseMetaPagination'
+      readOnly: true
       type: object
     IncidentSearchResponseNumericFacetData:
       description: Facet data numeric attributes of an incident.
@@ -5747,6 +5788,28 @@ components:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
       type: object
+    ListTeamsInclude:
+      description: Included related resources optionally requested.
+      enum:
+      - team_links
+      - user_team_permissions
+      type: string
+      x-enum-varnames:
+      - TEAM_LINKS
+      - USER_TEAM_PERMISSIONS
+    ListTeamsSort:
+      description: Specifies the order of the returned teams
+      enum:
+      - name
+      - -name
+      - user_count
+      - -user_count
+      type: string
+      x-enum-varnames:
+      - NAME
+      - _NAME
+      - USER_COUNT
+      - _USER_COUNT
     Log:
       description: Object description of a log after being processed and stored by
         Datadog.
@@ -9504,6 +9567,28 @@ components:
       - id
       - type
       type: object
+    RelationshipToTeamLinkData:
+      description: Relationship between a link and a team
+      properties:
+        id:
+          description: The team link's identifier
+          example: f9bb8444-af7f-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamLinkType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToTeamLinks:
+      description: Relationship between a team and a team link
+      properties:
+        data:
+          description: Related team links
+          items:
+            $ref: '#/components/schemas/RelationshipToTeamLinkData'
+          type: array
+      type: object
     RelationshipToUser:
       description: Relationship to user.
       properties:
@@ -9521,6 +9606,46 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToUserTeamPermission:
+      description: Relationship between a user team permission and a team
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToUserTeamPermissionData'
+      type: object
+    RelationshipToUserTeamPermissionData:
+      description: Related user team permission data
+      properties:
+        id:
+          description: The ID of the user team permission
+          example: UserTeamPermissions-aeadc05e-98a8-11ec-ac2c-da7ad0900001-416595
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamPermissionType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToUserTeamUser:
+      description: Relationship between team membership and user
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToUserTeamUserData'
+      required:
+      - data
+      type: object
+    RelationshipToUserTeamUserData:
+      description: A user's relationship with a team
+      properties:
+        id:
+          description: The ID of the user associated with the team
+          example: b8626d7e-cedd-11eb-abf5-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamUserType'
       required:
       - id
       - type
@@ -12298,6 +12423,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/ServiceDefinitionV1'
       - $ref: '#/components/schemas/ServiceDefinitionV2'
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       type: object
     ServiceDefinitionV1:
       deprecated: true
@@ -12509,6 +12635,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/ServiceDefinitionV2Email'
       - $ref: '#/components/schemas/ServiceDefinitionV2Slack'
+      - $ref: '#/components/schemas/ServiceDefinitionV2MSTeams'
     ServiceDefinitionV2Doc:
       description: Service documents.
       properties:
@@ -12528,6 +12655,235 @@ components:
       - name
       - url
       type: object
+    ServiceDefinitionV2Dot1:
+      description: Service definition v2.1 for providing service metadata and integrations.
+      properties:
+        application:
+          description: Identifier for a group of related services serving a product
+            feature, which the service is a part of.
+          example: my-app
+          type: string
+        contacts:
+          description: A list of contacts related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Dot1Contact'
+          type: array
+        dd-service:
+          description: Unique identifier of the service. Must be unique across all
+            services and is used to match with a service in Datadog.
+          example: my-service
+          type: string
+        description:
+          description: A short description of the service.
+          example: My service description
+          type: string
+        extensions:
+          additionalProperties: {}
+          description: Extensions to v2.1 schema.
+          example:
+            myorg/extension: extensionValue
+          type: object
+        integrations:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Integrations'
+        lifecycle:
+          description: The current life cycle phase of the service.
+          example: sandbox
+          type: string
+        links:
+          description: A list of links related to the services.
+          items:
+            $ref: '#/components/schemas/ServiceDefinitionV2Dot1Link'
+          type: array
+        schema-version:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Version'
+        tags:
+          description: A set of custom tags.
+          example:
+          - my:tag
+          - service:tag
+          items:
+            type: string
+          type: array
+        team:
+          description: Team that owns the service. It is used to locate a team defined
+            in Datadog Teams if it exists.
+          example: my-team
+          type: string
+        tier:
+          description: Importance of the service.
+          example: High
+          type: string
+      required:
+      - schema-version
+      - dd-service
+      type: object
+    ServiceDefinitionV2Dot1Contact:
+      description: Service owner's contacts information.
+      oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1Email'
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1Slack'
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1MSTeams'
+    ServiceDefinitionV2Dot1Email:
+      description: Service owner's email.
+      properties:
+        contact:
+          description: Contact value.
+          example: contact@datadoghq.com
+          format: email
+          type: string
+        name:
+          description: Contact email.
+          example: Team Email
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1EmailType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2Dot1EmailType:
+      description: Contact type.
+      enum:
+      - email
+      example: email
+      type: string
+      x-enum-varnames:
+      - EMAIL
+    ServiceDefinitionV2Dot1Integrations:
+      description: Third party integrations that Datadog supports.
+      properties:
+        opsgenie:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Opsgenie'
+        pagerduty:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1Pagerduty'
+      type: object
+    ServiceDefinitionV2Dot1Link:
+      description: Service's external links.
+      properties:
+        name:
+          description: Link name.
+          example: Runbook
+          type: string
+        provider:
+          description: Link provider.
+          example: Github
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1LinkType'
+        url:
+          description: Link URL.
+          example: https://my-runbook
+          type: string
+      required:
+      - name
+      - type
+      - url
+      type: object
+    ServiceDefinitionV2Dot1LinkType:
+      description: Link type.
+      enum:
+      - doc
+      - repo
+      - runbook
+      - dashboard
+      - other
+      example: runbook
+      type: string
+      x-enum-varnames:
+      - DOC
+      - REPO
+      - RUNBOOK
+      - DASHBOARD
+      - OTHER
+    ServiceDefinitionV2Dot1MSTeams:
+      description: Service owner's Microsoft Teams.
+      properties:
+        contact:
+          description: Contact value.
+          example: https://teams.microsoft.com/myteam
+          type: string
+        name:
+          description: Contact Microsoft Teams.
+          example: My team channel
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1MSTeamsType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2Dot1MSTeamsType:
+      description: Contact type.
+      enum:
+      - microsoft-teams
+      example: microsoft-teams
+      type: string
+      x-enum-varnames:
+      - MICROSOFT_TEAMS
+    ServiceDefinitionV2Dot1Opsgenie:
+      description: Opsgenie integration for the service.
+      properties:
+        region:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1OpsgenieRegion'
+        service-url:
+          description: Opsgenie service url.
+          example: https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000
+          type: string
+      required:
+      - service-url
+      type: object
+    ServiceDefinitionV2Dot1OpsgenieRegion:
+      description: Opsgenie instance region.
+      enum:
+      - US
+      - EU
+      example: US
+      type: string
+      x-enum-varnames:
+      - US
+      - EU
+    ServiceDefinitionV2Dot1Pagerduty:
+      description: PagerDuty integration for the service.
+      properties:
+        service-url:
+          description: PagerDuty service url.
+          example: https://my-org.pagerduty.com/service-directory/PMyService
+          type: string
+      type: object
+    ServiceDefinitionV2Dot1Slack:
+      description: Service owner's Slack channel.
+      properties:
+        contact:
+          description: Slack Channel.
+          example: https://yourcompany.slack.com/archives/channel123
+          type: string
+        name:
+          description: Contact Slack.
+          example: Team Slack
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2Dot1SlackType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2Dot1SlackType:
+      description: Contact type.
+      enum:
+      - slack
+      example: slack
+      type: string
+      x-enum-varnames:
+      - SLACK
+    ServiceDefinitionV2Dot1Version:
+      default: v2.1
+      description: Schema version being used.
+      enum:
+      - v2.1
+      example: v2.1
+      type: string
+      x-enum-varnames:
+      - V2_1
     ServiceDefinitionV2Email:
       description: Service owner's email.
       properties:
@@ -12604,6 +12960,31 @@ components:
       - ONCALL
       - CODE
       - LINK
+    ServiceDefinitionV2MSTeams:
+      description: Service owner's Microsoft Teams.
+      properties:
+        contact:
+          description: Contact value.
+          example: https://teams.microsoft.com/myteam
+          type: string
+        name:
+          description: Contact Microsoft Teams.
+          example: My team channel
+          type: string
+        type:
+          $ref: '#/components/schemas/ServiceDefinitionV2MSTeamsType'
+      required:
+      - type
+      - contact
+      type: object
+    ServiceDefinitionV2MSTeamsType:
+      description: Contact type.
+      enum:
+      - microsoft-teams
+      example: microsoft-teams
+      type: string
+      x-enum-varnames:
+      - MICROSOFT_TEAMS
     ServiceDefinitionV2Opsgenie:
       description: Opsgenie integration for the service.
       properties:
@@ -12686,6 +13067,7 @@ components:
     ServiceDefinitionsCreateRequest:
       description: Create service definitions request.
       oneOf:
+      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionRaw'
     ServiceDefinitionsListResponse:
@@ -12733,6 +13115,226 @@ components:
       - channel_name
       - redirect_url
       type: object
+    SpansMetricCompute:
+      description: The compute rule to compute the span-based metric.
+      properties:
+        aggregation_type:
+          $ref: '#/components/schemas/SpansMetricComputeAggregationType'
+        include_percentiles:
+          $ref: '#/components/schemas/SpansMetricComputeIncludePercentiles'
+        path:
+          description: The path to the value the span-based metric will aggregate
+            on (only used if the aggregation type is a "distribution").
+          example: '@duration'
+          type: string
+      required:
+      - aggregation_type
+      type: object
+    SpansMetricComputeAggregationType:
+      description: The type of aggregation to use.
+      enum:
+      - count
+      - distribution
+      example: distribution
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - DISTRIBUTION
+    SpansMetricComputeIncludePercentiles:
+      description: 'Toggle to include or exclude percentile aggregations for distribution
+        metrics.
+
+        Only present when the `aggregation_type` is `distribution`.'
+      example: false
+      type: boolean
+    SpansMetricCreateAttributes:
+      description: The object describing the Datadog span-based metric to create.
+      properties:
+        compute:
+          $ref: '#/components/schemas/SpansMetricCompute'
+        filter:
+          $ref: '#/components/schemas/SpansMetricFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/SpansMetricGroupBy'
+          type: array
+      required:
+      - compute
+      type: object
+    SpansMetricCreateData:
+      description: The new span-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansMetricCreateAttributes'
+        id:
+          $ref: '#/components/schemas/SpansMetricID'
+        type:
+          $ref: '#/components/schemas/SpansMetricType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    SpansMetricCreateRequest:
+      description: The new span-based metric body.
+      properties:
+        data:
+          $ref: '#/components/schemas/SpansMetricCreateData'
+      required:
+      - data
+      type: object
+    SpansMetricFilter:
+      description: The span-based metric filter. Spans matching this filter will be
+        aggregated in this metric.
+      properties:
+        query:
+          default: '*'
+          description: The search query - following the span search syntax.
+          example: '@http.status_code:200 service:my-service'
+          type: string
+      type: object
+    SpansMetricGroupBy:
+      description: A group by rule.
+      properties:
+        path:
+          description: The path to the value the span-based metric will be aggregated
+            over.
+          example: resource_name
+          type: string
+        tag_name:
+          description: Eventual name of the tag that gets created. By default, the
+            path attribute is used as the tag name.
+          example: resource_name
+          type: string
+      required:
+      - path
+      type: object
+    SpansMetricID:
+      description: The name of the span-based metric.
+      example: my.metric
+      type: string
+    SpansMetricResponse:
+      description: The span-based metric object.
+      properties:
+        data:
+          $ref: '#/components/schemas/SpansMetricResponseData'
+      type: object
+    SpansMetricResponseAttributes:
+      description: The object describing a Datadog span-based metric.
+      properties:
+        compute:
+          $ref: '#/components/schemas/SpansMetricResponseCompute'
+        filter:
+          $ref: '#/components/schemas/SpansMetricResponseFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/SpansMetricResponseGroupBy'
+          type: array
+      type: object
+    SpansMetricResponseCompute:
+      description: The compute rule to compute the span-based metric.
+      properties:
+        aggregation_type:
+          $ref: '#/components/schemas/SpansMetricComputeAggregationType'
+        include_percentiles:
+          $ref: '#/components/schemas/SpansMetricComputeIncludePercentiles'
+        path:
+          description: The path to the value the span-based metric will aggregate
+            on (only used if the aggregation type is a "distribution").
+          example: '@duration'
+          type: string
+      type: object
+    SpansMetricResponseData:
+      description: The span-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansMetricResponseAttributes'
+        id:
+          $ref: '#/components/schemas/SpansMetricID'
+        type:
+          $ref: '#/components/schemas/SpansMetricType'
+      type: object
+    SpansMetricResponseFilter:
+      description: The span-based metric filter. Spans matching this filter will be
+        aggregated in this metric.
+      properties:
+        query:
+          description: The search query - following the span search syntax.
+          example: '@http.status_code:200 service:my-service'
+          type: string
+      type: object
+    SpansMetricResponseGroupBy:
+      description: A group by rule.
+      properties:
+        path:
+          description: The path to the value the span-based metric will be aggregated
+            over.
+          example: resource_name
+          type: string
+        tag_name:
+          description: Eventual name of the tag that gets created. By default, the
+            path attribute is used as the tag name.
+          example: resource_name
+          type: string
+      type: object
+    SpansMetricType:
+      default: spans_metrics
+      description: The type of resource. The value should always be spans_metrics.
+      enum:
+      - spans_metrics
+      example: spans_metrics
+      type: string
+      x-enum-varnames:
+      - SPANS_METRICS
+    SpansMetricUpdateAttributes:
+      description: The span-based metric properties that will be updated.
+      properties:
+        compute:
+          $ref: '#/components/schemas/SpansMetricUpdateCompute'
+        filter:
+          $ref: '#/components/schemas/SpansMetricFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/SpansMetricGroupBy'
+          type: array
+      type: object
+    SpansMetricUpdateCompute:
+      description: The compute rule to compute the span-based metric.
+      properties:
+        include_percentiles:
+          $ref: '#/components/schemas/SpansMetricComputeIncludePercentiles'
+      type: object
+    SpansMetricUpdateData:
+      description: The new span-based metric properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansMetricUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/SpansMetricType'
+      required:
+      - type
+      - attributes
+      type: object
+    SpansMetricUpdateRequest:
+      description: The new span-based metric body.
+      properties:
+        data:
+          $ref: '#/components/schemas/SpansMetricUpdateData'
+      required:
+      - data
+      type: object
+    SpansMetricsResponse:
+      description: All the available span-based metric objects.
+      properties:
+        data:
+          description: A list of span-based metric objects.
+          items:
+            $ref: '#/components/schemas/SpansMetricResponseData'
+          type: array
+      type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -12741,6 +13343,438 @@ components:
         description: Tag associated with your event.
         type: string
       type: array
+    Team:
+      description: A team
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamAttributes'
+        id:
+          description: The team's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        relationships:
+          $ref: '#/components/schemas/TeamRelationships'
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    TeamAttributes:
+      description: Team attributes
+      properties:
+        created_at:
+          description: Creation date of the team
+          format: date-time
+          type: string
+        description:
+          description: Free-form markdown description/content for the team's homepage
+          type: string
+        handle:
+          description: The team's identifier
+          example: example-team
+          maxLength: 64
+          type: string
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        modified_at:
+          description: Modification date of the team
+          format: date-time
+          type: string
+        name:
+          description: The name of the team
+          example: Example Team
+          maxLength: 64
+          type: string
+        summary:
+          description: A brief summary of the team, derived from the `description`
+          maxLength: 120
+          type: string
+        user_count:
+          description: The number of users belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+      required:
+      - handle
+      - name
+      type: object
+    TeamCreate:
+      description: Team create
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/TeamCreateRelationships'
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamCreateAttributes:
+      description: Team creation attributes
+      properties:
+        description:
+          description: Free-form markdown description/content for the team's homepage
+          type: string
+        handle:
+          description: The team's identifier
+          example: example-team
+          maxLength: 64
+          type: string
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the team
+          example: Example Team
+          maxLength: 64
+          type: string
+      required:
+      - handle
+      - name
+      type: object
+    TeamCreateRelationships:
+      description: Relationships formed with the team on creation
+      properties:
+        users:
+          $ref: '#/components/schemas/RelationshipToUsers'
+      type: object
+    TeamCreateRequest:
+      description: Request to create a team
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamCreate'
+      required:
+      - data
+      type: object
+    TeamData:
+      description: A team
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamAttributes'
+        id:
+          description: The team's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    TeamIncluded:
+      description: Included resources related to the team
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/TeamLink'
+      - $ref: '#/components/schemas/UserTeamPermission'
+      properties: {}
+      type: object
+    TeamLink:
+      description: Team link
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamLinkAttributes'
+        id:
+          description: The team link's identifier
+          example: b8626d7e-cedd-11eb-abf5-da7ad0900001
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamLinkType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    TeamLinkAttributes:
+      description: Team link attributes
+      properties:
+        label:
+          description: The link's label
+          example: Link label
+          maxLength: 256
+          type: string
+        position:
+          description: The link's position, used to sort links for the team
+          format: int32
+          maximum: 2147483647
+          type: integer
+        team_id:
+          description: ID of the team the link is associated with
+          readOnly: true
+          type: string
+        url:
+          description: The URL for the link
+          example: https://example.com
+          type: string
+      required:
+      - label
+      - url
+      type: object
+    TeamLinkCreate:
+      description: Team link create
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamLinkAttributes'
+        type:
+          $ref: '#/components/schemas/TeamLinkType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamLinkCreateRequest:
+      description: Team link create request
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamLinkCreate'
+      required:
+      - data
+      type: object
+    TeamLinkResponse:
+      description: Team link response
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamLink'
+      type: object
+    TeamLinkType:
+      default: team_links
+      description: Team link type
+      enum:
+      - team_links
+      example: team_links
+      type: string
+      x-enum-varnames:
+      - TEAM_LINKS
+    TeamLinksResponse:
+      description: Team links response
+      properties:
+        data:
+          description: Team links response data
+          items:
+            $ref: '#/components/schemas/TeamLink'
+          type: array
+      type: object
+    TeamPermissionSetting:
+      description: Team permission setting
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamPermissionSettingAttributes'
+        id:
+          description: The team permission setting's identifier
+          example: TeamPermission-aeadc05e-98a8-11ec-ac2c-da7ad0900001-edit
+          type: string
+        type:
+          $ref: '#/components/schemas/TeamPermissionSettingType'
+      required:
+      - id
+      - type
+      type: object
+    TeamPermissionSettingAttributes:
+      description: Team permission setting attributes
+      properties:
+        action:
+          $ref: '#/components/schemas/TeamPermissionSettingSerializerAction'
+        editable:
+          description: Whether or not the permission setting is editable by the current
+            user
+          readOnly: true
+          type: boolean
+        options:
+          $ref: '#/components/schemas/TeamPermissionSettingValues'
+        title:
+          description: The team permission name
+          readOnly: true
+          type: string
+        value:
+          $ref: '#/components/schemas/TeamPermissionSettingValue'
+      type: object
+    TeamPermissionSettingResponse:
+      description: Team permission setting response
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamPermissionSetting'
+      type: object
+    TeamPermissionSettingSerializerAction:
+      description: The identifier for the action
+      enum:
+      - manage_membership
+      - edit
+      readOnly: true
+      type: string
+      x-enum-varnames:
+      - MANAGE_MEMBERSHIP
+      - EDIT
+    TeamPermissionSettingType:
+      default: team_permission_settings
+      description: Team permission setting type
+      enum:
+      - team_permission_settings
+      example: team_permission_settings
+      type: string
+      x-enum-varnames:
+      - TEAM_PERMISSION_SETTINGS
+    TeamPermissionSettingUpdate:
+      description: Team permission setting update
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamPermissionSettingUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/TeamPermissionSettingType'
+      required:
+      - type
+      type: object
+    TeamPermissionSettingUpdateAttributes:
+      description: Team permission setting update attributes
+      properties:
+        value:
+          $ref: '#/components/schemas/TeamPermissionSettingValue'
+      type: object
+    TeamPermissionSettingUpdateRequest:
+      description: Team permission setting update request
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamPermissionSettingUpdate'
+      required:
+      - data
+      type: object
+    TeamPermissionSettingValue:
+      description: What type of user is allowed to perform the specified action
+      enum:
+      - admins
+      - members
+      - organization
+      - user_access_manage
+      - teams_manage
+      type: string
+      x-enum-varnames:
+      - ADMINS
+      - MEMBERS
+      - ORGANIZATION
+      - USER_ACCESS_MANAGE
+      - TEAMS_MANAGE
+    TeamPermissionSettingValues:
+      description: Possible values for action
+      items:
+        $ref: '#/components/schemas/TeamPermissionSettingValue'
+      readOnly: true
+      type: array
+    TeamPermissionSettingsResponse:
+      description: Team permission settings response
+      properties:
+        data:
+          description: Team permission settings response data
+          items:
+            $ref: '#/components/schemas/TeamPermissionSetting'
+          type: array
+      type: object
+    TeamRelationships:
+      description: Resources related to a team
+      properties:
+        team_links:
+          $ref: '#/components/schemas/RelationshipToTeamLinks'
+        user_team_permissions:
+          $ref: '#/components/schemas/RelationshipToUserTeamPermission'
+      type: object
+    TeamResponse:
+      description: Response with a team
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamData'
+      type: object
+    TeamType:
+      default: team
+      description: Team type
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
+    TeamUpdate:
+      description: Team update request
+      properties:
+        attributes:
+          $ref: '#/components/schemas/TeamUpdateAttributes'
+        relationships:
+          $ref: '#/components/schemas/TeamUpdateRelationships'
+        type:
+          $ref: '#/components/schemas/TeamType'
+      required:
+      - attributes
+      - type
+      type: object
+    TeamUpdateAttributes:
+      description: Team update attributes
+      properties:
+        color:
+          description: An identifier for the color representing the team
+          format: int32
+          maximum: 13
+          minimum: 0
+          type: integer
+        description:
+          description: Free-form markdown description/content for the team's homepage
+          type: string
+        handle:
+          description: The team's identifier
+          example: example-team
+          maxLength: 64
+          type: string
+        link_count:
+          description: The number of links belonging to the team
+          format: int32
+          maximum: 2147483647
+          readOnly: true
+          type: integer
+        name:
+          description: The name of the team
+          example: Example Team
+          maxLength: 64
+          type: string
+      required:
+      - handle
+      - name
+      type: object
+    TeamUpdateRelationships:
+      description: Team update relationships
+      properties:
+        team_links:
+          $ref: '#/components/schemas/RelationshipToTeamLinks'
+      type: object
+    TeamUpdateRequest:
+      description: Team update request
+      properties:
+        data:
+          $ref: '#/components/schemas/TeamUpdate'
+      required:
+      - data
+      type: object
+    TeamsResponse:
+      description: Response with multiple teams
+      properties:
+        data:
+          description: Teams response data
+          items:
+            $ref: '#/components/schemas/Team'
+          type: array
+        included:
+          description: Resources related to the team
+          items:
+            $ref: '#/components/schemas/TeamIncluded'
+          type: array
+      type: object
     TimeseriesFormulaQueryRequest:
       description: A request wrapper around a single timeseries query to be executed.
       properties:
@@ -13239,6 +14273,148 @@ components:
         roles:
           $ref: '#/components/schemas/RelationshipToRoles'
       type: object
+    UserTeam:
+      description: A user's relationship with a team
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamAttributes'
+        id:
+          description: The ID of a user's relationship with a team
+          example: TeamMembership-aeadc05e-98a8-11ec-ac2c-da7ad0900001-38835
+          type: string
+        relationships:
+          $ref: '#/components/schemas/UserTeamRelationships'
+        type:
+          $ref: '#/components/schemas/UserTeamType'
+      required:
+      - id
+      - type
+      type: object
+    UserTeamAttributes:
+      description: Team membership attributes
+      properties:
+        role:
+          $ref: '#/components/schemas/UserTeamRole'
+      type: object
+    UserTeamCreate:
+      description: A user's relationship with a team
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamAttributes'
+        relationships:
+          $ref: '#/components/schemas/UserTeamRelationships'
+        type:
+          $ref: '#/components/schemas/UserTeamType'
+      required:
+      - type
+      type: object
+    UserTeamPermission:
+      description: A user's permissions for a given team
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamPermissionAttributes'
+        id:
+          description: The user team permission's identifier
+          example: UserTeamPermissions-aeadc05e-98a8-11ec-ac2c-da7ad0900001-416595
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamPermissionType'
+      required:
+      - id
+      - type
+      type: object
+    UserTeamPermissionAttributes:
+      description: User team permission attributes
+      properties:
+        permissions:
+          description: Object of team permission actions and boolean values indicating
+            of the currently logged in user can perform them on this team
+          readOnly: true
+          type: object
+      type: object
+    UserTeamPermissionType:
+      default: user_team_permissions
+      description: User team permission type
+      enum:
+      - user_team_permissions
+      example: user_team_permissions
+      type: string
+      x-enum-varnames:
+      - USER_TEAM_PERMISSIONS
+    UserTeamRelationships:
+      description: Relationship between membership and a user
+      properties:
+        user:
+          $ref: '#/components/schemas/RelationshipToUserTeamUser'
+      type: object
+    UserTeamRequest:
+      description: Team membership request
+      properties:
+        data:
+          $ref: '#/components/schemas/UserTeamCreate'
+      required:
+      - data
+      type: object
+    UserTeamResponse:
+      description: Team membership response
+      properties:
+        data:
+          $ref: '#/components/schemas/UserTeam'
+      type: object
+    UserTeamRole:
+      description: The user's role within the team
+      enum:
+      - admin
+      nullable: true
+      type: string
+      x-enum-varnames:
+      - ADMIN
+    UserTeamType:
+      default: team_memberships
+      description: Team membership type
+      enum:
+      - team_memberships
+      example: team_memberships
+      type: string
+      x-enum-varnames:
+      - TEAM_MEMBERSHIPS
+    UserTeamUpdate:
+      description: A user's relationship with a team
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UserTeamAttributes'
+        type:
+          $ref: '#/components/schemas/UserTeamType'
+      required:
+      - id
+      - type
+      type: object
+    UserTeamUpdateRequest:
+      description: Team membership request
+      properties:
+        data:
+          $ref: '#/components/schemas/UserTeamUpdate'
+      required:
+      - data
+      type: object
+    UserTeamUserType:
+      default: users
+      description: User team user type
+      enum:
+      - users
+      example: users
+      type: string
+      x-enum-varnames:
+      - USERS
+    UserTeamsResponse:
+      description: Team memberships response
+      properties:
+        data:
+          description: Team memberships response data
+          items:
+            $ref: '#/components/schemas/UserTeam'
+          type: array
+      type: object
     UserUpdateAttributes:
       description: Attributes of the edited user.
       properties:
@@ -13549,6 +14725,168 @@ paths:
       - Key Management
       x-codegen-request-body-name: body
       x-menu-order: 2
+      x-undo:
+        type: idempotent
+  /api/v2/apm/config/metrics:
+    get:
+      description: Get the list of configured span-based metrics with their definitions.
+      operationId: ListSpansMetrics
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansMetricsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all span-based metrics
+      tags:
+      - Spans Metrics
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a metric based on your ingested spans in your organization.
+
+        Returns the span-based metric object from the request body when the request
+        is successful.'
+      operationId: CreateSpansMetric
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpansMetricCreateRequest'
+        description: The definition of the new span-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a span-based metric
+      tags:
+      - Spans Metrics
+      x-codegen-request-body-name: body
+      x-given:
+        spans_metric:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"id\": \"{{ unique }}\",\n    \"attributes\":
+              {\n      \"filter\": {\n        \"query\": \"source:{{ unique }}\"\n
+              \     },\n      \"compute\": {\n        \"aggregation_type\": \"distribution\",\n
+              \       \"path\": \"@duration\",\n        \"include_percentiles\": false\n
+              \     },\n      \"group_by\": [\n        {\n            \"path\": \"resource_name\",\n
+              \           \"tag_name\": \"resource_name\"\n        }\n      ]\n    },\n
+              \   \"type\": \"spans_metrics\"\n  }\n}"
+          step: there is a valid "spans_metric" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteSpansMetric
+        parameters:
+        - name: metric_id
+          source: data.id
+        type: unsafe
+  /api/v2/apm/config/metrics/{metric_id}:
+    delete:
+      description: Delete a specific span-based metric from your organization.
+      operationId: DeleteSpansMetric
+      parameters:
+      - $ref: '#/components/parameters/SpansMetricIDParameter'
+      responses:
+        '200':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete a span-based metric
+      tags:
+      - Spans Metrics
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a specific span-based metric from your organization.
+      operationId: GetSpansMetric
+      parameters:
+      - $ref: '#/components/parameters/SpansMetricIDParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansMetricResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get a span-based metric
+      tags:
+      - Spans Metrics
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a specific span-based metric from your organization.
+
+        Returns the span-based metric object from the request body when the request
+        is successful.'
+      operationId: UpdateSpansMetric
+      parameters:
+      - $ref: '#/components/parameters/SpansMetricIDParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpansMetricUpdateRequest'
+        description: New definition of the span-based metric.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansMetricResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update a span-based metric
+      tags:
+      - Spans Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v2/application_keys:
@@ -15041,6 +16379,8 @@ paths:
       - $ref: '#/components/parameters/IncidentSearchIncludeQueryParameter'
       - $ref: '#/components/parameters/IncidentSearchQueryQueryParameter'
       - $ref: '#/components/parameters/IncidentSearchSortQueryParameter'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
       responses:
         '200':
           content:
@@ -15067,6 +16407,10 @@ paths:
       tags:
       - Incidents
       x-menu-order: 6
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data.attributes.incidents
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -22121,6 +23465,9 @@ paths:
       description: Get a list of all service definitions from the Datadog Service
         Catalog.
       operationId: ListServiceDefinitions
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
@@ -22136,6 +23483,10 @@ paths:
       tags:
       - Service Definition
       x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -22171,7 +23522,7 @@ paths:
         service_definition:
           parameters:
           - name: body
-            value: "{\n  \"dd-service\": \"service-{{ unique}}\",\n  \"dd-team\":
+            value: "{\n  \"dd-service\": \"service-{{ unique_lower_alnum }}\",\n  \"dd-team\":
               \"my-team\",\n  \"docs\": [{\"name\": \"Architecture\",\n            \"provider\":
               \"google drive\",\n            \"url\": \"https://gdrive/mygivedoc\"}],\n
               \ \"extensions\": {\"frogextension\": \"extensionfrogvalue\"},\n  \"integrations\":
@@ -22405,6 +23756,758 @@ paths:
       x-menu-order: 11
       x-undo:
         type: safe
+  /api/v2/team:
+    get:
+      description: 'Get all teams.
+
+        Can be used to search for teams using the `filter[keyword]` and `filter[me]`
+        query parameters.'
+      operationId: ListTeams
+      parameters:
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/PageSize'
+      - description: Specifies the order of the returned teams
+        in: query
+        name: sort
+        schema:
+          $ref: '#/components/schemas/ListTeamsSort'
+      - description: 'Included related resources optionally requested. Allowed enum
+          values: `team_links, user_team_permissions`'
+        in: query
+        name: include
+        schema:
+          items:
+            $ref: '#/components/schemas/ListTeamsInclude'
+          type: array
+      - description: Search query. Can be team name, team handle, or email of team
+          member
+        in: query
+        name: filter[keyword]
+        schema:
+          type: string
+      - description: When true, only returns teams the current user belongs to
+        in: query
+        name: filter[me]
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamsResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get all teams
+      tags:
+      - Teams
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: 'Create a new team.
+
+        User IDs passed through the `users` relationship field are added to the team.'
+      operationId: CreateTeam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: CREATED
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Create a team
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-given:
+        dd_team:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"{{timestamp('now')}}\",\n
+              \     \"name\": \"{{timestamp('now')}}\"\n    },\n    \"type\": \"team\"\n
+              \ }\n}"
+          step: there is a valid "dd_team" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteTeam
+        parameters:
+        - name: team_id
+          source: data.id
+        type: unsafe
+  /api/v2/team/{team_id}:
+    delete:
+      description: Remove a team using the team's `id`.
+      operationId: DeleteTeam
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Remove a team
+      tags:
+      - Teams
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a single team using the team's `id`.
+      operationId: GetTeam
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get a team
+      tags:
+      - Teams
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: 'Update a team using the team''s `id`.
+
+        If the `team_links` relationship is present, the associated links are updated
+        to be in the order they appear in the array, and any existing team links not
+        present are removed.'
+      operationId: UpdateTeam
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Update a team
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/team/{team_id}/links:
+    get:
+      description: Get all links for a given team.
+      operationId: GetTeamLinks
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamLinksResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get links for a team
+      tags:
+      - Teams
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Add a new link to a team.
+      operationId: CreateTeamLink
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamLinkCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamLinkResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Create a team link
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-given:
+        team_link:
+          parameters:
+          - name: team_id
+            source: dd_team.data.id
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"label\": \"{{unique}}\",\n
+              \     \"url\": \"https://example.com\",\n      \"position\": 0\n    },\n
+              \   \"type\": \"team_links\"\n  }\n}"
+          step: there is a valid "team_link" in the system
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteTeamLink
+        parameters:
+        - name: team_id
+          source: data.attributes.team_id
+        - name: link_id
+          source: data.id
+        type: unsafe
+  /api/v2/team/{team_id}/links/{link_id}:
+    delete:
+      description: Remove a link from a team.
+      operationId: DeleteTeamLink
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: link_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Remove a team link
+      tags:
+      - Teams
+      x-menu-order: 14
+      x-undo:
+        type: idempotent
+    get:
+      description: Get a single link for a team.
+      operationId: GetTeamLink
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: link_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamLinkResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get a team link
+      tags:
+      - Teams
+      x-menu-order: 12
+      x-undo:
+        type: safe
+    patch:
+      description: Update a team link.
+      operationId: UpdateTeamLink
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: link_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamLinkCreateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamLinkResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Update a team link
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 13
+      x-undo:
+        type: idempotent
+  /api/v2/team/{team_id}/memberships:
+    get:
+      description: Get a paginated list of members for a team
+      operationId: GetTeamMemberships
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      - description: Specifies the order of returned team memberships
+        in: query
+        name: sort
+        schema:
+          $ref: '#/components/schemas/GetTeamMembershipsSort'
+      - description: Search query, can be user email or name
+        in: query
+        name: filter[keyword]
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTeamsResponse'
+          description: Represents a user's association to a team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get team memberships
+      tags:
+      - Teams
+      x-menu-order: 6
+      x-undo:
+        type: safe
+    post:
+      description: Add a user to a team.
+      operationId: CreateTeamMembership
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTeamRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTeamResponse'
+          description: Represents a user's association to a team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Add a user to a team
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-given:
+        team_membership:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"role\": \"admin\"\n
+              \   },\n    \"relationships\": {\n      \"user\": {\n        \"data\":
+              {\n          \"id\": \"{{user.data.id}}\",\n          \"type\": \"users\"\n
+              \       }\n      }\n    },\n    \"type\": \"team_memberships\"\n  }\n}"
+          step: there is a valid "team_membership" in the system
+      x-menu-order: 7
+      x-undo:
+        operationId: DeleteTeamMembership
+        parameters:
+        - name: team_id
+          template: '{{team.data.id}}'
+        - name: user_id
+          source: data.relationships.user.data.id
+        type: unsafe
+  /api/v2/team/{team_id}/memberships/{user_id}:
+    delete:
+      description: Remove a user from a team.
+      operationId: DeleteTeamMembership
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Remove a user from a team
+      tags:
+      - Teams
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update a user's membership attributes on a team.
+      operationId: UpdateTeamMembership
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: user_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTeamUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserTeamResponse'
+          description: Represents a user's association to a team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Update a user's membership attributes on a team
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
+  /api/v2/team/{team_id}/permission-settings:
+    get:
+      description: Get all permission settings for a given team.
+      operationId: GetTeamPermissionSettings
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamPermissionSettingsResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Get permission settings for a team
+      tags:
+      - Teams
+      x-menu-order: 17
+      x-undo:
+        type: safe
+  /api/v2/team/{team_id}/permission-settings/{action}:
+    put:
+      description: Update a team permission setting for a given team.
+      operationId: UpdateTeamPermissionSetting
+      parameters:
+      - description: None
+        in: path
+        name: team_id
+        required: true
+        schema:
+          type: string
+      - description: None
+        in: path
+        name: action
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamPermissionSettingUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamPermissionSettingResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - teams_read
+      summary: Update permission setting for team
+      tags:
+      - Teams
+      x-codegen-request-body-name: body
+      x-menu-order: 18
+      x-undo:
+        type: idempotent
   /api/v2/teams:
     get:
       description: Get all incident teams for the requesting user's organization.
@@ -23812,6 +25915,12 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
+    for your organization.
+  externalDocs:
+    description: Find out more at
+    url: https://docs.datadoghq.com/tracing/metrics/metrics_namespace/
+  name: Spans Metrics
 - description: "Datadog Synthetics uses simulated user requests and browser rendering
     to help you ensure uptime,\nidentify regional issues, and track your application
     performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand
@@ -23819,6 +25928,8 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
+- description: View and manage teams within Datadog.
+  name: Teams
 - description: 'The usage metering API allows you to get hourly, daily, and
 
     monthly usage across multiple facets of Datadog.

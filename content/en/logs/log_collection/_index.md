@@ -218,19 +218,28 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 
 {{< site-region region="us" >}}
 
-Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
-```text
-telnet intake.logs.datadoghq.com 10514
-<DATADOG_API_KEY> Log sent directly via TCP
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-Your payload, or `Log sent directly via TCP` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
+For OpenSSL, run the following command:
+
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
-telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
 
 [1]: /account_management/api-app-keys/#api-keys
 
@@ -238,17 +247,27 @@ telnet intake.logs.datadoghq.com 10514
 
 {{< site-region region="eu" >}}
 
-Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
-```text
-telnet agent-intake.logs.datadoghq.eu 443
-<DATADOG_API_KEY> Log sent directly via TCP
+```shell
+gnutls-cli tcp-intake.logs.datadoghq.eu:443
 ```
 
-Your payload, or `Log sent directly via TCP` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
+For OpenSSL, run the following command:
+
+```shell
+openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
+```
+
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
-telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
@@ -280,7 +299,7 @@ The TCP endpoint is not supported for this site.
 * The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 256kB (256000 bytes).
 * A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
 * A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
-* Log events can be submitted up to 18h in the past and 2h in the future.
+* Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
 
 Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
 
@@ -333,3 +352,4 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [11]: /logs/log_configuration/attributes_naming_convention/#source-code
 [12]: /logs/explore/
 [13]: /getting_started/site/
+[14]: /logs/log_configuration/pipelines/?tab=date#date-attribute

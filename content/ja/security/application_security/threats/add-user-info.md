@@ -266,21 +266,12 @@ Python トレーサーパッケージが提供する `set_user` 関数を用い�
 この例では、ユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を示します。
 
 ```python
-from ddtrace.appsec.trace_utils import should_block_user
-from ddtrace.appsec.trace_utils import block_request
-from ddtrace.appsec.trace_utils import block_request_if_user_blocked
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
 # set_user() を呼び出し、現在認証されているユーザー ID をトレースします
 user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
-# is_user_blocked() を呼び出し、denylist にあるときに認証ユーザーをブロックする可能性があります
-if should_block_user(user_id):
-    block_request()
-# また、チェックし、必要であればブロックするユーティリティ関数:
-block_request_if_user_blocked(tracer, user_id)
-    block_request()
 ```
 
 {{< /programming-lang >}}

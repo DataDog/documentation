@@ -24,6 +24,8 @@ assets:
     source: rabbitmq
   monitors:
     disk_usage: assets/monitors/disk_usage.json
+    disk_usage_prometheus: assets/monitors/disk_usage_prometheus.json
+    message_unack_prometheus: assets/monitors/message_unack_prometheus.json
     message_unacknowledge_rate_anomaly: assets/monitors/message_unacknowledge_rate_anomaly.json
   saved_views:
     pid_overview: assets/saved_views/status_overview.json
@@ -201,7 +203,7 @@ Kubernetes などのコンテナ環境の場合は、[オートディスカバ�
 | -------------------- | -------------------------------------------- |
 | `<インテグレーション名>` | `rabbitmq`                                   |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                |
-| `<インスタンスコンフィギュレーション>`  | `{"prometheus_plugin": {"url": "%%host%%:15692"}}` |
+| `<インスタンスコンフィギュレーション>`  | `{"prometheus_plugin": {"url": "http://%%host%%:15692"}}` |
 
 ##### ログの収集
 

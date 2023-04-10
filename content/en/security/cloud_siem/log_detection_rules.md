@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-To create a new log detection rule in Datadog, hover over **Security**, select **Detection Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a log detection rule in Datadog, navigate to the [**Detection Rules** page][6] and click **New Rule**.
 
 ## Rule Type
 
@@ -75,9 +75,11 @@ Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
-#### Advanced options
+#### Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 #### Joining queries
 
@@ -290,3 +292,4 @@ The rule deprecation process is as follows:
 [3]: /security/default_rules/#cat-cloud-siem-log-detection
 [4]: /security/detection_rules/#rule-and-generated-signal-options
 [5]: https://app.datadoghq.com/security/configuration/siem/rules/view/nkq-b6q-h8c?query=type%3A%28log_detection%20OR%20signal_correlation%29%20guardduty&product=siem
+[6]: https://app.datadoghq.com/security/configuration/siem/rules

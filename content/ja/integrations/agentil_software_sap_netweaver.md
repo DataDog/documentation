@@ -29,8 +29,6 @@ author:
   vendor_id: agentil-software
 categories:
 - マーケットプレイス
-- cloud
-- モニタリング
 - sap
 dependencies: []
 display_on_public_website: true
@@ -62,12 +60,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
   - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: S/4HANA と NetWeaver システムの ABAP および J2EE スタックを監視する
   media:
@@ -103,9 +99,9 @@ tile:
 ## 概要
 SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4HANA** アプリケーションプラットフォームの ABAP および J2EE スタックを監視します。
 
-リモート**エージェントレス**接続と事前設定された監視テンプレートを使用することで、このインテグレーションはわずか**数分**で本稼働することができます
+リモート**エージェントレス**接続と事前設定された監視テンプレートを使用することで、このインテグレーションはわずか**数分**で本稼働することができます。
 
-モニタリングには、AGENTIL Software の [Pro.Monitor](https://www.agentil-software.com) プラットフォームが使用されています。SAP システムの最も関連性の高いモジュールとトランザクションをカバーするように、すぐに設定することができます (**ショートダンプ、SAP ジョブ、トランザクション応答時間、ワークプロセスなど**)。
+モニタリングには、AGENTIL Software の [Pro.Monitor][1] プラットフォームが使用されています。SAP システムの最も関連性の高いモジュールとトランザクションをカバーするように、すぐに設定することができます (**ショートダンプ、SAP ジョブ、トランザクション応答時間、ワークプロセスなど**)。
 
 このインテグレーションは、システムからデータをリアルタイムに収集・分析し、メトリクスとアクション可能なイベントを生成します。Pro.Monitor の設定によりアラートを細かく調整し、メトリクスに直接 Datadog モニターを作成することができます。
 
@@ -147,13 +143,26 @@ SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4
 - ワークプロセス
 
 ## サポート
-サポートや機能のリクエストについては、AGENTIL Software (support@agentil-software.com) までお問い合わせください。
+
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AGENTIL Software にお問い合わせください。
+
+- メール: [support@agentil-software.com][2]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の Agentil の製品を使って SAP NetWeaver を監視する][5]
 
 *SAP や他のプラットフォームとの特定のインテグレーションのための信頼できるパートナーをお探しなら、ぜひ当社にご連絡ください。*
 
 ---
 この製品は、スイスのジュネーブで設計・開発されています。
 
-
+[1]: https://www.agentil-software.com
+[2]: mailto:support@agentil-software.com
+[3]: https://softwaredownloads.sap.com/file/0020000000507122021
+[4]: https://wiki.agentil-software.com/doku.php?id=products:promonitor:6.8:userguide:configuration
+[5]: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">こちらをクリック</a>してください。

@@ -39,15 +39,17 @@ Datadog は、[AWS Lambda](#aws-lambda)、[Azure App Service](#azure-app-service
 
 [高度な Lambda メトリクス][3]は、Datadog で `aws.lambda.enhanced` のプレフィックスで表示され、秒単位の粒度で、ほぼリアルタイムで利用できます。高度な Lambda メトリクスは、すべての Lambda 関数におけるコールドスタート、推定 AWS コスト、タイムアウト、メモリ不足エラー、そしてメモリ使用量に関するアラートや SLO に使用できます。
 
-[分散型トレーシング][4]なら、サーバーレストレースをメトリクスに接続することで、アプリケーションのパフォーマンスに関する豊富な情報を入手できます。Datadog Python、Node.js、Ruby、Go、Java、.NET トレーシングライブラリは、AWS Lambda の分散型トレーシングをサポートしています。
+ログやトレースからメトリクスを生成したり、Datadog Lambda 拡張機能を使用したり、Datadog Forwarder Lambda を使用することで、Lambda 関数から [カスタムメトリクス][4]を送信できます。
 
-[デプロイ追跡][5]なら、サーバーレスコード、コンフィギュレーション、そしてデプロイメントの変更をメトリクス、トレース、そして関数からのログと関連付け、リアルタイムのインサイトによりこのような変更がアプリケーションの正常性やパフォーマンスに与える影響を確認できます。
+[分散型トレーシング][5]なら、サーバーレストレースをメトリクスに接続することで、アプリケーションのパフォーマンスに関する豊富な情報を入手できます。Datadog Python、Node.js、Ruby、Go、Java、.NET トレーシングライブラリは、AWS Lambda の分散型トレーシングをサポートしています。
+
+[デプロイ追跡][6]なら、サーバーレスコード、コンフィギュレーション、そしてデプロイメントの変更をメトリクス、トレース、そして関数からのログと関連付け、リアルタイムのインサイトによりこのような変更がアプリケーションの正常性やパフォーマンスに与える影響を確認できます。
 
 ### Azure App Service
 
-[Datadog の Azure App Service 向け拡張機能][6]は、Azure Web Apps のトレーシングもサポートしています。
+[Datadog の Azure App Service 向け拡張機能][7]は、Azure Web Apps のトレーシングもサポートしています。
 
-[Azure App Service ビュー][7]を使用すると、次のことができます。
+[Azure App Service ビュー][8]を使用すると、次のことができます。
 
 - レイテンシーやエラーの多いアプリをすばやく特定
 
@@ -57,19 +59,19 @@ Datadog は、[AWS Lambda](#aws-lambda)、[Azure App Service](#azure-app-service
 
 - App Service Plan で実行されているアプリをマッピングして、コストやパフォーマンスに影響を与える可能性のあるアプリを特定
 
-Datadog の Azure App Service 向け拡張機能は、Azure Web Apps のトレースもサポートしています。Azure のトレーシング設定について詳しくは、[Azure App Service][6] を参照してください。
+Datadog の Azure App Service 向け拡張機能は、Azure Web Apps のトレースもサポートしています。Azure のトレーシング設定について詳しくは、[Azure App Service][7] を参照してください。
 
 ### Azure Container Apps
 
-Azure Container Apps は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Azure インテグレーション][8]を通して Container Apps のモニタリングとログ収集を提供しています。
+Azure Container Apps は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Azure インテグレーション][9]を通して Container Apps のモニタリングとログ収集を提供しています。
 
-また、Datadog は現在ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で [Container Apps アプリケーションをインスツルメントする][9]ソリューションも提供しています。
+また、Datadog は現在ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で [Container Apps アプリケーションをインスツルメントする][10]ソリューションも提供しています。
 
 ### Google Cloud Run
 
-Google Cloud Run は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバレス機能を監視するには、[Google Cloud Platform インテグレーション][10]を有効にします。
+Google Cloud Run は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。Google Cloud Platform で実行中のサーバレス機能を監視するには、[Google Cloud Platform インテグレーション][11]を有効にします。
 
-また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で [Container Run アプリケーションをインスツルメントする][11]ソリューションも提供しています。
+また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で [Container Run アプリケーションをインスツルメントする][12]ソリューションも提供しています。
 
 ## その他の参考資料
 
@@ -78,11 +80,12 @@ Google Cloud Run は、単一目的の小規模な関数を作成できる、軽
 [1]: http://app.datadoghq.com/functions
 [2]: /ja/serverless/aws_lambda
 [3]: /ja/serverless/enhanced_lambda_metrics
-[4]: /ja/serverless/distributed_tracing
-[5]: /ja/serverless/deployment_tracking
-[6]: /ja/infrastructure/serverless/azure_app_services/#overview
-[7]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[8]: /ja/integrations/azure/#log-collection
-[9]: /ja/serverless/azure_container_apps
-[10]: /ja/integrations/google_cloud_platform/
-[11]: /ja/serverless/google_cloud_run
+[4]: /ja/serverless/custom_metrics
+[5]: /ja/serverless/distributed_tracing
+[6]: /ja/serverless/deployment_tracking
+[7]: /ja/infrastructure/serverless/azure_app_services/#overview
+[8]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
+[9]: /ja/integrations/azure/#log-collection
+[10]: /ja/serverless/azure_container_apps
+[11]: /ja/integrations/google_cloud_platform/
+[12]: /ja/serverless/google_cloud_run

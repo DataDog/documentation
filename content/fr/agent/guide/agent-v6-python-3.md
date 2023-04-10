@@ -108,87 +108,90 @@ Si les informations de l'image ne sont pas indiquées dans la ressource `Datadog
 Si vous avez précédemment imposé la version d'une image :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterChecksRunner:
+      image:
+        tag: 6.33.0
+    nodeAgent:
+      image:
+        tag: 6.33.0
+```
+
+Ou si vous utilisez `image.name` :
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  override:
+    # ...
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:6.33.0
+    # ...
+    clusterChecksRunner:
+      image:
+        name: gcr.io/datadoghq/agent:6.33.0
+```
+
+Utilisez l'option `spec.global.registry` pour modifier le registre par défaut. Par défaut, le registre `gcr.io/datadoghq/agent` est utilisé.
+
+Imposez ensuite le tag de l'image de l'Agent 7 dans `spec.override.nodeAgent.image.tag`.
+
+Si vous avez activé le déploiement d'exécuteurs de checks de cluster, imposez également le tag de l'image de l'Agent 7 dans `spec.override.clusterChecksRunner.image.tag`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
 spec:
   # ...
-  agent:
+  global:
+    registry: public.ecr.aws/datadog
+  override:
     # ...
-    imageConfig:
-      tag: 6.33.0
-  clusterChecksRunner:
+    nodeAgent:
+      image:
+        tag: 7.33.0
     # ...
-    imageConfig:
-      tag: 6.33.0
+    clusterChecksRunner:
+      image:
+        tag: 7.33.0
 ```
 
-Ou si vous utilisez `imageConfig.name` :
+**Remarque** : Datadog vous recommande de ne pas définir `*.image.tag`. Laissez plutôt l'Operator Datadog mettre automatiquement à jour le tag pour une image de l'Agent 7. 
+
+Si vous devez utiliser une image JMX de l'Agent, vous pouvez la définir sans utiliser `*.image.tag` pour l'Agent :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  credentials:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
-  agent:
-    # ...
-    imageConfig:
-      name: gcr.io/datadoghq/agent:6.33.0
-  clusterChecksRunner:
-    # ...
-    imageConfig:
-      name: gcr.io/datadoghq/agent:6.33.0
-```
-
-Utilisez l'option `spec.registry` pour modifier le registre par défaut. Par défaut, le registre `gcr.io/datadoghq/agent` est utilisé.
-
-Imposez ensuite le tag de l'image de l'Agent 7 dans `spec.agents.imageConfig.tag`.
-
-Si vous avez activé le déploiement d'exécuteurs de checks de cluster, imposez également le tag de l'image de l'Agent 7 dans `spec.clusterChecksRunner.imageConfig.tag`.
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
+apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
 spec:
   # ...
-  registry: public.ecr.aws/datadog
-  agent:
+  global:
+    registry: public.ecr.aws/datadog
+  override:
     # ...
-    imageConfig:
-      tag: 7.33.0
-  clusterChecksRunner:
-    # ...
-    imageConfig:
-      tag: 7.33.0
-```
-
-**Remarque** : Datadog vous recommande de ne pas définir `*.imageConfig.tag`. Laissez plutôt l'Operator Datadog mettre automatiquement à jour le tag pour une image de l'Agent 7. 
-
-Si vous devez utiliser une image JMX de l'Agent, vous pouvez la définir sans utiliser `*.imageConfig.tag` pour l'Agent :
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  # ...
-  registry: public.ecr.aws/datadog
-  agent:
-    # ...
-    imageConfig:
-      jmxEnabled: true
-  clusterChecksRunner:
-    # ...
-    imageConfig:
-      jmxEnabled: true
+    nodeAgent:
+      image:
+        jmxEnabled: true
+    clusterChecksRunner:
+      image:
+        jmxEnabled: true
 ```
 
 [1]: https://github.com/DataDog/datadog-operator

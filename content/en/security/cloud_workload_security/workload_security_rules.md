@@ -80,7 +80,7 @@ Approvers act as an allow-list at the kernel level in the Datadog Agent. For exa
 
 Approvers and discarders are generated based on your entire policy. Because of this, if a single rule does not make use of approvers for a given event (open, exec, etc.), approvers cannot be used for that event for the entire policy, making every rule that uses that event less efficient.
 
-For example, if you used explicit filenames to evaluate open events (for example, `open.file.path == "/etc/shadow”`) for every rule but one, and used a wildcard in that one event (for example, `open.file.path == "/etc/*”`), the open event would NOT generate an approver, but may generate discarders during runtime.
+For example, if you used explicit filenames to evaluate open events (for example, `open.file.path == "/etc/shadow"`) for every rule but one, and used a wildcard in that one event (for example, `open.file.path == "/etc/*"`), the open event would NOT generate an approver, but may generate discarders during runtime.
 
 Approvers are generally more powerful and preferred. Using approvers, the Agent can process only what it needs to see rather than dynamically learning what to filter out.
 
@@ -90,7 +90,7 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 First, create a default policy file to load to the Agent by following the instructions below.
 
-1. In Datadog, navigate to the [Agent Configuration page][4] under **Setup & Configuration**.
+1. In Datadog, navigate to the [Agent Configuration page][4].
 
 2. Click **Add an Agent Rule** in the top right.
 

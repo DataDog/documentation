@@ -4,5 +4,8 @@ link: 'https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md'
 ignorecase: true
 level: warning
 tokens:
-  - '(?:\w+)nised?'
+  - '(?:\w+)nised'
+  - '(?:\w+)ise'
   - '(?:\w+)logue'
+  - '(?:\w+)lour'
+  - '(?:\w+)lyse'

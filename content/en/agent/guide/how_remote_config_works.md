@@ -63,6 +63,7 @@ The following products and features are supported with Remote Config:
 ### Application Performance Monitoring (APM)
 <div class="alert alert-info">This feature is in private beta.</div>
 
+- **Remotely instrument your Kubernetes services with APM**: Remotely instrument your services in Kubernetes with Datadog APM via Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications.
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent. 
 
 ### Dynamic Instrumentation
@@ -95,7 +96,7 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Prerequisites
 
 
-- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate) or higher installed on your hosts or containers. 
+- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers. 
 - For features that use tracing libraries, the following minimum versions of Datadog tracing libraries:
 
 
@@ -129,6 +130,14 @@ remote_configuration:
   enabled: true
 ```
 
+To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
+
 6. Restart your Agent for the changes to take effect.  
 
 {{% /tab %}}
@@ -138,11 +147,20 @@ Add the following to your Datadog Agent manifest, specifying the API key that ha
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
 ```
+
+To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
 {{% /tab %}}
 {{< /tabs >}}
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CWS default agent rules][5] update automatically as released.
+- Datadog Remote Instrumentation is enabled.
 - [APM Agent-level sampling rates][6] are applied.  
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
