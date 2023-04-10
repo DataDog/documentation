@@ -76,6 +76,7 @@ export function closeMobileNav(){
 export function setMobileNav () {
     const dataPath = window.location.pathname.slice(1,-1)
     let mobileSelection = ''
+
     // redirect the AGENT/aggregating agent path to observability_pipelines/integrations/... on mobile nav
     if(dataPath.includes('observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker')){
         const observabilityPipelineMobile = document.querySelector('#mobile-nav a[data-path$="observability_pipelines"]');
@@ -84,13 +85,15 @@ export function setMobileNav () {
             'a[data-path*="observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker"]'
         );
     }else{
-        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
+        const hash = window.location.hash
+        const  hrefSelector = hash ? `[href$="${hash}"]`: ''
+        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]${hrefSelector}`) || false
     }
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
 
     if (mobileSelection) {
         const parentMenu = mobileSelection.parentElement || false
-    
+        document.querySelectorAll('#mobile-nav li.dropdown .dropdown-menu a').forEach(e => e.classList.remove('active'))
         mobileSelection.classList.add('active')
         if(subMenu){
             openMenu(subMenu)

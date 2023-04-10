@@ -1,4 +1,5 @@
 import Tab from 'bootstrap/js/dist/tab';
+import {setMobileNav} from '../components/mobile-nav'
 
 const versionSelect = document.querySelector('.js-api-version-select');
 
@@ -151,4 +152,11 @@ if (document.body.classList.contains('api')) {
         const distanceToTop = sideNavActiveMenuItem.offsetTop;
         apiSideNav.scrollTop = distanceToTop - 100;
     }
+}
+
+
+if(document.body.classList.contains('api') && window.location.hash){
+    window.addEventListener('hashchange', () => {
+        setMobileNav()
+    })
 }
