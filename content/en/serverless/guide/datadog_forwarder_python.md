@@ -221,7 +221,7 @@ More information and additional parameters can be found in the [macro documentat
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups, to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder][2] if you haven't.
 2. [Subscribe the Datadog Forwarder to your function's log groups][3].
@@ -269,7 +269,7 @@ Subscribe the Datadog Forwarder Lambda function to each of your function’s log
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function for each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function for each of your function's log groups, to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder][3] if you haven't.
 2. [Subscribe the Datadog Forwarder to your function's log groups][4].
@@ -365,7 +365,7 @@ Follow these steps to configure the function:
 
 ### Subscribe
 
-Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups, to send metrics, traces, and logs to Datadog.
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups, to send metrics, traces, and logs to Datadog.
 
 1. [Install the Datadog Forwarder][7] if you haven't.
 2. [Subscribe the Datadog Forwarder to your function's log groups][8].

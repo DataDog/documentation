@@ -51,7 +51,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
       `ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
 
-      Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function’s Dockerfile to ensure that the native extensions can be successfully compiled.
+      Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 
       ```dockerfile
       FROM <base image>
@@ -83,7 +83,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
 3. Subscribe the Datadog Forwarder to log groups
 
-    Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces and logs to Datadog.
+    Subscribe the Datadog Forwarder Lambda function to each of your function's log groups to send metrics, traces and logs to Datadog.
 
     1. [Install the Datadog Forwarder if you haven't][1].
     2. [Subscribe the Datadog Forwarder to your function's log groups][3].

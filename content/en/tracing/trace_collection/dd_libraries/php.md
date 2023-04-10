@@ -30,7 +30,7 @@ further_reading:
 
 The latest PHP Tracer supports versions >= 5.4.x.
 
-For a full list of Datadog’s PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 

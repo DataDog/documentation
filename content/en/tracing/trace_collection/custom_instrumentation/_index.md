@@ -29,9 +29,9 @@ further_reading:
 
 Custom instrumentation allows programmatic creation, modification, or deletion of traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, as well as for providing deeper visibility and context into spans, including adding any desired [span tags][1].
 
-Before instrumenting your application, review Datadog’s [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
+Before instrumenting your application, review Datadog's [APM Terminology][2] and familiarize yourself with the core concepts of Datadog APM.
 
-If you’re already using OpenTracing or OpenTelemetry, see [OpenTracing and OpenTelemetry][3].
+If you're already using OpenTracing or OpenTelemetry, see [OpenTracing and OpenTelemetry][3].
 
 {{< partial name="apm/apm-manual-instrumentation.html" >}}
 

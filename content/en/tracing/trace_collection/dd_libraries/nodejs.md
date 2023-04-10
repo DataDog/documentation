@@ -29,7 +29,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog’s Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
