@@ -10,9 +10,8 @@ code_lang_weight: 50
 
 ### Supported Node.js versions
 
-The Datadog Node.js library supports the following Node.js versions:
+The Datadog Node.js library supports Node 14 and higher. In general, we follow the Node.js LTS policy. For more information, read the [APM documentation][1].
 
-- Node.js 14 and higher
 
 These are supported on the following architectures:
 
@@ -37,11 +36,11 @@ The following ASM capabilities are supported in the NodeJS library, for the spec
 
 | ASM capability                   | Minimum NodeJS tracer version |
 | -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 3.11.0<br/>x.x<br/>not supported<br/>x.x     |
+| Threat Detection <br/> --> Business logic API  | 3.31.1 <br/>   |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 3.11.0<br/> --> 3.11.0<br/> --> not supported<br/> --> 3.11.0     |
 | Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ <br/>x.x<br/>x.x |
 
-The minimum tracer version to get all supported ASM capabilities for NodeJS is y.y.
+The minimum tracer version to get all supported ASM capabilities for NodeJS is 3.15.0.
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
 

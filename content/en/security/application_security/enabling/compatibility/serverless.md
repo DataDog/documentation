@@ -51,7 +51,7 @@ The following ASM capabilities are supported for Serverless, for the specified D
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | x.x <br/>x.x   |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/>     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | x.x <br/>not supported<br/>x.x |
+| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/> |
 
 The minimum Datadog lambda extension version to get all supported ASM capabilities for Serverless is y.y.
 
