@@ -11,6 +11,9 @@ further_reading:
 - link: "/security/cloud_siem/log_detection_rules/"
   tag: "Documentation"
   text: "Create new detection rules"
+- link: "/integrations/google_cloud_platform/#log-collection"
+  tag: "Documentation"
+  text: "Collect Google Cloud Platform logs"
 - link: "https://www.datadoghq.com/blog/visualize-google-cloud-activity-cloud-siem-investigator/"
   tag: "Blog"
   text: "Visualize activity in your Google Cloud environment with Datadog Cloud SIEM Investigator"
@@ -26,6 +29,7 @@ This guide walks you through the following steps so that you can start detecting
 1. [Create a new Google Cloud publish/subscription (pub/sub) system](#create-a-new-google-cloud-publishsubscription-pubsub-system)
 1. [Configure the pub/sub to send logs to Datadog](#configure-the-pubsub-to-send-logs-to-datadog)
 1. [Export logs from Google Cloud Logging to the pub/sub](#export-logs-from-google-cloud-logging-to-the-pubsub)
+1. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
 
 ## Enable Data Access audit logs
 
