@@ -93,4 +93,4 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [9]: /getting_started/tagging/
 [10]: /account_management/billing/custom_metrics/?tab=countrategauge
 [11]: /metrics/custom_metrics/#naming-custom-metrics
-[12]: /querying/
+[12]: /dashboards/querying/
