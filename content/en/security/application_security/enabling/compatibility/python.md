@@ -42,7 +42,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | 1.9.0<br/>   |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 1.10.0<br/><br/><br/>     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | x.x <br/>x.x<br/>x.x |
+| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | 1.5.0 <br/><br/> |
 
 The minimum tracer version to get all supported ASM capabilities for Python is 1.10.0.
 
