@@ -309,7 +309,7 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you w
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
-### Why doesn’t my feature flag data reflect what I expect to see?
+### Why doesn't my feature flag data reflect what I expect to see?
 Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
@@ -325,7 +325,7 @@ Here are a few examples of reasons why your feature flag is being evaluated on u
 - A common react component that appears on multiple pages which evaluates feature flags whenever they run.
 - A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
 
-When performing your investigations, you can also scope your data for `View Name`’s that are relevant to your feature flag.
+When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

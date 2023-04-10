@@ -44,7 +44,7 @@ For example, if you want to detect the following behavior: "When a PHP or Nginx 
 
 `bash` is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). Like in the previous example, to detect execution, include in your rule: `exec.file.path == "/usr/bin/bash"`. This ensures the rule isn't only accounting for the execution of the bash, but also bash as a child process of PHP or Nginx.
 
-A process ancestor’s filename in Cloud Workload Security is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. **Note**: Use the tilde when using wildcards.
+A process ancestor's filename in Cloud Workload Security is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. **Note**: Use the tilde when using wildcards.
 
 Putting it all together, the rule expression is: `exec.file.path == "/usr/bin/bash"  && (process.ancestors.file.name == "nginx" || process.ancestors.file.name =~ "php*")`
 

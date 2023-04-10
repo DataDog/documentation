@@ -50,7 +50,7 @@ You can access performance metrics for your views in:
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
-| [First Input Delay][8]        | Interactivity    | Time elapsed between a user’s first interaction with the page and the browser’s response.             | <100ms      |
+| [First Input Delay][8]        | Interactivity    | Time elapsed between a user's first interaction with the page and the browser's response.             | <100ms      |
 | [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
 
 ## All performance metrics
@@ -61,7 +61,7 @@ You can access performance metrics for your views in:
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | The moment in the page load timeline when the largest DOM object in the viewport renders and is visible on screen.                                                                                                               |
-| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                                        |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                                        |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][10].                                                                          |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                                         |

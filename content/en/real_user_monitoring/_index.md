@@ -58,7 +58,7 @@ A user session is a user journey on your web or mobile application lasting up to
 
 Datadog's *Session Replay* allows you to capture and visually replay the web browsing experience of your users.
 
-Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application’s usage patterns and design pitfalls.
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
 
 ## Get started
 

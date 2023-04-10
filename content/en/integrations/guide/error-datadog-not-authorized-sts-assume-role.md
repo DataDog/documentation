@@ -33,7 +33,7 @@ Datadog is not authorized to perform action sts:AssumeRole Account affected:<acc
 ```
 The source of the issue could be [AWS Service Control Policies][4].
 ```
-Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization. SCPs offer central control over the maximum available permissions for all accounts in your organization. SCPs help you to ensure your accounts stay within your organization’s access control guidelines.
+Service control policies (SCPs) are a type of organization policy that you can use to manage permissions in your organization. SCPs offer central control over the maximum available permissions for all accounts in your organization. SCPs help you to ensure your accounts stay within your organization's access control guidelines.
 ```
 
 To remove the error in the integration page, you can exclude regions in your AWS integration under the **General** tab, or use the [Update an AWS integration][5] API.

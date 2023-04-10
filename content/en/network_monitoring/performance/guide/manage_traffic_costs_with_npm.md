@@ -8,7 +8,7 @@ Traffic is expensive, especially in the cloud. Cloud providers charge different 
 
 Network Performance Monitoring (NPM) allows you to track all of the traffic patterns described above by mapping dependencies between any tags in Datadog, including service, container, availability zone, region, datacenter, etc. This insight into your dependencies and the traffic volume they produce (which is ultimately what cloud providers charge for) can be used to monitor and optimize your traffic-related costs. 
 
-## Datadog’s story
+## Datadog's story
 
 When Datadog migrated to Kubernetes, migrating stateless services was (expectedly) much faster and easier than migrating stateful services (for example, Kafka), stateless services were first. The outcome was a terabytes of new cross-AZ traffic between the stateful services (all in one AZ) and stateless services (spread across the other AZs), which led the cloud bill to increase drastically and unexpectedly. Datadog used its own NPM product to identify the root cause: a suboptimal migration strategy and consequently, inefficient and costly network communication. Sharding stateful services ultimately led to significant reductions in cloud provider traffic costs.
 
@@ -30,7 +30,7 @@ When Datadog migrated to Kubernetes, migrating stateless services was (expectedl
 
 3. Similarly, you can use the team tag to identify engineering teams that generate the most, for instance, cross-regional traffic 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/team_region.png" alt="Use the team tag.">}}
-or monitor your own team’s output specifically.
+or monitor your own team's output specifically.
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/region_region.png" alt="Use the region tag.">}}
 
 4. To monitor costs from external traffic, scope your destination endpoints to public IPs using the **IP Type** facet.

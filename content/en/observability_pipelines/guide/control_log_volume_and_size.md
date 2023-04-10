@@ -80,7 +80,7 @@ Use the [filter transform][4] when you want only certain logs that meet a specif
 - A specific tag, such as `env`.
 - A specific field value, such as the `status` field must be `400`.
 
-In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Vector Remap Language (VRL)][5] or [Datadog Log Search syntax][6] to set the conditions. Logs that don’t match the conditions are dropped. 
+In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Vector Remap Language (VRL)][5] or [Datadog Log Search syntax][6] to set the conditions. Logs that don't match the conditions are dropped. 
 
 The example below uses the filter transform and Vector Remap Language to send only logs with a `status` of `500`.
 
@@ -195,7 +195,7 @@ rate = 10
 
 ### Convert logs to metrics
 
-In scenarios where you want to understand behavior over time, metrics around an event’s data point(s) would be more useful than a series of logs. As logs flow through your pipeline, use the [log to metric transform][8] to cut down on log volume by generating metrics based on specific tags. 
+In scenarios where you want to understand behavior over time, metrics around an event's data point(s) would be more useful than a series of logs. As logs flow through your pipeline, use the [log to metric transform][8] to cut down on log volume by generating metrics based on specific tags. 
 
 You can generate four types of metrics:
 
