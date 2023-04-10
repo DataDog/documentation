@@ -1,5 +1,4 @@
 import Tab from 'bootstrap/js/dist/tab';
-import {setMobileNav} from '../components/mobile-nav'
 
 const versionSelect = document.querySelector('.js-api-version-select');
 
