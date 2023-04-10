@@ -1023,7 +1023,7 @@
     "summary": "Get hourly usage for hosts and containers"
   },
   "GetHourlyUsageAttribution": {
-    "description": "Get hourly usage attribution.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
+    "description": "Get hourly usage attribution. Multi-region data is available starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
     "summary": "Get hourly usage attribution"
   },
   "GetIncidentManagement": {
@@ -1055,7 +1055,7 @@
     "summary": "Get hourly usage for logs by index"
   },
   "GetMonthlyUsageAttribution": {
-    "description": "Get monthly usage attribution.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
+    "description": "Get monthly usage attribution. Multi-region data is available starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive all records, check if the value of `next_record_id` is\nset in the response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month, next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```",
     "summary": "Get monthly usage attribution"
   },
   "GetUsageNetworkFlows": {
