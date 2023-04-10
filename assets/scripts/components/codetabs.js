@@ -1,7 +1,13 @@
 import { getQueryParameterByName } from '../helpers/browser';
+import Cookies from 'js-cookie';
 
 const initCodeTabs = () => {
-    const codeTabsList = document.querySelectorAll('.code-tabs')
+    const region = Cookies.get('site');
+    const regionalSection = document.querySelector(`[data-region="${region}"]`);
+    let codeTabsList = document.querySelectorAll('.code-tabs');
+    if (regionalSection) {
+        codeTabsList = regionalSection.querySelectorAll('.code-tabs');
+    }
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
     const codeTabParameters = {};
 
@@ -107,7 +113,7 @@ const initCodeTabs = () => {
                         activateCodeTab(link);
                         getContentTabHeight();
                         for(const [idx, codeTab] of Object.entries(codeTabParameters)) {
-                            if (codeTab.elementTop < targetTop) {
+                            if (codeTab.elementTop < targetTop && codeTab.elementCurrentHeight > 0) {
                                 offsetY += codeTab.elementHeightDifference;
                             }
                         }
@@ -146,7 +152,10 @@ const initCodeTabs = () => {
     }
 
     const addObserversToCodeTabs = () => {
-        const tabContentList = document.querySelectorAll('.tab-content');
+        let tabContentList = document.querySelectorAll('.tab-content');
+        if (regionalSection) {
+            tabContentList = regionalSection.querySelectorAll('.tab-content');
+        }
         const resizeObserver = new ResizeObserver((entries) => {
             entries.forEach((entry, idx) => {
                 if (entry?.contentBoxSize?.[0]) {
@@ -156,7 +165,7 @@ const initCodeTabs = () => {
                     codeTabParameters[idx] = {
                         elementTop,
                         elementCurrentHeight,
-                        elementHeightDifference: elementHeightDifference,
+                        elementHeightDifference: Math.round(elementHeightDifference),
                     }
                 }
             })
@@ -167,7 +176,10 @@ const initCodeTabs = () => {
     }
 
     const getContentTabHeight = () => {
-        const tabContentList = document.querySelectorAll('.tab-content');
+        let tabContentList = document.querySelectorAll('.tab-content');
+        if (regionalSection) {
+            tabContentList = regionalSection.querySelectorAll('.tab-content');
+        }
         tabContentList.forEach((tabContentElement, idx) => {
             if (codeTabParameters[idx]) {
                 const elementCurrentHeight = tabContentElement.getBoundingClientRect().height;
@@ -175,7 +187,7 @@ const initCodeTabs = () => {
                 codeTabParameters[idx] = {
                     elementTop: codeTabParameters[idx].elementTop,
                     elementCurrentHeight,
-                    elementHeightDifference: elementHeightDifference,
+                    elementHeightDifference: Math.round(elementHeightDifference),
                 }
             } else {
                 codeTabParameters[idx] = {
