@@ -24,11 +24,7 @@ further_reading:
 
 ## Compatibility
 
-- **Custom spans**: Configure custom spans
-
 - **Custom pre-defined tags**: Set [custom tags][6] to all generated pipeline and job spans
-
-- **Custom tags and metrics at runtime**: Configure [custom tags][7] and metrics at runtime
 
 ## Configure the Datadog integration
 
