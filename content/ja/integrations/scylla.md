@@ -26,6 +26,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 - ログの収集
 dependencies:
@@ -45,16 +46,17 @@ public_title: Scylla
 short_description: クラスターのリソース、レイテンシー、健全性などを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Data Store
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラスターのリソース、レイテンシー、健全性などを追跡
   media: []
@@ -75,7 +77,7 @@ Scylla は「ドロップインの Apache Cassandra 代替」として使用で�
 
 以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Scylla チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

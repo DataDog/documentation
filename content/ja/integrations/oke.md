@@ -15,8 +15,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- コンテナ
+- kubernetes
 - oracle
-- containers
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oke/README.md
@@ -35,17 +36,18 @@ public_title: Oracle Container Engine for Kubernetes
 short_description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Oracle
   - Category::Containers
+  - Category::Kubernetes
+  - Category::Oracle
   - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
   media: []

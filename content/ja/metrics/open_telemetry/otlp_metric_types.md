@@ -83,7 +83,7 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターでは、
 : 指定された下限値と上限値を持つバケットのタイムウィンドウにおけるバケット数。<br>
 **Datadog In-App Type**: COUNT
 
-- `send_count_sum_metrics` フラグが有効な場合、以下のメトリクスが生成されます。
+- `send_aggregation_metrics` フラグが有効な場合、以下のメトリクスが生成されます。
 
 `<METRIC_NAME>.sum`
 : タイムウィンドウ内に送信された値の総和。<br>
@@ -93,7 +93,15 @@ Datadog Agent と OpenTelemetry Collector Datadog エクスポーターでは、
 : タイムウィンドウ内に送信された値の数。<br>
 **Datadog In-App Type**: COUNT
 
-**注**: `send_count_sum_metrics` は、ディストリビューションモードを使用していないときのみ有効です。
+`<METRIC_NAME>.min`
+: タイムウィンドウで送信された値の最小値。delta OTLP ヒストグラムでのみ利用可能です。Datadog エクスポーター v0.75.0 および Datadog Agent v6.45.0 および v7.45.0 以降利用可能です。 <br>
+**Datadog アプリ内タイプ**: GAUGE
+
+`<METRIC_NAME>.max`
+: タイムウィンドウで送信された値の最大値。delta OTLP ヒストグラムでのみ利用可能です。Datadog エクスポーター v0.75.0 および Datadog Agent v6.45.0 および v7.45.0 以降利用可能です。 <br>
+**Datadog アプリ内タイプ**: GAUGE
+
+**注**: `send_aggregation_metrics` は、ディストリビューションモードを使用していない場合にのみ有効です。Datadog エクスポーター v0.75.0 以前、Datadog Agent v6.45.0 および v7.45.0 では、代わりに `send_count_sum_metrics` を使用します。
 
 [1]: /ja/metrics/distributions
 [2]: /ja/dashboards/functions/arithmetic/#cumulative-sum
@@ -186,12 +194,14 @@ OpenTelemetry Histogram インスツルメントである `request.response_time
 
 [分布についてもっと読む][1]と、さらなる集計の構成方法を理解できます。
 
-また、`counters` モードを使用していて、`send_count_sum_metrics` フラグを有効にすると、ヒストグラムバケットの境界を `[-inf, 2, inf]` に設定した場合に，以下のメトリクスが報告されます。
+また、`counters` モードを使用し、`send_aggregation_metrics` フラグを有効にし、ヒストグラムのバケットの境界を `[-inf, 2, inf]` とした場合、以下のメトリクスが報告されます。
 
 | メトリクス名                                 | 値  | タグ                                | Datadog アプリ内タイプ |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`  | `8`    | 非該当                                 | COUNT               |
 | `request.response_time.distribution.sum`    | `15`   | 非該当                                 | COUNT               |
+| `request.response_time.distribution.max`    | `3`    | 非該当                                 | GAUGE               |
+| `request.response_time.distribution.min `   | `1`    | 非該当                                 | GAUGE               |
 | `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`、`upper_bound:2` | GAUGE               |
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`、`upper_bound:inf`  | GAUGE               |
 
