@@ -8,7 +8,7 @@ If you experience unexpected behavior with Datadog React Native RUM, use this gu
 
 ## No data is being sent to Datadog
 
-Follow these instructions when the SDK has been installed and the app compiles, but no data is received by Datadog. We recommend following these steps in order.
+Follow these instructions in order when the SDK has been installed and the app compiles, but no data is received by Datadog.
 
 ### Check the configuration
 
