@@ -286,10 +286,63 @@ test {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Downloading tracer library
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
+
+{{< code-block lang="shell" >}}
+DD_TRACER_VERSION=... // e.g. 1.12.0
+{{< /code-block >}}
+
+Run the command below to download the tracer JAR and add it to your local Maven repository:
+
+{{< code-block lang="shell" >}}
+mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadoghq:dd-java-agent:$DD_TRACER_VERSION
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
+
+{{< code-block lang="shell" >}}
+DD_TRACER_VERSION=... // e.g. 1.12.0
+{{< /code-block >}}
+
+Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded JAR:
+
+{{< code-block lang="shell" >}}
+DD_TRACER_FOLDER=... // e.g. ~/.datadog
+{{< /code-block >}}
+
+Run the command below to download the tracer JAR and save it into the specified folder:
+
+{{< code-block lang="shell" >}}
+curl https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar --output $DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Running your tests
 
 {{< tabs >}}
 {{% tab "Maven" %}}
+
+Declare `DD_TRACER_VERSION` variable with the version of the tracer that you have downloaded to your local Maven repository:
+
+{{< code-block lang="shell" >}}
+DD_TRACER_VERSION=... // e.g. 1.12.0
+{{< /code-block >}}
 
 Run your tests using the `MAVEN_OPTS` environment variable to specify a path to the Datadog Java Tracer JAR.
 
@@ -302,7 +355,8 @@ In the tracer arguments, specify the following:
 For example:
 
 {{< code-block lang="shell" >}}
-MAVEN_OPTS=-javaagent:$HOME/.m2/repository/com/datadoghq/dd-java-agent/${VERSION}/dd-java-agent-${VERSION}.jar=\
+MVN_LOCAL_REPO=$(mvn help:evaluate -Dexpression=settings.localRepository -DforceStdout -q)
+MAVEN_OPTS=-javaagent:$MVN_LOCAL_REPO/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app \
@@ -311,6 +365,18 @@ mvn clean verify -Pdd-civisibility
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
+
+Declare `DD_TRACER_VERSION` variable with the version of the tracer that you have downloaded to your host:
+
+{{< code-block lang="shell" >}}
+DD_TRACER_VERSION=... // e.g. 1.12.0
+{{< /code-block >}}
+
+Declare `DD_TRACER_FOLDER` variable with the path to the folder where you stored the downloaded tracer JAR:
+
+{{< code-block lang="shell" >}}
+DD_TRACER_FOLDER=... // e.g. ~/.datadog
+{{< /code-block >}}
 
 Run your tests using the `org.gradle.jvmargs` system property to specify a path to the Datadog Java Tracer JAR.
 
@@ -324,13 +390,17 @@ For example:
 
 {{< code-block lang="shell" >}}
 ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks -Dorg.gradle.jvmargs=\
--javaagent:$HOME/.m2/repository/com/datadoghq/dd-java-agent/${VERSION}/dd-java-agent-${VERSION}.jar=\
+-javaagent:$DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app
 {{< /code-block >}}
 
-**Note:** As Gradle builds can be customizable programmatically, you may need to adapt these steps to your specific build configuration.
+**Important:** Specifying `org.gradle.jvmargs` in the command-line will override the value specified elsewhere. If you have this property specified in a `gradle.properties` file, be sure to replicate the necessary settings in the command-line invocation
+
+**Note:** Currently CI Visibility is not compatible with [Gradle Configuration Cache][1], so do not enable the cache when running your tests with the tracer
+
+[1]: https://docs.gradle.org/current/userguide/configuration_cache.html
 
 {{% /tab %}}
 {{< /tabs >}}
