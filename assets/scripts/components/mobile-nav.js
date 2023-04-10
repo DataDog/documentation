@@ -89,6 +89,7 @@ export function setMobileNav () {
         const  hrefSelector = hash ? `[href$="${hash}"]`: ''
         mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]${hrefSelector}`) || false
     }
+
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
 
     if (mobileSelection) {

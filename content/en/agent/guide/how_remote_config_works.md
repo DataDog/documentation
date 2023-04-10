@@ -97,7 +97,7 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Prerequisites
 
 
-- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate) or higher installed on your hosts or containers. 
+- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers. 
 - For features that use tracing libraries, the following minimum versions of Datadog tracing libraries:
 
 
@@ -131,6 +131,14 @@ remote_configuration:
   enabled: true
 ```
 
+To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
+
 6. Restart your Agent for the changes to take effect.  
 
 {{% /tab %}}
@@ -140,11 +148,20 @@ Add the following to your Datadog Agent manifest, specifying the API key that ha
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
 ```
+
+To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
 {{% /tab %}}
 {{< /tabs >}}
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CWS default agent rules][5] update automatically as released.
+- Datadog Remote Instrumentation is enabled.
 - [APM Agent-level sampling rates][6] are applied.  
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.

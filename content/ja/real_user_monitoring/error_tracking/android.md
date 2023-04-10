@@ -15,7 +15,7 @@ title: Android のクラッシュレポートとエラー追跡
 
 エラー追跡は、RUM Android SDK から収集されたエラーを処理します。
 
-Android のクラッシュとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
+Android のクラッシュレポートとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
 
 - 集計済みの Android クラッシュダッシュボードおよび属性
 - 難読化された Android クラッシュレポート
@@ -147,6 +147,25 @@ CI/CD パイプラインでこのタスクを実行し、ビルドグラフの�
 
 ```groovy
 tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
+```
+
+## 制限
+
+マッピングファイルは、US1 サイトをターゲットとする場合は 100 Mb、その他のサイトでは 50 Mb に制限されています。プロジェクトでこれより大きなマッピングファイルを使用する場合は、以下のオプションのいずれかを使用してファイルサイズを縮小してください。
+
+- `mappingFileTrimIndents` オプションを `true` に設定します。これにより、ファイルサイズが平均で 5% 小さくなります。
+- `mappingFilePackagesAliases` のマップを設定します。これは、パッケージ名をより短いエイリアスで置き換えるものです。**注**: Datadog のスタックトレースは元のパッケージ名の代わりに同じエイリアスを使うので、サードパーティの依存関係にはこのオプションを使うのがよいでしょう。
+
+```
+datadog {
+    mappingFileTrimIndents = true
+    mappingFilePackageAliases = mapOf(
+        "kotlinx.coroutines" to "kx.cor",
+        "com.google.android.material" to "material",
+        "com.google.gson" to "gson",
+        "com.squareup.picasso" to "picasso"
+    )
+}
 ```
 
 ## その他の参考資料
