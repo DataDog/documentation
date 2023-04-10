@@ -40,7 +40,7 @@ There are four types of monitoring that the Datadog Agent uses for Cloud Workloa
 
 ## Requirements
 
-* Datadog Agent >= 7.27.0
+* Datadog Agent >= 7.44.0
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
   * Ubuntu 18.04+
   * Debian 10+
