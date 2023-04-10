@@ -214,7 +214,8 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 5. エクスポート用のストレージアカウント、コンテナ、およびディレクトリを選択します。請求エクスポートは、エクスポートが対象とするサブスクリプションに保存する必要があります。
 6. **Create** を選択します。
 
-Metric: **Amortized Cost (usage and purchases)** で、手順 1～6 を繰り返します。Datadog は、両方のエクスポートに同じストレージコンテナを使用することを推奨します。
+メトリクス **Amortized Cost (usage and purchases)** について、ステップ 1～6 を繰り返します。Datadog は、両方のエクスポートに同じストレージコンテナを使用することを推奨します。より速く処理するために、**Run Now** をクリックして最初のエクスポートを手動で生成します。
+{{< img src="cloud_cost/run_now.png" alt="エクスポートサイドパネルの Run Now ボタンをクリックし、エクスポートを生成します"  >}}
 
 ### Datadog がエクスポートにアクセスできるようにする
 

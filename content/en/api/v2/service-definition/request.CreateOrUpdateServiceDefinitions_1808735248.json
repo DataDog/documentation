@@ -6,7 +6,7 @@
       "type": "email"
     }
   ],
-  "dd-service": "service-examplecreateorupdateservicedefinitionusingschemav2returnscreatedresponse",
+  "dd-service": "service-exampleservicedefinition",
   "dd-team": "my-team",
   "docs": [
     {
