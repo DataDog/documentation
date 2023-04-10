@@ -3,11 +3,14 @@ import { getQueryParameterByName } from '../helpers/browser';
 const initCodeTabs = () => {
     const codeTabsList = document.querySelectorAll('.code-tabs')
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
+    const codeTabParameters = {};
 
     const init = () => {
         renderCodeTabElements()
         addEventListeners()
         activateTabsOnLoad()
+        addObserversToCodeTabs()
+        getContentTabHeight()
     }
 
     /**
@@ -19,7 +22,6 @@ const initCodeTabs = () => {
                 const navTabsElement = codeTabsElement.querySelector('.nav-tabs')
                 const tabContent = codeTabsElement.querySelector('.tab-content')
                 const tabPaneNodeList = tabContent.querySelectorAll('.tab-pane')
-
                 tabPaneNodeList.forEach(tabPane => {
                     const title = tabPane.getAttribute('title')
                     const lang = tabPane.getAttribute('data-lang')
@@ -93,13 +95,31 @@ const initCodeTabs = () => {
     }
 
     const addEventListeners = () => {
-        const allTabLinksNodeList = document.querySelectorAll('.code-tabs .nav-tabs li a')
-
-        allTabLinksNodeList.forEach(link => {
-            link.addEventListener('click', () => {
-                activateCodeTab(link)
-            })
-        })
+        if (codeTabsList.length > 0) {
+            codeTabsList.forEach(codeTabsElement => {
+                const allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
+                allTabLinksNodeList.forEach(link => {
+                    link.addEventListener('click', e => {                        
+                        e.preventDefault();
+                        const targetTop = e.target.getBoundingClientRect().top + window.scrollY;
+                        let offsetY = 0;
+                        activateCodeTab(link);
+                        getContentTabHeight();
+                        for(const [idx, codeTab] of Object.entries(codeTabParameters)) {
+                            if (codeTab.elementTop < targetTop) {
+                                offsetY += codeTab.elementHeightDifference;
+                            }
+                        }
+                        window.scrollTo({
+                            top: window.scrollY + offsetY,
+                            behavior: "instant"
+                        });
+                        getContentTabHeight();
+                        offsetY = 0;
+                    })
+                });
+            });
+        }
     }
 
     /**
@@ -122,6 +142,47 @@ const initCodeTabs = () => {
             null,
             `${url}?${queryParams}${window.location.hash}`
         );
+    }
+
+    const addObserversToCodeTabs = () => {
+        const tabContentList = document.querySelectorAll('.tab-content');
+        const resizeObserver = new ResizeObserver((entries) => {
+            entries.forEach((entry, idx) => {
+                if (entry?.contentBoxSize?.[0]) {
+                    const elementTop = entry.target.getBoundingClientRect().top + window.scrollY;
+                    const elementCurrentHeight = entry.target.getBoundingClientRect().height;
+                    const elementHeightDifference =  elementCurrentHeight - codeTabParameters[idx].elementCurrentHeight;
+                    codeTabParameters[idx] = {
+                        elementTop,
+                        elementCurrentHeight,
+                        elementHeightDifference: elementHeightDifference,
+                    }
+                }
+            })
+        });
+        tabContentList.forEach((codeTabsElement) => {
+            resizeObserver.observe(codeTabsElement);
+        })
+    }
+
+    const getContentTabHeight = () => {
+        const tabContentList = document.querySelectorAll('.tab-content');
+        tabContentList.forEach((tabContentElement, idx) => {
+            if (codeTabParameters[idx]) {
+                const elementCurrentHeight = tabContentElement.getBoundingClientRect().height;
+                const elementHeightDifference = elementCurrentHeight - codeTabParameters[idx].elementCurrentHeight;
+                codeTabParameters[idx] = {
+                    elementTop: codeTabParameters[idx].elementTop,
+                    elementCurrentHeight,
+                    elementHeightDifference: elementHeightDifference,
+                }
+            } else {
+                codeTabParameters[idx] = {
+                    elementCurrentHeight: tabContentElement.getBoundingClientRect().height,
+                    ...codeTabParameters[idx]
+                }
+            }
+        });
     }
 
     init()
