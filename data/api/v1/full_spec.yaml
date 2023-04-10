@@ -3769,6 +3769,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
             selected tags in the format of `<source_org_name>:::<selected tag 1>///<selected
@@ -7230,6 +7234,10 @@ components:
           type: string
         public_id:
           description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
           type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
@@ -31077,10 +31085,11 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
-        To make sure you receive all records, check if the value of `next_record_id`
-        is\nset in the response. If it is, make another request and pass `next_record_id`
-        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+      description: "Get hourly usage attribution. Multi-region data is available starting
+        March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive
+        all records, check if the value of `next_record_id` is\nset in the response.
+        If it is, make another request and pass `next_record_id` as a parameter.\nPseudo
+        code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
         next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
@@ -31612,10 +31621,11 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
-        To make sure you receive all records, check if the value of `next_record_id`
-        is\nset in the response. If it is, make another request and pass `next_record_id`
-        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+      description: "Get monthly usage attribution. Multi-region data is available
+        starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you
+        receive all records, check if the value of `next_record_id` is\nset in the
+        response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo
+        code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
         next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
