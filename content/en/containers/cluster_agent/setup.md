@@ -41,7 +41,7 @@ Then, upgrade your Datadog Helm chart.
 
 This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
 
-This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token used by setting the `clusterAgent.token` configuration. You can alternatively set this by referencing the name of an existing `Secret` containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
+This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token using the `clusterAgent.token` configuration. You can alternatively set this by referencing the name of an existing `Secret` containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
 
 When set manually, this token must be 32 alphanumeric characters.
 
@@ -70,7 +70,7 @@ It can be managed explicitly by the `DatadogAgent` configuration:
 
 The Operator creates the necessary RBACs, deploys the Cluster Agent, and modifies the Agent DaemonSet configuration.
 
-This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token used by setting the `global.clusterAgentToken` field. You can alternatively set this by referencing the name of an existing `Secret` and the data key containg this token.
+This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token by setting the `global.clusterAgentToken` field. You can alternatively set this by referencing the name of an existing `Secret` and the data key containing this token.
 
   ```yaml
   apiVersion: datadoghq.com/v2alpha1

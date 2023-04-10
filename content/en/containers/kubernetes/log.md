@@ -132,7 +132,7 @@ datadog:
     containerCollectAll: true
 ```
 
-You can set the `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default) you need to specify Autodiscovery log configurations to enable log collection.
+You can set the `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
 
 ### Unprivileged
 
@@ -170,7 +170,7 @@ spec:
       containerCollectAll: true
 ```
 
-See the sample [manifest with logs and metrics collection enabled][1] for a complete example. You can set the `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default) you need to specify Autodiscovery log configurations to enable log collection.
+See the sample [manifest with logs and metrics collection enabled][1] for a complete example. You can set the `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
 
 Then apply the new configuration:
 

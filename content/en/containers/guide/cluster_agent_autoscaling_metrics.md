@@ -46,7 +46,7 @@ As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-To enable the external metrics server with your Cluster Agent in Helm, update your [values.yaml][1] file with the following configurations. Provide a valid Datadog API Key, Application Key, and set the `clusterAgent.metricsProvider.enabled` to `true`. Once done redeploy your Datadog Helm chart:
+To enable the external metrics server with your Cluster Agent in Helm, update your [values.yaml][1] file with the following configurations. Provide a valid Datadog API Key, Application Key, and set the `clusterAgent.metricsProvider.enabled` to `true`. Then redeploy your Datadog Helm chart:
 
   ```yaml
   datadog:
@@ -65,7 +65,7 @@ To enable the external metrics server with your Cluster Agent in Helm, update yo
 
 This automatically updates the necessary RBAC configurations and sets up the corresponding `Service` and `APIService` for Kubernetes to use.
 
-The keys can alternatively be set by referencing the names of pre-created `Secrets` containing the data keys `api-key` and `app-key`  with the configurations `datadog.apiKeyExistingSecret` and `datadog.appKeyExistingSecret`.
+The keys can alternatively be set by referencing the names of pre-created `Secrets` containing the data keys `api-key` and `app-key` with the configurations `datadog.apiKeyExistingSecret` and `datadog.appKeyExistingSecret`.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
