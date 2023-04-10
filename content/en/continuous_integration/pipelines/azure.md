@@ -63,4 +63,3 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: https://docs.datadoghq.com/continuous_integration/pipelines/azure/#setting-custom-tags
-[7]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
