@@ -74,11 +74,11 @@ export function closeMobileNav(){
 }
 
 export function setMobileNav () {
-    const dataPath = window.location.pathname.slice(1,-1)
+    const pathName = window.location.pathname.slice(1,-1)
     let mobileSelection = ''
 
     // redirect the AGENT/aggregating agent path to observability_pipelines/integrations/... on mobile nav
-    if(dataPath.includes('observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker')){
+    if(pathName.includes('observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker')){
         const observabilityPipelineMobile = document.querySelector('#mobile-nav a[data-path$="observability_pipelines"]');
 
         mobileSelection = observabilityPipelineMobile.nextElementSibling.querySelector(
@@ -87,10 +87,10 @@ export function setMobileNav () {
     }else{
         const hash = window.location.hash
         const  hrefSelector = hash ? `[href$="${hash}"]`: ''
-        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]${hrefSelector}`) || false
+        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${pathName}"]${hrefSelector}`) || false
     }
 
-    const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
+    const subMenu = document.querySelector(`#mobile-nav a[data-path="${pathName}"] + ul.d-none`)
 
     if (mobileSelection) {
         const parentMenu = mobileSelection.parentElement || false
@@ -101,7 +101,7 @@ export function setMobileNav () {
         }else if (parentMenu){
             openMenu(parentMenu)
         }
-    }else if(!mobileSelection && dataPath.match(/api\/latest$/)){
+    }else if(!mobileSelection && pathName.match(/api\/latest$/)){
         // on `api/latest` path, open "Overview" mobile nav dropdown menu by default
         const firstMobileNavDropdown = document.querySelector('#mobile-nav .dropdown-menu')
         openMenu(firstMobileNavDropdown)

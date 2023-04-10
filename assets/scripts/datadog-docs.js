@@ -378,7 +378,8 @@ window.addEventListener('click', (event) => {
     rulesListClickHandler(event, 'default_rules');
 });
 
-if(!document.body.classList.contains('api')){
+if(!window.location.hash){
+    // runs onload for all pages that dont have a `hash` in the url.
     window.onload = function () {
         getPathElement();
         setMobileNav();
