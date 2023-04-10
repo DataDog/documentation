@@ -22,7 +22,7 @@ If you would like to be added to the Windows Private Location beta, reach out to
 
 ## Overview
 
-Private locations allow you to **monitor internal-facing applications** or private URLs that aren’t accessible from the public internet. 
+Private locations allow you to **monitor internal-facing applications** or private URLs that aren't accessible from the public internet. 
 
 {{< img src="getting_started/synthetics/pl-list.png" alt="List of Private Locations in your Settings page" style="width:100%;">}}
 
@@ -42,11 +42,11 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. Install [Docker][4] on a Unix-like machine, or use another container runtime such as [Podman][10].
+1. Install [Docker][4] on a Unix-like machine, or use another container runtime such as [Podman][5].
 
-   To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][11].
+   To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][6].
 
-2. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
+2. In the Datadog site, hover over **[UX Monitoring][7]** and select **Settings** > **Private Locations**. 
 3. Click **Add Private Location**.
 4. Fill out your private location details. Only `Name` and `API key` fields are mandatory. If you are configuring a private location for Windows, select **This is a Windows Private Location**.
 5. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker.
@@ -54,7 +54,7 @@ Your private locations test results display identically to your managed location
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
     - If you want to block reserved IPs, toggle **Block reserved IPs** and enter the IP ranges. 
     
-   For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
+   For more information, see [Private Locations Configuration Options][8] and [Run Synthetic Tests from Private Locations][9]. 
 7. Copy and paste your private location configuration file to your working directory.
 
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the **Private Locations** creation form. **You need to be able to reference the secrets again in order to add more workers to your private location**. 
@@ -86,7 +86,7 @@ Your private locations test results display identically to your managed location
 
 Use your new private location just like a managed location in your Synthetic tests.
 
-1. Create an [API test][2], [multistep API test][8], or [browser test][9] on any internal endpoint or application you want to monitor.
+1. Create an [API test][2], [multistep API test][10], or [browser test][11] on any internal endpoint or application you want to monitor.
 2. Under **Private Locations**, select your new private location:
 
     {{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign a Synthetic test to a private location" style="width:100%;">}}
@@ -101,10 +101,10 @@ Use your new private location just like a managed location in your Synthetic tes
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
-[5]: https://app.datadoghq.com/synthetics/list
-[6]: /synthetics/private_locations/configuration/#configuration-options
-[7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
-[8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
-[9]: /getting_started/synthetics/browser_test
-[10]: https://podman.io/
-[11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
+[5]: https://podman.io/
+[6]: https://app.vagrantup.com/ubuntu/boxes/jammy64
+[7]: https://app.datadoghq.com/synthetics/list
+[8]: /synthetics/private_locations/configuration/#configuration-options
+[9]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
+[10]: /getting_started/synthetics/api_test#create-a-multistep-api-test
+[11]: /getting_started/synthetics/browser_test

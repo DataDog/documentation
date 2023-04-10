@@ -16,7 +16,7 @@ Trace Explorer search consists of a time range and a search query that combines 
 
 ## Search query
 
-For example, to find spans from a web store service, with an error status, over the past thirty minutes, create a custom query like `service:web-store status:error` and set the time range to the `Past 30 minutes`:
+For example, to find spans from a web store service, with an error status, over the past thirty minutes, create a custom query like `service:web-store status:error`, and set the time range to the `Past 30 minutes`:
 
 {{< img src="tracing/trace_explorer/search/trace_explorer_list_search.png" alt="Trace Explorer list search"  style="width:100%;">}}
 
@@ -26,6 +26,7 @@ Select a top list view, and group the query by `resource` to see which specific 
 
 {{< site-region region="us,eu,us3,us5" >}}
 **Note**: `key:value` queries **do not** require that you [declare a facet][1] beforehand.
+
 {{< /site-region >}}
 
 ## Query Syntax
@@ -37,6 +38,6 @@ To begin searching for spans in the Trace Explorer, read the [query syntax docum
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_explorer/query_syntax#facets
+[1]: /tracing/trace_explorer/query_syntax/#facets
 [2]: /tracing/trace_explorer/query_syntax
 [3]: /dashboards/guide/custom_time_frames

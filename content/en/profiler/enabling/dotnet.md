@@ -11,7 +11,7 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting/dotnet'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
     - link: 'https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/'
@@ -21,7 +21,7 @@ aliases:
   - /tracing/profiler/enabling/dotnet/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to enabling the profiler.
+The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
 
 ## Requirements
 
@@ -57,12 +57,12 @@ The following profiling features are available in the following minimum versions
 | Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
 | Lock Contention profiling        | beta, 2.18.0+                       | .NET 5+      |
 | Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
-| [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
-| [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
+| [Code Hotspots][2]        | 2.7.0+                       | All supported runtime versions.      |
+| [Endpoint Profiling][3]            | 2.15.0+                       | All supported runtime versions.      |
 
 ## Installation
 
-If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
+If you are already using Datadog, upgrade your Agent to version 7.20.2+ or 6.20.2+. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
 
 Otherwise, install the profiler using the following steps, depending on your operating system.
 
@@ -351,9 +351,9 @@ You can configure the profiler using the following environment variables. Note t
 
 | Environment variable                             | Type          | Description                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_ENV`                   | String        | The [environment][3] name, for example, `production`. If not set, will be `unspecified-environment` |
-| `DD_SERVICE`               | String        | The [service][3] name, for example, `web-backend`. If this is not specified, the .NET Profiler tries to determine the service name automatically from the application name (process entry assembly or process name).    |
-| `DD_VERSION`               | String        | The [version][3] of your service. If not set, will be `unspecified-version` |
+| `DD_ENV`                   | String        | The [environment][4] name, for example, `production`. If not set, will be `unspecified-environment` |
+| `DD_SERVICE`               | String        | The [service][4] name, for example, `web-backend`. If this is not specified, the .NET Profiler tries to determine the service name automatically from the application name (process entry assembly or process name).    |
+| `DD_VERSION`               | String        | The [version][4] of your service. If not set, will be `unspecified-version` |
 | `DD_TAGS`                  | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
 | `DD_AGENT_HOST`            | String        | Sets the host where profiles are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to `localhost`.  |
 | `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to`8126`.  |
@@ -377,14 +377,12 @@ Starting with IIS 10, you can set environment variables for each IIS application
 
 ## Further Reading
 
-The [Getting Started with Profiler][4] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[3]: /getting_started/tagging/unified_service_tagging
-[4]: /getting_started/profiler/
-[5]: /tracing/trace_collection/
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[1]: /tracing/trace_collection/
+[2]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[3]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[4]: /getting_started/tagging/unified_service_tagging
+[5]: /getting_started/profiler/

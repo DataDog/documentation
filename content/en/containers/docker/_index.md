@@ -39,15 +39,15 @@ Images are available for 64-bit x86 and Arm v8 architectures.
 
 | ECR-Public    | Docker Hub          | GCR        |
 |----------------|--------------|-----------|
-| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
- |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
+| [Agent v6+][3]<br>`docker pull public.ecr.aws/datadog/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][4]<br>`docker pull gcr.io/datadoghq/agent`          |
+ |[Agent v5][5]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][7]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
 ## Setup
 
-If you haven’t installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10].
+If you haven't installed the Docker Agent, follow the [in-app installation instructions][8] or see below. For [supported versions][9], see the Agent documentation. Use the one-step install command. Replace `<YOUR_DATADOG_API_KEY>` with your [Datadog API key][10].
 
 {{< tabs >}}
 {{% tab "Standard" %}}
@@ -143,7 +143,7 @@ The Agent's [main configuration file][13] is `datadog.yaml`. For the Docker Agen
 | `DD_ENV`             | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                                                  |
 | `DD_HOSTNAME`        | Hostname to use for metrics (if autodetection fails).                                                                                                                                                                                                                                                                                             |
 | `DD_HOSTNAME_FILE`        | In some environments, auto-detection of the hostname is not adequate, and you cannot set the value with environment variables. In these cases, you can use a file on the host to provide an appropriate value. If `DD_HOSTNAME` is set to a non-empty value, this option is ignored.                                              |
-| `DD_TAGS`            | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`.                                                                                                                                                                                                                                                                 |
+| `DD_TAGS`            | Host tags separated by spaces. For example: `key1:value1 key2:value2`.                                                                                                                                                                                                                                                                 |
 | `DD_SITE`            | Destination site for your metrics, traces, and logs. Set your Datadog site to: `{{< region-param key="dd_site" >}}`. Defaults to `datadoghq.com`.                                                                                                                                                                                                |
 | `DD_DD_URL`          | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_URL` (6.36+/7.36+)            | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                                                                                                                                                    |
@@ -278,11 +278,11 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 
 [1]: /agent/
 [2]: https://hub.docker.com/r/datadog/agent
-[3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
-[4]: https://gallery.ecr.aws/datadog/agent
-[5]: https://hub.docker.com/r/datadog/docker-dd-agent
-[6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
-[7]: https://gallery.ecr.aws/datadog/docker-dd-agent
+[3]: https://gallery.ecr.aws/datadog/agent
+[4]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/agent
+[5]: https://gallery.ecr.aws/datadog/docker-dd-agent
+[6]: https://hub.docker.com/r/datadog/docker-dd-agent
+[7]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [8]: https://app.datadoghq.com/account/settings#agent/docker
 [9]: /agent/basic_agent_usage/#supported-os-versions
 [10]: https://app.datadoghq.com/organization-settings/api-keys

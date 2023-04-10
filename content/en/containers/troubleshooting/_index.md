@@ -18,15 +18,15 @@ There are three methods of deploying the Agent:
 
 3. In a [Kubernetes environment][2]
 
-These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
+These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][5] for further assistance. 
 
-For details on Agent release updates or changes, refer to Datadog’s [release notes][7].
+For details on Agent release updates or changes, refer to Datadog's [release notes][6].
 
 ## General issues
 
 ### Environment variables are not being set, and tags are not injected
 
-A useful way to inject [environment variables][8] or to configure a DogStatsD library is to implement the [Admission Controller][9] feature on the Cluster Agent. **Note**: The Cluster Agent must be deployed and running _before_ the application is deployed.
+A useful way to inject [environment variables][7] or to configure a DogStatsD library is to implement the [Admission Controller][8] feature on the Cluster Agent. **Note**: The Cluster Agent must be deployed and running _before_ the application is deployed.
 
 ### Metrics are not appearing on the Datadog Web Platform
 
@@ -36,17 +36,17 @@ Verify that the following are true:
 
 - There are no proxies or firewalls that might impede the Agent from accessing the endpoint. 
 
-- Agent has [Autodiscovery][10] enabled.
+- Agent has [Autodiscovery][9] enabled.
 
 
 ### Logs are not collected
 
-There are two [environment variables][8] that can effect whether logs are collected and from which containers:
+There are two [environment variables][7] that can effect whether logs are collected and from which containers:
 
 - Set `DD_LOGS_ENABLED` to `true` to collect logs. 
 - Additionally, set `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true` to collect all logs from all containers.
 
-To exclude logs (and other features) from collection, see the [Container Discovery Management guide][11].
+To exclude logs (and other features) from collection, see the [Container Discovery Management guide][10].
 
 ### Cannot connect to the Kubelet
 
@@ -62,7 +62,7 @@ First, ensure that the Cluster Agent is deployed and able to send data to the no
 
 Then, review the query used to scale the external metrics in the Metrics Summary. Only valid queries autoscale. If there are multiple queries, **all** queries are ignored if **any** of the queries are invalid.
 
-When reaching out for further assistance for HPA metrics, provide the following to [Datadog support][6]:
+When reaching out for further assistance for HPA metrics, provide the following to [Datadog support][5]:
   - A `describe` output of the HPA manifest:
       ```
       $ kubectl describe hpa > hpa.log
@@ -83,9 +83,9 @@ Ensure that your IAM policy is updated.
 
 ### Logs are not collected in Fargate
 
-  - [ECS][12]: Ensure that the log router is attached to the container from which you would like to collect logs.
+  - [ECS][11]: Ensure that the log router is attached to the container from which you would like to collect logs.
 
-  - [EKS][13]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Kinesis Data Firehose][14]. Using Kinesis Data Firehose to collect logs requires the successful implementation of the Kinesis Data Firehose delivery stream, as well as some command line tools. 
+  - [EKS][12]: There are two common ways for the Agent to collect logs in an EKS Fargate environment: Log forwarding with CloudWatch logs, and log forwarding through [Kinesis Data Firehose][13]. Using Kinesis Data Firehose to collect logs requires the successful implementation of the Kinesis Data Firehose delivery stream, as well as some command line tools. 
  
 
 ## Kubernetes
@@ -108,7 +108,7 @@ After you open a support ticket, you may be asked for the following types of inf
 
 ### Agent Flare 
 
-You can use the [`flare`][15] command to send troubleshooting information to Datadog support.
+You can use the [`flare`][14] command to send troubleshooting information to Datadog support.
 
 **Node Agent flare**
 
@@ -159,14 +159,13 @@ $ docker exec -it <AGENT_CONTAINER_ID> curl -k -v "<METRIC_ENDPOINT>"
 [2]: https://docs.datadoghq.com/containers/amazon_ecs/?tab=awscli
 [3]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#
 [4]: https://docs.datadoghq.com/integrations/eks_fargate
-[5]: https://docs.datadoghq.com/containers/kubernetes/
-[6]: https://docs.datadoghq.com/help/
-[7]: https://app.datadoghq.com/release-notes
-[8]: https://docs.datadoghq.com/agent/guide/environment-variables/#overview
-[9]: https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=operator
-[10]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[11]: https://docs.datadoghq.com/agent/guide/autodiscovery-management/?tab=containerizedagent
-[12]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#log-collection
-[13]: https://docs.datadoghq.com/integrations/eks_fargate/#log-collection
-[14]: https://docs.datadoghq.com/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/#overview
-[15]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare
+[5]: https://docs.datadoghq.com/help/
+[6]: https://app.datadoghq.com/release-notes
+[7]: https://docs.datadoghq.com/agent/guide/environment-variables/#overview
+[8]: https://docs.datadoghq.com/containers/cluster_agent/admission_controller/?tab=operator
+[9]: https://docs.datadoghq.com/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[10]: https://docs.datadoghq.com/agent/guide/autodiscovery-management/?tab=containerizedagent
+[11]: https://docs.datadoghq.com/integrations/ecs_fargate/?tab=webui#log-collection
+[12]: https://docs.datadoghq.com/integrations/eks_fargate/#log-collection
+[13]: https://docs.datadoghq.com/logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/#overview
+[14]: https://docs.datadoghq.com/agent/troubleshooting/send_a_flare

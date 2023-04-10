@@ -108,8 +108,8 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
 
 **Note:** Datadog Operator v1.0.0 or greater is required.
 
-[1]: https://github.com/DataDog/datadog-operator
 
+[1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
 {{% tab "Kubernetes without Helm" %}}
 
@@ -188,8 +188,6 @@ To enable Universal Service Monitoring with the [Datadog Operator][1], update yo
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
-           - name: HOST_PROC
-             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -342,7 +340,6 @@ docker run --cgroupns host \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
--e HOST_PROC=/host/root/proc \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -367,13 +364,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
-     - HOST_PROC: '/host/proc'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
@@ -420,8 +415,8 @@ must not have a running `apparmor` instance.
 
 If the operating system does not have a running `apparmor` instance, then use the same `docker-compose.yml` file from the `Docker-Compose` [section][1] beside the field `security_opt`.
 
-[1]: /universal_service_monitoring/?tab=dockercompose#enabling-universal-service-monitoring
 
+[1]: /universal_service_monitoring/?tab=dockercompose#enabling-universal-service-monitoring
 {{% /tab %}}
 {{% tab "Configuration files (Linux)" %}}
 

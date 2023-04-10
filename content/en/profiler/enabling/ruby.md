@@ -11,7 +11,7 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting/ruby'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
@@ -31,12 +31,12 @@ The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
 - Alpine Linux (musl libc) x86-64, aarch64
 
-You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) Linux system utility installed.
+You also need either the [`pkg-config`][2] or the [`pkgconf`][3] Linux system utility installed.
 This utility is available on the software repositories of most Linux distributions. For example:
 
-- The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
-- The `pkgconf` package is available for [Arch](https://archlinux.org/packages/?q=pkgconf)- and [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf)-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/)- and [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config)-based Linux
+- The `pkg-config` package is available for [Homebrew][4], and [Debian][5]- and [Ubuntu][6]-based Linux
+- The `pkgconf` package is available for [Arch][7]- and [Alpine][8]-based Linux
+- The `pkgconf-pkg-config` package is available for [Fedora][9]- and [Red-Hat][10]-based Linux
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -44,7 +44,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
+1. If you are already using Datadog, upgrade your agent to version [7.20.2][11]+ or [6.20.2][12]+.
 
 2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
 
@@ -105,20 +105,27 @@ end
     ```
 
 
-4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][4].
+4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][13].
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][14] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[4]: https://app.datadoghq.com/profiling
-[5]: /getting_started/profiler/
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[2]: https://www.freedesktop.org/wiki/Software/pkg-config/
+[3]: https://github.com/pkgconf/pkgconf
+[4]: https://formulae.brew.sh/formula/pkg-config
+[5]: https://packages.debian.org/search?keywords=pkg-config
+[6]: https://packages.ubuntu.com/search?keywords=pkg-config
+[7]: https://archlinux.org/packages/?q=pkgconf
+[8]: https://pkgs.alpinelinux.org/packages?name=pkgconf
+[9]: https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/
+[10]: https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config
+[11]: https://app.datadoghq.com/account/settings#agent/overview
+[12]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[13]: https://app.datadoghq.com/profiling
+[14]: /getting_started/profiler/

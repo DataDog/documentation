@@ -11,7 +11,7 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting/java'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 aliases:
@@ -43,7 +43,7 @@ The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there
 Minimum JDK versions:
 - OpenJDK 11+
 - Oracle JDK 11+
-- [OpenJDK 8 (version 1.8.0.262/8u262+)][3]
+- [OpenJDK 8 (version 1.8.0.262/8u262+)][1]
 - Azul Zulu 8 (version 1.8.0.212/8u212+).
 
 JFR is not supported in OpenJ9.
@@ -52,13 +52,13 @@ JFR is not supported in OpenJ9.
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
-Additional requirements for profiling [Code Hotspots][11]:
+Additional requirements for profiling [Code Hotspots][2]:
  - OpenJDK 11+ and `dd-trace-java` version 0.65.0+; or
  - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+.
 
-[3]: /profiler/profiler_troubleshooting/#java-8-support
-[11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
+[1]: /profiler/profiler_troubleshooting/#java-8-support
+[2]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -70,7 +70,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][4]+ or [6.20.2][5]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
+1. If you are already using Datadog, upgrade your Agent to version [7.20.2][3]+ or [6.20.2][4]+. If you don't have APM enabled to set up your application to send data to Datadog, in your Agent, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
@@ -113,7 +113,7 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-    **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][6]:
+    **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][5]:
 
     ```shell
     # Good:
@@ -122,7 +122,7 @@ java \
     java -jar my-service.jar -javaagent:dd-java-agent.jar ...
     ```
 
-4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][7].
+4. After a minute or two, you can visualize your profiles on the [Datadog APM > Profiling page][6].
 
 ### Enabling CPU profiler engine options
 
@@ -206,7 +206,7 @@ The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoi
 
 ### Datadog profiler allocation engine
 
-In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is turned off by default because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
+In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is turned off by default because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][7].
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint. It is disabled by default, but you can enable it with:
 
@@ -256,14 +256,14 @@ You can configure the profiler using the following environment variables:
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
 | `DD_PROFILING_ENABLED`                           | Boolean       | Alternate for `-Ddd.profiling.enabled` argument. Set to `true` to enable profiler.               |
 | `DD_PROFILING_ALLOCATION_ENABLED`                | Boolean       | Alternate for `-Ddd.profiling.allocation.enabled` argument. Set to `true` to enable the allocation profiler. It requires the profiler to be enabled already. |
-| `DD_ENV`                                         | String        | The [environment][9] name, for example: `production`. |
-| `DD_SERVICE`                                     | String        | The [service][9] name, for example, `web-backend`. |
-| `DD_VERSION`                                     | String        | The [version][9] of your service. |
+| `DD_ENV`                                         | String        | The [environment][8] name, for example: `production`. |
+| `DD_SERVICE`                                     | String        | The [service][8] name, for example, `web-backend`. |
+| `DD_VERSION`                                     | String        | The [version][8] of your service. |
 | `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api, team:intake`.  |
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][10] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][9] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -271,12 +271,10 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 
 [1]: /tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
-[3]: /profiler/profiler_troubleshooting/#java-8-support
-[4]: https://app.datadoghq.com/account/settings#agent/overview
-[5]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[7]: https://app.datadoghq.com/profiling
-[8]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
-[9]: /getting_started/tagging/unified_service_tagging
-[10]: /getting_started/profiler/
-[11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[3]: https://app.datadoghq.com/account/settings#agent/overview
+[4]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[5]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[6]: https://app.datadoghq.com/profiling
+[7]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
+[8]: /getting_started/tagging/unified_service_tagging
+[9]: /getting_started/profiler/

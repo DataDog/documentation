@@ -26,7 +26,7 @@ further_reading:
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
 
-Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product’s entire lifecycle. By offering code-free, reliable end-to-end testing and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
+Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product's entire lifecycle. By offering code-free, reliable end-to-end testing and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
 
 ## Test with ease and speed
 
@@ -49,23 +49,23 @@ Fast-track your application development by testing and troubleshooting in one pl
 
 </br>
 
-You can use the [Datadog Terraform provider][10] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][11] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][11].
+You can use the [Datadog Terraform provider][5] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][6] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][6].
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs the [Continuous Testing Explorer][11]. 
+Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][7] by looking at executed jobs the [Continuous Testing Explorer][6]. 
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 
 ## Use the Synthetic Monitoring & Continuous Testing Explorer
 
-Create [search queries and visualizations][11] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
+Create [search queries and visualizations][6] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
 
 {{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
-Once you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][14] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Continuous Testing Explorer][11].
+Once you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][8] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Continuous Testing Explorer][6].
 
 ## Further reading
 
@@ -75,8 +75,7 @@ Once you have configured some [Synthetic tests][4], see the documentation for yo
 [2]: /synthetics/browser_tests
 [3]: /continuous_testing/settings
 [4]: /synthetics/
-[10]: https://registry.terraform.io/providers/DataDog/datadog/latest/
-[11]: /continuous_testing/explorer
-[12]: /synthetics/apm/
-[13]: https://app.datadoghq.com/synthetics/create#
-[14]: /continuous_testing/cicd_integrations/configuration
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/
+[6]: /continuous_testing/explorer
+[7]: /synthetics/apm/
+[8]: /continuous_testing/cicd_integrations/configuration

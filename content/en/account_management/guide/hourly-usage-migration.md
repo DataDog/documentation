@@ -119,6 +119,7 @@ The families and usage types:
     * `billable_ingested_bytes`
     * `indexed_events_count`
     * `ingested_events_bytes`
+    * `logs_forwarding_events_bytes`
     * `logs_live_indexed_count`
     * `logs_live_ingested_bytes`
     * `logs_rehydrated_indexed_count`
@@ -473,6 +474,6 @@ parameter `filter[include_descendants]` to request data for child organizations.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://jsonapi.org/format/
 [2]: /api/latest/usage-metering/#get-hourly-usage-for-hosts-and-containers
-

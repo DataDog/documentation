@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [GCP integration][1]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run applications with apurpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [GCP integration][1]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
   <div class="alert alert-warning">This feature is in public beta. You can provide feedback through a <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">feedback form</a>, or through your standard support channels. During the beta period, Cloud Run monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
 
@@ -19,7 +19,7 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API Key][2] and are using a programming language [supported by a Datadog tracing library][3].
 
 ### 1. Instrument your application
 
@@ -47,15 +47,15 @@ CMD ["/path/to/your-go-binary"]
 ```
 
 #### Install tracing library
-Follow [these instructions][2] to install and configure the Go tracing library in your application to capture and submit traces. 
+Follow [these instructions][1] to install and configure the Go tracing library in your application to capture and submit traces. 
 
 
-[Sample code for a simple Go application][1].
+[Sample code for a simple Go application][2].
 
 
-[1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
 
+[1]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[2]: https://github.com/DataDog/crpb/tree/main/go
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -82,13 +82,13 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["ddtrace-run", "python", "app.py"]
 ```
 #### Install tracing library
-Follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces. 
+Follow [these instructions][1] to install and configure the Python tracing library in your application to capture and submit traces. 
 
-[Sample code for a simple Python application][1].
+[Sample code for a simple Python application][2].
 
-[1]: https://github.com/DataDog/crpb/tree/main/python
-[2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
+[1]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+[2]: https://github.com/DataDog/crpb/tree/main/python
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -120,13 +120,13 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
 #### Install tracing library
-Follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces. 
+Follow [these instructions][1] to install and configure the Node tracing library in your application to capture and submit traces. 
 
-[Sample code for a simple Node.js application][1].
+[Sample code for a simple Node.js application][2].
 
-[1]: https://github.com/DataDog/crpb/tree/main/js
-[2]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
+[1]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+[2]: https://github.com/DataDog/crpb/tree/main/js
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -152,13 +152,13 @@ CMD ["./mvnw", "spring-boot:run"]
 ```
 
 #### Install tracing library
-Follow [these instructions][2] to install and configure the Java tracing library in your application to capture and submit traces. 
+Follow [these instructions][1] to install and configure the Java tracing library in your application to capture and submit traces. 
 
-[Sample code for a simple Java application][1].
+[Sample code for a simple Java application][2].
 
-[1]: https://github.com/DataDog/crpb/tree/main/java
-[2]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 
+[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+[2]: https://github.com/DataDog/crpb/tree/main/java
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -186,9 +186,9 @@ CMD ["dotnet", "helloworld.dll"]
 #### Install tracing library
 Follow the instructions to install and configure the [.NET Core tracing library][1] and the [.NET Framework tracing library][2]. 
 
+
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
 [2]: /tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
-
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -215,21 +215,21 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 #### Install tracing library
 
-Follow [these instructions][2] to install and configure the Ruby tracing library in your application to capture and submit traces. 
+Follow [these instructions][1] to install and configure the Ruby tracing library in your application to capture and submit traces. 
 
-[Sample code for a simple Ruby application][1].
+[Sample code for a simple Ruby application][2].
 
-[1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
-[2]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
 
+[1]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+[2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
 #### 1.b Instrument using buildpack
 
-[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the GCP container registry and Datadog serverless buildpack.
+[`Pack Buildpacks`][4] provide a convenient way to package your container without using a Dockerfile. This example uses the GCP container registry and Datadog serverless buildpack.
 
-**Note**: Follow the instructions to install the [tracing library][2] for your language before running the buildpack.
+**Note**: Follow the instructions to install the [tracing library][3] for your language before running the buildpack.
 
 Build your application by running the following command:
 
@@ -245,7 +245,7 @@ Build your application by running the following command:
 ### 2. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [GCP Secret][10] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [GCP Secret][5] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
@@ -269,24 +269,24 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 ## Additional configurations
 
-- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
+- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][3] for more information.
 
 - **Logs:** If you use the [GCP integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][6]. For monitoring Cloud Run and other serverless applications, use [distribution][7] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][8]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
 ### Environment Variables
 
 | Variable | Description |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][7] - **Required**|
-| `DD_SITE` | [Datadog site][5] - **Required** |
+|`DD_API_KEY`| [Datadog API Key][9] - **Required**|
+| `DD_SITE` | [Datadog site][10] - **Required** |
 | `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_SERVICE`      | See [Unified Service Tagging][6].                                  |
-| `DD_VERSION`      | See [Unified Service Tagging][6].                                  |
-| `DD_ENV`          | See [Unified Service Tagging][6].                                  |
-| `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
-| `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
+| `DD_SERVICE`      | See [Unified Service Tagging][2].                                  |
+| `DD_VERSION`      | See [Unified Service Tagging][2].                                  |
+| `DD_ENV`          | See [Unified Service Tagging][2].                                  |
+| `DD_SOURCE`       | See [Unified Service Tagging][2].                                  |
+| `DD_TAGS`         | See [Unified Service Tagging][2].                                  |
 
 ## Troubleshooting
 
@@ -302,13 +302,12 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 
 [1]: /integrations/google_cloud_platform/#log-collection
-[2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
-[3]: https://buildpacks.io/docs/tools/pack/
-[4]: /metrics/custom_metrics/dogstatsd_metrics_submission/
-[5]: /getting_started/site/
-[6]: /getting_started/tagging/unified_service_tagging/
-[7]: /account_management/api-app-keys/#api-keys
-[8]: https://github.com/DataDog/crpb/tree/main
-[9]: /metrics/distributions/
-[10]: /metrics/#time-and-space-aggregation
-[11]: https://cloud.google.com/run/docs/configuring/secrets
+[2]: /getting_started/tagging/unified_service_tagging/
+[3]: /tracing/trace_collection/#for-setup-instructions-select-your-language
+[4]: https://buildpacks.io/docs/tools/pack/
+[5]: /metrics/#time-and-space-aggregation
+[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[7]: /metrics/distributions/
+[8]: https://cloud.google.com/run/docs/configuring/secrets
+[9]: /account_management/api-app-keys/#api-keys
+[10]: /getting_started/site/

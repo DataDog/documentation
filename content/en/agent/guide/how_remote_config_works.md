@@ -79,7 +79,7 @@ The following products and features are supported with Remote Config:
 ### Observability Pipelines
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI,  rolling out your configuration changes to OPW instances running in your environment.
+- **Remotely deploy and update [Observability Pipelines Workers][2] (OPW)**: Build and edit pipelines in the Datadog UI,  rolling out your configuration changes to OPW instances running in your environment.
 
 ## Security Considerations
  
@@ -97,7 +97,7 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Prerequisites
 
 
-- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate) or higher installed on your hosts or containers. 
+- Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers. 
 - For features that use tracing libraries, the following minimum versions of Datadog tracing libraries:
 
 
@@ -110,11 +110,11 @@ Datadog implements the following safeguards, designed to protect the confidentia
 ### Setup
 To activate Remote Configuration: 
 
-1. Ensure your RBAC permissions include [`org_management`][9], so you can enable Remote Configuration for your organization.
+1. Ensure your RBAC permissions include [`org_management`][3], so you can enable Remote Configuration for your organization.
 
-2. Ensure your RBAC permissions include [`api_keys_write`][3], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration. 
+2. Ensure your RBAC permissions include [`api_keys_write`][4], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration. 
 
-3. On the [Remote Configuration][4] page, enable Remote Configuration. This enables Datadog resources across your organization to receive configurations from Datadog. 
+3. On the [Remote Configuration][5] page, enable Remote Configuration. This enables Datadog resources across your organization to receive configurations from Datadog. 
 
 4. Select an existing API key or create a new API key, and enable the Remote Config capability on the key:
 
@@ -131,6 +131,14 @@ remote_configuration:
   enabled: true
 ```
 
+To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
+
 6. Restart your Agent for the changes to take effect.  
 
 {{% /tab %}}
@@ -140,26 +148,25 @@ Add the following to your Datadog Agent manifest, specifying the API key that ha
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
 ```
+
+To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
 {{% /tab %}}
 {{< /tabs >}}
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
-- [CWS default agent rules][5] update automatically as released.
-- [APM Agent-level sampling rates][6] are applied.  
-- [Dynamic Instrumentation][7] is enabled.
-- [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
+- [CWS default agent rules][6] update automatically as released.
+- Datadog Remote Instrumentation is enabled.
+- [APM Agent-level sampling rates][7] are applied.  
+- [Dynamic Instrumentation][8] is enabled.
+- [ASM 1-Click enablement, IP blocking, and attack pattern updates][9] are enabled.
 
 
-[1]: /getting_started/site/
-[2]: /help/
-[3]: /account_management/rbac/permissions#api-and-application-keys
-[4]: https://app.datadoghq.com/organization-settings/remote-config
-[5]: /security/default_rules/#cat-workload-security
-[6]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
-[7]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
-[8]: /security/application_security/how-appsec-works/#built-in-protection
-[9]: /account_management/rbac/permissions#access-management
-[10]: /observability_pipelines/#observability-pipelines-worker
 
 
 {{< /site-region >}}
@@ -167,3 +174,12 @@ After you perform these steps, your Agent requests its configuration from Datado
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+[1]: /getting_started/site/
+[2]: /observability_pipelines/#observability-pipelines-worker
+[3]: /account_management/rbac/permissions#access-management
+[4]: /account_management/rbac/permissions#api-and-application-keys
+[5]: https://app.datadoghq.com/organization-settings/remote-config
+[6]: /security/default_rules/#cat-workload-security
+[7]: /tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
+[8]: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
+[9]: /security/application_security/how-appsec-works/#built-in-protection

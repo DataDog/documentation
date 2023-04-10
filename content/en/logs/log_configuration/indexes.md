@@ -24,7 +24,7 @@ Log Indexes provide fine-grained control over your Log Management budget by allo
 
 {{< img src="logs/indexes/index_details.jpg" alt="index details"  style="width:70%;">}}
 
-You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], and [monitoring][6].
+You can use indexed logs for [faceted searching][2], [patterns][3], [analytics][4], and [monitoring][5].
 
 ## Multiple indexes
 
@@ -33,7 +33,7 @@ By default, each new account gets a single index representing a monolithic set o
 * Multiple [retention periods](#update-log-retention)
 * Multiple [daily quotas](#set-daily-quota), for finer budget control.
 
-The Log Explorer supports [queries across multiple indexes][7].
+The Log Explorer supports [queries across multiple indexes][6].
 
 ### Add indexes
 
@@ -73,17 +73,17 @@ Index filters allow dynamic control over which logs flow into which indexes.  Fo
 
 By default, logs indexes have no exclusion filter: that is to say all logs matching the Index Filter are indexed.
 
-But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][8] and can be used to [generate metrics][9] and [archived][10].
+But because your logs are not all and equally valuable, exclusion filters control which logs flowing in your index should be removed. Excluded logs are discarded from indexes, but still flow through the [Livetail][7] and can be used to [generate metrics][8] and [archived][9].
 
 To add an exclusion filter:
 
-1. Navigate to [Log Indexes][11].
+1. Navigate to [Log Indexes][10].
 2. Expand the pipeline for which you want to add an exclusion filter. 
 3. Click **Add an Exclusion Filter**.
 
 Exclusion filters are defined by a query, a sampling rule, and an active/inactive toggle:
 
-* Default **query** is `*`, meaning all logs flowing in the index would be excluded. Scope down exclusion filter to only a subset of logs [with a log query][12].
+* Default **query** is `*`, meaning all logs flowing in the index would be excluded. Scope down exclusion filter to only a subset of logs [with a log query][11].
 * Default **sampling rule** is `Exclude 100% of logs` matching the query. Adapt sampling rate from 0% to 100%, and decide if the sampling rate applies on individual logs, or group of logs defined by the unique values of any attribute.
 * Default **toggle** is active, meaning logs flowing in the index are actually discarded according to the exclusion filter configuration. Toggle this to inactive to ignore this exclusion filter for new logs flowing in the index.
 
@@ -97,14 +97,14 @@ Use drag and drop on the list of exclusion filters to reorder them according to 
 
 #### Switch off, switch on
 
-You might not need your DEBUG logs until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API][13] when required.
+You might not need your DEBUG logs until you actually need them when your platform undergoes an incident, or want to carefully observe the deployment of a critical version of your application. Setup a 100% exclusion filter on the `status:DEBUG`, and toggle it on and off from Datadog UI or through the [API][12] when required.
 
 {{< img src="logs/indexes/enable_index_filters.png" alt="enable index filters"  style="width:80%;">}}
 
 #### Keep an eye on trends
 
 What if you don't want to keep all logs from your web access server requests? You could choose to index all 3xx, 4xx, and 5xx logs, but exclude 95% of the 2xx logs: `source:nginx AND http.status_code:[200 TO 299]` to keep track of the trends.
-**Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][9], counting number of requests and tagged by status code, [browser][14] and [country][15].
+**Tip**: Transform web access logs into meaningful KPIs with a [metric generated from your logs][8], counting number of requests and tagged by status code, [browser][13] and [country][14].
 
 {{< img src="logs/indexes/sample_200.png" alt="enable index filters"  style="width:80%;">}}
 
@@ -114,8 +114,8 @@ You have millions of users connecting to your website everyday. And although you
 
 {{< img src="logs/indexes/sample_user_id.png" alt="enable index filters"  style="width:80%;">}}
 
-You can use APM in conjunction with Logs, thanks to [trace ID injection in logs][16]. As for users, you don't need to keep all your logs but making sure logs always give the full picture to a trace is critical for troubleshooting.
-Set up an exclusion filter applied to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure to use the [trace ID remapper][17] upstream in your pipelines.
+You can use APM in conjunction with Logs, thanks to [trace ID injection in logs][15]. As for users, you don't need to keep all your logs but making sure logs always give the full picture to a trace is critical for troubleshooting.
+Set up an exclusion filter applied to logs from your instrumented service (`service:my_python_app`) and exclude logs for 50% of the `Trace ID` - make sure to use the [trace ID remapper][16] upstream in your pipelines.
 
 {{< img src="logs/indexes/sample_trace_id.png" alt="enable index filters"  style="width:80%;">}}
 
@@ -137,14 +137,16 @@ In the following example:
 ## Update log retention
 
 The index retention setting determines how long logs are stored and searchable in Datadog. You can set the retention to any value allowed in your account configuration.
-To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`.
+To add retentions that are not in your current contract, contact Customer Success at: `success@datadoghq.com`. 
 
 {{< img src="logs/indexes/log_retention.png" alt="index details"  style="width:70%;">}}
+
+**Note**: To use retentions which are not in your current contract, [the option][17] must be enabled by an admin in your organisation settings.
 
 ## Set daily quota
 
 You can set a daily quota to hard-limit the number of logs that are stored within an Index per day. This quota is applied for all logs that should have been stored (such as after exclusion filters are applied).
-After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][10], and used to [generate metrics from logs][9].
+After the daily quota is reached, logs are no longer indexed but are still available in the [livetail][18], [sent to your archives][9], and used to [generate metrics from logs][8].
 
 Update or remove this quota at any time when editing the Index:
 
@@ -168,18 +170,19 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [2]: /logs/explorer/#visualization
 [3]: /logs/explorer/patterns/
 [4]: /logs/explorer/analytics/
-[6]: /monitors/types/log/
-[7]: /logs/explorer/facets/#the-index-facet
-[8]: /logs/live_tail/
-[9]: /logs/logs_to_metrics/
-[10]: /logs/archives/
-[11]: https://app.datadoghq.com/logs/pipelines/indexes
-[12]: /logs/search_syntax/
-[13]: /api/v1/logs-indexes/#update-an-index
-[14]: /logs/log_configuration/processors/#user-agent-parser
-[15]: /logs/log_configuration/processors/#geoip-parser
-[16]: /tracing/other_telemetry/connect_logs_and_traces/
-[17]: /logs/log_configuration/processors/#trace-remapper
+[5]: /monitors/types/log/
+[6]: /logs/explorer/facets/#the-index-facet
+[7]: /logs/live_tail/
+[8]: /logs/logs_to_metrics/
+[9]: /logs/archives/
+[10]: https://app.datadoghq.com/logs/pipelines/indexes
+[11]: /logs/search_syntax/
+[12]: /api/v1/logs-indexes/#update-an-index
+[13]: /logs/log_configuration/processors/#user-agent-parser
+[14]: /logs/log_configuration/processors/#geoip-parser
+[15]: /tracing/other_telemetry/connect_logs_and_traces/
+[16]: /logs/log_configuration/processors/#trace-remapper
+[17]: /account_management/org_settings/#out-of-contract-retention-periods-for-log-indexes
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage

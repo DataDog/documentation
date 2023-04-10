@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-To create a log detection rule in Datadog, navigate to the [**Detection Rules** page][6] and click **New Rule**.
+To create a log detection rule in Datadog, navigate to the [**Detection Rules** page][1] and click **New Rule**.
 
 ## Rule Type
 
@@ -56,7 +56,7 @@ Impossible travel detects access from different locations whose distance is grea
 
 ### Third Party
 
-Third Party allows you to forward alerts from an outside vendor or application. It is available only for the [AWS Guardduty finding][5] rule. You can update the rule with suppression queries and who to notify when a signal is generated.
+Third Party allows you to forward alerts from an outside vendor or application. It is available only for the [AWS Guardduty finding][2] rule. You can update the rule with suppression queries and who to notify when a signal is generated.
 
 ## Define a search query
 
@@ -75,9 +75,11 @@ Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
-#### Advanced options
+#### Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 #### Joining queries
 
@@ -278,16 +280,13 @@ The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
-    - [Rule editor][4] for that specific rule
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][4] in the UI.
+    - [Rule editor][3] for that specific rule
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][3] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/variables/
-[2]: /security/notifications/variables/#template-variables
-[3]: /security/default_rules/#cat-cloud-siem-log-detection
-[4]: /security/detection_rules/#rule-and-generated-signal-options
-[5]: https://app.datadoghq.com/security/configuration/siem/rules/view/nkq-b6q-h8c?query=type%3A%28log_detection%20OR%20signal_correlation%29%20guardduty&product=siem
-[6]: https://app.datadoghq.com/security/configuration/siem/rules
+[1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: https://app.datadoghq.com/security/configuration/siem/rules/view/nkq-b6q-h8c?query=type%3A%28log_detection%20OR%20signal_correlation%29%20guardduty&product=siem
+[3]: /security/detection_rules/#rule-and-generated-signal-options

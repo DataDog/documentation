@@ -11,7 +11,7 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting/php'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 aliases:
@@ -49,8 +49,8 @@ The following profiling features are available in the following minimum versions
 
 |      Feature         | Required `dd-trace-php` version          |
 |----------------------|-----------------------------------------|
-| [Code Hotspots][12]        | 0.71+                       |
-| [Endpoint Profiling][13]            | 0.79.0+                       |
+| [Code Hotspots][1]        | 0.71+                       |
+| [Endpoint Profiling][2]            | 0.79.0+                       |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -58,9 +58,9 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+.
+1. If you are already using Datadog, upgrade your Agent to version [7.20.2][3]+ or [6.20.2][4]+.
 
-2. Download the `datadog-setup.php` script from the [GitHub release page][3]. Version 0.69.0 is the first tracer release to include this installer.
+2. Download the `datadog-setup.php` script from the [GitHub release page][5]. Version 0.69.0 is the first tracer release to include this installer.
 
 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
@@ -111,23 +111,23 @@ SetEnv DD_VERSION 1.3.2
 {{% /tab %}}
 {{< /tabs >}}
 
-   See the [configuration docs][4] for more environment variables.
+   See the [configuration docs][6] for more environment variables.
 
-4. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+4. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][7].
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][8] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
-[3]: https://github.com/DataDog/dd-trace-php/releases
-[4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
-[5]: https://app.datadoghq.com/profiling
-[6]: /getting_started/profiler/
-[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
-[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[2]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[3]: https://app.datadoghq.com/account/settings#agent/overview
+[4]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[5]: https://github.com/DataDog/dd-trace-php/releases
+[6]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
+[7]: https://app.datadoghq.com/profiling
+[8]: /getting_started/profiler/

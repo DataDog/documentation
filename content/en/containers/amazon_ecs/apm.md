@@ -16,14 +16,14 @@ further_reading:
 
 To collect traces from your ECS containers, update the Task Definitions for both your Agent and your application container as described below.
 
-One option for doing this is to modify the previously used [Task Definition file][4] and [register your updated Task Definition][5]. Alternatively, you can edit the Task Definition directly from the Amazon Web UI.
+One option for doing this is to modify the previously used [Task Definition file][1] and [register your updated Task Definition][2]. Alternatively, you can edit the Task Definition directly from the Amazon Web UI.
 
 Once enabled, the Datadog Agent container collects the traces emitted from the other application containers on the same host as itself.
 
 ## Configure the Datadog Agent to accept traces
-1. To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][6] with the configuration below.
+1. To collect all traces from your running ECS containers, update your Agent's Task Definition from the [original ECS Setup][3] with the configuration below.
 
-    Use [datadog-agent-ecs-apm.json][3] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
+    Use [datadog-agent-ecs-apm.json][4] as a reference point for the required base configuration. In the Task Definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
 
     ```json
     {
@@ -62,12 +62,12 @@ Once enabled, the Datadog Agent container collects the traces emitted from the o
     ]
     ```
 
-3. If you are updating a local file for your Agent's Task Definition, [register your updated Task Definition][5]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
+3. If you are updating a local file for your Agent's Task Definition, [register your updated Task Definition][2]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
 
 ## Configure your application container to submit traces to Datadog Agent
 
 ### Install the tracing library
-Follow the [setup instructions for installing the Datadog tracing library][2] for your application's language. For ECS install the tracer into your application's container image.
+Follow the [setup instructions for installing the Datadog tracing library][5] for your application's language. For ECS install the tracer into your application's container image.
 
 ### Provide the private IP address for the EC2 instance
 Provide the tracer with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the tracer endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
@@ -77,7 +77,7 @@ Use one of the following methods to dynamically get the private IP address:
 {{< tabs >}}
 {{% tab "EC2 metadata endpoint" %}}
 
-The [Amazon’s EC2 metadata endpoint (IMDSv1)][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
+The [Amazon's EC2 metadata endpoint (IMDSv1)][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
 
 {{< code-block lang="curl" >}}
 curl http://169.254.169.254/latest/meta-data/local-ipv4
@@ -330,9 +330,8 @@ When using IMDSv2, the equivalent `entryPoint` configuration looks like the foll
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /container/amazon_ecs/
-[2]: /tracing/trace_collection/
-[3]: /resources/json/datadog-agent-ecs-apm.json
-[4]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
-[5]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
-[6]: /containers/amazon_ecs/?tab=awscli#setup
+[1]: /containers/amazon_ecs/?tab=awscli#managing-the-task-definition-file
+[2]: /containers/amazon_ecs/?tab=awscli#registering-the-task-definition
+[3]: /containers/amazon_ecs/?tab=awscli#setup
+[4]: /resources/json/datadog-agent-ecs-apm.json
+[5]: /tracing/trace_collection/

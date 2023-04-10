@@ -35,7 +35,7 @@ Apdex thresholds must be set by administrators, per service, before Apdex scores
 
 To visualize your web application or service Apdex: 
 
-1. On your web service dashboard, select Apdex instead of latency. If you don't see this option, check that you have selected a web service:
+1. On the [Services page][2], click into a web service. On the upper right-hand graph, select Apdex instead of Latency. If you don't see this option, check that you have clicked into a web service:
 
    {{< img src="tracing/faq/apdex_selection.png" alt="Apdex Selection"  >}}
 
@@ -53,9 +53,10 @@ To visualize your web application or service Apdex:
 
 ## Display your Apdex on your service page
 
-To display the Apdex on your [service page][2], select it in the configuration menu on the upper right corner of the page:
+To display the Apdex on your [service page][3], select it in the configuration menu on the upper right corner of the page:
 
 {{< img src="tracing/faq/apdex_service_list.png" alt="Apdex Service List"  >}}
 
 [1]: https://www.apdex.org/
-[2]: https://app.datadoghq.com/apm/services
+[2]: https://app.datadoghq.com/apm/services?query=type%3Aweb
+[3]: https://app.datadoghq.com/apm/services

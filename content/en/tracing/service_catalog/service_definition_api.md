@@ -1,5 +1,5 @@
 ---
-title: APIs for Service Catalog
+title: Service Catalog API
 kind: documentation
 aliases:
 - /tracing/faq/service_definition_api/
@@ -19,11 +19,11 @@ further_reading:
 
 A service is an independent, deployable unit of software. Datadog [Unified Service Tagging][1] provides a standard way to manage and monitor service ownership consistently across every telemetry type. Service Catalog allows you to add user-defined service entries and manage metadata for existing services from APM, USM, and RUM. 
 
-For more details about creating, getting, and deleting service definitions, see the [Service Definitions API reference][8].
+For more details about creating, getting, and deleting service definitions, see the [Service Definitions API reference][2].
 
 ## Service Definition Schema (v2)
 
-The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][4].
+The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][3].
 
 
 #### Example
@@ -73,8 +73,5 @@ External Resources (Optional)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/unified-service-tagging/
-[2]: /tracing/service_catalog/
-[3]: /account_management/api-app-keys/
-[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
-[7]: https://app.datadoghq.com/services/setup
-[8]: /api/latest/service-definition/
+[2]: /api/latest/service-definition/
+[3]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
