@@ -75,6 +75,30 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
 </html>
 ```
 {{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js','DD_LOGS')
+      DD_LOGS.onReady(function() {
+          DD_LOGS.init({
+            clientToken: '<DATADOG_CLIENT_TOKEN>',
+            site: 'ap1.datadoghq.com',
+            forwardErrorsToLogs: true,
+            sessionSampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
 <html>
@@ -190,6 +214,25 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
         DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'datadoghq.com',
+          forwardErrorsToLogs: true,
+          sessionSampleRate: 100,
+        })
+    </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
+    <script>
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<DATADOG_CLIENT_TOKEN>',
+          site: 'ap1.datadoghq.com',
           forwardErrorsToLogs: true,
           sessionSampleRate: 100,
         })
