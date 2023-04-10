@@ -99,19 +99,10 @@ Composer では、モニタリングのコンフィギュレーションをコ�
 
 
 ## サポート
+サポートや機能のご要望は、以下のチャンネルで Performetriks にご連絡ください。
+メール [composer@performetriks.com](mailto:composer@performetriks.com)
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Performetriks にお問い合わせください。
+[1]:https://www.performetriks.com/composer-datadog-product-guide
 
-- メール: [composer@performetriks.com][3]
-
-### その他の参考資料
-
-お役に立つドキュメント、リンクや記事:
-
-- [Datadog Marketplace の Performetriks の製品を使って Datadog の構成をコードとして保存・管理する][3]
-
-[1]: https://www.performetriks.com/composer-datadog-product-guide
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[3]: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">こちらをクリック</a>してください。

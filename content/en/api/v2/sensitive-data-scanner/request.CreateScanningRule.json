@@ -3,7 +3,7 @@
   "data": {
     "type": "sensitive_data_scanner_rule",
     "attributes": {
-      "name": "Example-Sensitive-Data-Scanner",
+      "name": "Example-Create_Scanning_Rule_returns_OK_response",
       "pattern": "pattern",
       "namespaces": [
         "admin"

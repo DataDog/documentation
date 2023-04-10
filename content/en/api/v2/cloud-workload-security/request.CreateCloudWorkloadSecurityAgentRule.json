@@ -4,7 +4,7 @@
       "description": "Test Agent rule",
       "enabled": true,
       "expression": "exec.file.name == \"sh\"",
-      "name": "examplecloudworkloadsecurity"
+      "name": "examplecreateacloudworkloadsecurityagentrulereturnsokresponse"
     },
     "type": "agent_rule"
   }

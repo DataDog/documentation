@@ -33,7 +33,7 @@ When these versions are no longer supported by their maintainers, Datadog APM fo
 | <span id="support-eol">End-of-life (EOL)</span>        |  No support. The version can still be used but no bug fixes are provided.                                                                                                  |
 
 
-PHP APM supports the following PHP versions (both ZTS and NTS):
+PHP APM supports the following PHP versions:
 
 <div class="alert alert-info">
 <strong>Note:</strong>
@@ -164,9 +164,9 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 ### PCNTL
 
-Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][8] for more details.
+Datadog does not offer support for tracing processes forked using [pcntl][7]. When a call to `pcntl_fork` is detected, tracing is disabled in the forked process. The main process can still be traced.
 
-If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][9], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
 ## Further Reading
 
@@ -179,5 +179,4 @@ If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is ins
 [5]: /tracing/troubleshooting/php_5_deep_call_stacks
 [6]: https://www.php.net/manual/en/language.generators.overview.php
 [7]: https://www.php.net/manual/en/book.pcntl.php
-[8]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
-[9]: https://man7.org/linux/man-pages/man2/unshare.2.html
+[8]: https://man7.org/linux/man-pages/man2/unshare.2.html

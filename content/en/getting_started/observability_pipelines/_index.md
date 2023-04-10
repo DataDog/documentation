@@ -76,7 +76,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm upgrade --install \
+helm update --install \
     opw datadog/observability-pipelines-worker \
     -f aws_eks.yaml
 ```
@@ -95,7 +95,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm upgrade --install \
+helm update --install \
   opw datadog/observability-pipelines-worker \
   -f azure_aks.yaml
 ```
@@ -114,7 +114,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm upgrade --install \
+helm update --install \
   opw datadog/observability-pipelines-worker \
   -f google_gke.yaml
 ```

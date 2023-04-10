@@ -2,13 +2,14 @@
 title: Connecting DBM and APM
 kind: guide
 beta: true
+private: true
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
+<div class="alert alert-warning">
+The features described on this page are in beta. Contact your Customer Success Manager to learn more about them.
 </div>
 
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
@@ -46,7 +47,7 @@ Data privacy
 | **PHP**  [dd-trace-php][17] >= 0.86.0    |                      |           |
 |                                          | [pdo][18]            | {{< X >}} | {{< X >}} |
 |                                          | [MySQLi][19]         |           | {{< X >}} |
-| **Node.js:** [dd-trace-js][20] >= 3.17.0  |                      |           |           |
+| **Node:** [dd-trace-js][20] >= 3.13.0     |                      |           |           |
 |                                          | [postgres][21]       |   Alpha   |           |
 |                                          | [mysql][22]          |           |   Alpha   |
 |                                          | [mysql2][23]         |           |   Alpha   |
@@ -261,51 +262,16 @@ cursor.executemany("select %s", (("foo",), ("bar",)))
 [2]: https://ddtrace.readthedocs.io/en/stable/integrations.html#module-ddtrace.contrib.psycopg
 {{% /tab %}}
 
-{{% tab ".NET" %}}
-
-<div class="alert alert-warning">
-This feature requires automatic instrumentation to be enabled for your .NET service.
-</div>
-
-Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
-
-Ensure that you are using a supported client library. For example, `Npgsql`.
-
-Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_DBM_PROPAGATION_MODE=full`
-
-
-[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
-[2]: /tracing/trace_collection/dd_libraries/dotnet-core
-{{% /tab %}}
-
-{{% tab "PHP" %}}
-
-<div class="alert alert-warning">
-This feature requires the tracer extension to be enabled for your PHP service.
-</div>
-
-Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
-
-Ensure that you are using a supported client library. For example, `PDO`.
-
-Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_DBM_PROPAGATION_MODE=full`
-
-
-[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
-{{% /tab %}}
-
 {{% tab "Node.js" %}}
 
 <div class="alert alert-warning">
-DBM-APM linking for Node.js is in alpha release and may be unstable.
+Node is in alpha release and may be unstable.
 </div>
 
-Install or update [dd-trace-js][1] to a version greater than `3.17.0` (or `2.30.0` if using end-of-life Node.js version 12):
+Install or udpate [dd-trace-js][1] to version greater than `3.9.0` (or `2.22.0` if using end-of-life Node.js version 12):
 
 ```
-npm install dd-trace@^3.17.0
+npm install dd-trace@^3.9.0
 ```
 
 Update your code to import and initialize the tracer:
@@ -350,21 +316,50 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 [1]: https://github.com/DataDog/dd-trace-js
 {{% /tab %}}
 
+{{% tab ".NET" %}}
+
+<div class="alert alert-warning">
+This features requires automatic instrumentation to be enabled for your .NET service.
+</div>
+
+Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing instructions][2] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library (e.g. `Npgsql`).
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-framework
+[2]: /tracing/trace_collection/dd_libraries/dotnet-core
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+
+<div class="alert alert-warning">
+This features requires the tracer extension to be enabled for your PHP service.
+</div>
+
+Follow the [PHP tracing instructions][1] to install the automatic instrumentation package and enable tracing for your service.
+
+Ensure that you are using a supported client library. For example, `PDO`.
+
+Enable the database monitoring propagation feature by setting the following environment variable:
+   - `DD_DBM_PROPAGATION_MODE=full`
+
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/php?tab=containers
+{{% /tab %}}
+
 {{< /tabs >}}
 
-## Explore the APM Connection in DBM
+## Explore the APM Connection
 
 ### Attribute active database connections to the calling APM services
 
 {{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="View active connections to a database broken down by the APM Service they originate from.">}}
 
-Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service's service page to continue the investigation.
-
-### Filter your database hosts by the APM services that call them
-
-{{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
-
-Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream dependencies have blocking activity that may impact service performance.   
+Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
 
 ### View the associated trace for a query sample
 
@@ -372,19 +367,12 @@ Quickly filter the Database List to display only the database hosts that your sp
 
 When viewing a Query Sample in Database Monitoring, if the associated trace has been sampled by APM, you can view the DBM Sample in the context of the APM Trace. This allows you to combine DBM telemetry, including the explain plan and historical performance of the query, alongside the lineage of the span within your infrastructure to understand if a change on the database is responsible for poor application performance.
 
-## Explore the DBM Connection in APM
-
-### Visualize the downstream database hosts of APM services
+### Identify the downstream database hosts of APM services
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
 On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
-### Identify potential optimizations using explain plans for database queries in traces 
-
-{{< img src="database_monitoring/explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
-
-View historical performance of similar queries to those executed in your trace, including sampled wait events, average latency, and recently captured explain plans, to contextualize how a query is expected to perform. Determine if the behavior is abnormal and continue the investigation by pivoting to Database Monitoring for additional context about the underlying database hosts.
 
 [1]: /database_monitoring/#getting-started
 [2]: /tracing/

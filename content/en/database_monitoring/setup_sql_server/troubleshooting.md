@@ -61,7 +61,7 @@ Some common errors are:
 
 To troubleshoot:
 
-1. Check the agent's login credentials
+1. Check the agent’s login credentials
 
 2. Try to login with those credentials manually using sqlcmd. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
@@ -71,7 +71,7 @@ To troubleshoot:
 
 1. Check the TCP connection from the agent to the host by running `telnet {host} {port}` to make sure there is network connectivity from the Agent to the database.
 
-2. Try to login manually using sqlcmd and see if there's an issue with the configured database. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
+2. Try to login manually using sqlcmd and see if there’s an issue with the configured database. For example: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
 
 ####  Due to "Invalid connection string attribute"
 

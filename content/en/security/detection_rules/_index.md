@@ -56,16 +56,9 @@ You can also filter by facets such as `source` and `severity` to help when inves
 
 Rules are displayed in the detection rules table. You can sort the table by clicking on the **Sort by** option in the top right corner of the table. For example, sort by **Highest Severity** to triage high-impact misconfigurations and threats.
 
-#### Enable or disable rules
+#### Enabling or disabling a rule
 
-To enable or disable a single rule, toggle the switch to the right of the rule.
-
-You can also bulk enable or disable rules:
-
-1. Click **Select Rules**.
-1. Select the rules you want to enable or disable.
-1. Click the **Edit Rules** dropdown.
-1. Select **Enable Rules** or **Disable Rules**.
+Enable or disable a rule using the toggle switch to the right of the rule.
 
 #### Rule and generated signal options
 

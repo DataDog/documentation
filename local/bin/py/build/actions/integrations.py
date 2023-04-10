@@ -739,8 +739,6 @@ class Integrations:
                 result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
-                print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
-                sys.exit(1)
         else:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
@@ -878,14 +876,9 @@ class Integrations:
 
                 ## Reformating all links now that all processing is done
                 if tab_logic:
-                    try:
-                        final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
-                        with open(out_name, 'w') as final_file:
-                            final_file.write(final_text)
-                    except Exception as e:
-                        print(e)
-                        print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
-                        sys.exit(1)
+                    final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
+                    with open(out_name, 'w') as final_file:
+                        final_file.write(final_text)
             else:
                 if exists(out_name):
                     print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")

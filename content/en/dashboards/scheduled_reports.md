@@ -25,7 +25,7 @@ Scheduled dashboard reports automatically send a visual summary of a dashboard t
 
 ## Schedule a report
 
-Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard's export icon and select **Schedule a Report**.
+Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard’s export icon and select **Schedule a Report**.
 
 The following widget types are supported:
 
@@ -61,7 +61,7 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 Finally, customize the report to provide recipients with more context or a tailored view. The optional description appears at the top of each report to provide more context on the dashboard.
 
-Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard's defaults. 
+Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard’s defaults. 
 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 

@@ -1,5 +1,5 @@
 ---
-title: Service Catalog API
+title: APIs for Service Catalog
 kind: documentation
 aliases:
 - /tracing/faq/service_definition_api/

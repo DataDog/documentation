@@ -103,7 +103,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 : `(1, hello)`
 
 `curl -X GET 'localhost:8080/notes'`
-: `{"1", "hello"}`
+: `{”1”, "hello"}`
 
 `curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
 : `(1, UpdatedNote)`

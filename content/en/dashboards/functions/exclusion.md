@@ -24,7 +24,7 @@ When you graph this metric as a timeseries, you would have 3 x 4 = 12 lines on y
 
 The `clamp_min()` and `clamp_max()` functions take one parameter:
 
--   `THRESHOLD`: the threshold value you've specified.
+-   `THRESHOLD`: the threshold value you’ve specified.
     -   `clamp_min()` sets all datapoints below the threshold to equal that value, while `clamp_max()` limits datapoints above the threshold.
 
 ## Cutoff

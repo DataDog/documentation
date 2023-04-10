@@ -1,10 +1,10 @@
 {
-  "name": "Example-Monitor",
+  "name": "Example-Create_a_ci_tests_formula_and_functions_monitor_returns_OK_response",
   "type": "ci-tests alert",
   "query": "formula(\"query1 / query2 * 100\").last(\"15m\") >= 0.8",
   "message": "some message Notify: @hipchat-channel",
   "tags": [
-    "test:examplemonitor",
+    "test:examplecreateacitestsformulaandfunctionsmonitorreturnsokresponse",
     "env:ci"
   ],
   "priority": 3,

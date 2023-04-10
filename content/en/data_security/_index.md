@@ -41,13 +41,13 @@ Data in motion through Datadog provided tools is protected with TLS and HSTS. Da
 
 The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][4]. 
 
-To learn how to avoid storing secrets in plaintext in the Agent's configuration files, see [Secrets Management][5].
+To learn how to avoid storing secrets in plaintext in the Agent’s configuration files, see [Secrets Management][5].
 
 ### Third party services integrations
 
 The integrations for some third party services are configured directly in Datadog and might require you to provide credentials to allow Datadog to connect to the service on your behalf. The credentials you provide are encrypted and stored by Datadog in a secure credential datastore. 
 
-All data through these integrations is encrypted when at-rest in Datadog's systems and encrypted in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within the third party services are limited to only what is necessary. Anomalous behavior detection tools continuously monitor for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
+All data through these integrations is encrypted when at-rest in Datadog’s systems and encrypted in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within the third party services are limited to only what is necessary. Anomalous behavior detection tools continuously monitor for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
 
 ### Cloud integrations
 
@@ -59,7 +59,7 @@ Due to their sensitive nature, additional security measures are implemented, whe
 
 ## Measures you can implement to reduce your data risk
 
-Datadog's purpose is to gather observability information from many sources around your infrastructure and services and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog's servers. Most of the data gathered for the intended use of the Datadog products has little chance of containing private or personal data. For the data that may contain unnecessary private or personal data, we provide instructions, tools, and recommendations to enable you to strip out, obfuscate, and otherwise reduce the inclusion of private or personal data in the data shared with Datadog.
+Datadog’s purpose is to gather observability information from many sources around your infrastructure and services and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog’s servers. Most of the data gathered for the intended use of the Datadog products has little chance of containing private or personal data. For the data that may contain unnecessary private or personal data, we provide instructions, tools, and recommendations to enable you to strip out, obfuscate, and otherwise reduce the inclusion of private or personal data in the data shared with Datadog.
 
 ### Sensitive Data Scanner
 
@@ -75,7 +75,7 @@ A key approach to reducing risk around logs data security is access control. Rea
 
 ### Live processes and containers
 
-To prevent leaking sensitive data when you're monitoring live processes and live containers, Datadog provides some default sensitive keyword scrubbing in process arguments and in Helm charts. You can obfuscate additional sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][16], and add to the container scrubbing word list by using the [`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` environment variable][17].
+To prevent leaking sensitive data when you’re monitoring live processes and live containers, Datadog provides some default sensitive keyword scrubbing in process arguments and in Helm charts. You can obfuscate additional sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][16], and add to the container scrubbing word list by using the [`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` environment variable][17].
 
 ### APM and other tracing library based products
 
@@ -98,7 +98,7 @@ Synthetic testing simulates requests and business transactions from testing loca
 
 ### RUM & Session Replay
 
-You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you're collecting. Read [Modifying RUM Data and Context][21] for details.
+You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you’re collecting. Read [Modifying RUM Data and Context][21] for details.
  
 Session Replay privacy options default to protecting end-user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
 

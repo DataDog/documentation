@@ -1,5 +1,5 @@
 {
-  "message": "Example-Downtime",
+  "message": "Example-Schedule_a_downtime_until_date",
   "recurrence": {
     "period": 1,
     "type": "weeks",

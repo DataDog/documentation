@@ -141,116 +141,12 @@ datadogRum.init({
 
 ### CDN 非同期
 
-生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグに追加します。**{{<region-param key="dd_site_name">}}** サイトの場合:
+生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグに追加します。
 
 <details open>
   <summary>最新バージョン</summary>
 
-{{< site-region region="us" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
+<!-- prettier-ignore -->
 ```html
 <script>
   (function(h,o,u,n,d) {
@@ -262,7 +158,7 @@ datadogRum.init({
     DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -275,118 +171,13 @@ datadogRum.init({
   })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 
 <details>
   <summary><code>v4.30.0</code> より前</summary>
 
-{{< site-region region="us" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
+<!-- prettier-ignore -->
 ```html
 <script>
   (function(h,o,u,n,d) {
@@ -398,7 +189,7 @@ datadogRum.init({
     DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -411,110 +202,13 @@ datadogRum.init({
   })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 
 <details>
   <summary><code>v4.20.0</code> より前</summary>
 
-{{< site-region region="us" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
+<!-- prettier-ignore -->
 ```html
 <script>
   (function(h,o,u,n,d) {
@@ -526,7 +220,7 @@ datadogRum.init({
     DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -537,110 +231,13 @@ datadogRum.init({
   })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 
 <details>
   <summary><code>v4.10.2</code> より前</summary>
 
-{{< site-region region="us" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script>
-  (function(h,o,u,n,d) {
-     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-     d=o.createElement(u);d.async=1;d.src=n
-     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-  })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
+<!-- prettier-ignore -->
 ```html
 <script>
   (function(h,o,u,n,d) {
@@ -652,7 +249,7 @@ datadogRum.init({
     DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -663,7 +260,6 @@ datadogRum.init({
   })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 
@@ -673,96 +269,11 @@ datadogRum.init({
 
 ### CDN 同期
 
-生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグ（他のスクリプトタグの前にあるタグ）に追加します。同期型のスクリプトタグをより高い位置に含めると、Datadog RUM ですべてのパフォーマンスデータとエラーを収集できます。**{{<region-param key="dd_site_name">}}** サイトの場合:
+生成されたコードスニペットを、アプリケーションで監視するすべての HTML ページの head タグ（他のスクリプトタグの前にあるタグ）に追加します。同期型のスクリプトタグをより高い位置に含めると、Datadog RUM ですべてのパフォーマンスデータとエラーを収集できます。
 
 <details open>
   <summary>最新バージョン</summary>
 
-{{< site-region region="us" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackUserInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
 ```html
 <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
 <script>
@@ -770,7 +281,7 @@ datadogRum.init({
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -782,98 +293,12 @@ datadogRum.init({
     })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 
 <details>
   <summary><code>v4.30.0</code> より前</summary>
 
-{{< site-region region="us" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      sessionReplaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackResources: true,
-      trackLongTasks: true,
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
 ```html
 <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
 <script>
@@ -881,7 +306,7 @@ datadogRum.init({
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -893,90 +318,12 @@ datadogRum.init({
     })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 
 <details>
   <summary><code>v4.20.0</code> より前</summary>
 
-{{< site-region region="us" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
 ```html
 <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
 <script>
@@ -984,7 +331,7 @@ datadogRum.init({
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -994,90 +341,12 @@ datadogRum.init({
     })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 
 <details>
   <summary><code>v4.10.2</code> より前</summary>
 
-{{< site-region region="us" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="eu" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'datadoghq.eu',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us3" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us3.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="us5" >}}
-```html
-<script src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js" type="text/javascript"></script>
-<script>
-  window.DD_RUM &&
-    window.DD_RUM.init({
-      clientToken: '<CLIENT_TOKEN>',
-      applicationId: '<APPLICATION_ID>',
-      site: 'us5.datadoghq.com',
-      //  service: 'my-web-application',
-      //  env: 'production',
-      //  version: '1.0.0',
-      sampleRate: 100,
-      replaySampleRate: 100, // 含まれない場合 - デフォルト 100
-      trackInteractions: true,
-    })
-</script>
-```
-{{</ site-region>}}
-{{< site-region region="gov" >}}
 ```html
 <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
 <script>
@@ -1085,7 +354,7 @@ datadogRum.init({
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'ddog-gov.com',
+      site: '<DATADOG_SITE>',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -1095,7 +364,6 @@ datadogRum.init({
     })
 </script>
 ```
-{{</ site-region>}}
 
 </details>
 

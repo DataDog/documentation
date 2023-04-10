@@ -20,14 +20,14 @@
     "aws:us-east-2"
   ],
   "message": "BDD test payload: synthetics_api_grpc_test_payload.json",
-  "name": "Example-Synthetic",
+  "name": "Example-Create_an_API_GRPC_test_returns_OK_Returns_the_created_test_details_response",
   "options": {
     "min_failure_duration": 0,
     "min_location_failed": 1,
     "monitor_options": {
       "renotify_interval": 0
     },
-    "monitor_name": "Example-Synthetic",
+    "monitor_name": "Example-Create_an_API_GRPC_test_returns_OK_Returns_the_created_test_details_response",
     "tick_every": 60
   },
   "subtype": "grpc",

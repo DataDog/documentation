@@ -52,7 +52,7 @@ clusterAgent:
     create: true
 ```
 
-If you don't want to use the Cluster Agent, you can still have a Node Agent collect Kubernetes events by setting `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to true in your `values.yaml` file.
+If you don’t want to use the Cluster Agent, you can still have a Node Agent collect Kubernetes events by setting `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to true in your `values.yaml` file.
 
 ```yaml
 datadog:

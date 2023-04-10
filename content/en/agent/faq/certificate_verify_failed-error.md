@@ -11,7 +11,7 @@ On Saturday May 30th, 2020, at 10:48 UTC, an SSL root certificate used to cross-
 
 Agent versions spanning 3.6.x to 5.32.6 embed the expired certificate and are affected.
 
-Agent versions 6.x and 7.x are fine and don't need to be updated.
+Agent versions 6.x and 7.x are fine and don’t need to be updated.
 
 ### Fixing by upgrading to Agent 5.32.7
 

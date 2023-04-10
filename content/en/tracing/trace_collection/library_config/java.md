@@ -30,7 +30,7 @@ The name of a set of processes that do the same job. Used for grouping stats for
 `dd.tags`
 : **Environment Variable**: `DD_TAGS`<br>
 **Default**: `null`<br>
-**Example**: `layer:api,team:intake,key:value`<br>
+**Example**: `layer:api,team:intake`<br>
 A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it overrides any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
 
 `dd.env`

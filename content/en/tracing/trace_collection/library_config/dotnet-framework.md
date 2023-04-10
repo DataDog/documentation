@@ -202,7 +202,7 @@ Added in version `2.19.0`.<br>
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api,team:intake,key:value` <br>
+**Example**: `layer:api,team:intake` <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`

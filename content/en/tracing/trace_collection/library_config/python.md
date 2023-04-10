@@ -71,7 +71,7 @@ For more information, see [Ingestion Mechanisms][5].<br>
 
 
 `DD_TAGS`
-: A list of default tags to be added to every span and profile, for example: `layer:api,team:intake,key:value`. Available in version 0.38+.
+: A list of default tags to be added to every span and profile, for example: `layer:api,team:intake`. Available in version 0.38+.
 
 `DD_TRACE_HEADER_TAGS`
 : **Default**: `null`<br>

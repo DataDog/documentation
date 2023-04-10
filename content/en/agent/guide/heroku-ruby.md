@@ -18,14 +18,14 @@ This guide walks you through the necessary steps to take a Rails application dep
 
 This guide assumes the following:
 
-* You already have a Datadog account. If you don't have one, you can [sign up for a free trial][1].
-* You already have a Heroku account. If you don't have one, you can [sign up for their free tier][2].
+* You already have a Datadog account. If you don’t have one, you can [sign up for a free trial][1].
+* You already have a Heroku account. If you don’t have one, you can [sign up for their free tier][2].
 * You have [Git][3] installed on your local system.
 * You have the [Heroku CLI tool][4] installed on your local system.
 
 ## Creating your Heroku application and deploying the sample Ruby application
 
-This guide uses [Heroku's Rails sample application][5]. This is a barebone Rails application that goes along their [Starting With Ruby article][6], which provides more detailed information about how to deploy a Ruby application in Heroku. This guide focuses on instrumenting a Rails application with Datadog.
+This guide uses [Heroku’s Rails sample application][5]. This is a barebone Rails application that goes along their [Starting With Ruby article][6], which provides more detailed information about how to deploy a Ruby application in Heroku. This guide focuses on instrumenting a Rails application with Datadog.
 
 The sample application has a dependency pg which only resolves if you have [Postgres installed locally][7]. Install Postgres before you proceed.
 You can verify that Postgres is installed successfully by running the `psql` command. It returns output similar to the following:
@@ -131,7 +131,7 @@ heroku-postgresql (postgresql-infinite-14462)  hobby-dev  free   created
 The table above shows add-ons and the attachments to the current app (ruby-heroku-datadog) or other apps.
 ```
 
-Your example application already uses that database in its code, but you haven't created the tables yet, run:
+Your example application already uses that database in its code, but you haven’t created the tables yet, run:
 
 ```shell
 heroku run rake db:migrate -a $APPNAME
@@ -563,7 +563,7 @@ git commit -m "Enable distributed tracing"
 git push heroku main
 ```
 
-During the build, error messages are displayed about the tracer not being able to reach the Datadog APM Agent endpoint. This is normal, as during the build process, the Datadog Agent hasn't started yet. You can ignore these messages:
+During the build, error messages are displayed about the tracer not being able to reach the Datadog APM Agent endpoint. This is normal, as during the build process, the Datadog Agent hasn’t started yet. You can ignore these messages:
 
 ```bash
 remote:        Download Yarn at https://yarnpkg.com/en/docs/install
@@ -803,7 +803,7 @@ heroku ps:exec -a $APPNAME
 ~ $
 ```
 
-You can ignore the warnings about the `DD_API_KEY` not being set. This is normal. The reason is that [Heroku doesn't set configuration variables for the SSH session itself][26], but the Datadog Agent process was able to access those.
+You can ignore the warnings about the `DD_API_KEY` not being set. This is normal. The reason is that [Heroku doesn’t set configuration variables for the SSH session itself][26], but the Datadog Agent process was able to access those.
 
 Once inside the SSH session, execute the Datadog status command:
 

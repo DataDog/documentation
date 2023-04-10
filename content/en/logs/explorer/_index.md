@@ -29,33 +29,25 @@ further_reading:
 
 The [**Log Explorer**][1] is your home base for log troubleshooting and exploration. Whether you start from scratch, from a [Saved View][2], or land here from any other context like monitor notifications or dashboard widgets, you can search and filter, group, visualize, and export logs in the Log Explorer.
 
-{{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:100%;">}}
-
-## Search and filter
+### Search and filter
 
 **Search** and **Filter** on logs to narrow down, broaden, or shift your focus on a subset of logs tailored to your current interest.
 
-  - To learn more about searching for logs in the Log Explorer, read [Search Logs][3].
-  - To start creating queries and using facets in the Log Explorer, read [Log Search Syntax][4].
-  - To learn how [Watchdog Insights][5] surface anomalous logs and outliers in error logs within your search context, read [Watchdog Insights for Logs][6].
+  - To learn more about searching for logs in Log Explorer, see the [Search Logs documentation][3].
+  - To start creating queries and using facets in Log Explorer, read the [Log Search Syntax documentation][4].
+  - To learn more about how Watchdog Insights surface anomalous logs within your search context, read the [Log Anomaly Detection documentation][5].
 
-## Analyze
+### Analyze
 
-**Group** your queried logs into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. 
+**Group** queried logs into higher-level entities (fields, patterns, and transactions) in order to derive or consolidate information. To start identifying patterns and aggregating logs by subsets of events, see the [Log Analytics documentation][6].
 
-To start identifying patterns and aggregating logs by subsets of events, see [Log Analytics][7].
+### Visualize
 
-## Visualize
+**Visualize** the outcome of filters and aggregations to put your logs into the right perspective and bubble up decisive information. For example, view your logs in a list, to organize log data into columns, or in a timeseries, to measure your log data over time. To start visualizing log data in the Log Explorer, see the [Create Log Visualizations documentation][7].
 
-**Visualize** the outcome of your filters and aggregations to better understand your logs and gather decisive information. For example, you can view your logs in a list to organize your log data into columns, or in a timeseries graph to measure your log data over time. 
+### Export
 
-To start visualizing log data in the Log Explorer, see [Log Visualizations][8].
-
-## Export
-
-You can also **export** your Log Explorer view to reuse it later or in different contexts. 
-
-To learn how to export your log queries and visualizations, see [Export Logs][9].
+You can also **export** your Log Explorer view to reuse it later or in different contexts. See the [Export Logs documentation][8].
 
 ## Further Reading
 
@@ -65,8 +57,7 @@ To learn how to export your log queries and visualizations, see [Export Logs][9]
 [2]: /logs/explorer/saved_views/
 [3]: /logs/explorer/search
 [4]: /logs/explorer/search_syntax/
-[5]: /watchdog/insights
-[6]: /logs/explorer/insights
-[7]: /logs/explorer/analytics
-[8]: /logs/explorer/visualize
-[9]: /logs/explorer/export
+[5]: /logs/explorer/insights
+[6]: /logs/explorer/analytics
+[7]: /logs/explorer/visualize
+[8]: /logs/explorer/export

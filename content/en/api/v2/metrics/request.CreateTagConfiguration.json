@@ -1,7 +1,7 @@
 {
   "data": {
     "type": "manage_tags",
-    "id": "ExampleMetric",
+    "id": "ExampleCreateatagconfigurationreturnsCreatedresponse",
     "attributes": {
       "tags": [
         "app",

@@ -51,7 +51,7 @@ https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -
 - キーと値をカンマ (`,`) で連結する
 - URL エンコーディングを使用する
 
-例えば、キーと値のペア `{"service": "billingService", "env": "production"}` の場合、URL エンコードされた文字列は次のようになります。
+例えば、キーと値のペア `{“service”: “billingService”, “env”: “production”}` の場合、URL エンコードされた文字列は次のようになります。
 
 ```
 service%3AbillingService%2Cenv%3Aproduction
@@ -72,7 +72,7 @@ HTTP ヘッダーに URL を埋め込むか (推奨)、`<meta>` HTML タグに�
 Datadog は、HTTP ヘッダーにコンテンツセキュリティポリシーを埋め込むことを推奨しています。`report-uri` ディレクティブまたは `report-to` ディレクティブのどちらかを使用することができます。`report-to` ディレクティブは最終的には `report-uri` に取って代わりますが、まだすべてのブラウザでサポートされているわけではありません。
 
 - `report-uri` ディレクティブを使用している場合
-  ```bash
+  ```shell
   Content-Security-Policy: ...; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
   ```
 

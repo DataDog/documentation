@@ -96,7 +96,7 @@ This is done using the following algorithm:
 
 1. Compute a hash based on CI information to group the tests.
     1. If the tests include `ci.job.url`, use this tag to calculate the hash.
-    2. If the tests don't include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
+    2. If the tests don’t include `ci.job.url`, use `ci.pipeline.id` + `ci.pipeline.name` + `ci.pipeline.number` to calculate the hash.
 2. The calculated wall time is associated to a given hash. **Note**: If there are multiple jobs that execute tests, the wall time is calculated for each job, and the maximum from all calculated wall times is shown.
 
 #### Possible issues with wall time calculation

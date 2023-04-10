@@ -192,12 +192,12 @@ The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
-Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][6].
+Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
 **Default**: `0`<br>
-Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][7].
+Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
@@ -217,7 +217,7 @@ Enable the tracer globally.
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
 **Default**: `1`<br>
-Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes][6].
+Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
@@ -267,7 +267,7 @@ CSV of URI mappings to normalize resource naming for outgoing requests (see [Map
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
 **Default**: `0`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][8] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
+Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][6] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
 **Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
 
 `DD_TRACE_SAMPLE_RATE`
@@ -295,7 +295,7 @@ The maximum number of spans that are generated within one trace. If the maximum 
 **Default**: `null`<br>
 A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
 **Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][9].<br>
+For more information, see [Ingestion Mechanisms][7].<br>
 
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
@@ -341,9 +341,9 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 **Default**: `tracecontext,Datadog`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [tracecontext][10]
-  - [b3multi][11]
-  - [B3 single header][12]
+  - [tracecontext][8]
+  - [b3multi][9]
+  - [B3 single header][10]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
@@ -351,9 +351,9 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
 **Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [tracecontext][10]
-  - [b3multi][11]
-  - [B3 single header][12]
+  - [tracecontext][8]
+  - [b3multi][9]
+  - [B3 single header][10]
   - Datadog
 
 `DD_DBM_PROPAGATION_MODE`
@@ -454,12 +454,12 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 
 ### `open_basedir` restrictions
 
-When [`open_basedir`][13] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
+When [`open_basedir`][11] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][11] and [W3C][10] headers extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][9] and [W3C][8] headers extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
@@ -488,11 +488,9 @@ If multiple extraction styles are enabled, the extraction attempt is completed w
 [3]: /tracing/setup/nginx/#nginx-and-fastcgi
 [4]: /profiler/enabling/php/
 [5]: /agent/guide/network/#configure-ports
-[6]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
-[7]: /tracing/guide/trace-php-cli-scripts/
-[8]: https://github.com/mind04/mod-ruid2
-[9]: /tracing/trace_pipeline/ingestion_mechanisms/
-[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
-[11]: https://github.com/openzipkin/b3-propagation
-[12]: https://github.com/openzipkin/b3-propagation#single-header
-[13]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[6]: https://github.com/mind04/mod-ruid2
+[7]: /tracing/trace_pipeline/ingestion_mechanisms/
+[8]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[9]: https://github.com/openzipkin/b3-propagation
+[10]: https://github.com/openzipkin/b3-propagation#single-header
+[11]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir

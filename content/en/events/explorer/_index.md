@@ -154,7 +154,7 @@ You can export analytics visualizations to create widgets in a dashboard or note
 
 ### Build an analytics query
 
-Use the query to control what's displayed in your Events Analytics:
+Use the query to control what’s displayed in your Events Analytics:
 
 1. Choose an attribute or tag to graph, and add it as a facet. Graphing a facet displays the unique count of the variable.
     {{< img src="events/explorer/facet-to-graph.png" alt="Shows the list of facets that can be graphed." style="width:100%;" >}}

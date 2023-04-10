@@ -61,6 +61,6 @@ Both fixed and relative custom time frames are supported:
   * Days: `d`, `day`, `days`
   * Weeks: `w`, `week`, `weeks`
   * Months: `mo`, `mos`, `mon`, `mons`, `month`, `months`
-* `today`, `yesterday`, `this month`, `this year`, and `last year` are calculated when entered. They won't continue to update as time passes.
+* `today`, `yesterday`, `this month`, `this year`, and `last year` are calculated when entered. They won’t continue to update as time passes.
 
 [1]: /dashboards/#display-utc-time

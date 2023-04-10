@@ -403,7 +403,7 @@ Troubleshooting command syntax has changed. These commands are available for v6.
 | `sudo -u dd-agent datadog-agent jmx list matching`     | List attributes that match at least one of your instance configurations.                                                                                        |
 | `sudo -u dd-agent datadog-agent jmx list limited`      | List attributes that match one of your instance configurations but are not being collected because it would exceed the number of metrics that can be collected. |
 | `sudo -u dd-agent datadog-agent jmx list collected`    | List attributes that are collected by your current instances configuration.                                                                                     |
-| `sudo -u dd-agent datadog-agent jmx list not-matching` | List attributes that don't match any of your instance configurations.                                                                                           |
+| `sudo -u dd-agent datadog-agent jmx list not-matching` | List attributes that don’t match any of your instance configurations.                                                                                           |
 | `sudo -u dd-agent datadog-agent jmx list everything`   | List every attribute available that has a type supported by JMXFetch.                                                                                           |
 | `sudo -u dd-agent datadog-agent jmx collect`           | Start the collection of metrics based on your current configuration and display them in the console.                                                            |
 

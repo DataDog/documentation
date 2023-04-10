@@ -1,12 +1,12 @@
 {
-  "description": "Test Example-Synthetic description",
+  "description": "Test Example-Create_a_private_location_returns_OK_response description",
   "metadata": {
     "restricted_roles": [
       "string"
     ]
   },
-  "name": "Example-Synthetic",
+  "name": "Example-Create_a_private_location_returns_OK_response",
   "tags": [
-    "test:examplesynthetic"
+    "test:examplecreateaprivatelocationreturnsokresponse"
   ]
 }

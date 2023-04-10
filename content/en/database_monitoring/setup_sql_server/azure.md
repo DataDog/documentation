@@ -65,19 +65,11 @@ instances:
     database: '<DATABASE_1>'
     username: datadog
     password: '<PASSWORD>'
-    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
-    azure:
-      deployment_type: 'sql_database'
-      name: '<DATABASE_1>'
 
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_2>'
     username: datadog
     password: '<PASSWORD>'
-    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
-    azure:
-      deployment_type: 'sql_database'
-      name: '<DATABASE_2>'
 ```
 
 See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.

@@ -2426,8 +2426,6 @@ components:
           items:
             type: string
           type: array
-      required:
-      - resource_type
       type: object
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
@@ -2562,8 +2560,6 @@ components:
           items:
             type: string
           type: array
-      required:
-      - resource_type
       type: object
     ConfluentResourceRequestData:
       description: JSON:API request for updating a Confluent resource.
@@ -12635,7 +12631,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/ServiceDefinitionV2Email'
       - $ref: '#/components/schemas/ServiceDefinitionV2Slack'
-      - $ref: '#/components/schemas/ServiceDefinitionV2MSTeams'
     ServiceDefinitionV2Doc:
       description: Service documents.
       properties:
@@ -12722,7 +12717,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1Email'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1Slack'
-      - $ref: '#/components/schemas/ServiceDefinitionV2Dot1MSTeams'
     ServiceDefinitionV2Dot1Email:
       description: Service owner's email.
       properties:
@@ -12795,31 +12789,6 @@ components:
       - RUNBOOK
       - DASHBOARD
       - OTHER
-    ServiceDefinitionV2Dot1MSTeams:
-      description: Service owner's Microsoft Teams.
-      properties:
-        contact:
-          description: Contact value.
-          example: https://teams.microsoft.com/myteam
-          type: string
-        name:
-          description: Contact Microsoft Teams.
-          example: My team channel
-          type: string
-        type:
-          $ref: '#/components/schemas/ServiceDefinitionV2Dot1MSTeamsType'
-      required:
-      - type
-      - contact
-      type: object
-    ServiceDefinitionV2Dot1MSTeamsType:
-      description: Contact type.
-      enum:
-      - microsoft-teams
-      example: microsoft-teams
-      type: string
-      x-enum-varnames:
-      - MICROSOFT_TEAMS
     ServiceDefinitionV2Dot1Opsgenie:
       description: Opsgenie integration for the service.
       properties:
@@ -12960,31 +12929,6 @@ components:
       - ONCALL
       - CODE
       - LINK
-    ServiceDefinitionV2MSTeams:
-      description: Service owner's Microsoft Teams.
-      properties:
-        contact:
-          description: Contact value.
-          example: https://teams.microsoft.com/myteam
-          type: string
-        name:
-          description: Contact Microsoft Teams.
-          example: My team channel
-          type: string
-        type:
-          $ref: '#/components/schemas/ServiceDefinitionV2MSTeamsType'
-      required:
-      - type
-      - contact
-      type: object
-    ServiceDefinitionV2MSTeamsType:
-      description: Contact type.
-      enum:
-      - microsoft-teams
-      example: microsoft-teams
-      type: string
-      x-enum-varnames:
-      - MICROSOFT_TEAMS
     ServiceDefinitionV2Opsgenie:
       description: Opsgenie integration for the service.
       properties:
@@ -23465,9 +23409,6 @@ paths:
       description: Get a list of all service definitions from the Datadog Service
         Catalog.
       operationId: ListServiceDefinitions
-      parameters:
-      - $ref: '#/components/parameters/PageSize'
-      - $ref: '#/components/parameters/PageNumber'
       responses:
         '200':
           content:
@@ -23483,10 +23424,6 @@ paths:
       tags:
       - Service Definition
       x-menu-order: 1
-      x-pagination:
-        limitParam: page[size]
-        pageOffsetParam: page[number]
-        resultsPath: data
       x-undo:
         type: safe
     post:

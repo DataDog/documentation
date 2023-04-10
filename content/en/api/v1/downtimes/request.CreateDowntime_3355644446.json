@@ -1,9 +1,9 @@
 {
-  "message": "Example-Downtime",
+  "message": "Example-Schedule_a_monitor_downtime_returns_OK_response",
   "start": 1636629071,
   "timezone": "Etc/UTC",
   "scope": [
-    "test:exampledowntime"
+    "test:examplescheduleamonitordowntimereturnsokresponse"
   ],
   "monitor_id": 7
 }

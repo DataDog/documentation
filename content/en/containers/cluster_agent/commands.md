@@ -119,15 +119,6 @@ The following environment variables are supported:
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`                
 : Adds extra tags to cluster checks metrics.
 
-`DD_PROXY_HTTPS`                
-: Sets a proxy server for HTTPS requests.
-
-`DD_PROXY_HTTP`                
-: Sets a proxy server for HTTP requests.
-
-`DD_PROXY_NO_PROXY`                
-: Sets a list of hosts that should bypass the proxy. The list is space-separated.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

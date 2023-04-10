@@ -2,7 +2,7 @@
   "data": {
     "type": "api_keys",
     "attributes": {
-      "name": "Example-Key-Management"
+      "name": "Example-Create_an_API_key_returns_Created_response"
     }
   }
 }

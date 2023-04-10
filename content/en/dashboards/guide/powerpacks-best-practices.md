@@ -34,7 +34,7 @@ This ownership model fosters standardization across your teams and provides a sc
 
 ## Best practices for creating a Powerpack
 
-A well-constructed Powerpack can speed up an organization's adoption of new monitoring patterns, like adding security observability to all existing application teams' dashboards. Build a clear, self-contained Powerpack to ensure dashboard owners get the most from your content while minimizing issues or questions. 
+A well-constructed Powerpack can speed up an organization’s adoption of new monitoring patterns, like adding security observability to all existing application teams’ dashboards. Build a clear, self-contained Powerpack to ensure dashboard owners get the most from your content while minimizing issues or questions. 
 
 ### Build self-explanatory content
 
@@ -44,7 +44,7 @@ The content in a Powerpack should be self-explanatory. When creating a Powerpack
 - Note widgets with additional context.
 - Horizontal markers to show expected and unexpected thresholds.
 
-A note widget can give helpful context on how to interpret a graph. For example, the `RUM Page Views` Powerpack describes how to compare the current week's page views to the previous week's. Notes can also link to external resources, like in the `System Resource Utilization` pack.
+A note widget can give helpful context on how to interpret a graph. For example, the `RUM Page Views` Powerpack describes how to compare the current week’s page views to the previous week’s. Notes can also link to external resources, like in the `System Resource Utilization` pack.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/note_widget_example.png" alt="An example powerpack titled /checkout Page Views showing several graphs of real user monitoring data. In the top right is a notes widget with a message providing information about one of the graphs" style="width:100%;" >}}
 

@@ -306,17 +306,15 @@ If you wish to rehydrate from archives in another access tier, you must first mo
 
 ##### SSE-S3
 
-The default encryption for Amazon S3 buckets is server-side encryption with Amazon S3 management keys ([SSE-S3][1]).
+The easiest method to add server side encryption to your S3 log archives is with S3's native server side encryption, [SSE-S3][1].
 
-To confirm your S3 bucket is encrypted with SSE-S3:
+To enable it, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
 
-1. Navigate to your S3 bucket.
-1. Click the **Properties** tab.
-1. In the **Default Encryption** section, check that the **Encryption key type** is **Amazon S3 managed keys (SSE-S3)**.
+{{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save."  style="width:75%;">}}
 
 ##### SSE-KMS
 
-Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
+Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
 
 1. Create your CMK
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:

@@ -63,7 +63,7 @@ The [Query Metrics view][2] shows historical query performance for normalized qu
 The [Query Samples view][3] helps you understand which queries are running at a given time. Compare each execution to the average performance of the query and related queries.
 
 - Identify unusually slow but infrequent queries not captured by metrics.
-- Find outliers in a query's execution time or execution cost.
+- Find outliers in a query’s execution time or execution cost.
 - Attribute a specific query execution to a user, application, or client host.
 
 {{< img src="database_monitoring/dbm-query-sample.png" alt="Database Monitoring" style="width:100%;">}}
@@ -74,7 +74,7 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 
 - Step through each operation to identify bottlenecks.
 - Improve query efficiency and save on costly sequential scans on large tables.
-- See how a query's plan changes over time.
+- See how a query’s plan changes over time.
 
 {{< img src="database_monitoring/dbm-explain-plan.png" alt="Database Monitoring" style="width:100%;">}}
 

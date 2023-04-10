@@ -10,16 +10,6 @@ kind: documentation
 title: データストリーム モニタリング
 ---
 
-<div class="alert alert-warning">
-このページで取り上げている機能は公開ベータ版です。
-</div>
-
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-    Data Streams Monitoring は、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
-</div>
-{{% /site-region %}}
-
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring は、大規模なパイプラインを理解し管理するための標準的な方法を提供し、以下を容易にします。

@@ -1721,7 +1721,7 @@ main:
     parent: service_catalog
     identifier: service_catalog_setup
     weight: 901
-  - name: Service Catalog API
+  - name: Registering Services through the API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
@@ -1895,43 +1895,8 @@ main:
   - name: Profiler Troubleshooting
     url: profiler/profiler_troubleshooting/
     parent: profiler
-    identifier: profiler_troubleshooting
+    identifier: profiler_profiler_troubleshooting
     weight: 6
-  - name: Java
-    url: profiler/profiler_troubleshooting/java/
-    parent: profiler_troubleshooting
-    identifier: profiler_troubleshooting_java
-    weight: 601
-  - name: Python
-    url: profiler/profiler_troubleshooting/python/
-    parent: profiler_troubleshooting
-    identifier: profiler_troubleshooting_python
-    weight: 602
-  - name: Go
-    url: profiler/profiler_troubleshooting/go/
-    parent: profiler_troubleshooting
-    identifier: profiler_troubleshooting_go
-    weight: 603
-  - name: Ruby
-    url: profiler/profiler_troubleshooting/ruby/
-    parent: profiler_troubleshooting
-    identifier: profiler_troubleshooting_ruby
-    weight: 604
-  - name: .NET
-    url: profiler/profiler_troubleshooting/dotnet/
-    parent: profiler_troubleshooting
-    identifier: profiler_troubleshooting_dotnet
-    weight: 606
-  - name: PHP
-    url: profiler/profiler_troubleshooting/php/
-    parent: profiler_troubleshooting
-    identifier: profiler_troubleshooting_php
-    weight: 607
-  - name: C/C++/Rust
-    url: profiler/profiler_troubleshooting/ddprof/
-    parent: profiler_troubleshooting
-    identifier: profiler_troubleshooting_linux
-    weight: 608
   - name: CI Visibility
     url: continuous_integration/
     pre: ci
@@ -2363,7 +2328,7 @@ main:
     url: logs/explorer/live_tail/
     parent: log_explorer
     weight: 501
-  - name: Search Logs
+  - name: Search
     url: logs/explorer/search/
     parent: log_explorer
     weight: 502

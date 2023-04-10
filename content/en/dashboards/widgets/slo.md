@@ -53,7 +53,7 @@ Display a custom title for your widget by checking the `Show a title` check box:
 
 {{< img src="dashboards/widgets/slo/slo_summary-show_title.png" alt="widget title"  >}}
 
-You can optionally define the title's size and alignment.
+You can optionally define the title’s size and alignment.
 
 ## API
 

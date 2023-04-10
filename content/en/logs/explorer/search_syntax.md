@@ -3,12 +3,14 @@ title: Log Search Syntax
 kind: documentation
 description: "Search through all of your logs."
 aliases:
+    - /logs/search
     - /logs/search-syntax
+    - /logs/explorer/search/
     - /logs/search_syntax/
 further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
-  text: "Learn how to visualize logs"
+  text: "Perform Log Analytics"
 - link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
@@ -17,7 +19,7 @@ further_reading:
   text: "Learn how to process your logs"
 - link: "/logs/explorer/saved_views/"
   tag: "Documentation"
-  text: "Learn about Saved Views"
+  text: "Automatically configure your Log Explorer"
 ---
 
 ## Overview
@@ -50,13 +52,9 @@ Use the search bar's autocomplete feature to complete your query using:
 
 Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example, if you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
 
-## Escape special characters and spaces
+## Escaping of special characters
 
-The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
-
-You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
-
-To search for special characters, parse them into an attribute with the [Grok Parser][1], and search for logs that contain that attribute.
+The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character. You can’t search for special characters in a log message. However, you can search for special characters when they’re inside of an attribute. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
 
 
 ## Attributes search

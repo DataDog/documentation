@@ -54,7 +54,7 @@ Periodic cleans reduce dashboard clutter; good practices for maintaining dashboa
 
 - Use custom lists to find what you need. Search for a keyword like a service name, and select multiple dashboards to add them to a list
 - Save one-off explorations for Notebooks or Quick Graphs. When exploring an individual metric or graph, try [Notebooks][5], which are unsaved by default, or [Quick Graphs][6] rather than creating a new dashboard that needs to be deleted
-- Use [dashboard details][7] to describe what a dashboard is for and how to use it. This helps teammates understand a dashboard's intended purpose and makes a dashboard useful to more people
+- Use [dashboard details][7] to describe what a dashboard is for and how to use it. This helps teammates understand a dashboard’s intended purpose and makes a dashboard useful to more people
 
 You can also manage dashboards programmatically with the Dashboards API, which includes endpoints to [bulk delete][8] and [bulk restore][2] dashboards.
 
