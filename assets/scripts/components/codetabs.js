@@ -2,11 +2,14 @@ import { getQueryParameterByName } from '../helpers/browser';
 import Cookies from 'js-cookie';
 
 const initCodeTabs = () => {
-    const region = Cookies.get('site');
-    const regionalSection = document.querySelector(`[data-region="${region}"]`);
     let codeTabsList = document.querySelectorAll('.code-tabs');
-    if (regionalSection) {
-        codeTabsList = regionalSection.querySelectorAll('.code-tabs');
+    let regionalSection;
+    const region = Cookies.get('site');
+    if (region) {
+        regionalSection = document.querySelector(`[data-region="${region}"]`);
+        if (regionalSection) {
+            codeTabsList = regionalSection.querySelectorAll('.code-tabs');
+        }
     }
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
     const codeTabParameters = {};
