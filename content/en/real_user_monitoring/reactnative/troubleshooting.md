@@ -1,6 +1,13 @@
 ---
 title: Troubleshooting
 kind: documentation
+further_reading:
+  - link: "https://github.com/DataDog/dd-sdk-reactnative"
+     tag: "Github"
+     text: "dd-sdk-reactnative Source code"
+  - link: "/real_user_monitoring"
+     tag: "Documentation"
+     text: "Datadog Real User Monitoring"
 
 ---
 
@@ -12,17 +19,19 @@ Follow these instructions in order when the SDK has been installed and the app c
 
 ### Check the configuration
 
-Sometimes, no data gets sent due to a small misstep in the configuration. Here are common things to check:
+Sometimes, no data is sent due to a small misstep in the configuration. 
 
-- Ensure your `clientToken` and `applicationId` are correct
-- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might not send
-- If you've set up a `Proxy` in the Datadog configuration, check that it has been correctly configured
-- Check that you are **tracking views** (all events must be attached to a view) and **sending events**
+Here are some common things to check for:
+
+- Ensure your `clientToken` and `applicationId` are correct.
+- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might not send.
+- If you've set up a `Proxy` in the Datadog configuration, check that it has been correctly configured.
+- Check that you are **tracking views** (all events must be attached to a view) and **sending events**.
 
 ### Review SDK logs in React Native
 
-- Set `config.verbosity = SdkVerbosity.DEBUG` (import `SdkVerbosity` from `@datadog/mobile-react-native`)
-- Logs will appear in the Javascript console, you should expect to see an output like this one:
+- Set `config.verbosity = SdkVerbosity.DEBUG`, which imports `SdkVerbosity` from `@datadog/mobile-react-native`.
+- Logs start appearing in the JavaScript console, like the following output:
 
   ```
   INFO  DATADOG: Datadog SDK was initialized
@@ -33,13 +42,13 @@ Sometimes, no data gets sent due to a small misstep in the configuration. Here a
   DEBUG  DATADOG: Adding RUM Action “RCTView” (TAP)
   ```
 
-  In this example, the first 4 logs indicate that the SDK has been correctly configured and the last 2 lines are events that were sent.
+  **Note**: In this example, the first four logs indicate that the SDK has been correctly configured and the last two lines are events that were sent.
 
 #### Possible cause
 
-If you are on iOS and see some DEBUG logs indicating that logs or RUM events were sent **before** the initialization logs, it might be the reason why the SDK is not sending events.
+If you are on iOS and see some DEBUG logs indicating that logs or RUM events were sent **before** the initialization logs, this may be why the SDK is not sending events.
 
-Currently, the SDK does not support sending events before initialization, and attempting to do so will put the SDK in a state where it cannot send any data.
+You cannot send events before initialization, and attempting to do so puts the SDK in a state where it cannot send any data.
 
 #### Solution
 
@@ -49,9 +58,9 @@ If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this fun
 
 With **`DatadogProvider`**:
 
-Starting from SDK version `1.2.0-beta1`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this very issue from happening.
+Starting from SDK version `1.2.0-beta1`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
-To use it, see our [migration guide][2].
+To use it, see the [Migrate to the Datadog Provider guide][2].
 
 ### Review native logs
 
@@ -59,9 +68,9 @@ Reviewing native logs can give you more input on what could be going wrong.
 
 #### On iOS
 
-- Open your project in Xcode by running `xed ios`
-- Build your project for a simulator or a device
-- Native logs will appear on the bottom right corner:
+- Open your project in Xcode by running `xed ios`.
+- Build your project for a simulator or a device.
+- Native logs start appearing on the bottom right corner:
 
   {{< img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="Reviewing native logs can help you figure out why no data is being sent"  >}}
 
@@ -74,7 +83,7 @@ If you are indeed sending events, you should see the following logs:
 [DATADOG SDK] 🐶 → 10:02:47.538 [DEBUG]    → (rum) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: AAAABBBB-1111-2222-3333-777788883333]
 ```
 
-The first log indicates that some data is being sent, and the second log that the data has been received.
+The first log indicates that some data is being sent, and the second log indicates that the data has been received.
 
 ##### Possible cause
 
@@ -92,15 +101,15 @@ If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this fun
 
 With **`DatadogProvider`**:
 
-Starting from SDK version `1.2.0-beta1`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this very issue from happening.
+Starting from SDK version `1.2.0-beta1`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
-To use it, see our [migration guide][2].
+To use it, see the [Migrate to the Datadog Provider guide][2].
 
 #### On Android
 
-- For a better debugging experience, we recommend installing [pidcat][3].
-  - pidcat filters the device logs (obtained by `adb logcat`) to only show the one from your application
-  - See [this issue][4] for M1 users who don't have Python 2
+- For a better debugging experience, Datadog recommends installing [pidcat][3].
+  - pidcat filters the device logs (obtained by `adb logcat`) to only show the one from your application.
+  - See [this issue][4] for M1 users who don't have Python 2.
 - Modify `node_modules/@datadog/mobile-react-native/android/src/main/kotlin/com/datadog/reactnative/DdSdk.kt` to enable verbose logging from the native SDK:
 
   ```java
@@ -114,15 +123,15 @@ To use it, see our [migration guide][2].
   }
   ```
 
-- Run the app on a phone connected in debug mode to your laptop (should appear when running `adb devices`), or from an emulator
-- Run pidcat `my.app.package.name` or `adb logcat` from your laptop
-- Look for any error mentioning Datadog
+- Run the app on a phone connected in debug mode to your laptop (should appear when running `adb devices`), or from an emulator.
+- Run pidcat `my.app.package.name` or `adb logcat` from your laptop.
+- Look for any error mentioning Datadog.
 
 Pidcat output looks like this:
 
 {{< img src="real_user_monitoring/react_native/troubleshooting-pidcat-logs.png" alt="This is an example of a pidcat output" >}}
 
-You can see in the example above that the last log indicates the batch of RUM data was sent successfully.
+In this example, the last log indicates that the batch of RUM data was sent successfully.
 
 ## Undefined symbols: Swift
 
@@ -135,7 +144,7 @@ Undefined symbols for architecture x86_64:
 ...
 ```
 
-Open Xcode and go to `Build Settings` of your project (not your app target) then make sure Library Search Paths is the following:
+Open Xcode, go to the `Build Settings` of your project (not your app target), and make sure Library Search Paths have the following settings:
 
 ```shell
 LIBRARY_SEARCH_PATHS = (
@@ -147,7 +156,7 @@ LIBRARY_SEARCH_PATHS = (
 
 ## Undefined symbols: _RCTModule
 
-If you see an undefined _RCTModule symbol, it may be related to this change in [react-native v0.63 changelog][5].
+If you see an undefined _RCTModule symbol, it may be related to this change in the [react-native v0.63 changelog][5].
 
 You can make the following change to fix it:
 
@@ -161,7 +170,11 @@ You can make the following change to fix it:
 
 ## Infinite loop-like error messages
 
-If you run into an issue such as [this one][5], where your React Native project displays a stream of error messages and significantly raises your CPU usage, try creating a new React Native project.
+If you run into an [issue where your React Native project displays a stream of error messages and significantly raises your CPU usage][5], try creating a new React Native project.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help
 [2]: https://github.com/DataDog/dd-sdk-reactnative/blob/develop/docs/migrating_to_datadog_provider.md
