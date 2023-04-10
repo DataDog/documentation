@@ -27,8 +27,8 @@ title: インテグレーションガイド
 {{< whatsnext desc="AWS ガイド:" >}}
     {{< nextlink href="getting_started/integrations/aws/" tag="AWS" >}}CloudFormation による AWS インテグレーションの自動セットアップ{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-terraform-setup" tag="AWS" >}}Terraform による AWS インテグレーションの自動セットアップ{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/aws-manual-setup" tag="AWS" >}}AWS インテグレーションの手動セットアップ{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag="AWS" >}}AWS インテグレーションに関するトラブルシューティング{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-organizations-setup" tag=" AWS" >}}組織向け AWS インテグレーションマルチアカウント設定{{< /nextlink >}}
+{{< nextlink href="integrations/guide/aws-manual-setup" tag=" AWS" >}}AWS インテグレーションに関するトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag="AWS" >}}AWS の請求詳細を監視する{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag="AWS" >}}エラー: Datadog は sts:AssumeRole を実行する権限がありません{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag="AWS" >}}AWS CloudWatch Metric Streams と Kinesis Data Firehose{{< /nextlink >}}
