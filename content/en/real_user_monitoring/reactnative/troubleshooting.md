@@ -24,7 +24,7 @@ Sometimes, no data is sent due to a small misstep in the configuration.
 Here are some common things to check for:
 
 - Ensure your `clientToken` and `applicationId` are correct.
-- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might not send.
+- Make sure you have not set `sessionSamplingRate` to something other than 100 (100 is the default value), or else your session might be sent.
 - If you've set up a `Proxy` in the Datadog configuration, check that it has been correctly configured.
 - Check that you are **tracking views** (all events must be attached to a view) and **sending events**.
 
