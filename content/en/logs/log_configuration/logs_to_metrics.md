@@ -27,11 +27,11 @@ To generate a new log-based metric, go to the [Configuration page][4] of your Da
 
 You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
 
-{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.jpg" alt="Generate Logs to metric"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/metrics_from_analytics.jpg" alt="Generate Logs to metric" style="width:80%;">}}
 
 ### Add a new log-based metric
 
-{{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric"  style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
 1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
 2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
@@ -39,7 +39,9 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][11].
 5. **Name your metric**: Log-based metric names must follow the [custom metric naming convention][12].
 
-**Note**: Data points for Log-based metrics are generated at ten second intervals.
+**Note**: Data points for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][13] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
+
+{{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The graph " style="width:80%;">}}
 
 <div class="alert alert-warning">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
@@ -92,3 +94,4 @@ An extra `status` tag is available on the `datadog.estimated_usage.logs.ingested
 [10]: /data_security/logs/#hipaa-enabled-customers
 [11]: /account_management/billing/custom_metrics/?tab=countrategauge
 [12]: /metrics/custom_metrics/#naming-custom-metrics
+[13]: /querying/
