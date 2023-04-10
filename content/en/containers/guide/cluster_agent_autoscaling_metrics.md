@@ -84,6 +84,7 @@ To enable the external metrics server with your Cluster Agent managed by the Dat
         apiKey: <DATADOG_API_KEY>
         appKey: <DATADOG_API_KEY>
 
+    features:
       externalMetricsServer:
         enabled: true
   ```
@@ -106,6 +107,7 @@ The keys can alternatively be set by referencing the names of pre-created `Secre
           secretName: <SECRET_NAME>
           keyName: <KEY_FOR_DATADOG_APP_KEY>
 
+    features:
       externalMetricsServer:
         enabled: true
   ```
@@ -211,7 +213,9 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
     name: datadog
   spec:
     global:
-      #(...)
+      credentials:
+        apiKey: <DATADOG_API_KEY>
+        appKey: <DATADOG_API_KEY>
     features:
       externalMetricsServer:
         enabled: true
