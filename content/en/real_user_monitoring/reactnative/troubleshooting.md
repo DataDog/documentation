@@ -58,7 +58,7 @@ If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this fun
 
 With **`DatadogProvider`**:
 
-Starting from SDK version `1.2.0-beta1`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
+Starting from SDK version `1.2.0`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
 To use it, see the [Migrate to the Datadog Provider guide][2].
 
@@ -101,7 +101,7 @@ If you use `DdSdkReactNative.initialize` to start the Datadog SDK, call this fun
 
 With **`DatadogProvider`**:
 
-Starting from SDK version `1.2.0-beta1`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
+Starting from SDK version `1.2.0`, you can initialize the SDK using the `DatadogProvider` component. This component includes a RUM events buffer that makes sure the SDK is initialized before sending any data to Datadog, which prevents this issue from happening.
 
 To use it, see the [Migrate to the Datadog Provider guide][2].
 
