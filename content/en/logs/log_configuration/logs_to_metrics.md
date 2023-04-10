@@ -41,7 +41,7 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 **Note**: Data points for log-based metrics are generated at 10-second intervals. When you create a [dashboard graph][13] for log-based metrics, the `count unique` parameter is based on the values within the 10-second interval.
 
-{{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The graph " style="width:80%;">}}
+{{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="The timeseries graph configuration page with the count unique query parameter highlighted" style="width:80%;">}}
 
 <div class="alert alert-warning">Log-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
