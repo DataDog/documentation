@@ -1992,7 +1992,7 @@ main:
     url: continuous_integration/pipelines/azure/
     parent: pipeline_visibility
     identifier: ci_azure
-    weight: 201  
+    weight: 201
   - name: Buildkite
     url: continuous_integration/pipelines/buildkite/
     parent: pipeline_visibility
