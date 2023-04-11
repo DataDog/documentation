@@ -42,7 +42,7 @@ You can filter the page by pipeline name to see the pipelines you're most concer
 
 Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame, and can display branches other than the default.
 
-{{< img src="ci/ci-single-pipeline.png" alt="Details for a single pipeline" style="width:100%;">}}
+{{< img src="ci/pipeline_branch_overview_updated.png" alt="Details for a single pipeline" style="width:100%;">}}
 
 Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
 
