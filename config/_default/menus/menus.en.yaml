@@ -7277,7 +7277,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 29
+      order: 40
   - name: Get usage attribution
     url: '#get-usage-attribution'
     identifier: usage-metering-get-usage-attribution
