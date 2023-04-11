@@ -13,7 +13,7 @@ Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances pick
 
 When you set up the Fargate and Lambda integration tiles, and any custom metrics, it impacts your Datadog bill.
 
-Datadog only bills for AWS hosts running the Datadog Agent and EC2 instances picked up by the Datadog-AWS integration. Other AWS resources such as ELB, RDS, and DynamoDB do not incur Datadog charges.
+Other AWS resources such as ELB, RDS, and DynamoDB are not part of monthly infrastructure billing, and configuration exclusions do not apply.
 
 ## AWS resource exclusion
 
