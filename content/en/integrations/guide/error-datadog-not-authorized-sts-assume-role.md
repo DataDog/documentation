@@ -80,7 +80,7 @@ Check the following points for the AWS account mentioned in the error:
 4. If you generated a new AWS External ID, add it to your AWS trust policy:
   {{< img src="integrations/guide/aws_error_sts_assume_role/aws-trust-policy-document.png" alt="AWS Trust Policy document with the sts:ExternalId parameter highlighted" >}}
 
-Note that the error **may** persist in the UI for a few hours while the changes propagate.
+**Note**: The error **may** persist in the UI for a few hours while the changes propagate.
 
 If you see the STS AssumeRole error limited to one or a few regions:
 ```
