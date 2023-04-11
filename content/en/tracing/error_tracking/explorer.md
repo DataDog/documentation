@@ -19,7 +19,7 @@ The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a 
 
 ## Explore your issues
 
-Each item listed in the Error Tracking Explorer surfaces high-level information about the issue, including the following:
+Each item listed in the [Error Tracking Explorer][3] surfaces high-level information about the issue, including the following:
 
 -   The error type and the error message
 -   The path to the file in which underlying errors occurred
@@ -71,4 +71,4 @@ Each error sample gives the information you need to understand why it happened a
 
 [1]: /tracing/trace_explorer/#live-search-for-15-minutes
 [2]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[3]: https://app.datadoghq.com/rum/error-tracking
+[3]: https://app.datadoghq.com/apm/error-tracking
