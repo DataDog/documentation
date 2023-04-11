@@ -20,7 +20,7 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-Datadog is an integration partner for GitHub Actions [Deployment Protection Rules][1], which helps you ensure the delivery of high-quality applications to end customers. You can enforce quality gates on your GitHub Actions deployment workflows using Datadog monitors. 
+Datadog is an integration partner for GitHub Actions Deployment Protection Rules, which helps you ensure the delivery of high-quality applications to end customers. You can enforce quality gates on your GitHub Actions deployment workflows using Datadog monitors. 
 
 These features are available for all Datadog customers, and they do not require usage of CI Visibility.
 
