@@ -396,9 +396,9 @@ dd.env=ci,\
 dd.service=my-java-app
 {{< /code-block >}}
 
-**Important:** Specifying `org.gradle.jvmargs` in the command-line will override the value specified elsewhere. If you have this property specified in a `gradle.properties` file, be sure to replicate the necessary settings in the command-line invocation
+Specifying `org.gradle.jvmargs` in the command line overrides the value specified elsewhere. If you have this property specified in a `gradle.properties` file, be sure to replicate the necessary settings in the command line invocation.
 
-**Note:** Currently CI Visibility is not compatible with [Gradle Configuration Cache][1], so do not enable the cache when running your tests with the tracer
+**Note:** CI Visibility is not compatible with [Gradle Configuration Cache][1], so do not enable the cache when running your tests with the tracer.
 
 [1]: https://docs.gradle.org/current/userguide/configuration_cache.html
 
