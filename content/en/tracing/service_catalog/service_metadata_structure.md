@@ -15,12 +15,12 @@ further_reading:
 
 ## Overview
 
-Service Catalog uses Service Definition Schemas to store and display relevant metadata about your services. The schemas have built-in validation rules that ensure that only valid values are accepted and you can view warnings in the 'Definition tab in the side panel for any selected services. 
+Service Catalog uses Service Definition Schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the 'Definition' tab in the side panel for any selected services. 
 
-There are two supported versions of the schema. 
+There are two supported versions of the schema:
 
-- V2 is the earliest version, and contains some experimental features such as dd-team (this is removed from v2.1).
-- V2.1 supports additional UI elements like service groupings as well as fields like application, tier, lifecycle to make it easier to preserve context for your service ownership information. 
+- V2 is the earliest version, and contains some experimental features, such as `dd-team` (this is removed from v2.1).
+- V2.1 supports additional UI elements like service groupings, as well as fields like application, tier, lifecycle to make it easier to preserve context for your service ownership information.
 
 You can find the latest updates and additional information about the schemas on GitHub.
 
