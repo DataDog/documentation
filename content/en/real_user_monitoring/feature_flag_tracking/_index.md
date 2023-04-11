@@ -11,9 +11,9 @@ further_reading:
   text: "RUM Explorer"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Feature Flag Tracking in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
-{{< /callout >}}
+<div class="alert alert-warning">
+    Feature Flag Tracking is in beta.
+</div>
 
 ## Overview
 
