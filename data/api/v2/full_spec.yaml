@@ -25033,8 +25033,7 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `audit_trail`, `serverless`, `ci_app`,
-          `cloud_cost_management`,
+          `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
           `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
@@ -25047,7 +25046,9 @@ paths:
           `sds`, `snmp`,
 
           `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.'
+          `timeseries`.
+
+          The following product family has been **deprecated**: `audit_logs`.'
         in: query
         name: filter[product_families]
         required: true
