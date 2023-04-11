@@ -83,11 +83,7 @@ Provide a **name** for each rule case. This name is appended to the rule name wh
 
 #### Severity and notification
 
-Set the severity of the signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the "Notify" section, configure zero or more [notification targets][4] for each rule case.
-
-You can also create [notification rules][5] to alleviate manual edits to notification preferences for individual detection rules.
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
