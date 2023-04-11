@@ -6,6 +6,9 @@ description: Learn how to set up RUM to capture feature flag data and analyze th
 aliases:
 - /real_user_monitoring/guide/getting-started-feature-flags/
 further_reading:
+- link: '/real_user_monitoring/feature_flag_tracking'
+  tag: 'Documentation'
+  text: 'Analyze your feature flag data with Feature Flag Tracking'
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
