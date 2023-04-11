@@ -43,10 +43,10 @@ You can install the [Datadog extension][6] from the [Visual Studio Code Marketpl
 
 1. After installing the Datadog extension, log in to Datadog.
 2. Select a Synthetic test to execute. You can search for specific tests by clicking the **Search** icon.
-3. To run a test in a local environment, update a Synthetic test's configuration by changing the test's start URL to `localhost`.
+3. To run a test in a local environment, update a Synthetic test's configuration by enabling the conversion of the start URL and specifying a `localhost` URL on the **Settings** page.
 4. Run a test.
 
-// image of test configuration panel with start URL modified to localhost
+{{< img src="developers/ide_integrations/vscode/test_configuration_modified_starturl.png" alt="The Test Configuration panel and Settings page where you can specify the start URL of a Synthetics test to a localhost URL" style="width:100%;" >}}
 
 ## Permissions
 
