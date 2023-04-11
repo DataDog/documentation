@@ -12,7 +12,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-    Feature Flag Tracking is currently in beta.
+    Feature Flag Tracking is in beta.
 </div>
 
 ## Overview
