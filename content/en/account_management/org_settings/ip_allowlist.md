@@ -17,14 +17,14 @@ When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowl
 
 If a user's IP is not contained in the IP allowlist, they are effectively blocked from accessing and using:
 
-- Datadog’s web UI
-- Datadog’s public [API][1], including both documented and unpublished endpoints
-- Datadog’s mobile apps (iOS, Android)
+- Datadog's web UI
+- Datadog's public [API][1], including both documented and unpublished endpoints
+- Datadog's mobile apps (iOS, Android)
 - Third-party applications that access Datadog through OAuth
 
 The IP allowlist feature does not block access to the following:
 - Data ingest endpoints to which the Agent sends data, such as metrics, traces, and logs
-- The [Validate API key][2] endpoint, which is often used by data ingestion
+- The [validate API key][2] endpoint, which the Agent uses before submitting data
 - [Public dashboards][3]
 
 ### Functionality
@@ -40,7 +40,15 @@ With the IP allowlist API or UI, you can:
 - Delete a single entry from the IP allowlist.
 - Replace the whole IP allowlist with new entries (only available through the API).
 
+### Lockout prevention
+
+When you enable or modify the IP allowlist, the system enforces constraints to make sure you can still access your data:
+- At least one entry in the IP allowlist contains your current IP
+- The allowlist contains at least one entry
+
 ## Managing the IP allowlist in the UI
+
+**Note:** The IP allowlist page only appears in the UI if your Datadog organization has the feature turned on.
 
 To find the [IP allowlist UI][4]:
 
@@ -59,7 +67,7 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 1. Click the **Add IP** button at the top right of the page. 
 1. Enter a valid IP address or CIDR range.
-1. Optionally, add a note, for example, to remind yourself why you are allowing access to or blocking certain addresses.
+1. Optionally, add a note, for example, to remind yourself why you are allowing access to certain addresses.
 1. Click **Confirm**.
 
 ### Edit IP addresses or CIDR ranges
@@ -76,13 +84,14 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 ## Managing the IP allowlist programmatically
 
-To manage the IP allowlist through the API, see the [public API documentation][2].
+To manage the IP allowlist through the API, see the [public API documentation][5].
 
-See the [`ip_allowlist` resource][5] to manage the IP allowlist in Terraform.
+See the [`ip_allowlist` resource][6] to manage the IP allowlist in Terraform.
 
 
 [1]: /api/latest/
-[2]: /api/latest/ip-allowlist/
+[2]: /api/latest/authentication/#validate-api-key
 [3]: /dashboards/sharing/
 [4]: https://app.datadoghq.com/organization-settings/ip-allowlist
-[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
+[5]: /api/latest/ip-allowlist/
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
