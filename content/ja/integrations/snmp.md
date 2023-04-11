@@ -26,9 +26,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
-- notification
 - network
+- notification
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp/README.md
@@ -47,18 +46,17 @@ public_title: SNMP
 short_description: ネットワークデバイスから SNMP メトリクスを収集。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::モニタリング
-  - Category::通知
   - Category::ネットワーク
+  - Category::通知
   - Category::SNMP
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ネットワークデバイスから SNMP メトリクスを収集。
   media: []

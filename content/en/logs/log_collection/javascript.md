@@ -62,10 +62,34 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js','DD_LOGS')
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
+            clientToken: '<DATADOG_CLIENT_TOKEN>',
+            site: 'datadoghq.com',
+            forwardErrorsToLogs: true,
+            sessionSampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js','DD_LOGS')
       DD_LOGS.onReady(function() {
           DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'datadoghq.com',
+            site: 'ap1.datadoghq.com',
             forwardErrorsToLogs: true,
             sessionSampleRate: 100,
           })
@@ -86,8 +110,8 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'datadoghq.eu',
             forwardErrorsToLogs: true,
@@ -110,8 +134,8 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'us3.datadoghq.com',
             forwardErrorsToLogs: true,
@@ -134,8 +158,8 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'us5.datadoghq.com',
             forwardErrorsToLogs: true,
@@ -158,8 +182,8 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v4.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'ddog-gov.com',
             forwardErrorsToLogs: true,
@@ -173,7 +197,7 @@ Load and configure the SDK in the head section of your pages. For **{{<region-pa
 {{</ site-region>}}
 
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ### CDN sync
 
@@ -187,9 +211,28 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'datadoghq.com',
+          forwardErrorsToLogs: true,
+          sessionSampleRate: 100,
+        })
+    </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
+    <script>
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<DATADOG_CLIENT_TOKEN>',
+          site: 'ap1.datadoghq.com',
           forwardErrorsToLogs: true,
           sessionSampleRate: 100,
         })
@@ -206,7 +249,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'datadoghq.eu',
           forwardErrorsToLogs: true,
@@ -225,7 +268,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'us3.datadoghq.com',
           forwardErrorsToLogs: true,
@@ -244,7 +287,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'us5.datadoghq.com',
           forwardErrorsToLogs: true,
@@ -263,7 +306,7 @@ To receive all logs and errors, load and configure the SDK at the beginning of t
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'ddog-gov.com',
           forwardErrorsToLogs: true,
@@ -343,17 +386,17 @@ datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 #### CDN async
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 #### CDN sync
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
+window.DD_LOGS && window.DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
@@ -430,13 +473,13 @@ try {
   throw new Error('Wrong behavior')
   ...
 } catch (ex) {
-  DD_LOGS.onReady(function () {
-    DD_LOGS.logger.error('Error occurred', {}, ex)
+  window.DD_LOGS.onReady(function () {
+    window.DD_LOGS.logger.error('Error occurred', {}, ex)
   })
 }
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 #### CDN sync
 
@@ -446,7 +489,7 @@ try {
   throw new Error('Wrong behavior')
   ...
 } catch (ex) {
-    window.DD_LOGS && DD_LOGS.logger.error('Error occurred', {}, ex)
+    window.DD_LOGS && window.DD_LOGS.logger.error('Error occurred', {}, ex)
 }
 ```
 
@@ -495,19 +538,19 @@ datadogLogs.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 For CDN async, use:
 
 ```javascript
-DD_LOGS.onReady(function() {
-  DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
+window.DD_LOGS.onReady(function() {
+  window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 #### CDN sync
 
 For CDN sync, use:
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
+window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 ```
 
 #### Placeholders
@@ -549,8 +592,8 @@ datadogLogs.init({
 #### CDN Async
 
 ```javascript
-DD_LOGS.onReady(function() {
-    DD_LOGS.init({
+window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
         ...,
         beforeSend: (log) => {
             // remove email from view url
@@ -611,8 +654,8 @@ datadogLogs.init({
 #### CDN Async
 
 ```javascript
-DD_LOGS.onReady(function() {
-    DD_LOGS.init({
+window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
         ...,
         beforeSend: (log) => {
           // discard 404 network errors
@@ -691,21 +734,21 @@ signupLogger.info('Test sign up completed')
 For example, assume there is a `signupLogger`, defined with all the other loggers:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+window.DD_LOGS.onReady(function () {
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 })
 ```
 
 It can now be used in a different part of the code with:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  const signupLogger = DD_LOGS.getLogger('signupLogger')
+window.DD_LOGS.onReady(function () {
+  const signupLogger = window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
@@ -713,7 +756,7 @@ For example, assume there is a `signupLogger`, defined with all the other logger
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 }
 ```
 
@@ -721,7 +764,7 @@ It can now be used in a different part of the code with:
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = DD_LOGS.getLogger('signupLogger')
+  const signupLogger = window.window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 }
 ```
@@ -774,55 +817,55 @@ datadogLogs.getGlobalContext() // => {}
 For CDN async, use:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.setGlobalContext({ env: 'staging' })
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setGlobalContext({ env: 'staging' })
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.removeGlobalContextProperty('referrer')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.removeGlobalContextProperty('referrer')
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getGlobalContext() // => {env: 'staging'}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getGlobalContext() // => {env: 'staging'}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.clearGlobalContext()
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.clearGlobalContext()
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getGlobalContext() // => {}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getGlobalContext() // => {}
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
 For CDN sync, use:
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setGlobalContext({ env: 'staging' })
+window.DD_LOGS && window.DD_LOGS.setGlobalContext({ env: 'staging' })
 
-window.DD_LOGS && DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
+window.DD_LOGS && window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 
-window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
 
-window.DD_LOGS && DD_LOGS.removeGlobalContextProperty('referrer')
+window.DD_LOGS && window.DD_LOGS.removeGlobalContextProperty('referrer')
 
-window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging'}
+window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {env: 'staging'}
 
-window.DD_LOGS && DD_LOGS.clearGlobalContext()
+window.DD_LOGS && window.DD_LOGS.clearGlobalContext()
 
-window.DD_LOGS && DD_LOGS.getGlobalContext() // => {}
+window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {}
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
@@ -862,55 +905,55 @@ datadogLogs.getUser() // => {}
 For CDN async, use:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.setUserProperty('type', 'customer')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setUserProperty('type', 'customer')
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.removeUserProperty('type')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.removeUserProperty('type')
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.clearUser()
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.clearUser()
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getUser() // => {}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getUser() // => {}
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
 For CDN sync, use:
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
+window.DD_LOGS && window.DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
 
-window.DD_LOGS && DD_LOGS.setUserProperty('type', 'customer')
+window.DD_LOGS && window.DD_LOGS.setUserProperty('type', 'customer')
 
-window.DD_LOGS && DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
+window.DD_LOGS && window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
 
-window.DD_LOGS && DD_LOGS.removeUserProperty('type')
+window.DD_LOGS && window.DD_LOGS.removeUserProperty('type')
 
-window.DD_LOGS && DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
+window.DD_LOGS && window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
 
-window.DD_LOGS && DD_LOGS.clearUser()
+window.DD_LOGS && window.DD_LOGS.clearUser()
 
-window.DD_LOGS && DD_LOGS.getUser() // => {}
+window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
@@ -939,25 +982,25 @@ datadogLogs.addContext('referrer', document.referrer)
 For CDN async, use:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.setContext("{'env': 'staging'}")
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setContext("{'env': 'staging'}")
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.addContext('referrer', document.referrer)
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.addContext('referrer', document.referrer)
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
 For CDN sync, use:
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}")
+window.DD_LOGS && window.DD_LOGS.setContext("{'env': 'staging'}")
 
-window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer)
+window.DD_LOGS && window.DD_LOGS.addContext('referrer', document.referrer)
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
@@ -987,19 +1030,19 @@ datadogLogs.logger.setLevel('<LEVEL>')
 For CDN async, use:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.logger.setLevel('<LEVEL>')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.logger.setLevel('<LEVEL>')
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
 For CDN sync, use:
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
+window.DD_LOGS && window.DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
@@ -1032,21 +1075,21 @@ datadogLogs.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 For CDN async, use:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.logger.setHandler('<HANDLER>')
-  DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.logger.setHandler('<HANDLER>')
+  window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 })
 ```
 
-**Note**: Early API calls must be wrapped in the `DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+**Note**: Early API calls must be wrapped in the `window.DD_LOGS.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ##### CDN sync
 
 For CDN sync, use:
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
-window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
+window.DD_LOGS && window.DD_LOGS.logger.setHandler('<HANDLER>')
+window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
 **Note**: The `window.DD_LOGS` check prevents issues when a loading failure occurs with the SDK.
@@ -1076,8 +1119,8 @@ datadogLogs.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
 For CDN async, use:
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
 })
 ```
 

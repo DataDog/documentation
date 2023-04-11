@@ -34,8 +34,8 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         proxy: '<YOUR_PROXY_URL>',

@@ -639,7 +639,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 **For CentOS, RedHat, or another distribution that uses yum/RPM:**
 
-1. Set up Datadog’s Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. Set up Datadog's Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
    ```
    [datadog]
    name = Datadog, Inc.

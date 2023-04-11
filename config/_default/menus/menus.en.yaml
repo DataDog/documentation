@@ -1988,51 +1988,56 @@ main:
     parent: ci
     identifier: pipeline_visibility
     weight: 2
+  - name: Azure
+    url: continuous_integration/pipelines/azure/
+    parent: pipeline_visibility
+    identifier: ci_azure
+    weight: 201  
   - name: Buildkite
     url: continuous_integration/pipelines/buildkite/
     parent: pipeline_visibility
     identifier: ci_buildkite
-    weight: 201
+    weight: 202
   - name: CircleCI
     url: continuous_integration/pipelines/circleci/
     parent: pipeline_visibility
     identifier: ci_circleci
-    weight: 202
+    weight: 203
   - name: Codefresh
     url: continuous_integration/pipelines/codefresh/
     parent: pipeline_visibility
     identifier: ci_codefresh
-    weight: 203
+    weight: 204
   - name: GitHub Actions
     url: continuous_integration/pipelines/github/
     parent: pipeline_visibility
     identifier: ci_github
-    weight: 204
+    weight: 205
   - name: GitLab
     url: continuous_integration/pipelines/gitlab/
     parent: pipeline_visibility
     identifier: ci_gitlab
-    weight: 205
+    weight: 206
   - name: Jenkins
     url: continuous_integration/pipelines/jenkins/
     parent: pipeline_visibility
     identifier: ci_jenkins
-    weight: 206
+    weight: 207
   - name: TeamCity
     url: continuous_integration/pipelines/teamcity/
     parent: pipeline_visibility
     identifier: ci_teamcity
-    weight: 207
+    weight: 208
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
     identifier: ci_custom_commands
-    weight: 210
+    weight: 209
   - name: Custom Tags and Metrics
     url: continuous_integration/pipelines/custom_tags_and_metrics/
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
-    weight: 211
+    weight: 210
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
@@ -3163,6 +3168,11 @@ main:
     parent: rum_reactnative
     identifier: rum_reactnative_codepush
     weight: 405
+  - name: Troubleshooting
+    url: real_user_monitoring/reactnative/troubleshooting/
+    parent: rum_reactnative
+    identifier: rum_reactnative_troubleshooting
+    weight: 406
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum

@@ -21,6 +21,7 @@ author:
   sales_email: sales@launchdarkly.com
   support_email: support@launchdarkly.com
 categories:
+- 構成 & デプロイ
 - notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
@@ -39,17 +40,18 @@ public_title: LaunchDarkly
 short_description: 機能リリースとインフラストラクチャーの変更を自信を持ってコントロールすることができます。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
   - Category::Notification
-  - Offering::UI Extension
   - Offering::Integration
+  - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 機能リリースとインフラストラクチャーの変更を自信を持ってコントロールすることができます。
   media:

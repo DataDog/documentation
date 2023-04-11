@@ -45,7 +45,7 @@ You can access performance metrics for your views in:
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.  
+- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
@@ -113,7 +113,7 @@ The criteria of 100ms since last request or DOM mutation might not be an accurat
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
 ```javascript
-DD_RUM.init({
+window.DD_RUM.init({
     ...
     excludedActivityUrls: [
         // Exclude exact URLs
@@ -140,7 +140,7 @@ For example, you can add a timing when your hero image has appeared:
 ```html
 <html>
   <body>
-    <img onload="DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
+    <img onload="window.DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
   </body>
 </html>
 ```
@@ -151,7 +151,7 @@ Or when users first scroll:
 document.addEventListener("scroll", function handler() {
     //Remove the event listener so that it only triggers once
     document.removeEventListener("scroll", handler);
-    DD_RUM.addTiming('first_scroll');
+    window.DD_RUM.addTiming('first_scroll');
 });
 ```
 
@@ -169,8 +169,8 @@ document.addEventListener("scroll", function handler() {
     document.removeEventListener("scroll", handler);
 
     const timing = Date.now()
-    DD_RUM.onReady(function() {
-      DD_RUM.addTiming('first_scroll', timing);
+    window.DD_RUM.onReady(function() {
+      window.DD_RUM.addTiming('first_scroll', timing);
     });
 });
 
