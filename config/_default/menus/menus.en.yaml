@@ -1726,7 +1726,7 @@ main:
     parent: service_catalog
     identifier: service_catalog_api
     weight: 902
-  - name: Service Catalog API
+  - name: Service Metadata Structure
     url: tracing/service_catalog/service_metadata_structure
     parent: service_catalog
     identifier: service_metadata_structure
