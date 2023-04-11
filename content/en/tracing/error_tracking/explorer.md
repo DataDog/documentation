@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a group of similar errors that have the same _fingerprint_ and which might need to be fixed depending on how critical it is. 
+The Error Tracking Explorer shows you a list of ongoing issues. An _issue_ is a group of similar errors that have the same _fingerprint_ and which might need to be fixed depending on the severity of the issue. 
 
 {{< img src="tracing/error_tracking/error_tracking_explore_inspect.png" alt="Error Tracking Explorer" style="width:100%" >}}
 
@@ -25,8 +25,8 @@ Each item listed in the [Error Tracking Explorer][3] surfaces high-level informa
 -   The path to the file in which underlying errors occurred.
 -  Information about the issue’s lifetime:
     -   When it was first and last seen.
-    -   Number of error occurrences in the selected time period.
-    -   Graph of error occurrences over time in the selected time period.
+    -   The number of error occurrences in the selected time period.
+    -   A graph of error occurrences over time in the selected time period.
 
 ### Time range
 
