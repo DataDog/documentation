@@ -9,7 +9,7 @@ aliases:
     - /serverless/troubleshooting/serverless_tracing_and_webpack
 ---
 
-# Compatibility
+## Overview
 
 Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bundlers like [webpack][1] due to the use of conditional imports and other issues. While webpack cannot build `dd-trace`, your application can still use the `dd-trace` and `datadog-lambda-js` libraries provided by the prebuilt Datadog Lambda layer. Follow the instructions below.
 

@@ -24,7 +24,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
-
+| AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | AP1      |
 
 ## Real User Monitoring (RUM) domains
 
@@ -38,6 +38,7 @@ All Datadog RUM traffic is transmitted over SSL (default 443) to the following d
 | US3  | `https://logs.browser-intake-us3-datadoghq.com` |
 | US5  | `https://logs.browser-intake-us5-datadoghq.com` |
 | EU1  | `https://mobile-http-intake.logs.datadoghq.eu`  |
+| AP1  | `https://logs.browser-intake-ap1-datadoghq.com/` |
 
 ### Traces
 
@@ -47,6 +48,7 @@ All Datadog RUM traffic is transmitted over SSL (default 443) to the following d
 | US3  | `https://trace.browser-intake-us3-datadoghq.com`     |
 | US5  | `https://trace.browser-intake-us5-datadoghq.com`     |
 | EU1  | `https://public-trace-http-intake.logs.datadoghq.eu` |
+| AP1  | `https://trace.browser-intake-ap1-datadoghq.com/`    |
 
 ### RUM Events
 
@@ -56,6 +58,7 @@ All Datadog RUM traffic is transmitted over SSL (default 443) to the following d
 | US3  | `https://rum.browser-intake-us3-datadoghq.com` |
 | US5  | `https://rum.browser-intake-us5-datadoghq.com` |
 | EU1  | `https://rum-http-intake.logs.datadoghq.eu`    |
+| AP1  | `https://rum.browser-intake-ap1-datadoghq.com/` |
 
 ## Navigate the Datadog documentation by site
 

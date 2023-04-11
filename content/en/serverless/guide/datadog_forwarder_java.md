@@ -53,12 +53,21 @@ dependencies {
 
 ### Instrument
 
-
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
     ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
+
+    ```yaml
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:<VERSION>
+    ```
+{{< /site-region >}}
 
 2. Configure the following environment variables on your function:
 
@@ -123,7 +132,7 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
         Map<String,Object> myTags = new HashMap<String, Object>();
             myTags.put("product", "latte");
             myTags.put("order","online");
-        
+
         // Submit a custom metric
         ddl.metric(
             "coffee_house.order_value", // Metric name
@@ -157,7 +166,7 @@ Some versions of `datadog-lambda-java` include a transitive dependency on log4j 
 
 The latest version of `datadog-lambda-java` is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
 
-If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well. 
+If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well.
 You may find the latest version of `0.3.x` in the [`datadog-lambda-java` repository][13].
 
 The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` (Maven) or `build.gradle` (Gradle).
@@ -175,7 +184,7 @@ Your `pom.xml` file contains a section similar to the following:
 </dependency>
 ```
 
-Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
 Then redeploy your Lambda function.
 
 {{% /tab %}}
@@ -190,7 +199,7 @@ dependencies {
 }
 ```
 
-Replace `VERSION` with the latest version of `datadog-lambda-java` (available above). 
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
 Then redeploy your Lambda function.
 
 {{% /tab %}}
@@ -198,10 +207,17 @@ Then redeploy your Lambda function.
 
 If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` Lambda layer and change it to:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ```
+{{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+```
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:4
+```
+{{< /site-region >}}
 
 [2]: /serverless/forwarder/
 [3]: /serverless/enhanced_lambda_metrics

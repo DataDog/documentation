@@ -7,6 +7,10 @@ aliases:
   - /logs/archives/rehydrating/
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-warning">Log Rehydration* is not supported in the AP1 region.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Log Rehydration* enables you to capture log events from customer-owned storage-optimized archives back into Datadog's search-optimized [Log Explorer][1], so that you can use Datadog to analyze or investigate log events that are either old or were excluded from indexing.

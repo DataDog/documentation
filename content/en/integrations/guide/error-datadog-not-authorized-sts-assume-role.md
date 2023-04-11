@@ -13,12 +13,25 @@ This error usually indicates an issue with the trust policy associated with the 
 
 Check the following points for the AWS account mentioned in the error:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
     {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-review.png" alt="AWS Create IAM Role Review page with DatadogAWSIntegrationRole entered for Role name, account 464622532012 listed for Trusted entities, and DatadogAWSIntegrationPolicy listed for Policies" >}}
 
 2. Ensure Datadog's account ID `464622532012` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
     {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-configuration.png" alt="AWS Create IAM Role page with Another AWS Account selected under type of trusted entity, 464622532012 entered for account ID, and the require MFA button unchecked" >}}
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+1. When creating an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
+    {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-review.png" alt="AWS Create IAM Role Review page with DatadogAWSIntegrationRole entered for Role name, account 417141415827 listed for Trusted entities, and DatadogAWSIntegrationPolicy listed for Policies" >}}
 
+2. Ensure Datadog's account ID `417141415827` is entered under `Another AWS account`. Entering any other account ID causes the integration to fail. Also ensure `Required MFA` is **unchecked**:
+    {{< img src="integrations/guide/aws_error_sts_assume_role/create-role-configuration.png" alt="AWS Create IAM Role page with Another AWS Account selected under type of trusted entity, 417141415827 entered for account ID, and the require MFA button unchecked" >}}
+
+[2]: https://ap1.datadoghq.com/integrations/amazon-web-services
+[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
+{{< /site-region >}}
 3. Generate a new AWS External ID under **Account Details** in the [Datadog AWS Integration page][2] and click **Save**:
   {{< img src="integrations/guide/aws_error_sts_assume_role/datadog-aws-integration-page.png" alt="Datadog AWS integration page with the AWS Role Name and AWS External ID fields and Generate New ID button" >}}
 
@@ -29,7 +42,7 @@ Note that the error **may** persist in the UI for a few hours while the changes 
 
 If you see the STS AssumeRole error limited to one or a few regions:
 ```
-Datadog is not authorized to perform action sts:AssumeRole Account affected:<account_id> Regions affected: us-east-1, eu-west-1 
+Datadog is not authorized to perform action sts:AssumeRole Account affected:<account_id> Regions affected: us-east-1, eu-west-1
 ```
 The source of the issue could be [AWS Service Control Policies][4].
 ```
@@ -46,7 +59,6 @@ Still need help? Contact [Datadog support][6].
 
 [1]: /integrations/amazon_web_services/?tab=roledelegation#setup
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 [4]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
 [5]: https://docs.datadoghq.com/api/latest/aws-integration/#update-an-aws-integration
 [6]: /help/

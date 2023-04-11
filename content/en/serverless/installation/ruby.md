@@ -32,6 +32,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
     - Option A: [Configure the layers][2] for your Lambda function using the ARN in the following format.
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
       ```
       # For regular regions
       arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
@@ -39,6 +40,17 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
       # For us-gov regions
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
       ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+      ```
+      # For regular regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
+
+      # For us-gov regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
+      ```
+{{< /site-region >}}
 
       Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 

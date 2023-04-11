@@ -49,8 +49,8 @@ To start collecting feature flag data, initialize the RUM SDK and configure the 
   <summary>CDN async</summary>
 
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       ...
       enableExperimentalFeatures: ["feature_flags"],
       ...

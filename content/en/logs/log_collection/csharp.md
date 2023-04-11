@@ -399,6 +399,14 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -476,6 +484,19 @@ using (var log = new LoggerConfiguration()
 ```csharp
 using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
     .CreateLogger())
 {
     // Some code

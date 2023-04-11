@@ -56,7 +56,7 @@ API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -129,6 +129,18 @@ Other: See [logs endpoints][3]
 : `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `http-encrypted-intake.logs.us5.datadoghq.com`
+
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
+Other: See [logs endpoints][3]
 
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers

@@ -30,6 +30,10 @@ When activity snapshots are enabled in the Agent configuration, the Agent automa
 
 Each Agent can profile multiple containers on the host system simultaneously. To minimize performance overhead, no more than five (default) containers are profiled at any given time.
 
+The following diagram shows a high-level representation of how activity snapshots from multiple containers are merged into a single Workload Security Profile. The commonality score represents how likely a given process or file activity is normal, known behavior.
+
+{{< img src="security/cws/security_profiles/security-profiles-diagram.png" alt="CWS Security Profiles page with auto-generated security profiles" width="50%">}}
+
 ### Behavior learning model
 
 A Workload Security Profile is a behavior model for a specific workload image and image version. Capturing and comparing activity snapshots from individual containers enables each security profile to provide a model of the aggregate workload behavior of similar containers. As more containers are profiled, this representation results in a more precise behavior model for a specific workload. Since containerized workloads are expected to be immutable, there should be few variations between workloads that share common image name and image version tags.
