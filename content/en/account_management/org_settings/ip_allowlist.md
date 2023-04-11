@@ -74,12 +74,15 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 1. In the IP allowlist table, hover over the row you wish to delete. 
 1. Click the trash can (**Delete**) icon and confirm you want to delete it. 
 
-## Managing the IP allowlist with the API
+## Managing the IP allowlist programmatically
 
-See the IP allowlist [public API][2].
+To manage the IP allowlist through the API, see the [public API documentation][2].
+
+See the [`ip_allowlist` resource][5] to manage the IP allowlist in Terraform.
 
 
 [1]: /api/latest/
 [2]: /api/latest/ip-allowlist/
 [3]: /dashboards/sharing/
 [4]: https://app.datadoghq.com/organization-settings/ip-allowlist
+[5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
