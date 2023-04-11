@@ -14,7 +14,7 @@ further_reading:
   text: "Threat Monitoring and Protection"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
-  text: "Risk Management"
+  text: "Application Vulnerability Management"
 - link: "/security/application_security/setup_and_configure/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
@@ -68,9 +68,9 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 ## Investigate risk introduced in upstream open source libraries and dependencies
 
-<div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
+<div class="alert alert-info">Application Vulnerability Management is in beta.</a></div>
 
-[ASM Risk Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+[Application Vulnerability Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
 
 ## Next steps
 

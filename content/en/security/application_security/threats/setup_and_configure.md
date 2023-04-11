@@ -265,7 +265,7 @@ Go
 
 ### ASM capabilities 
 The following ASM capabilities are not supported for Lambda functions:
- - ASM Risk Management
+ - Application Vulnerability Management
  - IP, user, and suspicious request blocking
  - 1-Click enabling ASM
 

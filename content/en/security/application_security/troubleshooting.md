@@ -541,9 +541,9 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang-wrapper >}}
 
 
-## No vulnerabilities detected by Risk Management
+## No vulnerabilities detected by Application Vulnerability Management
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the Risk Management Vulnerability Explorer. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the Application Vulnerability Management Explorer. It is important to check each step when investigating this issue. 
 
 ### Confirm ASM is enabled
 

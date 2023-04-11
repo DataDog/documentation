@@ -39,9 +39,9 @@ If your service is running with <a href="/agent/guide/how_remote_config_works/#e
 
 ### Identify vulnerable services
 
-<div class="alert alert-info">Risk Management vulnerability detection is in beta.</a></div>
+<div class="alert alert-info">Application Vulnerability Management vulnerability detection is in beta.</a></div>
 
-Datadog ASM [Risk Management][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
+Datadog [Application Vulnerability Management][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
 
 ## Compatibility
 
@@ -122,11 +122,11 @@ Datadog ASM includes over 100 attack signatures that help protect against [many 
 
 ## Built-in vulnerability detection
 
-<div class="alert alert-info">Risk Management through vulnerability detection is in beta.</a></div>
+<div class="alert alert-info">Application Vulnerability Management through vulnerability detection is in beta.</a></div>
 
 Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
-For more information, read [Risk Management][5].
+For more information, read [Application Vulnerability Management][5].
 
 ## How Datadog ASM protects against Log4Shell
 
