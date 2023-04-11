@@ -26,14 +26,14 @@
   {{- end -}}
 {{- end -}}
 
-{{- if ne $contentEncoding "deflate" -}}
-
 {{- with $exampleDefinition -}}
 ## {{ default $exampleId .summary }}
 {{- range split .description "\n" }}
 # {{ . }}
 {{- end }}
+<br/>
 {{- end -}}
+{{- if ne $contentEncoding "deflate" -}}
 
 {{- with $parameters.pathParams -}}
     <span class="c1"># Path parameters</span><br/>
@@ -157,5 +157,5 @@
 {{- end -}}
 <br/>
 {{- else -}}
-See one of the other client libraries for examples of deflate compression.<br/>
+See one of the other client libraries for examples of deflate compression.<br/><br/>
 {{- end -}}
