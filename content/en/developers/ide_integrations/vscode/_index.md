@@ -37,7 +37,7 @@ You can use the Datadog extension to:
 
 ## Setup
 
-You can install the [Datadog extension][6] from the [Visual Studio Code Marketplace][10].
+You can install the [Datadog extension][6].
 
 ## Run Synthetic tests locally
 
@@ -71,4 +71,3 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 [7]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [8]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [9]: mailto:team-ide-integration@datadoghq.com
-[10]: https://marketplace.visualstudio.com/vscode
