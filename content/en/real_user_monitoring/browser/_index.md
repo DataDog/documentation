@@ -154,8 +154,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.com',
@@ -206,8 +206,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.eu',
@@ -232,8 +232,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us3.datadoghq.com',
@@ -258,8 +258,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us5.datadoghq.com',
@@ -284,8 +284,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ddog-gov.com',
@@ -316,8 +316,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.com',
@@ -368,8 +368,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.eu',
@@ -394,8 +394,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us3.datadoghq.com',
@@ -420,8 +420,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us5.datadoghq.com',
@@ -446,8 +446,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ddog-gov.com',
@@ -478,8 +478,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.com',
@@ -526,8 +526,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.eu',
@@ -550,8 +550,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us3.datadoghq.com',
@@ -574,8 +574,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us5.datadoghq.com',
@@ -598,8 +598,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ddog-gov.com',
@@ -628,8 +628,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.com',
@@ -676,8 +676,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'datadoghq.eu',
@@ -700,8 +700,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us3.datadoghq.com',
@@ -724,8 +724,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'us5.datadoghq.com',
@@ -748,8 +748,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ddog-gov.com',
@@ -769,7 +769,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 
 The `trackUserInteractions` and `trackFrustrations` parameters enable the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
-Early RUM API calls must be wrapped in the `DD_RUM.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
+Early RUM API calls must be wrapped in the `window.DD_RUM.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
 ### CDN sync
 
@@ -1538,8 +1538,8 @@ datadogRum.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" 
 For CDN async, use:
 
 ```javascript
-DD_RUM.onReady(function () {
-  DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+window.DD_RUM.onReady(function () {
+  window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
 })
 ```
 
