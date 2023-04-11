@@ -141,7 +141,7 @@ Before installing, make sure you:
     EOF
     ```
 
-**Note:** If yo uare running RHEL/CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration above.
+   **Note:** If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration above.
 
 2. Update your packages and install the Worker:
 
