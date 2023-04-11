@@ -28,7 +28,7 @@ further_reading:
       text: 'Compare and optimize your code with Datadog Profile Comparison.'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tag: 'Blog'
-      text: 'How we optimized our Akka application using Datadog's Continuous Profiler'
+      text: "How we optimized our Akka application using Datadog's Continuous Profiler"
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
