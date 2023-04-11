@@ -74,7 +74,7 @@ Check the following points for the AWS account mentioned in the error:
 [3]: https://github.com/DataDog/cloudformation-template/blob/master/aws/datadog_integration_role.yaml
 {{< /site-region >}}
 
-3. The AWS External ID on the role page needs to match the AWS External ID value on the **Account Details** tab of the [AWS integration page][2]. Update the IAM role in AWS with the AWS External ID value from the integration page in Datadog, or generate a new AWS External ID and click **Save**:
+3. The AWS External ID on the role page needs to match the AWS External ID value on the **Account Details** tab of the [AWS integration page][2]. Update the IAM role in AWS with the AWS External ID value from the integration page in Datadog, or generate a new AWS External ID in Datadog and click **Save**:
   {{< img src="integrations/guide/aws_error_sts_assume_role/new-aws-external-id.png" alt="Datadog AWS integration page with the AWS Role Name and AWS External ID fields and Generate New ID button" >}}
 
 4. If you generated a new AWS External ID, add it to your AWS trust policy:
