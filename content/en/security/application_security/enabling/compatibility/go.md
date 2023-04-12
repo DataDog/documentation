@@ -62,7 +62,7 @@ The following ASM capabilities are supported in the Go library, for the specifie
 
 The minimum tracer version to get all supported ASM capabilities for Go is 1.48.0.
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib

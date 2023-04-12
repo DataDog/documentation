@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 90
 ---
 
-<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Datadog's lambda extension.<br><br> Don’t see your desired technology listed here? Datadog is continually adding additional support. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Datadog's lambda extension.<br><br> Don’t see your desired technology listed here? Datadog is continually adding additional support. Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ## Language and framework compatibility
 
