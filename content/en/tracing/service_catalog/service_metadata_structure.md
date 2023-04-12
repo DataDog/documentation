@@ -78,7 +78,7 @@ External Resources (Optional)
 
 ## Service Definition Schema (v2)
 
-The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][4].
+The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][1].
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -126,9 +126,5 @@ External Resources (Optional)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/blog/unified-service-tagging/
-[2]: /tracing/service_catalog/
-[3]: /account_management/api-app-keys/
-[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
-[7]: https://app.datadoghq.com/services/setup
-[8]: /api/latest/service-definition/
+[1]: https://github.com/DataDog/schema/blob/main/service-catalog/v2.1/schema.json
+
