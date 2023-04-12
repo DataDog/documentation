@@ -30,7 +30,50 @@ The Service Definition Schema is a structure that contains basic information abo
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
-
+schema-version: v2.1
+dd-service: web-store
+team: shopist
+contacts:
+ - type: slack
+   contact: https://datadogincidents.slack.com/archives/C01EWN6319S
+application: shopist
+description: shopist.com storefront
+tier: tier1
+lifecycle: production
+links:
+ - name: Demo Dashboard
+   type: dashboard
+   url: https://app.datadoghq.com/dashboard/krp-bq6-362
+ - name: Common Operations
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+ - name: Disabling Deployments
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+ - name: Rolling Back Deployments
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+ - name: Source
+   type: repo
+   provider: github
+   url: https://github.com/DataDog/shopist/tree/prod/rails-storefront
+ - name: Deployment
+   type: repo
+   provider: github
+   url: https://github.com/DataDog/shopist/blob/prod/k8s/dd-trace-demo/templates/rails-storefront-deployment.yaml
+ - name: Deployment Information
+   provider: link
+   type: doc
+   url: https://docs.datadoghq.com/
+ - name: Service Documentation
+   provider: link
+   type: doc
+   url: https://docs.datadoghq.com/
+tags: []
+integrations:
+ pagerduty:
+   service-url: https://datadog.pagerduty.com/service-directory/XXXXXXX
+External Resources (Optional)
 {{< /code-block >}}
 
 ## Service Definition Schema (v2)
