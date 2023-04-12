@@ -297,14 +297,14 @@
                 - /serverless/datadog_lambda_library/
                 - /serverless/serverless_integrations/cli/
         - action: pull-and-push-file
-          branch: master
+          branch: alai97/configuration-doc-page-fix-tabs
           globs:
           - 'src/commands/synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/alai97/configuration-doc-page-fix-tabs/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
               kind: documentation
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
