@@ -15,18 +15,19 @@ further_reading:
 
 ## Overview
 
-Service Catalog uses Service Definition Schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the 'Definition' tab in the side panel for any selected services. 
+Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
 
 There are two supported versions of the schema:
 
-- V2 is the earliest version, and contains some experimental features, such as `dd-team` (this is removed from v2.1).
+- V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
 - V2.1 supports additional UI elements like service groupings, as well as fields like application, tier, lifecycle to make it easier to preserve context for your service ownership information.
 
-You can find the latest updates and additional information about the schemas on GitHub.
+
+For more information about the latest updates, see the schemas on GitHub.
 
 ## Service Definition Schema (v2.1)
 
-The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][4].
+The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][1].
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -78,7 +79,7 @@ External Resources (Optional)
 
 ## Service Definition Schema (v2)
 
-The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][1].
+The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][2].
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -127,4 +128,4 @@ External Resources (Optional)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/schema/blob/main/service-catalog/v2.1/schema.json
-
+[2]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
