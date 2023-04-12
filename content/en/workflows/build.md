@@ -133,7 +133,7 @@ If you're not sure what variable you're looking for, Datadog suggests existing s
 ### Input parameters
 
 Use input parameters to pass data into a workflow. You can use input parameters in workflows that:
-- are triggered manually, such as from a Dashboard
+- are triggered manually, such as from a Dashboard.
 - use mention triggers, such as Monitors and Security Signal Notification Rules.
 
 To add an input parameter:
@@ -144,11 +144,11 @@ To add an input parameter:
 
 To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-{{< img src="workflows/input-parameter.png" alt="Adding a trigger variable to a step automatically adds it to the workflow" style="width:100%;">}}
+{{< img src="workflows/input-parameter.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
 
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
 
-You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name>}}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][2].
+You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][2].
 
 If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
 
