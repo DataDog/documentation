@@ -15,13 +15,14 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
 
 1. Configure the [Datadog Terraform provider][2] to interact with the Datadog API through a Terraform configuration.
 
+{{< site-region region="us,us3,us5,eu" >}}
+
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
-    * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][3] documentation.
-    * `AWS_ACCOUNT_ID`: Your AWS account ID.
+   * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
+   * `AWS_ACCOUNT_ID`: Your AWS account ID.
 
-   See the [Terraform Registry][4] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
+   See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
 
-   {{< site-region region="us,us3,us5,eu" >}}
    ```hcl
    data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
       statement {
@@ -71,9 +72,19 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
       role_name   = "DatadogAWSIntegrationRole"
    }
    ```
-   {{< /site-region >}}
 
-   {{< site-region region="ap1" >}}
+   [1]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
+   [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+
+2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
+   * `AWS_PERMISSIONS_LIST`: The IAM policies needed by Datadog AWS integrations. The current list is available in the [Datadog AWS integration][1] documentation.
+   * `AWS_ACCOUNT_ID`: Your AWS account ID.
+
+   See the [Terraform Registry][2] for further example usage and the full list of optional parameters, as well as additional Datadog resources.
+
    ```hcl
    data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
       statement {
@@ -123,11 +134,14 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
       role_name   = "DatadogAWSIntegrationRole"
    }
    ```
-   {{< /site-region >}}
 
-   {{< site-region region="gov" >}}
+[1]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
+[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
+{{< /site-region >}}
 
-   If you are using access keys to install the Datadog AWS integration, ensure that you have created an IAM user with the [necessary permissions][1] and access key. Add your access key ID and secret access key to the placeholders in the example below, then run `terraform apply`. For information about using Terraform to set up the AWS user and associated access key, see the [AWS Provider][2] resources in the Terraform Registry.
+{{< site-region region="gov" >}}
+
+2. If you are using access keys to install the Datadog AWS integration, ensure that you have created an IAM user with the [necessary permissions][1] and access key as described in the [AWS manual setup guide][3]. Add your access key ID and secret access key to the placeholders in the example below. For information about using Terraform to set up the AWS user and associated access key, see the [AWS Provider][2] resources in the Terraform Registry.
 
    ```
    resource "datadog_integration_aws" "sandbox" {
@@ -136,9 +150,10 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
    }
    ```
 
-   [1]: /integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly#aws-integration-iam-policy
-   [2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
-   {{< /site-region>}}
+[1]: /integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly#aws-integration-iam-policy
+[2]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+[3]: /integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly#aws
+{{< /site-region>}}
 
 3. Run `terraform apply`. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][5] to see metrics sent by your AWS services and infrastructure.
 
@@ -146,6 +161,4 @@ Using [Terraform][1], you can create the Datadog IAM role, policy document, and 
 
 [1]: https://www.terraform.io
 [2]: https://docs.datadoghq.com/integrations/terraform/#overview
-[3]: /integrations/amazon_web_services/?tab=manual#aws-iam-permissions
-[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [5]: https://app.datadoghq.com/screen/integration/7/aws-overview
