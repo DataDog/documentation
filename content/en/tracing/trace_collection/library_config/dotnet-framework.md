@@ -218,7 +218,7 @@ Added in version 1.17.0. <br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
 `DD_HTTP_SERVER_TAG_QUERY_STRING`
-: When set to `true` query string parameters are added to the http.url tag. You can find more details in [Redacting the query in the url][14].
+: When set to `true`, the `http.url` includes query string parameters. You can find more details in [Redacting the query in the url][14].
 **Default**: `true`
 
 `DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
@@ -344,4 +344,4 @@ Starting from version 2.22.0, the default injection style is `tracecontext, Data
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /agent/guide/network/#configure-ports
-[14]: /tracing/configure_data_security/?tab=mongodb#redacting-the-query-in-the-url
+[14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
