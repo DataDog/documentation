@@ -50,5 +50,8 @@ The following ASM capabilities are supported in the .NET library, for the specif
 
 The minimum tracer version to get all supported ASM capabilities for .NET is 2.26.0.
 
+**Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.  
+
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
+[3]: /agent/guide/how_remote_config_works/#enabling-remote-configuration

@@ -43,4 +43,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.9.0.
 
+**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.  
+
 [1]: /tracing/trace_collection/compatibility/java/
+[2]: /agent/guide/how_remote_config_works/#enabling-remote-configuration

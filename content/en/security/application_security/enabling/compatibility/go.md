@@ -62,6 +62,8 @@ The following ASM capabilities are supported in the Go library, for the specifie
 
 The minimum tracer version to get all supported ASM capabilities for Go is 1.48.0.
 
+**Note**: Threat Protection requires enabling [Remote Configuration][10], which is included in the listed minimum tracer version.  
+
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
@@ -74,3 +76,4 @@ The minimum tracer version to get all supported ASM capabilities for Go is 1.48.
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
 [8]: https://github.com/golang/go/wiki/cgo
 [9]: /tracing/trace_collection/compatibility/go/
+[10]: /agent/guide/how_remote_config_works/#enabling-remote-configuration

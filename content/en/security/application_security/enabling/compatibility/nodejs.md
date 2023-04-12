@@ -42,7 +42,10 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.15.0.
 
+**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.  
+
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
+[2]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
