@@ -1,18 +1,12 @@
 import { getQueryParameterByName } from '../helpers/browser';
-import Cookies from 'js-cookie';
+import { getCookieByName } from '../helpers/helpers';
+import regionConfig from '../config/regions.config';
 
 const initCodeTabs = () => {
     let codeTabsList = document.querySelectorAll('.code-tabs');
-    let regionalSection;
-    const region = Cookies.get('site');
-    if (region) {
-        regionalSection = document.querySelector(`[data-region="${region}"]`);
-        if (regionalSection) {
-            codeTabsList = regionalSection.querySelectorAll('.code-tabs');
-        }
-    }
+    const { allowedRegions } = regionConfig;
     const tabQueryParameter = getQueryParameterByName('tab') || getQueryParameterByName('tabs')
-    const codeTabParameters = {};
+    const codeTabParameters = allowedRegions.reduce((k,v) => ({...k, [v]: {}}), {});
 
     const init = () => {
         renderCodeTabElements()
@@ -36,7 +30,6 @@ const initCodeTabs = () => {
                     const lang = tabPane.getAttribute('data-lang')
                     const li = document.createElement('li')
                     const anchor = document.createElement('a')
-                    anchor.addEventListener("click", e => e.preventDefault(), false);
                     anchor.dataset.lang = lang
                     anchor.href = '#'
                     anchor.innerText = title
@@ -107,15 +100,17 @@ const initCodeTabs = () => {
     const addEventListeners = () => {
         if (codeTabsList.length > 0) {
             codeTabsList.forEach(codeTabsElement => {
-                const allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
+                let allTabLinksNodeList = codeTabsElement.querySelectorAll('.nav-tabs li a');
                 allTabLinksNodeList.forEach(link => {
                     link.addEventListener('click', e => {                        
                         e.preventDefault();
+                        const region = getCookieByName('site');
+                        const regionalCodeTabs = codeTabParameters[region];
                         const targetTop = e.target.getBoundingClientRect().top + window.scrollY;
                         let offsetY = 0;
                         activateCodeTab(link);
                         getContentTabHeight();
-                        for(const [idx, codeTab] of Object.entries(codeTabParameters)) {
+                        for(const [idx, codeTab] of Object.entries(regionalCodeTabs)) {
                             if (codeTab.elementTop < targetTop && codeTab.elementCurrentHeight > 0) {
                                 offsetY += codeTab.elementHeightDifference;
                             }
@@ -155,50 +150,65 @@ const initCodeTabs = () => {
     }
 
     const addObserversToCodeTabs = () => {
+        allowedRegions.forEach((targetRegion) => {
         let tabContentList = document.querySelectorAll('.tab-content');
-        if (regionalSection) {
-            tabContentList = regionalSection.querySelectorAll('.tab-content');
-        }
+        tabContentList = filterArrayOfNonRegionalCodeTabs(tabContentList, targetRegion);
         const resizeObserver = new ResizeObserver((entries) => {
             entries.forEach((entry, idx) => {
                 if (entry?.contentBoxSize?.[0]) {
-                    const elementTop = entry.target.getBoundingClientRect().top + window.scrollY;
-                    const elementCurrentHeight = entry.target.getBoundingClientRect().height;
-                    const elementHeightDifference =  elementCurrentHeight - codeTabParameters[idx].elementCurrentHeight;
-                    codeTabParameters[idx] = {
-                        elementTop,
-                        elementCurrentHeight,
-                        elementHeightDifference: Math.round(elementHeightDifference),
-                    }
-                }
+                            const elementTop = entry.target.getBoundingClientRect().top + window.scrollY;
+                            const elementCurrentHeight = entry.target.getBoundingClientRect().height;
+                            const elementHeightDifference =  elementCurrentHeight - codeTabParameters[targetRegion][idx].elementCurrentHeight;
+                            codeTabParameters[targetRegion][idx] = {
+                                elementTop,
+                                elementCurrentHeight,
+                                elementHeightDifference: Math.round(elementHeightDifference),
+                            }
+                        }
+                    })
+                });
+                tabContentList.forEach((codeTabsElement) => {
+                    resizeObserver.observe(codeTabsElement);
+                })
             })
-        });
-        tabContentList.forEach((codeTabsElement) => {
-            resizeObserver.observe(codeTabsElement);
-        })
     }
 
     const getContentTabHeight = () => {
-        let tabContentList = document.querySelectorAll('.tab-content');
-        if (regionalSection) {
-            tabContentList = regionalSection.querySelectorAll('.tab-content');
-        }
-        tabContentList.forEach((tabContentElement, idx) => {
-            if (codeTabParameters[idx]) {
-                const elementCurrentHeight = tabContentElement.getBoundingClientRect().height;
-                const elementHeightDifference = elementCurrentHeight - codeTabParameters[idx].elementCurrentHeight;
-                codeTabParameters[idx] = {
-                    elementTop: codeTabParameters[idx].elementTop,
-                    elementCurrentHeight,
-                    elementHeightDifference: Math.round(elementHeightDifference),
-                }
-            } else {
-                codeTabParameters[idx] = {
-                    elementCurrentHeight: tabContentElement.getBoundingClientRect().height,
-                    ...codeTabParameters[idx]
-                }
-            }
+        allowedRegions.forEach((targetRegion) => {
+            let tabContentList = document.querySelectorAll('.tab-content');
+            tabContentList = filterArrayOfNonRegionalCodeTabs(tabContentList, targetRegion);
+            tabContentList.forEach((tabContentElement, idx) => {
+                    if (codeTabParameters?.[targetRegion]?.[idx]) {
+                        const elementCurrentHeight = tabContentElement.getBoundingClientRect().height;
+                        const elementHeightDifference = elementCurrentHeight - codeTabParameters[targetRegion][idx].elementCurrentHeight;
+                        codeTabParameters[targetRegion][idx] = {
+                            elementTop: codeTabParameters[targetRegion][idx].elementTop || tabContentElement.getBoundingClientRect().top + window.scrollY,
+                            elementCurrentHeight,
+                            elementHeightDifference: Math.round(elementHeightDifference),
+                        }
+                    } else {
+                        codeTabParameters[targetRegion][idx] = {
+                            elementCurrentHeight: tabContentElement.getBoundingClientRect().height,
+                            ...codeTabParameters?.[targetRegion]?.[idx]
+                        }
+                    }
+            });
         });
+    }
+
+    const filterArrayOfNonRegionalCodeTabs = (codeTabElements, targetRegion) => {
+        return [...codeTabElements].filter((codeTabElement) => {
+            let targetNode = codeTabElement;
+            const arr = [];
+            while (targetNode) {
+                if (targetNode instanceof Element && targetNode?.hasAttribute("data-region")) {
+                    return targetNode.getAttribute("data-region").includes(targetRegion) ? true : false;
+                }
+                arr.unshift(targetNode);
+                targetNode = targetNode.parentNode;
+            }
+            return true;
+        })
     }
 
     init()
