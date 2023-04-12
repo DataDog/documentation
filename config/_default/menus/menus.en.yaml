@@ -1303,10 +1303,10 @@ main:
     parent: tracing_dd_libraries
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
-  - name: Injecting Libraries
-    url: tracing/trace_collection/library_injection/
+  - name: Injecting Libraries Locally
+    url: tracing/trace_collection/library_injection_local/
     parent: tracing_trace_collection
-    identifier: tracing_library_injection
+    identifier: tracing_library_injection_local
     weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
@@ -1726,21 +1726,26 @@ main:
     parent: service_catalog
     identifier: service_catalog_api
     weight: 902
+  - name: Service Metadata Structure
+    url: tracing/service_catalog/service_metadata_structure
+    parent: service_catalog
+    identifier: service_metadata_structure
+    weight: 903
   - name: Integrations
     url: tracing/service_catalog/integrations
     parent: service_catalog
     identifier: service_catalog_integrations
-    weight: 903
+    weight: 904
   - name: Troubleshooting
     url: tracing/service_catalog/troubleshooting
     parent: service_catalog
     identifier: service_catalog_troubleshooting
-    weight: 904
+    weight: 905
   - name: Guides
     url: tracing/service_catalog/guides
     parent: service_catalog
     identifier: service_catalog_guides
-    weight: 905
+    weight: 906
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
@@ -1992,7 +1997,7 @@ main:
     url: continuous_integration/pipelines/azure/
     parent: pipeline_visibility
     identifier: ci_azure
-    weight: 201  
+    weight: 201
   - name: Buildkite
     url: continuous_integration/pipelines/buildkite/
     parent: pipeline_visibility
@@ -2694,46 +2699,91 @@ main:
     parent: application_security
     identifier: appsec_getting_started
     weight: 2
+  - name: Library Compatibility
+    url: security/application_security/enabling/compatibility/
+    parent: appsec_getting_started
+    identifier: appsec_compat
+    weight: 201
+  - name: Java
+    url: security/application_security/enabling/compatibility/java/
+    parent: appsec_compat
+    identifier: appsec_compat_java
+    weight: 101
+  - name: .NET
+    url: security/application_security/enabling/compatibility/dotnet/
+    parent: appsec_compat
+    identifier: appsec_compat_dotnet
+    weight: 102
+  - name: Go
+    url: security/application_security/enabling/compatibility/go/
+    parent: appsec_compat
+    identifier: appsec_compat_go
+    weight: 103
+  - name: Ruby
+    url: security/application_security/enabling/compatibility/ruby/
+    parent: appsec_compat
+    identifier: appsec_compat_ruby
+    weight: 104
+  - name: PHP
+    url: security/application_security/enabling/compatibility/php/
+    parent: appsec_compat
+    identifier: appsec_compat_php
+    weight: 105
+  - name: NodeJS
+    url: security/application_security/enabling/compatibility/nodejs/
+    parent: appsec_compat
+    identifier: appsec_compat_nodejs
+    weight: 106
+  - name: Python
+    url: security/application_security/enabling/compatibility/python/
+    parent: appsec_compat
+    identifier: appsec_compat_python
+    weight: 107
+  - name: Serverless
+    url: security/application_security/enabling/compatibility/serverless/
+    parent: appsec_compat
+    identifier: appsec_compat_serverless
+    weight: 108
   - name: Java
     url: security/application_security/enabling/java/
     parent: appsec_getting_started
     identifier: appsec_java
-    weight: 201
+    weight: 202
   - name: .NET
     url: security/application_security/enabling/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
-    weight: 202
+    weight: 203
   - name: Go
     url: security/application_security/enabling/go/
     parent: appsec_getting_started
     identifier: appsec_go
-    weight: 203
+    weight: 204
   - name: Ruby
     url: security/application_security/enabling/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
-    weight: 204
+    weight: 205
   - name: PHP
     url: security/application_security/enabling/php/
     parent: appsec_getting_started
     identifier: appsec_php
-    weight: 205
+    weight: 206
   - name: NodeJS
     url: security/application_security/enabling/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
-    weight: 206
+    weight: 207
   - name: Python
     url: security/application_security/enabling/python/
     parent: appsec_getting_started
     identifier: appsec_python
-    weight: 207
+    weight: 208
   - name: Serverless
     url: security/application_security/enabling/serverless/
     parent: appsec_getting_started
     identifier: appsec_serverless
-    weight: 208
+    weight: 209
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
@@ -2749,8 +2799,8 @@ main:
     parent: application_security
     identifier: appsec_threats
     weight: 5
-  - name: Setup and Configure
-    url: security/application_security/threats/setup_and_configure/
+  - name: Library Configuration
+    url: security/application_security/threats/library_configuration/
     parent: appsec_threats
     identifier: threats_configuration
     weight: 501
@@ -3605,6 +3655,11 @@ main:
     parent: ide_integrations
     identifier: ide_integrations_idea
     weight: 801
+  - name: Visual Studio Code
+    url: developers/ide_integrations/vscode/
+    parent: ide_integrations
+    identifier: ide_integrations_vscode
+    weight: 802
   - name: Community
     url: developers/community/
     parent: dev_tools
@@ -7272,7 +7327,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 29
+      order: 40
   - name: Get usage attribution
     url: '#get-usage-attribution'
     identifier: usage-metering-get-usage-attribution

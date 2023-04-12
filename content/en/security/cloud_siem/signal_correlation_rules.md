@@ -51,11 +51,11 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 #### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 #### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
 
 Click **Add Case** to add additional cases.
 
@@ -63,7 +63,11 @@ Click **Add Case** to add additional cases.
 
 ### Say what's happening
 
-{{% cloud-siem-rule-say-whats-happening %}}
+{{% security-rule-say-whats-happening %}}
+
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
+
+**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
 ## Further reading
 

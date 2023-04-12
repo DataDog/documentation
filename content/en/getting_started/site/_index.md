@@ -37,8 +37,8 @@ All Datadog RUM traffic is transmitted over SSL (default 443) to the following d
 | US1  | `https://logs.browser-intake-datadoghq.com`     |
 | US3  | `https://logs.browser-intake-us3-datadoghq.com` |
 | US5  | `https://logs.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://mobile-http-intake.logs.datadoghq.eu`  |
-| AP1  | `https://logs.browser-intake-ap1-datadoghq.com/` |
+| EU1  | `https://logs.browser-intake-datadoghq.eu`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com` |
 
 ### Traces
 
@@ -47,8 +47,8 @@ All Datadog RUM traffic is transmitted over SSL (default 443) to the following d
 | US1  | `https://trace.browser-intake-datadoghq.com`         |
 | US3  | `https://trace.browser-intake-us3-datadoghq.com`     |
 | US5  | `https://trace.browser-intake-us5-datadoghq.com`     |
-| EU1  | `https://public-trace-http-intake.logs.datadoghq.eu` |
-| AP1  | `https://trace.browser-intake-ap1-datadoghq.com/`    |
+| EU1  | `https://trace.browser-intake-datadoghq.eu` |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 
 ### RUM Events
 
@@ -57,8 +57,8 @@ All Datadog RUM traffic is transmitted over SSL (default 443) to the following d
 | US1  | `https://rum.browser-intake-datadoghq.com`     |
 | US3  | `https://rum.browser-intake-us3-datadoghq.com` |
 | US5  | `https://rum.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://rum-http-intake.logs.datadoghq.eu`    |
-| AP1  | `https://rum.browser-intake-ap1-datadoghq.com/` |
+| EU1  | `https://rum.browser-intake-datadoghq.eu`    |
+| AP1  | `https://browser-intake-ap1-datadoghq.com` |
 
 ## Navigate the Datadog documentation by site
 

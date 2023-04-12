@@ -156,4 +156,4 @@ DD_APPSEC_ENABLED=true node app.js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security/application_security/setup_and_configure/?code-lang=nodejs#compatibility
+[2]: /security/application_security/enabling/compatibility/nodejs

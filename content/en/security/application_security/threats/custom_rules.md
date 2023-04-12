@@ -83,100 +83,21 @@ Provide a **name** for each rule case. This name is appended to the rule name wh
 
 #### Severity and notification
 
-Set the severity of the signal. The dropdown allows you to select an appropriate severity level (`INFO`, `LOW`, `MEDIUM`, `HIGH`, `CRITICAL`).
-
-In the "Notify" section, configure zero or more [notification targets][4] for each rule case.
-
-You can also create [notification rules][5] to alleviate manual edits to notification preferences for individual detection rules.
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates in real time.
+{{% security-rule-time-windows %}}
 
-When a signal is generated, it remains "open" if a case is matched at least once within this `keep alive` window. Each time a new event matches any of the cases, the *last updated* timestamp is updated for the signal.
-
-A signal will "close" regardless of the query being matched once the time exceeds the `maximum signal duration`. This time is calculated from the first seen timestamp.
-
-Additional cases can be added by clicking the **Add Case** button.
+Click **Add Case** to add additional cases.
 
 **Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ### Say what's happening
 
-The **Rule name** section allows you to configure the rule name that appears in the rules list view, as well as the title of the signal.
+{{% security-rule-say-whats-happening %}}
 
-Use [Notification Variables][5] to provide specific details about the signal by referencing its tags and event attributes.
-
-#### Template variables
-
-Use [template variables][6] to inject dynamic context from traces directly into a security signal and its associated notifications.
-
-Template variables also permit deep linking into Datadog or a partner portal for quick access to next steps for investigation. For example:
-
-```text
-* [Investigate service in the services dashboard](https://app.datadoghq.com/example/integration/application-security---service-events?tpl_var_service={{@service}})
-```
-
-Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification. For example:
-
-```text
-{{eval "first_seen_epoch-15*60*1000"}}
-```
-
-The attributes can be seen on a signal in the JSON dropdown, and you can access the attributes with the following syntax: `{{@attribute}}`. You can access inner keys of the event attributes by using JSON dot notation (for example, `{{@attribute.inner_key}}`).
-
-**Note**: You can copy the raw JSON directly from a security signal. Select any security signal in the Signals Explorer to view its details. Click the export button in the top left corner, and select **Copy raw JSON to clipboard**.
-
-This JSON object is an example of event attributes which may be associated with a security signal:
-
-```json
-{
-  "attributes":{
-    "title":"Security scanner detected",
-    "http":{
-      "url":"http://www.example.com"
-    },
-    "rule":{
-      "detectionMethod":"threshold",
-      "name":"Your rule name"
-    },
-    "events_matched":2,
-    "first_seen":"2022-01-26T13:23:33.000Z",
-    "last_seen":"2022-01-27T04:01:57.000Z"
-  },
-  "groupByPaths":[
-    "service"
-  ]
-}
-```
-
-For this attribute, use the following in the **Say what's happening** section:
-
-```
-Real routes targeted for {{@service}}.
-```
-
-This renders your service name in any notifications you receive.
-
-```
-Real routes targeted for `your_service_name`.
-```
-
-You can also use if-else logic to see if an attribute exists with the notation:
-
-```
-{{#if @network.client.ip}}The attribute IP attribute exists.{{/if}}
-```
-
-Or use if-else logic to see if an attribute matches a value:
-
-```
-{{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
-```
-
-See [Template Variables][6] for more information.
-
-Use the Tag Resulting Signals dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `attack:sql-injection-attempt`.
 
 **Note**: The tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 

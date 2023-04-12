@@ -17269,9 +17269,8 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
-              {\n      \"api_key\": \"6Zm7WEgKzAlCnt_4exfEK0mSoeHHAaDf41O1AAfu\",\n
-              \     \"name\": \"{{ unique_lower_alnum }}\",\n      \"email\": \"dev@datadog.com\"\n
-              \   }\n  }\n}"
+              {\n      \"api_key\": \"fakekey\",\n      \"name\": \"{{ unique_lower_alnum
+              }}\",\n      \"email\": \"dev@datadog.com\"\n    }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
       x-undo:
@@ -25034,8 +25033,7 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `audit_trail`, `serverless`, `ci_app`,
-          `cloud_cost_management`,
+          `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
           `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
@@ -25048,7 +25046,9 @@ paths:
           `sds`, `snmp`,
 
           `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.'
+          `timeseries`.
+
+          The following product family has been **deprecated**: `audit_logs`.'
         in: query
         name: filter[product_families]
         required: true
