@@ -20,7 +20,7 @@ Service Catalog uses service definition schemas to store and display relevant me
 There are two supported versions of the schema:
 
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
-- V2.1 supports additional UI elements like service groupings, as well as fields like application, tier, lifecycle to make it easier to preserve context for your service ownership information.
+- V2.1 supports additional UI elements such as service groupings and fields like application, tier, and lifecycle to make it easier to preserve the context for your service ownership information.
 
 
 For more information about the latest updates, see the schemas on GitHub.
