@@ -227,10 +227,10 @@ datadog:
 : Number of endpoints. Tags:`kube_namespace`.
 
 `kubernetes_state.endpoint.address_available`
-: Number of addresses available in endpoint. Tags:`endpoint` `kube_namespace`.
+: Number of addresses available in endpoint. Tags:`kube_endpoint` `kube_namespace`.
 
 `kubernetes_state.endpoint.address_not_ready`
-: Number of addresses not ready in endpoint. Tags:`endpoint` `kube_namespace`.
+: Number of addresses not ready in endpoint. Tags:`kube_endpoint` `kube_namespace`.
 
 `kubernetes_state.namespace.count`
 : Number of namespaces. Tags:`phase`.
