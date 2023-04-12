@@ -344,3 +344,4 @@ Starting from version 2.22.0, the default injection style is `tracecontext, Data
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/configure_data_security/?tab=mongodb#redacting-the-query-in-the-url
