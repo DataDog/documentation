@@ -263,10 +263,10 @@ public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAtt
     if (headers.TryGetValue("_datadog", out var messageAttributeValue)
         && messageAttributeValue.StringValue is string jsonString)
     {
-        var datadogHeaderDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
-        if (datadogHeaderDictionary.TryGetValue(name, out string datadogHeaderValue))
+        var datadogDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
+        if (datadogDictionary.TryGetValue(name, out string value))
         {
-            return new[] { datadogHeaderValue };
+            return new[] { value };
         }
     }
 
