@@ -445,7 +445,7 @@
       - repo_name: dd-sdk-android
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: alai97/log-collection-ap1-doc-update
           globs:
           - 'docs/log_collection.md'
           options:
@@ -455,7 +455,7 @@
               title: Android Log Collection
               kind: documentation
               description: "Collect logs from your Android applications."
-              dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md"]
+              dependencies: ["https://github.com/DataDog/dd-sdk-android/blob/alai97/log-collection-ap1-doc-update/docs/log_collection.md"]
               further_reading:
                 - link: "https://github.com/DataDog/dd-sdk-android"
                   tag: "GitHub"
@@ -510,7 +510,7 @@
                   text: "Learn how to explore your RUM data"
 
         - action: pull-and-push-file
-          branch: master
+          branch: alai97/log-collection-ap1-doc-update
           globs:
           - 'docs/log_collection.md'
           options:
@@ -520,7 +520,7 @@
               title: iOS Log Collection
               kind: documentation
               description: "Collect logs from your iOS applications."
-              dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/master/docs/log_collection.md"]
+              dependencies: ["https://github.com/DataDog/dd-sdk-ios/blob/alai97/log-collection-ap1-doc-update/docs/log_collection.md"]
               further_reading:
                 - link: "https://github.com/DataDog/dd-sdk-ios"
                   tag: "GitHub"
