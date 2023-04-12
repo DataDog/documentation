@@ -22,7 +22,7 @@ integration_id: "rsyslog"
 
 ## Overview
 
-Configure Rsyslog to gather logs from your host, containers, and services.
+Configure Rsyslog to gather logs from your host, containers, & services.
 
 ## Setup
 
@@ -41,43 +41,16 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
-{{< site-region region="us,eu" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
 
-   ```conf
-   ## For each file to send
-   input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
+    ```conf
+    ## For each file to send
+    input(type="imfile" ruleset="infiles" Tag="<APP_NAME_OF_FILE1>" File="<PATH_TO_FILE1>")
 
-   ## Set the Datadog Format to send the logs
-   $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-
-   ruleset(name="infiles") {
-     action(type="omfwd" protocol="tcp" target="intake.logs.{{< region-param key="dd_site" >}}" port="10516" template="DatadogFormat")
-   }
-   ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,ap1,gov" >}}
-
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
-
-   ```conf
-   ## For each file to send
-   input(type="imfile" ruleset="infiles" Tag="<TAGS>" File="<PATH_TO_FILE1>")
-
-   ## Set the Datadog Format to send the logs
-   template(name="test_template" type="list") { constant(value="{") property(name="msg" outname="message" format="jsonfr") constant(value="}")}
-
-   # include the omhttp module
-   module(load="omhttp")
-
-   ruleset(name="infiles") { 
-      action(type="omhttp" server="http-intake.logs.{{< region-param key="dd_site" >}}" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
-   }
-   ```
-{{< /site-region >}}
+    ## Set the Datadog Format to send the logs
+    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
+    ```
 
 4. Restart Rsyslog. Your new logs are forwarded directly to your Datadog account.
    ```shell
@@ -176,8 +149,6 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
-{{< site-region region="us,eu" >}}
-
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
 
     ```conf
@@ -186,33 +157,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
     ## Set the Datadog Format to send the logs
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-
-   ruleset(name="infiles") {
-      action(type="omfwd" protocol="tcp" target="intake.logs.{{< region-param key="dd_site" >}}" port="10516" template="DatadogFormat")
-   }
     ```
-
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,ap1,gov" >}}
-
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
-
-   ```conf
-   ## For each file to send
-   input(type="imfile" ruleset="infiles" Tag="<TAGS>" File="<PATH_TO_FILE1>")
-
-   ## Set the Datadog Format to send the logs
-   template(name="test_template" type="list") { constant(value="{") property(name="msg" outname="message" format="jsonfr") constant(value="}")}
-
-   # include the omhttp module
-   module(load="omhttp")
-
-   ruleset(name="infiles") { 
-      action(type="omhttp" server="http-intake.logs.{{< region-param key="dd_site" >}}" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
-   }
-   ```
-{{< /site-region >}}
 
 4. Restart Rsyslog. Your new logs are forwarded directly to your Datadog account.
    ```shell
@@ -312,7 +257,6 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 2. Create an `/etc/rsyslog.d/datadog.conf` file.
 
-{{< site-region region="us,eu" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
 
@@ -322,32 +266,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
     ## Set the Datadog Format to send the logs
     $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
-
-   ruleset(name="infiles") {
-      action(type="omfwd" protocol="tcp" target="intake.logs.{{< region-param key="dd_site" >}}" port="10516" template="DatadogFormat")
-   }
-   ```
-{{< /site-region >}}
-
-{{< site-region region="us3,us5,ap1,gov" >}}
-
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
-
-   ```conf
-   ## For each file to send
-   input(type="imfile" ruleset="infiles" Tag="<TAGS>" File="<PATH_TO_FILE1>")
-
-   ## Set the Datadog Format to send the logs
-   template(name="test_template" type="list") { constant(value="{") property(name="msg" outname="message" format="jsonfr") constant(value="}")}
-
-   # include the omhttp module
-   module(load="omhttp")
-
-   ruleset(name="infiles") { 
-      action(type="omhttp" server="http-intake.logs.{{< region-param key="dd_site" >}}" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
-   }
-   ```
-{{< /site-region >}}
+    ```
 
 4. Restart Rsyslog. Your new logs are forwarded directly to your Datadog account.
    ```shell
