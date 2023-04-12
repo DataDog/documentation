@@ -59,7 +59,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us3,us5,ap1,gov" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
 
@@ -194,7 +194,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us3,us5,ap1,gov" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
 
@@ -329,7 +329,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    ```
 {{< /site-region >}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{< site-region region="us3,us5,ap1,gov" >}}
 
 3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration. You must include a separate `input` line for each log file you want to monitor:
 
