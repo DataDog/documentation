@@ -184,7 +184,7 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
 
-Sublayer metrics are only available if a service has downstream dependencies. 
+Sublayer metrics are only available if a service has downstream dependencies and are calculated post-sampling. 
 
 ## Execution time
 
