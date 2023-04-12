@@ -97,7 +97,7 @@ On the upper-right corner of each graph click on the arrow in order to export yo
 
 See Requests, Latency, and Error graphs broken down by resource to identify problematic resources. Resources are particular actions for your services (typically individual endpoints or queries). Read more in [Getting Started with APM][1]. 
 
-Below, there’s a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
+Below, there's a list of [resources][11] associated with your service. Sort the resources for this service by requests, latency, errors, and time, to identify areas of high traffic or potential trouble. Note that these metric columns are configurable (see image below).
 
 {{< img src="tracing/visualization/service/resources_tab.jpg" alt="Resources"  style="width:100%;">}}
 
@@ -128,7 +128,7 @@ By default, you can see:
 * The times at which traces that correspond to this version were first and last seen.
 * An Error Types indicator, which shows how many types of errors appear in each version that did not appear in the immediately previous version.
 
-    **Note**: This indicator shows errors that were not seen in traces from the previous version. It doesn’t mean that this version necessarily introduced these errors. Looking into new error types can be a great way to begin investigating errors.
+    **Note**: This indicator shows errors that were not seen in traces from the previous version. It doesn't mean that this version necessarily introduced these errors. Looking into new error types can be a great way to begin investigating errors.
 
 * Requests per second.
 * Error rate as a percentage of total requests.
@@ -146,14 +146,14 @@ You can add columns to or remove columns from this overview table and your selec
 Read more about Deployments [on the service page][12].
 
 ### Error Tracking
-View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service’s errors. Read more about issues in [Error Tracking][4].
+View issues on your service, which are similar errors aggregated together to turn a noisy stream of errors into manageable issues and help you assess the impact of your service's errors. Read more about issues in [Error Tracking][4].
 
 This tab has overview graphs that show which resources have the most issues and a list of the most common issues occurring in your service. Click on an issue in the list to see details in a side panel, including its stack trace, related code versions, and total error occurrences since inception.
 
 {{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking tab"  style="width:90%;">}}
 
 ### Security
-Understand the security posture of the service, including known vulnerabilities exposed in the service’s libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
+Understand the security posture of the service, including known vulnerabilities exposed in the service's libraries and security signals on your service, which are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for you to review instead of assessing each individual attack attempt. Read more about [Application Security][18].
 
 The top section of the security tab has overview graphs that show the number and severity of vulnerabilities, a timeline of attacks, the types of attacks, and attacker information (client IP or authenticated user). 
 
@@ -173,7 +173,7 @@ The Kubernetes Metrics section contains a high level summary of your infrastruct
 For non-Kubernetes environments (such as host-based installation), see the [Unified Service Tagging documentation][13].
 
 ### Runtime Metrics
-If runtime metrics are enabled in the tracing client, you’ll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][14].
+If runtime metrics are enabled in the tracing client, you'll see a Runtime metrics tab corresponding to the runtime language of your service. Read more in [Runtime Metrics][14].
 
 {{< img src="tracing/visualization/service/runtime_metrics.png" alt="Runtime Metrics"  style="width:90%;">}}
 
@@ -188,7 +188,7 @@ View the list of traces associated with the service in the traces tab, which is 
 {{< img src="tracing/visualization/service/traces.png" alt="Traces"  style="width:90%;">}}
 
 ### Logs
-View common patterns in your service’s logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
+View common patterns in your service's logs, and use facets like status in the search bar to filter the list of patterns. Click on a pattern to open the side panel to view more details, such as what events triggered the cascade. Read more in [Log Patterns][17].
 
 {{< img src="tracing/visualization/service/log_patterns.png" alt="Log patterns"  style="width:90%;">}}
 

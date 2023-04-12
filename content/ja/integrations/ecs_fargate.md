@@ -23,9 +23,13 @@ author:
   support_email: help@datadoghq.com
 categories:
 - aws
+- cloud
 - containers
 - log collection
+- network
 - orchestration
+- provisioning
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ecs_fargate/README.md
 display_on_public_website: true
@@ -33,7 +37,7 @@ draft: false
 git_integration_title: ecs_fargate
 integration_id: aws-fargate
 integration_title: Amazon ECS on AWS Fargate
-integration_version: 3.2.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -43,18 +47,22 @@ public_title: Amazon ECS on AWS Fargate
 short_description: ECS Fargate を使用して実行中のコンテナのメトリクスを追跡する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::AWS
-  - Category::Containers
+  - Category::クラウド
+  - Category::コンテナ
   - Category::ログの収集
-  - Category::Orchestration
+  - Category::ネットワーク
+  - Category::オーケストレーション
+  - Category::プロビジョニング
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ECS Fargate を使用して実行中のコンテナのメトリクスを追跡する
   media: []
@@ -88,7 +96,7 @@ Datadog Agent は、ECS のタスクメタデータエンドポイントでタ�
 
 Datadog Agent を持たないタスクも Cloudwatch でメトリクスを報告しますが、Autodiscovery、詳細なコンテナメトリクス、トレーシングなどの機能には Agent が必要です。さらに、Cloudwatch メトリクスは粒度が低く、Datadog Agent を通じて直接発送されるメトリクスより報告のレイテンシーが高くなります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog で ECS Fargate タスクを監視するには、アプリケーションコンテナと**同じタスク定義**内のコンテナとして Agent を実行します。Datadog でメトリクスを収集するには、各タスク定義にアプリケーションコンテナのほかに Datadog Agent コンテナを含める必要があります。以下のセットアップ手順を実行します。
 
@@ -288,13 +296,13 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 
 上述のように Datadog Agent をセットアップすると、オートディスカバリーを有効にした状態で [ecs_fargate チェック][11]がメトリクスを収集します。その他のメトリクスを収集するには、同じタスク内の他のコンテナに Docker ラベルを追加します。
 
+インテグレーションは Linux と Windows で動作しますが、一部のメトリクスは OS に依存します。Windows で実行したときに公開されるメトリクスは、すべて Linux でも公開されますが、Linux でしか利用できないメトリクスもあります。このインテグレーションで提供されるメトリクスの一覧は、[データ収集](#data-collected)を参照してください。このリストでは、どのメトリクスが Linux 専用であるかも指定されています。
+
 インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][12]を参照してください。
 
 #### DogStatsD
 
 メトリクスは [DogStatsD][13] を使用して UDP ポート 8125 を介して収集されます。
-
-他のコンテナからの DogStatsD パケットをリスニングすることによってカスタムメトリクスを送信するには、Datadog Agent コンテナ内の環境変数 `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` を `true` に設定します。
 
 #### その他の環境変数
 
@@ -769,7 +777,7 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 
 ### トレースの収集
 
-1. [上の手順](#installation)に従ってタスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定し、ポートマッピングでコンテナポート（**8126** と **tcp** プロトコルを使用）を設定します。`DD_SITE` 変数を {{< region-param key="dd_site" code="true" >}} に設定します。設定しない場合、デフォルトで `datadoghq.com` になります。
+1. [上の手順](#installation)に従ってタスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定します。`DD_SITE` 変数を {{< region-param key="dd_site" code="true" >}} に設定します。設定しない場合、デフォルトで `datadoghq.com` になります。
 
 2. [アプリケーションのインスツルメンテーション][32]に基づいて、セットアップを行います。Fargate APM のアプリケーションでは、`DD_AGENT_HOST` を**設定しない**でください。デフォルトの `localhost` で動作します。
 
@@ -793,14 +801,14 @@ Agent は、タグを自動検出して、タスク全体またはこのタス�
   | `task_family`                 | 小          | ECS API              |
   | `task_name`                   | 小          | ECS API              |
   | `task_version`                | 小          | ECS API              |
-  | `availability_zone`           | 小          | ECS API              |
+  | `availability-zone`           | 小          | ECS API              |
   | `region`                      | 小          | ECS API              |
 
 ## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "ecs_fargate" >}}
- また、どれが Linux 専用なのかも明記されています。
+
 
 ### イベント
 

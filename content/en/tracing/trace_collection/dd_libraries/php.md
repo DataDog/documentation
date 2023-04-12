@@ -30,7 +30,7 @@ further_reading:
 
 The latest PHP Tracer supports versions >= 5.4.x.
 
-For a full list of Datadog’s PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -75,7 +75,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
    DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
    ```
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

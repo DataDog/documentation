@@ -33,24 +33,58 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 
 ### APM
+- [Connect telemetry using tags](#connect-telemetry-using-tags)
+- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
+- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
+- [Disable logs collection](#disable-logs-collection)
+- [Parse and transform logs](#parse-and-transform-logs)
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
-- [Choose APM tracing sampling rates](#select-sampling-rates-for-ingesting-apm-spans)
+- [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
 - [Disable trace collection](#disable-trace-collection)
-- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
-- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Connect logs and traces](#connect-logs-and-traces)
+- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Submit custom metrics](#submit-custom-metrics)
+- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
+- [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
 - [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
-- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
+- [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
+- [Troubleshoot](#troubleshoot)
+- [Further Reading](#further-reading)
 
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
-- [Send telemetry over AWS PrivateLink or a proxy](#send-telemetry-over-privatelink-or-proxy)
+- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
+- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
+- [Disable logs collection](#disable-logs-collection)
+- [Parse and transform logs](#parse-and-transform-logs)
+- [Configure the Datadog tracer](#configure-the-datadog-tracer)
+- [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
+- [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
+- [Disable trace collection](#disable-trace-collection)
+- [Connect logs and traces](#connect-logs-and-traces)
+- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Submit custom metrics](#submit-custom-metrics)
+- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
-- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
+- [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
+- [Further Reading](#further-reading)
 
 ## Connect telemetry using tags
 
@@ -368,9 +402,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration.
+Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
 
-For high throughput services, there’s usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
+For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
 The default sampling mechanism for ingestion is called [head-based sampling][19]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header. Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, you must configure the sampling rate on the root service to take effect.
 
@@ -624,9 +658,18 @@ If your Lambda functions are configured to use code signing, you must add Datado
 
 Datadog's Signing Profile ARN:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```
+arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
+```
+{{< /site-region >}}
+
 
 ## Migrate to the Datadog Lambda extension
 

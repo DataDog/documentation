@@ -55,7 +55,7 @@ further_reading:
 
 The .NET Tracer supports instrumentation on .NET Framework >= 4.6.1.
 
-For a full list of Datadog’s .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
+For a full list of Datadog's .NET Framework library and processor architecture support (including legacy and maintenance versions), see [Compatibility Requirements][1].
 
 ## Installation and getting started
 
@@ -99,7 +99,7 @@ For containerized, serverless, and cloud environments:
 
 3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on configuring these settings, see [Configuration](#configuration).
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. To ensure the Agent sends data to the right Datadog location, set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}}.
 
@@ -128,7 +128,7 @@ For all other environments, see the [Integrations documentation][4] for that env
 
 <div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection">Injecting Libraries</a> for instructions.</div>
 
-Install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis, so developers can manage the instrumentation through the application’s dependencies. To see machine-wide installation instructions, click the Windows tab. To see per-application installation instructions, click the NuGet tab.
+Install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis, so developers can manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows tab. To see per-application installation instructions, click the NuGet tab.
 
 {{< tabs >}}
 

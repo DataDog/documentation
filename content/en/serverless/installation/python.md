@@ -248,6 +248,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
 
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog Lambda library
 
     The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
@@ -302,6 +304,77 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Install the Datadog Lambda library
+
+    The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
+
+    The minor version of the `datadog-lambda` package always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
+
+    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+      ```sh
+      # Use this format for x86-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+      ```
+
+      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
+
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
+
+      ```sh
+      pip install datadog-lambda -t ./
+      ```
+
+      **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore it must be installed and compiled in a Linux environment on the right architecture (`x86_64` or `arm64`). For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
+
+      See the [latest release][5].
+
+2. Install the Datadog Lambda Extension
+
+    [Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
+{{< /site-region >}}
+
+
+
 3. Redirect the handler function
 
     - Set your function's handler to `datadog_lambda.handler.handler`.
@@ -318,7 +391,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 5. (AWS Chalice only) Register the middleware
 
     If you are using [AWS Chalice][8], you must install `datadog-lambda` using `pip`, and register `datadog_lambda_wrapper` as a [middleware][9] in your `app.py`:
-    
+
     ```python
     from chalice import Chalice, ConvertToMiddleware
     from datadog_lambda.wrapper import datadog_lambda_wrapper
@@ -333,11 +406,6 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     ```
 
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[5]: https://pypi.org/project/datadog-lambda/
 [6]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://aws.github.io/chalice/

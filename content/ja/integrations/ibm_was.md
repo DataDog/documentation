@@ -24,10 +24,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
-- OS & システム
 - ログの収集
-- オートディスカバリー
+- OS & システム
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_was/README.md
 display_on_public_website: true
@@ -35,7 +33,7 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 2.3.1
+integration_version: 2.3.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -45,18 +43,16 @@ public_title: IBM WAS
 short_description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
-  - Category::OS & System
   - Category::Log Collection
-  - Category::Autodiscovery
+  - Category::OS & System
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
   media: []
@@ -79,7 +75,7 @@ IBM WAS Datadog インテグレーションは、有効になっている PMI �
 
 このチェックはデフォルトで、JDBC、JVM、スレッドプール、および Servlet Session Manager のメトリクスを収集します。オプションで追加のメトリクスを指定して、"custom_queries" セクションに収集することができます。例については、[サンプルチェック構成][3]を参照してください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 IBM WAS チェックは [Datadog Agent][4] パッケージに含まれています。
 

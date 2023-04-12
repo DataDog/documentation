@@ -12,7 +12,7 @@ kind: documentation
 
 Datadog generates enhanced Lambda metrics from your Lambda runtime out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags.
 
-Enhanced Lambda metrics give you a view above and beyond the default [Lambda metrics][1] enabled with the AWS Lambda integration. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog’s best practice for setting real-time monitors on your serverless application health.
+Enhanced Lambda metrics give you a view above and beyond the default [Lambda metrics][1] enabled with the AWS Lambda integration. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog's best practice for setting real-time monitors on your serverless application health.
 
 ### Real-time enhanced Lambda metrics
 

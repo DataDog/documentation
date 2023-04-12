@@ -17331,6 +17331,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
+          deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
           format: int64
@@ -17732,6 +17733,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
+          deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current date for the given org.
           format: int64
@@ -18136,6 +18138,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
+          deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current months for all organizations.
           format: int64
@@ -19825,6 +19828,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -25628,8 +25632,8 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
-        US5.
+        **NOTE** Only available on US1-FED and in closed beta on US1, EU, AP1, US3,
+        and US5.
 
 
         **CI Pipelines Alert Query**
@@ -25654,7 +25658,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
+        **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
 
 
         **CI Tests Alert Query**
@@ -25679,8 +25683,8 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Test monitors are available only in closed beta on US1, EU, US3
-        and US5.
+        **NOTE** CI Test monitors are available only in closed beta on US1, EU, AP1,
+        US3, and US5.
 
 
         **Error Tracking Alert Query**
@@ -28240,6 +28244,7 @@ paths:
             - datadoghq.eu
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - ddog-gov.com
           subdomain:
             default: api
@@ -30530,12 +30535,10 @@ paths:
         type: safe
   /api/v1/usage/audit_logs:
     get:
+      deprecated: true
       description: 'Get hourly usage for audit logs.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
-        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
-        for the associated migration guide.'
+        **Note:** This endpoint has been deprecated.'
       operationId: GetUsageAuditLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30589,7 +30592,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 29
+      x-menu-order: 40
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -33050,6 +33053,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -33156,6 +33160,7 @@ servers:
       - datadoghq.com
       - us3.datadoghq.com
       - us5.datadoghq.com
+      - ap1.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:
