@@ -19,7 +19,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
 
 ### Supported frameworks
 
-Integrate the Go tracer with the following list of web frameworks using one of the corresponding APM tracer integration. Click to see the [integrations documentation][1], which provides a detailed overview of the supported packages and their APIs, along with usage examples.
+Integrate the Go tracer with the following list of web frameworks using one of the corresponding APM tracer integrations. Refer to [Go's integrations documentation][1] for a detailed overview of the supported packages and their APIs, along with usage examples.
 
 - [gRPC][2]
 - [net/http][3]
@@ -28,7 +28,7 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 - [Chi][6]
 - [HttpRouter][7]
 
-<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send us details</a>.</div>
+<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Enabling CGO
 
