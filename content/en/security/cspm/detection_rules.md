@@ -65,7 +65,7 @@ Alternatively, create [notification rules][21] that span across multiple detecti
 
 ## Create custom rules
 
-You can create custom rules to extend the rules being applied to your environment to evaluate your security posture. You can also clone the default detection rules and edit the copies (GCP only). See [Custom Rules][20] for more information.
+You can create custom rules to extend the rules being applied to your environment to evaluate your security posture. You can also clone the default detection rules and edit the copies (Google Cloud only). See [Custom Rules][20] for more information.
 
 ## Rule deprecation
 
