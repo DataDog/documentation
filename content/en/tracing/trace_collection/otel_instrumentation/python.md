@@ -15,7 +15,8 @@ further_reading:
 
 ## Requirements and limitations
 
-tktk Python requirements
+- Datadog python tracing library `dd-trace-py` version 1.12.0 or greater
+- Python version 3.7 or greater
 
 The following OTel features implemented in the Datadog library as noted:
 
@@ -28,14 +29,19 @@ The following OTel features implemented in the Datadog library as noted:
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog trace provider
+## Configuring OTel to use the Datadog Tracer Provider
 
 1. Add your desired manual OTel instrumentation to your Python code following the [OTel Python Manual Instrumentation documentation][5].
-1. tktk add library
-1. tktk config otel
-1. tktk config tracing
+2. Install the python tracer:
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports  [OpenTelemetry Automatic instrumentation][8] also.
+    ```
+    pip install "ddtrace>=1.12.0"
+    ```
+
+3. Set `DD_TRACE_OTEL_ENABLED` enviornment variable to `True`.
+4. Run your application with `ddtrace-run`. This will automatically configure the `Datadog Tracer Provider`. If your application can not use `ddttrace-run` refer to the following [doc][11] for additional configurations.
+
+Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [OpenTelemetry Automatic instrumentation][8] also.
 
 
 [1]: https://opentelemetry.io/docs/instrumentation/python/manual/#change-the-default-propagation-format
@@ -45,3 +51,5 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [5]: https://opentelemetry.io/docs/instrumentation/python/manual/
 [8]: https://opentelemetry.io/docs/instrumentation/python/automatic/
 [9]: /tracing/trace_collection/trace_context_propagation/python/
+[10]: /tracing/trace_collection/dd_libraries/python/#custom-logging
+[11]: https://ddtrace.readthedocs.io/en/stable/api.html##opentelemetry-api
