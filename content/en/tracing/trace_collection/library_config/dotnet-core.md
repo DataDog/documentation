@@ -206,7 +206,7 @@ The `from-key` value is specific to the integration type, and should exclude the
 **Default**: `true`
 
 `DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
-: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, sets the max size of the querystring to report, before obfuscation. Set 0 for no limit in size<br>
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, the max size of the querystring to report is set, before obfuscation. Set 0 for no limit in size<br>
 **Default**: `5000`
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
