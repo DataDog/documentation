@@ -217,6 +217,16 @@ Added in version 1.17.0. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
+`DD_HTTP_SERVER_TAG_QUERY_STRING`
+: When set to `true` query string parameters are added to the http.url tag. You can find more details in [Redacting the query in the url][14].
+**Default**: `true`
+
+`DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, sets the max size of the querystring to report, before obfuscation. Set 0 for no limit in size<br>
+**Default**: `5000`
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). An empty string disables redaction. This regex executes for every incoming request.
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
