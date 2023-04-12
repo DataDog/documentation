@@ -3,6 +3,8 @@ title: Browser Log Collection
 kind: documentation
 aliases:
   - /logs/log_collection/web_browser
+algolia:
+  tags: ['browser logs']
 ---
 
 Send logs to Datadog from web browser pages with the browser logs SDK.

@@ -19,8 +19,8 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 // vendor
 @import 'vendor/chroma-styles';
 
-// docsearch
-@import 'main_docsearch';
+// instantsearch
+@import 'algolia_instantsearch';
 
 // global to all pages
 @import 'pages/global';
@@ -32,7 +32,6 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 // partial css lives with partial
 
 @import "pages/api";
-@import "pages/search";
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";

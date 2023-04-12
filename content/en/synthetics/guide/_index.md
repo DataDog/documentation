@@ -5,6 +5,11 @@ aliases:
   - /synthetics/faq/uptime-check-internal-website/ 
 private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Synthetic Monitoring Guides
 ---
 
 {{< whatsnext desc="General Guides:" >}}
