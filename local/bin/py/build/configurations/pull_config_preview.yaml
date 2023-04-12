@@ -297,14 +297,14 @@
                 - /serverless/datadog_lambda_library/
                 - /serverless/serverless_integrations/cli/
         - action: pull-and-push-file
-          branch: master
+          branch: alai97/small-site-region-short-code-update
           globs:
           - 'src/commands/synthetics/README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'configuration.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci/blob/alai97/small-site-region-short-code-update/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
               kind: documentation
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
@@ -357,14 +357,14 @@
       - repo_name: datadog-ci-azure-devops
         contents:
         - action: pull-and-push-file
-          branch: main
+          branch: alai97/small-site-region-short-code-update
           globs:
           - 'README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'azure_devops_extension.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/alai97/small-site-region-short-code-update/README.md"]
               title: Continuous Testing and Datadog CI Azure DevOps Extension
               kind: documentation
               description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
@@ -374,30 +374,30 @@
       - repo_name: synthetics-ci-github-action
         contents:
         - action: pull-and-push-file
-          branch: main
+          branch: alai97/small-site-region-short-code-update
           globs:
           - 'README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'github_actions.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/alai97/small-site-region-short-code-update/README.md"]
               title: Continuous Testing and GitHub Actions
               kind: documentation
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
-      - repo_name: synthetics-ci-orb
+      - repo_name: synthetics-test-automation-circleci-orb
         contents:
         - action: pull-and-push-file
-          branch: main
+          branch: alai97/small-site-region-short-code-update
           globs:
           - 'README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'circleci_orb.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/alai97/small-site-region-short-code-update/README.md"]
               title: Continuous Testing and CircleCI Orb
               kind: documentation
               aliases:

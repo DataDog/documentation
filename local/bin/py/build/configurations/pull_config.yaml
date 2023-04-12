@@ -387,7 +387,7 @@
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
-      - repo_name: synthetics-ci-orb
+      - repo_name: synthetics-test-automation-circleci-orb
         contents:
         - action: pull-and-push-file
           branch: main
@@ -397,7 +397,7 @@
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'circleci_orb.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"]
               title: Continuous Testing and CircleCI Orb
               kind: documentation
               aliases:
