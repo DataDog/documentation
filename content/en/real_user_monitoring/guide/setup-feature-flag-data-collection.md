@@ -6,26 +6,113 @@ description: Learn how to set up RUM to capture feature flag data and analyze th
 aliases:
 - /real_user_monitoring/guide/getting-started-feature-flags/
 further_reading:
+- link: '/real_user_monitoring/feature_flag_tracking'
+  tag: 'Documentation'
+  text: 'Analyze your feature flag data with Feature Flag Tracking'
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Feature Flag analysis for RUM is in private beta. To request access, contact Support at support@datadoghq.com. In the meantime, follow the instructions below to enrich your RUM events with feature flag context.
-{{< /callout >}}
+<div class="alert alert-warning">
+    Feature Flag Tracking is in beta.
+</div>
+
 
 ## Overview
-Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance. 
+Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
 
 By enriching your RUM data with feature flag data, you can be confident that your feature will successfully launch without unintentionally causing a bug or performance regression. With this additional layer of insight, you can correlate feature releases with performance, pinpoint issues to specific releases, and troubleshoot faster.
 
 ## Setup
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
 Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-You can start collecting feature flag data for [custom feature flag management solutions](#custom-feature-flag-management), or using one of our integration partners. 
+To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
 
-We currently support integrations with:
+<details open>
+  <summary>npm</summary>
+
+```javascript
+  import { datadogRum } from '@datadog/browser-rum';
+
+  // Initialize Datadog Browser SDK
+  datadogRum.init({
+    ...
+    enableExperimentalFeatures: ["feature_flags"],
+    ...
+});
+```
+
+</details>
+
+<details>
+  <summary>CDN async</summary>
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ["feature_flags"],
+      ...
+    })
+})
+```
+</details>
+
+<details>
+  <summary>CDN sync</summary>
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ["feature_flags"],
+      ...
+    })
+```
+</details>
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+
+Datadog supports integrations with:
+
+[1]: /real_user_monitoring/browser#setup
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+
+Datadog supports integrations with:
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+
+Datadog supports integrations with:
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+
+Datadog supports integrations with:
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/flutter/
+{{% /tab %}}
+{{< /tabs >}}
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
@@ -35,195 +122,57 @@ We currently support integrations with:
 ### Custom feature flag management
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "Browser" %}}
 
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
+```javascript
+datadogRum.addFeatureFlagEvaluation(key, value);
+```
 
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     ...
-     enableExperimentalFeatures: ["feature_flags"],
-     ...
-   });
-   ```
+{{% /tab %}}
+{{% tab "iOS" %}}
 
-2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```javascript
-   datadogRum.addFeatureFlagEvaluation(key, value);
+   Global.rum.addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+{{% tab "Android" %}}
 
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
-
-2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```javascript
-   datadogRum.addFeatureFlagEvaluation(key, value);
-   ```
-
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
-
-2. Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
-
-   ```javascript
-   datadogRum.addFeatureFlagEvaluation(key, value);
+   GlobalRum.get().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### LaunchDarkly Integration
+### LaunchDarkly integration
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "Browser" %}}
 
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code shown below.
 
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
+ For more information about initializing LaunchDarkly's SDK, see [LaunchDarkly's JavaScript SDK documentation][1].
 
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     …
-     enableExperimentalFeatures: ["feature_flags"],
-     …
-   });
-   ```
-
-2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code shown below.
-
-   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][1].
-
-   ```javascript
-   const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
-     inspectors: [
-       {
-         type: "flag-used",
-         name: "dd-inspector",
-         method: (key: string, detail: LDClient.LDEvaluationDetail) => {
-           datadogRum.addFeatureFlagEvaluation(key, detail.value);
-         },
-       },
-     ],
-   });
-   ```
-
-
-[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
-{{% /tab %}}
-{{% tab "CDN async" %}}
-
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
-
-2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
-
-   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][1].
-
-   ```javascript
-   const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
-     inspectors: [
-       {
-         type: "flag-used",
-         name: "dd-inspector",
-         method: (key: string, detail: LDClient.LDEvaluationDetail) => {
-           datadogRum.addFeatureFlagEvaluation(key, detail.value);
-         },
-       },
-     ],
-   });
-   ```
-
-
-[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
-
-2. Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
-
-   For more information about initializing LaunchDarkly's SDK, check out [LaunchDarkly's JavaScript SDK documentation][1].
-
-   ```javascript
-   const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
-     inspectors: [
-       {
-         type: "flag-used",
-         name: "dd-inspector",
-         method: (key: string, detail: LDClient.LDEvaluationDetail) => {
-           datadogRum.addFeatureFlagEvaluation(key, detail.value);
-         },
-       },
-     ],
-   });
-   ```
+```javascript
+const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+  inspectors: [
+    {
+      type: "flag-used",
+      name: "dd-inspector",
+      method: (key: string, detail: LDClient.LDEvaluationDetail) => {
+        datadogRum.addFeatureFlagEvaluation(key, detail.value);
+      },
+    },
+  ],
+});
+```
 
 
 [1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
@@ -234,138 +183,83 @@ We currently support integrations with:
 ### Split Integration
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "Browser" %}}
 
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
 
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
+For more information about initializing Split's SDK, see Split's [JavaScript SDK documentation][1].
 
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     …
-     enableExperimentalFeatures: ["feature_flags"],
-     …
-   });
-   ```
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {
+          datadogRum
+              .addFeatureFlagEvaluation(
+                  impressionData.impression.feature,
+                  impressionData.impression.treatment
+              );
+    },
+  },
+});
 
-2. Initialize Split's SDK and and create an impression listener reporting feature flags evaluations to Datadog using the following snippet of code
-
-   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][1].
-
-   ```javascript
-   const factory = SplitFactory({
-       core: {
-         authorizationKey: "<APP_KEY>",
-         key: "<USER_ID>",
-       },
-       impressionListener: {
-         logImpression(impressionData) {              
-             datadogRum
-                 .addFeatureFlagEvaluation(
-                      impressionData.impression.feature,
-                      impressionData.impression.treatment
-                 );
-        },
-     },
-   });
-
-   const client = factory.client();
-   ```
+const client = factory.client();
+```
 
 
 [1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 {{% /tab %}}
-{{% tab "CDN async" %}}
+{{% tab "iOS" %}}
 
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
 
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
+For more information about initializing Split's SDK, see Split's [iOS SDK documentation][1].
 
-2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
-
-   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][1].
-
-   ```javascript
-   const factory = SplitFactory({
-       core: {
-         authorizationKey: "<APP_KEY>",
-         key: "<USER_ID>",
-       },
-       impressionListener: {
-         logImpression(impressionData) {              
-             datadogRum
-                 .addFeatureFlagEvaluation(
-                      impressionData.impression.feature,
-                      impressionData.impression.treatment
-                 );
-        },
-     },
-   });
-
-   const client = factory.client();
-   ```
+```javascript
+  let config = SplitClientConfig()
+// Send the feature flag when Split reports the impression
+  config.impressionListener = { impression in
+      if let feature = impression.feature,
+          let treatment = impression.treatment {
+          Global.rum.addFeatureFlagEvaluation(name: feature, value: treatment)
+      }
+  }
+```
 
 
-[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+[1]: https://help.split.io/hc/en-us/articles/360020401491-iOS-SDK
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+{{% tab "Android" %}}
 
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
 
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
+For more information about initializing Split's SDK, see Split's [Android SDK documentation][1].
 
-2. Initialize Split's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code below.
+```javascript
+  internal class DatadogSplitImpressionListener : ImpressionListener {
+    override fun log(impression: Impression) {
+        // Send the feature flag when Split reports the impression
+        GlobalRum.get().addFeatureFlagEvaluation(
+            impression.split(),
+            impression.treatment()
+        )
+    }
+    override fun close() {
+    }
+  }
 
-   For more information about initializing Split's SDK, check out Split's [JavaScript SDK documentation][1].
-
-   ```javascript
-   const factory = SplitFactory({
-       core: {
-         authorizationKey: "<APP_KEY>",
-         key: "<USER_ID>",
-       },
-       impressionListener: {
-         logImpression(impressionData) {              
-             datadogRum
-                 .addFeatureFlagEvaluation(
-                      impressionData.impression.feature,
-                      impressionData.impression.treatment
-                 );
-        },
-     },
-   });
-
-   const client = factory.client();
-   ```
+  // In initialization:
+  val apikey = BuildConfig.SPLIT_API_KEY
+  val config = SplitClientConfig.builder()
+      .impressionListener(DatadogSplitImpressionListener())
+      .build()
+```
 
 
-[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+[1]: https://help.split.io/hc/en-us/articles/360020343291-Android-SDK
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -373,97 +267,11 @@ We currently support integrations with:
 ### Flagsmith Integration
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "Browser" %}}
 
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
-
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     …
-     enableExperimentalFeatures: ["feature_flags"],
-     …
-   });
-   ```
-
-2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
+Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flag evaluations to Datadog using the snippet of code shown below.
 
    Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
-
-   ```javascript
-    // Initialize the Flagsmith SDK
-    flagsmith.init({
-        datadogRum: {
-            client: datadogRum,
-            trackTraits: true,
-        },
-        ...
-    })
-   ```
-
-
-[1]: https://docs.flagsmith.com/clients/javascript
-{{% /tab %}}
-{{% tab "CDN async" %}}
-
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
-
-2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
-
-    Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
-
-   ```javascript
-    // Initialize the Flagsmith SDK
-    flagsmith.init({
-        datadogRum: {
-            client: datadogRum,
-            trackTraits: true,
-        },
-        ...
-    })
-   ```
-
-
-[1]: https://docs.flagsmith.com/clients/javascript
-{{% /tab %}}
-{{% tab "CDN sync" %}}
-
-1. To start collecting feature flag data, initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
-
-2. Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flags evaluations to Datadog using the snippet of code shown below.
-
-    Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
 
    ```javascript
     // Initialize the Flagsmith SDK
@@ -483,12 +291,12 @@ We currently support integrations with:
 
 ## Analyze your Feature Flag performance in RUM
 
-Feature flags appear in the context of your RUM Sessions, Views, and Errors as a list. 
+Feature flags appear in the context of your RUM Sessions, Views, and Errors as a list.
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Feature Flag list of attributes in RUM Explorer" style="width:75%;">}}
 
 ### Search feature flags using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer][2] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][3] and [monitors][4]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute. 
+Search through all the data collected by RUM in the [RUM Explorer][2] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][3] and [monitors][4]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute.
 
 #### Sessions
 Filtering your **Sessions** with the `@feature_flags.{flag_name}` attribute, you will find all sessions in the given time frame where your feature flag was evaluated.
@@ -506,7 +314,7 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you w
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
 ### Why doesn’t my feature flag data reflect what I expect to see?
-Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on. 
+Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
 Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
 
@@ -519,14 +327,13 @@ For example, to see what **Views** your feature flag is being evaluated on, you 
 Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
 
 - A common react component that appears on multiple pages which evaluates feature flags whenever they run.
-- A routing issue where components with a feature flag evaluation are rendered before/after URL changes. 
+- A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
 
 When performing your investigations, you can also scope your data for `View Name`’s that are relevant to your feature flag.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser#setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors

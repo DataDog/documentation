@@ -22,7 +22,8 @@ author:
   name: コミュニティ
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
-categories: []
+categories:
+- キャッシュ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
 display_on_public_website: true
@@ -40,14 +41,15 @@ public_title: PHP APCu
 short_description: PHP APCu のメモリ内データキャッシュを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Caching
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: PHP APCu のメモリ内データキャッシュを監視します。
   media: []
@@ -66,7 +68,7 @@ tile:
 
 PHP APCu チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い PHP APCu チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

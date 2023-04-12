@@ -26,8 +26,11 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 ## Requirements
 
 * Kubernetes v1.14+
-* Datadog [Cluster Agent v7.40+][3] with Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
+* Datadog [Cluster Agent v7.40+][3]
+* Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * Applications in Java, JavaScript, or Python deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
+
+**Note:** Python uWSGI applications are not supported.
 
 
 ## Container registries
@@ -636,7 +639,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 **For CentOS, RedHat, or another distribution that uses yum/RPM:**
 
-1. Set up Datadog’s Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
+1. Set up Datadog's Yum repo on your system by creating a file called `/etc/yum.repos.d/datadog.repo` with the following contents:
    ```
    [datadog]
    name = Datadog, Inc.

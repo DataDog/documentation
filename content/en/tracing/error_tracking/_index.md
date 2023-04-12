@@ -31,6 +31,7 @@ Error Tracking enables you to:
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
 - Collect all the necessary context in one place to facilitate troubleshooting.
+- Access a trace in its source code repository, a Git blame, or a commit.
 
 ## Use span tags to track error spans
 
@@ -38,7 +39,7 @@ Error Tracking enables you to:
 
 The Datadog tracers collect errors through integrations and the manual instrumentation of your backend services' source code. Error spans within a trace are processed by Error Tracking **if the error is located in a service entry span** (the uppermost service span). This span must also contain the `error.stack`, `error.message`, and `error.type` [span tags][1] to be tracked.
 
-{{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:90%;" >}}
+{{< img src="tracing/error_tracking/flamegraph_with_errors.png" alt="Flame graph with errors" style="width:100%;" >}}
 
 Error Tracking computes a fingerprint for each error span it processes using the error type, the error message, and the frames that form the stack trace. Errors with the same fingerprint are grouped together and belong to the same issue. For more information, see the [Trace Explorer documentation][2].
 
@@ -54,4 +55,4 @@ Click on an issue to see a summary of the error, the distribution of impacted sp
 
 [1]: /tracing/visualization/trace/?tab=spantags#more-information
 [2]: /tracing/trace_explorer/trace_view/?tab=spantags
-[3]: https://app.datadoghq.com/apm/error-tracking
+[3]: /tracing/error_tracking/explorer

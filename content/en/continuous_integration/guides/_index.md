@@ -3,6 +3,11 @@ title: CI Visibility Guides
 kind: guide
 private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: CI Visibility Guides
 ---
 
 {{< whatsnext desc="CI Visibility Guides:" >}}

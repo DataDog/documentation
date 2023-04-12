@@ -30,9 +30,8 @@ author:
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
-- マーケットプレイス
 - data store
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -59,19 +58,18 @@ public_title: NetApp AIQUM
 short_description: NetApp AIQUM クラスターのパフォーマンスと使用量の監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Data Store
-  - Category::Monitoring
+  - Category::Marketplace
   - Offering::Integration
   - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: NetApp AIQUM クラスターのパフォーマンスと使用量の監視
   media:

@@ -26,8 +26,11 @@ Kubernetes Admission Controller の詳細については、[Kubernetes Admission
 ## 要件
 
 * Kubernetes v1.14+
-* Datadog Admission Controller を有効化した Datadog [Cluster Agent v7.40+][3]。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
+* Datadog [Cluster Agent v7.40+][3]
+* Datadog Admission Controller が有効になっている。**注**: Helm chart v2.35.0 以降では、Cluster Agent で Datadog Admission Controller がデフォルトでアクティブになります。
 * サポートされているアーキテクチャを持つ Linux 上にデプロイされた Java、JavaScript、Python のアプリケーション。言語ごとにサポートされているアーキテクチャの完全なリストについては、[対応するコンテナレジストリ](#container-registries)を確認してください。
+
+**注:** Python の uWSGI アプリケーションはサポートされていません。
 
 
 ## コンテナレジストリ
@@ -85,9 +88,9 @@ template:
 
 | 言語   | ポッドアノテーション                                              |
 |------------|-------------------------------------------------------------|
-| Java       | `admission.datadoghq.com/java-lib.version: "<lib-version>"`   |
-| JavaScript | `admission.datadoghq.com/js-lib.version: "<lib-version>"`     |
-| Python     | `admission.datadoghq.com/python-lib.version: "<lib-version>"` |
+| Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
+| JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
+| Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 
 利用可能なライブラリのバージョンは、各コンテナレジストリ、および各言語のトレーサーソースレジストリに記載されています。
 - [Java][13]
@@ -112,7 +115,7 @@ template:
     labels:
         admission.datadoghq.com/enabled: "true" # Admission Controller を有効にしてこのデプロイメントに含まれる新しいポッドを変異させます
     annotations:
-        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
+        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
   containers:
   -  ...
 ```
@@ -153,7 +156,7 @@ template:
         tags.datadoghq.com/version: "1.1" # 統合サービスタグ - ポッドバージョンタグ
         admission.datadoghq.com/enabled: "true" # Admission Controller を有効にしてこのデプロイメントに含まれる新しいポッドを変異させます
     annotations:
-        admission.datadoghq.com/java-lib.version: "<TRACER VERSION>"
+        admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"
   containers:
   -  ...
 ```

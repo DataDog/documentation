@@ -83,6 +83,34 @@ providers:
 ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+**Note:** Datadog Operator v1.0.0 or greater is required.
+
+[1]: https://github.com/DataDog/datadog-operator
+
+{{% /tab %}}
 {{% tab "Kubernetes without Helm" %}}
 
 1. Add the annotation `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` on the `datadog-agent` template:
@@ -160,8 +188,6 @@ providers:
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
-           - name: HOST_PROC
-             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -314,7 +340,6 @@ docker run --cgroupns host \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
--e HOST_PROC=/host/root/proc \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -339,13 +364,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
-     - HOST_PROC: '/host/proc'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src

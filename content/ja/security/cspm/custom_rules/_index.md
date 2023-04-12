@@ -33,7 +33,7 @@ title: カスタムルール
 ルールを複製するには
 
 1. 次のいずれかの方法でコピーしたいルールを探します。
-   - [**Security > Posture Management** に移動し、**Detection Rules** をクリックします][1]。コピーしたいルールを選択し、その詳細ページを開きます。
+   - [**Security > Posture Management** に移動し、**Compliance Rules** をクリックします][1]。コピーしたいルールを選択し、その詳細ページを開きます。
    - [**Security > Posture Management** に移動し、**Findings** をクリックします][2]。所見を選択してその詳細を開き、**Rule** メニューから **Edit Rule** を選択します。
 2. 新しいルールのために必要な変更を行います。
 3. 詳細ページの一番下までスクロールして、**Clone Rule** をクリックします。
@@ -42,7 +42,7 @@ title: カスタムルール
 
 ルールを一から作成するには
 
-1. Datadog で、[**Security > Posture Management** に移動し、**Detection Rules** をクリックします][1]。
+1. Datadog で、[**Security** > **Posture Management**][1] に移動し、**Compliance Rules** をクリックします。
 2. 右上の **New Rule** をクリックします。
 3. ルールの種類として、**Cloud Configuration** を選択します。
 4. ルールを記述するクラウドリソースタイプを指定します。

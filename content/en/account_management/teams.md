@@ -51,7 +51,7 @@ To find a team handle:
 
 To associate a resource with a defined team, a Team must exist in Datadog with a matching team handle. When you click on a resource associated with a defined team, a small window appears with the team handle and additional information. Defined teams provide additional functionality such as the Team filter below. 
 
-Team handles that aren’t associated with a defined team in Datadog behave similarly to tags. Convert any undefined team handles to defined teams to take advantage of Teams features.
+Team handles that aren't associated with a defined team in Datadog behave similarly to tags. Convert any undefined team handles to defined teams to take advantage of Teams features.
 
 ### Associate resources with team handles
 
@@ -77,12 +77,12 @@ The table below describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][6]         | Team handle                                                                      |
-| [Service Catalog][7]    | Team handle                                                                      |
-| [Incidents][8]          | Team handle                                                                      |
-| [Monitors][9]           | Team handle                                                                      |
-| [APM Error Tracking][10] | Service owned by teams (determined by ownership inside the [Service Catalog][7]) |
-| [Logs Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][7]) |
+| [Dashboards][7]         | Team handle                                                                      |
+| [Service Catalog][8]    | Team handle                                                                      |
+| [Incidents][9]          | Team handle                                                                      |
+| [Monitors][10]           | Team handle                                                                      |
+| [APM Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
+| [Logs Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
 
 
 ## Permissions
@@ -116,9 +116,10 @@ To enforce a strict membership model, configure your default team settings so **
 [3]: /monitors/incident_management/incident_details#overview-section
 [4]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [5]: /tracing/service_catalog/setup#add-service-definition-metadata
-[6]: https://app.datadoghq.com/dashboard/lists
-[7]: https://app.datadoghq.com/services
-[8]: https://app.datadoghq.com/incidents
-[9]: https://app.datadoghq.com/monitors/manage
-[10]: https://app.datadoghq.com/apm/error-tracking
-[11]: https://app.datadoghq.com/logs/error-tracking
+[6]: /monitors/service_level_objectives/#slo-tags
+[7]: https://app.datadoghq.com/dashboard/lists
+[8]: https://app.datadoghq.com/services
+[9]: https://app.datadoghq.com/incidents
+[10]: https://app.datadoghq.com/monitors/manage
+[11]: https://app.datadoghq.com/apm/error-tracking
+[12]: https://app.datadoghq.com/logs/error-tracking

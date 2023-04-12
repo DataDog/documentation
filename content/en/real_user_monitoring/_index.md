@@ -39,6 +39,8 @@ further_reading:
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
+algolia:
+  tags: ['rum', 'real user monitoring']
 ---
 
 {{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}

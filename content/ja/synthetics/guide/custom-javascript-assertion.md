@@ -29,7 +29,7 @@ title: ブラウザテストでカスタム JavaScript アサーションを使�
 
 ## ある要素がページ上に存在しないことをアサートする
 
-特定の ID を持つ要素がページ上に*ない*ことを確認するには、`return !document.getElementById("<ELEMENT_ID>”);` を使用します。
+特定の ID を持つ要素がページ上に*ない*ことを確認するには、`return !document.getElementById("<ELEMENT_ID>");` を使用します。
 
 ページ上に要素が*ない*ことを確認し、コンソールエラーで要素の数を返すには、本文のアサーションに以下を追加します。
 
@@ -61,7 +61,7 @@ return true
 例えば、1970 年 1 月 1 日 00 時 00 分 00 秒 (UTC) から経過したミリ秒数を "mytime" に設定するには
 
 {{< code-block lang="javascript" >}}
-localStorage.setItem(“mytime”, Date.now());
+localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 

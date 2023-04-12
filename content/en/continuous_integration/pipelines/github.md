@@ -32,6 +32,8 @@ further_reading:
 
 - **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
 
+- **Queue time**: View amount of time workflow jobs sit in the queue before processing
+
 ## Configuring the Datadog integration
 
 ### Configuring a GitHub App
