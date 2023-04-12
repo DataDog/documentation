@@ -257,7 +257,7 @@ public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAtt
     // For SQS, there are a maximum of 10 message attribute headers,
     // so the Datadog headers are combined into one header with the following properties:
     // - Key: "_datadog"
-    // - Value:
+    // - Value: MessageAttributeValue object
     //   - DataType: "String"
     //   - StringValue: <JSON map with key-value headers>
     if (headers.TryGetValue("_datadog", out var messageAttributeValue)
