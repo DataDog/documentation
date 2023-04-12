@@ -1726,21 +1726,26 @@ main:
     parent: service_catalog
     identifier: service_catalog_api
     weight: 902
+  - name: Service Metadata Structure
+    url: tracing/service_catalog/service_metadata_structure
+    parent: service_catalog
+    identifier: service_metadata_structure
+    weight: 903
   - name: Integrations
     url: tracing/service_catalog/integrations
     parent: service_catalog
     identifier: service_catalog_integrations
-    weight: 903
+    weight: 904
   - name: Troubleshooting
     url: tracing/service_catalog/troubleshooting
     parent: service_catalog
     identifier: service_catalog_troubleshooting
-    weight: 904
+    weight: 905
   - name: Guides
     url: tracing/service_catalog/guides
     parent: service_catalog
     identifier: service_catalog_guides
-    weight: 905
+    weight: 906
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
