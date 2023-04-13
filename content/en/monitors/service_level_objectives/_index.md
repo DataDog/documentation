@@ -123,7 +123,7 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 ## Viewing SLOs
 
-Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how the total number of SLOs are in each state (breached, warning, OK, and no data) grouped by context.
+Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by context.
 
 {{< img src="/monitors/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
