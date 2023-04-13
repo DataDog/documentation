@@ -342,7 +342,7 @@ Here are a few examples of reasons why your feature flag is being evaluated on u
 - A common react component that appears on multiple pages which evaluates feature flags whenever they run.
 - A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
 
-When performing your investigations, you can also scope your data for `View Name`’s that are relevant to your feature flag.
+When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
