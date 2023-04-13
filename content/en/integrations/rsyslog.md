@@ -43,7 +43,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 {{< site-region region="us,eu" >}}
 
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}**. You must include a separate `input` line for each log file you want to monitor:
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -178,7 +178,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 {{< site-region region="us,eu" >}}
 
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}**. You must include a separate `input` line for each log file you want to monitor:
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -315,7 +315,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
 {{< site-region region="us,eu" >}}
 
-3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}**. You must include a separate `input` line for each log file you want to monitor:
+3. In `/etc/rsyslog.d/datadog.conf`, add the following configuration and replace `<site_url>` with **{{< region-param key="dd_site" >}}** and `<API_KEY>` with your Datadog API key. You must include a separate `input` line for each log file you want to monitor:
 
    ```conf
    ## For each file to send
@@ -344,7 +344,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
 
    # include the omhttp module
    module(load="omhttp")
-   
+
    ruleset(name="infiles") { 
       action(type="omhttp" server="http-intake.logs.<site_url>" serverport="443" restpath="api/v2/logs" template="test_template" httpheaders=["DD-API-KEY: <API_KEY>", "Content-Type: application/json"])
    }
