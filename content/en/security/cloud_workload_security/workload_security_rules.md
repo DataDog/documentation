@@ -24,6 +24,8 @@ With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors 
 
 When you enable [Remote Configuration][7], you automatically receive new and updated CWS Agent rules when they're released. These bundled Agent rules are used in the [default signal rules][1]. You can also write your own custom Agent rules. This guide covers Agent rules, how to create them, and how to use them to generate security signals.
 
+<div class="alert alert-info">Remote Configuration for CWS is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+
 **Note**: At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
 
 ### Agent rules

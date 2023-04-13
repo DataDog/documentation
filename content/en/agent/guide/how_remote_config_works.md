@@ -67,11 +67,13 @@ The following products and features are supported with Remote Config:
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 ### Dynamic Instrumentation
-<div class="alert alert-info">This feature is in private beta.</div>
+<div class="alert alert-info">This feature is in beta.</div>
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
 ### Cloud Workload Security (CWS)
+
+<div class="alert alert-info">This feature is in public beta.</div>
 
 - **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][11] for more information.
 
