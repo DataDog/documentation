@@ -1,3 +1,3 @@
 ---
-title: GCP Integration
+title: Google Cloud Integration
 ---
