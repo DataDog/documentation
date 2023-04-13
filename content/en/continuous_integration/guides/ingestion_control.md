@@ -30,11 +30,11 @@ To create filters for your organization, your user account must have `ci_ingesti
 1. Navigate to the _Ingestion Settings_ tab in-app
 2. Select `Add an Exclusion Filter`
 
-[ ADD SCREENSHOT OF ADDING AN EXCLUSION FILTER ]
+{{< img src="ci/add-ci-exclusion-filter.png" alt="Add an Exclusion Filter button" style="width:90%;">}}
 
 3. Name the filter and define a query. After you define a query, the preview above the input fields shows ingested data that matches your query. Once your filter is created and enabled, events like the ones shown in the preview will be excluded from ingestion. 
 
-[ ADD SCREENSHOT OF FILTER CREATION ]
+{{< img src="ci/exclusion-filter-pipeline.png" alt="Creating an exclusion filter for a specific pipeline" style="width:100%;">}}
 
 Once you have added a filter, each row in this page should display:
 - `Filter name` - the name of the filter
@@ -52,17 +52,17 @@ Below are examples of how exclusion filters can help you optimize your CI Visibi
 **Filter by git author email address**
 You can exclude one or more specific committers from being monitored by defining a filter with git author email address (`@git.commit.author.email`). The screenshot below shows a filter in which all spans associated with commits from this particular git author email will not be ingested.
 
-[ ADD SCREENSHOT to exclude committers by email address - `@git.commit.author.email:john@datadoghq.com`]
+{{< img src="ci/exclusion-filter-email.png" alt="Ingestion control exclusion filter for email address" style="width:100%;">}}
 
 **Filter by git author email domain**
 You can also exclude many committers at once by email domain (e.g. excluding open source/external contributors committing to monitored repositories). The screenshot below shows a filter in which all spans associated with commits from email address domains that does not match the one in the query will not be ingested.
 
-[ ADD SCREENSHOT to exclude committers by domain]
+{{< img src="ci/exclusion-filter-domain.png" alt="Ingestion control exclusion filter for email domain" style="width:100%;">}}
 
 **Filter by repository** 
 You can exclude specific repositories from being monitored (e.g. an internal testing repository) by defining a filter with repository name (`@git.repository.name`) or ID (`@git.repository.id`). The screenshot below shows a filter in which all spans associated with commits to this repository will not be ingested.
 
-[ADD SCREENSHOT to exclude by repository name. `@git.repository.name:"DataDog/shopist"`]
+{{< img src="ci/exclusion-filter-repo.png" alt="Ingestion control exclusion filter for repository" style="width:100%;">}}
 
 ## Updating exclusion filters
 Exclusion filters can be enabled/disabled, updated, and deleted by users with `ci_ingestion_control_write` [permissions][4]. They are applied at the organization level. You can view detailed information about who modified exclusion filters via Datadog [Audit Trail][5]. 
@@ -80,12 +80,12 @@ _*While in most scenarios, filters will be applied to ingested data within <1 se
 ## Updating filters
 You can rename a filter or modify the query for an exclusion filter at any time within the “Ingestion Settings” page.
 
-[ ADD SCREENSHOT of edit button ]
+{{< img src="ci/exclusion-filter-edit.png" alt="Ingestion control edit exclusion filter button" style="width:90%;">}}
 
 ## Deleting filters
 You can delete a filter by clicking on the deletion icon. 
 
-[ ADD SCREENSHOT ]
+{{< img src="ci/exclusion-filter-delete.png" alt="Ingestion control delete exclusion filter button" style="width:90%;">}}
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
