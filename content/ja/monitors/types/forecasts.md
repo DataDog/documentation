@@ -46,7 +46,7 @@ Datadog で[予測値モニター][1]を作成するには、メインナビゲ�
 
 Datadog は、選択したメトリクスを自動的に分析して、複数のパラメーターを設定しますが、**Advanced Options** に、編集可能なオプションがあります。
 
-{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="高度なオプション" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Advanced options" style="width:80%;">}}
 
 | オプション                     | 説明                                                                                                             |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -72,11 +72,11 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 | Simple   | 履歴全体でロバスト線形回帰を行います。                                |
 | Reactive | ノイズ、スパイク、ディップに過剰に適合するリスクがありますが、最近の挙動をよりよく外挿します。  |
 
-{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="線形デフォルト" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" style="width:80%;">}}
 
-{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="線形シンプル" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/linear_simple.png" alt="linear simple" style="width:80%;">}}
 
-{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="線形リアクティブ" style="width:80%;" >}}
+{{< img src="monitors/monitor_types/forecasts/linear_reactive.png" alt="linear reactive" style="width:80%;" >}}
 
 {{% /tab %}}
 {{% tab "Seasonal" %}}
@@ -91,7 +91,7 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 
 **注**: このアルゴリズムには少なくとも 2 シーズンの履歴が必要で、予測には最大 6 シーズンが使用されます。
 
-{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="季節" style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -133,9 +133,9 @@ Datadog は、選択したメトリクスを自動的に分析して、複数の
 次の関数は、`forecast()` 関数の呼び出し内にネストすることはできません。<br>
 `anomalies`、`cumsum`、`integral`、`outliers`、`piecewise_constant`、`robust_trend`、`trend_line`
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
-{{< partial name="whats-next/whats-next.html"  >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/forecast
 [2]: /ja/monitors/types/metric/#define-the-metric
