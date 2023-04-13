@@ -1,6 +1,7 @@
 .mobile-nav-search-wrapper .searchbox-container {
     filter: none;
     margin-top: 13px;
+    z-index: 10001; // move search box container in front of open .dropdown-menu elements
 
     #searchbox {
         z-index: 2;
