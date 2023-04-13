@@ -26,7 +26,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
 | AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | AP1      |
 
-## SDKs domains
+## SDK domains
 
 All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
 
