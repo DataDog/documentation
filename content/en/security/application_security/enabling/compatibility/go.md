@@ -28,8 +28,6 @@ Integrate the Go tracer with the following list of web frameworks using one of t
 - [Chi][6]
 - [HttpRouter][7]
 
-<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
-
 ### Enabling CGO
 
 Compiling your code with ASM enabled involves [CGO][8] and therefore requires:
@@ -64,7 +62,7 @@ The minimum tracer version to get all supported ASM capabilities for Go is 1.48.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][10], which is included in the listed minimum tracer version.  
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Go framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
