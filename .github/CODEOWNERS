@@ -1,5 +1,6 @@
 *                         @DataDog/documentation
 
+/assets/                  @DataDog/corpweb @DataDog/documentation
 /data/                    @DataDog/corpweb @DataDog/documentation
 /local/                   @DataDog/corpweb @DataDog/documentation
 /layouts/                 @DataDog/corpweb @DataDog/documentation

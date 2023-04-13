@@ -6,6 +6,11 @@ disable_toc: true
 aliases:
     - /graphing/guide/
     - /faq/treemap-graph-visualization-can-i-use-this-elsewhere/
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Graphing Guides
 ---
 
 {{< whatsnext desc="General Guides:" >}}

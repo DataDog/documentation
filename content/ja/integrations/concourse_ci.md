@@ -19,7 +19,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- コラボレーション
+- 自動化
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md
 display_on_public_website: true
@@ -37,15 +37,15 @@ public_title: Concourse-CI
 short_description: Concourse CI から送信されるメトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Automation
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Collaboration
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Concourse CI から送信されるメトリクスを収集
   media: []

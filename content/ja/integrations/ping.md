@@ -19,7 +19,8 @@ author:
   sales_email: jim.stanton@datadoghq.com
   support_email: jim.stanton@datadoghq.com
 categories:
-- network
+- developer tools
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
 display_on_public_website: true
@@ -37,15 +38,16 @@ public_title: Ping
 short_description: リモートホストへの接続を監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Developer Tools
   - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: リモートホストへの接続を監視
   media: []
@@ -71,7 +73,7 @@ ICMP パケットの作成には raw ソケットが必要であるため、こ�
 
 Ping チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

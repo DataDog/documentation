@@ -7,12 +7,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- ネットワーク
-- 例外
+- 言語
 - メトリクス
-- アラート設定
-- 問題追跡
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md
 display_on_public_website: true
@@ -33,13 +30,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Any
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
+  - Category::Languages
   - Category::Metrics
-  - Category::Alerting
-  - Category::Issue Tracking
+  - Category::Tracing
+  - Supported OS::Any
   configuration: README.md#Setup
   description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
   media: []

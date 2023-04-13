@@ -21,9 +21,9 @@ author:
   sales_email: oran.moshai@aquasec.com
   support_email: oran.moshai@aquasec.com
 categories:
-- security
-- モニター
+- コンテナ
 - ログの収集
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md
 display_on_public_website: true
@@ -41,17 +41,17 @@ public_title: Aqua
 short_description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
-  - Category::Monitoring
+  - Category::Containers
   - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: コンテナおよびクラウドネイティブアプリケーションの開発から運用までをフルカバーするセキュリティソリューション
   media: []

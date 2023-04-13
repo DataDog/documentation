@@ -15,7 +15,7 @@ further_reading:
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
   text: "Application Vulnerability Management"
-- link: "/security/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/enabling/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
