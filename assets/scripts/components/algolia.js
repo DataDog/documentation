@@ -5,7 +5,6 @@ import { configure, searchBox } from 'instantsearch.js/es/widgets';
 import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
-import { closeMobileNav } from '../components/mobile-nav';
 import { debounce } from '../utils/debounce';
 
 function getPageLanguage() {
@@ -185,7 +184,6 @@ function loadInstantSearch(asyncLoad) {
 
                 if (window.innerWidth <= 991) {
                     searchBoxWrapperMobile?.appendChild(searchBoxContainerContainer);
-                    closeMobileNav();
                 } else {
                     searchBoxWrapper?.appendChild(searchBoxContainerContainer);
                 }
