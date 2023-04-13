@@ -18,6 +18,8 @@ further_reading:
 - link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
+algolia:
+  tags: ['cluster agent']
 ---
 
 If you deploy the Datadog Agent using Helm chart v2.7.0+ or Datadog Operator v0.7.0+, the Cluster Agent is enabled by default.
