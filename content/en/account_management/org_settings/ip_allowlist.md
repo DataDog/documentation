@@ -9,6 +9,8 @@ The IP allowlist feature is available for enterprise-level customers only. Reque
 
 ## Overview
 
+{{< img src="account_management/org_settings/ip_allowlist_list.png" alt="Screenshot showing the IP allowlist UI, containing four IP ranges"  >}}
+
 The IP allowlist controls which networks can be used to access your data in Datadog. By limiting allowed networks, you can protect your resources from data exfiltration and insider threats.
 
 When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI. 
@@ -64,6 +66,8 @@ A banner at the top of the page shows the enabled or disabled status of the IP a
 To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 ### Add IP addresses or CIDR ranges
+
+{{< img src="account_management/org_settings/add_ip.png" alt="Screenshot showing a dialog box titled Add IP to allowlist"  >}}
 
 1. Click the **Add IP** button at the top right of the page. 
 1. Enter a valid IP address or CIDR range.
