@@ -140,7 +140,6 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
-  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
