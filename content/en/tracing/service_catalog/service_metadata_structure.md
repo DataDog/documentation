@@ -79,7 +79,7 @@ External Resources (Optional)
 
 ## Service Definition Schema (v2)
 
-The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][2].
+See the [full schema on GitHub][2].
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
