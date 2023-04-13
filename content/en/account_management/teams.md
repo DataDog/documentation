@@ -3,8 +3,6 @@ title: Teams
 kind: documentation
 ---
 
-<div class="alert alert-warning">The Teams feature is in beta and is not yet generally available.</div>
-
 ## Overview
 Datadog Teams allow groups of users to organize their team assets within Datadog and automatically filter their Datadog-wide experience to prioritize these assets.
 
@@ -78,12 +76,12 @@ The table below describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][7]         | Team handle                                                                      |
-| [Service Catalog][8]    | Team handle                                                                      |
-| [Incidents][9]          | Team handle                                                                      |
-| [Monitors][10]           | Team handle                                                                      |
-| [APM Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
-| [Logs Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
+| [Dashboards][6]         | Team handle                                                                      |
+| [Service Catalog][7]    | Team handle                                                                      |
+| [Incidents][8]          | Team handle                                                                      |
+| [Monitors][9]           | Team handle                                                                      |
+| [APM Error Tracking][10] | Service owned by teams (determined by ownership inside the [Service Catalog][7]) |
+| [Logs Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][7]) |
 
 
 ## Permissions
@@ -117,10 +115,9 @@ To enforce a strict membership model, configure your default team settings so **
 [3]: /monitors/incident_management/incident_details#overview-section
 [4]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [5]: /tracing/service_catalog/setup#add-service-definition-metadata
-[6]: /monitors/service_level_objectives/#slo-tags
-[7]: https://app.datadoghq.com/dashboard/lists
-[8]: https://app.datadoghq.com/services
-[9]: https://app.datadoghq.com/incidents
-[10]: https://app.datadoghq.com/monitors/manage
-[11]: https://app.datadoghq.com/apm/error-tracking
-[12]: https://app.datadoghq.com/logs/error-tracking
+[6]: https://app.datadoghq.com/dashboard/lists
+[7]: https://app.datadoghq.com/services
+[8]: https://app.datadoghq.com/incidents
+[9]: https://app.datadoghq.com/monitors/manage
+[10]: https://app.datadoghq.com/apm/error-tracking
+[11]: https://app.datadoghq.com/logs/error-tracking
