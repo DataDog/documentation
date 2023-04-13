@@ -95,57 +95,40 @@ Each finding object contains the following:
 
 ```json
 {
-    "data": {
-        "id": "70646476-3143-433a-8953-426a4f464a",
-        "type": "posture_management_list_findings_resp",
-        "attributes": {
-            "findings": [
-                {
-                    "id": "AQAAAYZzBl-4bu4ufQAAA12WVp6QmwtNEFBQ04ydFhER3QxNC13QUE",
-                    "status": "critical",
-                    "evaluation": "fail",
-                    "resource_discovery_date": 1670453400000,
-                    "resource_type": "aws_s3_bucket",
-                    "resource": "public.xxxx.company.com",
-                    "rule": {
-                        "name": "S3 bucket contents are not publicly exposed via bucket policy",
-                        "id": "zno-neo-6jq"
-                    },
-                    "evaluation_changed_at": 1670453400000,
-                    "muted": false,
-                    "tags": [
-                        "requirement:AWS",
-                        "scored:true",
-                        "aws_account:112787438617",
-                        "control:164.312-a-1",
-                        "requirement:Least-Privileged-Access",
-                        "cloud_provider:aws",
-                        "terraform.managed:true",
-                        "control:1.3",
-                        "requirement:Data-Protection",
-                        "team:cake",
-                        "control:7.2.2",
-                        "requirement:Security-of-Processing",
-                        "control:A.18.1.3",
-                        "framework:soc-2",
-                        "scope:s3",
-                        "control:A.9.2.3",
-                        "control:32.1a",
-                        "requirement:Logical-and-Physical-Access-Control",
-                        "control:CC6.3",
-                        "control:CC6.1"
-                    ]
-                }...
-            ]
-        }
-    },
-    "meta": {
-        "page": {
-            "total_filtered_count": 2204,
-            "cursor": "eyJhZnRlciI6IkFRQUFBWVp6Vnxxxxrd0FBQU221ldWcDZWbk15VVVGQlExSmxTa0pNV1RoRGNHRjNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0="
+  "data": [
+    {
+      "id": "AQAAAYZzBl-4bu4ufQAAA12WVp6QmwtNEFBQ04ydFhER3QxNC13QUE",
+      "type": "finding",
+      "attributes": {
+        "status": "critical",
+        "evaluation": "fail",
+        "resource_discovery_date": 1670453400000,
+        "resource_type": "aws_s3_bucket",
+        "resource": "public.xxxx.company.com",
+        "rule": {
+          "name": "S3 bucket contents are not publicly exposed via bucket policy",
+          "id": "zno-neo-6jq"
         },
-        "snapshot_timestamp": 1676974639331
+        "evaluation_changed_at": 1670453400000,
+        "muted": false,
+        "tags": [
+          "requirement:AWS",
+          "scored:true",
+          "aws_account:112787438617",
+          "control:164.312-a-1",
+          "control:CC6.3",
+          "control:CC6.1"
+        ]
+      }
     }
+  ],
+  "meta": {
+    "page": {
+      "total_filtered_count": 2204,
+      "cursor": "eyJhZnRlciI6IkFRQUFBWVp6Vnxxxxrd0FBQU221ldWcDZWbk15VVVGQlExSmxTa0pNV1RoRGNHRjNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0="
+    },
+    "snapshot_timestamp": 1676974639331
+  }
 }
 ```
 ## Get a finding's details
@@ -178,69 +161,67 @@ The response includes a finding object that contains the following:
 
 ```json
 {
-    "data": {
-        "id": "70646476-3143-485a-a152-6a453228326b",
-        "type": "posture_management_fetch_finding_resp",
-        "attributes": {
-            "finding": {
-                "message": "%%%\n## Description\n\nUpdate your bucket policy as the contents of your Amazon S3 bucket are publicly accessible. \n\n## Rationale\n\nUnintentionally exposed Amazon S3 buckets have led to numerous data breaches and leaks. When misconfigured, an S3 bucket policy can permit anyone to download the contents of an Amazon S3 bucket.\n\n**Note**: If the bucket is configured to host a static website, this rule does not trigger because bucket contents are expected to be public to serve the site.\n\n## Remediation\n\nEnsure that there is a valid business justification as to why the bucket and all of its contents have been made public. If there is no valid reason, follow these steps to prevent public access.\n\n### From the console\n\nFollow the [Controlling access to a bucket with user policies][1] docs to edit your existing policy and set the policy permissions to private.\n\n### From the command line\n\n1. Run the [`delete-bucket-policy`][2] command to fully remove any public access to the bucket.\n   ```\n   aws s3api delete-bucket-policy \\\n     --bucket insert-bucket-name-here\n   ```\n2. If you need a bucket policy, create a new non-public bucket policy using the [AWS Policy Generator][3].\n3. Apply the bucket policy from Step 2 with the [`put-bucket-policy`][4] command.\n   ```\n   aws s3api put-bucket-policy\n     --bucket insert-bucket-name-here\n     --policy file://insert-bucket-policy-file-name-here.json\n   ```\n\n[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html\n[2]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/delete-bucket-policy.html\n[3]: http://awspolicygen.s3.amazonaws.com/policygen.html\n[4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-policy.html\n%%%",
-                "id": "AQAAAYZzBl-224ufQAAAABBWVp6QmwtNEFBQ04ydFhER3QxNC13QUE",
-                "status": "critical",
-                "evaluation": "fail",
-                "resource_discovery_date": 1670453400000,
-                "resource_type": "aws_s3_bucket",
-                "resource": "public.xxxx.company.com",
-                "rule": {
-                    "name": "S3 bucket contents are not publicly exposed via bucket policy",
-                    "id": "zno-neo-6jq"
-                },
-                "evaluation_changed_at": 1670453400000,
-                "muted": false,
-                "tags": [
-                        "requirement:AWS",
-                        "scored:true",
-                        "aws_account:112787438617",
-                        "control:164.312-a-1",
-                        "requirement:Least-Privileged-Access",
-                        "cloud_provider:aws",
-                        "terraform.managed:true",
-                        "control:1.3",
-                        "requirement:Data-Protection",
-                        "team:cake",
-                        "control:7.2.2",
-                        "requirement:Security-of-Processing",
-                        "control:A.18.1.3",
-                        "framework:soc-2",
-                        "scope:s3",
-                        "control:A.9.2.3",
-                        "control:32.1a",
-                        "requirement:Logical-and-Physical-Access-Control",
-                        "control:CC6.3",
-                        "control:CC6.1"
-                    ],
-                "resource_configuration": {
-                    "account_id": "111111111111",
-                    "bucket_arn": "arn:aws:s3:::public.xxx.company.com",
-                    "bucket_policy_statement": [...
-                    ],
-                    "creation_date": 1513177519000,
-                    "grants": [
-                        {
-                            "grantee": {...
-                            },
-                            "permission": "FULL_CONTROL"
-                        },
-                        {
-                            "grantee": {
-                                "type": "Group",
-                                "uri": "http://acs.amazonaws.com/groups/global/AllUsers"
-                            },
-                            "permission": "READ"
-                        }
-                    ],...
-                }
-            }
-        }
+  "data": {
+    "id": "AQAAAYZzBl-224ufQAAAABBWVp6QmwtNEFBQ04ydFhER3QxNC13QUE",
+    "type": "detailed_finding",
+    "attributes": {
+      "message": "%%%\n## Description\n\nUpdate your bucket policy as the contents of your Amazon S3 bucket are publicly accessible. \n\n## Rationale\n\nUnintentionally exposed Amazon S3 buckets have led to numerous data breaches and leaks. When misconfigured, an S3 bucket policy can permit anyone to download the contents of an Amazon S3 bucket.\n\n**Note**: If the bucket is configured to host a static website, this rule does not trigger because bucket contents are expected to be public to serve the site.\n\n## Remediation\n\nEnsure that there is a valid business justification as to why the bucket and all of its contents have been made public. If there is no valid reason, follow these steps to prevent public access.\n\n### From the console\n\nFollow the [Controlling access to a bucket with user policies][1] docs to edit your existing policy and set the policy permissions to private.\n\n### From the command line\n\n1. Run the [`delete-bucket-policy`][2] command to fully remove any public access to the bucket.\n   ```\n   aws s3api delete-bucket-policy \\\n     --bucket insert-bucket-name-here\n   ```\n2. If you need a bucket policy, create a new non-public bucket policy using the [AWS Policy Generator][3].\n3. Apply the bucket policy from Step 2 with the [`put-bucket-policy`][4] command.\n   ```\n   aws s3api put-bucket-policy\n     --bucket insert-bucket-name-here\n     --policy file://insert-bucket-policy-file-name-here.json\n   ```\n\n[1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html\n[2]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/delete-bucket-policy.html\n[3]: http://awspolicygen.s3.amazonaws.com/policygen.html\n[4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3api/put-bucket-policy.html\n%%%",
+      "status": "critical",
+      "evaluation": "fail",
+      "resource_discovery_date": 1670453400000,
+      "resource_type": "aws_s3_bucket",
+      "resource": "public.xxxx.company.com",
+      "rule": {
+        "name": "S3 bucket contents are not publicly exposed via bucket policy",
+        "id": "zno-neo-6jq"
+      },
+      "evaluation_changed_at": 1670453400000,
+      "muted": false,
+      "tags": [
+        "requirement:AWS",
+        "scored:true",
+        "aws_account:112787438617",
+        "control:164.312-a-1",
+        "requirement:Least-Privileged-Access",
+        "cloud_provider:aws",
+        "terraform.managed:true",
+        "control:1.3",
+        "requirement:Data-Protection",
+        "team:cake",
+        "control:7.2.2",
+        "requirement:Security-of-Processing",
+        "control:A.18.1.3",
+        "framework:soc-2",
+        "scope:s3",
+        "control:A.9.2.3",
+        "control:32.1a",
+        "requirement:Logical-and-Physical-Access-Control",
+        "control:CC6.3",
+        "control:CC6.1"
+      ],
+      "resource_configuration": {
+        "account_id": "111111111111",
+        "bucket_arn": "arn:aws:s3:::public.xxx.company.com",
+        "bucket_policy_statement": [],
+        "creation_date": 1513177519000,
+        "grants": [
+          {
+            "grantee": {
+              "type": "Group",
+              "uri": "http://acs.amazonaws.com/groups/global/AllUsers"
+            },
+            "permission": "FULL_CONTROL"
+          },
+          {
+            "grantee": {
+              "type": "Group",
+              "uri": "http://acs.amazonaws.com/groups/global/AllUsers"
+            },
+            "permission": "READ"
+          }
+        ]
+      }
     }
+  }
 }
 ```
