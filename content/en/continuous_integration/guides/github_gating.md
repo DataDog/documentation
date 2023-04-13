@@ -49,6 +49,8 @@ Any monitors you plan to use for quality gating must be tagged properly with the
 - `git_env` 
 - `git_repo` 
 
+The `git_repo` tag must contain the repository owner name in the format `<OWNER>/<REPO>`, e.g. `Datadog/my-repo`.
+
 When you run a workflow, GitHub Actions sends a request to your Datadog monitor. Based on one of the evaluation results of the monitor (listed below), Datadog sends a comment back to GitHub, which can be seen in GitHub under the Comment section for the associated event and environment within your workflow run.
 - If all monitors associated with your deployment (via environment and repo tags) are in the `OK` state, Datadog will approve the deployment
 - If any monitor associated with your deployment is not in `OK` state (in `ALERT`, `WARN`, or `NODATA`), Datadog will reject the deployment
