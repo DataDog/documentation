@@ -266,6 +266,14 @@ The following deployment can be used to start the Runtime Security Agent and `sy
                 {
                    "name": "DD_RUNTIME_SECURITY_CONFIG_ENABLED",
                    "value": "true"
+                },
+                {
+                    "name": "DD_REMOTE_CONFIGURATION_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED",
+                    "value": "true"
                 }
             ],
             "memory": 256,
@@ -322,7 +330,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
             ]
         }
     ]
-}
+} 
 ```
 
 {{% /tab %}}
