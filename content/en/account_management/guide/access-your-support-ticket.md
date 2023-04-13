@@ -11,7 +11,7 @@ aliases:
 To create a new support ticket, click on the appropriate Site link and click **Submit a request** to fill out a ticket form. 
 
 {{< whatsnext desc="Support page by Datadog site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU {{< /nextlink >}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -35,7 +35,7 @@ If you have opened at least one Datadog support ticket, follow this process to a
 6. If you would like to view your entire organization's tickets, submit a request to Datadog support.
 
 {{< whatsnext desc="Support Page by Datadog Site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU {{< /nextlink >}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
