@@ -97,6 +97,47 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 If you haven't already, set up the [Google Cloud Platform integration][1] and make sure that you have successfully completed the steps for enabling [metric collection][2].
 
+---
+
+#### Enable metric collection
+
+The Datadog <> Google Cloud integration uses Service Accounts to create an API connection between Google Cloud and Datadog. Below are instructions for creating a service account and providing Datadog with service account credentials to begin making API calls on your behalf.
+
+**Note**: [Google Cloud billing][30], the [Cloud Monitoring API][31], the [Compute Engine API][32], and the [Cloud Asset API][33] must all be enabled for the project(s) you wish to monitor.
+
+1. Navigate to the [Google Cloud credentials page][34] for the Google Cloud project where you would like to setup the Datadog integration.
+2. Click _Create credentials_ (near the top) and select _Service account_.
+
+    {{< img src="integrations/google_cloud_platform/SelectServiceAccount2.png" alt="settings" popup="true" style="width:80%;">}}
+
+3. Give the service account a unique name and click _Create_.
+4. Add the following roles: Compute Viewer, Monitoring Viewer, and Cloud Asset Viewer. Click _Done_.
+
+    **Note**: You must be a Service Account Key Admin to select Compute Engine and Cloud Asset roles. All selected roles allow Datadog to collect metrics, tags, events, and user labels on your behalf.
+
+5. At the bottom of the page, find your Service Accounts and select the one you just created. Click _Add Key_ -> _Create new key_, and choose _JSON_ as the type. Click _Create_ and _Save_. Take note of where this file is saved, as it is needed to complete the installation.
+6. Navigate to the [Datadog Google Cloud Integration tile][35].
+7. On the **Configuration** tab, select _Upload Key File_ to integrate this project with Datadog.
+8. Optionally, you can use tags to filter out hosts from being included in this integration. Detailed instructions on this can be found [below](#configuration).
+
+    {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="settings" popup="true" style="width:80%;">}}
+
+9. Press _Install/Update_.
+10. If you want to monitor multiple projects, use one of the following methods:
+
+    - Repeat the process above to use multiple service accounts.
+    - Use the same service account by updating the `project_id` in the JSON file downloaded in step 5. Then upload the file to Datadog as described in steps 6-9.
+
+#### Configuration
+
+Optionally, you can limit the GCE instances that are pulled into Datadog by entering tags in the **Limit Metric Collection** textbox under a given project’s dropdown menu. Only hosts that match one of the defined tags are imported into Datadog. You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. This example includes all `c1*` sized instances, but excludes staging hosts:
+
+```text
+datadog:monitored,env:production,!env:staging,instance-type:c1.*
+```
+
+See Google's documentation on [Creating and managing labels][36] for more details.
+
 ### Enable CSPM for Google Cloud
 
 Use one of the following methods to enable CSPM for your Google Cloud projects:
