@@ -30,7 +30,7 @@ Datadog で[予測値モニター][1]を作成するには、メインナビゲ�
 現在 Datadog にレポートが送信されるメトリクスはすべて、モニターに使用できます。詳細については、[メトリクスモニター][2]ページをご確認ください。
 
 メトリクスを定義すると、予測値モニターはエディターに 2 つのプレビューグラフを表示します。
-{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="エディターグラフ"  style="width:95%;">}}
+{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="エディターグラフ" style="width:95%;">}}
 
 * **Historical View** では、さまざまな時間スケールで過去のメトリクスデータを確認できます。
 * **Evaluation Preview** には、過去と予測のメトリクスデータの組み合わせが表示されます。
@@ -46,7 +46,7 @@ Datadog で[予測値モニター][1]を作成するには、メインナビゲ�
 
 Datadog は、選択したメトリクスを自動的に分析して、複数のパラメーターを設定しますが、**Advanced Options** に、編集可能なオプションがあります。
 
-{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="高度なオプション"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="高度なオプション" style="width:80%;">}}
 
 | オプション                     | 説明                                                                                                             |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|
