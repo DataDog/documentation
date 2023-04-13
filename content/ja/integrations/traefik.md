@@ -19,9 +19,8 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
+- クラウド
 - ログの収集
-- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
 display_on_public_website: true
@@ -39,17 +38,16 @@ public_title: Traefik
 short_description: traefik のメトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
+  - Category::Cloud
   - Category::Log Collection
-  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: traefik のメトリクスを収集
   media: []

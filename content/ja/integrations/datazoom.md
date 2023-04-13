@@ -20,7 +20,8 @@ author:
   name: Datadog
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
-categories: []
+categories:
+- ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/datazoom/README.md
 display_on_public_website: true
@@ -38,14 +39,15 @@ public_title: Datazoom
 short_description: Datazoom Collector のデータをログエクスプローラーで表示します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datazoom Collector のデータをログエクスプローラーで表示します。
   media: []
@@ -66,7 +68,7 @@ Datazoom は INFO レベルに設定されたデータを送信します。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datazoom インテグレーションは、Datadog にログを出力します。Datadog 側でのインストールは必要ありません。
 

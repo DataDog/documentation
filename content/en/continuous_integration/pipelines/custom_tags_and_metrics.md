@@ -79,7 +79,7 @@ datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
 
-{{< site-region region="us5,us3,eu" >}}
+{{< site-region region="us5,us3,eu,ap1" >}}
 You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
 
 [1]: /getting_started/site/
@@ -111,7 +111,7 @@ datadog-ci metric [--level <pipeline|job>] [--metrics <metrics>]
 {{< /code-block >}}
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
-{{< site-region region="us5,us3,eu" >}}
+{{< site-region region="us5,us3,eu,ap1" >}}
 You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
 
 [1]: /getting_started/site/

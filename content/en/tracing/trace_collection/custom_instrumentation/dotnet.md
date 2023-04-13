@@ -199,7 +199,7 @@ catch(Exception e)
 }
 ```
 
-This sets the following tags on the span: 
+This sets the following tags on the span:
 - `"error.msg":exception.Message`
 - `"error.stack":exception.ToString()`
 - `"error.type":exception.GetType().ToString()`
@@ -246,6 +246,28 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
     if (headers.TryGetValue(name, out object value) && value is byte[] bytes)
     {
         return new[] { Encoding.UTF8.GetString(bytes) };
+    }
+
+    return Enumerable.Empty<string>();
+}
+
+// SQS
+public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAttributeValue> headers, string name)
+{
+    // For SQS, there are a maximum of 10 message attribute headers,
+    // so the Datadog headers are combined into one header with the following properties:
+    // - Key: "_datadog"
+    // - Value: MessageAttributeValue object
+    //   - DataType: "String"
+    //   - StringValue: <JSON map with key-value headers>
+    if (headers.TryGetValue("_datadog", out var messageAttributeValue)
+        && messageAttributeValue.StringValue is string jsonString)
+    {
+        var datadogDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
+        if (datadogDictionary.TryGetValue(name, out string value))
+        {
+            return new[] { value };
+        }
     }
 
     return Enumerable.Empty<string>();

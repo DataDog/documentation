@@ -22,10 +22,9 @@ author:
   support_email: support@torq.io
 categories:
 - 自動化
-- orchestration
 - notification
-- コラボレーション
-- security
+- orchestration
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/torq/README.md
 display_on_public_website: true
@@ -43,19 +42,18 @@ public_title: Torq
 short_description: セキュリティチームとオペレーションチームのためのノーコード自動化
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Automation
-  - Category::Orchestration
   - Category::Notification
-  - Category::Collaboration
+  - Category::Orchestration
   - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: セキュリティチームとオペレーションチームのためのノーコード自動化
   media: []

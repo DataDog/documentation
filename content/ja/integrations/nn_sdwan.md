@@ -23,12 +23,12 @@ assets:
     Packet Loss Monitor: assets/monitors/packet-loss-monitor.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Netnology
   sales_email: info@netnology.io
   support_email: info@netnology.io
 categories:
-- モニタリング
 - ネットワーク
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md
 display_on_public_website: true
@@ -43,21 +43,21 @@ manifest_version: 2.0.0
 name: nn_sdwan
 oauth: {}
 public_title: Netnology Cisco SD-WAN
-short_description: Netnology の Cisco SDWAN コントローラメトリクスエクスポーター
+short_description: Cisco SDWAN Controller Metric Exporter
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
   - Category::Network
+  - Category::Notification
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
-  description: Netnology の Cisco SDWAN コントローラメトリクスエクスポーター
+  description: Cisco SDWAN Controller Metric Exporter
   media: []
   overview: README.md#Overview
   support: README.md#Support

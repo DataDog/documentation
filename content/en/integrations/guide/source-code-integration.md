@@ -66,6 +66,22 @@ The `git.commit.sha` and `git.repository_url` are tagged in your telemetry.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 {{% /tab %}}
+{{% tab "Serverless" %}}
+
+Datadog can extract source code information directly from your serverless application according to your [Serverless Monitoring for AWS Lambda setup][4].
+
+| APM Serverless Setup                | Method Description                                                                                                                                                                                                          |
+|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Datadog Serverless Framework Plugin | If you are using the [Datadog Serverless Plugin][1] to instrument your serverless application, use a serverless-plugin-datadog `version >= 5.18.0`.                                                                         |
+| datadog-cdk-constructs              | If you are using the [Datadog CDK Construct][2] to instrument your serverless application, use a datadog-cdk-constructs `version >= 0.8.5` for AWS CDK v1, and datadog-cdk-constructs-v2 `version >= 1.4.0` for AWS CDK v2. |
+| datadog-ci                          | If you are using the [Datadog CLI client][3] to instrument your serverless application, use a datadog-ci `version >= 2.4.1`. You must run the CLI tool in the same directory as the code repository.                        |
+
+[1]: /serverless/libraries_integrations/plugin/
+[2]: /serverless/libraries_integrations/cdk/
+[3]: https://www.npmjs.com/package/@datadog/datadog-ci
+[4]: /serverless/aws_lambda/configuration/
+
+{{% /tab %}}
 {{% tab "Other" %}}
 
 To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:

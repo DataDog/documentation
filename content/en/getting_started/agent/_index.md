@@ -215,7 +215,7 @@ For example, let's say you have data that is collected from different teams and 
       - test:agent_walkthrough
    ```
 
-4. Restart the Agent by running the Agent’s [restart command][24]. The Ubuntu restart command:
+4. Restart the Agent by running the Agent's [restart command][24]. The Ubuntu restart command:
 
    ```shell
    sudo service datadog-agent restart

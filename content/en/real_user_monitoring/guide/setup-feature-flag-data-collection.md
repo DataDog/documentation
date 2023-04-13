@@ -6,14 +6,18 @@ description: Learn how to set up RUM to capture feature flag data and analyze th
 aliases:
 - /real_user_monitoring/guide/getting-started-feature-flags/
 further_reading:
+- link: '/real_user_monitoring/feature_flag_tracking'
+  tag: 'Documentation'
+  text: 'Analyze your feature flag data with Feature Flag Tracking'
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Feature Flag analysis for RUM is in private beta. To request access, contact Support at support@datadoghq.com. In the meantime, follow the instructions below to enrich your RUM events with feature flag context.
-{{< /callout >}}
+<div class="alert alert-warning">
+    Feature Flag Tracking is in beta.
+</div>
+
 
 ## Overview
 Feature flag data gives you greater visibility into your user experience and performance monitoring by allowing you to determine which users are being shown a specific feature and if any change you introduce is impacting your user experience or negatively affecting performance.
@@ -49,8 +53,8 @@ To start collecting feature flag data, initialize the RUM SDK and configure the 
   <summary>CDN async</summary>
 
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       ...
       enableExperimentalFeatures: ["feature_flags"],
       ...
@@ -71,10 +75,7 @@ window.DD_RUM &&
     })
 ```
 </details>
-
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
+<br/>
 
 [1]: /real_user_monitoring/browser#setup
 {{% /tab %}}
@@ -82,19 +83,11 @@ Datadog supports integrations with:
 
 Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
-
 [1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
-
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
 {{% /tab %}}
@@ -102,14 +95,15 @@ Datadog supports integrations with:
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
-
 [1]: https://docs.datadoghq.com/real_user_monitoring/flutter/
 {{% /tab %}}
 {{< /tabs >}}
 
+## Integrations
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+
+Datadog supports integrations with:
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
 
@@ -172,6 +166,18 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 
 [1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -283,6 +289,17 @@ Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature f
 
 [1]: https://docs.flagsmith.com/clients/javascript
 {{% /tab %}}
+{{% tab "iOS" %}}
+
+Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Analyze your Feature Flag performance in RUM
@@ -325,7 +342,7 @@ Here are a few examples of reasons why your feature flag is being evaluated on u
 - A common react component that appears on multiple pages which evaluates feature flags whenever they run.
 - A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
 
-When performing your investigations, you can also scope your data for `View Name`’s that are relevant to your feature flag.
+When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

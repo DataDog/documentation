@@ -29,7 +29,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
@@ -52,10 +51,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::処理
-  - Category::ログの収集
   configuration: README.md#Setup
   description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
   media: []

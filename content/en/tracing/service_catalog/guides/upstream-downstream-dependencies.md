@@ -11,9 +11,9 @@ Service Catalog integrates with incident management tools like [Datadog Incident
 
 {{< img src="tracing/service_catalog/svc_cat_reliability.png" alt="Service Catalog service details Reliability tab." >}}
 
-Datadog Incidents are automatically connected to Service Catalog. Apply appropriate `SERVICE` tags to an incident to ensure that a service’s incident data are accurate. PagerDuty incident integration requires that you have set up the [PagerDuty integration][2].
+Datadog Incidents are automatically connected to Service Catalog. Apply appropriate `SERVICE` tags to an incident to ensure that a service's incident data are accurate. PagerDuty incident integration requires that you have set up the [PagerDuty integration][2].
 
-To see incident statuses of your service’s upstream and downstream dependencies, click the service in the Service Catalog, and in the service details page, go to the **Dependencies** tab.
+To see incident statuses of your service's upstream and downstream dependencies, click the service in the Service Catalog, and in the service details page, go to the **Dependencies** tab.
 
 {{< img src="tracing/service_catalog/svc_cat_dependencies.png" alt="Service Catalog service details Dependencies tab." >}}
 

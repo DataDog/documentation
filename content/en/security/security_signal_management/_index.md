@@ -12,7 +12,7 @@ Security signals can be viewed and managed by navigating to **Security** > **Sec
 
 ## Role-based access control for security signal management
 
-Learn more about Datadog’s default roles [in the RBAC docs][1] and granular role-based access control permissions available for Datadog Security [in the Cloud Security RBAC docs][2].
+Learn more about Datadog's default roles [in the RBAC docs][1] and granular role-based access control permissions available for Datadog Security [in the Cloud Security RBAC docs][2].
 
 To modify the signal state, enable the "Security Signals Write" permission for each user. 
 
@@ -50,7 +50,7 @@ To change signal state, follow the instructions below:
 
 4. Once you save the status, a confirmation toast appears that states which action was taken with the opportunity to "Undo" the action. You'll see it in a banner above the signal side panel when you save the action. The banner shows the action taken, by who, and when.
 
-Any security signal warning of a possible disruption to your organization’s services can be considered an incident. It is often necessary to have a set framework for handling these threats. [Incident Management][4] provides a system to effectively identify and mitigate incidents.
+Any security signal warning of a possible disruption to your organization's services can be considered an incident. It is often necessary to have a set framework for handling these threats. [Incident Management][4] provides a system to effectively identify and mitigate incidents.
 
 Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
 

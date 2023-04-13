@@ -18,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - azure
+- クラウド
 - ログの収集
 - セキュリティ
 dependencies:
@@ -37,17 +38,18 @@ public_title: Azure Active Directory
 short_description: Azure Active Directory アクティビティログを分析
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Azure
+  - Category::Cloud
   - Category::Log Collection
   - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Azure Active Directory アクティビティログを分析
   media: []
@@ -65,7 +67,7 @@ Azure Active Directory は、Microsoft Azure によるクラウドホスト型 A
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 このインテグレーションにより、 Azure Event Hubs を使用してログが Datadog に転送されます。アクティビティログをイベントハブに転送するように Azure AD を構成します。
 

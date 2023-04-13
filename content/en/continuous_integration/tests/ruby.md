@@ -64,7 +64,7 @@ To run the Datadog Agent as a container acting as a simple results forwarder, us
 **Default**: (autodetected)<br/>
 **Required value**: `none`
 
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE`
@@ -106,7 +106,7 @@ jobs:
       - script: make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
 {{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
@@ -160,7 +160,7 @@ test:
     - make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 
 Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
@@ -202,7 +202,7 @@ jobs:
       - run: make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 
 Replace `<datadog_site>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
@@ -252,7 +252,7 @@ workflows:
       - test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 
 Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 

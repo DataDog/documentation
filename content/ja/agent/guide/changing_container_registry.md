@@ -73,7 +73,7 @@ spec:
     registry: gcr.io/datadoghq
   // ..
 ```
-2. `spec.override.nodeAgent.image.name`、``spec.override.clusterAgent.image.name` および `spec.override.clusterChecksRunner.image.name` フィールドに対するすべてのオーバーライドを削除します。
+2. `spec.override.nodeAgent.image.name`、`spec.override.clusterAgent.image.name` および `spec.override.clusterChecksRunner.image.name` フィールドに対するすべてのオーバーライドを削除します。
 
 Datadog Operator の詳細については、[Operator を使用して Agent をデプロイする][4]を参照してください。
 
