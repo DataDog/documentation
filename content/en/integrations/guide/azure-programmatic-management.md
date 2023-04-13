@@ -22,6 +22,8 @@ If you prefer to use CLI, see the [Azure CLI for Datadog][2].
 
 ## Datadog Azure integration
 
+<div class="alert alert-warning">To ensure that you see the correct examples, check that the Datadog site selector in the side panel is correctly set to your <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>.</div>
+
 ### Terraform
 
 {{% site-region region="us3" %}}
