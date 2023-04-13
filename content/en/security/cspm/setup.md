@@ -106,11 +106,8 @@ The Datadog <> Google Cloud integration uses Service Accounts to create an API c
 **Note**: [Google Cloud billing][30], the [Cloud Monitoring API][31], the [Compute Engine API][32], and the [Cloud Asset API][33] must all be enabled for the project(s) you wish to monitor.
 
 1. Navigate to the [Google Cloud credentials page][34] for the Google Cloud project where you would like to setup the Datadog integration.
-2. Click _Create credentials_ (near the top) and select _Service account_.
-
-    {{< img src="integrations/google_cloud_platform/SelectServiceAccount2.png" alt="settings" popup="true" style="width:80%;">}}
-
-3. Give the service account a unique name and click _Create_.
+2. Click **Create credentials** and select **Service account**.
+3. Give the service account a unique name and click **Create and Continue**.
 4. Add the following roles: Compute Viewer, Monitoring Viewer, and Cloud Asset Viewer. Click _Done_.
 
     **Note**: You must be a Service Account Key Admin to select Compute Engine and Cloud Asset roles. All selected roles allow Datadog to collect metrics, tags, events, and user labels on your behalf.
