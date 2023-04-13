@@ -679,14 +679,6 @@ To migrate, compare the [installation instructions using the Datadog Lambda Exte
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
 
-## Migrating between x86 to arm64 with the Datadog Lambda Extension
-
-The Datadog Extension is a compiled binary, available in both x86 and arm64 variants. If you are migrating an x86 Lambda function to arm64 (or arm64 to x86) using a deployment tool such as CDK, Serverless Framework, or SAM, ensure that your service integration (such as API Gateway, SNS, or Kinesis) is configured to use a Lambda function's versions or aliases, otherwise the function may be unavailable for about ten seconds during deployment.
-
-This happens because migrating a Lambda function from x86 to arm64 consists of two parallel API calls, `updateFunction` and `updateFunctionConfiguration`. During these calls, there is a brief window where the Lambda `updateFunction` call has completed and the code is updated to use the new architecture while the `updateFunctionConfiguration` call has not yet completed, so the old architecture is still configured for the Extension.
-
-If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Forwarder][38] during the architecture migration process.
-
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
@@ -737,6 +729,15 @@ If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Fo
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Migrating between x86 to arm64 with the Datadog Lambda Extension
+
+The Datadog Extension is a compiled binary, available in both x86 and arm64 variants. If you are migrating an x86 Lambda function to arm64 (or arm64 to x86) using a deployment tool such as CDK, Serverless Framework, or SAM, ensure that your service integration (such as API Gateway, SNS, or Kinesis) is configured to use a Lambda function's versions or aliases, otherwise the function may be unavailable for about ten seconds during deployment.
+
+This happens because migrating a Lambda function from x86 to arm64 consists of two parallel API calls, `updateFunction` and `updateFunctionConfiguration`. During these calls, there is a brief window where the Lambda `updateFunction` call has completed and the code is updated to use the new architecture while the `updateFunctionConfiguration` call has not yet completed, so the old architecture is still configured for the Extension.
+
+If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Forwarder][38] during the architecture migration process.
+
 
 ## Configure the Datadog Lambda extension for local testing
 
