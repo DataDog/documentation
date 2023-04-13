@@ -75,10 +75,7 @@ window.DD_RUM &&
     })
 ```
 </details>
-
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
+<br/>
 
 [1]: /real_user_monitoring/browser#setup
 {{% /tab %}}
@@ -86,19 +83,11 @@ Datadog supports integrations with:
 
 Feature flag tracking is available in the RUM iOS SDK. To start, set up [RUM iOS monitoring][1]. You need the iOS RUM SDK version >= 1.16.0.
 
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
-
 [1]: https://docs.datadoghq.com/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
 {{% tab "Android" %}}
 
 Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM Android monitoring][1]. You need the Android RUM SDK version >= 1.18.0.
-
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=kotlin
 {{% /tab %}}
@@ -106,14 +95,15 @@ Datadog supports integrations with:
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
-
-Datadog supports integrations with:
-
 [1]: https://docs.datadoghq.com/real_user_monitoring/flutter/
 {{% /tab %}}
 {{< /tabs >}}
 
+## Integrations
+
+You can start collecting feature flag data with [custom feature flag management solutions](#custom-feature-flag-management), or by using one of Datadog's integration partners.
+
+Datadog supports integrations with:
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
 
@@ -176,6 +166,18 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 
 [1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -286,6 +288,17 @@ Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature f
 
 
 [1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+
 {{% /tab %}}
 {{< /tabs >}}
 
