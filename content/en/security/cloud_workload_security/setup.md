@@ -75,8 +75,8 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
     ```yaml
     # values.yaml file
     datadog:
-
-    # Add this to enable Cloud Workload Security
+      remoteConfiguration:
+        enabled: true
       securityAgent:
         runtime:
           enabled: true
