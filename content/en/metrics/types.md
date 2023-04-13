@@ -18,6 +18,8 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
+algolia:
+  tags: ['metric types']
 ---
 
 ## Overview

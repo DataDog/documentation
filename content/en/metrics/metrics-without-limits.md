@@ -11,6 +11,8 @@ further_reading:
   - link: "/observability_pipelines/guide/custom-metrics-governance"
     tag: "Documentation"
     text: "Use Observability Pipelines to govern custom metrics"
+algolia:
+  tags: ['metrics without limits']
 ---
 
 ## Overview
