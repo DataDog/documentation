@@ -13,7 +13,7 @@ Cloud Security Posture Management is not currently available in this site.
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-  The CSPM Findings API is currently in public beta. To request access or provide feedback, contact <a href="/help/">Support</a>.
+  The CSPM Findings API is currently in private beta. To request access or provide feedback, contact <a href="/help/">Support</a>.
 {{< /callout >}} 
 
 
@@ -25,7 +25,7 @@ Retrieve a list of CSPM findings or get the full details for a specific finding.
 
 ## Get a list of findings
 
-`GET https://app.datadoghq.com/api/v2/posture_management/findings`
+`GET https://app.datadoghq.com/api/unstable/posture_management/findings`
 
 ### Overview
 
@@ -75,7 +75,7 @@ The operator must come after the equal sign. For example, to filter with the `>=
 ##### Sample request
 
 ```bash
-curl --location -g --request GET 'https://app.datadoghq.com/api/v2/posture_management/findings?filter[evaluation_changed_at]>=1667403346000&filter[evaluation]=fail&filter[status]=critical&filter[tag]=cloud_provider:aws' \
+curl --location -g --request GET 'https://app.datadoghq.com/api/unstable/posture_management/findings?filter[evaluation_changed_at]>=1667403346000&filter[evaluation]=fail&filter[status]=critical&filter[tag]=cloud_provider:aws' \
 --header 'DD-API-KEY: INSERT_KEY' \
 --header 'DD-APPLICATION-KEY: INSERT_KEY'
 ```
@@ -150,7 +150,7 @@ Each finding object contains the following:
 ```
 ## Get a finding's details
 
-`GET https://app.datadoghq.com/api/v2/posture_management/findings/{finding_id}`
+`GET https://app.datadoghq.com/api/unstable/posture_management/findings/{finding_id}`
 
 ### Overview
 
