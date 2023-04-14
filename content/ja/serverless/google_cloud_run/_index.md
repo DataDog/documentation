@@ -233,7 +233,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更し�
    ```shell
    pack build --builder=gcr.io/buildpacks/builder \
    --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack \
+   --buildpack datadog/serverless-buildpack:latest \
    gcr.io/YOUR_PROJECT/YOUR_APP_NAME
    ```
 

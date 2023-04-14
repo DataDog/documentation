@@ -183,7 +183,7 @@ Build your application by running the following command:
    ```shell
    pack build --builder=gcr.io/buildpacks/builder \
    --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack \
+   --buildpack datadog/serverless-buildpack:latest \
    gcr.io/YOUR_PROJECT/YOUR_APP_NAME
    ```
 
