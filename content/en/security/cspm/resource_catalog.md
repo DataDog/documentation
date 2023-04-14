@@ -1,8 +1,6 @@
 ---
 title: Datadog Resource Catalog
 kind: documentation
-is_beta: true
-private: true
 aliases:
   - /security_platform/cspm/resource_catalog
 further_reading:
@@ -11,17 +9,11 @@ further_reading:
   text: "Cloud Resource Schema"
 ---
 
-{{< callout url="https://dashcon.io/security" >}}
-  Resource Catalog is in private beta. Fill out this form if you would like to access it.
-{{< /callout >}}
-
-{{< img src="security/cspm/resource_catalog/resource_catalog.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
-
-## Overview
-
 Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security findings have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
 
-Resource Catalog leverages Datadog cloud integrations and the Datadog Agent you likely already have installed to gather data from cloud resources such as databases, storage services, and hosts.
+Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as databases, storage services, and hosts.
+
+{{< img src="security/cspm/resource_catalog/resource_catalog2.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
 
 ## Adding resources to Resource Catalog
 
@@ -43,11 +35,15 @@ On the [Resource Catalog page][2], explore the cloud resources in your Datadog o
 
 You can sort resources in the Resource Catalog list by cloud platform, resource type, account, team, region, findings, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Sort by **Findings** to identify cloud resources most prone to misconfigurations.
 
-To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left-hand side. For example, you may find it helpful to filter by your team name, or to scope the findings to particular environments and clusters.
+To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left panel. For example, you may find it helpful to filter by your team name, or to scope the findings to particular environments and clusters.
+
+If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, and then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
 
 ### Map view
 
 The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the `Fill by` selector to fill the map elements by Findings or Threats.
+
+If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, and then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
 
 #### Findings
 
@@ -76,3 +72,4 @@ Click the **Share** button and select **Share Findings** to share a link to the 
 [1]: /security/cloud_security_management
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /integrations/#cat-notification
+[4]: /account_management/teams

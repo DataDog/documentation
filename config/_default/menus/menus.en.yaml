@@ -2638,6 +2638,11 @@ main:
     parent: cspm
     identifier: signals
     weight: 108
+  - name: Resource Catalog
+    url: /security/cspm/resource_catalog
+    parent: cspm
+    identifier: resource_catalog
+    weight: 109
   - name: Cloud Workload Security
     url: security/cloud_workload_security/
     parent: csm
