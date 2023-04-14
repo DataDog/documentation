@@ -1,5 +1,6 @@
 import { getHitData } from './getHitData';
 import { truncateContent } from '../../helpers/truncateContent';
+import { bodyClassContains } from '../../helpers/helpers';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
 const renderHits = (renderOptions, isFirstRender) => {
@@ -25,7 +26,7 @@ const renderHits = (renderOptions, isFirstRender) => {
 
                 generatedElementsArray.push(element);
             }
-
+            console.log(generatedElementsArray)
             return generatedElementsArray;
         };
 
@@ -104,8 +105,12 @@ const renderHits = (renderOptions, isFirstRender) => {
             })
             .join('');
 
+        const enhanceApiCategoryHeader = category.toLowerCase() === 'api' && bodyClassContains('api')
+        const categoryLiClassList = 'ais-Hits-item ais-Hits-category'
+        const categoryParagraphClassList = enhanceApiCategoryHeader ? 'fw-bold text-primary' : ''
+
         return hitsArray.length
-            ? [`<li class="ais-Hits-item ais-Hits-category"><p>${category}</p></li>`, joinedListItems].join('')
+            ? [`<li class="${categoryLiClassList}"><p class="${categoryParagraphClassList}">${category}</p></li>`, joinedListItems].join('')
             : null;
     };
 
@@ -125,6 +130,11 @@ const renderHits = (renderOptions, isFirstRender) => {
         generateJoinedHits(guidesHitsArray, 'Guides'),
         generateJoinedHits(apiHitsArray, 'API')
     ];
+
+    if (bodyClassContains('api')) {
+        allJoinedListItemsHTML.pop()
+        allJoinedListItemsHTML.unshift(generateJoinedHits(apiHitsArray, 'API'))
+    }
 
     if (isFirstRender) {
         handleFirstRender(container);
