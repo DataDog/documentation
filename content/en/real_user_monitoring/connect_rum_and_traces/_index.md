@@ -47,7 +47,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 ### Setup RUM
 
-**Note:** Configuring RUM and Traces makes use of RUM paid data in APM, which may impact your billing.
+**Note:** Configuring APM spans to connect to RUM data makes use of APM paid data in RUM, which may impact your APM billing.
 
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
