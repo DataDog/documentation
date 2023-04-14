@@ -3,8 +3,6 @@ title: Teams
 kind: documentation
 ---
 
-<div class="alert alert-warning">The Teams feature is in beta and is not yet generally available.</div>
-
 ## Overview
 Datadog Teams allow groups of users to organize their team assets within Datadog and automatically filter their Datadog-wide experience to prioritize these assets.
 
