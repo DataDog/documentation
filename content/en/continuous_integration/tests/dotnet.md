@@ -291,9 +291,9 @@ For more information about how to add spans and tags for custom instrumentation,
   <strong>Note:</strong> To use the manual testing API, you must add the <code>Datadog.Trace</code> NuGet package in the target .NET project.
 </div>
 
-If you use XUnit, NUnit or MSTest with your .NET projects, CI Visibility will automatically instruments them and sends the results to the Datadog backend. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the CI Visibility manual testing API, which also reports test results to the backend.
+If you use XUnit, NUnit, or MSTest with your .NET projects, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
 
-The API is based around three concepts: *test module*, *test suites*, and *tests*.
+The API is based around three concepts: test module, test suites, and tests.
 
 ### Test module
 
@@ -303,9 +303,9 @@ To start a test module, call `TestModule.Create()` and pass the name of the modu
 
 When all your tests have finished, call `module.Close()` or `module.CloseAsync()`, which forces the library to send all remaining test results to the backend.
 
-### Test Suites
+### Test suites
 
-A test suite comprises a set of tests that share common functionality. They can share a common initialization and teardown, and can also share some variables. In the .NET world can be a Test class or fixture containing multiple test methods. A test suite can optionally have additional information like attributes or error information.
+A test suite comprises a set of tests. They can have a common initialization and teardown methods and share some variables. In .NET, they are usually implemented as a Test class or fixture containing multiple test methods. A test suite can optionally have additional information like attributes or error information.
 
 Create test suites in the test module by calling `module.GetOrCreateSuite()` and passing the name of the test suite.
 
@@ -852,7 +852,7 @@ suite.Close();
 await module.CloseAsync();
 {{< /code-block >}}
 
-Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test info is flushed to Datadog.
+Always call `module.Close()` or `module.CloseAsync()` at the end so that all the test data is flushed to Datadog.
 
 ## Information collected
 
