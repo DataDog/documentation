@@ -319,7 +319,7 @@ A comma-separated list of query parameters to be collected as part of the URL. S
 `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_post_data_param_allowed`<br>
 **Default**: ""<br>
-A comma-separated list of HTTP POST data fields to be collected as part the request. Set to empty by default to redact all posted values, or `*` to collect and redact them if needed. When specific fields are explicitly whitelisted, only those fields' values aren't be redacted. Added in version `0.86.0`.<br>
+A comma-separated list of HTTP POST data fields to be collected as part the request. Set to empty by default to redact all posted values, or `*` to collect and redact them if needed. When specific fields are explicitly whitelisted, only those fields' values aren't redacted. Added in version `0.86.0`.<br>
 **Example**: 
   - The posted data is `foo[baz]=bar&foo[baz][bar]=quz&foo[bar][password]=baz&foo[bar][baz]=quz`
   - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`<br>
