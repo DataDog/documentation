@@ -72,7 +72,9 @@ function buildSection(specStr, deref, allData) {
         console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
       }
       entryData["html"] = table;
-      allData[name].push(entryData)
+      if(!["Unit Test", "Unit Test Stream"].includes(entryData["metadata"]["docs::label"])) {
+        allData[name].push(entryData);
+      }
   });
 }
 

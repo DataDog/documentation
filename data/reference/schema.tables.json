@@ -481,30 +481,6 @@
       "html": "<div class=\"hide-table\"><div class=\"row   \">\n              <div class=\"col-12 first-column\">\n                <div class=\"row first-row  \">\n                  <div class=\"col-3 column\">\n      <p class=\"key\">max_length</p>\n    </div>\n                  <div class=\"col-2 column\"><p>optional</p></div>\n                  <div class=\"col-2 column\" style=\"\"><p>integer</p></div>\n                  <div class=\"col-5 column\"><p>The maximum buffer size of incoming messages, in bytes.</p>\n<p>Messages larger than this are truncated.</p></div>\n                </div>\n                \n              </div>\n          </div><div class=\"row  hasChildData \">\n              <div class=\"col-12 first-column\">\n                <div class=\"row first-row js-collapse-trigger collapse-trigger \">\n                  <div class=\"col-3 column\">\n      <p class=\"key\"><span class=\"toggle-arrow\"><svg width=\"6\" height=\"9\" viewBox=\"0 0 6 9\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M4.7294 4.45711L0.733399 7.82311L1.1294 8.29111L5.6654 4.45711L1.1294 0.641113L0.751398 1.12711L4.7294 4.45711Z\" fill=\"black\"/></svg></span> host_key</p>\n    </div>\n                  <div class=\"col-2 column\"><p>optional</p></div>\n                  <div class=\"col-2 column\" style=\"\"><p>&nbsp;&lt;oneOf&gt;</p></div>\n                  <div class=\"col-5 column\"><p>Overrides the name of the log field used to add the peer host to each event.</p>\n<p>If using TCP or UDP, the value is the peer host&#39;s address, including the port. For example, <code>1.2.3.4:9000</code>. If using\nUDS, the value is the socket path itself.</p>\n<p>By default, the <a href=\"https://vector.dev/docs/reference/configuration/global-options/#log_schema.host_key\">global <code>log_schema.host_key</code> option</a> is used.</p></div>\n                </div>\n                <div class=\"row isNested d-none  \">\n              <div class=\"col-12 first-column\">\n                <div class=\"row first-row  \">\n                  <div class=\"col-3 column\">\n      <p class=\"key\">Option 1</p>\n    </div>\n                  <div class=\"col-2 column\"><p>optional</p></div>\n                  <div class=\"col-2 column\" style=\"\"><p>string</p></div>\n                  <div class=\"col-5 column\"><p>An optional path that deserializes an empty string to <code>None</code>.</p></div>\n                </div>\n                \n              </div>\n          </div>\n              </div>\n          </div><div class=\"row   \">\n              <div class=\"col-12 first-column\">\n                <div class=\"row first-row  \">\n                  <div class=\"col-3 column\">\n      <p class=\"key\">log_namespace</p>\n    </div>\n                  <div class=\"col-2 column\"><p>optional</p></div>\n                  <div class=\"col-2 column\" style=\"\"><p>boolean,&ZeroWidthSpace;null</p></div>\n                  <div class=\"col-5 column\"><p>The namespace to use for logs. This overrides the global setting.</p></div>\n                </div>\n                \n              </div>\n          </div><div class=\"row   \">\n              <div class=\"col-12 first-column\">\n                <div class=\"row first-row  \">\n                  <div class=\"col-3 column\">\n      <p class=\"key\">description</p>\n    </div>\n                  <div class=\"col-2 column\"><p>optional</p></div>\n                  <div class=\"col-2 column\" style=\"\"><p></p></div>\n                  <div class=\"col-5 column\"><p>Listener mode for the <code>syslog</code> source.</p></div>\n                </div>\n                \n              </div>\n          </div><div class=\"row   \">\n              <div class=\"col-12 first-column\">\n                <div class=\"row first-row  \">\n                  <div class=\"col-3 column\">\n      <p class=\"key\">oneOf</p>\n    </div>\n                  <div class=\"col-2 column\"><p>optional</p></div>\n                  <div class=\"col-2 column\" style=\"\"><p></p></div>\n                  <div class=\"col-5 column\"></div>\n                </div>\n                \n              </div>\n          </div><div class=\"row   \">\n              <div class=\"col-12 first-column\">\n                <div class=\"row first-row  \">\n                  <div class=\"col-3 column\">\n      <p class=\"key\">_metadata</p>\n    </div>\n                  <div class=\"col-2 column\"><p>optional</p></div>\n                  <div class=\"col-2 column\" style=\"\"><p></p></div>\n                  <div class=\"col-5 column\"></div>\n                </div>\n                \n              </div>\n          </div></div>"
     },
     {
-      "description1": "Unit test",
-      "description2": "Configuration for the `unit_test` source.",
-      "title": "",
-      "metadata": {
-        "docs::label": "Unit Test",
-        "logical_name": "UnitTestSource"
-      },
-      "simple": "type: unit_test\n",
-      "advanced": "type: unit_test\n",
-      "html": "<div class=\"hide-table\"><div class=\"row\">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row\">\n          <div class=\"col-12 column\"><p>No request body</p></div>\n        </div>\n      </div>\n    </div></div>"
-    },
-    {
-      "description1": "Unit test stream",
-      "description2": "Configuration for the `unit_test_stream` source.",
-      "title": "",
-      "metadata": {
-        "docs::label": "Unit Test Stream",
-        "logical_name": "UnitTestStreamSource"
-      },
-      "simple": "type: unit_test_stream\n",
-      "advanced": "type: unit_test_stream\n",
-      "html": "<div class=\"hide-table\"><div class=\"row\">\n      <div class=\"col-12 first-column\">\n        <div class=\"row first-row\">\n          <div class=\"col-12 column\"><p>No request body</p></div>\n        </div>\n      </div>\n    </div></div>"
-    },
-    {
       "description1": "Collect observability data from a Vector instance",
       "description2": "Configuration for the `vector` source.",
       "title": "",
