@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [GCP integration][1]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
   <div class="alert alert-warning">This feature is in public beta. You can provide feedback through a <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">feedback form</a>, or through your standard support channels. During the beta period, Cloud Run monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
 
@@ -174,7 +174,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 #### Install Agent with buildpack
 
-[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the GCP container registry and Datadog serverless buildpack.
+[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the Google Cloud container registry and Datadog serverless buildpack.
 
 **Note**: [Install the tracing library](#install-tracing-library) for your language before running the buildpack.
 
@@ -260,7 +260,7 @@ Follow [these instructions][2] to install and configure the Ruby tracing library
 ### 3. Configure your application
 
 Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [GCP Secret][10] for privacy and safety issue.
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][10] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
@@ -286,7 +286,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
-- **Logs:** If you use the [GCP integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+- **Logs:** If you use the [Google Cloud integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 

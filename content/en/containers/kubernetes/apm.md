@@ -126,22 +126,30 @@ This configuration creates a directory on the host and mounts it within the Agen
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `agent.apm.hostSocketPath` and `agent.apm.socketPath` configuration values.
+When APM is enabled, the default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `features.apm.unixDomainSocketConfig.path` configuration value.
 
 #### Optional - Configure the Datadog Agent to accept traces over TCP
 
 The Datadog Agent can also be configured to receive traces over TCP. To enable this feature:
 
-Update your `datadog-agent.yaml` manifest with the following:
+Update your `DatadogAgent` manifest with the following:
 
 ```yaml
-agent:
-  image:
-    name: "gcr.io/datadoghq/agent:latest"
-  apm:
-    enabled: true
-    hostPort: 8126
-site: <DATADOG_SITE>
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+    site: <DATADOG_SITE>
+
+  features:
+    apm:
+      enabled: true
+      hostPortConfig:
+        enabled: true
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 

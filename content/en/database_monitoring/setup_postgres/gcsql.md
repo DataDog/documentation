@@ -149,7 +149,7 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
-       # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
+       # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
        gcp:
         project_id: '<PROJECT_ID>'
         instance_id: '<INSTANCE_ID>'
@@ -326,7 +326,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 ## Install the Cloud SQL integration
 
-To collect more comprehensive database metrics from GCP, install the [Cloud SQL integration][11] (optional).
+To collect more comprehensive database metrics from Google Cloud, install the [Cloud SQL integration][11] (optional).
 
 ## Troubleshooting
 
