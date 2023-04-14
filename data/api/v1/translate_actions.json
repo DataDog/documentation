@@ -881,7 +881,7 @@
     "request_schema_description": "Object containing details about a Synthetic browser test."
   },
   "GetBrowserTestLatestResults": {
-    "description": "Get the last 50 test results summaries for a given Synthetics Browser test.",
+    "description": "Get the last 150 test results summaries for a given Synthetics Browser test.",
     "summary": "Get a browser test's latest results summaries"
   },
   "GetBrowserTestResult": {
@@ -917,7 +917,7 @@
     "request_schema_description": "Object containing details about your Synthetic test."
   },
   "GetAPITestLatestResults": {
-    "description": "Get the last 50 test results summaries for a given Synthetics API test.",
+    "description": "Get the last 150 test results summaries for a given Synthetics API test.",
     "summary": "Get an API test's latest results summaries"
   },
   "GetAPITestResult": {
