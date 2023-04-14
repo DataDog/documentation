@@ -159,7 +159,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
 ### View timing metrics
-
+**Note**: View timing metrics include time that a page is open in the background.
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
