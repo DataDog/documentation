@@ -4,7 +4,7 @@
   class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
 <head>
-  {{ partial "header-scripts.html" . }}
+  {{ partialCached "header-scripts.html" . }}
 
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}

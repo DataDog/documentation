@@ -2,10 +2,10 @@
 <html lang='{{ if eq .Site.Language.Lang "en" }}en-US{{ else }}{{ .Site.Language.Lang }}{{ end }}' data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}" data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0" class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
 <head>
-        {{ partial "header-scripts.html" . }}
+        {{ partialCached "header-scripts.html" . }}
 
         <meta name='zd-site-verification' content='scvnk4hxijj6or52029kqx' />
-        
+
         <meta charset="utf-8">
         {{ partial "prefetch.html" . }}
         {{ partial "preload.html" . }}
