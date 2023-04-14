@@ -316,6 +316,20 @@ Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
+`DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_post_data_param_allowed`<br>
+**Default**: ""<br>
+A comma-separated list of HTTP POST data fields to be collected as part the request. Set to empty by default to redact all posted values, or `*` to collect and redact them if needed. When specific fields are explicitly whitelisted, only those fields' values won't be redacted. Added in version `0.86.0`.<br>
+**Example**: 
+  - The posted data is `foo[baz]=bar&foo[baz][bar]=quz&foo[bar][password]=baz&foo[bar][baz]=quz`
+  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`<br>
+  - In this scenario, the collected metadata will be:
+    - `http.request.foo.baz=bar`
+    - `http.request.foo.baz.bar=quz`
+    - `http.request.foo.bar.password=baz`
+    - `http.request.foo.bar.baz=<redacted>`
+
+
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
 **Default**: `*`<br>
