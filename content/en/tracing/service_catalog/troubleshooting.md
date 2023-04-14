@@ -23,8 +23,9 @@ Service Catalog relies on the `DD_SERVICE` tag in all telemetry types (infrastru
 
 Adding metadata for RUM services is not supported. 
 
-## There are many services that share the same metadata, do I need separate `service.datadog.yaml` files for each? 
-No, you can define multiple services in a single `service.datadog.yaml` file by separating each service with a ‘---’ separator. You can copy and paste the shared metadata for the relevant dd-service entities. 
+## Multiple services share the same metadata
+ 
+If you have many services that share the same metadata, you do not need separate `service.datadog.yaml` files for each one. You can define multiple services in a single `service.datadog.yaml` file by separating each service with a `---` separator. Copy and paste the shared metadata for the relevant dd-service entities. 
 
 ## Further reading
 
