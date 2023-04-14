@@ -5,6 +5,14 @@ disable_sidebar: true
 aliases:
     - /overview
     - /getting_started/faq/
+further_reading:
+    - link: 'https://learn.datadoghq.com/'
+      tag: 'Learning Center'
+      text: 'Take a course to get started with Datadog'
+cascade:
+    algolia:
+        rank: 90
+        category: Getting Started
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}

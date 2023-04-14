@@ -9,7 +9,7 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Protect against Threats with Datadog Application Security Management"
-- link: "/security/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/enabling/compatibility/"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
 - link: "/security/application_security/add-user-info/"

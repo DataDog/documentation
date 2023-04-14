@@ -1,18 +1,20 @@
 ---
-title: Injecting Libraries
+title: Injecting Libraries Locally
 kind: documentation
 description: "Inject instrumentation libraries into applications"
 aliases:
  - /tracing/trace_collection/admission_controller/
+ - /tracing/trace_collection/library_injection/
 ---
 
 ## Overview
 
-There are two ways to instrument your application:
-* Injecting the instrumentation library, as described on this page; or
-* [Manually adding the instrumentation library in the application][1].
+To instrument your application, you can:
+* Inject the instrumentation library locally (at the Agent), as described on this page; or
+* [Inject the instrumentation library remotely from Datadog][5] (beta); or
+* [Manual adding the instrumentation library in the application][1].
 
-How to inject the library, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
+How to inject the library locally, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -891,3 +893,4 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 [2]: /tracing/trace_collection/library_config/
 [3]: /security/application_security/enabling/java/?tab=kubernetes#get-started
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
+[5]: /tracing/trace_collection/library_injection_remote/

@@ -18,6 +18,11 @@ further_reading:
     text: Learn more about Observability Pipelines configurations
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+
 {{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
 ## What is Observability Pipelines and the Observability Pipelines Worker?
