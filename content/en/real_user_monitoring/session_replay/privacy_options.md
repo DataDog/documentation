@@ -60,7 +60,7 @@ Masks most form fields such as inputs, text areas, and checkbox values while rec
 ### Mask mode
 Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
-{{< img src="real_user_monitoring/session_replay/mask-mode-fix.png" alt="Mask mode" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
 **Note**: Masked data is not stored on Datadog servers.
 ### Allow mode
