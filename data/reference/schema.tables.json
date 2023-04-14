@@ -5,7 +5,7 @@
       "description2": "Supports AMQP version 0.9.1",
       "title": "Configuration for the `amqp` source.",
       "metadata": {
-        "docs::label": "Amqp",
+        "docs::label": "AMQP",
         "logical_name": "AmqpSource"
       },
       "simple": "queue: vector\nconsumer: vector\nrouting_key_field: routing\nexchange_key: exchange\noffset_key: offset\nlog_namespace: boolean\nframing:\n  method: bytes\ndecoding:\n  codec: bytes\nacknowledgements:\n  enabled: null\ntype: amqp\n",
@@ -29,7 +29,7 @@
       "description2": "Configuration for the `aws_ecs_metrics` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Aws Ecs Metrics",
+        "docs::label": "AWS ECS Metrics",
         "logical_name": "AwsEcsMetricsSource"
       },
       "simple": "endpoint: 'http://169.254.170.2/v2'\nversion: v2\nscrape_interval_secs: 15\nnamespace: awsecs\ntype: aws_ecs_metrics\n",
@@ -41,7 +41,7 @@
       "description2": "Configuration for the `aws_kinesis_firehose` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Aws Kinesis Firehose",
+        "docs::label": "AWS Kinesis Firehose",
         "logical_name": "AwsKinesisFirehose"
       },
       "simple": "address: string\naccess_key: ''\naccess_keys: array\nstore_access_key: boolean\nrecord_compression: auto\ntls: ''\nframing:\n  method: bytes\ndecoding:\n  codec: bytes\nacknowledgements:\n  enabled: null\nlog_namespace: boolean\ntype: aws_kinesis_firehose\n",
@@ -53,7 +53,7 @@
       "description2": "Configuration for the `aws_s3` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Aws S3",
+        "docs::label": "AWS S3",
         "logical_name": "AwsS3"
       },
       "simple": "compression: ''\nstrategy: ''\nsqs: ''\nassume_role: string\nauth:\n  load_timeout_secs: null\n  imds:\n    max_attempts: 4\n    connect_timeout_seconds: 1\n    read_timeout_seconds: 1\nmultiline: ''\nacknowledgements:\n  enabled: null\ntls_options: ''\nlog_namespace: boolean\ntype: aws_s3\n",
@@ -65,7 +65,7 @@
       "description2": "Configuration for the `aws_sqs` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Aws Sqs",
+        "docs::label": "AWS SQS",
         "logical_name": "AwsSqs"
       },
       "simple": "auth:\n  load_timeout_secs: null\n  imds:\n    max_attempts: 4\n    connect_timeout_seconds: 1\n    read_timeout_seconds: 1\nqueue_url: string\npoll_secs: 15\nvisibility_timeout_secs: 300\ndelete_message: true\nclient_concurrency: integer\nframing:\n  method: bytes\ndecoding:\n  codec: bytes\nacknowledgements:\n  enabled: null\ntls: ''\nlog_namespace: boolean\ntype: aws_sqs\n",
@@ -125,7 +125,7 @@
       "description2": "Configuration for the `eventstoredb_metrics` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Eventstoredb Metrics",
+        "docs::label": "EventStoreDB Metrics",
         "logical_name": "EventStoreDb"
       },
       "simple": "endpoint: 'https://localhost:2113/stats'\nscrape_interval_secs: 15\ndefault_namespace: string\ntype: eventstoredb_metrics\n",
@@ -185,7 +185,7 @@
       "description2": "Configuration for the `gcp_pubsub` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Gcp Pubsub",
+        "docs::label": "GCP Pub/Sub",
         "logical_name": "Pubsub"
       },
       "simple": "project: string\nsubscription: string\nendpoint: 'https://pubsub.googleapis.com'\ntls: ''\nmax_concurrency: 10\nfull_response_size: 100\npoll_time_seconds: 2\nack_deadline_secs: 600\nack_deadline_seconds: integer\nretry_delay_secs: 1\nretry_delay_seconds: number\nkeepalive_secs: 60\nlog_namespace: boolean\nframing:\n  method: bytes\ndecoding:\n  codec: bytes\nacknowledgements:\n  enabled: null\ntype: gcp_pubsub\n",
@@ -221,7 +221,7 @@
       "description2": "Configuration for the `http` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Http",
+        "docs::label": "HTTP",
         "logical_name": "Http"
       },
       "simple": "address: string\nencoding: ''\nheaders: []\nquery_parameters: []\nauth: ''\nstrict_path: true\npath: /\npath_key: path\nmethod: POST\ntls: ''\nframing: ''\ndecoding: ''\nacknowledgements:\n  enabled: null\nlog_namespace: boolean\ntype: http\n",
@@ -233,7 +233,7 @@
       "description2": "Configuration for the `http_client` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Http Client",
+        "docs::label": "HTTP Client",
         "logical_name": "HttpClient"
       },
       "simple": "endpoint: string\nscrape_interval_secs: 15\nquery: {}\ndecoding:\n  codec: bytes\nframing:\n  method: bytes\nheaders: {}\nmethod: GET\ntls: ''\nauth: ''\nlog_namespace: boolean\ntype: http_client\n",
@@ -245,7 +245,7 @@
       "description2": "Configuration for the `http_server` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Http Server",
+        "docs::label": "HTTP Server",
         "logical_name": "SimpleHttp"
       },
       "simple": "address: string\nencoding: ''\nheaders: []\nquery_parameters: []\nauth: ''\nstrict_path: true\npath: /\npath_key: path\nmethod: POST\ntls: ''\nframing: ''\ndecoding: ''\nacknowledgements:\n  enabled: null\nlog_namespace: boolean\ntype: http_server\n",
@@ -329,7 +329,7 @@
       "description2": "Configuration for the `mongodb_metrics` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Mongodb Metrics",
+        "docs::label": "MongoDB Metrics",
         "logical_name": "MongoDbMetrics"
       },
       "simple": "endpoints: array\nscrape_interval_secs: 15\nnamespace: mongodb\ntype: mongodb_metrics\n",
@@ -341,7 +341,7 @@
       "description2": "Configuration for the `nats` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Nats",
+        "docs::label": "NATS",
         "logical_name": "NatsSource"
       },
       "simple": "url: string\nconnection_name: string\nsubject: string\nqueue: string\nlog_namespace: boolean\ntls: ''\nauth: ''\nframing:\n  method: bytes\ndecoding:\n  codec: bytes\nsubject_key_field: subject\ntype: nats\n",
@@ -353,7 +353,7 @@
       "description2": "Configuration for the `nginx_metrics` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Nginx Metrics",
+        "docs::label": "NGINX Metrics",
         "logical_name": "NginxMetrics"
       },
       "simple": "endpoints: array\nscrape_interval_secs: 15\nnamespace: nginx\ntls: ''\nauth: ''\ntype: nginx_metrics\n",
@@ -365,7 +365,7 @@
       "description2": "Configuration for the `opentelemetry` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Opentelemetry",
+        "docs::label": "OpenTelemetry",
         "logical_name": "Opentelemetry"
       },
       "simple": "grpc: object\nhttp: object\nacknowledgements:\n  enabled: null\nlog_namespace: boolean\ntype: opentelemetry\n",
@@ -377,7 +377,7 @@
       "description2": "Configuration for the `postgresql_metrics` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Postgresql Metrics",
+        "docs::label": "PostgreSQL Metrics",
         "logical_name": "PostgresqlMetrics"
       },
       "simple": "endpoints: array\ninclude_databases: array\nexclude_databases: array\nscrape_interval_secs: 15\nnamespace: postgresql\ntls: ''\ntype: postgresql_metrics\n",
@@ -437,7 +437,7 @@
       "description2": "Configuration for the `splunk_hec` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Splunk Hec",
+        "docs::label": "Splunk HEC",
         "logical_name": "Splunk"
       },
       "simple": "address: '0.0.0.0:8088'\ntoken: ''\nvalid_tokens: array\nstore_hec_token: boolean\ntls: ''\nacknowledgements:\n  enabled: null\n  max_pending_acks: 10000000\n  max_number_of_ack_channels: 1000000\n  max_pending_acks_per_channel: 1000000\n  ack_idle_cleanup: false\n  max_idle_time: 300\nlog_namespace: boolean\ntype: splunk_hec\n",
@@ -449,7 +449,7 @@
       "description2": "Configuration for the `statsd` source.",
       "title": "",
       "metadata": {
-        "docs::label": "Statsd",
+        "docs::label": "StatsD",
         "logical_name": "Statsd"
       },
       "simple": "type: statsd\n",
@@ -535,7 +535,7 @@
       "description2": "Configuration for the `aws_ec2_metadata` transform.",
       "title": "",
       "metadata": {
-        "docs::label": "Aws Ec2 Metadata",
+        "docs::label": "AWS EC2 Metadata",
         "logical_name": "Ec2Metadata"
       },
       "simple": "endpoint: 'http://169.254.169.254'\nnamespace: ''\nrefresh_interval_secs: 10\nfields:\n  - ami-id\n  - availability-zone\n  - instance-id\n  - instance-type\n  - local-hostname\n  - local-ipv4\n  - public-hostname\n  - public-ipv4\n  - region\n  - subnet-id\n  - vpc-id\n  - role-name\ntags: []\nrefresh_timeout_secs: 1\nproxy:\n  enabled: true\n  http: null\n  https: null\nrequired: true\ntype: aws_ec2_metadata\n",
