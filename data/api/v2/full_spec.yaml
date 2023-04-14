@@ -14811,6 +14811,11 @@ paths:
       - $ref: '#/components/parameters/SpansMetricIDParameter'
       responses:
         '200':
+          content:
+            application/json:
+              schema:
+                example: {}
+                type: object
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
