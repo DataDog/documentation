@@ -188,7 +188,7 @@ view. In the drawer, a new tab named **Infrastructure** appears which contains t
 
 ### Error messages for pipeline failures
 
-Error messages are supported for GitLab versions 15.2.0+.
+Error messages are supported for GitLab versions 15.2.0 and above.
 
 For failed GitLab pipeline executions, each error under the `Errors` tab within a specific pipeline execution displays a message associated with the error type from GitLab.
 
