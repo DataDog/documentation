@@ -329,7 +329,6 @@ A comma-separated list of HTTP POST data fields to be collected as part the requ
     - `http.request.foo.bar.password=baz`
     - `http.request.foo.bar.baz=<redacted>`
 
-
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
 **Default**: `*`<br>
