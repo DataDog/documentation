@@ -32,7 +32,7 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 1. Press the "Using Single Sign-On (SAML)?" button.
 2. Enter your company email and send the email.
 3. While on your mobile device, open the email and click on the indicated link.
-4. Enter your org’s SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
+4. Enter your org's SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
 
@@ -282,7 +282,7 @@ You can display SLOs from multiple organizations on your mobile home screen.
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you’ve logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
+All organizations you've logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
 
 
 {{% /tab %}}
@@ -380,7 +380,7 @@ You can display Monitors from multiple organizations within the same widget.
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
+All organizations you've logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
 
 {{% /tab %}}
