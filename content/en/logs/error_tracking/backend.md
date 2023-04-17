@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-If you aren’t already collecting logs with Datadog, see the [Logs documentation][10] to set up logs. Ensure that the `source` tag (specifying language) is properly configured. Datadog recommends setting up Agent-based log collection.
+If you aren't already collecting logs with Datadog, see the [Logs documentation][10] to set up logs. Ensure that the `source` tag (specifying language) is properly configured. Datadog recommends setting up Agent-based log collection.
 
 ## Setup
 

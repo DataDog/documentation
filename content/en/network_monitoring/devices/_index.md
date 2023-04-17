@@ -52,7 +52,7 @@ The generic profile collects metrics for all devices not supported by a vendor p
 
 ### Vendor profiles
 
-The following vendor devices are supported with dedicated profiles. If a vendor/device type is supported but the specific model isn’t supported, refer to the [FAQ page][6].
+The following vendor devices are supported with dedicated profiles. If a vendor/device type is supported but the specific model isn't supported, refer to the [FAQ page][6].
 
 -   Cisco Catalyst
 -   Cisco ASA

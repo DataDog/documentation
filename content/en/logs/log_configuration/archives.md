@@ -181,8 +181,8 @@ Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your a
 
 Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
 
-* If you’re creating a new Service Account, this can be done from the [Google Cloud Credentials page][1].
-* If you’re updating an existing Service Account, this can be done from the [Google Cloud IAM Admin page][2]).
+* If you're creating a new Service Account, this can be done from the [Google Cloud Credentials page][1].
+* If you're updating an existing Service Account, this can be done from the [Google Cloud IAM Admin page][2].
 
 Add the role under **Storage** called **Storage Object Admin**.
 
@@ -414,7 +414,7 @@ The log archives that Datadog forwards to your storage bucket are in compressed 
 
 This directory structure simplifies the process of querying your historical log archives based on their date.
 
-Within the zipped JSON file, each event’s content is formatted as follows:
+Within the zipped JSON file, each event's content is formatted as follows:
 
 ```json
 {
