@@ -121,7 +121,7 @@ In addition to default attributes, you can add user-related data to all RUM even
 <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
-You can [enrich your RUM event data with feature flags][6] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user’s performance. 
+You can [enrich your RUM event data with feature flags][6] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
 
 ## Event-specific metrics and attributes
 
@@ -166,7 +166,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered.                                                                                                |
-| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                             |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where `0` means that no shifts are happening.                                                                               |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][9].                                                                             |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][10].                               |

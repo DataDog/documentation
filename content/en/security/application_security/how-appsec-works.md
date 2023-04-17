@@ -103,7 +103,7 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful. 
 * Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java. 
-* An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack’s probability of success.
+* An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack's probability of success.
 * A harmful qualification is highlighted when there is evidence that a code level vulnerability has been found by the attacker.
 
 
