@@ -13,6 +13,9 @@ further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
+- link: "/dashboards/guide/slo_data_type"
+  tag: "Guide"
+  text: "Graph historical SLO data on Dashboards"
 ---
 
 The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time. The time window depends on what is selected on the [timeboard][1] or [screenboard][2]:

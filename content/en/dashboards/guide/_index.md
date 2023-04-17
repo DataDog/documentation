@@ -25,6 +25,7 @@ cascade:
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Embeddable graphs with template variables{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Why am I unable to iFrame certain HTTPS URLs?{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks best practices{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/slo_data_type" >}}Graph historical SLO data on Dashboards{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}
