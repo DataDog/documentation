@@ -23,12 +23,11 @@ author:
   sales_email: prateeksaini@lambdatest.com
   support_email: prateeksaini@lambdatest.com
 categories:
-- 問題追跡
 - 自動化
-- テスト
-- クラウド
-- コラボレーション
 - コンテナ
+- インシデント
+- 問題追跡
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md
 display_on_public_website: true
@@ -46,20 +45,19 @@ public_title: LambdaTest
 short_description: 最も強力な自動テストプラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Issue Tracking
   - Category::Automation
-  - Category::Testing
-  - Category::Cloud
-  - Category::Collaboration
   - Category::Containers
+  - Category::Incidents
+  - Category::Issue Tracking
+  - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 最も強力な自動テストプラットフォーム
   media: []

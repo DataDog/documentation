@@ -48,9 +48,19 @@ Click **Manage Agent Ingestion** to get instructions for configuring the Agent s
 You can control three ingestion mechanisms by configuring sampling in the Datadog Agent:
 - **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied in libraries, targeting 10 traces per second per Agent. The setting `DD_APM_MAX_TPS` allows you to change the target number of traces per second.
 -  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces up to 10 traces per second per Agent. The setting `DD_APM_ERROR_TPS` allows you to change the target number of traces per second.
--  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces per second per Agent. The setting `DD_APM_DISABLE_RARE_SAMPLER` allows you to disable the collection of rare traces.
+-  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces per second per Agent. This setting is disabled by default. The setting `DD_APM_ENABLE_RARE_SAMPLER` allows you to enable the collection of rare traces.
 
 **Note**: The `Other Ingestion Reasons` (gray) section of the pie chart represents other ingestion reasons which _are not configurable_ at the Datadog Agent level.
+
+### Remotely configure Agent ingestion settings
+
+<div class="alert alert-warning"> Remote configuration for ingestion configuration is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
+
+You can remotely configure these parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
+
+With remote configuration, you can change parameters without having to restart the Agent. Click `Apply` to save the configuration changes, and the new configuration takes effect immediately.
+
+**Note**: Remotely configured parameters take precedence over local configurations such as environment variables and `datadog.yaml` configuration.
 
 ## Managing ingestion for an individual service at the library level
 
@@ -156,3 +166,5 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [10]: /tracing/trace_pipeline/metrics
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
+[14]: /agent/guide/how_remote_config_works/#enabling-remote-configuration

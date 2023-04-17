@@ -108,7 +108,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### Cloud service autodetection
 
-If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or GCP dependency to pinpoint latency, assess database performance, and visualize your network more completely.
+If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or Google Cloud dependency to pinpoint latency, assess database performance, and visualize your network more completely.
 
 {{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
 
@@ -121,7 +121,7 @@ For instance, you can
 NPM automatically maps
 
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
-- API calls to AppEngine, Google DNS, Gmail, and other [GCP services][4].
+- API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
 
@@ -147,7 +147,7 @@ NPM users may configure their networks to have overlapping IP spaces. For instan
 
 To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from.
 
-In AWS and GCP, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
+In AWS and Google Cloud, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
 
   ```yaml
   network:

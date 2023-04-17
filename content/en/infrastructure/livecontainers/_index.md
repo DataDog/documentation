@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
   tag: "Blog"
   text: "Expedite infrastructure investigations with Kubernetes Anomalies"
+- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+  tag: "Blog"
+  text: "Practical tips for rightsizing your Kubernetes workloads"
 ---
 
 ## Overview
@@ -109,7 +112,7 @@ The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-You can switch between the "Scatter Plot” and "Timeseries" tabs in the collapsible **Summary Graphs** section in the Containers page:
+You can switch between the "Scatter Plot" and "Timeseries" tabs in the collapsible **Summary Graphs** section in the Containers page:
 
 {{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter plot selection" style="width:80%;">}}
 
@@ -169,7 +172,7 @@ This panel is useful for troubleshooting and finding information about a selecte
 
 * [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
 * [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
-* **Network**: View a container or resource’s network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
+* **Network**: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
 * [**Traces**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 
 Kubernetes Resources views have a few additional tabs:

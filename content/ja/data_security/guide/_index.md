@@ -1,8 +1,16 @@
 ---
+aliases:
+- /ja/security/guide/
+kind: guide
 disable_toc: true
 kind: ガイド
 private: true
 title: セキュリティガイド
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: セキュリティガイド
 ---
 
 

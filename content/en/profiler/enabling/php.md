@@ -11,7 +11,7 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting/php'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 aliases:
@@ -83,7 +83,7 @@ php hello.php
 {{% /tab %}}
 {{% tab "PHP-FPM" %}}
 
-Use the `env` directive in the php-fpm’s `www.conf` file, for example:
+Use the `env` directive in the php-fpm's `www.conf` file, for example:
 
 ```
 ; DD_PROFILING_ENABLED is not required for v0.82.0+

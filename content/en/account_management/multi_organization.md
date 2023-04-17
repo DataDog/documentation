@@ -97,7 +97,7 @@ The Usage page shows the aggregate usage of the parent-organization and all its 
 
 This tab contains a Month-to-Date Total Usage section and an Overall Usage section.
 
-The Month-to-Date Total Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
+The Month-to-Date Total Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you've used during the month, across your parent-organization and all its child-organizations.
 
 {{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
 

@@ -830,6 +830,7 @@ components:
               type: string
             type: array
           description: A mapping of Monitor ID to strings denoting where it's used.
+          nullable: true
           type: object
       required:
       - data
@@ -1711,6 +1712,7 @@ components:
             Email notifications can be sent to specific users by using the same `@username`
             notation as events.'
           example: Message on the downtime
+          nullable: true
           type: string
         monitor_id:
           description: 'A single monitor to which the downtime applies.
@@ -1846,6 +1848,7 @@ components:
             Email notifications can be sent to specific users by using the same `@username`
             notation as events.'
           example: Message on the downtime
+          nullable: true
           type: string
         monitor_id:
           description: 'A single monitor to which the downtime applies.
@@ -3425,6 +3428,7 @@ components:
         mute_timeout:
           description: Timeout of the mute applied to your host.
           format: int64
+          nullable: true
           type: integer
         name:
           description: The host name.
@@ -3769,6 +3773,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
             selected tags in the format of `<source_org_name>:::<selected tag 1>///<selected
@@ -3846,6 +3854,7 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
+      - universal_service_monitoring_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3878,6 +3887,7 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
+      - UNIVERSAL_SERVICE_MONITORING_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -5249,6 +5259,7 @@ components:
           description: 'Hash identifier of the next log to return in the list.
 
             This parameter is used for the pagination feature.'
+          nullable: true
           type: string
         status:
           description: Status of the response.
@@ -7229,6 +7240,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
             selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
@@ -7334,6 +7349,8 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
+      - universal_service_monitoring_usage
+      - universal_service_monitoring_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7397,6 +7414,8 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
+      - UNIVERSAL_SERVICE_MONITORING_USAGE
+      - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7644,6 +7663,14 @@ components:
           type: number
         snmp_usage:
           description: The network device usage by tag(s).
+          format: double
+          type: number
+        universal_service_monitoring_percentage:
+          description: The percentage of universal service monitoring usage by tag(s).
+          format: double
+          type: number
+        universal_service_monitoring_usage:
+          description: The universal service monitoring usage by tag(s).
           format: double
           type: number
       type: object
@@ -9188,6 +9215,7 @@ components:
         created_at:
           description: The epoch timestamp of when the correction was created at.
           format: int64
+          nullable: true
           type: integer
         creator:
           $ref: '#/components/schemas/Creator'
@@ -9204,10 +9232,12 @@ components:
         end:
           description: Ending time of the correction in epoch seconds.
           format: int64
+          nullable: true
           type: integer
         modified_at:
           description: The epoch timestamp of when the correction was modified at.
           format: int64
+          nullable: true
           type: integer
         modifier:
           $ref: '#/components/schemas/SLOCorrectionResponseAttributesModifier'
@@ -9318,6 +9348,7 @@ components:
           type: integer
         name:
           description: Name of the creator.
+          nullable: true
           type: string
       type: object
     SLODeleteResponse:
@@ -9589,6 +9620,7 @@ components:
           description: The current SLI value of the SLO over the history window.
           example: 99.99
           format: double
+          nullable: true
           type: number
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
@@ -9613,6 +9645,7 @@ components:
             level objective.
           items:
             $ref: '#/components/schemas/SLOHistoryResponseError'
+          nullable: true
           type: array
       type: object
     SLOHistoryResponseData:
@@ -9773,6 +9806,7 @@ components:
           description: The current SLI value of the SLO over the history window.
           example: 99.99
           format: double
+          nullable: true
           type: number
         span_precision:
           description: The amount of decimal places the SLI value is accurate to for
@@ -9785,6 +9819,7 @@ components:
           description: Use `sli_value` instead.
           example: 99.99
           format: double
+          nullable: true
           type: number
       type: object
     SLOListResponse:
@@ -11491,6 +11526,7 @@ components:
           type: string
         name:
           description: Name of the user who shared the dashboard.
+          nullable: true
           readOnly: true
           type: string
       readOnly: true
@@ -14486,6 +14522,10 @@ components:
             example: ''
             type: string
           type: array
+        compressedJsonDescriptor:
+          description: A protobuf JSON descriptor that needs to be gzipped first then
+            base64 encoded.
+          type: string
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
@@ -15700,6 +15740,7 @@ components:
         configured for usage attribution](https://docs.datadoghq.com/account_management/billing/usage_attribution/#getting-started).
 
         In this scenario the API returns the total usage, not broken down by tags.'
+      nullable: true
       type: object
     UsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -16209,22 +16250,26 @@ components:
         ci_pipeline_indexed_spans:
           description: The number of spans for pipelines in the queried hour.
           format: int64
+          nullable: true
           type: integer
         ci_test_indexed_spans:
           description: The number of spans for tests in the queried hour.
           format: int64
+          nullable: true
           type: integer
         ci_visibility_pipeline_committers:
           description: Shows the total count of all active Git committers for Pipelines
             in the current month. A committer is active if they commit at least 3
             times in a given month.
           format: int64
+          nullable: true
           type: integer
         ci_visibility_test_committers:
           description: The total count of all active Git committers for tests in the
             current month. A committer is active if they commit at least 3 times in
             a given month.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16250,11 +16295,13 @@ components:
           description: "The total number of Cloud Workload Security container hours
             from the start of the given hour\u2019s month until the given hour."
           format: int64
+          nullable: true
           type: integer
         cws_host_count:
           description: "The total number of Cloud Workload Security host hours from
             the start of the given hour\u2019s month until the given hour."
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16412,11 +16459,13 @@ components:
           description: "The total number of Database Monitoring host hours from the
             start of the given hour\u2019s month until the given hour."
           format: int64
+          nullable: true
           type: integer
         dbm_queries_count:
           description: "The total number of normalized Database Monitoring queries
             from the start of the given hour\u2019s month until the given hour."
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16446,15 +16495,18 @@ components:
           description: The high-water mark of APM ECS Fargate tasks during the given
             hour.
           format: int64
+          nullable: true
           type: integer
         appsec_fargate_count:
           description: The Application Security Monitoring ECS Fargate tasks during
             the given hour.
           format: int64
+          nullable: true
           type: integer
         avg_profiled_fargate_tasks:
           description: The average profiled task count for Fargate Profiling.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16469,6 +16521,7 @@ components:
         tasks_count:
           description: The number of Fargate tasks run.
           format: int64
+          nullable: true
           type: integer
       type: object
     UsageFargateResponse:
@@ -16490,6 +16543,7 @@ components:
 
             during a given hour that were running the Datadog Agent.'
           format: int64
+          nullable: true
           type: integer
         alibaba_host_count:
           description: 'Contains the total number of hosts that reported through Alibaba
@@ -16497,17 +16551,20 @@ components:
 
             (and were NOT running the Datadog Agent).'
           format: int64
+          nullable: true
           type: integer
         apm_azure_app_service_host_count:
           description: Contains the total number of Azure App Services hosts using
             APM.
           format: int64
+          nullable: true
           type: integer
         apm_host_count:
           description: 'Shows the total number of hosts using APM during the hour,
 
             these are counted as billable (except during trial periods).'
           format: int64
+          nullable: true
           type: integer
         aws_host_count:
           description: 'Contains the total number of hosts that reported through the
@@ -16515,6 +16572,7 @@ components:
 
             (and were NOT running the Datadog Agent).'
           format: int64
+          nullable: true
           type: integer
         azure_host_count:
           description: 'Contains the total number of hosts that reported through Azure
@@ -16522,11 +16580,13 @@ components:
 
             (and were NOT running the Datadog Agent).'
           format: int64
+          nullable: true
           type: integer
         container_count:
           description: Shows the total number of containers reported by the Docker
             integration during the hour.
           format: int64
+          nullable: true
           type: integer
         gcp_host_count:
           description: 'Contains the total number of hosts that reported through the
@@ -16534,11 +16594,13 @@ components:
 
             (and were NOT running the Datadog Agent).'
           format: int64
+          nullable: true
           type: integer
         heroku_host_count:
           description: Contains the total number of Heroku dynos reported by the Datadog
             Agent.
           format: int64
+          nullable: true
           type: integer
         host_count:
           description: 'Contains the total number of billable infrastructure hosts
@@ -16546,10 +16608,12 @@ components:
 
             This is the sum of `agent_host_count`, `aws_host_count`, and `gcp_host_count`.'
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
           format: date-time
+          nullable: true
           type: string
         infra_azure_app_service:
           description: 'Contains the total number of hosts that reported through the
@@ -16557,16 +16621,19 @@ components:
 
             (and were NOT running the Datadog Agent).'
           format: int64
+          nullable: true
           type: integer
         opentelemetry_apm_host_count:
           description: Contains the total number of hosts using APM reported by Datadog
             exporter for the OpenTelemetry Collector.
           format: int64
+          nullable: true
           type: integer
         opentelemetry_host_count:
           description: Contains the total number of hosts reported by Datadog exporter
             for the OpenTelemetry Collector.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16580,6 +16647,7 @@ components:
 
             (and were NOT running the Datadog Agent).'
           format: int64
+          nullable: true
           type: integer
       type: object
     UsageHostsResponse:
@@ -16603,6 +16671,7 @@ components:
           description: Contains the total number monthly active users from the start
             of the given hour's month until the given hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16715,6 +16784,7 @@ components:
           description: Contains the number of different functions for each region
             and AWS account.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16723,6 +16793,7 @@ components:
         invocations_sum:
           description: Contains the sum of invocations of all functions.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16828,6 +16899,7 @@ components:
         billable_ingested_bytes:
           description: Contains the number of billable log bytes ingested.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16836,30 +16908,42 @@ components:
         indexed_events_count:
           description: Contains the number of log events indexed.
           format: int64
+          nullable: true
           type: integer
         ingested_events_bytes:
           description: Contains the number of log bytes ingested.
           format: int64
+          nullable: true
+          type: integer
+        logs_forwarding_events_bytes:
+          description: Contains the number of logs forwarded bytes (data available
+            as of April 1st 2023)
+          format: int64
+          nullable: true
           type: integer
         logs_live_indexed_count:
           description: Contains the number of live log events indexed (data available
             as of December 1, 2020).
           format: int64
+          nullable: true
           type: integer
         logs_live_ingested_bytes:
           description: Contains the number of live log bytes ingested (data available
             as of December 1, 2020).
           format: int64
+          nullable: true
           type: integer
         logs_rehydrated_indexed_count:
           description: Contains the number of rehydrated log events indexed (data
             available as of December 1, 2020).
           format: int64
+          nullable: true
           type: integer
         logs_rehydrated_ingested_bytes:
           description: Contains the number of rehydrated log bytes ingested (data
             available as of December 1, 2020).
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16952,6 +17036,7 @@ components:
         online_archive_events_count:
           description: Total count of online archived events within the hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16975,11 +17060,13 @@ components:
         avg_container_agent_count:
           description: Get average number of container agents for that hour.
           format: int64
+          nullable: true
           type: integer
         host_count:
           description: Contains the total number of profiled hosts reporting during
             a given hour.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -17076,10 +17163,12 @@ components:
         browser_rum_units:
           description: The number of browser RUM units.
           format: int64
+          nullable: true
           type: integer
         mobile_rum_units:
           description: The number of mobile RUM units.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -17174,6 +17263,7 @@ components:
         snmp_devices:
           description: Contains the number of SNMP devices.
           format: int64
+          nullable: true
           type: integer
       type: object
     UsageSNMPResponse:
@@ -17300,6 +17390,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
+          deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
           format: int64
@@ -17465,6 +17556,11 @@ components:
         fargate_tasks_count_hwm:
           description: Shows the average of all Fargate tasks over all hours in the
             current date for all organizations.
+          format: int64
+          type: integer
+        forwarding_events_bytes_sum:
+          description: Shows the sum of all log bytes forwarded over all hours in
+            the current date for all organizations.
           format: int64
           type: integer
         gcp_host_top99p:
@@ -17655,6 +17751,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        universal_service_monitoring_host_top99p:
+          description: Shows the 99th percentile of all universal service management
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         vsphere_host_top99p:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current date for all organizations.
@@ -17691,6 +17792,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
+          deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current date for the given org.
           format: int64
@@ -17852,6 +17954,11 @@ components:
         fargate_tasks_count_hwm:
           description: Shows the high-water mark of all Fargate tasks over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        forwarding_events_bytes_sum:
+          description: Shows the sum of all log bytes forwarded over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         gcp_host_top99p:
@@ -18049,6 +18156,11 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        universal_service_monitoring_host_top99p:
+          description: Shows the 99th percentile of all Universal Service Monitoring
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         vsphere_host_top99p:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current date for the given org.
@@ -18085,6 +18197,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
+          deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current months for all organizations.
           format: int64
@@ -18258,6 +18371,12 @@ components:
         fargate_tasks_count_hwm_sum:
           description: Shows the sum of the high-water marks of all Fargate tasks
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        forwarding_events_bytes_agg_sum:
+          description: Shows the sum of all logs forwarding bytes over all hours in
+            the current months for all organizations (data available as of April 1,
+            2023)
           format: int64
           type: integer
         gcp_host_top99p_sum:
@@ -18484,6 +18603,11 @@ components:
             in the current months for all organizations.
           format: int64
           type: integer
+        universal_service_monitoring_host_top99p_sum:
+          description: Shows the 99th percentile of all Universal Service Monitoring
+            hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         usage:
           description: An array of objects regarding hourly usage.
           items:
@@ -18501,6 +18625,7 @@ components:
         check_calls_count:
           description: Contains the number of Synthetics API tests run.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -18530,6 +18655,7 @@ components:
         browser_check_calls_count:
           description: Contains the number of Synthetics Browser tests run.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -18667,6 +18793,7 @@ components:
         total_number_of_records:
           description: Total number of records.
           format: int64
+          nullable: true
           type: integer
       type: object
     UsageTopAvgMetricsResponse:
@@ -19763,6 +19890,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -20872,6 +21000,15 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        shared_dashboard:
+          parameters:
+          - name: body
+            value: "{\n  \"dashboard_id\": \"{{ dashboard.id }}\",\n  \"dashboard_type\":
+              \"custom_timeboard\",\n  \"share_type\": \"invite\",\n  \"share_list\":
+              [\"{{unique_lower_alnum}}@datadoghq.com\"],\n  \"global_time\": {\n
+              \   \"live_span\": \"1h\"\n  }\n}"
+          step: there is a valid "shared_dashboard" in the system
       x-menu-order: 8
       x-undo:
         operationId: DeletePublicDashboard
@@ -21058,7 +21195,7 @@ paths:
               json-request-body:
                 value:
                   data:
-                  - attributes:
+                    attributes:
                       email: test@datadoghq.com
                     type: public_dashboard_invitation
             schema:
@@ -21213,12 +21350,24 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        public_dashboard_invitation:
+          parameters:
+          - name: token
+            value: '"{{ shared_dashboard.token }}"'
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{unique_lower_alnum}}@datadoghq.com\"\n
+              \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
+          step: there is a valid "public_dashboard_invitation" in the system
       x-menu-order: 11
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
         - name: token
-          source: token
+          source: data.attributes.share_token
+        - name: body
+          template: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{data.attributes.email}}\"\n
+            \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
         type: unsafe
   /api/v1/dashboard/{dashboard_id}:
     delete:
@@ -25566,8 +25715,8 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
-        US5.
+        **NOTE** Only available on US1-FED and in closed beta on US1, EU, AP1, US3,
+        and US5.
 
 
         **CI Pipelines Alert Query**
@@ -25592,7 +25741,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
+        **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
 
 
         **CI Tests Alert Query**
@@ -25617,8 +25766,8 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Test monitors are available only in closed beta on US1, EU, US3
-        and US5.
+        **NOTE** CI Test monitors are available only in closed beta on US1, EU, AP1,
+        US3, and US5.
 
 
         **Error Tracking Alert Query**
@@ -28178,6 +28327,7 @@ paths:
             - datadoghq.eu
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - ddog-gov.com
           subdomain:
             default: api
@@ -29284,8 +29434,8 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
-      description: Get the last 50 test results summaries for a given Synthetics Browser
-        test.
+      description: Get the last 150 test results summaries for a given Synthetics
+        Browser test.
       operationId: GetBrowserTestLatestResults
       parameters:
       - description: 'The public ID of the browser test for which to search results
@@ -29657,8 +29807,8 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
     get:
-      description: Get the last 50 test results summaries for a given Synthetics API
-        test.
+      description: Get the last 150 test results summaries for a given Synthetics
+        API test.
       operationId: GetAPITestLatestResults
       parameters:
       - description: The public ID of the test for which to search results for.
@@ -30468,12 +30618,10 @@ paths:
         type: safe
   /api/v1/usage/audit_logs:
     get:
+      deprecated: true
       description: 'Get hourly usage for audit logs.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
-        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
-        for the associated migration guide.'
+        **Note:** This endpoint has been deprecated.'
       operationId: GetUsageAuditLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30527,7 +30675,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 29
+      x-menu-order: 40
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -31023,10 +31171,11 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
-        To make sure you receive all records, check if the value of `next_record_id`
-        is\nset in the response. If it is, make another request and pass `next_record_id`
-        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+      description: "Get hourly usage attribution. Multi-region data is available starting
+        March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive
+        all records, check if the value of `next_record_id` is\nset in the response.
+        If it is, make another request and pass `next_record_id` as a parameter.\nPseudo
+        code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
         next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
@@ -31558,10 +31707,11 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
-        To make sure you receive all records, check if the value of `next_record_id`
-        is\nset in the response. If it is, make another request and pass `next_record_id`
-        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+      description: "Get monthly usage attribution. Multi-region data is available
+        starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you
+        receive all records, check if the value of `next_record_id` is\nset in the
+        response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo
+        code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
         next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
@@ -32986,6 +33136,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -33092,6 +33243,7 @@ servers:
       - datadoghq.com
       - us3.datadoghq.com
       - us5.datadoghq.com
+      - ap1.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:

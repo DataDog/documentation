@@ -18,11 +18,13 @@ title: ヒートマップ
 
 - 最新バージョンの SDK (v4.20.0 以降) である必要があります
 - [セッションリプレイ][1]を有効にします。
+- SDK の初期化で `trackUserInteractions: true` を設定し、アクションの追跡を有効にします。
 - ヒートマップがベータ版の間は、SDK の [package.json][2] ファイルに以下のコードを追加して、機能フラグを有効にしてください。
 
 ```json
 datadogRum.init({
     ...
+    trackUserInteractions: true,
     enableExperimentalFeatures: ['clickmap']
 })
 ```

@@ -30,9 +30,9 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
 ## Get started
 
-1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Risk Management vulnerability detection features) for your target operating system architecture.
+1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Application Vulnerability Management vulnerability detection features) for your target operating system architecture.
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][2].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
 
 2. **Enable ASM** by setting the `DD_APPSEC_ENABLED` environment variable to `true`. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start up script:
    ```
@@ -196,4 +196,4 @@ ENV DD_APPSEC_ENABLED=true
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /security/application_security/setup_and_configure/?code-lang=dotnet#compatibility
+[2]: /security/application_security/enabling/compatibility/dotnet

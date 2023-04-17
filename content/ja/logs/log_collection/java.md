@@ -27,7 +27,9 @@ kind: documentation
 title: Java ログ収集
 ---
 
-一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。
+ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で調整します。
+
+一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。例:
 
 ```java
 //1 つのはずのイベントに、4 つのイベントが生成される
@@ -37,14 +39,12 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-この複雑さを軽減するには、ログを JSON 形式で生成するようにログライブラリを構成します。JSON にログすると、次のことができます。
+この問題を解決するには、ログを JSON 形式で生成するようにログライブラリを構成します。JSON にログすると、次のことができます。
 
 * スタックトレースがログイベントに適切にラップされることを確実にします。
 * すべてのログイベント属性 (重大度、ロガー名、スレッド名など) が適切に抽出されることを確実にします。
 * [マップされた診断コンテキスト (MDC)][1] 属性にアクセスできます。この属性は、任意のログイベントにアタッチできます。
 * [カスタムパースルール][2]が不要になります。
-
-**ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で調整します。**
 
 次の手順は、Log4j、Log4j 2、および Logback ログライブラリのセットアップ例を示しています。
 
@@ -118,7 +118,7 @@ Log4j 2 には JSON レイアウトが含まれています。
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -290,6 +290,8 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 3. [Agent を再起動します][7]。
 4. [Agent の status サブコマンド][8]を実行し、`Checks` セクションで `java` を探し、ログが Datadog に正常に送信されることを確認します。
 
+ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][9]し、ログ属性を抽出します。[ログエクスプローラー][10]を使用して、ログを表示し、トラブルシューティングを行うことができます。
+
 ## エージェントレスのログ収集
 
 アクセスできない、またはファイルにログを記録できないマシンでアプリケーションが実行されている例外的なケースでは、ログを Datadog または Datadog Agent に直接ストリーミングすることができます。アプリケーションが接続の問題を処理する必要があるため、これは推奨される設定ではありません。
@@ -344,7 +346,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
@@ -373,11 +375,11 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 ### Logback を構成する
 
-[logstash-logback-encoder][9] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
+[logstash-logback-encoder][11] ログライブラリを Logback と一緒に使用して、ログを Datadog に直接ストリーミングします。
 
 1. `logback.xml` ファイルに TCP アペンダーを構成します。この構成では、API キーは環境変数 `DD_API_KEY` から取得されます。あるいは、コンフィギュレーションファイルに直接 API キーを挿入することもできます。
 
-    {{< site-region region="us,us3,us5" >}}
+    {{< site-region region="us,us3,us5,ap1" >}}
 
   ```xml
   <configuration>
@@ -441,7 +443,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
   サポートされていません。
     {{< /site-region >}}
 
-   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][10]を参照してください。
+   **注:** XML コンフィギュレーションで空白が削除されるため、`%mdc{keyThatDoesNotExist}` が追加されます。プレフィックスパラメータの詳細については、[Logback ドキュメント][12]を参照してください。
 
 2. Logstash エンコーダの依存関係を `pom.xml` ファイルに追加します。
 
@@ -464,7 +466,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 ### キー値パーサーの使用
 
-[キー値パーサー][11]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
+[キー値パーサー][13]は、ログイベント内で認識された `<KEY>=<VALUE>` パターンを抽出します。
 
 Java のログイベントを補完するには、コードでメッセージを書き直し、`<キー>=<値>` のシーケンスを挿入します。
 
@@ -529,6 +531,8 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [6]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
-[9]: https://github.com/logstash/logstash-logback-encoder
-[10]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[11]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[9]: /ja/logs/log_configuration/parsing/?tab=matchers
+[10]: /ja/logs/explorer/#overview
+[11]: https://github.com/logstash/logstash-logback-encoder
+[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[13]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt

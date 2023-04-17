@@ -8,6 +8,8 @@ further_reading:
 - link: "/developers/integrations/new_check_howto/"
   tag: "Documentation"
   text: "Create a new Integration"
+algolia:
+  tags: ['custom agent check']
 ---
 
 ## Overview

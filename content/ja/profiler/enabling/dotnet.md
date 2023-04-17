@@ -359,7 +359,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 | `DD_TRACE_AGENT_PORT`      | 文字列        | プロファイルが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルトは `8126` です。  |
 | `DD_TRACE_AGENT_URL`       | 文字列        | プロファイルが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。デフォルトは `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` です。  |
 | `DD_TRACE_DEBUG`           | Boolean        | デバッグログを有効または無効にします (トラブルシューティングの調査時に役立ちます)。有効な値は `true` または `false` です。デフォルトは `false` です。  |
-| `DD_PROFILING_LOG_DIR`     | 文字列        | .NET Profiler のログを保存するディレクトリを設定します。デフォルトは `%ProgramData%\Datadog-APM\logs\` です。  |
+| `DD_PROFILING_LOG_DIR`     | 文字列        | .NET Profiler のログを保存するディレクトリを設定します。デフォルトは `%ProgramData%\Datadog .NET Tracer\logs\` です。(v2.24 以前は、デフォルトのディレクトリは `%ProgramData%\Datadog-APM\logs\` でした)  |
 | `DD_PROFILING_ENABLED`     | Boolean        | `true` に設定すると、.NET Profiler が有効になります。デフォルトは `false` です。  |
 | `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | `false` に設定すると、Wall time プロファイリングが無効になります。デフォルトは `true` です。  |
 | `DD_PROFILING_CPU_ENABLED` | Boolean        | `false` に設定すると、CPU プロファイリングが無効になります。デフォルトは `true` です。  |

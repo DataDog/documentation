@@ -10,7 +10,7 @@ further_reading:
 - link: profiler/search_profiles
   tag: ドキュメント
   text: 使用可能なプロファイルタイプの詳細
-- link: profiler/profiler_troubleshooting
+- link: profiler/profiler_troubleshooting/go
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
 kind: ドキュメント
@@ -106,7 +106,7 @@ CPU プロファイルに C 関数の詳細な呼び出し情報を追加する�
 1. パッケージをダウンロードします。
 
     ```shell
-   go get github.com/ianlancetaylor/cgosymbolizer@latest
+    go get github.com/ianlancetaylor/cgosymbolizer@latest
     ```
 
 2. プログラムの任意の場所に、以下のインポートを追加します。

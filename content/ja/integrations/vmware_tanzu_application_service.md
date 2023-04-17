@@ -62,7 +62,7 @@ Datadog Trace Agent (APM) はデフォルトで有効になっています。特
 
 {{% /site-region %}}
 
-{{% site-region region="us,us5,eu,gov" %}}
+{{% site-region region="us,us5,eu,gov,ap1" %}}
 
 ##### ログ収集の有効化
 

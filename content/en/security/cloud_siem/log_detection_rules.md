@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-To create a new log detection rule in Datadog, hover over **Security**, select **Detection Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a log detection rule in Datadog, navigate to the [**Detection Rules** page][6] and click **New Rule**.
 
 ## Rule Type
 
@@ -75,9 +75,11 @@ Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
-#### Advanced options
+## Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 #### Joining queries
 
@@ -118,9 +120,11 @@ For example, create a query for successful user authentication and set **Detect 
 
 You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
-#### Advanced options
+## Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when** a value is met, or **Never trigger a signal** when a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under `Never Trigger A Signal`.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -159,10 +163,11 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
-#### Advanced options
+## Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
 
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
@@ -190,11 +195,11 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
 
 Click **Add Case** to add additional cases.
 
@@ -208,7 +213,7 @@ Click **Add Case** to add additional cases.
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Forget value
 
@@ -226,7 +231,7 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
@@ -244,11 +249,11 @@ The impossible travel detection method does not require setting a rule case.
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -268,7 +273,11 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ## Say what's happening
 
-{{% cloud-siem-rule-say-whats-happening %}}
+{{% security-rule-say-whats-happening %}}
+
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
+
+**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
 ## Rule deprecation
 
@@ -290,3 +299,4 @@ The rule deprecation process is as follows:
 [3]: /security/default_rules/#cat-cloud-siem-log-detection
 [4]: /security/detection_rules/#rule-and-generated-signal-options
 [5]: https://app.datadoghq.com/security/configuration/siem/rules/view/nkq-b6q-h8c?query=type%3A%28log_detection%20OR%20signal_correlation%29%20guardduty&product=siem
+[6]: https://app.datadoghq.com/security/configuration/siem/rules

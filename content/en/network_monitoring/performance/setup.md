@@ -56,7 +56,7 @@ Datadog Network Performance Monitoring does not support macOS platforms.
 
 ### Containers
 
-NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
+NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
 ### Network routing tools
 
@@ -132,7 +132,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
-{{< site-region region="us,us3,us5,eu" >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 
 6. Optionally, enable additional cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
       * Install the [Azure integration][1] for visibility into Azure load balancers.
@@ -362,22 +362,21 @@ If you already have the [Agent running with a manifest][4]:
 [4]: /agent/kubernetes/
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
 To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
   namespace: placeholder
 spec:
-  # (...)
   features:
-    networkMonitoring:
+    npm:
       enabled: true
 ```
 
@@ -420,9 +419,9 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
-       DD_PROCESS_AGENT_ENABLED: 'true'
-       DD_API_KEY: '<DATADOG_API_KEY>'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+       DD_PROCESS_AGENT_ENABLED=true
+       DD_API_KEY=<DATADOG_API_KEY>
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - /proc/:/host/proc/:ro

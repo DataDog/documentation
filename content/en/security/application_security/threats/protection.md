@@ -23,15 +23,7 @@ To leveraging protection capabilities for your service:
 - [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable ASM][1].
 - [Enable Remote Configuration][2].
-- Update your tracing library to the appropriate minimum version needed to turn on protection and the supported capabilities:
-
-  |                        | Java      | .NET      | NodeJS    | Go        | Python    | PHP       |
-  | ---------------------- | --------- | --------- | --------- | --------- | --------- | --------- |
-  | Minumum tracer version | 1.9.0     | 2.26.0    | 3.15.0    | 1.48.0    | 1.10.0     | 0.86.0    |
-  | IP blocking support    | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-  | User blocking support  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-  | Suspicious requests blocking (in-app WAF) |  {{< X >}} |  {{< X >}} |       |       | {{< X >}} | {{< X >}} |
-
+- Update your tracing library to at least the minimum version needed to turn on protection. For details, see the ASM capabilities support section of[Compatibility][12] for your service's language.
 - If you plan to use authenticated user blocking, [add user information to traces][4].
 
 ## Blocking IPs and users
@@ -45,7 +37,7 @@ From there, all ASM-protected services block incoming requests performed by the 
 
 ## Denylist
 
-Attackers’ IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7].
+Attackers' IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7].
 
 ## Passlist
 
@@ -97,3 +89,4 @@ View blocked suspicious requests in the [Trace Explorer][11] by filtering on the
 [9]: https://app.datadoghq.com/security/appsec/in-app-waf
 [10]: /security/application_security/threats/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
+[12]: /security/application_security/enabling/compatibility/

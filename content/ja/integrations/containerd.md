@@ -20,6 +20,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
 display_on_public_website: true
@@ -41,9 +42,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Containers
   configuration: README.md#Setup
   description: Containerd のすべてのメトリクスを Datadog で追跡
   media: []
@@ -60,7 +62,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Containerd は [Datadog Agent][1] の中核となるチェックです。Containerd は、`datadog.yaml` と `containerd.d/conf.yaml` の両方で構成する必要があります。
 

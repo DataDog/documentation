@@ -13,7 +13,7 @@ assets:
       prefix: go_expvar.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: Go-Expvar
+    source_type_name: Go Expvar
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -21,7 +21,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - languages
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md
 display_on_public_website: true
@@ -48,7 +47,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::言語
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Go サービスから expvar で計測されたメトリクスとメモリ統計を収集
   media: []
@@ -69,7 +67,7 @@ Go サービスのメモリ使用量を追跡し、Go の expvar パッケージ
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Go Expvar チェックは Agent にパッケージ化されているため、メトリクスを収集するには、Go サービスを実行している場所に [Agent をインストール][3]します。
 
