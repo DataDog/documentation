@@ -46,6 +46,7 @@ documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-
 
 # Mobile SDK
 content/en/real_user_monitoring/android/                       @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/roku/                          @Datadog/rum-mobile @DataDog/documentation
 
 # Browser SDK
 content/en/real_user_monitoring/browser/                       @Datadog/rum-browser @DataDog/documentation
