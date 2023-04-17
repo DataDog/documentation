@@ -3,25 +3,25 @@
     {
       "id": "yq3-qs9-b8k",
       "config": {
-        "startUrl": " https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/account_management/"
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/account_management/"
       }
     },
     {
       "id": "4rx-amr-pnv",
       "config": {
-        "startUrl": " https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/infrastructure/"
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/infrastructure/"
       }
     },
     {
       "id": "5zm-7b4-ifw",
       "config": {
-        "startUrl": " https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/?q=mesos"
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/?q=mesos"
       }
     },
     {
       "id": "hz2-zgi-43d",
       "config": {
-        "startUrl": " https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/logs/log_collection/"
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/logs/log_collection/"
       }
     }
   ]
