@@ -129,3 +129,62 @@ allowedRegions:
     value: gov
     weight: 30
     domain: ddog-gov.com
+
+
+#  taxonomy
+core_product:
+  value_required: false
+  possible_values:
+    - name: alerts
+    - name: apm
+    - name: appsec
+      requires_all_keyvals:
+        - "core_product:security"
+    - name: ci-cd
+    - name: cloud siem
+      requires_all_keyvals:
+        - "core_product:security"
+    - name: code profiling
+    - name: continuous testing
+      requires_all_keyvals:
+        - "core_product:synthetic monitoring"
+        - "core_product:digital experience monitoring"
+        - "specific_interest:testing"
+    - name: csm
+      requires_all_keyvals:
+        - "core_product:security"
+    - name: cspm
+      requires_all_keyvals:
+        - "specific_interest:compliance"
+        - "core_product:security"
+    - name: cwpp
+      requires_all_keyvals:
+        - "core_product:security"
+    - name: dashboards
+    - name: database monitoring
+    - name: datadog agent
+    - name: datadog api
+    - name: datadog marketplace
+    - name: datadog mobile app
+    - name: digital experience monitoring
+      requires_one_keyval:
+        - "core_product:real user monitoring"
+        - "core_product:synthetic monitoring"
+    - name: real user monitoring
+      requires_all_keyvals:
+        - "core_product:digital experience monitoring"
+    - name: synthetic monitoring
+      requires_all_keyvals:
+        - "core_product:digital experience monitoring"
+    - name: error tracking
+    - name: incident management
+    - name: infrastructure monitoring
+    - name: log management
+    - name: network device monitoring
+    - name: network performance monitoring
+    - name: observability pipelines
+    - name: security
+    - name: serverless monitoring
+    - name: service catalog
+    - name: slos
+    - name: watchdog

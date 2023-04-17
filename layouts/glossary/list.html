@@ -2,49 +2,59 @@
     {{ $headless := .Site.GetPage "/glossary/terms" }}
     {{ $headless_term_pages := $headless.Resources.ByType "page" }}
     {{ $letters := slice }}
+    {{ $products := slice }}
 
     <div class="glossary-main">
         <h1 class="pb-0">{{ .Title }}</h1>
         <div class="row">
+            <!-- Technical terms section -->
             <div class="col-10 col-md-12 order-md-1 mt-5">
                 {{ .Content }}
                 {{ range $headless_term_pages }}
-                    {{ $first_char := substr .Title 0 1 | upper }}
-                    {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+                        {{ $first_char := substr .Title 0 1 | upper }}
+                        {{ $curr_letter := $.Scratch.Get "curr_letter" }}
 
-                    {{ if ne $first_char $curr_letter }}
-                        {{ $.Scratch.Set "curr_letter" $first_char }}
-                        {{ $letters = $letters | append $first_char }}
-                        <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
-                    {{ end }}
+                        {{ if ne $first_char $curr_letter }}
+                            {{ $.Scratch.Set "curr_letter" $first_char }}
+                            {{ $letters = $letters | append $first_char }}
+                            <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
+                        {{ end }}
 
-                    <h4 id="{{ anchorize .Params.Title }}" class="font-24-28">
-                        {{ .Params.Title }}
-                    </h4>
+                    <div class="glossary-term-container" data-core-products='{{ (delimit (.Params.core_product | default "") ",") }}'>
+                        <!-- Build $products slice for filtering section -->
+                        {{ with .Params.core_product }}
+                            {{ $products = union $products . }}
+                        {{ end }}
+                            
+                        <h4 id="{{ anchorize .Params.Title }}" class="glossary-term font-24-28">
+                            {{ .Params.Title }}
+                        </h4>
 
-                    {{ with .Params.related_terms }}
-                        <p class="fst-italic mb-0">
-                            {{ $len := len . }}
+                        {{ with .Params.related_terms }}
+                            <p class="fst-italic mb-0">
+                                {{ $len := len . }}
 
-                            Related terms:
-                            {{ range $index, $related_term := . }}
-                                <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
-                                {{ if ne $index (sub $len 1) }}, {{ end }}
-                            {{ end }}
-                        </p>
-                    {{ end }}
+                                Related terms:
+                                {{ range $index, $related_term := . }}
+                                    <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
+                                    {{ if ne $index (sub $len 1) }}, {{ end }}
+                                {{ end }}
+                            </p>
+                        {{ end }}
 
-                    {{ with .Params.synonyms }}
-                        <p class="fst-italic">
-                            Synonyms: {{ delimit . ", " }}
-                        </p>
-                    {{ end }}
+                        {{ with .Params.synonyms }}
+                            <p class="fst-italic">
+                                Synonyms: {{ delimit . ", " }}
+                            </p>
+                        {{ end }}
 
-                    <p>{{ .Content | safeHTML }}</p>
+                        {{ .Content | safeHTML }}
+                    </div>
                 {{ end }}
             </div>
 
             <!-- ID is scrollspy target -->
+            <!-- keep glossary-nav element here. $letters slice needs to be formed before use -->
             <nav id="glossary-nav">
                 <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                     {{ range $letters }}
@@ -53,6 +63,13 @@
                         </li>
                     {{ end }}
                 </ul>
+                <!-- Filtering section -->
+                <div class="filters-glossary border border-primary">
+                    <a href="#filter-{{ .Params.filter_all | anchorize }}" class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ .Params.filter_all | anchorize }}">{{.Params.filter_all | upper}}</a> 
+                    {{ range $products }}
+                        <a href="#filter-{{ . | anchorize }}" class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ . | anchorize }}">{{ . | upper }}</a>
+                    {{ end }}
+                </div>
             </nav>
         </div>
     </div>
