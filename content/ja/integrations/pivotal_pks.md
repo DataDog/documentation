@@ -16,8 +16,10 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
-- オーケストレーション
+- kubernetes
 - ログの収集
+- ネットワーク
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md
 display_on_public_website: true
@@ -39,11 +41,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Log Collection
+  - Category::Network
+  - Category::Orchestration
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::Containers
-  - Category::Orchestration
-  - Category::Log Collection
   configuration: README.md#Setup
   description: Pivotal のエンタープライズレベル Kubernetes 製品
   media: []

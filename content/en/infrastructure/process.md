@@ -24,7 +24,7 @@ further_reading:
 
 ## Introduction
 
-Datadog’s Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
 
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level
@@ -343,7 +343,7 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 ### APM
 
-In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
+In [APM Traces][10], you can click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
 
 ### Network Performance Monitoring
 

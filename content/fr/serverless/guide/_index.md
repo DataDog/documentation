@@ -3,6 +3,11 @@ disable_toc: true
 kind: guide
 private: true
 title: Guides d'utilisation de la surveillance sans serveur
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Guides d'utilisation de la surveillance sans serveur
 ---
 
 ## Surveiller vos applications sans serveur

@@ -8,6 +8,8 @@ further_reading:
 - link: "/account_management/plan_and_usage/"
   tag: "Documentation"
   text: "Plan and Usage Settings"
+algolia:
+  tags: ['usage attribution', 'cost attribution']
 ---
 
 ## Overview

@@ -32,6 +32,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
     - Option A: [Configure the layers][2] for your Lambda function using the ARN in the following format.
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
       ```
       # For regular regions
       arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
@@ -39,6 +40,17 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
       # For us-gov regions
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
       ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+      ```
+      # For regular regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
+
+      # For us-gov regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
+      ```
+{{< /site-region >}}
 
       Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
@@ -51,7 +63,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
       `ddtrace` contains native extensions that must be compiled for Amazon Linux to work with AWS Lambda. Datadog therefore recommends that you build and deploy your Lambda as a container image. If your function cannot be deployed as a container image and you would like to use Datadog APM, Datadog recommends installing the Lambda Library as a layer instead of as a gem.
 
-      Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function’s Dockerfile to ensure that the native extensions can be successfully compiled.
+      Install `gcc`, `gmp-devel`, and `make` prior to running `bundle install` in your function's Dockerfile to ensure that the native extensions can be successfully compiled.
 
       ```dockerfile
       FROM <base image>
@@ -83,7 +95,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
 3. Subscribe the Datadog Forwarder to log groups
 
-    Subscribe the Datadog Forwarder Lambda function to each of your function’s log groups to send metrics, traces and logs to Datadog.
+    Subscribe the Datadog Forwarder Lambda function to each of your function's log groups to send metrics, traces and logs to Datadog.
 
     1. [Install the Datadog Forwarder if you haven't][1].
     2. [Subscribe the Datadog Forwarder to your function's log groups][3].

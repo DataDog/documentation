@@ -1,20 +1,21 @@
 ---
-title: インフラストラクチャーリスト
-kind: documentation
 aliases:
-  - /ja/hostnames
-  - /ja/graphing/infrastructure/list/
+- /ja/hostnames
+- /ja/graphing/infrastructure/list/
 further_reading:
-  - link: /infrastructure/hostmap/
-    tag: ドキュメント
-    text: Host Map
-  - link: /infrastructure/livecontainers/
-    tag: ドキュメント
-    text: コンテナマップ
-  - link: /infrastructure/process/
-    tag: ドキュメント
-    text: ライブプロセスモニタリング
+- link: /infrastructure/hostmap/
+  tag: ドキュメント
+  text: Host Map
+- link: /infrastructure/livecontainers/
+  tag: ドキュメント
+  text: コンテナマップ
+- link: /infrastructure/process/
+  tag: ドキュメント
+  text: ライブプロセスモニタリング
+kind: documentation
+title: インフラストラクチャーリスト
 ---
+
 ## 概要
 
 インフラストラクチャーリストには、Datadog によって監視されているすべてのホストが、過去 2 時間 (デフォルト) のアクティビティとともに最大 1 週間分表示されます。ホストを検索するか、タグでグループ化します。
@@ -33,7 +34,7 @@ Instance ID
 : ホスト名[エイリアス](#aliases)。
 
 Status
-: 予想されるメトリクスが受信されると `UP` と表示され、メトリクスが受信されないと `???` と表示されます。
+: 予想されるメトリクスが受信されると `ACTIVE` と表示され、メトリクスが受信されないと `INACTIVE` と表示されます。
 
 CPU
 : 使用された CPU の割合（アイドル以外のすべて）。
@@ -64,32 +65,58 @@ Datadog Agent は、複数のソースから潜在的なホスト名を収集し
 
 ### 検査
 
-任意のホストをクリックして、[エイリアス](#aliases)、[タグ][2]、[メトリクス][3]、[コンテナ][4]、[ログ][5] (有効化されている場合) などの詳細を表示します:
+ホストをクリックすると、以下の詳細が表示されます。
+- [エイリアス](#aliases)
+- [タグ][2]
+- [メトリクス][3]
+- [コンテナ][4]
+- [ログ][5] (有効な場合)
+- [エージェント構成](#agent-configuration) (有効な場合)
 
-{{< img src="infrastructure/index/Infra-List.png" alt="インフラストラクチャーリストのホストの詳細" style="width:90%;">}}
+{{< img src="infrastructure/index/infra-list1.png" alt="インフラストラクチャーリストのホストの詳細" style="width:100%;">}}
 
 #### エイリアス
 
 Datadog は、1 つのホストに一意に識別可能な名前が複数ある場合、ホスト名のエイリアスを作成します。Agent によって収集されたこれらの名前は、選択された正規名のエイリアスとして追加されます。あたとえば、EC2 で実行している単一のホストは、インスタンス ID (`i-abcd1234`)、ホストの IP アドレスに基づいて EC2 が提供する汎用ホスト名 (`ip-192-0-0-1`)、および内部 DNS サーバーまたは config で管理されるホストファイルが提供するわかりやすいホスト名 (`myhost.mydomain`) を持つ可能性があります。
 
-{{< img src="infrastructure/index/Infra-List-Alias.png" alt="ホストエイリアス" style="width:90%;">}}
+{{< img src="infrastructure/index/infra-list-alias1.png" alt="ホストエイリアス" style="width:100%;">}}
+
+#### Agent の構成
+
+{{< callout url="#" btn_hidden="true" >}}
+  Agent 構成ビューは公開ベータ版で、Agent バージョン 7.39/6.39 以降で利用可能です。
+{{< /callout >}}
+
+Agent は、ホスト詳細パネルの `Agent Configuration` セクションに表示されるように、Datadog に自身の構成を送信することができます。
+
+Agent 構成は、機密情報が取り除かれ、コンフィギュレーションファイルや環境変数を使って設定した構成のみが含まれます。構成の変更は 10 分ごとに更新されます。
+
+この機能は、デフォルトでは無効になっています。有効にするには、以下の設定を[コンフィギュレーションファイル][6]に追加してください。
+
+```yaml
+inventories_configuration_enabled: true
+```
+
+あるいは、`DD_INVENTORIES_CONFIGURATION_ENABLED=true` 環境変数を使って、この機能を有効にすることができます。
+
+{{< img src="infrastructure/index/infra-list-config3.png" alt="Agent 構成ビュー" style="width:100%;">}}
 
 ### エクスポート
 
 Datadog にレポートするホストの JSON 形式のリストについては、次のいずれかを使用します。
 
 * インフラストラクチャーリストの上部にある **JSON API パーマリンク**。
-* [検索ホスト API エンドポイント][6] - 例については、[開発者ガイド][7]を参照してください。
+* [検索ホスト API エンドポイント][7] - 例については、[開発者ガイド][8]を参照してください。
 
 #### Agent バージョン
 
-Agent のバージョンを監査して、最新バージョンを実行していることを確認することも役立つ場合があります。この場合、[get_host_agent_list script][8] を使用します。これにより、JSON パーマリンクを利用して、現在実行中の Agent がバージョン番号とともに出力されます。また、JSON 出力を CSV ファイルに変換するための `json_to_csv` スクリプトもあります。
+Agent のバージョンを監査して、最新バージョンを実行していることを確認することも役立つ場合があります。この場合、[get_host_agent_list script][9] を使用します。これにより、JSON パーマリンクを利用して、現在実行中の Agent がバージョン番号とともに出力されます。また、JSON 出力を CSV ファイルに変換するための `json_to_csv` スクリプトもあります。
 
 #### Agent なし
 
-JSON エクスポートのもう 1 つのユースケースは、Agent がインストールされていない AWS EC2 インスタンスのリストを取得することです。これらのインスタンスは、Datadog AWS インテグレーションタイルで AWS アカウントを設定することにより、インフラストラクチャーリストに表示されます。この[サンプルスクリプト][9]を参照してください。
+JSON エクスポートのもう 1 つのユースケースは、Agent がインストールされていない AWS EC2 インスタンスのリストを取得することです。これらのインスタンスは、Datadog AWS インテグレーションタイルで AWS アカウントを設定することにより、インフラストラクチャーリストに表示されます。この[サンプルスクリプト][10]を参照してください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -98,7 +125,8 @@ JSON エクスポートのもう 1 つのユースケースは、Agent がイン
 [3]: /ja/metrics/
 [4]: /ja/infrastructure/livecontainers/?tab=helm#overview
 [5]: /ja/logs/
-[6]: /ja/api/v1/hosts/#get-the-total-number-of-active-hosts
-[7]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
-[8]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
-[9]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38
+[6]: /ja/agent/guide/agent-configuration-files/
+[7]: /ja/api/v1/hosts/#get-the-total-number-of-active-hosts
+[8]: /ja/developers/guide/query-the-infrastructure-list-via-the-api/
+[9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion
+[10]: https://gist.github.com/Martiflex/2803a28ec562fc9a15d404a539f85d38

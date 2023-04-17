@@ -32,7 +32,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gunicorn/README.md
@@ -55,10 +54,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::Web
-  - Category::ログの収集
   configuration: README.md#Setup
   description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
   media: []
@@ -84,7 +82,7 @@ Gunicorn 自身は、これ以外にも以下のようなメトリクスを DogS
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog Agent の Gunicorn チェックは [Datadog Agent][2] パッケージに含まれています。Gunicorn サーバーに追加でインストールする必要はありません。
 

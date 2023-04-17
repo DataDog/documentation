@@ -11,9 +11,9 @@ further_reading:
   text: "RUM Explorer"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-Feature Flag Tracking in RUM is in private beta. To request access, contact Support at support@datadoghq.com.
-{{< /callout >}}
+<div class="alert alert-warning">
+    Feature Flag Tracking is in beta.
+</div>
 
 ## Overview
 
@@ -44,12 +44,12 @@ Feature flags will show up in the context of events where they are evaluated, me
 
 Once you have set up your feature flag data collection, navigate to the [**Feature Flags**][4] tab within RUM or click the [**Feature Flags**][4] tab under **UX Monitoring**
 
-From this view, you can investigate any questions you have about your feature flag’s health and usage.
+From this view, you can investigate any questions you have about your feature flag's health and usage.
 - Monitor the number of users experiencing each variant and see summary statistics of your feature flag
 - Check the status of your feature flag to see if there are any that can be removed for code clean up
 - View which pages your feature flags are being evaluated on
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="View a list of your feature flags to investigate any questions you have about your feature flag’s health and usage" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="View a list of your feature flags to investigate any questions you have about your feature flag's health and usage" style="width:90%;" >}}
 
 
 ### Search and filter

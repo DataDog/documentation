@@ -34,8 +34,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - configuration & deployment
-- autodiscovery
 - log collection
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: teamcity
 integration_id: teamcity
 integration_title: TeamCity
-integration_version: 2.2.0
+integration_version: 3.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -53,17 +53,17 @@ public_title: TeamCity
 short_description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::構成 & デプロイ
-  - Category::オートディスカバリー
   - Category::ログの収集
+  - Category::通知
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
   media: []
@@ -293,7 +293,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 - [TeamCity と Datadog を使用して、コード変更がパフォーマンスに与える影響を追跡する][13]
 

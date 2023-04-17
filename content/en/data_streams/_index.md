@@ -11,10 +11,10 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
+The features discussed on this page are in public beta.
 </div>
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,ap1" %}}
 <div class="alert alert-warning">
     Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

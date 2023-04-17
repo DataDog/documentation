@@ -28,7 +28,7 @@ further_reading:
 ## Compatibility requirements
 The latest Python Tracer supports CPython versions 2.7 and 3.5-3.10.
 
-For a full list of Datadog’s Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
+For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -103,7 +103,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
      dogstatsd_url="unix:///var/run/datadog/dsd.socket",
    )
    ```
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -134,7 +134,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Instrument Your Application
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/library_injection">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries Using Admission Controller</a> for instructions.</div>
 
 Once the agent is installed, to begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
 
