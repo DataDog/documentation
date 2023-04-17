@@ -22,7 +22,9 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 ### Configuration
 
 1. Select an SLO from the dropdown menu.
-2. You can filter your query with tags. For Metrics-based SLOs, leverage [template variables][100] to dynamically scope your results.
+
+2. **For Metrics-based SLOs**: You can filter your query with tags. Leverage [template variables][2] to dynamically scope your results. You can use template variables in the filter by field to scope your results. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
+
 3. Select up to three different time windows.
 
 ### Options
@@ -57,9 +59,9 @@ Select whether to show or hide remaining error budget by toggling the `Show erro
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][3] for additional reference.
 
-The dedicated [widget JSON schema definition][3] for the SLO Summary widget is:
+The dedicated [widget JSON schema definition][4] for the SLO Summary widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -68,6 +70,6 @@ The dedicated [widget JSON schema definition][3] for the SLO Summary widget is:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/service_level_objectives/
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
-[100]: /dashboards/template_variables/
+[2]: /dashboards/template_variables/
+[3]: /api/latest/dashboards/
+[4]: /dashboards/graphing_json/widget_json/
