@@ -229,22 +229,9 @@ With split graph, you can see your metric visualizations broken out by tags.
 
 {{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the widget fullscreen" style="width:100%;" >}}
 
-1. Access this feature through the following ways:
-    - From the Dashboard, click on the widget ellipsis menu and select the **Split graph** option.
-    - Open up an existing metric widget and from the full-screen graph, click the **Split Graph** tab. 
-    - In the Metrics Explorer, click on the **Split Graph** button.
+1. Access this feature through the **Split Graph** tab when viewing graphs.
 1. You can change the *sort by* metric to see the relationship between the data you are graphing and other metrics. 
 1. Limit the number of graphs that are displayed by changing *limit to* value.
-1. To change the visualization type, go to the graph editor and select your visualization. 
-    - Timeseries
-    - Query Value
-    - Top List
-    - Table
-    - Tree Map
-    - Pie Chart
-    - Geomap
-    - Scatter Plot
-    - Change
 
 ## Further Reading
 
