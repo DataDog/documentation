@@ -225,13 +225,13 @@ With the event overlay, you can quickly see how actions within the organization 
 
 ### Split graph
 
-With split graph, you can see your metric visualizations broken out by tags. 
+With split graphs, you can see your metric visualizations broken out by tags. 
 
-{{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the widget fullscreen" style="width:100%;" >}}
+{{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the fullscreen widget" style="width:100%;" >}}
 
 1. Access this feature through the **Split Graph** tab when viewing graphs.
 1. You can change the *sort by* metric to see the relationship between the data you are graphing and other metrics. 
-1. Limit the number of graphs that are displayed by changing *limit to* value.
+1. Limit the number of graphs that are displayed by changing the *limit to* value.
 
 ## Further Reading
 
