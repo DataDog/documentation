@@ -109,7 +109,7 @@ transforms:
 
 ### Solution 3: Define a blocklist array of tags to drop
 
-In the case where you know which tags you want to drop, you can use the same steps as in Solution 2, but instead, negate the result of the `includes` call by prefixing it with `!`:
+In the case where you know which tags you want to drop, you can use the same steps as in Solution 2, but negate the result of the `includes` call by prefixing it with `!`:
 
 ```yaml
 transforms:
