@@ -37,13 +37,13 @@ You can sort resources in the Resource Catalog list by cloud platform, resource 
 
 To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left panel. For example, you may find it helpful to filter by your team name, or to scope the findings to particular environments and clusters.
 
-If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, and then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
+If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
 
 ### Map view
 
 The Resource Catalog map provides a visualization of the resources in your organization. To find a particular resource, search by its name. You may find it helpful to group resources by region, and to apply filters such as cloud provider and resource type, to see only matching resources. You can also use the `Fill by` selector to fill the map elements by Findings or Threats.
 
-If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, and then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
+If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
 
 #### Findings
 
