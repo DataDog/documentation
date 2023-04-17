@@ -97,11 +97,11 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 The Datadog Google Cloud integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection for CSPM, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf.
 
-**Note**: [Google Cloud billing][30], the [Cloud Monitoring API][31], the [Compute Engine API][32], and the [Cloud Asset API][33] must all be enabled for the project(s) you wish to monitor.
+**Note**: [Google Cloud billing][4], the [Cloud Monitoring API][5], the [Compute Engine API][6], and the [Cloud Asset API][7] must all be enabled for the projects you wish to monitor.
 
 #### Google Cloud
 
-1. Navigate to the [Google Cloud credentials page][34] for the Google Cloud project where you would like to set up the Datadog integration.
+1. Navigate to the [Google Cloud credentials page][8] for the Google Cloud project where you would like to set up the Datadog integration.
 2. Click **Create credentials** and select **Service account**.
 3. Give the service account a unique name and click **Create and Continue**.
 4. Add the following roles to the service account, then click **Continue**:
@@ -114,53 +114,39 @@ The Datadog Google Cloud integration uses service accounts to create an API conn
 
 #### Datadog
 
-1. In Datadog, navigate to the [Datadog Google Cloud Integration tile][35].
+1. In Datadog, navigate to the [Datadog Google Cloud Integration tile][9].
 2. On the **Configuration** tab, locate the service account and select **Upload Private Key File** to integrate the project with Datadog.
-3. Upload the downloaded JSON file, then click **Update Configuration**.
+3. Upload the JSON file, then click **Update Configuration**.
 4. To monitor multiple projects, use one of the following methods:
     - Repeat the process above to use multiple service accounts.
     - Use the same service account by updating the `project_id` in the downloaded JSON file. Then, upload the file to Datadog as described in steps 1-3.
-
-##### Configuration
-
-Optionally, you can limit the GCE instances that are pulled into Datadog by entering tags in the **Limit Metric Collection** textbox under a given project’s dropdown menu. Only hosts that match one of the defined tags are imported into Datadog. You can use wildcards (`?` for single character, `*` for multi-character) to match many hosts, or `!` to exclude certain hosts. This example includes all `c1*` sized instances, but excludes staging hosts:
-
-```text
-datadog:monitored,env:production,!env:staging,instance-type:c1.*
-```
-
-See Google's documentation on [Creating and managing labels][36] for more details.
 
 ### Enable CSPM for Google Cloud
 
 Use one of the following methods to enable CSPM for your Google Cloud projects:
 
-### Security Setup
+#### Security Setup
 
 1. Navigate to **Security** > **Setup**.
-2. Follow the [in-app instructions][3] to activate CSPM for your account.
-3. On the **Setup** > **Cloud Providers** tab, click the **[Google Cloud Platform][4]** tile.
+2. Follow the [in-app instructions][2] to activate CSPM for your account.
+3. On the **Setup** > **Cloud Providers** tab, click the **[Google Cloud Platform][3]** tile.
 4. Enable CSPM for your Google Cloud projects by turning on the **CSPM Enabled** toggle.
 
-**Note**: If you do not see any data on the CSPM overview page, you may not have set up your Google Cloud integration correctly. See the [Google Cloud metric collection][2] instructions for more information.
-
-### Google Cloud integration tile
+#### Google Cloud integration tile
 
 1. On the Google Cloud integration tile, select a Google Cloud project.
 2. Under **Enable resource collection for Cloud Security Posture Management**, select the **Resource collection** checkbox.
 3. Click **Update Configuration**.
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform
-[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#metric-collection
-[3]: https://app.datadoghq.com/security/configuration
-[4]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=google-cloud-platform
-[30]: https://support.google.com/cloud/answer/6293499?hl=en
-[31]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
-[32]: https://console.cloud.google.com/apis/library/compute.googleapis.com
-[33]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
-[34]: https://console.cloud.google.com/apis/credentials
-[35]: https://app.datadoghq.com/integrations/google-cloud-platform
-[36]: https://cloud.google.com/compute/docs/labeling-resources
+[2]: https://app.datadoghq.com/security/configuration
+[3]: https://app.datadoghq.com/security/configuration?sectionId=secureCloudEnvironment&secure-cloud-environment=google-cloud-platform
+[4]: https://support.google.com/cloud/answer/6293499?hl=en
+[5]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
+[6]: https://console.cloud.google.com/apis/library/compute.googleapis.com
+[7]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
+[8]: https://console.cloud.google.com/apis/credentials
+[9]: https://app.datadoghq.com/integrations/google-cloud-platform
 
 {{% /tab %}}
 
