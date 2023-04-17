@@ -26,7 +26,7 @@ const renderHits = (renderOptions, isFirstRender) => {
 
                 generatedElementsArray.push(element);
             }
-            console.log(generatedElementsArray)
+
             return generatedElementsArray;
         };
 
@@ -131,6 +131,7 @@ const renderHits = (renderOptions, isFirstRender) => {
         generateJoinedHits(apiHitsArray, 'API')
     ];
 
+    // Ensure API results render first if user performs a search from an API page.
     if (bodyClassContains('api')) {
         allJoinedListItemsHTML.pop()
         allJoinedListItemsHTML.unshift(generateJoinedHits(apiHitsArray, 'API'))
