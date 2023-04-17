@@ -85,7 +85,7 @@ transforms:
     inputs:
       - dd_agent.metrics
     source: |
-      # remove .tag_to_drop tag
+      # Remove  the `tag_to_drop` tag.
       del(.tags.tag_to_drop) 
 ```
 
