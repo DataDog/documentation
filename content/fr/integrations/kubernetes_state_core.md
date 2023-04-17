@@ -69,18 +69,18 @@ datadog:
 Pour activer le check `kubernetes_state_core`, le paramètre `spec.features.kubeStateMetricsCore.enabled` doit être défini sur `true` dans la ressource DatadogAgent :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <CLÉ_API_DATADOG>
-    appKey: <CLÉ_APPLICATION_DATADOG>
   features:
     kubeStateMetricsCore:
       enabled: true
-  # (...)
+  global:
+    credentials:
+      apiKey: <CLÉ_API_DATADOG>
+      appKey: <CLÉ_APPLICATION_DATADOG>
 ```
 
 Remarque : l'Operator Datadog 0.7.0 ou ultérieur est requis.

@@ -1,0 +1,41 @@
+{{- /* Creates an algolia json record for each individual section (split by h2 header) of the given page. */ -}}
+
+{{ $hugo_context := .context }}
+{{ $page := .page }}
+{{ $title := .title }}
+{{ $category := .category }}
+{{ $subcategory := .subcategory }}
+{{ $rank := .rank }}
+{{ $section_header := "" }}
+{{ $section_content := "" }}
+{{ $content_array := split $page.Content "<h2" }}
+
+{{ range $content_array }}
+    {{ if in . "h2" }}
+        {{ $context := print "%s" . | printf "%s%s" "<h2" }}
+        {{ $section_header = index (split (index (split $context "</h2>") 0) ">") 1 }}
+        {{ $section_content = $context | plainify | htmlUnescape | safeHTML | truncate 10000 }}
+
+        {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
+            {{ $full_url := print $page.Permalink "#" ($section_header | anchorize) }}
+            {{ $relpermalink := print $page.RelPermalink "#" ($section_header | anchorize) }}
+            {{ $object_id := md5 $full_url }}
+
+            {{
+                $hugo_context.Scratch.Add "algoliaindex" (
+                    dict "objectID" $object_id
+                    "title" $title
+                    "section_header" $section_header
+                    "content" $section_content
+                    "type" $page.Type
+                    "relpermalink" $relpermalink
+                    "full_url" $full_url
+                    "language" $page.Language.Lang
+                    "category" $category
+                    "subcategory" $subcategory
+                    "rank" $rank
+                )
+            }}
+        {{ end }}
+    {{ end }}
+{{ end }}

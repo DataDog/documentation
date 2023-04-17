@@ -36,6 +36,7 @@ author:
 categories:
 - data store
 - log collection
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
 display_on_public_website: true
@@ -53,16 +54,17 @@ public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
   media: []

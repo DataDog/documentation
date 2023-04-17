@@ -23,7 +23,8 @@ author:
   name: コミュニティ
   sales_email: info@dopensource.com
   support_email: tmoore@dopensource.com
-categories: []
+categories:
+- クラウド
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/filemage/README.md
 display_on_public_website: true
@@ -46,6 +47,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS

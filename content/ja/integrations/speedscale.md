@@ -21,8 +21,8 @@ author:
   sales_email: support@speedscale.com
   support_email: support@speedscale.com
 categories:
-- 自動化
 - コンテナ
+- kubernetes
 - orchestration
 - テスト
 dependencies:
@@ -42,18 +42,18 @@ public_title: Speedscale
 short_description: Speedscale のトラフィックリプレイ結果を Datadog に公開します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Automation
   - Category::Containers
+  - Category::Kubernetes
   - Category::Orchestration
   - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Speedscale のトラフィックリプレイ結果を Datadog に公開します。
   media: []

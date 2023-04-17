@@ -20,7 +20,7 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">Feature Flag Tracking</a> is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
+Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
 ## Overview
@@ -45,7 +45,7 @@ You can access performance metrics for your views in:
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.  
+- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
@@ -86,14 +86,22 @@ To account for modern web applications, loading time watches for network request
 
 - **Initial Load**: Loading Time is equal to _whichever is longer_:
 
-  - The difference between `navigationStart` and `loadEventEnd`.
-  - Or the difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
+  - The difference between `navigationStart` and `loadEventEnd`, or
+  - The difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 - **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 ### How page activity is calculated
 
-The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
+The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
+
+- `xhr` or `fetch` requests are in progress.
+- The browser emits performance resource timing entries (loading end of JS, CSS, etc.).
+- The browser emits DOM mutations.
+
+The page activity is considered to have ended when it hasn't had any activity for 100ms.
+
+**Note**: Only activity occurring after the SDK initialization is taken into account.
 
 **Caveats:**
 
@@ -105,7 +113,7 @@ The criteria of 100ms since last request or DOM mutation might not be an accurat
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
 ```javascript
-DD_RUM.init({
+window.DD_RUM.init({
     ...
     excludedActivityUrls: [
         // Exclude exact URLs
@@ -132,7 +140,7 @@ For example, you can add a timing when your hero image has appeared:
 ```html
 <html>
   <body>
-    <img onload="DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
+    <img onload="window.DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
   </body>
 </html>
 ```
@@ -143,7 +151,7 @@ Or when users first scroll:
 document.addEventListener("scroll", function handler() {
     //Remove the event listener so that it only triggers once
     document.removeEventListener("scroll", handler);
-    DD_RUM.addTiming('first_scroll');
+    window.DD_RUM.addTiming('first_scroll');
 });
 ```
 
@@ -161,8 +169,8 @@ document.addEventListener("scroll", function handler() {
     document.removeEventListener("scroll", handler);
 
     const timing = Date.now()
-    DD_RUM.onReady(function() {
-      DD_RUM.addTiming('first_scroll', timing);
+    window.DD_RUM.onReady(function() {
+      window.DD_RUM.addTiming('first_scroll', timing);
     });
 });
 

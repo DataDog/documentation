@@ -58,7 +58,7 @@ compile group: 'com.datadoghq', name: 'dd-trace-ot', version: "${dd-trace-java.v
 
 Configure your application using environment variables or system properties as discussed in the configuration section.
 
-If you’re not using autoinstrumentation, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(DDTracer.builder().build())` early on in your application startup (for example, main method).
+If you're not using autoinstrumentation, you must register a configured tracer with `GlobalTracer`. For this, call `GlobalTracer.register(DDTracer.builder().build())` early on in your application startup (for example, main method).
 
 ```java
 import datadog.opentracing.DDTracer;

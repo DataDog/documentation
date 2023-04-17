@@ -124,7 +124,7 @@ RUN apt-get update && apt-get install -y ca-certificates
    ```
    pack build --builder=gcr.io/buildpacks/builder \
    --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack:beta4 \
+   --buildpack datadog/serverless-buildpack:latest \
    gcr.io/YOUR_PROJECT/YOUR_APP_NAME
 
    ```

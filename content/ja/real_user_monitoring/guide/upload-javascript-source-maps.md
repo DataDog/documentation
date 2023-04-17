@@ -97,7 +97,7 @@ Parcel は、ビルドコマンドを実行すると、デフォルトでソー�
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov" >}}
+{{< site-region region="eu,us3,us5,gov,ap1" >}}
 1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
 2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
 3. 以下の 2 つの環境変数をエクスポートして、{{<region-param key="dd_site_name">}} サイトにファイルをアップロードするように CLI を構成します: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} と `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}

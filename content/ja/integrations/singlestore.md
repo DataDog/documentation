@@ -32,6 +32,7 @@ author:
 categories:
 - data store
 - ログの収集
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md
 display_on_public_website: true
@@ -49,16 +50,17 @@ public_title: SingleStore
 short_description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Data Store
   - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
   media: []
@@ -82,7 +84,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 SingleStore チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

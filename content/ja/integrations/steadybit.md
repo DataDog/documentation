@@ -21,8 +21,7 @@ author:
   sales_email: sales@steadybit.com
   support_email: support@steadybit.com
 categories:
-- AWS
-- クラウド
+- インシデント
 - テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/steadybit/README.md
@@ -46,13 +45,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Incidents
+  - Category::Testing
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::AWS
-  - Category::Cloud
-  - Category::Testing
   configuration: README.md#Setup
   description: カオスエンジニアリングでシステムの信頼性を即座に向上させる
   media:

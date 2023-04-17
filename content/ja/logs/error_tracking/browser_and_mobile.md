@@ -27,9 +27,8 @@ title: ブラウザとモバイルのエラーの追跡
 
 Datadog ブラウザ SDK をまだセットアップしていない場合は、[アプリ内セットアップ手順][1]に従うか、[ブラウザログの設定ドキュメント][2]をご覧ください。
 
-1. [ログブラウザ SDK][3] の最新バージョンをダウンロードします。
-2. [SDK の初期化][4]の際に、アプリケーションの `version`、`env`、`service` を構成します。
-3. NPM などで SDK を初期化します。
+1. Logs Browser SDK の最新版をダウンロードしてください。エラー追跡には、少なくとも `v4.36.0` が必要です。
+2. [SDK の初期化][3]の際に、アプリケーションの `version`、`env`、`service` を構成します。例えば、NPM で
 
    ```javascript
    import { datadogLogs } from '@datadog/browser-logs'
@@ -38,32 +37,28 @@ Datadog ブラウザ SDK をまだセットアップしていない場合は、[
      clientToken: '<DATADOG_CLIENT_TOKEN>',
      site: '<DATADOG_SITE>',
      service: '<MY_SERVICE>',
-     env: '<MY_ENV>'
+     env: '<MY_ENV>',
      forwardErrorsToLogs: true,
-     sampleRate: 100,
+     sessionSampleRate: 100,
    })
    ```
 
-4. キャッチされなかった例外をすべてキャッチして Datadog に送信するには、初期化付近に次のスニペットを追加する必要があります。
+3. キャッチした例外を自分でログに残すには、[オプションのエラーパラメーター][4]を使用することができます。
 
    ```javascript
-   window.onerror = function (message, source, lineno, colno, error) {
-       datadogLogs.logger.error(error?.message || '', {
-           error: { stack: error?.stack },
-       });
-   };
+   try {
+     throw new Error('wrong behavior');
+   } catch(err) {
+     datadogLogs.logger.error("an error occurred", {usr: {id: 123}}, err);
+   }
    ```
-5. キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
 
-   ```javascript
-   const e = new Error('an exception occurred');
-   datadogLogs.logger.error(e.message, {'error': {'stack': e.stack}});
-   ```
+**注**: エラー追跡は、`Error` のインスタンスであるエラーのみを考慮します。
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
 [2]: /ja/logs/log_collection/javascript/#setup
-[3]: https://github.com/DataDog/browser-sdk/tree/main/packages/logs
-[4]: /ja/logs/log_collection/javascript/#choose-the-right-installation-method
+[3]: /ja/logs/log_collection/javascript/#choose-the-right-installation-method
+[4]: /ja/logs/log_collection/javascript/#error-tracking
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -112,7 +107,7 @@ Datadog iOS SDK をまだセットアップしていない場合は、[アプリ
 {{% /tab %}}
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

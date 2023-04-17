@@ -27,7 +27,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
-- web
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/envoy/README.md
@@ -46,17 +45,16 @@ public_title: Envoy
 short_description: Envoy はオープンソースのエッジ/サービスプロキシを提供
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::クラウド
-  - Category::Web
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Envoy はオープンソースのエッジ/サービスプロキシを提供
   media: []
