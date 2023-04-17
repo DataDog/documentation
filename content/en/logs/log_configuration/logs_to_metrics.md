@@ -9,6 +9,8 @@ further_reading:
     - link: 'logs/log_configuration/processors'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
+algolia:
+  tags: ['log metrics', 'generating logs from metrics']
 ---
 
 ## Overview

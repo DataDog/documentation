@@ -7,7 +7,9 @@
     .region-select-container {
       display: flex;
       align-items: baseline;
-
+      @include media-breakpoint-down(sm) {
+        display: block;
+      }
       p {
         margin-right: 10px;
 
