@@ -7,12 +7,10 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- ネットワーク
-- 例外
 - メトリクス
-- アラート設定
-- 問題追跡
+- モバイル
+- ネットワーク
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md
 display_on_public_website: true
@@ -30,24 +28,22 @@ public_title: React Native
 short_description: Datadog RUM を使用した React Native アプリケーションの監視とメトリクス生成
 supported_os:
 - android
-- ios
 - linux
-- macos
 - windows
+- ios
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Android
-  - Supported OS::iOS
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
   - Category::Metrics
-  - Category::Alerting
-  - Category::Issue Tracking
+  - Category::Mobile
+  - Category::Network
+  - Category::Tracing
+  - Supported OS::Android
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::iOS
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog RUM を使用した React Native アプリケーションの監視とメトリクス生成
   media: []
@@ -66,7 +62,7 @@ Datadog [React Native インテグレーション][1]を利用することで、
 - アプリケーションの応答性向上、サービスレベルインジケータ (SLI) の設定、すぐに使えるダッシュボード、リアルタイムメトリクス、難読化されたクラッシュレポートによる問題の診断
 - 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
 
-ユーザーエクスペリエンスがビジネスに与える影響を、次のように関連付けます。
+ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。
 
 - ビジネス KPI を達成するために、デモグラフィック、バージョンリリース、または任意のカスタム属性による画面エンゲージメントなど、重要なモバイルユーザーエクスペリエンスデータを分析
 - すべてのユーザージャーニーを、ID、セルラーアクティビティ、リファーラル URL などのセッションイベントや属性のタイムラインと自動的に相関付け

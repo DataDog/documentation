@@ -30,7 +30,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - azure
+- iot
 - ログの収集
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
 display_on_public_website: true
@@ -48,16 +50,18 @@ public_title: Azure IoT Edge
 short_description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Azure
+  - Category::IOT
   - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
   media: []
@@ -80,7 +84,7 @@ Datadog-Azure IoT Edge インテグレーションを使用すると IoT Edge �
 
 以下の手順に従って、このチェックをデバイスホストで実行中の IoT Edge デバイスにインストール、構成します。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Azure IoT Edge チェックは [Datadog Agent][2] パッケージに含まれています。
 

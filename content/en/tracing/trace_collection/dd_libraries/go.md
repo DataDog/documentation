@@ -25,7 +25,7 @@ further_reading:
 
 ## Compatibility requirements
 
-The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog’s Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -65,7 +65,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
    DD_DOGSTATSD_PORT=8125    # The port to send Dogstatsd metrics to. Defaults to 8125.
    ```
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 

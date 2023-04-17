@@ -1,7 +1,6 @@
 ---
 title: Trigger a workflow
 kind: documentation
-is_beta: true
 disable_toc: false
 further_reading:
 - link: "/workflows/access/#service-accounts/"
@@ -17,10 +16,6 @@ further_reading:
   tag: "Documentation"
   text: "Find out more about Monitors"
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}}
 
 You can trigger a workflow manually or automatically.
 

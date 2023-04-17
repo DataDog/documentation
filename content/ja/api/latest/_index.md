@@ -11,6 +11,11 @@ further_reading:
   text: レート制限
 title: API リファレンス
 type: api
+cascade:
+    algolia:
+        rank: 10
+        category: API
+        subcategory: API リファレンス 
 ---
 
 {{< h2 >}}API リファレンス{{< /h2 >}}

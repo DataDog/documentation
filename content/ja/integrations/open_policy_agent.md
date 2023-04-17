@@ -24,10 +24,11 @@ author:
   sales_email: ara.pulido@datadoghq.com
   support_email: ara.pulido@datadoghq.com
 categories:
-- security
-- containers
+- コンプライアンス
 - 構成 & デプロイ
+- コンテナ
 - ログの収集
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md
 display_on_public_website: true
@@ -48,11 +49,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Category::Security
-  - Category::Containers
+  - カテゴリ::コンプライアンス
   - Category::Configuration & Deployment
+  - Category::Containers
   - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: OPA インテグレーション
   media: []
@@ -71,7 +73,7 @@ tile:
 
 Kubernetes クラスターで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。[オートディスカバリーのインテグレーションテンプレート][2]のガイドも参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 open_policy_agent チェックを Kubernetes クラスターにインストールするには:
 

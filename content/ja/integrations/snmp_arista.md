@@ -16,9 +16,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- notification
 - ネットワーク
+- notification
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_arista/README.md
@@ -42,13 +41,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Network
+  - Category::Notification
+  - Category::SNMP
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Monitoring
-  - Category::Notification
-  - Category::Network
-  - Category::SNMP
   configuration: README.md#Setup
   description: Arista ネットワークデバイスから SNMP メトリクスを収集
   media: []

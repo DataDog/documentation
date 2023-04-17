@@ -76,7 +76,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm update --install \
+helm upgrade --install \
     opw datadog/observability-pipelines-worker \
     -f aws_eks.yaml
 ```
@@ -95,7 +95,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm update --install \
+helm upgrade --install \
   opw datadog/observability-pipelines-worker \
   -f azure_aks.yaml
 ```
@@ -114,7 +114,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm update --install \
+helm upgrade --install \
   opw datadog/observability-pipelines-worker \
   -f google_gke.yaml
 ```
@@ -175,7 +175,7 @@ For Google GKE, Datadog recommends using the `premium-rwo` drive class because i
 To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
-vector:
+observability_pipelines_worker:
   logs.enabled: true
   # Adjust protocol to https if TLS/SSL is enabled on the Observability Pipelines Worker
   logs.url: "http://<OPW_HOST>:8282"

@@ -29,7 +29,7 @@ If you would like to be added to the Windows Private Location beta, reach out to
 
 ## Overview
 
-Private locations allow you to **monitor internal-facing applications or any private endpoints** that aren’t accessible from the public internet. They can also be used to:
+Private locations allow you to **monitor internal-facing applications or any private endpoints** that aren't accessible from the public internet. They can also be used to:
 
 * **Create custom Synthetic locations** in areas that are mission-critical to your business.
 * **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][1].
@@ -37,7 +37,7 @@ Private locations allow you to **monitor internal-facing applications or any pri
 
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any managed location.
 
-Your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog’s servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
+Your private location worker pulls your test configurations from Datadog's servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog's servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
 
 {{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign a Synthetic test to a private location" style="width:100%;">}}
 
@@ -88,6 +88,16 @@ To pull test configurations and push test results, the private location worker n
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+| Port | Endpoint                                | Description                                                                        |
+| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ap1.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 | Port | Endpoint                              | Description                                                    |
@@ -118,7 +128,7 @@ Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22
 
 {{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="Create a private location" style="width:90%;">}}
 
-Fill out your private location details: 
+Fill out your private location details:
 
 1. Specify your private location's **Name** and **Description**.
 2. Add any **Tags** you would like to associate with your private location. If you are configuring a private location for Windows, select **This is a Windows Private Location**.
@@ -128,7 +138,7 @@ Fill out your private location details:
 {{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}}
 ### Configure your private location
 
-Configure your private location by customizing the generated configuration file. When you add initial configuration parameters such as [proxies](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) in **Step 3**, your generated configuration file updates automatically in **Step 4**. 
+Configure your private location by customizing the generated configuration file. When you add initial configuration parameters such as [proxies](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) in **Step 3**, your generated configuration file updates automatically in **Step 4**.
 
 You can access advanced options to adjust the configuration based on your internal network setup. For more information about the `help` command, see [Configuration][5].
 
@@ -148,11 +158,11 @@ If some of the endpoints you are willing to test are located within one or sever
 
 ### View your configuration file
 
-After adding the appropriate options to your private location configuration file, you can copy and paste this file into your working directory. The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. 
+After adding the appropriate options to your private location configuration file, you can copy and paste this file into your working directory. The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption.
 
 {{< img src="synthetics/private_locations/pl_view_file_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
-Datadog does not store your secrets, so store them locally before clicking **View Installation Instructions**. 
+Datadog does not store your secrets, so store them locally before clicking **View Installation Instructions**.
 
 **Note:** You need to be able to reference these secrets again if you decide to add more workers or install workers on another host.
 
@@ -224,11 +234,11 @@ For more information about private locations parameters for admins, see [Configu
 
 {{% tab "Podman" %}}
 
-The Podman configuration is very similar to Docker, however, you must set `NET_RAW` as an additional capability to support ICMP tests. 
+The Podman configuration is very similar to Docker, however, you must set `NET_RAW` as an additional capability to support ICMP tests.
 
 1. Run `sysctl -w net.ipv4.ping_group_range = 0 2147483647` from the host where the container runs.
 2. Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is accessible to mount to the container:
-   
+
    ```shell
    podman run --cap-add=NET_RAW --rm -it -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json gcr.io/datadoghq/synthetics-private-location-worker:latest
    ```
@@ -297,14 +307,14 @@ For OpenShift, run the private location with the `anyuid` SCC. This is required 
 
 {{% tab "Helm Chart" %}}
 
-You can set environment variables in your configuration parameters that point to secrets you have already configured. To create environment variables with secrets, see the [Kubernetes documentation][3]. 
+You can set environment variables in your configuration parameters that point to secrets you have already configured. To create environment variables with secrets, see the [Kubernetes documentation][3].
 
 Alternatively:
 
 1. Add the [Datadog Synthetics Private Location][1] to your Helm repositories:
 
     ```shell
-    helm repo add datadog https://helm.datadoghq.com 
+    helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
 
@@ -354,7 +364,7 @@ Create a new EC2 task definition that matches the following. Replace each parame
 }
 ```
 
-**Notes:** 
+**Notes:**
 
 - If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
 - If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
@@ -715,23 +725,23 @@ Because you can run several containers for one single private location with a si
 
 You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
-For more information, see [Dimensioning Private Locations][18]. 
+For more information, see [Dimensioning Private Locations][18].
 
 In order to use private locations for continuous testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
 
 ## Monitor your private location
 
-While you initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to closely monitor them. [Private Location Monitoring][19] provides insight about the performance and state of your private location as well as out-of-the-box metrics and monitors. 
+While you initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to closely monitor them. [Private Location Monitoring][19] provides insight about the performance and state of your private location as well as out-of-the-box metrics and monitors.
 
 For more information, see [Private Location Monitoring][19].
 
 ## Permissions
 
-By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. 
+By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines.
 
-Users with the [Datadog Admin and Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. Grant access to the [**Private Locations** page][22] by upgrading your user to one of these two [default roles][19]. 
+Users with the [Datadog Admin and Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. Grant access to the [**Private Locations** page][22] by upgrading your user to one of these two [default roles][19].
 
-If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions. 
+If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions.
 
 ## Further Reading
 

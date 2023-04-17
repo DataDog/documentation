@@ -14,7 +14,7 @@ further_reading:
 The features discussed on this page are in public beta.
 </div>
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,ap1" %}}
 <div class="alert alert-warning">
     Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

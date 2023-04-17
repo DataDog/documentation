@@ -20,6 +20,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
+- configuration & deployment
+- containers
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/convox/README.md
 display_on_public_website: true
@@ -37,15 +39,17 @@ public_title: Convox
 short_description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::クラウド
+  - Category::構成 & デプロイ
+  - Category::コンテナ
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Convox は、プライバシーの完全保護を保全なしで実現できるよう設計されたオープンソースの PaaS です。
   media: []
@@ -72,12 +76,12 @@ Datadog Agent は、とても簡単な `docker-compose.yml` マニフェスト�
 
 ```shell
 # リポジトリを確認
-$ git clone https://github.com/convox-examples/dd-agent.git
+$ git clone https://github.com/convox-examples/datadog.git
 $ cd dd-agent
 
 # Agent アプリとシークレットをデプロイ
 $ convox apps create
-$ convox env set API_KEY=<api キー>
+$ convox env set DD_API_KEY=<your api key>
 $ convox deploy
 $ convox scale agent --count=3 --cpu=10 --memory=128
 ```

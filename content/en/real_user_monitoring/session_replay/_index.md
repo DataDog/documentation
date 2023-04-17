@@ -43,7 +43,7 @@ Session Replay is available in the RUM Browser SDK. To start collecting data for
 The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example, to only record authenticated user sessions:
 
 ```javascript
-DD_RUM.init({
+window.DD_RUM.init({
   applicationId: '<DATADOG_APPLICATION_ID>',
   clientToken: '<DATADOG_CLIENT_TOKEN>',
   site: '<DATADOG_SITE>',
@@ -56,7 +56,7 @@ DD_RUM.init({
 });
 
 if (user.isAuthenticated) {
-    DD_RUM.startSessionReplayRecording();
+    window.DD_RUM.startSessionReplayRecording();
 }
 ```
 
