@@ -15,12 +15,12 @@ further_reading:
 
 ## Requirements and limitations
 
-tktk Java requirements
+- Datadog Java tracing library `dd-trace-java` version 1.10.0 or greater.
 
 The following OTel features implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
-|---------------------------------------|-------------|-----------------------------|
+|---------------------------------------|-------------------------------------------|
 | [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
@@ -28,14 +28,13 @@ The following OTel features implemented in the Datadog library as noted:
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog trace provider
+## Configuring OTel to use the Datadog tracing library
 
 1. Add your desired manual OTel instrumentation to your Java code following the [OTel Java Manual Instrumentation documentation][5].
-1. tktk add library
-1. tktk config otel
-1. tktk config tracing
+1. Add the [Datadog tracing library to the JVM][11].
+1. Set the `dd.trace.otel.enabled` system property to `true`.
 
-Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [OpenTelemetry Automatic instrumentation][8] also.
+Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
 
 
 [1]: https://opentelemetry.io/docs/instrumentation/java/manual/#context-propagation
@@ -45,3 +44,4 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [5]: https://opentelemetry.io/docs/instrumentation/java/manual/
 [8]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [9]: /tracing/trace_collection/trace_context_propagation/java/
+[11]: /tracing/trace_collection/dd_libraries/java/?tab=springboot#add-the-java-tracer-to-the-jvm
