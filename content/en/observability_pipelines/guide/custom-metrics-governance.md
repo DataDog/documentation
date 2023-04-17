@@ -84,9 +84,9 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2-
-           # remove .tag_to_drop tag
-           del(.tags.tag_to_drop) 
+    source: |
+      # remove .tag_to_drop tag
+      del(.tags.tag_to_drop) 
 ```
 
 ### Solution 2: Define an allowlist array of tags to keep
@@ -99,13 +99,12 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
+    source: |
+      # list of tags to keep
+      tags_allowlist = ["tag 1", "tag 2", "tag 3", "tag 4"]
 
-           # list of tags to keep
-           tags_allowlist = ["tag 1", "tag 2", "tag 3", "tag 4"]
-
-           # filter and drop any tags that don't match the tags in tags_to_keep
-           .tags = [filter(.tags) -> |_index, value| { includes(tags_allowlist, value)}
+      # filter and drop any tags that don't match the tags in tags_to_keep
+      .tags = filter(object!(.tags)) -> |key, _value| { includes(tags_allowlist, key) }
 ```
 
 ### Solution 3: Define a blocklist array of tags to drop
@@ -118,13 +117,12 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
+    source: |
+      # list of tags to keep
+      tags_blocklist = ["tag 1", "tag 2", "tag 3", "tag 4"]
 
-           # list of tags to keep
-           tags_blocklist = ["tag 1", "tag 2", "tag 3", "tag 4"]
-
-           # filter and drop any tags that don't match the tags in tags_to_keep
-           .tags = [filter(.tags) -> |_index, value| { !includes(tags_blocklist, value)}
+      # filter and drop any tags that don't match the tags in tags_to_keep
+      .tags = filter(object!(.tags)) -> |key, _value| { includes(tags_allowlist, key) }
 ```
 
 ### Solution 4: Define an allowlist of valid tags in a Reference Table
@@ -164,9 +162,11 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
-           # filter and drop any tags that don't match the tags in tags_to_keep
-           .tags = [filter(.tags) -> |_index, value| {!is_empty(find_enrichment_table_records(valid_tag_table, value))}
+    source: |
+      # filter and drop any tags that don't match the tags in valid_tags.csv
+      .tags = filter(object!(.tags)) -> |key, _value| {
+        !is_empty(find_enrichment_table_records!("valid_tag_table", { "tag_name": key }))
+      }
 ```
 
 ## Prevent tag cardinality spikes
