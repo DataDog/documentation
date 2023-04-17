@@ -33,7 +33,7 @@ Navigate to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule
 
 1. Select a rule for **Rule a**. Click the pencil icon to rename the rule. Use the **correlated by** dropdown to define the correlating attribute. You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows) for more information about the sliding window.
 
-2. Select a rule for **Rule b** in the second Rule editor’s dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for **Rule a**.
+2. Select a rule for **Rule b** in the second Rule editor's dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for **Rule a**.
 
 ### Set rule cases
 

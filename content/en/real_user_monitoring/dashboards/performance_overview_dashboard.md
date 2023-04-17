@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The performance overview dashboard offers a bird’s-eye view of RUM applications. It shows:
+The performance overview dashboard offers a bird's-eye view of RUM applications. It shows:
 
 - **Performance metrics**:
     For all views, four browser metrics are highlighted: Loading Time, First Contentful Paint, DOM Content Loaded, and Load Event. For each one of these metrics, widgets show the median, the 75th percentile, and the 90th percentile.
