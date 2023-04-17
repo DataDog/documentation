@@ -3258,6 +3258,21 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_troubleshooting
     weight: 506
+  - name: Roku Monitoring
+    url: real_user_monitoring/roku/
+    parent: rum
+    identifier: rum_roku
+    weight: 6
+  - name: Data Collected
+    url: real_user_monitoring/roku/data_collected/
+    parent: rum_roku
+    identifier: rum_roku_data_collected
+    weight: 601
+  - name: Advanced Configuration
+    url: real_user_monitoring/roku/advanced_configuration/
+    parent: rum_roku
+    identifier: rum_roku_advanced
+    weight: 602
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
