@@ -91,7 +91,7 @@ transforms:
 
 ### Solution 2: Define an allowlist array of tags to keep
 
-In the scenario where you want to drop all tags except for a list of allowed tags, define the list and use the `filter()` function. This automatically drops any tags that aren't included in the allowlist. See the following configuration example:
+In the scenario where you want to drop all tags except for a list of allowed tags, define the allowlist and use the `filter()` function. This automatically drops any tags that aren't included in the allowlist. See the following configuration example:
 
 ```yaml
 transforms:
