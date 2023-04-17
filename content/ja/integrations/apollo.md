@@ -21,7 +21,6 @@ author:
   sales_email: sachin@apollographql.com
   support_email: sachin@apollographql.com
 categories:
-- モニター
 - キャッシュ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
@@ -40,16 +39,15 @@ public_title: Apollo
 short_description: GraphQL インフラストラクチャーのパフォーマンスを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
   - Category::Caching
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: GraphQL インフラストラクチャーのパフォーマンスを監視
   media: []

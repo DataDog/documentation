@@ -44,6 +44,14 @@ The Datadog Agent continuously sends sampling rates to tracing libraries to appl
 
 For instance, if service `A` has more traffic than service `B`, the Agent might vary the sampling rate for `A` such that  `A` keeps no more than seven traces per second, and similarly adjust the sampling rate for `B` such that `B` keeps no more than three traces per second, for a total of 10 traces per second.
 
+#### Remote configuration
+
+<div class="alert alert-warning">Remote configuration for ingestion configuration in the Agent is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
+
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
+
+#### Local configuration
+
 Set Agent's target traces-per-second in its main configuration file (`datadog.yaml`) or as an environment variable :
 ```
 @param max_traces_per_second - integer - optional - default: 10
@@ -51,6 +59,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 ```
 
 **Notes**: 
+- Remotely configured parameters take precedence over local configurations - environment variables and `datadog.yaml` configuration.
 - For PHP applications, use the tracing library's user-defined rules instead.
 - The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries other than PHP. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
 
@@ -191,7 +200,7 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
-C++ does not provide integrations for out-of-the-box instrumentation, but it’s used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
+C++ does not provide integrations for out-of-the-box instrumentation, but it's used by proxy tracing such as Envoy, Nginx, or Istio. Read more about how to configure sampling for proxies in [Tracing proxies][1].
 
 [1]: /tracing/trace_collection/proxy_setup
 {{% /tab %}}
@@ -242,6 +251,12 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 2. The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no guarantee that the complete trace is sent to Datadog.
 3. By default, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under the error sampler.
 
+#### Datadog Agent 7.42.0 and higher
+
+<div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
+
+The rare sampling is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
+
 #### Datadog Agent 6/7.41.0 and higher
 
 To override the default behavior so that spans dropped by the tracing library rules or custom logic such as `manual.drop` are **included** by the error sampler, enable the feature with: `DD_APM_FEATURES=error_rare_sample_tracer_drop` in the Datadog Agent (or the dedicated Trace Agent container within the Datadog Agent pod in Kubernetes).
@@ -258,6 +273,12 @@ Error sampling default behavior can't be changed for these Agent versions. Upgra
 The rare sampler sends a set of rare spans to Datadog. It catches combinations of `env`, `service`, `name`, `resource`, `error.type`, and `http.status` up to 5 traces per second (per Agent). It ensures visibility on low traffic resources when the head-based sampling rate is low.
 
 **Note**: The rare sampler captures local traces at the Agent level. If the trace is distributed, there is no way to guarantee that the complete trace will be sent to Datadog.
+
+#### Datadog Agent 7.42.0 and higher
+
+<div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
+
+The error sampling rate is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
 
@@ -575,13 +596,13 @@ another_span->SetTag(datadog::tags::manual_drop, {});
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Manual trace keeping should happen before context propagation. If it is kept after context propagation, the system can’t ensure that the entire trace is kept across services. Manual trace keep is set at tracing client location, so the trace can still be dropped by Agent or server location based on sampling rules.
+Manual trace keeping should happen before context propagation. If it is kept after context propagation, the system can't ensure that the entire trace is kept across services. Manual trace keep is set at tracing client location, so the trace can still be dropped by Agent or server location based on sampling rules.
 
 
 ## Single spans
 `ingestion_reason: single_span`
 
-If you need to sample a specific span, but don’t need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span.
+If you need to sample a specific span, but don't need the full trace to be available, tracing libraries allow you to set a sampling rate to be configured for a single span.
 
 For example, if you are building [metrics from spans][6] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
 
@@ -761,3 +782,5 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 [17]: https://github.com/DataDog/dd-sdk-android/releases/tag/1.15.0
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
+[20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
+[21]: /agent/guide/how_remote_config_works/#enabling-remote-configuration

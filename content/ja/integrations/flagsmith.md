@@ -19,7 +19,9 @@ author:
   sales_email: support@flagsmith.com
   support_email: support@flagsmith.com
 categories:
+- 構成 & デプロイ
 - notification
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md
 display_on_public_website: true
@@ -37,15 +39,17 @@ public_title: Flagsmith
 short_description: Flagsmith のフラグ変更イベントが Datadog に表示されます
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
   - Category::Notification
+  - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Flagsmith のフラグ変更イベントが Datadog に表示されます
   media: []
@@ -79,7 +83,7 @@ Flagsmith の機能フラグ追跡インテグレーションは、RUM データ
 
 [Flagsmith ダッシュボード][2]の Integrations Menu を選択し、Datadog Integration を追加します。[Datadog API キー][3]を入力します。Base URL には、US Datadog サイトを使用している場合は `https://api.datadoghq.com`、EU Datadog サイトを使用している場合は `https://api.datadoghq.eu` を入力します。
 
-### 機能フラグの追跡設定
+### 機能フラグ追跡の設定
 
 機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要][4]ガイドをご覧ください。
 

@@ -24,8 +24,8 @@ author:
   support_email: partner.cfrm@bottomline.com
   vendor_id: bottomline
 categories:
-- クラウド
-- モニタリング
+- mainframe
+- マーケットプレイス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
 display_on_public_website: true
@@ -47,11 +47,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Mainframe
+  - Category::Marketplace
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Cloud
-  - Category::Monitoring
-  - Offering::Integration
   configuration: README.md#Setup
   description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
   media:

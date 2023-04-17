@@ -132,7 +132,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
     **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
-{{< site-region region="us,us3,us5,eu" >}}
+{{< site-region region="us,us3,us5,eu,ap1" >}}
 
 6. Optionally, enable additional cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
       * Install the [Azure integration][1] for visibility into Azure load balancers.
@@ -419,9 +419,9 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
-       DD_PROCESS_AGENT_ENABLED: 'true'
-       DD_API_KEY: '<DATADOG_API_KEY>'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+       DD_PROCESS_AGENT_ENABLED=true
+       DD_API_KEY=<DATADOG_API_KEY>
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - /proc/:/host/proc/:ro

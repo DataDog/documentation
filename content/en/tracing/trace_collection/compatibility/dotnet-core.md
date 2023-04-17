@@ -85,7 +85,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                             | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don't see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
 
 ## End of life .NET Core versions
 

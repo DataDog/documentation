@@ -3,6 +3,11 @@ disable_toc: true
 kind: guide
 private: true
 title: Guides sur les logs
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Guides sur les logs
 ---
 
 {{< whatsnext desc="Logging Without Limits™" >}}

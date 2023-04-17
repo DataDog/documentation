@@ -23,6 +23,8 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"
     tag: "Blog"
     text: "Understand user impact scope with Watchdog Impact Analysis"
+algolia:
+  tags: ['watchdog']
 ---
 
 {{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with two ongoing critical alerts for error rates" >}}

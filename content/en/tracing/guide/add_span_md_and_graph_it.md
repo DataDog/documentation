@@ -7,7 +7,7 @@ further_reading:
   text: "Alert on anomalous p99 latency of a database service"
 - link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
-  text: "Compare a service’s latency to the previous week"
+  text: "Compare a service's latency to the previous week"
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
   text: "Create a Dashboard to track and correlate APM metrics"
@@ -31,7 +31,7 @@ In this example, a customer ID is added to traces allowing the customers that ha
 
 1) **Follow the example to get your code instrumented**.
 
-Depending on the programming language you are you using, you’ll need to set the [tags][3] to add to your spans differently.
+Depending on the programming language you are you using, you'll need to set the [tags][3] to add to your spans differently.
 
 **Note**: take note of the service and [resource names][4] you are working on, these will come in handy later. In this example, the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
 
@@ -261,13 +261,13 @@ You should now be able to see the facet you created in the Facet Explorer. The f
 
 The Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Explorer overview][9].
 
-7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
+7) **Choose the service** you've been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6"  video="true" style="width:90%;">}}
 
 8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**.
 
-You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][10], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
+You can now see the customers that have the slowest average requests. **Note**: If you'd like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][10], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true"  style="width:90%;">}}
 

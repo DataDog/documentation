@@ -10,7 +10,7 @@ further_reading:
 - link: "/security/application_security/enabling/"
   tag: "Documentation"
   text: "Enable Application Security Management to Start Detecting Threats"
-- link: "/security/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/enabling/compatibility/"
   tag: "Documentation"
   text: "Programming Language and Framework Compatibility"
 - link: "/security/application_security/how-appsec-works/"
@@ -177,7 +177,7 @@ For [Java][1], if you are using any of the following technologies, the respectiv
 - spring-web
 - tomcat
 
-[1]: /security/application_security/setup_and_configure/
+[1]: /security/application_security/enabling/compatibility/java
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -185,14 +185,14 @@ For [.NET][1], the ASP.NET integration is required.
 
 **Note:** If ASP.NET Core is disabled, ASM should still work with this framework.
 
-[1]: /security/application_security/setup_and_configure/
+[1]: /security/application_security/enabling/compatibility/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="PHP" >}}
 
 There are no required integrations for [PHP][1].
 <p></p>
 
-[1]: /security/application_security/setup_and_configure/
+[1]: /security/application_security/enabling/compatibility/php
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -206,7 +206,7 @@ The following [Go][1] frameworks should be instrumented using the out-of-the-box
 
 If your framework is not supported, [create a new issue][7] in the Go repository.
 
-[1]: /security/application_security/setup_and_configure/
+[1]: /security/application_security/enabling/compatibility/go
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
 [3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
@@ -219,7 +219,7 @@ If your framework is not supported, [create a new issue][7] in the Go repository
 For [Node.js][1], the HTTP integration is required.
 <p></p>
 
-[1]: /security/application_security/setup_and_configure/
+[1]: /security/application_security/enabling/compatibility/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
@@ -227,7 +227,7 @@ For [Ruby][1], the [Rack][2] integration is required. Ruby tracer version `1.0.0
 
 **Note:** Rack can be manually added or automatically added with the [Rails][4] or [Sinatra][5] integration. If manually added, the tracer middleware must appear before the security middleware in the Rack stack.
 
-[1]: /security/application_security/setup_and_configure/
+[1]: /security/application_security/enabling/compatibility/ruby
 [2]: /tracing/trace_collection/dd_libraries/ruby/#rack
 [3]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [4]: /tracing/trace_collection/dd_libraries/ruby/#rails
@@ -240,7 +240,7 @@ For [Python][1], the WSGI integration is required along with the integration for
 framework you're using, such as the Django or Flask integration.
 <p></p>
 
-[1]: /security/application_security/setup_and_configure/
+[1]: /security/application_security/enabling/compatibility/python
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -541,9 +541,9 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang-wrapper >}}
 
 
-## No vulnerabilities detected by Risk Management
+## No vulnerabilities detected by Application Vulnerability Management
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the Risk Management Vulnerability Explorer. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the Application Vulnerability Management Explorer. It is important to check each step when investigating this issue. 
 
 ### Confirm ASM is enabled
 

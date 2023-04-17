@@ -22,8 +22,11 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
-- オーケストレーション
+- kubernetes
 - ログの収集
+- ネットワーク
+- orchestration
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openshift/README.md
 display_on_public_website: true
@@ -44,10 +47,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Containers
-  - Category::Orchestration
+  - Category::Kubernetes
   - Category::Log Collection
+  - Category::Network
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: ビッグアイデア用の Kubernetes プラットフォーム
   media: []
@@ -64,7 +70,7 @@ Red Hat OpenShift は、企業向けアプリケーションの開発とデプ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent のインストールには、Kubernetes の [Agent のインストール方法][2]を参照してください。デフォルトのコンフィギュレーションは、OpenShift 3.7.0+ と OpenShift 4.0+ （使用する機能およびエンドポイントが導入されたバージョン）を前提としています。
 

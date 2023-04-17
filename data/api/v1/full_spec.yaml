@@ -3769,6 +3769,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
             selected tags in the format of `<source_org_name>:::<selected tag 1>///<selected
@@ -3846,6 +3850,7 @@ components:
       - profiled_host_usage
       - snmp_usage
       - estimated_rum_sessions_usage
+      - universal_service_monitoring_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3878,6 +3883,7 @@ components:
       - PROFILED_HOST_USAGE
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
+      - UNIVERSAL_SERVICE_MONITORING_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7229,6 +7235,10 @@ components:
         public_id:
           description: The organization public ID.
           type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
         tag_config_source:
           description: The source of the usage attribution tag configuration and the
             selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
@@ -7334,6 +7344,8 @@ components:
       - snmp_percentage
       - estimated_rum_sessions_usage
       - estimated_rum_sessions_percentage
+      - universal_service_monitoring_usage
+      - universal_service_monitoring_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7397,6 +7409,8 @@ components:
       - SNMP_PERCENTAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
+      - UNIVERSAL_SERVICE_MONITORING_USAGE
+      - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7644,6 +7658,14 @@ components:
           type: number
         snmp_usage:
           description: The network device usage by tag(s).
+          format: double
+          type: number
+        universal_service_monitoring_percentage:
+          description: The percentage of universal service monitoring usage by tag(s).
+          format: double
+          type: number
+        universal_service_monitoring_usage:
+          description: The universal service monitoring usage by tag(s).
           format: double
           type: number
       type: object
@@ -14486,6 +14508,10 @@ components:
             example: ''
             type: string
           type: array
+        compressedJsonDescriptor:
+          description: A protobuf JSON descriptor that needs to be gzipped first then
+            base64 encoded.
+          type: string
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
@@ -16841,6 +16867,11 @@ components:
           description: Contains the number of log bytes ingested.
           format: int64
           type: integer
+        logs_forwarding_events_bytes:
+          description: Contains the number of logs forwarded bytes (data available
+            as of April 1st 2023)
+          format: int64
+          type: integer
         logs_live_indexed_count:
           description: Contains the number of live log events indexed (data available
             as of December 1, 2020).
@@ -17300,6 +17331,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
+          deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
             the current date for all organizations.
           format: int64
@@ -17465,6 +17497,11 @@ components:
         fargate_tasks_count_hwm:
           description: Shows the average of all Fargate tasks over all hours in the
             current date for all organizations.
+          format: int64
+          type: integer
+        forwarding_events_bytes_sum:
+          description: Shows the sum of all log bytes forwarded over all hours in
+            the current date for all organizations.
           format: int64
           type: integer
         gcp_host_top99p:
@@ -17655,6 +17692,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        universal_service_monitoring_host_top99p:
+          description: Shows the 99th percentile of all universal service management
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         vsphere_host_top99p:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current date for all organizations.
@@ -17691,6 +17733,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
+          deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current date for the given org.
           format: int64
@@ -17852,6 +17895,11 @@ components:
         fargate_tasks_count_hwm:
           description: Shows the high-water mark of all Fargate tasks over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        forwarding_events_bytes_sum:
+          description: Shows the sum of all log bytes forwarded over all hours in
+            the current date for the given org.
           format: int64
           type: integer
         gcp_host_top99p:
@@ -18049,6 +18097,11 @@ components:
             in the current date for the given org.
           format: int64
           type: integer
+        universal_service_monitoring_host_top99p:
+          description: Shows the 99th percentile of all Universal Service Monitoring
+            hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
         vsphere_host_top99p:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current date for the given org.
@@ -18085,6 +18138,7 @@ components:
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
+          deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
             in the current months for all organizations.
           format: int64
@@ -18258,6 +18312,12 @@ components:
         fargate_tasks_count_hwm_sum:
           description: Shows the sum of the high-water marks of all Fargate tasks
             over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        forwarding_events_bytes_agg_sum:
+          description: Shows the sum of all logs forwarding bytes over all hours in
+            the current months for all organizations (data available as of April 1,
+            2023)
           format: int64
           type: integer
         gcp_host_top99p_sum:
@@ -18482,6 +18542,11 @@ components:
         twol_ingested_events_bytes_agg_sum:
           description: Shows the sum of all ingested APM span bytes over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        universal_service_monitoring_host_top99p_sum:
+          description: Shows the 99th percentile of all Universal Service Monitoring
+            hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
         usage:
@@ -19763,6 +19828,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -20872,6 +20938,15 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        shared_dashboard:
+          parameters:
+          - name: body
+            value: "{\n  \"dashboard_id\": \"{{ dashboard.id }}\",\n  \"dashboard_type\":
+              \"custom_timeboard\",\n  \"share_type\": \"invite\",\n  \"share_list\":
+              [\"{{unique_lower_alnum}}@datadoghq.com\"],\n  \"global_time\": {\n
+              \   \"live_span\": \"1h\"\n  }\n}"
+          step: there is a valid "shared_dashboard" in the system
       x-menu-order: 8
       x-undo:
         operationId: DeletePublicDashboard
@@ -21058,7 +21133,7 @@ paths:
               json-request-body:
                 value:
                   data:
-                  - attributes:
+                    attributes:
                       email: test@datadoghq.com
                     type: public_dashboard_invitation
             schema:
@@ -21213,12 +21288,24 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        public_dashboard_invitation:
+          parameters:
+          - name: token
+            value: '"{{ shared_dashboard.token }}"'
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{unique_lower_alnum}}@datadoghq.com\"\n
+              \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
+          step: there is a valid "public_dashboard_invitation" in the system
       x-menu-order: 11
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
         - name: token
-          source: token
+          source: data.attributes.share_token
+        - name: body
+          template: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{data.attributes.email}}\"\n
+            \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
         type: unsafe
   /api/v1/dashboard/{dashboard_id}:
     delete:
@@ -25566,8 +25653,8 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on US1, EU, US3, and
-        US5.
+        **NOTE** Only available on US1-FED and in closed beta on US1, EU, AP1, US3,
+        and US5.
 
 
         **CI Pipelines Alert Query**
@@ -25592,7 +25679,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Pipeline monitors are in alpha on US1, EU, US3 and US5.
+        **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
 
 
         **CI Tests Alert Query**
@@ -25617,8 +25704,8 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Test monitors are available only in closed beta on US1, EU, US3
-        and US5.
+        **NOTE** CI Test monitors are available only in closed beta on US1, EU, AP1,
+        US3, and US5.
 
 
         **Error Tracking Alert Query**
@@ -28178,6 +28265,7 @@ paths:
             - datadoghq.eu
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - ddog-gov.com
           subdomain:
             default: api
@@ -29284,8 +29372,8 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
-      description: Get the last 50 test results summaries for a given Synthetics Browser
-        test.
+      description: Get the last 150 test results summaries for a given Synthetics
+        Browser test.
       operationId: GetBrowserTestLatestResults
       parameters:
       - description: 'The public ID of the browser test for which to search results
@@ -29657,8 +29745,8 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
     get:
-      description: Get the last 50 test results summaries for a given Synthetics API
-        test.
+      description: Get the last 150 test results summaries for a given Synthetics
+        API test.
       operationId: GetAPITestLatestResults
       parameters:
       - description: The public ID of the test for which to search results for.
@@ -30468,12 +30556,10 @@ paths:
         type: safe
   /api/v1/usage/audit_logs:
     get:
+      deprecated: true
       description: 'Get hourly usage for audit logs.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
-        Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
-        for the associated migration guide.'
+        **Note:** This endpoint has been deprecated.'
       operationId: GetUsageAuditLogs
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`
@@ -30527,7 +30613,7 @@ paths:
       summary: Get hourly usage for audit logs
       tags:
       - Usage Metering
-      x-menu-order: 29
+      x-menu-order: 40
       x-undo:
         type: safe
   /api/v1/usage/aws_lambda:
@@ -31023,10 +31109,11 @@ paths:
         type: safe
   /api/v1/usage/hourly-attribution:
     get:
-      description: "Get hourly usage attribution.\n\nThis API endpoint is paginated.
-        To make sure you receive all records, check if the value of `next_record_id`
-        is\nset in the response. If it is, make another request and pass `next_record_id`
-        as a parameter.\nPseudo code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
+      description: "Get hourly usage attribution. Multi-region data is available starting
+        March 1, 2023.\n\nThis API endpoint is paginated. To make sure you receive
+        all records, check if the value of `next_record_id` is\nset in the response.
+        If it is, make another request and pass `next_record_id` as a parameter.\nPseudo
+        code example:\n\n```\nresponse := GetHourlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetHourlyUsageAttribution(start_month,
         next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
@@ -31558,10 +31645,11 @@ paths:
         type: safe
   /api/v1/usage/monthly-attribution:
     get:
-      description: "Get monthly usage attribution.\n\nThis API endpoint is paginated.
-        To make sure you receive all records, check if the value of `next_record_id`
-        is\nset in the response. If it is, make another request and pass `next_record_id`
-        as a parameter.\nPseudo code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
+      description: "Get monthly usage attribution. Multi-region data is available
+        starting March 1, 2023.\n\nThis API endpoint is paginated. To make sure you
+        receive all records, check if the value of `next_record_id` is\nset in the
+        response. If it is, make another request and pass `next_record_id` as a parameter.\nPseudo
+        code example:\n\n```\nresponse := GetMonthlyUsageAttribution(start_month)\ncursor
         := response.metadata.pagination.next_record_id\nWHILE cursor != null BEGIN\n
         \ sleep(5 seconds)  # Avoid running into rate limit\n  response := GetMonthlyUsageAttribution(start_month,
         next_record_id=cursor)\n  cursor := response.metadata.pagination.next_record_id\nEND\n```"
@@ -32986,6 +33074,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -33092,6 +33181,7 @@ servers:
       - datadoghq.com
       - us3.datadoghq.com
       - us5.datadoghq.com
+      - ap1.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:
