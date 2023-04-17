@@ -30,7 +30,7 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 
 ## Get started
 
-1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Risk Management vulnerability detection features) for your target operating system architecture.
+1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Application Vulnerability Management vulnerability detection features) for your target operating system architecture.
 
    To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
 

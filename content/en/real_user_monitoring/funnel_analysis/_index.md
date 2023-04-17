@@ -6,6 +6,8 @@ further_reading:
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "RUM Explorer"
+algolia:
+  tags: ['funnel']
 ---
 
 ## Overview

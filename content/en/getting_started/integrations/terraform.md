@@ -21,7 +21,7 @@ You can use Terraform to create and programmatically manage Datadog resources. T
 
 ### Cloud integrations
 
-The [AWS integration resource][9], [Azure integration resource][10], and [Google Cloud Project integration resource][11] can establish the connections to quickly get data flowing into your Datadog account from your [AWS][12], [Azure][13], and [GCP][14] services, respectively. If you're using the AWS integration, see the [AWS integration with Terraform][27] guide for an example of setting up the integration along with its associated IAM role and permissions.
+The [AWS integration resource][9], [Azure integration resource][10], and [Google Cloud Project integration resource][11] can establish the connections to quickly get data flowing into your Datadog account from your [AWS][12], [Azure][13], and [Google Cloud][14] services, respectively. If you're using the AWS integration, see the [AWS integration with Terraform][27] guide for an example of setting up the integration along with its associated IAM role and permissions.
 
 ### Monitors
 

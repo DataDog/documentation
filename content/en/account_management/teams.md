@@ -3,8 +3,6 @@ title: Teams
 kind: documentation
 ---
 
-<div class="alert alert-warning">The Teams feature is in beta and is not yet generally available.</div>
-
 ## Overview
 Datadog Teams allow groups of users to organize their team assets within Datadog and automatically filter their Datadog-wide experience to prioritize these assets.
 
@@ -61,6 +59,7 @@ Datadog supports associating the following resources with team handles:
 - [Incidents][3]
 - [Monitors][4]
 - [Service Catalog][5]
+- [Service Level Objectives][6]
 
 ## Filter
 

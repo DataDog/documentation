@@ -29,49 +29,59 @@ further_reading:
   text: "Catch attacks at the network layer with DNS-based threat detection"
 ---
 
-## Overview
+Cloud Workload Security (CWS) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CWS with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
-There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
+## Prerequisites
 
-1. **Process Execution Monitoring** to watch process executions for malicious activity on hosts or containers in real-time.
-2. **File Integrity Monitoring** to watch for changes to key files and directories on hosts or containers in real-time.
-3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
-4. **Kernel Activity Monitoring** to watch for Kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
-
-## Requirements
-
-* Datadog Agent >= 7.44
+* Datadog Agent 7.44 or later.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
-  * Ubuntu 18.04+
-  * Debian 10+
+  * Ubuntu 18.04 or later
+  * Debian 10 or later
   * Amazon Linux 2
-  * Fedora 26+
-  * SUSE 15+
-  * CentOS/RHEL 7.6+
+  * Fedora 26 or later
+  * SUSE 15 or later
+  * CentOS/RHEL 7.6 or later
   * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, please see the [Troubleshooting page][3].
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
 
 ## Installation
+
+In general, installing CWS involves the following steps:
+
+### Enable Remote Configuration
+
+<div class="alert alert-info">Remote Configuration for CWS is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+
+[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CWS, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+
+To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
+
+**Notes**:
+
+- Without Remote Configuration, new and updated Agent rules must be manually deployed to the Datadog Agent.
+- At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
+
+### Configure the CWS Agent
+
+#### Follow the in-app documentation (recommended)
+
+Follow the [in-app instructions][6] in the Datadog app for the best experience, including step-by-step instructions scoped to your deployment configuration.
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-1. If you have not already, install the [Datadog Agent][1] (version 7.27+).
+1. If you have not already, install the [Datadog Agent][1].
 
 2. Add the following to the `datadog` section of the `values.yaml` file:
 
     ```yaml
     # values.yaml file
     datadog:
-
-    # Add this to enable Cloud Workload Security
+      remoteConfiguration:
+        enabled: true
       securityAgent:
         runtime:
           enabled: true
-
-    # Add this to enable the collection of CWS network events, only for Datadog Agent version 7.36
-          network:
-            enabled: true
     ```
 
 3. Restart the Agent.
@@ -110,6 +120,7 @@ docker run -d --name dd-agent \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
+  -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
   gcr.io/datadoghq/agent:7
@@ -118,69 +129,70 @@ docker run -d --name dd-agent \
 
 {{% /tab %}}
 
-{{% tab "Debian" %}}
+{{% tab "Daemonset" %}}
 
-For a package-based deployment, the Datadog package has to be deployed: run `dkpg -i datadog-agent_7….deb`
+Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
 
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
-
-{{< code-block lang="shell" filename="debian-runtime-security.sh" >}}
-
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-
-systemctl restart datadog-agent
-
-{{< /code-block >}}
-
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
-
-```shell
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+```bash
+  # Source: datadog/templates/daemonset.yaml
+  apiVersion:app/1
+  kind: DaemonSet
+  [...]
+  spec:
+  [...]
+  spec:
+      [...]
+        containers:
+        [...]
+          - name: agent
+            [...]
+            env:
+              - name: DD_REMOTE_CONFIGURATION_ENABLED
+                value: "true" 
+              - name: system-probe
+                [...] 
+                env:
+                  - name: DD_RUNTIME_SECURITY_CONFIG_ENABLED 
+                    value: "true"
+                  - name: DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED
+                    value: "true" [...]
 ```
 
-Once you apply the changes, restart both the Security Agent and the system-probe.
-
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-{{% /tab %}}
-
-{{% tab "Fedora/CentOS" %}}
-
-For a package-based deployment, the Datadog package has to be deployed: run `yum/dnf install datadog-agent_7….rpm`
-
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
-
-{{< code-block lang="shell" filename="fedora-centos-runtime-security.sh" >}}
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-systemctl restart datadog-agent
-{{< /code-block >}}
-
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
-
-```shell
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-```
-
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
 {{% /tab %}}
 
 {{% tab "Host (Others)" %}}
 
-For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager.
+For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
-By default Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be adapted. Run the following commands to enable these configurations:
+By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be updated.
 
-{{< code-block lang="shell" filename="host-runtime-security.sh" >}}
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/security-agent.yaml
-echo "runtime_security_config.enabled: true" >> /etc/datadog-agent/system-probe.yaml
-systemctl restart datadog-agent
-{{< /code-block >}}
+```bash
+# /etc/datadog-agent/datadog.yaml file 
+remote_configuration:
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable remote configuration.
+  enabled: true
+```
 
-For [Datadog Agent][1] version 7.36 only, to enable the collection of CWS network events:
+```bash
+# /etc/datadog-agent/security-agent.yaml file 
+runtime_security_config:
+  ## @param enabled - boolean - optional - default: false 
+  ## Set to true to enable full Cloud Workload Security. 
+  enabled: true
+```
 
-```shell
-echo "runtime_security_config.network.enabled: true" >> /etc/datadog-agent/system-probe.yaml
+```bash
+# /etc/datadog-agent/system-probe.yaml file 
+runtime_security_config:
+  ## @param enabled - boolean - optional - default: false 
+  ## Set to true to enable full Cloud Workload Security. 
+  enabled: true
+
+  remote_configuration:
+    ## @param enabled - boolean - optional - default: false
+    ## For [Datadog Agent] version 7.42 only, to enable remote configuration
+    enabled: true
 ```
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
@@ -256,6 +268,14 @@ The following deployment can be used to start the Runtime Security Agent and `sy
                 {
                    "name": "DD_RUNTIME_SECURITY_CONFIG_ENABLED",
                    "value": "true"
+                },
+                {
+                    "name": "DD_REMOTE_CONFIGURATION_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED",
+                    "value": "true"
                 }
             ],
             "memory": 256,
@@ -312,13 +332,17 @@ The following deployment can be used to start the Runtime Security Agent and `sy
             ]
         }
     ]
-}
+} 
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: /security/cloud_security_management/troubleshooting
+[4]: /agent/guide/how_remote_config_works
+[5]: /agent/guide/how_remote_config_works/?tab=environmentvariable#enabling-remote-configuration
+[6]: https://app.datadoghq.com/security/setup

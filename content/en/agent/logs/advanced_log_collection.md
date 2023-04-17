@@ -18,6 +18,8 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
+algolia:
+  tags: ['advanced log filter']
 ---
 
 Customize your log collection configuration:

@@ -17,7 +17,7 @@ further_reading:
   text: "Dynamic Instrumentation"
 - link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
   tag: "Documentation"
-  text: "Getting Started with Cloud Workload Security"
+  text: "Setting Up Cloud Workload Security"
 
 ---
 {{< site-region region="gov" >}}
@@ -67,19 +67,20 @@ The following products and features are supported with Remote Config:
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 ### Dynamic Instrumentation
-<div class="alert alert-info">This feature is in private beta.</div>
+<div class="alert alert-info">This feature is in beta.</div>
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
 ### Cloud Workload Security (CWS)
-<div class="alert alert-info">This feature is in private beta.</div>
 
-- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released.
+<div class="alert alert-info">This feature is in public beta.</div>
+
+- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][11] for more information.
 
 ### Observability Pipelines
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI,  rolling out your configuration changes to OPW instances running in your environment.
+- **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
 ## Security Considerations
 
@@ -177,7 +178,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [8]: /security/application_security/how-appsec-works/#built-in-protection
 [9]: /account_management/rbac/permissions#access-management
 [10]: /observability_pipelines/#observability-pipelines-worker
-
+[11]: /security/cloud_workload_security/setup
 
 {{< /site-region >}}
 
