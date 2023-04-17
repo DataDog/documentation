@@ -98,6 +98,10 @@ content/en/real_user_monitoring/error_tracking/android.md
 content/en/real_user_monitoring/error_tracking/expo.md
 content/en/real_user_monitoring/error_tracking/ios.md
 content/en/real_user_monitoring/error_tracking/reactnative.md
+content/en/real_user_monitoring/ios/_index.md
+content/en/real_user_monitoring/ios/swiftui.md
+content/en/real_user_monitoring/ios/mobile_vitals.md
+content/en/real_user_monitoring/ios/*
 content/en/real_user_monitoring/reactnative/_index.md
 content/en/real_user_monitoring/reactnative/advanced_configuration.md
 content/en/real_user_monitoring/reactnative/integrated_libraries.md
