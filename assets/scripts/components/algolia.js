@@ -1,262 +1,201 @@
-import docsearch from 'docsearch.js';
-import configDocs from '../config/config-docs';
+import { getConfig } from '../helpers/getConfig';
+import algoliasearch from 'algoliasearch/lite';
+import instantsearch from 'instantsearch.js';
+import { configure, searchBox } from 'instantsearch.js/es/widgets';
+import { searchbarHits } from './algolia/searchbarHits';
+import { searchpageHits } from './algolia/searchpageHits';
+import { customPagination } from './algolia/customPagination';
+import { debounce } from '../utils/debounce';
+
+function getPageLanguage() {
+    const pageLanguage = document.documentElement.lang;
+
+    // Page lang element is set to en-US due to Zendesk
+    if (pageLanguage) {
+        return pageLanguage.toLowerCase() === 'en-us' ? 'en' : pageLanguage;
+    }
+
+    return 'en';
+}
 
 const { env } = document.documentElement.dataset;
-const lang = document.documentElement.lang.toLowerCase() || 'en-us';
+const pageLanguage = getPageLanguage();
+const algoliaConfig = getConfig(env).algoliaConfig;
 
-// Set baseUrl based on environment
-let baseUrl = window.location.origin;
-const uri = window.location.pathname;
-const subdomain = baseUrl.split('.')[0];
-const previewPath = uri
-    .split('/')
-    .slice(0, 3)
-    .join('/');
+const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
+const indexName = algoliaConfig.index;
 
-if (subdomain.includes('docs-staging')) {
-    baseUrl += previewPath;
-}
+function loadInstantSearch(asyncLoad) {
+    const searchBoxContainerContainer = document.querySelector('.searchbox-container');
+    const searchBoxContainer = document.querySelector('#searchbox');
+    const hitsContainerContainer = document.querySelector('.hits-container');
+    const hitsContainer = document.querySelector('#hits');
+    const paginationContainer = document.querySelector('#pagination');
+    const pageTitleScrollTo = document.querySelector('#pagetitle');
+    const filtersDocs = `language: ${pageLanguage}`;
+    const homepage = document.querySelector('.kind-home');
+    let searchResultsPage = document.querySelector('.search_results_page');
+    let basePathName = '/';
+    let numHits = 5;
+    let hitComponent = searchbarHits;
 
-function getConfig() {
-    if (env === 'live') {
-        return configDocs['live'];
-    } else if (env === 'preview') {
-        return configDocs['preview'];
-    } else {
-        return configDocs['development'];
-    }
-}
-
-const { algoliaConfig } = getConfig();
-
-let algoliaTimer;
-
-const isApiPage = () => document.body.classList.value.includes('api');
-const alogliaApiDocsearchInput = document.getElementById('search-input-api');
-
-const handleSearchPageRedirect = () => {
-    const docsearchInput = document.querySelector('.docssearch-input.ds-input');
-
-    if (docsearchInput.value !== '') {
-        let inputValue = docsearchInput.value;
-
-        if (inputValue.indexOf('#') > -1) {
-            inputValue = inputValue.replace("#", encodeURIComponent("#"));
-        }
-
-        window.location = `${baseUrl}/search/?s=${inputValue}`;
-    }
-}
-
-const appendHomeLinkToAutocompleteWidget = () => {
-    const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
-    const autocompleteHeaderElement = headers[0];
-    const searchPageLink = document.createElement('a');
-
-    searchPageLink.className = "font-regular text-underline ps-2 js-api-search";
-    searchPageLink.innerText = 'Click here to search the full docs';
-    searchPageLink.href = `${baseUrl}/search/`;
-
-    if (alogliaApiDocsearchInput && alogliaApiDocsearchInput.value !== '') {
-        searchPageLink.href += `?s=${alogliaApiDocsearchInput.value}`;
+    // If asyncLoad is true, we're not on the search page anymore
+    if (asyncLoad === true) {
+        searchResultsPage = false;
     }
 
-    if (autocompleteHeaderElement) {
-        autocompleteHeaderElement.appendChild(searchPageLink)
+    if (document.documentElement.dataset.commitRef) {
+        basePathName += `${document.documentElement.dataset.commitRef}/`;
     }
-}
 
-const enhanceApiResultStyles = () => {
-    const headers = document.querySelectorAll('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
+    if (pageLanguage !== 'en') {
+        basePathName += `${pageLanguage}/`;
+    }
 
-    headers.forEach(header => {
-        if (header.textContent.toLowerCase().includes('api')) {
-            header.style.fontWeight = '800';
-            header.style.color = '#632ca6';
-        }
-    })
-}
+    if (searchResultsPage) {
+        numHits = 10;
+        hitComponent = searchpageHits;
+    }
 
-// Transforms API-specific results to show API endpoint as title on both left & right-hand columns of autocomplete widget.
-const setApiEndpointAsSubcategory = () => {
-    const searchResultSubcategoryNodeList = document.querySelectorAll('.algolia-docsearch-suggestion--subcategory-column-text');
-
-    searchResultSubcategoryNodeList.forEach(subcategory => {
-        const parentAnchor = subcategory.closest('a');
-
-        if (parentAnchor) {
-            const categoryHeader = parentAnchor.querySelector('.algolia-autocomplete .algolia-docsearch-suggestion--category-header');
-
-            if (categoryHeader && categoryHeader.textContent.toLowerCase().includes('api')) {
-                const subcategoryContainer = subcategory.closest('.algolia-docsearch-suggestion--subcategory-column');
-
-                if (subcategoryContainer && subcategoryContainer.nextElementSibling) {
-                    const content = subcategoryContainer.nextElementSibling;
-
-                    if (content) {
-                        const apiEndpointTitle = content.querySelector('.algolia-docsearch-suggestion--title');
-                        subcategory.textContent = apiEndpointTitle.textContent;
-                        subcategory.style.fontWeight = '800';
-                        subcategory.style.color = '#000';
+    // No searchBoxContainer means no instantSearch
+    if (searchBoxContainer) {
+        const search = instantsearch({
+            indexName,
+            searchClient,
+            // routing handles search state URL sync
+            routing: {
+                stateMapping: {
+                    stateToRoute(uiState) {
+                        const indexUiState = uiState[indexName];
+                        return {
+                            s: indexUiState.query
+                        };
+                    },
+                    routeToState(routeState) {
+                        return {
+                            [indexName]: {
+                                query: routeState.s
+                            }
+                        };
+                    }
+                }
+            },
+            // Handle hitting algolia API based on query and page
+            searchFunction(helper) {
+                if (helper.state.query) {
+                    helper.search();
+                    if (!searchResultsPage) {
+                        searchBoxContainerContainer.classList.add('active-search');
+                        hitsContainerContainer.classList.remove('d-none');
+                    }
+                } else {
+                    if (!searchResultsPage) {
+                        searchBoxContainerContainer.classList.remove('active-search');
+                        hitsContainerContainer.classList.add('d-none');
+                    } else {
+                        helper.search();
                     }
                 }
             }
-        }
-    })
-}
+        });
 
-const searchDesktop = docsearch({
-    appId: algoliaConfig.appId,
-    apiKey: algoliaConfig.apiKey,
-    indexName: isApiPage() ? algoliaConfig.api_index : algoliaConfig.index,
-    inputSelector: '.docssearch-input',
-    algoliaOptions: {
-        facetFilters: [`language:${lang}`]
-    },
-    autocompleteOptions: {
-        autoselect: false
-    },
-    queryHook(query) {
-        // eslint-disable-next-line no-underscore-dangle
-        if (window._DATADOG_SYNTHETICS_BROWSER === undefined) {
-            clearTimeout(algoliaTimer);
-            algoliaTimer = setTimeout(function() {
-                if (query.length > 0) {
-                    window.DD_LOGS.logger.log(
-                        'Algolia Search',
-                        {
-                            browser: {
-                                algolia: {
-                                    search: query.toLowerCase()
-                                }
-                            }
-                        },
-                        'info'
-                    );
+        search.addWidgets([
+            configure({
+                hitsPerPage: numHits,
+                filters: filtersDocs,
+                distinct: 1
+            }),
+
+            searchBox({
+                container: searchBoxContainer,
+                placeholder: 'Search documentation...',
+                autofocus: false,
+                showReset: false,
+                showSubmit: true,
+                templates: {
+                    submit({ cssClasses }, { html }) {
+                        return html`<span id="submit-text" class="${cssClasses.submit}">search</span
+                            ><i id="submit-icon" class="${cssClasses.submit} icon-search"></i>`;
+                    }
                 }
-            }, 1000);
-        }
-    },
-    debug: false // Set debug to true if you want to inspect the dropdown
-});
+            }),
 
-let desktopEnableEnter = true;
-const searchBtn = document.querySelector('.js-search-btn');
-const searchContainer = document.querySelector('.search-container');
+            hitComponent({
+                container: hitsContainer,
+                basePathName: basePathName
+            }),
 
-searchDesktop.autocomplete.on('keyup', function(e) {
-    if ($('.algolia-docsearch-suggestion').length > 0) {
-        if ($('.algolia-autocomplete')) {
-            $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
-            $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
+            customPagination({
+                isNotSearchPage: !searchResultsPage,
+                container: paginationContainer,
+                scrollTo: pageTitleScrollTo,
+                padding: 5
+            })
+        ]);
+
+        // Start up frontend search
+        search.start();
+
+        // Handle clicks for non-search page
+        if (!searchResultsPage) {
+            const aisSearchBoxInput = document.querySelector('.ais-SearchBox-input');
+            const aisSearchBoxSubmit = document.querySelector('.ais-SearchBox-submit');
+            const searchPathname = `${basePathName}search`;
+
+            const handleSearchbarKeydown = (e) => {
+                if (e.code === 'Enter') {
+                    e.preventDefault();
+
+                    // Give query-url sync 500ms to update
+                    setTimeout(() => {
+                        window.location.pathname = searchPathname;
+                    }, 500);
+                }
+            };
+
+            const handleSearchbarSubmitClick = () => {
+                if (aisSearchBoxInput.value) {
+                    window.location.pathname = searchPathname;
+                }
+            };
+
+            const handleOutsideSearchbarClick = (e) => {
+                let target = e.target;
+                do {
+                    if (target === searchBoxContainerContainer) {
+                        return;
+                    }
+                    target = target.parentNode;
+                } while (target);
+
+                hitsContainerContainer.classList.add('d-none');
+            };
+
+            aisSearchBoxInput.addEventListener('keydown', handleSearchbarKeydown);
+            aisSearchBoxSubmit.addEventListener('click', handleSearchbarSubmitClick);
+            document.addEventListener('click', handleOutsideSearchbarClick);
         }
-    } else {
-        $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
-        $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
+
+        // Pages that aren't homepage or search page need to move the searchbar on mobile
+        if (!homepage && !searchResultsPage) {
+            const handleResize = () => {
+                const searchBoxWrapper = document.querySelector('.nav-search-wrapper');
+                const searchBoxWrapperMobile = document.querySelector('.mobile-nav-search-wrapper');
+
+                if (window.innerWidth <= 991) {
+                    searchBoxWrapperMobile?.appendChild(searchBoxContainerContainer);
+                } else {
+                    searchBoxWrapper?.appendChild(searchBoxContainerContainer);
+                }
+            };
+
+            const handleResizeDebounced = debounce(handleResize, 500, false);
+
+            window.addEventListener('resize', handleResizeDebounced);
+
+            handleResizeDebounced();
+        }
     }
-    if (e.keyCode === 13 && desktopEnableEnter) {
-        let { value } = this;
-        if (value.indexOf('#') > -1) {
-            value = value.replace("#", encodeURIComponent("#"));
-        }
-        window.location = `${baseUrl}/search/?s=${value}`;
-    }
-
-    if (isApiPage()) {
-        const searchLink = document.querySelector('.js-api-search');
-        const searchInput = document.getElementById('search-input-api');
-
-        // The search query's first input character is handled by appendHomeLinkToAutocompleteWidget()
-        // This is because it must be handled during algolia's autocomplete:shown function so we have access to algolia's autocomplete elements.
-        if (searchLink && searchInput && searchInput.length > 1) {
-            searchLink.href += !searchLink.href.includes('?') ? `?s=${searchInput.value}` : searchInput.value;
-        }
-    }
-});
-
-// if user clicks search button
-if (searchBtn) {
-    searchBtn.addEventListener('click', handleSearchPageRedirect);
 }
 
-searchDesktop.autocomplete.on('autocomplete:shown', function() {
-    if (isApiPage()) {
-        enhanceApiResultStyles();
-        setApiEndpointAsSubcategory();
-        appendHomeLinkToAutocompleteWidget();
-    }
-})
-
-searchDesktop.autocomplete.on('autocomplete:closed', function(e) {
-    if ($('.algolia-docsearch-suggestion').length > 0) {
-        if ($('.algolia-autocomplete')) {
-            $('.algolia-autocomplete').css('borderBottomLeftRadius', '0px');
-            $('.algolia-autocomplete').css('borderBottomRightRadius', '0px');
-        }
-    } else {
-        $('.algolia-autocomplete').css('borderTopLeftRadius', '3px');
-        $('.algolia-autocomplete').css('borderBottomLeftRadius', '3px');
-    }
-    if (e.keyCode === 13 && desktopEnableEnter) {
-        let { value } = this;
-        if (value.indexOf('#') > -1) {
-            value = value.replace("#", encodeURIComponent("#"));
-        }
-        window.location = `${baseUrl}/search/?s=${value}`;
-    }
-});
-searchDesktop.autocomplete.on('autocomplete:cursorchanged', function() {
-    desktopEnableEnter = false;
-});
-searchDesktop.autocomplete.on('autocomplete:cursorremoved', function() {
-    desktopEnableEnter = true;
-});
-
-if (searchContainer) {
-    document.querySelector('.search-container').style.display = 'block';
-}
-
-const docsSearchInputMobile = document.querySelector('.docssearch-input-mobile');
-if (docsSearchInputMobile) {
-  const searchMobile = docsearch({
-    appId: algoliaConfig.appId,
-    apiKey: algoliaConfig.apiKey,
-    indexName: isApiPage() ? algoliaConfig.api_index : algoliaConfig.index,
-    inputSelector: '.docssearch-input-mobile',
-    algoliaOptions: {
-      facetFilters: [`language:${lang}`]
-    },
-    autocompleteOptions: {
-      autoselect: false
-    },
-    debug: false // Set debug to true if you want to inspect the dropdown
-  });
-
-  let mobileEnableEnter = true;
-
-  searchMobile.autocomplete.on('keyup', function (e) {
-    if (e.keyCode === 13 && mobileEnableEnter) {
-      let {value} = this;
-      if (value.indexOf('#') > -1) {
-        value = value.replace("#", encodeURIComponent("#"));
-      }
-      window.location = `${baseUrl}/search/?s=${value}`;
-    }
-  });
-
-  searchMobile.autocomplete.on('autocomplete:cursorchanged', function () {
-    mobileEnableEnter = false;
-  });
-
-  searchMobile.autocomplete.on('autocomplete:cursorremoved', function () {
-    mobileEnableEnter = true;
-  });
-
-  searchMobile.autocomplete.on('autocomplete:shown', function () {
-    if (isApiPage()) {
-      enhanceApiResultStyles();
-      setApiEndpointAsSubcategory();
-      appendHomeLinkToAutocompleteWidget();
-    }
-  })
-}
+export { loadInstantSearch };

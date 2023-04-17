@@ -102,7 +102,7 @@ Whether to enable distributed tracing.
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **Default**: `null`<br>
-Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
+Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
@@ -192,12 +192,12 @@ The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
-Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
+Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
 **Default**: `0`<br>
-Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
+Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
@@ -217,7 +217,7 @@ Enable the tracer globally.
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
 **Default**: `1`<br>
-Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
+Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes][14].
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
@@ -306,7 +306,7 @@ Enable URL's as resource names (see [Map resource names to normalized URI](#map-
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
 **Default**: `null`<br>
-Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
+Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
@@ -494,3 +494,5 @@ If multiple extraction styles are enabled, the extraction attempt is completed w
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
+[15]: /tracing/guide/trace-php-cli-scripts/

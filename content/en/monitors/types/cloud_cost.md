@@ -18,6 +18,10 @@ further_reading:
   text: "Consult your monitor status"
 ---
 
+<div class="alert alert-warning">
+The feature discussed on this page is in private beta. Contact your Customer Success Manager to learn more about it.
+</div>
+
 ## Overview
 Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. You can configure your alerts to catch unexpected changes.
 

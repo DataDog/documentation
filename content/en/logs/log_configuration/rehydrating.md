@@ -7,6 +7,10 @@ aliases:
   - /logs/archives/rehydrating/
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-warning">Log Rehydration* is not supported in the AP1 region.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Log Rehydration* enables you to capture log events from customer-owned storage-optimized archives back into Datadog's search-optimized [Log Explorer][1], so that you can use Datadog to analyze or investigate log events that are either old or were excluded from indexing.
@@ -170,7 +174,7 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [GCP IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
+In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role"  style="width:75%;">}}
 

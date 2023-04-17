@@ -3,6 +3,11 @@ disable_sidebar: true
 kind: guide
 private: true
 title: Guides d'intégration
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Guides d'intégration
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

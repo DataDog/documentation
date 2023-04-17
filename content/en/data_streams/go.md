@@ -3,6 +3,10 @@ title: Setup Data Streams Monitoring for Go
 kind: documentation
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
+{{< /site-region >}}
+
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
@@ -11,7 +15,7 @@ To start with Data Streams Monitoring, you need recent versions of the Datadog A
 
 ### Installation
 
-Initiate a Data Streams pathway with `datastreams.Start()` at the start of your pipeline. 
+Initiate a Data Streams pathway with `datastreams.Start()` at the start of your pipeline.
 
 Two types of instrumentation are available:
 - Instrumentation for Kafka-based workloads
@@ -41,7 +45,7 @@ Two types of instrumentation are available:
 
    This function extracts the pathway that a Kafka message has gone through so far. It sets a new checkpoint on the pathway to record the successful consumption of a message and stores the pathway into the provided Go context.
 
-   **Note**: The output `ctx` from `TraceKafkaProduce()` and the output `ctx` from `TraceKafkaConsume()` both contain information about the updated pathway. 
+   **Note**: The output `ctx` from `TraceKafkaProduce()` and the output `ctx` from `TraceKafkaConsume()` both contain information about the updated pathway.
 
 For `TraceKafkaProduce()`, if you are sending multiple Kafka messages at once (fan-out), do not reuse the output `ctx` across calls.
 

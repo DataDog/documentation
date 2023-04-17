@@ -21,12 +21,12 @@ author:
   sales_email: sales@sosiv.io
   support_email: support@sosiv.io
 categories:
-- notification
-- モニタリング
-- コンテナ
-- ネットワーク
-- orchestration
 - アラート設定
+- コンテナ
+- kubernetes
+- ネットワーク
+- notification
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/sosivio/README.md
 display_on_public_website: true
@@ -47,13 +47,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Category::Notification
-  - Category::Monitoring
-  - Category::Containers
-  - Category::Network
-  - Category::Orchestration
   - Category::Alerting
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Network
+  - Category::Notification
+  - Category::Orchestration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: 手に入れるのは、データではなく答え。Kubernetes の予測型トラブルシューティング。
   media:

@@ -24,6 +24,8 @@ assets:
     source: rabbitmq
   monitors:
     disk_usage: assets/monitors/disk_usage.json
+    disk_usage_prometheus: assets/monitors/disk_usage_prometheus.json
+    message_unack_prometheus: assets/monitors/message_unack_prometheus.json
     message_unacknowledge_rate_anomaly: assets/monitors/message_unacknowledge_rate_anomaly.json
   saved_views:
     pid_overview: assets/saved_views/status_overview.json
@@ -35,8 +37,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
+- messaging
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md
 display_on_public_website: true
@@ -54,16 +56,16 @@ public_title: RabbitMQ
 short_description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::処理
   - Category::ログの収集
+  - Category::メッセージング
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡
   media: []
@@ -201,7 +203,7 @@ Kubernetes などのコンテナ環境の場合は、[オートディスカバ�
 | -------------------- | -------------------------------------------- |
 | `<インテグレーション名>` | `rabbitmq`                                   |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                |
-| `<インスタンスコンフィギュレーション>`  | `{"prometheus_plugin": {"url": "%%host%%:15692"}}` |
+| `<インスタンスコンフィギュレーション>`  | `{"prometheus_plugin": {"url": "http://%%host%%:15692"}}` |
 
 ##### ログの収集
 

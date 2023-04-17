@@ -14,6 +14,8 @@ further_reading:
 - link: "/logs/logs_to_metrics/"
   tag: "Documentation"
   text: "Learn how to generate metrics from ingested logs"
+algolia:
+  tags: ['logging without limits']
 ---
 
 {{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}

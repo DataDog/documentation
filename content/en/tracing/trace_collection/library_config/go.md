@@ -48,13 +48,13 @@ The Go tracer supports additional environment variables and functions for config
 See all available options in the [configuration documentation][3].
 
 `DD_VERSION`
-: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
+: Set the application's version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
 
 `DD_SERVICE`
 : The service name to be used for this application.
 
 `DD_ENV`
-: Set the application’s environment, for example: prod, pre-prod, staging.
+: Set the application's environment, for example: prod, pre-prod, staging.
 
 `DD_AGENT_HOST`
 : **Default**: `localhost` <br>
@@ -103,14 +103,14 @@ Enable debug logging in the tracer.
 
 `DD_TRACE_ENABLED`
 : **Default**: `true` <br>
-Enable web framework and library instrumentation. When false, the application code doesn’t generate any traces.
+Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
 
 `DD_SERVICE_MAPPING`
 : **Default**: `null` <br>
 Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **Default**: `false` <br>
+: **Default**: `true` <br>
 Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
 
 `DD_TRACE_CLIENT_IP_ENABLED`
