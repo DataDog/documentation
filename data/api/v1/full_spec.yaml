@@ -20938,6 +20938,15 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        shared_dashboard:
+          parameters:
+          - name: body
+            value: "{\n  \"dashboard_id\": \"{{ dashboard.id }}\",\n  \"dashboard_type\":
+              \"custom_timeboard\",\n  \"share_type\": \"invite\",\n  \"share_list\":
+              [\"{{unique_lower_alnum}}@datadoghq.com\"],\n  \"global_time\": {\n
+              \   \"live_span\": \"1h\"\n  }\n}"
+          step: there is a valid "shared_dashboard" in the system
       x-menu-order: 8
       x-undo:
         operationId: DeletePublicDashboard
@@ -21124,7 +21133,7 @@ paths:
               json-request-body:
                 value:
                   data:
-                  - attributes:
+                    attributes:
                       email: test@datadoghq.com
                     type: public_dashboard_invitation
             schema:
@@ -21279,12 +21288,24 @@ paths:
       tags:
       - Dashboards
       x-codegen-request-body-name: body
+      x-given:
+        public_dashboard_invitation:
+          parameters:
+          - name: token
+            value: '"{{ shared_dashboard.token }}"'
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{unique_lower_alnum}}@datadoghq.com\"\n
+              \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
+          step: there is a valid "public_dashboard_invitation" in the system
       x-menu-order: 11
       x-undo:
         operationId: DeletePublicDashboardInvitation
         parameters:
         - name: token
-          source: token
+          source: data.attributes.share_token
+        - name: body
+          template: "{\n  \"data\": {\n    \"attributes\": {\n      \"email\": \"{{data.attributes.email}}\"\n
+            \   },\n    \"type\": \"public_dashboard_invitation\"\n  }\n}"
         type: unsafe
   /api/v1/dashboard/{dashboard_id}:
     delete:

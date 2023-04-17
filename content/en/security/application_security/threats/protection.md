@@ -37,7 +37,7 @@ From there, all ASM-protected services block incoming requests performed by the 
 
 ## Denylist
 
-Attackers’ IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7].
+Attackers' IP addresses and authenticated users that are permanently or temporarily blocked are added to the _Denylist_. Manage the list on the [Denylist page][7].
 
 ## Passlist
 
