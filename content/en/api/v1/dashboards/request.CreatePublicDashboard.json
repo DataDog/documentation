@@ -1,0 +1,8 @@
+{
+  "dashboard_id": "123-abc-456",
+  "dashboard_type": "custom_timeboard",
+  "share_type": "open",
+  "global_time": {
+    "live_span": "1h"
+  }
+}

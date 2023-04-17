@@ -2789,8 +2789,8 @@ main:
     parent: application_security
     identifier: appsec_howitworks
     weight: 3
-  - name: Risk Management
-    url: security/application_security/risk_management/
+  - name: Vulnerability Management
+    url: security/application_security/vulnerability_management/
     parent: application_security
     identifier: application_risk_management
     weight: 4

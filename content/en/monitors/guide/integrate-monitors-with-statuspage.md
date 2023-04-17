@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-[Atlassian Statuspage][1] is a status and incident management tool that provides visibility into your applications’ and services’ uptime. A status page can display custom metrics and events from Datadog, and you can update the status of your systems with Datadog monitor notifications.
+[Atlassian Statuspage][1] is a status and incident management tool that provides visibility into your applications' and services' uptime. A status page can display custom metrics and events from Datadog, and you can update the status of your systems with Datadog monitor notifications.
 
 ## Add Statuspage alerts as Datadog events
 

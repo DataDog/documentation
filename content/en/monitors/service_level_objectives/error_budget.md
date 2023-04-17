@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO’s error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
+SLO error budget alerts are threshold based and notify you when a certain percentage of your SLO's error budget has been consumed. For example, alert me if 75% of the error budget for my 7-day target is consumed. Warn me if 50% is consumed (optional).
 
 **Note:** Error budget alerts are only available for [metric-based SLOs][1] or for [monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 
@@ -25,7 +25,7 @@ For a description of key terminology around SLOs, including *error budgets*, see
 3. Select the **Error Budget** tab in **Step 1: Setting alerting conditions**.
 4. Set an alert to trigger when the percentage of the error budget consumed is above the `threshold`.
 over the past `target` number of days.
-4. Add [Notification information][5] into the **Say what’s happening** and **Notify your team** sections.
+4. Add [Notification information][5] into the **Say what's happening** and **Notify your team** sections.
 5. Click the **Save and Set Alert** button on the SLO configuration page.
 
 {{< img src="monitors/service_level_objectives/save_set_alert.png" alt="Save SLO and set up an error budget alert">}}
