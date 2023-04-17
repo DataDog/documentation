@@ -7,7 +7,7 @@ description: "Use Monitors to alert off of the burn rate of an SLO"
 
 ## Overview
 
-SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO’s 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
+SLO burn rate alerts notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a specific period of time. For example, you can set an alert if a burn rate of 14.4 or more is measured for the past hour over the past 5 minutes for your SLO's 30-day target. And you can set it to optionally warn you for a slightly lower threshold than you would want an alert, for example if a burn rate of 7.2 or more is observed.
 
 **Note:** Burn rate alerts are only available for [metric-based SLOs][1] or for [monitor-based SLOs][2] that are only composed of Metric Monitor types (Metric, Integration, APM Metric, Anomaly, Forecast, or Outlier Monitors).
 
@@ -15,7 +15,7 @@ SLO burn rate alerts notify you when the rate of consumption of your SLO error b
 
 ## How Burn Rate Alerts work
 
-A burn rate is a unitless value [coined by Google][3] that indicates how fast your error budget is consumed relative to your SLO’s target length. For example, a 30-day target, a burn rate of 1 means your error budget would be fully consumed in exactly 30 days if the rate of 1 was kept constant. A burn rate of 2 means the error budget would be exhausted in 15 days if kept constant, and a burn rate of 3 means 10 days, etc.
+A burn rate is a unitless value [coined by Google][3] that indicates how fast your error budget is consumed relative to your SLO's target length. For example, a 30-day target, a burn rate of 1 means your error budget would be fully consumed in exactly 30 days if the rate of 1 was kept constant. A burn rate of 2 means the error budget would be exhausted in 15 days if kept constant, and a burn rate of 3 means 10 days, etc.
 
 This relationship is represented by the following formula:
 
@@ -27,7 +27,7 @@ $$\text"error rate" = 1 - {\text"good behavior during time period" / \text"total
 
 The units of "behavior" will differ depending on the type of SLO. Metric-based SLOs track the number of occurrences of something (like number of successful or failed requests), while monitor-based SLOs track amounts of time (like downtime and uptime of monitors).
 
-When you set a target for your SLO (like 99.9%), your error budget is the amount of unreliability you’re allowed to have:
+When you set a target for your SLO (like 99.9%), your error budget is the amount of unreliability you're allowed to have:
 
 $$\text"error budget" = 100% - \text"SLO Target"$$
 
@@ -36,7 +36,7 @@ In other words, your error budget (in fractional form) is the ideal error rate y
 $$(\text"burn rate")  (\text"ideal error rate") = \text"observed error rate"$$
 $$(10)(0.001) = 0.01$$
 
-Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO’s target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.
+Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO's target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.
 
 When you configure a burn rate alert, you specify the burn rate threshold alongside a "long alerting window" and "short alerting window" over which the observed burn rate will be measured. The long alerting window is specified in hours and ensures the monitor measures the burn rate over a period long enough to correspond to a significant issue. This prevents the monitor from triggering flaky alerts due to minor issues. The short alerting window is specified in minutes. It ensures the monitor recovers quickly after the actual issue is over by checking if the recent burn rate is still above the threshold. Google recommends the short window to be 1/12 of the long window. However, you will be able to customize the short window programmatically in Datadog through the API or with Terraform. Here is the full formula for how the burn rate alert evaluates:
 
@@ -52,7 +52,7 @@ The maximum error rate that you can ever observe is 1 (for example, when 100% of
 
 $$\text"max burn rate" = 1 / {1 - \text"SLO target"}$$
 
-The lower your SLO target, the lower your maximum possible burn rate value. If you were to attempt to set a burn rate threshold higher than this value, it would be impossible for the alert to trigger. If you set a burn rate alert’s condition to a value higher than the maximum determined by the above formula, you’re telling the burn rate alert to notify you when your SLO is seeing an error rate greater than 100% (which is impossible). So, to avoid unhelpful alerts from being accidentally created, Datadog blocks the creation of burn rate alerts that set a burn rate value beyond their maximum.
+The lower your SLO target, the lower your maximum possible burn rate value. If you were to attempt to set a burn rate threshold higher than this value, it would be impossible for the alert to trigger. If you set a burn rate alert's condition to a value higher than the maximum determined by the above formula, you're telling the burn rate alert to notify you when your SLO is seeing an error rate greater than 100% (which is impossible). So, to avoid unhelpful alerts from being accidentally created, Datadog blocks the creation of burn rate alerts that set a burn rate value beyond their maximum.
 
 ## Picking burn rate values
 
@@ -77,7 +77,7 @@ For example, for a 7-day SLO, to be alerted if the theoretical error budget cons
 
 $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget consumed"} / {1 \text"hour" * 100%} = 16.8$$
 
-**Note:** For metric-based SLOs, the relationship in Approach #2 extrapolates the total number of occurrences contained in the long window out to the full length of the SLO target. In practice, the error budget consumption observed won’t correspond exactly to this relationship, as the total occurrences tracked by the metric-based SLO in a rolling window will likely differ throughout the day. A burn rate alert is meant to predict significant amounts of error budget consumption before they occur. For monitor-based SLOs, theoretical error budget consumption and actual error budget consumption are equal because time always moves at a constant rate . For example, 60 minutes of monitor data is aways contained in the 1 hour window.
+**Note:** For metric-based SLOs, the relationship in Approach #2 extrapolates the total number of occurrences contained in the long window out to the full length of the SLO target. In practice, the error budget consumption observed won't correspond exactly to this relationship, as the total occurrences tracked by the metric-based SLO in a rolling window will likely differ throughout the day. A burn rate alert is meant to predict significant amounts of error budget consumption before they occur. For monitor-based SLOs, theoretical error budget consumption and actual error budget consumption are equal because time always moves at a constant rate . For example, 60 minutes of monitor data is aways contained in the 1 hour window.
 
 ## Monitor creation
 
@@ -90,12 +90,12 @@ $$\text"burn rate" = {7 \text"days" * 24 \text"hours" * 10% \text"error budget c
    * Datadog supports a maximum value of 48 hours for the long window. Your long window must be in the range of `1 hour <= long window <= 48 hours`.
    * The short window is then automatically calculated in the UI as `short window = 1/12 * long window`.
    * You can specify a different short window value using the [API or Terraform](#api-and-terraform), but it must always be less than the long window.
-5. Add [Notification information][4] into the **Say what’s happening** and **Notify your team** sections.
+5. Add [Notification information][4] into the **Say what's happening** and **Notify your team** sections.
 6. Click the **Save and Exit** button on the SLO configuration page.
 
 ### Examples
 
-Below are tables of Datadog’s recommended values for 7, 30, and 90-day targets. 
+Below are tables of Datadog's recommended values for 7, 30, and 90-day targets. 
 
 - These examples assume a 99.9% target, but they are reasonable for targets as low as 96% (the max burn rate for 96% is 25). However, if you are using lower targets you may require lower thresholds as described in the [Maximum Burn Rate Values](#maximum-burn-rate-values) section, Datadog recommends that you use [Approach #2](#approach-2-theoretical-error-budget-consumption) with either a smaller value for theoretical error budget consumed or a higher value for the long window.
 - For metric-based SLOs, the theoretical error budget consumed is calculated by extrapolating the number of total occurrences observed in the long alerting window out to the total length of the SLO target. 

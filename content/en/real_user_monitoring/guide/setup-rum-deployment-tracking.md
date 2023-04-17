@@ -74,11 +74,11 @@ window.DD_RUM &&
 
 #### Android RUM
 
-The version tag is captured automatically from the application’s manifest.
+The version tag is captured automatically from the application's manifest.
 
 #### iOS RUM
 
-The version tag is captured automatically from the application’s app’s `info.plist`.
+The version tag is captured automatically from the application's app's `info.plist`.
 
 ## Analyze your deployment performance in RUM
 

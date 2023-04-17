@@ -41,7 +41,7 @@ The Datadog site navigation varies based on the width of your browser. You can h
 
 {{< img src="getting_started/apm.png" alt="APM Dashboard" >}}
 
-[Datadog Application Performance Monitoring][6] (APM or tracing) provides you with deep insight into your application’s performance—from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests—side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and show you systematic data about precisely what is happening to this request.
+[Datadog Application Performance Monitoring][6] (APM or tracing) provides you with deep insight into your application's performance—from automatically generated dashboards for monitoring key metrics, like request volume and latency, to detailed traces of individual requests—side by side with your logs and infrastructure monitoring. When a request is made to an application, Datadog can see the traces across a distributed system, and show you systematic data about precisely what is happening to this request.
 
 ## Infrastructure
 
@@ -139,7 +139,7 @@ Datadog [Synthetic Monitoring][22] allow you to create and run API and browser t
 
 ## Datadog on Mobile
 
-The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google Play Store][25], gives key data for on-call engineers and business users to follow their service health and triage issues quickly without opening their laptop. Access your organization’s Dashboards, Monitors, Incidents, SLOs and more directly from your mobile device.
+The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google Play Store][25], gives key data for on-call engineers and business users to follow their service health and triage issues quickly without opening their laptop. Access your organization's Dashboards, Monitors, Incidents, SLOs and more directly from your mobile device.
 
 {{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Mobile App on iOS">}}
 

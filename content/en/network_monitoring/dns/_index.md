@@ -30,7 +30,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 * The pods or services making DNS requests and the servers receiving those requests.
 * The endpoints making the most requests or making requests at the highest rate.
-* If a DNS server’s response time to requests has gradually or suddenly increased.
+* If a DNS server's response time to requests has gradually or suddenly increased.
 * The DNS servers with a high error rate and the type of errors being emitted.
 * Which domains are being resolved.
 
@@ -56,7 +56,7 @@ To refine your search to a particular DNS server, filter the destination search 
 * `IP`: The IP of the DNS server.
 * `dns_query`: **requires agent version 7.33 or higher** The domain that was queried.
 
-This example shows all flows from pods in the production environment’s availability zone to hosts receiving DNS requests:
+This example shows all flows from pods in the production environment's availability zone to hosts receiving DNS requests:
 
 {{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="Query of pods making requests to multiple DNS servers"  style="width:100%;">}}
 
@@ -90,7 +90,7 @@ Narrow down the traffic in your view with the **Filter Traffic** [options][3].
 
 ## Sidepanel
 
-The sidepanel provides contextual telemetry to help you quickly debug DNS server dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a DNS server’s high number of incoming requests, response time, or failure rate is due to:
+The sidepanel provides contextual telemetry to help you quickly debug DNS server dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a DNS server's high number of incoming requests, response time, or failure rate is due to:
 
 * Heavy processes consuming the resources of the underlying infrastructure
 * Application errors in the code on the client side
