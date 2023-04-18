@@ -38,7 +38,7 @@ RUM は 3 種類のフラストレーションシグナルを収集します。
 フラストレーションシグナルの収集を開始するには、SDK の構成に以下を追加します。
 
 ```
-DD_RUM.init({
+window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
 })
