@@ -215,7 +215,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
 
 1. Ensure your [Agent is running][2].
 
-2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
+2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`:
 
    **For Ubuntu, Debian or other Debian-based Linux distributions:**
    ```sh
@@ -245,6 +245,8 @@ When both the Agent and your services are running on a host, real or virtual, Da
    sudo apt install nodejs -y
    ```
    For .NET applications, ensure you have the [.NET runtime installed][3].
+   
+   For Python applications, ensure you have Python installed.
 
 2. If you haven't already, install your app.
 
@@ -337,26 +339,27 @@ Set `service_language` to one of the following values:
 - `java`
 - `node`
 - `dotnet`
+- `python`
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
-| Injection | Java tracer | NodeJS tracer | .NET tracer |
-| --------- | ----------- | ------------- | ----------- |
-| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |
-| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  |
-| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
-| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` |
-| `tracing_rate_limit` | n/a       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
-| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` |
-| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a |
-| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` |
-| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
+| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
+| --------- | ----------- | ------------- | ----------- | ------------- |
+| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
+| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
+| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
+| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
+| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
+| `tracing_rate_limit` | n/a       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
+| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
+| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
+| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
+| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
+| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
+| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
+| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
@@ -396,6 +399,11 @@ DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC node index.js &
 DD_CONFIG_SOURCES=BASIC dotnet <SERVICE_1>.dll &
 DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC dotnet <SERVICE_2>.dll &
 ```
+**Python app example**:
+```sh
+DD_CONFIG_SOURCES=BASIC python <SERVICE_1>.py &
+DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC python <SERVICE_2>.py &
+```
 
 Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
 
@@ -427,7 +435,7 @@ Any newly started processes are intercepted and the specified instrumentation li
 
 1. Ensure your [Agent is running][3].
 
-2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`:
+2. Install the library with one of the following sets of commands, where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`:
 
    **For Ubuntu, Debian or other Debian-based Linux distributions:**
    ```sh
@@ -543,26 +551,27 @@ Set `service_language` to one of the following values:
 - `java`
 - `node`
 - `dotnet`
+- `python`
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][4]:
 
-| Injection | Java tracer | NodeJS tracer | .NET tracer |
-| --------- | ----------- | ------------- | ----------- |
-| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |
-| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  |
-| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
-| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` |
-| `tracing_rate_limit` | n/a       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
-| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` |
-| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a |
-| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` |
-| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
+| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
+| --------- | ----------- | ------------- | ----------- | ------------- |
+| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
+| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
+| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
+| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
+| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
+| `tracing_rate_limit` | n/a       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
+| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
+| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
+| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
+| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
+| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
+| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
+| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
@@ -635,7 +644,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    sudo apt-get update
    sudo apt-get install datadog-apm-inject datadog-apm-library-<LANG>
    ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+   where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`.
 
 3. Run the command `dd-container-install`.
 
@@ -658,7 +667,7 @@ Any newly started processes are intercepted and the specified instrumentation li
    sudo yum makecache
    sudo yum install datadog-apm-inject datadog-apm-library-<LANG>
    ```
-   where `<LANG>` is one of `java`, `js`, `dotnet`, or `all`.
+   where `<LANG>` is one of `java`, `js`, `dotnet`, `python`, or `all`.
 
 3. Run the command `dd-container-install`.
 
@@ -762,26 +771,27 @@ Set `service_language` to one of the following values:
 - `java`
 - `node`
 - `dotnet`
+- `python`
 
 In this configuration file, the value of `version` is always `1`. This refers to the configuration schema version in use, not the version of the content.
 
 The following table shows how the injection configuration values map to the corresponding [tracing library configuration options][3]:
 
-| Injection | Java tracer | NodeJS tracer | .NET tracer |
-| --------- | ----------- | ------------- | ----------- |
-| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |
-| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |
-| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  |
-| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
-| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` |
-| `tracing_rate_limit` | n/a       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
-| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` |
-| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` |
-| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a |
-| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` |
-| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` |
-| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
-| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    |
+| Injection | Java tracer | NodeJS tracer | .NET tracer | Python tracer |
+| --------- | ----------- | ------------- | ----------- | ------------- |
+| `tracing_enabled` | `dd.trace.enabled` | `DD_TRACE_ENABLED` | `DD_TRACE_ENABLED` |  `DD_TRACE_ENABLED` |
+| `log_injection_enabled` | `dd.logs.injection` | `DD_LOGS_INJECTION` | `DD_LOGS_INJECTION` |  `DD_LOGS_INJECTION` |
+| `health_metrics_enabled` | `dd.trace.health.metrics.enabled` |    n/a   |    n/a  | n/a |
+| `runtime_metrics_enabled` | `dd.jmxfetch.enabled` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` | `DD_RUNTIME_METRICS_ENABLED` |
+| `tracing_sampling_rate` | `dd.trace.sample.rate` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE` | `DD_TRACE_SAMPLE_RATE`  |
+| `tracing_rate_limit` | n/a       | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` | `DD_TRACE_RATE_LIMIT` |
+| `tracing_tags` | `dd.tags` | `DD_TAGS` | `DD_TAGS` | `DD_TAGS` |
+| `tracing_service_mapping` | `dd.service.mapping` | `DD_SERVICE_MAPPING` | `DD_TRACE_SERVICE_MAPPING` | `DD_SERVICE_MAPPING` |
+| `tracing_agent_timeout` | `dd.trace.agent.timeout` |  n/a | n/a | n/a |
+| `tracing_header_tags` | `dd.trace.header.tags` |    n/a    | `DD_TRACE_HEADER_TAGS` | `DD_TRACE_HEADER_TAGS` |
+| `tracing_partial_flush_min_spans` | `dd.trace.partial.flush.min.spans` | `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` | `DD_TRACE_PARTIAL_FLUSH_ENABLED ` | n/a |
+| `tracing_debug` | `dd.trace.debug` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` | `DD_TRACE_DEBUG` |
+| `tracing_log_level` | `datadog.slf4j.simpleLogger.defaultLogLevel` | `DD_TRACE_LOG_LEVEL` |   n/a    | n/a |
 
 Tracer library configuration options that aren't mentioned in the injection configuration are still available for use through properties or environment variables the usual way.
 
