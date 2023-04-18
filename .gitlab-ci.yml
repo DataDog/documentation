@@ -284,40 +284,6 @@ test_live_link_checks:
     paths:
       - ./tmp/.htmltest
 
-index_algolia:
-  <<: *live_schedule_rules
-  image:
-    name: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:docsearch-scraper-latest
-    entrypoint: [ "" ] # force an empty entrypoint (see https://gitlab.com/gitlab-org/gitlab-runner/issues/2692)
-  tags: ["arch:amd64"]
-  before_script:
-    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
-  stage: post-deploy
-  environment: "live"
-  timeout: 2h 30m
-  script:
-    - |-
-      echo APPLICATION_ID=$(get_secret 'ci.documentation.algolia_docsearch_application_id') > .env
-      echo API_KEY=$(get_secret 'ci.documentation.algolia_docsearch_api_key') >> .env
-      export DISPLAY=:99
-      Xvfb :99 -ac &
-      echo "n" | docsearch run ./local/etc/algolia/docs_datadoghq.json
-  dependencies:
-    - build_live
-
-replica_algolia:
-  <<: *base_template
-  <<: *live_schedule_rules
-  stage: post-deploy
-  cache:
-    - *yarn_cache
-  environment: "live"
-  script:
-    - yarn install --immutable
-    - ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id') ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key') yarn run algolia:config
-  dependencies:
-    - build_live
-
 sourcemaps_live:
   <<: *base_template
   <<: *live_rules

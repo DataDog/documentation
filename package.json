@@ -4,7 +4,6 @@
     "description": "Datadog Docs built on HUGO",
     "private": true,
     "scripts": {
-        "algolia:config": "node ./local/bin/js/algolia-config.js",
         "algolia:sync": "node ./local/bin/js/algolia-index-sync.js",
         "preinstall": "bash local/bin/sh/preinstall.sh",
         "prestart": "rimraf public && npx hugo mod clean",
