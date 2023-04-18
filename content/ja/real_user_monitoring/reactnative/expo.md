@@ -111,6 +111,28 @@ yarn add -D @datadog/datadog-ci
 
 Expo のクラッシュの追跡については、[Expo のクラッシュレポートとエラーの追跡][6]を参照してください。
 
+## Expo Router 画面の追跡
+
+[Expo Router][7] を使用している場合は、`app/_layout.js` ファイルで画面を追跡してください。
+
+```javascript
+import { useEffect } from 'react';
+import { usePathname, useSearchParams, useSegments, Slot } from 'expo-router';
+
+export default function Layout() {
+    const pathname = usePathname();
+    const segments = useSegments();
+    const viewKey = segments.join('/');
+
+    useEffect(() => {
+        DdRum.startView(viewKey, pathname);
+    }, [viewKey, pathname]);
+
+    // 最も基本的な方法で、すべての子ルートをエクスポートします。
+    return <Slot />;
+}
+```
+
 ## Expo Go
 
 Expo Go を使用している場合は、開発ビルドに切り替えるか (推奨)、スタンドアロンアプリケーションで実行させながら Datadog なしで Expo Go を使い続けます (非推奨)。
@@ -183,3 +205,4 @@ DdSdkReactNative.initialize(config);
 [4]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
 [5]: https://docs.expo.dev/development/getting-started/
 [6]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/expo/
+[7]: https://expo.github.io/router/docs/
