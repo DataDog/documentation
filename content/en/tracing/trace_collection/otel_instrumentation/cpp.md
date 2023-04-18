@@ -24,7 +24,6 @@ The following OTel features implemented in the Datadog library as noted:
 | [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
-| `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through [custom logging][10]. |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 ## Configuring OTel to use the Datadog trace provider
