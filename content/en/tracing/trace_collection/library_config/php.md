@@ -321,11 +321,11 @@ A comma-separated list of query parameters to be collected as part of the URL. S
 **Default**: ""<br>
 A comma-separated list of HTTP POST data fields to be collected as part the request. Leave empty to redact all posted values, or use `*` to collect and redact them if needed. When specific fields are explicitly allowed, only those fields' values remain. Added in version `0.86.0`.<br>
 **Example**: 
-  - The posted data is `foo[baz]=bar&foo[baz][bar]=quz&foo[bar][password]=baz&foo[bar][baz]=quz`
+  - The posted data is `foo[baz]=bar&foo[baz][key]=quz&foo[bar][password]=baz&foo[bar][baz]=quz`
   - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`<br>
   - In this scenario, the collected metadata is:
     - `http.request.foo.baz=bar`
-    - `http.request.foo.baz.bar=quz`
+    - `http.request.foo.baz.key=quz`
     - `http.request.foo.bar.password=baz`
     - `http.request.foo.bar.baz=<redacted>`
 
