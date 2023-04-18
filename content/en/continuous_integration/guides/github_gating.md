@@ -24,53 +24,57 @@ Datadog is an integration partner for GitHub Actions Deployment Protection Rules
 
 These features are available for all Datadog customers, and they do not require usage of CI Visibility.
 
-## Enabling Deployment Protection Rules
+## Enable Deployment Protection Rules
 In order to rely on Datadog for quality checks on application deployments, you must have the Deployment Protection Rules feature enabled for your application.
 
-**Setting up a new GitHub application in Datadog**
-Follow instructions here[1] to create a GitHub application that is automatically connected to Datadog. When following these instructions, check the Deployment Protection Rules box.
+### Set up a new GitHub application in Datadog
+
+See [these instructions][1] to create a GitHub application that is automatically connected to Datadog. Remember to check the box for **Deployment Protection Rules**.
 
 {{< img src="ci/github_gates_new_app.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
-If you already have a GitHub application set up and connected to Datadog, you can find a link to enable Deployment Protection Rules via the in-app [GitHub integration tile][2].
+If you already have a GitHub application set up and connected to Datadog, you can find a link to enable Deployment Protection Rules on the in-app [GitHub integration tile][2].
 
 {{< img src="ci/github_gates_existing_app.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
-**Configuring Deployment Protection Rules in GitHub** 
-1. Enable read and write permissions for Deployments
-2. Enable read permissions for Actions 
-3. Under “Subscribe to events” in an application, check “Deployment protection rule”
-4. In a repository, click “Settings”. Under the *Code and Automation* section, click *Environments*. Under *Deployment Protection Rules*, enable the GitHub application that is linked with Datadog integration. 
+### Configure Deployment Protection Rules in GitHub
+1. Enable read and write permissions for Deployments.
+2. Enable read permissions for Actions.
+3. Under **Subscribe to events** in an application, click the checkbox for **Deployment protection rule**.
+4. In a repository, click **Settings**. Under the **Code and Automation** section, click **Environments**. Under **Deployment Protection Rules**, enable the GitHub application that is linked with the Datadog integration. 
 
-## Creating monitors to gate your deployments
-Follow instructions [here][3] to create and configure a Datadog monitor to be used for GitHub Actions deployment gating. You can use multiple separate monitors for quality checks, but [composite monitors][4] are recommended, as they allow you to gate deployments based on two or more signals with one monitor. See all monitor types [here][5]. 
+## Create monitors to gate your deployments
 
-Any monitors you plan to use for quality gating must be tagged properly with the two tags below:
+Follow [these instructions][3] to create and configure a Datadog monitor to be used for GitHub Actions deployment gating. 
+
+You can use multiple separate monitors for quality checks, but Datadog recommends using [composite monitors][4] because they allow you to gate deployments based on two or more signals with one monitor. For more information, see [Monitor Types][5]. 
+
+Any monitors you plan to use for quality gating must be tagged properly with the following tags:
 - `git_env` 
 - `git_repo` 
 
-The `git_repo` tag must contain the repository owner name in the format `<OWNER>/<REPO>`, e.g. `Datadog/my-repo`.
+The `git_repo` tag must contain the repository owner name in the format `<OWNER>/<REPO>`, such as `Datadog/my-repo`.
 
-When you run a workflow, GitHub Actions sends a request to your Datadog monitor. Based on one of the evaluation results of the monitor (listed below), Datadog sends a comment back to GitHub, which can be seen in GitHub under the Comment section for the associated event and environment within your workflow run.
-- If all monitors associated with your deployment (via environment and repo tags) are in the `OK` state, Datadog will approve the deployment
-- If any monitor associated with your deployment is not in `OK` state (in `ALERT`, `WARN`, or `NODATA`), Datadog will reject the deployment
+When you run a workflow, GitHub Actions send a request to your Datadog monitor. Based on one of the evaluation results of the monitor listed below, Datadog sends a comment back to GitHub, which can be seen in GitHub under the **Comment** section for the associated event and environment within your workflow run.
+- If all monitors associated with your deployment (through environment and repo tags) are in the `OK` state, Datadog approves the deployment.
+- If any monitor associated with your deployment is not in `OK` state (in `ALERT`, `WARN`, or `NODATA`), Datadog rejects the deployment.
 
 ## Example quality checks
-**Application performance**
-[APM monitors][7] can be used to ensure that your application’s error rate and/or average latency are below certain thresholds prior to deployment.  
+### Application performance
+To ensure that your application’s error rate and/or average latency are below certain thresholds prior to deployment, you can use [APM monitors][7].  
 
-**Environment infrastructure health**
-[Integration][8] and [metric][9] monitors can be used to check your application or service’s CPU and/or memory usage prior to deployment.
+### Environment infrastructure health
+To check your application or service’s CPU and/or memory usage prior to deployment, use [integration][8] and [metric monitors][9].
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[2]: https://docs.datadoghq.com/integrations/github/
-[3]: https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert
-[4]: https://docs.datadoghq.com/monitors/types/composite/ 
-[5]: https://docs.datadoghq.com/monitors/types/
-[6]: https://docs.datadoghq.com/monitors/settings/
-[7]: https://docs.datadoghq.com/monitors/types/apm/?tab=apmmetrics
-[8]: https://docs.datadoghq.com/monitors/types/integration/?tab=checkalert 
-[9]: https://docs.datadoghq.com/monitors/types/metric/?tab=threshold
+[1]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[2]: /integrations/github/
+[3]: /monitors/configuration/?tab=thresholdalert
+[4]: /monitors/types/composite/ 
+[5]: /monitors/types/
+[6]: /monitors/settings/
+[7]: /monitors/types/apm/?tab=apmmetrics
+[8]: /monitors/types/integration/?tab=checkalert 
+[9]: /monitors/types/metric/?tab=threshold
