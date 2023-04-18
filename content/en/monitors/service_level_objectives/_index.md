@@ -209,9 +209,14 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 
 ## SLO widgets
 
-After creating your SLO, you can use the SLO Summary widget to visualize the status of a single SLO or an SLO List widget to visualize a set of SLOs.For more information about SLO Widgets, see the [SLO Summary][18] and [SLO List][19] widget pages.
+After creating your SLO, you can visualize the data through Dashboards and widgets. 
+  - Use the SLO Summary widget to visualize the status of a single SLO.
+  - Use the SLO List widget to visualize a set of SLOs
+  - Graph metrics-based SLO data with the [SLO data source][18] in Timeseries/scalar widgets. 
+  
+For more information about SLO Widgets, see the [SLO Summary][19] and [SLO List][20] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][18].
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][20] to notify you when events corresponding to certain tags occur.
+To proactively manage the configurations of your SLOs, set an [Event Monitor][21] to notify you when events corresponding to certain tags occur.
 
 ## SLO status corrections
 
@@ -224,7 +229,7 @@ When you apply a correction, the time period you specify is dropped from the SLO
 - For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][21]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][22]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
@@ -241,7 +246,7 @@ The 90-day limits per SLO are as follows:
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][22], or a [Terraform resource][23].
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][23], or a [Terraform resource][24].
 
 {{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
 
@@ -280,9 +285,10 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [15]: /monitors/service_level_objectives/#saved-views
 [16]: /account_management/teams/#associate-resources-with-team-handles
 [17]: /api/latest/events/
-[18]: /dashboards/widgets/slo/
-[19]: /dashboards/widgets/slo_list/
-[20]: /monitors/types/event/
-[21]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[22]: /api/latest/service-level-objective-corrections/
-[23]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[18]: /dashboards/guide/slo_data_source/
+[19]: /dashboards/widgets/slo/
+[20]: /dashboards/widgets/slo_list/
+[21]: /monitors/types/event/
+[22]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[23]: /api/latest/service-level-objective-corrections/
+[24]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

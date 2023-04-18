@@ -4,8 +4,8 @@ kind: guide
 disable_toc: false
 ---
 
-{{< callout url="#" btn_hidden="true">}}
-  The SLO data type is in public beta. 
+{{< callout url="#" btn_hidden="true" header="false">}}
+  The SLO data source is in public beta. This feature is only supported for <strong>metric-based</strong> SLOs.
 {{< /callout >}}
 
 ## Overview

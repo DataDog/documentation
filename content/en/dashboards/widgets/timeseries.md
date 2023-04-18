@@ -13,7 +13,7 @@ further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
-- link: "/dashboards/guide/slo_data_type"
+- link: "/dashboards/guide/slo_data_source"
   tag: "Guide"
   text: "Graph historical SLO data on Dashboards"
 ---
