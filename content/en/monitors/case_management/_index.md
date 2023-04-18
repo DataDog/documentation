@@ -38,12 +38,6 @@ You can create or update cases from several locations in Datadog:
 - Workflows
 - The Case Management page
 
-### From a monitor
-
-1. Navigate to the monitor's status page.
-1. Open the **Escalate** dropdown menu at the top right.
-1. Click **Create a case** or click **Add to an existing case**.
-
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/
 [3]: https://app.datadoghq.com/cases/contexts/new
