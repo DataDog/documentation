@@ -1191,11 +1191,11 @@ main:
     parent: slos
     identifier: burn_rate
     weight: 404
-  - name: Incident Management
-    url: monitors/incident_management
+  - name: Case Management
+    url: monitors/case_management
     parent: alerting
-    identifier: incidents
-    weight: 5
+    identifier: case_management
+    weight: 10
   - name: Guides
     url: monitors/guide/
     weight: 100
