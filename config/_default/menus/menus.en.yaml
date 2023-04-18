@@ -1194,7 +1194,7 @@ main:
   - name: Case Management
     url: monitors/case_management
     parent: alerting
-    identifier: cases
+    identifier: case_management
     weight: 10
   - name: Guides
     url: monitors/guide/
