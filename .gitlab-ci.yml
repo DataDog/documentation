@@ -448,3 +448,18 @@ set_redirect_metadata_live:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
+
+synthetic_tests_preview:
+  <<: *base_template
+  <<: *preview_rules
+  stage: post-deploy
+  environment: "preview"
+  variables:
+    URL: ${PREVIEW_DOMAIN}
+  allow_failure: false
+  cache: {}
+  dependencies:
+    - build_preview
+  script:
+    - run_preview_synthetic_tests "./datadog-ci.preview.json"
+  interruptible: true
