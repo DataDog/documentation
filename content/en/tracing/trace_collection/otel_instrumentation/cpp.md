@@ -20,7 +20,7 @@ tktk C++ requirements
 The following OTel features implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
-|---------------------------------------|-------------|-----------------------------|
+|---------------------------------------|-----------------------------------------|
 | [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
