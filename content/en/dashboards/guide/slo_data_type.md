@@ -4,10 +4,10 @@ kind: guide
 disable_toc: false
 ---
 
-{{< callout custom_class="sign-up-trigger" btn_hidden="true" header="Join the Beta!">}}
-
-Datadog Apps is currently in beta, but you can easily request access! Use this form to submit your request today. Once approved, you can start getting creative and develop your App for you, your organization, or for publishing to the entire Datadog community alongside our other great Datadog Apps!
+{{< callout url="#" btn_hidden="true">}}
+  The SLO data type is in public beta. 
 {{< /callout >}}
+
 ## Overview
 
 Graph metric-based SLOs on dashboards and track trends across 15 months. You can also leverage the [scheduled dashboard reporting][1] functionality to automatically deliver visual reports to key stakeholders. 
