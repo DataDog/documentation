@@ -11,6 +11,8 @@ further_reading:
 - link: "/agent/guide/autodiscovery-management/"
   tag: "Documentation"
   text: "Manage which Container to include in the Agent Autodiscovery"
+algolia:
+  tags: ['auto conf','ignore auto conf', 'autoconf','ignore autoconf']
 ---
 
 When the Agent runs as a container, it tries by default to Autodiscover other containers around it based on default Autodiscovery configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:

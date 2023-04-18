@@ -507,6 +507,8 @@
                 - link: "real_user_monitoring/explorer/"
                   tag: "Documentation"
                   text: "Learn how to explore your RUM data"
+              algolia:
+                tags: ['ios rum']
 
         - action: pull-and-push-file
           branch: master
