@@ -23,6 +23,7 @@ def pull_and_push_file(content, content_dir):
     :param content: object with a file_name, a file_path, and options to apply
     :param content_dir: The directory where content should be put
     """
+    base_path = pathlib.Path(content["options"].get("base_path", content_dir))
     with open("".join(content["globs"]), mode="r+") as f:
         file_content = f.read()
         boundary = re.compile(r'^-{3,}$', re.MULTILINE)
@@ -49,14 +50,10 @@ def pull_and_push_file(content, content_dir):
 
     if output_content:
         destination_path = content["options"]["dest_path"].lstrip('/')
-        dest_path_dir = pathlib.Path(content_dir) / pathlib.Path(destination_path)
+        dest_path_dir = base_path / pathlib.Path(destination_path)
         dest_path_dir.mkdir(parents=True, exist_ok=True)
         with open(
-            "{}{}{}".format(
-                content_dir,
-                destination_path,
-                basename(content["options"]["file_name"]),
-            ),
+            dest_path_dir / pathlib.Path(basename(content["options"]["file_name"])),
             mode="w+",
             encoding="utf-8",
         ) as f:
