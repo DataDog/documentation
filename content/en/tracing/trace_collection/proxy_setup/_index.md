@@ -280,22 +280,12 @@ The available [environment variables][3] depend on the version of the C++ tracer
 
 | Envoy Version | C++ Tracer Version |
 |---------------|--------------------|
-| v1.24 | v1.2.1 |
-| v1.23 | v1.2.1 |
-| v1.22 | v1.2.1 |
-| v1.21 | v1.2.1 |
-| v1.20 | v1.2.1 |
-| v1.19 | v1.2.1 |
-| v1.18 | v1.2.1 |
-| v1.17 | v1.1.5 |
-| v1.16 | v1.1.5 |
-| v1.15 | v1.1.5 |
+| v1.18.x - v1.26.0 | v1.2.1 |
+| v1.15.x - v1.17.x | v1.1.5 |
 | v1.14 | v1.1.3 |
-| v1.13 | v1.1.1 |
-| v1.12 | v1.1.1 |
-| v1.11 | v0.4.2 |
-| v1.10 | v0.4.2 |
-| v1.9 | v0.3.6 |
+| v1.13.x - v1.12.x | v1.1.1 |
+| v1.10.x - v1.11.x | v0.4.2 |
+| v1.9.x | v0.3.6 |
 
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
@@ -696,21 +686,11 @@ The available [environment variables][11] depend on the version of the C++ trace
 
 | Istio Version | C++ Tracer Version |
 |---------------|--------------------|
-| v1.15.x | v1.2.1 |
-| v1.14.x | v1.2.1 |
-| v1.13.x | v1.2.1 |
-| v1.12.x | v1.2.1 |
-| v1.11.x | v1.2.1 |
-| v1.10.x | v1.2.1 |
-| v1.9.x | v1.2.1 |
-| v1.8.x | v1.1.5 |
-| v1.7.x | v1.1.5 |
+| v1.9.x - v1.17.x | v1.2.1 |
+| v1.7.x - v1.8.x | v1.1.5 |
 | v1.6.x | v1.1.3 |
-| v1.5.x | v1.1.1 |
-| v1.4.x | v1.1.1 |
-| v1.3.x | v1.1.1 |
-| v1.2.x | v0.4.2 |
-| v1.1.3 | v0.4.2 |
+| v1.3.x - v1.5.x | v1.1.1 |
+| v1.1.3 - v1.2.x | v0.4.2 |
 
 
 ## Deployment and service
