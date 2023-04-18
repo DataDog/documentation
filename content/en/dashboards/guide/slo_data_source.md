@@ -24,7 +24,7 @@ The *Display* parameter allows you to break out the query by the groups that are
 
 **Note**: [SLO status corrections][2] are applied to scalar widgets only. 
 
-| Measure / Widget type | Timeseries widget    | Other scalar widgets |
+| Measure / Widget type | Timeseries widget    | Scalar widgets |
 | ---  | ----------- | ----------- |
 | Good events | Visualizes the good events over the global time interval. Each time bucket represents the sum of good events across that time period. The bucket size is controlled by the length of the global time interval. | The sum of good events across all groups over the global time interval. |
 | Bad events | Visualizes the bad events over the global time interval. Each time bucket represents the sum of bad events across that time period. The bucket size is controlled by the length of the global time interval. | The sum of bad events across all groups over the global time interval. |
