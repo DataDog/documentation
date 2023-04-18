@@ -33,7 +33,7 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 ## Tag your telemetry
 
-To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.con/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
+To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
 
 {{< tabs >}}
 {{% tab "Docker Runtime" %}}

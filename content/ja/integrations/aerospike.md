@@ -25,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
@@ -34,7 +33,7 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.17.1
+integration_version: 1.17.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -49,8 +48,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::データストア
-  - Category::オートディスカバリー
-  - Category::Log Collection
+  - Category::ログの収集
   configuration: README.md#Setup
   description: Aerospike データベースからクラスターやネームスペースの統計を収集
   media: []
@@ -73,7 +71,7 @@ Aerospike データベースからメトリクスをリアルタイムに取得�
 注: 現在の Aerospike インテグレーションは、Aerospike サーバー v4.9 以上のみで互換性があります。詳細は、Aerospike の [Python クライアントライブラリリリースノート][1]を参照してください。
 これ以前のバージョンの Aerospike サーバーを使用している場合は、Datadog Agent のバージョン 7.29.0 以下を使用して監視することができます。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Aerospike チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
