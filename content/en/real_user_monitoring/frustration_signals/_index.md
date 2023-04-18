@@ -71,7 +71,7 @@ To start collecting frustration signals, add the following to your SDK configura
 {{< tabs >}}
 {{% tab "Swift" %}}
 
-``
+```
 .trackUIKitRUMActions()
 .trackFrustrations()
 ```
@@ -79,7 +79,7 @@ To start collecting frustration signals, add the following to your SDK configura
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 
-``
+```
 [builder trackUIKitRUMActions];
 [builder trackFrustrations];
 ```
