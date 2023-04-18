@@ -94,7 +94,7 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
-Log4j 2 includes a JSON layout. 
+Log4j 2 includes a JSON layout.
 
 1. Configure a file appender using the JSON layout in `log4j2.xml`:
     ```xml
@@ -140,7 +140,7 @@ Log4j 2 includes a JSON layout.
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback. 
+Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
 
 1. Configure a file appender using the JSON layout in `logback.xml`:
 
@@ -288,7 +288,7 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
     ```
 
 3. [Restart the Agent][7].
-4. Run the [Agent’s status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 
@@ -379,7 +379,7 @@ Use the [logstash-logback-encoder][11] logging library along with Logback to str
 
 1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
-    {{< site-region region="us,us3,us5" >}}
+    {{< site-region region="us,us3,us5,ap1" >}}
 
   ```xml
   <configuration>

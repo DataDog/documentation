@@ -21,6 +21,9 @@ further_reading:
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: Documentation
   text: インシデントと Slack のインテグレーション
+- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
+  tag: ブログ
+  text: Datadog CoScreen でより効率的なペアプログラミングを実現
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス

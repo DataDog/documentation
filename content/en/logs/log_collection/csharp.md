@@ -292,7 +292,7 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     ```
 
 3. [Restart the Agent][5].
-4. Run the [Agent’s status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][7] to extract log attributes. Use the [Log Explorer][8] to view and troubleshoot your logs.
 
@@ -399,6 +399,14 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -476,6 +484,19 @@ using (var log = new LoggerConfiguration()
 ```csharp
 using (var log = new LoggerConfiguration()
     .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.us3.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
     .CreateLogger())
 {
     // Some code

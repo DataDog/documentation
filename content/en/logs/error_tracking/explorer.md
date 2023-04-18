@@ -20,7 +20,7 @@ Datadog creates issues by computing a fingerprint for each error using some of i
 
 -   The error type and the error message
 -   The path to the file in which underlying errors are fired
--   Important information about the issue’s lifetime:
+-   Important information about the issue's lifetime:
     -   When it was first and last seen
     -   Graph of occurrences over time
     -   Number of occurrences in the selected time period

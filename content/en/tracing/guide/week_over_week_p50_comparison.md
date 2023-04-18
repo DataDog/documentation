@@ -1,5 +1,5 @@
 ---
-title: Compare a Service’s latency to the previous week
+title: Compare a Service's latency to the previous week
 kind: guide
 further_reading:
 - link: "/tracing/guide/alert_anomalies_p99_database/"
@@ -34,7 +34,7 @@ Datadog can show you the latency of your application over time and how it compar
 
     {{< img src="tracing/guide/week_over_week_p50_comparison/wow_p50_comp_2.png" alt="comparaison 2"  style="width:90%;">}}
 
-    The Service page comes out of the box for every service in your stack that’s available in Datadog APM. See in-depth analyses of throughput, latency (including percentile distribution) and errors as well as a summary of the active Datadog monitors for the [service][2] and breakdown of the [resources][3] made available by the service.
+    The Service page comes out of the box for every service in your stack that's available in Datadog APM. See in-depth analyses of throughput, latency (including percentile distribution) and errors as well as a summary of the active Datadog monitors for the [service][2] and breakdown of the [resources][3] made available by the service.
 
 3. **Find the Latency graph** on the top of the Service Dashboard and deselect all the percentiles from the legend leaving only the p50 option, then **Expand the Latency graph** to view the full screen mode where you can conduct a more comprehensive analysis.
 

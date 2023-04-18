@@ -7,7 +7,7 @@
         "myTag2:myValue"
       ]
     },
-    "id": "exampleaddresourcetoconfluentaccountreturnsokresponse",
+    "id": "exampleconfluentcloud",
     "type": "confluent-cloud-resources"
   }
 }

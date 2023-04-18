@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
   tag: "Blog"
   text: "Expedite infrastructure investigations with Kubernetes Anomalies"
+- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+  tag: "Blog"
+  text: "Practical tips for rightsizing your Kubernetes workloads"
 ---
 
 ## Overview
@@ -169,7 +172,7 @@ This panel is useful for troubleshooting and finding information about a selecte
 
 * [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
 * [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
-* **Network**: View a container or resource’s network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
+* **Network**: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
 * [**Traces**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 
 Kubernetes Resources views have a few additional tabs:

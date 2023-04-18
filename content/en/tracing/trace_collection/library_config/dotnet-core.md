@@ -188,7 +188,7 @@ Added in version `2.19.0`.<br>
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api, team:intake` <br>
+**Example**: `layer:api, team:intake, key:value` <br>
 Added in version 1.17.0. <br>
 Note that the delimiter is a comma and a space: `, `.
 
@@ -203,6 +203,17 @@ Note that the delimiter is a comma and a space: `, `.
 : Rename services using configuration. Accepts a comma-separated list of key-value pairs of service name keys to rename, and the name to use instead, in the format `[from-key]:[to-name]`. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
+
+`DD_HTTP_SERVER_TAG_QUERY_STRING`
+: When set to `true`, the `http.url` includes query string parameters. You can find more details in [Redacting the query in the url][14].
+**Default**: `true`
+
+`DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, the max size of the querystring to report is set, before obfuscation. Set 0 for no limit in size<br>
+**Default**: `5000`
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
 
 #### Automatic instrumentation optional configuration
 
@@ -300,3 +311,4 @@ The following configuration variables are for features that are available for us
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/configure_data_security/#redacting-the-query-in-the-url

@@ -13,6 +13,9 @@ further_reading:
     - link: 'monitors/monitor_types/metric/?tab=threshold'
       tag: 'Documentation'
       text: 'Create a Metrics monitor'
+    - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+      tag: "Blog"
+      text: "Practical tips for rightsizing your Kubernetes workloads"
 ---
 
 ## Overview

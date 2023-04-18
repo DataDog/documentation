@@ -23,6 +23,8 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
     tag: "Blog"
     text: "Correlate Datadog RUM events with traces from OTel-instrumented applications"
+algolia:
+  tags: ['rum traces']
 ---
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_trace_tab.png" alt="RUM and Traces" style="width:100%;">}}
@@ -46,6 +48,8 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 -   You have a corresponding trace for requests to `allowedTracingUrls` or `firstPartyHosts`.
 
 ### Setup RUM
+
+**Note:** Configuring RUM and Traces makes use of APM paid data in RUM, which may impact your APM billing.
 
 {{< tabs >}}
 {{% tab "Browser RUM" %}}

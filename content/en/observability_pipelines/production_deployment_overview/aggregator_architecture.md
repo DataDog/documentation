@@ -67,7 +67,7 @@ Compute optimized instances with at least 8 vCPUs and 16 GiB of memory. These ar
 | ------------- | ----------------------------------------------------- |
 | AWS           | c6i.2xlarge (recommended) or c6g.2xlarge          	|
 | Azure         | f8                                                	|
-| GCP           | c2 (8 vCPUs, 16 GiB memory)                       	|
+| Google Cloud  | c2 (8 vCPUs, 16 GiB memory)                       	|
 | Private       | 8 vCPUs, 16 GiB of memory, local disk is not required	|
 
 ### CPU sizing
@@ -78,7 +78,7 @@ Most Observability Pipelines Worker workloads are CPU constrained and benefit fr
 | ------------- | --------------------------------------------------------------------- |
 | AWS           | Latest generation Intel Xeon, 8 vCPUs (recommended), at least 4 vCPUs |
 | Azure         | Latest generation Intel Xeon, 8 vCPUs (recommended), at least 4 vCPUs |
-| GCP           | Latest generation Intel Xeon, 8 vCPUs (recommended), at least 4 vCPUs |
+| Google Cloud  | Latest generation Intel Xeon, 8 vCPUs (recommended), at least 4 vCPUs |
 | Private       | Latest generation Intel Xeon, 8 vCPUs (recommended), at least 4 vCPUs |
 
 ### CPU architectures
@@ -97,7 +97,7 @@ If you're using Observability Pipelines Worker's disk buffers for high durabilit
 | ------------- | --------------------------------------------------------------|
 | AWS           | EBS gp3, 36 GiB per vCPU, no additional IOPS or throughput    |
 | Azure         | Ultra-disk or standard SSD, 36 GiB per vCPU                   |
-| GCP           | Balanced or SSD persistent disks, 36 GiB per vCPU             |
+| Google Cloud  | Balanced or SSD persistent disks, 36 GiB per vCPU             |
 | Private       | Network-based block storage equivalent, 36 GiB per vCPU       |
 
 *The recommended sizes are calculated at Observability Pipelines Worker's 10 MiB/s/vCPU throughput for one hour. For example, an 8 vCPU machine would require 288 GiB of disk space (10 MiB * 60 seconds * 60 minutes * 8 vCPUs).
@@ -162,7 +162,7 @@ Datadog recommends Layer 4 (L4) load balancers (network load balancers) since th
 | ------------- | --------------------------------------------------------------|
 | AWS           | AWS Network Load Balancer (NLB)                               |
 | Azure         | Internal Azure Load Balancer                                  |
-| GCP           | Internal TCP/UDP Network Load Balancer                        |
+| Google Cloud  | Internal TCP/UDP Network Load Balancer                        |
 | Private       | HAProxy, Nginx, or another load balancer with layer-4 support |
 
 ##### Load balancer configurations

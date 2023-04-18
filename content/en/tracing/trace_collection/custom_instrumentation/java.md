@@ -111,7 +111,7 @@ import java.io.StringWriter;
     }
 ```
 
-**Note**: You can add any relevant error metadata listed in the [trace view docs][3]. If the current span isn’t the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][4] section for more details.
+**Note**: You can add any relevant error metadata listed in the [trace view docs][3]. If the current span isn't the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][4] section for more details.
 
 ### Set tags and errors on a root span from a child span
 
@@ -239,7 +239,7 @@ class SomeClass {
             // Alternatively, set tags after creation
             span.setTag("my.tag", "value");
 
-            // The code you’re tracing
+            // The code you're tracing
 
         } catch (Exception e) {
             // Set error on span

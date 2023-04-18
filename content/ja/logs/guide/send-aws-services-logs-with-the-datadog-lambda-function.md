@@ -44,7 +44,8 @@ S3 バケットまたは CloudWatch ロググループにログを生成する A
 | [S3][29]                          | [AWS S3 ログを有効にする][30]                                                                       | [手動][31]および[自動](#automatically-set-up-triggers)ログコレクション。 |
 | [SNS][32]                         | SNS はログを提供しませんが、SNS サービスに送信されるログとイベントを処理することができます。 | [手動][33]ログコレクション。                                                |
 | [RedShift][34]                    | [AWS Redshift ログを有効にします][35]                                                                 | [手動][36]および[自動](#automatically-set-up-triggers)ログコレクション。 |
-| [VPC][37]                         | [AWS VPC ログを有効にする][38]                                                                      | [手動][39]ログコレクション。                                                |
+| [Verified Access][37]             | [Verified Access ログを有効にする][38]                                                              | [手動][39]ログコレクション。                                                |
+| [VPC][40]                         | [AWS VPC ログを有効にする][41]                                                                      | [手動][42]ログコレクション。                                                |
 
 ## トリガーの設定
 
@@ -71,7 +72,7 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
 **注**: `SubscriptionFilter` は自動作成されません。
 
 1. [Datadog ログコレクション AWS Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
-2. [Datadog と AWS のインテグレーション][40]に使用する IAM ロールのポリシーに、次のアクセス許可があることを確認します。この許可の使用方法については、以下に説明されています。
+2. [Datadog と AWS のインテグレーション][43]に使用する IAM ロールのポリシーに、次のアクセス許可があることを確認します。この許可の使用方法については、以下に説明されています。
 
     ```text
     "cloudfront:GetDistributionConfig",
@@ -111,14 +112,14 @@ Datadog は、Datadog Forwarder Lambda 関数にトリガーを自動的に構�
     | `logs:DeleteSubscriptionFilter`                             | CloudWatch ログのイベントに基づいて Lambda トリガーを削除します。|
     | `logs:DescribeSubscriptionFilters`                          | 特定のロググループのサブスクリプションフィルターを一覧表示します。|
 
-3. [AWS インテグレーションページ][41]で、ログを収集する AWS アカウントを選択し、**Log Collection** タブをクリックします。
+3. [AWS インテグレーションページ][44]で、ログを収集する AWS アカウントを選択し、**Log Collection** タブをクリックします。
    {{< img src="logs/aws/aws_log_setup_step1.png" alt="特定の AWS アカウントの AWS インテグレーションページの Log Collection タブに、AWS Services のログを送信する指示と、Forwarder Lambda 関数の ARN を入力して自動的にサブスクライブするテキストボックスが表示されます。" popup="true" style="width:90%;" >}}
 4. 前のセクションで作成した Lambda の ARN を入力し、**Add** をクリックします。
 5. ログを収集するサービスを選択し、**Save** をクリックします。特定のサービスからのログの収集を停止するには、ログソースの選択を解除します。
    {{< img src="logs/aws/aws_log_setup_step2.png" alt="Included ARNs に 1 つの Lambda 関数が正常に入力され、Log Sources でいくつかのサービスが有効になっている特定の AWS アカウントの AWS インテグレーションページの Log Collection タブ" popup="true" style="width:90%;" >}}
 6. 複数のリージョンにログがある場合は、そのリージョンに追加の Lambda 関数を作成して、このページに入力する必要があります。
 7. すべての AWS ログの収集を停止するには、Lambda にカーソルを合わせ、Delete アイコンをクリックします。その関数のトリガーがすべて削除されます。
-8. この初期のセットアップから数分以内に、AWS ログが Datadog [ログエクスプローラー][42]に表示されるようになります。
+8. この初期のセットアップから数分以内に、AWS ログが Datadog [ログエクスプローラー][45]に表示されるようになります。
 
 ### 手動でトリガーをセットアップする
 
@@ -241,8 +242,8 @@ Resources:
 
 ## スクラビングとフィルター
 
-Lambda 関数から送信されるログからメールや IP アドレスをスクラブしたり、カスタムスクラブルールを [Lambda パラメーターで][43]定義することができます。
-また、[フィルターオプション][44]を使用して、特定のパターンに一致するログのみを除外または送信することができます。
+Lambda 関数から送信されるログからメールや IP アドレスをスクラブしたり、カスタムスクラブルールを [Lambda パラメーターで][46]定義することができます。
+また、[フィルターオプション][47]を使用して、特定のパターンに一致するログのみを除外または送信することができます。
 
 [1]: /ja/serverless/forwarder/
 [2]: /ja/serverless/forwarder#aws-privatelink-support
@@ -280,11 +281,14 @@ Lambda 関数から送信されるログからメールや IP アドレスをス
 [34]: /ja/integrations/amazon_redshift/
 [35]: /ja/integrations/amazon_redshift/#enable-aws-redshift-logging
 [36]: /ja/integrations/amazon_redshift/#log-collection
-[37]: /ja/integrations/amazon_vpc/
-[38]: /ja/integrations/amazon_vpc/#enable-vpc-flow-log-logging
-[39]: /ja/integrations/amazon_vpc/#log-collection
-[40]: /ja/integrations/amazon_web_services/
-[41]: https://app.datadoghq.com/integrations/amazon-web-services
-[42]: https://app.datadoghq.com/logs
-[43]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
-[44]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[37]: /ja/integrations/amazon_verified_access/
+[38]: /ja/integrations/amazon_verified_access/#enable-verified-access-logs
+[39]: /ja/integrations/amazon_verified_access/#log-collection
+[40]: /ja/integrations/amazon_vpc/
+[41]: /ja/integrations/amazon_vpc/#enable-vpc-flow-log-logging
+[42]: /ja/integrations/amazon_vpc/#log-collection
+[43]: /ja/integrations/amazon_web_services/
+[44]: https://app.datadoghq.com/integrations/amazon-web-services
+[45]: https://app.datadoghq.com/logs
+[46]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
+[47]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional

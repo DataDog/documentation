@@ -22,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
 display_on_public_website: true
@@ -43,9 +44,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Containers
   configuration: README.md#Setup
   description: コンテナのメトリクスを Datadog で追跡
   media: []
@@ -65,7 +67,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 コンテナは、Datadog Agent チェックの核であり、対応するコンテナランタイムが検出されると自動的にアクティベートされます。
 ご使用の環境により、対応するコンテナランタイム (Docker、containerd) へのアクセスの構成が必要になる場合があります。

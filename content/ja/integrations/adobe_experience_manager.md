@@ -1,30 +1,35 @@
 ---
-title: Adobe Experience Manager
-name: adobe_experience_manager
-kind: インテグレーション
-description: Adobe Experience Manager のログを収集して、エラー、リクエスト応答時間、パフォーマンスが低い Web ページなどを追跡します。
-short_description: ログを収集して、エラー、リクエスト応答時間などを追跡
-dependencies:
-  - 'https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md'
-categories:
-  - ログの収集
-doc_link: /integrations/adobe_experience_manager/
 aliases:
-  - /ja/logs/log_collection/adobe_experience_manager
+- /ja/logs/log_collection/adobe_experience_manager
+categories:
+- ログの収集
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/adobe_experience_manager.md
+description: Adobe Experience Manager のログを収集して、エラー、リクエスト応答時間、パフォーマンスが低い Web ページなどを追跡します。
+doc_link: /integrations/adobe_experience_manager/
+further_reading:
+- link: logs/
+  tag: Documentation
+  text: ログ管理
 has_logo: true
+integration_id: adobe
 integration_title: Adobe Experience Manager
 is_public: true
+kind: インテグレーション
+name: adobe_experience_manager
 public_title: Datadog-Adobe Experience Manager
+short_description: ログを収集して、エラー、リクエスト応答時間などを追跡
 supported_os:
-  - linux
-  - mac_os
-  - windows
-further_reading:
-  - link: logs/
-    tag: Documentation
-    text: ログ管理
-integration_id: adobe
+- linux
+- mac_os
+- windows
+title: Adobe Experience Manager
 ---
+
+{{% site-region region="us3" %}}
+<div class="alert alert-warning">選択した Datadog サイト ({{< region-param key="dd_site_name" >}}) では Adobe Experience Manager インテグレーションはサポートされていません。</div>
+{{% /site-region %}}
+
 ## 概要
 
 Adobe Experience Manager のログを収集して、エラー、リクエスト応答時間、パフォーマンスが低い Web ページなどを追跡します。

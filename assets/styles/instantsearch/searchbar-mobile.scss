@@ -1,0 +1,53 @@
+.mobile-nav-search-wrapper .searchbox-container {
+    filter: none;
+    margin-top: 13px;
+    z-index: 10001; // move search box container in front of open .dropdown-menu elements
+
+    #searchbox {
+        z-index: 2;
+    }
+
+    .hits-container {
+        z-index: 1;
+    }
+
+    #hits {
+        margin-top: 13px;
+        filter: none;
+    }
+
+    .ais-SearchBox-submit {
+        order: -1;
+        background-color: #ffffff;
+        color: #d6d6d6;
+        min-width: unset;
+        max-width: unset;
+        padding-right: 0;
+
+        & #submit-icon {
+            display: inline-flex;
+            height: 100%;
+            align-items: center;
+            margin-top: 0;
+        }
+
+        & #submit-text {
+            display: none;
+        }
+    }
+
+    // Overrides coming from "_mobile_nav.scss" hitting elements
+    .ais-Hits-item > p {
+        padding: 0 0 12px 0 !important;
+    }
+
+    .ais-Hits-subcategory {
+        padding: 6px 8px 12px 12px !important;
+    }
+
+    .ais-Hits-title,
+    .ais-Hits-content {
+        padding-left: 2px !important;
+        padding-right: 8px !important;
+    }
+}

@@ -51,7 +51,7 @@ Pour utiliser certaines fonctionnalités des versions récentes de Kubernetes, v
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-<div class="alert alert-warning">L'Operator Datadog est en bêta publique. Si vous souhaitez nous faire part de vos remarques ou de vos questions, contactez l'<a href="/help">assistance Datadog</a>.</div>
+<div class="alert alert-warning">L'Operator Datadog est disponible pour le grand public depuis la version `1.0.0`, il prend en charge la version `v2alpha1` du `DatadogAgent` .</div>
 
 [L'Operator Datadog][1] est une fonctionnalité permettant de déployer l'Agent Datadog sur Kubernetes et OpenShift. L'Operator transmet des données sur le statut, la santé et les erreurs du déploiement dans le statut de sa ressource personnalisée. Ses paramètres de niveau supérieur permettent également de réduire les erreurs de configuration.
 
@@ -59,7 +59,7 @@ Pour utiliser certaines fonctionnalités des versions récentes de Kubernetes, v
 
 L'utilisation de l'Operator Datadog nécessite les prérequis suivants :
 
-- **Cluster Kubernetes version >= v1.14.X** : les tests ont été réalisés sur les versions >= `1.14.0`. Néanmoins, les versions `>= v1.11.0` devraient également fonctionner. Pour les versions plus anciennes, en raison de la prise en charge limitée de la CRD, il se peut que l'Operator ne fonctionne pas comme prévu.
+- **Cluster Kubernetes version >= v1.20.X** : les tests ont été réalisés sur les versions >= `1.20.0`. Néanmoins, les versions `>= v1.11.0` devraient également fonctionner. Pour les versions plus anciennes, en raison de la prise en charge limitée de la CRD, il se peut que l'Operator ne fonctionne pas comme prévu.
 - [`Helm`][2] pour le déploiement de `datadog-operator`.
 - [Interface de ligne de commande `Kubectl`][3] pour l'installation de `datadog-agent`.
 
@@ -83,26 +83,28 @@ Pour déployer l'Agent Datadog avec l'Operator le plus rapidement possible, cons
 
 2. Créez un fichier avec les spécifications de la configuration de déploiement de votre Agent Datadog. Voici la configuration la plus simple :
 
-   ```yaml
-   apiVersion: datadoghq.com/v1alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     credentials:
-       apiSecret:
-         secretName: datadog-secret
-         keyName: api-key
-       appSecret:
-         secretName: datadog-secret
-         keyName: app-key
-     agent:
-       image:
-         name: "gcr.io/datadoghq/agent:latest"
-     clusterAgent:
-       image:
-         name: "gcr.io/datadoghq/cluster-agent:latest"
-   ```
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
+```
 
 3. Déployez l'Agent Datadog avec le fichier de configuration ci-dessus :
    ```shell
@@ -125,15 +127,21 @@ Pour en savoir plus sur la configuration de l'Operator, notamment sur l'utilisat
 (Facultatif) Pour exécuter une installation sans privilèges, ajoutez le bloc suivant à la [ressource personnalisée Datadog][8] :
 
 ```yaml
-agent:
-  config:
-    securityContext:
-      runAsUser: <ID_UTILISATEUR>
-      supplementalGroups:
-        - <ID_GROUPE_DOCKER>
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: placeholder
+  namespace: placeholder
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 1 # <ID_UTILISATEUR>
+        supplementalGroups:
+          - 123 # <ID_GROUPE_DOCKER>
 ```
 
-`<USER_ID>` correspond à l'UID utilisé pour exécuter l'agent et `<DOCKER_GROUP_ID>` à l'ID du groupe auquel appartient le socket containerd ou Docker.
+`<ID_UTILISATEUR>` correspond à l'UID utilisé pour exécuter l'agent et `<ID_GROUPE_DOCKER>` à l'ID du groupe auquel appartient le socket containerd ou Docker.
 
 ## Registres de conteneurs
 
@@ -237,7 +245,7 @@ datadog:
         - <ID_GROUPE_DOCKER>
 ```
 
-`<USER_ID>` correspond à l'UID utilisé pour exécuter l'agent et `<DOCKER_GROUP_ID>` à l'ID du groupe auquel appartient le socket containerd ou docker.
+`<ID_UTILISATEUR>` correspond à l'UID utilisé pour exécuter l'agent et `<ID_GROUPE_DOCKER>` à l'ID du groupe auquel appartient le socket containerd ou docker.
 
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
@@ -340,7 +348,7 @@ Pour installer l'Agent Datadog sur votre cluster Kubernetes :
         - <ID_GROUPE_DOCKER>
 ```
 
-`<USER_ID>` correspond à l'UID utilisé pour exécuter l'agent et `<DOCKER_GROUP_ID>` à l'ID du groupe auquel appartient le socket containerd ou docker.
+`<ID_UTILISATEUR>` correspond à l'UID utilisé pour exécuter l'agent et `<ID_GROUPE_DOCKER>` à l'ID du groupe auquel appartient le socket containerd ou docker.
 
 [1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
 [2]: /resources/yaml/datadog-agent-all-features.yaml

@@ -76,7 +76,7 @@ When you select and deselect facets, the search bar automatically reflects your 
 * **Search on free text**: Enter your text in the search bar to search on a test name.
 * **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click on an additional value's checkbox. You can also add the additional value with an `OR` Boolean operator and wrap the values using quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
 * **Search on multiple facets and text**: Click on facet values from different facet types to customize a search query that filters for multiple facets. For example, `type:api region:aws:us-east-2`. You can also mix facets and text. For example, `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
-* **Search on message**: Add a message to create a search query that filters on your tests’ notification messages configured in the [test monitor][5]. For example, `message:testcontent`.
+* **Search on message**: Add a message to create a search query that filters on your tests' notification messages configured in the [test monitor][5]. For example, `message:testcontent`.
 * **Exclude facets or text**: Click on an already-filled checkbox to deselect a facet value or prepend a term with `-` to exclude it from the search query. For example, `-state:paused`.
 * **Perform custom matches**: Use wildcards (`*`). For example, `valid*`.
 

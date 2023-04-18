@@ -38,7 +38,7 @@ Metric-based SLIs allow you to focus on the most important attributes of your SL
 
 {{< img src="monitors/service_level_objectives/metric_editor.png" alt="grouped metric-based SLO editor"  >}}
 
-By grouping these SLIs you can visualize each individual group’s status, good request counts, and remaining error budget on the detail panel:
+By grouping these SLIs you can visualize each individual group's status, good request counts, and remaining error budget on the detail panel:
 
 {{< img src="monitors/service_level_objectives/metric_results.png" alt="metric-based SLO group results"  >}}
 

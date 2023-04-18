@@ -22,7 +22,7 @@ All configuration options below have system property and environment variable eq
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
 
-Note: When using the Java tracer’s system properties, make sure that they are listed before `-jar` so they get read in as JVM options.
+Note: When using the Java tracer's system properties, make sure that they are listed before `-jar` so they get read in as JVM options.
 
 
 `dd.service`
@@ -33,7 +33,7 @@ The name of a set of processes that do the same job. Used for grouping stats for
 `dd.tags`
 : **Environment Variable**: `DD_TAGS`<br>
 **Default**: `null`<br>
-**Example**: `layer:api,team:intake`<br>
+**Example**: `layer:api,team:intake,key:value`<br>
 A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it overrides any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
 
 `dd.env`

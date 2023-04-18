@@ -18,7 +18,7 @@ assets:
     source_type_name: gRPC Check
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: help@datadoghq.com
   support_email: keisuke.umegaki.630@gmail.com
 categories: []
@@ -29,7 +29,7 @@ draft: false
 git_integration_title: grpc_check
 integration_id: grpc-check
 integration_title: gRPC Health
-integration_version: 1.0.1
+integration_version: 1.0.2
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -72,7 +72,7 @@ tile:
 grpc_check チェックをホストにインストールするには
 
 ```bash
-sudo -u dd-agent datadog-agent integration install -t datadog-grpc-check==1.0.1
+sudo -u dd-agent datadog-agent integration install -t datadog-grpc-check==1.0.2
 ```
 
 #### Dockerfile
@@ -81,7 +81,7 @@ sudo -u dd-agent datadog-agent integration install -t datadog-grpc-check==1.0.1
 
 ```Dockerfile
 FROM datadog/agent:7
-RUN agent integration install -r -t datadog-grpc-check==1.0.1 \
+RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
   && /opt/datadog-agent/embedded/bin/pip3 install grpcio grpcio-health-checking
 ```
 
@@ -115,7 +115,7 @@ grpc_check インテグレーションには、イベントは含まれません
 
 [1]: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://github.com/DataDog/integrations-extras/blob/master/grpc_check/datadog_checks/check/data/conf.yaml.example
+[3]: https://github.com/DataDog/integrations-extras/blob/master/grpc_check/datadog_checks/grpc_check/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-extras/blob/master/grpc_check/metadata.csv

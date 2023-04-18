@@ -46,7 +46,7 @@ CloudWatch's API returns only metrics with data points, so if for example an ELB
 
 ### Wrong count of aws.elb.healthy_host_count
 
-When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch’s side). For example, if you have two instances in `1a` and three instances in `ab`, the metric displays five instances per availability zone.
+When the cross-zone load balancing option is enabled on an ELB, all the instances attached to this ELB are considered part of all availability zones (on CloudWatch's side). For example, if you have two instances in `1a` and three instances in `ab`, the metric displays five instances per availability zone.
 As this can be counter intuitive, the metrics **aws.elb.healthy_host_count_deduped** and **aws.elb.un_healthy_host_count_deduped** display the count of healthy and unhealthy instances per availability zone, regardless of if this cross-zone load balancing option is enabled or not.
 
 ## Datadog app

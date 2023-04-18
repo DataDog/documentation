@@ -65,7 +65,7 @@ Set up the [Azure integration][1] within the subscription that holds your new st
 
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
+Set up the [Google Cloud integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a Google Cloud service account that Datadog can use][2] to integrate with.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /integrations/google_cloud_platform/?tab=datadogussite#setup
@@ -107,7 +107,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Google Cloud Storage" %}}
 
-Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under **Choose how to control access to objects**, select **Set object-level and bucket-level permissions.**
+Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your archives to. Under **Choose how to control access to objects**, select **Set object-level and bucket-level permissions.**
 
 **Note:** Do not add [retention policy][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
@@ -179,14 +179,14 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-Grant your Datadog GCP service account permissions to write your archives to your bucket.
+Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
 
-* If you’re creating a new Service Account, this can be done from the [GCP Credentials page][1].
-* If you’re updating an existing Service Account, this can be done from the [GCP IAM Admin page][2]).
+* If you're creating a new Service Account, this can be done from the [Google Cloud Credentials page][1].
+* If you're updating an existing Service Account, this can be done from the [Google Cloud IAM Admin page][2].
 
 Add the role under **Storage** called **Storage Object Admin**.
 
-  {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog GCP Service Account." style="width:75%;">}}
+  {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/apis/credentials
 [2]: https://console.cloud.google.com/iam-admin/iam
@@ -306,15 +306,17 @@ If you wish to rehydrate from archives in another access tier, you must first mo
 
 ##### SSE-S3
 
-The easiest method to add server side encryption to your S3 log archives is with S3's native server side encryption, [SSE-S3][1].
+The default encryption for Amazon S3 buckets is server-side encryption with Amazon S3 management keys ([SSE-S3][1]).
 
-To enable it, go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Select the `AES-256` option and **Save**.
+To confirm your S3 bucket is encrypted with SSE-S3:
 
-{{< img src="logs/archives/log_archives_s3_encryption.png" alt="Select the AES-256 option and Save."  style="width:75%;">}}
+1. Navigate to your S3 bucket.
+1. Click the **Properties** tab.
+1. In the **Default Encryption** section, check that the **Encryption key type** is **Amazon S3 managed keys (SSE-S3)**.
 
 ##### SSE-KMS
 
-Alternatively, Datadog supports server side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
+Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
 
 1. Create your CMK
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
@@ -412,7 +414,7 @@ The log archives that Datadog forwards to your storage bucket are in compressed 
 
 This directory structure simplifies the process of querying your historical log archives based on their date.
 
-Within the zipped JSON file, each event’s content is formatted as follows:
+Within the zipped JSON file, each event's content is formatted as follows:
 
 ```json
 {
