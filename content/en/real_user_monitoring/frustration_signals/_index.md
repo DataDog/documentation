@@ -40,7 +40,7 @@ First, you need the Browser RUM SDK version >= 4.14.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-```
+```javascript
 window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
@@ -56,7 +56,7 @@ First, you need the Android RUM SDK version >= 1.15.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-```
+```kotlin
 .trackInteractions(true)
 .trackFrustrations(true)
 ```
@@ -68,24 +68,10 @@ First, you need the iOS RUM SDK version >= 1.13.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-{{< tabs >}}
-{{% tab "Swift" %}}
-
-```
+```swift
 .trackUIKitRUMActions()
 .trackFrustrations()
 ```
-
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-
-```
-[builder trackUIKitRUMActions];
-[builder trackFrustrations];
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
@@ -94,7 +80,7 @@ First, you need the React Native RUM SDK version >= 1.5.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-```
+```js
 const config = new DdSdkReactNativeConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
