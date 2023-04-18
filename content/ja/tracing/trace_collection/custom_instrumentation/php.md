@@ -152,7 +152,7 @@ class SampleRegistry
 }
    {{< /code-block >}}
 
-2. 例えば `composer update` を実行して、オートローダーをダンプします。
+2. 例えば `composer dump` を実行して、オートローダーをダンプします。
 
    <div class="alert alert-info">
    <strong>Note</strong>: The file that contains the custom instrumentation code and the actual classes that are instrumented are not required to be in the same code base and package. By separating them, you can publish an open source composer package, for example to GitHub, containing only your instrumentation code, which others might find useful. Registering the instrumentation entry point in the <code>composer.json</code>'s <code>autoload.files</code> array ensures that the file is always executed when the composer autoloader is required.
