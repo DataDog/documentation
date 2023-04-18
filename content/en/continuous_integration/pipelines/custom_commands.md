@@ -24,7 +24,7 @@ Custom commands work with the following CI providers:
 - Jenkins with Datadog plugin >= v3.2.0
 - CircleCI
 
-## Installing the Datadog CI CLI
+## Install the Datadog CI CLI
 
 Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 
@@ -32,7 +32,7 @@ Install the [`datadog-ci`][1] (>=v0.17.0) CLI globally using `npm`:
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
-## Tracing a command
+## Trace a command
 
 To trace a command, run:
 

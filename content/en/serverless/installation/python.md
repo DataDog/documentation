@@ -14,6 +14,8 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
+algolia:
+  tags: ['python lambda traces']
 ---
 
 <div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>

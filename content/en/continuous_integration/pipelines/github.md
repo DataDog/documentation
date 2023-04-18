@@ -34,9 +34,9 @@ further_reading:
 
 - **Queue time**: View amount of time workflow jobs sit in the queue before processing
 
-## Configuring the Datadog integration
+## Configure the Datadog integration
 
-### Configuring a GitHub App
+### Configure a GitHub App
 
 The [GitHub Actions][1] integration uses a private [GitHub App][2] to collect workflow information. If you already have an app, you can
 skip to the next section.
@@ -74,7 +74,7 @@ Immediately after toggling logs collection, workflow job logs are forwarded to D
 
 Log files larger than 1GiB are truncated.
 
-### Infrastructure metric correlation
+### Correlate infrastructure metrics to jobs
 
 If you are using self-hosted GitHub runners, you can correlate jobs to the host that is running them. To do this, make sure the GitHub runner name
 matches the hostname of the machine it is running on. CI Visibility uses this to link to
@@ -87,7 +87,7 @@ The [Pipelines][7] and [Pipeline Executions][8] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
-## Disabling GitHub Actions tracing
+## Disable GitHub Actions tracing
 
 To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
 workflow job and workflow run events. To remove the events:

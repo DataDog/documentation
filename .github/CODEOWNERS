@@ -44,6 +44,9 @@ docker-compose-docs.yml                                 @DataDog/corpweb
 # Cloud Cost Management
 documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility @DataDog/documentation
 
+# Mobile SDK
+content/en/real_user_monitoring/android/                       @Datadog/rum-mobile @DataDog/documentation
+
 # Browser SDK
 content/en/real_user_monitoring/browser/                       @Datadog/rum-browser @DataDog/documentation
 content/en/real_user_monitoring/guide/                         @Datadog/rum-browser @DataDog/documentation

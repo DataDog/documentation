@@ -16,10 +16,12 @@ further_reading:
   text: "OTLP ingestion in the Agent"
 - link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
   tag: "Blog"
-  text: "Learn more about AWS’s managed Lambda Layer for OpenTelemetry"
+  text: "Learn more about AWS's managed Lambda Layer for OpenTelemetry"
 - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
   tag: "Blog"
   text: "Correlate Datadog RUM events with traces from OTel-instrumented applications"
+algolia:
+  tags: ['opentelemetry', 'open telemetry', 'otel']
 ---
 
 ## Overview

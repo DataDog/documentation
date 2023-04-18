@@ -10,7 +10,7 @@ further_reading:
   text: "Configuring your ASM setup"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
-  text: "Risk Management"
+  text: "Application Vulnerability Management"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How ASM Works"
