@@ -283,7 +283,7 @@ The available [environment variables][3] depend on the version of the C++ tracer
 | v1.18.x - v1.26.0 | v1.2.1 |
 | v1.15.x - v1.17.x | v1.1.5 |
 | v1.14 | v1.1.3 |
-| v1.13.x - v1.12.x | v1.1.1 |
+| v1.12.x - v1.13.x | v1.1.1 |
 | v1.10.x - v1.11.x | v0.4.2 |
 | v1.9.x | v0.3.6 |
 
