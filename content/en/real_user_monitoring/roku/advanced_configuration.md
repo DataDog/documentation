@@ -29,8 +29,7 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 Network requests made directly with a `roUrlTransfer` node must be tracked. 
 
-For **synchronous requests**, you can use our wrapper to track the resource automatically, by using our `datadogroku_DdUrlTransfer` wrapper, 
-which supports most features of the `roUrlTransfer` component (except anything related to async network calls).
+For *synchronous requests*, you can use Datadog's `datadogroku_DdUrlTransfer` wrapper to track the resource automatically. This wrapper supports most features of the `roUrlTransfer` component, but does not support anything related to async network calls.
 
 For example, here's how to do a `GetToString` call:
 
@@ -42,7 +41,7 @@ For example, here's how to do a `GetToString` call:
     result = ddUrlTransfer.GetToString()
 ```
 
-For **asynchronous request**, there's no automatic instrumentation yet, meaning you need to track the resource manually. The following code snippet shows how to report the request as a RUM Resource:
+For *asynchronous requests*, automatic instrumentation is not supported. You need to track the resource manually. The following code snippet shows how to report the request as a RUM Resource:
 
 ```brightscript
 sub performRequest()
@@ -105,7 +104,7 @@ Whenever you use a `Video` or an `Audio` node to stream media, you can forward a
 
 After your Roku channel is instrumented with RUM, you can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
 
-In addition to the default RUM attributes captured by the RUM Roku SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to slice and dice information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
+In addition to the default RUM attributes captured by the RUM Roku SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, or network health).
 
 ### Identifying your users
 

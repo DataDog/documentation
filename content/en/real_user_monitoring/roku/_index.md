@@ -23,12 +23,12 @@ further_reading:
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your channel's individual users.
 
-The Datadog Roku SDK supports Brightscript channels for Roku OS 10 and higher.
+The Datadog Roku SDK supports BrightScript channels for Roku OS 10 and higher.
 
 ## Setup
 
 1. Declare the SDK as a dependency.
-2. Specify application details in the UI.
+2. Specify application details in Datadog.
 3. Initialize the library.
 4. Instrument the channel.
 
@@ -47,17 +47,17 @@ ropm install datadog-roku
 If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][5] zip archive, 
 and unzipping it in your project's root folder.
 
-Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and ` source` folders of your projet.
+Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and ` source` folders of your project.
 
-### Specify application details in the UI
+### Specify application details in Datadog
 
 1. Navigate to [**UX Monitoring** > **RUM Applications** > **New Application**][2].
-2. Select `Roku` as the application type and enter an application name to generate a unique Datadog application ID and client token.
+2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][15].
 
    {{< img src="real_user_monitoring/roku/roku-new-application.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku Channel's brightscript code. 
+To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
 
 For more information about setting up a client token, see the [Client Token documentation][4].
 
@@ -151,7 +151,7 @@ end sub
 
 ### Instrument the channel
 
-See [`Track RUM Resources`][6] to enable automatic tracking of all your views (activities, fragments, and more), and [`Enrich user sessions`][7] to add custom global or user information to your events.
+See [**Track RUM Resources**][6] to enable automatic tracking of all your views (activities, fragments, and more), and [**Enrich user sessions**][7] to add custom global or user information to your events.
 
 #### Track RUM Views
 
@@ -173,7 +173,7 @@ RUM Actions represent the interactions your users have with your channel. You ca
     m.global.datadogRumAgent.callfunc("addAction", { target: targetName, type: actionType})
 ```
 
-#### Track RUM Errors
+#### Track RUM errors
 
 Whenever you perform an operation that might throw an exception, you can forward the error to Datadog as follows:
 
