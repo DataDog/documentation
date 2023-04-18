@@ -23,7 +23,9 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 
 1. Select an SLO from the dropdown menu.
 
-2. **For Metrics-based SLOs**: You can filter your query with tags. Leverage [template variables][2] to dynamically scope your results. You can use template variables in the filter by field to scope your results. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
+2. **For Metrics-based SLOs**: You can filter your query with tags. Leverage [template variables][2] to dynamically scope your results. 
+  - Build queries that take advantage of template variables in the filter by field to scope your results. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
+  - Filter your SLO metric queries by tags that you did not configure ahead of time 
 
 3. Select up to three different time windows.
 
