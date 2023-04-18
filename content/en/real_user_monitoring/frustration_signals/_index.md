@@ -172,7 +172,7 @@ A session replay's user journey details the events that occur in chronological o
  For more information, see the [Session Replay documentation][8].
  
 <div class="alert alert-warning">
-Session Replay is only available for Browser RUM.
+Session Replay is only available for Browser RUM at the moment.
 </div>
 
 ## Create alerts for frustration signals
