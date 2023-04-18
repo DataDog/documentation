@@ -19,7 +19,7 @@ further_reading:
 
 The Real User Monitoring (RUM) Explorer allows you to examine data collected from your applications and granular information about your RUM events. 
 
-Click the **Sessions** tab under **UX Monitoring** > **RUM Applications** to access the [RUM Explorer][1] and investigate any questions you have about your applications' health and usage. 
+Click the **Sessions & Replays** tab under **UX Monitoring** > **RUM Applications** to access the [RUM Explorer][1] and investigate any questions you have about your applications' health and usage. 
 
 You can:
 
@@ -27,7 +27,7 @@ You can:
 - Investigate performance issues affecting views, resources, or actions
 - Troubleshoot application errors and long tasks
 
-{{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="RUM Explorer" style="width:95%;" >}}
+{{< img src="real_user_monitoring/explorer/rum_explorer-1.png" alt="RUM Explorer" style="width:95%;" >}}
 
 ## Search and filter
 
