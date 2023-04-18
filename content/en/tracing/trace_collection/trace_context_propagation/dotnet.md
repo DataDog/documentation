@@ -73,6 +73,27 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
 
     return Enumerable.Empty<string>();
 }
+
+// SQS
+public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAttributeValue> headers, string name)
+{
+    // For SQS, there are a maximum of 10 message attribute headers,
+    // so the Datadog headers are combined into one header with the following properties:
+    // - Key: "_datadog"
+    // - Value: MessageAttributeValue object
+    //   - DataType: "String"
+    //   - StringValue: <JSON map with key-value headers>
+    if (headers.TryGetValue("_datadog", out var messageAttributeValue)
+        && messageAttributeValue.StringValue is string jsonString)
+    {
+        var datadogDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonString);
+        if (datadogDictionary.TryGetValue(name, out string value))
+        {
+            return new[] { value };
+        }
+    }
+    return Enumerable.Empty<string>();
+}
 ```
 
 When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
