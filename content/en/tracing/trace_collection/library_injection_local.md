@@ -246,7 +246,10 @@ When both the Agent and your services are running on a host, real or virtual, Da
    ```
    For .NET applications, ensure you have the [.NET runtime installed][3].
    
-   For Python applications, ensure you have Python installed.
+   For Python applications, ensure you have Python installed, for example:
+   ```sh
+   sudo apt install python -y
+   ```
 
 2. If you haven't already, install your app.
 
