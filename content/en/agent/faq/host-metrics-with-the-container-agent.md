@@ -56,7 +56,7 @@ Here is an example of a related log reported by the Agent:
 
 Ideally, you should only expose useful paths to the Agent's container. If needed, prevent these logs from being reported by the Agent by updating the Disk check's `conf.yaml` to exclude the relevant file systems by using one of the following parameters:
 
-* `file_system_blacklist` for Agent v6.8.0+
+* `file_system_exclude` for Agent v6.8.0+
 * `excluded_filesystems` for older Agent versions
 
 ## Further Reading
