@@ -3,6 +3,11 @@ title: Serverless Monitoring Guides
 kind: guide
 private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Serverless Monitoring Guides
 ---
 
 ## General serverless guides

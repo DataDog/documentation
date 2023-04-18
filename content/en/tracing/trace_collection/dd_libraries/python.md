@@ -134,7 +134,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Instrument Your Application
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/library_injection">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries Using Admission Controller</a> for instructions.</div>
 
 Once the agent is installed, to begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
 

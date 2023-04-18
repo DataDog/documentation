@@ -24,7 +24,7 @@ CWS uses the Datadog Agent to monitor your environment. If you don't already hav
 
 CWS comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
 
-[Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
+Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
 {{< img src="security/cws/cws_detection_rules.png" alt="Cloud Workload Security detection rules in the Datadog app" width="100%">}}
 

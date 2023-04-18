@@ -4,6 +4,8 @@ kind: guide
 disable_sidebar: true
 aliases:
   - /developers/faq/data-collection-resolution-retention/
+algolia:
+  tags: ['data retention']
 ---
 
 Find below a summary of Datadog data collection, resolution, and retention:

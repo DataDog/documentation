@@ -105,8 +105,12 @@ security:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
       - (?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM|HOME|SSH_AUTH_SOCK|USERPROFILE|XDG_CONFIG_HOME)$
 
-# Output Format for Redirects
 outputFormats:
+  Algolia:
+    baseName: "algolia"
+    isPlainText: true
+    mediaType: "application/json"
+    notAlternative: true
   Redirects:
     baseName: "redirects"
     isPlainText: true

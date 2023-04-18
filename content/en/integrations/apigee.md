@@ -22,57 +22,57 @@ further_reading:
 integration_id: "apigee"
 ---
 
-{{% site-region region="us3" %}}
-<div class="alert alert-warning">The Apigee integration is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
 ## Overview
 
-Collect Apigee proxy logs to track errors, response time, duration, latency, monitor performance, and proxy issues aggregated in one place.
+Collect Apigee proxy logs to track errors, response time, duration, latency, monitor performance, and proxy issues.
 
 ## Setup
 
-#### Log collection
+### Log collection
 
-There are two methods available for collecting Apigee logs:
+{{% site-region region="us,eu" %}}
+There are two methods for collecting Apigee logs:
 
 1. Use Apigee's [JavaScript policy][1] to send logs to Datadog.
 2. If you already have a syslog server, use the Apigee [MessageLogging policy][2] type to log to a syslog account.
 
-##### Syslog parameter
+#### Syslog parameter
 
-Use the MessageLogging policy type with the syslog parameter on your API to log custom messages to syslog. Include the Datadog logs intake endpoint ({{< region-param key="web_integrations_endpoint" code="true" >}}), port ({{< region-param key="web_integrations_port" code="true" >}}), and protocol for your region. For example:
+Use the MessageLogging policy type with the syslog parameter on your API to log custom messages to syslog. Replace `<site_intake_endpoint>` with {{< region-param key="web_integrations_endpoint" code="true" >}} and `<site_port>` with {{< region-param key="web_integrations_port" code="true" >}}, in the following example:
 
 ```json
 <MessageLogging name="LogToSyslog">
     <DisplayName>datadog-logging</DisplayName>
     <Syslog>
         <Message><YOUR API KEY> test</Message>
-        <Host>intake.logs.datadoghq.com</Host>
-        <Port>10516</Port>
+        <Host><site_intake_endpoint></Host>
+        <Port><site_port></Port>
         <Protocol>TCP</Protocol>
     </Syslog>
 </MessageLogging>
 ```
 
-##### JavaScript policy
+[1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
+[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
+
+{{% /site-region %}}
+#### JavaScript policy
 
 Send Apigee proxy logs to Datadog using Apigee's [JavaScript policy][1].
 
-The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the [list of standard attributes][3].
+The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the [list of standard attributes][2].
 
 1. Select the Apigee proxy from which you want to send logs to Datadog.
-2. In the selected proxy overview page, click on the 'DEVELOP' tab located in the top-right corner.
+2. In the selected proxy overview page, click the **DEVELOP** tab located in the top-right corner.
 
 {{< img src="integrations/apigee/apigee_develop.png" alt="Develop" style="width:75%;">}}
 
-3. Under 'Navigator', go to add a new JavaScript policy. Then edit the JavaScript file that has been created under the 'Resources --> jsc' dropdown.
-4. Add the following JavaScript code snippet in it. Make sure to set your Datadog **API KEY** in the `dd_api_url` variable.
+3. Under **Navigator**, go to add a new JavaScript policy and edit the JavaScript file created under the **Resources --> jsc** dropdown menu.
+4. Add the following JavaScript code snippet in it. Make sure to replace `<DATADOG_API_KEY>` in the `dd_api_url` variable with your [Datadog API KEY][3].
 
 ```
 // Set the Datadog API URL here.
-// Note: If you are in the Datadog EU site (app.datadoghq.eu), the HTTP log endpoint is http-intake.logs.datadoghq.eu.
-var dd_api_url = "https://http-intake.logs.datadoghq.com/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=apigee";
+var dd_api_url = "https://http-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=apigee";
 
 // Debug
 // print(dd_api_url);
@@ -157,9 +157,8 @@ Need help? Contact [Datadog support][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://docs.apigee.com/api-platform/reference/policies/javascript-policy
-[2]: https://docs.apigee.com/api-platform/reference/policies/message-logging-policy#samples
-[3]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
+[2]: /logs/log_configuration/attributes_naming_convention/#standard-attributes
 [4]: https://docs.apigee.com/api-platform/reference/variables-reference
 [5]: /help/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
