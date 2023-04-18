@@ -31,7 +31,7 @@ Make bulk edits to cases from the [Case Management page][1]:
 
 ## Create or update a case
 
-You can create cases from several locations in Datadog:
+You can create or update cases from several locations in Datadog:
 - Monitors
 - Security signals
 - Error tracking
