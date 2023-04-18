@@ -20,7 +20,7 @@ The resources dashboard provides insights about your applications' resources. It
 - **Resource load timings**:
     Monitor the trends in [resource timings][2] collected by the Browser SDK.
 
-{{< img src="real_user_monitoring/dashboards/resources_dashboard.png" alt="Resource Dashboard" >}}
+{{< img src="real_user_monitoring/dashboards/resources_dashboard-1.png" alt="Resource Dashboard" >}}
 
 For more information about the data displayed, see [RUM Browser Data Collected][3].
 

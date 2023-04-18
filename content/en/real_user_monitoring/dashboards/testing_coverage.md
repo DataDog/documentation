@@ -29,9 +29,9 @@ It shows:
 - **Percentage of tested actions**: Scan your application's overall testing coverage.
 - **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
 
-{{< img src="synthetics/dashboards/testing_coverage.png" alt="Out-of-the-box Synthetics testing coverage dashboard" style="width:100%" >}}
+{{< img src="synthetics/dashboards/testing_coverage-2.png" alt="Out-of-the-box Synthetics testing coverage dashboard" style="width:100%" >}}
 
-{{< img src="synthetics/dashboards/testing_coverage_actions_tests.png" alt="Untested RUM actions and top Synthetic browser tests covering RUM actions sections of the Synthetics testing coverage dashboard" style="width:100%" >}}
+{{< img src="synthetics/dashboards/testing_coverage_actions_tests-1.png" alt="Untested RUM actions and top Synthetic browser tests covering RUM actions sections of the Synthetics testing coverage dashboard" style="width:100%" >}}
 
 For more information about the data displayed, see [RUM Browser Data Collected][2].
 
