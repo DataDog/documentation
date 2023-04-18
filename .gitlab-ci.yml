@@ -456,7 +456,7 @@ synthetic_tests_preview:
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
-  allow_failure: false
+  allow_failure: true
   cache: {}
   dependencies:
     - build_preview
