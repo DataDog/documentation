@@ -32,9 +32,9 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 
 #### Set the time window
 
-Select up to three different rolling time windows. Optionally, you can select a calendar time window or select the Global Time.
+Select up to three different rolling time windows. Optionally, you can select a calendar time window or select **Global Time**.
 
-The `Global Time` allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days. 
+`Global Time` allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days. 
 
 You can specify an optional unique SLO target for the arbitrary time period. To display an error budget and to color code the SLO status value as green or red, you need to specify an SLO target. 
 
