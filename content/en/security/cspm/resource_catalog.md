@@ -9,6 +9,12 @@ further_reading:
   text: "Cloud Resource Schema"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+Resource Catalog is not currently available in this site.
+</div>
+{{< /site-region >}}
+
 Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security findings have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as databases, storage services, and hosts.
