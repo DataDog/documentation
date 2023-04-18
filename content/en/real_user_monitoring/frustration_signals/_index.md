@@ -163,10 +163,6 @@ Click on an error in the **Errors** tab to open a side panel with error details.
 
 ## Watch frustration signals in Session Replay
 
-<div class="alert alert-warning">
-Session Replay is only available for Browser RUM.
-</div>
-
 In [Session Replay][7], you can observe a video-like replication of real user activity. Replays provide video evidence of the actions users take when they exhibit signs of frustration.
 
 A session replay's user journey details the events that occur in chronological order. Hover over an event to move to that point in time in the replay: for example, when a dead click occurred.
@@ -174,6 +170,10 @@ A session replay's user journey details the events that occur in chronological o
 {{< img src="real_user_monitoring/frustration_signals/session_replay_frustration_signals.png" alt="Frustration signals appear in a browser recording" style="width:90%;" >}}
 
  For more information, see the [Session Replay documentation][8].
+ 
+<div class="alert alert-warning">
+Session Replay is only available for Browser RUM.
+</div>
 
 ## Create alerts for frustration signals
 
