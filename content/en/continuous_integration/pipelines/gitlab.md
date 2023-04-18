@@ -176,7 +176,7 @@ These filters can also be applied through the facet panel on the left hand side 
 {{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
 
 
-### Correlate nfrastructure metrics to jobs
+### Correlate infrastructure metrics to jobs
 
 If you are using self-hosted GitLab runners, you can correlate jobs with the infrastructure that is running them.
 For this feature to work, the GitLab runner must have a tag of the form `host:<hostname>`. Tags can be added while
