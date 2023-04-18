@@ -23,6 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md
 display_on_public_website: true
@@ -40,15 +41,16 @@ public_title: Kubernetes API サーバーメトリクス
 short_description: Kubernetes APIServer からメトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Containers
+  - Category::Kubernetes
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes APIServer からメトリクスを収集
   media: []
@@ -67,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Kube_apiserver_metrics チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 

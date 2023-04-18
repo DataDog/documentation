@@ -33,7 +33,7 @@ Enable debug logging in the tracer.
 It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Refer to the [Unified Service Tagging][1] documentation for recommendations on how to configure these environment variables.
 
 `DD_ENV`
-: Set the application’s environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][3]. Available in version 0.38+.
+: Set the application's environment, for example: `prod`, `pre-prod`, `staging`. Learn more about [how to setup your environment][3]. Available in version 0.38+.
 
 `DD_SERVICE`
 : The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][4]). Available in version 0.38+.
@@ -50,7 +50,7 @@ Propagation styles to use when extracting tracing headers. When multiple values 
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
 
 `DD_VERSION`
-: Set the application’s version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
+: Set the application's version, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Available in version 0.38+.
 
 `DD_TRACE_SAMPLE_RATE`
 : Enable trace volume control

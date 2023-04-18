@@ -23,7 +23,6 @@ author:
 categories:
 - クラウド
 - マーケットプレイス
-- モニタリング
 - ネットワーク
 - セキュリティ
 dependencies:
@@ -50,7 +49,6 @@ tile:
   classifier_tags:
   - Category::Cloud
   - Category::Marketplace
-  - Category::Monitoring
   - Category::Network
   - Category::Security
   - Offering::Integration

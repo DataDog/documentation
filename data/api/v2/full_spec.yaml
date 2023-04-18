@@ -1969,11 +1969,13 @@ components:
       properties:
         userActivationStatus:
           description: Whether signals will be sent.
+          nullable: true
           type: boolean
         userGroupByFields:
           description: Fields to use to group findings by when sending signals.
           items:
             type: string
+          nullable: true
           type: array
       type: object
     CloudConfigurationRuleCreatePayload:
@@ -2146,6 +2148,7 @@ components:
         name:
           description: The name of the user.
           example: Datadog User
+          nullable: true
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleData:
@@ -2221,6 +2224,7 @@ components:
         name:
           description: The name of the user.
           example: Datadog User
+          nullable: true
           type: string
       type: object
     CloudWorkloadSecurityAgentRulesListResponse:
@@ -2426,6 +2430,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
@@ -2560,6 +2566,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentResourceRequestData:
       description: JSON:API request for updating a Confluent resource.
@@ -2715,6 +2723,7 @@ components:
           type: string
         name:
           description: Name of the creator.
+          nullable: true
           type: string
       type: object
     DashboardListAddItemsRequest:
@@ -2765,6 +2774,7 @@ components:
           type: string
         icon:
           description: URL to the icon of the dashboard.
+          nullable: true
           readOnly: true
           type: string
         id:
@@ -11708,6 +11718,7 @@ components:
           type: integer
         name:
           description: The name for this user account.
+          nullable: true
           type: string
         uuid:
           description: UUID assigned by Datadog to this user account.
@@ -13366,6 +13377,7 @@ components:
           type: string
         description:
           description: Free-form markdown description/content for the team's homepage
+          nullable: true
           type: string
         handle:
           description: The team's identifier
@@ -13390,6 +13402,7 @@ components:
         summary:
           description: A brief summary of the team, derived from the `description`
           maxLength: 120
+          nullable: true
           type: string
         user_count:
           description: The number of users belonging to the team
@@ -14382,7 +14395,6 @@ components:
         type:
           $ref: '#/components/schemas/UserTeamType'
       required:
-      - id
       - type
       type: object
     UserTeamUpdateRequest:
@@ -14806,7 +14818,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/SpansMetricIDParameter'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -17265,9 +17277,8 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
-              {\n      \"api_key\": \"6Zm7WEgKzAlCnt_4exfEK0mSoeHHAaDf41O1AAfu\",\n
-              \     \"name\": \"{{ unique_lower_alnum }}\",\n      \"email\": \"dev@datadog.com\"\n
-              \   }\n  }\n}"
+              {\n      \"api_key\": \"fakekey\",\n      \"name\": \"{{ unique_lower_alnum
+              }}\",\n      \"email\": \"dev@datadog.com\"\n    }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
       x-undo:
@@ -18269,6 +18280,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -18826,7 +18838,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/MetricID'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -25029,8 +25041,7 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `audit_trail`, `serverless`, `ci_app`,
-          `cloud_cost_management`,
+          `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
           `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
@@ -25043,7 +25054,9 @@ paths:
           `sds`, `snmp`,
 
           `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.'
+          `timeseries`.
+
+          The following product family has been **deprecated**: `audit_logs`.'
         in: query
         name: filter[product_families]
         required: true
@@ -25704,6 +25717,7 @@ servers:
       - datadoghq.com
       - us3.datadoghq.com
       - us5.datadoghq.com
+      - ap1.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:

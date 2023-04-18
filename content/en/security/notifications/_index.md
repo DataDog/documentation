@@ -35,7 +35,7 @@ Send notifications through email, Slack, Jira, PagerDuty, or a webhook.
 
 ## Detection Rule notifications
 
-When you [create or modify a new detection rule][2], you can use the **Set rule case** and **Say what’s happening** section to define the notifications that are sent. 
+When you [create or modify a new detection rule][2], you can use the **Set rule case** and **Say what's happening** section to define the notifications that are sent. 
 
 ### Set rule case
 
@@ -59,7 +59,7 @@ Use the **Tag resulting signals** dropdown to tag your signals with different ta
 
 ## Notification rules
 
-Notification rules allow you to set general alerting preferences so that you don’t have to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
+Notification rules allow you to set general alerting preferences so that you don't have to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
 ## Further reading
 
