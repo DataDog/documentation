@@ -1,12 +1,13 @@
 ---
 title: Events with a Custom Agent Check
-kind: documentation
+kind: guide
+aliases:
+- /events/agent/
+- /events/guides/agent
 further_reading:
 - link: "/developers/custom_checks/write_agent_check/"
   tag: "Documentation"
   text: "Writing a Custom Agent Check"
-aliases:
-    - /events/agent/
 ---
 
 ## Submission

@@ -1,7 +1,10 @@
 ---
 title: Events with DogStatsD
-kind: documentation
+kind: guide
 description: Overview of the features of DogStatsD, including data types and tagging.
+aliases:
+- /developers/events/dogstatsd/
+- /events/guides/dogstatsd
 further_reading:
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
@@ -12,8 +15,6 @@ further_reading:
 - link: "https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd"
   tag: "GitHub"
   text: "DogStatsD source code"
-aliases:
-    - /developers/events/dogstatsd/
 ---
 
 ## Submission

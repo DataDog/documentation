@@ -2,8 +2,9 @@
 title: Events
 kind: documentation
 aliases:
-    - /guides/eventcorrelation/
-    - /guides/markdown/
+- /guides/eventcorrelation/
+- /guides/markdown/
+- /events
 further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
