@@ -624,22 +624,6 @@ main:
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
     weight: 5
-  - name: Events
-    url: events/
-    identifier: events_top_level
-    pre: events
-    parent: platform_heading
-    weight: 60000
-  - name: Explorer
-    url: events/explorer/
-    identifier: event_explorer
-    parent: events_top_level
-    weight: 2
-  - name: Guides
-    url: events/guides/
-    identifier: events_guides
-    parent: events_top_level
-    weight: 3
   - name: Custom Agent Check
     url: events/guides/agent/
     parent: events_guides
@@ -661,7 +645,7 @@ main:
     pre: dashboard
     identifier: dashboards
     parent: platform_heading
-    weight: 70000
+    weight: 60000
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
@@ -765,7 +749,7 @@ main:
     identifier: mobile
     pre: mobile
     parent: platform_heading
-    weight: 80000
+    weight: 70000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -911,7 +895,7 @@ main:
     identifier: metrics_top_level
     pre: metric
     parent: platform_heading
-    weight: 110000
+    weight: 80000
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
@@ -993,7 +977,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 120000
+    weight: 90000
   - name: Guides
     url: notebooks/guide
     parent: notebooks
@@ -1004,7 +988,7 @@ main:
     pre: monitor
     identifier: alerting
     parent: platform_heading
-    weight: 130000
+    weight: 100000
   - name: Configure Monitors
     url: monitors/configuration/
     parent: alerting
@@ -1155,72 +1139,152 @@ main:
     weight: 5
     parent: alerting
     identifier: monitor_settings
-  - name: Service Level Objectives
-    url: monitors/service_level_objectives/
-    weight: 6
-    parent: alerting
-    identifier: slos
-  - name: Incident Management
-    url: monitors/incident_management
-    parent: alerting
-    identifier: incidents
-    weight: 8
-  - name: Incident Details
-    url: monitors/incident_management/incident_details
-    parent: incidents
-    identifier: incident_details
-    weight: 801
-  - name: Incident Settings
-    url: monitors/incident_management/incident_settings
-    parent: incidents
-    identifier: incidents_settings
-    weight: 802
-  - name: Incident Analytics
-    url: monitors/incident_management/analytics
-    parent: incidents
-    identifier: analytics
-    weight: 803
-  - name: Datadog Clipboard
-    url: monitors/incident_management/datadog_clipboard
-    parent: incidents
-    identifier: incidents_clipboard
-    weight: 804
-  - name: Monitor-based SLOs
-    url: monitors/service_level_objectives/monitor/
-    parent: slos
-    identifier: slos_monitor
-    weight: 401
-  - name: Metric-based SLOs
-    url: monitors/service_level_objectives/metric/
-    parent: slos
-    identifier: slos_metric
-    weight: 402
-  - name: Error Budget Alerts
-    url: monitors/service_level_objectives/error_budget/
-    parent: slos
-    identifier: error_budget
-    weight: 403
-  - name: Burn Rate Alerts
-    url: monitors/service_level_objectives/burn_rate/
-    parent: slos
-    identifier: burn_rate
-    weight: 404
-  - name: Case Management
-    url: monitors/case_management
-    parent: alerting
-    identifier: case_management
-    weight: 10
+  # - name: Service Level Objectives
+  #   url: monitors/service_level_objectives/
+  #   weight: 6
+  #   parent: alerting
+  #   identifier: slos
+  # - name: Incident Management
+  #   url: monitors/incident_management
+  #   parent: alerting
+  #   identifier: incidents
+  #   weight: 8
+  # - name: Incident Details
+  #   url: monitors/incident_management/incident_details
+  #   parent: incidents
+  #   identifier: incident_details
+  #   weight: 801
+  # - name: Incident Settings
+  #   url: monitors/incident_management/incident_settings
+  #   parent: incidents
+  #   identifier: incidents_settings
+  #   weight: 802
+  # - name: Incident Analytics
+  #   url: monitors/incident_management/analytics
+  #   parent: incidents
+  #   identifier: analytics
+  #   weight: 803
+  # - name: Datadog Clipboard
+  #   url: monitors/incident_management/datadog_clipboard
+  #   parent: incidents
+  #   identifier: incidents_clipboard
+  #   weight: 804
+  # - name: Monitor-based SLOs
+  #   url: monitors/service_level_objectives/monitor/
+  #   parent: slos
+  #   identifier: slos_monitor
+  #   weight: 401
+  # - name: Metric-based SLOs
+  #   url: monitors/service_level_objectives/metric/
+  #   parent: slos
+  #   identifier: slos_metric
+  #   weight: 402
+  # - name: Error Budget Alerts
+  #   url: monitors/service_level_objectives/error_budget/
+  #   parent: slos
+  #   identifier: error_budget
+  #   weight: 403
+  # - name: Burn Rate Alerts
+  #   url: monitors/service_level_objectives/burn_rate/
+  #   parent: slos
+  #   identifier: burn_rate
+  #   weight: 404
+  # - name: Case Management
+  #   url: monitors/case_management
+  #   parent: alerting
+  #   identifier: case_management
+  #   weight: 10
   - name: Guides
     url: monitors/guide/
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Service Management
+    url: service_management/
+    pre: events
+    identifier: service_management_top_level
+    parent: platform_heading
+    weight: 110000
+  - name: Service Level Objectives
+    url: /service_level_objectives/
+    weight: 1
+    parent: service_management_top_level
+    identifier: slos
+  - name: Monitor-based SLOs
+    url: /service_level_objectives/monitor/
+    parent: slos
+    identifier: slos_monitor
+    weight: 101
+  - name: Metric-based SLOs
+    url: /service_level_objectives/metric/
+    parent: slos
+    identifier: slos_metric
+    weight: 102
+  - name: Error Budget Alerts
+    url: /service_level_objectives/error_budget/
+    parent: slos
+    identifier: error_budget
+    weight: 103
+  - name: Burn Rate Alerts
+    url: /service_level_objectives/burn_rate/
+    parent: slos
+    identifier: burn_rate
+    weight: 104
+  - name: Events
+    url: events/
+    identifier: events
+    parent: service_management_top_level
+    weight: 2
+  - name: Explorer
+    url: events/explorer/
+    identifier: event_explorer
+    parent: events
+    weight: 201
+  - name: Incident Management
+    url: /incident_management
+    parent: service_management_top_level
+    identifier: incidents
+    weight: 4
+  - name: Incident Details
+    url: /incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 401
+  - name: Incident Settings
+    url: /incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 402
+  - name: Incident Analytics
+    url: /incident_management/analytics
+    parent: incidents
+    identifier: analytics
+    weight: 403
+  - name: Datadog Clipboard
+    url: /incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 404
+  - name: Case Management
+    url: /case_management
+    parent: service_management_top_level
+    identifier: case_management
+    weight: 3
+  - name: Guides
+    url: service_management/guides/
+    identifier: service_management_guides
+    parent: service_management_top_level
+    weight: 99
+
+
+
+
   - name: Workflows
     url: workflows/
     pre: workflows
     identifier: workflows
     parent: platform_heading
-    weight: 140000
+    weight: 120000
   - name: Build Workflows
     url: workflows/build/
     parent: workflows
