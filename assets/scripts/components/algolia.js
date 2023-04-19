@@ -6,6 +6,13 @@ import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
 import { debounce } from '../utils/debounce';
+import { datadogRum } from '@datadog/browser-rum';
+
+const { env } = document.documentElement.dataset;
+const pageLanguage = getPageLanguage();
+const algoliaConfig = getConfig(env).algoliaConfig;
+const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
+const indexName = algoliaConfig.index;
 
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
@@ -18,14 +25,16 @@ function getPageLanguage() {
     return 'en';
 }
 
-const { env } = document.documentElement.dataset;
-const pageLanguage = getPageLanguage();
-const algoliaConfig = getConfig(env).algoliaConfig;
+function sendSearchRumAction(query) {
+    if (query !== '') {
+        datadogRum.addAction('userSearch', {
+            query,
+            page: window.location.pathname
+        })
+    }
+}
 
-const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
-const indexName = algoliaConfig.index;
-
-function loadInstantSearch(asyncLoad) {
+function loadInstantSearch(pageWasAsyncLoaded) {
     const searchBoxContainerContainer = document.querySelector('.searchbox-container');
     const searchBoxContainer = document.querySelector('#searchbox');
     const hitsContainerContainer = document.querySelector('.hits-container');
@@ -40,7 +49,7 @@ function loadInstantSearch(asyncLoad) {
     let hitComponent = searchbarHits;
 
     // If asyncLoad is true, we're not on the search page anymore
-    if (asyncLoad === true) {
+    if (pageWasAsyncLoaded === true) {
         searchResultsPage = false;
     }
 
@@ -145,6 +154,7 @@ function loadInstantSearch(asyncLoad) {
             const handleSearchbarKeydown = (e) => {
                 if (e.code === 'Enter') {
                     e.preventDefault();
+                    sendSearchRumAction(search.helper.state.query)
 
                     // Give query-url sync 500ms to update
                     setTimeout(() => {
@@ -155,17 +165,27 @@ function loadInstantSearch(asyncLoad) {
 
             const handleSearchbarSubmitClick = () => {
                 if (aisSearchBoxInput.value) {
+                    sendSearchRumAction(search.helper.state.query)
                     window.location.pathname = searchPathname;
                 }
             };
 
             const handleOutsideSearchbarClick = (e) => {
+                e.preventDefault()
                 let target = e.target;
+
                 do {
                     if (target === searchBoxContainerContainer) {
                         return;
                     }
+
                     target = target.parentNode;
+                    
+                    if (target && target.href) {
+                        sendSearchRumAction(search.helper.state.query)
+                        window.history.pushState({}, '', target.href)
+                        window.location.reload()
+                    }
                 } while (target);
 
                 hitsContainerContainer.classList.add('d-none');

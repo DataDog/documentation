@@ -1,4 +1,5 @@
 /* eslint import/no-unresolved: 0 */
+import { datadogRum } from '@datadog/browser-rum';
 import { getConfig } from '../helpers/getConfig';
 const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
