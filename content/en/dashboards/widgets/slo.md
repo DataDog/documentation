@@ -22,9 +22,9 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 ### Configuration
 
 1. Select an SLO from the dropdown menu.
-2. **For Metrics-based SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
-    - Build queries that take advantage of template variables in the *filter by* field to scope your results. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
-    - Add additional scope and context to your widget queries even if the tags were not included in the original configuration. For example, if the original SLO query is `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` and in the SLO Widget you add `filter by: env` the SLO Widget will further scope down the data by the `env` tag.
+2. **For metric-based SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
+    - Take advantage of template variables by using the *filter by* field to scope the SLO statuses the widget displays. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
+    - Add additional scope and context to your SLO metric queries even if the tags were not included in the original SLO configuration. For example, if the original SLO query is `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` and you filter by `env:prod` in the widget, your data will be scoped to only that from your `prod` environment.
 
 3. Select up to three different time windows.
 
