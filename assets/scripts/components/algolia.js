@@ -27,7 +27,12 @@ function getPageLanguage() {
 
 function sendSearchRumAction(query) {
     if (query !== '') {
+        console.log(`Sending RUM action, userSearch: ${query}`)
         datadogRum.addAction('userSearch', {
+            query,
+            page: window.location.pathname
+        })
+        window.DD_RUM.addAction('userSearch', {
             query,
             page: window.location.pathname
         })
