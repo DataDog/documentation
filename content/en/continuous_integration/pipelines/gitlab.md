@@ -262,9 +262,9 @@ Log files larger than 1GiB are truncated.
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /logs/
-[10]: https://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
+[10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
 [12]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#enable-job-log-collection-beta
 [13]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#integrating-through-webhooks
-[14]: https://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
-[15]: https://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
+[14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
+[15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
