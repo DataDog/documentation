@@ -1169,6 +1169,11 @@ main:
     identifier: event_explorer
     parent: events
     weight: 201
+  - name: Case Management
+    url: service_management/case_management
+    parent: service_management_top_level
+    identifier: case_management
+    weight: 3
   - name: Incident Management
     url: service_management/incident_management
     parent: service_management_top_level
@@ -1194,11 +1199,6 @@ main:
     parent: incidents
     identifier: incidents_clipboard
     weight: 404
-  - name: Case Management
-    url: service_management/case_management
-    parent: service_management_top_level
-    identifier: case_management
-    weight: 3
   - name: Guides
     url: service_management/guides/
     identifier: service_management_guides

@@ -2,7 +2,8 @@
 title: Events Explorer
 kind: documentation
 aliases:
-    - /events/stream/
+- /events/stream/
+- /events/explorer/
 further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
