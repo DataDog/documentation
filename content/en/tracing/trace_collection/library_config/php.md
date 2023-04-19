@@ -319,7 +319,7 @@ A comma-separated list of query parameters to be collected as part of the URL. S
 `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_post_data_param_allowed`<br>
 **Default**: ""<br>
-A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data will be collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule will be redacted. If specific fields are given, then only these fields' values are collected in clear, while the values for all other fields will be redacted. Added in version `0.86.0`.<br>
+A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
 **Example**: 
   - The posted data is `foo[baz]=bar&foo[baz][key]=quz&foo[bar][password]=baz&foo[bar][baz]=quz`
   - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`<br>
