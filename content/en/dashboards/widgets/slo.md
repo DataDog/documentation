@@ -17,7 +17,7 @@ further_reading:
 
 Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
-{{< img src="dashboards/widgets/slo/slo_summary_editor.png" alt="slo summary widget"  >}}
+{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor "  >}}
 
 ### Configuration
 
@@ -45,18 +45,16 @@ You can specify an optional unique SLO target for the arbitrary time period. To 
 Select whether to show or hide remaining error budget by toggling the `Show error budget` option. If you are visualizing a monitor-based SLO with multiple groups or multiple monitors, select your `View mode`:
 
 - For monitor-based SLOs configured with a single monitor broken into multiple groups, there are the following three view modes:
-  - `Status`: displays the overall SLO status percentages and targets
+  - `Overall`: displays the overall SLO status percentages and targets
   - `Groups`: displays a table of status percentages for each group
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
 
 - For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
-  - `Status`: displays the overall SLO status percentages and targets
-  - `Monitors`: displays a table of status percentages for each monitor
+  - `Overall`: displays the overall SLO status percentages and targets
+  - `Groups`: displays a table of status percentages for each group
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
 
-**Note:** When the `Global Time` time window option is selected you can only use the `Status` view mode.
-
-{{< img src="dashboards/widgets/slo/slo_summary-view_mode.png" alt="view mode"  >}}
+**Note:** When the `Global Time` time window option is selected you can only use the `Overall` view mode.
 
 ## API
 
