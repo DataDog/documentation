@@ -75,7 +75,7 @@ For different messages based on alert vs. warning thresholds, see the [Notificat
 
 ### Notify your team
 
-Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the message box:
+Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the dropdown box. When an `@notification` is added to this box, the notification is automatically added to the message box:
 
 {{< img src="getting_started/application/message_notify.png" alt="Message and Notifications" style="width:70%;" >}}
 
@@ -97,13 +97,13 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
-[7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
 [10]: /mobile/

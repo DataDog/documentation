@@ -19,13 +19,13 @@ aliases:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
-<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">instrumenting using the Datadog Forwarder</a>.</div>
+<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the <a href="https://docs.datadoghq.com/serverless/guide/upgrade_java_instrumentation">special instructions to upgrade</a>.</div>
 
 ## Installation
 
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -119,6 +119,77 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+<div class="alert alert-info">Instrumenting Java functions through the Datadog CDK construct is only available for AWS CDK apps written in Node.js and Python.</div>
+
+The [Datadog CDK construct][1] automatically installs Datadog on your functions using Lambda layers. It configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension. 
+
+1. Install the Datadog CDK constructs library
+
+    **Node.js**:
+    ```sh
+    # For AWS CDK v1
+    npm install datadog-cdk-constructs --save-dev
+
+    # For AWS CDK v2
+    npm install datadog-cdk-constructs-v2 --save-dev
+    ```
+
+    **Python**:
+    ```sh
+    # For AWS CDK v1
+    pip install datadog-cdk-constructs
+
+    # For AWS CDK v2
+    pip install datadog-cdk-constructs-v2
+    ```
+
+2. Instrument your Lambda functions
+
+    **Node.js**:
+    ```javascript
+    // For AWS CDK v1
+    import { Datadog } from "datadog-cdk-constructs";
+
+    // For AWS CDK v2
+    import { Datadog } from "datadog-cdk-constructs-v2";
+
+    const datadog = new Datadog(this, "Datadog", {
+        javaLayerVersion: {{< latest-lambda-layer-version layer="dd-trace-java" >}},
+        extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}},
+        site: "<DATADOG_SITE>",
+        apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
+    });
+    datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
+    ```
+
+    **Python**:
+    ```python
+    # For AWS CDK v1
+    from datadog_cdk_constructs import Datadog
+
+    # For AWS CDK v2
+    from datadog_cdk_constructs_v2 import Datadog
+
+    datadog = Datadog(self, "Datadog",
+        java_layer_version={{< latest-lambda-layer-version layer="dd-trace-java" >}},
+        extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
+        site="<DATADOG_SITE>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
+      )
+    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
+    ```
+
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda execution role has the `secretsmanager:GetSecretValue` IAM permission in order to read the secret value. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+
+    More information and additional parameters can be found on the [Datadog CDK documentation][1].
+
+[1]: https://github.com/DataDog/datadog-cdk-constructs
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Container image" %}}
 

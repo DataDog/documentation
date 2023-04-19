@@ -1,38 +1,61 @@
 ---
-aliases: []
+app_id: traefik
+app_uuid: 3e412d36-f638-4cb0-9068-294aac7a84e2
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: traefik.total_status_code_count
+      metadata_path: metadata.csv
+      prefix: traefik.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Traefik
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - web
 - ログの収集
-creates_events: false
-ddtype: check
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
-display_name: Traefik
+display_on_public_website: true
 draft: false
 git_integration_title: traefik
-guid: 322c0b9d-3ec6-434e-918c-5740f2a114bf
 integration_id: traefik
 integration_title: Traefik
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: '@renaudhager'
-manifest_version: 1.0.0
-metric_prefix: traefik.
-metric_to_check: traefik.total_status_code_count
+manifest_version: 2.0.0
 name: traefik
-public_title: Datadog-Traefik インテグレーション
+oauth: {}
+public_title: Traefik
 short_description: traefik のメトリクスを収集
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Web
+  - Category::Log Collection
+  - Category::Tracing
+  configuration: README.md#Setup
+  description: traefik のメトリクスを収集
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Traefik
 ---
 
 
@@ -45,7 +68,7 @@ supported_os:
 
 Traefik チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Traefik チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -78,8 +101,9 @@ v1 から v2 への変更点については、[Traefik 移行ガイド][1]を参
 1. [Traefik がログをファイルに記録する][5]ように構成する場合は、Traefik 構成ファイルに以下を追加します。
 
    ```conf
-    log:
-      filePath: "/path/to/traefik.log"
+   [traefikLog]
+     filePath = "/path/to/traefik.log"
+     format   = "json"
     ```
 
    [一般的な Apache Access 形式][6]がデフォルトで使用され、このインテグレーションでサポートされています。
@@ -137,7 +161,7 @@ v1 については [Traefik のドキュメント][1]を、v1 から v2 への�
     init_config:
 
     instances:
-    - host: 10.1.2.3
+      - host: 10.1.2.3
         port: "8080"
         path: "/health"
         scheme: "http"
@@ -164,7 +188,8 @@ v1 については [Traefik のドキュメント][1]を、v1 から v2 への�
 
     ```conf
     [traefikLog]
-    filePath = "/path/to/traefik.log"
+      filePath = "/path/to/traefik.log"
+      format   = "json"
     ```
 
    [一般的な Apache Access 形式][7]がデフォルトで使用され、このインテグレーションでサポートされています。

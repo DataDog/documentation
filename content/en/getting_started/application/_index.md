@@ -96,7 +96,7 @@ In the Event Explorer, filter your events by facets or search queries. Group or 
 - Display by zone, host, or total usage.
 - Datadog exposes a JSON editor for the graph, allowing for [arithmetic][14] and [functions][15] to be applied to metrics.
 - Share a graph snapshot that appears in the stream.
-- Graphs can be embedded in an iframe. This enables you to give a 3rd party access to a live graph without also giving access to your data or any other information.
+- Graphs can be embedded in an iframe. This enables you to give a third party access to a live graph without also giving access to your data or any other information.
 
 ## Monitors
 

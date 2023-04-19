@@ -39,7 +39,6 @@ author:
 categories:
 - web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
 display_on_public_website: true
@@ -67,7 +66,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
   media: []
@@ -86,7 +84,7 @@ Apache チェックは、毎秒のリクエスト数、処理されたバイト�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Apache チェックは [Datadog Agent][2] にパッケージ化されています。Apache のメトリクスとログの収集を開始するには、以下を行います。
 

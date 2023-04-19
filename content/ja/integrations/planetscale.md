@@ -17,7 +17,7 @@ assets:
     source_type_name: PlanetScale
 author:
   homepage: http://www.planetscale.com
-  name: James Cunningham
+  name: PlanetScale
   sales_email: sales@planetscale.com
   support_email: support@planetscale.com
 categories:

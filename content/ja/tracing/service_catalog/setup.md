@@ -3,52 +3,56 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
   tag: Terraform
   text: Terraform によるサービス定義の作成と管理
-- link: /tracing/service_catalog/service_definition_api/
+- link: /api/latest/service-definition/
+  tag: API
+  text: サービス定義 API について
+- link: /integrations/github
   tag: ドキュメント
-  text: サービス定義 API
-- link: /integrations/github_apps
-  tag: ドキュメント
-  text: GitHub アプリのインテグレーション
+  text: GitHub インテグレーションについて
 kind: documentation
 title: サービスカタログの設定
 ---
 
 ## 概要
 
-サービスカタログには、サービスの一覧が表示されます。**Ownership** タブの **Registered** 列は、該当するサービスが登録されていることを緑色のチェックマークで表しています。
+Datadog サービスカタログは、デフォルトで APM、USM、RUM から検出されたすべてのサービスを含みます。これらの製品のいずれかを使用している場合、カタログにはエントリが事前に入力されています。Datadog UI、[API][1] を使ってこれらのエントリにサービスのメタデータを追加したり、[GitHub インテグレーション][11]や [Terraform][2] を使って自動パイプラインを使用することができます。
 
-サービス定義の更新は、[Service Definition API][1] または [Terraform][2] を使用します。
+## サービス定義メタデータの追加
 
-## すでに APM データを送信しているサービスの場合
+サービスがサービスカタログにリストされ、すでにメタデータが関連付けられている場合、元のソースは、**Ownership** ビューの **Metadata Source** 列にリストされています。そのソースに戻り、必要な更新を行います。
 
-Datadog APM にトレースデータを送信するサービスは、自動的にサービスカタログに登録されます。登録するまでは、カーソルを合わせるとグレーのチェックマークが表示されます。
+サービスにサービス定義のメタデータが割り当てられていない場合、またはサービスがまだサービスカタログにリストされていない場合は、追加することができます。
 
-サービスを登録し、所有者情報、ランブックなどの関連リンク、ソースコードリポジトリへのリンクを追加するには、[サービス定義の更新][1]を行ってください。
+1. [サービスカタログ][10]ページで、**Setup & Config** をクリックします。**Manage Entries** タブには、メタデータがないサービスの数が表示されます。
 
-[Service Catalog > Get Started][3] から、API で投稿するための有効な JSON を作成するためのヘルプを得ることができます。
+2. **Create New Entry** をクリックします。
 
-## カタログにポストしたい他のすべてのサービスの場合
+3. メタデータを追加するサービスを指定します。これは、サービスカタログにすでにリストされている、まだサービス定義のメタデータが定義されていないサービスの名前、または、データを送信していないサービスの名前にすることができます。
 
-関心があるサービス、API、カスタムライブラリがカタログページに掲載されていない場合
+4. Team、On-call、Contacts、Documentation、Code repo、Other links の詳細を入力してください。
 
-1. [Get Started][3] に移動します。
+4. **Code** ビューに切り替えると、入力したメタデータに対して生成された JSON と cURL が表示されます。このコードをコピーすれば、サービス定義のスキーマを学ぶことなく、API や Terraform、GitHub でプログラム的にサービス定義を提供するための出発点として利用することができます。
 
-2. **Register Services** フォームでは、Service Catalog API のエンドポイントにポストできる JSON を生成することができます。`dd-service` フィールドにサービス名を入力します。所有権、ソース、その他のサービス情報を、Service Definition スキーマに入力します。詳細については、[GitHub の JSON スキーマの全容][4]を参照してください。
-
-3. 生成された JSON をコピーするために、**Copy** ボタンをクリックします。これを [Service Definition API][1] を使って `POST` API 呼び出しの `body` として送信します。
+5. [Service Catalog Write][13] 権限を持っている場合、**Save Entry** をクリックするか、**Code** ビューで提供される cURL コマンドを実行することで、メタデータを送信することができます。
 
 
 ## 他の Datadog テレメトリーデータで報告されているサービスを発見する
 
-<div class="alert alert-warning">これはベータ版の機能です。</div>
+インフラストラクチャーメトリクスなどの既存の Datadog テレメトリーから他のサービスを検出するには、ページ上部の [**Setup &amp; Config** タブ][3]に移動して、**Import Entries** タブをクリックしてください。`DD_SERVICE` [タグ][5]を含む他の Datadog テレメトリーからサービスをインポートすることができます。
 
-インフラストラクチャーメトリクスなど、既存の Datadog テレメトリーを通じて他のサービスを検出するには、**Discover Services** タブに移動し、そこにある指示に従ってください。ディスカバリーは、`DD_SERVICE` [統合サービスタグ付け規則][5]を使用して、Datadog の組織にデータを送信するサービスを探します。
+{{< img src="tracing/service_catalog/import_entries.png" alt="サービスカタログのセットアップと構成セクションのインポートエントリータブ" style="width:90%;" >}}
+
+いくつかのエントリーをインポートすると、それらは **Explore** タブに表示されます。[API を使う][1]か [GitHub インテグレーション][6]で所有者や連絡先などのメタデータを追加しないと、エントリーが失効してしまうことがあります。
+
+インポートしたサービスをデフォルトの **Explore** ビューから削除するには、**Clear Previously Imported Services** をクリックします。これにより、メタデータを持たないサービスや、APM、ユニバーサルサービスモニタリング (USM)、リアルユーザーモニタリング (RUM) のテレメトリーを持たないサービスがすべて削除されます。
+
+{{< img src="tracing/service_catalog/clear_imported_services.png" alt="サービスカタログのセットアップと構成セクションで、以前にインポートしたサービスの削除を確認します" style="width:90%;" >}}
 
 ## サービス定義の GitHub への保存と編集
 
-[GitHub Apps インテグレーション][6]を構成し、Service Catalog でサービスの定義を表示する場所から、GitHub で保存・編集可能な場所に直接リンクするようにします。
+[GitHub インテグレーション][6]を構成し、Service Catalog でサービスの定義を表示する場所から、GitHub で保存・編集可能な場所に直接リンクするようにします。
 
-GitHub Apps インテグレーションをインストールするには、[インテグレーションタイル][7]に移動し、**Repo Configuration** タブにある **Link GitHub Account** をクリックします。
+GitHub インテグレーションをインストールするには、[インテグレーションタイル][7]に移動し、**Repo Configuration** タブにある **Link GitHub Account** をクリックします。
 
 ### サービス定義 YAML ファイル
 
@@ -56,13 +60,13 @@ Datadog は各リポジトリのルートにある `service.datadog.yaml` ファ
 
 ### サービス定義の変更
 
-サービス定義に GitHub Apps インテグレーションを設定すると、サービスの **Definition** タブに **Edit in Github** ボタンが表示され、GitHub にリンクして変更をコミットすることができるようになります。
+サービス定義に GitHub インテグレーションを設定すると、サービスの **Definition** タブに **Edit in Github** ボタンが表示され、GitHub にリンクして変更をコミットすることができるようになります。
 
 {{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="Service Catalog のサービスの Definition タブに Edit in Github ボタンが表示されるようになった" style="width:90%;" >}}
 
 リポジトリの YAML ファイルを更新すると、その変更はサービスカタログに伝搬されます。
 
-誤って上書きされることを防ぐため、サービス定義ファイルの作成と変更は、GitHub Apps インテグレーションまたは [Service Definition API エンドポイント][1]のどちらかを使用してください。GitHub と API の両方を使用して同じサービスを更新すると、意図しない上書きが発生する可能性があります。
+誤って上書きされることを防ぐため、サービス定義ファイルの作成と変更は、GitHub インテグレーションまたは [Service Definition API エンドポイント][1]のどちらかを使用してください。GitHub と API の両方を使用して同じサービスを更新すると、意図しない上書きが発生する可能性があります。
 
 ## Terraform でサービス定義の更新を自動化する
 
@@ -70,16 +74,27 @@ Datadog は各リポジトリのルートにある `service.datadog.yaml` ファ
 
 詳細については、[Datadog Provider のドキュメント][9]を参照してください。
 
+## オープンソースのメタデータプロバイダー
+
+GitHub インテグレーションや Terraform の代わりに、オープンソースの GitHub Action ソリューションである [Datadog サービスカタログメタデータプロバイダー][12]を利用することができます。
+
+この GitHub Action を使用すると、Datadog にこの情報を送信するタイミングを完全に制御しながら、GitHub Action を使用してサービスカタログにサービスを登録し、組織独自のその他のコンプライアンスチェックを実装することができます。
+
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/service_catalog/service_definition_api/
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-[3]: https://app.datadoghq.com/services/setup
+[3]: https://app.datadoghq.com/services/settings/get-started
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/integrations/github_apps/
-[7]: https://app.datadoghq.com/integrations/github-apps
+[6]: /ja/integrations/github/
+[7]: https://app.datadoghq.com/integrations/github
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
+[10]: https://app.datadoghq.com/services
+[11]: https://docs.datadoghq.com/ja/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
+[12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
+[13]: https://app.datadoghq.com/personal-settings/profile

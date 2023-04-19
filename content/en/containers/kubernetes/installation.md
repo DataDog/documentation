@@ -28,11 +28,11 @@ further_reading:
 
 ## Installation
 
-This page provides instructions on installing the Datadog Agent in a Kubernetes environment through three different methods. Choose the method that best suits your use case:
+This page provides instructions on installing the Datadog Agent in a Kubernetes environment through three different methods. The following methods are supported:
 
-- [Datadog Operator](?tab=operator)
-- [Helm chart](?tab=helm)
-- [DaemonSet](?tab=daemonset)
+- Datadog Operator
+- Helm chart
+- DaemonSet
 
 For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
 
@@ -50,7 +50,7 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-warning">The Datadog Operator is Generally Available with the 1.0.0 version, and it reconciles the version <code>v2alpha1</code> of the DatadogAgent Custom Resource. </div>
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
@@ -58,7 +58,7 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 
 Using the Datadog Operator requires the following prerequisites:
 
-- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
+- **Kubernetes Cluster version >= v1.20.X**: Tests were done on versions >= `1.20.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
 - [`Helm`][2] for deploying the `datadog-operator`.
 - [`Kubectl` CLI][3] for installing the `datadog-agent`.
 
@@ -82,26 +82,28 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
 
 2. Create a file with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
 
-   ```yaml
-   apiVersion: datadoghq.com/v1alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     credentials:
-       apiSecret:
-         secretName: datadog-secret
-         keyName: api-key
-       appSecret:
-         secretName: datadog-secret
-         keyName: app-key
-     agent:
-       image:
-         name: "gcr.io/datadoghq/agent:latest"
-     clusterAgent:
-       image:
-         name: "gcr.io/datadoghq/cluster-agent:latest"
-   ```
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
+```
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
@@ -134,6 +136,10 @@ agent:
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the Docker or containerd socket.
 
+## Container registries
+
+To modify the container image registry, see the [Changing Container Registry][9] guide.
+
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -142,6 +148,7 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
+[9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -273,7 +280,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][4]  | [Manifest template][5]  |
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][6]  | [Manifest template][7]  |
     | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][8]  | [Manifest template][9] |
-    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [Manifest template][10] | no template             |
+    |                           |                           |                           |                           | <i class="icon-check-bold"></i> |                           | [Manifest template][10] | no template             |
     | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [Manifest template][11] | [Manifest template][12] |
 
      To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Network Performance Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
@@ -327,11 +334,18 @@ To install the Datadog Agent on your Kubernetes cluster:
 (Optional) To run an unprivileged installation, add the following to your [pod template][19]:
 
 ```yaml
-  spec:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: placeholder
+  namespace: placeholder
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 1 # <USER_ID>
+        supplementalGroups:
+          - 123 # "<DOCKER_GROUP_ID>"
 ```
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.

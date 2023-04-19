@@ -15,7 +15,7 @@ assets:
     source_type_name: Portworx
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Portworx
   sales_email: paul@portworx.com
   support_email: paul@portworx.com
 categories:

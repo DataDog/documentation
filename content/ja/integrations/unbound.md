@@ -15,7 +15,7 @@ assets:
     source_type_name: Unbound
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: david.byron@avast.com
   support_email: david.byron@avast.com
 categories:

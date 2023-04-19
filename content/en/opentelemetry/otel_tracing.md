@@ -9,6 +9,9 @@ further_reading:
 - link: "/tracing/other_telemetry/connect_logs_and_traces/opentelemetry"
   tag: "Documentation"
   text: "Connect OpenTelemetry Traces and Logs"
+- link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
+  tag: "Blog"
+  text: "Send metrics, traces, and logs from OpenTelemetry Collector to Datadog using Datadog Exporter"
 aliases:
 - /tracing/setup_overview/open_standards/
 - /tracing/trace_collection/open_standards/
@@ -31,6 +34,16 @@ You can correlate OpenTelemetry traces and logs so that your application logs mo
 ## OpenTracing
 
 Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the OTLP Ingest in the Datadog Agent in conjunction with OpenTelemetry tracing clients. However, if that doesn't work for you, each of the supported languages also has support for sending [OpenTracing][6] data to Datadog. Read more about [setting up OpenTracing for each supported language][7]. 
+
+{{< whatsnext desc="Set up your application to send traces using OpenTracing." >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/go" >}}Go{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/nodejs" >}}NodeJS{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/php" >}}PHP{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/dotnet" >}}.NET{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 

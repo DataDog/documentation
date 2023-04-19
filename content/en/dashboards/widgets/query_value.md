@@ -26,12 +26,13 @@ The widget can display the latest value reported, or an aggregate computed from 
     * Metric: See the [Querying documentation][1] to configure a metric query.
     * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
     * Log Events: See the [Log search documentation][3] to configure a log event query.
-2. Choose the units and the formatting. Autoformat scales the Dashboard for you based on the units.
-3. Optional: configure a conditional format depending on the value displayed.
-4. Optional: overlay timeseries background
-    * Min to Max: Scale graph from min to max
-    * Line: Scale graph to include zero (0)
-    * Bars: Shows discrete, periodic measurements
+2. Reduce the query values to a single value, calculated as the `avg`, `min`, `sum`, `max`, or `last` value of all data points in the specified timeframe.
+3. Choose the units and the formatting. Autoformat scales the dashboard for you based on the units.
+4. Optionally, configure a conditional format depending on the value displayed.
+5. Optionally, overlay a timeseries background:
+    * Min to Max: A scale graph from minimum to maximum.
+    * Line: A scale graph to include zero (0).
+    * Bars: Shows discrete, periodic measurements.
 
 ### Options
 

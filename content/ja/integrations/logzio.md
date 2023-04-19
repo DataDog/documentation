@@ -15,7 +15,7 @@ assets:
     source_type_name: Logz.io
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Logz.io
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:

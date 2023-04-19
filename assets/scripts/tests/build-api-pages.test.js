@@ -2353,7 +2353,7 @@ describe(`schemaTable`, () => {
     const actual = bp.schemaTable({});
     const expected = `
   <div class=" schema-table row">
-    <p class="expand-all js-expand-all text-primary">Expand All</p>
+    <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
     <div class="col-12">
       <div class="row table-header">
         <div class="col-4 column">
@@ -2416,7 +2416,7 @@ describe(`schemaTable`, () => {
 
     const actual = bp.schemaTable("request", mockData.schema);
     const expected = `<div class="table-request schema-table row">
-    <p class="expand-all js-expand-all text-primary">Expand All</p>
+    <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
     <div class="col-12">
       <div class="row table-header">
         <div class="col-4 column">

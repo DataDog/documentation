@@ -31,7 +31,7 @@
 {{ $ctx := . }}
 
 <body
-  class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}" {{ with .Params.scrollspy }}data-spy="scroll" data-target="{{ .target }}" data-offset="{{ .offset | default 0 }}" {{ end }}>
+  class="{{ .Site.Language.Lang }} {{ if .Kind }}kind-{{.Kind}}{{ end }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ $customClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
 
   <div class="greyside">
     <div class="container container__content h-100">

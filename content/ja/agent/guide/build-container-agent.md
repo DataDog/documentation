@@ -11,10 +11,10 @@ Datadog Docker Agent を特定の `<AGENT_VERSION>` でビルドするには、�
     git clone https://github.com/DataDog/datadog-agent.git
     ```
 
-2. `datadog-agent/Dockerfile/agent/` フォルダに移動します。
+2. `datadog-agent/Dockerfiles/agent/` フォルダに移動します。
 
     ```shell
-    cd datadog-agent/Dockerfile/agent/
+    cd datadog-agent/Dockerfiles/agent/
     ```
 
 3. ビルドする Agent のバージョンのブランチに切り替えます。

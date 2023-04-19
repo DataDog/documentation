@@ -240,6 +240,8 @@ jobs:
         - domain: <DNS_NAME (e.g. datadog-cluster-agent)>
 ```
 
+Replace `<TOKEN>` with your [Cluster Agent token][34].
+
 **Note**: This creates a DNS alias for the Datadog Cluster Agent service which makes it addressable through a static alias. See [Aliases to services](https://bosh.io/docs/dns/#aliases-to-services) in the BOSH documentation for more details on BOSH DNS aliases.
 
 This DNS alias is specified in the [`cluster_agent.address`](https://bosh.io/jobs/dd-agent?source=github.com/DataDog/datadog-agent-boshrelease&version=4.0.0#p%3dcluster_agent.address) job property of the Datadog Agent runtime configuration, as shown in the example template below:
@@ -499,3 +501,4 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [30]: /profiler/enabling/
 [32]: /integrations/faq/pivotal_architecture
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
+[34]: https://docs.datadoghq.com/containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication

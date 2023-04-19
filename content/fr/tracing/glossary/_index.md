@@ -71,7 +71,9 @@ Vous ne voyez pas les endpoints HTTP attendus sur la page Service ? Dans l'APM,
 
 ## Ressources
 
-Les ressources représentent un domaine particulier d'une application client. Il s'agit généralement d'un endpoint web instrumenté, d'une requête de base de données ou d'une tâche en arrière-plan. Pour un service Web, ces ressources peuvent être des endpoints web dynamiques regroupés sous un nom de span tel que `web.request`. Pour un service de base de données, il peut s'agir de requêtes de base de données portant le nom de span `db.query`. Par exemple, le service `web-store` possède des ressources automatiquement instrumentées (endpoints web) qui gèrent les paiements, les mises à jour de panier, les ajouts d'article, etc. Chaque ressource possède sa propre [page Ressource][6] qui affiche les [métriques de trace](#metriques-de-trace) associées à chaque endpoint spécifique. Les métriques de trace peuvent être utilisées comme n'importe quelle autre métrique Datadog : elles peuvent être exportées vers un dashboard ou utilisées pour créer des monitors. La page Ressource affiche également le widget Résumé des spans avec une vue agrégée des [spans](#spans) pour toutes les [traces](#trace), les distributions de latences des requêtes et les traces indiquant les requêtes adressées à cet endpoint.
+Les ressources représentent un domaine particulier d'une application client. Il s'agit généralement d'un endpoint web instrumenté, d'une requête de base de données ou d'une tâche en arrière-plan. Pour un service Web, ces ressources peuvent être des endpoints web dynamiques regroupés sous un nom de span tel que `web.request`. Pour un service de base de données, il peut s'agir de requêtes de base de données portant le nom de span `db.query`. Par exemple, le service `web-store` possède des ressources automatiquement instrumentées (endpoints web) qui gèrent les paiements, les mises à jour de panier, les ajouts d'articles, etc. Le nom d'une ressource peut correspondre à la méthode ou route HTTP, par exemple `GET /productpage` ou `ShoppingCartController#checkout`. 
+
+Chaque ressource possède sa propre [page Ressource][7] qui affiche les [métriques de trace](#metriques-de-trace) associées à chaque endpoint spécifique. Les métriques de trace peuvent être utilisées comme n'importe quelle autre métrique Datadog : elles peuvent être exportées vers un dashboard ou utilisées pour créer des monitors. La page Ressource affiche également le widget Résumé des spans avec une vue agrégée des [spans](#spans) pour toutes les [traces](#trace), les distributions de latences des requêtes et les traces indiquant les requêtes adressées à cet endpoint.
 
 {{< img src="tracing/visualization/resource_page.mp4" video="true" alt="page ressource" >}}
 
@@ -195,7 +197,7 @@ Lorsque des spans enfant sont exécutées simultanément, la durée d'exécution
 
 {{< img src="tracing/visualization/execution-time2.png" style="width:50%;" alt="Durée d'exécution pour les tâches simultanées" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 

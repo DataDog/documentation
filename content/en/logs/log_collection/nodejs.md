@@ -147,13 +147,11 @@ You can stream your logs from your application to Datadog without installing an 
 Use the [Winston HTTP transport][4] to send your logs directly through the [Datadog Log API][5].
 In your bootstrap file or in your code, declare the logger in the following way:
 
-{{< site-region region="us" >}}
-
 ```javascript
 const { createLogger, format, transports } = require('winston');
 
 const httpTransportOptions = {
-  host: 'http-intake.logs.datadoghq.com',
+  host: 'http-intake.logs.{{< region-param key="dd_site" >}}',
   path: '/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=nodejs&service=<APPLICATION_NAME>',
   ssl: true
 };
@@ -174,42 +172,8 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-**Note:** You can also use the community supported [Datadog Transport][1].
+**Note:** You can also use the community-supported [Datadog Transport][13].
 
-[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
-
-{{< /site-region >}}
-{{< site-region region="eu" >}}
-
-```javascript
-const { createLogger, format, transports } = require('winston');
-
-const httpTransportOptions = {
-  host: 'http-intake.logs.datadoghq.eu',
-  path: '/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&ddsource=nodejs&service=<APPLICATION_NAME>',
-  ssl: true
-};
-
-const logger = createLogger({
-  level: 'info',
-  exitOnError: false,
-  format: format.json(),
-  transports: [
-    new transports.Http(httpTransportOptions),
-  ],
-});
-
-module.exports = logger;
-
-// Example logs
-logger.log('info', 'Hello simple log!');
-logger.info('Hello log with metas',{color: 'blue' });
-```
-
-[1]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#http-transport
-[2]: /api/v1/logs/#send-logs
-
-{{< /site-region >}}
 
 ## Troubleshooting
 
@@ -240,3 +204,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 [10]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
 [11]: /logs/log_configuration/parsing/?tab=matchers
 [12]: /logs/explorer/#overview
+[13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport

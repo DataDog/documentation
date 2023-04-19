@@ -1,6 +1,5 @@
 ---
-aliases:
-- /ja/integrations/azure_container_apps
+aliases: []
 categories:
 - クラウド
 - azure

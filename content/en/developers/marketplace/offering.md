@@ -118,41 +118,23 @@ Once you've decided on an offering, set up a directory:
 
 ## Install and configure the Datadog development toolkit
 
-The Datadog Development Toolkit command (`ddev`) allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata.
+The Agent Integration Developer Tool allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata. For instructions on installing the tool, see [Install the Datadog Agent Integration Developer Tool][25].
 
-Before you begin, make sure you meet the following prerequisites:
+After you install the Developer tool, configure it for the `marketplace` repo:
 
-- [Python v3.8 or later][20]
-- Docker is required if you're building an Agent-based integration
-- A Python virtual environment is recommended to avoid potential environment conflicts. The instructions below use `venv`, which comes packaged with Python v3.3 and later on most operating systems.
+Set `marketplace` as the default working repository:
 
-Install and configure the development toolkit:
+{{< code-block lang="shell" >}}
+ddev config set marketplace $HOME/dd/marketplace
+ddev config set repo marketplace
+{{< /code-block >}}
 
-1. Make sure you're inside the `marketplace` directory:
-   {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
+If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
 
-2. Set up a Python virtual environment:
-   {{< code-block lang="shell" >}}
-   python3 -m venv venv
-   . venv/bin/activate{{< /code-block >}}
-
-   You can exit the virtual environment at any time by running `deactivate`.
-
-3. Install the [Developer Toolkit][21]:
-   {{< code-block lang="shell" >}}pip3 install "datadog-checks-dev[cli]"{{< /code-block >}}
-
-   If you are using the Z Shell, you may need to use escaped characters by running `pip3 install datadog-checks-dev\[cli\]`.
-
-4. Set `marketplace` as the default working repository:
-   {{< code-block lang="shell" >}}
-   ddev config set marketplace $HOME/dd/marketplace
-   ddev config set repo marketplace{{< /code-block >}}
-
-   If you used a directory other than `$HOME/dd` to clone the marketplace directory, use the following command to set your working repository:
-
-   {{< code-block lang="shell" >}}
-   ddev config set marketplace <PATH/TO/MARKETPLACE>
-   ddev config set repo marketplace{{< /code-block >}}
+{{< code-block lang="shell" >}}
+ddev config set marketplace <PATH/TO/MARKETPLACE>
+ddev config set repo marketplace
+{{< /code-block >}}
 
 ## Populate the integration tile scaffolding
 
@@ -166,7 +148,7 @@ To create the informational tile-only listing's scaffolding:
 
 1. Make sure you're inside the `marketplace` directory:
    {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
-2. Run the `ddev` command with the `-t tile` option
+2. Run the `ddev` command with the `-t tile` option:
    {{< code-block lang="shell" >}}ddev create -t tile "<Offering Name>"{{< /code-block >}}
 
 ### Create a full Agent-based integration
@@ -174,7 +156,7 @@ To create the informational tile-only listing's scaffolding:
 To generate the scaffolding for an Agent-based integration:
 1. Make sure you're inside the `marketplace` directory:
    {{< code-block lang="shell" >}}cd $HOME/dd/marketplace{{< /code-block >}}
-2. Run the `ddev` command with the `-t tile` option
+2. Run the `ddev` command:
    {{< code-block lang="shell" >}}ddev create "<Offering Name>"{{< /code-block >}}
 
 ## Complete the necessary integration asset files
@@ -294,3 +276,4 @@ Once a Marketplace tile is live, Technology Partners can meet with Datadog's Par
 [22]: /developers/integrations/check_references/#manifest-file
 [23]: https://datadoghq.com/blog/
 [24]: https://github.com/DataDog/integrations-extras/tree/master/vantage
+[25]: /developers/integrations/python

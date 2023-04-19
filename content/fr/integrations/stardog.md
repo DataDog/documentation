@@ -15,7 +15,7 @@ assets:
     source_type_name: Stardog
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: unknown
+  name: Stardog
   sales_email: support@stardog.com
   support_email: support@stardog.com
 categories:

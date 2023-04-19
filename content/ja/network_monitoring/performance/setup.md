@@ -102,7 +102,7 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
 2. 下記のシステムプローブのコンフィギュレーションの例をコピーします。
 
     ```shell
-    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. `/etc/datadog-agent/system-probe.yaml` を編集し、有効フラグを `true` に設定します。
@@ -131,6 +131,16 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
     ```
 
     **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに次のコマンドを実行します: `sudo service datadog-agent restart`。
+
+{{< site-region region="us,us3,us5,eu" >}}
+
+6. オプションで、追加のクラウドインテグレーションを有効にして、ネットワークパフォーマンスモニタリングでクラウド管理型エンティティを検出できるようにします。
+      * Azure ロードバランサーを可視化するには、[Azure インテグレーション][1]をインストールします。
+      * AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/
+{{< /site-region >}}
 
 ### SELinux 対応のシステム
 
@@ -359,15 +369,14 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 Operator でネットワークパフォーマンスのモニタリングを有効化するには、次のコンフィギュレーションを使用します。
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
   namespace: placeholder
 spec:
-  # (...)
   features:
-    networkMonitoring:
+    npm:
       enabled: true
 ```
 
@@ -381,7 +390,7 @@ Docker でネットワークパフォーマンスのモニタリングを有効�
 $ docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
@@ -410,7 +419,7 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
        DD_PROCESS_AGENT_ENABLED: 'true'
        DD_API_KEY: '<DATADOG_API_KEY>'
     volumes:

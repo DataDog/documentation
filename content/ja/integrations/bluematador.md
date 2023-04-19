@@ -1,36 +1,57 @@
 ---
-"assets":
-  "dashboards": {}
-  "metrics_metadata": metadata.csv
-  "monitors": {}
-  "service_checks": assets/service_checks.json
-"categories":
+app_id: blue-matador
+app_uuid: b1cfb279-ab1a-4f63-a04f-9c6508d06588
+assets:
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: bluematador.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Blue Matador
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Blue Matador
+  sales_email: support@bluematador.com
+  support_email: support@bluematador.com
+categories:
 - 監視
-"creates_events": true
-"ddtype": "crawler"
-"dependencies":
-- "https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md"
-"display_name": "Blue Matador"
-"draft": false
-"git_integration_title": "bluematador"
-"guid": "db258635-5063-4a06-85c6-b15c1ea3df4b"
-"integration_id": "blue-matador"
-"integration_title": "Blue Matador"
-"integration_version": ""
-"is_public": true
-"kind": "インテグレーション"
-"maintainer": "support@bluematador.com"
-"manifest_version": "1.0.0"
-"metric_prefix": "bluematador."
-"metric_to_check": ""
-"name": "bluematador"
-"public_title": "Datadog-Blue Matador インテグレーション"
-"short_description": "Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。"
-"support": "contrib"
-"supported_os":
+dependencies:
+- https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md
+display_on_public_website: true
+draft: false
+git_integration_title: bluematador
+integration_id: blue-matador
+integration_title: Blue Matador
+integration_version: ''
+is_public: true
+kind: インテグレーション
+manifest_version: 2.0.0
+name: bluematador
+oauth: {}
+public_title: Blue Matador
+short_description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
+supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Blue Matador
 ---
 
 
@@ -67,8 +88,12 @@ Blue Matador インテグレーションには、メトリクスは含まれま�
 
 Blue Matador インテグレーションには、サービスのチェック機能は含まれません。
 
+## トラブルシューティング
+
+ご不明な点は、このインテグレーションの[メインテナー][5]までお問い合わせください。
+
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bluematador/images/eventstream.png
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/bluematador/images/dashboard.png
 [3]: https://www.bluematador.com/monitored-events
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-
+[5]: https://github.com/DataDog/integrations-extras/blob/master/bluematador/manifest.json

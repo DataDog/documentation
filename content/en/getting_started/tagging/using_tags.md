@@ -237,14 +237,14 @@ Read more about [Creating and managing labels][2] in the Google Cloud documentat
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{% tab "Trace Explorer" %}}
 
-For [Trace Search][1], filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see the [trace search][2] page.
+In the [Trace Explorer][1], you can filter traces with tags using the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`, for example: `service:coffee-house`. For advanced search, see [Query Syntax][2].
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="Trace Search Tags" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="Trace Explorer Tags" style="width:80%;">}}
 
-[1]: /tracing/app_analytics/search/
-[2]: /tracing/app_analytics/search/#search-bar
+[1]: /tracing/trace_explorer/search/
+[2]: /tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -283,7 +283,7 @@ For Logs [Search][10], [Analytics][11], [Patterns][12], and [Live Tail][13], fil
 {{% /tab %}}
 {{% tab "Analytics" %}}
 
-{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tabs" style="width:80%;">}}
+{{< img src="tagging/using_tags/loganalyticstags.png" alt="Log Analytics Tags" style="width:80%;">}}
 
 {{% /tab %}}
 {{% tab "Patterns" %}}
@@ -325,18 +325,18 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /synthetics/search/
 {{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{% tab "Explorer" %}}
 
-The [CI Results Explorer][1] displays your browser test results running in a [CI pipeline][2].
+The [Synthetic Monitoring & Continuous Testing Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
 
-To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search and Manage Synthetic Tests][3].
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search Test Batches][3].
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics and CI Tags" style="width:80%;">}}
 
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /synthetics/cicd_integrations
-[3]: /synthetics/search/
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /continuous_testing/cicd_integrations
+[3]: /continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 

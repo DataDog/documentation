@@ -16,7 +16,7 @@ assets:
     source_type_name: Unifi Console
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: antonin.bruneau@gmail.com
   support_email: antonin.bruneau@gmail.com
 categories: []
@@ -27,7 +27,7 @@ draft: false
 git_integration_title: unifi_console
 integration_id: unifi-console
 integration_title: Unifi Console
-integration_version: 1.1.1
+integration_version: 1.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -70,7 +70,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unifi チェ�
 1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
-   sudo -u dd-agent -- datadog-agent integration install -t datadog-unifi_console==1.1.1
+   sudo -u dd-agent -- datadog-agent integration install -t datadog-unifi_console==1.2.0
    ```
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。

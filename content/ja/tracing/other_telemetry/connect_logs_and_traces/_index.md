@@ -5,6 +5,7 @@ aliases:
 description: ログとトレースを接続して Datadog で関連付けます。
 kind: documentation
 title: ログとトレースの接続
+type: multi-code-lang
 ---
 
 {{< img src="tracing/connect_logs_and_traces/trace_id_injection.png" alt="トレースのログ"  style="width:100%;">}}

@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/workload_security_rules
 further_reading:
-- link: "/security/cloud_workload_security/getting_started"
+- link: "/security/cloud_workload_security/setup"
   tag: "Documentation"
   text: "Get Started with Cloud Workload Security"
 - link: "/security/cloud_workload_security/agent_expressions"
@@ -20,19 +20,19 @@ further_reading:
 
 ## Overview
 
-With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior. 
+With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of rules to detect suspicious behavior.
 
 When you upgrade the Datadog Agent you receive bundled CWS Agent rules, which are used in the [default signal rules][1]. You can also write your own custom Agent rules. This guide covers Agent rules, how to create them, and how to use them to generate security signals.
 
 ### Agent rules
 
-An Agent Rule contains [Agent Expressions][2] that determine which activities the Agent collects. These captured events are then evaluated based on patterns of events described in a [rule][3]. 
+An Agent Rule contains [Agent Expressions][2] that determine which activities the Agent collects. These captured events are then evaluated based on patterns of events described in a [rule][3].
 
 A full set of rules for the Agent is called a policy. Datadog provides you with several [out-of-the-box CWS Agent rules][1] powered by the default Agent policy.
 
 ### Agent expressions
 
-Agent expressions define behavior based on activity in your hosts and containers. For example, if you want to detect the following behavior, “the passwd command executed”, there are a few attributes to note.
+Agent expressions define behavior based on activity in your hosts and containers. For example, if you want to detect the following behavior, "the passwd command executed", there are a few attributes to note.
 
 `passwd` is a Unix utility, whose file is `/usr/bin/passwd` (assumed for a first implementation). Execution events include `exec`, `execve`, `fork`, and other system calls. In the Cloud Workload Security environment, all of these events are identified by the `exec` symbol.
 
@@ -40,15 +40,15 @@ Putting it all together, the rule expression is `exec.file.path == "/usr/bin/pas
 
 This example is an actual default rule that is present in the default Cloud Workload Security policy. However, Agent expressions can also be more advanced. For instance, you can define rules that match on process ancestors or use wildcards for broader detections.
 
-For example, if you want to detect the following behavior: “When a PHP or Nginx process launches bash”, there are a few attributes to note.
+For example, if you want to detect the following behavior: "When a PHP or Nginx process launches bash", there are a few attributes to note.
 
 `bash` is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). Like in the previous example, to detect execution, include in your rule: `exec.file.path == "/usr/bin/bash"`. This ensures the rule isn't only accounting for the execution of the bash, but also bash as a child process of PHP or Nginx.
 
 A process ancestor’s filename in Cloud Workload Security is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. **Note**: Use the tilde when using wildcards.
 
-Putting it all together, the rule expression is: `exec.file.path == “/usr/bin/bash”  && (process.ancestors.file.name == “nginx” || process.ancestors.file.name =~ "php*")`
+Putting it all together, the rule expression is: `exec.file.path == "/usr/bin/bash"  && (process.ancestors.file.name == "nginx" || process.ancestors.file.name =~ "php*")`
 
-This is one part of a default rule present when using Cloud Workload Security out-of-the-box, which checks a variety of shells, shell utilities, web servers, and language engines using lists. The right side of an equality can be a list of the form `[“a”, “b”, “c”, ...]`.
+This is one part of a default rule present when using Cloud Workload Security out-of-the-box, which checks a variety of shells, shell utilities, web servers, and language engines using lists. The right side of an equality can be a list of the form `["a", "b", "c", ...]`.
 
 At some point, you may want to write your own custom rules for the Agent to use. Below are guidelines for writing efficient rules and step-by-step instructions on how to create custom rules in Datadog.
 
@@ -78,7 +78,7 @@ Approvers act as an allow-list at the kernel level in the Datadog Agent. For exa
 
 Approvers and discarders are generated based on your entire policy. Because of this, if a single rule does not make use of approvers for a given event (open, exec, etc.), approvers cannot be used for that event for the entire policy, making every rule that uses that event less efficient.
 
-For example, if you used explicit filenames to evaluate open events (for example, `open.file.path == "/etc/shadow”`) for every rule but one, and used a wildcard in that one event (for example, `open.file.path == "/etc/*”`), the open event would NOT generate an approver, but may generate discarders during runtime.
+For example, if you used explicit filenames to evaluate open events (for example, `open.file.path == "/etc/shadow"`) for every rule but one, and used a wildcard in that one event (for example, `open.file.path == "/etc/*"`), the open event would NOT generate an approver, but may generate discarders during runtime.
 
 Approvers are generally more powerful and preferred. Using approvers, the Agent can process only what it needs to see rather than dynamically learning what to filter out.
 
@@ -88,7 +88,7 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 First, create a default policy file to load to the Agent by following the instructions below.
 
-1. In Datadog, navigate to the [Agent Configuration page][4] under **Setup & Configuration**.
+1. In Datadog, navigate to the [Agent Configuration page][4].
 
 2. Click **Add an Agent Rule** in the top right.
 
@@ -179,7 +179,7 @@ To finalize your setup, restart the [Datadog Agent][6].
 
 [1]: /security/default_rules/#cat-workload-security
 [2]: /security/cloud_workload_security/agent_expressions
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
 [6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent

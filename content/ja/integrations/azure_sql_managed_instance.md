@@ -1,15 +1,14 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure SQL Managed Instance のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_sql_managed_instance/
 draft: false
 git_integration_title: azure_sql_managed_instance
 has_logo: true
-integration_id: ''
+integration_id: azure-sql-managed-instance
 integration_title: Microsoft Azure SQL Managed Instance
 integration_version: ''
 is_public: true
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure SQL Managed Instance インテグレーシ
 short_description: Azure SQL Managed Instance のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Azure SQL Managed Instance は、広範な SQL サーバーエンジンの互換性と、サービスとしてフルマネージド型のプラットフォームの利点を備えるスケーラブルなクラウドデータベースサービスです。
@@ -27,7 +27,7 @@ Azure SQL Managed Instance は、広範な SQL サーバーエンジンの互換
 Datadog Azure インテグレーションを使用して SQL Managed Instances からメトリクスを収集できます。
 
 ## セットアップ
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

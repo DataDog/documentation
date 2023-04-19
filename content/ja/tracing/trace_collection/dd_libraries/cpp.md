@@ -64,14 +64,13 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{% tab "その他の環境" %}}
 
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の環境で利用できます。
+トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、他の環境で利用できます。
 
 その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
 
 [1]: /ja/agent/basic_agent_usage/heroku/#installation
 [2]: /ja/integrations/cloud_foundry/#trace-collection
 [3]: /ja/integrations/amazon_elasticbeanstalk/
-[4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
 {{% /tab %}}

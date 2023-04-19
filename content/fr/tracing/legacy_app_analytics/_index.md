@@ -68,7 +68,7 @@ La fonction App Analytics est disponible à partir de la version 1.11.0 du clie
 
 * la variable d'environnement `DD_TRACE_ANALYTICS_ENABLED=true`, à partir de la version 1.26.0.
 
-[1]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
+[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 

@@ -19,6 +19,10 @@ further_reading:
     text: "Learn about RUM Dashboards"
 ---
 
+{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">Feature Flag Tracking</a> is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
+{{< /callout >}}
+
 ## Overview
 
 RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
@@ -33,7 +37,7 @@ You can access performance metrics for your views in:
 ## Event timings and core web vitals
 
 <div class="alert alert-warning">
-  Datadog's core web vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
+  Datadog's Core Web Vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
 [Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
@@ -41,7 +45,7 @@ You can access performance metrics for your views in:
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed environment such as a [Synthetic browser test][6].
+- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.  
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
@@ -82,14 +86,22 @@ To account for modern web applications, loading time watches for network request
 
 - **Initial Load**: Loading Time is equal to _whichever is longer_:
 
-  - The difference between `navigationStart` and `loadEventEnd`.
-  - Or the difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
+  - The difference between `navigationStart` and `loadEventEnd`, or
+  - The difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 - **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 ### How page activity is calculated
 
-The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
+The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
+
+- `xhr` or `fetch` requests are in progress.
+- The browser emits performance resource timing entries (loading end of JS, CSS, etc.).
+- The browser emits DOM mutations.
+
+The page activity is considered to have ended when it hasn't had any activity for 100ms.
+
+**Note**: Only activity occurring after the SDK initialization is taken into account.
 
 **Caveats:**
 

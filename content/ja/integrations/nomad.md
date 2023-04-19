@@ -23,7 +23,7 @@ assets:
     Nomad Pending Jobs: assets/monitors/nomad_pending_jobs.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Nomad
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:

@@ -54,10 +54,6 @@ Increment by one on every code panic.
 : **Type**: Count<br>
 Increment by one every time a reverse proxy of profile endpoints is created.
 
-`datadog.trace_agent.ratelimit`
-: **Type**: Gauge<br>
-If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).
-
 `datadog.trace_agent.receiver.error`
 : **Type**: Count<br>
 Number of times that the API rejected a payload due to an error in either decoding, formatting or other.
@@ -85,6 +81,10 @@ Number of payloads accepted by the Agent.
 `datadog.trace_agent.receiver.payload_refused`
 : **Type**: Count<br>
 Number of payloads rejected by the receiver because of the sampling.
+
+`datadog.trace_agent.receiver.ratelimit`
+: **Type**: Gauge<br>
+If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).
 
 `datadog.trace_agent.receiver.spans_dropped`
 : **Type**: Count<br>

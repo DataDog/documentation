@@ -127,9 +127,10 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% tab "Cluster Agent" %}}
 
-| Platform   | Command                                                             |
-|------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Platform      | Command                                                                     |
+|---------------|-----------------------------------------------------------------------------|
+| Kubernetes    | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -142,7 +143,7 @@ Manually obtain this file and provide it to support if there are any issues with
 ### Kubernetes
 To obtain the archive file in Kubernetes, use the kubectl command:
 ```
-kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
 ## Further Reading

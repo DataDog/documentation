@@ -136,7 +136,7 @@ Your APM bill is calculated using the top 99 percentile of active agents sending
 
 **5. Do you get charged for pause containers in Kubernetes?**
 
-Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by nodes not by pods.
+Kubernetes creates pause containers to acquire the respective pod's IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by nodes not by pods.
 
 **6. How is the host billing related to your services?**
 

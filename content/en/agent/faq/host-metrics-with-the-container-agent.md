@@ -50,7 +50,7 @@ You may see permission denied errors with the containerized Agent when collectin
 
 Here is an example of a related log reported by the Agent:
 
-```shell
+```bash
 10:12:52 PST | WARN | (datadog_agent.go:149 in LogMessage) | (disk.py:114) | Unable to get disk metrics for /run/docker/netns/9ec58235910c: [Errno 13] Permission denied: '/run/docker/netns/9ec58235910c'
 ```
 

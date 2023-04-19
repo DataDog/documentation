@@ -8,9 +8,9 @@ kind: documentation
 title: Datadog の OAuth2
 ---
 
-{{< beta-callout btn_hidden="true" >}}
+{{< callout btn_hidden="true" >}}
   Datadog Developer Platform はベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 ## 概要
 

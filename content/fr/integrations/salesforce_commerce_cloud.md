@@ -33,7 +33,7 @@ public_title: Salesforce Commerce Cloud
 short_description: Importer vos logs Salesforce Commerce Cloud dans Datadog
 supported_os: []
 tile:
-  changelog: ''
+  changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
   configuration: README.md#Setup
@@ -48,7 +48,7 @@ tile:
 
 Salesforce Commerce Cloud est une plateforme de commerce cloud multi-locataires. Intégrez Salesforce Commerce Cloud à Datadog pour consulter et parser vos logs à l'aide des [logs Datadog][1].
 
-## Configuration
+## Implémentation
 
 ### Installation
 

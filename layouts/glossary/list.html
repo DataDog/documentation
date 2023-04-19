@@ -23,7 +23,7 @@
                     </h4>
 
                     {{ with .Params.related_terms }}
-                        <p class="font-italic mb-0">
+                        <p class="fst-italic mb-0">
                             {{ $len := len . }}
 
                             Related terms:
@@ -35,8 +35,8 @@
                     {{ end }}
 
                     {{ with .Params.synonyms }}
-                        <p class="font-italic">
-                            Synonyms: {{ delimit . ", " }} 
+                        <p class="fst-italic">
+                            Synonyms: {{ delimit . ", " }}
                         </p>
                     {{ end }}
 

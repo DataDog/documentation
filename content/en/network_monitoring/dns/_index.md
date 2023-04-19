@@ -36,7 +36,7 @@ DNS Monitoring provides an overview of DNS server performance to help you identi
 
 ## Setup
 
-Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a ‘DNS’ tab is accessible in the Network Performance Monitoring product.
+Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Network Performance Monitoring product.
 
 Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 

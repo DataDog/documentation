@@ -1,9 +1,10 @@
 ---
-title: Algorithmes
-kind: documentation
 aliases:
-  - /fr/graphing/functions/algorithms/
+- /fr/graphing/functions/algorithms/
+kind: documentation
+title: Algorithmes
 ---
+
 ## Anomalies
 
 | Fonction      | Description                                                                                | Exemple                                                    |
@@ -49,10 +50,6 @@ La fonction `forecast()` comprend deux paramètres :
 
 * `ALGORITHME` : l'algorithme de prévision à utiliser. Les options disponibles sont `linear` et `seasonal`. Pour en savoir plus sur ces algorithmes, consultez la section [Algorithmes de prévision][3].
 * `DÉVIATIONS` : la largeur de la plage des valeurs prédites. Une valeur de 1 ou 2 devrait être suffisante pour prévoir avec précision la plupart des points « normaux ».
-
-La visualisation des prévisions étant unique, plusieurs options d'affichage ne sont pas disponibles.  Une fois votre **prévision** ajoutée, votre éditeur devrait ressembler à ceci :
-
-{{< img src="dashboards/functions/algorithms/forecast_query.png" alt="éditeur de requête" style="width:80%;">}}
 
 ## Autres fonctions
 

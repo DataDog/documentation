@@ -1,40 +1,60 @@
 ---
+app_id: pihole
+app_uuid: 008d006b-6390-4b93-9302-dc37d9625b18
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: pihole.clients_ever_seen
+      metadata_path: metadata.csv
+      prefix: pihole.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: pihole
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: monganai@tcd.ie
+  support_email: monganai@tcd.ie
 categories:
 - ネットワーク
 - ログの収集
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pihole/README.md
-display_name: pihole
+display_on_public_website: true
 draft: false
 git_integration_title: pihole
-guid: f0a69a1e-3961-43e2-9848-469342734e34
 integration_id: pihole
 integration_title: Pi-hole
 integration_version: 3.14.1
 is_public: true
 kind: integration
-maintainer: monganai@tcd.ie
-manifest_version: 1.0.0
-metric_prefix: pihole.
-metric_to_check: pihole.clients_ever_seen
+manifest_version: 2.0.0
 name: pihole
-public_title: Datadog-Pi-hole インテグレーション
+oauth: {}
+public_title: Pi-hole
 short_description: Pi-hole のデフォルトメトリクスを収集するインテグレーション
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Pi-hole のデフォルトメトリクスを収集するインテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pi-hole
 ---
 
 

@@ -10,7 +10,7 @@ title: ブラウザアプリケーションでサービスを定義し、UI コ�
 
 ## 概要
 
-RUM を使用すると、ブラウザアプリケーションのすべてのイベントをキャプチャして、遅いページやコードエラーのトラブルシューティング、またはアプリケーションの使用状況を分析するためにそれらを調査することができます。すべてのイベントは [RUM エクスプローラー][1]でクエリ、ダッシュボード、アラートを行うことができます。
+RUM は、ブラウザアプリケーションのすべてのイベントをキャプチャし、これにより遅いページやコードエラーのトラブルシューティング、またはアプリケーションの使用状況を分析するためにそれらを調査することができます。すべてのキャプチャイベントは [RUM エクスプローラー][1]でクエリ、ダッシュボード、アラートを行うことができます。
 
 ブラウザ アプリケーションの規模が大きい場合、複数の Web 開発チームによって構築されている可能性があります。各チームは、エラー、速度低下、または使用状況の分析をトラブルシューティングする際に、重点的に取り組むべき領域を持っています。
 
@@ -19,8 +19,6 @@ RUM を使用すると、ブラウザアプリケーションのすべてのイ�
 ## RUM アプリケーションの作成
 
 ブラウザアプリケーションを追跡・分析するための最初のステップは、[RUM アプリケーションを作成する][2]ことです。RUM アプリケーションは、顧客が Web サイトとして認識するような体験をレンダリングする、特定のドメインで利用可能なブラウザアプリケーションをマッピングします。
-
-ブラウザアプリケーションが `https://www.account.yourwebsite.com` のようなサブドメインを持つ場合、各サブドメインごとに RUM アプリケーションを作成します。
 
 ## ブラウザアプリケーション内のページの追跡
 
@@ -33,7 +31,7 @@ RUM を使用すると、ブラウザアプリケーションのすべてのイ�
 
 ## ページのレンダリングライフサイクルにおけるタイミングの追跡
 
-Browser SDK は、業界標準である一連のレイテンシー (タイミング) を自動的に追跡します。これには、Core Web Vitals、ページの読み込み時間[など][4]が含まれます。
+Browser SDK は、業界標準のタイミング、Core Web Vitals、ページの読み込み時間[など][4]を自動的に追跡します。
 
 さらに、イメージやコンポーネントなど、ページ上の特定のアイテムのレンダリングにかかる時間を追跡することができます。コードでキャプチャして、その値をビューイベントに貼り付けることで、さらに多くのタイミングを追跡できます。この方法の詳細については、[独自のパフォーマンスタイミングを追加する][5]のドキュメントを参照してください。
 
@@ -70,10 +68,9 @@ Browser SDK は、業界標準である一連のレイテンシー (タイミン
 
 ```
 datadogRum.addAction('search_component_render', {
-        'team': 'Team A', // 例: 42.12
-        'time_to_full_render': 16.5, // 例: ['tomato', 'strawberries']
-    })
-
+    'team': 'Team A', // 例: 42.12
+    'time_to_full_render': 16.5, // 例: ['tomato', 'strawberries']
+})
 ```
 
 次に RUM エクスプローラーから、以下を分析することができます。
@@ -88,7 +85,7 @@ datadogRum.addAction('search_component_render', {
 
 ある Web 開発チームが、以下の例のような一連のページを所有しているとします。
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership-1.jpg" alt="Web 開発者が所有する一連のページの例" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-track-team-ownership-2.png" alt="Web 開発者が所有する一連のページの例" style="width:90%;">}}
 
 RUM アプリケーション内で、以下のようにして、チームが所有するページの各セットにサービスを作成します。
 
@@ -109,7 +106,7 @@ RUM の `service` 属性を使用して、指定されたチームのスコー�
 
 ### チームが UI コンポーネントを所有する
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-1.jpg" alt="カスタムアクションでコンポーネントを追跡可能" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-team-owns-ui-components-2.png" alt="カスタムアクションでコンポーネントを追跡可能" style="width:90%;">}}
 
 コンポーネントは、[前述][10]のカスタムアクションを使って追跡されます。
 

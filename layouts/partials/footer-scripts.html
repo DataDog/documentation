@@ -30,6 +30,15 @@ hugo defaults to environment development with hugo server
     <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
 {{ end }}
 
+{{ if eq .Section "glossary" }}
+    {{ $opts := dict "targetPath" "static/glossary.js" "defines" $defines "inject" $inject "sourceMap" $sourcemap "minify" $isProd }}
+    {{ $js := resources.Get "scripts/components/glossary.js" | js.Build $opts }}
+    {{ if $isProd }}
+        {{ $js = $js | fingerprint "sha512" }}
+    {{ end }}
+    <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+{{ end }}
+
 {{ if .Params.footer_scripts }}
     {{ range $k, $v := .Params.footer_scripts }}
 

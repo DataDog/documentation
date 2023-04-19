@@ -90,7 +90,7 @@ Network Performance Monitoring supports use of the following provisioning system
 
 ## Setup
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
@@ -102,7 +102,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 2. Copy the system-probe example configuration:
 
     ```shell
-    sudo -u dd-agent install -m 0644 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
@@ -134,8 +134,12 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 
 {{< site-region region="us,us3,us5,eu" >}}
 
-6. Optionally, install the Azure integration for more visibility into Azure load balancers.
+6. Optionally, enable additional cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
+      * Install the [Azure integration][1] for visibility into Azure load balancers.
+      * Install the [AWS Integration][2] for visibility in AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/
 {{< /site-region >}}
 
 ### SELinux-enabled systems
@@ -206,7 +210,7 @@ To enable Network Performance Monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. 
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers.
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
@@ -358,22 +362,21 @@ If you already have the [Agent running with a manifest][4]:
 [4]: /agent/kubernetes/
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
 To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
   namespace: placeholder
 spec:
-  # (...)
   features:
-    networkMonitoring:
+    npm:
       enabled: true
 ```
 
@@ -384,10 +387,10 @@ spec:
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
-$ docker run --cgroupns host \
+docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
@@ -416,9 +419,9 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
-       DD_PROCESS_AGENT_ENABLED: 'true'
-       DD_API_KEY: '<DATADOG_API_KEY>'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+       DD_PROCESS_AGENT_ENABLED=true
+       DD_API_KEY=<DATADOG_API_KEY>
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - /proc/:/host/proc/:ro

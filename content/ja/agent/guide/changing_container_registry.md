@@ -63,16 +63,17 @@ Datadog Operator で Datadog Agent (または Datadog Cluster Agent) をデプ�
 
 1. Datadog Agent のマニフェストファイルを更新し、デフォルトのレジストリ (`gcr.io/datadoghq`) をオーバーライドします。例えば、`public.ecr.aws/datadog` の場合:
 
-    ```yaml
-    apiVersion: datadoghq.com/v1alpha1
-    kind: DatadogAgent
-    metadata:
-      name: datadog
-    spec:
-      // ..
-      registry: gcr.io/datadoghq
-    ```
-2. `spec.agents.image.name`、`spec.clusterAgent.image.name` および `spec.clusterChecksRunner.image.name` フィールドに対するすべてのオーバーライドを削除します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    registry: gcr.io/datadoghq
+  // ..
+```
+2. `spec.override.nodeAgent.image.name`、``spec.override.clusterAgent.image.name` および `spec.override.clusterChecksRunner.image.name` フィールドに対するすべてのオーバーライドを削除します。
 
 Datadog Operator の詳細については、[Operator を使用して Agent をデプロイする][4]を参照してください。
 

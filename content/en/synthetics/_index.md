@@ -24,7 +24,7 @@ further_reading:
 
 ---
 
-{{< vimeo 447241955 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
 
 <br/>
 
@@ -60,9 +60,15 @@ Use the [integration between Synthetic tests and APM traces][16] to find the roo
 
 ## Access out-of-the-box dashboards
 
-Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetics dashboards][17]. 
+Analyze performance information about your API tests, multistep API tests, browser tests, and private locations, as well as Datadog events, with [out-of-the-box Synthetic dashboards][17]. 
 
 {{< img src="synthetics/test_summary_dashboard.png" alt="Test Summary Dashboard" style="width:100%;">}}
+
+## Use the Synthetic Monitoring & Continuous Testing Explorer
+
+Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
+
+{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
@@ -92,3 +98,4 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [17]: /synthetics/dashboards/
 [18]: /getting_started/synthetics
 [19]: /getting_started/synthetics/private_location
+[20]: /continuous_testing/explorer/

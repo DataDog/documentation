@@ -162,15 +162,6 @@ function getPathElement(event = null) {
         );
     }
 
-    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/integrations/integrate_vector_with_datadog` in the sidenav.
-    if (path.includes('observability_pipelines/integrations/integrate_vector_with_datadog')) {
-        const observabilityPipelineEl = document.querySelector('.side .nav-top-level > [data-path*="observability_pipelines"]');
-        sideNavPathElement = observabilityPipelineEl.nextElementSibling.querySelector(
-            '[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
-        );
-        mobileNavPathElement = sideNavPathElement;
-    }
-
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(

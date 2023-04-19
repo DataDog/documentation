@@ -8,9 +8,9 @@ further_reading:
   text: "Datadog Service Catalog"
 ---
 
-{{< beta-callout url="https://forms.gle/TgezmEhUPXzebvv27" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" >}}
   Datadog API Catalog is in beta! Use this form request access. 
-{{< /beta-callout >}} 
+{{< /callout >}} 
 
 {{< img src="tracing/api_catalog/api-catalog-overview.png" alt="API Catalog showing a list of API endpoints along with their Error Rate, P99 Latency, Requests Count, and Owning Team, with searching, filtering, and scoping features." style="width:100%;" >}}
 
@@ -68,7 +68,7 @@ For example, you can:
 
 {{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph, and click through to related traces to investigate." video="true" >}}
 
-The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope drop-downs. 
+The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
 
 
 ## Exploring endpoints during incidents

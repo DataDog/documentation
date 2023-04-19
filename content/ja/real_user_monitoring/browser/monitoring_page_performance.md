@@ -19,6 +19,10 @@ kind: documentation
 title: ページのパフォーマンスの監視
 ---
 
+{{< callout btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
+機能フラグで RUM データを補強し、パフォーマンス監視を可視化。<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>は非公開ベータ版です。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
+{{< /callout >}}
+
 ## 概要
 
 RUM のビューイベントは、すべてのページビューについて、広範なパフォーマンスメトリクスを収集します。アプリケーションのページビューを監視し、ダッシュボードや RUM エクスプローラでパフォーマンスメトリクスを確認することができます。
@@ -33,7 +37,7 @@ RUM のビューイベントは、すべてのページビューについて、�
 ## イベントのタイミングとコア Web バイタル
 
 <div class="alert alert-warning">
-Datadog のコア Web バイタルメトリクスは、<a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
+Datadog の Core Web Vitals メトリクスは、<a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
 </div>
 
 [Google のウェブに関する主な指標][5]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。Datadog では、このメトリクスの 75 パーセンタイルの監視をおすすめしています。
@@ -41,7 +45,7 @@ Datadog のコア Web バイタルメトリクスは、<a href="https://github.c
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="コアウェブバイタルの概要の視覚化"  >}}
 
 - バックグラウンドで開かれたページの First Input Delay および Largest Contentful Paint は収集されません（たとえば、新規タブや焦点のないウィンドウ）。
-- 実際のユーザーページビューから収集されたメトリクスは、 [Synthetic ブラウザテスト][6]など固定環境で読み込まれたページ用に計算されたメトリクスと異なる場合があります。
+- 実際のユーザーのページビューから収集されたメトリクスは、[Synthetic ブラウザテスト][6]などの固定され制御された環境で読み込まれたページに対して計算されたものと異なる場合があります。Synthetic Monitoring では、Largest Contentful Paint と Cumulative Layout Shift は、実際のメトリクスではなく、ラボのメトリクスとして表示されます。
 
 | メトリクス                   | 焦点            | 説明                                                                                           | 対象値 |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
@@ -72,7 +76,7 @@ Datadog のコア Web バイタルメトリクスは、<a href="https://github.c
 
 ## シングルページアプリケーション (SPA) の監視
 
-シングルページアプリケーション (SPA) の場合、RUM ブラウザ SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページをクリックすると、ページが完全に更新されずに新しいページが表示される場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][16] を使用してページの変更を追跡します。
+シングルページアプリケーション (SPA) の場合、RUM ブラウザ SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページを操作すると、ページが完全に更新されずに異なる URL に移動する場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][16] を使用して URL の変更を追跡します。
 
 Datadog は、ページの読み込みに必要な時間を計算する独自のパフォーマンスメトリクス、`loading_time` を提供します。このメトリクスは、`initial_load` と `route_change` の両方のナビゲーションで機能します。
 
@@ -85,11 +89,13 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
   - `navigationStart` と `loadEventEnd` の差。
   - または、`navigationStart` からページにアクティビティがない最初の時間までの差。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
 
-- **SPA Route Change**: ロード時間は、ユーザーがクリックしてから、そのページに初めてアクティビティが発生するまでの差に相当します。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
+- **SPA Route Change**: ロード時間は、URL が変わってから、そのページに初めてアクティビティが発生するまでの差に相当します。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
 
 ### ページアクティビティの計算方法
 
-ナビゲーションやクリックが発生するたびに、RUM ブラウザ SDK はページのアクティビティを追跡し、インターフェイスが再び安定するまでの時間を推定します。ネットワークリクエストと DOM の変異を見ることで、ページにアクティビティがあると判断されます。100ms 以上継続的なリクエストがなく、DOM の変異もない場合、ページアクティビティは終了します。100ms の間にリクエストも DOM ミューテーションも発生しなかった場合、そのページはアクティビティがないと判断されます。
+RUM ブラウザ SDK はページのアクティビティを追跡し、インターフェイスが再び安定するまでの時間を推定します。ネットワークリクエストと DOM の変異を見ることで、ページにアクティビティがあると判断されます。100ms 以上継続的なリクエストがなく、DOM の変異もない場合、ページアクティビティは終了します。100ms の間にリクエストも DOM ミューテーションも発生しなかった場合、そのページはアクティビティがないと判断されます。
+
+**注意事項:**
 
 最後のリクエストまたは DOM 変異から 100ms という基準は、以下のシナリオではアクティビティの正確な判断にならないかもしれません。
 
@@ -106,7 +112,10 @@ DD_RUM.init({
         'https://third-party-analytics-provider.com/endpoint',
 
         // /comet で終わる URL を除外する
-        /\/comet$/
+        /\/comet$/,
+
+        // 関数が true を返す URL を除外する
+        (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
 ```

@@ -23,7 +23,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
 display_on_public_website: true
@@ -31,7 +30,7 @@ draft: false
 git_integration_title: oracle
 integration_id: oracle
 integration_title: Oracle
-integration_version: 4.0.0
+integration_version: 4.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -50,7 +49,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::データストア
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
   media: []
@@ -69,7 +67,7 @@ Oracle Database サーバーからメトリクスをリアルタイムに取得�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 #### 前提条件
 
@@ -155,26 +153,26 @@ GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
    init_config:
 
    instances:
-     ## @param server - string - required
-     ## The IP address or hostname of the Oracle Database Server.
-     #
-     - server: localhost:1521
-
-      ## @param service_name - string - required
-      ## The Oracle Database service name. To view the services available on your server,
-      ## run the following query: `SELECT value FROM v$parameter WHERE name='service_names'`
+      ## @param server - string - required
+      ## The IP address or hostname of the Oracle Database Server.
       #
-      service_name: <SERVICE_NAME>
+      - server: localhost:1521
 
-      ## @param username - string - required
-      ## The username for the Datadog user account.
-      #
-      username: <USERNAME>
+        ## @param service_name - string - required
+        ## The Oracle Database service name. To view the services available on your server,
+        ## run the following query: `SELECT value FROM v$parameter WHERE name='service_names'`
+        #
+        service_name: <SERVICE_NAME>
 
-      ## @param password - string - required
-      ## The password for the Datadog user account.
-      #
-      password: <PASSWORD>
+        ## @param username - string - required
+        ## The username for the Datadog user account.
+        #
+        username: <USERNAME>
+
+        ## @param password - string - required
+        ## The password for the Datadog user account.
+        #
+        password: <PASSWORD>
    ```
 
 2. [Agent を再起動します][3]。

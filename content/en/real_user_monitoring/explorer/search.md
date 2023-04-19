@@ -35,6 +35,8 @@ To search through your RUM events, select an event type from the dropdown menu t
 
 To filter on sessions produced by a specific application by real users over the past day, create a custom query such as `@application.id:Shopist @session.type:user` and set the time range to `1d`.
 
+**Note:** If you are including a facet in your query, be sure to create the facet first.
+
 ### Search syntax
 
 For more information about searching for RUM events and using time frames, see [Search Syntax][5] and [Custom Time Frames][6].
@@ -43,7 +45,7 @@ For more information about searching for RUM events and using time frames, see [
 
 All RUM events contain attributes, which are automatically collected by the RUM SDKs, and your custom attributes, which are displayed on the [event side panel][7]. 
 
-While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to easily access them in your search and [visualizations][8].
+While most automatically collected attributes are indexed and faceted, your custom event attributes are not indexed and faceted by default. Index these attributes by creating a facet or measure to be able to access them in your search and [visualizations][8].
 
 ### Facets
 

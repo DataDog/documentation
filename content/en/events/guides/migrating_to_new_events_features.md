@@ -181,7 +181,7 @@ EC2 Instance marked for maintenance
 
 Zabbix or Prometheus has triggered an alert for a service today
 : Legacy syntax </br>
-`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
+`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last('1d') > 0`
 : New syntax </br>
 `events("source:(prometheus OR zabbix) status:error tags:service").rollup("count").last("1d") > 0`
 

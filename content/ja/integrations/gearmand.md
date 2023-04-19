@@ -30,7 +30,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - processing
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
@@ -56,7 +55,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Category::処理
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
@@ -78,7 +76,7 @@ Gearman のメトリクスを収集して、以下のことができます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Gearman チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

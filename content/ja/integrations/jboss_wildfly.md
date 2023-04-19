@@ -26,7 +26,6 @@ author:
 categories:
 - web
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: JBoss および WildFly アプリケーションからさまざまな JMX メトリクスを収集
   media: []
@@ -71,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれています。JBoss/WildFly ホストに追加でインストールする必要はありません。
 

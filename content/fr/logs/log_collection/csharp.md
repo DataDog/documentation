@@ -406,7 +406,7 @@ Les variables de configuration suivantes ne doivent généralement pas être mod
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Permet de définir l'URL vers laquelle les logs sont envoyés. Utilise le domaine spécifié dans `DD_SITE` par défaut.<br>
@@ -509,7 +509,7 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 ```csharp
 using (var log = new LoggerConfiguration()

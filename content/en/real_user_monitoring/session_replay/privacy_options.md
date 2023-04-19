@@ -36,11 +36,11 @@ datadogRum.init({
     //  service: 'my-web-application',
     //  env: 'production',
     //  version: '1.0.0',
-    sampleRate: 100,
+    sessionSampleRate: 100,
     sessionReplaySampleRate: 100,
     trackResources: true,
     trackLongTasks: true,
-    trackInteractions: true,
+    trackUserInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 
@@ -53,16 +53,16 @@ After updating your configuration, you can override elements of your HTML docume
 
 Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
-{{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="Mask user input mode" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="Mask user input mode" style="width:70%;">}}
 
-**Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay.
+**Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay, which means all input fields are automatically masked.
 
 ### Mask mode
-
-Masks all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
+Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
 {{< img src="real_user_monitoring/session_replay/mask.png" alt="Mask mode" style="width:70%;">}}
 
+**Note**: Masked data is not stored on Datadog servers.
 ### Allow mode
 
 Records everything unmasked.
@@ -105,7 +105,7 @@ In order to protect end-user privacy, regardless of your privacy configuration, 
 
 `hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text.
 
-If you are concerned about the number of visible elements in sensitive fields, enable ‘hidden’ for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
+If you are concerned about the number of visible elements in sensitive fields, enable `hidden` for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
 
 In this example replay session, the username in the Datadog navigation is obfuscated.
 
@@ -117,7 +117,7 @@ To obscure the default action name and update the naming convention for individu
 
 You can rename the default action name by overriding the name of a specific HTML element with a more general name. By default, Datadog displays the custom override name.
 
-For example, override the following name with `<div data-dd-action-name="Address" > → Action: “Click on Address”`.
+For example, override the following name with `<div data-dd-action-name="Address" > → Action: "Click on Address"`.
 
 Additional use cases to override the default action name include masking sensitive data in the RUM Explorer and streamlining your analytics and search with custom naming conventions.
 

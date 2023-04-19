@@ -18,7 +18,7 @@ Chaque incident dans Datadog dispose de sa propre page de détails où vous pouv
 
 {{< img src="monitors/incidents/incident_global_header.jpeg" alt="En-tête global d'un incident" style="width:80%;">}}
 
-L'en-tête global permet d'accéder aux sélecteurs de [statut et gravité][2], ainsi qu'à des liens vers vos [intégrations liées aux incidents][3]. Lorsque le statut d'un incident est défini sur résolu, une option s'affiche dans l'en-tête afin de vous permettre de générer un Notebook d'analyse post-mortem en utilisant un [modèle d'analyse post-mortem][4]. Configurez vos modèles d'analyse post-mortem dans Incident Settings pour prédéfinir la structure et le contenu de vos analyses post-mortem.
+L'en-tête global permet d'accéder aux sélecteurs de [statut et gravité][2], ainsi qu'à des liens vers vos [intégrations liées aux incidents][3]. Lorsque un incident possède un statut résolu, une option s'affiche dans l'en-tête afin de vous permettre de générer un notebook basé sur un [modèle d'analyse post-mortem][4]. Configurez vos modèles d'analyse post-mortem dans Incident Settings pour prédéfinir la structure et le contenu de vos analyses post-mortem.
 
 ## Section Overview
 
@@ -40,7 +40,7 @@ Les propriétés sont divisées en trois sections :
 * Why it happened
 * Attributes
 
-Vous pouvez configurer des champs de propriété supplémentaires dans [Incident Settings][5] en utilisant les paires `<KEY>:<VALUE>` transmises dans vos tags de métrique, ou en créant des champs personnalisés. En attribuant des valeurs aux propriétés d'un incident, vous pourrez plus facilement rechercher des sous-ensembles d'incidents sur la [Incident Homepage][6] et former des requêtes si vous utilisez la fonctionnalité [Incident Management Analytics][7]. Vous pouvez également réorganiser vos champs de propriété et les déplacer vers d'autres en-têtes de façon à améliorer la visibilité des propriétés les plus importantes.
+Vous pouvez configurer des champs de propriété supplémentaires dans [Incident Settings][5] en utilisant les paires `<KEY>:<VALUE>` transmises dans vos tags de métrique Datadog, ou en créant des champs personnalisés. En attribuant des valeurs aux propriétés d'un incident, vous pourrez plus facilement rechercher des sous-ensembles d'incidents sur la [page principale Incident][6] et former des requêtes si vous utilisez la fonctionnalité [Incident Management Analytics][7]. Vous pouvez également réorganiser vos champs de propriété et les déplacer vers d'autres en-têtes de façon à améliorer la visibilité des propriétés les plus importantes.
 
 Si votre incident affecte des clients, indiquez les détails dans la section Impact :
 
@@ -52,17 +52,17 @@ Si votre incident affecte des clients, indiquez les détails dans la section Imp
 
 En plus de vos champs de propriété, la section Overview affiche un récapitulatif des informations via les modules suivants :
 
-1. *Condensed Timeline* : Affiche les changements d'état de l'incident ainsi que le début et la fin de l'impact afin d'offrir une vue générale du cycle de vie de l'incident.
-2. *Latest Notifications* : Affiche la dernière notification envoyée pour l'incident, avec un lien pour accéder rapidement à la liste complète des notifications dans la [section Notification][14].
-3. *Pending Tasks* : Affiche la dernière tâche non terminée, avec un lien pour accéder rapidement à la liste complète des tâches dans la [section Remediation][15].
-4. *Responders* : Affiche le responsable actuel de l'incident ainsi que les avatars des autres personnes affectées à l'incident.
-5. *Recent timeline entries* : Affiche les cinq dernières entrées dans la timeline de l'incident, avec un lien pour accéder rapidement à la [section Timeline][16] complète.
+1. *Condensed Timeline* : affiche au sein d'une timeline les changements d'état de l'incident ainsi que le début et la fin de l'impact afin d'offrir une vue générale du cycle de vie de l'incident.
+2. *Latest Notifications* : affiche la dernière notification envoyée pour l'incident, avec un lien pour accéder rapidement à la liste complète des notifications dans la [section Notifications](#section-notifications).
+3. *Pending Tasks* : affiche la dernière tâche non terminée, avec un lien pour accéder rapidement à la liste complète des tâches dans la [section Remediation](#section-remediation].
+4. *Responders* : affiche le responsable actuel de l'incident ainsi que les avatars des autres personnes affectées à l'incident.
+5. *Recent timeline entries* : affiche les cinq dernières entrées dans la timeline de l'incident, avec un lien pour accéder rapidement à la [section Timeline](#section-timeline) complète.
 
 ## Section Timeline
 
 {{< img src="monitors/incidents/incident_timeline.jpeg" alt="Section Timeline d'un incident" style="width:80%;">}}
 
-La section Timeline de l'incident est la principale source d'informations pour le travail effectué pendant un incident. À mesure que des actions sont effectuées, de nouvelles cellules sont ajoutées à la timeline par ordre chronologique afin de refléter les modifications effectuées, par qui et à quel moment. 
+La section Timeline de l'incident est la principale source d'informations détaillant le travail effectué pendant un incident. À mesure que des actions sont effectuées, de nouvelles cellules sont ajoutées à la timeline par ordre chronologique afin de refléter les modifications effectuées, la personne à leur origine ainsi que leur date et heure. 
 
 ### Types de contenu
 
@@ -70,15 +70,15 @@ Les cellules peuvent afficher différents types de contenu différents :
 
 |  Type de contenu      | Description                                                                                            |
 | ------------------ | ------------------------------------------------------------------------------------------------------ |
-| Responder Note     | Une note ajoutée manuellement par un intervenant lors de l'incident. Il existe plusieurs sous-types de notes d'intervenant :<br>- *Graphique* : la note contient un ou plusieurs graphiques Datadog<br>- *Lien* : la note contient un hyperlien<br>- *Code* : la note contient des blocs de code incorporés à l'aide de la syntaxe Markdown
+| Responder Note     | Une note ajoutée manuellement par un intervenant lors de l'incident. Il existe plusieurs sous-types de notes d'intervenant :<br>- *Graphique* : la note contient un ou plusieurs graphiques Datadog.<br>- *Lien* : la note contient un hyperlien<br>- *Code* : la note contient des blocs de code incorporés à l'aide de la syntaxe Markdown.
 | Incident Update    | Toute modification apportée aux propriétés d'un incident (notamment le statut et la gravité) ou à son impact.
 | Integration Update | Toute modification effectuée via les [intégrations][3] utilisées pour la gestion des incidents.
 | Task               | Toute modification apportée aux tâches liées à l'incident dans la section Remediation de la page de détails d'un incident.
 | Notification Sent  | Indique lorsqu'une notification manuelle est envoyée par un intervenant.
 
-Pour ajouter des notes d'intervenant à la timeline directement, utilisez la zone de texte située sous les onglets permettant de passer d'une section à l'autre. Personnalisez le timestamp de la note au moment de la création pour capturer des informations importantes qui étaient pertinentes à un moment antérieur de la timeline. Si vous êtes l'auteur d'une note d'intervenant, vous pouvez modifier son contenu ou son timestamp, ou encore supprimer entièrement la note. Vous pouvez également copier un lien vers une cellule spécifique et le partager avec vos collègues. Il est possible d'[ajouter des notes d'intervenant à la timeline depuis Slack][8].
+Pour ajouter des notes d'intervenant à la timeline directement, utilisez la zone de texte située sous les onglets permettant de passer d'une section à une autre. Personnalisez le timestamp de la note au moment de la création pour capturer des informations importantes qui étaient pertinentes à un moment antérieur de la timeline. Si vous êtes l'auteur d'une note d'intervenant, vous pouvez modifier son contenu ou son timestamp, ou encore supprimer entièrement la note. Vous pouvez également copier un lien vers une cellule spécifique et le partager avec vos collègues. Il est possible d'[ajouter des notes d'intervenant à la timeline depuis Slack][8].
 
-En ce qui concerne les cellules de graphique, les définitions de graphique sont stockées au moyen d'URL de partage si cette option est activée dans les [paramètres de votre organisation][9]. Lorsqu'une cellule de graphique est ajoutée à la timeline, celle-ci présente les mêmes options d'interactivité que dans les Dashboards, Notebooks et d'autres pages. 24 heures après avoir été ajoutés à la timeline, les graphiques sont remplacés par des images statiques reflétant les informations qu'ils affichaient. Cela permet de s'assurer que les graphiques qui affichent des données à rétention courte restent pertinents même après l'expiration des données en temps réel.
+En ce qui concerne les cellules de graphique, les définitions de graphique sont stockées au moyen d'URL de partage si cette option est activée dans les [paramètres de votre organisation][9]. Lorsqu'une cellule de graphique est ajoutée à la timeline, celle-ci présente les mêmes options d'interactivité que dans les dashboards, notebooks et d'autres pages. 24 heures après avoir été ajoutés à la timeline, les graphiques sont remplacés par des images statiques reflétant les informations qu'ils affichaient. Cela permet de s'assurer que les graphiques qui affichent des données à rétention courte restent pertinents même après l'expiration des données en temps réel.
 
 Par défaut, les cellules de la timeline sont affichées selon l'ordre `oldest first`, mais vous pouvez définir cette option sur `newest first` à l'aide du bouton en haut à gauche de la timeline.
 
@@ -96,25 +96,26 @@ Dans la section Remediation, saisissez la description de votre tâche dans la zo
 
 À mesure qu'elles sont traitées, les différentes tâches peuvent être marquées comme terminées en cochant la case à gauche de la description de la tâche en question. Si vous avez beaucoup de tâches, vous pouvez les filtrer en recherchant des mots-clés ou en masquant les tâches terminées.
 
-## Section Responders
+## Section Response Team
 
 <div class="alert alert-warning">
-Cette fonctionnalité est en version bêta ouverte.
+Cette fonctionnalité est disponible en version bêta ouverte.
 </div>
 
-{{< img src="monitors/incidents/incident_responders.jpeg" alt="Section Responders d'un incident" style="width:80%;">}}
+{{< img src="monitors/incidents/incident_response_team.png" alt="La section Response Team de la page de détails d'un incident spécifique" style="width:80%;">}}
 
-Dans la section Responders, vous pouvez former votre équipe d'intervention en ajoutant d'autres utilisateurs et en leur attribuant les rôles qu'ils doivent tenir dans la résolution d'un incident. Voici les trois rôles par défaut fournis par Datadog :
+Dans la section Response Team, vous pouvez composer votre équipe d'intervention en ajoutant d'autres utilisateurs et en leur attribuant les rôles qu'ils doivent tenir lors de la résolution de l'incident. Voici les deux rôles d'intervenant par défaut fournis par Datadog :
 
 1. `Incident Commander` : la personne responsable de diriger l'équipe d'intervention
-2. `Communications Lead` : la personne responsable de gérer les communications avec les parties prenantes tout au long du cycle de vie de l'incident
 3. `Responder` : une personne qui contribue activement à l'analyse d'un incident et à la résolution du problème sous-jacent
 
-**Remarque** : chaque incident doit toujours avoir une personne définie en tant que `Incident Commander`. S'il n'y a qu'un seul intervenant sur un incident, le rôle `Incident Commander` est automatiquement attribué à cette personne. Le rôle `Communications Lead` ou `Responder` peut être attribué à autant de personnes que nécessaire.
+Si vous souhaitez créer des rôles d'intervenant personnalisés, accédez aux [paramètres liés aux types d'intervenants de l'incident][15]. Vous pourrez ainsi créer des types d'intervenants dotés de noms et de descriptions personnalisés. Il est également possible de définir si un type d'intervenant peut être attribué à une seule personne ou à plusieurs.
 
-Si vous ajoutez une autre personne en tant qu'intervenant, celle-ci est avertie via l'adresse e-mail associée à son compte Datadog. Tout le monde peut modifier le rôle d'un intervenant, mais vous seul pouvez retirer une personne de la liste des intervenants d'un incident si le rôle `Responder` général lui est attribué et qu'elle n'a aucune activité dans l'incident. Si un `Incident Commander` est déjà attribué pour un incident, le fait d'attribuer le rôle `Incident Commander` à une autre personne transfère le rôle à cette dernière. La personne à laquelle le rôle `Incident Commander` a été auparavant attribué se voit réattribuer le rôle `Responder`.
+**Remarque** : ces rôles ne correspondent pas aux rôles du système [RBAC (Role Based Access Control)][14]. Les rôles RBAC permettent de contrôler les autorisations d'un utilisateur et de définir s'il peut accéder à certaines fonctionnalités Datadog. Les types d'intervenants de la solution Incident Management n'ont aucune incidence sur les autorisations d'un utilisateur. Ils servent à inviter d'autres personnes à gérer vos incidents et à leur attribuer des rôles clairs qui sont documentés dans vos processus d'intervention.
 
-La liste des intervenants enregistre également la date et l'heure auxquelles une personne a été ajoutée pour la première fois à l'équipe d'intervention d'un incident, ainsi que la date et l'heure de la dernière contribution de cette personne à la timeline de l'incident.
+Si vous ajoutez une personne en tant qu'intervenant, celle-ci est avertie via l'adresse e-mail associée à son compte Datadog. Tout le monde peut modifier le rôle d'un intervenant, mais il est seulement possible de retirer une personne de l'équipe d'intervention d'un incident si le rôle `Responder` général lui est attribué et si elle n'a effectué aucune activité liée à l'incident. Si un `Incident Commander` est déjà attribué pour un incident, le fait d'attribuer le rôle `Incident Commander` à une autre personne transfère le rôle à cette dernière. La personne à laquelle le rôle `Incident Commander` était auparavant attribué se voit réattribuer le rôle `Responder` général. Un changement similaire se produit lorsque vous réattribuez un rôle personnalisé réservé à une seule personne. 
+
+La liste de l'équipe d'intervention enregistre également la date et l'heure auxquelles une personne a été ajoutée pour la première fois à l'équipe d'intervention d'un incident, ainsi que la date et l'heure de la dernière contribution de cette personne à la timeline de l'incident.
 
 ## Section Notifications
 
@@ -164,6 +165,5 @@ Découvrez un exemple de workflow dans le guide [Débuter avec la Gestion des in
 [11]: /fr/monitors/incident_management/incident_settings#rules
 [12]: /fr/monitors/incident_management/incident_settings#message-templates
 [13]: /fr/getting_started/incident_management
-[14]: #notifications-section
-[15]: #remediation-section
-[16]: #timeline-section
+[14]: /fr/account_management/rbac/?tab=datadogapplication
+[15]: /fr/monitors/incident_management/incident_settings/#responder-types

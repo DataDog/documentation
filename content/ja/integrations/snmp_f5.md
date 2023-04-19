@@ -20,7 +20,6 @@ categories:
 - モニタリング
 - notification
 - ネットワーク
-- autodiscovery
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_f5/README.md
@@ -50,7 +49,6 @@ tile:
   - Category::Monitoring
   - Category::Notification
   - Category::Network
-  - Category::Autodiscovery
   - Category::SNMP
   configuration: README.md#Setup
   description: F5 ネットワークデバイスから SNMP メトリクスを収集

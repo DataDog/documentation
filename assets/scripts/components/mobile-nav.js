@@ -75,17 +75,7 @@ export function closeMobileNav(){
 
 export function setMobileNav () {
     const dataPath = window.location.pathname.slice(1,-1)
-    let mobileSelection = ''
-    // redirect the AGENT/aggregating agent path to observability_pipelines/integrations/... on mobile nav
-    if(dataPath.includes('observability_pipelines/integrations/integrate_vector_with_datadog')){
-        const observabilityPipelineMobile = document.querySelector('#mobile-nav a[data-path$="observability_pipelines"]');
-
-        mobileSelection = observabilityPipelineMobile.nextElementSibling.querySelector(
-            'a[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
-        );
-    }else{
-        mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
-    }
+    const mobileSelection = document.querySelector(`#mobile-nav a[data-path="${dataPath}"]`) || false
     const subMenu = document.querySelector(`#mobile-nav a[data-path="${dataPath}"] + ul.d-none`)
 
     if (mobileSelection) {

@@ -293,7 +293,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 
 Install the Python tracer by running:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 pip install -U ddtrace
 {{< /code-block >}}
 
@@ -303,13 +303,13 @@ For more information, see the [Python tracer installation documentation][4].
 
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
 {{< /code-block >}}
 
 If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 

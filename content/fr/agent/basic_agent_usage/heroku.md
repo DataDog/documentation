@@ -160,9 +160,15 @@ Afin de recueillir des métriques système pour tous vos dynos, vous devez :
 
 ## Activation d'intégrations
 
-Pour activer une [intégration Datadog/<NOM_INTÉGRATION>][17], créez un fichier dans le dossier de configuration Datadog de votre application. Lors du démarrage du dyno, vos fichiers YAML sont copiés vers les répertoires de configuration de l'Agent Datadog appropriés.
+Pour activer l'[intégration Datadog <NOM_INTÉGRATION>][17], procédez comme suit :
 
-Par exemple, pour activer l'[intégration Datadog/Redis][18], ajoutez le fichier `/datadog/conf.d/redisdb.yaml` à la racine de votre application (ou `/$DD_HEROKU_CONF_FOLDER/conf.d/redisdb.yaml` si vous avez modifié cette [option de configuration](#configuration)) :
+* Créez un dossier `datadog/conf.d` au sein de votre application.
+* Pour chaque intégration à activer, créez un dossier `<NOM_INTÉGRATION>.d`.
+* Dans ce dossier, créez un fichier `conf.yaml` contenant la [configuration de l'intégration][18].
+
+Lors du démarrage du dyno, vos fichiers YAML sont copiés vers les répertoires de configuration de l'Agent Datadog appropriés.
+
+Par exemple, pour activer l'[intégration Datadog/Redis][19], ajoutez le fichier `/datadog/conf.d/redisdb.d/conf.yaml` à la racine de votre application (ou `/$DD_HEROKU_CONF_FOLDER/conf.d/redisdb.d/conf.yaml` si vous avez modifié cette [option de configuration](#configuration)) :
 
 ```yaml
 init_config:
@@ -180,17 +186,17 @@ instances:
     port: 6379
 ```
 
-**Remarque** : consultez le fichier d'exemple [redisdb.d/conf.yaml][19] pour découvrir toutes les options de configuration disponibles.
+**Remarque** : consultez le fichier d'exemple [redisdb.d/conf.yaml][20] pour découvrir toutes les options de configuration disponibles.
 
 ### Intégrations de la communauté
 
-Si l'intégration que vous activez fait partie des [intégrations de la communauté][20], installez le package au sein du [script de pré-exécution](#script-de-pre-execution).
+Si l'intégration que vous activez fait partie des [intégrations de la communauté][21], installez le package au sein du [script de pré-exécution](#script-de-pre-execution).
 
 ```
 agent-wrapper integration install -t datadog-<NOM_INTÉGRATION>==<VERSION_INTÉGRATION>
 ```
 
-Par exemple, pour installer l'[intégration ping][21], créez le fichier de configuration `datadog/conf.d/ping.yaml` et ajoutez la ligne suivante à votre script de pré-exécution :
+Par exemple, pour installer l'[intégration ping][22], créez le fichier de configuration `datadog/conf.d/ping.d/conf.yaml` et ajoutez la ligne suivante à votre script de pré-exécution :
 
 ```
 agent-wrapper integration install -t datadog-ping==1.0.0
@@ -210,7 +216,7 @@ fi
 
 ## Activer des checks custom
 
-Pour activer vos propres [checks d'Agent custom][22], créez un dossier `checks.d` dans le dossier de configuration Datadog de votre application. Collez-y tous les fichiers `.py` et `.yaml` de vos checks custom. Lors du lancement des dynos, vos fichiers seront copiés vers les répertoires de configuration appropriés de l'Agent Datadog.
+Pour activer vos propres [checks d'Agent custom][23], créez un dossier `checks.d` dans le dossier de configuration Datadog de votre application. Collez-y tous les fichiers `.py` et `.yaml` de vos checks custom. Lors du lancement des dynos, vos fichiers seront copiés vers les répertoires de configuration appropriés de l'Agent Datadog.
 
 Par exemple, voici un exemple d'arborescence pour deux checks custom `foo` et `bar` :
 
@@ -284,7 +290,7 @@ Pour réduire la taille de votre slug, assurez-vous que `DD_APM_ENABLED` est dé
 
 ## Debugging
 
-Pour exécuter les [commandes de debugging ou d'information][23], utilisez la commande `agent-wrapper`.
+Pour exécuter les [commandes de debugging ou d'information][24], utilisez la commande `agent-wrapper`.
 
 Par exemple, pour afficher le statut de votre Agent Datadog et des intégrations activées, exécutez :
 
@@ -304,7 +310,7 @@ Le buildpack Datadog ne recueille pas de logs à partir de la plateforme Heroku.
 
 ## Utiliser Heroku avec des images Docker
 
-Ce buildpack ne fonctionne que pour les déploiements Heroku qui utilisent le [compilateur de slug Heroku][24]. Si vous déployez votre application dans Heroku à l'aide de conteneurs Docker :
+Ce buildpack ne fonctionne que pour les déploiements Heroku qui utilisent le [compilateur de slug Heroku][25]. Si vous déployez votre application dans Heroku à l'aide de conteneurs Docker, procédez comme suit :
 
 1. Intégrez l'Agent Datadog à votre image Docker et lancez l'Agent en tant que processus distinct dans votre conteneur.
 2. Définissez l'option de configuration suivante dans votre application Heroku pour vous assurer que Datadog la transmet bien comme un dyno Heroku :
@@ -358,15 +364,15 @@ datadog-agent run &
 /opt/datadog-agent/embedded/bin/process-agent --config=/etc/datadog-agent/datadog.yaml
 ```
 
-Pour utiliser des options plus avancées dans l'image Docker, consultez les [fichiers Docker de l'Agent Datadog][25].
+Pour utiliser des options plus avancées dans l'image Docker, consultez les [fichiers Docker de l'Agent Datadog][26].
 
 ## Contributions
 
-Consultez les [règles de contribution][26] pour découvrir comment créer un ticket ou une pull request dans le [référentiel Heroku-buildpack-datadog][27].
+Consultez les [règles de contribution][27] pour découvrir comment créer un ticket ou une pull request dans le [référentiel Heroku-buildpack-datadog][28].
 
-## History
+## Historique
 
-Plusieurs forks ont été créés à partir d'anciennes versions du [projet heroku-buildpack-datadog de miketheman][28]. Ce dernier a été presque entièrement réécrit pour la version 6 de l'Agent Datadog. La liste des changements ainsi que d'autres informations sont disponibles dans le [changelog][29].
+Plusieurs forks ont été créés à partir d'anciennes versions du [projet heroku-buildpack-datadog de miketheman][29]. Ce dernier a été presque entièrement réécrit pour la version 6 de l'Agent Datadog. La liste des changements ainsi que d'autres informations sont disponibles dans le [changelog][30].
 
 ## Dépannage
 
@@ -504,15 +510,16 @@ Une fois le buildpack ou l'Agent mis à niveau, vous devez recompiler le slug de
 [15]: https://docs.datadoghq.com/fr/logs/guide/collect-heroku-logs
 [16]: https://docs.datadoghq.com/fr/logs/logs_to_metrics/
 [17]: https://docs.datadoghq.com/fr/integrations/
-[18]: https://docs.datadoghq.com/fr/integrations/redisdb/
-[19]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
-[20]: https://github.com/DataDog/integrations-extras/
-[21]: https://github.com/DataDog/integrations-extras/tree/master/ping
-[22]: https://docs.datadoghq.com/fr/developers/custom_checks/
-[23]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
-[24]: https://devcenter.heroku.com/articles/slug-compiler
-[25]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
-[26]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
-[27]: https://github.com/DataDog/heroku-buildpack-datadog
-[28]: https://github.com/miketheman/heroku-buildpack-datadog
-[29]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[18]: https://docs.datadoghq.com/fr/getting_started/integrations/#configuring-agent-integrations
+[19]: https://docs.datadoghq.com/fr/integrations/redisdb/
+[20]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
+[21]: https://github.com/DataDog/integrations-extras/
+[22]: https://github.com/DataDog/integrations-extras/tree/master/ping
+[23]: https://docs.datadoghq.com/fr/developers/custom_checks/
+[24]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#agent-status-and-information
+[25]: https://devcenter.heroku.com/articles/slug-compiler
+[26]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
+[27]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
+[28]: https://github.com/DataDog/heroku-buildpack-datadog
+[29]: https://github.com/miketheman/heroku-buildpack-datadog
+[30]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md

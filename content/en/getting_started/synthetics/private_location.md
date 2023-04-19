@@ -22,7 +22,7 @@ If you would like to be added to the Windows Private Location beta, reach out to
 
 ## Overview
 
-Private locations allow you to **monitor internal-facing applications** or private URLs that aren’t accessible from the public internet. 
+Private locations allow you to **monitor internal-facing applications** or private URLs that aren't accessible from the public internet. 
 
 {{< img src="getting_started/synthetics/pl-list.png" alt="List of Private Locations in your Settings page" style="width:100%;">}}
 

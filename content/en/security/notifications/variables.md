@@ -109,7 +109,7 @@ The following is an example JSON object with event attributes that may be associ
 }
 ```
 
-If you use the following in the “Say what’s happening” section:
+If you use the following in the **Say what's happening** section:
 
 ```
 {{@usr.id}} just logged in without MFA from {{@network.client.ip}}.

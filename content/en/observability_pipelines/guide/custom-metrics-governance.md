@@ -6,7 +6,7 @@ aliases:
   - /integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags/
   - /observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
 further_reading:
-- link: "/observability_pipelines/setup/"
+- link: "/observability_pipelines/installation/"
   tag: "Documentation"
   text: "Set up Observability Pipelines"
 ---
@@ -22,7 +22,7 @@ This guide walks you through how to use Observability Pipelines to govern and co
 
 ## Prerequisites
 
-This guide assumes that you have already set up Observability Pipelines, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Setup][4] documentation and [Vector Remap Language][5] for more information.
+This guide assumes that you have already set up the Observability Pipelines Worker, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Installation][4] documentation and [Vector Remap Language][5] for more information.
 
 ## Drop metrics missing specific tags or the metric's namespace
 
@@ -32,7 +32,7 @@ It is useful to break down your overall metrics usage with the [Usage Attributio
 
 ### Solution
 
-To prevent that issue, use Observability Pipelines to drop metrics missing tags that are meaningful to you. This can be done prior to metric ingestion and therefore before metrics contribute to your account's custom metrics usage. 
+To prevent that issue, use the Observability Pipelines Worker to drop metrics missing tags that are meaningful to you. This can be done prior to metric ingestion and therefore before metrics contribute to your account's custom metrics usage. 
 
 Observability Pipelines has a wide array of functions that can transform your metrics data before it is sent to Datadog. For example, use the `filter` transform to drop metrics that are missing specific tag keys. The following component filters out any metrics that do not have a `team_tag`, ensuring those metrics are dropped in your Observability Pipelines configuration.
 
@@ -209,9 +209,9 @@ transforms:
 [1]: /account_management/billing/usage_metrics/#types-of-usage
 [2]: /account_management/billing/usage_attribution/
 [3]: /metrics/metrics-without-limits/
-[4]: /observability_pipelines/setup/
+[4]: /observability_pipelines/installation/
 [5]: https://vector.dev/docs/reference/vrl/
 [6]: /account_management/billing/usage_attribution/
 [7]: https://vector.dev/docs/reference/vrl/
 [8]: /account_management/billing/custom_metrics/?tab=countrategauge
-[9]: https://vector.dev/docs/reference/configuration/transforms/tag_cardinality_limit/
+[9]: /observability_pipelines/reference/transforms/#tagcardinalitylimit

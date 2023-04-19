@@ -26,6 +26,33 @@ further_reading:
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="/tracing/setup/php/">PHP Setup Instructions</a>. Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See <a href="/tracing/setup/php/#automatic-instrumentation">automatic instrumentation</a> for more details.
 </div>
 
+## Annotations
+
+If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to your code to instrument it. It is a lighter alternative to [custom instrumentation written in code](#writing-custom-instrumentation). For example, add the `#[DDTrace\Trace]` attribute to methods for Datadog to trace them.
+
+```php
+<?php
+class Server {
+    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"]))]
+    static function process($arg) {}
+
+    #[DDTrace\Trace]
+    function get() {
+      Foo::simple(1);
+    }
+}
+```
+
+You can provide the following arguments:
+
+- `$name`: The operation name to be assigned to the span. Defaults to the function name.
+- `$resource`: The resource to be assigned to the span.
+- `$type`: The type to be assigned to the span.
+- `$service`: The service to be assigned to the span. Defaults to default or inherited service name.
+- `$tags`: The tags to be assigned to the span.
+- `$recurse`: Whether recursive calls shall be traced.
+- `$run_if_limited`: Whether the function shall be traced in limited mode. (For example, when span limit exceeded)
+
 ## Writing custom instrumentation
 
 If you do need to write your own custom instrumentation, consider the following sample application and walk through the coding examples.
@@ -109,7 +136,7 @@ To write custom instrumentation, you do not need any additional composer package
 
 To avoid mixing application or service business logic with instrumentation code, write the required code in a separate file.
 
-1. Create a file `datadog/instrumentation.php` and add it to the composer autoloader. 
+1. Create a file `datadog/instrumentation.php` and add it to the composer autoloader.
 
    {{< code-block lang="json" filename="composer.json" >}}
 {
@@ -125,7 +152,7 @@ To avoid mixing application or service business logic with instrumentation code,
 }
    {{< /code-block >}}
 
-2. Dump the autoloader, for example by running `composer update`.
+2. Dump the autoloader, for example by running `composer dump`.
 
    <div class="alert alert-info">
    <strong>Note</strong>: The file that contains the custom instrumentation code and the actual classes that are instrumented are not required to be in the same code base and package. By separating them, you can publish an open source composer package, for example to GitHub, containing only your instrumentation code, which others might find useful. Registering the instrumentation entry point in the <code>composer.json</code>'s <code>autoload.files</code> array ensures that the file is always executed when the composer autoloader is required.

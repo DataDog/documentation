@@ -3,19 +3,20 @@ title: Export Logs
 kind: documentation
 description: 'Export your Log Explorer view to reuse it later or in different contexts.'
 aliases:
-    - /logs/explorer/export
     - /logs/export
 further_reading:
     - link: 'logs/explorer/search'
       tag: 'Documentation'
-      text: 'Filter logs'
-    - link: 'logs/explorer/group'
+      text: 'Learn how to filter logs'
+    - link: 'logs/explorer/analytics'
       tag: 'Documentation'
-      text: 'Group queried logs'
+      text: 'Learn how to group logs'
     - link: 'logs/explorer/visualize'
       tag: 'Documentation'
       text: 'Create visualizations from logs'
 ---
+
+## Overview
 
 At any moment, and depending on your current aggregation, **export** your log exploration as a:
 
@@ -33,11 +34,13 @@ You can also export your Log Explorer view to reuse later or in different contex
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
 
+## Further Reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/saved_views/
 [2]: /dashboards/
-[3]: /monitors/create/types/log/
+[3]: /monitors/types/log/
 [4]: /logs/logs_to_metrics
 [5]: /api/latest/logs/
 [6]: /integrations/#cat-notification

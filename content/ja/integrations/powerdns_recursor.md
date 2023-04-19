@@ -31,7 +31,6 @@ author:
 categories:
 - web
 - network
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
@@ -60,7 +59,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::ネットワーク
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
@@ -86,7 +84,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 

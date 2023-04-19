@@ -35,7 +35,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - web
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md
 display_on_public_website: true
@@ -62,7 +61,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Web
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
   media: []
@@ -81,7 +79,7 @@ PHP-FPM チェックは、FPM プールの状態を監視し、リクエスト�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 PHP-FPM チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

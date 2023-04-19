@@ -38,6 +38,13 @@ title: デプロイメントの追跡
 
 リクエストおよびエラーのウィジェットは、ダッシュボードとモニターにエクスポートできます。
 
+## バージョンタグを使った欠陥のあるデプロイの自動検出
+
+`version` タグでサービスを構成することで、[欠陥のあるデプロイの自動検出][4]が可能になります。
+
+モニターを設定して、潜在的な欠陥のあるすべてのデプロイについて自動的に通知 を受けることができます。これを行うには、New Monitors ページに移動して Events を選択し、モニターを定義する検索クエリに `tags:deployment_analysis` を含めます。
+
+
 ## デプロイ済みのバージョン
 
 `version` タグで構成されたサービスには、サービス健全性を示すメインのグラフの下のサービス詳細画面にバージョンセクションがあります。バージョンセクションには、選択した時間間隔にアクティブだったサービスのすべてのバージョンが表示されます（上部にはアクティブなサービスが表示）。
@@ -224,3 +231,4 @@ Time = 45
 [1]: /ja/getting_started/tagging/unified_service_tagging/
 [2]: /ja/metrics/types/?tab=distribution#metric-types
 [3]: /ja/tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[4]: /ja/watchdog/faulty_deployment_detection/

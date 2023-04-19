@@ -25,6 +25,7 @@ const initCodeTabs = () => {
                     const lang = tabPane.getAttribute('data-lang')
                     const li = document.createElement('li')
                     const anchor = document.createElement('a')
+                    anchor.addEventListener("click", e => e.preventDefault(), false);
                     anchor.dataset.lang = lang
                     anchor.href = '#'
                     anchor.innerText = title
@@ -76,15 +77,17 @@ const initCodeTabs = () => {
     }
 
     const activateTabsOnLoad = () => {
+        const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
         if (tabQueryParameter) {
             const selectedLanguageTab = document.querySelector(`a[data-lang="${tabQueryParameter}"]`);
 
             if (selectedLanguageTab) {
                 selectedLanguageTab.click()
+            }else{
+                activateCodeTab(firstTab)
             }
         } else {
             if (codeTabsList.length > 0) {
-                const firstTab = document.querySelectorAll('.code-tabs .nav-tabs a').item(0)
                 activateCodeTab(firstTab)
             }
         }
@@ -94,8 +97,8 @@ const initCodeTabs = () => {
         const allTabLinksNodeList = document.querySelectorAll('.code-tabs .nav-tabs li a')
 
         allTabLinksNodeList.forEach(link => {
-            link.addEventListener('click', () => {
-                event.preventDefault()
+            link.addEventListener('click', e => {
+                e.preventDefault();
                 activateCodeTab(link)
             })
         })

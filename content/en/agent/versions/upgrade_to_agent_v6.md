@@ -52,13 +52,16 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
 
 Find below the manual upgrade instructions for:
 
-* [Amazon Linux](#amazon-linux)
-* [CentOS](#centos)
-* [Debian](#debian)
-* [Fedora](#fedora)
-* [Red Hat](#red-hat)
-* [SUSE](#suse)
-* [Ubuntu](#ubuntu)
+- [Upgrade to Agent 6](#upgrade-to-agent-6)
+- [One-step upgrade](#one-step-upgrade)
+- [Manual upgrade](#manual-upgrade)
+  - [Amazon Linux](#amazon-linux)
+  - [CentOS](#centos)
+  - [Debian](#debian)
+  - [Fedora](#fedora)
+  - [Red Hat](#red-hat)
+  - [Ubuntu](#ubuntu)
+  - [SUSE](#suse)
 
 ### Amazon Linux
 
@@ -73,7 +76,6 @@ Find below the manual upgrade instructions for:
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -117,7 +119,6 @@ Find below the manual upgrade instructions for:
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
    **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on CentOS 8.1.
@@ -187,12 +188,12 @@ Find below the manual upgrade instructions for:
     ```
 
 6. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
-    ```
+    ```shell
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
 7. Start the Agent:
-    ```
+    ```shell
     sudo service datadog-agent start
     ```
 
@@ -209,7 +210,6 @@ Find below the manual upgrade instructions for:
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
 2. Update your local Yum repo and install the Agent:
@@ -225,12 +225,12 @@ Find below the manual upgrade instructions for:
     ```
 
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
-    ```
+    ```shell
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
 5. Restart the Agent
-    ```
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
@@ -247,13 +247,12 @@ Find below the manual upgrade instructions for:
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY.public
     ```
 
    **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL 8.1.
 
 2. Update your local Yum repo and install the Agent:
-    ```
+    ```shell
     sudo yum makecache
     sudo yum remove datadog-agent-base
     sudo yum install datadog-agent
@@ -265,26 +264,26 @@ Find below the manual upgrade instructions for:
     ```
 
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
-    ```
+    ```shell
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
 5. Restart the Agent:
 
     * Red Hat 7 and above:
-    ```
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
     * Red Hat 6:
-    ```
+    ```shell
     sudo initctl restart datadog-agent
     ```
 
 ### Ubuntu
 
 1. Enable HTTPS support for APT, install `curl` and `gnupg`:
-    ```
+    ```shell
     sudo apt-get update
     sudo apt-get install apt-transport-https curl gnupg
     ```
@@ -306,7 +305,7 @@ Find below the manual upgrade instructions for:
    ```
 
 4. Update your local APT cache and install the Agent:
-    ```
+    ```shell
     sudo apt-get update
     sudo apt-get install datadog-agent datadog-signing-keys
     ```
@@ -317,19 +316,19 @@ Find below the manual upgrade instructions for:
     ```
 
 6. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled.:
-    ```
+    ```shell
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
 7. Start the Agent:
 
     * Ubuntu 16.04 or higher:
-    ```
+    ```shell
     sudo systemctl start datadog-agent
     ```
 
     * Ubuntu 14.04 or lower:
-    ```
+    ```shell
     sudo initctl start datadog-agent
     ```
 
@@ -347,7 +346,6 @@ Find below the manual upgrade instructions for:
   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-         https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   ```
 
 2. Update your local Zypper repo and install the Agent:
@@ -356,7 +354,6 @@ Find below the manual upgrade instructions for:
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY.public
   sudo zypper install datadog-agent
   ```
 
@@ -366,12 +363,12 @@ Find below the manual upgrade instructions for:
   ```
 
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
-    ```
+    ```shell
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
 5. Re-start the Agent:
-  ```
+  ```shell
   sudo systemctl restart datadog-agent.service
   ```
 

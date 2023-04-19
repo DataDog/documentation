@@ -30,7 +30,7 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - marketplace
@@ -64,13 +64,13 @@ short_description: Surveiller l'utilisation des ressources Nutanix pour mieux co
   votre environnement
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud
@@ -95,6 +95,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Intégration Nutanix
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -119,14 +120,14 @@ Machines virtuelles Nutanix par RapDev
 ## Assistance
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapDev.io aux coordonnées suivantes :
 
-- E-mail :  datadog-engineering@rapdev.io
+- E-mail : support@rapdev.io
 - Chat : [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - Téléphone : 855-857-0222
 
 ---
 Développé avec ❤️ à Boston
 
-*Ce n'est pas l'intégration que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? [Écrivez-nous](mailto:datadog-engineering@rapdev.io) et nous l'ajouterons !*
+*Ce n'est pas l'intégration que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? [Écrivez-nous](mailto:support@rapdev.io) et nous l'ajouterons !*
 
 ---
 Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-nutanix" target="_blank">Cliquez ici</a> pour l'acheter.

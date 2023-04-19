@@ -6,55 +6,55 @@ left:
       - name: product_features
         link: 'https://www.datadoghq.com/ja/product/'
         title: 機能
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''機能アイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/features.svg'' alt=''機能アイコン''>'
       - name: product_integrations
         link: 'https://www.datadoghq.com/product/platform/integrations/'
         title: インテグレーション
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''インテグレーションアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/integrations.svg'' alt=''インテグレーションアイコン''>'
       - name: product_dashboards
         link: 'https://www.datadoghq.com/product/platform/dashboards/'
         title: 'ダッシュボード  '
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''ダッシュボードアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/dashboard.svg'' alt=''ダッシュボードアイコン''>'
       - name: product_logs
         link: 'https://www.datadoghq.com/product/log-management/'
         title: ログ管理
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''ログアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/log.svg'' alt=''ログアイコン''>'
       - name: product_apm
         link: 'https://www.datadoghq.com/product/apm/'
         title: APM
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''APM アイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/apm.svg'' alt=''APM アイコン''>'
       - name: product_profiler
         link: 'https://www.datadoghq.com/product/code-profiling/'
         title: 継続的なプロファイラー
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''プロファイラーアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/profiling-1.svg'' alt=''プロファイラーアイコン''>'
       - name: product_security
         link: 'https://www.datadoghq.com/product/security-monitoring/'
         title: セキュリティモニタリング
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''セキュリティアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/security.svg'' alt=''セキュリティアイコン''>'
       - name: product_network
         link: 'https://www.datadoghq.com/product/network-performance-monitoring/'
         title: ネットワークモニタリング
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''ネットワークアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/network.svg'' alt=''ネットワークアイコン''>'
       - name: product_synthetics
         link: 'https://www.datadoghq.com/product/synthetic-monitoring/'
         title: Synthetic の監視
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics アイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/synthetics.svg'' alt=''synthetics アイコン''>'
       - name: product_rum
         link: 'https://www.datadoghq.com/product/real-user-monitoring/'
         title: リアルユーザーモニタリング
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''RUM アイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/rum.svg'' alt=''RUM アイコン''>'
       - name: product_serverless
         link: 'https://www.datadoghq.com/product/serverless-monitoring/'
         title: サーバーレス
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''サーバーレスアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/serverless.svg'' alt=''サーバーレスアイコン''>'
       - name: product_alerts
         link: 'https://www.datadoghq.com/product/platform/alerts/'
         title: アラート
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''アラートアイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/alert.svg'' alt=''アラートアイコン''>'
       - name: product_api
         link: api
         title: API
-        pre: '<img class=''menu-icon mr-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''API アイコン''>'
+        pre: '<img class=''menu-icon me-1'' src=''https://imgix.datadoghq.com/img/navbar/menu/api.svg'' alt=''API アイコン''>'
   - name: customers
     link: 'https://www.datadoghq.com/ja/customers/'
     title: お客様

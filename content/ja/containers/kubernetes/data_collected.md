@@ -55,14 +55,12 @@ Kubernetes クラスターにデプロイされた Agent が収集するメト�
 
 ## イベント
 
-Datadog Agent の 5.17.0 リリース版では、Kubernetes イベントコレクター用に組み込みの[leader election オプション][9]をサポートしています。これを有効にした後は、クラスターに追加のイベントコレクションコンテナをデプロイする必要はありません。代わりに、Agent が一度に 1 つの Agent インスタンスのみがイベントを収集するように調整します。使用できるイベントは以下のとおりです。
-
 - Backoff
 - Conflict
 - 削除
 - DeletingAllPods
 - Didn't have enough resource
-- エラー
+- Error
 - Failed
 - FailedCreate
 - FailedDelete

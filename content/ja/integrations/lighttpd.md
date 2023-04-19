@@ -29,7 +29,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - web
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
@@ -57,7 +56,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Web
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
@@ -77,7 +75,7 @@ Agent の lighttpd チェックは、アップタイム、処理バイト数、�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Lighttpd チェックは [Datadog Agent][2] パッケージに含まれています。Lighttpd サーバーに追加でインストールする必要はありません。
 

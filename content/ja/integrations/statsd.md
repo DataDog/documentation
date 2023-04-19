@@ -23,7 +23,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - monitoring
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
@@ -51,7 +50,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::モニタリング
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
@@ -71,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 StatsD チェックは [Datadog Agent][1] パッケージに含まれています。StatsD を実行するサーバーに追加でインストールする必要はありません。
 

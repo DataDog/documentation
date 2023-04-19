@@ -29,13 +29,13 @@ public_title: Apptrail
 short_description: Apptrail を使用して、すべての SaaS 監査ログを監視、分析、および警告する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Security
   - Category::Log Collection

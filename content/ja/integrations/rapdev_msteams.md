@@ -31,12 +31,12 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- コラボレーション
 - マーケットプレイス
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -64,17 +64,17 @@ public_title: Microsoft Teams インテグレーション
 short_description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Collaboration
   - Category::Marketplace
-  - Category::Monitoring
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
   media:
@@ -99,6 +99,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Microsoft Teams インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要

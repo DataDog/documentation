@@ -250,6 +250,9 @@ return jQuery().jquery.startsWith('3.5.1')
 `{{ alphanumeric(n) }}`
 : `n` 文字の英数字文字列を生成します。
 
+`{{ uuid }}`
+: バージョン 4 の UUID (Universally unique identifier) を生成します。
+
 `{{ date(n unit, format) }}` 
 : テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 
@@ -315,11 +318,15 @@ Datadog Synthetics のメールアドレスを作成し、テストステップ�
 
 ブラウザテストを他のブラウザテストの中で実行することで、既存のワークフローを最大 2 階層まで入れ子にして再利用することが可能です。
 
+既存のブラウザテストをサブテストとして使用するには、**Add New Subtest** をクリックし、**From Existing Test** タブのドロップダウンメニューからブラウザテストを選択し、**Add Subtest** をクリックします。
+
+現在のブラウザテストのステップをサブテストに変換するには、**Extract From Steps** タブをクリックし、抽出したい記録されたステップを選択し、**Convert to Subest** をクリックしてください。デフォルトでは、サブテストは親テストの前のステップと順番に実行されます。
+
+{{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="ブラウザテストでサブテストを追加する" style="width:60%;" >}}
+
 サブテストにある変数を親テストでオーバーライドするには、親テストレベルで作成された変数が、サブテストに存在する変数と同じ名前であることを確認してください。変数は、常に最初に代入された値を使用します。
 
-{{< img src="synthetics/browser_tests/subtest.png" alt="ブラウザテストサブテスト" style="width:60%;" >}}
-
-現在のブラウザテストのステップをサブテストに変換するには、**Extract From Steps** タブから記録したステップを選択し、**Convert to Subest** をクリックします。デフォルトでは、サブテストは親テストの前のステップと順番に実行されます。サブテストは、[**高度なオプション**][9]で再利用できる **Main**、**New**、**One** (1 番目)、**Two** (2 番目)、または **Three** (3 番目) のウィンドウで再生するよう選択することができ ます。
+サブテストの高度なオプションについては、[ブラウザテストステップの高度なオプション][9]を参照してください。
 
 サブテストを独立して実行することに意味がない場合は、一時停止することができます。このテストは、親テストの一部として呼び出され続け、 個別に実行されることはありません。詳しくは、[ブラウザのテストジャーニーをテストスイート全体で再利用する][10]を参照ください。
 
@@ -354,27 +361,27 @@ HTTP リクエストを定義するには、
    * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
    * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "クエリパラメーター" %}}
 
    * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "リクエスト本文" %}}
 
    * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "プロキシ" %}}
 
    * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
    * **Proxy Header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
-   {{< /tabs >}}
+   {{% /tab %}}
 
    {{% tab "Privacy" %}}
 
@@ -447,7 +454,7 @@ HTTP リクエストでは、`br`、`deflate`、`gzip`、`identity` の `content
 
 HTTP リクエストの変数や JavaScript のステップのように、実行時にしか計算されない変数もあります。例えば、`{{ <YOUR_VARIABLE_NAME> }}` をフィーチャーした `Type text` ステップがあるとします。テスト実行時には、`{{ <YOUR_VARIABLE_NAME> }}` が、変数に関連付けられた値に体系的に置き換えられます。これらの変数を使ったステップを記録するには、実際の変数の値でステップを記録し、テストを保存する前にステップの定義で実際の値を `{{ <YOUR_VARIABLE_NAME> }}` に置き換えてください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

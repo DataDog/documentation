@@ -26,7 +26,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md
 display_on_public_website: true
@@ -53,7 +52,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::データストア
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: OpCounter、レプリケーションラグ、キャッシュテーブルサイズなどのメトリクスを追跡。
   media: []
@@ -74,7 +72,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 TokuMX チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

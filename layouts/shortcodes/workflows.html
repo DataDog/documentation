@@ -13,7 +13,7 @@
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active js-tab-model" id="-model">
     <div class="schema-table row">
-      {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary">Expand All</p>{{ end }}
+      {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary text-end">Expand All</p>{{ end }}
       <div class="col-12">
         <div class="row table-header">
           <div class="col-4 column">
@@ -37,7 +37,7 @@
 <h3>Outputs</h3>
 <div class="tab-content">
   <div class="table-request schema-table row {{ if not (in . "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in . "hide-table") }}d-none{{ end }}">
-    {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary">Expand All</p>{{ end }}
+    {{ if in . "toggle-arrow" }}<p class="expand-all js-expand-all text-primary text-end">Expand All</p>{{ end }}
     <div class="col-12">
       <div class="row table-header">
         <div class="col-4 column">

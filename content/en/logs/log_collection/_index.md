@@ -10,6 +10,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/log-file-control-with-logrotate/"
   tag: "Blog"
   text: "How to manage log files using Logrotate"
+- link: "/agent/logs/advanced_log_collection"
+  tag: "Documentation"
+  text: "Advanced log collection configurations"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
@@ -215,19 +218,28 @@ You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP 
 
 {{< site-region region="us" >}}
 
-Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
-```text
-telnet intake.logs.datadoghq.com 10514
-<DATADOG_API_KEY> Log sent directly via TCP
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
 ```
 
-Your payload, or `Log sent directly via TCP` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
+For OpenSSL, run the following command:
+
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
-telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
 
 [1]: /account_management/api-app-keys/#api-keys
 
@@ -235,17 +247,27 @@ telnet intake.logs.datadoghq.com 10514
 
 {{< site-region region="eu" >}}
 
-Test it manually with telnet. You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
 
-```text
-telnet agent-intake.logs.datadoghq.eu 443
-<DATADOG_API_KEY> Log sent directly via TCP
+```shell
+gnutls-cli tcp-intake.logs.datadoghq.eu:443
 ```
 
-Your payload, or `Log sent directly via TCP` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
+For OpenSSL, run the following command:
+
+```shell
+openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
+```
+
+You must prefix the log entry with your [Datadog API Key][1] and add a payload.
+
+```
+<DATADOG_API_KEY> Log sent directly using TLS
+```
+
+Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
 
 ```text
-telnet intake.logs.datadoghq.com 10514
 <DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
 ```
 
@@ -289,7 +311,7 @@ Attributes prescribe [logs facets][9], which are used for filtering and searchin
 
 When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself.
 
-{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Stack trace"  >}}
+{{< img src="logs/log_collection/stack_trace.png" style="width:80%;" alt="Attributes for a parsed stack trace"  >}}
 
 To enable these functionalities use the following attribute names:
 
@@ -309,7 +331,7 @@ For more information, see the complete [source code attributes documentation][11
 
 Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
-{{< img src="logs/explore.jpg" alt="Log Explorer view"  >}}
+{{< img src="logs/explore.png" alt="Logs appearing in the Log Explorer" style="width:100%" >}}
 
 ## Further Reading
 

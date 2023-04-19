@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "policy": {
+        "tag_key": "datacenter",
+        "tag_key_required": true,
+        "valid_tag_values": [
+          "prod",
+          "staging"
+        ]
+      },
+      "policy_type": "tag"
+    },
+    "id": "00000000-0000-1234-0000-000000000000",
+    "type": "monitor-config-policy"
+  }
+}

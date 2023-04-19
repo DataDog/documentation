@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-The Continuous Testing tunnel creates short-lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic tests on your private applications.  
+The Continuous Testing tunnel creates short-lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic HTTP and Browser tests on your private applications.  
 
 Datadog recommends using the testing tunnel if you need to launch Continuous Testing tests against local versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can be used to trigger tests on short-lived cloud environments.
 
@@ -45,7 +45,7 @@ When using the testing tunnel, your tests' locations are overridden by a locatio
 
 As mentioned above, the testing tunnel comes with the [@datadog/datadog-ci][2] NPM package and is available from version [v0.11.0][3] of the package. To get started, see [Continuous Testing and CI/CD][4].
 
-Once you've set up your client on your local machine or your CI server, you can decide to have your tests launched with the tunnel by appending the command used to launch tests with `--tunnel`. For instance, if you are using a global configuration file, you can use:
+Once you've set up your client on your local machine or your CI server, you can decide to have your HTTP and Browser tests launched with the tunnel by appending the command used to launch tests with `--tunnel`. For instance, if you are using a global configuration file, you can use:
 
 ```sh
 datadog-ci synthetics run-tests --config <GLOBAL_CONFIG_FILE>.json --tunnel

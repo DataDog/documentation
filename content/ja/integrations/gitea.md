@@ -18,14 +18,13 @@ assets:
     source_type_name: Gitea
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: florent.clarret@gmail.com
   support_email: florent.clarret@gmail.com
 categories:
 - コラボレーション
 - ソースコントロール
 - 問題追跡
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gitea/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Category::Collaboration
   - カテゴリ::ソースコントロール
   - Category::Issue Tracking
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Gitea のすべてのメトリクスを Datadog で追跡
   media: []
@@ -84,7 +82,7 @@ ENABLED = true
 
 詳しくは、公式の[ドキュメント][1]をご覧ください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Gitea インテグレーションは、デフォルトでは [Datadog Agent][3] パッケージに含まれていないため、インストールが必要です。
 

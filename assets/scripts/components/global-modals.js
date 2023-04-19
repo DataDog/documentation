@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    $('#signupModal').on('show.bs.modal', function (e) {
+    const signupModal = document.getElementById('signupModal')
+    signupModal.addEventListener('show.bs.modal', function(e) {
         //$('body').css('overflow', 'hidden');
         //$('.modal').css('overflow', 'scroll');
         var regURL = 'https://app.datadoghq.com/signup_corp';
@@ -48,22 +49,27 @@ $(document).ready(function () {
         } else {
             $('#signUpIframe').attr('src', regURL+lang_param);
         }
-    }).on('hide.bs.modal', function(e) {
+    })
+
+    signupModal.addEventListener('hide.bs.modal', function(e) {
         $('#signUpIframe').attr('src', '');
         //$('body').css('overflow', '');
         //$('.modal').css('overflow', '');
     });
 
 
-
+    const imageModal = document.getElementById('popupImageModal')
     var naturalWidth = 0;
     var naturalHeight = 0;
     var isShowing = false;
-    $('#popupImageModal').on('show.bs.modal', function (e) {
+    imageModal.addEventListener('show.bs.modal', function(e) {
+      $('#popupImageModal').on('show.bs.modal', function (e) {
         $('#popupImageModal .modal-content').css({'background': 'transparent', 'border': 'none'});
-        $('#popupImageModal .modal-body, #popupImageModal .modal-dialog, #popupImageModal .modal-content').css('height','100%');
+        $('#popupImageModal .modal-body, #popupImageModal .modal-dialog, #popupImageModal .modal-content').css('height', '100%');
         $('#popupImageModal .modal-body').html('<div class="loader" style="position:absolute;top:50%;margin:-50px 0 0 -50px;height:100px;width:100px;"></div>');
-    }).on('shown.bs.modal', function (e) {
+      })
+    });
+    imageModal.addEventListener('shown.bs.modal', function(e) {
         $('body').removeClass('modal-open');
         var modal = $(this);
         //modal.hide();
@@ -85,7 +91,8 @@ $(document).ready(function () {
             }
         };
         img.src = url;
-    }).on('hide.bs.modal', function(e) {
+    });
+    imageModal.addEventListener('hide.bs.modal', function(e) {
         $('#popupImageModal .modal-body').empty();
     });
 

@@ -8,6 +8,9 @@ further_reading:
     - link: 'tracing/trace_collection/open_standards/'
       tag: 'Documentation'
       text: 'Learn more about OpenTelemetry'
+    - link: '/opentelemetry/guide/otlp_delta_temporality/'
+      tag: 'Guide'
+      text: 'Producing delta temporality metrics with OpenTelemetry'
 aliases:
   - /metrics/otlp
 ---
@@ -32,7 +35,7 @@ A single OTLP metric may be mapped to several Datadog metrics with a suffix indi
 
 **Note**: OpenTelemetry provides metric API instruments (`Gauge`, `Counter`, `UpDownCounter`, `Histogram`, and so on), whose measurements can be exported as OTLP metrics (Sum, Gauge, Histogram). Other sources for OTLP metrics are possible. Applications and libraries may provide customization into the OTLP metrics they produce. Read the documentation of your OpenTelemetry SDK or OTLP-producing application to understand the OTLP metrics produced and how to customize them.
 
-**Note**: OpenTelemetry protocol supports two ways of representing metrics in time: [Cumulative and Delta temporality][2], affecting the metrics described below. Set the temporality preference of the OTel implementation to **DELTA**, because setting it to CUMULATIVE may discard some data points during application (or collector) startup.  
+**Note**: OpenTelemetry protocol supports two ways of representing metrics in time: [Cumulative and Delta temporality][2], affecting the metrics described below. Set the temporality preference of the OTel implementation to **DELTA**, because setting it to CUMULATIVE may discard some data points during application (or collector) startup. For more information, read [Producing Delta Temporality Metrics with OpenTelemetry][3].
 
 ## Metric types
 
@@ -80,7 +83,7 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 : Bucket count in the time window for the bucket with the specified lower and upper bounds.<br>
 **Datadog In-App Type**: COUNT
 
-- If the `send_count_sum_metrics` flag is enabled, the following metrics are produced:
+- If the `send_aggregation_metrics` flag is enabled, the following metrics are produced:
 
 `<METRIC_NAME>.sum`
 : Sum of the values submitted during the time window.<br>
@@ -90,7 +93,15 @@ The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changin
 : Number of values submitted during the time window.<br>
 **Datadog In-App Type**: COUNT
 
-**Note**: `send_count_sum_metrics` is useful only when not using the distributions mode.
+`<METRIC_NAME>.min`
+: Minimum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: Datadog exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0. <br>
+**Datadog In-App Type**: GAUGE
+
+`<METRIC_NAME>.max`
+: Maximum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: Datadog exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0.<br>
+**Datadog In-App Type**: GAUGE
+
+**Note**: `send_aggregation_metrics` is useful only when not using the distributions mode. Before the Datadog exporter v0.75.0 and the Datadog Agent v6.45.0 and v7.45.0 use `send_count_sum_metrics` instead.
 
 [1]: /metrics/distributions
 [2]: /dashboards/functions/arithmetic/#cumulative-sum
@@ -183,12 +194,14 @@ Suppose you are using an OpenTelemetry Histogram instrument, `request.response_t
 
 [Read more about distributions][1] to understand how to configure further aggregations.
 
-Alternatively, if you are using the `counters` mode and enabling the `send_count_sum_metrics` flag, the following metrics would be reported if the histogram bucket boundaries are set to `[-inf, 2, inf]`:
+Alternatively, if you are using the `counters` mode, the `send_aggregation_metrics` flag is enabled, and the histogram bucket boundaries are set to `[-inf, 2, inf]`, the following metrics are reported:
 
 | Metric Name                                 | Value  | Tags                                | Datadog In-App Type |
 | ------------------------------------------- | ------ | ------------------------------------| ------------------- |
 | `request.response_time.distribution.count`  | `8`    | n/a                                 | COUNT               |
 | `request.response_time.distribution.sum`    | `15`   | n/a                                 | COUNT               |
+| `request.response_time.distribution.max`    | `3`    | n/a                                 | GAUGE               |
+| `request.response_time.distribution.min `   | `1`    | n/a                                 | GAUGE               |
 | `request.response_time.distribution.bucket` | `6`    | `lower_bound:-inf`, `upper_bound:2` | GAUGE               |
 | `request.response_time.distribution.bucket` | `2`    | `lower_bound:2`, `upper_bound:inf`  | GAUGE               |
 
@@ -217,3 +230,4 @@ Suppose you are submitting a legacy OTLP Summary metric, `request.response_time.
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
 [2]: https://opentelemetry.io/docs/reference/specification/metrics/data-model/#temporality
+[3]: /opentelemetry/guide/otlp_delta_temporality/

@@ -18,13 +18,14 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- キャッシュ
+- data store
 - マーケットプレイス
 - oracle
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -55,11 +56,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
+  - Category::Caching
+  - Category::Data Store
   - Category::Marketplace
   - Category::Oracle
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Oracle TimesTen データベースのパフォーマンスを監視する
   media:
@@ -82,6 +84,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Oracle TimesTen インテグレーション
+  uninstallation: README.md#Uninstallation
 ---
 
 

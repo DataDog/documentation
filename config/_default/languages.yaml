@@ -3,6 +3,14 @@ en:
   #languageCode: "en-US"
   weight: 1
   #contentDir: content/en
+  outputs:
+    home:
+      - HTML
+      - RSS
+      - Redirects
+    page:
+      - HTML
+      
 fr:
   languageName: "Français"
   weight: 2

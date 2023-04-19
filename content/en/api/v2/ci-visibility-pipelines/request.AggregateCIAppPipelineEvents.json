@@ -20,8 +20,5 @@
   ],
   "options": {
     "timezone": "GMT"
-  },
-  "page": {
-    "limit": 25
   }
 }

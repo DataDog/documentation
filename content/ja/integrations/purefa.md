@@ -3,7 +3,8 @@ app_id: purefa
 app_uuid: a2d8f393-62cd-4ece-bfab-e30797698b12
 assets:
   dashboards:
-    purefa_overview: dashboards/purefa_overview.json
+    purefa_overview: assets/dashboards/purefa_overview.json
+    purefa_overview_legacy: assets/dashboards/purefa_overview_legacy.json
   integration:
     configuration:
       spec: assets/configuration/spec.yaml
@@ -22,7 +23,7 @@ author:
   sales_email: sales@purestorage.com
   support_email: pure-observability@purestorage.com
 categories:
-- os system
+- OS & システム
 - data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md
@@ -31,7 +32,7 @@ draft: false
 git_integration_title: purefa
 integration_id: purefa
 integration_title: Pure Storage FlashArray
-integration_version: 1.0.1
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -41,15 +42,15 @@ public_title: Pure Storage FlashArray
 short_description: Pure Storage FlashArrays のパフォーマンスと利用状況を監視
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS System
+  - Category::OS & System
   - Category::Data Store
   - Offering::Integration
   configuration: README.md#Setup
@@ -73,7 +74,7 @@ tile:
 
 ## 概要
 
-このチェックでは、[Datadog Agent][2] と [Pure Storage Prometheus エクスポーター][3]を通して [Pure Storage FlashArray][1] を監視します。
+このチェックでは、[Datadog Agent][2] と [Pure Storage OpenMetrics エクスポーター][3]を通して [Pure Storage FlashArray][1] を監視します。
 
 このインテグレーションにより、アレイ、ホスト、ボリューム、ポッドレベルのパフォーマンスデータ、および容量と構成の概要情報を提供することができます。
 
@@ -83,13 +84,13 @@ tile:
 
  - Agent v7.26.x+、OpenMetricsBaseCheckV2 を利用するため
  - Python 3
- - Pure Storage Prometheus エクスポーターは、コンテナ環境でインストールされ、実行されます。インストール方法は、[GitHub リポジトリ][3]を参照してください。
+ - Pure Storage OpenMetrics エクスポーターは、コンテナ環境でインストールされ、実行されます。インストール方法は、[GitHub リポジトリ][3]を参照してください。
 
 ## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、オートディスカバリーのインテグレーションテンプレートのガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Pure FlashArray インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][4]を参照してください。
@@ -100,7 +101,7 @@ tile:
 ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefa==<INTEGRATION_VERSION>` を実行します。
 
 注: `<INTEGRATION_VERSION>` は、Datadog Integration Extras の [CHANGELOG.md][5] 内に記載されています。
-  * 例: `datadog-agent integration install -t datadog-purefa==1.0.1`
+  * 例: `datadog-agent integration install -t datadog-purefa==1.1.0`
 
 ### コンフィギュレーション
 
@@ -116,7 +117,7 @@ init_config:
 
 instances:
 
-  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/flasharray/array?endpoint=<array_ip_or_fqdn>
+  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/array?endpoint=<array_ip_or_fqdn>
     tags:
        - env:<env>
        - fa_array_name:<full_fqdn>
@@ -125,7 +126,7 @@ instances:
        Authorization: Bearer <api_token>
     min_collection_interval: 120
 
-  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/flasharray/volumes?endpoint=<array_ip_or_fqdn>
+  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/volumes?endpoint=<array_ip_or_fqdn>
     tags:
        - env:<env>
        - fa_array_name:<full_fqdn>
@@ -133,7 +134,7 @@ instances:
        Authorization: Bearer <api_token>
     min_collection_interval: 120
 
-  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/flasharray/hosts?endpoint=<array_ip_or_fqdn>
+  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/hosts?endpoint=<array_ip_or_fqdn>
     tags:
        - env:<env>
        - fa_array_name:<full_fqdn>
@@ -141,7 +142,16 @@ instances:
        Authorization: Bearer <api_token>
     min_collection_interval: 120
 
-  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/flasharray/pods?endpoint=<array_ip_or_fqdn>
+  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/pods?endpoint=<array_ip_or_fqdn>
+    tags:
+       - env:<env>
+       - fa_array_name:<full_fqdn>
+       - host:<full_fqdn>
+    headers:
+       Authorization: Bearer <api_token>
+    min_collection_interval: 120
+
+  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/directories?endpoint=<array_ip_or_fqdn>
     tags:
        - env:<env>
        - fa_array_name:<full_fqdn>
@@ -156,6 +166,22 @@ instances:
 ### 検証
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションの `purefa` を探します。
+
+
+
+### 本インテグレーションの新しいバージョンへのアップグレード
+
+#### PureFA Agent Check 1.0.x から 1.1.x へ
+
+1.1.x では、[Pure Storage OpenMetrics エクスポーター][3]と非推奨の [Pure Storage Prometheus エクスポーター][10]の両方がサポートされています。
+
+非推奨の [Pure Storage Prometheus エクスポーター][10]のダッシュボードは、`Pure FlashArray - Overview (Legacy Exporter)` に名称が変更されました。
+
+各エクスポーターで共有されるメトリクスと固有のメトリクスの一覧は、[metrics.py][11] に記載されています。Pure Storage Prometheus エクスポーター][10]から [Pure Storage OpenMetrics エクスポーター][3]に移行する場合、新しいメトリクス名に合わせてダッシュボードやアラートを更新する必要がある場合があります。ご不明な点がございましたら、 Support タブの情報をもとに Pure Storage にお問い合わせください。
+
+[Pure Storage Prometheus エクスポーター][10]から [Pure Storage OpenMetrics エクスポーター][3]に移行する際、エンドポイント URI に `/flasharray` が含まれないようになりました。
+
+PureFA Agent Check の将来のバージョンでは、Pure Storage Prometheus エクスポーターからのメトリクス名は削除されます。
 
 ### トラブルシューティング
 
@@ -191,23 +217,25 @@ PureFA インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][11] を参照してください。
+このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][13] を参照してください。
 
 ## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下の方法で Pure Storage にお問い合わせください。
 * メール: pure-observability@purestorage.com
-* Slack: [Pure Storage Code// Observability Channel][12].
+* Slack: [Pure Storage Code// Observability Channel][14]
 
 [1]: https://www.purestorage.com/products.html
 [2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://github.com/PureStorage-OpenConnect/pure-exporter
+[3]: https://github.com/PureStorage-OpenConnect/pure-fa-openmetrics-exporter
 [4]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
 [5]: https://github.com/DataDog/integrations-extras/blob/master/purefa/CHANGELOG.md
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/purefa/images/API.png
 [7]: https://github.com/datadog/integrations-extras/blob/master/purefa/datadog_checks/purefa/data/conf.yaml.example
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[10]: https://github.com/DataDog/integrations-extras/blob/master/purefa/metadata.csv
-[11]: https://github.com/DataDog/integrations-extras/blob/master/purefa/assets/service_checks.json
-[12]: https://code-purestorage.slack.com/messages/C0357KLR1EU
+[10]: https://github.com/PureStorage-OpenConnect/pure-exporter
+[11]: https://github.com/datadog/integrations-extras/blob/master/purefa/datadog_checks/purefa/metrics.py
+[12]: https://github.com/DataDog/integrations-extras/blob/master/purefa/metadata.csv
+[13]: https://github.com/DataDog/integrations-extras/blob/master/purefa/assets/service_checks.json
+[14]: https://code-purestorage.slack.com/messages/C0357KLR1EU

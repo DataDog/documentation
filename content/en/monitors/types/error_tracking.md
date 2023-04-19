@@ -7,10 +7,13 @@ aliases :
 further_reading:
 - link: "/real_user_monitoring/error_tracking/"
   tag: "Documentation"
-  text: "Learn more about RUM Error Tracking"
+  text: "Learn about Error Tracking for Web and Mobile Applications"
 - link: "/tracing/error_tracking/"
   tag: "Documentation"
-  text: "Learn more about APM Error Tracking"
+  text: "Learn about Error Tracking for Backend Services"
+- link: "/logs/error_tracking/"
+  tag: "Documentation"
+  text: "Learn about Error Tracking for Logs"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
@@ -24,7 +27,7 @@ further_reading:
 
 ## Overview
 
-When [Real User Monitoring][1] or [APM][2] is enabled for your organization, you can create an Error Tracking monitor to alert you when an issue starts, when it has a high impact, and when it starts regressing.
+With [Real User Monitoring][1], [APM][2], or [Logs][6] enabled for your organization, you can create an Error Tracking monitor to alert you when an issue in your web or mobile application, backend service, or logs starts, when it has a high impact, and when it starts regressing.
 
 ## Create an Error Tracking monitor
 
@@ -41,7 +44,7 @@ Choose **Count** to alert on issues with a high number of errors and **New Issue
 {{< tabs >}}
 {{% tab "Count" %}}
 
-Select **Web and Mobile Apps** from the dropdown menu.
+Select **Web and Mobile Apps** from the dropdown menu. If you select **Backend Services** or **Logs**, only the **Error Occurrences** option is available.
 
 1. Choose what metric you want to monitor: a count, facet, or measure.
    - For error occurrences, monitor over an overall count based on the issue ID.
@@ -55,7 +58,7 @@ Select **Web and Mobile Apps** from the dropdown menu.
    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
 
-2. Construct a search query using the same logic as a [RUM Explorer search][1] for the issues’ error occurrences.
+2. Construct a search query using the same logic as a [RUM Explorer search][1], [APM Explorer search][3], or [Log Explorer search][4] for the issues’ error occurrences.
 3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][2].
 
 ### Set alert conditions
@@ -63,7 +66,9 @@ Select **Web and Mobile Apps** from the dropdown menu.
 Triggers when the error count is `above` or `above or equal to`. An alert is triggered whenever a metric crosses a threshold.
 
 [1]: /real_user_monitoring/explorer/search/
-[2]: /monitors/create/configuration/#alert-grouping/
+[2]: /monitors/configuration/#alert-grouping/
+[3]: /tracing/trace_explorer/?tab=listview#filtering
+[4]: /logs/explorer/search/
 {{% /tab %}}
 
 {{% tab "New Issue" %}}
@@ -71,10 +76,10 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 The list of new issues might display older issues that are considered new in the selected time frame, such as the past 24 hours or the past week.
 
 1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
-2. Select **Web and Mobile Apps** or **Backend Services** and choose to monitor over a count or [measure][1].
+2. Select **Web and Mobile Apps**, **Backend Services**, or **Logs** and choose to monitor over a count or [measure][1].
    - Monitor the count of occurrences for a specific issue ID.
    - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Construct a search query using the same logic as a [RUM Explorer search][2] or [APM Explorer search][3] for the issues’ error occurrences.
+3. Construct a search query using the same logic as a [RUM Explorer search][2], [APM Explorer search][3], or [Log Explorer search][5] for the issues’ error occurrences.
 4. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][4].
 
 ### Set alert conditions
@@ -88,7 +93,8 @@ The monitor triggers when the number of errors is `above` or `above or equal to`
 [1]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
 [2]: /real_user_monitoring/explorer/search/
 [3]: /tracing/trace_explorer/?tab=listview#filtering
-[4]: /monitors/create/configuration/#alert-grouping/
+[4]: /monitors/configuration/#alert-grouping/
+[5]: /logs/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -109,5 +115,6 @@ For more information about the **Notify your team** and **Say what’s happening
 [1]: /real_user_monitoring/
 [2]: /tracing/
 [3]: https://app.datadoghq.com/monitors/create/error-tracking
-[4]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/
+[6]: /logs/

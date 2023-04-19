@@ -16,6 +16,10 @@ has_logo: true
 integration_title: Kubernetes State Metrics Core
 is_public: true
 public_title: Datadog-Kubernetes State Metrics Core Integration
+supported_os:
+    - linux
+    - mac_os
+    - windows
 # forcing integration_id to kube-state-metrics so it loads kubernetes svg
 integration_id: "kube-state-metrics"
 further_reading:
@@ -67,18 +71,18 @@ datadog:
 To enable the `kubernetes_state_core` check, the setting `spec.features.kubeStateMetricsCore.enabled` must be set to `true` in the DatadogAgent resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
   features:
     kubeStateMetricsCore:
       enabled: true
-  # (...)
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
 ```
 
 Note: Datadog Operator v0.7.0 or greater is required.

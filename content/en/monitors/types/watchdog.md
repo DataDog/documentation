@@ -16,24 +16,24 @@ further_reading:
 
 ## Overview
 
-[Watchdog][1] is an algorithmic feature for APM and infrastructure metrics. It automatically detects potential application and infrastructure issues by continuously observing trends and patterns in metrics and looking for atypical behavior.
+[Watchdog][1] is an algorithmic feature for APM, Infrastructure, and Logs. It automatically detects potential issues by continuously observing trends and patterns in metrics and logs, and looking for atypical behavior.
 
 ## Monitor creation
 
 To create a [Watchdog monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Watchdog*.
 
-### Select story type
+### Select alert type
 
-In this section, choose between an **APM** or **Infrastructure** story:
+In this section, choose between an APM, Infrastructure, or Logs alert:
 
 {{< tabs >}}
 {{% tab "APM" %}}
 
-An APM story is created when Watchdog detects anomalous behavior on your system’s services or their child resources.
+An APM alert is created when Watchdog detects anomalous behavior on your system's services or their child resources.
 
 ### Select sources {#select-sources-1}
 
-Choose your [primary tags][1], [service][2], and [resource][3] from the drop-down menus.
+Choose your [primary tags][1], [service][2], and [resource][3] from the dropdown menus.
 
 After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time, along with a list of events.
 
@@ -43,7 +43,7 @@ After your selections are made, the graph at the top of the monitor creation pag
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-Infrastructure-wide stories can include issues over the following integrations:
+Infrastructure-wide alerts can include issues over the following integrations:
 
 * [System][1]: Host-level memory usage (memory leak), TCP retransmit rate, etc.
 * [Redis][2]
@@ -67,6 +67,24 @@ No selection is necessary. You are notified when Watchdog detects issues across 
 [7]: /integrations/amazon_elb/
 [8]: /integrations/amazon_cloudfront/
 [9]: /integrations/amazon_dynamodb/
+
+{{% /tab %}}
+{{% tab "Logs (beta)" %}}
+
+A logs alert indicates that either a new pattern of error logs has been detected or that there has been an increase in an existing pattern of error logs.
+
+{{< img src="/monitors/monitor_types/watchdog/log_anomaly_monitor.png" alt="The Watchdog monitor's edit page showing the alert category set to logs, alert type as log anomaly, env set to production, service set to ad-server, and the monitor's title is Anomaly Detected in Production Ad Server" style="width:55%;">}}
+
+### Select sources {#select-sources-3}
+
+Choose your environment, service, log source, log status, and log anomaly type from the dropdown menus.
+
+The first four parameters (environment, service, log source, log status) refer to attributes of the logs themselves. The monitor only triggers if Watchdog finds an anomaly on logs with attributes that match the ones specified.
+
+The fifth parameter, log anomaly type, refers to whether the anomaly describes a new pattern of error logs or an increase in an existing pattern of error logs.
+
+After the selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time, along with a list of events.
+
 {{% /tab %}}
 {{< /tabs >}}
 

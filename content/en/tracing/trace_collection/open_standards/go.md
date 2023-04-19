@@ -45,5 +45,5 @@ func main() {
 ```
 
 [1]: https://github.com/opentracing/opentracing-go
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
+[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentracer
 [3]: http://opentracing.io

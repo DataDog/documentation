@@ -37,7 +37,7 @@ Use the following template variables when configuring Autodiscovery in order to 
 * For the `"%%host%%"` template variable: in case the Agent is not able to find it, this template variable falls back to the `bridge` network IP.
 * For the `"%%host_<NETWORK NAME>%%"`: if the `<NETWORK_NAME>` specified was not found this template variable behaves like `"%%host%%"`.
 
-Depending on your platform, not all template variables are be supported:
+Depending on your platform, not all template variables are supported:
 
 | Platform    | Auto-discovery identifiers  | Host | Port | Tag | Pid | Env | Hostname | Kube Namespace | Pod Name | Pod UID |
 | ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      | ---            | ---      | ---     |

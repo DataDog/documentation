@@ -1,6 +1,6 @@
 ---
 dependencies:
-- "https://github.com/DataDog/puppet-datadog-agent/blob/master/README.md"
+- https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md
 kind: documentation
 title: Puppet
 ---
@@ -22,8 +22,8 @@ puppet module install datadog-datadog_agent
 
 - デフォルトでは、Datadog Agent v7.x がインストールされます。以前のバージョンの Agent を使用するには、設定 `agent_major_version` を変更します。
 - `agent5_enable` は `agent_major_version` に置き換えられたため使用されなくなりました。
-- `agent6_extra_options` は、Agent v6 と v7 の両方に適用されるようになったため、`agent_extra_options` に名前が変更されました。
-- `agent6_log_file` は、Agent v6 と v7 の両方に適用されるようになったため、`agent_log_file` に名前が変更されました。
+- `agent6_extra_options` は、Agent v6 と v7 の両方に適用されるため、`agent_extra_options` に名前が変更されました。
+- `agent6_log_file` は、Agent v6 と v7 の両方に適用されるため、`agent_log_file` に名前が変更されました。
 - `agent5_repo_uri` と `agent6_repo_uri` は、すべての Agent バージョンで `agent_repo_uri` になります。
 - `conf_dir` と `conf6_dir` はすべての Agent バージョンで `conf_dir` になります。
 - Linux で作成されたリポジトリファイルの名前は、すべての Agent バージョンで `datadog5`/`datadog6` ではなく `datadog` になりました。
@@ -115,19 +115,19 @@ datadog_agent::install_integration { "mongo-1.9":
 
 Datadog タイムラインへの Puppet 実行のレポートを有効にするには、Puppet マスターのレポートプロセッサとクライアントのレポートを有効にします。クライアントは、各チェックイン後に実行レポートをマスターに送り返します。
 
-1. [dogapi][3] gem をシステムにインストールします。
-
-2. マスターのノード構成マニフェストで `puppet_run_reports` オプションを true に設定します。
+1. マスターのノード構成マニフェストで `puppet_run_reports` オプションを true に設定します。
 
     ```ruby
-    class { "datadog-agent":
-        api_key => "<YOUR_DD_API_KEY>",
-        puppet_run_reports => true
-        # ...
+    class { 'datadog-agent':
+      api_key            => '<YOUR_DD_API_KEY>',
+      puppet_run_reports => true
+      # ...
     }
     ```
 
-3. 次のコンフィギュレーションオプションを Puppet マスターコンフィギュレーションに追加します (例: `/etc/puppetlabs/puppet/puppet.conf`)。
+   dogapi gem は自動的にインストールされます。インストールをカスタマイズしたい場合は `manage_dogapi_gem` を false に設定してください。
+
+2. 次のコンフィギュレーションオプションを Puppet マスターコンフィギュレーションに追加します (例: `/etc/puppetlabs/puppet/puppet.conf`)。
 
     ```ini
     [main]
@@ -146,7 +146,23 @@ Datadog タイムラインへの Puppet 実行のレポートを有効にする�
     report=true
     ```
 
-4. すべての Puppet クライアントノードで、同じ場所に以下を追加します。
+[`ini_setting` module](https://forge.puppet.com/modules/puppetlabs/inifile) を使用する場合:
+
+```puppet
+  ini_setting { 'puppet_conf_master_report_datadog_puppetdb':
+    ensure  => present,
+    path    => '/etc/puppetlabs/puppet/puppet.conf',
+    section => 'master',
+    setting => 'reports',
+    value   => 'datadog_reports,puppetdb',
+    notify  => [
+      Service['puppet'],
+      Service['puppetserver'],
+    ],
+  }
+```
+
+3. すべての Puppet クライアントノードで、同じ場所に以下を追加します。
 
     ```ini
     [agent]
@@ -154,7 +170,22 @@ Datadog タイムラインへの Puppet 実行のレポートを有効にする�
     report=true
     ```
 
-5. (オプション) レポートとファクトのタグ付けを有効にします。
+[`ini_setting` module](https://forge.puppet.com/modules/puppetlabs/inifile) を使用する場合:
+
+```puppet
+  ini_setting { 'puppet_conf_agent_report_true':
+    ensure  => present,
+    path    => '/etc/puppetlabs/puppet/puppet.conf',
+    section => 'agent',
+    setting => 'report',
+    value   => 'true',
+    notify  => [
+      Service['puppet'],
+    ],
+  }
+```
+
+4. (オプション) レポートとファクトのタグ付けを有効にします。
 
    Datadog にイベントとして送られたレポートにタグを追加することができます。これらのタグの源泉は、レポートが関連付けられている任意のノードについての Puppet ファクトです。必ず 1:1 の関係であるものとし、可読性を確保するために構造化ファクト (ハッシュ、配列など) を含むことは禁止されています。通常のファクトのタグ付けを有効にするには、パラメーター `datadog_agent::reports::report_fact_tags` をファクトの配列値に設定します (例: `["virtual","operatingsystem"]`)。信頼できるファクトのタグ付けを有効にするには、パラメーター `datadog_agent::reports::report_trusted_fact_tags` をファクトの配列値に設定します (例: `["certname","extensions.pp_role","hostname"]`)。
 
@@ -165,7 +196,31 @@ Datadog タイムラインへの Puppet 実行のレポートを有効にする�
     - ホスト名、アップタイム、メモリーなど、モニタリングの汎用データを複製しないでください。
     - ロール、所有者、テンプレート、データセンターなどのコアファクトを調整します。これらはメトリクスから取得した同じタグに意義ある相関関係を構築するのに役立ちます。
 
-6. [Event Stream][5] で `sources:puppet` を検索して、Puppet データが Datadog にあることを確認します。
+5. [Event Stream][5] で `sources:puppet` を検索して、Puppet データが Datadog にあることを確認します。
+
+### NPM の設定
+
+Datadog Agent Network Performance Monitoring (NPM) 機能を有効にするには、次の手順に従います。
+
+1. (Windows のみ) すでに Agent がインストールされている場合は、メインクラスに `win_ensure => absent` を渡してアンインストールし、他のクラスの定義も削除します。
+2. (Windows のみ) `datadog::datadog_agent` クラスに `windows_npm_install` オプションを値 `true` で渡します。前のステップで追加した `win_ensure` を削除します。
+3. `datadog_agent::system_probe` クラスを使用して、コンフィギュレーションファイルを適切に作成します。
+
+```conf
+class { 'datadog_agent::system_probe':
+    network_enabled => true, 
+}
+```
+
+### USM のセットアップ
+
+Datadog Agent Universal Service Monitoring (USM) を有効にするには、`datadog_agent::system_probe` クラスを使用して、コンフィギュレーションファイルを適切に作成します。
+
+```conf
+class { 'datadog_agent::system_probe':
+    service_monitoring_enabled => true, 
+}
+```
 
 ### トラブルシューティング
 
@@ -192,6 +247,8 @@ Puppet Agent を手動で実行して、出力のエラーを確認できます�
     Error 400 on SERVER: Could not autoload datadog_reports:
     Class Datadog_reports is already defined in Puppet::Reports
     ```
+
+レポートを受信しない場合は、Puppet サーバーログを確認してください。
 
 ### マスターレス Puppet
 
@@ -226,7 +283,9 @@ class { "datadog_agent":
   facts_to_tags      => ["osfamily","networking.domain","my_custom_fact"],
 }
 ```
-ヒント: 
+
+ヒント:
+
 1. 構造化ファクトの場合、特定のファクト値にインデックスを付けます。こうしないと配列全体が文字列として渡され、最終的に使用するのが難しくなります。
 2. CPU 使用率やアップタイムなど、実行ごとに変化が予想される動的ファクトは、タグ付けには理想的ではありません。ノードの存続期間中存続すると予想される静的ファクトが、タグ付けの最適な候補です。
 
@@ -240,17 +299,18 @@ class { "datadog_agent":
 | `agent_version`                         | インストールする Agent の特定のマイナーバージョンを固定できます（例: `1:7.16.0-1`）。空のままにすると、最新バージョンがインストールされます。                                                             |
 | `collect_ec2_tags`                      | `true` を使用することで、インスタンスのカスタム EC2 タグを Agent タグとして収集します。                                                                                                                             |
 | `collect_instance_metadata`             | `true` を使用することで、インスタンスの EC2 メタデータを Agent タグとして収集します。                                                                                                                                |
-| `datadog_site`                          | レポート先の Datadog サイト (Agent v6 および v7 のみ)。デフォルトは `datadoghq.com` で、`datadoghq.eu` または `us3.datadoghq.com` に設定できます。                                                          |
+| `datadog_site`                          | レポート先の Datadog サイト (Agent v6 および v7 のみ)。デフォルトは `datadoghq.com` で、たとえば `datadoghq.eu` または `us3.datadoghq.com` に設定できます。                                                          |
 | `dd_url`                                | Datadog インテークサーバーの URL。これを変更する必要はほとんどありません。`datadog_site` をオーバーライドします                                                                                                 |
 | `host`                                  | ノードのホスト名をオーバーライドします。                                                                                                                                                                  |
 | `local_tags`                            | ノードのタグとして設定される `<キー:値>` 文字列の配列。                                                                                                                             |
 | `non_local_traffic`                     | 他のノードがこのノードを介してトラフィックをリレーできるようにします。                                                                                                                                      |
 | `apm_enabled`                           | APM Agent を有効にするブール値（デフォルトは false）。                                                                                                                                           |
-| `apm_analyzed_spans`                    | トレース検索および分析用の APM イベントを追加するためのハッシュ（デフォルトは undef）。例:<br>`{ 'app\|rails.request' => 1, 'service-name\|operation-name' => 0.8 }`                                |
 | `process_enabled`                       | プロセス Agent を有効にするブール値（デフォルトは false）。                                                                                                                                       |
 | `scrub_args`                            | プロセスのコマンドラインスクラビングを有効にするブール値（デフォルトは true）。                                                                                                                            |
 | `custom_sensitive_words`                | スクラビング機能で使用されるデフォルトのものを超える単語を追加するための配列（デフォルトは `[]`）。                                                                                             |
 | `logs_enabled`                          | ログ Agent を有効にするブール値（デフォルトは false）。                                                                                                                                          |
+| `windows_npm_install`                   | Windows NPM ドライバーのインストールを有効にするためのブール値 (デフォルトは false)。                                                                                                                     |
+| `win_ensure`                            | Windows 上の Datadog Agent の有無を確認するための enum (present/absent) (デフォルトは present)                                                                                    |
 | `container_collect_all`                 | すべてのコンテナのログ収集を有効にするブール値。                                                                                                                                          |
 | `agent_extra_options`<sup>1</sup>       | 追加の構成オプションを提供するハッシュ（Agent v6 および v7 のみ）。                                                                                                                       |
 | `hostname_extraction_regex`<sup>2</sup> | Puppet ノード名をレポートする代わりに、ホスト名キャプチャグループを抽出して Datadog での実行を報告するために使用される正規表現。例:<br>`'^(?<hostname>.*\.datadoghq\.com)(\.i-\w{8}\..*)?$'` |
@@ -271,7 +331,7 @@ class { "datadog_agent":
 (2) `hostname_extraction_regex` は、Puppet モジュールと Datadog Agent がインフラストラクチャーリスト内の同じホストに対して異なるホスト名をレポートしている場合に役立ちます。
 
 [1]: https://forge.puppet.com/datadog/datadog_agent
-[2]: https://app.datadoghq.com/account/settings#api
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://github.com/DataDog/dogapi-rb
 [4]: https://app.datadoghq.com/account/settings#integrations
 [5]: https://app.datadoghq.com/event/stream

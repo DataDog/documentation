@@ -36,9 +36,9 @@ author:
   support_email: support_ddp@ioconnectservices.com
   vendor_id: ioconnect
 categories:
-- marketplace
 - cloud
-- collaboration
+- marketplace
+- network
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -67,18 +67,18 @@ short_description: Recueillez des métriques à partir de vos produits MuleSoft 
   à Datadog
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
-  - Category::Collaboration
+  - Category::Marketplace
+  - Category::Network
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les
     à Datadog

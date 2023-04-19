@@ -13,11 +13,17 @@ Log Rehydration* enables you to capture log events from customer-owned storage-o
 
 ## Historical views
 
-With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. To create a historical view, go the [Configuration page][2] of your Datadog account and select the [“Rehydrate From Archives” tab][3], then the “New Historical View” button.
+With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. 
 
-{{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="Historical Views"  style="width:75%;">}}
+To create a historical view:
+
+1. Navigate to the [Configuration page][2] of your Datadog account.
+2. Select the [**Rehydrate From Archives**][3] tab.
+3. Click **New Historical View**.
 
 Index exclusion filters do not apply to historical views, so there is no need to modify exclusion filters when you rehydrate from archives.
+
+If you download historical views as a CSV, the data is limited to the last 90 days.
 
 ### Add new historical views
 
@@ -65,7 +71,7 @@ During the creation of a historical view, you can use the built-in template vari
 
 #### From the historical view page
 
-After selecting “Rehydrate from Archive,” the historical view is marked as “pending” until its content is ready to be queried.
+After selecting "Rehydrate from Archive," the historical view is marked as "pending" until its content is ready to be queried.
 
 Once the content is rehydrated, the historical view is marked as active, and the link in the query column leads to the historical view in the log explorer.
 

@@ -1,36 +1,57 @@
 ---
+app_id: ping
+app_uuid: 841c9313-628f-4861-ad0b-2d12c37ee571
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: network.ping.response_time
+      metadata_path: metadata.csv
+      prefix: ネットワーク。
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Ping
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: jim.stanton@datadoghq.com
+  support_email: jim.stanton@datadoghq.com
 categories:
 - network
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
-display_name: Ping
+display_on_public_website: true
 draft: false
 git_integration_title: ping
-guid: c3be63cb-678e-4421-b470-79c03b3fe3f1
 integration_id: ping
 integration_title: Ping
 integration_version: 1.0.2
 is_public: true
 kind: インテグレーション
-maintainer: jim.stanton@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ネットワーク。
-metric_to_check: network.ping.response_time
+manifest_version: 2.0.0
 name: ping
-public_title: Datadog-Ping インテグレーション
+oauth: {}
+public_title: Ping
 short_description: リモートホストへの接続を監視
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Network
+  configuration: README.md#Setup
+  description: リモートホストへの接続を監視
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Ping
 ---
 
 
@@ -43,6 +64,8 @@ supported_os:
 Ping は、インターネット制御メッセージプロトコル（ICMP）エコー要求パケットをターゲットホストに送信し、ICMP エコー応答を待機することで動作します。
 
 ICMP パケットの作成には raw ソケットが必要であるため、このチェックでは ICMP エコー要求自体を生成するのではなく、システムの ping コマンドを使用します。raw ソケットの作成には Agent にないルート権限が必要です。ping コマンドは、`setuid` アクセスフラグを使用して昇格した権限で実行し、この問題を回避します。
+
+**Windows をお使いの方への注意事項**: インストールされている Windows の言語が英語に設定されていない場合、このチェックが正しく行われないことがあります。
 
 ## セットアップ
 
@@ -61,8 +84,12 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
    # Windows
    agent.exe integration install -t datadog-ping==<INTEGRATION_VERSION>
    ```
+2. お使いの OS に合わせて、`ping` バイナリをインストールします。例えば、Ubuntu の場合、以下のコマンドを実行します。
+   ```shell
+   apt-get install iputils-ping
+   ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+3. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
 ### コンフィギュレーション
 
@@ -89,6 +116,25 @@ Ping チェックには、イベントは含まれません。
 
 
 ## トラブルシューティング
+
+### `SubprocessOutputEmptyError: get_subprocess_output expected output but had none` エラー
+Ping インテグレーションを実行中に、以下のようなエラーが表示されることがあります。
+
+```
+      Traceback (most recent call last):
+        File "/opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/base/checks/base.py", line 1006, in run
+          self.check(instance)
+        File "/opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/ping/ping.py", line 65, in check
+          lines = self._exec_ping(timeout, host)
+        File "/opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/ping/ping.py", line 48, in _exec_ping
+          lines, err, retcode = get_subprocess_output(
+        File "/opt/datadog-agent/embedded/lib/python3.8/site-packages/datadog_checks/base/utils/subprocess_output.py", line 56, in get_subprocess_output
+          out, err, returncode = subprocess_output(cmd_args, raise_on_empty_output, env=env)
+      _util.SubprocessOutputEmptyError: get_subprocess_output expected output but had none.
+```
+
+Ping インテグレーションは Agent にデフォルトで含まれていないため、`ping` バイナリも Agent に含まれていません。インテグレーションを正常に実行するためには、自分で `ping` バイナリをインストールする必要があります。
+
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

@@ -56,6 +56,8 @@ CREATE USER datadog FOR LOGIN datadog;
 
 When configuring the Datadog Agent, specify one check instance for each application database located on a given Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
 
+**Note:** Azure SQL Database deploys a database in an isolated network; each database is treated as a single host. This means that if you run Azure SQL Database in an elastic pool, each database in the pool is treated as a separate host.
+
 ```yaml
 init_config:
 instances:
@@ -63,11 +65,19 @@ instances:
     database: '<DATABASE_1>'
     username: datadog
     password: '<PASSWORD>'
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    azure:
+      deployment_type: 'sql_database'
+      name: '<DATABASE_1>'
 
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_2>'
     username: datadog
     password: '<PASSWORD>'
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    azure:
+      deployment_type: 'sql_database'
+      name: '<DATABASE_2>'
 ```
 
 See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
@@ -156,7 +166,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 The recommended [ADO][6] provider is [Microsoft OLE DB Driver][7]. Ensure the driver is installed on the host where the agent is running.
 ```yaml
 connector: adodbapi
-adoprovider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
 ```
 
 The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.

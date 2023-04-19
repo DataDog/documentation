@@ -14,6 +14,18 @@ title: Connexion à Datadog via AWS PrivateLink
 <div class="alert alert-warning">Datadog via PrivateLink ne prend pas en charge le site gouvernemental de Datadog.</div>
 {{< /site-region >}}
 
+{{< site-region region="us3" >}}
+<div class="alert alert-warning">Datadog via PrivateLink ne prend pas en charge le site US3 de Datadog.</div>
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+<div class="alert alert-warning">Datadog via PrivateLink ne prend pas en charge le site US5 de Datadog.</div>
+{{< /site-region >}}
+
+{{< site-region region="eu" >}}
+<div class="alert alert-warning">Datadog via PrivateLink ne prend pas en charge le site EU de Datadog.</div>
+{{< /site-region >}}
+
 Ce guide vous explique comment configurer [AWS PrivateLink][1] afin de l'utiliser avec Datadog.
 
 ## Présentation
@@ -22,7 +34,7 @@ Pour utiliser PrivateLink, vous devez configurer un endpoint interne dans votre 
 
 {{< img src="agent/guide/private_link/vpc_diagram_schema.png" alt="Schéma VPC" >}}
 
-## Configuration
+## Implémentation
 
 Datadog expose les endpoints AWS PrivateLink dans la région **us-east-1**.
 
@@ -46,7 +58,7 @@ Toutefois, pour acheminer le trafic vers l'endpoint PrivateLink de Datadog sur `
 | Logs (admission HTTP des utilisateurs)   | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` | `http-intake.logs.datadoghq.com`                  |
 | API                       | `com.amazonaws.vpce.us-east-1.vpce-svc-064ea718f8d0ead77` | `api.datadoghq.com`                               |
 | Métriques                   | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` | `metrics.agent.datadoghq.com`                     |
-| Containers                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
+| Conteneurs                | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` | `orchestrator.datadoghq.com`                      |
 | Processus                   | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` | `process.datadoghq.com`                           |
 | Profiling                 | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` | `intake.profile.datadoghq.com`                    |
 | Traces                    | `com.amazonaws.vpce.us-east-1.vpce-svc-0355bb1880dfa09c2` | `trace.agent.datadoghq.com`                       |
@@ -57,7 +69,7 @@ Toutefois, pour acheminer le trafic vers l'endpoint PrivateLink de Datadog sur `
 
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Activer le DNS privé" style="width:80%;" >}}
 
-7. Choisissez le groupe de sécurité de votre choix afin de contrôler les éléments capables de générer du trafic vers l'endpoint de ce VPC.
+7. Choisissez le groupe de sécurité de votre choix afin de contrôler les éléments capables de générer du trafic vers cet endpoint de VPC.
 
     **Remarque** : **le groupe de sécurité doit accepter le trafic entrant sur le port TCP `443`**.
 
@@ -65,7 +77,7 @@ Toutefois, pour acheminer le trafic vers l'endpoint PrivateLink de Datadog sur `
 
    {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="Endpoint de VPC créé" style="width:60%;" >}}
 
-9. Cliquez sur l'ID du endpoint de VPC pour consulter son statut.
+9. Cliquez sur l'ID de l'endpoint de VPC pour consulter son statut.
 10. Patientez jusqu'à ce que le statut _Pending_ soit remplacé par _Available_. Cela peut prendre jusqu'à 10 minutes. Dès lors que le statut _Available_ s'affiche, vous pouvez commencer à utiliser AWS PrivateLink.
 
     {{< img src="agent/guide/private_link/vpc_status.png" alt="Statut VPC" style="width:60%;" >}}
@@ -136,7 +148,7 @@ Toutefois, pour acheminer le trafic vers l'endpoint PrivateLink de Datadog sur `
 
 8. Cliquez sur l'ID de l'endpoint de VPC pour consulter son statut.
 9. Patientez jusqu'à ce que le statut _Pending_ soit remplacé par _Available_. Cela peut prendre jusqu'à 10 minutes.
-10. Une fois l'endpoint créé, acheminez du trafic à partir d'une autre région de façon à ce que les données soient envoyées à Datadog en utilisant le lien privé. Pour en savoir plus, consultez [cette section de la documentation AWS][2]. 
+10. Une fois l'endpoint créé, utilisez l'appairage de VPC pour que l'endpont PrivateLink soit disponible dans une autre région, afin d'envoyer des données de télémétrie à Datadog via PrivateLink. Pour en savoir plus, consultez la page [Utilisation de connexions d'appairage de VPC][10] de la documentation AWS.
 
 {{< img src="agent/guide/private_link/vpc_status.png" alt="Statut VPC" style="width:80%;" >}}
 
@@ -171,7 +183,9 @@ Cette commande renvoie `metrics.agent.datadoghq.com`, à savoir le nom de la zon
 
 2. Pour chaque nouvelle zone hébergée privée Route 53, créez un enregistrement A du même nom. Activez l'option **Alias**, puis, dans la section **Route traffic to**, sélectionnez **Alias to VPC endpoint** et **us-east-1**. Saisissez ensuite le nom DNS de l'endpoint de VPC associé au nom DNS.
 
-    **Remarque** : pour récupérer votre nom DNS, consultez la section [Afficher la configuration du nom DNS privé du service de point de transmission][2].
+   **Remarques** :
+      - Pour récupérer votre nom DNS, consultez la [documentation relative à l'affichage de la configuration du nom DNS privé du service d'endpoint][2] (en anglais).
+      - L'Agent envoie les données de télémétrie aux endpoints versionnés, par exemple `<version>-app.agent.datadoghq.com`, qui renvoie vers `metrics.agent.datadoghq.com` via un alias CNAME. Ainsi, vous devez uniquement configurer une zone hébergée privée pour `metrics.agent.datadoghq.com`.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Créer un enregistrement A" style="width:90%;" >}}
 
@@ -205,13 +219,13 @@ Certains paramètres, notamment `enableDnsHostnames` et `enableDnsSupport`, doiv
 
     ```yaml
     logs_config:
-        use_http: true
+        force_use_http: true
     ```
 
     Si vous utilisez l'Agent de conteneur, définissez plutôt les variables d'environnement ci-dessous :
 
     ```
-    DD_LOGS_CONFIG_USE_HTTP=true
+    DD_LOGS_CONFIG_FORCE_USE_HTTP=true
     ```
 
     Cette configuration est requise pour envoyer des logs à Datadog avec AWS PrivateLink et l'Agent Datadog. Elle est toutefois facultative si vous utilisez l'extension Lambda. Pour en savoir plus, consultez la section relative à la [collecte de logs de l'Agent][8].
@@ -230,6 +244,7 @@ Certains paramètres, notamment `enableDnsHostnames` et `enableDnsSupport`, doiv
 [7]: /fr/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [8]: https://docs.datadoghq.com/fr/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
+[10]: https://docs.aws.amazon.com/vpc/latest/peering/working-with-vpc-peering.html
 {{% /tab %}}
 {{< /tabs >}}
 
