@@ -3,7 +3,7 @@ title: Migrating to the New Events Features
 kind: guide
 aliases:
 - /events/guides/migrating_from_stream_to_explorer
-- /events/guides/migrating_to_new_events_features.md
+- /events/guides/migrating_to_new_events_features
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-events/"
   tag: "Blog"
