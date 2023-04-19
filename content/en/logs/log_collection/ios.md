@@ -1,5 +1,4 @@
 ---
-
 title: iOS Log Collection
 kind: documentation
 description: Collect logs from your iOS applications.
