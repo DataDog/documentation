@@ -11,16 +11,16 @@
             <div class="col-10 col-md-12 order-md-1 mt-5">
                 {{ .Content }}
                 {{ range $headless_term_pages }}
-                        {{ $first_char := substr .Title 0 1 | upper }}
-                        {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+                    {{ $first_char := substr .Title 0 1 | upper }}
+                    {{ $curr_letter := $.Scratch.Get "curr_letter" }}
 
-                        {{ if ne $first_char $curr_letter }}
-                            {{ $.Scratch.Set "curr_letter" $first_char }}
-                            {{ $letters = $letters | append $first_char }}
-                            <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
-                        {{ end }}
+                    {{ if ne $first_char $curr_letter }}
+                        {{ $.Scratch.Set "curr_letter" $first_char }}
+                        {{ $letters = $letters | append $first_char }}
+                        <h2 id="{{ $first_char | anchorize }}" class="glossary-letter mb-3">{{ $first_char }}</h2>
+                    {{ end }}
 
-                    <div class="glossary-term-container" data-core-products='{{ (delimit (.Params.core_product | default "") ",") }}'>
+                    <div class="glossary-term-container" data-core-products='{{ (delimit (.Params.core_product | default "") ",") }}' data-letter='{{ $first_char | lower }}'>
                         <!-- Build $products slice for filtering section -->
                         {{ with .Params.core_product }}
                             {{ $products = union $products . }}
@@ -58,13 +58,13 @@
             <nav id="glossary-nav">
                 <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                     {{ range $letters }}
-                        <li class="nav-item">
+                        <li class="nav-item" data-letter="{{ . | lower }}">
                             <a class="nav-link btn font-14-19" role='button' href='#{{ . | lower }}'>{{ . }}</a>
                         </li>
                     {{ end }}
                 </ul>
                 <!-- Filtering section -->
-                <div class="filters-glossary border border-primary">
+                <div class="filters-glossary">
                     <a href="#filter-{{ .Params.filter_all | anchorize }}" class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ .Params.filter_all | anchorize }}">{{.Params.filter_all | upper}}</a> 
                     {{ range $products }}
                         <a href="#filter-{{ . | anchorize }}" class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ . | anchorize }}">{{ . | upper }}</a>

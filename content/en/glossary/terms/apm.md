@@ -6,7 +6,6 @@ synonyms:
     - Tracing
     - Distributed Tracing
 core_product:
-
     - cwpp
     - watchdog
     - apm
