@@ -624,22 +624,6 @@ main:
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
     weight: 5
-  - name: Custom Agent Check
-    url: events/guides/agent/
-    parent: events_guides
-    weight: 300
-  - name: DogStatsD
-    url: events/guides/dogstatsd/
-    parent: events_guides
-    weight: 301
-  - name: Email
-    url: events/guides/email/
-    parent: events_guides
-    weight: 302
-  - name: API
-    url: api/latest/events/#post-an-event
-    parent: events_guides
-    weight: 303
   - name: Dashboards
     url: dashboards/
     pre: dashboard
