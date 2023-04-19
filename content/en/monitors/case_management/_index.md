@@ -1,6 +1,10 @@
 ---
 title: Case Management
 kind: documentation
+further_reading:
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  tag: "blog"
+  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
 ## Overview
@@ -37,6 +41,10 @@ You can create or update cases from several locations in Datadog:
 - Error tracking
 - Workflows
 - The Case Management page
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/
