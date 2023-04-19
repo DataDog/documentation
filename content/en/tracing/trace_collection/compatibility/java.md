@@ -214,7 +214,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK        | < 8.0    | Fully Supported | `twilio-sdk`                                   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][3].
+Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][3].
 
 To improve visibility into applications using unsupported frameworks, consider:
 

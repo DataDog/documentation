@@ -30,6 +30,7 @@ author:
 categories:
 - cloud
 - log collection
+- network
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openstack/README.md
 display_on_public_website: true
@@ -47,16 +48,17 @@ public_title: OpenStack (レガシー)
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::クラウド
   - Category::ログの収集
+  - Category::ネットワーク
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
   media: []
@@ -80,7 +82,7 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][3]します。
 

@@ -29,11 +29,11 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- オーケストレーション
 - コンテナ
+- kubernetes
 - ログの収集
-- web
 - ネットワーク
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true
@@ -51,19 +51,19 @@ public_title: nginx-ingress-controller
 short_description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
   - Category::Containers
+  - Category::Kubernetes
   - Category::Log Collection
-  - Category::Web
   - Category::Network
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
   media: []

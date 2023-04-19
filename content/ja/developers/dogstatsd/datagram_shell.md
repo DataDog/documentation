@@ -72,6 +72,22 @@ Datadog Agent は、コンテナ ID の値を使用して、追加のコンテ�
 
 コンテナタグについては、[Kubernetes][4] と [Docker][5] のタグ付けのドキュメントをご覧ください。
 
+### DogStatsD プロトコル v1.3
+
+Agent v6.40.0+ および v7.40.0+ は、オプションで Unix タイムスタンプフィールドをサポートしています。
+
+このフィールドを指定すると、Datadog Agent は、タグでメトリクスをリッチ化する以外、メトリクスの処理を行いません (集計を行いません)。これは、アプリケーションで既にメトリクスを集計しており、余分な処理なしで Datadog に送信したい場合に便利です。
+
+Unix のタイムスタンプは、過去の有効な正の数である必要があります。GAUGE と COUNT メトリクスのみサポートされています。
+
+値は Unix タイムスタンプ (UTC) であり、プレフィックスとして `T` を付ける必要があります。例:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|T<METRIC_TIMESTAMP>`
+
+### データグラムの例
+
+- `page.views:15|c|#env:dev|T1656581400`: 2022 年 6 月 30 日午前 9 時 30 分 (UTC) に 15 ページビューが発生したことを示す COUNT
+
 [1]: /ja/metrics/#naming-metrics
 [2]: /ja/metrics/types/
 [3]: /ja/getting_started/tagging/

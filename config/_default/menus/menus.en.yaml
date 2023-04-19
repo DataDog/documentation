@@ -1342,11 +1342,11 @@ main:
     parent: slos
     identifier: burn_rate
     weight: 404
-  - name: Incident Management
-    url: monitors/incident_management
+  - name: Case Management
+    url: monitors/case_management
     parent: alerting
-    identifier: incidents
-    weight: 5
+    identifier: case_management
+    weight: 10
   - name: Guides
     url: monitors/guide/
     weight: 100
@@ -1454,6 +1454,11 @@ main:
     parent: tracing_dd_libraries
     identifier: tracing_ddlib_dotnet_framework
     weight: 109
+  - name: Injecting Libraries Locally
+    url: tracing/trace_collection/library_injection_local/
+    parent: tracing_trace_collection
+    identifier: tracing_library_injection_local
+    weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/java/
     parent: tracing_trace_collection
@@ -1877,21 +1882,26 @@ main:
     parent: service_catalog
     identifier: service_catalog_api
     weight: 902
+  - name: Service Metadata Structure
+    url: tracing/service_catalog/service_metadata_structure
+    parent: service_catalog
+    identifier: service_metadata_structure
+    weight: 903
   - name: Integrations
     url: tracing/service_catalog/integrations
     parent: service_catalog
     identifier: service_catalog_integrations
-    weight: 903
+    weight: 904
   - name: Troubleshooting
     url: tracing/service_catalog/troubleshooting
     parent: service_catalog
     identifier: service_catalog_troubleshooting
-    weight: 904
+    weight: 905
   - name: Guides
     url: tracing/service_catalog/guides
     parent: service_catalog
     identifier: service_catalog_guides
-    weight: 905
+    weight: 906
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
@@ -2094,46 +2104,56 @@ main:
     parent: ci
     identifier: pipeline_visibility
     weight: 2
+  - name: Azure
+    url: continuous_integration/pipelines/azure/
+    parent: pipeline_visibility
+    identifier: ci_azure
+    weight: 201
   - name: Buildkite
     url: continuous_integration/pipelines/buildkite/
     parent: pipeline_visibility
     identifier: ci_buildkite
-    weight: 201
+    weight: 202
   - name: CircleCI
     url: continuous_integration/pipelines/circleci/
     parent: pipeline_visibility
     identifier: ci_circleci
-    weight: 202
+    weight: 203
   - name: Codefresh
     url: continuous_integration/pipelines/codefresh/
     parent: pipeline_visibility
     identifier: ci_codefresh
-    weight: 203
+    weight: 204
   - name: GitHub Actions
     url: continuous_integration/pipelines/github/
     parent: pipeline_visibility
     identifier: ci_github
-    weight: 204
+    weight: 205
   - name: GitLab
     url: continuous_integration/pipelines/gitlab/
     parent: pipeline_visibility
     identifier: ci_gitlab
-    weight: 205
+    weight: 206
   - name: Jenkins
     url: continuous_integration/pipelines/jenkins/
     parent: pipeline_visibility
     identifier: ci_jenkins
-    weight: 206
+    weight: 207
+  - name: TeamCity
+    url: continuous_integration/pipelines/teamcity/
+    parent: pipeline_visibility
+    identifier: ci_teamcity
+    weight: 208
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
     identifier: ci_custom_commands
-    weight: 210
+    weight: 209
   - name: Custom Tags and Metrics
     url: continuous_integration/pipelines/custom_tags_and_metrics/
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
-    weight: 211
+    weight: 210
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
@@ -2710,42 +2730,92 @@ main:
     url: security/application_security/getting_started/
     parent: application_security
     identifier: appsec_getting_started
-    weight: 1
+    weight: 2
+  - name: Library Compatibility
+    url: security/application_security/enabling/compatibility/
+    parent: appsec_getting_started
+    identifier: appsec_compat
+    weight: 201
+  - name: Java
+    url: security/application_security/enabling/compatibility/java/
+    parent: appsec_compat
+    identifier: appsec_compat_java
+    weight: 101
+  - name: .NET
+    url: security/application_security/enabling/compatibility/dotnet/
+    parent: appsec_compat
+    identifier: appsec_compat_dotnet
+    weight: 102
+  - name: Go
+    url: security/application_security/enabling/compatibility/go/
+    parent: appsec_compat
+    identifier: appsec_compat_go
+    weight: 103
+  - name: Ruby
+    url: security/application_security/enabling/compatibility/ruby/
+    parent: appsec_compat
+    identifier: appsec_compat_ruby
+    weight: 104
+  - name: PHP
+    url: security/application_security/enabling/compatibility/php/
+    parent: appsec_compat
+    identifier: appsec_compat_php
+    weight: 105
+  - name: NodeJS
+    url: security/application_security/enabling/compatibility/nodejs/
+    parent: appsec_compat
+    identifier: appsec_compat_nodejs
+    weight: 106
+  - name: Python
+    url: security/application_security/enabling/compatibility/python/
+    parent: appsec_compat
+    identifier: appsec_compat_python
+    weight: 107
+  - name: Serverless
+    url: security/application_security/enabling/compatibility/serverless/
+    parent: appsec_compat
+    identifier: appsec_compat_serverless
+    weight: 108
   - name: Java
     url: security/application_security/getting_started/java/
     parent: appsec_getting_started
     identifier: appsec_java
-    weight: 101
+    weight: 202
   - name: .NET
     url: security/application_security/getting_started/dotnet/
     parent: appsec_getting_started
     identifier: appsec_dotnet
-    weight: 102
+    weight: 203
   - name: Go
     url: security/application_security/getting_started/go/
     parent: appsec_getting_started
     identifier: appsec_go
-    weight: 103
+    weight: 204
   - name: Ruby
     url: security/application_security/getting_started/ruby/
     parent: appsec_getting_started
     identifier: appsec_ruby
-    weight: 104
+    weight: 205
   - name: PHP
     url: security/application_security/getting_started/php/
     parent: appsec_getting_started
     identifier: appsec_php
-    weight: 105
+    weight: 206
   - name: NodeJS
     url: security/application_security/getting_started/nodejs/
     parent: appsec_getting_started
     identifier: appsec_nodejs
-    weight: 106
+    weight: 207
   - name: Python
     url: security/application_security/getting_started/python/
     parent: appsec_getting_started
     identifier: appsec_python
-    weight: 107
+    weight: 208
+  - name: Serverless
+    url: security/application_security/enabling/serverless/
+    parent: appsec_getting_started
+    identifier: appsec_serverless
+    weight: 209
   - name: How It Works
     url: security/application_security/how-appsec-works/
     parent: application_security
@@ -2756,8 +2826,8 @@ main:
     parent: application_security
     identifier: appsec_default_rules
     weight: 3
-  - name: Tracking User Activity
-    url: security/application_security/add-user-info/
+  - name: Vulnerability Management
+    url: security/application_security/vulnerability_management/
     parent: application_security
     identifier: appsec_user_info
     weight: 4
@@ -2766,6 +2836,21 @@ main:
     parent: application_security
     identifier: appsec_configuration
     weight: 5
+  - name: Library Configuration
+    url: security/application_security/threats/library_configuration/
+    parent: appsec_threats
+    identifier: threats_configuration
+    weight: 501
+  - name: OOTB Rules
+    url: security/default_rules/#cat-application-security
+    parent: appsec_threats
+    identifier: appsec_default_rules
+    weight: 502
+  - name: User Monitoring and Protection
+    url: security/application_security/threats/add-user-info/
+    parent: appsec_threats
+    identifier: threats_user_info
+    weight: 503
   - name: Custom Detection Rules
     url: security/application_security/custom_rules/
     parent: application_security
@@ -3133,7 +3218,12 @@ main:
     url: real_user_monitoring/reactnative/codepush/
     parent: rum_reactnative
     identifier: rum_reactnative_codepush
-    weight: 404
+    weight: 405
+  - name: Troubleshooting
+    url: real_user_monitoring/reactnative/troubleshooting/
+    parent: rum_reactnative
+    identifier: rum_reactnative_troubleshooting
+    weight: 406
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
@@ -3542,6 +3632,11 @@ main:
     parent: ide_integrations
     identifier: ide_integrations_idea
     weight: 801
+  - name: Visual Studio Code
+    url: developers/ide_integrations/vscode/
+    parent: ide_integrations
+    identifier: ide_integrations_vscode
+    weight: 802
   - name: Community
     url: developers/community/
     parent: dev_tools
@@ -3618,6 +3713,10 @@ main:
     url: account_management/org_settings/service_accounts
     parent: organization_settings
     weight: 206
+  - name: IP Allowlist
+    url: account_management/org_settings/ip_allowlist
+    parent: organization_settings
+    weight: 207
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -5831,6 +5930,32 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 16
+  - name: Get a finding
+    url: '#get-a-finding'
+    identifier: security-monitoring-get-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetFinding
+      unstable:
+        - v2
+      order: 2
+  - name: List findings
+    url: '#list-findings'
+    identifier: security-monitoring-list-findings
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListFindings
+      unstable:
+        - v2
+      order: 1
   - name: Change the triage state of a security signal
     url: '#change-the-triage-state-of-a-security-signal'
     identifier: security-monitoring-change-the-triage-state-of-a-security-signal
@@ -7123,7 +7248,7 @@ api:
       operationids:
         - GetUsageAuditLogs
       unstable: []
-      order: 29
+      order: 40
   - name: Get usage attribution
     url: '#get-usage-attribution'
     identifier: usage-metering-get-usage-attribution

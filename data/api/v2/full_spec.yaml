@@ -1969,11 +1969,13 @@ components:
       properties:
         userActivationStatus:
           description: Whether signals will be sent.
+          nullable: true
           type: boolean
         userGroupByFields:
           description: Fields to use to group findings by when sending signals.
           items:
             type: string
+          nullable: true
           type: array
       type: object
     CloudConfigurationRuleCreatePayload:
@@ -2146,6 +2148,7 @@ components:
         name:
           description: The name of the user.
           example: Datadog User
+          nullable: true
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleData:
@@ -2221,6 +2224,7 @@ components:
         name:
           description: The name of the user.
           example: Datadog User
+          nullable: true
           type: string
       type: object
     CloudWorkloadSecurityAgentRulesListResponse:
@@ -2426,6 +2430,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentAccountResponse:
       description: The expected response schema when getting a Confluent account.
@@ -2560,6 +2566,8 @@ components:
           items:
             type: string
           type: array
+      required:
+      - resource_type
       type: object
     ConfluentResourceRequestData:
       description: JSON:API request for updating a Confluent resource.
@@ -2715,6 +2723,7 @@ components:
           type: string
         name:
           description: Name of the creator.
+          nullable: true
           type: string
       type: object
     DashboardListAddItemsRequest:
@@ -2765,6 +2774,7 @@ components:
           type: string
         icon:
           description: URL to the icon of the dashboard.
+          nullable: true
           readOnly: true
           type: string
         id:
@@ -2910,6 +2920,66 @@ components:
             type: number
           type: array
       type: object
+    DetailedFinding:
+      description: A single finding with with message and resource configuration.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DetailedFindingAttributes'
+        id:
+          $ref: '#/components/schemas/FindingID'
+        type:
+          $ref: '#/components/schemas/DetailedFindingType'
+      type: object
+    DetailedFindingAttributes:
+      description: The JSON:API attributes of the detailed finding.
+      properties:
+        evaluation:
+          $ref: '#/components/schemas/FindingEvaluation'
+        evaluation_changed_at:
+          $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        message:
+          description: The remediation message for this finding.
+          example: '## Remediation
+
+
+            ### From the console
+
+
+            1. Go to Storage Account
+
+            2. For each Storage Account, navigate to Data Protection
+
+            3. Select Set soft delete enabled and enter the number of days to retain
+            soft deleted data.'
+          type: string
+        mute:
+          $ref: '#/components/schemas/FindingMute'
+        resource:
+          $ref: '#/components/schemas/FindingResource'
+        resource_configuration:
+          description: The resource configuration for this finding.
+          type: object
+        resource_discovery_date:
+          $ref: '#/components/schemas/FindingResourceDiscoveryDate'
+        resource_type:
+          $ref: '#/components/schemas/FindingResourceType'
+        rule:
+          $ref: '#/components/schemas/FindingRule'
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+        tags:
+          $ref: '#/components/schemas/FindingTags'
+      type: object
+    DetailedFindingType:
+      default: detailed_finding
+      description: The JSON:API type for findings that have the message and resource
+        configuration.
+      enum:
+      - detailed_finding
+      example: detailed_finding
+      type: string
+      x-enum-varnames:
+      - DETAILED_FINDING
     Event:
       description: The metadata associated with a request.
       properties:
@@ -3610,6 +3680,164 @@ components:
             $ref: '#/components/schemas/FastlyServiceResponse'
           type: array
       type: object
+    Finding:
+      description: A single finding without message and resource configuration.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FindingAttributes'
+        id:
+          $ref: '#/components/schemas/FindingID'
+        type:
+          $ref: '#/components/schemas/FindingType'
+      type: object
+    FindingAttributes:
+      description: The JSON:API attributes of the finding.
+      properties:
+        evaluation:
+          $ref: '#/components/schemas/FindingEvaluation'
+        evaluation_changed_at:
+          $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        mute:
+          $ref: '#/components/schemas/FindingMute'
+        resource:
+          $ref: '#/components/schemas/FindingResource'
+        resource_discovery_date:
+          $ref: '#/components/schemas/FindingResourceDiscoveryDate'
+        resource_type:
+          $ref: '#/components/schemas/FindingResourceType'
+        rule:
+          $ref: '#/components/schemas/FindingRule'
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+        tags:
+          $ref: '#/components/schemas/FindingTags'
+      type: object
+    FindingEvaluation:
+      description: The evaluation of the finding.
+      enum:
+      - pass
+      - fail
+      example: pass
+      type: string
+      x-enum-varnames:
+      - PASS
+      - FAIL
+    FindingEvaluationChangedAt:
+      description: The date on which the evaluation for this finding changed (Unix
+        ms).
+      example: 1678721573794
+      format: int64
+      minimum: 1
+      type: integer
+    FindingID:
+      description: The unique ID for this finding.
+      example: AQAAAYbb1i0gijTHEQAAAABBWWJiMWkwZ0FBQ2FuNzBJVGZXZ3B3QUE
+      type: string
+    FindingMute:
+      additionalProperties: false
+      description: Information about the mute status of this finding.
+      properties:
+        description:
+          description: Additional information about the reason why this finding is
+            muted.
+          example: To be resolved later
+          type: string
+        expiration_date:
+          description: The end of the mute period.
+          example: 1778721573794
+          format: int64
+          type: integer
+        muted:
+          description: Whether this finding is muted.
+          example: true
+          type: boolean
+        reason:
+          $ref: '#/components/schemas/FindingMuteReason'
+        start_date:
+          description: The start of the mute period.
+          example: 1678721573794
+          format: int64
+          type: integer
+        uuid:
+          description: The ID of the user who muted this finding.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
+          type: string
+      type: object
+    FindingMuteReason:
+      description: The reason why this finding is muted.
+      enum:
+      - ACCEPTED_RISK
+      - PENDING_FIX
+      - FALSE_POSITIVE
+      - OTHER
+      example: ACCEPTED_RISK
+      type: string
+      x-enum-varnames:
+      - ACCEPTED_RISK
+      - PENDING_FIX
+      - FALSE_POSITIVE
+      - OTHER
+    FindingResource:
+      description: The resource name of this finding.
+      example: my_resource_name
+      type: string
+    FindingResourceDiscoveryDate:
+      description: The date on which the resource was discovered (Unix ms).
+      example: 1678721573794
+      format: int64
+      minimum: 1
+      type: integer
+    FindingResourceType:
+      description: The resource type of this finding.
+      example: azure_storage_account
+      type: string
+    FindingRule:
+      additionalProperties: false
+      description: The rule that triggered this finding.
+      properties:
+        id:
+          description: The ID of the rule that triggered this finding.
+          example: dv2-jzf-41i
+          type: string
+        name:
+          description: The name of the rule that triggered this finding.
+          example: Soft delete is enabled for Azure Storage
+          type: string
+      type: object
+    FindingStatus:
+      description: The status of the finding.
+      enum:
+      - critical
+      - high
+      - medium
+      - low
+      - info
+      example: critical
+      type: string
+      x-enum-varnames:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFO
+    FindingTags:
+      description: The tags associated with this finding.
+      example:
+      - cloud_provider:aws
+      - myTag:myValue
+      items:
+        description: The list of tags.
+        type: string
+      type: array
+    FindingType:
+      default: finding
+      description: The JSON:API type for findings.
+      enum:
+      - finding
+      example: finding
+      type: string
+      x-enum-varnames:
+      - FINDING
     FormulaLimit:
       description: Message for specifying limits to the number of values returned
         by a query.
@@ -3718,6 +3946,14 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    GetFindingResponse:
+      description: The expected response schema when getting a finding.
+      properties:
+        data:
+          $ref: '#/components/schemas/DetailedFinding'
+      required:
+      - data
       type: object
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
@@ -5783,6 +6019,49 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    ListFindingsData:
+      description: Array of findings.
+      items:
+        $ref: '#/components/schemas/Finding'
+      type: array
+    ListFindingsMeta:
+      additionalProperties: false
+      description: Metadata for pagination.
+      properties:
+        page:
+          $ref: '#/components/schemas/ListFindingsPage'
+        snapshot_timestamp:
+          description: The point in time corresponding to the listed findings.
+          example: 1678721573794
+          format: int64
+          minimum: 1
+          type: integer
+      type: object
+    ListFindingsPage:
+      additionalProperties: false
+      description: Pagination and findings count information.
+      properties:
+        cursor:
+          description: The cursor used to paginate requests.
+          example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+          type: string
+        total_filtered_count:
+          description: The total count of findings after the filter has been applied.
+          example: 213
+          format: int64
+          type: integer
+      type: object
+    ListFindingsResponse:
+      description: The expected response schema when listing findings.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListFindingsData'
+        meta:
+          $ref: '#/components/schemas/ListFindingsMeta'
+      required:
+      - data
+      - meta
       type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
@@ -11708,6 +11987,7 @@ components:
           type: integer
         name:
           description: The name for this user account.
+          nullable: true
           type: string
         uuid:
           description: UUID assigned by Datadog to this user account.
@@ -13366,6 +13646,7 @@ components:
           type: string
         description:
           description: Free-form markdown description/content for the team's homepage
+          nullable: true
           type: string
         handle:
           description: The team's identifier
@@ -13390,6 +13671,7 @@ components:
         summary:
           description: A brief summary of the team, derived from the `description`
           maxLength: 120
+          nullable: true
           type: string
         user_count:
           description: The number of users belonging to the team
@@ -14382,7 +14664,6 @@ components:
         type:
           $ref: '#/components/schemas/UserTeamType'
       required:
-      - id
       - type
       type: object
     UserTeamUpdateRequest:
@@ -14806,7 +15087,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/SpansMetricIDParameter'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -17265,9 +17546,8 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
-              {\n      \"api_key\": \"6Zm7WEgKzAlCnt_4exfEK0mSoeHHAaDf41O1AAfu\",\n
-              \     \"name\": \"{{ unique_lower_alnum }}\",\n      \"email\": \"dev@datadog.com\"\n
-              \   }\n  }\n}"
+              {\n      \"api_key\": \"fakekey\",\n      \"name\": \"{{ unique_lower_alnum
+              }}\",\n      \"email\": \"dev@datadog.com\"\n    }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
       x-undo:
@@ -18269,6 +18549,7 @@ paths:
             - datadoghq.com
             - us3.datadoghq.com
             - us5.datadoghq.com
+            - ap1.datadoghq.com
             - datadoghq.eu
             - ddog-gov.com
           subdomain:
@@ -18826,7 +19107,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/MetricID'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -20475,6 +20756,176 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v2/posture_management/findings:
+    get:
+      description: Get a list of CSPM findings.
+      operationId: ListFindings
+      parameters:
+      - description: Limit the number of findings returned.
+        example: 50
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Return findings for a given snapshot of time (Unix ms).
+        example: 1678721573794
+        in: query
+        name: snapshot_timestamp
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Return the next page of findings pointed to by the cursor.
+        example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Return findings that have these associated tags (repeatable).
+        example: filter[tags]=cloud_provider:aws&filter[tags]=aws_account:999999999999
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: Return findings that have changed from pass to fail or vice versa
+          on a specified date (Unix ms) or date range (using comparison operators).
+        example: '>=1678721573794'
+        in: query
+        name: filter[evaluation_changed_at]
+        required: false
+        schema:
+          type: string
+      - description: Set to `true` to return findings that are muted. Set to `false`
+          to return unmuted findings.
+        in: query
+        name: filter[muted]
+        required: false
+        schema:
+          type: boolean
+      - description: Return findings for the specified rule ID.
+        in: query
+        name: filter[rule_id]
+        required: false
+        schema:
+          type: string
+      - description: Return findings for the specified rule.
+        in: query
+        name: filter[rule_name]
+        required: false
+        schema:
+          type: string
+      - description: Return only findings for the specified resource type.
+        in: query
+        name: filter[resource_type]
+        required: false
+        schema:
+          type: string
+      - description: Return findings that were found on a specified date (Unix ms)
+          or date range (using comparison operators).
+        example: '>=1678721573794'
+        in: query
+        name: filter[discovery_timestamp]
+        required: false
+        schema:
+          type: string
+      - description: Return only `pass` or `fail` findings.
+        example: pass
+        in: query
+        name: filter[evaluation]
+        required: false
+        schema:
+          $ref: '#/components/schemas/FindingEvaluation'
+      - description: Return only findings with the specified status.
+        example: critical
+        in: query
+        name: filter[status]
+        required: false
+        schema:
+          $ref: '#/components/schemas/FindingStatus'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFindingsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List findings
+      tags:
+      - Security Monitoring
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/posture_management/findings/{finding_id}:
+    get:
+      description: Returns a single finding with message and resource configuration.
+      operationId: GetFinding
+      parameters:
+      - description: The ID of the finding.
+        in: path
+        name: finding_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFindingResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Get a finding
+      tags:
+      - Security Monitoring
+      x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -25029,8 +25480,7 @@ paths:
       - description: 'Comma separated list of product families to retrieve. Available
           families are `all`, `analyzed_logs`,
 
-          `application_security`, `audit_logs`, `audit_trail`, `serverless`, `ci_app`,
-          `cloud_cost_management`,
+          `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
           `cspm`, `custom_events`, `cws`, `dbm`, `fargate`,
 
@@ -25043,7 +25493,9 @@ paths:
           `sds`, `snmp`,
 
           `synthetics_api`, `synthetics_browser`, `synthetics_parallel_testing`, and
-          `timeseries`.'
+          `timeseries`.
+
+          The following product family has been **deprecated**: `audit_logs`.'
         in: query
         name: filter[product_families]
         required: true
@@ -25704,6 +26156,7 @@ servers:
       - datadoghq.com
       - us3.datadoghq.com
       - us5.datadoghq.com
+      - ap1.datadoghq.com
       - datadoghq.eu
       - ddog-gov.com
     subdomain:

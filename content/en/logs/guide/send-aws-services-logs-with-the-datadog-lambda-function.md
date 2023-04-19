@@ -281,9 +281,9 @@ You can also exclude or send only those logs that match a specific pattern by us
 [34]: /integrations/amazon_redshift/
 [35]: /integrations/amazon_redshift/#enable-aws-redshift-logging
 [36]: /integrations/amazon_redshift/#log-collection
-[37]: /integrations/amazon_verified_access/
-[38]: /integrations/amazon_verified_access/#enable-verified-access-logs
-[39]: /integrations/amazon_verified_access/#log-collection
+[37]: /integrations/aws_verified_access/
+[38]: /integrations/aws_verified_access/#enable-verified-access-logs
+[39]: /integrations/aws_verified_access/#log-collection
 [40]: /integrations/amazon_vpc/
 [41]: /integrations/amazon_vpc/#enable-vpc-flow-log-logging
 [42]: /integrations/amazon_vpc/#log-collection

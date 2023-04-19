@@ -1,5 +1,6 @@
 *                         @DataDog/documentation
 
+/assets/                  @DataDog/corpweb @DataDog/documentation
 /data/                    @DataDog/corpweb @DataDog/documentation
 /local/                   @DataDog/corpweb @DataDog/documentation
 /layouts/                 @DataDog/corpweb @DataDog/documentation
@@ -42,6 +43,9 @@ docker-compose-docs.yml                                 @DataDog/corpweb
 
 # Cloud Cost Management
 documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility @DataDog/documentation
+
+# Mobile SDK
+content/en/real_user_monitoring/android/                       @Datadog/rum-mobile @DataDog/documentation
 
 # Browser SDK
 content/en/real_user_monitoring/browser/                       @Datadog/rum-browser @DataDog/documentation
