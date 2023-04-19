@@ -32,7 +32,7 @@ RUM-based custom metrics are a cost-efficient option to summarize the data from 
 
 To create a custom metric from RUM event data, navigate to [**UX Monitoring** > **Generate Metrics**][4] and click **+ New Metric**.
 
-{{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
+{{< img src="real_user_monitoring/generate_metrics/new_metrics_button-1.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
 
 To create a custom metric from a search query in the [RUM Explorer][5], click the **Export** button and select **Generate new metric** from the dropdown menu.
 
