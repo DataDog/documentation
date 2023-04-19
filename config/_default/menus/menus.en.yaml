@@ -1191,11 +1191,11 @@ main:
     parent: slos
     identifier: burn_rate
     weight: 404
-  - name: Incident Management
-    url: monitors/incident_management
+  - name: Case Management
+    url: monitors/case_management
     parent: alerting
-    identifier: incidents
-    weight: 5
+    identifier: case_management
+    weight: 10
   - name: Guides
     url: monitors/guide/
     weight: 100
@@ -2789,8 +2789,8 @@ main:
     parent: application_security
     identifier: appsec_howitworks
     weight: 3
-  - name: Risk Management
-    url: security/application_security/risk_management/
+  - name: Vulnerability Management
+    url: security/application_security/vulnerability_management/
     parent: application_security
     identifier: application_risk_management
     weight: 4
@@ -6016,6 +6016,32 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 16
+  - name: Get a finding
+    url: '#get-a-finding'
+    identifier: security-monitoring-get-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetFinding
+      unstable:
+        - v2
+      order: 2
+  - name: List findings
+    url: '#list-findings'
+    identifier: security-monitoring-list-findings
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListFindings
+      unstable:
+        - v2
+      order: 1
   - name: Change the triage state of a security signal
     url: '#change-the-triage-state-of-a-security-signal'
     identifier: security-monitoring-change-the-triage-state-of-a-security-signal

@@ -42,10 +42,11 @@ For dedicated documentation and examples for monitoring the Kubernetes control p
 
 Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes version | Agent version  | Cluster Agent version | Reason                              |
+| Kubernetes version | Agent version  | Cluster Agent version | Reason                                |
 |--------------------|----------------|-----------------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation       |
-| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation    |
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation           |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation       |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | Support dynamic service account token |
 
 {{< tabs >}}
 {{% tab "Operator" %}}

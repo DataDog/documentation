@@ -288,7 +288,7 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
     ```
 
 3. [Restart the Agent][7].
-4. Run the [Agent’s status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 
