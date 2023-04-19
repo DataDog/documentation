@@ -49,17 +49,17 @@ Filters are defined flexibly through a query editor interface. Rely on [tags][3]
 ### Example exclusion filters
 Below are examples of how exclusion filters can help you optimize your CI Visibility usage and billing. 
 
-**Filter by git author email address**
+#### Filter by git author email address
 You can exclude one or more specific committers from being monitored by defining a filter with git author email address (`@git.commit.author.email`). The screenshot below shows a filter in which all spans associated with commits from this particular git author email are not ingested.
 
 {{< img src="ci/exclusion-filter-email.png" alt="Ingestion control exclusion filter for email address" style="width:100%;">}}
 
-**Filter by git author email domain**
+#### Filter by git author email domain
 You can also exclude many committers at once by email domain (for instance, you may want to exclude external contributors committing to monitored repositories). The screenshot below shows a filter in which all spans associated with commits from email address domains that do not match the one in the query are not ingested.
 
 {{< img src="ci/exclusion-filter-domain.png" alt="Ingestion control exclusion filter for email domain" style="width:100%;">}}
 
-**Filter by repository** 
+#### Filter by repository
 You can exclude specific repositories from being monitored (for example, an internal testing repository) by defining a filter with repository name (`@git.repository.name`) or ID (`@git.repository.id`). The screenshot below shows a filter in which all spans associated with commits to this repository are not ingested.
 
 {{< img src="ci/exclusion-filter-repo.png" alt="Ingestion control exclusion filter for repository" style="width:100%;">}}
@@ -74,7 +74,7 @@ A toggle on the right hand side of each filter allows you to enable and disable 
 
 
 ## Example quality checks
-**Application performance**
+#### Application performance
 You can use [APM monitors][6] to ensure that your application’s error rate and/or average latency are below certain thresholds prior to deployment.  
 
 ## Updating filters
