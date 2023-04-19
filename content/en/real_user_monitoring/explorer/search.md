@@ -53,11 +53,11 @@ A facet displays all distinct members of an attribute or tag and provides basic 
 
 {{< img src="real_user_monitoring/explorer/rum_explorer-2.png" alt="List of facets to the left of the events list" style="width:90%;">}}
 
-To create a facet, find and click on an attribute in the [event side panel][7].
+To create a facet, find and click on an attribute in the [event side panel][7]. This creates a section of attributes for the values in the side panel, such as "Country subdivision".
 
 {{< img src="real_user_monitoring/explorer/create_facet.png" alt="Create a facet" style="width:40%;">}}
 
-Alternatively, you can also add a new facet by clicking **+ Add** from the facet list on the left, then entering or selecting a path to the facet.
+You can also take taking metadata from a session and turn it into a facet (Viriginia, for example) by clicking **+ Add** from the left side panel, then entering or selecting a path to the facet.
 
 {{< img src="real_user_monitoring/explorer/create-facet-1.png" alt="Create a facet using the +Add button from the facet list" style="width:40%;">}}
 
