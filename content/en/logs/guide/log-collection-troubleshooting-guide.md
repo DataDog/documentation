@@ -82,7 +82,7 @@ If the Agent does not have the correct permissions, you might see one of the fol
 To fix the error, give the Datadog Agent user read, write, and execute permissions to the log file and subdirectories.
 
 {{< tabs >}}
-{{% tab "Linux and MacOS" %}}
+{{% tab "Linux" %}}
 1. Run the `namei` command to obtain more information about the file permissions:
    ```
    > namei -m /path/to/log/file
