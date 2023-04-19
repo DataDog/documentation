@@ -79,7 +79,7 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
+[1]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
 [2]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/URLSessionAutoInstrumentation/DDURLSessionDelegate.swift#L12
 [3]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1643148-urlsession
 [4]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411610-urlsession

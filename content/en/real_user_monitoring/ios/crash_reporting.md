@@ -163,7 +163,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
    ```swift
    func didTapButton() {
-   fatalError(“Crash the app”)
+   fatalError("Crash the app")
    }
    ```
 
@@ -176,7 +176,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/real_user_monitoring/ios
+[2]: /real_user_monitoring/ios
 [3]: https://github.com/DataDog/datadog-fastlane-plugin
 [4]: https://github.com/marketplace/actions/datadog-upload-dsyms
 [5]: https://www.npmjs.com/package/@datadog/datadog-ci

@@ -61,7 +61,7 @@ Click **Open View waterfall** to navigate from the session to a resource waterfa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/browser/#npm
+[1]: /real_user_monitoring/browser/#npm
 [2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.10.0-beta1
-[3]: https://docs.datadoghq.com/real_user_monitoring/ios/
+[3]: /real_user_monitoring/ios/
 [4]: https://app.datadoghq.com/rum/explorer

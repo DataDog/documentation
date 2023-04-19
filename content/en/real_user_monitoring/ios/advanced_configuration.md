@@ -65,7 +65,7 @@ Find more details and available options in the [`DDRUMMonitor` class][9].
 
 ### Add your own performance timing
 
-In addition to RUM’s default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view. 
+In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view. 
 
 For example, you can time how long it takes for your hero image to appear:
 
@@ -761,11 +761,11 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/real_user_monitoring/ios
-[3]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected
-[4]: https://docs.datadoghq.com/real_user_monitoring/explorer/search/#setup-facets-and-measures
-[5]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces?tab=browserrum
-[7]: https://docs.datadoghq.com/real_user_monitoring/ios/data_collected?tab=session#default-attributes
+[2]: /real_user_monitoring/ios
+[3]: /real_user_monitoring/ios/data_collected
+[4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[5]: /real_user_monitoring/ios/data_collected/?tab=error#error-attributes
+[6]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/DDRUMMonitor.swift
