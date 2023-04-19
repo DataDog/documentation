@@ -39,7 +39,7 @@ To create filters for your organization, your user account must have `ci_ingesti
 Once you have added a filter, each row in this page displays:
 - **Filter name** - the name of the filter
 - **Exclusion query** - the query that was defined for that filter
-- Toggle to [enable/disable the filter][2] - newly created filters are toggled on by default
+- Toggle to [enable/disable the filter](#enabling-and-disabling-filters) - newly created filters are toggled on by default
 
 All spans matching one or more filters are neither ingested nor processed by Datadog.
 
@@ -75,7 +75,7 @@ A toggle on the right hand side of each filter allows you to enable and disable 
 
 ## Example quality checks
 **Application performance**
-You can use [APM monitors][7] to ensure that your application’s error rate and/or average latency are below certain thresholds prior to deployment.  
+You can use [APM monitors][6] to ensure that your application’s error rate and/or average latency are below certain thresholds prior to deployment.  
 
 ## Updating filters
 You can rename a filter or modify the query for an exclusion filter at any time within the **Ingestion Settings** page.
@@ -90,8 +90,8 @@ You can delete a filter by clicking on the deletion icon.
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/account_management/rbac/permissions/#ci-visibility
-[2]: /###enabling-and-disabling-filters
-[3]: https://docs.datadoghq.com/getting_started/tagging/
-[4]: https://docs.datadoghq.com/account_management/rbac/permissions/#ci-visibility
+[1]: /account_management/rbac/permissions/#ci-visibility
+[3]: /getting_started/tagging/
+[4]: /account_management/rbac/permissions/#ci-visibility
 [5]: https://www.datadoghq.com/product/audit-trail/
+[6]: /monitors/types/apm/
