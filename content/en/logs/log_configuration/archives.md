@@ -65,7 +65,7 @@ Set up the [Azure integration][1] within the subscription that holds your new st
 
 {{% tab "Google Cloud Storage" %}}
 
-Set up the [GCP integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a GCP service account that Datadog can use][2] to integrate with.
+Set up the [Google Cloud integration][1] for the project that holds your GCS storage bucket, if you haven't already. This involves [creating a Google Cloud service account that Datadog can use][2] to integrate with.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google-cloud-platform
 [2]: /integrations/google_cloud_platform/?tab=datadogussite#setup
@@ -107,7 +107,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Google Cloud Storage" %}}
 
-Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives to. Under **Choose how to control access to objects**, select **Set object-level and bucket-level permissions.**
+Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your archives to. Under **Choose how to control access to objects**, select **Set object-level and bucket-level permissions.**
 
 **Note:** Do not add [retention policy][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
 
@@ -179,14 +179,14 @@ Go to your [GCP account][1] and [create a GCS bucket][2] to send your archives t
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-Grant your Datadog GCP service account permissions to write your archives to your bucket.
+Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
 
-* If you’re creating a new Service Account, this can be done from the [GCP Credentials page][1].
-* If you’re updating an existing Service Account, this can be done from the [GCP IAM Admin page][2]).
+* If you're creating a new Service Account, this can be done from the [Google Cloud Credentials page][1].
+* If you're updating an existing Service Account, this can be done from the [Google Cloud IAM Admin page][2].
 
 Add the role under **Storage** called **Storage Object Admin**.
 
-  {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog GCP Service Account." style="width:75%;">}}
+  {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/apis/credentials
 [2]: https://console.cloud.google.com/iam-admin/iam
@@ -195,11 +195,12 @@ Add the role under **Storage** called **Storage Object Admin**.
 
 ### Route your logs to a bucket
 
-Add webhook IPs from the [IP ranges list][4] to the allowlist. Go to the [Archives page][5] in the Datadog app and select the **Add a new archive** option at the bottom.
+Go to the [Archives page][5] in the Datadog app and select the **Add a new archive** option at the bottom.
 
 **Notes:** 
 * Only Datadog users with [logs_write_archive permission][3] can complete this and the following step.  
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][6], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
+* If your bucket restricts network access to specified IPs, add the webhook IPs from the [IP ranges list][4] to the allowlist. 
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
@@ -414,7 +415,7 @@ The log archives that Datadog forwards to your storage bucket are in compressed 
 
 This directory structure simplifies the process of querying your historical log archives based on their date.
 
-Within the zipped JSON file, each event’s content is formatted as follows:
+Within the zipped JSON file, each event's content is formatted as follows:
 
 ```json
 {

@@ -63,7 +63,7 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 ## Dependency Map
 
-You can also view a map of all of a resource’s upstream and downstream service dependencies. With the Dependency Map, you can quickly see the flow of services with spans that go through the specific resource (such as endpoints or database queries) end-to-end.
+You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map, you can quickly see the flow of services with spans that go through the specific resource (such as endpoints or database queries) end-to-end.
 
 The dependency map is only available for resources containing service entry spans.
 
@@ -71,7 +71,7 @@ The dependency map is only available for resources containing service entry span
 
 Hover over a node to view metrics of each service including requests/second, error rate, and average latency.
 
-The highlight color of the node indicates the service’s [monitor status][5]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
+The highlight color of the node indicates the service's [monitor status][5]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
 
 {{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
 

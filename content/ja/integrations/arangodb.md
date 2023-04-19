@@ -27,6 +27,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 - ログの収集
 dependencies:
@@ -46,16 +47,17 @@ public_title: ArangoDB
 short_description: ArangoDB の構成に関するメトリックスを追跡します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Data Store
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ArangoDB の構成に関するメトリックスを追跡します。
   media: []
@@ -80,7 +82,7 @@ Datadog-ArangoDB インテグレーションを有効にすると、以下のこ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]を参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 ArangoDB チェックは [Datadog Agent][3] パッケージに含まれています。
 

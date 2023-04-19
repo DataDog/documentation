@@ -4,8 +4,8 @@ import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/t
 import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
+import { loadInstantSearch } from './components/algolia';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
-import { getQueryParameterByName } from './helpers/browser';
 import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
@@ -47,13 +47,8 @@ $(document).ready(function () {
         }
     });
 
-    // algolia
-    $('.ds-hint').css('background', 'transparent');
-
-    const searchParam = getQueryParameterByName('s');
-    if (searchParam) {
-        $('.sidenav-search input[name="s"]').val(searchParam);
-    }
+    // load algolia instant search for the first time
+    loadInstantSearch(asyncLoad=false);
 
     if (!document.body.classList.contains('api')){
         $(window).on('resize scroll', function() {
@@ -205,7 +200,7 @@ function getPathElement(event = null) {
     }
 }
 
-// remove open class from li elements and active class from a elements
+// remove open class from li elements and active class from <a> elements
 function closeNav(){
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
     const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
@@ -407,6 +402,7 @@ function replaceURL(inputUrl) {
 window.addEventListener(
     'popstate',
     function (event) {
+        setMobileNav()
         const domain = replaceURL(window.location.origin);
         if (event.state) {
             loadPage(window.location.href);

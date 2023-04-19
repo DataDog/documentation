@@ -111,7 +111,7 @@ import java.io.StringWriter;
     }
 ```
 
-**Note**: You can add any relevant error metadata listed in the [trace view docs][3]. If the current span isn’t the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][4] section for more details.
+**Note**: You can add any relevant error metadata listed in the [trace view docs][3]. If the current span isn't the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][4] section for more details.
 
 ### Set tags & errors on a root span from a child span
 
@@ -172,7 +172,7 @@ if (span != null && (span instanceof MutableSpan)) {
 
 ## Adding spans
 
-If you aren’t using a [supported framework instrumentation][5], or you would like additional depth in your application’s [traces][3], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
+If you aren't using a [supported framework instrumentation][5], or you would like additional depth in your application's [traces][3], you may want to add custom instrumentation to your code for complete flame graphs or to measure execution times for pieces of code.
 
 If modifying application code is not possible, use the environment variable `dd.trace.methods` to detail these methods.
 
@@ -193,7 +193,7 @@ The only difference between this approach and using `@Trace` annotations is the 
 
 Add `@Trace` to methods to have them be traced when running with `dd-java-agent.jar`. If the Agent is not attached, this annotation has no effect on your application.
 
-Datadog’s Trace annotation is provided by the [dd-trace-api dependency][6].
+Datadog's Trace annotation is provided by the [dd-trace-api dependency][6].
 
 `@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `@Trace` annotation.
 
@@ -239,7 +239,7 @@ class SomeClass {
             // Alternatively, set tags after creation
             span.setTag("my.tag", "value");
 
-            // The code you’re tracing
+            // The code you're tracing
 
         } catch (Exception e) {
             // Set error on span

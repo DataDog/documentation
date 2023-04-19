@@ -34,7 +34,7 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
    gem 'ddtrace', '~> 1.1'
    ```
 
-   For information about which language and framework versions are supported by the library, see [Compatibility][1].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][1].
 
    For more information about upgrading from a `dd-trace` 0.x version, see [the Ruby tracer upgrade guide][2].
 
@@ -215,6 +215,6 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=ruby#compatibility
+[1]: /security/application_security/enabling/compatibility/ruby
 [2]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/UpgradeGuide.md#from-0x-to-10
 [3]: /tracing/trace_collection/dd_libraries/ruby/
