@@ -217,8 +217,6 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 
 {{< img src="infrastructure/livecontainers/errorlogs.png" alt="Preview Logs Side panel" style="width:100%;">}}
 
-## Container Images
-
 ## Notes and known issues
 
 * Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
