@@ -14818,7 +14818,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/SpansMetricIDParameter'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -18838,7 +18838,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/MetricID'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'

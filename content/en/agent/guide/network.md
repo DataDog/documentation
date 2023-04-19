@@ -16,6 +16,8 @@ further_reading:
     - link: 'tracing'
       tag: 'Documentation'
       text: 'Collect your traces'
+algolia:
+  tags: ['network traffic']
 ---
 
 <div class="alert alert-warning">
