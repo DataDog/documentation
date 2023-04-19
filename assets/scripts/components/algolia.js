@@ -6,7 +6,6 @@ import { searchbarHits } from './algolia/searchbarHits';
 import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
 import { debounce } from '../utils/debounce';
-import { datadogRum } from '@datadog/browser-rum';
 
 const { env } = document.documentElement.dataset;
 const pageLanguage = getPageLanguage();
@@ -26,12 +25,7 @@ function getPageLanguage() {
 }
 
 function sendSearchRumAction(query) {
-    if (query !== '') {
-        console.log(`Sending RUM action, userSearch: ${query}`)
-        datadogRum.addAction('userSearch', {
-            query,
-            page: window.location.pathname
-        })
+    if (window.DD_RUM && query !== '') {
         window.DD_RUM.addAction('userSearch', {
             query,
             page: window.location.pathname
@@ -199,6 +193,23 @@ function loadInstantSearch(pageWasAsyncLoaded) {
             aisSearchBoxInput.addEventListener('keydown', handleSearchbarKeydown);
             aisSearchBoxSubmit.addEventListener('click', handleSearchbarSubmitClick);
             document.addEventListener('click', handleOutsideSearchbarClick);
+        } else {
+            const hitsContainer = document.getElementById('hits');
+
+            hitsContainer.addEventListener('click', (e) => {
+                e.preventDefault()
+                let target = e.target
+                
+                do {
+                    if (target.href) {
+                        sendSearchRumAction(search.helper.state.query)
+                        window.history.pushState({}, '', target.href)
+                        window.location.reload()
+                    }
+
+                    target = target.parentNode
+                } while (target)
+            })
         }
 
         // Pages that aren't homepage or search page need to move the searchbar on mobile
