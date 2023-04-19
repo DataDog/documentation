@@ -5956,7 +5956,7 @@ components:
           readOnly: true
           type: string
         interval:
-          description: Number of seconds between data samples.
+          description: Number of milliseconds between data samples.
           format: int64
           readOnly: true
           type: integer
@@ -5971,10 +5971,10 @@ components:
           readOnly: true
           type: string
         pointlist:
-          description: List of points of the time series.
+          description: List of points of the time series in milliseconds.
           example:
-          - - 1575317847.0
-            - 0.5
+          - - 1681683300000.0
+            - 77.62145685254418
           items:
             $ref: '#/components/schemas/Point'
           readOnly: true

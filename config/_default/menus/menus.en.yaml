@@ -6016,6 +6016,32 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 16
+  - name: Get a finding
+    url: '#get-a-finding'
+    identifier: security-monitoring-get-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetFinding
+      unstable:
+        - v2
+      order: 2
+  - name: List findings
+    url: '#list-findings'
+    identifier: security-monitoring-list-findings
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListFindings
+      unstable:
+        - v2
+      order: 1
   - name: Change the triage state of a security signal
     url: '#change-the-triage-state-of-a-security-signal'
     identifier: security-monitoring-change-the-triage-state-of-a-security-signal
