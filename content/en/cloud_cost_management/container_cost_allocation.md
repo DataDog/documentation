@@ -22,7 +22,7 @@ Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in 
 1. Set up and configure [AWS Cloud Cost integration][1].
 1. At least one of the following must be running:
     - [**Datadog Agent**][2] in a Kubernetes environment using EC2 instances.
-    - **Datadog Container Monitoring** in containers running in ECS tasks. The container agent must be configured to use [orchestrator tag cardinality][3].
+    - [**Datadog Container Monitoring**][3] in ECS tasks.
 
 ## Cost metrics
 
@@ -136,5 +136,5 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 [1]: https://app.datadoghq.com/cost/setup
 [2]: /containers/kubernetes/installation/?tab=operator
-[3]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#tags-cardinality
+[3]: /containers/amazon_ecs/?tab=awscli
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html
