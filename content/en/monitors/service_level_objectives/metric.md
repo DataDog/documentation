@@ -3,7 +3,8 @@ title: Metric-based SLOs
 kind: documentation
 description: "Use metrics to define a Service Level Objective"
 aliases:
-  - /monitors/service_level_objectives/event/
+- /monitors/service_level_objectives/event/
+- /monitors/service_level_objectives/metric/
 further_reading:
 - link: "/metrics/"
   tag: "Documentation"

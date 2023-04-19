@@ -3,8 +3,8 @@ title: Service Level Objectives
 kind: documentation
 description: "Track the status of your SLOs"
 aliases:
-  - /monitors/monitor_uptime_widget/
-  - /monitors/slos/
+- /monitors/monitor_uptime_widget/
+- /monitors/slos/
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"

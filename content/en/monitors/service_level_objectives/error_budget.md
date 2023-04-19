@@ -2,6 +2,8 @@
 title: Error Budget Alerts
 kind: documentation
 description: "Use Monitors to alert off of the error budget consumption of an SLO"
+aliases:
+- /monitors/service_level_objectives/error_budget/
 further_reading:
 - link: "/monitors/service_level_objectives/"
   tag: "Documentation"

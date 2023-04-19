@@ -2,6 +2,8 @@
 title: Monitor-based SLOs
 kind: documentation
 description: "Use Monitors to define the Service Level Objective"
+aliases:
+- /monitors/service_level_objectives/monitor/
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
