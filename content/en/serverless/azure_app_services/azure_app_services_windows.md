@@ -1,5 +1,5 @@
 ---
-title: Microsoft Azure App Service Extension
+title: Azure App Service - Windows
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
@@ -24,22 +24,13 @@ further_reading:
 
 ## Overview
 
-Microsoft [Azure App Services][1] is a group of serverless resources that enable you to build and host web apps, mobile back ends, event-driven functions, and RESTful APIs without managing infrastructure. It can host workloads of all sizes and offers auto-scaling and high availability options.
-
-Datadog provides monitoring capabilities for all Azure App Service resource types:
-
-- Azure Monitor metrics for [Apps][2] and [Functions][3] using the [Azure Integration][2].
-- Use the [Azure App Service View][4] to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
-- Custom metrics can be submitted using the API.
-- [Resource logs][5] can be submitted using [Event Hub][6].
-
 The Datadog extension for Azure App Service provides additional monitoring capabilities.
 
 - Full distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
 - Support for manual APM instrumentation to customize spans.
 - `Trace_ID` injection into application logs.
-- Support for submitting custom metrics using [DogStatsD][7].
+- Support for submitting custom metrics using [DogStatsD][1].
 
 ## Setup
 
@@ -369,7 +360,7 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 1. Go to the Azure integration tile.
 
-2. Ensure you have installed the [Azure integration][8] for the Azure subscription where your application is running.
+2. Ensure you have installed the [Azure integration][2] for the Azure subscription where your application is running.
 
 3. Ensure that any App Service plan filtering rules you have applied include the App Service plan where the app is running. If an App Service plan is not included, all apps and functions hosted on it are also not included. Tags on the app itself are not used for filtering by Datadog.
 
@@ -384,19 +375,13 @@ It is likely that you do not have the Azure integration configured to monitor yo
 
 **Note**: To expedite the process of investigating application errors with the support team, set `DD_TRACE_DEBUG:true` and add the content of the Datadog logs directory (`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) to your email.
 
-Still need help? Contact [Datadog support][9].
+Still need help? Contact [Datadog support][3].
 
 ### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.microsoft.com/en-us/azure/app-service/
-[2]: /integrations/azure_app_services/
-[3]: /integrations/azure_functions/
-[4]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[5]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
-[6]: /integrations/azure/?tab=eventhub#log-collection
-[7]: /developers/dogstatsd
-[8]: /integrations/azure
-[9]: /help
+[1]: /developers/dogstatsd
+[2]: /integrations/azure
+[3]: /help

@@ -324,36 +324,42 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 ## Trace client and Agent configuration
 
-There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
+There are additional configurations possible for both the tracing client and Datadog Agent for context propagation, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-### B3 headers extraction and injection
+### Headers extraction and injection
 
-Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][8] and [W3C (Trace Context)][9] header extraction and injection for distributed tracing.
 
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
+You can configure injection and extraction styles for distributed headers.
 
-- Datadog: `Datadog`
-- B3: `B3`
+The Java Tracer supports the following styles:
 
-Injection styles can be configured using:
+- Datadog: `datadog`
+- B3 Multi Header: `b3multi` (`b3` alias is deprecated)
+- W3C Trace Context: `tracecontext` (Available since 1.11.0)
+- B3 Single Header: `b3 single header` (`b3single`)
 
-- System Property: `-Ddd.propagation.style.inject=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+`dd.trace.propagation.style.inject`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.<br>
+Available since version 1.9.0
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
+`dd.trace.propagation.style.extract`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
+Available since version 1.9.0
 
-Extraction styles can be configured using:
-
-- System Property: `-Ddd.propagation.style.extract=Datadog,B3`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
-
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+`dd.trace.propagation.style`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
+**Default**: `datadog`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
+Available since version 1.9.0
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page or in [Ignoring Unwanted Resources][10].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][10] page or in [Ignoring Unwanted Resources][11].
 
 ## Further Reading
 
@@ -367,5 +373,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
 [8]: https://github.com/openzipkin/b3-propagation
-[9]: /tracing/security
-[10]: /tracing/guide/ignoring_apm_resources/
+[9]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[10]: /tracing/security
+[11]: /tracing/guide/ignoring_apm_resources/

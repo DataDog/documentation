@@ -13,9 +13,17 @@ further_reading:
   text: "Learn about log pipelines"
 ---
 
+{{% site-region region="us,us3,us5,ap1,eu" %}}
 <div class="alert alert-warning">
 Log forwarding is in limited availability. Fill out this <a href="https://www.datadoghq.com/log-forwarding-limited-availability/">form</a> to request access.
 </div>
+{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Log forwarding is not available for the Government site. Contact your account representative for more information.
+</div>
+{{% /site-region %}}
 
 ## Overview
 

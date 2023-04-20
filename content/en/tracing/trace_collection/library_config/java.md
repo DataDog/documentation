@@ -393,7 +393,7 @@ See the [Java integration documentation][12] to learn more about Java metrics co
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][13] and [W3C (TraceParent)][14] header extraction and injection for distributed tracing.
+The Datadog APM Tracer supports [B3][13] and [W3C (Trace Context)][14] header extraction and injection for distributed tracing.
 
 You can configure injection and extraction styles for distributed headers.
 
@@ -402,7 +402,7 @@ The Java Tracer supports the following styles:
 - Datadog: `datadog`
 - B3 Multi Header: `b3multi` (`b3` alias is deprecated)
 - W3C Trace Context: `tracecontext` (Available since 1.11.0)
-- B3 Single Header: `b3 single header`
+- B3 Single Header: `b3 single header` (`b3single`)
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
