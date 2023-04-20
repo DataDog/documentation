@@ -229,7 +229,7 @@ If you aim to only analyze explicitly specified categories of logs, be cautious 
 | --------------------- |--------------------------------------------------|
 | AWS Security Logs     | `source:(cloudtrail OR guardduty OR route53)`    |
 | AWS Network Logs      | `source:(vpc OR waf OR elb OR alb)`              |
-| GCP Logs              | `source:gcp*`                                    |
+| Google Cloud Logs     | `source:gcp*`                                    |
 | Azure Logs            | `source:azure*`                                  |
 | Kubernetes Audit Logs | `source:kubernetes.audit`                        |
 | Identity Provider Logs| `source:(okta OR gsuite OR auth0)`               |

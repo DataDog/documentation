@@ -373,13 +373,10 @@ window.addEventListener('click', (event) => {
     rulesListClickHandler(event, 'default_rules');
 });
 
-if(!window.location.hash){
-    // runs onload for all pages that dont have a `hash` in the url.
-    window.onload = function () {
-        getPathElement();
-        setMobileNav();
-    };
-}
+window.onload = function () {
+    getPathElement();
+    setMobileNav();
+};
 
 // remove branch name from path
 function replacePath(inputPath) {

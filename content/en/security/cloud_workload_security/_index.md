@@ -9,7 +9,9 @@ Datadog Cloud Workload Security (CWS) monitors file, network, and process activi
 
 ## Detect threats to your production workloads in real-time
 
-Monitor file and process activity at the kernel level to detect threats to your AWS EC2 instances, Docker containers, Kubernetes clusters, and other infrastructure.
+Monitor file and process activity at the kernel level to detect threats to your infrastructure, such as AWS EC2 instances, Docker containers, and Kubernetes clusters. Combine CWS with [Network Performance Monitoring][9] and detect suspicious activity at the network level before a workload is compromised.
+
+<div class="alert alert-warning">Network threat detections is in private beta. Fill out this <a href="https://forms.gle/zjfbxB7Cqjxj5R5h7">form</a> to request access.</div>
 
 CWS uses the Datadog Agent to monitor your environment. If you don't already have the Datadog Agent set up, [start with setting up the Agent][2] on a [supported operating system][1]. There are four types of monitoring that the Datadog Agent uses for Cloud Workload Security:
 
@@ -24,7 +26,7 @@ CWS uses the Datadog Agent to monitor your environment. If you don't already hav
 
 CWS comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
 
-[Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
+Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
 {{< img src="security/cws/cws_detection_rules.png" alt="Cloud Workload Security detection rules in the Datadog app" width="100%">}}
 

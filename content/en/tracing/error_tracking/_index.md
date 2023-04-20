@@ -15,6 +15,8 @@ further_reading:
 - link: "/monitors/types/error_tracking/"
   tag: "Documentation"
   text: "Create an Error Tracking monitor"
+algolia:
+  tags: ['error tracking']
 ---
 
 ## Overview

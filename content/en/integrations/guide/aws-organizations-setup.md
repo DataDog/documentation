@@ -72,7 +72,7 @@ Keep the **Execution configuration** option as `Inactive` so the StackSet perfor
 
     - Keep `Automatic deployment` enabled in order to automatically deploy the Datadog AWS Integration in new accounts that are added to the Organization or OU.
 
-    - Under **Specify regions**, select a single region in which you’d like to deploy the integration in each AWS account.   
+    - Under **Specify regions**, select a single region in which you'd like to deploy the integration in each AWS account.   
       **NOTE**: The StackSet creates global IAM resources that are not region specific. If multiple regions are selected in this step, the deployment fails. 
 
     - Set the default settings under **Deployment options** to be sequential, so StackSets operations are deployed into one region at a time.
