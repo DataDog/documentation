@@ -33,15 +33,16 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 
 | Runtime | `DD_START_APP` Example Value | Description
 | ---- | --- | --- |
-| Node.js | `node ./bin/www` | Run the [Node PM2 configuration file][12], or your script file |
-| .NET Core | `dotnet datadog-demo.dll` | Run a .dll file that uses your Web App name by default |
-| PHP - Laravel | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Optional custom startup |
-| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Custom startup script. This example shows a Gunicorn command for starting a Django app. |
+| Node.js | `node ./bin/www` | Runs the [Node PM2 configuration file][12], or your script file |
+| .NET Core | `dotnet datadog-demo.dll` | Runs a .dll file that uses your Web App name by default |
+| PHP | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Copies script to correct location and starts application |
+| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Custom [startup script][13]. This example shows a Gunicorn command for starting a Django app. |
 | Java SE | `java -jar /home/site/wwwroot/datadog-demo.jar --server.port=80` | The command to start your JAR app |
 | Tomcat | `/home/site/deployments/tools/startup_script.sh` | The location of a script to perform any necessary configurations |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
+[13]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-php?pivots=platform-linux#customize-start-up
 
 
 **Note**: The application restarts when new settings are saved. 
