@@ -39,7 +39,7 @@ Python の一般的なトレース設定ドキュメントについては、[Pyt
 
 Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 {{< /code-block >}}
 
@@ -103,7 +103,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 : `(1, hello)`
 
 `curl -X GET 'localhost:8080/notes'`
-: `{”1”, "hello"}`
+: `{"1", "hello"}`
 
 `curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
 : `(1, UpdatedNote)`
@@ -141,7 +141,7 @@ Python アプリケーションが動作するようになったので、トレ�
 2. ノートアプリケーションの Dockerfile (`docker/host-and-containers/exercise/Dockerfile.notes`) 内で、アプリケーションを起動する CMD 行を変更し、`ddtrace` パッケージを使用するようにしてください。
 
    ```
-   # Run the application with Datadog 
+   # Run the application with Datadog
    CMD ["ddtrace-run", "python", "-m", "notes_app.app"]
    ```
 
@@ -188,7 +188,7 @@ Python アプリケーションが動作するようになったので、トレ�
           - "8080:8080"
        depends_on:
           - db
-       extra_hosts:                             # Linux only configuration 
+       extra_hosts:                             # Linux only configuration
          - "host.docker.internal:host-gateway"  # Linux only configuration
       environment:
          - DB_HOST=test_postgres                 # the Postgres container
@@ -304,7 +304,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 
 1. Dockerfile の起動コマンドに `dd_trace` を追加して、カレンダーアプリをトレース用に構成します。`docker/host-and-containers/exercise/Dockerfile.calendar` を開き、CMD 行を以下のように更新します。
    ```
-   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
+   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"]
    ```
 
 3. ノートアプリと同様に、統合サービスタグを適用します。`Dockerfile.calendar` ファイルに、以下の環境変数を追加します。

@@ -25,7 +25,7 @@ title: スケジュールされたレポート
 
 ## レポートのスケジュール
 
-グリッドベースまたは自動レイアウトの任意のダッシュボードから新しいレポートを作成します。ダッシュボードの歯車アイコンをクリックし、**Schedule a Report** を選択します。
+グリッドベースまたは自動レイアウトの任意のダッシュボードから新しいレポートを作成します。ダッシュボードのエクスポートアイコンをクリックし、**Schedule a Report** を選択します。
 
 以下のウィジェットタイプに対応しています。
 
@@ -36,6 +36,7 @@ title: スケジュールされたレポート
 - [Heat Map][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
+- [円グラフ][16]
 - [Query Value][8]
 - [Scatter Plot][9]
 - [SLO サマリー][10]
@@ -77,15 +78,15 @@ title: スケジュールされたレポート
 
 レポートを作成できるのは、**Dashboard Report Write** 権限を持つユーザーのみです。この権限は、Admins ではデフォルトでオンに、その他のすべてのロールではオフに設定されています。
 
-レポートで生成される画像は、粒度の細かい読み取り制限に関係なく、すべてのデータを表示します。Datadog では、レポートの権限は、データの詳細な読み取り制限を持たないユーザーに限定することをお勧めします。ユーザーに **Dashboard Report Write** 権限を付与するには、**Dashboards Report Write** 権限をオンにした新しいロールを作成し、そのユーザーをこのロールに割り当てます。または、このユーザーに **Admin** ロールを割り当ててください。ロールと権限の管理については、[ユーザー管理][13]を参照してください。
+レポートで生成される画像は、粒度の細かい読み取り制限に関係なく、すべてのデータを表示します。Datadog では、レポートの権限は、データの詳細な読み取り制限を持たないユーザーに限定することをお勧めします。ユーザーに **Dashboard Report Write** 権限を付与するには、**Dashboards Report Write** 権限をオンにした新しいロールを作成し、そのユーザーをこのロールに割り当てます。または、このユーザーに **Admin** ロールを割り当ててください。ロールと権限の管理については、[ユーザー管理][17]を参照してください。
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="組織の設定ページ内にある個々のユーザーの権限のスクリーンショット。ダッシュボードセクションの下にあるダッシュボードレポートの書き込み権限が強調表示されている" style="width:100%;" >}}
 
-Admin ロールまたは **Org Management** 権限を持つユーザーは、**Organization Settings** の [Public Sharing][16] にある **Settings** タブから、アカウントのスケジュールレポート機能を有効または無効にすることができます。
+Admin ロールまたは **Org Management** 権限を持つユーザーは、**Organization Settings** の [Public Sharing][15] にある **Settings** タブから、アカウントのスケジュールレポート機能を有効または無効にすることができます。
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="Datadog の Organization Settings 内の Public Sharing の Settings タブにある Report Management 設定が Enabled になっている" style="width:100%;" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -103,5 +104,6 @@ Admin ロールまたは **Org Management** 権限を持つユーザーは、**O
 [12]: /ja/dashboards/widgets/table/
 [13]: /ja/dashboards/widgets/timeseries/
 [14]: /ja/dashboards/widgets/top_list/
-[15]: /ja/account_management/users/#edit-a-users-roles
-[16]: /ja/account_management/org_settings/#public-sharing
+[15]: /ja/account_management/org_settings/#public-sharing
+[16]: /ja/dashboards/widgets/pie_chart/
+[17]: /ja/account_management/users

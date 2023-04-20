@@ -198,15 +198,6 @@ For detailed instructions on the advanced alert options (no data, auto resolve, 
 
 For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] and [Monitor configuration][8] pages.
 
-### Alert grouping
-
-Alerts are grouped automatically based on your selection of the `group by` step when defining your metric. If no group is specified, grouping defaults to `Simple Alert`. If groups are selected, grouping defaults to `Multi Alert`.
-
-Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts.
-
-Multi alerts apply the alert to each source according to your group parameters. You receive an alert for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `host` and `device` to receive a separate alert for each host device that is running out of space.
-Note that if your metric is only reporting by `host` with no `device` tag, it would not be detected by a monitor group by both `host` and `device`. [Tag Variables][4] are available for every group evaluated in the multi alert to dynamically fill in notifications with useful context.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -214,7 +205,6 @@ Note that if your metric is only reporting by `host` with no `device` tag, it wo
 [1]: https://app.datadoghq.com/monitors#create/metric
 [2]: /dashboards/querying/#advanced-graphing
 [3]: /monitors/guide/as-count-in-monitor-evaluations/
-[4]: /monitors/notify/?tab=is_alert#tag-variables
 [5]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/

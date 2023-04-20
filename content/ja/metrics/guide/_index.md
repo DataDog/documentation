@@ -6,6 +6,11 @@ disable_toc: true
 kind: ガイド
 private: true
 title: メトリクスガイド
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: メトリクスガイド
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}

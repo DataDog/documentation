@@ -24,8 +24,6 @@ author:
   vendor_id: agentil-software
 categories:
 - マーケットプレイス
-- cloud
-- モニタリング
 - sap
 dependencies: []
 display_on_public_website: true
@@ -57,12 +55,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
   - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: SAP ビジネスオブジェクトシステムの監視
   media:

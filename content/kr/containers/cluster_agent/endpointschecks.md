@@ -82,18 +82,17 @@ name: nginx-66d557f4cf-x2wzq
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-`clusterAgent.config.clusterChecksEnabled` 설정 키를 사용하여 클러스터 에이전트의 책임자(Operator) 배포에서 엔드포인트 점검 디스패칭을 사용할 수 있습니다.
+`features.clusterChecks.enabled` 설정 키를 사용하여 클러스터 에이전트의 책임자(Operator) 배포에서 엔드포인트 점검 디스패칭을 사용할 수 있습니다.
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
-name: datadog
+  name: datadog
 spec:
-# (...)
-clusterAgent:
-config:
-clusterChecksEnabled: true
-
+  features:
+    clusterChecks:
+      enabled: true
+```
 이 설정으로 클러스터 에이전트와 에이전트 사이에 클러스터 점검 및 엔드포인트 점검 디스패칭을 모두 사용할 수 있습니다.
 
 {{% /tab %}}

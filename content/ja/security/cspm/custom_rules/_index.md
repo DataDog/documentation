@@ -22,8 +22,7 @@ title: カスタムルール
 
 {{< callout url="#" btn_hidden="true">}}
 カスタム CSPM ルールの作成と使用はベータ機能であり、一部の Amazon Web Services (AWS)、Microsoft Azure、Google Cloud Platform (GCP) クラウドリソースで利用できます。詳細については、<a href="https://docs.datadoghq.com/security/cspm/custom_rules/schema/">クラウドリソーススキーマのドキュメント</a>を参照してください。新しいクラウドリソースは、ベータ期間中に追加される予定です。
-{{< /callout >}} 
-
+{{< /callout >}}
 
 ## 概要
 
@@ -34,7 +33,7 @@ title: カスタムルール
 ルールを複製するには
 
 1. 次のいずれかの方法でコピーしたいルールを探します。
-   - [**Security > Posture Management** に移動し、**Detection Rules** をクリックします][1]。コピーしたいルールを選択し、その詳細ページを開きます。
+   - [**Security > Posture Management** に移動し、**Compliance Rules** をクリックします][1]。コピーしたいルールを選択し、その詳細ページを開きます。
    - [**Security > Posture Management** に移動し、**Findings** をクリックします][2]。所見を選択してその詳細を開き、**Rule** メニューから **Edit Rule** を選択します。
 2. 新しいルールのために必要な変更を行います。
 3. 詳細ページの一番下までスクロールして、**Clone Rule** をクリックします。
@@ -43,7 +42,7 @@ title: カスタムルール
 
 ルールを一から作成するには
 
-1. Datadog で、[**Security > Posture Management** に移動し、**Detection Rules** をクリックします][1]。
+1. Datadog で、[**Security** > **Posture Management**][1] に移動し、**Compliance Rules** をクリックします。
 2. 右上の **New Rule** をクリックします。
 3. ルールの種類として、**Cloud Configuration** を選択します。
 4. ルールを記述するクラウドリソースタイプを指定します。
@@ -67,7 +66,7 @@ CSPM 検出ルールを作成、複製、または修正するときに、所見
 
 ほぼすべての Key-Value をタグとして割り当てることができます。次の表は、一般的なセキュリティシナリオで有用なタグを示したものです。
 
-| キー     | 有効な値    | 説明 | 
+| キー     | 有効な値    | 説明 |
 | ------  | --------------- | ----------- |
 | `scored` | `true`、`false` | 組織の総合的なポスチャスコアを計算するときに、ルールを含めるかどうかを示します。複製されたルールに自動的に追加されます。 |
 | `security` | `compliance` | [セキュリティシグナルページ][7]での所見を分類しています。削除はできません。 |
@@ -82,7 +81,7 @@ CSPM 検出ルールを作成、複製、または修正するときに、所見
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29&all=false&product=cspm&sort=rule_name
+[1]: https://app.datadoghq.com/security/configuration/rules?product=cspm&query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29&all=false&product=cspm&sort=rule_name
 [2]: https://app.datadoghq.com/security/compliance
 [3]: https://www.openpolicyagent.org/docs/latest/
 [4]: /ja/security/cloud_security_management/guide/writing_rego_rules/

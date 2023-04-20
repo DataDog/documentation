@@ -32,11 +32,9 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
-- cloud
+- クラウド
 - コラボレーション
-- メッセージング
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -64,20 +62,18 @@ public_title: Zoom インテグレーション
 short_description: Zoom アカウントを監視し、ライセンスを最適化します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Collaboration
-  - Category::Messaging
-  - Category::Monitoring
+  - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Zoom アカウントを監視し、ライセンスを最適化します
   media:

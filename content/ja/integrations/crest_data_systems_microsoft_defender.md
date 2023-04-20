@@ -33,8 +33,9 @@ author:
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
+- インシデント
 - マーケットプレイス
-- モニタリング
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -62,17 +63,18 @@ public_title: Microsoft 365 Defender for Endpoint インテグレーション
 short_description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Incidents
   - Category::Marketplace
-  - Category::Monitoring
+  - Category::Security
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
   media:

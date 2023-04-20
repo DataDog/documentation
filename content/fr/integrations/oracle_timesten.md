@@ -22,9 +22,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- caching
+- data store
 - marketplace
 - oracle
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -55,11 +56,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
+  - Category::Caching
+  - Category::Data Store
   - Category::Marketplace
   - Category::Oracle
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Surveillez les performances de vos bases de données Oracle TimesTen
   media:

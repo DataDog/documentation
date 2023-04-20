@@ -75,7 +75,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 
 1. [APM に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
 2. [トレーサーをインストールします。](#install-the-tracer)
-3. {{< tabs >}}
+3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [ライブデータを表示します。](#view-your-live-data)
 
 ### APM に Datadog Agent を構成する
@@ -95,7 +95,14 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. {{< site-region region="us3,us5,eu,gov" >}}
+3. The tracing client attempts to send traces to the following:
+
+- The `/var/run/datadog/apm.socket` Unix domain socket by default.
+- If the socket does not exist, then traces are sent to `localhost:8126`.
+- If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` or `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
+- Using Unix Domain Sockets for trace transport is only supported on .NET Core 3.1 and later.
+
+For more information on how to configure these settings, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov" >}}
 
@@ -118,7 +125,7 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 Azure App Service で Datadog APM を設定するには、[Azure App Service 拡張のトレース][1]を参照してください。
 
 [1]: /ja/serverless/azure_app_services/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Other Environments" %}}
 
@@ -132,7 +139,7 @@ Azure App Service で Datadog APM を設定するには、[Azure App Service 拡
 [3]: /ja/integrations/amazon_elasticbeanstalk/
 [4]: /ja/integrations/
 [5]: /ja/help/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -152,7 +159,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "NuGet" %}}
 
@@ -165,7 +172,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 1. アプリケーションに `Datadog.Monitoring.Distribution` [NuGet パッケージ][1]を追加します。
 
 [1]: https://www.nuget.org/packages/Datadog.Monitoring.Distribution
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -204,7 +211,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
    ```
 2. スタンドアロンアプリケーションや Windows サービスの場合は、手動でアプリケーションを再起動します。
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "NuGet" %}}
 
@@ -227,7 +234,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 2. スタンドアロンアプリケーションの場合は、手動でアプリケーションを再起動します。
 
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -264,7 +271,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 
 [1]: https://www.nuget.org/packages/Datadog.Trace
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "NuGet" %}}
 
@@ -272,7 +279,7 @@ Datadog .NET Tracer は、マシン上のすべてのサービスがインスツ
 
 1. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -298,7 +305,7 @@ COR_ENABLE_PROFILING=1
 
 {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディタを使用して Windows サービスに環境変数を作成" >}}
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "PowerShell" %}}
 
@@ -306,7 +313,7 @@ COR_ENABLE_PROFILING=1
 [string[]] $v = @("COR_ENABLE_PROFILING=1")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

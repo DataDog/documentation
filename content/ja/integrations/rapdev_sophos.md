@@ -28,6 +28,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -55,16 +56,17 @@ public_title: Sophos インテグレーション
 short_description: Sophos が管理するエンドポイントの健全性を監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Marketplace
+  - Category::Security
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Sophos が管理するエンドポイントの健全性を監視
   media:

@@ -7,7 +7,10 @@ author:
   name: Komodor
   sales_email: sales@komodor.com
   support_email: support@komodor.com
-categories: []
+categories:
+- コンテナ
+- kubernetes
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/komodor/README.md
 display_on_public_website: true
@@ -27,15 +30,18 @@ public_title: Komodor Automation
 short_description: K8s のランドスケープとスタック全体の変更点を追跡する
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Notification
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: K8s のランドスケープとスタック全体の変更点を追跡する
   media:

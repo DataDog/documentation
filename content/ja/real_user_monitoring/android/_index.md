@@ -53,8 +53,9 @@ dependencies {
 1. [**UX Monitoring** > **RUM Applications** > **New Application**][2] へ移動します。
 2. アプリケーションタイプとして `android` を選択し、新しいアプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
 3. Web ビューをインスツルメントするには、**Instrument your webviews** トグルをクリックします。詳しくは、[Web ビュー追跡][13]を参照してください。
+4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。詳しくは、[RUM Android データ収集][15]をご覧ください。
 
-{{< img src="real_user_monitoring/android/create_rum_application.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
+   {{< img src="real_user_monitoring/android/android-new-application.png" alt="Datadog で Android 用 RUM アプリケーションを作成する" style="width:90%;">}}
 
 データの安全性を確保するため、クライアントトークンを使用する必要があります。`dd-sdk-android`  ライブラリの構成に [Datadog API キー][3]のみを使用した場合、クライアント側で Android アプリケーションの APK バイトコード内で公開されます。
 
@@ -384,3 +385,4 @@ Datadog の構成で、初期化時に以下のスニペットを追加します
 [12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [13]: https://docs.datadoghq.com/ja/real_user_monitoring/android/web_view_tracking/
 [14]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags/#rum--session-replay
+[15]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/

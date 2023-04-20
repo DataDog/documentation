@@ -8,8 +8,11 @@ further_reading:
 - link: /continuous_integration/tests
   tag: ドキュメント
   text: テスト結果とパフォーマンスを確認する
-- link: /continuous_integration/troubleshooting/
+- link: /continuous_integration/intelligent_test_runner/dotnet
   tag: ドキュメント
+  text: Intelligent Test Runner でテストジョブを高速化する
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
   text: トラブルシューティング CI
 kind: documentation
 title: .NET テスト
@@ -77,7 +80,7 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /ja/getting_started/site/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -108,7 +111,7 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 
 <a href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test">dotnet test</a> の使用によって
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 {{< /code-block >}}
 
@@ -118,7 +121,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
 
 <a href="https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options">VSTest.Console.exe</a> の使用によって
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
 {{< /code-block >}}
 
@@ -132,7 +135,7 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 コマンドライン引数または環境変数を使用して、CLI のデフォルトコンフィギュレーションを変更できます。コンフィギュレーション設定の完全なリストについては、以下を実行してください。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 dd-trace ci run --help
 {{< /code-block >}}
 

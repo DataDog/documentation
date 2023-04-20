@@ -92,16 +92,16 @@ try {
 // Send a custom error with context
 const error = new Error('Something wrong occurred.');
 
-DD_RUM.onReady(function() {
-    DD_RUM.addError(error, {
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.addError(error, {
         pageStatus: 'beta',
     });
 });
 
 // Send a network error
 fetch('<SOME_URL>').catch(function(error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error);
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addError(error);
     });
 })
 
@@ -109,8 +109,8 @@ fetch('<SOME_URL>').catch(function(error) {
 try {
     //Some code logic
 } catch (error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error);
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addError(error);
     })
 }
 ```
@@ -121,20 +121,20 @@ try {
 // Send a custom error with context
 const error = new Error('Something wrong occurred.');
 
-window.DD_RUM && DD_RUM.addError(error, {
+window.DD_RUM && window.DD_RUM.addError(error, {
     pageStatus: 'beta',
 });
 
 // Send a network error
 fetch('<SOME_URL>').catch(function(error) {
-    window.DD_RUM && DD_RUM.addError(error);
+    window.DD_RUM && window.DD_RUM.addError(error);
 })
 
 // Send a handled exception error
 try {
     //Some code logic
 } catch (error) {
-    window.DD_RUM && DD_RUM.addError(error);
+    window.DD_RUM && window.DD_RUM.addError(error);
 }
 ```
 {{% /tab %}}

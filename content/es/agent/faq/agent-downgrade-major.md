@@ -2,36 +2,36 @@
 aliases:
 - /es/agent/faq/agent-downgrade
 kind: faq
-title: Cambiar a una versión principal anterior de Agent
+title: Cambiar a una versión principal anterior del Agent
 ---
 
-## Cambiar de la v7 a la v6 de Agent
+## Cambiar de la v7 a la v6 del Agent
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-En primer lugar, [desinstale la v7 de Agent del sistema][1].
+En primer lugar, [desinstala la v7 del Agent del sistema][1].
 
-A continuación, si siguió las instrucciones para [actualizar de la v6 a la v7][2], ejecute el siguiente comando de instalación de Agent para cambiar de la versión 7 a la versión 6 de Agent:
+A continuación, si seguiste las instrucciones para [pasar de la v6 a la v7][2], ejecuta el siguiente comando de instalación del Agent para cambiar de la versión 7 a la versión 6 del Agent:
 
 ```shell
 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"
 ```
 
-El comando funciona en todas las versiones compatibles de Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, y SUSE.
+El comando funciona en todas las versiones compatibles de Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu y SUSE.
 
 [1]: /es/agent/guide/how-do-i-uninstall-the-agent/
 [2]: /es/agent/versions/upgrade_to_agent_v6/
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-1. [Desinstale la v7 de Agent del sistema][1].
-2. [Descargue el instalador de Datadog Agent][2].
-3. Ejecute el instalador (como **Administrador**) abriendo `datadog-agent-6-latest.amd64.msi`.
-4. Siga las indicaciones, acepte el acuerdo de licencia e introduzca su [clave API de Datadog][3].
-5. Cuando termine la instalación, se le ofrecerá la opción de iniciar Datadog Agent Manager.
+1. [Desinstala la v7 del Agent del sistema][1].
+2. [Descarga el instalador del Datadog Agent][2].
+3. Abre `datadog-agent-6-latest.amd64.msi` para ejecutar el instalador (como **Administrador**).
+4. Sigue las indicaciones, acepta el acuerdo de licencia e introduce tu [clave de API de Datadog][3].
+5. Cuando termines la instalación, tendrás opción de iniciar el Datadog Agent Manager.
 
-**Nota**: Se ofrecen enlaces a todas las versiones disponibles de Windows Installer [en formato JSON][4].
+**Nota**: Los enlaces a todas las versiones disponibles de Windows Installer se ofrecen [en formato JSON][4].
 
 [1]: /es/agent/guide/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
@@ -40,9 +40,9 @@ El comando funciona en todas las versiones compatibles de Amazon Linux, CentOS, 
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-En primer lugar, [desinstale la v7 de Agent del sistema][1].
+En primer lugar, [desinstala la v7 del Agent del sistema][1].
 
-A continuación, si siguió las instrucciones para [actualizar de la v6 a la v7][2], ejecute el comando de instalación de Agent con la variable de entorno `DD_AGENT_MAJOR_VERSION=6` para cambiar de la versión 7 a la versión 6 de Agent:
+A continuación, si seguiste las instrucciones para [pasar de la v6 a la v7][2], ejecuta el comando de instalación del Agent con la variable de entorno `DD_AGENT_MAJOR_VERSION=6` para cambiar de la versión 7 a la versión 6 del Agent:
 
 ```shell
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
@@ -53,23 +53,23 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 {{% /tab %}}
 {{< /tabs >}}
 
-## Cambiar de la v6 a la v5 de Agent
+## Cambiar de la v6 a la v5 del Agent
 
-En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de actualización][1]. Si es así, seleccione su SO para ver las instrucciones detalladas sobre cómo cambiar de la versión 6 a la versión 5 de Agent:
+En esta guía, se asume que actualizaste a la v6 del Agent utilizando la [guía de actualización][1]. Si es así, selecciona tu SO para ver las instrucciones detalladas sobre cómo cambiar de la versión 6 a la versión 5 del Agent:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
 **Sistemas basados en Debian**:
 
-1. Configure APT para que pueda descargar a través de https e instale `curl` y `gnupg`
+1. Configura APT para que pueda descargarse a través de https e instala `curl` y `gnupg`
 
     ```shell
     sudo apt-get update
     sudo apt-get install apt-transport-https curl gnupg
     ```
 
-2. Quite el repositorio beta y asegúrese de que esté presente el repositorio estable:
+2. Quita el repositorio beta y asegúrate de que esté presente el repositorio estable:
 
     ```shell
     sudo rm /etc/apt/sources.list.d/datadog-beta.list
@@ -81,13 +81,13 @@ En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de a
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-3. Si ejecuta Ubuntu 14 o una versión anterior, o Debian 8 o una versión anterior, copie el conjunto de claves en `/etc/apt/trusted.gpg.d`:
+3. Si ejecutas Ubuntu 14 o una versión anterior, o Debian 8 o una versión anterior, copia el conjunto de claves en `/etc/apt/trusted.gpg.d`:
 
    ```shell
    sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
    ```
 
-4. Actualice APT y cambie a la versión anterior de Agent:
+4. Actualiza APT y cambia a la versión anterior del Agent:
 
     ```shell
     sudo apt-get update
@@ -95,21 +95,21 @@ En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de a
     sudo apt-get install datadog-agent
     ```
 
-5. Configuraciones de copia de seguridad-sincronización y plantillas de AutoDiscovery (opcional)
+5. Sincroniza las configuraciones y las plantillas de AutoDiscovery con la versión de antes (opcional)
 
-    Si realizó algún cambio en sus configuraciones o plantillas, es conveniente volver a sincronizarlas para la v5 de Agent.
+    Si realizaste algún cambio en tus configuraciones o plantillas, es conveniente volver a sincronizarlas para la v5 del Agent.
 
-    **Nota**: Si realizó algún cambio en sus configuraciones para la compatibilidad de opciones únicamente de la v6 de Agent, estas no funcionarán con la v5 de Agent.
+    **Nota**: Si realizaste algún cambio en tus configuraciones para admitir únicamente las opciones de la v6 del Agent, estas no funcionarán con la v5 del Agent.
 
-6. Checks personalizados de copia de seguridad-sincronización (opcional):
+6. Sincroniza los checks personalizados con la versión de antes (opcional):
 
-    Si realizó algún cambio o añadió nuevos checks personalizados mientras probaba Agent 6, es conveniente volver a activarlos en Agent 5. **Nota**: Solo tiene que volver a copiar los checks que cambió.
+    Si realizaste algún cambio o añadiste nuevos checks personalizados mientras probabas el Agent 6, es conveniente volver a activarlos en el Agent 5. **Nota**: Solo tienes que volver a copiar los checks que cambiaste.
 
     ```shell
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-7. Reinicie Agent
+7. Reinicia el Agent
 
     ```shell
     # Systemd
@@ -118,7 +118,7 @@ En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de a
     sudo /etc/init.d/datadog-agent restart
     ```
 
-8. Limpie `/etc/datadog-agent` (opcional):
+8. Elimina `/etc/datadog-agent` (opcional):
 
     ```shell
     sudo -u dd-agent -- rm -rf /etc/datadog-agent/
@@ -126,16 +126,16 @@ En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de a
 
 **Sistemas basados en Red Hat**:
 
-1. Quite el repositorio beta de Yum del sistema:
+1. Quita el repositorio beta de Yum del sistema:
 
     ```shell
     rm /etc/yum.repos.d/datadog-beta.repo
     [ ! -f /etc/yum.repos.d/datadog.repo ] && echo -e '[datadog]\nname = Datadog, Inc.\nbaseurl = https://yum.datadoghq.com/rpm/x86_64/   \nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\npriority=1\ngpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public\n       https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public' | sudo tee /etc/yum.repos.d/datadog.repo
     ```
 
-    **Nota**: debido a un [error en dnf][1], utilice `repo_gpgcheck=0` en lugar de `repo_gpgcheck=1` en RHEL/CentOS 8.1.
+    **Nota**: Debido a un [error en dnf][1], utiliza `repo_gpgcheck=0` en lugar de `repo_gpgcheck=1` con RHEL/CentOS 8.1.
 
-2. Actualice su caché de Yum local y cambie a la versión anterior de Agent
+2. Actualiza la caché de Yum local y cambia a la versión anterior del Agent
 
     ```shell
     sudo yum clean expire-cache metadata
@@ -144,21 +144,21 @@ En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de a
     sudo yum install datadog-agent
     ```
 
-3. Configuraciones de copia de seguridad-sincronización y plantillas de AutoDiscovery (opcional)
+3. Sincroniza las configuraciones y las plantillas de AutoDiscovery con la versión de antes (opcional)
 
-    Si realizó algún cambio en sus configuraciones o plantillas, es conveniente volver a sincronizarlas para la v5 de Agent.
+    Si realizaste algún cambio en tus configuraciones o plantillas, es conveniente volver a sincronizarlas para la v5 del Agent.
 
-    **Nota**: Si realizó algún cambio en sus configuraciones para la compatibilidad de opciones únicamente de la v6 de Agent, estas no funcionarán con la v5 de Agent.
+    **Nota**: Si realizaste algún cambio en tus configuraciones para admitir únicamente las opciones de la v6 del Agent, estas no funcionarán con la v5 del Agent.
 
-4. Checks personalizados de copia de seguridad-sincronización (opcional):
+4. Sincroniza los checks personalizados con la versión de antes (opcional):
 
-    Si realizó algún cambio o añadió nuevos checks personalizados mientras probaba Agent 6, es conveniente volver a activarlos en Agent 5. **Nota**: Solo tiene que volver a copiar los checks que cambió.
+    Si realizaste algún cambio o añadiste nuevos checks personalizados mientras probabas el Agent 6, es conveniente volver a activarlos en el Agent 5. **Nota**: Solo tienes que volver a copiar los checks que cambiaste.
 
     ```shell
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-5. Reinicie Agent
+5. Reinicia el Agent
 
     ```shell
     # Systemd
@@ -167,7 +167,7 @@ En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de a
     sudo /etc/init.d/datadog-agent restart
     ```
 
-6. Limpie `/etc/datadog-agent` (opcional):
+6. Elimina `/etc/datadog-agent` (opcional):
 
     ```shell
     sudo -u dd-agent -- rm -rf /etc/datadog-agent/
@@ -177,17 +177,17 @@ En esta guía se asume que actualizó a la v6 de Agent utilizando la [guía de a
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Ejecute el paquete de instalador de Agent para la última versión 5.x, encontrará instrucciones
-[en la página de integración de Datadog Agent][1].
+Ejecuta el paquete del instalador del Agent para instalar la última versión 5.x; encontrarás las instrucciones
+[en la página de integración del Datadog Agent][1].
 
 [1]: https://app.datadoghq.com/account/settings#agent/windows
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-1. Detenga Agent con la aplicación systray, si se está ejecutando.
-2. Salga de la aplicación systray.
-3. Desinstale la aplicación Datadog Agent.
-4. Instale el paquete DMG de Agent 5 con el método de instalación que prefiera.
+1. Detén el Agent con la aplicación systray, si se está ejecutando.
+2. Sal de la aplicación systray.
+3. Desinstala la aplicación del Datadog Agent.
+4. Instala el paquete DMG del Agent 5 con el método de instalación que prefieras.
 
 {{% /tab %}}
 {{< /tabs >}}

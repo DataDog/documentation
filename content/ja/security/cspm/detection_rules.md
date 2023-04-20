@@ -3,7 +3,7 @@ aliases:
 - /ja/security_platform/cspm/configuration_rules
 - /ja/security/cspm/configuration_rules
 further_reading:
-- link: /security/cspm/getting_started
+- link: /security/cspm/setup
   tag: ドキュメント
   text: CSPM の概要
 - link: /security/cspm/custom_rules/

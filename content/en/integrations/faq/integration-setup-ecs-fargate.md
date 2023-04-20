@@ -40,7 +40,7 @@ If you already [set up the Container Agent][3] in ECS Fargate, follow these step
 
 1. Within the cluster, click the **Services** tab, then click the **Service Name**.
 2. Click the **Update** button.
-3. For the **Task Definition**, choose the latest **Revision** from the drop-down menu.
+3. For the **Task Definition**, choose the latest **Revision** from the dropdown menu.
 4. Click the **Next step** button 3 times, then click the **Update Service** button.
 
 ### Verification

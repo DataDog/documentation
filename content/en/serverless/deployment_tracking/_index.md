@@ -22,7 +22,7 @@ For visibility into historical code and configuration changes, adjust the global
 
 Datadog collects code and configuration change events for your AWS Lambda functions from AWS CloudTrail.
 
-If you haven’t already, set up the [Amazon Web Services][2] integration first. Then, add the following permission to the policy document for your AWS/Datadog role:
+If you haven't already, set up the [Amazon Web Services][2] integration first. Then, add the following permission to the policy document for your AWS/Datadog role:
 
 ```text
 cloudtrail:LookupEvents

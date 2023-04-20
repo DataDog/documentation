@@ -10,6 +10,9 @@ further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
   tag: ドキュメント
   text: OpenTelemetry トレースとログに接続
+- link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
+  tag: ブログ
+  text: OpenTelemetry コレクターを使用して Datadog エクスポーター経由で Datadog にメトリクス、トレース、ログを送信する
 kind: documentation
 title: OpenTelemetry によるトレース収集
 ---
@@ -32,7 +35,17 @@ OpenTelemetry のトレースとログを相関させることで、アプリケ
 
 Datadog は OpenTelemetry Collector Datadog エクスポーターまたは Datadog Agent の OTLP 取り込みを OpenTelemetry のトレーシングクライアントと併用することをお勧めしています。しかし、これがうまく動作しない場合には、サポートされている各言語でも [OpenTracing][6] のデータを Datadog に送信することをサポートしています。[対応言語ごとに OpenTracing を設定する][7]をお読みください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+{{< whatsnext desc="OpenTracing を使用してトレースを送信するようにアプリケーションを設定します。" >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/go" >}}Go{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/nodejs" >}}NodeJS{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/php" >}}PHP{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/open_standards/dotnet" >}}.NET{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

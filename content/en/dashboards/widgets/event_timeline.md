@@ -5,33 +5,29 @@ description: "Display your Event Stream Timeline in a widget."
 aliases:
     - /graphing/widgets/event_timeline/
 further_reading:
+- link: "/events/explorer/"
+  tag: "Documentation"
+  text: "Events Explorer"
+- link: "/dashboards/widgets/event_stream/"
+  tag: "Documentation"
+  text: "Event Stream Widget"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
+
+
 ---
 
 The event timeline is a widget version of the timeline that appears at the top of the [Event Explorer view][1]:
 
-{{< img src="dashboards/widgets/event_timeline/event_timeline.png" alt="Event timeline example"  >}}
+{{< img src="dashboards/widgets/event_timeline/event_timeline_example.png" alt="Event timeline of Error status events over the last 2 days" >}}
 
 ## Setup
-
-{{< img src="dashboards/widgets/event_timeline/event_timeline_setup.png" alt="Event timeline example" style="width:80%;">}}
 
 ### Configuration
 
 1. Enter a [search query][1] to filter the event stream.
-2. On screenboards only, choose whether your widget has a custom timeframe or the screenboard's global timeframe.
-
-### Options
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
+2. Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
 
 ## API
 

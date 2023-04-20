@@ -140,10 +140,11 @@ Agent は、デフォルトで次の場所でジャーナルを探します。
 
 ##### ジャーナルユニットの絞り込み
 
-以下のパラメーターを使用して、特定のユニットに絞り込んだり除外することができます。
+これらのパラメーターを使用することで、特定の_システムレベル_ユニットをフィルターにかけることができます。
 
-- `include_units`: 指定されたすべてのユニットを含めます。
-- `exclude_units`: 指定されたすべてのユニットを除外します。
+- `include_units`: 指定されたすべてのシステムレベルユニットを含めます。
+- `exclude_units`: 指定されたすべてのシステムレベルユニットを除外します。
+
 
 例:
 
@@ -154,6 +155,64 @@ logs:
       include_units:
           - docker.service
           - sshd.service
+```
+
+Datadog Agent バージョン `7.37.0`+ では、これらのパラメーターを使用して、_ユーザーレベル_ユニットをフィルターにかけることができます。
+
+- `include_user_units`: 指定されたすべてのユーザーレベルユニットを含めます。
+- `exclude_user_units`: 指定されたすべてのユーザーレベルユニットを除外します。
+
+**注**: `exclude_units` または `exclude_user_units` で `*` ワイルドカードを使用して、特定の Journald ログを指定します。
+
+例:
+
+```yaml
+logs:
+    # すべてのシステムレベルユニットログを収集します。
+    - type: journald
+      exclude_user_units:
+          - '*'
+```
+
+##### ジャーナルメッセージのフィルター
+
+Datadog Agent バージョン `7.39.0`+ では、これらのパラメーターを持つキー値ペアを使用して、任意のメッセージをフィルターにかけることができます。
+
+- `include_matches`: `key=value` に一致するメッセージを含めます。
+- `exclude_matches`: `key=value` に一致するメッセージを除外します。
+
+
+例:
+
+```yaml
+logs:
+    - type: journald
+      path: /var/log/journal/
+      include_matches:
+          - _TRANSPORT=kernel
+```
+
+##### 同じジャーナルを複数回追跡する
+
+異なるソースタグやサービスタグを持つユニットを報告したい場合、これらは別々の journald 構成に表示する必要があります。
+
+これを行うには、ジャーナル構成を `config_id` で一意に識別する必要があります (Agent `7.41.0`+ で利用可能)。
+
+```yaml
+logs:
+    - type: journald
+      config_id: my-app1
+      source: my-app1
+      service: my-app1
+      include_units:
+          - my-app1.service
+
+    - type: journald
+      config_id: my-app2
+      source: my-app2
+      service: my-app2
+      include_units:
+          - my-app2.service
 ```
 
 ##### コンテナタグの収集

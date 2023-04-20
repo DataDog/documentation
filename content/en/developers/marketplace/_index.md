@@ -16,6 +16,11 @@ further_reading:
   text: "Learn about Datadog Apps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog Marketplace is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
+
 ## Overview
 
 The Datadog Marketplace is a digital marketplace where Datadog Technology Partners can list their offerings to Datadog users. Datadog customers can access integration tiles on the [**Integrations** page][1] or the [**Marketplace** page][2].

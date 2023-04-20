@@ -167,7 +167,7 @@ Use `curl` to again send requests to the application:
 : `( 2, newNote)`
 
 `curl -X GET 'localhost:8080/notes'`
-: `{ “1”: “hello”, “2”: “newNote” }`
+: `{ "1": "hello", "2": "newNote" }`
 
 Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]). The Traces list shows something like this:
 

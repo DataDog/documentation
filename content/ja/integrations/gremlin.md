@@ -19,7 +19,6 @@ author:
   sales_email: support@gremlin.com
   support_email: support@gremlin.com
 categories:
-- コラボレーション
 - 問題追跡
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gremlin/README.md
@@ -38,16 +37,15 @@ public_title: Gremlin
 short_description: Gremlin で発生したイベントを Datadog に送信
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Collaboration
   - Category::Issue Tracking
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Gremlin で発生したイベントを Datadog に送信
   media: []

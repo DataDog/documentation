@@ -2,7 +2,7 @@
 aliases:
 - /ja/security_platform/cspm/frameworks_and_benchmarks
 further_reading:
-- link: security/cspm/getting_started
+- link: security/cspm/setup
   tag: ドキュメント
   text: CSPM の概要
 - link: security/default_rules
@@ -82,7 +82,7 @@ CSPM [概要][20]のページで、各フレームワークのコンプライア
 [10]: https://gdpr.eu/
 [11]: /ja/security/cloud_siem/
 [12]: /ja/integrations/amazon_cloudtrail/
-[13]: https://app.datadoghq.com/security/configuration/rules/
+[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
 [14]: /ja/integrations/slack/
 [15]: /ja/integrations/jira/
 [16]: /ja/integrations/pagerduty

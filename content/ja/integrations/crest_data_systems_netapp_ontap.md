@@ -26,9 +26,8 @@ author:
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
-- マーケットプレイス
 - data store
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -60,14 +59,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Data Store
+  - Category::Marketplace
+  - Offering::Integration
+  - Submitted Data Type::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Marketplace
-  - Category::Data Store
-  - Category::Monitoring
-  - Offering::Integration
-  - Submitted Data Type::Metrics
   configuration: README.md#Setup
   description: NetApp ONTAP クラスターのパフォーマンスと使用量の監視
   media:

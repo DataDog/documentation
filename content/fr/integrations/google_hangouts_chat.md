@@ -2,7 +2,6 @@
 categories:
 - collaboration
 - notification
-ddtype: crawler
 dependencies: []
 description: Envoyez des alertes et des graphiques Datadog au salon Google Hangouts
   de votre équipe.

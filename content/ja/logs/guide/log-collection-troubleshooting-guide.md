@@ -26,12 +26,19 @@ title: ログ収集のトラブルシューティングガイド
 
 ## ポート 10516 のアウトバウンドトラフィックがブロックされる
 
-Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
+Datadog Agent は、ポート 10516 を使って TCP で Datadog にログを送信します。この接続が使用できない場合、ログは送信に失敗し、それを示すエラーが `agent.log` ファイルに記録されます。
 
-手動で接続をテストするには、次の Telnet または OpenSSL コマンドを実行します (ポート 10514 でも動作しますが、安全性は劣ります)。
+OpenSSL、GnuTLS、または他の SSL/TLS クライアントを使用して、接続を手動でテストすることができます。OpenSSL の場合は、以下のコマンドを実行します。
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
-* `telnet intake.logs.datadoghq.com 10514`
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+GnuTLS の場合、以下のコマンドを実行します。
+
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
+```
 
 さらに、次のようなログを送信します。
 
@@ -39,7 +46,7 @@ Datadog Agent は、ポート 10516 から TCP で Datadog にログを送信し
 <API_KEY> これはテストメッセージです
 ```
 
-- ポート 10514 または 10516 を開くことを選択できない場合は、`datadog.yaml` に次の設定を追加して、Datadog Agent がログを転送するよう構成することができます。
+- ポート 10516 を開くことを選択できない場合は、`datadog.yaml` に次の設定を追加して、Datadog Agent がログを転送するよう構成することができます。
 
 ```yaml
 logs_config:
@@ -101,7 +108,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
 
 **注**: これらの権限は、ログローテーション構成で正しく設定されていることを確認してください。そうしないと、次のログローテーション時に、Datadog Agent の読み取り権限が失われる可能性があります。Agent がファイルへの読み取りアクセス権を持つように、ログローテーション構成で権限を `644` として設定します。
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Windows (cmd)" %}}
 1. ファイルの権限についてのより詳しい情報を得るには、ログフォルダ上で `icacls` コマンドを使用します。
@@ -162,7 +169,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
    ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Windows (PowerShell)" %}}
 
@@ -206,7 +213,7 @@ Agent に正しい権限がない場合、[Agent のステータス][5]を確認
    ```
 
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 

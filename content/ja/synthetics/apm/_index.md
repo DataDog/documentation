@@ -1,6 +1,4 @@
 ---
-aliases:
-- /ja/synthetics/apm
 description: Synthetic モニタリングを使用した APM と分散型トレーシング
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/

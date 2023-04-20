@@ -17,7 +17,7 @@ further_reading:
 
 ### Versioning
 
-Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here’s an outline of what constitutes each type of semver change:
+Versioning of the Datadog Node.js tracing library follows [semver][1]. When a new major version is released it becomes the primary release line, where all new features, bug fixes and security patches land. Here's an outline of what constitutes each type of semver change:
 
 | Major          | Minor                                                          | Patch    |
 |---------------------------------|-------------------------------------------------------------------------|----------------------|
@@ -41,7 +41,7 @@ If you have any questions or concerns about our support for a particular version
 When the Node.js project drops support for an LTS major release line (when it goes EOL), support for it is dropped in the next major version of `dd-trace`.
 The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
 
-Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it’s not possible to solve the issue without moving to another non-EOL release.
+Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it's not possible to solve the issue without moving to another non-EOL release.
 Datadog does not make new releases of `dd-trace` to provide specific support for non-LTS Node.js major release lines (odd numbered versions).
 
 For the best level of support, always run the latest LTS release of Node.js, and the latest major version of `dd-trace`. Whatever release line of Node.js you use, also use the latest version of Node.js on that release line, to ensure you have the latest security fixes.
