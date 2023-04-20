@@ -2,6 +2,8 @@
 title: Incident Management Analytics
 kind: documentation
 description: Track and analyze aggregated incident management statistics in Dashboards and Notebooks
+aliases:
+- /monitors/incident_management/analytics
 ---
 
 ## Overview

@@ -2,10 +2,12 @@
 title: Datadog Clipboard
 kind: documentation
 description: Create and manage incidents
+aliases:
+- /monitors/incident_management/datadog_clipboard
 further_reading:
-    - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
-      tag: "Blog"
-      text: "Explore your data effortlessly with the Datadog Clipboard"
+- link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+  tag: "Blog"
+  text: "Explore your data effortlessly with the Datadog Clipboard"
 ---
 
 ## Overview

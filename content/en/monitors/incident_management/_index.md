@@ -2,7 +2,10 @@
 title: Incident Management
 kind: documentation
 description: Create and manage incidents
+aliases:
+- /monitors/incident_management/
 further_reading:
+<<<<<<< HEAD
   - link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
     tag: "Release Notes"
     text: "Check out the latest Incident Management releases! (App login required)."
@@ -18,6 +21,20 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
     tag: "blog"
     text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+=======
+- link: "https://app.datadoghq.com/release-notes?category=Incident%20Management"
+  tag: "Release Notes"
+  text: "Check out the latest Incident Management releases! (App login required)."
+- link: "dashboards/querying/#incident-management-analytics"
+  tag: "Documentation"
+  text: "Incident Management Analytics"
+- link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+  tag: 'Blog'
+  text: 'More efficient pair programming with Datadog CoScreen'
+- link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
+  tag: 'Blog'
+  text: 'Best practices for writing incident postmortems'
+>>>>>>> f01fe9ced4 (Add alias for incident management docs)
 ---
 
 {{< site-region region="gov" >}}

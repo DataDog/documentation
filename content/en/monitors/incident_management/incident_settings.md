@@ -4,6 +4,7 @@ kind: documentation
 description: Configure and customize your Incident Management experience
 aliases:
   - /monitors/incident_management/notification_rules
+- /monitors/incident_management/incident_settings
 ---
 
 ## Overview
