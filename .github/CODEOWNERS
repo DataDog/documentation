@@ -52,6 +52,7 @@ content/en/tracing/trace_collection/dd_libraries/android.md    @Datadog/rum-mobi
 
 # Mobile SDK
 content/en/real_user_monitoring/android/                       @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/error_tracking/android.md      @Datadog/rum-mobile @DataDog/documentation
 
 # Browser SDK
 content/en/real_user_monitoring/browser/                       @Datadog/rum-browser @DataDog/documentation
