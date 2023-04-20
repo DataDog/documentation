@@ -1,8 +1,8 @@
 ---
+title: iOS Crash Reporting and Error Tracking
+kind: documentation
 aliases:
 - /real_user_monitoring/ios/crash_reporting/
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/crash_reporting.md
 description: Set up Error Tracking for your iOS projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
@@ -14,8 +14,7 @@ further_reading:
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
-kind: documentation
-title: iOS Crash Reporting and Error Tracking
+
 ---
 ## Overview
 
