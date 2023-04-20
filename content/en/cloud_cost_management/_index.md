@@ -194,7 +194,12 @@ The rule stops executing for each resource, once a first match is found. For exa
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
-**Note**: If you are a US3 customer, you likely used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+{{% site-region region="us3" %}}
+**Note**: If you are a US3 customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+
+[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]: /integrations/azure/?tab=azurecliv20#setup
+{{% /site-region %}}
 
 ### Generate cost exports
 
@@ -211,7 +216,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
   
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
 
-5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, we recommend storing them in one subscription's storage account. 
+5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. 
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
@@ -249,7 +254,7 @@ You can visualize your ingested data using the following cost types:
 | Cost Type            | Description           |
 | -------------------- | --------------------- |
 | `azure.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis).|
-| `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate chargetypes.|
+| `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate charge types.|
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
