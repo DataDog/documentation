@@ -135,7 +135,7 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][3] in the **Starting URL** and **Advanced Options** of your browser test detail, as well as in your test recording to define local variables. To display a list of available variables, type `{{` in the desired field.
+You can use the [global variables defined in **Settings**][3] in the **Starting URL** and **Advanced Options** of your browser test detail, as well as in your test recording. To display a list of available variables, type `{{` in the desired field.
 
 {{< img src="synthetics/browser_tests/recording_global_variable.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
 
