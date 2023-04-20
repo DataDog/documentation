@@ -19,7 +19,7 @@ further_reading:
 
 Exclusion filters provide fine-grained control over your CI Visibility budget by allowing you to define one or more conditions by which to exclude specific events from being processed by Datadog.
 
-**Compatibility**
+### Compatibility
 Filters are available for Pipeline Visibility.
 
 ## Adding an exclusion filter
@@ -72,17 +72,12 @@ A toggle on the right hand side of each filter allows you to enable and disable 
 
 **Note**: In most scenarios, filters are applied to ingested data within <1 second (p95) of being enabled. However, it is possible that an enabled filter takes up to a few minutes to take effect.
 
-
-## Example quality checks
-#### Application performance
-You can use [APM monitors][6] to ensure that your application’s error rate and/or average latency are below certain thresholds prior to deployment.  
-
-## Updating filters
+### Updating filters
 You can rename a filter or modify the query for an exclusion filter at any time within the **Ingestion Settings** page.
 
 {{< img src="ci/exclusion-filter-edit.png" alt="Ingestion control edit exclusion filter button" style="width:90%;">}}
 
-## Deleting filters
+### Deleting filters
 You can delete a filter by clicking on the deletion icon. 
 
 {{< img src="ci/exclusion-filter-delete.png" alt="Ingestion control delete exclusion filter button" style="width:90%;">}}
