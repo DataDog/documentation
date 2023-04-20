@@ -121,7 +121,7 @@ In addition to default attributes, you can add user-related data to all RUM even
 <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
-You can [enrich your RUM event data with feature flags][6] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
 
 ## Event-specific metrics and attributes
 
@@ -159,7 +159,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
 ### View timing metrics
-
+**Note**: View timing metrics include time that a page is open in the background.
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

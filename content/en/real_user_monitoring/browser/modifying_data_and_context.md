@@ -22,10 +22,6 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Enrich your RUM data with feature flags and get visibility into performance monitoring and behavioral changes. <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
-{{< /callout >}}
-
 ## Overview
 
 There are various ways you can modify the [data collected][1] by RUM, to support your needs for:
@@ -155,7 +151,7 @@ For more information, see the [Enrich and control RUM data guide][14].
 
 ### Enrich RUM events
 
-Along with attributes added with the [Global Context API](#global-context), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
+Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -213,6 +209,13 @@ The RUM Browser SDK ignores:
 
 - Attributes added outside of `event.context`
 - Modifications made to a RUM view event context
+
+### Enrich RUM events with feature flags
+{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+<a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
+{{< /callout >}}
+
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
 
 ### Modify the content of a RUM event
 

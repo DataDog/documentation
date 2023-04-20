@@ -867,6 +867,14 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 2
+  - name: Linux
+    url: serverless/azure_app_services/azure_app_services_linux
+    parent: serverless_app_services
+    weight: 201
+  - name: Windows
+    url: serverless/azure_app_services/azure_app_services_windows
+    parent: serverless_app_services
+    weight: 202
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
@@ -889,9 +897,15 @@ main:
     weight: 6
   - name: Cloud Cost
     url: cloud_cost_management/
+    identifier: cloud_cost_top_level
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: Container Cost Allocation
+    url: cloud_cost_management/container_cost_allocation
+    parent: cloud_cost_top_level
+    identifier: container_cost_allocation
+    weight: 1
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -6086,6 +6100,32 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 16
+  - name: Get a finding
+    url: '#get-a-finding'
+    identifier: security-monitoring-get-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetFinding
+      unstable:
+        - v2
+      order: 2
+  - name: List findings
+    url: '#list-findings'
+    identifier: security-monitoring-list-findings
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListFindings
+      unstable:
+        - v2
+      order: 1
   - name: Change the triage state of a security signal
     url: '#change-the-triage-state-of-a-security-signal'
     identifier: security-monitoring-change-the-triage-state-of-a-security-signal

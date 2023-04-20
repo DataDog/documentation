@@ -324,7 +324,7 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 ## Trace client and Agent configuration
 
-There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
+There are additional configurations possible for both the tracing client and Datadog Agent for context propagation, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
 ### Propagating context with headers extraction and injection
 
@@ -332,7 +332,7 @@ You can configure the propagation of context for distributed traces by injecting
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page or in [Ignoring Unwanted Resources][10].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][10] page or in [Ignoring Unwanted Resources][11].
 
 ## Further Reading
 

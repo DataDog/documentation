@@ -74,7 +74,7 @@ To learn more, see the [search syntax][1] documentation.
 
 {{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
 
-Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source :
+Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
 * **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 * **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
@@ -211,6 +211,12 @@ The top of the sidepanel displays common source and destination tags shared by t
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
+### Security
+
+The **Security** tab highlights potential network threats and findings detected by [Cloud Workload Security][6] and [Cloud Security Posture Management][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+
+<div class="alert alert-warning">Network threat detections is in private beta. Fill out this <a href="https://forms.gle/zjfbxB7Cqjxj5R5h7">form</a> to request access.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -220,3 +226,6 @@ The top of the sidepanel displays common source and destination tags shared by t
 [3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /network_monitoring/performance/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
+[6]: /security/cloud_workload_security/
+[7]: /security/cspm/
+[8]: /security/detection_rules/
