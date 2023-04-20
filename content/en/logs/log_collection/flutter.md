@@ -105,7 +105,7 @@ logger.removeAttribute("user-status")
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: https://docs.datadoghq.com/real_user_monitoring/flutter/setup
+[2]: /real_user_monitoring/flutter/setup
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/LoggingConfiguration-class.html
-[4]: https://docs.datadoghq.com/getting_started/tagging/
+[4]: /getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html

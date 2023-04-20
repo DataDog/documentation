@@ -37,5 +37,5 @@ Most Flutter mobile vitals are powered by native Datadog iOS and Android SDKs fo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/mobile_vitals/
-[2]: https://docs.datadoghq.com/real_user_monitoring/android/mobile_vitals/
+[1]: /real_user_monitoring/ios/mobile_vitals/
+[2]: /real_user_monitoring/android/mobile_vitals/

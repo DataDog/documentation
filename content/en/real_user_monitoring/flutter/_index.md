@@ -76,9 +76,9 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens 
-[3]: https://docs.datadoghq.com/real_user_monitoring/flutter/#setup
+[2]: /account_management/api-app-keys/#client-tokens 
+[3]: /real_user_monitoring/flutter/#setup
 [4]: https://pub.dev/packages/datadog_flutter_plugin
 [5]: https://pub.dev/packages/datadog_tracking_http_client
-[6]: https://docs.datadoghq.com/serverless/distributed_tracing
-[7]: https://docs.datadoghq.com/real_user_monitoring/flutter/data_collected/
+[6]: /serverless/distributed_tracing
+[7]: /real_user_monitoring/flutter/data_collected/

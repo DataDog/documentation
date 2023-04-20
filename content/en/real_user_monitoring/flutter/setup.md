@@ -150,6 +150,6 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[4]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/flutter
+[3]: /account_management/api-app-keys/#client-tokens
+[4]: /real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
