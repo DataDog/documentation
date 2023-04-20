@@ -19,10 +19,6 @@ further_reading:
     text: "Learn about RUM Dashboards"
 ---
 
-{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
-{{< /callout >}}
-
 ## Overview
 
 RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
