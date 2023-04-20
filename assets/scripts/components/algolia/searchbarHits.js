@@ -90,9 +90,11 @@ const renderHits = (renderOptions, isFirstRender) => {
                 const hit = getHitData(item);
                 const displayContent = truncateContent(hit.content, 145);
                 let cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
+                console.log(basePathName, hit.relpermalink, cleanRelpermalink);
                 if(hit.relpermalink.startsWith(basePathName)) {
                   cleanRelpermalink = cleanRelpermalink.replace(basePathName, '/');
                 }
+                console.log(cleanRelpermalink);
 
                 return `
                     <li class="ais-Hits-item">
