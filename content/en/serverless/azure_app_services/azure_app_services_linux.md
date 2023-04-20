@@ -15,6 +15,7 @@ This instrumentation method provides the following additional monitoring capabil
 The solution uses the startup command setting and Application Settings for Linux Azure App Service to instrument the application and manage its configuration. 
 
 ### Setup
+#### Application settings
 To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings. 
 
 {{< img src="serverless/azure_app_service/storms-nodejs.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP."  style="width:80%;" >}}
@@ -24,15 +25,60 @@ To instrument your application, begin by adding the following key-value pairs un
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www`.
 
+### Identifying your startup command
+
+Linux Azure App Service Web Apps built using the code deployment option on built-in runtimes depend on a startup command that varies by language. The default values are outlined in [Azure's documentation][7]. Examples are included below. 
+
+Set these values in the `DD_START_APP` environment variable. Examples below are for an application named `datadog-demo`, where relevant.
+
+| Runtime | `DD_START_APP` Example Value | Description
+| ---- | --- | --- |
+| Node.js | `node ./bin/www` | The Node PM2 configuration file, or your script file |
+| .NET Core | `dotnet datadog-demo.dll` | Run a .dll file that uses your Web App name by default |
+|PHP - Laravel | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | optional |
+| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Optional |
+| Java SE | `java -jar /home/site/wwwroot/datadog-demo.jar --server.port=80` | The command to start your JAR app |
+| Tomcat | `/home/site/deployments/tools/startup_script.sh` | The location of a script to perform any necessary configurations |
+
+[7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
+
+
 **Note**: The application restarts when new settings are saved. 
 
-Next, go to **General settings** and add the following to the **Startup Command** field:
+#### General settings
+
+{{< tabs >}}
+{{% tab "Node, .NET, PHP, Python" %}}
+Go to **General settings** and add the following to the **Startup Command** field:
 
 ```
 curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datadog_wrapper | bash
 ```
 
-{{< img src="serverless/azure_app_service/startup-command.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command."  style="width:80%;" >}}
+{{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command."  style="width:80%;" >}}
+{{% /tab %}}
+{{% tab "Java" %}}
+Download the [`datadog_wrapper`][8] file from the releases and upload it to your application with the Azure CLI command:
+
+```
+  az webapp deploy --resource-group <group-name> --name <app-name> --src-path <path-to-datadog-wrapper> --type=startup
+```
+
+Alternatively, you can upload this script as part of your application and set the startup command in general settings as its location (for example, `/home/site/wwwroot/datadog_wrapper`.)
+
+If you are already using a startup script, add the following curl command to the end of your script:
+
+```
+ curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datadog_wrapper | bash
+```
+
+[8]: https://github.com/DataDog/datadog-aas-linux/releases
+{{% /tab %}}
+{{< /tabs >}}
+
+
+
+
 
 
 ### Viewing traces
