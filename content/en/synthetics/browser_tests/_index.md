@@ -230,4 +230,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [13]: /account_management/rbac#custom-roles
 [14]: /account_management/rbac/#create-a-custom-role
 [15]: /continuous_testing/testing_tunnel
-[16]: /synthetics/guide/browser-tests-fido2
+[16]: /synthetics/guide/browser-tests-passkeys
