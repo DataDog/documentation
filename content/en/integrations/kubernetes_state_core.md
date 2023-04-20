@@ -287,7 +287,7 @@ datadog:
 : The time in seconds since the creation of the node. Tags:`node`.
 
 `kubernetes_state.container.terminated`
-: Describes whether the container is currently in terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.cpu_limit`
 : The value of CPU limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
@@ -314,22 +314,22 @@ datadog:
 : The number of container restarts per container. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.running`
-: Describes whether the container is currently in running state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is currently in a running state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.waiting`
-: Describes whether the container is currently in waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is currently in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is currently in waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is currently in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is currently in terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is currently in waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is currently in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is currently in terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.crd.count`
 : Number of custom resource definition.
@@ -511,7 +511,7 @@ datadog:
 `kubernetes_state.job.completion.failed`
 : The job has failed its execution. Tags:`kube_job` or `kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
 
-`kubernetes_state.job.duration
+`kubernetes_state.job.duration`
 : Time elapsed between the start and completion time of the job, or the current time if the job is still running. Tags:`kube_job` `kube_namespace` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.resourcequota.<resource>.limit`
