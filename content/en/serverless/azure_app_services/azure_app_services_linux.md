@@ -33,14 +33,15 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 
 | Runtime | `DD_START_APP` Example Value | Description
 | ---- | --- | --- |
-| Node.js | `node ./bin/www` | The Node PM2 configuration file, or your script file |
+| Node.js | `node ./bin/www` | Run the [Node PM2 configuration file][12], or your script file |
 | .NET Core | `dotnet datadog-demo.dll` | Run a .dll file that uses your Web App name by default |
-|PHP - Laravel | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | optional |
-| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Optional |
+| PHP - Laravel | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Optional custom startup |
+| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Optional startup script|
 | Java SE | `java -jar /home/site/wwwroot/datadog-demo.jar --server.port=80` | The command to start your JAR app |
 | Tomcat | `/home/site/deployments/tools/startup_script.sh` | The location of a script to perform any necessary configurations |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
+[12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
 
 
 **Note**: The application restarts when new settings are saved. 
@@ -76,11 +77,6 @@ If you are already using a startup script, add the following curl command to the
 {{% /tab %}}
 {{< /tabs >}}
 
-
-
-
-
-
 ### Viewing traces
 
 After the application has been instrumented and restarted successfully, traces are from the application within. You can access from the [Azure Serverless view][3], or in the [APM Service page][4] of your Datadog app.
@@ -91,8 +87,11 @@ To enable custom metrics for your application with DogStatsD, add  `DD_CUSTOM_ME
 
 To configure your application to submit metrics, follow the appropriate steps for your runtime.
 
+- [Java][9]
 - [Node][5]
 - [.NET][6]
+- [PHP][10]
+- [Python][11]
 
 [1]: /developers/dogstatsd
 [2]: /getting_started/site/#access-the-datadog-site
@@ -100,3 +99,6 @@ To configure your application to submit metrics, follow the appropriate steps fo
 [4]: /tracing/services/service_page/
 [5]: https://github.com/brightcove/hot-shots
 [6]: developers/dogstatsd/?tab=hostagent&code-lang=dotnet#code
+[9]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=java
+[10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
+[11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
