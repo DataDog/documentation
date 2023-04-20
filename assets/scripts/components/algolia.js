@@ -7,12 +7,6 @@ import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
 import { debounce } from '../utils/debounce';
 
-const { env } = document.documentElement.dataset;
-const pageLanguage = getPageLanguage();
-const algoliaConfig = getConfig(env).algoliaConfig;
-const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
-const indexName = algoliaConfig.index;
-
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
 
@@ -24,16 +18,22 @@ function getPageLanguage() {
     return 'en';
 }
 
-function sendSearchRumAction(query) {
-    if (window.DD_RUM && query !== '') {
+function sendSearchRumAction(searchQuery) {
+    if (window.DD_RUM && searchQuery !== '') {
         window.DD_RUM.addAction('userSearch', {
-            query,
+            query: searchQuery,
             page: window.location.pathname
         })
     }
 }
 
-function loadInstantSearch(pageWasAsyncLoaded) {
+const { env } = document.documentElement.dataset;
+const pageLanguage = getPageLanguage();
+const algoliaConfig = getConfig(env).algoliaConfig;
+const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
+const indexName = algoliaConfig.index;
+
+function loadInstantSearch(currentPageWasAsyncLoaded) {
     const searchBoxContainerContainer = document.querySelector('.searchbox-container');
     const searchBoxContainer = document.querySelector('#searchbox');
     const hitsContainerContainer = document.querySelector('.hits-container');
@@ -48,7 +48,7 @@ function loadInstantSearch(pageWasAsyncLoaded) {
     let hitComponent = searchbarHits;
 
     // If asyncLoad is true, we're not on the search page anymore
-    if (pageWasAsyncLoaded === true) {
+    if (currentPageWasAsyncLoaded === true) {
         searchResultsPage = false;
     }
 
@@ -153,7 +153,7 @@ function loadInstantSearch(pageWasAsyncLoaded) {
             const handleSearchbarKeydown = (e) => {
                 if (e.code === 'Enter') {
                     e.preventDefault();
-                    sendSearchRumAction(search.helper.state.query)
+                    sendSearchRumAction(search.helper.state.query);
 
                     // Give query-url sync 500ms to update
                     setTimeout(() => {
@@ -164,22 +164,24 @@ function loadInstantSearch(pageWasAsyncLoaded) {
 
             const handleSearchbarSubmitClick = () => {
                 if (aisSearchBoxInput.value) {
-                    sendSearchRumAction(search.helper.state.query)
+                    sendSearchRumAction(search.helper.state.query);
                     window.location.pathname = searchPathname;
                 }
             };
 
-            const handleOutsideSearchbarClick = (e) => {
-                e.preventDefault()
+            const handleOutsideSearchbarClick = (e) => {                
+                // Intercept user clicks within algolia dropdown to send custom RUM event before redirect.
+                if (hitsContainer.contains(e.target)) {
+                    e.preventDefault()
+                }
+                
                 let target = e.target;
 
                 do {
-                    if (target === searchBoxContainerContainer) {
-                        return;
-                    }
+                    if (target === searchBoxContainerContainer) return;
 
                     target = target.parentNode;
-                    
+
                     if (target && target.href) {
                         sendSearchRumAction(search.helper.state.query)
                         window.history.pushState({}, '', target.href)
@@ -194,12 +196,10 @@ function loadInstantSearch(pageWasAsyncLoaded) {
             aisSearchBoxSubmit.addEventListener('click', handleSearchbarSubmitClick);
             document.addEventListener('click', handleOutsideSearchbarClick);
         } else {
-            const hitsContainer = document.getElementById('hits');
-
             hitsContainer.addEventListener('click', (e) => {
                 e.preventDefault()
                 let target = e.target
-                
+
                 do {
                     if (target.href) {
                         sendSearchRumAction(search.helper.state.query)
