@@ -241,6 +241,15 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
 
+### Cost types
+
+You can visualize your ingested data using the following cost types:
+
+| Cost Type            | Description           |
+| -------------------- | --------------------- |
+| `azure.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis).|
+| `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate chargetypes.|
+
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
