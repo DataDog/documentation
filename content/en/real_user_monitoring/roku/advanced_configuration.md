@@ -135,11 +135,11 @@ In addition to the default attributes captured by the SDK automatically, you can
     m.global.setField("datadogContext", { foo: "Some value", bar: 123})
 ```
 
+[1]: https://app.datadoghq.com/rum/application/create
+[2]: /real_user_monitoring/roku
+
 {{< /site-region >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/roku
