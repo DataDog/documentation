@@ -2,6 +2,9 @@
 title: Monitoring Page Performance
 kind: documentation
 further_reading:
+  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+    tag: "Learning Center"
+    text: "Interactive Lab: Core Web Vitals"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
