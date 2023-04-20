@@ -37,8 +37,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 | .NET Core | `dotnet datadog-demo.dll` | Runs a .dll file that uses your Web App name by default |
 | PHP | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Copies script to correct location and starts application |
 | Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Custom [startup script][13]. This example shows a Gunicorn command for starting a Django app. |
-| Java SE | `java -jar /home/site/wwwroot/datadog-demo.jar --server.port=80` | The command to start your JAR app |
-| Tomcat | `/home/site/deployments/tools/startup_script.sh` | The location of a script to perform any necessary configurations |
+| Java | `java -jar /home/site/wwwroot/datadog-demo.jar` | The command to start your app |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
