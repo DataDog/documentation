@@ -889,9 +889,15 @@ main:
     weight: 6
   - name: Cloud Cost
     url: cloud_cost_management/
+    identifier: cloud_cost_top_level
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: Container Cost Allocation
+    url: cloud_cost_management/container_cost_allocation
+    parent: cloud_cost_top_level
+    identifier: container_cost_allocation
+    weight: 1
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
