@@ -96,12 +96,21 @@ To configure your application to submit metrics, follow the appropriate steps fo
 - [PHP][10]
 - [Python][11]
 
+## Troubleshooting
+
+If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+
+{{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'."  style="width:100%;" >}}
+
+Share the content of the **Log stream** with [Datadog Support][14].
+
 [1]: /developers/dogstatsd
 [2]: /getting_started/site/#access-the-datadog-site
 [3]: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
 [4]: /tracing/services/service_page/
 [5]: https://github.com/brightcove/hot-shots
-[6]: developers/dogstatsd/?tab=hostagent&code-lang=dotnet#code
+[6]: /developers/dogstatsd/?tab=hostagent&code-lang=dotnet#code
 [9]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=java
 [10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
 [11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
+[14]: /help
