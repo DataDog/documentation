@@ -22,7 +22,8 @@ function sendSearchRumAction(searchQuery) {
     if (window.DD_RUM && searchQuery !== '') {
         window.DD_RUM.addAction('userSearch', {
             query: searchQuery,
-            page: window.location.pathname
+            page: window.location.pathname,
+            lang: getPageLanguage()
         })
     }
 }
@@ -196,6 +197,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
             aisSearchBoxSubmit.addEventListener('click', handleSearchbarSubmitClick);
             document.addEventListener('click', handleOutsideSearchbarClick);
         } else {
+            // Handle sending search RUM events from click events on the search results page.
             hitsContainer.addEventListener('click', (e) => {
                 e.preventDefault()
                 let target = e.target
