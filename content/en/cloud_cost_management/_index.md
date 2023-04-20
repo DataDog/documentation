@@ -194,11 +194,11 @@ The rule stops executing for each resource, once a first match is found. For exa
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
-**Note**: If you are a US3 customer, you likely used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog. To support Cloud Cost Management, you need to [create an App Registration][4]. 
+**Note**: If you are a US3 customer, you likely used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog. To support Cloud Cost Management, you need to [create an App Registration][2]. 
 
 ### Generate cost exports
 
-1. Navigate to [Exports][2] under Azure portal's *Cost Management + Billing*.
+1. Navigate to [Exports][3] under Azure portal's *Cost Management + Billing*.
 2. Select the export scope. **Note:** The scope must be *subscription* or *resource group*.
 3. Once the scope is selected, click **Add**.
 
