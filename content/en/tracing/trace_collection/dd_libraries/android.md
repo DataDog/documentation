@@ -704,12 +704,12 @@ The data on disk will automatically be discarded if it gets too old to ensure th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/tracing/visualization/#trace
+[1]: /tracing/visualization/#trace
 [2]: https://github.com/DataDog/dd-sdk-android
-[3]: https://docs.datadoghq.com/tracing/visualization/#spans
-[4]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[5]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
+[3]: /tracing/visualization/#spans
+[4]: /account_management/api-app-keys/#client-tokens
+[5]: /account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/
-[7]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=us
+[7]: /real_user_monitoring/android/?tab=us
 [8]: https://github.com/opentracing-contrib/java-rxjava
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3

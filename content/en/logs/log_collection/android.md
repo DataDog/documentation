@@ -473,10 +473,10 @@ If your existing codebase is using Timber, you can forward all those logs to Dat
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android
-[2]: https://docs.datadoghq.com/account_management/api-app-keys/#client-tokens
-[3]: https://docs.datadoghq.com/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/logs/processing/attributes_naming_convention/
-[5]: https://docs.datadoghq.com/tagging/
-[6]: https://docs.datadoghq.com/real_user_monitoring/android/?tab=us
-[7]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[2]: /account_management/api-app-keys/#client-tokens
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /logs/processing/attributes_naming_convention/
+[5]: /tagging/
+[6]: /real_user_monitoring/android/?tab=us
+[7]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [8]: https://source.android.com/security/app-sandbox
