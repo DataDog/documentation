@@ -66,7 +66,7 @@ After understanding analytics, the next step is to understand the action in the 
 
 ## Troubleshooting
 
-### I am looking at a heatmap for a given view, but it’s showing me an unexpected page.
+### I am looking at a heatmap for a given view, but it's showing me an unexpected page.
 
 Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
 

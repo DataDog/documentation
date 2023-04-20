@@ -13,6 +13,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  tag: "blog"
+  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
 ## Overview

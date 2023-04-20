@@ -292,7 +292,7 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     ```
 
 3. [Restart the Agent][5].
-4. Run the [Agent’s status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][7] to extract log attributes. Use the [Log Explorer][8] to view and troubleshoot your logs.
 

@@ -26,7 +26,7 @@ further_reading:
 
 Application Security Management (ASM) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.
 
-However, there are situations where you may want to customize a rule based on your environment or workload. For example, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn’t operate.
+However, there are situations where you may want to customize a rule based on your environment or workload. For example, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
 
 Another example is customizing a rule to exclude an internal security scanner. ASM detects its activity as expected. However, you may not want to be notified of its regularly occurring scan.
 
@@ -51,10 +51,6 @@ Optionally, define a unique count and signal grouping. Count the number of uniqu
 
 Use the preview section to see which ASM traces match the search query. You can also add additional queries with the Add Query button.
 
-##### Advanced options
-
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a query that excludes `Service` under the **Never trigger a signal when:** option.
-
 ##### Joining queries
 
 Joining queries to span a timeframe can increase the confidence or severity of the Security Signal. For example, to detect a successful attack, both successful and unsuccessful triggers can be correlated for a service.
@@ -67,7 +63,13 @@ Query 1: `@appsec.security_activity:business_logic.users.login.success @actor.ip
 
 Query 2: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
-In this instance, the joined queries technically hold the same attribute value: the value must be the same for the case to be met. If a `group by` value doesn’t exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+In this instance, the joined queries technically hold the same attribute value: the value must be the same for the case to be met. If a `group by` value doesn't exist, the case will never be met. A Security Signal is generated for each unique `group by` value when a case is matched.
+
+### Exclude benign activity with suppression queries
+
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a service is triggering a signal, but the action is benign and you no longer want signals triggered from this service, create a query that excludes `service`.
 
 ### Set a rule case
 
