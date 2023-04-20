@@ -1,6 +1,6 @@
 
 extends: existence
-message: "Avoid en dashes ('–'). For hyphenated words, use a hyphen ('-').\n For parenthesis, use an em dash ('—')."
+message: "Avoid en dashes ('–'). For hyphenated words, use a hyphen ('-').\nFor parenthesis, use an em dash ('—')."
 link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#dashes"
 nonword: true
 level: error
