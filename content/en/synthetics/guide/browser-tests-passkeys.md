@@ -18,7 +18,7 @@ further_reading:
 
 Passkeys (FIDO2) offer stronger security than the standard username and password tuple, and rely on cryptographic login credentials that are unique across every website. Passkeys never leave your user's devices and are never stored on a web application server. This security model eliminates the risks of phishing, all forms of password theft, and replay attacks.
 
-You can use Passkeys as a replacement for a username and password or as a second factor authentication. Synthetic Monitoring can now generate, store and use Passkeys to test your application’s Passkeys-based authentication modules and critical user journeys without disabling this critical security measure.
+You can use Passkeys as a replacement for a username and password or as a second factor authentication. Synthetic Monitoring can now generate, store and leverage Passkeys to test your application’s Passkeys-based authentication modules and critical user journeys without disabling this critical security measure.
 
 ## Create your Virtual Authenticator global variable
 
