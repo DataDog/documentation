@@ -96,7 +96,7 @@ Requires `dd-trace-php` version 0.71+.
 
 ### Link from a span to profiling data
 
-From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected span and the descended spans in the same service.
+From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
 
 The values on the left side is the time spent in that method call during the selected span. Depending on the runtime and language, this list of types varies:
 
@@ -109,7 +109,7 @@ The values on the left side is the time spent in that method call during the sel
 - **Monitor enter** shows the time a thread is blocked on a lock.
 - **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
 
-Clicking on the plus `+` will expand the stack trace to that method **in reverse order**. Hovering over the value will show what percentage of time is explained by which category.
+Clicking on the plus `+` expands the stack trace to that method **in reverse order**. Hovering over the value shows what percentage of time is explained by which category.
 
 ### Viewing a profile from a trace
 
