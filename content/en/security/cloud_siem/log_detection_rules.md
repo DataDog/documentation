@@ -30,7 +30,7 @@ further_reading:
 
 ## Overview
 
-To create a log detection rule in Datadog, navigate to the [**Detection Rules** page][6] and click **New Rule**.
+To create a log detection rule in Datadog, navigate to the [Detection Rules page][1] and click **New Rule**.
 
 ## Rule Type
 
@@ -56,7 +56,7 @@ Impossible travel detects access from different locations whose distance is grea
 
 ### Third Party
 
-Third Party allows you to forward alerts from an outside vendor or application. It is available only for the [AWS Guardduty finding][5] rule. You can update the rule with suppression queries and who to notify when a signal is generated.
+Third Party allows you to forward alerts from an outside vendor or application. You can update the rule with suppression queries and who to notify when a signal is generated.
 
 ## Define a search query
 
@@ -287,16 +287,12 @@ The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
-    - [Rule editor][4] for that specific rule
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][4] in the UI.
+    - [Rule editor][2] for that specific rule
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][2] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/variables/
-[2]: /security/notifications/variables/#template-variables
-[3]: /security/default_rules/#cat-cloud-siem-log-detection
-[4]: /security/detection_rules/#rule-and-generated-signal-options
-[5]: https://app.datadoghq.com/security/configuration/siem/rules/view/nkq-b6q-h8c?query=type%3A%28log_detection%20OR%20signal_correlation%29%20guardduty&product=siem
-[6]: https://app.datadoghq.com/security/configuration/siem/rules
+[1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /security/detection_rules/#rule-and-generated-signal-options
