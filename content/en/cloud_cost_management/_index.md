@@ -199,7 +199,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 ### Generate cost exports
 
 1. Navigate to [Exports][3] under Azure portal's *Cost Management + Billing*.
-2. Select the export scope. **Note:** The scope must be *subscription* or *resource group*.
+2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. Once the scope is selected, click **Add**.
 
 {{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope"  >}}
@@ -211,7 +211,7 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
   
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
 
-5. Choose a storage account, container, and directory for the exports. The billing exports must be stored in the subscription the export is for.
+5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, we recommend storing them in one subscription's storage account. 
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
@@ -232,6 +232,7 @@ Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Da
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
 ### Configure Cost Management Reader access
+**Note:** You do not need to configure this access if your scope is **Billing Account**.
 
 1. Navigate to your [subscriptions][4] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
