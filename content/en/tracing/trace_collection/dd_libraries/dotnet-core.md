@@ -356,9 +356,9 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 
 #### IIS
 
-After installing the MSI, no additional configuration is needed to automatically instrument your IIS sites. If you'd like to set additional environment variables that will be inherited by all IIS sites, perform the following steps:
+After installing the MSI, no additional configuration is needed to automatically instrument your IIS sites. To set additional environment variables that are inherited by all IIS sites, perform the following steps:
 
-1. Open the Registry Editor, find the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` key, and add environment variables one-per-line.
+1. Open the Registry Editor, find the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` key, and add the environment variables, one per line.
 2. Run the following commands to restart IIS:
    ```cmd
    net stop /y was
