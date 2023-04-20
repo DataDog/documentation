@@ -36,7 +36,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 | Node.js | `node ./bin/www` | Run the [Node PM2 configuration file][12], or your script file |
 | .NET Core | `dotnet datadog-demo.dll` | Run a .dll file that uses your Web App name by default |
 | PHP - Laravel | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Optional custom startup |
-| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Optional startup script|
+| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Custom startup script. This example shows a Gunicorn command for starting a Django app. |
 | Java SE | `java -jar /home/site/wwwroot/datadog-demo.jar --server.port=80` | The command to start your JAR app |
 | Tomcat | `/home/site/deployments/tools/startup_script.sh` | The location of a script to perform any necessary configurations |
 
