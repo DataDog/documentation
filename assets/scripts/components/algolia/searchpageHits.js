@@ -23,21 +23,24 @@ const renderHits = (renderOptions, isFirstRender) => {
             .map((item) => {
                 const hit = getHitData(item);
                 const displayContent = truncateContent(hit.content, 100);
-                const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
+                let cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
+                if(hit.relpermalink.startsWith(basePathName)) {
+                  cleanRelpermalink = cleanRelpermalink.replace(basePathName, '/');
+                }
 
                 return `
                     <li class="ais-Hits-item">
                         <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
                             <div class="ais-Hits-row">
                                 <p class="ais-Hits-category">${hit.category}</p>
-                                
+
                                 <span class="ais-Hits-category-spacer">&#187;</span>
 
                                 ${
                                     hit.subcategory === hit.title
                                         ? `<p class="ais-Hits-title">${hit.title}</p>`
                                         : `<p class="ais-Hits-subcategory">${hit.subcategory}</p><span class="ais-Hits-category-spacer">&#187;</span><p class="ais-Hits-title">${hit.title}</p>`
-                                }   
+                                }
                             </div>
                             <div class="ais-Hits-row">
                                 <p class="ais-Hits-content">${displayContent}</p>
