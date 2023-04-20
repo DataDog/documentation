@@ -28,7 +28,7 @@ kind: faq
 
 Example output after successful installation:
 
-![rasberypi_install](https://github.com/DataDog/documentation/blob/master/static/images/developers/faq/rasberypi_install.png)
+![RaspberryPI Install](https://raw.githubusercontent.com/DataDog/documentation/master/static/images/developers/faq/rasberypi_install.png)
 
 The Agent runs in the foreground. Some users find benefit in creating a `systemd` service for the Agent like this:
 
@@ -57,7 +57,7 @@ The Datadog Agent is installed in the working directory where you ran the instal
 
 Example of metrics being ingested from your Raspberry PI device:
 
-![raspberry_dashboard](https://github.com/DataDog/documentation/blob/master/static/images/developers/faq/rasberry_dashboard.png)
+![RaspberryPI Dashboard](https://raw.githubusercontent.com/DataDog/documentation/master/static/images/developers/faq/rasberry_dashboard.png)
 
 **Note**: Datadog does not officially support Raspbian.
 
