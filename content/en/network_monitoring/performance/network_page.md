@@ -215,7 +215,7 @@ The top of the sidepanel displays common source and destination tags shared by t
 
 The **Security** tab highlights potential network threats and findings detected by [Cloud Workload Security][6] and [Cloud Security Posture Management][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
 
-<div class="alert alert-info">Network threat detections is in private beta. Fill out this <a href="https://forms.gle/zjfbxB7Cqjxj5R5h7">form</a> to request access.</div>
+<div class="alert alert-warning">Network threat detections is in private beta. Fill out this <a href="https://forms.gle/zjfbxB7Cqjxj5R5h7">form</a> to request access.</div>
 
 ## Further Reading
 
