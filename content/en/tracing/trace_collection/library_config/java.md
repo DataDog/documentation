@@ -13,7 +13,7 @@ further_reading:
       text: 'Explore your services, resources and traces'
     - link: "/tracing/trace_collection/trace_context_propagation/java/"
       tag: "Documentation"
-      text: "Propagating trace context"
+      text: "Propagating trace context with headers"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -395,7 +395,7 @@ Would produce the following result:
 See the [Java integration documentation][12] to learn more about Java metrics collection with JMX fetch.
 ### Headers extraction and injection
 
-For information about the using the following configuration options, see [Propagating Java Trace Context][13].
+For information about valid values and using the following configuration options, see [Propagating Java Trace Context][13].
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -447,5 +447,4 @@ Deprecated since version 1.9.0
 [10]: /agent/amazon_ecs/#create-an-ecs-task
 [11]: /tracing/compatibility_requirements/java#disabling-integrations
 [12]: /integrations/java/?tab=host#metric-collection
-[13]: https://github.com/openzipkin/b3-propagation
-[14]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /tracing/trace_collection/trace_context_propagation/java/
