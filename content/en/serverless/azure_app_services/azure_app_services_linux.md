@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads using the Node and .NET runtimes:
+This instrumentation method provides the following additional monitoring capabilities for Linux Azure App Service workloads:
 
 - Fully distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
@@ -12,15 +12,16 @@ This instrumentation method provides the following additional monitoring capabil
 - `Trace_ID` injection into application logs.
 - Support for submitting custom metrics using [DogStatsD][1].
 
-The solution uses the startup command setting and Application Settings for Linux Azure App Service to instrument the application and manage its configuration. 
+This solution uses the startup command setting and Application Settings for Linux Azure App Service to instrument the application and manage its configuration. Java, Node, .NET, PHP, and Python are supported.
 
 ### Setup
-#### Application settings
+#### Set application settings
 To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings. 
 
-{{< img src="serverless/azure_app_service/storms-nodejs.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP."  style="width:80%;" >}}
+{{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP."  style="width:80%;" >}}
 
 - `DD_API_KEY` is your Datadog API key.
+- `DD_CUSTOM_METRICS_ENABLED` (optional) enables [custom metrics](#custom-metrics).
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
 - `DD_START_APP` is the command used to start your application. For example, `node ./bin/www`.
@@ -46,7 +47,7 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 
 **Note**: The application restarts when new settings are saved. 
 
-#### General settings
+#### Set General Settings
 
 {{< tabs >}}
 {{% tab "Node, .NET, PHP, Python" %}}
@@ -56,7 +57,7 @@ Go to **General settings** and add the following to the **Startup Command** fiel
 curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datadog_wrapper | bash
 ```
 
-{{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command."  style="width:80%;" >}}
+{{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command."  style="width:100%;" >}}
 {{% /tab %}}
 {{% tab "Java" %}}
 Download the [`datadog_wrapper`][8] file from the releases and upload it to your application with the Azure CLI command:
@@ -79,7 +80,9 @@ If you are already using a startup script, add the following curl command to the
 
 ### Viewing traces
 
-After the application has been instrumented and restarted successfully, traces are from the application within. You can access from the [Azure Serverless view][3], or in the [APM Service page][4] of your Datadog app.
+When new Application Settings are saved, Azure restarts the application. However, if a startup command is added and saved, a restart may be required.
+
+After the application restarts, you can view traces by searching for the service name (`DD_SERVICE`) in the [APM Service page][4] of Datadog.
 
 ### Custom metrics
 
