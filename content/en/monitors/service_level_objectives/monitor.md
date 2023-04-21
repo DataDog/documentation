@@ -37,7 +37,7 @@ Under **Define the source**, select **Monitor Based**.
 
 In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list.
 
-If you’re only using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors.
+If you're only using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors.
 
 
 ### Set your SLO targets

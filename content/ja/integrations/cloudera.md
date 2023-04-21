@@ -25,7 +25,8 @@ author:
   name: Datadog
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
-categories: []
+categories:
+- クラウド
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md
 display_on_public_website: true
@@ -48,6 +49,7 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS

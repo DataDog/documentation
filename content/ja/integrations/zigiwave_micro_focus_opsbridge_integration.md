@@ -11,12 +11,10 @@ author:
   support_email: support@zigiwave.com
   vendor_id: zigiwave
 categories:
-- メトリクス
-- マーケットプレイス
-- コラボレーション
 - event management
-- モニタリング
 - インシデント
+- マーケットプレイス
+- メトリクス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -37,7 +35,7 @@ pricing:
   product_id: micro-focus-opsbridge-integration
   short_description: 接続された Datadog/MF OpsBridge インスタンス 1 対の月額ライセンス
   unit_price: 750.0
-public_title: OpsBridge インテグレーション
+public_title: OpsBridge
 short_description: Datadog と OpsBridge のノーコードインテグレーション
 supported_os:
 - linux
@@ -45,14 +43,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Event Management
+  - Category::Incidents
+  - Category::Marketplace
+  - Category::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Metrics
-  - Category::Marketplace
-  - Category::Collaboration
-  - Category::Event Management
-  - Category::Monitoring
-  - Category::Incidents
   configuration: README.md#Setup
   description: Datadog と OpsBridge のノーコードインテグレーション
   media:
@@ -73,7 +69,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: OpsBridge インテグレーション
+  title: OpsBridge
   uninstallation: README.md#Uninstallation
 ---
 

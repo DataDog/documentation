@@ -30,7 +30,7 @@ With Log Management, you can analyze and explore data in the Log Explorer, conne
 
 ### Server
 
-There are several [integrations][5] available to forward logs from your server to Datadog. Integrations use a log configuration block in their `conf.yaml` file, which is available in the `conf.d/` folder at the root of your Agent’s configuration directory, to forward logs to Datadog from your server.
+There are several [integrations][5] available to forward logs from your server to Datadog. Integrations use a log configuration block in their `conf.yaml` file, which is available in the `conf.d/` folder at the root of your Agent's configuration directory, to forward logs to Datadog from your server.
 
 ```yaml
 logs:
@@ -69,7 +69,7 @@ To begin collecting logs from a container service, follow the [in-app instructio
 
 ### Cloud
 
-You can forward logs from multiple cloud providers, such as AWS, Azure, and GCP, to Datadog. Each cloud provider has its own set of configuration instructions.
+You can forward logs from multiple cloud providers, such as AWS, Azure, and Google Cloud, to Datadog. Each cloud provider has its own set of configuration instructions.
 
 For example, ​AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. You can subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams.​
 

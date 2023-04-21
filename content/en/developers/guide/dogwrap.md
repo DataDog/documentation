@@ -22,7 +22,7 @@ To install from source:
 
 The minimum valid `dogwrap` command has the following layout:
 
-{{< site-region region="us,us3,us5,gov" >}}
+{{< site-region region="us,us3,us5,gov,ap1" >}}
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 ```

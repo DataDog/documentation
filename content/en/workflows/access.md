@@ -5,7 +5,6 @@ description: Access and authentication for Workflows
 aliases:
   - "/workflows/service_accounts"
 disable_toc: false
-is_beta: true
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
@@ -14,10 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "See the list of workflow actions"
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}}
 
 A few tools control access and authentication for workflows and their components.
 

@@ -28,7 +28,7 @@ further_reading:
       text: 'Compare and optimize your code with Datadog Profile Comparison.'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tag: 'Blog'
-      text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
+      text: "How we optimized our Akka application using Datadog's Continuous Profiler"
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
@@ -71,7 +71,7 @@ See [Profile Types][6] for descriptions of the kinds of profile data collected f
 
 ### Search profiles by tags
 
-[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
 
 {{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 

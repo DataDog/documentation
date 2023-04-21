@@ -22,13 +22,13 @@ Create and modify notification preferences within a notification rule to span ac
 
 View and search through all created Notification Rules on the **Notification Rules** page. Create, edit, clone, enable, disable, delete, or view Notification Rules created by users in your organization.
 
-{{< img src="security/notification-profiles-overview.png" alt="Notification Rules" style="width:100%;" >}}
+{{< img src="security/notification-profiles-overview2.png" alt="Notification Rules" style="width:100%;" >}}
 
 ## Create a notification rule
 
 To create a new notification rule, follow the instructions below.
 
-1. In Datadog, navigate to the [Notification Rules tab][1] in **Security** > **Setup & Configuration**.
+1. In Datadog, navigate to the [Notification Rules][1] tab.
 2. Click on the **+ New Notification Rule** button in the top right corner of the page.
 3. Input a name for your notification rule in the **Name** field.
 4. Define the logic for when this notification rule is triggered by conditions matching to security detection rule and/or security signal.
@@ -41,7 +41,7 @@ To create a new notification rule, follow the instructions below.
 6. A panel with a preview of rules matching the notification rule appears to the right, which helps indicate if the notification rule is too specific or broad.
 7. Click **Save and Activate** to save the notification rule. This automatically activates the notification rule and navigates you back to the main **Notification Rules** page.
 
-{{< img src="security/notification-profiles-setup.png" alt="Setup of a notification rule" style="width:100%;" >}}
+{{< img src="security/notification-profiles-setup2.png" alt="Setup of a notification rule" style="width:100%;" >}}
 
 If the notification rule is associated with a Security Detection Rule, you can view the rule's trigger conditions in the **Set severity and notifications** section in your rules.
 
