@@ -19,7 +19,8 @@ author:
   sales_email: david.byron@avast.com
   support_email: david.byron@avast.com
 categories:
-- network
+- キャッシュ
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md
 display_on_public_website: true
@@ -37,15 +38,16 @@ public_title: Unbound
 short_description: unbound メトリクスを収集する Datadog インテグレーション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: unbound メトリクスを収集する Datadog インテグレーション
   media: []
@@ -68,7 +70,7 @@ unbound サービスからメトリクスをリアルタイムに取得して、
 
 Unbound チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Unbound チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

@@ -18,11 +18,13 @@ To get started with heatmaps:
 
 - You must be on the latest version of the SDK (v4.20.0 or later)
 - Enable [Session Replay][1].
+- Set`trackUserInteractions: true` in the SDK initialization to enable action tracking.
 - While heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
 
 ```json
 datadogRum.init({
     ...
+    trackUserInteractions: true,
     enableExperimentalFeatures: ['clickmap']
 })
 ```
@@ -64,7 +66,7 @@ After understanding analytics, the next step is to understand the action in the 
 
 ## Troubleshooting
 
-### I am looking at a heatmap for a given view, but it’s showing me an unexpected page.
+### I am looking at a heatmap for a given view, but it's showing me an unexpected page.
 
 Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
 

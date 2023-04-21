@@ -27,9 +27,11 @@ Amazon Step Functions (States) では、ビジュアルなワークフローを�
 
 このインテグレーションを有効にすると、Datadog にすべての Step Functions メトリクスを表示できます。
 
+<div class="alert alert-warning">Datadog のネイティブ AWS Step Function モニタリングは、非公開ベータ版で利用可能です。この機能を試してみたい方は、カスタマーサクセスマネージャーに連絡するか、<a href="https://docs.google.com/forms/d/e/1FAIpQLScoePnzEw9nLhFpCsJTbWlXcShKBgTLNegTcIA4dEm_IbGAjA/viewform">フォーム</a>からリクエストしてください。</div>
+
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。次に、AWS/Datadog ロールのポリシードキュメントに以下のアクセス許可を追加します。
 

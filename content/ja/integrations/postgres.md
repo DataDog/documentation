@@ -42,6 +42,8 @@ author:
 categories:
 - data store
 - log collection
+- notification
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
 display_on_public_website: true
@@ -49,7 +51,7 @@ draft: false
 git_integration_title: postgres
 integration_id: postgres
 integration_title: Postgres
-integration_version: 13.3.0
+integration_version: 13.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -59,16 +61,18 @@ public_title: Postgres
 short_description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
+  - Category::通知
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
   media: []

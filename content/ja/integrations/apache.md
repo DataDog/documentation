@@ -37,7 +37,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
@@ -56,16 +55,15 @@ public_title: Apache
 short_description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
   media: []

@@ -11,6 +11,9 @@ further_reading:
   - link: "/tracing/metrics/runtime_metrics/dotnet/"
     tag: "Documentation"
     text: "Runtime metrics"
+  - link: "/tracing/trace_collection/trace_context_propagation/dotnet/"
+    tag: "Documentation"
+    text: "Propagating trace context"
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
@@ -202,7 +205,7 @@ Added in version `2.19.0`.<br>
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api,team:intake` <br>
+**Example**: `layer:api,team:intake,key:value` <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`
@@ -217,6 +220,16 @@ Added in version 1.17.0. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
+`DD_HTTP_SERVER_TAG_QUERY_STRING`
+: When set to `true`, the `http.url` includes query string parameters. You can find more details in [Redacting the query in the url][14].
+**Default**: `true`
+
+`DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, sets the max size of the querystring to report, before obfuscation. Set 0 for no limit in size<br>
+**Default**: `5000`
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
@@ -297,28 +310,6 @@ The following configuration variables are for features that are available for us
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
 **Default**: `true`
 
-### Headers extraction and injection
-
-The Datadog APM Tracer supports [B3][9] and [W3C (TraceParent)][10] headers extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The .NET Tracer supports the following styles:
-
-- W3C: `tracecontext` (`W3C` is deprecated)
-- Datadog: `Datadog`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
-- B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
-
-You can use the following environment variables to configure injection and extraction styles:
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext, Datadog, b3multi`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext, Datadog, b3multi`
-
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in the order of configured styles, and uses the first successful extracted value.
-
-Starting from version 2.22.0, the default injection style is `tracecontext, Datadog`, so the W3C context is used, followed by the Datadog headers. Prior to version 2.22.0, only the `Datadog` injection style is enabled.
-
 
 ## Further reading
 
@@ -334,3 +325,4 @@ Starting from version 2.22.0, the default injection style is `tracecontext, Data
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/configure_data_security/#redacting-the-query-in-the-url

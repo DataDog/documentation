@@ -20,7 +20,7 @@ There are three methods of deploying the Agent:
 
 These different methods present unique deployment challenges. Use this page as a starting point to resolve issues. If you continue to have trouble, reach out to [Datadog support][6] for further assistance. 
 
-For details on Agent release updates or changes, refer to Datadog’s [release notes][7].
+For details on Agent release updates or changes, refer to Datadog's [release notes][7].
 
 ## General issues
 

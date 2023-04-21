@@ -22,10 +22,6 @@ further_reading:
   text: "Datadog Standard Attributes"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-To enrich your RUM data with feature flags and get visibility into performance monitoring and behavioral changes, join the <a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">Feature Flag Tracking</a> private beta. To request access, contact Datadog Support at support@datadoghq.com.
-{{< /callout >}}
-
 ## Overview
 
 There are various ways you can modify the [data collected][1] by RUM, to support your needs for:
@@ -57,8 +53,8 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
         ...,
         trackViewsManually: true,
         ...
@@ -101,8 +97,8 @@ datadogRum.startView({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.startView({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.startView({
       name: 'checkout',
       service: 'purchase',
       version: '1.2.3'
@@ -155,7 +151,7 @@ For more information, see the [Enrich and control RUM data guide][14].
 
 ### Enrich RUM events
 
-Along with attributes added with the [Global Context API](#global-context), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
+Along with attributes added with the [Global Context API](#global-context) or the [Feature Flag data collection](#enrich-rum-events-with-feature-flags), you can add additional context attributes to the event. For example, tag your RUM resource events with data extracted from a fetch response object:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -176,8 +172,8 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
         ...,
         beforeSend: (event, context) => {
             // collect a RUM resource's response headers
@@ -214,6 +210,13 @@ The RUM Browser SDK ignores:
 - Attributes added outside of `event.context`
 - Modifications made to a RUM view event context
 
+### Enrich RUM events with feature flags
+{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
+<a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
+{{< /callout >}}
+
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
+
 ### Modify the content of a RUM event
 
 For example, to redact email addresses from your web application URLs:
@@ -235,8 +238,8 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
             // remove email from view url
@@ -301,8 +304,8 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
         ...,
         beforeSend: (event) => {
             if (shouldDiscard(event)) {
@@ -371,8 +374,8 @@ datadogRum.setUser({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.setUser({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setUser({
         id: '1234',
         name: 'John Doe',
         email: 'john@doe.com',
@@ -408,8 +411,8 @@ datadogRum.getUser()
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.getUser()
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getUser()
 })
 ```
 {{% /tab %}}
@@ -433,8 +436,8 @@ datadogRum.setUserProperty('name', 'John Doe')
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.setUserProperty('name', 'John Doe')
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setUserProperty('name', 'John Doe')
 })
 ```
 {{% /tab %}}
@@ -458,8 +461,8 @@ datadogRum.removeUserProperty('name')
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.removeUserProperty('name')
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeUserProperty('name')
 })
 ```
 {{% /tab %}}
@@ -482,8 +485,8 @@ datadogRum.clearUser()
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.clearUser()
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearUser()
 })
 ```
 {{% /tab %}}
@@ -515,8 +518,8 @@ datadogRum.init({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
         site: '<DATADOG_SITE>',
@@ -562,13 +565,13 @@ datadogRum.setGlobalContextProperty('activity', {
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setGlobalContextProperty('<CONTEXT_KEY>', '<CONTEXT_VALUE>');
 })
 
 // Code example
-DD_RUM.onReady(function() {
-    DD_RUM.setGlobalContextProperty('activity', {
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setGlobalContextProperty('activity', {
         hasPaid: true,
         amount: 23.42
     });
@@ -606,13 +609,13 @@ datadogRum.removeGlobalContextProperty('codeVersion');
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 })
 
 // Code example
-DD_RUM.onReady(function() {
-    DD_RUM.removeGlobalContextProperty('codeVersion');
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeGlobalContextProperty('codeVersion');
 })
 ```
 {{% /tab %}}
@@ -620,11 +623,11 @@ DD_RUM.onReady(function() {
 
 ```javascript
 window.DD_RUM &&
-    DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
+    window.DD_RUM.removeGlobalContextProperty('<CONTEXT_KEY>');
 
 // Code example
 window.DD_RUM &&
-    DD_RUM.removeGlobalContextProperty('codeVersion');
+    window.DD_RUM.removeGlobalContextProperty('codeVersion');
 ```
 
 {{% /tab %}}
@@ -651,13 +654,13 @@ datadogRum.setGlobalContext({
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 })
 
 // Code example
-DD_RUM.onReady(function() {
-    DD_RUM.setGlobalContext({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setGlobalContext({
         codeVersion: 34,
     })
 })
@@ -667,11 +670,11 @@ DD_RUM.onReady(function() {
 
 ```javascript
 window.DD_RUM &&
-    DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
+    window.DD_RUM.setGlobalContext({ '<CONTEXT_KEY>': '<CONTEXT_VALUE>' });
 
 // Code example
 window.DD_RUM &&
-    DD_RUM.setGlobalContext({
+    window.DD_RUM.setGlobalContext({
         codeVersion: 34,
     });
 ```
@@ -695,15 +698,15 @@ datadogRum.clearGlobalContext();
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-  DD_RUM.clearGlobalContext();
+window.DD_RUM.onReady(function() {
+  window.DD_RUM.clearGlobalContext();
 });
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```javascript
-window.DD_RUM && DD_RUM.clearGlobalContext();
+window.DD_RUM && window.DD_RUM.clearGlobalContext();
 ```
 
 {{% /tab %}}
@@ -725,15 +728,15 @@ const context = datadogRum.getRumGlobalContext();
 {{% /tab %}}
 {{% tab "CDN async" %}}
 ```javascript
-DD_RUM.onReady(function() {
-  const context = DD_RUM.getRumGlobalContext();
+window.DD_RUM.onReady(function() {
+  const context = window.DD_RUM.getRumGlobalContext();
 });
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
 
 ```javascript
-const context = window.DD_RUM && DD_RUM.getRumGlobalContext();
+const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
 ```
 
 {{% /tab %}}

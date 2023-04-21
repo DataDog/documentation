@@ -121,6 +121,10 @@ allowedRegions:
     value: eu
     weight: 20
     domain: datadoghq.eu
+  - name: AP1
+    value: ap1
+    weight: 25
+    domain: ap1.datadoghq.com
   - name: US1-FED
     value: gov
     weight: 30

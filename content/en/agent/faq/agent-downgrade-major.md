@@ -109,7 +109,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-7. Restart the agent
+7. Restart the Agent:
 
     ```shell
     sudo systemctl restart datadog-agent # Systemd
@@ -156,7 +156,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-5. Restart the agent
+5. Restart the Agent:
 
     ```shell
     sudo systemctl restart datadog-agent # Systemd

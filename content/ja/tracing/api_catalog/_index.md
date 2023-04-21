@@ -8,7 +8,7 @@ kind: documentation
 title: Datadog API カタログ
 ---
 
-{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
+{{< callout url="https://forms.gle/TgezmEhUPXzebvv27" >}}
   Datadog API カタログはベータ版です。このフォームでアクセスをリクエストしてください。
 {{< /callout >}} 
 
@@ -68,7 +68,7 @@ API カタログは、Datadog 全体からデータを結合して、意見を�
 
 {{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="エンドポイントをクリックするとエラーグラフが表示され、クリックすると関連するトレースが表示され、調査することができます。" video="true" >}}
 
-ページ上のパフォーマンスグラフは、初期状態では API カタログページと同じ設定にスコープされており、詳細ページで時間枠セレクタやその他のスコープのドロップダウンを使用して、調査に合わせてそれらの設定を変更することができます。
+ページ上のパフォーマンスグラフは、初期状態では API カタログページと同じ設定にスコープされており、詳細ページで時間枠セレクタやその他のスコープのドロップダウンメニューを使用して、調査に合わせてそれらの設定を変更することができます。
 
 
 ## インシデント発生時のエンドポイントの確認

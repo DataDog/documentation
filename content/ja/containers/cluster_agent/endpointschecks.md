@@ -82,17 +82,16 @@ nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-エンドポイントチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `clusterAgent.config.clusterChecksEnabled` 構成キーを使用して有効にします。
+エンドポイントチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `features.clusterChecks.enabled` 構成キーを使用して有効にします。
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  # (...)
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+  features:
+    clusterChecks:
+      enabled: true
 ```
 
 この構成では、Cluster Agent と ノードベースの Agent との間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
