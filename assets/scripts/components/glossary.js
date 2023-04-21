@@ -13,30 +13,30 @@ window.onscroll = (()=> {
 })
 
 
-const glossaryTerms = document.querySelectorAll('.glossary-term-container')
-const glossaryLetters = document.querySelectorAll('.glossary-letter')
-const glossaryNavLetters = document.querySelectorAll('#glossary-nav .nav-item')
-
-const handleFilter = (e, onload=false) => {
-
-  const filterValue = onload ? e.currentTarget.location.hash.replace('#filter-', '') :  e.target.dataset.value
+const handleGlossaryFilter = (e) => {
+  const glossaryTerms = document.querySelectorAll('.glossary-term-container')
+  const glossaryLetters = document.querySelectorAll('.glossary-letter')
+  const glossaryNavLetters = document.querySelectorAll('#glossary-nav .nav-item')
+  
+  // if no event (e) passed to func, get filter value from url hash value
+  const filterValue = e ? e.target.dataset.value : window.location.hash.replace('#filter-', '')
 
   unhideElements([...glossaryTerms, ...glossaryLetters, ...glossaryNavLetters])
 
-  if(filterValue === "all"){
+  if(filterValue === "all" || filterValue === ""){
     [...glossaryTerms, ...glossaryLetters, ...glossaryNavLetters].forEach(el => el.classList.remove('d-none'))
   }else{
     glossaryTerms.forEach(el => {
       const {coreProducts} = el.dataset
       const coreProductsArr = coreProducts.split(',').map(e => anchorize(e))
-      
       if(!coreProductsArr.includes(filterValue)){
         el.classList.add('d-none')
       }
     })
   }
+
   // form an object of arrays. 
-  // each array is grouped by terms (.glossary-term-container) with the same first char
+  // each array is a group of terms (.glossary-term-container) with the same first char
   const termsGroupedByFirstChar = [...glossaryTerms].reduce((acc, curr) => {
     const currElLetter = curr.dataset.letter
     if(!acc[currElLetter]){
@@ -60,15 +60,18 @@ const handleFilter = (e, onload=false) => {
 }
 
 
-// ON Popstate 
-window.addEventListener('popstate', (e) => handleFilter(e, true))
+// Load handler when sharing filtered view
+window.addEventListener('load', () => handleGlossaryFilter(null) )
 
 // ON CLICK
-const filterBtns = document.querySelectorAll('.filter-btn')
-filterBtns.forEach(filterBtn => {
-  filterBtn.addEventListener('click', handleFilter)
-})
+export const addGlossaryFilterClickEvnt = () => {
+  const filterBtns = document.querySelectorAll('.filter-btn')
+  filterBtns.forEach(filterBtn => {
+    filterBtn.addEventListener('click', handleGlossaryFilter)
+  })
+};
 
+addGlossaryFilterClickEvnt()
 
 // HELPERS //
 /**

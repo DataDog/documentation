@@ -7,6 +7,7 @@ import {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName 
 import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './algolia';
+import { addGlossaryFilterClickEvnt } from './glossary';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -37,25 +38,25 @@ function loadPage(newUrl) {
                 return;
             }
 
+            // QUERY old document and newDocument
             const mainContentWrapper = document.querySelector(
                 '.mainContent-wrapper'
             );
-            const newmainContentWrapper = httpRequest.responseXML.querySelector(
+            const newmainContentWrapper = newDocument.querySelector(
                 '.mainContent-wrapper'
             );
-
-            const newContent = httpRequest.responseXML.getElementById(
+            const newContent = newDocument.getElementById(
                 'mainContent'
             );
-            const newTOC = httpRequest.responseXML.querySelector(
+            const newTOC = newDocument.querySelector(
                 '.js-toc-container'
             );
 
             const currentSidebar = document.querySelector('.sidebar');
-            const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
+            const newSidebar = newDocument.querySelector('.sidebar');
 
             const currentPageIsSearchPage = document.documentElement.dataset.relpermalink.includes("search");
-            const newPageIsSearchPage = httpRequest.responseXML.querySelector("html").dataset.relpermalink.includes("search");
+            const newPageIsSearchPage = newDocument.querySelector("html").dataset.relpermalink.includes("search");
 
             // For going from search page (/search) with no sidenav searchbar, to another page with sidenav searchbar
             if (currentPageIsSearchPage && !newPageIsSearchPage) {
@@ -213,6 +214,11 @@ function loadPage(newUrl) {
             // sets query params if code tabs are present
 
             initCodeTabs();
+
+            if(newUrl.endsWith('/glossary/')){
+                // ON CLICK
+                addGlossaryFilterClickEvnt();
+            }
 
             const regionSelector = document.querySelector('.js-region-select');
 
