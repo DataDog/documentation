@@ -3232,11 +3232,16 @@ main:
     parent: rum_reactnative
     identifier: rum_reactnative_codepush
     weight: 405
+  - name: Integrated Libraries
+    url: real_user_monitoring/reactnative/integrated_libraries/
+    parent: rum_reactnative
+    identifier: rum_reactnative_integrated_libraries
+    weight: 406
   - name: Troubleshooting
     url: real_user_monitoring/reactnative/troubleshooting/
     parent: rum_reactnative
     identifier: rum_reactnative_troubleshooting
-    weight: 406
+    weight: 407
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum

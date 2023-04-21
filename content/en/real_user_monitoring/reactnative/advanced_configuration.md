@@ -14,7 +14,7 @@ further_reading:
 ---
 ## Overview
 
-If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [React Native RUM setup documentation][2].
+If you have not set up the SDK yet, follow the [in-app setup instructions][1] or see the [React Native RUM setup documentation][2].
 
 ## Testing with Jest
 
@@ -28,7 +28,7 @@ jest.mock('@datadog/mobile-react-native', () => {
 });
 ```
 
-Interaction, error and resource automated tracking is disabled in your tests if you initialize the SDK with the `DatadogProvider` component.
+Interaction, error, and resource automated tracking is disabled in your tests if you initialize the SDK with the `DatadogProvider` component.
 
 All SDK methods are mocked by `jest.fn()`, so you can assert that a Datadog SDK method was called:
 

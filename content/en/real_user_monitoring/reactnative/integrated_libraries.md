@@ -26,3 +26,7 @@ Datadog provides automatic integration for [React Navigation](https://reactnavig
         // ...
     </NavigationContainer>
 ```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
