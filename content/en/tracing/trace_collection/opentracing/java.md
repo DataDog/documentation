@@ -1,20 +1,21 @@
 ---
-title: Java Open Standards
+title: Java OpenTracing Instrumentation
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/java
-description: 'Open Standards for Java'
+- /tracing/trace_collection/open_standards/java
+description: 'OpenTracing instrumentation for Java'
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 
 ---
 
-## OpenTracing
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/java/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
-Datadog integrates seamlessly with the [OpenTracing API][1].
+Datadog integrates with the [OpenTracing API][1].
 
-### Setup
+## Setup
 
 For Maven, add this to `pom.xml`:
 ```xml
@@ -79,7 +80,7 @@ Aside from environment variables and system properties, there are additional con
 
 **Note:** Never add `dd-java-agent` to your classpath. Doing so can cause unexpected behavior. 
 
-### Asynchronous traces
+## Asynchronous traces
 
 An asynchronous trace is when a span is started in one thread and finished in another. To instrument this behavior, a new scope must be used in each thread the span is active.
 ```java
@@ -105,7 +106,7 @@ try (final Scope scope = tracer.activateSpan(span)) {
 }
 ```
 
-### Inject and extract context for distributed tracing
+## Inject and extract context for distributed tracing
 
 Create a distributed trace using manual instrumentation with OpenTracing:
 
