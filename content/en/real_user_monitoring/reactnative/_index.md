@@ -36,6 +36,12 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-native
 ```
 
+Install the added pod:
+
+```sh
+(cd ios && pod install)
+```
+
 Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
 
 ### Specify application details in the UI
