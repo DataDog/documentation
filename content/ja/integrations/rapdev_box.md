@@ -51,7 +51,7 @@ pricing:
   tag: user_login
   unit_label: Box 登録ユーザー
   unit_price: 1
-public_title: Box インテグレーション
+public_title: Box
 short_description: Box エンタープライズユーザーとストレージの監視
 supported_os:
 - linux
@@ -89,7 +89,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Box インテグレーション
+  title: Box
   uninstallation: README.md#Uninstallation
 ---
 
