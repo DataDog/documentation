@@ -13,6 +13,10 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">
+The features described on this page are in beta. Contact your Customer Success Manager to get the required agent build and installation directions.
+</div>
+
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues quickly.
 
 Do the following steps to enable Database Monitoring with your database:
@@ -26,7 +30,7 @@ Supported Oracle versions
 : 19c, 21c
 
 Supported Agent versions
-: 7.45.0+
+: Please contact your Customer Success Manager to get agent installation directions for the beta.
 
 ## Grant the Agent access
 
