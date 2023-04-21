@@ -17,7 +17,7 @@ further_reading:
 ## RUM Integrations
 
 ### Integrate with ReactNavigation
-Datadog provides automatic integration for the [ReactNavigation](https://reactnavigation.org/) API (minimum supported version is `react-navigation/native@5.6.0`). Add the following in your source code:
+Datadog provides automatic integration for [React Navigation](https://reactnavigation.org/) (minimum supported version is `react-navigation/native@5.6.0`). Add the following in your source code:
 ```typescript
     const navigationRef:React.RefObject<NavigationContainerRef> = React.createRef();
     // ...
