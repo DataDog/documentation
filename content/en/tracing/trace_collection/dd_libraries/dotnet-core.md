@@ -445,7 +445,7 @@ When using `systemctl` to run .NET applications as a service, you can add the re
     CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
     DD_DOTNET_TRACER_HOME=/opt/datadog
 
-    ; Set additional Datadog environment variables
+    # Set additional Datadog environment variables
     DD_LOGS_INJECTION=true
     DD_RUNTIME_METRICS_ENABLED=true
     ```
