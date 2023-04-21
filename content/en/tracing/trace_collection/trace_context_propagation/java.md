@@ -4,10 +4,6 @@ kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
-further_reading:
-    - link: 'tracing/glossary/'
-      tag: 'Documentation'
-      text: 'Explore your services, resources, and traces'
 ---
 
 

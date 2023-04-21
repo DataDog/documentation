@@ -4,8 +4,6 @@ kind: documentation
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
-further_reading:
-
 ---
 
 ## Overview

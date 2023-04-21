@@ -36,6 +36,9 @@ The following OTel features implemented in the Datadog library as noted:
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [OpenTelemetry instrumentation libraries][8] also.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
 [3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter

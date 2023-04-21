@@ -4,10 +4,6 @@ kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
-further_reading:
-    - link: 'tracing/glossary/'
-      tag: 'Documentation'
-      text: 'Explore your services, resources, and traces'
 ---
 
 ### B3 headers extraction and injection

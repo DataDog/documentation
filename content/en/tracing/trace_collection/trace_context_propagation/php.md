@@ -4,8 +4,6 @@ kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
-further_reading:
-
 ---
 
 The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.

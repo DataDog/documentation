@@ -4,10 +4,6 @@ kind: documentation
 code_lang: nodejs
 code_lang_weight: 40
 type: multi-code-lang
-further_reading:
-    - link: 'tracing/glossary/'
-      tag: 'Documentation'
-      text: 'Explore your services, resources, and traces'
 ---
 
 The Datadog APM Tracer supports [B3][5] and [W3C (TraceParent)][6] header extraction and injection for distributed tracing.
