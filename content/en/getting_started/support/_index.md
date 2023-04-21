@@ -39,7 +39,7 @@ A support ticket is recommended for:
 
 ### Chat
 
-Reaching out on chat is recommended for:
+You can reach out to the support team through the chat link in Datadog, any business days between 10:00 and 19:00 (7:00 PM) ET. Reaching out on chat is recommended for:
 
    - Urgent issues
    - Call/Screenshare requests
