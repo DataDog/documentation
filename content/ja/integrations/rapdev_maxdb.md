@@ -56,7 +56,7 @@ pricing:
   tag: db
   unit_label: データベース
   unit_price: 50
-public_title: MaxDB インテグレーション
+public_title: MaxDB
 short_description: MaxDB データベースのボリューム、キャッシュ、スキーマ、テーブルなどを監視します
 supported_os:
 - linux
@@ -87,7 +87,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: MaxDB インテグレーション
+  title: MaxDB
   uninstallation: README.md#Uninstallation
 ---
 

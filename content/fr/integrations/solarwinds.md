@@ -1,25 +1,25 @@
 ---
-"categories":
-- Gestion des événements
-- Alertes
-- Monitoring
-"ddtype": "webhook"
-"dependencies": []
-"description": "Activez l'ingestion d'alertes SolarWinds Orion dans votre flux d'événements Datadog."
-"doc_link": "https://docs.datadoghq.com/integrations/solarwinds/"
-"draft": false
-"git_integration_title": "solarwinds"
-"has_logo": true
-"integration_id": ""
-"integration_title": "SolarWinds"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"manifest_version": "1.0"
-"name": "solarwinds"
-"public_title": "Intégration Datadog/SolarWinds"
-"short_description": "Activez l'ingestion d'alertes de SolarWinds Orion dans votre flux d'événements Datadog."
-"version": "1.0"
+categories:
+- event management
+- notification
+dependencies: []
+description: Activez l'ingestion d'alertes SolarWinds Orion dans votre flux d'événements
+  Datadog.
+doc_link: https://docs.datadoghq.com/integrations/solarwinds/
+draft: false
+git_integration_title: solarwinds
+has_logo: true
+integration_id: ''
+integration_title: SolarWinds
+integration_version: ''
+is_public: true
+kind: integration
+manifest_version: '1.0'
+name: solarwinds
+public_title: Intégration Datadog/SolarWinds
+short_description: Activez l'ingestion d'alertes de SolarWinds Orion dans votre flux
+  d'événements Datadog.
+version: '1.0'
 ---
 
 ## Présentation
@@ -28,7 +28,7 @@ Recevez des alertes SolarWinds Orion de façon à centraliser l'agrégation et 
 
 Pour que cette intégration fonctionne, vous devez abonner Datadog à toutes vos notifications d'alerte SolarWinds.
 
-## Configuration
+## Implémentation
 
 ### Créer des actions de déclenchement
 
@@ -123,4 +123,3 @@ L'intégration SolarWinds n'inclut aucun check de service.
 ## Dépannage
 
 Besoin d'aide ? Contactez l'assistance Datadog.
-
