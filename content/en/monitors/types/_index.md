@@ -13,6 +13,9 @@ further_reading:
 - link: "/monitors/manage/"
   tag: "Documentation"
   text: "Manage monitors"
+- link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+  tag: "Blog"
+  text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
 ---
 
 {{< whatsnext desc="Choose your monitor type:">}}

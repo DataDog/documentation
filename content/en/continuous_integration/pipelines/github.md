@@ -30,6 +30,8 @@ further_reading:
 
 - **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
 
+- **Infrastructure metric correlation**: [Correlate infrastructure metrics][11] to pipeline jobs for self-hosted GitHub runners
+
 - **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
 
 - **Queue time**: View amount of time workflow jobs sit in the queue before processing
@@ -111,3 +113,4 @@ workflow job and workflow run events. To remove the events:
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
 [10]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#enable-log-collection
+[11]: https://docs.datadoghq.com/continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs

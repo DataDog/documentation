@@ -119,5 +119,5 @@ These filters can also be applied through the facet panel on the left hand side 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#partial-and-downstream-pipelines
+[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
 [6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux

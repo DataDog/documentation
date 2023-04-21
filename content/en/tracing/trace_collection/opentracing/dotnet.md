@@ -1,19 +1,20 @@
 ---
-title: .NET Open Standards
+title: .NET OpenTracing Instrumentation
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/dotnet
+- /tracing/trace_collection/open_standards/dotnet
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 70
-description: 'Open Standards for .NET'
+description: 'OpenTracing instrumentation for .NET'
 ---
 
-## OpenTracing
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/dotnet/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
-Datadog also supports the OpenTracing standard.  For more details and information, view the [OpenTracing API][1].
+For more details and information, view the [OpenTracing API][1].
 
-### Setup
+## Setup
 For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][2] to your application. During application start-up, initialize the OpenTracing SDK:
 
 ```csharp
@@ -32,7 +33,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-### Manually instrument a method
+## Manually instrument a method
 
 Use OpenTracing to create a span.
 
@@ -44,7 +45,7 @@ using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").Start
 }
 ```
 
-### Asynchronous traces
+## Asynchronous traces
 
 To trace code running in an asynchronous task, create a new scope within the background task, just as you would wrap synchronous code.
 ```csharp

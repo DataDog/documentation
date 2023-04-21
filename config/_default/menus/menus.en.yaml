@@ -867,6 +867,14 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 2
+  - name: Linux
+    url: serverless/azure_app_services/azure_app_services_linux
+    parent: serverless_app_services
+    weight: 201
+  - name: Windows
+    url: serverless/azure_app_services/azure_app_services_windows
+    parent: serverless_app_services
+    weight: 202
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
@@ -889,9 +897,15 @@ main:
     weight: 6
   - name: Cloud Cost
     url: cloud_cost_management/
+    identifier: cloud_cost_top_level
     pre: cloud-cost-management
     parent: infrastructure_heading
     weight: 110000
+  - name: Container Cost Allocation
+    url: cloud_cost_management/container_cost_allocation
+    parent: cloud_cost_top_level
+    identifier: container_cost_allocation
+    weight: 1
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1408,11 +1422,36 @@ main:
     parent: tracing_library_config
     identifier: tracing_library_config_dotnet_framework
     weight: 109
-  - name: Custom Instrumentation
+  - name: Custom Instrumentation with OpenTelemetry
+    url: tracing/trace_collection/otel_instrumentation/
+    parent: tracing_trace_collection
+    identifier: tracing_otel_inst
+    weight: 105
+  - name: Java
+    url: tracing/trace_collection/otel_instrumentation/java/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/otel_instrumentation/python/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/otel_instrumentation/ruby/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_ruby
+    weight: 103
+  - name: .NET
+    url: tracing/trace_collection/otel_instrumentation/dotnet/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_dotnet
+    weight: 108
+  - name: Custom Instrumentation with Datadog Libraries
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 105
+    weight: 106
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1453,61 +1492,106 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: Instrumenting with OpenTelemetry
-    url: opentelemetry/otel_tracing/
+  - name: Custom Instrumentation with OpenTracing
+    url: tracing/trace_collection/opentracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
-    weight: 106
+    weight: 107
   - name: Java
-    url: tracing/trace_collection/open_standards/java/
+    url: tracing/trace_collection/opentracing/java/
     parent: tracing_open_standards
     identifier: tracing_open_standards_java
     weight: 101
   - name: Python
-    url: tracing/trace_collection/open_standards/python/
+    url: tracing/trace_collection/opentracing/python/
     parent: tracing_open_standards
     identifier: tracing_open_standards_python
     weight: 102
   - name: Ruby
-    url: tracing/trace_collection/open_standards/ruby/
+    url: tracing/trace_collection/opentracing/ruby/
     parent: tracing_open_standards
     identifier: tracing_open_standards_ruby
     weight: 108
   - name: Go
-    url: tracing/trace_collection/open_standards/go/
+    url: tracing/trace_collection/opentracing/go/
     parent: tracing_open_standards
     identifier: tracing_open_standards_go
     weight: 104
   - name: NodeJS
-    url: tracing/trace_collection/open_standards/nodejs/
+    url: tracing/trace_collection/opentracing/nodejs/
     parent: tracing_open_standards
     identifier: tracing_open_standards_nodejs
     weight: 105
   - name: PHP
-    url: tracing/trace_collection/open_standards/php/
+    url: tracing/trace_collection/opentracing/php/
     parent: tracing_open_standards
     identifier: tracing_open_standards_php
     weight: 106
   - name: .NET
-    url: tracing/trace_collection/open_standards/dotnet/
+    url: tracing/trace_collection/opentracing/dotnet/
     parent: tracing_open_standards
     identifier: tracing_open_standards_dotnet
     weight: 108
+  - name: Propagating Trace Context
+    url: tracing/trace_collection/trace_context_propagation/
+    parent: tracing_trace_collection
+    identifier: tracing_context
+    weight: 108
+  - name: Java
+    url: tracing/trace_collection/trace_context_propagation/java/
+    parent: tracing_context
+    identifier: tracing_context_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/trace_context_propagation/python/
+    parent: tracing_context
+    identifier: tracing_context_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/trace_context_propagation/ruby/
+    parent: tracing_context
+    identifier: tracing_context_ruby
+    weight: 103
+  - name: Go
+    url: tracing/trace_collection/trace_context_propagation/go/
+    parent: tracing_context
+    identifier: tracing_context_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/trace_collection/trace_context_propagation/nodejs/
+    parent: tracing_context
+    identifier: tracing_context_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/trace_collection/trace_context_propagation/php/
+    parent: tracing_context
+    identifier: tracing_context_php
+    weight: 106
+  - name: C++
+    url: tracing/trace_collection/trace_context_propagation/cpp/
+    parent: tracing_context
+    identifier: tracing_context_cpp
+    weight: 107
+  - name: .NET
+    url: tracing/trace_collection/trace_context_propagation/dotnet/
+    parent: tracing_context
+    identifier: tracing_context_dotnet
+    weight: 107
   - name: Tracing Serverless Applications
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
-    weight: 107
+    weight: 109
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 108
+    weight: 110
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 109
+    weight: 111
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
@@ -2638,6 +2722,11 @@ main:
     parent: cspm
     identifier: signals
     weight: 108
+  - name: Resource Catalog
+    url: /security/cspm/resource_catalog
+    parent: cspm
+    identifier: resource_catalog
+    weight: 109
   - name: Cloud Workload Security
     url: security/cloud_workload_security/
     parent: csm
@@ -3253,11 +3342,16 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_otel_support
     weight: 505
+  - name: Web View Tracking
+    url: real_user_monitoring/flutter/web_view_tracking/
+    parent: rum_flutter
+    identifier: rum_flutter_web_view_tracking
+    weight: 506
   - name: Troubleshooting
     url: real_user_monitoring/flutter/troubleshooting/
     parent: rum_flutter
     identifier: rum_flutter_troubleshooting
-    weight: 506
+    weight: 507
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
