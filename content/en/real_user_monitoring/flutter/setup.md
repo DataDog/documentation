@@ -59,7 +59,7 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
 
    ```yaml
    dependencies:
-     datadog_flutter_plugin: ^1.0.0-rc.1
+     datadog_flutter_plugin: ^1.3.0
    ```
 2. Create a configuration object for each Datadog feature (such as Logs or RUM) with the following snippet. If you do not pass a configuration for a given feature, that feature is disabled.
 
