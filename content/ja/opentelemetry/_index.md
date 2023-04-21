@@ -34,18 +34,6 @@ title: Datadog の OpenTelemetry
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="テレメトリーデータを生成し、観測可能性製品に送信するためのマップオプション。">}}
 
-## セットアップ
-
-OpenTelemetry データの Datadog への送信、構成、Datadog の観測可能性プラットフォームの使用によるサービスパフォーマンスへのアクション可能な洞察に関する追加情報については、以下をご覧ください。
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/otel_tracing/" >}}OpenTelemetry によるトレース収集{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics/" >}}OpenTelemetry によるメトリクス収集{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_logs/" >}}OpenTelemetry によるログ収集{{< /nextlink >}}
-{{< /whatsnext >}}
-
-
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

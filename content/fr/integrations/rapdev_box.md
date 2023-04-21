@@ -23,10 +23,11 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- marketplace
 - cloud
 - log collection
+- marketplace
 - metrics
+- notification
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -51,24 +52,25 @@ pricing:
   unit_label: Utilisateurs enregistrés Box
   unit_price: 1
 public_title: Intégration Box
-short_description: Surveiller vos utilisateurs et votre stockage dans Box Enterprise
+short_description: Surveillez vos utilisateurs et votre stockage dans Box Enterprise
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Log Collection
+  - Category::Marketplace
   - Category::Metrics
+  - Category::Notification
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
-  description: Surveiller vos utilisateurs et votre stockage dans Box Enterprise
+  description: Surveillez vos utilisateurs et votre stockage dans Box Enterprise
   media:
   - caption: Dashboard Box Integration Overview - Présentation
     image_url: images/dashboard_overview_1_4.jpg
@@ -93,13 +95,13 @@ tile:
 
 
 ## Présentation
-Cette intégration transmet des métriques sur le stockage de l'utilisateur dans votre [compte Box Enterprise](https://box.com/). Elle recueille également les logs d'administration Box via l'endpoint `admin_logs_streaming`. Les déclencheurs suivants sont soumis à Datadog sous forme de logs :
+ Cette intégration transmet des métriques sur le stockage des utilisateurs dans votre [compte Box Enterprise](https://box.com/). Elle recueille également les logs d'administration Box via l'endpoint `admin_logs_streaming`. Les déclencheurs suivants sont transmis à Datadog sous forme de logs :
  + [User Source Object](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)
  + [Shield Events](https://developer.box.com/guides/events/event-triggers/shield-alert-events/)
  + [Sign Events](https://developer.box.com/guides/events/event-triggers/sign-events/)
 ### Métriques
 Cette intégration recueille des métriques de stockage sur les utilisateurs de votre compte Box Enterprise.
-Les métriques suivantes sont soumises :
+Les métriques suivantes sont transmises :
 ```
 rapdev.box.users.count
 rapdev.box.users.storage.max
@@ -107,7 +109,7 @@ rapdev.box.users.storage.used
 ```
 ### Logs
 Cette intégration recueille les logs d'administration Box via l'endpoint `admin_logs_streaming`.
-Les déclencheurs suivants sont soumis à Datadog sous forme de logs :
+Les déclencheurs suivants sont transmis à Datadog sous forme de logs :
  + [User Source Object](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)
  ```
  {

@@ -28,8 +28,7 @@ author:
 categories:
 - ログの収集
 - マーケットプレイス
-- cloud
-- モニタリング
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -54,19 +53,18 @@ public_title: Rapid7 インテグレーション
 short_description: Rapid7 ログおよび調査アクティビティを監視します
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Log Collection
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
+  - Category::Security
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Rapid7 ログおよび調査アクティビティを監視します
   media:

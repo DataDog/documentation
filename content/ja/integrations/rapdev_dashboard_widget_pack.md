@@ -36,14 +36,14 @@ public_title: ダッシュボードウィジェットパック
 short_description: データ可視化のための 3 つのカスタムウィジェットを含むダッシュボードウィジェットパック
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Marketplace
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::UI Extension
   configuration: README.md#Setup

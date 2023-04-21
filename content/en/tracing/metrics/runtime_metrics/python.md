@@ -20,7 +20,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
+This feature is in public beta.
 </div>
 
 ## Automatic configuration

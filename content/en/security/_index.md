@@ -12,10 +12,10 @@ further_reading:
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
-  - link: "/security/cspm/getting_started"
+  - link: "/security/cspm/setup"
     tag: "Documentation"
     text: "Start tracking misconfigurations with Cloud Security Posture Management"
-  - link: "/security/cloud_workload_security/getting_started"
+  - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Cloud Workload Security"
   - link: "https://securitylabs.datadoghq.com/"
@@ -47,7 +47,8 @@ Bring speed and scale to your production security operations. Datadog Security d
 
 Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
-{{< vimeo 669874306 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/669874306/rendition/1080p/file.mp4?loc=external&signature=9cdb7724c414862115c85af15edb1bb8eb0cd6f7b5d38d89f6f99e65376cfc0c" poster="/images/poster/security.png" >}}
+
 </br>
 
 ## Application Security Management
@@ -70,7 +71,7 @@ Datadog Security includes [Application Security Management](#application-securit
 
 ## Cloud Workload Security
 
-[Cloud Workload Security (CWS)][8] monitors file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. Cloud Workload Security uses the unified Datadog Agent, so if you’re already using Datadog to monitor your environment, there’s no need to provision additional resources.
+[Cloud Workload Security (CWS)][8] monitors file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. Cloud Workload Security uses the unified Datadog Agent, so if you're already using Datadog to monitor your environment, there's no need to provision additional resources.
 
 {{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 

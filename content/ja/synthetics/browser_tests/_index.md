@@ -122,6 +122,9 @@ title: ブラウザテスト
 `{{ alphanumeric(n) }}`
 : `n` 文字の英数字文字列を生成します。
 
+`{{ uuid }}`
+: バージョン 4 の UUID (Universally unique identifier) を生成します。
+
 `{{ date(n unit, format) }}` 
 : テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 

@@ -197,7 +197,7 @@ If you want to see user activities, such as who changed the retention of an inde
 [8]: /account_management/rbac/permissions/?tab=ui#log-management
 [9]: /logs/guide/logs-rbac/
 [10]: /logs/logs_to_metrics/#logs-usage-metrics
-[11]: /monitors/create/types/anomaly/
+[11]: /monitors/types/anomaly/
 [12]: https://app.datadoghq.com/metric/summary?filter=datadog.estimated_usage.logs.ingested_bytes&metric=datadog.estimated_usage.logs.ingested_bytes
 [13]: https://app.datadoghq.com/monitors/create
 [14]: https://app.datadoghq.com/logs

@@ -36,9 +36,9 @@ author:
   support_email: support_ddp@ioconnectservices.com
   vendor_id: ioconnect
 categories:
+- クラウド
 - マーケットプレイス
-- cloud
-- コラボレーション
+- ネットワーク
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -66,18 +66,18 @@ public_title: Mule® インテグレーション
 short_description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
-  - Category::Collaboration
+  - Category::Marketplace
+  - Category::Network
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
   media:

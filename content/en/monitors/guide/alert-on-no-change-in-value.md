@@ -41,4 +41,4 @@ Other [alert conditions/options][2] can be set to preference. Your monitor's UI 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/
-[2]: /monitors/create/configuration/
+[2]: /monitors/configuration/

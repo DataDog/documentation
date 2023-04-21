@@ -29,8 +29,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- キャッシュ
 - data store
+- マーケットプレイス
+- sap
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -58,17 +60,19 @@ public_title: MaxDB インテグレーション
 short_description: MaxDB データベースのボリューム、キャッシュ、スキーマ、テーブルなどを監視します
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
+  - Category::Caching
   - Category::Data Store
+  - Category::Marketplace
+  - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: MaxDB データベースのボリューム、キャッシュ、スキーマ、テーブルなどを監視します
   media:

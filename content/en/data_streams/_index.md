@@ -10,6 +10,16 @@ further_reading:
       text: 'Service Catalog'
 ---
 
+<div class="alert alert-warning">
+The features discussed on this page are in public beta.
+</div>
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
@@ -27,7 +37,7 @@ To get started, follow the installation instructions to configure services with 
 
 | Runtime | Supported technologies |
 |---|----|
-| Java | Kafka (self-hosted, Amazon MSK), RabbitMQ, HTTP, gRPC |
+| Java | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC |
 | Go | All (with [manual instrumentation][1]) |
 | .NET | Kafka (self-hosted, Amazon MSK) |
 
@@ -42,7 +52,7 @@ Once Data Streams Monitoring is configured, you can measure the time it usually 
 |---|---|-----|
 | dd.stream.edge_latency | `service`, `upstream_service`, `topic`, `partition` | Time elapsed from producing messages in a client to receiving messages in the consuming service. |
 | dd.stream.latency_from_origin | `service`, `upstream_service`, `hash` | Time elapsed from producing messages at their point of origin to receiving messages in the selected service. |
-| dd.stream.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between consumer and broker. Requires Java Agent v1.8.0 or later. |
+| dd.stream.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between consumer and broker. Requires Java Agent v1.9.0 or later. |
 
 Datadog recommends using the **Pipeline SLOs** tab on any service in Data Streams Monitoring to create SLOs or monitors on end-to-end latency:
 
@@ -59,6 +69,10 @@ High lag on a consuming service, increased resource use on a Kafka broker and in
 {{< img src="data_streams/data_streams_throughput_tab.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Click on the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Service Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
+
+By filtering to a single Kafka or RabbitMQ cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
+
+{{< img src="data_streams/data_streams_cluster_throughput.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 ### Pivot from pipeline health to slowest individual messages
 

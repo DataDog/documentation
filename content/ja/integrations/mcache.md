@@ -39,7 +39,7 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 3.3.0
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

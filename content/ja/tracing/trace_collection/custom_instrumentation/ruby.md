@@ -57,7 +57,7 @@ end
 ```
 
 [1]: /ja/tracing/glossary/#spans
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Manually Instrumented Spans" %}}
 
@@ -123,7 +123,20 @@ example_method()
 
 デフォルトの動作: `on_error`
 
-{{% tab "ルートスパン" %}}
+```ruby
+require 'ddtrace'
+require 'timeout'
+
+def example_method
+  puts 'some work'
+  sleep(1)
+  raise StandardError, "This is an exception"
+end
+
+Datadog::Tracing.trace('example.trace') do |span|
+  example_method()
+end
+```
 
 カスタムの動作: `on_error`
 
@@ -235,6 +248,23 @@ Datadog::Tracing.before_flush do |trace|
 end
 ```
 
+次の例では、複雑な後処理ロジックを実現するプロセッサーを実装しています。
+
+```ruby
+Datadog::Tracing.before_flush do |trace|
+  trace.spans.each do |span|
+    originalPrice = span.get_tag('order.price'))
+    discount = span.get_tag('order.discount'))
+
+    # 他のタグから計算したタグを設定します
+    if (originalPrice != nil && discount != nil)
+      span.set_tag('order.value', originalPrice - discount)
+    end
+  end
+  trace
+end
+```
+
 カスタムプロセッサーのクラスの場合:
 
 ```ruby
@@ -282,7 +312,7 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 
 トレースはそれぞれのリソース名に基づいて除外可能で、これによりヘルスチェックなどの外形監視トラフィックが Datadog にレポートされるトレースから削除されます。この設定およびその他のセキュリティ/微調整に関するコンフィギュレーションについては[セキュリティ][7]ページを参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

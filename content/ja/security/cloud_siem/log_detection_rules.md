@@ -49,7 +49,7 @@ Cloud SIEM (Security Information and Event Management) の場合、取り込ん�
 ### 異常検知
 
 <div class="alert alert-warning">
-異常検出は現在、<a href="https://app.datadoghq.com/security/configuration/rules/new">公開ベータ版</a>です。
+異常検出は現在、<a href="https://app.datadoghq.com/security/configuration/rules/new?product=siem">公開ベータ版</a>です。
 </div>
 
 特定のしきい値を構成することができない場合、代わりに異常検出ルールを定義することができます。異常検出では、イベントの過去の観測可能性から動的なしきい値が自動的に導き出されます。

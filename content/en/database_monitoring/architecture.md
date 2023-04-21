@@ -65,7 +65,7 @@ Database Monitoring collects system metrics such as CPU, memory, disk usage, log
 
 You can install the Agent on any cloud VM (for example, EC2) provided the Agent can connect to your database instances.
 
-If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
+If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider's orchestration tools. For example, you can use [AWS ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
 
 ### Kubernetes
 

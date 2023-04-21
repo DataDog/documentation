@@ -1,0 +1,38 @@
+.sidenav .searchbox-container {
+    filter: none;
+
+    #searchbox {
+        z-index: 2;
+        max-width: 250px;
+    }
+
+    .hits-container {
+        z-index: 1;
+        max-width: 250px;
+    }
+
+    #hits {
+        width: 50vw;
+        margin-top: 6px;
+    }
+
+    .ais-SearchBox-submit {
+        order: -1;
+        background-color: #ffffff;
+        color: #d6d6d6;
+        min-width: unset;
+        max-width: unset;
+        padding-right: 0;
+
+        & #submit-icon {
+            display: inline-flex;
+            height: 100%;
+            align-items: center;
+            margin-top: 0;
+        }
+
+        & #submit-text {
+            display: none;
+        }
+    }
+}

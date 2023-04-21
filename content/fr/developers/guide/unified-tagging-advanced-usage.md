@@ -1,14 +1,13 @@
 ---
-title: Guide d'utilisation avancée du tagging unifié
 kind: guide
-aliases:
-  - /fr/developers/guide/unified-tagging-advanced-usage
+title: Guide d'utilisation avancée du tagging unifié
 ---
+
 ## Présentation
 
 Ce guide propose des moyens de migrer vers le [tagging de service unifié][1] et de le configurer en fonction de cas d'utilisation spécifiques.
 
-## Custom tags
+## Tags personnalisés
 
 Vous pouvez continuer à utiliser les tags `env`, `service` et `version` tels qu'ils sont configurés pour le tagging de service unifié. Toutefois, si vous souhaitez utiliser le tagging unifié avec vos propres tags personnalisés, il existe plusieurs options disponibles, énumérées ci-dessous.
 

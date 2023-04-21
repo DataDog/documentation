@@ -1,6 +1,4 @@
 ---
-aliases:
-- /kr/monitors/guide/monitor-arithmetic-and-sparse-metrics
 kind: 가이드
 title: 산술 및 희소 메트릭 모니터링
 ---

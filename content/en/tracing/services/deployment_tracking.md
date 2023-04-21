@@ -38,6 +38,13 @@ You can scope the errors widget to:
 
 Requests and Errors widgets can both be exported to dashboards and monitors.
 
+## Using version tags for automatic faulty deployment detection
+
+Configuring your services with the `version` tag enables [Automatic Faulty Deployment Detection][4]. 
+
+You can set up a monitor to get automatically notified on all potentially faulty deployments. To do so, navigate to the New Monitors page and choose Events, and include `tags:deployment_analysis` in the search query defining the monitor.
+
+
 ## Versions deployed
 
 A service configured with `version` tags has a version section on its Service page, below the main service health graphs. The version section shows all versions of the service that were active during the selected time interval, with active services at the top.
@@ -224,3 +231,4 @@ Max time between deployments:
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /metrics/types/?tab=distribution#metric-types
 [3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
+[4]: /watchdog/faulty_deployment_detection/

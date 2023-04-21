@@ -327,7 +327,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 | `sources`              | Array of Strings | yes      | Array of source attributes or tags                                             |
 | `target`               | String           | yes      | Final attribute or tag name to remap the sources to.                           |
 | `target_type`          | String           | no       | Defines if the target is a log `attribute` or a `tag`, default: `attribute`    |
-| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. possible value: `auto`, `string`, `long`  or `integer`, default: `auto`. When set to `auto`, no cast is applied.  |
+| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. Possible values: `auto`, `string`, or `integer`. Default: `auto`. When set to `auto`, no cast is applied.  |
 | `preserve_source`      | Boolean          | no       | Remove or preserve the remapped source element, default: `false`               |
 | `override_on_conflict` | Boolean          | no       | Override or not the target element if already set, default: `false`            |
 
@@ -569,16 +569,16 @@ Request GET https://app.datadoghq.com/users was answered with response 200
 
 **Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. For example, adding the block `%{array_ids}` returns:
 
-    ```text
-    123,456,789
-    ```
+```text
+123,456,789
+```
 
-    Whereas `%{array_users}` does not return anything because it is a list of objects.
-    However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
+Whereas `%{array_users}` does not return anything because it is a list of objects.
+However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
 
-    ```text
-    John,Jack
-    ```
+```text
+John,Jack
+```
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}

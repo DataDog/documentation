@@ -32,6 +32,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- developer tools
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/argocd/README.md
@@ -55,10 +56,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Developer Tools
+  - Category::Log Collection
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Log Collection
   configuration: README.md#Setup
   description: Argo CD
   media: []
@@ -79,6 +81,8 @@ tile:
 
 Argo CD チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
+
+**注**: この機能を使用するには、Agent v7.42.0 以上が必要です。
 
 ### コンフィギュレーション
 

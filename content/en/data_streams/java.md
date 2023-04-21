@@ -10,11 +10,15 @@ further_reading:
       text: 'Service Catalog'
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-info">Data Streams Monitoring is not supported in the AP1 region.</a></div>
+{{< /site-region >}}
+
 ### Prerequisites
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Java libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [APM enabled with the Java Agent v0.105 or later][2]
+* [APM enabled with the Java Agent v1.9.0 or later][2]
 
 ### Installation
 

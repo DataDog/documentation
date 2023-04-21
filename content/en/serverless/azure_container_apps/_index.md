@@ -18,12 +18,14 @@ Azure Container Apps is a fully managed serverless platform for deploying and sc
 
 Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
 
-### 1. Instrument using Dockerfile
-
-You can instrument your application by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
+### 1. Instrument your application
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
+
+#### Install Agent with Dockerfile
+
+You can instrument your application with a Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -41,14 +43,22 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
+#### Install tracing library
+Follow [these instructions][2] to install and configure the Go tracing library in your application to capture and submit traces. 
+
+
 [Sample code for a simple Go application][1].
-More details on the [Go tracing library][2].
+
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /serverless/installation/go/?tab=serverlessframework#install-the-datadog-lambda-library
+[2]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
+
+#### Install Agent with Dockerfile
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -68,15 +78,20 @@ ENTRYPOINT ["/app/datadog-init"]
 # execute your binary application wrapped in the entrypoint, launched by the Datadog trace library. Adapt this line to your needs
 CMD ["ddtrace-run", "python", "app.py"]
 ```
+#### Install tracing library
+Follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Python application][1].
-More details on the [Python tracing library][2].
 
 [1]: https://github.com/DataDog/crpb/tree/main/python
 [2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
+
+#### Install Agent with Dockerfile
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -101,15 +116,20 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
+#### Install tracing library
+Follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces. 
 
 [Sample code for a simple Node.js application][1].
-More details on the [Node.js tracing library][2].
 
 [1]: https://github.com/DataDog/crpb/tree/main/js
 [2]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
+
+#### Install Agent with Dockerfile
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -128,14 +148,20 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
+#### Install tracing library
+Follow [these instructions][2] to install and configure the Java tracing library in your application to capture and submit traces. 
+
 [Sample code for a simple Java application][1].
-More details on the [Java tracing library][2].
 
 [1]: https://github.com/DataDog/crpb/tree/main/java
 [2]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
+
+#### Install Agent with Dockerfile
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -154,8 +180,18 @@ CMD ["dotnet", "helloworld.dll"]
 
 ```
 
+#### Install tracing library
+Follow the instructions to install and configure the [.NET Core tracing library][1] and the [.NET Framework tracing library][2]. 
+
+[1]: /tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[2]: /tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
+
+#### Install Agent with Dockerfile
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -174,8 +210,11 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 ```
 
+#### Install tracing library
+
+Follow [these instructions][2] to install and configure the Ruby tracing library in your application to capture and submit traces. 
+
 [Sample code for a simple Ruby application][1].
-More details on the [Ruby tracing library][2].
 
 [1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 [2]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application

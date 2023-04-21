@@ -23,7 +23,7 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}Event Timeline{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/funnel" >}}Funnel{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" >}}Geomap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/heat_map" >}}Heatmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/list" >}}List{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Log Stream{{< /nextlink >}}
@@ -101,11 +101,11 @@ To copy multiple screenboard widgets (edit mode only), `shift + click` on the wi
 
 ### PNG
 
-To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select “Download as PNG”.
+To download a widget in PNG format, click the export button in the upper right hand side of the widget, and select **Download as PNG**.
 
 ### CSV
 
-To download data from a timeseries, table, or top list widget in CSV format, click the export button in the upper right hand side of the widget, and select “Download as CSV”.
+To download data from a timeseries, table, or top list widget in CSV format, click the export button in the upper right hand side of the widget, and select **Download as CSV**.
 
 ## Further Reading
 

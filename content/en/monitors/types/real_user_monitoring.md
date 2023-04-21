@@ -27,7 +27,7 @@ Once [Real User Monitoring (RUM) is enabled][1] for your organization, you can c
 
 To create a RUM monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Real User Monitoring**][2].
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 RUM monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 RUM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -94,5 +94,5 @@ For more information about the **Say what's happening** and **Notify your team**
 [3]: /real_user_monitoring/explorer/search/
 [4]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [5]: /real_user_monitoring/explorer/?tab=measures#setup-facets-measures
-[6]: /monitors/create/configuration/#advanced-alert-conditions
+[6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/

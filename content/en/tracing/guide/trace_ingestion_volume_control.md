@@ -84,7 +84,7 @@ Additionally, to reduce the volume of [error][9] and [rare][10] traces:
 
 ### Independently configure the ingestion sampling rate for services at the library level
 
-By configuring sampling rates for a few high-throughput services, most of the “exceeding” ingestion volume can be lowered.
+By configuring sampling rates for a few high-throughput services, most of the "exceeding" ingestion volume can be lowered.
 
 Click on a service to view the **Service Ingestion Summary**. Look at the **Ingestion reasons breakdown** in the side panel, which gives an overview of the share of ingestion volume attributed to each mechanism.
 
@@ -143,7 +143,7 @@ Read more about ingestion reasons in the [Ingestion Mechanisms documentation][2]
 [3]: /tracing/metrics/metrics_namespace/
 [4]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 [5]: /tracing/trace_pipeline/generate_metrics/
-[6]: /monitors/create/types/apm/?tab=analytics
+[6]: /monitors/types/apm/?tab=analytics
 [7]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
 [8]: /tracing/trace_pipeline/metrics/
 [9]: /tracing/trace_pipeline/ingestion_mechanisms/#error-traces

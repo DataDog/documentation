@@ -24,7 +24,7 @@ further_reading:
 
 ## Introduction
 
-Datadog’s Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
 
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level
@@ -41,12 +41,12 @@ If you are using Agent 5, follow this [specific installation process][1]. If you
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `"true"`:
 
 ```yaml
 process_config:
   process_collection:
-    enabled: true
+    enabled: "true"
 ```
 
 The `enabled` value is a string with the following options:
@@ -343,7 +343,7 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 ### APM
 
-In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
+In [APM Traces][10], you can click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
 
 ### Network Performance Monitoring
 
@@ -368,7 +368,7 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [3]: /getting_started/tagging/
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
-[6]: /monitors/create/types/process/
+[6]: /monitors/types/process/
 [7]: https://app.datadoghq.com/monitors#create/live_process
 [8]: /dashboards/widgets/timeseries/#pagetitle
 [9]: /infrastructure/livecontainers/
