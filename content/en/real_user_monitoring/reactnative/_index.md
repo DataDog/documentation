@@ -386,10 +386,6 @@ end
 
 **Note:** This solution comes from this [StackOverflow][14] post.
 
-## License
-
-For more information, see [Apache License, v2.0][9]
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
