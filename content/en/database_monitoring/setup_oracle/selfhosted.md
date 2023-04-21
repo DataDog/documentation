@@ -177,6 +177,20 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
+To install the basic Oracle integration, you should create an additional Oracle Agent conf file at `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`
+
+```yaml
+init_config:
+instances:
+  - server: '<HOSTNAME>:<SQL_PORT>'
+    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    username: 'c##datadog'
+    password: '<PASSWORD>'
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+```
+
 ### Validate
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Databases][6] page in Datadog to get started.
