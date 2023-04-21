@@ -49,7 +49,7 @@ After creating a template variable, Datadog displays the number of sources using
 
 ### Logs, APM, and RUM queries
 
-Template variables work with log, APM, and RUM widgets because metrics, logs, APM, and RUM share the same tags.
+Template variables work with log, APM, and RUM widgets because logs, APM, and RUM share the same tags.
 Additionally, you can define log, APM, and RUM template variables based on [log][2], APM, or [RUM][3] facets. These variables start with `@`, for example: `@http.status_code`.
 
 On log, APM, and RUM widgets, you can use wildcards in the middle of a value (for example, `eng*@example.com`) or use multiple wildcards in a value (for example, `*prod*`).
