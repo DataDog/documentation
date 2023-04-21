@@ -1,0 +1,80 @@
+---
+title: Getting started with Datadog Support
+kind: documentation
+further_reading:
+- link: "https://docs.datadoghq.com/agent/troubleshooting/"
+  tag: "Documentation"
+  text: "Agent Troubleshooting"
+---
+
+## Overview
+
+Datadog provides two primary channels for customers seeking support:
+   - [Open a support ticket][1].
+   - Live chat with Datadog Technical Support Engineers on a 1:1 level through a text chat. You can reach out to the support team through the chat link in Datadog, any business days between 10:00 and 19:00 (7:00 PM) ET.
+
+While both options focus on providing quick and effective solutions, one platform may be better suited depending on the timing, nature, and urgency of the request.
+
+This guide provides best practices for reaching out to the Support team, and guidelines for determining the support channel that’s right for you.
+
+## Prerequisites
+
+For the most efficient resolution of an issue, be ready to provide any of the relevant information and resources listed below:
+
+   - Organization name (if you have access to [more than one][2])
+   - [Datadog Site][3]
+   - Links to any pages demonstrating the issue in your Datadog account
+   - Screenshots or screen recordings of the behavior in question
+   - Steps that can be taken to replicate the issue
+   - Links to any documentation pages used
+
+## Chat or support ticket?
+
+### Support ticket
+
+A support ticket is recommended for:
+
+   - Questions or issues that may require significant technical investigation
+   - Questions or issues that are not urgent
+
+### Chat
+
+Reaching out on chat is recommended for:
+
+   - Urgent issues
+   - Call/Screenshare requests
+   - Incidents and outages
+   - Complex support troubleshooting across many configuration files, logs, or queries
+   - Product configuration support
+   - Setup questions
+   - Documentation clarification
+   - Simpler support troubleshooting involving a specific configuration file, log, or query
+
+If you're not sure which option is best, feel free to use either channel to connect with Datadog support. A support ticket is automatically created whenever a chat is closed, so the issue can continue to be investigated even if it's not resolved in chat.
+
+## Reaching out on chat
+
+To get started, click on **Live Chat** on the left panel of your Datadog Account.
+
+{{< img src="getting_started/chat/chat_button.png" alt="The chat button highlighted in Datadog" style="width:80%" >}}
+
+When a new chat is opened, you are asked if you have a **technical** or **sales** question.
+   - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.
+   - For sales questions, you are routed to the first available member of our sales team, who can answer questions about billing and account management.
+
+### Best practices for technical questions
+
+Ensure to have as many of the relevant [prerequisites](#prerequisites) available as possible. The Datadog Team member you connect with on chat does their best to collect information about the issue and resolve it. 
+
+### Following up
+
+When the chat closes, a support ticket is automatically created. If the issue was resolved on chat, the ticket can be closed. If additional investigation is required, the ticket is routed to experts in the appropriate areas, with a full transfer of the details and context provided during the chat. Use this ticket for further communication with the Datadog Support team.
+If you're unable to reach out on chat, open a support ticket through the [support page][1].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: help.datadoghq.com
+[2]: /account_management/org_switching/
+[3]: /getting_started/site/
