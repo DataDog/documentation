@@ -18,9 +18,7 @@ further_reading:
   text: "Learn more about Security notification variables"
 ---
 
-With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of out-of-the-box rules to detect suspicious behavior.
-
-CWS rules consist of two different components: [Agent rules](#agent-rules) and [detection rules](#detection-rules).
+With Cloud Workload Security (CWS) enabled, the Datadog Agent actively monitors system activity and evaluates it against a set of out-of-the-box rules to detect suspicious behavior. CWS rules consist of two different components: [Agent rules](#agent-rules) and [detection rules](#detection-rules).
 
 ## Agent rules
 
@@ -66,10 +64,8 @@ You can also write custom Agent rules and detection rules. This guide covers Age
 
 ### Define the agent rule
 
-1. In Datadog, navigate to the [Agent Configuration][4] page and click **New Rule**.
-
+1. On the [**Agent Configuration**][4] page, click **New Rule**.
 2. Add a name and description for the rule.
-
 3. Define the Agent expression in the **Expression** field using Datadog Security Language (SECL) syntax.
 
     {{< img src="security/cws/workload_security_rules/define_agent_expression.png" alt="Adding a rule to the Expression field" >}}
@@ -82,7 +78,6 @@ You can also write custom Agent rules and detection rules. This guide covers Age
     ```
 
 4. Click **Create Agent Rule**. This automatically navigates you back to the **Agent Configuration** page.
-
 5. Click **Download Agent Policy** to download a default policy file to your local machine.
 
 ### Deploy the policy in your environment
@@ -92,17 +87,18 @@ Next, upload the policy file to the Agent using the following instructions.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runtime-security.d` folder. Ensure the file minimally has `read` and `write` access for the `dd-agent` user on the host.
+Copy the `default.policy` file to the target host in the `{$DD_AGENT}/runtime-security.d` folder. At a minimum, the file must have `read` and `write` access for the `dd-agent` user on the host. This may require use of a utility such as SCP or FTP.
 
-  **Note:** This may require use of a utility such as SCP or FTP.
+To apply the changes, restart the [Datadog Agent][1].
+
+[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 
 {{% /tab %}}
 
 {{% tab "Helm" %}}
 
-1. Create a ConfigMap containing `default.policy`. For example, `kubectl create configmap jdefaultpol --from-file=default.policy`.
-
-2. Add the ConfigMap (`jdefaultpol`) into `values.yaml` with `datadog.securityAgent.runtime.policies.configMap`:
+1. Create a ConfigMap containing `default.policy`, for example, `kubectl create configmap jdefaultpol --from-file=default.policy`.
+2. Add the ConfigMap (`jdefaultpol`) to `values.yaml` with `datadog.securityAgent.runtime.policies.configMap`:
 
     ```yaml
     securityAgent:
@@ -126,11 +122,12 @@ Copy the `default.policy` file over to the target host in the `{$DD_AGENT}/runti
 
     **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with  `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
 
+4. Restart the [Datadog Agent][1].
+
+[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 
 {{% /tab %}}
 {{< /tabs >}}
-
-To finalize your setup, restart the [Datadog Agent][6].
 
 ### Configure the detection rule
 
@@ -142,11 +139,12 @@ After you upload the new default policy file to the agent, navigate to the [**Ru
 
     {{< img src="security/cws/workload_security_rules/define_runtime_expression.png" alt="Adding a rule to the expression field" >}}
 
-4. Define the logic for when this rule triggers a security signal. For example, `a>0` means a security signal triggers as long as the rule condition set in Step 3 is met at least once in the sliding time window. Select a severity to associate the rule with and select all relevant parties you want to notify.
+4. In the **Only generate a signal if there is a match** field, enter a query so that a trigger is only generated when a value is met. In the **This rule will not generate a signal if there is a match** field, enter suppression queries so that a trigger is not generated when the specified values are met.
+5. Define the logic for when this rule triggers a security signal. For example, `a>0` means a security signal triggers as long as the rule condition set in Step 3 is met at least once in the sliding time window. Select a severity to associate the rule with and select all relevant parties you want to notify.
 
     {{< img src="security/cws/workload_security_rules/rule_cases.png" alt="Setting a rule trigger, severity, and notification" >}}
 
-5. Set a rule trigger, severity, and notification. Name the rule and add the notification message in Markdown format. Use [Notification Variables][5] to provide specific details about the signal by referencing its tags and event attributes. After the message, add multiple tags to give more context to the signals generated by your custom rule.
+6. Set a rule trigger, severity, and notification. Name the rule and add the notification message in Markdown format. Use [Notification Variables][5] to provide specific details about the signal by referencing its tags and event attributes. After the message, add multiple tags to give more context to the signals generated by your custom rule.
 
     **Note**: Datadog recommends including a remediation runbook in the body. As noted in the template, use substitution variables to dynamically generate contextualized content at runtime.
 
@@ -158,5 +156,4 @@ After you upload the new default policy file to the agent, navigate to the [**Ru
 [3]: https://app.datadoghq.com/security/configuration/rules?product=cws
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
 [5]: /security/notifications/variables/
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: /security/cloud_workload_security/setup#remote-configuration
