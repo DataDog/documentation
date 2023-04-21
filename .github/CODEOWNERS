@@ -45,9 +45,9 @@ docker-compose-docs.yml                                 @DataDog/corpweb
 documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility @DataDog/documentation
 
 # Log collection
-content/en/logs/log_collection/android.md                       @Datadog/rum-mobile @DataDog/documentation
-content/en/logs/log_collection/flutter.md                       @Datadog/rum-mobile @DataDog/documentation
-content/en/logs/log_collection/ios.md                           @Datadog/rum-mobile @DataDog/documentation
+content/en/logs/log_collection/android.md                        @Datadog/rum-mobile @DataDog/documentation
+content/en/logs/log_collection/flutter.md                        @Datadog/rum-mobile @DataDog/documentation
+content/en/logs/log_collection/ios.md                            @Datadog/rum-mobile @DataDog/documentation
 
 # Traces
 content/en/tracing/trace_collection/dd_libraries/android.md     @Datadog/rum-mobile @DataDog/documentation
