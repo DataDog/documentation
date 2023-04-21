@@ -10,8 +10,8 @@ further_reading:
 ## Overview
 
 Datadog provides two primary channels for customers seeking support:
-   - [Open a support ticket][1].
-   - Live chat with Datadog Technical Support Engineers on a 1:1 level through a text chat. You can reach out to the support team through the chat link in Datadog, any business days between 10:00 and 19:00 (7:00 PM) ET.
+   - [Opening a support ticket][1].
+   - Chatting live with Datadog Technical Support Engineers through a text chat.
 
 While both options focus on providing quick and effective solutions, one platform may be better suited depending on the timing, nature, and urgency of the request.
 
