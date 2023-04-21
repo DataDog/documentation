@@ -34,7 +34,9 @@ Add custom tags to your spans corresponding to any dynamic value within your app
 
 {{< tabs >}}
 {{% tab "Active Span" %}}
-Access the current active [span][1] from any method within your code. **Note**: If the method is called and there is no active span, `active_span` is `nil`.
+Access the current active [span][1] from any method within your code. 
+
+**Note**: If the method is called and there is no active span, `active_span` is `nil`.
 
 ```ruby
 require 'ddtrace'

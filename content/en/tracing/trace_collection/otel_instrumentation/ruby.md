@@ -16,8 +16,8 @@ further_reading:
 
 ## Requirements and limitations
 
-- Datadog Ruby tracing library `dd-trace-rb` version 1.9.0 or greater
-- Gem version support 1.1.0 or greater
+- Datadog Ruby tracing library `dd-trace-rb` version 1.9.0 or greater.
+- Gem version support 1.1.0 or greater.
 
 The following OTel features implemented in the Datadog library as noted:
 

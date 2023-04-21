@@ -28,13 +28,13 @@ The environment variable values are comma-separated lists of header styles enabl
 
 If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then B3.
 
-When a new PHP script is launched, the tracer automatically checks for the presence of datadog headers for distributed tracing:
+When a new PHP script is launched, the tracer automatically checks for the presence of Datadog headers for distributed tracing:
 - `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
 - `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
 - `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
 - `x-datadog-tags` (environment variable: `HTTP_X_DATADOG_TAGS`)
 
-To manually set this information in a CLI script on new traces or an existing trace a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
+To manually set this information in a CLI script on new traces or an existing trace, a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
 
 ```php
 <?php
@@ -52,9 +52,6 @@ function processIncomingQueueMessage($message) {
 ```
 
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [7]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format

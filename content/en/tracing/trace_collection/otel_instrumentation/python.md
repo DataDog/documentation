@@ -15,8 +15,8 @@ further_reading:
 
 ## Requirements and limitations
 
-- Datadog python tracing library `dd-trace-py` version 1.12.0 or greater
-- Python version 3.7 or greater
+- Datadog python tracing library `dd-trace-py` version 1.12.0 or greater.
+- Python version 3.7 or greater.
 
 The following OTel features implemented in the Datadog library as noted:
 

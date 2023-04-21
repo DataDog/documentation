@@ -36,7 +36,7 @@ Extraction styles can be configured using:
 
 The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
 
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
 For reference details about the context propagation settings and other configuration, read [Java Tracing Library Configuration][1].
 
