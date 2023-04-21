@@ -23,7 +23,7 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, please start with the <a href="https://docs.datadoghq.com/tracing/setup/nodejs/">Node.js Setup Instructions</a>.
+If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="/tracing/setup/nodejs/">Node.js Setup Instructions</a>.
 </div>
 
 If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.

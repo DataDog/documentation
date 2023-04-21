@@ -73,7 +73,7 @@ end
 
 `options` is a `Hash` of integration-specific configuration settings.
 
-For a list of available integrations, and their configuration options, please refer to the following:
+For a list of available integrations, and their configuration options, refer to the following:
 
 | Name                     | Key                        | Versions Supported: MRI  | Versions Supported: JRuby | How to configure                    | Gem source                                                                     |
 | -------------------------- | -------------------------- |-------------------------|---------------------------|------------------|--------------|

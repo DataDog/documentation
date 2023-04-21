@@ -211,7 +211,7 @@ auto root_span = tracer->StartSpan("web.request");
 root_span->SetTag(datadog::tags::resource_name, "/user/profile");
 ```
 
-For more information, see [Setting up CPP and Custom Instrumentation][1].
+For more information, see [Setting up C++ and Custom Instrumentation][1].
 
 
 [1]: /tracing/trace_collection/custom_instrumentation/cpp/#manually-instrument-a-method
