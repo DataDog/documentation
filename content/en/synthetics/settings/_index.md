@@ -114,13 +114,13 @@ For more information about TOTP-based MFA in a browser test, see [TOTPs For Mult
 {{% /tab %}}
 {{% tab "Virtual Authenticator" %}}
 
-To complete a user journey with a Passkey in your Synthetics tests, create a Virtual Authenticator global variable. This global variable will generate and store Passkeys for all your Synthetics browser tests. For more information, see [Using Passkeys In Browser Tests][1].
+To complete a user journey with a passkey in your Synthetics tests, create a Virtual Authenticator global variable. This global variable will generate and store passkeys for all your Synthetics browser tests. For more information, see [Using passkeys In Browser Tests][1].
 
 1. Navigate to the **Global Variables** tab in [**Synthetic Monitoring & Continuous Testing** > **Settings**][1] and click **+ New Global Variable**.
 
 1. In the **Choose variable type** section, select **Virtual Authenticator**.
 2. In the **Specify variable details** section, enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores.
-3. Optionally, enter a **Description** and select **Tags** to associate with your variable. Datadog then creates a virtual authenticator that will generate and store your Passkeys. 
+3. Optionally, enter a **Description** and select **Tags** to associate with your variable. Datadog then creates a virtual authenticator that will generate and store your passkeys. 
 4. In the **Permissions settings** section, restrict access to your variable based on roles in your organization. For more information about roles, see the [RBAC documentation][2].
 
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-fido2.png" alt="Create a FIDO2 key" style="width:80%;" >}}
