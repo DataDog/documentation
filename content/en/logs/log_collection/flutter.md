@@ -45,9 +45,9 @@ myLogger.info('Info from my additional logger.');
 
 For more information about available logging options, see the [LoggingConfiguration class documentation][3].
 
-## Manage tags and attributes
+## Manage tags
 
-Tags and attributes set on loggers are local to each logger.
+Tags set on loggers are local to each logger.
 
 ### Add tags
 
@@ -69,7 +69,11 @@ logger.removeTag("build_configuration")
 
 For more information, see [Getting Started with Tags][4].
 
-## Default attributes
+## Manage attributes
+
+Attributes set on loggers are local to each logger.
+
+### Default attributes
 
 By default, the following attributes are added to all logs sent by a logger:
 
@@ -95,7 +99,7 @@ The `value` can be most types supported by the [`StandardMessageCodec` class][5]
 Use the `DdLogs.removeAttribute` method to remove a custom attribute from all logs sent by a specific logger:
 
 ```dart
-// This removes the attribute "user-status" from all further log send.
+// This removes the attribute "user-status" from all logs sent moving forward.
 logger.removeAttribute("user-status")
 ```
 
