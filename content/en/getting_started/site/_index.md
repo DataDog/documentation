@@ -24,7 +24,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
-| AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | AP1      |
+| AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | Japan |
 
 ## SDK domains
 
