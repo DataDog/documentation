@@ -11711,12 +11711,14 @@ components:
       - none
       - false_positive
       - testing_or_maintenance
+      - investigated_case_opened
       - other
       type: string
       x-enum-varnames:
       - NONE
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
+      - INVESTIGATED_CASE_OPENED
       - OTHER
     SignalAssigneeUpdateRequest:
       description: Attributes describing an assignee update operation over a security

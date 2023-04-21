@@ -41,18 +41,19 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   metadata:
     name: datadog
   spec:
+    global:
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
     features:
       apm:
         enabled: true
       logCollection:
         enabled: true
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
   ```
 
 4. Deploy the Datadog Agent:
