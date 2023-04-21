@@ -168,11 +168,7 @@ If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and 
  - custom (user) tags applied to VPC Internet Endpoints
  {{% /tab %}}
 
-
-
  {{< /tabs >}}
-
- [1]: /network_monitoring/performance/setup/#enhanced-resolution
 
 ### Domain resolution
 
@@ -278,3 +274,4 @@ The **Security** tab highlights potential network threats and findings detected 
 [6]: /security/cloud_workload_security/
 [7]: /security/cspm/
 [8]: /security/detection_rules/
+[9]: /network_monitoring/performance/setup/#enhanced-resolution
