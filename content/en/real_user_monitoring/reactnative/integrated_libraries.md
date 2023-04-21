@@ -14,6 +14,52 @@ further_reading:
   text: Learn how to explore your RUM data
 
 ---
+## Setup
+
+**Note**: This package is an integration for `react-navigation` library, please make sure you first install and setup the core `mobile-react-native` SDK.
+
+To install with NPM, run:
+
+```sh
+npm install @datadog/mobile-react-navigation
+```
+
+To install with Yarn, run:
+
+```sh
+yarn add @datadog/mobile-react-navigation
+```
+
+### Track view navigation
+To track changes in navigation as RUM Views, set the `onready` callback of your `NavigationContainer` component as follow. You can use the optional `ViewNamePredicate` parameter to replace the automatically detected View name with something more relevant to your use case.
+
+Returning `null` in the `ViewNamePredicate` prevents the new RUM View from being created. The previous RUM View remains active.
+
+```js
+import * as React from 'react';
+import { DdRumReactNavigationTracking, ViewNamePredicate } from '@datadog/mobile-react-navigation';
+import { Route } from "@react-navigation/native";
+
+const viewNamePredicate: ViewNamePredicate = function customViewNamePredicate(route: Route<string, any | undefined>, trackedName: string) {
+  return "My custom View Name"
+}
+
+function App() {
+  const navigationRef = React.useRef(null);
+  return (
+    <View>
+      <NavigationContainer ref={navigationRef} onReady={() => {
+        DdRumReactNavigationTracking.startTrackingViews(navigationRef.current, viewNamePredicate)
+      }}>
+        // …
+      </NavigationContainer>
+    </View>
+  );
+}
+```
+
+**Note**: Only one `NavigationContainer` can be tracked at the time. If you need to track another container, stop tracking the previous one first, using `DdRumReactNavigationTracking.stopTrackingViews()`.
+
 ## RUM Integrations
 
 ### Integrate with ReactNavigation
@@ -26,6 +72,7 @@ Datadog provides automatic integration for [React Navigation](https://reactnavig
         // ...
     </NavigationContainer>
 ```
+
 
 ## Further reading
 
