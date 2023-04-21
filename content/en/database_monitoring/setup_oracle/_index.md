@@ -25,4 +25,4 @@ The following deployment configurations are supported: on-prem, single-node, mul
 
 For setup instructions, select your hosting type:
 
-{{< partial name="dbm/dbm-setup-postgres" >}}
+{{< partial name="dbm/dbm-setup-oracle" >}}
