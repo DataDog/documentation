@@ -20,17 +20,22 @@ further_reading:
 
 The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problematic areas.
 
-{{< img src="network_performance_monitoring/network_map/network_map_2.png" alt="network_map" >}}
+**NEW SCREENSHOT**
 
 ## Setup
 
 The network map visualizes data collected by the Datadog Agent automatically. Once installed, no extra steps are necessary.
 
-## Configuration
+## Usage
 
-Use the page header to configure your network map:
+Select the **map** tab to configure your network map:
+
+**NEW SCREENSHOT**
+
+**NEW SCREENSHOT**
 
 1. Choose the tag you want your **Nodes** to represent with the first selector at the top of the page. Available tags are the same as those offered in the network page.
+    - If there are too many nodes, a second tag is automatically selected to group by. You can change this using the dropdown shown in the above screenshot. See [Clustering](#map-clusters) more information about clustering.
 2. Select the metric you want your **Edges** to represent:
 
     - Throughput sent
@@ -60,6 +65,22 @@ Hovering over a node highlights it and animates the directionality of the networ
 Click on a node and select _Inspect_ from the menu to contextualize it within the larger network:
 
 {{< img src="network_performance_monitoring/network_map/network_entity_zoom.mp4" alt="Network entity zoom" video="true" width="70%">}}
+
+## Map clusters
+
+**NEW SCREENSHOT**
+
+For complex networks, the map's query editor includes additional grouping fields. This enables you to render datasets that would otherwise have too many nodes to show at once on the map, as well as improve the performance of high cardinality queries.
+
+**NEW SCREENSHOT**
+
+Once loaded, you can view the nodes within a cluster by clicking on it to expand it. To collapse the cluster, click the gray area surrounding the nodes. 
+
+**NEW SCREENSHOT**
+
+Clustering is an additional dimension of grouping the nodes in the map. Large maps automatically get clustered to improve load time and readability of the map. Smaller maps are not clustered. To view the nodes within a cluster, click the cluster to expand it. To collapse the cluster, click anywhere in the gray cluster area. 
+
+**NEW SCREENSHOT**
 
 ## Further Reading
 
