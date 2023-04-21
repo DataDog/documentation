@@ -1442,6 +1442,21 @@ main:
     parent: tracing_otel_inst
     identifier: tracing_otel_inst_ruby
     weight: 103
+  - name: Go
+    url: tracing/trace_collection/otel_instrumentation/go/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/trace_collection/otel_instrumentation/nodejs/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_nodejs
+    weight: 105
+  - name: C++
+    url: tracing/trace_collection/otel_instrumentation/cpp/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_cpp
+    weight: 107
   - name: .NET
     url: tracing/trace_collection/otel_instrumentation/dotnet/
     parent: tracing_otel_inst
