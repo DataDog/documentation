@@ -356,7 +356,7 @@ Increase your filtering capabilities by adding extra attributes on top of the re
 
 When making changes to the user session object, all RUM events collected after the change contain the updated information.
 
-**Note**: If you delete the user session information (for a logout for instance) and continue the session, then the user information will be lost at the session level as the session takes the values from the last view.
+**Note**: If you delete the user session information, such as during a logout, the user information will still be available on the last view before the logout. However the user information will be lost on subsequent views and at the session level as the session data will get the values from the last view on the session.
 
 ### Identify user session
 
