@@ -1,19 +1,20 @@
 ---
-title: Ruby Open Standards
+title: Ruby OpenTracing Instrumentation
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/ruby
-description: 'Open Standards for Ruby'
+- /tracing/trace_collection/open_standards/ruby
+description: 'OpenTracing instrumentation for Ruby'
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
 ---
 
-## OpenTracing
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/ruby/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
 To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][1] for details.
 
-### Configuring Datadog tracer settings
+## Configuring Datadog tracer settings
 
 The underlying Datadog tracer can be configured by passing options (which match `Datadog::Tracer`) when configuring the global tracer:
 
@@ -24,13 +25,13 @@ OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new(options)
 
 It can also be configured by using `Datadog.configure` as described in the [Ruby tracer settings][2] section.
 
-### Activating and configuring integrations
+## Activating and configuring integrations
 
 By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][3] and [traces][4] from OpenTracing instrumentation you have in your application.
 
 However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][5] for more details.
 
-### Supported serialization formats
+## Supported serialization formats
 
 | Type                           | Supported? | Additional information                                                                                                                                                                                                                                                                                        |
 | ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
