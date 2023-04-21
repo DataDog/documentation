@@ -25508,6 +25508,14 @@ paths:
         schema:
           default: false
           type: boolean
+      - description: Include breakdown of usage by subcategories where applicable
+          (for product family logs only). Defaults to false.
+        in: query
+        name: filter[include_breakdown]
+        required: false
+        schema:
+          default: false
+          type: boolean
       - description: 'Comma separated list of product family versions to use in the
           format `product_family:version`. For example,
 
