@@ -356,6 +356,8 @@ Increase your filtering capabilities by adding extra attributes on top of the re
 
 When making changes to the user session object, all RUM events collected after the change contain the updated information.
 
+**Note**: If you delete the user session information (for a logout for instance) and continue the session, then the user information will be lost at the session level as the session takes the values from the last view.
+
 ### Identify user session
 
 `datadogRum.setUser(<USER_CONFIG_OBJECT>)`
