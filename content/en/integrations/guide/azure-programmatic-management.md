@@ -97,6 +97,65 @@ You can use multiple provider blocks with aliases to manage Terraform resources 
 
 Datadog's [Azure integration endpoints][8] enable you to create and manage the Azure integration with Datadog's APIs.
 
+## Datadog Azure VM Extension
+
+### Terraform
+
+You can use Terraform to create and manage the Datadog Agent extension. Follow these steps to install and configure the Agent on a single machine, and then upload a zipped configuration file to blob storage to be referenced in your VM Extension Terraform block.
+
+1. [Install the Agent][11].
+2. Apply any desired [Agent configurations][12].
+3. For Windows Server 2008, Vista and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
+4. Upload the file to blob storage.
+5. Reference the blob storage URL in the Terraform block to create the VM extension:
+
+{{< tabs >}}
+{{% tab "Windows" %}}
+
+```
+  resource "azurerm_virtual_machine_extension" "example" {
+  name                 = "DDAgentExtension"
+  virtual_machine_id   = azurerm_virtual_machine.example.id
+  publisher            = "Datadog.Agent"
+  type                 = "DatadogWindowsAgent"
+  type_handler_version = "2.0"
+   settings = <<SETTINGS
+  {
+    "site":"<DATADOG_SITE>"
+  }
+  SETTINGS
+   protected_settings = <<PROTECTED_SETTINGS
+  {
+    "DATADOG_API_KEY": "<DATADOG_API_KEY_VALUE>"
+  }
+  PROTECTED_SETTINGS
+```
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+```
+  resource "azurerm_virtual_machine_extension" "example" {
+  name                 = "DDAgentExtension"
+  virtual_machine_id   = azurerm_virtual_machine.example.id
+  publisher            = "Datadog.Agent"
+  type                 = "DatadogLinuxAgent"
+  type_handler_version = "2.0"
+   settings = <<SETTINGS
+  {
+    "site":"<DATADOG_SITE>"
+  }
+  SETTINGS
+   protected_settings = <<PROTECTED_SETTINGS
+  {
+    "DATADOG_API_KEY": "<DATADOG_API_KEY_VALUE>"
+  }
+  PROTECTED_SETTINGS
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+See the [Virtual Machine Extension resource][10] in the Terraform registry for more information about the available arguments.
+
 ## Logs
 
 {{% site-region region="us3" %}}
@@ -188,3 +247,6 @@ Datadog provides monitoring capabilities for serverless resources with the [Micr
 [7]: /integrations/azure_container_service/
 [8]: /api/latest/azure-integration/
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
+[10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
+[11]: https://app.datadoghq.com/account/settings#agent
+[12]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7
