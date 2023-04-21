@@ -31,7 +31,7 @@ The *Display* parameter allows you to break out the query by the groups that are
 | SLO status | For each time bucket, the SLO status is calculated as the number of good events divided by the total number of events across that time period. | The sum of good events divided by total number of events over the global time interval. |
 | Error budget remaining | Each time bucket represents the error budget remaining across that time period. The target for the [primary time window][3] is used in the error budget calculation. | The error budget remaining at the end of the global time interval. |
 | Burn rate | Each time bucket represents the burn rate across that time period. Burn rate is defined as the observed error rate divided by the ideal error rate. | The burn rate over the global time interval. |
-| Error budget burndown | Error budget burndown graphs how you spent your error budget, that is, when your service had bad events. The graph begins at 100% error budget remaining at the start of the global time interval and monotonically decreases. | Error budget burndown is only available as a timeseries. |
+| Error budget burndown | Error budget burndown graphs how you spent your error budget, that is, when your service had bad events. The graph begins at 100% error budget remaining at the start of the global time interval (unless there were bad events within the first time bucket) and monotonically decreases. | Error budget burndown is only available as a timeseries. |
 
 
 [1]: /dashboards/scheduled_reports/

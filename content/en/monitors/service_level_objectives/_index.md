@@ -212,7 +212,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
   - Use the SLO Summary widget to visualize the status of a single SLO.
   - Use the SLO List widget to visualize a set of SLOs
-  - Graph metrics-based SLO data with the [SLO data source][18] in Timeseries/scalar widgets. 
+  - Graph 15-months of metric-based SLO data with the [SLO data source][18] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
 For more information about SLO Widgets, see the [SLO Summary][19] and [SLO List][20] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][18].
 
