@@ -11,6 +11,9 @@ further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+- link: "/tracing/trace_collection/trace_context_propagation/cpp/"
+  tag: "Documentation"
+  text: "Propagating trace context"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].

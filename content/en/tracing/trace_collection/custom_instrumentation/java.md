@@ -1,12 +1,12 @@
 ---
-title: Java Custom Instrumentation
+title: Java Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/opentracing/java
     - /tracing/manual_instrumentation/java
     - /tracing/custom_instrumentation/java
     - /tracing/setup_overview/custom_instrumentation/java
-description: 'Implement the OpenTracing standard with the Datadog Java APM tracer.'
+description: 'Instrument your code with the Datadog Java APM tracer.'
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -26,7 +26,7 @@ This page details common use cases for adding and customizing observability with
 
 ## Adding tags
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 ### Add custom span tags
 
@@ -87,7 +87,7 @@ import io.opentracing.log.Fields;
     }
 ```
 
-**Note**: `Span.log()` is a generic OpenTracing mechanism for associating events to the current timestamp.  The Java Tracer only supports logging error events.
+**Note**: `Span.log()` is a generic OpenTracing mechanism for associating events to the current timestamp. The Java Tracer only supports logging error events.
 Alternatively, you can set error tags directly on the span without `log()`:
 
 ```java
@@ -113,7 +113,7 @@ import java.io.StringWriter;
 
 **Note**: You can add any relevant error metadata listed in the [trace view docs][3]. If the current span isn't the root span, mark it as an error by using the `dd-trace-api` library to grab the root span with `MutableSpan`, then use `setError(true)`. See the [setting tags & errors on a root span][4] section for more details.
 
-### Set tags & errors on a root span from a child span
+### Set tags and errors on a root span from a child span
 
 When an event or condition happens downstream, you may want that behavior or value reflected as a tag on the top level or root span. This can be useful to count an error or for measuring performance, or setting a dynamic tag for observability.
 
@@ -187,7 +187,7 @@ Using the `dd.trace.methods` system property, you can get visibility into unsupp
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-app -Ddd.trace.methods=store.db.SessionManager[saveSession] -jar path/to/application.jar
 ```
 
-The only difference between this approach and using `@Trace` annotations is the customization options for the operation and resource names.  With DD Trace Methods, `operationName` is `trace.annotation` and `resourceName` is `SessionManager.saveSession`.
+The only difference between this approach and using `@Trace` annotations is the customization options for the operation and resource names. With DD Trace Methods, `operationName` is `trace.annotation` and `resourceName` is `SessionManager.saveSession`.
 
 ### Trace annotations
 
@@ -195,7 +195,7 @@ Add `@Trace` to methods to have them be traced when running with `dd-java-agent.
 
 Datadog's Trace annotation is provided by the [dd-trace-api dependency][6].
 
-`@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented.  These are the only possible arguments that can be set for the `@Trace` annotation.
+`@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented. These are the only possible arguments that can be set for the `@Trace` annotation.
 
 ```java
 import datadog.trace.api.Trace;
@@ -212,7 +212,7 @@ Note that through the `dd.trace.annotations` system property, other tracing meth
 
 ### Manually creating a new span
 
-In addition to automatic instrumentation, the `@Trace` annotation, and `dd.trace.methods` configurations , you can customize your observability by programmatically creating spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
+In addition to automatic instrumentation, the `@Trace` annotation, and `dd.trace.methods` configurations , you can customize your observability by programmatically creating spans around any block of code. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
 
 ```java
 import datadog.trace.api.DDTags;
@@ -326,40 +326,13 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-### Headers extraction and injection
+### Propagating context with headers extraction and injection
 
-The Datadog APM Tracer supports [B3][8] and [W3C (Trace Context)][9] header extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The Java Tracer supports the following styles:
-
-- Datadog: `datadog`
-- B3 Multi Header: `b3multi` (`b3` alias is deprecated)
-- W3C Trace Context: `tracecontext` (Available since 1.11.0)
-- B3 Single Header: `b3 single header` (`b3single`)
-
-`dd.trace.propagation.style.inject`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
-**Default**: `datadog`<br>
-A comma-separated list of header formats to include to propagate distributed traces between services.<br>
-Available since version 1.9.0
-
-`dd.trace.propagation.style.extract`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
-**Default**: `datadog`<br>
-A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
-Available since version 1.9.0
-
-`dd.trace.propagation.style`
-: **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
-**Default**: `datadog`<br>
-A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
-Available since version 1.9.0
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][8] for information.
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][10] page or in [Ignoring Unwanted Resources][11].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][9] page or in [Ignoring Unwanted Resources][10].
 
 ## Further Reading
 
@@ -372,7 +345,6 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [5]: /tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: https://github.com/openzipkin/b3-propagation
-[9]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
-[10]: /tracing/security
-[11]: /tracing/guide/ignoring_apm_resources/
+[8]: /tracing/trace_collection/trace_context_propagation/java/
+[9]: /tracing/security
+[10]: /tracing/guide/ignoring_apm_resources/
