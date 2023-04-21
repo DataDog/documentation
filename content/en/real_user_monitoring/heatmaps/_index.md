@@ -19,13 +19,13 @@ To get started with heatmaps:
 - You must be on the latest version of the SDK (v4.20.0 or later)
 - Enable [Session Replay][1].
 - Set`trackUserInteractions: true` in the SDK initialization to enable action tracking.
-- While heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
+- While heatmaps are in beta, enable the feature flag by adding the following code to the [intitialization][2] of RUM:
 
-```json
+```diff
 datadogRum.init({
     ...
     trackUserInteractions: true,
-    enableExperimentalFeatures: ['clickmap']
++    enableExperimentalFeatures: ['clickmap']
 })
 ```
 
@@ -100,7 +100,7 @@ User information is not collected by default. Heatmaps use the user information 
 
 
 [1]: /real_user_monitoring/session_replay/
-[2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
+[2]: https://docs.datadoghq.com/real_user_monitoring/browser/#npm
 [3]: https://app.datadoghq.com/rum/heatmap/view
 [4]: /real_user_monitoring/explorer/
 [5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
