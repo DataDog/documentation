@@ -291,6 +291,8 @@ Use one of Datadog's integrations to automatically track views for the following
 -   If you use the [`react-native-navigation`][5] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][6].
 -   If you use the [`react-navigation`][7] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][8].
 
+If you experience any issue setting up View tracking with `@datadog/mobile-react-navigation` you can check out our [example application][16].
+
 ## Track custom attributes
 
 You can attach user information to all RUM events to get more detailed information from your RUM sessions.
@@ -342,7 +344,7 @@ While in development mode, your application can submit extra events related to t
 
 To prevent these events from showing in the dashboard, you can disable errors and resources tracking in dev mode using the `__DEV__` flag:
 
-```
+```js
 const config = new DdSdkReactNativeConfiguration(
 	CLIENT_TOKEN,
 	ENVIRONMENT,
@@ -405,3 +407,4 @@ end
 [13]: /real_user_monitoring/reactnative/expo/
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 [15]: /getting_started/tagging/#define-tags
+[16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
