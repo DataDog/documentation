@@ -12,6 +12,9 @@ further_reading:
   - link: "https://docs.datadoghq.com/continuous_integration/guides/pull_request_comments/"
     tag: "Documentation"
     text: "Enable test summaries on your GitHub pull requests"
+  - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+    tag: "Blog"
+    text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
 ---
 
 ## Overview
