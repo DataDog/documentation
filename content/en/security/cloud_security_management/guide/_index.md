@@ -9,6 +9,7 @@ aliases:
 
 {{< whatsnext desc="Cloud Workload Security Guides" >}}
     {{< nextlink href="/security/cloud_security_management/guide/tuning-rules" >}}Best Practices for Fine-Tuning CWS Security Signals{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/custom-rules-guidelines" >}}Guidelines for writing custom CWS rules{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud Security Posture Management Guides" >}}
