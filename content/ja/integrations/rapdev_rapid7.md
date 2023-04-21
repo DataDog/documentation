@@ -49,7 +49,7 @@ pricing:
   product_id: rapid7
   short_description: このインテグレーションの定額料金
   unit_price: 500
-public_title: Rapid7 インテグレーション
+public_title: Rapid7
 short_description: Rapid7 ログおよび調査アクティビティを監視します
 supported_os:
 - linux
@@ -76,7 +76,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Rapid7 インテグレーション
+  title: Rapid7
   uninstallation: README.md#Uninstallation
 ---
 
