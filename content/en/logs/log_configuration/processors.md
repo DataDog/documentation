@@ -569,16 +569,16 @@ Request GET https://app.datadoghq.com/users was answered with response 200
 
 **Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. For example, adding the block `%{array_ids}` returns:
 
-    ```text
-    123,456,789
-    ```
+```text
+123,456,789
+```
 
-    Whereas `%{array_users}` does not return anything because it is a list of objects.
-    However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
+Whereas `%{array_users}` does not return anything because it is a list of objects.
+However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
 
-    ```text
-    John,Jack
-    ```
+```text
+John,Jack
+```
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
