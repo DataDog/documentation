@@ -3,6 +3,10 @@ title: Guidelines for writing custom CWS rules
 kind: guide
 ---
 
+At some point, you may want to write your own custom rules for the Agent to use. Below are guidelines for writing efficient rules and step-by-step instructions on how to create custom rules in Datadog.
+
+## Guidelines for writing efficient rules
+
 When writing your own Cloud Workload Security (CWS) rules, there are a few strategies you can use to optimize for efficiency.
 
 ## Attributes
