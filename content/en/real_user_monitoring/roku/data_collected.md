@@ -12,13 +12,12 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">RUM for Roku is in beta.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -28,14 +27,14 @@ Every RUM event has all of the [default attributes](#default-attributes), for ex
 
 There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
 
-| Event Type | Retention | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ---------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Session    | 30 days   | A session represents a real user journey on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session will share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background. |
-| View       | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `onActivityResumed` and `onActivityPaused` callbacks are called through the `ActivityLifecycleCallbacks` interface. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                                                        |
-| Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                                                                                                                                                                                           |
-| Error      | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                                                                                                                                                                                                                                                  |
-| Action     | 30 days   | An action represents user activity in your mobile application (such as an application launch, tap, swipe, or back). Each action is attached with a unique `action.id` attached to the view it gets generated in.                                                                                                                                                                                                                                                                      |
-| Long Task  | 15 days   | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold.                                                                                                                                                                                                                                                                                                                                            |
+| Event Type | Retention | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Session    | 30 days   | A session represents a real user journey on your Roku channel. It begins when the user launches the channel, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session will share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the channel crashes or is killed by the Roku OS, it will reset the session. |
+| View       | 30 days   | A view represents a unique screen (or screen segment) on your Roku channel. A view starts when you call the `startView` function and stops when a new view is started. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                                                                               |
+| Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your Roku channel. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                                                                                                                                                        |
+| Error      | 30 days   | An error represents an exception or crash emitted by the Roku channel attached to the view it is generated in.                                                                                                                                                                                                                                                                                                                               |
+| Action     | 30 days   | An action represents user activity in your Roku channel (such as a remote click). Each action is attached with a unique `action.id` attached to the view it gets generated in.                                                                                                                                                                                                                                                               |
+| Long Task  | 15 days   | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold.                                                                                                                                                                                                                                                                                                   |
 
 The following diagram illustrates the RUM event hierarchy:
 
@@ -233,8 +232,6 @@ Network errors include information about failing HTTP requests. The following fa
 ## Data Storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in your channel's [cache directory][6], meaning that this data can't be read by other applications. Note that the OS can evict the data at any time, which could result in data loss in some rare cases. 
-
-{{< /site-region >}}
 
 ## Further Reading
 

@@ -12,14 +12,12 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
-
 <div class="alert alert-info">RUM for Roku is in beta.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -63,21 +61,9 @@ To ensure the safety of your data, you must use a client token. If you used only
 
 For more information about setting up a client token, see the [Client Token documentation][4].
 
-
-[1]: https://github.com/DataDog/dd-sdk-android
-[2]: https://app.datadoghq.com/rum/application/create
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /real_user_monitoring/
-[9]: /real_user_monitoring/android/data_collected/
-
 ### Initialize the library
 
 In the initialization snippet, set an environment name. For more information, see [Using Tags][8].
-
-[8]: /getting_started/tagging/using_tags/#rum--session-replay
-
-{{< /site-region >}}
 
 {{< site-region region="us" >}}
 ```brightscript
@@ -163,7 +149,6 @@ end sub
 ```
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 ### Instrument the channel
 
 See [**Track RUM Resources**][6] to enable automatic tracking of all your views (activities, fragments, and more), and [**Enrich user sessions**][7] to add custom global or user information to your events.
@@ -201,12 +186,7 @@ Whenever you perform an operation that might throw an exception, you can forward
 ```
 
 
-[5]: /real_user_monitoring/
-[6]: /real_user_monitoring/roku/advanced_configuration/#track-rum-resources
-[7]: /real_user_monitoring/roku/advanced_configuration/#enrich-user-sessions
 
-
-{{< /site-region >}}
 
 ## Further Reading
 
@@ -216,5 +196,8 @@ Whenever you perform an operation that might throw an exception, you can forward
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
+[5]: /real_user_monitoring/
+[6]: /real_user_monitoring/roku/advanced_configuration/#track-rum-resources
+[7]: /real_user_monitoring/roku/advanced_configuration/#enrich-user-sessions
 [8]: /getting_started/tagging/using_tags/#rum--session-replay
 [9]: /real_user_monitoring/android/data_collected/

@@ -11,13 +11,12 @@ further_reading:
   text: Explore Datadog RUM
 ---
 {{< site-region region="gov" >}}
-
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-info">RUM for Roku is in beta.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -138,7 +137,6 @@ In addition to the default attributes captured by the SDK automatically, you can
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/roku
 
-{{< /site-region >}}
 
 ## Further Reading
 
