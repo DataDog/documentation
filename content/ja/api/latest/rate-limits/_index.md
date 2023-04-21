@@ -1,6 +1,6 @@
 ---
 title: レート制限
-type: api
+type: documentation
 ---
 
 {{< h2 >}}レート制限{{< /h2 >}}
