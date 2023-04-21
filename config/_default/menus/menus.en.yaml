@@ -3342,11 +3342,16 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_otel_support
     weight: 505
+  - name: Web View Tracking
+    url: real_user_monitoring/flutter/web_view_tracking/
+    parent: rum_flutter
+    identifier: rum_flutter_web_view_tracking
+    weight: 506
   - name: Troubleshooting
     url: real_user_monitoring/flutter/troubleshooting/
     parent: rum_flutter
     identifier: rum_flutter_troubleshooting
-    weight: 506
+    weight: 507
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
