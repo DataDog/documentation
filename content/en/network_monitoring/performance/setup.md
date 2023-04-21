@@ -440,8 +440,8 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Enhanced Resolution
 {{< site-region region="us,us3,us5,eu" >}}
+### Enhanced Resolution
 
 Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
 - Install the [Azure integration][1] for visibility into Azure load balancers and NAT gateways.
