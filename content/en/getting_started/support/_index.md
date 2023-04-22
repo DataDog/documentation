@@ -68,8 +68,9 @@ Ensure to have as many of the relevant [prerequisites](#prerequisites) available
 
 ### Following up
 
-When the chat closes, a support ticket is automatically created. If the issue was resolved on chat, the ticket can be closed. If additional investigation is required, the ticket is routed to experts in the appropriate areas, with a full transfer of the details and context provided during the chat. Use this ticket for further communication with the Datadog Support team.
-If you're unable to reach out on chat, open a support ticket through the [support page][1].
+When the chat closes, a support ticket is automatically created. If the issue was resolved on chat, the ticket can be closed. 
+
+If additional investigation is required, the ticket is routed to experts in the appropriate areas, with a full transfer of the details and context provided during the chat. Use the ticket for further communication with the Datadog Support team.
 
 ## Further reading
 
