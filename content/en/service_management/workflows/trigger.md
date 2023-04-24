@@ -5,7 +5,7 @@ disable_toc: false
 aliases:
 - /workflows/trigger/
 further_reading:
-- link: "/workflows/access/#service-accounts/"
+- link: "/service_management/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
@@ -101,6 +101,6 @@ The initial **Debug** view for a workflow provides a panel with the list of prev
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /workflows/access/#service-accounts
+[1]: /service_management/workflows/access/#service-accounts
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules
