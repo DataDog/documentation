@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - ファネル
 disable_toc: false
 further_reading:
 - link: /real_user_monitoring/explorer/
