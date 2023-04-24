@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_cosmosdbforpostgresql
 categories:
-- クラウド
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure Cosmos DB for PostgreSQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb_for_postgresql/

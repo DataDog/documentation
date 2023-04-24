@@ -1,13 +1,13 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: モニターガイド
 disable_toc: true
-kind: guide
+kind: ガイド
 private: true
 title: モニターガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: モニターガイド
 ---
 
 {{< whatsnext desc="アラート、ダウンタイム、メッセージ:" >}}
