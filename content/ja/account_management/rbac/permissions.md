@@ -1,4 +1,8 @@
 ---
+algolia:
+  category: Documentation
+  rank: 80
+  subcategory: Datadog ロールのアクセス許可
 aliases:
 - /ja/account_management/faq/managing-global-role-permissions
 disable_toc: true
@@ -11,11 +15,6 @@ further_reading:
   text: Permission API を使用してアクセス許可を管理する
 kind: ドキュメント
 title: Datadog ロールのアクセス許可
-cascade:
-    algolia:
-        rank: 80
-        category: Documentation
-        subcategory: Datadog ロールのアクセス許可
 ---
 
 ロールを作成した後、[Datadog でロールを更新][1]するか [Datadog Permission API][2] を使用して、このロールへアクセス許可を直接割り当てたり削除したりできます。利用可能なアクセス許可の一覧は次のとおりです。
@@ -45,7 +44,6 @@ cascade:
 一般的なアクセス許可の他に、特定のアセットやデータタイプに対しより粒度の高いアクセス許可を定義することもできます。アクセス許可は、グローバルにすることも要素のサブセットに範囲を絞ることもできます。オプションの詳細と利用可能なアクセス許可に対する影響に関しては、以下をご覧ください。
 
 {{% permissions %}}
-
 
 ## その他の参考資料
 

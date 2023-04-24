@@ -13,14 +13,9 @@ further_reading:
 - link: モニター
   tag: ドキュメント
   text: モニターの詳細はこちら
-is_beta: true
 kind: documentation
 title: ワークフローをトリガーする
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows は公開ベータ版です。フィードバックや質問がある場合は、<a href="/help">Datadog サポート</a>にご連絡ください。
-{{< /callout >}}
 
 ワークフローは、手動または自動でトリガーすることができます。
 
