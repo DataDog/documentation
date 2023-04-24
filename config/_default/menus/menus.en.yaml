@@ -5,27 +5,30 @@ main:
   - name: In The App
     identifier: platform_heading
     weight: 2000000
+  - name: Service Management
+    identifier: service_management_heading
+    weight: 3000000
   - name: Infrastructure
     identifier: infrastructure_heading
-    weight: 3000000
+    weight: 4000000
   - name: Application Performance
     identifier: apm_heading
-    weight: 4000000
+    weight: 5000000
   - name: Continuous Integration
     identifier: ci_visibility_heading
-    weight: 5000000
+    weight: 6000000
   - name: Log Management
     identifier: log_management_heading
-    weight: 6000000
+    weight: 7000000
   - name: Security
     identifier: security_platform_heading
-    weight: 7000000
+    weight: 8000000
   - name: UX Monitoring
     identifier: ux_monitoring_heading
-    weight: 8000000
+    weight: 9000000
   - name: Administration
     identifier: administration_heading
-    weight: 9000000
+    weight: 10000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -728,12 +731,12 @@ main:
     parent: dashboards
     identifier: guides
     weight: 9
-  - name: Mobile Application
-    url: mobile/
-    identifier: mobile
-    pre: mobile
-    parent: platform_heading
-    weight: 70000
+  # - name: Mobile Application
+  #   url: mobile/
+  #   identifier: mobile
+  #   pre: mobile
+  #   parent: platform_heading
+  #   weight: 70000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1128,115 +1131,126 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
-  - name: Service Management
-    url: service_management/
-    pre: events
-    identifier: service_management_top_level
-    parent: platform_heading
-    weight: 110000
+  # - name: Service Management
+  #   url: service_management/
+  #   pre: events
+  #   parent: service_management_heading
+  #   identifier: service_management
+  #   parent: platform_heading
+  #   weight: 10000
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
-    weight: 1
-    parent: service_management_top_level
+    pre: slos
+    weight: 20000
+    parent: service_management_heading
     identifier: slos
   - name: Monitor-based SLOs
     url: service_management/service_level_objectives/monitor/
     parent: slos
     identifier: slos_monitor
-    weight: 101
+    weight: 1
   - name: Metric-based SLOs
     url: service_management/service_level_objectives/metric/
     parent: slos
     identifier: slos_metric
-    weight: 102
+    weight: 2
   - name: Error Budget Alerts
     url: service_management/service_level_objectives/error_budget/
     parent: slos
     identifier: error_budget
-    weight: 103
+    weight: 3
   - name: Burn Rate Alerts
     url: service_management/service_level_objectives/burn_rate/
     parent: slos
     identifier: burn_rate
-    weight: 104
+    weight: 4
   - name: Events
     url: service_management/events/
+    pre: events
     identifier: events
-    parent: service_management_top_level
-    weight: 2
+    parent: service_management_heading
+    weight: 30000
   - name: Explorer
     url: service_management/events/explorer/
     identifier: event_explorer
     parent: events
-    weight: 201
+    weight: 1
+  - name: Guides
+    url: service_management/events/guides/
+    identifier: events_guides
+    parent: events
+    weight: 2
   - name: Case Management
-    url: service_management/case_management
-    parent: service_management_top_level
+    url: service_management/case_management/
+    pre: inbox
+    parent: service_management_heading
     identifier: case_management
-    weight: 3
+    weight: 40000
   - name: Incident Management
-    url: service_management/incident_management
-    parent: service_management_top_level
+    url: service_management/incident_management/
+    pre: incidents
+    parent: service_management_heading
     identifier: incidents
-    weight: 4
+    weight: 50000
   - name: Incident Details
     url: service_management/incident_management/incident_details
     parent: incidents
     identifier: incident_details
-    weight: 401
+    weight: 1
   - name: Incident Settings
     url: service_management/incident_management/incident_settings
     parent: incidents
     identifier: incidents_settings
-    weight: 402
+    weight: 2
   - name: Incident Analytics
     url: service_management/incident_management/analytics
     parent: incidents
     identifier: analytics
-    weight: 403
+    weight: 3
   - name: Datadog Clipboard
     url: service_management/incident_management/datadog_clipboard
     parent: incidents
     identifier: incidents_clipboard
-    weight: 404
-  - name: Guides
-    url: service_management/guides/
-    identifier: service_management_guides
-    parent: service_management_top_level
-    weight: 100
+    weight: 4
+  - name: Mobile Application
+    url: service_management/mobile/
+    identifier: mobile
+    pre: mobile
+    parent: service_management_heading
+    weight: 60000
   - name: Workflows
-    url: workflows/
+    url: service_management/workflows/
     pre: workflows
     identifier: workflows
-    parent: platform_heading
-    weight: 120000
+    parent: service_management_heading
+    weight: 70000
   - name: Build Workflows
-    url: workflows/build/
+    url: service_management/workflows/build/
     parent: workflows
     identifier: workflows_build
     weight: 1
   - name: Authentication
-    url: workflows/access/
+    url: service_management/workflows/access/
     parent: workflows
     identifier: workflows_access
     weight: 2
   - name: Trigger Workflows
-    url: workflows/trigger/
+    url: service_management/workflows/trigger/
     parent: workflows
     identifier: workflows_trigger
     weight: 3
   - name: Actions Catalog
-    url: workflows/actions_catalog/
+    url: service_management/workflows/actions_catalog/
     parent: workflows
     identifier: workflows_actions_catalog
     weight: 4
   - name: Generic Actions
-    url: workflows/actions_catalog/generic_actions/
+    url: service_management/workflows/actions_catalog/generic_actions/
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
   - name: Connections
-    url: workflows/connections/
+    url: service_management/workflows/connections/
     parent: workflows
     identifier: workflows_connections
     weight: 5
