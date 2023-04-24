@@ -181,13 +181,13 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 do {
                     if (target === searchBoxContainerContainer) return;
 
-                    target = target.parentNode;
-
-                    if (target && target.href) {
+                    if (target && target.href && hitsContainer.contains(e.target)) {
                         sendSearchRumAction(search.helper.state.query)
                         window.history.pushState({}, '', target.href)
                         window.location.reload()
                     }
+
+                    target = target.parentNode;
                 } while (target);
 
                 hitsContainerContainer.classList.add('d-none');
