@@ -190,19 +190,19 @@ To create a postmortem template:
 5. Click **Save**
 
 [1]: https://app.datadoghq.com/incidents/settings
-[2]: /monitors/incident_management/analytics
-[3]: /monitors/incident_management/#from-the-incidents-page
+[2]: /service_management/incident_management/analytics
+[3]: /service_management/incident_management/#from-the-incidents-page
 [4]: https://app.datadoghq.com/incidents
 [5]: /tracing/
 [6]: /account_management/teams/
 [7]: /getting_started/tagging/using_tags/?tab=assignment#metrics
-[8]: /monitors/incident_management/incident_details/#overview-section
+[8]: /service_management/incident_management/incident_details/#overview-section
 [9]: /dashboards/
 [10]: /notebooks/
-[11]: /monitors/incident_management/incident_details/#response-team-section
+[11]: /service_management/incident_management/incident_details/#response-team-section
 [12]: /account_management/rbac/?tab=datadogapplication#pagetitle
 [13]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [14]: https://app.datadoghq.com/account/settings#integrations/slack
-[15]: /monitors/incident_management/incident_details/#notifications-section
+[15]: /service_management/incident_management/incident_details/#notifications-section
 [16]: /monitors/notifications/?tab=is_alert#notify-your-team
 [17]: /mobile/

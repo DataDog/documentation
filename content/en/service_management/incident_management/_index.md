@@ -230,13 +230,13 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [3]: /mobile
 [4]: https://apps.apple.com/app/datadog/id1391380318
 [5]: https://play.google.com/store/apps/details?id=com.datadog.app
-[6]: /monitors/incident_management/incident_settings#information
+[6]: /service_management/incident_management/incident_settings#information
 [7]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [8]: /integrations/slack/
 [9]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [10]: /tracing/#2-instrument-your-application
 [11]: /account_management/teams/
-[12]: /monitors/incident_management/analytics/#overview
+[12]: /service_management/incident_management/analytics/#overview
 [13]: /integrations/pagerduty/
 [14]: /integrations/opsgenie/
 [15]: /integrations/jira/

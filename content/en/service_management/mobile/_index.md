@@ -481,7 +481,7 @@ For help with troubleshooting, [contact Datadog support][20]. You can also send 
 [11]: /dashboards/
 [12]: /monitors/incident_management
 [13]: https://app.datadoghq.com/incidents/settings#Rules
-[14]: /monitors/incident_management/incident_settings/#rules
+[14]: /service_management/incident_management/incident_settings/#rules
 [15]: /dashboards/widgets/slo/#setup
 [16]: /logs/explorer/saved_views/
 [17]: https://app.datadoghq.com/dashboard/lists/preset/5
