@@ -31,7 +31,9 @@ Datadog Agent v7.35.0 or later is required.
 
 If you have [APM][6] set up already, navigate to [**Integrations** > **Link Source Code**][7] and configure the source code integration for your backend services.
 
-## Tag your telemetry
+## Link active commits
+
+### Tag your telemetry
 
 To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.con/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
 
@@ -66,7 +68,7 @@ The `git.commit.sha` and `git.repository_url` are tagged in your telemetry.
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/tag/?tab=containerizedagent#tag-autodiscovery
 {{% /tab %}}
-{{% tab "Other" %}}
+{{% tab "Host" %}}
 
 To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:
 
@@ -80,58 +82,20 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 
 Datadog only captures the repository URL, the commit SHA of the current branch, and a list of tracked file paths—Datadog does not ingest or store any user code.
 
-## Embed git information in your artifacts on CI
+### Embed git information in your artifacts on CI
 
-You can tag your telemetry with git information, such as the repository URL and commit hash, for artifacts built in a CI pipeline by running the following git commands and using the following environment variables. The [Datadog Tracing Libraries][9] uses this information to tag your telemetry and [display source code snippets in your stack traces][10].
-
-To extract the metadata, run `git rev-parse HEAD` for `git.commit.sha`, and `git config --get remote.origin.url` for `git.repository_url`. 
-
-You can use `DD_GIT_REPOSITORY_URL` AND `DD_GIT_COMMIT_SHA` environment variables for each language-specific tracer.
-
-For example:
-
-<details open>
-  <summary>Default</summary>
-
-```shell
-export DD_GIT_COMMIT_SHA=<FULL_GIT_COMMIT_SHA>
-export DD_GIT_REPOSITORY_URL="git-provider.example/me/my-repo"
-./my-application start
-```
-
-</details>
-
-<details>
-  <summary>With <code>DD_TAGS</code></summary>
-
-```shell
-export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA> 
-git.repository_url:git-provider.example/me/my-repo"
-./my-application start
-```
-
-</details>
+You can tag your telemetry with git information, such as the repository URL and commit hash, for artifacts built in a CI pipeline. The [Datadog Tracing Libraries][9] use this information to tag your telemetry.
 
 {{< tabs >}}
-{{% tab "Python" %}}
-
-For a standard library: 
-
-1. Install the `ddgitmetadata` package.
-2. Add `import ddgitmetadata` as the first import to the `setup.py` file.
-3. Add the main Python package name to the tracer's `DD_MAIN_PACKAGE` environment variable.
-
-For a unified Python project settings file:
-
-1. Install the [`hatch-datadog-build-metadata` plugin][1].
-2. Configure the plugin to embed git metadata. If the project already has URLs, reconfigure them as dynamic and move them into another configuration section.
-3. Add the main Python package name to the tracer's `DD_MAIN_PACKAGE` environment variable.
-
-[1]: https://github.com/DataDog/hatch-datadog-build-metadata
-{{% /tab %}}
 {{% tab "Go" %}}
 
-You can use Go [versions 1.18 or later][1] to embed git metadata. Build an application as a module using `go.mod`, and ensure that the module directive points to a public path such as `github.com` or `gopkg.in`, not a short module name.
+[Go embeds version control information][1] in binaries starting in version 1.18. 
+
+Ensure your service meets all the following requirements:
+
+* You are using a version of Go >= 1.18.
+* You are using a version of the Datadog Go Tracer >= 1.48.0.
+* Your application was built as a module using `go.mod`, and the module path is your code repository's URL.
 
 [1]: https://tip.golang.org/doc/go1.18
 {{% /tab %}}
@@ -229,4 +193,3 @@ To install a GitHub App for your organization, you need to be an organization ow
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
 [9]: /tracing/trace_collection/dd_libraries/
-[10]: /integrations/guide/source-code-integration/?tab=dockerruntime#inline-source-code
