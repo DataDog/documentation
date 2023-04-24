@@ -393,9 +393,9 @@ For more information, see [Apache License, v2.0][9]
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: https://github.com/wix/react-native-navigation
-[6]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
+[6]: /real_user_monitoring/reactnative/integrated_libraries/
 [7]: https://github.com/react-navigation/react-navigation
-[8]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
+[8]: /real_user_monitoring/reactnative/integrated_libraries/
 [9]: https://github.com/DataDog/dd-sdk-reactnative/blob/main/LICENSE
 [10]: https://source.android.com/security/app-sandbox
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
