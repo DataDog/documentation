@@ -10,7 +10,7 @@ disable_toc: false
 
 ## Overview
 
-Graph metric-based SLOs on dashboards and track trends across 15 months. You can also leverage the [scheduled dashboard reporting][1] functionality to automatically deliver visual reports to key stakeholders. 
+Graph metric-based SLOs on dashboards and track trends over 15 months. You can also leverage the [scheduled dashboard reporting][1] functionality to automatically deliver visual reports to key stakeholders. 
 
 ## Configuration
 

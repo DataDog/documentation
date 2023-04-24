@@ -212,7 +212,7 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
   - Use the SLO Summary widget to visualize the status of a single SLO.
   - Use the SLO List widget to visualize a set of SLOs
-  - Graph 15-months of metric-based SLO data with the [SLO data source][18] in both timeseries and scalar (query value, top list, table, change) widgets. 
+  - Graph 15 months' worth of metric-based SLO data with the [SLO data source][18] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
 For more information about SLO Widgets, see the [SLO Summary][19] and [SLO List][20] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][18].
 
@@ -229,7 +229,7 @@ When you apply a correction, the time period you specify is dropped from the SLO
 - For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
 
-You have the option to create one-time corrections for ad-hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][22]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][22]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
