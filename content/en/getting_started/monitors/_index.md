@@ -109,6 +109,6 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
-[10]: /mobile/
+[10]: /service_management/mobile/
 [11]: https://apps.apple.com/app/datadog/id1391380318
 [12]: https://play.google.com/store/apps/details?id=com.datadog.app

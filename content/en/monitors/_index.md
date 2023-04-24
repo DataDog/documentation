@@ -98,5 +98,5 @@ You can download a JSON file containing the definition of a monitor from the mon
 [10]: /monitors/notify/downtimes
 [11]: /monitors/manage
 [12]: /monitors/settings/
-[13]: /mobile/?tab=ios#monitors
+[13]: /service_management/mobile/?tab=ios#monitors
 [14]: /monitors/manage/search/#saved-view

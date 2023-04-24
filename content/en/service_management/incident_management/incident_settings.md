@@ -205,4 +205,4 @@ To create a postmortem template:
 [14]: https://app.datadoghq.com/account/settings#integrations/slack
 [15]: /service_management/incident_management/incident_details/#notifications-section
 [16]: /monitors/notifications/?tab=is_alert#notify-your-team
-[17]: /mobile/
+[17]: /service_management/mobile/

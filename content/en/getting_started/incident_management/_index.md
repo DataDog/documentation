@@ -201,6 +201,6 @@ You can also declare and edit incidents and quickly communicate to your teams th
 [9]: /service_management/incident_management/#status-levels
 [10]: /service_management/incident_management/notification_rules
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /mobile/
+[12]: /service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
