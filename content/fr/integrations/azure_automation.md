@@ -1,32 +1,33 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- automation
+- azure
+- cloud
 dependencies: []
-description: "Surveillez des métriques clés d'Azure\_Automation."
+description: Surveillez des métriques clés d'Azure Automation.
 doc_link: https://docs.datadoghq.com/integrations/azure_automation/
 draft: false
 git_integration_title: azure_automation
 has_logo: true
 integration_id: azure-automation
-integration_title: "Microsoft\_Azure\_Automation"
+integration_title: Microsoft Azure Automation
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: azure_automation
-public_title: "Intégration Datadog/Microsoft\_Azure\_Automation"
-short_description: "Surveillez des métriques clés d'Azure\_Automation."
+public_title: Intégration Datadog/Microsoft Azure Automation
+short_description: Surveillez des métriques clés d'Azure Automation.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Automation offre un service d'automatisation et de configuration cloud permettant une gestion cohérente de vos environnements Azure et non-Azure.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Automation.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

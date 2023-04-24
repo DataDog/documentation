@@ -18,7 +18,7 @@ assets:
     source: hbase
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: everpeace@gmail.com
   support_email: everpeace@gmail.com
 categories:

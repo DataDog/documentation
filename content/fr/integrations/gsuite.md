@@ -1,25 +1,27 @@
 ---
 categories:
-  - log collection
-  - security
-ddtype: crawler
+- collaboration
+- log collection
+- security
 dependencies: []
-description: "Importez vos logs d'audit et de sécurité Google\_Workspace dans Datadog."
+description: Importez vos logs d'audit et de sécurité Google Workspace dans Datadog.
 doc_link: https://docs.datadoghq.com/integrations/gsuite/
 draft: false
 git_integration_title: gsuite
 has_logo: true
 integration_id: ''
-integration_title: "Google\_Workspace"
+integration_title: Google Workspace
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: gsuite
-public_title: "Intégration Datadog/Google\_Workspace"
-short_description: "Importez vos logs d'audit et de sécurité Google\_Workspace dans Datadog."
+public_title: Intégration Datadog/Google Workspace
+short_description: Importez vos logs d'audit et de sécurité Google Workspace dans
+  Datadog.
 version: '1.0'
 ---
+
 ## Présentation
 
 Cette intégration permet d'importer vos logs de sécurité Google Workspace dans Datadog. Une fois activée, Datadog commence automatiquement à recueillir les logs à partir des services Google Workspace suivants :
@@ -31,7 +33,7 @@ Cette intégration permet d'importer vos logs de sécurité Google Workspace da
 | Agenda            | Les rapports d'activité pour l'application Agenda Google offrent des informations sur les différents types d'événements liés aux activités dans Agenda.                                                                             |
 | Drive               | Les rapports d'activité pour l'application Google Drive offrent des informations sur les différents types d'événements liés aux activités dans Google Drive. Ces rapports sont uniquement disponibles pour les clients Google Workspace Business. |
 | Gplus               | Les rapports d'activité pour l'application Google+ offrent des informations sur les différents événements liés aux activités dans Google+.                                                                                       |
-| Groupes              | Les rapports d'activité pour l'application Google Groups offrent des informations sur les différents événements liés aux activités dans Google Groups.                                                                                  |
+| Groups              | Les rapports d'activité pour l'application Google Groups offrent des informations sur les différents événements liés aux activités dans Google Groups.                                                                                  |
 | Groupes Enterprise   | Les rapports d'activité pour les groupes Enterprise offrent des informations sur les différents événements liés aux activités des groupes Enterprise.                                                                      |
 | Connexion               | Les rapports d'activité de connexion offrent des informations sur les différents types d'événements liés aux activités de connexion.                                                                |
 | Mobile              | Les rapports d'activité pour l'audit des appareils mobiles offrent des informations sur les différents types d'événements liés aux activités d'audit des appareils mobiles.                                                                         |

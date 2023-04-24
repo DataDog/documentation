@@ -59,7 +59,7 @@ pricing:
   tag: cds_ms_defender_endpoint_active_endpoint
   unit_label: Microsoft Defender アクティブエンドポイント
   unit_price: 1.0
-public_title: Microsoft 365 Defender for Endpoint インテグレーション
+public_title: Microsoft 365 Defender for Endpoint
 short_description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
 supported_os:
 - linux
@@ -104,7 +104,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Microsoft 365 Defender for Endpoint インテグレーション
+  title: Microsoft 365 Defender for Endpoint
   uninstallation: README.md#Uninstallation
 ---
 

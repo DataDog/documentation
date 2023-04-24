@@ -15,7 +15,7 @@ assets:
     source_type_name: Snmpwalk
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
