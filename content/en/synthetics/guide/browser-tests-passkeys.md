@@ -25,7 +25,7 @@ You can use passkeys as a replacement for a username and password, or as a secon
 Passkeys in Synthetic Monitoring are handled by Virtual Authenticator Global Variables. 
 To create a Virtual Authenticator global variable storing your passkeys, see the [**Global Variables** section in Synthetic Monitoring & Continuous Testing Settings][4].
 
-{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-fido2.png" alt="Create a FIDO2 key" style="width:70%;" >}}
+{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Create a Virtual Authenticator" style="width:70%;" >}}
 
 ## Use passkeys in your Synthetic tests
 When [creating a browser test][3], complete your application's passkeys registration/authentication flow using the passkeys stored in your virtual authenticator global variable.

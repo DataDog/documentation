@@ -123,7 +123,7 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 3. Optionally, enter a **Description**, and select **Tags** to associate with your variable. Datadog then creates a virtual authenticator used to generate and store your passkeys.
 4. In the **Permissions settings** section, restrict access to your variable based on roles in your organization. For more information about roles, see the [RBAC documentation][2].
 
-{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-fido2.png" alt="Create a FIDO2 key" style="width:80%;" >}}
+{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Create a Virtual Authenticator" style="width:80%;" >}}
 
 [1]: /synthetics/guide/browser-tests-passkeys
 [2]: /account_management/rbac/?tab=datadogapplication#custom-roles
