@@ -10,7 +10,7 @@ aliases:
 
 Yes. Enable **Collect Custom Metrics** under the **Metric Collection** tab on the [AWS integration page][1].
 
-### How do I collect metrics from a service for which Datadog doesn’t have an official integration?
+### How do I collect metrics from a service for which Datadog doesn't have an official integration?
 
 AWS metrics coming from an `AWS/<namespace>` for which there is no official integration are also brought in under the custom namespace when the `Collect custom metrics` option is enabled. You can filter these metrics out and only keep the metrics you want by using the filter string under custom namespace with the [Set an AWS tag filter][2] API.
 

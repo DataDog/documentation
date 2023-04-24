@@ -267,7 +267,7 @@ org.gradle.jvmargs=\
 
 `DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
@@ -289,7 +289,7 @@ test {
 
 `DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
 {{< /code-block >}}
 
@@ -408,7 +408,7 @@ Datadog にテストが表示されない場合は、Java トレーサのバー�
 `-Ddd.civisibility.enabled=true` のコンフィギュレーションプロパティは、そのバージョン以降でのみ利用可能です。
 
 以前のバージョンのトレーサーを使用する必要がある場合、以下のシステムプロパティを使用して CI Visibility を構成することができます。
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 -Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true
 {{< /code-block >}}
 

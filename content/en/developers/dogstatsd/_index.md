@@ -274,7 +274,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>3.0.0</version>
+    <version>4.2.1</version>
 </dependency>
 ```
 

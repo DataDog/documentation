@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "compute": {
+        "include_percentiles": false
+      },
+      "filter": {
+        "query": "@http.status_code:200 service:my-service-updated"
+      },
+      "group_by": [
+        {
+          "path": "resource_name",
+          "tag_name": "resource_name"
+        }
+      ]
+    },
+    "type": "spans_metrics"
+  }
+}

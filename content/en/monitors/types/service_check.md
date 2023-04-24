@@ -28,7 +28,7 @@ To create a [service check monitor][6] in Datadog, use the main navigation: **Mo
 
 ### Pick a service check
 
-Choose a service check from the drop-down menu.
+Choose a service check from the dropdown menu.
 
 ### Pick monitor scope
 

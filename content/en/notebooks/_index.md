@@ -13,6 +13,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  tag: "blog"
+  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
 ## Overview
@@ -46,7 +49,7 @@ Notebook authors receive email notifications for new comments on their notebooks
 
 ### View mode
 
-{{< img src="notebooks/read_mode.png" alt="View mode drop down menu" style="width:100%;">}}
+{{< img src="notebooks/read_mode.png" alt="View mode dropdown menu" style="width:100%;">}}
 
 You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
@@ -87,7 +90,7 @@ The [Notebook List][2] allows you to view and search previously created notebook
 Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
 ## Template gallery
-From the [Template Gallery][3], see ready-to-use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
+From the [Template Gallery][3], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Notebook configuration
 
@@ -166,17 +169,18 @@ Graphs in notebooks support all Datadog data sources: metrics, log events, Index
 * [Query value][13]
 * [Funnel][14]
 * [Pie][15]
+* [SLO Summary][16]
 
 ### Limit edit access
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][16] that may edit a particular notebook:
+Use granular access controls to limit the [roles][17] that may edit a particular notebook:
 1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles that may edit the notebook.
+1. Use the dropdown to select one or more roles that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
@@ -202,10 +206,11 @@ To restore general access to a notebook with restricted access, follow the steps
 [7]: /dashboards/widgets/timeseries/
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/table/
-[10]: /dashboards/widgets/heat_map/
+[10]: /dashboards/widgets/heatmap/
 [11]: /dashboards/widgets/distribution/
 [12]: /dashboards/widgets/list/
 [13]: /dashboards/widgets/query_value/
 [14]: /dashboards/widgets/funnel/
 [15]: /dashboards/widgets/pie_chart/
-[16]: /account_management/rbac/
+[16]: /dashboards/widgets/slo/
+[17]: /account_management/rbac/

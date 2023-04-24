@@ -1,29 +1,32 @@
 ---
 aliases:
-  - /fr/integrations/akamai/
+- /fr/integrations/akamai/
 categories:
-  - cloud
-ddtype: crawler
+- caching
+- cloud
 dependencies: []
-description: "Intégrez votre Akamai\_DataStream à Datadog."
-doc_link: 'https://docs.datadoghq.com/integrations/akamai_datastream/'
+description: Intégrez votre Akamai DataStream à Datadog.
+doc_link: https://docs.datadoghq.com/integrations/akamai_datastream/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/akamai-cdn-performance/'
-    tag: Blog
-    text: Intégrez Akamai à Datadog pour surveiller les performances de vos CDN
+- link: https://www.datadoghq.com/blog/akamai-cdn-performance/
+  tag: Blog
+  text: Intégrez Akamai à Datadog pour surveiller les performances de vos CDN
 git_integration_title: akamai_datastream
 has_logo: true
 integration_id: ''
-integration_title: "Akamai\_DataStream"
+integration_title: Akamai DataStream
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: akamai_datastream
-public_title: "Datadog/Akamai\_DataStream"
-short_description: "Intégrez votre Akamai\_DataStream à Datadog."
+public_title: Datadog/Akamai DataStream
+short_description: Intégrez votre Akamai DataStream à Datadog.
+team: web-integrations
 version: '1.0'
 ---
+
 ## Présentation
 
 Associez Datadog à Akamai DataStream pour recueillir les métriques d'état, de latence, de déchargement et d'erreurs relatives à vos CDN.
@@ -55,23 +58,35 @@ Seuls les flux présentant le type « Aggregated metrics » sont pris en charg
 
 #### Collecte de logs
 
+{{< site-region region="us3" >}}
+
+La collecte de logs n'est plus prise en charge pour ce site.
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
 Akamai DataStream 1.0 et 2.0 prennent en charge l'envoi de logs à Datadog via les endpoints HTTP(s) dans un fichier compressé gzip. Pour envoyer les logs à Datadog, remplissez ces champs dans Akamai :
 
 1. **Name** : saisissez une description lisible de l'endpoint.
 
-2. **Endpoint** : saisissez l'endpoint Datadog pour l'envoi et le stockage des logs : `{{< region-param key="http_endpoint" code="true" >}}/v1/input`.
+2. **Endpoint** : saisissez l'endpoint Datadog pour l'envoi et le stockage des logs : {{< region-param key="http_endpoint" code="true" >}}`/v1/input`.
 
 3. **Tags** (facultatif) : saisissez une liste de tags séparés par des virgules, par exemple `env:staging,team:web`, pour filtrer et regrouper vos logs dans Datadog.
 
-4. **Source** : saisissez le nom de la source `akamai`.
+4. **Source** : saisissez le nom de source `akamai`.
 
 5. **Service** (facultatif) : saisissez le nom de l'application ou du service qui génère les événements de log associés à votre compte Datadog.
 
-6. **API key** : saisissez votre [clé d'API Datadog][2].
+6. **API key** : saisissez votre [clé d'API Datadog][1].
 
 7. **Send compressed data** (facultatif) : cochez cette case pour compresser au format gzip les logs envoyés à la destination.
 
 8. **Validate & Save** : cliquez sur ce champ pour valider la connexion avec la destination et enregistrer les informations que vous avez fournies.
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+
+{{< /site-region >}}
 
 ## Données collectées
 
@@ -89,9 +104,8 @@ L'intégration Akamai n'inclut aucun check de service.
 
 ## Dépannage
 
-Besoin d'aide ? Contactez [l'assistance Datadog][4].
+Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
-[4]: https://docs.datadoghq.com/fr/help/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
+[3]: https://docs.datadoghq.com/fr/help/

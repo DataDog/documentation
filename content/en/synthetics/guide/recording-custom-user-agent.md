@@ -15,7 +15,7 @@ further_reading:
 
 Some implementations lead applications to render a certain way only when using a specific `User-Agent` string (for example, when using a mobile `User-Agent`). In these cases, you need to set the `User-Agent` header to a custom string to be able to record your browser tests' steps in your application. To do so:
 
-1. Open your application in a pop up by clicking on **Open in Popup** in your browser test recorder.
+1. Open your application in a pop-up by clicking on **Open in Popup** in your browser test recorder.
 2. Open your Chrome Developer Tools.
 3. Click on the menu button with the three vertical dots.
 4. Select the **More tools - Network conditions** option.

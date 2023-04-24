@@ -695,7 +695,7 @@ OS のイメージが Ubuntu や Debian の場合は、`environment` の後に�
 * AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。また、ENI および EC2 のメトリクス収集を有効にする必要があります。
 
 次に、各ロードバランサーに以下のタグを追加します。
-```shell
+```conf
 ENV=<env>
 SERVICE=<service>
 ```
@@ -787,7 +787,7 @@ network_config:
 {{% tab "環境変数" %}}
 次のエントリーを追加します。
 
-```shell
+```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}

@@ -10,7 +10,7 @@ further_reading:
   text: "How Application Security Management works"
 - link: "/security/application_security/getting_started"
   tag: "Documentation"
-  text: "Setting up ASM"
+  text: "Enabling ASM"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -34,7 +34,7 @@ In your first three days with Datadog ASM:
 
 2. **Enable ASM on the most exposed services.** Click `Enable ASM` in the ASM Status column to see the instructions or share them with the service's owner. 
 
-   Because ASM relies on the same library as APM, configuring a single environment variable is all that is needed to get ASM enabled on a service that is already sending traces. Read more in the [ASM setup documentation][2].
+   Because ASM relies on the same library as APM, configuring a single environment variable is all that is needed to get ASM enabled on a service that is already sending traces. Read more in the [Enabling ASM documentation][2].
 
 3. **Explore your first suspicious requests.** Go to **[Security --> Application Security][7]** to see suspicious requests listed in ASM.
 
@@ -56,10 +56,10 @@ After a few days of usage, you typically get your first security signals. If you
 
 {{< code-block lang="sh" >}}
 for ((i=1;i<=200;i++)); do
-# Target existing service’s routes
+# Target existing service's routes
 curl https://your-application-url/<EXISTING ROUTE> -A
 'dd-test-scanner-log';
-# Target non existing service’s routes
+# Target non existing service's routes
 curl https://your-application-url/<NON-EXISTING ROUTE> -A
 'dd-test-scanner-log';
 done{{< /code-block >}}
@@ -83,14 +83,14 @@ Over the next few days:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
-[2]: /security/application_security/getting_started/
-[3]: /security/application_security/threats/setup_and_configure/#configuring-a-client-ip-header
+[2]: /security/application_security/enabling/
+[3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /security/application_security/how-appsec-works/
 [5]: /security/application_security/threats/add-user-info/
 [6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal&viz=stream&start=1674824351640&end=1675429151640&paused=false
 [7]: https://app.datadoghq.com/security/appsec
 [8]: https://app.datadoghq.com/security/appsec/traces
-[9]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
+[9]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [10]: https://app.datadoghq.com/security/appsec/reports-configuration
 [11]: https://app.datadoghq.com/security/configuration/notification-rules
 [12]: /security/notifications/rules/

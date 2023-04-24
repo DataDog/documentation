@@ -27,6 +27,8 @@ title: Agent プロキシのコンフィギュレーション
 
 ## Web プロキシ
 
+Squid に関する具体的な情報は、本ページの [Squid](#squid) のセクションを参照してください。
+
 Agent は従来の Web プロキシをネイティブにサポートします。プロキシ経由でインターネットに接続する必要がある場合は、Agent 構成ファイルを編集します。
 
 **Agent v6 & v7**
@@ -134,20 +136,109 @@ proxy_password: my_password
 
 新しい設定を有効にするために、[Agent を再起動する][1]ことを忘れないでください。
 
+### Squid
 
+[Squid][2] は、HTTP、HTTPS、FTP などをサポートする Web 用転送プロキシです。Windows を含むほとんどのオペレーティングシステムで動作し、GNU GPL ライセンスの下でライセンスされています。Squid は、ネットワーク上で動作する Web プロキシがまだない場合、簡単な選択肢となります。
+
+#### Squid によるプロキシ転送
+
+##### Squid が Datadog にのみトラフィックを送信するように構成する
+
+内部 Agent と Datadog の両方に接続可能なホストに Squid をインストールします。オペレーティングシステムのパッケージマネージャーを使用するか、[Squid のプロジェクトページ][2]から直接ソフトウェアをインストールします。
+
+Squid を構成するには、コンフィギュレーションファイルを編集します。このファイルは通常、Linuxでは `/etc/squid/squid.conf`、Windowsでは `C:\squid\etc\squid.conf` にあります。
+
+Squid がローカルトラフィックを受け入れ、必要な Datadog インテークに転送できるように、`squid.conf` コンフィギュレーションファイルを編集します。
+
+```conf
+http_port 0.0.0.0:3128
+
+acl local src 127.0.0.1/32
+
+acl Datadog dstdomain .{{< region-param key="dd_site" >}}
+
+http_access allow Datadog
+http_access allow local manager
+```
+
+##### Squid の起動
+
+新しい構成が適用されるように、Squid を起動 (または再起動) します。
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+```bash
+sudo systemctl start squid
+```
+
+Squid がすでに起動している場合は、代わりに以下のコマンドで Squid を再起動します。
+
+```bash
+sudo systemctl restart squid
+```
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Windows で Squid を構成する場合、最初に [Squid をシステムサービスとして構成する][1]必要があります。その後、Administrator コマンドプロンプトで以下を実行します。
+
+```bash
+net start squid
+```
+
+Squid がすでに起動している場合は、代わりに以下のコマンドで Squid を再起動します。
+
+```bash
+net stop squid
+net start squid
+```
+
+[1]: https://wiki.squid-cache.org/KnowledgeBase/Windows
+{{% /tab %}}
+{{< /tabs >}}
+
+##### Datadog Agent 構成
+
+**Agent v6 & v7**
+
+Agent のコンフィギュレーションファイル (`datadog.yaml`) に以下を含めるように修正します。
+
+```yaml
+proxy:
+  http: http://127.0.0.1:3128
+  https: http://127.0.0.1:3128
+```
+
+変更内容を保存したら、[Agent を再起動][1]します。
+
+[インフラストラクチャーの概要][3]を確認し、Datadog が Agent からデータを受信できることを確認します。
+
+**Agent v5**
+
+Agent のコンフィギュレーションファイル (`datadog.conf`) に以下を含めるように修正します。
+
+```conf
+proxy_host: 127.0.0.1
+proxy_port: 3128
+```
+
+変更内容を保存したら、[Agent を再起動][1]します。
+
+[インフラストラクチャーの概要][3]を確認し、Datadog が Agent からデータを受信できることを確認します。
 
 ## HAProxy
 
-[HAProxy][2] は、TCP アプリケーションと HTTP アプリケーションのプロキシを提供する、無料で高速、そして信頼性の高いソリューションです。通常、HAProxy はロードバランサーとして着信リクエストをプールサーバーに分散するために使われますが、Agent トラフィックを外部接続がないホストから Datadog にプロキシするために使うこともできます。
+[HAProxy][4] は、TCP アプリケーションと HTTP アプリケーションのプロキシを提供する、無料で高速、そして信頼性の高いソリューションです。通常、HAProxy はロードバランサーとして着信リクエストをプールサーバーに分散するために使われますが、Agent トラフィックを外部接続がないホストから Datadog にプロキシするために使うこともできます。
 
 `agent ---> haproxy ---> Datadog`
 
-これは、ネットワーク内に容易に利用できる Web プロキシがなく、多数の Agent をプロキシしたい場合に最適なオプションです。場合によっては、1 つのプロキシが 1000 以上の Agent を収容できるため、ネットワーク内のローカル Agent のトラフィックを処理するには、1 つの HAProxy インスタンスで十分なことがあります。
+これは、ネットワーク内に容易に利用できる Web プロキシがなく、多数の Agent をプロキシしたい場合に、もう一つの良い選択肢です。場合によっては、1 つのプロキシが 1000 以上の Agent を収容できるため、ネットワーク内のローカル Agent のトラフィックを処理するには、1 つの HAProxy インスタンスで十分なことがあります。
 
-**注**: この数字は、特に `m3.xl` インスタンスの性能に基づいた保守的な見積もりです。多くのネットワーク関連やホスト関連の変数が HAProxy のスループットに影響を与える可能性があるので、サービスを開始する前と後の両方でプロキシの配置に目を光らせておく必要があります。詳しい情報は [HAProxy ドキュメント][3]を参照してください。
+**注**: この数字は、特に `m3.xl` インスタンスの性能に基づいた保守的な見積もりです。多くのネットワーク関連やホスト関連の変数が HAProxy のスループットに影響を与える可能性があるので、サービスを開始する前と後の両方でプロキシの配置に目を光らせておく必要があります。詳しい情報は [HAProxy ドキュメント][4]を参照してください。
 
 HAProxy と Datadog 間の通信は、常に TLS で暗号化されています。Agent ホストと HAProxy ホスト間の通信は、プロキシと Agent が同じホスト上にあると想定されるため、デフォルトでは暗号化されません。しかし、HAproxy ホストと Agent ホストが同じ孤立したローカルネットワーク上に配置されていない場合、この通信を TLS 暗号化で保護することをお勧めします。
-Agent と HAProxy 間のデータを暗号化するには、HAProxy ホストの Subject Alternative Name (SAN) 拡張機能を持つ x509 証明書を作成する必要があります。この証明書バンドル (*.pem) には、公開証明書と秘密鍵の両方が含まれている必要があります。詳しくは、こちらの [HAProxy のブログ記事][4]をご覧ください。
+Agent と HAProxy 間のデータを暗号化するには、HAProxy ホストの Subject Alternative Name (SAN) 拡張機能を持つ x509 証明書を作成する必要があります。この証明書バンドル (*.pem) には、公開証明書と秘密鍵の両方が含まれている必要があります。詳しくは、こちらの [HAProxy のブログ記事][5]をご覧ください。
 
 
 **注**: 次のコマンドで Datadog 証明書をダウンロードしてください:
@@ -301,13 +392,13 @@ mode tcp
 option tcplog
 default_backend datadog-instrumentations-telemetry
 
-# これは、Agent が appsec イベントを
-# 送信するために接続するエンドポイントを宣言します (非推奨)
-frontend appsec-events-frontend
-    bind *:3844
-    mode tcp
-    option tcplog
-    default_backend datadog-appsec-events
+# これは、Agent がネットワークデバイスモニタリングの NetFlow フローを
+# 送信するために接続するエンドポイントを宣言します (例えば"network_devices.netflow.dd_url" の値)。
+frontend network_devices_netflow_frontend
+bind *:3845
+mode http
+option tcplog
+default_backend datadog-network-devices-netflow
 
 # これは Datadog のサーバーです。事実上、上記で定義した
 # フォワーダーフロントエンドに来る全ての TCP リクエストは、
@@ -406,13 +497,13 @@ server-template mothership 5 instrumentation-telemetry-intake.{{< region-param k
 # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
 # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
-backend datadog-appsec-events # 非推奨
+backend datadog-network-devices-netflow
     balance roundrobin
-    mode tcp
+    mode http
     # 以下の構成は、HAProxy 1.8 以降の場合です
-    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
-    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+    # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 
@@ -552,13 +643,13 @@ mode tcp
 option tcplog
 default_backend datadog-instrumentations-telemetry
 
-# これは、Agent が appsec イベントを
-# 送信するために接続するエンドポイントを宣言します (非推奨)
-frontend appsec-events-frontend
-    bind *:3844 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
-    mode tcp
+# これは、Agent がネットワークデバイスモニタリングの NetFlow フローを
+# 送信するために接続するエンドポイントを宣言します (例えば、"network_devices.netflow.dd_url" の値)。
+frontend network_devices_netflow_frontend
+    bind *:3845 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
+    mode http
     option tcplog
-    default_backend datadog-appsec-events
+    default_backend datadog-network-devices-netflow
 
 # これは Datadog のサーバーです。事実上、上記で定義した
 # フォワーダーフロントエンドに来る全ての TCP リクエストは、
@@ -657,13 +748,13 @@ server-template mothership 5 instrumentation-telemetry-intake.{{< region-param k
 # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
 # server mothership instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
-backend datadog-appsec-events # 非推奨
+backend datadog-network-devices-netflow
     balance roundrobin
-    mode tcp
+    mode http
     # 以下の構成は、HAProxy 1.8 以降の場合です
-    server-template mothership 5 appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
-    # server mothership appsecevts-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+    # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 
@@ -687,7 +778,7 @@ HAProxy 1.8 以降では、DNS サービスの検出によりサーバーの変�
 ```yaml
 apm_config:
     apm_dd_url: <SCHEME>://haproxy.example.com:3835
-    profiling_dd_url: <SCHEME>://haproxy.example.com:3836
+    profiling_dd_url: <SCHEME>://haproxy.example.com:3836/api/v2/profile
     telemetry:
         dd_url: <SCHEME>://haproxy.example.com:3843
 
@@ -724,9 +815,11 @@ network_devices:
             logs_dd_url: haproxy.example.com:3842
             # Agent と HAProxy の間で暗号化を使用する場合は、以下の行をコメント化します
             logs_no_ssl: true
-
-appsec_config (deprecated):
-    appsec_dd_url: haproxy.example.com:3844
+    netflow:
+       forwarder:
+           logs_dd_url: haproxy.example.com:3845
+           # Agent と HAProxy の間で暗号化を使用する場合は、以下の行をコメント化します
+           logs_no_ssl: true
 ```
 
 Agent と HAProxy 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent 構成ファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
@@ -738,7 +831,7 @@ skip_ssl_validation: true
 
 最後に、[Agent を再起動][1]します。
 
-すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][5]を確認します。
+すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][3]を確認します。
 
 **Agent v5**
 
@@ -778,7 +871,7 @@ skip_ssl_validation: yes
 
 最後に、[Agent を再起動][1]します。
 
-すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][5]を確認します。
+すべてが正しく機能していることを確認するには、HAProxy 統計情報 (`http://haproxy.example.com:3833`) と[インフラストラクチャーの概要][3]を確認します。
 
 ## NGINX
 
@@ -899,11 +992,11 @@ stream {
         proxy_ssl on;
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
-    server {    
-        listen 3844; #appsec イベントのリッスン (非推奨)
+    server {
+        listen 3845; # ネットワークデバイスネットフローのリッスン
         proxy_ssl_verify on;
         proxy_ssl on;
-        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
+        proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -927,7 +1020,7 @@ http {
 
     proxy_ssl_trusted_certificate <PATH_TO_CERTIFICATES>;
 
-    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE>; 
+    ssl_certificate     <PATH_TO_PROXY_CERTIFICATE>;
     ssl_certificate_key <PATH_TO_PROXY_CERTIFICATE_KEY>;
 
     server {
@@ -1011,10 +1104,10 @@ stream {
         proxy_pass instrumentation-telemetry-intake.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3844 ssl; #appsec イベントのリッスン (非推奨)
+        listen 3845 ssl; # ネットワークデバイスネットフローのリッスン
         proxy_ssl_verify on;
         proxy_ssl on;
-        proxy_pass appsecevts-intake.{{< region-param key="dd_site" >}}:443;
+        proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
 }
 ```
@@ -1035,7 +1128,7 @@ stream {
 ```yaml
 apm_config:
     apm_dd_url: <SCHEME>://nginx.example.com:3835
-    profiling_dd_url: <SCHEME>://nginx.example.com:3836
+    profiling_dd_url: <SCHEME>://nginx.example.com:3836/api/v2/profile
     telemetry:
         dd_url: <SCHEME>://nginx.example.com:3843
 
@@ -1072,10 +1165,11 @@ network_devices:
             logs_dd_url: nginx.example.com:3842
             # Agent と NGINX の間で暗号化を使用する場合は、以下の行をコメント化します
             logs_no_ssl: true
-
-appsec_config (deprecated):
-    appsec_dd_url: nginx.example.com:3844
-
+    netflow:
+       forwarder:
+           logs_dd_url: nginx.example.com:3845
+           # Agent と NGINX の間で暗号化を使用する場合は、以下の行をコメント化します
+           logs_no_ssl: true
 ```
 
 Agent と NGINX 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent 構成ファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
@@ -1134,9 +1228,9 @@ TCP 経由でログを送信する場合は、[ログの TCP プロキシ][7]を
 
 
 [1]: /ja/agent/guide/agent-commands/
-[2]: http://haproxy.1wt.eu
-[3]: http://www.haproxy.org/#perf
-[4]: https://www.haproxy.com/blog/haproxy-ssl-termination/
-[5]: https://app.datadoghq.com/infrastructure
+[2]: http://www.squid-cache.org/
+[3]: https://app.datadoghq.com/infrastructure
+[4]: http://haproxy.1wt.eu
+[5]: https://www.haproxy.com/blog/haproxy-ssl-termination/
 [6]: https://www.nginx.com
 [7]: /ja/agent/logs/proxy

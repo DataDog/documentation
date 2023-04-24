@@ -11,7 +11,7 @@ further_reading:
 - link: /dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
   tag: ドキュメント
   text: ダイナミックインスツルメンテーション
-- link: /security/cloud_workload_security/getting_started/?tab=kubernetes#overview
+- link: /security/cloud_workload_security/setup/?tab=kubernetes#overview
   tag: ドキュメント
   text: クラウドワークロードセキュリティの概要
 is_beta: true
@@ -30,7 +30,7 @@ US1-FED Datadog サイトでは、リモート構成は利用できません。
 <div class="alert alert-info">リモート構成はベータ版です。</a></div>
 
 ## 概要
-リモート構成は、特定の製品機能に対して、お客様のインフラストラクチャーにデプロイされた Datadog リソース (Agent やトレーシングライブラリなど) の動作をリモートで構成することができる Datadog の機能です。リモート構成を使用すると、Agent やトレーシングライブラリの構成をオンデマンドで環境に簡単に適用できるため、管理コストの削減、チーム間の摩擦の軽減、解決時間の短縮が可能になります。
+リモート構成は Datadog の機能で、インフラストラクチャーにデプロイされた Datadog リソース (Agent、トレーシングライブラリ、観測可能性パイプラインワーカーなど) の動作を、一部の製品機能に対してリモートで設定することが可能です。リモート構成を使用すると、オンデマンドで環境内の Datadog リソースに構成を適用し、管理コストを削減し、チーム間の摩擦を減らし、問題解決時間を短縮することができます。
 
 Datadog のセキュリティ製品である Application Security Management と Cloud Workload Security については、リモート構成対応の Agent と互換性のあるトレーシングライブラリにより、リアルタイムにセキュリティアップデートとレスポンスを提供し、アプリケーションやクラウドインフラストラクチャーのセキュリティ体制を強化することができます。
 
@@ -62,6 +62,7 @@ Datadog Agent でリモート構成を有効にすると、設定されている
 ### アプリケーションパフォーマンスモニタリング (APM)
 <div class="alert alert-info">これは非公開ベータ版の機能です。</div>
 
+- **Remotely instrument your Kubernetes services with APM**: Datadog Library Injection による Datadog APM で Kubernetes のサービスをリモートでインスツルメンテーションし、デプロイをすべて Datadog UI 内で管理します。Java、Node、Python のアプリケーションで利用可能です。
 - **Agent のサンプリングレートをリモートで設定する**: Datadog Agent を再起動することなく、Datadog Agent のトレースサンプリング速度を変更し、組織のトレース取り込みをニーズに応じて拡張するためのルールをリモートで設定します。
 
 ### ダイナミックインスツルメンテーション
@@ -74,6 +75,11 @@ Datadog Agent でリモート構成を有効にすると、設定されている
 
 - **自動デフォルト Agent ルールアップデート**: 新しい Agent の検出や機能強化がリリースされると、Datadog が管理しているデフォルトの Agent ルールを自動的に受信し、更新します。
 
+### Observability Pipelines（観測データの制御）
+<div class="alert alert-info">これは非公開ベータ版の機能です。</div>
+
+- **[観測可能性パイプラインワーカー][10] (OPW) をリモートでデプロイし、更新する**: Datadog UI でパイプラインを構築・編集し、環境内で稼働している OPW インスタンスに構成変更をロールアウトします。
+
 ## セキュリティへの配慮
 
 Datadog は、受信した構成の機密性、完全性、可用性を保護するために、以下のセーフガードを実装しており、Agent やトレーシングライブラリに適用されます。
@@ -82,7 +88,7 @@ Datadog は、受信した構成の機密性、完全性、可用性を保護す
 * Datadog は、Agent からリクエストされない限り構成を送信せず、リクエストした Agent に関連する構成のみを送信します。
 * 構成リクエストは、お客様の Agent から HTTPS (ポート 443) 経由で Datadog に送信されるため、ネットワークファイアウォールで追加のポートを開く必要はありません。
 * お客様の Agent と Datadog 間の通信は、HTTPS を使用して暗号化され、お客様の Datadog API キーを使用して認証と認可が行われます。
-* 正しい RBAC 権限を持つユーザーのみが、API キーでリモート構成スコープを有効にし、サポートされている製品機能を使用することが認可されます。
+* 正しい RBAC 権限を持つユーザーのみが、API キーでリモート構成機能を有効にし、サポートされている製品機能を使用することが認可されます。
 * Datadog UI を通じて送信されたお客様の構成変更は、Agent とトレーシングライブラリ上で署名および検証され、構成のインテグレーションが確認されます。
 
 ## リモート構成を有効にする
@@ -103,21 +109,21 @@ Datadog は、受信した構成の機密性、完全性、可用性を保護す
 ### セットアップ
 リモート構成を有効にするには
 
-1.  API キーにリモート構成機能を追加するために、お客様の組織を有効にするには、[サポートに連絡][2]してください。
+1. RBAC 権限に [`org_management`][9] が含まれていることを確認し、組織のリモート構成を有効にすることができるようにします。
 
-2. RBAC 権限に [`api_keys_write`][3] が含まれていることを確認し、リモート構成スコープで新しい API キーを作成したり、既存の API キーにスコープを追加できるようにします。もし、権限を持っていない場合は、組織の Datadog 管理者に連絡して、権限を更新してください。このスコープを持つキーを使用して、Agent がリモート構成を使用するための認証と認可を行うことになります。
+2. RBAC 権限に [`api_keys_write`][3] が含まれていることを確認し、リモート構成機能で新しい API キーを作成したり、既存の API キーに機能を追加できるようにします。もし、権限を持っていない場合は、組織の Datadog 管理者に連絡して、権限を更新してください。この機能を持つキーを使用して、Agent がリモート構成を使用するための認証と認可を行うことができます。
 
-3. [組織設定][4]ページで、既存の API キーを選択するか、新規に API キーを作成します。
+3. [リモート構成][4]ページで、リモート構成を有効にします。これにより、組織全体の Datadog リソースが Datadog から構成を受信できるようになります。
 
-4. キーのリモート構成スコープを有効にします。
+4. 既存の API キーを選択するか、新しい API キーを作成し、そのキーでリモート構成機能を有効にします。
 
-   {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config scope Enable button." width="90%" style="center">}}
+   {{<img src="agent/guide/RC_Key_updated.png" alt="API Key properties with Remote Config capability Enable button." width="90%" style="center">}}
 
-5. Agent 構成を更新します。
+5. Agent コンフィギュレーションファイルを更新します。
 
 {{< tabs >}}
 {{% tab "コンフィギュレーション YAML ファイル" %}}
-リモート構成のスコープを有効にした API キーを指定し、コンフィギュレーション YAML ファイルに以下を追加します。
+リモート構成の機能を有効にした API キーを指定し、コンフィギュレーション YAML ファイルに以下を追加します。
 ```yaml
 api_key: xxx
 remote_configuration:
@@ -128,7 +134,7 @@ remote_configuration:
 
 {{% /tab %}}
 {{% tab "環境変数" %}}
-Datadog Agent マニフェストに以下を追加し、リモート構成スコープが有効になっている API キーを指定します。
+Datadog Agent マニフェストに以下を追加し、リモート構成機能が有効になっている API キーを指定します。
 ```yaml
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
@@ -145,12 +151,14 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 
 [1]: /ja/getting_started/site/
 [2]: /ja/help/
-[3]: /ja/account_management/api-app-keys/
-[4]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /ja/account_management/rbac/permissions#api-and-application-keys
+[4]: https://app.datadoghq.com/organization-settings/remote-config
 [5]: /ja/security/default_rules/#cat-workload-security
 [6]: /ja/tracing/trace_pipeline/ingestion_controls/#managing-ingestion-for-all-services-at-the-agent-level
 [7]: /ja/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration
 [8]: /ja/security/application_security/how-appsec-works/#built-in-protection
+[9]: /ja/account_management/rbac/permissions#access-management
+[10]: /ja/observability_pipelines/#observability-pipelines-worker
 
 
 {{< /site-region >}}

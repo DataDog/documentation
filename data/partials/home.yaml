@@ -76,7 +76,7 @@ nav_sections:
         link: continuous_testing/
         icon: continuous-testing
         desc: Perform codeless integration and end-to-end testing with CI/CD providers
-      - title: RUM & Session Replay
+      - title: Real User Monitoring
         link: real_user_monitoring/
         icon: rum
         desc: Capture, observe, and analyze the user experience of your applications

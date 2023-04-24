@@ -19,6 +19,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- configuration & deployment
 - notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/split/README.md
@@ -37,15 +38,16 @@ public_title: Split
 short_description: エンジニアリングチームや製品チームに実験用プラットフォームを提供。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::構成 & デプロイ
   - Category::通知
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: エンジニアリングチームや製品チームに実験用プラットフォームを提供。
   media: []

@@ -11,7 +11,7 @@ further_reading:
   text: "Threat Monitoring and Protection"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
-  text: "Risk Management"
+  text: "Application Vulnerability Management"
 ---
 
 Datadog Application Security Management (ASM) monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.

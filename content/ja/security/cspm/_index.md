@@ -76,6 +76,7 @@ CSPM には、セキュリティ専門家チームによって管理された 40
 
 {{< whatsnext >}}
   {{< nextlink href="/security/cspm/setup">}}完全なセットアップとコンフィギュレーション{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Cloud Security Management の概要{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}すぐに使えるポスチャ管理クラウドの検出ルール{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}すぐに使えるポスチャ管理インフラストラクチャーの検出ルール{{< /nextlink >}}
   {{< nextlink href="/security/cspm/findings">}} クラウドセキュリティポスチャ管理の知見を学ぶ{{< /nextlink >}}

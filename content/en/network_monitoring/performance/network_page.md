@@ -25,15 +25,15 @@ To refine your search to traffic between particular endpoints, aggregate and fil
 
 The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
-{{< img src="network_performance_monitoring/network_page/context_npm.png" alt="context"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/context_npm.png" alt="context" style="width:80%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
-{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="Aggregate connection table filtered"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="Aggregate connection table filtered" style="width:80%;">}}
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM"  style="width:30%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
 Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Popular Tags" to aggregate on, using a combination of `service`, `kube_service`, `short_image`, `container_name`, and other common tags.
 
@@ -41,13 +41,13 @@ Tags from Datadog integrations or Unified Service Tagging can be used for aggreg
 
 Facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
 
-{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel"  style="width:20%;">}}
+{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel" style="width:20%;">}}
 
 #### Custom facets
 
 Aggregate and filter your traffic data by any tags in Datadog network page. An include list of tags is provided by default, which you can find in the search bar dropdown menu:
 
-{{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Drop down menu"  style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="Dropdown menu" style="width:90%;">}}
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
@@ -74,7 +74,7 @@ To learn more, see the [search syntax][1] documentation.
 
 {{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
 
-Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source :
+Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
 * **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 * **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
@@ -108,7 +108,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### Cloud service autodetection
 
-If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or GCP dependency to pinpoint latency, assess database performance, and visualize your network more completely.
+If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or Google Cloud dependency to pinpoint latency, assess database performance, and visualize your network more completely.
 
 {{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
 
@@ -121,7 +121,7 @@ For instance, you can
 NPM automatically maps
 
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
-- API calls to AppEngine, Google DNS, Gmail, and other [GCP services][4].
+- API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
 
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
 
@@ -147,9 +147,9 @@ NPM users may configure their networks to have overlapping IP spaces. For instan
 
 To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from.
 
-In AWS and GCP, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
+In AWS and Google Cloud, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
 
-  ```shell
+  ```yaml
   network:
      Id: <your-network-id>
   ```
@@ -211,6 +211,12 @@ The top of the sidepanel displays common source and destination tags shared by t
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
+### Security
+
+The **Security** tab highlights potential network threats and findings detected by [Cloud Workload Security][6] and [Cloud Security Posture Management][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+
+<div class="alert alert-warning">Network threat detections is in private beta. Fill out this <a href="https://forms.gle/zjfbxB7Cqjxj5R5h7">form</a> to request access.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -220,3 +226,6 @@ The top of the sidepanel displays common source and destination tags shared by t
 [3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /network_monitoring/performance/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
+[6]: /security/cloud_workload_security/
+[7]: /security/cspm/
+[8]: /security/detection_rules/

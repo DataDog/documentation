@@ -5,7 +5,6 @@ description: Access and authentication for Workflows
 aliases:
   - "/workflows/service_accounts"
 disable_toc: false
-is_beta: true
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
@@ -14,10 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "See the list of workflow actions"
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}}
 
 A few tools control access and authentication for workflows and their components.
 
@@ -58,12 +53,12 @@ When you run a workflow, the service account user resolves the connections defin
 #### View service account details
 
 1. Click the cog (**Settings**) icon.
-1. Select your service account from the drop-down menu.
+1. Select your service account from the dropdown menu.
 
 #### Remove a service account associated with workflow
 
 1. Click the cog (**Settings**) icon.
-1. Select your service account from the drop-down menu.
+1. Select your service account from the dropdown menu.
 1. Click **Remove service account**.
 
 ## Action credentials
@@ -102,8 +97,8 @@ Follow the steps below to modify the permissions on a specific connection:
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
 1. Select **Restrict Access**.
-1. Select a role from the dropdown. Click **Add**. The role you selected populates into the bottom of the dialog box.
-1. Next to the role name, select your desired permission from the dropdown.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
 1. Click **Save**.
 

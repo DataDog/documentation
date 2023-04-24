@@ -231,7 +231,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
-```shell
+```json
 DD_APM_REPLACE_TAGS=[
       {
         "name": "http.url",
@@ -337,9 +337,9 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 * Python: [Trace Filtering][11]
 
 ## Telemetry collection
- 
+
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
- 
+
 To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable to `false` in your instrumented application.
 
 ## PCI DSS compliance for compliance for APM
