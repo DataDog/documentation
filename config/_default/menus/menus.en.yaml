@@ -731,12 +731,6 @@ main:
     parent: dashboards
     identifier: guides
     weight: 9
-  # - name: Mobile Application
-  #   url: mobile/
-  #   identifier: mobile
-  #   pre: mobile
-  #   parent: platform_heading
-  #   weight: 70000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -1131,6 +1125,7 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  # Placeholder for the Service Management Overview landing page
   # - name: Service Management
   #   url: service_management/
   #   pre: events
@@ -1182,7 +1177,7 @@ main:
     weight: 2
   - name: Case Management
     url: service_management/case_management/
-    pre: inbox
+    # pre: pending WEB-3520
     parent: service_management_heading
     identifier: case_management
     weight: 40000

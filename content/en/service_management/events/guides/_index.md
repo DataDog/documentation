@@ -3,6 +3,9 @@ title: Events Guides
 kind: documentation
 private: true
 disable_toc: true
+aliases:
+- /developers/events/
+- /event/guides/
 further_reading:
 - link: "/service_management/events/explorer/"
   tag: "Documentation"
@@ -10,9 +13,6 @@ further_reading:
 - link: "/monitors/types/event/"
   tag: "Documentation"
   text: "Event Monitors"
-aliases:
-    - /developers/events/
-    - /event/guides/
 cascade:
     algolia:
         rank: 20
