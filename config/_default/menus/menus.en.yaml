@@ -5951,7 +5951,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalIncidents
       unstable: []
-      order: 9
+      order: 11
   - name: Get a signal's details
     url: '#get-a-signals-details'
     identifier: security-monitoring-get-a-signals-details
@@ -5963,7 +5963,7 @@ api:
       operationids:
         - GetSecurityMonitoringSignal
       unstable: []
-      order: 11
+      order: 13
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
     identifier: security-monitoring-get-a-list-of-security-signals
@@ -5975,7 +5975,7 @@ api:
       operationids:
         - SearchSecurityMonitoringSignals
       unstable: []
-      order: 6
+      order: 8
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -5987,7 +5987,7 @@ api:
       operationids:
         - ListSecurityMonitoringSignals
       unstable: []
-      order: 7
+      order: 9
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: security-monitoring-update-an-existing-rule
@@ -5999,7 +5999,7 @@ api:
       operationids:
         - UpdateSecurityMonitoringRule
       unstable: []
-      order: 4
+      order: 6
   - name: Get a rule's details
     url: '#get-a-rules-details'
     identifier: security-monitoring-get-a-rules-details
@@ -6011,7 +6011,7 @@ api:
       operationids:
         - GetSecurityMonitoringRule
       unstable: []
-      order: 3
+      order: 5
   - name: Delete an existing rule
     url: '#delete-an-existing-rule'
     identifier: security-monitoring-delete-an-existing-rule
@@ -6023,7 +6023,7 @@ api:
       operationids:
         - DeleteSecurityMonitoringRule
       unstable: []
-      order: 5
+      order: 7
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: security-monitoring-create-a-detection-rule
@@ -6035,7 +6035,7 @@ api:
       operationids:
         - CreateSecurityMonitoringRule
       unstable: []
-      order: 2
+      order: 4
   - name: List rules
     url: '#list-rules'
     identifier: security-monitoring-list-rules
@@ -6047,7 +6047,7 @@ api:
       operationids:
         - ListSecurityMonitoringRules
       unstable: []
-      order: 1
+      order: 3
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
@@ -6059,7 +6059,7 @@ api:
       operationids:
         - UpdateSecurityFilter
       unstable: []
-      order: 13
+      order: 15
   - name: Get a security filter
     url: '#get-a-security-filter'
     identifier: security-monitoring-get-a-security-filter
@@ -6071,7 +6071,7 @@ api:
       operationids:
         - GetSecurityFilter
       unstable: []
-      order: 14
+      order: 16
   - name: Delete a security filter
     url: '#delete-a-security-filter'
     identifier: security-monitoring-delete-a-security-filter
@@ -6083,7 +6083,7 @@ api:
       operationids:
         - DeleteSecurityFilter
       unstable: []
-      order: 12
+      order: 14
   - name: Create a security filter
     url: '#create-a-security-filter'
     identifier: security-monitoring-create-a-security-filter
@@ -6095,7 +6095,7 @@ api:
       operationids:
         - CreateSecurityFilter
       unstable: []
-      order: 15
+      order: 17
   - name: Get all security filters
     url: '#get-all-security-filters'
     identifier: security-monitoring-get-all-security-filters
@@ -6107,7 +6107,7 @@ api:
       operationids:
         - ListSecurityFilters
       unstable: []
-      order: 16
+      order: 18
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6146,7 +6146,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalState
       unstable: []
-      order: 2
+      order: 4
   - name: Modify the triage assignee of a security signal
     url: '#modify-the-triage-assignee-of-a-security-signal'
     identifier: security-monitoring-modify-the-triage-assignee-of-a-security-signal
@@ -6159,7 +6159,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalAssignee
       unstable: []
-      order: 3
+      order: 5
   - name: Add a security signal to an incident
     url: '#add-a-security-signal-to-an-incident'
     identifier: security-monitoring-add-a-security-signal-to-an-incident
@@ -6171,7 +6171,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 1
+      order: 3
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
