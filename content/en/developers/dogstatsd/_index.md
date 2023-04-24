@@ -18,6 +18,9 @@ further_reading:
     - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
+    - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+      tag: "Blog"
+      text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
