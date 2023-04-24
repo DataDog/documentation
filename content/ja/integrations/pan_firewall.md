@@ -25,7 +25,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-- security
+- ネットワーク
+- OS & システム
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pan_firewall/README.md
 display_on_public_website: true
@@ -43,16 +45,18 @@ public_title: Palo Alto Networks Firewall
 short_description: Palo Alto Networks Firewall ログイベント
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Log Collection
+  - Category::Network
+  - Category::OS & System
   - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Palo Alto Networks Firewall ログイベント
   media: []

@@ -18,7 +18,7 @@ Available integrations endpoints:
 - [AWS Integration][1]
 - [AWS Logs Integration][2]
 - [Azure Integration][3]
-- [GCP Integration][4]
+- [Google Cloud Integration][4]
 - [Slack Integration][5]
 - [PagerDuty Integration][6]
 - [Webhooks Integration][7]

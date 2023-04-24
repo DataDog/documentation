@@ -18,7 +18,7 @@ further_reading:
 
 Multi-factor authentication methods such as TFA and MFA help protect your applications against unauthorized access, however, these methods can make testing features more difficult.
 
-Datadog Synthetic MFA global variables allow you to test your application’s TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
+Datadog Synthetic MFA global variables allow you to test your application's TOTP-based MFA modules and critical user journeys without disabling critical security measures or manually entering authentication codes with disparate tools. You do not need to create or maintain dedicated environments to test MFA-enabled user journeys.
 
 ## Store your secret key or QR code in a global variable
 
@@ -36,7 +36,7 @@ RBAC restrict access to global variables is in beta. To request access, contact 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
 ## Use TOTP in your Synthetic tests
-You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a [browser test][2], inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application’s authentication workflow.
+You can use the secret key or QR code stored in a global variable across all your Synthetic tests. When creating a [browser test][2], inject the TOTP generated from the secret key or QR code stored in the global variable to verify your application's authentication workflow.
 
 {{< img src="synthetics/guide/browser-tests-totp/mfa-token-totp.mp4" alt="Recording a TOTP validation" video="true" >}}
 

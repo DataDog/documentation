@@ -14,7 +14,7 @@ title: データストリーム モニタリング
 このページで取り上げている機能は公開ベータ版です。
 </div>
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,ap1" %}}
 <div class="alert alert-warning">
     Data Streams Monitoring は、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
 </div>

@@ -259,6 +259,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog Lambda library
 
     The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a JavaScript package.
@@ -303,6 +304,57 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Install the Datadog Lambda library
+
+    The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a JavaScript package.
+
+    The minor version of the `datadog-lambda-js` package always matches the layer version. For example, datadog-lambda-js v0.5.0 matches the content of layer version 5.
+
+    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+      ```sh
+      # Use this format for AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
+
+      # Use this format for AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
+      ```
+
+      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Node12-x`, `Node14-x`, `Node16-x` and `Node18-x`.
+
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the packages `datadog-lambda-js` and `dd-trace` using your favorite package manager.
+
+      ```
+      npm install datadog-lambda-js dd-trace
+      ```
+
+2. Install the Datadog Lambda Extension
+
+    [Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
 3. Redirect the handler function
 
     - Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` if using the layer, or `node_modules/datadog-lambda-js/dist/handler.handler` if using the package.
@@ -315,7 +367,6 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     - Set the environment variable `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Set the environment variable `DD_API_KEY_SECRET_ARN` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}

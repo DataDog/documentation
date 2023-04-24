@@ -33,9 +33,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
 - caching
+- data store
 - log collection
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
 display_on_public_website: true
@@ -53,17 +54,18 @@ public_title: Redis
 short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::データストア
   - Category::キャッシュ
+  - Category::データストア
   - Category::ログの収集
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
   media: []
@@ -88,7 +90,7 @@ Redis をデータベース、キャッシュ、メッセージキューとし�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Redis チェックは [Datadog Agent][1] パッケージに含まれています。Redis サーバーに追加でインストールする必要はありません。
 
