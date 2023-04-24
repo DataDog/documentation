@@ -28,26 +28,28 @@ To create a Virtual Authenticator global variable storing your passkeys, see the
 {{< img src="synthetics/guide/browser-tests-passkeys/new-variable-fido2.png" alt="Create a FIDO2 key" style="width:70%;" >}}
 
 ## Use passkeys in your Synthetic tests
-When [creating a browser test][3], complete your application's passkeys login/registering flow using the passkeys stored in your virtual authenticator global variable.
-**Note:** Today passkeys are only supported in Chrome and Edge Synthetics browser tests.
+When [creating a browser test][3], complete your application's passkeys registration/authentication flow using the passkeys stored in your virtual authenticator global variable.
+**Note:** Passkeys are only supported in Chrome and Edge Synthetics browser tests.
 
 ### Test a registration flow
 
 To test a registration flow using passkeys in your [browser tests][3]:
 
 1. Import your Virtual Authenticator global variable into your test.[Documentation][5] 
-2. Navigate to the page to register your passkey. When recording your test, Datadog automatically completes any passkey registration challenge by generating a passkey using the virtual authenticator. The passkey will then be store on Datadog.
+2. Navigate to the page to register your passkey. When recording your test, Datadog automatically generates and stores a new passkey, using the imported virtual authenticator global variable.
 3. After recording your test steps, click **Save & Launch Test**.
 
 ### Test a login flow
 
-To test a login flow using a passkey in your [browser tests][3], you need to have your Datadog Passkey registered on the web application (see section above). This is required once per key and application.
+To test a login flow using a passkey in your [browser tests][3], you need to first register your Datadog passkey on the web application (see section above). This is required once per key and application.
 
 **Note:**
-This can be done either by completing the registration form from within the recorder without recording the registration steps, or by creating a test that embeds both the recording and the login.
+This can be done in two ways:
+- Either by completing once the registration flow from within the recorder, but without recording the registration steps,
+- Or by creating a test that embeds both steps for the registration and login flows.
 
 1. Import your virtual authenticator global variable. [Documentation][5] 
-2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically log in using the passkey previously registered on the web application with the selected virtual authenticator.
+2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
 3. After recording your test steps, click **Save & Launch Test**.
 
 ## Further Reading
