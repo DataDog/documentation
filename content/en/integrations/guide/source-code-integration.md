@@ -102,7 +102,9 @@ Datadog only captures the repository URL, the commit SHA of the current branch, 
 
 ### Embed git information in your artifacts on CI
 
-You can tag your telemetry with git information, such as the repository URL and commit hash, for artifacts built in a CI pipeline. The [Datadog Tracing Libraries][9] use this information to tag your telemetry.
+You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically link the active commit to your APM service.
+
+Select one of the following languages that supports embedding git information:
 
 {{< tabs >}}
 {{% tab "Go" %}}
