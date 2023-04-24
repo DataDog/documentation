@@ -5,7 +5,7 @@ further_reading:
 - link: metrics/distributions
   tag: ドキュメント
   text: ディストリビューションの詳細
-- link: tracing/trace_collection/open_standards/
+- link: opentelemetry/
   tag: ドキュメント
   text: OpenTelemetry の詳細
 - link: /opentelemetry/guide/otlp_delta_temporality/

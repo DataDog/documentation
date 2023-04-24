@@ -4,16 +4,20 @@ aliases:
 beta: true
 description: RUM をセットアップして機能フラグデータをキャプチャし、Datadog でパフォーマンスを分析する方法をご紹介します。
 further_reading:
-- link: /real_user_monitoring/explorer
+- link: /real_user_monitoring/feature_flag_tracking
   tag: ドキュメント
+  text: 機能フラグ追跡で機能フラグデータを分析する
+- link: /real_user_monitoring/explorer
+  tag: Documentation
   text: RUM エクスプローラーで RUM データを視覚化する
 kind: ガイド
 title: RUM の機能フラグデータの概要
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-RUM の機能フラグ分析は非公開ベータ版です。アクセスのリクエストは、サポート (support@datadoghq.com) までご連絡ください。以下の手順で、RUM のイベントを機能フラグのコンテキストで充実させることができます。
-{{< /callout >}}
+<div class="alert alert-warning">
+    機能フラグ追跡はベータ版です。
+</div>
+
 
 ## 概要
 機能フラグデータにより、どのユーザーに特定の機能が表示されているか、導入した変更がユーザー体験に影響を与えているか、パフォーマンスに悪影響を与えているかを判断できるため、ユーザー体験やパフォーマンス監視の可視性が高まります。
@@ -49,8 +53,8 @@ RUM データを機能フラグデータでリッチ化することにより、�
   <summary>CDN async</summary>
 
 ```javascript
-DD_RUM.onReady(function() {
-    DD_RUM.init({
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       ...
       enableExperimentalFeatures: ["feature_flags"],
       ...
@@ -71,10 +75,7 @@ window.DD_RUM &&
     })
 ```
 </details>
-
-機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、または Datadog のインテグレーションパートナーのいずれかを使用して開始することができます。
-
-Datadog は、以下とのインテグレーションをサポートしています。
+<br/>
 
 [1]: /ja/real_user_monitoring/browser#setup
 {{% /tab %}}
@@ -82,19 +83,11 @@ Datadog は、以下とのインテグレーションをサポートしていま
 
 機能フラグの追跡は、RUM iOS SDK で利用可能です。開始するには、[RUM iOS モニタリング][1]をセットアップします。iOS RUM SDK バージョン 1.16.0 以上が必要です。
 
-機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、または Datadog のインテグレーションパートナーのいずれかを使用して開始することができます。
-
-Datadog は、以下とのインテグレーションをサポートしています。
-
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
 {{% tab "Android" %}}
 
 機能フラグの追跡は、RUM Android SDK で利用可能です。開始するには、[RUM Android モニタリング][1]をセットアップします。Android RUM SDK バージョン 1.18.0 以上が必要です。
-
-機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、または Datadog のインテグレーションパートナーのいずれかを使用して開始することができます。
-
-Datadog は、以下とのインテグレーションをサポートしています。
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=kotlin
 {{% /tab %}}
@@ -102,14 +95,15 @@ Datadog は、以下とのインテグレーションをサポートしていま
 
 機能フラグの追跡は、Flutter アプリケーションで利用可能です。開始するには、[RUM Flutter モニタリング][1]をセットアップします。Flutter プラグインバージョン 1.3.2 以上が必要です。
 
-機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、または Datadog のインテグレーションパートナーのいずれかを使用して開始することができます。
-
-Datadog は、以下とのインテグレーションをサポートしています。
-
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/
 {{% /tab %}}
 {{< /tabs >}}
 
+## インテグレーション
+
+機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、または Datadog のインテグレーションパートナーのいずれかを使用して開始することができます。
+
+Datadog は、以下とのインテグレーションをサポートしています。
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
 
@@ -172,6 +166,18 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 
 
 [1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -282,6 +288,17 @@ Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると
 
 
 [1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
 {{% /tab %}}
 {{< /tabs >}}
 

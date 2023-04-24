@@ -33,24 +33,58 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ログとトレースを接続する](#connect-logs-and-traces)
 
 ### APM
+- [タグを使ったテレメトリー接続](#connect-telemetry-using-tags)
+- [リクエストとレスポンスのペイロードを収集する](#collect-the-request-and-response-payloads)
+- [非 Lambda リソースからメトリクスを収集する](#collect-metrics-from-non-lambda-resources)
+- [非 Lambda リソースからログを収集する](#collect-logs-from-non-lambda-resources)
+- [非 Lambda リソースからトレースを収集する](#collect-traces-from-non-lambda-resources)
+- [ログから情報をフィルターまたはスクラブする](#filter-or-scrub-information-from-logs)
+- [ログ収集の無効化](#disable-logs-collection)
+- [ログのパースと変換](#parse-and-transform-logs)
 - [Datadog トレーサーの構成](#configure-the-datadog-tracer)
-- [APM トレースサンプリングレートの選択](#select-sampling-rates-for-ingesting-apm-spans)
+- [APM スパンを取り込む際のサンプリングレートの選択](#select-sampling-rates-for-ingesting-apm-spans)
 - [トレースから機密情報をフィルターまたはスクラブする](#filter-or-scrub-sensitive-information-from-traces)
 - [トレース収集の無効化](#disable-trace-collection)
-- [リクエストとレスポンスのペイロードを収集する](#collect-the-request-and-response-payloads)
-- [非 Lambda リソースからトレースを収集する](#collect-traces-from-non-lambda-resources)
+- [ログとトレースを接続する](#connect-logs-and-traces)
+- [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
+- [カスタムメトリクスの送信](#submit-custom-metrics)
+- [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
+- [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
 - [X-Ray と Datadog のトレースをマージする](#merge-x-ray-and-datadog-traces)
-- [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
+- [AWS Lambda のコード署名を有効にする](#enable-aws-lambda-code-signing)
+- [Datadog Lambda 拡張機能に移行する](#migrate-to-the-datadog-lambda-extension)
+- [Datadog Lambda 拡張機能による x86 から arm64 への移行](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
+- [ローカルテスト用の Datadog Lambda 拡張機能の構成](#configure-the-datadog-lambda-extension-for-local-testing)
+- [トラブルシューティング](#troubleshoot)
+- [参考文献](#further-reading)
 
 ### その他
 - [タグを使ったテレメトリー接続](#connect-telemetry-using-tags)
-- [AWS PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
+- [リクエストとレスポンスのペイロードを収集する](#collect-the-request-and-response-payloads)
+- [非 Lambda リソースからメトリクスを収集する](#collect-metrics-from-non-lambda-resources)
+- [非 Lambda リソースからログを収集する](#collect-logs-from-non-lambda-resources)
+- [非 Lambda リソースからトレースを収集する](#collect-traces-from-non-lambda-resources)
+- [ログから情報をフィルターまたはスクラブする](#filter-or-scrub-information-from-logs)
+- [ログ収集の無効化](#disable-logs-collection)
+- [ログのパースと変換](#parse-and-transform-logs)
+- [Datadog トレーサーの構成](#configure-the-datadog-tracer)
+- [APM スパンを取り込む際のサンプリングレートの選択](#select-sampling-rates-for-ingesting-apm-spans)
+- [トレースから機密情報をフィルターまたはスクラブする](#filter-or-scrub-sensitive-information-from-traces)
+- [トレース収集の無効化](#disable-trace-collection)
+- [ログとトレースを接続する](#connect-logs-and-traces)
+- [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
+- [カスタムメトリクスの送信](#submit-custom-metrics)
+- [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
-- [Datadog Lambda 拡張機能に移行する](#migrate-to-the-datadog-lambda-extension)
+- [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
+- [X-Ray と Datadog のトレースをマージする](#merge-x-ray-and-datadog-traces)
 - [AWS Lambda のコード署名を有効にする](#enable-aws-lambda-code-signing)
+- [Datadog Lambda 拡張機能に移行する](#migrate-to-the-datadog-lambda-extension)
+- [Datadog Lambda 拡張機能による x86 から arm64 への移行](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [ローカルテスト用の Datadog Lambda 拡張機能の構成](#configure-the-datadog-lambda-extension-for-local-testing)
 - [トラブルシューティング](#troubleshoot)
+- [参考文献](#further-reading)
 
 ## タグを使ったテレメトリー接続
 
@@ -624,9 +658,18 @@ Lambda 関数がコード署名を使用するように構成されている場�
 
 Datadog の Signing Profile ARN:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```
+arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
+```
+{{< /site-region >}}
+
 
 ## Datadog Lambda 拡張機能に移行する
 
@@ -635,14 +678,6 @@ Datadog は、[Forwarder Lambda 関数][4]または [Lambda 拡張機能][2]を�
 移行するには、[Datadog Lambda 拡張機能を使ったインストール手順][1]と [Datadog Forwarder を使った手順][38]を比較してみてください。ご参考までに、主な相違点を以下にまとめます。
 
 **注**: Datadog では、まず開発用とステージング用のアプリケーションを移行し、本番用のアプリケーションを 1 つずつ移行していくことを推奨しています。
-
-## Datadog Lambda 拡張機能で x86 と arm64 の切り替えを行う
-
-Datadog 拡張機能はコンパイル済みのバイナリコードで、x86 と rm64 の2種類が用意されています。CDK、Serverless Framework、SAM などのデプロイメントツールを使用して x86 の Lambda 関数を arm64 に移行 (または arm64 を x86 に移行) する場合、サービスインテグレーション (API Gateway、SNS、Kinesisなど) が Lambda 関数のバージョンまたはエイリアスを使用する構成になっていることを確認してください。この確認を怠ると、デプロイ中に関数が約 10 秒間利用できなくなる可能性があります。
-
-この現象が起きるのは、x86 から arm64 への Lambda 関数の移行が、`updateFunction` と `updateFunctionConfiguration` という並列で実行される 2 つの API 呼び出しで構成されているからです。これらの呼び出し中に短時間のずれが生じ、Lambda の `updateFunction` の呼び出しが完了して新しいアーキテクチャを使用するようコードが更新されても、 `updateFunctionConfiguration` の呼び出しがまだ完了せず、拡張機能で引き続き古いアーキテクチャを使用する構成が残ってしまいます。
-
-Layer のバージョンを利用できない場合、Datadog では、アーキテクチャの移行プロセス中に [Datadog Forwarder][38] の構成を行うことを推奨しています。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -694,6 +729,15 @@ Layer のバージョンを利用できない場合、Datadog では、アーキ
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Datadog Lambda 拡張機能で x86 と arm64 の切り替えを行う
+
+Datadog 拡張機能はコンパイル済みのバイナリコードで、x86 と rm64 の2種類が用意されています。CDK、Serverless Framework、SAM などのデプロイメントツールを使用して x86 の Lambda 関数を arm64 に移行 (または arm64 を x86 に移行) する場合、サービスインテグレーション (API Gateway、SNS、Kinesisなど) が Lambda 関数のバージョンまたはエイリアスを使用する構成になっていることを確認してください。この確認を怠ると、デプロイ中に関数が約 10 秒間利用できなくなる可能性があります。
+
+この現象が起きるのは、x86 から arm64 への Lambda 関数の移行が、`updateFunction` と `updateFunctionConfiguration` という並列で実行される 2 つの API 呼び出しで構成されているからです。これらの呼び出し中に短時間のずれが生じ、Lambda の `updateFunction` の呼び出しが完了して新しいアーキテクチャを使用するようコードが更新されても、 `updateFunctionConfiguration` の呼び出しがまだ完了せず、拡張機能で引き続き古いアーキテクチャを使用する構成が残ってしまいます。
+
+Layer のバージョンを利用できない場合、Datadog では、アーキテクチャの移行プロセス中に [Datadog Forwarder][38] の構成を行うことを推奨しています。
+
 
 ## ローカルテスト用の Datadog Lambda 拡張機能の構成
 
