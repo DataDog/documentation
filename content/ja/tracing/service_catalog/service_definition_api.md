@@ -27,7 +27,7 @@ Service Definition Schema は、サービスの基本情報を格納する構造
 
 
 #### 例
-{{< code-block lang="yaml" filename="service.definition.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 schema-version: v2
 dd-service: web-store
 team: shopist
@@ -63,6 +63,7 @@ docs:
     url: https://docs.datadoghq.com/
 tags: []
 integrations:
+    pagerduty: https://example.pagerduty.com/service-directory/XYZYX
 外部リソース (オプション)
 {{< /code-block >}}
 

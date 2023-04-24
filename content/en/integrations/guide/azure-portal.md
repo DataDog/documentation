@@ -105,8 +105,8 @@ Optionally, limit metric collection for Azure VMs and App Service Plans using Az
 ##### Tag rules for sending metrics
  
  * Virtual machines, virtual machine scale sets, and App Service Plans with `include` tags send metrics to Datadog.  
- * Virtual machines, virtual machine scale sets, and App Service Plans with `exclude` tags don’t send metrics to Datadog.  
- * If there’s a conflict between inclusion and exclusion rules, exclusion takes priority.  
+ * Virtual machines, virtual machine scale sets, and App Service Plans with `exclude` tags don't send metrics to Datadog.  
+ * If there's a conflict between inclusion and exclusion rules, exclusion takes priority.  
  * There is no option to limit metric collection for other resource types.
 
 #### Log collection

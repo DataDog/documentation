@@ -684,8 +684,27 @@
   "CreateOrUpdateServiceDefinitions": [
     {
       "group": "service_definition",
+      "suffix": "_1808735248",
+      "description": "Create or update service definition using schema v2 returns \"CREATED\" response"
+    },
+    {
+      "group": "service_definition",
+      "suffix": "_2619874414",
+      "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
+    }
+  ],
+  "CreateSpansMetric": [
+    {
+      "group": "spans_metrics",
       "suffix": "",
-      "description": "Create or update service definition returns \"CREATED\" response"
+      "description": "Create a span-based metric returns \"OK\" response"
+    }
+  ],
+  "UpdateSpansMetric": [
+    {
+      "group": "spans_metrics",
+      "suffix": "",
+      "description": "Update a span-based metric returns \"OK\" response"
     }
   ],
   "SetOnDemandConcurrencyCap": [
@@ -693,6 +712,41 @@
       "group": "synthetics",
       "suffix": "_2850884405",
       "description": "Save on demand concurrency cap"
+    }
+  ],
+  "CreateTeamLink": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create a team link returns \"OK\" response"
+    }
+  ],
+  "CreateTeam": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Create a team returns \"CREATED\" response"
+    }
+  ],
+  "UpdateTeamLink": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update a team link returns \"OK\" response"
+    }
+  ],
+  "UpdateTeam": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update a team returns \"OK\" response"
+    }
+  ],
+  "UpdateTeamPermissionSetting": [
+    {
+      "group": "teams",
+      "suffix": "",
+      "description": "Update permission setting for team returns \"OK\" response"
     }
   ],
   "CreateUser": [

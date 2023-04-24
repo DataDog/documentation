@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- network
 dependencies: []
 description: Surveillez des métriques clés de vos pare-feux Azure.
 doc_link: https://docs.datadoghq.com/integrations/azure_firewall/
@@ -20,6 +20,7 @@ public_title: Intégration Datadog/Pare-feu Microsoft Azure
 short_description: Surveillez des métriques clés de vos pare-feux Azure.
 version: '1.0'
 ---
+
 ## Présentation
 
 Pare-feu Azure est un service de sécurité réseau basé sur le cloud pour protéger les ressources de votre réseau virtuel Azure.

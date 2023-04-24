@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - Python Lambda トレース
 aliases:
 - /ja/serverless/datadog_lambda_library/python/
 - /ja/serverless/guide/python/
@@ -16,13 +19,13 @@ kind: ドキュメント
 title: Python サーバーレスアプリケーションのインスツルメンテーション
 ---
 
-<div class="alert alert-warning">Python Lambda 関数が <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 以下</a>で書かれている場合、または以前に Datadog Forwarder を使って Lambda 関数をセットアップした場合は、<a href="/serverless/guide/datadog_forwarder_python">Datadog Forwarder を使ったインスツルメンテーション</a>をご覧ください。</div>
+<div class="alert alert-warning">Python Lambda 関数が <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 以下</a>で書かれている場合、または以前に Datadog Forwarder を使って Lambda 関数をセットアップした場合は、<a href="/serverless/guide/datadog_forwarder_python">Datadog Forwarder を使ったインスツルメンテーション</a>をご覧ください。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。</div>
 
 <div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 
-## インストール
+## APM に Datadog Agent を構成する
 
-Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。
+Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。アプリケーションがコンテナイメージとしてデプロイされる場合は、「コンテナイメージ」の指示に従うことが*必要です*。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -45,7 +48,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
 
    Datadog CLI は、AWS Lambda サービスへのアクセスを必要とし、AWS JavaScript SDK に依存して[資格情報を解決][1]します。AWS CLI を呼び出すときに使用するのと同じ方法を使用して、AWS の資格情報が構成されていることを確認します。
 
-4. Datadog のサイトを構成する
+4. Datadog サイトを構成する
 
     ```sh
     export DATADOG_SITE="<DATADOG_SITE>"
@@ -61,7 +64,7 @@ Datadog CLI は、既存の Lambda 関数のコンフィギュレーションを
     export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
     ```
 
-   &nbsp;迅速なテスト目的のために、Datadog API キーをプレーンテキストで設定することも可能です。
+   迅速なテスト目的のために、Datadog API キーをプレーンテキストで設定することも可能です。
 
     ```sh
     export DATADOG_API_KEY="<DATADOG_API_KEY>"
@@ -190,7 +193,7 @@ Datadog サーバーレスプラグインをインストールして構成する
         python_layer_version={{< latest-lambda-layer-version layer="python" >}},
         extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
         site="<DATADOG_SITE>",
-        apiKeySecretArn="<DATADOG_API_KEY_SECRET_ARN>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
       )
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
     ```
@@ -248,6 +251,8 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 <div class="alert alert-info">Serverless Framework や AWS CDK といった Datadog をサポートするサーバーレス開発ツールを使用していない場合は、Datadog はお使いのサーバーレスアプリケーションを <a href="./?tab=datadogcli">Datadog CLI</a> でインスツルメントすることを強く推奨します。</div>
 
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Datadog Lambda ライブラリのインストール
 
    Datadog Lambda ライブラリは、レイヤー (推奨) _または_ Python パッケージのいずれかとしてインポートすることができます。
@@ -302,6 +307,77 @@ Datadog サーバーレスプラグインをインストールして構成する
 
    `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Datadog Lambda ライブラリのインストール
+
+   Datadog Lambda ライブラリは、レイヤー (推奨) _または_ Python パッケージのいずれかとしてインポートすることができます。
+
+   `datadog-lambda` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、datadog-lambda v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致します。
+
+    - オプション A: 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+      ```sh
+      # Use this format for x86-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+      ```
+
+      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Python37`、`Python38` または `Python39` が利用可能です。
+
+    - オプション B: ビルド済みの Datadog Lambda レイヤーを使用できない場合、代わりに `datadog-lambda` パッケージとその依存関係を、`pip` などのお気に入りの Python パッケージマネージャーを使って、関数プロジェクトフォルダにローカルにインストールします。
+
+      ```sh
+      pip install datadog-lambda -t ./
+      ```
+
+      **注**: `datadog-lambda` はネイティブ拡張機能を使用する `ddtrace` に依存しています。したがって、適切なアーキテクチャ (`x86_64` または `arm64`) の Linux 環境でインストールおよびコンパイルする必要があります。例えば、Serverless Framework では [dockerizePip][2] を、AWS SAM では [--use-container][3] を利用することができます。詳しくは、[関数デプロイパッケージへの依存関係の追加方法][4]をご参照ください。
+
+      [最新リリース][5]を参照。
+
+2. Datadog Lambda 拡張機能のインストール
+
+   以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+   `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
+{{< /site-region >}}
+
+
+
 3. ハンドラー関数のリダイレクト
 
     - 関数のハンドラーを `datadog_lambda.handler.handler` に設定します。
@@ -333,11 +409,6 @@ Datadog サーバーレスプラグインをインストールして構成する
     ```
 
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[5]: https://pypi.org/project/datadog-lambda/
 [6]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://aws.github.io/chalice/
@@ -348,7 +419,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 ## 次のステップ
 
 - [Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
-- [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください。
+- [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][2]を参照してください
 - [高度な構成][3]を参照して以下のことを行ってください。
     - タグを使ったテレメトリー接続

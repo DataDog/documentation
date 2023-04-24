@@ -22,10 +22,10 @@ author:
   support_email: support@moogsoft.com
   vendor_id: moogsoft
 categories:
-- マーケットプレイス
 - 自動化
+- インシデント
+- マーケットプレイス
 - notification
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -53,20 +53,20 @@ public_title: Moogsoft
 short_description: 高度なセルフサービス AI 駆動の可観測性プラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Automation
+  - Category::Incidents
+  - Category::Marketplace
   - Category::Notification
-  - Category::Monitoring
-  - Offering::Software License
   - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 高度なセルフサービス AI 駆動の可観測性プラットフォーム
   media:

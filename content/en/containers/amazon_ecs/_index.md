@@ -2,7 +2,6 @@
 title: Amazon ECS
 kind: documentation
 aliases:
-  - /integrations/amazon_ecs/
   - /agent/amazon_ecs/
   - /containers/amazon_ecs/data_collected
 further_reading:
@@ -15,6 +14,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"
+algolia:
+  tags: ['ecs']
 ---
 
 ## Overview

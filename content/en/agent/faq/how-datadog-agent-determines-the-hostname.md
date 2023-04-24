@@ -73,7 +73,7 @@ When upgrading from Agent v5 to Agent v6, there might be a difference in the hos
 
 #### Determine if you're affected
 
-Starting with v6.3.0, the Agent logs the warning below if you’re affected by the change:
+Starting with v6.3.0, the Agent logs the warning below if you're affected by the change:
 ```text
 DEPRECATION NOTICE: The agent resolved your hostname as <HOSTNAME>. However in a future version, it will be resolved as <FQDN> by default. To enable the future behavior, please enable the `hostname_fqdn` flag in the configuration.
 ```
@@ -91,7 +91,7 @@ If you're affected by this change, Datadog recommends taking the following actio
 
 * **Upgrading from Agent v5 to Agent v < 6.3**: Hardcode your hostname in the [Agent's main configuration][2] file.
 * **Upgrading from Agent v5 to Agent >= v6.3**: Enable the `hostname_fqdn` option in the [Agent's main configuration][2] file. This ensures that you keep the same hostname.
-* **Upgrading from Agent v5 to Agent v6 (a future version which uses the fqdn by default)**: you don’t need to take any action.
+* **Upgrading from Agent v5 to Agent v6 (a future version which uses the fqdn by default)**: you don't need to take any action.
 * If you want to ensure the current default behavior of Agent v6 is preserved when you upgrade the Agent in the future, set `hostname_fqdn` to `false`. That said, Datadog recommends you switch `hostname_fqdn` to `true` whenever possible.
 
 ### Windows

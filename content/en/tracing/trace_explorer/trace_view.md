@@ -79,7 +79,7 @@ See logs related to your service at the time of the trace. When you hover over a
 {{% /tab %}}
 {{% tab "Processes" %}}
 
-Click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. You can analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the [Live Processes page][1]. To view span-specific processes, enable [process collection][2]. Related processes are not currently supported for serverless and browser traces. 
+Click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. You can analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process will bring you to the [Live Processes page][1]. To view span-specific processes, enable [process collection][2]. Related processes are not currently supported for serverless and browser traces. 
 
 {{< img src="tracing/visualization/trace/trace_processes.png" alt="Trace Processes"  style="width:90%;">}}
 
@@ -89,7 +89,7 @@ Click on a service’s span to see the processes running on its underlying infra
 
 {{% tab "Network" %}}
 
-Click on a service’s span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Overview][1]. To view span-specific processes, enable [Network Performance Monitoring][2].
+Click on a service's span to see network dependencies of the service making the request. Use key network performance metrics such as volume, errors (TCP retransmits), and network latency (TCP round-trip time) to differentiate between application-specific and network-wide issues, especially when no code errors have been generated. For instance, you can use network telemetry to determine if high request latency is due to traffic overloading of the relevant application, or faulty dependencies with a downstream pod, security group, or any other tagged endpoint. Clicking on a process brings you to the [Network Overview][1]. To view span-specific processes, enable [Network Performance Monitoring][2].
 
 **Note**: Related network telemetry is not currently supported for serverless traces.
 

@@ -7,7 +7,7 @@ further_reading:
   text: "Alert on anomalous p99 latency of a database service"
 - link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
-  text: "Compare a service’s latency to the previous week"
+  text: "Compare a service's latency to the previous week"
 - link: "/tracing/guide/slowest_request_daily/"
   tag: "3 mins"
   text: "Debug the slowest trace on the slowest endpoint of a web service"

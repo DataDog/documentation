@@ -9,10 +9,7 @@ author:
   support_email: support@shoreline.io
 categories:
 - 自動化
-classifier_tags:
-- Supported OS::Linux
-- Category::Automation
-- Offering::UI Extension
+- インシデント
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/shoreline/README.md
 display_on_public_website: true
@@ -32,6 +29,11 @@ supported_os:
 - linux
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Incidents
+  - Offering::UI Extension
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: トリガーされたモニターを修復するためのオートメーション構築
   media:
@@ -67,7 +69,7 @@ Shoreline は、待機中の全員が最高の SRE と同等の能力を発揮�
 まずは、[Shoreline][1] でトライアルアカウントを設定してください。
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 以下の手順でインテグレーション構成を行います。
 

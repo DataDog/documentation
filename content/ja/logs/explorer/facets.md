@@ -31,39 +31,9 @@ title: ログファセット
 
 ファセットを使用すると、[ログモニター][4]のログ、[ダッシュボード][5]のログウィジェット、[ノートブック][6]を操作することもできます。
 
-{{< site-region region="gov,us3,us5" >}}
-
-**注**: [ログ処理][1]、[ライブテイル検索][2]、[アーカイブ][3]転送、リハイドレート、またはログからの[メトリクス生成][4]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][5]および[インデックス][6]にログをルーティングするためのファセットや、[除外フィルター][7]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。
+**注**: [ログ処理][7]、[ライブテイル検索][8]、[ログエクスプローラー検索][30]、ログからの[メトリクス生成][10]、[アーカイブ][11]転送、または[リハイドレート][12]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][13]および[インデックス][14]にログをルーティングするためのファセットや、[除外フィルター][15]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。
 
 これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
-
-[1]: /ja/logs/log_configuration/processors
-[2]: /ja/logs/live_tail/
-[3]: /ja/logs/archives/
-[4]: /ja/logs/logs_to_metrics/
-[5]: /ja/logs/log_configuration/pipelines
-[6]: /ja/logs/indexes/#indexes-filters
-[7]: /ja/logs/indexes/#exclusion-filters
-
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-
-**注**: [ログ処理][1]、[ライブテイル検索][2]、[ログエクスプローラー検索][8]、ログからの[メトリクス生成][4]、[アーカイブ][3]転送、または[リハイドレート][9]をサポートするためのファセットは必要ありません。また、フィルターを使用して[パイプライン][5]および[インデックス][6]にログをルーティングするためのファセットや、[除外フィルター][7]を使用してインデックスからログを除外またはサンプリングするためのファセットも必要ありません。
-
-これらすべてのコンテキストで、オートコンプリート機能は既存のファセットに依存しますが、入力ログに一致する入力はすべて機能します。
-
-[1]: /ja/logs/log_configuration/processors
-[2]: /ja/logs/live_tail/
-[3]: /ja/logs/archives/
-[4]: /ja/logs/logs_to_metrics/
-[5]: /ja/logs/log_configuration/pipelines
-[6]: /ja/logs/indexes/#indexes-filters
-[7]: /ja/logs/indexes/#exclusion-filters
-[8]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
-[9]: /ja/logs/archives/rehydrating/
-
-{{< /site-region >}}
 
 ### 定性的ファセット
 
@@ -71,24 +41,11 @@ title: ログファセット
 
 次が必要な場合は、定性的ファセットを使用します。
 
-- 値の**相対的なインサイトを取得**する。たとえば、`http.network.client.geoip.country.iso_code` のファセットを作成して、[NGINX][16] ウェブアクセスログの 5XX エラーの数ごとに最も影響を受ける上位の国を確認し、Datadog [GeoIP Processor][17] で加工します。<br/><br/>
-
+- 値の**相対的なインサイトを取得**する。たとえば、`http.network.client.geoip.country.iso_code` のファセットを作成して、[NGINX][16] ウェブアクセスログの 5XX エラーの数ごとに最も影響を受ける上位の国を確認し、Datadog [GeoIP Processor][17] で加工します。
 - **一意の値をカウント**する。たとえば、[Kong][18] ログから `user.email` のファセットを作成して、ウェブサイトに毎日接続しているユーザー数を把握します。
-
-{{< site-region region="gov,us3,us5" >}}
-- 特定の値に対してログを**フィルタリング**する。たとえば、`environment` [タグ][1]のファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。
-
-[1]: /ja/getting_started/tagging/assigning_tags/
-
-{{< /site-region >}}
-{{< site-region region="us,eu" >}}
-- 特定の値に対してログを頻繁に**フィルタリング**する。たとえば、`environment` [タグ][1]のファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。
+- 特定の値に対してログを頻繁に**フィルタリング**する。たとえば、`environment` [タグ][19]のファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。
 
 **注**: 属性の値に対してフィルタリングするためのファセットの作成は必須ではありませんが、調査でよく使用する属性に対し定義しておくと、解決の時間を削減できます。
-
-[1]: /ja/getting_started/tagging/assigning_tags/
-
-{{< /site-region >}}
 
 #### 種類
 
@@ -191,7 +148,7 @@ title: ログファセット
 
 ### インデックスファセット
 
-インデックスファセットは、組織に[複数のインデックス][27]がある場合や、アクティブな[履歴ビュー][15]がある場合にのみ表示される特定のファセットです。クエリのスコープをインデックスのサブセットに絞り込む場合は、このファセットを使用します。
+インデックスファセットは、組織に[複数のインデックス][27]がある場合や、アクティブな[履歴ビュー][28]がある場合にのみ表示される特定のファセットです。クエリのスコープをインデックスのサブセットに絞り込む場合は、このファセットを使用します。
 
 {{< img src="logs/explorer/facet/index_facet_.png" alt="ファセットを作成" style="width:30%;">}}
 
@@ -199,7 +156,7 @@ title: ログファセット
 
 新しいファセットを作成するのではなく、常に既存のファセットを使用することを習慣にすると良いでしょう（[ファセットのエイリアス設定](#alias-facets)セクションを参照）。類似した性質の情報に一意のファセットを使用すると、チーム間のコラボレーションが促されます。
 
-JSON オブジェクトの配列にファセットを作成するには、まず [grok パーサー][28]を使って属性を抽出し、その属性のファセットを作成します。
+JSON オブジェクトの配列にファセットを作成するには、まず [grok パーサー][29]を使って属性を抽出し、その属性のファセットを作成します。
 
 **注**: ファセットが作成されると、そのコンテンツは**どちらか**のインデックスに流れる**すべての新しいログに対して**入力されます。ログ管理ソリューションを最適な形で利用するため、Datadog では最大 1000 ファセットで使用することをおすすめしています。
 
@@ -263,20 +220,29 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 - ファセットの鉛筆アイコンをクリックします。
 - **Delete** をクリックします。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/search_syntax/
 [2]: /ja/logs/explorer/patterns/
 [3]: /ja/logs/explorer/analytics/
-[4]: /ja/monitors/create/types/log/
+[4]: /ja/monitors/types/log/
 [5]: /ja/dashboards/widgets/
 [6]: /ja/notebooks/
-[15]: /ja/logs/log_configuration/rehydrating
+[7]: /ja/logs/log_configuration/processors
+[8]: /ja/logs/live_tail/
+[9]: /ja/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[10]: /ja/logs/logs_to_metrics/
+[11]: /ja/logs/archives/
+[12]: /ja/logs/archives/rehydrating/
+[13]: /ja/logs/log_configuration/pipelines
+[14]: /ja/logs/indexes/#indexes-filters
+[15]: /ja/logs/indexes/#exclusion-filters
 [16]: /ja/integrations/nginx/
 [17]: /ja/logs/log_configuration/processors/#geoip-parser
 [18]: /ja/integrations/kong/
+[19]: /ja/getting_started/tagging/assigning_tags/
 [20]: /ja/integrations/varnish/
 [21]: /ja/integrations/ansible/
 [22]: /ja/integrations/python/
@@ -285,4 +251,6 @@ _エイリアス設定された_ファセットを_標準_ファセットにエ�
 [25]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /ja/logs/log_configuration/attributes_naming_convention
 [27]: /ja/logs/indexes/#indexes
-[28]: /ja/logs/log_configuration/parsing/?tab=matchers#nested-json
+[28]: /ja/logs/log_configuration/rehydrating
+[29]: /ja/logs/log_configuration/parsing/?tab=matchers#nested-json
+[30]: /ja/logs/explorer/

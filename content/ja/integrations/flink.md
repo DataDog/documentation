@@ -24,7 +24,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/flink/README.md
@@ -43,16 +42,15 @@ public_title: Flink
 short_description: Flink ジョブのメトリクスを追跡する。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Flink ジョブのメトリクスを追跡する。
   media: []
@@ -69,7 +67,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Flink チェックは [Datadog Agent][4] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

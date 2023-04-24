@@ -22,9 +22,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- developer tools
 - ネットワーク
-- web
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
 display_on_public_website: true
@@ -32,7 +31,7 @@ draft: false
 git_integration_title: tls
 integration_id: tls
 integration_title: TLS
-integration_version: 2.9.0
+integration_version: 2.10.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -42,17 +41,16 @@ public_title: TLS
 short_description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Developer Tools
   - Category::Network
-  - Category::Web
-  - Category::Autodiscovery
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
   media: []
@@ -74,7 +72,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 TLS チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

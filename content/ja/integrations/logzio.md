@@ -19,7 +19,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
+- event management
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md
 display_on_public_website: true
@@ -37,15 +37,15 @@ public_title: Logz.io
 short_description: サービスとしての AI 駆動型 ELK
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::モニタリング
+  - Category::Event Management
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: サービスとしての AI 駆動型 ELK
   media: []
