@@ -1,9 +1,9 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - ログの収集
-ddtype: crawler
+- cloud
+- google cloud
+- ログの収集
+- セキュリティ
 dependencies: []
 description: 監査ログダッシュボードを表示します。
 doc_link: ''
@@ -21,6 +21,7 @@ public_title: Datadog Google 監査ログダッシュボードのインテグレ
 short_description: 監査ログダッシュボードを表示します。
 version: '1.0'
 ---
+
 ## 概要
 
 GCP 監査ログを監視すると、リソースにアクセスしているユーザー、アクセス方法、アクセスが許可されているかどうかをよりよく理解できます。

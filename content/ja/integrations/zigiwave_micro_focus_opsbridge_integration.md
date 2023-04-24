@@ -35,7 +35,7 @@ pricing:
   product_id: micro-focus-opsbridge-integration
   short_description: 接続された Datadog/MF OpsBridge インスタンス 1 対の月額ライセンス
   unit_price: 750.0
-public_title: OpsBridge インテグレーション
+public_title: OpsBridge
 short_description: Datadog と OpsBridge のノーコードインテグレーション
 supported_os:
 - linux
@@ -69,7 +69,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: OpsBridge インテグレーション
+  title: OpsBridge
   uninstallation: README.md#Uninstallation
 ---
 

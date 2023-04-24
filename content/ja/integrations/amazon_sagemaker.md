@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
+- 自動化
 - aws
+- クラウド
 - ログの収集
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡
@@ -29,7 +30,7 @@ Amazon SageMaker は、フルマネージド型の機械学習サービスです
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

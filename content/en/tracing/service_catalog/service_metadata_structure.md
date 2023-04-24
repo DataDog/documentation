@@ -20,7 +20,7 @@ Service Catalog uses service definition schemas to store and display relevant me
 There are two supported versions of the schema:
 
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
-- V2.1 supports additional UI elements such as service groupings and fields like application, tier, and lifecycle to make it easier to preserve the context for your service ownership information.
+- V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience. 
 
 
 For more information about the latest updates, see the schemas on GitHub.

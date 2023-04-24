@@ -62,7 +62,7 @@ pricing:
   tag: vcoreid
   unit_label: プロダクション vCore
   unit_price: 200
-public_title: Mule® インテグレーション
+public_title: Mule®
 short_description: MuleSoft 製品からメトリクスを収集し、Datadog にアップロードします
 supported_os:
 - linux
@@ -104,7 +104,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Mule® インテグレーション
+  title: Mule®
   uninstallation: README.md#Uninstallation
 ---
 
