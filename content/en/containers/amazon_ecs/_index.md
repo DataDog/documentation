@@ -219,6 +219,112 @@ While it's possible to run the Agent in `awsvpc` mode, it's not the recommended 
 
 Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
 
+#### FIPS Proxy for GOVCLOUD environments.
+
+**This feature is available for Linux only**
+
+If you want to send data to Datadog's GOVCLOUD datacenter, you will need to add the `fips-proxy` sidecar container and open container ports to ensure proper communication for all the features:
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:0.0.4",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+Secondly, you will need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+
 ## Troubleshooting
 
 Need help? Contact [Datadog support][11].
