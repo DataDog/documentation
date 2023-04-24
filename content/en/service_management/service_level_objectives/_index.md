@@ -264,12 +264,12 @@ To view, edit, and delete existing status corrections, click on the **Correction
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /monitors/service_level_objectives/metric/
-[3]: /monitors/service_level_objectives/monitor/
+[2]: /service_management/service_level_objectives/metric/
+[3]: /service_management/service_level_objectives/monitor/
 [4]: /monitors/types/metric/?tab=threshold#alert-grouping
-[5]: /monitors/service_level_objectives/metric/#define-queries
-[6]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
-[7]: /monitors/service_level_objectives/metric/#set-your-slo-targets
+[5]: /service_management/service_level_objectives/metric/#define-queries
+[6]: /service_management/service_level_objectives/monitor/#set-your-slo-targets
+[7]: /service_management/service_level_objectives/metric/#set-your-slo-targets
 [8]: /account_management/rbac/
 [9]: /account_management/rbac/permissions/#service-level-objectives/
 [10]: /account_management/rbac/permissions/#monitors

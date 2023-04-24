@@ -67,4 +67,4 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 [4]: https://app.datadoghq.com/slo
 [5]: https://app.datadoghq.com/slo/new/metric
 [6]: /metrics/distributions/#threshold-queries
-[7]: /monitors/service_level_objectives/monitor/
+[7]: /service_management/service_level_objectives/monitor/

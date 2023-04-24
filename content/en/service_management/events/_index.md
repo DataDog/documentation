@@ -9,7 +9,7 @@ further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
   text: "Datadog Events API"
-- link: "/events/guides/recommended_event_tags/"
+- link: "/service_management/events/guides/recommended_event_tags/"
   tag: "Documentation"
   text: "Best Practices for Tagging Events"
 - link: "https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/"
@@ -81,11 +81,11 @@ Support for more processors types is under development. For more details, [conta
 [8]: /integrations/sentry/
 [9]: /integrations/nagios/#events
 [10]: /api/latest/events/#post-an-event
-[11]: /events/guides/agent/
-[12]: /events/guides/dogstatsd/
-[13]: /events/guides/email/
-[14]: /events/explorer/
-[15]: /events/explorer/#event-analytics
+[11]: /service_management/events/guides/agent/
+[12]: /service_management/events/guides/dogstatsd/
+[13]: /service_management/events/guides/email/
+[14]: /service_management/events/explorer/
+[15]: /service_management/events/explorer/#event-analytics
 [16]: /logs/explorer/search_syntax/
 [17]: /dashboards/widgets/alert_graph/
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview

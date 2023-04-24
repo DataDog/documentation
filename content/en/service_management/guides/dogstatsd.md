@@ -214,4 +214,4 @@ $statsd->event('An error occurred.',
 
 
 [1]: /developers/dogstatsd/
-[2]: /events/
+[2]: /service_management/events/
