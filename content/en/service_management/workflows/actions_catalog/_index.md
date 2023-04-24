@@ -3,6 +3,8 @@ title: Actions Catalog
 kind: documentation
 type: actioncatalog
 disable_toc: true
+aliases:
+- /workflows/actions_catalog/
 cascade:
   disable_sidebar: true
   type: actioncatalog

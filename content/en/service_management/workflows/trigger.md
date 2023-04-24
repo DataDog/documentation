@@ -2,6 +2,8 @@
 title: Trigger a workflow
 kind: documentation
 disable_toc: false
+aliases:
+- /workflows/trigger/
 further_reading:
 - link: "/workflows/access/#service-accounts/"
   tag: "Documentation"
