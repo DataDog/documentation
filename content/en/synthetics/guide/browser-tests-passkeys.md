@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Passkeys (FIDO2) offer stronger security than the standard username and password tuple, and rely on cryptographic login credentials that are unique across every website. passkeys never leave your user's devices and are never stored on a web application server. This security model eliminates the risks of phishing, all forms of password theft, and replay attacks.
+Passkeys (FIDO2) offer stronger security than the standard username and password tuple, and rely on cryptographic login credentials that are unique across every website. Passkeys never leave your user's devices and are never stored on a web application server. This security model eliminates the risks of phishing, all forms of password theft, and replay attacks.
 
 You can use passkeys as a replacement for a username and password or as a second factor authentication. Synthetic Monitoring can now generate, store and leverage passkeys to test your application’s passkeys-based authentication modules and critical user journeys without disabling this critical security measure.
 
