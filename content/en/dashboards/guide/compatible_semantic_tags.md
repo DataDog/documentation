@@ -1,7 +1,6 @@
 ---
 title: Compatible semantic tags
 kind: guide
-private: true
 further_reading:
 - link: "/dashboards/guide/widget_colors/#categorical-palettes"
   tag: "Documentation"
