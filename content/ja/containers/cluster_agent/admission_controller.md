@@ -5,6 +5,9 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: ドキュメント
   text: Datadog Cluster Agent のトラブルシューティング
+- link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
+  tag: ブログ
+  text: Datadog APM で Kubernetes アプリケーションのトレーシングを自動インスツルメンテーションするために、ライブラリインジェクションを使用します
 kind: documentation
 title: Datadog Admission Controller
 ---

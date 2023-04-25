@@ -23,23 +23,25 @@ Java Datadog Trace ライブラリはオープンソースです。詳細につ�
 
 Java トレーサーは、次の Oracle JDK および OpenJDK の JVM ランタイムの自動インスツルメンテーションをサポートします。
 
-| JVM バージョン | オペレーティングシステム                                                             | サポートレベル             | トレーサーバージョン |
-| -------------| ----------------------------------------------------------------------------- | ------------------------- | -------------- |
-| 18〜19     | Windows (x86、x86-64)<br>Linux (x86、x86-、arm64)<br>Mac (x86、x86-64、arm64) | [ベータ版](#support-beta)     | 最新         |
-| 7〜17      | Windows (x86、x86-64)<br>Linux (x86、x86-64)<br>Mac (x86、x86-64)             | [GA](#support-ga)         | 最新         |
-| 7〜17      | Linux (arm64)<br>Mac (arm64)                                                  | [ベータ版](#support-beta)     | 最新         |
+| JVM バージョン | オペレーティングシステム                                                               | サポートレベル                       | トレーサーバージョン |
+| -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
+| 18〜19     | Windows (x86、x86-64)<br>Linux (x86、x86-64、arm64)<br>Mac (x86、x86-64、arm64) | [ベータ版](#levels-of-support)               | 最新         |
+| 8〜17      | Windows (x86、x86-64)<br>Linux (x86、x86-64)<br>Mac (x86、x86-64)               | [GA](#levels-of-support)                   | 最新         |
+| 8〜17      | Linux (arm64)<br>Mac (arm64)                                                    | [ベータ版](#levels-of-support)               | 最新         |
+| 7            | Windows (x86、x86-64)<br>Linux (x86、x86-64)<br>Mac (x86、x86-64)               | [メンテナンス](#levels-of-support) | v0             |
+| 7            | Linux (arm64)<br>Mac (arm64)                                                    | [サポート終了](#levels-of-support)         | v0             |
 
 Datadog は、Java の早期アクセスバージョンを公式にサポートしていません。
 
 ### サポートレベル
 
-| **レベル**                                              | **サポート内容**                                                                                                                       |
-|--------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">非対応</span>      |  実装していません。特別なご要望は [Datadog サポート][2]にお問い合わせください。                                                                   |
+| **レベル**                                              | **サポート内容**                                                                                                                                |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">非対応</span>      |  実装していません。特別なご要望は [Datadog サポート][2]にお問い合わせください。                                                                              |
 | <span id="support-beta">ベータ版</span>                    |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。 |
-| <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグやセキュリティの修正を完全サポート。                                                 |
-| <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                           |
-| <span id="support-eol">サポート終了 (EOL)</span>        |  サポートはありません。                                                                                                                               |
+| <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグやセキュリティの修正を完全サポート。                                                     |
+| <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                                  |
+| <span id="support-eol">サポート終了 (EOL)</span>        |  サポートはありません。                                                                                                                                        |
 
 ## インテグレーション
 
@@ -75,13 +77,14 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Ratpack                 | 1.5+       | 完全対応 | `ratpack`                                      |
 | Restlet HTTP サーバー     | 2.2 - 2.4  | 完全対応 | `restlet-http`.                                |
 | Spark Java              | 2.3+       | [ベータ][3]       | `sparkjava` (要 `jetty`)                 |
+| Spring Boot             | 1.5        | 完全対応 | `spring-web` または `spring-webflux`               |
 | Spring Web (MVC)        | 4.0+       | 完全対応 | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | 完全対応 | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | 完全対応 | `tomcat`                                       |
 | Vert.x                  | 3.4-3.9.x  | 完全対応 | `vertx`、`vertx-3.4`                           |
 
 **注:** 多くのアプリケーションサーバーは Servlet 互換でそのインスツルメンテーションによって自動的にカバーされます (Websphere、Weblogic、JBoss)。
-また、Spring Boot のようなフレームワークは、通常サポートされた組み込みアプリケーションサーバーを使うため、本質的に機能します (Tomcat/Jetty/Netty)。
+また、Spring Boot (バージョン 3) のようなフレームワークは、通常、Tomcat、Jetty、Netty など、サポートされた組み込みアプリケーションサーバーを使うため、本質的に機能します。
 
 **インテグレーションはデフォルトでは無効です**
 
@@ -116,7 +119,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | AWS Java SDK             | 1.11+、2.2+ | 完全対応 | `aws-sdk`                                      |
 | Commons HTTP クライアント      | 2.0+        | 完全対応 | `commons-http-client`                          |
 | Google HTTP クライアント       | 1.19.0+     | 完全対応 | `google-http-client`                           |
-| Grizzly HTTP クライアント      | 1.9+        | [ベータ版][4]         | `grizzly-client`                               |
+| Grizzly HTTP クライアント      | 1.9+        | [ベータ版][4]       | `grizzly-client`                               |
 | gRPC                     | 1.5+        | 完全対応 | `grpc`、`grpc-client`、`grpc-server`           |
 | HttpURLConnection        | すべて         | 完全対応 | `httpurlconnection`、`urlconnection`           |
 | Kafka-Clients            | 0.11+       | 完全対応 | `kafka`                                        |
@@ -126,11 +129,11 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Jersey クライアント            | 1.9-2.29    | 完全対応 | `jax-rs`、`jaxrs`、`jax-rs-client`             |
 | JMS                      | 1 と 2     | 完全対応 | `jms`、`jms-1`、`jms-2`                        |
 | Netty HTTP クライアント        | 4.0+        | 完全対応 | `netty`、`netty-4.0`、`netty-4.1`              |
-| Ning HTTP クライアント         | 1.9.0+      | [ベータ版][4]         | `ning`                                         |
+| Ning HTTP クライアント         | 1.9.0+      | [ベータ版][4]       | `ning`                                         |
 | OkHTTP                   | 2.2+        | 完全対応 | `okhttp`、`okhttp-2`、`okhttp-3`                |
 | Play WSClient            | 1.0+        | 完全対応 | `play-ws`                                      |
 | Rabbit AMQP              | 2.7+        | 完全対応 | `amqp`、`rabbitmq`                             |
-| Spring SessionAwareMessageListener              | 3.1+        | 完全対応 | `spring-jms-3.1`                             |
+| Spring SessionAwareMessageListener     | 3.1+            | 完全対応 | `spring-jms-3.1`             |
 | Spring WebClient         | 5.0+        | 完全対応 | `spring-webflux`、`spring-webflux-client`      |
 
 **Kafka に関する注記**: Datadog's Kafka インテグレーションは、ヘッダー API をサポートする Kafka のバージョン `0.11+` で機能します。この API はトレースコンテキストの挿入と抽出に使用されます。バージョンが混在する環境でシステムを稼働させている場合は、Kafka ブローカーが Kafka のより新しいバージョンを間違って報告する場合があります。この場合、トレーサーがローカルのプロデューサーでサポートされていないヘッダーを挿入しようとしたときに問題が発生することがあります。また、古いバージョンのコンシューマーはヘッダーが存在するためにメッセージを収集することができません。これらの問題を回避するために、0.11 より前の Kafka のバージョンが混在している環境では、環境変数: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false` を伴うコンテキストの伝搬を無効化するようにしてください。
@@ -160,7 +163,8 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | Jedis                   | 1.4+     | 完全対応 | `jedis`、`redis`                                                                         |
 | Lettuce                 | 4.0+     | 完全対応 | `lettuce`、`lettuce-4-async`、`lettuce-5-rx`                                             |
 | MongoDB                 | 3.0-4.0+ | 完全対応 | `mongo`                                                                                  |
-| RediScala               | 1.5+     | 完全対応 | `rediscala`、`redis`                                                                     |
+| RediScala | 1.5+     | 完全対応 | `rediscala`、`redis`                                                                     |
+| Redisson | 2.x-3.x      | 完全対応 | `redisson`、`redis`                                                                     |
 | SpyMemcached            | 2.12+    | 完全対応 | `spymemcached`                                                                           |
 | Vert.x Cassandra クライアント | 3.9      | 完全対応 | `cassandra`                                                                              |
 | Vert.x Redis クライアント     | 3.9      | 完全対応 | `vertx-redis-client`                                                                     |
@@ -198,6 +202,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 | ----------------- | -------- | --------------- | ---------------------------------------------- |
 | Datanucleus JDO   | 4.0+     | 完全対応 | `datanucleus`                                  |
 | Dropwizard Views  | 0.7+     | 完全対応 | `dropwizard`、`dropwizard-view`                |
+| GraphQL         | 14.0+     | 完全対応 | `graphql-java`                  |
 | Hibernate         | 3.5+     | 完全対応 | `hibernate`、`hibernate-core`                  |
 | Hystrix           | 1.4+     | 完全対応 | `hystrix`                                      |
 | JSP Rendering     | 2.3+     | 完全対応 | `jsp`、`jsp-render`、`jsp-compile`             |
@@ -235,7 +240,7 @@ Datadog は、Java の早期アクセスバージョンを公式にサポート�
 
 Bitbucket での Java トレーサーの実行はサポートされていません。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

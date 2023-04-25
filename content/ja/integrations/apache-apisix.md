@@ -25,10 +25,7 @@ author:
   sales_email: dev@apisix.apache.org
   support_email: dev@apisix.apache.org
 categories:
-- モニタリング
-- web
-- cloud
-- autodiscovery
+- クラウド
 - メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
@@ -46,20 +43,17 @@ oauth: {}
 public_title: Apache APISIX
 short_description: Datadog-APISIX インテグレーション
 supported_os:
+- linux
 - windows
 - macos
-- linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
+  - Category::Metrics
+  - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Supported OS::Linux
-  - Category::Monitoring
-  - Category::Web
-  - Category::Cloud
-  - Category::Autodiscovery
-  - Category::Metrics
   configuration: README.md#Setup
   description: Datadog-APISIX インテグレーション
   media: []
@@ -78,7 +72,7 @@ Apache APISIX は動的でリアルタイムな高性能 API ゲートウェイ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 以下の構成方法に従ってください。
 

@@ -8,7 +8,6 @@ title: Datadog CDK コンストラクト
 [![NPM](https://img.shields.io/npm/v/datadog-cdk-constructs-v2?color=39a356&label=npm+cdk+v2)](https://www.npmjs.com/package/datadog-cdk-constructs-v2)
 [![PyPI](https://img.shields.io/pypi/v/datadog-cdk-constructs?color=blue&label=pypi+cdk+v1)](https://pypi.org/project/datadog-cdk-constructs/)
 [![PyPI](https://img.shields.io/pypi/v/datadog-cdk-constructs-v2?color=39a356&label=pypi+cdk+v2)](https://pypi.org/project/datadog-cdk-constructs-v2/)
-[![Slack](https://chat.datadoghq.com/badge.svg?bg=632CA6)](https://chat.datadoghq.com/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](https://github.com/DataDog/datadog-cdk-constructs/blob/main/LICENSE)
 
 この Datadog CDK コンスタクトライブラリを使用して、AWS CDK .NET Framework を使用してサーバーレスアプリケーションをデプロイします。
@@ -75,12 +74,14 @@ const datadog = new Datadog(this, "Datadog", {
   addLayers: <BOOLEAN>,
   extensionLayerVersion: "<EXTENSION_VERSION>",
   forwarderArn: "<FORWARDER_ARN>",
+  createForwarderPermissions: <BOOLEAN>,
   flushMetricsToLogs: <BOOLEAN>,
   site: "<SITE>",
   apiKey: "{Datadog_API_Key}",
   apiKeySecretArn: "{Secret_ARN_Datadog_API_Key}",
   apiKmsKey: "{Encrypted_Datadog_API_Key}",
   enableDatadogTracing: <BOOLEAN>,
+  enableMergeXrayTraces: <BOOLEAN>,
   enableDatadogLogs: <BOOLEAN>,
   injectLogContext: <BOOLEAN>,
   logLevel: <STRING>,
@@ -93,33 +94,68 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
 datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
 ```
 
-オプションとして、[ソースコードインテグレーション](https://docs.datadoghq.com/integrations/guide/source-code-integration/) (Typescript のみ) を有効にしたい場合、AWS CDK は非同期関数をサポートしていないため、スタック設定にいくつかの変更を加える必要があります。
+## ソースコードインテグレーション
+[ソースコードインテグレーション](https://docs.datadoghq.com/integrations/guide/source-code-integration/)は、Lambda の自動タグ付けによりデフォルトで有効であり、以下の場合に動作します。
 
-初期化関数を次のように変更します (注: ここでは `gitHash` の値を CDK に渡すように変更します)。
+- Datadog Github Integration がインストールされている。
+- Datadog-cdk の依存関係が以下のバージョンのいずれかを満たしている。
+  - `datadog-cdk-constructs-v2` >= 1.4.0
+  - `datadog-cdk-constructs` >= 0.8.5
 
-```typescript
-async function main() {
-  // パッケージマネージャーで @datadog/datadog-ci を追加することを確認します
+### ソースコードインテグレーションを可能にする代替方法
+自動導入がうまくいかない場合は、以下の 2 つのガイドのいずれかに従ってください。
+
+**注: これらの代替ガイドは Typescript にのみ有効です。**
+<details>
+  <summary>datadog-cdk のバージョンは満たしているが、Datadog の Github インテグレーションがインストールされていない</summary>
+
+  Datadog Github インテグレーションがインストールされていない場合は、`datadog-ci` パッケージをインポートして、Git メタデータを Datadog に手動でアップロードする必要があります。
+CDK Stack が初期化されている場所で行うことをお勧めします。
+
+  ```typescript
+  const app = new cdk.App();
+
+  // パッケージマネージャーで @datadog/datadog-ci を追加することを確認してください
   const datadogCi = require("@datadog/datadog-ci");
-  const [, gitHash] = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
+  // Git のメタデータを Datadog に手動でアップロードします。
+  datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
   const app = new cdk.App();
-  // ExampleStack のコンストラクタにハッシュを渡します
-  new ExampleStack(app, "ExampleStack", {}, gitHash);
-}
-```
+  new ExampleStack(app, "ExampleStack", {});
 
-スタックのコンストラクタで、オプションの `gitHash` パラメーターを追加して、`addGitCommitMetadata()` を呼び出すように変更します。
+  app.synth();
+  ```
+</details>
+<details>
+  <summary>datadog-cdk のバージョンを満たしていない</summary>
 
-```typescript
-export class ExampleStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
-    ...
-    ...
-    datadog.addGitCommitMetadata([<YOUR_FUNCTIONS>], gitHash)
+  初期化関数を次のように変更します (注: CDK に渡すのは `gitHash` 値だけにします)。
+
+  ```typescript
+  async function main() {
+    // パッケージマネージャーで @datadog/datadog-ci を追加することを確認してください
+    const datadogCi = require("@datadog/datadog-ci");
+    const [, gitHash] = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
+
+    const app = new cdk.App();
+    // ExampleStack のコンストラクタにハッシュを渡します
+    new ExampleStack(app, "ExampleStack", {}, gitHash);
   }
-}
-```
+  ```
+  この関数を呼び出してスタックを初期化することを確認してください。
+
+  スタックのコンストラクタで、オプションのパラメーターとして `gitHash` を追加し、`addGitCommitMetadata()` を呼び出すように変更します。
+
+  ```typescript
+  export class ExampleStack extends cdk.Stack {
+    constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
+      ...
+      ...
+      datadog.addGitCommitMetadata([<YOUR_FUNCTIONS>], gitHash)
+    }
+  }
+  ```
+</details>
 
 ## コンフィギュレーション
 
@@ -134,13 +170,16 @@ _注_: 説明では npm パッケージパラメーターを使用していま�
 | `nodeLayerVersion` | `node_layer_version` | インストールする Node.js Lambda レイヤーのバージョン（例: 29）。Node.js で記述された Lambda 関数を 1 つ以上デプロイする場合で、`addLayers` が「true」のときは必須。最新バージョンの数字は、[こちら][6]で確認できます。 |
 | `extensionLayerVersion` | `extension_layer_version` | 5 など、インストールする Datadog Lambda Extension レイヤーのバージョン。`extensionLayerVersion` が設定されている場合は、`apiKey` (暗号化の場合は `apiKMSKey` または `apiKeySecretArn`) の設定も必要となります。有効にすると、Lambda 関数のロググループは Forwarder にサブスクライブされなくなります。Lambda Extension の詳細は[こちら][12]。 |
 | `forwarderArn` | `forwarder_arn` | 設定すると、プラグインは自動的に Datadog Forwarder を関数のロググループにサブスクライブするようになります。`extensionLayerVersion` が設定されている場合は、`forwarderArn` を設定しないでください。 |
+| `createForwarderPermissions` | `createForwarderPermissions` | `true` に設定すると、ロググループごとに Datadog Forwarder に Lambda 権限が作成されます。Datadog Forwarder にはデフォルトで権限が構成されているため、ほとんどのユースケースで不要です。 |
 | `flushMetricsToLogs` | `flush_metrics_to_logs` | Datadog Forwarder Lambda 関数で CloudWatch ログを使用してカスタムメトリクスを送信します (推奨)。デフォルトは `true` です。このパラメーターを無効にすると、`apiKey` (暗号化されている場合は `apiKMSKey` または `apiKeySecretArn`) を設定する必要があります。 |
 | `site` | `site` | データを送信する Datadog サイトを設定します。これは、`flushMetricsToLogs` が `false` または `extensionLayerVersion` が設定されている場合にのみ使用されます。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。 |
 | `apiKey` | `api_key` | Datadog API キー。`flushMetricsToLogs` が `false` または `extensionLayerVersion` が設定されている場合にのみ必要です。Datadog API キーの取得の詳細については、[API キーのドキュメント][8]を参照してください。 |
 | `apiKeySecretArn` | `api_key_secret_arn` | AWS Secrets Manager で Datadog の API キーを保存しているシークレットの ARN。`flushMetricsToLogs` が `false` の場合や `extensionLayer` が設定されている場合に、`apiKey` の代わりにこのパラメータを使用することができます。Lambda  の実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加することを忘れないようにしましょう。 |
 | `apiKmsKey` | `api_kms_key` | KMS を使用して暗号化された Datadog API キー。`flushMetricsToLogs` が `false` または `extensionLayerVersion` が設定されており、KMS 暗号化を使用している場合、`apiKey` の代わりにこのパラメーターを使用します。 |
 | `enableDatadogTracing` | `enable_datadog_tracing` | Lambda 関数で Datadog トレースを有効にします。デフォルトは `true` です。 |
+| `enableMergeXrayTraces` | `enable_merge_xray_traces` | Lambda 関数の X-Ray トレースのマージを有効にします。デフォルトは `false` です。 |
 | `enableDatadogLogs` | `enable_datadog_logs` | Datadog Lambda Extension を介して Lambda 関数のログを Datadog に送信します。 デフォルトは `true` です。注: この設定は、Datadog Forwarder 経由で送信されるログには影響しません。 |
+| `enableSourceCodeIntegration` | `enable_source_code_integration` | Datadog ソースコードインテグレーションを有効にして、テレメトリーを Git リポジトリ内のアプリケーションコードと接続します。これには Datadog Github インテグレーションが必要で、そうでない場合は[代替方法](#alternative-methods to enable-source-code-integration)に従ってください。詳しくは[こちら](https://docs.datadoghq.com/integrations/guide/source-code-integration/)をご覧ください。デフォルトは `true` です。 |
 | `injectLogContext` | `inject_log_context` | 設定すると、Lambda レイヤーは自動的に console.log に Datadog のトレース ID をパッチします。デフォルトは `true` です。 |
 | `logLevel` | `log_level` | `debug` に設定すると、Datadog Lambda Library および Extension は、問題のトラブルシューティングに役立つ情報を追加でログに記録します。 |
 | `env` | `env` | `extensionLayerVersion` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_ENV` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `env` タグが追加され、指定した値が設定されます。 |
@@ -189,6 +228,7 @@ class RootStack extends cdk.Stack {
       apiKeySecretArn: "{Secret_ARN_Datadog_API_Key}",
       apiKmsKey: "{Encrypted_Datadog_API_Key}",
       enableDatadogTracing: <BOOLEAN>,
+      enableMergeXrayTraces: <BOOLEAN>,
       enableDatadogLogs: <BOOLEAN>,
       injectLogContext: <BOOLEAN>
     });
@@ -212,6 +252,7 @@ class NestedStack extends cdk.NestedStack {
       apiKeySecretArn: "{Secret_ARN_Datadog_API_Key}",
       apiKmsKey: "{Encrypted_Datadog_API_Key}",
       enableDatadogTracing: <BOOLEAN>,
+      enableMergeXrayTraces: <BOOLEAN>,
       enableDatadogLogs: <BOOLEAN>,
       injectLogContext: <BOOLEAN>
     });

@@ -85,7 +85,7 @@ Pour tous ces exemples, la variable d'environnement `DD_API_KEY` peut également
 Une fois votre fichier de définition de tâche créé, vous pouvez exécuter la commande suivante pour l'enregistrer dans AWS.
 
 ```bash
-aws ecs register-task-definition --cli-input-json <chemin vers datadog-agent-ecs.json>
+aws ecs register-task-definition --cli-input-json file://<chemin vers datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Interface utilisateur Web" %}}

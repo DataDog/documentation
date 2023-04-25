@@ -3,7 +3,7 @@ title: Selecting the right colors for your graphs
 kind: guide
 ---
 
-In Datadog graphs, color is the primary method by which you can distinguish between series of data. Selecting the right color for your graph ensures that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively. 
+In Datadog graphs, color is the primary method by which you can distinguish between series of data. Selecting the right color for your graph ensures that your teammates can parse data in your graphs, draw insights, and troubleshoot effectively.
 
 {{< img src="dashboards/guide/colors/colors_top.png" alt="Under the heading 'Graph your data', the user is selecting from a list of color palettes." style="width:90%;" >}}
 
@@ -17,7 +17,7 @@ Categorical palettes are best used for data that needs to be differentiated, but
 
 #### Classic
 
-The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. Adjacent series have distinct colors. 
+The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. Adjacent series have distinct colors.
 
 The Classic color palette has visual accessibility support.
 
@@ -38,7 +38,7 @@ For a small subset of compatible tags, Datadog automatically recognizes the mean
 
 ### Diverging palettes
 
-Use a Diverging palette when you need to emphasize the difference in values within a data set. Diverging palettes are best suited to data that has a natural order and a natural midpoint. For example: the amount of change in memory utilization, from -100% to +100%, with a natural midpoint at 0%. 
+Use a Diverging palette when you need to emphasize the difference in values within a data set. Diverging palettes are best suited to data that has a natural order and a natural midpoint. For example: the amount of change in memory utilization, from -100% to +100%, with a natural midpoint at 0%.
 
 There are two Diverging palette options: cool (green and blue) or warm (interpolates between yellow and orange).
 
@@ -64,7 +64,7 @@ Color overrides allow you to assign a single color of your choice to each query.
 
 **Note**: If your query aggregates by a tag (for instance, using 'sum by' or 'avg by'), you can only select a palette override. This prevents different series from using the same color, preserving readability.
 
-{{< img src="dashboards/guide/colors/12_palette_and_color_override_comparison.png" alt="A side-by-side comparison of the color override and palette override drop-downs." style="width:80%;" >}}
+{{< img src="dashboards/guide/colors/12_palette_and_color_override_comparison.png" alt="A side-by-side comparison of the color override and palette override dropdown panels." style="width:80%;" >}}
 
 ## Accessibility settings
 

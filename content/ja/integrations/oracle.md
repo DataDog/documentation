@@ -23,7 +23,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
+- network
+- oracle
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
 display_on_public_website: true
@@ -41,16 +42,17 @@ public_title: Oracle
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::データストア
-  - Category::オートディスカバリー
+  - Category::ネットワーク
+  - Category::Oracle
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
   media: []
@@ -69,7 +71,7 @@ Oracle Database サーバーからメトリクスをリアルタイムに取得�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 #### 前提条件
 

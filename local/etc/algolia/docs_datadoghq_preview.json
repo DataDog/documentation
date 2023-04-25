@@ -104,6 +104,7 @@
                     "account_management",
                     "agent",
                     "continuous_integration",
+                    "coscreen",
                     "dashboards",
                     "developers",
                     "events",
@@ -126,7 +127,8 @@
                     "profiler",
                     "containers",
                     "cloud_cost_management",
-                    "universal_service_monitoring"
+                    "universal_service_monitoring",
+                    "glossary"
                 ]
             },
             "tags": ["docs"],

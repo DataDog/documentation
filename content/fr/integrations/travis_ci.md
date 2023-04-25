@@ -1,8 +1,9 @@
 ---
 categories:
+- automation
 - cloud
 - configuration & deployment
-ddtype: crawler
+- outils de développement
 dependencies: []
 description: Connectez-vous à Travis CI pour visualiser des métriques sur les durées
   et les statuts des builds, les tâches, etc.
@@ -28,13 +29,13 @@ version: '1.0'
 
 Connectez-vous à Travis CI pour visualiser des métriques sur les durées et les statuts des builds, les tâches, etc.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
 Vous pouvez installer l'intégration Travis CI avec son [carré d'intégration][1].
 
-### Procédure à suivre
+### Configuration
 
 1. Ajoutez le nom de votre compte, le token d'API (disponible dans l'onglet de profil de Travis CI) et le type de projet. Les types de projets sont définis comme suit :
 

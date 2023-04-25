@@ -27,7 +27,6 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 
 {{< img src="universal_service_monitoring/usm-demo.mp4" alt="Video demonstrating Universal Service Monitoring. An overview of a service is accessed by clicking on a service on the Service Map and selecting View service overview." video="true" >}}
 
-
 ## Setup
 
 ### Supported versions and compatibility
@@ -59,8 +58,6 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
 - The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
 
-
-
 ## Enabling Universal Service Monitoring
 
 Enable Universal Service Monitoring in your Agent by using one of the following methods depending on how your service is deployed and your Agent configured:
@@ -84,6 +81,34 @@ providers:
   gke:
     cos: true
 ```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+**Note:** Datadog Operator v1.0.0 or greater is required.
+
+[1]: https://github.com/DataDog/datadog-operator
 
 {{% /tab %}}
 {{% tab "Kubernetes without Helm" %}}
@@ -214,6 +239,9 @@ providers:
    volumes:
      - name: sysprobe-socket-dir
        emptyDir: {}
+     - name: procdir
+       hostPath:
+         path: /proc
      - name: debugfs
        hostPath:
          path: /sys/kernel/debug
@@ -292,8 +320,14 @@ providers:
 Add the following to your `docker run` command:
 
 ```
+docker run --cgroupns host \
+--pid host \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
+-e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-v /var/run/docker.sock:/var/run/docker.sock:ro \
+-v /proc/:/host/proc/:ro \
+-v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
 -v /sys/kernel/debug:/sys/kernel/debug \
--v /:/host/root:ro \
 -v /lib/modules:/lib/modules:ro \
 -v /usr/src:/usr/src:ro \
 -v /var/tmp/datadog-agent/system-probe/build:/var/tmp/datadog-agent/system-probe/build \
@@ -306,6 +340,7 @@ Add the following to your `docker run` command:
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
+-e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
 --cap-add=SYS_RESOURCE \
@@ -314,13 +349,8 @@ Add the following to your `docker run` command:
 --cap-add=NET_BROADCAST \
 --cap-add=NET_RAW \
 --cap-add=IPC_LOCK \
---cap-add=CHOWN
-```
-
-For optional HTTPS support, also add:
-```
--e HOST_ROOT=/host/root \
--v /:/host/root:ro
+--cap-add=CHOWN \
+gcr.io/datadoghq/agent:latest
 ```
 
 {{% /tab %}}
@@ -334,8 +364,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
+     - /var/run/docker.sock:/var/run/docker.sock:ro
+     - /proc/:/host/proc/:ro
+     - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
@@ -681,8 +714,17 @@ For optional HTTPS support, also add:
 ]
 ```
 
+If you are using load balancers with your services, enable additional cloud integrations to allow Universal Service Monitoring to discover cloud-managed entities.
+* Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
+
+Then, add the following tags to each load balancer:
+```conf
+ENV=<env>
+SERVICE=<service>
+```
 
 [1]: /containers/amazon_ecs/?tab=awscli#run-the-agent-as-a-daemon-service
+[2]: /integrations/amazon_web_services/
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -716,7 +758,7 @@ After you configure the Agent, wait about five minutes for your service to appea
 
 The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
 
-{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation drop-down menu on the Services tab shows the available operation names" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation dropdown menu on the Services tab shows the available operation names" style="width:100%;" >}}
 
 After enabling Universal Service Monitoring, you can:
 
@@ -728,6 +770,53 @@ After enabling Universal Service Monitoring, you can:
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
 
+### Path exclusion and replacement
+
+Use `http_replace_rules` or `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` to configure the Agent to drop HTTP endpoints that match a regex, or to convert matching endpoints into a different format.
+
+{{< tabs >}}
+{{% tab "Configuration File" %}}
+
+Add the following configuration to the `system-probe`:
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "<exclusion rule>"
+      repl: ""
+    - pattern: "<replacement rule>"
+      repl: "<new format>"
+```
+
+For example, the following configuration drops endpoints that start with `/api/`, such `/api/v1/users`. However, it does not ignore `/api` or `/users/api`.
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "/api/.*"
+      repl: ""
+```
+
+The following configuration replaces an endpoint `/api/users` to match a new format of `/api/v1/users`:
+
+```yaml
+network_config:
+  http_replace_rules:
+    - pattern: "/api/users"
+      repl: "/api/v1/users"
+```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+Add the following entry:
+
+```conf
+DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -735,6 +824,6 @@ After enabling Universal Service Monitoring, you can:
 [1]: /getting_started/tagging/unified_service_tagging
 [2]: /tracing/services/deployment_tracking/
 [3]: /tracing/service_catalog/
-[4]: /monitors/create/types/apm/?tab=apmmetrics
+[4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
 [6]: /monitors/service_level_objectives/metric/

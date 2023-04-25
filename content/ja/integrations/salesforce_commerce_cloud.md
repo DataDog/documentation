@@ -33,7 +33,7 @@ public_title: Salesforce Commerce Cloud
 short_description: Salesforce Commerce Cloud のログを Datadog にインポートする
 supported_os: []
 tile:
-  changelog: ''
+  changelog: CHANGELOG.md
   classifier_tags:
   - Category::Log Collection
   configuration: README.md#Setup

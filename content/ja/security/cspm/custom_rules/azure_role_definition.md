@@ -1,0 +1,70 @@
+---
+dependencies: []
+disable_edit: true
+---
+# azure_role_definition
+
+## `assignable_scopes`
+**タイプ**: `UNORDERED_LIST_STRING`<br>
+**プロバイダー名**: `properties.assignableScopes`<br>
+**説明**: ロール定義の割り当て可能なスコープ。<br>
+## `created_by`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.createdBy`<br>
+**説明**: 割り当てを作成したユーザーの ID<br>
+## `created_on`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.createdOn`<br>
+**説明**: 作成された時間<br>
+## `description`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.description`<br>
+**説明**: ロール定義の説明。<br>
+## `id`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `id`<br>
+**説明**: ロール定義 ID。<br>
+## `name`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `name`<br>
+**説明**: ロール定義名。<br>
+## `permissions`
+**タイプ**: `UNORDERED_LIST_STRUCT`<br>
+**プロバイダー名**: `properties.permissions`<br>
+**説明**: ロール定義の権限。<br>
+   - `actions`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+    **プロバイダー名**: `actions`<br>
+    **説明**: 許可されたアクション。<br>
+   - `not_actions`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+    **プロバイダー名**: `notActions`<br>
+    **説明**: 拒否されたアクション。<br>
+## `properties_type`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.type`<br>
+**説明**: ロールタイプ。<br>
+## `resource_group`
+**タイプ**: `STRING`<br>
+## `role_name`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.roleName`<br>
+**説明**: ロール名。<br>
+## `subscription_id`
+**タイプ**: `STRING`<br>
+## `subscription_name`
+**タイプ**: `STRING`<br>
+## `tags`
+**タイプ**: `UNORDERED_LIST_STRING`<br>
+## `type`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `type`<br>
+**説明**: ロール定義タイプ。<br>
+## `updated_by`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.updatedBy`<br>
+**説明**: 割り当てを更新したユーザーの ID<br>
+## `updated_on`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.updatedOn`<br>
+**説明**: 更新された時間<br>

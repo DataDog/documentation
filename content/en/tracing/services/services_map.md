@@ -67,7 +67,7 @@ Using this tag on your Host Map or logs with the same key allows Datadog to join
 
 {{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Service Map tags" style="width:80%;">}}
 
-Additionally, monitors can be tagged by service in the “Say what’s happening” section. This allows you to associate monitors for any metric, including custom business metrics, with your services. The status of monitors is exposed directly on the Service Map.
+Additionally, monitors can be tagged by service in the **Say what's happening** section. This allows you to associate monitors for any metric, including custom business metrics, with your services. The status of monitors is exposed directly on the Service Map.
 
 {{< img src="tracing/visualization/services_map/servicemon.png" alt="Service Map monitor" style="width:90%;">}}
 

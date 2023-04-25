@@ -1,8 +1,6 @@
 ---
 title: Introduction to Integrations
 kind: documentation
-aliases:
-    - /getting_started/integrations
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
@@ -72,7 +70,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances` section:
+To monitor multiple Apache instances in the same Agent check, add additional instances to the `instances` section:
 
 ```yaml
 init_config:
@@ -120,14 +118,13 @@ Installing more than one integration is a matter of adding the configuration inf
 
 If you set up [process collection][29], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
+{{< img src="getting_started/integrations/ad_integrations_1.png" alt="Autodetected integrations" >}}
 
-Each integration has one of two status types:
+Each integration has one of three status types:
 
-- **+ Detected**: This integration is not enabled on any host(s) running it.
-- **✓ Partial Visibility**: This integration is enabled on some, but not all relevant hosts are running it.
-
-Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
+- **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
+- **Installed**: This integration is installed and configured on a host.
+- **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
 
 ## Security practices
 
@@ -172,7 +169,7 @@ logging
 : The file that lists and stores the metrics collected by each integration.
 
 metrics
-: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
+: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integration's `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
 parameters
 : Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed.

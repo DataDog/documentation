@@ -4,6 +4,10 @@ kind: documentation
 title: SQL Server 用 DBM セットアップのトラブルシューティング
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
+{{< /site-region >}}
+
 このページでは、SQL Server によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
 
 ## Diagnosing common connection issues {#common-connection-issues}
@@ -41,11 +45,39 @@ sqlcmd -S <INSTANCE_ENDPOINT> -d master -E
 
 マイクロソフトは、この種のエラーのトラブルシューティングに関する有用なドキュメントを提供しており、[こちら][5]を参照することができます。
 
-### SQL Server Unable to connect due to “Invalid connection string attribute” {#tcp-connection-error}
+### SQL Server TCP 接続エラー {#tcp-connection-error}
+
+TCP 接続の問題は、Agent の設定に誤構成がある場合によく発生します。ドライバーが提供するエラーメッセージは、必ずしも明確ではありません。
+
+例えば、次のようなエラーは、TCP 接続に失敗したためです。
+
+```shell
+TCP-connection(ERROR: getaddrinfo failed). Exception: unable to connect: could not open database requested by login
+```
+
+よくあるエラーは、以下の通りです。
+
+**"login failed for user"**: これは、Agent がホストへの接続を確立することに成功したが、何らかの理由でログインが拒否されたことを意味します。
+
+トラブルシューティングを行うには
+
+1. Agent のログイン資格情報を確認する
+
+2. sqlcmd を使って、これらの資格情報で手動でログインしてみてください。例: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
+
+**"could not open database requested for login"**: このエラーは、ネットワークの問題または不明なデータベースが原因で表示されます。
+
+トラブルシューティングを行うには
+
+1. `telnet {host} {port}` を実行して、Agent からホストへの TCP 接続を確認して、Agent からデータベースへのネットワーク接続があることを確認します。
+
+2. sqlcmd を使用して手動でログインし、構成されたデータベースに問題がないか確認してみてください。例: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
+
+#### “Invalid connection string attribute” のため
 
 Windows では、以下の ADO プロバイダーがサポートされています: `SQLOLEDB`、`MSOLEDBSQL`、`MSOLEDBSQL19`、`SQLNCLI11`。
 
-`SQLOLEDB` と `SQLNCLI11` プロバイダーは、さまざまな可能性のある問題に対して `Invalid connection string attribute` というエラーメッセージを生成します。例:
+`SQLOLEDB` と `SQLNCLI11` プロバイダーは、いくつかの重大な問題のために `Invalid connection string attribute` というエラーメッセージを表示することがありました。例:
 
 ```
 datadog_checks.sqlserver.connection.SQLConnectionError:
@@ -56,27 +88,15 @@ OperationalError(com_error(-2147352567, 'Exception occurred.',
 'Error opening connection to "ConnectRetryCount=2;Provider=SQLOLEDB;Data Source=foo.com,1433;Initial Catalog=master;User ID=datadog;Password=******;"')
 ```
 
-このエラーは、失敗の理由 (不明なホスト名、TCP 接続を確立できなかった、無効なログイン資格情報、不明なデータベース) に関係なく、同じように生成されます。
+このエラーは、失敗の理由 (例えば、不明なホスト名、TCP 接続が確立されていない、無効なログイン資格情報、不明なデータベースなど) に関係なく、同じエラーが表示されます。
 
-エラーメッセージの中にある HResult のエラーコードを確認してください。以下は、既知のコードです。
+エラーメッセージの中にある HResult のエラーコードを確認してください。これらは既知のコードの例です。
 
-`-2147217843` **“login failed for user”**: これは、Agent がホストへの接続を確立することに成功したが、何らかの理由でログインが拒否されたことを意味します。
+`-2147217843` **"login failed for user"**: これは、Agent がホストへの接続を確立することに成功したが、何らかの理由でログインが拒否されたことを意味します。
 
-トラブルシューティングを行うには
+`-2147467259` **"could not open database requested for login"**: このエラーは、ネットワークの問題または不明なデータベースが原因で表示されます。
 
-1. Agent のログイン資格情報を確認する
-
-2. sqlcmd を使って、これらの資格情報で手動でログインしてみてください。例: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
-
-`-2147467259` **“could not open database requested for login”**: このエラーは、ネットワークの問題または不明なデータベースが原因で表示されます。トラブルシューティングを行うには
-
-トラブルシューティングを行うには
-
-1. `telnet {host} {port}` を実行して、Agent からホストへの TCP 接続を確認して、Agent からデータベースへのネットワーク接続があることを確認します。
-
-2. sqlcmd を使用して手動でログインし、構成されたデータベースに問題がないか確認してみてください。例: `sqlcmd -S localhost -U datadog -P ${SQL_PASSWORD} -d master`
-
-もし、どちらの手順でも意味のあるヘルプが得られなかったり、エラーコードが表示されない場合は、Datadog は `MSOLEDBSQL` ドライバーや `Microsoft ODBC Driver for SQL Server` を使用することを推奨しています。これらのオプションは、より意味のあるエラーメッセージを生成し、接続が失敗している理由のトラブルシューティングに役立つはずです。
+どちらの手順でも問題が解決しない場合、または表示されるエラーコードがリストにない場合、Datadog は `MSOLEDBSQL` ドライバーまたは `Microsoft ODBC Driver for SQL Server` を使用することを推奨しています。これらのドライバーは、より詳細なエラーメッセージを提供し、接続が失敗している理由のトラブルシューティングに役立ちます。
 
 ### SQL Server 'Unable to connect: Adaptive Server is unavailable or does not exist' {#adaptive-server-unavailable}
 

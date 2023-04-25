@@ -8,7 +8,7 @@ kind: documentation
 title: Azure Database for MySQL のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -195,7 +195,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "name": "<YOUR_INSTANCE_NAME>"
     }
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -325,6 +325,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 ### 検証
 
 [Agent の status サブコマンドを実行][6]し、**Checks** セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
+
+## Agent の構成例
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Azure MySQL インテグレーションをインストールする
 

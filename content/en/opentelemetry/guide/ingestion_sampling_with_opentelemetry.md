@@ -61,7 +61,7 @@ At the OpenTelemetry collector level, you can do _tail-based sampling_, which al
 
 The [Tail Sampling Processor][9] and [Probabilistic Sampling Processor][10] allow you to sample traces based on a set of rules at the collector level.
 
-**Note**: Tail sampling's main limitation is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If the trace is distributed across multiple collector instances, there’s a risk that some parts of a trace are dropped whereas some other parts of the same trace are sent to Datadog.
+**Note**: Tail sampling's main limitation is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If the trace is distributed across multiple collector instances, there's a risk that some parts of a trace are dropped whereas some other parts of the same trace are sent to Datadog.
 
 To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, preprend the [Datadog Processor][11] in front of your sampling processor in the collectors' traces pipeline. The processor is available with OpenTelemetry Collector Contrib v0.69.0+.
 
@@ -77,7 +77,7 @@ You can leverage the [APM Estimated Usage dashboard][12] and the estimated usage
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/otel_collector_datadog_exporter
-[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#4-run-the-collector
+[2]:/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#5-run-the-collector
 [3]: /opentelemetry/otlp_ingest_in_the_agent
 [4]: /tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased

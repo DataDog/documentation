@@ -57,6 +57,12 @@ If a metric, `const_1{*}`, is a constant with the value of `1`, then `cumsum(con
 
 {{< img src="dashboards/functions/arithmetic/cumsum.png" alt="cum sum function with abs" style="width:80%;">}}
 
+## Cumulative sum in monitors
+
+Cumulative sum should be avoided in monitor queries, because the cumulative sum function is a visual function. When used in a dashboard or notebook, the points will reflect values based on the selected timeframe. This doesn't translate well in a monitor as the monitor doesn't have a sense of which timeframe to use.
+
+Instead, configure [Cumulative Time Windows][1] in your monitor evaluation period.
+
 ## Integral
 
 | Function     | Description                       | Example                             |
@@ -81,3 +87,5 @@ If a metric, `const_1{*}`, is a constant with the value of `1`, then `cumsum(con
     {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /monitors/configuration/?tab=thresholdalert#cumulative-time-windows

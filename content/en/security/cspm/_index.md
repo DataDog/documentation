@@ -3,6 +3,8 @@ title: Cloud Security Posture Management
 kind: documentation
 aliases:
   - /security_platform/cspm/
+algolia:
+  tags: ['cspm']
 ---
 
 {{< site-region region="gov" >}}
@@ -45,7 +47,7 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 ## Review and remediate findings
 
-Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment.
+Investigate details using the [Security Findings Explorer][10]. View detailed information about a resource, such as configuration, detection rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a finding does not match your business use case or is an accepted risk, you can [mute the finding][13] up to an indefinite period of time.
 
 {{< img src="security/cspm/security_findings_explorer.png" alt="Cloud Security Posture Management security findings explorer" width="100%">}}
 
@@ -75,7 +77,8 @@ Framework
 ## Get started
 
 {{< whatsnext >}}
-  {{< nextlink href="/security/cspm/getting_started">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/security/cspm/setup">}}Complete setup and configuration{{< /nextlink >}}
+  {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure detection rules{{< /nextlink >}}
   {{< nextlink href="/security/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
@@ -95,3 +98,4 @@ Framework
 [10]: /security/cspm/findings
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
+[13]: /security/cspm/findings#mute-findings

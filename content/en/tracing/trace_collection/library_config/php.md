@@ -11,6 +11,9 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
+- link: "/tracing/trace_collection/trace_context_propagation/php/"
+  tag: "Documentation"
+  text: "Propagating trace context"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -102,7 +105,7 @@ Whether to enable distributed tracing.
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **Default**: `null`<br>
-Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
+Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
@@ -144,6 +147,11 @@ The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
+`DD_TRACE_HEALTH_METRICS_ENABLED`
+: **INI**: `datadog.trace_health_metrics_enabled`<br>
+**Default**: `false`<br>
+When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction` is available at build time, the tracer sends uncaught exception metrics upon segfaults.
+
 `DD_TRACE_AGENT_ATTEMPT_RETRY_TIME_MSEC`
 : **INI**: `datadog.trace.agent_attempt_retry_time_msec`<br>
 **Default**: `5000`<br>
@@ -172,17 +180,27 @@ The Agent request transfer timeout (in milliseconds).
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
 **Default**: `null`<br>
-The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`; for example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Added in version `0.47.1`.
+The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. For example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it. Added in version `0.47.1`.
+
+`DD_DOGSTATSD_URL`
+: **INI**: `datadog.dogstatsd_url`<br>
+**Default**: `null`<br>
+The URL used to negotiate connection to DogStatsD. This setting takes precedence over `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. Supports `udp://` or `unix://` schemas only.
+
+`DD_DOGSTATSD_PORT`
+: **INI**: `datadog.dogstatsd_port`<br>
+**Default**: `8125`<br>
+The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` to negotiate connection to DogStatsD when `DD_TRACE_HEALTH_METRICS_ENABLED` is enabled.
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
-Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
+Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
 **Default**: `0`<br>
-Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
+Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
@@ -202,7 +220,7 @@ Enable the tracer globally.
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
 **Default**: `1`<br>
-Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
+Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes][14].
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
@@ -291,7 +309,7 @@ Enable URL's as resource names (see [Map resource names to normalized URI](#map-
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
 **Default**: `null`<br>
-Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
+Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
@@ -323,21 +341,31 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `Datadog`<br>
+**Default**: `tracecontext,Datadog`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 single header][8]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `Datadog,B3,B3 single header`<br>
+**Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
-  - [B3][7]
+  - [tracecontext][10]
+  - [b3multi][7]
   - [B3 single header][8]
   - Datadog
+
+`DD_DBM_PROPAGATION_MODE`
+: **INI**: `datadog.dbm_propagation_mode`<br>
+**Default**: `'disabled'`<br>
+Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
+The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
+The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+
 
 #### Integration names
 
@@ -432,6 +460,9 @@ Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requ
 When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
 When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
 
+### Headers extraction and injection
+
+Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context. 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -445,4 +476,8 @@ When the application runs in a docker container, the path `/proc/self` should al
 [7]: https://github.com/openzipkin/b3-propagation
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
+[10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[11]: /tracing/trace_collection/trace_context_propagation/php/
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
+[15]: /tracing/guide/trace-php-cli-scripts/

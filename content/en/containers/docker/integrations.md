@@ -95,7 +95,7 @@ services:
   project:
     image: '<IMAGE_NAME>'
     labels:
-      com.datadoghq.ad.checchecksk_names: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+      com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
 
 ```
 

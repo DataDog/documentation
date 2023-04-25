@@ -95,7 +95,7 @@ If **sn** and **givenName** are provided, they are used to update the user's nam
 
 With Datadog, you can map attributes in your IdP's response to Datadog roles. Users with the Access Management permission can assign or remove Datadog roles based on a user's SAML-assigned attributes.
 
-It’s important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][22]. Datadog recommends cross-referencing with [built-in browser tooling][23] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][24] **before** creating mappings.
+It's important to understand what is sent in an assertion before turning on mappings as mappings require correct attributes. Every IdP has specific mappings. For example, Azure works with object IDs, and Okta requires you to set attributes in [Okta settings][22]. Datadog recommends cross-referencing with [built-in browser tooling][23] such as Chrome Dev Tools or browser extensions and [validating your SAML assertions][24] **before** creating mappings.
 
 1. [Cross-reference][23] and [validate][24] your SAML assertion to understand your IdP's attributes.
 
@@ -149,7 +149,7 @@ If you do not use the updated SP Metadata, Datadog is not able to associate the 
 
 ### SAML strict
 
-You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company’s identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][26] to allow certain users to be SAML Strict exempt.
+You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][26] to allow certain users to be SAML Strict exempt.
 
 ### Self-updating Datadog SP Metadata
 

@@ -26,7 +26,6 @@ author:
 categories:
 - 処理
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_on_public_website: true
@@ -52,7 +51,6 @@ tile:
   - Supported OS::macOS
   - Category::Processing
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
   media: []
@@ -69,7 +67,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Ambari チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

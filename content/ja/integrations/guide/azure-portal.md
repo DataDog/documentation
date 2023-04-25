@@ -7,11 +7,11 @@ further_reading:
   tag: ブログ
   text: Microsoft とのパートナーシップにより、Datadog を Azure Portal でネイティブに利用可能に
 kind: ガイド
-title: Azure Portal の Datadog
+title: Azure Native インテグレーションの管理
 ---
 
 <div class="alert alert-warning">
-  このガイドは、Azure で US3 を使用している Datadog のお客様を対象としています。
+  本ガイドは、Datadog リソースと Azure Native のインテグレーションを管理するためのものです。
 </div>
 
 このガイドは、Datadog リソースを使用して Azure ポータルで Azure と Datadog のインテグレーションを管理するためのものです。Azure の Datadog リソースは、Datadog オーガニゼーションと Azure サブスクリプションの間の接続を表します。このガイドに進む前に、Azure で [Datadog リソースを作成][1]してください。
@@ -31,9 +31,9 @@ Datadog リソースを使用すると、関連付けられた Azure サブス�
 
 ## 概要
 
-左側のサイドバーで "Overview" を選択して、Datadog リソースの情報を表示します。
+左側のサイドバーで **Overview** を選択して、Datadog リソースの情報を表示します。
 
-{{< img src="integrations/guide/azure_portal/resource-overview.png" alt="Azure US3 リソース概要" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/resource-overview.png" alt="左のナビバーで Overview がハイライトされた Azure ポータル" responsive="true" style="width:100%;">}}
 
 ### 重要な情報
 
@@ -58,23 +58,23 @@ Datadog リソースを使用すると、関連付けられた Azure サブス�
 
 ### Disable
 
-Azure から Datadog へのログとメトリクスの送信を停止するには、概要ページで "Disable" を選択し、"OK" をクリックします。
+Azure から Datadog へのログとメトリクスの送信を停止するには、概要ページで **Disable** を選択し、**OK** をクリックします。
 
-{{< img src="integrations/guide/azure_portal/disable.png" alt="Azure US3 のインテグレーションの無効化" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/disable.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Disable タブがハイライトされ、OK ボタンがハイライトされています" responsive="true" style="width:100%;">}}
 
 **注**: Datadog リソースを無効にすると、関連付けられたサブスクリプションの Datadog へのメトリクスとプラットフォームログの送信が停止します。Agent または拡張機能を介して Datadog に直接データを送信するサブスクリプション内のリソースは影響を受けません。
 
 ### Enable
 
-Azure から Datadog へのログとメトリクスの送信を開始するには、概要ページで "Enable" を選択し、"OK" をクリックします。ログとメトリクスの以前のコンフィギュレーションが取得され、有効になります。
+Azure から Datadog へのログとメトリクスの送信を開始するには、概要ページで **Enable** を選択し、**OK** をクリックします。ログとメトリクスの以前のコンフィギュレーションが取得され、有効になります。
 
-{{< img src="integrations/guide/azure_portal/enable.png" alt="Azure US3 のインテグレーションの有効化" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/enable.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Enable タブがハイライトされ、OK ボタンがハイライトされています" responsive="true" style="width:100%;">}}
 
 ### 削除
 
-Datadog リソースを削除するには、概要ページで "Delete" を選択します。`yes` と入力して削除を確認し、"Delete" をクリックします。
+Datadog リソースを削除するには、概要ページで **Delete** を選択します。`yes` と入力して削除を確認し、**Delete** をクリックします。
 
-{{< img src="integrations/guide/azure_portal/delete.png" alt="Azure US3 の Datadog リソースの削除" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/delete.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Delete タブがハイライトされ、削除を確認するフィールドがあります" responsive="true" style="width:100%;">}}
 
 Azure Marketplace を通じて請求される Datadog オーガニゼーションの場合
 - 削除された Datadog リソースが関連する Datadog オーガニゼーションにマップされた唯一の Datadog リソースである場合、ログとメトリクスは Datadog に送信されなくなり、Azure を介した Datadog のすべての請求が停止します。アカウントの次のステップを確認するために Datadog サポートがご連絡します。
@@ -84,16 +84,16 @@ Datadog オーガニゼーションが Azure Marketplace を通じて請求さ�
 
 ### Change plan
 
-Datadog の請求プランを変更するには、概要ページで "Change Plan" を選択します。
+Datadog の請求プランを変更するには、概要ページで **Change Plan** を選択します。
 
-{{< img src="integrations/guide/azure_portal/change-plan1.png" alt="Azure US3 のプランの変更" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/change-plan1.png" alt="Azure ポータル内の Datadog リソースページでは、左のナビバーで Overview が選択され、Change Plan タブがハイライトされています" responsive="true" style="width:100%;">}}
 
-ポータルは、テナントで利用可能なすべての Datadog プランを取得します。これには、プライベートオファーが含まれます。適切なプランを選択し、"Change Plan" をクリックします。
+ポータルは、プライベートオファーなど、テナントで利用可能なすべての Datadog プランを取得します。適切なプランを選択し、**Change Plan** をクリックします。
 
 ## Datadog org configurations
 ### Metrics and logs
 
-左サイドバーの “Metrics and logs” を選択すると、メトリクスとログの構成ルールを変更することができます。リソースが追加されたり、タグが変更されたりすると、すべてのルールがサブスクリプション全体に動的に適用されます。
+左サイドバーの **Metrics and logs** を選択すると、メトリクスとログの構成ルールを変更することができます。リソースが追加されたり、タグが変更されたりすると、すべてのルールがサブスクリプション全体に動的に適用されます。
 
 メトリクスまたはログの構成設定の変更は、数分以内に有効になります。
 
@@ -119,15 +119,15 @@ Datadog リソースを使用して Azure から Datadog に出力できるロ�
 
 ##### アクティビティログ
 
-サブスクリプションレベルのログは、[コントロールプレーン][3]におけるリソースの運用に関するインサイトを提供します。アクティビティログを使用して、書き込み作業の何、誰、いつを決定します (PUT、POST、DELETE)。
+サブスクリプションレベルのログは、[コントロールプレーン][3]におけるリソースの運用に関するインサイトを提供します。アクティビティログを使用して、書き込み作業の何、誰、いつを決定します (`PUT`、`POST`、`DELETE`)。
 
-サブスクリプションレベルのログを Datadog に送信するには、"Send subscription activity logs" を選択します。このオプションを有効にしない場合、サブスクリプションレベルのログは Datadog に送信されません。
+サブスクリプションレベルのログを Datadog に送信するには、**Send subscription activity logs** を選択します。このオプションを有効にしない場合、サブスクリプションレベルのログは Datadog に送信されません。
 
 ##### リソースログ
 
 Azure リソースログは、[データプレーン][3]における Azure リソースの運用に関するインサイトを提供します。たとえば、Key Vault からシークレットを取得する、データベースへのリクエストを作成する、などはデータプレーンの運用です。リソースログのコンテンツは、Azure のサービスおよびリソースタイプにより異なります。
 
-Azure リソースログを Datadog に送信するには、"Send Azure resource logs for all defined resources" を選択します。Azure リソースログの種類は、[Azure 監視リソースログのカテゴリー][4]に一覧があります。このオプションが有効な場合、サブスクリプションで作成された新しいリソースを含むすべてのリソースログが Datadog に送信されます。
+Azure リソースログを Datadog に送信するには、**Send Azure resource logs for all defined resources** を選択します。Azure リソースログの種類は、[Azure 監視リソースログのカテゴリー][4]に一覧があります。このオプションが有効な場合、サブスクリプションで作成された新しいリソースを含むすべてのリソースログが Datadog に送信されます。
 
 オプションで、Azure リソースタグを使用して Datadog にログを送信する Azure リソースを絞り込むことができます。
 
@@ -155,11 +155,11 @@ Azure Active Directory (Azure AD) のログには、特定のテナントのサ�
 
 ### Monitored resources
 
-左側のサイドバーで "Monitored Resources" を選択して、Datadog にログとメトリクスを送信するリソースのリストを表示します。検索を使用して、リソース名、タイプ、グループ、場所、Datadog へのログ、または Datadog へのメトリクスでリストをフィルタリングします。
+左側のサイドバーで **Monitored Resources** を選択して、Datadog にログとメトリクスを送信するリソースのリストを表示します。検索を使用して、リソース名、タイプ、グループ、場所、Datadog へのログ、または Datadog へのメトリクスでリストをフィルタリングします。
 
-{{< img src="integrations/guide/azure_portal/monitored-resources.png" alt="Azure US3 の監視対象リソース" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/monitored-resources.png" alt="Azure ポータル内の Datadog リソースページでは、Datadog 組織の構成の下に Monitored Resources がハイライトされています" responsive="true" style="width:100%;">}}
 
-リソースが Datadog にログを送信している場合、"Logs to Datadog" 列には `Sending` と表示されます。それ以外の場合、このフィールドはログが送信されない理由として以下を示します。
+リソースが Datadog にログを送信している場合、**Logs to Datadog** 列には `Sending` と表示されます。それ以外の場合、このフィールドはログが送信されない理由として以下を示します。
 
 | 理由                                    | 説明                                                                                                             |
 |-------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -172,7 +172,7 @@ Azure Active Directory (Azure AD) のログには、特定のテナントのサ�
 
 ### Virtual machine agent
 
-サブスクリプション内の仮想マシン (VM) のリストを表示するには、左側のサイドバーで "Virtual machine agent" を選択します。このページでは、拡張機能として Datadog Agent を VM にインストールできます。
+サブスクリプション内の仮想マシン (VM) のリストを表示するには、左側のサイドバーで **Virtual machine agent** を選択します。このページでは、拡張機能として Datadog Agent を VM にインストールできます。
 
 VM ごとに、次の情報が表示されます。
 
@@ -188,17 +188,17 @@ VM ごとに、次の情報が表示されます。
 
 #### Install
 
-Datadog Agent をインストールするには、適切な VM を選択し、"Install Agent" をクリックします。ポータルで、デフォルトのキーを使用して Agent をインストールすることの確認が求められます。"OK" を選択してインストールを開始します。Agent がインストールされてプロビジョニングされるまで、Azure はステータスを `Installing` (インストール中) と表示します。Datadog Agent がインストールされると、ステータスが `Installed` (インストール済み) に変わります。
+Datadog Agent をインストールするには、適切な VM を選択し、**Install Agent** をクリックします。ポータルで、デフォルトのキーを使用して Agent をインストールすることの確認が求められます。**OK** を選択してインストールを開始します。Agent がインストールされてプロビジョニングされるまで、Azure はステータスを `Installing` (インストール中) と表示します。Datadog Agent がインストールされると、ステータスが `Installed` (インストール済み) に変わります。
 
 #### アンインストール
 
-Datadog Agent が Azure VM 拡張機能とともにインストールされている場合は、適切な VM を選択して、"Uninstall Agent" をクリックすることで、Agent をアンインストールできます。
+Datadog Agent が Azure VM 拡張機能とともにインストールされている場合は、適切な VM を選択して、**Uninstall Agent** をクリックすることで、Agent をアンインストールできます。
 
 Agent が別の方法でインストールされた場合、Datadog リソースを使用して Agent をデプロイまたは削除することはできませんが、Agent に関する情報は引き続きこのページに反映されます。
 
 ### App Service extension
 
-サブスクリプション内のアプリサービスのリストを表示するには、左側のサイドバーで "App Service extension" を選択します。このページでは、Azure App Service に Datadog 拡張機能をインストールして、APM トレースとカスタムメトリクスを有効にすることができます。
+サブスクリプション内のアプリサービスのリストを表示するには、左側のサイドバーで **App Service extension** を選択します。このページでは、Azure App Service に Datadog 拡張機能をインストールして、APM トレースとカスタムメトリクスを有効にすることができます。
 
 アプリサービスごとに、次の情報が表示されます。
 
@@ -211,7 +211,7 @@ Agent が別の方法でインストールされた場合、Datadog リソース
 
 #### Install
 
-[Datadog 拡張機能][6]をインストールするには、適切なアプリを選択し、"Install Extension" をクリックします。ポータルで、拡張機能をインストールすることの確認が求められます。"OK" を選択してインストールを開始します。これにより、アプリが再起動し、次の設定が追加されます。
+[Datadog 拡張機能][6]をインストールするには、適切なアプリを選択し、**Install Extension** をクリックします。ポータルで、拡張機能をインストールすることの確認が求められます。**OK** を選択してインストールを開始します。これにより、アプリが再起動し、次の設定が追加されます。
 
 - `DD_API_KEY:<DEFAULT_API_KEY>`
 - `DD_SITE:us3.datadoghq.com`
@@ -223,22 +223,22 @@ Agent がインストールされてプロビジョニングされるまで、Az
 
 #### アンインストール
 
-Datadog 拡張機能をアンインストールするには、適切なアプリを選択し、"Uninstall Extension" をクリックします。
+Datadog 拡張機能をアンインストールするには、適切なアプリを選択し、**Uninstall Extension** をクリックします。
 
 ## 設定
 ### Single sign-on
 
-シングルサインオンを再構成するには、左側のサイドバーで "Single sign-on" を選択します。
+シングルサインオンを再構成するには、左側のサイドバーで **Single sign-on** を選択します。
 
-Azure Active Directory を介してシングルサインオンをアクティブ化するには、"Enable single sign-on" を選択します。ポータルは、Azure Active Directory から適切な Datadog アプリケーションを取得します。アプリ名は、インテグレーションをセットアップするときに選択したエンタープライズアプリ名です。以下に示すように、Datadog アプリケーション名を選択します。
+Azure Active Directory を介してシングルサインオンをアクティブ化するには、**Enable single sign-on** を選択します。ポータルは、Azure Active Directory から適切な Datadog アプリケーションを取得します。アプリ名は、インテグレーションをセットアップするときに選択したエンタープライズアプリ名です。以下に示すように、Datadog アプリケーション名を選択します。
 
-{{< img src="integrations/guide/azure_portal/sso.png" alt="Azure US3 シングルサインオン" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/sso.png" alt="Azure アクティブディレクトリによるシングルサインオンを有効にした Azure ポータル" responsive="true" style="width:100%;">}}
 
 ### API キー
 
-左側のサイドバーで "Keys" を選択して、Datadog リソースの API キーのリストを表示します。
+左側のサイドバーで **Keys** を選択して、Datadog リソースの API キーのリストを表示します。
 
-{{< img src="integrations/guide/azure_portal/api-keys.png" alt="Azure US3 API キー" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/api-keys.png" alt="1 つの API キーを表示した Azure ポータル内の Keys ビュー" responsive="true" style="width:100%;">}}
 
 Azure ポータルは、API キーの読み取り専用ビューを提供します。キーを管理するには、"Datadog portal" リンクを選択します。Datadog で変更を加えた後、Azure ポータルビューを更新します。
 
@@ -266,4 +266,4 @@ Azure Datadog インテグレーションにより、Datadog Agent を VM また
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
 [6]: /ja/serverless/azure_app_services
 [7]: /ja/serverless/azure_app_services/#requirements
-[8]: /ja/security_platform/cspm/
+[8]: /ja/security/cspm/

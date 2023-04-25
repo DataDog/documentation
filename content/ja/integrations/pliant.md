@@ -19,10 +19,11 @@ author:
   sales_email: hello@pliant.io
   support_email: hello@pliant.io
 categories:
-- orchestration
-- notification
-- コンプライアンス
 - 自動化
+- コンプライアンス
+- notification
+- orchestration
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
 display_on_public_website: true
@@ -40,18 +41,19 @@ public_title: Pliant
 short_description: Pliant.io で IT プロセスを自動化
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
-  - Category::Notification
-  - カテゴリ::コンプライアンス
   - Category::Automation
+  - カテゴリ::コンプライアンス
+  - Category::Notification
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Pliant.io で IT プロセスを自動化
   media: []
@@ -78,7 +80,7 @@ Pliant.io により、Datadog の通知をローコードの自動ワークフ�
 - ロードが低いときリソースの使用を停止
 
 ## セットアップ
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog の通知からトリガーするワークフローを作成します。
 

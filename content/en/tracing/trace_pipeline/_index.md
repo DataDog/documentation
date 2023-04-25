@@ -37,7 +37,7 @@ You can generate metrics from ingested spans, and use those custom metrics for q
 
 After spans have been ingested by Datadog, some are kept for 15 days according to the [Retention Filters][5] that have been set on your account. The Datadog Intelligent Retention Filter indexes a proportion of traces to help you monitor the health of your applications. Plus, you can define your own custom retention filters to index trace data you want to keep in support your organization's goals.
 
-{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_page.png" style="width:100%;" alt="Retention Filters Page" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="Retention Filters Page" >}}
 
 ## Trace usage metrics
 

@@ -42,7 +42,7 @@ The example below demonstrates the creation of a browser test that maps a user's
 2. In the top right corner, click **New Test** > **[Browser Test][3]**.
 3. Define your browser test:
 
-    - Add the URL of the website you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
+    - Add the URL of the website you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io`, a test e-commerce web application.
     - Select **Advanced Options** to set custom request options, certificates, authentication credentials, and more. 
       In this example, no specific advanced option is needed.
     - Name your test and set tags to it such as `env:prod` and `app:shopist`. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
@@ -104,8 +104,8 @@ The example below demonstrates how to map a user journey from adding an item to 
 
 1. Navigate to one of the furniture sections on the example website such as **Chairs** and select **Add to cart**.
 2. Click on **Cart** and **Checkout**.
-3. Under **Add New**, select **Assertion** and click **“Test that some text is present on the active page”**.
-4. To confirm that the words “Thank you!” appear after checking out, enter `Thank you!` in the **Value** field. 
+3. Under **Add New**, select **Assertion** and click **"Test that some text is present on the active page"**.
+4. To confirm that the words "Thank you!" appear after checking out, enter `Thank you!` in the **Value** field. 
 5. Press **Save & Quit**.
 
 It is important to finish your browser test with an **Assertion** to ensure your application resulted in the expected state after the defined user journey.

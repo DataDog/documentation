@@ -14,8 +14,8 @@ further_reading:
   text: "Threat Monitoring and Protection"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
-  text: "Risk Management"
-- link: "/security/application_security/setup_and_configure/#compatibility"
+  text: "Application Vulnerability Management"
+- link: "/security/application_security/enabling/#compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/product/security-platform/application-security-monitoring/"
@@ -33,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+- link: "https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/"
+  tag: "Blog"
+  text: "Block attackers in your apps and APIs with Datadog Application Security Management"
 ---
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
@@ -57,7 +60,7 @@ If you're curious how Application Security Management is structured and how it u
 
 Powered by provided [out-of-the-box rules][4], ASM detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
 
-To start configuring your environment to detect and protect threats with ASM, follow the [Getting Started documentation][5]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
+To start configuring your environment to detect and protect threats with ASM, follow the [Enabling documentation][5]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
 
 ## Investigate and remediate security signals
 
@@ -65,9 +68,9 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 
 ## Investigate risk introduced in upstream open source libraries and dependencies
 
-<div class="alert alert-info">Application Security Risk Management is in beta.</a></div>
+<div class="alert alert-info">Application Vulnerability Management is in beta.</a></div>
 
-[ASM Risk Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+[Application Vulnerability Management][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
 
 ## Next steps
 
@@ -77,7 +80,7 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [2]: /agent/
 [3]: /security/application_security/how-appsec-works/
 [4]: /security/default_rules/#cat-application-security
-[5]: /security/application_security/getting_started/
+[5]: /security/application_security/enabling/
 [6]: /security/explorer/
 [7]: https://dashcon.io/appsec
 [8]: /security/application_security/risk_management/

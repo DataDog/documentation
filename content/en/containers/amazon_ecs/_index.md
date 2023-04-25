@@ -2,8 +2,8 @@
 title: Amazon ECS
 kind: documentation
 aliases:
-  - /integrations/amazon_ecs/
   - /agent/amazon_ecs/
+  - /containers/amazon_ecs/data_collected
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
@@ -11,12 +11,11 @@ further_reading:
 - link: "/agent/amazon_ecs/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/amazon_ecs/data_collected/#metrics"
-  tag: "Documentation"
-  text: "Collect ECS metrics"
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"
+algolia:
+  tags: ['ecs']
 ---
 
 ## Overview
@@ -85,7 +84,7 @@ For all of these examples the `DD_API_KEY` environment variable can alternativel
 Once you have your Task Definition file created you can execute the following command to register this in AWS.
 
 ```bash
-aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
+aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Web UI" %}}

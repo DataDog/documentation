@@ -317,20 +317,22 @@ Datadog Nginx モジュールはベータ版です。フィードバックは<a 
 </div>
 
 ### モジュールのインストール
-Datadog Nginx モジュールは、[Nginx Docker イメージタグ](https://hub.docker.com/_/nginx/tags)にそれぞれ 1 バージョンずつあります。[最新の nginx-datadog GitHub リリース][1]から適切なファイルをダウンロードし、Nginx の modules ディレクトリに解凍してモジュールをインストールします。
+Datadog Nginx モジュールは、サポートされた Docker イメージにそれぞれ 1 バージョンずつあります。[最新の nginx-datadog GitHub リリース][1]から適切なファイルをダウンロードし、Nginx の modules ディレクトリに解凍してモジュールをインストールします。
 
-例えば、Nginx バージョン 1.23.1 が Debian ベースのシステムで動作している場合、適切な Nginx イメージタグは [1.23.1][2] です。対応する Alpine ベースのイメージは [1.23.1-alpine][3] というタグが付けられています。
+例えば、Docker イメージ [nginx:1.23.2-alpine][3] と互換性のあるモジュールは、各リリースに `nginx_1.23.2-alpine-ngx_http_datadog_module.so.tgz` というファイルとして含まれています。Docker イメージ [amazonlinux:2.0.20230119.1][2] と互換性のあるモジュールは、各リリースに `amazonlinux_2.0.20230119.1-ngx_http_datadog_module.so.tgz` というファイルとして含まれています。
 
 ```bash
 get_latest_release() {
   curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
 }
-NGINX_IMAGE_TAG=1.23.1
+BASE_IMAGE=nginx:1.23.2-alpine
+BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
+tarball="nginx_$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
 wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
 tar -xzf "$tarball" -C /usr/lib/nginx/modules
 rm "$tarball"
+ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
 ```
 
 ### Nginx 構成と Datadog モジュールの組み合わせ
@@ -551,8 +553,8 @@ Datadog に送信される Ingress Controller のトレースの量を制御す�
    ```
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
-[2]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1/images/sha256-f26fbadb0acab4a21ecb4e337a326907e61fbec36c9a9b52e725669d99ed1261?context=explore
-[3]: https://hub.docker.com/layers/nginx/library/nginx/1.23.1-alpine/images/sha256-2959a35e1b1e61e2419c01e0e457f75497e02d039360a658b66ff2d4caab19c4?context=explore
+[2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
+[3]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
 [4]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/examples/nginx-tracing/Dockerfile
 [5]: https://github.com/opentracing-contrib/nginx-opentracing/releases/latest
 [6]: https://github.com/DataDog/dd-opentracing-cpp/releases/latest

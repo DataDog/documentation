@@ -98,6 +98,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3195475781",
+      "description": "Create a new dashboard with ci_test_stream list_stream widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_803346562",
       "description": "Create a new dashboard with distribution widget and apm stats data"
     },
@@ -238,6 +243,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_109450134",
+      "description": "Create a new dashboard with slo list widget with sort"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_173805046",
       "description": "Create a new dashboard with slo widget"
     },
@@ -245,6 +255,11 @@
       "group": "dashboards",
       "suffix": "_2705593938",
       "description": "Create a new dashboard with sunburst widget and metrics data"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2064651578",
+      "description": "Create a new dashboard with team tags returns \"OK\" response"
     },
     {
       "group": "dashboards",
@@ -283,8 +298,20 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2800096921",
+      "description": "Create a new timeseries widget with ci_pipelines data source"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1307120899",
       "description": "Create a new timeseries widget with ci_tests data source"
+    }
+  ],
+  "CreatePublicDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Create a shared dashboard returns \"OK\" response"
     }
   ],
   "DeleteDashboards": [
@@ -301,11 +328,30 @@
       "description": "Restore deleted dashboards returns \"No Content\" response"
     }
   ],
+  "SendPublicDashboardInvitation": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Send shared dashboard invitation email returns \"OK\" response"
+    }
+  ],
   "UpdateDashboard": [
     {
       "group": "dashboards",
       "suffix": "",
       "description": "Update a dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3454865944",
+      "description": "Update a dashboard with tags returns \"OK\" response"
+    }
+  ],
+  "UpdatePublicDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Update a shared dashboard returns \"OK\" response"
     }
   ],
   "CancelDowntimesByScope": [

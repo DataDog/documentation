@@ -24,26 +24,136 @@ kind: documentation
 title: .NET カスタムインスツルメンテーション
 type: multi-code-lang
 ---
-<div class="alert alert-info">
-.NET トレーサーのセットアップ方法と自動計測を有効にする方法については、<a href="https://docs.datadoghq.com/tracing/setup/dotnet-framework/">.NET Framework セットアップ方法</a>または <a href="https://docs.datadoghq.com/tracing/setup/dotnet-core/">.NET Core セットアップ方法</a>を参照してください。
-</div>
 
 このページでは、Datadog APM で可観測性を追加・カスタマイズするための一般的なユースケースを詳しく説明します。サポートされているランタイムの一覧は、[.NET Framework 互換性要件][1]または [.NET Core 互換性要件][2]を参照してください。
 
-以下の手順を実行するには、1 つまたは複数のライブラリに NuGet パッケージの参照を追加する必要がある場合があります。
+[デフォルトの自動インスツルメンテーション][3]以上を取得するためには、いくつかの方法があります。
 
-- `Datadog.Trace` [NuGet パッケージ][3]: このライブラリはトレーサーとアクティブスパンに直接アクセスするための API を提供します。**注:** NuGet パッケージの `Datadog.Trace` と自動インスツルメンテーションを同時に使用する場合、バージョンを同期させることが重要です。
-- `Datadog.Trace.Annotations` [NuGet パッケージ][4]: このライブラリは、コードに適用して追加の自動インスツルメンテーション機能を有効にすることができる .NET 属性を提供します。
+- [構成経由](#instrument-methods-through-configuration)。これは自動インストルメンテーションに依存し、特定のタグを追加することはできません。
+- [属性の使用](#instrument-methods-through-attributes)。これは、自動インストルメンテーションに依存し、操作名とリソース名をカスタマイズすることができます。
+- [カスタムコードの使用](#custom-instrumentation-with-code)。これは、自動インスツルメンテーションと並行して、またはそれなしで動作させることができます。スパンを最も自由にコントロールすることができます。
 
-## `ddtrace` ライブラリの機能性を拡張したり、アプリケーションのインスツルメントをより精確に制御するのに役立つ方法がライブラリにあります。
+これらのソリューションを互いに組み合わせることで、求めるインスツルメンテーションの精度を実現することができます。
+
+## 構成によるインスツルメントメソッド
+
+<div class="alert alert-info">
+  <strong>注</strong>: この機能を使用するには、アプリケーションの自動インストルメンテーションを有効にする必要があります。.NET トレーサーのセットアップ方法と自動インスツルメンテーションの有効化については、<a href="/tracing/trace_collection/dd_libraries/dotnet-framework/">.NET Framework セットアップ手順</a>または <a href="/tracing/trace_collection/dd_libraries/dotnet-core/">.NET Core セットアップ手順</a>を参照してください。
+</div>
+
+環境変数 `DD_TRACE_METHODS` を使用すると、アプリケーションコードを変更せずに、サポートされていないフレームワークを可視化することができます。`DD_TRACE_METHODS` の入力フォーマットの詳細については、[.NET Framework 構成手順][8]または [.NET Core 構成手順][9]を参照してください。例えば、`Store.Managers.SessionManager` 型で定義された `SaveSession` というメソッドをインスツルメンテーションするには、次のように設定します。
+
+```ini
+DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
+```
+
+結果として得られるスパンは、`trace.annotation` という値を持つ `operationName` 属性と `SaveSession` という値を持つ `resourceName` 属性を持っています。
+
+スパンの属性をカスタマイズしたい場合で、ソースコードを修正する能力がある場合は、代わりに[属性を通してメソッドをインスツルメントする](#instrument-methods-through-attributes)ことが可能です。
+
+## 属性によるインスツルメントメソッド
+
+<div class="alert alert-info">
+  <strong>注</strong>: この機能を使用するには、アプリケーションに <a href="https://www.nuget.org/packages/Datadog.Trace.Annotations"><code>Datadog.Trace.Annotations</code> NuGet パッケージ</a>を追加し、自動インスツルメンテーションを設定する必要があります。.NET トレーサーのセットアップ方法と自動インスツルメンテーションの有効化については、<a href="/tracing/trace_collection/dd_libraries/dotnet-framework/">.NET Framework セットアップ手順</a>または <a href="/tracing/trace_collection/dd_libraries/dotnet-core/">.NET Core セットアップ手順</a>を参照してください。
+</div>
+
+Datadog が自動インスツルメンテーションを行う際に、メソッドに `[Trace]` を追加し、トレースするようにします。自動インスツルメンテーションが有効でない場合、この属性はアプリケーションに何の影響も及ぼしません。
+
+`[Trace]` 属性はデフォルトのオペレーション名 `trace.annotation` とトレースされるメソッドのリソース名を持っています。**操作名**と**リソース名**を `[Trace]` 属性の名前付き引数として設定することで、インスツルメンテーションされる内容をより良く反映させることができます。`[Trace]` 属性に設定できる引数は、オペレーション名とリソース名のみです。例:
+
+```csharp
+using Datadog.Trace.Annotations;
+
+namespace Store.Managers
+{
+    public class SessionManager
+    {
+        [Trace(OperationName = "database.persist", ResourceName = "SessionManager.SaveSession")]
+        public static void SaveSession()
+        {
+            // ここにメソッドの実装
+        }
+    }
+}
+```
+
+## コードによるカスタムインスツルメンテーション
+
+<div class="alert alert-info">
+  <strong>注</strong>: この機能を使用するには、<a href="https://www.nuget.org/packages/Datadog.Trace"><code>Datadog.Trace</code> NuGet パッケージ</a>をアプリケーションに追加する必要があります。これは、トレーサーとアクティブスパンに直接アクセスするための API を提供します。
+</div>
+
+<div class="alert alert-warning">
+  <strong>注</strong>: <code>Datadog.Trace</code> NuGet パッケージと自動インスツルメンテーションの両方を使用する場合、バージョンを同期させることが重要です。
+</div>
+
+### コードによる Datadog の構成
+
+アプリケーションを構成する方法は複数あります。環境変数、`web.config` ファイル、`datadog.json` ファイルを使用する方法があり、 [ドキュメントで説明されています][11]。また、`Datadog.Trace` NuGet パッケージでは、コード内で構成を行うことができます。
+
+構成設定をオーバーライドするには、`TracerSettings` のインスタンスを作成して、静的な `Tracer.Configure()` メソッドに渡します。
+
+```csharp
+using Datadog.Trace;
+
+// 既存の環境変数と構成ソースを使用して
+// 設定オブジェクトを作成します
+var settings = TracerSettings.FromDefaultSources();
+
+// 値をオーバーライドします
+settings.GlobalTags.Add("SomeKey", "SomeValue");
+
+// トレーサーの構成を置き換えます
+Tracer.Configure(settings);
+```
+
+`Tracer.Configure()` を呼び出すと、カスタムインスツルメンテーションでも自動インスツルメンテーションでも、それ以降のすべてのトレースの設定が置き換わります。
+
+<div class="alert alert-warning">
+  構成の置き換えは、アプリケーションで<strong>一度だけ、できるだけ早い段階で</strong>行う必要があります。
+</div>
+
+### カスタムトレース/スパンの作成
+
+自動インスツルメンテーション、 `[Trace]` 属性、`DD_TRACE_METHODS` の構成に加えて、プログラム的に任意のコードブロックの周りにスパンを作成することで、観測可能性をカスタマイズすることが可能です。
+
+カスタムスパンを作成してアクティブにするには、`Tracer.Instance.StartActive()` を使用します。トレースがすでにアクティブな場合 (例えば、自動インスツルメンテーションによって作成された場合)、スパンは現在のトレースの一部となります。現在のトレースがない場合は、新しいトレースが開始されます。
+
+<div class="alert alert-warning"><strong>警告</strong>: <code>StartActive</code> から返されたスコープを確実にディスポーズしてください。スコープをディスポーズすると、スパンが閉じられ、そのスパンがすべて閉じられると、トレースが Datadog にフラッシュされるようになります。
+</div>
+
+```csharp
+using Datadog.Trace;
+
+// 新しいスパンを開始します
+using (var scope = Tracer.Instance.StartActive("custom-operation"))
+{
+    // 操作を実行します
+}
+```
 
 カスタム[スパンタグ][5]を[スパン][6]に追加して、Datadog 内の可観測性をカスタマイズします。スパンタグは受信トレースに適用されるため、観測された動作を、マーチャントの階層、チェックアウト金額、ユーザー ID などのコードレベルの情報と関連付けることができます。
 
-### カスタムスパンタグを追加する
+### 新しいスパンを手動で作成する
 
-<div class="alert alert-warning">
-  <strong>注:</strong> この機能を使用するには、アプリケーションに `Datadog.Trace` NuGet パッケージを追加することが必須です。
-</div>
+手動で作成したスパンは、他のトレースメカニズムからのスパンと自動的にインテグレーションされます。つまり、トレースがすでに開始されている場合、手動スパンはその呼び出し元を親スパンとして持っています。同様に、ラップされたコードブロックから呼び出されたトレースされたメソッドは、その親として手動スパンを持ちます。
+
+```csharp
+using (var parentScope =
+       Tracer.Instance.StartActive("manual.sortorders"))
+{
+    parentScope.Span.ResourceName = "<RESOURCE NAME>";
+    using (var childScope =
+           Tracer.Instance.StartActive("manual.sortorders.child"))
+    {
+        // トレースするコードの周囲にあるステートメントを使用してネストします
+        childScope.Span.ResourceName = "<RESOURCE NAME>";
+        SortOrders();
+    }
+}
+```
+
+### カスタムスパンタグを追加する
 
 `customer.id` などのアプリケーションコード内の動的な値に対応するカスタムタグをスパンに追加します。
 
@@ -74,21 +184,9 @@ public class ShoppingCartController : Controller
 }
 ```
 
-### すべてのスパンにグローバルにタグを追加する
-
-`DD_TAGS` 環境変数を使用して、アプリケーションに対して生成されたすべてのスパンにタグを設定します。これは、アプリケーション、データセンター、地域など、Datadog UI 内で統計データをグループ化するのに役立ちます。
-
-```ini
-DD_TAGS=datacenter:njc,key2:value2
-```
-
 ### スパンにエラーを設定する
 
-<div class="alert alert-warning">
-  <strong>注:</strong> この機能を使用するには、アプリケーションに `Datadog.Trace` NuGet パッケージを追加することが必須です。
-</div>
-
-コードで発生したエラーをマークするには、`Span.SetException(Exception)` メソッドを利用します。このメソッドは、スパンをエラーとしてマークし、[関連するスパンメタデータ][5]を追加して、例外の情報を提供します。
+コードで発生したエラーをマークするには、`Span.SetException(Exception)` メソッドを使用します。このメソッドは、スパンをエラーとしてマークし、[関連するスパンメタデータ][5]を追加して、例外の情報を提供します。
 
 ```csharp
 try
@@ -101,86 +199,16 @@ catch(Exception e)
 }
 ```
 
-これで、3 つのタグがスパンに設定されます。 `"error.msg":exception.Message`,  `"error.stack":exception.ToString()`, and `"error.type":exception.GetType().ToString()`.
-
-## タグの追加
-
-[.NET Framework][1] または [.NET Core][2] に対して対応するフレームワークインスツルメンテーションを使用しない場合や、より深いアプリケーションの[トレース][7]をする場合、完全なフレームグラフのため、またはコードの断片の実行時間を測定するために、コードにカスタムインスツルメンテーションを追加できます。
-
-アプリケーションコードの変更が不可能な場合は、環境変数 `DD_TRACE_METHODS` を使用してこれらのメソッドの詳細を記述します。
-
-既存の `[Trace]` または同様の属性がある場合、または属性を使用して Datadog 内の不完全なトレースを完了する場合は、トレースアノテーションを使用します。
-
-### 構成によるインスツルメントメソッド
-
-<div class="alert alert-warning">
-  <strong>注:</strong> この機能を使用するには、アプリケーションの自動インスツルメンテーションを有効にすることが必須です。
-</div>
-
-環境変数 `DD_TRACE_METHODS` を使用すると、アプリケーションコードを変更せずに、サポートされていないフレームワークを視覚化することができます。入力フォーマットに関する完全な詳細については、[.NET Framework セットアップ手順][8]または [.NET Core セットアップ手順][9]を参照してください。次の例では、インスツルメントしたいメソッドの名前が `SaveSession` で、そのメソッドが `Store.Managers.SessionManager` タイプで定義されていると仮定します。
-
-```ini
-DD_TRACE_METHODS=Store.Managers.SessionManager[SaveSession]
-```
-
-この結果、スパンには `operationName` が `trace.annotation` に、`resourceName` が `SaveSession` に設定されます。もし、スパンの属性をカスタマイズしたい場合で、ソースコードを変更できるのであれば、代わりに[属性によってメソッドをインスツルメント](#instrument-methods-via-attributes)することができます。
-
-### 属性によるインスツルメントメソッド
-
-<div class="alert alert-warning">
-  <strong>注:</strong> この機能を使用するには、`Datadog.Trace.Annotations` NuGet パッケージを追加し、アプリケーションの自動インスツルメンテーションを有効にすることが必須です。
-</div>
-
-Datadog が自動インスツルメンテーションを行う際に、メソッドに `[Trace]` を追加し、トレースするようにします。自動インスツルメンテーションが有効でない場合、この属性はアプリケーションに何の影響も及ぼしません。
-
-`[Trace]` 属性はデフォルトのオペレーション名 `trace.annotation` とトレースされるメソッドのリソース名を持っています。これらは `[Trace]` 属性の名前付き引数として設定することで、インスツルメンテーションされる内容をより良く反映させることができます。`[Trace]` 属性に設定できる引数は、オペレーション名とリソース名のみです。
-
-```csharp
-using Datadog.Trace.Annotations;
-
-namespace Store.Managers
-{
-    public class SessionManager
-    {
-        [Trace(OperationName = "database.persist", ResourceName = "SessionManager.SaveSession")]
-        public static void SaveSession()
-        {
-            // ここにメソッドの実装
-        }
-    }
-}
-```
-
-### 新しいスパンを手動で作成する
-
-<div class="alert alert-warning">
-  <strong>注:</strong> この機能を使用するには、アプリケーションに `Datadog.Trace` NuGet パッケージを追加することが必須です。
-</div>
-
-自動インスツルメンテーション、`[Trace]` 属性、`DD_TRACE_METHODS` コンフィギュレーションに加えて、プログラムでコードのブロックの周囲にスパンを作成することで、可観測性をカスタマイズできます。この方法で作成されたスパンは、他のトレースメカニズムと自動的に統合されます。つまり、トレースがすでに開始されている場合、手動スパンはその親スパンとして呼び出し元を持ちます。同様に、コードのラップされたブロックから呼び出されたトレースメソッドは、その親として手動スパンを持ちます。
-
-```csharp
-using (var parentScope =
-       Tracer.Instance.StartActive("manual.sortorders"))
-{
-    parentScope.Span.ResourceName = "<RESOURCE NAME>";
-    using (var childScope =
-           Tracer.Instance.StartActive("manual.sortorders.child"))
-    {
-        // トレースするコードの周囲にあるステートメントを使用してネストします
-        childScope.Span.ResourceName = "<RESOURCE NAME>";
-        SortOrders();
-    }
-}
-```
-
-## トレースクライアントと Agent コンフィギュレーション
+これは、スパンに以下のタグを設定します。
+- `"error.msg":exception.Message`
+- `"error.stack":exception.ToString()`
+- `"error.type":exception.GetType().ToString()`
 
 ### ヘッダーの抽出と挿入
 
 Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C][6] のヘッダー抽出と注入をサポートしています。詳細については、[セットアップドキュメント][7]を参照してください。
 
-ほとんどの場合、ヘッダーの抽出と注入は透過的に行われます。しかし、分散トレースが切断される可能性があるケースも知られています。例えば、分散キューからメッセージを読み込むとき、ライブラリによってはスパンコンテキストを失うことがあります。そのような場合、以下のコードを使ってカスタムトレースを追加することができます。
+ほとんどの場合、ヘッダーの抽出と注入は透過的に行われます。分散トレースが切断される可能性があるケースも知られています。例えば、分散キューからメッセージを読み込むとき、ライブラリによってはスパンコンテキストを失うことがあります。また、Kafka メッセージを消費する際に `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定した場合にも発生することがあります。そのような場合、以下のコードを使ってカスタムトレースを追加することができます。
 
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
@@ -226,22 +254,31 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
 
 Kafka コンシューマースパンをトレースするために `SpanContextExtractor` API を使用する場合、`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定します。これにより、メッセージがトピックから消費された直後にコンシューマースパンが正しく閉じられ、メタデータ (`partition` や `offset` など) が正しく記録されることが保証されます。`SpanContextExtractor` API を使用して Kafka メッセージから作成されたスパンは、プロデューサーのスパンの子であり、コンシューマーのスパンの兄弟になります。
 
-### リソースのフィルター
+
+## すべてのスパンにグローバルにタグを追加する
+
+`DD_TAGS` 環境変数を使用して、アプリケーションに対して生成されたすべてのスパンにタグを設定します。これは、Datadog UI 内でアプリケーション、データセンター、または地域の統計データをグループ化するのに役立ちます。例:
+
+```ini
+DD_TAGS=datacenter:njc,key2:value2
+```
+
+## リソースのフィルター
 
 リソース名に基づいてトレースを除外することで、ヘルスチェックなどの Synthetic トラフィックを削除することができます。セキュリティや追加構成については、[データセキュリティのための Datadog Agent またはトレーサーの構成][10]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /ja/tracing/trace_collection/compatibility/dotnet-framework
 [2]: /ja/tracing/trace_collection/compatibility/dotnet-core
-[3]: https://www.nuget.org/packages/Datadog.Trace
-[4]: https://www.nuget.org/packages/Datadog.Trace.Annotations
+[3]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
 [5]: /ja/tracing/glossary/#span-tags
 [6]: /ja/tracing/glossary/#spans
 [7]: /ja/tracing/glossary/#trace
-[8]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
-[9]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
+[8]: /ja/tracing/trace_collection/library_config/dotnet-framework/#automatic-instrumentation-optional-configuration
+[9]: /ja/tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
 [10]: /ja/tracing/security
+[11]: /ja/tracing/trace_collection/library_config/dotnet-core/

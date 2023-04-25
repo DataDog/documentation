@@ -117,6 +117,6 @@ You can use RUM-based custom metrics for the following actions:
 [10]: /monitors/
 [11]: /metrics/distributions/
 [12]: /dashboards/querying/#configuring-a-graph
-[13]: /monitors/create/types/anomaly/
-[14]: /monitors/create/types/forecasts/
+[13]: /monitors/types/anomaly/
+[14]: /monitors/types/forecasts/
 [15]: /monitors/service_level_objectives/metric/

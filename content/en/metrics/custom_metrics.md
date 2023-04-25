@@ -20,6 +20,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/metrics-without-limits/"
   tag: "Blog"
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
+algolia:
+  tags: ['custom metrics']
 ---
 
 ## Overview

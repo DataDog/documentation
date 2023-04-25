@@ -1,12 +1,17 @@
 ---
 aliases:
 - /ja/developers/events/
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: イベントガイド
 disable_toc: true
 further_reading:
 - link: /events/explorer/
   tag: ドキュメント
   text: Datadog イベントエクスプローラー
-- link: /monitors/create/types/event/
+- link: /monitors/types/event/
   tag: ドキュメント
   text: イベントモニター
 kind: documentation

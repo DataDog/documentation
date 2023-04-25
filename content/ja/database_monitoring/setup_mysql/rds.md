@@ -8,7 +8,7 @@ kind: documentation
 title: Amazon RDS マネージド MySQL のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -326,6 +326,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 ### 検証
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
+
+## Agent の構成例
+{{% dbm-mysql-agent-config-examples %}}
 
 ## RDS インテグレーションをインストール
 

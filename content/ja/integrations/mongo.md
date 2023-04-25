@@ -36,7 +36,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_on_public_website: true
@@ -44,7 +43,7 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 4.1.1
+integration_version: 5.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -64,7 +63,6 @@ tile:
   - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
   media: []
@@ -90,7 +88,7 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 

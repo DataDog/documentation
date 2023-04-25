@@ -15,7 +15,7 @@ Each item listed in the Explorer is an issue and contains high-level information
 
 -   The error type and the error message
 -   The path to the file in which underlying errors are fired
--   Important information about the issue’s lifetime:
+-   Important information about the issue's lifetime:
     -   When it was first and last seen
     -   Graph of occurrences over time
     -   Number of occurrences in the selected time period
@@ -58,4 +58,4 @@ Each event generated is tagged with the version, the service, and the environmen
 
 
 [1]: /events
-[2]: /monitors/create/types/event/
+[2]: /monitors/types/event/

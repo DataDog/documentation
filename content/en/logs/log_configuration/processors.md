@@ -237,7 +237,11 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log service re
 
 ## Log message remapper
 
-Message is a key attribute in Datadog. It is displayed in the message column of the Log Explorer to give context to a log. You can use the search to find a log by log message. Use the log message remapper processor to define one or more attributes as the official log message.
+`message` is a key attribute in Datadog. Its value is displayed in the **Content** column of the Log Explorer to provide context on the log. You can use the search bar to find a log by the log message. 
+
+Use the log message remapper processor to define one or more attributes as the official log message. Define more than one attribute for cases where the attributes might not exist and an alternative is available. For example, if the defined message attributes are `attribute1`, `attribute2`, and `attribute3`, and `attribute1` does not exist, then `attribute2` is used. Similarly, if `attribute2` does not exist, then `attribute3` is used.
+
+To define message attributes, first use the [string builder processor](#string-builder-processor) to create a new string attribute for each of the attributes you want to use. Then, use the log message remapper to remap the string attributes as the message.
 
 **Note**: If multiple log message remapper processors are applied to a given log, only the first one (according to the pipeline order) is taken into account.
 
@@ -323,7 +327,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following Remapper JSON 
 | `sources`              | Array of Strings | yes      | Array of source attributes or tags                                             |
 | `target`               | String           | yes      | Final attribute or tag name to remap the sources to.                           |
 | `target_type`          | String           | no       | Defines if the target is a log `attribute` or a `tag`, default: `attribute`    |
-| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. possible value: `auto`, `string`, `long`  or `integer`, default: `auto`. When set to `auto`, no cast is applied.  |
+| `target_format`        | String           | no       | Defines if the attribute value should be cast to another type. Possible values: `auto`, `string`, or `integer`. Default: `auto`. When set to `auto`, no cast is applied.  |
 | `preserve_source`      | Boolean          | no       | Remove or preserve the remapped source element, default: `false`               |
 | `override_on_conflict` | Boolean          | no       | Override or not the target element if already set, default: `false`            |
 
@@ -565,16 +569,16 @@ Request GET https://app.datadoghq.com/users was answered with response 200
 
 **Note**: `http` is an object and cannot be used in a block (`%{http}` fails), whereas `%{http.method}`, `%{http.status_code}`, or `%{http.url}` returns the corresponding value. Blocks can be used on arrays of values or on a specific attribute within an array. For example, adding the block `%{array_ids}` returns:
 
-    ```text
-    123,456,789
-    ```
+```text
+123,456,789
+```
 
-    Whereas `%{array_users}` does not return anything because it is a list of objects.
-    However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
+Whereas `%{array_users}` does not return anything because it is a list of objects.
+However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
 
-    ```text
-    John,Jack
-    ```
+```text
+John,Jack
+```
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}

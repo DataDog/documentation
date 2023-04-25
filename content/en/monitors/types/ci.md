@@ -18,9 +18,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
   tag: "Blog"
   text: "Configure pipeline alerts with Datadog CI monitors"
-- link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-  tag: "Blog"
-  text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< site-region region="gov" >}}
@@ -211,7 +208,7 @@ For more information on flaky tests, see the [flaky test management guide][6].
 
 [1]: /continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /monitors/create/configuration/#advanced-alert-conditions
+[3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [6]: https://docs.datadoghq.com/continuous_integration/guides/flaky_test_management/

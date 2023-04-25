@@ -176,7 +176,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : The timeframe to be checked for anomalies (for example, `last_5m`, `last_1h`).
 
 `interval`
-: A positive integer representing the number of seconds in the rollup interval. The `interval` should be at least a fifth of the `alert_window` duration.
+: A positive integer representing the number of seconds in the rollup interval. It should be smaller or equal to a fifth of the `alert_window` duration.
 
 `count_default_zero`
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
@@ -231,14 +231,14 @@ A standard configuration of thresholds and threshold window looks like:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly
-[2]: /monitors/create/types/metric/#define-the-metric
+[2]: /monitors/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
 [5]: /dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /monitors/create/configuration/#advanced-alert-conditions
-[9]: /monitors/create/types/metric/#data-window
+[8]: /monitors/configuration/#advanced-alert-conditions
+[9]: /monitors/types/metric/#data-window
 [10]: /monitors/notify/
 [11]: /api/v1/monitors/#create-a-monitor
 [12]: /monitors/manage/status/#settings

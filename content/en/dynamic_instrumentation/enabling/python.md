@@ -19,7 +19,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
 ## Installation
 
 
-1. Install or upgrade your Agent to version [7.41.1][2]+. 
+1. Install or upgrade your Agent to version [7.41.1][2]+.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Install `ddtrace`, which provides both tracing and Dynamic Instrumentation:
@@ -28,7 +28,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
    pip install ddtrace
    ```
 
-   **Note**: Dynamic Instrumentation is available in the `ddtrace` library version 1.5 and higher.
+   **Note**: Dynamic Instrumentation is available in the `ddtrace` library version 1.7.5 and higher.
 
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
 {{< tabs >}}

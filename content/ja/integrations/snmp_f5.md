@@ -17,10 +17,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- notification
 - ネットワーク
-- autodiscovery
+- notification
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_f5/README.md
@@ -39,19 +37,17 @@ public_title: F5 Networks
 short_description: F5 ネットワークデバイスから SNMP メトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Notification
   - Category::Network
-  - Category::Autodiscovery
+  - Category::Notification
   - Category::SNMP
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: F5 ネットワークデバイスから SNMP メトリクスを収集
   media: []

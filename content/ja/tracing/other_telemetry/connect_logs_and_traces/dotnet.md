@@ -32,7 +32,13 @@ type: multi-code-lang
 - [NLog][4]
 - [Microsoft.Extensions.Logging][5] (v1.28.6 で追加)
 
-## はじめに
+## ログ収集の構成
+
+ログパイプラインがログファイルをパースできるように、Datadog Agent でログ収集が構成され、追跡する指定ファイルの [Logs Agent の構成][15]が `source: csharp` に設定されていることを確認します。詳細は、[C# ログ収集][7]を参照してください。`source` が `csharp` 以外の値に設定されている場合、相関を正しく動作させるために、適切なログ処理パイプラインに[トレースリマッパー][8]を追加する必要があるかもしれません。
+
+<div class="alert alert-warning"><strong>注:</strong> 自動ログ挿入は、JSON でフォーマット化されたログのみに機能します。また、カスタムパースルールを使用することもできます。</div>
+
+## ログへの挿入の構成
 
 ログメッセージに相関関係のある識別子を挿入するには、お使いのロギングライブラリの指示に従ってください。
 
@@ -324,12 +330,6 @@ BeginScope を使用して、以下のログプロバイダーの構造化され
 - Serilog: [ILogger.BeginScope() のセマンティクス][12]
 - NLog: [Microsoft Extension Logging による NLog プロパティ][13]
 - log4net: [BeginScope の使用][14]
-
-## ログ収集の構成
-
-ログパイプラインがログファイルをパースできるように、Datadog Agent でログ収集が構成され、追跡する指定ファイルの [Logs Agent の構成][15]が `source: csharp` に設定されていることを確認します。詳細は、[C# ログ収集][7]を参照してください。`source` が `csharp` 以外の値に設定されている場合、相関を正しく動作させるために、適切なログ処理パイプラインに[トレースリマッパー][8]を追加する必要があるかもしれません。
-
-<div class="alert alert-warning"><strong>注:</strong> 自動ログ挿入は、JSON でフォーマット化されたログのみに機能します。また、カスタムパースルールを使用することもできます。</div>
 
 ## {{< partial name="whats-next/whats-next.html" >}}
 
