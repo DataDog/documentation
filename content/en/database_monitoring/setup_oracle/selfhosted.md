@@ -158,7 +158,7 @@ GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
 
 ## Install the Agent
 
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note that you must install the correct version to participate in the beta. Contact your Customer Success Manager for more information.
+To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note you must install the correct version to participate in the beta. Contact your Customer Success Manager for more information.
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
 
