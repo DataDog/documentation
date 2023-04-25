@@ -1,7 +1,9 @@
 ---
 title: Setting Up Database Monitoring for self-hosted Oracle
 kind: documentation
-description: Install and configure Database Monitoring for self-hosted SQL Server
+description: Install and configure Database Monitoring for Self-Hosted SQL Server
+private: true
+is_beta: true
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
@@ -14,15 +16,15 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to get the required agent build and installation directions.
+The features described on this page are in private beta. Contact your Customer Success Manager for information on the required Agent build and installation instructions.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues quickly.
 
-Do the following steps to enable Database Monitoring with your database:
+Complete the following steps to enable Database Monitoring with your database:
 
-1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
+1. [Grant the Agent access to the database](#grant-the-agent-access).
+2. [Install the Agent](#install-the-agent).
 
 ## Before you begin
 
@@ -30,7 +32,7 @@ Supported Oracle versions
 : 19c, 21c
 
 Supported Agent versions
-: Please contact your Customer Success Manager to get agent installation directions for the beta.
+: For more information on the required Agent build, contact your Customer Success Manager.
 
 ## Grant the Agent access
 
@@ -52,7 +54,7 @@ grant select on v_$instance to c##datadog ;
 grant select on dba_feature_usage_statistics to c##datadog ;
 ```
 
-Create a new `view`, and give the agent user access to it:
+Create a new `view`, and give the Agent user access to it:
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
@@ -145,7 +147,7 @@ WHERE
 GRANT SELECT ON dd_session TO c##datadog ;
 ```
 
-Grant additional permissions if you wish to use the basic oracle integration as well:
+Grant additional permissions if you wish to use the basic Oracle integration as well:
 
 ```SQL
 GRANT CREATE SESSION TO c##datadog CONTAINER=ALL;
@@ -156,7 +158,7 @@ GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
 
 ## Install the Agent
 
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. In order to install the correct version to participate in the beta, please contact your Customer Success Manager.
+To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note that you must install the correct version to participate in the beta. Contact your Customer Success Manager for more information.
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
 
@@ -173,7 +175,7 @@ instances:
       - 'env:<CUSTOM_ENV>'
 ```
 
-Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] on how these tags are used throughout Datadog.
+Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] to learn more about how these tags are used in Datadog.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 

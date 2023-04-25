@@ -3,6 +3,8 @@ title: Setting up Oracle
 kind: documentation
 description: Setting up Database Monitoring on an Oracle database
 disable_sidebar: true
+private: true
+is_beta: true
 ---
 
 {{< site-region region="gov" >}}
@@ -10,7 +12,7 @@ disable_sidebar: true
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to get the required agent build and installation directions.
+The features described on this page are in private beta. Contact your Customer Success Manager for information on the required Agent build and installation instructions.
 </div>
 
 ### Oracle versions supported
