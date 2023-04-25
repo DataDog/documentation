@@ -38,7 +38,7 @@ If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup your Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commands & Options</u>: List of all commands and options available for the Cluster Agent.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Cluster Checks</u>: Cluster checks provide the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Cluster Checks</u>: Cluster checks provide the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes services.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>Endpoint Checks</u>: Endpoint checks extend cluster checks to monitor any endpoint behind cluster services.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Admission Controller</u>: Configure the Admission Controller for simplified application Pod configuration.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}

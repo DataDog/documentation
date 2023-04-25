@@ -9,12 +9,10 @@ author:
   name: Embrace
   support_email: support@embrace.io
 categories:
-- モニタリング
-- network
-- 例外
-- メトリクス
-- アラート設定
 - 問題追跡
+- メトリクス
+- モバイル
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md
 display_on_public_website: true
@@ -32,21 +30,19 @@ public_title: Embrace Mobile
 short_description: iOS、Android、React Native、Unity のためのモバイル可観測性
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
-  - Category::Metrics
-  - Category::Alerting
   - Category::Issue Tracking
+  - Category::Metrics
+  - Category::Mobile
+  - Category::Network
   - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: iOS、Android、React Native、Unity のためのモバイル可観測性
   media:

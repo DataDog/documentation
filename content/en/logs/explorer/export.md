@@ -7,14 +7,16 @@ aliases:
 further_reading:
     - link: 'logs/explorer/search'
       tag: 'Documentation'
-      text: 'Filter logs'
-    - link: 'logs/explorer/group'
+      text: 'Learn how to filter logs'
+    - link: 'logs/explorer/analytics'
       tag: 'Documentation'
-      text: 'Group queried logs'
+      text: 'Learn how to group logs'
     - link: 'logs/explorer/visualize'
       tag: 'Documentation'
       text: 'Create visualizations from logs'
 ---
+
+## Overview
 
 At any moment, and depending on your current aggregation, **export** your log exploration as a:
 
@@ -23,7 +25,7 @@ At any moment, and depending on your current aggregation, **export** your log ex
 - [**Monitor**][3] to trigger alerts on predefined thresholds.
 - [**Metric**][4] to aggregate your logs into long term KPIs, as they are ingested in Datadog.
 - **cURL command** to test your queries in the Log Explorer and then build custom reports using [Datadog APIs][5].
-- **CSV** (for individual logs and transactions). You can export up to 5,000 logs at once for individual logs, 500 for Transactions.
+- **CSV** (for individual logs and transactions). You can export up to 100,000 logs at once for individual logs, 300 for Patterns, and 500 for Transactions.
 - **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][6] available for this feature.
 
 {{< img src="logs/explorer/export2.png" alt="Search Filter" style="width:100%;" >}}
@@ -31,6 +33,8 @@ At any moment, and depending on your current aggregation, **export** your log ex
 You can also export your Log Explorer view to reuse later or in different contexts. For example, download a List view or Table view in a CSV file to do offline processing of your logs or share the results of your query with your teammates.
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

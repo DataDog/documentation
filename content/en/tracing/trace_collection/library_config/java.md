@@ -11,6 +11,9 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
+    - link: "/tracing/trace_collection/trace_context_propagation/java/"
+      tag: "Documentation"
+      text: "Propagating trace context with headers"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -19,7 +22,7 @@ All configuration options below have system property and environment variable eq
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
 
-Note: When using the Java tracer’s system properties, make sure that they are listed before `-jar` so they get read in as JVM options.
+Note: When using the Java tracer's system properties, make sure that they are listed before `-jar` so they get read in as JVM options.
 
 
 `dd.service`
@@ -30,7 +33,7 @@ The name of a set of processes that do the same job. Used for grouping stats for
 `dd.tags`
 : **Environment Variable**: `DD_TAGS`<br>
 **Default**: `null`<br>
-**Example**: `layer:api,team:intake`<br>
+**Example**: `layer:api,team:intake,key:value`<br>
 A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it overrides any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
 
 `dd.env`
@@ -390,19 +393,9 @@ Would produce the following result:
 {{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example"  >}}
 
 See the [Java integration documentation][12] to learn more about Java metrics collection with JMX fetch.
-
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][13] and [W3C (TraceParent)][14] header extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The Java Tracer supports the following styles:
-
-- Datadog: `datadog`
-- B3 Multi Header: `b3multi` (`b3` alias is deprecated)
-- W3C Trace Context: `tracecontext` (Available since 1.11.0)
-- B3 Single Header: `b3 single header`
+For information about valid values and using the following configuration options, see [Propagating Java Trace Context][13].
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -424,9 +417,7 @@ Available since version 1.9.0
 
 #### Deprecated extraction and injection settings
 
-These extraction and and injection settings are deprecated since verision 1.9.0.
-
-- B3: `b3` (both B3 multi header and B3 single header)
+These extraction and and injection settings for `b3` (both B3 multi header and B3 single header) are deprecated since version 1.9.0.
 
 `dd.propagation.style.inject`
 : **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>
@@ -456,5 +447,4 @@ Deprecated since version 1.9.0
 [10]: /agent/amazon_ecs/#create-an-ecs-task
 [11]: /tracing/compatibility_requirements/java#disabling-integrations
 [12]: /integrations/java/?tab=host#metric-collection
-[13]: https://github.com/openzipkin/b3-propagation
-[14]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /tracing/trace_collection/trace_context_propagation/java/

@@ -126,7 +126,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-Datadog's module doesn’t support SUSE.
+Datadog's module doesn't support SUSE.
 
 {{% /tab %}}
 {{% tab "Ansible" %}}

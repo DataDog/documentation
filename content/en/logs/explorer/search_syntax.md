@@ -3,14 +3,12 @@ title: Log Search Syntax
 kind: documentation
 description: "Search through all of your logs."
 aliases:
-    - /logs/search
     - /logs/search-syntax
-    - /logs/explorer/search/
     - /logs/search_syntax/
 further_reading:
 - link: "/logs/explorer/#visualize"
   tag: "Documentation"
-  text: "Perform Log Analytics"
+  text: "Learn how to visualize logs"
 - link: "/logs/explorer/#patterns"
   tag: "Documentation"
   text: "Detect patterns inside your logs"
@@ -19,7 +17,7 @@ further_reading:
   text: "Learn how to process your logs"
 - link: "/logs/explorer/saved_views/"
   tag: "Documentation"
-  text: "Automatically configure your Log Explorer"
+  text: "Learn about Saved Views"
 ---
 
 ## Overview
@@ -44,17 +42,21 @@ To combine multiple terms into a complex query, you can use any of the following
 ## Autocomplete
 
 Use the search bar's autocomplete feature to complete your query using:
-    - Existing keys and values in your logs
-    - Recent searches per user
-    - Saved views
+- Existing keys and values in your logs
+- Your recent searches (recent searches from other users are not displayed)
+- Saved views
 
 {{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
 
 Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example, if you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
 
-## Escaping of special characters
+## Escape special characters and spaces
 
-The following characters are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and `/` require escaping with the `\` character. You can’t search for special characters in a log message. However, you can search for special characters when they’re inside of an attribute. To search for special characters, parse them into an attribute with the [grok parser][1], and then search for logs that contain the attribute.
+The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
+
+You cannot search for special characters in a log message. You can search for special characters when they are inside of an attribute.
+
+To search for special characters, parse them into an attribute with the [Grok Parser][1], and search for logs that contain that attribute.
 
 
 ## Attributes search

@@ -2,16 +2,11 @@
 title: Build Workflows
 kind: documentation
 disable_toc: false
-is_beta: true
 further_reading:
 - link: "/workflows/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}}
 
 You can create workflows or edit existing workflows from the [**Workflows** page][1] in Datadog. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed.
 - Hover over a workflow for the options to delete or clone the workflow.
@@ -130,16 +125,27 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 
 If you're not sure what variable you're looking for, Datadog suggests existing steps as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
 
-### Trigger variables
+### Input parameters
 
-You can pass trigger variables into a workflow as inputs. Workflows accept a JSON object of comma-separated key-value pairs. Access a trigger variable in workflow steps using the syntax `{{ Trigger.key }}`. For example, to access the trigger variable `{ "user": "Bits" }`, use ` {{ Trigger.user }}` in the step.
+Use input parameters to pass data into a workflow. You can use input parameters in workflows that:
+- are triggered manually, such as from a Dashboard.
+- use mention triggers, such as Monitors and Security Signal Notification Rules.
 
-- If you add a trigger variable that doesn't exist, the variable is automatically added as a workflow input.
-- If you're not sure what variable you're looking for, Datadog suggests existing steps as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
+To add an input parameter:
+1. Click on the workflow canvas.
+1. Click the **+** icon next to **Input Parameters**.
+1. Add a parameter name, data type, and description for the parameter. The display name is generated automatically from the parameter name. Check the **Use custom display name** box to customize it. The display name is a human readable name for the parameter, while the parameter name is used to reference the parameter in your workflow steps.
+1. Optionally, add a default value for the parameter. If you add a default value, the parameter is optional at runtime.
 
-{{< img src="workflows/add-trigger-variable.mp4" alt="Adding a trigger variable to a step automatically adds it to the workflow" video="true" >}}
+To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-For more information on triggering workflows, see [Trigger a workflow][2].
+{{< img src="workflows/input-parameter.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
+
+The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
+
+You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][2].
+
+If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
 
 ### Source object variables
 

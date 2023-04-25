@@ -56,10 +56,10 @@ After a few days of usage, you typically get your first security signals. If you
 
 {{< code-block lang="sh" >}}
 for ((i=1;i<=200;i++)); do
-# Target existing service’s routes
+# Target existing service's routes
 curl https://your-application-url/<EXISTING ROUTE> -A
 'dd-test-scanner-log';
-# Target non existing service’s routes
+# Target non existing service's routes
 curl https://your-application-url/<NON-EXISTING ROUTE> -A
 'dd-test-scanner-log';
 done{{< /code-block >}}
@@ -84,13 +84,13 @@ Over the next few days:
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
 [2]: /security/application_security/enabling/
-[3]: /security/application_security/threats/setup_and_configure/#configuring-a-client-ip-header
+[3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /security/application_security/how-appsec-works/
 [5]: /security/application_security/threats/add-user-info/
 [6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal&viz=stream&start=1674824351640&end=1675429151640&paused=false
 [7]: https://app.datadoghq.com/security/appsec
 [8]: https://app.datadoghq.com/security/appsec/traces
-[9]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
+[9]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [10]: https://app.datadoghq.com/security/appsec/reports-configuration
 [11]: https://app.datadoghq.com/security/configuration/notification-rules
 [12]: /security/notifications/rules/

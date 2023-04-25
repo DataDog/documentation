@@ -7,13 +7,13 @@ aliases:
 further_reading:
     - link: 'logs/explorer/search'
       tag: 'Documentation'
-      text: 'Filter logs'
-    - link: 'logs/explorer/group'
+      text: 'Learn how to filter logs'
+    - link: 'logs/explorer/analytics'
       tag: 'Documentation'
-      text: 'Group queried logs'
+      text: 'Learn how to group logs'
     - link: '/logs/explorer/export'
       tag: 'Documentation'
-      text: 'Export Log Explorer views'
+      text: 'Export views from the Log Explorer'
 ---
 
 ## Overview

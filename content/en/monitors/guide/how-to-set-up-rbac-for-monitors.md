@@ -157,7 +157,7 @@ You are a user with the [Datadog Admin Role][2] or are the creator of the monito
 
 ```
 This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
-If there is no specific change you want to apply to this monitor’s permissions, click Save. If you want to update this monitor’s permissions, read this doc.
+If there is no specific change you want to apply to this monitor's permissions, click Save. If you want to update this monitor's permissions, read this doc.
 ```
 
 On save, your monitor's definition will be updated to all roles with Admin permissions.

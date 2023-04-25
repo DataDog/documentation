@@ -9,7 +9,7 @@ title: Google Cloud Run
 
 ## 概要
 
-Google Cloud Run は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[GCP インテグレーション][1]を通して Cloud Run のモニタリングとログ収集を提供しています。また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Cloud Run アプリケーションをインスツルメントするソリューションも提供しています。
+Google Cloud Run は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Google Cloud インテグレーション][1]を通して Cloud Run のモニタリングとログ収集を提供しています。また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Cloud Run アプリケーションをインスツルメントするソリューションも提供しています。
 
   <div class="alert alert-warning">この機能は公開ベータ版です。<a href="https://forms.gle/HSiDGnTPvDvbzDAQA">フィードバックフォーム</a>、または標準的なサポートチャンネルを通じてフィードバックを提供することができます。ベータ期間中は、Cloud Run モニタリングと APM トレースは直接費用なしで利用できます。既存の APM のお客様は、スパンの取り込みとボリュームのコストが増加する可能性があります。</div>
 
@@ -19,12 +19,16 @@ Google Cloud Run は、コンテナベースのアプリケーションをデプ
 
 [Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
 
-### 1. アプリケーションのインスツルメンテーション
+### 1. Agent のインストール
+
+Dockerfile またはビルドパックを使用して Agent をインストールすることができます。ビルドパックを使用する場合、最初に[トレーシングライブラリのインストール](#install-tracing-library)が必要です。
+
+#### Dockerfile で Agent をインストールする
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
 
-#### Dockerfile で Agent をインストールする
+
 
 Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントすることができます。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
@@ -44,20 +48,8 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Go トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-
-[シンプルな Go アプリケーションのサンプルコード][1]。
-
-
-[1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
-
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
-
-#### Dockerfile で Agent をインストールする
 
 Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
@@ -79,18 +71,9 @@ ENTRYPOINT ["/app/datadog-init"]
 # Datadog トレースライブラリによって起動されるエントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
 CMD ["ddtrace-run", "python", "app.py"]
 ```
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Python トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-[シンプルな Python アプリケーションのサンプルコード][1]。
-
-[1]: https://github.com/DataDog/crpb/tree/main/python
-[2]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-
-#### Dockerfile で Agent をインストールする
 
 Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
@@ -117,18 +100,9 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Node トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-[シンプルな Node.js アプリケーションのサンプルコード][1]。
-
-[1]: https://github.com/DataDog/crpb/tree/main/js
-[2]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
-
-#### Dockerfile で Agent をインストールする
 
 Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
@@ -149,18 +123,8 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-#### トレーシングライブラリをインストールする
-[以下の手順][2]に従って、アプリケーションに Java トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
-
-[シンプルな Java アプリケーションのサンプルコード][1]。
-
-[1]: https://github.com/DataDog/crpb/tree/main/java
-[2]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
-
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-
-#### Dockerfile で Agent をインストールする
 
 Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
@@ -181,16 +145,8 @@ CMD ["dotnet", "helloworld.dll"]
 
 ```
 
-#### トレーシングライブラリをインストールする
-指示に従って、[.NET Core トレーシングライブラリ][1]と [.NET Framework トレーシングライブラリ][2]のインストールと構成を行います。
-
-[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
-[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
-
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
-
-#### Dockerfile で Agent をインストールする
 
 Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
@@ -210,7 +166,83 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更してください)
 ```
 
-#### トレーシングライブラリをインストールする
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+#### ビルドパックで Agent をインストールする
+
+[`Pack Buildpacks`][3] は、Dockerfile を使用せずにコンテナをパッケージ化する便利な方法を提供します。この例では、Google Cloud コンテナレジストリと Datadog サーバーレスビルドパックを使用しています。
+
+**注**: ビルドパックを実行する前に、お使いの言語の[トレーシングライブラリ](#install-tracing-library)をインストールしてください。
+
+以下のコマンドを実行して、アプリケーションを構築します。
+
+   ```shell
+   pack build --builder=gcr.io/buildpacks/builder \
+   --buildpack from=builder \
+   --buildpack datadog/serverless-buildpack:latest \
+   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+   ```
+
+**注**: Alpine とは互換性がありません。
+
+### 2. トレーシングライブラリのインストール {#install-tracing-library}
+
+ビルドパックを使用した場合は、[アプリケーションの構成](#3-configure-your-application)まで読み飛ばすことができます。
+
+{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
+{{< programming-lang lang="go" >}}
+[こちらの手順][2]に従って、アプリケーションに Go トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信してください。
+
+
+[シンプルな Go アプリケーションのサンプルコード][1]。
+
+
+[1]: https://github.com/DataDog/crpb/tree/main/go
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+[以下の手順][2]に従って、アプリケーションに Python トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Python アプリケーションのサンプルコード][1]。
+
+[1]: https://github.com/DataDog/crpb/tree/main/python
+[2]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+[以下の手順][2]に従って、アプリケーションに Node トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Node.js アプリケーションのサンプルコード][1]。
+
+[1]: https://github.com/DataDog/crpb/tree/main/js
+[2]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+[以下の手順][2]に従って、アプリケーションに Java トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Java アプリケーションのサンプルコード][1]。
+
+[1]: https://github.com/DataDog/crpb/tree/main/java
+[2]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+#### 
+
+指示に従って、[.NET Core トレーシングライブラリ][1]と [.NET Framework トレーシングライブラリ][2]のインストールと構成を行います。
+
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
 
 [以下の手順][2]に従って、アプリケーションに Ruby トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
 
@@ -222,27 +254,10 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更し�
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### 1.b ビルドパックを使用したインスツルメンテーション
-
-[`Pack Buildpacks`][3] は、Dockerfile を使用せずにコンテナをパッケージ化する便利な方法を提供します。この例では、GCP コンテナレジストリと Datadog サーバーレスビルドパックを使用しています。
-
-**注**: ビルドパックを実行する前に、お使いの言語の[トレーシングライブラリ][2]をインストールするよう、指示に従ってください。
-
-以下のコマンドを実行して、アプリケーションを構築します。
-
-   ```shell
-   pack build --builder=gcr.io/buildpacks/builder \
-   --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack \
-   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-   ```
-
-**注**: Alpine とは互換性がありません。
-
-### 2. アプリケーションを構成する
+### 3. アプリケーションを構成する
 
 コンテナが構築され、レジストリにプッシュされたら、最後の手順として Datadog Agent 用に必要な環境変数を設定します。
-- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[GCP シークレット][10]に設定する必要があります。
+- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Google Cloud シークレット][10]に設定する必要があります。
 - `DD_SITE`: Datadog のエンドポイントと Web サイト。このページの右側で自分のサイトを選択します。あなたのサイトは {{< region-param key="dd_site" code="true" >}} です。
 - `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします
 
@@ -268,7 +283,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 - **高度なトレース:** Datadog Agent は、一般的なフレームワーク向けに基本的なトレース機能をすでにいくつか提供しています。さらに詳しい情報については、[高度なトレースガイド][2]に従ってください。
 
-- **ログ:** [GCP インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
+- **ログ:** [Google Cloud インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
 
 - **カスタムメトリクス:** [DogStatsd クライアント][4]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][9]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][11]の両方で `avg`を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
 

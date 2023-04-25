@@ -8,10 +8,8 @@ author:
   sales_email: sales@apptrail.com
   support_email: support@apptrail.com
 categories:
-- セキュリティ
 - ログの収集
-- モニタリング
-- アラート設定
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md
 display_on_public_website: true
@@ -29,18 +27,16 @@ public_title: Apptrail
 short_description: Apptrail を使用して、すべての SaaS 監査ログを監視、分析、および警告する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
   - Category::Log Collection
-  - Category::Monitoring
-  - Category::Alerting
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Apptrail を使用して、すべての SaaS 監査ログを監視、分析、および警告する
   media:

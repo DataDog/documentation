@@ -74,7 +74,7 @@ To learn more, see the [search syntax][1] documentation.
 
 {{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
 
-Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source :
+Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
 * **Sent metrics**: measure the value of something from the _source_ to the _destination_ from the source's perspective.
 * **Received metrics**: measure the value of something from the _destination_ to the _source_ from the source's perspective.
@@ -108,7 +108,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 
 ### Cloud service autodetection
 
-If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or GCP dependency to pinpoint latency, assess database performance, and visualize your network more completely.
+If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or Google Cloud dependency to pinpoint latency, assess database performance, and visualize your network more completely.
 
 {{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
 
@@ -121,9 +121,54 @@ For instance, you can
 NPM automatically maps
 
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
-- API calls to AppEngine, Google DNS, Gmail, and other [GCP services][4].
+- API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
 
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
+
+### Cloud service enhanced resolution
+If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers only have user-defined tags. For AWS, Datadog applies the tags defined below in addition to the user-defined tags.
+
+ #### Amazon Web Services
+ {{< tabs >}}
+ {{% tab "Loadbalancers" %}}
+ - name
+ - loadbalancer
+ - load_balancer_arn
+ - dns_name (format loadbalancer/dns:)
+ - region
+ - account_id
+ - scheme
+ - custom (user-defined) tags applied to AWS Loadbalancers
+ {{% /tab %}}
+
+ {{% tab "NAT Gateways" %}}
+ - gateway_id
+ - gateway_type
+ - aws_nat_gateway_id
+ - aws_nat_gateway_public_ip
+ - aws_account
+ - availability-zone
+ - region
+ - custom (user) tags applied to AWS Nat Gateways
+ {{% /tab %}}
+
+ {{% tab "VPC Internet Gateway" %}}
+ - gateway_id
+ - gateway_type
+ - aws_internet_gateway_id
+ - aws_account
+ - region
+ - custom (user) tags applied to VPC Internet Gateways
+ {{% /tab %}}
+
+{{% tab "VPC Endpoint" %}}
+ - gateway_id
+ - gateway_type
+ - aws_vpc_endpoint_id
+ - custom (user) tags applied to VPC Internet Endpoints
+ {{% /tab %}}
+
+ {{< /tabs >}}
 
 ### Domain resolution
 
@@ -147,7 +192,7 @@ NPM users may configure their networks to have overlapping IP spaces. For instan
 
 To correctly classify traffic destinations, NPM uses the concept of a network ID, which is represented as a tag. A network ID is an alphanumeric identifier for a set of IP addresses that can communicate with one another. When an IP address mapping to several hosts with different network IDs is detected, this identifier is used to determine the particular host network traffic is going to or coming from.
 
-In AWS and GCP, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
+In AWS and Google Cloud, the network ID is automatically set to the VPC ID. For other environments, the network ID may be set manually, either in `datadog.yaml` as shown below, or by adding the `DD_NETWORK_ID` to the process and core Agent containers.
 
   ```yaml
   network:
@@ -211,6 +256,12 @@ The top of the sidepanel displays common source and destination tags shared by t
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
+### Security
+
+The **Security** tab highlights potential network threats and findings detected by [Cloud Workload Security][6] and [Cloud Security Posture Management][7]. These signals are generated when Datadog detects network activity that matches a [detection or compliance rule][8], or if there are other threats and misconfigurations related to the selected network flow.
+
+<div class="alert alert-warning">Network threat detections is in private beta. Fill out this <a href="https://forms.gle/zjfbxB7Cqjxj5R5h7">form</a> to request access.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -220,3 +271,7 @@ The top of the sidepanel displays common source and destination tags shared by t
 [3]: /network_monitoring/performance/guide/aws_supported_services/
 [4]: /network_monitoring/performance/guide/gcp_supported_services/
 [5]: /logs/explorer/saved_views/
+[6]: /security/cloud_workload_security/
+[7]: /security/cspm/
+[8]: /security/detection_rules/
+[9]: /network_monitoring/performance/setup/#enhanced-resolution

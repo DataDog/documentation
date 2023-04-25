@@ -65,7 +65,7 @@ All services can be found in the [Service List][4] and visually represented on t
 {{< img src="tracing/visualization/service_page.mp4" video="true" alt="service page" >}}
 
 <div class="alert alert-info">
-Don’t see the HTTP endpoints you were expecting on the Service page? In APM, endpoints are connected to a service by more than the service name. It is also done with the `span.name` of the entry-point span of the trace. For example, on the web-store service above, `web.request` is the entry-point span. More info on this <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">here</a>.
+Don't see the HTTP endpoints you were expecting on the Service page? In APM, endpoints are connected to a service by more than the service name. It is also done with the `span.name` of the entry-point span of the trace. For example, on the web-store service above, `web.request` is the entry-point span. More info on this <a href="/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/">here</a>.
 </div>
 
 ## Resources
@@ -184,7 +184,7 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 Some [Tracing Application Metrics][15] are tagged with `sublayer_service` and `sublayer_type` so that you can see the execution time for individual services within a trace.
 
-Sublayer metrics are only available if a service has downstream dependencies. 
+Sublayer metrics are only available if a service has downstream dependencies and are calculated post-sampling. 
 
 ## Execution time
 

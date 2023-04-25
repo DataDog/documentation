@@ -23,7 +23,7 @@ Each item listed in the Error Tracking Explorer is an issue and contains high-le
 
 -   The error type and the error message
 -   The path to the file in which underlying errors are fired
--   Important information about the issue’s lifetime:
+-   Important information about the issue's lifetime:
     -   When it was first and last seen
     -   Graph of occurrences over time
     -   Number of occurrences in the selected time period
