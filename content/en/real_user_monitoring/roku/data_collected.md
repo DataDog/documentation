@@ -42,7 +42,7 @@ The following diagram illustrates the RUM event hierarchy:
 
 ## Default attributes
 
-RUM collects common attributes for all events and attributes specific to each event listed below automatically. You can also choose to enrich your user session data by tracking [additional events][2] or by [adding custom attributes][3] to default events specific to your application monitoring and business analytics needs.
+RUM collects common attributes for all events and attributes specific to each event listed below automatically. You can also choose to enrich your user session data by tracking [additional events][2] or by [adding custom attributes][2] to default events specific to your application monitoring and business analytics needs.
 
 ### Common core attributes
 
@@ -238,7 +238,6 @@ Before data is uploaded to Datadog, it is stored in cleartext in your channel's 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /real_user_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[3]: /real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /real_user_monitoring/roku/advanced_configuration/#identifying-your-users
 [6]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs
