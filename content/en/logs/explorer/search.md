@@ -67,7 +67,7 @@ You can create Saved Views in the Log Explorer to save queries and additional co
 
 Syntax highlighting clearly differentiates input types, such as keys (e.g. an attribute such as `@merchant_name`), values (e.g. the name of a particular merchant), free text (e.g. keywords in a log messages such as `responded 500`), and control characters (e.g. parantheses and colons). Status attributes are also highlighted in colors representing the status, such as red for `error` and blue for `info`.
 
-{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The logs search bar showing `service:auth-dotnet status:error "500" ("check-token" OR "create-user")` as the query with differentiable syntax highlighting" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query with differentiable syntax highlighting" style="width:80%;">}}
 
 Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example,
 - If you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
@@ -82,7 +82,7 @@ To start searching for logs and customizing the time frame in the Log Explorer, 
 
 The user-friendly search mode contains autocomplete and syntax highlighting as mentioned. Toggle the button to the right of the search bar to search in raw mode, where syntax highlighting, search pills styling, and autocomplete are removed:
 
-{{< img src="logs/explorer/search/log_raw_search_mode.png" alt="The logs search bar showing `service:auth-dotnet status:error "500" ("check-token" OR "create-user")` as the query in raw search mode" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_raw_search_mode.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query in raw search mode" style="width:80%;">}}
 
 You can interact with the search bar with your mouse, as well as by using keyboard interactions such as:
 - CMD-A for selecting
