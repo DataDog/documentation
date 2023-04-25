@@ -14,8 +14,13 @@ jobs:
       id: changed_files
       uses: tj-actions/changed-files@v35
       with:
-        json: 'true'
+        separator: ','
         include_all_old_new_renamed_files: true
+
+    - name: Print output
+      with: 
+       files: ${{ steps.changed_files.outputs.all_changed_files }};
+      run: echo $files
     
     - name: Vale
       uses: errata-ai/vale-action@reviewdog
