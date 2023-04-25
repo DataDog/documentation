@@ -33,7 +33,7 @@ If you have [APM][6] set up already, navigate to [**Integrations** > **Link Sour
 
 ## Link active commits
 
-You can link active commits by either [**tagging your telemetry**](#tag-your-telemetry) or [**embedding git information**](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifact. 
+You can link active commits by either [tagging your telemetry](#tag-your-telemetry) or [embedding git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifact. 
 
 ### Tag your telemetry
 
