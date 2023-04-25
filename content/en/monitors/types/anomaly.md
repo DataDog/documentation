@@ -176,7 +176,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : The timeframe to be checked for anomalies (for example, `last_5m`, `last_1h`).
 
 `interval`
-: A positive integer representing the number of seconds of the sampling interval of the query. It should be smaller or equal to a fifth of the `alert_window` duration.
+: A positive integer representing the number of seconds in the rollup interval. It should be smaller or equal to a fifth of the `alert_window` duration.
 
 `count_default_zero`
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
