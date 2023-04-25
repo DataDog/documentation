@@ -39,7 +39,7 @@ kind: integration
 manifest_version: 2.0.0
 name: bottomline_recordandreplay
 oauth: {}
-public_title: 'Bottomline の Record and Replay: Mainframe インテグレーション'
+public_title: 'Bottomline の Record and Replay: Mainframe'
 short_description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
 supported_os:
 - linux
@@ -69,7 +69,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: 'Bottomline の Record and Replay: Mainframe インテグレーション'
+  title: 'Bottomline の Record and Replay: Mainframe'
 ---
 
 

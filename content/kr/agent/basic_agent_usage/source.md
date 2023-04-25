@@ -11,6 +11,12 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: 트레이스 수집
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: 설명서
+  text: 에이전트 아키텍처 자세히 알아보기
+- link: /agent/guide/network#configure-ports
+  tag: 설명서
+  text: 인바운드 포트 구성
 kind: 설명서
 platform: 소스
 title: 소스 설치용 Agent의 기본 사용법
@@ -82,7 +88,7 @@ Agent 설정 파일과 폴더 위치는 다음과 같습니다.
 
 [Agent 트러블슈팅 가이드][2]를 참조하세요.
 
-## 참고 자료
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

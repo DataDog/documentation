@@ -1,4 +1,9 @@
 ---
+cascade:
+  algolia:
+    category: 지침
+    rank: 20
+    subcategory: 모니터 가이드
 disable_toc: true
 kind: 가이드
 private: true
