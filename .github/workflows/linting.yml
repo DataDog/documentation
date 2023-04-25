@@ -7,11 +7,19 @@ jobs:
     timeout-minutes: 5
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Find changed files
+      id: changed_files
+      uses: tj-actions/changed-files@v35
+      with:
+        include_all_old_new_renamed_files: true
+    
     - name: Vale
       uses: errata-ai/vale-action@reviewdog
       with:
         reporter: github-pr-check
         fail_on_error: true
-        filter_mode: added
+        filter_mode: diff_context
+        files: ${{ steps.changed-files.outputs.all_changed_files }};
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
