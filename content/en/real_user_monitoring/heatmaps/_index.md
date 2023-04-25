@@ -16,18 +16,9 @@ A heatmap (or heat map) is a visualization of your user's Session Replay data, w
 
 To get started with heatmaps:
 
-- You must be on the latest version of the SDK (v4.20.0 or later)
+- You must be on the latest version of the SDK (v4.40.0 or later)
 - Enable [Session Replay][1].
 - Set`trackUserInteractions: true` in the SDK initialization to enable action tracking.
-- While heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
-
-```json
-datadogRum.init({
-    ...
-    trackUserInteractions: true,
-    enableExperimentalFeatures: ['clickmap']
-})
-```
 
 ### Getting started
 

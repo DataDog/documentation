@@ -24,7 +24,7 @@ type: multi-code-lang
 
 <div class="alert alert-info">AWS Lambda の ASM サポートはベータ版です。脅威の検出は Lambda の拡張機能を利用することで行われます。</div>
 
-AWS Lambda で実行する関数を Datadog Application Security Management (ASM) で監視することができます。サーバーレス関数でサポートされる ASM の機能については、[セットアップと構成][4]を参照してください。
+AWS Lambda で実行する関数を Datadog Application Security Management (ASM) で監視することができます。サーバーレス関数でサポートされる ASM の機能については、[互換性][4]を参照してください。
 
 一般的に AWS Lambda に ASM を設定する場合、以下のような内容になります。
 
@@ -75,6 +75,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
 
 {{% tab "Custom" %}}
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Datadog トレーサーをインストールします。
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
@@ -109,6 +110,47 @@ Datadog Serverless Framework プラグインをインストールして構成す
    # arm64-based Lambda in AWS GovCloud regions
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
    ```
+   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Datadog トレーサーをインストールします。
+   - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
+     ```sh
+     # In AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:8
+     # In AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     ```
+   - **Go**: Go トレーサーはレイヤーに依存せず、通常の Go モジュールとして使用できます。以下で最新バージョンにアップグレードできます。
+     ```sh
+     go get -u github.com/DataDog/datadog-lambda-go
+     ```
+   - **.NET**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
+     ```sh
+     # x86-based Lambda in AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:6
+     # arm64-based Lambda in AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:6
+     # x86-based Lambda in AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     # arm64-based Lambda  in AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     ```
+2. 以下のいずれかの関数で ARN を使用して Lambda 関数のレイヤーを構成し、Datadog Lambda 拡張機能をインストールします。`<AWS_REGION>` は、`us-east-1` など有効な AWS リージョンに置き換えてください。
+   ```sh
+   # x86-based Lambda in AWS commercial regions
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:36
+   # arm64-based Lambda in AWS commercial regions
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:36
+   # x86-based Lambda in AWS GovCloud regions
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   # arm64-based Lambda in AWS GovCloud regions
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   ```
+
+   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
 
 3. 関数のデプロイ時に以下の環境変数を追加して、ASM を有効にします。
    ```yaml
@@ -128,7 +170,6 @@ Datadog Serverless Framework プラグインをインストールして構成す
    ```
 4. 関数を再デプロイして呼び出します。数分後、[ASM ビュー][3]に表示されます。
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
 {{% /tab %}}
@@ -147,8 +188,8 @@ Datadog Serverless Framework プラグインをインストールして構成す
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
-[2]: /ja/serverless/distributed_tracing/?tab=python
+[2]: /ja/serverless/distributed_tracing/
 [3]: https://app.datadoghq.com/security/appsec
-[4]: /ja/security/application_security/threats/setup_and_configure/?code-lang=serverless
+[4]: /ja/security/application_security/enabling/compatibility/serverless
 [5]: /ja/security/default_rules/security-scan-detected/
 [6]: /ja/serverless/libraries_integrations/plugin/

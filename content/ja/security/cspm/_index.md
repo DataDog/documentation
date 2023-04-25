@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - cspm
 aliases:
 - /ja/security_platform/cspm/
 kind: documentation
