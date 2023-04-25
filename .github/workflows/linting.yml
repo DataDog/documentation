@@ -18,14 +18,15 @@ jobs:
         include_all_old_new_renamed_files: true
 
     - name: Print output
-      run: echo ${{ steps.changed_files.outputs.all_changed_files }};
+      run: echo ${{ steps.changed_files.outputs.all_changed_files }}
     
     - name: Vale
       uses: errata-ai/vale-action@reviewdog
       with:
+        separator: ","
         reporter: github-pr-check
         fail_on_error: true
         filter_mode: diff_context
-        files: ${{ steps.changed_files.outputs.all_changed_files }};
+        files: ${{ steps.changed_files.outputs.all_changed_files }}
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
