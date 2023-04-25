@@ -1,5 +1,5 @@
 ---
-title: Compatible Semantic Tags
+title: Compatible semantic tags
 kind: guide
 private: true
 further_reading:
@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-For compatible series of data, Datadog automatically maps colors to meanings. When a compatible tag is detected, Datadog suggests the Semantic color palette. This automatically maps data to meaning-driven colors.
+For compatible series of data, Datadog can map colors to meaning. When a compatible tag is detected, Datadog suggests the Semantic color palette. This automatically maps data to meaning-driven colors.
 
 **Note**: Queries must be grouped with a single set of tags.
 
@@ -37,5 +37,5 @@ Let's look at an example of a query that uses both the `Status` and `Service` ta
 {{% semantic-color %}}
 
 ## Further reading
-`
+
 {{< partial name="whats-next/whats-next.html" >}}
