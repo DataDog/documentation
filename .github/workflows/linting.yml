@@ -14,7 +14,7 @@ jobs:
       id: changed_files
       uses: tj-actions/changed-files@v35
       with:
-        separator: ','
+        json: 'true'
         include_all_old_new_renamed_files: true
     
     - name: Vale
