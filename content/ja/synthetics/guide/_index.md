@@ -1,15 +1,15 @@
 ---
 aliases:
 - /ja/synthetics/faq/uptime-check-internal-website/
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: Synthetic モニタリングガイド
 disable_toc: true
-kind: guide
+kind: ガイド
 private: true
 title: Synthetic モニタリングガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: Synthetic モニタリングガイド
 ---
 
 {{< whatsnext desc="一般的なガイド:" >}}

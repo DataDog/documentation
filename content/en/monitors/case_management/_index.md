@@ -1,11 +1,15 @@
 ---
 title: Case Management
 kind: documentation
+further_reading:
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  tag: "blog"
+  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
 ## Overview
 
-Datadog Case Management provides a centralized place to track, triage, and troubleshoot issues. Create cases from alerts, security signals, and error-tracking issues that you want to investigate.
+Datadog Case Management provides a centralized place to track, triage, and troubleshoot issues. Create cases from alerts, security signals, and Error Tracking issues that you want to investigate.
 
 You can assign cases to users or teams, establishing clear lines of ownership that persist throughout the lifespan of the case. Populate your cases with graphs, logs, and other telemetry data from across Datadog alongside information from external tools, such as messaging and issue-tracking apps.
 
@@ -34,9 +38,13 @@ Make bulk edits to cases from the [Case Management page][1]:
 You can create or update cases from several locations in Datadog:
 - Monitors
 - Security signals
-- Error tracking
+- Error Tracking for Logs
 - Workflows
 - The Case Management page
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/

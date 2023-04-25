@@ -1,12 +1,13 @@
 ---
-kind: guide
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: 開発者ガイド
+disable_toc: true
+kind: ガイド
 private: true
 title: 開発者ガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: 開発者ガイド
 ---
 
 {{< whatsnext desc="一般:" >}}

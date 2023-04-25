@@ -56,6 +56,7 @@ Each of these event types has the following attributes attached by default, so y
 |------------------|--------|-----------------------------|
 | `type`     | string | The type of the event (for example, `view` or `resource`).             |
 | `application.id` | string | The Datadog application ID generated when you create a RUM application. |
+| `application.name` | string | The name of your Datadog application. |
 | `service`     | string | A service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking][1].             |
 
 ### View attributes
@@ -121,7 +122,7 @@ In addition to default attributes, you can add user-related data to all RUM even
 <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
-You can [enrich your RUM event data with feature flags][6] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
 
 ## Event-specific metrics and attributes
 
@@ -159,7 +160,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
 ### View timing metrics
-
+**Note**: View timing metrics include time that a page is open in the background.
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

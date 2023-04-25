@@ -43,7 +43,7 @@ Datadog の[クイックスタート手順][2]に従って、最高のエクス�
 
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
 {{% tab "コンテナ" %}}
@@ -55,19 +55,23 @@ Datadog の[クイックスタート手順][2]に従って、最高のエクス�
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. トレースクライアントは、デフォルトでは `localhost:8126` にトレースを送信します。これが Agent の正しいホストとポートでない場合、以下を実行して `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` 環境変数を設定してください。
+3. トレースクライアントは、デフォルトでは `localhost:8126` にトレースを送信します。これが Agent の正しいホストとポートでない場合、以下を実行して `DD_TRACE_AGENT_HOSTNAME` と `DD_TRACE_AGENT_PORT` 環境変数を設定してください。
 
     ```sh
-    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    DD_TRACE_AGENT_HOSTNAME=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
     ```
 
    Unix ドメインソケットを使用するには、URL 全体を一つの環境変数 `DD_TRACE_AGENT_URL` として指定します。
 
-    ```sh
-    DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
-    ```
+   別のソケット、ホスト、ポートが必要な場合は、`DD_TRACE_AGENT_URL` 環境変数または `DD_TRACE_AGENT_HOST` と `DD_TRACE_AGENT_PORT` 環境変数を使用します。いくつかの例を挙げます。
 
-{{< site-region region="us3,us5,eu,gov" >}}
+   ```sh
+   DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+   DD_TRACE_AGENT_URL=http://<HOSTNAME>:<PORT> node server
+   DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+   ```
+
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -84,14 +88,13 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{% tab "その他の環境" %}}
 
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の環境で利用できます。
+トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、他の環境で利用できます。
 
 その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
 
 [1]: /ja/agent/basic_agent_usage/heroku/#installation
 [2]: /ja/integrations/cloud_foundry/#trace-collection
 [3]: /ja/integrations/amazon_elasticbeanstalk/
-[4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
 {{% /tab %}}
@@ -101,6 +104,8 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 初期化のオプションについては、[トレーサー設定][3]をお読みください。
 
 ### アプリケーションをインスツルメントする
+
+<div class="alert alert-info">Kubernetes アプリケーション、または Linux ホストやコンテナ上のアプリケーションからトレースを収集する場合、以下の説明の代わりに、アプリケーションにトレーシングライブラリを挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local">ライブラリの挿入</a>をお読みください。</div>
 
 Agent のインストールが完了したら、以下の手順で Datadog のトレーシングライブラリを Node.js アプリケーションに追加します。
 
@@ -114,6 +119,7 @@ Agent のインストールが完了したら、以下の手順で Datadog の�
     npm install dd-trace@latest-node12
     ```
    ディストリビューションタグおよび Node.js のランタイムばージョンサポートについて詳しくは、[互換性要件][1] ページを参照してください。
+   ライブラリの以前のメジャーバージョン (0.x、1.x、2.x) から別のメジャーバージョン (2.x、3.x) にアップグレードする場合は、[移行ガイド][5]を読み、変更点を評価するようにしてください。
 
 2. コードまたはコマンドライン引数を使用して、トレーサーをインポートして初期化します。Node.js トレースライブラリは、他のモジュールの**前**にインポートして初期化する必要があります。
 
@@ -172,3 +178,4 @@ node --require dd-trace/init app.js
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /ja/tracing/trace_collection/library_config/nodejs/
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md

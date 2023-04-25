@@ -38,6 +38,7 @@ def get_csv_metrics(tempdir):
             if metric[0] not in t:
               if metric[0] != 'trace' and metric[0] != 'datadog':
                 t = t + (metric[0],)
+  print(f"Found {len(csv_metrics_list)} documented metrics.")
   return [csv_metrics, t]
 
 

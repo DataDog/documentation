@@ -55,6 +55,10 @@ Below the header of Cloud Security Posture Management signals are tabs with deta
 - `Findings` includes a list of each resource that has been evaluated by the rule.
 - `Related Issues` includes a list of other signals which contain the same group by values to assist with triaging the signal.
 
+### Workflows
+
+You can trigger a [Workflow][7] automatically from any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] for more information.
+
 ### Threat intelligence
 
 Datadog Cloud SIEM offers threat intelligence feeds curated by threat intelligence partners. These feeds are constantly updated to include data about known suspicious activity (for example, indicators of compromise or IOCs), so you can quickly identify which potential threats to address.
@@ -117,3 +121,5 @@ Follow the [log graphing guide][6] to learn more about all the graphing options.
 [4]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22
 [6]: /logs/explorer/analytics/?tab=timeseries
+[7]: /workflows/
+[8]: /workflows/trigger/#trigger-a-workflow-from-a-security-signal
