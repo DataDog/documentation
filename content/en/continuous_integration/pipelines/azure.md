@@ -24,7 +24,9 @@ further_reading:
 
 ## Compatibility
 
-- **Custom pre-defined tags**: Set [custom tags][6] for all generated pipeline and job spans.
+- **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
+
+- **Custom pre-defined tags**: Set [custom tags][7] for all generated pipeline, stage and job spans.
 
 ## Configure the Datadog integration
 
@@ -36,8 +38,8 @@ The Datadog integration for [Azure Pipelines][1] works by using [service hooks][
     - **Run state changed**
     - **Run stage state changed**
     - **Run job state changed**
-    
-3. Click `Next` to continue to the next step and set the following: 
+
+3. Click `Next` to continue to the next step and set the following:
     - **URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/</code>
     - **HTTP Headers**: `DD-API-KEY:<API_KEY>` where `<API_KEY>` is your [Datadog API key][3].
     - **Resource Version**: Scroll down to the latest field and choose `[Latest]`.
@@ -62,4 +64,5 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.datadoghq.com/continuous_integration/pipelines/azure/#set-custom-tags
+[6]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[7]: https://docs.datadoghq.com/continuous_integration/pipelines/azure/#set-custom-tags
