@@ -30,7 +30,7 @@ At any moment, and depending on your current aggregation, **export** or **save**
 
 {{< img src="logs/explorer/export2.png" alt="Search Filter" style="width:100%;" >}}
 
-You can also save individual logs to Notebooks by selecting `Save to notebook` in the log event side panel. Logs saved to notebooks are displayed in a reader-friendly format, and this display is saved in the Notebook even after the log event itself has aged out of retention.
+You can also save individual logs to a notebook by selecting `Save to notebook` in the log event side panel. Logs saved to notebooks are displayed in a reader-friendly format, and this display is saved in the Notebook even after the log event itself has aged out of retention.
 
 {{< img src="logs/explorer/save_logs_to_notebooks.png" alt="Save logs to notebooks" style="width:100%;" >}}
 
