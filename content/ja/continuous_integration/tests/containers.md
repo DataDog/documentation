@@ -123,6 +123,8 @@ title: コンテナでのテスト
 - `BUILDKITE_BUILD_AUTHOR_EMAIL`
 - `BUILDKITE_BUILD_CREATOR`
 - `BUILDKITE_BUILD_CREATOR_EMAIL`
+- `BUILDKITE_AGENT_ID`
+- `BUILDKITE_AGENT_META_DATA_*`
 
 [Buildkite により提供されたビルド環境変数の完全リスト][1]
 
@@ -192,6 +194,8 @@ title: コンテナでのテスト
 - `CI_JOB_STAGE`
 - `CI_JOB_NAME`
 - `CI_JOB_URL`
+- `CI_RUNNER_ID`
+- `CI_RUNNER_TAGS`
 - `CI_REPOSITORY_URL`
 - `CI_COMMIT_SHA`
 - `CI_COMMIT_REF_NAME`
@@ -219,6 +223,8 @@ title: コンテナでのテスト
 - `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
+- `NODE_NAME`
+- `NODE_LABELS`
 - `DD_CUSTOM_TRACE_ID` ([Jenkins Datadog Plugin][2] で設定されるカスタム変数)
 - `DD_CUSTOM_PARENT_ID` (idem)
 

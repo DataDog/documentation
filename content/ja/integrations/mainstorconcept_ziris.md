@@ -37,10 +37,11 @@ author:
   support_email: support@mainstorconcept.com
   vendor_id: mainstorconcept
 categories:
-- マーケットプレイス
 - mainframe
+- マーケットプレイス
+- ネットワーク
+- OS & システム
 - トレーシング
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -64,18 +65,19 @@ pricing:
 public_title: z/IRIS
 short_description: メインフレームから IBM z/OS のパフォーマンスデータを収集する
 supported_os:
-- linux
 - ibm z/os
+- linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::IBM z/OS
-  - Category::Marketplace
   - Category::Mainframe
+  - Category::Marketplace
+  - Category::Network
+  - Category::OS & System
   - Category::Tracing
-  - Category::Monitoring
   - Offering::Integration
+  - Supported OS::IBM z/OS
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: メインフレームから IBM z/OS のパフォーマンスデータを収集する
   media:
@@ -114,11 +116,12 @@ tile:
 
 ## 概要
 
-[z/IRIS](https://www.mainstorconcept.com/z-iris-mainframe-observability/z-iris-datadog/?lang=en) は、メインフレーム以外の世界で、メインフレームを包括するパフォーマンス監視を提供するために構築されたプラグインソフトウェアソリューションです。
+[z/IRIS][1] は、メインフレーム以外の世界で、メインフレームを包括するパフォーマンス監視を提供するために構築されたプラグインソフトウェアソリューションです。
 
 DevOps チームは、ビジネスアプリケーションに対するメインフレームのパフォーマンスと、ピークパフォーマンスをどのように維持または達成できるかを理解したいと考えています。z/IRIS では、DevOps のためのメインフレームの観測可能性がコアコンセプトとなっています。チームは、Datadog を使用して、メインフレームリソースの使用状況を評価し、パフォーマンスを継続的に分析し、アプリケーション間でメトリクスとデータを比較することができます。
 
 z/IRIS をアクティブにした後、Datadog ユーザーは次のことを行うことができます。
+
 * メインフレームでホストされているサービスやアプリケーションに依存しているアプリケーションを特定する。
 * メインフレームサービスのレイテンシーを 1 リクエストレベルまで監視する。
 * 組織の SLI に関連する異常やしきい値を超えた場合に対応するモニターを作成する。
@@ -129,10 +132,9 @@ z/IRIS をアクティブにした後、Datadog ユーザーは次のことを�
 z/IRIS は、2 つの方法で Datadog とインテグレーションします。
 
 * **OpenTelemetry (OTEL):** この観測可能性フレームワークは、APM インテグレーションを標準化し、Datadog によって完全にサポートされています。Datadog 環境にトレースとメトリクスをエクスポートするように構成された OpenTelemetry Collector にトレースとメトリクスをストリームするように、z/IRIS を簡単に構成することができます。
-* **Datadog API (ベータ版):** また、Datadog Agent API と HTTP REST API を経由して、それぞれトレースとイベントをストリーミングすることも可能です。このインテグレーションは、OpenTelemetry がまだ組織内で利用できない場合に、概念実証を加速するのに役立ちます。
+* **Datadog API (ベータ版):** また、Datadog Agent API と HTTP REST API を通じて、それぞれトレースとイベントをストリーミングすることも可能です。このインテグレーションは、OpenTelemetry がまだ組織内で利用できない場合に、概念実証を加速するのに役立ちます。
 
-z/IRIS のインテグレーションに関するより詳細な情報は、[ドキュメント](https://public.mainstorconcept.com/home/observability-with-datadog)に記載されています。
-
+z/IRIS のインテグレーション可能性についての詳細な情報は、[z/IRIS ドキュメント][3]を参照してください。
 
 ### 分散型トレーシング
 
@@ -146,17 +148,19 @@ z/IRIS は、IBM Z メインフレームアプリケーションのプロセス�
 
 z/IRIS は、以下のメインフレームアプリケーションのスパンを作成します。
 
-* [Db2 for z/OS](https://public.mainstorconcept.com/home/distributed-db2-for-z-os-observability)
-* [z/OS Connect](https://public.mainstorconcept.com/home/z-os-connect-observability)
-* [バッチジョブのステップと TSO ユーザーセッション](https://public.mainstorconcept.com/home/z-os-work-observability)
-* [MQ for z/OS](https://public.mainstorconcept.com/home/ibm-mq-for-z-os-observability)
-* [CICS Transaction](https://public.mainstorconcept.com/home/cics-transaction-observability)
+* [Db2 for z/OS][4]
+* [z/OS Connect][5]
+* [バッチジョブの手順と TSO ユーザーセッション][6]
+* [MQ for z/OS][7]
+* [CICS トランザクション][8]
 
-このリストは常に増加しています。上記に掲載されていない z/OS アプリケーションやサブシステムのサポートに関するリクエストは、[ziris@mainstorconcept.com](mailto:ziris@mainstorconcept.com) までご連絡ください。
+このリストは常に増加しています。上記に掲載されていない z/OS アプリケーションやサブシステムのサポートに関するリクエストは、[ziris@mainstorconcept.com][2] までご連絡ください。
 
 #### ワークフローのトレース
 
-スパンが生成されると、z/IRIS はスパンがアップストリームアプリケーショントレースと論理的な関係を持っているかどうかをチェックします。もしそうなら、必要な相関コンテキストがスパンに追加され、Datadog は自動的にスパンを関連トレースに追加します。以下のリクエストワークフローは、スパン相関をトリガーします。
+スパンが生成されると、z/IRIS はスパンがアップストリームアプリケーショントレースと論理的な関係を持っているかどうかをチェックします。もしそうなら、必要な相関コンテキストがスパンに追加され、Datadog は自動的にスパンを関連トレースに追加します。
+
+以下のリクエストワークフローは、スパン相関をトリガーします。
 
 * z/OS Connect を処理する REST API リクエスト
 * Db2 for z/OS System-of-Record で処理される z/OS Connect API
@@ -167,7 +171,9 @@ z/IRIS は、以下のメインフレームアプリケーションのスパン�
 
 #### タグ
 
-z/OS 上のリクエスト処理に関する追加のメタデータは、Datadog トレースエクスプローラーで特定のトレースをフィルターするのに便利なタグを通じて提供され、Datadog の Watchdog Insights のための追加のインサイトとしても役立ちます。以下は、z/IRIS で作成されたすべてのタグの完全なリストです。
+z/OS 上のリクエスト処理に関する追加のメタデータは、[Datadog トレースエクスプローラー][9]で特定のトレースをフィルターするのに便利なタグを通じて提供され、[Datadog Watchdog Insights][10] のための追加のインサイトとしても役立ちます。
+
+以下は、z/IRIS で作成されたすべてのタグの完全なリストです。
 
 | トレースタグ名                                    | 説明                                   |
 |---------------------------------------------------|-----------------------------------------------|
@@ -443,20 +449,20 @@ z/OS 上のリクエスト処理に関する追加のメタデータは、Datado
 
 ### メインフレームメトリクス
 
-* [RMF メトリクス](https://public.mainstorconcept.com/home/rmf-metrics-streaming) 
+* [RMF メトリクス][11] 
     * RMF メトリクスは、カスタマイズ可能な間隔で、カスタマイズ可能な詳細レベルで、リソース使用率メトリク スを提供します。
 
-* [z/OS Connect メトリクス](https://public.mainstorconcept.com/home/z-os-connect-metrics-streaming)
+* [z/OS Connect メトリクス][12]
     * z/IRIS ストリームは、IBM の z/OS Connect SMF タイプ 123 バージョン 1 および 2 のレコードのデータを使用して作成されたメトリクスです。
 
-* [MQ メトリクス](https://public.mainstorconcept.com/home/mq-metrics-streaming)
+* [MQ メトリクス][13]
     * MQ 統計レコード (SMF タイプ 115) には、システム内のさまざまなリソースからの多数の統計情報が含まれています。z/IRIS は、監視、分析、およびアラートを目的とした最も重要なパフォーマンス指標に焦点を当て、z/OS MQ メトリクスを導入します。
 
-お探しのメトリクスはこれではありませんか？あなたの組織にとって重要な機能をお探しですか？機能のご要望は [info@mainstorconcept.com](mailto:info@mainstorconcept.com) までお送りください。
+お探しのメトリクスはこれではありませんか？あなたの組織にとって重要な機能をお探しですか？機能のご要望は [info@mainstorconcept.com][2] までお送りください。
 
 ### 民間企業による製品提供
 
-* メール: [mainstorconcept GmbH](mailto:ziris@mainstorconcept.com)
+* メール: [mainstorconcept GmbH][2]
 * 電話: +49 721 7907610
 
 ### ライセンシング
@@ -465,13 +471,42 @@ z/OS 上のリクエスト処理に関する追加のメタデータは、Datado
 
 ### 検証
 
-関連するコンポーネントが利用可能で、[最低要件](https://public.mainstorconcept.com/home/troubleshooting-opentelemetry-integration)を満たしていることを確認してください。
+関連するコンポーネントが利用可能であり、[最小要件][14]を満たしていることを確認します。
 
 ## サポート
 
-試用版およびライセンスをお持ちのお客様は、[サポートをリクエストする](https://service.mainstorconcept.com/mscportal/login)か、または [support@mainstorconcept.com](mailto:support@mainstorconcept.com) にご連絡ください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから z/IRIS にお問い合わせください。
 
-チーム向けの z/IRIS のデモをご希望の場合、または Datadog を使用した z/IRIS の機能についてご質問がある場合は、[ziris@mainstorconcept.com](mailto:ziris@mainstorconcept.com) までお問い合わせください。
+- メールでのお問い合わせ: [support@mainstorconcept.com][20] または Datadog を使用した z/IRIS の機能に関するデモやご質問は [ziris@mainstorconcept.com](mailto:ziris@mainstorconcept.com)
+- サポート: [Mainstorconcept Portal][21]
 
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace で mainstorconcept の製品でメインフレームのパフォーマンスを監視する][22]
+
+[1]: https://www.mainstorconcept.com/z-iris-mainframe-observability/z-iris-datadog/?lang=en
+[2]: mailto:ziris@mainstorconcept.com
+[3]: https://public.mainstorconcept.com/home/observability-with-datadog
+[4]: https://public.mainstorconcept.com/home/distributed-db2-for-z-os-observability
+[5]: https://public.mainstorconcept.com/home/z-os-connect-observability
+[6]: https://public.mainstorconcept.com/home/z-os-work-observability
+[7]: https://public.mainstorconcept.com/home/ibm-mq-for-z-os-observability
+[8]: https://public.mainstorconcept.com/home/cics-transaction-observability
+[9]: https://docs.datadoghq.com/ja/tracing/trace_explorer/
+[10]: https://docs.datadoghq.com/ja/watchdog/
+[11]: https://public.mainstorconcept.com/home/rmf-metrics-streaming
+[12]: https://public.mainstorconcept.com/home/z-os-connect-metrics-streaming
+[13]: https://public.mainstorconcept.com/home/mq-metrics-streaming
+[14]: https://public.mainstorconcept.com/home/troubleshooting-opentelemetry-integration
+[15]: https://public.mainstorconcept.com/home/irontap-image
+[16]: https://public.mainstorconcept.com/home/configure-irontap-container 
+[17]: https://public.mainstorconcept.com/home/install-z-iris-clients
+[18]: https://public.mainstorconcept.com/home/configure-z-iris-clients
+[19]: https://public.mainstorconcept.com/home/z-iris-client-started-task
+[20]: mailto:support@mainstorconcept.com
+[21]: https://service.mainstorconcept.com/mscportal/login
+[22]: https://www.datadoghq.com/blog/mainframe-monitoring-mainstorconcept-datadog-marketplace/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/mainstorconcept-ziris" target="_blank">こちらをクリック</a>してください。

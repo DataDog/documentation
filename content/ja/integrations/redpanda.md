@@ -24,9 +24,8 @@ author:
   sales_email: support@vectorized.io
   support_email: support@vectorized.io
 categories:
-- 処理
-- メッセージング
 - ログの収集
+- メッセージング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md
 display_on_public_website: true
@@ -44,17 +43,16 @@ public_title: Redpanda
 short_description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
-  - Category::Messaging
   - Category::Log Collection
+  - Category::Messaging
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
   media: []

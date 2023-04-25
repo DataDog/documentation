@@ -28,11 +28,11 @@ title: Kubernetes に Datadog Agent をインストールする
 
 ## インストール
 
-このページでは、3 種類の方法で Kubernetes 環境に Datadog Agent をインストールする手順を説明します。ユースケースに最適な方法を選択してください。
+このページでは、3 種類の方法で Kubernetes 環境に Datadog Agent をインストールする手順を説明します。以下の方法に対応しています。
 
-- [Datadog Operator](?tab=operator)
-- [Helm チャート](?tab=helm)
-- [DaemonSet](?tab=daemonset)
+- Datadog Operator
+- Helm チャート
+- DaemonSet
 
 AWS Elastic Kubernetes Service (EKS)、Azure Kubernetes Service (AKS)、Google Kubernetes Engine (GKE)、Red Hat OpenShift、Rancher、Oracle Container Engine for Kubernetes (OKE) など主要な Kubernetes ディストリビューションの専用ドキュメントやサンプルは [Kubernetes ディストリビューション][1]に掲載されています。
 
@@ -50,7 +50,7 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-<div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+<div class="alert alert-warning">Datadog Operator は 1.0.0 バージョンで一般公開されており、DatadogAgent Custom Resource のバージョン <code>v2alpha1</code> と照合しています。 </div>
 
 [Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
 
@@ -58,7 +58,7 @@ Kubernetes の後期バージョンに関連する一部の機能では、Datado
 
 Datadog Operator を使用するには、次の前提条件が必要です。
 
-- **Kubernetes Cluster バージョン >= v1.14.X**: テストはバージョン >= `1.14.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
+- **Kubernetes Cluster バージョン >= v1.20.X**: テストはバージョン >= `1.20.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
 - `datadog-operator` をデプロイするための [`Helm`][2]。
 - `datadog-agent` をインストールするための [`Kubectl` CLI][3]。
 
@@ -82,26 +82,28 @@ Datadog Operator を使用するには、次の前提条件が必要です。
 
 2. Datadog Agent のデプロイコンフィギュレーションを使用してファイルを作成します。最も単純なコンフィギュレーションは次のとおりです。
 
-   ```yaml
-   apiVersion: datadoghq.com/v1alpha1
-   kind: DatadogAgent
-   metadata:
-     name: datadog
-   spec:
-     credentials:
-       apiSecret:
-         secretName: datadog-secret
-         keyName: api-key
-       appSecret:
-         secretName: datadog-secret
-         keyName: app-key
-     agent:
-       image:
-         name: "gcr.io/datadoghq/agent:latest"
-     clusterAgent:
-       image:
-         name: "gcr.io/datadoghq/cluster-agent:latest"
-   ```
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
+```
 
 3. 上記のコンフィギュレーションファイルを使用して Datadog Agent をデプロイします。
    ```shell
@@ -134,6 +136,10 @@ agent:
 
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
+## コンテナレジストリ
+
+コンテナイメージのレジストリを変更する場合は、[コンテナレジストリの変更][9]のガイドを参照してください。
+
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -142,6 +148,7 @@ agent:
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [7]: /ja/agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
+[9]: /ja/agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -273,7 +280,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][4]  | [マニフェストテンプレート][5]  |
     | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [マニフェストテンプレート][6]  | [マニフェストテンプレート][7]  |
     | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][8]  | [マニフェストテンプレート][9] |
-    |                           |                           |                           |                           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [マニフェストテンプレート][10] | テンプレートなし             |
+    |                           |                           |                           |                           | <i class="icon-check-bold"></i> |                           | [マニフェストテンプレート][10] | テンプレートなし             |
     | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [マニフェストテンプレート][11] | [マニフェストテンプレート][12] |
 
    トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][13]。それぞれの機能を個別に有効にする方法については、[ログ][14]、[APM][15]、[プロセス][16]、[ネットワークパフォーマンスモニタリング][17]、[セキュリティ][18]に関するドキュメントページを参照してください。
@@ -327,11 +334,18 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 (オプション) 非特権インストールを実行するには、[ポッドテンプレート][19]に以下を追加します。
 
 ```yaml
-  spec:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: placeholder
+  namespace: placeholder
+spec:
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: 1 # <USER_ID>
+        supplementalGroups:
+          - 123 # "<DOCKER_GROUP_ID>"
 ```
 
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
@@ -353,7 +367,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 [15]: /ja/agent/kubernetes/apm/
 [16]: /ja/infrastructure/process/?tab=kubernetes#installation
 [17]: /ja/network_monitoring/performance/setup/
-[18]: /ja/security/agent/
+[18]: /ja/data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /ja/getting_started/site/
 [21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard

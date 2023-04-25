@@ -94,7 +94,7 @@ The installer can use only an existing domain account when installing on a read-
 
 ### Installation with Chef
 
-If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent’s configuration files have the correct permissions
+If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent's configuration files have the correct permissions
 
 ## Upgrade
 
@@ -117,9 +117,9 @@ For example, if the directory check is monitoring a directory that has specific 
 
 ### JMX-based integrations
 
-The change to `ddagentuser` affects your JMX-based integrations if the Agent’s JMXFetch is configured to connect to the monitored JVMs through the Attach API, for example if:
+The change to `ddagentuser` affects your JMX-based integrations if the Agent's JMXFetch is configured to connect to the monitored JVMs through the Attach API, for example if:
 
-1. You’re using a JMX-based integration, such as:
+1. You're using a JMX-based integration, such as:
    * [ActiveMQ][2]
    * [ActiveMQ_XML][3]
    * [Cassandra][4]
@@ -129,13 +129,13 @@ The change to `ddagentuser` affects your JMX-based integrations if the Agent’s
    * [Tomcat][8]
    * [Kafka][9]
 
-2. **AND** you’ve configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
+2. **AND** you've configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
 
-If you’re using the Attach API, the change in user context means that the Agent’s JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
+If you're using the Attach API, the change in user context means that the Agent's JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
 
 ### Process check
 
-In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users’ processes. This causes the following options of the check to not work:
+In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users' processes. This causes the following options of the check to not work:
 
 * `exact_match` when set to `false`
 * `user`, which allows selecting processes that belong to a specific user

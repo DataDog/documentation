@@ -36,11 +36,16 @@ title: Datadog Operator の概要
 
 3. `DatadogAgent` のデプロイメント構成の仕様を記述した `datadog-agent.yaml` ファイルを作成します。以下のサンプル構成では、メトリクス、ログ、APM を有効にしています。
   ```yaml
-  apiVersion: datadoghq.com/v1alpha1
+  apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
   metadata:
     name: datadog
   spec:
+    features:
+      apm:
+        enabled: true
+      logCollection:
+        enabled: true
     credentials:
       apiSecret:
         secretName: datadog-secret
@@ -48,11 +53,6 @@ title: Datadog Operator の概要
       appSecret:
         secretName: datadog-secret
         keyName: app-key
-    agent:
-      apm:
-        enabled: true
-      log:
-        enabled: true
   ```
 
 4. Datadog Agent をデプロイします。

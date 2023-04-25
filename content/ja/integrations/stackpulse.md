@@ -22,10 +22,10 @@ author:
   support_email: support@stackpulse.io
 categories:
 - 自動化
-- orchestration
-- notification
 - コラボレーション
-- モニタリング
+- インシデント
+- notification
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
 display_on_public_website: true
@@ -43,19 +43,19 @@ public_title: StackPulse
 short_description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Automation
-  - Category::Orchestration
-  - Category::Notification
   - Category::Collaboration
-  - Category::Monitoring
+  - Category::Incidents
+  - Category::Notification
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
   media: []

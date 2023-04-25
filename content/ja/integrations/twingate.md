@@ -19,10 +19,6 @@ author:
 categories:
 - ネットワーク
 - セキュリティ
-- クラウド
-- AWS
-- azure
-- google cloud
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/twingate/README.md
 display_on_public_website: true
@@ -40,21 +36,17 @@ public_title: Twingate
 short_description: Twingate は、企業内 VPN に代わる最新のゼロトラストサービスを提供します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Offering::Integration
   - Category::Network
   - Category::Security
-  - Category::Cloud
-  - Category::AWS
-  - Category::Azure
-  - Category::Google Cloud
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Twingate は、企業内 VPN に代わる最新のゼロトラストサービスを提供します。
   media:

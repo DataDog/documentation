@@ -20,11 +20,11 @@ Count of APM Events per second received by the Agent
 
 `datadog.trace_agent.events.max_eps.max_rate`
 : **Type**: Gauge<br>
-Same as the Agent config’s max_events_per_second parameter.
+Same as the Agent config's max_events_per_second parameter.
 
 `datadog.trace_agent.events.max_eps.reached_max`
 : **Type**: Gauge<br>
-Is set to `1` every time max_events_per_second is reached, otherwise it’s `0`.
+Is set to `1` every time max_events_per_second is reached, otherwise it's `0`.
 
 `datadog.trace_agent.events.max_eps.sample_rate`
 : **Type**: Gauge<br>
@@ -72,7 +72,7 @@ Number of times the Agent killed itself due to excessive memory use (150% of max
 
 `datadog.trace_agent.receiver.out_chan_fill`
 : **Type**: Gauge<br>
-Internal metric. Percentage of fill on the receiver’s output channel.
+Internal metric. Percentage of fill on the receiver's output channel.
 
 `datadog.trace_agent.receiver.payload_accepted`
 : **Type**: Count<br>

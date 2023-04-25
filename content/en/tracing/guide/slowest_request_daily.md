@@ -7,7 +7,7 @@ further_reading:
   text: "Alert on anomalous p99 latency of a database service"
 - link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
-  text: "Compare a service’s latency to the previous week"
+  text: "Compare a service's latency to the previous week"
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
   text: "Create a Dashboard to track and correlate APM metrics"

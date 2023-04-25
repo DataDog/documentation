@@ -30,7 +30,7 @@ further_reading:
 
 {{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
 
-By connecting your serverless traces to metrics, Datadog provides a context-rich picture of your application’s performance, allowing you to better troubleshoot performance issues given the distributed nature of serverless applications.
+By connecting your serverless traces to metrics, Datadog provides a context-rich picture of your application's performance, allowing you to better troubleshoot performance issues given the distributed nature of serverless applications.
 
 The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
 

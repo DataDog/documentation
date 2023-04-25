@@ -46,7 +46,7 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-**Note**: If you’re already using Datadog APM, you are already calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
 
 ```node
 node -r dd-trace/init app.js
@@ -64,7 +64,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**Note**: If you’re already using Datadog APM, you are already calling `init` and don’t need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
 
 ```node
 const tracer = require('dd-trace/init')

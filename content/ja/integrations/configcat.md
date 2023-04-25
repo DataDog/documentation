@@ -19,7 +19,9 @@ author:
   sales_email: developer@configcat.com
   support_email: developer@configcat.com
 categories:
+- 構成 & デプロイ
 - notification
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md
 display_on_public_website: true
@@ -37,15 +39,17 @@ public_title: ConfigCat
 short_description: Datadog により追跡する設定変更イベント
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
   - Category::Notification
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog により追跡する設定変更イベント
   media: []

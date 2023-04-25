@@ -2,6 +2,7 @@
 aliases:
 - /fr/integrations/akamai/
 categories:
+- caching
 - cloud
 dependencies: []
 description: Intégrez votre Akamai DataStream à Datadog.
@@ -30,7 +31,7 @@ version: '1.0'
 
 Associez Datadog à Akamai DataStream pour recueillir les métriques d'état, de latence, de déchargement et d'erreurs relatives à vos CDN.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

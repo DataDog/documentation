@@ -693,6 +693,20 @@
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
     }
   ],
+  "CreateSpansMetric": [
+    {
+      "group": "spans_metrics",
+      "suffix": "",
+      "description": "Create a span-based metric returns \"OK\" response"
+    }
+  ],
+  "UpdateSpansMetric": [
+    {
+      "group": "spans_metrics",
+      "suffix": "",
+      "description": "Update a span-based metric returns \"OK\" response"
+    }
+  ],
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",

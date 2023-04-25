@@ -190,7 +190,6 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.ancestors.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`process.ancestors.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`process.ancestors.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`process.ancestors.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`process.ancestors.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`process.ancestors.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`process.ancestors.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -236,7 +235,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.ancestors.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`process.ancestors.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`process.ancestors.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`process.ancestors.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`process.ancestors.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`process.ancestors.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`process.ancestors.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`process.ancestors.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -261,7 +260,6 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`process.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`process.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`process.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`process.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`process.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`process.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -282,7 +280,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`process.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`process.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`process.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`process.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`process.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`process.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`process.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -307,7 +305,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`process.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`process.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`process.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`process.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`process.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`process.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`process.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -326,7 +324,6 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.parent.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`process.parent.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`process.parent.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`process.parent.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`process.parent.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`process.parent.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`process.parent.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -347,7 +344,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.parent.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`process.parent.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`process.parent.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`process.parent.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`process.parent.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`process.parent.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`process.parent.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`process.parent.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -372,7 +369,7 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 | [`process.parent.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`process.parent.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`process.parent.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`process.parent.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`process.parent.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`process.parent.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`process.parent.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`process.parent.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -452,7 +449,7 @@ BPF コマンドが実行された
 | [`chmod.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`chmod.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`chmod.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`chmod.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`chmod.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`chmod.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`chmod.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`chmod.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -483,7 +480,7 @@ BPF コマンドが実行された
 | [`chown.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`chown.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`chown.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`chown.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`chown.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`chown.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`chown.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`chown.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -522,7 +519,6 @@ DNS リクエストが送信された
 | [`exec.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`exec.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`exec.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`exec.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`exec.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`exec.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`exec.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -543,7 +539,7 @@ DNS リクエストが送信された
 | [`exec.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`exec.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`exec.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`exec.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`exec.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`exec.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`exec.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`exec.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -568,7 +564,7 @@ DNS リクエストが送信された
 | [`exec.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`exec.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`exec.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`exec.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`exec.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`exec.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`exec.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`exec.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -602,7 +598,6 @@ DNS リクエストが送信された
 | [`exit.code`](#exit-code-doc) | プロセスの終了コード、またはプロセスを終了させたシグナルの番号 |
 | [`exit.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`exit.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`exit.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`exit.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`exit.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`exit.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -623,7 +618,7 @@ DNS リクエストが送信された
 | [`exit.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`exit.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`exit.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`exit.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`exit.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`exit.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`exit.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`exit.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -648,7 +643,7 @@ DNS リクエストが送信された
 | [`exit.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`exit.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`exit.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`exit.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`exit.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`exit.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`exit.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`exit.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -683,7 +678,7 @@ DNS リクエストが送信された
 | [`link.file.destination.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`link.file.destination.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`link.file.destination.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`link.file.destination.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`link.file.destination.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`link.file.destination.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`link.file.destination.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`link.file.destination.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -701,7 +696,7 @@ DNS リクエストが送信された
 | [`link.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`link.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`link.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`link.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`link.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`link.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`link.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`link.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -728,7 +723,7 @@ DNS リクエストが送信された
 | [`load_module.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`load_module.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`load_module.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`load_module.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`load_module.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`load_module.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`load_module.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`load_module.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -759,7 +754,7 @@ DNS リクエストが送信された
 | [`mkdir.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`mkdir.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`mkdir.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`mkdir.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`mkdir.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`mkdir.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`mkdir.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`mkdir.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -786,7 +781,7 @@ mmap コマンドが実行された
 | [`mmap.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`mmap.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`mmap.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`mmap.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`mmap.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`mmap.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`mmap.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`mmap.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -839,7 +834,7 @@ mprotect コマンドが実行された
 | [`open.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`open.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`open.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`open.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`open.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`open.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`open.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`open.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -867,7 +862,6 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.ancestors.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`ptrace.tracee.ancestors.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`ptrace.tracee.ancestors.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`ptrace.tracee.ancestors.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`ptrace.tracee.ancestors.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`ptrace.tracee.ancestors.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`ptrace.tracee.ancestors.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -888,7 +882,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.ancestors.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`ptrace.tracee.ancestors.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`ptrace.tracee.ancestors.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`ptrace.tracee.ancestors.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`ptrace.tracee.ancestors.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`ptrace.tracee.ancestors.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`ptrace.tracee.ancestors.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`ptrace.tracee.ancestors.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -913,7 +907,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.ancestors.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`ptrace.tracee.ancestors.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`ptrace.tracee.ancestors.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`ptrace.tracee.ancestors.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`ptrace.tracee.ancestors.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`ptrace.tracee.ancestors.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`ptrace.tracee.ancestors.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`ptrace.tracee.ancestors.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -938,7 +932,6 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`ptrace.tracee.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`ptrace.tracee.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`ptrace.tracee.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`ptrace.tracee.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`ptrace.tracee.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`ptrace.tracee.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -959,7 +952,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`ptrace.tracee.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`ptrace.tracee.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`ptrace.tracee.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`ptrace.tracee.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`ptrace.tracee.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`ptrace.tracee.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`ptrace.tracee.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -984,7 +977,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`ptrace.tracee.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`ptrace.tracee.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`ptrace.tracee.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`ptrace.tracee.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`ptrace.tracee.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`ptrace.tracee.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`ptrace.tracee.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1003,7 +996,6 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.parent.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`ptrace.tracee.parent.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`ptrace.tracee.parent.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`ptrace.tracee.parent.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`ptrace.tracee.parent.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`ptrace.tracee.parent.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`ptrace.tracee.parent.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -1024,7 +1016,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.parent.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`ptrace.tracee.parent.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`ptrace.tracee.parent.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`ptrace.tracee.parent.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`ptrace.tracee.parent.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`ptrace.tracee.parent.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`ptrace.tracee.parent.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`ptrace.tracee.parent.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1049,7 +1041,7 @@ ptrace コマンドが実行された
 | [`ptrace.tracee.parent.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`ptrace.tracee.parent.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`ptrace.tracee.parent.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`ptrace.tracee.parent.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`ptrace.tracee.parent.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`ptrace.tracee.parent.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`ptrace.tracee.parent.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`ptrace.tracee.parent.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1091,7 +1083,7 @@ ptrace コマンドが実行された
 | [`removexattr.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`removexattr.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`removexattr.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`removexattr.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`removexattr.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`removexattr.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`removexattr.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`removexattr.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1119,7 +1111,7 @@ ptrace コマンドが実行された
 | [`rename.file.destination.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`rename.file.destination.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`rename.file.destination.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`rename.file.destination.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`rename.file.destination.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`rename.file.destination.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`rename.file.destination.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`rename.file.destination.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1137,7 +1129,7 @@ ptrace コマンドが実行された
 | [`rename.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`rename.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`rename.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`rename.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`rename.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`rename.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`rename.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`rename.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1164,7 +1156,7 @@ ptrace コマンドが実行された
 | [`rmdir.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`rmdir.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`rmdir.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`rmdir.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`rmdir.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`rmdir.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`rmdir.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`rmdir.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1230,7 +1222,7 @@ SELinux 操作が実行された
 | [`setxattr.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`setxattr.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`setxattr.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`setxattr.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`setxattr.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`setxattr.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`setxattr.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`setxattr.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1257,7 +1249,6 @@ SELinux 操作が実行された
 | [`signal.target.ancestors.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`signal.target.ancestors.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`signal.target.ancestors.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`signal.target.ancestors.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`signal.target.ancestors.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`signal.target.ancestors.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`signal.target.ancestors.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -1278,7 +1269,7 @@ SELinux 操作が実行された
 | [`signal.target.ancestors.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`signal.target.ancestors.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`signal.target.ancestors.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`signal.target.ancestors.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`signal.target.ancestors.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`signal.target.ancestors.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`signal.target.ancestors.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`signal.target.ancestors.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1303,7 +1294,7 @@ SELinux 操作が実行された
 | [`signal.target.ancestors.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`signal.target.ancestors.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`signal.target.ancestors.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`signal.target.ancestors.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`signal.target.ancestors.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`signal.target.ancestors.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`signal.target.ancestors.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`signal.target.ancestors.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1328,7 +1319,6 @@ SELinux 操作が実行された
 | [`signal.target.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`signal.target.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`signal.target.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`signal.target.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`signal.target.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`signal.target.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`signal.target.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -1349,7 +1339,7 @@ SELinux 操作が実行された
 | [`signal.target.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`signal.target.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`signal.target.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`signal.target.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`signal.target.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`signal.target.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`signal.target.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`signal.target.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1374,7 +1364,7 @@ SELinux 操作が実行された
 | [`signal.target.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`signal.target.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`signal.target.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`signal.target.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`signal.target.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`signal.target.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`signal.target.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`signal.target.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1393,7 +1383,6 @@ SELinux 操作が実行された
 | [`signal.target.parent.cap_permitted`](#common-credentials-cap_permitted-doc) | プロセスの許可されたケイパビリティセット |
 | [`signal.target.parent.comm`](#common-process-comm-doc) | プロセスの Comm 属性 |
 | [`signal.target.parent.container.id`](#common-process-container-id-doc) | コンテナ ID |
-| [`signal.target.parent.cookie`](#common-process-cookie-doc) | プロセスのクッキー |
 | [`signal.target.parent.created_at`](#common-process-created_at-doc) | プロセス作成時のタイムスタンプ |
 | [`signal.target.parent.egid`](#common-credentials-egid-doc) | プロセスの有効な GID |
 | [`signal.target.parent.egroup`](#common-credentials-egroup-doc) | プロセスの有効なグループ |
@@ -1414,7 +1403,7 @@ SELinux 操作が実行された
 | [`signal.target.parent.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`signal.target.parent.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`signal.target.parent.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`signal.target.parent.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`signal.target.parent.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`signal.target.parent.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`signal.target.parent.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`signal.target.parent.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1439,7 +1428,7 @@ SELinux 操作が実行された
 | [`signal.target.parent.interpreter.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`signal.target.parent.interpreter.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`signal.target.parent.interpreter.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`signal.target.parent.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`signal.target.parent.interpreter.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`signal.target.parent.interpreter.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`signal.target.parent.interpreter.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`signal.target.parent.interpreter.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1480,7 +1469,7 @@ splice コマンドが実行された
 | [`splice.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`splice.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`splice.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`splice.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`splice.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`splice.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`splice.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`splice.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1509,7 +1498,7 @@ splice コマンドが実行された
 | [`unlink.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`unlink.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`unlink.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`unlink.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`unlink.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`unlink.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`unlink.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`unlink.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1546,7 +1535,7 @@ splice コマンドが実行された
 | [`utimes.file.name`](#common-fileevent-name-doc) | ファイルのベース名 |
 | [`utimes.file.name.length`](#common-string-length-doc) | 対応する文字列の長さ |
 | [`utimes.file.package.name`](#common-fileevent-package-name-doc) | [試験運用] このファイルを提供したパッケージの名前 |
-| [`utimes.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージのフルバージョン |
+| [`utimes.file.package.source_version`](#common-fileevent-package-source_version-doc) | [試験運用] このファイルを提供したパッケージのソースパッケージの正式バージョン名 |
 | [`utimes.file.package.version`](#common-fileevent-package-version-doc) | [試験運用] このファイルを提供したパッケージの正式バージョン名 |
 | [`utimes.file.path`](#common-fileevent-path-doc) | ファイルのパス |
 | [`utimes.file.path.length`](#common-string-length-doc) | 対応する文字列の長さ |
@@ -1705,15 +1694,6 @@ exec.argv in ["127.0.0.1"]
 定義: コンテナ ID
 
 `*.container.id` には 11 個のプレフィックスを付けることができます。
-`exec` `exit` `process` `process.ancestors` `process.parent` `ptrace.tracee` `ptrace.tracee.ancestors` `ptrace.tracee.parent` `signal.target` `signal.target.ancestors` `signal.target.parent`
-
-
-### `*.cookie` {#common-process-cookie-doc}
-タイプ: 整数
-
-定義: プロセスのクッキー
-
-`*.cookie` には 11 個のプレフィックスを付けることができます。
 `exec` `exit` `process` `process.ancestors` `process.parent` `ptrace.tracee` `ptrace.tracee.ancestors` `ptrace.tracee.parent` `signal.target` `signal.target.ancestors` `signal.target.parent`
 
 

@@ -80,7 +80,7 @@ By default, the Host Map only shows hosts that are reporting the selected metric
 
 ### Data freshness and meaning
 
-Data in the Host Map is refreshed about once a minute—unless you are continuously interacting with the map. The bottom right of the screen tells you when data was last updated.
+Data in the Host Map is refreshed about once a minute—unless you are continuously interacting with the map. The bottom left of the screen tells you when data was last updated.
 
 ## Use cases
 

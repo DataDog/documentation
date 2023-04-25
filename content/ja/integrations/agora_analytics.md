@@ -30,7 +30,6 @@ author:
   sales_email: sales-us@agora.io
   support_email: support@agora.io
 categories:
-- モニタリング
 - コラボレーション
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/agora_analytics/README.md
@@ -49,18 +48,17 @@ public_title: Agora Analytics
 short_description: Datadog で Agora Analytics Collector のメトリクスを表示する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Monitoring
   - Category::Collaboration
   - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Submitted Data Type::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog で Agora Analytics Collector のメトリクスを表示する
   media:

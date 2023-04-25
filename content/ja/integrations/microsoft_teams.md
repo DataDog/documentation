@@ -1,7 +1,8 @@
 ---
 categories:
 - コラボレーション
-- notification
+- ネットワーク
+- 通知
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信
 doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
@@ -25,7 +26,6 @@ version: '1.0'
 Microsoft Teams と統合して、以下のことができます。
 
 - Microsoft Teams で Datadog アラートとイベントの通知を受信
-- Microsoft Teams でメッセージやグラフを共有することができます。
 - Microsoft Teams の中からインシデントを管理することができます。
 
 ## Microsoft Teams チャンネルへのモニター通知の送信
@@ -52,6 +52,10 @@ Datadog を Microsoft Teams チャンネルと統合するには、以下のよ�
 Datadog モニターから、[`@-notification` 機能][2]を使用して、Microsoft Teams に通知を送信します。通知を `@teams-<CHANNEL>` というアドレスに送信し、`<CHANNEL>` を Microsoft Teams のチャンネル名に置き換えます。
 
 ## Microsoft Teams における Datadog Incident Management
+
+<div class="alert alert-warning">
+Datadog Incident Management for Microsoft Teams は公開ベータ版で、US1 サイトでのみ利用可能です。
+</div>
 
 ### アカウント設定
 

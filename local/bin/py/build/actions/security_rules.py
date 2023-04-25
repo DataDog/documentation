@@ -102,9 +102,8 @@ def security_rules(content, content_dir):
 
         # delete file or skip if staged
         # any() will return True when at least one of the elements is Truthy
-        # TODO: remove isStaged check after upstream removal
-        if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isStaged', False) or data.get('isShadowDeployed', False) \
-            or data.get('isDeleted', False) or not data.get('isEnabled', True) or data.get('isDeprecated', False):
+        if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isShadowDeployed', False) \
+            or data.get('isDeleted', False) or data.get('isDeprecated', False):
             if p.exists():
                 logger.info(f"removing file {p.name}")
                 global_aliases.append(f"/security/default_rules/{p.stem}")
