@@ -123,7 +123,52 @@ NPM automatically maps
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
 - API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
 
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
+
+### Cloud service enhanced resolution
+If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers only have user-defined tags. For AWS, Datadog applies the tags defined below in addition to the user-defined tags.
+
+ #### Amazon Web Services
+ {{< tabs >}}
+ {{% tab "Loadbalancers" %}}
+ - name
+ - loadbalancer
+ - load_balancer_arn
+ - dns_name (format loadbalancer/dns:)
+ - region
+ - account_id
+ - scheme
+ - custom (user-defined) tags applied to AWS Loadbalancers
+ {{% /tab %}}
+
+ {{% tab "NAT Gateways" %}}
+ - gateway_id
+ - gateway_type
+ - aws_nat_gateway_id
+ - aws_nat_gateway_public_ip
+ - aws_account
+ - availability-zone
+ - region
+ - custom (user) tags applied to AWS Nat Gateways
+ {{% /tab %}}
+
+ {{% tab "VPC Internet Gateway" %}}
+ - gateway_id
+ - gateway_type
+ - aws_internet_gateway_id
+ - aws_account
+ - region
+ - custom (user) tags applied to VPC Internet Gateways
+ {{% /tab %}}
+
+{{% tab "VPC Endpoint" %}}
+ - gateway_id
+ - gateway_type
+ - aws_vpc_endpoint_id
+ - custom (user) tags applied to VPC Internet Endpoints
+ {{% /tab %}}
+
+ {{< /tabs >}}
 
 ### Domain resolution
 
@@ -229,3 +274,4 @@ The **Security** tab highlights potential network threats and findings detected 
 [6]: /security/cloud_workload_security/
 [7]: /security/cspm/
 [8]: /security/detection_rules/
+[9]: /network_monitoring/performance/setup/#enhanced-resolution

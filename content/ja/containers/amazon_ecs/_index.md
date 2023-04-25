@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - ecs
 aliases:
 - /ja/agent/amazon_ecs/
 - /ja/containers/amazon_ecs/data_collected

@@ -9,7 +9,7 @@ further_reading:
   text: Threat Monitoring and Protection
 - link: /security/application_security/risk_management/
   tag: Documentation
-  text: リスク管理
+  text: Application Vulnerability Management
 kind: documentation
 title: ASM の用語と概念
 ---
