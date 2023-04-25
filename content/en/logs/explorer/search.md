@@ -47,13 +47,13 @@ The search bar autosuggests facets based on your input in the search bar. These 
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="The logs search bar showing `network` as the query and the facets @network.bytes_written, @network.client.ip, and @network.interface as autocomplete options" style="width:80%;">}}
 
-After you select a facet and input the `:` character, the search bar autosuggests values. These values are displayed in descending order of how many logs contain that facet:value pair in the past 15 minutes. The estimated number of logs containing that value is displayed on the righthand side of the dropdown. For example, the `balance-checker` service is positioned first in the autosuggested list of values for the `service` facet, indicated by 732M, the highest log count. 
+After you select a facet and input the `:` character, the search bar autosuggests values. These values are displayed in descending order of how many logs contain that facet:value pair in the past 15 minutes. The estimated number of logs containing that value is displayed on the righthand side of the dropdown. For example, the `balance-checker` service is positioned first in the autosuggested list of values for the `service` facet, indicated by 2.66M, the highest log count:
 
 {{< img src="logs/explorer/search/log_value_autocomplete.png" alt="The logs search bar showing `service:` as the query and the values balance-checker, ad-server, fraud-detector, and trade-executor as autocomplete options" style="width:80%;">}}
 
 ### Autocomplete recent searches
 
-Your 100 most recent searches run in the Log Explorer are retained. The search bar autosuggests the 4 most recent searches that match your input in the search bar, with the most recent search displayed first. The search bar also shows how long ago each recent search was run. For example, if you input `service:web-store status:error` in the search bar, the 4 most recent searches containing these terms are displayed in order of recency, each one specifying a different error.
+Your 100 most recent searches run in the Log Explorer are retained. Recent searches from other users are not retained or displayed. The search bar autosuggests the 4 most recent searches that match your input in the search bar, with the most recent search displayed first. The search bar also shows how long ago each recent search was run. For example, if you input `service:web-store status:error` in the search bar, the 4 most recent searches containing these terms are displayed in order of recency, each one specifying a different error:
 
 {{< img src="logs/explorer/search/log_recent_searches.png" alt="The logs search bar showing `service:web-store status:error` as the query and recent searches for different web-store service errors as autocomplete options" style="width:80%;">}}
 
@@ -71,8 +71,8 @@ Syntax highlighting clearly differentiates input types, such as keys (e.g. an at
 
 Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example,
 - If you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
-- If you input brackets for a range query, but does not fill in the high and low values, the message "Expected term but end of input found" is displayed.
-- If you input multiple values for a log field but miss the closing parenthesis character, such as  `service:(web-store OR auth-dotnet`, the message `Missing closing parenthesis character` is displayed.
+- If you input brackets for a range query, but do not fill in the high and low values, the message "Expected term but end of input found" is displayed.
+- If you input multiple values for a log field but miss the closing parenthesis character, such as  `service:(web-store OR auth-dotnet`, the message `Missing closing parenthesis character` is displayed:
 
 {{< img src="logs/explorer/search/log_error_states.png" alt="The logs search bar showing `service:(web-store OR auth-dotnet` as the query with the message `Missing closing parenthesis character`" style="width:80%;">}}
 
@@ -80,7 +80,7 @@ To start searching for logs and customizing the time frame in the Log Explorer, 
 
 ## Raw and user-friendly search mode
 
-The user-friendly search mode contains autocomplete and syntax highlighting as mentioned. Toggle the button to the right of the search bar to search in raw mode, where syntax highlighting, search pills, and autocomplete are removed.
+The user-friendly search mode contains autocomplete and syntax highlighting as mentioned. Toggle the button to the right of the search bar to search in raw mode, where syntax highlighting, search pills styling, and autocomplete are removed:
 
 {{< img src="logs/explorer/search/log_raw_search_mode.png" alt="The logs search bar showing `service:auth-dotnet status:error "500" ("check-token" OR "create-user")` as the query in raw search mode" style="width:80%;">}}
 
