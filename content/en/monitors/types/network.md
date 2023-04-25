@@ -99,5 +99,6 @@ Create a network metric monitor by following the instructions in the [metric mon
 [5]: /monitors/configuration/#no-data
 [6]: /monitors/configuration/#auto-resolve
 [7]: /monitors/configuration/#new-group-delay
-[8]: /monitors/types/metric
+[8]: /monitors/notify/
 [9]: https://app.datadoghq.com/monitors/manage
+[10]: /monitors/types/metric
