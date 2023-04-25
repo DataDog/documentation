@@ -25,7 +25,7 @@ At any moment, and depending on your current aggregation, **export** or **save**
 - [**Monitor**][3] to trigger alerts on predefined thresholds.
 - [**Metric**][4] to aggregate your logs into long term KPIs, as they are ingested in Datadog.
 - **cURL command** to test your queries in the Log Explorer and then build custom reports using [Datadog APIs][5].
-- **CSV** (for individual logs and transactions). You can export up to 100,000 logs at once for individual logs, 300 for Patterns, and 500 for Transactions. You can also download a Timeseries, Top List, or Table view in a CSV file.
+- **CSV** (for individual logs and transactions). You can export up to 100,000 logs at once for individual logs, 300 for Patterns, and 500 for Transactions. You can also download a timeseries, top list, or table view as a CSV file.
 - **Share** View: Share a link to the current view with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][6] available for this feature.
 
 {{< img src="logs/explorer/export2.png" alt="Search Filter" style="width:100%;" >}}
