@@ -106,7 +106,7 @@ Follow the [in-app instructions][6] in the Datadog app for the best experience, 
           enabled: true
     ```
 
-    See [documentation][2] for more configuration options.
+    See the [Datadog Operator documentation][2] for additional configuration options.
 
 3. Restart the Agent.
 
