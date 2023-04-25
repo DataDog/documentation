@@ -10,34 +10,40 @@ further_reading:
 
 ## Overview
 
-### Azure and Azure Native integrations
+This guide demonstrates how to programmatically manage the Azure integration with Datadog, as well as other Azure resources such as the Datadog Agent VM extension. This enables you to manage observability across multiple accounts at once.
 
-This guide provides an overview of ways to programmatically manage the Azure integration with Datadog, enabling you to streamline the process of managing multiple accounts in bulk.
+## Datadog Azure integration
 
-If your Datadog account is hosted on Datadog's [US3 site][3], you can use the Datadog resource in Azure to create and manage the integration between your Azure environment and Datadog. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
+### Azure or Azure Native integration?
+
+If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
 
 If your Datadog account is hosted on any other [Datadog site][3], use the [Azure integration][5] to collect monitoring data from your Azure environment.
 
 If you prefer to use CLI, see the [Azure CLI for Datadog][2].
 
-## Datadog Azure integration
-
 <div class="alert alert-warning">To ensure that you see the correct examples, check that the Datadog site selector in the side panel is correctly set to your <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>.</div>
 
 ### Terraform
 
+Follow these steps to deploy the integration through [Terraform][13].
+
 {{% site-region region="us3" %}}
 
-You can use [Terraform][1] to deploy the Azure Native integration, which uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This is possible through creation of a Datadog resource in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding. 
+The Azure Native integration uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This is possible through creation of the [azurerm_datadog_monitor][3] resource and assignment of the [Monitoring Reader role][4] in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
+
+1. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment:
+
+#### Azure Datadog Monitor resource
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
 resource "azurerm_resource_group" "example" {
-  name     = "example-datadog"
+  name     = "<NAME>"
   location = "<AZURE_REGION>"
 }
 resource "azurerm_datadog_monitor" "example" {
-  name                = "example-datadog-resource"
+  name                = "<NAME>"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   datadog_organization {
@@ -45,8 +51,8 @@ resource "azurerm_datadog_monitor" "example" {
     application_key = "<DATADOG_APPLICATION_KEY>"
   }
   user {
-    name  = "Example"
-    email = "abc@xyz.com"
+    name  = "<NAME>"
+    email = "<EMAIL>"
   }
   sku_name = "Linked"
   identity {
@@ -56,8 +62,29 @@ resource "azurerm_datadog_monitor" "example" {
 
 {{< /code-block >}}
 
-[1]: https://www.terraform.io
+#### Monitoring Reader role
+
+{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
+
+data "azurerm_subscription" "primary" {}
+
+data "azurerm_role_definition" "monitoring_reader" {
+  name = "Monitoring Reader"
+}
+
+resource "azurerm_role_assignment" "example" {
+  scope              = data.azurerm_subscription.primary.id
+  role_definition_id = data.azurerm_role_definition.monitoring_reader.role_definition_id
+  principal_id       = azurerm_datadog_monitor.example.identity.0.principal_id
+}
+
+{{< /code-block >}}
+
+2. Run `terraform apply`.
+
 [2]: /integrations/guide/azure-portal/
+[3]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors
+[4]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors#role-assignment
 {{% /site-region %}}
 
 {{% site-region region="us,eu,us5,gov" %}}
@@ -74,10 +101,9 @@ See the [Terraform Registry][4] for further example usage and the full list of o
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
 resource "datadog_integration_azure" "sandbox" {
-  tenant_name   = "<azure_tenant_name>"
-  client_id     = "<azure_client_id>"
-  client_secret = "<azure_client_secret_key>"
-  host_filters  = "examplefilter:true,example:true"
+  tenant_name   = "<AZURE_TENANT_NAME>"
+  client_id     = "<AZURE_CLIENT_ID>"
+  client_secret = "<AZURE_CLIENT_SECRET_KEY>"
 }
 
 {{< /code-block >}}
@@ -93,10 +119,6 @@ resource "datadog_integration_azure" "sandbox" {
 
 You can use multiple provider blocks with aliases to manage Terraform resources across multiple subscriptions or tenants. Read [Provider Configuration][9] for more information.
 
-### API
-
-Datadog's [Azure integration endpoints][8] enable you to create and manage the Azure integration with Datadog's APIs.
-
 ## Datadog Azure VM Extension
 
 ### Terraform
@@ -105,7 +127,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 
 1. [Install the Agent][11].
 2. Apply any desired [Agent configurations][12].
-3. For Windows Server 2008, Vista and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
+3. For Windows Server 2008, Vista, and newer, save the `%ProgramData%\Datadog` folder as a zip file. For Linux, save the `/etc/datadog-agent` folder as a zip file.
 4. Upload the file to blob storage.
 5. Reference the blob storage URL in the Terraform block to create the VM extension:
 
@@ -160,6 +182,9 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 
 {{% site-region region="us3" %}}
 
+Once the Datadog resource is set up in your Azure account, configure log collection through the Azure Portal. See [Configure metrics and logs][1] in the Azure documentation for more information.
+
+[1]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/create#configure-metrics-and-logs
 {{% /site-region %}}
 
 {{% site-region region="us,eu,us5,gov" %}}
@@ -179,7 +204,6 @@ az monitor diagnostic-settings create --name
                                       [--event-hub]
                                       
 {{< /code-block >}}
-
 
 See the [az monitor diagnostic-settings create][1] section in the Azure CLI reference for more information.
 
@@ -245,8 +269,9 @@ Datadog provides monitoring capabilities for serverless resources with the [Micr
 [5]: /integrations/azure/
 [6]: /agent/basic_agent_usage/ansible/
 [7]: /integrations/azure_container_service/
-[8]: /api/latest/azure-integration/
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
 [11]: https://app.datadoghq.com/account/settings#agent
 [12]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7
+[13]: https://www.terraform.io
+[14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
