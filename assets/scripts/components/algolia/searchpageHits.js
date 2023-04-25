@@ -56,6 +56,7 @@ const renderHits = (renderOptions, isFirstRender) => {
 
     const aisHits = document.createElement('div');
     const aisHitsList = document.createElement('ol');
+    
 
     if (isFirstRender) {
         addAttributesToEmptyElements();
