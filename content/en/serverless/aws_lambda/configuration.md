@@ -93,7 +93,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 
 Get alerted on attackers targeting your serverless applications and respond quickly. 
 
-To get started, first ensure that you have [tracing enabled](https://docs.datadoghq.com/serverless/installation#installation-instructions) for your functions.
+To get started, first ensure that you have [tracing enabled][40] for your functions.
 
 To enable threat monitoring, simply add the following environment variables depending on the language:
 ```yaml
