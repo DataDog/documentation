@@ -1,6 +1,7 @@
 ---
 title: Service Management
 kind: documentation
+private: true
 disable_toc: false
 ---
 
