@@ -54,7 +54,7 @@ You can also graph and visualize these metrics on any dashboard or notebook:
 
 {{< img src="data_streams/data_streams_monitor.jpg" alt="Datadog Data Streams Monitoring monitor" style="width:100%;" >}}
 
-### Monitor end to end latency of any pathway
+### Monitor end-to-end latency of any pathway
 
 Depending on how events traverse through your system, different paths can lead to increased latency. With the **Pathways** tab, you can view latency between any two points throughout your pipelines, including queues, producers, and consumers to identify bottlenecks and optimize performance. Easily create a monitor for a pathway, or export to a dashboard.
 
