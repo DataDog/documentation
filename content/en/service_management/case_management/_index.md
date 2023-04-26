@@ -5,8 +5,13 @@ aliases:
 - /monitors/case_management/
 further_reading:
 - link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
+<<<<<<< HEAD:content/en/service_management/case_management/_index.md
   tag: "Blog"
   text: Proactively track, triage, and assign issues
+=======
+  tag: "blog"
+  text: "Proactively track, triage, and assign issues with Datadog Case Management"
+>>>>>>> master:content/en/monitors/case_management/_index.md
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
@@ -39,13 +44,21 @@ Make bulk edits to cases from the [Case Management page][1]:
 1. Use the drop-down menus to **Set status**, **Assign**, **Set priority**, or perform **More actions**. Or, click **Archive**.
 
 ## Create or update a case
-
 You can create or update cases from several locations in Datadog:
-- Monitors
-- Security signals
-- Error Tracking for Logs
-- Workflows
-- The Case Management page
+### Monitors
+From the individual Monitor status page, click the **Escalate** dropdown menu and select the **+ Create a case** option.
+
+### Security signals
+Click into a Security Signal to open up the side panel. From the side panel, click **Create Case**.
+
+### Error Tracking for Logs
+Click into an individual Error Tracking issue to open the side panel. From the side panel, click  **Create Case** or **Add to an existing case**.
+
+### Workflows
+In a new or existing workflow, add a step in the [workflow builder][4] and search for "case management" and select **Create Case** or **Update the status from a Case**.
+
+### Case Management
+In the [Case Management][1] page, click the button **New Case** to create a new case. 
 
 ## Further reading
 
@@ -54,3 +67,4 @@ You can create or update cases from several locations in Datadog:
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/
 [3]: https://app.datadoghq.com/cases/contexts/new
+[4]: /workflows/build/#build-a-workflow-with-the-workflow-builder
