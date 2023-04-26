@@ -42,7 +42,7 @@ The following OTel features implemented in the Datadog library as noted:
   ```
 4. Import packages in the code:
 
-  ```shell
+  ```go
   import (
     "go.opentelemetry.io/otel"
     ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
@@ -50,12 +50,12 @@ The following OTel features implemented in the Datadog library as noted:
   ```
 5. Create a TracerProvider, optionally providing a set of options, that are specific to Datadog's APM product, and defer the Shutdown method, which stops the tracer.
 
-  ```shell
+  ```go
 provider := ddotel.NewTracerProvider()
 defer provider.Shutdown()
   ```
 6. Use the Tracer Provider instance with the OpenTelemetry API to set the global TracerProvider.
-  ```shell
+  ```go
   otel.SetTracerProvider(provider)
   ```
 7. Run your application.
