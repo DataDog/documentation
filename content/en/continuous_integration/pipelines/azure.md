@@ -26,7 +26,7 @@ further_reading:
 
 - **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
 
-- **Custom pre-defined tags**: Set [custom tags][7] for all generated pipeline, stage and job spans.
+- **Custom pre-defined tags**: Set [custom tags][7] for all generated pipeline, stage, and job spans.
 
 ## Configure the Datadog integration
 
@@ -65,4 +65,4 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
-[7]: https://docs.datadoghq.com/continuous_integration/pipelines/azure/#set-custom-tags
+[7]: /continuous_integration/pipelines/azure/#set-custom-tags

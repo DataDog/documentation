@@ -36,7 +36,7 @@ further_reading:
 
 - **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][14] for self-hosted GitLab runners
 
-- **Custom pre-defined tags**: Configure [custom tags][10] to all generated pipeline, stages and job spans
+- **Custom pre-defined tags**: Configure [custom tags][10] to all generated pipeline, stages, and job spans
 
 - **Custom tags and metrics at runtime**: Configure [custom tags][13] and metrics at runtime
 
