@@ -35,19 +35,6 @@ Datadog サービスカタログは、デフォルトで APM、USM、RUM から�
 
 5. [Service Catalog Write][13] 権限を持っている場合、**Save Entry** をクリックするか、**Code** ビューで提供される cURL コマンドを実行することで、メタデータを送信することができます。
 
-
-## 他の Datadog テレメトリーデータで報告されているサービスを発見する
-
-インフラストラクチャーメトリクスなどの既存の Datadog テレメトリーから他のサービスを検出するには、ページ上部の [**Setup &amp; Config** タブ][3]に移動して、**Import Entries** タブをクリックしてください。`DD_SERVICE` [タグ][5]を含む他の Datadog テレメトリーからサービスをインポートすることができます。
-
-{{< img src="tracing/service_catalog/import_entries.png" alt="サービスカタログのセットアップと構成セクションのインポートエントリータブ" style="width:90%;" >}}
-
-いくつかのエントリーをインポートすると、それらは **Explore** タブに表示されます。[API を使う][1]か [GitHub インテグレーション][6]で所有者や連絡先などのメタデータを追加しないと、エントリーが失効してしまうことがあります。
-
-インポートしたサービスをデフォルトの **Explore** ビューから削除するには、**Clear Previously Imported Services** をクリックします。これにより、メタデータを持たないサービスや、APM、ユニバーサルサービスモニタリング (USM)、リアルユーザーモニタリング (RUM) のテレメトリーを持たないサービスがすべて削除されます。
-
-{{< img src="tracing/service_catalog/clear_imported_services.png" alt="サービスカタログのセットアップと構成セクションで、以前にインポートしたサービスの削除を確認します" style="width:90%;" >}}
-
 ## サービス定義の GitHub への保存と編集
 
 [GitHub インテグレーション][6]を構成し、Service Catalog でサービスの定義を表示する場所から、GitHub で保存・編集可能な場所に直接リンクするようにします。
@@ -80,6 +67,17 @@ GitHub インテグレーションや Terraform の代わりに、オープン�
 
 この GitHub Action を使用すると、Datadog にこの情報を送信するタイミングを完全に制御しながら、GitHub Action を使用してサービスカタログにサービスを登録し、組織独自のその他のコンプライアンスチェックを実装することができます。
 
+## 他の Datadog テレメトリーデータで報告されているサービスを発見する
+
+インフラストラクチャーメトリクスなどの既存の Datadog テレメトリーから他のサービスを検出するには、ページ上部の [**Setup &amp; Config** タブ][3]に移動して、**Import Entries** タブをクリックしてください。`DD_SERVICE` [タグ][5]を含む他の Datadog テレメトリーからサービスをインポートすることができます。
+
+{{< img src="tracing/service_catalog/import_entries.png" alt="サービスカタログのセットアップと構成セクションのインポートエントリータブ" style="width:90%;" >}}
+
+いくつかのエントリーをインポートすると、それらは **Explore** タブに表示されます。[API を使う][1]か [GitHub インテグレーション][6]で所有者や連絡先などのメタデータを追加しないと、エントリーが失効してしまうことがあります。
+
+インポートしたサービスをデフォルトの **Explore** ビューから削除するには、**Clear Previously Imported Services** をクリックします。これにより、メタデータを持たないサービスや、APM、ユニバーサルサービスモニタリング (USM)、リアルユーザーモニタリング (RUM) のテレメトリーを持たないサービスがすべて削除されます。
+
+{{< img src="tracing/service_catalog/clear_imported_services.png" alt="サービスカタログのセットアップと構成セクションで、以前にインポートしたサービスの削除を確認します" style="width:90%;" >}}
 
 ## その他の参考資料
 

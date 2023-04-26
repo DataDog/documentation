@@ -20760,15 +20760,33 @@ paths:
         type: safe
   /api/v2/posture_management/findings:
     get:
-      description: Get a list of CSPM findings.
+      description: "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be
+        applied by appending query parameters to the URL.\n\n  - Using a single filter:
+        `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
+        \ - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere,
+        `attribute_key` can be any of the filter keys described further below.\n\nQuery
+        parameters of type `integer` support comparison operators (`>`, `>=`, `<`,
+        `<=`). This is particularly useful when filtering by `evaluation_changed_at`
+        or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou
+        can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*`
+        to filter for any non-AWS resources.\n\nThe operator must come after the equal
+        sign. For example, to filter with the `>=` operator, add the operator after
+        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\n### Response\n\nThe
+        response includes an array of finding objects, pagination metadata, and a
+        count of items that match the query.\n\nEach finding object contains the following:\n\n-
+        The finding ID that can be used in a `GetFinding` request to retrieve the
+        full finding details.\n- Core attributes, including status, evaluation, high-level
+        resource details, muted state, and rule details.\n- `evaluation_changed_at`
+        and `resource_discovery_date` time stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
-      - description: Limit the number of findings returned.
+      - description: Limit the number of findings returned. Must be <= 1000.
         example: 50
         in: query
-        name: limit
+        name: page[limit]
         required: false
         schema:
+          default: 100
           format: int64
           maximum: 1000
           minimum: 1
@@ -20879,6 +20897,11 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.cursor
+        limitParam: page[limit]
+        resultsPath: data
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -22406,7 +22429,7 @@ paths:
       summary: Get all security filters
       tags:
       - Security Monitoring
-      x-menu-order: 16
+      x-menu-order: 18
       x-undo:
         type: safe
     post:
@@ -22459,7 +22482,7 @@ paths:
               \       }\n     ],\n      \"filtered_data_type\":\"logs\",\n      \"is_enabled\":
               true\n     }\n  }\n}"
           step: there is a valid "security_filter" in the system
-      x-menu-order: 15
+      x-menu-order: 17
       x-undo:
         operationId: DeleteSecurityFilter
         parameters:
@@ -22489,7 +22512,7 @@ paths:
       summary: Delete a security filter
       tags:
       - Security Monitoring
-      x-menu-order: 12
+      x-menu-order: 14
       x-undo:
         type: idempotent
     get:
@@ -22523,7 +22546,7 @@ paths:
       summary: Get a security filter
       tags:
       - Security Monitoring
-      x-menu-order: 14
+      x-menu-order: 16
       x-undo:
         type: safe
     patch:
@@ -22566,7 +22589,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 15
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules:
@@ -22595,7 +22618,7 @@ paths:
       summary: List rules
       tags:
       - Security Monitoring
-      x-menu-order: 1
+      x-menu-order: 3
       x-undo:
         type: safe
     post:
@@ -22668,7 +22691,7 @@ paths:
               86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\":
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule_bis" in the system
-      x-menu-order: 2
+      x-menu-order: 4
       x-undo:
         operationId: DeleteSecurityMonitoringRule
         parameters:
@@ -22698,7 +22721,7 @@ paths:
       summary: Delete an existing rule
       tags:
       - Security Monitoring
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -22725,7 +22748,7 @@ paths:
       summary: Get a rule's details
       tags:
       - Security Monitoring
-      x-menu-order: 3
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -22771,7 +22794,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals:
@@ -22852,7 +22875,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 7
+      x-menu-order: 9
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -22896,7 +22919,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 8
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -22929,7 +22952,7 @@ paths:
       summary: Get a signal's details
       tags:
       - Security Monitoring
-      x-menu-order: 11
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -22976,7 +22999,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/incidents:
@@ -23023,7 +23046,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 11
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/state:
@@ -23070,7 +23093,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config:

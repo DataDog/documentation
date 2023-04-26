@@ -34,7 +34,7 @@ pricing:
   product_id: snmp-trap-logs
   short_description: このインテグレーションの定額料金
   unit_price: 1000
-public_title: SNMP Trap Logs インテグレーション
+public_title: SNMP Trap Logs
 short_description: SNMP トラップメッセージの Datadog ログへの変換
 supported_os:
 - linux
@@ -62,7 +62,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: SNMP Trap Logs インテグレーション
+  title: SNMP Trap Logs
   uninstallation: README.md#Uninstallation
 ---
 
