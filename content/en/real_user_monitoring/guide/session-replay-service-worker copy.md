@@ -38,7 +38,7 @@ After sharing the replay to a notebook, we can begin documenting the investigati
 
 We can add context about behavior in the replay, and bring in appropriate graphs to best represent the issue, such as the total number of users affected.
 
-In addition, by adding a comment in Notebooks, we can tag stakeholders who should take a look. In this case, we’ve tagged the product manager responsible for this feature to confirm a fix has been added to the backlog.
+In addition, by adding a comment in Notebooks, we can tag stakeholders who should take a look. In this case, we've tagged the product manager responsible for this feature to confirm a fix has been added to the backlog.
 
 ## Further Reading
 
