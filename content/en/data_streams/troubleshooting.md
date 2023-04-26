@@ -41,7 +41,7 @@ If your applications are running in .NET or Go, the [Kafka Consumer Integration]
 Ensure the [RabbitMQ integration][6] is set up correctly.
   
 ### Queue metrics are missing
-The [Kafka integration][7] must be set up for self-hosted, MSK, and Confluent Platform / Cloud environments for metrics to populate in the Queue tab.
+The [Kafka integration][7] must be set up for self-hosted, MSK, and Confluent Platform/Cloud environments for metrics to populate on the Queue tab.
   
 [1]: /data_streams/#setup  
 [2]: /data_streams/go/
