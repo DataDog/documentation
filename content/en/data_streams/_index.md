@@ -68,7 +68,7 @@ Click on the **Throughput** tab on any service or queue in Data Streams Monitori
 
 By filtering to a single Kafka or RabbitMQ cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
-{{< img src="data_streams/data_streams_cluster_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
+{{< img src="data_streams/data_streams_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 ### Quickly pivot to identify root causes in infrastructure, logs, or traces 
 
