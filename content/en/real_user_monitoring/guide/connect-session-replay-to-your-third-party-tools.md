@@ -1,0 +1,88 @@
+---
+title: Connect Session Replay To Your Third Party Tools
+kind: guide
+further_reading:
+- link: '/real_user_monitoring/session_replay/'
+  tag: 'Documentation'
+  text: 'Learn about Session Replay'
+---
+
+## Overview
+
+Session Replay provides visual insights to complement user analytics data. If you are using third party tools for customer experience, website analytics, and so on, you can connect them to Session Replay. This guide walks through how to access the Session Replay URL for use in integrations, live from the browser where the session is taking place. 
+
+## Use cases
+
+You may want to connect a third party tool with Session Replay for a more comprehensive view of user experience indicators like:
+
+- Form survey results
+- Customer experience tools
+- Data analytics
+
+## Get the session replay link
+To fetch the URL for the current user session's recording use the following snippet, depending on the installation method you used to setup RUM:
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    // optional, only needed if using a custom domain name
+    subdomain: ''
+    ...
+});
+
+const url = datadogRum.getSessionReplayUrl();
+```
+
+{{% /tab %}}
+
+{{% tab "CDN async" %}}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        // optional, only needed if using a custom domain name
+        subdomain: ''
+        ...
+    })
+    const url = DD_RUM.getSessionReplayUrl();
+})
+
+```
+
+{{% /tab %}}
+
+{{% tab "CDN sync" %}}
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+        ...,
+         // optional, only needed if using a custom domain name
+        subdomain: ''
+        ...
+    });
+const url = DD_RUM && DD_RUM.datadogRum.getSessionReplayUrl();
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+## Send link to third party tool
+Once you retrieve the link via the above snippet, you have a few different ways to pass the data, depending on what option(s) your third party tool offers:
+
+- As a hidden form field
+- As a JSON field
+- Through a URL parameter
+- Directly in your integration of choice in JavaScript
+
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
