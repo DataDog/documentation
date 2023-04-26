@@ -1,5 +1,5 @@
 ---
-title: Connect Session Replay To Your Third Party Tools
+title: Connect Session Replay To Your Third-Party Tools
 kind: guide
 further_reading:
 - link: '/real_user_monitoring/session_replay/'
@@ -9,18 +9,19 @@ further_reading:
 
 ## Overview
 
-Session Replay provides visual insights to complement user analytics data. If you are using third party tools for customer experience, website analytics, and so on, you can connect them to Session Replay. This guide walks through how to access the Session Replay URL for use in integrations, live from the browser where the session is taking place. 
+Session Replay provides visual insights to complement user analytics data. If you are using third-party tools for customer experience, website analytics, and more, you can connect them to Session Replay. This guide walks you through how to access the Session Replay URL to use in integrations, live from the browser where the session is taking place. 
 
 ## Use cases
 
-You may want to connect a third party tool with Session Replay for a more comprehensive view of user experience indicators like:
+You may want to connect a third-party tool with Session Replay for a more comprehensive view of user experience indicators such as the following:
 
 - Form survey results
 - Customer experience tools
 - Data analytics
 
-## Get the session replay link
-To fetch the URL for the current user session's recording use the following snippet, depending on the installation method you used to setup RUM:
+## Get the Session Replay link
+
+To fetch the URL for the current user session's recording, use the following snippet, depending on the installation method you used to set up RUM:
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -74,13 +75,14 @@ const url = DD_RUM && DD_RUM.datadogRum.getSessionReplayUrl();
 
 {{< /tabs >}}
 
-## Send link to third party tool
-Once you retrieve the link via the above snippet, you have a few different ways to pass the data, depending on what option(s) your third party tool offers:
+## Send link to a third-party tool
 
-- As a hidden form field
-- As a JSON field
-- Through a URL parameter
-- Directly in your integration of choice in JavaScript
+Once you retrieve the link through the snippet above, you have a few different ways to pass the data, depending on what option(s) your third-party tool offers:
+
+- As a hidden form field.
+- As a JSON field.
+- Through a URL parameter.
+- Directly in your integration of choice in JavaScript.
 
 
 ## Further Reading
