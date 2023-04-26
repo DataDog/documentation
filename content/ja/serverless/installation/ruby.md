@@ -32,31 +32,43 @@ title: Ruby サーバーレスアプリケーションのインスツルメン�
 
     - オプション A: 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][2]します。
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
       ```
-      # For regular regions
+      # 通常のリージョンの場合
       arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 
-      # For us-gov regions
+      # us-gov リージョンの場合
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
       ```
+{{< /site-region >}}
 
-      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
+{{< site-region region="ap1" >}}
+      ```
+      # 通常のリージョンの場合
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
 
-    - オプション B: 構築済みの Datadog Lambda レイヤーを使用できない場合、代替として以下を Gemfile に追加することができます。
+      # us-gov リージョンの場合
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Ruby2-7:{{< latest-lambda-layer-version layer="ruby" >}}
+      ```
+{{< /site-region >}}
+
+      `<AWS_REGION>` は、`us-east-1` のように有効な AWS リージョンに置き換えてください。
+
+    - オプション B: 構築済みの Datadog Lambda レイヤーを使用できない場合、代替案として以下を Gemfile に追加することができます。
 
       ```Gemfile
       gem 'datadog-lambda'
       gem 'ddtrace'
       ```
 
-      `ddtrace` には、AWS Lambda で動作するよう Amazon Linux 用にコンパイルする必要のあるネイティブ拡張機能が含まれています。そのため、Datadog では Lambda をコンテナイメージとして構築しデプロイすることを推奨しています。AWS Lambda を使用するが関数をコンテナイメージとしてデプロイできない、という場合は、Lambda ライブラリを gem ではなくレイヤーとしてインストールすることをおすすめします。
+      `ddtrace` にはネイティブ拡張機能が含まれており、AWS Lambda で動作させるためには Amazon Linux でコンパイルする必要があります。そのため、Datadog は Lambda をコンテナイメージとしてビルドし、デプロイすることを推奨しています。関数をコンテナイメージとしてデプロイできず、Datadog APM を使用したい場合、Datadog は Lambda ライブラリを gem としてではなく、レイヤーとしてインストールすることを推奨しています。
 
-      お使いの関数の Dockerfile で `bundle install` を実行する前に、`gcc`、`gmp-devel`、`make` をインストールし、ネイティブ拡張機能を正常にコンパイルします。
+      ネイティブ拡張機能が正常にコンパイルできるように、関数の Dockerfile で `bundle install` を実行する前に、`gcc`、`gmp-devel`、`make` をインストールしておいてください。
 
       ```dockerfile
       FROM <base image>
 
-      # assemble your container image
+      # コンテナイメージを組み立てる
 
       RUN yum -y install gcc gmp-devel make
       RUN bundle config set path 'vendor/bundle'
@@ -92,7 +104,7 @@ title: Ruby サーバーレスアプリケーションのインスツルメン�
 ## 次のステップ
 
 - [Serverless Homepage][4] でメトリクス、ログ、トレースを見ることができるようになりました。
-- [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください。
+- [カスタムビジネスロジックの監視](#monitor-custom-business-logic)のサンプルコードを参照してください
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][5]を参照してください
 - [高度な構成][6]を参照して以下のことを行ってください。
     - タグを使ったテレメトリー接続

@@ -3,14 +3,9 @@ aliases:
 - /ja/workflows/setup
 description: ワークフロー接続
 disable_toc: false
-is_beta: true
 kind: documentation
 title: 接続
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows は公開ベータ版です。フィードバックや質問がある場合は、<a href="/help">Datadog サポート</a>にご連絡ください。
-{{< /callout >}}
 
 ## 概要
 

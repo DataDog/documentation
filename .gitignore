@@ -48,7 +48,6 @@ content/en/integrations/*.md
 data/integrations/
 content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/_index.md
-!content/en/integrations/cloudability.md
 !content/en/integrations/cloudcheckr.md
 !content/en/integrations/kubernetes.md
 !content/en/integrations/kubernetes_state_core.md
@@ -91,11 +90,6 @@ npm-debug.log*
 # RUM
 content/en/real_user_monitoring/error_tracking/expo.md
 content/en/real_user_monitoring/error_tracking/reactnative.md
-content/en/real_user_monitoring/error_tracking/ios.md
-content/en/real_user_monitoring/ios/_index.md
-content/en/real_user_monitoring/ios/swiftui.md
-content/en/real_user_monitoring/ios/mobile_vitals.md
-content/en/real_user_monitoring/ios/*
 content/en/real_user_monitoring/reactnative/_index.md
 content/en/real_user_monitoring/reactnative/advanced_configuration.md
 content/en/real_user_monitoring/reactnative/integrated_libraries.md

@@ -23,9 +23,9 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-Datadog is an integration partner for GitHub Actions Deployment Protection Rules, which helps you ensure the delivery of high-quality applications to end customers. You can enforce quality gates on your GitHub Actions deployment workflows using Datadog monitors. 
+Datadog is an integration partner for [GitHub Actions Deployment Protection Rules][10], which helps you ensure the delivery of high-quality applications to end customers. You can enforce quality gates on your GitHub Actions deployment workflows using Datadog monitors. 
 
-These features are available for all Datadog customers, and they do not require usage of CI Visibility.
+These features are available for all Datadog customers on GitHub Enterprise Cloud, and they do not require usage of CI Visibility.
 
 ## Enable Deployment Protection Rules
 In order to rely on Datadog for quality checks on application deployments, you must have the Deployment Protection Rules feature enabled for your application.
@@ -81,3 +81,4 @@ To check your application or service’s CPU and/or memory usage prior to deploy
 [7]: /monitors/types/apm/?tab=apmmetrics
 [8]: /monitors/types/integration/?tab=checkalert 
 [9]: /monitors/types/metric/?tab=threshold
+[10]: https://github.blog/2023-04-20-announcing-github-actions-deployment-protection-rules-now-in-public-beta/

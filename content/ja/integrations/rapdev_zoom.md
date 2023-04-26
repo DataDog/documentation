@@ -58,7 +58,7 @@ pricing:
   tag: zoom_user_email
   unit_label: Zoom 登録ユーザー
   unit_price: 1
-public_title: Zoom インテグレーション
+public_title: Zoom
 short_description: Zoom アカウントを監視し、ライセンスを最適化します
 supported_os:
 - linux
@@ -94,7 +94,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Zoom インテグレーション
+  title: Zoom
   uninstallation: README.md#Uninstallation
 ---
 
