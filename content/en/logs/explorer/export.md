@@ -32,7 +32,7 @@ At any moment, and depending on your current aggregation, **export** or **save**
 
 You can also save individual logs to a notebook by selecting `Save to notebook` in the log event side panel. Logs saved to notebooks are displayed in a reader-friendly format, and this display is saved in the Notebook even after the log event itself has aged out of retention.
 
-{{< img src="logs/explorer/save_logs_to_notebooks.png" alt="Save logs to notebooks" style="width:60%;" >}}
+{{< img src="logs/explorer/save_logs_to_notebooks.png" alt="Save logs to notebooks" style="width:80%;" >}}
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
 
