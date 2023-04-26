@@ -25,7 +25,7 @@ After clicking into one session from the above query, we can watch a Session Rep
 ## Share to Notebook
 To ensure other team members investigating this issue can see this context, we can share this particular session replay to a notebook via the share button:
 
-{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/share-to-notebook.png" alt="Share the Session Replay video by saving it to a post-mortem notebook" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/share-to-notebook.png" alt="Share the Session Replay video by saving it to a post-mortem notebook" style="width:60%;">}}
 
 By sending the Session Replay to a notebook, we can add commentary, analyze other telemetry data from this incident, and document our post-mortem.
 
