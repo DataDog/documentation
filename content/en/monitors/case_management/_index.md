@@ -39,7 +39,7 @@ Make bulk edits to cases from the [Case Management page][1]:
 ## Create or update a case
 You can create or update cases from several locations in Datadog:
 ### Monitors
-From the individual Monitor status page, click on the **Escalate** dropdown menu and select the **+ Create a case** option.
+From the individual Monitor status page, click the **Escalate** dropdown menu and select the **+ Create a case** option.
 
 ### Security signals
 Click into a Security Signal to open up the side panel. From the side panel, click **Create Case**.
