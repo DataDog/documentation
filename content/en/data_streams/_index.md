@@ -11,7 +11,6 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-Data Streams Monitoring is now Generally Available. If you're interested in DSM, contact your CSM.
 </div>
 
 {{% site-region region="gov,ap1" %}}
