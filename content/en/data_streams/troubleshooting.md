@@ -27,7 +27,7 @@ If you do not see your services in the DSM Map or Overview page after following 
   
 ### End-to-end latency metric doesn't look accurate
 
-Latency calculations on a pathway require messages traversing through the pathway to be single threaded. If the messages in your data pipelines are multi-threaded, manual instrumentation is required, which is currently available for [Go applications][2] and [Java applications][3]. If you require manual instrumentation for .NET, contact us.
+Latency calculations on a pathway require messages traversing through the pathway to be single threaded. If the messages in your data pipelines are multi-threaded, manual instrumentation is required, which is currently available for [Go applications][2] and [Java applications][3]. If you require manual instrumentation for .NET, contact [Support][8].
 
 In the Pathways tab, if you see the message **latency values may be approximate for these pathways**, view the documentation for [instrumentation guidelines][4].
 
@@ -50,3 +50,4 @@ The [Kafka integration][7] must be set up for self-hosted, MSK, and Confluent Pl
 [5]: /integrations/kafka/?tab=host#kafka-consumer-integration
 [6]: /integrations/rabbitmq/?tab=host
 [7]: /integrations/kafka/?tab=host
+[8]: /help/
