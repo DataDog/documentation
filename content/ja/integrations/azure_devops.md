@@ -1,9 +1,11 @@
 ---
 categories:
 - azure
-- ソースコントロール
 - コラボレーション
+- developer tools
 - 問題追跡
+- プロビジョニング
+- ソースコントロール
 dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_devops
@@ -34,7 +36,7 @@ Datadog と Azure DevOps を統合して、次のことを行います。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog で、[Azure DevOps インテグレーションタイル][1]のインストールボタンをクリックします。
 

@@ -3,6 +3,10 @@ kind: documentation
 title: Data Streams Monitoring for .NET のセットアップ
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-info">Data Streams Monitoring は、AP1 リージョンではサポートされていません。</a></div>
+{{< /site-region >}}
+
 ### 前提条件
 
 Data Streams Monitoring を開始するには、Datadog Agent と .NET ライブラリの最新バージョンが必要です。

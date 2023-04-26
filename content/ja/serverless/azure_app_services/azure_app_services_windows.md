@@ -17,20 +17,11 @@ further_reading:
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: ブログ
   text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
-kind: ドキュメント
-title: Microsoft Azure App Service 拡張機能
+kind: documentation
+title: Azure App Service - Windows
 ---
 
 ## 概要
-
-Microsoft [Azure App Service][1] は、インフラストラクチャーを管理せずに Web アプリやモバイルバックエンド、イベント駆動型関数、RESTful API の構築とホスティングを行うことが可能な統合型のサーバーレスリソースです。あらゆる規模のワークロードのホスティングのほか、オートスケーリングと高可用性オプションにも対応しています。
-
-Datadog では Azure App Service に属するすべてのリソースタイプのモニタリングが可能です。
-
-- [Azure インテグレーション][2]を使用した[アプリ][2]および[関数][3]向けの Azure Monitor メトリクス。
-- [Azure App Service ビュー][4]を使用して、問題をすばやく特定し、Azure App Service リソース間の関係をマッピングし、コストとパフォーマンスに関する洞察を得ることができます。
-- カスタムメトリクスは API 経由で送信可能です。
-- [リソースログ][5]は [Event Hub][6] 経由で送信可能です。
 
 Datadog の Azure App Service 向け拡張機能は、追加モニタリングもサポートしています。
 
@@ -38,7 +29,7 @@ Datadog の Azure App Service 向け拡張機能は、追加モニタリング�
 - カスタマイズされた APM サービスとトレースビューは、関連する Azure App Service のメトリクスとメタデータを表示します。
 - スパンのカスタマイズが可能な、手動 APM インスツルメンテーション機能。
 - アプリケーションログへの `Trace_ID` 挿入。
-- [DogStatsD][7] を使用したカスタムメトリクス送信のサポート。
+- [DogStatsD][1] を使用したカスタムメトリクス送信のサポート。
 
 ## セットアップ
 
@@ -53,7 +44,7 @@ Datadog の Azure App Service 向け拡張機能は、追加モニタリング�
     - Azure App Service Web Apps
     - Basic、Standard、Premium プランでホストされている Function App。
 
-    <div class="alert alert-warning">消費プランの Function App、プロセス外 (分離) 関数には対応していません。他の App Service リソースタイプやランタイムのサポートに興味がありますか？ベータ版が利用可能になったら、<a href="https://forms.gle/n4nQcxEyLqDBMCDA7">サインアップ</a>してお知らせを受け取りましょう。</div>
+    <div class="alert alert-warning">消費プランの Function App には対応していません。他の App Service リソースタイプやランタイムのサポートに興味がありますか？ベータ版が利用可能になったら、<a href="https://forms.gle/n4nQcxEyLqDBMCDA7">サインアップ</a>してお知らせを受け取りましょう。</div>
 
 3. Datadog .NET APM 拡張機能は、Windows OS 上で稼働する x64 と x86 アーキテクチャの双方で以下の .NET ランタイムをサポートします (AAS は Linux での拡張機能をサポートしていません) 。自動的にインスツルメントされたライブラリの詳細については、[トレーサーのドキュメント][2]を参照してください。
 
@@ -80,7 +71,7 @@ v2.3.0 以降、.NET 拡張機能はセマンティックバージョニング�
 - 拡張機能 `2.3.101` は Tracer v`2.3.1` を使用します
 - 拡張機能 `2.3.200` は Tracer v`2.3.2` を使用します
 
-### インストール
+### APM に Datadog Agent を構成する
 
 1. Web アプリや関数を監視するために [Azure インテグレーション][1]を構成します。Datadog で対応する `azure.app_service.count` または `azure.functions.count` メトリクスが表示されることを確認し、正しく設定されていることを確認します。**注**: このステップは、メトリクス/トレースの相関、関数トレースパネル表示、および Azure App Services で Datadog を使用する際の全体的なエクスペリエンスを向上させるために重要です。
 
@@ -175,7 +166,7 @@ DogStatsd.Increment("sample.startup");
 
 4. Datadog では、機能の最適なパフォーマンス、安定性、そして可用性を確保するため、拡張機能の最新バージョンへの定期的な更新を推奨しています。初期インストールおよびその後の更新を正常に完了するには、ウェブアプリを一度完全に停止する必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 1. Web アプリや関数を監視するために [Azure インテグレーション][1]を構成します。Datadog で対応する `azure.app_service.count` または `azure.functions.count` メトリクスが表示されることを確認し、正しく設定されていることを確認します。**注**: このステップは、メトリクス/トレースの相関関係、機能的なトレース・パネル表示、Datadog サイトでの様々な壊れたユーザー体験の回避のために重要です。
 
@@ -223,7 +214,7 @@ Azure App Service の拡張機能には、[DogStatsD][7] (Datadog のメトリ�
 ```java
 // DogStatsd クライアントの構成と、任意のタグの構成
 StatsDClient client = new NonBlockingStatsDClientBuilder()
-                            .constantTags(“app:sample.service”)
+                            .constantTags("app:sample.service")
                             .build();
 // メトリクスを送信する
 client.Increment("sample.startup");
@@ -368,7 +359,7 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 
 1. Azure インテグレーションタイルに移動します。
 
-2. アプリケーションが動作している Azure サブスクリプションの [Azureインテグレーション][8]がインストールされていることを確認します。
+2. アプリケーションが動作している Azure サブスクリプションの [Azureインテグレーション][2]がインストールされていることを確認します。
 
 3. 適用した App Service プランのフィルタリングルールが、アプリが実行されている App Service プランを含んでいることを確認してください。App Service プランが含まれていない場合、そのプランでホストされているすべてのアプリと機能も含まれません。アプリ自体のタグは、Datadog によるフィルタリングに使用されません。
 
@@ -383,19 +374,13 @@ Azure App Service UI は、拡張機能の特定のバージョンをインス�
 
 **注**: サポートチームによるアプリケーションのエラー調査を迅速に進めるには、`DD_TRACE_DEBUG:true` を設定し、Datadog ログディレクトリのコンテンツ(`%AzureAppServiceHomeDirectory%\LogFiles\datadog`) をメールに追加します。
 
-さらにヘルプが必要な場合は、[Datadog サポート][9]までお問い合わせください。
+さらにヘルプが必要な場合は、[Datadog サポート][3]までお問い合わせください。
 
 ### その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://docs.microsoft.com/en-us/azure/app-service/
-[2]: /ja/integrations/azure_app_services/
-[3]: /ja/integrations/azure_functions/
-[4]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-[5]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/resource-logs
-[6]: /ja/integrations/azure/?tab=eventhub#log-collection
-[7]: /ja/developers/dogstatsd
-[8]: /ja/integrations/azure
-[9]: /ja/help
+[1]: /ja/developers/dogstatsd
+[2]: /ja/integrations/azure
+[3]: /ja/help

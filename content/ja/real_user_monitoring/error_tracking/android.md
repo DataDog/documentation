@@ -2,12 +2,15 @@
 dependencies:
 - https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
 further_reading:
+- link: https://www.datadoghq.com/blog/debug-android-crashes/
+  tag: ブログ
+  text: Datadog で Android のクラッシュをより速くデバッグする
 - link: /real_user_monitoring/error_tracking/
-  tag: Error Tracking
-  text: エラー追跡を開始する
-- link: /real_user_monitoring/error_tracking/explorer
   tag: ドキュメント
-  text: エクスプローラーでエラー追跡データを視覚化する
+  text: エラートラッキングについて
+- link: /real_user_monitoring/error_tracking/explorer
+  tag: Documentation
+  text: RUM エクスプローラーでエラー追跡データを視覚化する
 kind: documentation
 title: Android のクラッシュレポートとエラー追跡
 ---
