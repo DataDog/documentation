@@ -27,7 +27,7 @@ Configure your Datadog account to forward all the logs ingested—whether [index
 
 {{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
-This guide walks you through how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
+Navigate to the [**Log Forwarding** page][14] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
 1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
 2. Create a [storage bucket](#create-a-storage-bucket).
@@ -453,3 +453,4 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [11]: /account_management/rbac/permissions#logs_read_data
 [12]: /logs/explorer/live_tail/
 [13]: /events/explorer/
+[14]: https://app.datadoghq.com/logs/pipelines/log-forwarding
