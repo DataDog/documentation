@@ -26,29 +26,19 @@ For the most efficient resolution of an issue, be ready to provide any of the re
    - Links to any pages demonstrating the issue in your Datadog account
    - Screenshots or screen recordings of the behavior in question
    - Steps that can be taken to replicate the issue
+   - If the issue is related to the functioning of the Datadog Agent, an [Agent flare][4]
    - Links to any documentation pages used
 
 ## Chat or support ticket?
 
-### Support ticket
+Use the table below to determine whether to open a [support ticket][1] or reach out on chat. Chat is available any business day between the hours of 10:00 and 19:00 ET.
 
-A support ticket is recommended for:
-
-   - Questions or issues that may require significant technical investigation
-   - Questions or issues that are not urgent
-
-### Chat
-
-You can reach out to the support team through the chat link in Datadog, any business days between 10:00 and 19:00 (7:00 PM) ET. Reaching out on chat is recommended for:
-
-   - Urgent issues
-   - Call/Screenshare requests
-   - Incidents and outages
-   - Complex support troubleshooting across many configuration files, logs, or queries
-   - Product configuration support
-   - Setup questions
-   - Documentation clarification
-   - Simpler support troubleshooting involving a specific configuration file, log, or query
+| Support Ticket                  | Chat        |
+| ------------------------------- | ----------- |
+| Urgent issues                   | Product configuration support
+| Call/Screenshare requests       | Setup questions
+| Incidents and outages           | Documentation clarification
+| Complex support troubleshooting across many configuration files, logs, or queries | Minor issues involving a specific configuration file, log, or query
 
 If you're not sure which option is best, feel free to use either channel to connect with Datadog support. A support ticket is automatically created whenever a chat is closed, so the issue can continue to be investigated even if it's not resolved in chat.
 
@@ -79,3 +69,4 @@ If additional investigation is required, the ticket is routed to experts in the 
 [1]: help.datadoghq.com
 [2]: /account_management/org_switching/
 [3]: /getting_started/site/
+[4]: /agent/troubleshooting/send_a_flare/
