@@ -354,6 +354,24 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 
 {{< /tabs >}}
 
+#### IIS
+
+After installing the MSI, no additional configuration is needed to automatically instrument your IIS sites. To set additional environment variables that are inherited by all IIS sites, perform the following steps:
+
+1. Open the Registry Editor, find the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` key, and add the environment variables, one per line. For example, to add logs injection and runtime metrics, add the following lines to the value data:
+   ```text
+   DD_LOGS_INJECTION=true
+   DD_RUNTIME_METRICS_ENABLED=true
+   ```
+2. Run the following commands to restart IIS:
+   ```cmd
+   net stop /y was
+   net start w3svc
+   # Also, start any other services that were stopped when WAS was shut down.
+   ```
+
+{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Using the Registry Editor to create environment variables for all IIS sites" >}}
+
 #### Console applications
 
 To automatically instrument a console application, set the environment variables from a batch file before starting your application:
@@ -363,6 +381,10 @@ rem Set environment variables
 SET CORECLR_ENABLE_PROFILING=1
 rem Unless v2.14.0+ and you installed the tracer with the MSI
 SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+
+rem Set additional Datadog environment variables
+SET DD_LOGS_INJECTION=true
+SET DD_RUNTIME_METRICS_ENABLED=true
 
 rem Start application
 dotnet.exe example.dll
@@ -381,6 +403,10 @@ export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
+# Set additional Datadog environment variables
+export DD_LOGS_INJECTION=true
+export DD_RUNTIME_METRICS_ENABLED=true
+
 # Start your application
 dotnet example.dll
 ```
@@ -395,6 +421,10 @@ To set the required environment variables on a Linux Docker container:
   ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
   ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
   ENV DD_DOTNET_TRACER_HOME=/opt/datadog
+
+  # Set additional Datadog environment variables
+  ENV DD_LOGS_INJECTION=true
+  ENV DD_RUNTIME_METRICS_ENABLED=true
 
   # Start your application
   CMD ["dotnet", "example.dll"]
@@ -411,7 +441,10 @@ When using `systemctl` to run .NET applications as a service, you can add the re
     CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
     DD_DOTNET_TRACER_HOME=/opt/datadog
-    # any other environment variable used by the application
+
+    # Set additional Datadog environment variables
+    DD_LOGS_INJECTION=true
+    DD_RUNTIME_METRICS_ENABLED=true
     ```
 2. In the service's configuration file, reference this as an [`EnvironmentFile`][1] in the service block:
 
@@ -437,6 +470,10 @@ When using `systemctl` to run .NET applications as a service, you can also set e
     systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
     systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
     systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
+
+    # Set additional Datadog environment variables
+    systemctl set-environment DD_LOGS_INJECTION=true
+    systemctl set-environment DD_RUNTIME_METRICS_ENABLED=true
     ```
 2. Verify that the environment variables were set by running `systemctl show-environment`.
 
