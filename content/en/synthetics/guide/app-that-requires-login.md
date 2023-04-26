@@ -56,7 +56,7 @@ An alternative would be to use a non-SSO approach and leverage a regular usernam
 ### Passkeys
 Datadog Synthetic Monitoring supports [Passkeys][4], a security method that eliminates the risks of phishing, all forms of password theft, and replay attacks.
 
-Simply create a Virtual Authenticator global variable and import it in your test, once done record any passkey-related steps inside the browser.
+Create a Virtual Authenticator global variable and import it in your test. Then, record any passkey-related steps inside the browser.
 
 ### Multi-factor authentication
 
