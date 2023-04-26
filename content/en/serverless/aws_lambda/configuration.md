@@ -60,7 +60,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Further Reading](#further-reading)
 
 ### Security
-- [Enable Threat Detection to observe attack attempts] (#enable-threat-detection)
+- [Enable Threat Detection to observe attack attempts](#enable-threat-detection-to-observe-attack-attempts)
 
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
