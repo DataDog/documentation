@@ -72,7 +72,7 @@ Select an application type to start collecting RUM data:
 
 ## Explore Datadog RUM
 
-RUM can be accessed from [**UX Monitoring > RUM Applications**][1].
+Access RUM by navigating to [**UX Monitoring > RUM Applications**][1].
 
 ### Out-of-the-box dashboards
 
