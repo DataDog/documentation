@@ -57,7 +57,7 @@ Below the header of Cloud Security Posture Management signals are tabs with deta
 
 ### Workflows
 
-You can trigger a [Workflow][7] automatically from any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] for more information.
+You can trigger a [Workflow][7] automatically for any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] for more information.
 
 ### Threat intelligence
 
