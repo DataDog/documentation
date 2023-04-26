@@ -10,7 +10,6 @@ further_reading:
       text: 'Service Catalog'
 ---
 
-</div>
 
 {{% site-region region="gov,ap1" %}}
 <div class="alert alert-warning">
