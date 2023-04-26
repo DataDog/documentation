@@ -29,7 +29,7 @@ If you do not see your services in the DSM Map or Overview page after following 
 
 Latency calculations on a pathway require messages traversing through the pathway to be single threaded. If the messages in your data pipelines are multi-threaded, manual instrumentation is required, which is currently available for [Go applications][2] and [Java applications][3]. If you require manual instrumentation for .NET, contact us.
 
-In the Pathways tab, if you see the message "latency values may be approximate for these pathways“, view the documentation for [instrumentation guidelines][4].
+In the Pathways tab, if you see the message **latency values may be approximate for these pathways**, view the documentation for [instrumentation guidelines][4].
 
   
 ### Kafka metrics are missing
