@@ -1,5 +1,5 @@
 ---
-title: Service Scorecards
+title: Service Scorecards (Beta)
 kind: documentation
 is_beta: true
 private: true
