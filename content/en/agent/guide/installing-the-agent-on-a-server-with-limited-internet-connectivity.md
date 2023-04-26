@@ -35,7 +35,7 @@ Once the package has been transferred to the target system, it can be installed 
 sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.<CPU_ARCHITECTURE>.rpm
 ```
 
-To install a deb file in the current director for Debian based distributions:
+To install a deb file in the current directory for Debian-based distributions:
 
 ```bash
 sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb

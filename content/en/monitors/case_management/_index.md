@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Datadog Case Management provides a centralized place to track, triage, and troubleshoot issues. Create cases from alerts, security signals, and error-tracking issues that you want to investigate.
+Datadog Case Management provides a centralized place to track, triage, and troubleshoot issues. Create cases from alerts, security signals, and Error Tracking issues that you want to investigate.
 
 You can assign cases to users or teams, establishing clear lines of ownership that persist throughout the lifespan of the case. Populate your cases with graphs, logs, and other telemetry data from across Datadog alongside information from external tools, such as messaging and issue-tracking apps.
 
@@ -38,7 +38,7 @@ Make bulk edits to cases from the [Case Management page][1]:
 You can create or update cases from several locations in Datadog:
 - Monitors
 - Security signals
-- Error tracking
+- Error Tracking for Logs
 - Workflows
 - The Case Management page
 

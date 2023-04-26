@@ -23,7 +23,7 @@ To leveraging protection capabilities for your service:
 - [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable ASM][1].
 - [Enable Remote Configuration][2].
-- Update your tracing library to at least the minimum version needed to turn on protection. For details, see the ASM capabilities support section of[Compatibility][12] for your service's language.
+- Update your tracing library to at least the minimum version needed to turn on protection. For details, see the ASM capabilities support section of [Compatibility][12] for your service's language.
 - If you plan to use authenticated user blocking, [add user information to traces][4].
 
 ## Blocking IPs and users
@@ -79,7 +79,7 @@ View blocked suspicious requests in the [Trace Explorer][11] by filtering on the
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/application_security/enabling/
-[2]: /agent/guide/how_remote_config_works/
+[2]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
 [3]: /agent/versions/upgrade_between_agent_minor_versions
 [4]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [5]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal

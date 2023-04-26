@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/troubleshooting.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
@@ -11,6 +9,7 @@ further_reading:
 kind: documentation
 title: Dépannage
 ---
+
 ## Vérifier si le SDK Datadog est correctement initialisé
 
 Après avoir configuré le SDK Datadog et exécuter l'application pour la première fois, consultez votre console de debugging dans Xcode. Le SDK implémente plusieurs checks de cohérence et affiche des avertissements pertinents en cas de problème de configuration.
@@ -80,7 +79,7 @@ private class YourCustomDelegateURLSessionDelegate: NSObject, URLSessionTaskDele
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/real_user_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
+[1]: /fr/real_user_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-network-requests
 [2]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/URLSessionAutoInstrumentation/DDURLSessionDelegate.swift#L12
 [3]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1643148-urlsession
 [4]: https://developer.apple.com/documentation/foundation/urlsessiontaskdelegate/1411610-urlsession
