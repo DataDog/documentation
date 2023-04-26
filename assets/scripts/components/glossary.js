@@ -13,13 +13,23 @@ window.onscroll = (()=> {
 })
 
 
-const handleGlossaryFilter = (e) => {
+export const handleGlossaryFilter = (e) => {
+  window.scroll(0, 0);
   const glossaryTerms = document.querySelectorAll('.glossary-term-container')
   const glossaryLetters = document.querySelectorAll('.glossary-letter')
   const glossaryNavLetters = document.querySelectorAll('#glossary-nav .nav-item')
   
-  // if no event (e) passed to func, get filter value from url hash value
-  const filterValue = e ? e.target.dataset.value : window.location.hash.replace('#filter-', '')
+  // if no event (e), get filter value from 'product' query param
+  let filterValue = ""
+  if(e){
+    const { value } = e.target.dataset
+    const newParam = `?product=${value}`
+    // pushState adds the filter query param to url without loading/refreshing the url/page
+    window.history.pushState({param: newParam },'',newParam)
+    filterValue = value
+  }else{
+    filterValue = window.location.search?.replace('?product=', '')
+  }
 
   unhideElements([...glossaryTerms, ...glossaryLetters, ...glossaryNavLetters])
 
@@ -60,8 +70,6 @@ const handleGlossaryFilter = (e) => {
 }
 
 
-// Load handler when sharing filtered view
-window.addEventListener('load', () => handleGlossaryFilter(null) )
 
 // ON CLICK
 export const addGlossaryFilterClickEvnt = () => {
@@ -71,7 +79,11 @@ export const addGlossaryFilterClickEvnt = () => {
   })
 };
 
-addGlossaryFilterClickEvnt()
+if(window.location.pathname === '/glossary/'){
+  // Load handler when sharing filtered view
+  window.addEventListener('load', () => handleGlossaryFilter(null) )
+  addGlossaryFilterClickEvnt()
+}
 
 // HELPERS //
 /**

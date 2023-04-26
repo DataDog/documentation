@@ -65,9 +65,9 @@
                 </ul>
                 <!-- Filtering section -->
                 <div class="filters-glossary">
-                    <a href="#filter-{{ .Params.filter_all | anchorize }}" class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ .Params.filter_all | anchorize }}">{{.Params.filter_all | upper}}</a> 
+                    <button class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ .Params.filter_all | anchorize }}">{{.Params.filter_all | upper}}</button> 
                     {{ range $products }}
-                        <a href="#filter-{{ . | anchorize }}" class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ . | anchorize }}">{{ . | upper }}</a>
+                        <button class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary" data-value="{{ . | anchorize }}">{{ . | upper }}</button>
                     {{ end }}
                 </div>
             </nav>
