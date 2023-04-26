@@ -5,13 +5,8 @@ aliases:
 - /monitors/case_management/
 further_reading:
 - link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
-<<<<<<< HEAD:content/en/service_management/case_management/_index.md
-  tag: "Blog"
-  text: Proactively track, triage, and assign issues
-=======
   tag: "blog"
   text: "Proactively track, triage, and assign issues with Datadog Case Management"
->>>>>>> master:content/en/monitors/case_management/_index.md
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
