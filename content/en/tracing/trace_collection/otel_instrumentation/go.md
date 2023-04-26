@@ -15,9 +15,10 @@ further_reading:
 
 ## Requirements and limitations
 
-tktk Go Requirements
+- Datadog Go tracing library `dd-trace-go` version 1.5.0 or greater.
+- Go version 1.8 or greater.
 
-The following OTel features implemented in the Datadog library as noted:
+The following OTel features are implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
 |---------------------------------------|------------------------------------|
@@ -30,34 +31,41 @@ The following OTel features implemented in the Datadog library as noted:
 ## Configuring OTel to use the Datadog trace provider
 
 1. Add your desired manual OTel instrumentation to your Go code following the [OTel Go Manual Instrumentation documentation][5].
-2. Install necessary OpenTelemetry package `go.opentelemetry.io/otel` using the command:
 
-  ```shell
-  go get go.opentelemetry.io/otel
-  ```
-3. Install Datadog OpenTelemetry wrapper package `gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry` using the command:
+2. Install the OpenTelemetry package `go.opentelemetry.io/otel` using the command:
 
-  ```shell
-  go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry
-  ```
+   ```shell
+   go get go.opentelemetry.io/otel
+   ```
+
+3. Install the Datadog OpenTelemetry wrapper package `gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry` using the command:
+
+   ```shell
+   go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry
+   ```
+
 4. Import packages in the code:
 
-  ```go
-  import (
-    "go.opentelemetry.io/otel"
-    ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
-  )
-  ```
-5. Create a TracerProvider, optionally providing a set of options, that are specific to Datadog's APM product, and defer the Shutdown method, which stops the tracer.
+   ```go
+   import (
+     "go.opentelemetry.io/otel"
+     ddotel "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/opentelemetry"
+   )
+   ```
 
-  ```go
-provider := ddotel.NewTracerProvider()
-defer provider.Shutdown()
-  ```
-6. Use the Tracer Provider instance with the OpenTelemetry API to set the global TracerProvider.
-  ```go
-  otel.SetTracerProvider(provider)
-  ```
+5. Create a TracerProvider, optionally providing a set of options, that are specific to Datadog APM, and defer the Shutdown method, which stops the tracer:
+
+   ```go
+   provider := ddotel.NewTracerProvider()
+   defer provider.Shutdown()
+   ```
+
+6. Use the Tracer Provider instance with the OpenTelemetry API to set the global TracerProvider:
+
+   ```go
+   otel.SetTracerProvider(provider)
+   ```
+   
 7. Run your application.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
