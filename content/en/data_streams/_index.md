@@ -72,7 +72,7 @@ By filtering to a single Kafka or RabbitMQ cluster, you can detect changes in in
 
 ### Quickly pivot to identify root causes in infrastructure, logs, or traces 
 
-Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click on the **Infra** or **Logs** tabs to further troubleshoot why pathway latency or consumer lag has increased. To view traces within your pathways, click the **Processing Latency** tab.
+Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra** or **Logs** tabs to further troubleshoot why pathway latency or consumer lag has increased. To view traces within your pathways, click the **Processing Latency** tab.
   
 {{< img src="data_streams/data_streams_infra.jpg" alt="Datadog Data Streams Monitoring Infra tab" style="width:100%;" >}}
 
