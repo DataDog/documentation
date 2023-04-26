@@ -14,18 +14,18 @@ description: Troubleshoot Data Streams Monitoring
 This page explains common issues with setting up and using Data Streams Monitoring, and how to resolve them. Datadog recommends staying up to date with the latest version of the Datadog tracing libraries you use, as each release contains improvements and fixes.
 
 ## Diagnosing common problems
-### Services aren’t showing up in the DSM Map
+### Services aren't showing up in the DSM Map
 
 If you do not see your services in the DSM Map or Overview page after following the [setup instructions][1], ensure these requirements are met: 
-* You’re running the Datadog Agent v7.34.0 or later
-* Your service is directly producing or consuming from Kafka or RabbitMQ 
-* You’re running the following tracing library agent versions:
+* You're running the Datadog Agent v7.34.0 or later.
+* Your service is directly producing or consuming from Kafka or RabbitMQ.
+* You're running the following tracing library agent versions:
    * Java: Agent v1.9.0 or later
    * .NET: Tracer v2.28.0 or later (.NET Core, .NET Framework)
    * Go (manual instrumentation): Data Streams Library v0.2 or later
 
   
-### End to end latency metric doesn’t look accurate
+### End-to-end latency metric doesn't look accurate
 
 Latency calculations on a pathway require messages traversing through the pathway to be single threaded. If the messages in your data pipelines are multi-threaded, manual instrumentation is required, which is currently available for [Go applications][2] and [Java applications][3]. If you require manual instrumentation for .NET, contact us.
 
