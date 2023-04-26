@@ -33,7 +33,7 @@ In the Pathways tab, if you see the message "latency values may be approximate f
 
   
 ### Kafka metrics are missing
-If your application is running in Java, ensure you’re running version v1.9.0 or later of the Java Agent, and that both the producer and the consumer services are instrumented.
+If your application is running in Java, ensure you're running version v1.9.0 or later of the Java Agent, and that both the producer and the consumer services are instrumented.
 
 If your applications are running in .NET or Go, the [Kafka Consumer Integration][5] is required for the Kafka metrics to populate.
 
