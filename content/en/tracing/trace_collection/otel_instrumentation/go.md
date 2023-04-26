@@ -17,6 +17,7 @@ further_reading:
 
 - Datadog Go tracing library `dd-trace-go` version 1.5.0 or greater.
 - Go version 1.8 or greater.
+- Our OTel API implementation is dependent on upstream [OpenTelemetry Go][6].
 
 The following OTel features are implemented in the Datadog library as noted:
 
@@ -76,4 +77,5 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
 [4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
 [5]: https://opentelemetry.io/docs/instrumentation/go/manual/
+[6]: https://opentelemetry.io/docs/instrumentation/go/
 [9]: /tracing/trace_collection/trace_context_propagation/go/
