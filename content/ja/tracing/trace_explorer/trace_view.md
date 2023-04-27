@@ -98,6 +98,17 @@ title: トレースビュー
 
 [1]: /ja/network_monitoring/performance/network_page
 [2]: /ja/network_monitoring/performance/setup
+{{< /tabs >}}
+
+{{% tab "セキュリティ" %}}
+
+分散型トレーシングのサービスを対象とした攻撃の試行を確認できます。攻撃者が使用したパターン、攻撃を検出したルール、攻撃者がサービスの脆弱性を発見したかどうかを確認することができます。
+
+[Datadog Application Security Management][1] を使用してさらに調査するには、**View in ASM** をクリックします。
+
+{{< img src="tracing/visualization/trace/trace_security.png" alt="攻撃の試行をトレースする" style="width:90%;">}}
+
+[1]: /ja/security/application_security/how-appsec-works/
 {{% /tab %}}
 {{< /tabs >}}
 
