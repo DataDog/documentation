@@ -361,30 +361,7 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 ## Configuration settings
 
-The following system properties set configuration options and have environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
-
-`dd.service`
-: Name of the service or library under test.<br/>
-**Environment variable**: `DD_SERVICE`<br/>
-**Default**: `unnamed-java-app`<br/>
-**Example**: `my-java-app`
-
-`dd.env`
-: Name of the environment where tests are being run.<br/>
-**Environment variable**: `DD_ENV`<br/>
-**Default**: `none`<br/>
-**Examples**: `local`, `ci`
-
-`dd.trace.agent.url`
-: Datadog Agent URL for trace collection in the form `http://hostname:port`.<br/>
-**Environment variable**: `DD_TRACE_AGENT_URL`<br/>
-**Default**: `http://localhost:8126`
-
-All other [Datadog Tracer configuration][2] options can also be used.
-
-**Important:** You may want to enable more integrations if you have integration tests. To enable a specific integration, use the [Datadog Tracer Compatibility][3] table to create your custom setup for your integration tests.
-
-For example, to enable `OkHttp3` client request integration, add `-Ddd.integration.okhttp-3.enabled=true` to your setup.
+[Datadog Tracer configuration][2] options can be used for fine-tuning the tracer behavior.
 
 ### Collecting Git metadata
 
@@ -443,19 +420,44 @@ When CI Visibility is enabled, the following data is collected from your project
 * Test names and durations.
 * Predefined environment variables set by CI providers.
 * Git commit history including the hash, message, author information, and files changed (without file contents).
+* Source code information: relative paths to sources of test classes, line numbers of test methods.
 * Information from the CODEOWNERS file.
 
 ## Troubleshooting
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
 
-If the tests are not appearing in Datadog, ensure that you are using version 0.91.0 or greater of the Java tracer.
-The `-Ddd.civisibility.enabled=true` configuration property is only available since that version.
+Ensure that you are using the latest version of the tracer.
 
-If you need to use a previous version of the tracer, you can configure CI Visibility by using the following system properties:
-{{< code-block lang="shell" >}}
--Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true
-{{< /code-block >}}
+Verify that your build system and testing framework are supported by CI Visibility (refer to the list of supported build systems and test frameworks).
+
+Ensure that the `dd.civisibility.enabled` property is set to `true` in the tracer arguments.
+
+Check the build output for any errors that indicate tracer misconfiguration, such as an unset DD API KEY.
+
+### Tests or source code compilation fails when building a project with the tracer attached
+
+By default, CI Visibility runs Java code compilation with a compiler plugin attached.
+
+The plugin is optional, as it only serves to reduce the performance overhead.
+
+Depending on the build configuration, adding the plugin can sometimes disrupt the compilation process.
+
+If the plugin interferes with the build, disable it by adding `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` to the list of `-javaagent` arguments.
+
+### Tests fail when building a project with the tracer attached
+
+In some cases attaching the tracer can break tests, especially if they run asserts on the internal state of the JVM or instances of third-party libraries' classes.
+
+While the best approach is such cases is to update the tests, there is also a quicker option of disabling the tracer's third-party libraries integrations.
+
+The integrations provide additional insights into what happens in the tested code and are especially useful in integration tests, to monitor things like HTTP requests or database calls.
+They are enabled by default.
+
+To disable a specific integration, refer to the [Datadog Tracer Compatibility][3] table for the relevant configuration property names.
+For example, to disable `OkHttp3` client request integration, add `dd.integration.okhttp-3.enabled=false` to the list of `-javaagent` arguments.
+
+To disable all integrations, augment the list of `-javaagent` arguments with `dd.trace.enabled=false`.
 
 ## Further reading
 
@@ -463,4 +465,4 @@ If you need to use a previous version of the tracer, you can configure CI Visibi
 
 [1]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
 [2]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
-[3]: /tracing/trace_collection/compatibility/java
+[3]: /tracing/trace_collection/compatibility/java#integrations
