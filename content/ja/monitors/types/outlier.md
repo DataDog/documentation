@@ -22,7 +22,7 @@ title: 外れ値モニター
 
 外れ値検出は、特定のグループがピアと比較して異なる動作をしていることを検出できるアルゴリズム機能です。たとえば、プール内の 1 つのウェブサーバーが異常な数のリクエストを処理していることや、1 つの AWS アベイラビリティーゾーンで他よりはるかに多くの 500 エラーが発生していることを検出できます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="外れ値メトリクスアラート"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="外れ値メトリクスアラート" style="width:80%;">}}
 
 ## モニターの作成
 
@@ -46,7 +46,7 @@ Datadog で[外れ値モニター][1]を作成するには、メインナビゲ�
 
 アラートが適切に調整されるようにするには、プレビューグラフで時間枠を設定し、逆 (<<) ボタンを使用して、アラートをトリガーしたはずの外れ値を時間で振り返ります。さらに、この機能を使用して、特定の外れ値アルゴリズムに合わせてパラメーターを調整できます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="外れ値の新しいモニターグラフの調整"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="外れ値の新しいモニターグラフの調整" style="width:80%;">}}
 
 #### アルゴリズム
 
@@ -93,7 +93,7 @@ DBSCAN と MAD には、スケール調整バージョンがあります（scale
 
 以下の図では、複数のホストが一斉にバッファをフラッシュしていますが、1 つのホストが少し遅れてバッファをフラッシュしています。DBSCAN はこのホストを外れ値として検出しますが、MAD は検出しません。このグループの同時性は、単にそれらのホストが同時に再起動されたという人為的な理由に過ぎないため、このようなケースでは MAD の使用が適しています。一方、もしメトリクスがバッファのフラッシュではなくスケジューリングされたジョブを表し、グループ内のホスト全体で実際に同時に発生する必要がある場合は、DBSCAN の使用が適しています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="外れ値のフラッシュ"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="外れ値のフラッシュ" style="width:80%;">}}
 
 ### 高度なアラート条件
 
@@ -111,7 +111,7 @@ DBSCAN と MAD には、スケール調整バージョンがあります（scale
 
 外れ値アルゴリズムは、ピアとは異なる動作をしているグループを識別するために設定されます。 以下に示すようにグループに「帯状」動作が見られる場合（帯ごとに異なるシャードを表す場合がある）、各帯に識別子をタグ付けし、各帯で外れ値検出アラートを個別に設定することをお勧めします。
 
-{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="外れ値の帯状"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="外れ値の帯状" style="width:80%;">}}
 
 ## {{< partial name="whats-next/whats-next.html" >}}
 
