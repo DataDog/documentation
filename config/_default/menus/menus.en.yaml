@@ -2320,6 +2320,11 @@ main:
     identifier: data_streams
     parent: apm_heading
     weight: 170000
+  - name: Troubleshooting
+    url: data_streams/troubleshooting
+    identifier: data_streams_troubleshooting
+    parent: data_streams
+    weight: 1
   - name: Log Management
     url: logs/
     pre: log
