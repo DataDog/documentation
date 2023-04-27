@@ -1,12 +1,13 @@
 ---
-title: Datadog クリップボード
-kind: documentation
 description: インシデントの作成と管理
 further_reading:
-  - link: https://www.datadoghq.com/blog/datadog-clipboard/
-    tag: ブログ
-    text: Datadog クリップボードでデータを楽に検索
+- link: https://www.datadoghq.com/blog/datadog-clipboard/
+  tag: ブログ
+  text: Datadog クリップボードでデータを楽に検索
+kind: documentation
+title: Datadog クリップボード
 ---
+
 ## 概要
 
 Datadog クリップボードは、さまざまなコンテキストを収集して共有するためのクロスプラットフォーム型ツールです。各ユーザーが個別に使用でき、コピーしたすべてのグラフを保存したリンクと一緒に保存できます。また、シグナルは分類して、ダッシュボード、ノートブック、インシデントにエクスポートできます。
@@ -19,19 +20,19 @@ Datadog クリップボードは、さまざまなコンテキストを収集し
 
 ## クリップボードを開く
 
-クリップボードを開くには、いずれかのグラフをコピーして、トースト内で “Open Clipboard” をクリックします。
+クリップボードを開くには、いずれかのグラフをコピーして、トースト内で **Open Clipboard** をクリックします。
 
 {{< img src="monitors/incidents/open-clipboard.png" alt="クリップボードでグラフを開く"  style="width:80%;">}}
 
-または、最小化されたクリップボード上で “`Cmd/Ctrl + Shift + K` to open” をクリックします。
+または、最小化されたクリップボード上で "`Cmd/Ctrl + Shift + K` to open" をクリックします。
 
 クリップボードの開閉には、`Cmd/Ctrl + Shift + K` も使用できます。クリップボードを最小化するには、最小化アイコンをクリックします。最小化されたクリップボードは、Datadog の全ページにそのまま残ります。
 
 ## クリップの追加
 
-グラフを追加するには、`Cmd/Ctrl + C` キーを押してコピーするか、エクスポートメニューで “Copy” をクリックします。クリップボードが開いた際に、コピーしたグラフが自動的に追加されます。
+グラフを追加するには、`Cmd/Ctrl + C` キーを押してコピーするか、エクスポートメニューで **Copy** をクリックします。クリップボードが開いた際に、コピーしたグラフが自動的に追加されます。
 
-URL を追加するには、クリップボードを開き、“Add current page.” をクリクします。
+URL を追加するには、クリップボードを開き、**Add current page** をクリクします。
 
 {{< img src="monitors/incidents/add-page.png" alt="クリップボードにダッシュボードを追加"  style="width:80%;">}}
 
@@ -41,7 +42,7 @@ URL を追加するには、クリップボードを開き、“Add current page
 
 {{< img src="monitors/incidents/managing-clips.png" alt="クリップを管理"  style="width:80%;">}}
 
-クリップボードには、最大 20 個の信号を保存できます。削除する場合は、1 つずつ削除するか、“Remove All.” をクリックします。20 個を超える信号が追加された場合、一番古い信号 (一番左側に保存) が自動的に削除されます。
+クリップボードには、最大 20 個の信号を保存できます。削除する場合は、1 つずつ削除するか、**Remove All** をクリックします。20 個を超える信号が追加された場合、一番古い信号 (一番左側に保存) が自動的に削除されます。
 
 ## エクスポート
 

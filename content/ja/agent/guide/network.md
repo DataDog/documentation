@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - ネットワークトラフィック
 aliases:
 - /ja/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
 - /ja/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
@@ -56,7 +59,7 @@ Worker のバージョン 0.1.6 以降の API  テスト結果 `intake.synthetic
 Worker のバージョン 0.2.0 以降のブラウザテスト結果 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Worker のバージョン 0.1.5 以降の API テスト結果 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 [データベースモニタリング][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
@@ -129,6 +132,18 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 : `lambda-tcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `gcp-encrypted-intake.logs.us5.datadoghq.com`<br>
 `http-encrypted-intake.logs.us5.datadoghq.com`
+
+[1]: /ja/logs/
+[2]: /ja/data_security/logs/#hipaa-enabled-customers
+[3]: /ja/logs/log_collection/#logging-endpoints
+
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+
+[ログ][1] & [HIPAA ログ][2]
+: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
+その他: [ログのエンドポイント][3]を参照してください
 
 [1]: /ja/logs/
 [2]: /ja/data_security/logs/#hipaa-enabled-customers
@@ -297,6 +312,9 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 
 5002/tcp
 : [Agent ブラウザ GUI][2] 用のポート
+
+5012/tcp
+: APM [go_expvar server][1] 用のポート
 
 6062/tcp
 : Process Agent のデバッグエンドポイント用のポート。

@@ -2,9 +2,6 @@
 aliases:
 - /ja/tracing/setup_overview/setup/ios/
 - /ja/tracing/setup/ios/
-beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md
 description: iOS アプリケーションからトレースを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
@@ -239,12 +236,13 @@ Datadog.verbosityLevel = .debug
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
+```
 DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Datadog トレーサーは [Open Tracing 規格][8]を実装しています。`Tracer` を Open Tracing の `Global.sharedTracer` としてグローバルに構成・登録します。この作業は一度だけで、通常は `AppDelegate` のコードで行います。
+3. Datadog トレーサーは [Open Tracing 標準][8]を実装します。`Tracer` を Open Tracing `Global.sharedTracer` としてグローバルに構成して登録します。通常、`AppDelegate` コードで 1 回実施するだけです。
 
 {{< tabs >}}
 {{% tab "Swift" %}}

@@ -3,6 +3,7 @@ title: Cloud Cost Management
 kind: documentation
 aliases:
   - /infrastructure/cloud_cost_management
+  - /integrations/cloudability
 further_reading:
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"

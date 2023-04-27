@@ -28,7 +28,7 @@ To trigger a workflow manually:
 1. Enter the values for existing trigger variables.
 1. When you're ready to run the workflow, click **Save & Run**.
 
-## Manually trigger a workflow from a Dashboard
+## Trigger a workflow from a Dashboard
 
 To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
 1. From your Dashboard, click **Add Widget**.
@@ -60,7 +60,11 @@ To trigger a workflow from a Monitor:
 
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
-## Trigger a workflow from a Security Signal Notification Rule
+## Trigger a workflow from a Security Signal
+
+You can trigger a Workflow automatically for any Security Signal, or manually trigger a Workflow from a Cloud SIEM Security Signal panel.
+
+### Trigger a workflow automatically from Security Signal Notification Rules
 
 You can set up a workflow to trigger every time a Security Signal Notification Rule fires.
 
@@ -75,6 +79,16 @@ To trigger a workflow from a Notification Rule:
 {{< img src="workflows/notification-rule-trigger.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
 Each time the Notification Rule fires, it triggers a workflow run.
+
+### Trigger a workflow manually from Cloud SIEM Security Signals
+
+You can manually start a workflow from a Cloud SIEM Security Signal panel.
+
+1. Click **Run Workflow** at the top of the Security Signal panel.
+1. In the search modal, enter the name of the workflow you want to run. Select the workflow. 
+1. If your workflow requires input parameters, enter the values as required. You can copy the values from the Signal object JSON displayed next to the input parameters, and paste them into the parameter fields.
+1. Click **Run**.
+1. You can see the workflow run status in the **Workflow** section of the Security Signal.
 
 ## Trigger a workflow on a schedule
 

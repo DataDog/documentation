@@ -1,9 +1,7 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: Github
   text: dd-sdk-android ソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
@@ -373,16 +371,16 @@ Datadog の構成で、初期化時に以下のスニペットを追加します
 
 [1]: https://github.com/DataDog/dd-sdk-android
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[8]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#client-tokens
+[5]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[6]: /ja/real_user_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[8]: /ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [9]: https://square.github.io/okhttp/interceptors/
-[10]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#custom-views
-[11]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[10]: /ja/real_user_monitoring/android/advanced_configuration/#custom-views
+[11]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[13]: https://docs.datadoghq.com/ja/real_user_monitoring/android/web_view_tracking/
-[14]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags/#rum--session-replay
-[15]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/
+[13]: /ja/real_user_monitoring/android/web_view_tracking/
+[14]: /ja/getting_started/tagging/using_tags/#rum--session-replay
+[15]: /ja/real_user_monitoring/android/data_collected/

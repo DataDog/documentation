@@ -49,6 +49,9 @@ Capabilities:
 - `Trace_ID` injection into application logs
 - Custom metrics with [DogStatsD][7]
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/azure/#log-collection
 [2]: /tracing/trace_collection/dd_libraries/

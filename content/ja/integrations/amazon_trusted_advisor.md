@@ -1,8 +1,10 @@
 ---
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
+- コスト管理
 - ログの収集
+- プロビジョニング
 dependencies: []
 description: Amazon Trusted Advisor のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_trusted_advisor/
@@ -35,7 +37,7 @@ Amazon Trusted Advisor は、AWS ベストプラクティスに従ってリソ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
