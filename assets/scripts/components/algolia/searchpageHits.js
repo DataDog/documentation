@@ -22,9 +22,9 @@ const renderHits = (renderOptions, isFirstRender) => {
         const category = `<p class="ais-Hits-category">${hit.category}</p>`
         const subcategory = `<p class="ais-Hits-subcategory">${hit.subcategory}</p>`
         const pageTitle = `<p class="ais-Hits-title">${hit.title}</p>`
-        const baseTitleHierarchy = `${category}${spacer}${subcategory}${spacer}${pageTitle}`
-
-        if (hit.subcategory === hit.title) return `${category}${spacer}${pageTitle}`
+        const baseTitleHierarchy = hit.subcategory === hit.title 
+            ? `${category}${spacer}${pageTitle}`
+            : `${category}${spacer}${subcategory}${spacer}${pageTitle}`
 
         return hit.section_header
             ? `${baseTitleHierarchy}${spacer}<p class="ais-Hits-title">${hit.section_header}</p>`
