@@ -1,7 +1,6 @@
 ---
 categories:
-  - モニタリング
-ddtype: crawler
+- メトリクス
 dependencies: []
 description: 動画配信プラットフォームの Conviva Quality Insights メトリクスを監視します。
 doc_link: https://docs.datadoghq.com/integrations/conviva/
@@ -17,8 +16,10 @@ manifest_version: '1.0'
 name: conviva
 public_title: Datadog-Conviva インテグレーション
 short_description: Conviva Quality Metriclens メトリクスを収集。
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Datadog と Conviva アカウントを接続して、エクスペリエンスの品質 (QoE) MetricLens メトリクスを確認します。

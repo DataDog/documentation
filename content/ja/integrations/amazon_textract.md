@@ -1,7 +1,8 @@
 ---
 categories:
-- クラウド
+- 自動化
 - AWS
+- クラウド
 - ログの収集
 dependencies: []
 description: Amazon Textract の主要なメトリクスを追跡します。
@@ -30,7 +31,7 @@ Amazon Textract は、スキャンしたドキュメントからテキスト、�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

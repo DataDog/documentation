@@ -2,6 +2,9 @@
 title: Monitoring Page Performance
 kind: documentation
 further_reading:
+  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+    tag: "Learning Center"
+    text: "Interactive Lab: Core Web Vitals"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
@@ -18,10 +21,6 @@ further_reading:
     tag: "Documentation"
     text: "Learn about RUM Dashboards"
 ---
-
-{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
-{{< /callout >}}
 
 ## Overview
 

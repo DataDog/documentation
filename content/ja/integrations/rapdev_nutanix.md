@@ -57,7 +57,7 @@ pricing:
   tag: コア
   unit_label: Nutanix ホストコア
   unit_price: 5
-public_title: Nutanix インテグレーション
+public_title: Nutanix
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
 - linux
@@ -88,7 +88,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Nutanix インテグレーション
+  title: Nutanix
   uninstallation: README.md#Uninstallation
 ---
 

@@ -5956,7 +5956,7 @@ components:
           readOnly: true
           type: string
         interval:
-          description: Number of seconds between data samples.
+          description: Number of milliseconds between data samples.
           format: int64
           readOnly: true
           type: integer
@@ -5971,10 +5971,10 @@ components:
           readOnly: true
           type: string
         pointlist:
-          description: List of points of the time series.
+          description: List of points of the time series in milliseconds.
           example:
-          - - 1575317847.0
-            - 0.5
+          - - 1681683300000.0
+            - 77.62145685254418
           items:
             $ref: '#/components/schemas/Point'
           readOnly: true
@@ -11711,12 +11711,14 @@ components:
       - none
       - false_positive
       - testing_or_maintenance
+      - investigated_case_opened
       - other
       type: string
       x-enum-varnames:
       - NONE
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
+      - INVESTIGATED_CASE_OPENED
       - OTHER
     SignalAssigneeUpdateRequest:
       description: Attributes describing an assignee update operation over a security
@@ -12471,6 +12473,8 @@ components:
       - networkHop
       - receivedMessage
       - grpcHealthcheckStatus
+      - grpcMetadata
+      - grpcProto
       - connection
       example: statusCode
       type: string
@@ -12491,6 +12495,8 @@ components:
       - NETWORK_HOP
       - RECEIVED_MESSAGE
       - GRPC_HEALTHCHECK_STATUS
+      - GRPC_METADATA
+      - GRPC_PROTO
       - CONNECTION
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
@@ -25476,7 +25482,7 @@ paths:
         #### Query Types
 
 
-        **Metric Alert Query**
+        ##### Metric Alert Query
 
 
         Example: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator
@@ -25524,7 +25530,7 @@ paths:
         ''dbscan'', 7) > 0`
 
 
-        **Service Check Query**
+        ##### Service Check Query
 
 
         Example: `"check".over(tags).last(count).by(group).count_by_status()`
@@ -25550,7 +25556,7 @@ paths:
         for more information.
 
 
-        **Event Alert Query**
+        ##### Event Alert Query
 
 
         Example: `events(''sources:nagios status:error,warning priority:normal tags:
@@ -25586,7 +25592,7 @@ paths:
         V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
 
 
-        **Event V2 Alert Query**
+        ##### Event V2 Alert Query
 
 
         Example: `events(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25607,7 +25613,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **Process Alert Query**
+        ##### Process Alert Query
 
 
         Example: `processes(search).over(tags).rollup(''count'').last(timeframe) operator
@@ -25653,7 +25659,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **Composite Query**
+        ##### Composite Query
 
 
         Example: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite
@@ -25679,7 +25685,7 @@ paths:
         UI.
 
 
-        **SLO Alert Query**
+        ##### SLO Alert Query
 
 
         Example: `error_budget("slo_id").over("time_window") operator #`
@@ -25694,7 +25700,7 @@ paths:
         - `operator`: `>=` or `>`
 
 
-        **Audit Alert Query**
+        ##### Audit Alert Query
 
 
         Example: `audits(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25719,7 +25725,7 @@ paths:
         and US5.
 
 
-        **CI Pipelines Alert Query**
+        ##### CI Pipelines Alert Query
 
 
         Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25744,7 +25750,7 @@ paths:
         **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
 
 
-        **CI Tests Alert Query**
+        ##### CI Tests Alert Query
 
 
         Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25770,7 +25776,7 @@ paths:
         US3, and US5.
 
 
-        **Error Tracking Alert Query**
+        ##### Error Tracking Alert Query
 
 
         Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)
@@ -27483,7 +27489,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 1
+      x-menu-order: 3
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -27530,7 +27536,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 5
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/state:
@@ -27577,7 +27583,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/series:

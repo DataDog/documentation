@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure Virtual Network のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_virtual_networks/
@@ -37,7 +38,7 @@ Azure Virtual Network からメトリクスを取得して、以下のことを�
 
 **注**: ゲートウェイサブネットの使用量は Azure ではサポートされておらず、使用可能なアドレス空間と割り当てられたアドレス空間の双方について (-1) の値が返されます。ゲートウェイサブネットを含む仮想ネットワークの使用量を集計する場合は、この点を考慮するようにしてください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
