@@ -77,216 +77,11 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 {{< /tabs >}}
 
-## Installing the Java tracer
-
-Install and enable the Java tracer v0.101.0 or later.
-
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Add a Maven profile in your root `pom.xml` configuring the Datadog Java tracer dependency and the `javaagent` arg property, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]), and specifying the name of the service or library under test with the `-Ddd.service` property:
-
-{{< code-block lang="xml" filename="pom.xml" >}}
-<profile>
-  <id>dd-civisibility</id>
-  <activation>
-    <activeByDefault>false</activeByDefault>
-  </activation>
-  <properties>
-    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true</dd.java.agent.arg>
-  </properties>
-  <dependencies>
-    <dependency>
-        <groupId>com.datadoghq</groupId>
-        <artifactId>dd-java-agent</artifactId>
-        <version>$VERSION</version>
-        <scope>provided</scope>
-    </dependency>
-  </dependencies>
-</profile>
-{{< /code-block >}}
-
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-Add the `ddTracerAgent` entry to the `configurations` task block, and add the Datadog Java tracer dependency, replacing `$VERSION` with the latest version of the tracer available in the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
-
-{{< code-block lang="groovy" filename="build.gradle" >}}
-configurations {
-    ddTracerAgent
-}
-dependencies {
-    ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
-}
-{{< /code-block >}}
-
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
-{{< /tabs >}}
-
-### Installing the Java compiler plugin
-
-The Java compiler plugin works in combination with the Java tracer, and provides it with additional source code information. Installing the plugin is an optional step that improves performance and accuracy of certain CI visibility features.
-
-The plugin works with the standard `javac` compiler. Eclipse JDT compiler is not supported.
-
-If the configuration is successful, you should see the line `DatadogCompilerPlugin initialized` in your compiler's output.
-
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Include the snippets below in the relevant sections of the same Maven profile that you have added to your root `pom.xml` for the tracer configuration.
-Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
-
-{{< code-block lang="xml" filename="pom.xml" >}}
-<dependency>
-    <groupId>com.datadoghq</groupId>
-    <artifactId>dd-javac-plugin-client</artifactId>
-    <version>$VERSION</version>
-</dependency>
-{{< /code-block >}}
-
-{{< code-block lang="xml" filename="pom.xml" >}}
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.5</version>
-            <configuration>
-                <annotationProcessorPaths>
-                    <annotationProcessorPath>
-                        <groupId>com.datadoghq</groupId>
-                        <artifactId>dd-javac-plugin</artifactId>
-                        <version>$VERSION</version>
-                    </annotationProcessorPath>
-                </annotationProcessorPaths>
-                <compilerArgs>
-                    <arg>-Xplugin:DatadogCompilerPlugin</arg>
-                </compilerArgs>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-{{< /code-block >}}
-
-The Maven compiler plugin supports the [`annotationProcessorPaths`][3] property starting with version 3.5. If you have to use an older version, declare the Datadog compiler plugin as a regular dependency in your project.
-
-Additionally, if you are using JDK 16 or later, add the following lines to the [`.mvn/jvm.config`][4] file in your project's base directory:
-
-{{< code-block lang="properties" filename=".mvn/jvm.config" >}}
---add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
---add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
---add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
---add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
-{{< /code-block >}}
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
-[3]: https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths
-[4]: https://maven.apache.org/configure.html#mvn-jvm-config-file
-
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-Add the plugin-client JAR to the project's classpath, add the plugin JAR to the compiler's annotation processor path, and pass the plugin argument to the tasks that compile Java classes.
-
-Replace `$VERSION` with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
-
-{{< code-block lang="groovy" filename="build.gradle" >}}
-if (project.hasProperty("dd-civisibility")) {
-    dependencies {
-        implementation 'com.datadoghq:dd-javac-plugin-client:$VERSION'
-        annotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
-        testAnnotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        options.compilerArgs.add('-Xplugin:DatadogCompilerPlugin')
-    }
-}
-{{< /code-block >}}
-
-Additionally, if you are using JDK 16 or later, add the following lines to your [gradle.properties][3] file:
-
-{{< code-block lang="properties" filename="gradle.properties" >}}
-org.gradle.jvmargs=\
---add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED  \
---add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
---add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
---add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
-{{< /code-block >}}
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
-[3]: https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Instrumenting your tests
-
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-Configure the [Maven Surefire Plugin][1] or the [Maven Failsafe Plugin][2] (or both if you use both) to use the Datadog Java Agent:
-
-* If using the [Maven Surefire Plugin][1]:
-
-{{< code-block lang="xml" filename="pom.xml" >}}
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-surefire-plugin</artifactId>
-  <configuration>
-    <argLine>${dd.java.agent.arg}</argLine>
-  </configuration>
-</plugin>
-{{< /code-block >}}
-
-* If using the [Maven Failsafe Plugin][2]:
-
-{{< code-block lang="xml" filename="pom.xml" >}}
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-failsafe-plugin</artifactId>
-  <configuration>
-     <argLine>${dd.java.agent.arg}</argLine>
-  </configuration>
-  <executions>
-      <execution>
-        <goals>
-           <goal>integration-test</goal>
-           <goal>verify</goal>
-        </goals>
-      </execution>
-  </executions>
-</plugin>
-{{< /code-block >}}
-
-[1]: https://maven.apache.org/surefire/maven-surefire-plugin/
-[2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-Configure the `test` Gradle task by adding to the `jvmArgs` attribute the `-javaagent` argument targeting the Datadog Java tracer based on the `configurations.ddTracerAgent` property, specifying the name of the service or library under test with the `-Ddd.service` property:
-
-{{< code-block lang="groovy" filename="build.gradle" >}}
-test {
-  if(project.hasProperty("dd-civisibility")) {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true"]
-  }
-}
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Downloading tracer library
+
+You only need to download the tracer library once for each server.
+
+If the tracer library is already available locally on the server, you can proceed directly to running the tests.
 
 {{< tabs >}}
 {{% tab "Maven" %}}
@@ -294,10 +89,10 @@ test {
 Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.12.0
+DD_TRACER_VERSION=... // e.g. 1.13.0
 {{< /code-block >}}
 
-Run the command below to download the tracer JAR and add it to your local Maven repository:
+Run the command below to download the tracer JAR to your local Maven repository:
 
 {{< code-block lang="shell" >}}
 mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadoghq:dd-java-agent:$DD_TRACER_VERSION
@@ -312,7 +107,7 @@ mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadogh
 Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.12.0
+DD_TRACER_VERSION=... // e.g. 1.13.0
 {{< /code-block >}}
 
 Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded JAR:
@@ -321,7 +116,7 @@ Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want t
 DD_TRACER_FOLDER=... // e.g. ~/.datadog
 {{< /code-block >}}
 
-Run the command below to download the tracer JAR and save it into the specified folder:
+Run the command below to download the tracer JAR to the specified folder:
 
 {{< code-block lang="shell" >}}
 curl https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar --output $DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar
@@ -338,19 +133,15 @@ curl https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/$DD_TRACER_VERSI
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Declare `DD_TRACER_VERSION` variable with the version of the tracer that you have downloaded to your local Maven repository:
+Make sure to set the `DD_TRACER_VERSION` environment variable to the tracer version you have previously downloaded.
 
-{{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.12.0
-{{< /code-block >}}
+Run your tests using the `MAVEN_OPTS` environment variable to specify the path to the Datadog Java Tracer JAR.
 
-Run your tests using the `MAVEN_OPTS` environment variable to specify a path to the Datadog Java Tracer JAR.
+When specifying tracer arguments, include the following:
 
-In the tracer arguments, specify the following:
-
-* CI Visibility is enabled by setting the `dd.civisibility.enabled` property to `true`.
-* The environment where tests are being run (for example, `local` when running tests on a developer workstation or `ci` when running them on a CI provider) is defined in the `dd.env` property.
-* The name of the service or library that is being tested is defined in the `dd.service` property.
+* Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
+* Define the environment where the tests are being run using the `dd.env property` (e.g. `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Define the name of the service or library being tested in the `dd.service property`.
 
 For example:
 
@@ -366,25 +157,15 @@ mvn clean verify -Pdd-civisibility
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Declare `DD_TRACER_VERSION` variable with the version of the tracer that you have downloaded to your host:
+Make sure to set the `DD_TRACER_VERSION` environment variable to the tracer version you have previously downloaded, and `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
 
-{{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.12.0
-{{< /code-block >}}
+Run your tests using the `org.gradle.jvmargs` system property to specify the path to the Datadog Java Tracer JAR.
 
-Declare `DD_TRACER_FOLDER` variable with the path to the folder where you stored the downloaded tracer JAR:
+When specifying tracer arguments, include the following:
 
-{{< code-block lang="shell" >}}
-DD_TRACER_FOLDER=... // e.g. ~/.datadog
-{{< /code-block >}}
-
-Run your tests using the `org.gradle.jvmargs` system property to specify a path to the Datadog Java Tracer JAR.
-
-In the tracer arguments, specify the following:
-
-* CI Visibility is enabled by setting the `dd.civisibility.enabled` property to `true`.
-* The environment where tests are being run (for example, `local` when running tests on a developer workstation or `ci` when running them on a CI provider) is defined in the `dd.env` property.
-* The name of the service or library that is being tested is defined in the `dd.service` property.
+* Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
+* Define the environment where the tests are being run using the `dd.env property` (e.g. `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Define the name of the service or library being tested in the `dd.service property`.
 
 For example:
 
