@@ -398,6 +398,25 @@ post_failure_event_to_dd_live:
     - if: $CI_COMMIT_REF_NAME == "master"
       when: on_failure
 
+post_build_success_status_to_spec_repo:
+  <<: *base_template
+  stage: cleanup
+  cache: {}
+  environment: "preview"
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - >-
+        curl -L -X POST \
+          -H "Authorization: Bearer ${GITHUB_TOKEN}"\
+          https://api.github.com/repos/DataDog/datadog-api-spec/statuses/$CI_COMMIT_SHA \
+          -d '{"state":"success","description":"Docs build succeeded","context":"documentation/build"}'
+  rules:
+    - if: $CI_COMMIT_REF_NAME ~= /^datadog-api-spec\/generated/
+      when: on_success
+  interruptible: true
+  allow_failure: true
+
 set_redirect_metadata_preview:
   <<: *base_template
   <<: *preview_rules
