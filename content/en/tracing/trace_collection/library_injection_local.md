@@ -30,7 +30,7 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Kubernetes v1.14+
 * Datadog [Cluster Agent v7.40+][3]
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
-* Applications in Java, JavaScript, Python, or .NET deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
+* Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 **Note:** Python uWSGI applications are not supported.
 
@@ -44,6 +44,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AW
 | JavaScript | [gcr.io/datadoghq/dd-lib-js-init][7]     | [hub.docker.com/r/datadog/dd-lib-js-init][8]     | [gallery.ecr.aws/datadog/dd-lib-js-init][9]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][10] | [hub.docker.com/r/datadog/dd-lib-python-init][11] | [gallery.ecr.aws/datadog/dd-lib-python-init][12] |
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][13] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
+| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][13] | [hub.docker.com/r/datadog/dd-lib-ruby-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
@@ -51,7 +52,7 @@ You can pull the tracing library from a different registry by changing it to `do
 
 ## Configure instrumentation libraries injection
 
-For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, Python, or .NET instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
+For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, Python, .NET or Ruby instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
 
 1. Enable Datadog Admission Controller to mutate your pods.
 2. Annotate your pods to select which instrumentation library to inject.
@@ -95,12 +96,14 @@ To select your pods for library injection, annotate them with the following, cor
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
 | .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
 - [Java][16]
 - [Javascript][17]
 - [Python][18]
 - [.NET][19]
+- [Ruby][20]
   - Note: If the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, if you would like to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
@@ -128,7 +131,7 @@ template:
 
 ### Step 3 - Tag your pods with Unified Service Tags
 
-With [Unified Service Tags][20], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
+With [Unified Service Tags][21], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
 Set Unified Service tags by using the following labels:
 
 ```yaml
@@ -182,7 +185,7 @@ If the injection was successful you can see an `init` container called `datadog-
 
 Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init container listed.
 
-The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][21]).
+The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][22]).
 
 
 [1]: /containers/cluster_agent/admission_controller/
@@ -204,8 +207,9 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 [17]: https://github.com/DataDog/dd-trace-js/releases
 [18]: https://github.com/DataDog/dd-trace-py/releases
 [19]: https://github.com/DataDog/dd-trace-dotnet/releases
-[20]: /getting_started/tagging/unified_service_tagging/
-[21]: https://app.datadoghq.com/apm/traces
+[20]: https://github.com/DataDog/dd-trace-rb/releases
+[21]: /getting_started/tagging/unified_service_tagging/
+[22]: https://app.datadoghq.com/apm/traces
 {{% /tab %}}
 
 {{% tab "Host" %}}
