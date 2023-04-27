@@ -421,6 +421,163 @@ if (span != null) {
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Java custom instrumentation documentation.
 
+## Manual testing API
+
+If you use one of the supported testing frameworks, DD Java Tracer automatically instruments your tests and sends the results to the Datadog backend.
+
+If you are using a framework that is not supported, or an ad-hoc testing solution, you can harness manual testing API, which also reports test results to the backend.
+
+### Adding manual API dependency
+
+Manual API classes are available in `com.datadoghq:dd-trace-api` artifact.
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+Add the trace API dependency to your maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependency>
+    <groupId>com.datadoghq</groupId>
+    <artifactId>dd-trace-api</artifactId>
+    <version>$VERSION</version>
+    <scope>test</scope>
+</dependency>
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-trace-api?style=flat-square
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+Add the trace API dependency to your maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    testImplementation "com.datadoghq:dd-trace-api:$VERSION"
+}
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-trace-api?style=flat-square
+{{% /tab %}}
+{{< /tabs >}}
+
+### Domain model
+
+The API is based around four concepts: test session, test module, test suite, and test.
+
+#### Test session
+
+A test session represents a project build, which typically corresponds to execution of a test command issued by a user or by a CI script.
+
+To start a test session, call `datadog.trace.api.civisibility.CIVisibility#startSession` and pass the name of the project and the name of the used testing framework.
+
+When all your tests have finished, call `datadog.trace.api.civisibility.DDTestSession#end`, which forces the library to send all remaining test results to the backend.
+
+#### Test module
+
+A test module represents a smaller unit of work within a project build, typically corresponding to a project module (e.g. Maven submodule or Gradle subproject).
+
+To start a test mode, call `datadog.trace.api.civisibility.DDTestSession#testModuleStart` and pass the name of the module.
+
+When building and testing the module has finished, call `datadog.trace.api.civisibility.DDTestModule#end`.
+
+#### Test Suite
+
+A test suite comprises a set of tests that share common functionality.
+They can share a common initialization and teardown, and can also share some variables.
+A single suite usually corresponds to a Java class that contains test cases.
+
+Create test suites in a test module by calling `datadog.trace.api.civisibility.DDTestModule#testSuiteStart` and passing the name of the test suite.
+
+Call `datadog.trace.api.civisibility.DDTestSuite#end` when all the related tests in the suite have finished their execution.
+
+#### Test
+
+A test represents a single test case that is executed as part of a test suite.
+Usually it corresponds to a method that contains testing logic.
+
+Create tests in a suite by calling `datadog.trace.api.civisibility.DDTestSuite#testStart` and passing the name of the test.
+
+Call `datadog.trace.api.civisibility.DDTest#end` when a test has finished execution.
+
+### Code Example
+
+The following code represents a simple usage of the API:
+
+```java
+package com.datadog.civisibility.example;
+
+import datadog.trace.api.civisibility.CIVisibility;
+import datadog.trace.api.civisibility.DDTest;
+import datadog.trace.api.civisibility.DDTestModule;
+import datadog.trace.api.civisibility.DDTestSession;
+import datadog.trace.api.civisibility.DDTestSuite;
+import java.lang.reflect.Method;
+
+// the null arguments in the calls below are optional startTime/endTime values:
+// when they are not specified, current time is used
+public class ManualTest {
+    public static void main(String[] args) throws Exception {
+        DDTestSession testSession = CIVisibility.startSession("my-project-name", "my-test-framework", null);
+        testSession.setTag("my-tag", "additional-session-metadata");
+        try {
+            runTestModule(testSession);
+        } finally {
+            testSession.end(null);
+        }
+    }
+
+    private static void runTestModule(DDTestSession testSession) throws Exception {
+        DDTestModule testModule = testSession.testModuleStart("my-module", null);
+        testModule.setTag("my-module-tag", "additional-module-metadata");
+        try {
+            runFirstTestSuite(testModule);
+            runSecondTestSuite(testModule);
+        } finally {
+            testModule.end(null);
+        }
+    }
+
+    private static void runFirstTestSuite(DDTestModule testModule) throws Exception {
+        DDTestSuite testSuite = testModule.testSuiteStart("my-suite", ManualTest.class, null);
+        testSuite.setTag("my-suite-tag", "additional-suite-metadata");
+        try {
+            runTestCase(testSuite);
+        } finally {
+            testSuite.end(null);
+        }
+    }
+
+    private static void runTestCase(DDTestSuite testSuite) throws Exception {
+        Method myTestCaseMethod = ManualTest.class.getDeclaredMethod("myTestCase");
+        DDTest ddTest = testSuite.testStart("myTestCase", myTestCaseMethod, null);
+        ddTest.setTag("my-test-case-tag", "additional-test-case-metadata");
+        ddTest.setTag("my-test-case-tag", "more-test-case-metadata");
+        try {
+            myTestCase();
+        } catch (Exception e) {
+            ddTest.setErrorInfo(e); // pass error info to mark test case as failed
+        } finally {
+            ddTest.end(null);
+        }
+    }
+
+    private static void myTestCase() throws Exception {
+        // run some test logic
+    }
+
+    private static void runSecondTestSuite(DDTestModule testModule) {
+        DDTestSuite secondTestSuite = testModule.testSuiteStart("my-second-suite", ManualTest.class, null);
+        secondTestSuite.setSkipReason("this test suite is skipped"); // pass skip reason to mark test suite as skipped
+        secondTestSuite.end(null);
+    }
+}
+```
+
+Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so that all the test info is flushed to Datadog.
+
 ## Configuration settings
 
 The following system properties set configuration options and have environment variable equivalents. If the same key type is set for both, the system property configuration takes priority. System properties can be set as JVM flags.
