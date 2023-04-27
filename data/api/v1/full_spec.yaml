@@ -12473,6 +12473,8 @@ components:
       - networkHop
       - receivedMessage
       - grpcHealthcheckStatus
+      - grpcMetadata
+      - grpcProto
       - connection
       example: statusCode
       type: string
@@ -12493,6 +12495,8 @@ components:
       - NETWORK_HOP
       - RECEIVED_MESSAGE
       - GRPC_HEALTHCHECK_STATUS
+      - GRPC_METADATA
+      - GRPC_PROTO
       - CONNECTION
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
