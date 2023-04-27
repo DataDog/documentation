@@ -39,7 +39,7 @@ Docker API は、一度に 1 つのコンテナからログを取得するよう
 
 DaemonSet によるログの収集を有効にするには
 
-1. `datadog.yaml` Agent  マニフェストの *env* セクションで、`DD_LOGS_ENABLED` 変数と `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 変数を true に設定します。
+1. `datadog.yaml` Agent マニフェストの *env* セクションで、`DD_LOGS_ENABLED` 変数と `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 変数を true に設定します。
 
     ```yaml
      # (...)
