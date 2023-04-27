@@ -131,6 +131,13 @@ Enable printing of the full 128-bit ID when formatting a span with '%v'.
 When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
 When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
+`DD_TRACE_HEADER_TAGS`
+: **Default**: `null` <br>
+List of comma-separated HTTP headers to be used as span tags. Optionally specify a "mapped" field that the request header will be renamed to. This feature is compatible with [HTTP1]([url](https://www.rfc-editor.org/rfc/rfc7230#section-3.2)). A list of integrations for which the header tags will get applied can be found in the configuration documentation. (TODO: Link to the godocs, once they have been updated)
+**Examples:**<br>
+  - Capture request header `my-header`: `"DD_TRACE_HEADER_TAGS=my-header"`
+  - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
+
 
 ## Configure APM environment name
 
