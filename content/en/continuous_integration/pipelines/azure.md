@@ -34,18 +34,18 @@ The Datadog integration for [Azure Pipelines][1] works by using [service hooks][
 
 1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace.
 
-1. For each project, go to **Project settings > Service hooks** in Azure DevOps and select `Create subscription` (green plus icon).
+2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select `Create subscription` (green plus icon).
 
-2. Create a new subscription to the now available service `Datadog CI Visibility` for each of the following webhook types:
+3. Create a new subscription to the now available service `Datadog CI Visibility` for each of the following webhook types:
     - **Run state changed**
     - **Run stage state changed**
     - **Run job state changed**
 
-3. Click `Next` to continue to the next step and set the following:
+4. Click `Next` to continue to the next step and set the following:
     - **Datadog Site**: {{< region-param key="dd_site" >}}
     - **Datadog API Key**: your [Datadog API key][3].
 
-4. Click `Finish`.
+5. Click `Finish`.
 
 <div class="alert alert-info">
 All 3 supported types of events are required and must be enabled individually.
