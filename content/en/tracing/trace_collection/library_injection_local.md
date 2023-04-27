@@ -44,7 +44,7 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AW
 | JavaScript | [gcr.io/datadoghq/dd-lib-js-init][7]     | [hub.docker.com/r/datadog/dd-lib-js-init][8]     | [gallery.ecr.aws/datadog/dd-lib-js-init][9]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][10] | [hub.docker.com/r/datadog/dd-lib-python-init][11] | [gallery.ecr.aws/datadog/dd-lib-python-init][12] |
 | .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][13] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
-| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][13] | [hub.docker.com/r/datadog/dd-lib-ruby-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
+| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][23] | [hub.docker.com/r/datadog/dd-lib-ruby-init][24] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][25] |
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
@@ -212,6 +212,9 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 [20]: https://github.com/DataDog/dd-trace-rb/releases
 [21]: /getting_started/tagging/unified_service_tagging/
 [22]: https://app.datadoghq.com/apm/traces
+[23]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
 {{% /tab %}}
 
 {{% tab "Host" %}}
