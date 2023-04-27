@@ -423,18 +423,18 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ## Manual testing API
 
-If you use one of the supported testing frameworks, DD Java Tracer automatically instruments your tests and sends the results to the Datadog backend.
+If you use one of the supported testing frameworks, the Java Tracer automatically instruments your tests and sends the results to the Datadog backend.
 
-If you are using a framework that is not supported, or an ad-hoc testing solution, you can harness manual testing API, which also reports test results to the backend.
+If you are using a framework that is not supported, or an ad-hoc testing solution, you can harness the manual testing API, which also reports test results to the backend.
 
 ### Adding manual API dependency
 
-Manual API classes are available in `com.datadoghq:dd-trace-api` artifact.
+Manual API classes are available in the `com.datadoghq:dd-trace-api` artifact.
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Add the trace API dependency to your maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
+Add the trace API dependency to your Maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="xml" filename="pom.xml" >}}
 <dependency>
@@ -450,7 +450,7 @@ Add the trace API dependency to your maven project, replacing `$VERSION` with th
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Add the trace API dependency to your maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
+Add the trace API dependency to your Maven project, replacing `$VERSION` with the latest version of the tracer accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
@@ -471,17 +471,17 @@ The API is based around four concepts: test session, test module, test suite, an
 
 A test session represents a project build, which typically corresponds to execution of a test command issued by a user or by a CI script.
 
-To start a test session, call `datadog.trace.api.civisibility.CIVisibility#startSession` and pass the name of the project and the name of the used testing framework.
+To start a test session, call `datadog.trace.api.civisibility.CIVisibility#startSession` and pass the name of the project and the name of the testing framework you used.
 
 When all your tests have finished, call `datadog.trace.api.civisibility.DDTestSession#end`, which forces the library to send all remaining test results to the backend.
 
 #### Test module
 
-A test module represents a smaller unit of work within a project build, typically corresponding to a project module (e.g. Maven submodule or Gradle subproject).
+A test module represents a smaller unit of work within a project build, typically corresponding to a project module. For example, a Maven submodule or Gradle subproject.
 
 To start a test mode, call `datadog.trace.api.civisibility.DDTestSession#testModuleStart` and pass the name of the module.
 
-When building and testing the module has finished, call `datadog.trace.api.civisibility.DDTestModule#end`.
+When the module has finished building and testing, call `datadog.trace.api.civisibility.DDTestModule#end`.
 
 #### Test Suite
 
