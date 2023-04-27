@@ -216,7 +216,6 @@ function loadPage(newUrl) {
             initCodeTabs();
 
             if(newUrl.endsWith('/glossary/')){
-                // ON CLICK
                 addGlossaryFilterClickEvnt();
             }
 
