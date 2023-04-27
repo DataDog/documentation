@@ -100,8 +100,8 @@ Datadog で[サービスチェックモニター][6]を作成するには、メ�
 [4]: /ja/api/v1/service-checks/
 [5]: /ja/developers/service_checks/#overview
 [6]: https://app.datadoghq.com/monitors/create/custom
-[7]: /ja/monitors/create/configuration/#advanced-alert-conditions
-[8]: /ja/monitors/create/configuration/#no-data
-[9]: /ja/monitors/create/configuration/#auto-resolve
-[10]: /ja/monitors/create/configuration/#new-group-delay
+[7]: /ja/monitors/configuration/#advanced-alert-conditions
+[8]: /ja/monitors/configuration/#no-data
+[9]: /ja/monitors/configuration/#auto-resolve
+[10]: /ja/monitors/configuration/#new-group-delay
 [11]: /ja/monitors/notify/
