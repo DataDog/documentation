@@ -245,7 +245,7 @@ az containerapp up \
 
 ### 3. Results
 
-Once the deployment is completed, your custom metrics and traces will be sent to Datadog. To view the live tail of your Azure Container App traces, visit the [Trace View] filtered to `@origin:containerapp`. 
+Once the deployment is completed, your custom metrics and traces will be sent to Datadog. To view the live tail of your Azure Container App traces, visit the [Trace View][10] filtered to `@origin:containerapp`. 
 
 ## Additional configurations
 
