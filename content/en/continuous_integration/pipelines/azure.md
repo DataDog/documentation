@@ -43,7 +43,7 @@ The Datadog integration for [Azure Pipelines][1] works by using [service hooks][
 
 3. Click `Next` to continue to the next step and set the following:
     - **Datadog Site**: {{< region-param key="dd_site" >}}
-    - **Datadog API Key**: `<API_KEY>` where `<API_KEY>` is your [Datadog API key][3].
+    - **Datadog API Key**: your [Datadog API key][3].
 
 4. Click `Finish`.
 
