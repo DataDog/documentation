@@ -3287,36 +3287,46 @@ main:
     parent: rum
     identifier: rum_reactnative
     weight: 4
+  - name: Data Collected
+    url: real_user_monitoring/reactnative/data_collected/
+    parent: rum_reactnative
+    identifier: rum_reactnative_data_collected
+    weight: 401
   - name: Advanced Configuration
     url: real_user_monitoring/reactnative/advanced_configuration/
     parent: rum_reactnative
     identifier: rum_reactnative_advanced_configuration
-    weight: 401
+    weight: 402
   - name: Mobile Vitals
     url: real_user_monitoring/reactnative/mobile_vitals/
     parent: rum_reactnative
     identifier: rum_reactnative_mobile_vitals
-    weight: 402
+    weight: 403
   - name: Web View Tracking
     url: real_user_monitoring/reactnative/web_view_tracking/
     parent: rum_reactnative
     identifier: rum_reactnative_web_view_tracking
-    weight: 403
+    weight: 404
   - name: Expo
     url: real_user_monitoring/reactnative/expo/
     parent: rum_reactnative
     identifier: rum_reactnative_expo
-    weight: 404
+    weight: 405
   - name: CodePush
     url: real_user_monitoring/reactnative/codepush/
     parent: rum_reactnative
     identifier: rum_reactnative_codepush
-    weight: 405
+    weight: 406
+  - name: Integrated Libraries
+    url: real_user_monitoring/reactnative/integrated_libraries/
+    parent: rum_reactnative
+    identifier: rum_reactnative_integrated_libraries
+    weight: 407
   - name: Troubleshooting
     url: real_user_monitoring/reactnative/troubleshooting/
     parent: rum_reactnative
     identifier: rum_reactnative_troubleshooting
-    weight: 406
+    weight: 408
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
