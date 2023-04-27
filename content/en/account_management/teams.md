@@ -85,6 +85,7 @@ The table below describes the products in which you can use the team filter:
 | [APM Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
 | [Logs Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
 | [Service Level Objectives][13] | Team handle                                                                 |
+| [Data Streams Monitoring][15]  | Team handle                                                                 |
 
 
 ## Permissions
@@ -127,3 +128,4 @@ To enforce a strict membership model, configure your default team settings so **
 [12]: https://app.datadoghq.com/logs/error-tracking
 [13]: https://app.datadoghq.com/slo/manage
 [14]: /security/cspm/resource_catalog
+[15]: https://app.datadoghq.com/data-streams
