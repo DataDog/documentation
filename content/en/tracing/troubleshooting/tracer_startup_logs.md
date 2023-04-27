@@ -29,7 +29,7 @@ If you do not see logs at all, ensure that your application logs are not silence
 
 **Diagnostics:**
 
-The Java tracer does not output Diagnostics logs.  For this check, run the tracer in [debug mode][1].
+The Java tracer does not output Diagnostics logs. For this check, run the tracer in [debug mode][1].
 
 
 [1]: /tracing/troubleshooting/tracer_debug_logs/
