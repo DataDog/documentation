@@ -9,27 +9,27 @@ further_reading:
 
 ## Overview
 
-Session Replay bridges the gap between user analysis and visually reproducing errors. This guide walks through how developers can leverage Session Replay as a visual aid on documenting post-mortems.
+Session Replay bridges the gap between user analysis and visually reproducing errors. This guide walks through an example of how developers can leverage Session Replay as a visual aid on documenting post-mortems.
 
 ## Use RUM to identify how widespread a user issue is
 
-In this example, we noticed that a lot of users were complaining about getting an issue upon clicking the **Checkout** button. After investigating [RUM's frustration signals][1], we saw that there were nearly 3,000 instances of this error type occurring in just one week:
+In this example, we noticed that a lot of users were complaining about getting an issue upon clicking the **Checkout** button. After investigating the [RUM frustration signals dashboard][1], we confirmed in the RUM Explorer that there were nearly 3,000 instances of this error type occurring in just one week:
 
 {{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/identify-widespread-user-issue.png" alt="Use RUM to identify how many instances of an error type occurred in a week" style="width:100%;">}}
 
-## Watch user issue in a Session Replay
-After clicking into one session from the above query, we can watch a Session Replay to see this error occur live, and see what users did before and after:
+## Watch the user issue in a Session Replay
+After clicking into a session from the above query, we can watch a Session Replay to see this error occur live, and observe what users did before and after:
 
 {{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/watch-user-issue.png" alt="Review the user's experience the issue in a Session Replay" style="width:100%;">}}
 
 ## Share to Notebook
-To ensure other team members investigating this issue can see this context, we can share this particular session replay to a notebook via the share button:
+To ensure other team members investigating this issue can see this context, we can share this particular Session Replay to a notebook via the share button:
 
 {{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/share-to-notebook.png" alt="Share the Session Replay video by saving it to a post-mortem notebook" style="width:60%;">}}
 
 By sending the Session Replay to a notebook, we can add commentary, analyze other telemetry data from this incident, and document our post-mortem.
 
-Note: A template for post-mortem notebooks is available [here][2].
+**Note**: A template for post-mortem notebooks is available [here][2].
 
 ## Documenting the post-mortem
 After sharing the replay to a notebook, we can begin documenting the investigation.
