@@ -1,12 +1,11 @@
 ---
-title: Azure Advanced Configuration
+title: Azure Architecture and Configuration
 kind: guide
-description: "Advanced configuration options for the Datadog Azure integration"
+description: "Guide to architecture of the Datadog Azure integration and alternate configuration options"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
   tag: "Documentation"
   text: "Azure Integration"
-
 ---
 
 ## Overview
@@ -15,15 +14,13 @@ This guide provides detailed information and reference architectures for users c
 
 ### Reference Architectures
 
-The reference architectures in this guide provide a visual representation of the configuration process and outcome when following the steps in the [Azure Integration page][1]. This provides a more detailed overview of Datadog's interaction with your Azure environment, and answers common security, compliance, and governance questions.
+The diagrams in this guide provide a visual representation of the configuration process and outcome when following the steps in the [Azure Integration page][1]. This provides a more detailed overview of Datadog's interaction with your Azure environment, and answers common security, compliance, and governance questions.
 
 ### Alternate Configurations
 
-The setup processes documented in the Azure Integration page are the recommended steps and result in the ideal configuration for the vast majority of users. Alternate configuration options in this document may be preferable for certain use cases, and any trade-offs in performance, features, or ease-of-management are outlined as needed.
+The setup processes documented in the [Azure Integration page][1] are the recommended steps and result in the ideal configuration for the majority of users. Alternate configuration options in this document may be preferable for certain use cases, and any trade-offs in performance, features, or ease-of-management are outlined as needed.
 
 ## Azure Metric and Data Collection
-
-### Overview of Metric and Data Collection
 
 Enabling Datadog’s Azure integration allows Datadog to:
 
@@ -47,11 +44,11 @@ Follow these steps to enable the standard Azure integration:
 
 The diagram below outlines the process and resulting architecture of the Azure Integration configuration described in the main documentation.
 
-{{< img src="integrations/guide/azure_advanced_configuration/app_registration_integration_setup.png" alt="Diagram of the App Registration integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_integration_setup.png" alt="Diagram of the App Registration integration setup" >}}
 
 Once this is completed, data collection begins automatically. The App Registration information entered in Datadog allows Datadog to [request a token from Azure Active Directory][1] (AD). Datadog uses this token as the authorization for API calls to various Azure APIs, to discover resources within the scope provided and collect data. This continuous process runs with two-minute intervals by default, and is used to discover and collect data from your Azure environment. This process is pictured below.
 
-{{< img src="integrations/guide/azure_advanced_configuration/app_registration_metric_collection.png" alt="Diagram of the App Registration integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="Diagram of the App Registration integration setup" >}}
 
 [1]: https://learn.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/
 [2]: https://app.datadoghq.com/integrations/azure
@@ -63,7 +60,7 @@ _Available only in the Datadog US3 site_
 
 Follow these steps to enable the Azure Native integration:
 
-1. Confirm that your Datadog account is hosted on the US3 [Datadog site][1], or [create one][2].
+1. Confirm that your Datadog organization is hosted on the US3 [Datadog site][1], or [create a trial Datadog account on the US3 site][5].
 2. Create a Datadog resource in Azure that links at least one subscription.
 3. Optionally, update the Datadog resource to include other subscriptions.
 
@@ -75,15 +72,15 @@ The `Monitoring Reader` role assignment happens automatically during the creatio
 
 The diagram below outlines the process and resulting architecture of the Azure Native Integration configuration.
 
-{{< img src="integrations/guide/azure_advanced_configuration/azure_native_integration_setup.png" alt="Diagram of the Azure Native integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_integration_setup.png" alt="Diagram of the Azure Native integration setup" >}}
 
 Once this is completed, data collection begins automatically. Datadog continuously discovers and collects metrics from your Azure environment, as pictured below.
 
-{{< img src="integrations/guide/azure_advanced_configuration/azure_native_metric_collection.png" alt="Diagram of the Azure Native metric collection setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_metric_collection.png" alt="Diagram of the Azure Native metric collection setup" >}}
 
 ### Alternate configuration options for metric collection
 
-Whether you use the standard or the Azure Native integration, Datadog strongly recommends using the default configuration. This is because the integration is continually enhanced to provide new and differentiated insights, as well as improved performance and reliability of data collection. These improvements can be inhibited by alternate configurations for metric collection, which use more restrictive configurations.
+Whether you use the standard or the Azure Native integration, Datadog strongly recommends using the default configuration. This is because the integration is continually enhanced to provide new and differentiated insights, as well as improved performance and reliability of data collection. These improvements can be inhibited by more restrictive configurations for metric collection.
 
 #### Options for restricting access
 
@@ -127,6 +124,7 @@ The implications of restricting or omitting the the Azure AD roles are:
 [2]: https://www.datadoghq.com/
 [3]: /security/cspm/
 [4]: /security/cspm/resource_catalog/
+[5]: https://us3.datadoghq.com/signup
 {{% /site-region %}}
 
 ## Azure Log Collection
@@ -138,7 +136,7 @@ _Available in all Datadog Sites_
 
 The diagram below provides a reference architecture for forwarding logs from Azure to Datadog, as described in the [Log collection section][1] of the Azure integration page.
 
-{{< img src="integrations/guide/azure_advanced_configuration/manual_log_forwarding.png" alt="Diagram of the manual log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/manual_log_forwarding.png" alt="Diagram of the manual log forwarding setup" >}}
 
 ### Alternate Configuration Options for Log Forwarding with the Standard Azure Integration
 
@@ -148,7 +146,7 @@ The default architecture above is suitable for most users. Depending on the scal
 
 The **Deploy to Azure** button in the main Azure [log collection section][1] provides a template for creating an Event Hub and Forwarder Function pair. In addition to using this template to deploy directly, you can use the underlying ARM templates as a starting point for your own Infrastructure-as-Code deployments.
 
-These templates do not add diagnostic settings (except for, optionally, one diagnostic setting for Activity Logs). For Resource Logs, Datadog recommends utilizing ARM templates or Terraform to add diagnostic settings to your resources programmatically. These diagnostic settings must be added to every resource that needs to send resource logs to Datadog.
+These templates do not add diagnostic settings, apart from one optional diagnostic setting for Activity Logs. For Resource Logs, Datadog recommends utilizing ARM templates or Terraform to add diagnostic settings to your resources programmatically. These diagnostic settings must be added to every resource that needs to send resource logs to Datadog.
 
 #### Region considerations
 
@@ -165,34 +163,32 @@ For especially high log volumes, you may consider adding additional Event Hub an
 {{% /site-region %}}
 {{% site-region region="us3" %}}
 
-### Azure Native Integration Log Collection (US3 only)
-
-Available in all Datadog US3 Site
+### Azure Native Integration Log Collection
+_Available only in the Datadog US3 site_
 
 The diagram below outlines the process and resulting architecture of the Azure Native integration log forwarding configuration.
 
-{{< img src="integrations/guide/azure_advanced_configuration/azure_native_log_forwarding.png" alt="Diagram of the Azure Native log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_log_forwarding.png" alt="Diagram of the Azure Native log forwarding setup" >}}
 
-With the Azure Native integration, the user does not need to configure anything outside of the Datadog resource to implement Azure resource or activity log forwarding to Datadog. Diagnostic settings are added or removed automatically to match your configuration using only the tag rules specified in the Datadog resource.
+With the Azure Native integration, you do not need to configure anything outside of the Datadog resource to implement Azure resource or activity log forwarding to Datadog. Diagnostic settings are added or removed automatically to match your configuration using only the tag rules specified in the Datadog resource.
 
-**Note**: You can implement a `send resource logs for everything` rule by enabling resource logs without adding any filters, as shown below.
+**Note**: You can enable resource logs without any filters to send all resource logs, as shown below.
 
-{{< img src="integrations/guide/azure_advanced_configuration/datadog_agent_build_metrics_and_logs.png" alt="Diagram of the Datadog Agent build" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/datadog_agent_build_metrics_and_logs.png" alt="Diagram of the Datadog Agent build" >}}
 
-The Datadog resource adds diagnostic settings with the following characteristics:
-  - All log categories are included
-  - It is configured to `Send to Partner Solution` and specifies the Datadog resource that created it 
-  - It follows the naming format `DATADOG_DS_V2_<UNIQUE_IDENTIFIER>`.
+Diagnostic settings created by the Datadog resource include all log categories, are configured with `Send to Partner Solution`, and send logs back to the originating Datadog resource. They follow the naming format `DATADOG_DS_V2_<UNIQUE_IDENTIFIER>`.
 
 Any manual changes to the resource, including deleting it, are reverted within a few minutes.
 
 See below an example of a Diagnostic Setting created by a Datadog resource:
 
-{{< img src="integrations/guide/azure_advanced_configuration/diagnostic_setting.png" alt="Diagram of the diagnostic setting" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/diagnostic_setting.png" alt="Diagram of the diagnostic setting" >}}
 
 ### Alternate Configuration Options for Log Forwarding with the Azure Native Integration
 
 The one-click buttons to enable logs in the Datadog resource automate the process of adding diagnostic settings. In some cases, organizations may want to manage and configure diagnostic settings themselves, while still taking advantage of the automated log forwarding capability with the Azure Native integration. 
+
+Manually created diagnostic settings are not impacted by log settings on the Datadog resource, and are not deleted based on the tag rules specified in the Datadog resource. Resource logs do not have to be enabled on the Datadog resource in order for manual log forwarding to work. However, the Datadog resource being used for log forwarding must not be in a disabled state.
 
 Reasons for manually managing Diagnostic Settings include:
 
@@ -200,40 +196,24 @@ Reasons for manually managing Diagnostic Settings include:
        Strict internal policies around IaC that require all resources to to be created and managed deterministically (for example, if automatic creation of diagnostic settings by the Datadog resource would cause an unresolvable conflict between the desired and the actual state).
 
   2. Limiting Resource Log Categories
-       As the diagnostic settings created automatically by the Datadog resource include all log categories, specifying a subset of these categories requires you to create diagnostic settings yourself.
-
-**Note**: You can also use [exclusion filters][1] to exclude these logs from being indexed upon ingestion into Datadog.
+       As the diagnostic settings created automatically by the Datadog resource include all log categories, specifying a subset of these categories requires you to create diagnostic settings yourself.  
+       **Note**: You can also use [exclusion filters][1] to exclude these logs from being indexed upon ingestion into Datadog.
 
   3. Cross-subscription log forwarding
+       This can be useful if you only want to send logs and no other data from a specific subscription. The Datadog resource used for log forwarding still collects metrics and data from its own subscription. You must register the Resource Provider `Microsoft.Datadog` in each subscription intended to send logs before creating the diagnostic settings.
 
-       Some organizations may want to take advantage of the capability to ship logs across subscriptions. One reason for this might be if you are only using Datadog for logs and wish to limit the scope of metric and data collection. In this scenario, you can manually implement diagnostic settings that ship logs to a single Datadog resource in a different subscription.
+       {{< img src="integrations/guide/azure_architecture_and_configuration/datadog_agent_build_resource_providers.png" alt="Screenshot of the Resource providers page in the Azure Portal with Microsoft.Datadog showing the status of registered" >}}
 
-  4. Testing
+  4. Testing 
+       Sending example logs to Datadog can be useful for testing or other investigations. In these cases, adding diagnostic settings manually can be quicker than waiting for them to be created automatically from updated tags and settings.
 
-       Users may want to get examples of logs into Datadog to better understand what information a particular type of log may contain, or support other “one-off” investigations or use cases. In these cases sometimes it’s easier to just add the diagnostic setting directly to the resource(s) you want logs from rather than updating tags and/or the log forwarding settings and then waiting for the automatic process to create it.
+This architecture is shown below, including the optional cross-subscription set up:
 
-
-This architecture is shown below, including the (optional) cross-subscription set up:
-
-{{< img src="integrations/guide/azure_advanced_configuration/custom_azure_native_log_forwarding.png" alt="Diagram of the custom Azure Native log forwarding setup" >}}
-
-#### General Notes on Manual Log Forwarding
-Diagnostic settings you create manually will not be impacted by log settings on the Datadog resource:
-Manually created diagnostic settings will not be deleted based on the tag rules specified in the Datadog resource.
-Resource logs do not have to be enabled on the Datadog resource in order for the manual log forwarding to work.
-The Datadog resource being used for log forwarding must not be in a disabled state.
-In most cases it will make sense to choose either manual or automatic log forwarding, but hybrid setups are also valid.
-
-#### Notes on Cross-Subscription log forwarding: 
-
-Utilizing the automated log forwarding capability with the Azure Native integration does still require at least one Datadog resource per tenant.
-The Datadog resource used for log forwarding will still collect metrics and data from its own subscription at a minimum.
-You must register the Resource Provider  “Microsoft.Datadog” in each subscription from which you plan to send logs before creating the diagnostic settings.
-
-{{< img src="integrations/guide/azure_advanced_configuration/datadog_agent_build_resource_providers" alt="Diagram of the custom Azure Native log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/custom_azure_native_log_forwarding.png" alt="Diagram of the custom Azure Native log forwarding setup" >}}
 
 [1]: /logs/log_configuration/indexes/#exclusion-filters
 {{% /site-region %}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/azure/
