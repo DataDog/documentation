@@ -68,7 +68,7 @@ window.DD_RUM &&
         subdomain: ''
         ...
     });
-const url = const url = DD_RUM && DD_RUM.getSessionReplayUrl();
+const url = DD_RUM && DD_RUM.getSessionReplayUrl();
 ```
 
 {{% /tab %}}
