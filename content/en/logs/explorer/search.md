@@ -74,7 +74,7 @@ Clear error states inform you which part of the query contains syntax errors and
 - If you input brackets for a range query, but do not fill in the high and low values, the message "Expected term but end of input found" is displayed.
 - If you input multiple values for a log field but miss the closing parenthesis character, such as  `service:(web-store OR auth-dotnet`, the message `Missing closing parenthesis character` is displayed.
 
-{{< img src="logs/explorer/search/log_error_states.png" alt="The logs search bar showing `service:(web-store OR auth-dotnet` as the query with the message `Missing closing parenthesis character`" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_error_states.png" alt="The logs search bar showing `service:(web-store OR auth-dotnet` as the query with the message `Missing closing parenthesis character`" style="width:50%;">}}
 
 To start searching for logs and customizing the time frame in the Log Explorer, read the [Search Syntax documentation][3] and the [Custom Time Frames documentation][4].
 
