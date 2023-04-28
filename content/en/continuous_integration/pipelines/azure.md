@@ -34,41 +34,43 @@ The Datadog integration for [Azure Pipelines][1] works by using [service hooks][
 
 1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace.
 
-2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select `Create subscription` (green plus icon).
+2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
 
-3. Create a new subscription to the now available service `Datadog CI Visibility` for each of the following webhook types:
+3. Create a new subscription to the `Datadog CI Visibility` service for each of the following webhook types:
     - **Run state changed**
     - **Run stage state changed**
     - **Run job state changed**
 
-4. Click `Next` to continue to the next step and set the following:
+4. Click **Next** to continue to the next step and set the following:
     - **Datadog Site**: {{< region-param key="dd_site" >}}
     - **Datadog API Key**: your [Datadog API key][3].
 
-5. Click `Finish`.
+5. Click **Finish**.
 
 <div class="alert alert-info">
 All 3 supported types of events are required and must be enabled individually.
-If one or more events are not enabled, the installation will be incomplete and lead to unexpected behavior in Datadog.
+Not enabling one or more events results in an an incomplete installation, leading to unexpected behavior in Datadog.
 </div>
 
 ### Configuring multiple projects in bulk
 
 
-If you want to enable the hooks for many or all your Azure projects we provide a [script](https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py) to help you do it through the Azure API. For this you'll need:
+If you want to enable the hooks for many or all your Azure projects, Datadog provides a [script](https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py) to help you do it through the Azure API. 
 
-- Azure DevOps username
-- Azure DevOps [API Token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat)
-- Azure DevOps organization name
+To run the script, you need:
 
-The script only needs python3 and the requests package. For more info:
-```
+- An Azure DevOps username
+- An Azure DevOps [API Token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat)
+- An Azure DevOps organization name
+
+The script only needs python3 and the requests package. For more info, run:
+```shell
 ./service_hooks.py --help
 ```
 
-The script supports environment variables `DD_API_KEY` and `DD_SITE` and also flag parameters `--dd-api-key` and `--dd-site`
+The script supports environment variables `DD_API_KEY` and `DD_SITE`, and flag parameters `--dd-api-key` and `--dd-site`.
 
-Example to enable for all the projects:
+Example for enabling the hooks in all projects:
 ```
 ./service_hooks.py \
     --dd-api-key ******************** \
@@ -78,7 +80,7 @@ Example to enable for all the projects:
     --threads 4
 ```
 
-Example to enable only in a couple of projects:
+Example for enabling the hooks in specified projects:
 ```
 ./service_hooks.py \
     --dd-api-key ******************** \
