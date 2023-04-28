@@ -84,7 +84,7 @@ window.DD_RUM &&
 
 <details open>
   <summary>Latest version</summary>
-The following example manually tracks the page views on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
+The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -122,7 +122,7 @@ window.DD_RUM && window.DD_RUM.startView({
 
 <details>
   <summary>before <code>v4.13.0</code></summary>
-The following example manually tracks the page views on the `checkout` page in a RUM application. No service nor version can be specified.
+The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. No service nor version can be specified.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
