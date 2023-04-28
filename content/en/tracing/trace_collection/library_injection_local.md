@@ -28,12 +28,9 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 ## Requirements
 
 * Kubernetes v1.14+
-* Datadog [Cluster Agent v7.40+][3]
+* Datadog [Cluster Agent v7.40+] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+] for .NET and Ruby[3]
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
 * Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
-
-**Note:** Python uWSGI applications are not supported.
-
 
 ## Container registries
 
@@ -102,6 +99,7 @@ The available library versions are listed in each container registry, as well as
 - [Java][16]
 - [Javascript][17]
 - [Python][18]
+  - **Note:** Python uWSGI applications are not supported.
 - [.NET][19]
   - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
 - [Ruby][20]
