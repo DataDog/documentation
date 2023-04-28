@@ -1,6 +1,8 @@
 ---
 title: Compatible semantic tags
 kind: guide
+aliases:
+- /dashboards/guide/semantic_colors
 further_reading:
 - link: "/dashboards/guide/widget_colors/#categorical-palettes"
   tag: "Documentation"
