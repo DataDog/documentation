@@ -404,7 +404,7 @@ If multiple archives are defined, logs enter the first archive based on filter.
 
 {{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="Logs enter the first archive whose filter they match on." style="width:100%;">}}
 
-It is important to order your archives carefully. For example, if you create a first archive filtered to the `service:web=-store` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket or path, and the rest would go to the other.
+It is important to order your archives carefully. For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket or path, and the rest would go to the other.
 
 ## Format of the archives
 
