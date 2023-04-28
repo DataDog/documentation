@@ -209,7 +209,7 @@ Select the appropriate AWS account and role combination for your S3 bucket.
 
 Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Set your S3 bucket info in Datadog" style="width:75%;">}}
 
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
@@ -218,7 +218,7 @@ Select the **Azure Storage** archive type, and the Azure tenant and client for t
 
 Input your storage account name and the container name for your archive. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
 
 
 {{% /tab %}}
@@ -228,7 +228,7 @@ Select the **GCS** archive type, and the GCS Service Account that has permission
 
 Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -249,7 +249,7 @@ Use this optional configuration step to assign roles on that archive and restric
 * Rehydrate from that archive. See the [logs_read_archives][8] and [logs_write_historical_view][9].
 * Access rehydrated logs in case you use the legacy [read_index_data permission][10].
 
-{{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
+{{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs" style="width:75%;">}}
 
 #### Datadog tags
 
@@ -258,7 +258,7 @@ Use this optional configuration step to:
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
 * Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][11] permission.
 
-{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
+{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags" style="width:75%;">}}
 
 #### Define maximum scan size
 
@@ -394,7 +394,7 @@ When Datadog fails to upload logs to an external archive, due to unintentional c
 
 In addition, an event is generated, visible in the [Events Explorer][13]. Build a monitor on such events to detect and remediate failures quickly.
 
-{{< img src="logs/archives/archive_errors.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
+{{< img src="logs/archives/archive_errors.png" alt="Check that your archives are properly set up." style="width:75%;">}}
 
 ## Multiple archives
 
@@ -402,7 +402,7 @@ If multiple archives are defined, logs enter the first archive based on filter. 
 
 For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket/path, and the rest would go to the other.
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on."  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on." style="width:75%;">}}
 
 ## Format of the archives
 

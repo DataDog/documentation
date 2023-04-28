@@ -140,7 +140,7 @@ Kubernetes creates pause containers to acquire the respective pod's IP address a
 
 **6. How is the host billing related to your services?**
 
-APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services.  Additionally, over the monthly allocation by host, APM is billed on the basis of Ingested span volume and Indexed span count. To estimate how many ingested and indexed spans each of your services is sending, see the [ingestion][2] and [retention][13] documentation.
+APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Additionally, over the monthly allocation by host, APM is billed on the basis of Ingested span volume and Indexed span count. To estimate how many ingested and indexed spans each of your services is sending, see the [ingestion][2] and [retention][13] documentation.
 
 **7. What happens to your existing App Analytics filters?**
 

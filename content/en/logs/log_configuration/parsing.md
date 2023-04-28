@@ -49,7 +49,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 After processing, the following structured log is generated:
 
-{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1"  style="width:80%;">}}
+{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1" style="width:80%;">}}
 
 **Note**:
 
@@ -208,7 +208,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 
 At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
 
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" style="width:80%;">}}
 
 ### Parsing a specific text attribute
 
@@ -216,7 +216,7 @@ Use the **Extract from** field to apply your Grok processor on a given text attr
 
 For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could parse this log as follows:
 
-{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line" style="width:80%;">}}
 
 ### Using helper rules to factorize multiple parsing rules
 
@@ -242,7 +242,7 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" style="width:80%;">}}
 
 ## Examples
 
@@ -282,12 +282,12 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" style="width:80%;">}}
 
 You don't need to specify the name of your parameters as they are already contained in the log.
 If you add an **extract** attribute `my_attribute` in your rule pattern you will see:
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis"  style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" style="width:80%;">}}
 
 If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
 
@@ -303,7 +303,7 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" style="width:80%;" >}}
 
 If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the allowlist in the parsing rule:
 
@@ -412,9 +412,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 
 **Results**:
 
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" style="width:80%;" >}}
 
 ### Optional attribute
 
@@ -434,9 +434,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 
 **Note**: A rule will not match if you include a space after the first word in the optional section.
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" style="width:80%;" >}}
 
 ### Nested JSON
 
@@ -454,7 +454,7 @@ Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":20
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
-{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" style="width:80%;" >}}
 
 ### Regex
 
@@ -470,7 +470,7 @@ john_1a2b3c4 connected on 11/08/2017
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
 
 ### List to array
 
@@ -488,7 +488,7 @@ Users [John, Oliver, Marc, Tom] have been added to the database
 myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
-{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6"  style="width:80%;" >}}
+{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
 
 **Log**:
 

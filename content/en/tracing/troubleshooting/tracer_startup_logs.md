@@ -29,7 +29,7 @@ If you do not see logs at all, ensure that your application logs are not silence
 
 **Diagnostics:**
 
-The Java tracer does not output Diagnostics logs.  For this check, run the tracer in [debug mode][1].
+The Java tracer does not output Diagnostics logs. For this check, run the tracer in [debug mode][1].
 
 
 [1]: /tracing/troubleshooting/tracer_debug_logs/
@@ -93,7 +93,7 @@ Obtain the startup logs JSON string from a `phpinfo()` page next to "DATADOG TRA
 
 Diagnostic information is displayed in a separate table to help diagnose common issues.
 
-{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info"  >}}
+{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info" >}}
 
 **CLI SAPI:**
 

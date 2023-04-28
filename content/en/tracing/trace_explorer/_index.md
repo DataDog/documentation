@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The [Trace Explorer][1] gives you the ability to search all ingested or indexed spans using any tag on any span.  The spans found by your query change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or indexed spans (spans retained for 15 days by your custom filters).
+The [Trace Explorer][1] gives you the ability to search all ingested or indexed spans using any tag on any span. The spans found by your query change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or indexed spans (spans retained for 15 days by your custom filters).
 
 Instrumented applications send 100% of their traces to Datadog for [ingestion][2], making the traces available as Live traces for a rolling window of 15 minutes.
 
