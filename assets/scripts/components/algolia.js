@@ -18,13 +18,13 @@ function getPageLanguage() {
     return 'en';
 }
 
-function sendSearchRumAction(searchQuery, targetLink = '') {
+function sendSearchRumAction(searchQuery, clickthroughLink = '') {
     if (window.DD_RUM && searchQuery !== '') {
         window.DD_RUM.addAction('userSearch', {
             query: searchQuery.toLowerCase(),
             page: window.location.pathname,
             lang: getPageLanguage(),
-            targetLink
+            clickthroughLink
         })
     }
 }
@@ -205,7 +205,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
                 do {
                     if (target.href) {
-                        sendSearchRumAction(search.helper.state.query)
+                        sendSearchRumAction(search.helper.state.query, target.href)
                         window.history.pushState({}, '', target.href)
                         window.location.reload()
                     }
