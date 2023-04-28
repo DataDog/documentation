@@ -65,7 +65,7 @@ You can create Saved Views in the Log Explorer to save queries and additional co
 
 ## Search syntax
 
-Syntax highlighting clearly differentiates input types, such as keys (e.g. an attribute such as `@merchant_name`), values (e.g. the name of a particular merchant), free text (e.g. keywords in a log messages such as `responded 500`), and control characters (e.g. parantheses and colons). Status attributes are also highlighted in colors representing the status, such as red for `error` and blue for `info`.
+Syntax highlighting clearly differentiates input types, such as keys (for example, an attribute such as `@merchant_name`), values (for example, the name of a particular merchant), free text (for example, keywords in a log messages such as `responded 500`), and control characters (for example, parentheses and colons). Status attributes are also highlighted in colors representing the status, such as red for `error` and blue for `info`.
 
 {{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query with differentiable syntax highlighting" style="width:80%;">}}
 
