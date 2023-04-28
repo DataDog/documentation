@@ -96,7 +96,7 @@ resource "azurerm_role_assignment" "example" {
     * `client_id`: Your Azure web application secret key.
     * `client_secret`: Your Azure web application secret key.
 
-See the [Terraform Registry][4] for further example usage and the full list of optional parameters, as well as additional Datadog resources. 
+See the [Terraform Registry][3] for further example usage and the full list of optional parameters, as well as additional Datadog resources. 
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
