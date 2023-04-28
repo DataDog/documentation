@@ -72,7 +72,7 @@ Syntax highlighting clearly differentiates input types, such as keys (for exampl
 Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example,
 - If you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
 - If you input brackets for a range query, but do not fill in the high and low values, the message "Expected term but end of input found" is displayed.
-- If you input multiple values for a log field but miss the closing parenthesis character, such as  `service:(web-store OR auth-dotnet`, the message `Missing closing parenthesis character` is displayed:
+- If you input multiple values for a log field but miss the closing parenthesis character, such as  `service:(web-store OR auth-dotnet`, the message `Missing closing parenthesis character` is displayed.
 
 {{< img src="logs/explorer/search/log_error_states.png" alt="The logs search bar showing `service:(web-store OR auth-dotnet` as the query with the message `Missing closing parenthesis character`" style="width:80%;">}}
 
