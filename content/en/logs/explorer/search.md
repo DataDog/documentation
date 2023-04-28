@@ -80,7 +80,7 @@ To start searching for logs and customizing the time frame in the Log Explorer, 
 
 ## Disable styling and autocomplete for search bar
 
-The user-friendly search mode contains autocomplete and syntax highlighting as mentioned. Toggle the button to the right of the search bar to search in raw mode, where syntax highlighting, search pills styling, and autocomplete are removed:
+Toggle the button to the right of the search bar to search in raw mode, where syntax highlighting, search pills styling, and autocomplete are removed:
 
 {{< img src="logs/explorer/search/log_raw_search_mode.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query in raw search mode" style="width:100%;">}}
 
