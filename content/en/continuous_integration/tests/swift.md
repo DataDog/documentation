@@ -364,9 +364,9 @@ The test target needs to link explicitly with `opentelemetry-swift`.
 
 ### Reporting code coverage
 
-When code coverage is available, the Datadog SDK (v1.21.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+When code coverage is available, the Datadog SDK (v2.2.7+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-In XCode, you can enable the reporing of code coverage in your Test Plan configuration, within your Test Scheme.
+In Xcode, you can enable the reporting of code coverage in your Test Scheme
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
