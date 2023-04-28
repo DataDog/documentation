@@ -52,9 +52,11 @@ When a new chat is opened, you are asked if you have a **technical** or **sales*
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.
    - For sales questions, you are routed to the first available member of our sales team, who can answer questions about billing and account management.
 
+**Note**: For urgent issues, it’s best to reach out through a Support Ticket, and indicate why your request is urgent. This ensures that Support leadership can route your case to an appropriate expert immediately. 
+
 ### Best practices for technical questions
 
-Ensure to have as many of the relevant [prerequisites](#prerequisites) available as possible. The Datadog Team member you connect with on chat does their best to collect information about the issue and resolve it. 
+Ensure to have as many of the relevant [prerequisites](#prerequisites) available as possible. The Datadog team member you connect with on chat does their best to collect information about the issue and resolve it. Not all issues can be resolved in a chat session. If a more detailed investigation is required, Datadog support focuses on collecting the information needed to conduct the investigation after the chat is over.
 
 ### Following up
 
