@@ -20,9 +20,13 @@ Use the [Downtime API][1] to manage advanced maintenance schedules format, or to
 
 This guide describes how to configure downtimes for the following use cases:
 
-* [Downtime over the weekend](#downtime-over-the-weekend)
-* [Downtime outside of business hours](#downtime-outside-of-business-hours)
-* [Recurring downtime on nth weekday of the month](#recurring-downtime-on-the-nth-weekday-of-the-month)
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Examples](#examples)
+	- [Downtime over the weekend](#downtime-over-the-weekend)
+	- [Downtime outside of business hours](#downtime-outside-of-business-hours)
+	- [Recurring downtime on the nth weekday of the month](#recurring-downtime-on-the-nth-weekday-of-the-month)
+	- [Further Reading](#further-reading)
 
 ## Prerequisites
 
@@ -49,7 +53,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -d '{"scope": "env:prod","start":"1613779200","end":"1613865599", "recurrence": {"type": "weeks","period": 1,"week_days": ["Sat","Sun"]}}'
 ```
 
-Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. Replace the `start` and `end` parameter to match your wanted schedule. For example:
+Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}}. Replace the `start` and `end` parameter to match your wanted schedule.  For example:
 
 * `start=$(date +%s)`
 * `end=$(date -v+24H +%s)`
