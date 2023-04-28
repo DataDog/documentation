@@ -20,7 +20,7 @@ further_reading:
 
 The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problematic areas.
 
-**NEW SCREENSHOT**
+{{< img src="network_performance_monitoring/network_map/network_map_3.png" alt="network_map" >}}
 
 ## Setup
 
@@ -30,7 +30,7 @@ The network map visualizes data collected by the Datadog Agent automatically. On
 
 Select the **map** tab to configure your network map:
 
-**NEW SCREENSHOT**
+{{< img src="network_performance_monitoring/network_map/network_map_search.png" alt="Network map page search bar" video="true" >}}
 
 **NEW SCREENSHOT**
 
