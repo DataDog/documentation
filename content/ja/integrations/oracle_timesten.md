@@ -22,9 +22,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- キャッシュ
+- data store
 - マーケットプレイス
 - oracle
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,18 +49,19 @@ pricing:
   tag: ホスト
   unit_label: Oracle Times Ten データベース
   unit_price: 500
-public_title: Oracle TimesTen インテグレーション
+public_title: Oracle TimesTen
 short_description: Oracle TimesTen データベースのパフォーマンスを監視する
 supported_os:
 - linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
+  - Category::Caching
+  - Category::Data Store
   - Category::Marketplace
   - Category::Oracle
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Oracle TimesTen データベースのパフォーマンスを監視する
   media:
@@ -81,7 +83,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Oracle TimesTen インテグレーション
+  title: Oracle TimesTen
   uninstallation: README.md#Uninstallation
 ---
 

@@ -40,7 +40,7 @@ The [Detection Rules][9] page lets you search all detection rules by rule type. 
 
 ### Finding detection rules
 
-The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no “Search” button to click.
+The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no "Search" button to click.
 
 #### Filter by facet
 
@@ -56,9 +56,16 @@ You can also filter by facets such as `source` and `severity` to help when inves
 
 Rules are displayed in the detection rules table. You can sort the table by clicking on the **Sort by** option in the top right corner of the table. For example, sort by **Highest Severity** to triage high-impact misconfigurations and threats.
 
-#### Enabling or disabling a rule
+#### Enable or disable rules
 
-Enable or disable a rule using the toggle switch to the right of the rule.
+To enable or disable a single rule, toggle the switch to the right of the rule.
+
+You can also bulk enable or disable rules:
+
+1. Click **Select Rules**.
+1. Select the rules you want to enable or disable.
+1. Click the **Edit Rules** dropdown.
+1. Select **Enable Rules** or **Disable Rules**.
 
 #### Rule and generated signal options
 

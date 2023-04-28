@@ -1,0 +1,22 @@
+{
+  "data": {
+    "attributes": {
+      "compute": {
+        "aggregation_type": "distribution",
+        "include_percentiles": false,
+        "path": "@duration"
+      },
+      "filter": {
+        "query": "@http.status_code:200 service:my-service"
+      },
+      "group_by": [
+        {
+          "path": "resource_name",
+          "tag_name": "resource_name"
+        }
+      ]
+    },
+    "id": "ExampleSpansMetric",
+    "type": "spans_metrics"
+  }
+}

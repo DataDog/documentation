@@ -7,17 +7,27 @@ kind: ドキュメント
 title: アーカイブからのリハイドレート
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-warning">Log Rehydration* は、AP1 リージョンではサポートされていません。</div>
+{{< /site-region >}}
+
 ## 概要
 
 Log Rehydration* を使用すると、顧客が所有している、ストレージに最適化されたアーカイブからログイベントを取得して、検索に最適化された Datadog の[ログエクスプローラー][1]に戻すことができます。これにより、古いログイベントや、インデックス化から除外されたログイベントを、Datadog を使用して分析または調査することが可能になります。
 
 ## 履歴ビュー
 
-履歴ビューでは、アーカイブされたログイベントを、タイムフレームやクエリフィルターを指定して正確にリハイドレートできるため、予期しない特定のユースケースにも効果的に対応できます。履歴ビューを作成するには、Datadog アカウントの[コンフィギュレーションのページ][2]に移動し、[“Rehydrate From Archives” タブ][3]を選択し、“New Historical View” ボタンをクリックします。
+履歴ビューでは、アーカイブされたログイベントを時間枠やフィルターで正確にリハイドレートし、予期せぬ特定のユースケースを効率的に満たすことができます。
 
-{{< img src="logs/archives/log_archives_rehydrate_historical.png" alt="履歴ビュー"  style="width:75%;">}}
+履歴ビューを作成するには
+
+1. Datadog アカウントの[構成ページ][2]に移動します。
+2. [**Rehydrate From Archives**][3] タブを選択します。
+3. **New Historical View** をクリックします。
 
 インデックス除外フィルターは履歴ビューには適用されないため、アーカイブからリハイドレートするときに除外フィルターを変更する必要はありません。
+
+履歴ビューを CSV でダウンロードする場合、データは過去 90 日間に限定されます。
 
 ### 新しい履歴ビューの追加
 
@@ -65,7 +75,7 @@ Log Rehydration* を使用すると、顧客が所有している、ストレー
 
 #### 履歴ビューのページから
 
-“Rehydrate from Archive” を選択すると、コンテンツをクエリできる状態になるまで履歴ビューに “pending” のマークが付けられます。
+"Rehydrate from Archive" を選択すると、コンテンツをクエリできる状態になるまで履歴ビューに "pending" のマークが付けられます。
 
 コンテンツがリハイドレートされると、履歴ビューに active のマークが表示され、クエリ列のリンクによってログエクスプローラーの履歴ビューに移動できるようになります。
 
@@ -164,7 +174,7 @@ Datadog は、アーカイブのストレージアカウントのスコープを
 
 {{% tab "Google Cloud Storage" %}}
 
-アーカイブからログイベントをリハイドレートするために、Datadog は Storage Object Viewer ロールが割り当てられたサービスアカウントを使用します。このロールを Datadog のサービスアカウントに付与するには、[GCP の IAM と管理者のページ][1]でサービスアカウントのアクセス許可を編集し、ロールを 1 つ追加してから、Storage > Storage Object Viewer の順に選択します。
+アーカイブからログイベントをリハイドレートするために、Datadog は Storage Object Viewer ロールが割り当てられたサービスアカウントを使用します。このロールを Datadog のサービスアカウントに付与するには、[Google Cloud IAM 管理者ページ][1]でサービスアカウントのアクセス許可を編集し、ロールを 1 つ追加してから、Storage > Storage Object Viewer の順に選択します。
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="GCS からのリハイドレートには Storage Object Viewer ロールが必要"  style="width:75%;">}}
 

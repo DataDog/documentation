@@ -90,7 +90,7 @@ instances:
 推奨する [ADO][6] プロバイダーは、[Microsoft OLE DB Driver][7] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
 ```yaml
 connector: adodbapi
-provider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL19  # バージョン 18 以下の MSOLEDBSQL に置き換えます
 ```
 
 他の 2 つのプロバイダー、`SQLOLEDB` と `SQLNCLI` は、Microsoft によって非推奨とされており、もはや使用するべきではありません。

@@ -3,9 +3,12 @@ aliases:
 - /ja/guides/azure/
 - /ja/integrations/azure_storage/
 categories:
-- cloud
 - azure
+- cloud
+- iot
 - log collection
+- network
+- notification
 dependencies: []
 description: インスタンスや多数の Azure サービスからメトリクスを収集
 doc_link: https://docs.datadoghq.com/integrations/azure/
@@ -61,9 +64,9 @@ Datadog の Azure インテグレーションにより、Azure 環境からの�
 **All Sites:** すべての Datadog サイトは、メトリクス収集を実装するための App Registration 資格情報プロセス、および Azure Platform Logs を送信するための Event Hub セットアップを使用できます。 
 **US3:** Datadog US3 サイトに組織がある場合、Azure Native インテグレーションを使用して、Azure 環境の管理およびデータ収集を効率化します。Datadog では、可能な限りこの方法を使用することを推奨しています。セットアップには、Azure サブスクリプションを Datadog 組織にリンクするための Datadog リソースを Azure に作成することが必要です。これは、メトリクス収集のための App Registration 資格情報プロセスと、ログ転送のための Event Hub セットアップを置き換えるものです。
 
-{{% site-region region="us,eu,us5,gov" %}}
+{{< site-region region="us,eu,us5,gov" >}}
 <div class="alert alert-info"><strong>このページのサイドパネルのサイト US3 を選択または<a href="?site=us3">サイトセレクターを変更</a>してドキュメントの US3 バージョンを表示します。</strong></div>
-{{% /site-region %}}
+{{< /site-region >}}
 
 Microsoft Azure に接続すると、以下のことができます。
 - Datadog Agent をインストールして、またはインストールせずに、Azure VM からメトリクスを取得。
@@ -80,12 +83,12 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 |---------------------------------|-----------------------------------------------------------------------------------------------------------|
 | [Analysis Services][1]          | クラウドでデータモデルを提供するサービス                                                         |
 | [API Management][2]             | API を公開、セキュリティ保護、変換、管理、監視するサービス                                      |
-| [App Service][3]                | Web、モバイル、API、およびビジネスロジックアプリケーションをデプロイおよびスケーリングするためのサービス                      |
+| [App Service][3]                | Web、モバイル、API、およびビジネスロジックアプリケーションをデプロイおよびスケーリングするためのサービス。                      |
 | [App Service Environment][4]    | App Service のアプリを大規模かつ安全に実行するための環境を提供するサービス               |
 | [App Service Plan][5]           | Web アプリを実行するためのコンピューティングリソースのセット                                                          |
 | [Application Gateway][6]        | Web アプリケーションへのトラフィックを管理できる Web トラフィックロードバランサー                  |
 | [Automation][7]                 | 複数の環境を横断して自動化と構成管理を提供するサービス                 |
-| [Batch Service][8]              | マネージド型のタスクスケジューラーおよびプロセッサー                                                                      |
+| [Batch Service][8]              | マネージド型のタスクスケジューラーおよびプロセッサー。                                                                     |
 | [Cognitive Services][9]         | AI やデータサイエンスの知識なしでアプリケーションの構築を可能にする API、SDK、サービス       |
 | [Container Instances][10]       | 基底のインフラストラクチャーをプロビジョニングおよび管理する必要なく、コンテナをデプロイするサービス     |
 | [Container Service][11]         | 実稼働準備が整った Kubernetes、DC/OS、または Docker Swarm クラスター                                            |
@@ -97,37 +100,37 @@ Datadog の Azure インテグレーションは、<a href="https://docs.microso
 | [Data Lake Store][17]           | ビッグデータ分析を可能にする無制限のデータレイク                                                     |
 | [Database for MariaDB][18]      | エンタープライズ対応のフルマネージド型コミュニティ MariaDB データベースを提供するサービス                       |
 | [Event Grid][19]                | 公開/サブスクライブモデルを使用して均一なイベント消費を可能にするイベントルーティングサービス       |
-| [Event Hub][20]                 | マネージド型の大規模データストリーミングサービス                                                                   |
+| [Event Hub][20]                 | マネージド型の大規模データストリーミングサービス。                                                                   |
 | [ExpressRoute][21]              | オンプレミスのネットワークをクラウドに拡張するサービス                                             |
 | [Firewall][22]                  | Azure Virtual Network のリソースを保護するクラウドネイティブのネットワークセキュリティ                            |
 | [Functions][23]                 | イベントトリガーに呼応してコードをサーバーレスで実行するサービス                                      |
 | [HDInsights][24]                | 膨大な量のデータを処理するクラウドサービス                                                   |
-| [IOT Hub][25]                   | 何十億もの IOT 資産の接続、監視、管理                                                       |
+| [IOT Hub][25]                   | 何十億もの IOT 資産の接続、監視、管理。                                                      |
 | [Key Vault][26]                 | クラウドアプリケーションおよびサービスが使用する暗号化キーを保護および管理するサービス |
-| [Load Balancer][27]             | アプリケーションをスケーリングし、サービスの高可用性を実現                                    |
-| [Logic App][28]                 | 強力なインテグレーションソリューションの構築                                                                      |
+| [Load Balancer][27]             | アプリケーションをスケーリングし、サービスの高可用性を実現。                                   |
+| [Logic App][28]                 | 強力なインテグレーションソリューションの構築。                                                                     |
 | [Machine Learning][29]          | モデルをより早く構築しデプロイするための、エンタープライズレベルの機械学習サービス                              |
 | [Network Interfaces][30]        | VM とインターネット、Azure、オンプレミスリソースとの通信を提供                                 |
 | [Notification Hubs][31]         | 任意のバックエンドから任意のプラットフォームへ通知を送信できるようにするプッシュエンジン                     |
 | [Public IP Address][32]         | インターネットとのインバウンド通信およびアウトバウンド接続を可能にするリソース                |
 | [Recovery Service Vault][33]    | 時間の経過とともに作成されたバックアップやリカバリーポイントを保存するエンティティ。                                  |
-| [Redis Cache][34]               | マネージド型のデータキャッシュ                                                                                        |
+| [Redis Cache][34]               | マネージド型のデータキャッシュ。                                                                                       |
 | [Relay][35]                     | 企業ネットワーク内で実行されているサービスをパブリッククラウドに安全に公開                          |
 | [Cognitive Search][36]          | 優れた検索エクスペリエンスを追加するためのツールを提供する、サービスとしての検索クラウドソリューション             |
-| Storage                         | [BLOB][37]、[ファイル][38]、[キュー][39]、[テーブル][40]のためのストレージ                                      |
+| Storage                         | [BLOB][37]、[ファイル][38]、[キュー][39]、[テーブル][40]のためのストレージ。                                     |
 | [Stream Analytics][41]          | デバイスからの大量のデータストリーミングを調べるイベント処理エンジン                        |
-| [SQL Database][42]              | クラウドの拡張性の高いリレーショナルデータベース                                                          |
-| [SQL Database Elastic Pool][43] | 複数のデータベースのパフォーマンス管理                                                              |
-| [Usage and Quotas][44]          | お使いの Azure の使用状況を示します。                                                                                  |
-| [Virtual Machine][45]           | 仮想マシン管理サービス                                                                        |
-| [Virtual Machine Scale Set][46] | 同一の VM をセットでデプロイ、管理、オートスケーリング                                                      |
-| [Virtual Network][47]           | Azure リソースがお互いと、インターネットと、オープンプレミスネットワークと、安全に通信できるようにします。    |
+| [SQL Database][42]              | クラウドの拡張性の高いリレーショナルデータベース。                                                         |
+| [SQL Database Elastic Pool][43] | 複数のデータベースのパフォーマンス管理。                                                              |
+| [Synapse Analytics][44]         | データインテグレーション、エンタープライズデータウェアハウス、ビッグデータアナリティクスを統合したアナリティクスサービス。 |
+| [Usage and Quotas][45]          | お使いの Azure の使用状況を示します。                                                                                  |
+| [Virtual Machine][46]           | 仮想マシン管理サービス。                                                                       |
+| [Virtual Machine Scale Set][47] | 同一の VM をセットでデプロイ、管理、オートスケーリング。                                                     |
+| [Virtual Network][48]           | Azure リソースがお互いと、インターネットと、オープンプレミスネットワークと、安全に通信できるようにします。    |
 
 ## セットアップ
 
-{{% site-region region="us,eu,gov,us5" %}}
-
-**注**: Azure Native インテグレーション (Datadog の US3 サイトのお客様向け) には、異なるセットアップ手順があります。Azure Native インテグレーションを使用している場合は、[サイトセレクターを変更][60]して US3 固有の手順を参照してください。詳細については、[概要][61]を参照してください。
+{{< site-region region="us,eu,gov,us5" >}}
+<div class="alert alert-info"><strong>Azure Native インテグレーション (Datadog の US3 サイトでお客様向けに提供) には、異なるセットアップ手順があります。このページのサイドパネルでサイト US3 を選択するか、<a href="?site=us3">サイトセレクタを変更</a>して、US3 バージョンのドキュメントが表示されていることを確認してください。</strong></div>
 
 ### APM に Datadog Agent を構成する
 
@@ -137,40 +140,66 @@ Azure CLI ツールまたは Azure ポータルを使用して、Microsoft Azure
 
 #### Azure CLI を使用して統合する
 
-Azure CLI を使用して Datadog を Azure と統合するには、[Azure CLI をインストール][44]しておく必要があります。
+Azure CLI を使用して Datadog と Azure をインテグレーションするには、Datadog は [Azure Cloud Shell][44] を使用することを推奨しています。
 
 {{< tabs >}}
-{{% tab "Azure CLI v2.0" %}}
+{{% tab "Azure CLI" %}}
 
 最初に、Datadog と統合する Azure アカウントにログインします。
 
-```text
+```shell
 az login
 ```
 
-account show コマンドを実行します。
+サービスプリンシパルを作成し、Azure リソースへのアクセスを構成します。
 
-```text
-az account show
+```shell
+az ad sp create-for-rbac
 ```
 
-生成された`テナント ID` 値を [Datadog Azure インテグレーションタイル][1]の **Tenant name/ID** に入力します。
+サブスクリプションのリストを表示し、`subscription_id` をコピーアンドペーストできるようにします。
+
+```shell
+az account list --output table
+```
 
 次の形式を使用して、サービスプリンシパルとなるアプリケーションを作成します。
 
-```text
+```shell
 az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{subscription_id}
+```
+
+出力例:
+```text
+{
+  "appId": "0dd17b1e-54a4-45ae-b168-232b14b01f88",
+  "displayName": "azure-cli-2025-02-23-04-27-19",
+  "password": "dj-8Q~hKbQwU93Q0FBfIZ_pI5ZtaLoRxaws8Dca5",
+  "tenant": "4d3bac44-0230-4732-9e70-cc00736f0a97"
+}
 ```
 
 - このコマンドは、監視するサブスクリプションに対する `monitoring reader` ロールをサービスプリンシパルに付与します。
 - このコマンドによって生成された` appID `を [Datadog Azure インテグレーションタイル][1]の **Client ID** に入力する必要があります。
+- 生成された`テナント ID` 値を [Datadog Azure インテグレーションタイル][1]の **Tenant name/ID** に入力します。
+- `--scope` は複数の値をサポートすることができ、一度に複数のサブスクリプションまたは管理グループを追加することができます。**[az ad sp][2]** ドキュメントにある例を参照してください。
 - 自分で選択した名前を使用する場合は、`--name <CUSTOM_NAME>` を追加します。それ以外の場合は、Azure によって一意の名前が生成されます。この名前は、セットアッププロセスでは使用されません。
 - 自分で選択したパスワードを使用する場合は、`--password <CUSTOM_PASSWORD>` を追加します。それ以外の場合は、Azure によって一意のパスワードが生成されます。このパスワードは、[Datadog Azure インテグレーションタイル][1]の **Client Secret** に入力する必要があります。
 
+管理グループは、スコープとして有効かつ推奨されるオプションです。例:
+
+```shell
+az account management-group entities list --query "[?inheritedPermissions!='noaccess' && permissions!='noaccess'].{Name:displayName,Id:id}" --output table
+```
+
+- このコマンドは、ユーザーがアクセスできるすべてのサブスクリプションと管理グループを表示します。
+- ID を結合して、サービスプリンシパルを作成します。このコマンドを 1 つ実行するだけで、ユーザーを作成し、すべての管理グループ/サブスクリプションにロールを割り当てることができます
+
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
+[2]: https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest
 {{% /tab %}}
-{{% tab "Azure CLI v1.0" %}}
+{{% tab "Azure CLI Classic" %}}
 
 最初に、Datadog と統合する Azure アカウントにログインします。
 
@@ -204,60 +233,6 @@ azure role assignment create --objectId <オブジェクト_ID> -o "Monitoring R
 
 - このコマンドは、監視するサブスクリプションに対する `monitoring reader` ロールをサービスプリンシパルに付与します。
 - このコマンドによって生成された`サービスプリンシパル名`を [Datadog Azure インテグレーションタイル][1]の **Client ID** に入力する必要があります。
-- `<SUBSCRIPTION_ID>` は監視対象の Azure サブスクリプションです。これは、`azure account show` コマンドを使用すると、またはポータルに `ID` として一覧表示されます。
-
-
-[1]: https://app.datadoghq.com/account/settings#integrations/azure
-{{% /tab %}}
-{{% tab "v1.0 より前の Azure CLI" %}}
-
-最初に、Datadog と統合する Azure アカウントにログインします。
-
-```text
-azure login
-```
-
-account show コマンドを実行します。
-
-```text
-az account show
-```
-
-生成された`テナント ID` 値を [Datadog Azure インテグレーションタイル][1]の **Tenant name/ID** に入力します。
-
-名前、ホームページ、識別子 URI、パスワードを作成します。
-
-```text
-azure ad app create --name "<NAME>" --home-page "<URL>" --identifier-uris "<URL>" --password "<PASSWORD>"
-```
-
-- `name`、`home-page`、`identifier-uris` は使用されませんが、セットアッププロセスの一環として必要です。
-- 選択した `password` は、[Datadog Azure インテグレーションタイル][1]の **Client Secret** に入力する必要があります。
-- このコマンドから返される `AppId` は、次のコマンドで使用します。また、[Datadog Azure インテグレーションタイル][1]の **Client ID** に入力する必要があります。
-
-以下を使用して、サービスプリンシパルを作成します。
-
-Azure cli < 0.10.2 の場合
-
-```text
-azure ad sp create {app-id}
-```
-
-Azure cli >= 0.10.2 の場合
-
-```text
-azure ad sp create -a {app-id}
-```
-
-- このコマンドから返される`オブジェクト ID` を、次のコマンドの `<OBJECT_ID>` の代わりに使用します。
-
-次の形式を使用して、Active Directory アプリケーションを作成します。
-
-```text
-azure role assignment create --objectId <オブジェクト_ID> --roleName "Monitoring Reader" --subscription <サブスクリプション_ID>
-```
-
-- このコマンドは、監視するサブスクリプションに対する `monitoring reader` ロールをサービスプリンシパルに付与します。
 - `<SUBSCRIPTION_ID>` は監視対象の Azure サブスクリプションです。これは、`azure account show` コマンドを使用すると、またはポータルに `ID` として一覧表示されます。
 
 
@@ -300,8 +275,6 @@ azure role assignment create --objectId <オブジェクト_ID> --roleName "Moni
     {{< img src="integrations/azure/azure-add-role.png" alt="ロールの割り当ての追加" popup="true" style="width:80%">}}
 
 4. **Role** には、**Monitoring Reader** を選択します。**Select** では、前の手順で作成したアプリケーションの名前を選択します。
-
-    {{< img src="integrations/azure/azure-select-role-app.png" alt="ロールとアプリを選択" popup="true" style="width:60%">}}
 
 5. **保存**をクリックします。
 6. Datadog を使用して監視する他のサブスクリプションについても、この手順を繰り返します。**注**: Azure Lighthouse のユーザーは、顧客テナントからサブスクリプションを追加できます。
@@ -620,6 +593,16 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 {{% /tab %}}
 {{< /tabs >}}
 
+#### セットアップ
+
+##### ログアーカイブ
+
+Azure Native インテグレーションを使用している場合でも、Azure Blob Storage にログをアーカイブするには、App Registration が必要です。Azure Blob Storage にログをアーカイブするには、設定手順に従って、App Registration を使用してインテグレーションを構成します。アーカイブ目的で作成された App Registration には、`Monitoring Reader` ロールを割り当てる必要はありません。
+
+App Registration を構成したら、Azure Blob Storage に書き込む[ログアーカイブを作成][66]することができます。
+
+**注**: ストレージバケットが Azure Native インテグレーションで監視されているサブスクリプションにある場合、Azure Integration Tile に App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
+
 [44]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
 [45]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/#enable-diagnostics
 [46]: https://app.datadoghq.com/account/settings#integrations/azure
@@ -633,9 +616,9 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 [59]: /ja/monitors/notify/#notify-your-team
 [60]: https://docs.datadoghq.com/ja/integrations/azure/?site=us3
 [61]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#overview
-{{% /site-region %}}
+{{< /site-region >}}
 
-{{% site-region region="us3" %}}
+{{< site-region region="us3" >}}
 
 ### 前提条件
 
@@ -660,21 +643,6 @@ Azure に Datadog リソースを作成するには、2 つのオプションが
 **注**: Azure の **Create a new Datadog organization** オプションを使用すると、トライアルをご利用いただけません。無料トライアルを開始するには、まず [Datadog の  US3 サイトでトライアル組織を作成][6]し、リンクフローを使用して監視するサブスクリプションを追加します。
 
 Datadog リソースを作成すると、関連するサブスクリプションのデータ収集が開始します。このリソースを使用して Datadog を構成、管理、デプロイするには、[ガイド][7]で詳細をご確認ください。
-
-#### プログラムマネジメント
-
-このページの手順は、Azure Portal を使用して Azure Native インテグレーションを構成するプロセスの概要を説明します。プログラム的なオプションがお好みであれば、活用することもできます。
-
-- [Datadog の Azure CLI][62]
-
-- [Azure Terraform Provider for Datadog][63] (必ず [Role assignment block][64] を入れてください)
-
-Azure Native インテグレーションで監視したいサブスクリプションが多数ある場合、Datadog は Terraform を使用して Datadog リソースを作成することを推奨しています。複数のサブスクリプションにまたがる Terraform の構成については、このブログ投稿の [Terraform を使った複数の Azure サブスクリプションへのデプロイメント][65]を参照してください。
-
-[62]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
-[63]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors
-[64]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors#role-assignment
-[65]: https://medium.com/codex/deploying-to-multiple-azure-subscriptions-using-terraform-81249a58a600
 
 #### Datadog リソースの作成
 
@@ -915,17 +883,23 @@ Datadog リソース内で Security Assertion Markup Language (SAML) シング�
 [11]: https://app.datadoghq.com/monitors/recommended
 [12]: /ja/monitors/notify/#notify-your-team
 [13]: https://docs.datadoghq.com/ja/security_platform/cspm/
-{{% /site-region %}}
 
-#### セットアップ
+### プログラムマネジメント
 
-##### ログアーカイブ
+Azure Native インテグレーションの構成は、Azure Portal またはプログラムによって行うことができます。プログラム的なオプションを好む場合は、以下を活用することもできます。
 
-Azure Native インテグレーションを使用している場合でも、Azure Blob Storage にログをアーカイブするには、App Registration が必要です。Azure Blob Storage にログをアーカイブするには、設定手順に従って、App Registration を使用してインテグレーションを構成します。アーカイブ目的で作成された App Registration には、`Monitoring Reader` ロールを割り当てる必要はありません。
+- [Datadog の Azure CLI][62]
 
-App Registration を構成したら、Azure Blob Storage に書き込む[ログアーカイブを作成][48]することができます。
+- [Azure Terraform Provider for Datadog][63] (必ず [Role assignment block][64] を入れてください)
 
-**注**: ストレージバケットが Azure Native インテグレーションで監視されているサブスクリプションにある場合、Azure Integration Tile に App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
+Azure Native インテグレーションで監視したいサブスクリプションが多数ある場合、Datadog は Terraform を使用して Datadog リソースを作成することを推奨しています。複数のサブスクリプションにまたがる Terraform の構成については、このブログ投稿の [Terraform を使った複数の Azure サブスクリプションへのデプロイメント][65]を参照してください。
+
+[62]: https://docs.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
+[63]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors
+[64]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors#role-assignment
+[65]: https://medium.com/codex/deploying-to-multiple-azure-subscriptions-using-terraform-81249a58a600
+
+{{< /site-region >}}
 
 ## 収集データ
 
@@ -1010,11 +984,11 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 [41]: https://docs.datadoghq.com/ja/integrations/azure_stream_analytics/
 [42]: https://docs.datadoghq.com/ja/integrations/azure_sql_database/
 [43]: https://docs.datadoghq.com/ja/integrations/azure_sql_elastic_pool/
-[44]: https://docs.datadoghq.com/ja/integrations/azure_usage_and_quotas/
-[45]: https://docs.datadoghq.com/ja/integrations/azure_vm/
-[46]: https://docs.datadoghq.com/ja/integrations/azure_vm_scale_set/
-[47]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
-[48]: https://docs.datadoghq.com/ja/logs/log_configuration/archives/?tab=azurestorage#configure-an-archive'
+[44]: https://docs.datadoghq.com/ja/integrations/azure_synapse/
+[45]: https://docs.datadoghq.com/ja/integrations/azure_usage_and_quotas/
+[46]: https://docs.datadoghq.com/ja/integrations/azure_vm/
+[47]: https://docs.datadoghq.com/ja/integrations/azure_vm_scale_set/
+[48]: https://docs.datadoghq.com/ja/integrations/azure_virtual_networks/
 [49]: https://www.datadoghq.com/blog/datadog-generated-metrics-azure/
 [50]: https://app.datadoghq.com/event/explorer
 [51]: https://docs.datadoghq.com/ja/integrations/guide/azure-troubleshooting/

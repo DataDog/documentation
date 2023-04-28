@@ -22,8 +22,9 @@ author:
   sales_email: cody.lee@datadoghq.com
   support_email: cody.lee@datadoghq.com
 categories:
-- isp
+- developer tools
 - ネットワーク
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md
 display_on_public_website: true
@@ -41,16 +42,17 @@ public_title: speedtest
 short_description: speedtest-cli を使用して Speedtest の結果を実行します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - カテゴリ::ISP
+  - Category::Developer Tools
   - Category::Network
+  - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: speedtest-cli を使用して Speedtest の結果を実行します
   media: []
@@ -69,7 +71,7 @@ tile:
 
 Speedtest チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Speedtest チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

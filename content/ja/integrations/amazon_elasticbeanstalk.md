@@ -3,10 +3,12 @@ aliases:
 - /ja/integrations/awsbeanstalk/
 - /ja/developers/faq/i-want-my-application-deployed-in-a-container-through-elasticbeanstalk-to-talk-to-dogstatsd/
 categories:
+- aws
 - cloud
 - configuration & deployment
-- aws
 - log collection
+- network
+- provisioning
 dependencies: []
 description: Amazon Elastic Beanstalk のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/
@@ -41,11 +43,27 @@ AWS Elastic Beanstalk は、Apache、Nginx、Passenger、IIS などの使い慣�
 
 **注**: これらの設定により、CloudWatch カスタムメトリクス料金が加算されます。
 
-次のステップでは、Elastic Beanstalk VM に Datadog Agent をデプロイし、AWS インテグレーションによってクロールされるメトリクスに加えて、ホストメトリクスもレポートするようにします。
+## 収集データ
 
-### コンフィギュレーション
+### メトリクス
+{{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
-インストール方法を選択して、Elastic Beanstalk 環境を構成します。
+
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+
+### イベント
+
+AWS Elastic Beanstalk インテグレーションには、イベントは含まれません。
+
+### サービスのチェック
+
+AWS Elastic Beanstalk インテグレーションには、サービスのチェック機能は含まれません。
+
+## Datadog Agent 構成
+
+次のステップでは、Elastic Beanstalk VM に Datadog Agent をデプロイし、AWS インテグレーションによってクロールされるメトリクスに加えて、ホストメトリクスもレポートするようにします。詳しくは、[クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？][5]をお読みください。
+
+インストール方法を選択して、Elastic Beanstalk 環境に Agent を構成します。
 
 {{< tabs >}}
 {{% tab "単一のコンテナ" %}}
@@ -287,7 +305,7 @@ process_config:
 [6]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-ebcli
 [7]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-configuration-methods-during.html#configuration-options-during-awscli
 [8]: https://docs.datadoghq.com/ja/tracing/setup/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "コンテナなし (Windows)" %}}
 
@@ -374,26 +392,9 @@ process_config:
 
 ```
 
-
-## 収集データ
-
-### メトリクス
-{{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
-
-
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
-
-### イベント
-
-AWS Elastic Beanstalk インテグレーションには、イベントは含まれません。
-
-### サービスのチェック
-
-AWS Elastic Beanstalk インテグレーションには、サービスのチェック機能は含まれません。
-
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
@@ -403,4 +404,5 @@ AWS Elastic Beanstalk インテグレーションには、サービスのチェ�
 [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
 [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-cloudwatch.html#health-enhanced-cloudwatch-console
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticbeanstalk/amazon_elasticbeanstalk_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/ja/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
+[6]: https://docs.datadoghq.com/ja/help/

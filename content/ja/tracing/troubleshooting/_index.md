@@ -133,7 +133,7 @@ Datadog では、サービス名を変更することでインスツルメンテ
 
     **注**: Datadog Agent v7.19+ および Datadog Helm チャートの[最新版][9]、または Datadog Agent とトレース Agent が別コンテナにある状況で DaemonSet をご利用の場合は、トレース Agent からフレアを取得するために `datadog.yaml` に `log_level: DEBUG` または `log_level: TRACE` を設定した状態で以下のコマンドを実行する必要があります。
 
-    {{< code-block lang="bash" filename="trace-agent.sh" >}}
+    {{< code-block lang="shell" filename="trace-agent.sh" >}}
 kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --local
     {{< /code-block >}}
 
@@ -143,7 +143,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 
 6. **トレーサーコンフィギュレーション、[カスタムインスツルメンテーション][14]、スパンタグの追加など、トレーシングライブラリを使用して書かれたカスタムコード**
 
-   カスタムインスツルメンテーションは強力なツールですが、Datadog 内のトレース可視化に意図しない副作用を与える可能性があります。 
+   カスタムインスツルメンテーションは強力なツールですが、Datadog 内のトレース可視化に意図しない副作用を与える可能性があります。
 
    さらに、自動インスツルメンテーションとコンフィギュレーションを尋ねることで、Datadog はトレーサのスタートアップとデバッグログの両方に表示されているものと一致するかどうかを確認することができます。
 

@@ -4,7 +4,7 @@ further_reading:
   tag: ドキュメント
   text: CI Results Explorer について学ぶ
 kind: documentation
-title: Synthetics テストサマリーダッシュボード
+title: Synthetic テストサマリーダッシュボード
 ---
 
 ## 概要
@@ -18,7 +18,7 @@ title: Synthetics テストサマリーダッシュボード
 ピンクの Watchdog アイコンをクリックすると、[**Watchdog Insights**][2] サイドパネルが開き、アプリケーションパフォーマンスやトリガーされたモニターアラートにおける未解決の異常を分析することができます。
 
 {{< img src="synthetics/dashboards/test_summary_dashboard.png" alt="すぐに使える Synthetics テストサマリーダッシュボード" style="width:100%" >}}
-{{< img src="synthetics/dashboards/test_automation.png" alt="Synthetics テストサマリーダッシュボードの Synthetics と CI/CD インテグレーションのセクシ ョン" style="width:100%" >}}
+{{< img src="synthetics/dashboards/test_automation.png" alt="Synthetics テストサマリーダッシュボードの Continuous Testing と CI/CD インテグレーションのセクシ ョン" style="width:100%" >}}
 {{< img src="synthetics/dashboards/private_locations.png" alt="Synthetics テストサマリーダッシュボードのプライベートロケーションのセクション" style="width:100%" >}}
 
 表示されるデータの詳細については、[Synthetic モニタリングメトリクス][3]を参照してください。

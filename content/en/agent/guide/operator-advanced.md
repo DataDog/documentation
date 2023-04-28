@@ -15,7 +15,7 @@ further_reading:
 
 Using the Datadog Operator requires the following prerequisites:
 
-- **Kubernetes Cluster version >= v1.14.X**: Tests were done on versions >= `1.14.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
+- **Kubernetes Cluster version >= v1.20.X**: Tests were done on versions >= `1.20.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
 - [`Helm`][2] for deploying the `datadog-operator`.
 - [`Kubectl` CLI][3] for installing the `datadog-agent`.
 
@@ -91,20 +91,21 @@ helm delete datadog
 Update your `datadog-agent.yaml` file with the following configuration to add the toleration in the `Daemonset.spec.template` of your `DaemonSet` :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: "<DATADOG_API_KEY>"
-    appKey: "<DATADOG_APP_KEY>"
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    config:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  override:
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-       - operator: Exists
+        - operator: Exists
 ```
 
 Apply this new configuration:
@@ -136,10 +137,10 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-all.yaml
-[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs-apm.yaml
-[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
-[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-clusteragent.yaml
-[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-tolerations.yaml
+[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-all.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs-apm.yaml
+[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-apm.yaml
+[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-clusteragent.yaml
+[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-tolerations.yaml
 [10]: https://app.datadoghq.com/organization-settings/api-keys

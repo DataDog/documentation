@@ -71,7 +71,7 @@ disable_edit: true
 ## `boot_mode`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `BootMode`<br>
-**説明**: イメージのブートモード。詳細については、<i>Amazon Elastic Compute Cloud ユーザーガイド</i>の<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html">ブートモード</a>を参照してください。<br>
+**説明**: イメージのブートモード。詳細については、<i>Amazon EC2 ユーザーガイド</i>の<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html">ブートモード</a>を参照してください。<br>
 ## `creation_date`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `CreationDate`<br>
@@ -108,13 +108,17 @@ disable_edit: true
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `ImageType`<br>
 **説明**: イメージの種類。<br>
+## `imds_support`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `ImdsSupport`<br>
+**説明**: <code>v2.0</code> の場合、AMI で IMDSv2 が指定されていることを示します。この AMI から起動したインスタンスでは、<code>HttpTokens</code> が自動的に <code>required</code> に設定され、インスタンスのメタデータをリクエストする際に IMDSv2 が使用されていることがデフォルトで要求されるようになります。 また、<code>HttpPutResponseHopLimit</code> は <code>2</code> に設定されています。詳しくは、<i>Amazon EC2 ユーザーガイド</i>の <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration">AMI の構成</a>を参照してください。<br>
 ## `kernel_id`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `KernelId`<br>
 **説明**: イメージに関連付けられたカーネル (存在する場合のみ)。マシンイメージの場合のみ使用します。<br>
 ## `name`
 **タイプ**: `STRING`<br>
-**Provider name**: `Name`<br>
+**プロバイダー名**: `Name`<br>
 **説明**: イメージの作成中に提供された AMI の名前。<br>
 ## `owner_id`
 **タイプ**: `STRING`<br>
@@ -127,7 +131,7 @@ disable_edit: true
 ## `platform_details`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `PlatformDetails`<br>
-**説明**: AMI の請求コードに関連付けられたプラットフォーム情報。詳しくは、<i>Amazon Elastic Compute Cloud ユーザーガイド</i>の <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html">AMI の請求を理解する</a>を参照してください。<br>
+**説明**: AMI の請求コードに関連付けられたプラットフォーム情報。詳しくは、<i>Amazon EC2 ユーザーガイド</i>の <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html">AMI の請求情報を理解する</a>を参照してください。<br>
 ## `product_codes`
 **タイプ**: `UNORDERED_LIST_STRUCT`<br>
 **プロバイダー名**: `ProductCodes`<br>
@@ -181,7 +185,7 @@ disable_edit: true
 ## `tpm_support`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `TpmSupport`<br>
-**説明**: イメージが NitroTPM をサポートする構成になっている場合、この値は <code>v2.0</code> です。詳しくは、<i>Amazon Elastic Compute Cloud ユーザーガイド</i>の <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html">NitroTPM</a> を参照してください。<br>
+**説明**: イメージが NitroTPM サポートに構成されている場合、この値は <code>v2.0</code> です。詳しくは、<i>Amazon EC2 ユーザーガイド</i>の <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html">NitroTPM</a> を参照してください。<br>
 ## `usage_operation`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `UsageOperation`<br>

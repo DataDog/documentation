@@ -25,14 +25,12 @@ Datadog Agent 7.27.0 では、SNMP を使用したデバイスの監視の際、
 
 ## 手順
 
-### 非 K8s/DCA 環境
-
 1. 対応する Agent プラットフォーム用に Datadog Agent バージョンを 7.27 以降にアップグレードします。
 
 2. `snmp.d/conf.yaml` で新しいコアチェックを参照するよう SNMP チェックで `init_config` を更新します。
 
 ``` yaml
-  init_config
+  init_config:
       loader: core
 ```
 3. 以下の手順は、オートディスカバリー/サブネットスキャンを使用する場合のみ適用されます。各インスタンス（サブネット）のコンフィギュレーションを、SNMP チェックコンフィギュレーションからメインの Datadog Agent `datadog.yaml` に移動します。
@@ -44,26 +42,28 @@ Datadog Agent 7.27.0 では、SNMP を使用したデバイスの監視の際、
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100              # デバイスの検出に同時に使用されるワーカー数
-  discovery_interval: 3600  # 秒数
+  workers: 100  # デバイスの検出に同時に使用されるワーカー数
+  discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
+  loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
+  use_device_id_as_hostname: true  # 推奨
   configs:
-    - network: 1.2.3.4/24   # CIDR 表記。Datadog は /24 ブロック以下を推奨
-      version: 2
+    - network_address: 10.10.0.0/24  # CIDR サブネット
+      snmp_version: 2
       port: 161
-      community: ***
-    tags:
+      community_string: '***'  # 一重引用符で囲みます
+      tags:
       - "key1:val1"
       - "key2:val2"
-    - network: 2.3.4.5/24
-      version: 2
+    - network_address: 10.20.0.0/24
+      snmp_version: 2
       port: 161
-      community: ***
+      community_string: '***'
       tags:
       - "key1:val1"
       - "key2:val2"
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "SNMPv3" %}}
 
@@ -71,49 +71,35 @@ snmp_listener:
 listeners:
   - name: snmp
 snmp_listener:
-  workers: 100              # デバイスの検出に同時に使用されるワーカー数
-  discovery_interval: 3600  # 各オートディスカバリー間のインターバル（秒）
+  workers: 100  # デバイスの検出に同時に使用されるワーカー数
+  discovery_interval: 3600  # 各オートディスカバリーの間隔 (秒)
+  loader: core  # SNMP インテグレーションのコアチェック実装を使用します。推奨
+  use_device_id_as_hostname: true  # 推奨
   configs:
-    - network: 1.2.3.4/24   # CIDR 表記。Datadog は /24 ブロック以下を推奨
+    - network_address: 10.10.0.0/24  # CIDR サブネット
       snmp_version: 3
-      user: "user"
-      authProtocol: "fakeAuth"
-      authKey: "fakeKey"
-      privProtocol: "fakeProtocol"
-      privKey: "fakePrivKey"
+      user: 'user'
+      authProtocol: 'SHA256'  # 選択肢: MD5、SHA、SHA224、SHA256、SHA384、SHA512
+      authKey: 'fakeKey'  # 一重引用符で囲みます
+      privProtocol: 'AES256'  # 選択肢: DES、AES (128 bits)、AES192、AES192C、AES256、AES256C
+      privKey: 'fakePrivKey'  # 一重引用符で囲みます
       tags:
-        - "key1:val1"
-        - "key2:val2"
-    - network: 2.3.4.5/24
-      version: 3
+        - 'key1:val1'
+        - 'key2:val2'
+    - network_address: 10.20.0.0/24
       snmp_version: 3
-      user: "user"
-      authProtocol: "fakeAuth"
-      authKey: "fakeKey"
-      privProtocol: "fakeProtocol"
-      privKey: "fakePrivKey"
+      user: 'user'
+      authProtocol: 'SHA256'
+      authKey: 'fakeKey'
+      privProtocol: 'AES256'
+      privKey: 'fakePrivKey'
       tags:
-        - "key1:val1"
-        - "key2:val2"
+        - 'key1:val1'
+        - 'key2:val2'
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-### DCA 特定の移行
-
-`snmp_listener` で使用される一部のパラメーターが変更されています。たとえば、`network_address` が `network` に、`community_string` が `community` になっています。変更のあったパラメーターの全リストについては、以下をご参照ください。
-
-| インテグレーションコンフィグ (Python & Core) | snmp_listener                                                    |
-| ----------------------------------- | -----------------------------------------------------------------|
-| `community_string`                  | `community`                                                      |
-| `network_address`                   | `network`                                                        |
-| `authKey`                           | `authentication_key`                                             |
-| `authProtocol`                      | `authentication_protocol`                                        |
-| `privKey`                           | `privacy_key`                                                    |
-| `privProtocol`                      | `privacy_protocol`                                               |
-| `snmp_version`                      | `version`                                                        |
-| `discovery_allowed_failures`        | `allowed_failures`, top config: `snmp_listener.allowed_failures` |
 
 ### カスタムプロファイルの移行（デプロイ以外）
 

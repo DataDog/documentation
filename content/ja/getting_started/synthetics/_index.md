@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - 外形監視
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: ラーニングセンター
@@ -15,7 +18,7 @@ further_reading:
 - link: /synthetics/private_locations
   tag: Documentation
   text: プライベートロケーションの詳細
-- link: /synthetics/cicd_integrations
+- link: /continuous_testing/cicd_integrations
   tag: ドキュメント
   text: CI パイプラインでの Synthetic テスト実行について学ぶ
 kind: documentation

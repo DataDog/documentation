@@ -16,7 +16,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニター
+- メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
 display_on_public_website: true
@@ -34,15 +34,15 @@ public_title: OpenMetrics
 short_description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
+  - Category::Metrics
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
   media: []

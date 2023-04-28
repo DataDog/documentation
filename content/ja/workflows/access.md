@@ -10,14 +10,9 @@ further_reading:
 - link: /workflows/actions_catalog
   tag: Documentation
   text: ワークフローアクションの一覧を見る
-is_beta: true
 kind: documentation
 title: アクセス・認証
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows は公開ベータ版です。フィードバックや質問がある場合は、<a href="/help">Datadog サポート</a>にご連絡ください。
-{{< /callout >}}
 
 ワークフローとそのコンポーネントへのアクセスや認証を制御するツールがいくつかあります。
 

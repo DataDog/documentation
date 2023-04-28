@@ -83,7 +83,7 @@ For more details and examples of these techniques, sign up for the online learni
 Timeseries graphs of metrics are useful, but dashboards can contain many types of widgets to communicate important information. Try:
 
  - **Alert values and Check statuses**: Show big red, yellow, and green numbers to bring attention to successes or problems.
- - **Heat maps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
+ - **Heatmaps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
    {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example"  >}}
  - **iFrames, formatted text, and images**: Show any number of website-like details to help explain the dashboard contents and provide additional resources.
  - **Tables**: Show lists of metrics grouped by tag keys.

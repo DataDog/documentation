@@ -15,11 +15,12 @@ assets:
     source_type_name: storm
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
+- metrics
+- event management
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/storm/README.md
 display_on_public_website: true
@@ -37,15 +38,16 @@ public_title: Storm
 short_description: Apache Storm 1.x.x トポロジー実行統計
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::処理
+  - Category::Metrics
+  - Category::Event Management
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Apache Storm 1.x.x トポロジー実行統計
   media: []
@@ -67,7 +69,7 @@ Storm サービスからリアルタイムにメトリクスを取得して、�
 
 Storm チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Storm チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 

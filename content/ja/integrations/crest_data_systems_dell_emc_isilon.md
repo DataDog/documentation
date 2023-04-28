@@ -33,9 +33,9 @@ author:
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
-- マーケットプレイス
+- キャッシュ
 - data store
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -68,13 +68,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Caching
+  - Category::Data Store
+  - Category::Marketplace
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Marketplace
-  - Category::Data Store
-  - Category::Monitoring
-  - Offering::Integration
   configuration: README.md#Setup
   description: Dell EMC Isilon クラスターのパフォーマンスと使用量の監視
   media:
@@ -106,21 +106,21 @@ tile:
 
 このインテグレーションは、Dell EMC Isilon クラスターとノードのパフォーマンスと使用量を監視します。重要なメトリクスを取得し、Dell EMC Isilon クラスターの健全性と運用に関する洞察を提供します。このインテグレーションは、各ノードおよびクラスターの CPU、メモリ、およびディスクの使用量を警告するモニターもサポートします。
 
-ダッシュボード名 | 説明
----------------|------------
-クラスター情報 | このダッシュボードでは、クラスターレベルの情報を提供します。
-ノードの詳細 | このダッシュボードでは、ノードレベルの情報を提供します。
-プロトコルの詳細 | このダッシュボードでは、クラスター全体のプロトコルの詳細を提供します。
-ファイルシステム | このダッシュボードでは、ノードレベルのファイルシステムの詳細を提供します。
-クォータ情報 | このダッシュボードでは、クォータ情報を提供します。
-モニター概要 | このダッシュボードでは、このインテグレーションでサポートされるモニターの概要を提供します。
+| ダッシュボード名      | 説明                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| クラスター情報 | このダッシュボードでは、クラスターレベルの情報を提供します。                                      |
+| ノードの詳細        | このダッシュボードでは、ノードレベルの情報を提供します。                                         |
+| プロトコルの詳細    | このダッシュボードでは、クラスター全体のプロトコルの詳細を提供します。                                  |
+| ファイルシステム         | このダッシュボードでは、ノードレベルのファイルシステムの詳細を提供します。                          |
+| クォータ情報   | このダッシュボードでは、クォータ情報を提供します。                                              |
+| モニター概要    | このダッシュボードでは、このインテグレーションでサポートされるモニターの概要を提供します。 |
 
 ## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
- - メール: datadog.integrations@crestdatasys.com
- - Web サイト: [crestdatasys.com](https://www.crestdatasys.com/)
+- メール: datadog.integrations@crestdatasys.com
+- Web サイト: [crestdatasys.com](https://www.crestdatasys.com/)
 
 ### その他の参考資料
 

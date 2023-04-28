@@ -4,10 +4,11 @@ aliases:
 - /ja/integrations/rds/
 - /ja/integrations/faq/how-can-i-monitor-the-health-status-of-my-rds-instances/
 categories:
+- aws
 - cloud
 - data store
-- aws
 - log collection
+- network
 dependencies: []
 description: Amazon RDS に関連する大量のメトリクスを追跡する。
 doc_link: https://docs.datadoghq.com/integrations/amazon_rds/
@@ -208,7 +209,7 @@ init_config:
 
 instances:
     # AWS コンソールからのエンドポイント URL
-    - server: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
+    - server: 'mysqlrds.blah.us-east-1.rds.amazonaws.com'
       user: '<USERNAME>'
       pass: '<PASSWORD>'
       port: 3306
@@ -222,7 +223,7 @@ PostgreSQL を使用している場合は、`postgres.yaml` を編集します�
 init_config:
 
 instances:
-    - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com'
+    - host: 'postgresqlrds.blah.us-east-1.rds.amazonaws.com'
       port: 5432
       username: '<USERNAME>'
       password: '<PASSWORD>'
@@ -237,7 +238,7 @@ Microsoft SQL Server を使用している場合は、`sqlserver.yaml` を編集
 init_config:
 
 instances:
-    - host: 'mysqlrds.blah.us-east1-rds.amazonaws.com,1433'
+    - host: 'sqlserverrds.blah.us-east-1.rds.amazonaws.com,1433'
       username: '<USERNAME>'
       password: '<PASSWORD>'
       tags:

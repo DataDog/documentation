@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "handle": "1636629071",
+      "name": "1636629071"
+    },
+    "relationships": {
+      "users": {
+        "data": []
+      }
+    },
+    "type": "team"
+  }
+}

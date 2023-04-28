@@ -20,6 +20,12 @@ short_description: Azure Diagnostic Extension のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<div class="alert alert-warning">このインテグレーションは非推奨です。Azure VM に対する同様のゲストレベルおよびプロセスレベルの洞察については、Datadog Agent をインストールしてください。
+
+このページに記載されているメトリクスは、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、これらのメトリクスは 2023 年 6 月 1 日に無効化されます。
+
+ご質問は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog サポート</a>までご連絡ください。</div>
+
 ## 概要
 
 Azure Diagnostic Extension は、Microsoft Azure 上で実行されている VM の健全性の監視を支援します。
@@ -28,7 +34,7 @@ Datadog Azure インテグレーションは、Azure Diagnostic Extension から
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][3]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
