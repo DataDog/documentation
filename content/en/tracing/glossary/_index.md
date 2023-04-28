@@ -170,7 +170,7 @@ To get started tagging spans in your application, check out this [walkthrough][1
 
 After a tag has been added to a span, search and query on the tag in Analytics by clicking on the tag to add it as a [facet][18]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" style="width:50%;">}}
 
 ## Retention filters
 

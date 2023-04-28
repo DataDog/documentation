@@ -330,7 +330,7 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 ...
 ```
 
-{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
+{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax" style="width:90%;">}}
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
