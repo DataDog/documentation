@@ -20,7 +20,7 @@ further_reading:
 
 After [creating your monitor][1], use the monitor status page to view the status over time.
 
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page"  >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" >}}
 
 ## Header
 
