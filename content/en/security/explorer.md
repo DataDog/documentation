@@ -55,6 +55,10 @@ Below the header of Cloud Security Posture Management signals are tabs with deta
 - `Findings` includes a list of each resource that has been evaluated by the rule.
 - `Related Issues` includes a list of other signals which contain the same group by values to assist with triaging the signal.
 
+### Case Management
+
+You can create a case from a Cloud SIEM security signal to track, triage, and investigate your signals. Click **Create Case** to start a security investigation. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][9] for more information.
+
 ### Workflows
 
 You can trigger a [Workflow][7] automatically for any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] for more information.
@@ -123,3 +127,4 @@ Follow the [log graphing guide][6] to learn more about all the graphing options.
 [6]: /logs/explorer/analytics/?tab=timeseries
 [7]: /workflows/
 [8]: /workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[9]: /monitors/case_management/
