@@ -20,13 +20,9 @@ Use the [Downtime API][1] to manage advanced maintenance schedules format, or to
 
 This guide describes how to configure downtimes for the following use cases:
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Examples](#examples)
-	- [Downtime over the weekend](#downtime-over-the-weekend)
-	- [Downtime outside of business hours](#downtime-outside-of-business-hours)
-	- [Recurring downtime on the nth weekday of the month](#recurring-downtime-on-the-nth-weekday-of-the-month)
-	- [Further Reading](#further-reading)
+* [Downtime over the weekend](#downtime-over-the-weekend)
+* [Downtime outside of business hours](#downtime-outside-of-business-hours)
+* [Recurring downtime on nth weekday of the month](#recurring-downtime-on-the-nth-weekday-of-the-month)
 
 ## Prerequisites
 
