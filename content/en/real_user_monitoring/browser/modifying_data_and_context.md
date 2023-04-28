@@ -74,7 +74,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Optionally, define the associated view name, service name, and version.
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0](17), you can also optionally define the associated service name and version.
 
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
@@ -82,7 +82,9 @@ window.DD_RUM &&
 
    For more information, see [Setup Browser Monitoring][4].
 
-The following example manually tracks the page views on the `checkout` page in a RUM application. Use `checkout` for the view name and associate the `purchase` service with version `1.2.3`.
+<details open>
+  <summary>Latest version</summary>
+The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. Use <code>checkout</code> for the view name and associate the <code>purchase</code> service with version <code>1.2.3</code>.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -116,6 +118,35 @@ window.DD_RUM && window.DD_RUM.startView({
 ```
 {{% /tab %}}
 {{< /tabs >}}
+</details>
+
+<details>
+  <summary>before <code>v4.13.0</code></summary>
+The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. No service or version can be specified.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+datadogRum.startView('checkout')
+```
+
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.startView('checkout')
+})
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.startView('checkout')
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+</details>
+
 
 If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
@@ -215,7 +246,7 @@ The RUM Browser SDK ignores:
 <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
-You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
 
 ### Modify the content of a RUM event
 
@@ -764,3 +795,4 @@ const context = window.DD_RUM && window.DD_RUM.getRumGlobalContext();
 [14]: /real_user_monitoring/guide/enrich-and-control-rum-data
 [15]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum-core/src/rumEvent.types.ts
 [16]: /logs/log_configuration/attributes_naming_convention/#user-related-attributes
+[17]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v4130
