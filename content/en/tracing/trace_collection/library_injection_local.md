@@ -28,12 +28,9 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 ## Requirements
 
 * Kubernetes v1.14+
-* Datadog [Cluster Agent v7.40+][3]
+* Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
-* Applications in Java, JavaScript, or Python deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
-
-**Note:** Python uWSGI applications are not supported.
-
+* Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
 
@@ -43,6 +40,8 @@ Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AW
 | Java       | [gcr.io/datadoghq/dd-lib-java-init][4]   | [hub.docker.com/r/datadog/dd-lib-java-init][5]   | [gallery.ecr.aws/datadog/dd-lib-java-init][6]   |
 | JavaScript | [gcr.io/datadoghq/dd-lib-js-init][7]     | [hub.docker.com/r/datadog/dd-lib-js-init][8]     | [gallery.ecr.aws/datadog/dd-lib-js-init][9]     |
 | Python     | [gcr.io/datadoghq/dd-lib-python-init][10] | [hub.docker.com/r/datadog/dd-lib-python-init][11] | [gallery.ecr.aws/datadog/dd-lib-python-init][12] |
+| .NET       | [gcr.io/datadoghq/dd-lib-dotnet-init][13] | [hub.docker.com/r/datadog/dd-lib-dotnet-init][14] | [gallery.ecr.aws/datadog/dd-lib-dotnet-init][15] |
+| Ruby       | [gcr.io/datadoghq/dd-lib-ruby-init][23] | [hub.docker.com/r/datadog/dd-lib-ruby-init][24] | [gallery.ecr.aws/datadog/dd-lib-ruby-init][25] |
 
 The `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` environment variable in the Datadog Cluster Agent configuration specifies the registry used by the Admission Controller. The default value is `gcr.io/datadoghq`.
 
@@ -50,7 +49,7 @@ You can pull the tracing library from a different registry by changing it to `do
 
 ## Configure instrumentation libraries injection
 
-For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, or Python instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
+For your Kubernetes applications whose traces you want to send to Datadog, configure the Datadog Admission Controller to inject Java, JavaScript, Python, .NET or Ruby instrumentation libraries automatically. From a high level, this involves the following steps, described in detail below:
 
 1. Enable Datadog Admission Controller to mutate your pods.
 2. Annotate your pods to select which instrumentation library to inject.
@@ -93,11 +92,18 @@ To select your pods for library injection, annotate them with the following, cor
 | Java       | `admission.datadoghq.com/java-lib.version: "<CONTAINER IMAGE TAG>"`   |
 | JavaScript | `admission.datadoghq.com/js-lib.version: "<CONTAINER IMAGE TAG>"`     |
 | Python     | `admission.datadoghq.com/python-lib.version: "<CONTAINER IMAGE TAG>"` |
+| .NET       | `admission.datadoghq.com/dotnet-lib.version: "<CONTAINER IMAGE TAG>"` |
+| Ruby       | `admission.datadoghq.com/ruby-lib.version: "<CONTAINER IMAGE TAG>"` |
 
 The available library versions are listed in each container registry, as well as in the tracer source repositories for each language:
-- [Java][13]
-- [Javascript][14]
-- [Python][15]
+- [Java][16]
+- [Javascript][17]
+- [Python][18]
+  - **Note:** Python uWSGI applications are not supported.
+- [.NET][19]
+  - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
+- [Ruby][20]
+  - **Note**: For Ruby, instrumenting only Ruby on Rails or Hanami applications is supported.
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
@@ -124,7 +130,7 @@ template:
 
 ### Step 3 - Tag your pods with Unified Service Tags
 
-With [Unified Service Tags][16], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
+With [Unified Service Tags][21], you can tie Datadog telemetry together and navigate seamlessly across traces, metrics, and logs with consistent tags. Set the Unified Service Tagging on both the deployment object and the pod template specs.
 Set Unified Service tags by using the following labels:
 
 ```yaml
@@ -178,7 +184,7 @@ If the injection was successful you can see an `init` container called `datadog-
 
 Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init container listed.
 
-The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][17]).
+The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][22]).
 
 
 [1]: /containers/cluster_agent/admission_controller/
@@ -193,11 +199,19 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 [10]: http://gcr.io/datadoghq/dd-lib-python-init
 [11]: http://hub.docker.com/r/datadog/dd-lib-python-init
 [12]: http://gallery.ecr.aws/datadog/dd-lib-python-init
-[13]: https://github.com/DataDog/dd-trace-java/releases
-[14]: https://github.com/DataDog/dd-trace-js/releases
-[15]: https://github.com/DataDog/dd-trace-py/releases
-[16]: /getting_started/tagging/unified_service_tagging/
-[17]: https://app.datadoghq.com/apm/traces
+[13]: http://gcr.io/datadoghq/dd-lib-dotnet-init
+[14]: http://hub.docker.com/r/datadog/dd-lib-dotnet-init
+[15]: http://gallery.ecr.aws/datadog/dd-lib-dotnet-init
+[16]: https://github.com/DataDog/dd-trace-java/releases
+[17]: https://github.com/DataDog/dd-trace-js/releases
+[18]: https://github.com/DataDog/dd-trace-py/releases
+[19]: https://github.com/DataDog/dd-trace-dotnet/releases
+[20]: https://github.com/DataDog/dd-trace-rb/releases
+[21]: /getting_started/tagging/unified_service_tagging/
+[22]: https://app.datadoghq.com/apm/traces
+[23]: http://gcr.io/datadoghq/dd-lib-ruby-init
+[24]: http://hub.docker.com/r/datadog/dd-lib-ruby-init
+[25]: http://gallery.ecr.aws/datadog/dd-lib-ruby-init
 {{% /tab %}}
 
 {{% tab "Host" %}}
@@ -245,7 +259,7 @@ When both the Agent and your services are running on a host, real or virtual, Da
    sudo apt install nodejs -y
    ```
    For .NET applications, ensure you have the [.NET runtime installed][3].
-   
+
    For Python applications, ensure you have Python installed, for example:
    ```sh
    sudo apt install python -y
@@ -889,14 +903,14 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 
 - For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
 
-- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example: 
+- For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example:
 
   ```yaml
   additional_environment_variables:
   - key: DD_PROFILING_ENABLED
     value: true
   - key: DD_APPSEC_ENABLED
-    value: true 
+    value: true
   ```
 
   Only configuration keys that start with `DD_` can be set in the injection config source `additional_environment_variables` section.
