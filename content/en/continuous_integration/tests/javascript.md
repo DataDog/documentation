@@ -332,6 +332,14 @@ If the browser application being tested is instrumented using [RUM][6], your Cyp
 
 {{< /tabs >}}
 
+### Reporting code coverage
+
+When code coverage is available, the Datadog Tracer (v3.19.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+To compute the code coverage, you can use the `--coverage` flag in Jest or run your tests using [Istanbul][19] in other testing frameworks.
+
+You can see the evolution of the test coverage in the **Coverage** tab of a test session.
+
 ### Using Yarn >=2
 
 If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
@@ -519,3 +527,4 @@ In addition to that, if [Intelligent Test Runner][18] is enabled, the following 
 [16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [17]: https://www.npmjs.com/package/mocha-each
 [18]: /continuous_integration/intelligent_test_runner/
+[19]: https://istanbul.js.org/
