@@ -21,6 +21,7 @@ author:
   sales_email: hello@zebrium.com
   support_email: support@zebrium.com
 categories:
+- 自動化
 - notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md
@@ -39,17 +40,18 @@ public_title: Zebrium RCaaS
 short_description: 問題の根本原因をダッシュボード上で直接発見します
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Automation
   - Category::Notification
-  - Offering::UI Extension
   - Offering::Integration
+  - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 問題の根本原因をダッシュボード上で直接発見します
   media:

@@ -2,14 +2,17 @@
 aliases:
 - /ja/integrations/observability_pipelines/
 further_reading:
-- link: /observability_pipelines/installation/
+- link: /getting_started/observability_pipelines/
   tag: ドキュメント
-  text: 観測可能性パイプラインを設定する
+  text: 観測可能性パイプラインワーカーのインストール
+- link: /getting_started/observability_pipelines/
+  tag: Documentation
+  text: 観測可能性パイプラインと Datadog の概要
 - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
-  tag: GitHub
+  tag: ブログ
   text: 観測可能性パイプラインでテレメトリーデータを管理する
 - link: /observability_pipelines/configurations/
-  tag: ドキュメント
+  tag: Documentation
   text: 観測可能性パイプラインの構成の詳細
 kind: ドキュメント
 title: Observability Pipelines（観測データの制御）
@@ -30,7 +33,7 @@ title: Observability Pipelines（観測データの制御）
 
 ### Observability Pipelines（観測データの制御）
 
-観測可能性パイプラインは、観測可能性パイプラインワーカーのすべてのデプロイメントを大規模に監視、構築、管理できるコントロールプレーンです。
+Datadog を使用することで、観測可能性パイプラインワーカーデプロイのすべてをスケールアップして監視、構築、管理することができます。
 
 観測可能性パイプラインの構成に Datadog API キーを追加して、ボトルネックやレイテンシーの特定、パフォーマンスの微調整、データ配信の監視など、Datadog でパイプラインを監視することができます。
 

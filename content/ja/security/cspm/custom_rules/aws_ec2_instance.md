@@ -37,7 +37,7 @@ disable_edit: true
        - `status`<br>
         **タイプ**: `STRING`<br>
         **Provider name**: `Status`<br>
-        **説明**: The attachment state.<br>
+        **説明**: アタッチメントの状態。<br>
        - `volume_id`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `VolumeId`<br>
@@ -236,7 +236,7 @@ disable_edit: true
    - `http_tokens`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `HttpTokens`<br>
-    **説明**: インスタンスメタデータのリクエストに対するトークン使用の状態。この状態が <code>optional</code> の場合は、リクエストに署名済みのトークンヘッダを指定するかしないかでインスタンスメタデータを取得するかどうかを選択します。トークンなしで IAM ロールの資格情報を取得した場合は、 バージョン 1.0 のロール資格情報が返されます。有効な署名付きトークンを使用して IAM ロールの資格情報を取得した場合、バージョン 2.0 のロール資格情報が返されます。この状態が <code>required</code> の場合、すべてのインスタンスメタデータ取得リクエストで署名付きトークンヘッダーを送信する必要があります。この状態では、IAM ロール資格情報を取得すると、常にバージョン 2.0 の資格情報が返され、バージョン 1.0 の資格情報は使用できません。<br>
+    **説明**: IMDSv2 はトークンバックセッションを使用します。HTTP トークンの使用が <code>optional</code> であるか (言い換えれば、IMDSv2 の使用が <code>optional</code> であるかを示す)、<code>required</code> であるか (言い換えれば、IMDSv2の使用が <code>required</code> であるかを示す) を示します。<ul><li> <code>optional</code> - IMDSv2 がオプションの場合、リクエストでセッショントークンを使用するかしないかを選択して、インスタンスメタデータを取得することができます。トークンなしで IAM ロール資格情報を取得する場合、IMDSv1 ロール資格情報が返されます。有効なセッショントークンを使用して IAM ロールの資格情報を取得した場合、IMDSv2 ロールの資格情報が返されます。</li><li> <code>required</code> - IMDSv2 が必須の場合、インスタンスメタデータの取得リクエストでセッショントークンを送信する必要があります。この状態では、IAM ロールの資格情報を取得すると常に IMDSv2 資格情報が返され、IMDSv1 資格情報は利用できません。</li></ul>
     **デフォルト**: <code>optional</code>
    - `instance_metadata_tags`<br>
     **タイプ**: `STRING`<br>
@@ -289,7 +289,7 @@ disable_edit: true
        - `attach_time`<br>
         **タイプ**: `TIMESTAMP`<br>
         **プロバイダー名**: `AttachTime`<br>
-        **説明**: アタッチメントが開始されたタイムスタンプ。<br>
+        **説明**: アタッチメントが開始されたときのタイムスタンプ。<br>
        - `attachment_id`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `AttachmentId`<br>
@@ -317,7 +317,7 @@ disable_edit: true
    - `groups`<br>
     **タイプ**: `UNORDERED_LIST_STRUCT`<br>
     **プロバイダー名**: `Groups`<br>
-    **説明**: 1 つまたは複数のセキュリティグループ。<br>
+    **説明**: セキュリティグループ。<br>
        - `group_id`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `GroupId`<br>
@@ -341,7 +341,7 @@ disable_edit: true
    - `ipv6_addresses`<br>
     **タイプ**: `UNORDERED_LIST_STRUCT`<br>
     **プロバイダー名**: `Ipv6Addresses`<br>
-    **説明**: ネットワークインターフェイスに関連付けられた 1 つまたは複数の IPv6 アドレス。<br>
+    **説明**: ネットワークインターフェイスに関連付けられた IPv6 アドレス。<br>
        - `ipv6_address`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `Ipv6Address`<br>
@@ -377,7 +377,7 @@ disable_edit: true
    - `private_ip_addresses`<br>
     **タイプ**: `UNORDERED_LIST_STRUCT`<br>
     **プロバイダー名**: `PrivateIpAddresses`<br>
-    **説明**: ネットワークインターフェイスに関連付けられた 1 つまたは複数のプライベート IPv4 アドレス。<br>
+    **説明**: ネットワークインターフェイスに関連付けられたプライベート IPv4 アドレス。<br>
        - `association`<br>
         **タイプ**: `STRUCT`<br>
         **プロバイダー名**: `Association`<br>
@@ -441,23 +441,27 @@ disable_edit: true
    - `affinity`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `Affinity`<br>
-    **説明**: Dedicated Host 上のインスタンスに対するアフィニティ設定。このパラメーターは <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html">ImportInstance</a> コマンドではサポートされていません。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<br>
+    **説明**: Dedicated Host 上のインスタンスのアフィニティ設定。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> または <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html">ImportInstance</a> ではサポートされていません。<br>
    - `availability_zone`<br>
     **タイプ**: `STRING`<br>
     **Provider name**: `AvailabilityZone`<br>
     **説明**: インスタンスのアベイラビリティゾーン。指定しない場合、リージョンのロードバランシング基準に基づいて、アベイラビリティゾーンが自動的に選択されます。このパラメーターは <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<br>
+   - `group_id`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `GroupId`<br>
+    **説明**: インスタンスが所属している配置グループの ID。<code>GroupId</code> を指定した場合、<code>GroupName</code> は指定できません。<br>
    - `group_name`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `GroupName`<br>
-    **説明**: インスタンスが所属する配置グループの名前。<br>
+    **説明**: インスタンスが所属している配置グループの名前。<code>GroupName</code> を指定した場合、<code>GroupId</code> は指定できません。<br>
    - `host_id`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `HostId`<br>
-    **説明**: インスタンスが存在する Dedicated Host の ID。このパラメーターは <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html">ImportInstance</a> コマンドではサポートされていません。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<br>
+    **説明**: インスタンスが存在する Dedicated Host の ID。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> または <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html">ImportInstance</a> ではサポートされていません。<br>
    - `host_resource_group_arn`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `HostResourceGroupArn`<br>
-    **説明**: インスタンスを起動するホストリソースグループの ARN。ホストリソースグループの ARN を指定する場合は、<b>Tenancy</b> パラメーターを省略するか、<code>host</code> に設定します。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<br>
+    **説明**: インスタンスを起動するホストリソースグループの ARN。このパラメーター指定する場合は、<b>Tenancy</b> パラメーターを省略するか、<code>host</code> に設定します。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<br>
    - `partition_number`<br>
     **タイプ**: `INT32`<br>
     **プロバイダー名**: `PartitionNumber`<br>
@@ -465,11 +469,11 @@ disable_edit: true
    - `spread_domain`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `SpreadDomain`<br>
-    **説明**: 将来の使用のために予約されています。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<br>
+    **説明**: 将来の使用に備えた予約。<br>
    - `tenancy`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `Tenancy`<br>
-    **説明**: インスタンスのテナンシー (インスタンスが VPC で実行されている場合)。テナンシーが <code>dedicated</code> であるインスタンスは、シングルテナントのハードウェアで実行されます。<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html">ImportInstance</a> コマンドでは、<code>host</code> テナンシーはサポートされていません。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<code>unlimited</code> CPU クレジットオプションを使用する T3 インスタンスは、<code>host</code> テナンシーをサポートしません。<br>
+    **説明**: インスタンスのテナンシー (インスタンスが VPC で実行されている場合)。テナントが <code>dedicated</code> のインスタンスは、シングルテナントのハードウェアで実行されます。このパラメーターは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet">CreateFleet</a> ではサポートされていません。<code>host</code> テナンシーは、<a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html">ImportInstance</a> または <code>unlimited</code> CPU クレジットオプションに構成されている T3 インスタンスではサポートされていません。<br>
 ## `platform`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `Platform`<br>
@@ -500,7 +504,7 @@ disable_edit: true
     **説明**: インスタンスに割り当てるホスト名の種類。<br>
 ## `private_ip_address`
 **タイプ**: `STRING`<br>
-**Provider name**: `PrivateIpAddress`<br>
+**プロバイダー名**: `PrivateIpAddress`<br>
 **説明**: インスタンスに割り当てられたプライベート IPv4 アドレス。<br>
 ## `product_codes`
 **タイプ**: `UNORDERED_LIST_STRUCT`<br>
@@ -536,7 +540,7 @@ disable_edit: true
 **説明**: AMI で使用されるルートデバイスの種類。AMI は EBS ボリュームまたはインスタンスストアボリュームを使用することができます。<br>
 ## `security_groups`
 **タイプ**: `UNORDERED_LIST_STRUCT`<br>
-**Provider name**: `SecurityGroups`<br>
+**プロバイダー名**: `SecurityGroups`<br>
 **説明**: インスタンスのセキュリティグループ。<br>
    - `group_id`<br>
     **タイプ**: `STRING`<br>
@@ -568,7 +572,7 @@ disable_edit: true
     **説明**: 16 ビット符号なし整数としてのインスタンスの状態。 上位バイトは 2^8 から (2^16)-1 までのすべてのビットで、256 から 65535 までの 10 進数値に相当します。これらの数値は内部で使用されるもので、無視されるべきものです。下位バイトは、2^0 から (2^8)-1 までのすべてのビットで、0 から 255 までの 10 進数値に相当します。instance-state-code の有効な値は、すべて下位バイトの範囲になり、それらは次のとおりです。 <ul> <li>  <code>0</code> : <code>pending</code>  </li> <li>  <code>16</code> : <code>running</code>  </li> <li>  <code>32</code> : <code>shutting-down</code>  </li> <li>  <code>48</code> : <code>terminated</code>  </li> <li>  <code>64</code> : <code>stopping</code>  </li> <li>  <code>80</code> : <code>stopped</code>  </li> </ul> 2^8、10 進数で 256 以上のビットを全てゼロにすることで、上位バイトの値を無視することができます。<br>
    - `name`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `Name`<br>
+    **プロバイダー名**: `Name`<br>
     **説明**: インスタンスの現在の状態。<br>
 ## `state_reason`
 **タイプ**: `STRUCT`<br>
@@ -580,15 +584,15 @@ disable_edit: true
     **説明**: 状態変化の理由コード。<br>
    - `message`<br>
     **タイプ**: `STRING`<br>
-    **Provider name**: `Message`<br>
-    **説明**: 状態変化に対するメッセージ。 <ul> <li>  <code>Server.InsufficientInstanceCapacity</code>: 起動リクエストに応えるには容量が足りませんでした。 </li> <li>  <code>Server.InternalError</code>: 内部エラーにより、起動中にインスタンスが終了しました。 </li> <li>  <code>Server.ScheduledStop</code>: リタイア予定のため、インスタンスは停止しました。 </li> <li>  <code>Server.SpotInstanceShutdown</code>: 最大価格がスポット価格と同じかそれ以上のスポットリクエストの数が利用可能な容量を超えたため、またはスポット価格が上昇したため、インスタンスが停止しました。 </li> <li>  <code>Server.SpotInstanceTermination</code>: 最大価格がスポット価格と同じかそれ以上のスポットリクエストの数が利用可能な容量を超えたため、またはスポット価格が上昇したため、インスタンスが終了しました。 </li> <li>  <code>Client.InstanceInitiatedShutdown</code>: インスタンスから <code>shutdown -h</code> コマンドを使用して、インスタンスをシャットダウンしました。 </li> <li>  <code>Client.InstanceTerminated</code>: AMI 作成中にインスタンスが終了または再起動しました。 </li> <li>  <code>Client.InternalError</code>: クライアントエラーにより、起動中にインスタンスが終了してしまいました。 </li> <li>  <code>Client.InvalidSnapshot.NotFound</code>: 指定されたスナップショットは見つかりませんでした。 </li> <li>  <code>Client.UserInitiatedHibernate</code>: インスタンスでハイバネーションが開始されました。 </li> <li>  <code>Client.UserInitiatedShutdown</code>: Amazon EC2 API を使用してインスタンスをシャットダウンしました。 </li> <li>  <code>Client.VolumeLimitExceeded</code>: EBS ボリューム数または総ストレージ数の制限を超えました。使用量を減らすか、アカウントの上限額の引き上げをリクエストしてください。 </li> </ul>
+    **プロバイダー名**: `Message`<br>
+    **説明**: 状態変化に関するメッセージ。 <ul> <li>  <code>Server.InsufficientInstanceCapacity</code>: 起動リクエストに応えるには容量が足りませんでした。 </li> <li>  <code>Server.InternalError</code>: 内部エラーにより、起動中にインスタンスが終了しました。 </li> <li>  <code>Server.ScheduledStop</code>: リタイア予定のため、インスタンスは停止しました。 </li> <li>  <code>Server.SpotInstanceShutdown</code>: 最大価格がスポット価格と同じかそれ以上のスポットリクエストの数が利用可能な容量を超えたため、またはスポット価格が上昇したため、インスタンスが停止しました。 </li> <li>  <code>Server.SpotInstanceTermination</code>: 最大価格がスポット価格と同じかそれ以上のスポットリクエストの数が利用可能な容量を超えたため、またはスポット価格が上昇したため、インスタンスが終了しました。 </li> <li>  <code>Client.InstanceInitiatedShutdown</code>: インスタンスから <code>shutdown -h</code> コマンドを使用して、インスタンスをシャットダウンしました。 </li> <li>  <code>Client.InstanceTerminated</code>: AMI 作成中にインスタンスが終了または再起動しました。 </li> <li>  <code>Client.InternalError</code>: クライアントエラーにより、起動中にインスタンスが終了してしまいました。 </li> <li>  <code>Client.InvalidSnapshot.NotFound</code>: 指定されたスナップショットは見つかりませんでした。 </li> <li>  <code>Client.UserInitiatedHibernate</code>: インスタンスでハイバネーションが開始されました。 </li> <li>  <code>Client.UserInitiatedShutdown</code>: Amazon EC2 API を使用してインスタンスをシャットダウンしました。 </li> <li>  <code>Client.VolumeLimitExceeded</code>: EBS ボリューム数または総ストレージ数の制限を超えました。使用量を減らすか、アカウントの上限数の引き上げをリクエストしてください。 </li> </ul>
 ## `state_transition_reason`
 **タイプ**: `STRING`<br>
 **プロバイダー名**: `StateTransitionReason`<br>
 **説明**: 直近の状態遷移の理由。これは空文字列になる可能性があります。<br>
 ## `subnet_id`
 **タイプ**: `STRING`<br>
-**Provider name**: `SubnetId`<br>
+**プロバイダー名**: `SubnetId`<br>
 **説明**: [EC2-VPC] インスタンスが稼働しているサブネットの ID。<br>
 ## `tags`
 **タイプ**: `UNORDERED_LIST_STRING`<br>
@@ -610,5 +614,5 @@ disable_edit: true
 **説明**: インスタンスの仮想化タイプ。<br>
 ## `vpc_id`
 **タイプ**: `STRING`<br>
-**Provider name**: `VpcId`<br>
+**プロバイダー名**: `VpcId`<br>
 **説明**: [EC2-VPC] インスタンスが稼働している VPC の ID。<br>

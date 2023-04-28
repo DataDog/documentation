@@ -58,7 +58,7 @@ Select **Web and Mobile Apps** from the dropdown menu. If you select **Backend S
    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
 
-2. Construct a search query using the same logic as a [RUM Explorer search][1], [APM Explorer search][3], or [Log Explorer search][4] for the issues’ error occurrences.
+2. Construct a search query using the same logic as a [RUM Explorer search][1], [APM Explorer search][3], or [Log Explorer search][4] for the issues' error occurrences.
 3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][2].
 
 ### Set alert conditions
@@ -79,7 +79,7 @@ The list of new issues might display older issues that are considered new in the
 2. Select **Web and Mobile Apps**, **Backend Services**, or **Logs** and choose to monitor over a count or [measure][1].
    - Monitor the count of occurrences for a specific issue ID.
    - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Construct a search query using the same logic as a [RUM Explorer search][2], [APM Explorer search][3], or [Log Explorer search][5] for the issues’ error occurrences.
+3. Construct a search query using the same logic as a [RUM Explorer search][2], [APM Explorer search][3], or [Log Explorer search][5] for the issues' error occurrences.
 4. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][4].
 
 ### Set alert conditions
@@ -106,7 +106,7 @@ For more information about advanced alert options such as evaluation frequency, 
 
 To display triggering tags in the notification title, click **Include triggering tags in notification title**.
 
-For more information about the **Notify your team** and **Say what’s happening** sections, see [Notifications][5].
+For more information about the **Notify your team** and **Say what's happening** sections, see [Notifications][5].
 
 ## Further Reading
 

@@ -164,16 +164,16 @@ Datadogは、Ingested Span と Indexed Span のボリュームを監視するた
 
 
 [1]: /ja/tracing/
-[2]: /ja/tracing/trace_ingestion/ingestion_controls
-[3]: /ja/tracing/trace_retention/#retention-filters
+[2]: /ja/tracing/trace_pipeline/ingestion_controls
+[3]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
 [4]: /ja/account_management/billing/pricing/#infrastructure-monitoring
 [5]: /ja/account_management/billing/pricing/#apm
-[6]: /ja/tracing/profiling/
+[6]: /ja/profiler/
 [7]: https://www.datadoghq.com/pricing/
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
 [10]: https://docs.datadoghq.com/ja/account_management/billing/serverless/#serverless-functions
 [11]: /ja/account_management/billing/
-[12]: /ja/tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
-[13]: /ja/tracing/trace_retention/
-[14]: /ja/tracing/trace_retention/usage_metrics
+[12]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#configure-the-datadog-agent-for-apm
+[13]: /ja/tracing/trace_pipeline/trace_retention/
+[14]: /ja/tracing/trace_pipeline/metrics

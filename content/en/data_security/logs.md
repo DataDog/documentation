@@ -79,8 +79,7 @@ To enable PCI compliance for APM, see [PCI DSS compliance for APM][5].
 
 {{< /site-region >}}
 
-
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 PCI DSS compliance for Log Management is not available for the {{< region-param key="dd_site_name" >}} site.
 

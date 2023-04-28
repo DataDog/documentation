@@ -33,8 +33,9 @@ author:
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
+- インシデント
 - マーケットプレイス
-- モニタリング
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -58,21 +59,22 @@ pricing:
   tag: cds_ms_defender_endpoint_active_endpoint
   unit_label: Microsoft Defender アクティブエンドポイント
   unit_price: 1.0
-public_title: Microsoft 365 Defender for Endpoint インテグレーション
+public_title: Microsoft 365 Defender for Endpoint
 short_description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Incidents
   - Category::Marketplace
-  - Category::Monitoring
+  - Category::Security
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: エンドポイント、脆弱性、アラート、インシデントの詳細を提供します
   media:
@@ -102,7 +104,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Microsoft 365 Defender for Endpoint インテグレーション
+  title: Microsoft 365 Defender for Endpoint
   uninstallation: README.md#Uninstallation
 ---
 

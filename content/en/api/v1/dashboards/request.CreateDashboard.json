@@ -1,6 +1,6 @@
 {
   "layout_type": "ordered",
-  "title": "Example-Create_a_new_dashboard_returns_OK_response with Profile Metrics Query",
+  "title": "Example-Dashboard with Profile Metrics Query",
   "widgets": [
     {
       "definition": {

@@ -18,9 +18,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
   tag: "Blog"
   text: "Configure pipeline alerts with Datadog CI monitors"
-- link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-  tag: "Blog"
-  text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< site-region region="gov" >}}
@@ -166,7 +163,7 @@ To disable samples, uncheck the box at the bottom of the **Say what's happening*
 #### Sample examples
 
 Include a table of CI Test 10 samples in the alert notification:
-{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples" style="width:60%;" >}}
 
 Include a table of CI Pipeline 10 samples in the alert notification:
 {{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Pipeline samples" style="width:60%;" >}}

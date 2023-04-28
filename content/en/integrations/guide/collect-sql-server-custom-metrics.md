@@ -84,7 +84,7 @@ After you update the SQL Server YAML file, [restart the Datadog Agent][7].
 
 To verify your results, search for the metrics using the [Metrics Explorer][8]:
 
-{{< img src="integrations/faq/sql_metric_explorer.png" alt="Screenshot of Datadog's Metrics Explorer. On the left, the two items under 'Graph' are 'postgresql.employee_age' and 'postgresql.employee_salary.' On the right are two graphs showing employee age and employee salary."  >}}
+{{< img src="integrations/faq/sql_metric_explorer.png" alt="Screenshot of Datadog's Metrics Explorer. On the left, the two items under 'Graph' are 'postgresql.employee_age' and 'postgresql.employee_salary.' On the right are two graphs showing employee age and employee salary." >}}
 
 #### Debugging
 

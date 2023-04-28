@@ -70,15 +70,14 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  agent:
-    config:
-      kubelet:
-        tlsVerify: false
+  global:
+    kubelet:
+      tlsVerify: false
 ```
 
 {{% /tab %}}
@@ -139,17 +138,18 @@ datadog:
 `DatadogAgent` Kubernetes Resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  agent:
-    env:
-      - name: DD_HOSTNAME
-        valueFrom:
-          fieldRef:
-            fieldPath: spec.nodeName
+  override:
+    nodeAgent:
+      env:
+        - name: DD_HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
 ```
 
 {{% /tab %}}

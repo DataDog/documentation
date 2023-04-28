@@ -14,7 +14,7 @@ further_reading:
 
 Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3].
 
-{{< img src="monitors/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO"  >}}
+{{< img src="monitors/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO" >}}
 
 ## Setup
 
@@ -36,11 +36,11 @@ Why is `HTTP 3xx` excluded? - These are typically redirects and should not count
 
 Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `partition`, `availability-zone`, `resource`, or any other relevant group:
 
-{{< img src="monitors/service_level_objectives/metric_editor.png" alt="grouped metric-based SLO editor"  >}}
+{{< img src="monitors/service_level_objectives/metric_editor.png" alt="grouped metric-based SLO editor" >}}
 
-By grouping these SLIs you can visualize each individual group’s status, good request counts, and remaining error budget on the detail panel:
+By grouping these SLIs you can visualize each individual group's status, good request counts, and remaining error budget on the detail panel:
 
-{{< img src="monitors/service_level_objectives/metric_results.png" alt="metric-based SLO group results"  >}}
+{{< img src="monitors/service_level_objectives/metric_results.png" alt="metric-based SLO group results" >}}
 
 By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
 
@@ -55,10 +55,6 @@ Example: `99% of requests should be error-free over the past 7 days`.
 While the SLO remains above the target percentage, the SLO's status will be displayed in green font. When the target percentage is violated, the SLO's status will be displayed in red font. You can also optionally include a warning percentage that is greater than the target percentage to indicate when you are approaching an SLO breach. When the warning percentage is violated (but the target percentage is not violated), the SLO status will be displayed in yellow font.
 
 **Note:** Up to three decimal places are allowed for metric-based SLO targets. The precision shown in the details UI of the SLO will be up to `num_target_decimal_places + 1 = 4 decimal places`. The exact precision shown will be dependent on the magnitude of the values in your denominator query. The higher the magnitude of the denominator, the higher the precision that can be shown up to the four decimal place limit.
-
-### Identify this indicator
-
-Here you can add contextual information about the purpose of the SLO, including any related information or resources in the description and tags you would like to associate with the SLO.
 
 ## Further Reading
 

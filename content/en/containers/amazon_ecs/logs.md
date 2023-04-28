@@ -7,9 +7,6 @@ further_reading:
 - link: "/agent/amazon_ecs/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
-- link: "/agent/amazon_ecs/data_collected/#metrics"
-  tag: "Documentation"
-  text: "Collect ECS metrics"
 ---
 
 ## Overview

@@ -30,7 +30,7 @@ If you see a sudden spike or overall increase in your API test [timing metrics][
 
 #### The website is not loading in the iframe
 
-After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a popup by clicking **Open in Popup** to record your journey.
+After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder and the iframe displays `Your website does not support being loaded through an iframe.`. This could mean that your application has some settings preventing it from being opened in an iframe. If that is the case, try opening your website in a pop-up by clicking **Open in Popup** to record your journey.
 
 #### Some applications load in the iframe but some do not
 
@@ -38,13 +38,13 @@ This means your applications and environments have different restrictions, which
 
 #### The "We've detected HTTP requests that are not supported inside the iframe, you may need to record in a popup" banner appears at the top of the iframe
 
-This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a popup or change your URL to an `https` one to start recording on the page. 
+This most likely means you are trying to record steps on an `http` page. Only `https` is supported in the recorder iframe. You should open your page as a pop-up or change your URL to an `https` one to start recording on the page. 
 
 {{< img src="synthetics/http_iframe.png" alt="HTTP in iframe" style="width:100%;" >}}
 
-#### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a popup
+#### My website is not loading in the iframe and I cannot record any steps, even when opening my website in a pop-up
 
-After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a popup:
+After downloading the [Datadog extension][4], you are unable to see your website in the iframe on the right side of your Browser test's recorder. Additionally, you cannot record any steps, regardless of whether you open your website in the iframe or in a pop-up:
 
 {{< img src="synthetics/recording_iframe.mp4" alt="Issues recording Browser test steps" video="true" width="100%" >}}
 
@@ -60,15 +60,15 @@ To find out, go to `chrome://policy` and look for any extension-related settings
 
 #### I don't see the login page in the recorder
 
-By default, the iframe/popup of the recorder uses your own browser. This means that if you’re already logged into your application, the iframe/popup might directly display a post login page, therefore preventing you from recording your login steps without logging out first.
+By default, the iframe/pop-up of the recorder uses your own browser. This means that if you're already logged into your application, the iframe/pop-up might directly display a post login page, therefore preventing you from recording your login steps without logging out first.
 
-To be able to record your steps without logging out from your application, just leverage the recorder’s **incognito mode**:
+To be able to record your steps without logging out from your application, just leverage the recorder's **incognito mode**:
 
 {{< img src="synthetics/incognito_mode.mp4" alt="Using Incognito Mode Browser Tests" video="true" width="100%" >}}
 
-**Opening a popup window in incognito mode** allows you to start your test’s recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. 
+**Opening a pop-up window in incognito mode** allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. 
 
-This incognito popup window ignores your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
+This incognito pop-up window ignores your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
 ### Test results
 

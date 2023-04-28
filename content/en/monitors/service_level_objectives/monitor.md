@@ -16,7 +16,7 @@ To build an SLO from new or existing Datadog monitors, create a monitor-based SL
 
 Time-based data sets usually map well to monitor-based SLOs. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
 
-{{< img src="monitors/service_level_objectives/grouped_monitor_based_slo.png" alt="monitor-based SLO example"  >}}
+{{< img src="monitors/service_level_objectives/grouped_monitor_based_slo.png" alt="monitor-based SLO example" >}}
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Under **Define the source**, select **Monitor Based**.
 
 In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list.
 
-If you’re only using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors.
+If you're only using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors.
 
 
 ### Set your SLO targets
@@ -71,7 +71,7 @@ Select **Save & Exit** to save your new SLO.
 
 ## Status calculation
 
-{{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated"  >}}
+{{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated" >}}
 
 Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected. If specific groups have been selected, the SLO status is calculated with only those groups. If no specific groups are selected, the UI displays the five groups with the worst statuses.
 

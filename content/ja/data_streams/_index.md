@@ -10,6 +10,16 @@ kind: documentation
 title: データストリーム モニタリング
 ---
 
+<div class="alert alert-warning">
+このページで取り上げている機能は公開ベータ版です。
+</div>
+
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring は、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
+</div>
+{{% /site-region %}}
+
 {{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring は、大規模なパイプラインを理解し管理するための標準的な方法を提供し、以下を容易にします。
@@ -59,6 +69,10 @@ Datadog では、Data Streams Monitoring で任意のサービスの **Pipeline 
 {{< img src="data_streams/data_streams_throughput_tab.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring の任意のサービスやキューで **Throughput** タブをクリックすると、スループットの変化と、その変化がどの上流または下流のサービスに起因するものかを迅速に検出できます。[サービスカタログ][2]を構成すると、対応するチームの Slack チャンネルやオンコールエンジニアにすぐにピボットすることができます。
+
+単一の Kafka または RabbitMQ クラスターにフィルターをかけることで、そのクラスター上で動作するすべての検出されたトピックまたはキューについて、送受信トラフィックの変化を検出することができます。
+
+{{< img src="data_streams/data_streams_cluster_throughput.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 ### パイプラインの健全性から最も遅い個別メッセージへのピボット
 

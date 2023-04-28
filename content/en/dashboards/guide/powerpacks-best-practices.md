@@ -34,7 +34,7 @@ This ownership model fosters standardization across your teams and provides a sc
 
 ## Best practices for creating a Powerpack
 
-A well-constructed Powerpack can speed up an organization’s adoption of new monitoring patterns, like adding security observability to all existing application teams’ dashboards. Build a clear, self-contained Powerpack to ensure dashboard owners get the most from your content while minimizing issues or questions. 
+A well-constructed Powerpack can speed up an organization's adoption of new monitoring patterns, like adding security observability to all existing application teams' dashboards. Build a clear, self-contained Powerpack to ensure dashboard owners get the most from your content while minimizing issues or questions. 
 
 ### Build self-explanatory content
 
@@ -44,7 +44,7 @@ The content in a Powerpack should be self-explanatory. When creating a Powerpack
 - Note widgets with additional context.
 - Horizontal markers to show expected and unexpected thresholds.
 
-A note widget can give helpful context on how to interpret a graph. For example, the `RUM Page Views` Powerpack describes how to compare the current week’s page views to the previous week’s. Notes can also link to external resources, like in the `System Resource Utilization` pack.
+A note widget can give helpful context on how to interpret a graph. For example, the `RUM Page Views` Powerpack describes how to compare the current week's page views to the previous week's. Notes can also link to external resources, like in the `System Resource Utilization` pack.
 
 {{< img src="dashboards/guide/powerpacks_best_practices/note_widget_example.png" alt="An example powerpack titled /checkout Page Views showing several graphs of real user monitoring data. In the top right is a notes widget with a message providing information about one of the graphs" style="width:100%;" >}}
 
@@ -58,9 +58,9 @@ Powerpacks appear in the dashboard widget tray and you can find them through key
 
 {{< img src="dashboards/guide/powerpacks_best_practices/powerpack_keyword_search.png" alt="An example search being done in the Add Widgets menu of a dashboard with the keyword resource" style="width:60%;" >}}
 
-To ensure the right users find your Powerpack, include keywords your users might search (such as “performance”) in the title or description, and tag key technologies.
+To ensure the right users find your Powerpack, include keywords your users might search (such as "performance") in the title or description, and tag key technologies.
 
-Descriptions are limited to 80 characters. A good description provides a brief summary of what a pack is for and how someone can use it. For example, “View usage patterns for a UI action on a specific app page” for `RUM Feature Usage` describes what the Powerpack tracks, what it expects as an input (a specific app page), and includes keywords like “usage,” “UI,” and “app”.
+Descriptions are limited to 80 characters. A good description provides a brief summary of what a pack is for and how someone can use it. For example, "View usage patterns for a UI action on a specific app page" for `RUM Feature Usage` describes what the Powerpack tracks, what it expects as an input (a specific app page), and includes keywords like "usage," "UI," and "app".
 
 #### Tagging Powerpacks
 

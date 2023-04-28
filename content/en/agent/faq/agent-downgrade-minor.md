@@ -41,7 +41,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 ```conf
 class { 'datadog_agent':
       ...
-      agent_version => “1:X.Y.Z-1”,
+      agent_version => "1:X.Y.Z-1",
 }
 ```
 
@@ -85,7 +85,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 ```conf
 class { 'datadog_agent':
       ...
-      agent_version => “X.Y.Z-1”,
+      agent_version => "X.Y.Z-1",
 }
 ```
 
@@ -126,7 +126,7 @@ node["datadog"]["agent_allow_downgrade"] = true
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-Datadog's module doesn’t support SUSE.
+Datadog's module doesn't support SUSE.
 
 {{% /tab %}}
 {{% tab "Ansible" %}}

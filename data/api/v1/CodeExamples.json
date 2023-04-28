@@ -258,6 +258,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2064651578",
+      "description": "Create a new dashboard with team tags returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_858397694",
       "description": "Create a new dashboard with template variable defaults returns \"OK\" response"
     },
@@ -302,6 +307,13 @@
       "description": "Create a new timeseries widget with ci_tests data source"
     }
   ],
+  "CreatePublicDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Create a shared dashboard returns \"OK\" response"
+    }
+  ],
   "DeleteDashboards": [
     {
       "group": "dashboards",
@@ -316,11 +328,30 @@
       "description": "Restore deleted dashboards returns \"No Content\" response"
     }
   ],
+  "SendPublicDashboardInvitation": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Send shared dashboard invitation email returns \"OK\" response"
+    }
+  ],
   "UpdateDashboard": [
     {
       "group": "dashboards",
       "suffix": "",
       "description": "Update a dashboard returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3454865944",
+      "description": "Update a dashboard with tags returns \"OK\" response"
+    }
+  ],
+  "UpdatePublicDashboard": [
+    {
+      "group": "dashboards",
+      "suffix": "",
+      "description": "Update a shared dashboard returns \"OK\" response"
     }
   ],
   "CancelDowntimesByScope": [

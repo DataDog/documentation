@@ -12,6 +12,11 @@ further_reading:
   text: "Event Monitors"
 aliases:
     - /developers/events/
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Events Guides
 ---
 
 An event represents any record of activity noteworthy for engineers (devs, ops, and security). 

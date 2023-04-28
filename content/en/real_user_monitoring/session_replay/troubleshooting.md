@@ -47,7 +47,7 @@ For example, if your application is on the `example.com` domain and depends on a
 
 ```html
 <link rel="stylesheet" crossorigin="anonymous"
-      href="https://assets.example.com/style.css”>
+      href="https://assets.example.com/style.css">
 ```
 
 Additionally, authorize the `example.com` domain in the `assets.example.com`. This allows the assets file to load the resource by setting the [`Access-Control-Allow-Origin`][3] header.

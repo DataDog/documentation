@@ -1,6 +1,4 @@
 ---
-aliases:
-- /es/getting_started/agent
 further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentación
@@ -136,7 +134,7 @@ Agent (v7.36.1)
   Nivel de log: info
 ```
 
-#### Eventos
+#### Events (Eventos)
 
 En la IU de Datadog, dirígete a la página del Events Explorer (navegador de eventos) **Events > Explorer** (Eventos > Navegador). El Agent envía eventos a Datadog cada vez que se inicia o reinicia un Agent. En el siguiente mensaje, se indica si el Agent se ha instalado correctamente:
 

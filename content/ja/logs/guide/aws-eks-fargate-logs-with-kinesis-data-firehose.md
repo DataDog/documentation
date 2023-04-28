@@ -44,14 +44,14 @@ Kinesis Data Firehose と CloudWatch のログ転送を使用した場合の主�
 
 ### Kinesis 配信ストリームの作成
 
-Kinesis Firehose Delivery の設定方法は、[Datadog Kinesis Firehose の宛先を使用して AWS サービスログを送信する][4]のガイドをご参照ください。 
+Kinesis Firehose Delivery の設定方法は、[Datadog Kinesis Firehose の宛先を使用して AWS サービスログを送信する][4]のガイドをご参照ください。
 **注**: **Source** を `Direct PUT` に設定します。
 
 ### EKS Fargate クラスターで Fluent Bit for Firehose を構成する
 
 1. `aws-observability` ネームスペースを作成します。
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
 kubectl create namespace aws-observability
 {{< /code-block >}}
 
@@ -84,7 +84,7 @@ data:
 
 3. ConfigMap マニフェストを適用するには、`kubectl` を使用します。
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
 kubectl apply -f aws-logging-configmap.yaml
 {{< /code-block >}}
 
@@ -110,15 +110,15 @@ kubectl apply -f aws-logging-configmap.yaml
 
    a. ポリシーを作成します。
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
 aws iam create-policy \
          --policy-name FluentBitEKSFargate \
-         --policy-document file://allow_kinesis_put_permission.json 
+         --policy-document file://allow_kinesis_put_permission.json
 {{< /code-block >}}
 
    b. Fargate Pod Execution Role を取得し、IAM ポリシーをアタッチします。
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  POD_EXEC_ROLE=$(aws eks describe-fargate-profile \
    --cluster-name fargate-cluster \
    --fargate-profile-name fargate-profile \
@@ -159,13 +159,13 @@ aws iam create-policy \
 
  2. `fargate-namespace` ネームスペースを作成します。
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl create namespace fargate-namespace
  {{< /code-block >}}
 
  3. デプロイメントマニフェストを適用するには、`kubectl` を使用します。
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl apply -f sample-deployment.yaml
  {{< /code-block >}}
 
@@ -173,7 +173,7 @@ aws iam create-policy \
 
 1. ネームスペース `fargate-namespace` で `sample-app` ポッドが動作していることを確認します。
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl get pods -n fargate-namespace
  {{< /code-block >}}
 
@@ -188,7 +188,7 @@ aws iam create-policy \
 
 2. `kubectl describe pod` を使用して、Fargate のログ機能が有効であることを確認します。
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl describe pod <POD-NAME> -n fargate-namespace |grep Logging
  {{< /code-block >}}
 
@@ -201,7 +201,7 @@ aws iam create-policy \
 
 3. デプロイのログを検査します。
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl logs -l app=nginx -n fargate-namespace
  {{< /code-block >}}
 
@@ -215,7 +215,7 @@ aws iam create-policy \
  2023/01/27 16:53:42 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
  2023/01/27 16:53:42 [notice] 1#1: OS: Linux 4.14.294-220.533.amzn2.x86_64
  2023/01/27 16:53:42 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:65535
- 2023/01/27 16:53:42 [notice] 1#1: start worker processes 
+ 2023/01/27 16:53:42 [notice] 1#1: start worker processes
  ...
  {{< /code-block >}}
 
@@ -241,7 +241,7 @@ aws iam create-policy \
 ## その他の参考資料
  {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html 
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream#setup

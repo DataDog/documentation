@@ -21,13 +21,13 @@ Select a [Service Level Objective][1].
 
 Two types of alerts are available:
 
-[Error budget alerts][3] notify you when a certain percentage of your SLO’s error budget has been consumed.
+[Error budget alerts][3] notify you when a certain percentage of your SLO's error budget has been consumed.
 
 [Burn rate alerts][4] notify you when the rate of consumption of your SLO error budget has exceeded your specified threshold and is sustained for a certain period of time.
 
 ### Notifications
 
-For detailed instructions on the **Say what’s happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
 
 In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
 

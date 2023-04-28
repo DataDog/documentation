@@ -6,6 +6,11 @@ disable_toc: true
 kind: guide
 private: true
 title: Guides graphiques
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Guides graphiques
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}
