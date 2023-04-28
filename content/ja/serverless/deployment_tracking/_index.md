@@ -10,7 +10,7 @@ kind: documentation
 title: AWS Lambda サーバーレスアプリケーションのためのデプロイメントトラッキング
 ---
 
-{{< img src="serverless/deployment_tracking.jpeg" alt="サーバーレスのデプロイメント追跡"  style="width:100%;">}}
+{{< img src="serverless/deployment_tracking.jpeg" alt="サーバーレスのデプロイメント追跡" style="width:100%;">}}
 
 デプロイメント追跡は、コードの新しいバージョンやコンフィギュレーションの変更によってエラー率の上昇、パフォーマンス低下、またお使いのクラウド環境が期待通りの稼働状態から外れていないかなどを把握するのに役立ちます。
 
@@ -30,7 +30,7 @@ cloudtrail:LookupEvents
 
 アクセス許可を既に追加していても AWS Lambda 関数のイベントが表示されない場合は、AWS Lambda インテグレーションタイルを使用してデプロイ追跡を有効にします。
 
-{{< img src="serverless/lambda_integration_settings.png" alt="Lambda インテグレーション設定"  style="width:100%;">}}
+{{< img src="serverless/lambda_integration_settings.png" alt="Lambda インテグレーション設定" style="width:100%;">}}
 
 ## その他の参考資料
 
