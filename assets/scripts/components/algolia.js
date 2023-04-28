@@ -19,7 +19,7 @@ function getPageLanguage() {
 }
 
 function sendSearchRumAction(searchQuery, clickthroughLink = '') {
-    if (window.DD_RUM && searchQuery !== '') {
+    if (window.DD_RUM && window._DATADOG_SYNTHETICS_BROWSER === undefined && searchQuery !== '') {
         window.DD_RUM.addAction('userSearch', {
             query: searchQuery.toLowerCase(),
             page: window.location.pathname,
