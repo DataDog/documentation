@@ -74,7 +74,7 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting from [version 4.13.0](17), you can also optionally define the associated service name, and version.
+2. You must start views for each new page or route change (for single-page applications). RUM data is collected when the view starts. Starting with [version 4.13.0](17), you can also optionally define the associated service name and version.
 
    - View Name: Defaults to the page URL path.
    - Service: Defaults to the default service specified when creating your RUM application.
@@ -122,7 +122,7 @@ window.DD_RUM && window.DD_RUM.startView({
 
 <details>
   <summary>before <code>v4.13.0</code></summary>
-The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. No service nor version can be specified.
+The following example manually tracks the page views on the <code>checkout</code> page in a RUM application. No service or version can be specified.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
