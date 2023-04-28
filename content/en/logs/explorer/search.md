@@ -47,7 +47,7 @@ The search bar autosuggests facets based on your input in the search bar. These 
 
 {{< img src="logs/explorer/search/log_facet_autocomplete.png" alt="The logs search bar showing `network` as the query and the facets @network.bytes_written, @network.client.ip, and @network.interface as autocomplete options" style="width:80%;">}}
 
-After you select a facet and input the `:` character, the search bar autosuggests values. These values are displayed in descending order of how many logs contain that facet:value pair in the past 15 minutes. The estimated number of logs containing that value is displayed on the righthand side of the dropdown. For example, the `balance-checker` service is positioned first in the autosuggested list of values for the `service` facet, indicated by 2.66M, the highest log count:
+After you select a facet and input the `:` character, the search bar autosuggests values. These values are displayed in descending order of how many logs contain that `facet:value` pair in the past 15 minutes. The estimated number of logs containing that value is displayed on the right-hand side of the dropdown menu. For example, the `balance-checker` service is positioned first in the autosuggested list of values for the `service` facet, indicated by the `2.66M`, representing the highest log count:
 
 {{< img src="logs/explorer/search/log_value_autocomplete.png" alt="The logs search bar showing `service:` as the query and the values balance-checker, ad-server, fraud-detector, and trade-executor as autocomplete options" style="width:80%;">}}
 
