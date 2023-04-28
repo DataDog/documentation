@@ -84,7 +84,7 @@ The user-friendly search mode contains autocomplete and syntax highlighting as m
 
 {{< img src="logs/explorer/search/log_raw_search_mode.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query in raw search mode" style="width:80%;">}}
 
-You can interact with the search bar with your mouse, as well as by using keyboard interactions such as:
+You can interact with the search bar with your mouse, as well as by using keyboard commands. For example, use `CMD-A` for selecting text, `CMD-C` for copying text, `CMD-X for cutting text, and `CMD-V for pasting text.
 - CMD-A for selecting
 - CMD-C for copying
 - CMD-X for cutting
