@@ -465,8 +465,8 @@
             - "posture-management/**/*.yaml"
             - "posture-management/**/*.yml"
             - "posture-management/**/*.md"
-            - "application-security/*.json"
-            - "application-security/*.md"
+            - "application-security/**/*.json"
+            - "application-security/**/*.md"
           options:
             dest_path: '/security/default_rules/'
 
