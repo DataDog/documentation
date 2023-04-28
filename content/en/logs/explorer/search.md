@@ -67,7 +67,7 @@ You can create Saved Views in the Log Explorer to save queries and additional co
 
 Syntax highlighting clearly differentiates input types, such as keys (for example, an attribute such as `@merchant_name`), values (for example, the name of a particular merchant), free text (for example, keywords in a log messages such as `responded 500`), and control characters (for example, parentheses and colons). Status attributes are also highlighted in colors representing the status, such as red for `error` and blue for `info`.
 
-{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query with differentiable syntax highlighting" style="width:80%;">}}
+{{< img src="logs/explorer/search/log_syntax_highlighting.png" alt="The logs search bar showing `service:auth-dotnet status:error 500 (check-token OR create-user)` as the query with differentiable syntax highlighting" style="width:100%;">}}
 
 Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example,
 - If you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
