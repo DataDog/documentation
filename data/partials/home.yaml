@@ -100,6 +100,10 @@ nav_sections:
         link: continuous_integration/
         icon: ci
         desc: See test metrics, build results, and pipeline executions for your CI pipeline
+      - title: Cloud Cost
+        link: cloud_cost_management/
+        icon: cloud-cost-management
+        desc: Proactively see how changes to your infrastructure can affect costs
       - title: Database Monitoring
         link: database_monitoring/
         icon: database-2
