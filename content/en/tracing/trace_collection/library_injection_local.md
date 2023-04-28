@@ -193,12 +193,15 @@ The instrumentation also starts sending telemetry to Datadog (for example, trace
 If the application pod fails to start, run `kubectl logs <my-pod> --all-containers` to print out the logs and compare them to the known issues below.
 
 #### .NET installation issues
-1. Message: `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`<br/>
-   Problem: The pod annotation for the dotnet library version included a `-musl` suffix but the application container runs on a Linux distribution that uses glibc.<br/>
-   Solution: Remove the `-musl` suffix from the dotnet library version.
-1. Mesage: `Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /datadog-lib/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so)`<br/>
-   Problem: The application container runs on a Linux distribution that uses musl-libc (Alpine, for example) but the pod annotation did not include the `-musl` suffix.<br/>
-   Solution: Add the `-musl` suffix to the dotnet library version.
+##### `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`
+
+- **Problem**: The pod annotation for the dotnet library version included a `-musl` suffix, but the application container runs on a Linux distribution that uses glibc.
+- **Solution**: Remove the `-musl` suffix from the dotnet library version.
+
+##### `Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /datadog-lib/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so)`
+
+- **Problem**: The application container runs on a Linux distribution that uses musl-libc (for example, Alpine), but the pod annotation does not include the `-musl` suffix.
+- **Solution**: Add the `-musl` suffix to the dotnet library version.
 
 
 [1]: /containers/cluster_agent/admission_controller/
