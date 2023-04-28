@@ -78,7 +78,7 @@ Clear error states inform you which part of the query contains syntax errors and
 
 To start searching for logs and customizing the time frame in the Log Explorer, read the [Search Syntax documentation][3] and the [Custom Time Frames documentation][4].
 
-## Raw and user-friendly search mode
+## Disable styling and autocomplete for search bar
 
 The user-friendly search mode contains autocomplete and syntax highlighting as mentioned. Toggle the button to the right of the search bar to search in raw mode, where syntax highlighting, search pills styling, and autocomplete are removed:
 
