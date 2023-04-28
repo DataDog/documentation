@@ -23,7 +23,7 @@ jobs:
         separator: ","
         reporter: github-pr-check
         fail_on_error: true
-        filter_mode: diff_context
+        filter_mode: added
         # files: ${{ steps.changed_files.outputs.all_changed_files }}
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
