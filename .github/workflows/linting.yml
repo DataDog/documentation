@@ -7,8 +7,6 @@ jobs:
     timeout-minutes: 5
     steps:
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     
     - name: Find changed files
       id: changed_files
