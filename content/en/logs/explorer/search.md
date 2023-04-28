@@ -53,7 +53,7 @@ After you select a facet and input the `:` character, the search bar autosuggest
 
 ### Autocomplete recent searches
 
-Your 100 most recent searches run in the Log Explorer are retained. Recent searches from other users are not retained or displayed. The search bar autosuggests the 4 most recent searches that match your input in the search bar, with the most recent search displayed first. The search bar also shows how long ago each recent search was run. For example, if you input `service:web-store status:error` in the search bar, the 4 most recent searches containing these terms are displayed in order of recency, each one specifying a different error:
+Your 100 most recent searches in the Log Explorer are retained. Recent searches from other users are not retained or displayed. The search bar autosuggests the four most recent searches that match your input in the search bar, with the most recent search displayed first. The search bar also shows how long ago each recent search was run. For example, if you input `service:web-store status:error` in the search bar, the four most recent searches containing these terms are displayed in order of recency, each one specifying a different error:
 
 {{< img src="logs/explorer/search/log_recent_searches.png" alt="The logs search bar showing `service:web-store status:error` as the query and recent searches for different web-store service errors as autocomplete options" style="width:80%;">}}
 
