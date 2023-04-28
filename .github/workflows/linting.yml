@@ -23,8 +23,7 @@ jobs:
         separator: ","
         reporter: github-pr-check
         fail_on_error: true
-        onlyAnnotateModifiedLines: false
         filter_mode: diff_context
-        files: ${{ steps.changed_files.outputs.all_changed_files }}
+        # files: ${{ steps.changed_files.outputs.all_changed_files }}
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
