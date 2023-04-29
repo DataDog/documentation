@@ -45,7 +45,7 @@ If installing the Datadog Agent on a domain environment, see the [installation r
    <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">installer list</a>.</div>
 
 2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
+3. Follow the prompts, accept the license agreement, allow or deny non-open source software (required for NPM and USM), and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
@@ -89,6 +89,7 @@ Each configuration item is added as a property to the command line. The followin
 | `LOGS_ENABLED`                              | String  | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                        |
 | `APM_ENABLED`                               | String  | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                        |
 | `PROCESS_ENABLED`                           | String  | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
+| `ALLOWCLOSEDSOURCE`                         | String  | Allow (`"1"`) or Deny (`"0"`) non-open source software to run on the host (required for NPM and USM). This is denied by default. _(v7.45.0+)                                                                                        |
 | `HOSTNAME_FQDN_ENABLED`                     | String  | Enable (`"true"`) or disable (`"false"`) the usage of FQDN for the Agent hostname. It is equivalent to set `hostname_fqdn` in the Agent configuration file. The usage of FQDN for the hostname is disabled by default. _(v6.20.0+)_ |
 | `CMD_PORT`                                  | Number  | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                               |
 | `PROXY_HOST`                                | String  | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
@@ -99,7 +100,7 @@ Each configuration item is added as a property to the command line. The followin
 | `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
 | `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
 | `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
-| `ADDLOCAL`                                  | String  | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed.                                                                          |
+| `ADDLOCAL`                                  | String  | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(<= v7.44.0)                                                                          |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
 
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
@@ -142,22 +143,23 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 * Commands can be run from the an **elevated(run as Admin)** command line (PowerShell or Command Prompt) using the syntax `<PATH_TO_AGENT.EXE> <COMMAND>`.
 * Command-line options are below:
 
-| Command         | Description                                                                      |
-|-----------------|----------------------------------------------------------------------------------|
-| check           | Runs the specified check.                                                        |
-| diagnose        | Executes some connectivity diagnosis on your system.                             |
-| flare           | Collects a flare and send it to Datadog.                                         |
-| help            | Gets help about any command.                                                     |
-| hostname        | Prints the hostname used by the Agent.                                           |
-| import          | Imports and converts configuration files from previous versions of the Agent.    |
-| launch-gui      | Starts the Datadog Agent Manager.                                                |
-| restart-service | Restarts the Agent within the service control manager.                           |
-| run             | Starts the Agent.                                                                |
-| start           | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.) |
-| start-service   | Starts the Agent within the service control manager.                             |
-| status          | Print the current status.                                                        |
-| stopservice     | Stops the Agent within the service control manager.                              |
-| version         | Prints the version info.                                                         |
+| Command             | Description                                                                      |
+|---------------------|----------------------------------------------------------------------------------|
+| check               | Runs the specified check.                                                        |
+| closedsourceconsent | Get or `set` consent (`true` or `false`) for non-open source software to run.    |
+| diagnose            | Executes some connectivity diagnosis on your system.                             |
+| flare               | Collects a flare and send it to Datadog.                                         |
+| help                | Gets help about any command.                                                     |
+| hostname            | Prints the hostname used by the Agent.                                           |
+| import              | Imports and converts configuration files from previous versions of the Agent.    |
+| launch-gui          | Starts the Datadog Agent Manager.                                                |
+| restart-service     | Restarts the Agent within the service control manager.                           |
+| run                 | Starts the Agent.                                                                |
+| start               | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.) |
+| start-service       | Starts the Agent within the service control manager.                             |
+| status              | Print the current status.                                                        |
+| stopservice         | Stops the Agent within the service control manager.                              |
+| version             | Prints the version info.                                                         |
 
 * Examples:
   - PowerShell (`powershell.exe`)
