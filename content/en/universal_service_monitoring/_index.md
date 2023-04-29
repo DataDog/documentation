@@ -733,8 +733,8 @@ SERVICE=<service>
 
 1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network driver component enabled.
 
-   During installation select the check box to consent to non-open source software.
-   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI. _(version 7.44 or below)_
+   _(version 7.45+)_ During installation select the check box to consent to non-open source software.
+   _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
