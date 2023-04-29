@@ -89,7 +89,7 @@ Each configuration item is added as a property to the command line. The followin
 | `LOGS_ENABLED`                              | String  | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                        |
 | `APM_ENABLED`                               | String  | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                        |
 | `PROCESS_ENABLED`                           | String  | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
-| `ALLOWCLOSEDSOURCE`                         | String  | Allow (`"1"`) or Deny (`"0"`) non-open source software to run on the host (required for NPM and USM). This is denied by default. _(v7.45.0+)                                                                                        |
+| `ALLOWCLOSEDSOURCE`                         | String  | Allow (`"1"`) or Deny (`"0"`) non-open source software to run on the host (required for NPM and USM). This is denied by default. _(v7.45.0+)_                                                                                       |
 | `HOSTNAME_FQDN_ENABLED`                     | String  | Enable (`"true"`) or disable (`"false"`) the usage of FQDN for the Agent hostname. It is equivalent to set `hostname_fqdn` in the Agent configuration file. The usage of FQDN for the hostname is disabled by default. _(v6.20.0+)_ |
 | `CMD_PORT`                                  | Number  | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                               |
 | `PROXY_HOST`                                | String  | If using a proxy, sets your proxy host. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
@@ -100,7 +100,7 @@ Each configuration item is added as a property to the command line. The followin
 | `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
 | `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
 | `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
-| `ADDLOCAL`                                  | String  | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(<= v7.44.0)                                                                          |
+| `ADDLOCAL`                                  | String  | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(<= v7.44.0)_                                                           |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
 
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
@@ -146,7 +146,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | Command             | Description                                                                      |
 |---------------------|----------------------------------------------------------------------------------|
 | check               | Runs the specified check.                                                        |
-| closedsourceconsent | Get or `set` consent (`true` or `false`) for non-open source software to run.    |
+| closedsourceconsent | Get or `set` consent (`true` or `false`) for non-open source software to run (required for NPM and USM).    |
 | diagnose            | Executes some connectivity diagnosis on your system.                             |
 | flare               | Collects a flare and send it to Datadog.                                         |
 | help                | Gets help about any command.                                                     |
