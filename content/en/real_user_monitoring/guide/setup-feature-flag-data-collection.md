@@ -302,6 +302,55 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 {{% /tab %}}
 {{< /tabs >}}
 
+### DevCycle integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize DevCycle's SDK and subscribe to the `variableEvaluated` event, choosing to subscribe to all variable evaluations `variableEvaluated:*` or particular variable evaluations `variableEvaluated:my-variable-key`.
+
+For more information about initializing DevCycle's SDK, see [DevCycle's JavaScript SDK documentation][5] and for more information about DevCycle's event system, see [DevCycle's SDK Event Documentation][6].
+
+```javascript
+const user = { user_id: "<USER_ID>" };
+const dvcOptions = { ... };
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions); 
+...
+dvcClient.subscribe(
+    "variableEvaluted:*",
+    (key, variable) => {
+        // track all variable evaluations
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+...
+dvcClient.subscribe(
+    "variableEvaluted:my-variable-key",
+    (key, variable) => {
+        // track a particular variable evaluation
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+```
+
+
+[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
+[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+DevCycle does not currently support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+DevCycle does not currently support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Analyze your Feature Flag performance in RUM
 
 Feature flags appear in the context of your RUM Sessions, Views, and Errors as a list.
