@@ -56,7 +56,9 @@ The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on 
 
 {{< img src="tracing/visualization/service/cross-product-insight.jpg" alt="Watchdog Insights" style="width:100%;">}}
 
-Click on an insight to see more details, such as the time frame of the insight, related logs or traces, and suggested next steps. Read more about Watchdog here.
+Click on an insight to see more details, such as the time frame of the insight, related logs or traces, and suggested next steps.
+
+{{< img src="tracing/visualization/service/watchdog-details.jpg" alt="Watchdog Insights details" style="width:100%;">}}
 
 ## Summary cards
 
