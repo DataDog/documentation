@@ -12473,6 +12473,8 @@ components:
       - networkHop
       - receivedMessage
       - grpcHealthcheckStatus
+      - grpcMetadata
+      - grpcProto
       - connection
       example: statusCode
       type: string
@@ -12493,6 +12495,8 @@ components:
       - NETWORK_HOP
       - RECEIVED_MESSAGE
       - GRPC_HEALTHCHECK_STATUS
+      - GRPC_METADATA
+      - GRPC_PROTO
       - CONNECTION
     SyntheticsAssertionXPathOperator:
       description: Assertion operator to apply.
@@ -17203,12 +17207,14 @@ components:
             usage types by the Sensitive Data Scanner from the start of the given
             hour\u2019s month until the given hour."
           format: int64
+          nullable: true
           type: integer
         events_scanned_bytes:
           description: "The total number of bytes scanned of Events usage across all
             usage types by the Sensitive Data Scanner from the start of the given
             hour\u2019s month until the given hour."
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -17219,6 +17225,7 @@ components:
             Data Scanner from the start of the given hour\u2019s month until the given
             hour."
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -17231,12 +17238,14 @@ components:
             usage types by the Sensitive Data Scanner from the start of the given
             hour\u2019s month until the given hour."
           format: int64
+          nullable: true
           type: integer
         total_scanned_bytes:
           description: "The total number of bytes scanned across all usage types by
             the Sensitive Data Scanner from the start of the given hour\u2019s month
             until the given hour."
           format: int64
+          nullable: true
           type: integer
       type: object
     UsageSDSResponse:
@@ -25478,7 +25487,7 @@ paths:
         #### Query Types
 
 
-        **Metric Alert Query**
+        ##### Metric Alert Query
 
 
         Example: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator
@@ -25526,7 +25535,7 @@ paths:
         ''dbscan'', 7) > 0`
 
 
-        **Service Check Query**
+        ##### Service Check Query
 
 
         Example: `"check".over(tags).last(count).by(group).count_by_status()`
@@ -25552,7 +25561,7 @@ paths:
         for more information.
 
 
-        **Event Alert Query**
+        ##### Event Alert Query
 
 
         Example: `events(''sources:nagios status:error,warning priority:normal tags:
@@ -25588,7 +25597,7 @@ paths:
         V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
 
 
-        **Event V2 Alert Query**
+        ##### Event V2 Alert Query
 
 
         Example: `events(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25609,7 +25618,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **Process Alert Query**
+        ##### Process Alert Query
 
 
         Example: `processes(search).over(tags).rollup(''count'').last(timeframe) operator
@@ -25655,7 +25664,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **Composite Query**
+        ##### Composite Query
 
 
         Example: `12345 && 67890`, where `12345` and `67890` are the IDs of non-composite
@@ -25681,7 +25690,7 @@ paths:
         UI.
 
 
-        **SLO Alert Query**
+        ##### SLO Alert Query
 
 
         Example: `error_budget("slo_id").over("time_window") operator #`
@@ -25696,7 +25705,7 @@ paths:
         - `operator`: `>=` or `>`
 
 
-        **Audit Alert Query**
+        ##### Audit Alert Query
 
 
         Example: `audits(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25721,7 +25730,7 @@ paths:
         and US5.
 
 
-        **CI Pipelines Alert Query**
+        ##### CI Pipelines Alert Query
 
 
         Example: `ci-pipelines(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25746,7 +25755,7 @@ paths:
         **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
 
 
-        **CI Tests Alert Query**
+        ##### CI Tests Alert Query
 
 
         Example: `ci-tests(query).rollup(rollup_method[, measure]).last(time_window)
@@ -25772,7 +25781,7 @@ paths:
         US3, and US5.
 
 
-        **Error Tracking Alert Query**
+        ##### Error Tracking Alert Query
 
 
         Example(RUM): `error-tracking-rum(query).rollup(rollup_method[, measure]).last(time_window)

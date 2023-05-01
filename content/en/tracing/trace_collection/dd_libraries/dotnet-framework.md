@@ -283,7 +283,7 @@ COR_ENABLE_PROFILING=1
 COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-{{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
+{{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" >}}
 
 {{% /tab %}}
 
@@ -297,6 +297,24 @@ Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Env
 
 {{< /tabs >}}
 
+#### IIS
+
+After installing the MSI, no additional configuration is needed to automatically instrument your IIS sites. To set additional environment variables that are inherited by all IIS sites, perform the following steps:
+
+1. Open the Registry Editor, find the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` key, and add the environment variables, one per line. For example, to add logs injection and runtime metrics, add the following lines to the value data:
+   ```text
+   DD_LOGS_INJECTION=true
+   DD_RUNTIME_METRICS_ENABLED=true
+   ```
+2. Run the following commands to restart IIS:
+   ```cmd
+   net stop /y was
+   net start w3svc
+   # Also, start any other services that were stopped when WAS was shut down.
+   ```
+
+{{< img src="tracing/setup/dotnet/RegistryEditorIIS.png" alt="Using the Registry Editor to create environment variables for all IIS sites" >}}
+
 #### Console applications
 
 To automatically instrument a console application, set the environment variables from a batch file before starting your application:
@@ -306,6 +324,10 @@ rem Set environment variables
 SET COR_ENABLE_PROFILING=1
 rem Unless v2.14.0+ and you installed the tracer with the MSI
 SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+
+rem Set additional Datadog environment variables
+SET DD_LOGS_INJECTION=true
+SET DD_RUNTIME_METRICS_ENABLED=true
 
 rem Start application
 dotnet.exe example.dll

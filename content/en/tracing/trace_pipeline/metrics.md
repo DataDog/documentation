@@ -58,7 +58,7 @@ This metric is tagged by `env` and `service` so you can spot which environments 
 
 ## APM Traces Estimated Usage dashboard
 
-The [APM Traces Usage dashboard][8] contains several widget groups displaying high-level KPIs and additional  usage information.
+The [APM Traces Usage dashboard][8] contains several widget groups displaying high-level KPIs and additional usage information.
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 

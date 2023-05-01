@@ -44,26 +44,26 @@ ropm install datadog-roku
 
 ### Setup manually
 
-If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][5] zip archive, 
+If your project does not use `ROPM`, install the library manually by downloading the [Roku SDK][2] zip archive, 
 and unzipping it in your project's root folder.
 
 Make sure you have a `roku_modules/datadogroku` subfolder in both the `components` and `source` folders of your project.
 
 ### Specify application details in Datadog
 
-1. Navigate to [**UX Monitoring** > **RUM Applications** > **New Application**][2].
+1. Navigate to [**UX Monitoring** > **RUM Applications** > **New Application**][3].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
-3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][9].
+3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][4].
 
    {{< img src="real_user_monitoring/roku/roku-new-application.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][3] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
+To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
 
-For more information about setting up a client token, see the [Client Token documentation][4].
+For more information about setting up a client token, see the [Client Token documentation][6].
 
 ### Initialize the library
 
-In the initialization snippet, set an environment name. For more information, see [Using Tags][8].
+In the initialization snippet, set an environment name. For more information, see [Using Tags][7].
 
 {{< site-region region="us" >}}
 ```brightscript
@@ -151,11 +151,11 @@ end sub
 
 ### Instrument the channel
 
-See [**Track RUM Resources**][6] to enable automatic tracking of all your views (activities, fragments, and more), and [**Enrich user sessions**][7] to add custom global or user information to your events.
+See [**Track RUM Resources**][8] to enable automatic tracking of all your views (activities, fragments, and more), and [**Enrich user sessions**][9] to add custom global or user information to your events.
 
 #### Track RUM Views
 
-To split [user sessions][5] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new RUM View.
+To split [user sessions][4] into logical steps, manually start a View using the following code. Every navigation to a new screen within your channel should correspond to a new RUM View.
 
 ```brightscript
     viewName = "VideoDetails"
@@ -192,12 +192,12 @@ Whenever you perform an operation that might throw an exception, you can forward
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-android
-[2]: https://app.datadoghq.com/rum/application/create
-[3]: /account_management/api-app-keys/#api-keys
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /real_user_monitoring/
-[6]: /real_user_monitoring/roku/advanced_configuration/#track-rum-resources
-[7]: /real_user_monitoring/roku/advanced_configuration/#enrich-user-sessions
-[8]: /getting_started/tagging/using_tags/#rum--session-replay
-[9]: /real_user_monitoring/android/data_collected/
+[1]: https://github.com/rokucommunity/ropm
+[2]: https://github.com/DataDog/dd-sdk-roku
+[3]: https://app.datadoghq.com/rum/application/create
+[4]: /real_user_monitoring/roku/data_collected/
+[5]: /account_management/api-app-keys/#api-keys
+[6]: /account_management/api-app-keys/#client-tokens
+[7]: /getting_started/tagging/using_tags/#rum--session-replay
+[8]: /real_user_monitoring/roku/advanced_configuration/#track-rum-resources
+[9]: /real_user_monitoring/roku/advanced_configuration/#enrich-user-sessions
