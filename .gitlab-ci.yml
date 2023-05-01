@@ -239,8 +239,6 @@ post_build_success_status_to_spec_repo:
   stage: cleanup
   cache: {}
   environment: "preview"
-  variables:
-    GIT_STRATEGY: none
   script:
     - chmod +x ./local/bin/py/submit_github_status_check.py
     - ./local/bin/py/submit_github_status_check.py -i $(get_secret 'dd-api-spec-repo-app-id') -k $(get_secret 'dd-api-spec-repo-app-key')
@@ -255,8 +253,6 @@ post_build_failure_status_to_spec_repo:
   stage: cleanup
   cache: {}
   environment: "preview"
-  variables:
-    GIT_STRATEGY: none
   script:
     - chmod +x ./local/bin/py/submit_github_status_check.py
     - ./local/bin/py/submit_github_status_check.py -s "failure" -i $(get_secret 'dd-api-spec-repo-app-id') -k $(get_secret 'dd-api-spec-repo-app-key')
