@@ -151,15 +151,35 @@ The `weighted()` function properly accounts for the lifespan of the churning `co
 Let's suppose we have the following query and our gauge metric's submission interval is defined at 10s. 
 `sum:kubernetes.cpu.requests{*} by {shard}.rollup(avg, 60)`
 And we're graphing a datapoint every 60s in time. Also for simplicity, let's assume we have a kubernetes cluster with 2 pods at any given time. Each pod is labeled with a shard and there is only ever 1 pod per shard. So with a couple of deploys that switch out pods, our raw data over 60 seconds could resemble: 
-(INSERT TABLE resembling: https://a.cl.ly/L1uDl1wy) 
+
+| Time                 | 0s  |  10s |  20s |  30s |  40s |  50s |
+| ---                  | --  | ---  | ---  | ---  |  --- |  --- |
+| `pod:a`, `shard:1`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
+| `pod:b`, `shard:1`   | NAN | 12   | 12   | 12   | NAN  | NAN  |
+| `pod:c`, `shard:1`   | NAN | NAN  | NAN  | NAN  | 12   | 12   |
+| `pod:d`, `shard:2`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
+| `pod:e`, `shard:2`   | NAN | 16   | 16   | 16   | NAN  | NAN  |
+| `pod:f`, `shard:2`   | NAN | NAN  | NAN  | NAN  | 18   | 18   |
+
 
 1. _Time Aggregation -- Rolling up data_
 With time aggregation, we're rolling up data either `avg` (without weighted) or the proposed `weighted_avg`: 
-(INSERT TABLE HERE resembling: https://a.cl.ly/d5ugkK7P) 
+| Time aggregation   | .rollup(avg) | With .weighted() |
+| ----------------   | ------------ | ---------------- |
+| `pod:a`, `shard:1` | 12           | 2.0              |
+| `pod:b`, `shard:1` | 12           | 6.0              |
+| `pod:c`, `shard:1` | 12           | 4.0              |
+| `pod:d`, `shard:2` | 12           | 2.0              |
+| `pod:e`, `shard:2` | 16           | 8.0              |
+| `pod:f`, `shard:2` | 18           | 6.0              |
 
 2. _Space Aggregation_ 
 Finally, we aggregate by shard to get the final values below: 
-(INSERT TABLE HERE resembling: https://a.cl.ly/YEueYxq1)
+| Space aggregation by shard | .rollup(avg) | With .weighted() |
+| ------------------------   | ------------ | ---------------- |
+| `shard:1`                  | 36           | 12               |
+| `shard:1`                  | 46           | 16               |
+
 
 Here we can see `weighted()` provides a weighted average of each of the two shards according to the amount of time they were submitting data. 
 
