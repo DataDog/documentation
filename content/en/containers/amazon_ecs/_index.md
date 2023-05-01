@@ -219,11 +219,11 @@ While it's possible to run the Agent in `awsvpc` mode, it's not the recommended 
 
 Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
 
-#### FIPS Proxy for GOVCLOUD environments.
+#### FIPS proxy for GOVCLOUD environments
 
-**This feature is available for Linux only**
+To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for all of the features. 
 
-If you want to send data to Datadog's GOVCLOUD datacenter, you will need to add the `fips-proxy` sidecar container and open container ports to ensure proper communication for all the features:
+**Note**: This feature is available for Linux only.
 
 ```json
  {
@@ -299,7 +299,7 @@ If you want to send data to Datadog's GOVCLOUD datacenter, you will need to add 
 }
 ```
 
-Secondly, you will need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
+You also need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
 
 ```json
 {
