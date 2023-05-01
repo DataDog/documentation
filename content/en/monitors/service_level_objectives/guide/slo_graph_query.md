@@ -17,7 +17,7 @@ The [SLO Summary widget][1] supports advanced metric query filtering, including 
 ## Walk through of an SLO query
 
 ### Metric-based SLO query
-Create a [metric-based SLO][2]. This example uses APM trace metrics to measure the availability of an example service called `web-store`.
+First, create a [metric-based SLO][2]. This example uses APM trace metrics to measure the availability of an example service called `web-store`.
 
 ##### Good events (numerator)
 `sum:trace.rack.request.hits{service:web-store} by {resource_name}.as_count()` <br>
@@ -30,7 +30,7 @@ Create a [metric-based SLO][2]. This example uses APM trace metrics to measure t
 
 ### SLO Summary widget
 
-Select the SLO in the [SLO Summary widget editor][1]. You can apply additional filters in the widget configuration to further scope the results displayed. This does not modify the original definition of the SLO. In the example, we add the `$env` and `$availability-zone` tags to the *filter by* field of the widget. 
+Select the SLO in the [SLO Summary widget editor][1]. You can apply additional filters in the widget configuration to further scope the results displayed. This does not modify the original definition of the SLO. In the example, we add the `$env` and `$availability-zone` tags to the **filter by** field of the widget. 
 
 {{< img src="/monitors/service_level_objectives/slo_graph_query/slo_filter_by.png" alt="SLO Summary editor with dynamic tags for $env and $availability-zone" style="width:100%;" >}}
 
