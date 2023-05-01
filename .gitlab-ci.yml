@@ -234,6 +234,34 @@ sourcemaps_preview:
   allow_failure: true
   interruptible: true
 
+post_build_success_status_to_spec_repo:
+  <<: *base_template
+  stage: cleanup
+  cache: {}
+  environment: "preview"
+  script:
+    - chmod +x ./local/bin/py/submit_github_status_check.py
+    - ./local/bin/py/submit_github_status_check.py -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+      when: on_success
+  interruptible: true
+  allow_failure: true
+
+post_build_failure_status_to_spec_repo:
+  <<: *base_template
+  stage: cleanup
+  cache: {}
+  environment: "preview"
+  script:
+    - chmod +x ./local/bin/py/submit_github_status_check.py
+    - ./local/bin/py/submit_github_status_check.py -s "failure" -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+      when: on_failure
+  interruptible: true
+  allow_failure: true
+
 # ================== live ================== #
 build_live:
   <<: *base_template
