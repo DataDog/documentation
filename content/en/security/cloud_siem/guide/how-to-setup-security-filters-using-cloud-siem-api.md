@@ -176,8 +176,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 --data-raw '{
     "data": {
         "attributes": {
-            "is_enabled": false,
-            "version": 2
+            "is_enabled": false
         },
         "type": "security_filters"
     }
