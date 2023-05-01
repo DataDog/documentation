@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -280,6 +280,9 @@ In addition to telemetry collected from the database by the Agent, you can also 
 ## Validate
 
 [Run the Agent's status subcommand][10] and look for `mysql` under the Checks section. Or visit the [Databases][11] page to get started!
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Troubleshooting
 

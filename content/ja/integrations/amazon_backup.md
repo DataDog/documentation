@@ -35,7 +35,7 @@ AWS Backup は、AWS サービスやハイブリッドワークロードのデ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]の **Metric Collection** セクションで、`Backup` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Backup` が有効になっていることを確認します。
 2. [Datadog - Amazon Backup インテグレーション][3]をインストールします。
 
 ## 収集データ
@@ -57,7 +57,7 @@ Amazon Backup インテグレーションには、サービスのチェック機
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-backup
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-backup
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_backup/amazon_backup_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

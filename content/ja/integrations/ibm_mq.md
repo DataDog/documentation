@@ -24,10 +24,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
-- メッセージング
 - ログの収集
-- オートディスカバリー
+- メッセージング
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md
 display_on_public_website: true
@@ -35,7 +34,7 @@ draft: false
 git_integration_title: ibm_mq
 integration_id: ibm-mq
 integration_title: IBM MQ
-integration_version: 3.22.1
+integration_version: 4.0.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -45,18 +44,17 @@ public_title: IBM MQ
 short_description: IBM MQ はメッセージキューです
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
-  - Category::Messaging
   - Category::Log Collection
-  - Category::Autodiscovery
+  - Category::Messaging
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: IBM MQ はメッセージキューです
   media: []
@@ -69,11 +67,11 @@ tile:
 
 ## 概要
 
-このチェックは [IBM MQ][1] バージョン 8 から 9.0 を監視します。
+このチェックは [IBM MQ][1] バージョン 9.1 以降を監視します。
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 IBM MQ チェックは [Datadog Agent][2] パッケージに含まれています。
 
@@ -81,12 +79,11 @@ IBM MQ チェックを使用するには、[IBM MQ Client][3] 9.1+ がインス�
 
 #### Linux の場合
 
-`LD_LIBRARY_PATH` と `C_INCLUDE_PATH` を更新して、ライブラリの場所を含めます。(これらの 2 つの環境変数がまだ存在しない場合は作成します。) 
-例えば、`/opt` にインストールした場合:
+ライブラリの場所を含めるために `LD_LIBRARY_PATH` を更新してください。この環境変数がまだ存在しない場合は作成してください。
+例えば、クライアントを `/opt` の下にインストールした場合
 
 ```text
 export LD_LIBRARY_PATH=/opt/mqm/lib64:/opt/mqm/lib:$LD_LIBRARY_PATH
-export C_INCLUDE_PATH=/opt/mqm/inc:$C_INCLUDE_PATH
 ```
 
 **注**: Agent v6 以上は、`upstart`、`systemd`、または `launchd` を使用して datadog-agent サービスをオーケストレーションします。場合によっては、サービス構成ファイルに環境変数を追加する必要があります。サービス構成ファイルのデフォルトの場所は、以下の通りです。
@@ -360,17 +357,20 @@ IBM MQ チェックはサーバー上でクエリを実行しますが、これ�
 ### ログのエラー
 * `Unpack for type ((67108864,)) not implemented`: このようなエラーが発生し、MQ サーバーが IBM OS で動作している場合は、`convert_endianness` を有効にして Agent を再起動します。
 
+### ログに表示される警告
+* `Error getting [...]: MQI Error. Comp: 2, Reason 2085: FAILED: MQRC_UNKNOWN_OBJECT_NAME`: このようなメッセージが表示される場合、インテグレーションが存在しないキューからメトリクスを収集しようとしていることが原因です。これは、構成ミスか、`auto_discover_queues` を使用している場合、インテグレーションが[ダイナミックキュー][8]を発見して、メトリクスを収集しようとしたときに、そのキューがもはや存在しないことが原因です。この場合、より厳格な `queue_patterns` や `queue_regex` を指定して問題を軽減するか、あるいは警告を無視することができます。 
+
 
 ### その他
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM MQ メトリクスおよびログの監視][9]
+- [Datadog を使用した IBM MQ メトリクスおよびログの監視][10]
 
 
 [1]: https://www.ibm.com/products/mq
@@ -380,5 +380,6 @@ IBM MQ チェックはサーバー上でクエリを実行しますが、これ�
 [5]: https://www.ibm.com/docs/en/ibm-mq/9.1?topic=formats-reset-queue-statistics
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [7]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=reference-setmqaut-grant-revoke-authority
-[8]: https://docs.datadoghq.com/ja/help/
-[9]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog
+[8]: https://www.ibm.com/docs/en/ibm-mq/9.2?topic=queues-dynamic-model
+[9]: https://docs.datadoghq.com/ja/help/
+[10]: https://www.datadoghq.com/blog/monitor-ibmmq-with-datadog

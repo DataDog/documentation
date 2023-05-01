@@ -365,5 +365,5 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
-[3]: https://app.datadoghq.com/apm/search/analytics
+[3]: https://app.datadoghq.com/apm/analytics
 [4]: /ja/tracing/guide/add_span_md_and_graph_it/

@@ -1,42 +1,62 @@
 ---
+app_id: ambari
+app_uuid: 081f9cd9-a86a-4cea-ae5b-b4f7e163f413
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Ambari base dashboard: assets/dashboards/base_dashboard.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: ambari.cpu.cpu_user
+      metadata_path: metadata.csv
+      prefix: ambari.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Ambari
   logs:
     source: ambari
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - 処理
 - ログの収集
-- オートディスカバリー
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
-display_name: Ambari
+display_on_public_website: true
 draft: false
 git_integration_title: ambari
-guid: 4f518f2c-cfa7-4763-ac33-b1c8846eb738
 integration_id: ambari
 integration_title: Ambari
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ambari.
-metric_to_check: ambari.cpu.cpu_user
+manifest_version: 2.0.0
 name: ambari
-public_title: Datadog-Ambari インテグレーション
+oauth: {}
+public_title: Ambari
 short_description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Category::Processing
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Ambari
 ---
 
 
@@ -47,7 +67,7 @@ supported_os:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Ambari チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -149,7 +169,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 - disk
 - memory
 - load
-- network
+- ネットワーク
 - process
 
 `collect_service_metrics` を使用してサービスメトリクスの収集が有効にされている場合、このインテグレーションは、含まれるサービスコンポーネントごとに、インクルードリスト内のヘッダーを持つメトリクスを収集します。

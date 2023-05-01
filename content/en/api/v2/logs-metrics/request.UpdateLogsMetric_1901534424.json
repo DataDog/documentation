@@ -1,0 +1,10 @@
+{
+  "data": {
+    "type": "logs_metrics",
+    "attributes": {
+      "compute": {
+        "include_percentiles": false
+      }
+    }
+  }
+}

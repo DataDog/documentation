@@ -4,9 +4,9 @@
 {{- $outputStyles := "" -}}
 
 {{- if $isLocalServer -}}
-    {{- $outputStyles = resources.Get $inputStyleFile | toCSS $options -}}
+    {{- $outputStyles = resources.Get $inputStyleFile | resources.ExecuteAsTemplate $inputStyleFile . | toCSS $options -}}
 {{- else -}}
-    {{- $outputStyles = resources.Get $inputStyleFile | toCSS $options | minify | fingerprint -}}
+    {{- $outputStyles = resources.Get $inputStyleFile | resources.ExecuteAsTemplate $inputStyleFile . | toCSS $options | minify | fingerprint -}}
     {{ if ne (path.Ext $outputStyles.Permalink) ".css" }}
         {{ errorf "ERROR CSS File Not Found! %q" .Path }}
     {{ end }}

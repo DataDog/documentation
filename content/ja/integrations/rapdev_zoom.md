@@ -29,14 +29,12 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
-- cloud
+- クラウド
 - コラボレーション
-- メッセージング
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -60,24 +58,22 @@ pricing:
   tag: zoom_user_email
   unit_label: Zoom 登録ユーザー
   unit_price: 1
-public_title: Zoom インテグレーション
+public_title: Zoom
 short_description: Zoom アカウントを監視し、ライセンスを最適化します
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Collaboration
-  - Category::Messaging
-  - Category::Monitoring
+  - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Zoom アカウントを監視し、ライセンスを最適化します
   media:
@@ -98,7 +94,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Zoom インテグレーション
+  title: Zoom
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -107,7 +104,7 @@ tile:
 
 Zoom インテグレーションにより、ミーティング、Rooms、ユーザー、ネットワーク分析、そしてジオロケーションの概要を監視することで、世界中のあらゆる場所で勤務する従業員に最適な利用体験を提供することができます。インテグレーションには、完全カスタマイズが可能な 4 つのダッシュボードが事前構築されており、重要な情報を表面化できます。さらに、エンジニア、IT責任者、マネージャー、そして管理職レベルのすべてのユーザーに普遍的に利用価値のあるビジュアルを提供するよう設計されています。
 
-### モニター
+### アラート設定
 
 1. Zoom Room に問題があります
 2. Zoom Room のコンポーネントに問題があります
@@ -123,7 +120,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- サポート: datadog-engineering@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
@@ -131,7 +128,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
 
 [1]: https://marketplace.zoom.us/
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

@@ -3,7 +3,8 @@ app_id: prometheus
 app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
 assets:
   integration:
-    configuration: {}
+    configuration:
+      spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
@@ -15,7 +16,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
+- metrics
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
 display_on_public_website: true
@@ -33,15 +34,15 @@ public_title: Prometheus (レガシー)
 short_description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::モニタリング
+  - Category::Metrics
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
   media: []

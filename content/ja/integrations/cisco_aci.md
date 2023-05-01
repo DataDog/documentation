@@ -1,41 +1,60 @@
 ---
+app_id: cisco-aci
+app_uuid: fab40264-45aa-434b-9f9f-dc0ab609dd49
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     cisco_aci: assets/dashboards/cisco_aci_dashboard.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: cisco_aci.fabric.node.health.cur
+      metadata_path: metadata.csv
+      prefix: cisco_aci.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cisco ACI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - network
-- autodiscovery
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cisco_aci/README.md
-display_name: Cisco ACI
+display_on_public_website: true
 draft: false
 git_integration_title: cisco_aci
-guid: 8a20f56b-2e25-4a0b-a252-f5187dddeeef
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 2.1.0
+integration_version: 2.2.1
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cisco_aci.
-metric_to_check: cisco_aci.fabric.node.health.cur
+manifest_version: 2.0.0
 name: cisco_aci
-public_title: Datadog-CiscoACI インテグレーション
+oauth: {}
+public_title: CiscoACI
 short_description: Cisco ACI のパフォーマンスと使用状況を追跡。
-support: コア
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::ネットワーク
+  configuration: README.md#Setup
+  description: Cisco ACI のパフォーマンスと使用状況を追跡。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CiscoACI
 ---
 
 
@@ -50,7 +69,7 @@ Cisco ACI インテグレーションを使用すると、以下のことが可�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Cisco ACI チェックは Agent にパッケージ化されているので、ネットワーク内のサーバーに [Agent をインストール][1]するだけです。
 
@@ -145,6 +164,23 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
 
 エンドポイントを cURL して得られた出力が `datadog_checks/cisco_aci/aci_metrics.py` で収集されたメトリクスのいずれかと一致するか確認します。どの統計も一致しない場合、これは、統合が収集できる統計情報をエンドポイントが発信していないことを意味します。
 
+### 実行時間が長い
+
+このチェックは、メトリクスを返す前にリストされたすべてのテナント、アプリ、およびエンドポイントに問い合わせるため、このインテグレーションによる実行時間が長くなることがあります。
+
+  ```yaml
+    cisco_aci (2.2.0)
+  -----------------
+    Instance ID: cisco_aci:d3a2958f66f46212 [OK]
+    Configuration Source: file:/etc/datadog-agent/conf.d/cisco_aci.d/conf.yaml
+    Total Runs: 1
+    Metric Samples: Last Run: 678, Total: 678
+    Events: Last Run: 0, Total: 0
+    Service Checks: Last Run: 1, Total: 1
+    Average Execution Time : 28m20.95s
+    Last Execution Date : 2023-01-04 15:58:04 CST / 2023-01-04 21:58:04 UTC (1672869484000)
+    Last Successful Execution Date : 2023-01-04 15:58:04 CST / 2023-01-04 21:58:04 UTC (1672869484000)
+  ```
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

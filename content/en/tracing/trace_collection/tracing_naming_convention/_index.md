@@ -59,13 +59,14 @@ The following span tags can be used to describe the HTTP client and server spans
 | `http.client_ip`                            | Type: `string` <br>  The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.                                                                                                        |
 | `http.useragent`                            | Type: `string` <br>  The user agent header received with the request.                                                                                                                                                                              |
 | `http.request.content_length`               | Type: `number` <br>  The size of the request payload body in bytes.                                                                                                                                                                                |
-| `http.response.content_length`              | Type: `number` <br> The size of the request payload body in bytes.                                                                                                                                                                                |
+| `http.response.content_length`              | Type: `number` <br> The size of the response payload body in bytes.                                                                                                                                                                                |
 | `http.request.content_length_uncompressed`  | Type: `number` <br> The size of the uncompressed request payload body after transport decoding.                                                                                                                                                   |
 | `http.response.content_length_uncompressed` | Type: `number` <br> The size of the uncompressed response payload body after transport decoding.                                                                                                                                                  |
 | `http.request.headers.*`                    | Type: `string` <br> The request HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, see the corresponding [Library configuration][5].  |
 | `http.response.headers.*`                   | Type: `string` <br> The response HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, see the corresponding [Library configuration][5]. |
 
 ### Database
+
 The following span tags can be used to describe database spans:
 
 | **Name**           | **Type** | **Description**                                                                                              |
@@ -79,28 +80,30 @@ The following span tags can be used to describe database spans:
 | `db.sql.table`         | `number` | The name of the primary table that the operation is acting upon, including the database name (if applicable). |
 | `db.row_count`         | `number` | The number of rows/results from the query or operation.                                                      |
 
-Additional attributes for specific database technologies will use the prefix `db.<db.system>`.
+Additional attributes for specific database technologies use the prefix `db.<db.system>`.
 
-### Message Queue
+### Message queue
+
 The following span tags can be used to describe spans corresponding to messaging systems:
 
-| **Name**                     | **Type** | **Description**                                                                                                                                                                                                                  |
-|----------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `messaging.system`               | `string` | The identifier of the messaging system.                                                                                                                                                                                               |
-| `messaging.destination`          | `string` | The message destination name.                                                                                                                                                                                                     |
-| `messaging.destination_kind`     | `string` | The kind of message destination.                                                                                                                                                                                                  |
-| `messaging.protocol`             | `string` | The name of the transport protocol.                                                                                                                                                                                               |
-| `messaging.protocol_version`     | `string` | The version of the transport protocol.                                                                                                                                                                                            |
-| `messaging.url`                  | `string` | The connection string to the messaging system.                                                                                                                                                                                    |
-| `messaging.message_id`           | `string` | The name of the primary table that the operation is acting upon, including the database name (if applicable).                                                                                                                     |
-| `messaging.conversation_id`      | `string` | The number of rows/results from the query or operation.                                                                                                                                                                          |
-| `messaging.message_payload_size` | `number` | The size of the uncompressed message payload in bytes.                                                                                                                                                                            |
+| **Name**                         | **Type** | **Description**                                                                                                                                                                                                                      |
+|----------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `messaging.system`               | `string` | The identifier of the messaging system.                                                                                                                                                                                              |
+| `messaging.destination`          | `string` | The message destination name.                                                                                                                                                                                                        |
+| `messaging.destination_kind`     | `string` | The kind of message destination.                                                                                                                                                                                                     |
+| `messaging.protocol`             | `string` | The name of the transport protocol.                                                                                                                                                                                                  |
+| `messaging.protocol_version`     | `string` | The version of the transport protocol.                                                                                                                                                                                               |
+| `messaging.url`                  | `string` | The connection string to the messaging system.                                                                                                                                                                                       |
+| `messaging.message_id`           | `string` | A value used by the messaging system as an identifier for the message, represented as a string.                                                                                                                                      |
+| `messaging.conversation_id`      | `string` | The conversation ID identifying the conversation to which the message belongs, represented as a string.                                                                                                                              |
+| `messaging.message_payload_size` | `number` | The size of the uncompressed message payload in bytes.                                                                                                                                                                               |
 | `messaging.operation`            | `string` | A string identifying the kind of message consumption. <br>Examples: `send` (a message sent to a producer), `receive` (a message is received by a consumer), or `process` (a message previously received is processed by a consumer). |
-| `messaging.consumer_id`          | `string` | The identifier for the consumer receiving a message.                                                                                                                                                                              |
+| `messaging.consumer_id`          | `string` | The identifier for the consumer receiving a message.                                                                                                                                                                                 |
 
-Additional attributes for specific database technologies will use the prefix `messaging.<messaging.system>`.
+Additional attributes for specific messaging systems use the prefix `messaging.<messaging.system>`.
 
 ### Remote procedure calls
+
 The following span tags can be used to describe spans corresponding to remote procedure calls such as RMI or gRPC:
 
 | **Name**  | **Type** | **Description**                      |
@@ -114,8 +117,8 @@ The following span tags can be used to describe errors associated with spans:
 
 | **Name**    | **Type** | **Description**                                                  |
 |-----------------|----------|------------------------------------------------------------------|
-| `error.message` | `string` | The error type or kind (or code in some cases).                  |
-| `error.type`    | `string` | A concise, human-readable, one-line message explaining the event. |
+| `error.type` | `string` | The error type or kind (or code in some cases).                  |
+| `error.message`    | `string` | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | `string` | The stack trace or the complementary information about the error. |
 
 ## Further reading

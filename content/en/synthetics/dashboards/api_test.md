@@ -1,5 +1,5 @@
 ---
-title: Synthetics API Test Performance Dashboard
+title: Synthetic API Test Performance Dashboard
 kind: documentation
 further_reading:
 - link: '/synthetics/ci_results_explorer'

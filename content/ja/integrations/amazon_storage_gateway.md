@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awsstoragegateway/
+- /ja/integrations/awsstoragegateway/
 categories:
-  - cloud
-  - data store
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- aws
+- log collection
 dependencies: []
 description: AWS Storage Gateway のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_storage_gateway/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_storage_gateway/
 draft: false
 git_integration_title: amazon_storage_gateway
 has_logo: true
 integration_id: amazon-storage-gateway
 integration_title: Amazon Storage Gateway
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon Storage Gateway インテグレーション
 short_description: AWS Storage Gateway のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS Storage Gateway は、オーガニゼーションの IT 環境と AWS のストレージインフラストラクチャーとの間にシームレスで安全なインテグレーションを提供します。
@@ -37,7 +38,7 @@ AWS Storage Gateway は、オーガニゼーションの IT 環境と AWS のス
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`StorageGateway` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `StorageGateway` が有効になっていることを確認します。
 2. [Datadog - AWS Storage Gateway インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -62,7 +63,7 @@ Amazon Storage Gateway から S3 バケットまたは CloudWatch のいずれ�
 {{< get-metrics-from-git "amazon_storage_gateway" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -77,8 +78,8 @@ AWS Storage Gateway インテグレーションには、サービスのチェッ
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_storage_gateway
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-storage-gateway
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

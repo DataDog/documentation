@@ -28,7 +28,9 @@ Tracing application metrics are collected after you [enable trace collection and
 
 {{< img src="tracing/apm_lifecycle/trace_metrics.png" style="width:70%; background:none; border:none; box-shadow:none;" alt="Trace Metrics" >}}
 
-These metrics capture **request** counts, **error** counts, and **latency** measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration. Ensure you have full visibility into your application's traffic by using these metrics to spot potential errors on a service or a resource, and by creating dashboards, monitors, and SLOs. 
+These metrics capture request counts, error counts, and latency measures. They are calculated based on 100% of the application's traffic, regardless of any [trace ingestion sampling][2] configuration. Ensure that you have full visibility into your application's traffic by using these metrics to spot potential errors on a service or a resource, and by creating dashboards, monitors, and SLOs.
+
+**Note**: If your applications and services are instrumented with OpenTelemetry libraries and you set up sampling at the SDK level and/or at the collector level, APM metrics are calculated based on the sampled set of data.
 
 Trace metrics are generated for service entry spans and certain operations depending on integration language. For example, the Django integration produces trace metrics from spans that represent various operations (1 root span for the Django request, 1 for each middleware, and 1 for the view).
 
@@ -110,11 +112,13 @@ With the following definitions:
 
 ### Duration
 
-<div class="alert alert-warning">This method of using trace metrics is outdated. Instead, <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> is recommended.</div>
+<div class="alert alert-warning">Datadog recommends <a href="/tracing/guide/ddsketch_trace_metrics/">tracing distribution metrics using DDSketch</a> instead.</div>
 
 `trace.<SPAN_NAME>.duration`
 : **Prerequisite:** This metric exists for any APM service.<br>
-**Description:** [LEGACY] Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. This metric used to generate the "% exec time for downstream services" graph. When `trace.<SPAN_NAME>.duration` is divided by `trace.<SPAN_NAME>.hits`, the result can yield an average latency, but this is not the recommended approach for calculating the average latency. Instead, refer to the [Latency Distribution](#latency-distribution) section for average latency calculations. <br>
+**Description:** Measure the total time for a collection of spans within a time interval, including child spans seen in the collecting service. For most use cases, Datadog recommends using the [Latency Distribution](#latency-distribution) for calculation of average latency or percentiles. To calculate the average latency with host tag filters, you can use this metric with the following formula: <br>
+`sum:trace.<SPAN_NAME>.duration{<FILTER>}.rollup(sum).fill(zero) / sum:trace.<SPAN_NAME>.hits{<FILTER>}` <br>
+This metric does not support percentile aggregations. Read the [Latency Distribution](#latency-distribution) section for more information.
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 

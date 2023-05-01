@@ -5,7 +5,7 @@ description: Information about the data that Database Monitoring collects.
 further_reading:
 
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -85,4 +85,4 @@ _Other Queries_ represent the metrics of all queries which do not appear in the 
 [1]: /dashboards/
 [2]: /monitors/
 [3]: /notebooks/
-[4]: /security/logs/
+[4]: /data_security/logs/

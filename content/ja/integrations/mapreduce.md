@@ -25,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - processing
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
@@ -34,7 +33,7 @@ draft: false
 git_integration_title: mapreduce
 integration_id: mapreduce
 integration_title: Map Reduce
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -53,7 +52,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::処理
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: マップのステータスと期間を監視し、タスクを削減。
@@ -76,7 +74,7 @@ mapreduce サービスからメトリクスをリアルタイムに取得して�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Mapreduce チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

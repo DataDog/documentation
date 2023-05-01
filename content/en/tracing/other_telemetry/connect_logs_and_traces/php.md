@@ -43,7 +43,7 @@ For instance, you would append those two attributes to your logs with:
   <?php
   $context = \DDTrace\current_context();
   $append = sprintf(
-      ' [dd.trace_id=%d dd.span_id=%d]',
+      ' [dd.trace_id=%s dd.span_id=%s]',
       $context['trace_id'],
       $context['span_id']
   );
@@ -51,19 +51,49 @@ For instance, you would append those two attributes to your logs with:
 ?>
 ```
 
-If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages:
+If the logger implements the [**monolog/monolog** library][4], use `Logger::pushProcessor()` to automatically append the identifiers to all log messages. For monolog v1:
 
 ```php
 <?php
   $logger->pushProcessor(function ($record) {
       $context = \DDTrace\current_context();
       $record['message'] .= sprintf(
-          ' [dd.trace_id=%d dd.span_id=%d]',
+          ' [dd.trace_id=%s dd.span_id=%s]',
           $context['trace_id'],
           $context['span_id']
       );
       return $record;
   });
+?>
+```
+
+For monolog v2:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+      $context = \DDTrace\current_context();
+      return $record->with(message: $record['message'] . sprintf(
+          ' [dd.trace_id=%s dd.span_id=%s]',
+          $context['trace_id'],
+          $context['span_id']
+      ));
+    });
+  ?>
+```
+
+For monolog v3:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+        $context = \DDTrace\current_context();
+        $record->extra['dd'] = [
+            'trace_id' => $context['trace_id'],
+            'span_id'  => $context['span_id'],
+        ];
+        return $record;
+    });
 ?>
 ```
 

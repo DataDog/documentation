@@ -1,5 +1,4 @@
 ---
-beta: true
 dependencies:
 - https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/README.md
 description: Flutter プロジェクトから RUM データを収集します。
@@ -28,9 +27,11 @@ RUM は Flutter 2.8+ の Flutter Android および iOS アプリケーション�
 
 | iOS SDK | Android SDK | Browser SDK |
 | :-----: | :---------: | :---------: |
-| 1.12.0-beta2 | 1.14.0-beta1 | v4.11.2 |
+| 1.14.0 | 1.16.0 | 4.x.x |
 
 [//]: # (End SDK Table)
+
+
 
 ### iOS
 
@@ -63,7 +64,7 @@ Web の場合、`index.html` の `head` タグの下に以下を追加します�
 
 {{< img src="real_user_monitoring/flutter/image_flutter.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
 
-データの安全性を確保するために、クライアントトークンを使用する必要があります。クライアントトークンの設定方法については、[クライアントトークンのドキュメント][4]を参照してください。
+データの安全性を確保するために、クライアントトークンを使用する必要があります。クライアントトークンの設定方法については、[クライアントトークンのドキュメント][3]を参照してください。
 
 ### コンフィギュレーションオブジェクトの作成
 
@@ -168,6 +169,16 @@ MaterialApp(
 
 また、`DatadogRouteAwareMixin` プロパティと `DatadogNavigationObserverProvider` プロパティを組み合わせて使用すると、RUM ビューを自動的に起動したり停止したりすることができます。`DatadogRouteAwareMixin` を使って、`initState` から `didPush` へとロジックを移動させます。
 
+デフォルトでは、`DatadogRouteAwareMixin` はウィジェットの名前をビューの名前として使用することに注意してください。しかし、これは**難読化されたコードでは動作しません**。難読化の際に Widget クラスの名前が失われてしまうからです。正しいビュー名を保持するには、`rumViewInfo` をオーバーライドしてください。
+```dart
+class _MyHomeScreenState extends State<MyHomeScreen>
+    with RouteAware, DatadogRouteAwareMixin {
+
+  @override
+  RumViewInfo get rumViewInfo => RumViewInfo(name: 'MyHomeScreen');
+}
+```
+
 ### リソースの自動追跡
 
 [Datadog Tracking HTTP Client][7] パッケージを使用すると、RUM ビューからリソースと HTTP 呼び出しの自動追跡を有効にすることができます。このパッケージを `pubspec.yaml` に追加し、初期設定に以下を追加します。
@@ -189,7 +200,7 @@ Datadog 分散型トレーシングを有効にするには、構成オブジェ
 
 ### iOS
 
-データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][2]のキャッシュディレクトリ (`Library/Caches`) に平文で保存され、デバイスにインストールされた他のアプリからは読み取ることができません。
+データは Datadog にアップロードされる前に、[アプリケーションサンドボックス][10]のキャッシュディレクトリ (`Library/Caches`) に平文で保存され、デバイスにインストールされた他のアプリからは読み取ることができません。
 
 ## 寄稿
 
@@ -209,3 +220,4 @@ Datadog 分散型トレーシングを有効にするには、構成オブジェ
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://pub.dev/packages/datadog_tracking_http_client
 [9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
+[10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web

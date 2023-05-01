@@ -1,6 +1,5 @@
 ---
 aliases:
-- /ja/security/tracing
 - /ja/tracing/security
 - /ja/tracing/guide/security
 - /ja/tracing/guide/agent_obfuscation
@@ -176,13 +175,7 @@ apm_config:
 
 ## 収集した HTTP データ
 
-Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、[スパンタグのセマンティクス][11]を参照してください。
-
-### クライアント IP ヘッダーの構成
-
-Datadog は自動的に、`X-Forwarded-For` のようなよく知られたヘッダーから、`http.client_ip` を解決しようとします。もし、このフィールドにカスタムヘッダーを使用したり、解決アルゴリズムをバイパスしたい場合は、`DD_TRACE_CLIENT_IP_HEADER` 環境変数を設定すると、ライブラリはクライアント IP の指定されたヘッダーのみを検索します。
-
-クライアントの IP 値を収集したくない場合は、`DD_TRACE_CLIENT_IP_HEADER_DISABLED` 環境変数を `true` に設定します。デフォルトでは `false` になっています。
+Datadog は、サポートされているトレーシングライブラリ間で、Web スパン用に収集されるタグを標準化しています。これらのタグの収集が実装されているかどうかは、ライブラリのリリースノートを確認してください。完全に標準化されたライブラリの場合、[スパンタグのセマンティクス][3]を参照してください。
 
 ### URL のクエリを編集する
 
@@ -200,7 +193,7 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 
 ## ログの機密スパンのスクラビング
 
-[スパン][3]のタグから機密データをスクラブするには、[datadog.yaml コンフィギュレーションファイル][4]の `replace_tags` 設定、または `DD_APM_REPLACE_TAGS` 環境変数を使用します。設定または環境変数の値は、タグ内で機密データの置換方法を指定するパラメーターグループの一覧です。パラメーターは以下のとおりです。
+[スパン][4]のタグから機密データをスクラブするには、[datadog.yaml コンフィギュレーションファイル][5]の `replace_tags` 設定、または `DD_APM_REPLACE_TAGS` 環境変数を使用します。設定または環境変数の値は、タグ内で機密データの置換方法を指定するパラメーターグループの一覧です。パラメーターは以下のとおりです。
 
 * `name`: 置換するタグのキー。すべてのタグを照合するには、`*` を使用します。リソースを照合するには、`resource.name` を使用します。
 * `pattern`: 照合対象の正規表現パターン。
@@ -214,28 +207,41 @@ DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Heade
 ```yaml
 apm_config:
   replace_tags:
-    # タグ "http.url" 内で、文字列 `token/` で始まるすべての文字を "?" で置換します:
+    # タグ "http.url" 内で、文字列 `token/` で始まるすべての文字を "?" で置換します
     - name: "http.url"
       pattern: "token/(.*)"
       repl: "?"
-    # "bar" を持つタグに存在するすべての "foo" を置換します:
+    # リソース名の末尾の "/" 文字を削除します
+    - name: "resource.name"
+      pattern: "(.*)\/$"
+      repl: "$1"
+    # "bar" を持つタグに存在するすべての "foo" を置換します
     - name: "*"
       pattern: "foo"
       repl: "bar"
-    # すべての "error.stack" タグの値を削除します。
+    # すべての "error.stack" タグの値を削除します
     - name: "error.stack"
       pattern: "(?s).*"
+    # エラーメッセージの連番を置換します
+    - name: "error.msg"
+      pattern: "[0-9]{10}"
+      repl: "[REDACTED]"
 ```
 
 {{% /tab %}}
 {{% tab "環境変数" %}}
 
-```shell
+```json
 DD_APM_REPLACE_TAGS=[
       {
         "name": "http.url",
         "pattern": "token/(.*)",
         "repl": "?"
+      },
+      {
+        "name": "resource.name",
+        "pattern": "(.*)\/$",
+        "repl": "$1"
       },
       {
         "name": "*",
@@ -245,6 +251,11 @@ DD_APM_REPLACE_TAGS=[
       {
         "name": "error.stack",
         "pattern": "(?s).*"
+      },
+      {
+        "name": "error.msg",
+        "pattern": "[0-9]{10}",
+        "repl": "[REDACTED]"
       }
 ]
 ```
@@ -252,7 +263,7 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-**注**: 推奨の [Daemonset コンフィギュレーション][1]を使用している場合は、この環境変数を trace-agent コンテナに挿入します。
+この環境変数は、[daemonset configuration][1] を使用している場合は trace-agent コンテナに、[helm chart][2] を使用している場合は `values.yaml` ファイル内の `agents.containers.traceAgent.env` に記述してください。
 
 ```datadog-agent.yaml
 - name: DD_APM_REPLACE_TAGS
@@ -263,6 +274,11 @@ DD_APM_REPLACE_TAGS=[
               "repl": "?"
             },
             {
+              "name": "resource.name",
+              "pattern": "(.*)\/$",
+              "repl": "$1"
+            },
+            {
               "name": "*",
               "pattern": "foo",
               "repl": "bar"
@@ -270,16 +286,22 @@ DD_APM_REPLACE_TAGS=[
             {
               "name": "error.stack",
               "pattern": "(?s).*"
+            },
+            {
+              "name": "error.msg",
+              "pattern": "[0-9]{10}",
+              "repl": "[REDACTED]"
             }
           ]'
 ```
 
-[1]: /ja/agent/kubernetes/?tab=daemonset
+[1]: /ja/containers/kubernetes/installation/?tab=daemonset
+[2]: /ja/containers/kubernetes/installation/?tab=helm
 {{% /tab %}}
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
 ```
 
 {{% /tab %}}
@@ -287,13 +309,13 @@ DD_APM_REPLACE_TAGS=[
 
 ## リソースを収集から除外
 
-特定のリソースをトレースしないオプションに関する詳しい概要については、[不要なリソースを無視する][5]をご参照ください。
+特定のリソースをトレースしないオプションに関する詳しい概要については、[不要なリソースを無視する][6]をご参照ください。
 
 サービスに、ヘルスチェックなどシミュレーショントラフィックが含まれる場合、このようなトレースの収集を除外して、サービスのメトリクスが本番トラフィックと一致するようにすることが望ましい場合があります。
 
 そこで、Agent により Datadog に送信されるトレースから、特定のリソースを除外するように Agent を設定できます。特定のリソースが送信されないようにするには、`datadog.yaml` ファイルの `ignore_resources` 設定を使用します。そして、1 つ以上の正規表現のリストを作成し、リソース名に基づき Agent で除外するリソースを指定します。
 
-コンテナ化された環境で実行している場合は、代わりに Datadog Agent を使用してコンテナに `DD_APM_IGNORE_RESOURCES` を設定します。詳細については、[Docker APM Agent 環境変数][6]をご参照ください。
+コンテナ化された環境で実行している場合は、代わりに Datadog Agent を使用してコンテナに `DD_APM_IGNORE_RESOURCES` を設定します。詳細については、[Docker APM Agent 環境変数][7]をご参照ください。
 
 ```text
 ## @param ignore_resources - 文字列のリスト - オプション
@@ -304,15 +326,15 @@ DD_APM_REPLACE_TAGS=[
 
 ## トレースを Agent API に直接送信
 
-特定のアプリケーション用にカスタマイズされたインスツルメンテーションが必要な場合は、Agent 側のトレース API を使用して、トレースに含めるスパンを個別に選択することを検討してください。詳細については、[API に関するドキュメント][7]を参照してください。
+特定のアプリケーション用にカスタマイズされたインスツルメンテーションが必要な場合は、Agent 側のトレース API を使用して、トレースに含めるスパンを個別に選択することを検討してください。詳細については、[API に関するドキュメント][8]を参照してください。
 
 ## Datadog トレーサーでスパンを修正
 
 このページでは、データが Datadog Agent に到達してから修正する方法について説明していますが、一部のトレーシングライブラリは拡張可能です。カスタムポストプロセッサーを作成してスパンをインターセプトし、適宜 (正規表現マッチなどに基づき) 調整または破棄することが可能です。詳細は、ご希望の言語で「カスタムインスツルメンテーション」ドキュメントをご参照ください。
 
-* Java: [TraceInterceptor インターフェイス][8]
-* Ruby: [処理パイプライン][9]
-* Python: [トレースフィルター][10]
+* Java: [TraceInterceptor インターフェイス][9]
+* Ruby: [処理パイプライン][10]
+* Python: [トレースフィルター][11]
 
 ## テレメトリーの収集
 
@@ -320,14 +342,48 @@ Datadog は、お客様のトレーシングライブラリに関する環境情
 
 このテレメトリー収集を無効にするには、インスツルメンテーションを行うアプリケーションで `DD_INSTRUMENTATION_TELEMETRY_ENABLED` 環境変数を `false` に設定してください。
 
+## APM における PCI DSS 準拠
+
+{{< site-region region="us" >}}
+
+<div class="alert alert-warning">
+APM の PCI 準拠は、<a href="/getting_started/site/">US1 サイト</a>で作成された新しい Datadog 組織でのみ利用可能です。
+</div>
+
+APM の PCI 準拠は、Datadog の組織を新規に作成する際に利用できます。PCI 準拠の Datadog 組織をセットアップするには、以下の手順に従います。
+
+1. [US1 サイト][1]に新しい Datadog 組織をセットアップします。PCI DSS 準拠は、US1 で作成された新しい組織にのみサポートされています。
+2. [Datadog サポート][2]または[カスタマーサクセスマネージャー][3]に連絡し、新しい組織を PCI 準拠の組織として構成するようリクエストします。
+3. 新しい組織で[監査証跡][4]を有効にします。PCI DSS 準拠のため、監査証跡を有効にし、有効なままにする必要があります。
+4. Datadog サポートまたはカスタマーサクセスが新しい組織が PCI DSS に準拠していることを確認した後、PCI 準拠の専用エンドポイント (`https://trace-pci.agent.datadoghq.com`) にスパンを送信するように Agent コンフィギュレーションファイルを構成します。
+    ```
+    apm_config:
+      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
+    ```
+
+ログ で PCI 準拠を実現するためには、[ログ管理の PCI DSS 準拠][5]を参照してください。
+
+[1]: /ja/getting_started/site/
+[2]: /ja/help/
+[3]: mailto:success@datadoghq.com
+[4]: /ja/account_management/audit_trail/
+[5]: /ja/data_security/logs/#pci-dss-compliance-for-log-management
+
+
+{{< /site-region >}}
+
+{{< site-region region="us2,us3,us5,eu,gov" >}}
+APM の PCI 準拠は、{{< region-param key="dd_site_name" >}} サイトではご利用いただけません。
+{{< /site-region >}}
+
 [1]: /ja/help/
 [2]: /ja/tracing/glossary/#trace
-[3]: /ja/tracing/glossary/#spans
-[4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /ja/tracing/guide/ignoring_apm_resources/
-[6]: /ja/agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
-[7]: /ja/tracing/guide/send_traces_to_agent_by_api/
-[8]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
-[9]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
-[10]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
-[11]: /ja/tracing/trace_collection/tracing_naming_convention/#http-requests
+[3]: /ja/tracing/trace_collection/tracing_naming_convention/#http-requests
+[4]: /ja/tracing/glossary/#spans
+[5]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[6]: /ja/tracing/guide/ignoring_apm_resources/
+[7]: /ja/agent/docker/apm/?tab=standard#docker-apm-agent-environment-variables
+[8]: /ja/tracing/guide/send_traces_to_agent_by_api/
+[9]: /ja/tracing/trace_collection/custom_instrumentation/java/#extending-tracers
+[10]: /ja/tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
+[11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering

@@ -3,7 +3,7 @@ title: Troubleshoot Database Monitoring setup for MySQL
 kind: documentation
 description: Troubleshoot Database Monitoring setup
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -160,7 +160,7 @@ Before following these steps to diagnose missing query metric data, ensure the A
 The Agent requires the `performance_schema` option to be enabled. It is enabled by default by MySQL, but may be disabled in configuration or by your cloud provider. Follow the [setup instructions][1] for enabling it.
 
 #### Google Cloud SQL limitation
-The host is managed by Google Cloud SQL and does not support `performance_schema`. Due to limitations with Google Cloud SQL, Datadog Database Monitoring is [not supported on instances with less than 26GB of RAM][6].
+The host is managed by Google Cloud SQL and does not support `performance_schema`. Due to limitations with Google Cloud SQL, Datadog Database Monitoring is [not supported on instances with less than 16GB of RAM][6].
 
 ### Certain queries are missing
 

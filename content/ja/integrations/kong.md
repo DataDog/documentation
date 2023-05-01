@@ -3,6 +3,7 @@ app_id: kong
 app_uuid: 41e7a8cb-07b6-46cc-a087-53e87736b5c7
 assets:
   dashboards:
+    Kong API: assets/dashboards/kong_api.json
     Kong Overview: assets/dashboards/kong_overview.json
     Kong Overview OpenMetrics: assets/dashboards/kong_overview_openmetrics.json
   integration:
@@ -35,7 +36,6 @@ author:
 categories:
 - web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 2.1.1
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -63,7 +63,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
   media: []
@@ -78,11 +77,13 @@ tile:
 
 Agent の Kong チェックは、合計リクエスト数、応答コード数、クライアント接続数などを追跡します。
 
+また、Kong の [Datadog プラグイン][1]を使用すると、[DogStatsD][2] を使用して Datadog Agent を通じて Datadog に API、接続、データベースメトリクスを送信することができます。詳しくは、[Datadog インテグレーションによる Kong の監視][3]のブログ投稿をお読みください。
+
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
-Kong チェックは [Datadog Agent][1] パッケージに含まれています。Kong サーバーに追加でインストールする必要はありません。
+Kong チェックは [Datadog Agent][4] パッケージに含まれています。Kong サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
@@ -184,7 +185,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][2]し、Checks セクションで `kong` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `kong` を探します。
 
 ## 収集データ
 
@@ -202,14 +203,16 @@ Kong チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 ## その他の参考資料
 
-- [Datadog インテグレーションを使用した Kong の監視][4]
+- [Datadog インテグレーションを使用した Kong の監視][3]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[3]: https://docs.datadoghq.com/ja/help/
-[4]: https://www.datadoghq.com/blog/monitor-kong-datadog
+[1]: https://docs.konghq.com/hub/kong-inc/datadog/
+[2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
+[3]: https://www.datadoghq.com/blog/monitor-kong-datadog
+[4]: https://app.datadoghq.com/account/settings#agent
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/help/

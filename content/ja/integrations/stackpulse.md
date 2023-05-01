@@ -1,44 +1,71 @@
 ---
+app_id: stackpulse
+app_uuid: c42edc68-cb25-43f9-9bd2-657a2b7dea82
 assets:
   dashboards:
     StackPulse: assets/dashboards/stackpulse_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: stackpulse.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: StackPulse
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Torq
+  sales_email: support@stackpulse.io
+  support_email: support@stackpulse.io
 categories:
-  - 自動化
-  - orchestration
-  - notification
-  - コラボレーション
-  - モニタリング
-creates_events: true
-ddtype: crawler
+- 自動化
+- コラボレーション
+- インシデント
+- notification
+- orchestration
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
-display_name: StackPulse
+- https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: stackpulse
-guid: cbfbe4be-1720-4c9e-b565-cef70fcc5b2b
 integration_id: stackpulse
 integration_title: StackPulse
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@stackpulse.io
-manifest_version: 1.0.0
-metric_prefix: stackpulse.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: stackpulse
-public_title: Datadog-StackPulse インテグレーション
+oauth: {}
+public_title: StackPulse
 short_description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Notification
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: アラートの応答を自動化し、イベントストリームでプレイブックの実行を追跡します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: StackPulse
 ---
+
+
+
 ## 概要
 
 [StackPulse][1] インテグレーションは、Datadog のアラートに応答する形で自動プレイブックをトリガーし、アラートの強化、インシデントの軽減、そしてコラボレーションをサポートします。トリガー後は実行中のプレイブックから直接、イベントを Datadog のイベントストリームと専用の StackPulse ダッシュボードに返送することができます。

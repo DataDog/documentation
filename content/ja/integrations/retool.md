@@ -17,7 +17,7 @@ assets:
     source_type_name: Retool
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Retool
   sales_email: support@retool.com
   support_email: support@retool.com
 categories:

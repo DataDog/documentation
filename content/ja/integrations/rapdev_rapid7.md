@@ -23,13 +23,12 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - ログの収集
 - マーケットプレイス
-- cloud
-- モニタリング
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -50,23 +49,22 @@ pricing:
   product_id: rapid7
   short_description: このインテグレーションの定額料金
   unit_price: 500
-public_title: Rapid7 インテグレーション
+public_title: Rapid7
 short_description: Rapid7 ログおよび調査アクティビティを監視します
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Log Collection
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
+  - Category::Security
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Rapid7 ログおよび調査アクティビティを監視します
   media:
@@ -78,7 +76,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Rapid7 インテグレーション
+  title: Rapid7
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -105,7 +104,7 @@ tile:
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- サポート: datadog-engineering@rapdev.io
+- サポート: support@rapdev.io
 - セールス: sales@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
@@ -113,7 +112,7 @@ tile:
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
 
 [1]: https://insight.rapid7.com/platform#/apiKeyManagement/organization
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

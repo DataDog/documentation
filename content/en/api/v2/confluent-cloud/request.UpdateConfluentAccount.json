@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "api_key": "TESTAPIKEY123",
+      "api_secret": "update-secret",
+      "tags": [
+        "updated_tag:val"
+      ]
+    },
+    "type": "confluent-cloud-accounts"
+  }
+}

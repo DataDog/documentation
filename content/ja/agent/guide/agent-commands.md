@@ -1,15 +1,19 @@
 ---
-title: Agent のコマンド
-kind: ガイド
+algolia:
+  tags:
+  - Agent status コマンド
 aliases:
-  - /ja/agent/faq/agent-status-and-information
-  - /ja/agent/faq/start-stop-restart-the-datadog-agent
-  - /ja/agent/faq/agent-commands
+- /ja/agent/faq/agent-status-and-information
+- /ja/agent/faq/start-stop-restart-the-datadog-agent
+- /ja/agent/faq/agent-commands
 further_reading:
-  - link: /agent/troubleshooting/
-    tag: Documentation
-    text: Agent のトラブルシューティング
+- link: /agent/troubleshooting/
+  tag: Documentation
+  text: Agent のトラブルシューティング
+kind: ガイド
+title: Agent のコマンド
 ---
+
 <div class="alert alert-warning">
 <code>service</code> ラッパーコマンドを使用できない Linux ベースのシステムをご使用の場合は、<a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">代替リストを参照してください</a>。
 </div>
@@ -136,12 +140,14 @@ Datadog Agent のステータスを表示するためのコマンドを以下に
 | AIX             | `lssrc -s datadog-agent`                                                      |
 | Linux           | OS については、[Agent に関するドキュメント][1]をご参照ください。                                 |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
-| Kubernetes      | `kubectl exec -it <POD_NAME> s6-svstat /var/run/s6/services/agent/`           |
+| Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
 | macOS           | `launchctl list com.datadoghq.agent` *または* systray アプリを使用             |
 | ソース          | `sudo service datadog-agent status`                                           |
+| Windows         | [Windows Agent ドキュメントを参照してください][2]。                                     |
 
 
 [1]: /ja/agent/
+[2]: /ja/agent/basic_agent_usage/windows/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -149,7 +155,7 @@ Datadog Agent のステータスを表示するためのコマンドを以下に
 |-----------------|--------------------------------------------------------------------------|
 | Linux           | `sudo service datadog-agent status`                                      |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent status` |
-| Kubernetes      | `kubectl exec -it <POD_NAME> /etc/init.d/datadog-agent status`           |
+| Kubernetes      | `kubectl exec -it <POD_NAME> -- /etc/init.d/datadog-agent status`        |
 | macOS           | `datadog-agent status`                                                   |
 | ソース          | `sudo ~/.datadog-agent/bin/agent status`                                 |
 | Windows         | [Windows Agent ドキュメントを参照してください][1]。                                |
@@ -177,7 +183,7 @@ Datadog Agent と有効なインテグレーションのステータスを表示
 | AIX        | `datadog-agent status`                               |
 | Linux      | `sudo datadog-agent status`                          |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
-| Kubernetes | `kubectl exec -it <POD_NAME> agent status`           |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- agent status`        |
 | macOS      | `datadog-agent status` または [Web GUI][1] を使用   |
 | ソース     | `sudo datadog-agent status`                          |
 | Windows    | [Windows Agent ドキュメントを参照してください][2]。            |
@@ -205,7 +211,7 @@ Running Checks
 |------------|------------------------------------------------------------------------|
 | Linux      | `sudo service datadog-agent info`                                      |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> /etc/init.d/datadog-agent info` |
-| Kubernetes | `kubectl exec -it <POD_NAME> /etc/init.d/datadog-agent info`           |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- /etc/init.d/datadog-agent info`        |
 | macOS      | `datadog-agent info`                                                   |
 | ソース     | `sudo ~/.datadog-agent/bin/info`                                       |
 | Windows    | [Windows Agent ドキュメントを参照してください][1]。                              |
@@ -252,7 +258,7 @@ Agent v6 のコマンドラインインターフェイスは、サブコマン�
 <エージェント_バイナリ> check --help
 ```
 
-| サブコマンド        | Notes                                                                       |
+| サブコマンド        | 注                                                                       |
 |-------------------|-----------------------------------------------------------------------------|
 | `check`           | 指定されたチェックを実行します。                                                    |
 | `config`          | [ランタイムコンフィギュレーション管理][1]。                                      |
@@ -263,13 +269,11 @@ Agent v6 のコマンドラインインターフェイスは、サブコマン�
 | `help`            | 任意のコマンドのヘルプ。                                                     |
 | `hostname`        | Agent が使用するホスト名を出力します。                                       |
 | `import`          | 以前のバージョンの Agent から構成ファイルをインポートして変換します。 |
-| `installservice`  | サービスコントロールマネージャー内で Agent をインストールします。Windows のみです。         |
 | `jmx`             | JMX トラブルシューティング。                                                        |
 | `launch-gui`      | Datadog Agent GUI を起動します。                                                |
-| `regimport`       | レジストリ設定を `datadog.yaml` にインポートします。Windows のみです。7.27.0 以降では非推奨です。             |
-| `remove-service`  | サービスコントロールマネージャーから Agent を削除します。Windows のみです。            |
 | `restart-service` | サービスコントロールマネージャー内で Agent を再起動します。Windows のみです。         |
 | `start-service`   | サービスコントロールマネージャー内で Agent を起動します。Windows のみです。           |
+| `stream-logs`     | 実行中の Agent が処理するログをストリーミング表示します。                         |
 | `stopservice`     | サービスコントロールマネージャー内で Agent を停止します。Windows のみです。            |
 | `version`         | バージョン情報を出力します。                                                         |
 

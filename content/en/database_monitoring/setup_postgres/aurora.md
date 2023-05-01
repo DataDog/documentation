@@ -8,7 +8,7 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -299,14 +299,14 @@ helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
   --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
     port: 5432
     username: datadog
-    password: <UNIQUEPASSWORD>" \
+    password: "<UNIQUEPASSWORD>"' \
   datadog/datadog
 ```
 
@@ -391,7 +391,8 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
-
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 ## Install the RDS Integration
 
 To collect more comprehensive database metrics from AWS, install the [RDS integration][11] (optional).

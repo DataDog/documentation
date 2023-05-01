@@ -2,8 +2,6 @@
 title: Synthetic APM
 kind: documentation
 description: APM and Distributed Tracing with Synthetic Monitoring
-aliases:
-  - "/synthetics/apm"
 further_reading:
   - link: "https://www.datadoghq.com/blog/introducing-synthetic-monitoring/"
     tag: "Blog"
@@ -17,7 +15,7 @@ further_reading:
 
 ---
 
-{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM and Synthetic Monitoring" video="true"  >}}
+{{< img src="synthetics/apm/synthetics-apm.mp4" alt="APM and Synthetic Monitoring" video="true" >}}
 
 ## Overview
 
@@ -89,6 +87,7 @@ These traces are retained [just like your classical APM traces][20].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 
 
 [1]: /synthetics/api_tests/http_tests/?tab=requestoptions

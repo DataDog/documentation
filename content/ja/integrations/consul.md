@@ -35,7 +35,6 @@ categories:
 - configuration & deployment
 - notification
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
 display_on_public_website: true
@@ -43,7 +42,7 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -66,7 +65,6 @@ tile:
   - Category::構成 & デプロイ
   - Category::通知
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
   media: []
@@ -100,7 +98,7 @@ _Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 

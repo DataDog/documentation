@@ -32,6 +32,7 @@ author:
 categories:
 - data store
 - ログの収集
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md
 display_on_public_website: true
@@ -49,16 +50,17 @@ public_title: SingleStore
 short_description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Data Store
   - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
   media: []
@@ -71,13 +73,18 @@ tile:
 
 ## 概要
 
-このチェックは、Datadog Agent を通じて [SingleStore][1] を監視します。
+このチェックでは、Datadog Agent を通じて [SingleStore][1] を監視します。SingleStore は、保存されたデータのトランザクション処理と分析処理を提供します。Datadog-SingleStoreDB インテグレーションを有効にすると、以下が可能になります。
+
+- メトリクスとイベントにより、クラスターとノードの健全性を把握する。
+- ストレージ容量の低下に対応する。
+- リソースの利用効率を高める。
+
 
 ## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 SingleStore チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -130,9 +137,6 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 | `<インテグレーション名>` | `singlestore`                                                   |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                              |
 | `<インスタンスコンフィギュレーション>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
-
-
-**注**: デフォルトでは、SingleStore インテグレーションは `MV_GLOBAL_STATUS`、`AGGREGATORS`、`LEAVES` テーブルからしかメトリクスを収集しません。システムレベルのメトリクス (CPU、ディスク、ネットワーク IO、メモリ) を追加で収集するには、`singlestore.d/conf.yaml` ファイルで `"collect_system_metrics": "true"` を追加します。
 
 ##### ログの収集
 

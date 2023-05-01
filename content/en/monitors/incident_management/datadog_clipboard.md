@@ -20,29 +20,29 @@ The Clipboard works on all pages in Datadog and keeps a record of all graphs cop
 
 ## Opening the Clipboard
 
-To open the Clipboard, copy any graph and click “Open Clipboard” in the toast.
+To open the Clipboard, copy any graph and click **Open Clipboard** in the toast.
 
-{{< img src="monitors/incidents/open-clipboard.png" alt="Open a graph in the Clipboard"  style="width:80%;">}}
+{{< img src="monitors/incidents/open-clipboard.png" alt="Open a graph in the Clipboard" style="width:80%;">}}
 
-Or, click “`Cmd/Ctrl + Shift + K` to open” on the minimized Clipboard.
+Or, click "`Cmd/Ctrl + Shift + K` to open" on the minimized Clipboard.
 
 The Clipboard can also be opened and closed using `Cmd/Ctrl + Shift + K`. To minimize the Clipboard, click the Minimize icon. The minimized Clipboard persists on all pages of Datadog.
 
 ## Adding clips
 
-To add a graph, copy it with `Cmd/Ctrl + C` or click “Copy” in the export menu. Once the Clipboard is open, copied graphs get added automatically.
+To add a graph, copy it with `Cmd/Ctrl + C` or click **Copy** in the export menu. Once the Clipboard is open, copied graphs get added automatically.
 
-To add a URL, open the Clipboard and click “Add current page.”
+To add a URL, open the Clipboard and click **Add current page**.
 
-{{< img src="monitors/incidents/add-page.png" alt="Add a dashboard to the Clipboard"  style="width:80%;">}}
+{{< img src="monitors/incidents/add-page.png" alt="Add a dashboard to the Clipboard" style="width:80%;">}}
 
 ## Managing clips
 
 Each item in the Clipboard can be opened, cloned, or deleted; these options are available when you hover over any signal. Opening an item navigates to the link of the original signal. Open the source of any graph (like the dashboard it was clipped from) by clicking the title of the item.
 
-{{< img src="monitors/incidents/managing-clips.png" alt="Manage your clips"  style="width:80%;">}}
+{{< img src="monitors/incidents/managing-clips.png" alt="Manage your clips" style="width:80%;">}}
 
-The Clipboard holds a maximum of 20 signals. Remove signals by deleting them individually, or by clicking “Remove All.” If more than 20 signals are added, the oldest signals, stored furthest to the left, are removed automatically.
+The Clipboard holds a maximum of 20 signals. Remove signals by deleting them individually, or by clicking **Remove All**. If more than 20 signals are added, the oldest signals, stored furthest to the left, are removed automatically.
 
 ## Exporting
 
@@ -50,7 +50,7 @@ Items on the Clipboard can be exported to Dashboards, Notebooks, or Incidents us
 
 Alternatively, export your selection to a new or existing dashboard, notebook, or incident using the export menu. Only [supported graphs][1] can be exported to Notebooks.
 
-{{< img src="monitors/incidents/exporting.png" alt="Export from the Clipboard"  style="width:80%;">}}
+{{< img src="monitors/incidents/exporting.png" alt="Export from the Clipboard" style="width:80%;">}}
 
 
 ## Further Reading

@@ -9,7 +9,7 @@ further_reading:
 
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -253,14 +253,14 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: "<UNIQUEPASSWORD>"' \
   datadog/datadog
 ```
 
@@ -327,6 +327,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Install the RDS Integration
 

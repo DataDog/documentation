@@ -21,15 +21,15 @@ type: multi-code-lang
 ---
 ## 互換性要件
 
-最新の Java トレーサーは、すべてのプラットフォームの JVM バージョン 7 以降に対応しています。
+最新の Java トレーサーは、バージョン 8 以上のすべての JVM をサポートしています。8 以下の JVM バージョンに関する追加情報は、[サポートする JVM ランタイム][10]をお読みください。
 
-Datadog の Java バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][2]ページをご覧ください。
+Datadog の Java バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
 
 ## インストールと利用開始
 
 ### アプリ内のドキュメントに従ってください (推奨)
 
-Datadog アプリ内の[クイックスタート手順][3]に従って、最高のエクスペリエンスを実現します。例:
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
 
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
@@ -56,6 +56,7 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
    DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+
    ```
 
    ```bash
@@ -72,7 +73,7 @@ Datadog アプリ内の[クイックスタート手順][3]に従って、最高�
 
    同様に、トレースクライアントは Unix ドメインソケット `/var/run/datadog/dsd.socket` に統計情報を送信しようと試みます。ソケットが存在しない場合、統計情報は `http://localhost:8125` に送信されます。
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -104,32 +105,37 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 
 ### アプリケーションのインスツルメンテーション
 
+<div class="alert alert-info">Kubernetes アプリケーション、または Linux ホストやコンテナ上のアプリケーションからトレースを収集する場合、以下の説明の代わりに、アプリケーションにトレーシングライブラリを挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local">ライブラリの挿入</a>をお読みください。</div>
+
 Agent のインストール後、アプリケーションをトレースする場合は以下の操作を行ってください。
 
-1. 最新の Agent クラスファイルが含まれる `dd-java-agent.jar` をダウンロードします:
+1. 最新のトレーサークラスファイルを含む `dd-java-agent.jar` を、Datadog ユーザーがアクセス可能なフォルダにダウンロードします。
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
-   特定のトレーサーバージョンにアクセスするには、Datadog の [Maven リポジトリ][4]を参照してください。
+
+   **注:** 特定のメジャーバージョンをダウンロードするには、代わりに `https://dtdg.co/java-tracer-vX` リンクを使用します。`vX` は希望のバージョンです。
+   例えば、最新のバージョン 0 には `https://dtdg.co/java-tracer-v0` を使用します。
+   または、特定のバージョンについては、Datadog の [Maven リポジトリ][3]を参照してください。
 
 2. IDE、Maven または Gradle アプリケーションスクリプト、`java -jar` コマンドから、Continuous Profiler、デプロイ追跡、ログ挿入（Datadog へログを送信する場合）を使用してアプリケーションを実行するには、`-javaagent` JVM 引数と、該当する以下のコンフィギュレーションオプションを追加します。
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
 
-    **注:** プロファイリングを有効にすると、APM のバンドルによっては請求に影響を与える場合があります。詳しくは、[料金ページ][5]を参照してください。
+    **注:** プロファイリングを有効にすると、APM のバンドルによっては請求に影響を与える場合があります。詳しくは、[料金ページ][4]を参照してください。
 
 | 環境変数      | システムプロパティ                     | 説明|
 | --------- | --------------------------------- | ------------ |
 | `DD_ENV`      | `dd.env`                  | アプリケーション環境（`production`、`staging` など） |
 | `DD_SERVICE`   | `dd.service`     | 同一のジョブを実行するプロセスセットの名前。アプリケーションの統計のグループ化に使われます。 |
 | `DD_VERSION` | `dd.version` |  アプリケーションのバージョン（例: `2.5`、`202003181415`、`1.3-alpha` など） |
-| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | [継続的プロファイラー][6]を有効化 |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Datadog トレース ID とスパン ID に対する自動 MDC キー挿入を有効にします。詳しくは、[高度な使用方法][7]を参照してください。 |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | [継続的プロファイラー][5]を有効化 |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Datadog トレース ID とスパン ID に対する自動 MDC キー挿入を有効にします。詳しくは、[高度な使用方法][6]を参照してください。 |
 | `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   全サービスのトレースのルートでサンプリングレートを設定します。     |
-| `DD_TRACE_SAMPLING_SERVICE_RULES` | `dd.trace.sampling.service.rules` |   指定したルールに合致するサービスのトレースのルートでのサンプリングレートを設定します。    |
+| `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   指定したルールに合致するサービスのトレースのルートでのサンプリングレートを設定します。    |
 
 追加の[コンフィギュレーションオプション](#configuration) は以下で説明されています。
 
@@ -239,13 +245,13 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
 
-     詳細については、[Oracle のドキュメント][8]を参照してください。
+     詳細については、[Oracle のドキュメント][7]を参照してください。
 
 - classpath に `dd-java-agent` を追加しないでください。予期せぬ挙動が生じる場合があります。
 
 ## 自動インスツルメンテーション
 
-Java の自動インスツルメンテーションは、[JVM によって提供される][9] `java-agent` インスツルメンテーション機能を使用します。`java-agent` が登録されている場合は、ロード時にクラスファイルを変更することができます。
+Java の自動インスツルメンテーションは、[JVM によって提供される][8] `java-agent` インスツルメンテーション機能を使用します。`java-agent` が登録されている場合は、ロード時にクラスファイルを変更することができます。
 
 **注:** リモート ClassLoader でロードされたクラスは、自動的にインスツルメンテーションされません。
 
@@ -258,20 +264,20 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 
 ## コンフィギュレーション
 
-必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][10]を参照してください。
+必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][9]を参照してください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/profiler/enabling/?code-lang=java
-[2]: /ja/tracing/compatibility_requirements/java
-[3]: https://app.datadoghq.com/apm/docs
-[4]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
-[5]: /ja/account_management/billing/apm_tracing_profiler/
-[6]: /ja/profiler/
-[7]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
-[8]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
-[9]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[10]: /ja/tracing/trace_collection/library_config/java/
+[1]: /ja/tracing/compatibility_requirements/java
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
+[4]: /ja/account_management/billing/apm_tracing_profiler/
+[5]: /ja/profiler/
+[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
+[7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
+[8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
+[9]: /ja/tracing/trace_collection/library_config/java/
+[10]: /ja/tracing/trace_collection/compatibility/java/#supported-jvm-runtimes

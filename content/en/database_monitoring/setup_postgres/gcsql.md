@@ -8,7 +8,7 @@ further_reading:
   text: "Basic Postgres Integration"
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
@@ -149,7 +149,7 @@ To configure Database Monitoring metrics collection for an Agent running on a ho
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
-       # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
+       # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
        gcp:
         project_id: '<PROJECT_ID>'
         instance_id: '<INSTANCE_ID>'
@@ -234,7 +234,7 @@ helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
   --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -244,7 +244,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     gcp:
       project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>" \
+      instance_id: "<INSTANCE_ID>"' \
   datadog/datadog
 ```
 
@@ -321,10 +321,12 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 
 ## Install the Cloud SQL integration
 
-To collect more comprehensive database metrics from GCP, install the [Cloud SQL integration][11] (optional).
+To collect more comprehensive database metrics from Google Cloud, install the [Cloud SQL integration][11] (optional).
 
 ## Troubleshooting
 

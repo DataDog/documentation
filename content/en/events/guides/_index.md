@@ -7,11 +7,16 @@ further_reading:
 - link: "/events/explorer/"
   tag: "Documentation"
   text: "Datadog Events Explorer"
-- link: "/monitors/create/types/event/"
+- link: "/monitors/types/event/"
   tag: "Documentation"
   text: "Event Monitors"
 aliases:
     - /developers/events/
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Events Guides
 ---
 
 An event represents any record of activity noteworthy for engineers (devs, ops, and security). 

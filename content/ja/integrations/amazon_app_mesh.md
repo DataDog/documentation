@@ -1,9 +1,10 @@
 ---
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
 - ログの収集
-- web
+- ネットワーク
+- トレーシング
 creates_events: false
 dependencies: []
 description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。

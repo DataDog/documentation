@@ -9,18 +9,24 @@ further_reading:
   - link: "dashboards/querying/#incident-management-analytics"
     tag: "Documentation"
     text: "Incident Management Analytics"
+  - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+    tag: 'Blog'
+    text: 'More efficient pair programming with Datadog CoScreen'
   - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
     tag: 'Blog'
     text: 'Best practices for writing incident postmortems'
+  - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+    tag: "blog"
+    text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
 {{< /site-region >}}
 
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph" style="width:80%;">}}
 
-Any event that may lead to a disruption in your organization’s services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog’s Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
+Any event that may lead to a disruption in your organization's services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog's Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 
 Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
 
@@ -69,7 +75,7 @@ You can also add a monitor to an existing incident.
 
 Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
 
-Declare an incident from an Application Security Monitoring signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
+Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 
 {{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
 
@@ -130,17 +136,17 @@ When you create an incident, an incident modal comes up. This modal has several 
 
 **Additional notifications**: Notify other teams or people.
 
-Click on “Declare Incident” to finish creating your incident.
+Click on **Declare Incident** to finish creating your incident.
 
 ### Updating the incident and the incident timeline
 
-An incident’s status can be updated directly on the incident's overview page, or from Slack within the dedicated incident channel. To update an incident from its Slack channel, use this slash command to open the update modal: `/datadog incident update`
+An incident's status can be updated directly on the incident's overview page, or from Slack within the dedicated incident channel. To update an incident from its Slack channel, use this slash command to open the update modal: `/datadog incident update`
 
 Update the impact section to specify customer impact, the start and end times of the impact, and whether the incident is still active. This section also requires a description of the scope of impact to be completed.
 
 In the incident header, you can see the incident's state, severity, timestamp, impact, and duration, as well as who has responded to the incident. You can also notify responders of updates. There are quick links to chat channels (if not using the Datadog Slack App, video conferencing, and attached postmortem (if one has been added).
 
-Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what’s already investigated. As the author of the timeline notes, you can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
+Timeline data is automatically categorized, so you can use the facets to filter through timeline content. This is particularly useful for long incidents with longer investigations. This makes it easier for ICs and responders to filter through for who is involved, what progress has been made, and what's already investigated. As the author of the timeline notes, you can edit the timestamps and message notes as they are created. You can also flag timeline calls to highlight them to other people monitoring the incident.
 
 #### Status levels
 
@@ -171,7 +177,7 @@ Assessment fields are the metadata and context that you can define per incident.
     * Datadog overrides APM service names in favor of the manually uploaded list.
     * Note that if the service is an APM service and no metrics are posted in the past seven days, it does not appear in the search results.
     * Further integrate with Datadog products and accurately assess service impact. The Services property field is automatically populated with APM services for customers using Datadog APM.
-* **Teams**: Defined under Incident Settings in the [Property Fields][11]. Upload a list of teams from a CSV file. Any values uploaded through CSV are only available within Incident Management for incident assessment purposes.
+* **Teams**: Choose from the [teams][11] defined in your organization. It is not necessary to upload a list of teams from a CSV file. 
 
 ## Data collected
 
@@ -190,13 +196,13 @@ For more information about Incident Management graphs, see [Incident Management 
 
 In addition to integrating with [Slack][7], Incident Management also integrates with:
 
-- [PagerDuty][13] to send incident notifications to PagerDuty.
-- [Jira][14] to create a Jira ticket for an incident.
-- [Webhooks][15] to send incident notifications using webhooks (for example, [sending SMS to Twilio][16]).
+- [PagerDuty][13] and [OpsGenie][14] to send incident notifications to your on-call engineers.
+- [Jira][15] to create a Jira ticket for an incident.
+- [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
 
 ## Ready to try it out?
 
-Work through an example workflow in the [Getting Started with Incident Management][17] guide.
+Work through an example workflow in the [Getting Started with Incident Management][18] guide.
 
 ## Further Reading
 
@@ -212,10 +218,11 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 [8]: /integrations/slack/
 [9]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [10]: /tracing/#2-instrument-your-application
-[11]: https://app.datadoghq.com/incidents/settings#Property-Fields
+[11]: /account_management/teams/
 [12]: /monitors/incident_management/analytics/#overview
 [13]: /integrations/pagerduty/
-[14]: /integrations/jira/
-[15]: /integrations/webhooks/
-[16]: /integrations/webhooks/#sending-sms-through-twilio
-[17]: /getting_started/incident_management
+[14]: /integrations/opsgenie/
+[15]: /integrations/jira/
+[16]: /integrations/webhooks/
+[17]: /integrations/webhooks/#sending-sms-through-twilio
+[18]: /getting_started/incident_management

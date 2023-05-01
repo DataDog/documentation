@@ -250,6 +250,9 @@ You can select one of the following available builtins:
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
+
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
@@ -315,11 +318,15 @@ A unique mailbox is generated at each test execution to avoid conflicts between 
 
 You can run browser tests within other browser tests to reuse existing workflows up to two levels of nesting.
 
-To override variables from subtests in parent tests, ensure the variables created at the parent test level have the same names as the variables present in the subtest. The variable always uses the value that was first assigned to it.
+To use an existing browser test as a subtest, click **Add New Subtest**, select a browser test from the dropdown menu under the **From Existing Test** tab, and click **Add Subtest**.
 
-{{< img src="synthetics/browser_tests/subtest.png" alt="Browser Test Subtest" style="width:60%;" >}}
+To convert steps from your current browser test into a subtest, click on the **Extract From Steps** tab, select the recorded steps you want to extract, and click **Convert to Subtest**. By default, a subtest executes in sequence with the previous steps of the parent test. 
 
-To convert steps from your current browser test into a subtest, select your recorded steps from the **Extract From Steps** tab and click **Convert to Subtest**. By default, the subtest executes in sequence with the previous steps of the parent test. You can select to play the subtest in a **Main**, **New**, **One** (first), **Two** (second), or **Three** (third) window which can be reused in the [**advanced options**][9].
+{{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="Add a subtest in a browser test" style="width:60%;" >}}
+
+In order to override variables from subtests in parent tests, ensure the variables created at the parent test level have the same names as the variables present in the subtest. A variable always uses the value that was first assigned to it. 
+
+For more information about advanced options for subtests, see [Advanced Options for Browser Test Steps][9].
 
 If it does not make sense for you to run your subtest independently, you can pause it. The test continues to be called as part of your parent test, and is not executed individually. For more information, see [Reusing Browser Test Journeys Across Your Test Suite][10].
 
@@ -353,8 +360,6 @@ To define your HTTP request:
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
    * **Digest Auth**: Add Digest authentication credentials. 
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
-   For “Single Chunk” transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
 
    {{% /tab %}}
 
@@ -414,7 +419,7 @@ You can create up to 20 assertions per step by clicking **New Assertion** or by 
 
 #### Extract a variable from the response
 
-Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs.
+Optionally, extract a variable from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
 To start parsing a variable, click **Extract a variable from response content**:
 
@@ -426,7 +431,6 @@ To start parsing a variable, click **Extract a variable from response content**:
 
 {{< img src="synthetics/browser_tests/extracted_variable.png" alt="Extracted variable from response" style="width:80%;" >}}
 
-You can extract up to ten variables per test step. Once created, this variable can be used in the [following steps](#use-variables) of your browser test.
 
 ## Manage step order
 

@@ -1,0 +1,6 @@
+{{ define "main" }}
+  {{ $dot := .}}
+  <h1 id="pagetitle" class="mt-1">{{ .Params.bundle_title }}</h1>
+  <h2>{{ .Title }}</h2>
+  {{ .Content }}
+{{ end }}

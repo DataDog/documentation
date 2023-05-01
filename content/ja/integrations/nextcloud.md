@@ -1,36 +1,57 @@
 ---
+app_id: nextcloud
+app_uuid: a48ccc77-3e72-4e3b-b439-3ebe7e2688b7
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: nextcloud.server.database.size
+      metadata_path: metadata.csv
+      prefix: nextcloud.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Nextcloud
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: emeric.planet@gmail.com
+  support_email: emeric.planet@gmail.com
 categories:
 - コラボレーション
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nextcloud/README.md
-display_name: Nextcloud
+display_on_public_website: true
 draft: false
 git_integration_title: nextcloud
-guid: 852e64eb-93b9-4fb2-8cb2-10041b4045c3
 integration_id: nextcloud
 integration_title: Nextcloud
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: emeric.planet@gmail.com
-manifest_version: 1.0.0
-metric_prefix: nextcloud.
-metric_to_check: nextcloud.server.database.size
+manifest_version: 2.0.0
 name: nextcloud
-public_title: Datadog-Nextcloud インテグレーション
+oauth: {}
+public_title: Nextcloud
 short_description: Nextcloud インスタンスからの総合的な統計を追跡
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Collaboration
+  configuration: README.md#Setup
+  description: Nextcloud インスタンスからの総合的な統計を追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Nextcloud
 ---
 
 

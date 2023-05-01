@@ -33,7 +33,7 @@ All metrics used in the page are based on live traffic data of the **past 1 hour
 
 ## Summary across all environments
 
-Get an overview of the total ingested data over the past hour, and an estimation of your monthly usage against your monthly allocation, calculated with the active APM intrastructure (hosts, Fargate tasks, and serverless functions).
+Get an overview of the total ingested data over the past hour, and an estimation of your monthly usage against your monthly allocation, calculated with the active APM infrastructure (hosts, Fargate tasks, and serverless functions).
 
 If the monthly usage is under `100%`, the projected ingested data fits in your [monthly allotment][3]. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
 
@@ -48,9 +48,19 @@ Click **Manage Agent Ingestion** to get instructions for configuring the Agent s
 You can control three ingestion mechanisms by configuring sampling in the Datadog Agent:
 - **[Head-based Sampling][4]**: When no sampling rules are set for a service, the Datadog Agent automatically computes sampling rates to be applied in libraries, targeting 10 traces per second per Agent. The setting `DD_APM_MAX_TPS` allows you to change the target number of traces per second.
 -  **[Error Spans Sampling][5]**: For traces not caught by head-based sampling, the Datadog Agent catches local error traces up to 10 traces per second per Agent. The setting `DD_APM_ERROR_TPS` allows you to change the target number of traces per second.
--  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces per second per Agent. The setting `DD_APM_DISABLE_RARE_SAMPLER` allows you to disable the collection of rare traces.
+-  **[Rare Spans Sampling][6]**: For traces not caught by head-based sampling, the Datadog Agent catches local rare traces up to 5 traces per second per Agent. This setting is disabled by default. The setting `DD_APM_ENABLE_RARE_SAMPLER` allows you to enable the collection of rare traces.
 
 **Note**: The `Other Ingestion Reasons` (gray) section of the pie chart represents other ingestion reasons which _are not configurable_ at the Datadog Agent level.
+
+### Remotely configure Agent ingestion settings
+
+<div class="alert alert-warning"> Remote configuration for ingestion configuration is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
+
+You can remotely configure these parameters if you are using Agent version [7.42.0][13] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents.
+
+With remote configuration, you can change parameters without having to restart the Agent. Click `Apply` to save the configuration changes, and the new configuration takes effect immediately.
+
+**Note**: Remotely configured parameters take precedence over local configurations such as environment variables and `datadog.yaml` configuration.
 
 ## Managing ingestion for an individual service at the library level
 
@@ -117,18 +127,26 @@ If most of your service ingestion volume is due to decisions taken by upstream s
 
 For further investigations, use the [APM Trace - Estimated Usage Dashboard][12], which provides global ingestion information as well as breakdown graphs by `service`, `env` and `ingestion reason`.
 
+### Agent and tracing library versions
+
+See the **Datadog Agent and tracing library versions** your service is using. Compare the versions in use to the latest released versions to make sure you are running recent and up-to-date Agents and libraries.
+
+{{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent and tracing library versions" >}}
+
+**Note**: You need to upgrade the Agent to v6.34 or v7.34 for the version information to be reported.
+
 ### Configure the service ingestion rate
 
 Click **Manage Ingestion Rate** to get instructions on how to configure your service ingestion rate.
 
 {{< img src="tracing/trace_indexing_and_ingestion/service_ingestion_rate_config.png" style="width:100%;" alt="Change the Service Ingestion Rate" >}}
 
-To specify that a specific percentage of a service's traffic should be sent, add an environment variable or a generated code snippet to your tracer configuration for that service.
+To specify a specific percentage of a service's traffic to be sent, add an environment variable or a generated code snippet to your tracing library configuration for that service.
 
 1. Select the service you want to change the ingested span percent for.
 2. Choose the service language.
 3. Choose the desired ingestion percentage.
-4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service.
+4. Apply the appropriate configuration generated from these choices to the indicated service and redeploy the service. **Note**: The service name value is case sensitive. It should match the case of your service name.
 5. Confirm on the Ingestion Control Page that your new percentage has been applied by looking at the Traffic Breakdown column, which surfaces the sampling rate applied. The ingestion reason for the service is shown as `ingestion_reason:rule`.
 
 
@@ -148,3 +166,5 @@ To specify that a specific percentage of a service's traffic should be sent, add
 [10]: /tracing/trace_pipeline/metrics
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
+[13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
+[14]: /agent/guide/how_remote_config_works/#enabling-remote-configuration

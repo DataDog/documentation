@@ -25,7 +25,7 @@ Scheduled dashboard reports automatically send a visual summary of a dashboard t
 
 ## Schedule a report
 
-Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard’s cog icon and select **Schedule a Report**.
+Create a new report from any dashboard with a grid-based or automatic layout. Click on the dashboard's export icon and select **Schedule a Report**.
 
 The following widget types are supported:
 
@@ -33,14 +33,17 @@ The following widget types are supported:
 - [Distribution][2]
 - [Geomap][3]
 - [Group][4]
-- [Heat Map][5]
+- [Heatmap][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
+- [Pie Chart][16]
 - [Query Value][8]
 - [Scatter Plot][9]
-- [Table][10]
-- [Timeseries][11]
-- [Top List][12]
+- [SLO Summary][10]
+- [SLO List][11]
+- [Table][12]
+- [Timeseries][13]
+- [Top List][14]
 
 ### Set a schedule
 
@@ -58,7 +61,7 @@ Add recipients to your report by entering their email addresses. The email assoc
 
 Finally, customize the report to provide recipients with more context or a tailored view. The optional description appears at the top of each report to provide more context on the dashboard.
 
-Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard’s defaults. 
+Click **Edit Template Variables** to modify the filters applied when the report is sent. These values do not affect the underlying dashboard's defaults. 
 
 To see the report before saving the schedule, click **Send Preview**. You can pause a report schedule at any time.
 
@@ -73,11 +76,15 @@ From the configuration modal that opens, you can pause an existing report or cre
 
 ## Permissions
 
-Only users with the **Dashboard Report Write** permission can generate a report. This permission is turned on by default for Admins and off for all other roles. 
+Only users with the **Dashboard Report Write** permission can generate a report. This permission is turned on by default for Admins and off for all other roles.
 
-Images generated in reports show all data regardless of granular read restrictions. We recommend limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn more about managing roles and permissions, read our [account management documentation][13]. 
+Images generated in reports show all data regardless of granular read restrictions. Datadog recommends limiting the report permissions to users who have no granular read restrictions on data. To grant a user the **Dashboard Report Write** permission, create a new role with the **Dashboards Report Write** permission turned on and assign the user to this role. Alternatively, assign the **Admin** role to this user. To learn about managing roles and permissions, see [User Management][17]. 
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="A screenshot of an individual user's permissions from within the organization settings page. The dashboards report write permission is highlighted under the dashboards section" style="width:100%;" >}}
+
+Users with the Admin role or **Org Management** permission can enable or disable the scheduled reports feature for an account from the **Settings** tab under [Public Sharing][15] in **Organization Settings**.
+
+{{< img src="dashboards/scheduled_reports/report_management.png" alt="The Report Management setting under the Settings tab in Public Sharing within Organization Settings in Datadog with the setting Enabled" style="width:100%;" >}}
 
 ## Further Reading
 
@@ -87,12 +94,17 @@ Images generated in reports show all data regardless of granular read restrictio
 [2]: /dashboards/widgets/distribution/
 [3]: /dashboards/widgets/geomap/
 [4]: /dashboards/widgets/group/
-[5]: /dashboards/widgets/heat_map/
+[5]: /dashboards/widgets/heatmap/
 [6]: /dashboards/widgets/monitor_summary/
 [7]: /dashboards/widgets/note/
 [8]: /dashboards/widgets/query_value/
 [9]: /dashboards/widgets/scatter_plot/
-[10]: /dashboards/widgets/table/
-[11]: /dashboards/widgets/timeseries/
-[12]: /dashboards/widgets/top_list/
-[13]: /account_management/users/#edit-a-user-s-roles
+[10]: /dashboards/widgets/slo/
+[11]: /dashboards/widgets/slo_list/
+[12]: /dashboards/widgets/table/
+[13]: /dashboards/widgets/timeseries/
+[14]: /dashboards/widgets/top_list/
+[15]: /account_management/org_settings/#public-sharing
+[16]: /dashboards/widgets/pie_chart/
+[17]: /account_management/users
+

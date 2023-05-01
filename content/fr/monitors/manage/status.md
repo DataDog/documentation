@@ -3,7 +3,7 @@ aliases:
 - /fr/monitors/monitor_status/
 description: Visualiser l'évolution du statut de votre monitor au fil du temps
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: Documentation
   text: Créer des monitors
 - link: /monitors/notify/
@@ -129,7 +129,7 @@ Pour [importer un monitor][9] dans Datadog au format JSON, utilisez la navigatio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/monitors/create/
+[1]: /fr/monitors/
 [2]: /fr/monitors/notify/downtimes/
 [3]: /fr/api/v1/monitors/
 [4]: /fr/dashboards/querying/

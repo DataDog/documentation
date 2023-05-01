@@ -1,26 +1,26 @@
 ---
-title: Utilisation du Forwarder Datadog avec Node
 kind: guide
+title: Instrumenter des applications Node.js sans serveur avec le Forwarder Datadog
 ---
-Si vous découvrez tout juste les capacités sans serveur de Datadog, nous vous recommandons d'utiliser les [fonctionnalités Lambda clés en main][1]. À l'inverse, si vous avez configuré les fonctionnalités sans serveur Datadog à l'aide du Forwarder Datadog, avant que les fonctionnalités Lambda clés en main ne soient proposées, lisez ce guide pour gérer votre instance.
 
-## Configuration requise
+## Présentation
 
-Si vous ne l'avez pas encore fait :
+<div class="alert alert-warning">
+Si vous commencez tout juste à utiliser la surveillance sans serveur Datadog, suivez plutôt les <a href="/serverless/installation/nodejs">instructions d'instrumentation des fonctions Lambda avec l'extension Lambda Datadog</a>. Si vous avez configuré la surveillance sans serveur Datadog avec le Forwarder Datadog avant que les fonctionnalités Lambda clés en main ne soient proposées, consultez ce guide pour gérer votre instance.
+</div>
 
-- Installez [l'intégration AWS][2]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS.
-- Installez la [fonction Lambda du Forwarder Datadog][3], qui est nécessaire pour l'ingestion des traces, des métriques optimisées, des métriques custom et des logs AWS Lambda.
+## Prérequis
 
-Après avoir installé l'[intégration AWS][2] et le [Forwarder Datadog][3], suivez les étapes suivantes pour instrumenter votre application afin d'envoyer des métriques, des logs et des traces à Datadog.
+Pour ingérer des traces AWS Lambda, des métriques optimisées, des métriques custom et des logs, vous devez utiliser la [fonction Lambda du Forwarder Datadog][1].
 
-## Configuration
+## Procédure à suivre
 
 {{< tabs >}}
 {{% tab "Interface de ligne de commande Datadog" %}}
 
-L'interface de ligne de commande Datadog modifie les configurations des fonctions Lambda existantes pour activer l'instrumentation sans exiger un nouveau déploiement. Il s'agit du moyen le plus rapide pour commencer avec la surveillance sans serveur de Datadog.
+L'interface de ligne de commande Datadog permet de modifier les configurations des fonctions Lambda existantes pour instrumenter vos applications sans les redéployer. Il s'agit du moyen le plus rapide de tirer parti de la surveillance sans serveur de Datadog.
 
-Vous pouvez également ajouter la commande à vos pipelines de CI/CD pour activer l'instrumentation pour toutes vos applications sans serveur. Lancez la commande *après* le déploiement normal de votre application sans serveur, de sorte que les modifications apportées par l'interface de ligne de commande Datadog ne soient pas écrasées.
+Vous pouvez également ajouter la commande à vos pipelines de CI/CD pour instrumenter toutes vos applications sans serveur. Lancez la commande *après* le déploiement normal de votre application sans serveur, de sorte que les modifications apportées par l'interface de ligne de commande Datadog ne soient pas écrasées.
 
 ### Installation
 
@@ -42,7 +42,7 @@ Pour instrumenter la fonction, exécutez la commande suivante avec vos [identifi
 datadog-ci lambda instrument -f <nomfonction> -f <autre_nomfonction> -r <région_aws> -v <version_couche> --forwarder <arn_forwarder>
 ```
 
-Pour remplir les paramètres fictifs, procédez comme suit :
+Renseignez les paramètres fictifs comme suit :
 - Remplacez `<nomfonction>` et `<autre_nomfonction>` par les noms de vos fonctions Lambda.
 - Remplacez `<région_aws>` par le nom de la région AWS.
 - Remplacez `<version_couche>` par la version souhaitée de la bibliothèque Lambda Datadog. La dernière version est `{{< latest-lambda-layer-version layer="node" >}}`.
@@ -94,7 +94,7 @@ Pour installer et configurer le plug-in Serverless Datadog, suivez les étapes s
 [1]: https://docs.datadoghq.com/fr/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [3]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
-[4]: /fr/serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /fr/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 {{% /tab %}}
 {{% tab "AWS SAM" %}}
@@ -130,7 +130,7 @@ Transform:
       env: "<ENVIRONNEMENT>" # Facultatif
 ```
 
-Pour remplir les paramètres fictifs, procédez comme suit :
+Renseignez les paramètres fictifs comme suit :
 - Remplacez `<ARN_FORWARDER>` par l'ARN du Forwarder (voir la [documentation sur le Forwarder][2]).
 - Remplacez `<SERVICE>` et `<ENVIRONNEMENT>` par votre service et votre environnement.
 
@@ -185,7 +185,7 @@ class CdkStack extends cdk.Stack {
 }
 ```
 
-Pour remplir les paramètres fictifs, procédez comme suit :
+Renseignez les paramètres fictifs comme suit :
 
 - Remplacez `<ARN_FORWARDER>` par l'ARN du Forwarder (voir la [documentation sur le Forwarder][2]).
 - Remplacez `<SERVICE>` et `<ENVIRONNEMENT>` par votre service et votre environnement.
@@ -261,10 +261,10 @@ arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-Les options `RUNTIME` disponibles sont `Node10-x` et `Node12-x`. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
+Les options `RUNTIME` disponibles sont `Node12-x`, `Node14-x` et `Node16-x`. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node12-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][2] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.
@@ -308,7 +308,7 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-config-update
 [3]: https://www.npmjs.com/package/datadog-lambda-js
-[4]: /fr/serverless/troubleshooting/serverless_tracing_and_webpack/
+[4]: /fr/serverless/guide/serverless_tracing_and_webpack/
 [5]: https://webpack.js.org/
 [6]: https://docs.datadoghq.com/fr/serverless/forwarder/
 [7]: https://docs.datadoghq.com/fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
@@ -317,11 +317,11 @@ Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonct
 
 ### Tag
 
-Bien que cette opération soit facultative, Datadog vous recommande fortement d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur. Pour ce faire, suivez la [documentation relative au tagging de service unifié][4].
+Bien que cette opération soit facultative, Datadog vous recommande d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur. Pour ce faire, suivez la [documentation relative au tagging de service unifié][2].
 
 ## Utilisation
 
-Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][5].
+Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][3].
 
 ## Surveiller une logique opérationnelle personnalisée
 
@@ -374,17 +374,15 @@ exports.handler = async (event) => {
 };
 ```
 
-Pour en savoir plus sur l'envoi de métriques custom, consultez [cette page][6]. Pour obtenir plus d'informations sur l'instrumentation personnalisée, consultez la [documentation dédiée][7].
+Pour en savoir plus sur l'envoi de métriques custom, consultez la section [Métriques custom à partir d'applications sans serveur][4]. Pour en savoir plus sur l'instrumentation personnalisée, consultez la documentation de l'APM Datadog relative à l'[instrumentation personnalisée][5].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /fr/serverless/installation
-[2]: /fr/integrations/amazon_web_services/
-[3]: /fr/serverless/forwarder
-[4]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[5]: https://app.datadoghq.com/functions
-[6]: /fr/serverless/custom_metrics?tab=nodejs
-[7]: /fr/tracing/custom_instrumentation/nodejs/
+[1]: /fr/serverless/forwarder
+[2]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[3]: https://app.datadoghq.com/functions
+[4]: /fr/serverless/custom_metrics?tab=nodejs
+[5]: /fr/tracing/custom_instrumentation/nodejs/

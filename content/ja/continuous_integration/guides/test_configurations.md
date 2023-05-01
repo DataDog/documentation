@@ -3,7 +3,7 @@ further_reading:
 - link: /continuous_integration/guides/flaky_test_management
   tag: ガイド
   text: 不安定なテストの管理
-- link: /continuous_integration/explore_tests
+- link: /continuous_integration/tests
   tag: ドキュメント
   text: テストの確認
 kind: ガイド

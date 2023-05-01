@@ -26,6 +26,7 @@ Follow instructions to register for the Basic Tier and begin training.
 
 Head over to the [Partner Portal][4]. Log in and click **Training**. Under Sales Certification, click **Get started today**.
 
+
 {{<img src="partners/sales-enablement/portal_sales_go.png" alt="DPN Sales Certification" style="max-width:734px">}}
 
 This course walks you through the basics you need to work with your opportunity.
@@ -75,6 +76,7 @@ This course:
 - Describes customer success 
 - Helps you position individual product offerings
 
+
 If your organization is new to Datadog, this is the right time to develop your service offering. The Technical certification course prepares you for developing the service offering and it should be completed at this stage. Reach out to your PSM to get and validate ideas.
 
 If the service offering already exists, review it at this stage to put your new Datadog knowledge in the context of your organization's market positioning.
@@ -97,6 +99,7 @@ In order to complete your quote, you need to learn the Datadog pricing basics.
 - [Customer plans][3] provides details about standard end-customer pricing options.
 - Finally, to understand discounts offered, check out the Partner Portal[4] pricing tab.
 
+
 ---
 
 Once you go through the recommended training outlined above, you're ready 
@@ -104,9 +107,8 @@ to lead a customer to an effective observability solution and close the sale for
 
 Remember to loop in your PSM to provide additional help as you engage with the opportunity and to register the deal at the Partner Portal[4].
 
-
 [1]: https://learn.datadoghq.com/bundles/dd-fundamentals
 [2]: /account_management/billing/pricing/
 [3]: https://www.datadoghq.com/pricing/
 [4]: https://partners.datadoghq.com/
-[5]: #datadog-basics
+

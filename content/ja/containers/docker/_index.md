@@ -37,10 +37,10 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
-| Docker Hub     | GCR          |ECR-Public         |
+| ECR-Public    | Docker Hub          | GCR        |
 |----------------|--------------|-----------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
-| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
+| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
+ |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
 
 
 このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
@@ -94,7 +94,7 @@ docker run -d --cgroupns host --pid host --name dd-agent -v /var/run/docker.sock
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Datadog Agent は、Windows Server 2019 (LTSC) とバージョン 1909 (SAC) でサポートされています。
+Datadog Agent は、Windows Server 2019 (LTSC) と Windows Server 2022 (LTSC) でサポートされています。
 
 ```shell
 docker run -d --name dd-agent -e DD_API_KEY=<API_KEY> -v \\.\pipe\docker_engine:\\.\pipe\docker_engine gcr.io/datadoghq/agent
@@ -129,6 +129,7 @@ docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v
 ## インテグレーション
 
 クラスター内で Agent を起動し、実行したら、[Datadog のオートディスカバリー機能][12]を使ってアプリケーションコンテナからメトリクスとログを自動的に収集します。
+
 
 ## 環境変数
 
@@ -184,7 +185,7 @@ Agent v6.4.0 (トレース Agent の場合は v6.5.0) より、以下の環境�
 | `DD_DOGSTATSD_SOCKET`            | リスニングする UNIX ソケットのパス。`rw` でマウントされたボリューム内にある必要があります。                                                                                    |
 | `DD_DOGSTATSD_ORIGIN_DETECTION`  | UNIX ソケットのメトリクス用にコンテナの検出とタグ付けを有効にします。                                                                                            |
 | `DD_DOGSTATSD_TAGS`              | この DogStatsD サーバーが受信するすべてのメトリクス、イベント、サービスのチェックに付加する追加タグ。たとえば `"env:golden group:retrievers"` のように追加します。 |
-| `DD_DOGSTATSD_DISABLE`           | DogStatsD ライブラリからのカスタムメトリクス送信を無効化                                                                                                |
+| `DD_USE_DOGSTATSD`           | DogStatsD ライブラリからのカスタムメトリクスの送信を有効または無効にします。                                                                                                |
 詳しくは、[Unix ドメインソケット上の DogStatsD][21] を参照してください。
 
 ### タグ付け

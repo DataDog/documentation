@@ -1,6 +1,7 @@
 ---
 title: Configure the Datadog Tracing Library
 kind: documentation
+type: multi-code-lang
 ---
 
 For information about configuration options for tracing libraries, choose your language:

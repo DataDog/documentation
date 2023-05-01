@@ -43,7 +43,7 @@ AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 イ�
 
 ### メトリクスの収集
 
-1. Datadog の [AWS インテグレーションタイル][2]のメトリクス収集で、`AutoScaling` をオンにします。
+1. Datadog [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `AutoScaling` が有効になっていることを確認します。
 2. AWS の Auto Scaling データは CloudWatch に送信する必要があります。詳細は、[Auto Scaling グループメトリクスを有効にする][3]を参照してください。
 3. AWS Auto Scaling のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][4]に追加します。詳細については、AWS ウェブサイト上の [Auto Scaling ポリシー][5]を参照してください。
 
@@ -98,11 +98,11 @@ ASG メトリクスを Datadog に表示するには、まず、それらのメ�
 ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-monitoring.html#as-enable-group-metrics
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [5]: https://docs.aws.amazon.com/autoscaling/plans/userguide/auth-and-access-control.html
-[6]: https://app.datadoghq.com/account/settings#integrations/amazon_auto_scaling
+[6]: https://app.datadoghq.com/integrations/amazon-auto-scaling
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

@@ -25,6 +25,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/teradata/README.md
@@ -33,7 +34,7 @@ draft: false
 git_integration_title: teradata
 integration_id: teradata
 integration_title: Teradata
-integration_version: 1.0.1
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -47,9 +48,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Caching
+  - Category::Data Store
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Data Store
   configuration: README.md#Setup
   description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
   media: []
@@ -62,13 +64,15 @@ tile:
 
 ## 概要
 
-このチェックは、Datadog Agent を通じて [Teradata][1] を監視します。
+[Teradata][1] は、マルチクラウドデータプラットフォーム内のエンタープライズレベルのリレーショナルデータベース管理システムです。
+
+このチェックでは、Datadog Agent を通じて Teradata を監視します。Datadog-Teradata インテグレーションを有効にして、Teradata のパフォーマンス、ディスク使用量、リソース消費量を表示します。
 
 ## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Teradata チェックは [Datadog Agent][3] パッケージに含まれています。
 

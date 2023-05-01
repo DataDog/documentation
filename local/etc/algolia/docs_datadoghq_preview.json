@@ -27,7 +27,9 @@
                     "account_management",
                     "synthetics",
                     "database_monitoring",
-                    "profiler"
+                    "profiler",
+                    "cloud_cost_management",
+                    "universal_service_monitoring"
                 ]
             },
             "tags": ["faq"],
@@ -45,6 +47,7 @@
                     "tracing",
                     "logs",
                     "synthetics",
+                    "continuous_testing",
                     "network_monitoring/devices",
                     "serverless",
                     "real_user_monitoring",
@@ -101,6 +104,7 @@
                     "account_management",
                     "agent",
                     "continuous_integration",
+                    "coscreen",
                     "dashboards",
                     "developers",
                     "events",
@@ -115,12 +119,16 @@
                     "security",
                     "security_platform",
                     "synthetics",
+                    "continuous_testing",
                     "tracing",
                     "serverless",
                     "watchdog",
                     "database_monitoring",
                     "profiler",
-                    "containers"
+                    "containers",
+                    "cloud_cost_management",
+                    "universal_service_monitoring",
+                    "glossary"
                 ]
             },
             "tags": ["docs"],

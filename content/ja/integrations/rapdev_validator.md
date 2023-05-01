@@ -26,9 +26,11 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- コンプライアンス
+- 構成 & デプロイ
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -54,16 +56,18 @@ public_title: Tag Validator
 short_description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - カテゴリ::コンプライアンス
+  - Category::Configuration & Deployment
   - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
   media:
@@ -73,6 +77,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Tag Validator
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -81,23 +86,25 @@ tile:
 RapDev Validator は、Datadog 環境でのタグモニタリングと Agent のコンプライアンス問題を解決するのに役立ちます。インテグレーションはタグキーのリストと、お使いの環境のタグ付け戦略に基づく許容値を受け取り、それらをメトリクスおよびサービスチェックとして Datadog インスタンスに報告します。このようにして、お使いの環境内のホストに正しいタグが割り当てられているかを表示することができます。
 
 ### ダッシュボード  
-1. RapDev Validator ダッシュボード
+1. RapDev Validator ホストダッシュボード
+2. RapDev Validator Synthetic ダッシュボード
+3. RapDev Validator ダッシュボード
 
-### モニター
+### アラート設定
 1. ホストに必要なタグキーが割り当てられていない
 2. ホストのタグキーに非準拠の値が割り当てられている
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- メール: datadog-engineering@rapdev.io
+- メール: support@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-validator" target="_blank">こちらをクリック</a>してください。

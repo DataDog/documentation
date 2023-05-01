@@ -15,15 +15,16 @@ further_reading:
 
 The treemap widget allows you to display proportions of one or datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
 
-{{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="A treemap widget with unique page views stemming from the Real User Monitoring (RUM) dataset are shown at both the country and browser level. The outer groups - distinguished by color - shows the user’s country.">}}
+{{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="A treemap widget with unique page views stemming from the Real User Monitoring (RUM) dataset are shown at both the country and browser level. The outer groups - distinguished by color - shows the user's country.">}}
 
 ## Configuration
 
-1. Select one or more data sources from metrics or events.
+1. Select from the available data sources. 
+2. Configure the query, see the following resources for more information:
     * Metrics: See the [querying ][1] documentation to configure a metric query.
     * Events: See the [log search][2] documentation to configure a log event query.
-2. (Optional) Modify query with a [formula][3].
-3. Customize your graph.
+3. (Optional) Modify query with a [formula][3].
+4. Customize your graph.
 
 ## Customization
 
@@ -49,7 +50,7 @@ To access the context menu, first hover over an individual category: this can be
 
 ### Full-screen
 
-Viewing the pie chart widget in full-screen reveals the standard set of [full-screen options][5].
+Viewing the treemap widget in full-screen reveals the standard set of [full-screen options][5].
 
 ## API
 

@@ -18,7 +18,7 @@ assets:
     source_type_name: Cyral
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Cyral
   sales_email: product@cyral.com
   support_email: product@cyral.com
 categories:

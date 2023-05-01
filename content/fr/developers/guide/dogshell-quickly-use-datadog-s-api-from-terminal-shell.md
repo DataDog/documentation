@@ -65,6 +65,7 @@ Vous pouvez [consulter le code de Dogshell][4] à des fins de référence. Toute
 * `dog downtime`
 * `dog timeboard`
 * `dog screenboard`
+* `dog dashboard`
 * `dog host`
 * `dog tag`
 * `dog search`

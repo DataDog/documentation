@@ -37,7 +37,7 @@ Amazon Redshift は、ペタバイトスケールの高速なフルマネージ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Redshift` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Redshift` が有効になっていることを確認します。
 2. Amazon Redshift のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     - `redshift:DescribeClusters`: アカウント内のすべての Redshift クラスターを一覧表示します。
@@ -96,10 +96,10 @@ AWS Redshift インテグレーションには、サービスのチェック機�
 ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-authentication-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_redshift
+[5]: https://app.datadoghq.com/integrations/amazon-redshift
 [6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tabs=awsconsole#collecting-logs-from-s3-buckets
 [7]: https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing-console.html
 [8]: https://docs.datadoghq.com/ja/logs/guide/forwarder/

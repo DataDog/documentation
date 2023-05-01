@@ -12,29 +12,29 @@ kind: documentation
 
 Datadog generates enhanced Lambda metrics from your Lambda runtime out-of-the-box with low latency, several second granularity, and detailed metadata for cold starts and custom tags.
 
-Enhanced Lambda metrics give you a view above and beyond the default [Lambda metrics][1] enabled with the AWS Lambda integration. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog’s best practice for setting real-time monitors on your serverless application health.
+Enhanced Lambda metrics give you a view above and beyond the default [Lambda metrics][1] enabled with the AWS Lambda integration. These metrics are distinguished by being in the `aws.lambda.enhanced.*` namespace, and are Datadog's best practice for setting real-time monitors on your serverless application health.
 
 ### Real-time enhanced Lambda metrics
 
 The following real-time enhanced Lambda metrics are available, and they are tagged with the `aws_account`, `region`, `functionname`, `cold_start`, `memorysize`, `executedversion`, `resource` and `runtime`. These metrics are [distributions][2], and you can query them using the `count`, `min`, `max`, `sum`, and `avg` aggregations.
 
 
-`aws.lambda.enhanced.invocations`     
+`aws.lambda.enhanced.invocations`
 : Measures the number of times a function is invoked in response to an event or an invocation of an API call.
 
-`aws.lambda.enhanced.errors`          
+`aws.lambda.enhanced.errors`
 : Measures the number of invocations that failed due to errors in the function.
 
-`aws.lambda.enhanced.max_memory_used` 
+`aws.lambda.enhanced.max_memory_used`
 : Measures the maximum amount of memory (mb) used by the function.
 
-`aws.lambda.enhanced.duration`        
+`aws.lambda.enhanced.duration`
 : Measures the elapsed seconds from when the function code starts executing as a result of an invocation to when it stops executing.
 
-`aws.lambda.enhanced.billed_duration` 
+`aws.lambda.enhanced.billed_duration`
 : Measures the billed amount of time the function ran for (100ms increments).
 
-`aws.lambda.enhanced.init_duration` 
+`aws.lambda.enhanced.init_duration`
 : Measures the initialization time (second) of a function during a cold start.
 
 `aws.lambda.enhanced.runtime_duration`
@@ -43,13 +43,22 @@ The following real-time enhanced Lambda metrics are available, and they are tagg
 `aws.lambda.enhanced.post_runtime_duration`
 : Measures the elapsed milliseconds from when the function code returns the response back to the client to when the function stops executing, representing the duration added by Lambda extension executions.
 
-`aws.lambda.enhanced.estimated_cost`  
+`aws.lambda.enhanced.response_latency`
+: Measures the elapsed time in milliseconds from when the invocation request is received to when the first byte of response is sent to the client.
+
+`aws.lambda.enhanced.response_duration`
+: Measures the elapsed time in milliseconds from when the first byte of response to the last byte of response is sent to the client.
+
+`aws.lambda.enhanced.produced_bytes`
+: Measures the number of bytes returned by a function.
+
+`aws.lambda.enhanced.estimated_cost`
 : Measures the total estimated cost of the function invocation (US dollars).
 
-`aws.lambda.enhanced.timeouts`  
+`aws.lambda.enhanced.timeouts`
 : Measures the number of times a function times out.
 
-`aws.lambda.enhanced.out_of_memory`  
+`aws.lambda.enhanced.out_of_memory`
 : Measures the number of times a function runs out of memory.
 
 ## Enable enhanced Lambda metrics

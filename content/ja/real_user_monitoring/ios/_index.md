@@ -12,9 +12,12 @@ further_reading:
 - link: /real_user_monitoring
   tag: ドキュメント
   text: RUM データの調査方法
-- link: /real_user_monitoring/ios/crash_reporting/
+- link: /real_user_monitoring/error_tracking/ios/
   tag: ドキュメント
-  text: RUM のクラッシュレポートとエラーの傾向を見る
+  text: iOS のエラーの追跡方法について
+- link: /real_user_monitoring/ios/swiftui/
+  tag: ドキュメント
+  text: SwiftUI アプリケーションのインスツルメンテーションについて
 kind: documentation
 title: RUM iOS と tvOS のモニタリング
 ---
@@ -310,26 +313,22 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {{% /tab %}}
 {{< /tabs >}}
 
-### バックグラウンドイベントの追跡
+## バックグラウンドイベントの追跡
+
+<div class="alert alert-info"><p>バックグラウンドイベントを追跡すると、セッションが追加され、課金に影響を与える可能性があります。ご質問は、<a href="https://docs.datadoghq.com/help/">Datadog サポートまでお問い合わせ</a>ください。</p>
+</div>
 
 アプリケーションがバックグラウンドにあるとき (例えば、アクティブなビューがないとき)、クラッシュやネットワークリクエストなどのイベントを追跡することができます。
 
 Datadog の構成で、初期化時に以下のスニペットを追加します。
 
-{{< tabs >}}
-{{% tab "Swift" %}}
 ```swift
 .trackBackgroundEvents()
-
 ```
-{{% /tab %}}
-{{< /tabs >}}
-<div class="alert alert-info"><p>バックグラウンドイベントを追跡すると、セッションが追加され、課金に影響を与える可能性があります。ご質問は、<a href="https://docs.datadoghq.com/help/">Datadog サポートまでお問い合わせ</a>ください。</p>
-</div>
 
-## アクセスの未処理エラー
+## iOS エラーの追跡
 
-iOS のクラッシュレポートとエラー追跡では、問題と最新の利用可能なエラーが表示されます。エラーの詳細と JSON を含む属性を [RUM エクスプローラー][10]で表示できます。
+[iOS のクラッシュレポートとエラー追跡][13]では、アプリケーションの問題と最新の利用可能なエラーが表示されます。エラーの詳細と JSON を含む属性を [RUM エクスプローラー][10]で表示できます。
 
 ## その他の参考資料
 
@@ -348,3 +347,4 @@ iOS のクラッシュレポートとエラー追跡では、問題と最新の�
 [10]: https://docs.datadoghq.com/ja/real_user_monitoring/explorer/
 [11]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags/#rum--session-replay
 [12]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/web_view_tracking/
+[13]: https://docs.datadoghq.com/real_user_monitoring/error_tracking/ios/

@@ -15,7 +15,7 @@ assets:
     source_type_name: Riak MDC Replication
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: britt.treece@gmail.com
   support_email: britt.treece@gmail.com
 categories:

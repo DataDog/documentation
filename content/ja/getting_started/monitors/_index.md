@@ -5,7 +5,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: ブログ
   text: モニター入門 重要事項をアラート
-- link: /monitors/create/types/metric/
+- link: /monitors/types/metric/
   tag: ドキュメント
   text: メトリクスモニター
 - link: /monitors/notify/
@@ -45,7 +45,7 @@ Datadog で[メトリクスモニター][5]を作成するには、メインナ�
 
 ディスク容量不足のアラートを発生させるには、メトリクスがしきい値を`超えた`ときにモニターをトリガーする必要があります。しきい値はオプションで設定します。このメトリクスの場合、適切な値の範囲は `0` から `1` です。
 
-{{< img src="getting_started/application/alert_thresholds.png" alt="アラートのセットアップ"  >}}
+{{< img src="getting_started/application/monitor_configuration.png" alt="Create Monitor ページ内のメトリクスモニター構成設定、Multi Alert を選択し、メトリクスを報告している各ホストとデバイスの過去 5 分間のクエリの平均でアラートを出すように構成されています。Set alert conditions セクションは、評価された値が任意のホストまたはデバイスのしきい値を超えたときにトリガーするように構成されており、Alert しきい値は 0.9 に、Warning しきい値は 0.8 に設定され、データが不足している場合は通知しないようにモニターが構成されています"  >}}
 
 この例では、このセクションの他の設定はデフォルトのままになっています。詳細については、[メトリクスモニター][7]のドキュメントを参照してください。
 

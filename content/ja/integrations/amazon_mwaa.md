@@ -35,8 +35,7 @@ Amazon Managed Workflows for Apache Airflow (Amazon MWAA) は、クラウド上�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]の "Limit metric collection by AWS service" という項目で、
-   `MWAA` にチェックが入っていることを確認します。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MWAA` が有効になっていることを確認します。
 2. [Datadog - Amazon MWAA インテグレーション][3]をインストールします。
 
 ## 収集データ
@@ -58,7 +57,7 @@ Amazon MWAA インテグレーションには、サービスのチェック機�
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-mwaa
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-mwaa
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mwaa/amazon_mwaa_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

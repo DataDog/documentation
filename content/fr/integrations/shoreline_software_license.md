@@ -1,68 +1,69 @@
 ---
-"app_id": "shoreline-software-license"
-"app_uuid": "d1da5605-5ef5-47bc-af8d-16005945e21e"
-"assets": {}
-"author":
-  "homepage": "https://shoreline.io/"
-  "name": Shoreline.io
-  "sales_email": sales@shoreline.io
-  "support_email": support@shoreline.io
-  "vendor_id": shoreline
-"categories":
+app_id: shoreline-software-license
+app_uuid: d1da5605-5ef5-47bc-af8d-16005945e21e
+assets: {}
+author:
+  homepage: https://shoreline.io/
+  name: Shoreline.io
+  sales_email: sales@shoreline.io
+  support_email: support@shoreline.io
+  vendor_id: shoreline
+categories:
 - automation
 - marketplace
-"classifier_tags":
-- "Supported OS::Linux"
-- "Category::Automation"
-- "Category::Marketplace"
-- "Offering::Software License"
-"dependencies": []
-"display_on_public_website": true
-"draft": false
-"git_integration_title": "shoreline_software_license"
-"integration_id": "shoreline-software-license"
-"integration_title": "Shoreline.io"
-"integration_version": ""
-"is_public": true
-"kind": "integration"
-"legal_terms":
-  "eula": assets/terms_of_service_shoreline.pdf
-"manifest_version": "2.0.0"
-"name": "shoreline_software_license"
-"oauth": {}
-"pricing":
-- "billing_type": tag_count
-  "includes_assets": true
-  "metric": datadog.marketplace.shoreline.shoreline
-  "product_id": software-license
-  "short_description": Par host/mois. Aucun coût supplémentaire pour les pods ou les conteneurs.
-  "tag": host
-  "unit_label": Host
-  "unit_price": !!int "25"
-"public_title": "Shoreline.io"
-"short_description": "Automatiser le rétablissement des monitors déclenchés"
-"supported_os":
+dependencies: []
+display_on_public_website: true
+draft: false
+git_integration_title: shoreline_software_license
+integration_id: shoreline-software-license
+integration_title: Shoreline.io
+integration_version: ''
+is_public: true
+kind: integration
+legal_terms:
+  eula: assets/terms_of_service_shoreline.pdf
+manifest_version: 2.0.0
+name: shoreline_software_license
+oauth: {}
+pricing:
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.shoreline.shoreline
+  product_id: software-license
+  short_description: Par host/mois. Aucun coût supplémentaire pour les pods ou les
+    conteneurs.
+  tag: host
+  unit_label: Host
+  unit_price: 25
+public_title: Shoreline.io
+short_description: Automatiser le rétablissement des monitors déclenchés
+supported_os:
 - linux
-"tile":
-  "changelog": CHANGELOG.md
-  "configuration": "README.md#Setup"
-  "description": Automatiser le rétablissement des monitors déclenchés
-  "media":
-  - "caption": Dashboard de remédiation
-    "image_url": images/remediation_dashboard.png
-    "media_type": image
-  - "caption": Exemple de configuration d'automatisation de la remédiation
-    "image_url": images/automate_remediation.png
-    "media_type": image
-  - "caption": Exemple de debugging et de rétablissement interactifs pour tout un parc
-    "image_url": images/fleetwide_interactive_debugging_and_repair.png
-    "media_type": image
-  - "caption": Exemple de détails des commandes Linux pour tout un parc
-    "image_url": images/fleetwide_linux_command_details.png
-    "media_type": image
-  "overview": "README.md#Overview"
-  "support": "README.md#Support"
-  "title": Shoreline.io
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Category::Automation
+  - Category::Marketplace
+  - Offering::Software License
+  configuration: README.md#Setup
+  description: Automatiser le rétablissement des monitors déclenchés
+  media:
+  - caption: Dashboard de remédiation
+    image_url: images/remediation_dashboard.png
+    media_type: image
+  - caption: Exemple de configuration d'automatisation de la remédiation
+    image_url: images/automate_remediation.png
+    media_type: image
+  - caption: Exemple de debugging et de rétablissement interactifs pour tout un parc
+    image_url: images/fleetwide_interactive_debugging_and_repair.png
+    media_type: image
+  - caption: Exemple de détails des commandes Linux pour tout un parc
+    image_url: images/fleetwide_linux_command_details.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Shoreline.io
 ---
 
 
@@ -95,3 +96,5 @@ Pour en savoir plus, consultez la [documentation Shoreline][9] (en anglais).
 [8]: images/link_icon.svg
 [9]: https://docs.shoreline.io/
 [10]: https://app.datadoghq.com/account/settings#integrations/shoreline-integration
+---
+Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. <a href="https://app.datadoghq.com/marketplace/app/shoreline-software-license" target="_blank">Cliquez ici</a> pour l'acheter.

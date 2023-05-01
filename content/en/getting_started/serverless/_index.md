@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Serverless Monitoring
+title: Getting Started with AWS Lambda Serverless Monitoring
 kind: documentation
 
 further_reading:
@@ -96,7 +96,7 @@ Datadog generates enhanced Lambda metrics out-of-the-box with low latency, sever
 
 
 ### Invocations
-The **Invocations** tab displays your function’s latest invocations. 
+The **Invocations** tab displays your function's latest invocations. 
 
 Each invocation is associated with a trace. Click on **Open Trace** to see the trace for each invocation:
 

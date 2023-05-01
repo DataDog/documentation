@@ -37,7 +37,7 @@ Amazon Elasticsearch Service は、AWS Cloud で Elasticsearch を簡単にデ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`ES` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `ES` が有効になっていることを確認します。
 2. Amazon ES のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     - `es:ListTags`: ES メトリクスにカスタム ES ドメインタグを追加します。
@@ -85,10 +85,10 @@ AWS ES インテグレーションには、サービスのチェック機能は�
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/ac.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_es
+[5]: https://app.datadoghq.com/integrations/amazon-es
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#manually-set-up-triggers
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_es/amazon_es_metadata.csv

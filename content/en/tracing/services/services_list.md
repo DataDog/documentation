@@ -18,7 +18,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-{{< img src="tracing/visualization/services_page_2.png" alt="Services page"  >}}
+{{< img src="tracing/visualization/services_page_2.png" alt="Services page" >}}
 
 <div class="alert alert-warning">The Services List is being replaced by the <a href="https://app.datadoghq.com/services">Service Catalog</a>. Read more in the <a href="/tracing/service_catalog/">Service Catalog documentation</a>.</div>
 
@@ -72,7 +72,7 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 
 Service color is used in [trace visualizations][9]. Select your service color to change it:
 
-{{< img src="tracing/visualization/service_color.png" alt="Services colors"  style="width:30%;">}}
+{{< img src="tracing/visualization/service_color.png" alt="Services colors" style="width:30%;">}}
 
 ## Selecting columns
 
@@ -86,6 +86,10 @@ Click the cog menu to choose what to display in your services list:
 * **Monitor status**: [Status of monitors][11] attached to a service
 
 {{< img src="tracing/visualization/services_columns_2.png" alt="Services columns" style="width:40%;">}}
+
+## Data retention
+The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][12].
+
 
 ## Further Reading
 
@@ -102,3 +106,4 @@ Click the cog menu to choose what to display in your services list:
 [9]: /tracing/trace_explorer/trace_view/
 [10]: /tracing/faq/how-to-configure-an-apdex-for-your-traces-with-datadog-apm/
 [11]: /tracing/services/service_page/#service-monitor
+[12]: https://docs.datadoghq.com/developers/guide/data-collection-resolution-retention/

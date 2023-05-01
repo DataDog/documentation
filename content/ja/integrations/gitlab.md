@@ -30,7 +30,6 @@ categories:
 - source control
 - issue tracking
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/gitlab/README.md
 display_on_public_website: true
@@ -38,7 +37,7 @@ draft: false
 git_integration_title: gitlab
 integration_id: gitlab
 integration_title: GitLab
-integration_version: 5.2.3
+integration_version: 5.3.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -60,7 +59,6 @@ tile:
   - Category::ソースコントロール
   - Category::問題の追跡
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: Datadog ですべての GitLab メトリクスを追跡します。
   media: []
@@ -81,7 +79,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 GitLab チェックは [Datadog Agent][2] パッケージに含まれています。GitLab サーバーに追加でインストールする必要はありません。
 
@@ -214,7 +212,7 @@ GitLab Runner と Prometheus とのインテグレーションについては、
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][6]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 GitLab Runner チェックは [Datadog Agent][2] パッケージに含まれています。GitLab サーバーに追加でインストールする必要はありません。
 

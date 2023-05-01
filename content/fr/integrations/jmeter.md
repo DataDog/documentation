@@ -1,42 +1,67 @@
 ---
+app_id: jmeter
+app_uuid: be62a333-998e-4fea-b0e4-dd4a45b859b4
 assets:
   dashboards:
     JMeter Overview: assets/dashboards/JMeterOverview.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: jmeter.responses_count
+      metadata_path: metadata.csv
+      prefix: jmeter.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: JMeter
   logs:
     source: jmeter
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - log collection
-  - testing
-creates_events: false
-ddtype: check
+- log collection
+- testing
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
-display_name: JMeter
+- https://github.com/DataDog/integrations-core/blob/master/jmeter/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: jmeter
-guid: 73e25799-9bc1-413b-a5f3-989a7c5bd554
 integration_id: jmeter
 integration_title: JMeter
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: jmeter.
-metric_to_check: jmeter.responses_count
+manifest_version: 2.0.0
 name: jmeter
+oauth: {}
 public_title: JMeter
-short_description: "Plug-in Datadog pour Apache\_JMeter"
-support: core
+short_description: Plug-in Datadog pour Apache JMeter
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- macos
+- windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Log Collection
+  - Category::Testing
+  configuration: README.md#Setup
+  description: Plug-in Datadog pour Apache JMeter
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: JMeter
 ---
+
+
+
 ## Présentation
 
 Le service d'écoute backend Datadog pour Apache JMeter est un plug-in JMeter open source qui permet d'envoyer des résultats de test à la plateforme Datadog. Il fournit des rapports en temps réel sur des métriques de test relatives à la latence, au nombre d'octets envoyés et reçus, etc. Vous pouvez également envoyer à Datadog des résultats de test complets en tant qu'entrées de log.
@@ -51,7 +76,7 @@ Ce plug-in doit être installé manuellement. Vous trouverez la dernière versio
 
 Le plug-in présente les options de configuration suivantes :
 
-| Nom       | Obligatoire | Valeur par défaut | description|
+| Name       | Obligatoire | Valeur par défaut | description|
 |------------|:--------:|---------------|------------|
 |apiKey | true | S.O. | Votre clé d'API Datadog.|
 |datadogUrl | false | https://api.datadoghq.com/api/ | Vous pouvez configurer un autre endpoint, par exemple https://api.datadoghq.eu/api/, si votre instance Datadog se trouve dans l'UE.|

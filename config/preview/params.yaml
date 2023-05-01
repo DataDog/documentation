@@ -10,7 +10,6 @@ header_scripts:
   - marketo: false
 
 footer_scripts:
-  - snowplow: false
 
 hotjar:
   id: 1022108

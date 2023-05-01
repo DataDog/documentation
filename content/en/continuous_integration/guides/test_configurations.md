@@ -5,7 +5,7 @@ further_reading:
   - link: "/continuous_integration/guides/flaky_test_management"
     tag: "Guide"
     text: "Flaky test management"
-  - link: "/continuous_integration/explore_tests"
+  - link: "/continuous_integration/tests"
     tag: "Documentation"
     text: "Exploring tests"
 ---

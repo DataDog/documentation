@@ -1,5 +1,5 @@
 ---
-title: Synthetics Test Summary Dashboard
+title: Synthetic Test Summary Dashboard
 kind: documentation
 further_reading:
 - link: '/synthetics/ci_results_explorer'
@@ -18,7 +18,7 @@ The [test summary dashboard][1] provides insights about your Synthetic test runs
 Click the pink Watchdog icon to open the [**Watchdog Insights**][2] side panel and analyze outstanding anomalies in your application performance or triggered monitor alerts.
 
 {{< img src="synthetics/dashboards/test_summary_dashboard.png" alt="Out-of-the-box Synthetics test summary dashboard" style="width:100%" >}}
-{{< img src="synthetics/dashboards/test_automation.png" alt="Synthetics and CI/CD Integrations section of the Synthetics test summary dashboard" style="width:100%" >}}
+{{< img src="synthetics/dashboards/test_automation.png" alt="Continuous Testing and CI/CD Integrations section of the Synthetics test summary dashboard" style="width:100%" >}}
 {{< img src="synthetics/dashboards/private_locations.png" alt="Private locations section of the Synthetics test summary dashboard" style="width:100%" >}}
 
 For more information about the data displayed, see [Synthetic Monitoring Metrics][3].

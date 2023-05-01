@@ -1,8 +1,6 @@
 ---
 title: Deprecation notice for TLS version < 1.2
 kind: guide
-aliases:
-    - /security/guide/tls_deprecation_1_2/
 ---
 
 
@@ -66,7 +64,7 @@ You can run: `python -c "import json, urllib2; print json.load(urllib2.urlopen('
 
 If you are using a newer version of Go (1.13 or above), Go already supports TLS v1.2 by default, so no changes are necessary.
 
-When using older versions of Go, set your TLS Client Configuration’s MinVersion to explicitly use TLS v1.2:
+When using older versions of Go, set your TLS Client Configuration's MinVersion to explicitly use TLS v1.2:
 
 ```
 TLSClientConfig: &tls.Config{
@@ -100,7 +98,7 @@ $AllProtocols = [System.Net.SecurityProtocolType]'Ssl3,Tls,Tls11,Tls12'
 Ssl3, Tls, TLs11, Tls12
 ```
 
-There’s also a [community Powershell module][8] available on Github that can do that for you.
+There's also a [community Powershell module][8] available on Github that can do that for you.
 
 To make this setting persistent, you can edit the registry according to the Microsoft documentation about [enabling TLS in Office Online Server][9].
 

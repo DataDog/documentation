@@ -31,14 +31,14 @@ draft: false
 git_integration_title: purefb
 integration_id: purefb
 integration_title: Pure Storage FlashBlade
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: purefb
 oauth: {}
 public_title: Pure Storage FlashBlade
-short_description: Surveiller les performances et l'utilisation des baies Pure Storage FlashBlade
+short_description: Surveiller les performances et l'utilisation de stockages Pure Storage FlashBlade
 supported_os:
 - linux
 - mac os
@@ -53,7 +53,7 @@ tile:
   - Category::Data Store
   - Offering::Integration
   configuration: README.md#Setup
-  description: Surveiller les performances et l'utilisation des baies Pure Storage FlashBlade
+  description: Surveiller les performances et l'utilisation de stockages Pure Storage FlashBlade
   media:
   - caption: Dashboard Pure Storage FlashBlade - Vue d'ensemble (haut)
     image_url: images/FB-overview-1.png
@@ -77,14 +77,14 @@ Ce check surveille le service [Pure Storage FlashBlade][1] via l'[Agent Datado
 
 Cette intégration vous permet d'obtenir des données sur les performances des baies, clients, partages et compartiments, ainsi que des informations générales sur la configuration et la capacité.
 
-Vous pouvez surveiller plusieurs baies FlashBlade et les agréger au sein d'un unique dashboard, ou encore les regrouper en fonction de l'environnement de votre choix.
+Vous pouvez surveiller plusieurs stockages FlashBlade et les agréger au sein d'un unique dashboard, ou encore les regrouper en fonction de l'environnement de votre choix.
 
 **Cette intégration nécessite les éléments suivants** :
 
  - FlashBlade Purity 3.2.x+
  - La version 7.26.x+ de l'Agent Datadog, afin d'exploiter OpenMetricsBaseCheckV2
  - Python 3
- - L'exportateur Pure Storage FlashBlade OpenMetrics, installé et exécuté dans un environnement conteneurisé (voir le [référentiel Pure Storage GitHub][3] pour obtenir des instructions d'installation).
+ - L'exportateur Pure Storage FlashBlade OpenMetrics, installé et exécuté dans un environnement conteneurisé (voir le [référentiel Pure Storage GitHub][3] pour obtenir des instructions d'installation)
 
 ## Configuration
 
@@ -102,7 +102,7 @@ Pour configurer ce check pour un Agent en cours d'exécution sur un host, exécu
 
 ### Configuration
 
-1. Créez un utilisateur sur votre baie FlashBlade avec un rôle en lecture seule, puis générez un token d'API pour cet utilisateur.
+1. Créez un utilisateur sur votre stockage FlashBlade avec un rôle en lecture seule, puis générez un token d'API pour cet utilisateur.
 
 2. Ajoutez le bloc de configuration suivant au fichier `purefb.d/conf.yaml` dans le dossier `conf.d/` à la racine du répertoire de configuration de votre Agent pour commencer à recueillir vos données de performance PureFB. Consultez le fichier d'exemple [purefb.d/conf.yaml][6] pour découvrir toutes les options de configuration disponibles.
 
@@ -116,29 +116,29 @@ instances:
 
   - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/array?endpoint=<array_ip_or_fqdn>
     tags:
-       - env:<env>
-       - fb_array_name:<full_fqdn>
-       - host:<full_fqdn>
+       - env:<environnement>
+       - fb_array_name:<fqdn_complet>
+       - host:<fqdn_complet>
     headers:
-       Authorization: Bearer <api_token>
+       Authorization: Bearer <token_api>
     min_collection_interval: 120
 
-  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/clients?endpoint=<array_ip_or_fqdn>
+  - openmetrics_endpoint: http://<ip_ou_fqdn_exportateur>:<port>/metrics/clients?endpoint=<ip_ou_fqdn_baie>
     tags:
-       - env:<env>
-       - fb_array_name:<full_fqdn>
-       - host:<full_fqdn>
+       - env:<environnement>
+       - fb_array_name:<fqdn_complet>
+       - host:<fqdn_complet>
     headers:
-       Authorization: Bearer <api_token>
+       Authorization: Bearer <token_api>
     min_collection_interval: 600
 
-  - openmetrics_endpoint: http://<exporter_ip_or_fqdn>:<port>/metrics/usage?endpoint=<array_ip_or_fqdn>
+  - openmetrics_endpoint: http://<ip_ou_fqdn_exportateur>:<port>/metrics/usage?endpoint=<ip_ou_fqdn_baie>
     tags:
-       - env:<env>
-       - fb_array_name:<full_fqdn>
-       - host:<full_fqdn>
+       - env:<environnement>
+       - fb_array_name:<fqdn_complet>
+       - host:<fqdn_complet>
     headers:
-       Authorization: Bearer <api_token>
+       Authorization: Bearer <token_api>
     min_collection_interval: 600
 
 ```
@@ -157,9 +157,9 @@ Les dashboards fournis par cette intégration reposent sur les tags `env`, `host
 
 ```yaml
  tags:
-    - env:<env>
-    - fb_array_name:<full_fqdn>
-    - host:<full_fqdn>
+    - env:<environnement>
+    - fb_array_name:<fqdn_complet>
+    - host:<fqdn_complet>
 ```
 
 #### Augmenter l'intervalle de collecte

@@ -11,11 +11,9 @@ Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances pick
 
 **IMPORTANT**: Datadog uses EC2 instance metadata to ensure you aren't billed twice for hosts both running the agent and being crawled by the AWS integration. If your EC2 instances are configured to require the use of [Instance Metadata Service Version 2 (IMDSv2)][1], then you must set the parameter `ec2_prefer_imdsv2` to `true` in your [Agent configuration][2] to avoid double-billing.
 
-
 When you set up the Fargate and Lambda integration tiles, and any custom metrics, it impacts your Datadog bill.
 
-Other AWS resources (ELB, RDS, Dynamo, etc.) are not part of monthly billing and configuration exclusions do not apply.
-To filter out other resources use the [API][8]. 
+Other AWS resources such as ELB, RDS, and DynamoDB are not part of monthly infrastructure billing, and configuration exclusions do not apply.
 
 ## AWS resource exclusion
 
@@ -23,13 +21,15 @@ You can limit the AWS metrics collected for some services to specific resources.
 
 {{< img src="account_management/billing/aws-resource-exclusion.png" alt="The metric collection tab of an AWS account within the Datadog AWS integration page showing the option to limit metric collection to specific resources with a dropdown menu to select AWS service and a field to add tags in key:value format" >}}
 
+You can also limit AWS metrics using the [API][4].
+
 **Note**: Only EC2 (hosts), Lambda (active functions), and CloudWatch Custom Metrics (custom metrics) are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
 
 **Note**: EC2 metrics resource exclusion settings apply to both EC2 and its attached EBS volumes. 
 
 When adding limits to existing AWS accounts within the integration page, the previously discovered instances could stay in the [Infrastructure List][5] up to 2 hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 
-Hosts with a running Agent still display and are included in billing. Using the limit option is only applicable to EC2 instances without a running Agent.
+Hosts with a running Agent still display and are included in billing. Use the limit option to restrict `aws.ec2.*` metrics collection from AWS and restrict the AWS resource EC2 instance hosts.
 
 ## Troubleshooting
 
@@ -40,8 +40,7 @@ For billing questions, contact your [Customer Success][7] Manager.
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: /getting_started/tagging/using_tags/#integrations
+[4]: /api/latest/aws-integration/#set-an-aws-tag-filter
 [5]: /infrastructure/
 [6]: /help/
 [7]: mailto:success@datadoghq.com
-[8]: /api/latest/aws-integration/#set-an-aws-tag-filter

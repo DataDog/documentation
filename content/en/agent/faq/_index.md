@@ -23,4 +23,5 @@ aliases:
     {{< nextlink href="agent/guide/auto_conf" >}}Auto-configuration for Autodiscovery{{< /nextlink >}}
     {{< nextlink href="agent/guide/template_variables" >}}Template variables used for Autodiscovery{{< /nextlink >}}
     {{< nextlink href="logs/guide/commonly-used-log-processing-rules" >}}Commonly Used Log Processing Rules{{< /nextlink >}}
+    {{< nextlink href="agent/faq/docker-hub" >}}Docker Hub{{< /nextlink >}}
 {{< /whatsnext >}}

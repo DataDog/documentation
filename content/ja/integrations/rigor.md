@@ -15,11 +15,11 @@ assets:
     source_type_name: Rigor
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Rigor
   sales_email: support@rigor.com
   support_email: support@rigor.com
 categories:
-- モニター
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md
 display_on_public_website: true
@@ -37,15 +37,15 @@ public_title: Rigor
 short_description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
+  - Category::Testing
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Rigor は、開発ライフサイクル全体の総合的な監視および最適化を提供
   media: []

@@ -1,25 +1,27 @@
 ---
-title: Utilisation du Forwarder Datadog avec Go
 kind: guide
+title: Instrumenter des applications Go sans serveur avec le Forwarder Datadog
 ---
 ## Présentation
 
-Si vous découvrez tout juste les capacités sans serveur de Datadog, nous vous recommandons d'utiliser les [fonctionnalités Lambda clés en main][1]. À l'inverse, si vous avez configuré les fonctionnalités sans serveur Datadog à l'aide du Forwarder Datadog, avant que les fonctionnalités Lambda clés en main ne soient proposées, lisez ce guide pour gérer votre instance.
+<div class="alert alert-warning">
+Si vous commencez tout juste à utiliser la surveillance sans serveur Datadog, suivez plutôt les <a href="/serverless/installation/go">instructions d'instrumentation des fonctions Lambda avec l'extension Lambda Datadog</a>. Si vous avez configuré la surveillance sans serveur Datadog avec le Forwarder Datadog avant que les fonctionnalités Lambda clés en main ne soient proposées, consultez ce guide pour gérer votre instance.
+</div>
 
 ## Configuration requise
 
 Si vous ne l'avez pas encore fait :
 
-- Installez [l'intégration AWS][2]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS.
-- Installez la [fonction Lambda du Forwarder Datadog][3], qui est nécessaire pour l'ingestion des traces, des métriques optimisées, des métriques custom et des logs AWS Lambda.
+- Installez [l'intégration AWS][1]. Datadog pourra ainsi ingérer les métriques Lambda depuis AWS.
+- Installez la [fonction Lambda du Forwarder Datadog][2], qui est nécessaire pour l'ingestion des traces, des métriques optimisées, des métriques custom et des logs AWS Lambda.
 
-Après avoir installé l'[intégration AWS][2] et le [Forwarder Datadog][3], suivez les étapes suivantes pour instrumenter votre application afin d'envoyer des métriques, des logs et des traces à Datadog.
+Après avoir installé l'[intégration AWS][1] et le [Forwarder Datadog][2], suivez les étapes suivantes pour instrumenter votre application afin d'envoyer des métriques, des logs et des traces à Datadog.
 
 ## Configuration
 
 ### Installation
 
-Installez la [bibliothèque Lambda Datadog][4] localement en exécutant la commande suivante :
+Installez la [bibliothèque Lambda Datadog][3] localement en exécutant la commande suivante :
 
 ```
 go get github.com/DataDog/datadog-lambda-go
@@ -80,16 +82,16 @@ Suivez les étapes ci-dessous pour instrumenter la fonction :
 
 Pour pouvoir envoyer des métriques, traces et logs à Datadog, abonnez la fonction Lambda du Forwarder Datadog à chaque groupe de logs de votre fonction.
 
-1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][3].
-2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][5].
+1. [Si ce n'est pas déjà fait, installez le Forwarder Datadog][2].
+2. [Abonnez le Forwarder Datadog aux groupes de logs de votre fonction][4].
 
 ### Tag
 
-Bien que cette opération soit facultative, nous vous recommandons fortement d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur afin de bénéficier d'un [tagging de service unifié][6].
+Bien que cette opération soit facultative, Datadog vous conseille d'ajouter les tags `env`, `service` et `version` à vos applications sans serveur afin de bénéficier du [tagging de service unifié][5].
 
 ## Utilisation
 
-Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][7].
+Après avoir configuré votre fonction en suivant la procédure ci-dessus, visualisez vos métriques, logs et traces sur la [page Serverless principale][6].
 
 ## Surveiller une logique opérationnelle personnalisée
 
@@ -134,17 +136,16 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 }
 ```
 
-En savoir plus sur l'[envoi de métriques custom][8].
+En savoir plus sur l'[envoi de métriques custom][7].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/serverless/installation
-[2]: /fr/integrations/amazon_web_services/
-[3]: /fr/serverless/forwarder/
-[4]: https://github.com/DataDog/datadog-lambda-go
-[5]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
-[7]: https://app.datadoghq.com/functions
-[8]: /fr/serverless/custom_metrics?tab=go
+[1]: /fr/integrations/amazon_web_services/
+[2]: /fr/serverless/forwarder/
+[3]: https://github.com/DataDog/datadog-lambda-go
+[4]: /fr/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: /fr/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[6]: https://app.datadoghq.com/functions
+[7]: /fr/serverless/custom_metrics?tab=go

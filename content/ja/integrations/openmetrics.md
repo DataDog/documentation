@@ -16,8 +16,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニター
-- オートディスカバリー
+- メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md
 display_on_public_website: true
@@ -25,7 +24,7 @@ draft: false
 git_integration_title: openmetrics
 integration_id: openmetrics
 integration_title: OpenMetrics
-integration_version: 2.2.2
+integration_version: 2.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -35,16 +34,15 @@ public_title: OpenMetrics
 short_description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Autodiscovery
+  - Category::Metrics
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
   media: []
@@ -65,7 +63,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 OpenMetrics チェックは、[Datadog Agent のバージョン 6.6.0 以降][2]にパッケージ化されています。
 

@@ -26,7 +26,6 @@ author:
 categories:
 - コンテナ
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/harbor/README.md
 display_on_public_website: true
@@ -34,7 +33,7 @@ draft: false
 git_integration_title: harbor
 integration_id: harbor
 integration_title: Harbor
-integration_version: 2.1.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Containers
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Harbor コンテナレジストリの健全性を監視
   media: []
@@ -71,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Harbor チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

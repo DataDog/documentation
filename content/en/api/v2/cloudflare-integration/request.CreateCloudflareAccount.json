@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "api_key": "fakekey",
+      "email": "new@email",
+      "name": "examplecloudflareintegration"
+    },
+    "type": "cloudflare-accounts"
+  }
+}

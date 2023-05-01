@@ -16,11 +16,11 @@ Les valeurs de requête affichent la valeur actuelle d'une requête de métrique
 
 Le widget peut afficher la dernière valeur transmise, ou une agrégation calculée à partir de toutes les valeurs de requête de l'intervalle. Ces visualisations offrent un aperçu limité mais explicite de votre requête d'infrastructure. 
 
-{{< img src="dashboards/widgets/query_value/query_value.png" alt="Widget Valeur de requête" >}}
+{{< img src="dashboards/widgets/query_value/query_value1.png" alt="Widget Valeur de requête" >}}
 
 ## Configuration
 
-{{< img src="dashboards/widgets/query_value/query-value-widget-setup.png" alt="Configuration du widget Valeur de requête"  style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="Configuration du widget Valeur de requête"  style="width:80%;">}}
 
 ### Configuration
 

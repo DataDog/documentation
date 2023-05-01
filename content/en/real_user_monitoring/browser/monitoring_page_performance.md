@@ -2,6 +2,9 @@
 title: Monitoring Page Performance
 kind: documentation
 further_reading:
+  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+    tag: "Learning Center"
+    text: "Interactive Lab: Core Web Vitals"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
@@ -33,20 +36,20 @@ You can access performance metrics for your views in:
 ## Event timings and core web vitals
 
 <div class="alert alert-warning">
-  Datadog's core web vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
+  Datadog's Core Web Vitals metrics are available from the <a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> package v2.2.0+.
 </div>
 
 [Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
-- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed environment such as a [Synthetic browser test][6].
+- Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
 
 | Metric                   | Focus            | Description                                                                                           | Target value |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
 | [Largest Contentful Paint][7] | Load performance | Moment in the page load timeline in which the largest DOM object in the viewport (as in, visible on screen) is rendered.         | <2.5s       |
-| [First Input Delay][8]        | Interactivity    | Time elapsed between a user’s first interaction with the page and the browser’s response.             | <100ms      |
+| [First Input Delay][8]        | Interactivity    | Time elapsed between a user's first interaction with the page and the browser's response.             | <100ms      |
 | [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
 
 ## All performance metrics
@@ -57,7 +60,7 @@ You can access performance metrics for your views in:
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | The moment in the page load timeline when the largest DOM object in the viewport renders and is visible on screen.                                                                                                               |
-| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                                        |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                                        |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][10].                                                                          |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                                         |
@@ -72,7 +75,7 @@ You can access performance metrics for your views in:
 
 ## Monitoring single page applications (SPA)
 
-For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If a click on your web page leads to a new page without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks page changes using the [History API][16].
+For single page applications (SPAs), the RUM Browser SDK differentiates between `initial_load` and `route_change` navigation with the `loading_type` attribute. If an interaction on your web page leads to a different URL without a full refresh of the page, the RUM SDK starts a new view event with `loading_type:route_change`. RUM tracks URL changes using the [History API][16].
 
 Datadog provides a unique performance metric, `loading_time`, which calculates the time needed for a page to load. This metric works for both `initial_load` and `route_change` navigation.
 
@@ -82,31 +85,44 @@ To account for modern web applications, loading time watches for network request
 
 - **Initial Load**: Loading Time is equal to _whichever is longer_:
 
-  - The difference between `navigationStart` and `loadEventEnd`.
-  - Or the difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
+  - The difference between `navigationStart` and `loadEventEnd`, or
+  - The difference between `navigationStart` and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
-- **SPA Route Change**: Loading Time is equal to the difference between the user click and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
+- **SPA Route Change**: Loading Time is equal to the difference between the URL change and the first time the page has no activity. Read [How page activity is calculated](#how-page-activity-is-calculated) for details.
 
 ### How page activity is calculated
 
-Whenever a navigation or a click occurs, the RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is deemed to have activity by looking at network requests and DOM mutations. The page activity ends when there are no ongoing requests and no DOM mutation for more than 100ms. The page is determined to have no activity if no requests or DOM mutation occurred in 100ms.
+The RUM Browser SDK tracks the page activity to estimate the time until the interface is stable again. The page is considered to have activity when:
+
+- `xhr` or `fetch` requests are in progress.
+- The browser emits performance resource timing entries (loading end of JS, CSS, etc.).
+- The browser emits DOM mutations.
+
+The page activity is considered to have ended when it hasn't had any activity for 100ms.
+
+**Note**: Only activity occurring after the SDK initialization is taken into account.
+
+**Caveats:**
 
 The criteria of 100ms since last request or DOM mutation might not be an accurate determination of activity in the following scenarios:
 
 - The application collects analytics by sending requests to an API periodically or after every click.
-- The application uses "[comet][16]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
+- The application uses "[comet][17]" techniques (that is, streaming or long polling), and the request stays on hold for an indefinite time.
 
 To improve the accuracy of activity determination in these cases, specify `excludedActivityUrls`, a list of resources for the RUM Browser SDK to exclude when computing the page activity:
 
 ```javascript
-DD_RUM.init({
+window.DD_RUM.init({
     ...
     excludedActivityUrls: [
         // Exclude exact URLs
         'https://third-party-analytics-provider.com/endpoint',
 
         // Exclude any URL ending with /comet
-        /\/comet$/
+        /\/comet$/,
+
+        // Exclude any URLs for which the function return true
+        (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
 ```
@@ -123,7 +139,7 @@ For example, you can add a timing when your hero image has appeared:
 ```html
 <html>
   <body>
-    <img onload="DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
+    <img onload="window.DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
   </body>
 </html>
 ```
@@ -134,11 +150,11 @@ Or when users first scroll:
 document.addEventListener("scroll", function handler() {
     //Remove the event listener so that it only triggers once
     document.removeEventListener("scroll", handler);
-    DD_RUM.addTiming('first_scroll');
+    window.DD_RUM.addTiming('first_scroll');
 });
 ```
 
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][17] before creating a visualization in the RUM Explorer or in your dashboards.
+Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
@@ -152,8 +168,8 @@ document.addEventListener("scroll", function handler() {
     document.removeEventListener("scroll", handler);
 
     const timing = Date.now()
-    DD_RUM.onReady(function() {
-      DD_RUM.addTiming('first_scroll', timing);
+    window.DD_RUM.onReady(function() {
+      window.DD_RUM.addTiming('first_scroll', timing);
     });
 });
 
@@ -180,4 +196,5 @@ document.addEventListener("scroll", function handler() {
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [16]: https://developer.mozilla.org/en-US/docs/Web/API/History
-[17]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[17]: https://en.wikipedia.org/wiki/Comet_&#40;programming&#41;
+[18]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

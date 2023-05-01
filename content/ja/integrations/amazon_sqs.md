@@ -40,7 +40,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`SQS` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `SQS` が有効になっていることを確認します。
 2. Amazon SQS のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     - `sqs:ListQueues`: 有効なキューを一覧表示するために使用されます。
@@ -89,10 +89,10 @@ AWS SQS インテグレーションには、サービスのチェック機能は
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_sqs
+[5]: https://app.datadoghq.com/integrations/amazon-sqs
 [6]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/logging-using-cloudtrail.html
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [8]: https://app.datadoghq.com/logs

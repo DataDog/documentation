@@ -78,7 +78,6 @@ Here is an example of `aws.ec2.cpuutilization` with the `month_before()` value s
     {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-<br>
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

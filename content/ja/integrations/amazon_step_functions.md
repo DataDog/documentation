@@ -27,9 +27,11 @@ Amazon Step Functions (States) では、ビジュアルなワークフローを�
 
 このインテグレーションを有効にすると、Datadog にすべての Step Functions メトリクスを表示できます。
 
+<div class="alert alert-warning">Datadog のネイティブ AWS Step Function モニタリングは、非公開ベータ版で利用可能です。この機能を試してみたい方は、カスタマーサクセスマネージャーに連絡するか、<a href="https://docs.google.com/forms/d/e/1FAIpQLScoePnzEw9nLhFpCsJTbWlXcShKBgTLNegTcIA4dEm_IbGAjA/viewform">フォーム</a>からリクエストしてください。</div>
+
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。次に、AWS/Datadog ロールのポリシードキュメントに以下のアクセス許可を追加します。
 
@@ -40,7 +42,7 @@ states:DescribeStateMachine
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Step Functions (States)` をオンにします。ステートマシンが AWS Lambda を使用している場合は、`Lambda` がチェックされていることも確認してください。
+1. [AWS インテグレーションページ][2]の `Metric Collection` タブで、`States` を有効にします。ステートマシンが AWS Lambda を使用している場合は、`Lambda` がチェックされていることも確認してください。
 2. [Datadog - Amazon Step Functions インテグレーション][3]をインストールします。
 
 #### AWS Lambda メトリクスの増強
@@ -84,8 +86,8 @@ Amazon Step Functions インテグレーションには、サービスのチェ�
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: /ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-step-functions
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-step-functions
 [4]: /ja/tagging/
 [5]: /ja/serverless/
 [6]: https://docs.aws.amazon.com/step-functions/latest/dg/cw-logs.html

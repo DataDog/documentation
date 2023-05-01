@@ -62,7 +62,7 @@ draft: false
 git_integration_title: haproxy
 integration_id: haproxy
 integration_title: HAProxy
-integration_version: 4.3.1
+integration_version: 4.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

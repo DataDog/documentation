@@ -1,6 +1,6 @@
 # make
 SHELL = /bin/bash
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -24,6 +24,9 @@ BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 EXAMPLES_DIR = $(shell pwd)/examples/content/en/api
 EXAMPLES_REPOS := datadog-api-client-go datadog-api-client-java datadog-api-client-python datadog-api-client-ruby datadog-api-client-typescript
 
+#DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/\(.*\)\/manifest.json/\1\/manifest.deref.json/')
+DEREFS := $(shell find integrations_data/extracted/dd-source -type f -name "*manifest.json" | sed 's/.*\/\(.*\)\/manifest.json/data\/workflows\/\1.json/')
+
 # Set defaults when no makefile.config or missing entries
 # Use DATADOG_API_KEY if set, otherwise try DD_API_KEY and lastly fall back to false
 GITHUB_TOKEN ?= ""
@@ -31,6 +34,7 @@ DD_API_KEY ?= false
 DD_APP_KEY ?= false
 DATADOG_API_KEY ?= $(DD_API_KEY)
 DATADOG_APP_KEY ?= $(DD_APP_KEY)
+FULL_BUILD ?= false
 CONFIGURATION_FILE ?= "./local/bin/py/build/configurations/pull_config_preview.yaml"
 
 help:
@@ -74,10 +78,16 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 start-docker: clean  ## Build and run docs including external content via docker
 	@export REPO_PATH=$(PWD) && \
 	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
+	export FULL_BUILD=$(FULL_BUILD) && \
 	docker-compose -f ./docker-compose-docs.yml pull && docker-compose -p docs-local -f ./docker-compose-docs.yml up
 
 stop-docker: ## Stop the running docker container.
 	@docker-compose -f ./docker-compose-docs.yml down
+
+find-int: hugpython ## Find the source for an integration (downloads/updates integrations repos first)
+	@. hugpython/bin/activate && \
+	export GITHUB_TOKEN=$(GITHUB_TOKEN) && \
+	./local/bin/py/integration-finder.py $(int)
 
 # install the root level node modules
 node_modules: package.json yarn.lock
@@ -86,6 +96,18 @@ node_modules: package.json yarn.lock
 # All the requirements for a full build
 dependencies: clean hugpython all-examples data/permissions.json update_pre_build node_modules
 	@make placeholders
+	@make derefs
+
+# make directories
+data/workflows/:
+	mkdir -p $@
+
+# dereference any source jsonschema files
+derefs: $(DEREFS)
+
+.SECONDEXPANSION:
+$(DEREFS): %.json : integrations_data/extracted/dd-source/domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/$$(basename $$(notdir $$@))/manifest.json | data/workflows/
+	@node ./assets/scripts/workflow-process.js $< $@
 
 # builds permissions json from rbac
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
@@ -98,7 +120,10 @@ placeholders:
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
-	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install -r $<
+	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
+	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.14246916-py2.py3-none-any.whl; \
+	fi
 
 update_pre_build:
 	@. hugpython/bin/activate && GITHUB_TOKEN=$(GITHUB_TOKEN) CONFIGURATION_FILE=$(CONFIGURATION_FILE) ./local/bin/py/build/update_pre_build.py

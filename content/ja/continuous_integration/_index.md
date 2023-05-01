@@ -5,15 +5,18 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=CI%20Visibility
   tag: リリースノート
   text: CI Visibility の最新リリースをチェック！ (アプリログインが必要です)。
-- link: /continuous_integration/explore_pipelines/
+- link: /continuous_integration/pipelines/
   tag: ドキュメント
   text: ビルドの問題を解決するためにパイプラインデータの調査を開始します
-- link: /continuous_integration/explore_tests/
+- link: /continuous_integration/tests/
   tag: ドキュメント
   text: 問題のあるテストを見つけて修正するために、テストデータの調査を開始します
 - link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
   tag: ブログ
   text: Datadog で CircleCI 環境を監視する
+- link: https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/
+  tag: GitHub
+  text: Datadog CI モニターによるパイプラインアラートの構成
 kind: documentation
 title: Continuous Integration Visibility
 ---
@@ -24,7 +27,7 @@ title: Continuous Integration Visibility
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">このページでは、継続的インテグレーション (CI) のメトリクスとデータを Datadog のダッシュボードに取り込む方法について説明します。CI パイプラインで Synthetic テストを実行したい場合は、<a href="/synthetics/cicd_integrations/" target="_blank">Synthetics と CI/CD</a> のセクションを参照してください。</div>
+<div class="alert alert-info">このページでは、継続的インテグレーション (CI) のメトリクスとデータを Datadog のダッシュボードに取り込む方法について説明します。CI パイプラインで Continuous Testing テストを実行したい場合は、<a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing と CI/CD</a> のセクションを参照してください。</div>
 
 Datadog Continuous Integration (CI) Visibility は、CI テストとパイプラインの結果に関する情報に加えて、CI のパフォーマンス、傾向、信頼性に関するデータをすべて 1 か所にまとめます。開発者が、テストまたはパイプラインの失敗の理由を掘り下げたり、テストスイートの実行時間の傾向を監視したり、特定のコミットがパイプラインに与える影響を確認したりできるだけでなく、ビルドエンジニアが、組織間の CI の状態とパイプラインパフォーマンスの経時的な傾向を視認することもできます。
 
@@ -73,7 +76,7 @@ CI プロバイダーに対する Datadog のセットアップ手順、CI 製�
 
 [1]: https://app.datadoghq.com/dashboard/lists
 [2]: https://app.datadoghq.com/notebook/list
-[3]: /ja/continuous_integration/setup_pipelines/
-[4]: /ja/continuous_integration/setup_tests/
-[5]: /ja/continuous_integration/explore_pipelines/
-[6]: /ja/continuous_integration/explore_tests/
+[3]: /ja/continuous_integration/pipelines/
+[4]: /ja/continuous_integration/tests/
+[5]: /ja/continuous_integration/pipelines/
+[6]: /ja/continuous_integration/tests/

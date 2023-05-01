@@ -35,16 +35,46 @@ Si un test irrégulier n'a pas échoué au cours des 30 derniers jours, il est 
 
 ## Surveiller les nouveaux tests irréguliers
 
-1. Sur la page Tests, sélectionnez la vue **Branches**.
+Ces tests correspondent aux tests qui présentent un comportement irrégulier, mais qui ne figuraient pas encore dans le tableau Flaky Tests pour la branche actuelle ou la branche par défaut du référentiel.
 
+### Page Test Runs
+
+1. Accédez à la page [Test Runs][1].
+2. Depuis la liste des facettes sur la barre latérale de gauche, développez la facette **New Flaky** dans la section **Test** et cochez l'option `true`.
+L'écran affiche toutes les exécutions de test qui ont présenté un comportement irrégulier pour la première fois selon la définition ci-dessus.
+
+### Page Branches
+
+1. Sur la page [Tests][2], sélectionnez la vue **Branches**.
 2. Filtrez le tableau pour afficher les branches, services ou commits de votre choix.
+3. Examinez la colonne **New Flaky** pour connaître le nombre de nouveaux tests irréguliers identifiés depuis le dernier commit, selon la définition ci-dessus.
 
-3. Observez la colonne **New Flaky** pour découvrir le nombre de nouveaux tests irréguliers qui sont apparus avec le dernier commit. Ces tests présentent un comportement irrégulier depuis le dernier commit uniquement.
-
-### Ignorer les nouveaux tests irréguliers détectés par erreur
+#### Ignorer les nouveaux tests irréguliers détectés par erreur
 
 Vous pouvez ignorer les nouveaux tests irréguliers pour un commit donné si vous estimez que ces tests ont été détectés par erreur. Les tests réapparaîtront si un comportement régulier est à nouveau détecté dans le commit.
 
 Cliquez sur le nombre de tests **New Flaky**, puis cliquez sur **Ignore flaky tests**.
 
 {{< img src="ci/ignore-new-flaky-tests.png" alt="Ignorer tous les nouveaux tests irréguliers pour un commit" style="width:100%;">}}
+
+## Surveiller les tests irréguliers connus ayant échoué
+
+Ces tests correspondent aux tests qui présentent un comportement irrégulier sur la branche actuelle ou par défaut du référentiel.
+
+### Page Test Runs
+
+1. Accédez à la page [Test Runs][1].
+2. Depuis la liste des facettes sur la barre latérale de gauche, développez la facette **Known Flaky** dans la section **Test** et cochez l'option `true`.
+L'écran affiche alors les exécutions de test ayant échoué qui avaient déjà présenté un comportement irrégulier selon la définition ci-dessus.
+
+
+### Page Branches
+
+1. Sur la page [Tests][2], sélectionnez la vue **Branches**.
+2. Filtrez le tableau pour afficher les branches, services ou commits de votre choix.
+3. La colonne **Failed** indique le nombre de tests ayant échoué et le nombre de tests irréguliers connus dans le dernier commit.
+
+{{< img src="ci/known-flaky-failed-tests.png" alt="Vue Branches des tests CI avec une branche sélectionnée et une zone de texte dans la colonne Failed indiquant 1 test ayant échoué et 1 test irrégulier connu" style="width:100%;">}}
+
+[1]: https://app.datadoghq.com/ci/test-runs
+[2]: https://app.datadoghq.com/ci/test-services

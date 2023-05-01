@@ -18,6 +18,8 @@ assets:
     source_type_name: Vertica
   logs:
     source: vertica
+  monitors:
+    '[Vertica] Nodes down above K-safety level': assets/monitors/vertica_replication_safety.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog

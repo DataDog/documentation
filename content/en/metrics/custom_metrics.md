@@ -20,6 +20,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/metrics-without-limits/"
   tag: "Blog"
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
+- link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+  tag: "Blog"
+  text: "Monitor your Linux web apps on Azure App Service with Datadog"
+algolia:
+  tags: ['custom metrics']
 ---
 
 ## Overview
@@ -28,7 +33,7 @@ If a metric is not submitted from one of the [more than {{< translate key="integ
 
 A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
 
-**Note**: Users with the Datadog Admin roles can see the monthly average number of custom metrics per hour and the top 500 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
+**Note**: Users with the Datadog Admin role or `usage_read` permission can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
 
 ## Custom metrics properties
 
@@ -65,6 +70,7 @@ The following custom metric naming convention must be followed:
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generate live process-based metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 

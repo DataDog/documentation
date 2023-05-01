@@ -5,16 +5,13 @@ kind: ガイド
 title: AWS の請求の詳細を監視する
 ---
 
-Datadog-AWS Billing インテグレーションを利用することで、AWS から請求メトリクスを収集することができます。
-
-詳細は、こちらのアプリ内でご確認ください:
-https://app.datadoghq.com/account/settings#integrations/amazon_billing
+Datadog-AWS Billing インテグレーションを利用することで、AWS から請求メトリクスを収集することができます。詳しくは Datadog の [Amazon Billing][5] インテグレーションをご覧ください。
 
 請求メトリクスの収集を開始するには
 
-1. [AWS 構成タイル][1]で "Billing" を選択し、Datadog の AWS ポリシーに `budgets:ViewBudget` という権限を入れてください。
+1. [AWS 構成ページ][1]の `Metric Collection` タブで `Billing` が有効になっていることを確認し、Datadog の AWS ポリシーに `budgets:ViewBudget` という権限が含まれていることを確認します。
 
-2. [AWS コンソール][2]内で請求メトリクスを有効にします。
+2. AWS コンソール内で[請求メトリクスを有効にします][2]。
 
 Datadog-AWS Billing インテグレーションを使用すると、以下のメトリクスを利用できます。
 
@@ -27,7 +24,8 @@ Datadog-AWS Billing インテグレーションを使用すると、以下のメ
 
 AWS に加え、多くのクラウドサービスにまたがるより強固なコスト監視のために、Datadog は [CloudHealth][3] とサードパーティーのインテグレーションをサポートしています。[CloudHealth][3] がどのように Datadog とインテグレーションし、ホストされたインフラストラクチャー全体のコストを可視化するかについては、[このブログ記事][4]でより詳しく解説しています。
 
-[1]: /ja/integrations/amazon_web_services/
+[1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
 [3]: /ja/integrations/cloudhealth/
 [4]: https://www.datadoghq.com/blog/monitor-cloudhealth-assets-datadog
+[5]: https://app.datadoghq.com/integrations/amazon-billing

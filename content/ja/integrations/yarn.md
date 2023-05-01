@@ -26,7 +26,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - processing
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/yarn/README.md
@@ -35,7 +34,7 @@ draft: false
 git_integration_title: yarn
 integration_id: yarn
 integration_title: Yarn
-integration_version: 4.1.0
+integration_version: 4.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -54,7 +53,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::処理
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
@@ -82,7 +80,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 YARN チェックは [Datadog Agent][2] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
 

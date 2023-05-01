@@ -19,7 +19,9 @@ Datadog セッションリプレイで予期しない動作が発生した場合
 
 ### 一部の HTML 要素はリプレイ時に表示されない
 
-セッションリプレイは、次の HTML 要素をサポートしていません: `iframe`、`video`、`audio`、`canvas`。セッションリプレイは、Web コンポーネントをサポートしていません。
+セッションリプレイは、次の HTML 要素をサポートしていません: `iframe`、`video`、`audio`、`canvas`。
+
+セッションリプレイでは、HTTPS 接続を使用する必要があります。安全な接続を使用していない場合、リソースがタイムアウトし、画像や一部のページ要素が表示されなくなります。
 
 ### フォントまたは画像が正しくレンダリングされない
 
@@ -45,7 +47,7 @@ Datadog セッションリプレイで予期しない動作が発生した場合
 
 ```html
 <link rel="stylesheet" crossorigin="anonymous"
-      href="https://assets.example.com/style.css”>
+      href="https://assets.example.com/style.css">
 ```
 
 さらに、`assets.example.com` の `example.com` ドメインを承認します。これにより、[`Access-Control-Allow-Origin`][3] ヘッダーを設定することにより、アセットファイルがリソースをロードできるようになります。

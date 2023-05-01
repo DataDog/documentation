@@ -5,9 +5,14 @@ aliases:
   - /metrics/faq/metrics-without-limits/
   - /metrics/guide/metrics-without-limits-getting-started/
 further_reading:
-  - link: https://www.datadoghq.com/blog/metrics-without-limits
-    tag: Blog
+  - link: "https://www.datadoghq.com/blog/metrics-without-limits"
+    tag: "Blog"
     text: "Dynamically control custom metrics volume with Metrics without Limits™"
+  - link: "/observability_pipelines/guide/custom-metrics-governance"
+    tag: "Documentation"
+    text: "Use Observability Pipelines to govern custom metrics"
+algolia:
+  tags: ['metrics without limits']
 ---
 
 ## Overview
@@ -20,7 +25,7 @@ This page identifies key components of Metrics without Limits™ that can help y
 
 ### Configuration of tags
 
-Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **“Include Tags...”** to configure the tags you’d like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (colored in blue with an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
+Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (colored in blue with an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
 
 {{< img src="metrics/mwl_tag_config.mp4" alt="Configuration of Tags" video=true >}}
 
@@ -61,7 +66,7 @@ Learn more about [Custom Metrics Billing][8].
 1. Configure your Top 20 metrics on your [Plan & Usage page][9] from the Metrics Summary page or by using the [API][2].
    You can use bulk metric configuration (`*` syntax) to quickly configure tags on multiple metrics. Datadog notifies you when the bulk configuration job is completed.
 
-**Note:** If you’re using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
+**Note:** If you're using the [Create Tag Configuration API][2], use the [tag configuration cardinality estimator API][5] first to validate the potential impact of your tag configurations prior to creating tag configurations. If the UI or the estimator API returns a resulting number of indexed that is larger than ingested, do not save your tag configuration.
 
 2. Configure your unqueried metrics with empty tag configurations.
 
@@ -81,7 +86,7 @@ Learn more about [Custom Metrics Billing][8].
 
 - [Role based access control][11] for Metrics without Limits™ is also available to control which users have permissions to use this feature that has billing implications.
 
-- Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes. Search for "tags:audit" and “queryable tag configuration” or “percentile aggregations” on your [Events Stream][12]
+- Audit events allow you to track any tag configurations or percentile aggregations that have been made that may correlate with custom metrics spikes. Search for "tags:audit" and "queryable tag configuration" or "percentile aggregations" on your [Events Stream][12]
 
 \*Metrics without Limits is a trademark of Datadog, Inc.
 
@@ -96,7 +101,7 @@ Learn more about [Custom Metrics Billing][8].
 [5]: /api/latest/metrics/#tag-configuration-cardinality-estimator
 [6]: /metrics/#time-and-space-aggregation
 [7]: /metrics/summary/#configuration-of-multiple-metrics
-[8]: /account_management/billing/custom_metrics/?tab=countrategauge
+[8]: /account_management/billing/custom_metrics/
 [9]: https://app.datadoghq.com/billing/usage
 [10]: /account_management/billing/usage_metrics/
 [11]: /account_management/rbac/permissions/?tab=ui#metrics

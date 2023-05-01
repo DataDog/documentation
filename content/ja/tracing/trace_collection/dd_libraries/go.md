@@ -12,7 +12,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: GitHub
   text: ソースコード
-- link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: GoDoc
   text: パッケージページ
 - link: /tracing/glossary/
@@ -31,7 +31,7 @@ Go トレーサーは、Go `1.17+` と Datadog Agent `>= 5.21.1` が必要です
 
 ### アプリ内のドキュメントに従ってください (推奨)
 
-Datadog アプリ内の[クイックスタート手順][7]に従って、最高のエクスペリエンスを実現します。例:
+Datadog アプリ内の[クイックスタート手順][2]に従って、最高のエクスペリエンスを実現します。例:
 
 - デプロイコンフィギュレーション (ホスト、Docker、Kubernetes、または Amazon ECS) を範囲とする段階的な手順。
 - `service`、`env`、`version` タグを動的に設定します。
@@ -65,7 +65,7 @@ Datadog アプリ内の[クイックスタート手順][7]に従って、最高�
    DD_DOGSTATSD_PORT=8125    # The port to send Dogstatsd metrics to. Defaults to 8125.
    ```
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -82,14 +82,13 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{% tab "その他の環境" %}}
 
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の多くの環境で利用できます。
+トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、さまざまな環境で利用できます。
 
 その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
 
 [1]: /ja/agent/basic_agent_usage/heroku/#installation
 [2]: /ja/integrations/cloud_foundry/#trace-collection
 [3]: /ja/integrations/amazon_elasticbeanstalk/
-[4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
 {{% /tab %}}
@@ -101,19 +100,15 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 
 ## ライブラリ構成
 
-必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][8]を参照してください。
+必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][3]を参照してください。
 
-コンフィギュレーションおよび API の使用の詳細については、Datadog の [API ドキュメント][2]を参照してください。
+コンフィギュレーションおよび API の使用の詳細については、Datadog の [API ドキュメント][4]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/go
-[2]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[3]: /ja/tracing/glossary/
-[4]: https://github.com/DataDog/dd-trace-go/tree/v1#contributing
-[5]: https://github.com/DataDog/dd-trace-go/tree/v1/MIGRATING.md
-[6]: /ja/profiler/enabling/?code-lang=go
-[7]: https://app.datadoghq.com/apm/docs
-[8]: /ja/tracing/trace_collection/library_config/go/
+[2]: https://app.datadoghq.com/apm/service-setup
+[3]: /ja/tracing/trace_collection/library_config/go/
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

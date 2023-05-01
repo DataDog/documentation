@@ -7,12 +7,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- ネットワーク
-- 例外
 - メトリクス
-- アラート設定
-- 問題追跡
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md
 display_on_public_website: true
@@ -33,13 +29,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Any
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
   - Category::Metrics
-  - Category::Alerting
-  - Category::Issue Tracking
+  - Category::Tracing
+  - Supported OS::Any
   configuration: README.md#Setup
   description: Datadog RUM を使用した Angular アプリケーションの監視とメトリクス生成
   media: []
@@ -62,7 +54,7 @@ Datadog [Angular インテグレーション][1]で、Angular コンポーネン
 Angular アプリケーションをエンドツーエンドで監視します。
 
 - スタック全体におけるユーザージャーニーを追跡、視覚化
-- ロードタイムが遅くなる根本的な原因をデバッグ。React のコード、ネットワークパフォーマンス、または基礎的なインフラストラクチャーの問題である可能性があります。
+- ロードタイムが遅くなる根本的な原因をデバッグ。Angular のコード、ネットワークパフォーマンス、または基礎的なインフラストラクチャーの問題である可能性があります。
 - ユーザー ID、電子メール、名前などの属性で、すべてのユーザーセッションを分析し、コンテキストを作成
 - フロントエンドとバックエンドの開発チームのために、フルスタックモニタリングを 1 つのプラットフォームで実現
 

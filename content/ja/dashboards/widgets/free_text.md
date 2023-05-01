@@ -1,17 +1,15 @@
 ---
-title: フリーテキストウィジェット
-kind: documentation
-description: スクリーンボードにテキストを表示する
 aliases:
-  - /ja/graphing/widgets/free_text/
+- /ja/graphing/widgets/free_text/
+description: ダッシュボードウィジェットにテキストを表示します。
 further_reading:
-  - link: /dashboards/screenboards/
-    tag: ドキュメント
-    text: スクリーンボード
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: フリーテキストウィジェット
 ---
+
 フリーテキストは、[スクリーンボード][1]に見出しを追加できるウィジェットです。
 
 ダッシュボード全体の目的を示すためによく使用されます。
@@ -20,7 +18,7 @@ further_reading:
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="フリーテキストのセットアップ"  style="width:80%;">}}
+{{< img src="dashboards/widgets/free_text/free_text_setup.png" alt="フリーテキストのセットアップ" style="width:80%;">}}
 
 ### コンフィギュレーション
 
@@ -39,6 +37,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/screenboard/
+[1]: /ja/dashboards/#screenboards
 [2]: /ja/api/v1/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/

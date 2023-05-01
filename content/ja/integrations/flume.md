@@ -1,40 +1,56 @@
 ---
+app_id: flume
+app_uuid: 9e349061-5665-482d-9a5a-f3a07999bfae
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
-categories:
-- ''
-creates_events: false
-ddtype: check
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: flume.channel.capacity
+      metadata_path: metadata.csv
+      prefix: flume.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: flume
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: kealan.maas@datadoghq.com
+  support_email: kealan.maas@datadoghq.com
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/flume/README.md
-display_name: flume
+display_on_public_website: true
 draft: false
 git_integration_title: flume
-guid: 39644ce3-222b-4b97-81b4-55dd8a1db3ea
 integration_id: flume
 integration_title: flume
 integration_version: 0.0.1
 is_public: true
 kind: integration
-maintainer: kealan.maas@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: flume.
-metric_to_check: flume.channel.capacity
+manifest_version: 2.0.0
 name: flume
+oauth: {}
 public_title: flume
 short_description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: flume
 ---
 
 

@@ -1,20 +1,20 @@
 ---
 aliases:
-  - /ja/integrations/awsfirehose/
+- /ja/integrations/awsfirehose/
 categories:
-  - cloud
-  - processing
-  - aws
-  - log collection
-ddtype: crawler
+- cloud
+- processing
+- aws
+- log collection
 dependencies: []
 description: Amazon Firehose のキーメトリクスを追跡。
-doc_link: 'https://docs.datadoghq.com/integrations/amazon_firehose/'
+doc_link: https://docs.datadoghq.com/integrations/amazon_firehose/
 draft: false
 git_integration_title: amazon_firehose
 has_logo: true
 integration_id: amazon-firehose
 integration_title: Amazon Firehose
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -23,6 +23,7 @@ public_title: Datadog-Amazon Firehose インテグレーション
 short_description: Amazon Firehose のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Amazon Firehose は、AWS にストリーミングデータをロードする最も簡単な方法です。
@@ -37,7 +38,7 @@ Amazon Firehose は、AWS にストリーミングデータをロードする最
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Firehose` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Firehose` が有効になっていることを確認します。
 2. [Datadog - AWS Firehose インテグレーション][3]をインストールします。
 
 ### ログの収集
@@ -62,7 +63,7 @@ Amazon Firehose から S3 バケットまたは CloudWatch のいずれかにロ
 {{< get-metrics-from-git "amazon_firehose" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
 ### イベント
 
@@ -77,8 +78,8 @@ AWS AWS Kinesis Firehose インテグレーションには、サービスのチ�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon_firehose
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-firehose
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group

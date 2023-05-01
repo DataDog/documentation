@@ -62,11 +62,26 @@ GitHub アプリがインテグレーションタイルに表示されます。�
 
 {{< img src="integrations/guide/github_apps/notebooks-links-to-git.png" alt="Git へのリンク" style="width:100%;">}}
 
-## 収集データ
+## 収集されるデータ - テレメトリー
+
+### 監査ログ
+
+監査ログは、GitHub の組織全体のすべてのアクティビティとイベントを網羅します。アプリケーションのインストール時に、**Organization Administration** 権限で読み取りアクセスを許可します。 
+これにより、アプリケーションは GitHub の監査ストリームを GitHub 組織に代わってログとして収集し始めます。
+
+監査ログの収集を停止するには、GitHub Apps のインテグレーションタイルの **Telemetery** タブで該当する組織を探し、**Audit Log collection** を切り替えてください。
+
+監査ログについては、GitHub のドキュメントの[監査ログアクション][5]と [Datadog へのストリーミングの設定][6]を参照してください。
 
 ### メトリクス
 
-GitHub アプリインテグレーションには、メトリクスは含まれません。
+GitHub Apps インテグレーションは、コードスキャンアラートとシークレットスキャンアラートのメトリクスを収集します。これらのメトリクスを収集するためには、アプリケーションのインストール時に、それぞれの権限を読み取りアクセスに選択します。
+
+これらのメトリクスは、アラートの状態、リポジトリ、およびシークレットタイプを分類することで、組織のアラート状態の概要を提供します。また、これらのメトリクスは、アラートのトレンドとその全般的な進展に関する長期的な洞察を提供します。
+
+コードスキャンやシークレットスキャンのメトリクスをオプトアウトするには、GitHub Apps のインテグレーションタイルの **Telemetery** タブで対応する Organization を探し、それぞれのセクションをトグルしてください。
+
+詳しくは、GitHub ドキュメントの[コードスキャン][7]、[シークレットスキャン][8]をご覧ください。
 
 ### イベント
 
@@ -78,9 +93,9 @@ GitHub アプリインテグレーションには、サービスのチェック�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -88,4 +103,8 @@ GitHub アプリインテグレーションには、サービスのチェック�
 [2]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
 [3]: https://docs.datadoghq.com/ja/integrations/guide/source-code-integration
 [4]: https://app.datadoghq.com/notebook
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/reviewing-the-audit-log-for-your-organization#audit-log-actions
+[6]: https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise#setting-up-streaming-to-datadog
+[7]: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-alerts
+[8]: https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning
+[9]: https://docs.datadoghq.com/ja/help/

@@ -26,7 +26,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/riak/README.md
 display_on_public_website: true
@@ -34,7 +33,7 @@ draft: false
 git_integration_title: riak
 integration_id: riak
 integration_title: Riak
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡
   media: []
@@ -73,7 +71,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Riak チェックは [Datadog Agent][2] パッケージに含まれています。Riak サーバーに追加でインストールする必要はありません。
 

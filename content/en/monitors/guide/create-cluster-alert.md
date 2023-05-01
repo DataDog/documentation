@@ -2,7 +2,7 @@
 title: Create cluster alerts to notify when a percentage of groups are in critical state
 kind: guide
 further_reading:
-- link: "/monitors/create/"
+- link: "/monitors/"
   tag: "Documentation"
   text: "Learn how to create a monitor"
 - link: "/monitors/notify/"
@@ -23,15 +23,15 @@ In this example, you want to receive a notification when 40 percent of hosts hav
 * Use the `count_nonzero` function to count the total number of hosts.
 * Divide one by the other for the resulting percentage of hosts with CPU usage above 50 percent.
 
-{{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition"  >}}
+{{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition" >}}
 
 * Then, set the condition to alert if the percentage of hosts in that condition reaches 40 percent.
 
-{{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger"  >}}
+{{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger" >}}
 
 This monitor tracks the percentage of host that have a CPU usage above 50 percent within the last ten minutes and generates a notification if more than 40 percent of those hosts meet the specified condition.
 
-{{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status"  >}}
+{{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

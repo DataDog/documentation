@@ -24,9 +24,10 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- オーケストレーション
 - コンテナ
+- kubernetes
 - ログの収集
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md
 display_on_public_website: true
@@ -34,7 +35,7 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
-integration_version: 4.4.0
+integration_version: 4.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -44,17 +45,18 @@ public_title: Kubernetes Scheduler
 short_description: Kubernetes Scheduler の監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
   - Category::Containers
+  - Category::Kubernetes
   - Category::Log Collection
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes Scheduler の監視
   media: []
@@ -75,7 +77,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Kubernetes Scheduler チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

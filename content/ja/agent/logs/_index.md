@@ -63,8 +63,10 @@ logs:
     source: "<SOURCE>"
 ```
 
+Windows では、パス `"<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log"` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
+
 [1]: /ja/agent/guide/agent-configuration-files/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "TCP/UDP" %}}
 
@@ -162,7 +164,7 @@ logs:
 | `encoding`       | ✕       | `type` が **file** の場合、Agent がファイルを読み込む際のエンコーディングを設定します。UTF-16 リトルエンディアン の場合は `utf-16-le` に、UTF-16 ビッグエンディアンの場合は `utf-16-be` に、Shift JIS の場合は `shift-jis` に設定します。その他の値に設定すると、Agent はファイルを UTF-8 形式で読み込みます。_`utf-16-le` および `utf-16be` は Agent v6.23/v7.23 の、`shift-jis` は Agent v6.34/v7.34 の追加機能です_                                                                                      |
 | `tags`           | ✕       | 収集される各ログに追加するタグのリスト ([タグ付けの詳細はこちら][11])。                                                                                                                                                                                                                                                                             |
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

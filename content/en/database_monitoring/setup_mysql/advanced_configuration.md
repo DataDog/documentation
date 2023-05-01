@@ -4,10 +4,10 @@ kind: documentation
 description: Advanced Configuration for MySQL Database Monitoring
 
 ---
-{{< site-region region="us5,gov" >}}
+
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
-
 
 ## Truncating `events_statements_summary_by_digest`
 
@@ -35,13 +35,13 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-In these cases, track these queries as a single normalized query using the `quantize_sql_tables` option, so all metrics for those queries are rolled up into a single query:
+In these cases, track these queries as a single normalized query using the `replace_digits` option, so all metrics for those queries are rolled up into a single query:
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Add the `quantize_sql_tables` option to your database instance configuration in the Datadog Agent:
+Add the `replace_digits` option to your database instance configuration in the Datadog Agent:
 
 ```yaml
 init_config:
@@ -49,7 +49,7 @@ init_config:
 instances:
   - dbm: true
     ...
-    quantize_sql_tables: true
+    replace_digits: true
 ```
 
 ## Raising the sampling rate

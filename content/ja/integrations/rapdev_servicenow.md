@@ -22,18 +22,18 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- クラウド
+- インシデント
 - マーケットプレイス
-- cloud
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
 git_integration_title: rapdev_servicenow
 integration_id: rapdev-servicenow
-integration_title: ServiceNow
+integration_title: ServiceNow Performance Monitoring
 integration_version: ''
 is_public: true
 kind: integration
@@ -51,22 +51,22 @@ pricing:
   tag: instance_name
   unit_label: ServiceNow インスタンス
   unit_price: 1000
-public_title: ServiceNow インテグレーション
+public_title: ServiceNow Performance Monitoring
 short_description: ServiceNow インスタンスのパフォーマンスと ITSM インシデントを監視する
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
-  - Category::Monitoring
+  - Category::Incidents
+  - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ServiceNow インスタンスのパフォーマンスと ITSM インシデントを監視する
   media:
@@ -78,17 +78,18 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: ServiceNow インテグレーション
+  title: ServiceNow Performance Monitoring
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
 
-ServiceNow インテグレーションは、トランザクション、ジョブ、データベース、キャッシュメトリクスに関する豊富な洞察を使用して、ServiceNow インスタンスの状態とパフォーマンスを監視します。このインテグレーションにより、未解決の ITSM インシデントも追跡され、SLA とビジネスに影響を与えるインシデントの年齢の両方に関する実用的なデータポイントが提供されます。
+ServiceNow Performance Monitoring インテグレーションは、トランザクション、ジョブ、データベース、キャッシュメトリクスに関する豊富な洞察を使用して、ServiceNow インスタンスの状態とパフォーマンスを監視します。このインテグレーションにより、未解決の ITSM インシデントも追跡され、SLA とビジネスに影響を与えるインシデントの年齢の両方に関する実用的なデータポイントが提供されます。
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
- - メール: datadog-engineering@rapdev.io
+ - メール: support@rapdev.io
  - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - 電話: 855-857-0222
 
@@ -96,7 +97,7 @@ ServiceNow インテグレーションは、トランザクション、ジョブ
 
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-servicenow" target="_blank">こちらをクリック</a>してください。

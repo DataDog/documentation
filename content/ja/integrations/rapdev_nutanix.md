@@ -30,12 +30,10 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- cloud
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -59,22 +57,20 @@ pricing:
   tag: コア
   unit_label: Nutanix ホストコア
   unit_price: 5
-public_title: Nutanix インテグレーション
+public_title: Nutanix
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
   media:
@@ -92,7 +88,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Nutanix インテグレーション
+  title: Nutanix
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -117,14 +114,14 @@ RapDev Nutanix VM
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- メール: datadog-engineering@rapdev.io
+- メール: support@rapdev.io
 - チャット: [rapdev.io](https://www.rapdev.io/#Get-in-touch)
 - 電話: 855-857-0222
 
 ---
 ボストンより ❤️ を込めて
 
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:datadog-engineering@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)からメッセージをお送りいただければ、導入をサポートいたします！*
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-nutanix" target="_blank">こちらをクリック</a>してください。

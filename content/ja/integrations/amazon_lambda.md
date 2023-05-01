@@ -52,7 +52,7 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 
 #### AWS Lambda メトリクス
 
-1. [AWS インテグレーションタイル][2]のメトリクス収集で、`Lambda` をオンにします。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Lambda` が有効になっていることを確認します。
 2. Amazon Lambda のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [Lambda ポリシー][4]を参照してください。
 
     | AWS アクセス許可     | 説明                                  |
@@ -114,10 +114,10 @@ Lambda@Edge 関数では、分散型トレーシングは_サポートされて�
 
 
 [1]: /ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: /ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-permissions.html
-[5]: https://app.datadoghq.com/account/settings#integrations/amazon_lambda
+[5]: https://app.datadoghq.com/integrations/amazon-lambda
 [6]: https://app.datadoghq.com/functions
 [7]: /ja/serverless
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_lambda/amazon_lambda_metadata.csv

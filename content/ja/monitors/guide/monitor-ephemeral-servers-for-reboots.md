@@ -2,7 +2,7 @@
 aliases:
 - /ja/monitors/faq/how-do-i-monitor-ephemeral-servers-for-reboots
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成方法
 - link: /monitors/notify/

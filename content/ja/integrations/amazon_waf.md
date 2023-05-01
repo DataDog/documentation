@@ -38,9 +38,9 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションタイル][2]のメトリクスの収集で、`WAF` にチェックが入っていることを確認します。新規の [WAFV2][3] エンドポイントを使用している場合は、メトリクスの収集で、`WAFV2` にチェックが入っていることを確認します。
+1. [AWS インテグレーションページ][2]で、使用しているエンドポイントに応じて、`Metric Collection` タブで `WAF` または `WAFV2` が有効になっていることを確認します。
 
-2. [Datadog - AWS WAF インテグレーション][4]をインストールします。
+2. [Datadog - AWS WAF インテグレーション][3]をインストールします。
 
 ### ログの収集
 
@@ -50,13 +50,13 @@ Web Application Firewall 監査ログを有効にして、Web ACL で分析さ�
 
 1. `aws-waf-logs-` で始まる名前で `Amazon Kinesis Data Firehose` を作成します。
 2. `Amazon Kinesis Data Firehose` の送信先として `Amazon S3` を選択し、プレフィックスとして `waf` を追加します。
-3. 必要な Web ACL を選択し、そのログを新しく作成した Firehose に送信します ([詳細な手順はこちら][5])。
+3. 必要な Web ACL を選択し、そのログを新しく作成した Firehose に送信します ([詳細な手順はこちら][4])。
 
 WAF ログが収集され、S3 バケットに送信されます。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
+1. [Datadog ログコレクション AWS Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで WAF ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
    {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
    WAF ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
@@ -84,13 +84,12 @@ AWS WAF インテグレーションには、サービスのチェック機能は
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
-[3]: https://docs.aws.amazon.com/waf/latest/APIReference/Welcome.html
-[4]: https://app.datadoghq.com/account/settings#integrations/amazon_waf
-[5]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_waf/amazon_waf_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/integrations/amazon-web-services
+[3]: https://app.datadoghq.com/integrations/amazon-waf
+[4]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#set-up-the-datadog-lambda-function
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_waf/amazon_waf_metadata.csv
+[7]: https://docs.datadoghq.com/ja/help/

@@ -34,7 +34,7 @@ Visualisez l'évolution d'une seule mesure (ou d'une [facette][1] correspondant 
 
 {{< img src="real_user_monitoring/explorer/visualize/timeseries.png" alt="Graphique de série temporelle dans le RUM Explorer" style="width:80%;" >}}
 
-Ce graphique de série temporelle représente l'évolution du nombre de vues de page dans l'application Shopist au cours des dernières 24 heures pour chaque chemin d'affichage.
+Ce graphique de série temporelle représente l'évolution du nombre de vues de page dans l'application Shopist au cours des dernières 24 heures pour chaque chemin de vue.
 
 Vous disposez d'autres options pour modifier la visualisation :
 
@@ -78,20 +78,6 @@ Visualisez une [mesure][1] unique (ou une [facette][5] correspondant à un nombr
 
 Cette geomap d'analyse RUM affiche le 75e centile de la métrique **Largest Contentful Paint** au cours des dernières 24 heures.
 
-## Entonnoir
-
-Visualisez les taux de conversion de différents workflows et parcours utilisateur de bout en bout.
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel.png" alt="Graphique d'entonnoir dans le RUM Explorer" style="width:90%;">}}
-
-Pour configurer un entonnoir, sélectionnez **View** ou **Action** et choisissez une requête depuis le menu déroulant. Cliquez sur **+** et sélectionnez une autre requête dans le menu déroulant pour visualiser l'entonnoir.
-
-{{< img src="real_user_monitoring/explorer/analytics/rum_funnel.mp4" alt="Créer un entonnoir avec des requêtes" video="true" width="80%" >}}
-
-Ce graphique affiche les sessions correspondant aux requêtes sélectionnées à partir de toutes vos sessions RUM. Lorsque vous cliquez sur le graphique à barres, un volet latéral connexe présente les **sessions avec une conversion** et les **sessions abandonnées**.
-
-{{< img src="real_user_monitoring/explorer/visualize/funnel.mp4" alt="Graphique d'entonnoir dans le RUM Explorer" video="true" width="100%" >}}
-
 ## Événements associés
 
 Pour toutes les visualisations, à l'exception de l'[entonnoir](#entonnoir), vous pouvez sélectionnez une partie du graphique ou cliquer dessus pour agrandir les données ou afficher la liste des événements correspondant à votre sélection.
@@ -111,3 +97,5 @@ Pour les autres types de visualisations, cliquez sur le graphique et sur **View 
 [3]: /fr/logs/explorer/facets/
 [4]: /fr/real_user_monitoring/explorer/saved_views/
 [5]: /fr/real_user_monitoring/explorer/search#setup-facets-and-measures
+[6]: /fr/notebooks
+[7]: /fr/real_user_monitoring/explorer/export/

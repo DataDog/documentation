@@ -164,7 +164,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -222,6 +223,8 @@ Since the value is submitted as a `COUNT` it's stored as `RATE` in Datadog. To g
 Emit a `GAUGE` metric-stored as a `GAUGE` metric-to Datadog. Learn more about the `GAUGE` type in the [metric types][5] documentation.
 
 Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
+
+**Note:** Metrics submission calls are asynchronous. If you want to ensure metrics are submitted, call `flush` before the program exits.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -329,7 +332,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -488,7 +492,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -649,7 +654,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -917,7 +923,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)

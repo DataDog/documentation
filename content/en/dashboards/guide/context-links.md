@@ -247,7 +247,7 @@ Remapping the IP address creates a context link that connects your RUM events wi
 [15]: /logs/explorer/
 [16]: /dashboards/widgets/
 [17]: /real_user_monitoring/
-[18]: /security_platform/cloud_siem/
+[18]: /security/cloud_siem/
 [19]: /integrations/amazon_ec2/
 [20]: https://aws.amazon.com/console/
 [21]: /logs/

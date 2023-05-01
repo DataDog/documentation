@@ -4,8 +4,8 @@ import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/t
 import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
+import { loadInstantSearch } from './components/algolia';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
-import { getQueryParameterByName } from './helpers/browser';
 import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
@@ -47,13 +47,8 @@ $(document).ready(function () {
         }
     });
 
-    // algolia
-    $('.ds-hint').css('background', 'transparent');
-
-    const searchParam = getQueryParameterByName('s');
-    if (searchParam) {
-        $('.sidenav-search input[name="s"]').val(searchParam);
-    }
+    // load algolia instant search for the first time
+    loadInstantSearch(asyncLoad=false);
 
     if (!document.body.classList.contains('api')){
         $(window).on('resize scroll', function() {
@@ -83,7 +78,7 @@ $(document).ready(function () {
     buildTOCMap();
     onScroll();
 
-    if (document.body.classList.value.includes('security_platform') || document.body.classList.value.includes('catalog')) {
+    if (document.querySelector('.js-group-header')) {
         initializeGroupedListings();
     }
 
@@ -162,14 +157,6 @@ function getPathElement(event = null) {
         );
     }
 
-    if (path.includes('integrations/observability_pipelines/integrate_vector_with_datadog')) {
-        const integrationsEl = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
-        sideNavPathElement = integrationsEl.nextElementSibling.querySelector(
-            '[data-path*="integrations/observability_pipelines/integrate_vector_with_datadog"]'
-        );
-        mobileNavPathElement = sideNavPathElement;
-    }
-
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
@@ -181,7 +168,7 @@ function getPathElement(event = null) {
     }
 
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
-    if (path.includes('security_platform/default_rules')) {
+    if (path.includes('security/default_rules')) {
         const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
         if(ref) {
           sideNavPathElement = document.querySelector(
@@ -193,9 +180,18 @@ function getPathElement(event = null) {
         }
     }
 
+    if (path.includes('workflows/actions_catalog')) {
+      const workflowsEl = document.querySelector('.side .nav-top-level > [data-path*="workflows"]');
+      sideNavPathElement = workflowsEl.nextElementSibling.querySelector(
+          '[data-path*="workflows/actions_catalog"]'
+      );
+      mobileNavPathElement = sideNavPathElement;
+    }
+
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
+        scrollActiveNavItemToTop()
     }
 
     if (mobileNavPathElement) {
@@ -204,7 +200,7 @@ function getPathElement(event = null) {
     }
 }
 
-// remove open class from li elements and active class from a elements
+// remove open class from li elements and active class from <a> elements
 function closeNav(){
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
     const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
@@ -406,6 +402,7 @@ function replaceURL(inputUrl) {
 window.addEventListener(
     'popstate',
     function (event) {
+        setMobileNav()
         const domain = replaceURL(window.location.origin);
         if (event.state) {
             loadPage(window.location.href);
@@ -416,3 +413,24 @@ window.addEventListener(
     false
 );
 
+
+
+function scrollActiveNavItemToTop(){
+    // Scroll the open top level left nav item into view below Docs search input
+    if (document.querySelector('.sidenav:not(.sidenav-api)')) {
+        const headerHeight = document.querySelector('body .main-nav').style.height;
+        const padding = 200;
+        const maxHeight = document.documentElement.clientHeight - headerHeight - padding
+
+        // set max height of side nav.
+        document.querySelector('.sidenav-nav').style.maxHeight = `${maxHeight}px`
+
+        const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
+        const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
+
+        if (sideNavActiveMenuItem) {
+            const distanceToTop = sideNavActiveMenuItem.offsetTop;
+            leftSideNav.scrollTop = distanceToTop - 100;
+        }
+    }
+}

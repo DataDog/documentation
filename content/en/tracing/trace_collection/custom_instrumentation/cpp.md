@@ -1,5 +1,5 @@
 ---
-title: C++ Custom Instrumentation
+title: C++ Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/manual_instrumentation/cpp
@@ -24,9 +24,9 @@ If you have not yet read the setup instructions, start with the <a href="https:/
 
 ## Add tags
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-C++ tracing uses "common tags".  These tags can be sourced from both [Datadog specific tags][3] or [OpenTracing tags][4], and included via the below:
+C++ tracing uses "common tags". These tags can be sourced from both [Datadog specific tags][3] or [OpenTracing tags][4], and included like this:
 
 ```cpp
 #include <opentracing/ext/tags.h>
@@ -54,19 +54,48 @@ To set tags across all your spans, set the `DD_TAGS` environment variable as a l
 
 ### Set errors on a span
 
-To customize an error associated with one of your spans, use the below:
+To associate a span with an error, set one or more error-related tags on the
+span. For example:
 
 ```cpp
 span->SetTag(opentracing::ext::error, true);
 ```
 
-Error metadata may be set as additional tags on the same span as well.
+Or, alternatively:
+
+```cpp
+span->SetTag("error", true);
+```
+
+Add more specific information about the error by setting any combination of the
+`error.msg`, `error.stack`, or `error.type` tags. See [Error Tracking][7] for
+more information about error tags.
+
+An example of adding a combination of error tags:
+
+```cpp
+// Associate this span with the "bad file descriptor" error from the standard
+// library.
+span->SetTag("error.msg", "[EBADF] invalid file");
+span->SetTag("error.type", "errno");
+```
+
+Adding any of the `error.msg`, `error.stack`, or `error.type` tags sets
+`error` to the value `true`.
+
+To unset an error on a span, set the `error` tag to value `false`, which removes
+any previously set `error.msg`, `error.stack`, or `error.type` tags.
+
+```cpp
+// Clear any error information associated with this span.
+span->SetTag("error", false);
+```
 
 ## Adding spans
 
 ### Manually instrument a method
 
-To manually instrument your code, install the tracer as in the [setup examples][7], and then use the tracer object to create [spans][2].
+To manually instrument your code, install the tracer as in the [setup examples][8], and then use the tracer object to create [spans][2].
 
 ```cpp
 {
@@ -86,76 +115,14 @@ To manually instrument your code, install the tracer as in the [setup examples][
   // For example, root_span finishes here.
 ```
 
-### Inject and extract context for distributed tracing
 
-Distributed tracing can be accomplished by [using the `Inject` and `Extract` methods on the tracer][8], which accept [generic `Reader` and `Writer` types][9]. Priority sampling (enabled by default) should be on to ensure uniform delivery of spans.
+## Propagating context with headers extraction and injection
 
-```cpp
-// Allows writing propagation headers to a simple map<string, string>.
-// Copied from https://github.com/opentracing/opentracing-cpp/blob/master/mocktracer/test/propagation_test.cpp
-struct HTTPHeadersCarrier : HTTPHeadersReader, HTTPHeadersWriter {
-  HTTPHeadersCarrier(std::unordered_map<std::string, std::string>& text_map_)
-      : text_map(text_map_) {}
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.
 
-  expected<void> Set(string_view key, string_view value) const override {
-    text_map[key] = value;
-    return {};
-  }
+## Resource filtering
 
-  expected<void> ForeachKey(
-      std::function<expected<void>(string_view key, string_view value)> f)
-      const override {
-    for (const auto& key_value : text_map) {
-      auto result = f(key_value.first, key_value.second);
-      if (!result) return result;
-    }
-    return {};
-  }
-
-  std::unordered_map<std::string, std::string>& text_map;
-};
-
-void example() {
-  auto tracer = ...
-  std::unordered_map<std::string, std::string> headers;
-  HTTPHeadersCarrier carrier(headers);
-
-  auto span = tracer->StartSpan("operation_name");
-  tracer->Inject(span->context(), carrier);
-  // `headers` now populated with the headers needed to propagate the span.
-}
-```
-
-## Trace client and Agent configuration
-
-There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
-
-### B3 headers extraction and injection
-
-Datadog APM tracer supports [B3 headers extraction][10] and injection for distributed tracing.
-
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
-
-- Datadog: `Datadog`
-- B3: `B3`
-
-Injection styles can be configured using:
-
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT="Datadog B3"`
-
-The value of the environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
-
-Extraction styles can be configured using:
-
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT="Datadog B3"`
-
-The value of the environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
-
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
-
-### Resource filtering
-
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][11] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from sending traces and influencing trace metrics. Find information about this and other security and fine-tuning configuration on the [Security][12] page.
 
 ## Further Reading
 
@@ -167,8 +134,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [4]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/ext/tags.h
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
-[7]: /tracing/setup/cpp/#installation
-[8]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
-[9]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
-[10]: https://github.com/openzipkin/b3-propagation
-[11]: /tracing/security
+[7]: /tracing/error_tracking/
+[8]: /tracing/setup/cpp/#installation
+[9]: /tracing/trace_collection/trace_context_propagation/cpp
+[12]: /tracing/security

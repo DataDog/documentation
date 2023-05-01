@@ -1,10 +1,12 @@
 {
   "data": {
-    "id": "Example-Create_a_log_based_metric_returns_OK_response",
+    "id": "ExampleLogsMetric",
     "type": "logs_metrics",
     "attributes": {
       "compute": {
-        "aggregation_type": "count"
+        "aggregation_type": "distribution",
+        "include_percentiles": true,
+        "path": "@duration"
       }
     }
   }

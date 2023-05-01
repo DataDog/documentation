@@ -36,7 +36,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
 - キャッシュ
 - ログの収集
 dependencies:
@@ -46,7 +45,7 @@ draft: false
 git_integration_title: traffic_server
 integration_id: traffic-server
 integration_title: Traffic Server
-integration_version: 1.0.2
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -56,17 +55,16 @@ public_title: Traffic Server
 short_description: 接続、キャッシュ、DNS のメトリクスの監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::Caching
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 接続、キャッシュ、DNS のメトリクスの監視
   media: []
@@ -81,11 +79,19 @@ tile:
 
 このチェックは、Datadog Agent を通じて [Traffic Server][1] を監視します。
 
+Datadog-Apache Traffic Server インテグレーションを有効にすると、以下のことができます。
+
+- Web サイトやアプリケーションなどのオンラインリソースの可用性とパフォーマンスを確保する。
+- Web サイトやアプリケーションへのアクセス数、ボリューム、変化などのメトリクスを追跡する。
+- リクエストの平均応答時間およびサイズを決定する。
+- システムログ、エラーログを監視する。
+
+
 ## セットアップ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Traffic Server チェックは [Datadog Agent][3] パッケージに含まれています。
 

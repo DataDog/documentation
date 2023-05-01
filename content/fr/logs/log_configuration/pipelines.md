@@ -12,9 +12,9 @@ further_reading:
 - link: /logs/explorer/
   tag: Documentation
   text: Apprendre à explorer vos logs
-- link: https://learn.datadoghq.com/course/view.php?id=10
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: Centre d'apprentissage
-  text: Aller plus loin avec les logs grâce au parsing
+  text: Des analyses plus poussées grâce au traitement des logs
 kind: documentation
 title: Pipelines
 ---
@@ -145,7 +145,7 @@ Par défaut, [les traceurs de Datadog peuvent automatiquement injecter les ID de
 Vous pouvez préciser des attributs alternatifs à utiliser comme source pour l'ID de trace d'un log en définissant un [processeur de remappage d'ID de trace][2].
 
 
-[1]: /fr/tracing/connect_logs_and_traces/
+[1]: /fr/tracing/other_telemetry/connect_logs_and_traces/
 [2]: /fr/logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}

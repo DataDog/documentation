@@ -25,7 +25,7 @@ draft: false
 git_integration_title: windows_performance_counters
 integration_id: windows-performance-counters
 integration_title: Windows パフォーマンスカウンター
-integration_version: 1.3.0
+integration_version: 1.5.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0

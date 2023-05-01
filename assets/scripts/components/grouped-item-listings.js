@@ -29,7 +29,7 @@ export function initializeGroupedListings() {
             results = allRules;
         }
 
-        if (searchValue && searchValue.length > 2) {
+        if (searchValue && searchValue.length >= 2) {
             results = Array.from(results).filter(item => (item.dataset.name && item.dataset.name.indexOf(searchValue) > -1));
         }
 
@@ -106,14 +106,14 @@ export function initializeGroupedListings() {
         if (event.target.classList.contains('active') || !event.target.getAttribute('data-filter'))
             return;
 
-        const searchValue = inputSearch.value.length > 2 ? inputSearch.value.toLowerCase().trim() : '';
+        const searchValue = inputSearch.value.length >= 2 ? inputSearch.value.toLowerCase().trim() : '';
         const filtered = filterResults(event.target.dataset.filter, searchValue);
         activateButton(event.target, filters);
         showResults(filtered);
     }
 
     const handleKeyup = () => {
-        const searchValue = inputSearch.value.length > 2 ? inputSearch.value.toLowerCase().trim() : '';
+        const searchValue = inputSearch.value.length >= 2 ? inputSearch.value.toLowerCase().trim() : '';
         const activeCategory = document.querySelector('.controls .active');
         const activeCategoryFilter = (activeCategory) ? activeCategory.dataset.filter : '';
         const { hash } = window.location;

@@ -1,5 +1,5 @@
 ---
-title: Ruby Custom Instrumentation
+title: Ruby Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/opentracing/ruby
@@ -19,14 +19,14 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 <div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, please start with the <a href="https://docs.datadoghq.com/tracing/setup/ruby/">Ruby Setup Instructions</a>.
+If you have not yet read the instructions for auto-instrumentation and setup, read the <a href="https://docs.datadoghq.com/tracing/setup/ruby/">Ruby Setup Instructions</a>.
 </div>
 
-This page details common use cases for adding and customizing observability with Datadog APM.
+This page details describes use cases for adding and customizing observability with Datadog APM.
 
 ## Adding tags
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 ### Add custom span tags
 
@@ -34,7 +34,9 @@ Add custom tags to your spans corresponding to any dynamic value within your app
 
 {{< tabs >}}
 {{% tab "Active Span" %}}
-Access the current active [span][1] from any method within your code. **Note**: If the method is called and there is no span currently active, `active_span` is `nil`.
+Access the current active [span][1] from any method within your code. 
+
+**Note**: If the method is called and there is no active span, `active_span` is `nil`.
 
 ```ruby
 require 'ddtrace'
@@ -89,13 +91,13 @@ Datadog.configure do |c|
 end
 ```
 
-You can also use the `DD_TAGS` environment variable to set tags on all spans for an application. For more information on Ruby environment variables, refer to the [setup documentation][3].
+You can also use the `DD_TAGS` environment variable to set tags on all spans for an application. For more information on Ruby environment variables, read the [setup documentation][3].
 
 ### Setting errors on a span
 
-There are two ways to set an error on a span
+There are two ways to set an error on a span:
 
-- The first is to call `span.set_error` and pass in the Exception Object. This automatically extracts the error type, message, and backtrace.
+- Call `span.set_error` and pass in the Exception Object. This automatically extracts the error type, message, and backtrace.
 
 ```ruby
 require 'ddtrace'
@@ -116,12 +118,9 @@ end
 example_method()
 ```
 
-- The second is to use `tracer.trace` which by default sets the error type, message, and backtrace.
-- To configure this behavior you can use the `on_error` option, which is the Handler invoked when a block is provided to `trace`, and the block raises an error.
-- The Proc is provided `span` and `error` as arguments.
-- By default, `on_error` Sets error on the span.
+- Or, use `tracer.trace` which by default sets the error type, message, and backtrace. To configure this behavior you can use the `on_error` option, which is the Handler invoked when a block is provided to `trace`, and the block raises an error. The Proc is provided `span` and `error` as arguments. By default, `on_error` sets error on the span.
 
-Default Behavior: `on_error`
+Default behavior for `on_error`:
 
 ```ruby
 require 'ddtrace'
@@ -138,7 +137,7 @@ Datadog::Tracing.trace('example.trace') do |span|
 end
 ```
 
-Custom Behavior: `on_error`
+Custom behavior for `on_error`:
 
 ```ruby
 require 'ddtrace'
@@ -162,7 +161,7 @@ end
 
 ## Adding spans
 
-If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog::Tracing.trace` method, which you can wrap around any Ruby code:
+If you aren't using supported library instrumentation (see [library compatibility][4]), you can manually instrument your code. Add tracing to your code by using the `Datadog::Tracing.trace` method, which you can wrap around any Ruby code.
 
 To trace any Ruby code, you can use the `Datadog::Tracing.trace` method:
 
@@ -182,7 +181,7 @@ For all the available `**options`, see the [reference guide][5].
 
 ### Manually creating a new span
 
-Programmatically create spans around any block of code.  Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
+Programmatically create spans around any block of code. Spans created in this manner integrate with other tracing mechanisms automatically. In other words, if a trace has already started, the manual span will have its caller as its parent span. Similarly, any traced methods called from the wrapped block of code will have the manual span as its parent.
 
 ```ruby
 # An example of a Sinatra endpoint,
@@ -237,7 +236,7 @@ Datadog::Tracing.before_flush(
 
 #### Custom processor
 
-Processors can be any object that responds to `#call` accepting `trace` as an argument (which is an `Array` of `Datadog::Span`s.)
+Processors can be any object that responds to `#call` accepting `trace` as an argument (which is an `Array` of `Datadog::Span`.)
 
 For example, using the short-hand block syntax:
 
@@ -245,6 +244,23 @@ For example, using the short-hand block syntax:
 Datadog::Tracing.before_flush do |trace|
    # Processing logic...
    trace
+end
+```
+
+The following example implements a processor to achieve complex post-processing logic:
+
+```ruby
+Datadog::Tracing.before_flush do |trace|
+  trace.spans.each do |span|
+    originalPrice = span.get_tag('order.price'))
+    discount = span.get_tag('order.discount'))
+    
+    # Set a tag from a calculation from other tags
+    if (originalPrice != nil && discount != nil)
+      span.set_tag('order.value', originalPrice - discount)
+    end
+  end
+  trace
 end
 ```
 
@@ -268,32 +284,14 @@ In both cases, the processor method *must* return the `trace` object; this retur
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as to exclude specific Resources from sending traces to Datadog in the event these traces are not wanted to count in metrics calculated, such as Health Checks.
 
-### B3 headers extraction and injection
+### Propagating context with headers extraction and injection
 
-Datadog APM tracer supports [B3 headers extraction][6] and injection for distributed tracing.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][6] for information.
 
-Distributed headers injection and extraction is controlled by configuring injection/extraction styles. Currently two styles are supported:
-
-- Datadog: `Datadog`
-- B3: `B3`
-
-Injection styles can be configured using:
-
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-The value of the environment variable is a comma separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
-
-Extraction styles can be configured using:
-
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The value of the environment variable is a comma separated list of header styles that are enabled for extraction. By default Datadog and B3 extraction style are enabled.
-
-If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][7] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][7] page.
 
 ## Further Reading
 
@@ -304,5 +302,5 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [3]: /tracing/setup/ruby/#environment-and-tags
 [4]: /tracing/compatibility_requirements/ruby/
 [5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
-[6]: https://github.com/openzipkin/b3-propagation
+[6]: /tracing/trace_collection/trace_context_propagation/ruby/
 [7]: /tracing/security
