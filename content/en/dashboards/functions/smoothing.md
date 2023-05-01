@@ -157,12 +157,11 @@ And we're graphing a datapoint every 60s in time. Also for simplicity, let's ass
 With time aggregation, we're rolling up data either `avg` (without weighted) or the proposed `weighted_avg`: 
 (INSERT TABLE HERE resembling: https://a.cl.ly/d5ugkK7P) 
 
-3. _Space Aggregation_ 
+2. _Space Aggregation_ 
 Finally, we aggregate by shard to get the final values below: 
 (INSERT TABLE HERE resembling: https://a.cl.ly/YEueYxq1)
 
 Here we can see `weighted()` provides a weighted average of each of the two shards according to the amount of time they were submitting data. 
-
 
 ## Other functions
 
