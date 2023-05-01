@@ -179,13 +179,13 @@ Also generally, bundlers work by crawling all of the `require()` calls that an a
 
 Fundamentally APM tools like `dd-trace` stop working at this point. Perhaps they continue to intercept the calls for built-in modules but don't intercept calls to third party libraries. This means that by default when you bundle a `dd-trace` app with a bundler it is likely to capture information about disk access (via `fs`) and outbound HTTP requests (via `http`), but will otherwise omit calls to third party libraries (like extracting incoming request route information for the `express` framework or showing which query is run for the `mysql` database client).
 
-To get around this, one can treat all third party modules, or at least third party modules that the APM needs to instrument, as being "external" to the bundler. With this setting the instrumented modules remain on disk and continue to be loaded via `require()` while the non-instrumented modules are bundled. Sadly this results in a build with many extraneous files and starts to defeat the purpose of bundling.
+To get around this, one can treat all third party modules, or at least third party modules that the APM needs to instrument, as being "external" to the bundler. With this setting the instrumented modules remain on disk and continue to be loaded with `require()` while the non-instrumented modules are bundled. Sadly this results in a build with many extraneous files and starts to defeat the purpose of bundling.
 
 For these reasons it's necessary to have custom-built bundler plugins. Such plugins are able to instruct the bundler on how to behave, injecting intermediary code and otherwise intercepting the "translated" `require()` calls. The result is that many more packages are then included in the bundled JavaScript file. Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 
-#### Esbuild Support
+#### Esbuild support
 
-This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v14.17. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
+This library provides experimental esbuild support in the form of an esbuild plugin, and currently requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
 
 Here's an example of how one might use `dd-trace` with esbuild:
 
