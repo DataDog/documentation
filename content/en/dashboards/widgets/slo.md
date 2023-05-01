@@ -11,13 +11,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
   text: "Track the status of all your SLOs in Datadog"
+- link: "/dashboards/guide/slo_graph_query"
+  tag: "Documentation"
+  text: "Scope metric-based SLO queries"
 ---
 
 ## Setup
 
 Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
-{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor "  >}}
+{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor " >}}
 
 ### Configuration
 
@@ -26,8 +29,6 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 2. **For metric-based SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
     - Take advantage of template variables by using the *filter by* field to scope the SLO statuses the widget displays. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
     - Add additional scope and context to your SLO metric queries even if the tags were not included in the original SLO configuration. For example, if the original SLO query is `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` and you filter by `env:prod` in the widget, your data will be scoped to only that from your `prod` environment.
-<div class="alert alert-warning">This feature is in private beta. Request access by <a href="/help/">contacting Support</a>.</div>
-
 3. Select up to three different time windows.
 
 ### Options

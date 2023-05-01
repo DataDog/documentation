@@ -72,7 +72,7 @@ To learn more, see the [search syntax][1] documentation.
 
 ## Network data
 
-{{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
+{{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data" style="width:90%;" >}}
 
 Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
@@ -123,7 +123,52 @@ NPM automatically maps
 - network calls to S3 (which can broken down by `s3_bucket`), RDS (which can be broken down by `rds_instance_type`), Kinesis, ELB, Elasticache, and other [AWS services][3].
 - API calls to AppEngine, Google DNS, Gmail, and other [Google Cloud services][4].
 
-To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution).
+To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
+
+### Cloud service enhanced resolution
+If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers only have user-defined tags. For AWS, Datadog applies the tags defined below in addition to the user-defined tags.
+
+ #### Amazon Web Services
+ {{< tabs >}}
+ {{% tab "Loadbalancers" %}}
+ - name
+ - loadbalancer
+ - load_balancer_arn
+ - dns_name (format loadbalancer/dns:)
+ - region
+ - account_id
+ - scheme
+ - custom (user-defined) tags applied to AWS Loadbalancers
+ {{% /tab %}}
+
+ {{% tab "NAT Gateways" %}}
+ - gateway_id
+ - gateway_type
+ - aws_nat_gateway_id
+ - aws_nat_gateway_public_ip
+ - aws_account
+ - availability-zone
+ - region
+ - custom (user) tags applied to AWS Nat Gateways
+ {{% /tab %}}
+
+ {{% tab "VPC Internet Gateway" %}}
+ - gateway_id
+ - gateway_type
+ - aws_internet_gateway_id
+ - aws_account
+ - region
+ - custom (user) tags applied to VPC Internet Gateways
+ {{% /tab %}}
+
+{{% tab "VPC Endpoint" %}}
+ - gateway_id
+ - gateway_type
+ - aws_vpc_endpoint_id
+ - custom (user) tags applied to VPC Internet Endpoints
+ {{% /tab %}}
+
+ {{< /tabs >}}
 
 ### Domain resolution
 
@@ -178,7 +223,7 @@ You can configure the columns in your table using the `Customize` button at the 
 
 Configure the traffic shown with the `Filter Traffic` button.
 
-{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details" style="width:80%;">}}
 
 External traffic (to public IPs) and Datadog Agent traffic is shown by default. To narrow down your view, you can choose to toggle off the `Show Datadog Traffic` and `Show External Traffic` toggles.
 
@@ -194,7 +239,7 @@ Use the _Show N/A (Unresolved Traffic)_ toggle in the upper right corner of the 
 
 Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ aggregate connection:
 
-{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details" style="width:80%;">}}
 
 ## Sidepanel
 
@@ -203,7 +248,7 @@ The sidepanel provides contextual telemetry to help you debug network dependenci
 - Heavy processes consuming the CPU or memory of the destination endpoint.
 - Application errors in the code of the source endpoint.
 
-{{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details" style="width:80%;">}}
 
 ### Common tags
 
@@ -229,3 +274,4 @@ The **Security** tab highlights potential network threats and findings detected 
 [6]: /security/cloud_workload_security/
 [7]: /security/cspm/
 [8]: /security/detection_rules/
+[9]: /network_monitoring/performance/setup/#enhanced-resolution

@@ -54,9 +54,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
 
-1.  Set up [RUM Browser Monitoring][1].
+1. Set up [RUM Browser Monitoring][1].
 
-2.  Initialize the RUM SDK. Configure the `allowedTracingUrls` initialization parameter with the list of internal, first-party origins called by your browser application.
+2. Initialize the RUM SDK. Configure the `allowedTracingUrls` initialization parameter with the list of internal, first-party origins called by your browser application.
 
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
@@ -96,9 +96,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
-1.  Set up [RUM Android Monitoring][1].
+1. Set up [RUM Android Monitoring][1].
 
-2.  Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
+2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -125,9 +125,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
-1.  Set up [RUM iOS Monitoring][1].
+1. Set up [RUM iOS Monitoring][1].
 
-2.  Call the `trackURLSession(firstPartyHosts:)` builder function with the list of internal, first-party origins called by your iOS application.
+2. Call the `trackURLSession(firstPartyHosts:)` builder function with the list of internal, first-party origins called by your iOS application.
     ```swift
     Datadog.initialize(
         appContext: .init(),
@@ -180,9 +180,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
-1.  Set up [RUM React Native Monitoring][1].
+1. Set up [RUM React Native Monitoring][1].
 
-2.  Set the `firstPartyHosts` initialization parameter to define the list of internal, first-party origins called by your React Native application:
+2. Set the `firstPartyHosts` initialization parameter to define the list of internal, first-party origins called by your React Native application:
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
