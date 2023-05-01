@@ -20,13 +20,13 @@ further_reading:
   text: "Setting Up Cloud Workload Security"
 
 ---
+
 {{< site-region region="gov" >}}
 
-Remote configuration is not available on the US1-FED Datadog site.
+<div class="alert alert-warning">Remote configuration is not available on the US1-FED Datadog site.</div>
+
 
 {{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 
 <div class="alert alert-info">Remote Configuration is in beta.</a></div>
 
@@ -180,7 +180,8 @@ After you perform these steps, your Agent requests its configuration from Datado
 [10]: /observability_pipelines/#observability-pipelines-worker
 [11]: /security/cloud_workload_security/setup
 
-{{< /site-region >}}
+
+
 
 ## Further Reading
 

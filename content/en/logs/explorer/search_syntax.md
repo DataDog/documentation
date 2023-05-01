@@ -39,17 +39,6 @@ To combine multiple terms into a complex query, you can use any of the following
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
-## Autocomplete
-
-Use the search bar's autocomplete feature to complete your query using:
-- Existing keys and values in your logs
-- Your recent searches (recent searches from other users are not displayed)
-- Saved views
-
-{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
-
-Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example, if you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
-
 ## Escape special characters and spaces
 
 The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
@@ -178,3 +167,4 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 [4]: /integrations/#cat-log-collection
 [5]: /getting_started/tagging/#tags-best-practices
 [6]: /logs/explorer/saved_views/
+[7]: /logs/explorer/facets/#facet-panel

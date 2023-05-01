@@ -145,7 +145,7 @@ Find out how to monitor individual client and aggregate usage of the Datadog pla
 
 [1]: /monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
-[3]: https://learn.datadoghq.com/courses/intro-to-monitoring
+[3]: https://learn.datadoghq.com/courses/introduction-to-observability
 [4]: /monitors/types/anomaly/
 [5]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [6]: /monitors/types/metric/?tab=change
