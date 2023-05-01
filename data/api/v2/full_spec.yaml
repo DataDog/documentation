@@ -24318,6 +24318,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Create a team
       tags:
       - Teams
@@ -24364,6 +24365,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Remove a team
       tags:
       - Teams
