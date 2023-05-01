@@ -158,10 +158,12 @@ With time aggregation, we're rolling up data either `avg` (without weighted) or 
 (INSERT TABLE HERE resembling: https://a.cl.ly/d5ugkK7P) 
 
 3. _Space Aggregation_ 
-Finally, we aggregate by shard
+Finally, we aggregate by shard to get the final values below: 
 (INSERT TABLE HERE resembling: https://a.cl.ly/YEueYxq1)
 
 Here we can see `weighted()` provides a weighted average of each of the two shards according to the amount of time they were submitting data. 
+
+
 ## Other functions
 
 {{< whatsnext desc="Consult the other available functions:" >}}
