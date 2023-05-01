@@ -10321,9 +10321,6 @@ components:
       description: Use the SLO and uptime widget to track your SLOs (Service Level
         Objectives) and uptime on screenboards and timeboards.
       properties:
-        additional_query_filters:
-          description: Additional filters applied to the SLO query.
-          type: string
         global_time_target:
           description: Defined global time target.
           type: string
