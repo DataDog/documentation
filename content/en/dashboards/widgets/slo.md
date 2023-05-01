@@ -13,7 +13,7 @@ further_reading:
   text: "Track the status of all your SLOs in Datadog"
 - link: "monitors/service_level_objectives/guide/slo_graph_query"
   tag: "Documentation"
-  text: "Add scope and context for metric-based SLO graph queries"
+  text: "Scope metric-based SLO queries"
 ---
 
 ## Setup

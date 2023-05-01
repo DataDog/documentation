@@ -1,5 +1,5 @@
 ---
-title: Add scope and context for metric-based SLO graph queries
+title: Scope metric-based SLO queries
 kind: guide
 disable_toc: false
 further_reading:
@@ -12,12 +12,12 @@ further_reading:
 
 ## Overview
 
-Add scope and context to your graphs so you can visualize the Service Level Objective (SLO) metrics that are important to you. With [SLO Summary Widgets][1], you can use template variables to dynamically scope graphs without affecting your original query.
+The [SLO Summary widget][1] supports advanced metric query filtering, including the use of template variables to dynamically scope results displayed. 
 
-## Walk through of an SLO Query
+## Walk through of an SLO query
 
 ### Metric-based SLO query
-Create a [metric-based Service Level Objective][2]. For example, we have the following trace metrics to measure the availability SLO for our `web-store` service.
+Create a [metric-based SLO][2]. This example uses APM trace metrics to measure the availability of an example service called `web-store`.
 
 ##### Good events (numerator)
 `sum:trace.rack.request.hits{service:web-store} by {resource_name}.as_count()` <br>
@@ -28,33 +28,22 @@ Create a [metric-based Service Level Objective][2]. For example, we have the fol
 
 {{< img src="/monitors/service_level_objectives/slo_graph_query/trace_metrics_slo.png" alt="SLO configuration showing example trace metrics" style="width:100%;" >}}
 
-### SLO summary widget query
-Build out a [SLO Summary widget][1] with the metric-based SLO. Even though the original query is filtered by `service:web-store` you can add template variables to dynamically scope your graphs. We add the `$env` and `$availability-zone` dynamic tags in the *filter by* field of the widget configuration. 
+### SLO Summary widget
+
+Select the SLO in the [SLO Summary widget editor][1]. You can apply additional filters in the widget configuration to further scope the results displayed. This does not modify the original definition of the SLO. In the example, we add the `$env` and `$availability-zone` tags to the *filter by* field of the widget. 
 
 {{< img src="/monitors/service_level_objectives/slo_graph_query/slo_filter_by.png" alt="SLO Summary editor with dynamic tags for $env and $availability-zone" style="width:100%;" >}}
 
-With this configuration, what happens when the [Dashboard template variable][3] is changed to tbe `env:prod` and `availability-zone:northcentralus`?
+With this configuration, what happens when the [Dashboard template variable][3] is changed to `env:prod` and `availability-zone:northcentralus`?
 
-The SLO widget takes the original query and amends it for your visualization purposes:
+The SLO Summary widget filters the SLO metric queries by those additional tags for your visualization purposes:
+
 ##### Good events (numerator)
 `sum:trace.rack.request.hits{service:web-store, env:prod, availability-zone:northcentralus} by {resource_name}.as_count()` <br>
 `sum:trace.rack.request.errors{service:web-store, env:prod, availability-zone:northcentralus} by {resource_name}.as_count()`
 
 ##### Total events (denominator)
 `sum:trace.rack.request.hits{service:web-store, env:prod, availability-zone:northcentralus} by {resource_name}.as_count()`
-
-### What if the metric doesn't have the tags used in a filter? 
-
-What would happen if we added the `$random-example` tag even though none of the trace metrics have this tag associated with it? The query becomes:
-
-##### Good events (numerator)
-`sum:trace.rack.request.hits{service:web-store, env:prod, availability-zone:northcentralus, random-example:*} by {resource_name}.as_count()` <br>
-`sum:trace.rack.request.errors{service:web-store, env:prod, availability-zone:northcentralus, random-example:*} by {resource_name}.as_count()`
-
-##### Total events (denominator)
-`sum:trace.rack.request.hits{service:web-store, env:prod, availability-zone:northcentralus, random-example:*} by {resource_name}.as_count()`
-
-This query does not return any data, the SLO widget query behaves the same way the SLO metric query does. It cannot show data for tags that the metric is not associated with.
 
 ## Further reading
 
