@@ -72,7 +72,7 @@ To learn more, see the [search syntax][1] documentation.
 
 ## Network data
 
-{{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
+{{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data" style="width:90%;" >}}
 
 Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
@@ -223,7 +223,7 @@ You can configure the columns in your table using the `Customize` button at the 
 
 Configure the traffic shown with the `Filter Traffic` button.
 
-{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details" style="width:80%;">}}
 
 External traffic (to public IPs) and Datadog Agent traffic is shown by default. To narrow down your view, you can choose to toggle off the `Show Datadog Traffic` and `Show External Traffic` toggles.
 
@@ -239,7 +239,7 @@ Use the _Show N/A (Unresolved Traffic)_ toggle in the upper right corner of the 
 
 Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ aggregate connection:
 
-{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details" style="width:80%;">}}
 
 ## Sidepanel
 
@@ -248,7 +248,7 @@ The sidepanel provides contextual telemetry to help you debug network dependenci
 - Heavy processes consuming the CPU or memory of the destination endpoint.
 - Application errors in the code of the source endpoint.
 
-{{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details" style="width:80%;">}}
 
 ### Common tags
 

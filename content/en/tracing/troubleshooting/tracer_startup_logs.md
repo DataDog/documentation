@@ -96,7 +96,7 @@ Obtain the startup logs JSON string from a `phpinfo()` page next to "DATADOG TRA
 
 Diagnostic information is displayed in a separate table to help diagnose common issues.
 
-{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info"  >}}
+{{< img src="tracing/troubleshooting/PHPInfo.png" alt="PHP Info" >}}
 
 **CLI SAPI:**
 
