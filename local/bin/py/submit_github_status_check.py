@@ -40,7 +40,7 @@ if not args.pr_id or not args.pr_id.isdigit():
 
 integration = GithubIntegration(args.app_id, bytes(args.app_key, "utf-8"))
 install = integration.get_installation(args.owner, args.repo)
-access = integration.get_access_token(install.id.value)
+access = integration.get_access_token(install.id)
 
 g = Github(login_or_token=access.token)
 repo = g.get_repo(f"{args.owner}/{args.repo}")
