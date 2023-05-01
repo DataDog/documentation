@@ -284,7 +284,7 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -294,7 +294,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     gcp:
       project_id: "<PROJECT_ID>"
-      instance_id: "<INSTANCE_ID>" \
+      instance_id: "<INSTANCE_ID>"' \
   datadog/datadog
 ```
 

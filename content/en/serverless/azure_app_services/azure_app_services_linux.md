@@ -1,6 +1,10 @@
 ---
 title: Azure App Service - Linux
 kind: documentation
+further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+  tag: "Blog"
+  text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 ## Overview
 
@@ -18,7 +22,7 @@ This solution uses the startup command setting and Application Settings for Linu
 #### Set application settings
 To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings. 
 
-{{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP."  style="width:80%;" >}}
+{{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
 
 - `DD_API_KEY` is your Datadog API key.
 - `DD_CUSTOM_METRICS_ENABLED` (optional) enables [custom metrics](#custom-metrics).
@@ -57,7 +61,7 @@ Go to **General settings** and add the following to the **Startup Command** fiel
 curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.1.0/datadog_wrapper | bash
 ```
 
-{{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command."  style="width:100%;" >}}
+{{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}
 {{% /tab %}}
 {{% tab "Java" %}}
 Download the [`datadog_wrapper`][8] file from the releases and upload it to your application with the Azure CLI command:
@@ -100,9 +104,12 @@ To configure your application to submit metrics, follow the appropriate steps fo
 
 If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
 
-{{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'."  style="width:100%;" >}}
+{{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
 
 Share the content of the **Log stream** with [Datadog Support][14].
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /developers/dogstatsd
 [2]: /getting_started/site/#access-the-datadog-site

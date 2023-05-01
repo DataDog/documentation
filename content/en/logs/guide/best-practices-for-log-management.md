@@ -128,7 +128,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
-6.  Add a message, for example:
+6. Add a message, for example:
     ```
     The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
     ```

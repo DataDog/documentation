@@ -54,7 +54,7 @@ The `synthetics.http.ssl.time` and the `synthetics.ssl.hanshake.time` metrics me
 
 These metrics are only collected if the request goes over HTTPS, and not HTTP. 
 
-In case of any redirection, the SSL handshake timing only corresponds to  the last request.
+In case of any redirection, the SSL handshake timing only corresponds to the last request.
 
 
 ### Time to first byte

@@ -17,7 +17,7 @@ further_reading:
 
 Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
-{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor "  >}}
+{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor " >}}
 
 ### Configuration
 
