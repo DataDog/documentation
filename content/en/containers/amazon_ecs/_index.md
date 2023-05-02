@@ -307,7 +307,6 @@ To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar cont
    "family": "datadog-agent-task"
 }
 ```
-{{% /site-region %}}
 
 You also need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
 
@@ -334,6 +333,7 @@ You also need to update the environment variables of the Datadog Agent's contain
    "family": "datadog-agent-task"
 }
 ```
+{{% /site-region %}}
 
 ## Troubleshooting
 
