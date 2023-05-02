@@ -49,12 +49,6 @@ process_config:
     enabled: "true"
 ```
 
-The `enabled` value is a string with the following options:
-
-- `"true"`: Enable the Process Agent to collect processes and containers.
-- `"false"` (default): Only collect containers if available.
-- `"disabled"`: Don't run the Process Agent at all.
-
 Additionally, some configuration options may be set as environment variables.
 
 **Note**: Options set as environment variables override the settings defined in the configuration file.
@@ -126,6 +120,34 @@ datadog:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### I/O stats
+
+I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. In order to enable the process module of the system-probe, use the following configuration:
+
+1. Copy the system-probe example configuration:
+
+    ```shell
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    ```
+
+2. Edit `/etc/datadog-agent/system-probe.yaml` to enable the process module:
+
+    ```yaml
+    system_probe_config:
+      process_config:
+        enabled: true
+    ```
+
+5. [Restart the Agent][1].
+
+    ```shell
+    sudo systemctl restart datadog-agent
+    ```
+
+    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
+[1]: /agent/guide/agent-commands/#restart-the-agent
 
 ### Process arguments scrubbing
 
@@ -355,7 +377,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 ## Additional information
 
-- Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 - In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
