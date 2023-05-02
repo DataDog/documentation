@@ -26,9 +26,8 @@ author:
   sales_email: sales@emnify.com
   support_email: mail@emnify.com
 categories:
-- モニタリング
+- iot
 - メトリクス
-- コスト管理
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/emnify/README.md
 display_on_public_website: true
@@ -48,9 +47,8 @@ supported_os: []
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Monitoring
+  - Category::IOT
   - Category::Metrics
-  - Category::Cost Management
   configuration: README.md#Setup
   description: EMnify データ使用量メトリクスのモニターとダッシュボード
   media:

@@ -24,7 +24,7 @@ This guide walks you through best practices for getting your team up and running
 
 ## Phase 1: Deployment
 
-1. Install the [Datadog Agent (version 7.40 or above)][4]. 
+1. Install the [Datadog Agent (version 7.44 or above)][4]. 
 2. Enable CSM for for your cloud resources and infrastructure:
     - **CWS**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
     - **CSPM**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.

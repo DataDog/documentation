@@ -16,7 +16,7 @@ assets:
     source_type_name: Logstash
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: ervansetiawan@gmail.com
   support_email: ervansetiawan@gmail.com
 categories:

@@ -20,7 +20,7 @@ Amazon EKS audit logs give cluster administrators insight into actions within an
 
 1. If you already have an Amazon EKS cluster configured, navigate to your cluster in the [Amazon EKS console][2].
 1. Click on your EKS cluster.
-1. Click on the **Configuration** tab, and then the **Logging** tab.
+1. Click the **Logging** tab.
 1. Click the **Manage logging** button.
 1. Toggle the **Audit** option to **Enabled** and click the **Save changes** button.
 

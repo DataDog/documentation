@@ -16,12 +16,12 @@ assets:
     source_type_name: KernelCare
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: CloudLinux
   sales_email: schvaliuk@cloudlinux.com
   support_email: schvaliuk@cloudlinux.com
 categories:
-- security
-- os system
+- OS & システム
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
 display_on_public_website: true
@@ -39,16 +39,16 @@ public_title: KernelCare
 short_description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::OS & System
   - Category::Security
-  - Category::OS System
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
   media: []

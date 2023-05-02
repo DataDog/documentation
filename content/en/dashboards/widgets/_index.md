@@ -23,7 +23,7 @@ Widgets are building blocks for your dashboards. They are categorized into three
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}Event Timeline{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/funnel" >}}Funnel{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" >}}Geomap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/heat_map" >}}Heat Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/heat_map" >}}Heatmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/list" >}}List{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/log_stream" >}}Log Stream{{< /nextlink >}}

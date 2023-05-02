@@ -22,7 +22,7 @@ pip install datadog
 
 有効な最小限の `dogwrap` コマンドは、以下のレイアウトを持ちます。
 
-{{< site-region region="us,us3,us5,gov" >}}
+{{< site-region region="us,us3,us5,gov,ap1" >}}
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
 ```

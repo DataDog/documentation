@@ -23,6 +23,9 @@ further_reading:
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
       tag: 'Documentation'
       text: 'Slack integration with incidents'
+    - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
+      tag: 'Blog'
+      text: 'More efficient pair programming with Datadog CoScreen'
     - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
       tag: 'Blog'
       text: 'Best practices for writing incident postmortems'
@@ -90,7 +93,7 @@ In the _Overview_ section, you can update incident fields and customer impact as
 To update the severity level and root cause:
 1. Click the _Severity_ dropdown and select **SEV-3**.
 2. Under _What happened_, select **Monitor** in the _Detection Method_ dropdown (Unknown is selected), because you were first alerted by a monitor on the issue.
-1. Add to the _Why it happened_ field: `TEST: Host is running out 3f memory.`
+1. Add to the _Why it happened_ field: `TEST: Host is running out of memory.`
 4. Click **Save** to update the properties.
     From Slack, you can also update the title, severity, or status of an ongoing issue using the `/datadog incident update` command.
 

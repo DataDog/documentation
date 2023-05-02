@@ -16,9 +16,12 @@ author:
   support_email: help@datadoghq.com
 categories:
 - AWS
-- containers
-- orchestration
+- クラウド
+- コンテナ
+- kubernetes
 - ログの収集
+- orchestration
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md
 display_on_public_website: true
@@ -36,18 +39,21 @@ public_title: Amazon EKS Anywhere
 short_description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::AWS
+  - Category::Cloud
   - Category::Containers
-  - Category::Orchestration
+  - Category::Kubernetes
   - Category::Log Collection
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
   media: []
@@ -136,4 +142,4 @@ _Agent バージョン 6.0 以降で利用可能_
 [13]: https://docs.datadoghq.com/ja/help/
 [14]: https://www.datadoghq.com/blog/announcing-eks
 [15]: https://www.datadoghq.com/blog/eks-cluster-metrics
-[16]: https://docs.datadoghq.com/ja/integrations/amazon_eks_fargate/
+[16]: https://docs.datadoghq.com/ja/integrations/eks_fargate/

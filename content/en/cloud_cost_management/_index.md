@@ -3,6 +3,7 @@ title: Cloud Cost Management
 kind: documentation
 aliases:
   - /infrastructure/cloud_cost_management
+  - /integrations/cloudability
 further_reading:
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
@@ -194,28 +195,33 @@ The rule stops executing for each resource, once a first match is found. For exa
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
-**Note**: If you are a US3 customer, you likely used the recommended [Datadog Resource method][1] through the Azure portal to set up the integration with Datadog. To support Cloud Cost Management, you need to [create an App Registration][4]. 
+{{% site-region region="us3" %}}
+**Note**: If you are a US3 customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+
+[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]: /integrations/azure/?tab=azurecliv20#setup
+{{% /site-region %}}
 
 ### Generate cost exports
 
-1. Navigate to [Exports][2] under Azure portal's *Cost Management + Billing*.
-2. Select the export scope. **Note:** The scope must be *subscription* or *resource group*.
+1. Navigate to [Exports][3] under Azure portal's *Cost Management + Billing*.
+2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. Once the scope is selected, click **Add**.
 
-{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope"  >}}
+{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
   
-{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
+{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-5. Choose a storage account, container, and directory for the exports. The billing exports must be stored in the subscription the export is for.
+5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. 
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
-{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports"  >}}
+{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
 
 ### Provide Datadog access to your exports
 
@@ -232,6 +238,7 @@ Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Da
 If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
 ### Configure Cost Management Reader access
+**Note:** You do not need to configure this access if your scope is **Billing Account**.
 
 1. Navigate to your [subscriptions][4] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
@@ -240,6 +247,15 @@ If your exports are in different storage containers, repeat steps one to seven f
 5. Assign these permissions to the subscription.
 
 This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
+
+### Cost types
+
+You can visualize your ingested data using the following cost types:
+
+| Cost Type            | Description           |
+| -------------------- | --------------------- |
+| `azure.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis).|
+| `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate charge types.|
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
@@ -252,7 +268,7 @@ This ensures complete cost accuracy by allowing periodic cost calculations again
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" >}}
 
 ## Further reading
 
