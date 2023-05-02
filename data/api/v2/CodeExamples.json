@@ -235,13 +235,6 @@
       "description": "Create an incident returns \"CREATED\" response"
     }
   ],
-  "CreateIncidentTodo": [
-    {
-      "group": "incidents",
-      "suffix": "",
-      "description": "Create an incident todo returns \"CREATED\" response"
-    }
-  ],
   "UpdateIncidentIntegration": [
     {
       "group": "incidents",
