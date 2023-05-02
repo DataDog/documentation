@@ -13,7 +13,7 @@ Creating <a href="https://app.datadoghq.com/apm/traces/retention-filters">tag-ba
 
 In this example, the requests (`merchant.store_name` and `merchant.tier`) have been added as tags to the span.
 
-To get started with tagging spans in your application, see the [following documentation][6].
+To get started with tagging spans in your application, see the [Adding span tags][6] guide.
 
 After a tag has been added to a span, search and query on the tag in Analytics by clicking on the tag to add it as a [facet][7]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
@@ -21,7 +21,7 @@ After a tag has been added to a span, search and query on the tag in Analytics b
 
 [1]: /logs/
 [2]: /glossary/#span
-[3]: /glossary/#retention-filters
+[3]: /glossary/#retention-filter
 [4]: /tracing/trace_explorer/search
 [5]: /getting_started/tagging
 [6]: /tracing/guide/add_span_md_and_graph_it/

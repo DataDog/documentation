@@ -32,6 +32,8 @@ further_reading:
 
 The APM UI provides many tools to troubleshoot application performance and correlate it throughout the product, enabling you to find and resolve issues in distributed systems.
 
+For additional definitions and descriptions of important APM terms such as _spans_ and _indexed_, see the [main Glossary][22]. 
+
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                  |
@@ -110,3 +112,4 @@ A trace is used to track the time spent by an application processing a request a
 [19]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [20]: /tracing/trace_pipeline/ingestion_controls/
 [21]: /glossary/#span
+[22]: /glossary/
