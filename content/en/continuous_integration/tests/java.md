@@ -89,7 +89,7 @@ If the tracer library is already available locally on the server, you can procee
 Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.13.0
+DD_TRACER_VERSION=... // e.g. 1.14.0
 {{< /code-block >}}
 
 Run the command below to download the tracer JAR to your local Maven repository:
@@ -107,7 +107,7 @@ mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadogh
 Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.13.0
+DD_TRACER_VERSION=... // e.g. 1.14.0
 {{< /code-block >}}
 
 Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded JAR:
