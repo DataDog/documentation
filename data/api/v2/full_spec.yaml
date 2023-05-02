@@ -4523,6 +4523,11 @@ components:
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
+        customer_impact_scope:
+          description: Required if `customer_impacted:"true"`. A summary of the impact
+            customers experienced during the incident.
+          example: Example customer impact scope
+          type: string
         customer_impacted:
           description: A flag indicating whether the incident caused customer impact.
           example: false
@@ -24313,6 +24318,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Create a team
       tags:
       - Teams
@@ -24359,6 +24365,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Remove a team
       tags:
       - Teams

@@ -11,6 +11,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
   text: "Track the status of all your SLOs in Datadog"
+- link: "/dashboards/guide/slo_graph_query"
+  tag: "Documentation"
+  text: "Scope metric-based SLO queries"
 ---
 
 ## Setup
