@@ -8,7 +8,7 @@ kind: documentation
 title: Google Cloud SQL マネージド Postgres のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -149,7 +149,7 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
 
-       # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
+       # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
        gcp:
         project_id: '<PROJECT_ID>'
         instance_id: '<INSTANCE_ID>'
@@ -321,10 +321,12 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 ### 検証
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `postgres` を探します。または、[データベース][10]のページを参照してください。
+## Agent の構成例
+{{% dbm-postgres-agent-config-examples %}}
 
 ## Cloud SQL インテグレーションをインストールする
 
-GCP からより包括的なデータベースメトリクスを収集するには、[Cloud SQL インテグレーション][11]をインストールします (オプション)。
+Google Cloud からより包括的なデータベースメトリクスを収集するには、[Cloud SQL インテグレーション][11]をインストールします (オプション)。
 
 ## トラブルシューティング
 

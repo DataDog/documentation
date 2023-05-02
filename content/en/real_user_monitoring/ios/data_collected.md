@@ -53,6 +53,7 @@ RUM collects common attributes for all events and attributes specific to each ev
 | `type`           | string  | The type of the event (for example, `view` or `resource`).                         |
 | `service`        | string  | The [unified service name][2] for this application used to corelate user sessions. |
 | `application.id` | string  | The Datadog application ID.                                                        |
+| `application.name` | string  | The Datadog application name.                                                        |
 
 ### Device
 

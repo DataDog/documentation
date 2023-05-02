@@ -11,6 +11,8 @@ assets:
       check: pulsar.active_connections
       metadata_path: metadata.csv
       prefix: pulsar.
+    process_signatures:
+    - java org.apache.pulsar.PulsarStandaloneStarter
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: pulsar

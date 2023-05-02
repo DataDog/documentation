@@ -47,9 +47,9 @@ Data privacy
 |                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
 |                                          | [MySQLi][21]         |           | {{< X >}} |
 | **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |
-|                                          | [postgres][10]       |   Alpha   |           |
-|                                          | [mysql][13]          |           |   Alpha   |
-|                                          | [mysql2][14]         |           |   Alpha   |
+|                                          | [postgres][10]       | {{< X >}} |           |
+|                                          | [mysql][13]          |           | {{< X >}} |
+|                                          | [mysql2][14]         |           | {{< X >}} |
 
 
 
@@ -297,10 +297,6 @@ Enable the database monitoring propagation feature by setting the following envi
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-
-<div class="alert alert-warning">
-DBM-APM linking for Node.js is in alpha release and may be unstable.
-</div>
 
 Install or update [dd-trace-js][1] to a version greater than `3.17.0` (or `2.30.0` if using end-of-life Node.js version 12):
 

@@ -32,7 +32,7 @@ Datadog's Live Processes gives you real-time visibility into the process running
 * Monitor the performance of the internal and third-party software you run using system metrics at two-second granularity
 * Add context to your dashboards and notebooks
 
-{{< img src="infrastructure/process/live_processes_main.png" alt="Live Processes Overview"  >}}
+{{< img src="infrastructure/process/live_processes_main.png" alt="Live Processes Overview" >}}
 
 ## Installation
 

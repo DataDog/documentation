@@ -38,7 +38,7 @@ The following OTel features implemented in the Datadog library as noted:
     ```
 
 3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `True`.
-4. Run your application with `ddtrace-run`. This automatically configures the `Datadog Tracer Provider`. If your application cannot use `ddttrace-run` read [the `dd-trace-py` OpenTelemetry API docs][11] for additional configurations.
+4. Run your application with `ddtrace-run`. This automatically configures the `Datadog Tracer Provider`. If your application cannot use `ddtrace-run` read [the `dd-trace-py` OpenTelemetry API docs][11] for additional configurations.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [OpenTelemetry Automatic instrumentation][8] also.
 
