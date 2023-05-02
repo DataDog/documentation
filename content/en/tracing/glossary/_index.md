@@ -34,6 +34,8 @@ The APM UI provides many tools to troubleshoot application performance and corre
 
 For additional definitions and descriptions of important APM terms such as _spans_ and _indexed_, see the [main Glossary][22]. 
 
+For additional definitions and descriptions of important APM terms such as _spans_ and _indexed_, see the [main Glossary][22]. 
+
 | Concept                         | Description                                                                                                                                                                                                          |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Service](#services)            | Services are the building blocks of modern microservice architectures - broadly a service groups together endpoints, queries, or jobs for the purposes of building your application.                                  |
