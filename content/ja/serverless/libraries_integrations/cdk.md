@@ -94,53 +94,46 @@ datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>])
 datadog.addForwarderToNonLambdaLogGroups([<LOG_GROUPS>])
 ```
 
-オプションとして、[ソースコードインテグレーション](https://docs.datadoghq.com/integrations/guide/source-code-integration/) (Typescript のみ) を有効にしたい場合、AWS CDK は非同期関数をサポートしていないため、スタック設定にいくつかの変更を加える必要があります。
+## ソースコードインテグレーション
+[ソースコードインテグレーション](https://docs.datadoghq.com/integrations/guide/source-code-integration/)は、Lambda の自動タグ付けによりデフォルトで有効であり、以下の場合に動作します。
 
-初期化関数を次のように変更します (注: ここでは `gitHash` のと `gitRepoUrl` 値を CDK に渡すように変更します)。
+- Datadog Github Integration がインストールされている。
+- Datadog-cdk の依存関係が以下のバージョンのいずれかを満たしている。
+  - `datadog-cdk-constructs-v2` >= 1.4.0
+  - `datadog-cdk-constructs` >= 0.8.5
 
-```typescript
-async function main() {
-  // パッケージマネージャーで @datadog/datadog-ci を追加することを確認します
+### ソースコードインテグレーションを可能にする代替方法
+自動導入がうまくいかない場合は、以下の 2 つのガイドのいずれかに従ってください。
+
+**注: これらの代替ガイドは Typescript にのみ有効です。**
+<details>
+  <summary>datadog-cdk のバージョンは満たしているが、Datadog の Github インテグレーションがインストールされていない</summary>
+
+  Datadog Github インテグレーションがインストールされていない場合は、`datadog-ci` パッケージをインポートして、Git メタデータを Datadog に手動でアップロードする必要があります。
+CDK Stack が初期化されている場所で行うことをお勧めします。
+
+  ```typescript
+  const app = new cdk.App();
+
+  // パッケージマネージャーで @datadog/datadog-ci を追加することを確認してください
   const datadogCi = require("@datadog/datadog-ci");
-  const [gitRepoUrl, gitHash] = await datadogCi.gitMetadata.getGitCommitInfo();
+  // Git のメタデータを Datadog に手動でアップロードします。
+  datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
   const app = new cdk.App();
-  // ExampleStack のコンストラクタにハッシュとリポジトリ URL を渡します
-  new ExampleStack(app, "ExampleStack", {}, gitHash, gitRepoUrl);
-}
-```
+  new ExampleStack(app, "ExampleStack", {});
 
-
-この関数を呼び出し、スタックを初期化することを確認します。
-
-スタックのコンストラクタで、オプションの `gitHash` パラメーターを追加して、`addGitCommitMetadata()` を呼び出すように変更します。
-
-```typescript
-export class ExampleStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string, gitRepoUrl?:string) {
-    ...
-    ...
-    datadog.addGitCommitMetadata([<YOUR_FUNCTIONS>], gitHash, gitRepoUrl);
-  }
-}
-```
-
-### レガシーソースコードインテグレーション
-以下の依存関係のうち、古いバージョンを使用している場合
-- @datadog/datadog-ci < v2.4.0
-- datadog-cdk-constructs-v2 < v2-1.3.0
-- datadog-cdk-constructs < 0.8.4
-
-最新バージョンにアップグレードすることを強くお勧めします。そうでない場合は、以下のソースコードインテグレーションを有効にするためのレガシードキュメントを参照してください。
-
+  app.synth();
+  ```
+</details>
 <details>
-  <summary>レガシーソースコードのインテグレーション</summary>
+  <summary>datadog-cdk のバージョンを満たしていない</summary>
 
-  初期化関数を次のように変更します (注: ここでは `gitHash` の値だけを CDK に渡すように変更しています)。
+  初期化関数を次のように変更します (注: CDK に渡すのは `gitHash` 値だけにします)。
 
   ```typescript
   async function main() {
-    // パッケージマネージャーで @datadog/datadog-ci を追加することを確認します
+    // パッケージマネージャーで @datadog/datadog-ci を追加することを確認してください
     const datadogCi = require("@datadog/datadog-ci");
     const [, gitHash] = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
 
@@ -149,8 +142,9 @@ export class ExampleStack extends cdk.Stack {
     new ExampleStack(app, "ExampleStack", {}, gitHash);
   }
   ```
+  この関数を呼び出してスタックを初期化することを確認してください。
 
-  スタックのコンストラクターで、オプションの `gitHash` パラメーターを追加し、`addGitCommitMetadata()` を呼び出すように変更します。
+  スタックのコンストラクタで、オプションのパラメーターとして `gitHash` を追加し、`addGitCommitMetadata()` を呼び出すように変更します。
 
   ```typescript
   export class ExampleStack extends cdk.Stack {
@@ -185,6 +179,7 @@ _注_: 説明では npm パッケージパラメーターを使用していま�
 | `enableDatadogTracing` | `enable_datadog_tracing` | Lambda 関数で Datadog トレースを有効にします。デフォルトは `true` です。 |
 | `enableMergeXrayTraces` | `enable_merge_xray_traces` | Lambda 関数の X-Ray トレースのマージを有効にします。デフォルトは `false` です。 |
 | `enableDatadogLogs` | `enable_datadog_logs` | Datadog Lambda Extension を介して Lambda 関数のログを Datadog に送信します。 デフォルトは `true` です。注: この設定は、Datadog Forwarder 経由で送信されるログには影響しません。 |
+| `enableSourceCodeIntegration` | `enable_source_code_integration` | Datadog ソースコードインテグレーションを有効にして、テレメトリーを Git リポジトリ内のアプリケーションコードと接続します。これには Datadog Github インテグレーションが必要で、そうでない場合は[代替方法](#alternative-methods to enable-source-code-integration)に従ってください。詳しくは[こちら](https://docs.datadoghq.com/integrations/guide/source-code-integration/)をご覧ください。デフォルトは `true` です。 |
 | `injectLogContext` | `inject_log_context` | 設定すると、Lambda レイヤーは自動的に console.log に Datadog のトレース ID をパッチします。デフォルトは `true` です。 |
 | `logLevel` | `log_level` | `debug` に設定すると、Datadog Lambda Library および Extension は、問題のトラブルシューティングに役立つ情報を追加でログに記録します。 |
 | `env` | `env` | `extensionLayerVersion` と共に設定すると、指定した値を持つすべての Lambda 関数に `DD_ENV` 環境変数が追加されます。`forwarderArn` と共に設定すると、すべての Lambda 関数に `env` タグが追加され、指定した値が設定されます。 |

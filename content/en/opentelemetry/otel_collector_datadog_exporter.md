@@ -125,7 +125,7 @@ To get better metadata for traces and for smooth integration with Datadog:
 
 - **Use resource detectors**: If they are provided by the language SDK, attach container information as resource attributes. For example, in Go, use the [`WithContainer()`][9] resource option.
 
-- **Apply [Unified Service Tagging][10]**: Make sure you’ve configured your application with the appropriate resource attributes for unified service tagging. This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
+- **Apply [Unified Service Tagging][10]**: Make sure you've configured your application with the appropriate resource attributes for unified service tagging. This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
 
 ### 4. Configure the logger for your application
 
@@ -196,7 +196,7 @@ spec:
           command:
             - "/otelcol-contrib"
             - "--config=/conf/otel-agent-config.yaml"
-          image: otel/opentelemetry-collector-contrib:0.61.0
+          image: otel/opentelemetry-collector-contrib:0.71.0
           env:
             - name: POD_IP
               valueFrom:

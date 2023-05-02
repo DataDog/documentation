@@ -119,7 +119,7 @@ Before getting started, ensure you have the following prerequisites:
 7. After the stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
 
 8. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box [AWS overview dashboard][12] to see metrics sent by your AWS services and infrastructure:
-{{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heat map showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
+{{< img src="getting_started/integrations/aws-dashboard.png" alt="The AWS overview dashboard in the Datadog account. On the left is the AWS logo and an AWS events graph showing 'No matching entries found'. In the center are graphs related to EBS volumes with numerical data displayed and a heatmap showing consistent data. Along the right are graphs related to ELBs showing numerical data as well as a timeseries graph showing spiky data from three sources.">}}
 
 ## Enable integrations for individual AWS services
 
@@ -159,7 +159,7 @@ For containerized environments, you can use the Datadog Agent, whether you're ma
 
 #### ECS with EC2 launch type
 
-Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on the EC2 instances in your ECS cluster. Review the [Amazon ECS Data Collection documentation][27] to see the metrics and events reported to your Datadog account.
+Use the [Amazon ECS documentation][25] to run the [Datadog Docker Agent][26] on the EC2 instances in your ECS cluster. Review the [Amazon ECS on EC2][27] to see the metrics and events reported to your Datadog account.
 
 #### ECS with Fargate launch type
 
@@ -236,7 +236,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [24]: https://aws.amazon.com/fargate/
 [25]: /agent/amazon_ecs/?tab=awscli
 [26]: /agent/docker/?tab=standard
-[27]: /agent/amazon_ecs/data_collected/
+[27]: /integrations/amazon_ecs
 [28]: /integrations/ecs_fargate/?tab=fluentbitandfirelens
 [29]: /agent/kubernetes/distributions/?tab=helm#EKS
 [30]: /agent/kubernetes/?tab=helm

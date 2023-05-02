@@ -7,9 +7,25 @@
     "name": "AuthN Mappings",
     "description": "[AuthN Mappings API] (https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nは、ID プロバイダーから送信される属性を使用して、Datadogでユーザーグループをロールに自動的にマッピングするために使用されます。"
   },
+  "ci-visibility-pipelines": {
+    "name": "CI Visibility パイプライン",
+    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計します。"
+  },
+  "ci-visibility-tests": {
+    "name": "CI Visibility テスト",
+    "description": "CI Visibility のテストイベントを HTTP で検索・集計します。"
+  },
   "cloud-workload-security": {
     "name": "クラウドワークロードセキュリティ",
     "description": "Datadog セキュリティエージェントを使用してイベントを生成するためのワークロードアクティビティセキュリティルール。"
+  },
+  "cloudflare-integration": {
+    "name": "Cloudflare インテグレーション",
+    "description": "Datadog API を通じて、Datadog Cloudflare インテグレーションを直接構成します。"
+  },
+  "confluent-cloud": {
+    "name": "Confluent Cloud",
+    "description": "Datadog API を通じて、Datadog Confluent Cloud インテグレーションを直接構成します。"
   },
   "dashboard-lists": {
     "name": "ダッシュボードリスト",
@@ -18,6 +34,14 @@
   "events": {
     "name": "イベント",
     "description": "イベントサービスを使用すると、プログラムでイベントをイベントストリームにポストしたり、イベントストリームから取得することができます。イベントは 4000 文字に制限されています。4000 文字を超えるメッセージを含むイベントが送信された場合は、最初の 4000 文字だけが表示されます。"
+  },
+  "fastly-integration": {
+    "name": "Fastly インテグレーション",
+    "description": "Datadog API を通じて、Datadog Fastly インテグレーションを直接構成します。"
+  },
+  "ip-allowlist": {
+    "name": "IP 許可リスト",
+    "description": "IP allowlist API は、Datadog API および Web UI にアクセスできる IP アドレスを管理するために使用されます。インテーク API や公開ダッシュボードへのアクセスをブロックするものではありません。\n\nこれはエンタープライズ専用の機能です。Datadog のサポートに連絡してアクセスをリクエストしてください。"
   },
   "incident-services": {
     "name": "インシデントサービス",
@@ -53,7 +77,11 @@
   },
   "metrics": {
     "name": "メトリクス",
-    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする\n- メトリクスのタグコンフィギュレーションを変更する\n- メトリクスのタグとボリュームを確認する\n\n**注**: グラフには設定された数のポイントのみを含めることができ、\nメトリクスが表示されるタイムフレームが長くなると、\nポイント間の集計が発生してその設定された数を下回ります。\n\n`manage_tags` を Post、Patch、Delete する API メソッドは\n`Manage Tags for Metrics` アクセス許可を持つユーザーのみが実行できます。"
+    "description": "メトリクスエンドポイントでは、次のことができます。\n\n- メトリクスデータを投稿して Datadog のダッシュボードにグラフ化できるようにする\n- 任意の期間のメトリクスをクエリする (時系列とスカラー)\n- メトリクスのタグコンフィギュレーションを変更する\n- メトリクスのタグとボリュームを確認する\n\n**注**: グラフには設定された数のポイントのみを含めることができ、\nメトリクスが表示されるタイムフレームが長くなると、\nポイント間の集計が発生してその設定された数を下回ります。\n\n`manage_tags` を Post、Patch、Delete する API メソッドは\n`Manage Tags for Metrics` アクセス許可を持つユーザーのみが実行できます。"
+  },
+  "monitors": {
+    "name": "アラート設定",
+    "description": "[モニター](https://docs.datadoghq.com/monitors)を使用すると、気になるメトリクスまたはチェックを監視して、定義されたしきい値を超えたときにチームに通知することができます。\n詳しくは、[モニターの作成](https://docs.datadoghq.com/monitors/create/types/)と[タグポリシー](https://docs.datadoghq.com/monitors/settings/)のページを参照してください。"
   },
   "opsgenie-integration": {
     "name": "Opsgenie インテグレーション",
@@ -71,6 +99,10 @@
     "name": "RUM",
     "description": "HTTP 経由で RUM イベントを検索または集計します。"
   },
+  "restriction-policies": {
+    "name": "制限ポリシー",
+    "description": "制限ポリシーは、リソースのアクセス制御ルールを定義し、一連の関係 (編集者と閲覧者など) を、許可されたプリンシパル (ロールなど) のセットにマッピングします。制限ポリシーは、リソースに対して誰がどのようなアクションを実行することが認可されるかを決定します。"
+  },
   "roles": {
     "name": "ロール",
     "description": "Roles API は、Datadog ロール、ロールに付与する[グローバルアクセス許可](https://docs.datadoghq.com/account_management/rbac/)、そしてそのロールに属するユーザーを作成し、管理するために使用します。\n\n特定のアカウントアセットに関連したアクセス許可は、この API を使用しなくても Datadog アプリケーションでロールに付与することができます。たとえば、ロールに特定のログインデックスの読み取りアクセス権限を付与する場合、Datadog の[パイプラインページ](https://app.datadoghq.com/logs/pipelines)から実行できます。"
@@ -79,6 +111,10 @@
     "name": "セキュリティモニタリング",
     "description": "信号を生成し、生成された信号を一覧表示するための検出ルール。"
   },
+  "sensitive-data-scanner": {
+    "name": "センシティブ データ スキャナー",
+    "description": "機密データスキャナーのグループやルールを作成、更新、削除、取得します。"
+  },
   "service-accounts": {
     "name": "サービスアカウント",
     "description": "サービスアカウントを作成、編集、無効化します。"
@@ -86,6 +122,10 @@
   "service-definition": {
     "name": "サービス定義",
     "description": "サービス定義の作成、更新、取得、削除を行うための API。"
+  },
+  "synthetics": {
+    "name": "Synthetics",
+    "description": "Datadog Synthetics は、シミュレートされたユーザーリクエストとブラウザレンダリングを使用して、アップタイムを確保し、地域の問題を特定し、アプリケーションのパフォーマンスを追跡します。Datadog Synthetics テストには、[API テスト](https://docs.datadoghq.com/synthetics/api_tests/)と[ブラウザテスト](https://docs.datadoghq.com/synthetics/browser_tests)の 2 つの異なる種類があります。Datadog の API を使用して、両方のテストタイプをプログラムで管理できます。\n\nSynthetics の詳細については、[Synthetics の概要](https://docs.datadoghq.com/synthetics/)を参照してください。"
   },
   "usage-metering": {
     "name": "使用料のメータリング",

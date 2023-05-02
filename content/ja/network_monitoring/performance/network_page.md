@@ -1,24 +1,22 @@
 ---
-title: ネットワークページ
-kind: documentation
-description: スタック内の各ソースと宛先間のネットワークデータを探索。
 aliases:
-  - /ja/network_performance_monitoring/network_table
-  - /ja/network_performance_monitoring/network_page
+- /ja/network_performance_monitoring/network_table
+- /ja/network_performance_monitoring/network_page
+description: スタック内の各ソースと宛先間のネットワークデータを探索。
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
-    tag: ブログ
-    text: ネットワークパフォーマンスモニタリング
-  - link: /network_monitoring/devices
-    tag: Documentation
-    text: ネットワークデバイスモニタリング
-  - link: /network_monitoring/performance/setup
-    tag: Documentation
-    text: Datadog Agent を使用したネットワークデータの収集。
-  - link: /dashboards/widgets/network
-    tag: Documentation
-    text: ネットワークウィジェット
+- link: https://www.datadoghq.com/blog/network-performance-monitoring
+  tag: ブログ
+  text: ネットワークパフォーマンスモニタリング
+- link: /network_monitoring/devices
+  tag: Documentation
+  text: ネットワークデバイスモニタリング
+- link: /network_monitoring/performance/setup
+  tag: Documentation
+  text: Datadog Agent を使用したネットワークデータの収集。
+kind: documentation
+title: ネットワークページ
 ---
+
 {{< img src="network_performance_monitoring/network_page/main_page_npm.png" alt="メインページ" >}}
 
 ## クエリ
@@ -27,27 +25,29 @@ further_reading:
 
 以下のスクリーンショットは、_source_ と _destination_ を `service` タグで集計した場合のデフォルト表示です。テーブル内の各行が、1 時間の範囲内で集計されたサービス間集約接続に相当します。
 
-{{< img src="network_performance_monitoring/network_page/context_npm.png" alt="コンテキスト"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/context_npm.png" alt="コンテキスト" style="width:80%;">}}
 
 次の例は、`us-east-1` リージョン内のサービスを表す IP アドレスからアベイラビリティーゾーンまでのすべての集約接続を示しています。
 
-{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="集約接続テーブルのフィルタリング例"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="集約接続テーブルのフィルタリング例" style="width:80%;">}}
 
 ページの右上にあるタイムセレクターから、集計対象となるトラフィックに応じたタイムフレームを設定できます。
 
-{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="タイムフレーム NPM"  style="width:30%;">}} 
+{{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="タイムフレーム NPM" style="width:30%;">}}
+
+Datadog インテグレーションや統合サービスタグ付けのタグを使用して、自動的に集計やフィルターを行うことができます。その他のタグについては、後述の[カスタムファセット](#custom-facets)を参照してください。また、`service`、`kube_service`、`short_image`、`container_name` などの共通タグを組み合わせて、"Popular Tags" を選択して集計することができます。
 
 ### ファセットパネル
 
 ファセットパネルには検索バーのクエリ内にあるタグが反映されます。画面上の _Source_ と _Destination_ タブでファセットパネルの切り替えが可能です。
 
-{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination パネル"  style="width:20%;">}}
+{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination パネル" style="width:20%;">}}
 
 #### カスタムファセット
 
 Datadog ネットワークページでは、タグを使用してトラフィックデータを集計およびフィルタリングできます。タグのリストは、検索バーのドロップダウンメニューからデフォルトで利用可能です。
 
-{{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="ドロップダウンメニュー"  style="width:90%;">}}
+{{< img src="network_performance_monitoring/network_page/drop_down_npm.png" alt="ドロップダウンメニュー" style="width:90%;">}}
 
 リスト済みのタグには `service`、`availability zone`、`env`、`environment`、`pod`、`host`、`ip`、`port` などがあります。メニューに含まれていないタグで集計またはフィルタリングを行う場合は、該当のタグをカスタムファセットとして追加してください。
 
@@ -81,7 +81,7 @@ Datadog ネットワークページでは、タグを使用してトラフィッ
 
 パケットが大量にドロップされた場合は、`sent_metric` (ソースから宛先へ) と `received_metric` (宛先からソースへ) の表示値が異なることがあります。`destination` から `source` に送られた大量のバイトは、`destination` 由来の集約接続に含まれます。しかし、この場合に `source` 由来の集約接続がこのバイトを「受信した」とみなすことはありません。
 
-**注**: デフォルトの収集インターバルは 5 分で、保存期間は 7 日です。
+**注:** データは 30 秒ごとに収集され、5 分ごとに集計され、14 日間保持されます。
 
 ### メトリクス
 
@@ -123,7 +123,7 @@ NPM は自動的に、
 - ネットワーク呼び出しを S3 (`s3_bucket` で分類できる)、RDS (`rds_instance_type` で分類できる)、Kinesis、ELB、Elasticache、その他の [AWS サービス][3]にマッピングします。
 - API 呼び出しを AppEngine、Google DNS、Gmail、その他の [GCP サービス][4]にマッピングします。
 
-Agent をインストールできない他のエンドポイント (パブリック API など) を監視するには、[`domain` タグ](#dns-resolution)でネットワーク概要の宛先をグループ化します。
+Agent をインストールできない他のエンドポイント (パブリック API など) を監視するには、[`domain` タグ](#domain-resolution)でネットワーク概要の宛先をグループ化します。
 
 ### ドメイン解決
 
@@ -149,7 +149,7 @@ NPM ユーザーは、IP スペースが重複するようにネットワーク�
 
 AWS や GCP では、ネットワーク ID は自動的に VPC ID に設定されます。他の環境でネットワーク ID を設定するには、次のように `datadog.yaml` で手動で設定するか、プロセスおよびコア Agent コンテナに `DD_NETWORK_ID` を追加します。
 
-  ```shell
+  ```yaml
   network:
      Id: <your-network-id>
   ```

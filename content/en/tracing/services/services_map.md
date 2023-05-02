@@ -67,7 +67,7 @@ Using this tag on your Host Map or logs with the same key allows Datadog to join
 
 {{< img src="tracing/visualization/services_map/servicemaptags.png" alt="Service Map tags" style="width:80%;">}}
 
-Additionally, monitors can be tagged by service in the “Say what’s happening” section. This allows you to associate monitors for any metric, including custom business metrics, with your services. The status of monitors is exposed directly on the Service Map.
+Additionally, monitors can be tagged by service in the **Say what's happening** section. This allows you to associate monitors for any metric, including custom business metrics, with your services. The status of monitors is exposed directly on the Service Map.
 
 {{< img src="tracing/visualization/services_map/servicemon.png" alt="Service Map monitor" style="width:90%;">}}
 
@@ -83,7 +83,7 @@ New services or connections appear within moments of being instrumented and age 
 
 ### Color
 
-If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor.  If multiple monitors are defined, the status of the monitor in the most severe state is used.
+If a monitor is enabled for a service, the circumference has a weighted border colored with green, yellow, red, or grey, based on the status of that monitor. If multiple monitors are defined, the status of the monitor in the most severe state is used.
 
 Monitors are not constrained to APM monitors. The service tag, described above, can be used to associate any monitor type with a service.
 

@@ -168,19 +168,6 @@ root@datadog-agent-9d5bl:/# echo ${DD_CLUSTER_AGENT_AUTH_TOKEN}
 DD_CLUSTER_AGENT_AUTH_TOKEN=1234****9
 ```
 
-Verify that the node-based Agent is using the Datadog Cluster Agent as a tag provider:
-
-```text
-root@datadog-agent-9d5bl:/# cat /var/log/datadog/agent.log | grep "metadata-collector"
-2018-06-11 06:59:02 UTC | INFO | (tagger.go:151 in tryCollectors) | kube-metadata-collector tag collector successfully started
-```
-
-Or look for error logs, such as:
-
-```text
-2018-06-10 08:03:02 UTC | ERROR | Could not initialize the communication with the Datadog Cluster Agent, falling back to local service mapping: [...]
-```
-
 ## Custom Metrics Server
 
 ### Cluster Agent status and flare

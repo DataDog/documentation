@@ -4,6 +4,9 @@ aliases:
 - /ja/security/cloud_workload_security/getting_started
 description: セットアップとインストールの説明に従って、クラウドワークロードセキュリティを開始します。
 further_reading:
+- link: /getting_started/cloud_security_management
+  tag: Documentation
+  text: Cloud Security Management の概要
 - link: https://www.datadoghq.com/blog/datadog-runtime-security/
   tag: ブログ
   text: Datadog クラウドランタイムセキュリティの詳細はこちら

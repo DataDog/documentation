@@ -86,21 +86,19 @@ USM メトリクスクエリ構文は、`trace.*` を使用する [APM メトリ
 
 オプションで、USM メトリクスを使用して SLO を手動で作成するには
 
-1. **Monitors** > **SLOs** の順に移動し、[**New SLO**][15] をクリックします。
+1. **Service Management** > **SLOs** の順に移動し、[**New SLO**][15] をクリックします。
 2. **Metric Based** を選択し、**Good events (numerator)** セクションで 2 つのクエリを作成します。
 
-   * クエリ A: `universal.http.server` などの USM メトリクスを入力し、`from` フィールドに `env` プライマリタグを入力し、`all values` ドロップダウンメニューから `service` を選択します。
-   * クエリ B: `universal.http.server` などの USM メトリクスを入力し、`from` フィールドに `env` プライマリタグと `error:true` タグを入力し、`all values` ドロップダウンメニューから `service` を選択します。
+   * クエリ A: `universal.http.server` のような USM メトリクスを入力し、`from` フィールドにプライマリ `service` と `env` タグを追加して特定のサービスにフィルターし、`as` フィールドで `count` を選択します。
+   * クエリ B: `universal.http.server` のような USM メトリクスを入力し、`from` フィールドに `error:true` タグに加えて、プライマリ `service` と `env` タグを追加して特定のサービスにフィルターし、`as` フィールドで `count` を選択します。
 
 3. **+ Add Formula** をクリックし、`a-b` と入力します。
-4. **Total events (denominator)** セクションで、`universal.http.server` などの USM メトリクスを入力し、`from` フィールドに `env` プライマリタグを入力し、`all values` ドロップダウンメニューから `service` を選択します。
-5. **+ New Target** をクリックすると、以下の設定で 3 つのターゲットしきい値が作成されます。
+4. **Total events (denominator)** セクションでは、`universal.http.server` のような USM メトリクスを入力し、`from` フィールドにプライマリ `service` と `env` タグを追加して特定のサービスにフィルターし、`as` フィールドで `count` を選択します。
+5. **+ New Target** をクリックすると、以下の設定でターゲットしきい値が作成されます。
 
-   * タイムウィンドウは `7Days`、ターゲットしきい値は `95%`、警告しきい値は `97%` です。
-   * タイムウィンドウは `30 Days`、ターゲットしきい値は `97%`、警告しきい値は `99%` です。
-   * タイムウィンドウは `90 Days`、ターゲットしきい値は `99%`、警告しきい値は `99.5%` です。
+   * タイムウィンドウは `7 Days`、ターゲットしきい値は `95%`、警告しきい値は `99.5%` です。Datadog では、すべてのタイムウィンドウで同じターゲットしきい値を設定することを推奨しています。
 
-6. この SLO の名前と説明を入力し、`env` プライマリタグを追加します。
+6. この SLO の名前と説明を入力します。`team` タグに加えて、プライマリ `env` と `service` タグを設定します。
 7. **Save and Set Alert** をクリックします。
 
 {{< img src="universal_service_monitoring/guide/usm_slo_setup.png" alt="BITSBOUTIQUE のユニバーサルサービスモニタリング SLO を設定する" style="width:100%;" >}}

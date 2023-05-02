@@ -353,22 +353,21 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
 [4]: /fr/agent/kubernetes/
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">L'Operator Datadog est en bêta publique. Si vous souhaitez nous faire part de vos remarques ou de vos questions, contactez l'<a href="/help">assistance Datadog</a>.</div>
+<div class="alert alert-warning">L'Operator Datadog est disponible pour le grand public depuis la version `1.0.0`, il prend en charge la version `v2alpha1` du `DatadogAgent` .</div>
 
 [L'Operator Datadog][1] est une fonctionnalité permettant de déployer l'Agent Datadog sur Kubernetes et OpenShift. L'Operator transmet des données sur le statut, la santé et les erreurs du déploiement dans le statut de sa ressource personnalisée. Ses paramètres de niveau supérieur permettent également de réduire les erreurs de configuration.
 
 Pour activer NPM dans l'Operator, appliquez la configuration suivante :
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
   namespace: placeholder
 spec:
-  # (...)
   features:
-    networkMonitoring:
+    npm:
       enabled: true
 ```
 

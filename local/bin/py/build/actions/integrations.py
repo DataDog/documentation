@@ -28,7 +28,8 @@ from os.path import (
 from actions.format_link import format_link_file
 
 try:
-    from assetlib.constants import CLASSIFIER_TAGS
+    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
+    CLASSIFIER_TAGS = get_all_classifier_names()
 except ImportError:
     CLASSIFIER_TAGS = []
     if getenv("CI_COMMIT_REF_NAME"):
@@ -36,13 +37,13 @@ except ImportError:
         sys.exit(1)
 finally:
     if not CLASSIFIER_TAGS:
-        print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty continuing without validation')
+        print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty - continuing without validation')
     else:
+        file_content = ['| Name | Description |\n| --- | --- |\n']
         with open('layouts/shortcodes/integration_categories.md', 'w') as file:
-            for tag in CLASSIFIER_TAGS:
-                file.write(f'- {tag}\n')
-            file.write("\n")
-
+            for tag in get_non_deprecated_classifiers():
+                file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
+            file.write(''.join(file_content) + '\n')
 
 class Integrations:
     def __init__(self, source_file, temp_directory, integration_mutations):
@@ -738,6 +739,8 @@ class Integrations:
                 result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
+                print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
+                sys.exit(1)
         else:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
@@ -795,9 +798,9 @@ class Integrations:
             result = re.sub(
                 self.regex_partial_close, "", result, 0
             )
-            result = re.sub(
-                self.regex_site_region, r"{{% \1 %}}", result, 0
-            )
+            # result = re.sub(
+            #     self.regex_site_region, r"{{% \1 %}}", result, 0
+            # )
 
         # if __init__.py exists lets grab the integration id
         integration_id = manifest_json.get("integration_id", "") or ""
@@ -875,9 +878,14 @@ class Integrations:
 
                 ## Reformating all links now that all processing is done
                 if tab_logic:
-                    final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
-                    with open(out_name, 'w') as final_file:
-                        final_file.write(final_text)
+                    try:
+                        final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
+                        with open(out_name, 'w') as final_file:
+                            final_file.write(final_text)
+                    except Exception as e:
+                        print(e)
+                        print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
+                        sys.exit(1)
             else:
                 if exists(out_name):
                     print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")

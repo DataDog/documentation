@@ -13,6 +13,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/
   tag: GitHub
   text: Datadog で IoT アプリケーションを監視するために HiveMQ と OpenTelemetry を使用する
+- link: /metrics/open_telemetry/otlp_metric_types
+  tag: Documentation
+  text: OTLP メトリクスタイプ
 kind: documentation
 title: OpenTelemetry Collector Datadog エクスポーター
 ---
@@ -69,12 +72,16 @@ receivers:
         static_configs:
         - targets: ['0.0.0.0:8888']
 
+  filelog:
+    include_file_path: true
+    poll_interval: 500ms
+    include:
+      - /var/log/**/*example*/*.log
+
 processors:
   batch:
-    # Datadog APM Intake の上限は 3.2MB です。バッチがそれを超えないように
-    # しましょう。
-    send_batch_max_size: 1000
-    send_batch_size: 100
+    send_batch_max_size: 100
+    send_batch_size: 10
     timeout: 10s
 
 exporters:
@@ -93,25 +100,143 @@ service:
       receivers: [otlp]
       processors: [batch]
       exporters: [datadog]
+    logs:
+      receivers: [otlp, filelog]
+      processors: [batch]
+      exporters: [datadog]
 {{< /code-block >}}
 
 ここで `<DD_SITE>` はあなたのサイト、{{< region-param key="dd_site" code="true" >}} となります。
 
-上記の構成により、OpenTelemetry のインスツルメンテーションライブラリから HTTP と gRPC で OTLP データを受信できるようになり、非開発環境では必須の[バッチ処理][5]が設定されます。
+上記の構成により、OpenTelemetry のインスツルメンテーションライブラリから HTTP と gRPC で OTLP データを受信できるようになり、非開発環境では必須の[バッチ処理][5]が設定されます。なお、バッチ処理でテレメトリーデータを大量に処理すると、`413 - Request Entity Too Large` エラーが発生することがあります。
+
+バッチプロセッサの正確な構成は、シグナルの種類だけでなく、特定のワークロードに依存します。Datadog インテークは、3 つのシグナルタイプに対して異なるペイロードサイズ制限を設けています。
+- トレースインテーク: 3.2MB
+- ログインテーク: [5MB 非圧縮][6]
+- メトリクス V2 インテーク: [500KB または解凍後 5MB][7]
 
 #### 高度なコンフィギュレーション
 
-Datadog Exporter の構成オプションは、[このドキュメントにあるコンフィギュレーションファイルの例][6]で説明されています。デプロイメントに関連する他のオプション、例えば `api::site` や `host_metadata` セクションにあるものがあるかもしれません。
+Datadog Exporter の構成オプションは、[このドキュメントにあるコンフィギュレーションファイルの例][8]で説明されています。デプロイメントに関連する他のオプション、例えば `api::site` や `host_metadata` セクションにあるものがあるかもしれません。
 
 ### 3. アプリケーションを構成する
 
 トレースのメタデータを充実させ、Datadog とのインテグレーションを円滑に行うには
 
-- **リソース検出システム**を使用する: 言語 SDK で提供されている場合、コンテナ情報をリソース属性としてアタッチします。例えば、Go の場合、[`WithContainer()`][7] リソースオプションを使用します。
+- **リソース検出システム**を使用する: 言語 SDK で提供されている場合、コンテナ情報をリソース属性としてアタッチします。例えば、Go の場合、[`WithContainer()`][9] リソースオプションを使用します。
 
-- **[統合サービスタグ付け][8]**を適用する: 統合サービスタグ付けに適切なリソース属性をアプリケーションに構成していることを確認してください。これは、Datadog のテレメトリーを、サービス名、デプロイ環境、サービスバージョンなどのタグで結びつけます。アプリケーションはこれらのタグを OpenTelemetry のセマンティック規則 (`service.name`、`deployment.environment`、`service.version`) を使用して設定する必要があります。
+- **[統合サービスタグ付け][10]**を適用する: 統合サービスタグ付けに適切なリソース属性をアプリケーションに構成していることを確認してください。これは、Datadog のテレメトリーを、サービス名、デプロイ環境、サービスバージョンなどのタグで結びつけます。アプリケーションはこれらのタグを OpenTelemetry のセマンティック規則 (`service.name`、`deployment.environment`、`service.version`) を使用して設定する必要があります。
 
-### 4. コレクターを実行する
+### 4. アプリケーションに合わせたロガーの構成
+
+{{< img src="logs/log_collection/otel_collector_logs.png" alt="コレクター内の filelog レシーバーにデータを送信するホスト、コンテナ、アプリケーション、コレクター内の Datadog Exporter が Datadog バックエンドにデータを送信する様子を示した図" style="width:100%;">}}
+
+OpenTelemetry SDK のロギング機能は完全にサポートされていないため (詳細は [OpenTelemetry ドキュメント][11]の各言語を参照)、Datadog ではアプリケーションに標準のロギングライブラリを使用することを推奨しています。言語固有の[ログ収集のドキュメント][12]に従って、アプリケーションに適切なロガーをセットアップしてください。Datadog は、[カスタムパースルール][13]の必要性を避けるために、JSON でログを出力するようにロギングライブラリを設定することを強く推奨しています。
+
+#### filelog レシーバーの構成
+
+[演算子][14]を使って、filelog レシーバーを構成します。例えば、`checkoutservice` というサービスがあり、それが `/var/log/pods/services/checkout/0.log` にログを書き込んでいるとしたら、ログのサンプルは以下のようになります。
+
+```
+{"level":"info","message":"order confirmation email sent to \"jack@example.com\"","service":"checkoutservice","span_id":"197492ff2b4e1c65","timestamp":"2022-10-10T22:17:14.841359661Z","trace_id":"e12c408e028299900d48a9dd29b0dc4c"}
+```
+
+filelog の構成例
+
+```
+filelog:
+   include:
+     - /var/log/pods/**/*checkout*/*.log
+   start_at: end
+   poll_interval: 500ms
+   operators:
+     - id: parse_log
+       type: json_parser
+       parse_from: body
+     - id: trace
+       type: trace_parser
+       trace_id:
+         parse_from: attributes.trace_id
+       span_id:
+         parse_from: attributes.span_id
+   attributes:
+     ddtags: env:staging
+```
+
+- `include`: レシーバーが追跡するファイルのリスト 
+- `start_at: end`: 書き込まれている新しいコンテンツを読むことを示します
+- `poll_internal`: ポーリング頻度を設定します
+- 演算子:
+    - `json_parser`: JSON ログをパースします。デフォルトでは、filelog レシーバーは各ログ行をログレコードに変換し、それがログの[データモデル][15]の `body` となります。次に、`json_parser` が JSON の本文をデータモデルの属性に変換します。
+    - `trace_parser`: Datadog でログとトレースを関連付けるために、ログから `trace_id` と `span_id` を抽出します。
+
+#### Kubernetes を使用する
+
+Kubernetes インフラクチャーに OpenTelemetry Collector と Datadog Exporter をデプロイする方法は複数存在します。filelog レシーバーを動作させるためには、[Agent/DaemonSet のデプロイメント][16]を推奨します。
+
+コンテナ環境では、アプリケーションはログを `stdout` または `stderr` に書き込みます。Kubernetes はログを収集し、標準的な場所に書き込みます。filelog レシーバーには、ホストノード上のロケーションを Collector にマウントする必要があります。以下は、ログを送信するために必要なマウントを持つ[拡張機能例][17]です。
+
+```
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: otel-agent
+  labels:
+    app: opentelemetry
+    component: otel-collector
+spec:
+  template:
+    metadata:
+      labels:
+        app: opentelemetry
+        component: otel-collector
+    spec:
+      containers:
+        - name: collector
+          command:
+            - "/otelcol-contrib"
+            - "--config=/conf/otel-agent-config.yaml"
+          image: otel/opentelemetry-collector-contrib:0.61.0
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            # k8s.pod.ip は、k8sattributes のポッドを関連付けるために使用されます
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "k8s.pod.ip=$(POD_IP)"
+          ports:
+            - containerPort: 4318 # OpenTelemetry HTTP レシーバーのデフォルトポート。
+              hostPort: 4318
+            - containerPort: 4317 # OpenTelemetry gRPC レシーバーのデフォルトポート。
+              hostPort: 4317
+            - containerPort: 8888 # メトリクスをクエリするためのデフォルトのエンドポイント。
+          volumeMounts:
+            - name: otel-agent-config-vol
+              mountPath: /conf
+            - name: varlogpods
+              mountPath: /var/log/pods
+              readOnly: true
+            - name: varlibdockercontainers
+              mountPath: /var/lib/docker/containers
+              readOnly: true
+      volumes:
+        - name: otel-agent-config-vol
+          configMap:
+            name: otel-agent-conf
+            items:
+              - key: otel-agent-config
+                path: otel-agent-config.yaml
+        # マウントノードのログファイルの場所。
+        - name: varlogpods
+          hostPath:
+            path: /var/log/pods
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers
+```
+
+### 5. コレクターを実行する
 
 {{< tabs >}}
 {{% tab "ホスト上" %}}
@@ -122,7 +247,7 @@ Datadog Exporter の構成オプションは、[このドキュメントにあ�
 otelcontribcol_linux_amd64 --config collector.yaml
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Docker (ローカルホスト)" %}}
 OpenTelemetry Collector を Docker イメージとして実行し、同じホストからトレースを受信するには
@@ -419,10 +544,8 @@ OpenTelemetry Operator を使用するには
        processors:
          k8sattributes:
          batch:
-           # Datadog APM Intake limit is 3.2MB. Let's make sure the batches do not
-           # go over that.
-           send_batch_max_size: 1000
-           send_batch_size: 100
+           send_batch_max_size: 100
+           send_batch_size: 10
            timeout: 10s
        exporters:
          datadog:
@@ -461,7 +584,9 @@ Datadog Agent と並行して OpenTelemetry Collector を使用するには
    # ...
    exporters:
      otlp:
-       endpoint: "${env:HOST_IP}:4317"
+       endpoint: "${HOST_IP}:4317"
+       tls:
+         insecure: true
    # ...
    ```
 
@@ -506,11 +631,16 @@ Datadog Agent と並行して OpenTelemetry Collector を使用するには
 {{% /tab %}}
 {{< /tabs >}}
 
+### ログとトレースの相関
+
+Datadog Exporter を使って OpenTelemetry のトレースも Datadog に送る場合、`trace_parser` 演算子を使って各トレースから `trace_id` を抽出し、それを関連するログに追加してください。Datadog は関連するログとトレースを自動的に関連付けます。詳細は [OpenTelemetry のトレースとログの接続][18]を参照してください。
+
+{{< img src="logs/log_collection/logs_traces_correlation.png" alt="トレースと相関のあるログの一覧を表示するトレースパネル" style="width:70%;">}}
 ### ホスト名解決
 
 OpenTelemetry シグナルがタグ付けされるホスト名は、以下のソースを基に順番に取得され、現在のソースが利用できないか無効な場合は、次のソースにフォールバックされます。
 
-1. [リソース属性][9]から、例えば `host.name` (他の多くの属性もサポートされています)。
+1. [リソース属性][19]から、例えば `host.name` (他の多くの属性もサポートされています)。
 2. エクスポーターの構成にある `hostname` フィールド。
 3. クラウドプロバイダー API。
 4. Kubernetes のホスト名。
@@ -519,27 +649,44 @@ OpenTelemetry シグナルがタグ付けされるホスト名は、以下のソ
 
 ## デプロイメントに基づく制限
 
-OpenTelemetry コレクターには、[2 つの主要なデプロイメント方法][14]があります。Agent と Gateway です。デプロイメント方法によっては、利用できないコンポーネントがあります。
+OpenTelemetry コレクターには、[2 つの主要なデプロイメント方法][20]があります。Agent と Gateway です。デプロイメント方法によっては、利用できないコンポーネントがあります。
 
 | デプロイメントモード | ホストメトリクス | Kubernetes オーケストレーションメトリクス | トレース | ログの自動取り込み |
 | --- | --- | --- | --- | --- |
 | Gateway として | | {{< X >}} | {{< X >}} | |
 | Agent として | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
+## すぐに使えるダッシュボード
+
+Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには、**Dashboards** > **Dashboards list** に移動し、`opentelemetry` を検索してください。
+
+{{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
+
+**Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][21] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][22]に応じて収集された他の種類のメトリクス用です。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [3]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
 [4]: https://opentelemetry.io/docs/collector/configuration/
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
-[7]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
-[8]: /ja/getting_started/tagging/unified_service_tagging/
-[9]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
-[14]: https://opentelemetry.io/docs/collector/deployment/
+[6]: https://docs.datadoghq.com/ja/api/latest/logs/
+[7]: https://docs.datadoghq.com/ja/api/latest/metrics/#submit-metrics
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml
+[9]: https://pkg.go.dev/go.opentelemetry.io/otel/sdk/resource#WithContainer
+[10]: /ja/getting_started/tagging/unified_service_tagging/
+[11]: https://opentelemetry.io/docs/instrumentation/
+[12]: /ja/logs/log_collection/?tab=host
+[13]: /ja/logs/log_configuration/parsing/
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/pkg/stanza/docs/operators
+[15]: https://opentelemetry.io/docs/reference/specification/logs/data-model/
+[16]: https://opentelemetry.io/docs/collector/deployment/#agent
+[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
+[18]: /ja/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
+[19]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
+[20]: https://opentelemetry.io/docs/collector/deployment/
+[21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
+[22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver

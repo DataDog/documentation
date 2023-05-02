@@ -13,7 +13,7 @@ further_reading:
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-js'
       tag: 'GitHub'
-      text: 'Node.js Datadog Library source code'
+      text: 'Node.js Datadog library source code'
     - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
@@ -156,4 +156,4 @@ DD_APPSEC_ENABLED=true node app.js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[2]: /security/application_security/setup_and_configure/?code-lang=nodejs#compatibility
+[2]: /security/application_security/enabling/compatibility/nodejs

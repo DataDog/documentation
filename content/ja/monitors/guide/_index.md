@@ -1,4 +1,9 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: モニターガイド
 disable_toc: true
 kind: ガイド
 private: true

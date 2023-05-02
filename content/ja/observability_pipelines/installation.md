@@ -1,14 +1,12 @@
 ---
 aliases:
 - /ja/observability_pipelines/setup/
-- /ja/agent/vector_aggregation/
-- /ja/integrations/observability_pipelines/integrate_vector_with_datadog/
-- /ja/observability_pipelines/integrate_vector_with_datadog/
-- /ja/observability_pipelines/integrations/integrate_vector_with_datadog/
-- /ja/observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
 further_reading:
-- link: /observability_pipelines/production_deployment_overview/
+- link: /getting_started/observability_pipelines/
   tag: ドキュメント
+  text: 観測可能性パイプラインと Datadog の概要
+- link: /observability_pipelines/production_deployment_overview/
+  tag: Documentation
   text: ワーカーを本番環境に持ち込む
 kind: ドキュメント
 title: APM に Datadog Agent を構成する
@@ -27,7 +25,7 @@ title: APM に Datadog Agent を構成する
 
 1. サポートされている Linux アーキテクチャ (x86_64 または AMD64) のいずれかを使用している
 2. 有効な [Datadog API キー][5]がある。
-3. [観測可能性パイプラインの構成][7]がある。
+3. [観測可能性パイプラインの構成][6]がある。
 
 ## APM に Datadog Agent を構成する
 
@@ -72,7 +70,7 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
     echo "<DD_OP_CONFIG>" > /var/lib/observability-pipelines-worker/observability-pipelines-worker.yaml
     ```
 
-   ここで、`DD_OP_CONFIG` は [観測可能性パイプライン UI][7] で作成した観測可能性パイプラインの構成の内容です。
+   ここで、`DD_OP_CONFIG` は [観測可能性パイプライン UI][6] で作成した観測可能性パイプラインの構成の内容です。
 
 
 5. ワーカーを起動します。
@@ -100,17 +98,17 @@ $ DD_API_KEY=<DD_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.
 ## コンフィギュレーション
 
 - ワーカーのコンフィギュレーションファイルは `/etc/observability-pipelines-worker/observability-pipelines-worker.yaml` に格納されています。
-- すべての構成オプションについては、構成リファレンスを参照してください。
-- 構成例は、[データを活用する][6]および構成リファレンスを参照してください。
+- すべての構成オプションについては、[構成リファレンス][7]を参照してください。
+- 構成例は、[データを活用する][8]および構成リファレンスを参照してください。
 
 [1]: https://en.wikipedia.org/wiki/APT_%28software%29
 [2]: https://debian.org/
 [3]: https://ubuntu.com/
 [4]: https://linux.org/
 [5]: /ja/account_management/api-app-keys/#api-keys
-[6]: /ja/observability_pipelines/working_with_data/
-[7]: https://app.datadoghq.com/observability-pipelines
-
+[6]: https://app.datadoghq.com/observability-pipelines
+[7]: /ja/observability_pipelines/configurations/
+[8]: /ja/observability_pipelines/working_with_data/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -191,12 +189,11 @@ Kubernetes 環境に Helm Chart で観測可能性パイプラインワーカー
 
 値の一覧は[この表][5]を参照してください。
 
-[1]: https://helm.sh/ 
+[1]: https://helm.sh/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /ja/account_management/api-app-keys/#api-keys
 [4]: https://artifacthub.io/packages/helm/datadog/observability-pipelines-worker
 [5]: https://github.com/DataDog/helm-charts/tree/main/charts/observability-pipelines-worker#values
-
 {{% /tab %}}
 {{< /tabs >}}
 

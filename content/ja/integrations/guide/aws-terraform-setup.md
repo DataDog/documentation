@@ -19,57 +19,111 @@ title: AWS と Terraform のインテグレーション
     * `AWS_PERMISSIONS_LIST`: Datadog AWS インテグレーションが必要とする IAM ポリシー。現在のリストは、[Datadog AWS インテグレーション][3]のドキュメントで確認できます。
     * `AWS_ACCOUNT_ID`: AWS アカウント ID。
 
-さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、[Terraform Registry][4] を参照してください。
+   さらなる使用例やオプションパラメーターの全リスト、Datadog の追加リソースについては、[Terraform Registry][4] を参照してください。
 
-```hcl
-data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
-  statement {
-    actions = ["sts:AssumeRole"]
+   {{< site-region region="us,us3,us5,eu,gov" >}}
+   ```hcl
+   data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
+      statement {
+      actions = ["sts:AssumeRole"]
 
-    principals {
-      type = "AWS"
-      identifiers = ["arn:aws:iam::464622532012:root"]
-    }
-    condition {
-      test = "StringEquals"
-      variable = "sts:ExternalId"
+      principals {
+         type = "AWS"
+         identifiers = ["arn:aws:iam::464622532012:root"]
+      }
+      condition {
+         test = "StringEquals"
+         variable = "sts:ExternalId"
 
-      values = [
-        "${datadog_integration_aws.sandbox.external_id}"
-      ]
-    }
-  }
-}
+         values = [
+            "${datadog_integration_aws.sandbox.external_id}"
+         ]
+      }
+      }
+   }
 
-data "aws_iam_policy_document" "datadog_aws_integration" {
-  statement {
-    actions = [<AWS_PERMISSIONS_LIST>]
+   data "aws_iam_policy_document" "datadog_aws_integration" {
+      statement {
+      actions = [<AWS_PERMISSIONS_LIST>]
 
-    resources = ["*"]
-  }
-}
+      resources = ["*"]
+      }
+   }
 
-resource "aws_iam_policy" "datadog_aws_integration" {
-  name = "DatadogAWSIntegrationPolicy"
-  policy = "${data.aws_iam_policy_document.datadog_aws_integration.json}"
-}
+   resource "aws_iam_policy" "datadog_aws_integration" {
+      name = "DatadogAWSIntegrationPolicy"
+      policy = "${data.aws_iam_policy_document.datadog_aws_integration.json}"
+   }
 
-resource "aws_iam_role" "datadog_aws_integration" {
-  name = "DatadogAWSIntegrationRole"
-  description = "Role for Datadog AWS Integration"
-  assume_role_policy = "${data.aws_iam_policy_document.datadog_aws_integration_assume_role.json}"
-}
+   resource "aws_iam_role" "datadog_aws_integration" {
+      name = "DatadogAWSIntegrationRole"
+      description = "Role for Datadog AWS Integration"
+      assume_role_policy = "${data.aws_iam_policy_document.datadog_aws_integration_assume_role.json}"
+   }
 
-resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
-  role = "${aws_iam_role.datadog_aws_integration.name}"
-  policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
-}
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
+   }
 
-resource "datadog_integration_aws" "sandbox" {
-  account_id  = "<AWS_ACCOUNT_ID>"
-  role_name   = "DatadogAWSIntegrationRole"
-}
-```
+   resource "datadog_integration_aws" "sandbox" {
+      account_id  = "<AWS_ACCOUNT_ID>"
+      role_name   = "DatadogAWSIntegrationRole"
+   }
+   ```
+   {{< /site-region >}}
+
+   {{< site-region region="ap1" >}}
+   ```hcl
+   data "aws_iam_policy_document" "datadog_aws_integration_assume_role" {
+      statement {
+      actions = ["sts:AssumeRole"]
+
+      principals {
+         type = "AWS"
+         identifiers = ["arn:aws:iam::417141415827:root"]
+      }
+      condition {
+         test = "StringEquals"
+         variable = "sts:ExternalId"
+
+         values = [
+            "${datadog_integration_aws.sandbox.external_id}"
+         ]
+      }
+      }
+   }
+
+   data "aws_iam_policy_document" "datadog_aws_integration" {
+      statement {
+      actions = [<AWS_PERMISSIONS_LIST>]
+
+      resources = ["*"]
+      }
+   }
+
+   resource "aws_iam_policy" "datadog_aws_integration" {
+      name = "DatadogAWSIntegrationPolicy"
+      policy = "${data.aws_iam_policy_document.datadog_aws_integration.json}"
+   }
+
+   resource "aws_iam_role" "datadog_aws_integration" {
+      name = "DatadogAWSIntegrationRole"
+      description = "Role for Datadog AWS Integration"
+      assume_role_policy = "${data.aws_iam_policy_document.datadog_aws_integration_assume_role.json}"
+   }
+
+   resource "aws_iam_role_policy_attachment" "datadog_aws_integration" {
+      role = "${aws_iam_role.datadog_aws_integration.name}"
+      policy_arn = "${aws_iam_policy.datadog_aws_integration.arn}"
+   }
+
+   resource "datadog_integration_aws" "sandbox" {
+      account_id  = "<AWS_ACCOUNT_ID>"
+      role_name   = "DatadogAWSIntegrationRole"
+   }
+   ```
+   {{< /site-region >}}
 
 3. `terraform apply` を実行します。データ収集が開始されるまで最大 10 分待ち、すぐに使える [AWS 概要ダッシュボード][5]を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
 

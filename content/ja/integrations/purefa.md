@@ -23,8 +23,8 @@ author:
   sales_email: sales@purestorage.com
   support_email: pure-observability@purestorage.com
 categories:
-- os system
 - data store
+- OS & システム
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md
 display_on_public_website: true
@@ -42,17 +42,17 @@ public_title: Pure Storage FlashArray
 short_description: Pure Storage FlashArrays のパフォーマンスと利用状況を監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::OS System
   - Category::Data Store
+  - Category::OS & System
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Pure Storage FlashArrays のパフォーマンスと利用状況を監視
   media:

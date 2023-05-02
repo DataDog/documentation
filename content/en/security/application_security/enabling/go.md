@@ -13,7 +13,7 @@ further_reading:
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-go/tree/v1'
       tag: 'GitHub'
-      text: 'Go Datadog Library source code'
+      text: 'Go Datadog library source code'
     - link: "/security/default_rules/#cat-application-security"
       tag: "Documentation"
       text: "OOTB Application Security Management Rules"
@@ -35,7 +35,7 @@ You can monitor application security for Go apps running in Docker, Kubernetes, 
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
-   For information about which language and framework versions are supported by the library, see [Compatibility][4].
+   To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][4].
 
 2. **Recompile your program** and enable ASM and CGO:
    ```console
@@ -110,7 +110,7 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup_and_configure/?code-lang=go#supported-frameworks
+[1]: /security/application_security/enabling/compatibility/go#supported-frameworks
 [2]: https://github.com/golang/go/wiki/cgo
-[3]: /security/application_security/setup_and_configure/?code-lang=go#enabling-cgo
-[4]: /security/application_security/setup_and_configure/?code-lang=go#compatibility
+[3]: /security/application_security/enabling/compatibility/go#enabling-cgo
+[4]: /security/application_security/enabling/compatibility/go#compatibility

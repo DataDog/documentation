@@ -12,6 +12,9 @@ further_reading:
 - link: security/cspm/frameworks_and_benchmarks
   tag: Documentation
   text: フレームワークおよび業界のベンチマークの詳細
+- link: /getting_started/cloud_security_management
+  tag: Documentation
+  text: Cloud Security Management の概要
 kind: documentation
 title: CSPM のセットアップ
 ---

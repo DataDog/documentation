@@ -25,7 +25,7 @@ Classic カラーパレットは、視覚的なアクセシビリティをサポ
 
 #### Consistent/Semantic
 
-Consistent パレットは、データ系列に一貫して同じ色を割り当てることができ、チャート間のデータの相関を容易にすることができます。Classic パレットと異なり、Consistent パレットは隣接するデータ系列が同じ色を使用することを保証するものではなく、またアクセシビリティにも対応していません。
+Consistent パレットは、データ系列に一貫して同じ色を割り当てることができ、チャート間のデータの相関を容易にすることができます。Classic パレットと異なり、Consistent パレットは隣接するデータ系列が同じ色を使用しないことを保証するものではなく、またアクセシビリティにも対応していません。
 
 
 {{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="Consistent/Semantic パレットのカラーパレット。" style="width:70%;" >}}
@@ -61,6 +61,10 @@ Sequential パレットは、データセット内の異なる系列に共通点
 カラーオーバーライドを使うと、各クエリに好きな色を 1 つずつ割り当てることができます。これは、1 つのグラフで複数のクエリを実行した結果を区別する場合に特に有効です。
 
 {{< img src="dashboards/guide/colors/11_overrides.png" alt="カラーオーバーライドを構成するためのパネル。" style="width:80%;" >}}
+
+**注**: タグで集計する場合 (例えば 'sum by' や 'avg by' を使用)、パレットオーバーライドしか選択できません。これにより、異なるシリーズが同じ色を使用することを防ぎ、可読性を維持することができます。
+
+{{< img src="dashboards/guide/colors/12_palette_and_color_override_comparison.png" alt="カラーオーバーライドとパレットオーバーライドのドロップダウンパネルを並べて比較したものです。" style="width:80%;" >}}
 
 ## アクセシビリティの設定
 

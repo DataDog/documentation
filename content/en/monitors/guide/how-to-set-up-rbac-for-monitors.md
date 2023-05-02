@@ -32,7 +32,7 @@ For more information about default and custom roles, how to create custom roles,
 1. Navigate to the monitor editing page by creating a new monitor or editing an existing one.
 2. At the bottom of the form, specify which roles, in addition to the creator, are allowed to edit the monitor.
 
-{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor"  >}}
+{{< img src="/monitors/guide/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" >}}
 
 For more information, see [Monitors Permissions][1].
 
@@ -145,7 +145,7 @@ For more information on how to update your monitors' definitions, see [Edit a mo
 All new monitors created from the UI use the `restricted_roles` parameter. 
 All monitors also display the role restriction option regardless of the underlying mechanism:
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
 
 Datadog updates existing monitor definitions from the old locked mechanism to the new role restriction one whenever a monitor is saved.
 
@@ -157,7 +157,7 @@ You are a user with the [Datadog Admin Role][2] or are the creator of the monito
 
 ```
 This monitor is using the locked attribute: only its creator and admins can edit it. locked is deprecated in favor of restricted_roles. On save, the monitor will be automatically updated to use a restricted_roles attribute set to all roles with Admin permissions. 
-If there is no specific change you want to apply to this monitor’s permissions, click Save. If you want to update this monitor’s permissions, read this doc.
+If there is no specific change you want to apply to this monitor's permissions, click Save. If you want to update this monitor's permissions, read this doc.
 ```
 
 On save, your monitor's definition will be updated to all roles with Admin permissions.
@@ -193,7 +193,7 @@ This monitor is locked. Reach out to a user with the [Datadog Admin Role][2] or 
 
 You edit a non locked monitor and see the following option:
 
-{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor"  >}}
+{{< img src="/monitors/guide/monitor_rbac_non_restricted.jpg" alt="RBAC Non Restricted Monitor" >}}
 
 You have different ways to handle this option depending on the changes you are willing to make on your monitor:
 

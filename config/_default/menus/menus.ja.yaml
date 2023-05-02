@@ -4493,6 +4493,71 @@ api:
   name: インシデント
   url: /api/latest/incidents/
 - generated: true
+  identifier: incidents-update-an-incident-todo
+  name: インシデント Todo を更新する
+  params:
+    operationids:
+    - UpdateIncidentTodo
+    order: 17
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#update-an-incident-todo'
+- generated: true
+  identifier: incidents-get-incident-todo-details
+  name: インシデント Todo の詳細を取得する
+  params:
+    operationids:
+    - GetIncidentTodo
+    order: 16
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#get-incident-todo-details'
+- generated: true
+  identifier: incidents-delete-an-incident-todo
+  name: インシデント Todo を削除する
+  params:
+    operationids:
+    - DeleteIncidentTodo
+    order: 18
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#delete-an-incident-todo'
+- generated: true
+  identifier: incidents-create-an-incident-todo
+  name: インシデント Todo を作成する
+  params:
+    operationids:
+    - CreateIncidentTodo
+    order: 15
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#create-an-incident-todo'
+- generated: true
+  identifier: incidents-get-a-list-of-an-incidents-todos
+  name: インシデントの Todo のリストを取得する
+  params:
+    operationids:
+    - ListIncidentTodos
+    order: 14
+    unstable:
+    - v2
+    versions:
+    - v2
+  parent: インシデント
+  url: '#get-a-list-of-an-incidents-todos'
+- generated: true
   identifier: incidents-update-an-existing-incident-integration-metadata
   name: 既存のインシデントインテグレーションメタデータを更新する
   params:
@@ -5765,18 +5830,26 @@ main:
   parent: getting_started
   url: getting_started/database_monitoring/
   weight: 17
+- name: クラウド セキュリティ マネジメント
+  parent: getting_started
+  url: getting_started/cloud_security_management/
+  weight: 18
 - name: Cloud SIEM
   parent: getting_started
   url: getting_started/cloud_siem/
-  weight: 18
+  weight: 19
 - name: Application Security Management
   parent: getting_started
   url: getting_started/application_security/
   weight: 19
+- name: Observability Pipelines（観測データの制御）
+  parent: getting_started
+  url: getting_started/observability_pipelines/
+  weight: 20
 - name: ラーニングセンター
   parent: getting_started
   url: getting_started/learning_center/
-  weight: 20
+  weight: 21
 - identifier: 用語集
   name: 用語集
   parent: essentials_heading
@@ -6129,11 +6202,6 @@ main:
   parent: containers_amazon_ecs
   url: containers/amazon_ecs/tags/
   weight: 503
-- identifier: containers_amazon_ecs_data_collected
-  name: 収集データ
-  parent: containers_amazon_ecs
-  url: containers/amazon_ecs/data_collected/
-  weight: 504
 - identifier: ecs_fargate
   name: AWS Fargate
   parent: コンテナ
@@ -6263,205 +6331,100 @@ main:
   name: ウィジェット
   parent: dashboards
   url: dashboards/widgets/
-  weight: 4
-- name: アラートグラフ
-  parent: dashboards_widgets
-  url: dashboards/widgets/alert_graph/
-  weight: 10
-- name: アラート値
-  parent: dashboards_widgets
-  url: dashboards/widgets/alert_value/
-  weight: 11
-- name: 変更
-  parent: dashboards_widgets
-  url: dashboards/widgets/change/
-  weight: 12
-- name: チェックステータス
-  parent: dashboards_widgets
-  url: dashboards/widgets/check_status/
-  weight: 13
-- name: Distribution
-  parent: dashboards_widgets
-  url: dashboards/widgets/distribution/
-  weight: 14
-- name: イベントストリーム
-  parent: dashboards_widgets
-  url: dashboards/widgets/event_stream/
-  weight: 15
-- name: イベントタイムライン
-  parent: dashboards_widgets
-  url: dashboards/widgets/event_timeline/
-  weight: 16
-- name: フリーテキスト
-  parent: dashboards_widgets
-  url: dashboards/widgets/free_text/
-  weight: 17
-- name: ファネル
-  parent: dashboards_widgets
-  url: dashboards/widgets/funnel/
-  weight: 18
-- name: ジオマップ
-  parent: dashboards_widgets
-  url: dashboards/widgets/geomap/
-  weight: 19
-- name: グループ
-  parent: dashboards_widgets
-  url: dashboards/widgets/group/
-  weight: 20
-- name: ヒートマップ
-  parent: dashboards_widgets
-  url: dashboards/widgets/heat_map/
-  weight: 21
-- identifier: widgets_host_map
-  name: ホストマップ
-  parent: dashboards_widgets
-  url: dashboards/widgets/hostmap/
-  weight: 22
-- name: Iframe
-  parent: dashboards_widgets
-  url: dashboards/widgets/iframe/
-  weight: 23
-- name: 画像
-  parent: dashboards_widgets
-  url: dashboards/widgets/image/
-  weight: 24
-- name: ログストリーム
-  parent: dashboards_widgets
-  url: dashboards/widgets/log_stream/
-  weight: 25
-- name: モニターサマリー
-  parent: dashboards_widgets
-  url: dashboards/widgets/monitor_summary/
-  weight: 26
-- name: メモ &amp; リンク
-  parent: dashboards_widgets
-  url: dashboards/widgets/note/
-  weight: 27
-- name: クエリ値
-  parent: dashboards_widgets
-  url: dashboards/widgets/query_value/
-  weight: 28
-- name: 散布図
-  parent: dashboards_widgets
-  url: dashboards/widgets/scatter_plot/
-  weight: 29
-- name: SLOサマリー
-  parent: dashboards_widgets
-  url: dashboards/widgets/slo/
-  weight: 30
-- name: サービスサマリー
-  parent: dashboards_widgets
-  url: dashboards/widgets/service_summary/
-  weight: 31
-- name: 表
-  parent: dashboards_widgets
-  url: dashboards/widgets/table/
-  weight: 32
-- name: Timeseries
-  parent: dashboards_widgets
-  url: dashboards/widgets/timeseries/
-  weight: 33
-- name: トップリスト
-  parent: dashboards_widgets
-  url: dashboards/widgets/top_list/
-  weight: 34
-- name: トポロジーマップ
-  parent: dashboards_widgets
-  url: dashboards/widgets/topology_map/
-  weight: 35
+  weight: 1
 - name: クエリ
   parent: dashboards
   url: dashboards/querying/
-  weight: 5
+  weight: 2
 - identifier: dashboards_functions
   name: 関数
   parent: dashboards
   url: dashboards/functions/
-  weight: 6
+  weight: 3
 - name: アルゴリズム
   parent: dashboards_functions
   url: dashboards/functions/algorithms/
-  weight: 601
+  weight: 301
 - name: 算術演算
   parent: dashboards_functions
   url: dashboards/functions/arithmetic/
-  weight: 602
+  weight: 302
 - name: カウント
   parent: dashboards_functions
   url: dashboards/functions/count/
-  weight: 603
+  weight: 303
 - name: 除外
   parent: dashboards_functions
   url: dashboards/functions/exclusion/
-  weight: 603
+  weight: 303
 - name: 補間
   parent: dashboards_functions
   url: dashboards/functions/interpolation/
-  weight: 604
+  weight: 304
 - name: ランク
   parent: dashboards_functions
   url: dashboards/functions/rank/
-  weight: 605
+  weight: 305
 - name: レート
   parent: dashboards_functions
   url: dashboards/functions/rate/
-  weight: 606
+  weight: 306
 - name: 回帰
   parent: dashboards_functions
   url: dashboards/functions/regression/
-  weight: 607
+  weight: 307
 - name: ロールアップ
   parent: dashboards_functions
   url: dashboards/functions/rollup/
-  weight: 608
+  weight: 308
 - name: スムーシング
   parent: dashboards_functions
   url: dashboards/functions/smoothing/
-  weight: 609
+  weight: 309
 - name: タイムシフト
   parent: dashboards_functions
   url: dashboards/functions/timeshift/
-  weight: 610
+  weight: 310
 - name: ベータ
   parent: dashboards_functions
   url: dashboards/functions/beta/
-  weight: 611
+  weight: 311
 - name: 相関
   parent: dashboards
   url: dashboards/correlations/
-  weight: 7
+  weight: 4
 - identifier: dashboards_reporting
   name: スケジュールされたレポート
   parent: dashboards
   url: dashboards/scheduled_reports/
-  weight: 8
+  weight: 5
 - identifier: dashboards_temp_variables
   name: テンプレート変数
   parent: dashboards
   url: dashboards/template_variables/
-  weight: 9
+  weight: 6
 - name: 共有
   parent: dashboards
   url: dashboards/sharing/
-  weight: 10
+  weight: 7
 - identifier: graphing_json
   name: JSON を使用したグラフ作成
   parent: dashboards
   url: dashboards/graphing_json/
-  weight: 11
+  weight: 8
 - name: ウィジェット JSON スキーマ
   parent: graphing_json
   url: dashboards/graphing_json/widget_json/
-  weight: 1001
+  weight: 801
 - name: リクエスト JSON スキーマ
   parent: graphing_json
   url: dashboards/graphing_json/request_json/
-  weight: 1002
+  weight: 802
 - identifier: ガイド
   name: ガイド
   parent: dashboards
   url: dashboards/guide/
-  weight: 12
+  weight: 9
 - identifier: モバイル
   name: モバイルアプリケーション
   parent: platform_heading
@@ -7705,6 +7668,21 @@ main:
   parent: ci
   url: continuous_integration/intelligent_test_runner/
   weight: 3
+- identifier: ci_itr_dotnet
+  name: .NET
+  parent: intelligent_test_runner
+  url: continuous_integration/intelligent_test_runner/dotnet/
+  weight: 301
+- identifier: ci_itr_javascript
+  name: JavaScript と TypeScript
+  parent: intelligent_test_runner
+  url: continuous_integration/intelligent_test_runner/javascript/
+  weight: 303
+- identifier: ci_itr_swift
+  name: Swift
+  parent: intelligent_test_runner
+  url: continuous_integration/intelligent_test_runner/swift/
+  weight: 306
 - identifier: ci_guides
   name: ガイド
   parent: ci
@@ -7867,6 +7845,11 @@ main:
   pre: usm
   url: universal_service_monitoring/
   weight: 165000
+- identifier: universal_service_monitoring_guides
+  name: ガイド
+  parent: usm_parent
+  url: universal_service_monitoring/guide/
+  weight: 1
 - identifier: log_management
   name: ログ管理
   parent: log_management_heading
@@ -8145,7 +8128,7 @@ main:
   name: ガイド
   parent: observability_pipelines
   url: observability_pipelines/guide/
-  weight: 5
+  weight: 6
 - identifier: security_platform
   name: セキュリティの概要
   parent: security_platform_heading
@@ -8321,49 +8304,49 @@ main:
   url: security/application_security/terms/
   weight: 1
 - identifier: appsec_getting_started
-  name: はじめに
+  name: ASM の有効化
   parent: application_security
-  url: security/application_security/getting_started/
+  url: security/application_security/enabling/
   weight: 2
 - identifier: appsec_java
   name: Java
   parent: appsec_getting_started
-  url: security/application_security/getting_started/java/
+  url: security/application_security/enabling/java/
   weight: 201
 - identifier: appsec_dotnet
   name: .NET
   parent: appsec_getting_started
-  url: security/application_security/getting_started/dotnet/
+  url: security/application_security/enabling/dotnet/
   weight: 202
 - identifier: appsec_go
   name: Go
   parent: appsec_getting_started
-  url: security/application_security/getting_started/go/
+  url: security/application_security/enabling/go/
   weight: 203
 - identifier: appsec_ruby
   name: Ruby
   parent: appsec_getting_started
-  url: security/application_security/getting_started/ruby/
+  url: security/application_security/enabling/ruby/
   weight: 204
 - identifier: appsec_php
   name: PHP
   parent: appsec_getting_started
-  url: security/application_security/getting_started/php/
+  url: security/application_security/enabling/php/
   weight: 205
 - identifier: appsec_nodejs
   name: NodeJS
   parent: appsec_getting_started
-  url: security/application_security/getting_started/nodejs/
+  url: security/application_security/enabling/nodejs/
   weight: 206
 - identifier: appsec_python
   name: Python
   parent: appsec_getting_started
-  url: security/application_security/getting_started/python/
+  url: security/application_security/enabling/python/
   weight: 207
 - identifier: appsec_serverless
   name: サーバーレス
   parent: appsec_getting_started
-  url: security/application_security/getting_started/serverless/
+  url: security/application_security/enabling/serverless/
   weight: 208
 - identifier: appsec_howitworks
   name: オートディスカバリーの動作
@@ -8400,11 +8383,16 @@ main:
   parent: appsec_threats
   url: security/application_security/threats/custom_rules/
   weight: 504
-- identifier: threats_event_rules
-  name: イベントルール
+- identifier: threats_protection
+  name: 保護
   parent: appsec_threats
-  url: security/application_security/threats/event_rules/
+  url: security/application_security/threats/protection/
   weight: 505
+- identifier: threats_event_rules
+  name: アプリ内 WAF ルール
+  parent: appsec_threats
+  url: security/application_security/threats/inapp_waf_rules/
+  weight: 506
 - identifier: appsec_guides
   name: ガイド
   parent: application_security
@@ -8649,7 +8637,7 @@ main:
   url: continuous_testing/troubleshooting/
   weight: 6
 - identifier: rum
-  name: RUM & セッションリプレイ
+  name: リアルユーザーモニタリング (RUM)
   parent: ux_monitoring_heading
   pre: rum
   url: real_user_monitoring/
@@ -8999,11 +8987,6 @@ main:
   parent: rum_error_tracking
   url: real_user_monitoring/error_tracking/flutter/
   weight: 1407
-- identifier: rum_error_tracking_custom_grouping
-  name: カスタムグループ化
-  parent: rum_error_tracking
-  url: real_user_monitoring/error_tracking/custom_grouping
-  weight: 1408
 - identifier: rum_guides
   name: ガイド
   parent: rum
