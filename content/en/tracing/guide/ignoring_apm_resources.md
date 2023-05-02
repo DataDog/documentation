@@ -79,7 +79,8 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                   | **Remap from**                                      |
 |----------------------------|-----------------------------------------------------|
 | `network.host.ip`          | `tcp.local.address` - Node.js                       |
-| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js |
+| `network.destination.ip`   | `out.host` - All languages  |
+| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - All languages  |
 
 #### HTTP requests
 
@@ -94,7 +95,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                         | **Remap from**                                                                                                                                                                                                                  |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `db.system`                      | `db.type` - Java, Python, Node.js, Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
-| `db.instance`                    | `mongodb.db` - Python, sql.db - Python                                                                                                                                                                                          |
+| `db.instance`                    | `mongodb.db` - Python<br> `sql.db` - Python<br> `db.name` - All languages                                           |
 | `db.statement`                   | `cassandra.query` - Go<br>`consul.command` - Python<br>`memcached.query` - Python<br>`mongodb.query` - Python, .NET, Go<br>`redis.command` - Python<br>`redis.raw_command` - Python<br>`sql.query` - Python, PHP, Node.js, Java |
 | `db.row_count`                   | `cassandra.row_count` - Python<br>`db.rowcount` - Python, PHP<br>`mongodb.rows` - Python<br>`sql.rows` - Python                                                                                                                 |
 | `db.cassandra.cluster`           | `cassandra.cluster` - Python, Go                                                                                                                                                                                                |
@@ -135,8 +136,13 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `rpc.grpc.kind`                | `grpc.method.kind` - Python, Node.js, Go, .NET                                                          |
 | `rpc.grpc.path`                | `rpc.grpc.path` - Python, Node.js, Go, .NET                                                             |
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
-| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js        
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js
 
+#### Errors
+
+| **Name**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `error.message`                  | `error.msg` - All languages                      |
 
 ### Ignoring based on resources
 
@@ -154,13 +160,13 @@ apm_config:
 {{< /code-block >}}
 
 **Notes**:
-- The regex syntax that the Trace Agent accepts is evaluated by Go’s [regexp][6].
+- The regex syntax that the Trace Agent accepts is evaluated by Go's [regexp][6].
 - Depending on your deployment strategy, you may have to adjust the regex by escaping special characters.
 - If you use dedicated containers with Kubernetes, make sure that the environment variable for the ignore resource option is being applied to the **trace-agent** container.
 
 #### Example
 
-Consider a trace that contains calls to `/api/healthcheck` that you don’t want traces from:
+Consider a trace that contains calls to `/api/healthcheck` that you don't want traces from:
 
 {{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Flame graph of a resource you want the tracer to ignore" style="width:90%;">}}
 
@@ -192,7 +198,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
-In the Datadog Agent container’s list of environment variables, add `DD_APM_IGNORE_RESOURCES` with a pattern like the example below. Docker Compose has its own [variable substitution][1] to consider when you use special characters like `$`.
+In the Datadog Agent container's list of environment variables, add `DD_APM_IGNORE_RESOURCES` with a pattern like the example below. Docker Compose has its own [variable substitution][1] to consider when you use special characters like `$`.
 
 {{< code-block lang="yaml" >}}
     environment:
@@ -214,7 +220,7 @@ For multiple values:
 
 In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESOURCES`:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
               --pid host \
@@ -308,7 +314,7 @@ For multiple values:
 
 Alternatively, you can set `agents.containers.traceAgent.env` in the `helm install` command:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 helm install dd-agent -f values.yaml \
   --set datadog.apiKeyExistingSecret="datadog-secret" \
   --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
@@ -366,7 +372,7 @@ Datadog::Tracing.before_flush(
 
 The Python tracer has a `FilterRequestsOnUrl` filter you can configure to remove traces from certain endpoints. Alternatively, you can write a custom filter. See [Trace Filtering][1] for more information.
 
-Suppose the root span’s `http.url` span tag has a value of `http://<domain>/healthcheck`. Use the following regex to match against any endpoint ending in `healthcheck`:
+Suppose the root span's `http.url` span tag has a value of `http://<domain>/healthcheck`. Use the following regex to match against any endpoint ending in `healthcheck`:
 
 ```
 from ddtrace import tracer
@@ -383,7 +389,7 @@ tracer.configure(settings={
 
 {{< programming-lang lang="nodeJS" >}}
 
-Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace’s `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
+Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace's `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
 
 
 ```

@@ -5,7 +5,7 @@ kind: ServiceAccount
 metadata:
   labels:
     app: "datadog"
-    chart: "datadog-3.1.9"
+    chart: "datadog-3.3.1"
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
@@ -714,7 +714,7 @@ metadata:
   namespace: default
   labels:
     app: "datadog"
-    chart: "datadog-3.1.9"
+    chart: "datadog-3.3.1"
     release: "datadog"
     heritage: "Helm"
 spec:
@@ -749,7 +749,7 @@ spec:
       hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -879,7 +879,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -927,6 +927,14 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
+            - name: procdir
+              mountPath: /host/proc
+              mountPropagation: None
+              readOnly: true
+            - name: cgroups
+              mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
+              readOnly: true
             - name: logdatadog
               mountPath: /var/log/datadog
             - name: tmpdir
@@ -945,7 +953,7 @@ spec:
               port: 8126
             timeoutSeconds: 5
         - name: process-agent
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["process-agent", "--cfgpath=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -1024,7 +1032,7 @@ spec:
               mountPath: /etc/datadog-agent/system-probe.yaml
               subPath: system-probe.yaml
         - name: system-probe
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -1086,18 +1094,15 @@ spec:
               readOnly: true
             - name: etc-redhat-release
               mountPath: /host/etc/redhat-release
-              mountPropagation: None
               readOnly: true
             - name: etc-fedora-release
               mountPath: /host/etc/fedora-release
-              mountPropagation: None
               readOnly: true
             - name: etc-lsb-release
               mountPath: /host/etc/lsb-release
-              mountPropagation: None
               readOnly: true
         - name: security-agent
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           securityContext:
             capabilities:
@@ -1186,7 +1191,7 @@ spec:
               subPath: system-probe.yaml
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -1196,7 +1201,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -1234,7 +1239,7 @@ spec:
               value: "yes"
           resources: {}
         - name: seccomp-setup
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           command:
             - cp
             - /etc/config/system-probe-seccomp.json
@@ -1360,7 +1365,7 @@ spec:
       serviceAccountName: datadog-cluster-agent
       containers:
         - name: cluster-agent
-          image: "gcr.io/datadoghq/cluster-agent:7.39.1"
+          image: "gcr.io/datadoghq/cluster-agent:7.40.1"
           imagePullPolicy: IfNotPresent
           resources: {}
           ports:

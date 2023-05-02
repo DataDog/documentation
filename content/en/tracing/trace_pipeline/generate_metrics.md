@@ -53,7 +53,7 @@ To generate metrics from spans, on the [APM Setup and Configuration][8] page sel
 
 1. **Name your metric:** Metric names must follow the [metric naming convention][11]. Metric names that start with `trace.*` are not permitted and will not be saved.
 
-**Important Note**: Span-based metrics are considered custom metrics and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.
+<div class="alert alert-warning"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
 ## Updating existing span-based metrics
 
@@ -76,10 +76,10 @@ After a metric is created, only two fields can be updated:
 [1]: /tracing/trace_pipeline/trace_retention
 [2]: /account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/metrics/#overview
-[4]: /monitors/create/types/anomaly/#overview
+[4]: /monitors/types/anomaly/#overview
 [5]: /tracing/trace_explorer/
 [6]: /tracing/trace_explorer/query_syntax/#analytics-query
-[7]: /monitors/create/types/forecasts/
+[7]: /monitors/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /tracing/trace_explorer/query_syntax/

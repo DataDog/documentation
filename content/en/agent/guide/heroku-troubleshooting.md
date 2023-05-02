@@ -13,10 +13,9 @@ For example, to display the status of your Datadog Agent and enabled integration
 agent-wrapper status
 ```
 
-Next, verify the Datadog Agent is listening by sending a custom metric:
+Next, verify the Datadog Agent is listening by sending a custom metric. From your project directory, run:
 
 ```shell
-# From your project directory:
 heroku run bash
 
 # Once your Dyno has started and you are at the command line

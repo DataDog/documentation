@@ -7,6 +7,9 @@ further_reading:
   - link: "/continuous_integration/troubleshooting/"
     tag: "Documentation"
     text: "Troubleshooting CI"
+  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+    tag: "Blog"
+    text: "Configure pipeline alerts with Datadog CI monitors"
 ---
 
 {{< site-region region="gov" >}}
@@ -29,12 +32,13 @@ Custom tags and metrics work with the following CI providers:
 - GitLab (SaaS or self-hosted >= 14.1)
 - GitHub.com (SaaS) **Note:** For GitHub, tags and metrics can only be added to the pipeline span.
 - Jenkins **Note:** For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
+- Azure DevOps Pipelines
 
-## Installing the Datadog CI CLI
+## Install the Datadog CI CLI
 
 Install the [`datadog-ci`][1] (>=v1.15.0) CLI globally using `npm`:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
@@ -44,7 +48,7 @@ Alternatively, you can try and use the beta [standalone binary][2] if you don't 
 {{% tab "Linux" %}}
 To install the standalone binary on Linux run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 {{% /tab %}}
@@ -52,7 +56,7 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 {{% tab "MacOS" %}}
 To install the standalone binary on MacOS run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 {{% /tab %}}
@@ -60,23 +64,23 @@ curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/d
 {{% tab "Windows" %}}
 To install the standalone binary on Windows run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_win-x64.exe" -OutFile "datadog-ci.exe"
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding tags to pipeline traces
+## Add tags to pipeline traces
 
 Tags can be added to the pipeline span or to the job span. To do this, run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci tag [--level <pipeline|job>] [--tags <tags>]
 {{< /code-block >}}
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
 
-{{< site-region region="us5,us3,eu" >}}
+{{< site-region region="us5,us3,eu,ap1" >}}
 You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
 
 [1]: /getting_started/site/
@@ -84,13 +88,13 @@ You must specify the [Datadog site][1] using the environment variable `DATADOG_S
 
 The following example adds the tag `team` to the pipeline span:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci tag --level pipeline --tags team:backend
 {{< /code-block >}}
 
 The following example adds the tag `go.version` to the span for the current job:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci tag --level job --tags "go.version:`go version`"
 {{< /code-block >}}
 
@@ -99,16 +103,16 @@ and then click the **create facet** option.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
-## Adding metrics to pipeline traces
+## Add metrics to pipeline traces
 
 To add numerical tags to the pipeline span or the job span, run:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci metric [--level <pipeline|job>] [--metrics <metrics>]
 {{< /code-block >}}
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
-{{< site-region region="us5,us3,eu" >}}
+{{< site-region region="us5,us3,eu,ap1" >}}
 You must specify the [Datadog site][1] using the environment variable `DATADOG_SITE`.
 
 [1]: /getting_started/site/
@@ -116,13 +120,13 @@ You must specify the [Datadog site][1] using the environment variable `DATADOG_S
 
 The following example adds the metric `error_rate` to the pipeline span:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci metric --level pipeline --metrics "error_rate:0.56"
 {{< /code-block >}}
 
 The following example adds a metric `binary.size` to the span for the currently running job:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci metric --level job --metric "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
 {{< /code-block >}}
 

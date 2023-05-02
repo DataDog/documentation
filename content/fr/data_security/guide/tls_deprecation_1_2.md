@@ -1,8 +1,6 @@
 ---
-aliases:
-- /fr/security/guide/tls_deprecation_1_2/
 kind: guide
-title: Avis d'abandon des versions de TLS antérieures à la 1.12
+title: Avis d'abandon des versions de TLS antérieures à la 1.2
 ---
 
 

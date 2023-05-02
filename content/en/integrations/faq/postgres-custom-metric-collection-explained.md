@@ -90,7 +90,7 @@ After updating the Postgres YAML file, [restart the Datadog Agent][3].
 
 To verify the result, search for the metrics using the [Metrics Explorer][4]:
 
-{{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer"  >}}
+{{< img src="integrations/faq/sql_metric_explorer.png" alt="sql_metric_explorer" >}}
 
 ### Debugging
 

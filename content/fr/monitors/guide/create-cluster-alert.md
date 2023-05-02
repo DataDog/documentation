@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: Documentation
   text: Apprendre à créer un monitor
 - link: /monitors/notify/

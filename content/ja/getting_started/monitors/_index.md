@@ -5,7 +5,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: ブログ
   text: モニター入門 重要事項をアラート
-- link: /monitors/create/types/metric/
+- link: /monitors/types/metric/
   tag: ドキュメント
   text: メトリクスモニター
 - link: /monitors/notify/

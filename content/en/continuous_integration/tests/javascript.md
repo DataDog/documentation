@@ -10,6 +10,9 @@ further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
+    - link: "/continuous_integration/intelligent_test_runner/javascript"
+      tag: "Documentation"
+      text: "Speed up your test jobs with Intelligent Test Runner"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
@@ -28,11 +31,29 @@ Supported test frameworks:
   * Jest >= 28 is only supported from `dd-trace>=2.7.0`
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
+  * Mocha [parallel mode][4] is not supported.
 * Cucumber-js >= 7.0.0
 * Cypress >= 6.7.0
   * From `dd-trace>=1.4.0`
+* Playwright >= 1.18.0
+  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
 
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
+
+### Test suite level visibility compatibility
+[Test suite level visibility][5] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress, and Cucumber are supported.
+
+* Jest >= 24.8.0
+  * From `dd-trace>=3.10.0`.
+  * Only [`jest-circus`][1] is supported as [`testRunner`][3].
+* Mocha >= 5.2.0
+  * From `dd-trace>=3.10.0` and `dd-trace>=2.12.0` for 2.x release line.
+* Playwright >= 1.18.0
+  * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
+* Cypress >= 6.7.0
+  * From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line.
+* Cucumber >= 7.0.0
+  * From `dd-trace>=3.14.0` and `dd-trace>=2.27.0` for 2.x release line.
 
 ## Configuring reporting method
 
@@ -83,13 +104,13 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 ## Installing the JavaScript tracer
 
-To install the [JavaScript tracer][4], run:
+To install the [JavaScript tracer][6], run:
 
 ```bash
 yarn add --dev dd-trace
 ```
 
-For more information, see the [JavaScript tracer installation docs][5].
+For more information, see the [JavaScript tracer installation docs][7].
 
 
 ## Instrument your tests
@@ -112,20 +133,6 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 }
 {{< /code-block >}}
 
-### Using Yarn >=2
-
-If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
-
-```text
- Error: Cannot find module 'dd-trace/ci/init'
-```
-
-You can fix it by setting `NODE_OPTIONS` to the following:
-
-```bash
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-```
-
 ### Adding custom tags to tests
 
 You can add custom tags to your tests by using the current active span:
@@ -139,12 +146,12 @@ You can add custom tags to your tests by using the current active span:
   })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the NodeJS custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
 
-{{% tab "Cucumber" %}}
+{{% tab "Playwright" %}}
 Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
 
 ```bash
@@ -161,19 +168,28 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 }
 {{< /code-block >}}
 
-### Using Yarn >=2
+### Adding custom tags to tests
 
-If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+Custom tags are not supported for Playwright.
 
-```text
- Error: Cannot find module 'dd-trace/ci/init'
+{{% /tab %}}
+
+{{% tab "Cucumber" %}}
+Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your tests as you normally would, specifying the environment where the tests are run in the `DD_ENV` environment variable. For example, set `DD_ENV` to `local` when running tests on a developer workstation, or `ci` when running them on a CI provider:
+
+```bash
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 ```
 
-You can fix this by setting `NODE_OPTIONS` to the following:
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
 
-```
-NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
-```
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" jest"
+  }
+}
+{{< /code-block >}}
 
 ### Adding custom tags to tests
 
@@ -188,7 +204,7 @@ You can add custom tags to your test by grabbing the current active span:
   })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the NodeJS custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 {{% /tab %}}
@@ -212,13 +228,16 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-Your `supportFile` should look the same as in `cypress<10`:
+Add the following line to the **top level** of your `supportFile`:
 
 {{< code-block lang="javascript" filename="cypress/support/e2e.js" >}}
-// your previous code is before this line
+// Your code can be before this line
+// require('./commands')
 require('dd-trace/ci/cypress/support')
-// also supported:
+// Also supported:
 // import 'dd-trace/ci/cypress/support'
+// Your code can also be after this line
+// Cypress.Commands.add('login', (email, pw) => {})
 {{< /code-block >}}
 
 If you're using other Cypress plugins, your `cypress.config.js` file should contain the following:
@@ -255,16 +274,19 @@ module.exports = (on, config) => {
 }
 {{< /code-block >}}
 
-2. Add the following line to the [`supportFile`][4]:
+2. Add the following line to the **top level** of your [`supportFile`][4]:
 {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-// your previous code is before this line
+// Your code can be before this line
+// require('./commands')
 require('dd-trace/ci/cypress/support')
+// Your code can also be after this line
+// Cypress.Commands.add('login', (email, pw) => {})
 {{< /code-block >}}
 
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
@@ -292,11 +314,12 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the NodeJS custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
 
 ### Cypress - RUM integration
 
 If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
+
 
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
 [2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
@@ -308,6 +331,20 @@ If the browser application being tested is instrumented using [RUM][6], your Cyp
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### Using Yarn >=2
+
+If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
+
+```text
+ Error: Cannot find module 'dd-trace/ci/init'
+```
+
+You can fix it by setting `NODE_OPTIONS` to the following:
+
+```bash
+NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
+```
 
 
 ## Configuration settings
@@ -331,7 +368,7 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][6] options can also be used.
+All other [Datadog Tracer configuration][8] options can also be used.
 
 ### Collecting Git metadata
 
@@ -383,17 +420,29 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Git metadata upload
+
+From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uploads git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`. However, this is not recommended, as features like Intelligent Test Runner and others do not work without it.
+
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][7] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [NodeJS documentation][8].
+[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber` and `cypress` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and so on).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, etc.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][9]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][10] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][12] guide.
 
+### Cypress interactive mode
 
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][13], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][14].
+
+### Mocha parallel tests
+Mocha's [parallel mode][4] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
+
+### Jest's `test.concurrent`
+Jest's [test.concurrent][15] is not supported.
 
 ## Best practices
 
@@ -412,14 +461,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][11] instead:
+And use [`test.each`][16] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][12]:
+For `mocha`, use [`mocha-each`][17]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -433,21 +482,40 @@ forEach([
 
 When you use this approach, both the testing framework and CI Visibility can tell your tests apart.
 
+## Information collected
+
+When CI Visibility is enabled, the following data is collected from your project:
+
+* Test names and durations.
+* Predefined environment variables set by CI providers.
+* Git commit history including the hash, message, author information, and files changed (without file contents).
+* Information from the CODEOWNERS file.
+
+In addition to that, if [Intelligent Test Runner][18] is enabled, the following data is collected from your project:
+
+* Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
+
 [1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
 [2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
-[4]: https://github.com/DataDog/dd-trace-js
-[5]: /tracing/trace_collection/dd_libraries/nodejs
-[6]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[7]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[8]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[9]: /real_user_monitoring/browser/
-[10]: /continuous_integration/guides/rum_integration/
-[11]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[12]: https://www.npmjs.com/package/mocha-each
+[4]: https://mochajs.org/#parallel-tests
+[5]: /continuous_integration/tests/#test-suite-level-visibility
+[6]: https://github.com/DataDog/dd-trace-js
+[7]: /tracing/trace_collection/dd_libraries/nodejs
+[8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
+[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[11]: /real_user_monitoring/browser/
+[12]: /continuous_integration/guides/rum_integration/
+[13]: https://docs.cypress.io/api/plugins/before-run-api
+[14]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[15]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[17]: https://www.npmjs.com/package/mocha-each
+[18]: /continuous_integration/intelligent_test_runner/

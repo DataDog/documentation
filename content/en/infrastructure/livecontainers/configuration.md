@@ -16,7 +16,9 @@ further_reading:
 
 The Datadog Agent and Cluster Agent can be configured to retrieve Kubernetes resources for [Live Containers][1]. This feature allows you to monitor the state of pods, deployments, and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
 
-Kubernetes resources for Live Containers requires [Agent version >= 7.27.0][2] and [Cluster Agent version >= 1.11.0][3]. For older versions of the Datadog Agent and Cluster Agent, see [Live Containers Legacy Configuration][4].
+Kubernetes resources for Live Containers requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**. For older versions of the Datadog Agent and Cluster Agent, see [Live Containers Legacy Configuration][4].
+
+Note: For Kubernetes version 1.25 and above, the minimal Cluster Agent version required is 7.40.0.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -32,6 +34,7 @@ If you are using the official [Datadog Helm Chart][1]:
         processAgent:
             enabled: true
     ```
+
 - Deploy a new release.
 
 In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling`. In this case, you must set `datadog.clusterName` to your cluster name in [values.yaml][2].
@@ -97,6 +100,25 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
         - get
         - watch
       - apiGroups:
+        - ""
+        resources:
+        - serviceaccounts
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
+        - rbac.authorization.k8s.io
+        resources:
+        - roles
+        - rolebindings
+        - clusterroles
+        - clusterrolebindings
+        verbs:
+        - list
+        - get
+        - watch
+      - apiGroups:
        - networking.k8s.io
        resources:
        - ingresses
@@ -105,6 +127,7 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
        - watch
       ...
     ```
+
     These permissions are needed to create a `datadog-cluster-id` ConfigMap in the same Namespace as the Agent DaemonSet and the Cluster Agent Deployment, as well as to collect supported Kubernetes resources.
 
     If the `cluster-id` ConfigMap isn't created by the Cluster Agent, the Agent pod cannot collect resources. In such a case, update the Cluster Agent permissions and restart its pods to let it create the ConfigMap, and then restart the Agent pod.
@@ -123,8 +146,9 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
     value: "<YOUR_CLUSTER_NAME>"
   ```
 
-[1]: /agent/cluster_agent/
-[2]: /agent/cluster_agent/setup/
+  [1]: /containers/cluster_agent/
+  [2]: /containers/cluster_agent/setup/?tab=daemonset#pagetitle
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -132,26 +156,29 @@ In some setups, the Process Agent and Cluster Agent cannot automatically detect 
 
 The following table presents the list of collected resources and the minimal Agent, Cluster Agent, and Helm chart versions for each.
 
-| Resource | Minimal Agent version | Minimal Cluster Agent version | Minimal Helm chart version |
-|---|---|---|---|
-| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
-| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 |
-| Clusters | 7.27.0 | 1.12.0 | 2.10.0 |
-| CronJobs | 7.27.0 | 1.13.1 | 2.15.5 |
-| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 |
-| Deployments | 7.27.0 | 1.11.0 | 2.10.0 |
-| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 |
-| Jobs | 7.27.0 | 1.13.1 | 2.15.5 |
-| Nodes | 7.27.0 | 1.11.0 | 2.10.0 |
-| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 |
-| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 |
-| Pods | 7.27.0 | 1.11.0 | 2.10.0 |
-| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 |
-| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 |
-| Roles | 7.27.0 | 1.19.0 | 2.30.9 |
-| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 |
-| Services | 7.27.0 | 1.11.0 | 2.10.0 |
-| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 |
+| Resource | Minimal Agent version | Minimal Cluster Agent version* | Minimal Helm chart version | Minimal Kubernetes version |
+|---|---|---|---|---|
+| ClusterRoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ClusterRoles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| Clusters | 7.27.0 | 1.12.0 | 2.10.0 | 1.17.0 |
+| CronJobs | 7.27.0 | 7.40.0 | 2.15.5 | 1.16.0 |
+| DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 | 1.16.0 |
+| Deployments | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
+| Ingresses | 7.27.0 | 1.22.0 | 2.30.7 | 1.21.0 |
+| Jobs | 7.27.0 | 1.13.1 | 2.15.5 | 1.16.0 |
+| Namespaces | 7.27.0 | 7.41.0 | 2.30.9 | 1.17.0 |
+| Nodes | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| PersistentVolumes | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| PersistentVolumeClaims | 7.27.0 | 1.18.0 | 2.30.4 | 1.17.0 |
+| Pods | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| ReplicaSets | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
+| RoleBindings | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| Roles | 7.27.0 | 1.19.0 | 2.30.9 | 1.14.0 |
+| ServiceAccounts | 7.27.0 | 1.19.0 | 2.30.9 | 1.17.0 |
+| Services | 7.27.0 | 1.11.0 | 2.10.0 | 1.17.0 |
+| Statefulsets | 7.27.0 | 1.15.0 | 2.20.1 | 1.16.0 |
+
+**Note**: After version 1.22, Cluster Agent version numbering follows Agent release numbering, starting with version 7.39.0.
 
 ### Add custom tags to resources
 
@@ -160,7 +187,6 @@ You can add custom tags to Kubernetes resources to ease filtering inside the Kub
 Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` environment variable.
 
 **Note**: These tags only show up in the Kubernetes resources view.
-
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -180,10 +206,8 @@ If you are using the official Helm chart, add the environment variable on both t
         value: "tag1:value1 tag2:value2"
 ```
 
-
 Then, deploy a new release.
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
@@ -201,14 +225,14 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 
 It is possible to include and/or exclude containers from real-time collection:
 
-* Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
-* Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
+- Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
+- Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.
 
 Both arguments take an **image name** as value. Regular expressions are also supported.
 
 For example, to exclude all Debian images except containers with a name starting with *frontend*, add these two configuration lines in your `datadog.yaml` file:
 
-```shell
+```yaml
 container_exclude: ["image:debian"]
 container_include: ["name:frontend.*"]
 ```
@@ -248,7 +272,7 @@ env:
 
 For example, because `password` is a sensitive word, the scrubber changes `<MY_PASSWORD>` in any of the following to a string of asterisks, `***********`:
 
-```shell
+```text
 password <MY_PASSWORD>
 password=<MY_PASSWORD>
 password: <MY_PASSWORD>
@@ -261,7 +285,5 @@ However, the scrubber does not scrub paths that contain sensitive words. For exa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /infrastructure/livecontainers/configuration
-[2]: /tagging/assigning_tags?tab=agentv6v7#host-tags
-[3]: /getting_started/tagging/
+[1]: /infrastructure/livecontainers/#overview
 [4]: /infrastructure/livecontainers/legacy

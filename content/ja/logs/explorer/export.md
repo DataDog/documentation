@@ -1,6 +1,5 @@
 ---
 aliases:
-- /ja/logs/explorer/export
 - /ja/logs/export
 description: ログエクスプローラーのビューをエクスポートして、後で、または別のコンテキストで再利用することができます。
 further_reading:
@@ -37,7 +36,7 @@ Logs API が返す最大 1000 件以上のログリストを取得する場合�
 
 [1]: /ja/logs/explorer/saved_views/
 [2]: /ja/dashboards/
-[3]: /ja/monitors/create/types/log/
+[3]: /ja/monitors/types/log/
 [4]: /ja/logs/logs_to_metrics
 [5]: /ja/api/latest/logs/
 [6]: /ja/integrations/#cat-notification

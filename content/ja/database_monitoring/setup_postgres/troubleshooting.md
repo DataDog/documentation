@@ -3,7 +3,7 @@ description: Postgres のデータベースモニタリングセットアップ�
 kind: documentation
 title: Postgres 用 DBM セットアップのトラブルシューティング
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -97,6 +97,24 @@ psql -h localhost -U datadog -d postgres -c "select * from pg_stat_statements LI
 
 Agent のコンフィギュレーションでデフォルト `postgres` 以外の `dbname` を指定した場合は、そのデータベースで `CREATE EXTENSION pg_stat_statements` を実行する必要があります。
 
+ターゲットデータベースで拡張機能を作成してもこの警告が表示される場合は、拡張機能が `datadog` ユーザーがアクセスできないスキーマで作成された可能性があります。これを確認するには、このコマンドを実行して `pg_stat_statements` がどのスキーマで作成されたかを確認します。
+
+```bash
+psql -h localhost -U datadog -d postgres -c "select nspname from pg_extension, pg_namespace where extname = 'pg_stat_statements' and pg_extension.extnamespace = pg_namespace.oid;"
+```
+
+次に、このコマンドを実行して、`datadog` ユーザーがどのスキーマを見ることができるかを確認します。
+
+```bash
+psql -h localhost -U datadog -d <your_database> -c "show search_path;"
+```
+
+もし、`pg_stat_statements` スキーマが `datadog` ユーザーの `search_path` にない場合は、`datadog` ユーザーに追加する必要があります。例:
+
+```sql
+ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
+```
+
 ### 特定のクエリが見つからない
 
 いくつかのクエリからデータを取得したが、データベースモニタリングで特定のクエリまたはクエリのセットが表示されない場合は、次のガイドに従ってください。
@@ -173,13 +191,13 @@ Agent のバージョンが 7.36.1 以上であることを確認してくださ
 
 クライアントが Postgres [拡張クエリプロトコル][9]またはプリペアドステートメントを使用している場合、パースされたクエリと生のバインドパラメーターが分離されているため、Datadog Agent は説明プランを収集することができません。クライアントがシンプルクエリプロトコルを強制的に使用するオプションを提供している場合、それをオンにすることで Datadog Agent が実行プランを収集できるようになります。
 
-| 言語 | クライアント                    | シンプルクエリプロトコルの構成                                                                                                                                                                                                                                                                                                                                                |
-|----------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Go       | [pgx][10]                  | `PreferSimpleProtocol` を設定すると、シンプルクエリプロトコルに切り替わります ([ConnConfig のドキュメント][11]を参照してください)。                                                                                                                                                                                                                                                                            |
-| Java     | [Postgres JDBC クライアント][12] | `preferQueryMode = simple` と設定すると、シンプルクエリプロトコルに切り替わります ([PreferQueryMode のドキュメント][13]を参照してください)。                                                                                                                                                                                                                                                                   |
+| 言語 | クライアント | シンプルクエリプロトコルの構成|
+|----------|--------|----------------------------------------|
+| Go       | [pgx][10] | `PreferSimpleProtocol` を設定して、シンプルなクエリプロトコルに切り替えます ([ConnConfig のドキュメント][11]を参照)。また、`Query` または `Exec` 呼び出しの最初の引数として [QuerySimpleProtocol][24] フラグを使って、クエリまたは呼び出しごとに適用することが可能です。
+| Java     | [Postgres JDBC クライアント][12] | `preferQueryMode = simple` と設定すると、シンプルクエリプロトコルに切り替わります ([PreferQueryMode のドキュメント][13]を参照してください)。 |
 | Python   | [asyncpg][14]              | 無効化できない拡張クエリプロトコルを使用します。プリペアドステートメントを無効にしても、問題は解決しません。 実行計画の収集を可能にするには、SQL クエリを DB クライアントに渡す前に [psycopg sql][15] (または SQL 値を適切にエスケープする他の同等の SQL フォーマッタ) を使ってフォーマットしてください。                                                  |
 | Python   | [psycopg][16]             | `psycopg2` は拡張クエリプロトコルを使用しないので、実行計画は問題なく収集されるはずです。<br/> `psycopg3` はデフォルトで拡張クエリプロトコルを使用し、無効にすることはできません。プリペアドステートメントを無効にしても、問題は解決しません。実行計画の収集を有効にするには、DB クライアントに渡す前に [psycopg sql][15] を使って SQL クエリをフォーマットしてください。 |
-| Node     | [node-postgres][17]       | 拡張クエリプロトコルを使用するため、無効化することはできません。Datadog Agent が実行計画を収集できるようにするには、[pg-format][18] を使用して、SQL クエリを [node-postgres][17] に渡す前にフォーマットしてください。                                                                                                                                                                                 |
+| Node     | [node-postgres][17]       | 拡張クエリプロトコルを使用するため、無効化することはできません。Datadog Agent が実行計画を収集できるようにするには、[pg-format][18] を使用して、SQL クエリを [node-postgres][17] に渡す前にフォーマットしてください。|
 
 #### クエリが Agent インスタンスの構成で無視されるデータベースにある
 Agent インスタンスのコンフィギュレーション `ignore_databases` が無視するデータベース内にクエリが存在します。`rdsadmin` や `azure_maintenance` データベースなどのデフォルトのデータベースは、`ignore_databases` 設定では無視されます。これらのデータベースのクエリにはサンプルや実行計画がありません。インスタンスコンフィギュレーションでの設定値と、[サンプルコンフィギュレーションファイル][19]のデフォルト値を確認してください。
@@ -190,11 +208,14 @@ Agent インスタンスのコンフィギュレーション `ignore_databases` 
 BEGIN、COMMIT、SHOW、USE、ALTER などの一部のクエリでは、データベースから有効な実行計画を得ることができません。SELECT、UPDATE、INSERT、DELETE、REPLACE の各クエリのみが実行計画をサポートしています。
 
 #### クエリの実行頻度が比較的低い、または実行速度が速い。
-このクエリはデータベースの総実行時間の中で大きな割合を占めていないため、選択のためにサンプリングされていない可能性があります。クエリをキャプチャするために、[サンプリングレートを上げる][10]ことを試みてください。
+このクエリはデータベースの総実行時間の中で大きな割合を占めていないため、選択のためにサンプリングされていない可能性があります。クエリをキャプチャするために、[サンプリングレートを上げる][23]ことを試みてください。
 
 
 #### アプリケーションは、どのスキーマに問い合わせるかを指定するために、検索パスに依存している
-Postgres は [`pg_stat_activity`][21] で現在の[検索パス][20]を公開しないので、Datadog Agent はアクティブな Postgres プロセスでどの検索パスが使用されているかを知ることができないのです。この制限を回避する唯一の方法は、検索パスに依存するのではなく、完全修飾されたクエリを使用するようにアプリケーションコードを更新することです。例えば、`SET search_path TO schema_A; select * from table_B` の代わりに `select * from schema_A.table_B` を実行します。
+Postgres は、[`pg_stat_activity`][21] で現在の[検索パス][20]を公開しないため、Datadog Agent は、アクティブな Postgres プロセスで使用されている検索パスを確認することができません。この制限を回避するには、Postgres インテグレーションで定義されたユーザーの検索パスを変更して、スキーマを含めるようにします。
+```sql
+ALTER ROLE datadog SET search_path = "$user",public,schema1,schema2,etc;
+```
 
 ### `create extension pg_stat_statements` のセットアップの失敗
 
@@ -212,6 +233,14 @@ sudo apt-get install postgresql-contrib-10
 ```
 
 詳細については、[Postgres `contrib` ドキュメント][22]の適切なバージョンを参照してください。
+
+### Agent からのクエリが遅い、またはデータベースへの影響が大きい
+
+データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。Agent クエリがより多くのリソースを必要とする理由として、以下が考えられます。
+
+#### `pg_stat_statements.max` の値が大きい {#high-pg-stat-statements-max-configuration}
+`pg_stat_statements.max` の推奨値は `10000` です。この構成を高い値に設定すると、収集クエリの実行に時間がかかり、クエリのタイムアウトやクエリメトリクスの収集のギャップにつながる可能性があります。Agent がこの警告を表示した場合は、データベースで `pg_stat_statements.max` が `10000` に設定されていることを確認します。
+
 
 [1]: /ja/database_monitoring/setup_postgres/
 [2]: /ja/agent/troubleshooting/
@@ -235,3 +264,5 @@ sudo apt-get install postgresql-contrib-10
 [20]: https://www.postgresql.org/docs/14/ddl-schemas.html#DDL-SCHEMAS-PATH
 [21]: https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW
 [22]: https://www.postgresql.org/docs/12/contrib.html
+[23]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L281
+[24]: https://pkg.go.dev/github.com/jackc/pgx/v4#QuerySimpleProtocol

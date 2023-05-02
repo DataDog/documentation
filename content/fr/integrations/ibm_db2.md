@@ -1,44 +1,66 @@
 ---
+app_id: ibm-db2
+app_uuid: e588293a-833f-4888-a7b4-2208e087059a
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     IBM Db2 Overview: assets/dashboards/overview.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: true
+    metrics:
+      check: ibm_db2.connection.active
+      metadata_path: metadata.csv
+      prefix: ibm_db2.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: IBM Db2
   logs:
     source: ibm_db2
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - data store
 - log collection
-- autodiscovery
-creates_events: true
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
-display_name: IBM Db2
+display_on_public_website: true
 draft: false
 git_integration_title: ibm_db2
-guid: 67378f79-e72b-4f49-8ec2-57053706523d
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 1.11.0
+integration_version: 1.11.2
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: ibm_db2.
-metric_to_check: ibm_db2.connection.active
+manifest_version: 2.0.0
 name: ibm_db2
-public_title: Intégration Datadog/IBM Db2
+oauth: {}
+public_title: IBM Db2
 short_description: Surveillez les métriques de tablespace et de pool de mémoires tampon
   ainsi que d'autres métriques depuis votre base de données IBM Db2.
-support: core
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Data Store
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Surveillez les métriques de tablespace et de pool de mémoires tampon
+    ainsi que d'autres métriques depuis votre base de données IBM Db2.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: IBM Db2
 ---
 
 
@@ -49,7 +71,7 @@ supported_os:
 
 Ce check surveille [IBM Db2][2] avec l'Agent Datadog.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -62,7 +84,7 @@ La bibliothèque client [ibm_db][4] est requise. Pour l'installer, veillez à av
 ##### Unix
 
 ```text
-/opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
 ```
 
 ##### Windows
@@ -88,9 +110,14 @@ Pour le versions >= 7.0 de l'Agent :
 Des fonctionnalités XML peuvent être requises sur Linux. Si vous rencontrez des erreurs durant
 le processus de création, installez `libxslt-dev` (ou `libxslt-devel` pour RPM).
 
-#### Privilèges
+#### Activer la surveillance
 
-Pour interroger les métriques de certains tableaux, des privilèges spécifiques doivent être attribués à l'utilisateur Db2 choisi.
+Pour surveiller la santé d'une instance, de ses bases de données et de ses objets de base de données, activez les switches de surveillance du système de base de données pour chacun des objets à surveiller :
+* Statement
+* Lock
+* Tables
+* Buffer pool
+
 Basculez sur l'utilisateur principal de l'instance et exécutez ces commandes dans l'invite `db2` :
 
 ```text
@@ -115,7 +142,7 @@ Exécutez ensuite `get dbm cfg` pour obtenir un résultat similaire à ce qui su
  Monitor health of instance and databases   (HEALTH_MON) = ON
 ```
 
-### Procédure à suivre
+### Configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -177,7 +204,7 @@ Consultez la [documentation relative aux modèles d'intégration Autodiscovery][
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
-La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs avec Kubernetes][2].
+La collecte des logs est désactivée par défaut dans l'Agent Datadog. Pour l'activer, consultez la section [Collecte de logs Kubernetes][2].
 
 | Paramètre      | Valeur                                                                                                                                                                                                |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -69,7 +69,7 @@ Use out-of-the-box or custom rules to [identify and redact other kinds of sensit
 
 ### Stop indexing sensitive logs
 
-If you're not using Sensitive Data Scanner, determine whether you want to exclude any new logs containing sensitive data from being indexed entirely. You’ll still need to address the logs containing sensitive data already indexed in Datadog.
+If you're not using Sensitive Data Scanner, determine whether you want to exclude any new logs containing sensitive data from being indexed entirely. You'll still need to address the logs containing sensitive data already indexed in Datadog.
 
 * Find which index(es) hold logs with sensitive data.
 * For each index, add an exclusion filter based on the sensitive outline query.
@@ -129,8 +129,8 @@ If you have a specific compliance questions or need help, contact Datadog [suppo
 [7]: /logs/indexes#exclusion-filters
 [8]: /logs/archives
 [9]: /logs/logs_to_metrics/
-[10]: /monitors/create/types/log/
-[11]: /monitors/create/types/log/#notifications
+[10]: /monitors/types/log/
+[11]: /monitors/types/log/#notifications
 [12]: /logs/explorer/live_tail/
 [13]: /agent/
 [14]: /agent/logs/advanced_log_collection/?tab=configurationfile#scrub-sensitive-data-from-your-logs

@@ -1,40 +1,59 @@
 ---
+app_id: superwise
+app_uuid: 814d45d4-bf11-46c9-98a2-5fab9c997c94
 assets:
   dashboards:
     Superwise: assets/dashboards/superwise.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: superwise.metric.overall.quantity
+      metadata_path: metadata.csv
+      prefix: superwise.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Superwise
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Superwise
+  sales_email: support@superwise.ai
+  support_email: support@superwise.ai
 categories:
 - モニタリング
-- MLOps
-creates_events: false
-ddtype: crawler
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/superwise/README.md
-display_name: Superwise
+display_on_public_website: true
 draft: false
 git_integration_title: superwise
-guid: 2d2737e3-d201-4076-84e7-5455db0b5582
 integration_id: superwise
 integration_title: Superwise
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: support@superwise.ai
-manifest_version: 1.0.0
-metric_prefix: superwise.
-metric_to_check: superwise.metric.overall.quantity
+manifest_version: 2.0.0
 name: superwise
-public_title: Datadog-Superwise インテグレーション
+oauth: {}
+public_title: Superwise
 short_description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
-support: contrib
 supported_os:
 - linux
-- mac_os
+- macos
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Monitoring
+  configuration: README.md#Setup
+  description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Superwise
 ---
 
 
@@ -101,6 +120,6 @@ Superwise インテグレーションには、サービスのチェック機能�
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/superwise/images/6.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/superwise/images/3.png
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/superwise/images/4.png
-[8]: https://github.com/DataDog/integrations-core/blob/master/check/metadata.csv
+[8]: https://github.com/DataDog/integrations-extras/blob/master/superwise/metadata.csv
 [9]: https://docs.superwise.ai
 [10]: https://www.datadoghq.com/blog/superwise-datadog-marketplace/

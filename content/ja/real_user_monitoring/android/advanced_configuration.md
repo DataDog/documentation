@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
@@ -69,24 +67,26 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 {{% /tab %}}
 {{< /tabs >}}
 
-タイミングが送信されると、タイミングには `@view.custom_timings.<timing_name>` としてアクセスできます。例: `@view.custom_timings.hero_image`。RUM 分析またはダッシュボードでグラフ化する前に、[メジャーを作成](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures)する必要があります。
+タイミングが送信されると、タイミングは `@view.custom_timings.<timing_name>` としてアクセス可能になります (例: `@view.custom_timings.hero_image`)。RUM 分析またはダッシュボードでグラフを作成する前に、[メジャーを作成][10]する必要があります。
 
 ### カスタムアクション
 
 [アクションを自動追跡する][5]ほかに、`RumMonitor#addUserAction` で特定のカスタムユーザーアクション（タップ、クリック、スクロールなど）を追跡することも可能です。継続的なアクションの追跡（リストをスクロールするユーザーの追跡）には、`RumMonitor#startUserAction` および `RumMonitor#stopUserAction` を使用します。
 
+アクションタイプは、"カスタム"、"クリック"、"タップ"、"スクロール"、"スワイプ"、"戻る" のいずれかを指定する必要があることに注意してください。
+
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
        fun onUserInteraction() { 
-            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes)
+            GlobalRum.get().addUserAction(actionType, name, actionAttributes)
        }
    ```
 {{% /tab %}}
 {{% tab "Java" %}}
    ```java
        public void onUserInteraction() {
-            GlobalRum.get().addUserAction(resourceKey, method, url, resourceAttributes);
+            GlobalRum.get().addUserAction(actionType, name, actionAttributes);
        }
    ```
 {{% /tab %}}
@@ -193,7 +193,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 * エラーの影響を最も受けているユーザーを把握する
 * 最も重要なユーザーのパフォーマンスを監視する
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API"  >}}
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API" >}}
 
 以下の属性は**任意**で、**少なくとも 1 つ**提供する必要があります。
 
@@ -448,16 +448,17 @@ val monitor = RumMonitor.Builder()
 GlobalRum.registerIfAbsent(monitor)
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/android
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[2]: /ja/real_user_monitoring/android
+[3]: /ja/real_user_monitoring/android/data_collected
+[4]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[5]: /ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
-[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/#event-specific-attributes
+[9]: /ja/real_user_monitoring/android/data_collected/#event-specific-attributes
+[10]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures

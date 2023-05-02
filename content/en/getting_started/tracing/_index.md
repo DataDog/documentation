@@ -10,9 +10,9 @@ further_reading:
     - link: '/tracing/glossary/'
       tag: 'Documentation'
       text: 'Use the APM UI'
-    - link: 'https://learn.datadoghq.com/enrol/index.php?id=4'
+    - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
-      text: 'Learn Application Performance Monitoring with Docker'
+      text: 'Introduction to Application Performance Monitoring'
 ---
 
 ## Overview
@@ -27,7 +27,7 @@ If you haven't already, create a [Datadog account][3].
 
 ## Datadog Agent
 
-Before installing the Datadog Agent, set up a [Vagrant Ubuntu 16.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
+Before installing the Datadog Agent, set up a [Vagrant Ubuntu 22.04 virtual machine][4] using the following commands. For more information about Vagrant, see their [Getting Started][5] page.
 
 ```text
 vagrant init ubuntu/xenial64
@@ -38,7 +38,7 @@ vagrant ssh
 To install the Datadog Agent on a host, use the [one line install command][6] updated with your [Datadog API key][7]:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 ### Validation
@@ -74,7 +74,7 @@ For the latest versions of Agent v6 and v7, APM is enabled by default. You can s
 
 And in `trace-agent.log`:
 
-```shell
+```bash
 # /var/log/datadog/trace-agent.log:
 2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
@@ -129,7 +129,7 @@ ddtrace-run python hello.py
 
 You should see a similar output to:
 
-```shell
+```bash
 * Serving Flask app "hello" (lazy loading)
   ...
 * Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)
@@ -161,13 +161,13 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [1]: /tracing/#terminology
 [2]: https://docs.datadoghq.com/tracing/setup/
 [3]: https://www.datadoghq.com
-[4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
+[4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: https://app.datadoghq.com/apm/docs
+[10]: https://app.datadoghq.com/apm/service-setup
 [11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /tracing/guide/setting_primary_tags_to_scope/

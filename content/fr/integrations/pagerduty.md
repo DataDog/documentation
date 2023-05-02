@@ -1,30 +1,39 @@
 ---
 categories:
-  - monitoring
-  - notification
-ddtype: crawler
+- monitoring
+- notification
 dependencies: []
-description: Générez des alertes PagerDuty à partir des métriques et des événements Datadog.
-doc_link: 'https://docs.datadoghq.com/integrations/pagerduty/'
+description: Générez des alertes PagerDuty à partir des métriques et des événements
+  Datadog.
+doc_link: https://docs.datadoghq.com/integrations/pagerduty/
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/mobile-incident-management-datadog/
+  tag: Blog
+  text: Gérez les incidents où que vous soyez avec l'application mobile Datadog
+- link: https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/
+  tag: Blog
+  text: Comment PagerDuty effectue ses déploiements en toute sécurité avec Datadog
+- link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration
+  tag: Blog
+  text: Utiliser les intégrations avec le Service Catalog
 git_integration_title: pagerduty
 has_logo: true
-integration_id: pagerduty
+integration_id: ''
 integration_title: PagerDuty
+integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: pagerduty
 public_title: Intégration Datadog/PagerDuty
-short_description: Générez des alertes PagerDuty à partir des métriques et des événements Datadog.
+short_description: Générez des alertes PagerDuty à partir des métriques et des événements
+  Datadog.
 version: '1.0'
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">L'intégration PagerDuty ne prend pas en charge le site gouvernemental Datadog. <b>Remarque</b> : vous pouvez néanmoins envoyer des notifications de monitor à PagerDuty.</div>
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
-{{< img src="integrations/pagerduty/pagerduty_incident_trends.png" alt="Tendances des incidents" popup="true">}}
 {{< /site-region >}}
 
 ## Présentation
@@ -37,10 +46,10 @@ Associez PagerDuty à Datadog pour :
 
 ## Configuration
 
-Consultez [cette documentation][1] sur le site de PagerDuty.
+Consultez le [guide de l'intégration Datadog][1] dans la documentation PagerDuty (en anglais).
 
 {{< site-region region="us" >}}
-Une fois l'intégration PagerDuty configurée, vous pouvez consulter les tendances des incidents Pagerduty personnalisées de Datadog.
+Une fois l'intégration de PagerDuty configurée, vous pouvez consulter les [tendances des incidents Pagerduty][2] personnalisées de Datadog.
 {{< /site-region >}}
 
 ## Données collectées
@@ -51,7 +60,9 @@ L'intégration PagerDuty n'inclut aucune métrique.
 
 ### Événements
 
-Vos événements PagerDuty résolus/déclenchés s'affichent dans votre [flux d'événements][2].
+Vos événements PagerDuty résolus/déclenchés s'affichent dans l'[Events Explorer][2].
+
+<div class="alert alert-warning">Les Webhooks V3 PagerDuty envoient uniquement les événements à l'application Incidents de Datadog.</div>
 
 ### Checks de service
 
@@ -59,28 +70,36 @@ L'intégration PagerDuty n'inclut aucun check de service.
 
 ## Dépannage
 
-### Comment résoudre automatiquement un service PagerDuty lors du rétablissement d'un monitor ?
+### Envoyer une notification à un service PagerDuty spécifique
 
-Vous devez inclure la notification PagerDuty dans le contexte `{{#is_recovery}}` de la section **Say what's happening** de votre monitor, comme suit :
-
-```text
-{{#is_recovery}}
-
-    Cette notification ne surviendra que lors de la résolution du monitor.
-    En cas de déclenchement de @pagerduty-trigger pour l'alerte, il sera également résolu.
-
-{{/is_recovery}}
-```
-
-### Comment envoyer un message/une notification vers un service spécifique PagerDuty lorsque plusieurs services sont intégrés ?
-
-Ajoutez `@pagerduty-[nomDuService]` dans le message de votre monitor. Si vous commencez la saisie dans la section **Say what's happening** de votre monitor, le nom du service sera automatiquement complété.
+Si vous avez intégré plusieurs services PagerDuty et que vous souhaitez envoyer un message ou une notification à un service spécifique, ajoutez `@pagerduty-[nomDuService]` dans le message de votre monitor. Si vous commencez la saisie dans la section **Say what's happening** de votre monitor, le nom du service est automatiquement complété.
 
 {{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="faq 1 PagerDuty" popup="true">}}
 
-### Pourquoi la description de mon alerte est-elle tronquée dans PagerDuty ?
+Pour résoudre automatiquement le service PagerDuty lors du rétablissement d'un monitor, ajoutez la mention de notification dans le message de rétablissement du monitor. Cela ne fonctionnera pas si vous l'ajoutez uniquement dans le contexte `{{#is_alert}}`.
+
+### Correspondances des sévérités des incidents PagerDuty
+
+La sévérité d'un incident PagerDuty est déterminée à partir du statut du monitor qui a déclenché l'alerte. Le tableau suivant présente les correspondances entre les statuts d'alerte et les sévérités des incidents PagerDuty.
+
+| Statut du monitor     | Sévérité de l'incident PagerDuty             |
+|--------------------|-----------------------------------------|
+| `ALERT`            | `error`                                 |
+| `NODATA`           | `error`                                 |
+| `WARNING`          | `warning`                               |
+| `OK` ou autres     | `info`                                  |
+
+Par exemple, si le statut du monitor passe de `OK` à `WARNING` et notifie `@pagerduty-[NomDuService]`, la sévérité de l'incident PagerDuty créé sera `warning`.
+
+**Remarque** : ces correspondances sont déterminées automatiquement et ne peuvent pas être modifiées.
+
+### Description des alertes tronquée
 
 La longueur des notifications de votre monitor envoyées à PagerDuty est limitée par Datadog. Cette limite est de **1 024 caractères**.
 
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
-[2]: https://docs.datadoghq.com/fr/events/
+[2]: https://docs.datadoghq.com/fr/events/explorer/

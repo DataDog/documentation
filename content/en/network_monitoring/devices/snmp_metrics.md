@@ -69,7 +69,7 @@ To monitor individual devices:
       user: 'user'
       authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
       authKey: 'fakeKey'  # enclose with single quote
-      privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+      privProtocol: 'AES256'  # choices: DES, AES, AES192, AES192C, AES256, AES256C
       privKey: 'fakePrivKey'  # enclose with single quote
       tags:
         - 'key1:val1'
@@ -113,6 +113,7 @@ snmp_listener:
   use_device_id_as_hostname: true  # recommended
   configs:
     - network_address: 10.10.0.0/24  # CIDR subnet
+      loader: core
       snmp_version: 2
       port: 161
       community_string: '***'  # enclose with single quote
@@ -120,6 +121,7 @@ snmp_listener:
       - "key1:val1"
       - "key2:val2"
     - network_address: 10.20.0.0/24
+      loader: core
       snmp_version: 2
       port: 161
       community_string: '***'
@@ -146,7 +148,7 @@ snmp_listener:
       user: 'user'
       authProtocol: 'SHA256'  # choices: MD5, SHA, SHA224, SHA256, SHA384, SHA512
       authKey: 'fakeKey'  # enclose with single quote
-      privProtocol: 'AES256'  # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
+      privProtocol: 'AES256'  # choices: DES, AES, AES192, AES192C, AES256, AES256C
       privKey: 'fakePrivKey'  # enclose with single quote
       tags:
         - 'key1:val1'

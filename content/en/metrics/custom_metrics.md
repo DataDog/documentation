@@ -20,6 +20,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/metrics-without-limits/"
   tag: "Blog"
   text: "Dynamically control your custom metrics volume with Metrics without Limits™"
+- link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+  tag: "Blog"
+  text: "Monitor your Linux web apps on Azure App Service with Datadog"
+algolia:
+  tags: ['custom metrics']
 ---
 
 ## Overview
@@ -65,6 +70,7 @@ The following custom metric naming convention must be followed:
     {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
     {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
     {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generate live process-based metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 

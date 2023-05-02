@@ -30,7 +30,7 @@ To clone a Synthetics test, use the UI or API endpoints.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/synthetics/#get-a-browser-test
-[2]: /api/latest/synthetics/#get-an-api-test
+[1]: /api/latest/synthetics/#get-an-api-test
+[2]: /api/latest/synthetics/#get-a-browser-test
 [3]: /api/latest/synthetics/#create-an-api-test
 [4]: /api/latest/synthetics/#create-a-browser-test

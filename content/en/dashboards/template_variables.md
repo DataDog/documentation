@@ -39,13 +39,13 @@ A template variable is defined by:
     * Attribute: Use a [facet or measure as the template variable](#logs-apm-and-rum-queries).
 * **Name**: A unique name for the template variable that appears in queries on the dashboard. Template variables are automatically named after the selected tag or attribute.
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
-* **Available Values**: The tag or attribute values available for selection in the dropdown. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
+* **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
 After creating a template variable, Datadog displays the number of sources using the variable. In the example below, the template variable `team` is used in two graphs on the dashboard:
 
 {{< img src="dashboards/template_variables/stats_tv_modal.png" alt="Template variable with several variables set" style="width:90%;">}}
 
-[Use the template variables](#use) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
+[Use the template variables](#usage) in individual widgets or click the **Add to All** option. To remove a template variable from all widgets, click the **Remove From All** option.
 
 ### Logs, APM, and RUM queries
 
@@ -58,45 +58,45 @@ On log, APM, and RUM widgets, you can use wildcards in the middle of a value (fo
 
 ### Saved views
 
+{{< img src="dashboards/template_variables/saved_views.mp4" alt="Walk through of how to create, delete, and modify saved views" style="width:100%;" video="true">}}
+
 #### Create
 
-{{< img src="dashboards/template_variables/default_view.png" alt="Default Saved View" style="width:85%;">}}
+Click on the **Saved Views** dropdown menu to the left of the template variables in your dashboard. When you update a template variable value, the value does not automatically save to a view.
 
-To the left of the template variables on a dashboard, there is a dropdown listed as *(Default Value)*. When you make a change to a template variable value, the value is not automatically saved to a view.
-To save the current values of the template variables in a view, click on the dropdown menu and click *Save selections as view*. From there, you are prompted to enter a unique name for the view. After saving, this view is listed in the dropdown menu. Click on this view to retrieve the previously saved values for the template variables.
+To save your current template variables' values in a view, select **Save selections as view** from the **Saved Views** dropdown menu. Enter a unique name for the view and click **Save**. 
+
+Your saved view appears in the dropdown menu. Click on the view to retrieve your previously saved template variable values.
 
 #### Delete
 
-To delete a view, click on the saved views dropdown and choose *Manage views...*. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
-
-{{< img src="dashboards/template_variables/manage_views.png" alt="Manage View Popup" style="width:75%;">}}
+To delete a view, click on the saved views dropdown menu and choose **Manage views...**. From there, a popup with your saved views is displayed with a trash bin icon next to each view. Click the appropriate trash bin icon to delete a view.
 
 #### Modify
 
-To modify the *(Default Value)* view, click on the pencil icon and update the template variable values. Then click *Done* to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
+To modify the **Default view**, click on the pencil icon and update the template variable values. Then click **Done** to save. If any values in the other views are changed, save the values as a new view, and then delete the original view.
 
-## Use
+## Usage
 
-Template variables are used in widgets and event overlays.
+Template variables are used in widgets and event overlays. 
 
 ### Widgets
 
-When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you create the template variable `env`, the option `$env` is available.
+When creating or editing a widget, existing template variables display as options in the `from` field. For example, if you configure the `environment` template variable, the `$environment` option is available as a dynamic variable in the widget. 
 
-After the widget is saved, the value of the template variable is the one selected from the top of your dashboard:
+{{< img src="dashboards/template_variables/dynamic_template_variable.png" alt="Template variable can be set dynamically in widgets" style="width:100%;">}}
 
-{{< img src="dashboards/template_variables/selecting_template_variables.png" alt="Selecting template variables" style="width:75%;">}}
-
-To query based on just a prefix or suffix, use a wildcard character (`*`) at the beginning or end of the template variable value. For example, find all regions that begin with `us` using `us*`, or all emails under the `example.com` domain with `*@example.com`.
+Selecting **production** for the `environment` value dynamically scopes widgets with the `$environment` variable to the production environment.
 
 When you change the value of a template variable, the dashboard URL updates to reflect the template variable value with the format `&tpl_var_<TEMPLATE_VARIABLE_NAME>=<TEMPLATE_VARIABLE_VALUE>`. For example, a dashboard with the template variable `$env` changed to `prod` would have the URL parameter `&tpl_var_env=prod`.
 
 To include just the value in the query, append it with the syntax `$<TEMPLATE_VARIABLE_NAME>.value`. For example, with a template variable named `service`, use `env:staging-$service.value`.
 
-#### Associated template variables
-When selecting a template variable value, the **Associated Values** and **Other Values** sections are displayed. Associated values are calculated from the other template variable values selected on the page, and seamlessly identify the related values without any configuration.
+Hover over the template variable fields to see at a quick glance, the widgets that use that variable highlighted on the dashboard.
 
-{{< img src="dashboards/template_variables/associated_template_variables.png" alt="Associated template variables" style="width:75%;">}}
+#### Associated template variables
+
+When selecting a template variable value, associated values are displayed at the top of the selector. Associated values are calculated from other template variable values selected on the page, and seamlessly identify the related values without any configuration.
 
 #### Text
 
@@ -127,7 +127,7 @@ For example, searching for `region:$region.value` with a value of `us-east1` for
 
 Use commas to search using multiple template variables, for example: `role:$role.value,env:$env.value`
 
-**Note**: Once you press *enter* to search, `$region.value` updates to the value in the template variable drop-down.
+**Note**: Once you press *enter* to search, `$region.value` updates to the value in the template variable dropdown menu.
 
 #### Widgets
 
@@ -137,7 +137,7 @@ From your widgets, overlay the timing of the events using template variables wit
 $<TEMPLATE_VARIABLE_NAME>
 ```
 
-For example, enter `$region` in the event overlays search box. This searches for events with the value in the `region` template variable drop-down.
+For example, enter `$region` in the event overlays search box. This searches for events with the value in the `region` template variable dropdown menu.
 
 ## Further Reading
 

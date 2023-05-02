@@ -28,6 +28,8 @@ The default sort for spans in the list visualization is by timestamp, with the m
 
 The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
 
+The `Latency Breakdown` of the trace might be missing for some spans if the trace is malformed or incomplete. For instance, the error and the rare samplers capture pieces of traces, without the guarantee of capturing the complete trace. In this case, the data is omitted to avoid displaying inconsistent of misleading latency information that would only make sense when the trace is complete.
+
 ## Timeseries
 
 Use timeseries to visualize the evolution of a [measure][3] (or a count of unique tag values) over a selected time frame, and optionally split the data by up to three tags (grouping).

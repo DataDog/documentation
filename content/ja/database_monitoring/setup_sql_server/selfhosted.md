@@ -7,11 +7,17 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: ドキュメント
   text: よくある問題のトラブルシューティング
+- link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
+  tag: ブログ
+  text: Datadog で SQL ワークロードの Azure 移行を戦略化する
+- link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
+  tag: ブログ
+  text: Datadog Database Monitoring で AlwaysOn のアベイラビリティグループを監視する
 kind: documentation
 title: セルフホスト SQL Server のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -67,6 +73,8 @@ CREATE USER datadog FOR LOGIN datadog;
 
 Agent を SQL Server ホストに直接インストールすることをお勧めします。そうすることで、SQL Server 固有のテレメトリーに加え、様々なシステムテレメトリー (CPU、メモリ、ディスク、ネットワーク) を収集することができるからです。
 
+**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
@@ -81,6 +89,9 @@ Agent を SQL Server ホストに直接インストールすることをお勧�
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
+
+## Agent の構成例
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## その他の参考資料
 

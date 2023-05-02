@@ -4,13 +4,13 @@ aliases:
 - /ja/tracing/setup_overview/compatibility_requirements/nodejs
 code_lang: nodejs
 code_lang_weight: 40
-description: Nodejs トレーサーの互換性要件
+description: Node.js トレーサーの互換性要件
 further_reading:
 - link: tracing/trace_collection/dd_libraries/nodejs
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
 kind: documentation
-title: Nodejs 互換性要件
+title: Node.js 互換性要件
 type: multi-code-lang
 ---
 ## リリース
@@ -106,6 +106,7 @@ APM は、プラグインシステムを使用することで追加設定なし�
 | [elasticsearch][30]    | `10 以降`   | 完全対応 | バージョン 5 以降の `@elastic/elasticsearch` に対応 |
 | [ioredis][31]          | `2 以降`    | 完全対応 |                                                  |
 | [knex][32]             | `0.8 以降`  | 完全対応 | このインテグレーションはコンテキストの伝搬のみが目的 |
+| [mariadb][63]          | `3 以降`    | 完全対応 |                                                  |
 | [memcached][33]        | `2.2 以降`  | 完全対応 |                                                  |
 | [mongodb-core][34]     | `2 以降`    | 完全対応 | Mongoose に対応                                |
 | [mysql][35]            | `2 以降`    | 完全対応 |                                                  |
@@ -227,3 +228,4 @@ APM は、プラグインシステムを使用することで追加設定なし�
 [60]: https://nodejs.org/api/async_hooks.html
 [61]: https://www.meteor.com/
 [62]: https://github.com/DataDog/dd-trace-js/issues/1229
+[63]: https://github.com/mariadb-corporation/mariadb-connector-nodejs

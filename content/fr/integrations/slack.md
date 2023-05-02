@@ -26,10 +26,11 @@ version: '1.0'
 
 ## Présentation
 
-Associez Slack à Datadog pour permettre à votre équipe de collaborer en :
+Associez Slack à Datadog pour optimiser la collaboration au sein de votre équipe :
 
-- partageant des graphiques avec vos collègues via les canaux privés ou publics de votre équipe ;
-- recevant des alertes et des notifications de Datadog au sein de Slack.
+- Partagez des graphiques avec vos collègues via les canaux privés ou publics de votre équipe
+- Recevez des alertes et des notifications de Datadog via Slack
+- Désactivez les monitors qui se sont déclenchés et déclarez des incidents Datadog depuis Slack
 
 ## Configuration
 
@@ -37,15 +38,15 @@ Associez Slack à Datadog pour permettre à votre équipe de collaborer en :
 
 {{% tab "Application Slack" %}}
 
-### Installation
+### Configurer l'Agent Datadog pour l'APM
 
-Si vous utilisez le [site][1] US1, US3, US5 ou EU1 Datadog, installez l'app Slack Datadog dans votre espace de travail Slack :
+Si vous utilisez le [site][1] US1, US3, US5 ou EU1 Datadog, installez l'app Datadog pour Slack dans votre espace de travail Slack :
 
 1. Accédez au [carré de l'intégration][2] Slack sous Integrations sur le site Datadog. Cliquez sur le bouton **Connect Slack Account** en bas du carré.
 
-2. Vérifiez que votre compte Slack et votre compte Datadog sont associés. **Remarque** : l'administrateur de votre espace de travail Datadog devra potentiellement approuver une seule fois cette modification.
+2. Vérifiez que votre compte Slack et votre compte Datadog sont associés. L'administrateur de votre espace de travail Datadog devra potentiellement approuver cette modification s'il s'agit de la première fois.
 
-**Remarque** : l'[intégration Slack avec le répertoire de l'application Slack][3] fonctionne uniquement si vous utilisez le [site][1] US1, US3, US5 ou EU1 Datadog. Pour les autres régions, consultez la documentation relative au [Webhook Slack][4].
+L'[intégration Datadog proposée sur le Slack App Directory][3] fonctionne uniquement si vous utilisez le [site][1] US1, US3, US5 ou EU1 Datadog. Pour les autres régions, consultez la documentation relative au [Webhook Slack][4].
 
 ## Utilisation
 
@@ -55,19 +56,17 @@ Une fois installée, l'application Slack peut être invitée sur n'importe quel 
 /invite @Datadog
 ```
 
-Ensuite, associez votre compte Datadog à votre compte Slack :
+Utilisez la commande suivant pour visualiser toutes les commandes disponibles sur Slack :
 
 ```
-/datadog accounts
+/datadog help
 ```
 
-Vous avez également la possibilité d'intégrer des composants de Datadog dans Slack à l'aide d'une commande.
+<div class="alert alert-info">
+`/dd` peut être utilisé comme alias pour toutes les commandes `/datadog`.
+</div>
 
-```
-/datadog dashboard
-```
-
-Vous pouvez également copier et coller n'importe quel widget à partir de Datadog vers Slack à l'aide du raccourci `CMD + C` ou `CTRL + C`, ou en affichant le menu déroulant en haut d'un widget puis en sélectionnant Copy. Lorsque vous collez un widget, celui-ci apparaît en dessous d'un lien une fois envoyé dans un canal.
+Vous pouvez également copier et coller n'importe quel widget à partir de Datadog vers Slack à l'aide du raccourci `CMD + C` ou `CTRL + C`, ou en affichant le menu déroulant en haut d'un widget puis en sélectionnant **Copy**. Lorsque vous collez un widget, celui-ci apparaît en dessous d'un lien une fois envoyé dans un canal.
 
 ### Connexion de monitors
 
@@ -77,8 +76,7 @@ Vous pouvez modifier les monitors à envoyer à partir de l'application Slack de
 
 **Mise à jour groupée** : effectuez une mise à jour groupée de tous les monitors à envoyer à partir de l'application Slack et ajoutez les boutons de désactivation en cliquant sur le bouton « Upgrade », situé en haut de la configuration pour chacun de vos comptes Slack dans le carré d'intégration dans Datadog.
 
-**Méthode manuelle** : si vous souhaitez tester cette fonctionnalité avant de la déployer à toutes vos équipes, ajoutez manuellement les canaux à la nouvelle configuration de compte de l'application dans la configuration de l'intégration Slack. 
-**Remarque** : vous devrez peut-être supprimer les références en double vers un même canal.
+**Méthode manuelle** : si vous souhaitez tester cette fonctionnalité avant de la déployer à toutes vos équipes, ajoutez manuellement les canaux à la nouvelle configuration de compte de l'application dans la configuration de l'intégration Slack. Vous devrez peut-être supprimer les références en double vers un même canal.
 
 ### Utilisation des incidents Datadog
 
@@ -88,11 +86,11 @@ Déclarez un nouvel incident à partir de l'application Slack avec :
 /datadog incident 
 ```
 
-**Remarque** : tous les utilisateurs de votre organisation Slack peuvent déclarer un incident, même s'ils n'ont pas accès à Datadog.
+Tous les utilisateurs de votre organisation Slack peuvent déclarer un incident, même s'ils n'ont pas accès à Datadog.
 
 Lorsqu'un nouvel incident est créé, un canal Slack correspondant `#incident-(identifiant unique)` est créé, et un message est envoyé au canal pour vous indiquer le nouveau canal d'incident à utiliser. Le sujet du canal change en fonction de l'incident.
 
-Modifiez l'état d'un incident (p. ex. sa gravité) avec la commande suivante :
+Modifiez l'état d'un incident (comme sa gravité) avec la commande suivante :
 
 ```
 /datadog incident update
@@ -139,8 +137,7 @@ Vous pouvez créer des tâches à l'aide des actions Slack. Pour ce faire, passe
 * La commande `/datadog task` crée une tâche pour l'incident. La fenêtre modale qui s'affiche vous permet de décrire la tâche, de l'attribuer à des membres d'équipe et de définir une date d'échéance.
 * La commande `/datadog task list` affiche la liste des tâches créées pour l'incident. Cette liste vous permet de rouvrir des tâches ou d'indiquer qu'elles sont terminées.
 
-Vous pouvez gérer toutes les tâches créées depuis l'[interface Incidents][5] en accédant à l'onglet Remediation de la section Incident Tasks. Consultez la [documentation à ce sujet][8] pour en savoir plus.
-
+Vous pouvez gérer toutes les tâches créées depuis l'[interface Incidents][5] en accédant à l'onglet **Remediation** de la section **Incident Tasks**. Consultez la [documentation à ce sujet][8] pour en savoir plus.
 
 [1]: https://docs.datadoghq.com/fr/getting_started/site/
 [2]: https://app.datadoghq.com/account/settings#integrations/slack
@@ -188,9 +185,9 @@ Vous pouvez également configurer l'envoi d'alertes vers Slack à partir de [mon
 
 Après avoir configuré l'intégration Slack, saisissez `@slack` dans le message de votre notification pour afficher la liste des canaux auxquels vous pouvez envoyer votre notification.
 
-Ajoutez `< >` de chaque côté de `@username` dans le modèle de message de votre monitor afin de prévenir l'utilisateur défini dans les notifications Slack. Exemple : `@slack-CANAL_SLACK <@USERNAME>` ou `@slack-COMPTE_SLACK-CANAL_SLACK <@USERNAME>`.
+Ajoutez `< >` de chaque côté de `@nomutilisateur` dans le modèle de message de votre monitor afin de prévenir l'utilisateur défini dans les notifications Slack. Exemple : `@slack-CANAL_SLACK <@NOMUTILISATEUR>` ou `@slack-COMPTE_SLACK-CANAL_SLACK <@NOMUTILISATEUR>`.
 
-**Remarque** : si vous ne parvenez pas à ping une personne, utilisez son `nom d'utilisateur` Slack plutôt que son nom d'affichage. Vous le trouverez dans les [paramètres de compte Slack][1], sous **Nom d'utilisateur**.
+Si vous ne parvenez pas à ping une personne, utilisez son `nom d'utilisateur` Slack plutôt que son nom d'affichage. Vous le trouverez dans les [paramètres de compte Slack][1], sous **Nom d'utilisateur**.
 
 Ajoutez la mention **@ici** ou **@canal** en utilisant respectivement `<!ici>` ou `<!canal>`.
 
@@ -209,7 +206,7 @@ Attention @slack-infrastructure <!subteam^12345>
 {{/is_renotify}}
 ```
 
-**Remarque** : les caractères spéciaux à la fin du nom d'un canal ne sont pas pris en charge pour les notifications « @ » de Slack. Par exemple, `@----critical_alerts` fonctionne, mais `@--critical_alerts--` ne reçoit aucune notification.
+Les caractères spéciaux à la fin du nom d'un canal ne sont pas pris en charge pour les @notifications « @ » de Slack. Par exemple, `@----critical_alerts` fonctionne, mais `@--critical_alerts--` ne reçoit aucune notification.
 
 ### Utilisation des template variables de message pour créer des mentions « @ » dynamiques
 
@@ -253,35 +250,35 @@ L'intégration Slack n'inclut aucun check de service.
 
 ## Autorisations
 
-L'app Slack Datadog nécessite les portées OAuth suivantes. Pour en savoir plus, consultez la [documentation relative aux portées d'autorisations Slack][4] (en anglais). 
+L'app Datadog pour Slack nécessite les portées OAuth suivantes. Pour en savoir plus, consultez la [documentation relative aux portées d'autorisations Slack][4] (en anglais). 
 
 ### Portées des tokens du bot
 
-| Portées                   | Motif de la requête                                                                          |
-|--------------------------|-----------------------------------------------------------------------------------------|
-| `app_mentions:read`      | Cette app peut répondre en cas de mention directe.                                             |
-| `channels:join`          | Le bot rejoint automatiquement les canaux publics précédemment configurés.                        |
-| `channels:manage`        | Permet de créer des canaux pour la gestion des incidents.                                                |
-| `channels:read`          | Les canaux sont saisis automatiquement dans le carré de l'intégration Slack dans Datadog.                          |
-| `chat:write`             | Permet d'envoyer des messages dans les canaux et conversations approuvés.                                   |
-| `commands`               | Commande `/datadog`.                                                                     |
-| `groups:read`            | Les canaux sont saisis automatiquement dans le carré de l'intégration Slack dans Datadog.                          |
-| `im:read`                | Permet d'utiliser la commande `/datadog` dans des conversations individuelles.                                          |
-| `im:write`               | Permet de prévenir les administrateurs lorsque des autorisations supplémentaires sont requises.                                 |
-| `links:read`             | Permet d'afficher les aperçus des liens Datadog.                                                          |
-| `links:write`            | Permet d'afficher les aperçus des liens Datadog.                                                          |
-| `mpim:read`              | Permet d'utiliser la commande `/datadog`.                                                             |
-| `reactions:write`        | Permet d'indiquer qu'un message a été ajouté à la chronologie d'un incident.                                        |
-| `team:read`              | Permet de mettre à jour votre espace de travail dans le carré de l'intégration Slack dans Datadog. |
-| `users:read`             | Permet d'utiliser des réponses adaptées à votre fuseau horaire.                                                  |
-| `users:read.email`       | Permet d'ajouter des messages ou des utilisateurs pour les incidents créés en dehors de Slack.                           |
-| `workflow.steps:execute` | Permet de partager des widgets depuis une étape de workflow.                                                     |
+| Portées                   | Motif de la requête                                                                                                 |
+|--------------------------|----------------------------------------------------------------------------------------------------------------|
+| `channels:join`          | Rejoindre automatiquement les canaux publics configurés via le carré de l'intégration Slack dans Datadog.                        |
+| `channels:manage`        | Créer des canaux dédiés à la gestion et à la remédiation des incidents avec la solution Incident Management de Datadog.                           |
+| `channels:read`          | Activer les suggestions de nom de canal lors de la saisie dans le carré de l'intégration Slack sur Datadog.                      |
+| `chat:write`             | Recevoir des alertes et des notifications Datadog dans les canaux et les conversations approuvés.                               |
+| `commands`               | Activer la commande /datadog et son alias /dd pour effectuer des actions dans Datadog.                                |
+| `groups:read`            | Activer les suggestions de nom de canal lors de la saisie pour les canaux privés dans le carré de l'intégration Slack sur Datadog. |
+| `im:history`             | Autoriser Datadog à vous envoyer des messages dans l'onglet Messages, tels que des instructions d'utilisation.              |
+| `im:read`                | Activer la commande /datadog et son alias /dd pour effectuer des actions dans Datadog à partir des messages directs.               |
+| `im:write`               | Recevoir des messages, des demandes et des erreurs de la part du bot Datadog concernant votre compte Datadog.                    |
+| `links:read`             | Afficher un aperçu des liens Datadog dans les conversations, avec des informations supplémentaires comme des graphiques et des exemples de log.                |
+| `links:write`            | Afficher un aperçu des liens Datadog dans les conversations, avec des informations supplémentaires comme des graphiques et des exemples de log.                |
+| `mpim:read`              | Activer la commande /datadog et son alias /dd pour effectuer des actions dans Datadog à partir des messages directs de groupe.         |
+| `reactions:write`        | Ajouter un emoji de réaction aux messages qui ont été ajoutés à la timeline d'un incident via un raccourci.                   |
+| `team:read`              | Permet de mettre à jour votre espace de travail dans le carré de l'intégration Slack dans Datadog.                        |
+| `users:read`             | Utiliser des réponses adaptées à votre fuseau horaire.                                                                |
+| `users:read.email`       | Ajouter des messages et des utilisateurs pour les incidents créés en dehors de Slack dans Datadog.                                  |
+| `workflow.steps:execute` | Envoyer automatiquement des messages avec les widgets de dashboard Datadog depuis une étape de workflow Slack.                         |
 
 ### Portées des tokens utilisateur
 
-| Portées           | Motif de la requête                                     |
-|------------------|----------------------------------------------------|
-| `identity.basic` | Les utilisateurs peuvent associer leur compte Datadog à leur compte Slack. |
+| Portées           | Motif de la requête                                                            |
+|------------------|---------------------------------------------------------------------------|
+| `identity.basic` | Effectuer des actions dans Datadog depuis Slack en connectant votre compte Datadog. |
 
 ## Dépannage
 

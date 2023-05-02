@@ -1,0 +1,69 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "datadog-agent",
+      "image": "public.ecr.aws/datadog/agent:latest",
+      "cpu": 512,
+      "memory": 512,
+      "essential": true,
+      "mountPoints": [
+        {
+          "containerPath": "\\\\.\\pipe\\docker_engine",
+          "sourceVolume": "docker_sock",
+          "readOnly": null
+        },
+        {
+          "containerPath": "C:/programdata/datadog/run",
+          "sourceVolume": "pointdir",
+          "readOnly": false
+        },
+        {
+          "containerPath": "c:/programdata/docker/containers",
+          "sourceVolume": "containers_root",
+          "readOnly": true
+        }
+      ],
+      "environment": [
+        {
+          "name": "DD_API_KEY",
+          "value": "<YOUR_DATADOG_API_KEY>"
+        },
+        {
+          "name": "DD_SITE",
+          "value": "datadoghq.com"
+        },
+        {
+          "name": "DD_LOGS_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "\\\\.\\pipe\\docker_engine"
+      },
+      "name": "docker_sock"
+    },
+    {
+      "name": "pointdir",
+      "dockerVolumeConfiguration": {
+        "autoprovision": true,
+        "scope": "shared",
+        "driver": "local"
+      }
+    },
+    {
+      "host": {
+        "sourcePath": "c:/programdata/docker/containers"
+      },
+      "name": "containers_root"
+    }
+  ],
+  "family": "datadog-agent-task"
+}

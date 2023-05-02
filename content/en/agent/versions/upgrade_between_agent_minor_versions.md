@@ -11,23 +11,23 @@ aliases:
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The recommended way to upgrade between minor versions of Agent 6 and 7 is to use the `install_script.sh` script. The following commands work on all supported Linux distributions.
+The recommended way to upgrade between minor versions of Agent 6 and 7 is to use the `install_script_agent6.sh` and `install_script_agent7.sh` scripts. The following commands work on all supported Linux distributions.
 
 Upgrading to a given Agent 6 minor version:
 
-: `DD_AGENT_MAJOR_VERSION=6 DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
 Upgrading to the latest Agent 6 minor version:
 
-: `DD_AGENT_MAJOR_VERSION=6 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script.sh)"`
+: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
 Upgrading to a given Agent 7 minor version:
 
-: `DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script.sh)"`
+: `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 Upgrading to the latest Agent 7 minor version:
 
-: `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script.sh)"`
+: `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}

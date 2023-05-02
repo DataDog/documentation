@@ -16,6 +16,16 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+## Compatibility
+
+- **Partial pipelines**: View partially retried and downstream pipeline executions
+
+- **Manual steps**: View manually triggered pipelines
+
+- **Parameters**: Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered 
+
+- **Pipeline failure reasons**: Identify pipeline failure reasons from error messages
+
 ## Configure the Datadog integration
 
 The steps to activate the Datadog integration for [Codefresh][1] are:
@@ -42,3 +52,4 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
+[6]: https://codefresh.io/docs/docs/codefresh-yaml/variables/#user-provided-variables

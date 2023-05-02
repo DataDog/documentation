@@ -17,6 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
   tag: ブログ
   text: APM サービス詳細画面の URL をクリップボードに追加する
+- link: https://www.datadoghq.com/blog/apm-security-view/
+  tag: ブログ
+  text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
 kind: documentation
 title: サービス詳細画面
 ---
@@ -34,7 +37,7 @@ title: サービス詳細画面
 * [すぐに使えるグラフ](#out-of-the-box-graphs)
 * [このサービスに関連するリソース][2]
 * [その他のタブ](#additional-tabs)
-    *  [デプロイメント](#deployments)、[エラー追跡](#error-tracking)、[トレース](#traces)、など。
+    *  [デプロイメント](#deployments)、[エラー追跡](#error-tracking)、[トレース](#traces)、[セキュリティ](#security)など
 
 ## サービスモニター
 
@@ -50,9 +53,9 @@ Datadog は、サービスタイプに応じてモニターのリストを提案
 
 サービス詳細画面には、サービスの健全性に関するハイライトを示すサマリーカードが表示されます。カード内をクリックすると、最新のデプロイメントの詳細やトレースを表示したり、このサービス上のすべてのデプロイメントを表示したりできます。[エラー追跡][4]とのインテグレーションにより、サービス上でフラグが立てられた新しい問題を見ることができます。ここで、エラーは自動的に問題に集約されます。
 
-{{< img src="tracing/visualization/service/summary_cards.jpg" alt="サマリーカード"  style="width:100%;">}}
+{{< img src="tracing/visualization/service/summary_cards.png" alt="サマリーカード" style="width:100%;">}}
 
-[サービスレベル目標 (SLO)][5] と [インシデント][6]のサマリーにより、SLO と進行中のインシデントの状態を監視し、パフォーマンス目標を常に念頭に置いておくことができます。カードをクリックすると、サービスに関する新しい SLO を作成したり、インシデントを宣言したりすることができます。
+[サービスレベル目標 (SLO)][5] と[インシデント][6]のサマリーにより、SLO と進行中のインシデントの状態を監視し、パフォーマンス目標を常に念頭に置いておくことができます。カードをクリックすると、サービスに関する新しい SLO を作成したり、インシデントを宣言したりすることができます。[セキュリティシグナル][18]サマリーでは、アプリケーションの脅威に対してサービスがどのように対応しているかを確認できます。
 
 {{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog インサイト"  style="width:70%;">}}
 
@@ -150,6 +153,15 @@ Datadog は、特定のサービスに対して[すぐに使用できるグラ�
 
 {{< img src="tracing/visualization/service/error_tracking_side_panel.jpg" alt="Error Tracking タブ"  style="width:90%;">}}
 
+### セキュリティ
+サービスのライブラリに存在する既知の脆弱性や、サービス上のセキュリティシグナルなど、サービスのセキュリティポスチャを理解できます。セキュリティシグナルは、Datadog がサービスに影響を与えるアプリケーション攻撃を検知した際に自動的に生成されます。これらのシグナルは、個々の攻撃の試みをそれぞれ評価する代わりに、ユーザーが確認すべき重要な脅威を特定します。[アプリケーションセキュリティ][18]の詳細を参照してください。
+
+セキュリティタブのトップセクションには、脆弱性の数と重大性、攻撃の時期、攻撃の種類、攻撃者情報 (クライアント IP または認証済みユーザー) を示す概要グラフが表示されます。 
+
+パネルの次のセクションには、サービスに関係するすべての脆弱性とシグナルが一覧表示されます。任意のセキュリティ脆弱性をクリックすると、関連情報が記されたサイドパネルが開き、脆弱性に関するさらなる調査と修復を実行できます。セキュリティシグナルをクリックすると、どのような脅威が検出されたか、そして修復のためにどのような対応が可能かについての情報を入手できます。
+
+{{< img src="tracing/visualization/service/security_tab.jpg" alt="セキュリティ" style="width:90%;">}}
+
 ### インフラストラクチャー
 サービスが Kubernetes 上で実行されている場合、サービス詳細画面に Infrastructure タブが表示されます。ライブ Kubernetes Pods テーブルには、メモリ使用量が限界に近づいているかどうかなど、ポッドの詳細情報が表示されます。これにより、プロビジョニングされたコンピュートリソースが最適なアプリケーションパフォーマンスに必要なものを超えているかを明確に確認することによって、リソース割り当てを改善することが可能です。
 
@@ -199,6 +211,7 @@ Kubernetes 以外の環境 (ホストベースのインストールなど) に�
 [12]: /ja/tracing/services/deployment_tracking/#versions-deployed
 [13]: /ja/getting_started/tagging/unified_service_tagging/?tab=systemmetrics#non-containerized-environment
 [14]: /ja/tracing/metrics/runtime_metrics/
-[15]: /ja/tracing/profiler/
+[15]: /ja/profiler/
 [16]: /ja/tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
+[18]: /ja/security/application_security/how-appsec-works/

@@ -2,7 +2,7 @@
 aliases:
 - /ja/monitors/faq/how-can-i-setup-an-alert-for-when-a-specific-tag-stops-reporting
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成方法
 - link: /monitors/notify/

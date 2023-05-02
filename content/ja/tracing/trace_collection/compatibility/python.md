@@ -29,9 +29,9 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 
 | OS      | CPU                   | ランタイム | ランタイムバージョン | ddtrace のバージョンに対応 |
 |---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.10   | `<2`                     |
-| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.10   | `<2`                     |
-| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.10   | `<2`                     |
+| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.11   | `<2`                     |
+| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.11   | `<2`                     |
+| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.11   | `<2`                     |
 
 ## インテグレーション
 
@@ -53,6 +53,7 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 | [Falcon][8]               | 1.0 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#falcon  |
 | [Flask][9]                | 0.10 以降           | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask   |
 | [FastAPI][10]              | >= 0.51           | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#fastapi |
+| [Gunicorn][61]            | >= 20.0.04        | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#gunicorn |
 | [Molten][11]               | 0.7.0 以降          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#molten  |
 | [Pylons][12]              | 0.9.6 以降          | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylons  |
 | [Pyramid][13]             | 1.7 以降            | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#pyramid |
@@ -181,3 +182,4 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 [58]: https://requests.readthedocs.io/en/master/
 [59]: https://urllib3.readthedocs.io/en/stable/
 [60]: https://graphql-core-3.readthedocs.io/en/latest/intro.html
+[61]: https://gunicorn.org/

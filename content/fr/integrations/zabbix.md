@@ -16,7 +16,7 @@ assets:
     source_type_name: Zabbix
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: unknown
+  name: Communauté
   sales_email: KosukeKamiya@users.noreply.github.com
   support_email: KosukeKamiya@users.noreply.github.com
 categories:
@@ -29,7 +29,7 @@ draft: false
 git_integration_title: zabbix
 integration_id: zabbix
 integration_title: zabbix
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0

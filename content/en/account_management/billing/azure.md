@@ -12,7 +12,7 @@ The Azure integration collects metrics for all other Azure resources (Azure SQL 
 
 ## Azure VM exclusion
 
-Use the Datadog-Azure integration tile to filter your VMs monitored by Datadog. Go to the Configuration tab and edit an existing App Registration or add a new one. Each filter is controlled under “Optionally limit metrics collection to hosts with tag:”
+Use the Datadog-Azure integration tile to filter your VMs monitored by Datadog. Go to the Configuration tab and edit an existing App Registration or add a new one. Each filter is controlled under "Optionally limit metrics collection to hosts with tag:"
 
 When adding limits to existing Azure tenants within the integration tile, the previously discovered VMs could stay in the Infrastructure List up to two hours. During the transition period, VMs display a status of `???`. This does not count towards your billing.
 
@@ -20,7 +20,7 @@ VMs with a running Agent still display and are included in billing. Using the li
 
 ## Azure App Service Plan exclusion
 
-Use the Datadog-Azure integration tile to filter your Azure App Service Plans monitored by Datadog. Go to the Configuration tab and edit an existing App Registration or add a new one. The filter is controlled under “Optionally limit metrics collection to App Service Plans with tag:”
+Use the Datadog-Azure integration tile to filter your Azure App Service Plans monitored by Datadog. Go to the Configuration tab and edit an existing App Registration or add a new one. The filter is controlled under "Optionally limit metrics collection to App Service Plans with tag:"
 
 **Note**: This filters the metrics for all Apps or Functions running on the App Service Plan(s).
 

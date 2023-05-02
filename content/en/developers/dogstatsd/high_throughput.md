@@ -159,7 +159,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
 
             // Counter and Gauge are sent in the same datagram
             dogStatsdService.Counter("example_metric.count", 2, tags: new[] { "environment:dev" });

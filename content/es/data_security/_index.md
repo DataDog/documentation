@@ -8,7 +8,7 @@ further_reading:
   text: Seguridad de los datos en los logs
 - link: /data_security/agent/
   tag: Documentación
-  text: Seguridad de los datos en Agent
+  text: Seguridad de los datos en el Agent
 - link: /data_security/synthetics/
   tag: Documentación
   text: Seguridad de los datos en Synthetic Monitoring
@@ -36,13 +36,13 @@ Te animamos a consultar la información disponible en la [sección de seguridad 
 
 ## Cómo llegan tus datos a Datadog
 
-Tus datos pueden llegar a Datadog de diversas maneras; por ejemplo, desde Agent, [DogStatsD][3], la API pública y las integraciones. Además, los SDK de Real User Monitoring (RUM) y las bibliotecas de trazado generan datos basados en el código de tus aplicaciones y servicios, y los envían a Datadog.
+Tus datos pueden llegar a Datadog de diversas maneras; por ejemplo, desde el Agent, [DogStatsD][3], la API pública y las integraciones. Además, los SDK de Real User Monitoring (RUM) y las bibliotecas de rastreo generan datos basados en el código de tus aplicaciones y servicios, y los envían a Datadog.
 
 Los datos que se transmiten a través de las herramientas proporcionadas por Datadog se protegen mediante los protocolos TLS y HSTS. Los datos almacenados por Datadog se mantienen a buen recaudo mediante cifrado, controles de acceso y sistemas de autenticación. Para más detalles, consulta la [sección de seguridad de Datadog][1].
 
 ### Datadog Agent
 
-Agent representa la principal vía de entrada de tus datos a Datadog desde tus sistemas. [Consulta todo lo que debes saber sobre las medidas de seguridad que aplica Agent para proteger tus datos][4]. 
+El Agent representa la principal vía de entrada de tus datos a Datadog desde tus sistemas. [Consulta todo lo que debes saber sobre las medidas de seguridad que aplica el Agent para proteger tus datos][4]. 
 
 Si quieres saber lo que tienes que hacer para evitar guardar datos secretos como texto sin formato en los archivos de configuración de Agent, consulta el artículo [Gestión de datos secretos][5].
 
@@ -78,26 +78,26 @@ Para reducir los riesgos que amenazan la seguridad de los datos en los logs, es 
 
 ### Live Processes y Live Containers
 
-Para que no se filtren datos confidenciales cuando estás monitorizando Live Processes (procesos activos) y Live Containers (contenedores activos), tiene establecidas unas palabras clave confidenciales que se pueden quitar de argumentos de procesos y de gráficos de Helm. Puedes enmascarar más secuencias confidenciales en comandos o argumentos de procesos con el [parámetro `custom_sensitive_words`][16] y añadirlas a la lista de palabras que limpiar con la [variable de entorno `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`][17].
+Para que no se filtren datos confidenciales cuando estás monitorizando Live Processes (procesos activos) y Live Containers (contenedores activos), Datadog tiene establecidas unas palabras clave confidenciales que se pueden quitar de argumentos de procesos y de Helm charts. Puedes enmascarar más secuencias confidenciales en comandos o argumentos de procesos con el [parámetro `custom_sensitive_words`][16] y añadirlas a la lista de palabras que limpiar con la [variable de entorno `DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS`][17].
 
-### APM y otros productos de bibliotecas de trazado
+### APM y otros productos de bibliotecas de rastreo
 
-Las bibliotecas de trazado de Datadog sirven para instrumentar aplicaciones, servicios, pruebas y canalizaciones, y enviar datos de funcionamiento a Datadog mediante Agent. Se generan datos de trazas (traces) y tramos (spans), entre muchos otros, para que puedan utilizarlos los siguientes productos:
+Las bibliotecas de rastreo de Datadog sirven para instrumentar aplicaciones, servicios, pruebas y pipelines, y enviar datos de funcionamiento a Datadog mediante el Agent. Se generan datos de trazas (traces) y tramos (spans), entre muchos otros, para que puedan utilizarlos los siguientes productos:
 
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
 - Application Security Monitoring (ASM)
 
-Si quieres obtener información detallada sobre cómo se gestionan los datos que proceden de bibliotecas de trazado, sobre las configuraciones de seguridad básicas y sobre las operaciones predeterminadas de enmascaramiento, limpieza, exclusión y modificación de elementos relacionados con trazas, consulta el artículo [Configurar Agent y el trazador para proteger los datos de las trazas][18].
+Si quieres obtener información detallada sobre cómo se gestionan los datos que proceden de bibliotecas de rastreo, sobre las configuraciones de seguridad básicas y sobre las operaciones predeterminadas de enmascaramiento, limpieza, exclusión y modificación de elementos relacionados con trazas, consulta el artículo [Configurar Agent y el rastreador para proteger los datos de las trazas][18].
 
-### Trazado distribuido serverless
+### Rastreo distribuido serverless
 
-Con Datadog, puedes recopilar y visualizar las cargas de solicitud y respuesta JSON de las funciones de AWS Lambda. Para que no se envíen a Datadog los datos confidenciales que puedan incluirse en objetos JSON de solicitud y respuesta (como el ID de cuenta y las direcciones), tienes la posibilidad de limpiar determinados parámetros. Consulta más detalles sobre cómo [enmascarar contenido de las cargas de AWS Lambda][19].
+Con Datadog, puedes recopilar y visualizar las cargas útiles de solicitud y respuesta JSON de las funciones de AWS Lambda. Para que no se envíen a Datadog los datos confidenciales que puedan incluirse en objetos JSON de solicitud y respuesta (como el ID de cuenta y las direcciones), tienes la posibilidad de limpiar determinados parámetros. Consulta más detalles sobre cómo [enmascarar contenido de las cargas útiles de AWS Lambda][19].
 
 ### Synthetic Monitoring
 
-Las pruebas sintéticas simulan solicitudes y transacciones empresariales en ubicaciones de prueba de todo el mundo. En el artículo [Seguridad de los datos en Synthetic Monitoring][20] encontrarás todo lo que debes tener en cuenta para cifrar configuraciones, activos, resultados y credenciales, y para aprender a usar las opciones de privacidad de las pruebas.
+Las pruebas sintéticas simulan solicitudes y transacciones empresariales en localizaciones de prueba de todo el mundo. En el artículo [Seguridad de los datos en Synthetic Monitoring][20] encontrarás todo lo que debes tener en cuenta para cifrar configuraciones, activos, resultados y credenciales, y para aprender a usar las opciones de privacidad de las pruebas.
 
 ### RUM y Session Replay
 
@@ -107,7 +107,7 @@ De manera predeterminada, Session Replay protege la privacidad de los usuarios f
 
 ### Database Monitoring
 
-Database Monitoring Agent enmascara todos los parámetros ligados a consultas que se envían a Datadog. Por lo tanto, ni las contraseñas, ni la información de identificación personal ni cualquier otro dato potencialmente confidencial que tengas en tu base de datos aparecerán en las métricas de consultas, en las muestras de consultas o en los planes explicativos. Para obtener información sobre cómo mitigar los riesgos que amenazan otros datos que se utilizan para monitorizar el funcionamiento de la base de datos, consulta el artículo [Datos recopilados para Database Monitoring][23].
+El Database Monitoring Agent enmascara todos los parámetros ligados a consultas que se envían a Datadog. Por lo tanto, ni las contraseñas, ni la información de identificación personal ni cualquier otro dato potencialmente confidencial que tengas en tu base de datos aparecerán en las métricas de consultas, en las muestras de consultas o en los planes explicativos. Para obtener información sobre cómo mitigar los riesgos que amenazan otros datos que se utilizan para monitorizar el funcionamiento de la base de datos, consulta el artículo [Datos recopilados para Database Monitoring][23].
 
 ## Otras fuentes de datos que pueden considerarse confidenciales
 
@@ -116,7 +116,7 @@ Aparte de los datos confidenciales que se pueden limpiar, enmascarar y excluir d
 Metadatos y etiquetas
 : Los metadatos son, principalmente, [etiquetas][24] con el formato `key:value`; por ejemplo, `env:prod`. Datadog los utiliza para filtrar y agrupar datos con el fin de ayudarte a darle sentido a la información.
 
-Dashboards, notebooks, alertas, monitores, incidencias y objetivos de nivel de servicio (SLO)
+Dashboards, notebooks, alertas, monitores, incidencias y objetivos de nivel de servicio (SLOs)
 : Los textos descriptivos, los títulos y los nombres que asignas a lo que creas en Datadog son datos.
 
 Métricas
@@ -126,7 +126,7 @@ Datos de APM
 : Entre los datos de APM se incluyen servicios, recursos, perfiles, trazas y tramos, además de sus etiquetas asociadas. En el [glosario de APM][25] lo tienes todo explicado. 
 
 Firmas de consultas de la base de datos
-: Entre los datos de monitorización de la base de datos se incluyen las métricas y las muestras (junto con sus etiquetas asociadas) que recopila Agent y se usan para controlar cómo han funcionado las consultas normalizadas en el pasado. El nivel de detalle de estos datos viene determinado por la firma de la consulta normalizada correspondiente y el identificador de host único. Todos los parámetros de las consultas quedan enmascarados y se descartan en las muestras recopiladas antes de enviarse a Datadog.
+: Entre los datos de monitorización de la base de datos se incluyen las métricas y las muestras (junto con sus etiquetas asociadas) que recopila el Agent y se usan para controlar cómo han funcionado las consultas normalizadas en el pasado. El nivel de detalle de estos datos viene determinado por la firma de la consulta normalizada correspondiente y el identificador de host único. Todos los parámetros de las consultas quedan enmascarados y se descartan en las muestras recopiladas antes de enviarse a Datadog.
 
 Información de procesos
 : Los procesos constan de métricas y datos del sistema de archivos `proc`, que actúa como punto de entrada a las estructuras de datos internas del kernel. Entre los datos de procesos, puede haber comandos (incluidos los argumentos y la ruta), el nombre de usuario asociado, el ID del proceso y su elemento superior, el estado del proceso y el directorio de trabajo. Estos datos suelen tener asociados metadatos de etiqueta.
@@ -134,8 +134,8 @@ Información de procesos
 Eventos y comentarios
 : Los datos de eventos provienen de varias fuentes y se agregan en una vista unificada, que muestra los monitores activados, los eventos enviados por integraciones, los eventos enviados por la propia aplicación y los comentarios enviados por los usuarios o a través de la API. Los eventos y los comentarios suelen tener asociados metadatos de etiqueta.
 
-Canalizaciones y pruebas de integración continua
-: Tanto los nombres de las ramas como las canalizaciones, las pruebas y los conjuntos de pruebas son datos que se envían a Datadog.
+Pipelines y tests de integración continua
+: Tanto los nombres de las ramas como los pipelines, los tests y los conjuntos de tests son datos que se envían a Datadog.
 
 ### Leer más
 

@@ -26,7 +26,6 @@ author:
 categories:
 - data store
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openldap/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Data Store
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
   media: []
@@ -71,7 +69,7 @@ OpenLDAP インテグレーションを使用すると、OpenLDAP サーバー�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 OpenLDAP インテグレーションは Agent とパッケージ化されています。OpenLDAP メトリクスの収集を開始するには、以下を実行します。
 

@@ -1,23 +1,47 @@
 ---
+app_id: salesforce-commerce-cloud
+app_uuid: fe465a7e-7702-40fb-9a88-a0e4198d1983
+assets:
+  integration:
+    auto_install: false
+    configuration: {}
+    events:
+      creates_events: false
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Salesforce Commerce Cloud
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - ログの収集
 dependencies: []
-description: Salesforce Commerce Cloud
-doc_link: https://docs.datadoghq.com/integrations/salesforce_commerce_cloud/
+display_on_public_website: true
 draft: false
 git_integration_title: salesforce_commerce_cloud
-has_logo: false
-integration_id: ''
+integration_id: salesforce-commerce-cloud
 integration_title: Salesforce Commerce Cloud
 integration_version: ''
 is_public: true
 kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: salesforce_commerce_cloud
+oauth: {}
 public_title: Salesforce Commerce Cloud
-short_description: Salesforce Commerce Cloud からログを収集します。
-team: web-integrations
-version: '1.0'
+short_description: Salesforce Commerce Cloud のログを Datadog にインポートする
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Salesforce Commerce Cloud のログを Datadog にインポートする
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Salesforce Commerce Cloud
 ---
 
 ## 概要
@@ -26,7 +50,7 @@ Salesforce Commerce Cloud は、マルチテナント型のクラウドベース
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 インストールは必要ありません。
 

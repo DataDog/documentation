@@ -1,9 +1,9 @@
 ---
-aliases:
-- /ja/integrations/azure_container_apps
+aliases: []
 categories:
-- クラウド
 - azure
+- クラウド
+- コンテナ
 dependencies: []
 description: Azure Container Apps からメトリクスを取得します。
 doc_link: https://docs.datadoghq.com/integrations/azure_container_apps/

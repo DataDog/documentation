@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         redirectToRegion()
     }
+    hideNonRegionSpecificTOC()
 
     if (regionSelector) {
         const options = regionSelector.querySelectorAll('.dropdown-item');
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             option.addEventListener('click', () => {
                 const region = option.dataset.value;
                 regionOnChangeHandler(region);
+                hideNonRegionSpecificTOC(true)
             })
         })
     }
@@ -78,6 +80,27 @@ function regionOnChangeHandler(region) {
     } else {
         redirectToRegion(region);
     }
+}
+
+/**
+ * Hides Hugo TOC items that are not {{% site-region %}} specific
+ * @param {boolean} regionSelected - region selected via site select dropdown
+ */
+function hideNonRegionSpecificTOC(regionSelected=false) {
+    const allTOCItems = document.querySelectorAll('#TableOfContents li')
+    const hiddenHeaders = document.querySelectorAll('.site-region-container.d-none > h3')
+    const hiddenHeaderIDs = [...hiddenHeaders].map(el => `#${el.id}`)
+
+    allTOCItems.forEach(item => {
+        const refID = item.querySelector('a')?.hash
+        if(regionSelected){
+            // display all items
+            item.classList.remove('d-none')
+        }
+        if(hiddenHeaderIDs.includes(refID)){
+            item.classList.add('d-none')
+        }
+    })
 }
 
 function showRegionSnippet(newSiteRegion) {

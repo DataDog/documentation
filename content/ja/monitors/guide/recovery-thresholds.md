@@ -2,7 +2,7 @@
 aliases:
 - /ja/monitors/faq/what-are-recovery-thresholds
 further_reading:
-- link: /monitors/create/types/metric/
+- link: /monitors/types/metric/
   tag: ドキュメント
   text: メトリクスモニター
 kind: ガイド
@@ -14,8 +14,6 @@ title: 回復しきい値
 回復しきい値は、アラートまたは警告状態からモニターが回復するための追加条件を示すために、モニターに追加されるオプションのしきい値です。
 
 ## 動作
-
-しきい値メトリクスモニターを設定すると、メトリクスがアラートしきい値を超えたときにアラートが表示されます。
 
 回復しきい値は、モニターの回復に条件を追加し、回復しきい値を**超えた**場合にのみ回復状態に移行するようにします。回復しきい値が設定されていない場合、モニターはアラート条件が満たされなくなると回復します。
 
@@ -51,7 +49,7 @@ title: 回復しきい値
               }
 ```
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

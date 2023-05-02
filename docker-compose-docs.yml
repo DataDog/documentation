@@ -1,7 +1,7 @@
 version: '3'
 services:
   docs:
-    image: public.ecr.aws/x2b9z2t7/webops/site-build:main
+    image: public.ecr.aws/x2b9z2t7/webops/site-build:latest
     command: "./startup.sh ${GITHUB_TOKEN} ${FULL_BUILD}"
     volumes:
       - "${REPO_PATH}:/src:delegated"

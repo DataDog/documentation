@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- 構成 & デプロイ
 - ログの収集
 dependencies: []
 description: Amazon Keyspaces の主要なメトリクスを追跡します。
@@ -29,7 +30,7 @@ Amazon Keyspaces (Apache Cassandra 用) は、スケーラブルで可用性の�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

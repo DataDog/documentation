@@ -18,6 +18,9 @@ further_reading:
     - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
+    - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+      tag: "Blog"
+      text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
@@ -96,9 +99,18 @@ docker run -d --cgroupns host \
               gcr.io/datadoghq/agent:latest
 ```
 
-If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1]:
+If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1].
+
+#### Origin detection over UDP
+
+Origin detection is supported in Agent v6.10.0+, and allows DogStatsD to detect where the container metrics come from and automatically tag metrics. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
+
+Origin detection in non-Kubernetes environments is based on an extension of the DogStatsD protocol in [Datagram Format and Shell Usage][2]. To enable the feature in the Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
+
+**Note**: Origin detection is not supported for Fargate environments.
 
 [1]: /developers/dogstatsd/unix_socket/
+[2]: /developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -265,7 +277,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>3.0.0</version>
+    <version>4.2.1</version>
 </dependency>
 ```
 
@@ -351,7 +363,7 @@ For more options, see [Datadog's GoDoc][1].
 
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -423,7 +435,8 @@ var dogstatsdConfig = new StatsdConfig
 
 using (var dogStatsdService = new DogStatsdService())
 {
-    dogStatsdService.Configure(dogstatsdConfig);
+    if (!dogStatsdService.Configure(dogstatsdConfig))
+        throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     // ...
 } // Flush metrics not yet sent
 ```
@@ -485,7 +498,7 @@ The Go client has multiple options for configuring the behavior of your client.
 For all available options, see [Datadog's GoDoc][1].
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd#Option
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd#Option
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 
@@ -548,6 +561,10 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 {{< /whatsnext >}}
 
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][9] section, which also explains how to send metrics and events straight from the command line.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/etsy/statsd
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/

@@ -132,6 +132,8 @@ datadog:
     containerCollectAll: true
 ```
 
+You can set the `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+
 ### Unprivileged
 
 (Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
@@ -152,44 +154,67 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 
 Update your `datadog-agent.yaml` manifest with:
 
-```
-agent:
-  image:
-    name: "gcr.io/datadoghq/agent:latest"
-  log:
-    enabled: true
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
 ```
 
-See the sample [manifest with logs and metrics collection enabled][1] for a complete example.
+See the sample [manifest with logs and metrics collection enabled][1] for a complete example. You can set the `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
 
 Then apply the new configuration:
 
 ```shell
-$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
 ## Unprivileged
 
-(Optional) To run an unprivileged installation, add the following to the [datadog CR][8]:
+(Optional) To run an unprivileged installation, add the following to the [DatadogAgent Custom Resource][2]:
 
 ```yaml
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: <USER_ID>
+        supplementalGroups:
+          - <DOCKER_GROUP_ID>
 ```
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{< /tabs >}}
 
 **Warning**: When running an unprivileged installation, the agent needs to be able to read the log files in `/var/log/pods`.
 With `containerd`, the log files in `/var/log/pods` are readable by members of the `root` group. With the above instructions, the `agent` is still running with the `root` group so, it works.
-With `docker`, the logs files in `/var/log/pods` are symbolic links to `/var/lib/docker/containers` which is traversable only by the `root` user. As a consequence, with `docker`, it’s not possible for a non-`root` agent to read pod logs in `/var/log/pods`. The docker socket must be mounted in the agent container so that it can get pods logs through the docker daemon.
+With `docker`, the logs files in `/var/log/pods` are symbolic links to `/var/lib/docker/containers` which is traversable only by the `root` user. As a consequence, with `docker`, it's not possible for a non-`root` agent to read pod logs in `/var/log/pods`. The docker socket must be mounted in the agent container so that it can get pods logs through the docker daemon.
 
 **Note**: If you do want to collect logs from `/var/log/pods` even if the Docker socket is mounted, set the environment variable `DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE` (or `logs_config.k8s_container_use_file` in `datadog.yaml`) to `true` in order to force the Agent to go for the file collection mode.
 
@@ -398,7 +423,7 @@ You can customize logs collection per integration within `confd`. This method mo
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes, including custom tags.
+The following pod annotation defines the integration template for `redis` containers with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes, including custom tags :
 
 ```yaml
 apiVersion: v1
@@ -406,7 +431,7 @@ kind: Pod
 metadata:
   name: redis
   annotations:
-    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis","tags":"env:prod"}]'
+    ad.datadoghq.com/redis.logs: '[{"source": "redis","service": "redis","tags": ["env:prod"]}]'
   labels:
     name: redis
 spec:
@@ -420,7 +445,7 @@ spec:
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-The following ConfigMap defines the integration template for `redis` containers with the `source` and `service` attributes for collecting logs:
+The following ConfigMap defines the integration template for `redis` containers with the `source` and `service` attributes for collecting logs and tags all its logs with the correct `source` and `service` attributes, including custom tags :
 
 ```yaml
 kind: ConfigMap
@@ -434,9 +459,10 @@ data:
       - redis
       - redis-test
     logs:
-      source: redis
-      service: redis
-      tags: env:prod
+      - source: redis
+        service: redis
+        tags:
+          - env:prod
 ```
 
 In the manifest, define the `volumeMounts` and `volumes`:
@@ -466,7 +492,7 @@ The following etcd commands create a Redis integration template with a custom `p
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
-etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": "env:prod"}]'
+etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": ["env:prod"]}]'
 ```
 
 Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
@@ -484,8 +510,8 @@ The following configuration defines the integration template for Redis container
         - redis
       logs:
         - source: redis
-        - service: redis
-        - tags: env:prod
+          service: redis
+          tags: env:prod
   ```
 
 **Note**: The above configuration collects only logs from this integration. If you are already collecting other data from the Redis integration, you can append the `logs` section to your existing configuration.

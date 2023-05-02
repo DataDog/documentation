@@ -3,11 +3,15 @@ title: Custom Metrics Billing
 kind: documentation
 aliases:
     - /integrations/faq/what-standard-integrations-emit-custom-metrics/
+further_reading:
+  - link: "/observability_pipelines/guide/custom-metrics-governance"
+    tag: "Documentation"
+    text: "Use Observability Pipelines to govern custom metrics"
 ---
 
 If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a [custom metric][2]<sup>[(1)](#standard-integrations)</sup>.
 
-**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**.
+**A custom metric is uniquely identified by a combination of a metric name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][25] or through a [custom Agent Check][26] is a custom metric.
 
 Your monthly billable count for custom metrics (reflected on the Usage page) is calculated by taking the total of all distinct custom metrics for each hour in a given month, and dividing it by the number of hours in the month to compute a monthly average value.
 
@@ -17,7 +21,7 @@ Metrics without Limits™ users see monthly billable volumes for _ingested_ and 
 
 The number of custom metrics associated with a particular metric name depends on its metric [submission type][4]. Below are examples of how to count your custom metrics based on the following scenario below:
 
-Suppose you’re submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measures the latency of your endpoint requests. You’re submitting this metric with two tag keys:
+Suppose you're submitting a metric, `request.Latency`, from two hosts (`host:A`,`host:B`), which measures the latency of your endpoint requests. You're submitting this metric with two tag keys:
 
 - `endpoint`, which has the value `endpoint:X` or `endpoint:Y`.
 - `status`, which has the value `status:200` or `status:400`.
@@ -66,14 +70,14 @@ To obtain the temperature in Florida, you can recombine the custom metrics of:
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**Note**: Reordering tag values doesn’t add uniqueness. The following combinations are the same custom metric:
+**Note**: Reordering tag values doesn't add uniqueness. The following combinations are the same custom metric:
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
 ### Configure tags and aggregations with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][3]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][3]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
@@ -151,14 +155,14 @@ To obtain the temperature in Florida, you can recombine the custom metrics of:
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**Note**: Reordering tag values doesn’t add uniqueness. The following combinations are the same custom metric:
+**Note**: Reordering tag values doesn't add uniqueness. The following combinations are the same custom metric:
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
 
 ### Configure tags and aggregations with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][4]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
@@ -240,7 +244,7 @@ This table summarizes the effect of adding percentile aggregations to any distri
 
 ### Configure tags with Metrics without Limits™
 
-Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][2]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you’ve indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
+Custom metrics volumes can be impacted by configuring tags and aggregations using [Metrics without Limits™][2]. Metrics without Limits™ decouples ingestion costs from indexing costs -- so you can continue sending Datadog all of your data (everything is ingested) and you can specify an allowlist of tags you'd want to remain queryable in the Datadog platform. Given the volume of data Datadog is ingesting for your configured metrics now differs from the smaller, remaining volume you've indexed, you'll see two distinct volumes on your Usage page as well as the Metrics Summary page. 
  
 - **Ingested Custom Metrics**: The original volume of custom metrics based on the all ingested tags (sent via code)
 - **Indexed Custom Metrics**: The volume of custom metrics that remains queryable in the Datadog platform (based on any Metrics without Limits™ configurations) 
@@ -294,7 +298,7 @@ You are allocated a certain number of **ingested** and **indexed** custom metric
 
 These allocations are counted across your entire infrastructure. For example, if you are on the Pro plan and licensed for three hosts, 300 indexed custom metrics are allocated. The 300 indexed custom metrics can be divided equally across each host, or all 300 indexed metrics can be used by a single host. Using this example, the graphic below shows scenarios that do not exceed the allocated custom metric count:
 
-{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics"  >}}
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="Allocations for Custom Metrics" >}}
 
 The billable number of indexed custom metrics is based on the average number of custom metrics (from all paid hosts) per hour over a given month. The billable number of ingested custom metrics only grows if you've used Metrics without Limits™ to configure your metric. Contact [Sales][9] or your [Customer Success][10] Manager to discuss custom metrics for your account or to purchase an additional custom metrics package.
 
@@ -305,7 +309,7 @@ The following standard integrations can potentially emit custom metrics.
 | Type of integrations                           | Integrations                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
 | Limited to 350 custom metrics by default.      | [ActiveMQ XML][11] / [Go-Expvar][12] / [Java-JMX][13]                              |
-| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[OpenMetrics][16] /[Windows Services][17] /[WMI][18] |
+| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[OpenMetrics][16] /[Windows Services][17] /[WMI][18] /[Prometheus][27] |
 | Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                        |
 | Custom metrics sent from cloud integrations    | [AWS][23]                                                                          |
 
@@ -315,6 +319,9 @@ For technical questions, contact [Datadog support][24].
 
 For billing questions, contact your [Customer Success][10] Manager.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
@@ -340,3 +347,6 @@ For billing questions, contact your [Customer Success][10] Manager.
 [22]: /integrations/sqlserver/
 [23]: /integrations/amazon_web_services/
 [24]: /help/
+[25]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[26]: /metrics/custom_metrics/agent_metrics_submission/
+[27]: /integrations/prometheus

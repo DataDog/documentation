@@ -6,7 +6,7 @@ aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
 <div class="alert alert-warning">
 The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.
@@ -223,7 +223,7 @@ kubectl get daemonset
 
 If the Agent is deployed you a similar output to the text below, where **desired** and **current** are equal to the number of running nodes in your cluster.
 
-```shell
+```bash
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
 dd-agent   3         3         <none>          11h
 ```
@@ -232,7 +232,7 @@ dd-agent   3         3         <none>          11h
 
 [Run the Agent's info subcommand][11] and look for `kubernetes_state` under the Checks section:
 
-```shell
+```bash
 Checks
 ======
     kubernetes_state
@@ -275,7 +275,7 @@ metadata:
 
 [Run the Agent's info subcommand][11] and look for `kube_dns` under the Checks section:
 
-```shell
+```bash
 Checks
 ======
     kube_dns

@@ -90,20 +90,21 @@ helm delete datadog
 `datadog-agent.yaml` ファイルを次のコンフィギュレーションで更新して、`DaemonSet` の `Daemonset.spec.template` に許容範囲を追加します。
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: "<DATADOG_API_KEY>"
-    appKey: "<DATADOG_APP_KEY>"
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    config:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  override:
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-       - operator: Exists
+        - operator: Exists
 ```
 
 この新しいコンフィギュレーションを適用します。
@@ -135,10 +136,10 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-all.yaml
-[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs-apm.yaml
-[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
-[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-clusteragent.yaml
-[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-tolerations.yaml
+[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-all.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs-apm.yaml
+[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-apm.yaml
+[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-clusteragent.yaml
+[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-tolerations.yaml
 [10]: https://app.datadoghq.com/organization-settings/api-keys

@@ -1,0 +1,17 @@
+{
+  "data": {
+    "relationships": {
+      "groups": {
+        "data": [
+          {
+            "type": "sensitive_data_scanner_group",
+            "id": "string"
+          }
+        ]
+      }
+    },
+    "type": "sensitive_data_scanner_configuration",
+    "id": "55482444-d71c-c45c-7d1f-31984f64e6d2"
+  },
+  "meta": {}
+}

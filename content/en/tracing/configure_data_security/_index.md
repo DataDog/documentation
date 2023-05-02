@@ -3,7 +3,6 @@ title: Configure the Datadog Agent or Tracer for Data Security
 kind: documentation
 description: "Configure the Datadog Tracer or Agent to modify or discard spans for security or fine-tuning purposes."
 aliases:
-    - /security/tracing
     - /tracing/security
     - /tracing/guide/security
     - /tracing/guide/agent_obfuscation
@@ -51,7 +50,7 @@ This option works with the following services:
 * `http`
 * `remove_stack_traces`
 
-**Note:** You can use automatic scrubbing for multiple types of services at the same time.  Configure each in the `obfuscation` section of your `datadog.yaml` file.
+**Note:** You can use automatic scrubbing for multiple types of services at the same time. Configure each in the `obfuscation` section of your `datadog.yaml` file.
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 
@@ -208,28 +207,41 @@ For example:
 ```yaml
 apm_config:
   replace_tags:
-    # Replace all characters starting at the `token/` string in the tag "http.url" with "?":
+    # Replace all characters starting at the `token/` string in the tag "http.url" with "?"
     - name: "http.url"
       pattern: "token/(.*)"
       repl: "?"
-    # Replace all the occurrences of "foo" in any tag with "bar":
+    # Remove trailing "/" character in resource names
+    - name: "resource.name"
+      pattern: "(.*)\/$"
+      repl: "$1"
+    # Replace all the occurrences of "foo" in any tag with "bar"
     - name: "*"
       pattern: "foo"
       repl: "bar"
-    # Remove all "error.stack" tag's value.
+    # Remove all "error.stack" tag's value
     - name: "error.stack"
       pattern: "(?s).*"
+    # Replace series of numbers in error messages
+    - name: "error.msg"
+      pattern: "[0-9]{10}"
+      repl: "[REDACTED]"
 ```
 
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 
-```shell
+```json
 DD_APM_REPLACE_TAGS=[
       {
         "name": "http.url",
         "pattern": "token/(.*)",
         "repl": "?"
+      },
+      {
+        "name": "resource.name",
+        "pattern": "(.*)\/$",
+        "repl": "$1"
       },
       {
         "name": "*",
@@ -239,6 +251,11 @@ DD_APM_REPLACE_TAGS=[
       {
         "name": "error.stack",
         "pattern": "(?s).*"
+      },
+      {
+        "name": "error.msg",
+        "pattern": "[0-9]{10}",
+        "repl": "[REDACTED]"
       }
 ]
 ```
@@ -246,7 +263,7 @@ DD_APM_REPLACE_TAGS=[
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-**Note**: Put this environment variable in the trace-agent container if you are using the recommended [daemonset configuration][1].
+Put this environment variable in the trace-agent container if you are using the [daemonset configuration][1], or use `agents.containers.traceAgent.env` in the `values.yaml` file if you are using [helm chart][2].
 
 ```datadog-agent.yaml
 - name: DD_APM_REPLACE_TAGS
@@ -257,6 +274,11 @@ DD_APM_REPLACE_TAGS=[
               "repl": "?"
             },
             {
+              "name": "resource.name",
+              "pattern": "(.*)\/$",
+              "repl": "$1"
+            },
+            {
               "name": "*",
               "pattern": "foo",
               "repl": "bar"
@@ -264,16 +286,22 @@ DD_APM_REPLACE_TAGS=[
             {
               "name": "error.stack",
               "pattern": "(?s).*"
+            },
+            {
+              "name": "error.msg",
+              "pattern": "[0-9]{10}",
+              "repl": "[REDACTED]"
             }
           ]'
 ```
 
-[1]: /agent/kubernetes/?tab=daemonset
+[1]: /containers/kubernetes/installation/?tab=daemonset
+[2]: /containers/kubernetes/installation/?tab=helm
 {{% /tab %}}
 {{% tab "docker-compose" %}}
 
 ```docker-compose.yaml
-- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}]
+- DD_APM_REPLACE_TAGS=[{"name":"http.url","pattern":"token/(.*)","repl":"?"},{"name":"resource.name","pattern":"(.*)\/$","repl": "$1"},{"name":"*","pattern":"foo","repl":"bar"},{"name":"error.stack","pattern":"(?s).*"}, {"name": "error.msg", "pattern": "[0-9]{10}", "repl": "[REDACTED]"}]
 ```
 
 {{% /tab %}}
@@ -309,23 +337,38 @@ While this page deals with modifying data once it has reached the Datadog Agent,
 * Python: [Trace Filtering][11]
 
 ## Telemetry collection
- 
+
 Datadog may gather environmental and diagnostic information about your tracing libraries for processing; this may include information about the host running an application, operating system, programming language and runtime, APM integrations used, and application dependencies. Additionally, Datadog may collect information such as diagnostic logs, crash dumps with obfuscated stack traces, and various system performance metrics.
- 
+
 To disable this telemetry collection, set `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable to `false` in your instrumented application.
 
-## PCI compliance for APM
+## PCI DSS compliance for compliance for APM
 
 {{< site-region region="us" >}}
 
 <div class="alert alert-warning">
-PCI compliance for APM is only available for new Datadog orgs created in the <a href="/getting_started/site/">US1 site</a>.
+PCI compliance for APM is only available for new Datadog organizations created in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-PCI compliance for APM is available when you create a new Datadog organization. [Audit Trail][1] must be enabled and remain enabled to maintain PCI compliance. Contact [Datadog support][2] to enable PCI-compliant APM.
+PCI compliance for APM is available when you create a new Datadog organization. To set up a PCI-compliant Datadog org, follow these steps:
 
-[1]: /account_management/audit_trail/
+1. Set up a new Datadog org in the [US1 site][1]. PCI DSS compliance is only supported for new orgs created in US1.
+2. Contact [Datadog support][2] or your [Customer Success Manager][3] to request that the new org be configured as a PCI-compliant org.
+3. Enable [Audit Trail][4] in the new org. Audit Trail must be enabled and remain enabled for PCI DSS compliance.
+4. After Datadog support or Customer Success confirms that the new org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
+    ```
+    apm_config:
+      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
+    ```
+
+To enable PCI compliance for logs, see [PCI DSS compliance for Log Management][5].
+
+[1]: /getting_started/site/
 [2]: /help/
+[3]: mailto:success@datadoghq.com
+[4]: /account_management/audit_trail/
+[5]: /data_security/logs/#pci-dss-compliance-for-log-management
+
 
 {{< /site-region >}}
 

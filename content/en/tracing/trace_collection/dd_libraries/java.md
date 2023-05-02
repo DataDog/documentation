@@ -21,9 +21,9 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Java Tracer supports all JVMs version 7 and higher on all platforms.
+The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
-For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
+For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
 ## Installation and getting started
 
@@ -56,6 +56,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
    DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
+
    ```
 
    ```bash
@@ -72,7 +73,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
    Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist, then stats are sent to `http://localhost:8125`.
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -91,7 +92,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 
 Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
-For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
@@ -104,16 +105,16 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Instrument Your Application
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/admission_controller">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
 
 After the agent is installed, to begin tracing your applications:
 
-1. Download `dd-java-agent.jar` that contains the latest Agent class files:
+1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
-   
+
    **Note:** To download a specific major version, use the `https://dtdg.co/java-tracer-vX` link instead, where `vX` is the desired version.
    For example, use `https://dtdg.co/java-tracer-v0` for the latest version 0.
    Alternatively, see Datadog's [Maven repository][3] for any specific version.
@@ -121,7 +122,7 @@ After the agent is installed, to begin tracing your applications:
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
     ```text
-    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -jar path/to/your/app.jar -Ddd.version=1.0
+    java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
 
     **Note:** Enabling profiling may impact your bill depending on your APM bundle. See the [pricing page][4] for more information.
@@ -134,7 +135,7 @@ After the agent is installed, to begin tracing your applications:
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. |
 | `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services.     |
-| `DD_TRACE_SAMPLING_SERVICE_RULES` | `dd.trace.sampling.service.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
+| `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
 
 Additional [configuration options](#configuration) are described below.
 
@@ -271,7 +272,7 @@ If needed, configure the tracing library to send application performance telemet
 
 
 [1]: /tracing/compatibility_requirements/java
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
 [4]: /account_management/billing/apm_tracing_profiler/
 [5]: /profiler/
@@ -279,3 +280,4 @@ If needed, configure the tracing library to send application performance telemet
 [7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
 [9]: /tracing/trace_collection/library_config/java/
+[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes

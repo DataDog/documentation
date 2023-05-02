@@ -2,18 +2,16 @@
 title: Workflows
 kind: documentation
 disable_toc: false
-is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  tag: "blog"
+  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
-
-{{< img src="workflows/hero.jpg" alt="Graphic showing three purposes of Workflows: Orchestrate, Automate, and Break down Silos"  >}}
+{{< img src="workflows/hero.jpg" alt="Graphic showing three purposes of Workflows: Orchestrate, Automate, and Break down Silos" >}}
 
 Datadog Workflows allow you to orchestrate and automate your end-to-end processes. Build workflows made up of [actions][1] that connect to your infrastructure and tools. These actions can also perform data and logical operations, allowing you to build complex flows with branches, decisions, and data operations.
 
@@ -32,10 +30,10 @@ Trigger your workflows from monitors, security signals, or dashboards, or trigge
 ## Examples
 
 Below are a few examples of workflows you can build:
-- Automate scaling of your AWS Auto Scaling Groups when monitors tracking critical metrics of these Auto Scaling Groups go into the alert state. 
+- Automate scaling of your AWS Auto Scaling Groups when monitors tracking critical metrics of these Auto Scaling Groups go into the alert state.
 - Automatically create investigative notebooks of malicious IPs to be detected by Security Signals, and then block these IPs in CloudFlare with the click of a button.
 - Execute workflows to roll back to stable versions of your application directly from the Dashboards you use to track the health of your systems.
-- Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process. 
+- Manage feature flags by automatically updating your feature flag config files in GitHub and automating the pull request and merge process.
 
 Watch the video below to see a workflow configured to redeploy a Lambda function when it experiences a high error rate.
 

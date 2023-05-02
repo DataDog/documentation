@@ -3,15 +3,16 @@ title: Actions Catalog
 kind: documentation
 type: actioncatalog
 disable_toc: true
-is_beta: true
 cascade:
   disable_sidebar: true
   type: actioncatalog
+  algolia:
+      rank: 40
 ---
 
-{{< beta-callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
+{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
   Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 Datadog Workflows provide actions that can be performed against your infrastructure and integrations. You can orchestrate and automate your end-to-end processes by linking together actions for cloud providers, Datadog integrations, Datadog itself, custom HTTP requests, and more. Read [build workflows][1] for more information on creating a workflow.
 

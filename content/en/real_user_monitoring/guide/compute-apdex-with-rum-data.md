@@ -59,7 +59,7 @@ The example below calculates an Apdex score using the Largest Contentful Paint p
 
 1. To create query `b`, click **+ Add Query**.
 2. Select `RUM` as the data source for query `b` and enter `@view.largest_contentful_paint:[2s TO 8s]`.
-3. Press Enter or click **Update query** in the dropdown menu. The `Largest Contentful Paint:[2s - 3s]` query appears next to `RUM` for query `b`.
+3. Press Enter or click **Update query** in the dropdown menu. The `Largest Contentful Paint:[2s - 8s]` query appears next to `RUM` for query `b`.
 
 #### Query C
 
@@ -145,7 +145,7 @@ In the example above, the Apdex score is relevant to the View RUM events and Lar
 You can also calculate other Apdex scores with the following methods:
 
 - To see the Apdex score trend over time, select `Timeseries` instead of `Query Value` in **Select your visualization**.
-- To compute the Apdex score for a specific application, add an additional `@application.id` query and update your formula.
+- To compute the Apdex score for a specific application, add an additional `@application.name` query and update your formula.
 - To compute the Apdex score with another RUM performance metric such as First Contentful Paint, replace `@view.LargestContentfulPaint` with `@view.FirstContentfulPaint` in the queries.
 
 To compute additional performance indicators for your applications, determine what data points you need and which RUM events are relevant for you before [creating a quick graph](#create-a-quick-graph).

@@ -12,9 +12,9 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-- link: https://learn.datadoghq.com/course/view.php?id=10
+- link: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
   tag: ラーニングセンター
-  text: ログを極める パース
+  text: ログ処理を極める
 kind: documentation
 title: パイプライン
 ---
@@ -145,7 +145,7 @@ Datadog Agent または RFC5424 形式を使用すると、自動的にログに
 [トレース ID リマッパープロセッサー][2]を設定し、別の属性を指定してログのトレース ID のソースとして使用します。
 
 
-[1]: /ja/tracing/connect_logs_and_traces/
+[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [2]: /ja/logs/log_configuration/processors/#trace-remapper
 {{% /tab %}}
 {{< /tabs >}}

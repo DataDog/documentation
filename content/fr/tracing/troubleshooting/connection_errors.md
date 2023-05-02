@@ -260,7 +260,7 @@ Si la configuration ne contient pas d'erreur, mais que vous continuez à recevoi
 [3]: /fr/agent/guide/agent-commands/#agent-information
 [4]: /fr/help/
 [5]: /fr/agent/troubleshooting/send_a_flare/
-[6]: https://app.datadoghq.com/apm/docs
+[6]: https://app.datadoghq.com/apm/service-setup
 [7]: /fr/agent/amazon_ecs/apm/?tab=ec2metadataendpoint
 [8]: /fr/integrations/ecs_fargate/#trace-collection
 [9]: /fr/integrations/eks_fargate/#traces-collection

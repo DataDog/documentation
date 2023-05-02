@@ -22,7 +22,7 @@ When you create a Synthetic test, Datadog automatically creates an associated mo
 
 ## Create a Synthetic test monitor
 
-<div class="alert alert-info">You cannot create or import a Synthetic test monitor in <a href="/monitors/create/">Monitors</a>.</div>
+<div class="alert alert-info">You cannot create or import a Synthetic test monitor in <a href="/monitors/">Monitors</a>.</div>
 
 Create a monitor in the **Configure the monitor for this test** section to send notifications when a Synthetic test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
 
@@ -60,7 +60,7 @@ For more information, see [Integrating Monitors with Statuspage][8].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: /monitors/manage/
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: /monitors/notify/#integrations/

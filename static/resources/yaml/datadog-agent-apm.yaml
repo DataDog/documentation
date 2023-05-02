@@ -182,9 +182,10 @@ spec:
     spec:
       securityContext:
         runAsUser: 0
+      hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -286,7 +287,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
           resources: {}
@@ -327,6 +328,14 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /etc/datadog-agent
+            - name: procdir
+              mountPath: /host/proc
+              mountPropagation: None
+              readOnly: true
+            - name: cgroups
+              mountPath: /host/sys/fs/cgroup
+              mountPropagation: None
+              readOnly: true
             - name: logdatadog
               mountPath: /var/log/datadog
             - name: tmpdir
@@ -346,7 +355,7 @@ spec:
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:
@@ -356,7 +365,7 @@ spec:
               mountPath: /opt/datadog-agent
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.39.1"
+          image: "gcr.io/datadoghq/agent:7.40.1"
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c"]
           args:

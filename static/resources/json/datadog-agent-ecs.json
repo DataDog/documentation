@@ -10,17 +10,17 @@
         {
           "containerPath": "/var/run/docker.sock",
           "sourceVolume": "docker_sock",
-          "readOnly": null
+          "readOnly": true
         },
         {
           "containerPath": "/host/sys/fs/cgroup",
           "sourceVolume": "cgroup",
-          "readOnly": null
+          "readOnly": true
         },
         {
           "containerPath": "/host/proc",
           "sourceVolume": "proc",
-          "readOnly": null
+          "readOnly": true
         }
       ],
       "environment": [

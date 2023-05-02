@@ -14,6 +14,7 @@ For specific database setup troubleshooting, use the corresponding troubleshooti
 
 * [Troubleshooting MySQL Setup][2]
 * [Troubleshooting Postgres Setup][3]
+* [Troubleshooting SQL Server Setup][4]
 
 ## Diagnosing common problems
 ### Query bind parameters cannot be viewed
@@ -27,12 +28,49 @@ Depending on how complex the databases being monitored are, too many DBM hosts o
 
 It is recommended to have a single Datadog Agent monitor at most 10 DBM hosts. If you have more than 10 DBM hosts then you should consider spreading them over multiple Datadog Agents.
 
+
+### No DBM data visible in Datadog: Connection Issues?
+
+If you think that your setup is correct, but you're not seeing data in your DBM pages, it's possible that your Agent is not able to send data to Datadog's data collection endpoints. To diagnose connection issues, perform the following connection troubleshooting steps from the location where the Agent is running.
+
+1. Test TCP connectivity on DBM collection endpoints:
+
+```
+telnet dbm-metrics-intake.datadoghq.com 443
+telnet dbquery-intake.datadoghq.com 443
+```
+
+2. Test posting an empty payload with an invalid API key on both DBM endpoints. 
+These commands should fail with HTTP code `403: Forbidden`. 
+
+```
+curl -vvv -X POST "https://dbm-metrics-intake.datadoghq.com/api/v2/databasequery" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: NONE" \
+-d "[{}]"
+
+curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: NONE" \
+-d "[{}]"
+```
+
+The responses should contain `{"status":"error","code":403,"errors":["Forbidden"],...}` if requests were successfully sent and a response was received.
+
+Some common causes of connection failure include [proxy setups][7] and firewalls, which outbound traffic to Datadog's endpoints. If you have a proxy or firewall, make sure the IPs addresses for the DBM endpoints are allowed. Refer to the APM block in Datadog's [IP addresses][6].
+
+
 ## Need more help?
 
-If you are still experiencing problems, contact [Datadog Support][4] for help.
+If you are still experiencing problems, contact [Datadog Support][5] for help.
 
 
 [1]: /database_monitoring/#getting-started
 [2]: /database_monitoring/setup_mysql/troubleshooting/
 [3]: /database_monitoring/setup_postgres/troubleshooting/
-[4]: /help/
+[4]: /database_monitoring/setup_sql_server/troubleshooting/
+[5]: /help/
+[6]: https://ip-ranges.datadoghq.com
+[7]: /agent/proxy/?tab=linux

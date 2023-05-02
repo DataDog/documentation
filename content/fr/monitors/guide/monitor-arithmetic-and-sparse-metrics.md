@@ -1,9 +1,8 @@
 ---
-title: Surveillance des métriques arithmétiques et creuses
 kind: guide
-aliases:
-  - /fr/monitors/guide/monitor-arithmetic-and-sparse-metrics
+title: Surveillance des métriques arithmétiques et creuses
 ---
+
 ## Présentation
 
 De nombreuses requêtes reposent sur des données arithmétiques. Il est important d'utiliser certains outils et d'appliquer certains comportements pour veiller à ce que les réglages d'un monitor évaluent correctement les requêtes.
@@ -101,7 +100,7 @@ Il est possible de rencontrer des problèmes temporels lorsque vous effectuez de
 
 Pour une requête comme `min(last_1m):sum:mon_num{*}/sum:mon_denom{*}`, la valeur minimum peut être biaisée et peut déclencher par inadvertance votre monitor.
 
-Par conséquent, nous vous conseillons d'ajouter un court délai d'évaluation de 30 à 60 secondes afin de régler les problèmes temporels pour les requêtes avec une division impliquant des fenêtres d'évaluation de courte durée. Vous pouvez également passer à une fenêtre d'évaluation de cinq minutes.
+Par conséquent, il est conseillé d'ajouter un court délai d'évaluation de 30 à 60 secondes afin de régler les problèmes temporels pour les requêtes avec une division impliquant des fenêtres d'évaluation de courte durée. Vous pouvez également passer à une fenêtre d'évaluation de cinq minutes.
 
 [Contactez l'équipe d'assistance Datadog][1] si vous avez des questions sur cette logique.
 

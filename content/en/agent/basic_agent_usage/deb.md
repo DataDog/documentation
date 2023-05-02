@@ -16,6 +16,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/guide/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview

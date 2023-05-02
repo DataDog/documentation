@@ -80,7 +80,7 @@ CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements schema public;
 ```
 
 {{% /tab %}}
@@ -294,7 +294,7 @@ helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
   --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -303,7 +303,7 @@ instances:
     username: datadog
     password: <UNIQUEPASSWORD>
     tags:
-      - dbinstanceidentifier:<DB_INSTANCE_NAME>" \
+      - dbinstanceidentifier:"<DB_INSTANCE_NAME>"' \
   datadog/datadog
 ```
 
@@ -390,6 +390,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
+
+## Example Agent Configurations
+{{% dbm-postgres-agent-config-examples %}}
 
 ## Install the RDS Integration
 

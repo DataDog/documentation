@@ -55,42 +55,41 @@ HTTP テストは、ネットワークの外部または内部からのテスト
 
    {{% tab "認証" %}}
 
-   * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
-   * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
-   * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
-   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
-   AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
-   * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
-
-     <br/> 
-
-     `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
+   * **クライアント証明書**: クライアント証明書 (`.crt`) と関連する秘密キー (`.key`) を `PEM` 形式でアップロードして、mTLS を介して認証します。`openssl` ライブラリを使用して証明書を変換することができます。たとえば、`PKCS12` 証明書を `PEM` 形式の秘密キーと証明書に変換します。
 
       ```
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
-   {{% /tab %}}
+
+   * **HTTP Basic Auth**: HTTP 基本認証資格情報を追加します。
+   * **Digest Auth**: ダイジェスト認証の資格情報を追加します。
+   * **NTLM**: NTLM 認証の資格情報を追加します。NTLMv2 と NTLMv1 の両方をサポートします。
+   * **AWS Signature v4**: Access Key ID と Secret Access Key を入力します。Datadog は、リクエストの署名を生成します。このオプションは、SigV4 の基本的な実装を使用します。AWS S3 などの特定の署名はそのままではサポートされていません。
+     AWS S3 バケットへの "Single Chunk" 転送リクエストでは、リクエストの本文を sha256 エンコードした `x-amz-content-sha256` をヘッダーとして追加します (本文が空の場合: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`)。
+   * **OAuth 2.0**: クライアント資格情報またはリソース所有者のパスワードのどちらかを付与するかを選択し、アクセストークンの URL を入力します。選択内容に応じて、クライアント ID とシークレット、またはユーザー名とパスワードを入力します。ドロップダウンメニューから、API トークンを基本認証ヘッダーとして送信するか、クライアント資格情報を本文に送信するかを選択します。オプションで、オーディエンス、リソース、スコープなどの追加情報を提供できます (**Resource Owner Password** を選択した場合は、クライアント ID とシークレットも提供します)。 
+
+   {{< /tabs >}}
 
    {{% tab "クエリパラメーター" %}}
 
    * **Encode parameters**: エンコーディングが必要なクエリパラメーターの名前と値を追加します。
 
-   {{% /tab %}}
+   {{< /tabs >}}
 
    {{% tab "リクエスト本文" %}}
 
    * **Body type**: HTTP リクエストに追加するリクエスト本文のタイプ (`text/plain`、`application/json`、`text/xml`、`text/html`、`application/x-www-form-urlencoded`、`GraphQL`、または `None`) を選択します。
    * **Request body**: HTTP リクエスト本文のコンテンツを追加します。リクエスト本文は最大サイズ 50 キロバイトに制限されています。
 
-   {{% /tab %}}
+   {{< /tabs >}}
 
    {{% tab "プロキシ" %}}
 
    * **Proxy URL**: HTTP リクエストが通過する必要があるプロキシの URL (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`) を指定します。
    * **Proxy header**: プロキシへの HTTP リクエストに含めるヘッダーを追加します。
 
-   {{% /tab %}}
+   {{< /tabs >}}
 
    {{% tab "Privacy" %}}
 
@@ -264,7 +263,7 @@ HTTP テストの URL、高度なオプション、アサーションで、[`Set
 
 {{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

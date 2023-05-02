@@ -11,7 +11,6 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the following configurations.
 
-
 ## Metrics, APM, Live Processes, Orchestrator, CI Visibility
 
 You can add the YAML configuration to your `datadog.yaml` or launch the Agent with the appropriate environment variables.
@@ -19,6 +18,8 @@ You can add the YAML configuration to your `datadog.yaml` or launch the Agent wi
 {{< tabs >}}
 
 {{% tab "Metrics & Service checks" %}}
+
+<div class="alert alert-info">Requires Agent version >= 6.17 or 7.17.</div>
 
 ### YAML configuration
 In `datadog.yaml`:
@@ -33,6 +34,8 @@ additional_endpoints:
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent version >= 6.18 or 7.18.</div>
+
 ```bash
 DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://app.datadoghq.eu\": [\"apikey4\"]}'
 ```
@@ -40,6 +43,8 @@ DD_ADDITIONAL_ENDPOINTS='{\"https://app.datadoghq.com\": [\"apikey2\", \"apikey3
 {{% /tab %}}
 
 {{% tab "APM" %}}
+
+<div class="alert alert-info">Requires Agent version >= 6.7.0.</div>
 
 ### YAML configuration
 In `datadog.yaml`:
@@ -63,6 +68,8 @@ apm_config:
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent version >= 6.19 or 7.19.</div>
+
 ```bash
 DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 
@@ -73,23 +80,27 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [
 
 {{% tab "Live Processes" %}}
 
+<div class="alert alert-info">Requires Agent version >= 6.4.0.</div>
+
 ### YAML configuration
 In `datadog.yaml`:
 ```yaml
 process_config:
   [...]
   additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://process.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://process.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent version >= 6.20 or 7.20.</div>
+
 ```bash
-DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
@@ -102,24 +113,24 @@ In `datadog.yaml`:
 orchestrator_explorer:
   [...]
   orchestrator_additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://orchestrator.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://orchestrator.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://orchestrator.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://orchestrator.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{% /tab %}}
 
 {{% tab "CI Visibility" %}}
 
-<div class="alert alert-info">Requires Agent v6.38+ or v7.38+.</div>
+<div class="alert alert-info">Requires Agent >= 6.38 or 7.38.</div>
 
 ### YAML configuration
 In `datadog.yaml`:
@@ -149,6 +160,8 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [
 
 {{% tab "Logs" %}}
 
+<div class="alert alert-info">TCP requires Agent version >= 6.6.<br/>HTTPS requires Agent version >= 6.13.</div>
+
 ### YAML configuration
 In `datadog.yaml`:
 ```yaml
@@ -163,6 +176,8 @@ logs_config:
 
 ### Environment variable configuration
 
+<div class="alert alert-info">Requires Agent >= 6.18 or 7.18.</div>
+
 ```bash
 DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
@@ -172,6 +187,8 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"age
 
 {{% tab "Database Monitoring" %}}
 
+<div class="alert alert-info">Requires Agent >= 6.29 or 7.29.</div>
+
 ### YAML configuration
 In `datadog.yaml`:
 ```yaml
@@ -180,21 +197,21 @@ database_monitoring:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   activity:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbquery-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   metrics:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
 ```
@@ -203,16 +220,18 @@ database_monitoring:
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
-DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
-DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
-DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
 
 {{% tab "Network Devices" %}}
+
+<div class="alert alert-info">Requires Agent >= 6.29 or 7.29.</div>
 
 ### YAML configuration
 
@@ -223,7 +242,7 @@ network_devices:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "ndm-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   snmp_traps:
@@ -231,7 +250,7 @@ network_devices:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "ndm-intake.datadoghq.com"
         Port: 443
         is_reliable: true
   netflow:
@@ -239,7 +258,7 @@ network_devices:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "ndm-intake.datadoghq.com"
         Port: 443
         is_reliable: true
 ```
@@ -248,7 +267,7 @@ network_devices:
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
-DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{% /tab %}}
@@ -343,4 +362,8 @@ and add the relevant settings to `customAgentConfig`.
         is_reliable: true
 ```
 
-If you're using the [Datadog Agent operator](https://github.com/DataDog/datadog-operator) similarly you can set the `agent.customConfig.configData` key. All configurable keys are documented [here](https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md).
+If you're using the [Datadog Agent operator][1], similarly, you can set the `agent.customConfig.configData` key. All configurable keys are documented in [v1][2] and [v2][3].
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

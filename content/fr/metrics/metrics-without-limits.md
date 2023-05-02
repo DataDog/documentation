@@ -1,14 +1,19 @@
 ---
-title: Metrics without Limits™
-kind: documentation
 aliases:
-  - /fr/metrics/faq/metrics-without-limits/
-  - /fr/metrics/guide/metrics-without-limits-getting-started/
+- /fr/metrics/faq/metrics-without-limits/
+- /fr/metrics/guide/metrics-without-limits-getting-started/
 further_reading:
-  - link: https://www.datadoghq.com/blog/metrics-without-limits
-    tag: Blog
-    text: Contrôler de façon dynamique le volume des métriques custom grâce à Metrics without Limits™
+- link: https://www.datadoghq.com/blog/metrics-without-limits
+  tag: Blog
+  text: Contrôler de façon dynamique le volume des métriques custom grâce à Metrics
+    without Limits™
+- link: /observability_pipelines/guide/custom-metrics-governance
+  tag: Documentation
+  text: Utiliser des pipelines d'observabilité pour contrôler vos métriques custom
+kind: documentation
+title: Metrics without Limits™
 ---
+
 ## Présentation
 
 La solution Metrics without Limits™ dissocie l'ingestion et l'indexation des métriques custom afin de vous offrir un plus grand contrôle sur les volumes de vos métriques custom ainsi qu'une plus grande flexibilité. Ainsi, vous ne payez que pour les tags des métriques custom dont votre organisation a besoin.
@@ -19,9 +24,10 @@ Cette section présente les fonctionnalités clés de Metrics without Limits™ 
 
 ### Configuration des tags
 
-Cliquez sur un nom de métrique pour ouvrir son volet latéral et consulter plus de détails. Accédez ensuite à **Manage Tags** -> **Custom** pour configurer les tags pouvant être interrogés dans les dashboards et les monitors. Avant de cliquer sur **Save**, consultez l'estimation du volume de métriques custom indexées découlant de la configuration de tags que vous venez de définir.
+Cliquez sur un nom de métrique pour ouvrir son volet latéral et consulter plus de détails. Accédez ensuite à **Manage Tags** -> **Include Tags...** pour configurer les tags pouvant être interrogés dans les dashboards et les monitors. La fenêtre de configuration des tags propose automatiquement une liste d'autorisation en fonction des tags les plus interrogés dans les dashboards, les notebooks, les monitors et via l'API au cours des 30 derniers jours (ces tags sont affichés en bleu avec une icône). Vous pouvez également ajouter d'autres tags de votre choix. Avant de cliquer sur **Save**, consultez l'estimation du volume de métriques custom indexées découlant de la configuration de tags que vous venez de définir.
 
-{{< img src="metrics/mwl_tags.mp4" alt="Configuration des tags" video=true >}}
+{{< img src="metrics/mwl_tag_config.mp4" alt="Configuration des tags" video=true >}}
+
 
 Vous avez également la possibilité d'utiliser des API pour [créer][2], [modifier][3] et [supprimer][4] une configuration de tags. Il existe même une [API][5] vous permettant d'estimer l'incidence potentielle de votre configuration.
 
@@ -36,11 +42,12 @@ Il est possible d'affiner davantage vos filtres de métriques custom en ajoutant
 
 Vous pouvez ajouter ou supprimer à tout moment des agrégations, sans avoir à modifier vos Agents ni votre code.
 
+La fenêtre de configuration des tags propose automatiquement une liste d'autorisation en fonction des agrégations les plus interrogées dans les dashboards, les notebooks, les monitors et via l'API au cours des 30 derniers jours (ces agrégations sont affichées en bleu avec une icône). Vous pouvez également ajouter d'autres agrégations de votre choix.
 
 
 ### Configurer simultanément plusieurs métriques
 
-Optimisez les volumes de vos métriques custom à l'aide de la [fonctionnalité de configuration groupée des tags pour les métriques][7]. L'option **Configure Tags** de la page Metrics Summary vous permet de spécifier un espace de nommage, puis de configurer toutes les métriques correspondant au préfixe de cette espace avec une unique liste d'autorisation des tags.
+Optimisez les volumes de vos métriques custom à l'aide de la [fonctionnalité de configuration groupée des tags pour les métriques][7]. L'option **Include Tags...** de la page Metrics Summary vous permet de spécifier un espace de nommage, puis de configurer toutes les métriques correspondant au préfixe de cet espace avec une unique liste d'autorisation des tags.
 
 ## Facturation de Metrics without Limits™
 
@@ -90,10 +97,10 @@ En savoir plus sur la [facturation des métriques custom][8].
 [2]: /fr/api/latest/metrics/#create-a-tag-configuration
 [3]: /fr/api/latest/metrics/#update-a-tag-configuration
 [4]: /fr/api/latest/metrics/#delete-a-tag-configuration
-[5]: /fr/metrics/guide/tag-configuration-cardinality-estimation-tool/
+[5]: /fr/api/latest/metrics/#tag-configuration-cardinality-estimator
 [6]: /fr/metrics/#time-and-space-aggregation
 [7]: /fr/metrics/summary/#configuration-of-multiple-metrics
-[8]: /fr/account_management/billing/custom_metrics/?tab=countrategauge
+[8]: /fr/account_management/billing/custom_metrics/
 [9]: https://app.datadoghq.com/billing/usage
 [10]: /fr/account_management/billing/usage_metrics/
 [11]: /fr/account_management/rbac/permissions/?tab=ui#metrics

@@ -1,7 +1,7 @@
 ---
-title: NodeJS Runtime Metrics
+title: Node.js Runtime Metrics
 kind: documentation
-description: "Gain additional insights into your NodeJS application's performance with the runtime metrics associated to your traces."
+description: "Gain additional insights into your Node.js application's performance with the runtime metrics associated to your traces."
 aliases:
 - /tracing/runtime_metrics/nodejs
 code_lang: nodejs
@@ -20,7 +20,7 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is currently in private beta. <a href="https://docs.datadoghq.com/help/">Reach out to support</a> to turn on this feature for your account.
+This feature is in public beta.
 </div>
 
 ## Automatic configuration

@@ -29,6 +29,10 @@ version: '1.0'
 
 ## 概要
 
+<div class="alert alert-warning">
+AWS CloudTrail for Cloud SIEM を設定する場合は、<a href="https://docs.datadoghq.com/security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem/">AWS Configuration for Cloud SIEM</a> を参照してください。
+</div>
+
 AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Datadog は、この監査証跡を読み取ってイベントを作成します。Datadog のイベントエクスプローラーでイベントを検索し、ダッシュボードでの関連付けに使用します。次に CloudTrail イベントの例を示します。
 
 {{< img src="integrations/amazon_cloudtrail/cloudtrail_event.png" alt="Cloudtrail イベント" popup="true">}}
@@ -38,7 +42,7 @@ AWS CloudTrail は、AWS アカウントの監査証跡を提供します。Data
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 

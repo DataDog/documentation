@@ -62,9 +62,9 @@ To validate your metadata file:
 
 ## Roles errors
 
-When mappings are enabled, users logging in with SAML to a Datadog account are stripped of their current roles and reassigned to new roles based on the details in their SAML assertion passed on from your IdP.
+When mappings are enabled, users logging in with SAML to a Datadog account are permanently stripped of their current roles. Datadog assigns new roles based on the details in the SAML assertion passed on from your IdP.
 
-Users who log in with SAML and do not have the values that map to a Datadog role are stripped of all roles and are not allowed to log in.
+Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
 
 {{< img src="account_management/saml/unknown_user_error.png" alt="No AuthNMappings for this user" style="width:80%;">}}
 

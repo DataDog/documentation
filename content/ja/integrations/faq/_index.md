@@ -82,6 +82,10 @@ title: FAQ インテグレーション
 
 * [カスタム Vertica クエリからメトリクスを収集する方法][26]
 
+## VMware Tanzu Application Service
+
+* [VMware Tanzu Application Service のアーキテクチャ][31]
+
 ## VSphere
 
 * [vSphere による重複ホストのトラブルシューティング][27]
@@ -125,3 +129,4 @@ title: FAQ インテグレーション
 [28]: /ja/integrations/faq/how-to-make-trello-card-using-webhooks/
 [29]: /ja/integrations/faq/collect-custom-windows-performance-counters-over-wmi/
 [30]: /ja/integrations/faq/windows-status-based-check/
+[31]: /ja/integrations/faq/pivotal_architecture/
