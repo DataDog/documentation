@@ -122,35 +122,40 @@ Note: The span value is the number of data points. So `median_7()` uses the last
 Note: The span value is the number of data points. So `median_9()` uses the last 9 data points to calculate the median.
 
 ## Weighted 
-Note: Weighted() is only available when querying `SUM BY` on gauge type metrics. 
+<div class="alert alert-info">Weighted() is only available when querying `SUM BY` on gauge type metrics.</div> 
 
 | Function       | Description                                                           | Example                        |
 | :----          | :-------                                                              | :---------                     |
-| `weighted()`   | Automatically removes noise when summing your metric while preserving the proper weight of transient tags. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
+| `weighted()`   | Automatically removes noise while preserving the proper weight of transient tags. | `sum:(<GAUGE_METRIC_NAME>{*}).weighted()` |
 
 The `weighted()` function accounts for the short-lived lifespan of transient, churning tag values when summing gauge metrics in space to prevent artificial spikes. 
 
-This function is automatically appended to queries on gauges if both of the following conditions are met: 
+This function is automatically appended to queries on gauge metrics if both of the following conditions are met: 
 1. The metric has a regular, consistent submission interval that is also specified on Metrics Summary
-2. The metric is queried with `SUM by` (i.e. a query string that resembles `sum: mygaugemetric{*}`)
+2. The metric is aggregated with `SUM by` (for example, `sum: mygaugemetric{*}`)
 
-Here is an example graph of our original query with inaccurate spikes (in purple) and the query with the properly weighted calculation (in green): 
+Here is an example graph of the original query with inaccurate spikes (in purple) and the query with the properly weighted calculation (in green): 
 
 {{< img src="dashboards/functions/smoothing/weighed.png" alt="autosmooth illustration" style="width:80%;">}}
 
 ### How does .weighted() work? 
-Every metrics query has a standard order of evaluation (quick review of that order [here][3]). For example, the following query is calculated as follows: 
+Every metrics query has a standard order of evaluation (see the [Anatomy of a query][3] for a quick review). For example, the following query is calculated as follows: 
 `sum:kubernetes.cpu.requests{*} by {kube_container_name}.rollup(avg, 10)`
 
-1. Time aggregation -- We first sum the values across all unique tag value combinations (aka timeseries) in time for each 10s rollup time interval. The number of unique tag value combinations is actually determined by the most volatile / high granularity tag, let's say `container_id`,  on this metric. 
-2. Then per `kube_container_name` (space aggregation), we sum of all averaged values as a single representative value. So summing values for each `kube_container_name` is dependent upon the number of unique `container_id`s there are for each rollup interval.
+1. Time aggregation -- We first sum the values for each timeseries (defined by a unique tag value combination) in time for each 10s rollup time interval. The number of unique tag value combinations is actually determined by the most volatile / high granularity tag, let's say `container_id`,  on this metric. 
+2. Then, per `kube_container_name` (space aggregation), take the sum of all averaged values as a single representative value. The summed values for each `kube_container_name` is dependent upon the number of unique `container_id`s there are for each rollup interval.
 
-The `weighted()` function properly accounts for the lifespan of the churning `container_id` tag values when summing by `kube_container_name` for this gauge metric.
+The `weighted()` function accounts for the short lifespan of the `container_id` tag values when summing by `kube_container_name` for this gauge metric.
 
 #### Example
-Let's suppose we have the following query and our gauge metric's submission interval is defined at 10s. 
+Consider this query with the following assumptions:
 `sum:kubernetes.cpu.requests{*} by {shard}.rollup(avg, 60)`
-And we're graphing a datapoint every 60s in time. Also for simplicity, let's assume we have a kubernetes cluster with 2 pods at any given time. Each pod is labeled with a shard and there is only ever 1 pod per shard. So with a couple of deploys that switch out pods, our raw data over 60 seconds could resemble: 
+
+- The gauge metric's submission interval is defined at 10 seconds. 
+- A datapoint is graphed every 60 seconds in time.
+- There is a Kubernetes cluster with 2 pods at any given time. Each pod is labeled with a shard and there is only ever 1 pod per shard. 
+
+With a couple of deploys that switch out pods, the raw data over 60 seconds could resemble: 
 
 | Time                 | 0s  |  10s |  20s |  30s |  40s |  50s |
 | ---                  | --  | ---  | ---  | ---  |  --- |  --- |
@@ -163,7 +168,7 @@ And we're graphing a datapoint every 60s in time. Also for simplicity, let's ass
 
 
 1. _Time Aggregation -- Rolling up data_
-With time aggregation, we're rolling up data either `avg` (without weighted) or the proposed `weighted_avg`: 
+With time aggregation, we're rolling up data either `avg` (without weighted) or the proposed `weighted` average: 
 | Time aggregation   | .rollup(avg) | With .weighted() |
 | ----------------   | ------------ | ---------------- |
 | `pod:a`, `shard:1` | 12           | 2.0              |
@@ -174,14 +179,14 @@ With time aggregation, we're rolling up data either `avg` (without weighted) or 
 | `pod:f`, `shard:2` | 18           | 6.0              |
 
 2. _Space Aggregation_ 
-Finally, we aggregate by shard to get the final values below: 
+Finally, the metric is aggregated by shard to get the final values below: 
 | Space aggregation by shard | .rollup(avg) | With .weighted() |
 | ------------------------   | ------------ | ---------------- |
 | `shard:1`                  | 36           | 12               |
 | `shard:1`                  | 46           | 16               |
 
 
-Here we can see `weighted()` provides a weighted average of each of the two shards according to the amount of time they were submitting data. 
+The `weighted()` modifier provides a weighted average of each of the two shards according to the amount of time they were submitting data. 
 
 ## Other functions
 
