@@ -105,8 +105,8 @@ Datadog implements the following safeguards, designed to protect the confidentia
 | Product feature                        | Go            | Java          | .Net          | NodeJS
 |----------------------------------------|---------------|---------------|---------------|---------------|
 | Dynamic Instrumentation |               | 1.5.0         | 2.22.0        |               |
-| ASM Protect                | 1.45.1        | 1.4.0         | 2.16.0        | 3.11.0        |
-| ASM 1-click activation        |               | 1.4.0         | 2.17.0        | 3.9.0         |
+
+- For ASM Protection capabilities and ASM 1-click activation, check library compatibility here: https://docs.datadoghq.com/security/application_security/enabling/compatibility/
 
 ### Setup
 To enable Remote Configuration:
