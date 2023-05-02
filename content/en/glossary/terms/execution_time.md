@@ -1,7 +1,6 @@
 ---
 title: execution time
 ---
-{{< jqmath-vanilla >}}
 In APM, execution time is the total time that a span is considered active, or not waiting for a child span to complete.
 
 Execution time is calculated by adding up the time that a span is active, meaning it has no child spans. For non-concurrent work, this is straightforward. In the following image, the execution time for Span 1 is $\D1 + \D2 + \D3$. The execution time for Spans 2 and 3 are their respective widths.
