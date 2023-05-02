@@ -30,7 +30,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Functions:" >}}
-    {{< nextlink href="/dashboards/guide/how-weighted-works.md" >}}How does weighted() work?{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/how-weighted-works" >}}How does weighted() work?{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Deprecated APIs:" >}}

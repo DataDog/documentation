@@ -3,7 +3,7 @@ title: How does weighted() work?
 kind: guide
 disable_toc: false
 further_reading:
-- link: "/dashboards/functions/smoothing.md"
+- link: "/dashboards/functions/smoothing"
   tag: "Documentation"
   text: "Smoothing"
 ---
