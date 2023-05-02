@@ -25,7 +25,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 
 | Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthenticated activity detected][5]<br>[Unauthorized activity detected][11] |
 | `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
 | `users.login.failure`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]                                                                                                              |
 | `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
@@ -685,9 +685,10 @@ track_custom_event(tracer, event_name, metadata)
 [2]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [3]: /security/application_security/threats/add-user-info/#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [4]: /security/default_rules/bl-rate-limiting/
-[5]: /security/default_rules/bl-privilege-violation/
+[5]: /security/default_rules/bl-privilege-violation-ip/
 [6]: /security/default_rules/appsec-ato-groupby-ip/
 [7]: /security/default_rules/bl-signup-ratelimit/
 [8]: /security/default_rules/bl-account-deletion-ratelimit/
 [9]: /security/default_rules/bl-password-reset/
 [10]: /security/default_rules/bl-payment-failures/
+[11]: /security/default_rules/bl-privilege-violation-user/
