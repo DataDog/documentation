@@ -7,7 +7,7 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-Use this guide to set up logging directly from your Azure account to Datadog, without needing to install or configure any Datadog Agents. Ensure that the [Datadog site][1] selector on the right side of this page is set to your Datadog site to see the correct instructions.
+Use this guide to set up logging directly from your Azure subscriptions to Datadog, without needing to install or configure the Datadog Agent. Ensure that the Datadog site selector on the right side of this page is set to your [Datadog site][1] to see the correct instructions.
 
 {{< site-region region="us3" >}}
 
@@ -91,48 +91,46 @@ You can also [view the contents of the script](https://github.com/DataDog/datado
 
 {{< /code-block >}}
 
-### Sending platform logs
+### Azure platform logs
 
-To send Azure Platform Logs (including resource logs), you can deploy an Event Hub and log forwarder function pair. 
-After deploying, create diagnostic settings for each of the log sources to configure them to stream logs to Datadog.
+To send Azure platform logs (including resource logs), you can deploy an Event Hub and log forwarder function pair. 
+After deploying, create diagnostic settings for each of the log sources to stream logs to Datadog.
 
 1. In the Azure portal, navigate to your **Cloud Shell**.
 
-2. Run the command below to download the automation script into your Cloud Shell environment. 
+2. Run the Powershell command below to download the automation script into your Cloud Shell environment. 
 
-{{< code-block lang="powershell" filename="Platform Logs Step 1" >}}
+   {{< code-block lang="powershell" filename="Platform Logs Step 1" >}}
 
-(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
+   (New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/DataDog/datadog-serverless-functions/master/azure/eventhub_log_forwarder/resource_deploy.ps1", "resource_deploy.ps1")
 
-{{< /code-block >}}
+   {{< /code-block >}}
 
-You can also [view the contents of the script](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1).
+   You can also [view the contents of the script](https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/eventhub_log_forwarder/resource_deploy.ps1).
 
-3. Invoke the script by running the command below, replacing **`<API_KEY>`**, with your [Datadog API token](https://app.datadoghq.com/organization-settings/api-keys), and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. You can also add other optional parameters to configure your deployment. See [Optional Parameters](#optional-parameters).
+3. Invoke the script by running the Powershell command below, replacing **`<API_KEY>`**, with your [Datadog API token](https://app.datadoghq.com/organization-settings/api-keys), and **`<SUBSCRIPTION_ID>`**, with your Azure Subscription ID. You can also add other optional parameters to configure your deployment. See [Optional Parameters](#optional-parameters).
 
-{{< code-block lang="powershell" filename="Platform Logs Step 2" >}}
+   {{< code-block lang="powershell" filename="Platform Logs Step 2" >}}
 
-./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
+   ./resource_deploy.ps1 -ApiKey <API_KEY> -SubscriptionId <SUBSCRIPTION_ID> 
 
-{{< /code-block >}}
+   {{< /code-block >}}
 
-4. Create diagnostic settings for all Azure resources sending logs to Datadog. Configure these diagnostic settings to start streaming to the Event Hub you just created.
+4. Create diagnostic settings for all Azure resources sending logs to Datadog. Configure these diagnostic settings to stream to the Event Hub you just created.
 
-**Note:** Resources can only stream to Event Hubs in the same Azure region, so you need to replicate step 2 for each region you want to stream resource logs from.
+All of the Azure resources deployed for the Platform Logs pipeline contain its ResourceGroup-Location appended to its default name. For example, `datadog-eventhub-westus`. However, you can alter this convention by overriding the parameter.
 
-**Note:** All of the Azure resources deployed for the Platform Logs pipeline contain its Resource-Group-Location appended to its default name. For example, `datadog-eventhub-westus`. However, you can alter this convention by overriding the parameter.
+**Note**: Resources can only stream to Event Hubs in the same Azure region, so you need to replicate step 2 for each region you want to stream resource logs from.
 
-### Set up both activity and platform logs
+### Set up both activity and resource logs
 
-As an example, if you want to stream both activity logs and resource logs from `westus`, run the first script including the optional parameter `-ResourceGroupLocation westus`. Activity logs are a subscription-level source, so you can create your pipeline for them in any region. Once this is deployed, send resource logs through the same Event Hub by adding diagnostic settings on your resources in `westus`.
+To stream both activity logs and resource logs, run the first script including the optional parameter `-ResourceGroupLocation <REGION>`. Activity logs are a subscription-level source, so you can create your pipeline for them in any region. Once this is deployed, send resource logs through the same Event Hub by adding diagnostic settings on your resources in `westus`.
 
-**Note:**
+**Note**: This integration does not collect events.
 
-This integration does not collect events.
+### Optional parameters
 
-#### Optional parameters
-
-**Note:** Ensure that your custom resource names are unique when you customize the parameters. Validate that the resource name does not already exist within your list of other Azure resources.
+**Note**: Ensure that your custom resource names are unique when you customize the following parameters. Validate that the resource name does not already exist within your list of other Azure resources.
 
 | -Flag `<Default Parameter>`                                         | Description                                                                                                                                                           |
 |---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -325,4 +323,3 @@ Once you have an App Registration configured, you can [create a log archive][62]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-
