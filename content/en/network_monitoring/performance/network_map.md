@@ -30,9 +30,9 @@ The network map visualizes data collected by the Datadog Agent automatically. On
 
 Select the **map** tab to configure your network map:
 
-{{< img src="network_performance_monitoring/network_map/network_map_search.png" alt="Network map page search bar" video="true" >}}
+{{< img src="network_performance_monitoring/network_map/network_map_search.png" alt="Network map page search bar" >}}
 
-**NEW SCREENSHOT**
+{{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="Network map page search bar" >}}
 
 1. Choose the tag you want your **Nodes** to represent with the first selector at the top of the page. Available tags are the same as those offered in the network page.
     - If there are too many nodes, a second tag is automatically selected to group by. You can change this using the dropdown shown in the above screenshot. See [Clustering](#map-clusters) more information about clustering.
@@ -68,19 +68,19 @@ Click on a node and select _Inspect_ from the menu to contextualize it within th
 
 ## Map clusters
 
-**NEW SCREENSHOT**
+{{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="Network map page search bar" >}}
 
 For complex networks, the map's query editor includes additional grouping fields. This enables you to render datasets that would otherwise have too many nodes to show at once on the map, as well as improve the performance of high cardinality queries.
 
-**NEW SCREENSHOT**
+{{< img src="network_performance_monitoring/network_map/network_map_3.png" alt="network_map" >}}
 
-Once loaded, you can view the nodes within a cluster by clicking on it to expand it. To collapse the cluster, click the gray area surrounding the nodes. 
+Once loaded, you can view the nodes within a cluster by clicking on it to expand it. To collapse the cluster, click the gray area surrounding the nodes.
 
-**NEW SCREENSHOT**
+{{< img src="network_performance_monitoring/network_map/expanded_network_cluster.png" alt="expanded network cluster map view" >}}
 
-Clustering is an additional dimension of grouping the nodes in the map. Large maps automatically get clustered to improve load time and readability of the map. Smaller maps are not clustered. To view the nodes within a cluster, click the cluster to expand it. To collapse the cluster, click anywhere in the gray cluster area. 
+Clustering is an additional dimension of grouping the nodes in the map. Large maps will automatically get clustered to improve load time and readability of the map; smaller maps will not be clustered. To view the nodes within a cluster, click into the cluster to expand. To collapse the cluster, click within the gray cluster area. 
 
-**NEW SCREENSHOT**
+A red border around a cluster indicates that there is at least one alerting monitor with the same tag as what the nodes are being grouped by. For example, if the map is grouped by service, then the map will look for monitors with the tag service:nodeName. 
 
 ## Further Reading
 
