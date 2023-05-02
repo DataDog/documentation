@@ -151,7 +151,7 @@ end sub
 
 ### Instrument the channel
 
-See [**Track RUM Resources**][8] to enable automatic tracking of all your views (activities, fragments, and more), and [**Enrich user sessions**][9] to add custom global or user information to your events.
+See [**Track RUM Resources**][8] to enable automatic tracking of all your resources, and [**Enrich user sessions**][9] to add custom global or user information to your events.
 
 #### Track RUM Views
 
