@@ -123,31 +123,30 @@ datadog:
 
 ### I/O stats
 
-I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. In order to enable the process module of the system-probe, use the following configuration:
+I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To enable the process module of the system-probe, use the following configuration:
 
 1. Copy the system-probe example configuration:
 
-    ```shell
-    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
-    ```
+   ```shell
+   sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+   ```
 
 2. Edit `/etc/datadog-agent/system-probe.yaml` to enable the process module:
 
-    ```yaml
-    system_probe_config:
-      process_config:
-        enabled: true
-    ```
+   ```yaml
+   system_probe_config:
+     process_config:
+       enabled: true
+   ```
 
-5. [Restart the Agent][1].
+5. [Restart the Agent][12]:
 
-    ```shell
-    sudo systemctl restart datadog-agent
-    ```
+   ```shell
+   sudo systemctl restart datadog-agent
+   ```
 
-    **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+   **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
 
-[1]: /agent/guide/agent-commands/#restart-the-agent
 
 ### Process arguments scrubbing
 
@@ -395,3 +394,5 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
 [11]: /network_monitoring/performance/network_page
+[12]: /agent/guide/agent-commands/#restart-the-agent
+
