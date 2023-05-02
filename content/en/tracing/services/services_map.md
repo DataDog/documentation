@@ -89,7 +89,7 @@ Monitors are not constrained to APM monitors. The service tag, described above, 
 
 ### Availability
 
-Service Map is rendered based on complete traces that include the root spans. When some spans are missing during the query window you specify, the map view may be unavailable for that time period. A common cause is when spans are dropped due to [APM connection errors][6].
+The Service Map is rendered based on complete traces that include the root spans. When some spans are missing during the query window you specify, the map view may be unavailable for that time period. This may happen when [APM connection errors][6] occur and spans get dropped.
 
 ## Further Reading
 
