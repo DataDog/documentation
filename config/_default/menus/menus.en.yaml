@@ -8212,6 +8212,70 @@ api:
         - ListConfluentAccount
       unstable: []
       order: 10
+  - name: Dashboard Reports
+    url: /api/latest/dashboard-reports/
+    identifier: dashboard-reports
+    generated: true
+  - name: Update Dashboard Report
+    url: '#update-dashboard-report'
+    identifier: dashboard-reports-update-dashboard-report
+    parent: dashboard-reports
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateDashboardReportConfig
+      unstable: []
+      order: 5
+  - name: Get a Dashboard Report
+    url: '#get-a-dashboard-report'
+    identifier: dashboard-reports-get-a-dashboard-report
+    parent: dashboard-reports
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetDashboardReportConfig
+      unstable: []
+      order: 4
+  - name: Delete a Dashboard Report
+    url: '#delete-a-dashboard-report'
+    identifier: dashboard-reports-delete-a-dashboard-report
+    parent: dashboard-reports
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteDashboardReportConfig
+      unstable: []
+      order: 3
+  - name: Create a new Dashboard Report
+    url: '#create-a-new-dashboard-report'
+    identifier: dashboard-reports-create-a-new-dashboard-report
+    parent: dashboard-reports
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateDashboardReportConfig
+      unstable: []
+      order: 2
+  - name: Get Dashboard Reports for a Dashboard
+    url: '#get-dashboard-reports-for-a-dashboard'
+    identifier: dashboard-reports-get-dashboard-reports-for-a-dashboard
+    parent: dashboard-reports
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetDashboardReportConfigsList
+      unstable: []
+      order: 1
   - name: Fastly Integration
     url: /api/latest/fastly-integration/
     identifier: fastly-integration

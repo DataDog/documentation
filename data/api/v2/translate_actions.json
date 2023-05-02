@@ -177,6 +177,30 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "GetDashboardReportConfigsList": {
+    "description": "List of the dashboard reports configured on a given dashboard. This list includes report configurations that are both enabled and disabled, but does not include reports that have been deleted for the given dashboard.",
+    "summary": "Get Dashboard Reports for a Dashboard"
+  },
+  "CreateDashboardReportConfig": {
+    "description": "New dashboard report configuration for a given dashboard. This creates a new report email schedule, frequency, timeframe, and more.",
+    "summary": "Create a new Dashboard Report",
+    "request_description": "",
+    "request_schema_description": "Request body when creating a new dashboard report."
+  },
+  "DeleteDashboardReportConfig": {
+    "description": "Delete a dashboard report configuration, disabling the sending of scheduled emails for this report in the future. This operation cannot be undone. To pause the sending of emails for this report without deleting it, deactivate the report with a `PATCH` request.",
+    "summary": "Delete a Dashboard Report"
+  },
+  "GetDashboardReportConfig": {
+    "description": "Fetch a single Dashboard Report configuration. This includes the same information provided when fetching a dashboard's list of currently configured reports, but only for singular reports.",
+    "summary": "Get a Dashboard Report"
+  },
+  "UpdateDashboardReportConfig": {
+    "description": "Update a Dashboard Report configuration, including the schedule and email settings.  Changes to the schedule happen immediately, but it may take up to five minutes for your report to be sent if the scheduled time is close to the time of the update request.",
+    "summary": "Update Dashboard Report",
+    "request_description": "",
+    "request_schema_description": "Request body when updating a dashboard report."
+  },
   "ListEvents": {
     "description": "List endpoint returns events that match an events search query.\n[Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).\n\nUse this endpoint to see your latest events.",
     "summary": "Get a list of events"

@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "schedule": {
+        "active": false
+      },
+      "title": "Summary of performance for Web Application Backend"
+    },
+    "id": "d34db33f-1337-4a7a-d099-da7ad0900002",
+    "type": "dashboard_reports"
+  }
+}

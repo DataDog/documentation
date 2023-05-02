@@ -136,6 +136,20 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "CreateDashboardReportConfig": [
+    {
+      "group": "dashboard_reports",
+      "suffix": "",
+      "description": "Create a new Dashboard Report returns \"Created\" response"
+    }
+  ],
+  "UpdateDashboardReportConfig": [
+    {
+      "group": "dashboard_reports",
+      "suffix": "",
+      "description": "Update Dashboard Report returns \"OK\" response"
+    }
+  ],
   "SearchEvents": [
     {
       "group": "events",
