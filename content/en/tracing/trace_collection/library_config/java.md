@@ -169,7 +169,7 @@ Statsd host to send health metrics to
 **Default**: Same as `dd.jmxfetch.statsd.port` <br>
 Statsd port to send health metrics to
 
-`dd.trace_obfuscation_query_string_regexp
+`dd.trace_obfuscation_query_string_regexp`
 : **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
 **Default**: `null`<br>
 A regex to redact sensitive data from incoming requests’ query string reported in the http.url tag (matches are replaced with <redacted>)
