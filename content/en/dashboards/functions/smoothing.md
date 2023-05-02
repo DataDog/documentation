@@ -136,7 +136,7 @@ This function is automatically appended to queries on gauge metrics if both of t
 
 Here is an example graph of the original query with inaccurate spikes (in purple) and the query with the properly weighted calculation (in green): 
 
-{{< img src="dashboards/functions/smoothing/weighed.png" alt="autosmooth illustration" style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/weighed.jpg" alt="weighted illustration" style="width:80%;">}}
 
 ### How does .weighted() work? 
 Every metrics query has a standard order of evaluation (see the [Anatomy of a query][3] for a quick review). For example, the following query is calculated as follows: 
