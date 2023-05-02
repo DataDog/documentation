@@ -63,7 +63,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 - For PHP applications, use the tracing library's user-defined rules instead.
 - The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries other than PHP. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
 
-All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`.  The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
+All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
 
 ### In tracing libraries: user-defined rules
 `ingestion_reason: rule`
@@ -222,7 +222,7 @@ Read more about sampling controls in the [.NET tracing library documentation][1]
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: All the spans from a trace sampled using a tracing library configuration  are tagged with the ingestion reason `rule`. Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][5] Configuration column.
+**Note**: All the spans from a trace sampled using a tracing library configuration are tagged with the ingestion reason `rule`. Services configured with user-defined sampling rules are marked as `Configured` in the [Ingestion Control Page][5] Configuration column.
 
 ## Error and rare traces
 
@@ -729,7 +729,7 @@ Read more about sampling controls in the [.NET tracing library documentation][2]
 
 A request from a web or mobile application generates a trace when the backend services are instrumented. [The APM integration with Real User Monitoring][7] links web and mobile application requests to their corresponding backend traces so you can see your full frontend and backend data through one lens.
 
-Beginning with version `4.30.0` of the RUM browser SDK, you can control ingested volumes and keep a sampling of the backend traces by configuring the `traceSampleRate` initialization parameter.  Set `traceSampleRate` to a number between `0` and `100`.
+Beginning with version `4.30.0` of the RUM browser SDK, you can control ingested volumes and keep a sampling of the backend traces by configuring the `traceSampleRate` initialization parameter. Set `traceSampleRate` to a number between `0` and `100`.
 If no `traceSampleRate` value is set, a default of 100% of the traces coming from the browser requests are sent to Datadog.
 
 Similarly, control the trace sampling rate in other SDKs by using similar parameters:

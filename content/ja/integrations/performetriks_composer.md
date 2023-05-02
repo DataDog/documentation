@@ -30,7 +30,7 @@ pricing:
   product_id: composer
   short_description: Performetriks Composer の月額定額制
   unit_price: 99
-public_title: Composer インテグレーション
+public_title: Composer によるインストール
 short_description: Datadog 環境のコンフィギュレーション管理
 supported_os:
 - linux
@@ -63,7 +63,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Composer インテグレーション
+  title: Composer によるインストール
   uninstallation: README.md#Uninstallation
 ---
 

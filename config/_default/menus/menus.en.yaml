@@ -1422,11 +1422,41 @@ main:
     parent: tracing_library_config
     identifier: tracing_library_config_dotnet_framework
     weight: 109
-  - name: Custom Instrumentation
+  - name: Custom Instrumentation with OpenTelemetry
+    url: tracing/trace_collection/otel_instrumentation/
+    parent: tracing_trace_collection
+    identifier: tracing_otel_inst
+    weight: 105
+  - name: Java
+    url: tracing/trace_collection/otel_instrumentation/java/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/otel_instrumentation/python/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/otel_instrumentation/ruby/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_ruby
+    weight: 103
+  - name: Go
+    url: tracing/trace_collection/otel_instrumentation/go/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_go
+    weight: 104
+  - name: .NET
+    url: tracing/trace_collection/otel_instrumentation/dotnet/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_dotnet
+    weight: 108
+  - name: Custom Instrumentation with Datadog Libraries
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: tracing_custom_inst
-    weight: 105
+    weight: 106
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/java/
     parent: tracing_custom_inst
@@ -1467,61 +1497,106 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: Instrumenting with OpenTelemetry
-    url: opentelemetry/otel_tracing/
+  - name: Custom Instrumentation with OpenTracing
+    url: tracing/trace_collection/opentracing/
     parent: tracing_trace_collection
     identifier: tracing_open_standards
-    weight: 106
+    weight: 107
   - name: Java
-    url: tracing/trace_collection/open_standards/java/
+    url: tracing/trace_collection/opentracing/java/
     parent: tracing_open_standards
     identifier: tracing_open_standards_java
     weight: 101
   - name: Python
-    url: tracing/trace_collection/open_standards/python/
+    url: tracing/trace_collection/opentracing/python/
     parent: tracing_open_standards
     identifier: tracing_open_standards_python
     weight: 102
   - name: Ruby
-    url: tracing/trace_collection/open_standards/ruby/
+    url: tracing/trace_collection/opentracing/ruby/
     parent: tracing_open_standards
     identifier: tracing_open_standards_ruby
     weight: 108
   - name: Go
-    url: tracing/trace_collection/open_standards/go/
+    url: tracing/trace_collection/opentracing/go/
     parent: tracing_open_standards
     identifier: tracing_open_standards_go
     weight: 104
   - name: NodeJS
-    url: tracing/trace_collection/open_standards/nodejs/
+    url: tracing/trace_collection/opentracing/nodejs/
     parent: tracing_open_standards
     identifier: tracing_open_standards_nodejs
     weight: 105
   - name: PHP
-    url: tracing/trace_collection/open_standards/php/
+    url: tracing/trace_collection/opentracing/php/
     parent: tracing_open_standards
     identifier: tracing_open_standards_php
     weight: 106
   - name: .NET
-    url: tracing/trace_collection/open_standards/dotnet/
+    url: tracing/trace_collection/opentracing/dotnet/
     parent: tracing_open_standards
     identifier: tracing_open_standards_dotnet
     weight: 108
+  - name: Propagating Trace Context
+    url: tracing/trace_collection/trace_context_propagation/
+    parent: tracing_trace_collection
+    identifier: tracing_context
+    weight: 108
+  - name: Java
+    url: tracing/trace_collection/trace_context_propagation/java/
+    parent: tracing_context
+    identifier: tracing_context_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/trace_context_propagation/python/
+    parent: tracing_context
+    identifier: tracing_context_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/trace_context_propagation/ruby/
+    parent: tracing_context
+    identifier: tracing_context_ruby
+    weight: 103
+  - name: Go
+    url: tracing/trace_collection/trace_context_propagation/go/
+    parent: tracing_context
+    identifier: tracing_context_go
+    weight: 104
+  - name: NodeJS
+    url: tracing/trace_collection/trace_context_propagation/nodejs/
+    parent: tracing_context
+    identifier: tracing_context_nodejs
+    weight: 105
+  - name: PHP
+    url: tracing/trace_collection/trace_context_propagation/php/
+    parent: tracing_context
+    identifier: tracing_context_php
+    weight: 106
+  - name: C++
+    url: tracing/trace_collection/trace_context_propagation/cpp/
+    parent: tracing_context
+    identifier: tracing_context_cpp
+    weight: 107
+  - name: .NET
+    url: tracing/trace_collection/trace_context_propagation/dotnet/
+    parent: tracing_context
+    identifier: tracing_context_dotnet
+    weight: 107
   - name: Tracing Serverless Applications
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
-    weight: 107
+    weight: 109
   - name: Tracing Proxies
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
-    weight: 108
+    weight: 110
   - name: Span Tags Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
-    weight: 109
+    weight: 111
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
@@ -2250,6 +2325,11 @@ main:
     identifier: data_streams
     parent: apm_heading
     weight: 170000
+  - name: Troubleshooting
+    url: data_streams/troubleshooting
+    identifier: data_streams_troubleshooting
+    parent: data_streams
+    weight: 1
   - name: Log Management
     url: logs/
     pre: log
@@ -2652,6 +2732,11 @@ main:
     parent: cspm
     identifier: signals
     weight: 108
+  - name: Resource Catalog
+    url: /security/cspm/resource_catalog
+    parent: cspm
+    identifier: resource_catalog
+    weight: 109
   - name: Cloud Workload Security
     url: security/cloud_workload_security/
     parent: csm
@@ -3207,36 +3292,46 @@ main:
     parent: rum
     identifier: rum_reactnative
     weight: 4
+  - name: Data Collected
+    url: real_user_monitoring/reactnative/data_collected/
+    parent: rum_reactnative
+    identifier: rum_reactnative_data_collected
+    weight: 401
   - name: Advanced Configuration
     url: real_user_monitoring/reactnative/advanced_configuration/
     parent: rum_reactnative
     identifier: rum_reactnative_advanced_configuration
-    weight: 401
+    weight: 402
   - name: Mobile Vitals
     url: real_user_monitoring/reactnative/mobile_vitals/
     parent: rum_reactnative
     identifier: rum_reactnative_mobile_vitals
-    weight: 402
+    weight: 403
   - name: Web View Tracking
     url: real_user_monitoring/reactnative/web_view_tracking/
     parent: rum_reactnative
     identifier: rum_reactnative_web_view_tracking
-    weight: 403
+    weight: 404
   - name: Expo
     url: real_user_monitoring/reactnative/expo/
     parent: rum_reactnative
     identifier: rum_reactnative_expo
-    weight: 404
+    weight: 405
   - name: CodePush
     url: real_user_monitoring/reactnative/codepush/
     parent: rum_reactnative
     identifier: rum_reactnative_codepush
-    weight: 405
+    weight: 406
+  - name: Integrated Libraries
+    url: real_user_monitoring/reactnative/integrated_libraries/
+    parent: rum_reactnative
+    identifier: rum_reactnative_integrated_libraries
+    weight: 407
   - name: Troubleshooting
     url: real_user_monitoring/reactnative/troubleshooting/
     parent: rum_reactnative
     identifier: rum_reactnative_troubleshooting
-    weight: 406
+    weight: 408
   - name: Flutter Monitoring
     url: real_user_monitoring/flutter/
     parent: rum
@@ -3267,11 +3362,31 @@ main:
     parent: rum_flutter
     identifier: rum_flutter_otel_support
     weight: 505
+  - name: Web View Tracking
+    url: real_user_monitoring/flutter/web_view_tracking/
+    parent: rum_flutter
+    identifier: rum_flutter_web_view_tracking
+    weight: 506
   - name: Troubleshooting
     url: real_user_monitoring/flutter/troubleshooting/
     parent: rum_flutter
     identifier: rum_flutter_troubleshooting
-    weight: 506
+    weight: 507
+  - name: Roku Monitoring
+    url: real_user_monitoring/roku/
+    parent: rum
+    identifier: rum_roku
+    weight: 6
+  - name: Data Collected
+    url: real_user_monitoring/roku/data_collected/
+    parent: rum_roku
+    identifier: rum_roku_data_collected
+    weight: 601
+  - name: Advanced Configuration
+    url: real_user_monitoring/roku/advanced_configuration/
+    parent: rum_roku
+    identifier: rum_roku_advanced
+    weight: 602
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
@@ -5873,7 +5988,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalIncidents
       unstable: []
-      order: 9
+      order: 11
   - name: Get a signal's details
     url: '#get-a-signals-details'
     identifier: security-monitoring-get-a-signals-details
@@ -5885,7 +6000,7 @@ api:
       operationids:
         - GetSecurityMonitoringSignal
       unstable: []
-      order: 11
+      order: 13
   - name: Get a list of security signals
     url: '#get-a-list-of-security-signals'
     identifier: security-monitoring-get-a-list-of-security-signals
@@ -5897,7 +6012,7 @@ api:
       operationids:
         - SearchSecurityMonitoringSignals
       unstable: []
-      order: 6
+      order: 8
   - name: Get a quick list of security signals
     url: '#get-a-quick-list-of-security-signals'
     identifier: security-monitoring-get-a-quick-list-of-security-signals
@@ -5909,7 +6024,7 @@ api:
       operationids:
         - ListSecurityMonitoringSignals
       unstable: []
-      order: 7
+      order: 9
   - name: Update an existing rule
     url: '#update-an-existing-rule'
     identifier: security-monitoring-update-an-existing-rule
@@ -5921,7 +6036,7 @@ api:
       operationids:
         - UpdateSecurityMonitoringRule
       unstable: []
-      order: 4
+      order: 6
   - name: Get a rule's details
     url: '#get-a-rules-details'
     identifier: security-monitoring-get-a-rules-details
@@ -5933,7 +6048,7 @@ api:
       operationids:
         - GetSecurityMonitoringRule
       unstable: []
-      order: 3
+      order: 5
   - name: Delete an existing rule
     url: '#delete-an-existing-rule'
     identifier: security-monitoring-delete-an-existing-rule
@@ -5945,7 +6060,7 @@ api:
       operationids:
         - DeleteSecurityMonitoringRule
       unstable: []
-      order: 5
+      order: 7
   - name: Create a detection rule
     url: '#create-a-detection-rule'
     identifier: security-monitoring-create-a-detection-rule
@@ -5957,7 +6072,7 @@ api:
       operationids:
         - CreateSecurityMonitoringRule
       unstable: []
-      order: 2
+      order: 4
   - name: List rules
     url: '#list-rules'
     identifier: security-monitoring-list-rules
@@ -5969,7 +6084,7 @@ api:
       operationids:
         - ListSecurityMonitoringRules
       unstable: []
-      order: 1
+      order: 3
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
@@ -5981,7 +6096,7 @@ api:
       operationids:
         - UpdateSecurityFilter
       unstable: []
-      order: 13
+      order: 15
   - name: Get a security filter
     url: '#get-a-security-filter'
     identifier: security-monitoring-get-a-security-filter
@@ -5993,7 +6108,7 @@ api:
       operationids:
         - GetSecurityFilter
       unstable: []
-      order: 14
+      order: 16
   - name: Delete a security filter
     url: '#delete-a-security-filter'
     identifier: security-monitoring-delete-a-security-filter
@@ -6005,7 +6120,7 @@ api:
       operationids:
         - DeleteSecurityFilter
       unstable: []
-      order: 12
+      order: 14
   - name: Create a security filter
     url: '#create-a-security-filter'
     identifier: security-monitoring-create-a-security-filter
@@ -6017,7 +6132,7 @@ api:
       operationids:
         - CreateSecurityFilter
       unstable: []
-      order: 15
+      order: 17
   - name: Get all security filters
     url: '#get-all-security-filters'
     identifier: security-monitoring-get-all-security-filters
@@ -6029,7 +6144,7 @@ api:
       operationids:
         - ListSecurityFilters
       unstable: []
-      order: 16
+      order: 18
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6068,7 +6183,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalState
       unstable: []
-      order: 2
+      order: 4
   - name: Modify the triage assignee of a security signal
     url: '#modify-the-triage-assignee-of-a-security-signal'
     identifier: security-monitoring-modify-the-triage-assignee-of-a-security-signal
@@ -6081,7 +6196,7 @@ api:
       operationids:
         - EditSecurityMonitoringSignalAssignee
       unstable: []
-      order: 3
+      order: 5
   - name: Add a security signal to an incident
     url: '#add-a-security-signal-to-an-incident'
     identifier: security-monitoring-add-a-security-signal-to-an-incident
@@ -6093,7 +6208,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 1
+      order: 3
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks

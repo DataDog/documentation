@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
       tag: 'Pypi'
       text: 'API Docs'
+    - link: "/tracing/trace_collection/trace_context_propagation/python/"
+      tag: "Documentation"
+      text: "Propagating trace context"
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'

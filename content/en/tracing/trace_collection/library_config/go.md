@@ -14,6 +14,9 @@ further_reading:
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
+- link: "/tracing/trace_collection/trace_context_propagation/go/"
+  tag: "Documentation"
+  text: "Propagating trace context"
 ---
 
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
@@ -133,33 +136,6 @@ When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. T
 
 The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
 
-## Trace context propagation for distributed tracing
-
-The Datadog APM tracer supports extraction and injection of [B3][9] and [W3C][14] headers for distributed tracing.
-
-Distributed headers injection and extraction is controlled by
-configuring injection/extraction styles. Supported styles are:
-`tracecontext`, `Datadog`, [`B3`][9], and `B3 single header`.
-
-- Configure injection styles using the `DD_PROPAGATION_STYLE_INJECT=tracecontext,B3` environment variable.
-- Configure extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` environment variable.
-- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` environment variable.
-
-The values of these environment variables are comma-separated lists of
-header styles enabled for injection or extraction. By default,
-the `tracecontext,Datadog` styles are enabled.
-
-To disable trace context propagation, set the value of the environment variables to `none`.
-- Disable injection styles using the `DD_PROPAGATION_STYLE_INJECT=none` environment variable.
-- Disable extraction styles using the `DD_PROPAGATION_STYLE_EXTRACT=none` environment variable.
-- Disable all trace context propagation (both inject and extract) using the `DD_PROPAGATION_STYLE=none` environment variable.
-
-If multiple environment variables are set, `DD_PROPAGATION_STYLE_INJECT` and `DD_PROPAGATION_STYLE_EXTRACT`
-override any value provided in `DD_PROPAGATION_STYLE`.
-
-If multiple extraction styles are enabled, extraction attempts are made
-in the order that those styles are specified. The first successfully
-extracted value is used.
 
 ## Further reading
 
