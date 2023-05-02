@@ -86,7 +86,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 ### Network metric
 
-Create a network metric monitor by following the instructions in the [metric monitor][8] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
+Create a network metric monitor by following the instructions in the [metric monitor][10] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
 ## Further Reading
 
