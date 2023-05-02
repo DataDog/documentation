@@ -47,9 +47,9 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
    {{< tabs >}}
    {{% tab "JSON logs" %}}
 
-   For JSON logs, Step 1 and 2 are automatic. The tracer injects the [trace][1] and [span][2] IDs into the logs, which are automatically remapped by the    [reserved attribute remappers][3].
+   For JSON logs, Step 1 and 2 are automatic. The tracer injects the [trace][1] and [span][2] IDs into the logs, which are automatically remapped by the [reserved attribute remappers][3].
 
-   If this process is not working as expected, ensure the logs attribute's name containing the trace ID is `dd.trace_id` and verify that the attribute is    correctly set in the [reserved attributes'][4] Trace ID section.
+   If this process is not working as expected, ensure the logs attribute's name containing the trace ID is `dd.trace_id` and verify that the attribute is correctly set in the [reserved attributes'][4] Trace ID section.
 
    {{< img src="tracing/troubleshooting/trace_id_reserved_attribute_mapping.png" alt="The preprocessing for JSON logs page with the Trace Id section highlighted" >}}
 
@@ -64,7 +64,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    This example demonstrates the Java integration pipeline:
 
-   {{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="The Java log pipeline with the Trace Id remapper highlighted"  style="width:90%;">}}
+   {{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="The Java log pipeline with the Trace Id remapper highlighted" style="width:90%;">}}
 
    It is possible that the log format is not recognized by the integration pipeline. In this case, clone the pipeline and follow the [parsing troubleshooting guide][2] to make sure the pipeline accepts the log format.
 
@@ -77,7 +77,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
    1. Make sure that the custom parsing rule extracts the [trace][1] and [span][2] IDs as a string, like in the following example:
 
-      {{< img src="tracing/troubleshooting/tracing_custom_parsing.png" alt="A custom parser with the trace Id highlighted in the sample log, parsing rule, and extraction sections"  style="width:90%;">}}
+      {{< img src="tracing/troubleshooting/tracing_custom_parsing.png" alt="A custom parser with the trace Id highlighted in the sample log, parsing rule, and extraction sections" style="width:90%;">}}
 
    2. Then define a [Trace remapper][3] on the extracted attribute to remap it to the official trace ID of the logs.
 
@@ -89,7 +89,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 Once the IDs are properly injected and remapped to your logs, you can see the logs correlated to the trace in the trace panel.
 
-{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the the logs section with correlated logs"  style="width:90%;">}}
+{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the the logs section with correlated logs" style="width:90%;">}}
 
 ## Further Reading
 

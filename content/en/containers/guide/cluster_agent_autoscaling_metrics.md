@@ -161,7 +161,7 @@ Once enabled, the Cluster Agent is ready to fetch metrics for the HPA. There are
 - [Autoscaling with DatadogMetric Queries](#autoscaling-with-datadogmetric-queries)
 - [Autoscaling without DatadogMetric Queries](#autoscaling-without-datadogmetric-queries)
 
-Datadog recommends using the `DatadogMetric` option. While this does require an additional step of deploying the `DatadogMetric` CustomResourceDefinition (CRD), this provides a lot more flexibility in the queries performed.  If you do not use `DatadogMetric` queries, your HPAs use the native Kubernetes external metrics format, which the Cluster Agent translates into a Datadog metric query.
+Datadog recommends using the `DatadogMetric` option. While this does require an additional step of deploying the `DatadogMetric` CustomResourceDefinition (CRD), this provides a lot more flexibility in the queries performed. If you do not use `DatadogMetric` queries, your HPAs use the native Kubernetes external metrics format, which the Cluster Agent translates into a Datadog metric query.
 
 ## Autoscaling with DatadogMetric queries
 

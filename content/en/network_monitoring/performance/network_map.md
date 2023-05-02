@@ -49,13 +49,13 @@ Use the page header to configure your network map:
 
     - **Show unresolved traffic**.
     - Hide network traffic outside a specified percentile range of the active network metric.
-        {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="Filtering network map flows" video="true"  width="50%" >}}
+        {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="Filtering network map flows" video="true" width="50%" >}}
 
 ## Inspection
 
 Hovering over a node highlights it and animates the directionality of the network traffic it sends and receives:
 
-{{< img src="network_performance_monitoring/network_map/network_map_highlight.mp4" alt="Network Map" video="true"  width="70%" >}}
+{{< img src="network_performance_monitoring/network_map/network_map_highlight.mp4" alt="Network Map" video="true" width="70%" >}}
 
 Click on a node and select _Inspect_ from the menu to contextualize it within the larger network:
 

@@ -30,6 +30,8 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Kubernetes v1.14+
 * Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
+* For Python, uWSGI applications are not supported at this time.
+* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails or Hanami applications at this time.
 * Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
@@ -99,11 +101,9 @@ The available library versions are listed in each container registry, as well as
 - [Java][16]
 - [Javascript][17]
 - [Python][18]
-  - **Note:** Python uWSGI applications are not supported.
 - [.NET][19]
   - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
 - [Ruby][20]
-  - **Note**: For Ruby, instrumenting only Ruby on Rails or Hanami applications is supported.
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
@@ -185,6 +185,21 @@ If the injection was successful you can see an `init` container called `datadog-
 Or run `kubectl describe pod <my-pod>` to see the `datadog-lib-init` init container listed.
 
 The instrumentation also starts sending telemetry to Datadog (for example, traces to [APM][22]).
+
+### Troubleshooting installation issues
+
+If the application pod fails to start, run `kubectl logs <my-pod> --all-containers` to print out the logs and compare them to the known issues below.
+
+#### .NET installation issues
+##### `dotnet: error while loading shared libraries: libc.musl-x86_64.so.1: cannot open shared object file: No such file or directory`
+
+- **Problem**: The pod annotation for the dotnet library version included a `-musl` suffix, but the application container runs on a Linux distribution that uses glibc.
+- **Solution**: Remove the `-musl` suffix from the dotnet library version.
+
+##### `Error loading shared library ld-linux-x86-64.so.2: No such file or directory (needed by /datadog-lib/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so)`
+
+- **Problem**: The application container runs on a Linux distribution that uses musl-libc (for example, Alpine), but the pod annotation does not include the `-musl` suffix.
+- **Solution**: Add the `-musl` suffix to the dotnet library version.
 
 
 [1]: /containers/cluster_agent/admission_controller/
