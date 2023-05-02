@@ -234,7 +234,7 @@ StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 
 `dd.trace.obfuscation.query.string.regexp`
 : **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
 **Default**: `null`<br>
-A regex to redact sensitive data from incoming requests' query string reported in the http.url tag (matches are replaced with <redacted>)
+A regex to redact sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with <redacted>).
   
 `dd.integration.opentracing.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
