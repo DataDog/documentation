@@ -28,7 +28,7 @@ The raw data over 60 seconds could resemble:
 
 | Time                 | 0s  |  10s |  20s |  30s |  40s |  50s |
 | ---                  | --  | ---  | ---  | ---  |  --- |  --- |
-| `pod:a`, `shard:1`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
+| `app:a`, `version:1`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
 | `pod:b`, `shard:1`   | NAN | 12   | 12   | 12   | NAN  | NAN  |
 | `pod:c`, `shard:1`   | NAN | NAN  | NAN  | NAN  | 12   | 12   |
 | `pod:d`, `shard:2`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
