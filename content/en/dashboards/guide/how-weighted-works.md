@@ -18,7 +18,7 @@ The `weighted()` function accounts for the short lifespan of the `container_id` 
 
 #### Example
 Consider this query with the following assumptions: <br>
-`sum:kubernetes.cpu.requests{*} by {shard}.rollup(avg, 60)`
+`sum:kubernetes_state.pod.uptime{*} by {version}.rollup(avg, 10)`
 
 - The gauge metric's submission interval is defined at 10 seconds. 
 - A datapoint is graphed every 60 seconds in time.
