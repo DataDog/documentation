@@ -312,22 +312,23 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
+  --set 'clusterChecksRunner.enabled=true' \
+  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>,1433
+    host: <HOSTNAME>\,1433
     username: datadog
-    password: "<PASSWORD>"
-    connector: "odbc"
-    driver: "FreeTDS"
+    password: '<PASSWORD>'
+    connector: 'odbc'
+    driver: 'FreeTDS'
     include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
-      - "service:<CUSTOM_SERVICE>"
-      - "env:<CUSTOM_ENV>"
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
     azure:
-      deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<YOUR_INSTANCE_NAME>"' \
+      deployment_type: '<DEPLOYMENT_TYPE>'
+      name: '<YOUR_INSTANCE_NAME>'" \
   datadog/datadog
 ```
 

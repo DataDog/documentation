@@ -223,21 +223,47 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 [2]: /real_user_monitoring/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
+
+
+{{% tab "Roku RUM" %}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+<div class="alert alert-info">RUM for Roku is in beta.</div>
+
+1. Set up [RUM Roku Monitoring][1].
+
+2. Use the `datadogroku_DdUrlTransfer` component to perform your network requests.
+    ```brightscript
+        ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
+        ddUrlTransfer.SetUrl(url)
+        ddUrlTransfer.EnablePeerVerification(false)
+        ddUrlTransfer.EnableHostVerification(false)
+        result = ddUrlTransfer.GetToString()
+    ```
+
+[1]: /real_user_monitoring/roku/
+{{< /site-region >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported libraries
 
 The following Datadog tracing libraries are supported:
 
-| Library                             | Minimum Version                                                                                                             |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][2]                  | [0.22.0][3]                |
-| [Go][4]                  | [1.10.0][5]                |
-| [Java][6]                  | [0.24.1][7]                |
-| [Ruby][8]                  | [0.20.0][9]                |
-| [JavaScript][10]                  | [0.10.0][11]                |
-| [PHP][12]                  | [0.33.0][13]                |
-| [.NET][14]                  | [1.18.2][15]                |
+| Library          | Minimum Version |
+| ---------------- | --------------- |
+| [Python][2]      | [0.22.0][3]     |
+| [Go][4]          | [1.10.0][5]     |
+| [Java][6]        | [0.24.1][7]     |
+| [Ruby][8]        | [0.20.0][9]     |
+| [JavaScript][10] | [0.10.0][11]    |
+| [PHP][12]        | [0.33.0][13]    |
+| [.NET][14]       | [1.18.2][15]    |
 
 
 ## OpenTelemetry support

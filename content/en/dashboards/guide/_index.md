@@ -18,6 +18,7 @@ cascade:
     {{< nextlink href="dashboards/guide/how-to-graph-percentiles-in-datadog" >}}Graphing percentiles in Datadog{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/query-to-the-graph" >}}Query to the Graph{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/widget_colors" >}}Selecting the right colors for your graphs{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/compatible_semantic_tags" >}}Compatible semantic tags{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom time frames{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
