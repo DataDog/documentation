@@ -31,7 +31,8 @@ If `error.fingerprint` is provided, the grouping behavior follows these rules:
 
 ## Setup for broswer errors
 
-Custom grouping only needs a browser RUM error and an additional string attribute.
+Custom grouping needs the [browser-sdk v4.42.0][3] (or more recent), a browser RUM error and an additional
+string attribute.
 
 If you aren't already collecting browser RUM events with Datadog, see the [RUM documentation][1] to set up Real User Monitoring.
 
@@ -70,3 +71,4 @@ issue in Error Tracking.
 
 [1]: /real_user_monitoring/
 [2]: /real_user_monitoring/browser/collecting_browser_errors/
+[3]: https://github.com/DataDog/browser-sdk/releases/tag/v4.42.0
