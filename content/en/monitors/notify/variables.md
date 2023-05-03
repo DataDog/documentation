@@ -340,7 +340,7 @@ If a monitor uses Formulas & Functions in its queries, the values are resolved w
 
 #### Reserved attributes
 
-Logs, spans, and RUM events have generic reserved attributes, which you can use in variables with the following syntax:
+Logs, Event Management, spans, RUM, CI Pipeline, and CI Test events have generic reserved attributes, which you can use in variables with the following syntax:
 
 | Monitor type    | Variable syntax   | First level attributes |
 |-----------------|-------------------|------------------------|
