@@ -201,11 +201,11 @@ You can also query the Event Explorer programmatically using the [Datadog Events
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
-{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events"  >}}
+{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events" >}}
 
 For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
-{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor"  >}}
+{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor" >}}
 
 ## SLO widgets
 
@@ -248,7 +248,7 @@ The 90-day limits per SLO are as follows:
 
 You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][23], or a [Terraform resource][24].
 
-{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI"  >}}
+{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" >}}
 
 #### Access in the UI
 

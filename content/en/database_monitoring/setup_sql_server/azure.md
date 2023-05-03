@@ -312,11 +312,12 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
+  --set 'clusterChecksRunner.enabled=true' \
   --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>,1433
+    host: <HOSTNAME>\,1433
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
@@ -327,8 +328,8 @@ instances:
       - 'env:<CUSTOM_ENV>'
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>' \
-  datadog/datadog"
+      name: '<YOUR_INSTANCE_NAME>'" \
+  datadog/datadog
 ```
 
 ### Configure with mounted files

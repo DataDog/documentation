@@ -37,7 +37,7 @@ You can use the Datadog extension to:
 
 ## Setup
 
-You can install the [Datadog extension][6].
+Install the [Datadog Extension][6] from the Visual Studio Marketplace.
 
 ## Run Synthetic tests locally
 

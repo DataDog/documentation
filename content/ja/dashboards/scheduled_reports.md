@@ -33,7 +33,7 @@ title: スケジュールされたレポート
 - [Distribution][2]
 - [Geomap][3]
 - [Group][4]
-- [Heat Map][5]
+- [ヒートマップ][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
 - [円グラフ][16]
@@ -94,7 +94,7 @@ Admin ロールまたは **Org Management** 権限を持つユーザーは、**O
 [2]: /ja/dashboards/widgets/distribution/
 [3]: /ja/dashboards/widgets/geomap/
 [4]: /ja/dashboards/widgets/group/
-[5]: /ja/dashboards/widgets/heat_map/
+[5]: /ja/dashboards/widgets/heatmap/
 [6]: /ja/dashboards/widgets/monitor_summary/
 [7]: /ja/dashboards/widgets/note/
 [8]: /ja/dashboards/widgets/query_value/
