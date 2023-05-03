@@ -23,6 +23,13 @@ cascade:
     subcategory: Integrations
     tags: ['ksm']
 - _target:
+    path: /integrations/google_cloud_platform.md
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
+    tags: ['gcp', 'google cloud platform']
+- _target:
     path: /integrations/*.md
   algolia:
     rank: 60

@@ -87,6 +87,10 @@ If a monitor is enabled for a service, the circumference has a weighted border c
 
 Monitors are not constrained to APM monitors. The service tag, described above, can be used to associate any monitor type with a service.
 
+### Availability
+
+The Service Map is rendered based on complete traces that include the root spans. When some spans are missing during the query window you specify, the map view may be unavailable for that time period. This may happen when [APM connection errors][6] occur and spans get dropped.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -96,3 +100,4 @@ Monitors are not constrained to APM monitors. The service tag, described above, 
 [3]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [4]: https://app.datadoghq.com/apm/services
 [5]: /tracing/glossary/#trace
+[6]: /tracing/troubleshooting/connection_errors

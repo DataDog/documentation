@@ -30,6 +30,8 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 * Kubernetes v1.14+
 * Datadog [Cluster Agent v7.40+][3] for Java, Python, NodeJS, Datadog [Cluster Agent v7.44+][3] for .NET and Ruby.
 * Datadog Admission Controller enabled. **Note**: In Helm chart v2.35.0 and later, Datadog Admission Controller is activated by default in the Cluster Agent.
+* For Python, uWSGI applications are not supported at this time.
+* For Ruby, library injection support is in Beta. Instrumentation is only supported for Ruby on Rails or Hanami applications at this time.
 * Applications in Java, JavaScript, Python, .NET, or Ruby deployed on Linux with a supported architecture. Check the [corresponding container registry](#container-registries) for the complete list of supported architectures by language.
 
 ## Container registries
@@ -99,11 +101,9 @@ The available library versions are listed in each container registry, as well as
 - [Java][16]
 - [Javascript][17]
 - [Python][18]
-  - **Note:** Python uWSGI applications are not supported.
 - [.NET][19]
   - **Note**: For .NET library injection, if the application container uses a musl-based Linux distribution (such as Alpine), you must specify a tag with the the `-musl` suffix for the pod annotation. For example, to use library version `v2.29.0`, specify container tag `v2.29.0-musl`.
 - [Ruby][20]
-  - **Note**: For Ruby, instrumenting only Ruby on Rails or Hanami applications is supported.
 
 **Note**: If you already have an application instrumented using version X of the library, and then use library injection to instrument using version Y of the same tracer library, the tracer does not break. Rather, the library version loaded first is used. Because library injection happens at the admission controller level prior to runtime, it takes precedent over manually configured libraries.
 
