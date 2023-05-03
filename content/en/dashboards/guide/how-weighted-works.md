@@ -51,7 +51,7 @@ With time aggregation, we're rolling up data either `avg` (without weighted) or 
 Finally, the metric is aggregated by shard to get the final values below: 
 | Space aggregation by shard | .rollup(avg) | With .weighted() |
 | ------------------------   | ------------ | ---------------- |
-| `shard:1`                  | 36           | 12               |
+| `version:1`                  | 36           | 12               |
 | `shard:1`                  | 46           | 16               |
 
 
