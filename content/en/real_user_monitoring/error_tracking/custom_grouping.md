@@ -29,29 +29,39 @@ If `error.fingerprint` is provided, the grouping behavior follows these rules:
 * RUM errors from the same service and with the same `error.fingerprint` attribute are grouped into the same issue.
 * RUM errors with different `service` attributes are grouped into different issues.
 
-## Setup
+## Setup for broswer errors
 
-Custom grouping only needs a RUM error and an `error.fingerprint` string attribute.
+Custom grouping only needs a browser RUM error and an additional string attribute.
 
-If you aren’t already collecting RUM events with Datadog, see the [RUM documentation][1] to set up Real User Monitoring.
+If you aren’t already collecting browser RUM events with Datadog, see the [RUM documentation][1] to set up Real User Monitoring.
 
 ### Example
 
-If you're already sending RUM events, add a new `error.fingerprint` attribute to your RUM error event.
-
-Here's an example for [collecting browser errors][2]:
+If you're already [collecting browser errors][2], it's possible to add the new attribute to your browser error event
+either by adding a `dd_fingerprint` attribute to the error object
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
-
 // Send a custom error with context
 const error = new Error('Something went wrong');
-datadogRum.addError(error, {
-  'error.fingerprint': 'my-custom-grouping-material',
-});
+error.dd_fingerprint = 'my-custom-grouping-material'
+datadogRum.addError(error);
 ```
 
-In this case, `my-custom-grouping-material` is used to group these RUM errors into a single
+or using the `beforeSend` callbadk with an `error.fingerprint` attribute
+
+```javascript
+DD_RUM.init({
+  ...
+  beforeSend: () => {
+    if (event.type === 'error') {
+      event.error.fingerprint = 'my-custom-grouping-material'
+    }
+  },
+})
+```
+
+In both cases, `my-custom-grouping-material` is used to group the browser RUM errors into a single
 issue in Error Tracking.
 
 ## Further Reading
