@@ -33,11 +33,11 @@ If `error.fingerprint` is provided, the grouping behavior follows these rules:
 
 Custom grouping only needs a browser RUM error and an additional string attribute.
 
-If you aren’t already collecting browser RUM events with Datadog, see the [RUM documentation][1] to set up Real User Monitoring.
+If you aren't already collecting browser RUM events with Datadog, see the [RUM documentation][1] to set up Real User Monitoring.
 
 ### Example
 
-If you're already [collecting browser errors][2], it's possible to add the new attribute to your browser error event
+If you're already [collecting browser errors][2], it's possible to add the attribute
 either by adding a `dd_fingerprint` attribute to the error object
 
 ```javascript
