@@ -52,7 +52,7 @@ Finally, the metric is aggregated by shard to get the final values below:
 | Space aggregation by shard | .rollup(avg) | With .weighted() |
 | ------------------------   | ------------ | ---------------- |
 | `version:1`                  | 36           | 12               |
-| `shard:1`                  | 46           | 16               |
+| `version:2`                  | 46           | 16               |
 
 
 The `weighted()` function remedies any inconsistent behavior with short-lived tags by weighing the values against their submission rate
