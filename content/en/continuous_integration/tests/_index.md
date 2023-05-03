@@ -104,7 +104,7 @@ The definition of module changes slightly per language:
 * In .NET a test module groups every test that is run under the same [unit test project][8].
 * In Swift a test module groups every test that is run for a given bundle.
 * In JavaScript there are no test modules.
-* In Java a test module groups every test that is run by the same Maven Surefire/Failsafe or Gradle Test task execution
+* In Java a test module groups every test that is run by the same Maven Surefire/Failsafe or Gradle Test task execution.
 
 An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][9].
 
