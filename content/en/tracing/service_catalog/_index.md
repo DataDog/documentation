@@ -60,11 +60,9 @@ Information about the service provided by the service definition or by Datadog p
 
 ### Ownership view
 
-In the **Ownership** tab, you can click the icons in the **Contact** and **</>** columns and be directed to the tools and projects specified in the service definition. For example, you can access the owning team's Slack channel or GitHub repository containing the service code.
+In the **Ownership** tab, you can click the icons in the **Contact** and **Repo** columns and be directed to the tools and projects specified in the service definition. For example, you can access the owning team's Slack channel or GitHub repository containing the service code.
 
 The **Telemetry** column displays what types of telemetry data Datadog is collecting for the service. Clicking on the icons directs you into the corresponding Datadog product view. For example, the Agent sends traces to Datadog, and you can click the **Traces** icon to view them in APM.
-
-Click the kebab menu to the right hand corner to edit the service definition (if it exists) or link to one if the service is not defined. You may have to [set up an integration with your source code system][2] first.
 
 Sort the table by **Team** or **On Call** columns to see which services each team is responsible for, and identify services where ownership and responsibility are not specified yet.
 

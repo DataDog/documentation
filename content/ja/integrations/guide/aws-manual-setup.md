@@ -72,7 +72,12 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 
 8. AWS [IAM コンソール][4]で新しいロールを作成します。
 9. 信頼されるエンティティの種類で **AWS account** を選択し、**Another AWS account** を選択します。
+{{< site-region region="us,us3,us5,eu" >}}
 10. `Account ID` として、`464622532012` を入力します。これは Datadog のアカウント ID で、Datadog に AWS のデータへのアクセスを許可するものです。
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+10. `Account ID` として、`417141415827` を入力します。これは Datadog のアカウント ID で、Datadog に AWS のデータへのアクセスを許可するものです。
+{{< /site-region >}}
 11. **Require external ID** を選択し、[外部 ID を生成する](#generate-an-external-id)セクションでコピーした外部 ID を入力します。
 `Require MFA` を無効にしたままにしてください。詳しくは、AWS のドキュメント、[第三者にお客様の AWS リソースへのアクセスを許可する際の外部 ID の使用方法][2]をご覧ください。
 12. **Next** をクリックします。

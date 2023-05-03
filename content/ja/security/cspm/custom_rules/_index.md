@@ -1,4 +1,8 @@
 ---
+cascade:
+  algolia:
+    rank: 30
+    subcategory: クラウドセキュリティポスチャ管理
 further_reading:
 - link: security/cloud_security_management/guide/writing_rego_rules
   tag: ガイド
@@ -19,10 +23,6 @@ title: カスタムルール
 このサイトでは、クラウドセキュリティポスチャ管理は利用できません。
 </div>
 {{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true">}}
-カスタム CSPM ルールの作成と使用はベータ機能であり、一部の Amazon Web Services (AWS)、Microsoft Azure、Google Cloud Platform (GCP) クラウドリソースで利用できます。詳細については、<a href="https://docs.datadoghq.com/security/cspm/custom_rules/schema/">クラウドリソーススキーマのドキュメント</a>を参照してください。新しいクラウドリソースは、ベータ期間中に追加される予定です。
-{{< /callout >}}
 
 ## 概要
 

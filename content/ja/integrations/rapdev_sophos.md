@@ -52,7 +52,7 @@ pricing:
   tag: endpoint_name
   unit_label: 登録されたエンドポイント
   unit_price: 1
-public_title: Sophos インテグレーション
+public_title: Sophos
 short_description: Sophos が管理するエンドポイントの健全性を監視
 supported_os:
 - linux
@@ -75,7 +75,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Sophos インテグレーション
+  title: Sophos
   uninstallation: README.md#Uninstallation
 ---
 

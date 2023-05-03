@@ -13,6 +13,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: blog
+  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
 kind: documentation
 title: インシデント管理
 ---
@@ -21,7 +24,7 @@ title: インシデント管理
 <div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
 {{< /site-region >}}
 
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="グラフから"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="グラフから" style="width:80%;">}}
 
 組織のサービス中断につながる可能性のあるイベントは、すべてインシデントと見なすことができます。多くの場合、こうしたイベントを処理するためのフレームワークを用意する必要があります。Datadog のインシデント管理機能は、組織がインシデントを効果的に識別して軽減できるシステムを提供します。
 

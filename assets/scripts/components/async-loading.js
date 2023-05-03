@@ -74,7 +74,9 @@ function loadPage(newUrl) {
                 searchBoxContainer.append(hitsContainer);
                 hitsContainer.append(hits);
 
-                sidenavSearchbarMount.append(searchBoxContainer);
+                if(sidenavSearchbarMount) {
+                  sidenavSearchbarMount.append(searchBoxContainer);
+                }
 
                 loadInstantSearch(asyncLoad=true);
             }

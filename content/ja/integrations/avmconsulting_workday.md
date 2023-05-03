@@ -51,7 +51,7 @@ pricing:
   tag: job_id
   unit_label: Workday ジョブ
   unit_price: 1
-public_title: Workday インテグレーション
+public_title: Workday
 short_description: Workday インテグレーションのステータスを監視できるようになります
 supported_os:
 - linux
@@ -77,7 +77,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Workday インテグレーション
+  title: Workday
   uninstallation: README.md#Uninstallation
 ---
 

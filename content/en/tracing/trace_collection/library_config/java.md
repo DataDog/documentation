@@ -11,6 +11,9 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources and traces'
+    - link: "/tracing/trace_collection/trace_context_propagation/java/"
+      tag: "Documentation"
+      text: "Propagating trace context with headers"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
@@ -228,6 +231,11 @@ Statsd host to send JMX metrics to. If you are using Unix Domain Sockets, use an
 **Default**: `8125`<br>
 StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.
 
+`dd.trace.obfuscation.query.string.regexp`
+: **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
+**Default**: `null`<br>
+A regex to redact sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with <redacted>).
+  
 `dd.integration.opentracing.enabled`
 : **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
 **Default**: `true`<br>
@@ -281,7 +289,7 @@ See how to disable integrations in the [integrations][11] compatibility section.
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping"  >}}
+{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping" >}}
 
 #### `dd.tags`
 
@@ -291,7 +299,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.map
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags"  >}}
+{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags" >}}
 
 #### `dd.trace.span.tags`
 
@@ -301,7 +309,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -ja
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags"  >}}
+{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags" >}}
 
 #### `dd.trace.jmx.tags`
 
@@ -311,7 +319,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags"  >}}
+{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags" >}}
 
 #### `dd.trace.methods`
 
@@ -321,7 +329,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods"  >}}
+{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods" >}}
 
 #### `dd.trace.db.client.split-by-instance`
 
@@ -333,11 +341,11 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Dd
 
 DB Instance 1, `webappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
 
-{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1"  >}}
+{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1" >}}
 
 DB Instance 2, `secondwebappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
 
-{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2"  >}}
+{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2" >}}
 
 Similarly on the service map, you would now see one web app making calls to two different Postgres databases.
 
@@ -349,7 +357,7 @@ Example with system property:
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/query_string.png" alt="query string"  >}}
+{{< img src="tracing/setup/java/query_string.png" alt="query string" >}}
 
 #### `dd.trace.enabled`
 
@@ -387,22 +395,12 @@ instances:
 
 Would produce the following result:
 
-{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example"  >}}
+{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example" >}}
 
 See the [Java integration documentation][12] to learn more about Java metrics collection with JMX fetch.
-
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][13] and [W3C (TraceParent)][14] header extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The Java Tracer supports the following styles:
-
-- Datadog: `datadog`
-- B3 Multi Header: `b3multi` (`b3` alias is deprecated)
-- W3C Trace Context: `tracecontext` (Available since 1.11.0)
-- B3 Single Header: `b3 single header`
+For information about valid values and using the following configuration options, see [Propagating Java Trace Context][13].
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -424,9 +422,7 @@ Available since version 1.9.0
 
 #### Deprecated extraction and injection settings
 
-These extraction and and injection settings are deprecated since verision 1.9.0.
-
-- B3: `b3` (both B3 multi header and B3 single header)
+These extraction and and injection settings for `b3` (both B3 multi header and B3 single header) are deprecated since version 1.9.0.
 
 `dd.propagation.style.inject`
 : **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>
@@ -456,5 +452,4 @@ Deprecated since version 1.9.0
 [10]: /agent/amazon_ecs/#create-an-ecs-task
 [11]: /tracing/compatibility_requirements/java#disabling-integrations
 [12]: /integrations/java/?tab=host#metric-collection
-[13]: https://github.com/openzipkin/b3-propagation
-[14]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /tracing/trace_collection/trace_context_propagation/java/

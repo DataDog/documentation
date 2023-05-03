@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_datalakestore
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure Data Lake Store のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/
@@ -30,7 +31,7 @@ Datadog Azure インテグレーションを使用して、Data Lake Store か�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

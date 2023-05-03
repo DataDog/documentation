@@ -2,7 +2,8 @@
 aliases:
 - /ja/integrations/akamai/
 categories:
-- cloud
+- キャッシュ
+- クラウド
 dependencies: []
 description: Akamai DataStream を Datadog と統合
 doc_link: https://docs.datadoghq.com/integrations/akamai_datastream/
@@ -32,7 +33,7 @@ Datadog を Akamai DataStream と接続すると、CDN の健全性、レイテ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Datadog の [Akamai インテグレーションタイル][1]を使用して、インテグレーションをインストールします。
 

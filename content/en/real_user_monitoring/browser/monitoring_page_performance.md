@@ -2,6 +2,9 @@
 title: Monitoring Page Performance
 kind: documentation
 further_reading:
+  - link: "https://learn.datadoghq.com/courses/core-web-vitals-lab"
+    tag: "Learning Center"
+    text: "Interactive Lab: Core Web Vitals"
   - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
     tag: "Blog"
     text: "Real User Monitoring"
@@ -18,10 +21,6 @@ further_reading:
     tag: "Documentation"
     text: "Learn about RUM Dashboards"
 ---
-
-{{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Enrich your RUM data with feature flags to get visibility into performance monitoring. <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
-{{< /callout >}}
 
 ## Overview
 
@@ -42,7 +41,7 @@ You can access performance metrics for your views in:
 
 [Google's Core Web Vitals][5] are a set of three metrics designed to monitor a site's user experience. These metrics focus on giving you a view of load performance, interactivity, and visual stability. Each metric comes with guidance on the range of values that translate to good user experience. Datadog recommends monitoring the 75th percentile for these metrics.
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization"  >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="Core Web Vitals summary visualization" >}}
 
 - First Input Delay and Largest Contentful Paint are not collected for pages opened in the background (for example, in a new tab or a window without focus).
 - Metrics collected from your real users' page views may differ from those calculated for pages loaded in a fixed, controlled environment such as a [Synthetic browser test][6]. Synthetic Monitoring displays Largest Contentful Paint and Cumulative Layout Shift as lab metrics, not real metrics.
