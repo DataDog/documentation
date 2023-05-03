@@ -109,7 +109,7 @@ The values on the left side is the time spent in that method call during the sel
 - **Monitor enter** shows the time a thread is blocked on a lock.
 - **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
 
-Clicking on the plus `+` expands the stack trace to that method **in reverse order**. Hovering over the value shows what percentage of time is explained by which category.
+Click the plus icon `+` to expand the stack trace to that method **in reverse order**. Hover over the value to see the percentage of time explained by category.
 
 ### Viewing a profile from a trace
 
