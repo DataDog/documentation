@@ -21,7 +21,7 @@ further_reading:
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated from, and the server is where the connection was sent to.
+To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection was sent to.
 
 **NEW DIAGRAM**
 
@@ -41,7 +41,7 @@ Tags from Datadog integrations or Unified Service Tagging can be used for aggreg
 
 ### Facet panels
 
-Facet panels can be used to browse through all of the tags available on your flows, or filter traffic when you don't remember the exact tags you were looking for. Facet panels mirror the tags in your search bar query. Switch between the facet panels with the **Client** and **Server** tabs on top:
+You can use the facet panels to browse through all of the tags available on your flows, or filter traffic when you don't remember the exact tags you were looking for. Facet panels mirror the tags in your search bar query. Switch between the facet panels with the **Client** and **Server** tabs on top:
 
 {{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel" style="width:20%;">}}
 
@@ -74,7 +74,7 @@ To learn more, see the [search syntax][1] documentation.
 
 ### Group by
 
-Groups allow you to split your data by a tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to not to group anything using **Ungrouped traffic**. Oftentimes large chunks of data are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whatever tags are available. 
+Groups allow you to filter your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to not group by a tag using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
 
 ## Network data
 
