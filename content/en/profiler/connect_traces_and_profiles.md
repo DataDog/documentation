@@ -115,7 +115,7 @@ Clicking on the plus `+` expands the stack trace to that method **in reverse ord
 
 {{< img src="profiler/flamegraph_view.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
 
-For each type from the breakdown, click **View In Full Page** to view the same data in the full page view. From there you can change visualization to the flame graph.
+For each type from the breakdown, click **View In Full Page** to see the same data opened up in a in a new page . From there you can change visualization to the flame graph.
 Click the **Focus On** selector to define the scope of the data:
 
 - **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
