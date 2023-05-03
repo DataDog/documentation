@@ -55,7 +55,7 @@ Finally, the metric is aggregated by shard to get the final values below:
 | `shard:1`                  | 46           | 16               |
 
 
-The `weighted()` modifier provides a weighted average of each of the two shards according to the amount of time they were submitting data. 
+The `weighted()` function remedies any inconsistent behavior with short-lived tags by weighing the values against their submission rate
 
 ## Further reading
 
