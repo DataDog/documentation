@@ -33,7 +33,7 @@ The raw data over 60 seconds could resemble:
 | `app:c`, `version:1`   | NAN | NAN  | NAN  | NAN  | 12   | 12   |
 | `app:d`, `version:2`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
 | `app:e`, `version:2`   | NAN | 16   | 16   | 16   | NAN  | NAN  |
-| `pod:f`, `shard:2`   | NAN | NAN  | NAN  | NAN  | 18   | 18   |
+| `app:f`, `version:2`   | NAN | NAN  | NAN  | NAN  | 18   | 18   |
 
 
 1. _Time Aggregation -- Rolling up data_
