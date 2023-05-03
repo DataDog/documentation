@@ -40,7 +40,7 @@ The raw data over 60 seconds could resemble:
 With time aggregation, we're rolling up data either `avg` (without weighted) or the proposed `weighted` average: 
 | Time aggregation   | .rollup(avg) | With .weighted() |
 | ----------------   | ------------ | ---------------- |
-| `pod:a`, `shard:1` | 12           | 2.0              |
+| `app:a`, `version:1` | 12           | 2.0              |
 | `pod:b`, `shard:1` | 12           | 6.0              |
 | `app:c`, `version:1` | 12           | 4.0              |
 | `pod:d`, `shard:2` | 12           | 2.0              |
