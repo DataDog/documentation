@@ -99,9 +99,6 @@ content/en/serverless/libraries_integrations/cli.md
 content/en/serverless/libraries_integrations/cdk.md
 content/en/serverless/libraries_integrations/extension.md
 
-# rum
-content/en/real_user_monitoring/error_tracking/android.md
-
 # workflows
 content/en/workflows/actions_catalog/*
 data/workflows/
