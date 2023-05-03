@@ -140,7 +140,7 @@ Run your tests using the `MAVEN_OPTS` environment variable to specify the path t
 When specifying tracer arguments, include the following:
 
 * Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env property` (e.g. `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Define the environment where the tests are being run using the `dd.env property` (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 * Define the name of the service or library being tested in the `dd.service property`.
 
 For example:
@@ -164,7 +164,7 @@ Run your tests using the `org.gradle.jvmargs` system property to specify the pat
 When specifying tracer arguments, include the following:
 
 * Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env property` (e.g. `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Define the environment where the tests are being run using the `dd.env property` (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 * Define the name of the service or library being tested in the `dd.service property`.
 
 For example:
