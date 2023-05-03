@@ -48,8 +48,8 @@ With time aggregation, we're rolling up data either `avg` (without weighted) or 
 | `app:f`, `version:2` | 18           | 6.0              |
 
 2. _Space Aggregation_ 
-Finally, the metric is aggregated by shard to get the final values below: 
-| Space aggregation by shard | .rollup(avg) | With .weighted() |
+Finally, the metric is aggregated by version to get the final values below: 
+| Space aggregation by version | .rollup(avg) | With .weighted() |
 | ------------------------   | ------------ | ---------------- |
 | `version:1`                  | 36           | 12               |
 | `version:2`                  | 46           | 16               |
