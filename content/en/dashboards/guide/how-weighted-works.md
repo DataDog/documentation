@@ -43,7 +43,7 @@ With time aggregation, we're rolling up data either `avg` (without weighted) or 
 | `app:a`, `version:1` | 12           | 2.0              |
 | `app:b`, `version:1` | 12           | 6.0              |
 | `app:c`, `version:1` | 12           | 4.0              |
-| `pod:d`, `shard:2` | 12           | 2.0              |
+| `app:d`, `version:2` | 12           | 2.0              |
 | `app:e`, `version:2` | 16           | 8.0              |
 | `app:f`, `version:2` | 18           | 6.0              |
 
