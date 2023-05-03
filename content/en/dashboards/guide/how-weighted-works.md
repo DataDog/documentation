@@ -22,7 +22,7 @@ Consider this query with the following assumptions: <br>
 
 - The gauge metric's submission interval is defined at 10 seconds. 
 - A datapoint is graphed every 60 seconds in time.
-- There is a Kubernetes cluster with 2 pods at any given time. Each pod is labeled with a shard and there is only ever 1 pod per shard. 
+- There is a Kubernetes pod with 2 versions at any given time. Each version is labeled with an app and there is only ever 1 version per app.
 
 With a couple of deploys that switch out pods, the raw data over 60 seconds could resemble: 
 
