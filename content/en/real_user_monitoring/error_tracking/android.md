@@ -1,13 +1,14 @@
 ---
 title: Android Crash Reporting and Error Tracking
 kind: documentation
+description: Set up Error Tracking for your Android applications.
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
-tag: 'Error Tracking'
-text: 'Get started with Error Tracking'
+  tag: 'Error Tracking'
+  text: 'Get started with Error Tracking'
 - link: '/real_user_monitoring/error_tracking/explorer'
-tag: 'Documentation'
-text: 'Visualize Error Tracking data in the Explorer'
+  tag: 'Documentation'
+  text: 'Visualize Error Tracking data in the Explorer'
 ---
 
 ## Overview
