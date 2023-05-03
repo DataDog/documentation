@@ -324,7 +324,7 @@ helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
   --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -335,7 +335,7 @@ instances:
     ssl: true
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<YOUR_INSTANCE_NAME>" \
+      name: "<YOUR_INSTANCE_NAME>"' \
   datadog/datadog
 ```
 

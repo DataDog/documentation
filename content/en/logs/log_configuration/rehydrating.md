@@ -7,10 +7,6 @@ aliases:
   - /logs/archives/rehydrating/
 ---
 
-{{< site-region region="ap1" >}}
-<div class="alert alert-warning">Log Rehydration* is not supported in the AP1 region.</div>
-{{< /site-region >}}
-
 ## Overview
 
 Log Rehydration* enables you to capture log events from customer-owned storage-optimized archives back into Datadog's search-optimized [Log Explorer][1], so that you can use Datadog to analyze or investigate log events that are either old or were excluded from indexing.
@@ -47,7 +43,7 @@ If you download historical views as a CSV, the data is limited to the last 90 da
 
 8. (Optional) **Notify** trigger notifications on rehydration completion through [integrations][6] with the @handle syntax.
 
-{{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive"  style="width:75%;">}}
+{{< img src="logs/archives/log_rehydration_setup.png" alt="Reload from Archive" style="width:75%;">}}
 
 **Note**: The query is applied _after_ the files matching the time period are downloaded from your archive. To reduce your cloud data transfer cost, reduce the selected date range.
 
@@ -99,7 +95,7 @@ Historical views stay in Datadog until they have exceeded the selected retention
 
 One hour later, the historical view is definitively deleted; until that time, the team is able to cancel the deletion.
 
-{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true"  width="75%" >}}
+{{< img src="logs/archives/log_archives_rehydrate_delete.mp4" alt="Deleting Historical Views" video="true" width="75%" >}}
 
 ### Viewing deleted historical views
 
@@ -155,7 +151,7 @@ In order to rehydrate log events from your archives, Datadog uses the IAM Role i
 
 Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. Once you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
-{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" style="width:75%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
@@ -166,7 +162,7 @@ Datadog only supports rehydrating from archives that have been configured to use
 
 Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
 
-{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role"  style="width:75%;">}}
+{{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role" style="width:75%;">}}
 
 
 [1]: /logs/archives/?tab=azurestorage#create-and-configure-a-storage-bucket
@@ -176,7 +172,7 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting Storage > Storage Object Viewer.
 
-{{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role"  style="width:75%;">}}
+{{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" style="width:75%;">}}
 
 [1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}

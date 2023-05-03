@@ -15,7 +15,8 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
-
+algolia:
+  tags: ['database monitoring', 'dbm']
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>

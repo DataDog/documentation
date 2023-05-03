@@ -84,7 +84,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
 
  - **Alert values and Check statuses**: Show big red, yellow, and green numbers to bring attention to successes or problems.
  - **Heatmaps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
-   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example"  >}}
+   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example" >}}
  - **iFrames, formatted text, and images**: Show any number of website-like details to help explain the dashboard contents and provide additional resources.
  - **Tables**: Show lists of metrics grouped by tag keys.
  - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
