@@ -31,7 +31,7 @@ The raw data over 60 seconds could resemble:
 | `app:a`, `version:1`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
 | `app:b`, `version:1`   | NAN | 12   | 12   | 12   | NAN  | NAN  |
 | `app:c`, `version:1`   | NAN | NAN  | NAN  | NAN  | 12   | 12   |
-| `pod:d`, `shard:2`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
+| `app:d`, `version:2`   | 12  | NAN  | NAN  | NAN  | NAN  | NAN  |
 | `pod:e`, `shard:2`   | NAN | 16   | 16   | 16   | NAN  | NAN  |
 | `pod:f`, `shard:2`   | NAN | NAN  | NAN  | NAN  | 18   | 18   |
 
