@@ -11,13 +11,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
   text: "Track the status of all your SLOs in Datadog"
+- link: "/dashboards/guide/slo_graph_query"
+  tag: "Documentation"
+  text: "Scope metric-based SLO queries"
 ---
 
 ## Setup
 
 Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
-{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor "  >}}
+{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor " >}}
 
 ### Configuration
 
