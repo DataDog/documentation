@@ -7,8 +7,6 @@ kind: faq
 title: Datadog Operator 고급 설정
 ---
 
-<div class="alert alert-warning">Datadog Operator는 오픈 베타 상태입니다. 피드백이나 궁금하신 점이 있다면 <a href="/help">Datadog 지원팀</a>에 문의해주세요.</div>
-
 [Datadog Operator][1]는 쿠버네티스나 OpenShift에 Datadog Agent를 배포하는 방법입니다. 커스텀 리소스(Custom Resource) 상태에서 배포 상황, 건전성, 오류를 보고하고 고급 설정 옵션을 지원해 설정 오류가 발생할 위험을 줄여줍니다.
 
 ## 전제 조건
