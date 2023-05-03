@@ -75,7 +75,7 @@ custom_queries:
       - name: localisation
         type: tag
     tags:
-      - query:custom
+      - 'query:custom'
 ```
 
 After you update the SQL Server YAML file, [restart the Datadog Agent][7].

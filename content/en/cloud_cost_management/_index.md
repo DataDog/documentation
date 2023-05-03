@@ -191,7 +191,6 @@ The rule stops executing for each resource, once a first match is found. For exa
 {{% /tab %}}
 
 {{% tab "Azure" %}}
-<div class="alert alert-warning">Azure Cloud Cost Management is in private beta. Fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSftAIq_g4GxBAKdWV5OjP0Ui4CAjWTzH3YCKy3n930gMz0Krg/viewform?usp=sf_link">form</a> to request access.</div>
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 

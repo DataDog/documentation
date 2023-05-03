@@ -685,7 +685,7 @@ track_custom_event(tracer, event_name, metadata)
 [2]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [3]: /security/application_security/threats/add-user-info/#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [4]: /security/default_rules/bl-rate-limiting/
-[5]: /security/default_rules/bl-privilege-violation/
+[5]: /security/default_rules/bl-privilege-violation-user/
 [6]: /security/default_rules/appsec-ato-groupby-ip/
 [7]: /security/default_rules/bl-signup-ratelimit/
 [8]: /security/default_rules/bl-account-deletion-ratelimit/
