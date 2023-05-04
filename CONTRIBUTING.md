@@ -39,7 +39,7 @@ The purpose of the Docs site is to clearly inform readers about how to use Datad
 - **Recommended**: Configure this thing. Optionally, configure that thing.
 - **Not recommended**: You must configure this thing, and you may want to configure that thing.
 
-**Don't wax philosophical**: Think pieces and pontification belong on the corporate blog.
+**Don't wax philosophical**: Think pieces and pontification don't belong on the Docs site.
 
 **Don't constantly explain basic Datadog features**: Outside of introductory material, don't tell readers again and again that metrics submitted to Datadog may be graphed alongside other metrics, have events overlaid onto them, etc. It's okay to point out cases that are compelling and specific, such as "Overlay Jenkins deploys onto a graph of your application response times", but don't re-explain Datadog; instead, provide a useful description that enhances understanding of the feature.
 
