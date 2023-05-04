@@ -322,23 +322,19 @@ A comma-separated list of query parameters to be collected as part of the URL. S
 A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
 **Example**: 
   - The posted data is `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
-  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`<br>
+  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`
   - In this scenario, the collected metadata is:
     - `http.request.foo.bar.password=Password12!`
     - `http.request.foo.bar.username=<redacted>`
     - `http.request.foo.baz.bar=qux`
     - `http.request.foo.baz.key=value`
-    - `http.request.qux=<redacted>`
-    
+    - `http.request.qux=<redacted>`<br>
 With the same example, if the configuration variable is instead set to the wildcard, then the collected metadata is:
   - `http.request.foo.bar.password=<redacted>`
   - `http.request.foo.bar.username=admin`
   - `http.request.foo.baz.bar=qux`
   - `http.request.foo.baz.key=<redacted>`
   - `http.request.qux=quux`
-
-  
-
 
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
