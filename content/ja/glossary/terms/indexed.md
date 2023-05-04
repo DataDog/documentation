@@ -17,7 +17,7 @@ title: インデックス化
 
 タグがスパンに追加されたら、タグをクリックして[ファセット][7]として追加し、Analytics でタグを検索およびクエリします。これが完了すると、このタグの値はすべての新しいトレースに保存され、検索バー、ファセットパネル、トレースグラフクエリで使用できます。
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成"  style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成" style="width:50%;">}}
 
 [1]: /ja/logs/
 [2]: /ja/glossary/#span
