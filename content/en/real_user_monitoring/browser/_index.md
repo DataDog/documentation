@@ -167,7 +167,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -193,7 +194,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -219,7 +221,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -245,7 +248,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -271,7 +275,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -297,7 +302,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -329,7 +335,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -355,7 +362,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -381,7 +389,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -407,7 +416,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -459,7 +469,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -489,7 +500,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -513,7 +525,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+   DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -537,7 +550,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -561,7 +575,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -585,7 +600,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -609,7 +625,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -639,7 +656,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -663,7 +681,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -687,7 +706,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -711,7 +731,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -735,7 +756,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -759,7 +781,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
