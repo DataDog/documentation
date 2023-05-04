@@ -98,7 +98,8 @@ def download_content_from_external_source(self, content):
         * cache is disabled
         * this is a local run or master pipeline
     """
-    return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') in (None, 'master'))
+    return False
+    # return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') in (None, 'master'))
 
 
 def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
@@ -249,7 +250,12 @@ def download_cached_content_into_repo(self):
         if action == 'pull-and-push-file':
             dest_path = content.get('options', {}).get('dest_path')
             dest_file_name = content.get('options', {}).get('file_name')
-            full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
+            base_path = content.get('options', {}).get('base_path')
+
+            if base_path is not None and base_path == '':
+                full_dest_path = f'{dest_path}{dest_file_name}'
+            else:
+                full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
 
             if dest_file_name.endswith('.md'):
                 os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
