@@ -1,5 +1,5 @@
 ---
-title: Configuring an APM stats graph
+title: Configuring An APM Stats Graph
 kind: guide
 disable_toc: false
 aliases:
@@ -7,8 +7,10 @@ aliases:
 further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"
-  text: "Querying graphs"
+  text: "Learn how to query graphs"
 ---
+
+## Overview
 
 To configure your graph using APM stats data, follow these steps:
 
@@ -18,12 +20,12 @@ To configure your graph using APM stats data, follow these steps:
 4. [Title the graph](#create-a-title) (same as for Metrics)
 
 ### Level of detail
-Choose what level of detail you want to see statistics for: one or more services, resources, or spans. (Not all of these are available for every widget type.)
+Choose what level of detail you want to see statistics for: one or more services, resources, or spans. Not all of these are available for every widget type.
 
 ### APM stats parameters
 Select the following parameters from the graphing editor: Environment (`env`), Primary tag (`primary_tag`), Service (`service`), and Operation name (`name`).
 
-If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
+If your level of detail is `resource` or `span`, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
 
 ## Further reading
 
