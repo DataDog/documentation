@@ -2,10 +2,9 @@
 title: RUM Error Tracking Explorer
 kind: documentation
 beta: true
-private: true
 ---
 
-{{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer"  >}}
+{{< img src="real_user_monitoring/error_tracking/explorer.png" alt="Error Tracking Explorer" >}}
 
 ## Explore your issues
 
@@ -22,13 +21,13 @@ Each item listed in the Explorer is an issue and contains high-level information
 
 ### Time range
 
-{{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking Time Range"  >}}
+{{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking Time Range" >}}
 
 The time range appears on the top right of the Explorer as a timeline. This feature allows you to display issues having error occurrences within the selected time period. Change the time range by selecting a preset range from the dropdown.
 
 ### Facets
 
-{{< img src="real_user_monitoring/error_tracking/facet.png" alt="Error Tracking Facets"  >}}
+{{< img src="real_user_monitoring/error_tracking/facet.png" alt="Error Tracking Facets" >}}
 
 Error Tracking automatically indexes a predefined list of attributes from your issues and creates facets out of it. A facet displays all the distinct members of an attribute for the selected time period and provides some basic analytics, such as the number of issues represented. Facets allow you to pivot or filter your issues based on the given attribute.
 
@@ -36,11 +35,11 @@ Error Tracking automatically indexes a predefined list of attributes from your i
 
 Click on any issue to open the issue panel and see more information about it.
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel"  >}}
+{{< img src="real_user_monitoring/error_tracking/issue_panel_upper_part.png" alt="Upper Part of the Error Tracking issue panel" >}}
 
 The high-level details you need when troubleshooting an issue can be found in the upper part of the panel. From here, you can understand its lifecycle: first and last occurrence dates, total count, as well as the count over time for the given issue.
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel"  >}}
+{{< img src="real_user_monitoring/error_tracking/issue_panel_lower_part.png" alt="Lower Part of the Error Tracking Issue Panel" >}}
 
 The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you information while troubleshooting, for example:
 

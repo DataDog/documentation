@@ -21,7 +21,7 @@ Web applications can embed a lot of logic, and although end-to-end tests are oft
 
 You can **upload a file** to validate the final step of a functional workflow to test a profile creation. When uploading a file at the test recorder level, Datadog Synthetic browser tests automatically identify the uploaded file and create the [`Upload file` associated step][1]. It is then able to upload that file again at test execution.
 
-{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Upload File" video="true"  width="100%">}}
+{{< img src="synthetics/guide/testing-a-downloaded-file/upload_file.mp4" alt="Upload File" video="true" width="100%">}}
 
 ## Testing a file download
 

@@ -20,7 +20,7 @@ short_description: Azure Diagnostic Extension のキーメトリクスを追跡
 version: '1.0'
 ---
 
-<div class="alert alert-warning">このインテグレーションは非推奨です。Azure VM に対する同様のゲストレベルおよびプロセスレベルの洞察については、Datadog Agent をインストールしてください。
+<div class="alert alert-warning">このインテグレーションは非推奨です。Datadog Agent をインストールすることで、Azure VM のゲストレベルおよびプロセスレベルのインサイトを、より詳細な粒度とレイテンシーで把握することができます。
 
 このページに記載されているメトリクスは、新しく作成された Datadog 組織には入力されなくなりました。既存のユーザーについては、これらのメトリクスは 2023 年 6 月 1 日に無効化されます。
 

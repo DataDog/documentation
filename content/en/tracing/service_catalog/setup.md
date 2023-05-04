@@ -57,7 +57,7 @@ To prevent accidental overwriting, create and modify your service definition fil
 
 ## Automate service definition updates with Terraform
 
-The Service Catalog provides a service definition as a Terraform resource. Creating and managing services in the Service Catalog through automated pipelines requires [Datadog Provider][8] v3.16.0 or later.
+The Service Catalog provides a service definition as a [Terraform resource][14]. Creating and managing services in the Service Catalog through automated pipelines requires [Datadog Provider][8] v3.16.0 or later.
 
 For more information, see the [Datadog Provider documentation][9].
 
@@ -96,4 +96,5 @@ To remove your imported services from the default **Explore** view, click **Clea
 [11]: https://docs.datadoghq.com/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [13]: https://app.datadoghq.com/personal-settings/profile
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 
