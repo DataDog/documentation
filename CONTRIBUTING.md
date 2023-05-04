@@ -98,7 +98,7 @@ Avoid temporal words like "currently", "now", "will", etc. Describe the present 
 
 ### Words and phrases
 
-The [Gobwords Style Guide][4] is an index of commonly mis-capitalized, mispunctuated, and misused words that often appear on the corporate blog. Use this word guide when writing for the Docs site, too.
+The [datadog-vale][4] repo contains a set of linting rules for Vale based on the Documentation Style Guide. You can refer to the rules when writing for the Docs site.
 
 Otherwise, here are some words and phrases to avoid or use sparingly:
 
@@ -196,7 +196,7 @@ Use text formatting to clarify and enhance content.
 [1]: https://github.com/DataDog/documentation/wiki
 [2]: https://tools.ietf.org/html/rfc2119
 [3]: https://tools.ietf.org/html/rfc2606
-[4]: https://github.com/DataDog/gobwords/wiki/Style-guide
+[4]: https://github.com/DataDog/datadog-vale
 [5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/
