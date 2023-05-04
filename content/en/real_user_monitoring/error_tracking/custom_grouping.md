@@ -1,7 +1,7 @@
 ---
 title: Custom Grouping
 kind: documentation
-description: Customize how RUM errors are grouped into issues.
+description: Customize how Browser RUM errors are grouped into issues.
 further_reading:
 - link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
   tag: "GitHub"
