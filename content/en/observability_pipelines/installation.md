@@ -150,14 +150,7 @@ Before installing, make sure you:
     sudo yum install observability-pipelines-worker
     ```
 
-3. Run the following commands to update your local `apt` repo and install the Worker:
-
-    ```
-    sudo apt-get update
-    sudo apt-get install observability-pipelines-worker datadog-signing-keys
-    ```
-
-4. Add your keys to the Worker's bootstrap file:
+3. Add your keys to the Worker's bootstrap file:
 
     ```
     sudo sed -i -e 's/${DD_API_KEY}/<API_KEY>/' /etc/observability-pipelines-worker/bootstrap.yaml
@@ -165,7 +158,7 @@ Before installing, make sure you:
     sudo sed -i -e 's/${DD_SITE.*}/<DD_SITE>/' /etc/observability-pipelines-worker/bootstrap.yaml
     ```
 
-5. Start the worker:
+4. Start the worker:
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
