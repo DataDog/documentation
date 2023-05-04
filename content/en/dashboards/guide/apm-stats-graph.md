@@ -14,10 +14,10 @@ further_reading:
 
 To configure your graph using APM stats data, follow these steps:
 
-1. [Select your visualization](#select-your-visualization) (same as for Metrics)
-2. [Choose your level of detail](#level-of-detail)
-3. [Choose your parameters](#apm-stats-parameters)
-4. [Title the graph](#create-a-title) (same as for Metrics)
+1. Select your visualization from the available [widgets][1].
+2. [Choose your level of detail](#level-of-detail).
+3. [Choose your parameters](#apm-stats-parameters).
+4. Title the graph (same as for Metrics).
 
 ### Level of detail
 Choose what level of detail you want to see statistics for: one or more services, resources, or spans. Not all of these are available for every widget type.
@@ -30,3 +30,5 @@ If your level of detail is `resource` or `span`, some widget types also require 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /dashboards/widgets/
