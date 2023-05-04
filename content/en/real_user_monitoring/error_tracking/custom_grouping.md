@@ -45,7 +45,7 @@ either by adding a `dd_fingerprint` attribute to the error object
 import { datadogRum } from '@datadog/browser-rum';
 // Send a custom error with context
 const error = new Error('Something went wrong');
-error.dd_fingerprint = 'my-custom-grouping-material'
+error.dd_fingerprint = 'my-custom-grouping-fingerprint'
 datadogRum.addError(error);
 ```
 
@@ -56,7 +56,7 @@ DD_RUM.init({
   ...
   beforeSend: () => {
     if (event.type === 'error') {
-      event.error.fingerprint = 'my-custom-grouping-material'
+      event.error.fingerprint = 'my-custom-grouping-fingerprint'
     }
   },
 })
