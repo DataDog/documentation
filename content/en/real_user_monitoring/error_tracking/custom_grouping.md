@@ -29,7 +29,7 @@ If `error.fingerprint` is provided, the grouping behavior follows these rules:
 * RUM errors from the same service and with the same `error.fingerprint` attribute are grouped into the same issue.
 * RUM errors with different `service` attributes are grouped into different issues.
 
-## Setup for broswer errors
+## Setup for browser errors
 
 Custom grouping needs the [browser-sdk v4.42.0][3] (or more recent), a browser RUM error and an additional
 string attribute.
