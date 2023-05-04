@@ -28,7 +28,7 @@ further_reading:
   text: "Real-time distributed tracing for .NET Lambda functions"
 ---
 
-{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions"  style="width:100%;">}}
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="Trace Serverless Functions" style="width:100%;">}}
 
 By connecting your serverless traces to metrics, Datadog provides a context-rich picture of your application's performance, allowing you to better troubleshoot performance issues given the distributed nature of serverless applications.
 
@@ -177,7 +177,7 @@ Then, for X-Ray and Datadog APM traces to appear in the same flame graph, all se
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="trace of a request from a host to a Lambda function" >}}
 
 ## Trace Propagation
-{{< img src="serverless/lambda-non-http-trace.png" alt="Serverless Distributed Non-HTTP Trace"  style="width:100%;" >}}
+{{< img src="serverless/lambda-non-http-trace.png" alt="Serverless Distributed Non-HTTP Trace" style="width:100%;" >}}
 
 ### Required setup
 
