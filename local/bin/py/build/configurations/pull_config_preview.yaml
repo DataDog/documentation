@@ -1,6 +1,7 @@
 ---
+# Please make sure to switch cache_enabled to true after running any tests in preview.
 - config:
-    cache_enabled: false
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
