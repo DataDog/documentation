@@ -41,14 +41,14 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
 
 5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Upload and Enable** button.
-    {{< img src="account_management/saml/saml_enable.png" alt="saml enable"  >}}
+    {{< img src="account_management/saml/saml_enable.png" alt="saml enable" >}}
     
 6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
 
 7. Once SAML is configured in Datadog and your IdP is set up to accept requests from Datadog, users can log in:
 
    - **If using SP-initiated login** (Service Provider, or login initiated from Datadog): By using the **Single Sign-on URL** shown in the Status box at the top of the [SAML Configuration page][19]. The **Single Sign-on URL** is also displayed on the [Team page][20]. Loading this URL initiates a SAML authentication against your IdP. **Note**: This URL isn't displayed unless SAML is enabled for your account and you are using SP-initiated login.
-    {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled"  >}}
+    {{< img src="account_management/saml/saml_enabled.png" alt="Saml Enabled" >}}
 
    - **If using IdP-initiated login** (Identity Provider, or login initiated from your app portal): By clicking on the app icon in your app portal, for example in the Google App drawer or the Okta App Portal. In some scenarios users logging in with the SP-initiated login URL will also work with the IdP-initiated login experiences, but this depends on your Identity Provider's configuration and support.
 
@@ -107,7 +107,7 @@ It's important to understand what is sent in an assertion before turning on mapp
 
    For example, if you want all users whose `member_of` attribute has a value of `Development` to be assigned to a custom Datadog role called `Devs`:
 
-    {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role"  >}}
+    {{< img src="account_management/saml/create_mapping.png" alt="Creating a SAML mapping to Datadog Role" >}}
 
    **Note**: Every identity provider is different. Some allow you to set your attribute key or label. Others provide one by default. Datadog recommends you use an assertion inspector on your login to view the details of your particular assertion to understand how your Identity Provider is sending your group membership.
 

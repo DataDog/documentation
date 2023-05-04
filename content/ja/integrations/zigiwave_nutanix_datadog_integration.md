@@ -35,7 +35,7 @@ pricing:
   product_id: nutanix-integration
   short_description: 接続された Datadog/Nutanix インスタンスの月額ライセンス
   unit_price: 750.0
-public_title: Nutanix インテグレーション
+public_title: Nutanix
 short_description: Datadog と Nutanix のノーコードインテグレーション
 supported_os:
 - linux
@@ -60,7 +60,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Nutanix インテグレーション
+  title: Nutanix
   uninstallation: README.md#Uninstallation
 ---
 

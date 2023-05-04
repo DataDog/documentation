@@ -7,8 +7,6 @@ kind: faq
 title: Datadog Operator 고급 설정
 ---
 
-<div class="alert alert-warning">Datadog Operator는 오픈 베타 상태입니다. 피드백이나 궁금하신 점이 있다면 <a href="/help">Datadog 지원팀</a>에 문의해주세요.</div>
-
 [Datadog Operator][1]는 쿠버네티스나 OpenShift에 Datadog Agent를 배포하는 방법입니다. 커스텀 리소스(Custom Resource) 상태에서 배포 상황, 건전성, 오류를 보고하고 고급 설정 옵션을 지원해 설정 오류가 발생할 위험을 줄여줍니다.
 
 ## 전제 조건
@@ -35,7 +33,7 @@ Datadog Operator를 사용하려면 쿠버네티스 클러스터에 배포해야
 
 ## Operator로 Datadog Agents 배포하기
 
-Datadog Operator를 배포한 후,  쿠버네티스 클러스터에서 Datadog Agent의 배포를 트리거하는 `DatadogAgent` 리소스를 생성하세요. 이 리소스를  `Datadog-Operator` 네임스페이스에서 생성하면 Agent가 클로스터의 모든 `Node`에서 `DaemonSet`로 배포됩니다.
+Datadog Operator를 배포한 후, 쿠버네티스 클러스터에서 Datadog Agent의 배포를 트리거하는 `DatadogAgent` 리소스를 생성하세요. 이 리소스를  `Datadog-Operator` 네임스페이스에서 생성하면 Agent가 클로스터의 모든 `Node`에서 `DaemonSet`로 배포됩니다.
 
 다음 템플릿 중 하나를 활용해 `datadog-agent.yaml` 매니페스트를 생성하세요.
 

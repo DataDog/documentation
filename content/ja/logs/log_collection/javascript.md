@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - ブラウザログ
 aliases:
 - /ja/logs/log_collection/web_browser
 kind: documentation
@@ -62,10 +65,34 @@ datadogLogs.init({
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js','DD_LOGS')
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
+            clientToken: '<DATADOG_CLIENT_TOKEN>',
+            site: 'datadoghq.com',
+            forwardErrorsToLogs: true,
+            sessionSampleRate: 100,
+          })
+        })
+      </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+      <script>
+      (function(h,o,u,n,d) {
+        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+        d=o.createElement(u);d.async=1;d.src=n
+        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+      })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js','DD_LOGS')
       DD_LOGS.onReady(function() {
           DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
-            site: 'datadoghq.com',
+            site: 'ap1.datadoghq.com',
             forwardErrorsToLogs: true,
             sessionSampleRate: 100,
           })
@@ -86,8 +113,8 @@ datadogLogs.init({
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'datadoghq.eu',
             forwardErrorsToLogs: true,
@@ -110,8 +137,8 @@ datadogLogs.init({
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'us3.datadoghq.com',
             forwardErrorsToLogs: true,
@@ -134,8 +161,8 @@ datadogLogs.init({
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'us5.datadoghq.com',
             forwardErrorsToLogs: true,
@@ -158,8 +185,8 @@ datadogLogs.init({
         d=o.createElement(u);d.async=1;d.src=n
         n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
       })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-logs-v4.js','DD_LOGS')
-      DD_LOGS.onReady(function() {
-          DD_LOGS.init({
+      window.DD_LOGS.onReady(function() {
+          window.DD_LOGS.init({
             clientToken: '<DATADOG_CLIENT_TOKEN>',
             site: 'ddog-gov.com',
             forwardErrorsToLogs: true,
@@ -173,7 +200,7 @@ datadogLogs.init({
 {{</ site-region>}}
 
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 ### CDN 同期
 
@@ -187,9 +214,28 @@ datadogLogs.init({
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'datadoghq.com',
+          forwardErrorsToLogs: true,
+          sessionSampleRate: 100,
+        })
+    </script>
+  </head>
+</html>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<html>
+  <head>
+    <title>Example to send logs to Datadog</title>
+    <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
+    <script>
+      window.DD_LOGS &&
+        DD_LOGS.init({
+          clientToken: '<DATADOG_CLIENT_TOKEN>',
+          site: 'ap1.datadoghq.com',
           forwardErrorsToLogs: true,
           sessionSampleRate: 100,
         })
@@ -206,7 +252,7 @@ datadogLogs.init({
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'datadoghq.eu',
           forwardErrorsToLogs: true,
@@ -225,7 +271,7 @@ datadogLogs.init({
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'us3.datadoghq.com',
           forwardErrorsToLogs: true,
@@ -244,7 +290,7 @@ datadogLogs.init({
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'us5.datadoghq.com',
           forwardErrorsToLogs: true,
@@ -263,7 +309,7 @@ datadogLogs.init({
     <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
     <script>
       window.DD_LOGS &&
-        DD_LOGS.init({
+        window.DD_LOGS.init({
           clientToken: '<DATADOG_CLIENT_TOKEN>',
           site: 'ddog-gov.com',
           forwardErrorsToLogs: true,
@@ -343,17 +389,17 @@ datadogLogs.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 #### CDN 非同期
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 #### CDN 同期
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
+window.DD_LOGS && window.DD_LOGS.logger.info('Button clicked', { name: 'buttonName', id: 123 })
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK の読み込みに失敗した場合の問題を防止します。
@@ -429,13 +475,13 @@ try {
   throw new Error('Wrong behavior')
   ...
 } catch (ex) {
-  DD_LOGS.onReady(function () {
-    DD_LOGS.logger.error('Error occurred', {}, ex)
+  window.DD_LOGS.onReady(function () {
+    window.DD_LOGS.logger.error('Error occurred', {}, ex)
   })
 }
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 #### CDN 同期
 
@@ -445,7 +491,7 @@ try {
   throw new Error('Wrong behavior')
   ...
 } catch (ex) {
-    window.DD_LOGS && DD_LOGS.logger.error('Error occurred', {}, ex)
+    window.DD_LOGS && window.DD_LOGS.logger.error('Error occurred', {}, ex)
 }
 ```
 
@@ -494,19 +540,19 @@ datadogLogs.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function() {
-  DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
+window.DD_LOGS.onReady(function() {
+  window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 #### CDN 同期
 
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
+window.DD_LOGS && window.DD_LOGS.logger.log(<MESSAGE>,<JSON_ATTRIBUTES>,<STATUS>,<ERROR>);
 ```
 
 #### プレースホルダー
@@ -548,8 +594,8 @@ datadogLogs.init({
 #### CDN 非同期
 
 ```javascript
-DD_LOGS.onReady(function() {
-    DD_LOGS.init({
+window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
         ...,
         beforeSend: (log) => {
             // ビューの URL からメールを削除します
@@ -610,8 +656,8 @@ datadogLogs.init({
 #### CDN 非同期
 
 ```javascript
-DD_LOGS.onReady(function() {
-    DD_LOGS.init({
+window.DD_LOGS.onReady(function() {
+    window.DD_LOGS.init({
         ...,
         beforeSend: (log) => {
           // 404 ネットワークエラーを破棄します
@@ -690,21 +736,21 @@ signupLogger.info('Test sign up completed')
 たとえば、他のロガーと共に定義された `signupLogger` があります。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+window.DD_LOGS.onReady(function () {
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 })
 ```
 
 これで、次のように、このロガーをコードの別の場所で使用できます。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  const signupLogger = DD_LOGS.getLogger('signupLogger')
+window.DD_LOGS.onReady(function () {
+  const signupLogger = window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 ##### CDN 同期
 
@@ -712,7 +758,7 @@ DD_LOGS.onReady(function () {
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
+  const signupLogger = window.DD_LOGS.createLogger('signupLogger', 'info', 'http', { env: 'staging' })
 }
 ```
 
@@ -720,7 +766,7 @@ if (window.DD_LOGS) {
 
 ```javascript
 if (window.DD_LOGS) {
-  const signupLogger = DD_LOGS.getLogger('signupLogger')
+  const signupLogger = window.window.DD_LOGS.getLogger('signupLogger')
   signupLogger.info('Test sign up completed')
 }
 ```
@@ -773,55 +819,55 @@ datadogLogs.getGlobalContext() // => {}
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.setGlobalContext({ env: 'staging' })
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setGlobalContext({ env: 'staging' })
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.removeGlobalContextProperty('referrer')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.removeGlobalContextProperty('referrer')
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getGlobalContext() // => {env: 'staging'}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getGlobalContext() // => {env: 'staging'}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.clearGlobalContext()
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.clearGlobalContext()
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getGlobalContext() // => {}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getGlobalContext() // => {}
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 ##### CDN 同期
 
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setGlobalContext({ env: 'staging' })
+window.DD_LOGS && window.DD_LOGS.setGlobalContext({ env: 'staging' })
 
-window.DD_LOGS && DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
+window.DD_LOGS && window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer)
 
-window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
+window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {env: 'staging', referrer: ...}
 
-window.DD_LOGS && DD_LOGS.removeGlobalContextProperty('referrer')
+window.DD_LOGS && window.DD_LOGS.removeGlobalContextProperty('referrer')
 
-window.DD_LOGS && DD_LOGS.getGlobalContext() // => {env: 'staging'}
+window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {env: 'staging'}
 
-window.DD_LOGS && DD_LOGS.clearGlobalContext()
+window.DD_LOGS && window.DD_LOGS.clearGlobalContext()
 
-window.DD_LOGS && DD_LOGS.getGlobalContext() // => {}
+window.DD_LOGS && window.DD_LOGS.getGlobalContext() // => {}
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK の読み込みに失敗した場合の問題を防止します。
@@ -861,55 +907,55 @@ datadogLogs.getUser() // => {}
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.setUserProperty('type', 'customer')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setUserProperty('type', 'customer')
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.removeUserProperty('type')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.removeUserProperty('type')
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.clearUser()
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.clearUser()
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.getUser() // => {}
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getUser() // => {}
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 ##### CDN 同期
 
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
+window.DD_LOGS && window.DD_LOGS.setUser({ id: '1234', name: 'John Doe', email: 'john@doe.com' })
 
-window.DD_LOGS && DD_LOGS.setUserProperty('type', 'customer')
+window.DD_LOGS && window.DD_LOGS.setUserProperty('type', 'customer')
 
-window.DD_LOGS && DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
+window.DD_LOGS && window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com', type: 'customer'}
 
-window.DD_LOGS && DD_LOGS.removeUserProperty('type')
+window.DD_LOGS && window.DD_LOGS.removeUserProperty('type')
 
-window.DD_LOGS && DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
+window.DD_LOGS && window.DD_LOGS.getUser() // => {id: '1234', name: 'John Doe', email: 'john@doe.com'}
 
-window.DD_LOGS && DD_LOGS.clearUser()
+window.DD_LOGS && window.DD_LOGS.clearUser()
 
-window.DD_LOGS && DD_LOGS.getUser() // => {}
+window.DD_LOGS && window.DD_LOGS.getUser() // => {}
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK の読み込みに失敗した場合の問題を防止します。
@@ -938,25 +984,25 @@ datadogLogs.addContext('referrer', document.referrer)
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.setContext("{'env': 'staging'}")
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.setContext("{'env': 'staging'}")
 })
 
-DD_LOGS.onReady(function () {
-  DD_LOGS.addContext('referrer', document.referrer)
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.addContext('referrer', document.referrer)
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 ##### CDN 同期
 
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.setContext("{'env': 'staging'}")
+window.DD_LOGS && window.DD_LOGS.setContext("{'env': 'staging'}")
 
-window.DD_LOGS && DD_LOGS.addContext('referrer', document.referrer)
+window.DD_LOGS && window.DD_LOGS.addContext('referrer', document.referrer)
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK の読み込みに失敗した場合の問題を防止します。
@@ -986,19 +1032,19 @@ datadogLogs.logger.setLevel('<LEVEL>')
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.logger.setLevel('<LEVEL>')
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.logger.setLevel('<LEVEL>')
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 ##### CDN 同期
 
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.setLevel('<LEVEL>')
+window.DD_LOGS && window.DD_LOGS.logger.setLevel('<LEVEL>')
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK の読み込みに失敗した場合の問題を防止します。
@@ -1031,21 +1077,21 @@ datadogLogs.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.logger.setHandler('<HANDLER>')
-  DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.logger.setHandler('<HANDLER>')
+  window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 })
 ```
 
-**注**: 始めの API 呼び出しは `DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
+**注**: 始めの API 呼び出しは `window.DD_LOGS.onReady()` コールバックにラップされている必要があります。こうすることで、SDK が適切に読み込まれたときにのみコードが実行されるようにできます。
 
 ##### CDN 同期
 
 CDN 同期の場合は以下を使用します。
 
 ```javascript
-window.DD_LOGS && DD_LOGS.logger.setHandler('<HANDLER>')
-window.DD_LOGS && DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
+window.DD_LOGS && window.DD_LOGS.logger.setHandler('<HANDLER>')
+window.DD_LOGS && window.DD_LOGS.logger.setHandler(['<HANDLER1>', '<HANDLER2>'])
 ```
 
 **注**: `window.DD_LOGS` チェックは、SDK の読み込みに失敗した場合の問題を防止します。
@@ -1075,8 +1121,8 @@ datadogLogs.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
 CDN 非同期の場合は以下を使用します。
 
 ```javascript
-DD_LOGS.onReady(function () {
-  DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
+window.DD_LOGS.onReady(function () {
+  window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxxx-xxxx-xxxx" }
 })
 ```
 

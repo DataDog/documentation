@@ -313,7 +313,7 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
 
-Note: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
+**Note**: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
 
 ### Configuration files
 
@@ -327,9 +327,11 @@ Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site
 site: {{< region-param key="dd_site" >}}
 ```
 
+**Note**: See the [Getting Started with Datadog Sites documentation][11] for further details on the `site` parameter.
+
 ### Log location
 
-See the [Agent log files documentation][11].
+See the [Agent log files documentation][12].
 
 ## Further Reading
 
@@ -345,4 +347,5 @@ See the [Agent log files documentation][11].
 [8]: /agent/guide/integration-management/
 [9]: /agent/guide/agent-configuration-files/
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-log-files/
+[11]: /getting_started/site/
+[12]: /agent/guide/agent-log-files/

@@ -7,13 +7,14 @@ stages:
 variables:
   PREVIEW_CONFIG: "config/preview.yaml"
   LIVE_CONFIG: "config/live.yaml"
+  HUGO_CACHEDIR: "${CI_PROJECT_DIR}/hugo_cache/"
   ARTIFACT_RESOURCE: "public"
   LIVE_DOMAIN: "https://docs.datadoghq.com/"
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
   KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
   KUBERNETES_CPU_REQUEST: 8
-  KUBERNETES_MEMORY_REQUEST: 16Gi
-  KUBERNETES_MEMORY_LIMIT: 16Gi
+  KUBERNETES_MEMORY_REQUEST: 24Gi
+  KUBERNETES_MEMORY_LIMIT: 24Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
@@ -46,6 +47,16 @@ before_script:
   - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
   - export job_start=$(date +%s) # we need the start of each job recorded for the ci reporting
 
+
+# set policy for the common case
+# hugo cache is used only in the build job so lets pull-push
+.hugo_cache: &hugo_cache
+  - key:
+      files:
+        - go.sum
+    paths:
+      - ${HUGO_CACHEDIR}
+    policy: pull-push
 
 # set policy for the common case
 # yarn cache is used in a lot but only built during build job so lets default to pull and explicit push in build job
@@ -108,6 +119,7 @@ build_preview:
   <<: *preview_rules
   stage: build
   cache:
+    - *hugo_cache
     - *yarn_cache_pull_push
   environment: "preview"
   variables:
@@ -191,7 +203,7 @@ algolia_sync_preview:manual:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       when: never
-    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"' 
+    - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_TAG =~ "/^$/"'
       when: manual
 
 algolia_sync_live:
@@ -222,12 +234,41 @@ sourcemaps_preview:
   allow_failure: true
   interruptible: true
 
+post_build_success_status_to_spec_repo:
+  <<: *base_template
+  stage: cleanup
+  cache: {}
+  environment: "preview"
+  script:
+    - chmod +x ./local/bin/py/submit_github_status_check.py
+    - ./local/bin/py/submit_github_status_check.py -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+      when: on_success
+  interruptible: true
+  allow_failure: true
+
+post_build_failure_status_to_spec_repo:
+  <<: *base_template
+  stage: cleanup
+  cache: {}
+  environment: "preview"
+  script:
+    - chmod +x ./local/bin/py/submit_github_status_check.py
+    - ./local/bin/py/submit_github_status_check.py -s "failure" -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+      when: on_failure
+  interruptible: true
+  allow_failure: true
+
 # ================== live ================== #
 build_live:
   <<: *base_template
   <<: *live_rules
   stage: build
   cache:
+    - *hugo_cache
     - *yarn_cache_pull_push
   environment: "live"
   retry: 1
@@ -422,7 +463,7 @@ synthetic_tests_preview:
   environment: "preview"
   variables:
     URL: ${PREVIEW_DOMAIN}
-  allow_failure: true
+  allow_failure: false
   cache: {}
   dependencies:
     - build_preview

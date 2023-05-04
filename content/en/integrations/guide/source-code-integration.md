@@ -1,7 +1,7 @@
 ---
 title: Datadog Source Code Integration
 kind: guide
-description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories and use the GitHub integration to generate inline code snippets."
+description: "Set up the source code integration that integrates with APM to link your telemetry with your repositories, embed git information into artifacts in your CI pipeline, and use the GitHub integration to generate inline code snippets."
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/github/"
   tag: "Documentation"
@@ -17,10 +17,10 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li></ul></br> Self-hosted instances or private URLs are not supported.
+The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> Self-hosted instances or private URLs are not supported.
 </div>
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
+Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, Bitbucket, or Azure DevOps. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
@@ -31,7 +31,11 @@ Datadog Agent v7.35.0 or later is required.
 
 If you have [APM][6] set up already, navigate to [**Integrations** > **Link Source Code**][7] and configure the source code integration for your backend services.
 
-## Tag your telemetry
+## Link active commits
+
+You can link active commits by either [tagging your telemetry](#tag-your-telemetry) or [embedding git information](#embed-git-information-in-your-artifacts-on-ci) in the deployed artifact. 
+
+### Tag your telemetry
 
 To link data to a specific commit, tag your telemetry with `git.commit.sha` and `git.repository_url` tags. Ensure that the `git.repository_url` tag does not contain protocols. For example, if your repository URL is `https://github.com/example_repo`, the value for the `git.repository_url` tag should be `github.com/example_repo`.
 
@@ -82,7 +86,7 @@ Datadog can extract source code information directly from your serverless applic
 [4]: /serverless/aws_lambda/configuration/
 
 {{% /tab %}}
-{{% tab "Other" %}}
+{{% tab "Host" %}}
 
 To tag your traces, spans, and profiles with `git.commit.sha` and `git.repository_url`, configure the tracer with the `DD_TAGS` environment variable:
 
@@ -95,6 +99,27 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 {{< /tabs >}}
 
 Datadog only captures the repository URL, the commit SHA of the current branch, and a list of tracked file paths—Datadog does not ingest or store any user code.
+
+### Embed git information in your artifacts on CI
+
+You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically link the active commit to your APM service.
+
+Select one of the following languages that supports embedding git information:
+
+{{< tabs >}}
+{{% tab "Go" %}}
+
+[Go embeds version control information][1] in binaries starting in version 1.18. 
+
+Ensure your service meets all the following requirements:
+
+* You are using a version of Go >= 1.18.
+* You are using a version of the Datadog Go Tracer >= 1.48.0.
+* Your application was built as a module using `go.mod`, and the module path is your code repository's URL.
+
+[1]: https://tip.golang.org/doc/go1.18
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configure your repositories
 
@@ -187,3 +212,4 @@ To install a GitHub App for your organization, you need to be an organization ow
 [6]: /tracing/
 [7]: https://app.datadoghq.com/source-code/setup/apm
 [8]: /tracing/error_tracking/
+[9]: /tracing/trace_collection/dd_libraries/

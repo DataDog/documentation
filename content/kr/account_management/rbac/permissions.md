@@ -1,4 +1,8 @@
 ---
+algolia:
+  category: 설명서
+  rank: 80
+  subcategory: Datadog 역할 권한 허용
 aliases:
 - /kr/account_management/faq/managing-global-role-permissions
 disable_toc: true

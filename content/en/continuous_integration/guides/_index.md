@@ -18,4 +18,5 @@ cascade:
     {{< nextlink href="/continuous_integration/guides/pull_request_comments" >}}Enabling Test Summaries in GitHub Pull Request Comments{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/developer_workflows" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}Creating exclusion filters for ingestion control{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -15,13 +15,16 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
     tag: 'Blog'
     text: 'Best practices for writing incident postmortems'
+  - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+    tag: "blog"
+    text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
 {{< /site-region >}}
 
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph" style="width:80%;">}}
 
 Any event that may lead to a disruption in your organization's services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog's Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 

@@ -1,6 +1,6 @@
 ---
 categories:
-- web
+- cloud
 dependencies: []
 description: Recueille des métriques sur les connecteurs et les clusters Kafka depuis
   Confluent Cloud.

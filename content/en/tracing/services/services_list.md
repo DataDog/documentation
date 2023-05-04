@@ -18,7 +18,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-{{< img src="tracing/visualization/services_page_2.png" alt="Services page"  >}}
+{{< img src="tracing/visualization/services_page_2.png" alt="Services page" >}}
 
 <div class="alert alert-warning">The Services List is being replaced by the <a href="https://app.datadoghq.com/services">Service Catalog</a>. Read more in the <a href="/tracing/service_catalog/">Service Catalog documentation</a>.</div>
 
@@ -72,7 +72,7 @@ Some integrations alias to types. For example, Postgres, MySQL, and Cassandra ma
 
 Service color is used in [trace visualizations][9]. Select your service color to change it:
 
-{{< img src="tracing/visualization/service_color.png" alt="Services colors"  style="width:30%;">}}
+{{< img src="tracing/visualization/service_color.png" alt="Services colors" style="width:30%;">}}
 
 ## Selecting columns
 

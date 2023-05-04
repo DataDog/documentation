@@ -1,33 +1,34 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- google cloud
+- log collection
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Filestore."
+description: Surveillez des métriques clés de Google Cloud Filestore.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_filestore/
 draft: false
 git_integration_title: google_cloud_filestore
 has_logo: true
 integration_id: google-cloud-filestore
-integration_title: "Google\_Cloud\_Filestore"
+integration_title: Google Cloud Filestore
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_filestore
-public_title: "Intégration Datadog/Google\_Cloud\_Filestore"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Filestore."
+public_title: Intégration Datadog/Google Cloud Filestore
+short_description: Surveillez des métriques clés de Google Cloud Filestore.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Filestore est un service géré de stockage de fichiers destiné aux applications qui requièrent une interface de système de fichiers ainsi qu'un système de fichiers partagé pour les données.
 
 Utilisez l'intégration Datadog Google Cloud Platform pour recueillir des métriques de Google Cloud Filestore.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
