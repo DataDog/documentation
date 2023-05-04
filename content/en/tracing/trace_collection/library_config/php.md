@@ -328,13 +328,7 @@ A comma-separated list of HTTP POST data fields to be collected. Leave empty if 
     - `http.request.foo.bar.username=<redacted>`
     - `http.request.foo.baz.bar=qux`
     - `http.request.foo.baz.key=value`
-    - `http.request.qux=<redacted>`<br>
-With the same example, if the configuration variable is instead set to the wildcard, then the collected metadata is:
-  - `http.request.foo.bar.password=<redacted>`
-  - `http.request.foo.bar.username=admin`
-  - `http.request.foo.baz.bar=qux`
-  - `http.request.foo.baz.key=<redacted>`
-  - `http.request.qux=quux`
+    - `http.request.qux=<redacted>`
 
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
