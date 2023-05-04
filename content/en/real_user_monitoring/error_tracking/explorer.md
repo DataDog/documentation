@@ -33,6 +33,7 @@ Each item listed in the Error Tracking Explorer is an issue and contains high-le
 
 {{< img src="real_user_monitoring/error_tracking/time_range.png" alt="Error Tracking Time Range" style="width:80%;" >}}
 
+
 The time range appears on the top right of the Explorer as a timeline. This feature allows you to display issues having error occurrences within the selected time period. Change the time range by selecting a preset range from the dropdown.
 
 ### Facets

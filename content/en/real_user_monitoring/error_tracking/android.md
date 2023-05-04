@@ -1,19 +1,16 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
-further_reading:
-- link: https://www.datadoghq.com/blog/debug-android-crashes/
-  tag: Blog
-  text: Debug Android crashes faster with Datadog
-- link: /real_user_monitoring/error_tracking/
-  tag: Documentation
-  text: Learn about Error Tracking
-- link: /real_user_monitoring/error_tracking/explorer
-  tag: Documentation
-  text: Visualize Error Tracking data in the RUM Explorer
-kind: documentation
 title: Android Crash Reporting and Error Tracking
+kind: documentation
+description: Set up Error Tracking for your Android applications.
+further_reading:
+- link: '/real_user_monitoring/error_tracking/'
+  tag: 'Error Tracking'
+  text: 'Get started with Error Tracking'
+- link: '/real_user_monitoring/error_tracking/explorer'
+  tag: 'Documentation'
+  text: 'Visualize Error Tracking data in the Explorer'
 ---
+
 ## Overview
 
 Error Tracking processes errors collected from the RUM Android SDK. 
