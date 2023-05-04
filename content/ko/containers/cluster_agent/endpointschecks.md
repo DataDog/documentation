@@ -281,7 +281,7 @@ app: nginx
 [2]: /ko/agent/cluster_agent
 [3]: /ko/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [4]: /ko/agent/cluster_agent/clusterchecks/
-[5]: /ko/containers/guide/clustercheckounners
+[5]: /ko/containers/guide/clustercheckrunners
 [6]: /ko/containers/kubernetes/control_plane/?tab=helm#api-server-2
 [7]: /ko/agent/guide/template_variables/
 [8]: /ko/agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
