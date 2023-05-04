@@ -5,6 +5,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'blog'
   text: 'Detect user pain points with Datadog Frustration Signals'
+- link: 'https://docs.datadoghq.com/notebooks/'
+  tag: 'documentation'
+  text: 'Notebooks'
 ---
 
 ## Overview
@@ -22,7 +25,7 @@ After clicking into a session from the above query, we can watch a Session Repla
 
 {{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/watch-user-issue.png" alt="Review the user's experience the issue in a Session Replay" style="width:100%;">}}
 
-## Share to Notebook
+## Share to a Notebook
 To ensure other team members investigating this issue can see this context, we can share this particular Session Replay to a notebook via the share button:
 
 {{< img src="real_user_monitoring/guide/using-session-replay-in-post-mortems/share-to-notebook.png" alt="Share the Session Replay video by saving it to a post-mortem notebook" style="width:60%;">}}
