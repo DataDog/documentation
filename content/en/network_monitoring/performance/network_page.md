@@ -43,7 +43,7 @@ Tags from Datadog integrations or Unified Service Tagging can be used for aggreg
 
 You can use the facet panels to browse through all of the tags available on your flows, or filter traffic when you don't remember the exact tags you were looking for. Facet panels mirror the tags in your search bar query. Switch between the facet panels with the **Client** and **Server** tabs on top:
 
-{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel" style="width:20%;">}}
+{{< img src="network_performance_monitoring/network_page/destination_panel2.png" alt="Destination panel" style="width:20%;">}}
 
 #### Custom facets
 
