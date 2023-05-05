@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
-- link: "/service_management/workflows/actions_catalog"
+- link: "/workflows/actions_catalog"
   tag: "Documentation"
   text: "See the list of workflow actions"
 ---
@@ -110,10 +110,10 @@ Follow the steps below to modify the permissions on a specific connection:
 [1]: /account_management/audit_trail/#overview
 [2]: /account_management/org_settings/service_accounts/
 [3]: /account_management/rbac/
-[4]: /service_management/workflows/trigger/
-[5]: /service_management/workflows/actions_catalog/
+[4]: /workflows/trigger/
+[5]: /workflows/actions_catalog/
 [6]: /integrations/
-[7]: /service_management/workflows/connections/
-[8]: /service_management/workflows/actions_catalog/generic_actions/
+[7]: /workflows/connections/
+[8]: /workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
 [10]: /account_management/rbac/permissions/#workflows

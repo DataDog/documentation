@@ -5,7 +5,7 @@ disable_toc: false
 aliases:
 - /workflows/build/
 further_reading:
-- link: "/service_management/workflows/actions_catalog"
+- link: "/workflows/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
 ---
@@ -194,4 +194,4 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/workflow
-[2]: /service_management/workflows/trigger
+[2]: /workflows/trigger

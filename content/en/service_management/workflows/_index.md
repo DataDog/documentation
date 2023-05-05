@@ -45,5 +45,5 @@ Watch the video below to see a workflow configured to redeploy a Lambda function
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/actions_catalog/
-[2]: /service_management/workflows/build/#build-a-workflow-from-a-blueprint
+[1]: /workflows/actions_catalog/
+[2]: /workflows/build/#build-a-workflow-from-a-blueprint
