@@ -181,7 +181,7 @@ GitHub または Chef からのイベントを表示する
 
 今日、Zabbix または Prometheus がサービスのアラートをトリガーした
 : レガシー構文 </br>
-`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last(‘1d’) > 0`
+`events('tags:service priority:all status:error sources:prometheus sources:zabbix).rollup('count').last('1d') > 0`
 : 新しい構文 </br>
 `events("source:(prometheus OR zabbix) status:error tags:service").rollup("count").last("1d") > 0`
 

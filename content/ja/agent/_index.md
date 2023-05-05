@@ -36,7 +36,7 @@ Agent v7 が利用可能です。 <a href="/agent/versions/upgrade_to_agent_v7">
 
 Datadog Agent は、ホストで実行されるソフトウェアです。ホストからイベントとメトリクスを収集し、Datadog に送信します。ここで、モニタリングとパフォーマンスのデータを分析できます。Datadog Agent はオープンソースです。ソースコードは、GitHub の [DataDog/datadog-agent][1] から入手できます。
 
-**Agent はフルでインストールすることが推奨されています。**ただし、Amazon Linux、CentOS、Debian、Fedora、Red Hat、SUSE、Ubuntu 用に、スタンドアロンの DogStatsD パッケージを使用することが可能です。このパッケージは、DogStatsD がサイドカーとして稼働するか、Agent の機能をフルに持たない DogStatsD サーバーを稼働させているコンテナ環境で使用されます。
+**Agent はフルでインストールすることが推奨されています。** ただし、Amazon Linux、CentOS、Debian、Fedora、Red Hat、SUSE、Ubuntu 用に、スタンドアロンの DogStatsD パッケージを使用することが可能です。このパッケージは、DogStatsD がサイドカーとして稼働するか、Agent の機能をフルに持たない DogStatsD サーバーを稼働させているコンテナ環境で使用されます。
 
 スタンドアロンの DogStatsD パッケージは、Agent の [1 行のインストールコマンド][2]でインストールできますが、`datadog-agent` の部分をすべて `datadog-dogstatsd` に変える必要があります。[DogStatsD6 Docker イメージリポジトリ][3]にある Docker イメージも利用できます。
 
