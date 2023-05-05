@@ -28,7 +28,7 @@ kind: ドキュメント
 title: AWS Lambda サーバーレスアプリケーションによる分散型トレーシング
 ---
 
-{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="トレースサーバーレス関数"  style="width:100%;">}}
+{{< img src="tracing/serverless_functions/ServerlessDistributedTrace.png" alt="トレースサーバーレス関数" style="width:100%;">}}
 
 Datadog では、サーバーレストレースをメトリクスに接続することで、アプリケーションのパフォーマンスに関する豊富な情報を提供します。これにより、サーバーレスアプリケーションの性質である分散型の環境でもパフォーマンスの問題を的確にトラブルシューティングできます。
 
@@ -177,7 +177,7 @@ Datadog Agent でホストに `dd-trace` がインストールされていて、
 {{< img src="integrations/amazon_lambda/lambda_host_trace.png" alt="ホストから Lambda 関数へのリクエストのトレース" >}}
 
 ## トレース伝搬
-{{< img src="serverless/lambda-non-http-trace.png" alt="サーバーレスの分散型非 HTTP トレース"  style="width:100%;" >}}
+{{< img src="serverless/lambda-non-http-trace.png" alt="サーバーレスの分散型非 HTTP トレース" style="width:100%;" >}}
 
 ### 必須セットアップ
 
