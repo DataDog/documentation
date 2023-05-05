@@ -98,8 +98,7 @@ def download_content_from_external_source(self, content):
         * cache is disabled
         * this is a local run or master pipeline
     """
-    return False
-    # return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') in (None, 'master'))
+    return (self.cache_enabled == False) or (getenv('CI_COMMIT_REF_NAME') in (None, 'master'))
 
 
 def fetch_sourced_content_from_local_or_upstream(self, github_token, extract_dir):
@@ -245,32 +244,35 @@ def download_cached_content_into_repo(self):
 
     for content in self.list_of_cached_contents:
         action = content.get('action', '')
-        destination = ''
+        final_file_destination = ''
 
         if action == 'pull-and-push-file':
-            dest_path = content.get('options', {}).get('dest_path')
-            dest_file_name = content.get('options', {}).get('file_name')
-            base_path = content.get('options', {}).get('base_path')
+            destination_path = content.get('options', {}).get('dest_path')
+            destination_base_path = content.get('options', {}).get('base_path')
+            destination_file_name = content.get('options', {}).get('file_name')
 
-            if base_path is not None and base_path == '':
-                full_dest_path = f'{dest_path}{dest_file_name}'
+            # we need a solution for single-sourced files that don't belong under content/ dir
+            # please use base_path = '' under options in pull_config for these cases.
+            if destination_base_path is not None and destination_base_path == '':
+                destination_path = destination_path.lstrip('/')
+                full_dest_path = f'{destination_path}{destination_file_name}'
             else:
-                full_dest_path = f'{self.relative_en_content_path}{dest_path}{dest_file_name}'
+                full_dest_path = f'{self.relative_en_content_path}{destination_path}{destination_file_name}'
 
-            if dest_file_name.endswith('.md'):
-                os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
+            if destination_file_name.endswith('.md'):
                 print(f'Copying {full_dest_path} from cache')
+                os.makedirs(os.path.dirname(full_dest_path), exist_ok=True)
                 shutil.copy(f'temp/{full_dest_path}', full_dest_path)
         elif action == 'pull-and-push-folder':
-            destination = content.get('options', {}).get('dest_dir', '')
+            final_file_destination = content.get('options', {}).get('dest_dir', '')
         elif action in ('workflows', 'security-rules'):
-            destination = content.get('options', {}).get('dest_path', '')
+            final_file_destination = content.get('options', {}).get('dest_path', '')
         elif action not in ('integrations', 'marketplace-integrations', 'npm-integrations'):
             raise ValueError(f'Action {action} unsupported, cannot copy from cache.')
 
-        if destination != '':
-            print(f'Copying {self.relative_en_content_path}{destination} from cache')
-            shutil.copytree(f'temp/{self.relative_en_content_path}{destination}', f'{self.relative_en_content_path}{destination}', dirs_exist_ok=True)
+        if final_file_destination != '':
+            print(f'Copying {self.relative_en_content_path}{final_file_destination} from cache')
+            shutil.copytree(f'temp/{self.relative_en_content_path}{final_file_destination}', f'{self.relative_en_content_path}{final_file_destination}', dirs_exist_ok=True)
 
     # Integrations are handled separately for now (there is active work underway to improve this)
     if self.cache_enabled:
