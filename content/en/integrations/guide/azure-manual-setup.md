@@ -1,11 +1,8 @@
 ---
 title: Azure Manual Setup Guide
 kind: guide
-description: "Steps for manually setting up the Datadog Azure Integration"
+description: "Steps for manually setting up the Datadog Azure integration"
 further_reading:
-- link: "https://www.datadoghq.com/blog/tagging-best-practices/#aws"
-  tag: "Blog"
-  text: "Best practices for tagging your infrastructure and applications"
 - link: "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
   tag: "Documentation"
   text: "Why should I install the Datadog Agent on my cloud instances?"
@@ -38,11 +35,7 @@ Use this guide to manually set up the [Datadog Azure integration][1].
 
 To set up the Azure Native integration, you must be an **Owner** on any Azure subscriptions you want to link, and **Admin** for the Datadog org you are linking them to. Ensure you have the appropriate access before starting the setup.
 
-#### SSO configuration
-
-_(Optional)_: You can configure [single sign-on (SSO)][5] during the process of creating a new Datadog organization in Azure. You can also configure SSO later. To configure SSO during the initial creation, first create a Datadog enterprise gallery app.
-
-### Installation
+## Setup
 
 Configuring the Azure integration requires the creation of a Datadog resource in Azure. These resources represent the connection or link between a Datadog organization and an Azure subscription. A Datadog resource is needed for each subscription you wish to monitor with Datadog. 
 
@@ -52,11 +45,11 @@ There are two options when you create a Datadog resource in Azure:
 
 2. Create a new Datadog organization. This flow is less common. Use this if you do not yet have a Datadog org and you want to get started with a paid plan through Azure Marketplace. This flow creates a brand new Datadog org, allows you to select a billing plan, and links the associated Azure subscription for monitoring.
 
-**Note**: Trials are not available through the **Create a new Datadog organization** option in Azure. To get started with a free trial, first [create a trial Datadog org on the US3 site][1]. Then use the linking flow to add the subscription(s) you want to monitor.
+**Note**: Trials are not available through the **Create a new Datadog organization** option in Azure. To get started with a free trial, first [create a trial Datadog org on the US3 site][1]. Then use the linking flow to add any subscriptions you want to monitor.
 
 Once you create a Datadog resource, data collection begins for the associated subscription. See details for using this resource to configure, manage, and deploy Datadog in the [Managing the Azure Native Integration][2] guide.
 
-#### Create a Datadog resource
+### Create a Datadog resource
 
 To start monitoring an Azure subscription, navigate to the [Datadog Service page in Azure][3] and select the option to create a new Datadog resource:
 {{< img src="integrations/azure/azure-us3-dd-service.png" alt="Azure US3 Datadog Service" responsive="true" style="width:90%;">}}
@@ -66,6 +59,10 @@ Choose **Link Azure subscription to an existing Datadog organization** or **Crea
 {{< img src="integrations/azure/azure-us3-create-dd-resource1.png" alt="Azure US3 create a Datadog resource" responsive="true" style="width:90%;">}}
 
 **Note**: New Datadog organizations created through the Azure portal automatically have billing consolidated into their Azure invoice. This usage counts towards your organization's [MACC][4] if applicable.
+
+### SSO configuration
+
+_(Optional)_: You can configure [single sign-on (SSO)][5] during the process of creating a new Datadog organization in Azure. You can also configure SSO later. To configure SSO during the initial creation, first create a Datadog enterprise gallery app.
 
 ### Configuration {#configuration-us3}
 
@@ -93,9 +90,7 @@ By default, Azure links your current Datadog organization to your Datadog resour
 
 {{< img src="integrations/azure/azure-us3-select-org.png" alt="Azure US3 select Datadog organization" responsive="true" style="width:90%;">}}
 
-When the oauth flow is complete, verify the Datadog organization name is correct.
-
-After you complete the basic configuration, select **Next: Metrics and logs**.
+When the OAuth flow is complete, verify the Datadog organization name is correct.
 
 [1]: https://docs.datadoghq.com/getting_started/site/
 [2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
@@ -134,7 +129,9 @@ Provide the following values:
 
 {{< site-region region="us,eu,us5,gov,ap1" >}}
 
-#### Integrating through the Azure CLI
+## Setup
+
+### Integrating through the Azure CLI
 
 To integrate Datadog with Azure using the Azure CLI, Datadog recommends using the [Azure Cloud Shell][1].
 
@@ -176,11 +173,11 @@ Example Output:
 ```
 
 - This command grants the Service Principal the `monitoring reader` role for the subscription you would like to monitor.
-- The `appID` generated from this command must be entered in the [Datadog Azure Integration tile][1] under **Client ID**.
-- Enter the generated `Tenant ID` value in the [Datadog Azure Integration tile][1] under **Tenant name/ID**.
+- The `appID` generated from this command must be entered in the [Datadog Azure integration tile][1] under **Client ID**.
+- Enter the generated `Tenant ID` value in the [Datadog Azure integration tile][1] under **Tenant name/ID**.
 - `--scopes` can support multiple values, and you can add multiple subscriptions or Management Groups at once. See the examples in the **[az ad sp][2]** documentation.
 - Add `--name <CUSTOM_NAME>` to use a hand-picked name, otherwise Azure generates a unique one. The name is not used in the setup process.
-- Add `--password <CUSTOM_PASSWORD>` to use a hand-picked password. Otherwise Azure generates a unique one. This password must be entered in the [Datadog Azure Integration tile][1] under **Client Secret**.
+- Add `--password <CUSTOM_PASSWORD>` to use a hand-picked password. Otherwise Azure generates a unique one. This password must be entered in the [Datadog Azure integration tile][1] under **Client Secret**.
 
 Management Group is a valid and recommended option for scope. For example:
 
@@ -208,7 +205,7 @@ Run the account show command:
 az account show
 ```
 
-Enter the generated `Tenant ID` value in the [Datadog Azure Integration tile][1] under **Tenant name/ID**.
+Enter the generated `Tenant ID` value in the [Datadog Azure integration tile][1] under **Tenant name/ID**.
 
 Create a name and password:
 
@@ -217,7 +214,7 @@ azure ad sp create -n <NAME> -p <PASSWORD>
 ```
 
 - The `<NAME>` is NOT used but is required as part of the setup process.
-- The `<PASSWORD>` you choose must be entered in the [Datadog Azure Integration tile][1] under **Client Secret**.
+- The `<PASSWORD>` you choose must be entered in the [Datadog Azure integration tile][1] under **Client Secret**.
 - The `Object Id` returned from this command is used in place of `<OBJECT_ID>` in the next command.
 
 Create an application as a service principal using the format:
@@ -227,19 +224,19 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 ```
 
 - This command grants the Service Principal the `monitoring reader` role for the subscription you would like to monitor.
-- The `Service Principal Name` generated from this command must be entered in the [Datadog Azure Integration tile][1] under **Client ID**.
+- The `Service Principal Name` generated from this command must be entered in the [Datadog Azure integration tile][1] under **Client ID**.
 - `<SUBSCRIPTION_ID>` is the Azure subscription you would like to monitor, and is listed as `ID` with `azure account show` or in the portal.
 
 [1]: https://app.datadoghq.com/integrations/azure
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Integrating through the Azure portal
+### Integrating through the Azure portal
 
 1. [Create an app registration](#creating-the-app-registration) in your Active Directory and pass the correct credentials to Datadog.
 2. [Give the application read-access](#giving-read-permissions-to-the-application) to any subscriptions you would like to monitor.
 
-##### Creating the app registration
+#### Creating the app registration
 
 1. Under **Azure Active Directory**, navigate to **App Registrations** and click **New registration**.
 2. Enter the following and click the **Create** button. The name and sign-on URL are not used but are required for the setup process.
@@ -250,7 +247,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 {{< img src="integrations/azure/Azure_create_ad.png" alt="Azure create app" popup="true" style="width:80%;" >}}
 
-##### Giving read permissions to the application
+#### Giving read permissions to the application
 
 1. To assign access at the individual subscription level, navigate to **Subscriptions** through the search box or the left sidebar. 
 
@@ -275,7 +272,7 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 
 **Note**: Diagnostics must be enabled for ARM deployed VMs to collect metrics, see [Enable diagnostics][5].
 
-##### Completing the integration
+#### Completing the integration
 
 1. Under **App Registrations**, select the App you created, copy the **Application ID** and **Tenant ID**, and paste the values in the [Datadog Azure integration tile][4] under **Client ID** and **Tenant ID**.
 2. For the same app, go to **Manage** > **Certificates and secrets**.
@@ -283,7 +280,7 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 
     {{< img src="integrations/azure/Azure_client_secret.png" alt="Azure client secret" popup="true" style="width:80%">}}
 
-4. When the key value is shown, copy and paste the value in the [Datadog Azure Integration tile][4] under **Client Secret** and click **Install Integration** or **Update Configuration**.
+4. When the key value is shown, copy and paste the value in the [Datadog Azure integration tile][4] under **Client Secret** and click **Install Integration** or **Update Configuration**.
 
 **Note**: Your updates to the Azure configuration can take up to 20 minutes to be reflected in Datadog.
 
@@ -318,7 +315,12 @@ Datadog provides a recommended monitor you can use as a template to get started.
 [3]: /monitors/notify/#notify-your-team
 [4]: https://app.datadoghq.com/integrations/azure
 [5]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
+
 {{< /site-region >}}
+
+#### Sending logs
+
+See the [Azure Logging guide][5] to set up log forwarding from your Azure environment to Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -326,3 +328,4 @@ Datadog provides a recommended monitor you can use as a template to get started.
 [2]: https://us3.datadoghq.com/signup
 [3]: /integrations/guide/azure-portal/
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
+[5]: https://docs.datadoghq.com/logs/guide/azure-logging-guide
