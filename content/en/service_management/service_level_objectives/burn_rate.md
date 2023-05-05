@@ -35,7 +35,7 @@ $$\text"error budget" = 100% - \text"SLO Target"$$
 
 In other words, your error budget (in fractional form) is the ideal error rate you should be maintaining. So, a burn rate can alternatively be interpreted as a multiplier of your ideal error rate. For example, for a 99.9% SLO over 30 days, if the SLO is experiencing a burn rate of 10 that means the error budget is on pace to be completely depleted in 3 days and that the observed error rate is 10 times the ideal error rate: 
 
-$$(\text"burn rate")  (\text"ideal error rate") = \text"observed error rate"$$
+$$(\text"burn rate") (\text"ideal error rate") = \text"observed error rate"$$
 $$(10)(0.001) = 0.01$$
 
 Ideally, you should always try to maintain a burn rate of 1 over the course of your SLO's target (as you invest in evolving your application with new features). However, in practice, your burn rate will fluctuate as issues or incidents cause your burn rate to increase rapidly until the issue is resolved. Therefore, alerting on burn rates allows you to be proactively notified when an issue is consuming your error budget at an elevated rate that could potentially cause you to miss your SLO target.

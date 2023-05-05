@@ -15,7 +15,7 @@ categories:
 integration_id: "feed"
 ---
 
-{{< img src="integrations/rss/rss.png" alt="RSS event"  >}}
+{{< img src="integrations/rss/rss.png" alt="RSS event" >}}
 
 ## Overview
 
@@ -35,7 +35,7 @@ Configuration requires:
 
 **Optional**: Enter a username and a password to access the RSS feed
 
-{{< img src="integrations/rss/rss_setup.png" alt="RSS setup"  >}}
+{{< img src="integrations/rss/rss_setup.png" alt="RSS setup" >}}
 
 ### Validation
 

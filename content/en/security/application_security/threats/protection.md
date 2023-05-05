@@ -41,7 +41,7 @@ Attackers' IP addresses and authenticated users that are permanently or temporar
 
 ## Passlist
 
-You can use the _Passlist_ to permanently allow an IP address, or range of addresses, access to your application. For example, you may wish to add internal IP addresses to your passlist, or IP addresses that regularly run security audits on your application. You can also add specific paths to ensure uninterrupted access. Manage the list from the [Passlist page][8].
+You can use the _Passlist_ to permanently allow specific IP addresses access to your application. For example, you may wish to add internal IP addresses to your passlist, or IP addresses that regularly run security audits on your application. You can also add specific paths to ensure uninterrupted access. Manage the list from the [Passlist page][8].
 
 ## Blocking suspicious requests with In-App WAF
 
