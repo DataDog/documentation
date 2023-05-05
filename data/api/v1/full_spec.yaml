@@ -1744,6 +1744,10 @@ components:
             be muted.
           example: false
           type: boolean
+        notify_end_states:
+          $ref: '#/components/schemas/NotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/NotifyEndTypes'
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1880,6 +1884,10 @@ components:
             be muted.
           example: false
           type: boolean
+        notify_end_states:
+          $ref: '#/components/schemas/NotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/NotifyEndTypes'
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -8498,6 +8506,60 @@ components:
           format: int64
           type: integer
       type: object
+    NotifyEndState:
+      description: A notification end state.
+      enum:
+      - alert
+      - no data
+      - warn
+      example: alert
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - NO_DATA
+      - WARN
+    NotifyEndStates:
+      default:
+      - alert
+      - no data
+      - warn
+      description: States for which `notify_end_types` sends out notifications for.
+      example:
+      - alert
+      - no data
+      - warn
+      items:
+        $ref: '#/components/schemas/NotifyEndState'
+      type: array
+    NotifyEndType:
+      description: A notification end type.
+      enum:
+      - canceled
+      - expired
+      example: expired
+      type: string
+      x-enum-varnames:
+      - CANCELED
+      - EXPIRED
+    NotifyEndTypes:
+      default:
+      - expired
+      description: 'If set, notifies if a monitor is in an alert-worthy state (`ALERT`,
+        `WARNING`, or `NO DATA`)
+
+        when this downtime expires or is canceled. Applied to monitors that change
+        states during
+
+        the downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and
+        to monitors that
+
+        already have an alert-worthy state when downtime begins.'
+      example:
+      - canceled
+      - expired
+      items:
+        $ref: '#/components/schemas/NotifyEndType'
+      type: array
     OnMissingDataOption:
       description: 'Controls how groups or monitors are treated if an evaluation does
         not return any data points.
@@ -15423,6 +15485,7 @@ components:
         analyzed_logs:
           description: Contains the number of analyzed logs.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16709,6 +16772,7 @@ components:
         indexed_events_count:
           description: Contains the number of spans indexed.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16738,6 +16802,7 @@ components:
           description: Contains the total number of bytes ingested for APM spans during
             a given hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16870,11 +16935,13 @@ components:
           description: Total logs indexed with this retention period during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         live_indexed_events_count:
           description: Live logs indexed with this retention period during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16886,6 +16953,7 @@ components:
           description: Rehydrated logs indexed with this retention period during a
             given hour.
           format: int64
+          nullable: true
           type: integer
         retention:
           description: The retention period in days or "custom" for all custom retention
@@ -16989,6 +17057,7 @@ components:
         indexed_events_count:
           description: Contains the number of netflow events indexed.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.

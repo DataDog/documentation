@@ -17,13 +17,13 @@ The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest versi
 Get metrics from Kubernetes in real time to:
 
 * Visualize and monitor Kubernetes states
-* Be notified about Kubernetes failovers and events.
+* Be notified about Kubernetes failovers and events
 
 For Kubernetes, it's recommended to run the [Agent in a DaemonSet][1]. A [Docker image][2] is available with both the Docker and the Kubernetes integrations enabled.
 
 You can also just [run the Datadog Agent on your host][3] and configure it to gather your Kubernetes metrics.
 
-## Setup Kubernetes
+## Set up Kubernetes
 
 ### Installation
 
@@ -221,7 +221,7 @@ To verify the Datadog Agent is running in your environment as a DaemonSet, execu
 kubectl get daemonset
 ```
 
-If the Agent is deployed you a similar output to the text below, where **desired** and **current** are equal to the number of running nodes in your cluster.
+If the Agent is deployed, you receive a similar output to the text below, where **desired** and **current** are equal to the number of running nodes in your cluster.
 
 ```bash
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
