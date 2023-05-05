@@ -212,7 +212,7 @@ Adding user information to your RUM sessions makes it easy to:
 * Know which users are the most impacted by errors
 * Monitor performance for your most important users
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI"  >}}
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" >}}
 
 The following attributes are **optional**, you should provide **at least one** of them:
 

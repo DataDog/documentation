@@ -8,6 +8,9 @@ further_reading:
     - link: '/tracing/service_catalog/'
       tag: 'Documentation'
       text: 'Service Catalog'
+    - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
+      tag: 'Blog'
+      text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
 ---
 
 
@@ -48,7 +51,7 @@ Once Data Streams Monitoring is configured, you can measure the time it usually 
 | Metric Name | Notable Tags | Description |
 |---|---|-----|
 | data_streams.latency | `start`, `end`, `env` | End to end latency of a pathway from a specified source to destination service |
-| dd.stream.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between producer and consumer. Requires Java Agent v1.9.0 or later. |
+| data_streams.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between producer and consumer. Requires Java Agent v1.9.0 or later. |
 
 You can also graph and visualize these metrics on any dashboard or notebook:
 
@@ -68,7 +71,7 @@ Click on the **Throughput** tab on any service or queue in Data Streams Monitori
 
 By filtering to a single Kafka or RabbitMQ cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
-{{< img src="data_streams/data_streams_cluster_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
+{{< img src="data_streams/data_streams_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 ### Quickly pivot to identify root causes in infrastructure, logs, or traces 
 
