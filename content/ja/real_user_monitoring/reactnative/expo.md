@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_development.md
 description: Expo と Expo Go を使用して React Native プロジェクトを Datadog で監視します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -200,9 +198,9 @@ DdSdkReactNative.initialize(config);
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc9
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/#setup
+[2]: /ja/real_user_monitoring/reactnative/#setup
 [3]: https://docs.expo.dev/development/introduction/
 [4]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
 [5]: https://docs.expo.dev/development/getting-started/
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/expo/
+[6]: /ja/real_user_monitoring/error_tracking/expo/
 [7]: https://expo.github.io/router/docs/
