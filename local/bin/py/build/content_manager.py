@@ -251,7 +251,7 @@ def download_cached_content_into_repo(self):
             destination_base_path = content.get('options', {}).get('base_path')
             destination_file_name = content.get('options', {}).get('file_name')
 
-            # we need a solution for single-sourced files that don't belong under content/ dir
+            # we need this solution for single-sourced files that don't belong under content/ dir
             # please use base_path = '' under options in pull_config for these cases.
             if destination_base_path is not None and destination_base_path == '':
                 destination_path = destination_path.lstrip('/')
