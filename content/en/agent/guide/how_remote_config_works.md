@@ -17,16 +17,16 @@ further_reading:
   text: "Dynamic Instrumentation"
 - link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
   tag: "Documentation"
-  text: "Getting Started with Cloud Workload Security"
+  text: "Setting Up Cloud Workload Security"
 
 ---
+
 {{< site-region region="gov" >}}
 
-Remote configuration is not available on the US1-FED Datadog site.
+<div class="alert alert-warning">Remote configuration is not available on the US1-FED Datadog site.</div>
+
 
 {{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 
 <div class="alert alert-info">Remote Configuration is in beta.</a></div>
 
@@ -67,19 +67,20 @@ The following products and features are supported with Remote Config:
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 ### Dynamic Instrumentation
-<div class="alert alert-info">This feature is in private beta.</div>
+<div class="alert alert-info">This feature is in beta.</div>
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
 ### Cloud Workload Security (CWS)
-<div class="alert alert-info">This feature is in private beta.</div>
 
-- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released.
+<div class="alert alert-info">This feature is in public beta.</div>
+
+- **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][11] for more information.
 
 ### Observability Pipelines
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI,  rolling out your configuration changes to OPW instances running in your environment.
+- **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
 ## Security Considerations
 
@@ -98,16 +99,16 @@ Datadog implements the following safeguards, designed to protect the confidentia
 
 
 - Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers. 
-- For features that use tracing libraries, the following minimum versions of Datadog tracing libraries:
+- For features that use tracing libraries, the following minimum versions of Datadog tracing libraries include:
 
+  | Product feature                        | Go            | Java          | .Net          | NodeJS
+  |----------------------------------------|---------------|---------------|---------------|---------------|
+  | Dynamic Instrumentation |               | 1.5.0         | 2.22.0        |               |
 
-| Product feature                        | Go            | Java          | .Net          | NodeJS
-|----------------------------------------|---------------|---------------|---------------|---------------|
-| Dynamic Instrumentation |               | 1.5.0         | 2.22.0        |               |
-| ASM Protect                | 1.45.1        | 1.4.0         | 2.16.0        | 3.11.0        |
-| ASM 1-click activation        |               | 1.4.0         | 2.17.0        | 3.9.0         |
+  For ASM Protection capabilities and ASM 1-click activation, see [Compatibility Requirements][12].
 
 ### Setup
+
 To enable Remote Configuration:
 
 1. Ensure your RBAC permissions include [`org_management`][9], so you can enable Remote Configuration for your organization.
@@ -166,6 +167,9 @@ After you perform these steps, your Agent requests its configuration from Datado
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
 [2]: /help/
@@ -177,10 +181,5 @@ After you perform these steps, your Agent requests its configuration from Datado
 [8]: /security/application_security/how-appsec-works/#built-in-protection
 [9]: /account_management/rbac/permissions#access-management
 [10]: /observability_pipelines/#observability-pipelines-worker
-
-
-{{< /site-region >}}
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[11]: /security/cloud_workload_security/setup
+[12]: /security/application_security/enabling/compatibility/

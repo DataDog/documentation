@@ -92,7 +92,7 @@ Find more details on sending metrics from Dogshell by running:
 dog metric post -h
 ```
 
-{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test"  >}}
+{{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" >}}
 
 [1]: https://github.com/DataDog/datadogpy
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/

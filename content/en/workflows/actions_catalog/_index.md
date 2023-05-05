@@ -3,7 +3,6 @@ title: Actions Catalog
 kind: documentation
 type: actioncatalog
 disable_toc: true
-is_beta: true
 cascade:
   disable_sidebar: true
   type: actioncatalog

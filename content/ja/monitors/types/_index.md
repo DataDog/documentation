@@ -11,6 +11,9 @@ further_reading:
 - link: /monitors/manage/
   tag: ドキュメント
   text: モニターの管理
+- link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
+  tag: ブログ
+  text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
 kind: documentation
 title: モニターの種類
 ---
@@ -40,6 +43,6 @@ title: モニターの種類
 {{< /whatsnext >}}
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

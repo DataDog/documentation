@@ -16,6 +16,20 @@ cascade:
     subcategory: Integrations
     tags: ['azure', 'microsoft azure']
 - _target:
+    path: /integrations/kubernetes_state_core.md
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
+    tags: ['ksm']
+- _target:
+    path: /integrations/google_cloud_platform.md
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
+    tags: ['gcp', 'google cloud platform']
+- _target:
     path: /integrations/*.md
   algolia:
     rank: 60

@@ -8,7 +8,7 @@ private: true
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-Remote instrumentation is in beta. <a href="/help">Contact support</a> if you would like to access it.
+Remote instrumentation is in beta. Contact your CSM or account manager if you would like to access it.
 {{< /callout >}}
 
 ## Overview

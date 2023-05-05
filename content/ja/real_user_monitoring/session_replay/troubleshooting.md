@@ -47,7 +47,7 @@ Datadog セッションリプレイで予期しない動作が発生した場合
 
 ```html
 <link rel="stylesheet" crossorigin="anonymous"
-      href="https://assets.example.com/style.css”>
+      href="https://assets.example.com/style.css">
 ```
 
 さらに、`assets.example.com` の `example.com` ドメインを承認します。これにより、[`Access-Control-Allow-Origin`][3] ヘッダーを設定することにより、アセットファイルがリソースをロードできるようになります。

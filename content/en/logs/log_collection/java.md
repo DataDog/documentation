@@ -288,7 +288,7 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
     ```
 
 3. [Restart the Agent][7].
-4. Run the [Agent’s status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 
@@ -308,7 +308,7 @@ If you are not already using Logback, most common logging libraries can be bridg
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes.  To use it:
+Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes. To use it:
 
 1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml

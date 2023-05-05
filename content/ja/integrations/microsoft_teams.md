@@ -1,7 +1,8 @@
 ---
 categories:
 - コラボレーション
-- notification
+- ネットワーク
+- 通知
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信
 doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
@@ -53,7 +54,7 @@ Datadog モニターから、[`@-notification` 機能][2]を使用して、Micro
 ## Microsoft Teams における Datadog Incident Management
 
 <div class="alert alert-warning">
-Datadog Incident Management for Microsoft Teams はクローズドベータ版です。アクセスをご希望の方は、<a href="https://docs.datadoghq.com/help/" class="alert-link">Datadog サポート</a>までご連絡ください。
+Datadog Incident Management for Microsoft Teams は公開ベータ版で、US1 サイトでのみ利用可能です。
 </div>
 
 ### アカウント設定
