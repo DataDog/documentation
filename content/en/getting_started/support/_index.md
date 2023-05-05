@@ -1,5 +1,5 @@
 ---
-title: Getting started with Datadog Support
+title: Getting Started with Datadog Support
 kind: documentation
 further_reading:
 - link: "https://docs.datadoghq.com/agent/troubleshooting/"
@@ -31,7 +31,7 @@ For the most efficient resolution of an issue, be ready to provide any of the re
 
 ## Chat or support ticket?
 
-Use the table below to determine whether to open a [support ticket][1] or reach out on chat. Chat is available any business day between the hours of 10:00 and 19:00 ET.
+Use the table below to determine whether to open a [support ticket][1] or reach out on chat. Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET).
 
 | Support Ticket                  | Chat        |
 | ------------------------------- | ----------- |
@@ -44,7 +44,7 @@ If you're not sure which option is best, feel free to use either channel to conn
 
 ## Reaching out on chat
 
-To get started, click on **Live Chat** on the left panel of your Datadog Account.
+To get started, click **Live Chat** on the left panel of your Datadog Account.
 
 {{< img src="getting_started/chat/chat_button.png" alt="The chat button highlighted in Datadog" style="width:80%" >}}
 
@@ -56,7 +56,7 @@ When a new chat is opened, you are asked if you have a **technical** or **sales*
 
 ### Best practices for technical questions
 
-Ensure to have as many of the relevant [prerequisites](#prerequisites) available as possible. The Datadog team member you connect with on chat does their best to collect information about the issue and resolve it. Not all issues can be resolved in a chat session. If a more detailed investigation is required, Datadog support focuses on collecting the information needed to conduct the investigation after the chat is over.
+Ensure that you have as many of the relevant [prerequisites](#prerequisites) available as possible. The Datadog team member you connect with on chat does their best to collect information about the issue and resolve it. Not all issues can be resolved in a chat session. If a more detailed investigation is required, Datadog support focuses on collecting the information needed to conduct the investigation after the chat is over.
 
 ### Following up
 
