@@ -46,7 +46,7 @@ The `passwd` command example is an actual default rule that is present in the de
 
 To detect when a PHP or Nginx process launches bash, there are a few attributes to note.
 
-Bash is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). As in the previous example, to detect execution, include in your rule: `exec.file.path == "/usr/bin/bash"`. This ensures the rule isn't only accounting for the execution of bash, but also bash as a child process of PHP or Nginx.
+Bash is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). As in the previous example, to detect execution, include `exec.file.path == "/usr/bin/bash"` in your rule. This ensures the rule isn't only accounting for the execution of bash, but also bash as a child process of PHP or Nginx.
 
 A process ancestor's filename in CWS is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. 
 
@@ -54,11 +54,11 @@ Putting it all together, the rule expression is `exec.file.path == "/usr/bin/bas
 
 ## Detection rules
 
-Detection rules run in the Datadog backend after events are sent over as logs. The logs are then evaluated based on patterns of events described in the [detection rules][3]. Security signals are generated as a result. Datadog continuously develops new default rules, which are automatically imported into your account.
+Detection rules run in the Datadog backend after events are sent over as logs. The logs are then evaluated based on patterns of events described in the [detection rules][3]. If the pattern matches a detection rule, a [security signal][8] is generated. Datadog continuously develops new detection rules, which are automatically imported into your account.
 
 ## Create custom rules
 
-You can also write custom Agent rules and detection rules. This guide covers Agent rules, how to create them, and how to use them to generate security signals.
+In addition to the default rules, you can also write custom Agent and detection rules. Custom Agent rules are deployed to the Agent in a policy separate from the default one.
 
 **Note**: At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
 
@@ -158,3 +158,4 @@ After you upload the new default policy file to the agent, navigate to the [**Ru
 [5]: /security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/cloud_workload_security/setup#remote-configuration
+[8]: /security/explorer
