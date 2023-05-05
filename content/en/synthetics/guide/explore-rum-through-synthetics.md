@@ -16,8 +16,6 @@ further_reading:
 
 <div class="alert alert-info">If you don't have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
 
-**Note:** If the target application is already instrumented with RUM, you should not enable RUM data collection within the synthetic test configuration as this can result in unexpected behavior.
-
 Synthetic browser tests embed the Real User Monitoring SDK, allowing you to explore:
 
 - [Session Replay][1] for all tests. You can access additional context beyond screenshots available for each step and [Browser Dev Tools][2].
@@ -26,6 +24,9 @@ Synthetic browser tests embed the Real User Monitoring SDK, allowing you to expl
 - Extra resources and timing information from RUM including additional search and monitor capabilities.
 
 ## Allow Synthetic data on RUM applications
+
+<div class="alert alert-warning">
+If the target application is already instrumented with RUM, you should not enable RUM data collection within the synthetic test configuration as this can result in unexpected behavior.</div>
 
 In your browser test recording, click **Collect RUM Data on** above the **Start Recording** button and select an application to collect data on. After saving your recording and test configuration, RUM gathers test data and generates session recordings from your browser test runs. 
 
