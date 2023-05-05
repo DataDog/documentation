@@ -9,7 +9,7 @@ The System for Cross-domain Identity Management, or SCIM, is an open standard th
 
 ### Prerequisites
 
-Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [Using a service account with SCIM][1].
+Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][1].
 
 This documentation assumes your organization manages user identities using an identity provider. 
 
