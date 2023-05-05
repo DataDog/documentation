@@ -16,7 +16,9 @@ This guide demonstrates how to programmatically manage the Azure integration wit
 
 ### Azure or Azure Native integration?
 
-If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
+If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.  
+
+**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
 
 If your Datadog account is hosted on any other [Datadog site][3], use the [Azure integration][5] to collect monitoring data from your Azure environment.
 
