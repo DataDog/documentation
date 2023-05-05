@@ -4,7 +4,6 @@ kind: documentation
 description: Access and authentication for Workflows
 aliases:
 - /workflows/service_accounts
-- /workflows/access
 disable_toc: false
 further_reading:
 - link: "/integrations/"

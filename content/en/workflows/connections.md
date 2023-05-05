@@ -4,8 +4,6 @@ kind: documentation
 description: Workflow connections
 aliases:
 - /workflows/setup
-- /workflows/connections/
-
 disable_toc: false
 ---
 

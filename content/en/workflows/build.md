@@ -2,8 +2,6 @@
 title: Build Workflows
 kind: documentation
 disable_toc: false
-aliases:
-- /workflows/build/
 further_reading:
 - link: "/workflows/actions_catalog"
   tag: "Documentation"
