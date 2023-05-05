@@ -2,7 +2,6 @@
 title: Application Security Management
 kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
-disable_sidebar: true
 aliases:
   - /security_platform/application_security
 further_reading:

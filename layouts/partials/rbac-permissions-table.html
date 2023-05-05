@@ -1,6 +1,6 @@
 {{/* Scopable columns may be refactored or moved to a different page later, but should remain hardcoded for now. */}}
 
-{{ $scopable_permissions := slice "logs_read_data" "logs_write_exclusion_filters" "logs_write_processors" "logs_read_archives" "logs_read_index_data" }}
+{{ $scopable_permissions := slice "logs_write_exclusion_filters" "logs_write_processors" "logs_read_index_data" }}
 {{ $is_scopable := false }}
 {{ $hide_scopable_column := false }}
 {{ $permission_group := .group }}

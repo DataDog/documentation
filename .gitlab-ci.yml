@@ -13,8 +13,8 @@ variables:
   PREVIEW_DOMAIN: "https://docs-staging.datadoghq.com/"
   KUBERNETES_SERVICE_ACCOUNT_OVERWRITE: documentation
   KUBERNETES_CPU_REQUEST: 8
-  KUBERNETES_MEMORY_REQUEST: 16Gi
-  KUBERNETES_MEMORY_LIMIT: 16Gi
+  KUBERNETES_MEMORY_REQUEST: 24Gi
+  KUBERNETES_MEMORY_LIMIT: 24Gi
   # datadog-ci
   DATADOG_SITE: 'datadoghq.com'
   DATADOG_SUBDOMAIN: 'dd-corpsite'
@@ -102,7 +102,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-14529003
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-15527163
   tags:
     - "arch:amd64"
   rules:
@@ -233,6 +233,34 @@ sourcemaps_preview:
     - build_preview
   allow_failure: true
   interruptible: true
+
+post_build_success_status_to_spec_repo:
+  <<: *base_template
+  stage: cleanup
+  cache: {}
+  environment: "preview"
+  script:
+    - chmod +x ./local/bin/py/submit_github_status_check.py
+    - ./local/bin/py/submit_github_status_check.py -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+      when: on_success
+  interruptible: true
+  allow_failure: true
+
+post_build_failure_status_to_spec_repo:
+  <<: *base_template
+  stage: cleanup
+  cache: {}
+  environment: "preview"
+  script:
+    - chmod +x ./local/bin/py/submit_github_status_check.py
+    - ./local/bin/py/submit_github_status_check.py -s "failure" -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+      when: on_failure
+  interruptible: true
+  allow_failure: true
 
 # ================== live ================== #
 build_live:
