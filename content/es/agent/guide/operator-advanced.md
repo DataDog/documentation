@@ -7,8 +7,6 @@ kind: faq
 title: Configuración avanzada del Datadog Operator
 ---
 
-<div class="alert alert-warning">El Datadog Operator está en fase beta pública. Si tienes dudas o quieres enviarnos algún comentario, ponte en contacto con el <a href="/help">equipo de asistencia de Datadog</a>.</div>
-
 [El Datadog Operator][1] permite desplegar el Datadog Agent en Kubernetes y OpenShift e informa sobre el estado, el mantenimiento y los errores de despliegue en el estado de su recurso personalizado. Además, sus opciones de configuración de nivel superior limitan el riesgo de fallos en el proceso.
 
 ## Requisitos previos
