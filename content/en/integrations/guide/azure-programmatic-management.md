@@ -16,9 +16,7 @@ This guide demonstrates how to programmatically manage the Azure integration wit
 
 ### Azure or Azure Native integration?
 
-If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.  
-
-**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
+If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
 
 If your Datadog account is hosted on any other [Datadog site][3], use the [Azure integration][5] to collect monitoring data from your Azure environment.
 
@@ -33,6 +31,8 @@ Follow these steps to deploy the integration through [Terraform][13].
 {{% site-region region="us3" %}}
 
 The Azure Native integration uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This is possible through creation of the [azurerm_datadog_monitor][3] resource and assignment of the [Monitoring Reader role][4] in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
+
+**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
 
 1. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment:
 
@@ -210,56 +210,6 @@ az monitor diagnostic-settings create --name
 See the [az monitor diagnostic-settings create][1] section in the Azure CLI reference for more information.
 
 [1]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
-{{% /site-region %}}
-
-## Best practices in Datadog
-
-{{% site-region region="us3" %}}
-
-### Containers 
-
-Use the [Microsoft Azure Kubernetes Service integration][1] and its out-of-the-box [dashboard][2] to monitor and analyze data from your Kubernetes workloads in Azure. Explore the [containers page][3] in Datadog for detailed insights.
-
-### Databases
-
-The [Microsoft Azure Cosmos DB for PostgreSQL][4] and [Microsoft Azure SQL Database][5] integrations provide additional data from Azure database services. Use [Datadog Database Monitoring][6] to better understand the health and performance of your databases.
-
-### Serverless
-
-Datadog provides monitoring capabilities for serverless resources with the [Microsoft Azure App Service Extension][7]. Access the data on the [Azure App Service view][8] in Datadog.
-
-[1]: /integrations/azure_container_service/
-[2]: https://us3.datadoghq.com/dash/integration/524/azure-kubernetes-service
-[3]: https://us3.datadoghq.com/containers
-[4]: /integrations/azure_cosmosdb_for_postgresql/
-[5]: /integrations/azure_sql_database/
-[6]: /getting_started/database_monitoring/
-[7]: /serverless/azure_app_services
-[8]: https://us3.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
-{{% /site-region %}}
-
-{{% site-region region="us,eu,us5,gov" %}}
-
-### Containers
-
-Use the [Microsoft Azure Kubernetes Service integration][1] and its out-of-the-box [dashboard][2] to monitor and analyze data from your Kubernetes workloads in Azure. Explore the [containers page][3] in Datadog for detailed insights.
-
-### Databases
-
-The [Microsoft Azure Cosmos DB for PostgreSQL][4] and [Microsoft Azure SQL Database][5] integrations provide additional data from Azure database services. Use [Datadog Database Monitoring][6] to better understand the health and performance of your databases.
-
-### Serverless
-
-Datadog provides monitoring capabilities for serverless resources with the [Microsoft Azure App Service Extension][7]. Access the data on the [Azure App Service view][8] in Datadog.
-
-[1]: /integrations/azure_container_service/
-[2]: https://app.datadoghq.com/dash/integration/30699/azure-kubernetes-service
-[3]: https://app.datadoghq.com/containers
-[4]: /integrations/azure_cosmosdb_for_postgresql/
-[5]: /integrations/azure_sql_database/
-[6]: /getting_started/database_monitoring/
-[7]: /serverless/azure_app_services
-[8]: https://app.datadoghq.com/functions?cloud=azure&config_serverless-azure-app=true&group=service
 {{% /site-region %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
