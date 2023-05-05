@@ -105,9 +105,6 @@ data/workflows/
 !content/en/workflows/actions_catalog/_index.md
 !content/en/workflows/actions_catalog/generic_actions.md
 
-# semantic tag colors
-layouts/shortcodes/semantic-color.md
-
 # Runtime data
 pids
 *.pid
