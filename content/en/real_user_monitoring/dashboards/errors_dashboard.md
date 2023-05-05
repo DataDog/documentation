@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The errors dashboard provides insights about your applications’ errors. It shows:
+The errors dashboard provides insights about your applications' errors. It shows:
 
 - **General errors**:
     Visualize which pages, browser, and countries are the most affected by frontend errors.

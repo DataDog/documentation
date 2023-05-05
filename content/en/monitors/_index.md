@@ -18,6 +18,9 @@ further_reading:
   - link: "/api/v1/monitors/"
     tag: "Documentation"
     text: "Datadog Monitors API"
+  - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+    tag: "Blog"
+    text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
 ---
 
 ## Overview

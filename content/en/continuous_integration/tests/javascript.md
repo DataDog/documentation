@@ -441,6 +441,8 @@ Cypress interactive mode (which you can enter by running `cypress open`) is not 
 ### Mocha parallel tests
 Mocha's [parallel mode][4] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
 
+### Jest's `test.concurrent`
+Jest's [test.concurrent][15] is not supported.
 
 ## Best practices
 
@@ -459,14 +461,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][15] instead:
+And use [`test.each`][16] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][16]:
+For `mocha`, use [`mocha-each`][17]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -489,7 +491,7 @@ When CI Visibility is enabled, the following data is collected from your project
 * Git commit history including the hash, message, author information, and files changed (without file contents).
 * Information from the CODEOWNERS file.
 
-In addition to that, if [Intelligent Test Runner][17] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][18] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
@@ -513,6 +515,7 @@ In addition to that, if [Intelligent Test Runner][17] is enabled, the following 
 [12]: /continuous_integration/guides/rum_integration/
 [13]: https://docs.cypress.io/api/plugins/before-run-api
 [14]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[15]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[16]: https://www.npmjs.com/package/mocha-each
-[17]: /continuous_integration/intelligent_test_runner/
+[15]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[17]: https://www.npmjs.com/package/mocha-each
+[18]: /continuous_integration/intelligent_test_runner/

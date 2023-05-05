@@ -17,15 +17,25 @@ title: ユーザーモニタリングと保護
 
 サービスをインスツルメンテーションし、ユーザーのアクティビティを追跡することで、悪質なユーザーを検出・ブロックします。
 
-認証されたユーザー情報をトレースに追加することで、認証された攻撃対象領域を狙う悪質なユーザーを特定し、ブロックすることができます。これを行うには、実行中の APM トレースにユーザー ID タグを設定し、ASM が認証済み攻撃者をブロックするために必要なインストルメンテーションを提供します。これにより、ASM は攻撃やビジネスロジックのイベントをユーザーに関連付けることができます。
+[認証されたユーザー情報をトレースに追加する][2]ことで、認証された攻撃対象領域を狙う悪質なユーザーを特定し、ブロックすることができます。これを行うには、実行中の APM トレースにユーザー ID タグを設定し、ASM が認証済み攻撃者をブロックするために必要なインストルメンテーションを提供します。これにより、ASM は攻撃やビジネスロジックのイベントをユーザーに関連付けることができます。
 
-ユーザーのログインを追跡し、すぐに使える検出ルールでアカウントの乗っ取りを検出し、最終的に攻撃者をブロックすることができます。
+[ユーザーのログインとアクティビティを追跡][3]し、すぐに使える検出ルールでアカウントの乗っ取りやビジネスロジックの乱用を検出し、最終的に攻撃者をブロックすることができます。
 
-ビジネスロジックの不正使用を防止するために、追加のビジネスロジックを追跡し、独自の検出ルールを作成します。
+すぐに使える検出ルールとして、以下のようなカスタムユーザーアクティビティがあります。
+
+| 内蔵のイベント名   | 必要なメタデータ                                    | 関連ルール                                                                                                                                                                                                       |
+|------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [IP からのレート制限アクティビティ][4]<br>[不正なアクティビティの検出][5] |
+| `users.login.success`  | ユーザー ID は必須で、オプションでメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]                                                                                                              |
+| `users.login.failure`  | ユーザー ID は必須で、オプションでメタデータを追加できます | [クレデンシャルスタッフィング攻撃][6]                                                                                                              |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント作成][7]                                                                                                    |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント削除][8]                                                                                           |
+| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [パスワードリセットのブルートフォース試行][9]                                                                                                         |
+| `payment.attempt`      | `{ "status": "failed" }`                             | [IP からの過剰な支払い失敗][10]                                                                                                        |
 
 ## 認証されたユーザー情報をトレースに追加し、ユーザーブロック機能を有効にする
 
-[ルートスパンにカスタムタグを追加する][1]方法と、後述のインスツルメンテーション関数を利用する方法があります。
+[ルートスパンにカスタムタグを追加する][3]方法と、後述のインスツルメンテーション関数を利用する方法があります。
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
@@ -61,7 +71,6 @@ Blocking
     .forUser("d131dd02c56eec4")
     .blockIfMatch();
 ```
-
 
 [1]: /ja/tracing/trace_collection/compatibility/java/#setup
 {{< /programming-lang >}}
@@ -196,25 +205,28 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-ルートスパンにカスタムタグを追加するための PHP トレーサーの API を使用し、アプリケーションで認証されたリクエストを監視できるように、ユーザー情報を追加します。
+PHP トレーサーは `\DDTrace\set_user()` 関数を提供し、認証されたリクエストを監視したりブロックしたりすることができます。
 
-ユーザーモニタリングタグは、ルートスパンの `meta` セクションに適用され、プレフィックス `usr` の後にフィールド名が続きます。例えば、`usr.name` は、ユーザーの名前を追跡するユーザーモニタリングタグです。
+`\DDTrace\set_user()` はトレースに関連するユーザータグとメタデータを追加し、ユーザーブロックを自動的に実行します。
 
-以下の例では、ルートスパンを取得し、関連するユーザーモニタリングタグを追加する方法を示しています。
+以下の例では、ユーザー監視タグを設定し、ユーザーブロックを有効にする方法を示します。
 
 ```php
 <?php
-$rootSpan = \DDTrace\root_span();
+// ブロッキングは、set_user コールにより内部で行われます。
+\DDTrace\set_user(
+    // ユーザーの一意な識別子が必要です。
+    '123456789',
 
- // ユーザーの一意な識別子が必要です。
-$rootSpan->meta['usr.id'] = ‘123456789’;
-
-// その他のフィールドはすべてオプションです。
-$rootSpan->meta['usr.name'] = ‘Jean Example’;
-$rootSpan->meta['usr.email'] = ‘jean.example@example.com’;
-$rootSpan->meta['usr.session_id'] = ‘987654321’;
-$rootSpan->meta['usr.role'] = ‘admin’;
-$rootSpan->meta['usr.scope'] = ‘read:message, write:files’;
+    // その他のフィールドはすべてオプションです。
+    [
+        'name' =>  'Jean Example',
+        'email' => 'jean.example@example.com',
+        'session_id' => '987654321',
+        'role' => 'admin',
+        'scope' => 'read:message, write:files',
+    ]
+);
 ?>
 ```
 
@@ -266,28 +278,19 @@ Python トレーサーパッケージが提供する `set_user` 関数を用い�
 この例では、ユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を示します。
 
 ```python
-from ddtrace.appsec.trace_utils import should_block_user
-from ddtrace.appsec.trace_utils import block_request
-from ddtrace.appsec.trace_utils import block_request_if_user_blocked
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
 # set_user() を呼び出し、現在認証されているユーザー ID をトレースします
 user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
-# is_user_blocked() を呼び出し、denylist にあるときに認証ユーザーをブロックする可能性があります
-if should_block_user(user_id):
-    block_request()
-# また、チェックし、必要であればブロックするユーティリティ関数:
-block_request_if_user_blocked(tracer, user_id)
-    block_request()
 ```
 
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
-## ユーザーイベント (ログイン成功、ログイン失敗、任意のビジネスロジック) のトレースへの追加
+## ビジネスロジック情報 (ログイン成功、ログイン失敗、任意のビジネスロジック) のトレースへの追加
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
@@ -564,7 +567,7 @@ dd-trace-php v0.84.0 からは、PHP トレーサーの API を使用してユ�
 {{% tab "カスタムビジネスロジック" %}}
 ```php
 <?php
-\datadog\appsec\track_custom_event(‘users.signup’, [‘id’ => $id, 'email' => $email]);
+\datadog\appsec\track_custom_event('users.signup', ['id' => $id, 'email' => $email]);
 ?>
 ```
 {{% /tab %}}
@@ -658,6 +661,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 {{% /tab %}}
 
 {{% tab "カスタムビジネスロジック" %}}
+
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
 from ddtrace import tracer
@@ -678,3 +682,12 @@ track_custom_event(tracer, event_name, metadata)
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/custom_instrumentation/
+[2]: /ja/security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
+[3]: /ja/security/application_security/threats/add-user-info/#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[4]: /ja/security/default_rules/bl-rate-limiting/
+[5]: /ja/security/default_rules/bl-privilege-violation/
+[6]: /ja/security/default_rules/appsec-ato-groupby-ip/
+[7]: /ja/security/default_rules/bl-signup-ratelimit/
+[8]: /ja/security/default_rules/bl-account-deletion-ratelimit/
+[9]: /ja/security/default_rules/bl-password-reset/
+[10]: /ja/security/default_rules/bl-payment-failures/

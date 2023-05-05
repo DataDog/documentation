@@ -1,8 +1,8 @@
 {
   "data": {
     "attributes": {
-      "api_key": "ExampleAddFastlyaccountreturnsCREATEDresponse",
-      "name": "Example-Add_Fastly_account_returns_CREATED_response",
+      "api_key": "ExampleFastlyIntegration",
+      "name": "Example-Fastly-Integration",
       "services": []
     },
     "type": "fastly-accounts"

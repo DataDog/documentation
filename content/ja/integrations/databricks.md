@@ -20,8 +20,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
-- コラボレーション
-- 処理
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
@@ -40,18 +38,16 @@ public_title: Databricks
 short_description: Databricks クラスターで Apache Spark を監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Cloud
-  - Category::Collaboration
-  - Category::Processing
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Databricks クラスターで Apache Spark を監視する
   media: []
@@ -68,7 +64,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Databricks Spark アプリケーションを [Datadog Spark インテグレーション][3]で監視します。適切なクラスターの[コンフィギュレーション](#configuration)方法に従って、クラスターに [Datadog Agent][4] をインストールしてください。
 

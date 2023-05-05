@@ -18,7 +18,7 @@ Session Replay provides privacy controls to ensure organizations of any scale do
 
 Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected.
 
-By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK.
+By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
 ## Configuration
 
@@ -53,14 +53,14 @@ After updating your configuration, you can override elements of your HTML docume
 
 Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
-{{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="Mask user input mode" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="Mask user input mode" style="width:70%;">}}
 
 **Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay, which means all input fields are automatically masked.
 
 ### Mask mode
 Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
-{{< img src="real_user_monitoring/session_replay/mask.png" alt="Mask mode" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
 **Note**: Masked data is not stored on Datadog servers.
 ### Allow mode

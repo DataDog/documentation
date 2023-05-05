@@ -6,7 +6,7 @@
       "type": "email"
     }
   ],
-  "dd-service": "service-examplecreateorupdateservicedefinitionusingschemav21returnscreatedresponse",
+  "dd-service": "service-exampleservicedefinition",
   "extensions": {
     "myorgextension": "extensionvalue"
   },

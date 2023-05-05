@@ -1,11 +1,13 @@
 ---
 aliases: []
 categories:
-  - cloud
-  - oracle
-  - log collection
+- cloud
+- log collection
+- network
+- oracle
 dependencies: []
-description: Permet d'envoyer des logs personnalisés et des logs de services depuis Oracle Cloud Infrastructure vers Datadog.
+description: Permet d'envoyer des logs personnalisés et des logs de services depuis
+  Oracle Cloud Infrastructure vers Datadog.
 doc_link: https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/
 draft: false
 further_reading: []
@@ -23,13 +25,14 @@ short_description: Collectez et surveillez des logs depuis Oracle Cloud.
 type: ''
 version: '1.0'
 ---
+
 ## Présentation
 
 Oracle Cloud Infrastructure (OCI) est une infrastructure en tant que service (IaaS) et une plateforme en tant que service (PaaS) utilisée par les plus grandes entreprises. Celle-ci inclut un ensemble complet de services gérés pour l'hébergement, le stockage, la mise en réseau, les bases de données, et bien plus encore.
 
 Grâce à l'intégration Datadog, les utilisateurs d'OCI peuvent transmettre directement l'ensemble de leurs logs vers Datadog, où ils peuvent alors être stockés indéfiniment, analysés à des fins de dépannage, et surveillés à des fins de sécurité et de conformité.
 
-## Configuration
+## Implémentation
 
 ### Collecte de logs
 
@@ -59,7 +62,7 @@ Les instructions ci-dessous utilisent le portail OCI pour configurer l'intégrat
 
 Pour en savoir plus sur les logs OCI, consultez la section [Activation de la journalisation pour une ressource][1].
 
-#### Fonction OCI
+#### Fonciton OCI
 
 1. Depuis le portail OCI, accédez à *Solutions and Platform -> Developer Services -> Functions.*
 2. Sélectionnez une application existante ou cliquez sur **Create Application**.

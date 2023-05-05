@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables) (such as attributes and signal tags) and [conditional variables](#conditional-variables) to customize a rule’s notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
+When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables) (such as attributes and signal tags) and [conditional variables](#conditional-variables) to customize a rule's notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
 
 ## Template Variables
 
@@ -52,7 +52,7 @@ Or, if a signal is tagged with a specific service, use the `{{@service}}` variab
 
 ### Evaluation of numerical values
 
-For template variables that return numerical values, use `eval` to perform mathematical operations or change the value’s format. For more information, see [Template Variable Evaluation][2].
+For template variables that return numerical values, use `eval` to perform mathematical operations or change the value's format. For more information, see [Template Variable Evaluation][2].
 
 ### Epoch
 
@@ -84,7 +84,7 @@ HIPAA-enabled Datadog organizations have access to only <a href="#template-varia
 
 Use attribute variables to customize signal notifications with specific information about the triggered signal. 
 
-To see a signal’s list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal’s side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
+To see a signal's list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal's side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
 
 The following is an example JSON object with event attributes that may be associated with a security signal:
 
@@ -171,7 +171,7 @@ The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}}
 ```
 ## Tag variables
 
-Use the following syntax to add a tag variable to your rule’s notification message: `{{tag_name}}`. 
+Use the following syntax to add a tag variable to your rule's notification message: `{{tag_name}}`. 
 
 For tags following the `key:value` syntax, use the variable: `{{key.name}}`. This renders the value associated with the key in the notification. For example, if a signal has the tag key `region`, use the variable `{{region.name}}` in your notification message.
 

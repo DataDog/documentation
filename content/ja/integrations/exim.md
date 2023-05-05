@@ -19,8 +19,7 @@ author:
   name: コミュニティ
   sales_email: JeanFred1@gmail.com
   support_email: JeanFred1@gmail.com
-categories:
-- コラボレーション
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/exim/README.md
 display_on_public_website: true
@@ -38,15 +37,14 @@ public_title: Exim
 short_description: メールキューを監視する Exim インテグレーション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Collaboration
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: メールキューを監視する Exim インテグレーション
   media: []
@@ -65,7 +63,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い exim チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

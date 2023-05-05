@@ -93,7 +93,7 @@ See [Logs Search Syntax][1] for more details.
 
 ### Facets
 
-Datadog indexes event attributes as facets or measures that are accessible from the Event Explorer facet side-panel, analytics, and monitors.
+Datadog indexes event attributes as facets that are accessible from the Event Explorer facet side-panel, analytics, and monitors.
 
 A facet displays the distinct members of an attribute or a tag and provides basic analytics, such as the number of events represented. Facets allow you to pivot or filter your datasets based on a given attribute. To filter, select the values that you want to see.
 
@@ -154,7 +154,7 @@ You can export analytics visualizations to create widgets in a dashboard or note
 
 ### Build an analytics query
 
-Use the query to control what’s displayed in your Events Analytics:
+Use the query to control what's displayed in your Events Analytics:
 
 1. Choose an attribute or tag to graph, and add it as a facet. Graphing a facet displays the unique count of the variable.
     {{< img src="events/explorer/facet-to-graph.png" alt="Shows the list of facets that can be graphed." style="width:100%;" >}}

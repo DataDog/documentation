@@ -39,7 +39,7 @@ Docker API は、一度に 1 つのコンテナからログを取得するよう
 
 DaemonSet によるログの収集を有効にするには
 
-1. `datadog.yaml` Agent  マニフェストの *env* セクションで、`DD_LOGS_ENABLED` 変数と `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 変数を true に設定します。
+1. `datadog.yaml` Agent マニフェストの *env* セクションで、`DD_LOGS_ENABLED` 変数と `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 変数を true に設定します。
 
     ```yaml
      # (...)
@@ -132,6 +132,8 @@ datadog:
     containerCollectAll: true
 ```
 
+`datadog.logs.containerCollectAll` を `true` に設定すると、デフォルトで検出されたすべてのコンテナからログを収集することができます。`false` (デフォルト) に設定すると、ログ収集を有効にするためにオートディスカバリーのログ構成を指定する必要があります。
+
 ### 非特権
 
 (オプション) 非特権インストールを実行するには、`values.yaml` ファイルに以下を追加します。
@@ -152,38 +154,61 @@ datadog:
 
 `datadog-agent.yaml` マニフェストを次のように更新します。
 
-```
-agent:
-  image:
-    name: "gcr.io/datadoghq/agent:latest"
-  log:
-    enabled: true
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
 ```
 
-完全な例については、[ログ とメトリクス収集が有効になっているマニフェスト][1]の例を参照してください。
+完全な例は、[ログとメトリクスの収集が有効なマニフェスト][1]例を参照してください。`features.logCollection.containerCollectAll` を `true` に設定すると、デフォルトで検出されたすべてのコンテナからログを収集することができます。`false` (デフォルト) に設定すると、ログ収集を有効にするためにオートディスカバリーのログ構成を指定する必要があります。
 
 次に、新しいコンフィギュレーションを適用します。
 
 ```shell
-$ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
 ## 非特権
 
-(オプション) 非特権インストールを実行するには、[Datadog CR][8] に以下を追加します。
+(オプション) 非特権インストールを実行するには、[DatadogAgent Custom Resource][2] に以下を追加します。
 
 ```yaml
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: <USER_ID>
+        supplementalGroups:
+          - <DOCKER_GROUP_ID>
 ```
 
 `<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
+[1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -406,7 +431,7 @@ kind: Pod
 metadata:
   name: redis
   annotations:
-    ad.datadoghq.com/redis.logs: '[{"source":"redis","service":"redis","tags":"env:prod"}]'
+    ad.datadoghq.com/redis.logs: '[{"source": "redis","service": "redis","tags": ["env:prod"]}]'
   labels:
     name: redis
 spec:
@@ -420,7 +445,7 @@ spec:
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
-次の ConfigMap は、ログを収集するための `source` 属性と `service` 属性を使用して、`redis` コンテナのインテグレーションテンプレートを定義しています。
+次の ConfigMap は、ログを収集するための `source` と `service` 属性を持つ `redis` コンテナのインテグレーションテンプレートを定義し、そのすべてのログにカスタムタグを含む正しい `source` と `service` 属性でタグ付けします。
 
 ```yaml
 kind: ConfigMap
@@ -434,9 +459,10 @@ data:
       - redis
       - redis-test
     logs:
-      source: redis
-      service: redis
-      tags: env:prod
+      - source: redis
+        service: redis
+        tags:
+          - env:prod
 ```
 
 マニフェストで `volumeMounts` と `volumes` を定義します。
@@ -466,7 +492,7 @@ data:
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
-etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": "env:prod"}]'
+etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": ["env:prod"]}]'
 ```
 
 3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をインテグレーション構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
@@ -484,8 +510,8 @@ auto-conf ファイルとは異なり、**key-value ストアの場合は、コ�
         - redis
       logs:
         - source: redis
-        - service: redis
-        - tags: env:prod
+          service: redis
+          tags: env:prod
   ```
 
 **注**: 上記のコンフィギュレーションは、このインテグレーションからのログのみを収集します。すでに Redis インテグレーションから他のデータを収集している場合は、`logs` セクションを既存のコンフィギュレーションに追加できます。
@@ -586,7 +612,7 @@ Kubernetes のログにタグがない場合、ログが送信されるときに
 tagger_warmup_duration: 5
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

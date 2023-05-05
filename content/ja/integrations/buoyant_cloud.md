@@ -22,8 +22,6 @@ author:
   support_email: cloud@buoyant.io
 categories:
 - クラウド
-- マーケットプレイス
-- モニタリング
 - ネットワーク
 - セキュリティ
 dependencies:
@@ -49,8 +47,6 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Cloud
-  - Category::Marketplace
-  - Category::Monitoring
   - Category::Network
   - Category::Security
   - Offering::Integration

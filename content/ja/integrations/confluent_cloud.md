@@ -1,6 +1,6 @@
 ---
 categories:
-- web
+- クラウド
 dependencies: []
 description: Confluent Cloud から Kafka クラスターとコネクタのメトリクスを収集します。
 doc_link: https://docs.datadoghq.com/integrations/confluent_cloud/
