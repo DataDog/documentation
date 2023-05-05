@@ -20,13 +20,13 @@ further_reading:
   text: "Setting Up Cloud Workload Security"
 
 ---
+
 {{< site-region region="gov" >}}
 
-Remote configuration is not available on the US1-FED Datadog site.
+<div class="alert alert-warning">Remote configuration is not available on the US1-FED Datadog site.</div>
+
 
 {{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 
 <div class="alert alert-info">Remote Configuration is in beta.</a></div>
 
@@ -99,16 +99,16 @@ Datadog implements the following safeguards, designed to protect the confidentia
 
 
 - Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers. 
-- For features that use tracing libraries, the following minimum versions of Datadog tracing libraries:
+- For features that use tracing libraries, the following minimum versions of Datadog tracing libraries include:
 
+  | Product feature                        | Go            | Java          | .Net          | NodeJS
+  |----------------------------------------|---------------|---------------|---------------|---------------|
+  | Dynamic Instrumentation |               | 1.5.0         | 2.22.0        |               |
 
-| Product feature                        | Go            | Java          | .Net          | NodeJS
-|----------------------------------------|---------------|---------------|---------------|---------------|
-| Dynamic Instrumentation |               | 1.5.0         | 2.22.0        |               |
-| ASM Protect                | 1.45.1        | 1.4.0         | 2.16.0        | 3.11.0        |
-| ASM 1-click activation        |               | 1.4.0         | 2.17.0        | 3.9.0         |
+  For ASM Protection capabilities and ASM 1-click activation, see [Compatibility Requirements][12].
 
 ### Setup
+
 To enable Remote Configuration:
 
 1. Ensure your RBAC permissions include [`org_management`][9], so you can enable Remote Configuration for your organization.
@@ -167,6 +167,9 @@ After you perform these steps, your Agent requests its configuration from Datado
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
 [2]: /help/
@@ -179,9 +182,4 @@ After you perform these steps, your Agent requests its configuration from Datado
 [9]: /account_management/rbac/permissions#access-management
 [10]: /observability_pipelines/#observability-pipelines-worker
 [11]: /security/cloud_workload_security/setup
-
-{{< /site-region >}}
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[12]: /security/application_security/enabling/compatibility/
