@@ -334,7 +334,7 @@ If the browser application being tested is instrumented using [RUM][6], your Cyp
 
 ### Reporting code coverage
 
-When tests are instrumented with code coverage with [Istanbul][8], the Datadog Tracer (v3.20.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+When tests are instrumented with [Istanbul][8], the Datadog Tracer (v3.20.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
