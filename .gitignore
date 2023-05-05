@@ -73,7 +73,6 @@ content/en/security/cloud_workload_security/backend.md
 content/en/security_platform/
 
 # cspm cloud resource schemas
-
 content/en/security/cspm/custom_rules/*.md
 !content/en/security/cspm/custom_rules/_index.md
 !content/en/security/cspm/custom_rules/schema.md
@@ -105,6 +104,9 @@ content/en/workflows/actions_catalog/*
 data/workflows/
 !content/en/workflows/actions_catalog/_index.md
 !content/en/workflows/actions_catalog/generic_actions.md
+
+# semantic tag colors
+layouts/shortcodes/semantic-color.md
 
 # Runtime data
 pids

@@ -1744,6 +1744,10 @@ components:
             be muted.
           example: false
           type: boolean
+        notify_end_states:
+          $ref: '#/components/schemas/NotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/NotifyEndTypes'
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1880,6 +1884,10 @@ components:
             be muted.
           example: false
           type: boolean
+        notify_end_states:
+          $ref: '#/components/schemas/NotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/NotifyEndTypes'
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -8498,6 +8506,60 @@ components:
           format: int64
           type: integer
       type: object
+    NotifyEndState:
+      description: A notification end state.
+      enum:
+      - alert
+      - no data
+      - warn
+      example: alert
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - NO_DATA
+      - WARN
+    NotifyEndStates:
+      default:
+      - alert
+      - no data
+      - warn
+      description: States for which `notify_end_types` sends out notifications for.
+      example:
+      - alert
+      - no data
+      - warn
+      items:
+        $ref: '#/components/schemas/NotifyEndState'
+      type: array
+    NotifyEndType:
+      description: A notification end type.
+      enum:
+      - canceled
+      - expired
+      example: expired
+      type: string
+      x-enum-varnames:
+      - CANCELED
+      - EXPIRED
+    NotifyEndTypes:
+      default:
+      - expired
+      description: 'If set, notifies if a monitor is in an alert-worthy state (`ALERT`,
+        `WARNING`, or `NO DATA`)
+
+        when this downtime expires or is canceled. Applied to monitors that change
+        states during
+
+        the downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and
+        to monitors that
+
+        already have an alert-worthy state when downtime begins.'
+      example:
+      - canceled
+      - expired
+      items:
+        $ref: '#/components/schemas/NotifyEndType'
+      type: array
     OnMissingDataOption:
       description: 'Controls how groups or monitors are treated if an evaluation does
         not return any data points.
@@ -25643,7 +25705,7 @@ paths:
         - `#` an integer or decimal number used to set the threshold
 
 
-        **Logs Alert Query**
+        ##### Logs Alert Query
 
 
         Example: `logs(query).index(index_name).rollup(rollup_method[, measure]).last(time_window)

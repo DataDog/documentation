@@ -5,6 +5,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/migrate-to-azure-with-the-microsoft-cloud-adoption-framework/
   tag: ブログ
   text: Microsoft Cloud Adoption Framework と Datadog で Azure への移行を成功させる
+- link: https://www.datadoghq.com/blog/azure-arc-integration/
+  tag: ブログ
+  text: Datadog で Azure Arc ハイブリッドインフラストラクチャーを監視する
 kind: ガイド
 title: Azure Datadog 拡張機能をインストールするコマンド
 ---
@@ -54,7 +57,7 @@ Datadog Windows Agent Azure Extension は、`agentConfiguration` URI が `.blob.
 Datataog Agent 構成は、`%PROGRAMDATA%\Datadog` フォルダから作成する必要があります。
 
 ```powershell
-Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
+Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentConfiguration" = "https://<CONFIGURATION_BLOB>.blob.core.windows.net/<FILE_PATH>.zip"; "agentConfigurationChecksum" = "<SHA256_CHECKSUM>"} -DisableAutoUpgradeMinorVersion
 ```
 
 **注**: Datadog Agent をインストールすると、構成は新しいバージョンにアップグレードするときのみ変更することができます。
@@ -65,7 +68,7 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 **注**: ダウングレードはサポートされていないため、ターゲットマシンに現在インストールされている Datadog Agent のバージョンよりも低いバージョンの Datadog Agent をインストールすることはできません。Datadog Agent の下位バージョンをインストールするには、ターゲットマシン上の Datadog Windows Agent Azure Extension を削除して、以前のバージョンを最初にアンインストールしてください。Datadog Windows Agent Azure Extension を削除しても、Datadog Agent の構成は削除されません。
 
 ```powershell
-Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "6.4" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "7.40.0"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
+Set-AzureVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "DatadogWindowsAgent" -TypeHandlerVersion "5.0" -Settings @{"site" = "<SITE_PARAMETER>"; "agentVersion" = "7.40.0"} -ProtectedSettings @{"api_key" = "<DATADOG_API_KEY>"} -DisableAutoUpgradeMinorVersion
 ```
 
 [1]: https://learn.microsoft.com/en-us/powershell/module/az.compute/set-azvmextension
