@@ -11,7 +11,7 @@ further_reading:
 
 Real User Monitoring (RUM) events are valuable both individually and collectively. The search query contains information to aggregate a subset of events. 
 
-{{< img src="real_user_monitoring/explorer/group_into_fields.png" alt="Group into fields section of the Search query" style="width:90%;" >}}
+{{< img src="real_user_monitoring/explorer/group_into_fields-2.png" alt="Group into fields section of the Search query" style="width:100%;" >}}
 
 Your selection of fields to group, aggregate, and measure your events are preserved as you switch between visualization types.
 
