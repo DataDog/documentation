@@ -180,6 +180,10 @@ main:
     url: getting_started/learning_center/
     parent: getting_started
     weight: 21
+  - name: Support
+    url: getting_started/support/
+    parent: getting_started
+    weight: 22
   - name: Glossary
     url: glossary/
     pre: features
