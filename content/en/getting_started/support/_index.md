@@ -68,7 +68,7 @@ If additional investigation is required, the ticket is routed to experts in the 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: help.datadoghq.com
+[1]: https://help.datadoghq.com/hc/
 [2]: /account_management/org_switching/
 [3]: /getting_started/site/
 [4]: /agent/troubleshooting/send_a_flare/
