@@ -69,7 +69,7 @@ Click on a node and select _Inspect_ from the menu to contextualize it within th
 
 ## Map clusters
 
-For complex networks, the map's query editor includes additional grouping fields. This enables you to render datasets that would otherwise have too many nodes to show at once on the map, as well as improve the performance of high cardinality queries.
+For complex networks, the map's query editor includes additional grouping fields. This enables you to render datasets that would otherwise have too many nodes to show at once on the map. Using the additional grouping fields also improves the performance of high cardinality queries.
 
 {{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="Network map page search bar" >}}
 
@@ -77,7 +77,7 @@ For complex networks, the map's query editor includes additional grouping fields
 
 Clustering adds an additional dimension for grouping the nodes in the map. Large maps are automatically clustered to improve load time and readability of the map. To view the nodes within a cluster, click the cluster to expand it. To collapse the cluster, click the gray area surrounding the nodes.
 
-A red border around a cluster indicates that there is at least one alerting monitor with the same tag as what the nodes are being grouped by. For example, if the map is grouped by service, then the map will look for monitors with the tag `service:nodeName`. 
+A red border around a cluster indicates that at least one alerting monitor carries a tag that matches the tag by which the nodes are grouped. For example, if the map is grouped by service, then the map looks for monitors with the tag `service:<nodeName>`. If the monitor is in an alert state, the map outlines any clusters containing `<nodeName>` in red.  
 
 {{< img src="network_performance_monitoring/network_map/expanded_network_cluster.png" alt="expanded network cluster map view" >}}
 
