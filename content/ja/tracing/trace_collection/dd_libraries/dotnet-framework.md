@@ -77,7 +77,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 
 1. [APM に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
 2. [トレーサーをインストールします。](#install-the-tracer)
-3. {{< tabs >}}
+3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [ライブデータを表示します。](#view-your-live-data)
 
 ### APM に Datadog Agent を構成する
