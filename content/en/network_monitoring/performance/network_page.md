@@ -241,7 +241,7 @@ Unresolved client and server tags are marked as `N/A`. A traffic client or serve
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
 
-Use the _Show N/A (Unresolved Traffic)_ toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
+Use the **Show N/A (Unresolved Traffic)** toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
 
 Select any row from the data table to see associated logs, traces, and processes for a given **client** <=> **server** aggregate connection:
 
