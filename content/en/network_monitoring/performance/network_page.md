@@ -37,7 +37,7 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 {{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
-Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to aggregate on, using a combination of `service`, `kube_service`, `short_image`, `container_name`, and other common tags.
+Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into a several commonly used tags  such as `service`, `kube_service`, `short_image`, and `container_name`.
 
 ### Facet panels
 
