@@ -37,7 +37,7 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 {{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
-Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into a several commonly used tags  such as `service`, `kube_service`, `short_image`, and `container_name`.
+Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
 ### Facet panels
 
@@ -66,7 +66,7 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 - `client_service:*web` matches all client services that end with web
 - `client_service:*web*` matches all client services that contain the string web
 
-Wildcard searches work within facets with this syntax. This query returns all the client services that end with the string mongo:
+Wildcard searches work within facets with this syntax. This query returns all the client services that end with the string "mongo":
 
 `client_service:*mongo`
 
@@ -258,7 +258,7 @@ The sidepanel provides contextual telemetry to help you debug network dependenci
 
 ### Common tags
 
-The top of the sidepanel displays common client and server tags shared by the inspected dependency's most recent connections. Use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags will surface:
+The top of the sidepanel displays common client and server tags shared by the inspected dependency's most recent connections. Use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags surface the following:
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 
