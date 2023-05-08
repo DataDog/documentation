@@ -21,7 +21,7 @@ further_reading:
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection was sent to.
+To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection terminated.
 
 {{< img src="network_performance_monitoring/network_page/network_diagram.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
 
