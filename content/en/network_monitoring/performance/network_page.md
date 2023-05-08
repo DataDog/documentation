@@ -74,7 +74,7 @@ To learn more, see the [search syntax][1] documentation.
 
 ### Group by
 
-Groups allow you to filter your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to not group by a tag using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
+Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
 
 ## Network data
 
