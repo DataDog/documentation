@@ -105,7 +105,7 @@ Datadog implements the following safeguards, designed to protect the confidentia
   |----------------------------------------|---------------|---------------|---------------|---------------|
   | Dynamic Instrumentation |               | 1.5.0         | 2.22.0        |               |
 
-  For ASM Protection capabilities and ASM 1-click activation, see [Compatability Requirements][12].
+  For ASM Protection capabilities and ASM 1-click activation, see [Compatibility Requirements][12].
 
 ### Setup
 
