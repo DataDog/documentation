@@ -33,6 +33,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/
   tag: ブログ
   text: Datadog Application Security Management でアプリや API の攻撃者をブロックする
+- link: https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/
+  tag: ブログ
+  text: Datadog Application Security Management による脅威のモデリング
 kind: documentation
 title: Application Security Management
 ---
