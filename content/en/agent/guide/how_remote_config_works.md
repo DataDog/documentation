@@ -1,8 +1,6 @@
 ---
 title: How Remote Configuration Works
 kind: guide
-is_beta: true
-private: true
 aliases:
 - /agent/guide/how_rc_works
 further_reading:
@@ -18,7 +16,6 @@ further_reading:
 - link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
   tag: "Documentation"
   text: "Setting Up Cloud Workload Security"
-
 ---
 
 {{< site-region region="gov" >}}
@@ -28,10 +25,8 @@ further_reading:
 
 {{< /site-region >}}
 
-<div class="alert alert-info">Remote Configuration is in beta.</a></div>
-
 ## Overview
-Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog resources (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog resources in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
+Remote Configuration is a Datadog capability that allows you to remotely configure the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
 
 For Datadog security products, Application Security Management and Cloud Workload Security, Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
 
@@ -54,7 +49,6 @@ The following diagram illustrates how Remote Configuration works:
 The following products and features are supported with Remote Config:
 
 ### Application Security Management (ASM)
-<div class="alert alert-info">This feature is in beta.</div>
 
 - **1-click ASM activation**: Enable ASM in 1-click from the Datadog UI.
 - **In-App attack patterns updates**: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
@@ -115,7 +109,7 @@ To enable Remote Configuration:
 
 2. Ensure your RBAC permissions include [`api_keys_write`][3], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
 
-3. On the [Remote Configuration][4] page, enable Remote Configuration. This enables Datadog resources across your organization to receive configurations from Datadog.
+3. On the [Remote Configuration][4] page, enable Remote Configuration. This enables Datadog components across your organization to receive configurations from Datadog.
 
 4. Select an existing API key or create a new API key, and enable the Remote Config capability on the key:
 
@@ -130,17 +124,7 @@ Add the following to your configuration YAML file, specifying the API key that h
 api_key: xxx
 remote_configuration:
   enabled: true
-```
-
-To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
-```yaml
-clusterAgent:
-  admissionController:
-    remoteInstrumentation:
-      enabled: true
-```
-
-6. Restart your Agent for the changes to take effect.  
+``` 
 
 {{% /tab %}}
 {{% tab "Environment variable" %}}
@@ -150,22 +134,32 @@ DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
 ```
 
-To enable Datadog Remote Instrumentation, add the following to your Helm Chart.
+{{% /tab %}}
+{{% tab "Helm" %}}
+Add the following to your Helm chart, specifying the API key that has Remote Config capability enabled:
 ```yaml
-clusterAgent:
-  admissionController:
-    remoteInstrumentation:
-      enabled: true
+datadog:
+  apiKey:  # <DATADOG_API_KEY>
+  remoteConfiguration:
+    enabled: true
 ```
+
 {{% /tab %}}
 {{< /tabs >}}
 
+
+6. Restart your Agent for the changes to take effect. 
+
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CWS default agent rules][5] update automatically as released.
-- Datadog Remote Instrumentation is enabled.
+- [Datadog Remote Instrumentation][13] is enabled.
 - [APM Agent-level sampling rates][6] are applied.  
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
+
+## Best Practices
+
+## Troubleshooting
 
 ## Further Reading
 
@@ -183,3 +177,4 @@ After you perform these steps, your Agent requests its configuration from Datado
 [10]: /observability_pipelines/#observability-pipelines-worker
 [11]: /security/cloud_workload_security/setup
 [12]: /security/application_security/enabling/compatibility/
+[13]: /tracing/trace_collection/library_injection_remote/
