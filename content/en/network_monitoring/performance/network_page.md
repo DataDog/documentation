@@ -102,7 +102,7 @@ The following network load metrics are available:
 
 #### TCP
 
-TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available:
+TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available: All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 
 | Metric                      | Description                                                                                                                              |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
