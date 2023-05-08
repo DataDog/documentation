@@ -107,7 +107,7 @@ TCP is a connection-oriented protocol that guarantees in-order delivery of packe
 | Metric                      | Description                                                                                                                              |
 |-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
 | **TCP Retransmits**         | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
-| **TCP Latency**             | Measured as TCP smoothed round-trip time, that is the time between a TCP frame being sent and acknowledged.                              |
+| **TCP Latency**             | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged.                              |
 | **TCP Jitter**              | Measured as TCP smoothed round-trip time variance.                                                                                       |
 | **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client.                               |
 | **Closed Connections**      | The number of TCP connections in a closed state. Measured in connections per second from the client.                                     |
