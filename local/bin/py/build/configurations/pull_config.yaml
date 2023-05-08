@@ -65,7 +65,7 @@
         contents:
 
         - action: integrations
-          branch: cswatt/azure-additions
+          branch: prod
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
