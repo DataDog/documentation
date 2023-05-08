@@ -3,8 +3,8 @@
     "attributes": {
       "policy_type": "tag",
       "policy": {
-        "tag_key": "examplemonitor",
-        "tag_key_required": false,
+        "tag_key": "datacenter",
+        "tag_key_required": true,
         "valid_tag_values": [
           "prod",
           "staging"
