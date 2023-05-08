@@ -109,7 +109,7 @@ nav_sections:
         icon: database-2
         desc: Explore enriched dashboards, query metrics, and query samples
       - title: Data Streams Monitoring
-        link: data-streams/
+        link: data_streams/
         icon: datastreams-monitoring
         desc: Track and improve performance of your data streaming pipelines
       - title: Observability Pipelines
