@@ -5,12 +5,7 @@ description: Workflow connections
 aliases:
   - "/workflows/setup"
 disable_toc: false
-is_beta: true
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows are in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}}
 
 ## Overview
 

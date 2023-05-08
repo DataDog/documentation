@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The resources dashboard provides insights about your applications’ resources. It shows:
+The resources dashboard provides insights about your applications' resources. It shows:
 
 - **Resources overview**:
     Visualize which resources are being loaded the most, their associated status code, and their size split by resource type.

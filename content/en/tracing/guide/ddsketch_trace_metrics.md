@@ -31,7 +31,7 @@ The APM Service and Resource pages use this metric type automatically. This mean
 **How am I seeing a full history of this new metric?**
 - Datadog stitches any existing query on the new metric to an equivalent query based on the long-existing latency metrics, so you do not have to create multiple queries.
 
-**I’m seeing a change in the values of my latency, what is happening?**
+**I'm seeing a change in the values of my latency, what is happening?**
 - Datadog Distribution Metrics are powered by [DDSketch][4]. This includes a change from rank-error guarantees to relative error guarantees. As a result, all percentile estimate values are now guaranteed to be closer to the true percentile value.
 - Specifically, you might expect to see a reduction in p99 values, where this difference is most noticeable. The new values are centered more closely on the precise p99 value.
 - One thing to note is that the APM metric calculations are not exactly akin to a Datadog Distribution Custom Metric that would be calculated in-code. The calculation happens on the backend, so some differences may occur.

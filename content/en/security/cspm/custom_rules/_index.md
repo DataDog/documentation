@@ -12,6 +12,10 @@ further_reading:
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true
+cascade:
+    algolia:
+        rank: 30
+        subcategory: Cloud Security Posture Management
 ---
 
 {{< site-region region="gov" >}}

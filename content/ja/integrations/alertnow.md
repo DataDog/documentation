@@ -18,7 +18,12 @@ author:
   name: AlertNow
   sales_email: sales@opsnow.com
   support_email: support@opsnow.com
-categories: []
+categories:
+- アラート設定
+- 自動化
+- コラボレーション
+- インシデント
+- モバイル
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
 display_on_public_website: true
@@ -36,14 +41,19 @@ public_title: AlertNow
 short_description: Datadog のアラートと AlertNow のアラートを同期させる
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Alerting
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Mobile
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog のアラートと AlertNow のアラートを同期させる
   media: []

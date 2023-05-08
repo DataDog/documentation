@@ -3,6 +3,13 @@ title: Observability Pipelines Guides
 kind: guide
 private: true
 disable_toc: true
+aliases:
+    - /integrations/observability_pipelines/guide/
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Observability Pipelines Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}

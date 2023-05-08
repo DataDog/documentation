@@ -7,6 +7,12 @@ further_reading:
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
   tag: ドキュメント
   text: よくある問題のトラブルシューティング
+- link: https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/
+  tag: ブログ
+  text: Datadog で SQL ワークロードの Azure 移行を戦略化する
+- link: https://www.datadoghq.com/blog/datadog-monitoring-always-on/
+  tag: ブログ
+  text: Datadog Database Monitoring で AlwaysOn のアベイラビリティグループを監視する
 kind: documentation
 title: セルフホスト SQL Server のデータベースモニタリングの設定
 ---

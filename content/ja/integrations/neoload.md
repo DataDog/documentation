@@ -22,8 +22,8 @@ author:
   sales_email: sales@tricentis.com
   support_email: support@tricentis.com
 categories:
-- モニタリング
 - notification
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md
 display_on_public_website: true
@@ -46,12 +46,12 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Notification
+  - Category::Testing
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Offering::Integration
-  - Category::Monitoring
-  - Category::Notification
   configuration: README.md#Setup
   description: NeoLoad によるパフォーマンステストの結果のモニタリングと分析
   media:

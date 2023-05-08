@@ -16,29 +16,34 @@ title: マーケットプレイス
 type: documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、Datadog Marketplace は利用できません。</div>
+{{< /site-region >}}
+
+
 ## 概要
 
-Datadog Marketplace は、Datadog テクノロジーパートナーが Datadog ユーザーに提供する製品を掲載することができるデジタルマーケットプレイスです。Datadog のお客様は、[**Integrations** ページ][1]または [**Marketplace** ページ][2]からインテグレーションタイルにアクセスすることができます。
+Datadog Marketplace は、Datadog テクノロジーパートナーが Datadog ユーザー向けに提供する製品を掲載できるデジタルマーケットプレイスです。Datadog のお客様は、[**Integrations** ページ][1]または [**Marketplace** ページ][2]でインテグレーションタイルにアクセスできます。
 
 {{< img src="developers/marketplace/marketplace_overview.png" alt="Datadog Marketplace ページ" style="width:100%" >}}
 
-インテグレーションページには、Datadog とテクノロジーパートナーによって無料で構築されたデータインテグレーションや Datadog アプリが含まれていますが、Marketplace は、Datadog のお客様とテクノロジーパートナーがデータインテグレーション、Datadog アプリ、ソフトウェア、プロフェッショナルサービスなどのさまざまな製品を売買するための商用プラットフォームです。
+**Integrations** ページには、Datadog とテクノロジーパートナーが無償で構築したインテグレーションや Datadog アプリが含まれていますが、**Marketplace** ページは、Datadog の顧客とテクノロジーパートナーが、Agent ベースまたは API ベースのインテグレーション、Datadog アプリ、ソフトウェア、専門サービスなど様々な製品を売買できる商用プラットフォームとなっています。
 
-## Datadog パートナーネットワークに参加する
+## Datadog のパートナーネットワークに参加する
 
-Datadog Marketplace へのアクセスをリクエストする前に、まず [Datadog パートナーネットワークの][3] **Technology Partners** トラックへの参加を申請してください。Datadog テクノロジーパートナーとして、[Agent ベースまたは API インテグレーション][4]や [Datadog アプリ][5]を開発するか、SaaS ライセンスまたはプロフェッショナルサービス製品を掲載することができます。
+Datadog Marketplace へのアクセスをリクエストする前に、まず [Datadog テクノロジーパートナーの][3] **Technology Partners** トラックへの参加を申請してください。Datadog テクノロジーパートナーとして、[Agent ベースまたは API インテグレーション][4]や [Datadog アプリ][5]を開発するか、SaaS ライセンスまたはプロフェッショナルサービスの製品を出品することができます。
 
 ## サンドボックスアカウントを申請する
 
-すべてのテクノロジーパートナーは、開発を支援するために専用のサンドボックス Datadog アカウントをリクエストできます。
+すべてのテクノロジーパートナーは、開発を支援するために、専用のサンドボックス Datadog アカウントをリクエストすることができます。
 
 サンドボックスアカウントをリクエストするには
 
 1. [Datadog パートナーポータル][6]にログインします。
-2. 個人のホームページで、**Sandbox Access** の下にある **Learn More** ボタンをクリックします。
+2. 個人ホームページで、**Sandbox Access** の下にある **Learn More** ボタンをクリックします。
 3. **Request Sandbox Upgrade** を選択します。
 
-<div class="alert alert-info">すでに Datadog 組織 (トライアル組織を含む) のメンバーである場合、新しく作成したサンドボックスに切り替える必要がある場合があります。詳細については、<a href="https://docs.datadoghq.com/account_management/org_switching/">アカウント管理のドキュメント</a>を参照してください。</div>
+<div class="alert alert-info">すでに Datadog 組織 (トライアル組織を含む) のメンバーである場合、新しく作成したサンドボックスへの切り替えが必要な場合があります。詳しくは、<a href="https://docs.datadoghq.com/account_management/org_switching/">アカウント管理のドキュメント</a>をご覧ください。</div>
 
 開発者用サンドボックスの作成には、最大で 1〜2 営業日かかる場合があります。サンドボックスが作成されると、[組織から新しいメンバーを招待する][7]ことができ、共同作業を行うことができます。
 
@@ -56,16 +61,16 @@ Datadog Marketplace へのアクセスをリクエストする前に、まず [D
 すべてのテクノロジーパートナーは、無料のインテグレーションを **Integrations** ページに、商用製品を **Marketplace** ページに掲載することができます。Datadog Marketplace の追加製品には、以下のようなものがあります。
 
 インテグレーション
-: Datadog Agent や API を通じて、サードパーティのデータを送信または取得するインテグレーション。
+: [Datadog Agent][15] や [API][16] を介してサードパーティのデータを送信またはプルする Marketplace インテグレーション。このインテグレーションには、すぐに使えるメトリクス、イベント、またはサービスチェックが含まれています。
 
 ソフトウェアライセンス
 : SaaS ライセンスでは、Datadog Marketplace を通じて、ソフトウェアソリューションを顧客にライセンス提供することができます。
 
 UI 拡張機能またはアプリケーション
-: Datadog Marketplace のタイルのみの掲載であるアプリケーション ([Datadog アプリ][5]など)。
+: Datadog Marketplace の[タイルのみの出品][17があるアプリケーション ([Datadog アプリ][5]など)。
 
 プロフェッショナルサービス
-: プロフェッショナルサービスでは、一定期間、チームによる導入、サポート、管理などのサービスを提供することができます。
+: [プロフェッショナルサービス][18]では、一定期間、チームによる導入、サポート、管理などのサービスを提供することができます。
 
 ### Marketplace へのアクセスをリクエストする
 
@@ -73,7 +78,7 @@ UI 拡張機能またはアプリケーション
 
 Datadog マーケットプレイスで製品の開発を始めるには、[マーケットプレイス製品の開発][13]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -90,3 +95,8 @@ Datadog マーケットプレイスで製品の開発を始めるには、[マ�
 [11]: /ja/developers/authorization/
 [12]: https://github.com/DataDog/marketplace/pull/107
 [13]: /ja/developers/marketplace/offering
+[14]: /ja/developers/integrations/api_integration/
+[15]: /ja/developers/marketplace/offering#agent-based-integrations
+[16]: /ja/developers/marketplace/offering#rest-api-integrations
+[17]: /ja/developers/marketplace/offering#datadog-apps
+[18]: /ja/developers/marketplace/offering#saas-license-or-professional-service-offerings

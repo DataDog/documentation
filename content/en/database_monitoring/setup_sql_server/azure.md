@@ -68,7 +68,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
-      name: '<DATABASE_1>'
+      name: '<SERVER_NAME>'
 
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_2>'
@@ -77,7 +77,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: 'sql_database'
-      name: '<DATABASE_2>'
+      name: '<SERVER_NAME>'
 ```
 
 See [Install the Agent](#install-the-agent) for more detailed instructions on how to install and configure the Datadog Agent.
@@ -312,11 +312,12 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
+  --set 'clusterChecksRunner.enabled=true' \
   --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>,1433
+    host: <HOSTNAME>\,1433
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
@@ -327,8 +328,8 @@ instances:
       - 'env:<CUSTOM_ENV>'
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>' \
-  datadog/datadog"
+      name: '<YOUR_INSTANCE_NAME>'" \
+  datadog/datadog
 ```
 
 ### Configure with mounted files

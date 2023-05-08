@@ -25,7 +25,7 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 ```
 
 
-[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
+[1]: https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}

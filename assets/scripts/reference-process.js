@@ -44,6 +44,7 @@ $RefParser.dereference(fileData)
 
 
 function buildSection(specStr, deref, allData) {
+  const skiplabels = ["Unit Test", "Unit Test Stream"];
   const specStrSplit = specStr.split('::');
   const name = specStrSplit[specStrSplit.length - 1].toLowerCase();
   allData[name] = [];
@@ -72,7 +73,9 @@ function buildSection(specStr, deref, allData) {
         console.log(`Couldn't created schematable for ${key} from file ${input} - ${e.message}, ${e.stack}`);
       }
       entryData["html"] = table;
-      allData[name].push(entryData)
+      if(!skiplabels.includes(entryData["metadata"]["docs::label"]) && !skiplabels.includes(entryData["metadata"]["docs::human_name"])) {
+        allData[name].push(entryData);
+      }
   });
 }
 
