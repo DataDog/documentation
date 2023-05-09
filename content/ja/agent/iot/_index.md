@@ -1,11 +1,12 @@
 ---
-title: IoT Agent
-kind: ドキュメント
 further_reading:
-  - link: /getting_started/agent/
-    tag: Documentation
-    text: Agent の概要
+- link: /getting_started/agent/
+  tag: Documentation
+  text: Agent の概要
+kind: ドキュメント
+title: IoT Agent
 ---
+
 ## 概要
 
 Datadog IoT Agent は、IoT デバイスおよび埋め込み型アプリケーションの監視に最適化された、Agent の バージョンです。IoT Agent を使用すると、デジタルディスプレイからセキュリティデバイスまで、画像検知アルゴリズムを実行するさまざまなデバイスを監視することができます。
@@ -51,7 +52,7 @@ IoT Agent は、x64、arm64 (ARMv8)、ARMv7 アーキテクチャで実行中の
 ご使用中のオペレーティングシステムおよびチップセットアーキテクチャに適切な IoT Agent を自動的にダウンロードしてインストールするには、以下のコマンドを使用します。
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_MAJOR_VERSION=7 DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 #### 手動
@@ -84,23 +85,23 @@ Debian ベースのオペレーティングシステムに IoT Agent を手動�
    ```
 
 4. `apt` を更新し、IoT Agent をインストールします。
-    ```bash
+    ```shell
     sudo apt-get update
     sudo apt-get install datadog-iot-agent datadog-signing-keys
     ```
 
 5. 構成サンプルをコピーし、適切な API キーを指定します。
-    ```bash
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 6. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 7. IoT Agent を起動します。
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
@@ -130,23 +131,23 @@ RPM ベースのオペレーティングシステムに IoT Agent を手動で�
     - ARMv7 - `https://yum.datadoghq.com/stable/7/armv7hl/`
 
 2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
-    ```
+    ```shell
     sudo yum makecache
     sudo yum install datadog-iot-agent
     ```
 
 3. 構成サンプルをコピーし、適切な API キーを指定します。
-    ```
+    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
 4. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
-    ```bash
+    ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml
     ```
 
 5. IoT Agent を起動します。
-    ```bash
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
