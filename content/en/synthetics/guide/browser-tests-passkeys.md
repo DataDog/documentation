@@ -41,7 +41,7 @@ To test a registration flow using passkeys in your [browser tests][3]:
 
 ### Test a login flow
 
-To test a login flow using a passkey in your [browser tests][3], you need to first register your Datadog passkey on the web application in Step 2. This is required once per passkey and application.
+To test a login flow using a passkey in your [browser tests][3], you need to first register your Datadog passkey on the web application (see section above). This is required once per passkey and application.
 
 You can either:
 

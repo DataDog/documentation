@@ -8,7 +8,10 @@ further_reading:
   text: "Set up Feature Flag data collection"
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
-  text: "RUM Explorer"
+  text: "Learn about the RUM Explorer"
+- link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
+  tag: "Blog"
+  text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
 <div class="alert alert-warning">

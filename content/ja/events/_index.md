@@ -9,6 +9,9 @@ further_reading:
 - link: /events/guides/recommended_event_tags/
   tag: ドキュメント
   text: イベントへのタグ付けのベストプラクティス
+- link: https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/
+  tag: GitHub
+  text: 機密データスキャナーでイベントの機密データを特定し、編集する
 kind: documentation
 title: イベント
 ---
@@ -86,6 +89,6 @@ _プロセッサー_は、イベント属性が取り込まれると、その属
 [17]: /ja/dashboards/widgets/alert_graph/
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [19]: /ja/getting_started/tagging/unified_service_tagging/
-[20]: /ja/logs/guide/reference-tables/
+[20]: /ja/integrations/guide/reference-tables/
 [21]: /ja/help/
 [22]: /ja/logs/log_configuration/processors/
