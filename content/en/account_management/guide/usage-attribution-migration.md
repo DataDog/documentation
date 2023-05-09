@@ -1,5 +1,5 @@
 ---
-title: Migrating to the hourly and monthly Usage Attribution APIs
+title: Migrating to Hourly and Monthly Usage Attribution APIs
 kind: guide
 further_reading:
 - link: "/account_management/plan_and_usage/"
@@ -16,7 +16,7 @@ based APIs ([Get the list of available daily custom reports][2], [Get specified 
 [Get the list of available monthly custom reports][4], and
 [Get specified monthly custom reports][5]). To use this guide, find the section below for the v1 APIs you are currently using, and follow the instructions to migrate to the corresponding v2 APIs.
 
-Note that v1 and v2 in this document does not refer to the version in the url path. All of the APIs this documentation are the first versions with their respective paths and so use `v1` in the url path.
+**Note**: Any mention of v1 and v2 in this document does not refer to the version in the URL path. All APIs this documentation are the first versions with their respective paths, and so use `v1` in the URL path.
 
 ## Monthly API
 
