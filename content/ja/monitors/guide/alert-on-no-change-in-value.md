@@ -20,9 +20,9 @@ title: 値に変化がない場合のアラート
 
 * `abs(diff(avg:system.mem.free{*}))`
 
-これらの関数は、"+" ボタンを使用して UI のクエリに適用できます。
+これらの関数は UI のクエリに適用できます。
 
-{{< img src="monitors/faq/new_query_ui_monitors.png" alt="new_query_ui_monitors"  >}}
+{{< img src="monitors/guide/alert_value_difference.png" alt="シグマアイコン > Rate > Value difference から差分関数を適用" >}}
 
 または、複雑なクエリを 'edit monitor' UI に手動で入力するか、[API][1] を介してプログラムで適用することもできます。下の画像を参照してください。
 
@@ -36,9 +36,9 @@ title: 値に変化がない場合のアラート
 
 他の[アラート条件/オプション][2]を設定することもできます。モニターの UI コンフィギュレーションは、次のようになります。
 
-{{< img src="monitors/faq/zero_alert.png" alt="zero_alert"  >}}
+{{< img src="monitors/faq/zero_alert.png" alt="zero_alert" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/api/
-[2]: /ja/monitors/create/configuration/
+[2]: /ja/monitors/configuration/

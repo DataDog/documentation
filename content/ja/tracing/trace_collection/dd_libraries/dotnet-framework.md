@@ -1,14 +1,19 @@
 ---
 aliases:
-- /ja/tracing/dotnet-core
-- /ja/tracing/languages/dotnet-core
+- /ja/tracing/dotnet
+- /ja/tracing/languages/dotnet
 - /ja/tracing/setup/dotnet-core
-- /ja/agent/apm/dotnet-core/
+- /ja/tracing/setup_overview/dotnet
 - /ja/tracing/setup/dotnet-core
-- /ja/tracing/setup_overview/dotnet-core
-- /ja/tracing/setup_overview/setup/dotnet-core
-code_lang: dotnet-core
-code_lang_weight: 60
+- /ja/tracing/dotnet-framework
+- /ja/tracing/languages/dotnet-framework
+- /ja/tracing/setup/dotnet-framework
+- /ja/agent/apm/dotnet-framework/
+- /ja/tracing/setup_overview/dotnet-framework
+- /ja/tracing/setup_overview/setup/dotnet
+- /ja/tracing/setup_overview/setup/dotnet-framework
+code_lang: dotnet-framework
+code_lang_weight: 70
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
   tag: ドキュメント
@@ -23,14 +28,14 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 - link: https://www.datadoghq.com/blog/net-monitoring-apm/
-  tag: ブログ
+  tag: GitHub
   text: Datadog APM と分散型トレーシングを使用した .NET のモニタリング
 - link: https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/
-  tag: ブログ
+  tag: GitHub
   text: コンテナ化された ASP.NET コアアプリケーションを監視する
-- link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
-  tag: ブログ
-  text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
+- link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
+  tag: GitHub
+  text: AWS Fargate でコンテナ化された ASP.NET コアアプリケーションを監視する
 - link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
   tag: GitHub
   text: Datadog Continuous Profiler で .NET アプリケーションのパフォーマンスを最適化する
@@ -41,17 +46,16 @@ further_reading:
   tag: GitHub
   text: ソースコード
 kind: documentation
-title: .NET コアアプリケーションのトレース
+title: .NET Framework アプリケーションのトレース
 type: multi-code-lang
 ---
-
 ## 互換性要件
 
-### サポートされている .NET Core のランタイム
+### サポートされている .NET フレームワークのランタイム
 
-.NET Tracer は、.NET Core 2.1、3.1、.NET 5、.NET 6、.NET 7. でのインスツルメンテーションをサポートします。
+.NET トレーサーは、.NET Framework 4.6.1 以上のインスツルメンテーションをサポートします。
 
-Datadog の .NET Core ライブラリとプロセッサアーキテクチャーのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]を参照してください。
+Datadog の .NET Framework ライブラリとプロセッサアーキテクチャーのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]を参照してください。
 
 ## インストールと利用開始
 
@@ -78,7 +82,7 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 
 ### APM に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように [Datadog Agent をインストールして構成][2]します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。
+インスツルメントされたアプリケーションからトレースを受信するように [Datadog Agent をインストールして構成][2]します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレーストラフィックをリッスンします。
 
 コンテナ化、サーバーレス、クラウド環境の場合:
 
@@ -93,14 +97,7 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. トレースクライアントは以下にトレースの送信を試みます。
-
-    - デフォルトでは `/var/run/datadog/apm.socket` の Unix ドメインソケット。
-    - ソケットが存在しない場合、トレースは `localhost:8126` に送信されます。
-    - もし、別のソケット、ホスト、ポートが必要な場合は、環境変数 `DD_TRACE_AGENT_URL` を使用します: `DD_TRACE_AGENT_URL=http://custom-hostname:1234` または `DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket`
-    - トレース転送に Unix Domain Socket を使用することは、.NET Core 3.1 以降でサポートされています。
-
-これらの設定方法の詳細については、[構成](#configuration)を参照してください。
+3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on configuring these settings, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov,ap1" >}}
 
@@ -115,7 +112,7 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 
 トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、他の環境で利用できます。
 
-その他のすべての環境については、その環境の[インテグレーションのドキュメント][4]を参照し、セットアップの問題が発生した場合は [Datadog サポート][5]にお問い合わせください。
+その他のすべての環境については、その環境の[インテグレーションのドキュメント][4]を参照し、セットアップの問題が発生した場合は[Datadog サポート][5]にお問い合わせください。
 
 
 [1]: /ja/agent/basic_agent_usage/heroku/#installation
@@ -131,7 +128,7 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 
 <div class="alert alert-info">Kubernetes アプリケーション、または Linux ホストやコンテナ上のアプリケーションからトレースを収集する場合、以下の説明の代わりに、アプリケーションにトレーシングライブラリを挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local">ライブラリの挿入</a>をお読みください。</div>
 
-Datadog .NET Tracer は、マシン上のすべてのサービスがインスツルメントされるようにマシン全体にインストールすることも、アプリケーションごとにインストールすることも可能で、開発者はアプリケーションの依存関係を通じてインスツルメンテーションを管理することができます。マシン全体のインストール手順を見るには、Windows または Linux タブをクリックします。アプリケーションごとのインストール手順を見るには、NuGet タブをクリックします。
+Datadog .NET Tracer は、マシン上のすべてのサービスがインスツルメントされるようにマシン全体にインストールするか、アプリケーションごとにインストールし、開発者はアプリケーションの依存関係を通じてインスツルメンテーションを管理することができます。マシン全体のインストール手順を見るには、Windows タブをクリックします。アプリケーションごとのインストール手順を見るには、NuGet タブをクリックします。
 
 {{< tabs >}}
 
@@ -148,30 +145,6 @@ PowerShell で次を実行することで、MSI セットアップをスクリ�
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
-{{% tab "Linux" %}}
-
-.NET Tracer をマシン全体にインストールするには
-
-1. お使いの OS とアーキテクチャに対応した最新の [.NET Tracer パッケージ][1]をダウンロードします。
-
-2. 以下のコマンドのいずれかを実行して、パッケージをインストールし、適切な権限で .NET トレーサーのログディレクトリ `/var/log/datadog/dotnet` を作成します。
-
-   Debian または Ubuntu
-   : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && /opt/datadog/createLogPath.sh`
-
-   CentOS または Fedora
-   : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && /opt/datadog/createLogPath.sh`
-
-   Alpine などの musl ベースの分布
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
-
-   その他の分布
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
-
-
-[1]: https://github.com/DataDog/dd-trace-dotnet/releases
-{{% /tab %}}
-
 {{% tab "NuGet" %}}
 
 <div class="alert alert-warning">
@@ -181,6 +154,7 @@ PowerShell で次を実行することで、MSI セットアップをスクリ�
 .NET Tracer をアプリケーション単位でインストールするには
 
 1. `Datadog.Trace.Bundle` [NuGet パッケージ][1]をアプリケーションに追加します。
+
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
@@ -201,10 +175,6 @@ PowerShell で次を実行することで、MSI セットアップをスクリ�
 
 1. .NET Tracer の MSI インストーラーは、必要な環境変数をすべて追加します。構成する必要のある環境変数はありません。
 
-   <div class="alert alert-warning">
-     <strong>Note:</strong> You must set the <strong>.NET CLR version</strong> for the application pool to <strong>No Managed Code</strong> as recommended by <a href='https://learn.microsoft.com/aspnet/core/host-and-deploy/iis/advanced#create-the-iis-site'> Microsoft</a>.
-   </div>
-
 2. IIS でホストされるアプリケーションを自動でインスツルメントするには、管理者として次のコマンドを実行して IIS を完全に停止してから起動します。
 
    ```cmd
@@ -220,30 +190,15 @@ PowerShell で次を実行することで、MSI セットアップをスクリ�
 
 #### IIS にないサービス
 
-<div class="alert alert-info">v2.14.0 より、MSI を使用してトレーサーをインストールした場合、<code>CORECLR_PROFILER</code> を設定する必要がありません。</div>
+<div class="alert alert-info">v2.14.0 より、MSI を使用してトレーサーをインストールした場合、<code>COR_PROFILER</code> を設定する必要がありません。</div>
 
 1. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
    ```
-   CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+   COR_ENABLE_PROFILING=1
+   COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
    ```
 2. スタンドアロンアプリケーションや Windows サービスの場合は、手動でアプリケーションを再起動します。
-
-{{% /tab %}}
-
-{{% tab "Linux" %}}
-
-1. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
-
-   ```
-   CORECLR_ENABLE_PROFILING=1
-   CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-   CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-   DD_DOTNET_TRACER_HOME=/opt/datadog
-   ```
-
-2. スタンドアロンアプリケーションの場合は、通常通り手動でアプリケーションを再起動します。
 
 {{% /tab %}}
 
@@ -252,7 +207,9 @@ PowerShell で次を実行することで、MSI セットアップをスクリ�
 パッケージの Readme に書かれている手順に従ってください。[`dd-trace-dotnet` リポジトリ][1]でも公開されています。
 Docker のサンプルも[リポジトリ][2]で公開されています。
 
-[1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace.Bundle/README.md
+
+
+[1]: https://github.com/DataDog/dd-trace-dotnet/blob/master/docs/Datadog.Trace.Bundle/README.md
 [2]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
@@ -270,7 +227,7 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 ## コンフィギュレーション
 
-必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][4]を参照してください。
+統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリを構成します。詳しくは、[ライブラリの構成][4]を参照してください。
 
 ## カスタムインスツルメンテーション
 
@@ -293,20 +250,6 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 [1]: https://www.nuget.org/packages/Datadog.Trace
 {{% /tab %}}
 
-{{% tab "Linux" %}}
-
-<div class="alert alert-warning">
-  <strong>注:</strong> 自動インスツルメンテーションとカスタムインスツルメンテーションの両方を使用している場合は、パッケージバージョン (MSI や NuGet など) の同期を維持する必要があります。
-</div>
-
-.NET アプリケーションでカスタムインスツルメンテーションを使用するには
-1. `Datadog.Trace` [NuGet パッケージ][1]をアプリケーションに追加します。
-2. アプリケーションコードで、`Datadog.Trace.Tracer.Instance` プロパティを介してグローバルトレーサーにアクセスし、新しいスパンを作成します。
-
-
-[1]: https://www.nuget.org/packages/Datadog.Trace
-{{% /tab %}}
-
 {{% tab "NuGet" %}}
 
 .NET アプリケーションでカスタムインスツルメンテーションを使用するには
@@ -321,13 +264,13 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 
 ## プロセス環境変数の構成
 
-サービスに自動インスツルメンテーションをアタッチするには、アプリケーションを起動する前に、必要な環境変数を設定する必要があります。.NET Tracer のインストール方法に応じて設定する環境変数を特定するために、 [サービスのトレーサーを有効にする](#enable-the-tracer-for-your-service)のセクションを参照し、以下の例に従って、インスツルメントされたサービスの環境に基づいて環境変数を正しく設定します。
+サービスに自動インスツルメンテーションをアタッチするには、アプリケーションを起動する前に、必要な環境変数を設定します。.NET Tracer のインストール方法に応じて設定する環境変数を特定するために、 [サービスのトレーサーを有効にする](#enable-the-tracer-for-your-service)のセクションを参照し、以下の例に従って、インスツルメントされたサービスの環境に基づいて環境変数を正しく設定します。
 
 ### Windows
 
-#### Windows サービス
+<div class="alert alert-info">v2.14.0 より、MSI を使用してトレーサーをインストールした場合、<code>COR_PROFILER</code> を設定する必要がありません。</div>
 
-<div class="alert alert-info">v2.14.0 より、MSI を使用してトレーサーをインストールした場合、<code>CORECLR_PROFILER</code> を設定する必要がありません。</div>
+#### Windows サービス
 
 {{< tabs >}}
 
@@ -336,18 +279,18 @@ Docker のサンプルも[リポジトリ][2]で公開されています。
 レジストリエディターで、`HKLM\System\CurrentControlSet\Services\<SERVICE NAME>` キーに `Environment` 複数の文字列値を作成します。
 
 ```text
-CORECLR_ENABLE_PROFILING=1
-CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+COR_ENABLE_PROFILING=1
+COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 ```
 
-{{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディタを使用して Windows サービスに環境変数を作成" >}}
+{{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Registry Editor を使用して、Windows サービスの環境変数を作成する" >}}
 
 {{% /tab %}}
 
 {{% tab "PowerShell" %}}
 
 ```powershell
-[string[]] $v = @("CORECLR_ENABLE_PROFILING=1", "CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
+[string[]] $v = @("COR_ENABLE_PROFILING=1", "COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}")
 Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\<SERVICE NAME> -Name Environment -Value $v
 ```
 {{% /tab %}}
@@ -378,9 +321,9 @@ MSI をインストールした後、IIS サイトを自動的にインスツル
 
 ```bat
 rem Set environment variables
-SET CORECLR_ENABLE_PROFILING=1
+SET COR_ENABLE_PROFILING=1
 rem Unless v2.14.0+ and you installed the tracer with the MSI
-SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
+SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 
 rem Set additional Datadog environment variables
 SET DD_LOGS_INJECTION=true
@@ -390,103 +333,13 @@ rem Start application
 dotnet.exe example.dll
 ```
 
-### Linux
-
-#### Bash スクリプト
-
-アプリケーションを起動する前に、bash ファイルから必要な環境変数を設定するには
-
-```bash
-# 環境変数を設定
-export CORECLR_ENABLE_PROFILING=1
-export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-export CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-export DD_DOTNET_TRACER_HOME=/opt/datadog
-
-# Datadog の環境変数を追加で設定
-export DD_LOGS_INJECTION=true
-export DD_RUNTIME_METRICS_ENABLED=true
-
-# アプリケーションを起動
-dotnet example.dll
-```
-
-#### Linux Docker コンテナ
-
-Linux Docker コンテナに必要な環境変数を設定するには
-
-  ```docker
-  # 環境変数を設定
-  ENV CORECLR_ENABLE_PROFILING=1
-  ENV CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-  ENV CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-  ENV DD_DOTNET_TRACER_HOME=/opt/datadog
-
-  # Datadog の環境変数を追加で設定
-  ENV DD_LOGS_INJECTION=true
-  ENV DD_RUNTIME_METRICS_ENABLED=true
-
-  # アプリケーションを起動
-  CMD ["dotnet", "example.dll"]
-  ```
-
-#### `systemctl` (per service)
-
-`systemctl` を使用して、サービスとして .NET アプリケーションを実行する場合、特定のサービスに必要な環境変数がロードされるよう追加することができます。
-
-1. 以下を含む、`environment.env` というファイルを作成します。
-
-    ```ini
-    CORECLR_ENABLE_PROFILING=1
-    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    DD_DOTNET_TRACER_HOME=/opt/datadog
-
-    # Set additional Datadog environment variables
-    DD_LOGS_INJECTION=true
-    DD_RUNTIME_METRICS_ENABLED=true
-    ```
-2. サービスのコンフィギュレーションファイルで、サービスブロックの [`EnvironmentFile`][1] としてこれを参照します。
-
-    ```ini
-    [Service]
-    EnvironmentFile=/path/to/environment.env
-    ExecStart=<command used to start the application>
-    ```
-3. .NET サービスを再起動して、環境変数の設定を有効にします。
-
-#### `systemctl` (all services)
-
-<div class="alert alert-warning">
-  <strong>注:</strong> .NET ランタイムは、これらの環境変数が設定された状態で開始された<em>あらゆる</em> .NET プロセスにプロファイラーをロードしようとします。インスツルメンテーションは、トレースする必要のあるアプリケーションのみに制限する必要があります。<strong>これらの環境変数をグローバルに設定しないでください。こうすると、ホスト上の<em>すべての</em> .NET プロセスがプロファイラーをロードします。</strong>
-</div>
-
-`systemctl` を使用して .NET アプリケーションをサービスとして実行する場合、`systemctl` によって実行されるすべてのサービスに対してロードされる環境変数を設定することもできます。
-
-1. [`systemctl set-environment`][6] を実行して、必要な環境変数を設定します。
-
-    ```bash
-    systemctl set-environment CORECLR_ENABLE_PROFILING=1
-    systemctl set-environment CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
-    systemctl set-environment CORECLR_PROFILER_PATH=/opt/datadog/Datadog.Trace.ClrProfiler.Native.so
-    systemctl set-environment DD_DOTNET_TRACER_HOME=/opt/datadog
-
-    # Set additional Datadog environment variables
-    systemctl set-environment DD_LOGS_INJECTION=true
-    systemctl set-environment DD_RUNTIME_METRICS_ENABLED=true
-    ```
-2. `systemctl show-environment` を実行して、環境変数が設定されていることを確認します。
-
-3. .NET サービスを再起動して、環境変数を有効にします。
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/trace_collection/compatibility/dotnet-core
+[1]: /ja/tracing/compatibility_requirements/dotnet-framework
 [2]: /ja/agent/
 [3]: https://app.datadoghq.com/apm/traces
-[4]: /ja/tracing/trace_collection/library_config/dotnet-core/
+[4]: /ja/tracing/trace_collection/library_config/dotnet-framework/
 [5]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
-[6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
