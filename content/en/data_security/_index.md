@@ -108,7 +108,7 @@ The Database Monitoring Agent obfuscates all query bind parameters sent to the D
 
 ## Other sources of potentially sensitive data 
 
-In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things.  We recommend not including private or personal information in the text you are sending.  Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
+In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things. We recommend not including private or personal information in the text you are sending. Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
 
 Metadata and tags
 : Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 

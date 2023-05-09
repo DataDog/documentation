@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_crash_reporting.md
 description: Datadog で Expo のクラッシュレポートをキャプチャします。
 further_reading:
 - link: https://www.datadoghq.com/blog/debug-android-crashes/
@@ -105,4 +103,4 @@ Datadog と Sentry の構成プラグインは、iOS のビルドフェーズ "B
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/#usage
+[3]: /ja/real_user_monitoring/reactnative/expo/#usage

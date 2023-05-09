@@ -18,7 +18,7 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-{{< img src="tracing/visualization/resource/ressource.png" alt="Ressource"  >}}
+{{< img src="tracing/visualization/resource/ressource.png" alt="Ressource" >}}
 
 A resource is a particular action for a given [service][1] (typically an individual endpoint or query). Read more about resources in [Getting Started with APM][2]. For each resource, APM automatically generates a dashboard page covering:
 
@@ -45,7 +45,7 @@ Datadog provides out-of-the-box graphs for any given resource:
 
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 
-{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" style="width:90%;">}}
 
 ### Export to dashboard
 
@@ -55,11 +55,11 @@ On the upper-right corner of each graph, click on the up arrow in order to expor
 
 The resource page also displays a resource latency distribution graph:
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution"  style="width:100%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution" style="width:100%;">}}
 
 Use the top right percentile selectors to zoom into a given percentile, or hover over the sidebar to view percentile markers.
 
-{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:50%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector" style="width:50%;">}}
 
 ## Dependency Map
 
@@ -81,7 +81,7 @@ Click on a node to open a context menu with options to view the Service Page, re
 
 For a given resource, Datadog provides you a [span][6] analysis breakdown of all matching traces:
 
-{{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics"  style="width:80%;">}}
+{{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics" style="width:80%;">}}
 
 The displayed metrics represent, per span:
 
@@ -105,7 +105,7 @@ The span summary table is only available for resources containing service entry 
 
 Consult the list of [traces][7] associated with this resource in the [Trace search][8] modal already filtered on your environment, service, operation, and resource name:
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" style="width:90%;">}}
 
 ## Further Reading
 

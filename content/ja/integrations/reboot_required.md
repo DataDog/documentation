@@ -15,11 +15,12 @@ assets:
     source_type_name: Reboot required
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: support@krugerheavyindustries.com
   support_email: support@krugerheavyindustries.com
 categories:
-- os system
+- developer tools
+- os & system
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md
 display_on_public_website: true
@@ -40,8 +41,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Developer Tools
+  - Category::OS とシステム
   - Supported OS::Linux
-  - Category::OS システム
   configuration: README.md#Setup
   description: ソフトウェアアップデートの後に再起動が必要なシステムを監視
   media: []
@@ -60,7 +62,7 @@ tile:
 
 Reboot Required チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Reboot Required チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 

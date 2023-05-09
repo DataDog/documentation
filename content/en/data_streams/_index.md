@@ -8,6 +8,9 @@ further_reading:
     - link: '/tracing/service_catalog/'
       tag: 'Documentation'
       text: 'Service Catalog'
+    - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
+      tag: 'Blog'
+      text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
 ---
 
 

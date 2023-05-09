@@ -8,9 +8,9 @@ further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: APM の UI を利用する
-- link: https://learn.datadoghq.com/enrol/index.php?id=4
+- link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: ラーニングセンター
-  text: Docker を使用したアプリケーションパフォーマンス監視
+  text: Application Performance Monitoring の紹介
 kind: documentation
 title: トレースの概要
 ---
@@ -27,7 +27,7 @@ Datadog の APM (アプリケーションパフォーマンス監視機能、ま
 
 ## Datadog Agent
 
-Datadog Agent をインストールする前に、以下のコマンドを使用して [Vagrant Ubuntu 16.04 仮想マシン][4]を設定します。Vagrant の詳細については、[はじめに][5]ページをご参照ください。
+Datadog Agent をインストールする前に、以下のコマンドを使用して [Vagrant Ubuntu 22.04 仮想マシン][4]を設定します。Vagrant の詳細については、[はじめに][5]ページをご参照ください。
 
 ```text
 vagrant init ubuntu/xenial64
@@ -38,7 +38,7 @@ vagrant ssh
 [Datadog API キー][7]を付加した [1 行のインストールコマンド][6]を使用して、Datadog Host Agent をインストールします。
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
 ### 検証
@@ -74,7 +74,7 @@ sudo datadog-agent status
 
 `trace-agent.log` でも確認できます。
 
-```shell
+```bash
 # /var/log/datadog/trace-agent.log:
 2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
@@ -129,7 +129,7 @@ ddtrace-run python hello.py
 
 次のような出力が表示されます。
 
-```shell
+```bash
 * Serving Flask app "hello" (lazy loading)
   ...
 * Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)
@@ -161,7 +161,7 @@ hello world
 [1]: /ja/tracing/#terminology
 [2]: https://docs.datadoghq.com/ja/tracing/setup/
 [3]: https://www.datadoghq.com
-[4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
+[4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings#agent/ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys

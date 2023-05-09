@@ -13,12 +13,6 @@ kind: documentation
 title: カスタム宛先へのログの転送
 ---
 
-{{% site-region region="us,us3,us5,ap1,eu" %}}
-<div class="alert alert-warning">
-ログ転送のご利用には制限があります。この<a href="https://www.datadoghq.com/log-forwarding-limited-availability/">フォーム</a>にご記入の上、アクセスをリクエストしてください。
-</div>
-{{% /site-region %}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
 ガバメントサイトでは、ログ転送はご利用いただけません。詳しくはアカウント担当者にお問い合わせください。

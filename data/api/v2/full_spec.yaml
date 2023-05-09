@@ -4523,6 +4523,11 @@ components:
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
+        customer_impact_scope:
+          description: Required if `customer_impacted:"true"`. A summary of the impact
+            customers experienced during the incident.
+          example: Example customer impact scope
+          type: string
         customer_impacted:
           description: A flag indicating whether the incident caused customer impact.
           example: false
@@ -18377,8 +18382,8 @@ paths:
         Add the `Content-Encoding: gzip` header to the request when sending compressed
         logs.
 
-        Log events can be submitted up to 18 hours in the past and 2 hours in the
-        future.
+        Log events can be submitted with a timestamp that is up to 18 hours in the
+        past.
 
 
         The status codes answered by the HTTP API are:
@@ -20572,8 +20577,8 @@ paths:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"monitor-config-policy\",\n    \"attributes\":
               {\n      \"policy_type\": \"tag\",\n      \"policy\": {\n        \"tag_key\":
-              \"dc\", \"tag_key_required\": true, \"valid_tag_values\": [\"prod\",
-              \"staging\"]\n      }\n    }\n  }\n}"
+              \"{{ unique_lower_alnum }}\", \"tag_key_required\": false, \"valid_tag_values\":
+              [\"prod\", \"staging\"]\n      }\n    }\n  }\n}"
           step: there is a valid "monitor_configuration_policy" in the system
       x-menu-order: 11
       x-undo:
@@ -24313,6 +24318,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Create a team
       tags:
       - Teams
@@ -24359,6 +24365,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Remove a team
       tags:
       - Teams
@@ -24982,6 +24989,7 @@ paths:
         type: idempotent
   /api/v2/teams:
     get:
+      deprecated: true
       description: Get all incident teams for the requesting user's organization.
         If the `include[users]` query parameter is provided, the included attribute
         will contain the users related to these incident teams.
@@ -25019,10 +25027,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     post:
+      deprecated: true
       description: Creates a new incident team.
       operationId: CreateIncidentTeam
       requestBody:
@@ -25072,11 +25079,10 @@ paths:
         - name: team_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/teams/{team_id}:
     delete:
+      deprecated: true
       description: Deletes an existing incident team.
       operationId: DeleteIncidentTeam
       parameters:
@@ -25105,10 +25111,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     get:
+      deprecated: true
       description: 'Get details of an incident team. If the `include[users]` query
         parameter is provided,
 
@@ -25145,10 +25150,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     patch:
+      deprecated: true
       description: Updates an existing incident team. Only provide the attributes
         which should be updated as this request is a partial update.
       operationId: UpdateIncidentTeam
@@ -25190,9 +25194,7 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/usage/application_security:
     get:
       description: 'Get hourly usage for application security .
@@ -25344,7 +25346,7 @@ paths:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost beginning this month. Either start_month or start_date should be
           specified, but not both. (start_month cannot go beyond two months in the
-          past)'
+          past). Provide an `end_month` to view month-over-month cost.'
         in: query
         name: start_month
         required: false
@@ -25362,7 +25364,7 @@ paths:
       - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
           for cost beginning this day. Either start_month or start_date should be
           specified, but not both. (start_date cannot go beyond two months in the
-          past)'
+          past). Provide an `end_date` to view day-over-day cumulative cost.'
         in: query
         name: start_date
         required: false
@@ -26266,8 +26268,8 @@ tags:
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services
-- description: Create, update, delete and retrieve teams which can be associated with
-    incidents.
+- description: The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/)
+    to create, update, delete, and retrieve teams which can be associated with incidents.
   name: Incident Teams
 - description: Manage incident response.
   name: Incidents

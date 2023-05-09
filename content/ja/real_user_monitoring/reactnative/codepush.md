@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/codepush.md
 description: クライアントサイドの React Native モジュールを使用して、Appcenter Codepush および Datadog を操作する方法について説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -153,7 +151,7 @@ config.versionSuffix = `codepush.${codepushVersion}`; // "1.0.0-codepush.v2" に
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/
+[2]: /ja/real_user_monitoring/reactnative/
 [3]: https://github.com/DataDog/datadog-ci
 [4]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-api-ref#codepushgetupdatemetadata
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#upload

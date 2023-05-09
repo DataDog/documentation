@@ -54,9 +54,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{< tabs >}}
 {{% tab "Browser RUM" %}}
 
-1.  Set up [RUM Browser Monitoring][1].
+1. Set up [RUM Browser Monitoring][1].
 
-2.  Initialize the RUM SDK. Configure the `allowedTracingUrls` initialization parameter with the list of internal, first-party origins called by your browser application.
+2. Initialize the RUM SDK. Configure the `allowedTracingUrls` initialization parameter with the list of internal, first-party origins called by your browser application.
 
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
@@ -96,9 +96,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
-1.  Set up [RUM Android Monitoring][1].
+1. Set up [RUM Android Monitoring][1].
 
-2.  Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
+2. Configure the `OkHttpClient` interceptor with the list of internal, first-party origins called by your Android application.
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -125,9 +125,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
-1.  Set up [RUM iOS Monitoring][1].
+1. Set up [RUM iOS Monitoring][1].
 
-2.  Call the `trackURLSession(firstPartyHosts:)` builder function with the list of internal, first-party origins called by your iOS application.
+2. Call the `trackURLSession(firstPartyHosts:)` builder function with the list of internal, first-party origins called by your iOS application.
     ```swift
     Datadog.initialize(
         appContext: .init(),
@@ -180,9 +180,9 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
-1.  Set up [RUM React Native Monitoring][1].
+1. Set up [RUM React Native Monitoring][1].
 
-2.  Set the `firstPartyHosts` initialization parameter to define the list of internal, first-party origins called by your React Native application:
+2. Set the `firstPartyHosts` initialization parameter to define the list of internal, first-party origins called by your React Native application:
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
@@ -223,21 +223,47 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 [2]: /real_user_monitoring/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
+
+
+{{% tab "Roku RUM" %}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+<div class="alert alert-info">RUM for Roku is in beta.</div>
+
+1. Set up [RUM Roku Monitoring][1].
+
+2. Use the `datadogroku_DdUrlTransfer` component to perform your network requests.
+    ```brightscript
+        ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
+        ddUrlTransfer.SetUrl(url)
+        ddUrlTransfer.EnablePeerVerification(false)
+        ddUrlTransfer.EnableHostVerification(false)
+        result = ddUrlTransfer.GetToString()
+    ```
+
+[1]: /real_user_monitoring/roku/
+{{< /site-region >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported libraries
 
 The following Datadog tracing libraries are supported:
 
-| Library                             | Minimum Version                                                                                                             |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][2]                  | [0.22.0][3]                |
-| [Go][4]                  | [1.10.0][5]                |
-| [Java][6]                  | [0.24.1][7]                |
-| [Ruby][8]                  | [0.20.0][9]                |
-| [JavaScript][10]                  | [0.10.0][11]                |
-| [PHP][12]                  | [0.33.0][13]                |
-| [.NET][14]                  | [1.18.2][15]                |
+| Library          | Minimum Version |
+| ---------------- | --------------- |
+| [Python][2]      | [0.22.0][3]     |
+| [Go][4]          | [1.10.0][5]     |
+| [Java][6]        | [0.24.1][7]     |
+| [Ruby][8]        | [0.20.0][9]     |
+| [JavaScript][10] | [0.10.0][11]    |
+| [PHP][12]        | [0.33.0][13]    |
+| [.NET][14]       | [1.18.2][15]    |
 
 
 ## OpenTelemetry support

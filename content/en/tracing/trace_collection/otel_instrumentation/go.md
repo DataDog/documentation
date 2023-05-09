@@ -16,7 +16,7 @@ further_reading:
 ## Requirements and limitations
 
 - Datadog Go tracing library `dd-trace-go` version 1.5.0 or greater.
-- Go version 1.8 or greater.
+- Go version 1.18 or greater.
 - The Datadog OTel API implementation is dependent on upstream [OpenTelemetry Go][6].
 
 The following OTel features are implemented in the Datadog library as noted:
