@@ -106,7 +106,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 {{< /site-region >}}
 
 [1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Other Environments" %}}
 
@@ -120,7 +120,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 [3]: /ja/integrations/amazon_elasticbeanstalk/
 [4]: /ja/integrations/
 [5]: /ja/help/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
