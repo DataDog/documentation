@@ -13,19 +13,19 @@ further_reading:
   text: ダイナミックインスツルメンテーション
 - link: /security/cloud_workload_security/setup/?tab=kubernetes#overview
   tag: ドキュメント
-  text: クラウドワークロードセキュリティの概要
+  text: クラウドワークロードセキュリティのセットアップ
 is_beta: true
 kind: ガイド
 private: true
 title: リモート構成の仕組み
 ---
+
 {{< site-region region="gov" >}}
 
-US1-FED Datadog サイトでは、リモート構成は利用できません。
+<div class="alert alert-warning">US1-FED Datadog サイトでは、リモート構成は利用できません。</div>
+
 
 {{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu" >}}
 
 <div class="alert alert-info">リモート構成はベータ版です。</a></div>
 
@@ -66,14 +66,15 @@ Datadog Agent でリモート構成を有効にすると、設定されている
 - **Agent のサンプリングレートをリモートで設定する**: Datadog Agent を再起動することなく、Datadog Agent のトレースサンプリング速度を変更し、組織のトレース取り込みをニーズに応じて拡張するためのルールをリモートで設定します。
 
 ### ダイナミックインスツルメンテーション
-<div class="alert alert-info">これは非公開ベータ版の機能です。</div>
+<div class="alert alert-info">これはベータ版の機能です。</div>
 
 - 重要なメトリクス、トレース、ログを、コードを変更することなく、ライブアプリケーションから送信できます。
 
 ### クラウドワークロードセキュリティ (CWS)
-<div class="alert alert-info">これは非公開ベータ版の機能です。</div>
 
-- **自動デフォルト Agent ルールアップデート**: 新しい Agent の検出や機能強化がリリースされると、Datadog が管理しているデフォルトの Agent ルールを自動的に受信し、更新します。
+<div class="alert alert-info">これは公開ベータ版の機能です。</div>
+
+- **自動デフォルト Agent ルールアップデート**: 新しい Agent の検出や機能強化がリリースされると、Datadog が管理しているデフォルトの Agent ルールを自動的に受信し、更新します。詳しくは、[Cloud Workload Security の設定][11]をご覧ください。
 
 ### Observability Pipelines（観測データの制御）
 <div class="alert alert-info">これは非公開ベータ版の機能です。</div>
@@ -96,17 +97,17 @@ Datadog は、受信した構成の機密性、完全性、可用性を保護す
 ### 前提条件
 
 
-- Datadog Agent バージョン `7.41.1` (APM サンプリングレートは `7.42.0`) 以上がホストまたはコンテナにインストールされていること。
-- トレーシングライブラリを使用する機能については、以下の Datadog トレーシングライブラリの最小バージョン:
+- Datadog Agent バージョン `7.41.1` (APM サンプリングレートは `7.42.0`、APM Remote Instrumentation は `7.43.0`) 以上がホストまたはコンテナにインストールされていること。
+- トレーシングライブラリを使用する機能については、以下の Datadog トレーシングライブラリの最小バージョンは、こちらを含みます。
 
+  | 製品機能                        | Go            | Java          | .Net          | NodeJS
+  |----------------------------------------|---------------|---------------|---------------|---------------|
+  | ダイナミックインスツルメンテーション |               | 1.5.0         | 2.22.0        |               |
 
-| 製品の特徴                        | Go            | Java          | .Net          | NodeJS          
-|----------------------------------------|---------------|---------------|---------------|---------------|
-| ダイナミックインスツルメンテーション |               | 1.5.0         | 2.22.0        |               |
-| ASM Protect                | 1.45.1        | 1.4.0         | 2.16.0        | 3.11.0        |
-| ASM 1 クリックアクティベーション        |               | 1.4.0         | 2.17.0        | 3.9.0         |
+  ASM Protection 機能および ASM 1 クリックアクティベーションについては、[互換性要件][12]を参照してください。
 
 ### セットアップ
+
 リモート構成を有効にするには
 
 1. RBAC 権限に [`org_management`][9] が含まれていることを確認し、組織のリモート構成を有効にすることができるようにします。
@@ -130,6 +131,14 @@ remote_configuration:
   enabled: true
 ```
 
+Datadog Remote Instrumentation を有効にするには、Helm Chart に以下を追加します。
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
+
 6. 変更を有効にするために、Agent を再起動します。 
 
 {{% /tab %}}
@@ -139,15 +148,27 @@ Datadog Agent マニフェストに以下を追加し、リモート構成機能
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
 ```
+
+Datadog Remote Instrumentation を有効にするには、Helm Chart に以下を追加します。
+```yaml
+clusterAgent:
+  admissionController:
+    remoteInstrumentation:
+      enabled: true
+```
 {{% /tab %}}
 {{< /tabs >}}
 
 これらの手順を実行すると、Agent は Datadog に構成をリクエストし、リモート構成を使用する機能が有効になります。
 - [CWS デフォルト Agent ルール][5]は、リリースされると自動的に更新されます。
+- Datadog Remote Instrumentation が有効になります。
 - [APM Agent レベルのサンプリングレート][6]が適用されます。
 - [ダイナミックインスツルメンテーション][7]が有効になります。
 - [ASM 1 クリック有効化、IP ブロック、攻撃パターン更新][8]が有効になります。
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/site/
 [2]: /ja/help/
@@ -159,10 +180,5 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 [8]: /ja/security/application_security/how-appsec-works/#built-in-protection
 [9]: /ja/account_management/rbac/permissions#access-management
 [10]: /ja/observability_pipelines/#observability-pipelines-worker
-
-
-{{< /site-region >}}
-
-## その他の参考資料
-
-{{< partial name="whats-next/whats-next.html" >}}
+[11]: /ja/security/cloud_workload_security/setup
+[12]: /ja/security/application_security/enabling/compatibility/

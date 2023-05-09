@@ -47,7 +47,7 @@ pricing:
   product_id: terraform
   short_description: このインテグレーションの定額料金
   unit_price: 100
-public_title: Terraform インテグレーション
+public_title: Terraform
 short_description: terraform アカウントと失敗した実行を監視する
 supported_os:
 - linux
@@ -71,7 +71,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Terraform インテグレーション
+  title: Terraform
   uninstallation: README.md#Uninstallation
 ---
 

@@ -2920,6 +2920,66 @@ components:
             type: number
           type: array
       type: object
+    DetailedFinding:
+      description: A single finding with with message and resource configuration.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DetailedFindingAttributes'
+        id:
+          $ref: '#/components/schemas/FindingID'
+        type:
+          $ref: '#/components/schemas/DetailedFindingType'
+      type: object
+    DetailedFindingAttributes:
+      description: The JSON:API attributes of the detailed finding.
+      properties:
+        evaluation:
+          $ref: '#/components/schemas/FindingEvaluation'
+        evaluation_changed_at:
+          $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        message:
+          description: The remediation message for this finding.
+          example: '## Remediation
+
+
+            ### From the console
+
+
+            1. Go to Storage Account
+
+            2. For each Storage Account, navigate to Data Protection
+
+            3. Select Set soft delete enabled and enter the number of days to retain
+            soft deleted data.'
+          type: string
+        mute:
+          $ref: '#/components/schemas/FindingMute'
+        resource:
+          $ref: '#/components/schemas/FindingResource'
+        resource_configuration:
+          description: The resource configuration for this finding.
+          type: object
+        resource_discovery_date:
+          $ref: '#/components/schemas/FindingResourceDiscoveryDate'
+        resource_type:
+          $ref: '#/components/schemas/FindingResourceType'
+        rule:
+          $ref: '#/components/schemas/FindingRule'
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+        tags:
+          $ref: '#/components/schemas/FindingTags'
+      type: object
+    DetailedFindingType:
+      default: detailed_finding
+      description: The JSON:API type for findings that have the message and resource
+        configuration.
+      enum:
+      - detailed_finding
+      example: detailed_finding
+      type: string
+      x-enum-varnames:
+      - DETAILED_FINDING
     Event:
       description: The metadata associated with a request.
       properties:
@@ -3620,6 +3680,164 @@ components:
             $ref: '#/components/schemas/FastlyServiceResponse'
           type: array
       type: object
+    Finding:
+      description: A single finding without message and resource configuration.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/FindingAttributes'
+        id:
+          $ref: '#/components/schemas/FindingID'
+        type:
+          $ref: '#/components/schemas/FindingType'
+      type: object
+    FindingAttributes:
+      description: The JSON:API attributes of the finding.
+      properties:
+        evaluation:
+          $ref: '#/components/schemas/FindingEvaluation'
+        evaluation_changed_at:
+          $ref: '#/components/schemas/FindingEvaluationChangedAt'
+        mute:
+          $ref: '#/components/schemas/FindingMute'
+        resource:
+          $ref: '#/components/schemas/FindingResource'
+        resource_discovery_date:
+          $ref: '#/components/schemas/FindingResourceDiscoveryDate'
+        resource_type:
+          $ref: '#/components/schemas/FindingResourceType'
+        rule:
+          $ref: '#/components/schemas/FindingRule'
+        status:
+          $ref: '#/components/schemas/FindingStatus'
+        tags:
+          $ref: '#/components/schemas/FindingTags'
+      type: object
+    FindingEvaluation:
+      description: The evaluation of the finding.
+      enum:
+      - pass
+      - fail
+      example: pass
+      type: string
+      x-enum-varnames:
+      - PASS
+      - FAIL
+    FindingEvaluationChangedAt:
+      description: The date on which the evaluation for this finding changed (Unix
+        ms).
+      example: 1678721573794
+      format: int64
+      minimum: 1
+      type: integer
+    FindingID:
+      description: The unique ID for this finding.
+      example: AQAAAYbb1i0gijTHEQAAAABBWWJiMWkwZ0FBQ2FuNzBJVGZXZ3B3QUE
+      type: string
+    FindingMute:
+      additionalProperties: false
+      description: Information about the mute status of this finding.
+      properties:
+        description:
+          description: Additional information about the reason why this finding is
+            muted.
+          example: To be resolved later
+          type: string
+        expiration_date:
+          description: The end of the mute period.
+          example: 1778721573794
+          format: int64
+          type: integer
+        muted:
+          description: Whether this finding is muted.
+          example: true
+          type: boolean
+        reason:
+          $ref: '#/components/schemas/FindingMuteReason'
+        start_date:
+          description: The start of the mute period.
+          example: 1678721573794
+          format: int64
+          type: integer
+        uuid:
+          description: The ID of the user who muted this finding.
+          example: e51c9744-d158-11ec-ad23-da7ad0900002
+          type: string
+      type: object
+    FindingMuteReason:
+      description: The reason why this finding is muted.
+      enum:
+      - ACCEPTED_RISK
+      - PENDING_FIX
+      - FALSE_POSITIVE
+      - OTHER
+      example: ACCEPTED_RISK
+      type: string
+      x-enum-varnames:
+      - ACCEPTED_RISK
+      - PENDING_FIX
+      - FALSE_POSITIVE
+      - OTHER
+    FindingResource:
+      description: The resource name of this finding.
+      example: my_resource_name
+      type: string
+    FindingResourceDiscoveryDate:
+      description: The date on which the resource was discovered (Unix ms).
+      example: 1678721573794
+      format: int64
+      minimum: 1
+      type: integer
+    FindingResourceType:
+      description: The resource type of this finding.
+      example: azure_storage_account
+      type: string
+    FindingRule:
+      additionalProperties: false
+      description: The rule that triggered this finding.
+      properties:
+        id:
+          description: The ID of the rule that triggered this finding.
+          example: dv2-jzf-41i
+          type: string
+        name:
+          description: The name of the rule that triggered this finding.
+          example: Soft delete is enabled for Azure Storage
+          type: string
+      type: object
+    FindingStatus:
+      description: The status of the finding.
+      enum:
+      - critical
+      - high
+      - medium
+      - low
+      - info
+      example: critical
+      type: string
+      x-enum-varnames:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - INFO
+    FindingTags:
+      description: The tags associated with this finding.
+      example:
+      - cloud_provider:aws
+      - myTag:myValue
+      items:
+        description: The list of tags.
+        type: string
+      type: array
+    FindingType:
+      default: finding
+      description: The JSON:API type for findings.
+      enum:
+      - finding
+      example: finding
+      type: string
+      x-enum-varnames:
+      - FINDING
     FormulaLimit:
       description: Message for specifying limits to the number of values returned
         by a query.
@@ -3728,6 +3946,14 @@ components:
             type: string
           nullable: true
           type: array
+      type: object
+    GetFindingResponse:
+      description: The expected response schema when getting a finding.
+      properties:
+        data:
+          $ref: '#/components/schemas/DetailedFinding'
+      required:
+      - data
       type: object
     GetTeamMembershipsSort:
       description: Specifies the order of returned team memberships
@@ -4297,6 +4523,11 @@ components:
     IncidentCreateAttributes:
       description: The incident's attributes for a create request.
       properties:
+        customer_impact_scope:
+          description: Required if `customer_impacted:"true"`. A summary of the impact
+            customers experienced during the incident.
+          example: Example customer impact scope
+          type: string
         customer_impacted:
           description: A flag indicating whether the incident caused customer impact.
           example: false
@@ -5793,6 +6024,49 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+      type: object
+    ListFindingsData:
+      description: Array of findings.
+      items:
+        $ref: '#/components/schemas/Finding'
+      type: array
+    ListFindingsMeta:
+      additionalProperties: false
+      description: Metadata for pagination.
+      properties:
+        page:
+          $ref: '#/components/schemas/ListFindingsPage'
+        snapshot_timestamp:
+          description: The point in time corresponding to the listed findings.
+          example: 1678721573794
+          format: int64
+          minimum: 1
+          type: integer
+      type: object
+    ListFindingsPage:
+      additionalProperties: false
+      description: Pagination and findings count information.
+      properties:
+        cursor:
+          description: The cursor used to paginate requests.
+          example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+          type: string
+        total_filtered_count:
+          description: The total count of findings after the filter has been applied.
+          example: 213
+          format: int64
+          type: integer
+      type: object
+    ListFindingsResponse:
+      description: The expected response schema when listing findings.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListFindingsData'
+        meta:
+          $ref: '#/components/schemas/ListFindingsMeta'
+      required:
+      - data
+      - meta
       type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
@@ -11018,12 +11292,14 @@ components:
       - none
       - false_positive
       - testing_or_maintenance
+      - investigated_case_opened
       - other
       type: string
       x-enum-varnames:
       - NONE
       - FALSE_POSITIVE
       - TESTING_OR_MAINTENANCE
+      - INVESTIGATED_CASE_OPENED
       - OTHER
     SecurityMonitoringSignalAssigneeUpdateAttributes:
       description: Attributes describing the new assignee of a security signal.
@@ -14818,7 +15094,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/SpansMetricIDParameter'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -18106,8 +18382,8 @@ paths:
         Add the `Content-Encoding: gzip` header to the request when sending compressed
         logs.
 
-        Log events can be submitted up to 18 hours in the past and 2 hours in the
-        future.
+        Log events can be submitted with a timestamp that is up to 18 hours in the
+        past.
 
 
         The status codes answered by the HTTP API are:
@@ -18838,7 +19114,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/MetricID'
       responses:
-        '200':
+        '204':
           description: OK
         '403':
           $ref: '#/components/responses/NotAuthorizedResponse'
@@ -20301,8 +20577,8 @@ paths:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"monitor-config-policy\",\n    \"attributes\":
               {\n      \"policy_type\": \"tag\",\n      \"policy\": {\n        \"tag_key\":
-              \"dc\", \"tag_key_required\": true, \"valid_tag_values\": [\"prod\",
-              \"staging\"]\n      }\n    }\n  }\n}"
+              \"{{ unique_lower_alnum }}\", \"tag_key_required\": false, \"valid_tag_values\":
+              [\"prod\", \"staging\"]\n      }\n    }\n  }\n}"
           step: there is a valid "monitor_configuration_policy" in the system
       x-menu-order: 11
       x-undo:
@@ -20487,6 +20763,199 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
+  /api/v2/posture_management/findings:
+    get:
+      description: "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be
+        applied by appending query parameters to the URL.\n\n  - Using a single filter:
+        `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n
+        \ - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere,
+        `attribute_key` can be any of the filter keys described further below.\n\nQuery
+        parameters of type `integer` support comparison operators (`>`, `>=`, `<`,
+        `<=`). This is particularly useful when filtering by `evaluation_changed_at`
+        or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou
+        can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*`
+        to filter for any non-AWS resources.\n\nThe operator must come after the equal
+        sign. For example, to filter with the `>=` operator, add the operator after
+        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\n### Response\n\nThe
+        response includes an array of finding objects, pagination metadata, and a
+        count of items that match the query.\n\nEach finding object contains the following:\n\n-
+        The finding ID that can be used in a `GetFinding` request to retrieve the
+        full finding details.\n- Core attributes, including status, evaluation, high-level
+        resource details, muted state, and rule details.\n- `evaluation_changed_at`
+        and `resource_discovery_date` time stamps.\n- An array of associated tags.\n"
+      operationId: ListFindings
+      parameters:
+      - description: Limit the number of findings returned. Must be <= 1000.
+        example: 50
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 100
+          format: int64
+          maximum: 1000
+          minimum: 1
+          type: integer
+      - description: Return findings for a given snapshot of time (Unix ms).
+        example: 1678721573794
+        in: query
+        name: snapshot_timestamp
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Return the next page of findings pointed to by the cursor.
+        example: eyJhZnRlciI6IkFRQUFBWWJiaEJXQS1OY1dqUUFBQUFCQldXSmlhRUpYUVVGQlJFSktkbTlDTUdaWFRVbDNRVUUiLCJ2YWx1ZXMiOlsiY3JpdGljYWwiXX0=
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Return findings that have these associated tags (repeatable).
+        example: filter[tags]=cloud_provider:aws&filter[tags]=aws_account:999999999999
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: Return findings that have changed from pass to fail or vice versa
+          on a specified date (Unix ms) or date range (using comparison operators).
+        example: '>=1678721573794'
+        in: query
+        name: filter[evaluation_changed_at]
+        required: false
+        schema:
+          type: string
+      - description: Set to `true` to return findings that are muted. Set to `false`
+          to return unmuted findings.
+        in: query
+        name: filter[muted]
+        required: false
+        schema:
+          type: boolean
+      - description: Return findings for the specified rule ID.
+        in: query
+        name: filter[rule_id]
+        required: false
+        schema:
+          type: string
+      - description: Return findings for the specified rule.
+        in: query
+        name: filter[rule_name]
+        required: false
+        schema:
+          type: string
+      - description: Return only findings for the specified resource type.
+        in: query
+        name: filter[resource_type]
+        required: false
+        schema:
+          type: string
+      - description: Return findings that were found on a specified date (Unix ms)
+          or date range (using comparison operators).
+        example: '>=1678721573794'
+        in: query
+        name: filter[discovery_timestamp]
+        required: false
+        schema:
+          type: string
+      - description: Return only `pass` or `fail` findings.
+        example: pass
+        in: query
+        name: filter[evaluation]
+        required: false
+        schema:
+          $ref: '#/components/schemas/FindingEvaluation'
+      - description: Return only findings with the specified status.
+        example: critical
+        in: query
+        name: filter[status]
+        required: false
+        schema:
+          $ref: '#/components/schemas/FindingStatus'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFindingsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: List findings
+      tags:
+      - Security Monitoring
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.cursor
+        limitParam: page[limit]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/posture_management/findings/{finding_id}:
+    get:
+      description: Returns a single finding with message and resource configuration.
+      operationId: GetFinding
+      parameters:
+      - description: The ID of the finding.
+        in: path
+        name: finding_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFindingResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_findings_read
+      summary: Get a finding
+      tags:
+      - Security Monitoring
+      x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/processes:
     get:
       description: Get all processes for your organization.
@@ -21965,7 +22434,7 @@ paths:
       summary: Get all security filters
       tags:
       - Security Monitoring
-      x-menu-order: 16
+      x-menu-order: 18
       x-undo:
         type: safe
     post:
@@ -22018,7 +22487,7 @@ paths:
               \       }\n     ],\n      \"filtered_data_type\":\"logs\",\n      \"is_enabled\":
               true\n     }\n  }\n}"
           step: there is a valid "security_filter" in the system
-      x-menu-order: 15
+      x-menu-order: 17
       x-undo:
         operationId: DeleteSecurityFilter
         parameters:
@@ -22048,7 +22517,7 @@ paths:
       summary: Delete a security filter
       tags:
       - Security Monitoring
-      x-menu-order: 12
+      x-menu-order: 14
       x-undo:
         type: idempotent
     get:
@@ -22082,7 +22551,7 @@ paths:
       summary: Get a security filter
       tags:
       - Security Monitoring
-      x-menu-order: 14
+      x-menu-order: 16
       x-undo:
         type: safe
     patch:
@@ -22125,7 +22594,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 15
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules:
@@ -22154,7 +22623,7 @@ paths:
       summary: List rules
       tags:
       - Security Monitoring
-      x-menu-order: 1
+      x-menu-order: 3
       x-undo:
         type: safe
     post:
@@ -22227,7 +22696,7 @@ paths:
               86400\n  },\n  \"message\": \"Test rule Bis\",\n  \"tags\": [],\n  \"isEnabled\":
               true,\n  \"type\": \"log_detection\"\n}"
           step: there is a valid "security_rule_bis" in the system
-      x-menu-order: 2
+      x-menu-order: 4
       x-undo:
         operationId: DeleteSecurityMonitoringRule
         parameters:
@@ -22257,7 +22726,7 @@ paths:
       summary: Delete an existing rule
       tags:
       - Security Monitoring
-      x-menu-order: 5
+      x-menu-order: 7
       x-undo:
         type: idempotent
     get:
@@ -22284,7 +22753,7 @@ paths:
       summary: Get a rule's details
       tags:
       - Security Monitoring
-      x-menu-order: 3
+      x-menu-order: 5
       x-undo:
         type: safe
     put:
@@ -22330,7 +22799,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 4
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals:
@@ -22411,7 +22880,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 7
+      x-menu-order: 9
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -22455,7 +22924,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 8
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -22488,7 +22957,7 @@ paths:
       summary: Get a signal's details
       tags:
       - Security Monitoring
-      x-menu-order: 11
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v2/security_monitoring/signals/{signal_id}/assignee:
@@ -22535,7 +23004,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/incidents:
@@ -22582,7 +23051,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 11
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/signals/{signal_id}/state:
@@ -22629,7 +23098,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 10
+      x-menu-order: 12
       x-undo:
         type: idempotent
   /api/v2/sensitive-data-scanner/config:
@@ -23849,6 +24318,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Create a team
       tags:
       - Teams
@@ -23895,6 +24365,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - teams_read
+        - teams_manage
       summary: Remove a team
       tags:
       - Teams
@@ -24518,6 +24989,7 @@ paths:
         type: idempotent
   /api/v2/teams:
     get:
+      deprecated: true
       description: Get all incident teams for the requesting user's organization.
         If the `include[users]` query parameter is provided, the included attribute
         will contain the users related to these incident teams.
@@ -24555,10 +25027,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     post:
+      deprecated: true
       description: Creates a new incident team.
       operationId: CreateIncidentTeam
       requestBody:
@@ -24608,11 +25079,10 @@ paths:
         - name: team_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/teams/{team_id}:
     delete:
+      deprecated: true
       description: Deletes an existing incident team.
       operationId: DeleteIncidentTeam
       parameters:
@@ -24641,10 +25111,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     get:
+      deprecated: true
       description: 'Get details of an incident team. If the `include[users]` query
         parameter is provided,
 
@@ -24681,10 +25150,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     patch:
+      deprecated: true
       description: Updates an existing incident team. Only provide the attributes
         which should be updated as this request is a partial update.
       operationId: UpdateIncidentTeam
@@ -24726,9 +25194,7 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/usage/application_security:
     get:
       description: 'Get hourly usage for application security .
@@ -24880,7 +25346,7 @@ paths:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
           for cost beginning this month. Either start_month or start_date should be
           specified, but not both. (start_month cannot go beyond two months in the
-          past)'
+          past). Provide an `end_month` to view month-over-month cost.'
         in: query
         name: start_month
         required: false
@@ -24898,7 +25364,7 @@ paths:
       - description: 'Datetime in ISO-8601 format, UTC, precise to day: `[YYYY-MM-DD]`
           for cost beginning this day. Either start_month or start_date should be
           specified, but not both. (start_date cannot go beyond two months in the
-          past)'
+          past). Provide an `end_date` to view day-over-day cumulative cost.'
         in: query
         name: start_date
         required: false
@@ -25065,6 +25531,14 @@ paths:
       - description: Include child org usage in the response. Defaults to false.
         in: query
         name: filter[include_descendants]
+        required: false
+        schema:
+          default: false
+          type: boolean
+      - description: Include breakdown of usage by subcategories where applicable
+          (for product family logs only). Defaults to false.
+        in: query
+        name: filter[include_breakdown]
         required: false
         schema:
           default: false
@@ -25794,8 +26268,8 @@ tags:
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services
-- description: Create, update, delete and retrieve teams which can be associated with
-    incidents.
+- description: The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/)
+    to create, update, delete, and retrieve teams which can be associated with incidents.
   name: Incident Teams
 - description: Manage incident response.
   name: Incidents

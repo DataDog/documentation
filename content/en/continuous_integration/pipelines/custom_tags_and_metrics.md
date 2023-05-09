@@ -32,8 +32,9 @@ Custom tags and metrics work with the following CI providers:
 - GitLab (SaaS or self-hosted >= 14.1)
 - GitHub.com (SaaS) **Note:** For GitHub, tags and metrics can only be added to the pipeline span.
 - Jenkins **Note:** For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
+- Azure DevOps Pipelines
 
-## Installing the Datadog CI CLI
+## Install the Datadog CI CLI
 
 Install the [`datadog-ci`][1] (>=v1.15.0) CLI globally using `npm`:
 
@@ -69,7 +70,7 @@ Invoke-WebRequest -Uri "https://github.com/DataDog/datadog-ci/releases/latest/do
 {{% /tab %}}
 {{< /tabs >}}
 
-## Adding tags to pipeline traces
+## Add tags to pipeline traces
 
 Tags can be added to the pipeline span or to the job span. To do this, run:
 
@@ -102,7 +103,7 @@ and then click the **create facet** option.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
-## Adding metrics to pipeline traces
+## Add metrics to pipeline traces
 
 To add numerical tags to the pipeline span or the job span, run:
 

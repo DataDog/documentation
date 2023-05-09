@@ -82,7 +82,7 @@ All fields that customers might use to search and analyze logs need to be added 
 There are two types of facets:
 
 - A facet is used to get relative insights and to count unique values.
-- A measure is a type of facet used for searches over a range.  For example, adding a measure for latency duration allows users to search for all logs above a certain latency. **Note**: Define the [unit][11] of a measure facet based on what the attribute represents.
+- A measure is a type of facet used for searches over a range. For example, adding a measure for latency duration allows users to search for all logs above a certain latency. **Note**: Define the [unit][11] of a measure facet based on what the attribute represents.
 
 To add a new facet or measure:
 1. Click on a log that contains the attribute you want to add a facet or measure for. 

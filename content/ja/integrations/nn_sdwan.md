@@ -36,7 +36,7 @@ draft: false
 git_integration_title: nn_sdwan
 integration_id: nn-sdwan
 integration_title: Netnology Cisco SD-WAN
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -83,7 +83,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従いチェックを
 1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ``` bash
-   datadog-agent integration install -t nn_sdwan==1.0.0
+   datadog-agent integration install -t nn_sdwan==1.0.1
    ```
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。

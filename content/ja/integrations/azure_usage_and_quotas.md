@@ -1,8 +1,9 @@
 ---
 categories:
-- cloud
-- コスト管理
 - azure
+- クラウド
+- コスト管理
+- ネットワーク
 dependencies: []
 description: Azure の各サブスクリプションリソース (コンピューティング、ネットワーク、ストレージ) について、事前に構成された上限に照らして使用状況を追跡します
 doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
@@ -30,7 +31,7 @@ Azure では、サブスクリプションリソースに対して事前に構�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 

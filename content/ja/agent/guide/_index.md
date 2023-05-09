@@ -1,13 +1,13 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: Agent ガイド
 disable_toc: true
-kind: guide
+kind: ガイド
 private: true
 title: Agent ガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: Agent ガイド
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}
@@ -42,7 +42,7 @@ cascade:
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}JMX を使用したオートディスカバリー{{< /nextlink >}}
     {{< nextlink href="agent/guide/build-container-agent" >}}Datadog Agent イメージの構築{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-management" >}}Agent でコンテナのディスカバリーを管理{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifers パラメーターを使用して、指定されたコンテナにオートディスカバリーのコンフィギュレーションファイルテンプレートを適用{{< /nextlink >}}
+    {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifiers パラメーターを使用して、指定されたコンテナにオートディスカバリーのコンフィギュレーションファイルテンプレートを適用{{< /nextlink >}}
     {{< nextlink href="agent/guide/operator-advanced" >}}Datadog Operator の高度なセットアップ{{< /nextlink >}}
     {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Docker 環境のコンテナイメージ{{< /nextlink >}}
     {{< nextlink href="/agent/guide/compose-and-the-datadog-agent" >}}コンポーズと Datadog Agent{{< /nextlink >}}

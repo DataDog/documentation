@@ -88,6 +88,16 @@ Windows プライベートロケーションベータ版への追加をご希望
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+| ポート | エンドポイント                                | 説明                                                                        |
+| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ap1.datadoghq.com`  | [AWS Signature Version 4 プロトコル][1]に基づく社内プロトコルを使用して、テストコンフィギュレーションをプルし、テスト結果を Datadog にプッシュするためにプライベートロケーションで使用されます。 |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 | ポート | エンドポイント                              | 説明                                                    |
@@ -304,7 +314,7 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 1. [Datadog Synthetics Private Location][1] を Helm リポジトリに追加します。
 
     ```shell
-    helm repo add datadog https://helm.datadoghq.com 
+    helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
 
@@ -354,7 +364,7 @@ OpenShift の場合、プライベートロケーションを `anyuid` SCC で�
 }
 ```
 
-**注:** 
+**注:**
 
 - 予約済み IP をブロックした場合は、[linuxParameters][1] を構成して、プライベートロケーションコンテナに `NET_ADMIN` 機能を付与してください。
 - `DATADOG_API_KEY`、`DATADOG_ACCESS_KEY`、`DATADOG_SECRET_ACCESS_KEY`、`DATADOG_PUBLIC_KEY_PEM`、`DATADOG_PRIVATE_KEY` の環境変数を使用する場合、それらを `"command": [ ]` セクションに入れる必要はありません。

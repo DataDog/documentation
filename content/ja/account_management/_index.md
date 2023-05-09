@@ -1,10 +1,10 @@
 ---
-title: アカウントの管理
-kind: documentation
-description: Datadog アカウントと組織を管理する
 aliases:
-  - /ja/guides/billing
-  - /ja/account_management/settings
+- /ja/guides/billing
+- /ja/account_management/settings
+description: Datadog アカウントと組織を管理する
+kind: documentation
+title: アカウントの管理
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
@@ -28,11 +28,8 @@ Google 認証を使用して Datadog にログインする場合、メールア�
 
 * 1 日のダイジェスト
 * 週間ダイジェスト
-* 週間モニターレポート
-* 週間 PagerDuty レポート
-* 週間 Nagios レポート
 
-メールダイジェストまたはレポートが自分に関連しているかどうかわからない場合は、各メールサブスクリプションの横にある **Example** リンクをクリックして例を表示してください。**Unsubscribe From All** ボタンを使用して、すべてのメールサブスクリプションからすばやく退会することもできます。
+メールダイジェストが自分に関連しているかどうかわからない場合は、各メールサブスクリプションの横にある **Example** リンクをクリックして例を表示してください。**Unsubscribe From All** ボタンを使用して、すべてのメールサブスクリプションからすばやく退会することもできます。
 
 ### Organizations
 
@@ -63,9 +60,9 @@ Datadog をダークモードで表示するには、サイドバーにあるア
 
 [GitHub インテグレーション][9]をインストールして Datadog でイベントを作成するには、自分の GitHub アカウントを Datadog ユーザーアカウントにリンクする必要があります。アカウントをリンクすることで、Datadog で GitHub イベントに投稿したコメントは自動的に GitHub の対応する問題またはプルリクエストに投稿し直されます。
 
-## アカウントの削除
+## 組織のアカウントを無効にする
 
-Datadog アカウントを完全に削除するには、[Datadog サポート][10]にご連絡ください。
+Datadog の組織アカウントを無効にするには、[Datadog サポート][10]にお問い合わせください。
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en

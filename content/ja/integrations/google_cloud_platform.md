@@ -4,7 +4,9 @@ aliases:
 categories:
 - cloud
 - google cloud
+- iot
 - log collection
+- network
 dependencies: []
 description: 豊富な GCP メトリクスを収集してホストマップ内のインスタンスを視覚化。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_platform/
@@ -28,7 +30,7 @@ version: '1.0'
 Google Cloud Platform に接続して、すべての Google Compute Engine (GCE) ホストを Datadog に表示できます。GCE ホストタグと追加した GCE ラベルがホストに自動的にタグ付けされるため、Datadog のインフラストラクチャー概要にホストを表示し、分類することができます。
 
 <div class="alert alert-warning">
-Datadog の GCP インテグレーションは、<a href="https://cloud.google.com/monitoring/api/metrics_gcp">Google Cloud Logging からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
+Datadog の GCP インテグレーションは、<a href="https://cloud.google.com/monitoring/api/metrics_gcp">すべての Google Cloud メトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
 </div>
 
 | インテグレーション                       | 説明                                                             |
@@ -94,7 +96,7 @@ Datadog <> Google Cloud インテグレーションは、サービスアカウ�
 10. 複数のプロジェクトを監視する場合は、次の方法のいずれかを使用します。
 
     - 複数のサービスアカウントを使用する場合は、上のプロセスを繰り返します。
-    - 同じサービスアカウントを使用する場合は、手順 6 でダウンロードした JSON ファイルで `project_id` を更新します。次に、手順 7 ～ 10 の説明に従って、このファイルを Datadog にアップロードします。
+    - 同じサービスアカウントを使用する場合は、手順 5 でダウンロードした JSON ファイルで `project_id` を更新します。次に、手順 6 ～ 9 の説明に従って、このファイルを Datadog にアップロードします。
 
 #### コンフィギュレーション
 
@@ -142,7 +144,7 @@ Pub/Sub が Google Cloud Logging からログを受け取り、Datadog へ転送
 #### Google Cloud からログをエクスポート
 
 1. [ログエクスプローラーページ][41]に移動し、エクスポートするログを絞り込みます。
-2. **Actions** メニューから **Create Sink** を選択します。
+2. **Log Router** タブより、**Create Sink** を選択します。
 3. シンクに名前を設定します。
 4. エクスポート先として _Cloud Pub/Sub_ を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
@@ -178,16 +180,7 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 
 ### タグ
 
-タグは、Google Cloud Platform および Google Compute Engine に関するさまざまな構成オプションに基づいて、自動的に割り当てられます。自動的に割り当てられるタグを以下に示します。
-
-- Zone
-- Instance-type
-- Instance-id
-- Automatic-restart
-- On-host-maintenance
-- Project
-- Numeric_project_id
-- 名前
+タグは、Google Cloud Platform と Google Compute Engine の様々な構成オプションに基づいて自動的に割り当てられます。`project_id` タグは、すべてのメトリクスに追加されます。追加のタグは、利用可能な場合に Google Cloud Platform から収集され、メトリクスの種類に応じて異なります。
 
 また、Datadog は以下をタグとして収集します。
 
@@ -239,7 +232,7 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 [32]: https://console.cloud.google.com/apis/library/compute.googleapis.com
 [33]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
 [34]: https://console.cloud.google.com/apis/credentials
-[35]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
+[35]: https://app.datadoghq.com/integrations/google-cloud-platform
 [36]: https://cloud.google.com/compute/docs/labeling-resources
 [37]: https://cloud.google.com/pubsub/quotas#quotas
 [38]: https://console.cloud.google.com/cloudpubsub/topicList
