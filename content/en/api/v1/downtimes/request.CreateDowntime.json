@@ -16,5 +16,14 @@
       "Fri"
     ],
     "until_date": 1638443471
-  }
+  },
+  "notify_end_states": [
+    "alert",
+    "no data",
+    "warn"
+  ],
+  "notify_end_types": [
+    "canceled",
+    "expired"
+  ]
 }

@@ -62,7 +62,7 @@ pricing:
   tag: vcoreid
   unit_label: production vCore
   unit_price: 200
-public_title: Intégration Mule®
+public_title: Mule®
 short_description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les
   à Datadog
 supported_os:
@@ -106,7 +106,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Mule®
+  title: Mule®
   uninstallation: README.md#Uninstallation
 ---
 

@@ -3,6 +3,7 @@ title: Cloud Cost Management
 kind: documentation
 aliases:
   - /infrastructure/cloud_cost_management
+  - /integrations/cloudability
 further_reading:
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
@@ -190,7 +191,6 @@ The rule stops executing for each resource, once a first match is found. For exa
 {{% /tab %}}
 
 {{% tab "Azure" %}}
-<div class="alert alert-warning">Azure Cloud Cost Management is in private beta. Fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSftAIq_g4GxBAKdWV5OjP0Ui4CAjWTzH3YCKy3n930gMz0Krg/viewform?usp=sf_link">form</a> to request access.</div>
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
@@ -207,20 +207,20 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. Once the scope is selected, click **Add**.
 
-{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope"  >}}
+{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
   
-{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
+{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
 5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. 
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
-{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports"  >}}
+{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
 
 ### Provide Datadog access to your exports
 
@@ -267,7 +267,7 @@ You can visualize your ingested data using the following cost types:
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" >}}
 
 ## Further reading
 

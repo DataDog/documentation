@@ -132,8 +132,8 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | change           | The absolute change of the value.                                                                                                                                             |
 | %&nbsp;change    | The percentage change of the value compared to its previous value. For example, the percentage change for a previous value of 2 with a current value of 4 is 100%.            |
 | average          | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                   |
-| max              | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the max() function to your monitor query.                              |
-| min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query.                      |
+| max              | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the max() function to your monitor query. See the Notes section for additional threshold behavior. |
+| min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query. See the Notes section for additional threshold behavior. |
 | sum              | If the summation of every point in the series crosses the threshold, an alert is triggered. It adds the `sum()` function to your monitor query.                               |
 | percentile(pXX)  | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
 | Alert grouping   | If using a `Simple Alert`, the monitor aggregates over all reporting sources. If using a `Multi Alert`, the monitor applies the alert to each source, according to your group parameters. See [Alert grouping](#alert-grouping) for more details.
@@ -144,6 +144,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 
 **Notes:**
   - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified.
+  - **max/min**: These descriptions of max and min assume that the monitor alerts when the metric goes above the threshold. For monitors that alert when below the threshold, the max and min behavior is reversed.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
   - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
 

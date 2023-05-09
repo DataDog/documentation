@@ -35,7 +35,7 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 ### Setup
 
 - **Define Scanning Groups:** A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for Logs, APM, RUM, and/or Events. See the [Log Search Syntax][2] documentation to learn more about query filters.
-- **Define Scanning Rules:** A scanning rule determines what sensitive information to match within the data.  Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
+- **Define Scanning Rules:** A scanning rule determines what sensitive information to match within the data. Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
 
 Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
   - Backreferences and capturing sub-expressions (lookarounds)
@@ -67,7 +67,7 @@ Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following 
 ### Out-of-the-box Scanning Rules
 
 The Scanning Rule Library contains an evergrowing collection of predefined rules maintained by Datadog for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
-{{< img src="logs/sensitive_data_scanner/sds-library-28-03-23.png" alt="Scanning Rule Library"  style="width:90%;">}}
+{{< img src="logs/sensitive_data_scanner/sds-library-28-03-23.png" alt="Scanning Rule Library" style="width:90%;">}}
 
 ### Permissions
 

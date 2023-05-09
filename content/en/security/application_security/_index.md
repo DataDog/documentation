@@ -2,7 +2,6 @@
 title: Application Security Management
 kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
-disable_sidebar: true
 aliases:
   - /security_platform/application_security
 further_reading:
@@ -36,6 +35,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/"
   tag: "Blog"
   text: "Block attackers in your apps and APIs with Datadog Application Security Management"
+- link: "https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/"
+  tag: "Blog"
+  text: "Threat modeling with Datadog Application Security Management"
 ---
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}

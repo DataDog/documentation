@@ -60,7 +60,7 @@ pricing:
   tag: meeting_participant
   unit_label: 会議参加者
   unit_price: 1.0
-public_title: Microsoft Teams インテグレーション
+public_title: Microsoft Teams
 short_description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
 supported_os:
 - linux
@@ -98,7 +98,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Microsoft Teams インテグレーション
+  title: Microsoft Teams
   uninstallation: README.md#Uninstallation
 ---
 

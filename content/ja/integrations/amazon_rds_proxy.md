@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- data store
 - ログの収集
 dependencies: []
 description: Amazon RDS Proxy のキーメトリクスを追跡
@@ -29,7 +30,7 @@ Amazon RDS Proxy は、Amazon Relational Database Service (RDS) 用のフルマ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 まだの方は、[Amazon Web Services とのインテグレーション][1]を最初に設定してください。
 また、[Amazon RDS とのインテグレーション][2]の有効化も必要です。

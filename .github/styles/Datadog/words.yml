@@ -10,6 +10,7 @@ swap:
   'acknowledgement': acknowledgment
   'auto-complete': 'autocomplete'
   'a number of': few|several|many
+  'and/or': 'and|or|either or'
   'back end': backend
   'Datadog app': 'Datadog|Datadog site'
   'Datadog application': 'Datadog|Datadog site'
@@ -24,9 +25,10 @@ swap:
   'time board': timeboard
   'time series': timeseries
   'toplist': top list
+  'tradeoff': 'trade-off'
   'turnkey': turn-key
   'utilize': use
   'via': with|through
   'webserver': 'web server'
-  'web site': website
+  'web site': 'website'
   'multi-alert': 'multi alert'

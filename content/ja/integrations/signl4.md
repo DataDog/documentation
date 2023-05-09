@@ -30,14 +30,14 @@ display_on_public_website: true
 draft: false
 git_integration_title: signl4
 integration_id: signl4
-integration_title: SIGNL4  for Datadog
+integration_title: SIGNL4
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: signl4
 oauth: {}
-public_title: Datadog と SIGNL4 のインテグレーション
+public_title: SIGNL4
 short_description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
 supported_os:
 - linux
@@ -59,7 +59,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Datadog と SIGNL4 のインテグレーション
+  title: SIGNL4
 ---
 
 ## 概要

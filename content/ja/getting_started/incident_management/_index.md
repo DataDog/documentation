@@ -93,7 +93,7 @@ _Overview_ セクションで、調査が進むにつれてインシデントの
 重大度レベルと根本原因を更新する:
 1. _Severity_  ドロップダウンをクリックして **SEV-3** を選択します。
 2. この問題についてはモニターから最初に警告を受けたため、_What happened_ の _Detection Method_ ドロップダウン (Unknown が選択されています) で **Monitor** を選択します。
-1. _Why it happened_ フィールドに値を追加します:  `TEST: Host is running out 3f memory.`
+1. _Why it happened_ フィールドに値を追加します:  `TEST: Host is running out of memory.`
 4. **Save** をクリックしてプロパティを更新します。
     Slack から、`/datadog incident update` コマンドを使って進行中の問題のタイトル、重大度、ステータスを更新することもできます。
 
