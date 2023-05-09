@@ -465,7 +465,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-**Note**: The values that you send to Datadog are strings, so the facets are displayed in lexicographical order.
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
 
 ## Further reading
 
