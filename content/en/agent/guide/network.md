@@ -52,6 +52,13 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
 `session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+{{< site-region region="us,eu,us3,us5,ap1" >}}
+[Remote Configuration][1]
+: `config.`{{< region-param key="dd_site" code="true" >}}
+
+[1]: agent/guide/how_remote_config_works
+{{< /site-region >}}
+
 [Synthetics private location][8]
 : Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint to configure.<br>
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -449,3 +456,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [8]: /synthetics/private_locations
 [9]: /agent/proxy/
 [10]: /network_monitoring/devices
+
