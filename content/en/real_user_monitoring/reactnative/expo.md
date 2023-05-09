@@ -17,7 +17,7 @@ The RUM React Native SDK supports Expo and Expo Go. To use it, install `expo-dat
 
 `expo-datadog` supports Expo starting from SDK 45 and the plugin's versions follow Expo versions. For example, if you use Expo SDK 45, use `expo-datadog` version `45.x.x`. Datadog recommends using **Expo SDK 45** as a minimum version; previous versions may require manual steps.
 
-If you experience any issue setting up the datadog SDK with an expo application you can check out our [example application][8].
+If you experience any issues setting up the Datadog SDK with an Expo application, you can see our [example application][8] as a reference.
 
 ## Setup
 

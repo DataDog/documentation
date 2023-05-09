@@ -20,7 +20,7 @@ Each time you release a new [CodePush][1] version for your React Native applicat
 
 Datadog recommends using `@datadog/mobile-react-native-code-push` in your app and the [datadog-ci][3] `react-native codepush` command to upload your source maps. This ensures that the `version` is consistent in both reported crashes and uploaded source maps.
 
-If you experience any issue setting up the Datadog SDK with codepush you can check out our [example application][6].
+If you experience any issues setting up the Datadog SDK with codepush, you can see our [example application][6] as a reference.
 
 ## Setup
 

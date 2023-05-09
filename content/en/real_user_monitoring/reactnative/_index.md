@@ -291,7 +291,7 @@ Use one of Datadog's integrations to automatically track views for the following
 -   If you use the [`react-native-navigation`][5] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][6].
 -   If you use the [`react-navigation`][7] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][8].
 
-If you experience any issue setting up View tracking with `@datadog/mobile-react-navigation` you can check out our [example application][16].
+If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see our [example application][16] as a reference.
 
 ## Track custom attributes
 
