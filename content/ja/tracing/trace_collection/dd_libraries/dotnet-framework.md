@@ -97,7 +97,7 @@ Datadog の .NET Framework ライブラリとプロセッサアーキテクチ�
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. {{< site-region region="us3,us5,eu,gov" >}}
+3. After instrumenting your application, the tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port, change it by setting the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. For more information on configuring these settings, see [Configuration](#configuration).
 
 {{< site-region region="us3,us5,eu,gov,ap1" >}}
 
