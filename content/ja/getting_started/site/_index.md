@@ -24,35 +24,57 @@ Datadog では、世界中でさまざまなサイトを提供しています。
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
+| AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | 日本 |
 
-Datadog のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
+## SDK ドメイン
 
-### ログ管理
+Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
+
+### Mobile
 
 | サイト | サイト URL                                      |
 |------|-----------------------------------------------|
-| US1  | https://logs.browser-intake-datadoghq.com     |
-| US3  | https://logs.browser-intake-us3-datadoghq.com |
-| US5  | https://logs.browser-intake-us5-datadoghq.com |
-| EU1  | https://mobile-http-intake.logs.datadoghq.eu  |
+| US1  | `https://browser-intake-datadoghq.com`        |
+| US3  | `https://browser-intake-us3-datadoghq.com`    |
+| US5  | `https://browser-intake-us5-datadoghq.com`    |
+| EU1  | `https://browser-intake-datadoghq.eu`         |
+| US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 
-### トレース
+### Browser
 
-| サイト | サイト URL                                           |
-|------|----------------------------------------------------|
-| US1  | https://trace.browser-intake-datadoghq.com         |
-| US3  | https://trace.browser-intake-us3-datadoghq.com     |
-| US5  | https://trace.browser-intake-us5-datadoghq.com     |
-| EU1  | https://public-trace-http-intake.logs.datadoghq.eu |
+#### ログ管理
 
-### RUM
+| サイト | サイト URL                                        |
+|------|-------------------------------------------------|
+| US1  | `https://logs.browser-intake-datadoghq.com`     |
+| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
+| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
 
-| サイト | サイト URL                                     |
-|------|----------------------------------------------|
-| US1  | https://rum.browser-intake-datadoghq.com     |
-| US3  | https://rum.browser-intake-us3-datadoghq.com |
-| US5  | https://rum.browser-intake-us5-datadoghq.com |
-| EU1  | https://rum-http-intake.logs.datadoghq.eu    |
+#### セッション リプレイ
+
+| サイト | サイト URL                                                  |
+|------|-----------------------------------------------------------|
+| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
+| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
+| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
+
+#### RUM
+
+| サイト | サイト URL                                       |
+|------|------------------------------------------------|
+| US1  | `https://rum.browser-intake-datadoghq.com`     |
+| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
+| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
 
 ## Datadog のドキュメントをサイト別に見る
 
