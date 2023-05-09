@@ -64,7 +64,7 @@ In the **banner card** view, you can see:
 
 In the **full side panel**, you can see a timeseries graph about the performance metric with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
 
-{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 You can begin your investigation for the root cause of a performance issue in this timeseries graph.
 
