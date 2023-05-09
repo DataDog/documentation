@@ -21,7 +21,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: ブログ
   text: Datadog で Amazon ECS をどこでも監視する
-- link: integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
+- link: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation
   tag: ドキュメント
   text: Kinesis Data Firehose を使用した AWS CloudWatch メトリクスストリーム
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
@@ -48,33 +48,58 @@ title: AWS の概要
 1. [AWS][7] アカウント。AWS ユーザーは、CloudFormation テンプレートを正常に実行するために、以下の IAM 権限が必要です。
 
     * cloudformation:CreateStack
+    * cloudformation:CreateUploadBucket
+    * cloudformation:DeleteStack
+    * cloudformation:DescribeStacks
+    * cloudformation:DescribeStackEvents
+    * cloudformation:GetStackPolicy
+    * cloudformation:GetTemplateSummary
+    * cloudformation:ListStacks
+    * cloudformation:ListStackResources
     * ec2:DescribeSecurityGroups
     * ec2:DescribeSubnets
     * ec2:DescribeVpcs
     * iam:AttachRolePolicy
     * iam:CreatePolicy
     * iam:CreateRole
+    * iam:DeleteRole
+    * iam:DeleteRolePolicy
+    * iam:DetachRolePolicy
+    * iam:GetRole
+    * iam:GetRolePolicy
     * iam:PassRole
     * iam:PutRolePolicy
     * iam:UpdateAssumeRolePolicy
     * kms:Decrypt
     * lambda:AddPermission
     * lambda:CreateFunction
+    * lambda:DeleteFunction
     * lambda:GetCodeSigningConfig
     * lambda:GetFunction
     * lambda:GetFunctionCodeSigningConfig
+    * lambda:GetLayerVersion
     * lambda:InvokeFunction
     * lambda:PutFunctionConcurrency
+    * lambda:RemovePermission
+    * lambda:TagResource
     * logs:CreateLogGroup
+    * logs:DeleteLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
     * s3:CreateBucket
+    * s3:DeleteBucket
+    * s3:DeleteBucketPolicy
+    * s3:GetEncryptionConfiguration
     * s3:GetObject
     * s3:GetObjectVersion
+    * s3:PutBucketPolicy
+    * s3:PutBucketPublicAccessBlock
+    * s3:PutEncryptionConfiguration
     * secretsmanager:CreateSecret
+    * secretsmanager:DeleteSecret
     * secretsmanager:GetSecretValue
     * secretsmanager:PutSecretValue
-    * serverless:CreateCloudFormationTemplate
+    * serverlessrepo:CreateCloudFormationTemplate
 
 ## セットアップ
 
@@ -134,7 +159,7 @@ Agent がインストールされると、[インフラストラクチャーリ�
 
 #### EC2 起動タイプの ECS
 
-[Amazon ECS のドキュメント][25]を使用して、ECS クラスターの EC2 インスタンスで [Datadog Docker Agent][26] を実行します。[Amazon ECS Data Collection のドキュメント][27]で、Datadog アカウントに報告されるメトリクスとイベントを確認します。
+[Amazon ECS のドキュメント][25]を使用して、ECS クラスターの EC2 インスタンスで [Datadog Docker Agent][26] を実行します。[Amazon ECS on EC2][27] で、Datadog アカウントに報告されるメトリクスとイベントを確認します。
 
 #### Fargate 起動タイプの ECS
 
@@ -181,7 +206,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 ### トラブルシューティング
 問題が発生した場合は、[トラブルシューティング][57]を必ずご確認ください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -196,7 +221,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [9]: /ja/integrations/amazon_ec2/#ec2-automuting
 [10]: /ja/integrations/amazon_web_services/?tab=roledelegation#alarm-collection
 [11]: /ja/events/explorer
-[12]: https://app.datadoghq.com/screen/integration/7/aws-overview
+[12]: https://app.datadoghq.com/dash/integration/7/aws-overview
 [13]: /ja/integrations/#cat-aws
 [14]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
 [15]: https://app.datadoghq.com/logs
@@ -211,7 +236,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [24]: https://aws.amazon.com/fargate/
 [25]: /ja/agent/amazon_ecs/?tab=awscli
 [26]: /ja/agent/docker/?tab=standard
-[27]: /ja/agent/amazon_ecs/data_collected/
+[27]: /ja/integrations/amazon_ecs
 [28]: /ja/integrations/ecs_fargate/?tab=fluentbitandfirelens
 [29]: /ja/agent/kubernetes/distributions/?tab=helm#EKS
 [30]: /ja/agent/kubernetes/?tab=helm
@@ -223,7 +248,7 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [36]: /ja/dashboards/#overview
 [37]: /ja/dashboards/functions/
 [38]: /ja/dashboards/correlations/
-[39]: /ja/monitors/create/#monitor-types
+[39]: /ja/monitors/types
 [40]: /ja/monitors/notify/
 [41]: /ja/integrations/#cat-notification
 [42]: /ja/serverless
@@ -234,13 +259,13 @@ Datadog の UI や [API][33] を利用するほか、[CloudFormation Registry][3
 [47]: /ja/tracing/trace_collection/
 [48]: /ja/tracing/#explore-datadog-apm
 [49]: /ja/watchdog/
-[50]: /ja/security_platform/cloud_siem/getting_started/
-[51]: /ja/security_platform/default_rules/#cat-log-detection
-[52]: /ja/security_platform/explorer/
-[53]: /ja/security_platform/notifications/rules/
-[54]: /ja/security_platform/cspm/getting_started/
-[55]: /ja/security_platform/default_rules/#cat-posture-management-cloud
-[56]: /ja/security_platform/default_rules/#cat-posture-management-infra
+[50]: /ja/getting_started/cloud_siem/
+[51]: /ja/security/default_rules/#cat-log-detection
+[52]: /ja/security/explorer/
+[53]: /ja/security/notifications/rules/
+[54]: /ja/security/cspm/setup/
+[55]: /ja/security/default_rules/#cat-posture-management-cloud
+[56]: /ja/security/default_rules/#cat-posture-management-infra
 [57]: /ja/integrations/amazon_web_services/?tab=roledelegation#troubleshooting
 [58]: https://app.datadoghq.com/organization-settings/api-keys
 [59]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
