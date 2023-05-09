@@ -13714,12 +13714,6 @@ components:
           example: example-team
           maxLength: 64
           type: string
-        link_count:
-          description: The number of links belonging to the team
-          format: int32
-          maximum: 2147483647
-          readOnly: true
-          type: integer
         name:
           description: The name of the team
           example: Example Team
@@ -14017,12 +14011,6 @@ components:
           example: example-team
           maxLength: 64
           type: string
-        link_count:
-          description: The number of links belonging to the team
-          format: int32
-          maximum: 2147483647
-          readOnly: true
-          type: integer
         name:
           description: The name of the team
           example: Example Team
