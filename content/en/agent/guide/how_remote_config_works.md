@@ -7,15 +7,15 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
   text: "How Application Security Monitoring Works"
-- link: "https://www.datadoghq.com/blog/dash-2022-new-feature-roundup/#application-security-management-protection"
-  tag: "Blog"
-  text: "Application Security Protection"
 - link: "/dynamic_instrumentation/?tab=configurationyaml#enable-remote-configuration"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
 - link: "/security/cloud_workload_security/setup/?tab=kubernetes#overview"
   tag: "Documentation"
   text: "Setting Up Cloud Workload Security"
+- link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+  tag: "Blog"
+  text: "Using Datadog Audit Trail"
 ---
 
 {{< site-region region="gov" >}}
@@ -159,7 +159,42 @@ After you perform these steps, your Agent requests its configuration from Datado
 
 ## Best Practices
 
+### Datadog Audit Trail
+
+- Use [Datadog Audit Trail][14] to monitor organization access and Remote Configuration enabled events. Audit Trail allows your administrators and security teams to track the creation, deletion, and modification of Datadog API and application keys. Once configured, you can view events related to Remote Configuration enabled features and who has requested these changes. Audit Trail is a valuable feature, allowing you to reconstruct sequences of events, and establish robust Datadog monitoring for Remote Configuration. 
+### Monitors
+- Configure [monitors][15] to receive notifications when an event of interest is encountered.
+
 ## Troubleshooting
+
+### Restart the Agent
+
+To enable the Agent deployed in your environment to request and receive configuration updates from Datadog, update the Agent [`datadog.yaml`][16] file, and restart the Agent for this configuration change to take effect. 
+
+### Ensure Datadog Config endpoints are reachable from your environment	
+
+To perform Remote Configuration, the Agent and Observability Pipelines Worker deployed in your environment communicate to Datadog Config [endpoints][17]. Ensure you are allowing outbound HTTPS access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your proxy settings to incorporate Config destinations.
+
+### Enable Remote Configuration at the Organization level
+
+To enable Remote Configuration at the [Organization][4] level in the Datadog UI, follow the **Organization Settings > Security > Remote Configuration** menu. This allows your authenticated and authorized Datadog components to remotely receive configurations and security detection rules of supported features from Datadog. Only users who have the [`org_management`][9] RBAC permission are able to enable Remote Configuration at the Organization level.
+
+### Enable Remote Configuration on the API Key
+
+To authenticate and authorize the Agent to receive configurations and security detection rules, and to allow the Observability Pipelines Worker to receive configurations, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][3] RBAC permission are able to enable Remote Configuration on the API Key.
+
+### Review Remote Configuration status events
+
+To provide visibility into the Remote Configuration status of your Agent, Datadog has added Remote Configuration status' in the [Remote Configuration UI][4]. The following chart describes the meaning of each status:
+
+  | Status           | Description                                      |
+  |------------------|--------------------------------------------------|
+  | CONNECTED      | The Agent deployed in your environment is able to reach, authenticate, and authorize successfully with Datadog. This is the optimal state you want your Agents to be in.                                               |    
+  | ERROR          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize for Remote Configuration operation. The most likely cause of this is the API Key used by the Agent is not Remote Configuration enabled. To fix the issue, enable Remote Configuration capability on the API Key.                                                 | 
+  | RC_TRUE        |   The Agent deployed in your environment has Remote Configuration set to `true` in its `datadog.yaml` configuration file, however, the Agent cannot be located in the Remote Configuration component. The most likely cause of this is the Agent is unable to reach Datadog Config endpoints. To fix the issue, allow outbound HTTPS access to Config endpoints from your environment.                 | 
+  | RC_FALSE       |   The Agent deployed in your environment has Remote Configuration set to `false` in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. Set Remote Configuration to `true` to enable Remote Configuration on the Agent.                 | 
+  | NO INFO        | No information is available from the Agent on its Remote Configuration capabilities. This can be caused by the Agent being on a lower version that is not Remote Configuration capable. To fix this issue, upgrade the Agent to the latest version.            | 
+ 
 
 ## Further Reading
 
@@ -178,3 +213,7 @@ After you perform these steps, your Agent requests its configuration from Datado
 [11]: /security/cloud_workload_security/setup
 [12]: /security/application_security/enabling/compatibility/
 [13]: /tracing/trace_collection/library_injection_remote/
+[14]: /account_management/audit_trail
+[15]: /monitors/
+[16]: /agent/guide/how_remote_config_works/?tab=configurationyamlfile#setup
+[17]: /agent/guide/network
