@@ -169,6 +169,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 
 ## What's next?
 
+- Turn on [threat monitoring][4] to get alerted on attackers targeting your service.
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
@@ -185,3 +186,5 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [1]: https://app.datadoghq.com/functions
 [2]: /serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /serverless/configuration/
+[4]: /security/application_security/enabling/serverless/?tab=serverlessframework
+
