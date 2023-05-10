@@ -2,8 +2,6 @@
 title: Workflows
 kind: documentation
 disable_toc: false
-aliases:
-- /workflows/
 further_reading:
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
