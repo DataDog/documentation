@@ -829,3 +829,4 @@ If you have trouble configuring your installations, set the environment variable
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
 [40]: /serverless/installation#installation-instructions
+[41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
