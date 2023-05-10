@@ -118,7 +118,7 @@ Redeploy the function and invoke it. After a few minutes, it appears in [ASM vie
 
 To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
 A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
