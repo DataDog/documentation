@@ -103,6 +103,7 @@ The [Datadog Forwarder Lambda function][1] is required to ingest AWS Lambda trac
 
 ## What's next?
 
+- Turn on [threat monitoring][9] to get alerted on attackers targeting your service.
 - You can now view metrics, logs, and traces on the [Serverless Homepage][4].
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][5] if you have trouble collecting the telemetry
@@ -172,3 +173,5 @@ For more information on custom metric submission, see [Serverless Custom Metrics
 [6]: /serverless/configuration
 [7]: /serverless/custom_metrics?tab=ruby
 [8]: /tracing/custom_instrumentation/ruby/
+[9]: /security/application_security/enabling/serverless/?tab=serverlessframework
+
