@@ -95,7 +95,7 @@ Get alerted on attackers targeting your serverless applications and respond quic
 
 To get started, first ensure that you have [tracing enabled][40] for your functions.
 
-To enable threat monitoring, simply add the following environment variables depending on the language:
+To enable threat monitoring, add the following environment variables depending on the language:
    ```yaml
    environment:
      DD_SERVERLESS_APPSEC_ENABLED: true
