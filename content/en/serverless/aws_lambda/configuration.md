@@ -120,7 +120,7 @@ To see Application Security Management threat detection in action, send known at
    ```sh
    curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
    ```
-A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
+A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
 ## Connect telemetry using tags
 
