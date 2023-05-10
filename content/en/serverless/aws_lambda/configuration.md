@@ -59,6 +59,9 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
+### Security
+- [Enable Threat Detection to observe attack attempts](#enable-threat-detection-to-observe-attack-attempts)
+
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
@@ -85,6 +88,39 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
+
+## Enable Threat Detection to observe attack attempts
+
+Get alerted on attackers targeting your serverless applications and respond quickly. 
+
+To get started, first ensure that you have [tracing enabled][40] for your functions.
+
+To enable threat monitoring, simply add the following environment variables depending on the language:
+   ```yaml
+   environment:
+     DD_SERVERLESS_APPSEC_ENABLED: true
+   ```
+   For **Go functions only** also add:
+   ```yaml
+   environment:
+     DD_UNIVERSAL_INSTRUMENTATION: true
+   ```
+   For **NodeJS or Python functions** also add:
+   ```yaml
+   environment:
+     DD_EXPERIMENTAL_ENABLE_PROXY: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+   ```
+
+Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+
+[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
+   ```sh
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
+   ```
+A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
 
 ## Connect telemetry using tags
 
@@ -792,3 +828,4 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
+[40]: /serverless/installation#installation-instructions
