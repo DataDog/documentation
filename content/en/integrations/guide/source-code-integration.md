@@ -100,7 +100,7 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 
 Datadog only captures the repository URL, the commit SHA of the current branch, and a list of tracked file paths—Datadog does not ingest or store any user code.
 
-### Embed git information in your artifacts
+### Embed Git information in your artifacts
 
 You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically link the active commit to your APM service.
 
@@ -121,14 +121,14 @@ Ensure your service meets all the following requirements:
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Based on your Java setup, there are popular libraries that can inject version control information in the Java artifact. These plugins generate a `git.properties` file in the root directory of your application's JAR archive.
+Based on your Java setup, there are libraries that can inject version control information in the Java artifact. These plugins generate a `git.properties` file in the root directory of your application's JAR archive.
 
 1. Install the `version-control-information` injector library:
 
    - For Maven, install and set up [`git-commit-id-maven-plugin`][101].
    - For Gradle, install and set up [`gradle-git-properties`][102].
 
-2. Upgrade the [Datadog Java Tracer][103] to a version >=1.12.1.
+2. Upgrade the [Datadog Java Tracer][103] to version 1.12.1 or later.
 
 [101]: https://github.com/git-commit-id/git-commit-id-maven-plugin
 [102]: https://github.com/n0mer/gradle-git-properties
