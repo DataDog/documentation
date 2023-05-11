@@ -219,7 +219,7 @@ Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_sit
 
 Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule downtime"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule downtime" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}

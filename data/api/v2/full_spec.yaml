@@ -13714,12 +13714,6 @@ components:
           example: example-team
           maxLength: 64
           type: string
-        link_count:
-          description: The number of links belonging to the team
-          format: int32
-          maximum: 2147483647
-          readOnly: true
-          type: integer
         name:
           description: The name of the team
           example: Example Team
@@ -14017,12 +14011,6 @@ components:
           example: example-team
           maxLength: 64
           type: string
-        link_count:
-          description: The number of links belonging to the team
-          format: int32
-          maximum: 2147483647
-          readOnly: true
-          type: integer
         name:
           description: The name of the team
           example: Example Team
@@ -20923,6 +20911,15 @@ paths:
         required: true
         schema:
           type: string
+      - description: Return the finding for a given snapshot of time (Unix ms).
+        example: 1678721573794
+        in: query
+        name: snapshot_timestamp
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
@@ -24327,9 +24324,9 @@ paths:
         dd_team:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"{{timestamp('now')}}\",\n
-              \     \"name\": \"{{timestamp('now')}}\"\n    },\n    \"type\": \"team\"\n
-              \ }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"handle-{{
+              unique_hash }}\",\n      \"name\": \"name-{{ unique_hash }}\"\n    },\n
+              \   \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
