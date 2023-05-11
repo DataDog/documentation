@@ -82,7 +82,22 @@ In addition to the default rules, you can write custom Agent and detection rules
 
 ### Deploy the policy in your environment
 
-Next, upload the policy file to the Agent using the following instructions.
+#### Remote Configuration
+
+<div class="alert alert-warning">Remote Configuration for custom rules is in private beta. Fill out this <a href="google.com">form</a> to request access.</div>
+
+1. On the **Agent Configuration** page, click **Deploy Agent Policy**.
+2. Select **Remote Configuration**.
+3. Choose whether to **Deploy to All Hosts** or **Deploy to a Subset of Hosts**. To deploy the policy to a subset of hosts, specify the hosts by selecting one or more service tags.
+4. Click **Deploy**.
+
+#### Manual deployment
+
+1. On the **Agent Configuration** page, click **Deploy Agent Policy**.
+2. Select **Manual**.
+3. Click **Download Agent Policy**, then click **Done**.
+
+Next, use the following instructions to upload the policy file to each host.
 
 {{< tabs >}}
 {{% tab "Host" %}}
