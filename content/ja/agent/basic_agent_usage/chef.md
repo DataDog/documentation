@@ -314,6 +314,8 @@ Agent インテグレーションのコンフィギュレーションファイ�
 
 `system-probe.yaml` で [Network Performance Monitoring][7] (NPM) を有効にするには、` node ['datadog'] ['system_probe'] ['network_enabled'] ` を true に設定します。
 
+`system-probe.yaml` で [ユニバーサルサービスモニタリング][7] (USM) を有効にするには、`node['datadog']['system_probe']['service_monitoring_enabled']` を true に設定します。
+
 **Windows をご利用の方へのご注意**: NPM は Agent v6.27+ と v7.27+ で Windows 上でサポートされています。NPM はオプションコンポーネントとして出荷され、Agent のインストールまたはアップグレード時に `node['datadog']['system_probe']['network_enabled']` が true に設定された場合にのみインストールされます。このため、Agent を同時にアップグレードしない限り、既存のインストールでは NPM コンポーネントをインストールするために一旦 Agent をアンインストールして再インストールする必要があるかもしれません。
 
 ## リソース

@@ -26,7 +26,7 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 4. 過去の `target` 日数において、エラーバジェットの消費割合が `threshold` を超えるとアラートをトリガーするタイミングを設定します。
 。
 4. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][5]を追加します。
-5. SLO コンフィギュレーションページで ‘Save and Set Alert’ ボタンをクリックします。
+5. SLO コンフィギュレーションページで **Save and Set Alert** ボタンをクリックします。
 
 {{< img src="monitors/service_level_objectives/save_set_alert.png" alt="SLO を保存してエラーバジェットアラートをセットアップ">}}
 
