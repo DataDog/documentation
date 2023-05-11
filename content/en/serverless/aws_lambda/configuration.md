@@ -616,11 +616,11 @@ You can monitor your custom business logic by [submitting custom metrics][27].
    ```js
    // instrument.js
 
-  const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
-  const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
-  const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+   const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
+   const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
 
-  registerInstrumentations({
+   registerInstrumentations({
       instrumentations: [
           new AwsInstrumentation({
               suppressInternalInstrumentation: true,
@@ -629,35 +629,35 @@ You can monitor your custom business logic by [submitting custom metrics][27].
               disableAwsContextPropagation: true,
           }),
       ],
-  });
+   });
 
    ```
 3. Apply instrumentation at runtime. For instance, for Node.js, use `NODE_OPTIONS`.
 
    ```yaml
-  # serverless.yml
+   # serverless.yml
 
-  functions:
-    node:
-      handler: handler.handler
-      environment:
-        NODE_OPTIONS: --require instrument
+   functions:
+     node:
+       handler: handler.handler
+       environment:
+         NODE_OPTIONS: --require instrument
    ```
 
 4. Enable OTel using the environment variable `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT`. Add the Datadog Extension v41+. Do not add the Datadog tracing layer.
 
    ```yaml
-  # serverless.yml
+   # serverless.yml
   
-  provider:
-    name: aws
-    region: sa-east-1
-    runtime: nodejs18.x
-    environment:
-      DD_API_KEY: ${env:DD_API_KEY}
-      DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
-    layers:
-      - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
+   provider:
+     name: aws
+     region: sa-east-1
+     runtime: nodejs18.x
+     environment:
+       DD_API_KEY: ${env:DD_API_KEY}
+       DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
+     layers:
+       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
    ```
 
 5. Deploy.
