@@ -29,7 +29,7 @@ The IP allowlist feature does not block access to the following:
 - The [validate API key][2] endpoint, which the Agent uses before submitting data
 - [Public dashboards][3]
 
-Third-party integrations and applications that need access to Datadog’s public web-APIs may be impacted by the IP allowlist. Applications submitting telemetry like metrics, traces, logs, etc. from Agents and integrations, however, are unaffected. Datadog recommends utilizing the [Audit Trail][4] to monitor for IP addresses from third-parties.
+Third-party integrations and applications that need access to Datadog’s public web APIs may be impacted by the IP allowlist. Applications submitting telemetry such as metrics, traces, and logs from the Agent and integrations are unaffected. Datadog recommends utilizing the [Audit Trail][4] to monitor for IP addresses from third parties.
 
 ### Functionality
 
@@ -90,7 +90,7 @@ To toggle the IP allowlist status, click the **Enable** or **Disable** button.
 
 ## Managing the IP allowlist programmatically
 
-To manage the IP allowlist through the API, see the [public API documentation][6].
+To manage the IP allowlist through the API, see the [IP Allowlist API documentation][6].
 
 See the [`ip_allowlist` resource][7] to manage the IP allowlist in Terraform.
 
