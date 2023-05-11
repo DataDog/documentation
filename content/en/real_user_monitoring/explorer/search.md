@@ -33,7 +33,7 @@ To search through your RUM events, select an event type from the dropdown menu t
 
 ## Search query
 
-To filter on sessions produced by a specific application by real users over the past day, create a custom query such as `@application.name:Shopist @session.type:user` and set the time range to `1d`.
+To filter on sessions produced by a specific application by real users over the past day, use the application selector from the top navigation, then create a custom query such as `@session.type:user` and set the time range to `1d`.
 
 **Note:** If you are including a facet in your query, be sure to create the facet first.
 

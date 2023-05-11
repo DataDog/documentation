@@ -25,11 +25,11 @@ All RUM events that match your filter query are aggregated into groups based on 
 
 - Unique count of coded values for a facet per group
 
-  {{< img src="real_user_monitoring/explorer/group-unique-count-coded-values.png" alt="Group by unique count of coded values" style="width:90%;" >}}
+  {{< img src="real_user_monitoring/explorer/group-unique-count-coded-values-1.png" alt="Group by unique count of coded values" style="width:90%;" >}}
 
 - Statistical operations (such as minimum, maximum, average, and percentiles) on a facet's numerical values per group
 
-  {{< img src="real_user_monitoring/explorer/group-statistical-operations-1.png" alt="Group into fields using statistical operations" style="width:90%;" >}}
+  {{< img src="real_user_monitoring/explorer/group-statistical-operations-2.png" alt="Group into fields using statistical operations" style="width:90%;" >}}
 
 Individual events with multiple values for a single facet belong to that number of aggregates. For example, a RUM event with the `country:france` and `browser:chrome` attributes are counted once in the `country:france` aggregate and once in the `browser:chrome` aggregate.
 
