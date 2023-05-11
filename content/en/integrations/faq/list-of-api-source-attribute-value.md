@@ -99,7 +99,7 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Amazon S3                     | amazon s3                     | s3                         |
 | Amazon S3 Storage Lens        | amazon s3 storage lens        | s3storagelens              |
 | Amazon Sagemaker              | amazon sagemaker              | sagemaker                  |
-| Amazon Security Hub           | amazon security hub           | aws_security_hub        |
+| Amazon Security Hub           | amazon security hub           | amazon_security_hub        |
 | Amazon Ses                    | amazon ses                    | ses                        |
 | Amazon Shield                 | amazon shield                 | shield                     |
 | Amazon Sns                    | amazon sns                    | sns                        |
