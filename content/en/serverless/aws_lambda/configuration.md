@@ -612,7 +612,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 {{% /tab %}}
 {{% tab "AWS Secrets Manager" %}}
 
-The Datadog Extension supports retrieving [AWS Secrets Manager][40] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
+The Datadog Extension supports retrieving [AWS Secrets Manager][1] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
 
 1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
 2. Add the `secretsmanager:GetSecretValue` permission to your Lambda function IAM role permissions.
@@ -625,6 +625,7 @@ The Datadog Extension supports retrieving [AWS Secrets Manager][40] values autom
 9. Create a new secret on Secrets Manager to store the dual shipping logs environment variable. The contents should be **similar** to `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`.
 10. Set the environment variable `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
 
+[1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 {{% /tab %}}
 {{% tab "AWS KMS" %}}
 
