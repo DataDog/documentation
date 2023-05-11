@@ -254,7 +254,7 @@ Azure Datadog インテグレーションにより、Datadog Agent を VM また
 
 {{< img src="integrations/guide/azure_portal/enable-CSPM.png" alt="Settings タブで Cloud Security Posture Management を選択した Azure Portal のページ" responsive="true" style="width:100%;">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
