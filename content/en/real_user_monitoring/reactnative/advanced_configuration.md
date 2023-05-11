@@ -215,7 +215,7 @@ All interactions with the RUM SDK (view tracking, actions, resources tracing, an
 
 Logs are not recorded and calling a `DdLogs` method before the actual initialization might break logging.
 
-If you experience any issue setting up the asynchronous initialization of Datadog you can check out our [example application][7].
+If you experience any issue setting up the asynchronous initialization of Datadog, you can check out our [example application][7].
 
 ## Delaying the initialization
 
