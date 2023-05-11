@@ -17,6 +17,8 @@ While both options focus on providing quick and effective solutions, one platfor
 
 This guide provides best practices for reaching out to the Support team, and guidelines for determining the support channel that’s right for you.
 
+{{< img src="getting_started/support/chat_best_practices.mp4" alt="Spoken summary of best practices for getting started with support" video="true">}}
+
 ## Prerequisites
 
 For the most efficient resolution of an issue, be ready to provide any of the relevant information and resources listed below:
