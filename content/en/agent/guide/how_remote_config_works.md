@@ -57,7 +57,7 @@ The following products and features are supported with Remote Config:
 ### Application Performance Monitoring (APM)
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Remotely instrument your Kubernetes services with APM**: Remotely instrument your services in Kubernetes with Datadog APM via Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote Instrumentation][13] for more information.
+- **Remotely instrument your Kubernetes services with APM**: Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote Instrumentation][13] for more information.
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 ### Dynamic Instrumentation
@@ -157,38 +157,38 @@ After you perform these steps, your Agent requests its configuration from Datado
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
 
-## Best Practices
+## Best practices
 
 ### Datadog Audit Trail
 
-- Use [Datadog Audit Trail][14] to monitor organization access and Remote Configuration enabled events. Audit Trail allows your administrators and security teams to track the creation, deletion, and modification of Datadog API and application keys. Once configured, you can view events related to Remote Configuration enabled features and who has requested these changes. Audit Trail is a valuable feature, allowing you to reconstruct sequences of events, and establish robust Datadog monitoring for Remote Configuration. 
+Use [Datadog Audit Trail][14] to monitor organization access and Remote Configuration enabled events. Audit Trail allows your administrators and security teams to track the creation, deletion, and modification of Datadog API and application keys. After Audit Trail is configured, you can view events related to Remote Configuration enabled features and who has requested these changes. Audit Trail allows you to reconstruct sequences of events, and establish robust Datadog monitoring for Remote Configuration. 
 ### Monitors
-- Configure [monitors][15] to receive notifications when an event of interest is encountered.
+Configure [monitors][15] to receive notifications when an event of interest is encountered.
 
 ## Troubleshooting
 
 ### Restart the Agent
 
-To enable the Agent deployed in your environment to request and receive configuration updates from Datadog, update the Agent [`datadog.yaml`][16] file, and restart the Agent for this configuration change to take effect. 
+After the Agent configuration is updated in the [`datadog.yaml`][16] file, restart the Agent for this change to take effect. 
 
 ### Ensure Datadog Config endpoints are reachable from your environment	
 
-To perform Remote Configuration, the Agent and Observability Pipelines Worker deployed in your environment communicate to Datadog Config [endpoints][17]. Ensure you are allowing outbound HTTPS access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your proxy settings to incorporate Config destinations.
+To perform Remote Configuration, both the Agent and  the Observability Pipelines Worker deployed in your environment communicate to Datadog Config [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your proxy settings to incorporate Config destinations.
 
 ### Enable Remote Configuration at the Organization level
 
-To enable Remote Configuration at the [Organization][4] level in the Datadog UI, follow the **Organization Settings > Security > Remote Configuration** menu. This allows your authenticated and authorized Datadog components to remotely receive configurations and security detection rules of supported features from Datadog. Only users who have the [`org_management`][9] RBAC permission are able to enable Remote Configuration at the Organization level.
+To enable Remote Configuration at the [Organization][4] level in the Datadog UI, follow the **Organization Settings > Security > Remote Configuration** menu. This allows your authenticated and authorized Datadog components to remotely receive configurations and security detection rules of supported features from Datadog. Only users who have the [`org_management`][9] RBAC permission can enable Remote Configuration at the Organization level.
 
 ### Enable Remote Configuration on the API key
 
-To authenticate and authorize the Agent to receive configurations and security detection rules, and to allow the Observability Pipelines Worker to receive configurations, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][3] RBAC permission are able to enable Remote Configuration on the API Key.
+To authenticate and authorize the Agent to receive configurations and security detection rules, and to allow the Observability Pipelines Worker to receive configurations, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][3] RBAC permission can enable Remote Configuration on the API Key.
 
-**Note:** If you have [`api_keys_write`][3] RBAC permission, but are missing Remote Configuration [Organization][4] level permissions, the ability to enable Remote Configuration on a new or an existing API Key is not available. You would only have permission to disable Remote Configuration on an existing API Key.
+**Note:** If you have [`api_keys_write`][3] RBAC permission, but are missing Remote Configuration [Organization][4] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
 
 
 ### Review Remote Configuration status events
 
-To provide visibility into the Remote Configuration status of your Agent, Datadog has added Remote Configuration status' in the [Remote Configuration UI][4]. The following chart describes the meaning of each status:
+Gain visibility into the Remote Configuration status of your Agent through the Remote Configuration statuses in the [Remote Configuration UI][4]. The following table describes the meaning of each status:
 
   | Status           | Description                                      |
   |------------------|--------------------------------------------------|
