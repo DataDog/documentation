@@ -109,7 +109,7 @@ def security_rules(content, content_dir):
         # we don’t set isDeleted to true for 15months either due to the retention period on signals when we deprecate a rule.
         # If we did, the customer’s signals would disappear sooner than the retention time period.
         deprecation_date = data.get('deprecationDate', None)
-        is_past_deprecation_date = date.fromisoformat(deprecation_date) < date.today() if deprecation_date else False
+        is_past_deprecation_date = date(*[int(x) for x in deprecation_date.split('-')]) < date.today() if deprecation_date else False
         # 3. general flags we should respect for removal. At least one true to cause removal
         is_removed = (data.get('isShadowDeployed', False) or data.get('isDeleted', False) or data.get('isDeprecated', False))
 
