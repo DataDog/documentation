@@ -68,13 +68,7 @@ Use one of the following methods to enable CSPM for your AWS accounts:
 
 If you haven't already, set up the [Microsoft Azure integration][1].
 
-**Note**: To access the full set of Azure compliance rules, you must enable the following API permissions for Microsoft Graph:
-
-- `Application.Read.All`
-- `Directory.Read.All`
-- `Group.Read.All`
-- `Policy.Read.All`
-- `User.Read.All`
+**Note**: To access the full set of Azure compliance rules, you must enable the `Application.Read.All`, `Directory.Read.All`, `Group.Read.All`, `Policy.Read.All`, and `User.Read.All` permissions for the Microsoft Graph API.
 
 ### Enable CSPM for Azure
 
