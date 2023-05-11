@@ -1,13 +1,13 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: RUM & セッションリプレイガイド
 disable_toc: true
-kind: guide
+kind: ガイド
 private: true
 title: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: リアルユーザーモニタリングおよびセッションリプレイについてのガイド
 ---
 
 {{< whatsnext desc="RUM 全般:" >}}
@@ -39,4 +39,7 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}セッションリプレイのためのサードパーティサービスワーカーの許可{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}セッションリプレイをサポートワークフローに活用する{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM コンポーネントでセッションリプレイを充実させる{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}セッションリプレイとサードパーティツールの連携{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}セッションリプレイをポストモーテムのキーツールとして活用する{{< /nextlink >}}
+
 {{< /whatsnext >}}
