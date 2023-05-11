@@ -78,14 +78,14 @@ The following products and features are supported with Remote Config:
 
 ## Security Considerations
 
-Datadog implements the following safeguards, designed to protect the confidentiality, integrity, and availability of configurations received and applied to your Agents and tracing libraries:
+Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
 
 * Agents deployed in your infrastructure request configurations from Datadog.
 * Datadog never sends configurations unless requested by Agents, and only sends configurations relevant to the requesting Agent.
 * Because the configuration requests are initiated from your Agents to Datadog over HTTPS (port 443), there is no need to open additional ports in your network firewall.
 * The communication between your Agents and Datadog is encrypted using HTTPS, and is authenticated and authorized using your Datadog API key.
-* Only users with the right RBAC permissions are authorized to enable Remote Configuration capability on the API key and use the supported product features.
-* Your configuration changes submitted through the Datadog UI are signed and validated on the Agent and tracing libraries, verifying integrity of the configuration.
+* Only users with the [`api_keys_write`][3] permissions are authorized to enable or disable Remote Configuration capability on the API key and use the supported product features.
+* Your configuration changes submitted through the Datadog UI are signed and validated on the Agent and requesting Datadog components, verifying integrity of the configuration.
 
 ## Enabling Remote Configuration
 
@@ -179,9 +179,12 @@ To perform Remote Configuration, the Agent and Observability Pipelines Worker de
 
 To enable Remote Configuration at the [Organization][4] level in the Datadog UI, follow the **Organization Settings > Security > Remote Configuration** menu. This allows your authenticated and authorized Datadog components to remotely receive configurations and security detection rules of supported features from Datadog. Only users who have the [`org_management`][9] RBAC permission are able to enable Remote Configuration at the Organization level.
 
-### Enable Remote Configuration on the API Key
+### Enable Remote Configuration on the API key
 
 To authenticate and authorize the Agent to receive configurations and security detection rules, and to allow the Observability Pipelines Worker to receive configurations, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][3] RBAC permission are able to enable Remote Configuration on the API Key.
+
+**Note:** If you have [`api_keys_write`][3] RBAC permission, but are missing Remote Configuration [Organization][4] level permissions, the ability to enable Remote Configuration on a new or an existing API Key is not available. You would only have permission to disable Remote Configuration on an existing API Key.
+
 
 ### Review Remote Configuration status events
 
