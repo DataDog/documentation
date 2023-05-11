@@ -70,7 +70,7 @@ Florida の気温を入手するには、次のようにカスタムメトリク
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**注意**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
+**注**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
@@ -155,7 +155,7 @@ Florida の気温を入手するには、次のようにカスタムメトリク
 - `temperature{country:USA, state:Florida, city:Orlando}`
 - `temperature{country:USA, state:Florida, city:Miami}`
 
-**注意**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
+**注**: タグ値の順序を変えても一意性は増えません。次の組み合わせは共に同じカスタムメトリクスです。
 
 - `temperature{country:USA, state:Florida, city:Miami}`
 - `temperature{state:Florida, city:Miami, country:USA}`
@@ -298,7 +298,7 @@ Datadog では、料金プランごとに一定数の**インジェスト**お�
 
 割り当ては、インフラストラクチャー全体でカウントされます。たとえば、プロプランを利用しており、3 ホスト分のライセンスを取得している場合、300 個のインデックスされたカスタムメトリクスが割り当てられます。300 個のインデックスされたカスタムメトリクスは、ホストごとに均等に振り分けることも、1 つのホストでのみ使用することもできます。例として、割り当てられたカスタムメトリクス数を超えないシナリオを下記に示しています。
 
-{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="カスタムメトリクスの割り当て"  >}}
+{{< img src="account_management/billing/custom_metrics/host_custom_metrics.png" alt="カスタムメトリクスの割り当て" >}}
 
 課金されるインデックスされたカスタムメトリクスの数は、特定の月の (有料ホストすべての) カスタムメトリクスの 1 時間当たりの平均に基づきます。Metrics without LimitsTM を使用してメトリクスを構成した場合のみ、インジェストされたカスタムメトリクスの請求対象数が増加します。アカウントのカスタムメトリクスについてのご相談や、カスタムメトリクスパッケージの追加購入については、[セールス][9]チームまたは担当の[カスタマーサクセス][10]マネージャーまでお問い合わせください。
 
@@ -319,7 +319,7 @@ Datadog では、料金プランごとに一定数の**インジェスト**お�
 
 課金に関するご質問は、[カスタマーサクセス][10]マネージャーにお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

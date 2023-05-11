@@ -56,10 +56,14 @@ SNS を Datadog に接続すると、以下のことができます。
 
 #### SNS メッセージの受信
 
-Datadog イベントストリームで SNS メッセージを受信するには
+Datadog Event Stream の SNS メッセージは、`HTTPS` と `Email` の両方のプロトコルで受け取ることができます。`HTTPS` プロトコルを使用すると、Webhook URL で自動的にサブスクリプションを確認することができます。
 
-1. SNS マネジメントコンソールの Topics セクションで、目的のトピックを選択し、**Create Subscription** をクリックします。
-2. HTTPS を選択し、次の Webhook URL を入力します。
+`Email` プロトコルを使用する場合、Datadog がこの目的のために自動的に生成したメールアドレスの確認ステップを手動で行う必要があります。詳しくは [Amazon SNS のメールから Datadog のイベントを作成する][6]のガイドをお読みください。
+
+Datadog Event Explorer で SNS メッセージを `HTTPS` で受信するには
+
+1. SNS マネジメントコンソールの **Topics** セクションで、目的のトピックを選択し、**Create Subscription** をクリックします。
+2. プロトコルとして `HTTPS` を選択し、以下の Webhook URL を入力します。
 
     ```text
     ## Datadog US site
@@ -69,7 +73,8 @@ Datadog イベントストリームで SNS メッセージを受信するには
     https://app.datadoghq.eu/intake/webhook/sns?api_key=<API KEY>
     ```
 
-3. "Enable raw message delivery" はオフにします。
+3. **Enable raw message delivery** のチェックは外したままにします。
+4. **Create subscription** をクリックします。
 
 #### SNS 通知の送信
 
@@ -112,12 +117,13 @@ AWS SNS インテグレーションには、サービスのチェック機能は
 
 Datadog では、Datadog から GovCloud または 中国のトピックへの SNS 通知をサポートしていません。
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/sns/latest/dg/sns-using-identity-based-policies.html
 [5]: https://app.datadoghq.com/integrations/amazon-sns
-[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sns/amazon_sns_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/integrations/guide/events-from-sns-emails/
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sns/amazon_sns_metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/

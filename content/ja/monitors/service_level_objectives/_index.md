@@ -46,16 +46,16 @@ title: サービスレベル目標
 
 ## セットアップ
 
-Datadog の[サービスレベル目標ステータスページ][1]を使用して、新しい SLO を作成したり、既存の SLO を表示して管理します。また、[SLO サマリーウィジェット][2]をダッシュボードに追加すると、SLO のステータスを一目で確認できます。
+Datadog の[サービスレベル目標ステータスページ][1]を使用して、新しい SLO を作成したり、既存の SLO を表示して管理します。また、[SLO ウィジェット](#slo-widgets)をダッシュボードに追加すると、SLO のステータスを一目で確認できます。
 
 ### コンフィギュレーション
 
 1. [SLO ステータスページ][1]で **New SLO +** を選択します。
-2. SLO のソースを定義します。SLO は、[メトリクス][3]または[モニター][4]から作成することができます。
+2. SLO のソースを定義します。SLO は、[メトリクス][2]または[モニター][3]から作成することができます。
 3. SLO のターゲットとローリング期間 (7 日、30 日、90 日経過後) を設定します。Datadog では、SLO のターゲットを SLA で指定した値より厳し目に設定することを推奨しています。期間を複数設定する場合は、プライマリに設定する期間を 1 つ選択します。この期間が SLO 一覧に表示されます。デフォルトでは、最も短い期間が選択されます。
 4. 最後に、SLO にタイトルを付け詳細を入力するか、説明にリンクを足しタグを追加して保存します。
 
-SLO を設定したら、[サービスレベル目標リストビュー][1]から SLO を選択して、詳細サイドパネルを開きます。サイドパネルには、SLO の各ターゲットの全体的なステータスのパーセンテージと残りのエラーバジェット、および SLI の履歴のステータスバー (モニターベースの SLO) または棒グラフ (メトリクスベースの SLO) が表示されます。1 つの[マルチアラートモニター][5]を使用してグループ化されたモニターベースの SLO を作成した場合、または [`sum by` 句][6]を使用してグループ化されたメトリクスベースの SLO を作成した場合、全体的なステータスのパーセンテージと残りのエラーバジェットに加えて、個々のグループのステータスのパーセンテージと残りのエラーバジェットが表示されます。
+SLO を設定したら、[サービスレベル目標リストビュー][1]から SLO を選択して、詳細サイドパネルを開きます。サイドパネルには、SLO の各ターゲットの全体的なステータスのパーセンテージと残りのエラーバジェット、および SLI の履歴のステータスバー (モニターベースの SLO) または棒グラフ (メトリクスベースの SLO) が表示されます。1 つの[マルチアラートモニター][4]を使用してグループ化されたモニターベースの SLO を作成した場合、または [`sum by` 句][5]を使用してグループ化されたメトリクスベースの SLO を作成した場合、全体的なステータスのパーセンテージと残りのエラーバジェットに加えて、個々のグループのステータスのパーセンテージと残りのエラーバジェットが表示されます。
 
 **例:** アベイラビリティーゾーンごとにレイテンシを追跡するためにモニターベースの SLO 作成すると、全体的な SLO と SLO が追跡している個々のアベイラビリティーゾーンのステータス割合とエラーバジェットの残量が表示されます。
 
@@ -71,9 +71,9 @@ $$\text"エラーバジェットの残り" = 100 * {\text"現在のステータ�
 
 **注:** SLO で指定できる小数の桁数は、SLO の種類と選択するタイムウィンドウに応じて異なります。それぞれの SLO の種類について、詳しくは次のリンクを参照してください。
 
-[モニターベースの SLO][7]: 7 日および 30 日目標の場合は小数第 2 位まで、90 日目標の場合は小数第 3 位まで。
+[モニターベースの SLO][6]: 7 日および 30 日目標の場合は小数第 2 位まで、90 日目標の場合は小数第 3 位まで。
 
-[メトリクスベースの SLO][8]: すべての目標について小数第 3 位まで。
+[メトリクスベースの SLO][7]: すべての目標について小数第 3 位まで。
 
 ## SLO の変更
 
@@ -83,13 +83,13 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 
 ### ロールベースのアクセス
 
-すべてのユーザーは、関連付けられた[ロール][9]に関係なく、SLO と [SLO ステータス修正](#slo-status-corrections)を閲覧できます。SLO の作成、編集、削除は、`slos_write` 権限を持つロールにアタッチされたユーザーのみが行えます。
+すべてのユーザーは、関連付けられた[ロール][8]に関係なく、SLO と [SLO ステータス修正](#slo-status-corrections)を閲覧できます。SLO の作成、編集、削除は、`slos_write` 権限を持つロールにアタッチされたユーザーのみが行えます。
 
-ステータス修正を作成、編集、および削除するには、ユーザーは `slos_corrections` 権限を必要とします。この権限を持つユーザーは、それらの SLO を編集する権限を持っていなくても、ステータスの修正を行うことができます。権限の完全なリストについては、[RBAC ドキュメント][10]を参照してください。
+ステータス修正を作成、編集、および削除するには、ユーザーは `slos_corrections` 権限を必要とします。この権限を持つユーザーは、それらの SLO を編集する権限を持っていなくても、ステータスの修正を行うことができます。権限の完全なリストについては、[RBAC ドキュメント][9]を参照してください。
 
 ### きめ細かなアクセス制御
 
-編集を許可する[ロール][9]のリストを指定することで、個々の SLO へのアクセスを制限します。
+編集を許可する[ロール][8]のリストを指定することで、個々の SLO へのアクセスを制限します。
 
 {{< img src="monitors/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="歯車メニューの SLO 権限オプション">}}
 
@@ -105,9 +105,9 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 
 SLO への編集アクセス権を維持するために、システムは保存する前に、自分がメンバーであるロールを少なくとも 1 つ含めることを要求します。アクセス制御リストのユーザーは、ロールを追加することができ、自分以外のロールを削除することのみが可能です。
 
-**注**: ユーザーは、モニターへの書き込み権限がなくても、任意のモニターに SLO を作成することができます。同様に、ユーザーは SLO への書き込み権限がなくても、SLO アラートを作成することができます。モニターの RBAC 権限の詳細については、[RBAC ドキュメント][11]または[モニターの RBAC の設定方法に関するガイド][12]を参照してください。
+**注**: ユーザーは、モニターへの書き込み権限がなくても、任意のモニターに SLO を作成することができます。同様に、ユーザーは SLO への書き込み権限がなくても、SLO アラートを作成することができます。モニターの RBAC 権限の詳細については、[RBAC ドキュメント][10]または[モニターの RBAC の設定方法に関するガイド][11]を参照してください。
 
-## SLO の検索と表示
+## SLO の検索
 
 [サービスレベル目標ステータスページ][1]では、すべての SLO に対し高度な検索を実行して、検索結果から SLO を検索、表示、編集、複製、削除できます。
 
@@ -121,15 +121,23 @@ SLO への編集アクセス権を維持するために、システムは保存�
 
 検索を実行するには、左側のファセットチェックボックスと上部の検索バーを使用します。ボックスをチェックすると、それに合わせて検索バーのクエリが更新されます。同様に、検索バーのクエリを変更 (あるいは新規入力) すると、ボックスのチェックが更新されます。クエリ結果はクエリの変更に合わせてリアルタイムで更新されます。'検索'ボタンはありません。
 
-個々の SLO を編集するには、SLO の上にカーソルを置き、その行の右側に表示される **Edit**、**Clone**、**Delete** ボタンを使用します。SLO の内容を詳しく確認するには、その行をクリックしてサイドパネルを開きます。
+## SLO の表示
 
-**注**: [Apple App Store][14] および [Google Play Store][15] で入手できる [Datadog モバイルアプリ][13]をダウンロードすれば、モバイルデバイスのホーム画面から SLO を表示することが可能です。
+SLOを*チーム*、*サービス*、*環境*でグループ化し、データのサマリービューを得ることができます。各状態 (違反、警告、OK、データなし) にある SLO の数を、コンテキストごとにグループ化して素早く分析することができます。
+
+{{< img src="/monitors/service_level_objectives/slo_group_by.png" alt="チームごとにグループ化された SLO のサマリービュー" style="width:100%;" >}}
+
+ステータス*とエラー予算*の列で SLO を並べ替え、注意が必要な SLO に優先順位をつけることができます。SLO リストには、[構成](#configuration)で選択した主要なタイムウィンドウの SLO の詳細が表示されます。その他の構成タイムウィンドウはすべて、個別のサイドパネルで表示できます。それぞれのテーブル行をクリックして、SLO 詳細サイドパネルを開きます。
+
+**注**: [Apple App Store][13] および [Google Play Store][14] で入手できる [Datadog モバイルアプリ][12]をダウンロードすれば、モバイルデバイスのホーム画面から SLO を表示することが可能です。
 
 {{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android 上の SLO">}}
 
 ### SLO タグ
 
-SLO の作成時や変更時に、[SLO ステータスページ][1]でフィルタリングに必要なタグや[SLO の保存済みビュー][16]の作成に必要なタグを追加することができます。
+SLO の作成時や変更時に、[SLO ステータスページ][1]でフィルタリングに必要なタグや[SLO の保存済みビュー][15]の作成に必要なタグを追加することができます。
+
+SLO リストの上部にある *Edit Tags* と *[Edit Teams][16]* ドロップダウンオプションを使用して、SLO にタグを一括して追加します。
 
 ### SLO のデフォルトビュー
 
@@ -193,17 +201,22 @@ SLO 監査イベントの全リストを取得するには、イベントエク�
 
 **注:** UI にイベントが表示されない場合は、イベントエクスプローラーの時間枠を長くしてみてください（過去 7 日間など）。
 
-{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO 監査イベント"  >}}
+{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO 監査イベント" >}}
 
 たとえば、特定の SLO コンフィギュレーションが変更されたときに通知を受信するには、タグ `audit,slo_id:<SLO ID>` に対して `[SLO Modified]` テキストを追跡するようイベントモニターをセットします。
 
-{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO イベントモニター"  >}}
+{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO イベントモニター" >}}
 
 ## SLO ウィジェット
 
-SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][18]を設定します。
+SLO を作成した後は、ダッシュボードやウィジェットを使ってデータを可視化することができます。
+  - SLO Summary ウィジェットを使用して、単一の SLO のステータスを可視化します。
+  - SLO List ウィジェットを使用して、SLO のセットを可視化します
+  - [SLO データソース][18]を使用して、15 か月分のメトリクスベースの SLO データを時系列とスカラー (クエリ値、トップリスト、テーブル、変化) の両方のウィジェットでグラフ化します。
 
-SLO を作成した後に、SLO サマリーダッシュボードウィジェットを使用して、SLO のステータスをダッシュボードメトリクス、ログ、APM データと合わせて表示することが可能です。SLO ウィジェットについて詳しくは、[SLO ウィジェットのドキュメント][2]ページを参照してください。
+SLO ウィジェットの詳細については、[SLO Summary][19] および [SLO List][20] ウィジェットページをご覧ください。SLO データソースの詳細については、[ダッシュボードで過去の SLO データをグラフ化する][18]方法に関するガイドを参照してください。
+
+SLO のコンフィギュレーションをプロアクティブに管理するには、特定のタグに対応するイベントが発生したときに通知するよう[イベントモニター][21]を設定します。
 
 ## SLO ステータスの修正
 
@@ -216,7 +229,7 @@ SLO を作成した後に、SLO サマリーダッシュボードウィジェッ
 - モニターベースの SLO の場合、修正時間ウィンドウはカウントされません。
 - メトリクスベースの SLO の場合、修正ウィンドウ内のすべての良好イベントと不良イベントはカウントされません。
 
-臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalendar RFC 5545 の RRULE 仕様][19]に基づいています。サポートされているルールは `FREQ`、`INTERVAL`、`COUNT` および `UNTIL` です。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
+臨機応変に対応するための 1 回限りの修正と、定期的に発生する予測可能な修正を作成するオプションがあります。1 回限りの修正には開始時刻と終了時刻が必要であり、定期的な修正には開始時刻、期間、間隔が必要です。定期的な修正は、[iCalendar RFC 5545 の RRULE 仕様][22]に基づいています。サポートされているルールは `FREQ`、`INTERVAL`、`COUNT` および `UNTIL` です。定期的な修正の終了日の指定は、修正を無期限に繰り返す必要がある場合にオプションで指定できます。
 
 どちらのタイプの修正でも、修正を行う理由を示す修正カテゴリーを選択する必要があります。選択可能なカテゴリーは、`Scheduled Maintenance` (定期メンテナンス)、`Outside Business Hours` (営業時間外)、`Deployment` (デプロイ)、`Other`(その他)です。必要であれば、説明文を追加することができます。
 
@@ -233,9 +246,9 @@ SLO ごとの 90 日制限は、以下の通りです。
 | 毎週繰り返し  | 3             |
 | 毎月繰り返し | 5             |
 
-SLO のサイドパネルで `Correct Status` を選択するか、[SLO ステータス修正 API][20] または [Terraform リソース][21]を使用して、UI からステータス修正を構成することができます。
+SLO のサイドパネルで `Correct Status` を選択するか、[SLO ステータス修正 API][23] または [Terraform リソース][24]を使用して、UI からステータス修正を構成することができます。
 
-{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO 修正 UI"  >}}
+{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO 修正 UI" >}}
 
 #### UI でのアクセス
 
@@ -256,23 +269,26 @@ UI で SLO ステータス修正にアクセスするには
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /ja/dashboards/widgets/slo/
-[3]: /ja/monitors/service_level_objectives/metric/
-[4]: /ja/monitors/service_level_objectives/monitor/
-[5]: /ja/monitors/types/metric/?tab=threshold#alert-grouping
-[6]: /ja/monitors/service_level_objectives/metric/#define-queries
-[7]: /ja/monitors/service_level_objectives/monitor/#set-your-slo-targets
-[8]: /ja/monitors/service_level_objectives/metric/#set-your-slo-targets
-[9]: /ja/account_management/rbac/
-[10]: /ja/account_management/rbac/permissions/#service-level-objectives/
-[11]: /ja/account_management/rbac/permissions/#monitors
-[12]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
-[13]: /ja/mobile
-[14]: https://apps.apple.com/app/datadog/id1391380318
-[15]: https://play.google.com/store/apps/details?id=com.datadog.app
-[16]: /ja/monitors/service_level_objectives/#saved-views
+[2]: /ja/monitors/service_level_objectives/metric/
+[3]: /ja/monitors/service_level_objectives/monitor/
+[4]: /ja/monitors/types/metric/?tab=threshold#alert-grouping
+[5]: /ja/monitors/service_level_objectives/metric/#define-queries
+[6]: /ja/monitors/service_level_objectives/monitor/#set-your-slo-targets
+[7]: /ja/monitors/service_level_objectives/metric/#set-your-slo-targets
+[8]: /ja/account_management/rbac/
+[9]: /ja/account_management/rbac/permissions/#service-level-objectives/
+[10]: /ja/account_management/rbac/permissions/#monitors
+[11]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
+[12]: /ja/mobile
+[13]: https://apps.apple.com/app/datadog/id1391380318
+[14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: /ja/monitors/service_level_objectives/#saved-views
+[16]: /ja/account_management/teams/#associate-resources-with-team-handles
 [17]: /ja/api/latest/events/
-[18]: /ja/monitors/types/event/
-[19]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[20]: /ja/api/latest/service-level-objective-corrections/
-[21]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[18]: /ja/dashboards/guide/slo_data_source/
+[19]: /ja/dashboards/widgets/slo/
+[20]: /ja/dashboards/widgets/slo_list/
+[21]: /ja/monitors/types/event/
+[22]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[23]: /ja/api/latest/service-level-objective-corrections/
+[24]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

@@ -20,6 +20,7 @@ assets:
   monitors:
     '[SNMP] Device Down Alert': assets/monitors/device_down.json
     '[SNMP] Device Unreachable Alert': assets/monitors/device_unreachable.json
+    '[SNMP] Interface Down Alert': assets/monitors/interface_down.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog

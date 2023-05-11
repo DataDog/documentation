@@ -15,7 +15,7 @@ title: モニターの管理
 
 [モニターの管理][1]ページではモニターの一括検索、削除、ミュート、解決、およびモニタータグの編集が可能です。検索結果に含まれるモニターを個別に複製したり、編集することもできます。
 
-{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="モニターの管理ページ"  >}}
+{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="モニターの管理ページ" >}}
 
 ## 検索
 
