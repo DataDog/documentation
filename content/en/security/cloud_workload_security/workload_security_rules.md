@@ -36,17 +36,17 @@ Agent expressions use [Datadog's Security Language (SECL)][2] to define behavior
 
 To detect when the `passwd` command is executed, there are a few attributes to note.
 
-`passwd` is a Unix utility, whose file is `/usr/bin/passwd` (assumed for a first implementation). Execution events include `exec`, `execve`, `fork`, and other system calls. In the CWS environment, all of these events are identified by the `exec` symbol.
+On most Linux distributions, the `passwd` utility is installed at `/usr/bin/passwd`. Execution events include `exec`, `execve`, `fork`, and other system calls. In the CWS environment, all of these events are identified by the `exec` symbol.
 
 Putting it all together, the rule expression is `exec.file.path == "/usr/bin/passwd"`.
 
-The `passwd` command example is an actual default rule that is present in the default CWS Agent policy. However, Agent expressions can also be more advanced, and can define rules that match on process ancestors or use wildcards for broader detections.
+The `passwd` command rule is already present in the default CWS Agent policy. However, Agent expressions can also be more advanced, and can define rules that match on process ancestors or use wildcards for broader detections.
 
 #### Detect when a PHP or Nginx process launches bash
 
 To detect when a PHP or Nginx process launches bash, there are a few attributes to note.
 
-Bash is a Unix utility, whose file is `/usr/bin/bash` (assumed for a first implementation). As in the previous example, to detect execution, include `exec.file.path == "/usr/bin/bash"` in your rule. This ensures the rule isn't only accounting for the execution of bash, but also bash as a child process of PHP or Nginx.
+On most Linux distributions, Bash is installed at `/usr/bin/bash`. As in the previous example, to detect execution, include `exec.file.path == "/usr/bin/bash"` in your rule. This ensures the rule is accounting for the execution of Bash, and also Bash as a child process of PHP or Nginx.
 
 A process ancestor's filename in CWS is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. 
 
@@ -58,7 +58,7 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 
 ## Create custom rules
 
-In addition to the default rules, you can also write custom Agent and detection rules. Custom Agent rules are deployed to the Agent in a policy separate from the default one.
+In addition to the default rules, you can write custom Agent and detection rules. Custom Agent rules are deployed to the Agent in a policy separate from the default one.
 
 **Note**: At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
 
@@ -131,7 +131,7 @@ To apply the changes, restart the [Datadog Agent][1].
 
 ### Configure the detection rule
 
-After you upload the new default policy file to the agent, navigate to the [**Rules**][3] page.
+After you upload the new default policy file to the Agent, navigate to the [**Rules**][3] page.
 
 1. On the [**Detection Rules**][3] page, click **New Rule**.
 2. Select **Workload Security** under **Rule types**. Select a detection method such as **Threshold** or **New Value**.
