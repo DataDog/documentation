@@ -20911,6 +20911,15 @@ paths:
         required: true
         schema:
           type: string
+      - description: Return the finding for a given snapshot of time (Unix ms).
+        example: 1678721573794
+        in: query
+        name: snapshot_timestamp
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
