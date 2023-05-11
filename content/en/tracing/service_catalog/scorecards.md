@@ -7,6 +7,9 @@ further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Service Catalog"
+- link: "https://www.datadoghq.com/blog/service-scorecards/"
+  tag: "Blog"
+  text: "Improve service health and performance with Service Scorecards"
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
