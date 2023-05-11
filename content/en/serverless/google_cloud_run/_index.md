@@ -312,7 +312,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
    ```js
    // instrument.js
 
-  const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
    const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
    const { Resource } = require('@opentelemetry/resources');
    const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
