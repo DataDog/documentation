@@ -8,11 +8,14 @@ further_reading:
 - link: "/metrics/"
   tag: "Documentation"
   text: "More information about metrics"
+- link: "/monitors/service_level_objectives/"
+  tag: "Documentation"
+  text: "SLO overview, configuration, and calculation"
 ---
 
 ## Overview
 
-Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3].
+Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3]. For an overview on how SLOs are configured and calculated, see the [Service Level Objective][8] page.
 
 {{< img src="monitors/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO" >}}
 
@@ -67,3 +70,4 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 [5]: https://app.datadoghq.com/slo/new/metric
 [6]: /metrics/distributions/#threshold-queries
 [7]: /monitors/service_level_objectives/monitor/
+[8]: /monitors/service_level_objectives
