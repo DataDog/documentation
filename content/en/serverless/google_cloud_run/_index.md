@@ -374,7 +374,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
    COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
    ```
-5. Enable Opentelemetry in the Datadog `serverless-init` using environment variable `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT`.
+5. Enable OTel in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
 
    ```
    # Dockerfile
