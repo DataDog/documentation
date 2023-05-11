@@ -78,6 +78,8 @@ For example:
 
 2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
+**Note**: Customers using the Azure Native integration can use the Datadog resource in Azure to add the extension to their .NET apps. For instructions, see the [App Service extension section][12] of Datadog's [Azure Portal guide][13]
+
 3. Go to the Application settings tab of the Configuration page.
     {{< img src="infrastructure/serverless/azure_app_services/config.png" alt="configuration page" >}}
 4. Add your Datadog API key as an application setting called `DD_API_KEY` and a value of your [Datadog API Key][4].
@@ -153,6 +155,8 @@ Learn more about [custom metrics][11].
 [9]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 [10]: /developers/dogstatsd/?tab=net#code
 [11]: /metrics/
+[12]: /integrations/guide/azure-portal/#app-service-extension
+[13]: /integrations/guide/azure-portal/
 {{% /tab %}}
 {{% tab "Java" %}}
 ### Requirements
@@ -329,9 +333,6 @@ Replace `<EXTENSION_VERSION>` with the version of the extension you wish to inst
 ### ARM template
 
 Many organizations use [Azure Resource Management (ARM) templates][8] to implement the practice of infrastructure-as-code. To build the App Service Extension into these templates, incorporate [Datadog's App Service Extension ARM template][9] into your deployments to add the extension and configure it alongside your App Service resources.
-
-See the [Azure Microsoft.Datadog monitors documentation][10], which shows using ARM templates as Platform as Code to create the Liftr Datadog Resource.
-You can use the marketplace to install the Datadog Resource and download it as an ARM template to see those parameters (such as `enterpriseAppId`, `linkingAuthCode`, and `linkingClientId`) that are specific to you.
 
 [1]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
 [2]: https://docs.microsoft.com/en-us/azure/cloud-shell/overview
