@@ -2,57 +2,95 @@
     {{ $headless := .Site.GetPage "/glossary/terms" }}
     {{ $headless_term_pages := $headless.Resources.ByType "page" }}
     {{ $letters := slice }}
+    {{ $products := slice }}
 
-    <div class="glossary-main">
+    <div x-data="{filterValue: window.location.search.includes('?product=') && !window.location.search.includes('?product=all') ? window.location.search.replace('?product=', '') : '', filteredLetters: []}" class="glossary-main">
         <h1 class="pb-0">{{ .Title }}</h1>
         <div class="row">
+            <!-- Technical terms section -->
             <div class="col-10 col-md-12 order-md-1 mt-5">
                 {{ .Content }}
                 {{ range $headless_term_pages }}
                     {{ $first_char := substr .Title 0 1 | upper }}
                     {{ $curr_letter := $.Scratch.Get "curr_letter" }}
+                    {{ $core_products := (delimit (.Params.core_product | default "") ",") }}
 
+                    <!-- Letter Header -->
                     {{ if ne $first_char $curr_letter }}
                         {{ $.Scratch.Set "curr_letter" $first_char }}
                         {{ $letters = $letters | append $first_char }}
-                        <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
+                        <h2 id="{{ $first_char | anchorize }}" class="glossary-letter mb-3" x-show="filteredLetters.length ? filteredLetters.includes('{{$first_char | anchorize}}') : true">{{ $first_char }}</h2>
                     {{ end }}
 
-                    <h4 id="{{ anchorize .Params.Title }}" class="font-24-28">
-                        {{ .Params.Title }}
-                    </h4>
+                    <!-- `watch` method filters letter headers on every state change of filterValue - not on state initialization-->
+                    <div class="glossary-term-container" 
+                    :class="'{{ $core_products }}'.replace(' ','-').includes(filterValue) && 'show'" 
+                    x-show="'{{ $core_products }}'.replace(' ','-').includes(filterValue)" 
+                    data-letter='{{ $first_char | lower }}'
+                    x-init="$watch('filterValue', _ => $el.classList.contains('show') && filteredLetters.push($el.dataset.letter))"
+                    >
+                    
+                        <!-- Build $products slice for filtering section -->
+                        {{ with .Params.core_product }}
+                            {{ $products = union $products . }}
+                        {{ end }}
+                        
+                        <!-- `nextTick` filters letter headers on state initialization. -->
+                        <h4 
+                        id="{{ anchorize .Params.Title }}" 
+                        class="glossary-term font-24-28"
+                        x-init="$nextTick(() => $el.parentElement.classList.contains('show') && filteredLetters.push($el.parentElement.dataset.letter))"
+                        >
+                            {{ .Params.Title }}
+                        </h4>
 
-                    {{ with .Params.related_terms }}
-                        <p class="fst-italic mb-0">
-                            {{ $len := len . }}
+                        {{ with .Params.related_terms }}
+                            <p class="fst-italic mb-0">
+                                {{ $len := len . }}
 
-                            Related terms:
-                            {{ range $index, $related_term := . }}
-                                <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
-                                {{ if ne $index (sub $len 1) }}, {{ end }}
-                            {{ end }}
-                        </p>
-                    {{ end }}
+                                Related terms:
+                                {{ range $index, $related_term := . }}
+                                    <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
+                                    {{ if ne $index (sub $len 1) }}, {{ end }}
+                                {{ end }}
+                            </p>
+                        {{ end }}
 
-                    {{ with .Params.synonyms }}
-                        <p class="fst-italic">
-                            Synonyms: {{ delimit . ", " }}
-                        </p>
-                    {{ end }}
+                        {{ with .Params.synonyms }}
+                            <p class="fst-italic">
+                                Synonyms: {{ delimit . ", " }}
+                            </p>
+                        {{ end }}
 
-                    <p>{{ .Content | safeHTML }}</p>
+                        {{ .Content | safeHTML }}
+                    </div>
                 {{ end }}
             </div>
 
             <!-- ID is scrollspy target -->
+            <!-- keep glossary-nav element here. $letters slice needs to be formed before use -->
             <nav id="glossary-nav">
                 <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                     {{ range $letters }}
-                        <li class="nav-item">
+                        <li class="nav-item" x-show="filteredLetters.length ? filteredLetters.includes('{{ . | lower }}') : true">
                             <a class="nav-link btn font-14-19" role='button' href='#{{ . | lower }}'>{{ . }}</a>
                         </li>
                     {{ end }}
                 </ul>
+
+                <!-- Filtering section -->
+                <!-- pushState adds the filter query param to url without loading/refreshing the url/page  -->
+                <div class="filters-glossary">
+                    <button 
+                    @click="filterValue = ''; filteredLetters = []; window.history.pushState({param: '?product=all' },'', '?product=all')" 
+                    class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary">{{.Params.filter_all | upper}}</button> 
+                    {{ range $products }}
+                        {{ $product := . | anchorize}}
+                        <button 
+                        @click="filterValue = '{{ $product }}'; filteredLetters = []; window.history.pushState({param: '?product={{ $product }}' },'', '?product={{ $product }}')" 
+                        class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary">{{ . | upper }}</button>
+                    {{ end }}
+                </div>
             </nav>
         </div>
     </div>
