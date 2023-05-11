@@ -50,7 +50,7 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 ## Limitations
 
 <div class="alert alert-warning"><p>
-Datadog can accept uploads up to 50MB.
+Datadog can accept uploads up to 200 MB for US1 or EU1 sites, 50 MB for other sites.
 </p></div>
 
 To compute the size of your source maps and bundle, run this command:
