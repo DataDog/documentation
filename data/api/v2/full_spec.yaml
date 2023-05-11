@@ -24315,9 +24315,9 @@ paths:
         dd_team:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"{{timestamp('now')}}\",\n
-              \     \"name\": \"{{timestamp('now')}}\"\n    },\n    \"type\": \"team\"\n
-              \ }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"handle-{{
+              unique_hash }}\",\n      \"name\": \"name-{{ unique_hash }}\"\n    },\n
+              \   \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
