@@ -158,6 +158,20 @@ Give more visual context to your audit trail events with dashboards. To create a
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
+## Create a scheduled report
+
+Datadog Audit Trail allows you to send out audit analytics views as scheduled emails routinely. This allows you to get proactive reports right in your inbox which is useful for routine monitoring of usage of Datadog platform. As an example you can choose to get a report of number of unique Datadog user logins by country on a weekly basis. This particular query would allow you to keep tabs on anmolous login activity or simply get automated insight on usage in your Inbox.
+
+To export an audit analytics query as a report, simply create either a timeseries, top list or a table query in audit trail and export it as scheduled report.
+
+Fill out the following details
+
+1. Name of the new Dashboard that will be created that will contain the query widget. Note that a new Dashboard needs to be created for every scheduled report. This dashboard can later be referenced and changed if you need to change the report content or schedule.
+2. Schedule the email report
+3. Add recipients that the email will be sent to
+4. Add any additional customized message that needs to be part of the email report
+
+
 ## Out-of-the-box dashboard
 
 Datadog Audit Trail comes with an [out-of-the-box dashboard][12] that shows various audit events, such as index retention changes, log pipeline changes, dashboard changes, etc. Clone this dashboard to customize queries and visualizations for your auditing needs.
