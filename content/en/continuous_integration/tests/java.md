@@ -429,7 +429,7 @@ When CI Visibility is enabled, the following data is collected from your project
 
 Ensure that you are using the latest version of the tracer.
 
-Verify that your build system and testing framework are supported by CI Visibility (refer to the list of supported build systems and test frameworks).
+Verify that your build system and testing framework are supported by CI Visibility. See the list of [supported build systems and test frameworks](#compatibility).
 
 Ensure that the `dd.civisibility.enabled` property is set to `true` in the tracer arguments.
 
