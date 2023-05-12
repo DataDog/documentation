@@ -110,7 +110,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Symfony        | 3.3, 3.4, 4.x, 5.x, 6.x | All supported PHP versions | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x             | PHP 7+                     | Framework-level instrumentation |
 | Yii            | 1.1, 2.0             | All supported PHP versions | Framework-level instrumentation |
-| Zend Framework | 1.12                 | All supported PHP versions | Framework-level instrumentation |
+| Zend Framework | 1.12, 1.21           | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 2.x                  | All supported PHP versions | Generic web tracing             |
 
 Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
