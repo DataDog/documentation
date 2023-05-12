@@ -433,7 +433,7 @@ Verify that your build system and testing framework are supported by CI Visibili
 
 Ensure that the `dd.civisibility.enabled` property is set to `true` in the tracer arguments.
 
-Check the build output for any errors that indicate tracer misconfiguration, such as an unset DD API KEY.
+Check the build output for any errors that indicate tracer misconfiguration, such as an unset `DD_API_KEY` environment variable.
 
 ### Tests or source code compilation fails when building a project with the tracer attached
 
