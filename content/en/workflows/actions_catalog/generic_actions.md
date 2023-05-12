@@ -4,8 +4,6 @@ kind: documentation
 disable_toc: false
 type: workflows
 is_beta: true
-aliases:
-- /workflows/generic_actions/
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
