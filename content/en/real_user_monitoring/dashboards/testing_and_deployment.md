@@ -1,7 +1,7 @@
 ---
-title: Application Testing Coverage Dashboard
+title: Testing and Deployment Dashboards
 kind: documentation
-description: Learn about the out-of-the-box RUM application testing coverage dashboard.
+description: Learn about the out-of-the-box RUM testing and deployment dashboards.
 further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'
@@ -14,9 +14,11 @@ further_reading:
   text: 'Track your test coverage with RUM and Synthetic Monitoring'
 ---
 
-## Overview
+## Testing coverage
 
-The [application testing coverage dashboard][1] uses data collected from [RUM][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
+### Overview
+
+The [Synthetics & RUM application testing coverage dashboard][1] uses data collected from [RUM][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
 
 You can use this dashboard to answer the following questions:
 
@@ -35,7 +37,39 @@ It shows:
 
 For more information about the data displayed, see [RUM Browser Data Collected][2].
 
-## Manage browser tests
+## Web deployment tracking
+
+The RUM Web App Deployment Tracking dashboard helps you identify when a recent deployment is causing performance issues or new errors within your application. To use this feature, make sure that you [add RUM versions to your application][4]. This dashboard shows:
+
+- **Core web vitals**:
+  For all views, three browser performance metrics are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance metrics, such as Load Time, are also available.
+- **Errors**: 
+  See a count of errors, percentage of views with errors, and explore ongoing issues.
+- **Browser performance metrics**:
+  Compare performance metrics like loading time, sessions, errors, and load times across different services and versions.
+
+{{< img src="real_user_monitoring/dashboards/dashboard-deployment-web.png" alt="Out-of-the-box web deployment dashboard" style="width:100%" >}}
+
+## Mobile deployment tracking
+
+The RUM Mobile App Deployment Tracking dashboard helps you to identify when a recent deployment or release is causing performance issues or new errors within your mobile application. If you need to directly compare versions, use the RUM summary page deployment tracking section.
+
+To use deployment tracking, make sure to specify an app version when you initialize the **Datadog SDK**.
+
+This dashboard shows:
+
+- **Crashes**: 
+  Review crash count by version, crash rate by version, and explore ongoing crashes.
+- **Errors**:
+  Review error count by version, error rate by version, and explore ongoing errors.
+- **Mobile vitals by version**:
+  For all versions, four mobile performance metrics are highlighted: slow renders, frozen frames, application start time, and memory usage.
+
+{{< img src="real_user_monitoring/dashboards/dashboard-deployment-mobile.png" alt="Out-of-the-box mobile deployment dashboard" style="width:100%" >}}
+
+For more information about the data displayed, see our documentation for each platform: [iOS RUM][5], [Android RUM][6], [React Native RUM][7], and [Flutter RUM][8].
+
+<!-- ## Manage browser tests
 
 In order to improve your testing coverage and better manage your browser tests, this dashboard can help you answer the following questions:
 
@@ -54,7 +88,7 @@ The **Top Views** table lists the most popular web pages that users are interact
 
 Use the [template variables][6] to customize the data types and filter out your queried data on [custom actions][7]. 
 
-Datadog recommends using custom actions. By default, custom actions are unique and offer more accurate coverage results compared to generated actions.
+Datadog recommends using custom actions. By default, custom actions are unique and offer more accurate coverage results compared to generated actions. -->
 
 ## Further Reading
 
@@ -63,7 +97,13 @@ Datadog recommends using custom actions. By default, custom actions are unique a
 [1]: https://app.datadoghq.com/dash/integration/30697/synthetics---browser-test-performance
 [2]: /real_user_monitoring/browser/data_collected/
 [3]: /synthetics/browser_tests/
-[4]: /synthetics/cicd_integrations/
+[4]: /real_user_monitoring/browser/#initialization-parameters
+[5]: /real_user_monitoring/ios/data_collected/
+[6]: /real_user_monitoring/android/data_collected/
+[7]: /real_user_monitoring/reactnative/data_collected/
+[8]: /real_user_monitoring/flutter/data_collected/
+
+<!-- [4]: /synthetics/cicd_integrations/
 [5]: /real_user_monitoring/explorer
 [6]: /dashboards/template_variables/
-[7]: /real_user_monitoring/guide/send-rum-custom-actions/
+[7]: /real_user_monitoring/guide/send-rum-custom-actions/ -->
