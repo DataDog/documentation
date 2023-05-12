@@ -137,6 +137,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | Fully Supported |
 | Elasticsearch                                                           | 1+                         | Fully Supported |
 | Eloquent                                                                | Laravel supported versions | Fully Supported |
+| Laravel Queues                                                          | Laravel supported versions | Fully Supported |
 | Memcache                                                                | *(Any Supported PHP)*      | Fully Supported |
 | Memcached                                                               | *(Any Supported PHP)*      | Fully Supported |
 | MongoDB - via [mongo][4] extension                                      | 1.4.x                      | Fully Supported |
@@ -144,6 +145,7 @@ To request support for additional CLI libraries, contact our awesome [support te
 | PDO                                                                     | *(Any Supported PHP)*      | Fully Supported |
 | PhpRedis                                                                | 3, 4, 5                    | PHP 7, 8        |
 | Predis                                                                  | 1.1                        | Fully Supported |
+| SQLSRV                                                                  | *(Any Supported PHP)*      | Fully Supported |
 
 To request support for additional datastores, contact our awesome [support team][3].
 
