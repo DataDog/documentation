@@ -14,7 +14,7 @@ further_reading:
   This guide is for managing the Azure Native integration with the Datadog resource.
 </div>
 
-This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between your Datadog organization and your Azure subscription(s). You can configure a Datadog resource to link as many subscriptions as you wish to monitor. [Create a Datadog resource][1] in Azure before proceeding with this guide.
+This guide is for managing the integration between Azure and Datadog in the Azure portal using the Datadog resource. The Datadog resource in Azure represents the connection between your Datadog organization and your Azure environment. You can configure a Datadog resource to link as many subscriptions as you wish to monitor. [Create a Datadog resource][1] in Azure before proceeding with this guide.
 
 With the Datadog resource, you can manage the following within the associated Azure subscription:
 - View or modify the scope of the Datadog resource to include the subscriptions to monitor
@@ -97,7 +97,8 @@ The portal retrieves all the available Datadog plans for your tenant, including 
 
 Select **Monitored Subscriptions** in the left sidebar to view or modify the scope of the Datadog resource. A list of currently monitored subscriptions appears. Use this view to configure the scope of the Datadog resource to monitor as many subscriptions as desired.  The subscription with the Datadog resource must be included in the scope.
 
-To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`. To remove subscriptions from being monitored with Datadog, select the subscriptions you wish to remove and click `Remove Subscriptions`. You can only remove subscriptions to which you have `Owner` role assigned.
+   - To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`. 
+   - To remove subscriptions from being monitored with Datadog, select the subscriptions you wish to remove and click `Remove Subscriptions`. You can only remove subscriptions to which you have `Owner` role assigned.
 
 **Note**: The same settings (such as host filters and log collection rules) are applied across all subscriptions in scope. To apply different settings to different subscriptions, create different Datadog resources.
 
