@@ -185,19 +185,6 @@ To authenticate and authorize the Agent to receive configurations and security d
 
 **Note:** If you have [`api_keys_write`][3] RBAC permission, but are missing Remote Configuration [Organization][4] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
 
-### Review Remote Configuration status events
-
-Gain visibility into the Remote Configuration status of your Agent through the Remote Configuration statuses in the [Remote Configuration UI][4]. The following table describes the meaning of each status:
-
-  | Status           | Description                                      |
-  |------------------|--------------------------------------------------|
-  | CONNECTED      | The Agent deployed in your environment is able to reach, authenticate, and authorize successfully with Datadog. This is the optimal state you want your Agents to be in.                                               |    
-  | ERROR          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize for Remote Configuration operation. The most likely cause of this is the API Key used by the Agent is not Remote Configuration enabled. To fix the issue, enable Remote Configuration capability on the API Key.                                                 | 
-  | RC_TRUE        |   The Agent deployed in your environment has Remote Configuration set to `true` in its `datadog.yaml` configuration file, however, the Agent cannot be located in the Remote Configuration component. The most likely cause of this is the Agent is unable to reach Datadog Config endpoints. To fix the issue, allow outbound HTTPS access to Config endpoints from your environment.                 | 
-  | RC_FALSE       |   The Agent deployed in your environment has Remote Configuration set to `false` in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. Set Remote Configuration to `true` to enable Remote Configuration on the Agent.                 | 
-  | NO INFO        | No information is available from the Agent on its Remote Configuration capabilities. This can be caused by the Agent being on a lower version that is not Remote Configuration capable. To fix this issue, upgrade the Agent to the latest version.            | 
- 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
