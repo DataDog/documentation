@@ -139,7 +139,7 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 Add the following to your Helm chart, specifying the API key that has Remote Config capability enabled:
 ```yaml
 datadog:
-  apiKey:  # <DATADOG_API_KEY>
+  apiKey: xxx
   remoteConfiguration:
     enabled: true
 ```
@@ -173,7 +173,7 @@ After the Agent configuration is updated in the [`datadog.yaml`][16] file, resta
 
 ### Ensure Datadog Config endpoints are reachable from your environment	
 
-To perform Remote Configuration, both the Agent and  the Observability Pipelines Worker deployed in your environment communicate to Datadog Config [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your proxy settings to incorporate Config destinations.
+To perform Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Config [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your proxy settings to incorporate Remote Config [endpoints][17].
 
 ### Enable Remote Configuration at the Organization level
 
@@ -184,7 +184,6 @@ To enable Remote Configuration at the [Organization][4] level in the Datadog UI,
 To authenticate and authorize the Agent to receive configurations and security detection rules, and to allow the Observability Pipelines Worker to receive configurations, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][3] RBAC permission can enable Remote Configuration on the API Key.
 
 **Note:** If you have [`api_keys_write`][3] RBAC permission, but are missing Remote Configuration [Organization][4] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
-
 
 ### Review Remote Configuration status events
 
