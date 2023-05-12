@@ -157,7 +157,7 @@ mvn clean verify -Pdd-civisibility
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-Make sure to set the `DD_TRACER_VERSION` environment variable to the tracer version you have previously downloaded, and `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
+Make sure to set the `DD_TRACER_VERSION` environment variable to the tracer version you have previously downloaded, and the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
 
 Run your tests using the `org.gradle.jvmargs` system property to specify the path to the Datadog Java Tracer JAR.
 
