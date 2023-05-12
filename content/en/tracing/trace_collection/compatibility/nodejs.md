@@ -54,7 +54,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
-| 3.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+| 4.x, 3.x            | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 |                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
 |                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
 |                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
@@ -82,7 +82,7 @@ For details about how to how to toggle and configure plugins, check out the [API
 | [koa][13]               | `>=2`    | Fully supported |                                            |
 | [microgateway-core][14] | `>=2.1`  | Fully supported | Core library for Apigee Edge. Support for the [edgemicro][15] CLI requires static patching using [@datadog/cli][16]. |
 | [moleculer][17]         | `>=0.14` | Fully supported |                                            |
-| [next][18]              | `>=9.5`  | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. |
+| [next][18]              | `>=10.2` | Fully supported | CLI usage requires `NODE_OPTIONS='-r dd-trace/init'`. |
 | [paperplane][19]        | `>=2.3`  | Fully supported | Not supported in [serverless-mode][20]     |
 | [restify][21]           | `>=3`    | Fully supported |                                            |
 
