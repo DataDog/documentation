@@ -12,6 +12,8 @@ author:
   sales_email: sales@f5.com
   support_email: g.coward@f5.com
 categories:
+- クラウド
+- 構成 & デプロイ
 - notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/f5-distributed-cloud/README.md
@@ -30,16 +32,18 @@ public_title: F5 Distributed Cloud Services
 short_description: F5 Distributed Cloud Services のイベントログをストリーミングし、視覚化します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
+  - Category::Configuration & Deployment
+  - Category::Notification
   - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Notification
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: F5 Distributed Cloud Services のイベントログをストリーミングし、視覚化します。
   media:
@@ -124,7 +128,7 @@ Global Log Receiver セクションで以下を実行します。
 
 ヘルプが必要ですか？[Datadog サポート][5]または [F5 サポート][6]にお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 [F5 Distributed Cloud Services][7] の詳細についてはこちらをご覧ください。
 

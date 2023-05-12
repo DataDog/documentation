@@ -8,6 +8,11 @@ aliases:
   - /cloud_siem/default_rules/
   - /security_platform/default_rules/
 disable_sidebar: true
+cascade:
+    algolia:
+        rank: 50
+        category: Documentation
+        subcategory: Security Detection Rules
 ---
 
 Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker techniques and potential misconfigurations so you can immediately take steps to remediate. Datadog continuously develops new default rules, which are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration. For more information, see the Detection Rules documentation.

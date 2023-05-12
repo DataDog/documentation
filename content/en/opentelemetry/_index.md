@@ -16,23 +16,30 @@ further_reading:
   text: "OTLP ingestion in the Agent"
 - link: "https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/"
   tag: "Blog"
-  text: "Learn more about AWS’s managed Lambda Layer for OpenTelemetry"
+  text: "Learn more about AWS's managed Lambda Layer for OpenTelemetry"
 - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
   tag: "Blog"
   text: "Correlate Datadog RUM events with traces from OTel-instrumented applications"
+- link: "https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/"
+  tag: "Blog"
+  text: "Monitor OTel-instrumented apps with support for W3C Trace Context"
+algolia:
+  tags: ['opentelemetry', 'open telemetry', 'otel']
 ---
 
 ## Overview
 
 [OpenTelemetry][1] (OTel) is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OTel provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
-If your applications and services are instrumented with OpenTelemetry libraries, you can choose between two paths for getting the traces, metrics, and logs data to the Datadog backend:
+If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend:
 
 1. [Send data to the OpenTelemetry collector, and use the Datadog exporter to forward it to Datadog][3], or
 
 2. [Ingest data with the Datadog Agent, which collects it for Datadog][4] (metrics and traces only).
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
+
+<div class="alert alert-info"><strong>Beta: Custom Instrumentation for Datadog Libraries</strong></br>For some supported languages, you can configure OTel instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
 
 ## Further Reading
 

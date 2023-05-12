@@ -7,9 +7,15 @@ further_reading:
 - link: dashboards/querying/#incident-management-analytics
   tag: ドキュメント
   text: インシデント管理分析
+- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
+  tag: ブログ
+  text: Datadog CoScreen でより効率的なペアプログラミングを実現
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: blog
+  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
 kind: documentation
 title: インシデント管理
 ---
@@ -18,7 +24,7 @@ title: インシデント管理
 <div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
 {{< /site-region >}}
 
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="グラフから"  style="width:80%;">}}
+{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="グラフから" style="width:80%;">}}
 
 組織のサービス中断につながる可能性のあるイベントは、すべてインシデントと見なすことができます。多くの場合、こうしたイベントを処理するためのフレームワークを用意する必要があります。Datadog のインシデント管理機能は、組織がインシデントを効果的に識別して軽減できるシステムを提供します。
 
@@ -69,7 +75,7 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 サイドパネルの右上にあるケバブボタンをクリックし、**Declare incident** をクリックして、Cloud SIEM または Cloud Workload Security のシグナルから直接インシデントを宣言することができます。
 
-サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、アプリケーションセキュリティモニタリングのシグナルからインシデントを宣言します。
+サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、Application Security Management のシグナルからインシデントを宣言します。
 
 {{< img src="monitors/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
 
@@ -130,7 +136,7 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 
 **Additional notifications**: 他のチームまたは人々に通知します。
 
-“Declare Incident” をクリックして、インシデントの作成を完了します。
+**Declare Incident** をクリックして、インシデントの作成を完了します。
 
 ### インシデントとインシデントタイムラインの更新
 
@@ -171,7 +177,7 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
     * Datadog は、手動でアップロードしたリストを優先して APM サービス名をオーバーライドします。
     * 利用しているサービスが APM サービスで、過去 7 日間にメトリクスが何もポストされていない場合、検索結果には表示されません。
     * Datadog 製品をさらに統合すると、サービスへの影響をより正確に評価できます。サービスのプロパティフィールドは、Datadog APM を使用しているカスタマーの APM サービスが自動的に入力されます。
-* **Teams**: [プロパティフィールド][11]のインシデント設定で定義されています。CSV ファイルからチームのリストをアップロードします。CSV を介してアップロードされた値は、インシデント評価の目的でインシデント管理内でのみ使用できます。
+* **Teams**: 組織で定義されている[チーム][11]から選択してください。CSV ファイルからチームリストをアップロードする必要はありません。
 
 ## 収集データ
 
@@ -212,7 +218,7 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [8]: /ja/integrations/slack/
 [9]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments#overview
 [10]: /ja/tracing/#2-instrument-your-application
-[11]: https://app.datadoghq.com/incidents/settings#Property-Fields
+[11]: /ja/account_management/teams/
 [12]: /ja/monitors/incident_management/analytics/#overview
 [13]: /ja/integrations/pagerduty/
 [14]: /ja/integrations/opsgenie/

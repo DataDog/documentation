@@ -17,6 +17,20 @@ CWS のログは、以下の JSON スキーマを持ちます。
 {
     "$id": "https://github.com/DataDog/datadog-agent/pkg/security/serializers/event",
     "$defs": {
+        "AnomalyDetectionSyscallEvent": {
+            "properties": {
+                "syscall": {
+                    "type": "string",
+                    "description": "異常検出イベントのトリガーとなった syscall の名前"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "syscall"
+            ],
+            "description": "AnomalyDetectionSyscallEventSerializer は syscall イベントに対する異常検出をシリアライズする"
+        },
         "BPFEvent": {
             "properties": {
                 "cmd": {
@@ -197,7 +211,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "async": {
                     "type": "boolean",
-                    "description": "イベントが非同期であった場合 True"
+                    "description": "イベントが非同期であった場合 true"
                 }
             },
             "additionalProperties": false,
@@ -208,7 +222,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "properties": {
                 "cause": {
                     "type": "string",
-                    "description": "プロセス終了の原因 (EXITEDSIGNALEDCOREDUMPED のうちいずれか 1 つ)"
+                    "description": "プロセス終了の原因 (EXITED、SIGNALED、COREDUMPED のうちいずれか 1 つ)"
                 },
                 "code": {
                     "type": "integer",
@@ -627,7 +641,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "source": {
                     "$ref": "#/$defs/IPPort",
-                    "description": "source はネットワークイベントのエミッターである"
+                    "description": "source はネットワークイベントの送信側である"
                 },
                 "destination": {
                     "$ref": "#/$defs/IPPort",
@@ -782,7 +796,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "args_truncated": {
                     "type": "boolean",
-                    "description": "引数の切り捨てを示す指標"
+                    "description": "引数の切り捨てを示すインジケーター"
                 },
                 "envs": {
                     "items": {
@@ -793,7 +807,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "envs_truncated": {
                     "type": "boolean",
-                    "description": "環境変数の切り捨てを示す指標"
+                    "description": "環境変数の切り捨てを示すインジケーター"
                 },
                 "is_thread": {
                     "type": "boolean",
@@ -898,7 +912,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "args_truncated": {
                     "type": "boolean",
-                    "description": "引数の切り捨てを示す指標"
+                    "description": "引数の切り捨てを示すインジケーター"
                 },
                 "envs": {
                     "items": {
@@ -909,7 +923,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "envs_truncated": {
                     "type": "boolean",
-                    "description": "環境変数の切り捨てを示す指標"
+                    "description": "環境変数の切り捨てを示すインジケーター"
                 },
                 "is_thread": {
                     "type": "boolean",
@@ -1034,7 +1048,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
             },
             "additionalProperties": false,
             "type": "object",
-            "description": "SELinuxBoolChangeSerializer は SELinux ブール値変更を JSON にシリアライズする"
+            "description": "SELinuxBoolChangeSerializer は SELinux のブール値変更を JSON にシリアライズする"
         },
         "SELinuxBoolCommit": {
             "properties": {
@@ -1051,7 +1065,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "properties": {
                 "status": {
                     "type": "string",
-                    "description": "SELinux の強制ステータス ('enforcing' 'permissive' 'disabled' のいずれか)"
+                    "description": "SELinux の強制ステータス ('enforcing'、'permissive'、'disabled' のいずれか)"
                 }
             },
             "additionalProperties": false,
@@ -1066,7 +1080,7 @@ CWS のログは、以下の JSON スキーマを持ちます。
                 },
                 "enforce": {
                     "$ref": "#/$defs/SELinuxEnforceStatus",
-                    "description": "SELinux の強制の変更"
+                    "description": "SELinux の強制力の変更"
                 },
                 "bool_commit": {
                     "$ref": "#/$defs/SELinuxBoolCommit",
@@ -1076,6 +1090,38 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "additionalProperties": false,
             "type": "object",
             "description": "SELinuxEventSerializer は SELinux コンテキストを JSON にシリアライズする"
+        },
+        "SecurityProfileContext": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "セキュリティプロファイルの名前"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Status はイベントがトリガーされたときにセキュリティプロファイルがどのような状態であったかを定義する"
+                },
+                "version": {
+                    "type": "string",
+                    "description": "使用中のプロファイルのバージョン"
+                },
+                "tags": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "このプロファイルに関連するタグのリスト"
+                }
+            },
+            "additionalProperties": false,
+            "type": "object",
+            "required": [
+                "name",
+                "status",
+                "version",
+                "tags"
+            ],
+            "description": "SecurityProfileContextSerializer はイベント内のセキュリティプロファイルコンテキストをシリアライズする"
         },
         "SignalEvent": {
             "properties": {
@@ -1104,11 +1150,11 @@ CWS のログは、以下の JSON スキーマを持ちます。
             "properties": {
                 "pipe_entry_flag": {
                     "type": "string",
-                    "description": "スプライスシステムコールに渡された fd_out パイプのエントリーフラグ"
+                    "description": "スプライス syscall に渡された fd_out パイプの開始フラグ"
                 },
                 "pipe_exit_flag": {
                     "type": "string",
-                    "description": "スプライスシステムコールに渡された fd_out パイプの終了フラグ"
+                    "description": "スプライス syscall に渡された fd_out パイプの終了フラグ"
                 }
             },
             "additionalProperties": false,
@@ -1181,6 +1227,9 @@ CWS のログは、以下の JSON スキーマを持ちます。
         "mount": {
             "$ref": "#/$defs/MountEvent"
         },
+        "anomaly_detection_syscall": {
+            "$ref": "#/$defs/AnomalyDetectionSyscallEvent"
+        },
         "usr": {
             "$ref": "#/$defs/UserContext"
         },
@@ -1192,6 +1241,9 @@ CWS のログは、以下の JSON スキーマを持ちます。
         },
         "container": {
             "$ref": "#/$defs/ContainerContext"
+        },
+        "security_profile": {
+            "$ref": "#/$defs/SecurityProfileContext"
         },
         "date": {
             "type": "string",
@@ -1222,11 +1274,39 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | `bind` | $ref | [BindEvent](#bindevent) をご覧ください。 |
 | `exit` | $ref | [ExitEvent](#exitevent) をご覧ください。 |
 | `mount` | $ref | [MountEvent](#mountevent) をご覧ください。 |
+| `anomaly_detection_syscall` | $ref | [AnomalyDetectionSyscallEvent](#anomalydetectionsyscallevent) をご覧ください |
 | `usr` | $ref | [UserContext](#usercontext) をご覧ください。 |
 | `process` | $ref | [ProcessContext](#processcontext) をご覧ください。 |
 | `dd` | $ref | [DDContext](#ddcontext) をご覧ください。 |
 | `container` | $ref | [ContainerContext](#containercontext) をご覧ください。 |
+| `security_profile` | $ref | [SecurityProfileContext](#securityprofilecontext) をご覧ください |
 | `date` | 文字列 |  |
+
+## `AnomalyDetectionSyscallEvent`
+
+
+{{< code-block lang="json" collapsible="true" >}}
+{
+    "properties": {
+        "syscall": {
+            "type": "string",
+            "description": "異常検出イベントのトリガーとなった syscall の名前"
+        }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+        "syscall"
+    ],
+    "description": "AnomalyDetectionSyscallEventSerializer は syscall イベントに対する異常検出をシリアライズする"
+}
+
+{{< /code-block >}}
+
+| フィールド | 説明 |
+| ----- | ----------- |
+| `syscall` | 異常検出イベントのトリガーとなった syscall の名前 |
+
 
 ## `BPFEvent`
 
@@ -2809,6 +2889,53 @@ CWS のログは、以下の JSON スキーマを持ちます。
 | [SELinuxBoolChange](#selinuxboolchange) |
 | [SELinuxEnforceStatus](#selinuxenforcestatus) |
 | [SELinuxBoolCommit](#selinuxboolcommit) |
+
+## `SecurityProfileContext`
+
+
+{{< code-block lang="json" collapsible="true" >}}
+{
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "セキュリティプロファイルの名前"
+        },
+        "status": {
+            "type": "string",
+            "description": "Status はイベントがトリガーされたときにセキュリティプロファイルがどのような状態であったかを定義する"
+        },
+        "version": {
+            "type": "string",
+            "description": "使用中のプロファイルのバージョン"
+        },
+        "tags": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array",
+            "description": "このプロファイルに関連するタグのリスト"
+        }
+    },
+    "additionalProperties": false,
+    "type": "object",
+    "required": [
+        "name",
+        "status",
+        "version",
+        "tags"
+    ],
+    "description": "SecurityProfileContextSerializer はイベント内のセキュリティプロファイルコンテキストをシリアライズする"
+}
+
+{{< /code-block >}}
+
+| フィールド | 説明 |
+| ----- | ----------- |
+| `name` | セキュリティプロファイルの名前 |
+| `status` | Status はイベントがトリガーされたときにセキュリティプロファイルがどのような状態であったかを定義する |
+| `version` | 使用中のプロファイルのバージョン |
+| `tags` | このプロファイルに関連するタグのリスト |
+
 
 ## `SignalEvent`
 

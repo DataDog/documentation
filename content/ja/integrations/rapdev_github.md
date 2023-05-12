@@ -50,7 +50,7 @@ pricing:
   tag: repo_name
   unit_label: GitHub リポジトリ
   unit_price: 1
-public_title: GitHub インテグレーション
+public_title: GitHub
 short_description: GitHub の組織やエンタープライズを監視する
 supported_os:
 - linux
@@ -81,7 +81,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: GitHub インテグレーション
+  title: GitHub
   uninstallation: README.md#Uninstallation
 ---
 

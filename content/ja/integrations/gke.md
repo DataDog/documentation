@@ -24,14 +24,14 @@ display_on_public_website: true
 draft: false
 git_integration_title: gke
 integration_id: gke
-integration_title: Google Kubernetes Engine
+integration_title: Google Kubernetes Engine, Agent
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: gke
 oauth: {}
-public_title: Google Kubernetes Engine
+public_title: Google Kubernetes Engine, Agent インテグレーション
 short_description: GKE は、コンテナ化されたアプリケーションを実行およびオーケストレーションするためのプラットフォームです。
 supported_os:
 - linux
@@ -50,7 +50,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Google Kubernetes Engine
+  title: Google Kubernetes Engine, Agent インテグレーション
 ---
 
 

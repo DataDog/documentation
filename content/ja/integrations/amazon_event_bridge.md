@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
+- 通知
 dependencies: []
 description: Amazon EventBridge のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_event_bridge/
@@ -35,7 +36,7 @@ Amazon EventBridge と Datadog のインテグレーションは、以下の機�
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 1. アラート通知を受信する AWS アカウントにそれぞれメイン [AWS インテグレーション][1]がインストールされていることを確認します。
 2. Datadog AWS ロールのアクセス許可ポリシーに次の項目が含まれていることを確認します。
@@ -44,7 +45,7 @@ Amazon EventBridge と Datadog のインテグレーションは、以下の機�
 
 ### コンフィギュレーション
 
-イベントバスにアラート通知を送信するには、`events:CreateEventBus` アクセス許可が必要です。このアクセス許可が設定されていない場合は、[Datadog IAM アクセス許可のドキュメント][2]を参照して、さらに構成を行う前にアクセス許可を有効にしてください。
+イベントバスにアラート通知を送信するには、`events:CreateEventBus` と `events:PutPartnerEvents` のアクセス許可が必要です。このアクセス許可が設定されていない場合は、[Datadog IAM アクセス許可のドキュメント][2]を参照して、さらに構成を行う前にアクセス許可を有効にしてください。
 
 1. [Datadog - Amazon EventBridge インテグレーション][3]タイルに移動し、Datadog に統合された AWS アカウントのリストを確認します。ここで、イベントブリッジを作成します。
 2. 選択した AWS アカウントで、イベントバスの名前を指定し、そのイベントバスを置くリージョンを選択して、新しいイベントバスを作成します。
@@ -95,7 +96,7 @@ Amazon EventBridge インテグレーションには、サービスのチェッ�
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#datadog-aws-iam-policy
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-event-bridge
+[3]: https://app.datadoghq.com/integrations/amazon-event-bridge
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html
 [5]: https://console.aws.amazon.com/events/home#/partners/datadoghq.com?page=overview
 [6]: https://console.aws.amazon.com/events/

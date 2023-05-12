@@ -132,6 +132,8 @@ datadog:
     containerCollectAll: true
 ```
 
+You can set the `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+
 ### Unprivileged
 
 (Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
@@ -152,16 +154,23 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 
 Update your `datadog-agent.yaml` manifest with:
 
-```
-agent:
-  image:
-    name: "gcr.io/datadoghq/agent:latest"
-  log:
-    enabled: true
-    logsConfigContainerCollectAll: true
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
 ```
 
-See the sample [manifest with logs and metrics collection enabled][1] for a complete example.
+See the sample [manifest with logs and metrics collection enabled][1] for a complete example. You can set the `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
 
 Then apply the new configuration:
 
@@ -171,20 +180,35 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 
 ## Unprivileged
 
-(Optional) To run an unprivileged installation, add the following to the [datadog CR][8]:
+(Optional) To run an unprivileged installation, add the following to the [DatadogAgent Custom Resource][2]:
 
 ```yaml
-agent:
-  config:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+
+  override:
+    nodeAgent:
+      securityContext:
+        runAsUser: <USER_ID>
+        supplementalGroups:
+          - <DOCKER_GROUP_ID>
 ```
 
 where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{< /tabs >}}
 

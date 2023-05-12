@@ -79,8 +79,7 @@ APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][5]を�
 
 {{< /site-region >}}
 
-
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 ログ管理の PCI DSS 準拠は、{{< region-param key="dd_site_name" >}} サイトではご利用いただけません。
 

@@ -33,24 +33,60 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 
 ### APM
+- [Connect telemetry using tags](#connect-telemetry-using-tags)
+- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
+- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
+- [Disable logs collection](#disable-logs-collection)
+- [Parse and transform logs](#parse-and-transform-logs)
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
-- [Choose APM tracing sampling rates](#select-sampling-rates-for-ingesting-apm-spans)
+- [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
 - [Disable trace collection](#disable-trace-collection)
-- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
-- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Connect logs and traces](#connect-logs-and-traces)
+- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Submit custom metrics](#submit-custom-metrics)
+- [Send OpenTelemetry data to Datadog](#send-opentelemetry-data-to-datadog)
+- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
+- [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
 - [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
-- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
+- [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
+- [Troubleshoot](#troubleshoot)
+- [Further Reading](#further-reading)
 
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
-- [Send telemetry over AWS PrivateLink or a proxy](#send-telemetry-over-privatelink-or-proxy)
+- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
+- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
+- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
+- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
+- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
+- [Disable logs collection](#disable-logs-collection)
+- [Parse and transform logs](#parse-and-transform-logs)
+- [Configure the Datadog tracer](#configure-the-datadog-tracer)
+- [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
+- [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
+- [Disable trace collection](#disable-trace-collection)
+- [Connect logs and traces](#connect-logs-and-traces)
+- [Link errors to your source code](#link-errors-to-your-source-code)
+- [Submit custom metrics](#submit-custom-metrics)
+- [Send OpenTelemetry data to Datadog](#send-opentelemetry-data-to-datadog)
+- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
-- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
+- [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
 - [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
+- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
+- [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
+- [Further Reading](#further-reading)
 
 ## Connect telemetry using tags
 
@@ -368,9 +404,9 @@ To see what libraries and frameworks are automatically instrumented by the Datad
 
 To manage the [APM traced invocation sampling rate][17] for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.000 (no tracing of Lambda function invocations) and 1.000 (trace all Lambda function invocations).
 
-Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration.
+Metrics are calculated based on 100% of the application's traffic, and remain accurate regardless of any sampling configuration.
 
-For high throughput services, there’s usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
+For high throughput services, there's usually no need for you to collect every single request as trace data is very repetitive—an important enough problem should always show symptoms in multiple traces. [Ingestion controls][18] help you to have the visibility that you need to troubleshoot problems while remaining within budget.
 
 The default sampling mechanism for ingestion is called [head-based sampling][19]. The decision of whether to keep or drop a trace is made at the very beginning of the trace, at the start of the root span. This decision is then propagated to other services as part of their request context, for example as an HTTP request header. Because the decision is made at the beginning of the trace and then conveyed to all parts of the trace, you must configure the sampling rate on the root service to take effect.
 
@@ -548,6 +584,84 @@ export class ExampleStack extends cdk.Stack {
 
 You can monitor your custom business logic by [submitting custom metrics][27].
 
+## Send OpenTelemetry data to Datadog
+
+1. Tell OpenTelemetry to export spans to the [Datadog Lambda Extension][40].
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+2. Add OpenTelemetry's instrumentation for AWS Lambda. This is akin to adding the tracing layer.
+   ```js
+   // instrument.js
+
+   const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
+   const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new AwsInstrumentation({
+              suppressInternalInstrumentation: true,
+          }),
+          new AwsLambdaInstrumentation({
+              disableAwsContextPropagation: true,
+          }),
+      ],
+   });
+
+   ```
+3. Apply instrumentation at runtime. For instance, for Node.js, use `NODE_OPTIONS`.
+
+   ```yaml
+   # serverless.yml
+
+   functions:
+     node:
+       handler: handler.handler
+       environment:
+         NODE_OPTIONS: --require instrument
+   ```
+
+4. Enable OTel using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
+
+   ```yaml
+   # serverless.yml
+  
+   provider:
+     name: aws
+     region: sa-east-1
+     runtime: nodejs18.x
+     environment:
+       DD_API_KEY: ${env:DD_API_KEY}
+       DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
+     layers:
+       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
+   ```
+
+5. Deploy.
+
 ## Send telemetry over PrivateLink or proxy
 
 The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][28] to the `datadoghq.com` [Datadog site][29], or [send data over a proxy][30] for all other sites.
@@ -578,7 +692,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 {{% /tab %}}
 {{% tab "AWS Secrets Manager" %}}
 
-The Datadog Extension supports retrieving [AWS Secrets Manager][40] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
+The Datadog Extension supports retrieving [AWS Secrets Manager][1] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
 
 1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
 2. Add the `secretsmanager:GetSecretValue` permission to your Lambda function IAM role permissions.
@@ -590,6 +704,8 @@ The Datadog Extension supports retrieving [AWS Secrets Manager][40] values autom
 8. Set the environment variable `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
 9. Create a new secret on Secrets Manager to store the dual shipping logs environment variable. The contents should be **similar** to `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`.
 10. Set the environment variable `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+
+[1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
 {{% /tab %}}
 {{% tab "AWS KMS" %}}
@@ -603,6 +719,7 @@ The Datadog Extension supports decrypting [AWS KMS][41] values automatically for
 5. For dual shipping profiling, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 5. For dual shipping logs, encrypt `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` using KMS and set the `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 
+[41]: https://docs.aws.amazon.com/kms/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -624,9 +741,18 @@ If your Lambda functions are configured to use code signing, you must add Datado
 
 Datadog's Signing Profile ARN:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```
+arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc
+```
+{{< /site-region >}}
+
 
 ## Migrate to the Datadog Lambda extension
 
@@ -635,14 +761,6 @@ Datadog can collect the monitoring data from your Lambda functions either using 
 To migrate, compare the [installation instructions using the Datadog Lambda Extension][1] against the [instructions using the Datadog Forwarder][38]. For your convenience, the key differences are summarized below.
 
 **Note**: Datadog recommends migrating your dev and staging applications first and migrating production applications one by one.
-
-## Migrating between x86 to arm64 with the Datadog Lambda Extension
-
-The Datadog Extension is a compiled binary, available in both x86 and arm64 variants. If you are migrating an x86 Lambda function to arm64 (or arm64 to x86) using a deployment tool such as CDK, Serverless Framework, or SAM, ensure that your service integration (such as API Gateway, SNS, or Kinesis) is configured to use a Lambda function's versions or aliases, otherwise the function may be unavailable for about ten seconds during deployment.
-
-This happens because migrating a Lambda function from x86 to arm64 consists of two parallel API calls, `updateFunction` and `updateFunctionConfiguration`. During these calls, there is a brief window where the Lambda `updateFunction` call has completed and the code is updated to use the new architecture while the `updateFunctionConfiguration` call has not yet completed, so the old architecture is still configured for the Extension.
-
-If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Forwarder][38] during the architecture migration process.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -694,6 +812,15 @@ If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Fo
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Migrating between x86 to arm64 with the Datadog Lambda Extension
+
+The Datadog Extension is a compiled binary, available in both x86 and arm64 variants. If you are migrating an x86 Lambda function to arm64 (or arm64 to x86) using a deployment tool such as CDK, Serverless Framework, or SAM, ensure that your service integration (such as API Gateway, SNS, or Kinesis) is configured to use a Lambda function's versions or aliases, otherwise the function may be unavailable for about ten seconds during deployment.
+
+This happens because migrating a Lambda function from x86 to arm64 consists of two parallel API calls, `updateFunction` and `updateFunctionConfiguration`. During these calls, there is a brief window where the Lambda `updateFunction` call has completed and the code is updated to use the new architecture while the `updateFunctionConfiguration` call has not yet completed, so the old architecture is still configured for the Extension.
+
+If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Forwarder][38] during the architecture migration process.
+
 
 ## Configure the Datadog Lambda extension for local testing
 
@@ -748,3 +875,4 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
+[40]: /serverless/libraries_integrations/extension/

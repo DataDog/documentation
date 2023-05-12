@@ -1,6 +1,5 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
+description: Android アプリケーションにエラー追跡を設定します。
 further_reading:
 - link: /real_user_monitoring/error_tracking/
   tag: Error Tracking
@@ -11,6 +10,7 @@ further_reading:
 kind: documentation
 title: Android のクラッシュレポートとエラー追跡
 ---
+
 ## 概要
 
 エラー追跡は、RUM Android SDK から収集されたエラーを処理します。

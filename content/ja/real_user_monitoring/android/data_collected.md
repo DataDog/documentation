@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/mobile_data_collected.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
@@ -11,6 +9,7 @@ further_reading:
 kind: documentation
 title: 収集された RUM Android データ
 ---
+
 ## 概要
 
 RUM Android SDK は、メトリクスと属性が関連付けられたイベントを生成します。メトリクスとは、イベント関連の計測に使用される定量化可能な値のことです。属性は、分析でメトリクスデータをスライス（グループ化）するために使用する定量化できない値です。
@@ -23,19 +22,18 @@ RUM SDK は、メトリクスと属性が関連付けられたイベントを生
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | セッション  | 30 日   | セッションは、モバイルアプリケーションでの実際のユーザージャーニーを表します。セッションはユーザーがアプリケーションを起動したときに開始され、ユーザーがアクティブである限りライブのままになります。ユーザージャーニー中、セッションの一部として生成されたすべての RUM イベントは、同じ `session.id` 属性を共有します。**注:** セッションは、15 分間操作されないとリセットされます。アプリケーションが OS によって強制終了された場合、アプリケーションがバックグラウンドにある間にセッションをリセットすることができます。 |
 | ビュー     | 30 日   | ビューは、モバイルアプリケーション上のユニークな画面 (または画面セグメント) を表します。ビューは `ActivityLifecycleCallbacks` インターフェイスを通じて `onActivityResumed` と `onActivityPaused` コールバックが呼び出されると開始・停止します。各オカレンスは個別のビューとして分類されます。ユーザーがビューに滞在している間、RUM イベント属性 (エラー、リソース、アクション) は、一意の `view.id` を持つビューにアタッチされます。                     |
-| Resource  | 15 日   | リソースとは、モバイルアプリケーションのファーストパーティホスト、API、サードパーティプロバイダーへのネットワークリクエストのことです。ユーザーセッション中に生成されるすべてのリクエストは、一意の `resource.id` と共にビューにアタッチされます。                                                                                           |
-| エラー     | 30 日   | エラーとは、モバイルアプリケーションにより送信される例外またはクラッシュで、それが生成されたビューにアタッチされます。                                                                                                                                            |
+| Resource  | 30 日   | リソースとは、モバイルアプリケーションのファーストパーティホスト、API、サードパーティプロバイダーへのネットワークリクエストのことです。ユーザーセッション中に生成されるすべてのリクエストは、一意の `resource.id` と共にビューにアタッチされます。                                                                                           |
+| Error     | 30 日   | エラーとは、モバイルアプリケーションにより送信される例外またはクラッシュで、それが生成されたビューにアタッチされます。                                                                                                                                            |
 | アクション    | 30 日   | アクションとは、モバイルアプリケーションでのユーザーアクティビティ（アプリケーションの起動、タップ、スワイプ、または戻るなど）のことです。各アクションは、一意の `action.id` と共に、それが生成されたビューにアタッチされます。                                                                                                                                              |
-| ロングタスク | 15 日 | ロングタスクイベントは、指定された閾値以上の期間メインスレッドをブロックするアプリケーション内のすべてのタスクに対して生成されます。 |
+| ロングタスク | 30 日 | ロングタスクイベントは、指定された閾値以上の期間メインスレッドをブロックするアプリケーション内のすべてのタスクに対して生成されます。 |
 
 次の図は、RUM イベント階層を示しています。
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM イベント階層" style="width:50%;border:none" >}}
+{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM イベント階層" style="width:50%;" >}}
 
 ## デフォルト属性
 
 RUM は、すべてのイベントに共通の属性および以下に挙げたイベントに特定の属性を[自動的に][1]収集します。また、[追加のイベント][2]を追跡またはアプリケーションの監視やビジネス分析のニーズに合わせてデフォルトのイベントに[カスタム属性を追加][3]することで、ユーザーセッションデータを強化することも可能です。
-
 
 ### 共通のコア属性
 
@@ -45,6 +43,7 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `type`     | 文字列 | イベントのタイプ (`view` や `resource` など)。             |
 | `service` | 文字列 | ユーザーセッションを関連付けるために使用した、このアプリケーションの[統合サービス名][4]。 |
 | `application.id` | 文字列 | Datadog アプリケーション ID。 |
+| `application.name` | 文字列 | Datadog アプリケーション名。 |
 
 ### デバイス
 
@@ -234,12 +233,12 @@ RUM アクション、エラー、リソース、ロングタスクのイベン�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
-[4]: https://docs.datadoghq.com/ja/getting_started/tagging/unified_service_tagging/
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#track-user-sessions
+[1]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[2]: /ja/real_user_monitoring/android/advanced_configuration/#enrich-user-sessions
+[3]: /ja/real_user_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[4]: /ja/getting_started/tagging/unified_service_tagging/
+[5]: /ja/real_user_monitoring/android/advanced_configuration/#track-user-sessions
 [6]: https://source.android.com/security/app-sandbox
 [7]: https://developer.android.com/training/articles/direct-boot
-[8]: https://docs.datadoghq.com/ja/data_security/real_user_monitoring/#ip-address
-[9]: https://docs.datadoghq.com/ja/data_security/real_user_monitoring/#geolocation
+[8]: /ja/data_security/real_user_monitoring/#ip-address
+[9]: /ja/data_security/real_user_monitoring/#geolocation

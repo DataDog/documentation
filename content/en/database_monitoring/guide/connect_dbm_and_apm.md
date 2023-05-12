@@ -46,10 +46,10 @@ Data privacy
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |
 |                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
 |                                          | [MySQLi][21]         |           | {{< X >}} |
-| **Node.js:** [dd-trace-js][9] >= 3.13.0     |                      |           |           |
-|                                          | [postgres][10]       |   Alpha   |           |
-|                                          | [mysql][13]          |           |   Alpha   |
-|                                          | [mysql2][14]         |           |   Alpha   |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |
+|                                          | [postgres][10]       | {{< X >}} |           |
+|                                          | [mysql][13]          |           | {{< X >}} |
+|                                          | [mysql2][14]         |           | {{< X >}} |
 
 
 
@@ -298,14 +298,10 @@ Enable the database monitoring propagation feature by setting the following envi
 
 {{% tab "Node.js" %}}
 
-<div class="alert alert-warning">
-DBM-APM linking for Node.js is in alpha release and may be unstable.
-</div>
-
-Install or update [dd-trace-js][1] to a version greater than `3.13.0` (or `2.22.0` if using end-of-life Node.js version 12):
+Install or update [dd-trace-js][1] to a version greater than `3.17.0` (or `2.30.0` if using end-of-life Node.js version 12):
 
 ```
-npm install dd-trace@^3.13.0
+npm install dd-trace@^3.17.0
 ```
 
 Update your code to import and initialize the tracer:
@@ -358,7 +354,7 @@ client.query('SELECT $1::text as message', ['Hello world!'], (err, result) => {
 
 {{< img src="database_monitoring/dbm_apm_active_connections_breakdown.png" alt="View active connections to a database broken down by the APM Service they originate from.">}}
 
-Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service’s service page to continue the investigation.
+Break down active connections for a given host by the upstream APM services making the requests. You can attribute load on a database to individual services to understand which services are most active on the database. Pivot to the most active upstream service's service page to continue the investigation.
 
 ### Filter your database hosts by the APM services that call them
 

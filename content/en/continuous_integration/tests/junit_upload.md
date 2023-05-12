@@ -337,7 +337,6 @@ The parameter provided must have the format `key=expression`, where `key` is the
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
-
 `/testcase/@attribute-name`
 : The XML attribute from `<testcase attribute-name="value">`.
 
@@ -435,7 +434,7 @@ Another way to provide additional tags to specific tests is including `<property
 
 To be processed, the `name` attribute in the `<property>` element must have the format `dd_tags[key]`, where `key` is the name of the custom tag to be added. Other properties are ignored.
 
-**Example**: Adding tags to a `<testcase>` element
+**Example**: Adding tags to a `<testcase>` element.
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -451,7 +450,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-**Example**: Adding tags to a `<testsuite>` element
+**Example**: Adding tags to a `<testsuite>` element.
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -465,6 +464,8 @@ To be processed, the `name` attribute in the `<property>` element must have the 
   </testsuite>
 </testsuites>
 {{< /code-block >}}
+
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
 
 ## Further reading
 

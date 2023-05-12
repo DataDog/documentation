@@ -25,8 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- OS & システム
-- 処理
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
@@ -48,11 +46,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Data Store
-  - Category::OS & System
-  - Category::Processing
   - Category::Log Collection
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
   media: []
@@ -71,7 +67,7 @@ tile:
 
 以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 MapR チェックは [Datadog Agent][2] パッケージに含まれていますが、追加のセットアップが必要です。
 

@@ -19,8 +19,6 @@ The Datadog Mobile app enables you to view alerts from Datadog on your mobile de
 
 Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
 
-{{< img src="mobile/mobile_app_qr_code.png" style="width:40%; background:none; border:none; box-shadow:none;" alt="Download Datadog mobile app">}}
-
 ### Logging in
 
 You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.
@@ -32,7 +30,7 @@ SAML login requires you to set up and authenticate your SAML provider with Datad
 1. Press the "Using Single Sign-On (SAML)?" button.
 2. Enter your company email and send the email.
 3. While on your mobile device, open the email and click on the indicated link.
-4. Enter your org’s SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
+4. Enter your org's SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
 
 Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
 
@@ -75,7 +73,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 {{< img src="mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also  declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
+On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
 
 ### Create an incident
 
@@ -282,7 +280,7 @@ You can display SLOs from multiple organizations on your mobile home screen.
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you’ve logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
+All organizations you've logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
 
 
 {{% /tab %}}
@@ -380,7 +378,7 @@ You can display Monitors from multiple organizations within the same widget.
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you’ve logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
+All organizations you've logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
 
 
 {{% /tab %}}
