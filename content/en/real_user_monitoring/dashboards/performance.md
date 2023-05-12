@@ -12,6 +12,7 @@ further_reading:
 
 ## Web app performance
 
+### Overview
 
 The web app performance dashboard offers a bird's-eye view of RUM web applications. It shows:
 
@@ -27,6 +28,7 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 
 ## Mobile app performance
 
+### Overview
 
 The mobile app performance dashboard gives an overview of RUM mobile applications. It shows:
 
@@ -43,6 +45,7 @@ For more information about the data displayed, see our documentation for each pl
 
 ## Resources
 
+### Overview
 
 The RUM resources dashboard helps you identify which resources have the heaviest impact on your application. It shows:
 

@@ -11,6 +11,7 @@ further_reading:
 
 ## Web app errors
 
+### Overview
 
 The RUM web app errors dashboard provides insights about your applications' errors. It helps you focus on the views or versions that are generating the most errors. It shows:
 
@@ -25,6 +26,7 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 
 ## Mobile app crashes and errors
 
+### Overview
 
 The RUM mobile app crashes and errors dashboard provides insights about your mobile applications' errors. It helps you focus on the views or versions that are generating the most errors. It shows:
 
