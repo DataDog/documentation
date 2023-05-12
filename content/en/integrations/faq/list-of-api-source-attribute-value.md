@@ -52,6 +52,7 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Amazon Ebs                    | amazon ebs                    | ebs                        |
 | Amazon Ec2                    | amazon ec2                    | ec2                        |
 | Amazon Ec2 Spot               | amazon ec2 spot               | ec2spot                    |
+| Amazon Ecr                    | amazon ecr                    | ecr                        |
 | Amazon Ecs                    | amazon ecs                    | ecs                        |
 | Amazon Efs                    | amazon efs                    | efs                        |
 | Amazon Elasticache            | amazon elasticache            | elasticache                |
@@ -98,7 +99,7 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Amazon S3                     | amazon s3                     | s3                         |
 | Amazon S3 Storage Lens        | amazon s3 storage lens        | s3storagelens              |
 | Amazon Sagemaker              | amazon sagemaker              | sagemaker                  |
-| Amazon Security Hub           | amazon security hub           | awssecurityhub             |
+| Amazon Security Hub           | amazon security hub           | amazon_security_hub        |
 | Amazon Ses                    | amazon ses                    | ses                        |
 | Amazon Shield                 | amazon shield                 | shield                     |
 | Amazon Sns                    | amazon sns                    | sns                        |
@@ -308,6 +309,7 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Ruby                          | ruby                          | ruby                       |
 | Salesforce                    | salesforce                    | salesforce                 |
 | Salesforce Commerce Cloud     | salesforce commerce cloud     | salesforcecommercecloud    |
+| Salesforce Marketing Cloud    | salesforce marketing cloud    | salesforcemarketingcloud   |
 | Salesforce Incidents          | salesforce incidents          | salesforceincidents        |
 | Segment                       | segment                       | segment                    |
 | Sendgrid                      | sendgrid                      | sendgrid                   |
@@ -318,6 +320,7 @@ Search for events in the event explorer using `sources:<SEARCH_TERM>`.
 | Solarwinds                    | solarwinds                    | solarwinds                 |
 | Solr                          | solr                          | solr                       |
 | Spark                         | spark                         | spark                      |
+| Split.io                      | splitio                       | splitio                    |
 | Splunk                        | splunk                        | splunk                     |
 | Sql Server                    | sql server                    | sqlserver                  |
 | Ssh                           | ssh                           | ssh                        |

@@ -103,7 +103,7 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 | 属性       | 説明                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `agent_version` | サポートされている Agent の最小バージョン。                                                                                           |
-| `integration`   | このサービスチェックを送信するインテグレーションの名前。これは、`manifest.json` にある正規化されていない `display_name` です。 |
+| `integration`   | このサービスチェックを送信するインテグレーションの名前。これは、`manifest.json` にある正規化されていない `tile.title` です。   |
 | `check`         | サービスチェックの名前。一意である必要があります。                                                                              |
 | `statuses`      | チェックのさまざまなステータスのリスト。`ok`、`warning`、`critical` から選択します。`unknown` も可能です。   |
 | `groups`        | サービスチェックと共に送信される[タグ][8]。                                                                                     |
@@ -126,7 +126,7 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 | `per_unit_name` | オプション           | 単位の下位区分がある場合。`request per second` (1 秒あたりのリクエスト) など。                                                                                                                                                                                                                                                                               |
 | `description`   | オプション           | メトリクスの説明。                                                                                                                                                                                                                                                                                                              |
 | `orientation`   | 必須          | `myapp.turnover` のように、大きい方がよいメトリクスの場合は `1` に設定します。メトリクスの変動が特に重要でない場合は `0` に設定します。`myapp.latency` のように、小さい方がよいメトリクスの場合は `-1` に設定します。                                                                                                                                                         |
-| `integration`   | 必須          | メトリクスを送信するインテグレーションの名前。これは、`manifest.json` ファイルにある `display_name` を正規化した文字列です。文字、アンダースコア、ダッシュ、数字以外の文字はアンダースコアに変換されます。例: `Openstack Controller` -> `openstack_controller`、`ASP.NET` -> `asp_net`、`CRI-o` -> `cri-o`。 |
+| `integration`   | 必須          | メトリクスを送信するインテグレーションの名前。これは、`manifest.json` ファイルにある `tile.title` を正規化した文字列です。文字、アンダースコア、ダッシュ、数字以外の文字はアンダースコアに変換されます。例: `Openstack Controller` -> `openstack_controller`、`ASP.NET` -> `asp_net`、`CRI-o` -> `cri-o`。 |
 | `short_name`    | 必須          | メトリクスの明示的な一意の ID。                                                                                                                                                                                                                                                                                                      |
 | `curated_metric`| オプション           | インテグレーションのためのどのメトリクスが、与えられたタイプで注目すべきかをマークします (`cpu`と`memory`の両方が受け入れられる)。これらは、UI で他のインテグレーションメトリクスの上に表示されます。
 
