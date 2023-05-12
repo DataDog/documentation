@@ -506,6 +506,19 @@ backend datadog-network-devices-netflow
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
+{{< site-region region="us,eu,us3,us5,ap1" >}}
+For the following configuration, replace `<site_url>` with {{< region-param key="dd_site" >}}:
+```conf
+backend datadog-remote-configuration
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 config.<site_url>:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership config.<site_url>:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+```
+{{< /site-region >}}
+
 ##### HTTPS
 
 This configuration adds SSL/TLS encryption on communication between the Agent and HAProxy. Replace the variable `<PATH_TO_PROXY_CERTIFICATE_PEM>` with the path to the proxy certificate bundle (*.pem).
@@ -757,6 +770,19 @@ backend datadog-network-devices-netflow
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
+{{< site-region region="us,eu,us3,us5,ap1" >}}
+For the following configuration, replace `<site_url>` with {{< region-param key="dd_site" >}}:
+```conf
+backend datadog-remote-configuration
+    balance roundrobin
+    mode http
+    # The following configuration is for HAProxy 1.8 and newer
+    server-template mothership 5 config.<site_url>:443  check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # Uncomment the following configuration for older HAProxy versions
+    # server mothership config.<site_url>:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATE
+```
+{{< /site-region >}}
+
 **Note**: You can use `verify none` instead of `verify required ca-file <PATH_TO_CERTIFICATES>` if you are unable to get the certificates on the proxy host, but be aware that HAProxy will not be able to verify Datadog's intake certificate in that case.
 
 HAProxy 1.8 and newer allow DNS service discovery to detect server changes and automatically apply them to your configuration.
@@ -1001,6 +1027,18 @@ stream {
     }
 }
 ```
+{{< site-region region="us,eu,us3,us5,ap1" >}}
+For the following configuration, replace `<site_url>` with {{< region-param key="dd_site" >}}:
+```conf
+server {
+        listen 3846; #listen for Remote Configuration requests
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass <site_url>:443;
+    }
+}
+```
+{{< /site-region >}}
 
 ##### HTTPS
 
@@ -1113,6 +1151,17 @@ stream {
 }
 ```
 
+{{< site-region region="us,eu,us3,us5,ap1" >}}
+For the following configuration, replace `<site_url>` with {{< region-param key="dd_site" >}}:
+```conf
+server {
+        listen 3846 ssl; #listen for Remote Configuration requests
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass config.datadoghq.com:443;
+```
+{{< /site-region >}}
+
 **Note**: You can remove `proxy_ssl_verify on` if you are unable to get the certificates on the proxy host, but be aware that NGINX will not be able to verify Datadog's intake certificate in that case.
 
 #### Datadog Agent configuration
@@ -1172,7 +1221,12 @@ network_devices:
             # Comment the line below to use encryption between the Agent and NGINX
             logs_no_ssl: true
 
+remote_config:
+    logs_dd_url: nginx.example.com:3846
+    # Comment the line below to use encryption between the Agent and NGINX
+    logs_no_ssl: true
 ```
+
 
 When using encryption between the Agent and NGINX, if the Agent does not have access to the proxy certificate, is unable to validate it, or the validation is not needed, you can edit the `datadog.yaml` Agent configuration file and set `skip_ssl_validation` to `true`.
 With this option set to `true`, the Agent skips the certificate validation step and does not verify the identity of the proxy, but the communication is still encrypted with SSL/TLS.

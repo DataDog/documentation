@@ -57,7 +57,7 @@ The following products and features are supported with Remote Config:
 ### Application Performance Monitoring (APM)
 <div class="alert alert-info">This feature is in private beta.</div>
 
-- **Remotely instrument your Kubernetes services with APM**: Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote Instrumentation][13] for more information.
+- **Remotely instrument your Kubernetes services with APM**: Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote instrumentation][13] for more information.
 - **Remotely set Agent sampling rate**: Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 ### Dynamic Instrumentation
@@ -76,7 +76,7 @@ The following products and features are supported with Remote Config:
 
 - **Remotely deploy and update [Observability Pipelines Workers][10] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
-## Security Considerations
+## Security considerations
 
 Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
 
@@ -152,7 +152,7 @@ datadog:
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CWS default agent rules][5] update automatically as released.
-- [Datadog Remote Instrumentation][13] is enabled.
+- [Datadog Remote instrumentation][13] is enabled.
 - [APM Agent-level sampling rates][6] are applied.  
 - [Dynamic Instrumentation][7] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][8] are enabled.
@@ -171,11 +171,11 @@ Configure [monitors][15] to receive notifications when an event of interest is e
 
 After the Agent configuration is updated in the [`datadog.yaml`][16] file, restart the Agent for this change to take effect. 
 
-### Ensure Datadog Config endpoints are reachable from your environment	
+### Ensure Datadog Remote Configuration endpoints are reachable from your environment	
 
-To perform Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Config [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your proxy settings to incorporate Remote Config [endpoints][17].
+To perform Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Config [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your [proxy settings][18] to incorporate Remote Config endpoints.
 
-### Enable Remote Configuration at the Organization level
+### Enable Remote Configuration at the organization level
 
 To enable Remote Configuration at the [Organization][4] level in the Datadog UI, follow the **Organization Settings > Security > Remote Configuration** menu. This allows your authenticated and authorized Datadog components to remotely receive configurations and security detection rules of supported features from Datadog. Only users who have the [`org_management`][9] RBAC permission can enable Remote Configuration at the Organization level.
 
@@ -206,3 +206,4 @@ To authenticate and authorize the Agent to receive configurations and security d
 [15]: /monitors/
 [16]: /agent/guide/how_remote_config_works/?tab=configurationyamlfile#setup
 [17]: /agent/guide/network
+[18]: /agent/proxy/
