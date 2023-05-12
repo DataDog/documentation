@@ -1,4 +1,5 @@
 {{ define "main" }}
+    {{ $core_product_taxonomy := .Site.Params.core_product }}
     {{ $headless := .Site.GetPage "/glossary/terms" }}
     {{ $headless_term_pages := $headless.Resources.ByType "page" }}
     {{ $letters := slice }}
@@ -33,9 +34,10 @@
             <div class="col-10 col-md-12 order-md-1 mt-5">
                 {{ .Content }}
                 {{ range $headless_term_pages }}
+                    {{ $dot := . }}
                     {{ $first_char := substr .Title 0 1 | upper }}
                     {{ $curr_letter := $.Scratch.Get "curr_letter" }}
-                    {{ $core_products := (delimit (.Params.core_product | default "") ",") }}
+                    {{ $core_products_string := (delimit (.Params.core_product | default "") ",") }}
 
                     <!-- Letter Header -->
                     {{ if ne $first_char $curr_letter }}
@@ -46,17 +48,23 @@
 
                     <!-- `$watch` method filters letter headers on every state change of filterValue - not on state initialization-->
                     <div class="glossary-term-container" 
-                    :class="shouldShowGlossaryTerm('{{ $core_products }}') && 'show'" 
-                    x-cloak x-show="shouldShowGlossaryTerm('{{ $core_products }}')" 
+                    :class="shouldShowGlossaryTerm('{{ $core_products_string }}') && 'show'" 
+                    x-cloak x-show="shouldShowGlossaryTerm('{{ $core_products_string }}')" 
                     data-letter='{{ $first_char | lower }}'
                     x-init="$watch('filterValue', _ => appendToFilteredLetters($el))"
                     >
                     
-                        <!-- Build $products slice for filtering section -->
-                        {{ with .Params.core_product }}
-                            {{ $products = union $products . }}
+                        <!-- Validate core_product values and build $products slice for filtering section (filter-btns)-->
+                        {{ range .Params.core_product  }}
+                            {{ $valid_core_product := index (where $core_product_taxonomy.possible_values "name" .) 0 }}
+                            {{ if $valid_core_product }}
+                                {{ $products = union $products (slice $valid_core_product.name) }}
+                            {{ else }}
+                                {{ errorf "Invalid core_product tag %q" . }}
+                                {{ errorf "in %q" $dot.File.Path }}
+                            {{ end }}
                         {{ end }}
-                        
+
                         <!-- `$nextTick` filters letter headers on state initialization. -->
                         <h4 
                         id="{{ anchorize .Params.Title }}" 
