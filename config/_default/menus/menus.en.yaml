@@ -1182,7 +1182,7 @@ main:
     weight: 2
   - name: Case Management
     url: service_management/case_management/
-    # pre: pending WEB-3520
+    pre: casestudy
     parent: service_management_heading
     identifier: case_management
     weight: 40000
