@@ -449,7 +449,7 @@ If the plugin interferes with the build, disable it by adding `dd.civisibility.c
 
 In some cases attaching the tracer can break tests, especially if they run asserts on the internal state of the JVM or instances of third-party libraries' classes.
 
-While the best approach is such cases is to update the tests, there is also a quicker option of disabling the tracer's third-party libraries integrations.
+While the best approach is such cases is to update the tests, there is also a quicker option of disabling the tracer's third-party library integrations.
 
 The integrations provide additional insights into what happens in the tested code and are especially useful in integration tests, to monitor things like HTTP requests or database calls.
 They are enabled by default.
