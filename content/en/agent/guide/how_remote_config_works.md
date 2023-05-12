@@ -162,7 +162,9 @@ After you perform these steps, your Agent requests its configuration from Datado
 ### Datadog Audit Trail
 
 Use [Datadog Audit Trail][14] to monitor organization access and Remote Configuration enabled events. Audit Trail allows your administrators and security teams to track the creation, deletion, and modification of Datadog API and application keys. After Audit Trail is configured, you can view events related to Remote Configuration enabled features and who has requested these changes. Audit Trail allows you to reconstruct sequences of events, and establish robust Datadog monitoring for Remote Configuration. 
+
 ### Monitors
+
 Configure [monitors][15] to receive notifications when an event of interest is encountered.
 
 ## Troubleshooting
@@ -173,7 +175,7 @@ After the Agent configuration is updated in the [`datadog.yaml`][16] file, resta
 
 ### Ensure Datadog Remote Configuration endpoints are reachable from your environment	
 
-To perform Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Config [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your [proxy settings][18] to incorporate Remote Config endpoints.
+To use Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Config [endpoints][17]. Ensure that outbound HTTPS has access to these endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your [proxy settings][18] to incorporate Remote Config endpoints.
 
 ### Enable Remote Configuration at the organization level
 
