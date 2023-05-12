@@ -60,7 +60,7 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 
 In addition to the default rules, you can write custom Agent and detection rules. Custom Agent rules are deployed to the Agent in a policy separate from the default one. You can use Remote Configuration to automatically deploy the policy to your hosts, or alternatively, manually upload it to the Agent on each host.
 
-<div class="alert alert-warning">Remote Configuration for custom rules is in private beta. Fill out this <a href="google.com">form</a> to request access.</div>
+<div class="alert alert-info">Remote Configuration for custom rules is in private beta. Fill out this <a href="google.com">form</a> to request access.</div>
 
 ### Define the agent rule
 
