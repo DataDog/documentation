@@ -8,7 +8,7 @@ kind: documentation
 title: Amazon RDS マネージド Postgres のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -80,7 +80,7 @@ CREATE SCHEMA datadog;
 GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements schema public;
 ```
 
 {{% /tab %}}
@@ -294,7 +294,7 @@ helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
   --set 'clusterChecksRunner.enabled=true' \
-  --set "clusterAgent.confd.postgres\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.postgres\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -303,7 +303,7 @@ instances:
     username: datadog
     password: <UNIQUEPASSWORD>
     tags:
-      - dbinstanceidentifier:<DB_INSTANCE_NAME>" \
+      - dbinstanceidentifier:"<DB_INSTANCE_NAME>"' \
   datadog/datadog
 ```
 
@@ -390,6 +390,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 ### 検証
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `postgres` を探します。または、[データベース][10]のページを参照してください。
+
+## Agent の構成例
+{{% dbm-postgres-agent-config-examples %}}
 
 ## RDS インテグレーションをインストール
 
