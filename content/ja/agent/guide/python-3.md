@@ -1,6 +1,4 @@
 ---
-title: Python 3 カスタムチェックの移行
-kind: ガイド
 further_reading:
 - link: /agent/versions/upgrade_to_agent_v7/
   tag: ドキュメント
@@ -8,6 +6,8 @@ further_reading:
 - link: /agent/guide/agent-v6-python-3/
   tag: ドキュメント
   text: Datadog Agent v6 で Python 3 を使用する
+kind: ガイド
+title: Python 3 カスタムチェックの移行
 ---
 
 <div class="alert alert-info">
@@ -147,7 +147,7 @@ Python 2 は Unicode テキストとバイナリコード化されたデータ�
 from io import open
 
 f = open('textfile.txt', encoding='utf-8')
-contents = f.read()  # コンテンツは ‘utf-8’ を使用してユニコードにデコードされます。これは、バイトではありません！
+contents = f.read()  # コンテンツは 'utf-8' を使用してユニコードにデコードされます。これは、バイトではありません！
 ```
 
 詳細については Ned Batchelder の[実用的な Unicode][8] を参照してください。
