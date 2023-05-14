@@ -49,7 +49,7 @@ function processIncomingQueueMessage($message) {
 );
 ```
 
-Alternatively, starting version **0.87.0**, if the raw headers are available, a function `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` is provided. Note that the header names must be in lowercase.
+Alternatively, starting with version **0.87.0**, if the raw headers are available, a function `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` is provided. Note that the header names must be in lowercase.
 
 ```php
 $headers = [
