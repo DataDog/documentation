@@ -43,7 +43,7 @@
                     {{ if ne $first_char $curr_letter }}
                         {{ $.Scratch.Set "curr_letter" $first_char }}
                         {{ $letters = $letters | append $first_char }}
-                        <h2 id="{{ $first_char | anchorize }}" class="glossary-letter mb-3" x-cloak x-show="shouldShowGlossaryLetter('{{$first_char | anchorize}}')">{{ $first_char }}</h2>
+                        <h2 id="{{ $first_char | lower }}" class="glossary-letter mb-3" x-cloak x-show="shouldShowGlossaryLetter('{{ $first_char | lower }}')">{{ $first_char }}</h2>
                     {{ end }}
 
                     <!-- `$watch` method filters letter headers on every state change of filterValue - not on state initialization-->
@@ -112,13 +112,17 @@
                 <!-- pushState adds the product query param to url without loading/refreshing the url/page  -->
                 <div class="filters-glossary">
                     <button 
-                    @click="filterValue = ''; filteredLetters = []; pushState('all')" 
-                    class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary">{{.Params.filter_all | upper}}</button> 
+                    @click="filterValue = ''; filteredLetters = []; pushState('all')"
+                    :class="(filterValue === 'all' || !filterValue) && 'active'"
+                    class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+                    data-filter="{{.Params.filter_all}}">{{.Params.filter_all | upper}}</button> 
                     {{ range $products }}
                         {{ $product := . | anchorize}}
                         <button 
-                        @click="filterValue = '{{ $product }}'; filteredLetters = []; pushState('{{ $product }}')" 
-                        class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary">{{ . | upper }}</button>
+                        @click="filterValue = '{{ $product }}'; filteredLetters = []; pushState('{{ $product }}')"
+                        :class="$el.dataset.filter === filterValue && 'active'"
+                        class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+                        data-filter="{{ $product }}">{{ . | upper }}</button>
                     {{ end }}
                 </div>
             </nav>
