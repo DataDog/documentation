@@ -39,7 +39,7 @@ title: プロセッサー
 
 [Datadog ログ構成ページ][1]で、Grok プロセッサープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/parser.png" alt="パース"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/parser.png" alt="パース" style="width:80%;" >}}
 
 **Parse my logs** をクリックして、基底のパイプラインを流れるログの 3 つのパースルールのセットを始動させます。そこから属性の名前を絞り込み、必要に応じて他のタイプのログに新しいルールを追加します。この機能を使用するには、対応するログがインデックス化され、実際に流入している必要があります。除外フィルターを一時的に無効にするか、サンプリングして、これを機能させることができます。
 
