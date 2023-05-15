@@ -282,7 +282,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [12]: /mobile
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
-[15]: /monitors/service_level_objectives/#saved-views
+[15]: /service_management/service_level_objectives/#saved-views
 [16]: /account_management/teams/#associate-resources-with-team-handles
 [17]: /api/latest/events/
 [18]: /dashboards/guide/slo_data_source/
