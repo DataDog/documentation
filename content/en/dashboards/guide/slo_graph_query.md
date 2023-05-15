@@ -50,5 +50,5 @@ The SLO Summary widget filters the SLO metric queries by those additional tags f
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dashboards/widgets/slo/
-[2]: /monitors/service_level_objectives/metric/
+[2]: /service_management/service_level_objectives/metric/
 [3]: /dashboards/template_variables/

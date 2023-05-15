@@ -42,6 +42,8 @@ You can set the timeframe over which traffic is aggregated using the time select
 
 Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
 
+You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`  
+
 ### Facet panels
 
 You can use the facet panels to browse through all of the tags available on your flows, or filter traffic when you don't remember the exact tags you were looking for. Facet panels mirror the tags in your search bar query. Switch between the facet panels with the **Client** and **Server** tabs on top:
