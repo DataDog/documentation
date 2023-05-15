@@ -12,12 +12,12 @@ aliases:
 
 ## Overview
 
-Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bundlers like [webpack][1], or [esbuild][2], due to the use of conditional imports and other issues. While bundlers cannot build `dd-trace`, your application can still use the `dd-trace` and `datadog-lambda-js` libraries provided by the prebuilt Datadog Lambda layer. Follow the instructions below.
+Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bundlers, like [Webpack][1] or [esbuild][2], due to the use of conditional imports and other issues. While bundlers cannot build `dd-trace`, your application can still use the `dd-trace` and `datadog-lambda-js` libraries provided by the prebuilt Datadog Lambda layer. Follow the instructions below.
 
-## webpack
+## Webpack
 1. Follow the [installation instructions for Node.js][3] and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
 2. Exclude `datadog-lambda-js` and `dd-trace`, either by removing them from your `package.json` or by setting an [exclude rule][4]. Excluding them tells the bundler to skip building them as dependencies, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
-3. Mark your dependencies as [externals][5]. This tells the bundler to exclude them from the output bundle, instead they will be packaged in `node_modules`.
+3. Mark your dependencies as [externals][5]. This tells the bundler to exclude them from the output bundle; instead, they are packaged in `node_modules`.
 
     **webpack.config.js**
 
@@ -39,7 +39,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     }
     ```
 
-    If you are using the `serverless-webpack` plugin and have the option `includeModules` set to any value other than `false`. The plugin will automatically [pack external modules under `node_modules`][6]. Therefore, you must force exclude `datadog-lambda-js` and `dd-trace`. Skip this step if you don't use `serverless-webpack` or you don't have the `includeModules` option in your `serverless.yml`.
+    If you are using the `serverless-webpack` plugin and have the option `includeModules` set to any value other than `false`, the plugin automatically [packs external modules under `node_modules`][6]. Therefore, you must force exclude `datadog-lambda-js` and `dd-trace`. Skip this step if you don't use `serverless-webpack` or you don't have the `includeModules` option in your `serverless.yml`.
 
     **serverless.yml**
 
@@ -59,7 +59,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
             - rm -rf node_modules/datadog-lambda-js node_modules/dd-trace
     ```
 
-    To have more control around what dependencies are included, you could also include your `webpack.config.js` in `serverless-webpack` configuration.`
+    To have more control around what dependencies are included, you could also include your `webpack.config.js` in your `serverless-webpack` configuration:
 
     ```yaml
     custom:
@@ -74,7 +74,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
 ## esbuild
 1. Follow the [installation instructions for Node.js][3] and ensure the Datadog Lambda layer for Node.js is added to your Lambda function.
 2. Remove `datadog-lambda-js` and `dd-trace` from your `package.json` and the build process, since they are already available in the Lambda runtime provided by the Datadog Lambda layer.
-3. Mark your dependencies as [externals][7]. This tells the bundler to eclude them from the output bundle, instead they will be packaged in `node_modules`.
+3. Mark your dependencies as [externals][7]. This tells the bundler to eclude them from the output bundle; instead, they are packaged in `node_modules`.
     
     **esbuild.config.js**
     
@@ -88,7 +88,7 @@ Datadog's tracing libraries (`dd-trace`) are known to be not compatible with bun
     })
     ```
 
-    If you are using the `serverless-esbuild` plugin, you can externalize all dependencies with the `esbuild-node-externals` as an esbuild plugin. It will automatically [pack external modules under `node_modules`][8].
+    If you are using the `serverless-esbuild` plugin, you can externalize all dependencies with the `esbuild-node-externals` as an esbuild plugin. automatically [packs external modules under `node_modules`][8].
 
     **serverless.yml**
 
