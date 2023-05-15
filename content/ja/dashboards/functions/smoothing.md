@@ -85,7 +85,7 @@ title: スムーシング
 
 メトリクス `10 + x%10 {*}` は、10 から 1 ずつ増え、データポイントが 10 個になると 10 に戻ります。これに対して、`ewma20(10 + x%10 {*})` は次のようなグラフになります。
 
-{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20"  style="width:80%;">}}
+{{< img src="dashboards/functions/smoothing/ewma20.png" alt="EWMA20" style="width:80%;">}}
 
 ## 中央値 
 
