@@ -1,6 +1,8 @@
 ---
 title: Case Management
 kind: documentation
+aliases:
+- /monitors/case_management/
 further_reading:
 - link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
   tag: "blog"

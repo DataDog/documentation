@@ -2,6 +2,8 @@
 title: Incident Management Analytics
 kind: documentation
 description: Track and analyze aggregated incident management statistics in Dashboards and Notebooks
+aliases:
+- /monitors/incident_management/analytics
 ---
 
 ## Overview
@@ -62,4 +64,4 @@ To configure your graph using Incident Management Analytics data, follow these s
 [4]: https://app.datadoghq.com/notebook/template/11/incident-management-overview
 [5]: /dashboards/querying/#select-your-visualization
 [6]: /dashboards/querying/#create-a-title
-[7]: /monitors/incident_management/incident_settings#property-fields
+[7]: /service_management/incident_management/incident_settings#property-fields

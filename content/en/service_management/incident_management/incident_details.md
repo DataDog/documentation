@@ -2,6 +2,8 @@
 title: Incident Details Page
 kind: documentation
 description: Manage the context and work for an incident
+aliases:
+- /monitors/incident_management/incident_details
 further_reading:
 - link: "dashboards/querying/#incident-management-analytics"
   tag: "Documentation"
@@ -152,18 +154,18 @@ Work through an example workflow in the [Getting Started with Incident Managemen
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/incident_management/#creating-an-incident
-[2]: /monitors/incident_management/#describing-the-incident
-[3]: /monitors/incident_management/#integrations
-[4]: /monitors/incident_management/incident_settings#postmortem-templates
+[1]: /service_management/incident_management/#creating-an-incident
+[2]: /service_management/incident_management/#describing-the-incident
+[3]: /service_management/incident_management/#integrations
+[4]: /service_management/incident_management/incident_settings#postmortem-templates
 [5]: https://app.datadoghq.com/incidents/settings#Property-Fields
 [6]: https://app.datadoghq.com/incidents
-[7]: /monitors/incident_management/analytics
+[7]: /service_management/incident_management/analytics
 [8]: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
 [9]: https://app.datadoghq.com/organization-settings/public-sharing/settings
 [10]: /integrations/slack/?tab=slackapplicationus#manage-incident-tasks
-[11]: /monitors/incident_management/incident_settings#rules
-[12]: /monitors/incident_management/incident_settings#message-templates
+[11]: /service_management/incident_management/incident_settings#rules
+[12]: /service_management/incident_management/incident_settings#message-templates
 [13]: /getting_started/incident_management
 [14]: /account_management/rbac/?tab=datadogapplication
-[15]: /monitors/incident_management/incident_settings/#responder-types
+[15]: /service_management/incident_management/incident_settings/#responder-types

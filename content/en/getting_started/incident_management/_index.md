@@ -5,7 +5,7 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-incident-management'
       tag: 'Learning Center'
       text: 'Introduction to Incident Management'
-    - link: '/monitors/incident_management/datadog_clipboard'
+    - link: '/service_management/incident_management/datadog_clipboard'
       tag: 'Documentation'
       text: 'Datadog Clipboard'
     - link: 'https://www.youtube.com/watch?v=QIambwILy_M'
@@ -17,7 +17,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
       tag: 'Blog'
       text: 'Incident Management with Datadog'
-    - link: '/monitors/incident_management/notification_rules'
+    - link: '/service_management/incident_management/notification_rules'
       tag: 'Documentation'
       text: 'Notification Rules'
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
@@ -191,16 +191,16 @@ You can also declare and edit incidents and quickly communicate to your teams th
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/slack/
-[2]: /monitors/incident_management/datadog_clipboard
+[2]: /service_management/incident_management/datadog_clipboard
 [3]: /notebooks/#overview
-[4]: /monitors/incident_management/#from-a-graph
-[5]: /monitors/incident_management/#from-a-monitor
+[4]: /service_management/incident_management/#from-a-graph
+[5]: /service_management/incident_management/#from-a-monitor
 [6]: /api/latest/incidents/#create-an-incident
 [7]: https://app.datadoghq.com/notebook/list
 [8]: https://app.datadoghq.com/incidents/settings#Messages
-[9]: /monitors/incident_management/#status-levels
-[10]: /monitors/incident_management/notification_rules
+[9]: /service_management/incident_management/#status-levels
+[10]: /service_management/incident_management/notification_rules
 [11]: https://app.datadoghq.com/incidents/settings
-[12]: /mobile/
+[12]: /service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app

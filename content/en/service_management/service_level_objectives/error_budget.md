@@ -2,6 +2,8 @@
 title: Error Budget Alerts
 kind: documentation
 description: "Use Monitors to alert off of the error budget consumption of an SLO"
+aliases:
+- /monitors/service_level_objectives/error_budget/
 further_reading:
 - link: "/monitors/service_level_objectives/"
   tag: "Documentation"
@@ -66,8 +68,8 @@ resource "datadog_monitor" "metric-based-slo" {
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /monitors/service_level_objectives/metric/
-[2]: /monitors/service_level_objectives/monitor/
+[1]: /service_management/service_level_objectives/metric/
+[2]: /service_management/service_level_objectives/monitor/
 [3]: /monitors/service_level_objectives/#key-terminology
 [4]: https://app.datadoghq.com/slo
 [5]: /monitors/notify/
