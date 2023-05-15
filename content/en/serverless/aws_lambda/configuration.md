@@ -337,13 +337,13 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 These keys represent specific service types. If you use one of these keys in the `DD_SERVICE_MAPPING` variable, it will rename *all* upstream service names associated with that particular service type.
 
-- `api_gateway` i.e. DD_SERVICE_MAPPING=`api_gateway|newServiceName`
-- `sns` i.e. DD_SERVICE_MAPPING=`sns|newServiceName`
-- `sqs` i.e. DD_SERVICE_MAPPING=`sqs|newServiceName`
-- `s3` i.e. DD_SERVICE_MAPPING=`s3|newServiceName`
-- `eventbridge` i.e. DD_SERVICE_MAPPING=`eventbridge|newServiceName`
-- `kinesis` i.e. DD_SERVICE_MAPPING=`kinesis|newServiceName`
-- `dynamodb` i.e. DD_SERVICE_MAPPING=`dynamodb|newServiceName`
+- `lambda_api_gateway` i.e. DD_SERVICE_MAPPING=`lambda_api_gateway|newServiceName`
+- `lambda_sns` i.e. DD_SERVICE_MAPPING=`lambda_sns|newServiceName`
+- `lambda_sqs` i.e. DD_SERVICE_MAPPING=`lambda_sqs|newServiceName`
+- `lambda_s3` i.e. DD_SERVICE_MAPPING=`lambda_s3|newServiceName`
+- `lambda_eventbridge` i.e. DD_SERVICE_MAPPING=`lambda_eventbridge|newServiceName`
+- `lambda_kinesis` i.e. DD_SERVICE_MAPPING=`lambda_kinesis|newServiceName`
+- `lambda_dynamodb` i.e. DD_SERVICE_MAPPING=`lambda_dynamodb|newServiceName`
 - `lambda_url` i.e. DD_SERVICE_MAPPING=`lambda_url|newServiceName`
 
 If you wish to rename *specific* upstream services then set use these keys
@@ -361,8 +361,8 @@ If you wish to rename *specific* upstream services then set use these keys
 1. `DD_SERVICE_MAPPING="08se3mvh28.execute-api.eu-west-1.amazonaws.com:new-service-name"`  
    This will specifically rename `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name`, providing fine-grained control over upstream service names.
 
-2. `DD_SERVICE_MAPPING="api_gateway:new-service-name"`  
-   This will rename all `api_gateway` services to `new-service-name`, allowing you to consolidate many services under a single Datadog Service name.
+2. `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"`  
+   This will rename all `lambda_api_gateway` services to `new-service-name`, allowing you to consolidate many services under a single Datadog Service name.
 
 For downstream services, please refer to `DD_SERVICE_MAPPING` in the [respective tracer's config documentation][41] for your language.
 ## Filter or scrub information from logs
