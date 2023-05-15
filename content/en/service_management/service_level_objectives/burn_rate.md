@@ -2,6 +2,8 @@
 title: Burn Rate Alerts
 kind: documentation
 description: "Use Monitors to alert off of the burn rate of an SLO"
+aliases:
+- /monitors/service_level_objectives/burn_rate/
 ---
 {{< jqmath-vanilla >}}
 
@@ -156,8 +158,8 @@ resource "datadog_monitor" "metric-based-slo" {
 ```
 
 
-[1]: /monitors/service_level_objectives/metric/
-[2]: /monitors/service_level_objectives/monitor/
+[1]: /service_management/service_level_objectives/metric/
+[2]: /service_management/service_level_objectives/monitor/
 [3]: https://sre.google/workbook/alerting-on-slos/
 [4]: https://app.datadoghq.com/slo
 [5]: /api/v1/monitors/#create-a-monitor

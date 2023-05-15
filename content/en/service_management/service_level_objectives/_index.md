@@ -3,8 +3,9 @@ title: Service Level Objectives
 kind: documentation
 description: "Track the status of your SLOs"
 aliases:
-  - /monitors/monitor_uptime_widget/
-  - /monitors/slos/
+- /monitors/monitor_uptime_widget/
+- /monitors/slos/
+- /monitors/service_level_objectives/
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
@@ -269,12 +270,12 @@ To view, edit, and delete existing status corrections, click on the **Correction
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/slo
-[2]: /monitors/service_level_objectives/metric/
-[3]: /monitors/service_level_objectives/monitor/
+[2]: /service_management/service_level_objectives/metric/
+[3]: /service_management/service_level_objectives/monitor/
 [4]: /monitors/types/metric/?tab=threshold#alert-grouping
-[5]: /monitors/service_level_objectives/metric/#define-queries
-[6]: /monitors/service_level_objectives/monitor/#set-your-slo-targets
-[7]: /monitors/service_level_objectives/metric/#set-your-slo-targets
+[5]: /service_management/service_level_objectives/metric/#define-queries
+[6]: /service_management/service_level_objectives/monitor/#set-your-slo-targets
+[7]: /service_management/service_level_objectives/metric/#set-your-slo-targets
 [8]: /account_management/rbac/
 [9]: /account_management/rbac/permissions/#service-level-objectives/
 [10]: /account_management/rbac/permissions/#monitors
@@ -282,7 +283,7 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [12]: /mobile
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
-[15]: /monitors/service_level_objectives/#saved-views
+[15]: /service_management/service_level_objectives/#saved-views
 [16]: /account_management/teams/#associate-resources-with-team-handles
 [17]: /api/latest/events/
 [18]: /dashboards/guide/slo_data_source/

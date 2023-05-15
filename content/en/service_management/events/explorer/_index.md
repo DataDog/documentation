@@ -2,7 +2,8 @@
 title: Events Explorer
 kind: documentation
 aliases:
-    - /events/stream/
+- /events/stream/
+- /events/explorer/
 further_reading:
 - link: "/api/v1/events/"
   tag: "Documentation"
@@ -172,6 +173,6 @@ Use the query to control what's displayed in your Events Analytics:
 
 [1]: /logs/explorer/search_syntax/
 [2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#remapper
-[3]: https://docs.datadoghq.com/events/explorer/#create-a-facet
+[3]: /service_management/events/explorer/#create-a-facet
 [4]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [5]: /monitors/notify/

@@ -2,6 +2,8 @@
 title: Monitor-based SLOs
 kind: documentation
 description: "Use Monitors to define the Service Level Objective"
+aliases:
+- /monitors/service_level_objectives/monitor/
 further_reading:
 - link: "/monitors/"
   tag: "Documentation"
@@ -133,6 +135,6 @@ Confirm you are using the preferred SLI type for your use case. Datadog supports
 
 [1]: https://app.datadoghq.com/monitors#create
 [2]: https://app.datadoghq.com/slo
-[3]: /monitors/service_level_objectives/metric/
+[3]: /service_management/service_level_objectives/metric/
 [4]: /synthetics/api_tests/?tab=httptest#alert-conditions
-[5]: /monitors/service_level_objectives/#slo-status-corrections
+[5]: /service_management/service_level_objectives/#slo-status-corrections
