@@ -5,6 +5,7 @@ description: "Track the status of your SLOs"
 aliases:
 - /monitors/monitor_uptime_widget/
 - /monitors/slos/
+- /monitors/service_level_objectives/
 further_reading:
 - link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
   tag: "Blog"
