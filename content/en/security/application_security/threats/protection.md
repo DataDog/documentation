@@ -99,7 +99,7 @@ You can also optionally redirect attackers to a custom deny page and away from y
 
 Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and suspicious requests from In-App WAF. The latter also requires you to configure blocking per service in In-App WAF. 
 
-As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To access this switch, navigate to **Security > Application Security > Configuration > [Protection][16]** and toggling **Protection mode** to off.
+As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Configuration > [Protection][16]** and toggle **Protection mode** to off.
 
 ## Further reading
 
