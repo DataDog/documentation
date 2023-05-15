@@ -19,8 +19,6 @@ Datadog Mobile アプリを使用すると、Datadog からのアラートをモ
 
 iOS デバイスの場合は [Apple App Store][1] から、Android デバイスの場合は [Google Play ストア][2]からアプリをダウンロードします。
 
-{{< img src="mobile/mobile_app_qr_code.png" style="width:40%; background:none; border:none; box-shadow:none;" alt="Datadog モバイルアプリのダウンロード">}}
-
 ### ログイン
 
 US と EU のどちらのリージョンでも、標準認証、Google 認証、または [SAML][3] を使用してログインできます。
