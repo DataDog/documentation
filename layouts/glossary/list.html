@@ -115,7 +115,7 @@
                     @click="filterValue = ''; filteredLetters = []; pushState('all')"
                     :class="(filterValue === 'all' || !filterValue) && 'active'"
                     class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
-                    data-filter="{{.Params.filter_all}}">{{.Params.filter_all | upper}}</button> 
+                    data-filter="{{.Params.filter_all | lower}}">{{.Params.filter_all }}</button> 
                     {{ range $products }}
                         {{ $product := . | anchorize}}
                         <button 
