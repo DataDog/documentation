@@ -15,10 +15,14 @@ exceptions:
   - Amazon Web Services
   - APCu
   - APIs
+  - APM
+  - Application Performance Monitoring
   - APM & Continuous Profiler
   - App Analytics
   - App Service
   - AppVeyor
+  - Application Security Management
+  - Application Vulnerability Management
   - AuthN
   - Autodiscovery
   - AWS Step Functions
@@ -28,24 +32,35 @@ exceptions:
   - Azure App Service Plan
   - Azure Blob Storage
   - Azure Event Hub
+  - Audit Trail
   - BitBucket
   - BuildKite
+  - Browser Monitoring
   - CakePHP
   - Cassandra Nodetool
   - Cassandra Nodetool Integration
   - CentOS
   - Chef
   - CircleCI
+  - CI/CD
+  - CI Visibility
   - Clipboard
+  - Cloud Cost Management
   - Cloud Pub Sub
+  - Cloud Security Management
+  - Cloud Security Posture Management
+  - Cloud SIEM
+  - Cloud Workload Security
   - CloudFormation
   - CloudSQL
   - CloudTrail
   - CloudWatch
   - Cluster Agent
   - Continuous Profiler
+  - Continuous Testing
   - DaemonSet
   - Data Collected
+  - Database Monitoring
   - Datadog
   - DatadogMetric
   - Datadog Agent Manager
@@ -98,6 +113,7 @@ exceptions:
   - IDs
   - iLert
   - Incident Management
+  - Infrastructure Monitoring
   - Ingress Controller
   - Internet Information Services
   - IoT
@@ -136,6 +152,7 @@ exceptions:
   - Mesos Slave Integration
   - Metrics Explorer
   - Metrics without Limits
+  - Mobile Monitoring
   - MongoDB
   - MsTest
   - MySQL
@@ -150,6 +167,7 @@ exceptions:
   - Notebook List
   - npm
   - NXLog
+  - Observability Pipelines
   - OkHttp
   - OneLogin
   - OPcache
@@ -165,6 +183,7 @@ exceptions:
   - OpsWorks
   - Oracle Instant Client
   - Phusion Passenger
+  - Pipeline Visibility
   - Pivotal Platform
   - Postgres
   - PostgreSQL
@@ -181,10 +200,12 @@ exceptions:
   - Redis
   - ReplicaSet
   - RocketPants
+  - Roku Monitoring
   - Root Cause Analysis
   - Route53
   - RSpec
   - Ruby
+  - RUM
   - RumMonitor
   - SafeNet
   - SaltStack
@@ -192,8 +213,13 @@ exceptions:
   - Security Signal
   - Security Signals
   - SELinux
+  - Sensitive Data Scanner
+  - Serverless APM
   - Serverless Framework
+  - Serverless Monitoring
+  - Serverless Workload Monitoring
   - Service Checks
+  - Session Replay
   - Siri
   - Slack
   - SLIs
@@ -209,12 +235,14 @@ exceptions:
   - StatsD
   - Sumo Logic
   - Swift
+  - Synthetic Monitoring
   - Syslog
   - sysOID
   - System Core
   - System Swap
   - Teamcity
   - Terraform
+  - Testing Visibility
   - TokuMX
   - Tracing Without Limits
   - Trello
@@ -226,6 +254,8 @@ exceptions:
   - Unix Domain Socket
   - URLs
   - User Datagram Protocol
+  - USM
+  - Universal Service Monitoring
   - Varnish
   - Vector
   - Vertica

@@ -335,6 +335,10 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
+<div class="alert alert-info">
+  コンテナ Agent または Kubernetes で DogStatsD を使用する場合、Unix ドメインソケットを使用している場合は <code>$DD_DOGSTATSD_SOCKET</code> 環境変数を、ホストポートバインディング方式を使用している場合は <code>$DD_AGENT_HOST</code> 環境変数を使用して、StatsD メトリクスの転送先のホストをインスタンス化する必要があります。
+</div>
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
@@ -430,10 +434,6 @@ using (var dogStatsdService = new DogStatsdService())
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-<div class="alert alert-info">
-  コンテナ Agent または Kubernetes で DogStatsD を使用する場合、Unix ドメインソケットを使用している場合は <code>$DD_DOGSTATSD_SOCKET</code> 環境変数を、ホストポートバインディング方式を使用している場合は <code>$DD_AGENT_HOST</code> 環境変数を使用して、StatsD メトリクスの転送先のホストをインスタンス化する必要があります。
-</div>
 
 ### クライアントのインスタンス化パラメーター
 

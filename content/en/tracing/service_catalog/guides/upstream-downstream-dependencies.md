@@ -21,5 +21,5 @@ To see incident statuses of your service's upstream and downstream dependencies,
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/incident_management/
+[1]: /service_management/incident_management/
 [2]: /integrations/pagerduty/

@@ -472,7 +472,7 @@ class AppServiceProvider extends ServiceProvider
         $monolog->pushProcessor(function ($record) use ($useJson) {
             $context = \DDTrace\current_context();
             if ($useJson === true) {
-                $record['dd'] = [
+                $record['extra']['dd'] = [
                     'trace_id' => $context['trace_id'],
                     'span_id'  => $context['span_id'],
                 ];

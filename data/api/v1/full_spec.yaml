@@ -15485,6 +15485,7 @@ components:
         analyzed_logs:
           description: Contains the number of analyzed logs.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16771,6 +16772,7 @@ components:
         indexed_events_count:
           description: Contains the number of spans indexed.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16800,6 +16802,7 @@ components:
           description: Contains the total number of bytes ingested for APM spans during
             a given hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16932,11 +16935,13 @@ components:
           description: Total logs indexed with this retention period during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         live_indexed_events_count:
           description: Live logs indexed with this retention period during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16948,6 +16953,7 @@ components:
           description: Rehydrated logs indexed with this retention period during a
             given hour.
           format: int64
+          nullable: true
           type: integer
         retention:
           description: The retention period in days or "custom" for all custom retention
@@ -17051,6 +17057,7 @@ components:
         indexed_events_count:
           description: Contains the number of netflow events indexed.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
