@@ -772,7 +772,7 @@ backend datadog-remote-configuration
     # The following configuration is for HAProxy 1.8 and newer
     server-template mothership 5 config.{{< region-param key="dd_site" >}}:443  check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # Uncomment the following configuration for older HAProxy versions
-    # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATE
+    # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
 ```
 
@@ -1208,9 +1208,9 @@ network_devices:
             
 #remove this section if your environment does not support Remote Configuration
 remote_config:
-    logs_dd_url: nginx.example.com:3846
+    rc_dd_url: nginx.example.com:3846
     # Comment the line below to use encryption between the Agent and NGINX
-    logs_no_ssl: true
+    no_tls: true
 ```
 
 
