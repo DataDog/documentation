@@ -8,12 +8,11 @@ further_reading:
   text: "Application Security Management with Datadog"
 ---
 
-<div class="alert alert-info">If your service is running <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
-
 ## Overview
 
-Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Suspicious requests are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
+If your service is running [an Agent with Remote Configuration enabled and a tracing library version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
 
+Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Suspicious requests are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
 ## Prerequisites 
 
@@ -25,7 +24,7 @@ To leveraging protection capabilities for your service:
 - Update your tracing library to at least the minimum version needed to turn on protection. For details, see the ASM capabilities support section of [Compatibility][12] for your service's language.
 - If you plan to use authenticated user blocking, [add user information to traces][4].
 
-## Blocking Attackers (IPs/Authenticated Users)
+## Blocking attackers (IPs and authenticated users)
 
 You can block attackers that are flagged in ASM [Security Signals][5] temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
 
@@ -34,12 +33,13 @@ You can block attackers that are flagged in ASM [Security Signals][5] temporaril
 
 From there, all ASM-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` or `security_response.block_user` and displayed in the [Trace Explorer][6]. Services where ASM is disabled aren't protected.
 
-## Respond to threats in real-time by automating attacker blocking
-In addition to manually blocking attackers as described in the section above, you can configure automation rules to have ASM automatically block attackers flagged in Security Signals. 
+## Respond to threats in real time by automating attacker blocking
 
-To get started, navigate to Security => Application Security => Configuration => [Detection Rules](https://app.datadoghq.com/security/configuration/asm/rules) in the Datadog UI. You can create a new rule or edit an existing rule (rule type = Application security). For example, you can create a rule to trigger “Critical” severity signals when Credential Stuffing attacks are detected and automatically block the associated attackers' IP addresses for 30 minutes.
+In addition to manually blocking attackers, you can configure automation rules to have ASM automatically block attackers that are flagged in Security Signals. 
 
-**Note**: You need to instrument your services to be able to block authenticated attackers. See [User Monitoring and Protection](https://docs.datadoghq.com/security/application_security/threats/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) for more details.
+To get started, navigate to **Security > Application Security > Configuration > [Detection Rules][14]**. You can create a new rule or edit an existing rule with type _Application security_. For example, you can create a rule to trigger `Critical` severity signals when Credential Stuffing attacks are detected, and automatically block the associated attackers' IP addresses for 30 minutes.
+
+**Note**: You must instrument your services to be able to block authenticated attackers. See [User Monitoring and Protection][15] for more details.
 
 ## Denylist
 
@@ -69,15 +69,19 @@ Manage In-App WAF by navigating to Security --> Application Security --> Configu
 
 View blocked suspicious requests in the [Trace Explorer][11] by filtering on the facet `Blocked:true`.
 
-{{< img src="security/application_security/blocked-true.png" alt="ASM Trace Exporer filtered using facet Blocked set to true." style="width:100%;" >}}
+{{< img src="security/application_security/blocked-true.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
 
 ### Configure In-App WAF
-1. [**Enable Remote Configuration**](https://docs.datadoghq.com/agent/guide/how_remote_config_works/#enabling-remote-configuration)(prerequisite) - so that your ASM-enabled services start showing up under In-App WAF. This is required for Datadog to securely push In-App WAF configuration from Datadog backend to the Tracer library in your infrastructure. 
-2. **Associate your ASM/RC-enabled services with a policy**
-- Once Remote Configuration (RC) is enabled on a service, it would show up under “Datadog Recommended” policy by default. Datadog Recommended is a managed policy and read-only, i.e. you cannot modify the status (monitoring, blocking or disabled) for individual rules. 
-- If you need granular control, clone the Datadog Recommended policy to create your own custom policy where rule statuses can be modified. Proceed to associate one or more of your services with this custom policy.
-3. **Configure blocking per service** - By default, no requests are blocked even if certain In-App WAF rule statuses are in “blocking”. Navigate [here](https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=services) to turn on “blocking” mode per service.
-## Customize Protection behavior
+
+1. [**Enable Remote Configuration**][2] so that your ASM-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure. 
+
+2. **Associate your ASM/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, it appears under the _Datadog Recommended_ policy by default. Datadog Recommended is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
+
+   If you need granular control, clone the _Datadog Recommended_ policy to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
+
+3. **Configure blocking for each service**. By default, no requests are blocked even if certain In-App WAF rule statuses are blocking. Navigate to **Security > Configuration > Application > [In-App WAF][13]** to turn on blocking mode for a service.
+
+## Customize protection behavior
 
 ### Customize response to blocked requests
 
@@ -85,17 +89,17 @@ View blocked suspicious requests in the [Trace Explorer][11] by filtering on the
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
 
-The default HTTP response status code while serving the deny page to attackers is 403 FORBIDDEN. You can override the response code to 200 OK or 404 NOT FOUND when the deny page is served thereby masking the fact that the attacker has been detected and blocked.
+The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > Application Security > Configuration > [Protection][16]**.
 
-You can also redirect attackers to a custom deny page and away from your critical services/infrastructure. Redirect URL as well as the type of redirect, i.e. permanent (301 response code) or temporary (302 response code), needs to be specified. 
+You can optionally mask the fact that the attacker has been detected and blocked by overriding the response code to be `200 OK` or `404 NOT FOUND` when the deny page is served.
 
-To get started, navigate to Security => Application Security => Configuration => [Protection](https://app.datadoghq.com/security/configuration/asm/protection-behaviour) settings page.
+You can also optionally redirect attackers to a custom deny page and away from your critical services and infrastructure. Specify a redirect URL and the type of redirect, for example permanent (`301` response code) or temporary (`302` response code). 
 
-### Disable Protection across ALL services with 1-click (Protection mode)
-"Protection mode" is ON by default and is a toggle available to quickly disable blocking across ALL your services. To elaborate, requests can be blocked from two sections primarily in the Datadog UI -  all attacker requests from Security Signals and suspicious requests from In-App WAF. The latter also requires you to "configure blocking per service" in In-App WAF. 
+### Disable protection across all services with (Disabling protection mode)
 
-As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, we want to provide you with a kill-switch to quickly stop ALL blocking across ALL services. You can do so by toggling OFF the “Protection mode”.
-To access this switch, navigate to Security => Application Security => Configuration => [Protection](https://app.datadoghq.com/security/configuration/asm/protection-behaviour) settings page.
+Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and suspicious requests from In-App WAF. The latter also requires you to configure blocking per service in In-App WAF. 
+
+As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To access this switch, navigate to **Security > Application Security > Configuration > [Protection][16]** and toggling **Protection mode** to off.
 
 ## Further reading
 
@@ -113,3 +117,7 @@ To access this switch, navigate to Security => Application Security => Configura
 [10]: /security/application_security/threats/inapp_waf_rules/
 [11]: https://app.datadoghq.com/security/appsec/traces
 [12]: /security/application_security/enabling/compatibility/
+[13]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=services
+[14]: https://app.datadoghq.com/security/configuration/asm/rules
+[15]: /security/application_security/threats/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
+[16]: https://app.datadoghq.com/security/configuration/asm/protection-behaviour
