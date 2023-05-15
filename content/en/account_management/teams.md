@@ -119,7 +119,7 @@ To enforce a strict membership model, configure your default team settings so **
 [3]: /service_management/incident_management/incident_details#overview-section
 [4]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [5]: /tracing/service_catalog/setup#add-service-definition-metadata
-[6]: /monitors/service_level_objectives/#slo-tags
+[6]: /service_management/service_level_objectives/#slo-tags
 [7]: https://app.datadoghq.com/dashboard/lists
 [8]: https://app.datadoghq.com/services
 [9]: https://app.datadoghq.com/incidents

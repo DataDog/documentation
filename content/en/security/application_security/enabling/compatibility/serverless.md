@@ -69,4 +69,4 @@ ASM Threat Detection supports HTTP requests as function input only. These typica
 [1]: /serverless/distributed_tracing/
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
-[4]: /serverless/guide/serverless_tracing_and_webpack/
+[4]: /serverless/guide/serverless_tracing_and_bundlers/

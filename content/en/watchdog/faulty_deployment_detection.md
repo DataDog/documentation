@@ -41,5 +41,5 @@ Watchdog attempts to determine if the new deployment is a plausible cause of the
 - This error pattern is common during deployments of the service, even when the new code version is not faulty.
 
 [1]: https://app.datadoghq.com/apm/services
-[2]: /events/explorer
+[2]: /service_management/events/explorer
 [3]: https://app.datadoghq.com/monitors/create
