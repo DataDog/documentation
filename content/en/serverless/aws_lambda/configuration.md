@@ -354,7 +354,7 @@ If you wish to rename *specific* upstream services then set use these keys
 - For eventbridge use the event.source i.e. `my.event|newServiceName`
 - For Kinesis use the stream ARN i.e. `arn:aws:kinesis:us-east-1:123456789012:stream/MyStream|newServiceName`
 - For DynamoDB use the table ARN i.e. `arn:aws:dynamodb:us-east-1:123456789012:table/ExampleTableWithStream|newServiceName`
-- Lambda URLS: use the domain i.e. `a8hyhsshac.lambda-url.eu-south-1.amazonaws.com|newServiceName`
+- Lambda URLS: use the domain i.e. `a8hyhsshac.lambda-url.us-east-1.amazonaws.com|newServiceName`
 
 ### Examples
 
