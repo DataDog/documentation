@@ -272,7 +272,7 @@ The following ASM capabilities are not supported for Lambda functions:
 
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
-[4]: /serverless/guide/serverless_tracing_and_webpack/
+[4]: /serverless/guide/serverless_tracing_and_bundlers/
 
 {{< /programming-lang >}}
 
