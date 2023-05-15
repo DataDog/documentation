@@ -18,7 +18,7 @@ Certaines anciennes versions de <code>datadog-lambda-java</code> importent <code
 
 Pour ingérer des traces AWS Lambda, des métriques optimisées, des métriques custom et des logs, vous devez utiliser la [fonction Lambda du Forwarder Datadog][2].
 
-Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (`java8.al2`) ou Java 11 (`java11`).
+Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (`java8.al2`), Java 11 (`java11`) ou Java 17 (`java17`).
 
 ## Procédure à suivre
 

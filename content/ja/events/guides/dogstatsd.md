@@ -32,7 +32,7 @@ event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <
 | `<message>`          | 文字列          | 〇      | イベントのテキスト本文                                                                 |
 | `<alert_type>`       | 文字列          | ✕       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
 | `<aggregation_key>`  | 文字列          | ✕       | イベントを集計するために使用するキー                                                        |
-| `<source_type_name>` | 文字列          | ✕       | ソースタイプの名前                                                                       |
+| `<source_type_name>` | 文字列          | ✕       | ソースタイプ名 (デフォルトは `my_apps`)                                               |
 | `<date_happened>`    | 整数         | ✕       | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
 | `<priority>`         | 文字列          | ✕       | イベントの優先度を指定します (`normal` または `low`)                                    |
 | `<tags>`             | 文字列のリスト | ✕       | このイベントに関連付けられるタグのリスト                                                  |
@@ -141,7 +141,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())   
         {   
-            dogStatsdService.Configure(dogstatsdConfig);    
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             dogStatsdService.Event("An error occurred", "Error message", alertType: "error", date_happened='TIMESTAMP', tags: new[] { "env:dev" }); 
         }   
     }   

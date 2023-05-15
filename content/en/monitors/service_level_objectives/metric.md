@@ -8,23 +8,26 @@ further_reading:
 - link: "/metrics/"
   tag: "Documentation"
   text: "More information about metrics"
+- link: "/monitors/service_level_objectives/"
+  tag: "Documentation"
+  text: "SLO overview, configuration, and calculation"
 ---
 
 ## Overview
 
-Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3].
+Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3]. For an overview on how SLOs are configured and calculated, see the [Service Level Objective][4] page.
 
 {{< img src="monitors/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO" >}}
 
 ## Setup
 
-On the [SLO status page][4], select **New SLO +**. Then select [**Metric**][5].
+On the [SLO status page][5], select **New SLO +**. Then select [**Metric**][6].
 
 ### Define queries
 
 1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly.
 2. Use the `FROM` field to include or exclude specific groups using tags.
-3. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][6].
+3. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][7].
 4. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
 5. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
 
@@ -44,7 +47,7 @@ By grouping these SLIs you can visualize each individual group's status, good re
 
 By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
 
-**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][7].
+**Note**: If you are using monitor-based SLIs, you can also [view monitor groups][8].
 
 ### Set your SLO targets
 
@@ -63,7 +66,8 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 [1]: https://docs.datadoghq.com/tracing/generate_metrics/
 [2]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
 [3]: https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics/#overview
-[4]: https://app.datadoghq.com/slo
-[5]: https://app.datadoghq.com/slo/new/metric
-[6]: /metrics/distributions/#threshold-queries
-[7]: /monitors/service_level_objectives/monitor/
+[4]: /monitors/service_level_objectives
+[5]: https://app.datadoghq.com/slo
+[6]: https://app.datadoghq.com/slo/new/metric
+[7]: /metrics/distributions/#threshold-queries
+[8]: /monitors/service_level_objectives/monitor/

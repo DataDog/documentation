@@ -18,7 +18,7 @@ assets:
     '[php_opcache] Cache Full has been detected': assets/monitors/php-opcache_expunges.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
 categories: []
@@ -73,7 +73,7 @@ tile:
 1. [開発ツールキット][3]をインストールします。
  どのマシンでも。
 
-2. `ddev release build php_opcache` を実行してパッケージをビルドします。
+2. `ddev -e release build php_opcache` を実行してパッケージをビルドします。
 
 3. [Datadog Agent をダウンロードします][4]。
 

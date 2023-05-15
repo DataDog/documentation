@@ -1,16 +1,17 @@
 ---
-title: オートディスカバリーコンテナ識別子
-kind: ドキュメント
 aliases:
-  - /ja/agent/autodiscovery/ad_identifiers
+- /ja/agent/autodiscovery/ad_identifiers
 further_reading:
-  - link: /agent/kubernetes/integrations/
-    tag: ドキュメント
-    text: オートディスカバリーのインテグレーションテンプレートの作成とロード
-  - link: /agent/guide/autodiscovery-management/
-    tag: ドキュメント
-    text: Agent オートディスカバリーに含めるコンテナの管理
+- link: /agent/kubernetes/integrations/
+  tag: ドキュメント
+  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
+- link: /agent/guide/autodiscovery-management/
+  tag: ドキュメント
+  text: Agent オートディスカバリーに含めるコンテナの管理
+kind: ドキュメント
+title: オートディスカバリーコンテナ識別子
 ---
+
 オートディスカバリーコンテナ識別子、すなわち `ad_identifiers` を使用すると、オートディスカバリーコンフィギュレーションファイルテンプレートを特定のコンテナに適用できます。それには[コンテナイメージの短い名前](#short-image-container-identifiers)を使用する方法と、[カスタムなオートディスカバリーコンテナ識別子](#custom-autodiscovery-container-identifiers)を使用する方法があります。
 
 **注**: 他のコンフィギュレーションタイプ（key-value ストア、Docker ラベル、または Kubernetes ポッドアノテーション）の場合、インテグレーションのコンフィギュレーションテンプレートとコンテナとのマッチングには、key-value ストア、ラベル、またはアノテーションコンフィギュレーションに含まれる `<CONTAINER_IDENTIFIER>` が使用されます。
@@ -19,7 +20,7 @@ further_reading:
 
 以下のオートディスカバリーコンフィギュレーションテンプレートを特定のコンテナに適用するために、`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` に**コンテナイメージの短い名前**を指定します。
 
-```text
+```yaml
 ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
@@ -67,7 +68,7 @@ ad_identifiers:
 
 同じイメージを実行しているコンテナに異なるオートディスカバリーコンフィギュレーションテンプレートを適用するには、カスタムな値の `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>` を使用し、それを `com.datadoghq.ad.check.id` ラベルで指定してコンテナを識別します。以下のコンフィギュレーションファイルを使用する場合、
 
-```text
+```yaml
 ad_identifiers:
   <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 
@@ -78,13 +79,28 @@ instances:
   <INSTANCES_CONFIG>
 ```
 
-以下のラベルをこのオートディスカバリーコンフィギュレーションテンプレートに追加することで、コンテナを特定できます。
+コンテナに対して有効にするには
 
-```text
+{{< tabs >}}
+{{% tab "Docker" %}}
+このオートディスカバリー構成テンプレートを docker の特定のコンテナに適用するために、以下のラベルを追加します。
+
+```yaml
 com.datadoghq.ad.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
 ```
-
 **注**: `com.datadoghq.ad.check.id` ラベルはイメージの名前よりも優先されます。
+
+{{% /tab %}}
+{{% tab "Kubernetes" %}}
+Kubernetes に以下のアノテーションを追加して、このオートディスカバリー構成を適用します (`<CONTAINER_IDENTIFIER>` はポッド内のコンテナ名です)。
+
+```text
+ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id: <INTEGRATION_AUTODISCOVERY_IDENTIFIER>
+```
+
+**注**: このアノテーションは、バージョン `6.25.0` と `7.25.0` 以降にのみ適用されます。`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.check.id` ラベルはイメージ/名前より優先されます。
+{{% /tab %}}
+{{< /tabs >}}
 
 ## その他の参考資料
 
