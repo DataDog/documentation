@@ -67,7 +67,7 @@ The following products and features are supported with Remote Config:
 
 ### Cloud Workload Security (CWS)
 
-<div class="alert alert-info">This feature is in public beta.</div>
+<div class="alert alert-info">This feature is in beta.</div>
 
 - **Automatic default agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up Cloud Workload Security][11] for more information.
 
