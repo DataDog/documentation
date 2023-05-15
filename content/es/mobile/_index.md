@@ -20,8 +20,6 @@ La aplicación móvil de Datadog te permite consultar las alertas de Datadog des
 
 Descarga la aplicación desde el [App Store de Apple][1] si tu dispositivo es de iOS o desde [Google Play][2] si es de Android.
 
-{{< img src="mobile/mobile_app_qr_code.png" style="width:40%; background:none; border:none; box-shadow:none;" alt="Descargar la aplicación móvil de Datadog">}}
-
 ### Inicio de sesión
 
 Puedes iniciar sesión utilizando la autenticación estándar, la autenticación de Google o [SAML][3], independientemente de si resides en EE. UU. o en la UE.
@@ -45,8 +43,8 @@ También tienes la opción de autenticarte mediante un código QR o introducien
 
 ##### Introducción manual
 
-1. Para introducir manualmente el id. de SAML, abre la aplicación móvil de Datadog y pulsa el botón “Using Single Sign-On (SAML)?” (¿Quieres usar el inicio de sesión único [SAML]?).
-2. Pulsa el botón “Use another method to login” (Usar otro método para iniciar sesión) e introduce el id. de SAML manualmente.
+1. Para introducir manualmente el ID de SAML, abre la aplicación móvil de Datadog y pulsa el botón “Using Single Sign-On (SAML)?” (¿Quieres usar el inicio de sesión único [SAML]?).
+2. Pulsa el botón “Use another method to login” (Usar otro método para iniciar sesión) e introduce el ID de SAML manualmente.
 
 Si haces clic en **Authorize** (Autorizar) al iniciar sesión, vincularás el dispositivo móvil que estés usando en ese momento con tu cuenta. Por motivos de seguridad, tendrás que repetir este procedimiento una vez al mes.
 
@@ -54,7 +52,7 @@ Si haces clic en **Authorize** (Autorizar) al iniciar sesión, vincularás el di
 
 Si sigues teniendo problemas al iniciar sesión con SAML, tu proveedor de identidades puede forzar el inicio de sesión. Para más información acerca de cómo habilitar SAML mediante IdP, consulta nuestra página de [SAML mediante IdP][5].
 
-## Monitores
+## Monitors
 
 {{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="página de monitores">}}
 
@@ -76,12 +74,12 @@ En la página de Dashboards, puedes consultar y buscar todos los dashboards a lo
 
 {{< img src="mobile/incidents.png" alt="página de incidencias" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-En la página de Incidents (Incidencias), puedes consultar, buscar y filtrar todas las incidencias a las que tienes acceso en tu cuenta de Datadog con la aplicación móvil de Datadog para garantizar su pronta resolución, independientemente de dónde te encuentres. Asimismo, puedes declarar y editar incidencias y comunicarte fácilmente con tus equipos a través de las integraciones con Slack, Zoom y muchas otras herramientas. Para más información sobre las incidencias, consulta la [documentación acerca de la gestión de incidencias de Datadog][12].
+En la página Incidents (Incidencias), puedes consultar, buscar y filtrar todas las incidencias a las que tienes acceso en tu cuenta de Datadog con la aplicación móvil de Datadog para que puedan solucionarse rápidamente estés donde estés. También puedes notificar y editar incidencias y comunicarte fácilmente con tus equipos a través de las integraciones con Slack, Zoom y muchas otras herramientas. Para obtener más información sobre las incidencias, consulta la [documentación acerca de la gestión de incidencias de Datadog][12].
 
 ### Crear una incidencia
 
 1. Haz clic en la pestaña Incidents (Incidencias), situada en la barra de la parte inferior, para ir a la lista de incidencias.
-2. Haz clic en el botón “+” en la esquina superior derecha.
+2. Haz clic en el botón “+” de la esquina superior derecha.
 3. Establece el título, la gravedad y el responsable.
 
 ### Recibir notificaciones push de incidencias
@@ -107,7 +105,7 @@ Para ver los problemas de una forma más detallada, pulsa sobre cualquiera de la
 
 También puedes personalizar tus widgets de incidencias abiertas aplicando los siguientes filtros:
 
-- Organization (Organización)
+- Organización
 - Severity levels (Niveles de gravedad)
 - Customers impacted (Clientes afectados)
 - Ordering (Orden)
@@ -231,7 +229,7 @@ También puedes especificar que un dashboard se abra de forma predeterminada cad
 {{% tab "iOS" %}}
 
 - Mantén pulsada tu pantalla de inicio durante un rato.
-- Pulsa el botón “+” en la esquina superior izquierda de la pantalla.
+- Pulsa el botón “+” de la esquina superior izquierda de la pantalla.
 - Busca los widgets de “Datadog”.
 - Selecciona el tamaño que prefieras (el pequeño muestra un SLO; el mediano, un SLO y la representación temporal de su estado).
 - Arrastra el widget para colocarlo en la localización que prefieras de la pantalla.
@@ -283,7 +281,7 @@ Puedes mostrar los SLOs de varias organizaciones en la pantalla de inicio de tu 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-La pantalla de configuración mostrará todas las organizaciones en las que has iniciado sesión. Si no encuentras la tuya, vuelve a iniciar sesión.
+La pantalla de configuración mostrará todas las organizaciones en las que has iniciado sesión. Si no encuentras la tuya, vuelve a iniciar sesión en ella.
 
 
 {{% /tab %}}
@@ -330,7 +328,7 @@ Consulta tus [monitores][16] desde tu pantalla de inicio gracias a los widgets d
 {{% tab "iOS" %}}
 
 - Mantén pulsada la pantalla de inicio durante un rato.
-- Pulsa el botón “+” en la esquina superior izquierda de la pantalla.
+- Pulsa el botón “+” de la esquina superior izquierda de la pantalla.
 - Busca los widgets de “Datadog”.
 - Selecciona el tamaño que prefieras (el pequeño muestra dos vistas guardadas del monitor; el mediano puede mostrar hasta tres; el grande, hasta seis).
 - Arrastra el widget para colocarlo en la localización que prefieras de la pantalla.
@@ -430,12 +428,12 @@ Mantén pulsado el icono de la aplicación durante un rato para que aparezca una
 
 **Android**: Para crear iconos de acceso directo hacia tus dashboards, mantén pulsado el icono de la aplicación de Datadog durante un rato y, luego, levanta el dedo. Si la aplicación tiene accesos directos, te mostrará una lista con todos ellos. Pulsa el que te interese y, sin levantar el dedo, arrástralo y suéltalo en una localización diferente de la pantalla. Así, tendrás un icono de acceso directo independiente.
 
-**iOS**: Crea atajos de Siri para acceder a dashboards y monitores de Datadog mediante la aplicación Atajos. Para que la creación de un atajo sea posible, es necesario que antes efectúes la acción que te interese una vez, como mínimo, en la aplicación. Por ejemplo, si quieres crear un atajo que responda a la acción “Abrir el dashboard de información general de AWS”, primero tienes que abrir el dashboard de información general de AWS en tu aplicación móvil, como mínimo, una vez.
+**iOS**: Crea atajos de Siri para acceder a dashboards y monitores de Datadog mediante la aplicación Atajos. Para poder crear un atajo, primero debes realizar la acción que te interese al menos una vez en la aplicación. Por ejemplo, si quieres crear un atajo que responda a la acción “Abrir el dashboard de información general de AWS”, abre primero el dashboard de información general de AWS en tu aplicación móvil al menos una vez.
 
 Con el atajo, puedes acceder a tus dashboards y monitores realizando tres acciones clave:
 
 - Ancla el atajo como si fuese un icono en tu pantalla de inicio. Para ello, ve a la aplicación Atajos y abre el menú de edición del atajo de tu dashboard.
-- Voz de Siri: Pronuncia el nombre de tu atajo, como puede ser “Abrir la información general de AWS”, y Siri abrirá el dashboard en la aplicación.
+- Voz de Siri: Di el nombre del atajo, por ejemplo, “Abrir la información general de AWS”, y Siri abrirá el dashboard en la aplicación.
 - Sugerencias de Siri: Siri asimila tu rutina y te sugiere la creación de atajos hacia tus dashboards cuando más los necesitas. Puede hacerlo mediante un banner visible en tu pantalla de inicio o bloqueo, a través del apartado de búsqueda del iPhone o con los widgets de sugerencias de Siri de iOS 14.
 
 {{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Atajos">}}
@@ -474,7 +472,7 @@ Si necesitas ayuda para solucionar problemas, [contacta con el equipo de asisten
 [5]: /es/account_management/saml/mobile-idp-login/
 [6]: /es/monitors/manage/#search
 [7]: https://app.datadoghq.com/monitors
-[8]: /es/monitors/create/#monitor-types
+[8]: /es/monitors/types
 [9]: /es/dashboards/template_variables/#saved-views
 [10]: https://app.datadoghq.com/dashboard/lists
 [11]: /es/dashboards/
