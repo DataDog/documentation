@@ -580,7 +580,7 @@ window.DD_RUM &&
 
 ### グローバルコンテキストプロパティを追加する
 
-RUM を初期化した後、`setGlobalContextProperty(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM  イベントにコンテキストを追加します。
+RUM を初期化した後、`setGlobalContextProperty(key: string, value: any)` API を使用してアプリケーションから収集したすべての RUM イベントにコンテキストを追加します。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
