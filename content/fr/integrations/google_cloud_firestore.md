@@ -1,33 +1,35 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- google cloud
+- log collection
+- mobile
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Firestore."
+description: Surveillez des métriques clés de Google Cloud Firestore.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_firestore/
 draft: false
 git_integration_title: google_cloud_firestore
 has_logo: true
 integration_id: google-cloud-firestore
-integration_title: "Google\_Cloud\_Firestore"
+integration_title: Google Cloud Firestore
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_firestore
-public_title: "Intégration Datadog/Google\_Cloud\_Firestore"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Firestore."
+public_title: Intégration Datadog/Google Cloud Firestore
+short_description: Surveillez des métriques clés de Google Cloud Firestore.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Firestore est une base de données flexible et évolutive pour le développement mobile, web et serveur depuis Firebase et Google Cloud Platform.
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Firestore.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

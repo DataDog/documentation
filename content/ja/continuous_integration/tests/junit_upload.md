@@ -28,7 +28,7 @@ JUnit テストレポートファイルは、テスト名とスイート名、�
 
 `npm` を使用して [`datadog-ci`][3] CLI をグローバルにインストールします。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
@@ -36,28 +36,28 @@ npm install -g @datadog/datadog-ci
 
 <div class="alert alert-warning"><strong>注</strong>: スタンドアロンバイナリは<strong>ベータ版</strong>であり、その安定性は保証されていません。</div>
 
-CI で NodeJS をインストールすることに問題がある場合は、スタンドアロンバイナリが [Datadog CI リリース][4]で提供されています。_linux-x64_、_darwin-x64_ (MacOS)、_win-x64_ (Windows) のみがサポートされています。インストールするには、ターミナルで以下を実行します。
+CI で Node.js をインストールすることに問題がある場合は、スタンドアロンバイナリが [Datadog CI リリース][4]で提供されています。_linux-x64_、_darwin-x64_ (MacOS)、_win-x64_ (Windows) のみがサポートされています。インストールするには、ターミナルで以下を実行します。
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
 次に、`datadog-ci` と任意のコマンドを実行します:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci version
 {{< /code-block >}}
 
 {{< /tabs >}}
 
 {{% tab "MacOS" %}}
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
 次に、`datadog-ci` と任意のコマンドを実行します:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci version
 {{< /code-block >}}
 
@@ -83,7 +83,7 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 JUnit XML テストレポートを Datadog にアップロードするには、次のコマンドを実行し、`--service` パラメーターを使用してテストされたサービスまたはライブラリの名前と、XML レポートファイルまたはそれらを含むディレクトリへの 1 つ以上のファイルパスを指定します。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
@@ -158,7 +158,7 @@ pipeline {
 {{% tab "Bash" %}}
 CI システムがサブシェルを許可している場合
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 $(./run-tests.sh); export tests_exit_code=$?
 datadog-ci junit upload --service service_name ./junit.xml
 if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
@@ -190,6 +190,13 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 **デフォルト**: (none)<br/>
 **例**: `team:backend`<br/>
 **注**: `--tags` と `DD_TAGS` 環境変数を使用して指定されたタグがマージされます。`--tags` と `DD_TAGS` の両方に同じキーが表示される場合、環境変数 `DD_TAGS` の値が優先されます。
+
+`--xpath-tag`
+:  キーと xpath 表現を `key=expression` の形式で指定します。これにより、ファイル内のテスト用タグをカスタマイズできます (`--xpath-tag` パラメーターは複数回指定できます)。<br/>
+サポートされている表現の詳細については、[XPath 表現によるメタデータの提供][9]を参照してください。<br/>
+**デフォルト**: (none)<br/>
+**例**: `test.suite=/testcase/@classname`<br/>
+**注**: `--xpath-tag` を使用し、`--tags` または `DD_TAGS` 環境変数とともに指定されたタグはマージされます。xpath-tag の値は通常テストごとに異なるため、最優先されます。
 
 `--logs` **(ベータ版)**
 : XML レポートの内容を [Logs][6] として転送できるようにします。`<system-out>`、`<system-err>`、`<failure>` 内のコンテンツはログとして収集されます。`<testcase>` 内の要素からのログは自動的にテストに接続されます。<br/>
@@ -322,9 +329,109 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 **例**: `iPhone 12 Pro Simulator`、`iPhone 13 (QA team)`
 
 
+## XPath 表現によるメタデータの提供
+
+アップロードされた XML レポートに含まれるすべてのテストにカスタムタグをグローバルに適用する `--tags` CLI パラメーターと `DD_TAGS` 環境変数に加え、`--xpath-tag` パラメーターは、XML 内の各種属性から各テストにタグを追加するカスタムルールを提供します。
+
+提供されるパラメーターは `key=expression` の形式でなければならず、`key` は追加されるカスタムタグの名前、`expression` はサポートされている有効な [XPath][10] 表現になります。
+
+XPath 構文が馴染みが深いため使用されますが、サポートされている表現は下記のみとなります。
+
+
+`/testcase/@attribute-name`
+:  `<testcase attribute-name="value">` の XML 属性。
+
+`/testcase/../@attribute-name`
+: 現在の `<testcase>` の親 `<testsuite attribute-name="value">` の XML 属性。
+
+`/testcase/..//property[@name='property-name']`
+: 現在の `<testcase>` の親の `<testsuite>` 内の`<property name="property-name" value="value">` の `value` 属性。
+
+`/testcase//property[@name='property-name']`
+: 現在の `<testcase>` 内の `<property name="property-name" value="value">` `value` 属性。
+
+例:
+
+{{< tabs >}}
+
+{{% tab "@classname からテストスイートを取得" %}}
+テストの `test.suite` タグは、デフォルトで `<testsuite name="suite name">` から読み込まれます。ただし、一部のプラグインでは、`<testcase classname="TestSuite">` でより良い値が報告される可能性があります。
+
+`test.suite` タグを `value 1`、`value 2` から `SomeTestSuiteClass`、`OtherTestSuiteClass` に変更する方法:
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="value 1">
+    <testcase classname="SomeTestSuiteClass" name="test_something" time="0.030000"></testcase>
+  </testsuite>
+  <testsuite tests="1" failures="0" time="0.021300" name="value 2">
+    <testcase classname="OtherTestSuiteClass" name="test_something" time="0.021300"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+{{< code-block lang="shell" >}}
+datadog-ci junit upload --service service_name \
+  --xpath-tag test.suite=/testcase/@classname ./junit.xml
+{{< /code-block >}}
+
+{{< /tabs >}}
+
+{{% tab "属性からタグを追加" %}}
+各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.020000" name="SomeTestSuiteClass">
+    <testcase name="test_something" time="0.010000" attr="value 1"></testcase>
+    <testcase name="test_other" time="0.010000" attr="value 2"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+{{< code-block lang="shell" >}}
+datadog-ci junit upload --service service_name \
+  --xpath-tag custom_tag=/testcase/@attr ./junit.xml
+{{< /code-block >}}
+
+{{< /tabs >}}
+
+{{% tab "testsuite プロパティからタグを追加" %}}
+各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
+
+{{< code-block lang="xml" >}}
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite tests="1" failures="0" time="0.030000" name="SomeTestSuiteClass">
+    <properties>
+      <property name="prop" value="value 1"></property>
+    </properties>
+    <testcase name="test_something" time="0.030000" attr="value 1"></testcase>
+  </testsuite>
+  <testsuite tests="1" failures="0" time="0.021300" name="OtherTestSuiteClass">
+    <properties>
+      <property name="prop" value="value 1"></property>
+    </properties>
+    <testcase name="test_something" time="0.021300" attr="value 1"></testcase>
+  </testsuite>
+</testsuites>
+{{< /code-block >}}
+
+{{< code-block lang="shell" >}}
+datadog-ci junit upload --service service_name \
+  --xpath-tag custom_tag=/testcase/..//property[@name=\'prop\'] ./junit.xml
+{{< /code-block >}}
+
+**注:** 名前は引用符で囲む必要があります。Bash では、バックスラッシュを使って引用符をエスケープしなければなりません。例えば、`[@name='prop']` は `[@name=\'prop\'] と入力します。
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## `<property>` 要素によるメタデータの提供
 
-アップロードされた XML レポートに含まれるすべてのテストにカスタムタグをグローバルに適用する `--tags` CLI パラメーターと `DD_TAGS` 環境変数に加えて、 `<testsuite>` や `<testcase>` の要素の中に `<property name="dd_tags[key]" value="value">` の要素を含めることによって、特定のテストに追加のタグを提供することができます。これらのタグを `<testcase>` 要素に追加すると、そのタグはテストスパンに保存されます。`<testsuite>` 要素にタグを追加すると、そのスイートのすべてのテストスパンにタグが格納されます。
+特定のテストに追加のタグを指定するもう 1 つの方法は、`<testsuite>` または `<testcase>` 要素内に `<property name="dd_tags[key]" value="value">` 要素を含める方法です。これらのタグを `<testcase>` 要素に追加すると、そのテストスパンにタグが格納されます。タグを `<testsuite>` 要素に追加すると、そのスイートの全てのテストスパンにタグが格納されます。
 
 この処理を行うには、 `<property>` 要素の `name` 属性が `dd_tags[key]` という形式である必要があります。ここで `key` は追加されるカスタムタグの名前です。その他のプロパティは無視されます。
 
@@ -371,3 +478,5 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 [6]: /ja/logs/
 [7]: /ja/getting_started/site/
 [8]: https://git-scm.com/downloads
+[9]: #providing-metadata-with-xpath-expressions
+[10]: https://www.w3schools.com/xml/xpath_syntax.asp

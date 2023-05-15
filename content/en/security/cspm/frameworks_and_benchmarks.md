@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
 further_reading:
-- link: "security/cspm/getting_started"
+- link: "security/cspm/setup"
   tag: "Documentation"
   text: "Getting started with CSPM"
 - link: "security/default_rules"
@@ -82,7 +82,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [10]: https://gdpr.eu/
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
-[13]: https://app.datadoghq.com/security/configuration/rules/
+[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
 [14]: /integrations/slack/
 [15]: /integrations/jira/
 [16]: /integrations/pagerduty

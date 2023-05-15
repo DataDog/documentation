@@ -26,7 +26,7 @@ In addition to reviewing and fixing cloud misconfigurations directly in the [fin
 
 Signals are security alerts that Datadog generates and displays in the [Signals Explorer][4]. Security posture signals trigger when Datadog generates `evaluation:fail` findings for a cloud or infrastructure configuration rule.
 
-A selection of rules that have a ‘high’ or ‘critical’ severity level are enabled to generate signals by default. For lower severity detection rules, select the *Trigger a security signal* toggle to begin generating signals. You can also use this toggle to disable detection rules from generating signals at any point in time.
+A selection of rules that have a 'high' or 'critical' severity level are enabled to generate signals by default. For lower severity detection rules, select the *Trigger a security signal* toggle to begin generating signals. You can also use this toggle to disable detection rules from generating signals at any point in time.
 
 {{< img src="security/cspm/signals_explorer/Notifications.png" style="width:100%;">}}
 

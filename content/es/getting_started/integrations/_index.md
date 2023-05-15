@@ -1,6 +1,4 @@
 ---
-aliases:
-- /es/getting_started/integrations
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-integrations
   tag: Centro de aprendizaje

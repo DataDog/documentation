@@ -22,7 +22,7 @@ Synthetic テストを作成すると、Datadog は自動的に関連するモ�
 
 ## Synthetic テストモニターの作成
 
-<div class="alert alert-info"><a href="/monitors/create/">モニター</a>で Synthetic テストモニターを作成またはインポートすることはできません。</div>
+<div class="alert alert-info"><a href="/monitors/">モニター</a>で Synthetic テストモニターを作成またはインポートすることはできません。</div>
 
 Synthetic テストが失敗したときに通知を送信するために、**Configure the monitor for this test** セクションでモニターを作成します。モニターは、作成した Synthetic テストに関連付けられ、Synthetic テストの構成で設定したアラート条件とリンクしています。モニターの属性とタグの変数を使用するには、[メトリクスモニター][1]を作成します。
 
@@ -60,7 +60,7 @@ Synthetic テストモニターは、メール、Slack、Pagerduty、Microsoft T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/create/types/metric/
+[1]: /ja/monitors/types/metric/
 [2]: /ja/monitors/manage/
 [3]: /ja/monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: /ja/monitors/notify/#integrations/

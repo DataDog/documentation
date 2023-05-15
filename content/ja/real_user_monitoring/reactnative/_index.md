@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/README.md
 description: React Native プロジェクトから RUM データを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
@@ -44,8 +42,9 @@ yarn add @datadog/mobile-react-native
 1. [Datadog アプリ][1]で、**UX Monitoring** > **RUM Applications** > **New Application** へ移動します。
 2. アプリケーションタイプとして `react-native` を選択します。
 3. アプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
+4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。
 
-{{< img src="real_user_monitoring/react_native/image_reactnative.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
+   {{< img src="real_user_monitoring/react_native/reactnative_setup.png" alt="Datadog で React Native の RUM アプリケーションを作成する" style="width:90%;">}}
 
 データの安全性を確保するため、クライアントトークンを使用する必要があります。`@datadog/mobile-react-native` ライブラリの構成に [Datadog API キー][3]のみを使用した場合、クライアント側で React Native アプリケーションのコード内で公開されます。
 
@@ -384,22 +383,22 @@ end
 
 詳細については、[Apache ライセンス、v2.0][9]を参照
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: https://raw.githubusercontent.com/DataDog/dd-sdk-reactnative/main/docs/image_reactnative.png
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#client-tokens
 [5]: https://github.com/wix/react-native-navigation
-[6]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
+[6]: /ja/real_user_monitoring/reactnative/integrated_libraries/
 [7]: https://github.com/react-navigation/react-navigation
-[8]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
+[8]: /ja/real_user_monitoring/reactnative/integrated_libraries/
 [9]: https://github.com/DataDog/dd-sdk-reactnative/blob/main/LICENSE
 [10]: https://source.android.com/security/app-sandbox
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [12]: https://docs.expo.dev/
-[13]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/expo/
+[13]: /ja/real_user_monitoring/reactnative/expo/
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
-[15]: https://docs.datadoghq.com/ja/getting_started/tagging/#define-tags
+[15]: /ja/getting_started/tagging/#define-tags

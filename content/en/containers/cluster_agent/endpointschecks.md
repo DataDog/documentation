@@ -35,7 +35,7 @@ This feature is supported on Kubernetes for Datadog Agent v6.12.0+ and Datadog C
 In the example below, a Kubernetes deployment for NGINX was created with three Pods.
 
 ```shell
-# kubectl get pods --selector app=nginx -o wide
+kubectl get pods --selector app=nginx -o wide
 NAME                     READY   STATUS    RESTARTS   AGE   IP           NODE
 nginx-66d557f4cf-m4c7t   1/1     Running   0          3d    10.0.0.117   gke-cluster-default-pool-4658d5d4-k2sn
 nginx-66d557f4cf-smsxv   1/1     Running   0          3d    10.0.1.209   gke-cluster-default-pool-4658d5d4-p39c
@@ -45,13 +45,13 @@ nginx-66d557f4cf-x2wzq   1/1     Running   0          3d    10.0.1.210   gke-clu
 A service was also created. It links to the Pods through these three endpoints.
 
 ```shell
-# kubectl get service nginx -o wide
+kubectl get service nginx -o wide
 NAME    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
 nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 ```
 
 ```shell
-# kubectl get endpoints nginx -o yaml
+kubectl get endpoints nginx -o yaml
 ...
 - addresses:
   - ip: 10.0.0.117
@@ -74,7 +74,7 @@ nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
       ...
 ```
 
-While a service-based cluster check tests the service's single IP address, endpoint checks are scheduled for **each** of the three endpoints associated with this service. 
+While a service-based cluster check tests the service's single IP address, endpoint checks are scheduled for **each** of the three endpoints associated with this service.
 
 By design, endpoint checks are dispatched to Agents that run on the same node as the Pods that back the endpoints of this `nginx` service. In this example, the Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` run the checks against these `nginx` Pods.
 
@@ -83,17 +83,16 @@ By design, endpoint checks are dispatched to Agents that run on the same node as
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
+Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `features.clusterChecks.enabled` configuration key:
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  # (...)
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+  features:
+    clusterChecks:
+      enabled: true
 ```
 
 This configuration enables both cluster check and endpoint check dispatching between the Cluster Agent and the Agents.

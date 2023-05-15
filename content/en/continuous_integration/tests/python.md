@@ -63,7 +63,7 @@ To run the Datadog Agent as a container acting as a simple results forwarder, us
 **Default**: (autodetected)<br/>
 **Required value**: `none`
 
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE`
@@ -105,7 +105,7 @@ jobs:
       - script: make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
 {{< code-block lang="yaml" filename="azure-pipeline.yml" >}}
@@ -159,7 +159,7 @@ test:
     - make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 
 Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
@@ -201,7 +201,7 @@ jobs:
       - run: make test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 
 Replace `<datadog_site>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
@@ -251,7 +251,7 @@ workflows:
       - test
 {{< /code-block >}}
 {{< /site-region >}}
-{{< site-region region="us3,us5,eu" >}}
+{{< site-region region="us3,us5,eu,ap1" >}}
 
 Replace `<DD_SITE>` with the selected site: {{< region-param key="dd_site" code="true" >}}.
 
@@ -293,7 +293,7 @@ Add your [Datadog API key][2] to your [project environment variables][3] with th
 
 Install the Python tracer by running:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 pip install -U ddtrace
 {{< /code-block >}}
 
@@ -303,13 +303,13 @@ For more information, see the [Python tracer installation documentation][4].
 
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace
 {{< /code-block >}}
 
 If you also want to enable the rest of the APM integrations to get more information in your flamegraph, add the `--ddtrace-patch-all` option:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 

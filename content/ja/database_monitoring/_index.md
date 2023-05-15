@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - データベースモニタリング
+  - dbm
 description: Database Monitoring について学び、始めましょう
 further_reading:
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog

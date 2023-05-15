@@ -18,12 +18,14 @@ Azure Container Apps は、コンテナベースのアプリケーションを�
 
 [Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
 
-### 1. Dockerfile を使用したインスツルメンテーション
-
-Dockerfile に次の記述を追加することで、アプリケーションをインスツルメントすることができます。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+### 1. アプリケーションのインスツルメンテーション
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントすることができます。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init` を Docker イメージにコピーします
@@ -41,14 +43,22 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-[シンプルな Go アプリケーション用のサンプルコード][1]。
-[Go トレーシングライブラリ][2]に関する詳細。
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Go トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+
+[シンプルな Go アプリケーションのサンプルコード][1]。
+
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /ja/serverless/installation/go/?tab=serverlessframework#install-the-datadog-lambda-library
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init` を Docker イメージにコピーします
@@ -68,15 +78,20 @@ ENTRYPOINT ["/app/datadog-init"]
 # Datadog トレースライブラリによって起動されるエントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
 CMD ["ddtrace-run", "python", "app.py"]
 ```
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Python トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
 
-[シンプルな Python アプリケーション用のサンプルコード][1]。
-[Python レーシングライブラリ][2]に関する詳細。
+[シンプルな Python アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/python
 [2]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init` を Docker イメージにコピーします
@@ -101,15 +116,20 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Node トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
 
-[シンプルな Node.js アプリケーション用のサンプルコード][1]。
-[Node.js トレーシングライブラリ][2]に関する詳細。
+[シンプルな Node.js アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/js
 [2]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init`  を Docker イメージにコピーします
@@ -128,14 +148,20 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-[シンプルな Java アプリケーション用のサンプルコード][1]。
-[Java トレーシングライブラリ][2]に関する詳細。
+#### トレーシングライブラリをインストールする
+[以下の手順][2]に従って、アプリケーションに Java トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Java アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/java
 [2]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init`  を Docker イメージにコピーします
@@ -154,8 +180,18 @@ CMD ["dotnet", "helloworld.dll"]
 
 ```
 
+#### トレーシングライブラリをインストールする
+指示に従って、[.NET Core トレーシングライブラリ][1]と [.NET Framework トレーシングライブラリ][2]のインストールと構成を行います。
+
+[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
+
+#### Dockerfile で Agent をインストールする
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
 
 ```
 # Datadog `serverless-init`  を Docker イメージにコピーします
@@ -173,8 +209,11 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更してください)
 ```
 
-[シンプルな Ruby アプリケーション用のサンプルコード][1]。
-[Ruby トレーシングライブラリ][2]に関する詳細。
+#### トレーシングライブラリをインストールする
+
+[以下の手順][2]に従って、アプリケーションに Ruby トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Ruby アプリケーションのサンプルコード][1]。
 
 [1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 [2]: /ja/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application

@@ -30,13 +30,13 @@ further_reading:
 
 ## Overview
 
-To create a new log detection rule in Datadog, hover over **Security**, select **Detection Rules**, and select the **New Rule** button in the top right corner of the page.
+To create a log detection rule in Datadog, navigate to the [Detection Rules page][1] and click **New Rule**.
 
 ## Rule Type
 
 For Cloud SIEM (Security Information and Event Management), select **Log Detection** to analyze ingested logs in real-time.
 
-## Choose a detection method
+## Detection methods
 
 ### Threshold
 
@@ -48,15 +48,15 @@ Detect when an attribute changes to a new value. For example, if you create a tr
 
 ### Anomaly
 
-<div class="alert alert-warning">
-Anomaly detection is currently in <a href="https://app.datadoghq.com/security/configuration/rules/new">public beta</a>.
-</div>
-
 When configuring a specific threshold isn't an option, you can define an anomaly detection rule instead. With anomaly detection, a dynamic threshold is automatically derived from the past observations of the events.
 
 ### Impossible Travel
 
 Impossible travel detects access from different locations whose distance is greater than the distance a human can travel in the time between the two access events.
+
+### Third Party
+
+Third Party allows you to forward alerts from an outside vendor or application. You can update the rule with suppression queries and who to notify when a signal is generated.
 
 ## Define a search query
 
@@ -75,9 +75,11 @@ Add additional queries with the Add Query button.
 
 **Note**: The query applies to all Datadog events and ingested logs which do not require indexing.
 
-#### Advanced options
+## Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 #### Joining queries
 
@@ -116,11 +118,13 @@ Select the value or values to detect, the learning duration, and, optionally, de
 
 For example, create a query for successful user authentication and set **Detect new value** to `country` and group by to `user`. Set a learning duration of `7 days`. Once configured, logs coming in over the next 7 days are evaluated with the set values. If a log comes in with a new value after the learning duration, a signal is generated, and the new value is learned to prevent future signals with this value.
 
-You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**. 
+You can also identify users and entities using multiple values in a single query. For example, if you want to detect when a user signs in from a new device and from a country that they've never signed in from before, add `device_id` and `country_name` to **Detect new value**.
 
-#### Advanced options
+## Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when** a value is met, or **Never trigger a signal** when a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under `Never Trigger A Signal`.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
+
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 [1]: /logs/search_syntax/
 {{% /tab %}}
@@ -159,10 +163,11 @@ When selected, signals are suppressed for the first 24 hours. In that time, Data
 
 Do not click the checkbox if you want Datadog to detect all impossible travel behavior.
 
-#### Advanced options
+## Exclude benign activity with suppression queries
 
-Click the **Advanced** option to add queries that will **Only trigger a signal when:** a value is met, or **Never trigger a signal when:** a value is met. For example, if a user is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, create a logs query that excludes `@user.username: john.doe` under the **Never trigger a signal when:** option.
+In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
 
+In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
 
 [1]: /logs/search_syntax/
 [2]: /logs/log_configuration/processors#geoip-parser
@@ -180,7 +185,7 @@ Click the **Advanced** option to add queries that will **Only trigger a signal w
 
 Enable **Create rules cases with the Then operator** if you want to trigger a signal for the example: If query A occurs and then query B occurs. The `then` operator can only be used on a single rule case.
 
-All rule cases are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering. An example rules case is `a > 3`. 
+All rule cases are evaluated as case statements. Thus, the first case to match generates the signal. Click and drag your rule cases to manipulate their ordering. An example rules case is `a > 3`.
 
 A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [query labels](#define-a-search-query) are referenced in this section.
 
@@ -190,11 +195,11 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
 
 Click **Add Case** to add additional cases.
 
@@ -208,7 +213,7 @@ Click **Add Case** to add additional cases.
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Forget value
 
@@ -226,7 +231,7 @@ Set a maximum duration to keep updating a signal if new values are detected with
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
@@ -244,11 +249,11 @@ The impossible travel detection method does not require setting a rule case.
 
 ### Severity and notification
 
-{{% cloud-siem-rule-severity-notification %}}
+{{% security-rule-severity-notification %}}
 
 ### Time windows
 
-{{% cloud-siem-rule-time-windows %}}
+{{% security-rule-time-windows %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -268,7 +273,11 @@ The severity decrement is applied to signals with an environment tag starting wi
 
 ## Say what's happening
 
-{{% cloud-siem-rule-say-whats-happening %}}
+{{% security-rule-say-whats-happening %}}
+
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
+
+**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
 ## Rule deprecation
 
@@ -276,16 +285,14 @@ Regular audits of all out-of-the-box detection rules are performed to maintain h
 
 The rule deprecation process is as follows:
 
-1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
-    - Signal side panel's **Rule Details > Playbook** section 
-    - [Rule editor][4] for that specific rule 
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][4] in the UI.
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
+    - Signal side panel's **Rule Details > Playbook** section
+    - [Rule editor][2] for that specific rule
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][2] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/notifications/variables/
-[2]: /security/notifications/variables/#template-variables
-[3]: /security/default_rules/#cat-cloud-siem-log-detection
-[4]: /security/detection_rules/#rule-and-generated-signal-options
+[1]: https://app.datadoghq.com/security/configuration/siem/rules
+[2]: /security/detection_rules/#rule-and-generated-signal-options

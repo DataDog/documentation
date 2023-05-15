@@ -24,7 +24,7 @@ further_reading:
 
 ## Introduction
 
-Datadog’s Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
+Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:
 
 * View all of your running processes in one place
 * Break down the resource consumption on your hosts and containers at the process level
@@ -32,7 +32,7 @@ Datadog’s Live Processes gives you real-time visibility into the process runni
 * Monitor the performance of the internal and third-party software you run using system metrics at two-second granularity
 * Add context to your dashboards and notebooks
 
-{{< img src="infrastructure/process/live_processes_main.png" alt="Live Processes Overview"  >}}
+{{< img src="infrastructure/process/live_processes_main.png" alt="Live Processes Overview" >}}
 
 ## Installation
 
@@ -41,19 +41,13 @@ If you are using Agent 5, follow this [specific installation process][1]. If you
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `true`:
+Once the Datadog Agent is installed, enable Live Processes collection by editing the [Agent main configuration file][1] by setting the following parameter to `"true"`:
 
 ```yaml
 process_config:
   process_collection:
-    enabled: true
+    enabled: "true"
 ```
-
-The `enabled` value is a string with the following options:
-
-- `"true"`: Enable the Process Agent to collect processes and containers.
-- `"false"` (default): Only collect containers if available.
-- `"disabled"`: Don't run the Process Agent at all.
 
 Additionally, some configuration options may be set as environment variables.
 
@@ -126,6 +120,33 @@ datadog:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### I/O stats
+
+I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To enable the process module of the system-probe, use the following configuration:
+
+1. Copy the system-probe example configuration:
+
+   ```shell
+   sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+   ```
+
+2. Edit `/etc/datadog-agent/system-probe.yaml` to enable the process module:
+
+   ```yaml
+   system_probe_config:
+     process_config:
+       enabled: true
+   ```
+
+5. [Restart the Agent][12]:
+
+   ```shell
+   sudo systemctl restart datadog-agent
+   ```
+
+   **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+
 
 ### Process arguments scrubbing
 
@@ -343,7 +364,7 @@ Live Processes adds extra visibility to your container deployments by monitoring
 
 ### APM
 
-In [APM Traces][10], you can click on a service’s span to see the processes running on its underlying infrastructure. A service’s span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
+In [APM Traces][10], you can click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
 
 ### Network Performance Monitoring
 
@@ -355,7 +376,6 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 
 ## Additional information
 
-- Collection of open files and current working directory is limited based on the level of privilege of the user running `dd-process-agent`. In the event that `dd-process-agent` is able to access these fields, they are collected automatically.
 - Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
 - In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
 
@@ -374,3 +394,5 @@ While actively working with the Live Processes, metrics are collected at 2s reso
 [9]: /infrastructure/livecontainers/
 [10]: /tracing/
 [11]: /network_monitoring/performance/network_page
+[12]: /agent/guide/agent-commands/#restart-the-agent
+

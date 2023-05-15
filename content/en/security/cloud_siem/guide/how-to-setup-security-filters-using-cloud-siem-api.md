@@ -28,7 +28,7 @@ The following examples are covered in this guide:
 
 * An API key and an application key **from an admin user** is required to use the API. These are available in your [Datadog account API key page][3]. Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key.
 
-* This guide features `curl` examples. Install [curl][4] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][2].
+* This guide features `curl` examples. Install [cURL][4] if you do not have it installed, or reference additional language examples for this API endpoint in the [API documentation][2].
 
 ## Examples
 
@@ -164,6 +164,8 @@ curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/
 }
 ```
 
+**Note**: `version` indicates the current version of the filter you want to update. This field is optional. If it is not provided, the latest version is updated.
+
 Security Filters are inclusive, which means a given log is analyzed **if it matches at least one Security Filter**. If you're aiming to specify a subset of logs to analyze, you likely also would want to disable the default built-in filter named `all ingested logs`. You would do so by setting its `is_enabled` attribute to `false`, as follows:
 
 **API call:**
@@ -176,8 +178,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 --data-raw '{
     "data": {
         "attributes": {
-            "is_enabled": false,
-            "version": 2
+            "is_enabled": false
         },
         "type": "security_filters"
     }
@@ -209,6 +210,8 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 }
 ```
 
+**Note**: `version` indicates the current version of the filter you want to update. This field is optional. If it is not provided, the latest version is updated.
+
 ## Key security-relevant tags and attributes
 
 If you aim to only analyze explicitly specified categories of logs, be cautious not to exclude logs that contain valuable security-relevant users and entities, or key sources of security logs. The tables below provide useful examples.
@@ -229,7 +232,7 @@ If you aim to only analyze explicitly specified categories of logs, be cautious 
 | --------------------- |--------------------------------------------------|
 | AWS Security Logs     | `source:(cloudtrail OR guardduty OR route53)`    |
 | AWS Network Logs      | `source:(vpc OR waf OR elb OR alb)`              |
-| GCP Logs              | `source:gcp*`                                    |
+| Google Cloud Logs     | `source:gcp*`                                    |
 | Azure Logs            | `source:azure*`                                  |
 | Kubernetes Audit Logs | `source:kubernetes.audit`                        |
 | Identity Provider Logs| `source:(okta OR gsuite OR auth0)`               |

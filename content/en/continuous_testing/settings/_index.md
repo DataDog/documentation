@@ -30,7 +30,7 @@ By default, all your tests running in CI/CD pipelines run sequentially (one afte
 
 ## Parallelization
 
-Parallel tests are tests that run simultaneously in your continuous integration and continuous delivery (CI/CD) pipelines. 
+Parallel tests are tests that run simultaneously in your [continuous integration and continuous delivery (CI/CD) pipelines][4]. 
 
 {{< img src="continuous_testing/parallelization_explained.png" alt="A diagram that explains the benefits of parallelization vs. sequential test runs" style="width:100%;">}}
 
@@ -42,7 +42,7 @@ This ensures you can:
 
 ### Estimate parallelization
 
-Click **Estimate Parallelization** to see how many tests Datadog recommends running in parallel based on your Continuous Testing metrics. 
+Click **Estimate Parallelization** to see how many tests Datadog recommends running in parallel based on your [Continuous Testing metrics][3]. 
 
 {{< img src="continuous_testing/estimated_parallelization.png" alt="Completing the Estimate Parallelization wizard in Continuous Testing Settings" style="width:60%;">}}
 
@@ -73,3 +73,5 @@ For more information, see [Datadog Role Permissions][2].
 
 [1]: /synthetics/settings/
 [2]: /account_management/rbac/permissions/#billing-and-usage
+[3]: /synthetics/metrics/#continuous-testing
+[4]: /continuous_testing/cicd_integrations

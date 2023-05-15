@@ -82,10 +82,6 @@ Enclave は Datadog アカウントにメトリクスを送信します。方法
 
 [FreeSwitch ESL][30] アプリケーションが DogStatsD API を使用して Datadog へ統計情報をエクスポートするために使用します。開発元は [WiMacTel][31] です。
 
-### Google Analytics
-
-[Bithaus][33] の [Google Analytics ライブラリ][32]を使用すると、Google Analytics から Datadog API を使って Datadog にデータを取り込むことができます。
-
 ### Heroku
 
 Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[Heroku ログの収集][34]を参照してください。
@@ -191,8 +187,6 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [29]: https://github.com/cvent/dogscaler
 [30]: https://github.com/wimactel/FreeSwitch-DataDog-Metrics
 [31]: https://github.com/wimactel
-[32]: https://github.com/bithauschile/datadog-ga
-[33]: https://blog.bithaus.cl/2016/04/20/realtime-google-analytics-metrics-in-datadog
 [34]: /ja/logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
 [36]: https://web.oz.com/

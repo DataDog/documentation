@@ -1,11 +1,11 @@
 ---
 categories:
-- cloud
 - aws
+- cloud
 - log collection
-- web
+- network
+- tracing
 creates_events: false
-ddtype: check
 dependencies: []
 description: AWS App Mesh est un proxy de périmètre et de service open source.
 display_name: AWS App Mesh
@@ -40,7 +40,7 @@ supported_os:
 [AWS App Mesh][1] est un maillage de services qui facilite la surveillance des communications entre les applications de micro-services s'exécutant sur des clusters AWS ECS Fargate ou AWS EKS.
 
 
-## Configuration
+## Implémentation
 
 {{< tabs >}}
 {{% tab "EKS" %}}

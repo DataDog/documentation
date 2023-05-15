@@ -77,7 +77,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 | `DATADOG_API_KEY` | Datadog API キー。Lambda 関数のコンフィギュレーションに `DD_API_KEY` 環境変数を設定します。Datadog API キーの取得の詳細については、[API キーのドキュメント][6]を参照してください。  | `export DATADOG_API_KEY=<API_KEY>` |
 | `DATADOG_API_KEY_SECRET_ARN` | AWS Secrets Manager に Datadog の API キーを格納するシークレットの ARN です。Lambda 関数の構成に `DD_API_KEY_SECRET_ARN` を設定します。注: `DD_KMS_API_KEY` が設定されている場合、 `DD_API_KEY_SECRET_ARN` は無視されます。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加してください。 | `export DATADOG_API_KEY_SECRET_ARN=<SECRETS_MANAGER_RESOURCE_ARN>` |
 | `DATADOG_KMS_API_KEY` | KMS を使用して暗号化された Datadog API キー。Lambda 関数のコンフィギュレーションに `DD_KMS_API_KEY` 環境変数を設定します。注: `DD_KMS_API_KEY` が設定されている場合、`DD_API_KEY` は無視されます。 | `export DATADOG_KMS_API_KEY=<KMS_ENCRYPTED_API_KEY>` |
-| `DATADOG_SITE` | データを送信する Datadog サイトを設定します。Datadog Lambda Extension を使用する場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。Lambda 関数設定に `DD_SITE` 環境変数を設定します。 | `export DATADOG_SITE="datadoghq.com"` |
+| `DATADOG_SITE` | データを送信する Datadog サイトを設定します。Datadog Lambda Extension を使用する場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。Lambda 関数設定に `DD_SITE` 環境変数を設定します。 | `export DATADOG_SITE="datadoghq.com"` |
 
 
 ### 引数
@@ -97,6 +97,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 | `--version` | | `—version` タグを追加して、遅延、負荷、エラーのスパイクを新しいバージョンに関連付けることができます。`version` タグについて詳しくは [こちら][8]を参照してください。 | |
 | `--env` | | ステージング環境、開発環境、本番環境を分けるには、`—env` を使用します。`env` タグについて詳しくは [こちら][7]を参照してください。 | |
 | `--extra-tags` | | Datadog の Lambda 関数にカスタムタグを追加します。`layer:api,team:intake` のようなカンマで区切られた `<key>:<value>` のリストである必要があります。 | |
+| `--profile` | | インスツルメンテーションに使用する AWS 名前付きプロファイルの資格情報を指定します。AWS 名前付きプロファイルの詳細は[こちら][12]を参照してください。 |  | 
 | `--layer-version` | `-v` | 適用する Datadog Lambda ライブラリレイヤーのバージョン。これはランタイムによって異なります。最新のレイヤーバージョンを確認するには、[JS][3] または [python][4] datadog-lambda-layer リポジトリのリリースノートを確認してください。 | |
 | `--extension-version` | `-e` | 適用する Datadog Lambda Extension レイヤーのバージョン。`extension-version` が設定されている場合は、お使いの環境でも必ず `DATADOG_API_KEY` (または暗号化されている場合は `DATADOG_KMS_API_KEY` または `DATADOG_API_KEY_SECRET_ARN`) をエクスポートしてください。`extension-version` を使用する場合は、`forwarder` を省略します。Lambda Extension の詳細は[こちら][5]。 | |
 | `--tracing` |  | Lambda で dd-trace トレースを有効にするかどうか。 | `true` |
@@ -106,8 +107,11 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 | `--forwarder` | | この関数の LogGroup をアタッチする [datadog forwarder][10] の ARN。 | |
 | `--dry` | `-d` | コマンドを実行している変更のプレビューが適用されます。 | `false` |
 | `--log-level` | | Datadog Lambda ライブラリおよび/または Lambda 拡張機能から追加の出力をトラブルシューティングのために確認するには、`debug` を設定します。 | |
-| `--source-code-integration` | `-s` | Datadog ソースコードインテグレーションを有効にするかどうか。これは Datadog に現在のローカルディレクトリの Git メタデータを送信し、最新のコミットで Lambda をタグ付けします。この機能を使用する場合は、`DATADOG_API_KEY`を指定してください。**注**: Git リポジトリはリモートより先に存在してはいけませんし、ダーティであってはいけません。 | `false` |
-
+| `--source-code-integration` | `-s` | [Datadog ソースコードインテグレーション][13]を有効にするかどうか。これにより、Lambda に Git リポジトリの URL と、現在のローカルディレクトリの最新のコミットハッシュがタグ付けされます。**注**: Git リポジトリはリモートより先に存在してはいけませんし、ダーティであってはいけません。 | `true` |
+| `--no-source-code-integration` | | Datadog ソースコードインテグレーションを無効にします。 | |
+| `--upload-git-metadata` | `-u` | ソースコードインテグレーションの一部として、Git メタデータのアップロードを有効にするかどうか。Git メタデータのアップロードは、Datadog Github インテグレーションをインストールしていない場合のみ必要です。 | `true` | 
+| `--no-upload-git-metadata` | | ソースコードインテグレーションの一部として、Git メタデータのアップロードを無効にします。Datadog Github インテグレーションをインストールしている場合、このフラグを使用すると、Git メタデータのアップロードが不要になります。 ||
+| `--apm-flush-deadline` | | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。 ||
 <br />
 
 #### `uninstrument`
@@ -120,6 +124,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 | `--function` | `-f` | **アンインスツルメント**する Lambda 関数の ARN、または Lambda 関数の名前 (`--region` を定義する必要があります)。 | |
 | `--functions-regex` | | **アンインスツルメント**する Lambda 関数名とマッチする正規表現パターン。 | |
 | `--region` | `-r` | `--function` が ARN ではなく関数名で指定されている場合に使用するデフォルトのリージョン。 | |
+| `--profile` | | アンインスツルメンテーションに使用する AWS 名前付きプロファイルの資格情報を指定します。AWS 名前付きプロファイルの詳細は[こちら][12]を参照してください。 |  | 
 | `--forwarder` | | この関数から削除する [datadog forwarder][10] の ARN。 | |
 | `--dry` | `-d` | コマンドを実行している変更のプレビューが適用されます。 | `false` |
 
@@ -143,6 +148,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
         "logLevel": "debug",
         "service":"some-service",
         "version":"b17s47h3w1n",
+        "profile": "my-credentials"
         "environment":"staging",
         "extraTags":"layer:api,team:intake"
     }
@@ -163,3 +169,5 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 [9]: https://docs.datadoghq.com/ja/serverless/troubleshooting/serverless_tagging/#the-service-tag
 [10]: https://docs.datadoghq.com/ja/serverless/forwarder/
 [11]: https://docs.datadoghq.com/ja/serverless/custom_metrics?tab=python#enabling-asynchronous-custom-metrics
+[12]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html#using-profiles
+[13]: https://docs.datadoghq.com/ja/integrations/guide/source-code-integration

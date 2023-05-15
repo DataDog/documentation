@@ -56,6 +56,7 @@ Each of these event types has the following attributes attached by default, so y
 |------------------|--------|-----------------------------|
 | `type`     | string | The type of the event (for example, `view` or `resource`).             |
 | `application.id` | string | The Datadog application ID generated when you create a RUM application. |
+| `application.name` | string | The name of your Datadog application. |
 | `service`     | string | A service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking][1].             |
 
 ### View attributes
@@ -118,10 +119,10 @@ In addition to default attributes, you can add user-related data to all RUM even
 ### Feature flag attributes
 
 {{< callout btn_hidden="true" header="Join the Feature Flag Tracking Beta!">}}
-Feature Flag Tracking is in private beta. To request access, contact Datadog Support at support@datadoghq.com.
+<a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
-You can [enrich your RUM event data with feature flags][6] to get visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user’s performance. 
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
 
 ## Event-specific metrics and attributes
 
@@ -141,7 +142,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 | Attribute name                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `session.id`                      | string | Randomly generated ID for each session.                                                                      |
-| `session.ip`                      | string | Client IP address. If you want to stop collecting this attribute, [contact Support][7].                                                                       |
+| `session.ip`                      | string | Client IP address. If you want to stop collecting this attribute, change the setting in your [application details][7].                                                                       |
 | `session.is_active`                      | boolean | Indicates if the session is currently active. The session ends after 4 hours of activity or 15 minutes of inactivity.                                                                     |
 | `session.type`                     | string | The type of session: `user` or `synthetics`. Sessions from [Synthetic Monitoring Browser Tests][8] are excluded from billing. |
 | `session.referrer`                | string | The URL of the previous web page from which a link to the currently requested page was followed. |
@@ -159,14 +160,14 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
 ### View timing metrics
-
+**Note**: View timing metrics include time that a page is open in the background.
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
 |---------------------------------|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered.                                                                                                |
-| `view.first_input_delay`        | number (ns) | Time elapsed between a user’s first interaction with the page and the browser’s response.                                                                                                                             |
+| `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                             |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where `0` means that no shifts are happening.                                                                               |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][9].                                                                             |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][10].                               |
@@ -181,7 +182,7 @@ You can [enrich your RUM event data with feature flags][6] to get visibility int
 
 ### Resource timing metrics
 
-Detailed network timing data for the loading of an application’s resources are collected with the [Performance Resource Timing API][15].
+Detailed network timing data for the loading of an application's resources are collected with the [Performance Resource Timing API][15].
 
 | Metric                              | Type           | Description                                                                                                                               |
 |----------------------------------------|----------------|-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -276,7 +277,7 @@ Source errors include code-level information about the error. For more informati
 [4]: /data_security/real_user_monitoring/#ip-address
 [5]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
 [6]: /real_user_monitoring/guide/setup-feature-flag-data-collection
-[7]: /help/
+[7]: /data_security/real_user_monitoring/#ip-address
 [8]: /synthetics/browser_tests/
 [9]: /real_user_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [10]: https://www.w3.org/TR/paint-timing/#sec-terminology

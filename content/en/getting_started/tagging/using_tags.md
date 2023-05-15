@@ -363,7 +363,7 @@ When creating a [metric-based SLO][1], use metric tags in the SLO's success rati
 
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="Metric-based SLO Tags" style="width:80%;">}}
 
-[1]: /monitors/service_level_objectives/metric/
+[1]: /service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
@@ -371,7 +371,7 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="Monitor-based SLO Tags" style="width:80%;">}}
 
-[1]: /monitors/service_level_objectives/monitor/
+[1]: /service_management/service_level_objectives/monitor/
 [2]: /getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}

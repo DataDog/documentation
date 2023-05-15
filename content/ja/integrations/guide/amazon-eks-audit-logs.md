@@ -81,5 +81,5 @@ Cloud SIEM がセットアップされ、構成されると、ゼロから新し
 [10]: https://app.datadoghq.com/security
 [11]: /ja/security_platform/default_rules/#cat-cloud-siem
 [12]: /ja/security_platform/detection_rules/#creating-and-managing-detection-rules
-[13]: https://app.datadoghq.com/security/configuration/rules/new
+[13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
 [14]: /ja/security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method

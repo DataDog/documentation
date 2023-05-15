@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [GCP integration][1]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run applications with apurpose-built Agent to enable tracing, custom metrics, and direct log collection.
+Google Cloud Run is a fully managed serverless platform for deploying and scaling container-based applications. Datadog provides monitoring and log collection for Cloud Run through the [Google Cloud integration][1]. Datadog also provides a solution, now in public beta, for instrumenting your Cloud Run applications with a purpose-built Agent to enable tracing, custom metrics, and direct log collection.
 
   <div class="alert alert-warning">This feature is in public beta. You can provide feedback through a <a href="https://forms.gle/HSiDGnTPvDvbzDAQA">feedback form</a>, or through your standard support channels. During the beta period, Cloud Run monitoring and APM tracing are available without a direct cost. Existing APM customers may incur increased span ingestion and volume costs. </div>
 
@@ -19,22 +19,20 @@ Google Cloud Run is a fully managed serverless platform for deploying and scalin
 
 ### Prerequisites
 
-Make sure you have a [Datadog API Key][7] and are using a programming language [supported by a Datadog tracing library][2].
+Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
 
-### Deploy a sample application in one click
+### 1. Install Agent
 
-To deploy a sample application without the need to follow the rest of the guide, you can use one of [these examples][8]. The installation process asks required details, such as your Datadog API key. Note that these applications send data to the default website `datadoghq.com`.
+You can install the Agent using Dockerfile or a buildpack. If you use buildpack, you must [install your tracing library](#install-tracing-library) first.
 
-### 1. Instrument your application
-
-To build your container with Datadog instrumentation you can follow one of these two methods, depending if you are using a Dockerfile or buildpack.
-
-#### 1.a Instrument using Dockerfile
-
-You can instrument your application by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
+#### Install Agent with Dockerfile
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
+
+
+
+You can instrument your application with a Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -52,14 +50,10 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-[Sample code for a simple Go application][1].
-More details on the [Go tracing library][2].
-
-[1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /serverless/installation/go/?tab=serverlessframework#install-the-datadog-lambda-library
-
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -80,14 +74,10 @@ ENTRYPOINT ["/app/datadog-init"]
 CMD ["ddtrace-run", "python", "app.py"]
 ```
 
-[Sample code for a simple Python application][1].
-More details on the [Python tracing library][2].
-
-[1]: https://github.com/DataDog/crpb/tree/main/python
-[2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
-
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -113,14 +103,10 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
 
-[Sample code for a simple Node.js application][1].
-More details on the [Node.js tracing library][2].
-
-[1]: https://github.com/DataDog/crpb/tree/main/js
-[2]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
-
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -139,14 +125,10 @@ CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-[Sample code for a simple Java application][1].
-More details on the [Java tracing library][2].
-
-[1]: https://github.com/DataDog/crpb/tree/main/java
-[2]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
-
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
 
 ```
 # copy the Datadog `serverless-init` into your Docker image
@@ -168,6 +150,8 @@ CMD ["dotnet", "helloworld.dll"]
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
+
 ```
 # copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
@@ -185,8 +169,87 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 ```
 
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+#### Install Agent with buildpack
+
+[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the Google Cloud container registry and Datadog serverless buildpack.
+
+**Note**: [Install the tracing library](#install-tracing-library) for your language before running the buildpack.
+
+Build your application by running the following command:
+
+   ```shell
+   pack build --builder=gcr.io/buildpacks/builder \
+   --buildpack from=builder \
+   --buildpack datadog/serverless-buildpack:latest \
+   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+   ```
+
+**Note**: Not compatible with Alpine.
+
+### 2. Install tracing library {#install-tracing-library}
+
+If you used buildpack, you can skip to [configure your application](#3-configure-your-application).
+
+{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
+{{< programming-lang lang="go" >}}
+Follow [these instructions][2] to install and configure the Go tracing library in your application to capture and submit traces. 
+
+
+[Sample code for a simple Go application][1].
+
+
+[1]: https://github.com/DataDog/crpb/tree/main/go
+[2]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+Follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces. 
+
+[Sample code for a simple Python application][1].
+
+[1]: https://github.com/DataDog/crpb/tree/main/python
+[2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces. 
+
+[Sample code for a simple Node.js application][1].
+
+[1]: https://github.com/DataDog/crpb/tree/main/js
+[2]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+Follow [these instructions][2] to install and configure the Java tracing library in your application to capture and submit traces. 
+
+[Sample code for a simple Java application][1].
+
+[1]: https://github.com/DataDog/crpb/tree/main/java
+[2]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+#### 
+
+Follow the instructions to install and configure the [.NET Core tracing library][1] and the [.NET Framework tracing library][2]. 
+
+[1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[2]: /tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+Follow [these instructions][2] to install and configure the Ruby tracing library in your application to capture and submit traces. 
+
 [Sample code for a simple Ruby application][1].
-More details on the [Ruby tracing library][2].
 
 [1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 [2]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
@@ -194,27 +257,10 @@ More details on the [Ruby tracing library][2].
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### 1.b Instrument using buildpack
+### 3. Configure your application
 
-[`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the GCP container registry and Datadog serverless buildpack.
-
-**Note**: Follow the instructions to install the [tracing library][2] for your language before running the buildpack.
-
-Build your application by running the following command:
-
-   ```shell
-   pack build --builder=gcr.io/buildpacks/builder \
-   --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack \
-   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-   ```
-
-**Note**: Not compatible with Alpine.
-
-### 2. Configure your application
-
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [GCP Secret][10] for privacy and safety issue.
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
+- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][10] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
 
@@ -240,7 +286,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
 
-- **Logs:** If you use the [GCP integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+- **Logs:** If you use the [Google Cloud integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
@@ -256,6 +302,85 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_ENV`          | See [Unified Service Tagging][6].                                  |
 | `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
 | `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
+
+### OpenTelemetry
+
+Follow these steps to send OpenTelemetry (OTel) data to Datadog.
+
+1. Tell OTel to export spans to Datadog `serverless-init`.
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+
+2. Add OTel's instrumentation for Express. This is akin to adding `ddtrace`.
+
+   ```js
+   // instrument.js
+
+   const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
+   const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new HttpInstrumentation(),
+          new ExpressInstrumentation(),
+      ],
+   });
+
+   ```
+
+3. Add instrumentation at runtime. For instance, for Node.js, use `NODE_OPTIONS`.
+   ```
+   # Dockerfile
+
+   FROM node
+
+   WORKDIR /app
+   COPY package.json index.js instrument.js /app/
+   RUN npm i
+
+   ENV NODE_OPTIONS="--require ./instrument"
+
+   CMD npm run start
+   ```
+
+4. Add the Datadog `serverles-init`.
+   ```
+   # Dockerfile
+
+   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   ```
+5. Enable OTel in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
+
+   ```
+   # Dockerfile
+
+   ENV DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT="localhost:4318"
+   ```
 
 ## Troubleshooting
 

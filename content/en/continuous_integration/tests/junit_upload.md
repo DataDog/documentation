@@ -28,7 +28,7 @@ If your testing framework can generate JUnit XML test reports, you can use these
 
 Install the [`datadog-ci`][3] CLI globally using `npm`:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
@@ -40,24 +40,24 @@ If installing Node.js in the CI is an issue, standalone binaries are provided wi
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
 Then run any command with `datadog-ci`:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci version
 {{< /code-block >}}
 
 {{% /tab %}}
 
 {{% tab "MacOS" %}}
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
 Then run any command with `datadog-ci`:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci version
 {{< /code-block >}}
 
@@ -83,7 +83,7 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 To upload your JUnit XML test reports to Datadog, run the following command, specifying the name of the service or library that was tested using the `--service` parameter, and one or more file paths to either the XML report files directly or directories containing them:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
@@ -158,7 +158,7 @@ pipeline {
 {{% tab "Bash" %}}
 If your CI system allows sub-shells:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 $(./run-tests.sh); export tests_exit_code=$?
 datadog-ci junit upload --service service_name ./junit.xml
 if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
@@ -337,7 +337,6 @@ The parameter provided must have the format `key=expression`, where `key` is the
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
-
 `/testcase/@attribute-name`
 : The XML attribute from `<testcase attribute-name="value">`.
 
@@ -371,7 +370,7 @@ To change `test.suite` tags from `value 1`, `value 2` to `SomeTestSuiteClass`, `
 </testsuites>
 {{< /code-block >}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service service_name \
   --xpath-tag test.suite=/testcase/@classname ./junit.xml
 {{< /code-block >}}
@@ -391,7 +390,7 @@ To add `custom_tag` to each test with values `value 1`, `value 2`:
 </testsuites>
 {{< /code-block >}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service service_name \
   --xpath-tag custom_tag=/testcase/@attr ./junit.xml
 {{< /code-block >}}
@@ -419,7 +418,7 @@ To add `custom_tag` to each test with values `value 1`, `value 2`:
 </testsuites>
 {{< /code-block >}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service service_name \
   --xpath-tag custom_tag=/testcase/..//property[@name=\'prop\'] ./junit.xml
 {{< /code-block >}}
@@ -435,7 +434,7 @@ Another way to provide additional tags to specific tests is including `<property
 
 To be processed, the `name` attribute in the `<property>` element must have the format `dd_tags[key]`, where `key` is the name of the custom tag to be added. Other properties are ignored.
 
-**Example**: Adding tags to a `<testcase>` element
+**Example**: Adding tags to a `<testcase>` element.
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -451,7 +450,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-**Example**: Adding tags to a `<testsuite>` element
+**Example**: Adding tags to a `<testsuite>` element.
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -465,6 +464,8 @@ To be processed, the `name` attribute in the `<property>` element must have the 
   </testsuite>
 </testsuites>
 {{< /code-block >}}
+
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
 
 ## Further reading
 

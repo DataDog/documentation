@@ -18,6 +18,9 @@ further_reading:
   - link: "/api/v1/monitors/"
     tag: "Documentation"
     text: "Datadog Monitors API"
+  - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+    tag: "Blog"
+    text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
 ---
 
 ## Overview
@@ -95,5 +98,5 @@ You can download a JSON file containing the definition of a monitor from the mon
 [10]: /monitors/notify/downtimes
 [11]: /monitors/manage
 [12]: /monitors/settings/
-[13]: /mobile/?tab=ios#monitors
+[13]: /service_management/mobile/?tab=ios#monitors
 [14]: /monitors/manage/search/#saved-view
