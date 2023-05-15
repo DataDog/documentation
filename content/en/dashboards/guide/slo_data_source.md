@@ -35,5 +35,5 @@ The *Display* parameter allows you to break out the query by the groups that are
 
 
 [1]: /dashboards/scheduled_reports/
-[2]: /monitors/service_level_objectives/#slo-status-corrections
-[3]: /monitors/service_level_objectives/#configuration
+[2]: /service_management/service_level_objectives/#slo-status-corrections
+[3]: /service_management/service_level_objectives/#configuration

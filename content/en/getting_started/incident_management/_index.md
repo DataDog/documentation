@@ -17,7 +17,7 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
       tag: 'Blog'
       text: 'Incident Management with Datadog'
-    - link: '/service_management/incident_management/notification_rules'
+    - link: '/service_management/incident_management/incident_settings'
       tag: 'Documentation'
       text: 'Notification Rules'
     - link: '/integrations/slack/?tab=slackapplicationus#using-datadog-incidents'
@@ -174,7 +174,7 @@ If there are follow-up tasks that you and your team need to complete to ensure t
 
 Datadog Incident Management can be customized with different severity and status levels, based on your organization's needs, and also include additional information such as APM services and teams related to the incident. For more information, see this [section][9] of the Incident Management page.
 
-You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Notification Rules][10] documentation.
+You can also set up notification rules to automatically notify specific people or services based on an incident's severity level. For more information, see the [Incident Settings][10] documentation.
 
 To customize Incident Management, go to the [incident settings page][11]. From the Datadog menu on the left-hand side, go to **Monitors** > **Incidents** (if you get an Incident Management welcome screen, click **Get Started**). Then on the top, click **Settings**.
 
@@ -199,7 +199,7 @@ You can also declare and edit incidents and quickly communicate to your teams th
 [7]: https://app.datadoghq.com/notebook/list
 [8]: https://app.datadoghq.com/incidents/settings#Messages
 [9]: /service_management/incident_management/#status-levels
-[10]: /service_management/incident_management/notification_rules
+[10]: /service_management/incident_management/incident_settings
 [11]: https://app.datadoghq.com/incidents/settings
 [12]: /service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
