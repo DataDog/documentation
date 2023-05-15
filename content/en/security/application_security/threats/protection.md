@@ -95,7 +95,7 @@ You can optionally mask the fact that the attacker has been detected and blocked
 
 You can also optionally redirect attackers to a custom deny page and away from your critical services and infrastructure. Specify a redirect URL and the type of redirect, for example permanent (`301` response code) or temporary (`302` response code). 
 
-### Disable protection across all services with (Disabling protection mode)
+### Disable protection across all services (Disabling protection mode)
 
 Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and suspicious requests from In-App WAF. The latter also requires you to configure blocking per service in In-App WAF. 
 
