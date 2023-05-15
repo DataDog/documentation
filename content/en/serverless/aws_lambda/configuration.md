@@ -325,6 +325,46 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
+## DD_SERVICE_MAPPING
+
+### Syntax
+`DD_SERVICE_MAPPING=key1|value1,key2|value2`...
+### Definition
+
+`DD_SERVICE_MAPPING`: This environment variable allows you to remap Datadog [Service][40] names for upstream non-Lambda (inferred spans) services. It accepts a comma-separated list of "old-service|new-service" pairs, delimited by a "|", without spaces.
+
+### Supported Keys for Renaming Upstream Service Names
+
+These keys represent specific service types. If you use one of these keys in the `DD_SERVICE_MAPPING` variable, it will rename *all* upstream service names associated with that particular service type.
+
+- `api_gateway` i.e. DD_SERVICE_MAPPING=`api_gateway|newServiceName`
+- `sns` i.e. DD_SERVICE_MAPPING=`sns|newServiceName`
+- `sqs` i.e. DD_SERVICE_MAPPING=`sqs|newServiceName`
+- `s3` i.e. DD_SERVICE_MAPPING=`s3|newServiceName`
+- `eventbridge` i.e. DD_SERVICE_MAPPING=`eventbridge|newServiceName`
+- `kinesis` i.e. DD_SERVICE_MAPPING=`kinesis|newServiceName`
+- `dynamodb` i.e. DD_SERVICE_MAPPING=`dynamodb|newServiceName`
+- `lambda_url` i.e. DD_SERVICE_MAPPING=`lambda_url|newServiceName`
+
+If you wish to rename *specific* upstream services then set use these keys
+- API Gateway: use the domain i.e. `r3pmxmplak.execute-api.us-east-2.amazonaws.com|newServiceName`
+- For SNS use the topic ARN i.e. `arn:aws:sns:us-east-1:123456789012:ExampleTopic|newServiceName`
+- For SQS use the queue ARN i.e. `arn:aws:sqs:us-east-1:123456789012:MyQueue|newServiceName`
+- For S3 use the bucket ARN i.e. `arn:aws:s3:::example-bucket|newServiceName`
+- For eventbridge use the event.source i.e. `my.event|newServiceName`
+- For Kinesis use the stream ARN i.e. `arn:aws:kinesis:us-east-1:123456789012:stream/MyStream|newServiceName`
+- For DynamoDB use the table ARN i.e. `arn:aws:dynamodb:us-east-1:123456789012:table/ExampleTableWithStream|newServiceName`
+- Lambda URLS: use the domain i.e. `a8hyhsshac.lambda-url.eu-south-1.amazonaws.com|newServiceName`
+
+### Examples
+
+1. `DD_SERVICE_MAPPING="08se3mvh28.execute-api.eu-west-1.amazonaws.com:new-service-name"`  
+   This will specifically rename `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name`, providing fine-grained control over upstream service names.
+
+2. `DD_SERVICE_MAPPING="api_gateway:new-service-name"`  
+   This will rename all `api_gateway` services to `new-service-name`, allowing you to consolidate many services under a single Datadog Service name.
+
+For downstream services, please refer to `DD_SERVICE_MAPPING` in the [respective tracer's config documentation][41] for your language.
 ## Filter or scrub information from logs
 
 To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
@@ -792,3 +832,5 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
+[40]: https://docs.datadoghq.com/tracing/glossary/#services
+[41]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
