@@ -95,10 +95,10 @@ The portal retrieves all the available Datadog plans for your tenant, including 
 
 ### Monitored subscriptions
 
-Select **Monitored Subscriptions** in the left sidebar to view or modify the scope of the Datadog resource. A list of currently monitored subscriptions appears. Use this view to configure the scope of the Datadog resource to monitor as many subscriptions as desired.  The subscription with the Datadog resource must be included in the scope.
+Select **Monitored Subscriptions** in the left sidebar to view or modify the scope of the Datadog resource. A list of currently monitored subscriptions appears. Use this view to configure the scope of the Datadog resource to monitor as many subscriptions as desired. The subscription with the Datadog resource must be included in the scope.
 
-   - To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`. 
-   - To remove subscriptions from being monitored with Datadog, select the subscriptions you wish to remove and click `Remove Subscriptions`. You can only remove subscriptions to which you have `Owner` role assigned.
+   - To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have the `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`. 
+   - To remove subscriptions from being monitored with Datadog, select the subscriptions you wish to remove and click `Remove Subscriptions`. Only users with the `Owner` role can remove subscriptions.
 
 **Note**: The same settings (such as host filters and log collection rules) are applied across all subscriptions in scope. To apply different settings to different subscriptions, create different Datadog resources.
 
