@@ -97,6 +97,8 @@ The portal retrieves all the available Datadog plans for your tenant, including 
 
 Select **Monitored Subscriptions** in the left sidebar to view or modify the scope of the Datadog resource. A list of currently monitored subscriptions appears. Use this view to configure the scope of the Datadog resource to monitor as many subscriptions as desired. The subscription with the Datadog resource must be included in the scope.
 
+{{< img src="integrations/guide/azure_portal/change-plan1.png" alt="The Datadog resource page within the Azure portal, with Overview selected along the left nav bar and the Change Plan tab highlighted" responsive="true" style="width:100%;">}}
+
    - To add subscriptions to monitor, click `+ Add Subscriptions`. The list of subscriptions available only includes subscriptions to which you have the `Owner` role assigned. Select the subscriptions you wish to monitor and click `Add`. 
    - To remove subscriptions from being monitored with Datadog, select the subscriptions you wish to remove and click `Remove Subscriptions`. Only users with the `Owner` role can remove subscriptions.
 
@@ -249,7 +251,7 @@ To activate single sign-on through Azure Active Directory, select **Enable singl
 
 Select **Keys** in the left sidebar to view a list of API keys for your Datadog resource.
 
-{{< img src="integrations/guide/azure_portal/api-keys.png" alt="The Keys view within the Azure portal displaying one API key" responsive="true" style="width:100%;">}}
+{{< img src="integrations/guide/azure_portal/azure-portal-multiple-subscriptions.png" alt="The Datadog resource in the Azure portal with Monitored Subscriptions selected in the Datadog organization configurations section and two subscriptions displayed" responsive="true" style="width:100%;">}}
 
 The Azure portal provides a read-only view of the API keys. To manage the keys, select the "Datadog portal" link. After making changes in Datadog, refresh the Azure portal view.
 
