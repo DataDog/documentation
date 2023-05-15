@@ -39,7 +39,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
 
-<div class="alert alert-info"><strong>Beta: Custom Instrumentation for Datadog Libraries</strong></br>For some supported languages, you can configure OTel instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
+<div class="alert alert-info"><strong>Beta: Custom Instrumentation with the OpenTelemetry API</strong></br>For some supported languages, you can configure OTel instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
 
 ## Further Reading
 
