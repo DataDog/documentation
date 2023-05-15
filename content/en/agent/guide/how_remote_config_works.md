@@ -169,6 +169,8 @@ Configure [monitors][15] to receive notifications when an event of interest is e
 
 ## Troubleshooting
 
+If you experience issues using Remote Configuration, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][2].
+
 ### Restart the Agent
 
 After the Agent configuration is updated in the [`datadog.yaml`][16] file, restart the Agent for this change to take effect. 
