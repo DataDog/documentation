@@ -39,8 +39,6 @@ If your service is running with <a href="/agent/guide/how_remote_config_works/#e
 
 ### Identify vulnerable services
 
-<div class="alert alert-info">Application Vulnerability Management vulnerability detection is in beta.</a></div>
-
 Datadog [Application Vulnerability Management][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
 
 ## Compatibility
@@ -89,8 +87,7 @@ To configure the information redacted by ASM, refer to the [data security config
 
 Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][12] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][13], a security signal is generated in Datadog.
 
-<div class="alert alert-info"><strong>Beta: Automatic Threat Patterns Updates</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, the threat patterns being used to monitor your service is automatically updated whenever Datadog publishes updates.</div>
+**Automatic Threat Patterns Updates:** If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, the threat patterns being used to monitor your service is automatically updated whenever Datadog publishes updates.
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
