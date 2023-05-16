@@ -41,7 +41,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 <div class="alert alert-info"><strong>Beta: Custom Instrumentation with the OpenTelemetry API</strong></br>For some supported languages, you can configure OTel instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
 
-Datadog supports the W3C Trace Context standard, ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as that OpenTelemetry (OTel) libraries or Datadog tracing libraries, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
+Datadog supports the [W3C Trace Context standard][6], ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as that OpenTelemetry (OTel) libraries or Datadog tracing libraries, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
 
 ## Further Reading
 
@@ -52,3 +52,4 @@ Datadog supports the W3C Trace Context standard, ensuring complete traces are ca
 [3]: /opentelemetry/otel_collector_datadog_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [5]: /tracing/trace_collection/trace_context_propagation/
+[6]: https://www.w3.org/TR/trace-context/
