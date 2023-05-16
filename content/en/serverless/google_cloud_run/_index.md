@@ -320,7 +320,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
 
    const provider = new NodeTracerProvider({
       resource: new Resource({
-          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
+          [ SemanticResourceAttributes.SERVICE_NAME ]: 'your-service-name',
       })
    });
 
@@ -367,7 +367,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
    CMD npm run start
    ```
 
-4. Add the Datadog `serverles-init`.
+4. Add the Datadog `serverless-init`.
    ```
    # Dockerfile
 
