@@ -21,7 +21,7 @@ All RUM data refers to user or synthetics sessions, which are at the top of the 
 
 #### Sample search: List all sessions from a user
 
-To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the action count and user.
+To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the session status and user.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-all-session-user-1.png" alt="Sample search listing all sessions from user 'Lee Davis'." style="width:80%;">}}
 
@@ -30,9 +30,9 @@ Each session is automatically associated with a unique `session.id`.
 ## Views
 Within a session, a view event is created each time a user navigates to a page (Browser RUM) or to a screen or screen segment (Mobile RUM) of an application. 
 
-Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the video below.
+Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the image below.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views-2.png" alt="RUM views." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views-3.png" alt="RUM views." style="width:80%;">}}
 
 Similarly to the `session.id`, each view automatically has a unique `view.id` connected to it. 
 
@@ -58,7 +58,7 @@ Errors can be viewed in both RUM and Error Tracking. Source and custom errors ar
 
 #### Sample search: List of all crashes that occurred on a page in the application
 
-This example displays query that searches within the errors event to view all crashes that occurred on the "CheckoutViewController" page for a particular application.
+This example displays a query that searches within the errors event to view all crashes that occurred on the "CheckoutViewController" page for a particular application.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller-1.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
 
