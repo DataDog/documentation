@@ -105,7 +105,7 @@
 
             <!-- ID is scrollspy target -->
             <!-- keep glossary-nav element here. $letters slice needs to be formed before use -->
-            <nav id="glossary-nav">
+            <nav id="glossary-nav" class="d-none d-md-block">
                 <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                     {{ range $letters }}
                         <li class="nav-item" x-cloak x-show="shouldShowGlossaryLetter('{{ . | lower }}')">
