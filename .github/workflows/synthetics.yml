@@ -34,7 +34,6 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Run Datadog Synthetic tests
-        if: steps.check-status.outputs.conclusion == 'success'
         uses: DataDog/synthetics-ci-github-action@v0.11.0
         env:
           CI_COMMIT_REF_NAME: ${{steps.extract_branch.outputs.branch}}
@@ -42,10 +41,3 @@ jobs:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
           config_path: './datadog-ci.preview.json'
-
-      - name: Preview did not build
-        if: steps.check-status.outputs.conclusion == 'failure' || steps.check-status.outputs.conclusion == 'timed_out'
-        shell: bash
-        run: |
-          echo "Preview failed to build, synthetics not run"
-          exit 1
