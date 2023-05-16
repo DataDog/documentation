@@ -339,7 +339,7 @@ dvcClient.subscribe(
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-DevCycle does not currently support this integration. Create a ticket with DevCycle to request this feature.
+DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
 
 
 {{% /tab %}}
