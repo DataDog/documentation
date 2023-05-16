@@ -129,7 +129,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">For metric/data collection or custom metrics that requires querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the datadog user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained//">PostgreSQL custom metric collection</a> for more information. </div>
+<div class="alert alert-info">For metric/data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the datadog user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained//">PostgreSQL custom metric collection</a> for more information. </div>
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
