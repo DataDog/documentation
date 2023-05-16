@@ -19,12 +19,18 @@
         getProductParamValue (queryParam) {
             return (queryParam.includes('?product=') && !queryParam.includes('?product=all')) ? queryParam.replace('?product=', '') : ''
         },
+        resetFilteredLetters (selectedFilter) {
+            if (selectedFilter !== this.filterValue) {
+                this.filteredLetters = []
+            }
+        },
         appendToFilteredLetters (gtcEl) {
             gtcEl.classList.contains('show') && this.filteredLetters.push(gtcEl.dataset.letter)
         },
         pushState (productParamValue) {
             const newParam = `?product=${productParamValue}`
             window.history.pushState({param: newParam },'', newParam)
+            window.scroll(0, 0)
         }
     }"
     x-init="filterValue = getProductParamValue(window.location.search) ">
@@ -112,14 +118,14 @@
                 <!-- pushState adds the product query param to url without loading/refreshing the url/page  -->
                 <div class="filters-glossary">
                     <button 
-                    @click="filterValue = ''; filteredLetters = []; pushState('all')"
+                    @click="resetFilteredLetters($el.dataset.filter); filterValue = ''; pushState('all')"
                     :class="(filterValue === 'all' || !filterValue) && 'active'"
                     class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
-                    data-filter="{{.Params.filter_all | lower}}">{{.Params.filter_all }}</button> 
+                    data-filter="{{ .Params.filter_all | lower }}">{{.Params.filter_all }}</button> 
                     {{ range $products }}
                         {{ $product := . | anchorize}}
                         <button 
-                        @click="filterValue = '{{ $product }}'; filteredLetters = []; pushState('{{ $product }}')"
+                        @click="resetFilteredLetters('{{ $product }}'); filterValue = '{{ $product }}'; pushState('{{ $product }}')"
                         :class="$el.dataset.filter === filterValue && 'active'"
                         class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
                         data-filter="{{ $product }}">{{ . | upper }}</button>
