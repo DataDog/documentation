@@ -400,6 +400,14 @@ frontend network_devices_netflow_frontend
     option tcplog
     default_backend datadog-network-devices-netflow
 
+# This declares the endpoint where your Agents connects for
+# receiving Remote Configurations (for example, the value of "remote_configuration.rc_dd_url")
+frontend remote_configuration_frontend
+    bind *:3846
+    mode http
+    option tcplog
+    default_backend datadog-remote-configuration
+
 # This is the Datadog server. In effect, any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -505,7 +513,6 @@ backend datadog-network-devices-netflow
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
-#remove this section if your environment does not support Remote Configuration
 backend datadog-remote-configuration
     balance roundrobin
     mode http
@@ -660,6 +667,14 @@ frontend network_devices_netflow_frontend
     option tcplog
     default_backend datadog-network-devices-netflow
 
+# This declares the endpoint where your Agents connects for
+# receiving Remote Configurations (for example, the value of "remote_configuration.rc_dd_url")
+frontend remote_configuration_frontend
+    bind *:3846 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
+    mode http
+    option tcplog
+    default_backend datadog-remote-configuration
+
 # This is the Datadog server. In effect any TCP request coming
 # to the forwarder frontends defined above are proxied to
 # Datadog's public endpoints.
@@ -765,7 +780,6 @@ backend datadog-network-devices-netflow
     # Uncomment the following configuration for older HAProxy versions
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 
-#remove this section if your environment does not support Remote Configuration
 backend datadog-remote-configuration
     balance roundrobin
     mode http
@@ -840,8 +854,7 @@ network_devices:
             # Comment the line below to use encryption between the Agent and HAProxy
             logs_no_ssl: true
 
-#remove this section if your environment does not support Remote Configuration
-remote_config:
+remote_configuration:
     rc_dd_url: haproxy.example.com:3846
     # Comment the line below to use encryption between the Agent and HAProxy
     no_tls: true
@@ -1024,8 +1037,6 @@ stream {
         proxy_ssl on;
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
-}
-#remove this section if your environment does not support Remote Configuration
     server {
         listen 3846; #listen for Remote Configuration requests
         proxy_ssl_verify on;
@@ -1143,14 +1154,13 @@ stream {
         proxy_ssl on;
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
-}
-#remove this section if your environment does not support Remote Configuration
     server {
         listen 3846 ssl; #listen for Remote Configuration requests
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass config.{{< region-param key="dd_site" >}}:443;
-
+    }
+}
 ```
 
 **Note**: You can remove `proxy_ssl_verify on` if you are unable to get the certificates on the proxy host, but be aware that NGINX will not be able to verify Datadog's intake certificate in that case.
@@ -1211,9 +1221,8 @@ network_devices:
             logs_dd_url: nginx.example.com:3845
             # Comment the line below to use encryption between the Agent and NGINX
             logs_no_ssl: true
-            
-#remove this section if your environment does not support Remote Configuration
-remote_config:
+
+remote_configuration:
     rc_dd_url: nginx.example.com:3846
     # Comment the line below to use encryption between the Agent and NGINX
     no_tls: true
