@@ -24,13 +24,13 @@ jobs:
         shell: bash
         run: echo ${{steps.extract_branch.outputs.branch}}
 
-      - name: Wait for tests to succeed
+      - name: Wait for previews
         uses: lewagon/wait-on-check-action@v1.3.1
         id: check-status
         with:
           wait-interval: 60
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          check-name: dd-gitlab/build_preview 
+          check-name: 'dd-gitlab/build_preview'
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Run Datadog Synthetic tests
