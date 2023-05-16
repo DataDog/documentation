@@ -280,7 +280,7 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 ## Git metadata upload
 
-From `datadog-ci>=2.9.0`, CI Visibility automatically uploads git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, you can do so by passing the flag `--skip-git-metadata-upload`.
+From `datadog-ci` version `2.9.0` or later, CI Visibility automatically uploads Git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, pass the flag `--skip-git-metadata-upload`.
 
 
 ## Collecting environment configuration metadata
