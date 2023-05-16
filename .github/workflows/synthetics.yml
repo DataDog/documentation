@@ -24,13 +24,13 @@ jobs:
         shell: bash
         run: echo ${{steps.extract_branch.outputs.branch}}
 
-      - name: Wait for preview status
-        uses: fountainhead/action-wait-for-check@v1.1.0
+      - name: Wait for tests to succeed
+        uses: lewagon/wait-on-check-action@v1.3.1
         id: check-status
         with:
-          intervalSeconds: 60
-          token: ${{ secrets.GITHUB_TOKEN }}
-          checkName: dd-gitlab/build_preview 
+          wait-interval: 60
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          check-name: dd-gitlab/build_preview 
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Run Datadog Synthetic tests
