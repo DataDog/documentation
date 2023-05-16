@@ -447,8 +447,11 @@ Cypress interactive mode (which you can enter by running `cypress open`) is not 
 ### Mocha parallel tests
 Mocha's [parallel mode][4] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
 
+### Cucumber parallel tests
+Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
+
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][16] is not supported.
+Jest's [test.concurrent][17] is not supported.
 
 ## Best practices
 
@@ -467,14 +470,14 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][17] instead:
+And use [`test.each`][18] instead:
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][18]:
+For `mocha`, use [`mocha-each`][19]:
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -497,7 +500,7 @@ When CI Visibility is enabled, the following data is collected from your project
 * Git commit history including the hash, message, author information, and files changed (without file contents).
 * Information from the CODEOWNERS file.
 
-In addition to that, if [Intelligent Test Runner][19] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][20] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
@@ -522,7 +525,8 @@ In addition to that, if [Intelligent Test Runner][19] is enabled, the following 
 [13]: /continuous_integration/guides/rum_integration/
 [14]: https://docs.cypress.io/api/plugins/before-run-api
 [15]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[16]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[17]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[18]: https://www.npmjs.com/package/mocha-each
-[19]: /continuous_integration/intelligent_test_runner/
+[16]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
+[17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[19]: https://www.npmjs.com/package/mocha-each
+[20]: /continuous_integration/intelligent_test_runner/
