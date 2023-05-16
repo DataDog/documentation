@@ -111,7 +111,7 @@ Both methods allow trace ID injection, making it possible to connect logs and tr
 
 ### Custom metrics with DogStatsD
 
-The Azure App Service extension includes an instance of [DogStatsD][8] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
+The Azure App Service extension includes an instance of [DogStatsD][9] (Datadog's metrics aggregation service). This enables you to submit custom metrics, service checks, and events directly to Datadog from Azure Web Apps and Functions with the extension.
 
 Writing custom metrics and checks in Azure App Service is similar to the process for doing so with an application on a host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
