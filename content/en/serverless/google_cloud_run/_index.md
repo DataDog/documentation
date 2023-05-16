@@ -290,6 +290,8 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
+- **Trace Propagation:** Trace propagation through W3C Trace Context is not supported. In order to propagate trace context for distributed tracing, set the `DD_TRACE_PROPAGATION_STYLE` environment variable to `'datadog'` for your Cloud Run app and any services downstream of it.
+
 ### Environment Variables
 
 | Variable | Description |
