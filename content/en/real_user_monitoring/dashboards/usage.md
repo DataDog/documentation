@@ -22,6 +22,8 @@ The RUM Web App Usage dashboard provides insights about how your customers are u
 - **User demographics**:
   Observe the number of sessions by country and the top countries, devices, and operating systems for your application. You can also view a graph of the top browser usage shares.
 
+{{< img src="real_user_monitoring/dashboards/dashboard-usage-web-app.png" alt="Out-of-the-box RUM web app usage dashboard" style="width:100%" >}}
+
 For more information about the data displayed, see [RUM Browser Data Collected][1].
 
 ## Mobile usage
@@ -39,6 +41,8 @@ The RUM Mobile App Usage dashboard provides insights about how your customers ar
 - **User demographics**:
   Observe the number of sessions by country and the top countries, devices, and operating systems for your application. You can also view a graph of the top browser usage shares.
 
+{{< img src="real_user_monitoring/dashboards/dashboard-usage-mobile-app.png" alt="Out-of-the-box RUM mobile app usage dashboard" style="width:100%" >}}
+
 For more information about the data displayed, see our documentation for each platform: [iOS RUM][2], [Android RUM][3], [React Native RUM][4], and [Flutter RUM][5].
 
 ## User demographics
@@ -51,6 +55,8 @@ The RUM User Demographics dashboard gives you insight into geographic adoption o
   Get a global view of your users and see which countries, regions, and cities use your application the most.
 - **Compare Continents and Compare Countries**:
   See how your users experience your application differently based on their continent and country.
+
+{{< img src="real_user_monitoring/dashboards/dashboard-usage-user-demographics.png" alt="Out-of-the-box RUM user demographics dashboard" style="width:100%" >}}
 
 For more information about the data displayed, see [Real User Monitoring Data Security][6].
 
@@ -66,6 +72,8 @@ The RUM Frustration Signals dashboard gives you insight into where your users ar
   When a user clicks an element and encounters a JavaScript error.
 - **Dead Click**:
   When a user clicks on a static element that produces no action on the page.
+
+{{< img src="real_user_monitoring/dashboards/dashboard-usage-frustration-signals.png" alt="Out-of-the-box RUM frustration signals dashboard" style="width:100%" >}}
 
 For more information about the data displayed, see [Real User Monitoring Data Security][6].
 
