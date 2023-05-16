@@ -24,7 +24,16 @@ jobs:
         shell: bash
         run: echo ${{steps.extract_branch.outputs.branch}}
 
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.1.0
+        id: check-status
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          checkName: dd-gitlab/build_preview 
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
       - name: Run Datadog Synthetic tests
+        if: steps.check-status.outputs.conclusion == 'success'
         uses: DataDog/synthetics-ci-github-action@v0.11.0
         env:
           CI_COMMIT_REF_NAME: ${{steps.extract_branch.outputs.branch}}
@@ -32,3 +41,10 @@ jobs:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
           config_path: './datadog-ci.preview.json'
+
+      - name: Preview did not build
+        if: steps.check-status.outputs.conclusion == 'success'
+        shell: bash
+        run: |
+          echo "Preview failed to build, synthetics not run"
+          exit 1
