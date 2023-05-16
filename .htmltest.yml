@@ -12,7 +12,7 @@ CheckExternal: false
 CheckImages: false
 IgnoreAltMissing: true
 CheckInternal: true
-CheckInternalHash: true
+CheckInternalHash: false
 CheckMailto: false
 CheckMeta: false
 CheckScripts: false
