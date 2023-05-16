@@ -85,38 +85,6 @@
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
-        - action: pull-and-push-file
-          branch: alai97/add-marketplace-documentation
-          globs:
-          - 'README.md'
-          options:
-            dest_path: '/developers/integrations/'
-            file_name: '_index.md'
-
-        - action: pull-and-push-file
-          branch: alai97/add-marketplace-documentation
-          globs:
-          - 'docs/dev/create_a_tile.md'
-          options:
-            dest_path: '/developers/integrations/'
-            file_name: 'create_a_tile.md'
-
-        - action: pull-and-push-file
-          branch: alai97/add-marketplace-documentation
-          globs:
-          - 'docs/dev/marketplace_offering.md'
-          options:
-            dest_path: '/developers/integrations/'
-            file_name: 'marketplace_offering.md'
-
-        - action: pull-and-push-file
-          branch: alai97/add-marketplace-documentation
-          globs:
-          - 'docs/dev/agent_integration.md'
-          options:
-            dest_path: '/developers/integrations/'
-            file_name: 'agent_integration.md'
-
         - action: pull-and-push-folder
           branch: alai97/add-marketplace-documentation
           globs:
