@@ -117,11 +117,13 @@
                 <!-- Filtering section -->
                 <!-- pushState adds the product query param to url without loading/refreshing the url/page  -->
                 <div class="filters-glossary">
-                    <button 
-                    @click="resetFilteredLetters($el.dataset.filter); filterValue = ''; pushState('all')"
-                    :class="(filterValue === 'all' || !filterValue) && 'active'"
-                    class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
-                    data-filter="{{ .Params.filter_all | lower }}">{{.Params.filter_all }}</button> 
+                    {{ if  $products }}
+                        <button 
+                        @click="resetFilteredLetters($el.dataset.filter); filterValue = ''; pushState('all')"
+                        :class="(filterValue === 'all' || !filterValue) && 'active'"
+                        class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+                        data-filter="{{ .Params.filter_all | lower }}">{{.Params.filter_all }}</button> 
+                    {{ end }}
                     {{ range $products }}
                         {{ $product := . | anchorize}}
                         <button 
