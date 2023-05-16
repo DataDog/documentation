@@ -1,0 +1,34 @@
+name: Preview Synthetics
+on: [pull_request]
+
+# Stop the current running job if a new push is made to the PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  synthetic_testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "branch=$(echo ${{ github.event.pull_request.head.ref }})" >>$GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Echo brnach name
+        shell: bash
+        run: echo ${{steps.extract_branch.outputs.branch}}
+
+      - name: Run Datadog Synthetic tests
+        uses: DataDog/synthetics-ci-github-action@v0.11.0
+        env:
+          CI_COMMIT_REF_NAME: ${{steps.extract_branch.outputs.branch}}
+        with:
+          api_key: ${{secrets.DD_API_KEY}}
+          app_key: ${{secrets.DD_APP_KEY}}
+          config_path: './datadog-ci.preview.json'
