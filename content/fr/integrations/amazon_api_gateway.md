@@ -52,7 +52,7 @@ Pour activer la journalisation API Gateway :
 2. Sélectionnez l'API souhaitée et accédez à la section Stages.
 3. Dans l'onglet **Logs**, activez **Enable CloudWatch Logs** et **Enable Access Logging**.
 4. Sélectionnez le niveau `INFO` afin de récupérer l'ensemble des requêtes.
-5. Assurez-vous d'inclure `apigateway` dans le nom de votre **groupe Cloudwatch**.
+5. Assurez-vous d'inclure `api-gateway` au début du nom de votre **groupe Cloudwatch**.
 6. Sélectionnez le format JSON (les formats CLF et CSV sont également pris en charge), et ajoutez ce qui suit dans le champ **Log format** :
 
     ```text
