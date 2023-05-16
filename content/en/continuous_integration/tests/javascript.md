@@ -441,13 +441,12 @@ Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwri
 If you want visibility into the browser process, consider using [RUM & Session Replay][12]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][13] guide.
 
 ### Cypress interactive mode
-
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][14], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][15].
 
 ### Mocha parallel tests
 Mocha's [parallel mode][4] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
 
-### Cucumber parallel tests
+### Cucumber parallel tests
 Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
 
 ### Jest's `test.concurrent`
