@@ -444,10 +444,10 @@ If you want visibility into the browser process, consider using [RUM & Session R
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][14], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][15].
 
 ### Mocha parallel tests
-Mocha's [parallel mode][4] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
+Mocha's [parallel mode][4] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
 ### Cucumber parallel tests
-Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
+Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
 ### Jest's `test.concurrent`
 Jest's [test.concurrent][17] is not supported.
