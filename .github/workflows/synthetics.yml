@@ -24,10 +24,11 @@ jobs:
         shell: bash
         run: echo ${{steps.extract_branch.outputs.branch}}
 
-      - name: Wait for build to succeed
+      - name: Wait for preview status
         uses: fountainhead/action-wait-for-check@v1.1.0
         id: check-status
         with:
+          intervalSeconds: 60
           token: ${{ secrets.GITHUB_TOKEN }}
           checkName: dd-gitlab/build_preview 
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
@@ -43,7 +44,7 @@ jobs:
           config_path: './datadog-ci.preview.json'
 
       - name: Preview did not build
-        if: steps.check-status.outputs.conclusion == 'success'
+        if: steps.check-status.outputs.conclusion == 'failure' || steps.check-status.outputs.conclusion == 'timed_out'
         shell: bash
         run: |
           echo "Preview failed to build, synthetics not run"
