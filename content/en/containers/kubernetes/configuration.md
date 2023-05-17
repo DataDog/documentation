@@ -193,4 +193,4 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 [11]: /agent/kubernetes/tag/
 [12]: /agent/guide/secrets-management/
 [13]: /agent/guide/autodiscovery-management/
-[14]: /containers/guides/kubernetes_daemonset#cluster-agent-event-collection
+[14]: /containers/guide/kubernetes_daemonset#cluster-agent-event-collection

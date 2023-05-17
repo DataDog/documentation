@@ -548,4 +548,4 @@ tagger_warmup_duration: 5
 [6]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
 [7]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
 [8]: /agent/guide/autodiscovery-management/
-[9]: /containers/kubernetes/guide/kubernetes_daemonset#log-collection
+[9]: /containers/guide/kubernetes_daemonset/#log-collection
