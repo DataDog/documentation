@@ -182,7 +182,7 @@ document.addEventListener("scroll", function handler() {
 
 [1]: /real_user_monitoring/dashboards/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/dashboards/performance_overview_dashboard
+[3]: /real_user_monitoring/dashboards/performance
 [4]: /real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /synthetics/browser_tests/

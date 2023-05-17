@@ -1,6 +1,8 @@
 ---
 title: RUM Error Dashboards
 kind: documentation
+aliases:
+- '/real_user_monitoring/dashboards/errors_dashboard'
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

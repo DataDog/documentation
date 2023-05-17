@@ -2,6 +2,8 @@
 title: Testing and Deployment Dashboards
 kind: documentation
 description: Learn about the out-of-the-box RUM testing and deployment dashboards.
+aliases:
+- '/real_user_monitoring/dashboards/testing_coverage'
 further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'
