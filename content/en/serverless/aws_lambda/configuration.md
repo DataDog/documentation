@@ -327,15 +327,15 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
-## DD_SERVICE_MAPPING
+### DD_SERVICE_MAPPING
 
 `DD_SERVICE_MAPPING` is an environment variable used to rename Datadog [Service][40] names for upstream non-Lambda services (inferred spans). It uses a comma-separated list of `old-service:new-service` pairs, delimited by a colon (`:`), without spaces. 
 
-### Syntax
+#### Syntax
 
 `DD_SERVICE_MAPPING=key1:value1,key2:value2`...
 
-### Renaming Service Types
+#### Renaming Service Types
 
 The following keys represent specific service types. Using these keys in the `DD_SERVICE_MAPPING` variable renames all associated upstream service names:
 
@@ -343,7 +343,7 @@ The following keys represent specific service types. Using these keys in the `DD
 
 Example: `DD_SERVICE_MAPPING=lambda_s3:newServiceName` renames all `lambda_s3` services to `newServiceName`.
 
-### Renaming Specific Services
+#### Renaming Specific Services
 
 For more granularity, use specific identifiers as keys:
 
@@ -356,7 +356,7 @@ For more granularity, use specific identifiers as keys:
 - DynamoDB: Table name, e.g., `ExampleTableWithStream:newServiceName`
 - Lambda URLs: API ID, e.g., `a8hyhsshac:newServiceName`
 
-### Examples
+#### Examples
 
 1. `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"`  
    Renames upstream `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name`.
