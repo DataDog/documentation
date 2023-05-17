@@ -3,6 +3,7 @@ title: Sensitive Data Scanner
 kind: documentation
 aliases:
     - /logs/log_configuration/sensitive_data_detection
+    - /account_management/org_settings/sensitive_data_detection
 further_reading:
     - link: "/data_security/logs/"
       tag: "Documentation"
@@ -30,7 +31,7 @@ Sensitive Data Scanner is a stream-based, pattern matching service that you can 
 
 Sensitive Data Scanner can be found under [Organization Settings][1].
 
-{{< img src="logs/sensitive_data_scanner/sds_main_28_03_23.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
+{{< img src="sensitive_data_scanner/sds_main_28_03_23.png" alt="Sensitive Data Scanner in Organization Settings" style="width:90%;">}}
 
 ### Setup
 
@@ -62,18 +63,18 @@ Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following 
 - **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position (start/end) and length (# of characters) to redact within matching values. Redaction, partial redaction, and hashing are all irreversible actions.
 - **Name the rule:** Provide a human-readable name for the rule.
 
-{{< img src="logs/sensitive_data_scanner/sds_rules_28_03_23.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
+{{< img src="sensitive_data_scanner/sds_rules_28_03_23.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
 
 ### Out-of-the-box Scanning Rules
 
 The Scanning Rule Library contains an evergrowing collection of predefined rules maintained by Datadog for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more.
-{{< img src="logs/sensitive_data_scanner/sds-library-28-03-23.png" alt="Scanning Rule Library" style="width:90%;">}}
+{{< img src="sensitive_data_scanner/sds-library-28-03-23.png" alt="Scanning Rule Library" style="width:90%;">}}
 
 ### Permissions
 
 By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][3] for details on Roles and Permissions.
 
-{{< img src="logs/sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
+{{< img src="sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
 
 ### Using tags with Query based RBAC
 
@@ -83,7 +84,7 @@ Control who can access events containing sensitive data. Use tags added by Sensi
 
 When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][4] summarizing sensitive data findings is automatically installed in your account.
 
-{{<img src="account_management/sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
+{{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
 To access this dashboard, go to **Dashboards > Dashboards List** and search for `Sensitive Data Scanner Overview`.
 
