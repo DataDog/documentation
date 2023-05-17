@@ -115,6 +115,8 @@ Windows Event Log を Datadog イベントとして収集するには、`win32_e
 
 Agent は、2 つの方法で Windows Event Log を Datadog イベントとして収集するよう構成することができます。各方法は、チャンネルとフィルターのための独自の構成構文を持っています ([イベントのフィルタリング](?tab=events#filtering-events)を参照してください)。従来の方法は WMI を使用し、インスタンスのデフォルトモードです。新しい方法は、Event Log API を使用します。Event Log API を使用する方がパフォーマンスが良いので、Event Log API を使用することをお勧めします。Event Log API の収集メソッドを使用するには、各インスタンスで `legacy_mode: false` を設定します。
 
+`legacy_mode: false` が設定されている場合、`path` は `win32_event_log.dconf.yaml` ファイルで設定する必要があります。`legacy_mode` が設定されていないか `true` に設定されている場合、`source_name`、`event_id`、`message_filters`、`log_file`、`type` のフィルターのうち少なくとも 1 つが設定されている必要があります。
+
 この例では、`Security` と `<CHANNEL_2>` チャンネルのエントリーを示します。
 
 ```yaml
@@ -430,7 +432,7 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 
 ## その他の参考資料
 
-### ドキュメント
+### Documentation
 
 - (レガシー) [イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する][9]
 

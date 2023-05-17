@@ -3863,6 +3863,7 @@ components:
       - snmp_usage
       - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
+      - vuln_management_hosts_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3896,6 +3897,7 @@ components:
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
+      - VULN_MANAGEMENT_HOSTS_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7359,6 +7361,8 @@ components:
       - estimated_rum_sessions_percentage
       - universal_service_monitoring_usage
       - universal_service_monitoring_percentage
+      - vuln_management_hosts_usage
+      - vuln_management_hosts_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7424,6 +7428,8 @@ components:
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
+      - VULN_MANAGEMENT_HOSTS_USAGE
+      - VULN_MANAGEMENT_HOSTS_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7679,6 +7685,15 @@ components:
           type: number
         universal_service_monitoring_usage:
           description: The universal service monitoring usage by tag(s).
+          format: double
+          type: number
+        vuln_management_hosts_percentage:
+          description: The percentage of Application Vulnerability Management usage
+            by tag(s).
+          format: double
+          type: number
+        vuln_management_hosts_usage:
+          description: The Application Vulnerability Management usage by tag(s).
           format: double
           type: number
       type: object
@@ -17844,6 +17859,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        vuln_management_host_count_top99p:
+          description: Shows the 99th percentile of all Application Vulnerability
+            Management hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
       type: object
     UsageSummaryDateOrg:
       description: Global hourly report of all data billed by Datadog for a given
@@ -18247,6 +18267,11 @@ components:
         vsphere_host_top99p:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        vuln_management_host_count_top99p:
+          description: Shows the 99th percentile of all Application Vulnerability
+            Management hosts over all hours in the current date for the given org.
           format: int64
           type: integer
       type: object
@@ -18699,6 +18724,11 @@ components:
         vsphere_host_top99p_sum:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        vuln_management_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Application Vulnerability
+            Management hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
       type: object

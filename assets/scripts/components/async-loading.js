@@ -40,22 +40,22 @@ function loadPage(newUrl) {
             const mainContentWrapper = document.querySelector(
                 '.mainContent-wrapper'
             );
-            const newmainContentWrapper = httpRequest.responseXML.querySelector(
+            const newmainContentWrapper = newDocument.querySelector(
                 '.mainContent-wrapper'
             );
 
-            const newContent = httpRequest.responseXML.getElementById(
+            const newContent = newDocument.getElementById(
                 'mainContent'
             );
-            const newTOC = httpRequest.responseXML.querySelector(
+            const newTOC = newDocument.querySelector(
                 '.js-toc-container'
             );
 
             const currentSidebar = document.querySelector('.sidebar');
-            const newSidebar = httpRequest.responseXML.querySelector('.sidebar');
+            const newSidebar = newDocument.querySelector('.sidebar');
 
             const currentPageIsSearchPage = document.documentElement.dataset.relpermalink.includes("search");
-            const newPageIsSearchPage = httpRequest.responseXML.querySelector("html").dataset.relpermalink.includes("search");
+            const newPageIsSearchPage = newDocument.querySelector("html").dataset.relpermalink.includes("search");
 
             // For going from search page (/search) with no sidenav searchbar, to another page with sidenav searchbar
             if (currentPageIsSearchPage && !newPageIsSearchPage) {
