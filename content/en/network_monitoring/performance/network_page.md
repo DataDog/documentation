@@ -26,7 +26,7 @@ further_reading:
 
 To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection terminated.
 
-{{< img src="network_performance_monitoring/network_page/network_diagram.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
+{{< img src="network_performance_monitoring/network_page/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
