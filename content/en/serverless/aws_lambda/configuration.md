@@ -327,44 +327,43 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 ## DD_SERVICE_MAPPING
 
+`DD_SERVICE_MAPPING` is an environment variable used to rename Datadog [Service][40] names for upstream non-Lambda services (inferred spans). It uses a comma-separated list of "old-service:new-service" pairs, without spaces. 
+
 ### Syntax
-`DD_SERVICE_MAPPING=key1|value1,key2|value2`...
-### Definition
 
-`DD_SERVICE_MAPPING`: This environment variable allows you to remap Datadog [Service][40] names for upstream non-Lambda (inferred spans) services. It accepts a comma-separated list of "old-service|new-service" pairs, delimited by a "|", without spaces.
+`DD_SERVICE_MAPPING=key1:value1,key2:value2`...
 
-### Supported Keys for Renaming Upstream Service Names
+### Renaming Service Types
 
-These keys represent specific service types. If you use one of these keys in the `DD_SERVICE_MAPPING` variable, it will rename *all* upstream service names associated with that particular service type.
+The following keys represent specific service types. Using these keys in the `DD_SERVICE_MAPPING` variable will rename all associated upstream service names:
 
-- `lambda_api_gateway` i.e. DD_SERVICE_MAPPING=`lambda_api_gateway|newServiceName`
-- `lambda_sns` i.e. DD_SERVICE_MAPPING=`lambda_sns|newServiceName`
-- `lambda_sqs` i.e. DD_SERVICE_MAPPING=`lambda_sqs|newServiceName`
-- `lambda_s3` i.e. DD_SERVICE_MAPPING=`lambda_s3|newServiceName`
-- `lambda_eventbridge` i.e. DD_SERVICE_MAPPING=`lambda_eventbridge|newServiceName`
-- `lambda_kinesis` i.e. DD_SERVICE_MAPPING=`lambda_kinesis|newServiceName`
-- `lambda_dynamodb` i.e. DD_SERVICE_MAPPING=`lambda_dynamodb|newServiceName`
-- `lambda_url` i.e. DD_SERVICE_MAPPING=`lambda_url|newServiceName`
+- `lambda_api_gateway`, `lambda_sns`, `lambda_sqs`, `lambda_s3`, `lambda_eventbridge`, `lambda_kinesis`, `lambda_dynamodb`, `lambda_url`
 
-If you wish to rename *specific* upstream services then set use these keys
-- API Gateway: use the domain i.e. `r3pmxmplak.execute-api.us-east-2.amazonaws.com|newServiceName`
-- For SNS use the topic ARN i.e. `arn:aws:sns:us-east-1:123456789012:ExampleTopic|newServiceName`
-- For SQS use the queue ARN i.e. `arn:aws:sqs:us-east-1:123456789012:MyQueue|newServiceName`
-- For S3 use the bucket ARN i.e. `arn:aws:s3:::example-bucket|newServiceName`
-- For eventbridge use the event.source i.e. `my.event|newServiceName`
-- For Kinesis use the stream ARN i.e. `arn:aws:kinesis:us-east-1:123456789012:stream/MyStream|newServiceName`
-- For DynamoDB use the table ARN i.e. `arn:aws:dynamodb:us-east-1:123456789012:table/ExampleTableWithStream|newServiceName`
-- Lambda URLS: use the domain i.e. `a8hyhsshac.lambda-url.us-east-1.amazonaws.com|newServiceName`
+Example: `DD_SERVICE_MAPPING=lambda_s3:newServiceName` renames all `lambda_s3` services to `newServiceName`.
+
+### Renaming Specific Services
+
+For more granularity, use specific identifiers as keys:
+
+- API Gateway: API ID, e.g., `r3pmxmplak:newServiceName`
+- SNS: Topic name, e.g., `ExampleTopic:newServiceName`
+- SQS: Queue name, e.g., `MyQueue:newServiceName`
+- S3: Bucket name, e.g., `example-bucket:newServiceName`
+- EventBridge: Event source, e.g., `eventbridge.custom.event.sender:newServiceName`
+- Kinesis: Stream name, e.g., `MyStream:newServiceName`
+- DynamoDB: Table name, e.g., `ExampleTableWithStream:newServiceName`
+- Lambda URLs: API ID, e.g., `a8hyhsshac:newServiceName`
 
 ### Examples
 
-1. `DD_SERVICE_MAPPING="08se3mvh28.execute-api.eu-west-1.amazonaws.com:new-service-name"`  
-   This will specifically rename `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name`, providing fine-grained control over upstream service names.
+1. `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"`  
+   Renames upstream `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name`.
 
 2. `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"`  
-   This will rename all `lambda_api_gateway` services to `new-service-name`, allowing you to consolidate many services under a single Datadog Service name.
+   Renames all upstream `lambda_api_gateway` services to `new-service-name`.
 
-For downstream services, please refer to `DD_SERVICE_MAPPING` in the [respective tracer's config documentation][41] for your language.
+For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][41] for your language.
+
 ## Filter or scrub information from logs
 
 To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
