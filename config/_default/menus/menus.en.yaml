@@ -3995,7 +3995,7 @@ main:
     parent: data_security
     weight: 6
   - name: Sensitive Data Scanner
-    url: sensitive_data_detection/
+    url: sensitive_data_scanner/
     pre: sensitive-data-scanner
     identifier: sds_top_level
     parent: administration_heading
