@@ -95,6 +95,10 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 
 ### Example
 
+{{< tabs >}}
+
+{{% tab "Shell" %}}
+
 {{< code-block lang="curl" >}}
 # Curl command
 curl -X PUT "http://localhost:8126/v0.3/traces" \
@@ -115,6 +119,38 @@ curl -X PUT "http://localhost:8126/v0.3/traces" \
 ]
 EOF
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Powershell" %}}
+{{< code-block lang="curl" >}}
+
+# Invoke-RestMethod command
+
+$uri = "http://localhost:8126/v0.3/traces"
+$headers = @{
+    "Content-Type" = "application/json"
+}
+$body = @"
+[
+  [
+    {
+      "duration": 12345,
+      "name": "span_name",
+      "resource": "/home",
+      "service": "service_name",
+      "span_id": 987654321,
+      "start": 0,
+      "trace_id": 123456789
+    }
+  ]
+]
+"@
+
+Invoke-RestMethod -Uri $uri -Method Put -Body $body -Headers $headers
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

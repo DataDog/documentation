@@ -51,7 +51,7 @@ When there are multiple primary operations defined for a service, the highest re
 5. Select the operation that you want reflected as the entry-point to the service.
 6. Click **Save**.
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save"  >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" >}}
 
 ## Viewing stats for additional span names
 

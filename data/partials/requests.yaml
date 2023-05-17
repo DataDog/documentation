@@ -28,7 +28,7 @@ requests:
     link: "/integrations/directory"
     image: "int_files.png"
   - name: "Endpoint"
-    description: "Use the Agent-based [HTTP check](https://docs.datadoghq.com/integrations/http_check/), or configure [Synthetic Monitoring](https://docs.datadoghq.com/synthetics/) from the Datadog application to validate if an endpoint or URL is running and accessible. Use either option to test both public and private endpoints. Combine with [Service Level Objectives, or SLOs](https://docs.datadoghq.com/monitors/service_level_objectives/) to define clear targets for performance."
+    description: "Use the Agent-based [HTTP check](https://docs.datadoghq.com/integrations/http_check/), or configure [Synthetic Monitoring](https://docs.datadoghq.com/synthetics/) from the Datadog application to validate if an endpoint or URL is running and accessible. Use either option to test both public and private endpoints. Combine with [Service Level Objectives, or SLOs](https://docs.datadoghq.com/service_management/service_level_objectives/) to define clear targets for performance."
     link: "/synthetics"
     image: "int_endpoint.png"
   - name: "SNMP and Network Traffic"

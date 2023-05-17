@@ -57,7 +57,7 @@ The sample application is a simple multi-service Java application with two APIs,
 
 The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and AWS ECR repository.
 
-Open `terraform/EC2/global_constants/variables.tf`.  Replace the variable values below with your correct AWS account information:
+Open `terraform/EC2/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
 
 ```
 output "aws_profile" {

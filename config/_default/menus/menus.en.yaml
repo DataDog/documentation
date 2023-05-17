@@ -5,27 +5,30 @@ main:
   - name: In The App
     identifier: platform_heading
     weight: 2000000
+  - name: Service Management
+    identifier: service_management_heading
+    weight: 3000000
   - name: Infrastructure
     identifier: infrastructure_heading
-    weight: 3000000
+    weight: 4000000
   - name: Application Performance
     identifier: apm_heading
-    weight: 4000000
+    weight: 5000000
   - name: Continuous Integration
     identifier: ci_visibility_heading
-    weight: 5000000
+    weight: 6000000
   - name: Log Management
     identifier: log_management_heading
-    weight: 6000000
+    weight: 7000000
   - name: Security
     identifier: security_platform_heading
-    weight: 7000000
+    weight: 8000000
   - name: UX Monitoring
     identifier: ux_monitoring_heading
-    weight: 8000000
+    weight: 9000000
   - name: Administration
     identifier: administration_heading
-    weight: 9000000
+    weight: 10000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -537,6 +540,11 @@ main:
     parent: containers_amazon_ecs
     identifier: containers_amazon_ecs_tags
     weight: 503
+  - name: Data collected
+    url: containers/amazon_ecs/data_collected/
+    parent: containers_amazon_ecs
+    identifier: containers_amazon_ecs_data_collected
+    weight: 504
   - name: AWS Fargate
     url: integrations/ecs_fargate/
     parent: containers
@@ -624,44 +632,12 @@ main:
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
     weight: 5
-  - name: Events
-    url: events/
-    identifier: events_top_level
-    pre: events
-    parent: platform_heading
-    weight: 60000
-  - name: Explorer
-    url: events/explorer/
-    identifier: event_explorer
-    parent: events_top_level
-    weight: 2
-  - name: Guides
-    url: events/guides/
-    identifier: events_guides
-    parent: events_top_level
-    weight: 3
-  - name: Custom Agent Check
-    url: events/guides/agent/
-    parent: events_guides
-    weight: 300
-  - name: DogStatsD
-    url: events/guides/dogstatsd/
-    parent: events_guides
-    weight: 301
-  - name: Email
-    url: events/guides/email/
-    parent: events_guides
-    weight: 302
-  - name: API
-    url: api/latest/events/#post-an-event
-    parent: events_guides
-    weight: 303
   - name: Dashboards
     url: dashboards/
     pre: dashboard
     identifier: dashboards
     parent: platform_heading
-    weight: 70000
+    weight: 60000
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
@@ -760,12 +736,6 @@ main:
     parent: dashboards
     identifier: guides
     weight: 9
-  - name: Mobile Application
-    url: mobile/
-    identifier: mobile
-    pre: mobile
-    parent: platform_heading
-    weight: 80000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -911,7 +881,7 @@ main:
     identifier: metrics_top_level
     pre: metric
     parent: platform_heading
-    weight: 110000
+    weight: 80000
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
@@ -993,7 +963,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 120000
+    weight: 90000
   - name: Guides
     url: notebooks/guide
     parent: notebooks
@@ -1004,7 +974,7 @@ main:
     pre: monitor
     identifier: alerting
     parent: platform_heading
-    weight: 130000
+    weight: 100000
   - name: Configure Monitors
     url: monitors/configuration/
     parent: alerting
@@ -1155,72 +1125,97 @@ main:
     weight: 5
     parent: alerting
     identifier: monitor_settings
-  - name: Service Level Objectives
-    url: monitors/service_level_objectives/
-    weight: 6
-    parent: alerting
-    identifier: slos
-  - name: Incident Management
-    url: monitors/incident_management
-    parent: alerting
-    identifier: incidents
-    weight: 8
-  - name: Incident Details
-    url: monitors/incident_management/incident_details
-    parent: incidents
-    identifier: incident_details
-    weight: 801
-  - name: Incident Settings
-    url: monitors/incident_management/incident_settings
-    parent: incidents
-    identifier: incidents_settings
-    weight: 802
-  - name: Incident Analytics
-    url: monitors/incident_management/analytics
-    parent: incidents
-    identifier: analytics
-    weight: 803
-  - name: Datadog Clipboard
-    url: monitors/incident_management/datadog_clipboard
-    parent: incidents
-    identifier: incidents_clipboard
-    weight: 804
-  - name: Monitor-based SLOs
-    url: monitors/service_level_objectives/monitor/
-    parent: slos
-    identifier: slos_monitor
-    weight: 401
-  - name: Metric-based SLOs
-    url: monitors/service_level_objectives/metric/
-    parent: slos
-    identifier: slos_metric
-    weight: 402
-  - name: Error Budget Alerts
-    url: monitors/service_level_objectives/error_budget/
-    parent: slos
-    identifier: error_budget
-    weight: 403
-  - name: Burn Rate Alerts
-    url: monitors/service_level_objectives/burn_rate/
-    parent: slos
-    identifier: burn_rate
-    weight: 404
-  - name: Case Management
-    url: monitors/case_management
-    parent: alerting
-    identifier: case_management
-    weight: 10
   - name: Guides
     url: monitors/guide/
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Service Level Objectives
+    url: service_management/service_level_objectives/
+    pre: slos
+    weight: 20000
+    parent: service_management_heading
+    identifier: slos
+  - name: Monitor-based SLOs
+    url: service_management/service_level_objectives/monitor/
+    parent: slos
+    identifier: slos_monitor
+    weight: 1
+  - name: Metric-based SLOs
+    url: service_management/service_level_objectives/metric/
+    parent: slos
+    identifier: slos_metric
+    weight: 2
+  - name: Error Budget Alerts
+    url: service_management/service_level_objectives/error_budget/
+    parent: slos
+    identifier: error_budget
+    weight: 3
+  - name: Burn Rate Alerts
+    url: service_management/service_level_objectives/burn_rate/
+    parent: slos
+    identifier: burn_rate
+    weight: 4
+  - name: Events
+    url: service_management/events/
+    pre: events
+    identifier: events
+    parent: service_management_heading
+    weight: 30000
+  - name: Explorer
+    url: service_management/events/explorer/
+    identifier: event_explorer
+    parent: events
+    weight: 1
+  - name: Guides
+    url: service_management/events/guides/
+    identifier: events_guides
+    parent: events
+    weight: 2
+  - name: Case Management
+    url: service_management/case_management/
+    pre: case-management
+    parent: service_management_heading
+    identifier: case_management
+    weight: 40000
+  - name: Incident Management
+    url: service_management/incident_management/
+    pre: incidents
+    parent: service_management_heading
+    identifier: incidents
+    weight: 50000
+  - name: Incident Details
+    url: service_management/incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 1
+  - name: Incident Settings
+    url: service_management/incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 2
+  - name: Incident Analytics
+    url: service_management/incident_management/analytics
+    parent: incidents
+    identifier: analytics
+    weight: 3
+  - name: Datadog Clipboard
+    url: service_management/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 4
+  - name: Mobile Application
+    url: service_management/mobile/
+    identifier: mobile
+    pre: mobile
+    parent: service_management_heading
+    weight: 60000
   - name: Workflows
     url: workflows/
     pre: workflows
     identifier: workflows
     parent: platform_heading
-    weight: 140000
+    weight: 120000
   - name: Build Workflows
     url: workflows/build/
     parent: workflows
@@ -1442,6 +1437,11 @@ main:
     parent: tracing_otel_inst
     identifier: tracing_otel_inst_ruby
     weight: 103
+  - name: Go
+    url: tracing/trace_collection/otel_instrumentation/go/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_go
+    weight: 104
   - name: .NET
     url: tracing/trace_collection/otel_instrumentation/dotnet/
     parent: tracing_otel_inst
@@ -1805,31 +1805,36 @@ main:
     parent: service_catalog
     identifier: service_catalog_setup
     weight: 901
+  - name: Service Scorecards
+    url: tracing/service_catalog/scorecards
+    parent: service_catalog
+    identifier: service_catalog_scorecards
+    weight: 902
   - name: Service Catalog API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
-    weight: 902
+    weight: 903
   - name: Service Metadata Structure
     url: tracing/service_catalog/service_metadata_structure
     parent: service_catalog
     identifier: service_metadata_structure
-    weight: 903
+    weight: 904
   - name: Integrations
     url: tracing/service_catalog/integrations
     parent: service_catalog
     identifier: service_catalog_integrations
-    weight: 904
+    weight: 905
   - name: Troubleshooting
     url: tracing/service_catalog/troubleshooting
     parent: service_catalog
     identifier: service_catalog_troubleshooting
-    weight: 905
+    weight: 906
   - name: Guides
     url: tracing/service_catalog/guides
     parent: service_catalog
     identifier: service_catalog_guides
-    weight: 906
+    weight: 907
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
@@ -2356,49 +2361,54 @@ main:
     url: logs/log_collection/flutter/
     parent: log_collection
     weight: 104
+  - name: Roku
+    identifier: log_roku
+    url: logs/log_collection/roku/
+    parent: log_collection
+    weight: 105
   - name: C#
     url: logs/log_collection/csharp/
     parent: log_collection
-    weight: 105
+    weight: 106
   - name: Go
     identifier: log_go
     url: logs/log_collection/go/
     parent: log_collection
-    weight: 106
+    weight: 107
   - name: Java
     url: logs/log_collection/java/
     parent: log_collection
     identifier: log_collection_java
-    weight: 107
+    weight: 108
   - name: NodeJS
     url: logs/log_collection/nodejs/
     parent: log_collection
-    weight: 108
+    weight: 109
   - name: PHP
     identifier: log_php
     url: logs/log_collection/php/
     parent: log_collection
-    weight: 109
+    weight: 110
   - name: Python
     identifier: log_python
     url: logs/log_collection/python/
     parent: log_collection
-    weight: 110
+    weight: 111
   - name: Ruby
     url: logs/log_collection/ruby/
     parent: log_collection
     identifier: log_collection_ruby
-    weight: 111
+    weight: 112
   - name: OpenTelemetry
     url: opentelemetry/otel_logs/
     parent: log_collection
     identifier: log_collection_opentelemetry
-    weight: 112
+    weight: 113
   - name: Other Integrations
     url: integrations/#cat-log-collection
     identifier: other_integrations
     parent: log_collection
-    weight: 113
+    weight: 114
   - name: Log Configuration
     url: logs/log_configuration/
     parent: log_management
@@ -3557,6 +3567,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1407
+  - name: Custom Grouping
+    url: real_user_monitoring/error_tracking/custom_grouping
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_custom_grouping
+    weight: 1408
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum

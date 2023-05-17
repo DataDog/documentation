@@ -259,7 +259,7 @@ Follow [these instructions][2] to install and configure the Ruby tracing library
 
 ### 3. Configure your application
 
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Google Cloud Secret][10] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing
@@ -302,6 +302,85 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_ENV`          | See [Unified Service Tagging][6].                                  |
 | `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
 | `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
+
+### OpenTelemetry
+
+Follow these steps to send OpenTelemetry (OTel) data to Datadog.
+
+1. Tell OTel to export spans to Datadog `serverless-init`.
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+
+2. Add OTel's instrumentation for Express. This is akin to adding `ddtrace`.
+
+   ```js
+   // instrument.js
+
+   const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
+   const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new HttpInstrumentation(),
+          new ExpressInstrumentation(),
+      ],
+   });
+
+   ```
+
+3. Add instrumentation at runtime. For instance, for Node.js, use `NODE_OPTIONS`.
+   ```
+   # Dockerfile
+
+   FROM node
+
+   WORKDIR /app
+   COPY package.json index.js instrument.js /app/
+   RUN npm i
+
+   ENV NODE_OPTIONS="--require ./instrument"
+
+   CMD npm run start
+   ```
+
+4. Add the Datadog `serverles-init`.
+   ```
+   # Dockerfile
+
+   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   ```
+5. Enable OTel in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
+
+   ```
+   # Dockerfile
+
+   ENV DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT="localhost:4318"
+   ```
 
 ## Troubleshooting
 
