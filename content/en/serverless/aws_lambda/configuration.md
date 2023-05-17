@@ -335,7 +335,7 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 `DD_SERVICE_MAPPING=key1:value1,key2:value2`...
 
-#### Renaming Service Types
+#### Renaming service types
 
 The following keys represent specific service types. Using these keys in the `DD_SERVICE_MAPPING` variable renames all associated upstream service names:
 
@@ -343,18 +343,18 @@ The following keys represent specific service types. Using these keys in the `DD
 
 Example: `DD_SERVICE_MAPPING=lambda_s3:newServiceName` renames all `lambda_s3` services to `newServiceName`.
 
-#### Renaming Specific Services
+#### Renaming specific services
 
 For more granularity, use specific identifiers as keys:
 
-- API Gateway: API ID, e.g., `r3pmxmplak:newServiceName`
-- SNS: Topic name, e.g., `ExampleTopic:newServiceName`
-- SQS: Queue name, e.g., `MyQueue:newServiceName`
-- S3: Bucket name, e.g., `example-bucket:newServiceName`
-- EventBridge: Event source, e.g., `eventbridge.custom.event.sender:newServiceName`
-- Kinesis: Stream name, e.g., `MyStream:newServiceName`
-- DynamoDB: Table name, e.g., `ExampleTableWithStream:newServiceName`
-- Lambda URLs: API ID, e.g., `a8hyhsshac:newServiceName`
+- API Gateway: API ID, for example, `r3pmxmplak:newServiceName`
+- SNS: Topic name, for example, `ExampleTopic:newServiceName`
+- SQS: Queue name, for example, `MyQueue:newServiceName`
+- S3: Bucket name, for example, `example-bucket:newServiceName`
+- EventBridge: Event source, for example, `eventbridge.custom.event.sender:newServiceName`
+- Kinesis: Stream name, for example, `MyStream:newServiceName`
+- DynamoDB: Table name, for example, `ExampleTableWithStream:newServiceName`
+- Lambda URLs: API ID, for example, `a8hyhsshac:newServiceName`
 
 #### Examples
 
