@@ -59,6 +59,7 @@ The following profiling features are available in the following minimum versions
 | Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
 | [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
 | [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
+| Timeline            | 2.30.0+                       | All supported runtime versions (except .NET 5+ required for garbage collection details).     |
 
 ## Installation
 
@@ -120,6 +121,18 @@ To install the .NET Profiler per-application:
 1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
+{{% /tab %}}
+
+{{% tab "Azure App Service (public beta)" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Only webapps are supported. Functions are not supported.
+</div>
+
+To install the .NET Profiler per-webapp:
+1. Install the Azure App Service [Datadog APM Extension][1] to your webapp.
+
+[1]: /serverless/azure_app_services/?tab=net#installation
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -342,6 +355,13 @@ To install the .NET Profiler per-application:
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
+{{% tab "Azure App Service (public beta)" %}}
+
+2. Follow these [installation guidelines][1] to set `DD_PROFILING_ENABLED:true` to enable the profiler
+
+[1]: /serverless/azure_app_services/?tab=net#installation
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -367,6 +387,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables the Allocations profiling (beta). Defaults to `false`.  |
 | `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables the Lock Contention profiling (beta). Defaults to `false`.  |
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables the Live Heap profiling (beta). Defaults to `false`.  |
+| `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disable Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
 
 <div class="alert alert-warning">
 <strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.

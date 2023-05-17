@@ -27,11 +27,11 @@ further_reading:
 Supported test frameworks:
 * Jest >= 24.8.0
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
-  * Only [`jest-circus`][1] and [`jest-jasmine2`][2] are supported as [`testRunner`][3].
+  * Only [`jest-circus`][1] is supported as [`testRunner`][2].
   * Jest >= 28 is only supported from `dd-trace>=2.7.0`
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
-  * Mocha [parallel mode][4] is not supported.
+  * Mocha [parallel mode][3] is not supported.
 * Cucumber-js >= 7.0.0
 * Cypress >= 6.7.0
   * From `dd-trace>=1.4.0`
@@ -41,11 +41,11 @@ Supported test frameworks:
 The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
 
 ### Test suite level visibility compatibility
-[Test suite level visibility][5] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress, and Cucumber are supported.
+[Test suite level visibility][4] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress, and Cucumber are supported.
 
 * Jest >= 24.8.0
   * From `dd-trace>=3.10.0`.
-  * Only [`jest-circus`][1] is supported as [`testRunner`][3].
+  * Only [`jest-circus`][1] is supported as [`testRunner`][2].
 * Mocha >= 5.2.0
   * From `dd-trace>=3.10.0` and `dd-trace>=2.12.0` for 2.x release line.
 * Playwright >= 1.18.0
@@ -104,13 +104,13 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 ## Installing the JavaScript tracer
 
-To install the [JavaScript tracer][6], run:
+To install the [JavaScript tracer][5], run:
 
 ```bash
 yarn add --dev dd-trace
 ```
 
-For more information, see the [JavaScript tracer installation docs][7].
+For more information, see the [JavaScript tracer installation docs][6].
 
 
 ## Instrument your tests
@@ -332,6 +332,12 @@ If the browser application being tested is instrumented using [RUM][6], your Cyp
 
 {{< /tabs >}}
 
+### Reporting code coverage
+
+When tests are instrumented with [Istanbul][7], the Datadog Tracer (v3.20.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+You can see the evolution of the test coverage in the **Coverage** tab of a test session.
+
 ### Using Yarn >=2
 
 If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
@@ -436,13 +442,16 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 ### Cypress interactive mode
 
-Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][13], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][14].
+Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][14], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][15].
 
 ### Mocha parallel tests
-Mocha's [parallel mode][4] is not supported. Tests run in parallel mode will not be instrumented by CI Visibility.
+Mocha's [parallel mode][4] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
+
+### Cucumber parallel tests
+Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][15] is not supported.
+Jest's [test.concurrent][17] is not supported.
 
 ## Best practices
 
@@ -461,14 +470,16 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][16] instead:
+And use [`test.each`][18] instead:
+
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][17]:
+For `mocha`, use [`mocha-each`][19]:
+
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -491,14 +502,13 @@ When CI Visibility is enabled, the following data is collected from your project
 * Git commit history including the hash, message, author information, and files changed (without file contents).
 * Information from the CODEOWNERS file.
 
-In addition to that, if [Intelligent Test Runner][18] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][20] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
 
 
 [1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
@@ -508,14 +518,16 @@ In addition to that, if [Intelligent Test Runner][18] is enabled, the following 
 [5]: /continuous_integration/tests/#test-suite-level-visibility
 [6]: https://github.com/DataDog/dd-trace-js
 [7]: /tracing/trace_collection/dd_libraries/nodejs
-[8]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[9]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /real_user_monitoring/browser/
-[12]: /continuous_integration/guides/rum_integration/
-[13]: https://docs.cypress.io/api/plugins/before-run-api
-[14]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[15]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[16]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[17]: https://www.npmjs.com/package/mocha-each
-[18]: /continuous_integration/intelligent_test_runner/
+[8]: https://istanbul.js.org/
+[9]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
+[10]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[11]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[12]: /real_user_monitoring/browser/
+[13]: /continuous_integration/guides/rum_integration/
+[14]: https://docs.cypress.io/api/plugins/before-run-api
+[15]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[16]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
+[17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[19]: https://www.npmjs.com/package/mocha-each
+[20]: /continuous_integration/intelligent_test_runner/

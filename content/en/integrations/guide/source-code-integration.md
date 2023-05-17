@@ -17,10 +17,10 @@ further_reading:
 ## Overview
 
 <div class="alert alert-info">
-The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li></ul></br> Self-hosted instances or private URLs are not supported.
+The source code integration supports:</br></br>Languages:<ul><li>Go</li><li>Java</li><li>JavaScript (doesn't support transpiled JavaScript)</li><li>Python</li></ul></br>Git providers:<ul><li>GitHub</li><li>GitLab</li><li>BitBucket</li><li>Azure DevOps</li></ul></br> Self-hosted instances or private URLs are not supported.
 </div>
 
-Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, or Bitbucket. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
+Datadog's source code integration allows you to connect your telemetry with your Git repositories hosted in GitHub, GitLab, Bitbucket, or Azure DevOps. Once you have enabled the [source code integration][7], you can debug stack traces, slow profiles, and other issues by quickly accessing the relevant lines of your source code. 
 
 {{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
 
@@ -100,7 +100,7 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 
 Datadog only captures the repository URL, the commit SHA of the current branch, and a list of tracked file paths—Datadog does not ingest or store any user code.
 
-### Embed git information in your artifacts on CI
+### Embed Git information in your artifacts
 
 You can embed git information such as the repository URL and commit hash in your artifact. The [Datadog Tracing Libraries][9] use this information to automatically link the active commit to your APM service.
 
@@ -109,7 +109,7 @@ Select one of the following languages that supports embedding git information:
 {{< tabs >}}
 {{% tab "Go" %}}
 
-[Go embeds version control information][1] in binaries starting in version 1.18. 
+[Go embeds version control information][101] in binaries starting in version 1.18. 
 
 Ensure your service meets all the following requirements:
 
@@ -117,7 +117,22 @@ Ensure your service meets all the following requirements:
 * You are using a version of the Datadog Go Tracer >= 1.48.0.
 * Your application was built as a module using `go.mod`, and the module path is your code repository's URL.
 
-[1]: https://tip.golang.org/doc/go1.18
+[101]: https://tip.golang.org/doc/go1.18
+{{% /tab %}}
+{{% tab "Java" %}}
+
+Based on your Java setup, there are libraries that can inject version control information in the Java artifact. These plugins generate a `git.properties` file in the root directory of your application's JAR archive.
+
+1. Install the `version-control-information` injector library:
+
+   - For Maven, install and set up [`git-commit-id-maven-plugin`][101].
+   - For Gradle, install and set up [`gradle-git-properties`][102].
+
+2. Upgrade the [Datadog Java Tracer][103] to version 1.12.1 or later.
+
+[101]: https://github.com/git-commit-id/git-commit-id-maven-plugin
+[102]: https://github.com/n0mer/gradle-git-properties
+[103]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
 {{< /tabs >}}
 

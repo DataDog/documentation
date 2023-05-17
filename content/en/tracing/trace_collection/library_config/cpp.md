@@ -71,12 +71,12 @@ If specified, adds the `version` tag with the specified value to all generated s
 : **Version**: v1.1.4 <br>
 If specified, will add tags to all generated spans. A comma-separated list of `key:value` pairs.
 
-`DD_PROPAGATION_STYLE_INJECT` 
+`DD_TRACE_PROPAGATION_STYLE_INJECT` 
 : **Version**: v0.4.1 <br>
 **Default**: `Datadog` <br>
 Propagation style(s) to use when injecting tracing headers. `Datadog`, `B3`, or `Datadog B3`.
 
-`DD_PROPAGATION_STYLE_EXTRACT` 
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT` 
 : **Version**: v0.4.1 <br>
 **Default**: `Datadog` <br>
 Propagation style(s) to use when extracting tracing headers. `Datadog`, `B3`, or `Datadog B3`.

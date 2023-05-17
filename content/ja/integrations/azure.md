@@ -50,7 +50,16 @@ is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 monitors:
+  '[Azure SQL Database] CPU Utilization': assets/monitors/sql_db_cpu_percent.json
+  '[Azure SQL Database] DTU Consumption': assets/monitors/sql_db_dtu_consumption_percent.json
+  '[Azure SQL Database] Deadlock Anomalies': assets/monitors/sql_db_deadlock_anomalies.json
+  '[Azure SQL Database] Failed Connections': assets/monitors/sql_db_connections_failed.json
+  '[Azure SQL Database] Georeplication Link Status ': assets/monitors/sql_db_replication_links.json
+  '[Azure SQL Database] Storage Utilization': assets/monitors/sql_db_storage_percent.json
+  '[Azure] API Rate Limit': assets/monitors/rate_limits.json
   '[Azure] Integration Errors': assets/monitors/integration_errors.json
+  '[Azure] Resource Quotas': assets/monitors/resource_quotas.json
+  '[Azure] Service Health Events': assets/monitors/service_health_events.json
 name: azure
 public_title: Datadog-Microsoft Azure インテグレーション
 short_description: インスタンスや多数の Azure サービスからメトリクスを収集
@@ -193,7 +202,16 @@ az account management-group entities list --query "[?inheritedPermissions!='noac
 ```
 
 - このコマンドは、ユーザーがアクセスできるすべてのサブスクリプションと管理グループを表示します。
-- ID を結合して、サービスプリンシパルを作成します。このコマンドを 1 つ実行するだけで、ユーザーを作成し、すべての管理グループ/サブスクリプションにロールを割り当てることができます
+
+##### Azure CLI コマンドのクイック起動
+
+また、上記のコマンドを 1 つのコマンドにまとめることも可能です。
+
+```shell
+az ad sp create-for-rbac --role "Monitoring Reader" --scopes `az account management-group entities list --query "[?inheritedPermissions!='noaccess' && permissions!='noaccess'].id | join(' ', @)" -o tsv`
+```
+- このコマンドは、それらの ID を結合して、サービスプリンシパルを作成します。
+- ユーザーを作成し、アクセス可能なすべての管理グループとサブスクリプションにロールを割り当てます。
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
@@ -295,7 +313,27 @@ azure role assignment create --objectId <オブジェクト_ID> -o "Monitoring R
 
 ### コンフィギュレーション
 
-Azure ベースのホストのリソース収集を制限するには、Azure のインテグレーションタイルを開きます。**Configuration** タブを選択し、**App Registrations** を開きます。**Metric Collection Filters** の下のテキストボックスにタグのリストを入力します。
+[Azure インテグレーションタイル][68]には、構成可能なオプションと設定が含まれています。すべての設定は、App Registration レベルで構成され、スコープ内のすべてのサブスクリプションに適用されます。
+
+{{< img src="integrations/azure/azure-tile-config.png" alt="Datadog の Azure インテグレーションタイルで、 'Configuration' タブに設定した状態です。'App Registration' の下には、'Client ID' という見出しがいくつもあります。一番上のものは、クライアント ID、テナント ID、クライアントシークレットなどの構成オプションが表示されるように展開されています。その下には、'Metric Collection Filters' を入力するためのテキストボックスがあり、'Collect Custom Metrics'、'Monitor Automuting'、'Resource Collection' のトグルが続いています。" popup="true" style="width:80%;" >}}
+
+これらの設定は以下の通りです。
+
+**Metric Collection Filters**: これらのフィルターを使用して、Datadog が監視するホストとアプリサービスプランを制限します。これは、Datadog インフラストラクチャーのコストを管理するのに便利です。これらのフィルターの設定方法については、以下の[メトリクス収集フィルター](#metric-collection-filters)を参照してください。請求の詳細については、[Azure インテグレーション課金ガイド][69]を参照してください。
+
+**Collect Custom Metrics**: [Azure App Insights からのカスタムメトリクス][70]の収集の有効/無効を設定します。
+
+<div class="alert alert-info">
+この構成は、App Insights Standard メトリクスの収集には影響せず、ネームスペース <code>azure.insights.</code> の下で標準メトリクスとして Datadog に含まれます。この構成で有効になる追加の Azure App Insights メトリクスは、Datadog でカスタム メトリクスとしてカウントされ、コストに影響する場合があります。
+</div>
+
+**Monitor Automuting**: Azure VM の自動化の有効/無効を設定します。
+
+**Resource Collection**: Cloud Security Posture Management の有効/無効を設定します。
+
+#### メトリクス収集フィルター
+
+タグのリストは、**Metric Collection Filters** のテキストボックスに入力します。
 
 この `<KEY>:<VALUE>` 形式のタグリストはカンマ区切りで、メトリクスを収集する際に使用されるフィルターを定義します。`?` (1 文字) や `*` (複数文字) などのワイルドカードも使用できます。
 
@@ -599,7 +637,7 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 
 Azure Native インテグレーションを使用している場合でも、Azure Blob Storage にログをアーカイブするには、App Registration が必要です。Azure Blob Storage にログをアーカイブするには、設定手順に従って、App Registration を使用してインテグレーションを構成します。アーカイブ目的で作成された App Registration には、`Monitoring Reader` ロールを割り当てる必要はありません。
 
-App Registration を構成したら、Azure Blob Storage に書き込む[ログアーカイブを作成][66]することができます。
+App Registration を構成したら、Azure Blob Storage に書き込む[ログアーカイブを作成][62]することができます。
 
 **注**: ストレージバケットが Azure Native インテグレーションで監視されているサブスクリプションにある場合、Azure Integration Tile に App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
 
@@ -614,8 +652,12 @@ App Registration を構成したら、Azure Blob Storage に書き込む[ログ�
 [57]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
 [58]: https://app.datadoghq.com/monitors/recommended
 [59]: /ja/monitors/notify/#notify-your-team
-[60]: https://docs.datadoghq.com/ja/integrations/azure/?site=us3
+[60]: https://docs.datadoghq.com/ja/getting_started/site/
 [61]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#overview
+[62]: https://docs.datadoghq.com/ja/logs/log_configuration/archives/
+[68]: https://app.datadoghq.com/integrations/azure
+[69]: /ja/account_management/billing/azure/
+[70]: https://learn.microsoft.com/en-us/azure/azure-monitor/app/api-custom-events-metrics
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}
@@ -640,7 +682,7 @@ Azure に Datadog リソースを作成するには、2 つのオプションが
 
 2. 新しい Datadog オーガニゼーションを作成。このフローは、あまり一般的ではありません。まだ Datadog オーガニゼーションをお持ちでなく、Azure Marketplace を通じて有料プランを始める場合はこのオプションを使用します。新しい Datadog オーガニゼーションを作成し、請求プランを選択して、関連する Azure サブスクリプションをリンクして監視できます。
 
-**注**: Azure の **Create a new Datadog organization** オプションを使用すると、トライアルをご利用いただけません。無料トライアルを開始するには、まず [Datadog の  US3 サイトでトライアル組織を作成][6]し、リンクフローを使用して監視するサブスクリプションを追加します。
+**注**: Azure の **Create a new Datadog organization** オプションを使用すると、トライアルをご利用いただけません。無料トライアルを開始するには、まず [Datadog の US3 サイトでトライアル組織を作成][6]し、リンクフローを使用して監視するサブスクリプションを追加します。
 
 Datadog リソースを作成すると、関連するサブスクリプションのデータ収集が開始します。このリソースを使用して Datadog を構成、管理、デプロイするには、[ガイド][7]で詳細をご確認ください。
 

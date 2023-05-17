@@ -21,7 +21,7 @@ Datadog の HTTP API は、コンテンツヘッダー `application/logplex-1` �
 * 以下のコマンドを使用して HTTPS ドレインをセットアップします。
 
 ```text
-heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
+heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&env=<ENV>&service=<SERVICE>&host=<HOST>" -a <APPLICATION_NAME>
 ```
 
 * `<DD_API_KEY>` は [Datadog API キー][2]に置き換えます。
@@ -34,7 +34,7 @@ heroku drains:add "https://http-intake.logs.{{< region-param key="dd_site" >}}/a
 アプリケーションからのログにカスタム属性を追加するには、ドレイン内の URL を次のように置き換えます。
 
 ```text
-https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs/?dd-api-key=<DD_API_KEY>&ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
+https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/logs?dd-api-key=<DD_API_KEY>&ddsource=heroku&service=<SERVICE>&host=<HOST>&attribute_name=<VALUE>
 ```
 
 [1]: https://devcenter.heroku.com/articles/log-drains#https-drains
