@@ -32,25 +32,14 @@ terraform {
 }
 
 # Configure the Datadog provider
-provider "datadog" {
-  api_key = var.datadog_api_key
-  app_key = var.datadog_app_key
-}
-
-variable "datadog_api_key" {
-  default = "<YOUR_API_KEY>"
-}
-
-variable "datadog_app_key" {
-  default = "<YOUR_APPLICATION_KEY>"
-}
+provider "datadog" {}
 ```
 
 Then run `terraform init` from within this directory to pull the datadog terraform provider.
 
 Now you can use `terraformer` to start importing resources. For example, to import Dashboard `abc-def-ghi` you can run
 
-`terraformer import datadog --resources=dashboard --filter=dashboard=abc-def-ghi --api-key <YOUR_API_KEY> --app-key <YOUR_APP_KEY>`
+`terraformer import datadog --resources=dashboard --filter=dashboard=abc-def-ghi --api-key <YOUR_API_KEY> --app-key <YOUR_APP_KEY> --api-url <YOUR_DATADOG_SITE_URL>`
 
 This generates a folder `generated` that contains both a terraform state file, as well as HCL terraform config files representing the imported resource.
 
@@ -71,7 +60,7 @@ generated
 
 ## Other examples of running terraformer
 
-All example commands require the `--api-key` and `--app-key` flags.
+All example commands require the `--api-key`, `--app-key`, and `--api-url` flags.
 
 * Import all monitors: `terraformer import datadog --resources=monitor`
 * Import monitor with id 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234`

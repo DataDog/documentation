@@ -51,6 +51,7 @@ kind: インテグレーション
 manifest_version: '1.0'
 monitors:
   '[Azure] Integration Errors': assets/monitors/integration_errors.json
+  '[Azure] Service Health Events': assets/monitors/service_health_events.json
 name: azure
 public_title: Datadog-Microsoft Azure インテグレーション
 short_description: インスタンスや多数の Azure サービスからメトリクスを収集
@@ -599,7 +600,7 @@ Azure 関数に精通していない場合は、[Azure Portal で初めての関
 
 Azure Native インテグレーションを使用している場合でも、Azure Blob Storage にログをアーカイブするには、App Registration が必要です。Azure Blob Storage にログをアーカイブするには、設定手順に従って、App Registration を使用してインテグレーションを構成します。アーカイブ目的で作成された App Registration には、`Monitoring Reader` ロールを割り当てる必要はありません。
 
-App Registration を構成したら、Azure Blob Storage に書き込む[ログアーカイブを作成][66]することができます。
+App Registration を構成したら、Azure Blob Storage に書き込む[ログアーカイブを作成][62]することができます。
 
 **注**: ストレージバケットが Azure Native インテグレーションで監視されているサブスクリプションにある場合、Azure Integration Tile に App Registration が冗長である旨の警告が表示されます。この警告は無視することができます。
 
@@ -614,8 +615,9 @@ App Registration を構成したら、Azure Blob Storage に書き込む[ログ�
 [57]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
 [58]: https://app.datadoghq.com/monitors/recommended
 [59]: /ja/monitors/notify/#notify-your-team
-[60]: https://docs.datadoghq.com/ja/integrations/azure/?site=us3
+[60]: https://docs.datadoghq.com/ja/getting_started/site/
 [61]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#overview
+[62]: https://docs.datadoghq.com/ja/logs/log_configuration/archives/
 {{< /site-region >}}
 
 {{< site-region region="us3" >}}

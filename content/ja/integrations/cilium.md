@@ -13,6 +13,10 @@ assets:
       check: cilium.endpoint.state
       metadata_path: metadata.csv
       prefix: cilium.
+    process_signatures:
+    - cilium-operator-generic
+    - cilium-agent
+    - cilium-health-responder
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Cilium
@@ -73,7 +77,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Cilium チェックは [Datadog Agent][3] パッケージに含まれていますが、Prometheus のメトリクスを公開するための追加のセットアップが必要です。
 
