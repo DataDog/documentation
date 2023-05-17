@@ -30,7 +30,7 @@ jobs:
           CHECK_SUITE_URL="https://api.github.com/repos/DataDig/documentation/commits/${{ github.sha }}/check-suites"
           for i in {1..10}
           do
-            status="$(curl -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' $CHECK_SUITE_URL | jq -r '.check_suites[] | .check_runs[] | select(.app.slug=="dd-gitlab" and .name=="build_preview") | .status')"
+            status="$(curl -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' $CHECK_SUITE_URL | jq -r '.check_suites // [] | .[] | .check_runs // [] | .[] | select(.app.slug=="dd-gitlab" and .name=="build_preview") | .status')"
             if [[ "$status" == "completed" ]]; then
               echo "Preview build complete, moving on..."
               break
