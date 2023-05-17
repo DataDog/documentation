@@ -3863,22 +3863,18 @@ main:
     url: account_management/org_settings/oauth_apps
     parent: organization_settings
     weight: 203
-  - name: Sensitive Data Scanner
-    url: account_management/org_settings/sensitive_data_detection
-    parent: organization_settings
-    weight: 204
   - name: Custom Organization Landing Page
     url: account_management/org_settings/custom_landing
     parent: organization_settings
-    weight: 205
+    weight: 204
   - name: Service Accounts
     url: account_management/org_settings/service_accounts
     parent: organization_settings
-    weight: 206
+    weight: 205
   - name: IP Allowlist
     url: account_management/org_settings/ip_allowlist
     parent: organization_settings
-    weight: 207
+    weight: 206
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -3990,12 +3986,18 @@ main:
     url: data_security/guide/
     parent: data_security
     weight: 6
+  - name: Sensitive Data Scanner
+    url: sensitive_data_scanner/
+    pre: sensitive-data-scanner
+    identifier: sds_top_level
+    parent: administration_heading
+    weight: 240000
   - name: Help
     url: help/
     pre: info-fill
     identifier: help_top_level
     parent: administration_heading
-    weight: 240000
+    weight: 250000
 api:
   - name: Overview
     url: /api/latest/
