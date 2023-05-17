@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -24,14 +24,25 @@ jobs:
         shell: bash
         run: echo ${{steps.extract_branch.outputs.branch}}
 
-      - name: Wait for previews
-        uses: lewagon/wait-on-check-action@v1.3.1
+      - name: Check preview status
         id: check-status
-        with:
-          wait-interval: 60
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          check-name: 'dd-gitlab/build_preview'
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          CHECK_SUITE_URL="https://api.github.com/repos/DataDig/documentation/commits/ref/check-suites"
+          for i in {1..10}
+          do
+            status="$(curl -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' $CHECK_SUITE_URL | jq -r '.check_suites[] | .check_runs[] | select(.app.slug=="dd-gitlab" and .name=="build_preview") | .status')"
+            if [[ "$status" == "completed" ]]; then
+              echo "Preview build complete, moving on..."
+              break
+            else
+              echo "Waiting for check to complete..."
+              sleep 60
+            fi
+            if [[ $i -eq 10 && "$status" != "completed" ]]; then
+              echo "There was an issue with the preview build"
+              exit 1
+            fi
+          done
 
       - name: Run Datadog Synthetic tests
         uses: DataDog/synthetics-ci-github-action@v0.11.0
