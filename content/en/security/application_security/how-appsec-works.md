@@ -119,8 +119,6 @@ Datadog ASM includes over 100 attack signatures that help protect against [many 
 
 ## Built-in vulnerability detection
 
-<div class="alert alert-info">Application Vulnerability Management through vulnerability detection is in beta.</a></div>
-
 Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
 For more information, read [Application Vulnerability Management][5].
