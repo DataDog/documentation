@@ -47,7 +47,7 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
 # this env var is needed for trace propagation to work properly in Cloud Run.
-# make sure to also set this variable for all Datadog instrumented downstream services.
+# ensure to set this variable for all Datadog-instrumented downstream services.
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # execute your binary application wrapped in the entrypoint. Adapt this line to your needs
@@ -72,7 +72,7 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
 # this env var is needed for trace propagation to work properly in cloud run.
-# make sure to also set this variable for all Datadog instrumented downstream services.
+# ensure to set this variable for all Datadog-instrumented downstream services.
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
@@ -104,7 +104,7 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
 # this env var is needed for trace propagation to work properly in cloud run.
-# make sure to also set this variable for all Datadog instrumented downstream services.
+# ensure to set this variable for all Datadog-instrumented downstream services.
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
@@ -130,7 +130,7 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
 # this env var is needed for trace propagation to work properly in cloud run.
-# make sure to also set this variable for all Datadog instrumented downstream services.
+# ensure to set this variable for all Datadog-instrumented downstream services.
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
@@ -156,7 +156,7 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
 # this env var is needed for trace propagation to work properly in cloud run.
-# make sure to also set this variable for all Datadog instrumented downstream services.
+# ensure to set this variable for all Datadog-instrumented downstream services.
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
@@ -182,7 +182,7 @@ ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
 # this env var is needed for trace propagation to work properly in cloud run.
-# make sure to also set this variable for all Datadog instrumented downstream services.
+# ensure to set this variable for all Datadog-instrumented downstream services.
 ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
