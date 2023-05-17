@@ -3,7 +3,7 @@ title: Connections
 kind: documentation
 description: Workflow connections
 aliases:
-  - "/workflows/setup"
+- /workflows/setup
 disable_toc: false
 ---
 

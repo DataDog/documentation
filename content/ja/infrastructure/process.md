@@ -32,7 +32,7 @@ Datadog のライブプロセスにより、インフラストラクチャー上
 * システムメトリクスを使用して、実行する内部およびサードパーティーソフトウェアのパフォーマンスを 2 秒の粒度でモニターします
 * ダッシュボードとノートブックにコンテキストを追加します
 
-{{< img src="infrastructure/process/live_processes_main.png" alt="ライブプロセスの概要"  >}}
+{{< img src="infrastructure/process/live_processes_main.png" alt="ライブプロセスの概要" >}}
 
 ## インストール
 
@@ -41,19 +41,13 @@ Agent 5 の場合は、[こちらのバージョン固有のインストール�
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Datadog Agent をインストールしたら、[Agent のメイン構成ファイル][1]を編集し、次のパラメーターを `true` に設定して、ライブプロセスの収集を有効にします。
+Datadog Agent をインストールしたら、[Agent のメイン構成ファイル][1]を編集し、次のパラメーターを `"true"` に設定して、ライブプロセスの収集を有効にします。
 
 ```yaml
 process_config:
   process_collection:
-    enabled: true
+    enabled: "true"
 ```
-
-`enabled` の値は文字列で、以下のオプションがあります。
-
-- `"true"`: プロセス Agent を有効にして、プロセスとコンテナを収集します。
-- `"false"` (デフォルト): コンテナがあれば、コンテナのみを収集します。
-- `"disabled"`: プロセス Agent をまったく実行しません。
 
 さらに、いくつかの構成オプションを環境変数として設定できます。
 
@@ -126,6 +120,33 @@ datadog:
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### I/O 統計
+
+I/O とオープンファイルの統計情報は、昇格した権限で実行される Datadog system-probe によって収集することができます。system-probe の process モジュールを有効にするには、次の構成を使用します。
+
+1. 下記のシステムプローブのコンフィギュレーションの例をコピーします。
+
+   ```shell
+   sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+   ```
+
+2. `/etc/datadog-agent/system-probe.yaml` を編集し、process モジュールを有効にします。
+
+   ```yaml
+   system_probe_config:
+     process_config:
+       enabled: true
+   ```
+
+5. [Agent を再起動します][12]。
+
+   ```shell
+   sudo systemctl restart datadog-agent
+   ```
+
+   **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに次のコマンドを実行します: `sudo service datadog-agent restart`。
+
 
 ### プロセス引数のスクラビング
 
@@ -355,7 +376,6 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 
 ## 追加情報
 
-- 開かれているファイルと現在の作業ディレクトリの収集は、`dd-process-agent` を実行しているユーザーの権限レベルに基づいて制限されます。`dd-process-agent` がこれらのフィールドにアクセスすることができる場合は、自動的に収集されます。
 - リアルタイム (2 秒) データ収集は 30 分後にオフになります。リアルタイム収集を再開するには、ページをリフレッシュします。
 - コンテナのデプロイで、各プロセスのユーザー名を収集するには、`docker-dd-agent` にマウントされた `/etc/passwd` ファイルが必要です。これは公開ファイルですが、プロセス Agent はユーザー名以外のフィールドを使用しません。`user` メタデータフィールド以外のすべての機能は、このファイルにアクセスせずに機能します。**注**: ライブプロセスは、ホストの `passwd` ファイルのみを使用し、コンテナ内に作成されたユーザーのユーザー名解決は実行しません。
 
@@ -368,9 +388,10 @@ Datadog ではプロセス収集を使用して、ホストで実行されてい
 [3]: /ja/getting_started/tagging/
 [4]: /ja/getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
-[6]: /ja/monitors/create/types/process/
+[6]: /ja/monitors/types/process/
 [7]: https://app.datadoghq.com/monitors#create/live_process
 [8]: /ja/dashboards/widgets/timeseries/#pagetitle
 [9]: /ja/infrastructure/livecontainers/
 [10]: /ja/tracing/
 [11]: /ja/network_monitoring/performance/network_page
+[12]: /ja/agent/guide/agent-commands/#restart-the-agent

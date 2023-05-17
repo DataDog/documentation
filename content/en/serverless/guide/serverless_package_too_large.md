@@ -59,9 +59,9 @@ The Datadog Lambda layer packages the instrumentation libraries and makes them a
 
 Also inspect other dependencies (the `node_modules` folder) that are included into your deployment package and only keep the ones that you need in `dependencies`.
 
-## Webpack
+## Bundlers
 
-Using a bundler like [Webpack][6] can dramatically reduce your deployment package size by only including the code that is used. See [Node.js Lambda Tracing and Webpack Compatibility][7] for required webpack configurations.
+Using a bundler like [Webpack][6] or [esbuild][7] can dramatically reduce your deployment package size by only including the code that is used. See [Node.js Lambda Tracing and Bundlers Compatibility][8] for required webpack configurations.
 
 ## Get help
 
@@ -81,4 +81,5 @@ If you need the Datadog support team to help investigate, include the following 
 [4]: https://www.serverless.com/
 [5]: https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/#package
 [6]: https://webpack.js.org
-[7]: /serverless/guide/serverless_tracing_and_webpack/
+[7]: https://esbuild.github.io/
+[8]: /serverless/guide/serverless_tracing_and_bundlers/
