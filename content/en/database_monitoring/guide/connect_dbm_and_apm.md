@@ -16,7 +16,7 @@ This guide assumes that you have configured [Database Monitoring][1] and are usi
 ## Before you begin
 
 Supported databases
-: postgres, mysql
+: postgres, mysql (except with Python applications)
 
 Supported Agent versions
 : 7.36.1+
