@@ -20,10 +20,6 @@ jobs:
         run: echo "branch=$(echo ${{ github.event.pull_request.head.ref }})" >>$GITHUB_OUTPUT
         id: extract_branch
 
-      - name: Echo brnach name
-        shell: bash
-        run: echo ${{steps.extract_branch.outputs.branch}}
-
       - name: Check preview status
         id: check-status
         run: |
@@ -31,15 +27,16 @@ jobs:
           for i in {1..10}
           do
             status=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
-            if [[ "$status" == "200" ]]; then
+            if [[ "$status" == "200" | "$status" == "302" | "$status" == "304" ]]; then
               echo "Preview site has been deployed"
               break
             else
-              echo "Waiting for preview site to return 200..."
+              echo "Waiting for preview site to return 200 | 302 | 304..."
+              echo "Currently returning ${status}"
               sleep 60
             fi
-            if [[ $i -eq 10 && "$status" != "200" ]]; then
-              echo "Preview site not responding...."
+            if [[ $i -eq 10 && "$status" != "200" | "$status" != "302" | "$status" != "304" ]]; then
+              echo "Preview site returned ${status} for 10 minutes, there may be an issue with the preview site build"
               exit 1
             fi
           done
