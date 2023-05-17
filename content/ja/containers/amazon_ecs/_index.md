@@ -4,7 +4,6 @@ algolia:
   - ecs
 aliases:
 - /ja/agent/amazon_ecs/
-- /ja/containers/amazon_ecs/data_collected
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: ドキュメント
@@ -12,6 +11,9 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: ドキュメント
   text: アプリケーショントレースの収集
+- link: /agent/amazon_ecs/data_collected/#metrics
+  tag: Documentation
+  text: ECS メトリクスの収集
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: ブログ
   text: Amazon ECS Anywhere のサポート開始

@@ -39,7 +39,7 @@ Data Streams Monitoring は、大規模なパイプラインを理解し管理�
 |---|----|
 | Java | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC |
 | Go | 全て ([手動インスツルメンテーション][1]で) |
-| .NET | Kafka (セルフホスティング、Amazon MSK)、RabbitMQ |
+| .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ |
 
 
 ## Data Streams Monitoring の調査
