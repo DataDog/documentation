@@ -27,19 +27,19 @@ jobs:
       - name: Check preview status
         id: check-status
         run: |
-          CHECK_SUITE_URL="https://api.github.com/repos/DataDig/documentation/commits/${{ github.sha }}/check-suites"
+          URL="https://docs-staging.datadoghq.com/${{steps.extract_branch.outputs.branch}}"
           for i in {1..10}
           do
-            status="$(curl -H 'Accept: application/vnd.github.v3+json' -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' $CHECK_SUITE_URL | jq -r '.check_suites // [] | .[] | .check_runs // [] | .[] | select(.app.slug=="dd-gitlab" and .name=="build_preview") | .status')"
-            if [[ "$status" == "completed" ]]; then
-              echo "Preview build complete, moving on..."
+            status=$(curl -o /dev/null -s -w "%{http_code}\n" $URL)
+            if [[ "$status" == "200" ]]; then
+              echo "Preview site has been deployed"
               break
             else
-              echo "Waiting for check to complete..."
+              echo "Waiting for preview site to return 200..."
               sleep 60
             fi
-            if [[ $i -eq 10 && "$status" != "completed" ]]; then
-              echo "There was an issue with the preview build"
+            if [[ $i -eq 10 && "$status" != "200" ]]; then
+              echo "Preview site not responding...."
               exit 1
             fi
           done
