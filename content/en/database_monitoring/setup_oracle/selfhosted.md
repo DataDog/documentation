@@ -1,7 +1,7 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted Oracle
 kind: documentation
-description: Install and configure Database Monitoring for Self-Hosted SQL Server
+description: Install and configure Database Monitoring for Self-Hosted Oracle
 private: true
 is_beta: true
 further_reading:
