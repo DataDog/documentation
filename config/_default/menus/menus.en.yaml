@@ -1130,14 +1130,6 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
-  # Placeholder for the Service Management Overview landing page
-  # - name: Service Management
-  #   url: service_management/
-  #   pre: events
-  #   parent: service_management_heading
-  #   identifier: service_management
-  #   parent: platform_heading
-  #   weight: 10000
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
