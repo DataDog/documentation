@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale. 
+The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring the Datadog Agent to send logs and metrics to the Worker.
 
@@ -26,7 +26,6 @@ This guide walks you through deploying the Worker in your common tools cluster a
 
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines.
-* Your services are deployed to a Kubernetes cluster in Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), or Google Kubernetes Engine (GKE).
 * You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
 * You have a common tools or security cluster for your environment to which all other clusters are connected.
 
@@ -34,15 +33,15 @@ This guide walks you through deploying the Worker in your common tools cluster a
 Before installing, make sure you have:
 
 * A valid [Datadog API key][2].
-* An Observability Pipelines Configuration ID.
+* A Pipeline ID.
 
 You can generate both of these in [Observability Pipelines][3].
-
-To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
 ### Provider-specific requirements
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
+To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
+
 * The [AWS Load Balancer controller][1] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
 
   ```shell
@@ -53,21 +52,24 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-There are no specific requirements for Azure AKS.
+To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-There are no specific requirements for Google GKE.
+To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
+{{% /tab %}}
+{{% tab "APT-based Linux" %}}
+{{% /tab %}}
+{{% tab "RPM-based Linux" %}}
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Installing the Observability Pipelines Worker
-### Download the Helm chart
 
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-Download the [Helm chart][1] for AWS EKS. 
+Download the [Helm chart][1] for AWS EKS.
 
-In the Helm chart, replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then, install it in your cluster with the following commands:
+In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -84,9 +86,9 @@ helm upgrade --install \
 [1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-Download the [Helm chart][1] for Azure AKS. 
+Download the [Helm chart][1] for Azure AKS.
 
-In the Helm chart, replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then, install it in your cluster with the following commands:
+In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -103,9 +105,9 @@ helm upgrade --install \
 [1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-Download the [Helm chart][1] for Google GKE. 
+Download the [Helm chart][1] for Google GKE.
 
-In the Helm chart, replace the `datadog.apiKey` and `datadog.configKey` values to match your pipeline. Then, install it in your cluster with the following commands:
+In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -121,21 +123,111 @@ helm upgrade --install \
 
 [1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
 {{% /tab %}}
+{{% tab "APT-based Linux" %}}
+1. Run the following commands to set up APT to download through HTTPS:
+
+    ```
+    sudo apt-get update
+    sudo apt-get install apt-transport-https curl gnupg
+    ```
+
+2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
+
+    ```
+    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog.list"
+    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
+    sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    ```
+
+3. Run the following commands to update your local `apt` repo and install the Worker:
+
+    ```
+    sudo apt-get update
+    sudo apt-get install observability-pipelines-worker datadog-signing-keys
+    ```
+
+4. Add your keys to the Worker's bootstrap file:
+
+    ```
+    sudo cat <<-EOF > /etc/observability-pipelines-worker/bootstrap.yaml
+    api_key: <API_KEY>
+    pipeline_id: <PIPELINE_ID>
+    site: <SITE>
+    EOF
+    ```
+
+5. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host.
+
+6. Start the worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+[1]: /resources/yaml/observability_pipelines/quickstart/linux.yaml
+{{% /tab %}}
+{{% tab "RPM-based Linux" %}}
+1. Run the following commands to set up the Datadog `rpm` repo on your system:
+
+    ```
+    cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
+    [observability-pipelines-worker]
+    name = Observability Pipelines Worker
+    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/x86_64/
+    enabled=1
+    gpgcheck=1
+    repo_gpgcheck=1
+    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+    EOF
+    ```
+
+   **Note:** If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration above.
+
+2. Update your packages and install the Worker:
+
+    ```
+    sudo yum makecache
+    sudo yum install observability-pipelines-worker
+    ```
+
+3. Add your keys to the Worker's bootstrap file:
+
+    ```
+    sudo cat <<EOF > /etc/observability-pipelines-worker/bootstrap.yaml
+    api_key: <API_KEY>
+    pipeline_id: <PIPELINE_ID>
+    site: <SITE>
+    EOF
+    ```
+
+4. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host.
+
+5. Start the worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+[1]: /resources/yaml/observability_pipelines/quickstart/linux.yaml
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Load balancing
+
+{{< tabs >}}
+{{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.
 They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
 so they are only accessible inside your network.
 
 Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
 
+NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
+
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
-
-{{< tabs >}}
-{{% tab "AWS EKS" %}}
-NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
 
 The sample configurations do not enable the cross-zone load balancing feature available in this controller. To enable it, add the following annotation to the `service` block:
 
@@ -149,10 +241,32 @@ See [AWS Load Balancer Controller][2] for more details.
 [2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-No specific requirements are needed for Azure AKS.
+Use the load balancers provided by your cloud provider.
+They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
+so they are only accessible inside your network.
+
+Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
+
+#### Cross-availability-zone load balancing
+The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 {{% /tab %}}
 {{% tab "Google GKE" %}}
+Use the load balancers provided by your cloud provider.
+They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
+so they are only accessible inside your network.
+
+Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
+
+#### Cross-availability-zone load balancing
+The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
+
 Global Access is enabled by default since that is likely required for use in a shared tools cluster.
+{{% /tab %}}
+{{% tab "APT-based Linux" %}}
+No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
+{{% /tab %}}
+{{% tab "RPM-based Linux" %}}
+No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -169,23 +283,33 @@ For Azure AKS, Datadog recommends using the `default` (also known as `managed-cs
 {{% tab "Google GKE" %}}
 For Google GKE, Datadog recommends using the `premium-rwo` drive class because it is backed by SSDs. The HDD-backed class, `standard-rwo`, might not provide enough write performance for the buffers to be useful.
 {{% /tab %}}
+{{% tab "APT-based Linux" %}}
+By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker` - if you are using the sample configuration, you should ensure that this has at least 288GB of space available for buffering.
+
+Where possible, it is recommended to have a separate SSD mounted at that location.
+{{% /tab %}}
+{{% tab "RPM-based Linux" %}}
+By default, the Observability Pipelines Worker's data directory is set to `/var/lib/observability-pipelines-worker` - if you are using the sample configuration, you should ensure that this has at least 288GB of space available for buffering.
+
+Where possible, it is recommended to have a separate SSD mounted at that location.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Connect the Agent and the Worker
 To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
-observability_pipelines_worker:
-  logs.enabled: true
-  # Adjust protocol to https if TLS/SSL is enabled on the Observability Pipelines Worker
-  logs.url: "http://<OPW_HOST>:8282"
-  metrics.enabled: true
-  # Adjust protocol to https if TLS/SSL is enabled on the Observability Pipelines Worker
-  metrics.url: "http://<OPW_HOST>:8282"
+vector:
+  logs:
+    enabled: true
+    url: "http://<OPW_HOST>:8282"
+  metrics:
+    enabled: true
+    url: "http://<OPW_HOST>:8282"
 
 ```
 
-`OPW_HOST` is the `EXTERNAL-IP` of the load balancer you set up earlier. You can retrieve it by running the following command:
+`OPW_HOST` is the IP of the load balancer or machine you set up earlier. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
 
 ```shell
 kubectl get svc opw-observability-pipelines-worker
@@ -194,7 +318,7 @@ kubectl get svc opw-observability-pipelines-worker
 At this point, your observability data should be going to the Worker and is available for data processing. The next section goes through what processing is included by default and the additional options that are available.
 
 ## Working with data
-The [Helm chart](#download-the-helm-chart) provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format. 
+The sample configuration provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format.
 
 ### Processing logs
 The provided logs pipeline does the following:
@@ -203,7 +327,7 @@ The provided logs pipeline does the following:
 - **Correct the status of logs coming through the Worker.** Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
 
 The following are two important components in the example configuration:
-- `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data. 
+- `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data.
 - `logs_finish_ddtags`: Re-encodes the tags so that it is in the format as how the Datadog Agent would send it.
 
 Internally, the Datadog Agent represents log tags as a CSV in a single string. To effectively manipulate these tags, they must be parsed, modified, and then re-encoded before they are sent to the ingest endpoint. These steps are written to automatically perform those actions for you. Any modifications you make to the pipeline, especially for manipulating tags, should be in between these two steps.
