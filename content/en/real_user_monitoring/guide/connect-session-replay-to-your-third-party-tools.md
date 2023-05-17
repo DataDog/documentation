@@ -23,7 +23,7 @@ You may want to connect a third-party tool with Session Replay for a more compre
 
 To fetch the URL for the current user session's recording, use the following snippet, depending on the installation method you used to set up RUM:
 
-**Note**: Although providing a value for `subdomain` when fetching the user session's recording URL is optional, you should provide it if you're accessing Datadog through a custom subdomain and want to see the custom domain in the URL that gets returned.
+**Note**: Providing a value for `subdomain` when fetching the user session's recording URL is optional, but must be provided if you're accessing Datadog through a custom subdomain and want to see the custom domain in the URL that gets returned.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
