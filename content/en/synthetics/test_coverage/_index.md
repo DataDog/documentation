@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-The [**Test Coverage** page][1] uses browser data collected from [RUM][2] and [Synthetic browser test results][3] to provide insights about the overall testing coverage of your RUM applications. 
+The [**Test Coverage** page][1] uses [data collected from Browser RUM][2] and [results from Synthetic browser tests][3] to provide actionable insight into the overall testing coverage of your [RUM applications][9]. 
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
-You can build a more comprehensive, accurate testing suite by considering the following information presented on the page:
+Build a more comprehensive, accurate testing suite by evaluating the percentage of browser tests created for a given RUM application and identifying new areas in a RUM application to add browser tests for:
 
 - The top visited web pages
 - The percentage of tested RUM actions
@@ -87,3 +87,4 @@ Add the most popular sections of your application to a new or existing browser t
 [6]: /continuous_testing/
 [7]: /real_user_monitoring/session_replay/
 [8]: https://app.datadoghq.com/rum/explorer/
+[9]: https://app.datadoghq.com/rum/list
