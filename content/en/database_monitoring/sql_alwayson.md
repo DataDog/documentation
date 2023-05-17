@@ -7,7 +7,11 @@ further_reading:
   text: "Setting Up SQL Server"
 ---
 
-placeholder text
+The AlwaysOn Clusters view enables you to detect data synchronization issues, understand availability group behavior, and identify cluster bottlenecks.
+
+...access high-level overviews of your SQL Server AlwaysOn availability groups to quickly assess database health at any given time. 
+
+To navigate to the AlwaysOn Clusters view within Database Monitoring, select **AlwaysOn Clusters** on the **Databases** tab.
 
 On the **Databases** tab, select **AlwaysOn Clusters**.
 
