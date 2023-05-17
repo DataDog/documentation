@@ -367,6 +367,36 @@ manage_ignored_translations:on-schedule:
     - echo "Downloading ignored translation source files..."
     - manage_ignored_translation_files
 
+# This checks anchor links,
+# its too noisy to run all the time but we want some insight so its running on schedule
+link_checks:on-schedule:
+  <<: *base_template
+  <<: *live_rules
+  stage: post-deploy
+  cache: {}
+  environment: "live"
+  variables:
+    URL: ${LIVE_DOMAIN}
+    GIT_STRATEGY: none
+  dependencies:
+    - build_live
+  script:
+    - dog --config "$HOME/.dogrc" event post "documentation htmltest ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
+    - find ./public -name "*.html" -exec sed -i -e "s#https://docs.datadoghq.com/#/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v1/#/api/latest/#g" {} +
+    - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
+    - "sed -i'' -e 's/CheckInternalHash: false/CheckInternalHash: true/' .htmltest.yml"
+    - htmltest
+  after_script:
+    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
+    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
+    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
+  artifacts:
+    paths:
+      - ./tmp/.htmltest
+  interruptible: true
+  allow_failure: true
+
 test_missing_tms_live:
   <<: *base_template
   <<: *live_rules

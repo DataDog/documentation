@@ -1,5 +1,5 @@
 ---
-title: Control sensitive logs data
+title: Control Sensitive Logs Data
 kind: guide
 aliases:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
