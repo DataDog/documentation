@@ -337,7 +337,7 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 ### Renaming Service Types
 
-The following keys represent specific service types. Using these keys in the `DD_SERVICE_MAPPING` variable will rename all associated upstream service names:
+The following keys represent specific service types. Using these keys in the `DD_SERVICE_MAPPING` variable renames all associated upstream service names:
 
 - `lambda_api_gateway`, `lambda_sns`, `lambda_sqs`, `lambda_s3`, `lambda_eventbridge`, `lambda_kinesis`, `lambda_dynamodb`, `lambda_url`
 
