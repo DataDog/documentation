@@ -440,7 +440,7 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% site-region region="us,us3,us5,eu" %}}
+{{< site-region region="us,us3,us5,eu" >}}
 ### Enhanced Resolution
 
 Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
@@ -453,7 +453,7 @@ For additional information around these capabilities, please see [Cloud service 
   [2]: /integrations/amazon_web_services/#resource-collection
   [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
 
-{{% /site-region %}}
+{{< /site-region >}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
