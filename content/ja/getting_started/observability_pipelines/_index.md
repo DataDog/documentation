@@ -76,7 +76,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm update --install \
+helm upgrade --install \
     opw datadog/observability-pipelines-worker \
     -f aws_eks.yaml
 ```
@@ -95,7 +95,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm update --install \
+helm upgrade --install \
   opw datadog/observability-pipelines-worker \
   -f azure_aks.yaml
 ```
@@ -114,7 +114,7 @@ helm repo add datadog https://helm.datadoghq.com
 helm repo update
 ```
 ```shell
-helm update --install \
+helm upgrade --install \
   opw datadog/observability-pipelines-worker \
   -f google_gke.yaml
 ```
@@ -175,7 +175,7 @@ Google GKE では、Datadog は SSD でバックアップされた `premium-rwo`
 Datadog Agent のログとメトリクスを観測可能性パイプラインワーカーに送信するには、以下のように Agent の構成を更新してください。
 
 ```yaml
-vector:
+observability_pipelines_worker:
   logs.enabled: true
   # 観測可能性パイプラインワーカーで TLS/SSL が有効になっている場合、プロトコルを https に調整します
   logs.url: "http://<OPW_HOST>:8282"

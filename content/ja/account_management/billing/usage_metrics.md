@@ -33,6 +33,7 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | APM インデックス化スパン             | `datadog.estimated_usage.apm.indexed_spans` |
 | APM 取り込みバイト            | `datadog.estimated_usage.apm.ingested_bytes` |
 | APM 取り込みスパン            | `datadog.estimated_usage.apm.ingested_spans` |
+| APM Fargate タスク             | `datadog.estimated_usage.apm.fargate_tasks` |
 | RUM Sessions                  | `datadog.estimated_usage.rum.sessions`  |
 | サーバーレス Lambda 関数   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
 | サーバーレス呼び出し        | `datadog.estimated_usage.serverless.invocations`|
@@ -42,14 +43,17 @@ Datadog は、現在の推定使用量をほぼリアルタイムで計算しま
 | Network Devices               | `datadog.estimated_usage.network.devices` |
 | Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` |
 | Profiled Containers           | `datadog.estimated_usage.profiling.containers` |
+| Profiler Fargate タスク        | `datadog.estimated_usage.profiler.fargate_tasks` |
 | CSPM ホスト                    | `datadog.estimated_usage.cspm.hosts` |
 | CSPM コンテナ               | `datadog.estimated_usage.cspm.containers` |
 | CWS ホスト                     | `datadog.estimated_usage.cws.hosts` |
 | CWS コンテナ                | `datadog.estimated_usage.cws.containers` | 
 | データベースホスト                | `datadog.estimated_usage.dbm.hosts` |
 | ASM ホスト                     | `datadog.estimated_usage.asm.hosts` |
+| ASM タスク                     | `datadog.estimated_usage.asm.tasks` |
 | インシデント管理 (アクティブユーザー)   | `datadog.estimated_usage.incident_management.active_users` |
-| CI Visibility                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`、`datadog.estimated_usage.ci_visibility.test.committers` |
+| CI Visibility （CI/CDの可視化）                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`、`datadog.estimated_usage.ci_visibility.test.committers` |
+| IOT デバイス                   | `datadog.estimated_usage.iot.devices` |
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="メトリクス名" >}}
