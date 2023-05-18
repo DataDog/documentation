@@ -374,14 +374,14 @@
       - repo_name: synthetics-ci-github-action
         contents:
         - action: pull-and-push-file
-          branch: alai97/configuration-links-cleanup
+          branch: alai97/small-site-region-short-code-update
           globs:
           - 'README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'github_actions.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/alai97/configuration-links-cleanup/README.md"]
+              dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/alai97/small-site-region-short-code-update/README.md"]
               title: Continuous Testing and GitHub Actions
               kind: documentation
               aliases:
@@ -390,14 +390,14 @@
       - repo_name: synthetics-test-automation-circleci-orb
         contents:
         - action: pull-and-push-file
-          branch: alai97/configuration-links-cleanup
+          branch: alai97/small-site-region-short-code-update
           globs:
           - 'README.md'
           options:
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'circleci_orb.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/alai97/configuration-links-cleanup/README.md"]
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/alai97/small-site-region-short-code-update/README.md"]
               title: Continuous Testing and CircleCI Orb
               kind: documentation
               aliases:
