@@ -74,7 +74,7 @@ Redact sensitive data before they are routed outside of your infrastructure, usi
 
 Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows.
 
-{{< img src="observability_pipelines/pipeline_health.png" alt="The pipeline configuration page showing a warning based on the metrics components are experiencing errors and event ingestion delay detected" style="width:90%;" >}}
+{{< img src="observability_pipelines/pipeline_health.png" alt="The pipeline configuration page showing a warning because components are experiencing errors and an event ingestion delay was detected" style="width:90%;" >}}
 
 ## Further Reading
 
