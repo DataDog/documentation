@@ -9,13 +9,21 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    
+
+    - name: Clone Datadog Vale
+      uses: actions/checkout@v3
+      with:
+        repository: DataDog/datadog-vale
+        path: ../datadog-vale
+        
     - name: Find changed files
       id: changed_files
       uses: tj-actions/changed-files@v35
       with:
         separator: ","
         include_all_old_new_renamed_files: true
+
+    - name:     
     
     - name: Vale
       uses: errata-ai/vale-action@reviewdog
