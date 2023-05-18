@@ -387,10 +387,6 @@ link_checks:on-schedule:
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
     - "sed -i'' -e 's/CheckInternalHash: false/CheckInternalHash: true/' .htmltest.yml"
     - htmltest
-  after_script:
-    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
-    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
-    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   artifacts:
     paths:
       - ./tmp/.htmltest
