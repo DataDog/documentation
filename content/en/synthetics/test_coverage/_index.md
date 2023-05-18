@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-The [**Test Coverage** page][1] uses [data collected from Browser RUM][2] and [results from Synthetic browser tests][3] to provide actionable insight into the overall testing coverage of your [RUM applications][9]. 
+The [**Test Coverage** page][1] provides actionable insight into the overall testing coverage of your [RUM applications][9]. It uses [data collected from the Browser RUM SDK][2] and [results from Synthetic browser tests][3].
 
 {{< img src="synthetics/test_coverage/test_coverage.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
-Build a more comprehensive, accurate testing suite by evaluating the percentage of browser tests created for a given RUM application and identifying new areas in a RUM application to add browser tests for:
+The Test Coverage page presents the following information:
 
 - The top visited web pages
 - The percentage of tested RUM actions
