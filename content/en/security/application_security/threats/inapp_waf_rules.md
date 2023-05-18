@@ -54,6 +54,11 @@ An input represents which part of the request the operator is applied to. The fo
 | `is_xss` | Special operator to check for cross-site scripting (XSS) payloads |
 | `is_sqli` | Special operator to check for SQL injection (SQLI) payloads |
 
+## Beta: Custom In-App WAF Rules
+Custom In-App WAF rules enable users to log specific types of requests to their applications. For example, you can use custom rules to monitor login success/failure and other business logic events. To get started, navigate to Security –> Application Security –> Configuration –> In-App WAF -> [Custom Rules][4].
+
+Note: "Default rules" in In-App WAF are read-only. Sometimes, to fine-tune your In-App WAF behavior, you would need to modify the In-App WAF rules. While the default rules cannot be modified, you can create a custom rule based on one of the default rules and modify the match conditions as per your needs. Be sure to disable the default rule so that you don't end up with two very similar rules evaluating the same requests. 
+
 ## Configure an ASM In-App WAF rule in your service
 
 1. In Datadog, navigate to the [In-App WAF page under ASM Configuration][2].
@@ -112,3 +117,4 @@ Next, [configure detection rules to create security signals][1] based on those s
 [1]: /security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?group_by=NONE
 [3]: /security/application_security/enabling/
+[4]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=custom-rules
