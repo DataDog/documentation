@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/advanced_configuration.md
 description: Flutter Monitoring の構成について説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
@@ -125,7 +123,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 | `usr.name`  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
 | `usr.email` | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
 
-ユーザーセッションを識別するには、`DatadogSdk.setUserInfo` を使用します。
+ユーザーセッションを識別するには、`DdRum.setUserInfo` を使用します。
 
 例:
 
@@ -233,8 +231,8 @@ RUM では、ユーザーのデバイスがオフラインのときにもデー�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/#setup
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/data_collected
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[2]: /ja/real_user_monitoring/flutter/#setup
+[3]: /ja/real_user_monitoring/flutter/data_collected
+[4]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [5]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/

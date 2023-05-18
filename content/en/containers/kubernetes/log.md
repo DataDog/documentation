@@ -33,123 +33,6 @@ The Docker API is optimized to get logs from one container at a time; when there
 In order to start collecting your application logs you must be [running the Datadog Agent in your Kubernetes cluster][2]. To enable log collection with your Agent, follow the instructions below:
 
 {{< tabs >}}
-{{% tab "DaemonSet" %}}
-
-**Note**: This option is not supported on Windows. Use the Helm option instead.
-
-To enable log collection with your DaemonSet:
-
-1. Set the `DD_LOGS_ENABLED` and `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` variable to true in the *env* section of the `datadog.yaml` Agent manifest:
-
-    ```yaml
-     # (...)
-      env:
-        # (...)
-        - name: DD_LOGS_ENABLED
-          value: "true"
-        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-          value: "true"
-        - name: DD_CONTAINER_EXCLUDE_LOGS
-          value: "name:datadog-agent"
-     # (...)
-    ```
-
-    **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [environment variable for ignoring containers][1] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
-
-2. Mount the `pointerdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
-
-    ```yaml
-      # (...)
-        volumeMounts:
-          # (...)
-          - name: pointerdir
-            mountPath: /opt/datadog-agent/run
-          - name: logpodpath
-           mountPath: /var/log/pods
-          # Docker runtime directory, replace this path
-          # with your container runtime logs directory,
-          # or remove this configuration if `/var/log/pods`
-          # is not a symlink to any other directory.
-          - name: logcontainerpath
-           mountPath: /var/lib/docker/containers
-      # (...)
-      volumes:
-        # (...)
-        - hostPath:
-            path: /opt/datadog-agent/run
-          name: pointerdir
-        - hostPath:
-            path: /var/log/pods
-          name: logpodpath
-        # Docker runtime directory, replace this path
-        # with your container runtime logs directory,
-        # or remove this configuration if `/var/log/pods`
-        # is not a symlink to any other directory.
-        - hostPath:
-            path: /var/lib/docker/containers
-          name: logcontainerpath
-        # (...)
-    ```
-
-    The `pointerdir` is used to store a file with a pointer to all the containers that the Agent is collecting logs from. This is to make sure none are lost when the Agent is restarted, or in the case of a network issue.
-
-### Unprivileged
-
-(Optional) To run an unprivileged installation, add the following to your [pod template][2]:
-
-```yaml
-  spec:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
-```
-
-where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
-
-When the agent is running with a non-root user, it cannot directly read the log files contained in `/var/lib/docker/containers`. In this case, it is necessary to mount the docker socket in the agent container so that it can fetch the container logs from the docker daemon.
-
-[1]: /agent/docker/?tab=standard#ignore-containers
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-To enable log collection with Helm, update your [datadog-values.yaml][1] file with the following log collection configuration, then upgrade your Datadog Helm chart:
-
-```yaml
-datadog:
-  ## @param logs - object - required
-  ## Enable logs agent and provide custom configs
-  #
-  logs:
-    ## @param enabled - boolean - optional - default: false
-    ## Enables this to activate Datadog Agent log collection.
-    #
-    enabled: true
-
-    ## @param containerCollectAll - boolean - optional - default: false
-    ## Enable this to allow log collection for all containers.
-    #
-    containerCollectAll: true
-```
-
-You can set the `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
-
-### Unprivileged
-
-(Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
-
-```yaml
-datadog:
-  securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
-```
-
-where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
 {{% tab "Operator" %}}
 
 Update your `datadog-agent.yaml` manifest with:
@@ -210,7 +93,48 @@ where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the gro
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+To enable log collection with Helm, update your [datadog-values.yaml][1] file with the following log collection configuration, then upgrade your Datadog Helm chart:
+
+```yaml
+datadog:
+  ## @param logs - object - required
+  ## Enable logs agent and provide custom configs
+  #
+  logs:
+    ## @param enabled - boolean - optional - default: false
+    ## Enables this to activate Datadog Agent log collection.
+    #
+    enabled: true
+
+    ## @param containerCollectAll - boolean - optional - default: false
+    ## Enable this to allow log collection for all containers.
+    #
+    containerCollectAll: true
+```
+
+You can set the `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+
+### Unprivileged
+
+(Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
 {{< /tabs >}}
+
+To configure log collection using a DaemonSet, see [DaemonSet Log Collection][9].
 
 **Warning**: When running an unprivileged installation, the agent needs to be able to read the log files in `/var/log/pods`.
 With `containerd`, the log files in `/var/log/pods` are readable by members of the `root` group. With the above instructions, the `agent` is still running with the `root` group so, it works.
@@ -624,3 +548,4 @@ tagger_warmup_duration: 5
 [6]: /agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
 [7]: /agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
 [8]: /agent/guide/autodiscovery-management/
+[9]: /containers/guide/kubernetes_daemonset/#log-collection

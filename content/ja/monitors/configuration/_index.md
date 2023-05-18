@@ -202,8 +202,8 @@ Datadog には、アラートと警告の 2 種類の通知があります。モ
 
 `Evaluate as zero` と `Show last known status` のオプションが、クエリの種類に応じて表示されます。
 
-- **Evaluate as zero:** このオプションは `Count` クエリを使用するモニターに使用できます。
-- **Show last known status:** このオプションは `Count` 以外のクエリタイプ、例えば `Gauge`、`Rate`、`Distribution` を使用しているモニターで利用できます。
+- **Evaluate as zero:** このオプションは、`default_zero()` 関数がない `Count` クエリを使用するモニターに使用できます。
+- **Show last known status:** このオプションは `Count` 以外のクエリタイプ、例えば `Gauge`、`Rate`、`Distribution` を使用しているモニター、および `default_zero()` を持つ `Count` クエリで利用できます。
 
 {{% /tab %}}
 {{< /tabs >}}
