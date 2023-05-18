@@ -27,9 +27,9 @@ To identify groups that are experiencing issues, use the status filters to show 
 
 ## Analyze historical metrics
 
-To evaluate how node synchronization states have fluctuated over time, select an availability group to open the details side panel. The **Historical Synchronization States** timeseries graph
+To evaluate how node synchronization states have fluctuated over time, select an availability group to open the details side panel. The **Historical Synchronization States** graph at the top of the panel shows the status of each node over the selected timeframe.
 
-When you want a comprehensive picture of your database health, you can view historical metrics for every node in your AlwaysOn availability groups. By selecting a cluster, you can access a timeseries of past synchronization states for this availability group, categorized by node. You can also view send, redo, and lag metrics for each of the secondary nodes. This information (shown in the following screenshot) helps you spot nodes that have been experiencing issues, as well as perform investigations into failures and bottlenecks.
+View additional information about each secondary node on the **Secondary Nodes** tab. You can also use the timeseries graphs on the **Metrics** tab to spot abnormal behavior in individual nodes based on view send, redo, and lag metrics. 
 
 {{< img src="database_monitoring/dbm_alwayson_history.png" alt="View SQL Server AlwaysOn groups" style="width:80%;">}}
 
