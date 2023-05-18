@@ -5,7 +5,7 @@ further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
   text: "Database Monitoring"
-- link: "/setup_sql_server/"
+- link: ""/database_monitoring/setup_sql_server/"
   tag: "Documentation"
   text: "Setting Up SQL Server"
 - link: "/database_monitoring/troubleshooting/"
