@@ -94,7 +94,7 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 ## Other
 
 {{< whatsnext desc="Other developer resources:" >}}
-    {{< nextlink href="/developers/marketplace" >}}<u>Marketplace</u>: Build services on top of Datadog and market them to customers.{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/marketplace_offering" >}}<u>Marketplace</u>: Build services on top of Datadog and market them to customers.{{< /nextlink >}}
     {{< nextlink href="/developers/amazon_cloudformation" >}}<u>Amazon CloudFormation</u>: Use templates to describe, configure, and provision all the AWS resources in your environment at once.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -112,6 +112,6 @@ A [custom check][11], also know as a custom Agent check, lets you send internal 
 [7]: https://github.com/DataDog/integrations-extras
 [8]: https://www.datadoghq.com/pricing/
 [9]: https://github.com/DataDog/integrations-core
-[10]: /developers/marketplace/
+[10]: /developers/integrations/marketplace_offering
 [11]: /developers/custom_checks/
 [12]: /developers/service_checks/
