@@ -12,7 +12,7 @@ further_reading:
   text: "Notebooks"
 ---
 
-The geomap widget graphs any metric that has a country tag or facet.
+The geomap widget plots geographic data and visualizes it through shaded regions or points.
 
 {{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="Geomap visualization with the points overlay" >}}
 
@@ -21,16 +21,40 @@ The geomap widget graphs any metric that has a country tag or facet.
 {{< img src="dashboards/widgets/geomap/geomap_setup2.png" alt="Geomap Graph your data section of widget configuration">}}
 
 ### Configuration
-
 1. Choose the visualization layer:
     * **Regions**: Aggregate measures at a country level.
     * **Points**: Overlay events as points on the map to display geographic event data.
-2. Choose the data to graph:
-|  Data source    | Requirement notes    | Query configuration |
-| ---  | ----------- | ----------- |
-|Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. | See the [Log search documentation][3] to configure a log event query. |
-|Metric   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. | See the [querying][5] documentation to configure a metric query. |
-|RUM   |  | See the [RUM documentation][6] to configure a RUM query. |
+
+2. Choose the data to graph: <br>
+  **Note**: Support for data sources vary based on the visualization layer you select.
+  {{< tabs >}}
+  {{% tab "Regions" %}}
+  |  Data source    | Notes    | 
+  | --------------  | -------- |
+  |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
+  |Metric   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying][5] documentation to configure a metric query.|
+  |RUM   | See the [RUM documentation][6] to configure a RUM query. |
+
+  [1]: /logs/log_configuration/processors/#geoip-parser
+  [2]: /getting_started/tagging/#defining-tags
+  [3]: /logs/search_syntax/
+  [4]: /logs/logs_to_metrics/
+  [5]: /dashboards/querying/
+  [6]: /real_user_monitoring/explorer/search_syntax/
+  {{% /tab %}}
+
+  {{% tab "Points" %}}
+  |  Data source | Notes |
+  | -----------  | ----- | 
+  |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query. |
+  |RUM   | See the [RUM documentation][4] to configure a RUM query. |
+
+  [1]: /logs/log_configuration/processors/#geoip-parser
+  [2]: /getting_started/tagging/#defining-tags
+  [3]: /logs/search_syntax/
+  [4]: /real_user_monitoring/explorer/search_syntax/
+  {{% /tab %}}
+  {{< /tabs >}}
 
 3. Optional: configure your view box depending on where you'd like to zoom into on the map by default.
 
@@ -39,6 +63,14 @@ The geomap widget graphs any metric that has a country tag or facet.
 #### Context links
 
 [Context links][7] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party).
+
+## API
+
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][8] for additional reference.
+
+The dedicated [widget JSON schema definition][9] for the change widget is:
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
@@ -51,3 +83,5 @@ The geomap widget graphs any metric that has a country tag or facet.
 [5]: /dashboards/querying/
 [6]: /real_user_monitoring/explorer/search_syntax/
 [7]: /dashboards/guide/context-links/
+[8]: /api/latest/dashboards/
+[9]: /dashboards/graphing_json/widget_json/
