@@ -441,6 +441,13 @@ components:
       schema:
         example: 00000000-0000-1234-0000-000000000000
         type: string
+    ServiceAccountUniqueID:
+      description: Your GCP STS enabled service account's unique ID.
+      in: path
+      name: account_id
+      required: true
+      schema:
+        type: string
     ServiceName:
       description: The name of the service.
       in: path
@@ -667,6 +674,39 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    AccountAttributes:
+      description: Attributes associated with your service account.
+      properties:
+        automute:
+          description: Silence monitors for expected GCE instance shutdowns.
+          type: boolean
+        client_email:
+          description: Your service account email address.
+          example: datadog-service-account@test-project.iam.gserviceaccount.com
+          type: string
+        host_filters:
+          description: Your Host Filters.
+          items:
+            description: Host Filters
+            type: string
+          type: array
+        is_cspm_enabled:
+          description: When enabled, Datadog performs configuration checks across
+            your Google Cloud environment by continuously scanning every resource.
+          type: boolean
+      type: object
+    AccountCreationResponse:
+      description: The account creation response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceAccountInfo'
+      type: object
+    AccountPatchBody:
+      description: Service account info.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceAccountInfoPatch'
+      type: object
     ApplicationKeyCreateAttributes:
       description: Attributes used to create an application Key.
       properties:
@@ -804,6 +844,27 @@ components:
       type: string
       x-enum-varnames:
       - APPLICATION_KEYS
+    AttributeMetadata:
+      description: Attribute Metadata.
+      properties:
+        automute:
+          description: Silence monitors for expected GCE instance shutdowns.
+          type: boolean
+        client_email:
+          description: Your client email.
+          example: dd-integration@datadog-staging.iam.gserviceaccount.com
+          type: string
+        host_filters:
+          description: Your host filters.
+          items:
+            description: Host Filter items
+            type: string
+          type: array
+        is_cspm_enabled:
+          description: When enabled, Datadog performs configuration checks across
+            your Google Cloud environment by continuously scanning every resource.
+          type: boolean
+      type: object
     AuditLogsEvent:
       description: Object description of an Audit Logs event after it is processed
         and stored by Datadog.
@@ -2927,6 +2988,34 @@ components:
             type: number
           type: array
       type: object
+    DelegateAccountAttributes:
+      description: Your delegate account attributes.
+      properties:
+        delegate_account_email:
+          description: Your organization's Datadog principal email address.
+          example: ddgci-1a19n28hb1a812221893@datadog-gci-sts-us5-prod.iam.gserviceaccount.com
+          type: string
+      type: object
+    DelegateCreationResponse:
+      description: Your delegate service account response data.
+      properties:
+        data:
+          $ref: '#/components/schemas/DelegateInfo'
+      type: object
+    DelegateInfo:
+      description: Datadog principal service account info.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DelegateAccountAttributes'
+        id:
+          description: The ID of the delegate service account.
+          example: ddgci-1a19n28hb1a812221893@datadog-gci-sts-us5-prod.iam.gserviceaccount.com
+          type: string
+        type:
+          description: The type of account.
+          example: gcp_sts_delegate
+          type: string
+      type: object
     DetailedFinding:
       description: A single finding with with message and resource configuration.
       properties:
@@ -3954,6 +4043,27 @@ components:
           nullable: true
           type: array
       type: object
+    GCPSTSAccounts:
+      description: Your Google Cloud Platform STS enabled service accounts.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AccountAttributes'
+        id:
+          description: Your service account's unique ID.
+          example: d18bn126-4ab5-6789-0c1d-234g6a67j89
+          type: string
+        meta:
+          $ref: '#/components/schemas/MetaInfo'
+        type:
+          description: The type of account.
+          example: gcp_service_account
+          type: string
+      type: object
+    GCPSTSServiceAccountArray:
+      description: Array of GCP STS enabled service accounts.
+      items:
+        $ref: '#/components/schemas/GCPSTSAccounts'
+      type: array
     GetFindingResponse:
       description: The expected response schema when getting a finding.
       properties:
@@ -7232,6 +7342,16 @@ components:
             from the other indexes
           type: string
       type: object
+    MetaInfo:
+      description: Additional information related to your service account.
+      properties:
+        accessible_projects:
+          description: The current list of projects accessible from your service account.
+          items:
+            description: List of GCP projects.
+            type: string
+          type: array
+      type: object
     Metric:
       description: Object for a single metric tag configuration.
       example:
@@ -10499,6 +10619,12 @@ components:
       type: string
       x-enum-varnames:
       - SAML_ASSERTION_ATTRIBUTES
+    STSEnabledAccountData:
+      description: Object containing all your STS enabled accounts.
+      properties:
+        data:
+          $ref: '#/components/schemas/GCPSTSServiceAccountArray'
+      type: object
     ScalarColumn:
       description: A single column in a scalar query response.
       oneOf:
@@ -12649,6 +12775,51 @@ components:
           $ref: '#/components/schemas/ServiceAccountCreateData'
       required:
       - data
+      type: object
+    ServiceAccountInfo:
+      description: Info on your service account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AccountAttributes'
+        id:
+          description: Your service account's unique ID.
+          example: d291291f-12c2-22g4-j290-123456678897
+          type: string
+        meta:
+          $ref: '#/components/schemas/MetaInfo'
+        type:
+          description: The type of account.
+          example: gcp_service_account
+          type: string
+      type: object
+    ServiceAccountInfoPatch:
+      description: Info on your newly generated service account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AccountAttributes'
+        id:
+          description: Your service account's unique ID.
+          example: d291291f-12c2-22g4-j290-123456678897
+          type: string
+        type:
+          description: The type of account.
+          example: gcp_service_account
+          type: string
+      type: object
+    ServiceAccountMetadata:
+      description: Additional metadata on your newly generated service account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/AttributeMetadata'
+        type:
+          description: The type of service account.
+          type: string
+      type: object
+    ServiceAccountToBeCreatedData:
+      description: Data on your newly generated service account.
+      properties:
+        data:
+          $ref: '#/components/schemas/ServiceAccountMetadata'
       type: object
     ServiceDefinitionCreateResponse:
       description: Create service definitions response.
@@ -17348,6 +17519,206 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/integration/gcp/accounts:
+    get:
+      description: List all GCP STS-enabled service accounts configured in your Datadog
+        account.
+      operationId: ListGCPSTSAccountsV2
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/STSEnabledAccountData'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List all GCP STS-enabled service accounts
+      tags:
+      - GCP Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create a new entry within Datadog for your STS enabled service
+        account.
+      operationId: CreateGCPSTSAccountsV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceAccountToBeCreatedData'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountCreationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new entry for your service account
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteGCPSTSAccountsV2
+        parameters:
+        - name: account_id
+          source: id
+        type: unsafe
+  /api/v2/integration/gcp/accounts/{account_id}:
+    delete:
+      description: Delete an STS enabled GCP account from within Datadog.
+      operationId: DeleteGCPSTSAccountsV2
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountUniqueID'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an STS enabled GCP Account
+      tags:
+      - GCP Integration
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+    patch:
+      description: Update an STS enabled service account.
+      operationId: UpdateGCPSTSAccountsV2
+      parameters:
+      - $ref: '#/components/parameters/ServiceAccountUniqueID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountPatchBody'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountPatchBody'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update STS Service Account
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/integration/gcp/sts_delegate:
+    get:
+      description: List your Datadog-GCP STS delegate account configured in your Datadog
+        account.
+      operationId: GetDelegateV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example: {}
+              type: object
+        description: Get a Datadog GCP STS delegate account.
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelegateCreationResponse'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Internal Server Error
+      summary: List delegate account
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: safe
+    post:
+      description: Create a Datadog GCP principal.
+      operationId: MakeDelegateV2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example: {}
+              type: object
+        description: Create a delegate service account within Datadog.
+        required: false
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DelegateCreationResponse'
+          description: OK
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Conflict Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a Datadog GCP principal
+      tags:
+      - GCP Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        operationId: TODO
+        parameters: []
+        type: unsafe
   /api/v2/integration/opsgenie/services:
     get:
       description: Get a list of all services from the Datadog Opsgenie integration.
@@ -26271,6 +26642,12 @@ tags:
 - description: Configure your Datadog Fastly integration directly through the Datadog
     API.
   name: Fastly Integration
+- description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
+
+    through the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform).'
+  externalDocs:
+    url: https://docs.datadoghq.com/integrations/google_cloud_platform
+  name: GCP Integration
 - description: 'The IP allowlist API is used to manage the IP addresses that
 
     can access the Datadog API and web UI. It does not block

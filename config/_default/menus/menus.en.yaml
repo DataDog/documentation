@@ -4792,6 +4792,78 @@ api:
     url: /api/latest/gcp-integration/
     identifier: gcp-integration
     generated: true
+  - name: Create a Datadog GCP principal
+    url: '#create-a-datadog-gcp-principal'
+    identifier: gcp-integration-create-a-datadog-gcp-principal
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - MakeDelegateV2
+      unstable: []
+      order: 5
+  - name: List delegate account
+    url: '#list-delegate-account'
+    identifier: gcp-integration-list-delegate-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetDelegateV2
+      unstable: []
+      order: 6
+  - name: Update STS Service Account
+    url: '#update-sts-service-account'
+    identifier: gcp-integration-update-sts-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateGCPSTSAccountsV2
+      unstable: []
+      order: 4
+  - name: Delete an STS enabled GCP Account
+    url: '#delete-an-sts-enabled-gcp-account'
+    identifier: gcp-integration-delete-an-sts-enabled-gcp-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteGCPSTSAccountsV2
+      unstable: []
+      order: 3
+  - name: Create a new entry for your service account
+    url: '#create-a-new-entry-for-your-service-account'
+    identifier: gcp-integration-create-a-new-entry-for-your-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateGCPSTSAccountsV2
+      unstable: []
+      order: 2
+  - name: List all GCP STS-enabled service accounts
+    url: '#list-all-gcp-sts-enabled-service-accounts'
+    identifier: gcp-integration-list-all-gcp-sts-enabled-service-accounts
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListGCPSTSAccountsV2
+      unstable: []
+      order: 1
   - name: Update a GCP integration
     url: '#update-a-gcp-integration'
     identifier: gcp-integration-update-a-gcp-integration
