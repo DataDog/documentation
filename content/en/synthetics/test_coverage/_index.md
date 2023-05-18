@@ -35,7 +35,9 @@ Build a more comprehensive, accurate testing suite by evaluating the percentage 
 
 ## Investigate test coverage for an application or view
 
-To get started with understanding the completeness of your test coverage:
+Build a more comprehensive, accurate testing suite by identifying untested actions and linking them with real user interactions on the Test Coverage page. 
+
+To identify areas in your application or views where you should create browser tests:
 
 1. Select a RUM application from the **Application** dropdown menu or a view from the **View Name** dropdown menu. 
 2. Click **Custom** to filter the data on [custom actions][4], which are unique and offer more accurate coverage results compared to generated actions. If you want to include generated actions in the test coverage analysis, select **All Actions**.
