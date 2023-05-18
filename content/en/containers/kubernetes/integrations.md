@@ -709,7 +709,6 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 [1]: /agent/docker/integrations/
 [2]: /getting_started/integrations/#configuring-agent-integrations
 [3]: /agent/guide/secrets-management/
-[4]: /integrations/#cat-autodiscovery
 [5]: /integrations/ceph/
 [6]: /integrations/varnish/#autodiscovery
 [7]: /integrations/postfix/
