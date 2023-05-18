@@ -250,7 +250,7 @@ config.lograge.custom_options = lambda do |event|
 end
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

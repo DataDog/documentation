@@ -66,7 +66,7 @@ Azure Monitor からメトリクスのグラフが表示されるスクリーン
 
 ### 未登録のリソースプロバイダー
 
-エラー **The subscription is not registered to use namespace ‘Microsoft.EventHub’** が原因でスクリプトの実行が失敗した場合:
+エラー **The subscription is not registered to use namespace 'Microsoft.EventHub'** が原因でスクリプトの実行が失敗した場合:
 
 Azure には、各サービスのリソースプロバイダーがあります。たとえば、Azure EventHub の場合は `Microsoft.EventHub` です。Azure サブスクリプションが必要なリソースプロバイダーに登録されていない場合、スクリプトは失敗します。この問題は、リソースプロバイダーに登録することで修正できます。CloudShell でこのコマンドを実行します。
 
