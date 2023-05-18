@@ -20,9 +20,11 @@ jobs:
     - run: | 
         pwd
         ls
-        
-    - run: cd documentation
-    - run: ls
+        ls documentation
+        ls datadog-vale
+        cd documentation
+        ls
+        pwd
         
     - name: Find changed files
       id: changed_files
