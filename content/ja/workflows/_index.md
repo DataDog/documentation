@@ -4,16 +4,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
   tag: GitHub
   text: Automate end-to-end processes and quickly respond to events with Datadog Workflows
-is_beta: true
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+  tag: blog
+  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
 kind: documentation
 title: Workflows
 ---
 
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  Workflows は公開ベータ版です。フィードバックや質問がある場合は、<a href="/help">Datadog サポート</a>にご連絡ください。
-{{< /callout >}}
-
-{{< img src="workflows/hero.jpg" alt="ワークフローの 3 つの目的であるオーケストレーション、自動化、サイロの破壊を示すグラフィック"  >}}
+{{< img src="workflows/hero.jpg" alt="ワークフローの 3 つの目的であるオーケストレーション、自動化、サイロの破壊を示すグラフィック" >}}
 
 Datadog Workflows は、エンドツーエンドプロセスのオーケストレーションと自動化を可能にします。インフラストラクチャーやツールに接続する[アクション][1]で構成されるワークフローを構築します。これらのアクションは、データおよび論理演算子も実行できるため、分岐、決定、データ演算を含む複雑なフローを構築することができます。
 
