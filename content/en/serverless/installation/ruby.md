@@ -399,7 +399,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 ## What's next?
 
-- Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- You can view metrics, logs, and traces on the [Serverless Homepage][1].
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
