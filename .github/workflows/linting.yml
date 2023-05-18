@@ -20,8 +20,9 @@ jobs:
     - run: | 
         pwd
         ls
-        cd documentation
-        ls
+        
+    - run: cd documentation
+    - run: ls
         
     - name: Find changed files
       id: changed_files
