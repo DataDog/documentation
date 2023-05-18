@@ -50,11 +50,33 @@ MaterialApp(
 
 This works if you are using named routes or if you have supplied a name to the `settings` parameter of your `PageRoute`.
 
-Alternatively, you can use the `DatadogRouteAwareMixin` property in conjunction with the `DatadogNavigationObserverProvider` property to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`. 
+Alternatively, you can use the `DatadogRouteAwareMixin` property in conjunction with the `DatadogNavigationObserverProvider` property to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`.
+
+To rename your views or supply custom paths, provide a [`viewInfoExtractor`][8] callback. This function can fall back to the default behavior of the observer by calling `defaultviewInfoExtractor`. For example:
+
+```dart
+RumViewInfo? infoExtractor(Route<dynamic> route) {
+  var name = route.settings.name;
+  if (name == 'my_named_route') {
+    return RumViewInfo(
+      name: 'MyDifferentName',
+      attributes: {'extra_attribute': 'attribute_value'},
+    );
+  }
+
+  return defaultViewInfoExtractor(route);
+}
+
+var observer = DatadogNavigationObserver(
+  datadogSdk: DatadogSdk.instance,
+  viewInfoExtractor: infoExtractor,
+);
+```
+
 
 ## Automatically track resources
 
-Use the [Datadog Tracking HTTP Client][5] package to enable automatic tracking of resources and HTTP calls from your RUM views. 
+Use the [Datadog Tracking HTTP Client][5] package to enable automatic tracking of resources and HTTP calls from your RUM views.
 
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
 
@@ -76,9 +98,10 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /account_management/api-app-keys/#client-tokens 
+[2]: /account_management/api-app-keys/#client-tokens
 [3]: /real_user_monitoring/flutter/#setup
 [4]: https://pub.dev/packages/datadog_flutter_plugin
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing
 [7]: /real_user_monitoring/flutter/data_collected/
+[8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
