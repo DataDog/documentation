@@ -2827,6 +2827,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries or Scalar response.
@@ -2838,6 +2839,81 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - SCALAR
+    FormulaAndFunctionSLODataSource:
+      description: Data source for SLO measures queries.
+      enum:
+      - slo
+      example: slo
+      type: string
+      x-enum-varnames:
+      - SLO
+    FormulaAndFunctionSLOGroupMode:
+      description: Group mode to query measures.
+      enum:
+      - overall
+      - components
+      example: overall
+      type: string
+      x-enum-varnames:
+      - OVERALL
+      - COMPONENTS
+    FormulaAndFunctionSLOMeasure:
+      description: SLO measures queries.
+      enum:
+      - good_events
+      - bad_events
+      - slo_status
+      - error_budget_remaining
+      - burn_rate
+      - error_budget_burndown
+      example: slo_status
+      type: string
+      x-enum-varnames:
+      - GOOD_EVENTS
+      - BAD_EVENTS
+      - SLO_STATUS
+      - ERROR_BUDGET_REMAINING
+      - BURN_RATE
+      - ERROR_BUDGET_BURNDOWN
+    FormulaAndFunctionSLOQueryDefinition:
+      description: A formula and functions metrics query.
+      example:
+        data_source: slo
+        group_mode: overall
+        measure: good_events
+        name: my_slo
+        slo_id: '12345678910'
+        slo_query_type: metric
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionSLODataSource'
+        group_mode:
+          $ref: '#/components/schemas/FormulaAndFunctionSLOGroupMode'
+        measure:
+          $ref: '#/components/schemas/FormulaAndFunctionSLOMeasure'
+        name:
+          description: Name of the query for use in formulas.
+          example: my_slo
+          type: string
+        slo_id:
+          description: ID of an SLO to query measures.
+          example: '12345678910'
+          type: string
+        slo_query_type:
+          $ref: '#/components/schemas/FormulaAndFunctionSLOQueryType'
+      required:
+      - data_source
+      - slo_id
+      - measure
+      type: object
+    FormulaAndFunctionSLOQueryType:
+      description: Name of the query for use in formulas.
+      enum:
+      - metric
+      example: metric
+      type: string
+      x-enum-varnames:
+      - METRIC
     FreeTextWidgetDefinition:
       description: Free text is a widget that allows you to add headings to your screenboard.
         Commonly used to state the overall purpose of the dashboard. Only available
