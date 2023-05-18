@@ -6,14 +6,17 @@ further_reading:
   text: 機能フラグデータ収集の設定
 - link: /real_user_monitoring/explorer/
   tag: Documentation
-  text: RUM エクスプローラー
+  text: RUM エクスプローラーについて
+- link: https://www.datadoghq.com/blog/feature-flag-tracking/
+  tag: ブログ
+  text: Datadog RUM の機能フラグ追跡によるリリースの安全性の確保
 kind: documentation
 title: 機能フラグ追跡
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-RUM の機能フラグ追跡は非公開ベータ版です。アクセスをリクエストするには、サポート (support@datadoghq.com) までご連絡ください。
-{{< /callout >}}
+<div class="alert alert-warning">
+    機能フラグ追跡はベータ版です。
+</div>
 
 ## 概要
 

@@ -38,7 +38,7 @@ Docker をお使いの場合、Datadog Cluster Agent は Docker Hub と GCR で�
 {{< whatsnext desc="このセクションには、以下のトピックが記載されています。">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>セットアップ</u>: Kubernetes クラスターで Datadog Cluster Agent をセットアップします。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>コマンドとオプション</u>: Cluster Agent で利用可能なコマンドとオプションの一覧。{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>クラスターチェック</u>: クラスターチェックにより、オートディスカバリーの実施や、Kubernetes など負荷分散型クラスターサービスでのチェックの実施が可能になります。{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>クラスターチェック</u>: クラスターチェックにより、オートディスカバリーの実施や、Kubernetes サービスなど負荷分散型クラスターサービスでのチェックの実施が可能になります。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>エンドポイントチェック</u>: エンドポイントがクラスターチェックを拡張してクラスターサービス背後のあらゆるエンドポイントを監視します。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Admission Controller</u>: アプリケーションポッドの構成を簡略化するために Admission Controller を構成します。{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent のトラブルシューティング</u>: Datadog Cluster Agent のトラブルシューティング情報を検索できます。{{< /nextlink >}}
