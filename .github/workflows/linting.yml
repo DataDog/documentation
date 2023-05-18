@@ -28,7 +28,7 @@ jobs:
     - name: Vale
       uses: errata-ai/vale-action@reviewdog
       with:
-        entryPoint: ./documentation
+        workdir: documentation
         separator: ","
         reporter: github-pr-check
         fail_on_error: true
