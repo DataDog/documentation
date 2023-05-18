@@ -28,7 +28,6 @@ jobs:
     - name: Vale
       uses: errata-ai/vale-action@reviewdog
       with:
-        workdir: documentation
         separator: ","
         reporter: github-pr-check
         fail_on_error: true
@@ -36,3 +35,4 @@ jobs:
         files: ${{ steps.changed_files.outputs.all_changed_files }}
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        GITHUB_WORKSPACE: '/home/runner/work/documentation/documentation/documentation'
