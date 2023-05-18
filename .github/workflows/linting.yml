@@ -21,6 +21,7 @@ jobs:
         pwd
         ls
         cd documentation
+        ls
         
     - name: Find changed files
       id: changed_files
