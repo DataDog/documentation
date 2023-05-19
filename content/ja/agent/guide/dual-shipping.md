@@ -88,10 +88,10 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [
 process_config:
   [...]
   additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://process.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://process.datadoghq.eu":
     - apikey4
 ```
 
@@ -100,7 +100,7 @@ process_config:
 <div class="alert alert-info">Agent バージョン >= 6.20 または 7.20 が必要です。</div>
 
 ```bash
-DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{< /tabs >}}
@@ -113,17 +113,17 @@ DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2
 orchestrator_explorer:
   [...]
   orchestrator_additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://orchestrator.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://orchestrator.datadoghq.eu":
     - apikey4
 ```
 
 ### 環境変数コンフィギュレーション
 
 ```bash
-DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_ORCHESTRATOR_EXPLORER_ORCHESTRATOR_ADDITIONAL_ENDPOINTS='{\"https://orchestrator.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://orchestrator.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 {{< /tabs >}}
@@ -197,21 +197,21 @@ database_monitoring:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   activity:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbquery-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   metrics:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "dbm-metrics-intake.datadoghq.com"
       Port: 443
       is_reliable: true
 ```
@@ -220,11 +220,11 @@ database_monitoring:
 
 ```bash
 DD_DATABASE_MONITORING_SAMPLES_USE_HTTP=true
-DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_SAMPLES_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_ACTIVITY_USE_HTTP=true
-DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_ACTIVITY_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbquery-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
-DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{< /tabs >}}
@@ -242,7 +242,7 @@ network_devices:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "ndm-intake.datadoghq.com"
       Port: 443
       is_reliable: true
   snmp_traps:
@@ -250,7 +250,7 @@ network_devices:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "ndm-intake.datadoghq.com"
         Port: 443
         is_reliable: true
   netflow:
@@ -258,7 +258,7 @@ network_devices:
       use_http: true
       additional_endpoints:
       - api_key: "apiKey2"
-        Host: "mydomain.datadoghq.com"
+        Host: "ndm-intake.datadoghq.com"
         Port: 443
         is_reliable: true
 ```
@@ -267,7 +267,7 @@ network_devices:
 
 ```bash
 DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
-DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 {{< /tabs >}}
@@ -361,4 +361,8 @@ YAML 構成を `datadog.yaml` に追加するか、適切な環境変数で Agen
         is_reliable: true
 ```
 
-[Datadog Agent オペレーター](https://github.com/DataDog/datadog-operator)を使用している場合、同様に `agent.customConfig.configData` キーを設定することができます。すべての構成可能なキーは、[ここ](https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md)で文書化されています。
+[Datadog Agent オペレーター][1]を使用している場合は、同様に、`agent.customConfig.configData` キーを設定することができます。全ての構成可能キーは [v1][2] と [v2][3] で文書化されています。
+
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

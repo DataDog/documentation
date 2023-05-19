@@ -6,9 +6,9 @@ further_reading:
 - link: /serverless/configuration
   tag: Documentation
   text: サーバーレスモニタリングの構成
-- link: /serverless/guide/serverless_tracing_and_webpack/
+- link: /serverless/guide/serverless_tracing_and_bundlers/
   tag: Documentation
-  text: Node.js Lambda トレースと Webpack の互換性
+  text: Node.js Lambda トレースとバンドラーの互換性
 - link: /serverless/guide/troubleshoot_serverless_monitoring
   tag: Documentation
   text: サーバーレスモニタリングのトラブルシューティング
@@ -23,7 +23,7 @@ title: Node.js サーバーレスアプリケーションのインスツルメ�
 
 <div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 
-<div class="alert alert-warning">webpack や esbuild を使ってバンドルしている場合、<a href="/serverless/guide/serverless_tracing_and_webpack/">Datadog のライブラリを external としてマークする</a>必要があるかもしれません。</div>
+<div class="alert alert-warning">webpack や esbuild を使ってバンドルしている場合、<a href="/serverless/guide/serverless_tracing_and_bundlers/">Datadog のライブラリを external としてマークする</a>必要があるかもしれません。</div>
 
 ## インストール
 

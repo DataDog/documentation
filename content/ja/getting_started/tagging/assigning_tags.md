@@ -173,7 +173,7 @@ Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] か
 
 **例:**
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```

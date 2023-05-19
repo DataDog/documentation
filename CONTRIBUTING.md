@@ -39,7 +39,7 @@ The purpose of the Docs site is to clearly inform readers about how to use Datad
 - **Recommended**: Configure this thing. Optionally, configure that thing.
 - **Not recommended**: You must configure this thing, and you may want to configure that thing.
 
-**Don't wax philosophical**: Think pieces and pontification belong on the corporate blog.
+**Don't wax philosophical**: Think pieces and pontification don't belong on the Docs site.
 
 **Don't constantly explain basic Datadog features**: Outside of introductory material, don't tell readers again and again that metrics submitted to Datadog may be graphed alongside other metrics, have events overlaid onto them, etc. It's okay to point out cases that are compelling and specific, such as "Overlay Jenkins deploys onto a graph of your application response times", but don't re-explain Datadog; instead, provide a useful description that enhances understanding of the feature.
 
@@ -98,7 +98,7 @@ Avoid temporal words like "currently", "now", "will", etc. Describe the present 
 
 ### Words and phrases
 
-The [Gobwords Style Guide][4] is an index of commonly mis-capitalized, mispunctuated, and misused words that often appear on the corporate blog. Use this word guide when writing for the Docs site, too.
+The [datadog-vale][4] repo contains a set of linting rules for Vale based on the Documentation Style Guide. You can refer to the rules when writing for the Docs site.
 
 Otherwise, here are some words and phrases to avoid or use sparingly:
 
@@ -196,7 +196,7 @@ Use text formatting to clarify and enhance content.
 [1]: https://github.com/DataDog/documentation/wiki
 [2]: https://tools.ietf.org/html/rfc2119
 [3]: https://tools.ietf.org/html/rfc2606
-[4]: https://github.com/DataDog/gobwords/wiki/Style-guide
+[4]: https://github.com/DataDog/datadog-vale
 [5]: https://github.com/DataDog/documentation/wiki/Translations-Overview
 [6]: https://github.com/DataDog/documentation/wiki/Import-an-Image-or-a-mp4-video
 [7]: https://docs.datadoghq.com/

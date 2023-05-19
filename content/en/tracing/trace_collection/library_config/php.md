@@ -316,6 +316,20 @@ Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
 
+`DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_post_data_param_allowed`<br>
+**Default**: ""<br>
+A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
+**Example**: 
+  - The posted data is `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
+  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`
+  - In this scenario, the collected metadata is:
+    - `http.request.foo.bar.password=Password12!`
+    - `http.request.foo.bar.username=<redacted>`
+    - `http.request.foo.baz.bar=qux`
+    - `http.request.foo.baz.key=value`
+    - `http.request.qux=<redacted>`
+
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
 **Default**: `*`<br>
@@ -337,7 +351,7 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
-  Regular expression used to obfuscate the query string included as part of the URL. Added in version `0.76.0`.
+  Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>

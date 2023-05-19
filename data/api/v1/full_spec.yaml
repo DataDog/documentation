@@ -1744,6 +1744,10 @@ components:
             be muted.
           example: false
           type: boolean
+        notify_end_states:
+          $ref: '#/components/schemas/NotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/NotifyEndTypes'
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -1880,6 +1884,10 @@ components:
             be muted.
           example: false
           type: boolean
+        notify_end_states:
+          $ref: '#/components/schemas/NotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/NotifyEndTypes'
         parent_id:
           description: ID of the parent Downtime.
           example: 123
@@ -2819,6 +2827,7 @@ components:
       - $ref: '#/components/schemas/FormulaAndFunctionProcessQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmDependencyStatsQueryDefinition'
       - $ref: '#/components/schemas/FormulaAndFunctionApmResourceStatsQueryDefinition'
+      - $ref: '#/components/schemas/FormulaAndFunctionSLOQueryDefinition'
       type: object
     FormulaAndFunctionResponseFormat:
       description: Timeseries or Scalar response.
@@ -2830,6 +2839,81 @@ components:
       x-enum-varnames:
       - TIMESERIES
       - SCALAR
+    FormulaAndFunctionSLODataSource:
+      description: Data source for SLO measures queries.
+      enum:
+      - slo
+      example: slo
+      type: string
+      x-enum-varnames:
+      - SLO
+    FormulaAndFunctionSLOGroupMode:
+      description: Group mode to query measures.
+      enum:
+      - overall
+      - components
+      example: overall
+      type: string
+      x-enum-varnames:
+      - OVERALL
+      - COMPONENTS
+    FormulaAndFunctionSLOMeasure:
+      description: SLO measures queries.
+      enum:
+      - good_events
+      - bad_events
+      - slo_status
+      - error_budget_remaining
+      - burn_rate
+      - error_budget_burndown
+      example: slo_status
+      type: string
+      x-enum-varnames:
+      - GOOD_EVENTS
+      - BAD_EVENTS
+      - SLO_STATUS
+      - ERROR_BUDGET_REMAINING
+      - BURN_RATE
+      - ERROR_BUDGET_BURNDOWN
+    FormulaAndFunctionSLOQueryDefinition:
+      description: A formula and functions metrics query.
+      example:
+        data_source: slo
+        group_mode: overall
+        measure: good_events
+        name: my_slo
+        slo_id: '12345678910'
+        slo_query_type: metric
+      properties:
+        data_source:
+          $ref: '#/components/schemas/FormulaAndFunctionSLODataSource'
+        group_mode:
+          $ref: '#/components/schemas/FormulaAndFunctionSLOGroupMode'
+        measure:
+          $ref: '#/components/schemas/FormulaAndFunctionSLOMeasure'
+        name:
+          description: Name of the query for use in formulas.
+          example: my_slo
+          type: string
+        slo_id:
+          description: ID of an SLO to query measures.
+          example: '12345678910'
+          type: string
+        slo_query_type:
+          $ref: '#/components/schemas/FormulaAndFunctionSLOQueryType'
+      required:
+      - data_source
+      - slo_id
+      - measure
+      type: object
+    FormulaAndFunctionSLOQueryType:
+      description: Name of the query for use in formulas.
+      enum:
+      - metric
+      example: metric
+      type: string
+      x-enum-varnames:
+      - METRIC
     FreeTextWidgetDefinition:
       description: Free text is a widget that allows you to add headings to your screenboard.
         Commonly used to state the overall purpose of the dashboard. Only available
@@ -3855,6 +3939,7 @@ components:
       - snmp_usage
       - estimated_rum_sessions_usage
       - universal_service_monitoring_usage
+      - vuln_management_hosts_usage
       type: string
       x-enum-varnames:
       - API_USAGE
@@ -3888,6 +3973,7 @@ components:
       - SNMP_USAGE
       - ESTIMATED_RUM_SESSIONS_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
+      - VULN_MANAGEMENT_HOSTS_USAGE
     IFrameWidgetDefinition:
       description: The iframe widget allows you to embed a portion of any other web
         page on your dashboard. Only available on FREE layout dashboards.
@@ -7351,6 +7437,8 @@ components:
       - estimated_rum_sessions_percentage
       - universal_service_monitoring_usage
       - universal_service_monitoring_percentage
+      - vuln_management_hosts_usage
+      - vuln_management_hosts_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7416,6 +7504,8 @@ components:
       - ESTIMATED_RUM_SESSIONS_PERCENTAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - UNIVERSAL_SERVICE_MONITORING_PERCENTAGE
+      - VULN_MANAGEMENT_HOSTS_USAGE
+      - VULN_MANAGEMENT_HOSTS_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7671,6 +7761,15 @@ components:
           type: number
         universal_service_monitoring_usage:
           description: The universal service monitoring usage by tag(s).
+          format: double
+          type: number
+        vuln_management_hosts_percentage:
+          description: The percentage of Application Vulnerability Management usage
+            by tag(s).
+          format: double
+          type: number
+        vuln_management_hosts_usage:
+          description: The Application Vulnerability Management usage by tag(s).
           format: double
           type: number
       type: object
@@ -8498,6 +8597,60 @@ components:
           format: int64
           type: integer
       type: object
+    NotifyEndState:
+      description: A notification end state.
+      enum:
+      - alert
+      - no data
+      - warn
+      example: alert
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - NO_DATA
+      - WARN
+    NotifyEndStates:
+      default:
+      - alert
+      - no data
+      - warn
+      description: States for which `notify_end_types` sends out notifications for.
+      example:
+      - alert
+      - no data
+      - warn
+      items:
+        $ref: '#/components/schemas/NotifyEndState'
+      type: array
+    NotifyEndType:
+      description: A notification end type.
+      enum:
+      - canceled
+      - expired
+      example: expired
+      type: string
+      x-enum-varnames:
+      - CANCELED
+      - EXPIRED
+    NotifyEndTypes:
+      default:
+      - expired
+      description: 'If set, notifies if a monitor is in an alert-worthy state (`ALERT`,
+        `WARNING`, or `NO DATA`)
+
+        when this downtime expires or is canceled. Applied to monitors that change
+        states during
+
+        the downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and
+        to monitors that
+
+        already have an alert-worthy state when downtime begins.'
+      example:
+      - canceled
+      - expired
+      items:
+        $ref: '#/components/schemas/NotifyEndType'
+      type: array
     OnMissingDataOption:
       description: 'Controls how groups or monitors are treated if an evaluation does
         not return any data points.
@@ -15423,6 +15576,7 @@ components:
         analyzed_logs:
           description: Contains the number of analyzed logs.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -16709,6 +16863,7 @@ components:
         indexed_events_count:
           description: Contains the number of spans indexed.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16738,6 +16893,7 @@ components:
           description: Contains the total number of bytes ingested for APM spans during
             a given hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16870,11 +17026,13 @@ components:
           description: Total logs indexed with this retention period during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         live_indexed_events_count:
           description: Live logs indexed with this retention period during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -16886,6 +17044,7 @@ components:
           description: Rehydrated logs indexed with this retention period during a
             given hour.
           format: int64
+          nullable: true
           type: integer
         retention:
           description: The retention period in days or "custom" for all custom retention
@@ -16989,6 +17148,7 @@ components:
         indexed_events_count:
           description: Contains the number of netflow events indexed.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -17775,6 +17935,11 @@ components:
             in the current date for all organizations.
           format: int64
           type: integer
+        vuln_management_host_count_top99p:
+          description: Shows the 99th percentile of all Application Vulnerability
+            Management hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
       type: object
     UsageSummaryDateOrg:
       description: Global hourly report of all data billed by Datadog for a given
@@ -18178,6 +18343,11 @@ components:
         vsphere_host_top99p:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current date for the given org.
+          format: int64
+          type: integer
+        vuln_management_host_count_top99p:
+          description: Shows the 99th percentile of all Application Vulnerability
+            Management hosts over all hours in the current date for the given org.
           format: int64
           type: integer
       type: object
@@ -18630,6 +18800,11 @@ components:
         vsphere_host_top99p_sum:
           description: Shows the 99th percentile of all vSphere hosts over all hours
             in the current months for all organizations.
+          format: int64
+          type: integer
+        vuln_management_host_count_top99p_sum:
+          description: Shows the 99th percentile of all Application Vulnerability
+            Management hosts over all hours in the current months for all organizations.
           format: int64
           type: integer
       type: object

@@ -192,7 +192,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [36]: https://web.oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://github.com/evernote/jiradog
+[39]: https://bitbucket.org/atlassian/jiradog/src/master/
 [40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
