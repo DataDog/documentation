@@ -210,5 +210,5 @@ The following resources allow granular access control:
 [11]: /dashboards/#permissions
 [12]: /monitors/notify/#permissions
 [13]: /security_platform/detection_rules/#limit-edit-access
-[14]: /monitors/service_level_objectives/#permissions
+[14]: /service_management/service_level_objectives/#permissions
 [15]: /synthetics/browser_tests/#permissions

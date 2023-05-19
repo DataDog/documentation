@@ -9,6 +9,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
       text: 'Network Performance Monitoring'
+    - link: 'https://www.datadoghq.com/blog/datadog-npm-search-map-updates/'
+      tag: 'Blog'
+      text: 'Streamline network investigations with an enhanced querying and map experience'
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
@@ -23,7 +26,7 @@ further_reading:
 
 To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection terminated.
 
-{{< img src="network_performance_monitoring/network_page/network_diagram.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
+{{< img src="network_performance_monitoring/network_page/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
@@ -38,6 +41,8 @@ You can set the timeframe over which traffic is aggregated using the time select
 {{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
 Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+
+You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`  
 
 ### Facet panels
 

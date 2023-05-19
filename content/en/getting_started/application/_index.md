@@ -155,8 +155,8 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [7]: /infrastructure/
 [8]: /getting_started/tagging/
 [9]: /infrastructure/hostmap/
-[10]: /events/
-[11]: /events/explorer/#event-analytics
+[10]: /service_management/events/
+[11]: /service_management/events/explorer/#event-analytics
 [12]: /dashboards/
 [13]: /dashboards/#screenboards
 [14]: /dashboards/functions/arithmetic/
@@ -168,6 +168,6 @@ The [Datadog Mobile App][23], available on the [Apple App Store][24] and [Google
 [20]: /serverless
 [21]: /security/cloud_siem/
 [22]: /synthetics/
-[23]: /mobile/
+[23]: /service_management/mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318
 [25]: https://play.google.com/store/apps/details?id=com.datadog.app

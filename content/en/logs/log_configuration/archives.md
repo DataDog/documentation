@@ -452,5 +452,5 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [10]: /account_management/rbac/permissions#logs_read_index_data
 [11]: /account_management/rbac/permissions#logs_read_data
 [12]: /logs/explorer/live_tail/
-[13]: /events/explorer/
+[13]: /service_management/events/explorer/
 [14]: https://app.datadoghq.com/logs/pipelines/log-forwarding
