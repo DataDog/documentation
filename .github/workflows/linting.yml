@@ -15,15 +15,11 @@ jobs:
       with:
         repository: DataDog/datadog-vale
         path: datadog-vale
-
-    # vale config expects the datadog vale repo to be here:
-    - name: Move vale styles
-      run: mv datadog-vale ../datadog-vale
-
-    - run: |
-        cd ../datadog-vale
-        ls styles
-        pwd
+    
+    - name: Edit StylesPath in Vale config file 
+      run: |
+        sed -i 's/\.\.\/datadog-vale\/styles/datadog-vale\/styles/' .vale.ini
+        cat .vale.ini
 
     - name: Find changed files
       id: changed_files
