@@ -18,7 +18,7 @@ Autodiscovery container identifiers, or `ad_identifiers`, allow you to apply an 
 
 ## Short image container identifiers
 
-To apply the following Autodiscovery  configuration template to a given container, use the **container short image** name as the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
+To apply the following Autodiscovery configuration template to a given container, use the **container short image** name as the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`:
 
 ```yaml
 ad_identifiers:
