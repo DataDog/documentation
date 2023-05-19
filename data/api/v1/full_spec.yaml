@@ -12204,7 +12204,7 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
       type: object
     SyntheticsAPIStep:
-      description: The steps used in a Synthetics multistep API test.
+      description: The steps used in a Synthetic multistep API test.
       properties:
         allowFailure:
           description: Determines whether or not to continue with test if this step
@@ -12970,7 +12970,7 @@ components:
           $ref: '#/components/schemas/SyntheticsStatus'
       type: object
     SyntheticsBatchResult:
-      description: Object with the results of a Synthetics batch.
+      description: Object with the results of a Synthetic batch.
       properties:
         device:
           $ref: '#/components/schemas/SyntheticsDeviceID'
@@ -13376,7 +13376,7 @@ components:
     SyntheticsBrowserVariable:
       description: 'Object defining a variable that can be used in your browser test.
 
-        Learn more in the [Browser test Actions documentation](https://docs.datadoghq.com/synthetics/browser_tests/actions#variable).'
+        See the [Recording Steps documentation](https://docs.datadoghq.com/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#variables).'
       properties:
         example:
           description: Example for the variable.
@@ -13391,6 +13391,10 @@ components:
         pattern:
           description: Pattern of the variable.
           type: string
+        secure:
+          description: Determines whether or not the browser test variable is obfuscated.
+            Can only be used with browser variables of type `text`.
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsBrowserVariableType'
       required:
@@ -13414,7 +13418,7 @@ components:
       - JAVASCRIPT
       - TEXT
     SyntheticsCIBatchMetadata:
-      description: Metadata for the Synthetics tests run.
+      description: Metadata for the Synthetic tests run.
       properties:
         ci:
           $ref: '#/components/schemas/SyntheticsCIBatchMetadataCI'
@@ -13454,7 +13458,7 @@ components:
           type: string
       type: object
     SyntheticsCITest:
-      description: Test configuration for Synthetics CI
+      description: Configuration for Continuous Testing.
       properties:
         allowInsecureCertificates:
           description: Disable certificate checks in API tests.
@@ -13465,7 +13469,7 @@ components:
           description: Body to include in the test.
           type: string
         bodyType:
-          description: Type of the data sent in a synthetics API test.
+          description: Type of the data sent in a Synthetic API test.
           type: string
         cookies:
           description: Cookies for the request.
@@ -13492,7 +13496,7 @@ components:
         metadata:
           $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
         public_id:
-          description: The public ID of the Synthetics test to trigger.
+          description: The public ID of the Synthetic test to trigger.
           example: aaa-aaa-aaa
           type: string
         retry:
@@ -13726,7 +13730,7 @@ components:
           type: array
       type: object
     SyntheticsGlobalVariable:
-      description: Synthetics global variable.
+      description: Synthetic global variable.
       properties:
         attributes:
           $ref: '#/components/schemas/SyntheticsGlobalVariableAttributes'
@@ -13739,7 +13743,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: Name of the global variable. Unique across Synthetics global
+          description: Name of the global variable. Unique across Synthetic global
             variables.
           example: MY_VARIABLE
           type: string
@@ -13780,8 +13784,8 @@ components:
           $ref: '#/components/schemas/SyntheticsGlobalVariableTOTPParameters'
       type: object
     SyntheticsGlobalVariableParseTestOptions:
-      description: Parser options to use for retrieving a Synthetics global variable
-        from a Synthetics Test. Used in conjunction with `parse_test_public_id`.
+      description: Parser options to use for retrieving a Synthetic global variable
+        from a Synthetic test. Used in conjunction with `parse_test_public_id`.
       properties:
         field:
           description: When type is `http_header`, name of the header to use to extract
@@ -13801,7 +13805,7 @@ components:
       - type
       type: object
     SyntheticsGlobalVariableParseTestOptionsType:
-      description: Property of the Synthetics Test Response to use for a Synthetics
+      description: Property of the Synthetic Test Response to use for a Synthetic
         global variable.
       enum:
       - http_body
@@ -13814,7 +13818,7 @@ components:
       - HTTP_HEADER
       - LOCAL_VARIABLE
     SyntheticsGlobalVariableParserType:
-      description: Type of parser for a Synthetics global variable from a synthetics
+      description: Type of parser for a Synthetic global variable from a synthetics
         test.
       enum:
       - raw
@@ -13896,10 +13900,10 @@ components:
           type: string
       type: object
     SyntheticsLocations:
-      description: List of Synthetics locations.
+      description: List of Synthetic locations.
       properties:
         locations:
-          description: List of Synthetics locations.
+          description: List of Synthetic locations.
           items:
             $ref: '#/components/schemas/SyntheticsLocation'
           type: array
@@ -14143,7 +14147,7 @@ components:
       - skipped
       - failed
     SyntheticsStep:
-      description: The steps used in a Synthetics browser test.
+      description: The steps used in a Synthetic browser test.
       properties:
         allowFailure:
           description: A boolean set to allow this step to fail.
@@ -14204,7 +14208,7 @@ components:
           format: int64
           type: integer
         subTestStepDetails:
-          description: 'If this steps include a sub-test.
+          description: 'If this step includes a sub-test.
 
             [Subtests documentation](https://docs.datadoghq.com/synthetics/browser_tests/advanced_options/#subtests).'
           items:
@@ -14427,7 +14431,7 @@ components:
       - API
       - BROWSER
     SyntheticsTestExecutionRule:
-      description: Execution rule for a Synthetics test.
+      description: Execution rule for a Synthetic test.
       enum:
       - blocking
       - non_blocking
@@ -14816,7 +14820,7 @@ components:
       description: 'Object containing all metrics and their values collected for a
         Synthetic API test.
 
-        Learn more about those metrics in [Synthetics documentation](https://docs.datadoghq.com/synthetics/#metrics).'
+        See the [Synthetic Monitoring Metrics documentation](https://docs.datadoghq.com/synthetics/metrics/).'
       properties:
         dns:
           description: The duration in millisecond of the DNS lookup.
@@ -14856,10 +14860,10 @@ components:
           type: number
       type: object
     SyntheticsTriggerBody:
-      description: Object describing the synthetics tests to trigger.
+      description: Object describing the Synthetic tests to trigger.
       properties:
         tests:
-          description: Individual synthetics test.
+          description: Individual Synthetic test.
           items:
             $ref: '#/components/schemas/SyntheticsTriggerTest'
           type: array
@@ -14867,7 +14871,7 @@ components:
       - tests
       type: object
     SyntheticsTriggerCITestLocation:
-      description: Synthetics location.
+      description: Synthetic location.
       properties:
         id:
           description: Unique identifier of the location.
@@ -14887,7 +14891,7 @@ components:
           format: int64
           type: integer
         public_id:
-          description: The public ID of the Synthetics test.
+          description: The public ID of the Synthetic test.
           type: string
         result_id:
           description: ID of the result.
@@ -14901,7 +14905,7 @@ components:
           nullable: true
           type: string
         locations:
-          description: List of Synthetics locations.
+          description: List of Synthetic locations.
           items:
             $ref: '#/components/schemas/SyntheticsTriggerCITestLocation'
           type: array
@@ -14911,9 +14915,9 @@ components:
             $ref: '#/components/schemas/SyntheticsTriggerCITestRunResult'
           type: array
         triggered_check_ids:
-          description: The public IDs of the Synthetics test triggered.
+          description: The public IDs of the Synthetic test triggered.
           items:
-            description: The public ID of the Synthetics test.
+            description: The public ID of the Synthetic test.
             type: string
           type: array
       type: object
@@ -14923,7 +14927,7 @@ components:
         metadata:
           $ref: '#/components/schemas/SyntheticsCIBatchMetadata'
         public_id:
-          description: The public ID of the Synthetics test to trigger.
+          description: The public ID of the Synthetic test to trigger.
           example: aaa-aaa-aaa
           type: string
       required:
@@ -28890,7 +28894,7 @@ paths:
         type: safe
   /api/v1/synthetics/private-locations:
     post:
-      description: Create a new Synthetics private location.
+      description: Create a new Synthetic private location.
       operationId: CreatePrivateLocation
       requestBody:
         content:
@@ -28938,7 +28942,7 @@ paths:
         type: unsafe
   /api/v1/synthetics/private-locations/{location_id}:
     delete:
-      description: Delete a Synthetics private location.
+      description: Delete a Synthetic private location.
       operationId: DeletePrivateLocation
       parameters:
       - description: The ID of the private location.
@@ -28972,7 +28976,7 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get a Synthetics private location.
+      description: Get a Synthetic private location.
       operationId: GetPrivateLocation
       parameters:
       - description: The ID of the private location.
@@ -29010,7 +29014,7 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Edit a Synthetics private location.
+      description: Edit a Synthetic private location.
       operationId: UpdatePrivateLocation
       parameters:
       - description: The ID of the private location.
@@ -29089,7 +29093,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: Synthetics is not activated for the user.
+          description: Synthetic Monitoring is not activated for the user.
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -29546,7 +29550,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: '- Synthetic is not activated for the user
+          description: '- Synthetic Monitoring is not activated for the user
 
             - Test is not owned by the user'
         '429':
@@ -29626,8 +29630,8 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/browser/{public_id}/results:
     get:
-      description: Get the last 150 test results summaries for a given Synthetics
-        Browser test.
+      description: Get the last 150 test results summaries for a given Synthetic browser
+        test.
       operationId: GetBrowserTestLatestResults
       parameters:
       - description: 'The public ID of the browser test for which to search results
@@ -29678,7 +29682,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: '- Synthetic is not activated for the user
+          description: '- Synthetic Monitoring is not activated for the user
 
             - Test is not owned by the user'
         '429':
@@ -29697,7 +29701,7 @@ paths:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
     get:
-      description: Get a specific full result from a given (browser) Synthetic test.
+      description: Get a specific full result from a given Synthetic browser test.
       operationId: GetBrowserTestResult
       parameters:
       - description: 'The public ID of the browser test to which the target result
@@ -29732,7 +29736,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: '- Synthetic is not activated for the user
+          description: '- Synthetic Monitoring is not activated for the user
 
             - Test or result is not owned by the user'
         '429':
@@ -29790,7 +29794,7 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: '- Tests to be deleted can''t be found
 
-            - Synthetics is not activated for the user'
+            - Synthetic is not activated for the user'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
@@ -29807,7 +29811,7 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
     post:
-      description: Trigger a set of Synthetics tests.
+      description: Trigger a set of Synthetic tests.
       operationId: TriggerTests
       requestBody:
         content:
@@ -29836,7 +29840,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - synthetics_write
-      summary: Trigger Synthetics tests
+      summary: Trigger Synthetic tests
       tags:
       - Synthetics
       x-codegen-request-body-name: body
@@ -29852,7 +29856,7 @@ paths:
         type: safe
   /api/v1/synthetics/tests/trigger/ci:
     post:
-      description: Trigger a set of Synthetics tests for continuous integration.
+      description: Trigger a set of Synthetic tests for continuous integration.
       operationId: TriggerCITests
       requestBody:
         content:
@@ -29890,7 +29894,7 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
     get:
-      description: Get the detailed configuration associated with a Synthetics test.
+      description: Get the detailed configuration associated with a Synthetic test.
       operationId: GetTest
       parameters:
       - description: The public ID of the test to get details from.
@@ -29999,8 +30003,8 @@ paths:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
     get:
-      description: Get the last 150 test results summaries for a given Synthetics
-        API test.
+      description: Get the last 150 test results summaries for a given Synthetic API
+        test.
       operationId: GetAPITestLatestResults
       parameters:
       - description: The public ID of the test for which to search results for.
@@ -30068,7 +30072,7 @@ paths:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
     get:
-      description: Get a specific full result from a given (API) Synthetic test.
+      description: Get a specific full result from a given Synthetic API test.
       operationId: GetAPITestResult
       parameters:
       - description: The public ID of the API test to which the target result belongs.
@@ -30101,7 +30105,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: '- Synthetic is not activated for the user
+          description: '- Synthetic Monitoring is not activated for the user
 
             - Test or result is not owned by the user'
         '429':
@@ -30119,7 +30123,7 @@ paths:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
     put:
-      description: Pause or start a Synthetics test by changing the status.
+      description: Pause or start a Synthetic test by changing the status.
       operationId: UpdateTestPauseStatus
       parameters:
       - description: The public ID of the Synthetic test to update.
@@ -30159,7 +30163,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
-          description: '- Synthetic is not activated for the user
+          description: '- Synthetic Monitoring is not activated for the user
 
             - Test is not owned by the user'
         '429':
@@ -30178,7 +30182,7 @@ paths:
         type: idempotent
   /api/v1/synthetics/variables:
     get:
-      description: Get the list of all Synthetics global variables.
+      description: Get the list of all Synthetic global variables.
       operationId: ListGlobalVariables
       responses:
         '200':
@@ -30207,7 +30211,7 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a Synthetics global variable.
+      description: Create a Synthetic global variable.
       operationId: CreateGlobalVariable
       requestBody:
         content:
@@ -30261,7 +30265,7 @@ paths:
         type: unsafe
   /api/v1/synthetics/variables/{variable_id}:
     delete:
-      description: Delete a Synthetics global variable.
+      description: Delete a Synthetic global variable.
       operationId: DeleteGlobalVariable
       parameters:
       - description: The ID of the global variable.
@@ -30347,7 +30351,7 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Edit a Synthetics global variable.
+      description: Edit a Synthetic global variable.
       operationId: EditGlobalVariable
       parameters:
       - description: The ID of the global variable.
@@ -33688,12 +33692,13 @@ tags:
   name: Slack Integration
 - description: Take graph snapshots using the API.
   name: Snapshots
-- description: "Datadog Synthetics uses simulated user requests and browser rendering
-    to help you ensure uptime,\nidentify regional issues, and track your application
-    performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand
-    [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can
-    use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
-    information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+- description: "Datadog Synthetic Monitoring uses simulated user requests and browser
+    rendering to help you ensure uptime,\nidentify regional issues, and track your
+    application performance. Synthetic tests come in\ntwo different flavors, [API
+    tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser
+    tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog\u2019s
+    API to\nmanage both test types programmatically.\n\nFor more information, see
+    the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
 - description: 'The tag endpoint allows you to assign tags to hosts,
 
