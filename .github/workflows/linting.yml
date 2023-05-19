@@ -8,27 +8,20 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
+        path: documentation
         fetch-depth: 0
-
-    - run: | 
-        pwd
-        ls
 
     - name: Clone Datadog Vale
       uses: actions/checkout@v3
       with:
         repository: DataDog/datadog-vale
-        path: /home/runner/work/documentation/datadog-vale
-
-    - run: | 
-        ls 
-        echo
-        ls /home/runner/work/documentation/
+        path: datadog-vale
         
     - name: Find changed files
       id: changed_files
       uses: tj-actions/changed-files@v35
       with:
+        path: documentation
         separator: ","
         include_all_old_new_renamed_files: true
     
@@ -42,3 +35,4 @@ jobs:
         files: ${{ steps.changed_files.outputs.all_changed_files }}
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        workdir: documentation
