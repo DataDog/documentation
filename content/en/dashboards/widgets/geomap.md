@@ -26,13 +26,13 @@ The geomap widget plots geographic data and visualizes it through shaded regions
     * **Points**: Overlay events as points on the map to display geographic event data.
 
 2. Choose the data to graph: <br>
-  **Note**: Support for data sources vary based on the visualization layer you select.
+  **Note**: Support for data sources varies based on the visualization layer you select.
   {{< tabs >}}
   {{% tab "Regions" %}}
   |  Data source    | Notes    | 
   | --------------  | -------- |
   |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
-  |Metric   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying][5] documentation to configure a metric query.|
+  |Metric   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
   |RUM   | See the [RUM documentation][6] to configure a RUM query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
@@ -56,13 +56,13 @@ The geomap widget plots geographic data and visualizes it through shaded regions
   {{% /tab %}}
   {{< /tabs >}}
 
-3. Optional: configure your view box depending on where you'd like to zoom into on the map by default.
+3. Optional: Configure your view box to specify where you want to focus the map initially.
 
 ### Options
 
 #### Context links
 
-[Context links][7] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party).
+[Context links][7] are enabled by default, you can toggle them on or off. Context links connect dashboard widgets with other pages (in Datadog, or third-party).
 
 ## API
 
