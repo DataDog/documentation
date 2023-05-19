@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">If you don't have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
+<div class="alert alert-info">If you have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
 
 Synthetic browser tests embed the Real User Monitoring SDK, allowing you to explore:
 
