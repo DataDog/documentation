@@ -52,7 +52,7 @@ This works if you are using named routes or if you have supplied a name to the `
 
 Alternatively, you can use the `DatadogRouteAwareMixin` property in conjunction with the `DatadogNavigationObserverProvider` property to start and stop your RUM views automatically. With `DatadogRouteAwareMixin`, move any logic from `initState` to `didPush`.
 
-To rename your views or supply custom paths, provide a [`viewInfoExtractor`][8] callback. This function can fall back to the default behavior of the observer by calling `defaultviewInfoExtractor`. For example:
+To rename your views or supply custom paths, provide a [`viewInfoExtractor`][8] callback. This function can fall back to the default behavior of the observer by calling `defaultViewInfoExtractor`. For example:
 
 ```dart
 RumViewInfo? infoExtractor(Route<dynamic> route) {

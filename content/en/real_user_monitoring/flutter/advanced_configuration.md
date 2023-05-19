@@ -134,7 +134,7 @@ DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
 
 ## Modify or drop RUM events
 
-**Note**: This feature is not yet available for Flutter Web applications.
+**Note**: This feature is not yet available for Flutter web applications.
 
 To modify attributes of a RUM event before it is sent to Datadog or to drop an event entirely, use the Event Mappers API when configuring the Flutter RUM SDK:
 
@@ -189,7 +189,7 @@ Depending on the event's type, only some specific properties can be modified:
 |                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action.   |
 |                  | `resourceEvent.view.url`          | URL of the view linked to this resource.      |
 
-¹While event mappers allow you to modify the names of view, but this is not the recommended way to rename a view. Use the `viewInfoExtractor` parameter on [`DatadogNavigationObserver`][7] instead
+¹ While event mappers allow you to modify the names of views, they are not the recommended way to rename a view. Use the `viewInfoExtractor` parameter on [`DatadogNavigationObserver`][7] instead
 
 ## Set tracking consent (GDPR & CCPA compliance)
 
