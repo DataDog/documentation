@@ -41,4 +41,4 @@ Using the Datadog Consul Integration with HCP Consul collects a subset of the Co
 [7]: /integrations/consul/?tab=host#metrics
 [8]: https://www.consul.io/docs/agent/telemetry#server-health
 [9]: https://www.consul.io/docs/agent/telemetry#cluster-health
-[10]: https://www.hashicorp.com/cloud
+[10]: https://developer.hashicorp.com/hcp/docs/consul
