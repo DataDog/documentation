@@ -27,7 +27,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines allows you to collect, process, and route observability data (logs, metrics, and traces) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
+Observability Pipelines allow you to collect, process, and route observability data (logs, metrics, and traces) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
@@ -37,7 +37,7 @@ Observability Pipelines allows you to collect, process, and route observability 
 The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your data. More specifically, the Worker can:
 
 - Receive or pull all your observability data collected by your agents, collectors, or forwarders.
-- Transform ingested data (for example, parses, filters, samples, enriches, and more).
+- Transform ingested data (for example: parse, filter, sample, enrich, and more).
 - Route the processed data to any destination.
 
 The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can monitor your pipelines to understand the health of your pipelines, identify bottlenecks and latencies, fine-tune performance, validate data delivery, and investigate your largest volume contributors. You can build or edit pipelines, whether it be routing a subset of data to a new destination or introducing a new sensitive data redaction rule, and roll out these changes to your active pipelines from the Datadog UI.
