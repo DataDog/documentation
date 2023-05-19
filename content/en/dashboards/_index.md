@@ -128,9 +128,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Version History
 
-From a dashboard click on the cog icon at the top of the page and select **Version History** to open the Version History side panel.
-
-From a notebook click on the cog icon at the top of the page and select **Version History** to open the Version History side panel. Use this feature to preview, restore, or clone your notebook version history. See the [Version History][12] guide for more information.
+From a dashboard click on the version history icon in the top right corner of the page to open the Version History side panel. Use this feature to preview, restore, or clone your notebook version history. See the [Version History guide][12] for more information.
 
 #### Generate public URL
 
@@ -329,7 +327,7 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [9]: /tracing/
 [10]: /profiler/
 [11]: /dashboards/guide/custom_time_frames/
-[12]: /notebooks/guide/version_history
+[12]: /dashboards/guide/version_history/
 [13]: /dashboards/sharing/#dashboards
 [14]: /events/
 [15]: /account_management/rbac/
