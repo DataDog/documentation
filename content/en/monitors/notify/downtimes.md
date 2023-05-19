@@ -213,7 +213,7 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [2]: http://daringfireball.net/projects/markdown/syntax
 [3]: /integrations/#cat-notification
 [4]: /monitors/manage/status/
-[5]: /events/explorer
+[5]: /service_management/events/explorer
 [6]: /api/v1/downtimes/#cancel-a-downtime
 [7]: /account_management/#preferences
 [8]: /integrations/amazon_ec2/#ec2-automuting

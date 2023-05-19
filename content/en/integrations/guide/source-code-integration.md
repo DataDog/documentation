@@ -44,7 +44,7 @@ To link data to a specific commit, tag your telemetry with `git.commit.sha` and 
 
 <div class="alert alert-warning">
 This approach requires Docker, or containerd >= 1.5.6. It doesn't support containers running on AWS Fargate.
-For additional container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=other#tag-your-telemetry">Other</a> section.
+For additional container setups, see the <a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> tab.
 </div>
 
 If you are running your app in containers, Datadog can extract source code information directly from your images' Docker labels. During build time, follow the [Open Containers standard][1] to add the git commit SHA and repository URL as Docker labels:

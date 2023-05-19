@@ -207,8 +207,8 @@ View common patterns in your service's logs, and use facets like status in the s
 [2]: /tracing/services/resource_page/
 [3]: /monitors/types/apm/
 [4]: /tracing/error_tracking/
-[5]: /monitors/service_level_objectives/
-[6]: /monitors/incident_management/
+[5]: /service_management/service_level_objectives/
+[6]: /service_management/incident_management/
 [7]: /watchdog/
 [8]: /tracing/metrics/metrics_namespace/
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

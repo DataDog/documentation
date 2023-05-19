@@ -77,7 +77,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 ## Other sections
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/monitors/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
+    {{< nextlink href="/service_management/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
     {{< nextlink href="/monitors/incident_management" >}}<u>Incident Management</u>: Declare and manage incidents.{{< /nextlink >}}
     {{< nextlink href="/monitors/guide" >}}<u>Guides</u>: Additional helpful articles about monitors and alerting.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -98,5 +98,5 @@ You can download a JSON file containing the definition of a monitor from the mon
 [10]: /monitors/notify/downtimes
 [11]: /monitors/manage
 [12]: /monitors/settings/
-[13]: /mobile/?tab=ios#monitors
+[13]: /service_management/mobile/?tab=ios#monitors
 [14]: /monitors/manage/search/#saved-view

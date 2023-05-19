@@ -101,7 +101,7 @@ title: 検索構文
 
 複雑なクエリを入力するのは面倒です。検索バーのオートコンプリート機能を使用すると、既存の値を使用してクエリを完成させることができます。
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="検索バーのオートコンプリート"  style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="検索バーのオートコンプリート" style="width:60%;">}}
 
 ### 特殊文字のエスケープ
 
@@ -119,7 +119,7 @@ title: 検索構文
 
 同じビューを毎日作成するのは時間の無駄です。保存された検索には、検索クエリ、列、期間が含まれます。検索名やクエリにかかわらず、オートコンプリートの一致により、これは検索バーで利用できます。
 
-{{< img src="tracing/app_analytics/search/saved_search.png" alt="保存された検索"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/saved_search.png" alt="保存された検索" style="width:80%;">}}
 
 保存された検索を削除するには、Trace search ドロップダウンメニューの下にあるごみ箱のアイコンをクリックします。
 
@@ -137,28 +137,28 @@ title: 検索構文
 
 トレースをクリックして、詳細を表示します。
 
-{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="トレースストリームのトレース"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="トレースストリームのトレース" style="width:80%;">}}
 
 ### 列
 
 リストにトレースの詳細を追加するには、**Options** ボタンをクリックして、表示するファセットを選択します。
 
-{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="列を含むトレースリスト"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="列を含むトレースリスト" style="width:80%;">}}
 
 ### 複数行表示
 
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="複数行表示"  style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="複数行表示" style="width:30%;">}}
 
 トレースの表示行数を 1 行、3 行、10 行 から選択します。3 行と 10 行で表示すると、`error.stack` 属性に関する情報をより多く得ることができます。
 
 * 1 行表示の場合
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 行の複数行表示"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 行の複数行表示" style="width:80%;">}}
 
 * 3 行表示の場合
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 行の複数行表示"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 行の複数行表示" style="width:80%;">}}
 
 * 10 行表示の場合
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 行の複数行表示"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 行の複数行表示" style="width:80%;">}}
 
 ## ファセット
 
@@ -166,7 +166,7 @@ title: 検索構文
 
 ファセットを使用すると、特定の属性に基づいてデータセットを絞り込んだり、データセットの切り口を変えることができます。ファセットには、ユーザーやサービスなどがあります。
 
-{{< img src="tracing/app_analytics/search/facets_demo.png" alt="ファセットデモ"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facets_demo.png" alt="ファセットデモ" style="width:80%;">}}
 
 ### 定量 (メジャー)
 
@@ -189,7 +189,7 @@ title: 検索構文
 
 属性をファセットとして使用したり、検索で使用したりするには、属性をクリックしてファセットとして追加します。
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成"  style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成" style="width:50%;">}}
 
 これで、この属性の値が**すべての新しいトレースに**格納され、[検索バー](#search-bar)、[ファセットパネル](#facet-panel)、およびトレースグラフクエリで使用できるようになります。
 
@@ -197,7 +197,7 @@ title: 検索構文
 
 ファセットを使用し、トレースをフィルタリングします。検索バーと URL には、選択内容が自動的に反映されます。
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="ファセットパネル"  style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="ファセットパネル" style="width:30%;">}}
 
 ## Analytics の概要
 
@@ -213,24 +213,24 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 
 1. 分析する `Duration` メトリクスまたは [ファセット][8]を選択します。`Duration` メトリクスを選択した場合は、集計関数を選択します。ファセットを選択した場合は、ユニーク数が表示されます。
 
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="メジャーファセットを選択"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="メジャーファセットを選択" style="width:50%;">}}
 
 2. `Duration` メトリクスには集計関数を選択します。
 
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="集計関数"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="集計関数" style="width:50%;">}}
 
 3. タグまたはファセットを使用して、分析を分割します。
 
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="分割条件"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="分割条件" style="width:50%;">}}
 
 4. 選択したファセットに応じて、上位 (**top**) X 個と下位 (**bottom**) X 個のどちらの値を表示するかを選択します。
 
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="上位下位ボタン"  style="width:20%;">}}
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="上位下位ボタン" style="width:20%;">}}
 
 5. 分析タイムステップを選択します。
  グローバルタイムフレームを変更すると、使用可能なタイムステップ値のリストも変更されます。
 
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="タイムステップ"  style="width:30%;">}}
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="タイムステップ" style="width:30%;">}}
 
 ## 視覚化
 
@@ -246,7 +246,7 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 
 次の時系列 Analytics は、各**サービス**における **pc99** の **5 分**おきの**継続時間**の動きを示しています。
 
-{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="時系列例"  style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="時系列例" style="width:90%;">}}
 
 ### Toplist
 
@@ -254,7 +254,7 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 
 以下の Analytics トップリストは、**pc99** の**サービス**の**継続時間**を上から示しています。
 
-{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="トップリストの例"  style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="トップリストの例" style="width:90%;">}}
 
 ### 表
 
@@ -268,17 +268,17 @@ Analytics は、15 分間 (ローリングウィンドウ) で収集されたデ
 
 次のテーブルログ分析は、**スループット**に基づいて、過去 15 分間の**上位ステータスコード**の動きをユニーク**クライアント IP** の数と共に示しています。
 
-{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="上位リストの例"  style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="上位リストの例" style="width:90%;">}}
 
 ## 関連トレース
 
 グラフの一部を選択またはクリックすると、グラフをズームインしたり、選択範囲に対応する[トレース][10]のリストを表示したりすることができます。
 
-{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="トレースを確認"  style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="トレースを確認" style="width:40%;">}}
 
 ## エクスポート
 
-{{< img src="tracing/app_analytics/analytics/export_button.png" alt="分析をエクスポートボタン"  style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="分析をエクスポートボタン" style="width:40%;">}}
 
 Analyticsをエクスポート
 
