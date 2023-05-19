@@ -1,0 +1,91 @@
+---
+title: Azure Native Integration Programmatic Management Guide
+kind: guide
+description: "Steps for programmatically managing the Azure Native integration with Datadog"
+further_reading:
+- link: "https://docs.datadoghq.com/integrations/azure/"
+  tag: "Documentation"
+  text: "Azure Integration"
+- link: "https://docs.datadoghq.com/integrations/guide/azure-portal"
+  tag: "Documentation"
+  text: "Managing the Azure Native Integration"
+---
+
+## Overview
+
+{{% site-region region="us3" %}}
+
+The Azure Native integration uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This is possible through creation of the [azurerm_datadog_monitor][3] resource and assignment of the [Monitoring Reader role][4] in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
+
+**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
+
+1. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment:
+
+## Azure Datadog Monitor resource
+
+{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
+
+resource "azurerm_resource_group" "example" {
+  name     = "<NAME>"
+  location = "<AZURE_REGION>"
+}
+resource "azurerm_datadog_monitor" "example" {
+  name                = "<NAME>"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  datadog_organization {
+    api_key         = "<DATADOG_API_KEY>"
+    application_key = "<DATADOG_APPLICATION_KEY>"
+  }
+  user {
+    name  = "<NAME>"
+    email = "<EMAIL>"
+  }
+  sku_name = "Linked"
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+{{< /code-block >}}
+
+### Monitoring Reader role
+
+{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
+
+data "azurerm_subscription" "primary" {}
+
+data "azurerm_role_definition" "monitoring_reader" {
+  name = "Monitoring Reader"
+}
+
+resource "azurerm_role_assignment" "example" {
+  scope              = data.azurerm_subscription.primary.id
+  role_definition_id = data.azurerm_role_definition.monitoring_reader.role_definition_id
+  principal_id       = azurerm_datadog_monitor.example.identity.0.principal_id
+}
+
+{{< /code-block >}}
+
+2. Run `terraform apply`.
+
+### Log collection
+
+Once the Datadog resource is set up in your Azure account, configure log collection through the Azure Portal. See [Configure metrics and logs][5] in the Azure documentation for more information.
+
+[2]: /integrations/guide/azure-portal/
+[3]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors
+[4]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors#role-assignment
+[5]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/create#configure-metrics-and-logs
+{{% /site-region %}}
+
+{{% site-region region="us,us5,eu,ap1,gov" %}}
+
+The Azure Native integration is only supported for users of Datadog's US3 site. If you're using a different [Datadog site][3], see the standard [Azure Programmatic Management guide][1]. If you're using the Datadog US3 site, [change the site selector][2] on the right of this page.
+
+[1]: /integrations/guide/azure-programmatic-management/
+[2]: ?site=us3
+[3]: /getting_started/site/
+{{% /site-region %}}
+
+{{< partial name="whats-next/whats-next.html" >}}

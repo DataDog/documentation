@@ -18,87 +18,22 @@ This guide demonstrates how to programmatically manage the Azure integration wit
 
 If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
 
-If your Datadog account is hosted on any other [Datadog site][3], use the [Azure integration][5] to collect monitoring data from your Azure environment.
+If your Datadog account is hosted on any other [Datadog site][3], use the standard [Azure integration][5] to collect monitoring data from your Azure environment.
 
 If you prefer to use CLI, see the [Azure CLI for Datadog][2].
-
-<div class="alert alert-warning">To ensure that you see the correct examples, check that the Datadog site selector in the side panel is correctly set to your <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>.</div>
 
 ### Terraform
 
 Follow these steps to deploy the integration through [Terraform][13].
 
-{{% site-region region="us3" %}}
-
-The Azure Native integration uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This is possible through creation of the [azurerm_datadog_monitor][3] resource and assignment of the [Monitoring Reader role][4] in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
-
-**Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
-
-1. Use the templates below to create the `azurerm_datadog_monitor` resource and perform the `Monitoring Reader` role assignment:
-
-#### Azure Datadog Monitor resource
-
-{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
-
-resource "azurerm_resource_group" "example" {
-  name     = "<NAME>"
-  location = "<AZURE_REGION>"
-}
-resource "azurerm_datadog_monitor" "example" {
-  name                = "<NAME>"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
-  datadog_organization {
-    api_key         = "<DATADOG_API_KEY>"
-    application_key = "<DATADOG_APPLICATION_KEY>"
-  }
-  user {
-    name  = "<NAME>"
-    email = "<EMAIL>"
-  }
-  sku_name = "Linked"
-  identity {
-    type = "SystemAssigned"
-  }
-}
-
-{{< /code-block >}}
-
-#### Monitoring Reader role
-
-{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
-
-data "azurerm_subscription" "primary" {}
-
-data "azurerm_role_definition" "monitoring_reader" {
-  name = "Monitoring Reader"
-}
-
-resource "azurerm_role_assignment" "example" {
-  scope              = data.azurerm_subscription.primary.id
-  role_definition_id = data.azurerm_role_definition.monitoring_reader.role_definition_id
-  principal_id       = azurerm_datadog_monitor.example.identity.0.principal_id
-}
-
-{{< /code-block >}}
-
-2. Run `terraform apply`.
-
-[2]: /integrations/guide/azure-portal/
-[3]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors
-[4]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/datadog_monitors#role-assignment
-{{% /site-region %}}
-
-{{% site-region region="us,eu,us5,gov" %}}
-
-1. Configure the [Datadog Terraform provider][2] to interact with the Datadog API through a Terraform configuration. 
+1. Configure the [Datadog Terraform provider][15] to interact with the Datadog API through a Terraform configuration. 
 
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:  
     * `azure_tenant_name`: Your Azure Active Directory ID.
     * `client_id`: Your Azure web application secret key.
     * `client_secret`: Your Azure web application secret key.
 
-See the [Terraform Registry][3] for further example usage and the full list of optional parameters, as well as additional Datadog resources. 
+   See the [Terraform Registry][17] for further example usage and the full list of optional parameters, as well as additional Datadog resources. 
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
@@ -111,11 +46,6 @@ resource "datadog_integration_azure" "sandbox" {
 {{< /code-block >}}
 
 3. Run `terraform apply`. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box Azure overview dashboard to see metrics sent by your Azure resources.
-
-[1]: https://www.terraform.io
-[2]: https://docs.datadoghq.com/integrations/terraform/#overview
-[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
-{{% /site-region %}}
 
 #### Managing multiple subscriptions or tenants
 
@@ -150,7 +80,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   SETTINGS
    protected_settings = <<PROTECTED_SETTINGS
   {
-    "DATADOG_API_KEY": "<DATADOG_API_KEY_VALUE>"
+    "DATADOG_API_KEY": "<DATADOG_API_KEY>"
   }
   PROTECTED_SETTINGS
 ```
@@ -171,7 +101,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
   SETTINGS
    protected_settings = <<PROTECTED_SETTINGS
   {
-    "DATADOG_API_KEY": "<DATADOG_API_KEY_VALUE>"
+    "DATADOG_API_KEY": "<DATADOG_API_KEY>"
   }
   PROTECTED_SETTINGS
 ```
@@ -180,16 +110,7 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 
 See the [Virtual Machine Extension resource][10] in the Terraform registry for more information about the available arguments.
 
-## Logs
-
-{{% site-region region="us3" %}}
-
-Once the Datadog resource is set up in your Azure account, configure log collection through the Azure Portal. See [Configure metrics and logs][1] in the Azure documentation for more information.
-
-[1]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/create#configure-metrics-and-logs
-{{% /site-region %}}
-
-{{% site-region region="us,eu,us5,gov" %}}
+## Log collection
 
 The best method for submitting logs from Azure to Datadog is with the Agent or DaemonSet. For some resources it may not be possible. In these cases, Datadog recommends creating a log forwarding pipeline using an Azure Event Hub to collect Azure Platform Logs. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option.
 
@@ -207,14 +128,11 @@ az monitor diagnostic-settings create --name
                                       
 {{< /code-block >}}
 
-See the [az monitor diagnostic-settings create][1] section in the Azure CLI reference for more information.
-
-[1]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
-{{% /site-region %}}
+See the [az monitor diagnostic-settings create][16] section in the Azure CLI reference for more information.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/azure/#create-datadog-resource
+
 [2]: https://learn.microsoft.com/en-us/cli/azure/datadog?view=azure-cli-latest
 [3]: /getting_started/site/
 [4]: /integrations/guide/azure-portal/
@@ -224,6 +142,9 @@ See the [az monitor diagnostic-settings create][1] section in the Azure CLI refe
 [9]: https://developer.hashicorp.com/terraform/language/providers/configuration
 [10]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension
 [11]: https://app.datadoghq.com/account/settings#agent
-[12]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6v7
+[12]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 [13]: https://www.terraform.io
 [14]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
+[15]: /integrations/terraform/#overview
+[16]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
+[17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
