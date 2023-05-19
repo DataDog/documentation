@@ -22,6 +22,8 @@ With [Audit Trail][1] enabled, the version history is extended from 30 days to 9
 ## View versions
 From an individual dashboard, click on the version history icon in the top right of the page to open the Version History side panel. If there are no edits within the retention period, the Version History icon is disabled.
 
+{{< img src="/dashboards/guide/version_history/disabled_version_history_dashboards.png" alt="Disabled version history icon in dashboards" style="width:100%;" >}}
+
 In the Version History side panel, for each version you can see:
 - Which Datadog user made the change
 - The date and time of the change
