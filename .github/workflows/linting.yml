@@ -20,6 +20,11 @@ jobs:
     - name: Move vale styles
       run: mv datadog-vale ../datadog-vale
 
+    - run: |
+        cd ../datadog-vale
+        ls
+        pwd
+
     - name: Find changed files
       id: changed_files
       uses: tj-actions/changed-files@v35
