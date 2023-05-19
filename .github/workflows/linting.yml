@@ -17,9 +17,7 @@ jobs:
         path: datadog-vale
     
     - name: Edit StylesPath in Vale config file 
-      run: |
-        sed -i 's/\.\.\/datadog-vale\/styles/datadog-vale\/styles/' .vale.ini
-        cat .vale.ini
+      run: sed -i 's/\.\.\/datadog-vale\/styles/datadog-vale\/styles/' .vale.ini
 
     - name: Find changed files
       id: changed_files
