@@ -84,6 +84,7 @@ metadata:
   name: datadog
 spec:
   global:
+    site: {{< region-param key="dd_site_name" >}}
     credentials:
       apiSecret:
         secretName: datadog-secret
