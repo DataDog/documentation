@@ -22,7 +22,7 @@ jobs:
 
     - run: |
         cd ../datadog-vale
-        ls
+        ls styles
         pwd
 
     - name: Find changed files
