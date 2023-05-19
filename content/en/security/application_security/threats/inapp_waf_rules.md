@@ -54,7 +54,10 @@ An input represents which part of the request the operator is applied to. The fo
 | `is_xss` | Special operator to check for cross-site scripting (XSS) payloads |
 | `is_sqli` | Special operator to check for SQL injection (SQLI) payloads |
 
-## Beta: Custom In-App WAF Rules
+## Custom in-app WAF rules
+
+**Note:** This feature is in beta.
+
 Custom In-App WAF rules enable users to log specific types of requests to their applications. For example, you can use custom rules to monitor login success/failure and other business logic events. To get started, navigate to Security –> Application Security –> Configuration –> In-App WAF -> [Custom Rules][4].
 
 Note: "Default rules" in In-App WAF are read-only. Sometimes, to fine-tune your In-App WAF behavior, you would need to modify the In-App WAF rules. While the default rules cannot be modified, you can create a custom rule based on one of the default rules and modify the match conditions as per your needs. Be sure to disable the default rule so that you don't end up with two very similar rules evaluating the same requests. 
