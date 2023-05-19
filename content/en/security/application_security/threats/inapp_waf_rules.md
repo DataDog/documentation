@@ -60,7 +60,7 @@ An input represents which part of the request the operator is applied to. The fo
 
 Custom in-app WAF rules enable users to log specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** –> **Application Security** –> **Configuration** –> **In-App WAF** -> [**Custom Rules**][4].
 
-Note: "Default rules" in In-App WAF are read-only. Sometimes, to fine-tune your In-App WAF behavior, you would need to modify the In-App WAF rules. While the default rules cannot be modified, you can create a custom rule based on one of the default rules and modify the match conditions as per your needs. Be sure to disable the default rule so that you don't end up with two very similar rules evaluating the same requests. 
+**Note:** Default rules in in-app WAF are read-only. Sometimes, to fine-tune your in-app WAF behavior, you need to modify the in-app WAF rules. While you cannot modify the default rules, you can create a custom rule based on one of the default rules and modify the match conditions as per your needs. Be sure to disable the default rule so that you don't end up with two very similar rules evaluating the same requests. 
 
 ## Configure an ASM In-App WAF rule in your service
 
