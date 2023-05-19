@@ -6743,9 +6743,9 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
-  - name: Trigger Synthetics tests
-    url: '#trigger-synthetics-tests'
-    identifier: synthetics-trigger-synthetics-tests
+  - name: Trigger Synthetic tests
+    url: '#trigger-synthetic-tests'
+    identifier: synthetics-trigger-synthetic-tests
     parent: synthetics
     generated: true
     params:
