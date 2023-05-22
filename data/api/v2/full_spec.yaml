@@ -398,6 +398,13 @@ components:
       required: true
       schema:
         type: string
+    SchemaVersion:
+      description: The schema version desired in the response.
+      in: query
+      name: schema_version
+      required: false
+      schema:
+        $ref: '#/components/schemas/ServiceDefinitionSchemaVersions'
     SecurityFilterID:
       description: The ID of the security filter.
       in: path
@@ -12708,6 +12715,17 @@ components:
       - $ref: '#/components/schemas/ServiceDefinitionV2'
       - $ref: '#/components/schemas/ServiceDefinitionV2Dot1'
       type: object
+    ServiceDefinitionSchemaVersions:
+      description: Schema versions
+      enum:
+      - v1
+      - v2
+      - v2.1
+      type: string
+      x-enum-varnames:
+      - V1
+      - V2
+      - V2_1
     ServiceDefinitionV1:
       deprecated: true
       description: Deprecated - Service definition V1 for providing additional service
@@ -13714,12 +13732,6 @@ components:
           example: example-team
           maxLength: 64
           type: string
-        link_count:
-          description: The number of links belonging to the team
-          format: int32
-          maximum: 2147483647
-          readOnly: true
-          type: integer
         name:
           description: The name of the team
           example: Example Team
@@ -14017,12 +14029,6 @@ components:
           example: example-team
           maxLength: 64
           type: string
-        link_count:
-          description: The number of links belonging to the team
-          format: int32
-          maximum: 2147483647
-          readOnly: true
-          type: integer
         name:
           description: The name of the team
           example: Example Team
@@ -18382,8 +18388,8 @@ paths:
         Add the `Content-Encoding: gzip` header to the request when sending compressed
         logs.
 
-        Log events can be submitted up to 18 hours in the past and 2 hours in the
-        future.
+        Log events can be submitted with a timestamp that is up to 18 hours in the
+        past.
 
 
         The status codes answered by the HTTP API are:
@@ -20923,6 +20929,15 @@ paths:
         required: true
         schema:
           type: string
+      - description: Return the finding for a given snapshot of time (Unix ms).
+        example: 1678721573794
+        in: query
+        name: snapshot_timestamp
+        required: false
+        schema:
+          format: int64
+          minimum: 1
+          type: integer
       responses:
         '200':
           content:
@@ -23945,6 +23960,7 @@ paths:
       parameters:
       - $ref: '#/components/parameters/PageSize'
       - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/SchemaVersion'
       responses:
         '200':
           content:
@@ -24047,6 +24063,7 @@ paths:
       operationId: GetServiceDefinition
       parameters:
       - $ref: '#/components/parameters/ServiceName'
+      - $ref: '#/components/parameters/SchemaVersion'
       responses:
         '200':
           content:
@@ -24327,9 +24344,9 @@ paths:
         dd_team:
           parameters:
           - name: body
-            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"{{timestamp('now')}}\",\n
-              \     \"name\": \"{{timestamp('now')}}\"\n    },\n    \"type\": \"team\"\n
-              \ }\n}"
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"handle\": \"handle-{{
+              unique_hash }}\",\n      \"name\": \"name-{{ unique_hash }}\"\n    },\n
+              \   \"type\": \"team\"\n  }\n}"
           step: there is a valid "dd_team" in the system
       x-menu-order: 2
       x-undo:
@@ -24989,6 +25006,7 @@ paths:
         type: idempotent
   /api/v2/teams:
     get:
+      deprecated: true
       description: Get all incident teams for the requesting user's organization.
         If the `include[users]` query parameter is provided, the included attribute
         will contain the users related to these incident teams.
@@ -25026,10 +25044,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     post:
+      deprecated: true
       description: Creates a new incident team.
       operationId: CreateIncidentTeam
       requestBody:
@@ -25079,11 +25096,10 @@ paths:
         - name: team_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/teams/{team_id}:
     delete:
+      deprecated: true
       description: Deletes an existing incident team.
       operationId: DeleteIncidentTeam
       parameters:
@@ -25112,10 +25128,9 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     get:
+      deprecated: true
       description: 'Get details of an incident team. If the `include[users]` query
         parameter is provided,
 
@@ -25152,10 +25167,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
     patch:
+      deprecated: true
       description: Updates an existing incident team. Only provide the attributes
         which should be updated as this request is a partial update.
       operationId: UpdateIncidentTeam
@@ -25197,9 +25211,7 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+      x-unstable: '**Note**: This endpoint is deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/).'
   /api/v2/usage/application_security:
     get:
       description: 'Get hourly usage for application security .
@@ -26273,8 +26285,8 @@ tags:
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents.
   name: Incident Services
-- description: Create, update, delete and retrieve teams which can be associated with
-    incidents.
+- description: The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/)
+    to create, update, delete, and retrieve teams which can be associated with incidents.
   name: Incident Teams
 - description: Manage incident response.
   name: Incidents

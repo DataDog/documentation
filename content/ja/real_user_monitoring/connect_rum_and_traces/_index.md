@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - rum トレース
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: GitHub
@@ -47,12 +50,14 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 
 ### RUM の設定
 
+**注:** RUM とトレースの構成では、RUM で APM の有料データを使用するため、APM の請求に影響を与える可能性があります。
+
 {{< tabs >}}
 {{% tab "ブラウザ RUM" %}}
 
-1.  [RUM ブラウザモニタリング][1]を設定します。
+1. [RUM ブラウザモニタリング][1]を設定します。
 
-2.  RUM SDK を初期化します。ブラウザアプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`allowedTracingUrls` 初期化パラメーターを設定します。
+2. RUM SDK を初期化します。ブラウザアプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`allowedTracingUrls` 初期化パラメーターを設定します。
 
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
@@ -66,9 +71,9 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
     })
     ```
 
-    RUM をトレースに接続するには、`service` フィールドにブラウザアプリケーションを指定する必要があります。
+   RUM をトレースに接続するには、`service` フィールドにブラウザアプリケーションを指定する必要があります。
 
-    `allowedTracingUrls` は完全な URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`) に一致します。次のタイプを指定できます。
+   `allowedTracingUrls` は完全な URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`) に一致します。次のタイプを指定できます。
       - `string`: 指定した値で始まるすべての URL に一致します。したがって、`https://api.example.com` は `https://api.example.com/v1/resource` に一致します。
       - `RegExp`: 指定された正規表現と URL で検証を実行します。
       - `function`: URL をパラメーターとして評価を実行します。戻り値の `boolean` が `true` に設定されていた場合は、一致することを示します。
@@ -92,9 +97,9 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
-1.  [RUM Android モニタリング][1]を設定します。
+1. [RUM Android モニタリング][1]を設定します。
 
-2.  Android アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`OkHttpClient` インターセプターを構成します。
+2. Android アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`OkHttpClient` インターセプターを構成します。
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -105,7 +110,7 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
        .build()
     ```
 
-    デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
+   デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
 
 3.  _(オプション)_ `traceSamplingRate` パラメーターを構成して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。バックエンドトレースの 100% を保持する場合:
 
@@ -121,9 +126,9 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
-1.  [RUM iOS モニタリング][1]を設定します。
+1. [RUM iOS モニタリング][1]を設定します。
 
-2.  iOS アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、ビルダー関数 `trackURLSession(firstPartyHosts:)` を呼び出します。
+2. iOS アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、ビルダー関数 `trackURLSession(firstPartyHosts:)` を呼び出します。
     ```swift
     Datadog.initialize(
         appContext: .init(),
@@ -176,9 +181,9 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
-1.  [RUM React Native モニタリング][1]を設定します。
+1. [RUM React Native モニタリング][1]を設定します。
 
-2.  `firstPartyHosts` の初期化パラメーターを設定して、React Native アプリケーションが呼び出す内部のファーストパーティオリジンのリストを定義します。
+2. `firstPartyHosts` の初期化パラメーターを設定して、React Native アプリケーションが呼び出す内部のファーストパーティオリジンのリストを定義します。
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
@@ -186,7 +191,7 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
     config.firstPartyHosts = ["example.com", "api.yourdomain.com"];
     ```
 
-    デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
+   デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
 
 3. _(オプション)_ `resourceTracingSamplingRate` 初期化パラメーターを設定して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。
 
@@ -219,21 +224,47 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 [2]: /ja/real_user_monitoring/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
+
+
+{{% tab "Roku RUM" %}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+<div class="alert alert-info">RUM for Roku はベータ版です。</div>
+
+1. [RUM Roku モニタリング][1]を設定します。
+
+2. ネットワークリクエストを行うには、`datadogroku_DdUrlTransfer` コンポーネントを使用します。
+    ```brightscript
+        ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
+        ddUrlTransfer.SetUrl(url)
+        ddUrlTransfer.EnablePeerVerification(false)
+        ddUrlTransfer.EnableHostVerification(false)
+        result = ddUrlTransfer.GetToString()
+    ```
+
+[1]: /ja/real_user_monitoring/roku/
+{{< /site-region >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## サポートされるライブラリ
 
 以下の Datadog トレーシングライブラリがサポートされています。
 
-| ライブラリ                             | 最小バージョン                                                                                                             |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][2]                  | [0.22.0][3]                |
-| [Go][4]                  | [1.10.0][5]                |
-| [Java][6]                  | [0.24.1][7]                |
-| [Ruby][8]                  | [0.20.0][9]                |
-| [JavaScript][10]                  | [0.10.0][11]                |
-| [PHP][12]                  | [0.33.0][13]                |
-| [.NET][14]                  | [1.18.2][15]                |
+| ライブラリ          | 最小バージョン |
+| ---------------- | --------------- |
+| [Python][2]      | [0.22.0][3]     |
+| [Go][4]          | [1.10.0][5]     |
+| [Java][6]        | [0.24.1][7]     |
+| [Ruby][8]        | [0.20.0][9]     |
+| [JavaScript][10] | [0.10.0][11]    |
+| [PHP][12]        | [0.33.0][13]    |
+| [.NET][14]       | [1.18.2][15]    |
 
 
 ## OpenTelemetry のサポート

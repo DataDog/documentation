@@ -75,16 +75,14 @@ custom_queries:
       - name: localisation
         type: tag
     tags:
-      - query:custom
+      - 'query:custom'
 ```
 
 SQL Server YAML ファイルを更新した後、[Datadog Agent を再起動][7]します。
 
 #### 検証
 
-結果を確認するには、[メトリクスエクスプローラー][8] を使用してメトリクスを検索します。
-
-{{< img src="integrations/faq/sql_metric_explorer.png" alt="Datadog のメトリクスエクスプローラーのスクリーンショット。左側の 'Graph' の下には、'postgresql.employee_age' と 'postgresql.employee_salary' の 2 つのアイテムがあります。右側には、従業員の年齢と給与を示す 2 つのグラフがあります。"  >}}
+結果を確認するには、[メトリクスエクスプローラー][8]を使用してメトリクスを検索します。
 
 #### デバッグ作業
 

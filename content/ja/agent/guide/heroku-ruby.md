@@ -731,7 +731,7 @@ heroku restart -a $APPNAME
 
 パースされたパラメーターに基づき、レイテンシーメトリクスを生成できます。
 
-Logs -> Generate Metrics へ移動し「+ New Metric」ボタンをクリックします。
+Logs -> Generate Metrics へ移動し "+ New Metric" ボタンをクリックします。
 
 {{< img src="agent/guide/heroku_ruby/new_custom_metric.png" alt="新しいログベースのメトリクス" >}}
 
@@ -741,7 +741,7 @@ Logs -> Generate Metrics へ移動し「+ New Metric」ボタンをクリック�
 
 {{< img src="agent/guide/heroku_ruby/custom_metric.png" alt="新しいログベースのメトリクスの作成" >}}
 
-ルールを作成したら、新しいメトリクスが収集されるまで数分待ちます。「See in Metric Explorer」をクリックして新しいメトリクスを確認します。
+ルールを作成したら、新しいメトリクスが収集されるまで数分待ちます。"See in Metric Explorer" をクリックして新しいメトリクスを確認します。
 
 {{< img src="agent/guide/heroku_ruby/generated_metric.png" alt="ログベースの利用可能なメトリクス" >}}
 {{< img src="agent/guide/heroku_ruby/metrics_explorer.png" alt="メトリクスエクスプローラービュー" >}}

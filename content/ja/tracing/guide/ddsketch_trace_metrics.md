@@ -1,19 +1,20 @@
 ---
-title: APM の DDSketch ベースのメトリクス
-kind: ガイド
 aliases:
-  - /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
+- /ja/tracing/faq/resource-trace-doesn-t-show-up-under-correct-service/
 further_reading:
-  - link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
-    tag: ブログ
-    text: DDSketch を使用した正確なパーセンタイルの計算
-  - link: https://docs.datadoghq.com/metrics/distributions/
-    tag: Documentation
-    text: ディストリビューションの詳細
-  - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
-    tag: Documentation
-    text: トレースメトリクスの詳細
+- link: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+  tag: ブログ
+  text: DDSketch を使用した正確なパーセンタイルの計算
+- link: https://docs.datadoghq.com/metrics/distributions/
+  tag: Documentation
+  text: ディストリビューションの詳細
+- link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
+  tag: Documentation
+  text: トレースメトリクスの詳細
+kind: ガイド
+title: APM の DDSketch ベースのメトリクス
 ---
+
 トレースメトリクスは、サービスとリソースに対して自動的に収集され、15 か月間保持されます。レイテンシーパーセンタイルは、個々の時系列として存在します。これらのパーセンタイルは、[Datadog ディストリビューションメトリクス][1]としても利用できます。パーセンタイルごとに異なるメトリクスを使用したり、サービス、リソース、または 2 番目のプライマリタグに個別のメトリクスを使用する代わりに、Datadog は次の単純なメトリクスを提供します。
 
 - `trace.<SPAN_NAME>`:

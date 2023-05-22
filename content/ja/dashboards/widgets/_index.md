@@ -20,6 +20,7 @@ title: ウィジェット
     {{< nextlink href="/dashboards/widgets/distribution" >}}分布{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_stream" >}}イベントストリーム{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/event_timeline" >}}イベントタイムライン{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel" >}}ファネル{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" >}}ジオマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map" >}}ヒートマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/hostmap" >}}ホストマップ{{< /nextlink >}}
@@ -32,6 +33,7 @@ title: ウィジェット
     {{< nextlink href="/dashboards/widgets/treemap" >}}ツリーマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/timeseries" >}}時系列{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list" >}}トップリスト{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" >}}トポロジーマップ{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Synthetic Monitoring の情報を表示するサマリーウィジェット: ">}}
@@ -39,9 +41,8 @@ title: ウィジェット
     {{< nextlink href="/dashboards/widgets/alert_value" >}}アラート値{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/check_status" >}}ステータス確認{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/monitor_summary" >}}モニター概要{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" >}}サービスレベル目標 (SLO) 概要{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo" >}}サービスレベル目標 (SLO) サマリー{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" >}}サービスレベル目標 (SLO) リスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_map" >}}サービスマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/service_summary" >}}サービス概要{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -99,11 +100,11 @@ title: ウィジェット
 
 ### PNG
 
-ウィジェットを PNG 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、“Download as PNG” を選択します。
+ウィジェットを PNG 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as PNG** を選択します。
 
 ### CSV
 
-時系列、テーブル、またはトップリストウィジェットからデータを CSV 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、“Download as CSV” を選択します。
+時系列、テーブル、またはトップリストウィジェットからデータを CSV 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as CSV** を選択します。
 
 ## その他の参考資料
 

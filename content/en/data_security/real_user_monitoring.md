@@ -119,7 +119,7 @@ See [privacy options specific to Session Replay][12].
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
-[11]: /account_management/org_settings/sensitive_data_detection
+[11]: /sensitive_data_scanner/
 [12]: /real_user_monitoring/session_replay/privacy_options
 [13]: https://www.datadoghq.com/privacy/
 [14]: /real_user_monitoring/explorer/search/
