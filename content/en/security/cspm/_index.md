@@ -3,7 +3,7 @@ title: Cloud Security Posture Management
 kind: documentation
 aliases:
   - /security_platform/cspm/
-  - security/cspm#glossary
+  - security/cspm/#glossary
 algolia:
   tags: ['cspm']
 ---
