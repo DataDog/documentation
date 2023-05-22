@@ -194,7 +194,7 @@ public class ShoppingCartController : Controller
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
+The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag in the `meta` array.
 
 ```php
 <?php

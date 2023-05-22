@@ -93,7 +93,7 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics, otlp]
+      receivers: [hostmetrics, prometheus, otlp]
       processors: [batch]
       exporters: [datadog]
     traces:
@@ -170,7 +170,8 @@ filelog:
     - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
     - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog. 
 
-#### Using Kubernetes
+<details>
+<summary><strong>Optional: Using Kubernetes</strong></summary>
 
 There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
 
@@ -235,6 +236,7 @@ spec:
           hostPath:
             path: /var/lib/docker/containers
 ```
+</details>
 
 ### 5. Run the collector
 

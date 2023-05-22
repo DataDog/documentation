@@ -33,7 +33,8 @@ Selecting a service on the services page leads you to the detailed service page.
 Consult on this page:
 
 * [Service monitor states](#service-monitor)
-* [Summary cards and Watchdog Insights](#summary-cards)
+* [Watchdog Insights](#watchdog-insights)
+* [Summary cards](#summary-cards)
 * [Out-of-the-box graphs](#out-of-the-box-graphs)
 * [Resources associated to this service][2]
 * [Additional tabs](#additional-tabs)
@@ -49,17 +50,23 @@ Enable them directly or create your own [APM monitors][3].
 
 **Note**: Tag any monitor with `service:<SERVICE_NAME>` to attach it to an APM service.
 
-## Summary Cards
+## Watchdog Insights
+
+The [Watchdog Insights][7] carousel surfaces anomalies and outliers detected on specific tags, enabling you to investigate the root cause of an issue. Insights are discovered from APM, Continuous Profiler, Log Management, and Infrastructure data that include the service tag. These insights are the same insights that appear in each of the product pages. For example, the same Log outliers on the service page can be found in the [Logs Explorer][19]. 
+
+{{< img src="tracing/visualization/service/cross-product-insight.jpg" alt="Watchdog Insights" style="width:100%;">}}
+
+Click on an insight to see more details, such as the time frame of the insight, related logs or traces, and suggested next steps.
+
+{{< img src="tracing/visualization/service/watchdog-details.jpg" alt="Watchdog Insights details" style="width:100%;">}}
+
+## Summary cards
 
 The service page features summary cards with highlights on your service health. Easily spot potential faulty deployments, click into the card to view details or traces of the latest deployment, or view all deployments on this service. See new issues flagged on your service through our integration with [Error Tracking][4], where errors are automatically aggregated into issues.
 
 {{< img src="tracing/visualization/service/summary_cards.png" alt="Summary cards" style="width:100%;">}}
 
 Our [Service Level Objectives (SLOs)][5] and [Incidents][6] summaries allow you to monitor the status of SLOs and ongoing incidents, so that you can keep performance goals top of mind. Click the cards to create a new SLO on the service or declare an incident. The [security signals][18] summary highlights how your services react to application threats.
-
-{{< img src="tracing/visualization/service/watchdog_insights.png" alt="Watchdog Insights" style="width:70%;">}}
-
-The [Watchdog Insights][7] carousel surfaces anomalies detected on specific tags, enabling you to drill down straight to the root cause of an issue. 
 
 ## Out-of-the-box graphs
 
@@ -200,8 +207,8 @@ View common patterns in your service's logs, and use facets like status in the s
 [2]: /tracing/services/resource_page/
 [3]: /monitors/types/apm/
 [4]: /tracing/error_tracking/
-[5]: /monitors/service_level_objectives/
-[6]: /monitors/incident_management/
+[5]: /service_management/service_level_objectives/
+[6]: /service_management/incident_management/
 [7]: /watchdog/
 [8]: /tracing/metrics/metrics_namespace/
 [9]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
@@ -214,3 +221,5 @@ View common patterns in your service's logs, and use facets like status in the s
 [16]: /tracing/trace_explorer/query_syntax/#facets
 [17]: https://www.datadoghq.com/blog/log-patterns/
 [18]: /security/application_security/how-appsec-works/
+[19]: https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/
+

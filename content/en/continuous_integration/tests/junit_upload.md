@@ -193,7 +193,7 @@ This is the full list of options available when using the `datadog-ci junit uplo
 
 `--xpath-tag`
 : Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
-See [Providing metadata with XPath expressions][9] for more details on the supported expressions.<br/>
+See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-expressions) for more details on the supported expressions.<br/>
 **Default**: (none)<br/>
 **Example**: `test.suite=/testcase/@classname`<br/>
 **Note**: Tags specified using `--xpath-tag` and with `--tags` or `DD_TAGS` environment variable are merged. xpath-tag gets the highest precedence, as the value is usually different for each test.
@@ -278,6 +278,11 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Git metadata upload
+
+From `datadog-ci` version `2.9.0` or later, CI Visibility automatically uploads Git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, pass the flag `--skip-git-metadata-upload`.
+
+
 ## Collecting environment configuration metadata
 
 Datadog uses special dedicated tags to identify the configuration of the environment in which tests run, including the operating system, runtime, and device information, if applicable. When the same test for the same commit runs in more than one configuration (for example, on Windows and on Linux), the tags are used to differentiate the test in failure and flakiness detection.
@@ -333,7 +338,7 @@ For mobile apps (Swift, Android):
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
 
-The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][10] expression within the ones supported.
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][9] expression within the ones supported.
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
@@ -465,7 +470,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-**Note**: The values that you send to Datadog are strings, so the facets are displayed in lexicographical order.
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
 
 ## Further reading
 
@@ -479,5 +484,4 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [6]: /logs/
 [7]: /getting_started/site/
 [8]: https://git-scm.com/downloads
-[9]: #providing-metadata-with-xpath-expressions
-[10]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: https://www.w3schools.com/xml/xpath_syntax.asp

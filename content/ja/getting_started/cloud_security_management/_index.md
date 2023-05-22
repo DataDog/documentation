@@ -24,7 +24,7 @@ title: Cloud Security Management の概要
 
 ## フェーズ 1: デプロイメント
 
-1. [Datadog Agent (バージョン 7.40 以上)][4] をインストールします。
+1. [Datadog Agent (バージョン 7.44 以上)][4] をインストールします。
 2. クラウドリソースとインフラストラクチャーに対して、CSM を有効にします。
     - **CWS**: [Kubernetes][5]、[Docker][6]、[ホストベース][7]のインストール。
     - **CSPM**: [AWS][10]、[Azure][11]、[GCP][12]、[Kubernetes][8]、[Docker][9] の手順。

@@ -89,7 +89,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+To apply a specific configuration to a given container, Autodiscovery identifies containers by name, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image.` To configure your Datadog container logs Autodiscovery on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod's `log_processing_rules`:
 
 ```yaml
 apiVersion: apps/v1
@@ -103,7 +103,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -118,7 +118,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -220,7 +220,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -235,7 +235,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -308,7 +308,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -324,7 +324,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -409,7 +409,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -424,7 +424,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: postgres
+        - name: '<CONTAINER_IDENTIFIER>'
           image: postgres:latest
 ```
 
@@ -437,14 +437,14 @@ spec:
 
 More examples:
 
-| **Raw string**           | **Pattern**                                   |
-|--------------------------|-----------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
-| 20180228                 | `\d{8}`                                       |
-| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
-| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
+| **Raw string**           | **Pattern**                                       |
+|--------------------------|---------------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
+| 20180228                 | `\d{8}`                                           |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Automatic multi-line aggregation
 With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][2] automatically. 
@@ -502,7 +502,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/testApp.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -513,7 +513,7 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: testApp
+        - name: '<CONTAINER_IDENTIFIER>'
           image: testApp:latest
 ```
 

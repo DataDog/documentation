@@ -1,25 +1,28 @@
 ---
-title: プロセッサー
-kind: documentation
-description: Grok プロセッサーを使用してログをパースする
 aliases:
-  - /ja/logs/processing/processors/
+- /ja/logs/processing/processors/
+description: Grok プロセッサーを使用してログをパースする
 further_reading:
-  - link: /logs/log_configuration/pipelines
-    tag: ドキュメント
-    text: Datadog のパイプライン
-  - link: /logs/logging_without_limits/
-    tag: ドキュメント
-    text: Logging without Limits*
-  - link: /logs/explorer/
-    tag: ドキュメント
-    text: ログの調査方法
+- link: /logs/log_configuration/pipelines
+  tag: ドキュメント
+  text: Datadog のパイプライン
+- link: /logs/logging_without_limits/
+  tag: ドキュメント
+  text: Logging without Limits*
+- link: /logs/explorer/
+  tag: ドキュメント
+  text: ログの調査方法
+kind: documentation
+title: プロセッサー
 ---
+
 ## 概要
 
 {{< img src="logs/processing/processors/processing_overview.png" alt="プロセッサー" >}}
 
-プロセッサーは[パイプライン][1]内で実行され、ログの[属性の再マップ](#remapper)、[Grok パース](#grok-parser)などのデータ構造化アクションを完了します。
+プロセッサーは[パイプライン][1]の中で実行され、データ構造化アクションを完了し、ログを豊かにする属性を生成します。
+
+[ログコンフィギュレーション設定][1]で、[Grok パーサー](#grok-parser) や [日付リマッパー](#remapper) などの処理系を設定して、ログの属性を抽出・作成・再マッピングし、ファセット検索を充実させることが可能です。
 
 **注**:
 
@@ -36,11 +39,13 @@ further_reading:
 
 [Datadog ログ構成ページ][1]で、Grok プロセッサープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/parser.png" alt="パース"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/parser.png" alt="パース" style="width:80%;" >}}
 
-プロセッサーには最大 5 つのサンプルを保存できます。各サンプルの長さは最大 5000 文字となります。すべてのサンプルについて、Grok パーサーのパース規則のいずれかがそのサンプルに一致するかどうかのステータス (`match` または `no match`) を確認することができます。サンプルをクリックで選択するとパース規則との照合が行われ、結果が画面の下に表示されます。
+**Parse my logs** をクリックして、基底のパイプラインを流れるログの 3 つのパースルールのセットを始動させます。そこから属性の名前を絞り込み、必要に応じて他のタイプのログに新しいルールを追加します。この機能を使用するには、対応するログがインデックス化され、実際に流入している必要があります。除外フィルターを一時的に無効にするか、サンプリングして、これを機能させることができます。
 
-**Parse my logs** をクリックして、基底のパイプラインを流れるログの 3 つのパースルールのセットを始動させます。そこから属性の名前を微調整し、必要に応じて他のタイプのログに新しいルールを追加します。この機能を使用するには、対応するログがインデックス化され、実際に流入している必要があります。除外フィルターを一時的に無効にするか、サンプリングして、これを機能させることができます。
+サンプルをクリックして選択すると、パースルールに対する評価が開始され、結果が画面の下に表示されます。
+
+プロセッサーには最大 5 つのサンプルを保存できます。各サンプルの長さは最大 5000 文字となります。すべてのサンプルについて、Grok パーサーのパース規則のいずれかがそのサンプルに一致するかどうかのステータス (`match` または `no match`) を確認することができます。
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -85,24 +90,32 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 * `eventTime`
 * `published_date`
 
-このリストにない属性にログの日付が入っている場合は、ログ日付リマッパープロセッサーを使用して、その日付属性を公式のログタイムスタンプとして定義してください。
+ログにこのリストにない属性の日付がある場合は、ログ日付リマッパープロセッサーを使用して、その日付属性を公式のログタイムスタンプとして定義してください。
 
 <div class="alert alert-info">
 認識される日付の形式は、<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO8601</a>、<a href="https://en.wikipedia.org/wiki/Unix_time">UNIX (ミリ秒エポック形式)</a>、および <a href="https://www.ietf.org/rfc/rfc3164.txt">RFC3164</a> です。
 </div>
 
+ログに上記の形式に準拠したタイムスタンプがない場合、grok プロセッサーを使用してタイムスタンプからエポックタイムを抽出し、新しい属性に変換します。日付リマッパーは新しく定義された属性を使用します。
+
+Datadog でカスタム日付と時間形式をパースする方法については、[日付のパース][3]を参照してください。
+
 **注**:
 
 * **過去 18 時間および未来 2 時間までのログイベントを送信できます**。
+* ISO 8601-1:2019 では、基本フォーマットは `T[hh][mm][ss]`、拡張フォーマットは `T[hh]:[mm]:[ss]` です。それ以前のバージョンでは、どちらのフォーマットでも T (時刻を表す) が省略されています。
 * ログにデフォルトの属性が含まれず、独自の日付属性も定義していない場合、Datadog は、ログを受信した日付をタイムスタンプとします。
 * 複数のログ日付リマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
+
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ログ日付リマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/log_date_remapper.png" alt="ログ日付リマッパー"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/log_date_remapper.png" alt="日付属性の定義" style="width:80%;" >}}
+
+{{< img src="logs/processing/processors/log_date_remapper_example.png" alt="ログエクスプローラーのサイドパネルに表示される日付と時間" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -132,17 +145,13 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## ログステータスリマッパー
 
-いくつかの属性を公式ステータスとして割り当てる場合は、このプロセッサーを使用します。次のログを例にします。
+ログに公式なステータスとして属性を割り当てるには、ステータスリマッパープロセッサーを使用します。例えば、ステータスリマッパーを使用して、ログに重大度レベルを追加します。
 
-{{< img src="logs/processing/processors/log_pre_severity.png" alt=" ログ事前重大度 "  style="width:40%;">}}
-
-変換すると次のようになります。
-
-{{< img src="logs/processing/processors/log_post_severity_bis.png" alt=" ログ事後重大度ビス"  style="width:40%;" >}}
+{{< img src="logs/processing/processors/log_post_severity_bis.png" alt="リマップ後のログの重大度" style="width:40%;" >}}
 
 受信したステータス値は、次のようにマップされます。
 
-* 整数値 (0 から 7) は、[Syslog の重大度標準][3]にマップされます
+* 整数値 (0 から 7) は、[Syslog の重大度標準][4]にマップされます
 * **emerg** または **f** で始まる文字列 (大文字と小文字の区別なし) は、**emerg (0)** にマップされます
 * **a** で始まる文字列 (大文字と小文字の区別なし) は、**alert (1)** にマップされます
 * **c** で始まる文字列 (大文字と小文字の区別なし) は、**critical (2)** にマップされます
@@ -161,7 +170,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ログステータスリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="重大度リマッパープロセッサータイル"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/severity_remapper_processor_tile.png" alt="ログエクスプローラーでのログの重大度" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -191,7 +200,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## サービスリマッパー
 
-いくつかの属性を公式サービスとして割り当てる場合は、このプロセッサーを使用します。
+サービスリマッパープロセッサーは、ログに 1 つまたは複数の属性を正式なサービスとして割り当てます。
 
 **注**: 複数のサービスリマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
@@ -200,7 +209,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ログサービスリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="サービスリマッパープロセッサータイル"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/service_remapper_processor_tile.png" alt="サービスリマッパープロセッサータイル" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -230,16 +239,20 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## ログメッセージリマッパー
 
-メッセージは Datadog における重要な属性です。メッセージはログエクスプローラーのメッセージ列に表示され、メッセージに対して全文検索を行うことができます。いくつかの属性を公式ログメッセージとして定義するには、このプロセッサーを使用します。
+`message` は、Datadog のキー属性です。その値はログエクスプローラーの **Content** 列に表示され、ログのコンテキストを提供します。検索バーを使って、ログメッセージでログを見つけることができます。
 
-複数のログメッセージリマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
+ログメッセージリマッパープロセッサーを使用して、1 つまたは複数の属性を公式ログメッセージとして定義します。属性が存在しない可能性があり、代替が可能な場合には、複数の属性を定義します。例えば、定義されたメッセージの属性が `attribute1`、`attribute2`、`attribute3` で、`attribute1` が存在しない場合は `attribute2` が使用されます。同様に、`attribute2` が存在しない場合、`attribute3` が使用されます。
+
+メッセージ属性を定義するには、まず[ストリングビルダープロセッサー](#string-builder-processor)を使用して、使用したい属性ごとに新しい文字列属性を作成します。次に、ログメッセージリマッパーを使用して、文字列属性をメッセージとして再マッピングします。
+
+**注**: 複数のログメッセージリマッパープロセッサーがログに適用された場合は、(パイプラインの順序で) 最初のプロセッサーだけが考慮されます。
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ログメッセージリマッパープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/message_processor.png" alt="メッセージプロセッサー"  style="width:80%;">}}
+{{< img src="logs/processing/processors/message_processor.png" alt="メッセージプロセッサー" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -269,24 +282,22 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## リマッパー
 
-リマッパープロセッサーは、ソース属性またはタグを別のターゲット属性またはタグに再マップします。次のログを例にします。
+リマッパープロセッサーは、任意のソース属性やタグを、別のターゲット属性やタグにリマップします。例えば、`user` を `firstname` にリマップして、ログエクスプローラーのログをターゲットにすることができます。
 
-{{< img src="logs/processing/processors/attribute_pre_remapping.png" alt="属性の事前再マッピング "  style="width:40%;">}}
+{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="リマップ後の属性" style="width:50%;">}}
 
-変換すると次のようになります。
+タグ/属性名の制約については、[属性とタグのドキュメント][5]に説明があります。いくつかの追加の制約は、`:` や `,` として適用され、ターゲットタグ/属性名では許可されません。
 
-{{< img src="logs/processing/processors/attribute_post_remapping.png" alt="属性の事後再マッピング "  style="width:40%;">}}
+リマッパーのターゲットが属性の場合、リマッパーは値を新しい型（`String`、`Integer`、`Double`）への変換を試みることができます。型変換できない場合、元の型が保持されます。
 
-タグ/属性名の制約については、[属性とタグのドキュメント][4]に説明があります。ターゲットタグ/属性名では `:` および `,` を使用できないため、さらにいくつかの制約が適用されます。
-
-リマッパーのターゲットが属性の場合、リマッパーは値を新しい型（`String`、`Integer`、`Double`）への変換を試みることができます。型変換できない場合、元の型が保持されます（注、`Double` の小数点は `.` を使用します）。 
+**注**: `Double` の小数点以下の桁数は `.` である必要があります。
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-[Datadog ログ構成ページ][1]で、リマッパープロセッサーを定義します。たとえば、ここでは `user` を `user.firstname` に再マップします。
+[Datadog ログ構成ページ][1]で、リマッパープロセッサーを定義します。たとえば、`user` を `user.firstname` に再マップします。
 
-{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="属性リマッパープロセッサータイル"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/attribute_remapper_processor_tile.png" alt="属性リマッパープロセッサータイル" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -318,7 +329,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 | `sources`              | 文字列の配列 | はい      | ソース属性またはタグの配列。                                             |
 | `target`               | 文字列           | はい      | ソースの再マップ先になる最終的な属性またはタグの名前。                           |
 | `target_type`          | 文字列           | いいえ       | ターゲットがログの `attribute` または `tag` のどちらであるかを定義します。デフォルト: `attribute`。    |
-| `target_format`        | 文字列           | いいえ       | 属性値を別の型にキャストするかを定義します。可能な値には、`auto`、`string`、`long`、`integer` があり、デフォルトは `auto` です。`auto` に設定するとキャストは適用されません。  |
+| `target_format`        | 文字列           | いいえ       | 属性値を別の型にキャストするかを定義します。可能な値には、`auto`、`string`、`integer` があり、デフォルトは `auto` です。`auto` に設定するとキャストは適用されません。  |
 | `preserve_source`      | Boolean          | いいえ       | 再マップされたソース要素を削除または維持します。デフォルト: `false`。               |
 | `override_on_conflict` | Boolean          | いいえ       | ターゲット要素が既に設定されている場合に上書きするかどうか。デフォルト: `false`。            |
 
@@ -328,16 +339,16 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## URL パーサー
 
-このプロセッサーは URL からクエリパラメーターなどの重要なパラメーターを抽出します。これをセットアップすると、次の属性が生成されます。
+URL パーサープロセッサーは URL からクエリパラメーターなどの重要なパラメーターを抽出します。これをセットアップすると、次の属性が生成されます。
 
-{{< img src="logs/processing/processors/url_processor.png" alt="URL プロセッサー"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor.png" alt="URL プロセッサー" style="width:80%;" >}}
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、URL パーサープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/url_processor_tile.png" alt="URL プロセッサータイル"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/url_processor_tile.png" alt="URL プロセッサータイル" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -366,18 +377,18 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## ユーザーエージェントパーサー
 
-ユーザーエージェントパーサーは、User-Agent 属性から OS、ブラウザ、デバイスなどのユーザーデータを抽出します。このパーサーは、Google Bot、Yahoo Slurp、Bing などの主要なボットを認識します。これをセットアップすると、次の属性が生成されます。
+ユーザーエージェントパーサープロセッサーは `useragent` 属性を受け取り、OS、ブラウザ、デバイス、およびその他のユーザーデータを抽出します。設定されると、以下のような属性が生成されます。
 
-{{< img src="logs/processing/processors/useragent_processor.png" alt="ユーザーエージェントプロセッサー"  style="width:80%;">}}
+{{< img src="logs/processing/processors/useragent_processor.png" alt="ユーザーエージェントプロセッサー" style="width:80%;">}}
 
-**注**: エンコードされた User-Agent がログに含まれている場合 (IIS ログなど) は、パースの前に **URL をデコードする**ようにプロセッサーを構成してください。
+**注**: エンコードされたユーザーエージェントがログに含まれている場合 (IIS ログなど) は、パースの前に **URL をデコードする**ようにプロセッサーを構成してください。
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 [Datadog ログ構成ページ][1]で、ユーザーエージェントプロセッサーを定義します。
 
-{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="ユーザーエージェントプロセッサータイル"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/useragent_processor_tile.png" alt="ユーザーエージェントプロセッサータイル" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -411,12 +422,11 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## カテゴリプロセッサー
 
-指定された検索クエリに一致するログに、新しい属性 (新しい属性の名前にはスペースまたは特殊文字を含まない) を追加するには、カテゴリプロセッサーを使用します。
-複数のカテゴリを使用すると、1 つの分析ビューに複数のグループが作成されます (複数の URL グループ、マシングループ、環境、応答時間バケットなど)。
+指定された検索クエリに一致するログに、新しい属性 (新しい属性の名前にはスペースまたは特殊文字を含まない) を追加するには、カテゴリプロセッサーを使用します。次に、複数のカテゴリを使用すると、1 つの分析ビューに複数のグループが作成されます (複数の URL グループ、マシングループ、環境、応答時間バケットなど)。
 
 **注**:
 
-* このクエリの構文は [ログエクスプローラー][5] 検索バーで使用されているものです。クエリはファセットか否かに関わらず、任意のログ属性またはタグで実行できます。クエリ内でワイルドカードを使用することも可能です。
+* このクエリの構文は[ログエクスプローラー][6]検索バーで使用されているものです。このクエリはファセットか否かに関わらず、任意のログ属性またはタグで実行できます。クエリ内でワイルドカードを使用することも可能です。
 * ログは、プロセッサークエリのいずれかと一致した時点で停止します。1 つのログが複数のクエリに一致する可能性がある場合は、クエリが正しい順序になっていることを確認してください。
 * カテゴリ名は一意でなければなりません。
 * カテゴリプロセッサーを定義したら、[ログステータスリマッパー](#log-status-remapper)を使用してカテゴリをログステータスにマップします。
@@ -426,11 +436,11 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、カテゴリプロセッサーを定義します。たとえば、Web アクセスログをステータスコード範囲に基づいて分類 (応答コード 200 ～ 299 の場合は「OK」、応答コード 300 ～ 399 の場合は「通知」など) するには、次のプロセッサーを追加します。
 
-{{< img src="logs/processing/processors/category_processor.png" alt="カテゴリープロセッサー"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor.png" alt="カテゴリプロセッサー" style="width:80%;" >}}
 
-このプロセッサーは、以下の結果を生成します。
+このプロセッサーは、次のような結果をもたらします。
 
-{{< img src="logs/processing/processors/category_processor_result.png" alt="カテゴリープロセッサー結果"  style="width:80%;" >}}
+{{< img src="logs/processing/processors/category_processor_result.png" alt="カテゴリプロセッサー結果" style="width:80%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -465,13 +475,13 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## 算術演算プロセッサー
 
-ログに、指定された式の結果を含む新しい属性 (新しい属性の名前にはスペースまたは特殊文字を含まない) を追加するには、算術演算プロセッサーを使用します。
-これを使用して、異なる単位を持つ異なる時間属性を 1 つの属性に再マップしたり、同じログ内の複数の属性に対して演算を行うことができます。
+ログに、指定された式の結果を含む新しい属性 (新しい属性の名前にはスペースまたは特殊文字を含まない) を追加するには、算術演算プロセッサーを使用します。これにより、異なる単位を持つ異なる時間属性を 1 つの属性に再マップしたり、同じログ内の複数の属性に対して演算を行ったりします。
 
-式には、括弧および基本的な算術演算子 `-`、`+`、`*`、`/` を使用できます。
+算術演算プロセッサー式には、括弧および基本的な算術演算子 `-`、`+`、`*`、`/` を使用できます。
 
-デフォルトでは、属性がない場合は計算がスキップされます。「Replace missing attribute by 0」を選択すると、属性値がない場合は自動的に 0 を挿入して、常に計算が行われます。
-属性値がないとは、ログ属性内に見つからない場合、または数値に変換できない場合です。
+デフォルトでは、属性がない場合は計算がスキップされます。*Replace missing attribute by 0* を選択すると、属性値がない場合は自動的に 0 を挿入して、常に計算が行われます。
+
+**注**: ログの属性にない場合、または数値に変換できない場合、属性が見つからないと表示されることがあります。
 
 **注**:
 
@@ -485,7 +495,7 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、算術演算プロセッサーを定義します。
 
-{{< img src="logs/processing/processors/arithmetic_processor.png" alt="算術演算プロセッサー"  style="width:80%;">}}
+{{< img src="logs/processing/processors/arithmetic_processor.png" alt="算術演算プロセッサー" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -519,14 +529,13 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 ## ストリングビルダープロセッサー
 
-ログに、指定されたテンプレートの結果を含む新しい属性 (スペースまたは特殊文字を含まない) を追加するには、ストリングビルダープロセッサーを使用します。
-これを使用して、異なる属性や生文字列を 1 つの属性に集約することができます。
+ログに、指定されたテンプレートの結果を含む新しい属性 (スペースまたは特殊文字を含まない) を追加するには、ストリングビルダープロセッサーを使用します。これを使用して、異なる属性や生文字列を 1 つの属性に集約することができます。
 
-このテンプレートは生テキストとブロックに `%{属性パス}` 構文 を組み合わせた形で定義されます。
+このテンプレートは生テキストとブロックに `%{attribute_path}` 構文を組み合わせた形で定義されます。
 
 **注**:
 
-* このプロセッサーでは、ブロック内に値または値の配列を持つ属性のみしか使用できません ([UI セクション](?tab=ui#string-builder-processor) の例をご参照ください) 。
+* このプロセッサーでは、ブロック内に値または値の配列を持つ属性のみしか使用できません (以下の UI セクションの例をご参照ください)。
 * 属性 (オブジェクトまたはオブジェクトの配列) が使用できない場合、その属性を空の文字列に置換するか、操作自体をスキップするかを選択することができます。
 * ターゲット属性が既に存在する場合、その属性はテンプレートの結果で上書きされます。
 * テンプレートの結果は 256 文字以内に収める必要があります。
@@ -536,11 +545,10 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 
 [Datadog ログ構成ページ][1]で、ストリングビルダープロセッサーを定義します。
 
-{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="ストリングビルダープロセッサー"  style="width:80%;">}}
+{{< img src="logs/processing/processors/stringbuilder_processor.png" alt="ストリングビルダープロセッサー" style="width:80%;">}}
 
-**例**
+以下のようなログがある場合、テンプレート `Request %{http.method} %{http.url} was answered with response %{http.status_code}` を使って、結果を返します。例:
 
-次のログと組み合わせます。
 
 ```json
 {
@@ -557,19 +565,11 @@ Datadog はログを受信すると、以下のデフォルトの属性のいず
 }
 ```
 
-テンプレート `リクエスト %{http.method} %{http.url} に対する応答 %{http.status_code}` を利用して結果を得ることができます。
-
 ```text
 リクエスト GET https://app.datadoghq.com/users に対する応答 200
 ```
 
-**オブジェクト**:
-
-ログの例では、`http` はオブジェクトであるためブロックでは使用できませんが (`%{http}` は失敗)、`%{http.method}`、`%{http.status_code}`、または `%{http.url}` であれば対応する値を取得できます。
-
-**配列**:
-
-ブロックは、値の配列または配列内の特殊な属性に使用できます。ログの例ではブロック `%{array_ids}` を追加することで次の値を取得しています:
+**注**: `http` はオブジェクトであり、ブロック内で使用することはできません (`%{http}` は失敗します)。一方、`%{http.method}`、`%{http.status_code}`、または `%{http.url}` は、対応する値を返します。ブロックは、値の配列や配列内の特定の属性に対して使用することができます。例えば、 `%{array_ids}` というブロックを追加すると、以下のような値が返されます。
 
 ```text
 123,456,789
@@ -614,23 +614,23 @@ John,Jack
 
 ## GeoIP パーサー
 
-GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット属性パスに含まれる大陸、国、都道府県 (州)、都市名などの情報を抽出します。
+geoIP パーサーは、IP アドレスの属性を受け取り、対象の属性パスに大陸、国、小区域、または都市情報 (利用可能な場合) を抽出します。
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP プロセッサー"  style="width:80%;">}}
+{{< img src="logs/processing/processors/geoip_processor.png" alt="GeoIP プロセッサー" style="width:80%;">}}
 
-<mrk mid="459" mtype="seg"/><mrk mid="460" mtype="seg"/>
+ほとんどの要素は `name` と `iso_code` (大陸の場合は `code`) 属性を含んでいます。`subdivision` は国が使用する最初のレベルの細分化で、アメリカ合衆国の場合は "States"、フランスの場合は "Departments" となります。
 
-以下にて、GeoIP パーサーが抽出する位置情報の例をご覧いただけます。この例では `network.client.ip` 属性から情報を抽出し、`network.client.geoip` 属性に保存しています。
+例えば、geoIP パーサーは `network.client.ip` 属性から位置を抽出し、それを `network.client.geoip` 属性に格納します。
 
-{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP 例"  style="width:60%;">}}
+{{< img src="logs/processing/processors/geoip_example.png" alt="GeoIP 例" style="width:60%;">}}
 
 {{% /tab %}}
 {{% tab "API" %}}
 
-次の Geo-IP パーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
+次の geoIP パーサー JSON ペイロードで [Datadog ログパイプライン API エンドポイント][1]を使用します。
 
 ```json
 {
@@ -656,25 +656,27 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 ## ルックアッププロセッサー
 
-ルックアッププロセッサーを使用して、ログ属性と、[エンリッチメントテーブル (ベータ版)][6] またはプロセッサーのマッピングテーブル内に保存されている視認可能な値のマッピングを定義します。
-たとえば、ルックアッププロセッサーで内部のサービス ID をマップし、読んで意味の通るサービス名を割り当てることができます。
-また、このプロセッサーで本番環境に接続を試みた MAC アドレスと盗難に遭ったマシンのリストを照合し、接続元をチェックすることも可能です。
+ルックアッププロセッサーを使用して、ログ属性と [Reference Table (ベータ版)][7] またはプロセッサーマッピングテーブルに保存された人間が読める値との間のマッピングを定義することができます。
+
+例えば、ルックアッププロセッサーを使用して、内部サービス ID を人間が読めるサービス名にマッピングすることができます。
+
+また、本番環境への接続を試みた MAC アドレスが、盗まれたマシンのリストに含まれているかどうかの確認にも使用できます。
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-{{< img src="logs/processing/processors/lookup_processor.png" alt="ルックアッププロセッサー"  style="width:80%;">}}
+{{< img src="logs/processing/processors/lookup_processor.png" alt="ルックアッププロセッサー" style="width:80%;">}}
 
-このプロセッサーでは以下のアクションを実行可能です。
+ルックアッププロセッサーは、以下の動作を行います。
 
 * 現在のログにソース属性が含まれていないかを確認する。
 * ソース属性の値がマッピングテーブルに存在するかをチェックする。
   * 存在する場合、テーブルにターゲット属性を作成し、対応する値を割り当てる。
   * (オプション) マッピングテーブルに値が存在しない場合、デフォルト値でターゲット属性を作成する。
 
-マッピングテーブルには、エンリッチメントテーブルを選択する、手動で `source_key,target_value` のリストを入力する、または CSV ファイルをアップロードすることで値を入力できます。
+マッピングテーブルには、Reference Table を選択する、手動で `source_key,target_value` のリストを入力する、または CSV ファイルをアップロードすることで値を入力できます。
 
-マッピングテーブルのサイズ上限は 100Kb です。この制限はプラットフォーム上のすべてのルックアッププロセッサーに適用されますが、エンリッチメントテーブルはより大容量のファイルサイズをサポートしています。
+マッピングテーブルのサイズ上限は 100Kb です。この制限はプラットフォーム上のすべてのルックアッププロセッサーに適用されますが、Reference Table はより大容量のファイルサイズをサポートしています。
 
 {{% /tab %}}
 {{% tab "API" %}}
@@ -711,7 +713,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 アプリケーショントレースとログの間の関連付けを改善する方法は 2 つあります。
 
-1. [トレース ID をアプリケーションログに挿入する方法][7]のドキュメントを参照してください。セットアップの大半は、ログのインテグレーションによってデフォルトで行われます。
+1. [トレース ID をアプリケーションログに挿入する方法][8]のドキュメントを参照してください。セットアップの大半は、ログのインテグレーションによってデフォルトで行われます。
 
 2. トレースリマッパープロセッサーを使用して、トレース ID として関連付けられるログ属性を定義します。
 
@@ -720,7 +722,7 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 [Datadog ログ構成ページ][1]で、トレースリマッパープロセッサーを定義します。次のように、プロセッサータイルでトレース ID 属性パスを入力します。
 
-{{< img src="logs/processing/processors/trace_processor.png" alt="トレース ID プロセッサー"  style="width:80%;">}}
+{{< img src="logs/processing/processors/trace_processor.png" alt="トレース ID プロセッサー" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -757,8 +759,9 @@ GeoIP パーサーは IP アドレスの属性を読み取り、ターゲット�
 
 [1]: /ja/logs/log_configuration/pipelines/
 [2]: /ja/logs/log_configuration/parsing/
-[3]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[4]: /ja/logs/log_collection/?tab=host#attributes-and-tags
-[5]: /ja/logs/search_syntax/
-[6]: /ja/logs/guide/enrichment-tables/
-[7]: /ja/tracing/connect_logs_and_traces/
+[3]: /ja/logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[4]: https://en.wikipedia.org/wiki/Syslog#Severity_level
+[5]: /ja/logs/log_collection/?tab=host#attributes-and-tags
+[6]: /ja/logs/search_syntax/
+[7]: /ja/integrations/guide/reference-tables/
+[8]: /ja/tracing/other_telemetry/connect_logs_and_traces/

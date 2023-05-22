@@ -14,38 +14,44 @@ title: Datadog Heroku ビルドパック
 
 1. [Datadog API 設定][3]で Datadog API キーをコピーし、次の環境変数へエクスポートします:
 
- ```shell
- export DD_API_KEY=<YOUR_API_KEY>
- ```
+   ```shell
+   export DD_API_KEY=<YOUR_API_KEY>
+   ```
 
 2. アプリケーション名を APPNAME 環境変数へエクスポートします:
 
-```shell
-export APPNAME=<YOUR_HEROKU_APP_NAME>
-```
+   ```shell
+   export APPNAME=<YOUR_HEROKU_APP_NAME>
+   ```
 
-3. Datadog ビルドパックをプロジェクトに追加します:
+3. Datadog サイトを DD_SITE 環境変数にエクスポートします。
 
-```shell
-cd <HEROKU_PROJECT_ROOT_FOLDER>
+   ```shell
+   export DD_SITE={{< region-param key=dd_site code="true" >}}
+   ```
 
-# 最新のメジャーバージョンの Agent を使用
-heroku config:add DD_AGENT_MAJOR_VERSION=7
+4. Datadog ビルドパックをプロジェクトに追加します:
 
-# Heroku Labs Dyno Metadata を有効にして HEROKU_APP_NAME 環境変数を自動的に設定
-heroku labs:enable runtime-dyno-metadata -a $APPNAME
+   ```shell
+   cd <HEROKU_PROJECT_ROOT_FOLDER>
 
-# メトリクスが連続するよう、Datadog でホスト名を appname.dynotype.dynonumber に設定
-heroku config:add DD_DYNO_HOST=true
+   # Enable Heroku Labs Dyno Metadata to set HEROKU_APP_NAME env variable automatically
+   heroku labs:enable runtime-dyno-metadata -a $APPNAME
 
-# このビルドパックを追加して Datadog API キーを設定
-heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
-heroku config:add DD_API_KEY=$DD_API_KEY
+   # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
+   heroku config:add DD_DYNO_HOST=true
 
-# 強制的に再構築して Heroku をデプロイ
-git commit --allow-empty -m "Rebuild slug"
-git push heroku main
-```
+   # Set the DD_SITE env variable automatically
+   heroku config:add DD_SITE=$DD_SITE
+
+   # Add this buildpack and set your Datadog API key
+   heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
+   heroku config:add DD_API_KEY=$DD_API_KEY
+
+   # Deploy to Heroku forcing a rebuild
+   git commit --allow-empty -m "Rebuild slug"
+   git push heroku main
+   ```
 
 完了すると、各 dyno の起動時に Datadog Agent が自動的に起動します。
 
@@ -114,14 +120,14 @@ git push heroku main
 | `DD_PROCESS_AGENT`         | オプション。Datadog Process Agent は、デフォルトでは無効になっています。Process Agent を有効にするには、これを `true` に設定します。このオプションを変更した場合は、スラグを再コンパイルする必要があります。                                                                                                                                                                                                                                                 |
 | `DD_SITE`                  | オプション。app.datadoghq.eu サービスを使用する場合は、これを `datadoghq.eu` に設定します。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `DD_AGENT_VERSION`         | *オプション。*ビルドパックは、デフォルトで、パッケージリポジトリから入手できる最新バージョンの Datadog Agent をインストールします。この変数を使用すると、Datadog Agent の以前のバージョンをインストールできます。**注**: Agent のすべてのバージョンをインストールできるわけではありません。このオプションは `DD_AGENT_MAJOR_VERSION` よりも優先されます。このオプションを変更するには、スラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイル](#upgrading-and-slug-recompilation)を参照してください。                                           |
-| `DD_AGENT_MAJOR_VERSION`   | *オプション。*ビルドパックは、デフォルトで、パッケージリポジトリから入手できる最新の 6.x バージョンの Datadog Agent をインストールします。最新の 7.x バージョンの Datadog Agent をインストールするには、この変数を `7` に設定します。**この変数を `7` に設定することを強く推奨します**。Agent バージョンと Python バージョンの関係の詳細については、[Python バージョンのセクション](#python-and-agent-versions)を確認してください。このオプションを変更するには、スラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイル](#upgrading-and-slug-recompilation)を参照してください。     |
+| `DD_AGENT_MAJOR_VERSION`   | *オプション。*ビルドパックは、デフォルトで、パッケージリポジトリから入手できる最新の 6.x バージョンの Datadog Agent をインストールします。最新の 7.x バージョンの Datadog Agent をインストールするには、この変数を `6` に設定します。Agent バージョンと Python バージョンの関係の詳細については、[Python バージョンのセクション](#python-and-agent-versions)を確認してください。このオプションを変更するには、スラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイル](#upgrading-and-slug-recompilation)を参照してください。     |
 | `DD_DISABLE_HOST_METRICS`  | *オプション。* ビルドパックは、デフォルトで、dyno を実行しているホストマシンのシステムメトリクスを報告します。システムメトリクスの収集を無効にするには、これを `true` に設定します。詳細は、以下の[システムメトリクスのセクション](#system-metrics)を参照してください。                                                                                                                                                                                                                                                                                  |
 | `DD_PYTHON_VERSION`        | *オプション。*バージョン `6.14.0` 以降の Datadog Agent には、Python バージョン `2` および `3` が付属しています。ビルドパックは、いずれかのバージョンのみを維持します。この変数を `2` または `3` に設定して、Agent が維持する Python バージョンを選択してください。設定しない場合、ビルドパックは `2` を維持します。詳細については、[Python バージョンのセクション](#python-and-agent-versions)を確認してください。このオプションを変更するには、スラグを再コンパイルする必要があります。詳細については、[アップグレードとスラグの再コンパイルのセクション](#upgrading-and-slug-recompilation)を確認してください。 |
 | `DD_HEROKU_CONF_FOLDER`    | *オプション。* デフォルトで、ビルドパックは含めたいコンフィギュレーションファイルのためにアプリケーションのルートでファイル `/datadog` を探します ([prerun.sh script](#prerun-script) を参照してください)。このロケーションは、これを希望のパスに設定することで上書きできます。 |
-| `ENABLE_HEROKU_REDIS`    | *オプション.* Redis インテグレーションのオートディスカバリーを有効にする場合は true に設定します。詳細については、[Datadog Redis インテグレーションを有効にするセクション](#enabling-the-datadog-redis-integration)を確認してください。 |
-| `REDIS_URL_VAR`    | *オプション。* デフォルトで、Redis インテグレーションのオートディスカバリーは、`REDIS_URL` に格納された接続文字列を使用します。これを上書きするには、接続文字列を格納した変数名のカンマ区切りリストをこの変数に設定します。詳細については、[Datadog Redis インテグレーションを有効にするのセクション](#enabling-the-datadog-redis-integration)を確認してください。 |
-| `ENABLE_HEROKU_POSTGRES`    | *オプション.* Postgres インテグレーションのオートディスカバリーを有効にする場合は true に設定します。詳細については、[Datadog Postgres インテグレーションを有効にするのセクション](#enabling-the-datadog-postgresredis-integration)を確認してください。 |
-| `POSTGRES_URL_VAR`    | *オプション。* デフォルトで、Postgres インテグレーションのオートディスカバリーは、`DATABASE_URL` に格納された接続文字列を使用します。これを上書きするには、接続文字列を格納した変数名のカンマ区切りリストをこの変数に設定します。詳細については、[Datadog Postgres インテグレーションを有効にするのセクション](#enabling-the-datadog-postgres-integration)を確認してください。 |
+| `DD_ENABLE_HEROKU_REDIS`    | *オプション.* Redis インテグレーションのオートディスカバリーを有効にする場合は true に設定します。詳細については、[Datadog Redis インテグレーションを有効にするセクション](#enabling-the-datadog-redis-integration)を確認してください。 |
+| `DD_REDIS_URL_VAR`    | *オプション。* デフォルトで、Redis インテグレーションのオートディスカバリーは、`REDIS_URL` に格納された接続文字列を使用します。これを上書きするには、接続文字列を格納した変数名のカンマ区切りリストをこの変数に設定します。詳細については、[Datadog Redis インテグレーションを有効にするのセクション](#enabling-the-datadog-redis-integration)を確認してください。 |
+| `DD_ENABLE_HEROKU_POSTGRES`    | *オプション.* Postgres インテグレーションのオートディスカバリーを有効にする場合は true に設定します。詳細については、[Datadog Postgres インテグレーションを有効にするのセクション](#enabling-the-datadog-postgresredis-integration)を確認してください。 |
+| `DD_POSTGRES_URL_VAR`    | *オプション。* デフォルトで、Postgres インテグレーションのオートディスカバリーは、`DATABASE_URL` に格納された接続文字列を使用します。これを上書きするには、接続文字列を格納した変数名のカンマ区切りリストをこの変数に設定します。詳細については、[Datadog Postgres インテグレーションを有効にするのセクション](#enabling-the-datadog-postgres-integration)を確認してください。 |
 
 その他のドキュメントについては、[Datadog Agent のドキュメント][12]を参照してください。
 
@@ -169,15 +175,15 @@ dyno のシステムメトリクスを収集するには、以下を行う必要
 Heroku アプリケーションで Redis アドオン (例: Heroku Data for Redis、Redis Enterprise Cloud) を使用している場合、環境変数を設定することにより、Datadog Redis インテグレーションを有効にすることができます。
 
 ```
-heroku config:set ENABLE_HEROKU_REDIS=true
+heroku config:set DD_ENABLE_HEROKU_REDIS=true
 ```
 
 このインテグレーションは、デフォルトで、Redis の接続 URL が `REDIS_URL` という名前の環境変数で定義されていることを前提としています (これは Heroku Data for Redis およびその他の Redis アドオンのデフォルトの構成です）。
 
-接続 URL が別の環境変数で定義されている場合、または複数の Redis インスタンスを構成したい場合は、 `REDIS_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Heroku Redis と Redis Enterprise Cloud の両方を利用している場合は、それに従って `REDIS_URL_VAR` を設定します。
+接続 URL が別の環境変数で定義されている場合、または複数の Redis インスタンスを構成したい場合は、`DD_REDIS_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Heroku Redis と Redis Enterprise Cloud の両方を利用している場合は、それに従って `DD_REDIS_URL_VAR` を設定します。
 
 ```
-heroku config:set REDIS_URL_VAR=REDIS_URL,REDISCLOUD_URL
+heroku config:set DD_REDIS_URL_VAR=REDIS_URL,REDISCLOUD_URL
 ```
 
 ### Datadog Postgres インテグレーションを有効にする
@@ -185,15 +191,15 @@ heroku config:set REDIS_URL_VAR=REDIS_URL,REDISCLOUD_URL
 Heroku アプリケーションで Postgres アドオン (例: Heroku Postgres) を使用している場合、環境変数を設定することにより、Datadog Postgres インテグレーションを有効にすることができます。
 
 ```
-heroku config:set ENABLE_HEROKU_POSTGRES=true
+heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
 ```
 
 このインテグレーションは、デフォルトで、Postgres の接続 URL が `DATABASE_URL` という名前の環境変数で定義されていることを前提としています (これは Heroku Postgres およびその他の Postgres アドオンのデフォルトの構成です）。
 
-接続 URL が別の環境変数で定義されている場合、または複数の Postgres インスタンスを構成したい場合は、 `POSTGRES_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Postgres インスタンスが 2 つあり、接続文字列が `POSTGRES_URL1` と `POSTGRES_URL2` に格納されている場合は、それに従って `POSTGRES_URL_VAR` を設定します。
+接続 URL が別の環境変数で定義されている場合、または複数の Postgres インスタンスを構成したい場合は、`DD_POSTGRES_URL_VAR` 環境変数に接続文字列の変数名をカンマ区切りで設定します。例えば、Postgres インスタンスが 2 つあり、接続文字列が `POSTGRES_URL1` と `POSTGRES_URL2` に格納されている場合は、それに従って `DD_POSTGRES_URL_VAR` を設定します。
 
 ```
-heroku config:set POSTGRES_URL_VAR=POSTGRES_URL1,POSTGRES_URL2
+heroku config:set DD_POSTGRES_URL_VAR=POSTGRES_URL1,POSTGRES_URL2
 ```
 
 ### その他のインテグレーションを有効にする

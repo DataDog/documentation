@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - サービスカタログ
 aliases:
 - /ja/tracing/faq/service_catalog/
 further_reading:
@@ -24,6 +27,9 @@ kind: documentation
 title: Datadog サービスカタログ
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) ではサービスカタログは利用できません。</div>
+{{< /site-region >}}
 
 {{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="サービスカタログのナビゲーション" style="width:100%;" >}}
 
@@ -55,11 +61,9 @@ APM サービスリストと比較して、サービスカタログには、ト�
 
 ### Ownership ビュー
 
-**Ownership** タブでは、**Contact** と **</>** 列のアイコンをクリックすると、サービス定義で指定されたツールやプロジェクトに移動することができます。例えば、所有するチームの Slack チャンネルや、サービスコードを含む GitHub リポジトリにアクセスすることができます。
+**Ownership** タブでは、**Contact** と **Repo** 列のアイコンをクリックすると、サービス定義で指定されたツールやプロジェクトに移動することができます。例えば、所有するチームの Slack チャンネルや、サービスコードを含む GitHub リポジトリにアクセスすることができます。
 
 **Telemetry** 列には、Datadog がサービスに対して収集しているテレメトリーデータの種類が表示されます。アイコンをクリックすると、対応する Datadog 製品のビューに誘導されます。例えば、Agent は Datadog にトレースを送信し、**Traces** アイコンをクリックすると APM でそれらを表示することができます。
-
-右側のケバブメニューをクリックして、サービス定義を編集するか (存在する場合)、サービスが定義されていない場合は、サービスにリンクします。最初に[ソースコードシステムとのインテグレーションをセットアップする][2]必要があるかもしれません。
 
 **Team** または **On Call** の列で表を並べ替えると、各チームがどのサービスを担当しているかがわかり、所有権と責任がまだ特定されていないサービスを特定できます。
 

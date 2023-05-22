@@ -29,7 +29,7 @@ further_reading:
   - link: "/dashboards/widgets/"
     tag: "Documentation"
     text: "Discover all available Widgets for your Dashboard"
-  - link: "/mobile/#dashboards"
+  - link: "/service_management/mobile/#dashboards"
     tag: "Documentation"
     text: "View your Dashboards on the Mobile App"
   - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
@@ -311,7 +311,7 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile/
+[1]: /service_management/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists
