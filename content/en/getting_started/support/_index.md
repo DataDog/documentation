@@ -15,9 +15,7 @@ Datadog provides two primary channels for customers seeking support:
 
 While both options focus on providing quick and effective solutions, one platform may be better suited depending on the timing, nature, and urgency of the request.
 
-This guide provides best practices for reaching out to the Support team, and guidelines for determining the support channel that’s right for you.
-
-{{< img src="getting_started/support/chat_best_practices.mp4" alt="Spoken summary of best practices for getting started with support" video="true">}}
+This guide provides best practices for reaching out to the Support team, and guidelines for determining the support channel that's right for you.
 
 ## Prerequisites
 
@@ -52,9 +50,9 @@ To get started, click **Live Chat** on the left panel of your Datadog Account.
 
 When a new chat is opened, you are asked if you have a **technical** or **sales** question.
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.
-   - For sales questions, you are routed to the first available member of our sales team, who can answer questions about billing and account management.
+   - For sales questions, you are routed to the first available member of the Datadog sales team, who can answer questions about billing and account management.
 
-**Note**: For urgent issues, it’s best to reach out through a Support Ticket, and indicate why your request is urgent. This ensures that Support leadership can route your case to an appropriate expert immediately. 
+**Note**: For urgent issues, it's best to reach out through a Support Ticket, and indicate why your request is urgent. This ensures that Support leadership can route your case to an appropriate expert immediately. 
 
 ### Best practices for technical questions
 
