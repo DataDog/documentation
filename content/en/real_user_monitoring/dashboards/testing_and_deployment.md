@@ -18,7 +18,6 @@ further_reading:
 
 ## Testing coverage
 
-### Overview
 
 The [Synthetics & RUM application testing coverage dashboard][1] uses data collected from [RUM][2] and results from Synthetic [browser tests][3] to provide insights about the overall testing coverage for your application. 
 

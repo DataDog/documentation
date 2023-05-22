@@ -38,7 +38,7 @@ In addition to dashboards, the list widget can be used in Notebooks as well, all
 
 Visualize the evolution of a single measure (or a [facet][5] unique count of values) over a selected time frame, and optionally, split by an available [facet][5].
 
-{{< img src="real_user_monitoring/explorer/visualize/timeseries-2.png" alt="Timeseries graph in the RUM Explorer" style="width:80%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/timeseries-2.png" alt="Timeseries graph in the RUM Explorer" style="width:90%;" >}}
 
 The timeseries graph depicts the evolution of the number of page views on the Shopist application over the past day for every view path.
 
@@ -51,7 +51,7 @@ You can choose additional display options such as:
 
 Visualize the top values from a facet based on your chosen measure.
 
-{{< img src="real_user_monitoring/explorer/visualize/top_list-2.png" alt="Top list bar graph in the RUM Explorer" style="width:80%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/top_list-2.png" alt="Top list bar graph in the RUM Explorer" style="width:90%;" >}}
 
 The top list includes the top ten browsers used to visit the Shopist website over the last day.
 
@@ -88,7 +88,7 @@ The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful P
 
 For all visualizations besides the [funnel](#funnel), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
 
-{{< img src="real_user_monitoring/explorer/visualize/related_events-2.png" alt="Related events link available when you click on the graph" width="80%" >}}
+{{< img src="real_user_monitoring/explorer/visualize/related_events-2.png" alt="Related events link available when you click on the graph" width="90%" >}}
 
 For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
 
