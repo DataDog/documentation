@@ -85,7 +85,7 @@ When enabled, users with `Modify Index` permission can choose any of the 3-, 7-,
 **Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
 #### Monitors
 
-##### Monitors Time Zone Preference
+##### Monitors time zone preference
 
 Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
 
@@ -93,13 +93,13 @@ Users with the `Org Management` permission can customize the time zone used in a
 
 The setting applies to **all** Monitor alert notifications, as it's an org-wide setting.
 
-#### Synthetic Tests
+#### Synthetic tests
 
 Learn how to access and control [Synthetic Monitoring Settings][13].
 
 ### Security
 
-#### Public Sharing
+#### Public sharing
 
 The **Public Sharing** tab contains lists of shared dashboards and shared graphs. You can also edit your sharing settings by clicking the **Enabled** toggles.
 
@@ -108,11 +108,11 @@ The **Public Sharing** tab contains lists of shared dashboards and shared graphs
 The [**OAuth Apps**][14] page allows you to view or manage OAuth applications in your organization.
 
 ### Compliance
-#### Audit Trail
+#### Audit trail
 
 The **Audit Trail** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
 
-#### Audit Trail Settings
+#### Audit trail settings
 
 The **Audit Trail Settings** tab allows you to set the retention period of audit trails and enable archiving to other cloud storage services.
 
