@@ -5,4 +5,4 @@ core_product:
   - cspm
 ---
 
-A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a Pass or Fail status.
+A finding is the primary primitive for a rule evaluation against a resource. Every time a resource is evaluated against a rule, a finding is generated with a **pass** or **fail** status.
