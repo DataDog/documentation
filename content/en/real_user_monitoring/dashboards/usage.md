@@ -11,6 +11,7 @@ further_reading:
 ---
 
 ## Web usage
+
 ### Overview
 
 The RUM Web App Usage dashboard provides insights about how your customers are using your application. It shows:
@@ -30,8 +31,6 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 
 ## Mobile usage
 
-### Overview
-
 The RUM Mobile App Usage dashboard provides insights about how your customers are using your application.
 
 - **Application usage**:
@@ -49,7 +48,6 @@ For more information about the data displayed, see our documentation for each pl
 
 ## User demographics
 
-### Overview
 
 The RUM User Demographics dashboard gives you insight into geographic adoption of your application.
 
@@ -64,7 +62,6 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 
 ## Frustration signals
 
-### Overview
 
 The RUM Frustration Signals dashboard gives you insight into where your users are getting frustrated, annoyed, or blocked on their workflow. Frustration signals are split into three different types:
 
