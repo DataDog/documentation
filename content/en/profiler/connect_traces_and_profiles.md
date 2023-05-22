@@ -21,7 +21,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ## Identify code hotspots in slow traces
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab-1.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Prerequisites
 
