@@ -12,7 +12,7 @@ further_reading:
 ---
 
 ## Overview
-Version History automatically tracks changes made to your Dashboards and saves previous versions so you can see exactly what was changed and by whom. With this feature you can view previous versions, restore your dashboard to any saved version, or clone a version to create a new dashboard.
+Version History automatically tracks changes made to your dashboards and saves previous versions so you can see exactly what was changed and by whom. You can view previous versions, restore your dashboard to any saved version, or clone a version to create a new dashboard.
 
 ## Prerequisites
 All dashboards retain 30 days worth of version history by default. In order to see any previous versions, an edit must be made within the last 30 days. 
@@ -39,13 +39,13 @@ There are two ways you can restore your dashboard to a previous version.
 
 {{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Your image description" style="width:100%;" >}}
 
-- From the Version History side panel, after you choose the version to restore, click the three dot ellipsis menu and select **Restore this version**.
+- From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this version**.
 - When the Version History side panel opens up, a button appears at the top of the page to **Restore this version**.
 
 Restoring a version updates the dashboard to that version for all users and a new entry is added to the version history showing the restore. This does not overwrite the history of your changes, so you are still able preview and restore to any versions within your retention period. 
 
 ## Clone a version
-If you do not want to change your current dashboard but you'd like to create a copy of a previous version, you can create a clone from any version in your version history. From the Version History side panel after you choose the version you want to make a copy of, click the three dot ellipsis menu and select **Clone**.
+If you do not want to change your current dashboard but you'd like to create a copy of a previous version, you can create a clone from any version in your version history. From the Version History side panel after you choose the version you want to make a copy of, click the kebab menu to the right of a user profile and select **Clone**.
 
 ## Version History retention
 

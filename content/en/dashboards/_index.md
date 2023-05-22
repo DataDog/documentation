@@ -126,9 +126,9 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 ### Settings
 
-#### Version History
+#### Version history
 
-From a dashboard click on the version history icon in the top right corner of the page to open the Version History side panel. Use this feature to preview, restore, or clone your notebook version history. See the [Version History guide][12] for more information.
+From a dashboard click on the version history icon in the top right corner of the page to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
 
 #### Generate public URL
 
@@ -140,7 +140,7 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event explorer][14]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [Events Explorer][14]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
@@ -166,7 +166,7 @@ Any user setting access control rules has to include one or more roles they are 
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
-If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
+If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
 
 **Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
 

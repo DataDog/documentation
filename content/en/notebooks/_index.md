@@ -92,8 +92,8 @@ Hover over the Preview icon for any Notebook to see a preview of the contents, i
 ## Template gallery
 From the [Template Gallery][3], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
-## Version History
-From a notebook click on the cog icon in the top right corner of the page and select the **Version History** option in the menu to open the Version History side panel. Use this feature to preview, restore, or clone your notebook version history. See the [Version History guide][4] for more information.
+## Version history
+From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][4].
 
 ## Notebook configuration
 
