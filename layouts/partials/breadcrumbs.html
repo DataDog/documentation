@@ -5,8 +5,10 @@
 {{ else }}
 {{ $text = replace .File.ContentBaseName "_" " "  }}
 {{ end }}
+{{ if $text }}
 <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>
 &nbsp;>&nbsp;
+{{ end }}
 {{ end }}
 <div id="breadcrumbs" {{- if (eq .Section "api") -}}class="position-relative"{{- end -}}>
     {{- if (eq .Section "api") -}}
