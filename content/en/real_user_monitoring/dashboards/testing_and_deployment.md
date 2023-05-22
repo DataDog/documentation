@@ -70,27 +70,6 @@ This dashboard shows:
 
 For more information about the data displayed, see our documentation for each platform: [iOS RUM][5], [Android RUM][6], [React Native RUM][7], and [Flutter RUM][8].
 
-<!-- ## Manage browser tests
-
-In order to improve your testing coverage and better manage your browser tests, this dashboard can help you answer the following questions:
-
-- What actions are not being tested in your application?
-- What views are the most popular to your users? 
-- What views need more browser tests?
-- What browser tests are covering user actions? 
-
-By testing the most popular sections of your application through Synthetic browser tests, you are alerted when key user journeys in your application are negatively impacted by a code change. You can run tests [directly in your CI/CD pipelines][4] to ensure no regressions occur before releasing code in production. 
-
-To add a browser test for a top view or untested action, click on a view with a low percentage of tested actions under **Top Views** or an action under **Untested Actions** and select **Create a Synthetics browser test** from the dropdown menu. Clicking **View RUM events** navigates you to the [RUM Explorer][5] with an autofilled search query for actions with a specific view name.
-
-The **Top Views** table lists the most popular web pages that users are interacting with, along with the number of real user interactions and the percentage of actions that are tested in browser tests. 
-
-## Explore custom actions
-
-Use the [template variables][6] to customize the data types and filter out your queried data on [custom actions][7]. 
-
-Datadog recommends using custom actions. By default, custom actions are unique and offer more accurate coverage results compared to generated actions. -->
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
