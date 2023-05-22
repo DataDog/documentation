@@ -19,6 +19,10 @@ integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  ec2_cpu_utilization: assets/monitors/ec2_cpu_utilization.json
+  ec2_host_ok: assets/monitors/ec2_host_ok.json
+  ec2_status_check: assets/monitors/ec2_status_check.json
 name: amazon_ec2
 public_title: Datadog-Amazon EC2 インテグレーション
 short_description: インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。
@@ -33,7 +37,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -141,7 +145,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 [3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-iam.html
 [5]: https://app.datadoghq.com/integrations/amazon-ec2
-[6]: https://app.datadoghq.com/monitors#downtime
+[6]: https://app.datadoghq.com/monitors/downtimes
 [7]: https://docs.datadoghq.com/ja/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [8]: https://console.aws.amazon.com/systems-manager/parameters
 [9]: https://app.datadoghq.com/organization-settings/api-keys
