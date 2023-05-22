@@ -183,6 +183,10 @@ main:
     url: getting_started/learning_center/
     parent: getting_started
     weight: 21
+  - name: Support
+    url: getting_started/support/
+    parent: getting_started
+    weight: 22
   - name: Glossary
     url: glossary/
     pre: features
@@ -6743,9 +6747,9 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
-  - name: Trigger Synthetics tests
-    url: '#trigger-synthetics-tests'
-    identifier: synthetics-trigger-synthetics-tests
+  - name: Trigger Synthetic tests
+    url: '#trigger-synthetic-tests'
+    identifier: synthetics-trigger-synthetic-tests
     parent: synthetics
     generated: true
     params:
