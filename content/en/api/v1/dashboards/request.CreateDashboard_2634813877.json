@@ -16,7 +16,8 @@
         "type": "event_stream",
         "query": "example-query",
         "tags_execution": "and",
-        "event_size": "s"
+        "event_size": "s",
+        "show_year": true
       }
     }
   ],
