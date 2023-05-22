@@ -1,13 +1,15 @@
 ---
 title: SLO Checklist
 kind: guide
+aliases:
+- /monitors/guide/slo-checklist/
 further_reading:
-    - link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
-      tag: 'Blog'
-      text: 'Track the status and error budget of your SLOs with Datadog'
-    - link: 'https://learn.datadoghq.com/courses/intro-to-slo'
-      tag: 'Learning Center'
-      text: 'Introduction to Service Level Objectives'
+- link: 'https://www.datadoghq.com/blog/slo-monitoring-tracking/'
+  tag: 'Blog'
+  text: 'Track the status and error budget of your SLOs with Datadog'
+- link: 'https://learn.datadoghq.com/courses/intro-to-slo'
+  tag: 'Learning Center'
+  text: 'Introduction to Service Level Objectives'
 ---
 
 <div class="alert alert-info">
