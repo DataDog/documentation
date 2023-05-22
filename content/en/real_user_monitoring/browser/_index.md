@@ -67,6 +67,8 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
+  });
+DD_RUM.startSessionReplayRecording();
 })
 ```
 
@@ -90,6 +92,8 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackInteractions: true,
+  });
+DD_RUM.startSessionReplayRecording();
 })
 ```
 
@@ -111,6 +115,8 @@ datadogRum.init({
   sampleRate: 100,
   premiumSampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
+  });
+DD_RUM.startSessionReplayRecording();
 })
 ```
 
@@ -132,6 +138,8 @@ datadogRum.init({
   sampleRate: 100,
   replaySampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
+  });
+DD_RUM.startSessionReplayRecording();
 })
 ```
 
@@ -818,7 +826,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -839,7 +849,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -860,7 +872,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -881,7 +895,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -902,7 +918,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -923,7 +941,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -950,7 +970,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -971,7 +993,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -992,7 +1016,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1013,7 +1039,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1034,7 +1062,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1055,7 +1085,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1080,7 +1112,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1099,7 +1133,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1118,7 +1154,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1137,7 +1175,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1156,7 +1196,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1175,7 +1217,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1200,7 +1244,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1219,7 +1265,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1238,7 +1286,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1257,7 +1307,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1276,7 +1328,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
@@ -1295,7 +1349,9 @@ Add the generated code snippet to the head tag (in front of any other script tag
       sampleRate: 100,
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
-    })
+    });
+  DD_RUM.startSessionReplayRecording();
+  })
 </script>
 ```
 {{</ site-region>}}
