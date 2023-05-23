@@ -13,7 +13,7 @@ further_reading:
 - link: /continuous_testing/explorer
   tag: ドキュメント
   text: Synthetic Monitoring &amp; Continuous Testing Explorer について
-- link: /events/explorer
+- link: /service_management/events/explorer
   tag: ドキュメント
   text: イベントエクスプローラーについて
 kind: documentation

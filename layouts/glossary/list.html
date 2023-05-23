@@ -14,7 +14,7 @@
             return this.filteredLetters.length ? this.filteredLetters.includes(firstChar) : true
         },
         shouldShowGlossaryTerm (coreProducts) {
-            return coreProducts.replace(' ','-').includes(this.filterValue)
+            return coreProducts.replaceAll(' ','-').includes(this.filterValue)
         },
         getProductParamValue (queryParam) {
             return (queryParam.includes('?product=') && !queryParam.includes('?product=all')) ? queryParam.replace('?product=', '') : ''
