@@ -1,6 +1,13 @@
 ---
 title: Set up service account impersonation and automatic project discovery for Google Cloud
 kind: guide
+further_reading:
+    - link: 'integrations/google_cloud_platform/'
+      tag: 'Documentation'
+      text: 'Google Cloud Platform Integration'
+    - link: 'https://cloud.google.com/iam/docs/granting-changing-revoking-access'
+      tag: 'Google Cloud'
+      text: 'Manage access to projects, folders, and organizations'
 ---
 
 Instead of using static credentials in private key files, you can use [service account impersonation][1] and automatic project discovery to integrate Datadog with [Google Cloud][2].
@@ -45,9 +52,8 @@ This feature is in beta. Log archiving to Google projects is not supported with 
 1. In Datadog, navigate to the [**Integrations** > **Google Cloud Platform**][10].
 2. Click on **Add GCP Account**. If you have no configured projects, you are automatically redirected to this page.
 3. If you have not generated a Datadog principal for your org, click the **Generate Principal** button.
-4. Copy your Datadog principal. 
+4. Copy your Datadog principal and keep it for the next section.
    {{< img src="integrations/guide/service_account_impersonation/datadog-principal.png" alt="Create service account" style="width:70%;">}}
-   Keep this for the next section.
 5. In the box under **Add Service Account Email**, paste the email (for example, `<sa-name>@datadog-sandbox.iam.gserviceaccount.com`) associated with the Google service account. This email is listed under the **Service Account** > **Details** tab in your Google Cloud console.
 6. Click on **Verify and Save Account**.
 
@@ -79,6 +85,8 @@ Automatic project discovery simplifies to process of adding additional rpojects 
    * Compute Viewer
    * Monitoring Viewer
    * Cloud Asset Viewer
+
+
    **Note**: The Browser role is only required in the default project of the service account.
 6. Click **Save**.
 
