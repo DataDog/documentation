@@ -70,5 +70,5 @@ Find out if data is reaching its destination and get full visibility into any la
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/installation/
+[1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/configurations/
