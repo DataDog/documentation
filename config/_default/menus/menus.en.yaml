@@ -379,7 +379,7 @@ main:
     parent: agent
     weight: 12
   - name: Aggregating Agents
-    url: getting_started/observability_pipelines/
+    url: observability_pipelines/setup/
     parent: agent
     identifier: opw_aggregation
     weight: 13
@@ -2555,8 +2555,8 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
-  - name: Getting Started
-    url: getting_started/observability_pipelines/
+  - name: Setup
+    url: observability_pipelines/setup/
     parent: observability_pipelines
     weight: 1
   - name: Production Deployment Overview
