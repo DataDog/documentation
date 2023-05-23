@@ -91,6 +91,6 @@ To add and configure event processing pipelines, visit the [Enrich & Normalize][
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [19]: /getting_started/tagging/unified_service_tagging/
 [20]: /integrations/guide/reference-tables/
-[21]: /event/pipelines/
+[21]: https://app.datadoghq.com/event/pipelines
 [22]: /help/
 [23]: /logs/log_configuration/processors/
