@@ -8,7 +8,7 @@ doc_link: https://docs.datadoghq.com/integrations/azure_app_configuration/
 draft: false
 git_integration_title: azure_app_configuration
 has_logo: true
-integration_id: ''
+integration_id: azure-app-configuration
 integration_title: Microsoft Azure App Configuration
 integration_version: ''
 is_public: true

@@ -23,9 +23,14 @@ content/en/api/tsconfig.json
 temp
 
 # Developers/integrations
+content/en/developers/integrations/_index.md
+content/en/developers/integrations/create_an_integration.md
+content/en/developers/integrations/create_a_tile.md
+content/en/developers/integrations/develop_an_offering.md
 content/en/developers/integrations/*.md
 content/en/developers/datadog_apps.md
 content/en/developers/integrations/api_integration.md
+content/en/developers/integrations/agent_integration.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md

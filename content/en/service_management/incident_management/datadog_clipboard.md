@@ -22,7 +22,7 @@ The Clipboard works on all pages in Datadog and keeps a record of all graphs cop
 
 ## Opening the Clipboard
 
-To open the Clipboard, copy any graph and click **Open Clipboard** in the toast.
+To open the Clipboard, copy any graph and click **Open Clipboard** in the popup.
 
 {{< img src="monitors/incidents/open-clipboard.png" alt="Open a graph in the Clipboard" style="width:80%;">}}
 
