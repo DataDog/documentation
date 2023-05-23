@@ -2333,9 +2333,6 @@ components:
           description: Query to filter the event stream with.
           example: ''
           type: string
-        show_year:
-          description: Option to display the year in the date column.
-          type: boolean
         tags_execution:
           description: The execution method for multi-value filters. Can be either
             and or or.
