@@ -1,9 +1,9 @@
 ---
-title: Set up service account impersonation and automatic discovery for Google Cloud
+title: Set up service account impersonation and automatic project discovery for Google Cloud
 kind: guide
 ---
 
-Instead of using static credentials in private key files, you can use [service account impersonation][1] and automatic discovery to integrate Datadog with [Google Cloud][2].
+Instead of using static credentials in private key files, you can use [service account impersonation][1] and automatic project discovery to integrate Datadog with [Google Cloud][2].
 
 This solution enables you to monitor all projects visible to a service account by assigning the required roles in the relevant projects. You can assign these roles to projects individually, or you can configure Datadog to monitor groups of projects by assigning these roles at the organization or folder level. Assigning roles in this way allows Datadog to automatically discover and monitor all projects in the given scope, including any new projects that may be added to the group in the future. 
 
@@ -15,7 +15,7 @@ This feature is in beta. Log archiving to Google projects is not supported with 
 
 * If your organization restricts identities by domain, you must add Datadog’s customer identity as an allowed value in your policy. Datadog’s customer identity: `C0147pk0i`
 
-* Service account impersonation and automatic discovery rely on having certain roles and APIs enabled to monitor projects. Before you start, ensure the following APIs are enabled for the projects you want to monitor:
+* Service account impersonation and automatic project discovery rely on having certain roles and APIs enabled to monitor projects. Before you start, ensure the following APIs are enabled for the projects you want to monitor:
   * [Cloud Resource Manager API][3]
   * [Google Cloud Billing API][4]
   * [Cloud Monitoring API][5]
@@ -38,7 +38,50 @@ This feature is in beta. Log archiving to Google projects is not supported with 
   * Browser
 6. Click **CONTINUE**, then **DONE** to complete creating the service account.
 
-{{< img src="integration/guide/service_account_impersonation/create-service-account.png" alt="Create service account" style="width:100%;">}}
+{{< img src="integrations/guide/service_account_impersonation/create-service-account.png" alt="Create service account" style="width:100%;">}}
+
+#### 2. Add your GCP account in Datadog
+
+1. In Datadog, navigate to the [**Integrations** > **Google Cloud Platform**][10].
+2. Click on **Add GCP Account**. If you have no configured projects, you are automatically redirected to this page.
+3. If you have not generated a Datadog principal for your org, click the **Generate Principal** button.
+4. Copy your Datadog principal. 
+   {{< img src="integrations/guide/service_account_impersonation/datadog-principal.png" alt="Create service account" style="width:100%;">}}
+   Keep this for the next section.
+5. In the box under **Add Service Account Email**, paste the email (for example, `<sa-name>@datadog-sandbox.iam.gserviceaccount.com`) associated with the Google service account. This email is listed under the **Service Account** > **Details** tab in your Google Cloud console.
+6. Click on **Verify and Save Account**.
+
+#### 3. Add the Datadog principal to your service account
+
+1. In [Google Cloud console][9], under the **Service Acounts** menu, find the service account you created in the [first section](#1-create-your-google-cloud-service-account).
+2. Go to the **Permissions** tab and click on **Grant Access**.
+   {{< img src="integrations/guide/service_account_impersonation/grant-access.png" alt="Create service account" style="width:100%;">}}
+3. Paste your Datading principal into the **New principals** text box.
+4. Assign the role of **Service Account Token Creator** and click **Save**.
+{{< img src="integrations/guide/service_account_impersonation/add-principals.png" alt="Create service account" style="width:100%;">}}
+
+In approximately fifteen minutes, metrics appear in Datadog.
+
+**Note**: If you previously configured access using a shared Datadog principal, you can revoke the permission for that principal after you complete these steps.
+
+#### 4. Assign roles to other projects (optional)
+
+Automatic project discovery simplifies to process of adding additional rpojects to be monitored. If you grant your service account access to other projects, folders, or orgs, Datadog discovers these projects (and any projects nested in the folders or orgs) and automatically adds them to your integration tile.
+
+1. Make sure you have the appropriate permissions to assign roles at the desired scope:
+   * Project IAM Admin (or higher)
+   * Folder Admin
+   * Organization Admin
+2. In the Google Cloud console, go to the **IAM** page.
+3. Select a project, folder, or organization.
+4. To grant a role to a principal that does not already have other roles on the resource, click **Grant Access**, then enter the email of the service account you created earlier.
+5. Assign the following roles:
+   * Compute Viewer
+   * Monitoring Viewer
+   * Cloud Asset Viewer
+   **Note**: The Browser role is only required in the default project of the service account.
+6. Click **Save**.
+
 
 
 
@@ -51,3 +94,4 @@ This feature is in beta. Log archiving to Google projects is not supported with 
 [7]: https://console.cloud.google.com/apis/library/cloudasset.googleapis.com
 [8]: https://console.cloud.google.com/apis/library/iam.googleapis.com
 [9]: https://console.cloud.google.com/
+[10]: https://app.datadoghq.com/integrations/google-cloud-platform
