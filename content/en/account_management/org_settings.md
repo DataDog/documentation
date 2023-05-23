@@ -13,7 +13,8 @@ further_reading:
 The Organization Settings section is available to [Administrators][1] by clicking **Organization Settings** from the account menu in the bottom of the left side navigation or by selecting **Organization Settings** from the header dropdown at the top of the Personal Settings page.
 
 Organization Settings allow you to manage users, groups, RBAC, keys, and tokens. This page outlines every section and where in the documentation you can learn about specific tasks in **Organization Settings**.
-### Identity & Accounts
+
+## Identity & Accounts
 #### Users
 
 Read the [user management][2] documentation to add, edit, and disable users.
@@ -26,13 +27,14 @@ Read the [Teams][3] documentation to manage teams for organizing your assets wit
 
 [Service accounts][4] are non-interactive accounts that you can use to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once by the individual who created the key. You can use service accounts to access Datadog APIs without associating your application or script with a particular person.
 
-### Authentication
+## Authentication
 
 #### Login methods
 
 The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
 
 Read the [Configuring Login Methods][5] documentation to authenticate users to log into your Datadog organization.
+
 ##### SAML settings
 
 To learn how to configure SAML, read the [Single sign on with SAML documentation][6].
@@ -44,7 +46,7 @@ When enabled, users logging in with SAML to your Datadog account are permanently
 Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
 To learn how to create and set mappings, read the [Mapping SAML attributes documentation][7].
 
-### Access
+## Access
 
 #### API keys
 
@@ -70,7 +72,7 @@ Client tokens are used to send events and logs from your user's web and mobile a
 
 If your application does not have an existing Datadog integration, and you don't want to create a custom Agent check, you can send events with email. To learn how to set up events API emails, read the [Events with email guide][12].
 
-### Products
+## Products
 
 #### Logs
 
@@ -97,7 +99,7 @@ The setting applies to **all** Monitor alert notifications, as it's an org-wide 
 
 Learn how to access and control [Synthetic Monitoring Settings][13].
 
-### Security
+## Security
 
 #### Public sharing
 
@@ -107,7 +109,7 @@ The **Public Sharing** tab contains lists of shared dashboards and shared graphs
 
 The [**OAuth Apps**][14] page allows you to view or manage OAuth applications in your organization.
 
-### Compliance
+## Compliance
 #### Audit trail
 
 The **Audit Trail** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
@@ -116,7 +118,7 @@ The **Audit Trail** tab in the Organization Settings page opens a new tab to the
 
 The **Audit Trail Settings** tab allows you to set the retention period of audit trails and enable archiving to other cloud storage services.
 
-### General
+## General
 
 #### Preferences
 
