@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/azure-datadog-partnership"
     tag: Blog
     text: "Microsoft partnership embeds Datadog natively in the Azure portal"
+  - link: "https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/"
+    tag: Blog
+    text: "Enable monitoring for enterprise-scale Azure environments in minutes with Datadog"
 ---
 
 <div class="alert alert-warning">
