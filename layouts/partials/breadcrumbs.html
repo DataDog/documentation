@@ -1,37 +1,17 @@
-{{ define "partials/breadcrumb-link.html" }}
-{{ $text := "" }}
-{{ if eq .File.Dir "/" }}
-{{ $text = i18n "docs" }}
-{{ else }}
-{{ $text = replace .File.ContentBaseName "_" " "  }}
-{{ end }}
-{{ if $text }}
-<a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>
-&nbsp;>&nbsp;
-{{ end }}
-{{ end }}
+{{- $text := "" -}}
 <div id="breadcrumbs" {{- if (eq .Section "api") -}}class="position-relative"{{- end -}}>
-    {{- if (eq .Section "api") -}}
-      <a class="text-uppercase text-gray-darkish" href="{{ "" | absLangURL }}">{{ i18n "docs" }}</a>
-          &nbsp;>&nbsp;
-      {{ with .Page.Parent }}
-          {{ if ne .File.Path "api/_index.md" }}
-          <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ .Title }}</a>
-          &nbsp;>&nbsp;
-          {{ end }}
+    {{- range .Ancestors.Reverse }}
+      {{ if eq .File.Dir "/" }}
+        {{ $text = i18n "docs" }}
+      {{ else }}
+        {{ $text = .Title }}
       {{ end }}
-    {{ else }}
-      {{ with .Page.Parent }}
-          {{ with .Parent }}
-              {{ with .Parent }}
-                  {{ partial "breadcrumb-link.html" . }}
-              {{ end }}
-              {{ partial "breadcrumb-link.html" . }}
-          {{ end }}
-          {{ partial "breadcrumb-link.html" . }}
+      {{ if (ne .File.Path "api/_index.md") }}
+      <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>
+&nbsp;>&nbsp;
       {{ end }}
-    {{ end }}
-    <a class="text-primary text-uppercase" href="{{ .Page.RelPermalink }}">
+    {{- end }}
+    <a class="text-primary text-uppercase" href="{{ .RelPermalink }}">
       {{ if and (eq .Section "integrations") (.Params.integration_title) }}
         {{ .Params.integration_title }}
       {{ else }}
