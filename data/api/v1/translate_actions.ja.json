@@ -819,21 +819,21 @@
     "summary": "ロケーションをすべて取得する（パブリックおよびプライベート）"
   },
   "CreatePrivateLocation": {
-    "description": "新しい Synthetics プライベートロケーションを作成します。",
+    "description": "新しい Synthetic プライベートロケーションを作成します。",
     "summary": "プライベートロケーションを作成する",
     "request_description": "作成するプライベートロケーションの詳細。",
     "request_schema_description": "作成するプライベートロケーションに関する情報を含むオブジェクト。"
   },
   "DeletePrivateLocation": {
-    "description": "Synthetics プライベートロケーションを削除します。",
+    "description": "Synthetic プライベートロケーションを削除します。",
     "summary": "プライベートロケーションを削除する"
   },
   "GetPrivateLocation": {
-    "description": "Synthetics プライベートロケーションを取得します。",
+    "description": "Synthetic プライベートロケーションを取得します。",
     "summary": "プライベートロケーションを取得する"
   },
   "UpdatePrivateLocation": {
-    "description": "Synthetics プライベートロケーションを編集します。",
+    "description": "Synthetic プライベートロケーションを編集します。",
     "summary": "プライベートロケーションを編集する",
     "request_description": "更新するプライベートロケーションの詳細。",
     "request_schema_description": "作成するプライベートロケーションに関する情報を含むオブジェクト。"
@@ -885,7 +885,7 @@
     "summary": "ブラウザテストの最新結果概要を取得"
   },
   "GetBrowserTestResult": {
-    "description": "特定の (ブラウザ) Synthetic テストの完全な結果を取得します。",
+    "description": "特定の Synthetic ブラウザテストの完全な結果を取得します。",
     "summary": "ブラウザテストの結果を取得"
   },
   "DeleteTests": {
@@ -895,19 +895,19 @@
     "request_schema_description": "削除したい Synthetic テスト ID の \nJSON リスト。"
   },
   "TriggerTests": {
-    "description": "Synthetics のテストのセットをトリガーします。",
-    "summary": "Synthetics テストをトリガーする",
+    "description": "Synthetic テストのセットをトリガーします。",
+    "summary": "Synthetic テストをトリガーする",
     "request_description": "トリガーするテストの識別子。",
-    "request_schema_description": "トリガーする Synthetics テストを記述するオブジェクト。"
+    "request_schema_description": "トリガーする Synthetic テストを記述するオブジェクト。"
   },
   "TriggerCITests": {
-    "description": "継続的なインテグレーションに向けた一連の Synthetics テストをトリガーします。",
+    "description": "継続的なインテグレーションに向けた一連の Synthetic テストをトリガーします。",
     "summary": "CI/CD パイプラインからのテストをトリガー",
     "request_description": "トリガーするテストの詳細。",
     "request_schema_description": "トリガーする Synthetics テストを記述するオブジェクト。"
   },
   "GetTest": {
-    "description": "Synthetics テストに関連する詳細なコンフィギュレーションを取得します。",
+    "description": "Synthetic テストに関連する詳細なコンフィギュレーションを取得します。",
     "summary": "テストコンフィギュレーションを取得する"
   },
   "UpdateTest": {
@@ -921,11 +921,11 @@
     "summary": "API テストの最新結果概要を取得"
   },
   "GetAPITestResult": {
-    "description": "特定の (API) Synthetic テストの完全な結果を取得します。",
+    "description": "特定の Synthetic API テストの完全な結果を取得します。",
     "summary": "API テスト結果を取得"
   },
   "UpdateTestPauseStatus": {
-    "description": "Synthetics テストのステータスを変更し、一時停止または開始します。",
+    "description": "Synthetic テストのステータスを変更し、一時停止または開始します。",
     "summary": "テストを一時停止または開始する",
     "request_description": "特定の Synthetic テストに設定されるステータス。",
     "request_schema_description": "既存の Synthetic テストを開始または一時停止するオブジェクト。"

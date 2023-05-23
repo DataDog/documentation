@@ -15,6 +15,7 @@ The Organization Settings section is available to [Administrators][1] by clickin
 Organization Settings allow you to manage users, groups, RBAC, keys, and tokens. This page outlines every section and where in the documentation you can learn about specific tasks in **Organization Settings**.
 
 ## Identity & Accounts
+
 ### Users
 
 Read the [user management][2] documentation to add, edit, and disable users.
@@ -25,11 +26,13 @@ Read the [Teams][3] documentation to manage teams for organizing your assets wit
 
 ### Service accounts
 
+
 [Service accounts][4] are non-interactive accounts that you can use to own application keys and other resources that are shared across your teams. Service account application keys can only be viewed once by the individual who created the key. You can use service accounts to access Datadog APIs without associating your application or script with a particular person.
 
 ## Authentication
 
 ### Login methods
+
 
 The **Login Methods** tab shows password, Google, and SAML authentication settings. You can toggle each with the **Enabled by Default** dropdowns. In order to be "SAML Strict" or strict for any other type of login, disable the other login method types. You can allow per-user overrides in the User Management tab to allow users to login with another login method if needed.
 
@@ -76,7 +79,8 @@ If your application does not have an existing Datadog integration, and you don't
 
 ### Logs
 
-#### Out-of-contract retention periods for log indexes
+
+##### Out-of-contract retention periods for log indexes
 
 Users with `Org Management` permission can enable the out-of-contract retention periods feature for log indexes. This feature is enabled on a per-org basis. This means that if a user enables the feature on a parent org, the feature is not automatically enabled for all child orgs.
 
@@ -85,9 +89,11 @@ Users with `Org Management` permission can enable the out-of-contract retention 
 When enabled, users with `Modify Index` permission can choose any of the 3-, 7-, 15-, 30-, 45-, and 60-day retention periods, even if it is not in the contract. This can be useful when troubleshooting a potential long standing issue or meeting compliance requirements for which customers need a higher retention period that is not part of the current contract.
 
 **Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
+
 ### Monitors
 
 #### Monitors time zone preference
+
 
 Users with the `Org Management` permission can customize the time zone used in alert graph snapshots within Monitor alert notifications.
 
@@ -110,6 +116,7 @@ The **Public Sharing** tab contains lists of shared dashboards and shared graphs
 The [**OAuth Apps**][14] page allows you to view or manage OAuth applications in your organization.
 
 ## Compliance
+
 ### Audit trail
 
 The **Audit Trail** tab in the Organization Settings page opens a new tab to the Audit Events Explorer.
@@ -123,11 +130,13 @@ The **Audit Trail Settings** tab allows you to set the retention period of audit
 ### Preferences
 
 #### Organization name
+
 To rename your organization, click the **Edit** button in the **Preferences** tab of **Organization Settings**, enter the new name, then click the **Save** button.
 
 **Note**: Your organization name must not exceed 32 characters.
 
 #### Datadog homepage
+
 You can choose to set your organization homepage to a Dashboard List or an individual dashboard.
 
 ## Further reading
