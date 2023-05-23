@@ -175,18 +175,14 @@ main:
     url: getting_started/application_security/
     parent: getting_started
     weight: 19
-  - name: Observability Pipelines
-    url: getting_started/observability_pipelines/
-    parent: getting_started
-    weight: 20
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 21
+    weight: 20
   - name: Support
     url: getting_started/support/
     parent: getting_started
-    weight: 22
+    weight: 21
   - name: Glossary
     url: glossary/
     pre: features
@@ -386,16 +382,11 @@ main:
     identifier: agent_guides
     parent: agent
     weight: 12
-  - name: Aggregating Agents
-    url: getting_started/observability_pipelines/
-    parent: agent
-    identifier: opw_aggregation
-    weight: 13
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 14
+    weight: 13
   - name: Containers
     url: containers/
     identifier: containers
@@ -2563,10 +2554,9 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
-  - name: Installation
-    url: observability_pipelines/installation/
+  - name: Setup
+    url: observability_pipelines/setup/
     parent: observability_pipelines
-    identifier: observability_pipelines_installation
     weight: 1
   - name: Production Deployment Overview
     url: observability_pipelines/production_deployment_overview/
