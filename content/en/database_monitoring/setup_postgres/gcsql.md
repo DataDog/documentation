@@ -136,7 +136,7 @@ To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and
 
 To configure Database Monitoring metrics collection for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
 
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options. The location of the `postgres.d` directory depends on your operating system. For more information, see [Agent Configuration Directory][4].
+1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options. The location of the `postgres.d` directory depends on your operating system. For more information, see [Agent configuration directory][4].
    ```yaml
    init_config:
    instances:
