@@ -21870,10 +21870,11 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"message\": \"{{ unique }}\",\n  \"start\": {{ timestamp(\"now\")
-              }},\n  \"timezone\": \"Etc/UTC\",\n  \"scope\": [\"test:{{ unique_lower_alnum
-              }}\"],\n  \"recurrence\": {\n    \"type\": \"weeks\",\n    \"period\":
-              1,\n    \"week_days\": [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n
-              \   \"until_date\": {{ timestamp(\"now + 21d\")}}\n  }\n}"
+              }},\n  \"end\": {{ timestamp(\"now + 1h\") }},\n  \"timezone\": \"Etc/UTC\",\n
+              \ \"scope\": [\"test:{{ unique_lower_alnum }}\"],\n  \"recurrence\":
+              {\n    \"type\": \"weeks\",\n    \"period\": 1,\n    \"week_days\":
+              [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n    \"until_date\":
+              {{ timestamp(\"now + 21d\")}}\n  }\n}"
           step: there is a valid "downtime" in the system
       x-menu-order: 2
       x-undo:
