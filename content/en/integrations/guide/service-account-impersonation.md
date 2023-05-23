@@ -47,28 +47,32 @@ This feature is in beta. Log archiving to Google projects is not supported with 
 
 {{< img src="integrations/guide/service_account_impersonation/create-service-account.png" alt="Create service account" style="width:70%;">}}
 
-### 2. Add your GCP account in Datadog
+### 2. Add the Datadog principal to your service account
 
 1. In Datadog, navigate to the [**Integrations** > **Google Cloud Platform**][10].
 2. Click on **Add GCP Account**. If you have no configured projects, you are automatically redirected to this page.
 3. If you have not generated a Datadog principal for your org, click the **Generate Principal** button.
 4. Copy your Datadog principal and keep it for the next section.
    {{< img src="integrations/guide/service_account_impersonation/datadog-principal.png" alt="Create service account" style="width:70%;">}}
-5. In the box under **Add Service Account Email**, paste the email (for example, `<sa-name>@datadog-sandbox.iam.gserviceaccount.com`) associated with the Google service account. This email is listed under the **Service Account** > **Details** tab in your Google Cloud console.
-6. Click on **Verify and Save Account**.
-
-### 3. Add the Datadog principal to your service account
-
-1. In [Google Cloud console][9], under the **Service Acounts** menu, find the service account you created in the [first section](#1-create-your-google-cloud-service-account).
-2. Go to the **Permissions** tab and click on **Grant Access**.
+   Keep this window open for the [next section](#3-complete-the-integration-setup-in-datadog)
+5. In [Google Cloud console][9], under the **Service Acounts** menu, find the service account you created in the [first section](#1-create-your-google-cloud-service-account).
+6. Go to the **Permissions** tab and click on **Grant Access**.
    {{< img src="integrations/guide/service_account_impersonation/grant-access.png" alt="Create service account" style="width:70%;">}}
-3. Paste your Datading principal into the **New principals** text box.
-4. Assign the role of **Service Account Token Creator** and click **Save**.
-{{< img src="integrations/guide/service_account_impersonation/add-principals.png" alt="Create service account" style="width:70%;">}}
-
-In approximately fifteen minutes, metrics appear in Datadog.
+7. Paste your Datading principal into the **New principals** text box.
+8. Assign the role of **Service Account Token Creator** and click **Save**.
+   {{< img src="integrations/guide/service_account_impersonation/add-principals.png" alt="Create service account" style="width:70%;">}}
 
 **Note**: If you previously configured access using a shared Datadog principal, you can revoke the permission for that principal after you complete these steps.
+
+### 3. Complete the integration setup in Datadog
+
+1. In your Google Cloud console, navigate to the **Service Account** > **Details** tab. There, you can find the email associated with this Google service account. It resembles `<sa-name>@datadog-sandbox.iam.gserviceaccount.com`.
+2. Copy this email.
+3. Return to the integration configuration tile in Datadog (where you coppied your Datadog principal in the [previous section](#2-add-the-datadog-principal-to-your-service-account)).
+4. In the box under **Add Service Account Email**, paste the email (for example, ) associated with the Google service account. This email is listed under  in your Google Cloud console.
+5. Click on **Verify and Save Account**.
+
+In approximately fifteen minutes, metrics appear in Datadog.
 
 ### 4. Assign roles to other projects (optional)
 
