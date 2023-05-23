@@ -60,8 +60,10 @@ To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
+There are no provider-specific requirements for APT-based Linux.
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
+There are no provider-specific requirements for RPM-based Linux.
 {{% /tab %}}
 {{< /tabs >}}
 
