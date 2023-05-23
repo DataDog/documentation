@@ -1,0 +1,138 @@
+---
+title: Azure Native Integration Manual Setup Guide
+kind: guide
+description: "Steps for manually setting up the Datadog Azure native integration"
+further_reading:
+- link: "https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/"
+  tag: "Documentation"
+  text: "Why should I install the Datadog Agent on my cloud instances?"
+- link: "https://docs.datadoghq.com/integrations/guide/azure-portal/"
+  tag: "Documentation"
+  text: "Datadog in the Azure Portal"
+- link: "https://www.datadoghq.com/blog/azure-government-monitoring-datadog/"
+  tag: "Blog"
+  text: "Monitor Azure Government with Datadog"
+- link: "https://www.datadoghq.com/blog/azure-container-apps/"
+  tag: "Blog"
+  text: "Monitor Azure Container Apps with Datadog"
+- link: "https://www.datadoghq.com/blog/how-to-monitor-microsoft-azure-vms/"
+  tag: "Blog"
+  text: "How to Monitor Microsoft Azure VMs"
+- link: "https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/"
+  tag: "Blog"
+  text: "Explore Azure App Service with the Datadog Serverless view"
+---
+
+{{< site-region region="us3" >}}
+
+## Overview
+
+If your Datadog organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a Datadog resource in Azure to link your Azure subscriptions to your Datadog organization. This replaces the App Registration credential process used by the standard Azure integration for metric collection and Event Hub setup for log forwarding.
+
+### Prerequisites
+
+#### Required permissions
+
+To set up the Azure Native integration, you must be an **Owner** on any Azure subscriptions you want to link, and **Admin** for the Datadog org you are linking them to. Ensure you have the appropriate access before starting the setup.
+
+## Setup
+
+Configuring the Azure integration requires the creation of a Datadog resource in Azure. These resources represent the connection or link between a Datadog organization and an Azure subscription. A Datadog resource is needed for each subscription you wish to monitor with Datadog. 
+
+There are two options when you create a Datadog resource in Azure:
+
+1. Link to an existing Datadog organization. This is the more common action. Use this to configure your Datadog org to monitor an Azure subscription that hasn't been linked yet. This action does not affect your Datadog billing plan.
+
+2. Create a new Datadog organization. This flow is less common. Use this if you do not yet have a Datadog org and you want to get started with a paid plan through Azure Marketplace. This flow creates a brand new Datadog org, allows you to select a billing plan, and links the associated Azure subscription for monitoring.
+
+**Note**: Trials are not available through the **Create a new Datadog organization** option in Azure. To get started with a free trial, first [create a trial Datadog org on the US3 site][1]. Then use the linking flow to add any subscriptions you want to monitor.
+
+Once you create a Datadog resource, data collection begins for the associated subscription. See details for using this resource to configure, manage, and deploy Datadog in the [Managing the Azure Native Integration][2] guide.
+
+### Create a Datadog resource
+
+To start monitoring an Azure subscription, navigate to the [Datadog Service page in Azure][3] and select the option to create a new Datadog resource:
+{{< img src="integrations/azure/azure-us3-dd-service.png" alt="Azure US3 Datadog Service" responsive="true" style="width:90%;">}}
+
+Choose **Link Azure subscription to an existing Datadog organization** or **Create a new Datadog organization**. Linking is the more common action. Use this to configure monitoring for an Azure subscription that hasn't been linked yet. Only choose the **Create** flow if you are not yet a Datadog customer and want to get started with a new, paid plan.
+
+{{< img src="integrations/azure/azure-us3-create-dd-resource1.png" alt="Azure US3 create a Datadog resource" responsive="true" style="width:90%;">}}
+
+**Note**: New Datadog organizations created through the Azure portal automatically have billing consolidated into their Azure invoice. This usage counts towards your organization's [MACC][4] if applicable.
+
+### SSO configuration
+
+_(Optional)_: You can configure [single sign-on (SSO)][5] during the process of creating a new Datadog organization in Azure. You can also configure SSO later. To configure SSO during the initial creation, first create a Datadog enterprise gallery app.
+
+### Configuration {#configuration-us3}
+
+{{< tabs >}}
+{{% tab "Link" %}}
+
+#### Basics {#basics-link}
+
+After selecting to link to an existing Datadog organization, the portal displays a form for creating the Datadog resource:
+{{< img src="integrations/azure/azure-us3-link-sub.png" alt="Link Azure subscription to an existing Datadog organization" responsive="true" style="width:90%;">}}
+
+Provide the following values:
+
+| Property             | Description                                                                                                                                                                                                                  |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Subscription         | The Azure subscription you want to monitor with Datadog. The Datadog resource exists in this subscription. You must have owner access.                                                                                       |
+| Resource group       | Create a new resource group or use an existing one. A [resource group][5] is a container that holds related resources for an Azure solution.                                                                                 |
+| Resource name        | Specify a name for the Datadog resource. The recommended naming convention is: `subscription_name-datadog_org_name`.                                                                                                         |
+| Location             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
+| Datadog organization | After the authentication step is completed, the Datadog organization name is set to the name of the Datadog organization being linked. The Datadog site is set to US3.                                                                                                                                |
+
+Click **Link to Datadog organization** to open a Datadog authentication window, then sign in to Datadog.
+
+By default, Azure links your current Datadog organization to your Datadog resource. If you want to link to a different organization, select the appropriate organization in the authentication window:
+
+{{< img src="integrations/azure/azure-us3-select-org.png" alt="Azure US3 select Datadog organization" responsive="true" style="width:90%;">}}
+
+When the OAuth flow is complete, verify the Datadog organization name is correct.
+
+[1]: https://docs.datadoghq.com/getting_started/site/
+[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+[5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+{{% /tab %}}
+{{% tab "Create" %}}
+
+#### Basics {#basics-create}
+
+After selecting to create a new Datadog organization, the portal displays a form for creating both the Datadog resource and the new Datadog organization:
+{{< img src="integrations/azure/azure-us3-create-dd-resource2.png" alt="Azure US3 create a Datadog resource" responsive="true" style="width:90%;">}}
+
+Provide the following values:
+
+| Property             | Description                                                                                                                                                                                                                  |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Subscription         | The Azure subscription you want to monitor with Datadog. The Datadog resource exists in this subscription. You must have owner access.                                                                                       |
+| Resource group       | Create a new resource group or use an existing one. A [resource group][2] is a container that holds related resources for an Azure solution.                                                                                 |
+| Resource name        | The name for the Datadog resource. This name is assigned to the new Datadog organization.                                                                                                                                    |
+| Location             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
+| Datadog organization | The Datadog organization name is set to the resource name, and the Datadog site is set to US3.                                                                                                                                |
+| Pricing plan         | A list of the available Datadog pricing plans. If you have a private offer, it iss available in this dropdown.                                                                                                                 |
+| Billing term         | Monthly.                                                                                                                                                                                                                      |
+
+[1]: https://docs.datadoghq.com/getting_started/site/
+[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://us3.datadoghq.com/signup
+[2]: https://docs.datadoghq.com/integrations/guide/azure-portal/
+[3]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
+[4]: https://learn.microsoft.com/en-us/partner-center/marketplace/azure-consumption-commitment-enrollment
+[5]: https://docs.datadoghq.com/integrations/azure/?tab=link#saml-sso-configuration
+{{< /site-region >}}
+
+{{< site-region region="us,eu,us5,gov,ap1" >}}
+<div class="alert alert-warning">The Azure native integration is only available for users on Datadog's US3 site. If you're not using Datadog's US3 site, see the <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/" target="_blank">Azure Manual Setup Guide</a> for instructions on creating an app registration with read permissions to your Azure subscriptions.</div>
+
+If your Datadog organization is hosted on Datadog's US3 site, select **US3** in the side panel of this page or [change the site selector][1] to ensure you're seeing the US3 version of the documentation.
+
+[1]: ?site=us3
+{{< /site-region >}}
