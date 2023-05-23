@@ -17,7 +17,7 @@ title: インテグレーションアセットリファレンス
 ---
 ## 概要
 
-このページでは、[**Integrations** ページ][12]または [**Marketplace** ページ][11]で製品を開発する方法について説明します。
+このページでは、[** Integrations** ページ][12]または [**Marketplace** ページ][9]で製品を作成するために入力する必要があるファイルについて説明します。
 
 ## 構成ファイル
 
@@ -142,7 +142,7 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 [6]: https://docs.datadoghq.com/ja/metrics/types/#metric-types
 [7]: https://docs.datadoghq.com/ja/metrics/units/#unit-list
 [8]: https://docs.datadoghq.com/ja/getting_started/tagging/
-[9]: https://docs.datadoghq.com/ja/developers/marketplace/
+[9]: https://app.datadoghq.com/marketplace/
 [10]: https://docs.datadoghq.com/ja/developers/datadog_apps/
-[11]: https://docs.datadoghq.com/ja/developers/marketplace/
+[11]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering
 [12]: https://app.datadoghq.com/integrations
