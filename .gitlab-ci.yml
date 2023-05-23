@@ -103,7 +103,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-15641318
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-16052913
   tags:
     - "arch:amd64"
   rules:
@@ -387,10 +387,6 @@ link_checks:on-schedule:
     - find ./public -name "*.html" -exec sed -i -e "s#/api/v2/#/api/latest/#g" {} +
     - "sed -i'' -e 's/CheckInternalHash: false/CheckInternalHash: true/' .htmltest.yml"
     - htmltest
-  after_script:
-    - "[ -f /usr/local/bin/helpers.sh ] && source /usr/local/bin/helpers.sh"  # source helpers
-    - RESULT="⛈ htmltest result; the following issues were found:\n$(tail -n +2 ./tmp/.htmltest/htmltest.log)\n--------------------" # output all but first line
-    - if grep -q "not exist" tmp/.htmltest/htmltest.log; then notify_slack "${RESULT}" "#31b834"; fi
   artifacts:
     paths:
       - ./tmp/.htmltest
@@ -485,19 +481,4 @@ set_redirect_metadata_live:
     - build_live
   script:
     - in-isolation run_update_redirect_metadata
-  interruptible: true
-
-synthetic_tests_preview:
-  <<: *base_template
-  <<: *preview_rules
-  stage: post-deploy
-  environment: "preview"
-  variables:
-    URL: ${PREVIEW_DOMAIN}
-  allow_failure: false
-  cache: {}
-  dependencies:
-    - build_preview
-  script:
-    - run_preview_synthetic_tests "./datadog-ci.preview.json"
   interruptible: true
