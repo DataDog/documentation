@@ -90,8 +90,9 @@ Automatic project discovery simplifies to process of adding additional rpojects 
    **Note**: The Browser role is only required in the default project of the service account.
 6. Click **Save**.
 
+## Further Reading
 
-
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://cloud.google.com/iam/docs/service-account-overview#impersonation
 [2]: /integrations/google_cloud_platform/
@@ -103,3 +104,4 @@ Automatic project discovery simplifies to process of adding additional rpojects 
 [8]: https://console.cloud.google.com/apis/library/iam.googleapis.com
 [9]: https://console.cloud.google.com/
 [10]: https://app.datadoghq.com/integrations/google-cloud-platform
+
