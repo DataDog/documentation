@@ -183,7 +183,6 @@ If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and 
 
 #### Azure
 ##### Loadbalancers and Application Gateways
- {{% tab "Loadbalancers and Application Gateways" %}}
  - name
  - loadbalancer
  - cloud_provider
