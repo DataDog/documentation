@@ -58,7 +58,7 @@ For more information, see [OpenMetrics Metric Types][2] and [Datadog Metric Type
 
 ### Counter
 
-By default, [Prometheus/OpenMetrics `counter`][102] is mapped to Datadog's `monotonic_count`. [Read more about monotonic counters][103].
+[Prometheus/OpenMetrics `counter`][102] is mapped to Datadog's `count`.
 
 ### StateSet
 
@@ -69,15 +69,11 @@ TBD.
 
 ### Histogram
 
-For [Prometheus/OpenMetrics `histogram`][104], the `_count` and `_sum` values of the histogram are each mapped to Datadog's `gauge`.
+For [Prometheus/OpenMetrics `histogram`][104], the `_count` and `_sum` values of the histogram are each mapped to Datadog's `count`.
 
-If the parameter `collect_histogram_buckets` is `true`, each `_bucket` value is also mapped to Datadog's `gauge`.
+If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. [Datadog distribution metrics][108] are based on the [DDSketch algorithm][109] and allow more advanced statistical aggregations such as quantiles. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][105].
 
-If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. Prometheus/OpenMetrics histogram data is converted to Datadog distribution metrics to allow for monitoring Kubernetes metrics as percentiles in Datadog. Datadog distribution metrics are based on the [DDSketch algorithm]. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][105].
-
-**Note**: For OpenMetrics v2.0.0, use `collect_counters_with_distributions` instead.
-
-If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][103].
+`collect_counters_with_distributions` can be used to send `_count` and `_sum` values as `count`s alongside the distribution.
 
 ### GaugeHistogram
 
@@ -85,7 +81,7 @@ TBD.
 
 ### Summary
 
-By default, [Prometheus/OpenMetrics `summary`][107] is mapped to Datadog's `monotonic_count`. [Read more about monotonic counters][103].
+For [Prometheus/OpenMetrics `summary`][107], `_count` and `_sum` values are mapped to Datadog's `count`. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix.
 
 [101]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [102]: https://prometheus.io/docs/concepts/metric_types/#counter
@@ -93,14 +89,16 @@ By default, [Prometheus/OpenMetrics `summary`][107] is mapped to Datadog's `mono
 [104]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [105]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
 [107]: https://prometheus.io/docs/concepts/metric_types/#counter
+[108]: /metrics/distributions/
+[109]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 
 {{% /tab %}}
 {{% tab "Before OpenMetrics v2.0.0" %}}
 ### Counter
 
-By default, [Prometheus/OpenMetrics `counter`][101] is mapped to Datadog's `monotonic_count`.
+By default, [Prometheus/OpenMetrics `counter`][101] is mapped to Datadog's `count`.
 
-However, if the parameter `send_monotonic_counter` is `false`, then this metric is sent as `gauge`. [Read more about monotonic counters][102].
+However, if the parameter `send_monotonic_counter` is `false`, then this metric is sent as `gauge`.
 
 ### Gauge
 
@@ -112,19 +110,17 @@ For [Prometheus/OpenMetrics `histogram`][104], the `_count` and `_sum` values of
 
 If the parameter `collect_histogram_buckets` is `true`, each `_bucket` value is also mapped to Datadog's `gauge`.
 
-If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. Prometheus/OpenMetrics histogram data is converted to Datadog distribution metrics to allow for monitoring Kubernetes metrics as percentiles in Datadog. Datadog distribution metrics are based on the [DDSketch algorithm]. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][106].
+If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. [Datadog distribution metrics][108] are based on the [DDSketch algorithm][107] and allow more advanced statistical aggregations such as quantiles. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][106].
 
-**Note**: For OpenMetrics v2.0.0, use `collect_counters_with_distributions` instead.
-
-If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][102].
+If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `count`.
 
 ### Summary
 
-For [Prometheus/OpenMetrics `summary`][105], the `_count` and `_sum` values of the summary are each mapped to Datadog's `count`.
+For [Prometheus/OpenMetrics `summary`][105], the `_count` and `_sum` values of the summary are each mapped to Datadog's `gauge`.
 
 If the parameter `send_distribution_buckets` is `true`, the histogram is converted to a distribution, and each `_bucket` can be fetched using `distribution` tags.
 
-If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][102].
+If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `count`.
 
 [101]: https://prometheus.io/docs/concepts/metric_types/#counter
 [102]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
@@ -132,9 +128,13 @@ If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric 
 [104]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [105]: https://prometheus.io/docs/concepts/metric_types/#summary
 [106]: https://www.datadoghq.com/blog/whats-next-monitoring-kubernetes/#distribution-metrics
+[107]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
+[108]: /metrics/distributions/
 
 {{% /tab %}}
 {{< /tabs >}}
+
+<div class="alert alert-info">All <code>count</code> metrics are processed by the Agent as <em>monotonic counts</em>, meaning the Agent actually sends the difference between consecutive raw values. [Read more about monotonic counters][102].</div>
 
 ## Further Reading
 
