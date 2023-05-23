@@ -41,7 +41,7 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 ## Get started
 
-1. [Install the Observability Pipelines Worker][1].
+1. [Set up the Observability Pipelines Worker][1].
 2. [Create pipelines to collect, transform and route your data][2].
 
 ## Explore Observability Pipelines
