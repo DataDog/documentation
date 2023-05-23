@@ -71,59 +71,59 @@ There are no provider-specific requirements for RPM-based Linux.
 
 {{< tabs >}}
 {{% tab "AWS EKS" %}}
-Download the [Helm chart][1] for AWS EKS.
+1. Download the [Helm chart][1] for AWS EKS.
 
-In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
 
-```shell
-helm repo add datadog https://helm.datadoghq.com
-```
-```shell
-helm repo update
-```
-```shell
-helm upgrade --install \
-    opw datadog/observability-pipelines-worker \
-    -f aws_eks.yaml
-```
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+        opw datadog/observability-pipelines-worker \
+        -f aws_eks.yaml
+    ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-Download the [Helm chart][1] for Azure AKS.
+1. Download the [Helm chart][1] for Azure AKS.
 
-In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
 
-```shell
-helm repo add datadog https://helm.datadoghq.com
-```
-```shell
-helm repo update
-```
-```shell
-helm upgrade --install \
-  opw datadog/observability-pipelines-worker \
-  -f azure_aks.yaml
-```
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+      opw datadog/observability-pipelines-worker \
+      -f azure_aks.yaml
+    ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-Download the [Helm chart][1] for Google GKE.
+1. Download the [Helm chart][1] for Google GKE.
 
-In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, install it in your cluster with the following commands:
 
-```shell
-helm repo add datadog https://helm.datadoghq.com
-```
-```shell
-helm repo update
-```
-```shell
-helm upgrade --install \
-  opw datadog/observability-pipelines-worker \
-  -f google_gke.yaml
-```
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+      opw datadog/observability-pipelines-worker \
+      -f google_gke.yaml
+    ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
 {{% /tab %}}
