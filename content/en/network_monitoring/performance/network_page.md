@@ -195,8 +195,6 @@ If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and 
  - subscription_id
  - sku_name
  - custom (user-defined) tags applied to Azure Loadbalancers and Application Gateways
- {{% /tab %}}
-{{< /tabs >}}
 
 
 ### Domain resolution
