@@ -11,5 +11,5 @@ disable_toc: true
 
 {{< whatsnext desc="Dashboard guides:">}}
     {{< nextlink href="/dashboards/guide/slo_data_source" >}}Graph historical SLO data on Dashboards{{< /nextlink >}}
-    {{< nextlink href="content/en/dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
 {{< /whatsnext >}}
