@@ -81,7 +81,7 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.y
 init_config:
 instances:
   - dbm: true
-    server: '<HOSTNAME>:<SQL_PORT>'
+    server: '<RDS_INSTANCE_ENDPOINT>:<SQL_PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
