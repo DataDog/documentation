@@ -59,7 +59,7 @@ Datadog recommends submitting logs from Azure to Datadog with the Agent or Daemo
 
 {{% tab "Automated Installation" %}}
 
-To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you.
+To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account are deployed for you.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
 
@@ -154,10 +154,10 @@ Installation errors? See [Automated log collection][1] for common error cases.
 To send logs from Azure to Datadog, follow this general process:
 
 1. Create an [Azure Event Hub][1].
-2. Setup the Datadog-Azure [function with an Event hub trigger][2] to forward logs to Datadog.
+2. Set up the Datadog-Azure [function with an Event hub trigger][2] to forward logs to Datadog.
 3. Configure your Azure services to stream logs to the Event Hub by creating a [diagnostic setting][3].
 
-The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
+The instructions below walk through a basic, initial setup using the Azure portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
 
 #### Azure Event Hub
 
@@ -294,13 +294,13 @@ If you are unfamiliar with Azure functions, see [Create your first function in t
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log Archiving
+## Log archiving
 
 Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
 
 Once you have an App Registration configured, you can [create a log archive][62] that writes to Azure Blob Storage. 
 
-**Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration Tile about the App Registration being redundant. You can ignore this warning.
+**Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration tile about the App Registration being redundant. You can ignore this warning.
 
 [44]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
 [45]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
