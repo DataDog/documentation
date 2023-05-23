@@ -10,6 +10,12 @@ Use Teams to link resources such as dashboards, services, monitors, and incident
 
 Team membership is flexible. Users can join teams, be added by other members, or be added by an administrator. Users can belong to multiple teams.
 
+I'm writing a very long sentence with far more than twenty-five words, because I need to test whether the Vale linter will correctly identify the extreme length of this sentence.
+
+I love metrics, traces and logs.
+
+## Remember To Use Sentence Style Capitalization
+
 ## Setup
 
 ### Navigation
@@ -58,9 +64,9 @@ Datadog supports associating the following resources with team handles:
 - [Dashboards][2]
 - [Incidents][3]
 - [Monitors][4]
-- [Resource Catalog][14]
-- [Service Catalog][5]
-- [Service Level Objectives][6]
+- [Resource Catalog][5]
+- [Service Catalog][6]
+- [Service Level Objectives][7]
 
 ## Filter
 
@@ -77,14 +83,14 @@ The table below describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][7]         | Team handle                                                                      |
-| [Resource Catalog][14]   | Team handle                                                                      |
-| [Service Catalog][8]    | Team handle                                                                      |
-| [Incidents][9]          | Team handle                                                                      |
-| [Monitors][10]          | Team handle                                                                      |
-| [APM Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
-| [Logs Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
-| [Service Level Objectives][13] | Team handle                                                                 |
+| [Dashboards][8]         | Team handle                                                                      |
+| [Resource Catalog][5]   | Team handle                                                                      |
+| [Service Catalog][9]    | Team handle                                                                      |
+| [Incidents][10]          | Team handle                                                                      |
+| [Monitors][11]          | Team handle                                                                      |
+| [APM Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][9]) |
+| [Logs Error Tracking][13] | Service owned by teams (determined by ownership inside the [Service Catalog][9]) |
+| [Service Level Objectives][14] | Team handle                                                                 |
 | [Data Streams Monitoring][15]  | Team handle                                                                 |
 
 
@@ -118,14 +124,14 @@ To enforce a strict membership model, configure your default team settings so **
 [2]: /dashboards/#edit-details
 [3]: /service_management/incident_management/incident_details#overview-section
 [4]: /monitors/configuration/?tab=thresholdalert#add-metadata
-[5]: /tracing/service_catalog/setup#add-service-definition-metadata
-[6]: /service_management/service_level_objectives/#slo-tags
-[7]: https://app.datadoghq.com/dashboard/lists
-[8]: https://app.datadoghq.com/services
-[9]: https://app.datadoghq.com/incidents
-[10]: https://app.datadoghq.com/monitors/manage
-[11]: https://app.datadoghq.com/apm/error-tracking
-[12]: https://app.datadoghq.com/logs/error-tracking
-[13]: https://app.datadoghq.com/slo/manage
-[14]: /security/cspm/resource_catalog
+[5]: /security/cspm/resource_catalog
+[6]: /tracing/service_catalog/setup#add-service-definition-metadata
+[7]: /service_management/service_level_objectives/#slo-tags
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/services
+[10]: https://app.datadoghq.com/incidents
+[11]: https://app.datadoghq.com/monitors/manage
+[12]: https://app.datadoghq.com/apm/error-tracking
+[13]: https://app.datadoghq.com/logs/error-tracking
+[14]: https://app.datadoghq.com/slo/manage
 [15]: https://app.datadoghq.com/data-streams
