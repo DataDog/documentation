@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Observability Pipelines
+title: Set up Observability Pipelines
 kind: Documentation
 aliases:
   - /agent/vector_aggregation/
@@ -7,6 +7,8 @@ aliases:
   - /observability_pipelines/integrate_vector_with_datadog/
   - /observability_pipelines/integrations/integrate_vector_with_datadog/
   - /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
+  - /getting_started/observability_pipelines/
+  - /observability_pipelines/installation/
 further_reading:
   - link: "/observability_pipelines/production_deployment_overview/"
     tag: "Documentation"
