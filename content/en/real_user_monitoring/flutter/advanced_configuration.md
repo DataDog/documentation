@@ -207,22 +207,6 @@ For example, if the current tracking consent is `TrackingConsent.pending` and yo
 
 Likewise, if you change the value from `TrackingConsent.pending` to `TrackingConsent.notGranted`, the Flutter RUM SDK wipes all data and does not collect any future data.
 
-## Sample RUM sessions
-
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Flutter RUM SDK][2] as a percentage between 0 and 100.
-
-For example, to keep only 50% of sessions, use:
-
-```dart
-final config = DdSdkConfiguration(
-    // other configuration...
-    rumConfiguration: RumConfiguration(
-        applicationId: '<YOUR_APPLICATION_ID>',
-        sessionSamplingRate: 50.0,
-    ),
-);
-```
-
 ## Sending data when device is offline
 
 RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.

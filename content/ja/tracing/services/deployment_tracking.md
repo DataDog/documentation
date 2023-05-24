@@ -23,7 +23,7 @@ title: デプロイメントの追跡
 
 ## サービス詳細画面での version タグの使用
 
-{{< img src="tracing/deployment_tracking/ServicePageRequestsErrorsByVersion.png" alt="サービス詳細画面のバージョン"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ServicePageRequestsErrorsByVersion.png" alt="サービス詳細画面のバージョン" style="width:100%;">}}
 
 サービス詳細画面で、`version` タグが使用可能な場合、リクエストウィジェットのスコープを次のいずれかに設定できます。
 
@@ -69,7 +69,7 @@ title: デプロイメントの追跡
 - エラー総数。
 - p50、p75、p90、p95、p99、または最大で計測されたレイテンシー。
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="サービス詳細画面のバージョン"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="サービス詳細画面のバージョン" style="width:100%;">}}
 
 **注:** バージョンセクションは、ページ上部で選択された時間間隔の間に報告するバージョンが 1 つ以上ある場合にのみ表示されます。
 
@@ -107,7 +107,7 @@ title: デプロイメントの追跡
 
 このセクションでは、サービスの各エンドポイントのパフォーマンス（リクエスト、レイテンシー、エラー）を比較できます。値別にテーブルをソートして、デプロイ後に最高スループットのエンドポイントが引き続き正常であることを確認したり、パーセンテージの変化でソートして、レイテンシーまたはエラー率における大きな変化を確認したりできます。
 
-{{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="エンドポイント比較"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="エンドポイント比較" style="width:100%;">}}
 
 ## デプロイ戦略
 
@@ -119,7 +119,7 @@ Datadog のデプロイ追跡により、以下のデプロイ戦略 (または�
 
 Datadog を使用して、ローリングデプロイを監視し、エラーの増加を検出できます。
 
-{{< img src="tracing/deployment_tracking/rolling.png" alt="ローリングデプロイメント"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/rolling.png" alt="ローリングデプロイメント" style="width:100%;">}}
 
 ### ブルーおよびグリーンデプロイ
 
@@ -127,7 +127,7 @@ Datadog を使用して、ローリングデプロイを監視し、エラーの
 
 これらのサービスの `version` タグを設定して表示すると、リクエストとエラーを比較し、クラスターの 1 つが他のクラスターよりもエラー率が高い場合、クラスターが SLO を満たしていない場合、トラフィックを受信することが想定されていないクラスターである場合を検出することができます。
 
-{{< img src="tracing/deployment_tracking/BlueGreenDeploy.png" alt="ブルー/グリーンデプロイメント"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/BlueGreenDeploy.png" alt="ブルー/グリーンデプロイメント" style="width:100%;">}}
 
 ### カナリアデプロイ
 
@@ -137,7 +137,7 @@ Datadog 内で `version` タグを使用すると、カナリアデプロイの�
 
 たとえば、次の画像では、カナリアバージョンがデプロイされ、いくつかのエラーがあり、削除されたことがわかります。そのバージョンに対応するトレースは、さらに影響を与えることなく調査に利用できます。
 
-{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="カナリアデプロイメント"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="カナリアデプロイメント" style="width:100%;">}}
 
 ### シャドウデプロイ
 
@@ -151,7 +151,7 @@ Datadog 内で `version` タグを使用すると、カナリアデプロイの�
 
 ### リソースステータス画面
 
-{{< img src="tracing/deployment_tracking/ResourcePage.png" alt="リソースステータス画面のバージョン"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ResourcePage.png" alt="リソースステータス画面のバージョン" style="width:100%;">}}
 
 リソースステータス画面で、version タグが使用可能な場合、リクエストウィジェットのスコープは次のいずれかに設定できます。
 
@@ -178,7 +178,7 @@ Datadog 内で `version` タグを使用すると、カナリアデプロイの�
 
 特定のバージョンに対応するプロファイルを検索できます。[デプロイメント比較](#deployment-comparison) ページ右上の **View Profiles** をクリックして、比較しているバージョンのいずれかにスコープした継続的プロファイラーを開くことも可能です。
 
-{{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="バージョン別にプロファイルをフィルター"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="バージョン別にプロファイルをフィルター" style="width:100%;">}}
 
 <br>
 
