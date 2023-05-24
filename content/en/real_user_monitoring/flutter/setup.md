@@ -129,7 +129,7 @@ You can initialize RUM using one of two methods in your `main.dart` file.
 
 ### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Flutter RUM SDK][2] as a percentage between 0 and 100.
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Flutter RUM SDK][2] as a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
 
 For example, to keep only 50% of sessions, use:
 
