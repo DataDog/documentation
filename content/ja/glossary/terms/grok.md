@@ -1,6 +1,6 @@
 ---
 core_product:
-- ログ管理
+- log management
 title: grok
 ---
 Grok とは、半構造化されたログメッセージをパースして属性を抽出する手法のことです。
