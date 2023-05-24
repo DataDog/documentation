@@ -4388,6 +4388,10 @@ components:
           description: Widget query.
           example: '@service:app'
           type: string
+        show_year:
+          description: Option to display the year in the date column. To be used with
+            the `event_stream`.
+          type: boolean
         storage:
           description: Option for storage location. Feature in Private Beta.
           example: indexes
