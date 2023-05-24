@@ -4,7 +4,7 @@
       {{ if eq .File.Dir "/" }}
         {{ $text = i18n "docs" }}
       {{ else }}
-        {{ $text = .Title }}
+        {{ $text = (replace .Title "_" " ") }}
       {{ end }}
       {{ if (ne .File.Path "api/_index.md") }}
       <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>
