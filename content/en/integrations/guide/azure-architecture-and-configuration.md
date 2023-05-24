@@ -58,13 +58,15 @@ Once this is completed, data collection begins automatically. The app registrati
 ### Azure Native integration metric collection
 _Available only in the Datadog US3 site_
 
+**Linking accounts**: The Datadog resource in Azure links your Azure environment and your Datadog account. This link enables the same data collection as the standard Azure integration available for other Datadog sites, but with a different authentication mechanism. Its access is assigned using a **System Managed Identity** associated with the Datadog resource in Azure, rather than a user-created and configured **App Registration**. 
+
+**Permissions**: The `Monitoring Reader` role assignment happens automatically during the creation of the Datadog resource, and is scoped to the parent subscription of the Datadog resource. If you add additional subscriptions for monitoring to the Datadog resource, this scope is updated for the Managed Identity automatically.
+
 Follow these steps to enable the Azure Native integration:
 
 1. Confirm that your Datadog organization is hosted on the US3 [Datadog site][1], or [create a trial Datadog account on the US3 site][5].
 2. Create a Datadog resource in Azure that links at least one subscription.
 3. Optionally, update the Datadog resource to include other subscriptions.
-
-The Datadog resource in Azure links your Azure environment and your Datadog account. This link enables the same data collection as the standard Azure integration available for other Datadog sites, but with a different authentication mechanism. Its access is assigned using a **System Managed Identity** associated with the Datadog resource in Azure, rather than a user-created and configured **App Registration**. The `Monitoring Reader` role assignment happens automatically during the creation of the Datadog resource, and is scoped to the parent subscription of the Datadog resource. If you add additional subscriptions for monitoring to the Datadog resource, this scope is updated for the Managed Identity automatically.
 
 As an [external ISV][6], there is an additional, separate process to request and use this access:
 
