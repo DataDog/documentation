@@ -1,6 +1,6 @@
 ---
 core_product:
-- インフラストラクチャーのモニタリング
+- infrastructure monitoring
 title: マニフェスト (Kubernetes)
 ---
 Kubernetes において、マニフェストとは、クラスター内のリソースの作成と管理を記述したファイルです。
