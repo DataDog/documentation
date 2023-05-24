@@ -10,7 +10,8 @@
     x-data="{
         filterValue: '', 
         filteredLetters: [],
-        glossaryNavHeight: '',
+        glossaryNavHeight: 0,
+        glossaryLetterNav: '',
         shouldShowGlossaryLetter (firstChar) {
             return this.filteredLetters.length ? this.filteredLetters.includes(firstChar) : true
         },
@@ -34,7 +35,13 @@
             window.scroll(0, 0)
         },
         setGlossaryNavHeight (nav) {
-            this.glossaryNavHeight = nav.getBoundingClientRect().height - 30
+            this.glossaryNavHeight = nav.getBoundingClientRect().height - 25
+        },
+        setGlossaryNavLetterToHighlight (glossaryLetterEl) {
+            const letterDistanceFromTop = glossaryLetterEl.getBoundingClientRect().top
+            if ( (letterDistanceFromTop - 10) < this.glossaryNavHeight){
+                this.glossaryLetterNav = glossaryLetterEl.id
+            }
         }
     }"
     x-init="filterValue = getProductParamValue(window.location.search)">
@@ -56,7 +63,8 @@
                         <h2 
                         id="{{ $first_char | lower }}" 
                         class="glossary-letter mb-3"
-                        :style="{scrollMarginTop: `${glossaryNavHeight}px`}" 
+                        :style="{scrollMarginTop: `${glossaryNavHeight}px`}"
+                        @scroll.window.throttle.1ms="setGlossaryNavLetterToHighlight($el)" 
                         x-cloak x-show="shouldShowGlossaryLetter('{{ $first_char | lower }}')">{{ $first_char }}</h2>
                     {{ end }}
 
@@ -122,7 +130,7 @@
                 <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                     {{ range $letters }}
                         <li class="nav-item" x-cloak x-show="shouldShowGlossaryLetter('{{ . | lower }}')">
-                            <a class="nav-link btn font-14-19" role='button' href='#{{ . | lower }}'>{{ . }}</a>
+                            <a class="nav-link btn font-14-19" :class="($el.textContent.toLowerCase() === glossaryLetterNav) && 'active'" role='button' href='#{{ . | lower }}'>{{ . }}</a>
                         </li>
                     {{ end }}
                 </ul>
