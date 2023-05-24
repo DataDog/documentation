@@ -1,6 +1,6 @@
 ---
 core_product:
-- Datadog Agent
+- datadog agent
 title: datadog.yaml
 ---
 `datadog.yaml` は、様々な機能を有効化・無効化するためのメインの Agent コンフィギュレーションファイルです。
