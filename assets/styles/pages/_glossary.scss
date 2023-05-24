@@ -6,9 +6,22 @@
     h4 {
         text-transform: none;
     }
-    h2.glossary-letter {
-        scroll-margin-top: 240px;
-    }
+    // h2.glossary-letter {
+    //     // scroll-margin-top: 340px;
+    //     // @include media-breakpoint-up(md) {
+    //     //     scroll-margin-top: 270px;
+    //     // }
+
+    //     // @include media-breakpoint-up(lg) {
+    //     //     scroll-margin-top: 340px;
+    //     // }
+    //     // @include media-breakpoint-up(xl) {
+    //     //     scroll-margin-top: 300px;
+    //     // }
+    //     // @include media-breakpoint-up(xxl) {
+    //     //     scroll-margin-top: 275px;
+    //     // }
+    // }
 
     #glossary-nav {
         position: sticky;
@@ -22,7 +35,6 @@
             padding-top: 11px;
             background: white;
             width: 100%;
-            // height: 50px;
             top: 89px;
 
             &:lang(ja) {
@@ -88,7 +100,7 @@
             }
         }
         .filters-glossary{
-            max-height: 200px;
+            max-height: 300px;
             padding-left: 15px;
             margin-top: 16px;
             font-size: 16px;

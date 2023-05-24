@@ -1,9 +1,9 @@
 // Controls highlighting glossary letters in the glossary nav
 const menuSection = document.querySelectorAll('a.nav-link');
-const mainSection = document.querySelectorAll('#mainContent h2.glossary-letter');
-const glossaryNavHeight = document.querySelector('#glossary-nav').getBoundingClientRect().height - 25
 
 window.onscroll = (()=> {
+  const mainSection = document.querySelectorAll('#mainContent h2.glossary-letter');
+  const glossaryNavHeight = document.querySelector('#glossary-nav').getBoundingClientRect().height - 25
   mainSection.forEach((v,i)=> {
     const letterDistanceFromTop = v.getBoundingClientRect().top
     if(letterDistanceFromTop < glossaryNavHeight){
