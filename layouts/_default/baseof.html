@@ -4,7 +4,10 @@
   class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
 <head>
-
+  <!-- TrustArc -->
+  <script type="text/javascript" src="https://consent.trustarc.com/v2/autoblockasset/core.min.js?cmId=ufocto"></script>
+  <script type="text/javascript" src="https://consent.trustarc.com/v2/autoblock?cmId=ufocto"></script>
+  
   {{ partialCached "header-scripts.html" . }}
 
   <meta charset="utf-8">
