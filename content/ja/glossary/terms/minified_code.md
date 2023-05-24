@@ -1,7 +1,7 @@
 ---
 core_product:
 - apm
-- Synthetic モニタリング
+- synthetic monitoring
 - real user monitoring
 title: 縮小化されたコード
 ---
