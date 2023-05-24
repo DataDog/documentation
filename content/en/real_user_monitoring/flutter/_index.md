@@ -87,7 +87,7 @@ final configuration = DdSdkConfiguration(
 )..enableHttpTracking()
 ```
 
-Note that the Datadog Tracking HTTP Client modifies [HttpOverrides.global][9]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][10]. In this case, you do not need to call `enableHttpTracking`.  Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
+**NOTE**: The Datadog Tracking HTTP Client modifies [HttpOverrides.global][9]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][10]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
 In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `RumConfiguration`.
 
