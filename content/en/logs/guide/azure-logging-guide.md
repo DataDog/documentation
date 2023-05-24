@@ -7,59 +7,17 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-Use this guide to set up logging directly from your Azure subscriptions to Datadog, without needing to install or configure the Datadog Agent. Ensure that the Datadog site selector on the right side of this page is set to your [Datadog site][1] to see the correct instructions.
+Use this guide to set up logging directly from your Azure subscriptions to Datadog. Ensure that the Datadog site selector on the right side of this page is set to your [Datadog site][1] to see the correct instructions.
 
-{{< site-region region="us3" >}}
+## Sending Azure logs to Datadog
 
-## Azure native integration log collection
-
-Manage the collection of three kinds of Azure logs through the [Datadog resource in Azure][4].
-
-### Subscription level logs 
-
-Provide insight into the operations on your resources at the [control plane][1]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
-
-To send subscription level logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the subscription level logs are sent to Datadog.
-
-### Azure resource logs 
-
-Provide insight into operations taken on Azure resources at the [data plane][1]. For example, getting a secret from a key vault or making a request to a database are data plane operations. The content of resource logs varies by the Azure service and resource type.
-
-To send Azure resource logs to Datadog, select **Send Azure resource logs for all defined resources**. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][2]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
-
-You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
-
-#### Tag rules for sending logs
-
-- Azure resources with `include` tags send logs to Datadog.
-- Azure resources with `exclude` tags don't send logs to Datadog.
-- If there's a conflict between inclusion and exclusion rules, exclusion takes priority.
-
-For example, the screenshot below shows a tag rule where only those virtual machines, virtual machine scale sets, and app service plans tagged as `Datadog = True` send metrics and logs to Datadog.
-
-{{< img src="integrations/azure/azure-us3-create-dd-resource3.png" alt="Azure US3 create a Datadog resource logs" responsive="true" style="width:90%;">}}
-
-### Azure Active Directory (Azure AD) logs 
-
-Azure AD logs contain the history of sign-in activity and an audit trail of changes made in Azure AD for a particular tenant. To send these logs to Datadog, first complete the process to create a Datadog resource. Once you have a Datadog resource in Azure, follow the setup steps in the [Datadog in the Azure Portal][3] guide.
-
-[1]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/control-plane-and-data-plane
-[2]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
-[3]: https://docs.datadoghq.com/integrations/guide/azure-portal/#azure-active-directory-logs
-[4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
-{{< /site-region >}}
-
-{{< site-region region="us,eu,us5,gov,ap1" >}}
-
-## Azure standard integration log collection
-
-Datadog recommends submitting logs from Azure to Datadog with the Agent or DaemonSet. For some resources it may not be possible. In these cases, you can create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][57]. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option.
+Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSet. For some resources it may not be possible. In these cases, you can create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option.
 
 {{< tabs >}}
 
 {{% tab "Automated Installation" %}}
 
-To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account are deployed for you.
+To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account will be deployed for you.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
 
@@ -154,10 +112,10 @@ Installation errors? See [Automated log collection][1] for common error cases.
 To send logs from Azure to Datadog, follow this general process:
 
 1. Create an [Azure Event Hub][1].
-2. Set up the Datadog-Azure [function with an Event hub trigger][2] to forward logs to Datadog.
+2. Setup the Datadog-Azure [function with an Event hub trigger][2] to forward logs to Datadog.
 3. Configure your Azure services to stream logs to the Event Hub by creating a [diagnostic setting][3].
 
-The instructions below walk through a basic, initial setup using the Azure portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
+The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
 
 #### Azure Event Hub
 
@@ -294,32 +252,18 @@ If you are unfamiliar with Azure functions, see [Create your first function in t
 {{% /tab %}}
 {{< /tabs >}}
 
-## Log archiving
+## Log Archiving
 
 Archiving logs to Azure Blob Storage requires an App Registration even if you are using the Azure Native integration. To archive logs to Azure Blob Storage, follow the setup instructions to configure the integration using an App Registration. App Registrations created for archiving purposes do not need the `Monitoring Reader` role assigned.
 
-Once you have an App Registration configured, you can [create a log archive][62] that writes to Azure Blob Storage. 
+Once you have an App Registration configured, you can [create a log archive][3] that writes to Azure Blob Storage. 
 
-**Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration tile about the App Registration being redundant. You can ignore this warning.
-
-[44]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
-[45]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
-[46]: https://app.datadoghq.com/account/settings#integrations/azure
-[47]: https://portal.azure.com
-[48]: https://app.datadoghq.com/organization-settings/api-keys
-[49]: https://app.datadoghq.com/account/settings#agent
-[50]: https://app.datadoghq.com/screen/integration/azure_vm
-[52]: https://docs.datadoghq.com/events/
-[57]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
-[58]: https://app.datadoghq.com/monitors/recommended
-[59]: /monitors/notify/#notify-your-team
-[60]: /logs/guide/azure-logging-guide/?site=us3
-[61]: /integrations/azure/?tab=azurecliv20#overview
-[62]: /logs/log_configuration/archives/
-{{< /site-region >}}
+**Note**: If your storage bucket is in a subscription being monitored through the Azure Native integration, a warning is displayed in the Azure Integration Tile about the App Registration being redundant. You can ignore this warning.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
+[2]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
+[3]: /logs/log_configuration/archives/
