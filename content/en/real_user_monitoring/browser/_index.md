@@ -68,8 +68,8 @@ datadogRum.init({
   trackLongTasks: true,
   trackUserInteractions: true,
   });
-DD_RUM.startSessionReplayRecording();
-})
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -93,8 +93,8 @@ datadogRum.init({
   trackLongTasks: true,
   trackInteractions: true,
   });
-DD_RUM.startSessionReplayRecording();
-})
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -116,8 +116,8 @@ datadogRum.init({
   premiumSampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
   });
-DD_RUM.startSessionReplayRecording();
-})
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -139,8 +139,8 @@ datadogRum.init({
   replaySampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
   });
-DD_RUM.startSessionReplayRecording();
-})
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -175,9 +175,9 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    });
-   window.DD_RUM.startSessionReplayRecording();
-  })
+     });
+    window.DD_RUM.startSessionReplayRecording();
+   })
 </script>
 ```
 {{</ site-region>}}
@@ -828,8 +828,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -851,8 +851,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -874,8 +874,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -897,8 +897,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -920,8 +920,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -943,8 +943,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -972,8 +972,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -995,8 +995,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1018,8 +1018,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
-  DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1041,8 +1041,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1064,8 +1064,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1087,8 +1087,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1114,8 +1114,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1135,8 +1135,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1156,8 +1156,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1177,8 +1177,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1198,8 +1198,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1219,8 +1219,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1246,8 +1246,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1267,8 +1267,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1288,8 +1288,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1309,8 +1309,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1330,8 +1330,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
@@ -1351,8 +1351,8 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  window.DD_RUM.startSessionReplayRecording();
-  })
+    window.DD_RUM.startSessionReplayRecording();
+
 </script>
 ```
 {{</ site-region>}}
