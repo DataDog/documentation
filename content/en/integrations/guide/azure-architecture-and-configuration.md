@@ -29,7 +29,7 @@ Enabling Datadog's Azure integration allows Datadog to:
   - Ingest a range of both general and resource-specific metadata (including custom Azure tags), and apply it to the associated resource metrics in Datadog as tags
   - Query Azure metadata APIs and use the responses to [generate useful metrics in Datadog][2] for insights that Azure Monitor does not support
 
-The Azure APIs used and data collected are identical regardless of whether you use the standard or Azure native version of the integration.
+The Azure APIs used and data collected are identical regardless of whether you use the standard or Azure Native version of the integration.
 
 {{% site-region region="us,us5,eu,gov,ap1" %}}
 
@@ -55,10 +55,10 @@ Once this is completed, data collection begins automatically. The app registrati
 {{% /site-region %}}
 {{% site-region region="us3" %}}
 
-### Azure native integration metric collection
+### Azure Native integration metric collection
 _Available only in the Datadog US3 site_
 
-Follow these steps to enable the Azure native integration:
+Follow these steps to enable the Azure Native integration:
 
 1. Confirm that your Datadog organization is hosted on the US3 [Datadog site][1], or [create a trial Datadog account on the US3 site][5].
 2. Create a Datadog resource in Azure that links at least one subscription.
@@ -73,13 +73,13 @@ As an [external ISV][6], there is an additional, separate process to request and
 1. Azure returns a short-lived customer token to Datadog. This token enables the same level of access granted to the associated system managed identity.
 1. Datadog uses this customer token to query data in the monitored environment until it approaches expiration, at which point the process repeats.
 
-The diagram below outlines the process and resulting architecture of the Azure native integration configuration.
+The diagram below outlines the process and resulting architecture of the Azure Native integration configuration.
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_integration_setup.png" alt="Diagram of the Azure native integration setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_integration_setup.png" alt="Diagram of the Azure Native integration setup" >}}
 
 Once this is completed, data collection begins automatically. Datadog continuously discovers and collects metrics from your Azure environment, as pictured below.
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_metric_collection.png" alt="Diagram of the Azure native metric collection setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_metric_collection.png" alt="Diagram of the Azure Native metric collection setup" >}}
 
 ### Alternate configuration options for metric collection
 
@@ -96,7 +96,7 @@ You can assign Datadog access below the subscription level:
   - By resource group	
   - By individual resource
 
-**Note**: This access is managed through the **App Registration** for the standard Azure integration, and through the **System Managed Identity** associated with the Datadog resource for the Azure native integration.
+**Note**: This access is managed through the **App Registration** for the standard Azure integration, and through the **System Managed Identity** associated with the Datadog resource for the Azure Native integration.
 
 If you update the scope of the access below subscription level, Datadog is still able to discover resources and their available metrics, and ingest them dynamically within the given scope.
 
@@ -167,14 +167,14 @@ For especially high log volumes, you may consider adding additional Event Hub an
 {{% /site-region %}}
 {{% site-region region="us3" %}}
 
-### Azure native integration log collection
+### Azure Native integration log collection
 _Available only in the Datadog US3 site_
 
 The diagram below outlines the process and resulting architecture of the Azure Native integration log forwarding configuration.
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_log_forwarding.png" alt="Diagram of the Azure native log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/azure_native_log_forwarding.png" alt="Diagram of the Azure Native log forwarding setup" >}}
 
-With the Azure native integration, you do not need to configure anything outside of the Datadog resource to implement Azure resource or activity log forwarding to Datadog. Diagnostic settings are added or removed automatically to match your configuration using only the tag rules specified in the Datadog resource.
+With the Azure Native integration, you do not need to configure anything outside of the Datadog resource to implement Azure resource or activity log forwarding to Datadog. Diagnostic settings are added or removed automatically to match your configuration using only the tag rules specified in the Datadog resource.
 
 **Note**: You can enable resource logs without any filters to send all resource logs, as shown below.
 
@@ -188,9 +188,9 @@ See below an example of a diagnostic setting created by a Datadog resource:
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/diagnostic_setting.png" alt="Diagram of the diagnostic setting" >}}
 
-### Alternate configuration options for log forwarding with the Azure native integration
+### Alternate configuration options for log forwarding with the Azure Native integration
 
-The one-click buttons to enable logs in the Datadog resource automate the process of adding diagnostic settings. In some cases, organizations may want to manage and configure diagnostic settings themselves, while still taking advantage of the automated log forwarding capability with the Azure native integration. 
+The one-click buttons to enable logs in the Datadog resource automate the process of adding diagnostic settings. In some cases, organizations may want to manage and configure diagnostic settings themselves, while still taking advantage of the automated log forwarding capability with the Azure Native integration. 
 
 Manually created diagnostic settings are not impacted by log settings on the Datadog resource, and are not deleted based on the tag rules specified in the Datadog resource. Resource logs do not have to be enabled on the Datadog resource in order for manual log forwarding to work. However, the Datadog resource being used for log forwarding must not be in a disabled state.
 
@@ -213,7 +213,7 @@ Reasons for manually managing diagnostic settings include:
 
 This architecture is shown below, including the optional cross-subscription set up:
 
-{{< img src="integrations/guide/azure_architecture_and_configuration/custom_azure_native_log_forwarding.png" alt="Diagram of the custom Azure native log forwarding setup" >}}
+{{< img src="integrations/guide/azure_architecture_and_configuration/custom_azure_native_log_forwarding.png" alt="Diagram of the custom Azure Native log forwarding setup" >}}
 
 [1]: /logs/log_configuration/indexes/#exclusion-filters
 {{% /site-region %}}
