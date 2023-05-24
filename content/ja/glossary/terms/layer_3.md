@@ -1,7 +1,7 @@
 ---
 core_product:
 - network device monitoring
-- ネットワークパフォーマンスモニタリング
+- network performance monitoring
 synonyms:
 - ネットワーク層
 title: レイヤー 3
