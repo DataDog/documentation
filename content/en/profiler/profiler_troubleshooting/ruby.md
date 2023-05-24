@@ -81,7 +81,7 @@ Datadog.configure do |c|
 end
 ```
 
-Note that the above setting is only available starting in `dd-trace-rb` 1.12.0.
+**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
 
 Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
