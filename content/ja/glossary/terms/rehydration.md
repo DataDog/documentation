@@ -1,6 +1,6 @@
 ---
 core_product:
-- ログ管理
+- log management
 title: リハイドレート
 ---
 リハイドレートとは、アーカイブされたログが Datadog に呼び戻されることです。
