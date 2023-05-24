@@ -1,6 +1,6 @@
 ---
 core_product:
-- ネットワークパフォーマンスモニタリング
+- network performance monitoring
 - ネットワークデバイスモニタリング
 title: ネットワークプロファイル
 ---
