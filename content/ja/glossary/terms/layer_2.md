@@ -1,6 +1,6 @@
 ---
 core_product:
-- ネットワークデバイスモニタリング
+- network device monitoring
 - ネットワークパフォーマンスモニタリング
 synonyms:
 - データリンク層
