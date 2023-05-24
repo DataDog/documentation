@@ -46,7 +46,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
 ```
 {{< /site-region >}}
 
-**Note**: The `dogwrap` command sends data to the US Datadog site by default. If you need to send data to another site, you must include the `-s` option specifying a target site such as `eu`, `us3`, `us5`, etc.
+**Note**: The `dogwrap` command sends data to the US Datadog site by default. If you need to send data to another site, you must include the `-s` option specifying a target site, such as `eu`, `us3`, `us5`, etc.
 
 With the following placeholders:
 
