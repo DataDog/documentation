@@ -2,9 +2,8 @@
 aliases:
 - /ja/integrations/awssqs/
 categories:
-- cloud
-- processing
 - aws
+- cloud
 - log collection
 dependencies: []
 description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
@@ -18,6 +17,9 @@ integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  sqs_message_processing_time: assets/monitors/sqs_message_processing_time.json
+  sqs_message_queue_anomaly: assets/monitors/sqs_message_queue_anomaly.json
 name: amazon_sqs
 public_title: Datadog-Amazon SQS インテグレーション
 short_description: キューサイズ、平均メッセージサイズ、メッセージ数などを追跡。
@@ -34,7 +36,7 @@ Amazon Simple Queue Service (SQS) は、高速、高信頼性、スケーラブ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
