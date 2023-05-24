@@ -829,7 +829,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackUserInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -852,7 +851,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackUserInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -875,7 +873,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackUserInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -898,7 +895,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackUserInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -921,7 +917,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackUserInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -944,7 +939,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackUserInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -973,7 +967,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -996,7 +989,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1019,7 +1011,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1042,7 +1033,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1065,7 +1055,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1088,7 +1077,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1115,7 +1103,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1136,7 +1123,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1157,7 +1143,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1178,7 +1163,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1199,7 +1183,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1220,7 +1203,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1247,7 +1229,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1268,7 +1249,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1289,7 +1269,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1310,7 +1289,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1331,7 +1309,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
@@ -1352,7 +1329,6 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackInteractions: true,
     });
     window.DD_RUM.startSessionReplayRecording();
-
 </script>
 ```
 {{</ site-region>}}
