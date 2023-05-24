@@ -35,10 +35,10 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 
 | ASM capability                   | Minimum NodeJS tracer version |
 | -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> Business logic API  | 3.13.1 <br/>   |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | <br/> --> 3.11.0<br/> --> 3.19.0 <br/> --> 3.11.0     |
-| Vulnerability Management <br/> --> Open source vulnerability detection <br/> | <br/> 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+  |
-| Vulnerability Management <br/> --> Custom code vulnerability detection <br/> | <br/> 2.32.0 for NodeJS 12+, or 3.19.1 for NodeJS 14+  |
+| Threat Detection <br/> --> Business logic API  | 3.13.1 <br/> |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking | <br/> --> 3.11.0 <br/> --> 3.19.0 <br/> --> 3.11.0 |
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/> | <br/> 2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
+| Vulnerability Management <br/> --> Custom code vulnerability detection <br/> | <br/> 2.32.0 for NodeJS 12+, or 3.19.1 for NodeJS 14+ |
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.1.
 
