@@ -52,10 +52,6 @@ Datadog Security includes [Application Security Management](#application-securit
 
 Check out the [30-second Product Guided Tour](https://www.datadoghq.com/guided-tour/security/) to see more.
 
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/669874306/rendition/1080p/file.mp4?loc=external&signature=9cdb7724c414862115c85af15edb1bb8eb0cd6f7b5d38d89f6f99e65376cfc0c" poster="/images/poster/security.png" >}}
-
-</br>
-
 ## Application Security Management
 
 [Application Security Management][1] (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
