@@ -1,6 +1,6 @@
 ---
 core_product:
-- Datadog Agent
+- datadog agent
 title: コレクター
 ---
 コレクターは、マシン上でチェックを実行し、メトリクスを収集する Agent プロセスです。
