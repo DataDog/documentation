@@ -18,6 +18,11 @@ kind: ドキュメント
 title: Observability Pipelines（観測データの制御）
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では観測可能性パイプラインは利用できません。</div>
+{{< /site-region >}}
+
+
 {{< img src="observability_pipelines/obs_pipelines.png" alt="左側の異なるデータソースが、transform、reduce、route という 3 つの六角形に流れ、矢印が修正されたデータの異なる宛先を指しているグラフィック" style="width:100%;" >}}
 
 ## 観測可能性パイプラインと観測可能性パイプラインワーカーとは？
