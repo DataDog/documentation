@@ -1,6 +1,6 @@
 ---
 core_product:
-- セキュリティ
+- security
 synonyms:
 - XSRF
 title: クロスサイトリクエストフォージェリー (CSRF)
