@@ -101,7 +101,7 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
            name: gcr.io/datadoghq/agent:latest
    ```
 
-   Replace `<DATADOG_SITE>` with your [Datadog site][10]. Your site is {{< region-param key="dd_site" code="true" >}}.
+   Replace `<DATADOG_SITE>` with your [Datadog site][10]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
