@@ -52,6 +52,14 @@ grant select on v_$containers to c##datadog;
 grant select on v_$sqlstats to c##datadog ;
 grant select on v_$instance to c##datadog ;
 grant select on dba_feature_usage_statistics to c##datadog ;
+grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
+grant select on V_$PROCESS to c##datadog ;
+grant select on V_$SESSION to c##datadog ;
+grant select on V_$CON_SYSMETRIC to c##datadog ;
+grant select on CDB_TABLESPACE_USAGE_METRICS to c##datadog ;
+grant select on CDB_TABLESPACES to c##datadog ;
+grant select on V_$SQLCOMMAND to c##datadog ;
+grant select on V_$DATAFILE to c##datadog ;
 ```
 
 Create a new `view`, and give the Agent user access to it:
