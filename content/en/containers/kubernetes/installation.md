@@ -182,6 +182,10 @@ Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 
 ### Container registries
 
+<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
+
+Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+
 If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use another registry with the following configuration in the `values.yaml` file:
 
 - For the public AWS ECR registry ([public.ecr.aws/datadog][9]), use the following:
