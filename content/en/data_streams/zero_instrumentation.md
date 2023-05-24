@@ -1,5 +1,5 @@
 ---
-title: Setup Data Streams Monitoring without instrumentation
+title: Setup Data Streams Monitoring without code instrumentation
 kind: documentation
 ---
 
