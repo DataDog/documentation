@@ -1,6 +1,6 @@
 ---
 core_product:
-- インフラストラクチャーのモニタリング
+- infrastructure monitoring
 title: クローラー遅延
 ---
 クローラー遅延とは、クラウドプロバイダー API との制約により、Datadog クラウドインテグレーションのメトリクスに遅延が発生することです。
