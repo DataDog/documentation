@@ -1,6 +1,6 @@
 ---
 core_product:
-- インフラストラクチャーのモニタリング
+- infrastructure monitoring
 title: ポッド
 ---
 Kubernetes では、ポッドはデプロイ可能な最小のコンピューティング単位です。
