@@ -64,16 +64,14 @@ Follow these steps to enable the Azure native integration:
 2. Create a Datadog resource in Azure that links at least one subscription.
 3. Optionally, update the Datadog resource to include other subscriptions.
 
-The Datadog resource in Azure links your Azure environment and your Datadog account. This link enables the same data collection as the standard Azure integration available for other Datadog sites, but with a different authentication mechanism. Its access is assigned using a **System Managed Identity** associated with the Datadog resource in Azure, rather than a user-created and configured **App Registration**.
+The Datadog resource in Azure links your Azure environment and your Datadog account. This link enables the same data collection as the standard Azure integration available for other Datadog sites, but with a different authentication mechanism. Its access is assigned using a **System Managed Identity** associated with the Datadog resource in Azure, rather than a user-created and configured **App Registration**. The `Monitoring Reader` role assignment happens automatically during the creation of the Datadog resource, and is scoped to the parent subscription of the Datadog resource. If you add additional subscriptions for monitoring to the Datadog resource, this scope is updated for the Managed Identity automatically.
 
-After you create the Datadog resource, the following steps occur:
-1. The Azure environment passes the Datadog resource's resource ID and other information to Datadog.
-1. Datadog uses its own App Registration to request a token from Azure AD, authenticating with Azure as Datadog. 
-1. Datadog uses the Datadog token along with the user's Datadog resource ID to request a user token from a bespoke Azure service created for the Azure Native integration.
-1. The Azure service verifies Datadog's identity, confirms the user has granted access with the Datadog resource, and then returns a short-lived token to Datadog.
-1. Datadog uses the token to authorize API calls made to Azure APIs in the user's environment. Datadog uses API calls to discover resources within the scope provided and collect data.
+As an [external ISV][6], there is an additional, separate process to request and use this access:
 
-The `Monitoring Reader` role assignment happens automatically during the creation of the Datadog resource, and is scoped to the parent subscription of the Datadog resource. If you add additional subscriptions for monitoring to the Datadog resource, this scope is updated for the Managed Identity automatically.
+1. Datadog authenticates into Azure and uses a private Azure service to request the customer token associated with the given Datadog resource.
+1. This Azure service verifies Datadog’s identity, and ensures the requested Datadog resource exists and is enabled.
+1. Azure returns a short-lived customer token to Datadog. This token enables the same level of access granted to the associated system managed identity.
+1. Datadog uses this customer token to query data in the monitored environment until it approaches expiration, at which point the process repeats.
 
 The diagram below outlines the process and resulting architecture of the Azure native integration configuration.
 
@@ -130,6 +128,7 @@ The implications of restricting or omitting the the Azure AD roles are:
 [3]: /security/cspm/
 [4]: /security/cspm/resource_catalog/
 [5]: https://us3.datadoghq.com/signup
+[6]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
 {{% /site-region %}}
 
 ## Azure log collection
