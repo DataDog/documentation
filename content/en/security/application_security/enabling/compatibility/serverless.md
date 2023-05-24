@@ -51,7 +51,7 @@ The following ASM capabilities are supported for serverless, for the specified D
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | Supported for Node.js, Java, Python, Go, and .NET with Lambda Extension version 39 and Serverless plugin version 5.20.0. <br/> --> Business logic capabilities follow the language-specific versions in which the service is built. |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/>     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/> |
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/> |
 
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
