@@ -1,6 +1,6 @@
 ---
 core_product:
-- リアルユーザーモニタリング
+- real user monitoring
 - error tracking
 title: error
 ---
