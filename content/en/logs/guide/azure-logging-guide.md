@@ -7,11 +7,13 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-Use this guide to set up logging directly from your Azure subscriptions to Datadog. Ensure that the Datadog site selector on the right side of this page is set to your [Datadog site][1] to see the correct instructions.
+## Overview
 
-## Sending Azure logs to Datadog
+Use this guide to set up logging directly from your Azure subscriptions to Datadog. 
 
 Datadog recommends sending logs from Azure to Datadog with the Agent or DaemonSet. For some resources it may not be possible. In these cases, you can create a log forwarding pipeline using an Azure Event Hub to collect [Azure Platform Logs][2]. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option.
+
+<div class="alert alert-info">If your Datadog organization is on Datadog's US3 site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/" target="_blank">Azure Native Logging Guide</a> for a simplified configuration using the Datadog resource in Azure.</div>
 
 {{< tabs >}}
 

@@ -56,7 +56,7 @@ Azure AD logs contain the history of sign-in activity and an audit trail of chan
 
 {{< site-region region="us,eu,us5,gov,ap1" >}}
 
-<div class="alert alert-warning">The Azure native integration is only available for users on Datadog's US3 site. If you're not using Datadog's US3 site, see the <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/" target="_blank">Azure Manual Setup Guide</a> for instructions on creating an app registration with read permissions to your Azure subscriptions.</div>
+<div class="alert alert-warning">The Datadog resource in Azure is only available for users on Datadog's US3 site. If you are using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure Logs to Datadog</a> guide for configuration options.</div>
 
 {{< /site-region >}}
 
