@@ -114,7 +114,7 @@ Installation errors? See [Automated log collection][1] for common error cases.
 To send logs from Azure to Datadog, follow this general process:
 
 1. Create an [Azure Event Hub][1].
-2. Setup the Datadog-Azure [function with an Event hub trigger][2] to forward logs to Datadog.
+2. Set up the Datadog-Azure [function with an Event hub trigger][2] to forward logs to Datadog.
 3. Configure your Azure services to stream logs to the Event Hub by creating a [diagnostic setting][3].
 
 The instructions below walk through a basic, initial setup using the Azure Portal. All of these steps can be performed with the CLI, Powershell, or resource templates by referring to the Azure documentation.
@@ -218,12 +218,12 @@ Configure your Azure services to forward their logs to the Event Hub by creating
 To collect logs from all of your Azure App Services, follow this general process:
 
 1. Set up [Azure Blob Storage][1] from the [Azure portal][2], [Azure Storage Explorer][3], [Azure CLI][4], or [Powershell][5].
-2. [Set up the Datadog-Azure Function](#create-a-new-azure-blob-storage-function) which forwards logs from your blob storage to Datadog.
-3. [Configure your Azure App Services to forward their logs to the Blob Storage][6].
+2. Set up the [Datadog-Azure Function](#create-a-new-azure-blob-storage-function) which forwards logs from your blob storage to Datadog.
+3. Configure your Azure App Services to [forward their logs to the Blob Storage][6].
 
 #### Create a new Azure Blob Storage function
 
-If you are unfamiliar with Azure functions, see [Create your first function in the Azure portal][7].
+If you are unfamiliar with Azure functions, see [Getting started with Azure Functions][7].
 
 1. In the [Azure portal][2], navigate to the **Function Apps** overview and click **Create**.
 2. Select a subscription, resource group, region, and enter a name for your function apps. 

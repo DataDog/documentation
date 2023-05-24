@@ -7,18 +7,17 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-## Overview
-
-Use this guide to set up and manage logging directly from your Azure subscriptions to Datadog through the [Datadog resource in Azure][3].  
-**Note**: The Datadog resource in Azure is only available to Datadog organizations on the Datadog US3 site. If you are using any other [Datadog site][1], see the [Send Azure Logs to Datadog][2] guide for configuration options.
-
 {{< site-region region="us3" >}}
 
-You can manage the collection of three kinds of Azure logs. Find instructions and additional details in the sections below:
+## Overview
+
+Use this guide to set up and manage logging directly from your Azure subscriptions to Datadog through the [Datadog resource in Azure][7], also known as the Azure native integration. You can manage the collection of three kinds of Azure logs. Find instructions and additional details in the sections below:
 
    - [Subscription level logs](#subscription-level-logs)
    - [Azure resource logs](#azure-resource-logs)
    - [Azure Active Directory (Azure AD) logs](#azure-active-directory-azure-ad-logs)
+
+**Note**: The Datadog resource in Azure is only available to Datadog organizations on the Datadog US3 site. If you are using any other [Datadog site][5], see the [Send Azure Logs to Datadog][6] guide for configuration options.
 
 ## Subscription level logs 
 
@@ -52,6 +51,9 @@ Azure AD logs contain the history of sign-in activity and an audit trail of chan
 [2]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/resource-logs-categories
 [3]: https://docs.datadoghq.com/integrations/guide/azure-portal/#azure-active-directory-logs
 [4]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
+[5]: /getting_started/site/
+[6]: /logs/guide/azure-logging-guide
+[7]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
 {{< /site-region >}}
 
 {{< site-region region="us,eu,us5,gov,ap1" >}}
@@ -63,8 +65,3 @@ Azure AD logs contain the history of sign-in activity and an audit trail of chan
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-
-[1]: /getting_started/site/
-[2]: /logs/guide/azure-logging-guide
-[3]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/
