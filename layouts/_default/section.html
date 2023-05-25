@@ -1,5 +1,6 @@
 {{ define "main" }}
     <h1 id="pagetitle">{{ .Title }}</h1>
+    {{ partial "breadcrumbs.html" . }}
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
     {{ .Content }}
 {{ end }}

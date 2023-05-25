@@ -10,6 +10,7 @@
   <h1 id="pagetitle">
     {{ .Title }}
   </h1>
+  {{ partial "breadcrumbs.html" . }}
 
   <!-- Page Content-->
   {{ with .Content }}{{ . }}{{ end }}
