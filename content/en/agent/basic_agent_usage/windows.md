@@ -75,6 +75,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 - The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 - Some Agent versions may cause a forced reboot. To prevent this, add the parameter: `REBOOT=ReallySuppress`.
+- Some Agent components require a kernel driver to collect data. To know if a kernel driver is required, refer to the products' documentation page or search for `kernel driver` in any of the Agent configuration files.
 
 ### Configuration
 
