@@ -89,7 +89,7 @@ Heroku emits dyno metrics through logs. To convert these logs into metrics and s
 * [Heroku Datadog Log Drain][35] written in Nodejs by [Oz][36].
 * [Heroku Datadog Log Drain][37] written in Go by [Apiary][38].
 
-To use the tracer or profiler on Heroku you may use a buildpack.
+To use the PHP tracer or profiler on Heroku, use the following buildpack.
 
 * [Heroku Datadog PHP Tracer/Profiler Buildpack][65] maintained by [SpeedCurve][66].
 
