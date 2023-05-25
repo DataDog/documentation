@@ -16,8 +16,7 @@
             "query": {
               "data_source": "event_stream",
               "query_string": "",
-              "event_size": "l",
-              "show_year": true
+              "event_size": "l"
             },
             "response_format": "event_list"
           }
