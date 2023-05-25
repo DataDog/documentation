@@ -2,7 +2,7 @@
 
 {{ $scopable_permissions := slice "logs_write_exclusion_filters" "logs_write_processors" "logs_read_index_data" }}
 {{ $is_scopable := false }}
-{{ $hide_scopable_column := false }}
+{{ $hide_scopable_column := true }}
 {{ $permission_group := .group }}
 {{ $permissions_data := .data }}
 
