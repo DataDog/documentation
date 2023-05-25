@@ -38,7 +38,7 @@ To integrate Datadog with Azure using the Azure CLI, Datadog recommends using th
 {{< tabs >}}
 {{% tab "Azure CLI" %}}
 
-First, log in to the Azure account you want to integrate with Datadog:
+First, log into the Azure account you want to integrate with Datadog:
 
 ```shell
 az login
@@ -187,7 +187,7 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 
 ### Configuration
 
-To limit resource collection for Azure based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
+To limit resource collection for Azure-based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
 
 This list of tags in `<KEY>:<VALUE>` form is separated by commas and defines a filter used while collecting metrics. Wildcards such as `?` (for single characters) and `*` (for multiple characters) can also be used. 
 

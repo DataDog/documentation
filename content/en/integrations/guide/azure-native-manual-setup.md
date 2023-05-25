@@ -33,7 +33,7 @@ If your Datadog organization is on the Datadog US3 site, you can use the Azure N
 
 #### Required permissions
 
-To set up the Azure Native integration, you must be an **Owner** on any Azure subscriptions you want to link, and **Admin** for the Datadog org you are linking them to. Ensure you have the appropriate access before starting the setup.
+To set up the Azure Native integration, you must be an **Owner** on any Azure subscriptions you want to link, and **Admin** for the Datadog organization you are linking them to. Ensure you have the appropriate access before starting the setup.
 
 ## Setup
 
