@@ -21,7 +21,8 @@ title: Datadog CDK コンストラクト
 ## AWS CDK v1 と AWS CDK v2
 Datadog CDK コンストラクトには、`datadog-cdk-constructs` と `datadog-cdk-constructs-v2` という 2 つのバージョンが存在します。これらは、それぞれ `AWS CDK v1` と `AWS CDK v2` で動作するように設計されています。
 
-- `datadog-cdk-constructs-v2` には Node 14+ が必要で、`datadog-cdk-constructs-v1` は Node 12+ をサポートしています。
+- `datadog-cdk-constructs-v2` には Node >= 14 が必要で、`datadog-cdk-constructs` は Node >= 12 をサポートしています。
+- `datadog-cdk-constructs-v2` はより多くの機能を含んでいます。
 - それ以外は、2 つのパッケージの使用方法は同じです。
 
 ## npm パッケージのインストール:
@@ -80,6 +81,7 @@ const datadog = new Datadog(this, "Datadog", {
   site: "<SITE>",
   apiKey: "{Datadog_API_Key}",
   apiKeySecretArn: "{Secret_ARN_Datadog_API_Key}",
+  apiKeySecret: <AWS_CDK_ISECRET>, // datadog-cdk-constructs-v2 でのみ使用可能
   apiKmsKey: "{Encrypted_Datadog_API_Key}",
   enableDatadogTracing: <BOOLEAN>,
   enableMergeXrayTraces: <BOOLEAN>,
@@ -177,6 +179,7 @@ _注_: 説明では npm パッケージパラメーターを使用していま�
 | `site` | `site` | データを送信する Datadog サイトを設定します。これは、`flushMetricsToLogs` が `false` または `extensionLayerVersion` が設定されている場合にのみ使用されます。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。 |
 | `apiKey` | `api_key` | Datadog API キー。`flushMetricsToLogs` が `false` または `extensionLayerVersion` が設定されている場合にのみ必要です。Datadog API キーの取得の詳細については、[API キーのドキュメント][8]を参照してください。 |
 | `apiKeySecretArn` | `api_key_secret_arn` | AWS Secrets Manager で Datadog の API キーを保存しているシークレットの ARN。`flushMetricsToLogs` が `false` の場合や `extensionLayer` が設定されている場合に、`apiKey` の代わりにこのパラメータを使用することができます。Lambda  の実行ロールに `secretsmanager:GetSecretValue` アクセス許可を追加することを忘れないようにしましょう。 |
+| `apiKeySecret` | `api_key_secret` | AWS Secrets Manager で Datadog API キーを格納するシークレットを表す [AWS CDK ISecret][16]。このパラメーターを `apiKeySecretArn` の代わりに使用すると、Lambda 実行ロールに与えられたシークレットへの読み取りアクセスを自動的に付与できます。[例はこちら](#automatically-grant-aws-secret-read-access-to-lambda-execution-role)を参照してください。**datadog-cdk-constructs-v2 でのみ使用可能です**。 |
 | `apiKmsKey` | `api_kms_key` | KMS を使用して暗号化された Datadog API キー。`flushMetricsToLogs` が `false` または `extensionLayerVersion` が設定されており、KMS 暗号化を使用している場合、`apiKey` の代わりにこのパラメーターを使用します。 |
 | `enableDatadogTracing` | `enable_datadog_tracing` | Lambda 関数で Datadog トレースを有効にします。デフォルトは `true` です。 |
 | `enableMergeXrayTraces` | `enable_merge_xray_traces` | Lambda 関数の X-Ray トレースのマージを有効にします。デフォルトは `false` です。 |
@@ -195,6 +198,7 @@ _注_: 説明では npm パッケージパラメーターを使用していま�
 | `encodeAuthorizerContext`     |`encode_authorizer_context` | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
 | `decodeAuthorizerContext`     |`decode_authorizer_context` | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。                         |
 | `apmFlushDeadline` | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。 |
+| `redirectHandler` | `redirect_handler` | `false` に設定すると、ハンドラーを Datadog Lambda Library のハンドラーにリダイレクトするのをスキップします。Datadog Lambda 拡張機能のみでインスツルメンテーションを行う場合に便利です。デフォルトは `true` です。 |
 
 **注**: 上記のパラメーターを使用すると、対応する関数レベルの `DD_XXX` 環境変数がオーバーライドされる場合があります。
 ### トレーシング
@@ -276,6 +280,25 @@ class NestedStack extends cdk.NestedStack {
 ### タグ
 
 コンストラクトにタグを追加します。Datadog のテレメトリーを紐付けるために、`env` タグと `service` タグを設定することをお勧めします。詳しくは [AWS 公式ドキュメント][10]や [CDK ドキュメント][11]を参照してください。
+
+## Lambda 実行ロールに AWS シークレット読み取りアクセスを自動で付与する
+**datadog-cdk-constructs-v2 でのみ使用可能**
+
+Lambda 実行ロールに指定したシークレットへの読み取りアクセスを自動的に付与するには、Datadog のコンストラクトを初期化する際に、`apiKeySecretArn` の代わりに `apiKeySecret` を渡します。
+
+```
+const { Secret } = require('aws-cdk-lib/aws-secretsmanager');
+
+const secret = Secret.fromSecretPartialArn(this, 'DatadogApiKeySecret' 'arn:aws:secretsmanager:us-west-1:123:secret:DATADOG_API_KEY');
+
+const datadog = new Datadog(this, 'Datadog', {
+  ...
+  apiKeySecret: secret
+  ...
+});
+```
+
+`addLambdaFunctions` が呼び出されると、Datadog CDK コンストラストは、Lambda 実行ロールに与えられた AWS シークレットへの読み取りアクセスを付与します。これは [AWS ISecret の grantRead 関数][17]を通して行われます。
 
 ## UDS の仕組み
 
@@ -359,3 +382,5 @@ DD_CONSTRUCT_DEBUG_LOGS=true npx cdk --app lib/sample/index.js synth --quiet
 [13]: https://github.com/projen/projen
 [14]: https://cdkworkshop.com/15-prerequisites.html
 [15]: https://docs.datadoghq.com/ja/serverless/installation/java/?tab=awscdk
+[16]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_secretsmanager.ISecret.html
+[17]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_secretsmanager.ISecret.html#grantwbrreadgrantee-versionstages
