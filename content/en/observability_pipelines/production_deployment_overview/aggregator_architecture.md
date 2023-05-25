@@ -419,7 +419,7 @@ In the above diagram, the tier two aggregators receive an aggregated sub-stream 
 - Limit global aggregation to tasks that can reduce data, such as computing global histograms. Never send all data to your global aggregators.
 - Continue to use your local aggregators to process and deliver most data so that you do not introduce a single point of failure.
 
-[1]: /observability_pipelines/installation/
+[1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/working_with_data/
 [3]: https://wiki.archlinux.org/title/Domain_name_resolution
 [4]: /logs/log_configuration/archives

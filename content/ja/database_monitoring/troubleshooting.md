@@ -58,8 +58,7 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 
 リクエストの送信に成功し、レスポンスを受け取った場合、レスポンスには `{"status":"error","code":403,"errors":["Forbidden"],...}` が含まれなければなりません。
 
-接続障害の一般的な原因には、Datadog のエンドポイントへのアウトバウンドトラフィックを行う[プロキシ設定][7]やファイアウォールなどがあります。プロキシやファイアウォールを使用している場合は、DBM エンドポイント用の IP アドレスが許可されていることを確認します。Datadog の [IP アドレス][6]にある APM ブロックを参照してください。
-
+接続障害の一般的な原因には、Datadog のエンドポイントへのアウトバウンドトラフィックを行う[プロキシ設定][7]やファイアウォールなどがあります。プロキシやファイアウォールを使用している場合は、DBM エンドポイント用の IP アドレスが許可されていることを確認します。これらのアドレスは APM ブロックの `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}} で確認できます。
 
 ## さらにサポートが必要ですか？
 
@@ -71,5 +70,4 @@ curl -vvv -X POST "https://dbquery-intake.datadoghq.com/api/v2/databasequery" \
 [3]: /ja/database_monitoring/setup_postgres/troubleshooting/
 [4]: /ja/database_monitoring/setup_sql_server/troubleshooting/
 [5]: /ja/help/
-[6]: https://ip-ranges.datadoghq.com
 [7]: /ja/agent/proxy/?tab=linux

@@ -2,12 +2,9 @@
 aliases:
 - /ja/continuous_integration/setup_pipelines/azure
 further_reading:
-- link: /continuous_integration/pipelines
-  tag: Documentation
-  text: パイプラインの実行結果とパフォーマンスを確認する
-- link: /continuous_integration/pipelines/custom_commands/
-  tag: Documentation
-  text: 個々のコマンドをトレースしてパイプラインの可視性を拡張する
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で Azure Pipelines を監視する
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: トラブルシューティング CI
