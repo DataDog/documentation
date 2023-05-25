@@ -23,7 +23,8 @@ Datadog Agent コンテナを有効にすると、自身と同じホスト上の
 ## トレースを受け取るように Datadog Agent を構成する
 1. 実行中の ECS コンテナからすべてのトレースを収集するには、[オリジナルの ECS セットアップ][6]の Agent のタスク定義を以下の構成に更新してください。
 
-   &nbsp;必要な基本構成は、[datadog-agent-ecs-apm.json][3] を参照します。Datadog Agent コンテナのタスク定義で、ホストの `portMappings` をコンテナのポート `8126` に設定し、プロトコル `tcp` を設定します。test
+   &nbsp;必要な基本構成は、[datadog-agent-ecs-apm.json][3] を参照します。Datadog Agent コンテナのタスク定義で、ホストの `portMappings` をコンテナのポート `8126` に設定し、プロトコル `tcp` を設定します。
+
     ```json
     {
       "containerDefinitions": [
