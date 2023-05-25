@@ -32,9 +32,9 @@ The Session Replay recorder supports all browsers supported by the RUM Browser S
 
 To reduce Session Replay's network impact and ensure the Session Replay recorder has minimal overhead on your application's performance, Datadog compresses the data prior to sending it. Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
 
-## Setup
+## Web Setup
 
-Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK.
+Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK. For setup in mobile environments, see [Mobile Session Replay](#mobile-session-replay).
 
 <div class="alert alert-info">You must be on the latest version of the SDK (v3.6.0 or later)</div>
 
@@ -65,6 +65,41 @@ To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 ### Disable Session Replay
 
 To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for [Browser RUM & Session Replay plan][5], which includes replays.
+
+## Mobile Session Replay
+
+<div class="alert alert-warning">
+This feature is in public beta.
+</div>
+
+### Overview
+
+Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction. It is available for native apps on both Android and iOS.
+
+### Setup
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+Android content here.
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+iOS content here.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Sampling
+
+
+### Privacy configuration
+
+
+### Troubleshooting
+
 
 ## Further Reading
 
