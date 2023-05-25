@@ -69,7 +69,6 @@ apikey = <DATADOG_API_KEY>
 appkey = <YOUR_APPLICATION_KEY>
 api_host = https://us5.datadoghq.com
 {{< /site-region >}}
-```
 {{< site-region region="eu" >}}
 ```text
 apikey = <DATADOG_API_KEY>
