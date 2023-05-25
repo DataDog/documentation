@@ -91,7 +91,7 @@ Heroku emits dyno metrics through logs. To convert these logs into metrics and s
 
 To use the PHP tracer or profiler on Heroku, use the following buildpack.
 
-* [Heroku Datadog PHP Tracer/Profiler Buildpack][65] maintained by [SpeedCurve][66].
+* [Heroku Datadog PHP Tracer and Profiler Buildpack][65] maintained by [SpeedCurve][66].
 
 ### Jira
 
