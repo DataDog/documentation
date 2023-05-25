@@ -30,7 +30,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 
 ## FIPS Compliance
 
-For information on setting up the Datadog Agent with a FIPS proxy, see [Datadog FIPS Compliance][8].
+For information on setting up a FIPS proxy with the Datadog Agent, see [Datadog FIPS Compliance][8]. The FIPS proxy is only available in the US1-FED region.
 
 ## Web proxy
 
