@@ -51,6 +51,28 @@ MaterialApp(
 
 また、`DatadogRouteAwareMixin` プロパティと `DatadogNavigationObserverProvider` プロパティを組み合わせて使用すると、RUM ビューを自動的に起動したり停止したりすることができます。`DatadogRouteAwareMixin` を使って、`initState` から `didPush` へとロジックを移動させます。
 
+ビューの名前を変更したり、カスタムパスを供給するには、[`viewInfoExtractor`][8] コールバックを提供します。この関数は、`defaultViewInfoExtractor` を呼び出すことによって、オブザーバーのデフォルト動作にフォールバックすることができます。例:
+
+```dart
+RumViewInfo? infoExtractor(Route<dynamic> route) {
+  var name = route.settings.name;
+  if (name == 'my_named_route') {
+    return RumViewInfo(
+      name: 'MyDifferentName',
+      attributes: {'extra_attribute': 'attribute_value'},
+    );
+  }
+
+  return defaultViewInfoExtractor(route);
+}
+
+var observer = DatadogNavigationObserver(
+  datadogSdk: DatadogSdk.instance,
+  viewInfoExtractor: infoExtractor,
+);
+```
+
+
 ## リソースの自動追跡
 
 [Datadog Tracking HTTP Client][5] パッケージを使用して、RUM ビューからリソースと HTTP 呼び出しの自動追跡を有効にします。
@@ -75,9 +97,10 @@ Datadog [分散型トレーシング][6]を有効にするには、構成オブ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /ja/account_management/api-app-keys/#client-tokens 
+[2]: /ja/account_management/api-app-keys/#client-tokens
 [3]: /ja/real_user_monitoring/flutter/#setup
 [4]: https://pub.dev/packages/datadog_flutter_plugin
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /ja/serverless/distributed_tracing
 [7]: /ja/real_user_monitoring/flutter/data_collected/
+[8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html

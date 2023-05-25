@@ -181,18 +181,14 @@ main:
     url: getting_started/application_security/vulnerability_management
     parent: getting_started_application_security
     weight: 101
-  - name: Observability Pipelines
-    url: getting_started/observability_pipelines/
-    parent: getting_started
-    weight: 20
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 21
+    weight: 20
   - name: Support
     url: getting_started/support/
     parent: getting_started
-    weight: 22
+    weight: 21
   - name: Glossary
     url: glossary/
     pre: features
@@ -392,16 +388,11 @@ main:
     identifier: agent_guides
     parent: agent
     weight: 12
-  - name: Aggregating Agents
-    url: getting_started/observability_pipelines/
-    parent: agent
-    identifier: opw_aggregation
-    weight: 13
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 14
+    weight: 13
   - name: Containers
     url: containers/
     identifier: containers
@@ -1025,76 +1016,81 @@ main:
     parent: monitor_types
     identifier: monitor_types_ci
     weight: 206
+  - name: Cloud Cost
+    url: monitors/types/cloud_cost/
+    parent: monitor_types
+    identifier: monitor_types_cloud_cost
+    weight: 207
   - name: Composite
     url: monitors/types/composite/
     parent: monitor_types
     identifier: monitor_types_composite
-    weight: 207
+    weight: 208
   - name: Error Tracking
     url: monitors/types/error_tracking/
     parent: monitor_types
     identifier: monitor_types_error_tracking
-    weight: 208
+    weight: 209
   - name: Event
     url: monitors/types/event/
     parent: monitor_types
     identifier: monitor_types_event
-    weight: 209
+    weight: 210
   - name: Forecast
     url: monitors/types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
-    weight: 210
+    weight: 211
   - name: Integration
     url: monitors/types/integration/
     parent: monitor_types
     identifier: monitor_types_integration
-    weight: 211
+    weight: 212
   - name: Live Process
     url: monitors/types/process/
     parent: monitor_types
     identifier: monitor_types_process
-    weight: 212
+    weight: 213
   - name: Logs
     url: monitors/types/log/
     parent: monitor_types
     identifier: monitor_types_log
-    weight: 213
+    weight: 214
   - name: Network
     url: monitors/types/network/
     parent: monitor_types
     identifier: monitor_types_network
-    weight: 214
+    weight: 215
   - name: Outlier
     url: monitors/types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
-    weight: 215
+    weight: 216
   - name: Process Check
     url: monitors/types/process_check/
     parent: monitor_types
     identifier: monitor_types_process_check
-    weight: 216
+    weight: 217
   - name: Real User Monitoring
     url: monitors/types/real_user_monitoring/
     parent: monitor_types
     identifier: monitor_types_rum
-    weight: 217
+    weight: 218
   - name: Service Check
     url: monitors/types/service_check/
     parent: monitor_types
     identifier: monitor_types_service_check
-    weight: 218
+    weight: 219
   - name: SLO Alerts
     url: monitors/types/slo/
     parent: monitor_types
     identifier: monitor_types_slo
-    weight: 219
+    weight: 220
   - name: Watchdog
     url: monitors/types/watchdog/
     parent: monitor_types
     identifier: monitor_types_watchdog
-    weight: 220
+    weight: 221
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -2569,10 +2565,9 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
-  - name: Installation
-    url: observability_pipelines/installation/
+  - name: Setup
+    url: observability_pipelines/setup/
     parent: observability_pipelines
-    identifier: observability_pipelines_installation
     weight: 1
   - name: Production Deployment Overview
     url: observability_pipelines/production_deployment_overview/

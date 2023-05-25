@@ -59,7 +59,7 @@ Optional path to a file where configuration properties are provided one per each
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
 **Default**: `null`<br>
-**Example**: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`<br>
+**Example**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
 Dynamically rename services via configuration. Useful for making databases have distinct names across different services.
 
 `dd.writer.type`

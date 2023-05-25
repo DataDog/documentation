@@ -35,6 +35,5 @@ cascade:
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: Discover best practices for getting your team up and running with CSM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: Discover best practices for getting your team up and running with ASM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
-{{< nextlink href="/getting_started/observability_pipelines" >}}<u>Observability Pipelines</u>: Learn how to collect, process, and route logs and metrics from any source to any destination.{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Follow a learning path, take a self-guided class or lab, and explore the Datadog certification program.{{< /nextlink >}}
 {{< /whatsnext >}}

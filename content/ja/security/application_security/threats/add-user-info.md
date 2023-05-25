@@ -6,7 +6,7 @@ further_reading:
 - link: /security/application_security/
   tag: ドキュメント
   text: Datadog Application Security Management で脅威から守る
-- link: /security/application_security/setup_and_configure/
+- link: /security/application_security/threats/library_configuration/
   tag: ドキュメント
   text: その他のセットアップに関する注意と構成オプション
 kind: documentation
@@ -685,7 +685,7 @@ track_custom_event(tracer, event_name, metadata)
 [2]: /ja/security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [3]: /ja/security/application_security/threats/add-user-info/#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [4]: /ja/security/default_rules/bl-rate-limiting/
-[5]: /ja/security/default_rules/bl-privilege-violation/
+[5]: /ja/security/default_rules/bl-privilege-violation-user/
 [6]: /ja/security/default_rules/appsec-ato-groupby-ip/
 [7]: /ja/security/default_rules/bl-signup-ratelimit/
 [8]: /ja/security/default_rules/bl-account-deletion-ratelimit/

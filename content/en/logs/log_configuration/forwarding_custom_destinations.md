@@ -62,7 +62,7 @@ The following metrics report on logs that have been forwarded successfully, incl
 {{% tab "Splunk" %}}
 
 6. Enter a name for the destination.
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, `https://<your_account>.splunkcloud.com:8088`.
+7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`. **Note**: `/services/collector/event` is automatically appended to the endpoint.
 8. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
 9. Click **Save**.
 
