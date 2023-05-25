@@ -15,7 +15,7 @@ further_reading:
 
 {{% site-region region="us3" %}}
 
-The Azure Native integration uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This is possible through creation of the [azurerm_datadog_monitor][3] resource and assignment of the [Monitoring Reader role][4] in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
+The Azure Native integration uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This method involves creating the [azurerm_datadog_monitor][3] resource and assigning the [Monitoring Reader role][4] in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
 
 **Note**: To set up the Azure Native integration, you must be an Owner on any Azure subscriptions you want to link, and Admin for the Datadog org you are linking them to.
 
@@ -81,11 +81,11 @@ Once the Datadog resource is set up in your Azure account, configure log collect
 
 {{% site-region region="us,us5,eu,ap1,gov" %}}
 
-The Azure Native integration is only supported for users of Datadog's US3 site. If you're using a different [Datadog site][3], see the standard [Azure Programmatic Management guide][1]. If you're using the Datadog US3 site, [change the site selector][2] on the right of this page.
+The Azure Native integration is only supported for users of Datadog's US3 site. If you're using a different [Datadog site][1], see the standard [Azure Programmatic Management guide][2]. If you're using the Datadog US3 site, [change the site selector][3] on the right of this page.
 
-[1]: /integrations/guide/azure-programmatic-management/
-[2]: ?site=us3
-[3]: /getting_started/site/
+[1]: /getting_started/site/
+[2]: /integrations/guide/azure-programmatic-management/
+[3]: ?site=us3
 {{% /site-region %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
