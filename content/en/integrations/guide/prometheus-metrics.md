@@ -24,16 +24,12 @@ This page walks you through how Prometheus or OpenMetrics check metrics map to e
 
 ## Prometheus and OpenMetrics metric types
 
-For more information, see [Kubernetes Prometheus and OpenMetrics Metrics Collection][1].
 
 {{< tabs >}}
 {{% tab "Latest Version" %}}
 * `gauge`: A metric that represents a single numeric value, which can arbitrarily go up and down.
 * `counter`: A cumulative metric that represents a single monotonically increasing counter, whose value can only increase—or be reset to zero.
-* `stateset`: A metric that represents a series of related boolean values, also known as a bitset. 
-* `info`: A metric that exposes textual information which should not change during the process lifetime. For example, an application's version, revision control commit, and the compiler version.
 * `histogram`: Samples observations and counts them in configurable buckets; also provides a sum of all observed values.
-* `gaugehistogram`: Samples current distributions and counts them in configurable buckets; also provides a sum of all observed values.
 * `summary`: Similar to `histogram`; samples observations, provides a sum of all observed values, and calculates configurable quantiles over a sliding time window.
 
 {{% /tab %}}
@@ -119,10 +115,10 @@ If the parameter `send_distribution_buckets` is `true`, `_bucket` samples are ag
 
 For [Prometheus/OpenMetrics `summary`][105], `_count` and `_sum` values are mapped to Datadog's `gauge` type by default, and include a `.count` and `.sum` suffix in their name, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix.
 
-Setting the parameter `send_distribution_counts_as_monotonic` to `true` will cause `_count` and metrics to be sent as type `count` instead. `send_distribution_sums_as_monotonic` will do the same for `_sum` metrics.
+Setting the parameter `send_distribution_counts_as_monotonic` to `true` causes the `_count` and metrics to be sent as type `count` instead. Setting `send_distribution_sums_as_monotonic` does the same for `_sum` metrics.
 
 [101]: https://prometheus.io/docs/concepts/metric_types/#counter
-[102]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic-count
+[102]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic_count
 [103]: https://prometheus.io/docs/concepts/metric_types/#gauge
 [104]: https://prometheus.io/docs/concepts/metric_types/#histogram
 [105]: https://prometheus.io/docs/concepts/metric_types/#summary
@@ -133,7 +129,7 @@ Setting the parameter `send_distribution_counts_as_monotonic` to `true` will cau
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">All <code>count</code> metrics are processed by the Agent as <em>monotonic counts</em>, meaning the Agent actually sends the difference between consecutive raw values. [Read more about monotonic counters][102].</div>
+<div class="alert alert-info">All <code>count</code> metrics are processed by the Agent as <em>monotonic counts</em>, meaning the Agent actually sends the difference between consecutive raw values. For more information, see <a href="/metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic_count">Metric Submission: Custom Agent Check</a>.</div>
 
 ## Further Reading
 
