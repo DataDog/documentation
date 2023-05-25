@@ -14,10 +14,6 @@ Instead of using static credentials in private key files, you can use [service a
 
 This solution enables you to monitor all projects visible to a service account by assigning the required roles in the relevant projects. You can assign these roles to projects individually, or you can configure Datadog to monitor groups of projects by assigning these roles at the organization or folder level. Assigning roles in this way allows Datadog to automatically discover and monitor all projects in the given scope, including any new projects that may be added to the group in the future. 
 
-<div class="alert alert-warning">
-This feature is in beta. Log archiving to Google projects is not supported with service account impersonation. Errors and warnings about issues with service account impersonation are not fully represented in Datadog.
-</div>
-
 ### Prerequisites
 
 * If your organization restricts identities by domain, you must add Datadog’s customer identity as an allowed value in your policy. Datadog’s customer identity: `C0147pk0i`
