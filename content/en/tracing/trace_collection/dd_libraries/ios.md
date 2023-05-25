@@ -449,10 +449,10 @@ The following attributes in `Tracer.Configuration` can be used when creating the
 | Method                           | Description                                                                                                                                                                                                                         |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `serviceName`    | Set the value for the `service`. |
-| `sendNetworkInfo` | Set to `true` in order to enrich traces with network connection info (reachability status, connection type, mobile carrier name, and more).|
-| `globalTags`     | Set `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
-| `bundleWithRUM`    | Set to `true` in order to enabled spans to be enriched with the current RUM View information. It will then be possible to see all of the spans produced during a specific View lifespan in the RUM Explorer. |
-| `samplingRate`   | Set a value `0-100` in order to define the percentage of Traces to collect. |
+| `sendNetworkInfo` | Set to `true` to enrich traces with network connection info (reachability status, connection type, mobile carrier name, and more).|
+| `globalTags`     | Set a `<KEY>:<VALUE>` pair of tags to be added to spans created by the Tracer. |
+| `bundleWithRUM`    | Set to `true` to enable spans to be enriched with the current RUM View information. This enables you to see all of the spans produced during a specific View lifespan in the RUM Explorer. |
+| `samplingRate`   | Set a value `0-100` to define the percentage of Traces to collect. |
 
 
 
