@@ -77,28 +77,31 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
 
 2. Create a file with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
 
-```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  global:
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
-    nodeAgent:
-      image:
-        name: gcr.io/datadoghq/agent:latest
-```
+   ```yaml
+   kind: DatadogAgent
+   apiVersion: datadoghq.com/v2alpha1
+   metadata:
+     name: datadog
+   spec:
+     global:
+       site: <DATADOG_SITE>
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+         appSecret:
+           secretName: datadog-secret
+           keyName: app-key
+     override:
+       clusterAgent:
+         image:
+           name: gcr.io/datadoghq/cluster-agent:latest
+       nodeAgent:
+         image:
+           name: gcr.io/datadoghq/agent:latest
+   ```
+
+   Replace `<DATADOG_SITE>` with your [Datadog site][10]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
@@ -144,6 +147,7 @@ To modify the container image registry, see the [Changing Container Registry][9]
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 [9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
+[10]: /getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 

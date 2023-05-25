@@ -17,7 +17,7 @@
 {{ end }}
 
 <h1 id="pagetitle">{{ .Title }}</h1>
-
+{{ partial "breadcrumbs.html" . }}
 {{ .Content }}
 <form id="rules">
     {{- partial "grouped-item-listings.html" ( dict "context" $dot "filters" (sort ($.Scratch.Get "filters")) "listgroups" ($list.GroupByParam "source") "transformGroupTitle" true ) -}}

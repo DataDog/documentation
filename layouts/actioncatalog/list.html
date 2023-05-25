@@ -17,6 +17,7 @@
 {{ end }}
 
 <h1 id="pagetitle">{{ .Title }}</h1>
+{{ partial "breadcrumbs.html" . }}
 
 {{ .Content }}
 <form id="rules">
