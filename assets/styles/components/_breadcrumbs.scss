@@ -1,4 +1,4 @@
-.integrations-breadcrumbs {
+#breadcrumbs {
   position: absolute;
   top: 0;
   line-height:24px;
@@ -20,5 +20,8 @@
     &:last-child {
       color: #7847A6;
     }
+  }
+  &:lang(ja) {
+      font-size: 15px;
   }
 }
