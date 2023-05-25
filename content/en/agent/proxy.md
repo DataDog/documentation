@@ -13,6 +13,9 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces and profiles"
+- link: "/agent/guide/agent-fips-proxy"
+  tag: "Documentation"
+  text: "Datadog FIPS Compliance"
 ---
 
 ## Overview
@@ -24,6 +27,10 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 1. Using a web proxy, such as Squid or Microsoft Web Proxy, that is already deployed to your network
 2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
 3. Using the Agent as a proxy (for **up to 16 Agents** per proxy, **only on Agent v5** )
+
+## FIPS Compliance
+
+For information on setting up the Datadog Agent with a FIPS proxy, see [Datadog FIPS Compliance][8].
 
 ## Web proxy
 
@@ -1291,3 +1298,4 @@ It is recommended to use an actual proxy (a web proxy or HAProxy) to forward you
 [5]: https://www.haproxy.com/blog/haproxy-ssl-termination/
 [6]: https://www.nginx.com
 [7]: /agent/logs/proxy
+[8]: /agent/guide/agent-fips-proxy
