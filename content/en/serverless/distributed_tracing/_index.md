@@ -34,20 +34,11 @@ By connecting your serverless traces to metrics, Datadog provides a context-rich
 
 The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda.
 
-## Choose your tracing solution
+## Get Started
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Architecture diagram for tracing AWS Lambda with Datadog" >}}
 
-<div class="alert alert-info"> New to serverless monitoring? Follow the installation steps <a href="/serverless/installation/">here</a> to get started.</div>
-
-To start using Datadog APM with your serverless application, you can choose between generating traces using Datadog's tracing client (`dd-trace`) or pulling X-Ray traces from AWS.
-
-| [Datadog APM with dd-trace][1]          | [Datadog APM with AWS X-Ray][2]           |
-|---------------------------------|-------------------------------------------------------------------------|
-| Uses Datadog APM's integration libraries for end-to-end tracing.  | Pulls traces from AWS X-Ray. |
-| Visualize your traces in Datadog in real-time. | Trace data available in Datadog after a few minutes. |
-| Tail-based sampling and fully customizable tag-based retention filters. | Sampling rate cannot be configured. |
-| Support for all Lambda runtimes. |  Support for all Lambda runtimes. |
+The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda. You can install the tracer using the <a href="/serverless/installation/">installation instructions.</a> to get started. If you already have the extension installed, ensure that DD_ENABLE_TRACING is set to `true`. 
 
 ### Runtime recommendations
 
@@ -69,11 +60,7 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
   - EventBridge
 - Tracing dozens of additional out-of-the-box [Python][3] and [Node.js][4] libraries.
 
-For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][5]. If your application requires AWS X-Ray active tracing in AWS managed services such as AppSync or Step Functions, Datadog recommends you augment AWS X-Ray traces with Datadog APM by configuring _both_ AWS X-Ray and Datadog APM tracing libraries as described in [Serverless Trace Merging][6].
-
-If you are already tracing your serverless functions with X-Ray and want to continue using X-Ray, you can [install the AWS X-Ray integration][2].
-
-*Looking to trace through serverless resources not listed above? [Open a feature request][7].*
+For Python and Node.js serverless applications, Datadog recommends you [install Datadog's tracing libraries][5]. 
 
 #### Ruby
 
@@ -93,9 +80,7 @@ The Datadog Lambda Library and tracing libraries for Go support:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Go][9] libraries.
 
-For Go serverless applications, Datadog recommends installing [Datadog's tracing libraries][5]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, you may want to consider instead using [Datadog APM with AWS X-Ray tracing][2].
-
-*Looking to trace through serverless resources not listed above? [Open a feature request][7].*
+For Go serverless applications, Datadog recommends installing [Datadog's tracing libraries][5]. 
 
 #### Java
 
@@ -104,7 +89,7 @@ The Datadog Lambda Library and tracing libraries for Java support:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [Java][11] libraries.
 
-For Java serverless applications, Datadog recommends [installing Datadog's tracing libraries][5]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, you may want to consider instead using [Datadog APM with AWS X-Ray tracing][2].
+For Java serverless applications, Datadog recommends [installing Datadog's tracing libraries][5]. 
 
 *Have feedback on the Datadog's tracing libraries for Java Lambda functions? Make sure to check out discussions going on in the [#serverless][12] channel in the [Datadog Slack community][13].*
 
@@ -114,7 +99,7 @@ The tracing library for .NET supports:
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing dozens of additional out-of-the-box [.NET][14] libraries.
 
-For .NET serverless applications, Datadog recommends [installing Datadog's tracing libraries][5]. If your application requires AWS X-Ray active tracing in AWS managed services such as API Gateway or Step Functions, you may want to consider instead using [Datadog APM with AWS X-Ray tracing][2].
+For .NET serverless applications, Datadog recommends [installing Datadog's tracing libraries][5].
 
 Learn more about [tracing through .NET Azure serverless applications][15].
 
@@ -125,12 +110,6 @@ If you have installed Datadog's tracing libraries (`dd-trace`) on both your Lamb
 If `dd-trace` is installed on your hosts with the Datadog Agent, and your serverless functions are traced with AWS X-Ray, trace merging is required to see a single, connected trace across your infrastructure. See the [Serverless Trace Merging][6] documentation to learn more about merging traces from `dd-trace` and AWS X-Ray.
 
 Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. See the [Datadog APM documentation][16] to learn more about tracing in container or host-based environments.
-
-## Enable Datadog APM
-
-{{< img src="tracing/live_search/livesearchmain.mp4" alt="Live Search" video=true >}}
-
-The Datadog Python, Node.js, Ruby, Go, Java, and .NET tracing libraries support distributed tracing for AWS Lambda. To enable tracing on your functions, follow [the installation instructions][5].
 
 ## Trace Merging
 
@@ -330,6 +309,10 @@ ddlambda.WrapFunction(handler, cfg)
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+## X-Ray Integration
+
+If you are already tracing your serverless functions with X-Ray and want to continue using X-Ray, you can [install the AWS X-Ray integration][2]
 
 ## Further Reading
 
