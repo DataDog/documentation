@@ -25,13 +25,13 @@ public_title: Twenty Forty Eight
 short_description: Un jeu de logique amusant à ajouter à vos dashboards Datadog
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::UI Extension
   configuration: README.md#Setup

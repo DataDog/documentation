@@ -3,6 +3,7 @@ categories:
 - cloud
 - google cloud
 - ログの収集
+- ネットワーク
 dependencies: []
 description: Google Cloud Interconnect のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_interconnect/
@@ -29,7 +30,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

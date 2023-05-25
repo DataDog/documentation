@@ -7,6 +7,9 @@ further_reading:
 - link: /observability_pipelines/working_with_data/
   tag: ドキュメント
   text: 観測可能性パイプラインを使ったデータの操作
+- link: /getting_started/observability_pipelines/
+  tag: Documentation
+  text: 観測可能性パイプラインと Datadog の概要
 kind: ドキュメント
 title: 構成
 ---

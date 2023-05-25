@@ -40,7 +40,7 @@ The [Detection Rules][9] page lets you search all detection rules by rule type. 
 
 ### Finding detection rules
 
-The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no “Search” button to click.
+The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no "Search" button to click.
 
 #### Filter by facet
 
@@ -56,9 +56,16 @@ You can also filter by facets such as `source` and `severity` to help when inves
 
 Rules are displayed in the detection rules table. You can sort the table by clicking on the **Sort by** option in the top right corner of the table. For example, sort by **Highest Severity** to triage high-impact misconfigurations and threats.
 
-#### Enabling or disabling a rule
+#### Enable or disable rules
 
-Enable or disable a rule using the toggle switch to the right of the rule.
+To enable or disable a single rule, toggle the switch to the right of the rule.
+
+You can also bulk enable or disable rules:
+
+1. Click **Select Rules**.
+1. Select the rules you want to enable or disable.
+1. Click the **Edit Rules** dropdown.
+1. Select **Enable Rules** or **Disable Rules**.
 
 #### Rule and generated signal options
 
@@ -79,7 +86,7 @@ Use granular access controls to limit the [roles][10] that may edit a single rul
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles that may edit the security rule.
+1. Use the dropdown to select one or more roles that may edit the security rule.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
@@ -90,6 +97,19 @@ To restore general access to a rule with restricted access, follow the steps bel
 1. Select **Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
+
+## Rule deprecation
+
+Regular audits of all detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
+
+The rule deprecation process is as follows:
+
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
+    - Signal side panel's **Rule Details > Playbook** section
+    - Findings side panel (CSPM only)
+    - [Rule editor](#rule-and-generated-signal-options) for that specific rule 
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#rule-and-generated-signal-options) in the UI.
+3. Once the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

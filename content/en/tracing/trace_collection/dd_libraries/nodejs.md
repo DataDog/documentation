@@ -29,7 +29,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog’s Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -43,7 +43,7 @@ Follow the [Quick start instructions][2] in Datadog for the best experience, inc
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -55,19 +55,23 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables by running:
+3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_TRACE_AGENT_HOSTNAME` and `DD_TRACE_AGENT_PORT` environment variables by running:
 
     ```sh
-    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    DD_TRACE_AGENT_HOSTNAME=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
     ```
 
    To use Unix domain sockets, specify the entire URL as a single environment variable, `DD_TRACE_AGENT_URL`.
 
-    ```sh
-    DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
-    ```
+   If you require a different socket, host, or port, use the `DD_TRACE_AGENT_URL` environment variable or the `DD_TRACE_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. Some examples:
 
-{{< site-region region="us3,us5,eu,gov" >}}
+   ```sh
+   DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+   DD_TRACE_AGENT_URL=http://<HOSTNAME>:<PORT> node server
+   DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+   ```
+
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -101,7 +105,7 @@ Read [tracer settings][3] for a list of initialization options.
 
 ### Instrument your application
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection">Injecting Libraries</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
@@ -119,7 +123,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
 
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
-   Once you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm step 2 has been correctly done**.  The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
+   Once you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm step 2 has been correctly done**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
    When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 

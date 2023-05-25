@@ -24,7 +24,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - languages
 - log collection
 dependencies:
@@ -47,10 +46,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Windows
-  - Category::Web
   - Category::言語
-  - Category::Log Collection
+  - Category::ログの収集
+  - Supported OS::Windows
   configuration: README.md#Setup
   description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
   media: []
@@ -70,7 +68,7 @@ ASP.NET からメトリクスをリアルタイムに取得すると、以下の
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 ASP.NET チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

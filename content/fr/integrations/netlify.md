@@ -1,7 +1,8 @@
 ---
 categories:
-- web
+- collaboration
 - log collection
+- provisioning
 dependencies: []
 description: Effectuez un suivi des logs Netlify.
 doc_link: https://docs.datadoghq.com/integrations/netlify/
@@ -37,7 +38,7 @@ Intégrez Netlify à Datadog pour :
 * Visualiser la durée de votre fonction et consulter les logs correspondants pour chaque requête
 * Surveiller les performances frontend grâce à la [surveillance Synthetic Datadog][3]
 
-## Configuration
+## Implémentation
 
 1. Générez une [clé d'API Datadog][4].
 2. Configuez vos [drains de logs Netlify][5] de façon à envoyer les logs à Datadog.

@@ -51,6 +51,7 @@ The data we track automatically contains primarily technical information, much o
 - [iOS][2]
 - [Android][3]
 - [Flutter][4]
+- [React Native][16]
 
 ### Transmit RUM events through a proxy server
 You can transmit all RUM events through your own [proxy server][15] so that end user devices never directly communicate with Datadog.
@@ -66,7 +67,7 @@ By default, data retention for production environments is:
 - 30 days for sessions, views, actions, errors, and session recordings.
 - 15 days for resources and long tasks.
 
-Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8].
+Retention can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8]. Note that this retention extension does not apply to Session Replays, Resources, or Long Tasks.
 
 #### Role-based access control
 Datadog provides role-based access control (RBAC) for managing who sees captured RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
@@ -93,10 +94,10 @@ When setting up a RUM application, you can choose whether or not you want to inc
 
 {{< img src="data_security/data-security-rum-privacy-compliance-edit-rum-application.png" alt="You can include or exclude geolocation and client IP data from the RUM application setup page" style="width:100%;" >}}
 
-If you choose to collect this data, you can request that it be scrubbed from any future collected data by submitting a support ticket at any time. It is not possible to remove IPs from data collected prior to initiating scrubbing. IP scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is performed on the backend, which means the Browser SDK will still be sending data, but IP addresses will be scrubbed by Datadog backend pipelines and dropped at processing time.
+Once you disable collection of IP data, the change will be applied immediately. Any events collected prior to disabling will not have their IP data removed. It is performed on the backend, which means the Browser SDK will still be sending data, but IP addresses will be omitted by Datadog backend pipelines and dropped at processing time.
 
 #### Geolocation
-In addition to removing client IPs, you can also choose to scrub geolocation (country, city, county), or GeoIP from all future collected data. It is not possible to scrub only GeoIP data without removing client IPs. As with IP addresses, geolocation scrubbing occurs at the organization level; this data cannot be removed for specific applications, services, and so on. It is done at the backend level, which means the Browser SDK will still be sending data, but geolocation data will be scrubbed out by our backend pipelines and dropped at processing time.
+In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the **Collect geolocation data** box, the change will be applied immediately. Any events collected prior to disabling will not have their geolocation data removed. Data omission is done at the backend level, which means the Browser SDK will still be sending data, but geolocation data will be omitted by our backend pipelines and dropped at processing time.
 
 ### Proactively search for sensitive data with Sensitive Data Scanner
 [Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
@@ -118,8 +119,9 @@ See [privacy options specific to Session Replay][12].
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
-[11]: /account_management/org_settings/sensitive_data_detection
+[11]: /sensitive_data_scanner/
 [12]: /real_user_monitoring/session_replay/privacy_options
 [13]: https://www.datadoghq.com/privacy/
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
+[16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events

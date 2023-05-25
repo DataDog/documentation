@@ -63,19 +63,21 @@ OpenTelemetry コレクターレベルでは、_追跡ベースサンプリン�
 
 **注**: 追跡サンプリングの主な制限は、効果的なサンプリング決定のために、与えられたトレースのすべてのスパンが同じコレクターインスタンスによって受信されなければならないということです。トレースが複数のコレクターインスタンスに分散している場合、トレースの一部がドロップされ、同じトレースの他の一部が Datadog に送信される危険性があります。
 
-コレクターレベルの追跡ベースサンプリングでは、APM メトリクスは、Datadog エクスプローラーが見るサンプリングされたトラフィックで計算されます。トレース分析のモニターやスパンからのメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][11]をお読みください。
+コレクターレベルのテールベースサンプリングを使用しながら、APM メトリクスがアプリケーションのトラフィックの 100% に基づいて計算されるようにするには、コレクターのトレースパイプラインでサンプリングプロセッサの前に [Datadog Processor][11] を事前定義してください。このプロセッサは、OpenTelemetry Collector Contribor v0.69.0+ で利用可能です。
+
+スパンからのトレース分析モニターとメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][8]を参照してください。
 
 ## Datadog UI から取り込み量を監視する
 
 [APM 推定使用量ダッシュボード][12]と推定使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` を活用すると、特定の期間の取り込み量を可視化することができます。ダッシュボードを特定の環境とサービスにフィルターして、取り込み量の最大のシェアを占めるサービスを確認できます。
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/opentelemetry/otel_collector_datadog_exporter
-[2]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#4-run-the-collector
+[2]:/ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#5-run-the-collector
 [3]: /ja/opentelemetry/otlp_ingest_in_the_agent
 [4]: /ja/tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
@@ -84,5 +86,5 @@ OpenTelemetry コレクターレベルでは、_追跡ベースサンプリン�
 [8]: /ja/tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
-[11]: /ja/tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor
 [12]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

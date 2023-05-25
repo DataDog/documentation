@@ -16,7 +16,7 @@ aliases:
 
 Datadog APM allows you to collect performance metrics by tracing your code to determine which parts of your application are slow or inefficient.
 
-Tracing data is sent from your instrumented code to the Datadog Agent through an HTTP API. Datadog tracing libraries simplify sending metrics to the Datadog Agent. However you might want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don’t yet have an official Datadog tracing library.
+Tracing data is sent from your instrumented code to the Datadog Agent through an HTTP API. Datadog tracing libraries simplify sending metrics to the Datadog Agent. However you might want to interact directly with the API to instrument applications that cannot use the libraries or are written in languages that don't yet have an official Datadog tracing library.
 
 The tracing API is an Agent API rather than a service side API. Submit your traces to the `http://localhost:8126/v0.3/traces` local endpoint so your Agent can forward them to Datadog.
 
@@ -95,6 +95,10 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 
 ### Example
 
+{{< tabs >}}
+
+{{% tab "Shell" %}}
+
 {{< code-block lang="curl" >}}
 # Curl command
 curl -X PUT "http://localhost:8126/v0.3/traces" \
@@ -115,6 +119,38 @@ curl -X PUT "http://localhost:8126/v0.3/traces" \
 ]
 EOF
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Powershell" %}}
+{{< code-block lang="curl" >}}
+
+# Invoke-RestMethod command
+
+$uri = "http://localhost:8126/v0.3/traces"
+$headers = @{
+    "Content-Type" = "application/json"
+}
+$body = @"
+[
+  [
+    {
+      "duration": 12345,
+      "name": "span_name",
+      "resource": "/home",
+      "service": "service_name",
+      "span_id": 987654321,
+      "start": 0,
+      "trace_id": 123456789
+    }
+  ]
+]
+"@
+
+Invoke-RestMethod -Uri $uri -Method Put -Body $body -Headers $headers
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

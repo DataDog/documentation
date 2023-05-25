@@ -3,6 +3,11 @@ title: Agent Guides
 kind: guide
 private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Agent Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}
@@ -10,8 +15,10 @@ disable_toc: true
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent Configuration Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/setup" >}}Aggregating Agents{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 Status Page{{< /nextlink >}}
     {{< nextlink href="agent/guide/dual-shipping" >}}Dual Shipping{{< /nextlink >}}
+    {{< nextlink href="agent/guide/how_remote_config_works" >}}How Remote Configuration Works{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}

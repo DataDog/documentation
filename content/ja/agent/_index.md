@@ -1,29 +1,33 @@
 ---
-title: Agent
-kind: documentation
+algolia:
+  tags:
+  - agent
+aliases:
+- /ja/agent/faq/agent-check-directory-structure
+- /ja/agent/faq/install-core-extra
+- /ja/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
+- /ja/agent/faq/the-datadog-agent-for-logs-or-traces-only
 description: Agent をインストールおよび構成してデータを収集する
 further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
-  - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-    tag: Documentation
-    text: クラウドインスタンスに Agent をインストールするのはなぜですか？
-  - link: https://www.datadoghq.com/blog/dont-fear-the-agent/
-    tag: ブログ
-    text: Agent は難しくない
-aliases:
-  - /ja/agent/faq/agent-check-directory-structure
-  - /ja/agent/faq/install-core-extra
-  - /ja/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
-  - /ja/agent/faq/the-datadog-agent-for-logs-or-traces-only
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+  tag: Documentation
+  text: クラウドインスタンスに Agent をインストールするのはなぜですか？
+- link: https://www.datadoghq.com/blog/dont-fear-the-agent/
+  tag: ブログ
+  text: Agent は難しくない
+kind: documentation
+title: Agent
 ---
+
 <div class="alert alert-info">
 Agent v7 が利用可能です。 <a href="/agent/versions/upgrade_to_agent_v7">最新バージョンにアップグレードすると</a>新しい機能を利用できます。
 </div>
@@ -32,7 +36,7 @@ Agent v7 が利用可能です。 <a href="/agent/versions/upgrade_to_agent_v7">
 
 Datadog Agent は、ホストで実行されるソフトウェアです。ホストからイベントとメトリクスを収集し、Datadog に送信します。ここで、モニタリングとパフォーマンスのデータを分析できます。Datadog Agent はオープンソースです。ソースコードは、GitHub の [DataDog/datadog-agent][1] から入手できます。
 
-**Agent はフルでインストールすることが推奨されています。**ただし、Amazon Linux、CentOS、Debian、Fedora、Red Hat、SUSE、Ubuntu 用に、スタンドアロンの DogStatsD パッケージを使用することが可能です。このパッケージは、DogStatsD がサイドカーとして稼働するか、Agent の機能をフルに持たない DogStatsD サーバーを稼働させているコンテナ環境で使用されます。
+**Agent はフルでインストールすることが推奨されています。** ただし、Amazon Linux、CentOS、Debian、Fedora、Red Hat、SUSE、Ubuntu 用に、スタンドアロンの DogStatsD パッケージを使用することが可能です。このパッケージは、DogStatsD がサイドカーとして稼働するか、Agent の機能をフルに持たない DogStatsD サーバーを稼働させているコンテナ環境で使用されます。
 
 スタンドアロンの DogStatsD パッケージは、Agent の [1 行のインストールコマンド][2]でインストールできますが、`datadog-agent` の部分をすべて `datadog-dogstatsd` に変える必要があります。[DogStatsD6 Docker イメージリポジトリ][3]にある Docker イメージも利用できます。
 
@@ -63,7 +67,7 @@ Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a
   {{< nextlink href="/agent/troubleshooting">}}<u>トラブルシューティング</u>: Datadog Agent のトラブルシューティング情報をご紹介します。{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>ガイド</u>: Agent の使用に関するステップバイステップの詳細なチュートリアルです。{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>セキュリティ</u>: 安全な環境を維持するためにお客様が利用できる主なセキュリティ機能について説明します。{{< /nextlink >}}
-  {{< nextlink href="/agent/vector_aggregation">}}<u>Agent の集約</u>: オブザーバビリティ パイプラインの構築ツール、Vector にデータを送信するよう Datadog Agent を構成します。{{< /nextlink >}}
+  {{< nextlink href="/getting_started/observability_pipelines">}}<u>観測可能性パイプラインと Datadog の構成</u>: 観測可能性パイプラインワーカーをアグリゲーターとしてデプロイし、すべてのログとメトリクスを収集、変換し、任意の宛先にルーティングします。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

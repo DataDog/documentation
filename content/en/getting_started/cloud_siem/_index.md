@@ -13,15 +13,18 @@ further_reading:
     - link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
       tag: "Learning Center"
       text: "Introduction to Cloud SIEM course"
-    - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
+    - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
       tag: "Blog"
-      text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
+      text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
     - link: "https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY"
       tag: "App"
       text: "Automate responses with Workflows security blueprints"
     - link: "/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/"
       tag: "Documentation"
       text: "AWS configuration guide for Cloud SIEM"
+    - link: "/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/"
+      tag: "Documentation"
+      text: "Google Cloud configuration guide for Cloud SIEM"
     - link: "/security/notifications/variables/"
       tag: "Documentation"
       text: "Learn more about notification variables to customize notifications"
@@ -55,7 +58,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 2. Explore [security signals][11]. When a threat is detected with a detection rule, a security signal is generated. See the [security signals][12] documentation for more information.
 
-    - [Set up notification rules][13] to alert when signals are generated. You can alert using Slack, Jira, email, or webhooks. See the [notification rules][14] documentation for more information.
+    - [Set up notification rules][13] to alert when signals are generated. You can alert using Slack, Jira, email, webhooks, and other integrations. See the [notification rules][14] documentation for more information.
 
 ## Phase 3: Investigation
 

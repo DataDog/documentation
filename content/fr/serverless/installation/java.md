@@ -15,7 +15,7 @@ kind: documentation
 title: Instrumenter des applications Java sans serveur
 ---
 
-<div class="alert alert-warning">Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (<code>java8.al2</code>) ou Java 11 (<code>java11</code>) avec au moins 1 024 Mo de mémoire.</div>
+<div class="alert alert-warning">Pour instrumenter entièrement votre application sans serveur grâce au tracing distribué, vos fonctions Lambda Java doivent utiliser le runtime Java 8 Corretto (<code>java8.al2</code>), Java 11 (<code>java11</code>) ou Java 17 (<code>java17</code>) avec au moins 1 024 Mo de mémoire.</div>
 
 <div class="alert alert-warning">Si vos fonctions Lambda sont déployées dans un VPC sans accès à Internet, vous pouvez transmettre des données avec <a href="/agent/guide/private-link/">AWS PrivateLink</a> pour le site <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog</a> ou avec <a href="/agent/proxy/">un proxy</a> pour tous les autres sites.</div>
 

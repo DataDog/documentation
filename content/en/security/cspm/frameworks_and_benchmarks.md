@@ -4,7 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/frameworks_and_benchmarks
 further_reading:
-- link: "security/cspm/getting_started"
+- link: "security/cspm/setup"
   tag: "Documentation"
   text: "Getting started with CSPM"
 - link: "security/default_rules"
@@ -23,7 +23,7 @@ Cloud Security Posture Management is not currently available in this site.
 
 Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box detection rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [detection rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
-- [CIS AWS Foundations Benchmark v1.3.0*][2]
+- [CIS AWS Foundations Benchmark v1.5.0*][2]
 - [CIS Azure Foundations Benchmark v1.3.0][3]
 - [CIS GCP Foundations Benchmark v1.3.0][22]
 - [CIS Docker Benchmark v1.2.0][4]
@@ -82,7 +82,7 @@ Select a rule to view details about the misconfigured resources, the rule descri
 [10]: https://gdpr.eu/
 [11]: /security/cloud_siem/
 [12]: /integrations/amazon_cloudtrail/
-[13]: https://app.datadoghq.com/security/configuration/rules/
+[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
 [14]: /integrations/slack/
 [15]: /integrations/jira/
 [16]: /integrations/pagerduty

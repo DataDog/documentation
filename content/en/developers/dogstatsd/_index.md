@@ -18,6 +18,9 @@ further_reading:
     - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
       tag: 'GitHub'
       text: 'DogStatsD source code'
+    - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+      tag: "Blog"
+      text: "Monitor your Linux web apps on Azure App Service with Datadog"
 ---
 
 The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent. DogStatsD implements the [StatsD][1] protocol and adds a few Datadog-specific extensions:
@@ -36,6 +39,10 @@ DogStatsD is available on Docker Hub and GCR:
 | Docker Hub                                       | GCR                                                       |
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
+
+<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
+
+Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 ## How it works
 
@@ -96,9 +103,18 @@ docker run -d --cgroupns host \
               gcr.io/datadoghq/agent:latest
 ```
 
-If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1]:
+If you need to change the port used to collect StatsD metrics, use the `DD_DOGSTATSD_PORT="<NEW_DOGSTATSD_PORT>` environment variable. You can also configure DogStatsD to use a [Unix domain socket][1].
+
+#### Origin detection over UDP
+
+Origin detection is supported in Agent v6.10.0+, and allows DogStatsD to detect where the container metrics come from and automatically tag metrics. When this mode is enabled, all metrics received through UDP are tagged by the same pod tags as Autodiscovery metrics.
+
+Origin detection in non-Kubernetes environments is based on an extension of the DogStatsD protocol in [Datagram Format and Shell Usage][2]. To enable the feature in the Agent, set the `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` environment variable to `true`.
+
+**Note**: Origin detection is not supported for Fargate environments.
 
 [1]: /developers/dogstatsd/unix_socket/
+[2]: /developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -265,7 +281,7 @@ The Java DataDog StatsD Client is distributed with maven central, and can be [do
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>3.0.0</version>
+    <version>4.2.1</version>
 </dependency>
 ```
 
@@ -335,6 +351,10 @@ require 'datadog/statsd'
 # Create a DogStatsD client instance.
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
+
+<div class="alert alert-info">
+  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a Unix Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
+</div>
 
 {{< /programming-lang >}}
 
@@ -432,10 +452,6 @@ using (var dogStatsdService = new DogStatsdService())
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-<div class="alert alert-info">
-  If you use DogStatsD with the Container Agent or in Kubernetes, you must instantiate the host to which StatsD metrics are forwarded to with the <code>$DD_DOGSTATSD_SOCKET</code> environment variable if using a Unix Domain Socket, or with the <code>$DD_AGENT_HOST</code> environment variable if you are using the host port binding method.
-</div>
 
 ### Client instantiation parameters
 
@@ -549,6 +565,10 @@ DogStatsD and StatsD are broadly similar, however, DogStatsD contains advanced f
 {{< /whatsnext >}}
 
 If you're interested in learning more about the datagram format used by DogStatsD, or want to develop your own Datadog library, see the [datagram and shell usage][9] section, which also explains how to send metrics and events straight from the command line.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/etsy/statsd
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/

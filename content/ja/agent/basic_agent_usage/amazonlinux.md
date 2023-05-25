@@ -35,9 +35,9 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-### Amazon Linux 2、Amazon Linux 2022
+### Amazon Linux 2、Amazon Linux 2022/2023
 
-<div class="alert alert-info">Amazon Linux 2022 を Agent バージョン <= 6.39/7.39 でインストールする場合、<code>libxcrypt-compat</code> パッケージが必要です。このパッケージをインストールするには、<pre><code>dnf install -y libxcrypt-compat</code></pre> を実行してください。</div>
+<div class="alert alert-info">Amazon Linux 2022/2023 を Agent バージョン <= 6.39/7.39 でインストールする場合、<code>libxcrypt-compat</code> パッケージが必要です。このパッケージをインストールするには、<pre><code>dnf install -y libxcrypt-compat</code></pre> を実行してください。</div>
 
 | 説明                        | コマンド                                                |
 |------------------------------------|--------------------------------------------------------|

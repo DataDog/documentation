@@ -17,35 +17,23 @@ further_reading:
 
 Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. You can add service metadata to these entries through the Datadog UI, [API][1], or use automated pipelines through the [GitHub integration][11] or [Terraform][2].
 
-## For services with existing telemetry data (APM/USM/RUM)
+## Add service definition metadata
 
-Any service that sends tracing data to Datadog APM, USM, or RUM is automatically listed in the Service Catalog. Each unregistered service shows a gray check mark when you hover over it.
+If your service is listed in Service Catalog and already has metadata associated with it, the original source is listed in the **Metadata Source** column on the **Ownership** view. Return to that source to make any updates you need to make.
 
-To register the service and add ownership information, related links such as runbooks, and links to source code repositories, [update the service definition][1].
+If the service has not been assigned any service definition metadata, or if the service isn't listed in the Service Catalog yet, you can add it:
 
-Navigate to [**APM** > **Service Catalog**][10] and click the [**Setup & Config** tab][3] to get help with forming valid JSON to post with the API.
+1. On the [Service Catalog][10] page, click **Setup & Config**. The **Manage Entries** tabs shows you how many services are without metadata.
 
-## For all other services you want to catalog
+2. Click **Create New Entry**.
 
-If the service, API, or custom library you are interested in is not listed in the **Explore** tab:
+3. Specify which service you are adding metadata to. This can be the name of a service already listed in the Service Catalog that doesn't have service definition metadata defined for it yet, or it can be the name of a service not sending any data.
 
-1. Navigate to [**APM** > **Service Catalog**][10] and click the [**Setup & Config** tab][3].
+4. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
 
-2. The **Create New Entry** form helps you generate JSON that you can post to Service Catalog API endpoint. Provide a service name in the `dd-service` field. Fill in ownership, source, and other service information in the Service Definition schema presented. Refer to the [full JSON schema on GitHub][4] for complete details.
+4. Switch to the **Code** view to see the JSON and cURL generated for the metadata you've entered. You can copy this code as a jumping off point for programmatically providing service definitions by API, Terraform, or GitHub, without having to learn the schema for service definitions.
 
-3. Click the **Copy** button to copy the generated JSON. Send this as the `body` of a `POST` API call with the [Service Definition API][1].
-
-## Discover services being reported in other Datadog telemetry data
-
-To discover other services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
-
-{{< img src="tracing/service_catalog/import_entries.png" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
-
-Once you have imported some entries, they appear in the **Explore** tab. Entries may expire unless you add metadata such as the owner or contacts by [using the API][1] or the [GitHub integration][6].
-
-To remove your imported services from the default **Explore** view, click **Clear Previously Imported Services**. This removes all services that do not have metadata or do not have APM, Universal Service Monitoring (USM), or Real User Monitoring (RUM) telemetry.
-
-{{< img src="tracing/service_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Service Catalog setup and configuration section" style="width:90%;" >}}
+5. If you have the [Service Catalog Write][13] permission, you can submit the metadata by clicking **Save Entry**, or by running the cURL command provided on the **Code** view.
 
 ## Store and edit service definitions in GitHub
 
@@ -69,7 +57,7 @@ To prevent accidental overwriting, create and modify your service definition fil
 
 ## Automate service definition updates with Terraform
 
-The Service Catalog provides a service definition as a Terraform resource. Creating and managing services in the Service Catalog through automated pipelines requires [Datadog Provider][8] v3.16.0 or later.
+The Service Catalog provides a service definition as a [Terraform resource][14]. Creating and managing services in the Service Catalog through automated pipelines requires [Datadog Provider][8] v3.16.0 or later.
 
 For more information, see the [Datadog Provider documentation][9].
 
@@ -79,6 +67,17 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
+## Discover services being reported in other Datadog telemetry data
+
+To discover other services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
+
+{{< img src="tracing/service_catalog/import_entries.png" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
+
+Once you have imported some entries, they appear in the **Explore** tab. Entries may expire unless you add metadata such as the owner or contacts by [using the API][1] or the [GitHub integration][6].
+
+To remove your imported services from the default **Explore** view, click **Clear Previously Imported Services**. This removes all services that do not have metadata or do not have APM, Universal Service Monitoring (USM), or Real User Monitoring (RUM) telemetry.
+
+{{< img src="tracing/service_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Service Catalog setup and configuration section" style="width:90%;" >}}
 
 ## Further reading
 
@@ -96,3 +95,6 @@ This GitHub Action allows you to register your services with the Service Catalog
 [10]: https://app.datadoghq.com/services
 [11]: https://docs.datadoghq.com/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
+[13]: https://app.datadoghq.com/personal-settings/profile
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
+

@@ -22,7 +22,7 @@ To enable listening for SNMP Traps, add the following to `datadog.yaml`:
 
 ```yaml
 network_devices:
-  namespace: <NAMESPACE> # optional, defaults to “default”.
+  namespace: <NAMESPACE> # optional, defaults to "default".
   snmp_traps:
     enabled: true
     port: 9162 # on which ports to listen for traps

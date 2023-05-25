@@ -4,7 +4,6 @@ kind: documentation
 aliases:
 - /agent/kubernetes/cluster/
 - /agent/cluster_agent/
-- /containers/cluster_agent/
 - /containers/cluster_agent/event_collection
 - /containers/cluster_agent/metadata_provider
 further_reading:
@@ -34,12 +33,16 @@ If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
 
+<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
+
+Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+
 **Note**: To take advantage of all features from the Datadog Cluster Agent, you must run Kubernetes v1.10+.
 
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup your Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commands & Options</u>: List of all commands and options available for the Cluster Agent.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Cluster Checks</u>: Cluster checks provide the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Cluster Checks</u>: Cluster checks provide the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes services.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>Endpoint Checks</u>: Endpoint checks extend cluster checks to monitor any endpoint behind cluster services.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Admission Controller</u>: Configure the Admission Controller for simplified application Pod configuration.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}

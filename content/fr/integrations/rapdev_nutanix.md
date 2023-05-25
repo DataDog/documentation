@@ -34,8 +34,6 @@ author:
   vendor_id: rapdev
 categories:
 - marketplace
-- cloud
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -59,23 +57,21 @@ pricing:
   tag: core
   unit_label: Cores de host Nutanix
   unit_price: 5
-public_title: Intégration Nutanix
+public_title: Nutanix
 short_description: Surveiller l'utilisation des ressources Nutanix pour mieux comprendre
   votre environnement
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Surveiller l'utilisation des ressources Nutanix pour mieux comprendre
     votre environnement
@@ -94,7 +90,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Nutanix
+  title: Nutanix
   uninstallation: README.md#Uninstallation
 ---
 

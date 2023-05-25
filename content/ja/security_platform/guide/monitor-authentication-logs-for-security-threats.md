@@ -112,8 +112,8 @@ Datadog では、[すべてのログ][18]を取り込み分析し、環境全体
 [7]: /ja/logs/log_configuration/attributes_naming_convention/#events
 [8]: /ja/logs/log_configuration/attributes_naming_convention/#network
 [9]: https://developers.google.com/recaptcha/docs/v3
-[10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
-[11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule
+[10]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=brute%20force%20attack&sort=rule
+[11]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=credential%20stuffing%20attack&sort=rule
 [12]: /ja/cloud_siem/default_rules/
 [13]: /ja/cloud_siem/explorer
 [14]: https://app.datadoghq.com/notebook/credentialstuffingrunbook

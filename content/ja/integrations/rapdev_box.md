@@ -2,6 +2,8 @@
 app_id: rapdev-box
 app_uuid: 3de78642-7136-41a8-9df9-48d65ed46251
 assets:
+  dashboards:
+    RapDev Box Overview: assets/dashboards/rapdev_box_overview.json
   integration:
     configuration:
       spec: assets/configuration/spec.yaml
@@ -17,14 +19,15 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
 - クラウド
 - ログの収集
+- マーケットプレイス
 - メトリクス
+- notification
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,23 +51,24 @@ pricing:
   tag: user_login
   unit_label: Box 登録ユーザー
   unit_price: 1
-public_title: Box インテグレーション
+public_title: Box
 short_description: Box エンタープライズユーザーとストレージの監視
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
   - Category::Log Collection
+  - Category::Marketplace
   - Category::Metrics
+  - Category::Notification
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Box エンタープライズユーザーとストレージの監視
   media:
@@ -85,7 +89,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Box インテグレーション
+  title: Box
+  uninstallation: README.md#Uninstallation
 ---
 
 

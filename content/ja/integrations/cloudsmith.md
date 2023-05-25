@@ -22,7 +22,7 @@ author:
   sales_email: ccarey@cloudsmith.io
   support_email: ccarey@cloudsmith.io
 categories:
-- security
+- クラウド
 - メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/README.md
@@ -31,7 +31,7 @@ draft: false
 git_integration_title: cloudsmith
 integration_id: cloudsmith
 integration_title: Cloudsmith
-integration_version: 0.0.1
+integration_version: 0.0.2
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -41,16 +41,16 @@ public_title: Cloudsmith
 short_description: Cloudsmith メトリクスを監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
+  - Category::Cloud
   - Category::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Cloudsmith メトリクスを監視する
   media: []
@@ -101,12 +101,18 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Cloudsmith チ
 
 ### イベント
 
-Cloudsmith インテグレーションには、イベントは含まれません。
+収集された Cloudsmith 関連のイベントはすべて、Datadog イベントストリーム内で `source:cloudsmith` プロパティを指定して表示されます。Cloudsmith API に送信されるリクエスト数を減らすために、5 分ごとに収集されます。
+
+イベントには 2 種類あります。
+
+- セキュリティスキャンイベント
+- 監査ログイベント
+
+これらは集計キー `@aggregation_key:audit_log` と `@aggregation_key:vulnerabilities` でアクセス可能です。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
-
+ご不明な点は、[Cloudsmith サポート][10]までお問い合わせください。
 
 [1]: https://cloudsmith.com
 [2]: https://app.datadoghq.com/account/settings#agent
@@ -117,4 +123,4 @@ Cloudsmith インテグレーションには、イベントは含まれません
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://help.cloudsmith.io/docs/contact-us#live-chat-via-intercom

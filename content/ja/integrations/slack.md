@@ -26,9 +26,9 @@ version: '1.0'
 
 Slack を Datadog に接続し、次の方法でチームのコラボレーションを支援します。
 
-- チームのプライベートチャンネルまたは公開チャンネルで、同僚とグラフを共有できます。
+- Slack のプライベートチャンネルまたはパブリックチャンネルでグラフを共有できます。
 - Slack 内で Datadog からのアラートや通知を受けることができます。
-- トリガーとなるモニターをミュートし、Datadog 内の Slack からインシデントを宣言できます。
+- トリガーとなるモニターをミュートし、Slack からインシデントを宣言できます。
 
 ## セットアップ
 
@@ -38,15 +38,23 @@ Slack を Datadog に接続し、次の方法でチームのコラボレーシ�
 
 ### APM に Datadog Agent を構成する
 
-US1、US3、US5、EU1 の Datadog [サイト][1]をお使いの方は、Slack のワークスペースに Datadog for Slack をインストールします。
+Slack のワークスペースに Datadog for Slack をインストールします。
 
-1. Datadog サイトで、「Integrations」の下にある Slack [インテグレーションタイル][1]へ移動し、タイル下部の **Connect Slack Account** ボタンをクリックします。
+1. Datadog サイトで、Integrations の下にある Slack [インテグレーションタイル][2]へ移動し、タイル下部の **Connect Slack Account** ボタンをクリックします。
 
-2. Slack と Datadog のアカウントが接続されたことを確認します。この変更を Datadog ワークスペースの管理者に承認してもらう必要がある場合があります（一度のみ）。
+2. Slack と Datadog のアカウントが接続されたことを確認します。この変更を Slack ワークスペースの管理者に承認してもらう必要がある場合があります (一度のみ)。
 
-[Slack App ディレクトリでの Slack インテグレーション][3]は、US1、US3、US5、または EU1 Datadog [サイト][1]をご使用の場合のみ可能です。他のリージョンについては、[Slack Webhook][4] ドキュメントを参照してください。
+US1-FED サイトでは、[Slack App Directory Slack インテグレーション][2]はご利用いただけません。US1-FED サイトへの Slack App のインストールについては、[Slack Webhook][3] のドキュメントをご参照ください。
 
 ## 使用方法
+
+次のコマンドを使用して、Slack チャンネルで実行できる Datadog のアクションを確認します。
+
+```
+/datadog
+```
+
+また、すべての `/datadog` コマンドを実行するために、`/dd` エイリアスを使用することができます。
 
 アプリがインストールされたら、Slack アプリをチャンネルに招待できます。
 
@@ -60,11 +68,9 @@ US1、US3、US5、EU1 の Datadog [サイト][1]をお使いの方は、Slack �
 /datadog help
 ```
 
-<div class="alert alert-info">
-`/dd` はすべての `/datadog` コマンドのエイリアスです。
-</div>
+### リンク展開
 
-あらゆるウィジェットを Datadog から Slack へコピーして貼り付けることも可能です（`CMD + C`、`CTRL + C` のショートカット、またはウィジェットの拡張アイコンをクリックして **Copy** を選択）。貼り付けると、チャンネルに送信されたウィジェットとして展開されるリンクが表示されます。
+Slack で共有される一部の Datadog リンクは、自動的に展開されプレビューが表示されます。サポートされているリンクには、ログイベント、トレース、ダッシュボードウィジェットが含まれます。ダッシュボードウィジェットを共有するには、ウィジェットにカーソルを合わせて `CMD + C` または `CTRL + C` を押すか、共有メニューから **Copy** ボタンをクリックしてクリップボードにコピーし、そのリンクを Slack に貼り付けます。
 
 ### モニターの接続
 
@@ -75,6 +81,18 @@ Slack アプリから送信されるようモニターを更新するには、�
 **一括更新**: すべてのモニターが Slack アプリから送信されるように一括で更新することができます。また、コンフィギュレーションの上部にある "Upgrade" ボタンをクリックことで、Datadog のインテグレーションタイルにある各 Slack アカウントにミュートボタンを含められます。
 
 **手動**: すべてのチームに展開する前にこの機能をテストしたい場合は、Slack インテグレーションのコンフィギュレーションで、手動でチャンネルを新しいアプリのアカウントコンフィギュレーションに追加することができます。同じチャンネルの重複参照を削除する必要がある場合があります。
+
+### ダッシュボードウィジェットの共有
+
+Slack を離れることなく、ダッシュボードウィジェットのスナップショットを任意の Slack チャンネルに投稿することができます。
+
+Slack からダッシュボードウィジェットを共有するには、2 つの方法があります。
+
+**オンデマンド**: `/datadog dashboard` を使用するか、`/datadog` を使用し、**Share Dashboard Widget** ボタンをクリックします。
+
+**ワークフロービルダー**: Datadog for Slack は、Slack 自動化ワークフローの一部としてウィジェットスナップショットを投稿できる [Workflow Builder][4] ステップを提供します。
+
+対応ウィジェットの一覧は、[スケジュールレポート][5]を参照してください。
 
 ### Datadog インシデントの使用
 
@@ -109,10 +127,10 @@ Datadog へのアクセス権の有無を問わず、Slack 組織内の誰でも
 
 1. 新しく宣言されたインシデント。
 2. 重要度、ステータスの移行、インシデントコマンダーへの変更点。
-3. アプリ内の[インシデント][5]の概要ページへのリンク。
+3. アプリ内の[インシデント][6]の概要ページへのリンク。
 4. 該当するインシデントの Slack チャンネルへの参加リンク。
 
-Slack アプリを[インストール][6]したら、Incident [Settings][7] ページに移動します。*Incident Updates Channel* セクションまでスクロールして、セットアップの手順を開始します。
+Slack アプリを[インストール][7]したら、Incident [Settings][8] ページに移動します。*Incident Updates Channel* セクションまでスクロールして、セットアップの手順を開始します。
 
 Slack アプリに入ったら、インシデント更新のためのチャンネルを設定します。
 
@@ -135,31 +153,30 @@ Slack アクションを使用して、インシデントチャンネルで送�
 * `/datadog task` はインシデントのタスクを作成します。表示されるモーダル画面でタスクの説明の入力、チームメイトの割り当て、期限の設定を行うことができます。
 * `/datadog task list` はあるインシデントについて作成されたすべてのタスクのリストを表示します。このリストを利用してタスクを完了としてマークしたり、再開したりすることができます。
 
-作成されたすべてのタスクは、[インシデント UI][5]の **Incident Tasks** の **Remediation** タブで管理することができます。詳しくは、[インシデント管理ドキュメント][8]を参照してください。
+作成されたすべてのタスクは、[インシデント UI][6]の **Incident Tasks** の **Remediation** タブで管理することができます。詳しくは、[インシデント管理ドキュメント][9]を参照してください。
 
-[1]: https://docs.datadoghq.com/ja/getting_started/site/
-[2]: https://app.datadoghq.com/account/settings#integrations/slack
-[3]: https://www.datadoghq.com/blog/datadog-slack-app/
-[4]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackwebhooklegacy
-[5]: https://app.datadoghq.com/incidents
-[6]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackapplicationus#installation
-[7]: https://app.datadoghq.com/incidents/settings
-[8]: https://docs.datadoghq.com/ja/monitors/incident_management/#follow-up-and-learn-from-the-incident
-{{< /tabs >}}
+[1]: https://app.datadoghq.com/account/settings#integrations/slack
+[2]: https://www.datadoghq.com/blog/datadog-slack-app/
+[3]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackwebhooklegacy
+[4]: https://slack.com/features/workflow-automation
+[5]: https://docs.datadoghq.com/ja/dashboards/scheduled_reports/
+[6]: https://app.datadoghq.com/incidents
+[7]: https://docs.datadoghq.com/ja/integrations/slack/?tab=slackapplicationus#installation
+[8]: https://app.datadoghq.com/incidents/settings
+[9]: https://docs.datadoghq.com/ja/monitors/incident_management/#follow-up-and-learn-from-the-incident
+{{% /tab %}}
 
 {{% tab "Slack Webhook (レガシー)" %}}
 
-US5 または US1-FED Datadog [サイト][1]を使用している場合は、Slack Webhook を使用します。
-
 ### APM に Datadog Agent を構成する
 
-Slack インテグレーションは、Datadog サイトの[インテグレーションタイル][2]を使用してインストールします。
+Slack インテグレーションは、Datadog サイトの[インテグレーションタイル][1]を使用してインストールします。
 
 ### コンフィギュレーション
 
-1. Slack アカウントで、[Datadog (レガシー) アプリ][3]にアクセスします。
+1. Slack アカウントで、[Datadog (レガシー) アプリ][2]にアクセスします。
 2. _Install_ --> _Add Integration_ の順に選択し、次に Slack の **Webhook URL** をコピーします。
-3. [Datadog-Slack インテグレーションタイル][2]の Configuration タブに移動します。
+3. [Datadog-Slack インテグレーションタイル][1]の Configuration タブに移動します。
 4. _Add Account_ をクリックします。
 5. 選択した **Slack アカウント名**を追加します。
 6. **Slack Account Hook** フィールドに Webhook URL を貼り付けます。
@@ -168,14 +185,13 @@ Slack インテグレーションは、Datadog サイトの[インテグレー�
   {{< img src="integrations/slack/slack_configuration.png" alt="Slack コンフィギュレーション" >}}
 9. グラフへのコメントごとに通知を受けるには、各チャンネルの **Transfer all user comments** チェックボックスをオンにします。このチェックボックスをオフのままにする場合、コメントが Slack にポストされるようにするには、`@slack-<ACCOUNT_NAME>-<CHANNEL_NAME>` 構文を使用する必要があります。アカウントを 1 つだけ使用する場合、または最初のアカウントのみを参照する場合は、`@slack-<CHANNEL_NAME>` も使用できます。
 
-[モニター][4]と[イベントストリーム][5]から Slack にアラートを送信するように構成することもできます。
+[モニター][3]と[イベントストリーム][4]から Slack にアラートを送信するように構成することもできます。
 
 
-[1]: https://docs.datadoghq.com/ja/getting_started/site/
-[2]: https://app.datadoghq.com/account/settings#integrations/slack
-[3]: https://slack.com/apps/A0F7XDT7F-datadog-legacy
-[4]: https://docs.datadoghq.com/ja/monitors/notifications/?tab=slackintegration#notification
-[5]: https://docs.datadoghq.com/ja/events/#notifications
+[1]: https://app.datadoghq.com/account/settings#integrations/slack
+[2]: https://slack.com/apps/A0F7XDT7F-datadog-legacy
+[3]: https://docs.datadoghq.com/ja/monitors/notifications/?tab=slackintegration#notification
+[4]: https://docs.datadoghq.com/ja/events/#notifications
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -272,6 +288,16 @@ Datadog for Slack は、以下の OAuth Scope を必要とします。詳しく�
 | `users:read`             | タイムゾーンに合わせた応答を提供します。                                                                |
 | `users:read.email`       | Datadog の Slack 以外で作成されたインシデントのメッセージングとユーザーを追加します。                                  |
 | `workflow.steps:execute` | Slack Workflow Step から Datadog のダッシュボードウィジェットを使ってメッセージを自動送信します。                         |
+
+### オプションの Optional Bot Token Scopes
+
+Datadog for Slack では、オプションの Bot Token Scopes を追加で有効にする必要がある機能があります。これらのスコープは、機能の有効化に基づいて動的に追加され、最初のインストール時には追加されません。
+
+| スコープ             | リクエスト理由                                                                               |
+|--------------------|----------------------------------------------------------------------------------------------|
+| `channels:history` | インシデントチャンネルからのメッセージをインシデントタイムラインに自動的に同期します。               |
+| `groups:write`     | Datadog Incident Management を使用して、インシデントを管理および修復するプライベートチャンネルを作成します。 |
+| `pins:write`       | インシデントチャンネルに、Datadog インシデントの関連リンクやリソースのピンを作成します。          |
 
 ### ユーザトークンのスコープ
 

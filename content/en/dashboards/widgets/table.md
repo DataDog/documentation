@@ -43,7 +43,7 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 
 Columns in the table widget are queried independently from one another. Overlapping groups with matching names are joined realtime to form the rows of the table. As a result of that process, there might be situations with no total overlap, showing N/A cells. To mitigate this:
   * Extend the limit of queries to higher numbers, to maximize overlap between columns
-  * Sort tables according to the one column that you could consider as “driving” the insight
+  * Sort tables according to the one column that you could consider as "driving" the insight
 
 ## API
 
@@ -63,7 +63,7 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 [4]: /real_user_monitoring/explorer/search_syntax
 [5]: /profiler/search_profiles
 [6]: /security_monitoring/explorer/
-[7]: /dashboards/querying/#configuring-an-apm-stats-graph
+[7]: /dashboards/guide/apm-stats-graph
 [8]: /api/v1/dashboards/
 [9]: /dashboards/graphing_json/widget_json/
 [10]: /dashboards/guide/context-links/

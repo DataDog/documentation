@@ -1,8 +1,10 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- 構成 & デプロイ
 - ログの収集
+- プロビジョニング
 dependencies: []
 description: 主要な AWS Certificate Manager メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_certificate_manager/
@@ -29,7 +31,7 @@ AWS Certificate Manager を使用すると、SSL/TLS 証明書をプロビジョ
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

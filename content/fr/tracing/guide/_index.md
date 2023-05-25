@@ -5,6 +5,13 @@ aliases:
 disable_toc: true
 kind: guide
 private: true
+aliases:
+  - /fr/tracing/getting_further/
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Guides de tracing
 title: Guides de tracing
 ---
 

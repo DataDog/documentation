@@ -12,14 +12,6 @@ categories:
 - log collection
 - monitoring
 - alerting
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::Security
-- Category::Log Collection
-- Category::Monitoring
-- Category::Alerting
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md
 display_on_public_website: true
@@ -38,10 +30,18 @@ short_description: Surveiller et analyser tous vos logs d'audit SaaS et génére
   alertes avec Apptrail
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Security
+  - Category::Log Collection
+  - Category::Monitoring
+  - Category::Alerting
   configuration: README.md#Setup
   description: Surveiller et analyser tous vos logs d'audit SaaS et générer des alertes
     avec Apptrail

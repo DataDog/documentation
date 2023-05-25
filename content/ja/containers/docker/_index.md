@@ -37,17 +37,17 @@ Datadog Docker Agent は、ホスト [Agent][1] をコンテナ化したバー�
 
 64-bit x86 および Arm v8 アーキテクチャ用のイメージをご用意しています。
 
-| Docker Hub     | GCR          |ECR-Public         |
-|----------------|--------------|-----------|
-| [Agent v6+][2]<br>`docker pull datadog/agent`  | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |[Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          |
-| [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` | [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |[Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent` |
+| ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
+|----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
+| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          | 
+| [Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` |
 
 
 このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
 ## セットアップ
 
-Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<ご使用の_DATADOG_API_キー>` を [Datadog API キー][10]と置き換えてください。
+Docker Agent をまだインストールしていない場合は、以下の手順または[アプリ内のインストール手順][8]を参照してください。[サポートされるバージョン][9]については、Agent のドキュメントを参照してください。ワンステップインストールコマンドを使用し、`<YOUR_DATADOG_API_KEY>` を [Datadog API キー][10]と置き換えてください。
 
 {{< tabs >}}
 {{% tab "標準" %}}
@@ -143,7 +143,7 @@ Agent の [メインコンフィギュレーションファイル][13]は `datad
 | `DD_ENV`             | 出力されるすべてのデータにグローバル `env` タグを設定します。                                                                                                                                                                                                                                                                                                  |
 | `DD_HOSTNAME`        | メトリクスに使用するホスト名 (自動検出が失敗した場合)                                                                                                                                                                                                                                                                                             |
 | `DD_HOSTNAME_FILE`        | 環境によっては、ホスト名の自動検出がうまくいかず、環境変数で値を設定できない場合があります。このような場合、ホスト上のファイルを使って適切な値を提供することができます。もし `DD_HOSTNAME` が空でない値に設定されている場合、このオプションは無視されます。                                              |
-| `DD_TAGS`            | スペース区切りのホストタグ。例: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
+| `DD_TAGS`            | スペース区切りのホストタグ。例: `key1:value1 key2:value2`                                                                                                                                                                                                                                                                 |
 | `DD_SITE`            | メトリクス、トレース、ログの送信先サイト。Datadog サイトを `{{< region-param key="dd_site" >}}` に設定します。デフォルトは `datadoghq.com` です。                                                                                                                                                                                                |
 | `DD_DD_URL`          | メトリクス送信用 URL を上書きします。設定は任意です。                                                                                                                                                                                                                                                                                      |
 | `DD_URL` (6.36+/7.36+)            | `DD_DD_URL` のエイリアス。すでに `DD_DD_URL` が設定されている場合は無視されます。                                                                                                                                                                                                                                                                                    |

@@ -17,6 +17,10 @@ further_reading:
 - link: https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/
   tag: GitHub
   text: En savoir plus sur la couche Lambda gérée AWS pour OpenTelemetry
+- link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
+  tag: Blog
+  text: Mettre en corrélation les événements RUM Datadog avec les traces de vos applications
+    instrumentées via OTel
 kind: Documentation
 title: OpenTelemetry dans Datadog
 ---
@@ -32,18 +36,6 @@ Si vos applications et services sont instrumentés avec des bibliothèques OpenT
 2. [Ingérer les données avec l'Agent Datadog, qui les recueille pour Datadog][4] (métriques et traces uniquement)
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="Représentation des différentes approches permettant de générer des données de télémétrie et de les envoyer aux solutions d'observabilité">}}
-
-## Configuration
-
-Pour découvrir en détail comment envoyer des données OpenTelemetry à Datadog, comment configurer OpenTelemetry et comment utiliser la plateforme d'observabilité de Datadog pour obtenir des informations actionnables sur les performances de vos service, consultez les ressources suivantes :
-
-{{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/otel_tracing/" >}}Collecte de traces via OpenTelemetry{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics/" >}}Collecte de métriques via OpenTelemetry{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_logs/" >}}Collecte de logs via OpenTelemetry{{< /nextlink >}}
-{{< /whatsnext >}}
-
-
 
 ## Pour aller plus loin
 

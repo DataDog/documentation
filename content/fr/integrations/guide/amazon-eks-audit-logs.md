@@ -81,5 +81,5 @@ Pour créer une règle, accédez à la page [Rule Setup and Configuration][13] d
 [10]: https://app.datadoghq.com/security
 [11]: /fr/security_platform/default_rules/#cat-cloud-siem
 [12]: /fr/security_platform/detection_rules/#creating-and-managing-detection-rules
-[13]: https://app.datadoghq.com/security/configuration/rules/new
+[13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
 [14]: /fr/security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
