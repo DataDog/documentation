@@ -1,8 +1,9 @@
 ---
-title: How Remote Configuration Works
-kind: guide
+title: Remote Configuration
+kind: documentation
 aliases:
 - /agent/guide/how_rc_works
+- /agent/guide/how_remote_config_works
 further_reading:
 - link: "/security/application_security/how-appsec-works/#built-in-protection"
   tag: "Documentation"
@@ -207,6 +208,6 @@ To authenticate and authorize the Agent to receive configurations and security d
 [13]: /account_management/audit_trail
 [14]: /monitors/
 [15]: /help/
-[16]: /agent/guide/how_remote_config_works/?tab=configurationyamlfile#setup
+[16]: /agent/remote_config/?tab=configurationyamlfile#setup
 [17]: /agent/guide/network
 [18]: /agent/proxy/

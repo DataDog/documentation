@@ -36,5 +36,5 @@ To set up remote instrumentation on a Kubernetes deployment:
    {{< img src="tracing/trace_collection/remote-instrumentation-setup-page.png" alt="Remote Instrumentation setup page" style="width:100%;" >}}
 
 [1]: /tracing/trace_collection/
-[2]: /agent/guide/how_remote_config_works/?tab=configurationyamlfile#prerequisites
+[2]: /agent/remote_config/?tab=configurationyamlfile#prerequisites
 [5]: /tracing/trace_collection/library_injection_local/
