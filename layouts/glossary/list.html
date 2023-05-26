@@ -90,7 +90,8 @@
                         <!-- `$nextTick` filters letter headers on state initialization. -->
                         <h4 
                         id="{{ anchorize .Params.Title }}" 
-                        class="glossary-term font-24-28" 
+                        class="glossary-term font-24-28"
+                        :style="{scrollMarginTop: `${glossaryNavHeight+10}px`}"
                         x-init="$nextTick(() => appendToFilteredLetters($el.parentElement))"
                         >
                             {{ .Params.Title }}
