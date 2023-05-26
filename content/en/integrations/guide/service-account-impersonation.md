@@ -49,14 +49,14 @@ This solution enables you to monitor all projects visible to a service account b
 2. Click on **Add GCP Account**. If you have no configured projects, you are automatically redirected to this page.
 3. If you have not generated a Datadog principal for your org, click the **Generate Principal** button.
 4. Copy your Datadog principal and keep it for the next section.
-   {{< img src="integrations/guide/service_account_impersonation/datadog-principal.png" alt="Datadog interface, showing the 'Add New GCP Account' flow. The first step, 'Add Datadog Principal to Google,' features a text box where a user can generate a Datadog Principal and copy it to their clipboard. The second step, 'Add Service Account Email,' features a text box that the user can complete in section 3." style="width:70%;">}}
+   {{< img src="integrations/guide/service_account_impersonation/principal-2.png" alt="Datadog interface, showing the 'Add New GCP Account' flow. The first step, 'Add Datadog Principal to Google,' features a text box where a user can generate a Datadog Principal and copy it to their clipboard. The second step, 'Add Service Account Email,' features a text box that the user can complete in section 3." style="width:70%;">}}
    Keep this window open for the [next section](#3-complete-the-integration-setup-in-datadog).
 5. In [Google Cloud console][9], under the **Service Acounts** menu, find the service account you created in the [first section](#1-create-your-google-cloud-service-account).
 6. Go to the **Permissions** tab and click on **Grant Access**.
    {{< img src="integrations/guide/service_account_impersonation/grant-access.png" alt="Google Cloud console interface, showing the Permissions tab under Service Accounts." style="width:70%;">}}
 7. Paste your Datading principal into the **New principals** text box.
 8. Assign the role of **Service Account Token Creator** and click **Save**.
-   {{< img src="integrations/guide/service_account_impersonation/add-principals.png" alt="Google Cloud console interface, showing an 'Add principals' box and an 'Assign roles' interface." style="width:70%;">}}
+   {{< img src="integrations/guide/service_account_impersonation/add-principals-blurred.png" alt="Google Cloud console interface, showing an 'Add principals' box and an 'Assign roles' interface." style="width:70%;">}}
 
 **Note**: If you previously configured access using a shared Datadog principal, you can revoke the permission for that principal after you complete these steps.
 
