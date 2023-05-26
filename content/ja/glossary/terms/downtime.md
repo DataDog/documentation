@@ -1,7 +1,7 @@
 ---
 core_product:
 - alerts
-- SLO
+- slos
 - インシデント管理
 title: ダウンタイム
 ---
