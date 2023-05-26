@@ -3933,7 +3933,6 @@ components:
       - infra_host_usage
       - invocations_usage
       - npm_host_usage
-      - obs_pipeline_bytes_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -3968,7 +3967,6 @@ components:
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - NPM_HOST_USAGE
-      - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -7469,8 +7467,6 @@ components:
       - invocations_percentage
       - npm_host_usage
       - npm_host_percentage
-      - obs_pipeline_bytes_usage
-      - obs_pipeline_bytes_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -7538,8 +7534,6 @@ components:
       - INVOCATIONS_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
-      - OBS_PIPELINE_BYTES_USAGE
-      - OBS_PIPELINE_BYTES_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -7769,14 +7763,6 @@ components:
           type: number
         npm_host_usage:
           description: The network host usage by tag(s).
-          format: double
-          type: number
-        obs_pipeline_bytes_percentage:
-          description: The percentage of observability pipeline bytes usage by tag(s).
-          format: double
-          type: number
-        obs_pipeline_bytes_usage:
-          description: The observability pipeline bytes usage by tag(s).
           format: double
           type: number
         profiled_container_percentage:
