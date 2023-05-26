@@ -178,6 +178,12 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    
+    
+     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.
+    aws:
+      deployment_type: '<DEPLOYMENT_TYPE>'
+      name: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.
