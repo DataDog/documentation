@@ -207,6 +207,11 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # pg_stat_activity_view: datadog.pg_stat_activity()
        ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
+       
+       # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.
+       aws:
+        deployment_type: '<DEPLOYMENT_TYPE>'
+        name: '<AWS_INSTANCE_ENDPOINT>'
    ```
 2. [Restart the Agent][2].
 
