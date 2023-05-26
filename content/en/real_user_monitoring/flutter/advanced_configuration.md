@@ -5,7 +5,7 @@ description: Learn how to configure Flutter Monitoring.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter Source code
+  text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data

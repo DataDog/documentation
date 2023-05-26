@@ -5,7 +5,7 @@ description: Learn how to troubleshoot issues with Flutter Monitoring.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter Source code
+  text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/flutter/
   tag: Documentation
   text: Learn about Flutter Monitoring
