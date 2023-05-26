@@ -126,7 +126,6 @@
             id="glossary-nav" 
             class="d-none d-md-block" 
             x-init="setGlossaryNavHeight($el)" 
-            @scroll.window.throttle="setGlossaryNavHeight($el)" 
             @resize.window.throttle="setGlossaryNavHeight($el)" >
                 <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                     {{ range $letters }}
