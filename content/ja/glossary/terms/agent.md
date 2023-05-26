@@ -1,6 +1,6 @@
 ---
 core_product:
-- Datadog Agent
+- datadog agent
 synonyms:
 - Datadog Agent
 title: エージェント
