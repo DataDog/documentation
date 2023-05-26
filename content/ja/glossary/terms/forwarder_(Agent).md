@@ -1,6 +1,6 @@
 ---
 core_product:
-- Datadog Agent
+- datadog agent
 title: Forwarder (Agent)
 ---
 Forwarder は、HTTPS で Dataodog にメトリクスを送信する Agent プロセスです。
