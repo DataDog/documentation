@@ -189,8 +189,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -203,7 +203,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-   DD_RUM.startSessionReplayRecording();
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -357,8 +357,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -371,7 +371,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackLongTasks: true,
       trackInteractions: true,
     });
-   DD_RUM.startSessionReplayRecording();
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -523,8 +523,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -535,7 +535,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-   DD_RUM.startSessionReplayRecording();
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -679,8 +679,8 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
       site: 'ap1.datadoghq.com',
@@ -691,7 +691,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
-  DD_RUM.startSessionReplayRecording();
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
