@@ -54,4 +54,4 @@ The minimum tracer version to get all supported ASM capabilities for .NET is 2.2
 
 [1]: /tracing/trace_collection/compatibility/dotnet-core/
 [2]: /tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[3]: /agent/remote_config/#enabling-remote-configuration

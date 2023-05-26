@@ -47,4 +47,4 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
-[2]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[2]: /agent/remote_config/#enabling-remote-configuration
