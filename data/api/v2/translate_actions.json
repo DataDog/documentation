@@ -577,7 +577,7 @@
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Configure tags for multiple metrics",
+    "summary": "Delete tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag deletion request."
   },

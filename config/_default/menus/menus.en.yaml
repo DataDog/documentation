@@ -290,24 +290,28 @@ main:
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 7
+    weight: 5
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 8
+    weight: 6
   - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 801
+    weight: 601
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 802
+    weight: 602
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 803
+    weight: 603
+  - name: Remote Configuration
+    url: agent/remote_config
+    parent: agent
+    weight: 7
   - name: Proxy
     url: agent/proxy/
     parent: agent
@@ -5459,8 +5463,19 @@ api:
       versions:
         - v2
       operationids:
-        - DeleteBulkTagsMetricsConfiguration
         - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 9
+  - name: Delete tags for multiple metrics
+    url: '#delete-tags-for-multiple-metrics'
+    identifier: metrics-delete-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteBulkTagsMetricsConfiguration
       unstable: []
       order: 10
   - name: Get a list of metrics
