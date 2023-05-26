@@ -17,13 +17,12 @@ The features described on this page are in private beta. Contact your Customer S
 
 ### Oracle versions supported
 
+|  | Self-hosted | RDS |
+|--|-------------|-----| 
+| Oracle 19c | {{< X >}} | {{< X >}} |
+| Oracle 21c | {{< X >}} | {{< X >}} |
 
-|  | Self-hosted |
-|--|------------|
-| Oracle 19c | {{< X >}} |
-| Oracle 21c | {{< X >}} |
-
-The following deployment configurations are supported: on-prem, single-node, multi-tenant. Note these do not include RAC and Exadata or legacy architectures.
+The following deployment configurations are supported: self-managed, RDS, single-node, and multi-tenant. Note these do not include RAC and Exadata or legacy architectures.
 
 For setup instructions, select your hosting type:
 
