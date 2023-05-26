@@ -231,8 +231,8 @@ Statsd host to send JMX metrics to. If you are using Unix Domain Sockets, use an
 **Default**: `8125`<br>
 StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.
 
-`dd.trace.obfuscation.query.string.regexp`
-: **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
+`dd.obfuscation.query.string.regexp`
+: **Environment Variable**: `DD_OBFUSCATION_QUERY_STRING_REGEXP`<br>
 **Default**: `null`<br>
 A regex to redact sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with <redacted>).
   
