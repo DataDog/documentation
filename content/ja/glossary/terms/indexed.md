@@ -1,6 +1,6 @@
 ---
 core_product:
-- ログ管理
+- log management
 - apm
 title: インデックス化
 ---
