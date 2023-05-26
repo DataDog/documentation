@@ -173,11 +173,11 @@ main:
     weight: 19
   - name: Application Security Management
     identifier: getting_started_application_security
-    url: getting_started/application_security/application_management
+    url: getting_started/application_security
     parent: getting_started
     weight: 19
   - name: Application Vulnerability Management
-    identifier: getting_started_containers_application_vulnerability
+    identifier: getting_started_application_vulnerability
     url: getting_started/application_security/vulnerability_management
     parent: getting_started_application_security
     weight: 101
