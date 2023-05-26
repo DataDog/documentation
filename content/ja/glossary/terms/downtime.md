@@ -2,7 +2,7 @@
 core_product:
 - alerts
 - slos
-- インシデント管理
+- incident management
 title: ダウンタイム
 ---
 ダウンタイムとは、モニターのアラートと通知を停止させるスケジュールされた時間です。
