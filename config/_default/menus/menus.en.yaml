@@ -172,9 +172,15 @@ main:
     parent: getting_started
     weight: 19
   - name: Application Security Management
-    url: getting_started/application_security/
+    identifier: getting_started_application_security
+    url: getting_started/application_security
     parent: getting_started
     weight: 19
+  - name: Application Vulnerability Management
+    identifier: getting_started_application_vulnerability
+    url: getting_started/application_security/vulnerability_management
+    parent: getting_started_application_security
+    weight: 101
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
