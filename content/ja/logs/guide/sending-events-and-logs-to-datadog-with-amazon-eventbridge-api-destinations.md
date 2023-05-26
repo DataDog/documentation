@@ -17,7 +17,7 @@ Amazon EventBridge は、イベント駆動型アプリケーションの構築�
 
 1. [Amazon の API 宛先を作成][5]文書のステップに従い、Datadog を API 宛先として追加します。
     - キー名として `DD-API-KEY`、[Datadog API キー][3]を値として、API キー認証を使用します。
-    - 宛先エンドポイントには、ログの場合 `https://http-intake.logs.datadoghq.com/v1/input`、イベントの場合は `https://api.datadoghq.com/api/v1/events` を使用して、HTTP メソッドとして `POST` を設定します。ログとイベントの違いに関する詳細は、[データのカテゴリ文書のページ][8]の[ログセクション][6]および[イベントセクション][7]を参照してください。
+    - 宛先エンドポイントには、ログの場合 `https://{{< region-param key="http_endpoint" code="true" >}}/api/v2/logs`、イベントの場合は `https://api.{{< region-param key="dd_site" code="true" >}}/api/v1/events` を使用して、HTTP メソッドとして `POST` を設定します。ログとイベントの違いに関する詳細は、[データのカテゴリ文書のページ][8]の[ログセクション][6]および[イベントセクション][7]を参照してください。
     - イベントエンドポイントを利用する場合、API Destination 接続の `body.field` パラメータに `title` と `text` を含める必要があります。これらは、イベントエンドポイントに `POST` するために必要な値です。詳しくは、[イベントのポストのドキュメント][9]を参照してください。
 2. 宛先をセットアップしたら、Amazon のドキュメントを参照して [EventBridge 作成ルール][10]を作成して、Datadog をあて先として設定します。
 3. Datadog を宛先としてルールをセットアップしたら、イベントを EventBridge にポストしてトリガーします。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーションのドキュメント][1]をご参照ください。たとえば、アカウントで[オブジェクトを S3 バケットへアップロード][11]してテストイベントをトリガーするには、以下の AWS CloudShell コマンドを使用します。
@@ -39,7 +39,7 @@ Datadog に送信されたペイロードの詳細を確認し、API エンド�
 5. 先ほど作成した SQS キューを選択します。
 6. ルールを更新します。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
