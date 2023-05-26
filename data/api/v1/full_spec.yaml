@@ -13975,6 +13975,9 @@ components:
           type: string
         parser:
           $ref: '#/components/schemas/SyntheticsVariableParser'
+        secure:
+          description: Determines whether or not the extracted value will be obfuscated.
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
