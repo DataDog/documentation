@@ -21,7 +21,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ## Identify code hotspots in slow traces
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab-2.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Prerequisites
 
@@ -113,7 +113,7 @@ Click the plus icon `+` to expand the stack trace to that method **in reverse or
 
 ### Viewing a profile from a trace
 
-{{< img src="profiler/flamegraph_view.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
+{{< img src="profiler/flamegraph_view-1.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
 
 For each type from the breakdown, click **View In Full Page** to see the same data opened up in a in a new page . From there you can change visualization to the flame graph.
 Click the **Focus On** selector to define the scope of the data:
