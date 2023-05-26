@@ -56,7 +56,7 @@ In case the NetFlow exporter IP is one of the device IPs but not the one configu
 ## Visualization
 
 You can find the NetFlow page directly from the [Network Devices page][5].
-{{< img src="network_device_monitoring/netflow_page.png" alt="NetFlow Page" >}}
+{{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlow Page" >}}
 
 But your data is also available in Dashboards, Notebooks and more for more precise queries and for correlating with other sources of data.
 
