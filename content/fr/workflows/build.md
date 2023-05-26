@@ -4,14 +4,9 @@ further_reading:
 - link: /workflows/actions_catalog
   tag: Documentation
   text: Explorer les actions disponibles dans l'Actions Catalog
-is_beta: true
 kind: documentation
 title: Créer des workflows
 ---
-
-{{< callout url="https://forms.gle/VEjerYVQ2QJhauZ57" >}}
-  La solution Workflows est en bêta publique. Si vous souhaitez nous faire part de vos remarques ou de vos questions, contactez l'<a href="/help">assistance Datadog</a>.
-{{< /callout >}}
 
 Vous pouvez créer des workflows ou modifier des workflows existants depuis la [page **Workflows**][1] de Datadog. Cette page affiche la liste des workflows existants ainsi que leur auteur, leur dernière date de modification et leur dernière date d'exécution.
 - Passez votre curseur sur un workflow pour afficher les options de suppression ou de duplication du workflow.
@@ -38,7 +33,7 @@ Pour créer un workflow :
 
 1. Cliquez sur **Add a step to get started** pour ajouter la première étape de votre workflow.
 1. Recherchez une action à l'aide de la barre de recherche ou parcourez les différentes intégrations et leurs actions associées pour trouver l'action qui vous intéresse. Cliquez sur une action pour l'ajouter en tant qu'étape dans la fenêtre d'édition.
-{{< img src="workflows/workflow-builder.mp4" alt="Faire glisser une étape sur la fenêtre d'édition de workflow" video="true"  >}}
+{{< img src="workflows/workflow-builder.mp4" alt="Faire glisser une étape sur la fenêtre d'édition de workflow" video="true" >}}
 1. Cliquez sur l'étape dans la fenêtre d'édition pour la configurer ou visualiser ses sorties et ses variables de contexte. Pour en savoir plus sur les sorties et les variables de contexte, consultez la section [Variables de contexte](#variables-de-contexte).
 1. Une fois l'étape configurée, cliquez sur l'icône Plus (`+`) pour ajouter une autre étape, ou enregistrez le workflow si vous avez terminé.
 
@@ -130,16 +125,27 @@ Certaines étapes génèrent des sorties que les étapes ultérieures peuvent en
 
 Si vous ne savez pas quelle variable utiliser, Datadog vous suggère des étapes existantes à mesure que vous saisissez du texte. Vous pouvez également consulter l'onglet [Context Variables](#variables-de-contexte) pour visualiser la liste des variables disponibles.
 
-### Variables de déclenchement
+### Paramètres d'entrée
 
-Vous pouvez transmettre des variables de déclenchement dans un workflow sous forme d'entrées. Les workflows acceptent un objet JSON constitué de paires key/value séparées par des virgules. Pour accéder à une variable de déclenchement dans des étapes de workflow, utilisez la syntaxe `{{ Trigger.key }}`. Par exemple, pour accéder à la variable de déclenchement `{ "user": "Bits" }`, utilisez ` {{ Trigger.user }}` dans l'étape.
+Les paramètres d'entrée vous permettent de transférer des données dans un workflow. Vous pouvez les utiliser dans :
+- les workflows déclenchés manuellement, par exemple à partir d'un dashboard
+- les workflows déclenchés via une mention, par exemple dans un monitor ou dans les règles de notification des signaux de sécurité
 
-- Si vous ajoutez une variable de déclenchement qui n'existe pas, la variable est automatiquement ajoutée en tant qu'entrée de workflow.
-- Si vous ne savez pas quelle variable utiliser, Datadog vous suggère des étapes existantes à mesure que vous saisissez du texte. Vous pouvez également consulter l'onglet [Context Variables](#variables-de-contexte) pour visualiser la liste des variables disponibles.
+Pour ajouter un paramètre d'entrée :
+1. Cliquez sur la fenêtre d'édition du workflow.
+1. Cliquez sur l'icône **+** à proximité de **Input Parameters**.
+1. Indiquez le nom du paramètre, le type de données et une description. Le nom d'affichage est automatiquement généré à partir du nom du paramètre. Cochez la case **Use custom display name** pour le personnaliser. Le nom d'affichage doit être lisible par un humain, tandis que le nom du paramètre est utilisé pour faire référence au paramètre dans vos étapes de workflow.
+1. Si vous le souhaitez, attribuez une valeur par défaut au paramètre. Si vous ajoutez une valeur par défaut, le paramètre est alors facultatif lors de l'exécution.
 
-{{< img src="workflows/add-trigger-variable.mp4" alt="Lorsqu'une variable de déclenchement est ajoutée à une étape, elle est automatiquement ajoutée au workflow" video="true" >}}
+Pour faire référence au paramètre d'entrée dans une étape, utilisez la syntaxe `{{ Trigger.<nom du paramètre>}}`. Par exemple, pour faire référence à un paramètre d'entrée nommé `user`, utilisez `{{Trigger.user}}`.
 
-Pour en savoir plus sur le déclenchement de workflows, consultez la section [Déclencher un workflow][2].
+{{< img src="workflows/input-parameter.png" alt="Lorsqu'un paramètre d'entrée est ajouté à une étape, il est automatiquement ajouté au workflow" style="width:100%;">}}
+
+La section **Input Parameters** affiche les noms de tous les paramètres d'entrée existants avec leur nombre d'utilisations. Passez votre souris sur un nombre pour voir les étapes qui utilisent le paramètre.
+
+Vous pouvez ajouter un paramètre d'entrée implicite (c'est-à-dire qui n'existe pas déjà dans le workflow) en le saisissant dans une étape de workflow à l'aide la syntaxe `{{ Trigger.<nom du paramètre> }}`. Lorsque vous enregistrerez le workflow, une fenêtre apparaîtra pour vous inviter à convertir le paramètre en paramètre explicite. Pour en savoir plus sur le déclenchement de workflows, consultez la section [Déclencher un workflow][2].
+
+Si vous recherchez le nom d'un paramètre d'entrée existant, commencez à saisir `{{ Trigger.` pour voir s'il apparaît dans les suggestions. Vous pouvez également consulter l'onglet [Context Variables](#context-variables) pour obtenir la liste des paramètres disponibles.
 
 ### Variables d'objet source
 

@@ -72,7 +72,7 @@ Datadog 監査証跡を有効にするには、[オーガニゼーションの�
 
 監査イベントを詳しく確認するには、[Audit Trail][1] セクションに移動します。Datadog の[オーガニゼーションの設定][2]からもアクセス可能です。
 
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="組織設定メニューの監査証跡" style="width:30%;">}}
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="組織設定メニューの監査証跡設定" style="width:30%;">}}
 
 監査証跡イベントは、[ログエクスプローラー][4]内のログと同様の機能を持っています。
 

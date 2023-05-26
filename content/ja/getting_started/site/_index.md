@@ -84,14 +84,14 @@ Datadog サイトによって、インスタンスのセキュリティ要件に
 
 例えば、Datadog for Government サイトのドキュメントを見るには、**US1-FED** を選択します。
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 
 ## Datadog for Government サイトにアクセスする
 
 Datadog for Government Site (US1-FED) は、アメリカ政府機関およびパートナーがそのアプリケーションやインフラストラクチャーを監視するためのサイトです。Datadog for Government site のセキュリティおよびコンプライアンスコントロール、フレームワークに関する詳細や、FedRAMP への対応については、[セキュリティページ][1]をご参照ください。
 
 [1]: https://www.datadoghq.com/security/
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## その他の参考資料
 
