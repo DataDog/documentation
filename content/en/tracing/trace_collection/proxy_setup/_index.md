@@ -742,7 +742,6 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 [13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
 {{% /tab %}}
-{{% /tab %}}
 {{% tab "Kong" %}}
 
 Datadog APM is available for [Kong Gateway][1] using the [kong-plugin-ddtrace][2] plugin.
@@ -754,9 +753,9 @@ The plugin is installed using `luarocks`.
 luarocks install kong-plugin-ddtrace
 ```
 
-As this is not a bundled plugin, Kong Gateeway needs to be configured to enable it.
-This can be done by including `bundled` and `ddtrace` in the `KONG_PLUGINS` environment variable, or by setting `plugins=bundled,ddtrace` in `/etc/kong/kong.conf`
-Kong Gateway should be restarted after this change is made.
+Kong Gateway is not a bundled plugin, so it needs to be configured before it can be enabled.
+To enable it, include `bundled` and `ddtrace` in the `KONG_PLUGINS` environment variable, or
+set `plugins=bundled,ddtrace` in `/etc/kong/kong.conf`. Next, restart Kong Gateway to apply the change.
 
 ```
 # Set the KONG_PLUGINS environment variable or edit /etc/kong/kong.conf to enable the ddtrace plugin
@@ -788,6 +787,7 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 [2]: https://github.com/DataDog/kong-plugin-ddtrace
 [3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
 
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further Reading
