@@ -3,8 +3,7 @@
   data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
   class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
-<head>
-
+<head>  
   {{ partialCached "header-scripts.html" . }}
 
   <meta charset="utf-8">

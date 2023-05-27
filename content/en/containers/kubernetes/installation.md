@@ -77,28 +77,31 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
 
 2. Create a file with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
 
-```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  global:
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
-    nodeAgent:
-      image:
-        name: gcr.io/datadoghq/agent:latest
-```
+   ```yaml
+   kind: DatadogAgent
+   apiVersion: datadoghq.com/v2alpha1
+   metadata:
+     name: datadog
+   spec:
+     global:
+       site: <DATADOG_SITE>
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+         appSecret:
+           secretName: datadog-secret
+           keyName: app-key
+     override:
+       clusterAgent:
+         image:
+           name: gcr.io/datadoghq/cluster-agent:latest
+       nodeAgent:
+         image:
+           name: gcr.io/datadoghq/agent:latest
+   ```
+
+   Replace `<DATADOG_SITE>` with your [Datadog site][10]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
@@ -144,6 +147,7 @@ To modify the container image registry, see the [Changing Container Registry][9]
 [7]: /agent/guide/operator-advanced
 [8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
 [9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
+[10]: /getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -181,6 +185,10 @@ Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
 - For a full list of the Datadog chart's configurable parameters and their default values, see the [Datadog Helm repository README][7].
 
 ### Container registries
+
+<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
+
+Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use another registry with the following configuration in the `values.yaml` file:
 

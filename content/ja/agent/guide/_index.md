@@ -15,9 +15,9 @@ title: Agent ガイド
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent コンフィギュレーションファイル{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent のログファイル{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent 環境変数{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/setup" >}}集計 Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 ステータスページ{{< /nextlink >}}
     {{< nextlink href="agent/guide/dual-shipping" >}}デュアルシッピング{{< /nextlink >}}
-    {{< nextlink href="agent/guide/how_remote_config_works" >}}リモート構成の仕組み{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}インテグレーション管理{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 キーローテーション{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}ネットワークトラフィック{{< /nextlink >}}

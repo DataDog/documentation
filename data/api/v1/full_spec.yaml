@@ -2333,9 +2333,6 @@ components:
           description: Query to filter the event stream with.
           example: ''
           type: string
-        show_year:
-          description: Option to display the year in the date column.
-          type: boolean
         tags_execution:
           description: The execution method for multi-value filters. Can be either
             and or or.
@@ -3936,6 +3933,7 @@ components:
       - infra_host_usage
       - invocations_usage
       - npm_host_usage
+      - obs_pipeline_bytes_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -3970,6 +3968,7 @@ components:
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - NPM_HOST_USAGE
+      - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -5931,6 +5930,43 @@ components:
       type: string
       x-enum-varnames:
       - USER_AGENT_PARSER
+    MatchingDowntime:
+      description: Object describing a downtime that matches this monitor.
+      properties:
+        end:
+          description: POSIX timestamp to end the downtime.
+          example: 1412792983
+          format: int64
+          nullable: true
+          type: integer
+        id:
+          description: The downtime ID.
+          example: 1625
+          format: int64
+          readOnly: true
+          type: integer
+        scope:
+          description: 'The scope(s) to which the downtime applies. Must be in `key:value`
+            format. For example, `host:app2`.
+
+            Provide multiple scopes as a comma-separated list like `env:dev,env:prod`.
+
+            The resulting downtime applies to sources that matches ALL provided scopes
+            (`env:dev` **AND** `env:prod`).'
+          example:
+          - env:staging
+          items:
+            description: A scope. For example, `"env:staging"`.
+            type: string
+          type: array
+        start:
+          description: POSIX timestamp to start the downtime.
+          example: 1412792983
+          format: int64
+          type: integer
+      required:
+      - id
+      type: object
     MetricContentEncoding:
       default: deflate
       description: HTTP header used to compress the media-type.
@@ -6211,6 +6247,11 @@ components:
           format: int64
           readOnly: true
           type: integer
+        matching_downtimes:
+          description: A list of active downtimes that match this monitor.
+          items:
+            $ref: '#/components/schemas/MatchingDowntime'
+          type: array
         message:
           description: A message to include with notifications for this monitor.
           type: string
@@ -7428,6 +7469,8 @@ components:
       - invocations_percentage
       - npm_host_usage
       - npm_host_percentage
+      - obs_pipeline_bytes_usage
+      - obs_pipeline_bytes_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -7495,6 +7538,8 @@ components:
       - INVOCATIONS_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
+      - OBS_PIPELINE_BYTES_USAGE
+      - OBS_PIPELINE_BYTES_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -7724,6 +7769,14 @@ components:
           type: number
         npm_host_usage:
           description: The network host usage by tag(s).
+          format: double
+          type: number
+        obs_pipeline_bytes_percentage:
+          description: The percentage of observability pipeline bytes usage by tag(s).
+          format: double
+          type: number
+        obs_pipeline_bytes_usage:
+          description: The observability pipeline bytes usage by tag(s).
           format: double
           type: number
         profiled_container_percentage:
@@ -13922,6 +13975,9 @@ components:
           type: string
         parser:
           $ref: '#/components/schemas/SyntheticsVariableParser'
+        secure:
+          description: Determines whether or not the extracted value will be obfuscated.
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
@@ -21870,11 +21926,21 @@ paths:
           parameters:
           - name: body
             value: "{\n  \"message\": \"{{ unique }}\",\n  \"start\": {{ timestamp(\"now\")
-              }},\n  \"timezone\": \"Etc/UTC\",\n  \"scope\": [\"test:{{ unique_lower_alnum
-              }}\"],\n  \"recurrence\": {\n    \"type\": \"weeks\",\n    \"period\":
-              1,\n    \"week_days\": [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n
-              \   \"until_date\": {{ timestamp(\"now + 21d\")}}\n  }\n}"
+              }},\n  \"end\": {{ timestamp(\"now + 1h\") }},\n  \"timezone\": \"Etc/UTC\",\n
+              \ \"scope\": [\"test:{{ unique_lower_alnum }}\"],\n  \"recurrence\":
+              {\n    \"type\": \"weeks\",\n    \"period\": 1,\n    \"week_days\":
+              [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\"],\n    \"until_date\":
+              {{ timestamp(\"now + 21d\")}}\n  }\n}"
           step: there is a valid "downtime" in the system
+        downtime_monitor:
+          parameters:
+          - name: body
+            value: "{\n  \"message\": \"{{ unique }}\",\n  \"monitor_id\": {{ monitor.id
+              }},\n  \"start\": {{ timestamp(\"now\") }},\n  \"end\": {{ timestamp(\"now
+              + 7d\") }},\n  \"timezone\": \"Etc/UTC\",\n  \"scope\": [\"*\"],\n  \"mute_first_recovery_notification\":
+              true,\n  \"notify_end_states\": [\"alert\"],\n  \"notify_end_types\":
+              [\"canceled\"]\n}"
+          step: there is a valid "downtime" for a "monitor" in the system
       x-menu-order: 2
       x-undo:
         operationId: CancelDowntime
@@ -26415,6 +26481,13 @@ paths:
         required: false
         schema:
           type: string
+      - description: If this argument is set to true, then the returned data includes
+          all current active downtimes for the monitor.
+        in: query
+        name: with_downtimes
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:

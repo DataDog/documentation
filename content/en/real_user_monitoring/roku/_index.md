@@ -9,6 +9,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
+  tag: Blog
+  text: Monitor your Roku channels with Datadog RUM
 ---
 
 {{< site-region region="gov" >}}
