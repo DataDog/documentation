@@ -33,123 +33,6 @@ Docker API は、一度に 1 つのコンテナからログを取得するよう
 アプリケーションのログを収集するには、[Kubernetes クラスターで Datadog Agent を実行する][2]必要があります。Agent でログの収集を有効にするには、次の手順に従ってください。
 
 {{< tabs >}}
-{{% tab "DaemonSet" %}}
-
-**注**: このオプションは Windows ではサポートされません。代わりに Helm オプションを使用してください。
-
-DaemonSet によるログの収集を有効にするには
-
-1. `datadog.yaml` Agent マニフェストの *env* セクションで、`DD_LOGS_ENABLED` 変数と `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` 変数を true に設定します。
-
-    ```yaml
-     # (...)
-      env:
-        # (...)
-        - name: DD_LOGS_ENABLED
-          value: "true"
-        - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-          value: "true"
-        - name: DD_CONTAINER_EXCLUDE_LOGS
-          value: "name:datadog-agent"
-     # (...)
-    ```
-
-    **注**: `DD_CONTAINER_EXCLUDE_LOGS` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナを無視するための環境変数][1]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE_LOGS` にコンテナの `name` を設定してログを収集します。これらパラメーター値（除外/含む）は正規表現をサポートします。
-
-2. 再起動やネットワーク障害の際にコンテナログを失わないように、`pointerdir` ボリュームをマウントします。`/var/log/pods` がこのディレクトリへのシンボリックリンクであるため、Kubernetes ログファイルからログを収集するよう `/var/lib/docker/containers` もマウントします。
-
-    ```yaml
-      # (...)
-        volumeMounts:
-          # (...)
-          - name: pointerdir
-            mountPath: /opt/datadog-agent/run
-          - name: logpodpath
-           mountPath: /var/log/pods
-          # Docker runtime directory, replace this path
-          # with your container runtime logs directory,
-          # or remove this configuration if `/var/log/pods`
-          # is not a symlink to any other directory.
-          - name: logcontainerpath
-           mountPath: /var/lib/docker/containers
-      # (...)
-      volumes:
-        # (...)
-        - hostPath:
-            path: /opt/datadog-agent/run
-          name: pointerdir
-        - hostPath:
-            path: /var/log/pods
-          name: logpodpath
-        # Docker runtime directory, replace this path
-        # with your container runtime logs directory,
-        # or remove this configuration if `/var/log/pods`
-        # is not a symlink to any other directory.
-        - hostPath:
-            path: /var/lib/docker/containers
-          name: logcontainerpath
-        # (...)
-    ```
-
-   `pointerdir` は、Agent がログを収集するすべてのコンテナへのポインターを含むファイルを格納するために使用されます。これは、Agent が再起動したり、ネットワークに問題があった場合でも、何も失われないようにするためです。
-
-### 非特権
-
-(オプション) 非特権インストールを実行するには、[ポッドテンプレート][2]に以下を追加します。
-
-```yaml
-  spec:
-    securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
-```
-
-`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
-
-Agent が非ルートユーザーで実行しているときは、`/var/lib/docker/containers` に含まれるログファイルを直接読み取れません。この場合、Docker Daemon からコンテナログをフェッチできるよう、Agent コンテナの Docker ソケットをマウントする必要があります。
-
-[1]: /ja/agent/docker/?tab=standard#ignore-containers
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Helm によるログの収集を有効にするには、次のログ収集コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新してから、Datadog Helm チャートをアップグレードします。
-
-```yaml
-datadog:
-  ## @param logs - object - required
-  ## ログ Agent を有効にし、カスタムコンフィグを提供
-  #
-  logs:
-    ## @param enabled - boolean - optional - default: false
-    ## これを有効にし、Datadog Agent のログの収集を開始します。
-    #
-    enabled: true
-
-    ## @param containerCollectAll - boolean - optional - default: false
-    ## これを有効にし、すべてのコンテナのログの収集を可能にします。
-    #
-    containerCollectAll: true
-```
-
-`datadog.logs.containerCollectAll` を `true` に設定すると、デフォルトで検出されたすべてのコンテナからログを収集することができます。`false` (デフォルト) に設定すると、ログ収集を有効にするためにオートディスカバリーのログ構成を指定する必要があります。
-
-### 非特権
-
-(オプション) 非特権インストールを実行するには、`values.yaml` ファイルに以下を追加します。
-
-```yaml
-datadog:
-  securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
-```
-
-`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-{{% /tab %}}
 {{% tab "Operator" %}}
 
 `datadog-agent.yaml` マニフェストを次のように更新します。
@@ -210,7 +93,48 @@ spec:
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
+{{% tab "Helm" %}}
+
+Helm によるログの収集を有効にするには、次のログ収集コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新してから、Datadog Helm チャートをアップグレードします。
+
+```yaml
+datadog:
+  ## @param logs - object - required
+  ## ログ Agent を有効にし、カスタムコンフィグを提供
+  #
+  logs:
+    ## @param enabled - boolean - optional - default: false
+    ## これを有効にし、Datadog Agent のログの収集を開始します。
+    #
+    enabled: true
+
+    ## @param containerCollectAll - boolean - optional - default: false
+    ## これを有効にし、すべてのコンテナのログの収集を可能にします。
+    #
+    containerCollectAll: true
+```
+
+`datadog.logs.containerCollectAll` を `true` に設定すると、デフォルトで検出されたすべてのコンテナからログを収集することができます。`false` (デフォルト) に設定すると、ログ収集を有効にするためにオートディスカバリーのログ構成を指定する必要があります。
+
+### 非特権
+
+(オプション) 非特権インストールを実行するには、`values.yaml` ファイルに以下を追加します。
+
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
+
+`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
 {{< /tabs >}}
+
+DaemonSet を使用したログ収集の構成は、[DaemonSet ログ収集][9]を参照してください。
 
 **警告**: 非特権インストールを実行する際、Agent が `/var/log/pods` のログファイルを読み取れる必要があります。
 `containerd` の場合、`/var/log/pods` のログファイルは `root` グループのメンバーに読み取り可能です。上記の手順により、`Agent` が依然として `root` グループで実行しているため、動作します。
@@ -624,3 +548,4 @@ tagger_warmup_duration: 5
 [6]: /ja/agent/logs/advanced_log_collection/?tab=kubernetes#scrub-sensitive-data-from-your-logs
 [7]: /ja/agent/logs/advanced_log_collection/?tab=kubernetes#multi-line-aggregation
 [8]: /ja/agent/guide/autodiscovery-management/
+[9]: /ja/containers/guide/kubernetes_daemonset/#log-collection
