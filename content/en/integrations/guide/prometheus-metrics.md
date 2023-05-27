@@ -4,15 +4,9 @@ kind: guide
 aliases:
   - /integrations/faq/how-to-collect-metrics-with-sql-stored-procedure/
 further_reading:
-- link: "https://www.datadoghq.com/blog/sql-server-metrics/#create-a-stored-procedure-to-generate-and-collect-metrics"
-  tag: "Blog"
-  text: "Create a stored procedure to generate and collect metrics"
 - link: "/integrations/openmetrics/"
   tag: "Documentation"
   text: "Learn about the OpenMetrics integration"
-- link: "/integrations/mysql/"
-  tag: "Documentation"
-  text: "Learn about the MySQL integration"
 - link: "/agent/kubernetes/prometheus/"
   tag: "Documentation"
   text: "Kubernetes Prometheus and OpenMetrics metrics collection"
@@ -23,7 +17,6 @@ further_reading:
 This page walks you through how Prometheus or OpenMetrics check metrics map to existing Datadog metric types.
 
 ## Prometheus and OpenMetrics metric types
-
 
 {{< tabs >}}
 {{% tab "Latest Version" %}}
@@ -108,14 +101,14 @@ If the `send_histogram_buckets` parameter is `true`, `_bucket` samples are sent 
 
 Setting the `send_distribution_counts_as_monotonic` parameter to `true` causes the `_count` and `_bucket` metrics to be sent as type `count` instead. Setting `send_distribution_sums_as_monotonic` does the same for `_sum` metrics.
 
-If the parameter `send_distribution_buckets` is `true`, `_bucket` samples are aggregated into a Datadog `distribution`. [Datadog distribution metrics][108] are based on the [DDSketch algorithm][107] and allow for more advanced statistical aggregations such as quantiles. For more information, see the Datadog Engineering Blog [post on OpenMetrics and distribution metrics][106].
+If the `send_distribution_buckets` parameter is `true`, `_bucket` samples are aggregated into a Datadog `distribution`. [Datadog distribution metrics][108] are based on the [DDSketch algorithm][107] and allow for more advanced statistical aggregations such as quantiles. For more information, see the Datadog Engineering Blog [post on OpenMetrics and distribution metrics][106].
 
 
 ### Summary
 
 For [Prometheus/OpenMetrics `summary`][105], `_count` and `_sum` values are mapped to Datadog's `gauge` type by default, and include a `.count` and `.sum` suffix in their name, respectively. Quantile samples are mapped to a metric of type `gauge` with the `.quantile` suffix.
 
-Setting the parameter `send_distribution_counts_as_monotonic` to `true` causes the `_count` and metrics to be sent as type `count` instead. Setting `send_distribution_sums_as_monotonic` does the same for `_sum` metrics.
+Setting the `send_distribution_counts_as_monotonic` parameter to `true` causes the `_count` and `_sum` metrics to be sent as type `count` instead. Setting `send_distribution_sums_as_monotonic` does the same for `_sum` metrics.
 
 [101]: https://prometheus.io/docs/concepts/metric_types/#counter
 [102]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#monotonic_count
