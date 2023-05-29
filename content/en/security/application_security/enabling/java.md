@@ -120,23 +120,23 @@ java -javaagent:dd-java-agent.jar \
 
 ## Enabling custom code vulnerability detection
 
-If your service is running a [tracing library version that supports Vulnerability Management for Custom Code Vulnerability Detection][3], enable it by setting the `DD_IAST_ENABLED=true` environment variable and restart your service.
+If your service runs a [tracing library version that supports Vulnerability Management for Custom Code Vulnerability Detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
-To leveraging custom code vulnerability detection capabilities for your service:
+To detect custom code vulnerabilities for your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
 2. Update your tracing library to at least the minimum version needed to turn on custom code vulnerability detection. For details, see [ASM capabilities support][3].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
-From the command line:
+   From the command line:
 
- ```shell
+   ```shell
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.iast.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
 
 Or one of the following methods, depending on where your application runs:
 
-**Note**: Read-only file systems are not currently supported. The application must have access to a writable `/tmp` directory.
+**Note**: Read-only file systems are not supported. The application must have access to a writable `/tmp` directory.
 
 
    {{< tabs >}}
@@ -195,7 +195,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
    {{< /tabs >}}
 
 4. Restart your service.
-5. To see Application Vulnerability Management for custom code vulnerabilities in action, browse your service and the custom code vulnerabilities will appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Custom Code value.
+5. To see Application Vulnerability Management for custom code vulnerabilities in action, browse your service and the custom code vulnerabilities appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Custom Code value.
 
 {{< img src="/security/application_security/Custom_Code_vulnerability.mp4" alt="Video showing Vulnerabilities tab, Custom Code source, and inspecting the custom code vulnerability" video="true" >}}
 

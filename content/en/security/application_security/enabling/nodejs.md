@@ -161,9 +161,9 @@ To leveraging custom code vulnerability detection capabilities for your service:
 2. Update your tracing library to at least the minimum version needed to turn on custom code vulnerability detection. For details, see [ASM capabilities support][3].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
-If you initialize the APM library on the command line using the `--require` option to Node.js:
+   If you initialize the APM library on the command line using the `--require` option to Node.js:
 
- ```shell
+   ```shell
    node --require dd-trace/init app.js
    ```
    Then use environment variables to enable ASM:
@@ -225,7 +225,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{< /tabs >}}
 
 4. Restart your service.
-5. To see Application Vulnerability Management for custom code vulnerabilities in action, browse your service and the custom code vulnerabilities will appear in the [Vulnerability Explorer][5]. The `SOURCE` column shows the Custom Code value.
+5. To see Application Vulnerability Management for custom code vulnerabilities in action, browse your service and the custom code vulnerabilities appear in the [Vulnerability Explorer][5]. The `SOURCE` column shows the Custom Code value.
 
 {{< img src="/security/application_security/Custom_Code_vulnerability.mp4" alt="Video showing Vulnerabilities tab, Custom Code source, and inspecting the custom code vulnerability" video="true" >}}
 
