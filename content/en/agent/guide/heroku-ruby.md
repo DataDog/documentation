@@ -80,7 +80,7 @@ heroku labs:enable runtime-dyno-metadata -a $APPNAME
 # Set hostname in Datadog as appname.dynotype.dynonumber for metrics continuity
 heroku config:add DD_DYNO_HOST=true
 
-# Set your hostzone (eg: us5.datadoghq.com) 
+# Set your Datadog site (for example, us5.datadoghq.com) 
 heroku config:add DD_SITE=$DD_SITE
 
 # Add this buildpack and set your Datadog API key
