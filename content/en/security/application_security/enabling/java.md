@@ -134,9 +134,9 @@ To detect custom code vulnerabilities for your service:
    java -javaagent:/path/to/dd-java-agent.jar -Ddd.iast.enabled=true -Ddd.service=<MY SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
    ```
 
-Or one of the following methods, depending on where your application runs:
+   Or one of the following methods, depending on where your application runs:
 
-**Note**: Read-only file systems are not supported. The application must have access to a writable `/tmp` directory.
+   **Note**: Read-only file systems are not supported. The application must have access to a writable `/tmp` directory.
 
 
    {{< tabs >}}
