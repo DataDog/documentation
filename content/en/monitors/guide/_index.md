@@ -31,7 +31,6 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides:" >}}
-    {{< nextlink href="monitors/guide/slo-checklist" >}}SLO checklist{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly monitors{{< /nextlink >}}

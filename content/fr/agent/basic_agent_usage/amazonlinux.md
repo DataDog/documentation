@@ -28,7 +28,9 @@ Avec les Agents v6 et v7, le gestionnaire de service fourni par le système d'ex
 {{< tabs >}}
 {{% tab "Agents v6 et v7" %}}
 
-### Amazon Linux 2
+### Amazon Linux 2, Amazon Linux 2022/2023
+
+<div class="alert alert-info">L'installation d'une version d'Agent <= 6.39/7.39 sur Amazon Linux 2022/2023 nécessite le paquet <code>libxcrypt-compat</code>. Pour l'installer, lancez:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre></div>
 
 | Description                        | Commande                                                |
 |------------------------------------|--------------------------------------------------------|

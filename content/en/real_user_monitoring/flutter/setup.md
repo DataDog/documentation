@@ -8,7 +8,7 @@ further_reading:
   text: Monitor Flutter application performance with Datadog Mobile RUM
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter Source code
+  text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
@@ -126,6 +126,22 @@ You can initialize RUM using one of two methods in your `main.dart` file.
      );
    });
    ```
+
+### Sample RUM sessions
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Flutter RUM SDK][2] as a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
+
+For example, to keep only 50% of sessions, use:
+
+```dart
+final config = DdSdkConfiguration(
+    // other configuration...
+    rumConfiguration: RumConfiguration(
+        applicationId: '<YOUR_APPLICATION_ID>',
+        sessionSamplingRate: 50.0,
+    ),
+);
+```
 
 ### Set tracking consent
 
