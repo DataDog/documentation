@@ -20755,7 +20755,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too Many Requests
-      summary: Create a tag configuration
+      summary: Get a monitor configuration policy
       tags:
       - Metrics
       x-codegen-request-body-name: body
@@ -21038,7 +21038,7 @@ paths:
           description: Unprocessable Entity
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      summary: Edit a monitor configuration policy
+      summary: Delete a monitor configuration policy
       tags:
       - Monitors
       x-codegen-request-body-name: body

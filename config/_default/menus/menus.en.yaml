@@ -5447,9 +5447,9 @@ api:
         - ListVolumesByMetricName
       unstable: []
       order: 8
-  - name: Create a tag configuration
-    url: '#create-a-tag-configuration'
-    identifier: metrics-create-a-tag-configuration
+  - name: Get a monitor configuration policy
+    url: '#get-a-monitor-configuration-policy'
+    identifier: metrics-get-a-monitor-configuration-policy
     parent: metrics
     generated: true
     params:
@@ -5656,18 +5656,6 @@ api:
     url: /api/latest/monitors/
     identifier: monitors
     generated: true
-  - name: Edit a monitor configuration policy
-    url: '#edit-a-monitor-configuration-policy'
-    identifier: monitors-edit-a-monitor-configuration-policy
-    parent: monitors
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateMonitorConfigPolicy
-      unstable: []
-      order: 12
   - name: Get a monitor configuration policy
     url: '#get-a-monitor-configuration-policy'
     identifier: monitors-get-a-monitor-configuration-policy
@@ -5690,6 +5678,7 @@ api:
         - v2
       operationids:
         - DeleteMonitorConfigPolicy
+        - UpdateMonitorConfigPolicy
       unstable: []
       order: 13
   - name: Create a monitor configuration policy

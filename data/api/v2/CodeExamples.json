@@ -378,7 +378,7 @@
   "CreateTagConfiguration": [
     {
       "group": "metrics",
-      "suffix": "",
+      "suffix": "_215159720",
       "description": "Create a tag configuration returns \"Created\" response"
     }
   ],
@@ -425,7 +425,7 @@
   "UpdateMonitorConfigPolicy": [
     {
       "group": "monitors",
-      "suffix": "",
+      "suffix": "_1761088824",
       "description": "Edit a monitor configuration policy returns \"OK\" response"
     }
   ],

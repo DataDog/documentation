@@ -645,7 +645,7 @@
   },
   "CreateTagConfiguration": {
     "description": "Create and define a list of queryable tag keys for an existing count/gauge/rate/distribution metric.\nOptionally, include percentile aggregations on any distribution metric or configure custom aggregations\non any count, rate, or gauge metric.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Create a tag configuration",
+    "summary": "Get a monitor configuration policy",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to configure tags for."
   },
@@ -673,7 +673,7 @@
   },
   "UpdateMonitorConfigPolicy": {
     "description": "Edit a monitor configuration policy.",
-    "summary": "Edit a monitor configuration policy",
+    "summary": "Delete a monitor configuration policy",
     "request_description": "Description of the update.",
     "request_schema_description": "Request for editing a monitor configuration policy."
   },
