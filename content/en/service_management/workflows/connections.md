@@ -73,7 +73,7 @@ Alternatively, add a connection from the workflow page:
 
 The example below shows the **New Connection** dialog box for the AWS connection. Each connection requires different authentication information. The AWS connection requires a valid AWS IAM Account ID and Role Name.
 
-{{< img src="workflows/new-connection.png" alt="The New Connection dialog box for the AWS connection" >}}
+{{< img src="service_management/workflows/new-connection.png" alt="The New Connection dialog box for the AWS connection" >}}
 
 ### Edit a connection
 

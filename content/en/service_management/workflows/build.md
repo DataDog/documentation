@@ -35,7 +35,7 @@ To create a workflow:
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
-{{< img src="workflows/workflow-builder.mp4" alt="Drag a step onto the workflow canvas" video="true" >}}
+{{< img src="service/management/workflows/workflow-builder.mp4" alt="Drag a step onto the workflow canvas" video="true" >}}
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
 1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
 
@@ -105,10 +105,10 @@ Context variables come in the following varieties:
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
-{{< img src="workflows/context-variables.png" alt="The Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables.png" alt="The Context Variables tab" >}}
 
 Access a context variable in a step by enclosing it in double braces (`{{`). Context variables are available in fields marked with the `{{` notation.
-{{< img src="workflows/use-context-variable.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true" >}}
+{{< img src="service_management/workflows/use-context-variable.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true" >}}
 
 ### Workflow variables
 
@@ -141,7 +141,7 @@ To add an input parameter:
 
 To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-{{< img src="workflows/input-parameter.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
+{{< img src="service_management/workflows/input-parameter.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
 
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
 
@@ -155,7 +155,7 @@ Source object variables are properties of the triggering event that are resolved
 
 All the variables of the Source object are visible in the Context Variables tab.
 
-{{< img src="workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
 
 ## Error handling and fallbacks
 
@@ -168,7 +168,7 @@ To configure error handling for a step:
 1. Optionally, [add a fallback step](#add-a-fallback).
 1. Save your workflow to apply the changes.
 
-{{< img src="workflows/error-handling.png" alt="The Error Handling and Retries section" style="width:100%;" >}}
+{{< img src="service_management/workflows/error-handling.png" alt="The Error Handling and Retries section" style="width:100%;" >}}
 
 ### Add a fallback
 
@@ -182,7 +182,7 @@ Alternatively, you can create a fallback step that branches from the main workfl
 
 To get back to the main workflow canvas, click **Main** above the fallback tree. From the workflow canvas, a fallback icon appears next to steps with a fallback. Click the icon and select the fallback step to open the fallback tree. Alternatively, you can access the fallback tree by clicking **Edit Fallback Tree** in the **Error Handling & Retries** section of a step. The **Edit Fallback Tree** button only appears if the fallback step is not an existing downstream step in the main workflow.
 
-{{< img src="workflows/fallback-icon.png" alt="A step with a fallback" style="width:60%;" >}}
+{{< img src="service_management/workflows/fallback-icon.png" alt="A step with a fallback" style="width:60%;" >}}
 
 ### Remove a fallback
 

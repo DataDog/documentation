@@ -39,7 +39,7 @@ To trigger a workflow from a Dashboard, add the **Run Workflow** widget:
 1. Map dashboard template variables to workflow input parameters. This allows the values of your dashboard template variables to be mapped directly to the input parameters when you run the workflow.
 1. Enter a title for the widget and click **Save**.
 
-{{< img src="workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
+{{< img src="service_management/workflows/trigger-from-dashboard2.png" alt="Click Run Workflow to trigger a workflow from Dashboard widget." >}}
 
 To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
@@ -58,7 +58,7 @@ To trigger a workflow from a Monitor:
    - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
 1. Save the monitor.
 
-{{< img src="workflows/monitor-trigger.png" alt="Add a monitor trigger to the message section of a Monitor" >}}
+{{< img src="service_management/workflows/monitor-trigger.png" alt="Add a monitor trigger to the message section of a Monitor" >}}
 
 Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
@@ -78,7 +78,7 @@ To trigger a workflow from a Notification Rule:
 1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
 1. Click **Save and Activate**.
 
-{{< img src="workflows/notification-rule-trigger.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
+{{< img src="service_management/workflows/notification-rule-trigger.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
 Each time the Notification Rule fires, it triggers a workflow run.
 
@@ -107,7 +107,7 @@ After you trigger a workflow, the workflow page switches to the **Debug** view. 
 
 Use the **Debug** view to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed GitHub team membership step. The error message shows that the step failed due to missing permissions:
 
-{{< img src="workflows/failed-step2.png" alt="A workflow with a failed step." >}}
+{{< img src="service_management/workflows/failed-step2.png" alt="A workflow with a failed step." >}}
 
 The initial **Debug** view for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking on the workflow canvas.
 
