@@ -116,6 +116,12 @@ If `dd-trace` is installed on your hosts with the Datadog Agent, and your server
 
 Datadog's [AWS X-Ray integration][2] only provides traces for Lambda functions. See the [Datadog APM documentation][16] to learn more about tracing in container or host-based environments.
 
+## Profiling your Lambda Functions (Public Beta)
+
+Datadog's [Continuous Profiler][27] is now available in beta for Python in version 4.62.0 and layer version 62 and above. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to true. During the beta period, profiling is available at no additional cost.
+
+The Continuous Profiler works by spawning a thread which periodically wakes up and takes a snapshot of the CPU and Heap of all running python code. This can include the profiler itself. If you want the Profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to true.
+
 ## Trace Merging
 
 ### Use cases
@@ -349,3 +355,4 @@ If you are already tracing your serverless application with X-Ray and want to co
 [24]: /serverless/distributed_tracing#runtime-recommendations
 [25]: /tracing/trace_collection/custom_instrumentation/
 [26]: /serverless/guide/handler_wrapper/
+[27]: /profiler/
