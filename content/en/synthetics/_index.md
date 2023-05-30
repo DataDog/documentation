@@ -21,6 +21,9 @@ further_reading:
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to enhance your synthetic testing capabilities"
 algolia:
   tags: ['synthetics']
 ---
