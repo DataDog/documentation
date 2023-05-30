@@ -292,6 +292,11 @@ spec:
         app: nginx
 ```
 
+[1]: /containers/kubernetes/integrations/?tab=kubernetesadv2
+[9]: /integrations/http_check/
+[11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /integrations/nginx/
+[13]: /getting_started/tagging/unified_service_tagging
 
 {{% /tab %}}
 
@@ -355,6 +360,12 @@ spec:
     selector:
         app: nginx
 ```
+
+[9]: /integrations/http_check/
+[10]: /agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /integrations/nginx/
+[13]: /getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 {{< /tabs >}}
 

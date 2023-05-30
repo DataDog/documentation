@@ -395,6 +395,10 @@ spec:
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
 
+[1]: /agent/kubernetes/integrations/
+[10]: /integrations/http_check/
+[11]: /agent/faq/template_variables/
+[12]: /integrations/nginx/
 {{% /tab %}}
 
 {{% tab "Kubernetes (AD v1)" %}}
@@ -443,6 +447,11 @@ spec:
 ```
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
+
+[1]: /agent/kubernetes/integrations/
+[10]: /integrations/http_check/
+[11]: /agent/faq/template_variables/
+[12]: /integrations/nginx/
 
 {{% /tab %}}
 {{< /tabs >}}
