@@ -22,6 +22,7 @@ If you opt to send OTLP monotonic sums, histograms, or exponential histograms wi
 
 - Your deployment is stateful, so you need to send all points on a timeseries to the same Datadog Agent or Datadog exporter. This affects how you scale your OpenTelemetry Collector deployments.
 - Datadog might not send the first point it receives from a given timeseries if it cannot ensure this point is the true start of the timeseries. This may lead to missing points upon restarts.
+- The minimum and maximum cannot be recovered for cumulative OTLP Histograms; they may be missing or approximated depending on the histograms export mode. 
 
 ## Configuring your OpenTelemetry SDK
 

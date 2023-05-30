@@ -41,8 +41,6 @@ title: Kubernetes インテグレーションオートディスカバリー
 | `<インスタンスコンフィギュレーション>`  | 〇      | `<初期コンフィギュレーション>` の一部であるこれらは、`conf.yaml` の `instances:` の下にリストされ、有効にするインテグレーションに必要なコンフィギュレーションパラメーターです。         |
 | `<LOG_CONFIG>`  | 〇      | `<初期コンフィギュレーション>` の一部であるこれらは、`conf.yaml` の `logs:` の下にリストされているコンフィギュレーションパラメーターで、Datadog に送信するログを定義します。        |
 
-[**オートディスカバリー対応の Agent インテグレーションの完全なリストとそれらのパラメーターの例をご覧ください**][4]
-
 以下の各セクションのタブで、特定のコンテナにインテグレーションテンプレートを適用するそれぞれの方法を示します。次の方法があります。
 
 * [Kubernetes ポッドアノテーション](?tab=kubernetes#configuration)
@@ -711,7 +709,6 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 [1]: /ja/agent/docker/integrations/
 [2]: /ja/getting_started/integrations/#configuring-agent-integrations
 [3]: /ja/agent/guide/secrets-management/
-[4]: /ja/integrations/#cat-autodiscovery
 [5]: /ja/integrations/ceph/
 [6]: /ja/integrations/varnish/#autodiscovery
 [7]: /ja/integrations/postfix/

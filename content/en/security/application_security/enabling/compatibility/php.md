@@ -36,4 +36,4 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 
 
 [1]: /tracing/trace_collection/compatibility/php/
-[2]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[2]: /agent/remote_config/#enabling-remote-configuration

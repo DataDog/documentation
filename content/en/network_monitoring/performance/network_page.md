@@ -26,7 +26,7 @@ further_reading:
 
 To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection terminated.
 
-{{< img src="network_performance_monitoring/network_page/network_diagram.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
+{{< img src="network_performance_monitoring/network_page/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
 
 The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
 
@@ -137,7 +137,7 @@ NPM automatically maps
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
 
 ### Cloud service enhanced resolution
-If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers only have user-defined tags. For AWS, Datadog applies the tags defined below in addition to the user-defined tags.
+If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Datadog applies the tags defined below in addition to the user-defined tags.
 
  #### Amazon Web Services
  {{< tabs >}}
@@ -180,6 +180,21 @@ If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and 
  {{% /tab %}}
 
  {{< /tabs >}}
+
+#### Azure
+##### Loadbalancers and Application Gateways
+ - name
+ - loadbalancer
+ - cloud_provider
+ - region
+ - type
+ - resource_group
+ - tenant_name
+ - subscription_name
+ - subscription_id
+ - sku_name
+ - custom (user-defined) tags applied to Azure Loadbalancers and Application Gateways
+
 
 ### Domain resolution
 
