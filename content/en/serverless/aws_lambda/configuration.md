@@ -337,7 +337,7 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 Here are two main ways to interact with this variable:
 
-#### 1. Rename All Upstream Services of a Type
+#### 1. Rename all upstream services of a type
 
 To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
 
@@ -352,7 +352,7 @@ To rename all upstream services associated with an AWS Lambda integration, use t
 | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | `lambda_url` | `"lambda_url:newServiceName"` |
 
-#### 2. Rename Specific Upstream Services
+#### 2. Rename specific upstream services
 
 For a more granular approach, use these service-specific identifiers:
 
@@ -367,7 +367,7 @@ For a more granular approach, use these service-specific identifiers:
 | DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
 | Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
-#### Examples with Description
+#### Examples with description
 
 | Command | Description |
 |---|---|
