@@ -335,9 +335,9 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 `DD_SERVICE_MAPPING=key1:value1,key2:value2`...
 
-Here are two main ways to interact with this variable:
+There are two ways to interact with this variable:
 
-#### 1. Rename all upstream services of a type
+#### Rename all services of a type
 
 To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
 
@@ -352,7 +352,7 @@ To rename all upstream services associated with an AWS Lambda integration, use t
 | `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
 | `lambda_url` | `"lambda_url:newServiceName"` |
 
-#### 2. Rename specific upstream services
+#### Rename specific services
 
 For a more granular approach, use these service-specific identifiers:
 
