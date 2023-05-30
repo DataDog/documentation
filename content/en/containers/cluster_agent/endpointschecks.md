@@ -217,6 +217,84 @@ instances:
 
 ### Configuration from Kubernetes service annotations
 
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+The syntax for annotating services is similar to that for [annotating Kubernetes Pods][1]:
+
+```yaml
+ad.datadoghq.com/endpoints.checks: |
+  {
+    "<INTEGRATION_NAME>": {
+      "init_config": <INIT_CONFIG>,
+      "instances": [<INSTANCE_CONFIG>]
+    }
+  }
+ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
+```
+
+This syntax supports a `%%host%%` [template variable][11] which is replaced by the IP of each endpoint. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
+
+**Note**: Custom endpoints log configuration is only supported during Docker socket log collection, and not Kubernetes log file collection.
+
+#### Example: HTTP check on an NGINX-backed service with an NGINX check on the service's endpoints
+
+This service is associated with the Pods of the `nginx` deployment. Based on this configuration:
+
+- An [`nginx`][12]-based endpoint check is dispatched for each NGINX Pod backing this service. This check is run by Agents on the same respective nodes as the NGINX Pods (using the Pod IP as `%%host%%`).
+- An [`http_check`][9]-based cluster check is dispatched to a single Agent in the cluster. This check uses the IP of the service as `%%host%%`, automatically getting load balanced to the respective endpoints.
+- The checks are dispatched with the tags `env:prod`, `service:my-nginx`, and `version:1.19.0`, corresponding to [Unified Service Tagging][13] labels.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    labels:
+        app: nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
+    annotations:
+      ad.datadoghq.com/service.checks: |
+        {
+          "http_check": {
+            "init_config": {},
+            "instances": [
+              {
+                "url": "http://%%host%%",
+                "name": "My Nginx",
+                "timeout": 1
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.checks: |
+        {
+          "nginx": {
+            "init_config": {},
+            "instances": [
+              {
+                "name": "My Nginx Service Endpoints",
+                "nginx_status_url": "http://%%host%%:%%port%%/status/"
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        app: nginx
+```
+
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
+
 The syntax for annotating services is similar to that for [annotating Kubernetes Pods][10]:
 
 ```yaml
@@ -275,6 +353,8 @@ spec:
     selector:
         app: nginx
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
