@@ -329,42 +329,52 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 ### DD_SERVICE_MAPPING
 
-`DD_SERVICE_MAPPING` is an environment variable used to rename Datadog [Service][40] names for upstream non-Lambda services (inferred spans). It uses a comma-separated list of `old-service:new-service` pairs, delimited by a colon (`:`), without spaces. 
+`DD_SERVICE_MAPPING` is an environment variable that renames upstream non-Lambda services for Datadog [Service][40]. It operates with `old-service:new-service` pairs.
 
 #### Syntax
 
 `DD_SERVICE_MAPPING=key1:value1,key2:value2`...
 
-#### Renaming service types
+Here are two main ways to interact with this variable:
 
-The following keys represent specific service types. Using these keys in the `DD_SERVICE_MAPPING` variable renames all associated upstream service names:
+#### 1. Rename All Upstream Services of a Type
 
-- `lambda_api_gateway`, `lambda_sns`, `lambda_sqs`, `lambda_s3`, `lambda_eventbridge`, `lambda_kinesis`, `lambda_dynamodb`, `lambda_url`
+To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
 
-Example: `DD_SERVICE_MAPPING=lambda_s3:newServiceName` renames all `lambda_s3` services to `newServiceName`.
+| AWS Lambda Integration | DD_SERVICE_MAPPING Value |
+|---|---|
+| `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| `lambda_sns` | `"lambda_sns:newServiceName"` |
+| `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| `lambda_s3` | `"lambda_s3:newServiceName"` |
+| `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| `lambda_url` | `"lambda_url:newServiceName"` |
 
-#### Renaming specific services
+#### 2. Rename Specific Upstream Services
 
-For more granularity, use specific identifiers as keys:
+For a more granular approach, use these service-specific identifiers:
 
-- API Gateway: API ID, for example, `r3pmxmplak:newServiceName`
-- SNS: Topic name, for example, `ExampleTopic:newServiceName`
-- SQS: Queue name, for example, `MyQueue:newServiceName`
-- S3: Bucket name, for example, `example-bucket:newServiceName`
-- EventBridge: Event source, for example, `eventbridge.custom.event.sender:newServiceName`
-- Kinesis: Stream name, for example, `MyStream:newServiceName`
-- DynamoDB: Table name, for example, `ExampleTableWithStream:newServiceName`
-- Lambda URLs: API ID, for example, `a8hyhsshac:newServiceName`
+| Service | Identifier | DD_SERVICE_MAPPING Value |
+|---|---|---|
+| API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| SNS | Topic name | `"ExampleTopic:newServiceName"` |
+| SQS | Queue name | `"MyQueue:newServiceName"` |
+| S3 | Bucket name | `"example-bucket:newServiceName"` |
+| EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
+| Kinesis | Stream name | `"MyStream:newServiceName"` |
+| DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
+| Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
 
-#### Examples
+#### Examples with Description
 
-1. `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"`  
-   Renames upstream `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name`.
+| Command | Description |
+|---|---|
+| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Renames all `lambda_api_gateway` upstream services to `new-service-name` |
+| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
 
-2. `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"`  
-   Renames all upstream `lambda_api_gateway` services to `new-service-name`.
-
-For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][41] for your language.
+For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][41].
 
 ## Filter or scrub information from logs
 
