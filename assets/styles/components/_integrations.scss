@@ -673,3 +673,19 @@ $screen-md-max: ($screen-lg-min - 1) !default;
 .integration-search {
   height: calc(1.5em + .75rem + 2px);
 }
+
+.integrations-carousel {
+    .carousel-asset-wrapper {
+        height: 194px;
+        .carousel-control {
+            width: 26px;
+            height: 26px;
+            &.prev{
+                left: 8px;
+            }
+            &.next{
+                right: 8px;
+            }
+        }
+    }
+}

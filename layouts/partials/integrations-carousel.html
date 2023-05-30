@@ -1,0 +1,72 @@
+{{ $asset_len := (.Params.tile.media | default slice) | len  }}
+<div 
+class="integrations-carousel container border border-primary container p-0"
+x-data="{
+    activeSlide: 0,
+    navigateCarousel (direction) {
+        const max = {{ $asset_len }} - 1
+        if(direction === 'next'){
+            if(this.activeSlide === max){
+                this.activeSlide = 0
+            }else{
+                this.activeSlide += 1
+            }
+        }else{
+            if(!this.activeSlide){
+                this.activeSlide = max
+            }else{
+                this.activeSlide -= 1
+            }
+        }
+    },
+    isHidden (idx) {
+        return idx !== this.activeSlide && 'd-none'
+    }
+}">
+    <div class="row g-0">
+        <div class="col-12 col-lg-8 p-0 carousel-asset-wrapper position-relative bg-light">
+            <div class="carousel-items h-100">
+                {{ range $idx, $el := .Params.tile.media }}
+                <div class="carousel-item" :class="isHidden({{ $idx }})">
+                    {{ if eq $el.media_type "image"}}
+                    <img src="{{$el.img_url}}" alt="{{ add $idx 1 }}">
+                    {{ else }}
+                    <video poster="{{$el.img_url}}" preload="none">
+                        <source type="video/mp4">
+                    </video>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            <button class="carousel-control prev position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" @click="navigateCarousel('prev')">
+                <span><</span>
+                <div class="visually-hidden">Previous</div>
+            </button>
+            <button class="carousel-control next position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" @click="navigateCarousel('next')">
+                <span>></span>
+                <div class="visually-hidden">Next</div>
+            </button>
+        </div>
+        <div class="d-none d-lg-block col-lg-4">
+            <div>
+                {{ range $idx, $el := .Params.tile.media }}
+                    <img src="#" alt="123${{$idx}}">
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    <div class="row g-0">
+        <div class="col-12 p-0 carousel-item-descriptions border border-secondary">
+            {{ range $idx, $el := .Params.tile.media }}
+            <div class="row g-0 carousel-item-description" :class="isHidden({{ $idx }})">
+                <div class="col-1">
+                    <span class="fw-bold" x-text="(activeSlide + 1) + '/{{$asset_len}}'"></span>
+                </div>
+                <div class="col">
+                    <p>{{$el.caption}}</p>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</div>
