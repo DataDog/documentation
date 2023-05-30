@@ -81,6 +81,9 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. Sort the table by clicking columns to reveal services that:
 
+The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment. 
+The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][12] on APM [trace metrics][13]. This dropdown does not affect how many services you see in the list.  
+  
 - Deployed most recently, or have not deployed for a long time
 - Are receiving the most requests per second, or are not receiving any traffic
 - Have the highest latency at various percentiles
@@ -154,3 +157,5 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [9]: /account_management/rbac/
 [10]: /account_management/rbac/permissions/
 [11]: /security/application_security/how-appsec-works/
+[12]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[13]: /tracing/metrics/metrics_namespace/
