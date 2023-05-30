@@ -4,6 +4,8 @@ kind: documentation
 disable_toc: false
 type: workflows
 is_beta: true
+aliases:
+- /workflows/generic_actions
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
@@ -87,7 +89,7 @@ Pause the execution of the workflow for a duration specified in seconds.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /workflows/build/#context-variables
+[1]: /service_management/workflows/build/#context-variables
 [2]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
-[3]: /workflows/access/
+[3]: /service_management/workflows/access/
 [4]: https://lodash.com/

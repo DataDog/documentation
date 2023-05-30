@@ -3,6 +3,7 @@ title: Connections
 kind: documentation
 description: Workflow connections
 aliases:
+- /workflows/connections
 - /workflows/setup
 disable_toc: false
 ---
@@ -109,10 +110,10 @@ To connect to an arbitrary service, use the HTTP connection type, and choose fro
 1. Choose an connection type: **Token Auth** or **Basic Auth**. Enter the appropriate parameters.
 1. Click **Create** to save your HTTP connection.
 
-[1]: /workflows/actions_catalog/generic_actions/
+[1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow
 [3]: https://app.datadoghq.com/workflow/connections
-[4]: /workflows/access/#restrict-connection-use
+[4]: /service_management/workflows/access/#restrict-connection-use
 [6]: /integrations/
-[8]: /workflows/actions_catalog/generic_actions/
+[8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow

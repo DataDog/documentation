@@ -2,6 +2,8 @@
 title: Workflows
 kind: documentation
 disable_toc: false
+aliases:
+- /workflows
 further_reading:
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
@@ -43,5 +45,5 @@ Watch the video below to see a workflow configured to redeploy a Lambda function
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /workflows/actions_catalog/
+[1]: /service_management/workflows/actions_catalog/
 [2]: /workflows/build/#build-a-workflow-from-a-blueprint
