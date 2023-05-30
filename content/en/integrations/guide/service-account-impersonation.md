@@ -16,7 +16,7 @@ This solution enables you to monitor all projects visible to a service account b
 
 ### Prerequisites
 
-* If your organization restricts identities by domain, you must add Datadog’s customer identity as an allowed value in your policy. Datadog’s customer identity: `C0147pk0i`
+* If your organization restricts identities by domain, you must add Datadog's customer identity as an allowed value in your policy. Datadog's customer identity: `C0147pk0i`
 
 * Service account impersonation and automatic project discovery rely on having certain roles and APIs enabled to monitor projects. Before you start, ensure the following APIs are enabled for the projects you want to monitor:
   * [Cloud Resource Manager API][3]
