@@ -3,6 +3,8 @@ title: Actions Catalog
 kind: documentation
 type: actioncatalog
 disable_toc: true
+aliases:
+- /workflows/actions_catalog
 cascade:
   disable_sidebar: true
   type: actioncatalog
@@ -19,4 +21,4 @@ Datadog Workflows provide actions that can be performed against your infrastruct
 See below a list of all available workflow actions. Click an action to see its description, inputs, outputs, and parameters.
 
 
-[1]: /workflows/build/
+[1]: /service_management/workflows/build/

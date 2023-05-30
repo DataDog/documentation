@@ -2,6 +2,8 @@
 title: Workflows
 kind: documentation
 disable_toc: false
+aliases:
+- /workflows
 further_reading:
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
@@ -11,7 +13,7 @@ further_reading:
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
 ---
 
-{{< img src="workflows/hero.jpg" alt="Graphic showing three purposes of Workflows: Orchestrate, Automate, and Break down Silos" >}}
+{{< img src="service_management/workflows/hero.jpg" alt="Graphic showing three purposes of Workflows: Orchestrate, Automate, and Break down Silos" >}}
 
 Datadog Workflows allow you to orchestrate and automate your end-to-end processes. Build workflows made up of [actions][1] that connect to your infrastructure and tools. These actions can also perform data and logical operations, allowing you to build complex flows with branches, decisions, and data operations.
 
@@ -43,5 +45,5 @@ Watch the video below to see a workflow configured to redeploy a Lambda function
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /workflows/actions_catalog/
+[1]: /service_management/workflows/actions_catalog/
 [2]: /workflows/build/#build-a-workflow-from-a-blueprint
