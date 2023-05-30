@@ -139,7 +139,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
    ```
 
 {{% /tab %}}
-{{% tab "Flutter"}}
+{{% tab "Flutter" %}}
 
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
@@ -147,7 +147,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
    DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
    ```
 
-{{% /tab }}
+{{% /tab %}}
 {{< /tabs >}}
 
 ### LaunchDarkly integration
