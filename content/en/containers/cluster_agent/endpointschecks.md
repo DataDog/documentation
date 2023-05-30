@@ -220,6 +220,8 @@ instances:
 {{< tabs >}}
 {{% tab "Kubernetes (AD v2)" %}}
 
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
 The syntax for annotating services is similar to that for [annotating Kubernetes Pods][1]:
 
 ```yaml
