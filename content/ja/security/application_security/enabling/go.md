@@ -35,7 +35,7 @@ Docker、Kubernetes、AWS ECS で動作する Go アプリのアプリケーシ�
    ```console
    $ go get -v -u gopkg.in/DataDog/dd-trace-go.v1
    ```
-   ライブラリが対応している言語やフレームワークのバージョンについては、[互換性][4]をご覧ください。
+   サービスの言語やフレームワークのバージョンが ASM 機能に対応しているかどうかは、[互換性][4]をご参照ください。
 
 2. **プログラムを再コンパイル**して、ASM と CGO を有効にします。
    ```console
@@ -110,7 +110,7 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/security/application_security/setup_and_configure/?code-lang=go#supported-frameworks
+[1]: /ja/security/application_security/enabling/compatibility/go#supported-frameworks
 [2]: https://github.com/golang/go/wiki/cgo
-[3]: /ja/security/application_security/setup_and_configure/?code-lang=go#enabling-cgo
-[4]: /ja/security/application_security/setup_and_configure/?code-lang=go#compatibility
+[3]: /ja/security/application_security/enabling/compatibility/go#enabling-cgo
+[4]: /ja/security/application_security/enabling/compatibility/go#compatibility

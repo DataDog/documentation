@@ -2,7 +2,7 @@
 aliases:
 - /ja/monitors/faq/how-to-update-anomaly-monitor-timezone
 further_reading:
-- link: /monitors/create/types/anomaly/
+- link: /monitors/types/anomaly/
   tag: ドキュメント
   text: 異常検知モニターを作成する
 - link: /monitors/notify/
@@ -32,7 +32,7 @@ UI でローカルタイムゾーンを考慮して異常検知モニターを�
 
 ## API
 
-1.  モニター API で更新リクエストを行うには、次の情報が必要です。
+1. モニター API で更新リクエストを行うには、次の情報が必要です。
   - 認証に使用する [Datadog API キーとアプリケーションキー][3]
   - 異常検知モニターからのモニター ID とクエリ
     {{< img src="monitors/guide/anomaly_monitor_timezone.png" alt="モニター ID とクエリ" >}}

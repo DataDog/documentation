@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: dd-sdk-android Source code
+  text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
@@ -305,7 +305,48 @@ For instance, to set each fragment as a distinct view, use the following configu
 {{< /tabs >}}
 
    
-For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedViewTrackingStrategy`, you can filter which `Fragment` or `Activity` is tracked as a RUM View by providing a `ComponentPredicate` implementation in the constructor.
+For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedViewTrackingStrategy`, you can filter which `Fragment` or `Activity` is tracked as a RUM View by providing a `ComponentPredicate` implementation in the constructor:
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val configuration = Configuration.Builder(true, true, true, true)
+        .useViewTrackingStrategy(
+        ActivityViewTrackingStrategy(
+            trackExtras = true,
+            componentPredicate = object : ComponentPredicate<Activity> {
+                override fun accept(component: Activity): Boolean {
+                    return true
+                }
+
+                override fun getViewName(component: Activity): String? = null
+            })
+        )
+        .build()  
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+        Configuration configuration = new Configuration.Builder(true, true, true, true)
+            .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
+                true,
+                new ComponentPredicate<Activity>() {
+                    @Override
+                    public boolean accept(Activity component) {
+                        return true;
+                    }
+
+                    @Override
+                    public String getViewName(Activity component) {
+                        return null;
+                    }
+                }
+            ))
+            .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
    
 **Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
 

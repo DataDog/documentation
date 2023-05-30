@@ -5,10 +5,10 @@ description: Learn about advanced configuration options for your React Native se
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative Source code
+  text: Source code for dd-sdk-reactnative
 - link: real_user_monitoring/reactnative/
   tag: Documentation
-  text: Learn about React Native Monitoring
+  text: Learn about React Native monitoring
 
 
 ---
@@ -215,6 +215,8 @@ All interactions with the RUM SDK (view tracking, actions, resources tracing, an
 
 Logs are not recorded and calling a `DdLogs` method before the actual initialization might break logging.
 
+If you experience any issue setting up the asynchronous initialization of Datadog, you can check out our [example application][7].
+
 ## Delaying the initialization
 
 There may be situations where you want to wait before initializing the SDK. For example, when you want to use a different configuration based on the user role or to fetch the configuration from one of your servers.
@@ -287,3 +289,4 @@ const configuration = {
 [4]: https://jestjs.io/
 [5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async

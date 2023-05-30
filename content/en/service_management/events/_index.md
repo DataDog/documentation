@@ -62,9 +62,9 @@ A _processor_ runs data-structuring actions on events attributes when they are i
 - Normalize disparate sources of events by remapping attributes. For example, use the same reserved [service tags][19] everywhere.
 - Enrich events with external data saved in a [Reference Table][20] (beta). For example, map a service name with your service directory to enrich events with team ownership information, links to dashboards, or links to documentation.
 
-Support for more processors types is under development. For more details, [contact Support][21].
+To add and configure event processing pipelines, see the [Enrich & Normalize][21] tab of Event Management. If you need further help, contact Datadog [support][22].
 
-[Learn more about processing pipelines][22].
+[Learn more about processing pipelines][23].
 
 ## Further Reading
 
@@ -91,5 +91,6 @@ Support for more processors types is under development. For more details, [conta
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [19]: /getting_started/tagging/unified_service_tagging/
 [20]: /integrations/guide/reference-tables/
-[21]: /help/
-[22]: /logs/log_configuration/processors/
+[21]: https://app.datadoghq.com/event/pipelines
+[22]: /help/
+[23]: /logs/log_configuration/processors/

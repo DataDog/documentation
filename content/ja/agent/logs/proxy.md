@@ -92,7 +92,7 @@ logs_config:
 
 Datadog への接続があるホストに HAProxy をインストールする必要があります。次の構成ファイルを使用します (まだ構成していない場合)。
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 # 基本的なコンフィギュレーション
@@ -155,8 +155,8 @@ backend datadog-logs
 
 HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (例: `service haproxy reload`)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 # 基本的なコンフィギュレーション
@@ -218,7 +218,7 @@ backend datadog-logs
 
 HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (例: `service haproxy reload`)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 {{% /tab %}}
 
@@ -241,7 +241,7 @@ logs_config:
 
 この例では、`nginx.conf` を使用して、Agent のトラフィックを Datadog にプロキシ転送できます。このコンフィギュレーションにおける最後のサーバーブロックで TLS ラップを行うことで、プロキシと Datadog のログインテーク API エンドポイントとの間で内部的なプレーンテキストログを暗号化します。
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 user nginx;
@@ -261,8 +261,8 @@ stream {
 }
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 user nginx;
@@ -282,7 +282,7 @@ stream {
 }
 ```
 
-{{< /site-region >}}
+{{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -6,7 +6,7 @@ aliases:
   - /integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags/
   - /observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
 further_reading:
-- link: "/observability_pipelines/installation/"
+- link: "/observability_pipelines/setup/"
   tag: "Documentation"
   text: "Set up Observability Pipelines"
 ---
@@ -209,7 +209,7 @@ transforms:
 [1]: /account_management/billing/usage_metrics/#types-of-usage
 [2]: /account_management/billing/usage_attribution/
 [3]: /metrics/metrics-without-limits/
-[4]: /observability_pipelines/installation/
+[4]: /observability_pipelines/setup/
 [5]: https://vector.dev/docs/reference/vrl/
 [6]: /account_management/billing/usage_attribution/
 [7]: https://vector.dev/docs/reference/vrl/
