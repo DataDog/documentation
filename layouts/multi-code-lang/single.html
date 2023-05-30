@@ -8,9 +8,11 @@
     {{ end }}
 
     <div class="mt-7">{{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}</div>
+    
+    {{ partial "breadcrumbs.html" . }}
 
     <h1 id="pagetitle">{{ .Title }}</h1>
-    {{ partial "breadcrumbs.html" . }}
+    
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
 
     <div>{{ .Content }}</div>

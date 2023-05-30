@@ -5,12 +5,12 @@
 {{ $files := readDir $filepath }}
 <!-- check to ensure file exist-->
 {{ if (fileExists $filepath)}}
-
+  {{ partial "breadcrumbs.html" . }}
+  
   <!-- Page Title -->
   <h1 id="pagetitle">
     {{ .Title }}
   </h1>
-  {{ partial "breadcrumbs.html" . }}
 
   <!-- Page Content-->
   {{ with .Content }}{{ . }}{{ end }}

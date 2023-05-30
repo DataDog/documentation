@@ -1,6 +1,6 @@
 {{ define "main" }}
-    <h1 id="pagetitle">{{ .Title }}</h1>
     {{ partial "breadcrumbs.html" . }}
+    <h1 id="pagetitle">{{ .Title }}</h1>
     {{ with .Content }}{{ . }}{{ end }}
 
     {{ $t := (index .Site.Data.reference "schema.tables") }}

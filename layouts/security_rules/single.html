@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $dot := .}}
+	{{ partial "breadcrumbs.html" . }}
 	<h1 id="pagetitle">{{ .Title }}</h1>
-  {{ partial "breadcrumbs.html" . }}
 	{{ partial "translate_status_banner/translate_status_banner.html" . }}
 
   {{- with .Params.is_beta -}}
