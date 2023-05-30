@@ -16,6 +16,9 @@ further_reading:
   - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
     tag: "Learning Center"
     text: "Introduction to Log Management"
+  - link: 'https://dtdg.co/fe'
+    tag: 'Foundation Enablement'
+    text: 'Join an interactive session to optimize your Log Management'
   - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
     tag: "Blog"
     text: "Accelerate Incident Investigations with Log Anomaly Detection"
