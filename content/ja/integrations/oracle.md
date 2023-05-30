@@ -32,7 +32,7 @@ draft: false
 git_integration_title: oracle
 integration_id: oracle
 integration_title: Oracle
-integration_version: 4.1.0
+integration_version: 4.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
