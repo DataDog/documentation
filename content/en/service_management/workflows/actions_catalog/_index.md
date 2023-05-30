@@ -4,7 +4,7 @@ kind: documentation
 type: actioncatalog
 disable_toc: true
 aliases:
-- /service_management/workflows/actions_catalog
+- /workflows/actions_catalog
 cascade:
   disable_sidebar: true
   type: actioncatalog
