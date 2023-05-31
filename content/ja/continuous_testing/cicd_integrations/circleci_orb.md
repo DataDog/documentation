@@ -32,7 +32,7 @@ CircleCI コマンド orb は [datadog-ci][1] をインストールし、`datado
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@1.0.1
+  synthetics-ci: datadog/synthetics-ci-orb@2.2.0
 
 jobs:
   e2e-tests:
@@ -50,11 +50,13 @@ workflows:
 
 ### グローバルコンフィグレーションのオーバーライドを使用した orb 使用の例
 
+この orb では、[テストファイル][18]のパターンへのパスがオーバーライドされます。
+
 ```
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@1.0.1
+  synthetics-ci: datadog/synthetics-ci-orb@2.2.0
 
 jobs:
   e2e-tests:
@@ -80,7 +82,7 @@ Synthetic テストをトリガーするパイプラインの別の例につい�
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@1.0.1
+  synthetics-ci: datadog/synthetics-ci-orb@2.2.0
 
 jobs:
   e2e-tests:
@@ -102,7 +104,7 @@ workflows:
 version: 2.1
 
 orbs:
-  synthetics-ci: datadog/synthetics-ci-orb@1.0.1
+  synthetics-ci: datadog/synthetics-ci-orb@2.2.0
 
 jobs:
   e2e-tests:
@@ -129,30 +131,30 @@ workflows:
             - build-image
 ```
 
-ローカルサーバーを起動し、Continuous Testing Tunnel を使用して Synthetic テストをトリガーする別のサンプルパイプラインについては、[`advanced-example.yml` ファイル][16]をご覧ください。
+CircleCI パイプラインの `pollingTimeout` をカスタマイズするなどの追加オプションについては、[CI/CD インテグレーション構成][18]を参照してください。ローカルサーバーを起動し、Continuous Testing Tunnel を使用して Synthetic テストをトリガーする別のサンプルパイプラインについては、[`advanced-example.yml` ファイル][16]を参照してください。
 
 ## 入力
 
 ワークフローをカスタマイズするために、[`run-tests.yml` ファイル][14]に以下のパラメーターを設定することができます。
 
-| 名前                      | タイプ         | デフォルト                                   | 説明                                                                                          |
-| ------------------------- | ------------ | ----------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `api_key`                 | 環境変数名 | `DATADOG_API_KEY`                         | API キーが格納されている環境変数名。                                         |
-| `api_key`                 | 環境変数名 | `DATADOG_APP_KEY`                         | アプリケーションキーが格納されている環境変数名。                                         |
-| `config_path`             | 文字列       | `datadog-ci.json`                         | テストを起動する際に使用するグローバルな JSON 構成。                                             |
-| `fail_on_critical_errors` | boolean      | `false`                                   | テストがトリガーされなかったか、結果を取得できなかった場合に失敗します。                                    |
-| `fail_on_timeout`         | boolean      | `true`                                    | テストタイムアウトを超えた場合、CI を強制的に失敗 (または合格) させます。                       |
-| `files`                   | 文字列       | `{,!(node_modules)/**/}*.synthetics.json` | Synthetic テストのコンフィギュレーションファイルを検出するためのグロブパターン。                                                 |
-| `junit_report`            | 文字列       | _なし_                                    | JUnit レポートを生成したい場合のファイル名。                                         |
-| `locations`               | 文字列       | _テストコンフィギュレーションファイルの値_             | テストが実行される場所をオーバーライドするための、セミコロンで区切られた場所の文字列。          |
-| `public_ids`              | 文字列       | _テストコンフィギュレーションファイルの値_             | トリガーしたい Synthetic テストの公開 ID をカンマで区切った文字列。                    |
+| 名前                      | タイプ         | デフォルト                                   | 説明                                                                                                |
+| ------------------------- | ------------ | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `api_key`                 | 環境変数名 | `DATADOG_API_KEY`                         | API キーが格納されている環境変数名。                                               |
+| `api_key`                 | 環境変数名 | `DATADOG_APP_KEY`                         | アプリケーションキーが格納されている環境変数名。                                               |
+| `config_path`             | 文字列       | `datadog-ci.json`                         | テストを起動する際に使用するグローバルな JSON 構成。                                                   |
+| `fail_on_critical_errors` | boolean      | `false`                                   | テストがトリガーされなかったか、結果を取得できなかった場合に失敗します。                                          |
+| `fail_on_timeout`         | boolean      | `true`                                    | テストタイムアウトを超えた場合、CI を強制的に失敗 (または合格) させます。                             |
+| `files`                   | 文字列       | `{,!(node_modules)/**/}*.synthetics.json` | Synthetic テストのコンフィギュレーションファイルを検出するためのグロブパターン。                                                       |
+| `junit_report`            | 文字列       | _なし_                                    | JUnit レポートを生成したい場合のファイル名。                                               |
+| `locations`               | 文字列       | _テストコンフィギュレーションファイルの値_             | テストが実行される場所をオーバーライドするための、セミコロンで区切られた場所の文字列。                |
+| `public_ids`              | 文字列       | _テストコンフィギュレーションファイルの値_             | トリガーしたい Synthetic テストの公開 ID をカンマで区切った文字列。                          |
 | `site`                    | 文字列       | `datadoghq.com`                           | データ送信先となる [Datadog のサイト][17]。環境変数 `DD_SITE` が設定されている場合は、そちらが優先されます。 |
-| `subdomain`               | 文字列       | `app`                                     | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。                             |
-| `test_search_query`       | 文字列       | _なし_                                    | 検索クエリに対応するテストをトリガーします。                                                       |
-| `tunnel`                  | boolean      | `false`                                   | Continuous Testing Tunnel を使用してテストをトリガーします。                                                             |
-| `variables`               | 文字列       | _なし_                                    | テストに変数を注入するための Key-Value ペア。`KEY=VALUE` という形式である必要があります。             |
+| `subdomain`               | 文字列       | `app`                                     | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。                                   |
+| `test_search_query`       | 文字列       | _なし_                                    | 検索クエリに対応するテストをトリガーします。                                                             |
+| `tunnel`                  | boolean      | `false`                                   | Continuous Testing Tunnel を使用してテストをトリガーします。                                                        |
+| `variables`               | 文字列       | _なし_                                    | テストに変数を注入するための Key-Value ペア。`KEY=VALUE` という形式である必要があります。                   |
 
-`pollingTimeout` などのパラメーターのカスタマイズや、CircleCI パイプラインの追加オプションについては、[CI/CD インテグレーション構成][12]を参照してください。
+`pollingTimeout` などのパラメーターのカスタマイズや、CircleCI パイプラインの追加オプションについては、[Continuous Testing と CI/CD インテグレーション構成][12]を参照してください。
 
 ## その他の参考資料
 
@@ -180,3 +182,4 @@ workflows:
 [15]: https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/src/examples/simple-example.yml
 [16]: https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/src/examples/advanced-example.yml
 [17]: https://docs.datadoghq.com/ja/getting_started/site/
+[18]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
