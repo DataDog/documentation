@@ -322,6 +322,10 @@ You also need to update the environment variables of the Datadog Agent's contain
             "environment": [
               (...)
                 {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
                     "name": "DD_FIPS_PORT_RANGE_START",
                     "value": "9803"
                 },
