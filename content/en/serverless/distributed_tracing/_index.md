@@ -51,7 +51,7 @@ The Datadog Lambda Library and tracing libraries for Python and Node.js support:
 - Installation without any code changes using Serverless Framework, AWS SAM and AWS CDK integrations.
 - Tracing HTTP requests invoking downstream Lambda functions or containers.
 - Tracing consecutive Lambda invocations made via the AWS SDK.
-- Cold Start Tracing
+- Cold start tracing
 - Tracing asynchronous Lambda invocations through AWS Managed Services
   - API Gateway
   - SQS
