@@ -92,7 +92,7 @@ List of commands to stop the Datadog Agent:
 
 ### Restart the Agent
 
-List of commands to restart the Datadog Agent:
+This is a test. List of commands to restart the Datadog Agent:
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
