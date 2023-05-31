@@ -2,7 +2,7 @@
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: dd-sdk-android ソースコード
+  text: dd-sdk-android のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
@@ -306,6 +306,47 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 
 `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val configuration = Configuration.Builder(true, true, true, true)
+        .useViewTrackingStrategy(
+        ActivityViewTrackingStrategy(
+            trackExtras = true,
+            componentPredicate = object : ComponentPredicate<Activity> {
+                override fun accept(component: Activity): Boolean {
+                    return true
+                }
+
+                override fun getViewName(component: Activity): String? = null
+            })
+        )
+        .build()  
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+        Configuration configuration = new Configuration.Builder(true, true, true, true)
+            .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
+                true,
+                new ComponentPredicate<Activity>() {
+                    @Override
+                    public boolean accept(Activity component) {
+                        return true;
+                    }
+
+                    @Override
+                    public String getViewName(Activity component) {
+                        return null;
+                    }
+                }
+            ))
+            .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 **注**: デフォルトで、ライブラリは `ActivityViewTrackingStrategy` を使用しています。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
 

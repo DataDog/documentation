@@ -23,7 +23,7 @@ title: コンプライアンスレポート
 
 Cloud Security Posture Management (CSPM) には、クラウドリソースの構成を評価し、潜在的な誤構成を特定する 400 以上の検出ルールがすぐに使える状態で提供されています。各[検出ルール][1]は、以下のコンプライアンス基準および業界ベンチマーク内の 1 つまたは複数のコントロールに対応します。
 
-- [CIS AWS Foundations ベンチマーク v1.3.0*][2]
+- [CIS AWS Foundations ベンチマーク v1.5.0*][2]
 - [CIS Azure Foundations ベンチマーク v1.3.0][3]
 - [CIS GCP Foundations ベンチマーク v1.3.0][22]
 - [CIS Docker ベンチマーク v1.2.0][4]

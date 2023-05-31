@@ -787,5 +787,5 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[21]: /agent/remote_config/#enabling-remote-configuration
 [22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry

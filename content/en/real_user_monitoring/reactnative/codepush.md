@@ -6,10 +6,10 @@ description: Learn how to use a client-side React Native module to interact with
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative Source code
+  text: Source code for dd-sdk-reactnative
 - link: real_user_monitoring/reactnative/
   tag: Documentation
-  text: Learn about React Native Monitoring
+  text: Learn about React Native monitoring
 
 ---
 ## Overview
@@ -19,6 +19,8 @@ Enable React Native Crash Reporting and Error Tracking to get comprehensive cras
 Each time you release a new [CodePush][1] version for your React Native application, you need to upload the source maps to Datadog to unminify errors.
 
 Datadog recommends using `@datadog/mobile-react-native-code-push` in your app and the [datadog-ci][3] `react-native codepush` command to upload your source maps. This ensures that the `version` is consistent in both reported crashes and uploaded source maps.
+
+If you experience any issues setting up the Datadog SDK with codepush, you can see our [example application][6] as a reference.
 
 ## Setup
 
@@ -157,3 +159,4 @@ Then, upload your source maps using the [`datadog-ci react-native upload`][5] co
 [3]: https://github.com/DataDog/datadog-ci
 [4]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-api-ref#codepushgetupdatemetadata
 [5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/react-native#upload
+[6]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-codepush

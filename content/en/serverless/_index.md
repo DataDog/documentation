@@ -21,6 +21,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/azure-container-apps/"
   tag: "Blog"
   text: "Monitor Azure Container Apps with Datadog"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to learn more about serverless monitoring"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/543362476/rendition/1080p/file.mp4?loc=external&signature=4927d13b131aea1e3b4f77efca5af49bb509f5e7f1d6ca06a5267ba02a8c194a" poster="/images/poster/serverless.png" >}}
