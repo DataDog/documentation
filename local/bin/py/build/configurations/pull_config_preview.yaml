@@ -509,7 +509,7 @@
             - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
             - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
           options:
-            dest_path: '/workflows/actions_catalog/'
+            dest_path: '/service_management/workflows/actions_catalog/'
             bundle_excludes:
               - "com.datadoghq.test"
               - "com.datadoghq.sample"
