@@ -23,15 +23,15 @@ x-data="{
         return idx !== this.activeSlide && 'd-none'
     }
 }">
-    <div class="row g-0">
-        <div class="col-12 col-lg-8 pr-1 carousel-asset-wrapper position-relative bg-light border border-warning">
+    <div class="carousel-top-row row g-0">
+        <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9 bg-light border border-warning">
             <div class="carousel-items h-100">
                 {{ range $idx, $el := .Params.tile.media }}
-                <div class="carousel-item" :class="isHidden({{ $idx }})">
+                <div class="carousel-item h-100" :class="isHidden({{ $idx }})">
                     {{ if eq $el.media_type "image"}}
-                    <img src="{{$el.img_url}}" alt="{{ add $idx 1 }}">
+                    <img class="h-100 w-100" src="{{$el.img_url}}" alt="{{ add $idx 1 }}">
                     {{ else }}
-                    <video poster="{{$el.img_url}}" preload="none">
+                    <video class="h-100 w-100" poster="{{$el.img_url}}" preload="none">
                         <source type="video/mp4">
                     </video>
                     {{ end }}
@@ -47,13 +47,13 @@ x-data="{
                 <div class="visually-hidden">Next</div>
             </button>
         </div>
-        <div class="d-none d-lg-block col-lg-4 border border-primary">
+        <div class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary">
             {{ range $idx, $el := .Params.tile.media }}
-            <div class="row g-0">
-                <div class="col">
+            <button class="carousel-item-vert row g-0 p-0 w-100 mx-auto">
+                <div class="col h-100 border border-primary">
                     <img src="#" alt="123${{$idx}}">
                 </div>
-            </div>
+            </button>
             {{ end }}
         </div>
     </div>
