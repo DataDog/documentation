@@ -37,14 +37,6 @@ The geomap widget graphs any metric that has a country tag or facet.
 
 On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
-
 
 ## Further Reading
 
