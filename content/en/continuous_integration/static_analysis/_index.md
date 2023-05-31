@@ -11,14 +11,14 @@ further_reading:
 
 ## Overview
 
-{{% site-region region="us,us3,us5,ap1" %}}
+{{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
   Static Analysis is in private beta. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
+<div class="alert alert-danger">
     Static Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
