@@ -45,20 +45,20 @@ After saving your changes, [restart the Agent][4].
 
 ## Aggregation
 
-The Datadog Agent will automatically aggregate the received NetFlow data in order to limit the number of records sent to platform while maintaining most of the information. By default there is a 5 minutes aggregation interval, flow recording sharing the same identifying information (source and destination address and port, protocol etc.) will be aggregated together. Addtionnally the Datadog Agent can detect ephemeral port and remove them, this is why you may see Flows with `port:*`.
+The Datadog Agent automatically aggregates the received NetFlow data in order to limit the number of records sent to the platform while maintaining most of the information. By default there is a 5 minute aggregation interval, during which flow recordings which share the same identifying information (source and destination address and port, protocol, and so forth) will be aggregated together. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
 
 ## Enrichment
 
-Your NetFlow data is processed by the Datadog backend and they are enriched with the available metadata we have about your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. In case of possible private IP collisions, a `namespace` configured on the Agent side is also used.
+Your NetFlow data is processed by the Datadog backend and are enriched with the available metadata from your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. In case of possible private IP collisions, a `namespace` configured on the Agent side is also used.
 
-In case the NetFlow exporter IP is one of the device IPs but not the one configured on the SNMP integration, Datadog will try to find which device does this exporter IP belong to and will enrich your NetFlow data with is as long as the match is unique.
+If the NetFlow exporter IP is one of the device IPs, but not the one configured on the SNMP integration, Datadog will attempt to locate the device that the exporter IP belongs to, and will enrich your NetFlow data with it is as long as the match is unique.
 
 ## Visualization
 
-You can find the NetFlow page directly from the [Network Devices page][5].
+You can find the NetFlow page on the [Network Devices page][5].
 {{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlow Page" >}}
 
-But your data is also available in Dashboards, Notebooks and more for more precise queries and for correlating with other sources of data.
+Your data is also available in Dashboards, Notebooks, and more for more precise queries and for correlating with other sources of data.
 
 ## Retention
 
