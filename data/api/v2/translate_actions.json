@@ -273,6 +273,36 @@
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
   },
+  "ListGCPSTSAccounts": {
+    "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
+    "summary": "List all GCP STS-enabled service accounts"
+  },
+  "CreateGCPSTSAccount": {
+    "description": "Create a new entry within Datadog for your STS enabled service account.",
+    "summary": "Create a new entry for your service account",
+    "request_description": "",
+    "request_schema_description": "Data on your newly generated service account."
+  },
+  "DeleteGCPSTSAccount": {
+    "description": "Delete an STS enabled GCP account from within Datadog.",
+    "summary": "Delete an STS enabled GCP Account"
+  },
+  "UpdateGCPSTSAccount": {
+    "description": "Update an STS enabled service account.",
+    "summary": "Update STS Service Account",
+    "request_description": "",
+    "request_schema_description": "Service account info."
+  },
+  "GetGCPSTSDelegate": {
+    "description": "List your Datadog-GCP STS delegate account configured in your Datadog account.",
+    "summary": "List delegate account"
+  },
+  "MakeGCPSTSDelegate": {
+    "description": "Create a Datadog GCP principal.",
+    "summary": "Create a Datadog GCP principal",
+    "request_description": "Create a delegate service account within Datadog.",
+    "request_schema_description": ""
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"

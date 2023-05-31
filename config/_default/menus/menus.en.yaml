@@ -1226,38 +1226,38 @@ main:
     parent: service_management_heading
     weight: 60000
   - name: Workflows
-    url: workflows/
+    url: service_management/workflows/
     pre: workflows
     identifier: workflows
-    parent: platform_heading
-    weight: 120000
+    parent: service_management_heading
+    weight: 70000
   - name: Build Workflows
-    url: workflows/build/
+    url: service_management/workflows/build/
     parent: workflows
     identifier: workflows_build
     weight: 1
   - name: Authentication
-    url: workflows/access/
+    url: service_management/workflows/access/
     parent: workflows
     identifier: workflows_access
     weight: 2
   - name: Trigger Workflows
-    url: workflows/trigger/
+    url: service_management/workflows/trigger/
     parent: workflows
     identifier: workflows_trigger
     weight: 3
   - name: Actions Catalog
-    url: workflows/actions_catalog/
+    url: service_management/workflows/actions_catalog/
     parent: workflows
     identifier: workflows_actions_catalog
     weight: 4
   - name: Generic Actions
-    url: workflows/actions_catalog/generic_actions/
+    url: service_management/workflows/actions_catalog/generic_actions/
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
   - name: Connections
-    url: workflows/connections/
+    url: service_management/workflows/connections/
     parent: workflows
     identifier: workflows_connections
     weight: 5
@@ -4806,6 +4806,78 @@ api:
     url: /api/latest/gcp-integration/
     identifier: gcp-integration
     generated: true
+  - name: Create a Datadog GCP principal
+    url: '#create-a-datadog-gcp-principal'
+    identifier: gcp-integration-create-a-datadog-gcp-principal
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - MakeGCPSTSDelegate
+      unstable: []
+      order: 5
+  - name: List delegate account
+    url: '#list-delegate-account'
+    identifier: gcp-integration-list-delegate-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetGCPSTSDelegate
+      unstable: []
+      order: 6
+  - name: Update STS Service Account
+    url: '#update-sts-service-account'
+    identifier: gcp-integration-update-sts-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateGCPSTSAccount
+      unstable: []
+      order: 4
+  - name: Delete an STS enabled GCP Account
+    url: '#delete-an-sts-enabled-gcp-account'
+    identifier: gcp-integration-delete-an-sts-enabled-gcp-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteGCPSTSAccount
+      unstable: []
+      order: 3
+  - name: Create a new entry for your service account
+    url: '#create-a-new-entry-for-your-service-account'
+    identifier: gcp-integration-create-a-new-entry-for-your-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateGCPSTSAccount
+      unstable: []
+      order: 2
+  - name: List all GCP STS-enabled service accounts
+    url: '#list-all-gcp-sts-enabled-service-accounts'
+    identifier: gcp-integration-list-all-gcp-sts-enabled-service-accounts
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListGCPSTSAccounts
+      unstable: []
+      order: 1
   - name: Update a GCP integration
     url: '#update-a-gcp-integration'
     identifier: gcp-integration-update-a-gcp-integration
