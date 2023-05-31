@@ -136,7 +136,7 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
 
 ホストで実行されている Agent に対してデータベースモニタリングメトリクスのコレクションを構成するには、次の手順に従ってください。 (Agent が Google Cloud SQL データベースから収集するように小さな GCE インスタンスをプロビジョニングする場合など)
 
-1. `postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][1] を参照してください。
+1. `postgres.d/conf.yaml` ファイルを編集して `host` / `port` を指定し、マスターを監視するように設定します。利用可能なすべての構成オプションについては、[サンプル postgres.d/conf.yaml][1] を参照してください。`postgres.d` ディレクトリの場所は、オペレーティングシステムに依存します。詳しくは、[Agent 構成ディレクトリ][4]を参照してください。
    ```yaml
    init_config:
    instances:
@@ -160,6 +160,7 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
+[4]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 {{% /tab %}}
 {{% tab "Docker" %}}
 
