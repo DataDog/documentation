@@ -234,7 +234,7 @@ To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar cont
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.0",
+            "image": "datadog/fips-proxy:0.5.2",
             "portMappings": [
                 {
                     "containerPort": 9803,
