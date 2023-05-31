@@ -1,5 +1,7 @@
 {{ define "main" }}
 
+    {{ partial "breadcrumbs.html" . }}
+
     {{ $codeLangs := slice }}
     {{ range sort .CurrentSection.Pages ".Params.code_lang_weight" }}
         {{ with .Params.code_lang }}
@@ -7,9 +9,7 @@
         {{ end }}
     {{ end }}
 
-    <div class="mt-7">{{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}</div>
-    
-    {{ partial "breadcrumbs.html" . }}
+    <div class="mt-2">{{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}</div>
 
     <h1 id="pagetitle">{{ .Title }}</h1>
     
