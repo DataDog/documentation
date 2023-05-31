@@ -18,7 +18,7 @@ Use NetFlow Monitoring in Datadog to visualize and monitor your flow records fro
 
 To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.45 or newer.
 
-**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended as this extra data can be used to enrich your flow records with information like the device name, model and vendor as well as the inbound/outbound interface name.
+**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended as this extra data can be used to enrich your flow records with information such as the device name, model, and vendor, as well as the inbound/outbound interface name.
 
 ## Configuration
 
