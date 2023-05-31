@@ -24,7 +24,7 @@ x-data="{
     }
 }">
     <div class="row g-0">
-        <div class="col-12 col-lg-8 p-0 carousel-asset-wrapper position-relative bg-light">
+        <div class="col-12 col-lg-8 pr-1 carousel-asset-wrapper position-relative bg-light border border-warning">
             <div class="carousel-items h-100">
                 {{ range $idx, $el := .Params.tile.media }}
                 <div class="carousel-item" :class="isHidden({{ $idx }})">
@@ -47,12 +47,14 @@ x-data="{
                 <div class="visually-hidden">Next</div>
             </button>
         </div>
-        <div class="d-none d-lg-block col-lg-4">
-            <div>
-                {{ range $idx, $el := .Params.tile.media }}
+        <div class="d-none d-lg-block col-lg-4 border border-primary">
+            {{ range $idx, $el := .Params.tile.media }}
+            <div class="row g-0">
+                <div class="col">
                     <img src="#" alt="123${{$idx}}">
-                {{ end }}
+                </div>
             </div>
+            {{ end }}
         </div>
     </div>
     <div class="row g-0">
