@@ -682,7 +682,7 @@
     {
       "group": "synthetics",
       "suffix": "",
-      "description": "Trigger Synthetics tests returns \"OK\" response"
+      "description": "Trigger Synthetic tests returns \"OK\" response"
     }
   ],
   "CreateWebhooksIntegrationCustomVariable": [

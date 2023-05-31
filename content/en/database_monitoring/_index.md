@@ -15,6 +15,9 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to level up your Database Monitoring"
 algolia:
   tags: ['database monitoring', 'dbm']
 ---

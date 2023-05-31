@@ -74,4 +74,4 @@ The minimum tracer version to get all supported ASM capabilities for Go is 1.48.
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
 [8]: https://github.com/golang/go/wiki/cgo
 [9]: /tracing/trace_collection/compatibility/go/
-[10]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[10]: /agent/remote_config/#enabling-remote-configuration

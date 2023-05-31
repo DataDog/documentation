@@ -36,11 +36,11 @@ title: GitLab パイプラインでトレースを設定する
 
 - **Infrastructure metric correlation**: セルフホスティングの GitLab ランナーのために、パイプラインを[インフラストラクチャーホストメトリクス][14]に関連付ける
 
-- **Custom spans**: カスタムスパンを構成する
+- **Custom pre-defined tags**: 生成されたすべてのパイプライン、ステージ、ジョブスパンに[カスタムタグ][10]を構成する
 
-- **Custom pre-defined tags**: ランタイムに[カスタムタグ][10]とメトリクスを構成する
+- **Custom tags and metrics at runtime**: ランタイムの[カスタムタグ][13]とメトリクスを構成する
 
-- **Parameters**: カスタム `env` または `service` [パラメーター][13]を設定する
+- **Parameters**: カスタム `env` または `service` パラメーターを設定する
 
 - **Pipeline failure reasons**: [エラーメッセージ][15]からパイプラインの障害理由を特定する
 
@@ -176,13 +176,15 @@ kubectl exec -it <task-runner-pod-name> -- \
 {{< img src="ci/partial_retries_facet_panel.png" alt="Partial Pipeline ファセットが展開され、値 Retry が選択されたファセットパネル、Partial Retry ファセットが展開され、値 true が選択されたファセットパネル" style="width:40%;">}}
 
 
-### インフラストラクチャーメトリクスの相関
+### インフラストラクチャーメトリクスとジョブの相関付け
 
 セルフホスティングの GitLab ランナーを使っている場合、ジョブとそれを実行しているインフラストラクチャーを関連付けることができます。この機能を使うには、GitLab ランナーに `host:<hostname>` という形式のタグが必要です。タグは、[新しいランナーを登録する][6]際に追加することができます。既存のランナーでは、ランナーの `config.toml` を更新することでタグを追加します。または、UI から **Settings > CI/CD > Runners** に移動して、該当するランナーを編集することでタグを追加します。
 
 これらのステップの後、CI Visibility は各ジョブにホスト名を追加します。メトリクスを見るには、トレースビューでジョブスパンをクリックします。ドロワーに、ホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
 
-### パイプライン失敗時のエラーメッセージ
+### パイプライン失敗時のエラーメッセージの表示
+
+エラーメッセージは GitLab のバージョン 15.2.0 以降でサポートされています。
 
 GitLab パイプラインの実行に失敗した場合、特定のパイプライン実行内の `Errors` タブの下の各エラーは、GitLab からのエラータイプに関連するメッセージを表示します。
 
@@ -256,9 +258,9 @@ GitLab パイプラインの実行に失敗した場合、特定のパイプラ�
 [7]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 [8]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [9]: /ja/logs/
-[10]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#setting-custom-tags
+[10]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
 [12]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#enable-job-log-collection-beta
-[13]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#integrating-through-webhooks
-[14]: http://docs.datadoghq.com/continuous_integration/pipelines/gitlab/?tab=gitlabcom#infrastructure-metric-correlation
-[15]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#error-messages-for-pipeline-failures
+[13]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[14]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
+[15]: /ja/continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures

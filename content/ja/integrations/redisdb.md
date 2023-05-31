@@ -44,7 +44,7 @@ draft: false
 git_integration_title: redisdb
 integration_id: redis
 integration_title: Redis
-integration_version: 4.6.0
+integration_version: 4.7.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

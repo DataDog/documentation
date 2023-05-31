@@ -6,6 +6,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Datadog RUM を探索する
+- link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
+  tag: ブログ
+  text: Datadog RUM で Roku チャンネルを監視する
 is_beta: true
 kind: documentation
 title: RUM Roku チャンネルモニタリング
