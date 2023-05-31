@@ -27,7 +27,7 @@ Schedule downtimes for system shutdowns, off-line maintenance, or upgrades witho
 
 To schedule a [monitor downtime][1] in Datadog use the main navigation: _Monitors –> Manage Downtime_. Then, click the **Schedule Downtime** button in the upper right.
 
-To mute an individual monitor, click on the **Mute** button at the top of a monitor status page. This creates a downtime schedule for the specific monitor.
+To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for the monitor.
 
 ## Choose what to silence
 
@@ -35,11 +35,11 @@ Apply downtime schedules to specific monitors by name or to a broad range of mon
 
 ### By Monitor Name
 
-Search or use the dropdown to choose monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
+Search or use the dropdown menu to choose which monitors to silence. If the field is left empty, all monitors are silenced by default. You can also select a scope to constrain your downtime to a specific host, device, or arbitrary tag. Only monitors that have **ALL selected scopes** are silenced.
 
 ### By Monitor Tags
 
-Schedule a downtime based on one or more [monitor tags][2]. Select at least one tag with a limit of 32 tags. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
+Schedule a downtime based on one or more [monitor tags][2]. The maximum number of tags that can be selected for a single downtime is 32. Each tag can be at most 256 characters long. Only monitors that have **ALL selected tags** are silenced. You can also select scopes for additional constraints.
 
 ### Downtime scope
 
@@ -68,7 +68,7 @@ When a single downtime of a recurring downtime ends, the single downtime is canc
 
 {{< img src="/monitors/downtimes/downtime_recurring_rrule.png" alt="Fields for scheduling recurring downtime with RRULE" style="width:90%;">}}
 
-Use RRULEs - or [recurrence rules][5] - to define downtimes schedules. Use the official [RRULE generator][6] as a tool to generate recurring rules. A common use case is to use RRULES to define downtimes on specific days of the month. For example, on the third Monday of each month.
+Use [recurrence rules][5] (RRULEs) to define downtimes schedules. Use the official [RRULE generator][6] as a tool to generate recurring rules. A common use case is to use RRULES to define downtimes on specific days of the month, for example, on the third Monday of each month.
 
 **Note**: Attributes specifying the duration in RRULE are not supported (for example, `DTSTART`, `DTEND`, `DURATION`).
 
@@ -79,7 +79,7 @@ Enter a message to notify your team about this downtime. The message field allow
 
 ### Notify your team
 
-Notify your team by specifying team members or send the message to a service [integration][8]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, and expired. These audit notifications allows your team to be aware of the Downtimes in your system.
+Notify your team by specifying team members or send the message to a service [integration][8]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, or expired. These audit notifications allows your team to be aware of the Downtimes in your system.
 
 ### Disable first recovery notification
 
