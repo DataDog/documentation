@@ -329,7 +329,7 @@ To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
 ### DD_SERVICE_MAPPING
 
-`DD_SERVICE_MAPPING` is an environment variable that renames upstream non-Lambda services for Datadog [Service][40]. It operates with `old-service:new-service` pairs.
+`DD_SERVICE_MAPPING` is an environment variable that renames upstream non-Lambda [services names][42]. It operates with `old-service:new-service` pairs.
 
 #### Syntax
 
