@@ -84,7 +84,7 @@ With the following definitions:
 : **Prerequisite:** This metric exists for any APM service.<br>
 **Description:** Represent the count of errors for a given span.<br>
 **Metric type:** [COUNT][5].<br>
-**Tags:** `env`, `service`, `version`, `resource`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
+**Tags:** `env`, `service`, `version`, `resource`, `resource_name`, `http.status_code`, all host tags from the Datadog Host Agent, and [the second primary tag][4].
 
 `trace.<SPAN_NAME>.errors.by_http_status`
 : **Prerequisite:** This metric exists for any APM service.<br>
