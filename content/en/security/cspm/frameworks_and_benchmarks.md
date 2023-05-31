@@ -56,7 +56,7 @@ View a high-level overview of your compliance posture for each framework on the 
 
 Compliance framework reports show which rules are failing in your environment, along with details about the misconfigured resources.
 
-The summary at the top of the report shows the number of rules with Pass/Fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, and download a PDF copy of the report.
+The summary at the top of the report shows the number of rules with pass/fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, download a PDF copy of the report, and filter the page by account, team, service, and environment tags.
 
 Below the summary is a complete listing of all rules associated with the framework, organized by requirements and controls, along with the number of resources checked by the rule, and the percentage of failures.
 
