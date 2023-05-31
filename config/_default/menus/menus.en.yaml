@@ -2167,16 +2167,21 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_swift
     weight: 306
+  - name: Static Analysis
+    url: continuous_integration/static_analysis/
+    parent: ci
+    identifier: ci_static_analysis
+    weight: 4
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 4
+    weight: 5
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 5
+    weight: 6
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
