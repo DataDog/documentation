@@ -65,7 +65,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: cswatt/gcp-service-account
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
