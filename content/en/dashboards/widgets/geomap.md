@@ -34,6 +34,8 @@ The geomap widget plots geographic data and visualizes it through shaded regions
   |Log Events   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can use the [GeoIP Processor][1] to do this, or manually include the [tags on ingest][2]. See the [Log search documentation][3] to configure a log event query.|
   |Metric   | The group by tag must include a country ISO Code following the alpha-2 ISO format. You can [generate metrics from ingested logs][4], or manually include the [tags on ingest][2]. See the [querying documentation][5] to configure a metric query.|
   |RUM   | See the [RUM documentation][6] to configure a RUM query. |
+  |SLO | See the [SLO search documentation][7] to configure an SLO query. |
+  |Security Signals <br> Application Security <br> Audit Trail | See the [Log search documentation][3] to configure a query. |
 
   [1]: /logs/log_configuration/processors/#geoip-parser
   [2]: /getting_started/tagging/#defining-tags
@@ -41,6 +43,7 @@ The geomap widget plots geographic data and visualizes it through shaded regions
   [4]: /logs/logs_to_metrics/
   [5]: /dashboards/querying/
   [6]: /real_user_monitoring/explorer/search_syntax/
+  [7]: /service_management/service_level_objectives/#searching-slos
   {{% /tab %}}
 
   {{% tab "Points" %}}
