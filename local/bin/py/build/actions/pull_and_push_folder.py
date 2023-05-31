@@ -8,6 +8,8 @@ from itertools import chain
 from os import makedirs
 from os.path import basename
 
+from actions.comment_conversion import replace_comments
+
 TEMPLATE = """\
 ---
 {front_matter}
@@ -69,6 +71,10 @@ def pull_and_push_folder(content, content_dir):
                 txt,
                 count=0,
             )
+
+            # replace html comments with shortcodes
+            txt = replace_comments(txt)
+
             file_content = TEMPLATE.format(front_matter=front_matter, content=txt.strip())
             # Replacing the master README.md by _index.md to follow Hugo logic
             if file_name.endswith("README.md"):

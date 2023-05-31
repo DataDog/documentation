@@ -173,6 +173,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1877023900",
+      "description": "Create a new dashboard with list_stream widget with a valid sort parameter ASC"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2361531620",
+      "description": "Create a new dashboard with list_stream widget with a valid sort parameter DESC"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2029850837",
       "description": "Create a new dashboard with log_stream widget"
     },

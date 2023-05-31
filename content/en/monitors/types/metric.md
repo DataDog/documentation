@@ -93,7 +93,6 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | Define the `from`                 | No       | Everywhere     | `env:prod`        |
 | Specify metric aggregation        | Yes      | `avg by`       | `sum by`          |
 | Group by                          | No       | Everything     | `host`            |
-| Set the alert grouping            | No       | `Simple Alert` | `Multi Alert`     |
 | Specify monitor query aggregation | No       | `average`      | `sum`             |
 | Evaluation window                 | No       | `5 minutes`    | `1 day`           |
 
@@ -106,7 +105,6 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query. See the Notes section for additional threshold behavior.|
 | sum              | If the summation of every point in the series crosses the threshold, an alert is triggered. It adds the `sum()` function to your monitor query.                               |
 | percentile(pXX)  | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
-| Alert grouping   | If using a `Simple Alert`, the monitor aggregates over all reporting sources. If using a `Multi Alert`, the monitor applies the alert to each source, according to your group parameters. See [Alert grouping](#alert-grouping) for more details.
 | Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
 
 {{% /tab %}}
@@ -136,7 +134,6 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 | min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query. See the Notes section for additional threshold behavior. |
 | sum              | If the summation of every point in the series crosses the threshold, an alert is triggered. It adds the `sum()` function to your monitor query.                               |
 | percentile(pXX)  | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
-| Alert grouping   | If using a `Simple Alert`, the monitor aggregates over all reporting sources. If using a `Multi Alert`, the monitor applies the alert to each source, according to your group parameters. See [Alert grouping](#alert-grouping) for more details.
 | Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
 
 {{% /tab %}}
