@@ -31,7 +31,6 @@ title: モニターガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="一般ガイド:" >}}
-    {{< nextlink href="monitors/guide/slo-checklist" >}}SLO チェックリスト{{< /nextlink >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターの RBAC の設定方法{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}Synthetic テストでモニターを作成する方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}異常モニター{{< /nextlink >}}

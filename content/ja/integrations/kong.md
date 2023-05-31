@@ -34,7 +34,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kong/README.md
@@ -43,7 +42,7 @@ draft: false
 git_integration_title: kong
 integration_id: kong
 integration_title: Kong
-integration_version: 2.3.0
+integration_version: 2.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -53,16 +52,15 @@ public_title: Kong
 short_description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
   media: []

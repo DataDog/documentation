@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - bots
 description: 受信した RUM リクエストを識別します。
 further_reading:
 - link: /real_user_monitoring/explorer

@@ -1,5 +1,6 @@
 {{ define "main" }}
 <h1 id="pagetitle">{{ .Title }}</h1>
+{{ partial "breadcrumbs.html" . }}
 <small>{{ i18n "tags" }}: {{ partial "related-groups" (dict "taxonomy" "video-categories" "terms" (index .Params "video-categories") ) }}</small>
 <br><br>
 {{ partial "video" .Params.wistiaid }}

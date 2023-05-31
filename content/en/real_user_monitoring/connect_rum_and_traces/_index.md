@@ -60,6 +60,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 2. Initialize the RUM SDK. Configure the `allowedTracingUrls` initialization parameter with the list of internal, first-party origins called by your browser application.
 
+   For **npm install**:
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -71,6 +72,25 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
     })
     ```
+
+   For **CDN install**:
+
+   ```javascript
+   window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<http://datadoghq.com|datadoghq.com>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      allowedTracingUrls: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("<https://api.example.com>")]
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    })
+   ```
 
     To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
