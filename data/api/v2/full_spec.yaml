@@ -13873,12 +13873,12 @@ components:
         handle:
           description: The team's identifier
           example: example-team
-          maxLength: 64
+          maxLength: 195
           type: string
         name:
           description: The name of the team
           example: Example Team
-          maxLength: 64
+          maxLength: 200
           type: string
       required:
       - handle

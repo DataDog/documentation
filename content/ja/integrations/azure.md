@@ -32,9 +32,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-container-apps/
   tag: ブログ
   text: Datadog で Azure コンテナアプリを監視する
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で Azure Pipelines を監視する
 - link: https://www.datadoghq.com/blog/azure-government-monitoring-datadog/
   tag: ブログ
   text: Datadog で Azure Government を監視する
+- link: https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/
+  tag: ブログ
+  text: Datadog でエンタープライズ規模の Azure 環境の監視を数分で可能にします
 - link: https://docs.datadoghq.com/integrations/guide/azure-portal/
   tag: Documentation
   text: Azure ポータルの Datadog
@@ -980,7 +986,7 @@ Azure インテグレーションメトリクス、イベント、およびサ�
 
 | インテグレーション                             | ネームスペース                                   | Datadog タグキー                                                                                                                                                                                                 |
 |-----------------------------------------|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| すべての Azure インテグレーション                  | すべて                                         | `cloud_provider`、`region`、`kind`、`type`、`name`、`resource_group`、`tenant_name`、`subscription_name`、`subscription_id`、`status`（該当する場合）                                                            |
+| すべての Azure インテグレーション                  | All                                         | `cloud_provider`、`region`、`kind`、`type`、`name`、`resource_group`、`tenant_name`、`subscription_name`、`subscription_id`、`status`（該当する場合）                                                            |
 | Azure VM インテグレーション                   | `azure.vm.*`                                | `host`、`size`、`operating_system`、`availability_zone`                                                                                                                                                          |
 | Azure App Service Plans                 | `azure.web_serverfarms.*`                   | `per_site_scaling`、`plan_size`、`plan_tier`、`operating_system`                                                                                                                                                 |
 | Azure App Services Web Apps & Functions | `azure.app_services.*`、`azure.functions.*` | `operating_system`、`server_farm_id`、`reserved`、`usage_state`、`fx_version`（linux ウェブアプリのみ）、`php_version`、`dot_net_framework_version`、`java_version`、`node_version`、`python_version`                |

@@ -3,7 +3,7 @@ description: Flutter Monitoring の構成について説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter ソースコード
+  text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの調査方法

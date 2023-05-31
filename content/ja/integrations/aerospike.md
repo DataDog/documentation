@@ -33,7 +33,7 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.17.2
+integration_version: 1.18.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

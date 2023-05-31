@@ -7,7 +7,7 @@ further_reading:
   text: iOS モニタリング
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
-  text: ブラウザのモニタリング
+  text: ブラウザモニタリング
 kind: documentation
 title: iOS Web ビュー追跡
 ---

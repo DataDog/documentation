@@ -125,6 +125,6 @@ Follow the [log graphing guide][9] to learn more about all the graphing options.
 [4]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22
 [6]: /monitors/case_management/
-[7]: /workflows/
-[8]: /workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[7]: /service_management/workflows/
+[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /logs/explorer/analytics/?tab=timeseries
