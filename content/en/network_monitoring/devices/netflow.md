@@ -49,7 +49,7 @@ The Datadog Agent automatically aggregates the received NetFlow data in order to
 
 ## Enrichment
 
-Your NetFlow data is processed by the Datadog backend and are enriched with the available metadata from your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. In case of possible private IP collisions, a `namespace` configured on the Agent side is also used.
+Your NetFlow data is processed by the Datadog backend and are enriched with the available metadata from your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. To disambiguate possible collisions between reused private IPs, you can configure a different `namespace` for each Agent configuration file (with the setting `network_devices.namespace`)
 
 If the NetFlow exporter IP is one of the device IPs, but not the one configured on the SNMP integration, Datadog will attempt to locate the device that the exporter IP belongs to, and will enrich your NetFlow data with it is as long as the match is unique.
 
@@ -58,7 +58,8 @@ If the NetFlow exporter IP is one of the device IPs, but not the one configured 
 You can find the NetFlow page on the [Network Devices page][5].
 {{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlow Page" >}}
 
-Your data is also available in Dashboards, Notebooks, and more for more precise queries and for correlating with other sources of data.
+This data is also available in Dashboards, Notebooks, and more for more precise queries and for correlating with other sources of data.
+{{< img src="network_device_monitoring/netflow/notebook.png" alt="Notebook" >}}
 
 ## Retention
 
