@@ -3,6 +3,8 @@
 class="integrations-carousel container border border-primary container p-0"
 x-data="{
     activeSlide: 0,
+    distanceConstant: 0,
+    verticalCarouselEl: {},
     navigateCarousel (direction) {
         const max = {{ $asset_len }} - 1
         if(direction === 'next'){
@@ -18,40 +20,57 @@ x-data="{
                 this.activeSlide -= 1
             }
         }
+        // navigate vertical carousel
+        this.verticalCarouselEl.scrollTop = this.activeSlide * this.distanceConstant
     },
     isHidden (idx) {
         return idx !== this.activeSlide && 'd-none'
+    },
+    setDistanceConstant (carouselVertEl) {
+        // sets the distance from middle btn to top of vertical carousel as a constant
+        this.distanceConstant = carouselVertEl.children[1].offsetTop
+    },
+    setVerticalCarouselEl (carouselVertEl) {
+        this.verticalCarouselEl = carouselVertEl
     }
 }">
     <div class="carousel-top-row row g-0">
         <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9 bg-light border border-warning">
             <div class="carousel-items h-100">
-                {{ range $idx, $el := .Params.tile.media }}
+                {{ range $idx, $elm := .Params.tile.media }}
                 <div class="carousel-item h-100" :class="isHidden({{ $idx }})">
-                    {{ if eq $el.media_type "image"}}
-                    <img class="h-100 w-100" src="{{$el.img_url}}" alt="{{ add $idx 1 }}">
+                    {{ if eq $elm.media_type "image"}}
+                    <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{ add $idx 1 }}" >
                     {{ else }}
-                    <video class="h-100 w-100" poster="{{$el.img_url}}" preload="none">
+                    <video class="h-100 w-100" poster="{{$elm.image_url}}" preload="none">
                         <source type="video/mp4">
                     </video>
                     {{ end }}
                 </div>
                 {{ end }}
             </div>
-            <button class="carousel-control prev position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" @click="navigateCarousel('prev')">
+            <button 
+            class="carousel-control prev position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" 
+            @click="navigateCarousel('prev')">
                 <span><</span>
                 <div class="visually-hidden">Previous</div>
             </button>
-            <button class="carousel-control next position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" @click="navigateCarousel('next')">
+            <button 
+            class="carousel-control next position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" 
+            @click="navigateCarousel('next')">
                 <span>></span>
                 <div class="visually-hidden">Next</div>
             </button>
         </div>
-        <div class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary">
-            {{ range $idx, $el := .Params.tile.media }}
-            <button class="carousel-item-vert row g-0 p-0 w-100 mx-auto">
+        <div 
+        class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
+        x-init="setDistanceConstant($el); setVerticalCarouselEl($el)">
+            {{ range $idx, $elm := .Params.tile.media }}
+            <button 
+            class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
+            @click="console.log('element offset top: ', $el.offsetTop)">
                 <div class="col h-100 border border-primary">
-                    <img src="#" alt="123${{$idx}}">
+                    <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{add $idx 1}}">
                 </div>
             </button>
             {{ end }}
