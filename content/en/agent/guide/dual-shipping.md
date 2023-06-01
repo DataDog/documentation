@@ -155,8 +155,6 @@ DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadog
 TCP requires Agent version >= 6.6.<br/>
 HTTPS requires Agent version >= 6.13.
 
-{{% agent-dual-shipping %}}
-
 ### YAML configuration
 In `datadog.yaml`:
 ```yaml
@@ -178,9 +176,9 @@ DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-## Database Monitoring
-
 {{% agent-dual-shipping %}}
+
+## Database Monitoring
 
 ### YAML configuration
 
@@ -223,9 +221,9 @@ DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
 DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-## Network Devices
-
 {{% agent-dual-shipping %}}
+
+## Network Devices
 
 ### YAML configuration
 
@@ -266,9 +264,9 @@ DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
 DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-## Cloud Security Posture Management (CSPM)
-
 {{% agent-dual-shipping %}}
+
+## Cloud Security Posture Management (CSPM)
 
 ### YAML configuration
 
@@ -291,9 +289,9 @@ DD_COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-## Cloud Workload Security (CWS)
-
 {{% agent-dual-shipping %}}
+
+## Cloud Workload Security (CWS)
 
 ### YAML configuration
 In `datadog.yaml`:
@@ -314,6 +312,8 @@ runtime_security_config:
 DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
+
+{{% agent-dual-shipping %}}
 
 ## Dual shipping in Kubernetes
 
