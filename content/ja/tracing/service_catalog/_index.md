@@ -82,6 +82,9 @@ APM サービスリストと比較して、サービスカタログには、ト�
 
 **Performance** タブでは、サービスのパフォーマンスや最も注意を払う必要があるものを表示する方法がいくつか用意されています。列をクリックして表をソートすると、以下のことがわかります。
 
+環境のドロップダウンはフィルターとして機能します。例えば、`env:prod` を選択すると、直近 1 時間に `env:prod` にパフォーマンスデータ (APM/USM テレメトリー) があるサービスだけがリストに表示されます。`env:*` を選択すると、サービスがテレメトリーを発するすべての環境を一目で確認でき、展開すると環境ごとの詳細なパフォーマンスメトリクスを見ることができます。
+2 つ目のドロップダウンでは、Performance ビューにある APM データを、APM の[トレースメトリクス][13]の[second primary tag][12] に再スコープすることができます。このドロップダウンは、リストに表示されるサービスの数には影響しません。 
+
 - 最近デプロイされたサービス、または長い間デプロイされていないサービス
 - 1 秒間に最も多くのリクエストを受信している、またはトラフィックを受信していないサービス
 - 様々なパーセンタイルで最も高いレイテンシーを持つサービス
@@ -155,3 +158,5 @@ APM サービスリストと比較して、サービスカタログには、ト�
 [9]: /ja/account_management/rbac/
 [10]: /ja/account_management/rbac/permissions/
 [11]: /ja/security/application_security/how-appsec-works/
+[12]: /ja/tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[13]: /ja/tracing/metrics/metrics_namespace/

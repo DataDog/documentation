@@ -34,7 +34,7 @@ draft: false
 git_integration_title: ibm_mq
 integration_id: ibm-mq
 integration_title: IBM MQ
-integration_version: 4.0.3
+integration_version: 4.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
