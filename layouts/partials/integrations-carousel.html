@@ -1,4 +1,5 @@
-{{ $asset_len := (.Params.tile.media | default slice) | len  }}
+{{ $media := .Params.tile.media}}
+{{ $asset_len := ($media | default slice) | len  }}
 <div 
 class="integrations-carousel container border border-primary container p-0"
 x-data="{
@@ -23,6 +24,12 @@ x-data="{
         // navigate vertical carousel
         this.verticalCarouselEl.scrollTop = this.activeSlide * this.distanceConstant
     },
+    infiniteCarousel () {
+        console.log('---')
+    },
+    getTransformY (idx) {
+        return idx < ({{ $asset_len }} - 1) ? this.distanceConstant : -(idx * this.distanceConstant)
+    },
     isHidden (idx) {
         return idx !== this.activeSlide && 'd-none'
     },
@@ -38,7 +45,7 @@ x-data="{
         {{/*  Carousel (horizontal)  */}}
         <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9 bg-light border border-warning">
             <div class="carousel-items h-100">
-                {{ range $idx, $elm := .Params.tile.media }}
+                {{ range $idx, $elm := $media }}
                 <div class="carousel-item h-100" :class="isHidden({{ $idx }})">
                     {{ if eq $elm.media_type "image"}}
                     <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{ add $idx 1 }}" >
@@ -67,14 +74,15 @@ x-data="{
         <div 
         class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
         x-init="setDistanceConstant($el); setVerticalCarouselEl($el)">
-            {{ range $idx, $elm := .Params.tile.media }}
+            {{ range $idx, $elm := $media }}
             <button 
             class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-            @click="navigateCarousel($el.offsetTop > $el.parentElement.children[activeSlide]?.offsetTop ? 'next': 'prev')"
-            :style="{transform: `translateY(${distanceConstant}px)`}">
-                <div class="col h-100 border border-primary">
-                    <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{add $idx 1}}">
-                </div>
+            @click="navigateCarousel($el.offsetTop > verticalCarouselEl.children[activeSlide]?.offsetTop ? 'next': 'prev')"
+            :style="{transform: `translateY(${getTransformY({{ $idx }})}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+            :disabled="{{ $idx }} === activeSlide"
+            x-text="$el.offsetTop + '-{{ add $idx 1}}'"
+            >
+                
             </button>
             {{ end }}
         </div>
@@ -82,7 +90,7 @@ x-data="{
     {{/*  Carousel item description  */}}
     <div class="row g-0">
         <div class="col-12 p-0 carousel-item-descriptions border border-secondary">
-            {{ range $idx, $el := .Params.tile.media }}
+            {{ range $idx, $el := $media }}
             <div class="row g-0 carousel-item-description" :class="isHidden({{ $idx }})">
                 <div class="col-1">
                     <span class="fw-bold" x-text="(activeSlide + 1) + '/{{$asset_len}}'"></span>
