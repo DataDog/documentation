@@ -8,7 +8,7 @@ further_reading:
   text: Real User Monitoring
 - link: /real_user_monitoring/browser/data_collected/
   tag: ドキュメント
-  text: 収集された RUM ブラウザデータ
+  text: RUM ブラウザデータ収集
 - link: /real_user_monitoring/explorer/
   tag: ドキュメント
   text: Datadog でビューを検索する

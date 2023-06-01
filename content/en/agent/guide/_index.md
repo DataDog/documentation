@@ -19,7 +19,6 @@ cascade:
     {{< nextlink href="observability_pipelines/setup" >}}Aggregating Agents{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 Status Page{{< /nextlink >}}
     {{< nextlink href="agent/guide/dual-shipping" >}}Dual Shipping{{< /nextlink >}}
-    {{< nextlink href="agent/guide/how_remote_config_works" >}}How Remote Configuration Works{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}
     {{< nextlink href="agent/guide/linux-agent-2022-key-rotation" >}}Linux Agent 2022 Key Rotation{{< /nextlink >}}
     {{< nextlink href="agent/guide/network" >}}Network Traffic{{< /nextlink >}}

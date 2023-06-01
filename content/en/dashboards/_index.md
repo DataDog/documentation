@@ -41,6 +41,9 @@ further_reading:
   - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
     tag: "Developer docs"
     text: "Create great integration dashboards"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on better visualizations with Dashboards"
 ---
 
 ## Overview

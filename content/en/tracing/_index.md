@@ -30,6 +30,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
     tag: "Blog"
     text: "Monitor your Linux web apps on Azure App Service with Datadog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to boost your APM understanding"  
+
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology

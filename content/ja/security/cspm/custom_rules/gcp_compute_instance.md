@@ -66,7 +66,7 @@ disable_edit: true
 **プロバイダー名**: `status`<br>
 **説明**: [出力のみ] インスタンスのステータス。値は PROVISIONING、STAGING、RUNNING、STOPPING、SUSPENDING、SUSPENDED、REPAIRING、TERMINATED のいずれかです。インスタンスのステータスについては、「インスタンスのライフサイクル」を参照してください。 <br>
 **可能な値**:<br>
-  - `DEPROVISIONING` - Nanny は停止しており、ネットワークのデプログラミング、クォータ、IP の解放、ディスクのテアダウンなどのテアダウン作業を行っています。<br>
+  - `DEPROVISIONING` - インスタンスは停止しており、ネットワークのデプログラミング、クォータ、IP の解放、ディスクのテアダウンなどのテアダウン作業を行っています。<br>
   - `PROVISIONING` - インスタンスにリソースが割り当てられています。<br>
   - `REPAIRING` - インスタンスは修理中です。<br>
   - `RUNNING` - インスタンスは実行中です。<br>
@@ -165,11 +165,11 @@ disable_edit: true
        - `external_ipv6`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `externalIpv6`<br>
-        **説明**: このインスタンスに関連する外部 IPv6 範囲の最初の IPv6 アドレスで、プレフィックス長は ipv6AccessConfig の externalIpv6PrefixLength に格納されます。静的な外部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、GCP はインスタンスのサブネットワークから外部 IPv6 アドレスを自動的に割り当てます。<br>
+        **説明**: ipv6AccessConfigs にのみ適用されます。このインスタンスに関連する外部 IPv6 範囲の最初の IPv6 アドレスで、プレフィックス長は ipv6AccessConfig の externalIpv6PrefixLength に格納されます。静的な外部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、Google Cloud はインスタンスのサブネットワークから外部 IPv6 アドレスを自動的に割り当てます。<br>
        - `external_ipv6_prefix_length`<br>
         **タイプ**: `INT32`<br>
         **プロバイダー名**: `externalIpv6PrefixLength`<br>
-        **説明**: 外部 IPv6 範囲のプレフィックス長。<br>
+        **説明**: ipv6AccessConfigs にのみ適用されます。外部 IPv6 範囲のプレフィックス長。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
         **Provider name**: `kind`<br>
@@ -177,11 +177,11 @@ disable_edit: true
        - `name`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `name`<br>
-        **説明**: このアクセス構成の名前。デフォルトおよび推奨される名前は External NAT ですが、My external IP や Network Access など任意の文字列を使用することができます。<br>
+        **説明**: このアクセス構成の名前。accessConfigs (IPv4) の場合、デフォルトおよび推奨される名前は External NAT ですが、My external IP や Network Access など任意の文字列を使用することができます。ipv6AccessConfigs の場合、推奨される名前は External IPv6 です。<br>
        - `nat_ip`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `natIP`<br>
-        **説明**: このインスタンスに関連付けられた外部 IP アドレス。プロジェクトで使用可能な未使用の静的外部 IP アドレスを指定するか、このフィールドを未定義のままにして、共有エフェメラル IP アドレスプールからの IP を使用します。静的な外部 IP アドレスを指定する場合、インスタンスのゾーンと同じリージョンに存在する必要があります。<br>
+        **説明**: accessConfigs (IPv4) にのみ適用されます。このインスタンスに関連付けられた外部 IP アドレス。プロジェクトで使用可能な未使用の静的外部 IP アドレスを指定するか、このフィールドを未定義のままにして、共有エフェメラル IP アドレスプールからの IP を使用します。静的な外部 IP アドレスを指定する場合、インスタンスのゾーンと同じリージョンに存在する必要があります。<br>
        - `network_tier`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `networkTier`<br>
@@ -202,7 +202,7 @@ disable_edit: true
        - `type`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `type`<br>
-        **説明**: 構成の種類。デフォルトで唯一のオプションは ONE_TO_ONE_NAT です。 <br>
+        **説明**: 構成のタイプ。accessConfigs (IPv4) の場合、デフォルトで唯一のオプションは ONE_TO_ONE_NAT です。ipv6AccessConfigs の場合、デフォルトで唯一のオプションは、DIRECT_IPV6 です。 <br>
         **可能な値**:<br>
           - `DIRECT_IPV6`
           - `ONE_TO_ONE_NAT`
@@ -229,11 +229,11 @@ disable_edit: true
        - `external_ipv6`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `externalIpv6`<br>
-        **説明**: このインスタンスに関連する外部 IPv6 範囲の最初の IPv6 アドレスで、プレフィックス長は ipv6AccessConfig の externalIpv6PrefixLength に格納されます。静的な外部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、GCP はインスタンスのサブネットワークから外部 IPv6 アドレスを自動的に割り当てます。<br>
+        **説明**: ipv6AccessConfigs にのみ適用されます。このインスタンスに関連する外部 IPv6 範囲の最初の IPv6 アドレスで、プレフィックス長は ipv6AccessConfig の externalIpv6PrefixLength に格納されます。静的な外部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、Google Cloud はインスタンスのサブネットワークから外部 IPv6 アドレスを自動的に割り当てます。<br>
        - `external_ipv6_prefix_length`<br>
         **タイプ**: `INT32`<br>
         **プロバイダー名**: `externalIpv6PrefixLength`<br>
-        **説明**: 外部 IPv6 範囲のプレフィックス長。<br>
+        **説明**: ipv6AccessConfigs にのみ適用されます。外部 IPv6 範囲のプレフィックス長。<br>
        - `kind`<br>
         **タイプ**: `STRING`<br>
         **Provider name**: `kind`<br>
@@ -241,11 +241,11 @@ disable_edit: true
        - `name`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `name`<br>
-        **説明**: このアクセス構成の名前。デフォルトおよび推奨される名前は External NAT ですが、My external IP や Network Access など任意の文字列を使用することができます。<br>
+        **説明**: このアクセス構成の名前。accessConfigs (IPv4) の場合、デフォルトおよび推奨される名前は External NAT ですが、My external IP や Network Access など任意の文字列を使用することができます。ipv6AccessConfigs の場合、推奨される名前は External IPv6 です。<br>
        - `nat_ip`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `natIP`<br>
-        **説明**: このインスタンスに関連付けられた外部 IP アドレス。プロジェクトで使用可能な未使用の静的外部 IP アドレスを指定するか、このフィールドを未定義のままにして、共有エフェメラル IP アドレスプールからの IP を使用します。静的な外部 IP アドレスを指定する場合、インスタンスのゾーンと同じリージョンに存在する必要があります。<br>
+        **説明**: accessConfigs (IPv4) にのみ適用されます。このインスタンスに関連付けられた外部 IP アドレス。プロジェクトで使用可能な未使用の静的外部 IP アドレスを指定するか、このフィールドを未定義のままにして、共有エフェメラル IP アドレスプールからの IP を使用します。静的な外部 IP アドレスを指定する場合、インスタンスのゾーンと同じリージョンに存在する必要があります。<br>
        - `network_tier`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `networkTier`<br>
@@ -266,7 +266,7 @@ disable_edit: true
        - `type`<br>
         **タイプ**: `STRING`<br>
         **プロバイダー名**: `type`<br>
-        **説明**: 構成の種類。デフォルトで唯一のオプションは ONE_TO_ONE_NAT です。 <br>
+        **説明**: 構成のタイプ。accessConfigs (IPv4) の場合、デフォルトで唯一のオプションは ONE_TO_ONE_NAT です。ipv6AccessConfigs の場合、デフォルトで唯一のオプションは、DIRECT_IPV6 です。 <br>
         **可能な値**:<br>
           - `DIRECT_IPV6`
           - `ONE_TO_ONE_NAT`
@@ -280,7 +280,7 @@ disable_edit: true
    - `ipv6_address`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `ipv6Address`<br>
-    **説明**: このネットワークインターフェイスの IPv6 内部ネットワークアドレス。静的な内部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、GCP はインスタンスのサブネットワークから内部 IPv6 アドレスを自動的に割り当てます。<br>
+    **説明**: このネットワークインターフェイスの IPv6 内部ネットワークアドレス。静的な内部 IP アドレスを使用するには、未使用でインスタンスのゾーンと同じリージョンにある必要があります。指定しない場合、Google Cloud はインスタンスのサブネットワークから内部 IPv6 アドレスを自動的に割り当てます。<br>
    - `kind`<br>
     **タイプ**: `STRING`<br>
     **Provider name**: `kind`<br>
@@ -316,7 +316,7 @@ disable_edit: true
    - `stack_type`<br>
     **タイプ**: `STRING`<br>
     **プロバイダー名**: `stackType`<br>
-    **説明**: IPv6 機能が有効かどうかを識別するための、このネットワークインターフェイスのスタックタイプ。指定しない場合、IPV4_ONLY が使用されます。このフィールドは、インスタンス生成時とネットワークインターフェイスの更新時の両方で設定することができます。 <br>
+    **説明**: このネットワークインターフェイスのスタックタイプ。IPv4 アドレスのみを割り当てるには、IPV4_ONLY を使用します。IPv4 と IPv6 の両方のアドレスを割り当てるには、IPV4_IPV6 を使用します。指定しない場合は、IPV4_ONLY が使用されます。このフィールドは、インスタンス作成時とネットワークインターフェイスの更新時の両方で設定することができます。<br>
     **可能な値**:<br>
       - `IPV4_IPV6` - ネットワークインターフェイスは、IPv4 と IPv6 の両方のアドレスを持つことができます。<br>
       - `IPV4_ONLY` - ネットワークインターフェイスには、IPv4 アドレスが割り当てられます。<br>

@@ -1,16 +1,15 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/troubleshooting_android.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
   text: dd-sdk-android ソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
-  text: Datadog RUM を探索する
+  text: リアルユーザーモニタリングについて
 kind: documentation
 title: トラブルシューティング
 ---
+
 ## Datadog RUM が初期化されているかどうか確認
 ユーティリティメソッド `isInitialized` を使用して SDK が適切に初期化されていることを確認します。
 

@@ -153,13 +153,13 @@ There are no provider-specific requirements for RPM-based Linux.
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-4. Add your keys to the Worker's bootstrap file:
+4. Add your keys to the Worker's environment variables:
 
     ```
-    sudo cat <<-EOF > /etc/observability-pipelines-worker/bootstrap.yaml
-    api_key: <API_KEY>
-    pipeline_id: <PIPELINE_ID>
-    site: <SITE>
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY: <API_KEY>
+    DD_OP_PIPELINE_ID: <PIPELINE_ID>
+    DD_SITE: <SITE>
     EOF
     ```
 
@@ -197,13 +197,13 @@ There are no provider-specific requirements for RPM-based Linux.
     sudo yum install observability-pipelines-worker
     ```
 
-3. Add your keys to the Worker's bootstrap file:
+3. Add your keys to the Worker's environment variables:
 
     ```
-    sudo cat <<EOF > /etc/observability-pipelines-worker/bootstrap.yaml
-    api_key: <API_KEY>
-    pipeline_id: <PIPELINE_ID>
-    site: <SITE>
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY: <API_KEY>
+    DD_OP_PIPELINE_ID: <PIPELINE_ID>
+    DD_SITE: <SITE>
     EOF
     ```
 

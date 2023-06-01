@@ -8,8 +8,11 @@ further_reading:
 - link: https://ddtrace.readthedocs.io/en/stable/
   tag: Pypi
   text: API ドキュメント
-- link: tracing/glossary/
+- link: /tracing/trace_collection/trace_context_propagation/python/
   tag: ドキュメント
+  text: トレースコンテキストの伝搬
+- link: tracing/glossary/
+  tag: Documentation
   text: サービス、リソース、トレースを調査する
 - link: tracing/
   tag: 高度な使用方法
@@ -71,7 +74,7 @@ type: multi-code-lang
 
 
 `DD_TAGS`
-: すべてのスパンとプロファイルに追加されるデフォルトタグのリスト (例: `layer:api,team:intake`)。バージョン 0.38 以降で利用可能。
+: すべてのスパンとプロファイルに追加されるデフォルトタグのリスト (例: `layer:api,team:intake,key:value`)。バージョン 0.38 以降で利用可能。
 
 `DD_TRACE_HEADER_TAGS`
 : **デフォルト**: `null`<br>
@@ -109,7 +112,7 @@ Web フレームワークとライブラリインスツルメンテーション�
 
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

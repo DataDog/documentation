@@ -6,9 +6,12 @@ further_reading:
 - link: /security/application_security/how-appsec-works
   tag: Documentation
   text: Application Security Management の仕組み
-- link: /security/application_security/getting_started
+- link: /security/application_security/enabling/
   tag: Documentation
   text: ASM の有効化
+- link: /getting_started/application_security/vulnerability_management
+  tag: ガイド
+  text: Application Vulnerability Management を始める
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ

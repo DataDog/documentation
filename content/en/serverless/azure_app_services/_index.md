@@ -35,12 +35,14 @@ Datadog provides monitoring capabilities for all Azure App Service resource type
 
 Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
 
-| OS | Runtime |Status|Documentation| 
-|----|---------|----|----|
-|Windows|.NET|GA|[Windows .NET setup][7]|
-|Windows|Java|Beta|[Windows Java setup][8]|
-|Linux|.NET|Beta|[Linux docs][9]|
-|Linux|Node|Beta|[Linux docs][9]|
+| OS | Runtime |App Type|Status|Documentation| 
+|----|---------|-----|----|----|
+|Windows|.NET|Function App & Web App|GA|[Windows .NET setup][7]|
+|Linux|.NET|Web App|GA|[Linux docs][9]|
+|Linux|Node|Web App|GA|[Linux docs][9]|
+|Linux|PHP|Web App|GA|[Linux docs][9]|
+|Linux|Java|Web App|GA|[Linux docs][9]|
+|Linux|Python|Web App|GA|[Linux docs][9]|
 
 Capabilities:
 - Fully distributed APM tracing using automatic instrumentation

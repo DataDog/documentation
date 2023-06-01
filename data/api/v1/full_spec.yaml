@@ -4388,6 +4388,8 @@ components:
           description: Widget query.
           example: '@service:app'
           type: string
+        sort:
+          $ref: '#/components/schemas/WidgetFieldSort'
         storage:
           description: Option for storage location. Feature in Private Beta.
           example: indexes
@@ -13975,6 +13977,9 @@ components:
           type: string
         parser:
           $ref: '#/components/schemas/SyntheticsVariableParser'
+        secure:
+          description: Determines whether or not the extracted value will be obfuscated.
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object

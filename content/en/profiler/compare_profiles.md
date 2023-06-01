@@ -71,18 +71,6 @@ On the Aggregation view, select a service to see its aggregated profile for a pa
 
 {{< img src="profiler/compare_recent_versions.mp4" alt="Opening the comparison view for two versions." video="true">}}
 
-### Side-by-side and combined comparison views
-
-Switch between **Side-by-Side** and **Combined** to find the view that is most helpful to you.
-
-Side-by-side comparison is helpful when you want to retain the context of both A and B profiles. In this mode, The flame graph on the left represents profile scoped to tags and time range scoped for A while the flame graph on the right represents profile scoped to tags and time range scoped for B. 
-
-The methods highlighted in blue on the left flame graph show methods that were not seen running in profile B during the period that the profile was captured, or among the set of tags queried. Similarly, methods highlighted in purple show methods that were not seen in profile A. 
-
-The Combined comparison mode is helpful when you want to look at code performance changes in a single view. It computes one flame graph that averages method timings in A and B and shows an averaged difference in method timings between the two queries. 
-
-Removed methods are highlighted in green and revealed when you hover over the method frame. Added code is highlighted in red.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
