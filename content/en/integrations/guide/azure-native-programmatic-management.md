@@ -11,9 +11,9 @@ further_reading:
   text: "Managing the Azure Native Integration"
 ---
 
-## Overview
-
 {{% site-region region="us3" %}}
+
+## Overview
 
 The Azure Native integration uses the Datadog resource to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. This method involves creating the [azurerm_datadog_monitor][3] resource and assigning the [Monitoring Reader role][4] in Azure to link your Azure subscription(s) to your Datadog organization. This replaces the App Registration credential process for metric collection and Event Hub setup for log forwarding.
 
@@ -81,7 +81,8 @@ Once the Datadog resource is set up in your Azure account, configure log collect
 
 {{% site-region region="us,us5,eu,ap1,gov" %}}
 
-The Azure Native integration is only supported for users of Datadog's US3 site. If you're using a different [Datadog site][1], see the standard [Azure Programmatic Management guide][2]. If you're using the Datadog US3 site, [change the site selector][3] on the right of this page.
+<div class="alert alert-info">The Azure Native integration is only supported for users of Datadog's US3 site. If you're using a different <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>, see the standard <a href="https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/" target="_blank">Azure Programmatic Management guide</a>. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
+
 
 [1]: /getting_started/site/
 [2]: /integrations/guide/azure-programmatic-management/
