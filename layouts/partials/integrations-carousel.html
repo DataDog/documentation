@@ -68,7 +68,7 @@ x-data="{
             {{ range $idx, $elm := .Params.tile.media }}
             <button 
             class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-            @click="console.log('element offset top: ', $el.offsetTop)">
+            @click="navigateCarousel($el.offsetTop > $el.parentElement.children[activeSlide+1].offsetTop ? 'next': 'prev')">
                 <div class="col h-100 border border-primary">
                     <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{add $idx 1}}">
                 </div>
