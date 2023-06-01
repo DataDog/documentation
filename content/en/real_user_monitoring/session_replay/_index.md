@@ -37,6 +37,7 @@ To reduce Session Replay's network impact and ensure the Session Replay recorder
 Session Replay is available in the RUM Browser SDK. To start collecting data for Session Replay, set up [Datadog RUM Browser Monitoring][4] by creating a RUM application, generating a client token generation, and initializing the RUM Browser SDK.
 
 <div class="alert alert-info">You must be on the latest version of the SDK (v3.6.0 or later)</div>
+<div class="alert alert-info">While Session Replay does not support native iOS and Android apps, it is currently available for web-based mobile apps.</div>
 
 ## Usage
 
