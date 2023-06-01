@@ -27,7 +27,9 @@ further_reading:
 
 Use this guide to manually set up the [Datadog Azure integration][1] through an app registration with read permissions to the monitored subscriptions.
 
-If your Datadog organization is on the Datadog US3 site, you can use the [Azure Native integration][6] to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible.
+**All sites**: All Datadog sites can use the steps on this page to complete the app registration credential process for Azure metric collection and the Event Hub setup for sending Azure Platform Logs.
+
+**US3**: If your organization is on the Datadog US3 site, you can use the Azure Native integration to streamline management and data collection for your Azure environment. Datadog recommends using this method when possible. Setup entails creating a [Datadog resource in Azure][12] to link your Azure subscriptions to your Datadog organization. This replaces the app registration credential process for metric collection and Event Hub setup for log forwarding.
 
 ## Setup
 
@@ -228,3 +230,4 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [9]: /monitors/notify/#notify-your-team
 [10]: https://app.datadoghq.com/integrations/azure
 [11]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
+[12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
