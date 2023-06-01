@@ -35,6 +35,7 @@ x-data="{
     }
 }">
     <div class="carousel-top-row row g-0">
+        {{/*  Carousel (horizontal)  */}}
         <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9 bg-light border border-warning">
             <div class="carousel-items h-100">
                 {{ range $idx, $elm := .Params.tile.media }}
@@ -62,13 +63,15 @@ x-data="{
                 <div class="visually-hidden">Next</div>
             </button>
         </div>
+        {{/*  Carousel (vertical)  */}}
         <div 
         class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
         x-init="setDistanceConstant($el); setVerticalCarouselEl($el)">
             {{ range $idx, $elm := .Params.tile.media }}
             <button 
             class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-            @click="navigateCarousel($el.offsetTop > $el.parentElement.children[activeSlide+1].offsetTop ? 'next': 'prev')">
+            @click="navigateCarousel($el.offsetTop > $el.parentElement.children[activeSlide]?.offsetTop ? 'next': 'prev')"
+            :style="{transform: `translateY(${distanceConstant}px)`}">
                 <div class="col h-100 border border-primary">
                     <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{add $idx 1}}">
                 </div>
@@ -76,6 +79,7 @@ x-data="{
             {{ end }}
         </div>
     </div>
+    {{/*  Carousel item description  */}}
     <div class="row g-0">
         <div class="col-12 p-0 carousel-item-descriptions border border-secondary">
             {{ range $idx, $el := .Params.tile.media }}
