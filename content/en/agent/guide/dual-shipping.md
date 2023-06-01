@@ -1,6 +1,10 @@
 ---
 title: Dual Shipping
 kind: guide
+further_reading:
+- link: "/agent/guide/network/"
+  tag: "Guide"
+  text: "Network Traffic"
 ---
 
 <div class="alert alert-danger">
@@ -9,7 +13,9 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 ## Overview
 
-If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the following configurations.
+If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
+
+For a full list of network traffic destinations, see [Network Traffic][1].
 
 ## Metrics and service checks
 
@@ -49,17 +55,17 @@ In `datadog.yaml`:
 apm_config:
   [...]
   additional_endpoints:
-    "https://trace.agent.datadoghq.com":
+    "intake.profile.datadoghq.com":
     - apikey2
     - apikey3
-    "https://trace.agent.datadoghq.eu":
+    "intake.profile.datadoghq.eu":
     - apikey4
 
   profiling_additional_endpoints:
-    "https://trace.agent.datadoghq.com":
+    "intake.profile.datadoghq.com":
     - apikey2
     - apikey3
-    "https://trace.agent.datadoghq.eu":
+    "intake.profile.datadoghq.eu":
     - apikey4
 ```
 
@@ -131,17 +137,17 @@ In `datadog.yaml`:
 evp_proxy_config:
   [...]
   additional_endpoints:
-    "https://mydomain.datadoghq.com":
+    "https://<VERSION>-app.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "https://mydomain.datadoghq.eu":
+    "https://<VERSION>-app.agent.datadoghq.eu":
     - apikey4
 ```
 
 ### Environment variable configuration
 
 ```bash
-DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://mydomain.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://mydomain.datadoghq.eu\": [\"apikey4\"]}'
+DD_EVP_PROXY_CONFIG_ADDITIONAL_ENDPOINTS='{\"https://<VERSION>-app.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://<VERSION>-app.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
 ## Logs
@@ -273,7 +279,7 @@ compliance_config:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "https://<VERSION>-app.agent.datadoghq.eu"
       Port: 443
       is_reliable: true
 ```
@@ -282,7 +288,7 @@ compliance_config:
 
 ```bash
 DD_COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 ## Cloud Workload Security (CWS)
@@ -297,7 +303,7 @@ runtime_security_config:
     use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "mydomain.datadoghq.com"
+      Host: "https://<VERSION>-app.agent.datadoghq.eu"
       Port: 443
       is_reliable: true
 ```
@@ -306,7 +312,7 @@ runtime_security_config:
 
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"mydomain.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
+DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
 ## Dual shipping in Kubernetes
@@ -341,6 +347,11 @@ and add the relevant settings to `customAgentConfig`.
 
 If you're using the [Datadog Agent operator][1], similarly, you can set the `agent.customConfig.configData` key. All configurable keys are documented in [v1][2] and [v2][3].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/guide/network/
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
 [3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
