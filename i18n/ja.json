@@ -52,7 +52,7 @@
   },
 
   "live_chat_support_sentence": {
-    "other": "Datadog サポートチームと月曜日から金曜日の 10:00 から 19:00 (東部標準時間) までアプリ内チャットで会話することができます。"
+    "other": "アプリ内チャットで Datadog サポートチームと月曜日から金曜日の 10:00 から 19:00 (東部標準時) にチャットできます。ベストプラクティスについては、<a href=\"https://docs-staging.datadoghq.com/bryce/add-chat-page/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">チャットで連絡を取る</a>を参照してください。"
   },
 
   "event_stream_support_sentence": {

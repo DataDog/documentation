@@ -11,6 +11,9 @@ further_reading:
   - link: "dashboards/querying/#incident-management-analytics"
     tag: "Documentation"
     text: "Incident Management Analytics"
+  - link: 'https://dtdg.co/fe'
+    tag: 'Foundation Enablement'
+    text: 'Join an interactive session to improve your Incident Management'
   - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
     tag: 'Blog'
     text: 'More efficient pair programming with Datadog CoScreen'

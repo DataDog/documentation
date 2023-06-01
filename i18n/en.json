@@ -52,7 +52,7 @@
   },
 
   "live_chat_support_sentence": {
-    "other": "Chat with the Datadog Support Team Monday through Friday from 10:00 to 19:00 ET (Eastern Time) using in-app chat. See <a href=\"https://docs-staging.datadoghq.com/bryce/add-chat-page/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">Reaching out on chat</a> for best practices."
+    "other": "Chat with the Datadog Support Team Monday through Friday from 10:00 to 19:00 ET (Eastern Time) using in-app chat. See <a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">Reaching out on chat</a> for best practices."
   },
 
   "event_stream_support_sentence": {

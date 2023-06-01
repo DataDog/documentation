@@ -4,7 +4,7 @@ aliases:
 - /ja/integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags/
 - /ja/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
 further_reading:
-- link: /observability_pipelines/installation/
+- link: /observability_pipelines/setup/
   tag: ドキュメント
   text: 観測可能性パイプラインを設定する
 kind: ガイド
@@ -209,7 +209,7 @@ transforms:
 [1]: /ja/account_management/billing/usage_metrics/#types-of-usage
 [2]: /ja/account_management/billing/usage_attribution/
 [3]: /ja/metrics/metrics-without-limits/
-[4]: /ja/observability_pipelines/installation/
+[4]: /ja/observability_pipelines/setup/
 [5]: https://vector.dev/docs/reference/vrl/
 [6]: /ja/account_management/billing/usage_attribution/
 [7]: https://vector.dev/docs/reference/vrl/

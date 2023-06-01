@@ -92,7 +92,7 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 
 - アプリケーションはアクセストークンを取得するために、認可コードと `code_verifier` を指定して Datadog にトークンリクエストを送信します。トークンエンドポイントは `code_verifier` を `code_challenge_method` を使って変換し、元の `code_challenge` の値と比較することで認可コードを検証します。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -100,7 +100,7 @@ OAuth2 プロトコルはいくつかの付与フローをサポートしてい�
 [2]: /ja/api/latest/scopes/
 [3]: /ja/developers/datadog_apps/#oauth-api-access
 [4]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[5]: /ja/developers/integrations/oauth_for_data_integrations
+[5]: /ja/developers/integrations/oauth_for_integrations
 [6]: /ja/developers/authorization/oauth2_endpoints/?tab=authorizationendpoints#request-authorization-from-a-user
 [7]: /ja/developers/authorization/oauth2_endpoints/?tab=apikeycreationendpoints#create-an-api-key-on-behalf-of-a-user
 [8]: https://tools.ietf.org/html/rfc6749#section-4.1

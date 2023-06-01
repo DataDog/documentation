@@ -2,9 +2,9 @@
 aliases:
 - /ja/integrations/observability_pipelines/working_with_data/
 further_reading:
-- link: /getting_started/observability_pipelines/
+- link: /observability_pipelines/setup/
   tag: ドキュメント
-  text: 観測可能性パイプラインと Datadog の概要
+  text: 観測可能性パイプラインを設定する
 - link: /observability_pipelines/reference/transforms/#awsec2metadata
   tag: ドキュメント
   text: AWS EC2 インスタンスが発するメタデータのパース

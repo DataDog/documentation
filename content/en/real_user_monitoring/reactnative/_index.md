@@ -5,7 +5,7 @@ description: Collect RUM data from your React Native projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative Source code
+  text: Source code for dd-sdk-reactnative
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog
   text: Monitor React Native applications

@@ -44,7 +44,7 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.3.0
+integration_version: 5.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

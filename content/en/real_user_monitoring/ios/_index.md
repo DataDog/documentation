@@ -8,7 +8,7 @@ aliases:
 further_reading:
     - link: "https://github.com/DataDog/dd-sdk-ios"
       tag: "Github"
-      text: "dd-sdk-ios Source Code"
+      text: "Source code for dd-sdk-ios"
     - link: "/real_user_monitoring"
       tag: "Documentation"
       text: "Learn how to explore your RUM data"

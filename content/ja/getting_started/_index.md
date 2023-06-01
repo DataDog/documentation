@@ -35,6 +35,5 @@ title: はじめに
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: CSM を使いこなすためのベストプラクティスをご紹介します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: ASM を使いこなすためのベストプラクティスをご紹介します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Cloud SIEM を使いこなすためのベストプラクティスをご紹介します。{{< /nextlink >}}
-{{< nextlink href="/getting_started/observability_pipelines" >}}<u>Observability Pipelines</u>: あらゆるソースからあらゆる宛先まで、ログやメトリクスを収集、処理、ルーティングする方法を学びます。{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: ラーニングパスに沿って、セルフガイドのクラスやラボを受講し、Datadog の認定プログラムを確認します。{{< /nextlink >}}
 {{< /whatsnext >}}

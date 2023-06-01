@@ -56,7 +56,7 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | 1.47.0 <br/>  |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   |  <br/> --> 1.48.0<br/> --> v1.50.0<br/> --> 1.48.0     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
 
 The minimum tracer version to get all supported ASM capabilities for Go is 1.48.0.
 
@@ -74,4 +74,4 @@ The minimum tracer version to get all supported ASM capabilities for Go is 1.48.
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
 [8]: https://github.com/golang/go/wiki/cgo
 [9]: /tracing/trace_collection/compatibility/go/
-[10]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[10]: /agent/remote_config/#enabling-remote-configuration
