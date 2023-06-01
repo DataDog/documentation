@@ -50,8 +50,10 @@ User monitoring tags are applied on the root span and start with the prefix `usr
 The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
 
 ```java
-import datadog.trace.api.GlobalTracer;
-import datadog.appsec.api.Blocking;
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+import datadog.appsec.api.blocking.Blocking;
+import datadog.trace.api.interceptor.MutableSpan;
 
 // Get the active span
 final Span span = GlobalTracer.get().activeSpan();
