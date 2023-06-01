@@ -52,7 +52,7 @@ In your first three days with Datadog ASM:
 
 4. Now that ASM is set up detecting suspicious requests on your service in real-time, **let the product run for a couple days**.
 
-<div class="alert alert-info">If your services use recent versions of tracing libraries, ASM immediately <a href="/security/application_security/risk_management">detects security vulnerabilities</a> in the upstream libraries that your services have as dependencies, and APM previews this information for you in its Security view. Optionally, <strong>explore ASM's consolidated <a href="https://app.datadoghq.com/security/appsec/vm">Vulnerabilities view</a></strong> (beta) to see how it helps you triage and prioritize vulnerabilities.</div>
+If your services use recent versions of tracing libraries, ASM immediately [detects security vulnerabilities][13] in the upstream libraries that your services have as dependencies, and APM previews this information for you in its Security view. Optionally, explore ASM's consolidated [Vulnerabilities view][14] to see how it helps you triage and prioritize vulnerabilities.
 
 **Note**: ASM also enables you to **track user activity**, identifying authenticated users making suspicious requests. [Setting up authenticated user tracking][5] is not required to use ASM, but it does help you get visibility on authenticated attacks and attackers. 
 
@@ -100,3 +100,5 @@ Over the next few days:
 [10]: https://app.datadoghq.com/security/appsec/reports-configuration
 [11]: https://app.datadoghq.com/security/configuration/notification-rules
 [12]: /security/notifications/rules/
+[13]: /security/application_security/risk_management
+[14]: https://app.datadoghq.com/security/appsec/vm
