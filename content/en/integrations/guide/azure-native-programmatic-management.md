@@ -83,10 +83,6 @@ Once the Datadog resource is set up in your Azure account, configure log collect
 
 <div class="alert alert-info">The Azure Native integration is only supported for users of Datadog's US3 site. If you're using a different <a href="https://docs.datadoghq.com/getting_started/site/" target="_blank">Datadog site</a>, see the standard <a href="https://docs.datadoghq.com/integrations/guide/azure-programmatic-management/" target="_blank">Azure Programmatic Management guide</a>. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
 
-
-[1]: /getting_started/site/
-[2]: /integrations/guide/azure-programmatic-management/
-[3]: ?site=us3
 {{% /site-region %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
