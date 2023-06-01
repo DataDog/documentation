@@ -151,7 +151,7 @@ For the Cassandra Nodetool integration to continue working, apply the following 
 
 ## Security logs channel
 
-If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Reader Group to collect logs from the Security logs channel:
+If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Readers Group to collect logs from the Security logs channel:
 
 1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
 2. Navigate to *System Tools* -> *Local Users and Groups* -> *Groups*.
