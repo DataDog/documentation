@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-Use this guide to set up and manage logging directly from your Azure subscriptions to Datadog through the [Datadog resource in Azure][7], also known as the Azure native integration. You can manage the collection of three kinds of Azure logs. Find instructions and additional details in the sections below:
+Use this guide to set up and manage logging directly from your Azure subscriptions to Datadog through the [Datadog resource in Azure][7]. You can manage the collection of three kinds of Azure logs. Find instructions and additional details in the sections below:
 
    - [Subscription level logs](#subscription-level-logs)
    - [Azure resource logs](#azure-resource-logs)
@@ -58,7 +58,7 @@ Azure AD logs contain the history of sign-in activity and an audit trail of chan
 
 {{< site-region region="us,eu,us5,gov,ap1" >}}
 
-<div class="alert alert-warning">The Datadog resource in Azure is only available for users on Datadog's US3 site. If you are using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure Logs to Datadog</a> guide for configuration options.</div>
+<div class="alert alert-info">The Datadog resource in Azure is only available for organizations on Datadog's US3 site. If you are using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure Logs to Datadog</a> guide for configuration options.</div>
 
 {{< /site-region >}}
 
