@@ -73,7 +73,7 @@ Python APM クライアントライブラリは，ライブラリと Python ラ�
 | [algoliasearch][18]                | >= 1.20.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [asyncpg][19]                      | >= 0.18.0         | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
 | [Cassandra][20]                    | 3.5 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
-| [Elasticsearch][21]                | 1.6 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Elasticsearch][21]                | >= 1.6、< 8.0     | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Flask Cache][22]                  | 0.12 以降           | いいえ | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
 | [Mariadb][23]                      | >= 1.0.0          | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
 | [Memcached][24] [pylibmc][25]      | 1.4 以降            | はい | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |

@@ -73,6 +73,56 @@ Select an application type to start collecting RUM data:
 
 </br>
 
+## Supported endpoints for SDK domains
+
+All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
+
+### Mobile
+
+| Site | Site URL                                      |
+|------|-----------------------------------------------|
+| US1  | `https://browser-intake-datadoghq.com`        |
+| US3  | `https://browser-intake-us3-datadoghq.com`    |
+| US5  | `https://browser-intake-us5-datadoghq.com`    |
+| EU1  | `https://browser-intake-datadoghq.eu`         |
+| US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+
+### Browser
+
+#### Logs
+
+| Site | Site URL                                        |
+|------|-------------------------------------------------|
+| US1  | `https://logs.browser-intake-datadoghq.com`     |
+| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
+| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
+
+#### Session Replay
+
+| Site | Site URL                                                  |
+|------|-----------------------------------------------------------|
+| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
+| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
+| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
+
+#### RUM
+
+| Site | Site URL                                       |
+|------|------------------------------------------------|
+| US1  | `https://rum.browser-intake-datadoghq.com`     |
+| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
+| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
+
 ## Explore Datadog RUM
 
 Access RUM by navigating to [**UX Monitoring > RUM Applications**][1].

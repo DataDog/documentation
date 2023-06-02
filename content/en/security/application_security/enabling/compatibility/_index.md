@@ -13,11 +13,14 @@ further_reading:
 
 The following ASM capabilities are supported relative to each language's tracing library:
 
+
 | ASM capability                   | Java | .NET | Node.js | Python | Go | Ruby | PHP |
-| -------------------------------- | ----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|
-| Threat Detection <br/>  | 1.8.0 <br/>   | 2.23.0 <br/> | 3.31.1 <br/> | 1.9.0<br/>   | 1.47.0 <br/>  | 1.9.0<br/>   | 0.84.0 <br/>   |
+| -------------------------------- | ----------------------------------|----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|
+| Threat Detection <br/> --> Business logic API | <br/>  1.8.0 <br/>   | <br/> 2.23.0 <br/> | <br/> 3.13.1 <br/> | <br/> 1.9.0<br/>   | <br/> 1.47.0 <br/>  | <br/> 1.9.0<br/>   | <br/> 0.84.0 <br/>   |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 1.9.0<br/>    | 2.26.0 <br/> | <br/> --> 3.11.0<br/> --> 3.19.0<br/><br/> --> 3.11.0     | 1.10.0<br/>    |  <br/>--> 1.48.0<br/> --> v1.50.0<br/><br/> --> 1.48.0     |  1.11.0<br/>    | 0.86.0<br/>    |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | 1.1.4 <br/> | 2.16.0 <br/> | 2.23.0 for Node.js 12+, or 3.10.0 for Node.js 14+ <br/>| 1.5.0 <br/>| not supported<br/>| not supported<br/>| not supported<br/>|
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/> | <br/> <br/> 1.1.4 | <br/> <br/> 2.16.0 <br/> <br/> | <br/> <br/> 2.23.0 for Node.js 12+, or 3.10.0 for Node.js 14+ <br/>| <br/><br/> 1.5.0 <br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>|
+| Vulnerability Management <br/> --> Custom code vulnerability detection | <br/> <br/> 1.15.0| <br/> <br/> private beta | <br/> <br/> 2.32.0 for NodeJS 12+, or 3.19.1 for NodeJS 14+ <br/>| <br/> <br/> private beta <br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>|
+
 
 Select your application language for details about framework compatibility and feature support.
 

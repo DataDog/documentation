@@ -4388,6 +4388,8 @@ components:
           description: Widget query.
           example: '@service:app'
           type: string
+        sort:
+          $ref: '#/components/schemas/WidgetFieldSort'
         storage:
           description: Option for storage location. Feature in Private Beta.
           example: indexes
