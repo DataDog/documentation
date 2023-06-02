@@ -55,4 +55,4 @@ The [`@datadog/datadog-ci` package][2] allows you to run Static Analysis directl
 
 [1]: https://app.datadoghq.com/ci/static-analysis
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /static_analysis/configuration/
+[3]: /continuous_integration/static_analysis/configuration/
