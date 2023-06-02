@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -333,6 +333,36 @@
               - link: "/continuous_testing/testing_tunnel"
                 tag: "Documentation"
                 text: "Learn about the Testing Tunnel"
+
+      - repo_name: datadog-static-analyzer-circleci-orb
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_integration/static_analysis/'
+            file_name: 'circleci_orb.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
+              title: Static Analysis and CircleCI Orb
+              kind: documentation
+              description: Use the Datadog Static Analysis CI extension to run Static Analysis tests in a CI pipeline.
+      
+      - repo_name: datadog-static-analyzer-github-action
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_integration/static_analysis/'
+            file_name: 'github_actions.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
+              title: Static Analysis and GitHub Actions
+              kind: documentation
+              description: Use the Datadog Static Analysis CI extension to run Static Analysis tests in a CI pipeline.
 
       - repo_name: datadog-cdk-constructs
         contents:
