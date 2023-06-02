@@ -1,6 +1,6 @@
 ---
 core_product:
-- Synthetic モニタリング
+- synthetic monitoring
 title: マルチステップ API テスト
 ---
 マルチステップ API テストは、いくつかの HTTP リクエストを連鎖させて、サービスでのユーザージャーニーを監視します。
