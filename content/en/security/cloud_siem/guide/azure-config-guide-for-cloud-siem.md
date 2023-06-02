@@ -13,11 +13,11 @@ further_reading:
   text: "Create new detection rules"
 ---
 
-## Overview 
+## Overview
 
 Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure resource modification. The threats are surfaced as Security Signals in the Security Signals Explorer for triaging.
 
-This guide walks you through configuring Microsoft Azure to send logs to Datadog so that you can start detecting threats on your Azure Platform logs. 
+This guide walks you through configuring Microsoft Azure to send logs to Datadog so that you can start detecting threats on your Azure Platform logs.
 
 <div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/integrations/azure/?tab=manualinstallation#log-collection
 ">Microsoft Azure log collection</a>. </div>
@@ -72,7 +72,7 @@ If you want to use an existing resource group, skip to Create an Event Hubs name
 1. Click **Create**.
 1. In the **Resource group** dropdown menu, select the resource group you want to add the Event Hub to.
 1. Enter a name for the namespace.
-1. Select a location for the namespace.  
+1. Select a location for the namespace.
 **Note**: The Event Hub must be in the same Location as the resource you want to submit logs from. For activity logs or other account-wide log sources, you can choose any region.
 1. Select a pricing tier.
 1. Leave the throughput units (for standard tier) or processing units (for premium tier) as it is.
