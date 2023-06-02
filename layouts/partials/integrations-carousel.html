@@ -2,6 +2,7 @@
 {{ $newCarousel := slice }}
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $cardView := 3 }}
+{{ $isScrollableCarousel := (gt $asset_len 3)}}
 {{ range $idx, $el := $media }}
     {{ if gt $idx (sub $asset_len 4)}}
     {{ $newCarousel = $newCarousel | append . }}
@@ -21,7 +22,7 @@ class="integrations-carousel container border border-primary container p-0"
 x-data="{
     activeSlide: 0,
     distanceConstant: 0,
-    carouselViewportActiveBtnTop: 0,
+    activeBtnOffsetTop: 0,
     cardView: {{$cardView}},
     verticalCarouselEl: {},
     navigateCarousel (direction) {
@@ -30,22 +31,22 @@ x-data="{
         if(direction === 'next'){
             if(this.activeSlide === max){
                 this.activeSlide = 0
-                this.carouselViewportActiveBtnTop = this.distanceConstant * 3
+                this.activeBtnOffsetTop = this.distanceConstant * 3
                 this.verticalCarouselEl.style.scrollBehavior = 'auto'
                 endReached = true
             }else{
                 this.activeSlide += 1
-                this.carouselViewportActiveBtnTop += this.distanceConstant
+                this.activeBtnOffsetTop += this.distanceConstant
             }
         }else{
             if(!this.activeSlide){
                 this.activeSlide = {{ $asset_len }} - 1
-                this.carouselViewportActiveBtnTop = this.verticalCarouselEl.scrollHeight - (this.distanceConstant*4)
+                this.activeBtnOffsetTop = this.verticalCarouselEl.scrollHeight - (this.distanceConstant*2)
                 this.verticalCarouselEl.style.scrollBehavior = 'auto'
                 endReached = true
             }else{
                 this.activeSlide -= 1
-                this.carouselViewportActiveBtnTop -= this.distanceConstant
+                this.activeBtnOffsetTop -= this.distanceConstant
             }
         }
 
@@ -60,7 +61,7 @@ x-data="{
     },
     setDistanceConstant (carouselVertEl) {
         // sets the distance from middle btn to top of vertical carousel as a constant
-        this.distanceConstant = carouselVertEl.children[1].offsetTop
+        this.distanceConstant = {{ $isScrollableCarousel }} && carouselVertEl.children[1].offsetTop
     },
     setVerticalCarouselEl (carouselVertEl) {
         this.verticalCarouselEl = carouselVertEl
@@ -100,14 +101,15 @@ x-data="{
         {{/*  Carousel (vertical)  */}}
         <div 
         class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
-        x-init="setDistanceConstant($el); setVerticalCarouselEl($el); carouselViewportActiveBtnTop = distanceConstant*3">
+        x-init="setDistanceConstant($el); setVerticalCarouselEl($el); activeBtnOffsetTop = distanceConstant ? distanceConstant*3: 103">
             {{ range $idx, $elm := $media }}
-                {{ if gt $idx (sub $asset_len 4)}}
+                {{ if and (gt $idx (sub $asset_len 4)) $isScrollableCarousel}}
                 <button 
                 class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-                @click="navigateCarousel($el.offsetTop > carouselViewportActiveBtnTop ? 'next': 'prev')"
+                @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}-' + (($el.offsetTop-distanceConstant)+($el.offsetTop+distanceConstant))/2"
+                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
                 >
                 </button>
                 {{ end }}
@@ -115,22 +117,24 @@ x-data="{
             {{ range $idx, $elm := $media }}
             <button
             class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-            @click="navigateCarousel($el.offsetTop > carouselViewportActiveBtnTop ? 'next': 'prev')"
+            @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
             :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-            x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}-' + (($el.offsetTop-distanceConstant)+($el.offsetTop+distanceConstant))/2"
+            x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+            :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
             >
             </button>
             {{ end }}
             {{ range $idx, $elm := first 1 $media }}
-                {{/*  {{ if lt $idx  $cardView}}  */}}
+                {{ if $isScrollableCarousel}}
                 <button 
                 class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-                @click="navigateCarousel($el.offsetTop > carouselViewportActiveBtnTop ? 'next': 'prev')"
+                @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}-' + (($el.offsetTop-distanceConstant)+($el.offsetTop+distanceConstant))/2"
+                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
                 >
                 </button>
-                {{/*  {{ end }}  */}}
+                {{ end }}
             {{ end }}
         </div>
     </div>

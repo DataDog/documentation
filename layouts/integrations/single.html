@@ -2,6 +2,8 @@
     <h1 id="pagetitle">{{ if .Params.integration_title }}{{ .Params.integration_title }}{{ else }}{{.Title}}{{ end }}</h1>
     {{ partial "integration-labels/integration-labels.html" . }}
     {{ partial "breadcrumbs.html" . }}
+    {{ if in .Params.categories "marketplace" }}
     {{ partial "integrations-carousel.html" . }}
+    {{ end }}
     {{ .Content }}
 {{ end }}
