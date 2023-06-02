@@ -21,6 +21,7 @@ class="integrations-carousel container border border-primary container p-0"
 x-data="{
     activeSlide: 0,
     distanceConstant: 0,
+    carouselViewportActiveBtnTop: 0,
     cardView: {{$cardView}},
     verticalCarouselEl: {},
     navigateCarousel (direction) {
@@ -29,19 +30,22 @@ x-data="{
         if(direction === 'next'){
             if(this.activeSlide === max){
                 this.activeSlide = 0
+                this.carouselViewportActiveBtnTop = this.distanceConstant * 3
                 this.verticalCarouselEl.style.scrollBehavior = 'auto'
                 endReached = true
             }else{
                 this.activeSlide += 1
+                this.carouselViewportActiveBtnTop += this.distanceConstant
             }
         }else{
-            console.log(this.activeSlide ,max)
             if(!this.activeSlide){
                 this.activeSlide = {{ $asset_len }} - 1
+                this.carouselViewportActiveBtnTop = this.verticalCarouselEl.scrollHeight - (this.distanceConstant*4)
                 this.verticalCarouselEl.style.scrollBehavior = 'auto'
                 endReached = true
             }else{
                 this.activeSlide -= 1
+                this.carouselViewportActiveBtnTop -= this.distanceConstant
             }
         }
 
@@ -96,38 +100,37 @@ x-data="{
         {{/*  Carousel (vertical)  */}}
         <div 
         class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
-        x-init="setDistanceConstant($el); setVerticalCarouselEl($el)">
+        x-init="setDistanceConstant($el); setVerticalCarouselEl($el); carouselViewportActiveBtnTop = distanceConstant*3">
             {{ range $idx, $elm := $media }}
                 {{ if gt $idx (sub $asset_len 4)}}
                 <button 
                 class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-                @click="navigateCarousel($el.offsetTop > verticalCarouselEl.children[activeSlide]?.offsetTop ? 'next': 'prev')"
-                :style="{transform: `translateY(-${distanceConstant * (cardView-1)}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                @click="navigateCarousel($el.offsetTop > carouselViewportActiveBtnTop ? 'next': 'prev')"
+                :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}-' + (($el.offsetTop-distanceConstant)+($el.offsetTop+distanceConstant))/2"
                 >
                 </button>
                 {{ end }}
             {{ end }}
             {{ range $idx, $elm := $media }}
-            <button 
+            <button
             class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-            @click="navigateCarousel($el.offsetTop > verticalCarouselEl.children[activeSlide]?.offsetTop ? 'next': 'prev')"
-            :style="{transform: `translateY(-${distanceConstant * (cardView-1)}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-            x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+            @click="navigateCarousel($el.offsetTop > carouselViewportActiveBtnTop ? 'next': 'prev')"
+            :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+            x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}-' + (($el.offsetTop-distanceConstant)+($el.offsetTop+distanceConstant))/2"
             >
             </button>
             {{ end }}
-            {{ range $idx, $elm := $media }}
-                {{ if lt $idx  $cardView}}
+            {{ range $idx, $elm := first 1 $media }}
+                {{/*  {{ if lt $idx  $cardView}}  */}}
                 <button 
                 class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-                @click="navigateCarousel($el.offsetTop > verticalCarouselEl.children[activeSlide]?.offsetTop ? 'next': 'prev')"
-                :style="{transform: `translateY(-${distanceConstant * (cardView-1)}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-
-                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                @click="navigateCarousel($el.offsetTop > carouselViewportActiveBtnTop ? 'next': 'prev')"
+                :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}-' + (($el.offsetTop-distanceConstant)+($el.offsetTop+distanceConstant))/2"
                 >
                 </button>
-                {{ end }}
+                {{/*  {{ end }}  */}}
             {{ end }}
         </div>
     </div>
