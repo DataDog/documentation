@@ -1,34 +1,55 @@
 {{ $media := .Params.tile.media}}
+{{ $newCarousel := slice }}
 {{ $asset_len := ($media | default slice) | len  }}
+{{ $cardView := 3 }}
+{{ range $idx, $el := $media }}
+    {{ if gt $idx (sub $asset_len 4)}}
+    {{ $newCarousel = $newCarousel | append . }}
+    {{ end }}
+{{ end }}
+{{ $newCarousel = $newCarousel | append $media }}
+{{ range $idx, $el := $media }}
+    {{ if lt $idx  $cardView}}
+    {{ $newCarousel = $newCarousel | append . }}
+    {{ end }}
+{{ end }}
+
+{{ $new_asset_len := ($newCarousel | default slice) | len  }}
+
 <div 
 class="integrations-carousel container border border-primary container p-0"
 x-data="{
     activeSlide: 0,
     distanceConstant: 0,
+    cardView: {{$cardView}},
     verticalCarouselEl: {},
     navigateCarousel (direction) {
         const max = {{ $asset_len }} - 1
+        let endReached = false
         if(direction === 'next'){
             if(this.activeSlide === max){
                 this.activeSlide = 0
+                this.verticalCarouselEl.style.scrollBehavior = 'auto'
+                endReached = true
             }else{
                 this.activeSlide += 1
             }
         }else{
+            console.log(this.activeSlide ,max)
             if(!this.activeSlide){
-                this.activeSlide = max
+                this.activeSlide = {{ $asset_len }} - 1
+                this.verticalCarouselEl.style.scrollBehavior = 'auto'
+                endReached = true
             }else{
                 this.activeSlide -= 1
             }
         }
-        // navigate vertical carousel
+
+        // navigate vertical carousel. everything is offset by -206px. i need to scroll up by 103px 
         this.verticalCarouselEl.scrollTop = this.activeSlide * this.distanceConstant
-    },
-    infiniteCarousel () {
-        console.log('---')
-    },
-    getTransformY (idx) {
-        return idx < ({{ $asset_len }} - 1) ? this.distanceConstant : -(idx * this.distanceConstant)
+        if(endReached){
+            this.verticalCarouselEl.style.scrollBehavior = 'smooth'
+        }
     },
     isHidden (idx) {
         return idx !== this.activeSlide && 'd-none'
@@ -44,13 +65,15 @@ x-data="{
     <div class="carousel-top-row row g-0">
         {{/*  Carousel (horizontal)  */}}
         <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9 bg-light border border-warning">
-            <div class="carousel-items h-100">
+            <div 
+            class="carousel-items-horizontal h-100"
+            >
                 {{ range $idx, $elm := $media }}
                 <div class="carousel-item h-100" :class="isHidden({{ $idx }})">
                     {{ if eq $elm.media_type "image"}}
-                    <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{ add $idx 1 }}" >
+                    <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
                     {{ else }}
-                    <video class="h-100 w-100" poster="{{$elm.image_url}}" preload="none">
+                    <video class="h-100 w-100" poster="{{$elm.image_url}}" preload="none" alt="{{ $elm.image_url }}-{{add $idx 1}}">
                         <source type="video/mp4">
                     </video>
                     {{ end }}
@@ -75,15 +98,36 @@ x-data="{
         class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
         x-init="setDistanceConstant($el); setVerticalCarouselEl($el)">
             {{ range $idx, $elm := $media }}
+                {{ if gt $idx (sub $asset_len 4)}}
+                <button 
+                class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
+                @click="navigateCarousel($el.offsetTop > verticalCarouselEl.children[activeSlide]?.offsetTop ? 'next': 'prev')"
+                :style="{transform: `translateY(-${distanceConstant * (cardView-1)}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                >
+                </button>
+                {{ end }}
+            {{ end }}
+            {{ range $idx, $elm := $media }}
             <button 
             class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
             @click="navigateCarousel($el.offsetTop > verticalCarouselEl.children[activeSlide]?.offsetTop ? 'next': 'prev')"
-            :style="{transform: `translateY(${getTransformY({{ $idx }})}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-            :disabled="{{ $idx }} === activeSlide"
-            x-text="$el.offsetTop + '-{{ add $idx 1}}'"
+            :style="{transform: `translateY(-${distanceConstant * (cardView-1)}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+            x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
             >
-                
             </button>
+            {{ end }}
+            {{ range $idx, $elm := $media }}
+                {{ if lt $idx  $cardView}}
+                <button 
+                class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
+                @click="navigateCarousel($el.offsetTop > verticalCarouselEl.children[activeSlide]?.offsetTop ? 'next': 'prev')"
+                :style="{transform: `translateY(-${distanceConstant * (cardView-1)}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+
+                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                >
+                </button>
+                {{ end }}
             {{ end }}
         </div>
     </div>
