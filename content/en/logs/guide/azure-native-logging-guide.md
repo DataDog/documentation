@@ -58,7 +58,7 @@ Azure AD logs contain the history of sign-in activity and an audit trail of chan
 
 {{< site-region region="us,eu,us5,gov,ap1" >}}
 
-<div class="alert alert-info">The Datadog resource in Azure is only available for organizations on Datadog's US3 site. If you are using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure Logs to Datadog</a> guide for configuration options. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
+<div class="alert alert-info">The Datadog resource in Azure is only available for organizations on Datadog's US3 site. If you're using a different Datadog site, see the <a href="https://docs.datadoghq.com/logs/guide/azure-logging-guide/" target="_blank">Send Azure Logs to Datadog</a> guide for configuration options. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
 
 {{< /site-region >}}
 
