@@ -132,7 +132,7 @@ Provide the following values:
 {{< /site-region >}}
 
 {{< site-region region="us,eu,us5,gov,ap1" >}}
-<div class="alert alert-info">The Azure native integration is only available for users on Datadog's US3 site. If you're using a different Datadog site, see the <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/" target="_blank">Azure Manual Setup Guide</a> for instructions on creating an app registration with read permissions to your Azure subscriptions. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
+<div class="alert alert-info">The Azure native integration is only available for organizations on Datadog's US3 site. If you're using a different Datadog site, see the <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/" target="_blank">Azure Manual Setup Guide</a> for instructions on creating an app registration with read permissions to your Azure subscriptions. If you're using the Datadog US3 site, <a href="?site=us3" target="_blank">change the site selector</a> on the right of this page.</div>
 
 [1]: ?site=us3
 {{< /site-region >}}
