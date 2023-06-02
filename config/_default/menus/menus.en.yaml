@@ -2187,6 +2187,11 @@ main:
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
     weight: 403
+  - name: Default Rules
+    url: continuous_integration/static_analysis/default_rules
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_default_rules
+    weight: 404
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
