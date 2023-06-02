@@ -22,7 +22,7 @@ algolia:
   rank: 70
   category: Documentation
   subcategory: Synthetic API Tests
-  tags: ["icmp", "icmp test, "icmp tests"]
+  tags: ["icmp", "icmp test", "icmp tests"]
 ---
 
 ## Overview
