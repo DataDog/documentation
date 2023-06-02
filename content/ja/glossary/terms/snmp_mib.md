@@ -1,6 +1,6 @@
 ---
 core_product:
-- ネットワークデバイスモニタリング
+- network device monitoring
 title: SNMP 管理情報ベース (MIB)
 ---
 SNMP MIB は、管理対象オブジェクトのプロパティ (データ型、アクセス権限など) の定義をまとめたものです。
