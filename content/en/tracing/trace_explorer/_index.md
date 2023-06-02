@@ -122,14 +122,14 @@ You can search retained traces in the same way as you do a Live Search. To switc
 {{< tabs >}}
 {{% tab "List view" %}}
 
-All spans indexed by custom retention filters and the intelligent retention filter are available to be searched in the List view. However, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search does not return any results, unlike when using [Live Search](#live-search-for-15-minutes).
+All spans indexed by custom retention filters *and* the intelligent retention filter are available to be searched in the List view. However, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search does not return any results, unlike when using [Live Search](#live-search-for-15-minutes).
 
 {{% /tab %}}
 {{% tab "Timeseries View" %}}
 
-All spans indexed by custom retention filters and the intelligent retention filter are available to be searched when using trace analytics.
+All spans indexed by custom retention filters *and* the intelligent retention filter are available to be searched when using trace analytics.
 
-From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. Please note that spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards and notebooks and from trace analytics monitor evaluation. More information can be found [here][4].
+From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. **Note**: Spans indexed by the intelligent retention filter are excluded from APM queries that appear in dashboards and notebooks and from trace analytics monitor evaluation. More information can be found [here][4].
 
 [1]: /dashboards/widgets/timeseries/
 [2]: /monitors/types/apm/?tab=analytics
