@@ -342,6 +342,33 @@ For more information about outbound connections from the Agent, see the [Network
 
 If you're still unsure about your issue, you may reach out to the [Datadog support][6].
 
+## FAQ
+
+**1. Does the Datadog Agent and the Datadog FIPS proxy have to be on same host?**
+
+Yes, the FIPS compliance is not retained if the Datadog FIPS proxy and the Datadog Agent are not on the same host.
+The same applies if the `fips.enabled` option in not set to `true` in `datadog.yaml`.
+
+**2. Are customers responsible for hardening their host?**
+
+Yes, **Host security and hardening are customer responsibilities.**
+
+**3. Are the FIPS proxy images hardened?**
+
+No, FIPS proxy docker images are not hardened.
+
+**4. Is the FIPS proxy supported on every platform?**
+
+No, the FIPS proxy is only avaivable for Linux x86_64. See the [Supported platforms and limitations] section for more details.
+
+**5. Are all incoming and outgoing agent communications FIPS supported?** 
+
+No, only the communications between the Datadog Agent and the Datadog FIPS proxy support FIPS, if they are on the same host.
+
+**6. Are all communications between the Cluster Agent and Node Agents FIPS supported?**
+
+No, only the communications between the Cluster Agent and the Datadog FIPS proxy support FIPS.
+
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4024
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4024.pdf
 [3]: /agent/troubleshooting/
