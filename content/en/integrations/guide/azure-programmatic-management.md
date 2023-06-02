@@ -18,7 +18,7 @@ further_reading:
 
 ## Datadog Azure integration
 
-The standard Azure integration process uses the App Registration credential process for implementing metric collection, and the Event Hub setup for sending Azure Platform Logs.If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection settings, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
+The standard Azure integration process uses an app registration credential process for implementing metric collection, and an Event Hub setup for sending Azure Platform Logs. If your Datadog account is hosted on Datadog's [US3 site][3], you can use the [Datadog resource in Azure][14] to create and manage the Datadog integration with your Azure environment. This is referred to as the Azure Native integration, and enables you to configure log and metric collection, deploy the Datadog Agent, and manage account settings. See [Managing the Azure Native Integration][4] for additional information.
 
 If your Datadog account is hosted on any other [Datadog site][3], use the standard [Azure integration][5] to collect monitoring data from your Azure environment.
 
