@@ -10,7 +10,7 @@ const getIndexName = () => {
             algoliaIndexName = configDocs['live'].algoliaConfig.index;
             break;
         case 'preview':
-            algoliaIndexName = configDocs['preview'].algoliaConfig.index;
+            algoliaIndexName = 'docs_preview_nick';
             break;
         default:
             algoliaIndexName = '';
@@ -28,8 +28,8 @@ const updateSettings = (index) => {
             'unordered(section_header)',
             'unordered(content)'
         ],
-        ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'desc(rank)', 'exact', 'custom'],
-        customRanking: [],
+        ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
+        customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
         indexLanguages: ['ja', 'en', 'fr'],
