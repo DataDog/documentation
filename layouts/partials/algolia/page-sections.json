@@ -21,7 +21,7 @@
 {{- range $i, $c := $chunked -}}
     {{- $full_url := print $page.Permalink "#" ($section_header | anchorize) -}}
     {{- $relpermalink := print $page.RelPermalink "#" ($section_header | anchorize) -}}
-    {{- $object_id := (print $page.File.UniqueID "_" $i) -}}
+    {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" $i) -}}
 
     {{- $hugo_context.Scratch.Add "algoliaindex" (
         dict "objectID" $object_id
