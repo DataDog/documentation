@@ -27929,6 +27929,11 @@ paths:
           - file: metric_payload.json
             name: body
           step: there is a valid "metric" in the system
+        metric_static:
+          parameters:
+          - file: metric_payload_static.json
+            name: body
+          step: there is a valid "metric_static" in the system
       x-menu-order: 1
       x-undo:
         type: safe
