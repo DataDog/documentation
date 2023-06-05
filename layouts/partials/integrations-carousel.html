@@ -1,4 +1,4 @@
-{{ $media := .Params.tile.media}}
+{{ $media := .Params.tile.media | default slice}}
 {{ $newCarousel := slice }}
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $cardView := 3 }}
