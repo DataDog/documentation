@@ -758,9 +758,9 @@ class Integrations:
                 self.regex_h1, "", result, 1
             )
             result = replace_comments(result)
-            # result = re.sub(
-            #     self.regex_site_region, r"{{% \1 %}}", result, 0
-            # )
+            result = re.sub(
+                self.regex_site_region, r"{{% \1 %}}", result, 0
+            )
 
         # if __init__.py exists lets grab the integration id
         integration_id = manifest_json.get("integration_id", "") or ""
