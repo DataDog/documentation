@@ -185,7 +185,7 @@ A common workaround is to treat all third party modules that the APM needs to in
 
 Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require()` calls. As a result, more packages are included in the bundled JavaScript file. 
 
-**Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.` 
+**Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
 
 #### Esbuild support
 
