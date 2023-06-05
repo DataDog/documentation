@@ -174,6 +174,7 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - フィルターを使用して返されたメトリクスのスコープを絞り込みます。{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>ディストリビューションメトリクス</u> - データセット全体のグローバルパーセンタイルを計算します。{{< /nextlink >}}
     {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM を使って、タグや集計構成によりカスタムメトリクスのボリュームを制御する方法をご紹介します。{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /ja/logs
