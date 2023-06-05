@@ -35,11 +35,13 @@ The APM integration with Real User Monitoring allows you to link requests from y
 
 Use frontend data from RUM, as well as backend, infrastructure, and log information from trace ID injection to pinpoint issues anywhere in your stack and understand what your users are experiencing.
 
+To start sending just your iOS application's traces to Datadog, see [iOS Trace Collection][1].
+
 ## Usage
 
 ### Prerequisites
 
--   You have set up [APM tracing][1] on the services targeted by your RUM applications.
+-   You have set up [APM tracing][2] on the services targeted by your RUM applications.
 -   Your services use an HTTP server.
 -   Your HTTP servers are using [a library that supports distributed tracing](#supported-libraries).
 -   You have the following set up based on your SDK:
@@ -58,6 +60,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 2. Initialize the RUM SDK. Configure the `allowedTracingUrls` initialization parameter with the list of internal, first-party origins called by your browser application.
 
+   For **npm install**:
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -69,6 +72,25 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
         allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
     })
     ```
+
+   For **CDN install**:
+
+   ```javascript
+   window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<http://datadoghq.com|datadoghq.com>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      allowedTracingUrls: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("<https://api.example.com>")]
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    })
+   ```
 
     To connect RUM to Traces, you need to specify your browser application in the `service` field.
 
@@ -257,13 +279,13 @@ The following Datadog tracing libraries are supported:
 
 | Library          | Minimum Version |
 | ---------------- | --------------- |
-| [Python][2]      | [0.22.0][3]     |
-| [Go][4]          | [1.10.0][5]     |
-| [Java][6]        | [0.24.1][7]     |
-| [Ruby][8]        | [0.20.0][9]     |
-| [JavaScript][10] | [0.10.0][11]    |
-| [PHP][12]        | [0.33.0][13]    |
-| [.NET][14]       | [1.18.2][15]    |
+| [Python][3]      | [0.22.0][4]     |
+| [Go][5]          | [1.10.0][6]     |
+| [Java][7]        | [0.24.1][8]     |
+| [Ruby][9]        | [0.20.0][10]     |
+| [JavaScript][11] | [0.10.0][12]    |
+| [PHP][13]        | [0.33.0][14]    |
+| [.NET][15]       | [1.18.2][16]    |
 
 
 ## OpenTelemetry support
@@ -437,7 +459,7 @@ Example for b3 multiple headers:
 {{% /tab %}}
 {{< /tabs >}}
 
-These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][16] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][17] (OPTIONS requests), which are made by the SDK prior to every request.
+These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the SDK prior to every request.
 
 ## How are APM quotas affected?
 
@@ -445,28 +467,29 @@ Connecting RUM and traces may significantly increase the APM-ingested volumes. U
 
 ## How long are traces retained?
 
-These traces are available for 15 minutes in the [Live Search][18] explorer. To retain the traces for a longer period of time, create [retention filters][19]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
+These traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, create [retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing
-[2]: /tracing/trace_collection/dd_libraries/python/
-[3]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[4]: /tracing/trace_collection/dd_libraries/go/
-[5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[6]: /tracing/trace_collection/dd_libraries/java/
-[7]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[8]: /tracing/trace_collection/dd_libraries/ruby/
-[9]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[10]: /tracing/trace_collection/dd_libraries/nodejs/
-[11]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[12]: /tracing/trace_collection/dd_libraries/php/
-[13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[14]: /tracing/trace_collection/dd_libraries/dotnet-core/
-[15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
-[17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[18]: /tracing/trace_explorer/#live-search-for-15-minutes
-[19]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[1]: /tracing/trace_collection/dd_libraries/ios/?tab=swiftpackagemanagerspm
+[2]: /tracing
+[3]: /tracing/trace_collection/dd_libraries/python/
+[4]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[5]: /tracing/trace_collection/dd_libraries/go/
+[6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[7]: /tracing/trace_collection/dd_libraries/java/
+[8]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[9]: /tracing/trace_collection/dd_libraries/ruby/
+[10]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[11]: /tracing/trace_collection/dd_libraries/nodejs/
+[12]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[13]: /tracing/trace_collection/dd_libraries/php/
+[14]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[15]: /tracing/trace_collection/dd_libraries/dotnet-core/
+[16]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[17]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+[18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
+[19]: /tracing/trace_explorer/#live-search-for-15-minutes
+[20]: /tracing/trace_pipeline/trace_retention/#retention-filters

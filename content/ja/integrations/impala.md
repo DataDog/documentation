@@ -39,7 +39,7 @@ draft: false
 git_integration_title: impala
 integration_id: impala
 integration_title: Impala
-integration_version: 1.0.1
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0

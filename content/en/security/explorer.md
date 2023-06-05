@@ -57,7 +57,7 @@ Below the header of Cloud Security Posture Management signals are tabs with deta
 
 ### Case Management
 
-You can create a case from a Cloud SIEM security signal to track, triage, and investigate your signals. Click **Create Case** to start a security investigation. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][6] for more information.
+You can create a case from a Cloud SIEM security signal to track, triage, and investigate your signals. Click **Escalate** to see the dropdown menu. Select **Create a case** to start a security investigation. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][6] for more information.
 
 ### Workflows
 
@@ -125,6 +125,6 @@ Follow the [log graphing guide][9] to learn more about all the graphing options.
 [4]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22
 [6]: /monitors/case_management/
-[7]: /workflows/
-[8]: /workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[7]: /service_management/workflows/
+[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /logs/explorer/analytics/?tab=timeseries

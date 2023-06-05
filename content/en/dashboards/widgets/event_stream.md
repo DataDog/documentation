@@ -44,7 +44,7 @@ The dedicated [widget JSON schema definition][4] for the event stream widget fol
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /events/
-[2]: /events/explorer/#search-syntax
+[1]: /service_management/events/
+[2]: /service_management/events/explorer/#search-syntax
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

@@ -35,7 +35,7 @@ DDoS 攻撃に対する保護のため、Amazon は Shield Standard と Shield A
 
 ### メトリクスの収集
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Shield` が有効になっていることを確認します。
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DDoSProtection` が有効になっていることを確認します。
 2. [Datadog - Amazon Shield インテグレーション][3]をインストールします。
 
 ### ログの収集

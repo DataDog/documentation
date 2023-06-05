@@ -37,10 +37,10 @@ Datadog 도커(Docker) 에이전트는 호스트 [에이전트][1]의 컨테이�
 
 이미지는 64비트 x86 및 Arm v8 아키텍처에서 사용할 수 있습니다.
 
-| ECR-Public    | Docker Hub          | GCR        |
-|----------------|--------------|-----------|
-| [에이전트 v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`          | [에이전트 v6+][2]<br>`docker pull datadog/agent`  | [에이전트 v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          |
- |[에이전트 v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [에이전트 v5][5]<br>`docker pull datadog/docker-dd-agent` | [에이전트 v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` |
+| ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
+|----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
+| [에이전트 v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [에이전트 v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [에이전트 v6+][2]<br>`docker pull datadog/agent`          | 
+| [에이전트 v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [에이전트 v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [에이전트 v5][5]<br>`docker pull datadog/docker-dd-agent` |
 
 
 CLI 명령은 Docker 런타임에 대한 명령입니다. containerd 런타임인 경우 `docker`를 `nerdctl`로 대체하며, Podman 런타임의 경우 `podman`으로 대체합니다.

@@ -331,7 +331,7 @@ BeginScope を使用して、以下のログプロバイダーの構造化され
 - NLog: [Microsoft Extension Logging による NLog プロパティ][13]
 - log4net: [BeginScope の使用][14]
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

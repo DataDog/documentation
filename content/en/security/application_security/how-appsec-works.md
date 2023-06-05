@@ -35,11 +35,9 @@ Because APM collects a sample of your application traffic, enabling ASM in the t
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>Beta: 1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/enabling/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/enabling/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ### Identify vulnerable services
-
-<div class="alert alert-info">Application Vulnerability Management vulnerability detection is in beta.</a></div>
 
 Datadog [Application Vulnerability Management][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
 
@@ -89,8 +87,7 @@ To configure the information redacted by ASM, refer to the [data security config
 
 Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][12] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][13], a security signal is generated in Datadog.
 
-<div class="alert alert-info"><strong>Beta: Automatic Threat Patterns Updates</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, the threat patterns being used to monitor your service is automatically updated whenever Datadog publishes updates.</div>
+**Automatic Threat Patterns Updates:** If your service is running with [an Agent with Remote Configuration enabled and a tracing library version that supports it][26] , the threat patterns being used to monitor your service are automatically updated whenever Datadog publishes updates.
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
@@ -122,8 +119,6 @@ Datadog ASM includes over 100 attack signatures that help protect against [many 
 
 ## Built-in vulnerability detection
 
-<div class="alert alert-info">Application Vulnerability Management through vulnerability detection is in beta.</a></div>
-
 Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
 For more information, read [Application Vulnerability Management][5].
@@ -154,3 +149,4 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [16]: /security/cloud_siem/
 [17]: /security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[26]: /agent/remote_config/#enabling-remote-configuration

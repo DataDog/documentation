@@ -26,7 +26,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | 0.84.0 <br/>   |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 0.86.0<br/><br/><br/>     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
 
 The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
 
@@ -36,4 +36,4 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 
 
 [1]: /tracing/trace_collection/compatibility/php/
-[2]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[2]: /agent/remote_config/#enabling-remote-configuration

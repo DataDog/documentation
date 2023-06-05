@@ -48,6 +48,8 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics](#submit-custom-metrics)
+- [Send OpenTelemetry data to Datadog](#send-opentelemetry-data-to-datadog)
+- [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -75,6 +77,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics](#submit-custom-metrics)
+- [Send OpenTelemetry data to Datadog](#send-opentelemetry-data-to-datadog)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -582,6 +585,90 @@ export class ExampleStack extends cdk.Stack {
 
 You can monitor your custom business logic by [submitting custom metrics][27].
 
+## Send OpenTelemetry data to Datadog
+
+1. Tell OpenTelemetry to export spans to the [Datadog Lambda Extension][40].
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+2. Add OpenTelemetry's instrumentation for AWS Lambda. This is akin to adding the tracing layer.
+   ```js
+   // instrument.js
+
+   const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
+   const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new AwsInstrumentation({
+              suppressInternalInstrumentation: true,
+          }),
+          new AwsLambdaInstrumentation({
+              disableAwsContextPropagation: true,
+          }),
+      ],
+   });
+
+   ```
+3. Apply instrumentation at runtime. For instance, for Node.js, use `NODE_OPTIONS`.
+
+   ```yaml
+   # serverless.yml
+
+   functions:
+     node:
+       handler: handler.handler
+       environment:
+         NODE_OPTIONS: --require instrument
+   ```
+
+4. Enable OTel using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
+
+   ```yaml
+   # serverless.yml
+  
+   provider:
+     name: aws
+     region: sa-east-1
+     runtime: nodejs18.x
+     environment:
+       DD_API_KEY: ${env:DD_API_KEY}
+       DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
+     layers:
+       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
+   ```
+
+5. Deploy.
+
+## Collect Profiling data (public beta)
+
+Datadog's [Continuous Profiler][42] is available in beta for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+
+The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
+
 ## Send telemetry over PrivateLink or proxy
 
 The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][28] to the `datadoghq.com` [Datadog site][29], or [send data over a proxy][30] for all other sites.
@@ -612,7 +699,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 {{% /tab %}}
 {{% tab "AWS Secrets Manager" %}}
 
-The Datadog Extension supports retrieving [AWS Secrets Manager][40] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
+The Datadog Extension supports retrieving [AWS Secrets Manager][1] values automatically for any environment variables prefixed with `_SECRET_ARN`. You can use this to securely store your environment variables in Secrets Manager and dual ship with Datadog.
 
 1. Set the environment variable `DD_LOGS_CONFIG_USE_HTTP=true` on your Lambda function.
 2. Add the `secretsmanager:GetSecretValue` permission to your Lambda function IAM role permissions.
@@ -624,6 +711,8 @@ The Datadog Extension supports retrieving [AWS Secrets Manager][40] values autom
 8. Set the environment variable `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
 9. Create a new secret on Secrets Manager to store the dual shipping logs environment variable. The contents should be **similar** to `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`.
 10. Set the environment variable `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` on your Lambda function equal to the ARN from the aforementioned secret.
+
+[1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
 {{% /tab %}}
 {{% tab "AWS KMS" %}}
@@ -637,6 +726,7 @@ The Datadog Extension supports decrypting [AWS KMS][41] values automatically for
 5. For dual shipping profiling, encrypt `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` using KMS and set the `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 5. For dual shipping logs, encrypt `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` using KMS and set the `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` environment variable equal to its value.
 
+[41]: https://docs.aws.amazon.com/kms/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -792,3 +882,5 @@ If you have trouble configuring your installations, set the environment variable
 [37]: /serverless/guide/extension_motivation/
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
+[40]: /serverless/libraries_integrations/extension/
+[42]: /profiler/

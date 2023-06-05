@@ -1,10 +1,10 @@
 datadog:
   apiKey: "<datadog_api_key>"
-  configKey: "<observability_pipelines_configuration_id>"
+  pipelineId: "<observability_pipelines_configuration_id>"
   site: "datadoghq.com"
 
 ## Autoscaling
-## 
+##
 autoscaling:
   enabled: true
   minReplicas: 2
@@ -14,7 +14,7 @@ podDisruptionBudget:
   enabled: true
   minAvailable: 1
 
-## HorizontalPodAutoscaler (HPA) requires resource requests to function, 
+## HorizontalPodAutoscaler (HPA) requires resource requests to function,
 ## so this example configures several default values. Datadog recommends
 ## that you change the values to match the actual size of instances that
 ## you are using.
@@ -66,9 +66,7 @@ persistence:
 ## This is a sample configuration that Datadog recommends for
 ## getting started with OP. It sets up data proxying and provides hooks
 ## for your own processing steps.
-config:
-  data_dir: /var/lib/observability-pipelines-worker
-
+pipelineConfig:
   sources:
     datadog_agent:
       address: 0.0.0.0:8282
@@ -116,7 +114,7 @@ config:
       inputs:
         - LOGS_YOUR_STEPS
       source: |
-        .ddtags = encode_key_value!(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+        .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
 
     metrics_add_dd_tags:
       type: remap
