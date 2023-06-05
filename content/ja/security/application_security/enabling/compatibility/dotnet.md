@@ -46,7 +46,8 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する .NET アプリのア
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | 2.23.0 <br/>   |
 | Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | 2.26.0<br/><br/><br/>     |
-| Risk Management <br/> --> サードパーティの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 2.16.0 <br/><br/> |
+| Vulnerability Management <br/> --> オープンソースの脆弱性検出 <br/> | <br/> 2.16.0  |
+| Vulnerability Management <br/> --> カスタムコードの脆弱性検出 <br/> | <br/> 非公開ベータ版  |
 
 .NET でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 2.26.0 です。
 
@@ -54,4 +55,4 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する .NET アプリのア
 
 [1]: /ja/tracing/trace_collection/compatibility/dotnet-core/
 [2]: /ja/tracing/trace_collection/compatibility/dotnet-framework/
-[3]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[3]: /ja/agent/remote_config/#enabling-remote-configuration
