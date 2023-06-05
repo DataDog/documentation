@@ -46,7 +46,7 @@ The Datadog Agent FIPS Proxy does **not** support the following:
 
 ## Prerequisites
 
-- TCP port range: 9803 to 9816
+- TCP port range available: 9803 to 9816
 - Datadog Agent >= v7.41
 
 ## Install the Agent with FIPS support
