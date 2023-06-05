@@ -279,8 +279,6 @@ agents:
           memory: 200Mi
     
     priorityClassCreate: true
-    priorityClassName: datadog-priority
-    priorityClassValue: 1000
 
 providers:
   gke:
