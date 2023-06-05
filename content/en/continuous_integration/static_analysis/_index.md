@@ -29,7 +29,7 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis help developers identify maintainability issues and adhere to coding best practices early in the Software Development Life Cycle (SDLC) to ensure only the highest quality code makes it to production. 
+Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps developers identify maintainability issues and adhere to coding best practices early in the Software Development Life Cycle (SDLC) to ensure only the highest quality code makes it to production. 
 
 Using Static Analysis provides organizations with the following benefits:
 
@@ -39,15 +39,29 @@ Using Static Analysis provides organizations with the following benefits:
 
 ## Integrations
 
-{{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of choice. See the documentation for information about the following integrations, or read more about the Datadog CI NPM package:">}}
+{{< whatsnext desc="With Static Analysis, you can integrate feedback in any CI platform provider of choice, with native integrations for GitHub and CircleCI. See the documentation for information about the following integrations, or read more about the Datadog CI NPM package:">}}
     {{< nextlink href="continuous_integration/static_analysis/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/configuration" >}}NPM package{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Use the CLI
+## Usage
 
-The [`@datadog/datadog-ci` package][2] allows you to run Static Analysis directly within your CI/CD pipeline. To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
+Datadog Static Analysis is run in your CI pipelines using the [datadog-ci CLI][2] to check your code against Datadog's default rulesets. To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
+
+After configuring your CI pipelines to run the Datadog Static Analyzer. Any violations will begin to appear in your [Static Analysis Results page][1] in the Datadog UI. Results can be filtered using the facets to the left of the list or with the search bar at the top of the page. Each violation is associated with a specific commit and branch from your repo on which your CI pipeline was run. 
+
+Every violation per commit gets its own row item in the list. 
+
+{{< img src="monitors/incidents/TODO.png" alt="Static Analysis results list view" style="width:80%;">}}
+
+Clicking on a violation will open a side panel containing metadata regarding the scope of the violation and where it originates from. The content of the violation is split into three tabs:
+
+1. Source Code - A description of the violation and the offending lines of code that caused it. To see the offending code snippet, configure the Datadog [GitHub App][4].
+{{< img src="monitors/incidents/TODO.png" alt="Static Analysis result Source Code Tab" style="width:80%;">}}
+2. Fix - Where possible, Datadog will recommend one or more code fixes to resolve the violation that a developer can copy/paste.
+{{< img src="monitors/incidents/TODO.png" alt="Static Analysis result Fix Tab" style="width:80%;">}}
+1. Event - JSON Metadata regarding the the Static Analysis violation event.
 
 ## Further Reading
 
@@ -56,3 +70,4 @@ The [`@datadog/datadog-ci` package][2] allows you to run Static Analysis directl
 [1]: https://app.datadoghq.com/ci/static-analysis
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
 [3]: /continuous_integration/static_analysis/configuration/
+[4]: /integrations/github/
