@@ -11,7 +11,7 @@ title: Datadog Agent 이미지 빌드
     git clone https://github.com/DataDog/datadog-agent.git
     ```
 
-2. `datadog-agent/Dockerfiles/agent/` 폴더로 이동하세요.
+2. `datadog-agent/Dockerfile/agent/` 폴더로 이동하세요.
 
     ```shell
     cd datadog-agent/Dockerfiles/agent/
@@ -69,12 +69,12 @@ docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAG
     docker build --build-arg DD_AGENT_ARTIFACT=./datadog-agent_7.17.0-1_amd64.deb --file amd64/Dockerfile --pull --tag documentation-example .
     ```
 
-     Available `<BUILD_ARGS>` are:
+     사용 가능한 `<BUILD_ARGS>`는 다음과 같습니다.
 
-    | Argument          | Definition                                                                  | Default |
+    | 인수          | 정의                                                                  | 기본 설정 |
     | ----------------- | --------------------------------------------------------------------------- | ------- |
-    | PYTHON_VERSION    | The Python runtime version for your Agent check.                            | `-`     |
-    | WITH_JMX          | If set to `true`, the Agent container contains the JMX fetch logic.         | `false` |
-    | DD_AGENT_ARTIFACT | Path to the Agent Debian artifact package to use if not in the same folder. | `-`     |
+    | PYTHON_VERSION    | Agent 점검의 파이썬(Python) 런타임 버전.                            | `-`     |
+    | WITH_JMX          | `true`로 설정된 경우 Agent 컨테이너에 JMX 가져오기 로직이 포함됩니다.         | `false` |
+    | DD_AGENT_ARTIFACT | Agent 데비안 아티팩트 패키지가 동일 폴더에 위치하지 않은 경우 사용하는 경로. | `-`     |
 
 [1]: http://apt.datadoghq.com/pool/d/da/
