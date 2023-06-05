@@ -70,7 +70,7 @@ Requires Agent version >= 6.19 or 7.19.
 DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
-## Profiling
+## Continuous Profiler
 
 ### YAML configuration
 
