@@ -355,19 +355,29 @@ Yes, host security and hardening are customer responsibilities.
 
 **3. Are the Datadog Agent FIPS Proxy images hardened?**
 
-No, FIPS proxy docker images are not hardened.
+While the images provided are constructed with security in mind, they have not been evaluated against CIS benchmark recommendations or DISA STIG standards.
 
-**4. Is the FIPS proxy supported on every platform?**
-
-No, the FIPS proxy is only avaivable for Linux x86_64. See the [Supported platforms and limitations] section for more details.
-
-**5. Are all incoming and outgoing Agent communications FIPS supported?** 
+**4. Are all incoming and outgoing Agent communications FIPS supported?**
 
 Datadog FIPS proxy only secures communication originating from the Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Agent or originating from the Agent are not covered by this solution.
 
-**6. Are all communications between the Cluster Agent and Node Agents FIPS supported?**
+**5. Are all communications between the Cluster Agent and Node Agents FIPS supported?**
 
 Datadog FIPS proxy only secures communication originating from the Cluster Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Cluster Agent or originating from the Cluster Agent are not covered by this solution.
+
+**6. Is FIPS compliance retained if we rebuild or reconfigure the Datadog FIPS proxy to fit our deployment or testing needs?**
+
+Even though rebuilding, reconfiguring or modifiying the Datadog FIPS proxy might be a technically working setup, Datadog cannot guarantee FIPS compliance if the Datadog FIPS proxy is not used exactly as explained in the documentation
+
+**7. My Datadog Agent is correctly sending data without following a step in the installation documents. Is my setup FIPS compliant?**
+
+FIPS compliance is only retained if you followed the installation steps from the FIPS documentation. This notably implies having your Datadog Agent
+configured to communicate to the FIPS proxy by setting the `fips.enabled` option, as well as having a running Datadog FIPS proxy.
+
+**8. Are Datadog Agent release versions tied to Datadog FIPS proxy release versions?**
+
+Datadog FIPS proxy releases are decoupled from Datadog Agent releases. Make sure to use the latest Datadog Agent and Datadog FIPS proxy versions
+to have all the available products supported by the Datadog Agent and the Datadog FIPS proxy.
 
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4024
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4024.pdf
