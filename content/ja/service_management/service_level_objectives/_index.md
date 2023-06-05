@@ -17,6 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-service-performance-with-slo-alerts/
   tag: ブログ
   text: SLO アラートによるサービスパフォーマンスのプロアクティブな監視
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: 効果的なモニターと SLO の作成に関するインタラクティブなセッションに参加できます
 kind: documentation
 title: サービスレベル目標（SLO）
 ---
@@ -150,7 +153,7 @@ SLO のリストビューに移動すると、デフォルトの SLO ビュー�
 - オーガニゼーションで定義されているすべての SLO リスト
 - 左側のファセットリストで利用可能なファセットのリスト
 
-### 保存済みビュー
+### 保存ビュー
 
 以下を共有することで、チームに最も関連性の高い SLO についてカスタマイズした検索を保存ビューの SLO リストビューに保存し共有することができます。
 
