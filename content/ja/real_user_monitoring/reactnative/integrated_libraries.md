@@ -3,7 +3,7 @@ description: React Native プロジェクトから RUM データを収集しま�
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: ブログ
   text: React Native アプリケーションの監視

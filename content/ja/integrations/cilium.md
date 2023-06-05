@@ -37,7 +37,7 @@ draft: false
 git_integration_title: cilium
 integration_id: cilium
 integration_title: Cilium
-integration_version: 2.3.0
+integration_version: 2.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -90,15 +90,16 @@ Cilium チェックは [Datadog Agent][3] パッケージに含まれていま�
      `prometheus.enabled=true` および `operator.prometheus.enabled=true`
 
 または、別途 Kubernetes のマニフェストで Prometheus のメトリクスを有効にします。
+<div class="alert alert-warning"><a href="https://docs.cilium.io/en/v1.12/operations/upgrade/#id2">Cilium <= v1.11</a> の場合は、<code>--prometheus-serve-addr=:9090</code> を使用してください。 </a></div>
 
-   - `cilium-agent` で、Cilium DaemonSet コンフィギュレーションの `args` セクションに `--prometheus-serve-addr=:9090` を追加します。
+   - `cilium-agent` で、Cilium DaemonSet 構成の `args` セクションに `--prometheus-serve-addr=:9962` を追加します。
 
      ```yaml
      # [...]
      spec:
        containers:
          - args:
-             - --prometheus-serve-addr=:9090
+             - --prometheus-serve-addr=:9962
      ```
 
    - `cilium-operator` で、Cilium デプロイコンフィギュレーションの `args` セクションに `--enable-metrics` を追加します。
@@ -182,7 +183,7 @@ Cilium には `cilium-agent` と `cilium-operator` の 2 種類のログがあ�
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset#installation
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 

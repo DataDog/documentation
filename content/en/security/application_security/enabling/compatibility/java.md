@@ -39,9 +39,10 @@ The following ASM capabilities are supported in the Java library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | 1.8.0 <br/>   |
 | Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 1.9.0<br/><br/><br/>     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | 1.1.4 <br/><br/> |
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/>  | <br/> 1.1.4 |
+| Vulnerability Management <br/> --> Custom code vulnerability detection <br/>  | <br/> 1.15.0|
 
-The minimum tracer version to get all supported ASM capabilities for Java is 1.9.0.
+The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.  
 

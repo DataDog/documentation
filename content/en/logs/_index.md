@@ -25,6 +25,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/"
     tag: "Blog"
     text: "Monitor your IoT devices at scale with Datadog Log Management"
+  - link: "https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/"
+    tag: "Blog"
+    text: "Monitor your firewall logs with Datadog"
 ---
 
 ## Overview

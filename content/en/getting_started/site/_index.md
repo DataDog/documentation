@@ -28,53 +28,7 @@ You can identify which site you are on by matching your Datadog website URL to t
 
 ## SDK domains
 
-All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
-
-### Mobile
-
-| Site | Site URL                                      |
-|------|-----------------------------------------------|
-| US1  | `https://browser-intake-datadoghq.com`        |
-| US3  | `https://browser-intake-us3-datadoghq.com`    |
-| US5  | `https://browser-intake-us5-datadoghq.com`    |
-| EU1  | `https://browser-intake-datadoghq.eu`         |
-| US1-FED  | `https://browser-intake-ddog-gov.com`     |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
-
-### Browser
-
-#### Logs
-
-| Site | Site URL                                        |
-|------|-------------------------------------------------|
-| US1  | `https://logs.browser-intake-datadoghq.com`     |
-| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
-| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
-
-#### Session Replay
-
-| Site | Site URL                                                  |
-|------|-----------------------------------------------------------|
-| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
-| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
-| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
-
-#### RUM
-
-| Site | Site URL                                       |
-|------|------------------------------------------------|
-| US1  | `https://rum.browser-intake-datadoghq.com`     |
-| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
-| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
+See [Supported endpoints for SDK domains][2].
 
 ## Navigate the Datadog documentation by site
 
@@ -96,3 +50,5 @@ The Datadog for Government site (US1-FED) is meant to allow US government agenci
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[2]: /real_user_monitoring/#supported-endpoints-for-sdk-domains

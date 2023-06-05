@@ -193,7 +193,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [31]: https://github.com/wimactel
 [34]: /logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
-[36]: https://web.oz.com/
+[36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
 [39]: https://bitbucket.org/atlassian/jiradog/src/master/
