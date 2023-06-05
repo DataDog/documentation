@@ -183,7 +183,7 @@ APM tools like `dd-trace` stop working at this point. They can continue to inter
 
 A common workaround is to treat all third party modules that the APM needs to instrument as being "external" to the bundler. With this setting the instrumented modules remain on disk and continue to be loaded with `require()` while the non-instrumented modules are bundled. However, this results in a build with many extraneous files and starts to defeat the purpose of bundling.
 
-Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require() calls. As a result, more packages are included in the bundled JavaScript file. 
+Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require()` calls. As a result, more packages are included in the bundled JavaScript file. 
 
 **Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.` 
 
