@@ -54,7 +54,9 @@ The Datadog Agent FIPS Proxy does **not** support the following:
 {{< tabs >}}
 {{% tab "Bare metal / VM" %}}
 
-To install the Datadog Agent with the FIPS proxy, add `DD_FIPS_MODE=1` to the one-step install instructions on the [Datadog Agent Integration][1] page. For example:
+### Install the Agent on a new host
+
+To install the Datadog Agent with the Datadog Agent FIPS Proxy, add `DD_FIPS_MODE=1` to the one-step install instructions on the [Datadog Agent Integration][1] page. For example:
 
 ```shell
 DD_API_KEY=<DD_API_KEY> \
@@ -64,48 +66,13 @@ bash -c "$(curl -L \
    https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-Setting the `DD_FIPS_MODE` environment variable installs the FIPS package along with the Agent, and configures the Agent to use the proxy. There are no additional configuration steps if you're using this method, but you should [verify the installation](#verify-the-installation).
+Setting the `DD_FIPS_MODE` environment variable installs the FIPS package along with the Agent, and configures the Agent to use the proxy. There are no additional configuration steps if you're using this method, but you should [verify the installation](#verify-your-installation).
 
-[1]: https://app.datadoghq.com/account/settings#agent/
-{{% /tab %}}
-
-{{% tab "Helm on Amazon EKS" %}}
-Set the following values in your `values.yaml` file:
-
-```yaml
-fips:
-  enabled: true
-  use_https: false
-```
-
-The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy. This setting ignores custom URL options, such as `dd_url`.
-
-The `https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy is expected to run on the same host as the Datadog Agent and relies on the host's security for protection of that communication. 
-
-**Host security and hardening are customer responsibilities.**
-
-<div class="alert alert-warning">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
-
-{{% /tab %}}
-
-{{% tab "Amazon ECS" %}}
-
-For instructions on installing the FIPS proxy on Amazon ECS, see [FIPS proxy for GOVCLOUD environments][1].
-
-[1]:/containers/amazon_ecs/#fips-proxy-for-govcloud-environments
-{{% /tab %}}
-
-{{< /tabs >}}
-
-
-## Add the FIPS proxy to an existing Agent
+### Add the FIPS proxy to an existing Agent
 
 Follow the steps below to add the FIPS proxy to an existing Agent installation.
 
-{{< tabs >}}
-{{% tab "Bare metal / VM" %}}
-
-### Install the FIPS proxy package
+#### Install the FIPS proxy package
 
 1. Run the following commands to install the FIPS proxy:
 
@@ -132,11 +99,11 @@ Follow the steps below to add the FIPS proxy to an existing Agent installation.
    sudo systemctl restart datadog-fips-proxy
    ```
 
-### Configure the Agent to use the FIPS proxy
+#### Configure the Agent to use the FIPS proxy
 
 The Datadog Agent FIPS Proxy package comes pre-configured for use with the US1-FED datacenter. If you're upgrading an existing Datadog Agent, you **must** configure the Agent to use the proxy.
 
-To configure the Agent to use the FIPS proxy, set `fips.enabled` to `true` and `fips.https` to `false` in the [Agent configuration file][1]:
+To configure the Agent to use the proxy, set `fips.enabled` to `true` and `fips.https` to `false` in the [Agent configuration file][2]:
 
 ```yaml
 fips:
@@ -152,22 +119,7 @@ The `https` option is set to `false` because the Agent uses HTTP to communicate 
 
 <div class="alert alert-warning">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-
-{{% tab "Helm on Amazon EKS" %}}
-
-{{% /tab %}}
-
-{{% tab "Amazon ECS" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## Verify your installation
-
-{{< tabs >}}
-{{% tab "Bare metal / VM" %}}
+### Verify your installation
 
 Verify that metrics, traces, and logs are correctly reported in the app.
 
@@ -177,36 +129,19 @@ For metrics, run the connectivity diagnostic command and verify that all checks 
 sudo -u dd-agent datadog-agent diagnose datadog-connectivity
 ```
 
-If you're not seeing metrics, traces, or logs reported in the app, see the [Troubleshooting](#troubleshooting) section.
+If you're not seeing metrics, traces, or logs reported in the app, see the [Troubleshooting](#troubleshooting-a-bare-metal-or-vm-installation) section.
 
-{{% /tab %}}
-
-{{% tab "Helm on Amazon EKS" %}}
-
-{{% /tab %}}
-
-{{% tab "Amazon ECS" %}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-
-## View logs
-
-{{< tabs >}}
-
-{{% tab "Bare metal / VM" %}}
-The Datadog Agent FIPS Proxy logs to journald. To view the logs, run:
+### View logs
 
 ```shell
 sudo journalctl -u datadog-fips-proxy
 ```
 
-### journald logs configuration
+#### journald logs configuration
 
-If you're using [Log Management][1] and want to send the Datadog Agent FIPS Proxy logs to Datadog, you must set up the Datadog Agent to read logs from journald.
+If you're using [Log Management][3] and want to send the Datadog Agent FIPS Proxy logs to Datadog, you must set up the Datadog Agent to read logs from journald.
 
-1. In the Agent's [configuration file][2], set `logs_enabled` to `true` to activate the Logs Agent. In the [configuration directory][3], create a file at `fips_proxy.d/conf.yaml` with the following content:
+1. In the Agent's [configuration file][2], set `logs_enabled` to `true` to activate the Logs Agent. In the [configuration directory][4], create a file at `fips_proxy.d/conf.yaml` with the following content:
 
    ```yaml
    logs:
@@ -216,26 +151,47 @@ If you're using [Log Management][1] and want to send the Datadog Agent FIPS Prox
          - datadog-fips-proxy.service
    ```
 
-1. Make sure that the `dd-agent` user is in the `systemd-journal` group. For more information, see the [journald integration][4] documentation.
-1. [Restart the Agent][5].
+1. Make sure that the `dd-agent` user is in the `systemd-journal` group. For more information, see the [journald integration][5] documentation.
+1. [Restart the Agent][6].
 
-[1]: /logs/
+[1]: https://app.datadoghq.com/account/settings#agent/
 [2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[4]: /integrations/journald/#configuration
-[5]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-
+[3]: /logs/
+[4]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: /integrations/journald/#configuration
+[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 
 {{% tab "Helm on Amazon EKS" %}}
+Set the following values in your `values.yaml` file:
+
+```yaml
+fips:
+  enabled: true
+  use_https: false
+```
+
+The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy. This setting ignores custom URL options, such as `dd_url`.
+
+The `https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy is expected to run on the same host as the Datadog Agent and relies on the host's security for protection of that communication. 
+
+**Host security and hardening are customer responsibilities.**
+
+<div class="alert alert-warning">The <code>fips.enabled</code> setting defaults to <code>false</code> in the Agent. It must be set to <code>true</code> to ensure all communications are forwarded through the Datadog Agent FIPS Proxy.<br><br><strong>If <code>fips.enabled</code> is not set to <code>true</code>, the Agent is not FIPS Compliant</strong>.</div>
+
+
 {{% /tab %}}
 
 {{% tab "Amazon ECS" %}}
+
+For instructions on installing the FIPS proxy on Amazon ECS, see [FIPS proxy for GOVCLOUD environments][1].
+
+[1]:/containers/amazon_ecs/#fips-proxy-for-govcloud-environments
 {{% /tab %}}
 
 {{< /tabs >}}
 
-## Troubleshooting
+## Troubleshooting a bare-metal or VM installation
 
 To troubleshoot the Datadog Agent FIPS Proxy, verify the following:
 - The Datadog Agent and Datadog Agent FIPS Proxy are running.
