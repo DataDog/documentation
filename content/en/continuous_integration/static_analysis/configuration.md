@@ -85,7 +85,7 @@ The following inputs should also be provided:
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `service` | The service you want your results tagged with.                                                                                | True     |                 |
-| `env`     | The environment you want your results tagged with. Datadog recommends using `ci` as the value for this variable.                                                                           | False    | `none`          |
+| `env`     | The environment you want your results tagged with. Datadog recommends using `ci` as the value for this input.                                                                           | False    | `none`          |
 | `site`    | The [Datadog site][3] to send information to. You are currently viewing the documentation for the {{< region-param key="dd_site_name" code="true" >}} site, for which the correct value for this input would be {{< region-param key="dd_site" code="true" >}}                                                                                 | False    | `datadoghq.com` |
 
 From here, add the following to your CI pipeline:
