@@ -73,7 +73,7 @@ If you want to use an existing resource group, skip to Create an Event Hubs name
 1. In the **Resource group** dropdown menu, select the resource group you want to add the Event Hub to.
 1. Enter a name for the namespace.
 1. Select a location for the namespace.
-**Note**: The Event Hub must be in the same Location as the resource you want to submit logs from. For activity logs or other account-wide log sources, you can choose any region.
+     **Note**: The Event Hub must be in the same Location as the resource you want to submit logs from. For activity logs or other account-wide log sources, you can choose any region.
 1. Select a pricing tier.
 1. Leave the throughput units (for standard tier) or processing units (for premium tier) as it is.
 1. Click **Review + create**.
