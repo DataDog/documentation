@@ -127,7 +127,7 @@ All spans indexed by custom retention filters *and* the intelligent retention fi
 {{% /tab %}}
 {{% tab "Timeseries View" %}}
 
-All spans indexed by custom retention filters *and* the intelligent retention filter are available to be searched when using trace analytics.
+All spans indexed by custom retention filters **and** the intelligent retention filter are available to be searched when using trace analytics.
 
 From the timeseries view, export your query to a [dashboard][1], a [monitor][2] or a [notebook][3] to investigate further or to alert automatically when an aggregate number of spans crosses a specific threshold. 
 
