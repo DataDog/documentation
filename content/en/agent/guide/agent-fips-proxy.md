@@ -335,6 +335,10 @@ This notably implies having your Datadog Agent configured to communicate to the 
 The Datadog Agent FIPS Proxy releases are decoupled from Datadog Agent releases. Make sure to use the latest Datadog Agent and Datadog Agent FIPS Proxy versions
 to have all the available products supported by the Datadog Agent and the Datadog Agent FIPS Proxy.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4024
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4024.pdf
 [3]: /agent/troubleshooting/
