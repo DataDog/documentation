@@ -693,7 +693,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             }
         }
         .carousel-items-vertical {
-            scroll-snap-type: y mandatory;
             scroll-behavior: smooth;
             .carousel-item-vert {
                 height: 91px;

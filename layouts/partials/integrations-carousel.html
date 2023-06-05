@@ -108,7 +108,7 @@ x-data="{
                 class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
                 @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
                 :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
                 >
                 </button>
@@ -119,7 +119,7 @@ x-data="{
             class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
             @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
             :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-            x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+            x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
             :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
             >
             </button>
@@ -130,7 +130,7 @@ x-data="{
                 class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
                 @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-                x-text="$el.offsetTop + '-{{ $elm.image_url }}-{{add $idx 1}}'"
+                x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
                 :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
                 >
                 </button>
