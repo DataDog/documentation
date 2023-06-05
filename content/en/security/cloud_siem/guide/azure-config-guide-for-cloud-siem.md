@@ -112,7 +112,7 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 1. Select **Azure Event Hub trigger**.
 1. Enter a name for the new function.
 1. In **Event Hub connection**, click **New**.
-1. In the **Event Hub connection** dropdown menu,  select the event hub you created earlier.
+1. In the **Event Hub connection** dropdown menu, select the event hub you created earlier.
 1. Click **OK**.
 1. In the **Event Hub name**, enter the name of the event hub you created earlier.
 1. Click **Create**.
