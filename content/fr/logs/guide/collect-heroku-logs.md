@@ -1,7 +1,8 @@
 ---
-title: Recueillir des logs Heroku
 kind: guide
+title: Recueillir des logs Heroku
 ---
+
 **Cette intégration de logs est actuellement disponible en version bêta publique**
 
 Heroku propose trois types de logs :
