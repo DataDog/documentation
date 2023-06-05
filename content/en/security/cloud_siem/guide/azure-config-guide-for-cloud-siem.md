@@ -162,7 +162,7 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 1. Select the event hub namespace created previously.
 1. Click **Save**.
 
-Go to [Log Explorer][7] and enter `service:azure` in the search query to view your Azure logs
+Go to [Log Explorer][7] and enter `service:azure` in the search query to view your Azure logs.
 
 [1]: https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups
 [2]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
