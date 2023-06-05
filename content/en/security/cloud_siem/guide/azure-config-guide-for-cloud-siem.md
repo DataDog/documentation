@@ -103,7 +103,7 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 1. Select a storage account in the dropdown menu.
 1. Click **Review + create**.
 1. After validation succeeds, click **Create**.
-1. After the deployment completed successfully, click **Create a function**.
+1. After the deployment is completed successfully, click **Create a function**.
 
 ### Add a new function to your Function App
 
