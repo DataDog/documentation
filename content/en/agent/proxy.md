@@ -28,7 +28,7 @@ A few options are available to send traffic to Datadog over SSL/TLS for hosts th
 2. Using HAProxy (if you want to proxy **more than 16-20 Agents** through the same proxy)
 3. Using the Agent as a proxy (for **up to 16 Agents** per proxy, **only on Agent v5** )
 
-## FIPS Compliance
+## FIPS compliance
 
 For information on setting up the Datadog Agent FIPS Proxy with the Datadog Agent, see [Datadog FIPS Compliance][8]. The FIPS proxy is only available in the US1-FED region. The Datadog Agent FIPS Proxy cannot be used together with a regular proxy.
 
