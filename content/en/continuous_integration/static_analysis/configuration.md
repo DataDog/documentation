@@ -75,13 +75,18 @@ If you are not using CircleCI Orbs or GitHub Actions, you can run the Datadog CL
 
 The following environment variables should be configured:
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| DD_API_KEY | True | Unique key belonging to your organization, more details [here][1]. |
-| DD_APP_KEY | True | Unique key scoped users or service accounts with scoped permissions, more details [here][2]. |
-| DD_SERVICE | True | Value of the service that this repository contains. |
-| DD_SITE | False | The site corresponding to the [Datadog region][3] your organization belongs to. You are currently viewing the documentation for the {{< region-param key="dd_site_name" code="true" >}} site, for which the correct value for this variable would be {{< region-param key="dd_site" code="true" >}} |
-| DD_ENV | False | The environment that this repository belongs to. Datadog recommends using `ci` as the value for this variable. |
+| Name         | Description                                                                                                                | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][1] and should be stored as a secret.              | True     |                 |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][2] and should be stored as a secret.      | True     |                 |
+
+The following inputs should also be provided:
+
+| Name         | Description                                                                                                                | Required | Default         |
+|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service` | The service you want your results tagged with.                                                                                | True     |                 |
+| `env`     | The environment you want your results tagged with. Datadog recommends using `ci` as the value for this variable.                                                                           | False    | `none`          |
+| `site`    | The [Datadog site][3] to send information to. You are currently viewing the documentation for the {{< region-param key="dd_site_name" code="true" >}} site, for which the correct value for this input would be {{< region-param key="dd_site" code="true" >}}                                                                                 | False    | `datadoghq.com` |
 
 From here, add the following to your CI pipeline:
 ```bash
