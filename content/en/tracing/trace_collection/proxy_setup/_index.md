@@ -328,8 +328,6 @@ ls -l /usr/lib/nginx/modules/ngx_http_datadog_module.so
 ```
 
 ### NGINX configuration with Datadog module
-TODO: rewrite this section
-
 In the topmost section of the NGINX configuration, load the Datadog module.
 
 ```nginx
@@ -337,8 +335,8 @@ load_module modules/ngx_http_datadog_module.so;
 ```
 
 The default configuration connects to a local Datadog Agent and produces traces
-for all NGINX locations. Specify custom configuration in a `datadog` JSON block
-within the `http` section of the NGINX configuration.
+for all NGINX locations. Specify custom configuration via the dedicated
+`datadog_*` directives described in the Datadog module's [API documentation][15].
 
 For example, the following NGINX configuration sets the service name to
 `usage-internal-nginx` and the sampling rate to 10%.
@@ -347,19 +345,12 @@ For example, the following NGINX configuration sets the service name to
 load_module modules/ngx_http_datadog_module.so;
 
 http {
-  datadog {
-    "service": "usage-internal-nginx",
-    "sample_rate": 0.1
-  }
+  datadog_service_name usage-internal-nginx;
+  datadog_sample_rate 0.1;
+
+  # servers, locations...
 }
 ```
-
-For information about fields supported by the `datadog` directive and about
-other configuration directives supported by the module, see the [API
-documentation](https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md).
-
-### NGINX Sampling with the Datadog Module
-TODO: Might be able to include this  above.
 
 ## NGINX with OpenTracing module
 The OpenTracing project provides an NGINX module for distributed tracing. The
@@ -579,6 +570,7 @@ variable. To define sampling rules in the Ingress Controller:
 [12]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/doc/sampling.md
 [13]: https://github.com/kubernetes/ingress-nginx
 [14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
+[15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 {{% /tab %}}
 {{% tab "Istio" %}}
 
