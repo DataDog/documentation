@@ -4000,6 +4000,10 @@ main:
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
     weight: 801
+  - name: Cost Details
+    url: account_management/plan_and_usage/cost_details/
+    parent: account_management_plan_and_usage
+    weight: 802
   - name: Billing
     url: account_management/billing/
     parent: account_management
