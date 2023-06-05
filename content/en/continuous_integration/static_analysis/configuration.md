@@ -77,11 +77,11 @@ The following environment variables should be configured:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| DD_API_KEY | Yes | Unique key belonging to your organization, more details [here][1]. |
-| DD_APP_KEY | Yes | Unique key scoped users or service accounts with scoped permissions, more details [here][2]. |
-| DD_SERVICE | Yes | Value of the service that this repository contains. |
-| DD_SITE | Yes | The site corresponding to the [Datadog region][3] your organization belongs to. You are currently viewing the documentation for the {{< region-param key="dd_site_name" code="true" >}} site, for which the correct value for this variable would be {{< region-param key="dd_site" code="true" >}} |
-| DD_ENV | No | The environment that this repository belongs to. Datadog recommends using `ci` as the value for this variable. |
+| DD_API_KEY | True | Unique key belonging to your organization, more details [here][1]. |
+| DD_APP_KEY | True | Unique key scoped users or service accounts with scoped permissions, more details [here][2]. |
+| DD_SERVICE | True | Value of the service that this repository contains. |
+| DD_SITE | False | The site corresponding to the [Datadog region][3] your organization belongs to. You are currently viewing the documentation for the {{< region-param key="dd_site_name" code="true" >}} site, for which the correct value for this variable would be {{< region-param key="dd_site" code="true" >}} |
+| DD_ENV | False | The environment that this repository belongs to. Datadog recommends using `ci` as the value for this variable. |
 
 From here, add the following to your CI pipeline:
 ```bash
