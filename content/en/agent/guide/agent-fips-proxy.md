@@ -367,12 +367,12 @@ Datadog FIPS proxy only secures communication originating from the Cluster Agent
 
 **6. Is FIPS compliance retained if we rebuild or reconfigure the Datadog FIPS proxy to fit our deployment or testing needs?**
 
-Even though rebuilding, reconfiguring or modifiying the Datadog FIPS proxy might be a technically working setup, Datadog cannot guarantee FIPS compliance if the Datadog FIPS proxy is not used exactly as explained in the documentation
+Even though rebuilding, reconfiguring or modifiying the Datadog FIPS proxy might be a technically working setup, Datadog cannot guarantee FIPS compliance if the Datadog FIPS proxy is not used exactly as explained in the documentation.
 
 **7. My Datadog Agent is correctly sending data without following a step in the installation documents. Is my setup FIPS compliant?**
 
-FIPS compliance is only retained if you followed the installation steps from the FIPS documentation. This notably implies having your Datadog Agent
-configured to communicate to the FIPS proxy by setting the `fips.enabled` option, as well as having a running Datadog FIPS proxy.
+Datadog cannot guarantee FIPS compliance if the Datadog FIPS proxy is not used exactly as explained in the documentation.
+This notably implies having your Datadog Agent configured to communicate to the FIPS proxy by setting the `fips.enabled` option, as well as having a running Datadog FIPS proxy.
 
 **8. Are Datadog Agent release versions tied to Datadog FIPS proxy release versions?**
 
