@@ -125,7 +125,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```javascript
+   ```swift
    Global.rum.addFeatureFlagEvaluation(key, value);
    ```
 
@@ -134,8 +134,17 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```javascript
+   ```kotlin
    GlobalRum.get().addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+   ```dart
+   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -174,6 +183,12 @@ LaunchDarkly は現在、このインテグレーションをサポートして�
 
 {{% /tab %}}
 {{% tab "Android" %}}
+
+LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
 
 LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
@@ -220,9 +235,9 @@ Split の SDK を初期化し、以下に示すコードスニペットを使用
 
 Split の SDK の初期化については、[Split の iOS SDK ドキュメント][1]を参照してください。
 
-```javascript
+```swift
   let config = SplitClientConfig()
-// Split がインプレッションを報告する際に機能フラグを送信します
+  // Split がインプレッションを報告する際に機能フラグを送信します
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
@@ -240,7 +255,7 @@ Split の SDK を初期化し、以下に示すコードスニペットを使用
 
 Split の SDK の初期化については、[Split の Android SDK ドキュメント][1]を参照してください。
 
-```javascript
+```kotlin
   internal class DatadogSplitImpressionListener : ImpressionListener {
     override fun log(impression: Impression) {
         // Split がインプレッションを報告する際に機能フラグを送信します
@@ -262,6 +277,26 @@ Split の SDK の初期化については、[Split の Android SDK ドキュメ�
 
 
 [1]: https://help.split.io/hc/en-us/articles/360020343291-Android-SDK
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
+
+Split の SDK の初期化については、Split の [Flutter プラグインのドキュメント][1]を参照してください。
+
+```dart
+  StreamSubscription<Impression> impressionsStream = _split.impressionsStream().listen((impression) {
+    // Split がインプレッションを報告する際に機能フラグを送信します
+    final split = impression.split;
+    final treatment = impression.treatment;
+    if (split != null && treatment != null) {
+      DatadogSdk.instance.rum?.addFeatureFlagEvaluation(split, treatment);
+    }
+  });
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/8096158017165-Flutter-plugin
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -298,6 +333,66 @@ Flagsmith は現在、このインテグレーションをサポートしてい�
 {{% tab "Android" %}}
 
 Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### DevCycle インテグレーション
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+DevCycle の SDK を初期化し、`variableEvaluated` イベントにサブスクライブします。すべての変数評価 `variableEvaluated:*` または特定の変数評価 `variableEvaluated:my-variable-key` にサブスクライブすることを選択します。
+
+DevCycle の SDK の初期化については、[DevCycle の JavaScript SDK ドキュメント][5]を、DevCycle のイベントシステムについては、[DevCycle の SDK イベントドキュメント][6]を参照してください。
+
+```javascript
+const user = { user_id: "<USER_ID>" };
+const dvcOptions = { ... };
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
+...
+dvcClient.subscribe(
+    "variableEvaluted:*",
+    (key, variable) => {
+        // すべての変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+...
+dvcClient.subscribe(
+    "variableEvaluted:my-variable-key",
+    (key, variable) => {
+        // 特定の変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+```
+
+
+[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
+[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
 
 {{% /tab %}}
 {{< /tabs >}}
