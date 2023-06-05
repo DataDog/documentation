@@ -34,7 +34,7 @@
 
                     {{- $hugo_context.Scratch.Add "algoliaindex" (
                         dict "objectID" $object_id
-                        "title" $title
+                        "title" $section_header
                         "order" $i
                         "tags" $page.Params.algolia.tags
                         "section_header" $section_header
