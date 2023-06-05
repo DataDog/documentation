@@ -1,41 +1,55 @@
 {{- /* Creates an algolia json record for each individual section (split by h2 header) of the given page. */ -}}
 
-{{- $hugo_context := .context -}}
-{{- $page := .page -}}
-{{- $title := .title -}}
-{{- $category := .category -}}
-{{- $subcategory := .subcategory -}}
-{{- $rank := .rank -}}
-{{- $section_header := "" -}}
+{{ $hugo_context := .context }}
+{{ $page := .page }}
+{{ $title := .title }}
+{{ $category := .category }}
+{{ $subcategory := .subcategory }}
+{{ $rank := .rank }}
+{{ $section_header := "" }}
+{{ $section_content := "" }}
 
-{{- $context := print "%s" . | printf "%s%s" "<h2" -}}
-{{- $section_header = index (split (index (split $context "</h2>") 0) ">") 1 -}}
+{{ range $element := (slice "h2" "h3" "h4" "h5") }}
+    {{ $content_array := split $page.Content (print "<" $element) }}
+    {{ range $content_array }}
+        {{ if in . $element }}
+            {{ $context := print "%s" . | printf "%s%s" (print "<" $element) }}
+            {{ $section_header = index (split (index (split $context (printf "</%s>" $element)) 0) ">") 1 }}
+            {{ $section_content = $context | plainify | htmlUnescape | safeHTML }}
+            {{ $section_content = (split $section_content " ")}}
 
-{{- $chunked := slice -}}
-{{- $post_len := len $page.PlainWords -}}
+            {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
 
-{{- range $i := (seq 0 1000 $post_len) -}}
-    {{- $chunked = $chunked | append (delimit (first 1000 (after $i $page.PlainWords) ) " " ) -}}
-{{- end -}}
+                {{- $chunked := slice -}}
+                {{- $post_len := len $section_content -}}
 
-{{- range $i, $c := $chunked -}}
-    {{- $full_url := print $page.Permalink -}}
-    {{- $relpermalink := print $page.RelPermalink -}}
-    {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" $i) -}}
+                {{- range $i := (seq 0 1000 $post_len) -}}
+                    {{- $chunked = $chunked | append (delimit (first 1000 (after $i $section_content) ) " " ) -}}
+                {{- end -}}
 
-    {{- $hugo_context.Scratch.Add "algoliaindex" (
-        dict "objectID" $object_id
-        "title" $title
-        "order" $i
-        "tags" $page.Params.tags
-        "section_header" $section_header
-        "content" $c
-        "type" $page.Type
-        "relpermalink" $relpermalink
-        "full_url" $full_url
-        "language" $page.Language.Lang
-        "category" $category
-        "subcategory" $subcategory
-        "rank" $rank
-    ) -}}
-{{- end -}}
+                {{- range $i, $c := $chunked -}}
+                    {{- $full_url := print $page.Permalink "#" ($section_header | anchorize) -}}
+                    {{- $relpermalink := print $page.RelPermalink "#" ($section_header | anchorize) -}}
+                    {{- $object_id := (print $page.File.UniqueID "_" $page.File.Lang "_" $i) -}}
+
+                    {{- $hugo_context.Scratch.Add "algoliaindex" (
+                        dict "objectID" $object_id
+                        "title" $title
+                        "order" $i
+                        "tags" $page.Params.tags
+                        "section_header" $section_header
+                        "content" $c
+                        "type" $page.Type
+                        "relpermalink" $relpermalink
+                        "full_url" $full_url
+                        "language" $page.Language.Lang
+                        "category" $category
+                        "subcategory" $subcategory
+                        "rank" $rank
+                    ) -}}
+                {{- end -}}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
