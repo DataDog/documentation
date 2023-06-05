@@ -36,7 +36,7 @@
                         dict "objectID" $object_id
                         "title" $title
                         "order" $i
-                        "tags" $page.Params.algolia.tags | default ""
+                        "tags" $page.Params.algolia.tags
                         "section_header" $section_header
                         "content" $c
                         "type" $page.Type
