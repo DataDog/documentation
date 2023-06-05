@@ -364,6 +364,38 @@
               kind: documentation
               description: Use the Datadog Static Analysis CI extension to run Static Analysis tests in a CI pipeline.
 
+      - repo_name: datadog-static-analyzer-rule-docs
+        contents:
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/python-best-practices/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/default_rules/python/best_practices/'
+            path_to_remove: 'rulesets/python-best-practices/'
+            front_matters:
+              dependencies: [ "https://github.com/DataDog/datadog-static-analyzer-rule-docs/blob/main/rulesets/python-best-practices/" ]
+
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/python-code-style/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/default_rules/python/code_style/'
+            path_to_remove: 'rulesets/python-code-style/'
+            front_matters:
+              dependencies: [ "https://github.com/DataDog/datadog-static-analyzer-rule-docs/blob/main/rulesets/python-code-style/" ]
+        
+        - action: pull-and-push-folder
+          branch: main
+          globs:
+          - rulesets/python-security/*.md
+          options:
+            dest_dir: '/continuous_integration/static_analysis/default_rules/python/security/'
+            path_to_remove: 'rulesets/python-security/'
+            front_matters:
+              dependencies: [ "https://github.com/DataDog/datadog-static-analyzer-rule-docs/blob/main/rulesets/python-security/" ]
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
