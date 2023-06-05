@@ -3,7 +3,7 @@ aliases:
 - /ja/tracing/connect_logs_and_traces/nodejs
 code_lang: nodejs
 code_lang_weight: 50
-description: Nodejs ログとトレースを接続して Datadog で関連付けます。
+description: Node.js ログとトレースを接続して Datadog で関連付けます。
 further_reading:
 - link: tracing/trace_collection/custom_instrumentation
   tag: ドキュメント
@@ -18,7 +18,7 @@ further_reading:
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
 kind: documentation
-title: Nodejs ログとトレースの接続
+title: Node.js ログとトレースの接続
 type: multi-code-lang
 ---
 
@@ -35,7 +35,7 @@ const tracer = require('dd-trace').init({
 
 これにより、`bunyan`、`paperplane`、`pino`、`winston` の自動トレース ID 挿入が有効になります。
 
-まだの場合は、NodeJS トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成します。これは、
+まだの場合は、Node.js トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成します。これは、
 `env`、`service`、`version` を追加する際のベストプラクティスです (詳細は、[統合サービスタグ付け][1]を参照)。
 
 **注**: 自動挿入が機能するのは JSON 形式のログのみです。
@@ -67,7 +67,7 @@ class Logger {
 module.exports = Logger;
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
