@@ -660,9 +660,12 @@ OpenTelemetry コレクターには、[2 つの主要なデプロイメント方
 
 ## すぐに使えるダッシュボード
 
-Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには、**Dashboards** > **Dashboards list** に移動し、`opentelemetry` を検索してください。
+Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには
 
-{{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
+1. [OpenTelemetry インテグレーション][23]をインストールします。
+2. **Dashboards** > **Dashboards list** にアクセスし、`opentelemetry` を検索します。
+
+   {{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
 
 **Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][21] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][22]に応じて収集された他の種類のメトリクス用です。
 
@@ -692,3 +695,4 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 [20]: https://opentelemetry.io/docs/collector/deployment/
 [21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[23]: https://app.datadoghq.com/integrations/otel
