@@ -342,6 +342,43 @@ For more information about outbound connections from the Agent, see the [Network
 
 If you're still unsure about your issue, you may reach out to the [Datadog support][6].
 
+## FAQ
+
+**1. Do the Datadog Agent and the Datadog Agent FIPS Proxy have to be on the same host?**
+
+Yes, FIPS compliance is not retained if the Datadog Agent FIPS Proxy and the Datadog Agent are not on the same host.
+Similarly, FIPS compliance is not retained if the `fips.enabled` option is not set to `true` in `datadog.yaml`.
+
+**2. Are customers responsible for hardening their host?**
+
+Yes, host security and hardening are customer responsibilities.
+
+**3. Are the Datadog Agent FIPS Proxy images hardened?**
+
+While the images provided are constructed with security in mind, they have not been evaluated against CIS benchmark recommendations or DISA STIG standards.
+
+**4. Are all incoming and outgoing Agent communications FIPS supported?**
+
+The Datadog Agent FIPS Proxy only secures communication originating from the Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Agent or originating from the Agent are not covered by this solution.
+
+**5. Are all communications between the Cluster Agent and Node Agents FIPS supported?**
+
+The Datadog Agent FIPS Proxy only secures communication originating from the Cluster Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Cluster Agent or originating from the Cluster Agent are not covered by this solution.
+
+**6. Is FIPS compliance retained if we rebuild or reconfigure the Datadog Agent FIPS Proxy to fit our deployment or testing needs?**
+
+Even though rebuilding, reconfiguring, or modifying the Datadog Agent FIPS Proxy might be a technically working setup, Datadog cannot guarantee FIPS compliance if the Datadog Agent FIPS Proxy is not used exactly as explained in the documentation.
+
+**7. My Datadog Agent is correctly sending data even though I didn't follow all of the installation steps listed above. Is my setup FIPS compliant?**
+
+Datadog cannot guarantee FIPS compliance if the Datadog Agent FIPS Proxy is not used exactly as documented.
+This notably implies having your Datadog Agent configured to communicate to the Datadog Agent FIPS Proxy by setting the `fips.enabled` option, as well as having a running Datadog Agent FIPS Proxy.
+
+**8. Are Datadog Agent release versions tied to Datadog Agent FIPS Proxy release versions?**
+
+The Datadog Agent FIPS Proxy releases are decoupled from Datadog Agent releases. Make sure to use the latest Datadog Agent and Datadog Agent FIPS Proxy versions
+to have all the available products supported by the Datadog Agent and the Datadog Agent FIPS Proxy.
+
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4024
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4024.pdf
 [3]: /agent/troubleshooting/
