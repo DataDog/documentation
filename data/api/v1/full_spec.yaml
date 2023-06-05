@@ -27754,7 +27754,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
