@@ -344,16 +344,16 @@ If you're still unsure about your issue, you may reach out to the [Datadog suppo
 
 ## FAQ
 
-**1. Does the Datadog Agent and the Datadog FIPS proxy have to be on same host?**
+**1. Do the Datadog Agent and the Datadog Agent FIPS Proxy have to be on same host?**
 
-Yes, the FIPS compliance is not retained if the Datadog FIPS proxy and the Datadog Agent are not on the same host.
-The same applies if the `fips.enabled` option in not set to `true` in `datadog.yaml`.
+Yes, FIPS compliance is not retained if the Datadog Agent FIPS Proxy and the Datadog Agent are not on the same host.
+Similarly, FIPS compliance is not retained if the `fips.enabled` option is not set to `true` in `datadog.yaml`.
 
 **2. Are customers responsible for hardening their host?**
 
-Yes, **Host security and hardening are customer responsibilities.**
+Yes, host security and hardening are customer responsibilities.
 
-**3. Are the FIPS proxy images hardened?**
+**3. Are the Datadog Agent FIPS Proxy images hardened?**
 
 No, FIPS proxy docker images are not hardened.
 
@@ -361,13 +361,13 @@ No, FIPS proxy docker images are not hardened.
 
 No, the FIPS proxy is only avaivable for Linux x86_64. See the [Supported platforms and limitations] section for more details.
 
-**5. Are all incoming and outgoing agent communications FIPS supported?** 
+**5. Are all incoming and outgoing Agent communications FIPS supported?** 
 
-No, only the communications between the Datadog Agent and the Datadog FIPS proxy support FIPS, if they are on the same host.
+Datadog FIPS proxy only secures communication originating from the Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Agent or originating from the Agent are not covered by this solution.
 
 **6. Are all communications between the Cluster Agent and Node Agents FIPS supported?**
 
-No, only the communications between the Cluster Agent and the Datadog FIPS proxy support FIPS.
+Datadog FIPS proxy only secures communication originating from the Cluster Agent targeting the Datadog intake API endpoints. This means that other forms of communication terminating at the Cluster Agent or originating from the Cluster Agent are not covered by this solution.
 
 [1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4024
 [2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4024.pdf
