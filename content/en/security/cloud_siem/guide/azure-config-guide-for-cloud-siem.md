@@ -120,7 +120,7 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 ### Add the Datadog Azure function
 
 1. In the new function, select **Code + Test** in the left side menu.
-1. Copy and paste the [Datadog-Azure function code][4] to you index.js file.
+1. Copy and paste the [Datadog-Azure function code][4] to your `index.js` file.
 1. Replace `<DATADOG_API_KEY>` with your Datadog API on line 22 of the function code.
 1. If you are not using the Datadog US1 site, replace `DD_SITE` with your [Datadog site][5] parameter on line 23 of the function code.
 1. Click **Save**.
