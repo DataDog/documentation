@@ -335,7 +335,7 @@ load_module modules/ngx_http_datadog_module.so;
 ```
 
 The default configuration connects to a local Datadog Agent and produces traces
-for all NGINX locations. Specify custom configuration via the dedicated
+for all NGINX locations. Specify custom configuration using the dedicated
 `datadog_*` directives described in the Datadog module's [API documentation][15].
 
 For example, the following NGINX configuration sets the service name to
@@ -485,7 +485,7 @@ The [Ingress-NGINX Controller for Kubernetes][13] versions 0.23.0+ include the
 OpenTracing NGINX module.
 
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
-The name of the ConfigMap will be cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
+The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
 If ingress-nginx was installed via helm chart, this ConfigMap will be named like `Release-Name-nginx-ingress-controller`.
 
 The ingress controller manages both the `nginx.conf` and `/etc/nginx/opentracing.json` files. Tracing is enabled for all `location` blocks.
