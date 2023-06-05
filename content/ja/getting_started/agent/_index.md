@@ -3,6 +3,9 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: ドキュメント
   text: 基本的な Agent の利用方法
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: インフラストラクチャーモニタリングをパワーアップさせるインタラクティブなセッションに参加できます
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: よくあるご質問
   text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
@@ -57,7 +60,7 @@ Agent メトリクスの全リストは、[Agent メトリクス][3]のインテ
 | メモリ      | [System][4]  | すべて                |
 | ネットワーク     | [Network][6] | すべて                |
 | NTP         | [NTP][7]     | すべて                |
-| アップタイム      | [System][4]  | すべて                |
+| アップタイム      | [System][4]  | All                |
 | ファイル処理 | [System][4]  | Mac 以外のすべて     |
 | ロード        | [System][4]  | Windows 以外のすべて |
 | Docker      | [Docker][8]  | Docker             |
