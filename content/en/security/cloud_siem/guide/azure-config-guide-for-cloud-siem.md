@@ -96,7 +96,7 @@ Create a new Function App. If you are using an existing function app, skip to Ad
 1. Select a resource group for the function app.
 1. Enter a name for the function app.
 1. Leave the selection to deploy to code.
-1. In **Runtime stack** dropdown menu, select **Node.js**.
+1. In the **Runtime stack** dropdown menu, select **Node.js**.
 1. Select a region for your function app.
 1. Select an operating system and plan type.
 1. Click **Next: Storage**.
