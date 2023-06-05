@@ -18,6 +18,9 @@ further_reading:
 - link: /developers/community/libraries/
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/metrics-without-limits/
   tag: ブログ
   text: Metrics without Limits™ でカスタムメトリクスのボリュームをダイナミックにコントロール
