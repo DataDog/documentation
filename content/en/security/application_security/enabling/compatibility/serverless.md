@@ -22,7 +22,7 @@ code_lang_weight: 90
 ### Supported languages and their requirements
 
 Node.js
-: If you are bundling using webpack or esbuild, [follow the specific bundler instruction][4].
+: If you are bundling using webpack or esbuild, [follow the specific bundler instructions][4].
 
 Python
 : 
