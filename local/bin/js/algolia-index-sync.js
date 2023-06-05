@@ -28,8 +28,8 @@ const updateSettings = (index) => {
             'unordered(section_header)',
             'unordered(content)'
         ],
-        ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'desc(rank)', 'exact', 'custom'],
-        customRanking: [],
+        ranking: ['words', 'filters', 'typo', 'attribute', 'proximity', 'exact', 'custom'],
+        customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
         indexLanguages: ['ja', 'en', 'fr'],
