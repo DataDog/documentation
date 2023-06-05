@@ -78,7 +78,7 @@ If you want to use an existing resource group, skip to Create an Event Hubs name
 1. Leave the throughput units (for standard tier) or processing units (for premium tier) as it is.
 1. Click **Review + create**.
 1. After validation succeeds, click **Create**.
-1. After deployment completed successfully, click **Go to resource**.
+1. After the deployment is completed successfully, click **Go to resource**.
 
 ### Create an event hub
 
