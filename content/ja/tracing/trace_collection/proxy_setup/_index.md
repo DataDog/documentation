@@ -711,6 +711,50 @@ Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProt
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 [13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
 {{% /tab %}}
+{{% tab "Kong" %}}
+
+Datadog APM は、[Kong Gateway][1] で [kong-plugin-ddtrace][2] プラグインを利用して利用できます。
+
+## APM に Datadog Agent を構成する
+
+プラグインは `luarocks` を使ってインストールします。
+```
+luarocks install kong-plugin-ddtrace
+```
+
+Kong Gateway はバンドルされているプラグインではないので、有効にする前に構成する必要があります。有効にするには、環境変数 `KONG_PLUGINS` に `bundled` と `ddtrace` を含めるか、`/etc/kong/kong.conf` に `plugins=bundled,ddtrace` を設定してください。次に、Kong Gateway を再起動すると変更が適用されます。
+
+```
+# KONG_PLUGINS 環境変数を設定するか、/etc/kong/kong.conf を編集して ddtrace プラグインを有効にします
+export KONG_PLUGINS=bundled,ddtrace
+kong restart
+```
+
+## コンフィギュレーション
+
+プラグインは、グローバルまたは Kong Gateway の特定のサービスで有効にすることができます。
+
+```
+# グローバルに有効
+curl -i -X POST --url http://localhost:8001/plugins/ --data 'name=ddtrace'
+# 特定のサービスのみ有効
+curl -i -X POST --url http://localhost:8001/services/example-service/plugins/ --data 'name=ddtrace'
+```
+
+プラグイン内のサービス名や環境などを設定するためのオプションが用意されています。
+以下の例では、`prod` 環境に `mycorp-internal-api` というサービス名を設定しています。
+```
+curl -i -X POST --url http://localhost:8001/plugins/ --data 'name=ddtrace' --data 'config.service_name=mycorp-internal-api' --data 'config.environment=prod'
+```
+
+その他の構成オプションは、[kong-plugin-ddtrace][3] のプラグインドキュメントに記載されています。
+
+
+[1]: https://docs.konghq.com/gateway/latest/
+[2]: https://github.com/DataDog/kong-plugin-ddtrace
+[3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料

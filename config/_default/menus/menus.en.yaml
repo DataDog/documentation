@@ -172,9 +172,15 @@ main:
     parent: getting_started
     weight: 19
   - name: Application Security Management
-    url: getting_started/application_security/
+    identifier: getting_started_application_security
+    url: getting_started/application_security
     parent: getting_started
     weight: 19
+  - name: Application Vulnerability Management
+    identifier: getting_started_application_vulnerability
+    url: getting_started/application_security/vulnerability_management
+    parent: getting_started_application_security
+    weight: 101
   - name: Learning Center
     url: getting_started/learning_center/
     parent: getting_started
@@ -284,24 +290,28 @@ main:
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 7
+    weight: 5
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 8
+    weight: 6
   - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 801
+    weight: 601
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 802
+    weight: 602
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 803
+    weight: 603
+  - name: Remote Configuration
+    url: agent/remote_config
+    parent: agent
+    weight: 7
   - name: Proxy
     url: agent/proxy/
     parent: agent
@@ -1156,6 +1166,11 @@ main:
     parent: slos
     identifier: burn_rate
     weight: 4
+  - name: Guides
+    url: service_management/service_level_objectives/guide/
+    parent: slos
+    identifier: slos_guides
+    weight: 99
   - name: Events
     url: service_management/events/
     pre: events
@@ -1211,38 +1226,38 @@ main:
     parent: service_management_heading
     weight: 60000
   - name: Workflows
-    url: workflows/
+    url: service_management/workflows/
     pre: workflows
     identifier: workflows
-    parent: platform_heading
-    weight: 120000
+    parent: service_management_heading
+    weight: 70000
   - name: Build Workflows
-    url: workflows/build/
+    url: service_management/workflows/build/
     parent: workflows
     identifier: workflows_build
     weight: 1
   - name: Authentication
-    url: workflows/access/
+    url: service_management/workflows/access/
     parent: workflows
     identifier: workflows_access
     weight: 2
   - name: Trigger Workflows
-    url: workflows/trigger/
+    url: service_management/workflows/trigger/
     parent: workflows
     identifier: workflows_trigger
     weight: 3
   - name: Actions Catalog
-    url: workflows/actions_catalog/
+    url: service_management/workflows/actions_catalog/
     parent: workflows
     identifier: workflows_actions_catalog
     weight: 4
   - name: Generic Actions
-    url: workflows/actions_catalog/generic_actions/
+    url: service_management/workflows/actions_catalog/generic_actions/
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
   - name: Connections
-    url: workflows/connections/
+    url: service_management/workflows/connections/
     parent: workflows
     identifier: workflows_connections
     weight: 5
@@ -4791,6 +4806,78 @@ api:
     url: /api/latest/gcp-integration/
     identifier: gcp-integration
     generated: true
+  - name: Create a Datadog GCP principal
+    url: '#create-a-datadog-gcp-principal'
+    identifier: gcp-integration-create-a-datadog-gcp-principal
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - MakeGCPSTSDelegate
+      unstable: []
+      order: 5
+  - name: List delegate account
+    url: '#list-delegate-account'
+    identifier: gcp-integration-list-delegate-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetGCPSTSDelegate
+      unstable: []
+      order: 6
+  - name: Update STS Service Account
+    url: '#update-sts-service-account'
+    identifier: gcp-integration-update-sts-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateGCPSTSAccount
+      unstable: []
+      order: 4
+  - name: Delete an STS enabled GCP Account
+    url: '#delete-an-sts-enabled-gcp-account'
+    identifier: gcp-integration-delete-an-sts-enabled-gcp-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteGCPSTSAccount
+      unstable: []
+      order: 3
+  - name: Create a new entry for your service account
+    url: '#create-a-new-entry-for-your-service-account'
+    identifier: gcp-integration-create-a-new-entry-for-your-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateGCPSTSAccount
+      unstable: []
+      order: 2
+  - name: List all GCP STS-enabled service accounts
+    url: '#list-all-gcp-sts-enabled-service-accounts'
+    identifier: gcp-integration-list-all-gcp-sts-enabled-service-accounts
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListGCPSTSAccounts
+      unstable: []
+      order: 1
   - name: Update a GCP integration
     url: '#update-a-gcp-integration'
     identifier: gcp-integration-update-a-gcp-integration
@@ -5453,8 +5540,19 @@ api:
       versions:
         - v2
       operationids:
-        - DeleteBulkTagsMetricsConfiguration
         - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 9
+  - name: Delete tags for multiple metrics
+    url: '#delete-tags-for-multiple-metrics'
+    identifier: metrics-delete-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteBulkTagsMetricsConfiguration
       unstable: []
       order: 10
   - name: Get a list of metrics
@@ -6095,7 +6193,7 @@ api:
       operationids:
         - ListSecurityMonitoringRules
       unstable: []
-      order: 3
+      order: 4
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
@@ -6156,6 +6254,19 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
+  - name: Mute or unmute a finding
+    url: '#mute-or-unmute-a-finding'
+    identifier: security-monitoring-mute-or-unmute-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateFinding
+      unstable:
+        - v2
+      order: 3
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6219,7 +6330,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 3
+      order: 4
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks

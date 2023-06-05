@@ -326,7 +326,7 @@ get_latest_release() {
 BASE_IMAGE=nginx:1.23.2-alpine
 BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="nginx_$NGINX_IMAGE_TAG-ngx_http_datadog_module.so.tgz"
+tarball="$BASE_IMAGE_WITHOUT_COLONS-ngx_http_datadog_module.so.tgz"
 wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
 tar -xzf "$tarball" -C /usr/lib/nginx/modules
 rm "$tarball"
@@ -741,6 +741,52 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 [13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
+{{% /tab %}}
+{{% tab "Kong" %}}
+
+Datadog APM is available for [Kong Gateway][1] using the [kong-plugin-ddtrace][2] plugin.
+
+## Installation
+
+The plugin is installed using `luarocks`.
+```
+luarocks install kong-plugin-ddtrace
+```
+
+Kong Gateway is not a bundled plugin, so it needs to be configured before it can be enabled.
+To enable it, include `bundled` and `ddtrace` in the `KONG_PLUGINS` environment variable, or
+set `plugins=bundled,ddtrace` in `/etc/kong/kong.conf`. Next, restart Kong Gateway to apply the change.
+
+```
+# Set the KONG_PLUGINS environment variable or edit /etc/kong/kong.conf to enable the ddtrace plugin
+export KONG_PLUGINS=bundled,ddtrace
+kong restart
+```
+
+## Configuration
+
+The plugin can be enabled globally or on specific services in Kong Gateway.
+
+```
+# Enabled globally
+curl -i -X POST --url http://localhost:8001/plugins/ --data 'name=ddtrace'
+# Enabled for specific service only
+curl -i -X POST --url http://localhost:8001/services/example-service/plugins/ --data 'name=ddtrace'
+```
+
+Options are available for setting the service name, environment, and other features within the plugin.
+The example below sets the service name to `mycorp-internal-api` in the `prod` environment.
+```
+curl -i -X POST --url http://localhost:8001/plugins/ --data 'name=ddtrace' --data 'config.service_name=mycorp-internal-api' --data 'config.environment=prod'
+```
+
+More configuration options can be found on the [kong-plugin-ddtrace][3] plugin documentation.
+
+
+[1]: https://docs.konghq.com/gateway/latest/
+[2]: https://github.com/DataDog/kong-plugin-ddtrace
+[3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
+
 {{% /tab %}}
 {{< /tabs >}}
 

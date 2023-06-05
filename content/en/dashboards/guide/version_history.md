@@ -9,6 +9,9 @@ further_reading:
 - link: "/account_management/audit_trail/"
   tag: "documentation"
   text: "Audit Trail Overview"
+- link: "https://www.datadoghq.com/blog/dashboards-notebooks-version-history/"
+  tag: "blog"
+  text: "Track changes to Datadog dashboards and notebooks with version history"
 ---
 
 ## Overview

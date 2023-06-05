@@ -62,4 +62,4 @@ In the [Case Management][1] page, click the button **New Case** to create a new 
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/
 [3]: https://app.datadoghq.com/cases/contexts/new
-[4]: /workflows/build/#build-a-workflow-with-the-workflow-builder
+[4]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder

@@ -135,7 +135,6 @@ spec:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
     kubelet:
-      # Agent 7.35 から必要です。以下の Kubelet 証明書に関する注記を参照してください。
       tlsVerify: false
   override:
     clusterAgent:
@@ -197,7 +196,6 @@ spec:
     credentials:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
-    # サポートされているノードイメージのバージョンが必要です
     kubelet:
       host:
         fieldRef:
@@ -613,7 +611,7 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/helm-charts/tree/master/examples/datadog
+[1]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
 [2]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
 [3]: /ja/containers/cluster_agent/admission_controller
 [4]: https://github.com/Azure/AKS/releases/tag/2022-10-30
