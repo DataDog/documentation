@@ -104,9 +104,20 @@ datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
 {{% /tab %}}
 {{< /tabs >}}
 
-### Other programming languages
+### Import third-party Static Analysis results
 
-Upload a SARIF report using [`datadog-ci`][1].
+Datadog supports the ingestion of Static Analysis results from third-party Static Analysis tools that can export their results into the interoperable [SARIF Format][3]. To configure this:
+
+1. Make sure the variables `DD_API_KEY` and `DD_APP_KEY` are defined
+2. Install the datadog-ci utility:
+   ```bash
+   npm install -g @datadog/datadog-ci
+   ```
+3. Run your code third-party Static Analysis tool that outputs results in the SARIF format
+4. Upload the results to Datadog:
+   ```bash
+   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
+   ```
 
 ## Further Reading
 
@@ -114,3 +125,4 @@ Upload a SARIF report using [`datadog-ci`][1].
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 [2]: /account_management/api-app-keys/
+[3]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
