@@ -34,12 +34,14 @@ Datadog では Azure App Service に属するすべてのリソースタイプ�
 
 Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure App Service のワークロードランタイムの監視機能を追加提供します。
 
-| OS | ランタイム |ステータス|Documentation| 
-|----|---------|----|----|
-|Windows|.NET|GA|[Windows .NET のセットアップ][7]|
-|Windows|Java|ベータ|[Windows Java のセットアップ][8]|
-|Linux|.NET|ベータ|[Linux ドキュメント][9]|
-|Linux|Node|ベータ|[Linux ドキュメント][9]|
+| OS | ランタイム |アプリタイプ|ステータス|Documentation| 
+|----|---------|-----|----|----|
+|Windows|.NET|関数アプリと Web アプリ|GA|[Windows .NET のセットアップ][7]|
+|Linux|.NET|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|Node|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|PHP|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|Java|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|Python|Web アプリ|GA|[Linux ドキュメント][9]|
 
 機能:
 - 自動インスツルメンテーションを用いた完全分散型 APM トレーシング
