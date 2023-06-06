@@ -13,6 +13,8 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces and profiles"
+algolia:
+  tags: ['agent proxy']
 ---
 
 ## Overview

@@ -5,7 +5,7 @@ private: true
 disable_toc: true
 cascade:
     algolia:
-        rank: 20
+        rank: 70
         category: Guide
         subcategory: Agent Guides
 ---
