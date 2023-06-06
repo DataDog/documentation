@@ -214,7 +214,6 @@ runtime_security_config:
 
   remote_configuration:
     ## @param enabled - boolean - optional - default: false
-    ## For [Datadog Agent] version 7.42 only, to enable remote configuration
     enabled: true
 ```
 

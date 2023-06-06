@@ -72,6 +72,7 @@
                     :class="shouldShowGlossaryTerm('{{ $core_products_string }}') && 'show'" 
                     x-cloak x-show="shouldShowGlossaryTerm('{{ $core_products_string }}')" 
                     data-letter='{{ $first_char | lower }}'
+                    data-products="{{ $core_products_string }}"
                     x-init="$watch('filterValue', _ => appendToFilteredLetters($el))"
                     >
                     
