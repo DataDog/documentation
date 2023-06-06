@@ -220,12 +220,13 @@ To install and configure the Datadog Serverless Framework plugin:
    environment:
      DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+     DD_TRACE_ENABLED: true
    ```
-4. For **Node** and **Python** functions only, double-check that the function's handler is set correctly
-    - **Node**: Set your function’s handler to /opt/nodejs/node_modules/datadog-lambda-js/handler.handler. 
-       - Also, set the environment variable DD_LAMBDA_HANDLER to your original handler, for example, myfunc.handler.
-    - **Python**: Set you function’s handler is to datadog_lambda.handler.handler.
-       - Also, set the environment variable DD_LAMBDA_HANDLER to your original handler, for example, myfunc.handler.
+4. For **Node** and **Python** functions only, double-check that the function's handler is set correctly:
+    - **Node**: Set your function’s handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`. 
+       - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+    - **Python**: Set your function’s handler is to `datadog_lambda.handler.handler`.
+       - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
    
 4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
