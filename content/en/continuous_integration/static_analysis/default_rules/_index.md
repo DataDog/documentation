@@ -1,5 +1,5 @@
 ---
-title: Default Rules
+title: Default Static Analysis Rules
 kind: documentation
 type: static_analysis_rules
 description: View rules for languages such as Python for Datadog Static Analysis.
@@ -25,11 +25,11 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-Datadog Static Analysis provides out-of-the-box queries to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
+Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
 
 ## Default rules
 
-### Best Practices
+### Best practices
 
 {{< whatsnext desc="See the following documentation about rules for Static Analysis to detect violations in best practices:">}}
     {{< nextlink href="continuous_integration/static_analysis/default_rules/python/best_practices/argument-same-name" >}}Argument Same Name{{< /nextlink >}}
@@ -64,9 +64,9 @@ Datadog Static Analysis provides out-of-the-box queries to help detect violation
     {{< nextlink href="continuous_integration/static_analysis/default_rules/python/best_practices/unreachable-code" >}}Unreachable Code{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Code Style
+### Code style
 
-{{< whatsnext desc="See the following documentation about rules for Static Analysis to detect violations in code styling:">}}
+{{< whatsnext desc="See the following documentation about rules for Static Analysis to detect violations in code style:">}}
     {{< nextlink href="continuous_integration/static_analysis/default_rules/python/code_style/assignment-names" >}}Assignment Names{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/default_rules/python/code_style/function-naming" >}}Function Naming{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/default_rules/python/code_style/max-function-lines" >}}Maximum Function Lines{{< /nextlink >}}
