@@ -16,6 +16,8 @@ further_reading:
 - link: "/agent/guide/agent-fips-proxy"
   tag: "Documentation"
   text: "Datadog FIPS Compliance"
+algolia:
+  tags: ['agent proxy']
 ---
 
 ## Overview

@@ -28,6 +28,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/"
     tag: "Blog"
     text: "Monitor your firewall logs with Datadog"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
