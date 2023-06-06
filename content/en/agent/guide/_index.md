@@ -13,6 +13,7 @@ cascade:
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="agent/guide/agent-commands" >}}Agent Commands{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent Configuration Files{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-fips-proxy" >}}Datadog FIPS Compliance{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/setup" >}}Aggregating Agents{{< /nextlink >}}
