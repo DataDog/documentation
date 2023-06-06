@@ -29,8 +29,6 @@ further_reading:
 <div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
 {{< /site-region >}}
 
-{{< img src="service_management/incidents/workflow-1-graph-1.png" alt="From Graph" style="width:80%;">}}
-
 Any event that may lead to a disruption in your organization's services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog's Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 
 Incidents live in Datadog alongside the metrics, traces, and logs you are collecting. You can view and filter incidents that are relevant to you.
