@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-{{< img src="monitors/incidents/incident_analytics.mp4" alt="Incident Management Analytics" video=true style="width:80%;">}}
+{{< img src="service_management/incidents/incident_analytics.mp4" alt="Incident Management Analytics" video=true style="width:80%;">}}
 
 Incident Management Analytics is a queryable data source for aggregated incident statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][1] and [Notebooks][2] to analyze the history of your incident response over time. To give you a starting point, Datadog provides an Incident Management Overview [Dashboard template][3] and [Notebook template][4] that you can clone and customize as necessary.
 
@@ -56,7 +56,7 @@ To configure your graph using Incident Management Analytics data, follow these s
 6. Filter: `severity:("SEV-1" OR "SEV-2")`
 7. Group: `Services`, limit to top 5
 
-{{< img src="monitors/incidents/incident_analytics_query_example.jpeg" alt="Incident Analytics Query Example" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_analytics_query_example.jpeg" alt="Incident Analytics Query Example" style="width:80%;">}}
 
 [1]: /dashboards/
 [2]: /notebooks/

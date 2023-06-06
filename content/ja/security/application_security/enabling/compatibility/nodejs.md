@@ -35,7 +35,7 @@ Node.js ライブラリでは、指定されたトレーサーのバージョン
 
 | ASM の機能                   | NodeJS  トレーサーの最小バージョン |
 | -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> Business logic API  | 3.31.1 <br/>   |
+| Threat Detection <br/> --> Business logic API  | 3.13.1 <br/>   |
 | Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | <br/> --> 3.11.0<br/> --> 3.19.0<br/> --> 3.11.0     |
 | Risk Management <br/> --> サードパーティの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | NodeJS 12+ の場合は 2.23.0、NodeJS 14+ の場合は 3.10.0<br/><br/> |
 
@@ -47,4 +47,4 @@ Node.js でサポートされるすべての ASM 機能を得るためのトレ�
 
 
 [1]: /ja/tracing/trace_collection/compatibility/nodejs/
-[2]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[2]: /ja/agent/remote_config/#enabling-remote-configuration

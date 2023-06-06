@@ -3743,36 +3743,40 @@ main:
     url: developers/integrations/api_integration/
     parent: dev_tools_integrations
     weight: 402
+  - name: Create a Log Integration
+    url: developers/integrations/log_integration/
+    parent: dev_tools_integrations
+    weight: 403
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 403
+    weight: 404
   - name: Build a Marketplace Offering
     url: developers/integrations/marketplace_offering/
     parent: dev_tools_integrations
     identifier: dev_tools__integrations_marketplace_offering
-    weight: 404
+    weight: 405
   - name: Create a Tile
     url: developers/integrations/create_a_tile/
     parent: dev_tools_integrations
     identifier: dev_tools_integrations_tile
-    weight: 405
+    weight: 406
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 406
+    weight: 407
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 407
+    weight: 408
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 408
+    weight: 409
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 409
+    weight: 410
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
@@ -6193,7 +6197,7 @@ api:
       operationids:
         - ListSecurityMonitoringRules
       unstable: []
-      order: 3
+      order: 4
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
@@ -6254,6 +6258,19 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
+  - name: Mute or unmute a finding
+    url: '#mute-or-unmute-a-finding'
+    identifier: security-monitoring-mute-or-unmute-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateFinding
+      unstable:
+        - v2
+      order: 3
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6317,7 +6334,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 3
+      order: 4
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
