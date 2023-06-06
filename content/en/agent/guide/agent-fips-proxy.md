@@ -36,6 +36,17 @@ Supported platforms (64-bit x86 only):
 | Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04|
 | Cloud and container| AWS ECS<br>AWS EKS (Helm)|
 
+Supported products (Agent 7.45+):
+
+- Metrics
+- Logs
+- APM traces
+- APM profiles
+- Instrumentation Telemetry
+- Processes
+- Orchestrator Explorer
+- Runtime Security
+
 The Datadog Agent FIPS Proxy does **not** support the following:
 
 - Serverless Monitoring
