@@ -36,6 +36,10 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 
 ## Container registries
 
+<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
+
+Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AWS ECR:
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |
 |------------|-------------------------------------|---------------------------------------------|-------------------------------------------|
@@ -916,7 +920,7 @@ The supported features and configuration options for the tracing library are the
 
 For example, you can turn on [Application Security Monitoring][3] or [Continuous Profiler][4], each of which may have billing impact:
 
-- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`.
+- For **Kubernetes**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` environment variables to `true` in the underlying application pod's deployment file.
 
 - For **hosts and containers**, set the `DD_APPSEC_ENABLED` or `DD_PROFILING_ENABLED` container environment variables to `true`, or in the [injection configuration](#supplying-configuration-source), specify an `additional_environment_variables` section like the following YAML example:
 

@@ -93,7 +93,7 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics, otlp]
+      receivers: [hostmetrics, prometheus, otlp]
       processors: [batch]
       exporters: [datadog]
     traces:
@@ -170,11 +170,12 @@ filelog:
     - `json_parser`: JSON ログをパースします。デフォルトでは、filelog レシーバーは各ログ行をログレコードに変換し、それがログの[データモデル][15]の `body` となります。次に、`json_parser` が JSON の本文をデータモデルの属性に変換します。
     - `trace_parser`: Datadog でログとトレースを関連付けるために、ログから `trace_id` と `span_id` を抽出します。
 
-#### Kubernetes を使用する
+<details>
+<summary><strong>オプション: Kubernetes の使用</strong></summary>
 
-Kubernetes インフラクチャーに OpenTelemetry Collector と Datadog Exporter をデプロイする方法は複数存在します。filelog レシーバーを動作させるためには、[Agent/DaemonSet のデプロイメント][16]を推奨します。
+Kubernetes インフラストラクチャーで OpenTelemetry Collector と Datadog Exporter をデプロイする方法は複数あります。filelog レシーバーを動作させるためには、[Agent/DaemonSet デプロイ][16]が推奨されるデプロイ方法です。
 
-コンテナ環境では、アプリケーションはログを `stdout` または `stderr` に書き込みます。Kubernetes はログを収集し、標準的な場所に書き込みます。filelog レシーバーには、ホストノード上のロケーションを Collector にマウントする必要があります。以下は、ログを送信するために必要なマウントを持つ[拡張機能例][17]です。
+コンテナ環境では、アプリケーションは `stdout` または `stderr` にログを書き込みます。Kubernetes はログを収集し、標準的な場所に書き込みます。ホストノード上のロケーションを filelog レシーバー用の Collector にマウントする必要があります。以下は、ログを送信するために必要なマウントを持つ[拡張機能例][17]です。
 
 ```
 apiVersion: apps/v1
@@ -235,6 +236,7 @@ spec:
           hostPath:
             path: /var/lib/docker/containers
 ```
+</details>
 
 ### 5. コレクターを実行する
 

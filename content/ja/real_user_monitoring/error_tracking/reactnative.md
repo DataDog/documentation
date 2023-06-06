@@ -1,20 +1,19 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/crash_reporting.md
 description: React Native プロジェクトにエラー追跡を設定します。
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-ios
+- link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-ios ソースコード
-- link: real_user_monitoring/error_tracking/explorer
+  text: dd-sdk-reactnative ソースコード
+- link: real_user_monitoring/error_tracking/
   tag: ドキュメント
-  text: エラートラッキングエクスプローラーについて
+  text: エラートラッキングについて
 - link: https://www.datadoghq.com/blog/rum-now-offers-react-native-crash-reporting-and-error-tracking/
   tag: GitHub
   text: RUM が React Native のクラッシュレポートとエラー追跡を提供開始
 kind: documentation
 title: React Native のクラッシュレポートとエラー追跡
 ---
+
 ## 概要
 
 React Native のクラッシュレポートとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
@@ -50,7 +49,7 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 ## 制限
 
 <div class="alert alert-warning"><p>
-Datadog は、50MB までのアップロードを受け付けます。
+Datadog は、US1 または EU1 サイトでは 200 MB まで、それ以外のサイトでは 50 MB までのアップロードを受け付けます。
 </p></div>
 
 ソースマップとバンドルのサイズを計算するには、次のコマンドを実行します。
@@ -70,6 +69,8 @@ payloadsize=$(($sourcemapsize + $bundlesize))
 echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 ```
 
+もし `build` ディレクトリがまだ存在しない場合は、まず `mkdir build` を実行してディレクトリを作成します。その後、上記のコマンドを実行します。
+
 ## クラッシュレポートのシンボル化
 
 アプリケーションのサイズを小さくするために、リリース用にビルドされる際に、そのコードは最小化されます。エラーを実際のコードにリンクするために、以下のシンボル化ファイルをアップロードする必要があります。
@@ -83,6 +84,22 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 
 オプションについては、ウィザード[公式ドキュメント][13]を参照してください。
 
+## アップロード時のオプションの受け渡し
+
+### Android で `datadog-sourcemaps.gradle` スクリプトを使用する
+
+別のサービス名を指定するには、`android/app/build.gradle` ファイルの `apply from: "../../node_modules/@datadog/mobile-react-native/datadog-sourcemaps.gradle"` 行の前に、以下のコードを追加します。
+
+```groovy
+project.ext.datadog = [
+    serviceName: "com.my.custom.service"
+]
+```
+
+### iOS で `datadog-ci react-native xcode` コマンドを使用する
+
+`datadog-ci react-native xcode` コマンドのオプションは、[コマンドドキュメントページ][12]にあります。
+
 ## クラッシュレポートの実装をテストする
 
 ソースマップが正しく送信され、アプリケーションにリンクされていることを確認するために、[`react-native-performance-limiter`][14] パッケージでクラッシュを生成することができます。
@@ -90,7 +107,7 @@ echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 yarn や npm でインストールして、ポッドを再インストールします。
 
 ```shell
-yarn install react-native-performance-limiter # or npm install react-native-performance-limiter
+yarn add react-native-performance-limiter # or npm install react-native-performance-limiter
 (cd ios && pod install)
 ```
 
@@ -126,7 +143,7 @@ const crashApp = () => {
 
 ```bash
 yarn add -D @datadog/datadog-ci
-
+# または
 npm install --save-dev @datadog/datadog-ci
 ```
 
@@ -389,18 +406,14 @@ datadog {
         }
 ```
 
-### クラッシュレポートの検証
-
-React Native のクラッシュレポートとエラー追跡の構成を確認するには、[`react-native-crash-tester`][7] のようなパッケージをインストールすると、ネイティブ側または JavaScript 側からアプリをクラッシュさせることが可能です。
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
+[3]: /ja/real_user_monitoring/reactnative/
+[4]: /ja/real_user_monitoring/ios/crash_reporting/?tabs=cocoapods#symbolicate-crash-reports
 [5]: https://reactnative.dev/docs/signed-apk-android#enabling-proguard-to-reduce-the-size-of-the-apk-optional
 [6]: https://github.com/datadog/dd-sdk-android-gradle-plugin
 [7]: https://github.com/cwhenderson20/react-native-crash-tester
