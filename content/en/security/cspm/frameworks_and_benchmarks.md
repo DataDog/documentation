@@ -50,17 +50,17 @@ View a high-level overview of your compliance posture for each framework on the 
 - **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the detection rules for each framework.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview.png" alt="The compliance reports section of the CSPM overview page provides a high-level overview of your compliance posture" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview2.png" alt="The compliance reports section of the CSPM overview page provides a high-level overview of your compliance posture" style="width:100%;">}}
 
 ## Explore compliance framework reports
 
 Compliance framework reports show which rules are failing in your environment, along with details about the misconfigured resources.
 
-The summary at the top of the report shows the number of rules with Pass/Fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, and download a PDF copy of the report.
+The summary at the top of the report shows the number of rules with pass/fail findings, the top three high-severity rule failures, and a detailed breakdown of the rules based on severity. You can also explore your past posture with the time selector, download a PDF copy of the report, and filter the page by account, team, service, and environment tags.
 
 Below the summary is a complete listing of all rules associated with the framework, organized by requirements and controls, along with the number of resources checked by the rule, and the percentage of failures.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/report-2.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/report3.png" alt="The CIS AWS compliance framework report provides details on critical rule failures" style="width:100%;">}}
 
 Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 

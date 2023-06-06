@@ -64,13 +64,13 @@ Agent v6.0 以降、Agent は特定のコンテナのラベルを収集し、そ
 
 特定のコンテナラベル `<LABEL_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"<LABEL_NAME>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
@@ -127,13 +127,13 @@ Agent v6.0 以降、Agent は特定のコンテナの環境変数を収集し、
 
 特定のコンテナ環境変数 `<ENVVAR_NAME>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENVVAR_NAME>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 ```
 

@@ -125,7 +125,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
-   ```javascript
+   ```swift
    Global.rum.addFeatureFlagEvaluation(key, value);
    ```
 
@@ -134,8 +134,17 @@ Each time a feature flag is evaluated, add the following function to send the fe
 
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
-   ```javascript
+   ```kotlin
    GlobalRum.get().addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```dart
+   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -174,6 +183,12 @@ LaunchDarkly does not currently support this integration. Create a ticket with L
 
 {{% /tab %}}
 {{% tab "Android" %}}
+
+LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
 
 LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
 
@@ -220,9 +235,9 @@ Initialize Split's SDK and create an inspector reporting feature flag evaluation
 
 For more information about initializing Split's SDK, see Split's [iOS SDK documentation][1].
 
-```javascript
+```swift
   let config = SplitClientConfig()
-// Send the feature flag when Split reports the impression
+  // Send the feature flag when Split reports the impression
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
@@ -240,7 +255,7 @@ Initialize Split's SDK and create an inspector reporting feature flag evaluation
 
 For more information about initializing Split's SDK, see Split's [Android SDK documentation][1].
 
-```javascript
+```kotlin
   internal class DatadogSplitImpressionListener : ImpressionListener {
     override fun log(impression: Impression) {
         // Send the feature flag when Split reports the impression
@@ -262,6 +277,26 @@ For more information about initializing Split's SDK, see Split's [Android SDK do
 
 
 [1]: https://help.split.io/hc/en-us/articles/360020343291-Android-SDK
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Split's SDK, see Split's [Flutter plugin documentation][1].
+
+```dart
+  StreamSubscription<Impression> impressionsStream = _split.impressionsStream().listen((impression) {
+    // Send the feature flag when Split reports the impression
+    final split = impression.split;
+    final treatment = impression.treatment;
+    if (split != null && treatment != null) {
+      DatadogSdk.instance.rum?.addFeatureFlagEvaluation(split, treatment);
+    }
+  });
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/8096158017165-Flutter-plugin
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -300,6 +335,11 @@ Flagsmith does not currently support this integration. Create a ticket with Flag
 Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
 
 {{% /tab %}}
+{{% tab "Flutter" %}}
+
+Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### DevCycle integration
@@ -314,7 +354,7 @@ For more information about initializing DevCycle's SDK, see [DevCycle's JavaScri
 ```javascript
 const user = { user_id: "<USER_ID>" };
 const dvcOptions = { ... };
-const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions); 
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
 ...
 dvcClient.subscribe(
     "variableEvaluted:*",
@@ -344,6 +384,12 @@ DevCycle does not support this integration. Create a ticket with DevCycle to req
 
 {{% /tab %}}
 {{% tab "Android" %}}
+
+DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
 
 DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
 
