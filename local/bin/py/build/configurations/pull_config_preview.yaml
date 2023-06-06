@@ -373,8 +373,6 @@
           options:
             dest_dir: '/continuous_integration/static_analysis/default_rules/python/best_practices/'
             path_to_remove: 'rulesets/python-best-practices/'
-            front_matters:
-              dependencies: [ "https://github.com/DataDog/datadog-static-analyzer-rule-docs/blob/main/rulesets/python-best-practices/" ]
 
         - action: pull-and-push-folder
           branch: main
@@ -383,8 +381,6 @@
           options:
             dest_dir: '/continuous_integration/static_analysis/default_rules/python/code_style/'
             path_to_remove: 'rulesets/python-code-style/'
-            front_matters:
-              dependencies: [ "https://github.com/DataDog/datadog-static-analyzer-rule-docs/blob/main/rulesets/python-code-style/" ]
         
         - action: pull-and-push-folder
           branch: main
@@ -393,8 +389,6 @@
           options:
             dest_dir: '/continuous_integration/static_analysis/default_rules/python/security/'
             path_to_remove: 'rulesets/python-security/'
-            front_matters:
-              dependencies: [ "https://github.com/DataDog/datadog-static-analyzer-rule-docs/blob/main/rulesets/python-security/" ]
 
       - repo_name: datadog-cdk-constructs
         contents:

@@ -4,7 +4,6 @@ kind: documentation
 type: static_analysis_rules
 description: View rules for languages such as Python for Datadog Static Analysis.
 is_beta: true
-disable_sidebar: true
 further_reading:
   - link: "/continuous_integration/static_analysis/configuration"
     tag: "Documentation"
