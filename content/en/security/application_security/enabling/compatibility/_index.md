@@ -16,10 +16,10 @@ The following ASM capabilities are supported relative to each language's tracing
 
 | ASM capability                   | Java | .NET | Node.js | Python | Go | Ruby | PHP |
 | -------------------------------- | ----------------------------------|----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|
-| Threat Detection <br/> --> Business logic API | <br/>  1.8.0 <br/>   | <br/> 2.23.0 <br/> | <br/> 3.13.1 <br/> | <br/> 1.9.0<br/>   | <br/> 1.47.0 <br/>  | <br/> 1.9.0<br/>   | <br/> 0.84.0 <br/>   |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 1.9.0<br/>    | 2.26.0 <br/> | <br/> --> 3.11.0<br/> --> 3.19.0<br/><br/> --> 3.11.0     | 1.10.0<br/>    |  <br/>--> 1.48.0<br/> --> v1.50.0<br/><br/> --> 1.48.0     |  1.11.0<br/>    | 0.86.0<br/>    |
-| Vulnerability Management <br/> --> Open source vulnerability detection <br/> | <br/> <br/> 1.1.4 | <br/> <br/> 2.16.0 <br/> <br/> | <br/> <br/> 2.23.0 for Node.js 12+, or 3.10.0 for Node.js 14+ <br/>| <br/><br/> 1.5.0 <br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>|
-| Vulnerability Management <br/> --> Custom code vulnerability detection | <br/> <br/> 1.15.0| <br/> <br/> private beta | <br/> <br/> 2.32.0 for NodeJS 12+, or 3.19.1 for NodeJS 14+ <br/>| <br/> <br/> private beta <br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>| <br/> <br/> not supported<br/>|
+| Threat Detection| 1.8.0 | 2.23.0 | 3.13.1 | 1.9.0   | 1.47.0  | 1.9.0| 0.84.0 |
+| Threat Protection | 1.9.0 | 2.26.0 | 3.19.0| 1.10.0  |  v1.50.0|  1.11.0    | 0.86.0   |
+| Open source vulnerability detection  | 1.1.4 | 2.16.0 |2.23.0 for Node.js 12+, or 3.10.0 for Node.js 14+ | 1.5.0 | not supported| not supported| not supported|
+| Custom code vulnerability detection   |1.15.0| private beta | 2.32.0 for NodeJS 12+, or 3.19.1 for NodeJS 14+ | private beta | not supported<br/>| not supported| not supported|
 
 
 Select your application language for details about framework compatibility and feature support.
