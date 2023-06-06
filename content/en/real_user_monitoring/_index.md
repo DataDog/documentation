@@ -65,6 +65,29 @@ Datadog's *Session Replay* allows you to capture and visually replay the web bro
 
 Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
 
+## Compatibility requirements
+
+The following RUM capabilities are supported relative to each platform:
+
+| Feature                   | Browser | iOS | Android | Flutter | React Native | Roku |
+| ------------------------- | --------|--------|---------|---------|--------------|--------|
+| Send logs to Datadog  | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Fully supported |
+| Global attribute tracking in Logs  | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
+| Client side tracking | Not supported | Fully supported | Fully supported | Not supported | Not supported  | Not supported |
+| Distributed tracing of network requests | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Fully supported |
+| Track Views and Actions (RUM) | Fully supported  | Fully supported | Fully supported | Fully supported <br> <br> **Note**: All actions tracked in Flutter Web are recorded as `custom` </br> </br>| Fully supported  | Fully supported |
+| Feature Flags tracking and release tracking | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
+| Frustration signals | Fully supported  | Partially supported | Partially supported | Partially supported | Partially supported  | Not supported |
+| Error tracking and source mapping | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
+| Crash tracking, symbolication, and deobfuscation | Not supported | Fully supported | Fully supported | Fully supported | Fully supported | Fully supported |
+| Stop sessions (Kiosk Monitoring) | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
+| Track Events in WebViews | Not supported | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
+| Monitor platform-specific vitals | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
+| Session Replay | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
+| Heatmaps | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
+
+**Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.
+
 ## Get started
 
 Select an application type to start collecting RUM data:
