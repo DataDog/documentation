@@ -8,22 +8,23 @@
 {{ $rank := .rank }}
 {{ $section_header := "" }}
 {{ $section_content := "" }}
+{{ $section_content_words := "" }}
 {{ $content_array := split $page.Content "<h2" }}
 
 {{ range $content_array }}
     {{ if in . "h2" }}
         {{ $context := print "%s" . | printf "%s%s" "<h2" }}
         {{ $section_header = index (split (index (split $context "</h2>") 0) ">") 1 }}
-        {{ $section_content = $context | plainify | htmlUnescape | safeHTML | truncate 10000 }}
-        {{ $section_content = (split $section_content " ")}}
+        {{ $section_content = $context | plainify | htmlUnescape | safeHTML }}
+        {{ $section_content_words = (split $section_content " ")}}
 
         {{ if and (ne $section_header "Further Reading") (ne $section_header "") }}
 
             {{- $chunked := slice -}}
-            {{- $post_len := len $section_content -}}
+            {{- $post_len := len $section_content_words -}}
 
             {{- range $i := (seq 0 1000 $post_len) -}}
-                {{- $chunked = $chunked | append (delimit (first 1000 (after $i $section_content) ) " " ) -}}
+                {{- $chunked = $chunked | append (delimit (first 1000 (after $i $section_content_words) ) " " ) -}}
             {{- end -}}
 
             {{- range $i, $c := $chunked -}}
@@ -36,9 +37,9 @@
                         dict "objectID" $object_id
                         "title" $title
                         "order" $i
-                        "tags" $page.Params.algolia.tags
+                        "tags" ($page.Params.algolia.tags | default "")
                         "section_header" $section_header
-                        "content" $section_content
+                        "content" $c
                         "type" $page.Type
                         "relpermalink" $relpermalink
                         "full_url" $full_url
