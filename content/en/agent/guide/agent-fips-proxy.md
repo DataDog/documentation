@@ -52,7 +52,6 @@ The Datadog Agent FIPS Proxy does **not** support the following:
 - Serverless Monitoring
 - Communication between Cluster Agent and Node Agents
 - Agent integrations
-- Products not defined in the [Datadog Agent][7]
 - Outbound communication to anything other than GovCloud
 
 ## Prerequisites
@@ -356,4 +355,3 @@ to have all the available products supported by the Datadog Agent and the Datado
 [4]: https://ip-ranges.ddog-gov.com/
 [5]: /agent/guide/network/#destinations
 [6]: /help/
-[7]: https://github.com/DataDog/datadog-agent/blob/7.45.0/pkg/config/config.go#L1563-L1576
