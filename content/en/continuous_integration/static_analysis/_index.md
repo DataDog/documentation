@@ -39,7 +39,7 @@ Using Static Analysis provides organizations with the following benefits:
 
 ## Integrations
 
-{{< whatsnext desc="With Static Analysis, you can integrate feedback in any CI platform provider of choice, with native integrations for GitHub and CircleCI. See the documentation for information about the following integrations, or read more about the Datadog CI NPM package:">}}
+{{< whatsnext desc="With Static Analysis, you can integrate feedback in a supporting CI platform provider, with native integrations for GitHub and CircleCI. See the documentation for information about the following integrations, or read more about configuring the Datadog CI NPM package:">}}
     {{< nextlink href="continuous_integration/static_analysis/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/configuration" >}}NPM package{{< /nextlink >}}
@@ -47,31 +47,31 @@ Using Static Analysis provides organizations with the following benefits:
 
 ## Usage
 
-Datadog Static Analysis is run in your CI pipelines using the [datadog-ci CLI][2] to check your code against Datadog's default rulesets. To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
+Datadog Static Analysis runs in your CI pipelines using the [datadog-ci CLI][2] and checks your code against Datadog's default rulesets. To install and configure the [`@datadog/datadog-ci` CLI using the NPM package][2], see [Configuration][3].
 
 ### Search and filter results
 
-After configuring your CI pipelines to run the Datadog Static Analyzer, violations will appear on the [Static Analysis Results page][1]. To filter your results, use the facets to the left of the list or use the search bar. 
+After you configure your CI pipelines to run the Datadog Static Analyzer, violations appear on the [Static Analysis Results page][1]. To filter your results, use the facets to the left of the list, or search. 
 
-Each violation is associated with a specific commit and branch from your repository on which your CI pipeline was run. Every violation per commit has a row item in the list. 
+Each violation is associated with a specific commit and branch from your repository on which the CI pipeline ran. The rows represent every violation per commit. 
 
 {{< img src="monitors/incidents/TODO.png" alt="Static Analysis results list view" style="width:80%;">}}
 
-Click on a violation to open a side panel containing metadata regarding the scope of the violation and where it originated from. 
+Click on a violation to open a side panel that contains information about the scope of the violation and where it originated. 
 
-The content of the violation is split into three tabs:
+The content of the violation is shown in tabs:
 
-* Source Code: A description of the violation and the offending lines of code that caused it. 
+* Source Code: A description of the violation and the lines of code that caused it. 
 
   To see the offending code snippet, configure the [Datadog GitHub App][4].
   
   {{< img src="monitors/incidents/TODO.png" alt="Static Analysis result Source Code Tab" style="width:80%;">}}
 
-* Fix: Where possible, Datadog recommends one or more code fixes to resolve the violation that a developer can copy and paste.
+* Fix: Where possible, one or more code fixes that can resolve the violation, which you can copy and paste.
 
   {{< img src="monitors/incidents/TODO.png" alt="Static Analysis result Fix Tab" style="width:80%;">}}
 
-* Event: JSON Metadata regarding the the Static Analysis violation event.
+* Event: JSON metadata regarding the the Static Analysis violation event.
 
 ## Further Reading
 

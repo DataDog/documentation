@@ -29,11 +29,11 @@ further_reading:
 
 ## Overview
 
-Use the [`@datadog-ci` NPM package][1] to run Static Analysis directly within your CI/CD pipeline. 
+Install the `@datadog-ci` CLI using its [NPM package][1] to run Static Analysis directly within your CI/CD pipeline. 
 
 ## Setup 
 
-To use Datadog Static Analysis, you need to add a `static-analysis.datadog.yml` file to your repository's root directory to specify which rulesets to use.
+To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory to specify which rulesets to use.
 
 ```yaml
 rulesets:
@@ -41,9 +41,7 @@ rulesets:
   - <ruleset-name>
 ```
 
-### Example for Python
-
-This example demonstrates which rulesets are specified for Python-based repositories:
+For example, for Python rules:
 
 ```yaml
 rulesets:
@@ -71,26 +69,28 @@ To run Static Analysis with GitHub, [follow these instructions for setting up a 
 {{% /tab %}}
 {{% tab "Other" %}}
 
-If you are not using CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
+If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
 
-### Requirements
+Prerequisites:
 
-This requires you to install UnZip, Node.js, and Java 17 or later.
+- UnZip
+- Node.js
+- Java 17 or later
 
 Configure the following environment variables:
 
 | Name         | Description                                                                                                                | Required |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|
-| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][101] and should be stored as a secret.              | True     |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.      | True     |
+| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][101] and should be stored as a secret.              | Yes     |
+| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.      | Yes     |
 
 Provide the following inputs:
 
 | Name         | Description                                                                                                                | Required | Default         |
 |--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service` | The service you want your results tagged with.                                                                                | True     |                 |
-| `env`     | The environment you want your results tagged with. Datadog recommends using `ci` as the value for this input.                                                                           | False    | `none`          |
-| `site`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.                                                                                 | False    | {{< region-param key="dd_site" code="true" >}}  |
+| `service` | The name of the service to tag the results with.                                                                                | Yes     |                 |
+| `env`     | The environment to tag the results with. `ci` is a helpful value for this input.                                                                           | No    | `none`          |
+| `site`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.                                                                                 | No    | {{< region-param key="dd_site" code="true" >}}  |
 
 Add the following to your CI pipeline:
 
@@ -104,7 +104,7 @@ unzip $TEMP_DIR/latest-static-analyzer
 $TEMP_DIR/cli-1.0-SNAPSHOT/bin/cli --directory . -t true -o results.sarif -f sarif
 
 # Upload results
-datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
+datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV" --site "$DD_SITE"
 ```
 
 [101]: /account_management/api-app-keys/#api-keys
@@ -114,9 +114,9 @@ datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV"
 {{% /tab %}}
 {{< /tabs >}}
 
-### Import third-party Static Analysis results
+### Upload third-party static analysis results to Datadog
 
-Datadog supports ingesting Static Analysis results from third-party Static Analysis tools that can export results into the interoperable [Static Analysis Results Interchange Format (SARIF) Format][3]. 
+You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][3]. 
 
 To upload a SARIF report:
 
@@ -127,11 +127,11 @@ To upload a SARIF report:
    npm install -g @datadog/datadog-ci
    ```
 
-3. Run your third-party Static Analysis tool on your code which outputs results in the SARIF format.
+3. Run the third-party static analysis tool on your code and output the results in the SARIF format.
 4. Upload the results to Datadog:
 
    ```bash
-   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
+   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env> --site <dd-site>
    ```
 
 ## Further Reading
