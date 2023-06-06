@@ -66,7 +66,7 @@ Datadog allows customers to send logs to PCI DSS compliant Datadog organizations
       logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
     ```
     **Note**: The port must be included in the configuration.  
-    **Note**: PCI compliance uses HTTP log forwarding only. If using the Agent, we recommend [enforcing HTTP transport][5].
+    **Note**: PCI compliance uses HTTP log forwarding only. If using the Agent, you should [enforce HTTP transport][5].
     
 
 If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
