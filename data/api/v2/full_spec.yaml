@@ -16826,7 +16826,7 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in beta.
 
         For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events/search:
@@ -16874,7 +16874,7 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in beta.
 
         For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents:
