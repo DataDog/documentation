@@ -6197,7 +6197,7 @@ api:
       operationids:
         - ListSecurityMonitoringRules
       unstable: []
-      order: 4
+      order: 3
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
@@ -6258,19 +6258,6 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
-  - name: Mute or unmute a finding
-    url: '#mute-or-unmute-a-finding'
-    identifier: security-monitoring-mute-or-unmute-a-finding
-    parent: security-monitoring
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - UpdateFinding
-      unstable:
-        - v2
-      order: 3
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6334,7 +6321,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 4
+      order: 3
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
