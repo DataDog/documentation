@@ -1,6 +1,6 @@
 ---
 core_product:
-- セキュリティ
+- security
 - appsec
 title: Web アプリケーションファイアウォール (WAF)
 ---
