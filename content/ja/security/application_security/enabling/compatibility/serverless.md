@@ -28,7 +28,7 @@ Python
 : 
 
 Java
-: 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`) または Java 11 (`java11`) ランタイムを使用し、少なくとも 1024MB のメモリを搭載している必要があります。
+: 分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用し、少なくとも 1024MB のメモリを搭載している必要があります。
 : Datadog Lambda レイヤーの `dd-trace-java:4` (またはそれ以前) と `Datadog-Extension:24` (またはそれ以前) を使用する場合、[Java Lambda 関数のインスツルメンテーションのアップグレード][3]の手順に従ってください。
 
 Go
@@ -69,4 +69,4 @@ ASM Threat Detection は、関数の入力としてのみ HTTP リクエスト�
 [1]: /ja/serverless/distributed_tracing/
 [2]: /ja/serverless/guide/datadog_forwarder_python
 [3]: /ja/serverless/guide/upgrade_java_instrumentation
-[4]: /ja/serverless/guide/serverless_tracing_and_webpack/
+[4]: /ja/serverless/guide/serverless_tracing_and_bundlers/

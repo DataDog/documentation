@@ -99,7 +99,7 @@ COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
 # install the Datadog js tracing library, either here or in package.json
 
-npm i dd-trace@2.2.0
+RUN npm i dd-trace@2.2.0
 
 # enable the Datadog tracing library
 ENV NODE_OPTIONS="--require dd-trace/init"

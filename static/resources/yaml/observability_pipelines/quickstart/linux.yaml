@@ -45,7 +45,7 @@ transforms:
     inputs:
       - LOGS_YOUR_STEPS
     source: |
-      .ddtags = encode_key_value!(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
+      .ddtags = encode_key_value(.ddtags, key_value_delimiter: ":", field_delimiter: ",")
 
   metrics_add_dd_tags:
     type: remap
@@ -63,8 +63,8 @@ transforms:
 ## This should work for the vast majority of OP Worker deployments and should rarely
 ## need to be adjusted.
 ##
-## The "${DD_API_KEY}" parameters are replaced with the API key you provisioned in the
-## `bootstrap.yaml`.
+## The "${DD_API_KEY}" parameters are replaced with the API key you provisioned
+## earlier.
 sinks:
   datadog_logs:
     type: datadog_logs

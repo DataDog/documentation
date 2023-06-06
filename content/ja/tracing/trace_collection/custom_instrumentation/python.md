@@ -15,7 +15,7 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: Python のカスタムインスツルメンテーション
+title: Datadog ライブラリを使った Python カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 <div class="alert alert-info">
@@ -60,7 +60,7 @@ def make_sandwich_request(request):
       return
 ```
 
-`ddtrace.Tracer.wrap()` 向けデコレータの API 詳細は、[こちら][1]で確認できます。
+詳しくは、[`ddtrace.Tracer.wrap()` のデコレータの API 詳細][1]をご覧ください。
 
 
 [1]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
@@ -89,7 +89,7 @@ def make_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-`ddtrace.Tracer()` の API 詳細は[こちら][2]で確認できます
+詳しくは、[`ddtrace.Tracer()` の API 詳細][2]全文をお読みください。
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
@@ -113,7 +113,7 @@ def make_sandwich_request(request):
     span.finish()  # ここでスパンを閉じる
 ```
 
-デコレータの API 詳細は、`ddtrace.Tracer.trace` の[ドキュメント][2]または `ddtrace.Span.finish` の[ドキュメント][3]で確認できます。
+デコレータの API 詳細については、[`ddtrace.Tracer.trace` ドキュメント][2]または [`ddtrace.Span.finish` ドキュメント][3]をお読みください。
 
 
 
@@ -217,26 +217,10 @@ span.finish()
 {{% /tab %}}
 {{< /tabs >}}
 
-## 分散型トレーシングのためのトレースコンテキストの伝搬
 
-Datadog APM トレーサーは、分散型トレーシングのために [B3][2] や [W3C][3] のヘッダーの抽出と挿入をサポートしています。
+## ヘッダー抽出と挿入によるコンテキストの伝搬
 
-分散したヘッダーの挿入と抽出は、挿入および抽出スタイルを構成することで制御されます。`tracecontext`、`Datadog`、`B3`、`B3 single header` のスタイルがサポートされています。
-
-- 環境変数 `DD_PROPAGATION_STYLE_INJECT=tracecontext,B3` を用いて挿入スタイルを構成する
-- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` を用いて抽出スタイルを構成する
-- 環境変数 `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` を用いて挿入スタイルと抽出スタイルの両方を構成する
-
-これらの環境変数の値は、挿入または抽出が有効になっているヘッダースタイルのコンマ区切りリストです。デフォルトでは、`tracecontext,Datadog` スタイルが有効になっています。
-
-トレースコンテキストの伝搬を無効にするには、環境変数の値を `none` に設定します。
-- 環境変数 `DD_PROPAGATION_STYLE_INJECT=none` を用いて挿入スタイルを無効にする
-- 環境変数 `DD_PROPAGATION_STYLE_EXTRACT=none` を用いて抽出スタイルを無効にする
-- 環境変数 `DD_PROPAGATION_STYLE=none` を使って、すべてのトレースコンテキストの伝搬を無効にします (挿入と抽出の両方)。
-
-複数の環境変数が設定されている場合、 `DD_PROPAGATION_STYLE_INJECT` と `DD_PROPAGATION_STYLE_EXTRACT` は `DD_TRACE_PROPAGATION_STYLE` で指定した値をオーバーライドします。
-
-複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
+分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][8]をお読みください。
 
 ## リソースのフィルター
 
@@ -247,7 +231,6 @@ Datadog APM トレーサーは、分散型トレーシングのために [B3][2]
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/python
-[2]: https://github.com/openzipkin/b3-propagation
-[3]: https://github.com/w3c/trace-context
+[2]: /ja/tracing/trace_collection/trace_context_propagation/python/
 [4]: /ja/tracing/security
 [5]: /ja/tracing/guide/ignoring_apm_resources/

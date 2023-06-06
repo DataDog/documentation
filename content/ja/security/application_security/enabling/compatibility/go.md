@@ -55,8 +55,8 @@ Go ライブラリでは、指定されたトレーサーのバージョンで�
 | ASM の機能                   | Go トレーサーの最小バージョン |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | 1.47.0 <br/>  |
-| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   |  <br/> --> 1.48.0<br/> --> 非対応<br/> --> 1.48.0     |
-| Risk Management <br/> --> サードパーティの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 非対応<br/><br/> |
+| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   |  <br/> --> 1.48.0<br/> --> v1.50.0<br/> --> 1.48.0     |
+| Vulnerability Management <br/> --> オープンソースの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 非対応<br/><br/> |
 
 Go でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 1.48.0 です。
 
@@ -74,4 +74,4 @@ Go でサポートされるすべての ASM 機能を得るためのトレーサ
 [7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
 [8]: https://github.com/golang/go/wiki/cgo
 [9]: /ja/tracing/trace_collection/compatibility/go/
-[10]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[10]: /ja/agent/remote_config/#enabling-remote-configuration
