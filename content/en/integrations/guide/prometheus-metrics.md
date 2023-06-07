@@ -26,7 +26,7 @@ This page walks you through how Prometheus or OpenMetrics check metrics map to e
 * `summary`: Similar to `histogram`; samples observations, provides a sum of all observed values, and calculates configurable quantiles over a sliding time window.
 
 {{% /tab %}}
-{{% tab "Before OpenMetrics v2.0.0" %}}
+{{% tab "Legacy" %}}
 
 * `counter`: A cumulative metric that represents a single monotonically increasing counter, whose value can only increase—or be reset to zero.
 * `gauge`: A metric that represents a single numeric value, which can arbitrarily go up and down.
