@@ -4,7 +4,7 @@ kind: documentation
 description: 'Instrument your Node.js application with OTel API to send traces to Datadog.'
 code_lang: nodejs
 type: multi-code-lang
-code_lang_weight: 20
+code_lang_weight: 40
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -38,7 +38,7 @@ The following OTel features implemented in the Datadog library as noted:
     npm install dd-trace
     ```
 
-3. Initialize the dd-trace module in your application:
+3. Initialize the `dd-trace` module in your application:
 
     ```js
     const tracer = require('dd-trace').init({
@@ -46,13 +46,13 @@ The following OTel features implemented in the Datadog library as noted:
     })
     ```
 
-4. Get TracerProvider from tracer:
+4. Get `TracerProvider` from `tracer`:
 
     ```js
     const { TracerProvider } = tracer
     ```
 
-5. Construct and register a TracerProvider:
+5. Construct and register a `TracerProvider`:
 
     ```js
     const provider = new TracerProvider()
