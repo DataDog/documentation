@@ -10,7 +10,7 @@ further_reading:
 - link: profiler/search_profiles
   tag: ドキュメント
   text: 使用可能なプロファイルタイプの詳細
-- link: profiler/profiler_troubleshooting
+- link: profiler/profiler_troubleshooting/dotnet
   tag: ドキュメント
   text: プロファイラの使用中に発生する問題を修正
 - link: https://www.datadoghq.com/blog/dotnet-datadog-continuous-profiler/
@@ -59,6 +59,7 @@ Windows Server バージョン 2012 以降
 | ライブヒーププロファイリング        | ベータ版、2.22.0+                       | .NET 7+      |
 | [Code Hotspots][12]        | 2.7.0+                       | サポートされているすべてのランタイムバージョン。      |
 | [Endpoint Profiling][13]            | 2.15.0+                       | サポートされているすべてのランタイムバージョン。      |
+| 沿革            | 2.30.0+                       | サポートされているすべてのランタイムバージョン (ガベージコレクションの詳細のために必要な .NET 5+ を除く) 。     |
 
 ## APM に Datadog Agent を構成する
 
@@ -120,7 +121,19 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 1. `Datadog.Trace.Bundle` [NuGet パッケージ][1]をアプリケーションに追加します。
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
-{{< /tabs >}}
+{{% /tab %}}
+
+{{% tab "Azure App Service (公開ベータ版)" %}}
+
+<div class="alert alert-warning">
+  <strong>注:</strong> Web アプリのみ対応しています。関数はサポートされていません。
+</div>
+
+.NET Profiler を Web アプリ単位でインストールするには
+1. Azure App Service [Datadog APM Extension][1] を Web アプリにインストールします。
+
+[1]: /ja/serverless/azure_app_services/?tab=net#installation
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -174,7 +187,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
    DD_VERSION=1.2.3
    ```
 
-   {{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="レジストリエディターを使用して、IIS の .NET Core アプリケーションの環境変数を作成する" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディターを使用して、IIS の .NET Core アプリケーションの環境変数を作成する" style="width:90%" >}}
 
    .NET Framework の場合:
    ```text
@@ -184,7 +197,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorFrameworkIIS.png" alt="レジストリエディターを使用して、IIS の .NET Framework アプリケーションの環境変数を作成する" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="レジストリエディターを使用して、IIS の .NET Framework アプリケーションの環境変数を作成する" style="width:90%" >}}
 
    <strong>注</strong>: 環境変数は、<em>すべての</em> IIS アプリケーションに適用されます。IIS 10 以降、<a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:indexWindowsSystem32/inetsrv/config/applicationhost.config</code> ファイル</a>に IIS アプリケーションごとの環境変数が設定できるようになりました。詳細は、<a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft のドキュメント</a>を参照してください。
 
@@ -342,6 +355,13 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
+{{% tab "Azure App Service (公開ベータ版)" %}}
+
+2. 以下の[インストールガイドライン][1]に従って、`DD_PROFILING_ENABLED:true` を設定し、プロファイラーを有効にします
+
+[1]: /ja/serverless/azure_app_services/?tab=net#installation
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -359,7 +379,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 | `DD_TRACE_AGENT_PORT`      | 文字列        | プロファイルが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルトは `8126` です。  |
 | `DD_TRACE_AGENT_URL`       | 文字列        | プロファイルが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。デフォルトは `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` です。  |
 | `DD_TRACE_DEBUG`           | Boolean        | デバッグログを有効または無効にします (トラブルシューティングの調査時に役立ちます)。有効な値は `true` または `false` です。デフォルトは `false` です。  |
-| `DD_PROFILING_LOG_DIR`     | 文字列        | .NET Profiler のログを保存するディレクトリを設定します。デフォルトは `%ProgramData%\Datadog-APM\logs\` です。  |
+| `DD_PROFILING_LOG_DIR`     | 文字列        | .NET Profiler のログを保存するディレクトリを設定します。デフォルトは `%ProgramData%\Datadog .NET Tracer\logs\` です。(v2.24 以前は、デフォルトのディレクトリは `%ProgramData%\Datadog-APM\logs\` でした)  |
 | `DD_PROFILING_ENABLED`     | Boolean        | `true` に設定すると、.NET Profiler が有効になります。デフォルトは `false` です。  |
 | `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | `false` に設定すると、Wall time プロファイリングが無効になります。デフォルトは `true` です。  |
 | `DD_PROFILING_CPU_ENABLED` | Boolean        | `false` に設定すると、CPU プロファイリングが無効になります。デフォルトは `true` です。  |
@@ -367,6 +387,7 @@ Datadog .NET Profiler は、マシン上のすべてのサービスがインス�
 | `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | `true` に設定すると、Allocations プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
 | `DD_PROFILING_LOCK_ENABLED` | Boolean        | `true` に設定すると、Lock Contention プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | `true` に設定すると、Live Heap プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
+| `DD_PROFILING_GC_ENABLED` | Boolean        | `false` に設定すると、Timeline のユーザーインターフェイスで使用される Garbage Collection のプロファイリングを無効にします。デフォルトは `true` です。  |
 
 <div class="alert alert-warning">
 <strong>注</strong>: IIS アプリケーションでは、<a href="?tab=windowsservices#installation">上記の Windows Service タブ</a>のように、レジストリ(<code>HKLM\System\CurrentControlSet\Services\WAS</code> および <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> ノード) で環境変数の設定を行う必要があります。この環境変数は、<em>すべての</em> IIS アプリケーションに適用されます。

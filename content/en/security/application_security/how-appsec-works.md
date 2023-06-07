@@ -5,7 +5,7 @@ aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
 further_reading:
-- link: "/security/application_security/setup_and_configure/#compatibility"
+- link: "/security/application_security/enabling/compatibility"
   tag: "Documentation"
   text: "Learn more about language and framework compatibility"
 - link: "https://www.datadoghq.com/blog/datadog-application-security/"
@@ -18,11 +18,11 @@ further_reading:
 
 ## Overview
 
-Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into any bad actors targeting your systems.
+Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems.
 
 In addition, ASM detects the risks built into your applications, for example through vulnerable libraries and dependencies the application uses at runtime.
 
-Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic and flags attack attempts based on suspicious requests that match known attack patterns. Security signals are automatically created when Datadog detects application attacks impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic. ASM flags attack attempts based on suspicious requests that match known attack patterns, or [tags business logic information][25]. Security signals are automatically created when Datadog detects application attacks or business logic abuse impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. Because ASM is embedded in the application, it has access to trace data, making it more effective at pinpointing and classifying threats. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal-to-noise ratio, lowering false positives.
 
@@ -35,13 +35,11 @@ Because APM collects a sample of your application traffic, enabling ASM in the t
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
 
 <div class="alert alert-info"><strong>Beta: 1-Click Enablement</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/enabling/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/enabling/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ### Identify vulnerable services
 
-<div class="alert alert-info">Risk Management vulnerability detection is in beta.</a></div>
-
-Datadog ASM [Risk Management][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
+Datadog [Application Vulnerability Management][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
 
 ## Compatibility
 
@@ -89,8 +87,7 @@ To configure the information redacted by ASM, refer to the [data security config
 
 Datadog uses multiple pattern sources, including the [OWASP ModSecurity Core Rule Set][12] to detect known threats and vulnerabilities in HTTP requests. When an HTTP request matches one of [the OOTB detection rules][13], a security signal is generated in Datadog.
 
-<div class="alert alert-info"><strong>Beta: Automatic Threat Patterns Updates</strong><br>
-If your service is running with <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, the threat patterns being used to monitor your service is automatically updated whenever Datadog publishes updates.</div>
+**Automatic Threat Patterns Updates:** If your service is running with [an Agent with Remote Configuration enabled and a tracing library version that supports it][26] , the threat patterns being used to monitor your service are automatically updated whenever Datadog publishes updates.
 
 Security Signals are automatically created when Datadog detects meaningful attacks targeting your production services. It provides you with visibility on the attackers and the targeted services. You can set custom detection rules with thresholds to determine which attacks you want to be notified about.
 
@@ -103,7 +100,7 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful. 
 * Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java. 
-* An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack’s probability of success.
+* An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack's probability of success.
 * A harmful qualification is highlighted when there is evidence that a code level vulnerability has been found by the attacker.
 
 
@@ -122,11 +119,9 @@ Datadog ASM includes over 100 attack signatures that help protect against [many 
 
 ## Built-in vulnerability detection
 
-<div class="alert alert-info">Risk Management through vulnerability detection is in beta.</a></div>
-
 Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
-For more information, read [Risk Management][5].
+For more information, read [Application Vulnerability Management][5].
 
 ## How Datadog ASM protects against Log4Shell
 
@@ -146,10 +141,12 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [8]: /security/application_security/enabling/serverless/
 [9]: /tracing/trace_pipeline/trace_retention/
 [10]: /tracing/configure_data_security/?tab=http
-[11]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
+[11]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
 [13]: /security/default_rules/#cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /security/cloud_siem/
-[17]: /security/application_security/threats/setup_and_configure/#data-security-considerations
+[17]: /security/application_security/threats/library_configuration/#data-security-considerations
+[25]: /security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[26]: /agent/remote_config/#enabling-remote-configuration

@@ -39,6 +39,10 @@
     "name": "Fastly Integration",
     "description": "Configure your Datadog Fastly integration directly through the Datadog API."
   },
+  "gcp-integration": {
+    "name": "GCP Integration",
+    "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
+  },
   "ip-allowlist": {
     "name": "IP Allowlist",
     "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support."
@@ -49,7 +53,7 @@
   },
   "incident-teams": {
     "name": "Incident Teams",
-    "description": "Create, update, delete and retrieve teams which can be associated with incidents."
+    "description": "The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/) to create, update, delete, and retrieve teams which can be associated with incidents."
   },
   "incidents": {
     "name": "Incidents",
@@ -123,9 +127,17 @@
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
   },
+  "spans-metrics": {
+    "name": "Spans Metrics",
+    "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization."
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+  },
+  "teams": {
+    "name": "Teams",
+    "description": "View and manage teams within Datadog."
   },
   "usage-metering": {
     "name": "Usage Metering",

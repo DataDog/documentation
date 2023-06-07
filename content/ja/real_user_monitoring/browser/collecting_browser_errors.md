@@ -2,7 +2,7 @@
 further_reading:
 - link: /real_user_monitoring/error_tracking/
   tag: Documentation
-  text: Error Tracking
+  text: エラー追跡
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: ブログ
   text: リアルユーザーの監視
@@ -92,16 +92,16 @@ try {
 // コンテキスト付きでカスタムエラーを送信
 const error = new Error('Something wrong occurred.');
 
-DD_RUM.onReady(function() {
-    DD_RUM.addError(error, {
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.addError(error, {
         pageStatus: 'beta',
     });
 });
 
 // ネットワークエラーを送信
 fetch('<SOME_URL>').catch(function(error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error);
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addError(error);
     });
 })
 
@@ -109,8 +109,8 @@ fetch('<SOME_URL>').catch(function(error) {
 try {
     //コードロジック
 } catch (error) {
-    DD_RUM.onReady(function() {
-        DD_RUM.addError(error);
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.addError(error);
     })
 }
 ```
@@ -121,20 +121,20 @@ try {
 // コンテキスト付きでカスタムエラーを送信
 const error = new Error('Something wrong occurred.');
 
-window.DD_RUM && DD_RUM.addError(error, {
+window.DD_RUM && window.DD_RUM.addError(error, {
     pageStatus: 'beta',
 });
 
 // ネットワークエラーを送信
 fetch('<SOME_URL>').catch(function(error) {
-    window.DD_RUM && DD_RUM.addError(error);
+    window.DD_RUM && window.DD_RUM.addError(error);
 })
 
 // 処理済みの例外エラーを送信
 try {
     //コードロジック
 } catch (error) {
-    window.DD_RUM && DD_RUM.addError(error);
+    window.DD_RUM && window.DD_RUM.addError(error);
 }
 ```
 {{% /tab %}}

@@ -12,7 +12,7 @@ title: Datadog Agent によって送信された APM メトリクス
 
 `datadog.trace_agent.cpu_percent`
 : **タイプ**: ゲージ<br>
-CPU 使用量 (コア単位): 例えば 50 (1 コアの半分)、200 (2 コア)、250 (2.5 コア)
+コアに対する割合で見た CPU 使用量。例えば、値が `50` の場合はコアの半分、`200` の場合は 2 コア。
 
 `datadog.trace_agent.events.max_eps.current_rate`
 : **タイプ**: ゲージ<br>
@@ -56,10 +56,6 @@ SQL の難読化が発生するたびに 1 増加。
 : **タイプ**: カウント<br>
 プロファイルエンドポイントのリバースプロキシが作成されるたびに 1 つずつ増加する。
 
-`datadog.trace_agent.ratelimit`
-: **タイプ**: ゲージ<br>
-`1` 未満の場合、リソース使用量 (CPU またはメモリ) が多いためにペイロードが拒否されていることを意味します。
-
 `datadog.trace_agent.receiver.error`
 : **タイプ**: カウント<br>
 デコード、フォーマット、またはその他のエラーが原因で API がペイロードを拒否した回数。
@@ -87,6 +83,10 @@ Agent が受け入れたペイロード数。
 `datadog.trace_agent.receiver.payload_refused`
 : **タイプ**: カウント<br>
 サンプリングが原因で受信者に拒否されたペイロードの数。
+
+`datadog.trace_agent.receiver.ratelimit`
+: **タイプ**: ゲージ<br>
+`1` 未満の場合、リソース使用量 (CPU またはメモリ) が多いためにペイロードが拒否されていることを意味します。
 
 `datadog.trace_agent.receiver.spans_dropped`
 : **タイプ**: カウント<br>

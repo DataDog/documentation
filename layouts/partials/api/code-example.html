@@ -155,19 +155,15 @@
                             {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                         {{- end -}}
                       {{- end -}}
-## {{ default $exampleId $exampleDefinition.summary }}
-  {{- range split $exampleDefinition.description "\n" }}
-# {{ . }}
-  {{- end }}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body) }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
                   {{- end -}}
               {{- else -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body) }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
               {{- end -}}
           {{- end -}}
       {{- end -}}
   {{- else -}}
-{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body) }}
+{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "body" $body "title" $item.description) }}
   {{- end -}}
   </code>
   {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}
@@ -211,19 +207,15 @@
                           {{- $exampleValue = $exampleValue | jsonify (dict "indent" "  ") -}}
                       {{- end -}}
                     {{- end -}}
-## {{ default $exampleId $exampleDefinition.summary }}
-{{- range split $exampleDefinition.description "\n" }}
-# {{ . }}
-{{- end }}
-{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint) }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "exampleValue" $exampleValue "exampleId" $exampleId "exampleDefinition" $exampleDefinition "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
                 {{- end -}}
             {{- else -}}
-{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint) }}
+{{ partial "api/curl.html" (dict "contentType" $contentType "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
             {{- end -}}
         {{- end -}}
     {{- end -}}
 {{- else -}}
-{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint) }}
+{{ partial "api/curl.html" (dict "context" $context "securitySchemes" $securitySchemes "dollarScratch" $context.Scratch "endpoint" $endpoint "title" $endpoint.action.summary) }}
 {{- end -}}
 </code>
 {{/* Do not change indent of html above as it will change the indentation of the curl code block */}}

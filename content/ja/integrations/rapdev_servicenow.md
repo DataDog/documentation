@@ -25,9 +25,9 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- クラウド
+- インシデント
 - マーケットプレイス
-- cloud
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -55,18 +55,18 @@ public_title: ServiceNow Performance Monitoring
 short_description: ServiceNow インスタンスのパフォーマンスと ITSM インシデントを監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
-  - Category::Monitoring
+  - Category::Incidents
+  - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ServiceNow インスタンスのパフォーマンスと ITSM インシデントを監視する
   media:

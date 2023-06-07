@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - 高度なログフィルター
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
 - link: /logs/log_configuration/processors
@@ -17,7 +20,7 @@ further_reading:
   tag: ドキュメント
   text: Logging without Limits (無制限のログ)*
 kind: documentation
-title: ログの収集
+title: ログ収集の高度な構成
 ---
 
 ログ収集の構成をカスタマイズします。
@@ -66,7 +69,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
+Docker 環境では、`log_processing_rules` を指定するために、**フィルターしたいログを送るコンテナ**のラベル `com.datadoghq.ad.logs` を使用します。例:
 
 ```yaml
  labels:
@@ -87,7 +90,7 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
+特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。ポッド内の特定の `<CONTAINER_IDENTIFIER>` で Datadog コンテナログのオートディスカバリーを構成するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
 
 ```yaml
 apiVersion: apps/v1
@@ -101,7 +104,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -116,7 +119,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -183,7 +186,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。以下に例を示します。
+Docker 環境では、`log_processing_rules` を指定するために、**フィルターしたいログを送るコンテナ**のラベル `com.datadoghq.ad.logs` を使用します。例:
 
 ```yaml
  labels:
@@ -218,7 +221,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -233,7 +236,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -306,7 +309,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -322,7 +325,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -407,7 +410,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -422,7 +425,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: postgres
+        - name: '<CONTAINER_IDENTIFIER>'
           image: postgres:latest
 ```
 
@@ -435,14 +438,14 @@ spec:
 
 その他の例:
 
-| **文字列の例**           | **パターン**                                   |
-|--------------------------|-----------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
-| 20180228                 | `\d{8}`                                       |
-| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
-| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
+| **文字列の例**           | **パターン**                                       |
+|--------------------------|---------------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
+| 20180228                 | `\d{8}`                                           |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### 自動複数行集計
 Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][2]を自動的に検出することができます。
@@ -500,7 +503,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/testApp.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -511,7 +514,7 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: testApp
+        - name: '<CONTAINER_IDENTIFIER>'
           image: testApp:latest
 ```
 
@@ -525,7 +528,7 @@ logs_config:
   auto_multi_line_detection: true
   auto_multi_line_extra_patterns:
    - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
 この機能を有効にすると、新しいログファイルが開かれたとき、Agent はパターンの検出を試みます。このプロセスの間、ログは 1 行で送信されます。検出しきい値に達すると、そのソースの将来のすべてのログは、検出されたパターンで集計され、パターンが見つからない場合は 1 行で集計されます。検出には、最大 30 秒または最初の 500 ログ (いずれか早い方) が必要です。
@@ -567,6 +570,17 @@ logs:
 上記の例では、`/var/log/myapp/log/myfile.log` にマッチし、`/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` は除外しています。
 
 **注**: Agent がディレクトリ内にあるファイルをリストするには、そのディレクトリへの読み取りおよび実行アクセス許可が必要です。
+
+## 最近更新されたファイルを最初に追跡する
+**注:** この機能は公開ベータ版です。
+
+Datadog Agent は、ファイルを優先的に追跡する際、ディレクトリパスのファイル名を逆辞典順でソートします。ファイルの修正時間に基づいてファイルをソートするには、構成オプション `logs_config.file_wildcard_selection_mode` に値 `by_modification_time` を設定します。
+
+このオプションは、ログファイルの合計マッチ数が `logs_config.open_files_limit` を超える場合に有用です。`by_modification_time` を使用すると、定義されたディレクトリパスで最も新しく更新されたファイルが最初に追跡されるようになります。
+
+デフォルトの動作に戻すには、構成オプション `logs_config.file_wildcard_selection_mode` を値 `by_name` に設定します。
+
+この機能を使用するには、Agent バージョン 7.40.0 以降が必要です。
 
 ## ログファイルのエンコーディング
 

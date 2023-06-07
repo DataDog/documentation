@@ -5,18 +5,18 @@ further_reading:
 - link: "/security/application_security/threats/add-user-info/"
   tag: "Documentation"
   text: "Tracking User Activity"
-- link: "/security/application_security/threats/setup_and_configure/"
+- link: "/security/application_security/threats/library_configuration/"
   tag: "Documentation"
   text: "Configuring your ASM setup"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
-  text: "Risk Management"
+  text: "Application Vulnerability Management"
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
   text: "How ASM Works"
 ---
 
-ASM Threat Monitoring and Protection uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns. 
+ASM Threat Monitoring and Protection uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns, or by identifying business logic abuse.
 
 Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Service Catalog][1] and individual Service Pages in APM provide quick insights into application threat signals, and let you quickly click through to investigate signals and block attackers.
 
@@ -33,7 +33,7 @@ In the [Signals Explorer][2], filter by attributes and facets to find critical t
 
 From this page you can block and unblock users and IPs, or investigate what infrastructure might have been affected.
 
-{{< img src="security/application_security/appsec-threat-overview.mp4" alt="Overview of investigating threats in signals explorer" video="true" >}}
+{{< img src="security/application_security/appsec-threat-overview_v2.mp4" alt="Overview of investigating threats in signals explorer" video="true" >}}
 
 
 ## Create In-App WAF rules for identifying attack patterns

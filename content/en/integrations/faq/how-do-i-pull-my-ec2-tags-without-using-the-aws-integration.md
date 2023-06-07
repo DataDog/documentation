@@ -56,7 +56,7 @@ If tags are not available through the EC2 Instance Metadata Service, the Datadog
 
 This option only pulls in custom tags set on the EC2 host under the **Tags** tab in your AWS console:
 
-{{< img src="integrations/faq/ec2_tags.png" alt="ec2_tags"  >}}
+{{< img src="integrations/faq/ec2_tags.png" alt="ec2_tags" >}}
 
 Tags like `availability_zone`, `region`, or `instance_type` are only available by pulling in the EC2 host through the [AWS integration][1].
 

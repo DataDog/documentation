@@ -5,13 +5,13 @@ description: フィルターと集計の結果を視覚化して、ログを正�
 further_reading:
 - link: logs/explorer/search
   tag: ドキュメント
-  text: ログの絞り込み
-- link: logs/explorer/group
+  text: ログのフィルター方法
+- link: logs/explorer/analytics
   tag: ドキュメント
-  text: クエリログのグループ化
+  text: ログをグループ化する方法
 - link: /logs/explorer/export
   tag: ドキュメント
-  text: ログエクスプローラーのビューをエクスポート
+  text: ログエクスプローラーからビューをエクスポートする
 kind: documentation
 title: ログの視覚化
 ---
@@ -37,21 +37,9 @@ title: ログの視覚化
 
 {{< img src="logs/explorer/table_controls.mp4" alt="表示テーブルを構成する" video=true style="width:80%;">}}
 
-{{< site-region region="gov,us3" >}}
 リストの視覚化におけるログのデフォルトの**ソート**はタイムスタンプによるもので、最新のログが一番上に表示されます。これが最速なので、一般的な目的では推奨される並べ替え方法になります。最初にメジャーの値が最小または最大のログを表示するか、ファセットの一意の値について辞書式にログを並べ替え、そのファセットに従って列を並べ替えます。
 
-**注**: 特定のフィールドに従ってテーブルを並べ替えるには、事前に[ファセットを宣言][5]する必要があります。
-
-[1]: /ja/logs/explorer/facets/
-{{< /site-region >}}
-
-{{< site-region region="us,eu" >}}
-リストの視覚化におけるログのデフォルトの**ソート**はタイムスタンプによるもので、最新のログが一番上に表示されます。これが最速なので、一般的な目的では推奨される並べ替え方法になります。最初にメジャーの値が最小または最大のログを表示するか、ファセットの一意の値について辞書式にログを並べ替え、そのファセットに従って列を並べ替えます。
-
-**注**: 任意の属性やタグを列として追加することはできますが、テーブルのソートは、あらかじめ [ファセットを宣言][1]しておくと最も確実です。ファセットでない属性も列として追加できるが、確実なソートはできません。
-
-[1]: /ja/logs/explorer/facets/
-{{< /site-region >}}
+**注**: 任意の属性やタグを列として追加することはできますが、テーブルのソートは、あらかじめ [ファセットを宣言][3]しておくと最も確実です。ファセットでない属性も列として追加できるが、確実なソートはできません。
 
 ログテーブルのコンフィギュレーションは、トラブルシューティングコンテキストの他の要素と一緒に[保存ビュー][1]に保存されます。
 
@@ -113,6 +101,6 @@ Choose additional display options for timeseries: the **roll-up interval**, whet
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: /ja/logs/explorer/saved_views/
 [2]: /ja/logs/search-syntax
+[3]: /ja/logs/explorer/facets/

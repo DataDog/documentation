@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/otel_support.md
 description: OpenTelemetry を RUM Flutter で使用する方法について説明します。
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
@@ -8,7 +6,7 @@ further_reading:
   text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter ソースコード
+  text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: RUM データの調査方法

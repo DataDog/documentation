@@ -35,19 +35,6 @@ Datadog サービスカタログは、デフォルトで APM、USM、RUM から�
 
 5. [Service Catalog Write][13] 権限を持っている場合、**Save Entry** をクリックするか、**Code** ビューで提供される cURL コマンドを実行することで、メタデータを送信することができます。
 
-
-## 他の Datadog テレメトリーデータで報告されているサービスを発見する
-
-インフラストラクチャーメトリクスなどの既存の Datadog テレメトリーから他のサービスを検出するには、ページ上部の [**Setup &amp; Config** タブ][3]に移動して、**Import Entries** タブをクリックしてください。`DD_SERVICE` [タグ][5]を含む他の Datadog テレメトリーからサービスをインポートすることができます。
-
-{{< img src="tracing/service_catalog/import_entries.png" alt="サービスカタログのセットアップと構成セクションのインポートエントリータブ" style="width:90%;" >}}
-
-いくつかのエントリーをインポートすると、それらは **Explore** タブに表示されます。[API を使う][1]か [GitHub インテグレーション][6]で所有者や連絡先などのメタデータを追加しないと、エントリーが失効してしまうことがあります。
-
-インポートしたサービスをデフォルトの **Explore** ビューから削除するには、**Clear Previously Imported Services** をクリックします。これにより、メタデータを持たないサービスや、APM、ユニバーサルサービスモニタリング (USM)、リアルユーザーモニタリング (RUM) のテレメトリーを持たないサービスがすべて削除されます。
-
-{{< img src="tracing/service_catalog/clear_imported_services.png" alt="サービスカタログのセットアップと構成セクションで、以前にインポートしたサービスの削除を確認します" style="width:90%;" >}}
-
 ## サービス定義の GitHub への保存と編集
 
 [GitHub インテグレーション][6]を構成し、Service Catalog でサービスの定義を表示する場所から、GitHub で保存・編集可能な場所に直接リンクするようにします。
@@ -70,7 +57,7 @@ Datadog は各リポジトリのルートにある `service.datadog.yaml` ファ
 
 ## Terraform でサービス定義の更新を自動化する
 
-サービスカタログは、Terraform リソースとしてサービス定義を提供します。自動化されたパイプラインによるサービスカタログのサービスの作成と管理には、[Datadog Provider][8] v3.16.0 以降が必要です。
+サービスカタログは、[Terraform リソース][14]としてサービス定義を提供します。自動化されたパイプラインによるサービスカタログのサービスの作成と管理には、[Datadog Provider][8] v3.16.0 以降が必要です。
 
 詳細については、[Datadog Provider のドキュメント][9]を参照してください。
 
@@ -80,6 +67,17 @@ GitHub インテグレーションや Terraform の代わりに、オープン�
 
 この GitHub Action を使用すると、Datadog にこの情報を送信するタイミングを完全に制御しながら、GitHub Action を使用してサービスカタログにサービスを登録し、組織独自のその他のコンプライアンスチェックを実装することができます。
 
+## 他の Datadog テレメトリーデータで報告されているサービスを発見する
+
+インフラストラクチャーメトリクスなどの既存の Datadog テレメトリーから他のサービスを検出するには、ページ上部の [**Setup &amp; Config** タブ][3]に移動して、**Import Entries** タブをクリックしてください。`DD_SERVICE` [タグ][5]を含む他の Datadog テレメトリーからサービスをインポートすることができます。
+
+{{< img src="tracing/service_catalog/import_entries.png" alt="サービスカタログのセットアップと構成セクションのインポートエントリータブ" style="width:90%;" >}}
+
+いくつかのエントリーをインポートすると、それらは **Explore** タブに表示されます。[API を使う][1]か [GitHub インテグレーション][6]で所有者や連絡先などのメタデータを追加しないと、エントリーが失効してしまうことがあります。
+
+インポートしたサービスをデフォルトの **Explore** ビューから削除するには、**Clear Previously Imported Services** をクリックします。これにより、メタデータを持たないサービスや、APM、ユニバーサルサービスモニタリング (USM)、リアルユーザーモニタリング (RUM) のテレメトリーを持たないサービスがすべて削除されます。
+
+{{< img src="tracing/service_catalog/clear_imported_services.png" alt="サービスカタログのセットアップと構成セクションで、以前にインポートしたサービスの削除を確認します" style="width:90%;" >}}
 
 ## その他の参考資料
 
@@ -98,3 +96,4 @@ GitHub インテグレーションや Terraform の代わりに、オープン�
 [11]: https://docs.datadoghq.com/ja/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [13]: https://app.datadoghq.com/personal-settings/profile
+[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml

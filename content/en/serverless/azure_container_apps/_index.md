@@ -99,7 +99,7 @@ COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
 # install the Datadog js tracing library, either here or in package.json
 
-npm i dd-trace@2.2.0
+RUN npm i dd-trace@2.2.0
 
 # enable the Datadog tracing library
 ENV NODE_OPTIONS="--require dd-trace/init"
@@ -224,7 +224,7 @@ Follow [these instructions][2] to install and configure the Ruby tracing library
 
 ### 2. Configure your application
 
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the  Datadog Agent:
+Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
 - `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
 - `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
 - `DD_TRACE_ENABLED`: set to `true` to enable tracing

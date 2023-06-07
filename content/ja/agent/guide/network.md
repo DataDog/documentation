@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - ネットワークトラフィック
 aliases:
 - /ja/account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
 - /ja/account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
@@ -50,22 +53,28 @@ title: ネットワークトラフィック
 : `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
 `session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+{{% site-region region="us,eu,us3,us5,ap1" %}}
+[リモート構成][1]
+: `config.`{{< region-param key="dd_site" code="true" >}}
+
+[1]: /ja/agent/guide/how_remote_config_works
+{{% /site-region %}}
+
 [Synthetics プライベートロケーション][8]
 : ワーカーのバージョン 1.5.0 以上 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} は構成に使用する唯一のエンドポイントです。<br>
 Worker のバージョン 0.1.6 以降の API  テスト結果 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Worker のバージョン 0.2.0 以降のブラウザテスト結果 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Worker のバージョン 0.1.5 以降の API テスト結果 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{% site-region region="us,eu,us3,us5,ap1" %}}
 [データベースモニタリング][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [2]: /ja/database_monitoring/
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us" >}}
-
+{{% site-region region="us" %}}
 [ログ][1] & [HIPAA ログ][2]
 : TCP: `agent-intake.logs.datadoghq.com`<br>
 HTTP: `agent-http-intake.logs.datadoghq.com`<br>
@@ -80,11 +89,9 @@ HTTP: `agent-http-intake.logs.datadoghq.com`<br>
 [1]: /ja/logs/
 [2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
+{{% site-region region="eu" %}}
 [ログ][1] & [HIPAA ログ][2]
 : TCP: `agent-intake.logs.datadoghq.eu`<br>
 HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
@@ -99,11 +106,9 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 [1]: /ja/logs/
 [2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
+{{% site-region region="us3" %}}
 [ログ][1] & [HIPAA ログ][2]
 : HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
 その他: [ログのエンドポイント][3]を参照してください
@@ -116,11 +121,9 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 [1]: /ja/logs/
 [2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
+{{% site-region region="us5" %}}
 [ログ][1] & [HIPAA ログ][2]
 : HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
 その他: [ログのエンドポイント][3]を参照してください
@@ -133,11 +136,19 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 [1]: /ja/logs/
 [2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
+{{% site-region region="ap1" %}}
+[ログ][1] & [HIPAA ログ][2]
+: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
+その他: [ログのエンドポイント][3]を参照してください
 
-{{< site-region region="gov" >}}
+[1]: /ja/logs/
+[2]: /ja/data_security/logs/#hipaa-enabled-customers
+[3]: /ja/logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
+{{% site-region region="gov" %}}
 [ログ][1] & [HIPAA ログ][2]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
 その他: [ログのエンドポイント][3]を参照してください
@@ -150,8 +161,7 @@ HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
 [1]: /ja/logs/
 [2]: /ja/data_security/logs/#hipaa-enabled-customers
 [3]: /ja/logs/log_collection/#logging-endpoints
-
-{{< /site-region >}}
+{{% /site-region %}}
 
 その他すべての Agent データ
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -211,7 +221,7 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 
 #### アウトバウンド
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 443/tcp
 : 大半の Agent データ (メトリクス、APM、ライブプロセス/コンテナなど) 用のポート
@@ -235,9 +245,9 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 [3]: /ja/logs/log_collection/#logging-endpoints
 [4]: /ja/agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 443/tcp
 : 大半の Agent データ (メトリクス、APM、ライブプロセス/コンテナなど) 用のポート
@@ -261,9 +271,9 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 [3]: /ja/logs/log_collection/#logging-endpoints
 [4]: /ja/agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{% site-region region="us3,us5,gov" %}}
 
 443/tcp
 : 大半の Agent データ (メトリクス、APM、ライブプロセス/コンテナなど) 用のポート
@@ -283,7 +293,7 @@ v6.1.0 以降、Agent は Datadog の API にもクエリを実行、重要で�
 [3]: /ja/logs/log_collection/#logging-endpoints
 [4]: /ja/agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### インバウンド
 
@@ -297,6 +307,9 @@ Agent のサービスがホスト内のローカルで相互通信する場合�
 
 5002/tcp
 : [Agent ブラウザ GUI][2] 用のポート
+
+5012/tcp
+: APM [go_expvar server][1] 用のポート
 
 6062/tcp
 : Process Agent のデバッグエンドポイント用のポート。

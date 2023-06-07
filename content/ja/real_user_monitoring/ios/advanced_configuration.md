@@ -1,16 +1,15 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/advanced_configuration.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: RUM & セッションリプレイ
 kind: documentation
 title: RUM iOS の高度なコンフィギュレーション
 ---
+
 まだ RUM iOS SDK をインストールしていない場合は、[アプリ内セットアップ手順][1]に従うか、[RUM iOS セットアップドキュメント][2]を参照してください。
 
 ## ユーザーセッションの充実
@@ -213,7 +212,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 * エラーの影響を最も受けているユーザーを把握する
 * 最も重要なユーザーのパフォーマンスを監視する
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API"  >}}
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API" >}}
 
 以下の属性は**任意**で、**少なくとも 1 つ**提供する必要があります。
 
@@ -284,6 +283,9 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 
 `setRUMErrorEventMapper(_ mapper: @escaping (RUMErrorEvent) -> RUMErrorEvent?)`
 : エラーのデータスクラビングコールバックを設定します。Datadog に送信される前のエラーイベントの修正またはドロップに使用可能です。詳しくは、[RUM イベントの修正またはドロップ](#modify-or-drop-rum-events)をご参照ください。
+
+`setRUMLongTaskEventMapper(_ mapper: @escaping (RUMLongTaskEvent) -> RUMLongTaskEvent?)`
+: ロングタスクのデータスクラビングコールバックを設定します。Datadog に送信される前のロングタスクイベントの修正またはドロップに使用可能です。詳しくは、[RUM イベントの修正またはドロップ](#modify-or-drop-rum-events)をご参照ください。
 
 `setRUMResourceAttributesProvider(_ provider: @escaping (URLRequest, URLResponse?, Data?, Error?) -> [AttributeKey: AttributeValue]?)`
 : インターセプトされたリソースのカスタム属性を提供するクロージャーを設定します。RUM iOS SDK により収集される各リソースに、`provider` クロージャーが呼び出されます。このクロージャーはタスク情報と共に呼び出され、カスタムリソース属性を返すか、属性がアタッチされない場合は `nil` を返します。
@@ -566,6 +568,9 @@ Datadog.Configuration
     .setRUMActionEventMapper { actionEvent in
         return actionEvent
     }
+    .setRUMLongTaskEventMapper { longTaskEvent in
+        return longTaskEvent
+    }
     .build()
 ```
 {{% /tab %}}
@@ -589,6 +594,10 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 
 [builder setRUMActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull actionEvent) {
     return actionEvent;
+}];
+
+[builder setRUMLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull longTaskEvent) {
+    return longTaskEvent;
 }];
 
 [builder build];
@@ -752,11 +761,11 @@ DDConfigurationBuilder *builder = [DDConfiguration builderWithRumApplicationID:@
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/ios
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
-[7]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected?tab=session#default-attributes
+[2]: /ja/real_user_monitoring/ios
+[3]: /ja/real_user_monitoring/ios/data_collected
+[4]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures
+[5]: /ja/real_user_monitoring/ios/data_collected/?tab=error#error-attributes
+[6]: /ja/real_user_monitoring/connect_rum_and_traces?tab=browserrum
+[7]: /ja/real_user_monitoring/ios/data_collected?tab=session#default-attributes
 [8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/master/Sources/Datadog/DDRUMMonitor.swift

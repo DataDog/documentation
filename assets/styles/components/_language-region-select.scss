@@ -7,7 +7,9 @@
     .region-select-container {
       display: flex;
       align-items: baseline;
-
+      @include media-breakpoint-down(sm) {
+        display: block;
+      }
       p {
         margin-right: 10px;
 
@@ -90,6 +92,7 @@ aside.sidebar {
     font-size: 16px;
     line-height: 20px;
     z-index: 3;
+    font-variant: lining-nums;
 
     &:lang(ja) {
       font-size: 14px;

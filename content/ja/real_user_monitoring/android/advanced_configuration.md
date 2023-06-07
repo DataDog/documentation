@@ -1,10 +1,8 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/configure_rum_android_sdk.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: dd-sdk-android ソースコード
+  text: dd-sdk-android のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
@@ -69,7 +67,7 @@ RUM のデフォルト属性に加えて、`addTiming` API を使用して、ア
 {{% /tab %}}
 {{< /tabs >}}
 
-タイミングが送信されると、タイミングには `@view.custom_timings.<timing_name>` としてアクセスできます。例: `@view.custom_timings.hero_image`。RUM 分析またはダッシュボードでグラフ化する前に、[メジャーを作成](https://docs.datadoghq.com/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures)する必要があります。
+タイミングが送信されると、タイミングは `@view.custom_timings.<timing_name>` としてアクセス可能になります (例: `@view.custom_timings.hero_image`)。RUM 分析またはダッシュボードでグラフを作成する前に、[メジャーを作成][10]する必要があります。
 
 ### カスタムアクション
 
@@ -195,7 +193,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 * エラーの影響を最も受けているユーザーを把握する
 * 最も重要なユーザーのパフォーマンスを監視する
 
-{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API"  >}}
+{{< img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="RUM UI のユーザー API" >}}
 
 以下の属性は**任意**で、**少なくとも 1 つ**提供する必要があります。
 
@@ -308,6 +306,47 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 
 `ActivityViewTrackingStrategy`、`FragmentViewTrackingStrategy`、`MixedViewTrackingStrategy` のいずれかを使用する場合、コンストラクターで `ComponentPredicate` の実装を提供することで、RUM View として追跡する `Fragment` または `Activity` を絞り込むことができます。
+
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+   ```kotlin
+       val configuration = Configuration.Builder(true, true, true, true)
+        .useViewTrackingStrategy(
+        ActivityViewTrackingStrategy(
+            trackExtras = true,
+            componentPredicate = object : ComponentPredicate<Activity> {
+                override fun accept(component: Activity): Boolean {
+                    return true
+                }
+
+                override fun getViewName(component: Activity): String? = null
+            })
+        )
+        .build()  
+   ```
+{{% /tab %}}
+{{% tab "Java" %}}
+   ```java
+        Configuration configuration = new Configuration.Builder(true, true, true, true)
+            .useViewTrackingStrategy(new ActivityViewTrackingStrategy(
+                true,
+                new ComponentPredicate<Activity>() {
+                    @Override
+                    public boolean accept(Activity component) {
+                        return true;
+                    }
+
+                    @Override
+                    public String getViewName(Activity component) {
+                        return null;
+                    }
+                }
+            ))
+            .build();
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
 
 **注**: デフォルトで、ライブラリは `ActivityViewTrackingStrategy` を使用しています。ビューの追跡ストラテジーを提供しないことにした場合は、自身で `startView` および `stopView` メソッドを呼び出してビューを手動で送信する必要があります。
 
@@ -450,16 +489,17 @@ val monitor = RumMonitor.Builder()
 GlobalRum.registerIfAbsent(monitor)
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/android
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[2]: /ja/real_user_monitoring/android
+[3]: /ja/real_user_monitoring/android/data_collected
+[4]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[5]: /ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[6]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
-[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/#event-specific-attributes
+[9]: /ja/real_user_monitoring/android/data_collected/#event-specific-attributes
+[10]: /ja/real_user_monitoring/explorer/search/#setup-facets-and-measures

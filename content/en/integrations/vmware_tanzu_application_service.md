@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, see the [VMware announcement][1] for more information) deployment can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more. 
+Any VMware Tanzu Application Service (formerly known as Pivotal Cloud Foundry, see the [VMware announcement][1] for more information) deployment can send metrics and events to Datadog. You can track the health and availability of all nodes in the deployment, monitor the jobs they run, collect metrics from the Loggregator Firehose, and more.
 
 For the best experience, use this page to automatically set up monitoring through Tanzu Ops Manager for your application on VMware Tanzu Application Service and your VMware Tanzu Application Service cluster. For manual setup steps, see the [VMware Tanzu Application Service Manual Setup Guide][2].
 
@@ -63,7 +63,7 @@ Log collection is not supported for this site.
 
 {{% /site-region %}}
 
-{{% site-region region="us,us5,eu,gov" %}}
+{{% site-region region="us,us5,eu,gov,ap1" %}}
 
 ##### Enable log collection
 
@@ -109,7 +109,7 @@ For Agent version 6.12 or greater, when using a [proxy configuration][8] with th
 
 If the connection fails to establish and log collection does not start, an event like this appears in the [Events Explorer][9]. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
-{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established"  >}}
+{{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established" >}}
 
 ### Tags
 

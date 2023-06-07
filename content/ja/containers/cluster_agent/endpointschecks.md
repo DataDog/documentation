@@ -34,7 +34,7 @@ title: オートディスカバリーによるエンドポイントチェック
 以下の例では、NGINX 用の Kubernetes デプロイメントが 3 つのポッドで作成されています。
 
 ```shell
-# kubectl get pods --selector app=nginx -o wide
+kubectl get pods --selector app=nginx -o wide
 NAME                     READY   STATUS    RESTARTS   AGE   IP           NODE
 nginx-66d557f4cf-m4c7t   1/1     Running   0          3d    10.0.0.117   gke-cluster-default-pool-4658d5d4-k2sn
 nginx-66d557f4cf-smsxv   1/1     Running   0          3d    10.0.1.209   gke-cluster-default-pool-4658d5d4-p39c
@@ -44,13 +44,13 @@ nginx-66d557f4cf-x2wzq   1/1     Running   0          3d    10.0.1.210   gke-clu
 サービスも作成されました。この 3 つのエンドポイントを通じてポッドにリンクしています。
 
 ```shell
-# kubectl get service nginx -o wide
+kubectl get service nginx -o wide
 NAME    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
 nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 ```
 
 ```shell
-# kubectl get endpoints nginx -o yaml
+kubectl get endpoints nginx -o yaml
 ...
 - addresses:
   - ip: 10.0.0.117
@@ -82,17 +82,16 @@ nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-エンドポイントチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `clusterAgent.config.clusterChecksEnabled` 構成キーを使用して有効にします。
+エンドポイントチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `features.clusterChecks.enabled` 構成キーを使用して有効にします。
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  # (...)
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+  features:
+    clusterChecks:
+      enabled: true
 ```
 
 この構成では、Cluster Agent と ノードベースの Agent との間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。

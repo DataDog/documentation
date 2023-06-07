@@ -1,5 +1,5 @@
 ---
-title: Control sensitive logs data
+title: Control Sensitive Logs Data
 kind: guide
 aliases:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
@@ -69,7 +69,7 @@ Use out-of-the-box or custom rules to [identify and redact other kinds of sensit
 
 ### Stop indexing sensitive logs
 
-If you're not using Sensitive Data Scanner, determine whether you want to exclude any new logs containing sensitive data from being indexed entirely. You’ll still need to address the logs containing sensitive data already indexed in Datadog.
+If you're not using Sensitive Data Scanner, determine whether you want to exclude any new logs containing sensitive data from being indexed entirely. You'll still need to address the logs containing sensitive data already indexed in Datadog.
 
 * Find which index(es) hold logs with sensitive data.
 * For each index, add an exclusion filter based on the sensitive outline query.
@@ -121,7 +121,7 @@ If you have a specific compliance questions or need help, contact Datadog [suppo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/guide/logs-rbac/
-[2]: /account_management/org_settings/sensitive_data_detection/
+[2]: /sensitive_data_scanner/
 [3]: /account_management/org_settings/
 [4]: /logs/search_syntax/
 [5]: /logs/indexes

@@ -29,7 +29,7 @@ further_reading:
   - link: "/dashboards/widgets/"
     tag: "Documentation"
     text: "Discover all available Widgets for your Dashboard"
-  - link: "/mobile/#dashboards"
+  - link: "/service_management/mobile/#dashboards"
     tag: "Documentation"
     text: "View your Dashboards on the Mobile App"
   - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
@@ -41,6 +41,12 @@ further_reading:
   - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
     tag: "Developer docs"
     text: "Create great integration dashboards"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on better visualizations with Dashboards"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -126,9 +132,13 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 ### Settings
 
+#### Version history
+
+From a dashboard click on the version history icon in the top right corner of the page to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
+
 #### Generate public URL
 
-Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][12].
+Share a dashboard with external users by generating a public URL. For more details, see [Sharing dashboards][13].
 
 #### Display UTC time
 
@@ -136,7 +146,7 @@ Toggle between UTC time and your default time zone.
 
 #### Notifications
 
-If notifications are activated for a dashboard, an event is created in the [event explorer][13]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion along with the name of the user performing the action.
+If notifications are activated for a dashboard, an event is created in the [Events Explorer][14]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action.
 
 Additionally, individual users who activate the notification receive an email alert. Any user in the organization, regardless of administrative privileges, can sign up to receive change notifications for a dashboard.
 
@@ -158,13 +168,13 @@ Use the pop-up to restrict access to you, everyone in your organization with you
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][14].
+Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][15].
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
-If you manage your Dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your Dashboards. For more information, see the [Terraform Dashboard role restriction guide][15].
+If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
 
-**Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][16] to enable this feature. 
+**Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
 
 
 #### High-density mode
@@ -204,7 +214,7 @@ From an individual dashboard, Datadog offers suggestions for viewing related das
 
 ### Edit details
 
-Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
+Update Markdown-supported dashboard descriptions or associate [teams][18] with a dashboard:
 
 1. Open the dashboard you wish to edit.
 1. Click the caret icon next to the dashboard title. A dropdown panel opens.
@@ -220,7 +230,7 @@ Search, view, or create dashboards and lists on the [Dashboard List][4] page.
 
 ### Teams
 
-Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][17].
+Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][18].
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -293,7 +303,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][18]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][19]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -311,7 +321,8 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile/
+
+[1]: /service_management/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists
@@ -322,10 +333,11 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [9]: /tracing/
 [10]: /profiler/
 [11]: /dashboards/guide/custom_time_frames/
-[12]: /dashboards/sharing/#dashboards
-[13]: /events/
-[14]: /account_management/rbac/
-[15]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[16]: /help/
-[17]: /account_management/teams/
-[18]: /dashboards/template_variables/#saved-views
+[12]: /dashboards/guide/version_history/
+[13]: /dashboards/sharing/#dashboards
+[14]: /events/
+[15]: /account_management/rbac/
+[16]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[17]: /help/
+[18]: /account_management/teams/
+[19]: /dashboards/template_variables/#saved-views

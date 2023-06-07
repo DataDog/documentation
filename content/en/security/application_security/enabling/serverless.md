@@ -24,7 +24,7 @@ further_reading:
 
 <div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.</div>
 
-You can monitor your functions running in AWS Lambda with Datadog Application Security Management (ASM). See [Setup and Configure][4] for information about what ASM features are supported for serverless functions.
+You can monitor your functions running in AWS Lambda with Datadog Application Security Management (ASM). See [Compatibility][4] for information about what ASM features are supported for serverless functions.
 
 In general, setting up ASM for AWS Lambda involves:
 
@@ -75,7 +75,34 @@ To install and configure the Datadog Serverless Framework plugin:
 
 {{% tab "Custom" %}}
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog tracer:
+   - **Python** 
+       ```sh
+       # Use this format for x86-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+
+          # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          ```
+          Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
+
+   - **Node**   
+       ``` sh
+       # Use this format for AWS commercial regions
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+
+         # Use this format for AWS GovCloud regions
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         ```  
+         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
+        
    - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
      ```sh
      # In AWS commercial regions
@@ -109,6 +136,74 @@ To install and configure the Datadog Serverless Framework plugin:
    # arm64-based Lambda in AWS GovCloud regions
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
    ```
+   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Install the Datadog tracer:
+   - **Python** 
+       ```sh
+       # Use this format for x86-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+
+          # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          ```
+          Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
+
+   - **Node**   
+       ``` sh
+       # Use this format for AWS commercial regions
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+
+         # Use this format for AWS GovCloud regions
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         ```  
+         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
+  
+
+   - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+     ```sh
+     # In AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:8
+     # In AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     ```
+   - **Go**: The Go tracer doesn't rely on a layer and is a regular Go module. You can upgrade to its latest version with:
+     ```sh
+     go get -u github.com/DataDog/datadog-lambda-go
+     ```
+   - **.NET**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+     ```sh
+     # x86-based Lambda in AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:6
+     # arm64-based Lambda in AWS commercial regions
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:6
+     # x86-based Lambda in AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     # arm64-based Lambda  in AWS GovCloud regions
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     ```
+2. Install the Datadog Lambda Extension by configuring the layers for your Lambda function using the ARN in one of the following formats. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+   ```sh
+   # x86-based Lambda in AWS commercial regions
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:36
+   # arm64-based Lambda in AWS commercial regions
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:36
+   # x86-based Lambda in AWS GovCloud regions
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   # arm64-based Lambda in AWS GovCloud regions
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   ```
+
+   [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
 
 3. Enable ASM by adding the following environment variables on your function deployment:
    ```yaml
@@ -125,10 +220,16 @@ To install and configure the Datadog Serverless Framework plugin:
    environment:
      DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+     DD_TRACE_ENABLED: true
    ```
+4. For **Node** and **Python** functions only, double-check that the function's handler is set correctly:
+    - **Node**: Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`. 
+       - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+    - **Python**: Set your function's handler is to `datadog_lambda.handler.handler`.
+       - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
+   
 4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
 {{% /tab %}}
@@ -147,8 +248,8 @@ A few minutes after you enable your application and exercise it, **threat inform
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
-[2]: /serverless/distributed_tracing/?tab=python
+[2]: /serverless/distributed_tracing/
 [3]: https://app.datadoghq.com/security/appsec
-[4]: /security/application_security/threats/setup_and_configure/?code-lang=serverless
+[4]: /security/application_security/enabling/compatibility/serverless
 [5]: /security/default_rules/security-scan-detected/
 [6]: /serverless/libraries_integrations/plugin/

@@ -145,7 +145,7 @@ Find out how to monitor individual client and aggregate usage of the Datadog pla
 
 [1]: /monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
-[3]: https://learn.datadoghq.com/courses/intro-to-monitoring
+[3]: https://learn.datadoghq.com/courses/introduction-to-observability
 [4]: /monitors/types/anomaly/
 [5]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
 [6]: /monitors/types/metric/?tab=change
@@ -188,7 +188,7 @@ Find out how to monitor individual client and aggregate usage of the Datadog pla
 [43]: /api/latest/embeddable-graphs/
 [44]: /dashboards/guide/embeddable-graphs-with-template-variables/
 [45]: https://www.datadoghq.com/blog/establishing-service-level-objectives/
-[46]: /monitors/guide/slo-checklist/
+[46]: /service_management/service_level_objectives/guide/slo-checklist
 [47]: https://www.datadoghq.com/blog/define-and-manage-slos/
 [48]: https://www.datadoghq.com/blog/slo-monitoring-tracking/
 [49]: /api/latest/service-level-objectives/

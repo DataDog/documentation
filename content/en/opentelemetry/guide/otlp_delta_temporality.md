@@ -22,6 +22,7 @@ If you opt to send OTLP monotonic sums, histograms, or exponential histograms wi
 
 - Your deployment is stateful, so you need to send all points on a timeseries to the same Datadog Agent or Datadog exporter. This affects how you scale your OpenTelemetry Collector deployments.
 - Datadog might not send the first point it receives from a given timeseries if it cannot ensure this point is the true start of the timeseries. This may lead to missing points upon restarts.
+- The minimum and maximum cannot be recovered for cumulative OTLP Histograms; they may be missing or approximated depending on the histograms export mode. 
 
 ## Configuring your OpenTelemetry SDK
 
@@ -29,7 +30,7 @@ If you produce OTLP metrics from an OpenTelemetry SDK, you can configure your OT
 
 If your SDK does not support this environment variable you can configure delta temporality in code. The following example configures an OTLP HTTP exporter and adds `1` to a counter every two seconds for a total of five minutes:
 
-{{< programming-lang-wrapper langs="python,go,java" >}}
+{{< programming-lang-wrapper langs="python,go,java,.net" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -173,6 +174,42 @@ public final class Main {
       Thread.sleep(2000);
     }
   }
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".net" >}}
+```c#
+// Requires: $ dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+
+namespace GettingStarted;
+
+public class Program
+{
+    public static void Main()
+    {
+		using var meter = new Meter("my-meter");
+		var providerBuilder = Sdk.CreateMeterProviderBuilder().AddMeter(meter.Name);
+		providerBuilder.AddOtlpExporter((exporterOptions, metricReaderOptions) =>
+			{
+				exporterOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
+				metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+			});
+		using var provider = providerBuilder.Build();
+
+		Counter<int> counter = meter.CreateCounter<int>("example.counter", "1", "Example counter");
+		for (int i = 0; i < 150; i++) {
+			counter?.Add(1);
+			Task.Delay(2000).Wait();
+		}
+    }
 }
 ```
 {{< /programming-lang >}}

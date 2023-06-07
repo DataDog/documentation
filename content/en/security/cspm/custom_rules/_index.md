@@ -12,6 +12,10 @@ further_reading:
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
 is_beta: true
+cascade:
+    algolia:
+        rank: 30
+        subcategory: Cloud Security Posture Management
 ---
 
 {{< site-region region="gov" >}}
@@ -19,10 +23,6 @@ is_beta: true
 Cloud Security Posture Management is not available in this site.
 </div>
 {{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true">}}
-Creating and using custom CSPM rules is a beta feature, available for select Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP) cloud resources. See the <a href="https://docs.datadoghq.com/security/cspm/custom_rules/schema/">cloud resources schema documentation</a> for more information. New cloud resources will be added throughout the beta period.
-{{< /callout >}}
 
 ## Overview
 
@@ -42,7 +42,7 @@ To clone a rule:
 
 To create a rule from scratch:
 
-1. In Datadog, navigate to [**Security > Posture Management** and click **Compliance Rules**][1].
+1. In Datadog, navigate to [**Security** > **Posture Management**][1] and click **Compliance Rules**.
 2. Click **New Rule** in the upper-right.
 3. Select **Cloud Configuration** as the rule type.
 4. Specify the cloud resource types you are writing the rule for.

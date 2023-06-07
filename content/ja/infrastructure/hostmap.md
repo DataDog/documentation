@@ -35,7 +35,7 @@ title: Host Map
 
 簡単な例として、ホストを AWS アベイラビリティーゾーンでグループ化するとします。2 つ目のグループ化タグ (たとえば、インスタンスタイプ) を追加すると、ホストはさらにいくつかのグループに再分割されます。つまり、以下に示すように、まずアベイラビリティーゾーンで分割され、次にインスタンスタイプで分割されます。
 
-{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog ホストマップ - AZ インスタンスグループ"  >}}
+{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog ホストマップ - AZ インスタンスグループ" >}}
 
 ### タグ
 
@@ -80,7 +80,7 @@ Datadog Agent では、ホストメタデータおよびアプリケーション
 
 ### データの鮮度と意味
 
-ホストマップのデータは、マップを継続的に操作していない限り、約 1 分に 1 回の割合でリフレッシュされます。画面の右下に、データが最後に更新された日時が表示されます。
+ホストマップのデータは、マップを継続的に操作していない限り、約 1 分に 1 回の割合でリフレッシュされます。画面の左下に、データが最後に更新された日時が表示されます。
 
 ## ユースケース
 
@@ -116,7 +116,7 @@ AWS の費用を削減したいのであれば、高価なインスタンスが�
 
 {{< img src="infrastructure/hostmap/hostmappart1image6.png" alt="Datadog ホストマップ - 2 つのイメージグループ" style="width:80%;">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

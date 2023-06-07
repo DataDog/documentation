@@ -18,7 +18,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [Datadog Forwarder Lambda 関数][2]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`) または Java 11 (`java11`) ランタイムを使用している必要があります。
+分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用している必要があります。
 
 ## コンフィギュレーション
 
@@ -53,12 +53,21 @@ dependencies {
 
 ### インスツルメントする
 
-
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. 関数に Datadog Lambda レイヤーをインストールします。最新の `VERSION` は `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` です。
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
     ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. 関数に Datadog Lambda レイヤーをインストールします。最新の `VERSION` は `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` です。
+
+    ```yaml
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:<VERSION>
+    ```
+{{< /site-region >}}
 
 2. 関数に以下の環境変数を構成します。
 
@@ -198,10 +207,17 @@ dependencies {
 
 0.3.x から 1.4.x へのアップグレードで、`dd-trace-java` トレーサーを使用したい場合は、`dd-trace-java` Lambda レイヤーへの参照を見つけ、次のように変更してください。
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ```
+{{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+```
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:4
+```
+{{< /site-region >}}
 
 [2]: /ja/serverless/forwarder/
 [3]: /ja/serverless/enhanced_lambda_metrics

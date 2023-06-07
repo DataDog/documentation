@@ -27,7 +27,7 @@ This guide describes how to configure downtimes for the following use cases:
 ## Prerequisites
 
 Since this guide describes the usage of the API, you will need an API key and an application key with admin privileges. These are available in your [Datadog account API key page][2].
-Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
+Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog Application key, respectively.
 
 This guide also assumes that you have a terminal with `CURL` and have reviewed the main [Downtime documentation page][3]
 
@@ -219,7 +219,7 @@ Replace the placeholder value `<DATADOG_SITE>` with {{< region-param key="dd_sit
 
 Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule downtime"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="rrule downtime" style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}

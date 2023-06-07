@@ -1,18 +1,17 @@
 ---
 beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/swiftui.md
 description: SwiftUI アプリケーションのインスツルメンテーションに RUM を使用します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: https://docs.datadoghq.com/real_user_monitoring/ios/
   tag: ドキュメント
   text: iOS と tvOS のモニタリングについて
 kind: documentation
 title: SwiftUI
 ---
+
 ## 概要
 
 Datadog iOS SDK for RUM を使用すると、`SwiftUI` アプリケーションのビューとアクションをインストルメントすることができます。また、インスツルメンテーションは、`UIKit` と `SwiftUI` のハイブリッドアプリケーションでも機能します。

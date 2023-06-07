@@ -67,7 +67,7 @@ By default, data retention for production environments is:
 - 30 days for sessions, views, actions, errors, and session recordings.
 - 15 days for resources and long tasks.
 
-Any of this retained data can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8].
+Retention can be extended to a maximum of 90 days at no additional cost by [opening a support ticket][8]. Note that this retention extension does not apply to Session Replays, Resources, or Long Tasks.
 
 #### Role-based access control
 Datadog provides role-based access control (RBAC) for managing who sees captured RUM data. Default settings for data access depend on the role a user gets added to. There are three types of Datadog roles available: Administrator, Standard, and Read Only roles. More granular RUM-specific permissions are defined in [Datadog role permissions][10]. For example, you can grant or revoke access to view Session Replays.
@@ -119,7 +119,7 @@ See [privacy options specific to Session Replay][12].
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
-[11]: /account_management/org_settings/sensitive_data_detection
+[11]: /sensitive_data_scanner/
 [12]: /real_user_monitoring/session_replay/privacy_options
 [13]: https://www.datadoghq.com/privacy/
 [14]: /real_user_monitoring/explorer/search/

@@ -9,9 +9,9 @@ further_reading:
   - link: /observability_pipelines/working_with_data/
     tag: Documentation
     text: Working with data using Observability Pipelines
-  - link: /getting_started/observability_pipelines/
+  - link: /observability_pipelines/setup
     tag: Documentation
-    text: Get started with Observability Pipelines and Datadog
+    text: Set up Observability Pipelines
 ---
 
 ## Overview
