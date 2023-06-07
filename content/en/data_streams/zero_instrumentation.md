@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Data Streams Monitoring supports an option which provides visibility into your kafka client <--> kafka server metrics universally across your entire stack _without having to instrument your code_. It relies solely on the presence of a configured Datadog Agent and [Unified Service Tagging][1], and brings performance data about your uninstrumented kafka services.
+Data Streams Monitoring supports an option that provides visibility into your Kafka client-server metrics, universally, across your entire stack—without having to instrument your code. This option relies on the Datadog Agent and [Unified Service Tagging][1], and provides performance data about your uninstrumented Kafka services.
 
 ## Setup
 
