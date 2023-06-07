@@ -7,6 +7,12 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring"
     tag: "Release Notes"
     text: "Check out the latest Datadog Infrastructure Monitoring releases! (App login required)."
+  - link: 'https://dtdg.co/fe'
+    tag: 'Foundation Enablement'
+    text: 'Join an interactive session to power up your Infrastructure monitoring'
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}

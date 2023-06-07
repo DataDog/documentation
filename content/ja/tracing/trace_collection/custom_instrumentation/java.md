@@ -6,7 +6,7 @@ aliases:
 - /ja/tracing/setup_overview/custom_instrumentation/java
 code_lang: java
 code_lang_weight: 0
-description: Datadog Java APM トレーサーを使用して OpenTracing 標準を実装します。
+description: Datadog Java APM トレーサーを使用してコードをインスツルメンテーションします。
 further_reading:
 - link: tracing/other_telemetry/connect_logs_and_traces
   tag: ドキュメント
@@ -15,7 +15,7 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: Java カスタムインスツルメンテーション
+title: Datadog ライブラリを使った Java カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 <div class="alert alert-info">
@@ -128,6 +128,10 @@ import io.opentracing.util.Tracer;
 
 Tracer tracer = GlobalTracer.get();
 final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
+// 注: 下の try with resource ブロック内のスコープは
+// コードブロックの最後に自動的に閉じられます。
+// try with resource 句を使用しない場合は、
+// scope.close() をコールする必要があります。
 try (final Scope scope = tracer.activateSpan(span)) {
     // ここで例外をスロー
 } catch (final Exception e) {
@@ -191,7 +195,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-ap
 
 Datadog のトレースアノテーションは、[dd-trace-api 依存関係][6]が提供します。
 
-`@Trace`  アノテーションには、デフォルトのオペレーション名 `trace.annotation` とトレースされるメソッドのリソース名があります。これらは `@Trace` アノテーションの引数として設定でき、インスツルメンテーション対象をより適切に反映します。これらは、`@Trace` アノテーションに設定できる唯一の引数です。
+`@Trace` アノテーションには、デフォルトのオペレーション名 `trace.annotation` とトレースされるメソッドのリソース名があります。これらは `@Trace` アノテーションの引数として設定でき、インスツルメンテーション対象をより適切に反映します。これらは、`@Trace` アノテーションに設定できる唯一の引数です。
 
 ```java
 import datadog.trace.api.Trace;
@@ -208,7 +212,7 @@ public class SessionManager {
 
 ### 新しいスパンを手動で作成する
 
-自動インスツルメンテーション、`@Trace` アノテーション、`dd.trace.methods` コンフィギュレーションに加えて、プログラムでコードのブロックの周囲にスパンを作成することで、可観測性をカスタマイズできます。この方法で作成されたスパンは、他のトレースメカニズムと自動的に統合されます。つまり、トレースがすでに開始されている場合、手動スパンはその親スパンとして呼び出し元を持ちます。同様に、コードのラップされたブロックから呼び出されたトレースメソッドは、その親として手動スパンを持ちます。
+自動インスツルメンテーション、`@Trace` アノテーション、`dd.trace.methods` コンフィギュレーションに加えて、プログラムで任意のコードブロックの周囲にスパンを作成することで、可観測性をカスタマイズできます。この方法で作成されたスパンは、他のトレースメカニズムと自動的に統合されます。つまり、トレースがすでに開始されている場合、手動スパンはその親スパンとして呼び出し元を持ちます。同様に、ラップされたコードブロックから呼び出されたトレースメソッドは、その親として手動スパンを持ちます。
 
 ```java
 import datadog.trace.api.DDTags;
@@ -222,11 +226,15 @@ class SomeClass {
         Tracer tracer = GlobalTracer.get();
 
         // サービス名とリソース名のタグが必要です。
-        // スパンの作成時にタグを設定できます。
+        // サービス名とリソース名のタグが必要です。
         Span span = tracer.buildSpan("<OPERATION_NAME>")
             .withTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>")
             .withTag(DDTags.RESOURCE_NAME, "<RESOURCE_NAME>")
             .start();
+        // 注: 下の try with resource ブロック内のスコープは
+        // コードブロックの最後に自動的に閉じられます。
+        // try with resource 句を使用しない場合は、
+        // scope.close() をコールする必要があります。
         try (Scope scope = tracer.activateSpan(span)) {
             // タグは作成後に設定することもできます
             span.setTag("my.tag", "value");
@@ -316,38 +324,17 @@ datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor(
 
 ## トレースクライアントと Agent コンフィギュレーション
 
-トレーシングクライアントと Datadog Agent の両方で、コンフィギュレーションを追加することで、B3 ヘッダーを使用したコンテキスト伝播や、ヘルスチェックなどの計算されたメトリクスでこれらのトレースがカウントされないように、特定のリソースがトレースを Datadog に送信しないように除外することができます。
+トレーシングクライアントと Datadog Agent の両方で、コンフィギュレーションを追加することで、コンテキスト伝播のための構成を行ったり、特定のリソースがトレースを Datadog に送信しないように除外して、ヘルスチェックなどのメトリクスの算出でこれらのトレースがカウントされないようにすることができます。
 
-### B3 ヘッダーの抽出と挿入
+### ヘッダー抽出と挿入によるコンテキストの伝搬
 
-Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][8]と挿入をサポートしています。
-
-分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。現在、次の 2 つのスタイルがサポートされています:
-
-- Datadog: `Datadog`
-- B3: `B3`
-
-挿入スタイルは次を使って構成できます:
-
-- システムプロパティ: `-Ddd.propagation.style.inject=Datadog,B3`
-- 環境変数: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-プロパティまたは環境変数の値は、挿入が有効になっているヘッダースタイルのカンマ (またはスペース) 区切りリストです。デフォルトでは、Datadog 挿入スタイルのみが有効になっています。
-
-抽出スタイルは次を使って構成できます:
-
-- システムプロパティ: `-Ddd.propagation.style.extract=Datadog,B3`
-- 環境変数: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-プロパティまたは環境変数の値は、抽出が有効になっているヘッダースタイルのカンマ (またはスペース) 区切りリストです。デフォルトでは、Datadog 抽出スタイルのみが有効になっています。
-
-複数の抽出スタイルが有効になっている場合、抽出試行はスタイルの構成順で実行され、最初に成功した抽出値が使われます。
+分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][8]をお読みください。
 
 ### リソースのフィルター
 
 トレースはそれぞれのリソース名に基づいて除外可能で、これによりヘルスチェックなどの外形監視トラフィックが Datadog にレポートされるトレースから削除されます。この設定およびその他のセキュリティ/微調整に関するコンフィギュレーションについては[セキュリティ][9]ページまたは[不要なリソースを無視する][10]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -358,6 +345,6 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 [5]: /ja/tracing/setup/java/#compatibility
 [6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
 [7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
-[8]: https://github.com/openzipkin/b3-propagation
+[8]: /ja/tracing/trace_collection/trace_context_propagation/java/
 [9]: /ja/tracing/security
 [10]: /ja/tracing/guide/ignoring_apm_resources/

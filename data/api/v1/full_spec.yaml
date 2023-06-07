@@ -3933,6 +3933,7 @@ components:
       - infra_host_usage
       - invocations_usage
       - npm_host_usage
+      - obs_pipeline_bytes_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -3967,6 +3968,7 @@ components:
       - INFRA_HOST_USAGE
       - INVOCATIONS_USAGE
       - NPM_HOST_USAGE
+      - OBS_PIPELINE_BYTES_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -4386,6 +4388,8 @@ components:
           description: Widget query.
           example: '@service:app'
           type: string
+        sort:
+          $ref: '#/components/schemas/WidgetFieldSort'
         storage:
           description: Option for storage location. Feature in Private Beta.
           example: indexes
@@ -7467,6 +7471,8 @@ components:
       - invocations_percentage
       - npm_host_usage
       - npm_host_percentage
+      - obs_pipeline_bytes_usage
+      - obs_pipeline_bytes_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -7534,6 +7540,8 @@ components:
       - INVOCATIONS_PERCENTAGE
       - NPM_HOST_USAGE
       - NPM_HOST_PERCENTAGE
+      - OBS_PIPELINE_BYTES_USAGE
+      - OBS_PIPELINE_BYTES_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -7763,6 +7771,14 @@ components:
           type: number
         npm_host_usage:
           description: The network host usage by tag(s).
+          format: double
+          type: number
+        obs_pipeline_bytes_percentage:
+          description: The percentage of observability pipeline bytes usage by tag(s).
+          format: double
+          type: number
+        obs_pipeline_bytes_usage:
+          description: The observability pipeline bytes usage by tag(s).
           format: double
           type: number
         profiled_container_percentage:
@@ -13961,6 +13977,9 @@ components:
           type: string
         parser:
           $ref: '#/components/schemas/SyntheticsVariableParser'
+        secure:
+          description: Determines whether or not the extracted value will be obfuscated.
+          type: boolean
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
@@ -27735,7 +27754,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -27910,6 +27929,11 @@ paths:
           - file: metric_payload.json
             name: body
           step: there is a valid "metric" in the system
+        metric_static:
+          parameters:
+          - file: metric_payload_static.json
+            name: body
+          step: there is a valid "metric_static" in the system
       x-menu-order: 1
       x-undo:
         type: safe

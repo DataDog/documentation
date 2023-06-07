@@ -120,13 +120,14 @@ Netskope はクラウドセキュリティプラットフォームで、クラ�
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
-- メール: datadog.integrations@crestdatasys.com
+- サポートメール: datadog.integrations@crestdatasys.com
+- 営業メール: sales@crestdatasys.com
 - Web サイト: [crestdatasys.com][3]
-
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.crestdatasys.com/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netskope" target="_blank">こちらをクリック</a>してください。
