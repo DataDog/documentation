@@ -6,9 +6,9 @@ kind: documentation
 
 ## Overview
 
-Once [Database Monitoring (DBM)][1] is enabled for your organization, you can create a monitor to alert you when a DBM event type deviates from a predefined threshold over a given period of time.
+With the [Database Monitoring (DBM)][1] monitor type, you can create monitors and alert on the data surfaced in DBM. These monitors can be configured to alert you when a DBM event type deviates from a predefined threshold over a given period of time.
 
-Some examples of these event types include when a set of queries are waiting on the resolution of a blocking query to run, or when a certain amount of active query executions exceed a given duration threshold.
+Some examples of these event types include when queries are waiting on the resolution of blocking queries or when active query executions exceed a given duration threshold.
 
 ## Monitor creation
 
@@ -18,7 +18,7 @@ To create a new DBM monitor in Datadog, navigate to [**Monitors** > **New Monito
 
 ## Define the search query
 
-For both of the below cases your query changes, note that as you expand your search filters, the chart above the search bar updates.
+Note: As your query changes, the chart above the search bar updates in response.
 
 ### Common monitor types
 
@@ -26,10 +26,9 @@ If you don't wish to [create your monitor from scratch](#creating-monitors-from-
 - Waiting Queries
 - Long Running Queries
 
-{{< img src="database_monitoring/dbm_event_monitor/dbm_common_monitor_types.png" alt="The options for the Waiting Queries and Long Running Queries example monitors as presented in the UI" style="width:100%;" >}}
+{{< img src="database_monitoring/dbm_event_monitor/dbm_common_monitor_types.png" alt="Example OOTB monitors related to waiting queries and long running queries" style="width:100%;" >}}
 
-
-Additionally, please share any feedback you have on these example monitors with your CSM, as we are actively looking to incorporate new ones to recommend.
+Any feedback on these existing monitor types and other ones you would like to see should be shared with your Customer Success Manager.
 
 ### Creating monitors from scratch
 
@@ -37,14 +36,14 @@ Additionally, please share any feedback you have on these example monitors with 
 
 {{< img src="database_monitoring/dbm_event_monitor/dbm_event_monitor_data_types.png" alt="A dropdown menu showing the different data sources available for the Database Monitoring monitor type" style="width:80%;" >}}
 
-2. Construct a search query using the same logic as in the <a href="https://docs.datadoghq.com/database_monitoring/query_samples/">DBM Query Samples</a> activity and explain plan explorer. This means that you will need to select one or more **facets** to include in the search bar. For example, if you wanted to alert on the waiting queries executed by user `postgresadmin`, then your search bar would look like this:
+2. Construct a search query using the same logic as in the <a href="https://docs.datadoghq.com/database_monitoring/query_samples/">DBM Query Samples</a> activity and explain plan explorer. This means that you should select one or more **facets** to include in the search bar. For example, if you wanted to alert on the waiting queries executed by user `postgresadmin`, then your search bar would look like this:
 
 {{< img src="database_monitoring/dbm_event_monitor/dbm_example_query_no_group_by.png" alt="An example search query containing two facets in the search bar." style="width:100%;" >}}
 
-Note that the monitor you configure will alert over the **unique value count** of the facets.
+Note: The monitor you configure alerts over the **unique value count** of the facets.
 
 3. You also have the option to group DBM events by multiple dimensions. All DBM events matching the query are grouped together based on the values of up to **five facets**. With the group by functionality, you also have the ability to configure the **alerting grouping strategy**:
-    * **Simple Alert**: Simple Alerts aggregate over all reporting sources, so you'll get one alert when one or multiple groups values breach the threshold. You may use this strategy to reduce notification noise.
+    * **Simple Alert**: Simple Alerts aggregate over all reporting sources, so one alert triggers when one or multiple groups values breach the threshold. You may use this strategy to reduce notification noise.
     * **Multi Alert**: Multi Alerts apply the alert to each source according to your group parameters, meaning that an alerting event is generated for each group that meets the set conditions. For example, you can group a query by `@db.user` and select the Multi Alert Aggregation type to receive a separate alert for each database user that triggers the alert as you've defined it.
 
 ### Set alert conditions
@@ -54,7 +53,7 @@ Note that the monitor you configure will alert over the **unique value count** o
 
 #### No data and below alerts
 
-To receive a notification when an application has stopped sending DBM events, set the condition to `below 1`. This alert will trigger when no DBM events match the monitor query in a given time frame across all aggregate groups.
+To receive a notification when an application has stopped sending DBM events, set the condition to `below 1`. This alert triggers when no DBM events match the monitor query in a given time frame across all aggregate groups.
 
 When you split the monitor by any dimension (tag or facet) and use a `below` condition, the alert is triggered **if and only if**:
 1. There are DBM events for a given group, but the count is below the threshold.
