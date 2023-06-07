@@ -69,7 +69,7 @@ To stop session recordings, remove `startSessionReplayRecording()` and set `sess
 ## Mobile Session Replay
 
 <div class="alert alert-warning">
-This feature is in public beta.
+Session Replay is currently in a public beta for native mobile apps. As such, there is no billing at the time.
 </div>
 
 ### Overview
@@ -81,7 +81,67 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 {{< tabs >}}
 {{% tab "Android" %}}
 
-Android content here.
+All Session Replay SDK versions can be found in the [Maven Snapshots Repository][1].
+
+1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2]
+2. In order to use the SNAPSHOTS in your Gradle dependencies, you will need to add this repository as a source in your repository configuration in your `build.gradle` file:
+
+   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+   repositories {
+        maven {
+         url ="https://oss.sonatype.org/content/repositories/snapshots"
+        }
+        }
+
+        dependencies {
+           implementation 'com.datadoghq:dd-sdk-android:1.19.0-sr-beta1-SNAPSHOT'
+           implementation 'com.datadoghq:dd-sdk-android-session-replay:1.19.0-sr-beta1-SNAPSHOT'
+           implementation 'com.datadoghq:dd-sdk-android-session-replay-material:1.19.0-sr-beta1-SNAPSHOT' // in case you need material support
+
+        }
+   {{< /code-block >}}
+
+3. Once the DD SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
+   {{< code-block lang="javascript" filename="block.java" disable_copy="false" collapsible="true" >}}
+      val config = Configuration.Builder(
+         logsEnabled = true,
+         tracesEnabled = true,
+         crashReportsEnabled = true,
+         rumEnabled = true
+      )
+      ...
+      .build()
+
+      ...
+
+      Datadog.initialize(context, credentials, config, trackingConsent) 
+      val sessionReplayConfig = SessionReplayConfiguration.Builder()
+         // in case you need material extension support
+         .addExtensionSupport(MaterialExtensionSupport()) 
+         .build()
+      val sessionReplayFeature = SessionReplayFeature(sessionReplayConfig)
+      Datadog.registerFeature(sessionReplayFeature)
+   {{< /code-block >}}
+
+By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, we have an option to unmask data in all recorded content:
+
+{{< code-block lang="javascript" filename="block.java" disable_copy="false" collapsible="true" >}}
+val sessionReplayConfig = SessionReplayConfiguration.Builder()
+ ...
+.setSessionReplayPrivacy(SessionReplayPrivacy.[PRIVACY])
+.build()
+   {{< /code-block >}}
+
+#### v1.19.0
+
+We now support 3 privacy options:
+
+1. `MASK_ALL` - The default privacy level, which masks all the content in the session replay recording.
+2. `MASK_USER_INPUT` - This masks any content that is considered user input, such as input fields, date pickers, time pickers, and dropdowns.
+3. `ALLOW_ALL` - This does not mask anything except for sensitive fields, such as passwords, emails, phone numbers, and addresses.
+
+[1]: https://oss.sonatype.org/content/repositories/snapshots/
+[2]: /real_user_monitoring/android/?tab=kotlin
 
 {{% /tab %}}
 
