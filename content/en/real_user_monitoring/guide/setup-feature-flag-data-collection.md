@@ -397,6 +397,91 @@ DevCycle does not support this integration. Create a ticket with DevCycle to req
 {{% /tab %}}
 {{< /tabs >}}
 
+### Amplitude integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Amplitude's SDK and and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing Amplitude's SDK, see Apmplitude's [JavaScript SDK documentation][1].
+
+```javascript
+  const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
+    exposureTrackingProvider: {
+      track(exposure: Exposure)  {
+        // Send the feature flag when Amplitude reports the exposure
+        datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
+      }
+    }
+  })
+```
+
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascript-sdk/
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Amplitude's SDK, see Amplitude's [iOS SDK documentation][1].
+
+```swift
+  class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    func track(exposure: Exposure) {
+      // Send the feature flag when Amplitude reports the exposure
+      if let variant = exposure.variant {
+        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+      }
+    }
+  }
+
+  // In initialization:
+  ExperimentConfig config = ExperimentConfigBuilder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
+    .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/ios-sdk/
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Amplitude's SDK, see Amplitude's [Android SDK documentation][1].
+
+```kotlin
+  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    override fun track(exposure: Exposure) {
+        // Send the feature flag when Amplitude reports the exposure
+        GlobalRum.get().addFeatureFlagEvaluation(
+            exposure.flagKey,
+            exposure.variant.orEmpty()
+        )
+    }
+  }
+
+  // In initialization:
+  val config = ExperimentConfig.Builder()
+      .exposureTrackingProvider(DatadogExposureTrackingProvider())
+      .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Analyze your Feature Flag performance in RUM
 
 Feature flags appear in the context of your RUM Sessions, Views, and Errors as a list.
