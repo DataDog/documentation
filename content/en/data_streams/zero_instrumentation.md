@@ -145,7 +145,7 @@ DD_SYSTEM_PROBE_DATA_STREAMS_ENABLED=true
 {{% /tab %}}
 {{% tab "ECS" %}}
 
-For ECS, enable USM and the system probe with the following JSON task definition. Deploy the task definition as a [daemon service][1].
+For ECS, enable DSM support and system probe with the following JSON task definition. Deploy the task definition as a [daemon service][1].
 
 ```json
 {
@@ -365,7 +365,7 @@ If the operating system image is Ubuntu or Debian, add the following after `envi
 ]
 ```
 
-If you are using load balancers with your services, enable additional cloud integrations to allow Universal Service Monitoring to discover cloud-managed entities. Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
+If you are using load balancers with your services, enable additional cloud integrations to allow Data Streams Monitoring to discover cloud-managed entities. Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
 
 Then, add the following tags to each load balancer:
 ```conf
