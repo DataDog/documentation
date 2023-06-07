@@ -31,7 +31,7 @@ Datadog provides monitoring capabilities for all Azure App Service resource type
 - Azure Monitor metrics for [Apps][2] and [Functions][3] using the [Azure Integration][2].
 - Use the [Azure App Service View][4] to quickly spot issues, map relationships between your Azure App Service resources, and gain insights into cost and performance.
 - Submit custom metrics through the API.
-- Submit [resource logs][5] through [Event Hub][6].
+- Submit [resource logs][11] through [Event Hub][12].
 
 Datadog provides additional monitoring capabilities for the following Azure App Service workload runtimes on Basic, Standard, and Premium plans:
 
@@ -49,7 +49,7 @@ Capabilities:
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata
 - Manual APM instrumentation to customize spans
 - `Trace_ID` injection into application logs
-- Custom metrics with [DogStatsD][7]
+- Custom metrics with [DogStatsD][10]
 
 ## Further reading
 
@@ -64,3 +64,6 @@ Capabilities:
 [7]: /serverless/azure_app_services/azure_app_services_windows?tab=net#setup
 [8]: /serverless/azure_app_services/azure_app_services_windows?tab=java#setup
 [9]: /serverless/azure_app_services/azure_app_services_linux
+[10]: /developers/dogstatsd/
+[11]: /integrations/azure/#log-collection
+[12]: https://learn.microsoft.com/azure/event-hubs/

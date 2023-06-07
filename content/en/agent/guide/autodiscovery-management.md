@@ -165,11 +165,17 @@ In **Agent v7.20+**, to include a given Docker container with the **name** `<NAM
 DD_CONTAINER_INCLUDE = "name:<NAME>"
 ```
 
-For example, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
+For example, if you only want to monitor `ubuntu` or `debian` images, first exclude all other images, then specify the image to include:
 
 ```bash
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
+```
+
+Similarly, if you only want to monitor `nginx` images, first exclude all other images, then specify the image to include:
+```bash
+DD_CONTAINER_EXCLUDE="image:.*"
+DD_CONTAINER_INCLUDE="image:nginx"
 ```
 
 In **Agent <= v7.19+**, to include a given Docker container with the **name** `<IMAGE_NAME>` from Autodiscovery, add the following environment variable to the Datadog Agent:
@@ -178,7 +184,7 @@ In **Agent <= v7.19+**, to include a given Docker container with the **name** `<
 DD_AC_INCLUDE = "name:<NAME>"
 ```
 
-As before, if you only want to monitor `ubuntu` or `debian` images, and exclude the rest, specify:
+As before, if you only want to monitor `ubuntu` or `debian` images, first exclude all other images, then specify the image to include:
 
 ```bash
 DD_AC_EXCLUDE = "image:.*"

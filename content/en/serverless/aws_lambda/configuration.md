@@ -49,6 +49,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics](#submit-custom-metrics)
 - [Send OpenTelemetry data to Datadog](#send-opentelemetry-data-to-datadog)
+- [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -662,6 +663,12 @@ You can monitor your custom business logic by [submitting custom metrics][27].
 
 5. Deploy.
 
+## Collect Profiling data (public beta)
+
+Datadog's [Continuous Profiler][42] is available in beta for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+
+The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
+
 ## Send telemetry over PrivateLink or proxy
 
 The Datadog Lambda Extension needs access to the public internet to send data to Datadog. If your Lambda functions are deployed in a VPC without access to public internet, you can [send data over AWS PrivateLink][28] to the `datadoghq.com` [Datadog site][29], or [send data over a proxy][30] for all other sites.
@@ -876,3 +883,4 @@ If you have trouble configuring your installations, set the environment variable
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
 [40]: /serverless/libraries_integrations/extension/
+[42]: /profiler/
