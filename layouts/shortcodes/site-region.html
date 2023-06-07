@@ -8,7 +8,7 @@
 {{ $region := .Get "region" }}
 {{ $listOfPages := slice "account_management" "agent" "getting_started" "integrations"}}
 {{ if in $listOfPages .Page.Type}}
-<div class="d-none site-region-container markdown-site-region" data-region="{{ $region }}">
+<div class="d-none site-region-container" data-region="{{ $region }}">
 {{.Inner}}
 </div>
 {{ else }}

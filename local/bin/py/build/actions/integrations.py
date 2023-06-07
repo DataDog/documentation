@@ -762,7 +762,6 @@ class Integrations:
             result = re.sub(
                 self.regex_site_region, r"{{% \1 %}}", result, 0
             )
-            print('testing this file in gitlab')
         # if __init__.py exists lets grab the integration id
         integration_id = manifest_json.get("integration_id", "") or ""
         initpy = "{0}{1}{2}".format(dirname(file_name), sep, "__init__.py")
