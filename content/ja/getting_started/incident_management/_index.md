@@ -12,11 +12,14 @@ further_reading:
 - link: /monitors/incident_management
   tag: Documentation
   text: インシデント管理
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: インシデントマネジメントを向上させるためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/incident-response-with-datadog/
   tag: ブログ
   text: Datadog でのインシデント管理
 - link: /service_management/incident_management/incident_settings
-  tag: ドキュメント
+  tag: Documentation
   text: 通知ルール
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: Documentation

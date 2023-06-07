@@ -18,6 +18,9 @@ further_reading:
 - link: /monitors/
   tag: Documentation
   text: モニター、SLO、通知、ダウンタイム、インシデント
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: ダッシュボードでより良い視覚化を実現するインタラクティブなセッションに参加できます
 kind: ドキュメント
 title: ダッシュボードの概要
 ---
@@ -145,6 +148,6 @@ Y 軸の範囲、色、凡例を調整またはマーカーやイベントオー
 [12]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [13]: /ja/integrations/slack/
 [14]: /ja/api/v1/dashboards/
-[15]: /ja/mobile/
+[15]: /ja/service_management/mobile/
 [16]: https://apps.apple.com/app/datadog/id1391380318
 [17]: https://play.google.com/store/apps/details?id=com.datadog.app

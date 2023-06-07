@@ -22,9 +22,21 @@ pip install datadog
 
 有効な最小限の `dogwrap` コマンドは、以下のレイアウトを持ちます。
 
-{{< site-region region="us,us3,us5,gov,ap1" >}}
+{{< site-region region="us,gov,ap1" >}}
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
+```
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us3 "<COMMAND>"
+```
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us5 "<COMMAND>"
 ```
 {{< /site-region >}}
 
@@ -34,7 +46,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
 ```
 {{< /site-region >}}
 
-**注**: `dogwrap` コマンドは、デフォルトで US の Datadog サイトにデータを送信します。EU のサイトにデータを送信する必要がある場合は、`-s eu` オプションを含める必要があります。
+**注**: `dogwrap` コマンドは、デフォルトで US の Datadog サイトにデータを送信します。他のサイトにデータを送信する必要がある場合は、`eu`、`us3`、`us5` などのターゲットサイトを指定する `-s` オプションを含める必要があります。
 
 次のプレースホルダーと組み合わせます。
 
