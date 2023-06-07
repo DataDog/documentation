@@ -98,7 +98,7 @@ DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/a
 ```
 
 **Note:** Uploads to additional endpoints for the continuous profiler product are done through best-effort delivery.
-* The main endpoint will always have the highest priority. Uploads to additional endpoints are only handled after successful upload to the main endpoint.
+* The main endpoint has the highest priority. Uploads to additional endpoints are only handled after successful upload to the main endpoint.
 * Responses from additional endpoints are not forwarded back to the continuous profiler. Any errors during delivery to additional endpoints will be logged in the agent error logs.
 
 ## Live Processes
