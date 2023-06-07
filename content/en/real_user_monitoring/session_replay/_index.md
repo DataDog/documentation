@@ -102,7 +102,7 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
    {{< /code-block >}}
 
 3. Once the DD SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
-   {{< code-block lang="javascript" filename="block.java" disable_copy="false" collapsible="true" >}}
+   ```kotlin
       val config = Configuration.Builder(
          logsEnabled = true,
          tracesEnabled = true,
@@ -121,16 +121,16 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
          .build()
       val sessionReplayFeature = SessionReplayFeature(sessionReplayConfig)
       Datadog.registerFeature(sessionReplayFeature)
-   {{< /code-block >}}
+   ```
 
 By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, we have an option to unmask data in all recorded content:
 
-{{< code-block lang="javascript" filename="block.java" disable_copy="false" collapsible="true" >}}
+```kotlin
 val sessionReplayConfig = SessionReplayConfiguration.Builder()
  ...
 .setSessionReplayPrivacy(SessionReplayPrivacy.[PRIVACY])
 .build()
-   {{< /code-block >}}
+```
 
 #### v1.19.0
 
