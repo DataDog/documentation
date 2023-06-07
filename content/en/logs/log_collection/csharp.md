@@ -37,7 +37,7 @@ This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Micr
 
 ## File-tail logging with the Datadog Agent
 
-The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
+The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent ***(please clarify what you mean by tail that file with your Datadog agent - specifically, what does tailing a file mean)***. This enables the Datadog Agent to enrich the logs with additional metadata.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
