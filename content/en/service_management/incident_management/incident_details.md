@@ -18,13 +18,13 @@ Every incident in Datadog has its own Incident Details page where you can manage
 
 ## Global header
 
-{{< img src="monitors/incidents/incident_global_header.jpeg" alt="Incident Global Header" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_global_header.jpeg" alt="Incident Global Header" style="width:80%;">}}
 
 The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][4]. Configure your postmortem templates in Incident Settings to predefine the structure and content of your postmortems.
 
 ## Overview section
 
-{{< img src="monitors/incidents/incident_overview.jpeg" alt="Incident Overview Section" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_overview.jpeg" alt="Incident Overview Section" style="width:80%;">}}
 
 Use the Overview section to specify an incident's properties and define customer impact. 
 
@@ -62,7 +62,7 @@ In addition to housing your property fields, the Overview section also provides 
 
 ## Timeline section
 
-{{< img src="monitors/incidents/incident_timeline.jpeg" alt="Incident Timeline" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_timeline.jpeg" alt="Incident Timeline" style="width:80%;">}}
 
 The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made. 
 
@@ -86,7 +86,7 @@ By default, timeline cells are sorted in `oldest first` order, but this can be c
 
 ## Remediation section
 
-{{< img src="monitors/incidents/incident_remediation.jpeg" alt="Incident Remediation Section" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_remediation.jpeg" alt="Incident Remediation Section" style="width:80%;">}}
 
 Use the Remediation section to store any documents or resources that are relevant to the remediation process of an incident, as well as to track key tasks for the remediation process. 
 
@@ -104,7 +104,7 @@ As work for different tasks is finished, individual tasks can be marked as compl
 This feature is in open beta.
 </div>
 
-{{< img src="monitors/incidents/incident_response_team.png" alt="The Response Team section of the Incident Details page for a specific incident" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_response_team.png" alt="The Response Team section of the Incident Details page for a specific incident" style="width:80%;">}}
 
 In the Response Team section, you can form your response team by adding other users and assigning them roles to carry out in the process of resolving an incident. The two default responder types provided by Datadog are:
 
@@ -121,7 +121,7 @@ The Response Team list also saves the date and time when an individual was origi
 
 ## Notifications section
 
-{{< img src="monitors/incidents/incident_notifications.jpeg" alt="Incident Notifications" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_notifications.jpeg" alt="Incident Notifications" style="width:80%;">}}
 
 All stakeholder notifications for an incident are consolidated in the Notifications section.
 You can manually create, save as draft, and send notifications directly from this page. Automated notifications sent by [Notification Rules][11] for the incident in question are also listed in this section.

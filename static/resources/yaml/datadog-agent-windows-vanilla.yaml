@@ -46,7 +46,9 @@ data:
         - volumeattachments
         - ingresses
         labels_as_tags:
-            {}
+          {}
+        annotations_as_tags:
+          {}
 ---
 # Source: datadog/templates/install_info-configmap.yaml
 apiVersion: v1
@@ -145,6 +147,13 @@ rules:
     verbs:
       - list
       - watch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - list
+      - watch
 ---
 # Source: datadog/templates/kube-state-metrics-core-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -160,174 +169,3 @@ subjects:
   - kind: ServiceAccount
     name: datadog-cluster-agent
     namespace: default
----
-# Source: datadog/templates/daemonset.yaml
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  name: datadog
-  namespace: default
-  labels: {}
-spec:
-  revisionHistoryLimit: 10
-  selector:
-    matchLabels:
-      app: datadog
-  template:
-    metadata:
-      labels:
-        app: datadog
-      name: datadog
-      annotations: {}
-    spec:
-      hostPID: true
-      containers:
-        - name: agent
-          image: "gcr.io/datadoghq/agent:7.40.1"
-          imagePullPolicy: IfNotPresent
-          command: ["agent", "run"]
-          resources: {}
-          ports:
-            - containerPort: 8125
-              name: dogstatsdport
-              protocol: UDP
-          env:
-            # Needs to be removed when Agent N-2 is built with Golang 1.17
-            - name: GODEBUG
-              value: x509ignoreCN=0
-            - name: DD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "datadog"
-                  key: api-key
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
-            - name: DD_LOG_LEVEL
-              value: "INFO"
-            - name: DD_DOGSTATSD_PORT
-              value: "8125"
-            - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
-              value: "true"
-            - name: DD_LEADER_ELECTION
-              value: "true"
-            - name: DD_COLLECT_KUBERNETES_EVENTS
-              value: "true"
-            - name: DD_APM_ENABLED
-              value: "false"
-            - name: DD_LOGS_ENABLED
-              value: "false"
-            - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
-              value: "false"
-            - name: DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE
-              value: "true"
-            - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
-              value: "false"
-            - name: DD_HEALTH_PORT
-              value: "5555"
-            - name: DD_IGNORE_AUTOCONF
-              value: "kubernetes_state"
-            - name: DD_EXPVAR_PORT
-              value: "6000"
-          volumeMounts:
-            - name: config
-              mountPath: C:/ProgramData/Datadog
-            - name: runtimesocket
-              mountPath: \\.\pipe\docker_engine
-            - name: containerdsocket
-              mountPath: \\.\pipe\containerd-containerd
-          livenessProbe:
-            failureThreshold: 6
-            httpGet:
-              path: /live
-              port: 5555
-              scheme: HTTP
-            initialDelaySeconds: 15
-            periodSeconds: 15
-            successThreshold: 1
-            timeoutSeconds: 5
-          readinessProbe:
-            failureThreshold: 6
-            httpGet:
-              path: /ready
-              port: 5555
-              scheme: HTTP
-            initialDelaySeconds: 15
-            periodSeconds: 15
-            successThreshold: 1
-            timeoutSeconds: 5
-      initContainers:
-        - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.40.1"
-          imagePullPolicy: IfNotPresent
-          command: ["pwsh", "-Command"]
-          args:
-            - |
-              Copy-Item -Recurse -Force C:/ProgramData/Datadog C:/Temp
-              Copy-Item -Force C:/Temp/install_info/install_info C:/Temp/Datadog/install_info
-          volumeMounts:
-            - name: config
-              mountPath: C:/Temp/Datadog
-            - name: installinfo
-              mountPath: C:/Temp/install_info
-          resources: {}
-        - name: init-config
-          image: "gcr.io/datadoghq/agent:7.40.1"
-          imagePullPolicy: IfNotPresent
-          command: ["pwsh", "-Command"]
-          args:
-            - Get-ChildItem 'entrypoint-ps1' | ForEach-Object { & $_.FullName if (-Not $?) { exit 1 } }
-          volumeMounts:
-            - name: config
-              mountPath: C:/ProgramData/Datadog
-            - name: runtimesocket
-              mountPath: \\.\pipe\docker_engine
-            - name: containerdsocket
-              mountPath: \\.\pipe\containerd-containerd
-          env:
-            # Needs to be removed when Agent N-2 is built with Golang 1.17
-            - name: GODEBUG
-              value: x509ignoreCN=0
-            - name: DD_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: "datadog"
-                  key: api-key
-            - name: DD_KUBERNETES_KUBELET_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
-          resources: {}
-      volumes:
-        - name: installinfo
-          configMap:
-            name: datadog-installinfo
-        - name: config
-          emptyDir: {}
-        - hostPath:
-            path: \\.\pipe\docker_engine
-          name: runtimesocket
-        # If the CRI is not provided, try to mount the default containerd pipe.
-        # By default, "datadog.dockerOrCriSocketPath" mounts the Docker pipe.
-        # So with this additional hostPath, by default, both are mounted.
-        - hostPath:
-            path: \\.\pipe\containerd-containerd
-          name: containerdsocket
-      tolerations:
-        - effect: NoSchedule
-          key: node.kubernetes.io/os
-          value: windows
-          operator: Equal
-      affinity: {}
-      serviceAccountName: "datadog-agent"
-      nodeSelector:
-        kubernetes.io/os: windows
-  updateStrategy:
-    rollingUpdate:
-      maxUnavailable: 10%
-    type: RollingUpdate

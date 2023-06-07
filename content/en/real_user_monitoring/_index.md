@@ -44,6 +44,9 @@ further_reading:
   text: "RUM Browser Data Collected"
 algolia:
   tags: ['rum', 'real user monitoring']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}

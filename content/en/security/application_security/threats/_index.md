@@ -33,7 +33,7 @@ In the [Signals Explorer][2], filter by attributes and facets to find critical t
 
 From this page you can block and unblock users and IPs, or investigate what infrastructure might have been affected.
 
-{{< img src="security/application_security/appsec-threat-overview.mp4" alt="Overview of investigating threats in signals explorer" video="true" >}}
+{{< img src="security/application_security/appsec-threat-overview_v2.mp4" alt="Overview of investigating threats in signals explorer" video="true" >}}
 
 
 ## Create In-App WAF rules for identifying attack patterns

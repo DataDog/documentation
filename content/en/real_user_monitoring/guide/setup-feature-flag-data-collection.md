@@ -357,7 +357,7 @@ const dvcOptions = { ... };
 const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
 ...
 dvcClient.subscribe(
-    "variableEvaluted:*",
+    "variableEvaluated:*",
     (key, variable) => {
         // track all variable evaluations
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
@@ -365,7 +365,7 @@ dvcClient.subscribe(
 )
 ...
 dvcClient.subscribe(
-    "variableEvaluted:my-variable-key",
+    "variableEvaluated:my-variable-key",
     (key, variable) => {
         // track a particular variable evaluation
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
