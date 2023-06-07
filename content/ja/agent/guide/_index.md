@@ -2,7 +2,7 @@
 cascade:
   algolia:
     category: ガイド
-    rank: 20
+    rank: 70
     subcategory: Agent ガイド
 disable_toc: true
 kind: ガイド
@@ -13,6 +13,7 @@ title: Agent ガイド
 {{< whatsnext desc="全般ガイド:" >}}
     {{< nextlink href="agent/guide/agent-commands" >}}Agent のコマンド{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent コンフィギュレーションファイル{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-fips-proxy" >}}Datadog FIPS コンプライアンス{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent のログファイル{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent 環境変数{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/setup" >}}集計 Agent{{< /nextlink >}}
