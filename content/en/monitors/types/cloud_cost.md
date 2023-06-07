@@ -50,6 +50,8 @@ Any cost type or metric reporting to Datadog is available for monitors. You can 
 | Group by                          | No       | Everything           | `aws_availability_zone` |
 | Add observability metric | No      | `system.cpu.user` | `aws.s3.all_requests` |
 
+{{< img src="monitors/monitor_types/cloud_cost/ccm_metrics_source.png" alt="Add alt text description" style="width:100%;" >}}
+
 ## Set alert conditions
 
 If the cost monitor type is **Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
