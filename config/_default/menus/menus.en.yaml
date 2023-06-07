@@ -2721,8 +2721,8 @@ main:
     parent: cspm
     identifier: cspm_setup
     weight: 101
-  - name: Detection Rules
-    url: security/cspm/detection_rules
+  - name: Compliance Rules
+    url: security/cspm/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 102
