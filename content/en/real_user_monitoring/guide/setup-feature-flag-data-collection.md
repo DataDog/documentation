@@ -476,7 +476,7 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Amplitude does not support this integration. Create a ticket with DevCycle to request this feature.
+Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
 
 
 {{% /tab %}}
