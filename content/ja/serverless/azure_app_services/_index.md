@@ -30,23 +30,25 @@ Datadog では Azure App Service に属するすべてのリソースタイプ�
 - [Azure インテグレーション][2]を使用した[アプリ][2]および[関数][3]向けの Azure Monitor メトリクス。
 - [Azure App Service ビュー][4]を使用して、問題をすばやく特定し、Azure App Service リソース間の関係をマッピングし、コストとパフォーマンスに関する洞察を得ることができます。
 - API を通じてカスタムメトリクスの送信を行います。
-- [イベントハブ][6]から[リソースログ][5]を送信します。
+- [イベントハブ][12]から[リソースログ][11]を送信します。
 
 Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure App Service のワークロードランタイムの監視機能を追加提供します。
 
-| OS | ランタイム |ステータス|Documentation| 
-|----|---------|----|----|
-|Windows|.NET|GA|[Windows .NET のセットアップ][7]|
-|Windows|Java|ベータ|[Windows Java のセットアップ][8]|
-|Linux|.NET|ベータ|[Linux ドキュメント][9]|
-|Linux|Node|ベータ|[Linux ドキュメント][9]|
+| OS | ランタイム |アプリタイプ|ステータス|Documentation| 
+|----|---------|-----|----|----|
+|Windows|.NET|関数アプリと Web アプリ|GA|[Windows .NET のセットアップ][7]|
+|Linux|.NET|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|Node|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|PHP|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|Java|Web アプリ|GA|[Linux ドキュメント][9]|
+|Linux|Python|Web アプリ|GA|[Linux ドキュメント][9]|
 
 機能:
 - 自動インスツルメンテーションを用いた完全分散型 APM トレーシング
 - カスタマイズされた APM サービスとトレースビューは、関連する Azure App Service のメトリクスとメタデータを表示します
 - スパンのカスタマイズが可能な、手動 APM インスツルメンテーション
 - アプリケーションログへの `Trace_ID` 挿入
-- [DogStatsD][7] を使用したカスタムメトリクス
+- [DogStatsD][10] を使用したカスタムメトリクス
 
 ## その他の参考資料
 
@@ -61,3 +63,6 @@ Datadog は、Basic、Standard、Premium プランにおいて、以下の Azure
 [7]: /ja/serverless/azure_app_services/azure_app_services_windows?tab=net#setup
 [8]: /ja/serverless/azure_app_services/azure_app_services_windows?tab=java#setup
 [9]: /ja/serverless/azure_app_services/azure_app_services_linux
+[10]: /ja/developers/dogstatsd/
+[11]: /ja/integrations/azure/#log-collection
+[12]: https://learn.microsoft.com/azure/event-hubs/

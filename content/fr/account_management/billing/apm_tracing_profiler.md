@@ -9,7 +9,7 @@ title: Tarification d'APM
 
 [L'APM et le profileur en continu][1] vous permettent d'identifier les goulots d'étranglement dans vos services, et d'analyser les traces distribuées et les performances du code au sein de votre architecture de microservices.
 
-Deux options de tarification sont disponibles, selon que vous utilisiez ou non l'APM et le profiling. Vous pouvez contrôler le flux de données ingérées grâce aux [contrôles d'ingestion][2]. Il est également possible de définir les spans à conserver durant la période de rétention : pour ce faire, il vous suffit de les indexer avec des [filtres de rétention basés sur des tags][3].
+Deux options de tarification sont disponibles, selon que vous utilisiez ou non l'APM et le profiling. Vous pouvez contrôler le flux de données ingérées grâce aux [paramètres d'ingestion][2]. Il est également possible de définir les spans à conserver durant la période de rétention : pour ce faire, il vous suffit de les indexer avec des [filtres de rétention basés sur des tags][3].
 
 | Paramètre de facturation  | Prix                                      | Spans ingérées et spans indexées                                                                 | Facturation                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -164,16 +164,16 @@ Oui. Si vous souhaitez acheter le profileur en continu sans l'APM, faites-le-nou
 
 
 [1]: /fr/tracing/
-[2]: /fr/tracing/trace_ingestion/ingestion_controls
-[3]: /fr/tracing/trace_retention/#retention-filters
+[2]: /fr/tracing/trace_pipeline/ingestion_controls
+[3]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters
 [4]: /fr/account_management/billing/pricing/#infrastructure-monitoring
 [5]: /fr/account_management/billing/pricing/#apm
-[6]: /fr/tracing/profiling/
+[6]: /fr/profiler/
 [7]: https://www.datadoghq.com/pricing/
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
 [10]: https://docs.datadoghq.com/fr/account_management/billing/serverless/#serverless-functions
 [11]: /fr/account_management/billing/
-[12]: /fr/tracing/setup_overview/setup/java/?tab=containers#configure-the-datadog-agent-for-apm
-[13]: /fr/tracing/trace_retention/
-[14]: /fr/tracing/trace_retention/usage_metrics
+[12]: /fr/tracing/trace_collection/dd_libraries/java/?tab=containers#configure-the-datadog-agent-for-apm
+[13]: /fr/tracing/trace_pipeline/trace_retention/
+[14]: /fr/tracing/trace_pipeline/metrics

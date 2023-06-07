@@ -43,6 +43,13 @@ Pathways タブで、**latency values may be approximate for these pathways** (�
 ### キューメトリクスが見つからない
 Queue タブにメトリクスを入力するためには、セルフホスト、MSK、Confluent Platform/Cloud 環境で [Kafka インテグレーション][7]をセットアップする必要があります。
 
+### クラスタータグが表示されない
+クラスタータグは環境に応じて異なる設定になります。
+* セルフホスティングの Kafka: Kafka ブローカーと同じクラスターで動作する Agent の構成に、`kafka_cluster` タグを追加し、キーに `kafka_cluster`、値にクラスター名を設定する必要があります。
+* Amazon MSK: [MSK インテグレーション][9]がオンになっている場合、クラスター情報は DSM に自動的に伝播されます。MSK は DSM にクラスターを `cluster_name` として送信します。
+* Confluent Cloud: DSM でインスツルメンテーションしたクラスターに [Confluent Cloud インテグレーション][10]が設定されていれば、クラスターの情報は DSM に自動的に伝播されます。
+* Confluent Platform: 上記のセルフホスティング Kafka と同様に、`kafka_cluster` タグを Agent の構成に追加する必要があります。
+
 [1]: /ja/data_streams/#setup  
 [2]: /ja/data_streams/go/
 [3]: https://github.com/DataDog/dd-trace-java/blob/76f25aedf70254cb04d55eedbed6e12921c6e509/dd-trace-api/src/main/java/datadog/trace/api/experimental/DataStreamsCheckpointer.java#L25
@@ -51,3 +58,5 @@ Queue タブにメトリクスを入力するためには、セルフホスト�
 [6]: /ja/integrations/rabbitmq/?tab=host
 [7]: /ja/integrations/kafka/?tab=host
 [8]: /ja/help/
+[9]: https://docs.datadoghq.com/ja/integrations/amazon_msk/ 
+[10]: https://docs.datadoghq.com/ja/integrations/confluent_cloud/

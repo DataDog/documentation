@@ -12,6 +12,9 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging
   tag: ドキュメント
   text: 統合サービスタグ付けの構成方法を学ぶ
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: ログ管理を最適化するためのインタラクティブなセッションに参加できます
 kind: documentation
 title: ログの使用を開始する
 ---

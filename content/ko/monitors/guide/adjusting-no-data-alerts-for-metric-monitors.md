@@ -35,9 +35,9 @@ title: 메트릭 모니터에 대한 데이터 없음 경고 조정
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/monitors/create/types/metric/
+[1]: /ko/monitors/types/metric/
 [2]: /ko/integrations/amazon_web_services/
-[3]: /ko/monitors/create/types/metric/?tab=threshold#advanced-alert-conditions
+[3]: /ko/monitors/types/metric/?tab=threshold#advanced-alert-conditions
 [4]: /ko/integrations/guide/cloud-metric-delay/
 [5]: /ko/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
 [6]: /ko/help/

@@ -1,20 +1,15 @@
 ---
-title: Widget Hostmap
-kind: documentation
-description: Affichez la hostmap Datadog dans vos dashboards.
 aliases:
-  - /fr/graphing/widgets/hostmap/
+- /fr/graphing/widgets/hostmap/
+description: Affichez la hostmap Datadog dans vos dashboards.
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: Documentation
-    text: Timeboards
-  - link: /dashboards/screenboards/
-    tag: Documentation
-    text: Screenboard
-  - link: /dashboards/graphing_json/
-    tag: Documentation
-    text: Créer des dashboards avec JSON
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Créer des dashboards avec JSON
+kind: documentation
+title: Widget Hostmap
 ---
+
 Le widget Hostmap représente graphiquement n'importe quelle métrique pour l'ensemble de vos hosts, en proposant le même type de visualisation que la principale page [Host Map][1] :
 
 {{< img src="dashboards/widgets/hostmap/hostmap.png" alt="Host Map"  >}}
@@ -25,7 +20,7 @@ Le widget Hostmap représente graphiquement n'importe quelle métrique pour l'en
 
 ### Configuration
 
-La configuration du widget Hostmap est similaire à celle de la [page principale de la hostmap][1] :
+La configuration du widget Hostmap est similaire à celle de la page principale de la [hostmap][1] :
 
 1. **Type** : choisissez d'afficher des `hosts` ou des `containers`.
 2. **Filter by** : choisissez les hosts ou les conteneurs à afficher.

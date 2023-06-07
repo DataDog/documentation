@@ -11,6 +11,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: ラーニングセンター
   text: Application Performance Monitoring の紹介
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: APM の理解を深めるためのインタラクティブなセッションに参加できます
 kind: documentation
 title: トレースの概要
 ---
@@ -92,7 +95,7 @@ sudo datadog-agent status
 
 ## APM アプリケーション
 
-### インストール
+### APM に Datadog Agent を構成する
 
 アプリケーションを設定する前に、まず Ubuntu VM 上に `pip` をインストールし、次に `flask` と `ddtrace` をインストールします。
 
