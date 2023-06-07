@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /security_platform/cspm/configuration_rules
   - /security/cspm/configuration_rules
+  - security/cspm/detection_rules
 further_reading:
   - link: "/security/cspm/setup"
     tag: "Documentation"
