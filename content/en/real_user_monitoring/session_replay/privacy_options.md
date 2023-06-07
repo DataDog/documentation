@@ -22,6 +22,9 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 
 ## Configuration
 
+{{< tabs >}}
+{{% tab "Browser" %}}
+
 <div class="alert alert-warning"><code>defaultPrivacyLevel</code> and <code>mask-user-input</code> are available in the SDK v3.6.0+.</div>
 
 To enable your privacy settings, set `defaultPrivacyLevel` to `mask-user-input`, `mask`, or `allow` in your JavaScript configuration.
@@ -49,7 +52,32 @@ datadogRum.startSessionReplayRecording();
 
 After updating your configuration, you can override elements of your HTML documents with the following privacy options:
 
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 ### Mask user input mode
+
+{{< tabs >}}
+{{% tab "Browser" %}}
 
 Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
@@ -57,21 +85,98 @@ Masks most form fields such as inputs, text areas, and checkbox values while rec
 
 **Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay, which means all input fields are automatically masked.
 
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 ### Mask mode
+{{< tabs >}}
+{{% tab "Browser" %}}
+
 Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
 {{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
 **Note**: Masked data is not stored on Datadog servers.
+
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 ### Allow mode
+
+{{< tabs >}}
+{{% tab "Browser" %}}
 
 Records everything unmasked.
 
 {{< img src="real_user_monitoring/session_replay/allow.png" alt="Allow mode" style="width:70%;">}}
 
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Privacy options
 
 ### Override an HTML element
+
+{{< tabs >}}
+{{% tab "Browser" %}}
 
 You can set an application-wide default and tag the privacy level of an individual HTML element using one of two methods:
 
@@ -93,15 +198,68 @@ The dollar amount in the cart is replaced with asterisks.
 
 {{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;">}}
 
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Privacy restrictions
+
+{{< tabs >}}
+{{% tab "Browser" %}}
 
 In order to protect end-user privacy, regardless of your privacy configuration, the following HTML elements are **always masked**:
 - Input elements of type `password`, `email`, and `tel`
 - Elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes
 
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Advanced privacy options
 
 ### Completely hide an element
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
 
 `hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text.
 
@@ -111,7 +269,34 @@ In this example replay session, the username in the Datadog navigation is obfusc
 
 {{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
 
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ### Override the action name
+
+
+{{< tabs >}}
+{{% tab "Browser" %}}
 
 To obscure the default action name and update the naming convention for individual actions, set the override for your individual action names.
 
@@ -126,6 +311,29 @@ Additional use cases to override the default action name include masking sensiti
 Datadog is working to add more privacy features to RUM & Session Replay. Have something in mind that you would like to see? <a href="/help">Contact Datadog support.</a>
 
 </div>
+
+{{% /tab %}}
+
+{{% tab "Android" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+   {{< code-block lang="javascript" filename="add filename here" disable_copy="false" collapsible="true" >}}
+
+   Insert code snippet here.
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
