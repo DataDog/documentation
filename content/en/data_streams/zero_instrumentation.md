@@ -11,15 +11,9 @@ Data Streams Monitoring supports an option that provides visibility into your Ka
 
 ### Prerequisites
 
-Required Agent version
-: requires that the Datadog Agent installed alongside your containerized service be at least version 6.44 or 7.44.
-
-Your containerized service must be running on one of the following supported platforms
-: Linux Kernel 4.14 and greater<br/>
-CentOS or RHEL 8.0 and greater
-
-Service Tagging
-: The `env` tag for [Unified Service Tagging][1] has been applied to your deployment. The `service` and `version` tags are optional.
+- Datadog Agent 6.44+ or 7.44+
+- Your containerized service is running on Linux Kernel 4.14+, or CentOS or RHEL 8.0+
+- [Unified Service Tagging][1], where the `env` tag has been applied to your deployment
 
 ## Enablement
 
