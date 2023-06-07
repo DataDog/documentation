@@ -28,7 +28,7 @@ Enable Data Stream Monitoring in your Agent by using one of the following method
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Using the Datadog chart version >= 3.30.0, add the following to your values file:
+Using the Datadog chart v3.30.0+, add the following to your values file:
 
 ```
 datadog:
