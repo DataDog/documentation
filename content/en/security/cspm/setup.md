@@ -208,7 +208,7 @@ To view the findings for your cloud resources, go to the [CSPM homepage][1].
 
 CSPM comes with a set of [out-of-the-box compliance rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration compliance rules are added, they are automatically imported into your account.
 
-To filter the default detectcomplianceion rules by cloud provider:
+To filter the default compliance rules by cloud provider:
 
 1. Navigate to **Security** > **Posture Management** > **Compliance Rules**.
 2. Choose one of the following values from the **Tag** facet.
