@@ -97,7 +97,7 @@ Requires Agent version >= 6.19 or 7.19.
 DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
 ```
 
-**Note:** Uploads to additional endpoints for the continuous profiler product are done through best-effort delivery.
+**Note:** Uploads to additional endpoints for the Continuous Profiler product are done through best-effort delivery.
 * The main endpoint has the highest priority. Uploads to additional endpoints are only handled after successful upload to the main endpoint.
 * Responses from additional endpoints are not forwarded back to the continuous profiler. Any errors during delivery to additional endpoints will be logged in the agent error logs.
 
