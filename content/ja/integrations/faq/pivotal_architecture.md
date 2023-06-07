@@ -15,7 +15,7 @@ title: Datadog VMware Tanzu Application Service インテグレーションア�
 
 このページでは、Datadog VMware Tanzu Application Service のインテグレーションの背後にあるアーキテクチャについて説明します。
 
-{{< img src="integrations/pivotal/pivotal_datadog_diagram.png" alt="Datadog とVMware Tanzu Application Service のインテグレーションのコンポーネントと、両者間のデータの流れの概要を説明します。"  >}}
+{{< img src="integrations/pivotal/pivotal_datadog_diagram.png" alt="Datadog とVMware Tanzu Application Service のインテグレーションのコンポーネントと、両者間のデータの流れの概要を説明します。" >}}
 
 以下のセクションでは、個々のコンポーネントとその相互関係について、さらに詳しく説明します。
 
@@ -72,7 +72,7 @@ Datadog Buildpack は、軽量な Datadog Container Agent と Datadog Trace Agen
 
 これらのタグは、Datadog Agent によって収集されたメトリクス、トレース、ログに存在します。収集したデータに応じて、[メトリクスエクスプローラー][5]や[メトリクスサマリー][6]、[トレースエクスプローラー][8]、[ログエクスプラー][9]で表示します。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -9,7 +9,7 @@ IP 許可リスト機能は、エンタープライズレベルのお客様の�
 
 ## 概要
 
-{{< img src="account_management/org_settings/ip_allowlist_list.png" alt="4 つの IP 範囲を含む IP 許可リスト UI を示すスクリーンショット"  >}}
+{{< img src="account_management/org_settings/ip_allowlist_list.png" alt="4 つの IP 範囲を含む IP 許可リスト UI を示すスクリーンショット" >}}
 
 IP 許可リストは、Datadog のデータにアクセスするために使用できるネットワークを制御します。許可されたネットワークを制限することで、データの流出や内部脅威からリソースを保護することができます。
 
@@ -28,6 +28,8 @@ IP 許可リスト機能は、以下へのアクセスをブロックしませ�
 - Agent がメトリクス、トレース、ログなどのデータを送信するデータ取り込みエンドポイント
 - Agent がデータを送信する前に使用する [validate API key][2] のエンドポイント
 - [公開ダッシュボード][3]
+
+Datadog の公開 Web API へのアクセスが必要なサードパーティのインテグレーションおよびアプリケーションは、IP 許可リストの影響を受ける可能性があります。Agent やインテグレーションからメトリクス、トレース、ログなどのテメトリーを送信するアプリケーションは、影響を受けません。Datadog では、サードパーティからの IP アドレスの監視に[監査証跡][4]を使用することを推奨しています。
 
 ### 機能性
 
@@ -52,7 +54,7 @@ IP 許可リストを有効化または変更すると、あなたがデータ�
 
 **注:** IP 許可リスト ページは、Datadog 組織がこの機能をオンにしている場合にのみ UI に表示されます。
 
-[IP 許可リスト UI][4] を見つけるには
+[IP 許可リスト UI][5] を見つけるには
 
 1. アカウントメニューから、**Organization Settings** に移動します。
 1. **Access** の下で、**IP Allowlist** を選択します。
@@ -67,7 +69,7 @@ IP 許可リストのステータスを切り替えるには、**Enable** また
 
 ### IP アドレスまたは CIDR 範囲を追加する
 
-{{< img src="account_management/org_settings/add_ip.png" alt="Add IP to allowlist と題されたダイアログボックスを示すスクリーンショット"  >}}
+{{< img src="account_management/org_settings/add_ip.png" alt="Add IP to allowlist と題されたダイアログボックスを示すスクリーンショット" >}}
 
 1. ページ右上の **Add IP** ボタンをクリックします。
 1. 有効な IP アドレスまたは CIDR 範囲を入力します。
@@ -88,14 +90,15 @@ IP 許可リストのステータスを切り替えるには、**Enable** また
 
 ## プログラムで IP 許可リストを管理する
 
-IP 許可リストを API で管理するには、[公開 API ドキュメント][5]を参照してください。
+IP 許可リストを API で管理するには、[IP 許可リスト API ドキュメント][6]を参照してください。
 
-Terraform で IP 許可リストを管理するには、[`ip_allowlist` リソース][6]をご覧ください。
+Terraform で IP 許可リストを管理するには、[`ip_allowlist` リソース][7]をご覧ください。
 
 
 [1]: /ja/api/latest/
 [2]: /ja/api/latest/authentication/#validate-api-key
 [3]: /ja/dashboards/sharing/
-[4]: https://app.datadoghq.com/organization-settings/ip-allowlist
-[5]: /ja/api/latest/ip-allowlist/
-[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
+[4]: /ja/account_management/audit_trail/
+[5]: https://app.datadoghq.com/organization-settings/ip-allowlist
+[6]: /ja/api/latest/ip-allowlist/
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist

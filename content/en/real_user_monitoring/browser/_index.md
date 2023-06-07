@@ -828,6 +828,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -850,6 +851,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -872,6 +874,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -894,6 +897,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -916,6 +920,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -938,6 +943,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackUserInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -966,6 +972,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -988,6 +995,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1010,6 +1018,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1032,6 +1041,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1054,6 +1064,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1076,6 +1087,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackLongTasks: true,
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1102,6 +1114,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1122,6 +1135,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1142,6 +1156,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1162,6 +1177,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1182,6 +1198,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1202,6 +1219,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       premiumSampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1228,6 +1246,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1248,6 +1267,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1268,6 +1288,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1288,6 +1309,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1308,6 +1330,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1328,6 +1351,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       replaySampleRate: 100, // if not included, the default is 100
       trackInteractions: true,
     });
+  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```

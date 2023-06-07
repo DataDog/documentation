@@ -62,9 +62,9 @@ _プロセッサー_は、イベント属性が取り込まれると、その属
 - 属性の再マッピングにより、異なるイベントのソースを正規化する。例えば、予約済みの[サービスタグ][19]をどこでも同じように使用します。
 - [Reference Table][20] に保存された外部データでイベントをリッチ化する (ベータ版)。例えば、サービス名とサービスディレクトリを対応させ、チームの所有者情報、ダッシュボードへのリンク、ドキュメントへのリンクでイベントをリッチ化することができます。
 
-より多くのプロセッサーの種類に対応するため、現在開発中です。詳しくは、[サポートにお問い合わせください][21]。
+イベント処理パイプラインの追加と構成は、イベント管理の [Enrich & Normalize][21] タブを参照してください。さらにサポートが必要な場合は、Datadog [サポート][22]にお問い合わせください。
 
-[処理パイプラインの詳細はこちら][22]。
+[処理パイプラインの詳細はこちら][23]。
 
 ## その他の参考資料
 
@@ -91,5 +91,6 @@ _プロセッサー_は、イベント属性が取り込まれると、その属
 [18]: https://app.datadoghq.com/dash/integration/30532/monitor-notifications-overview
 [19]: /ja/getting_started/tagging/unified_service_tagging/
 [20]: /ja/integrations/guide/reference-tables/
-[21]: /ja/help/
-[22]: /ja/logs/log_configuration/processors/
+[21]: https://app.datadoghq.com/event/pipelines
+[22]: /ja/help/
+[23]: /ja/logs/log_configuration/processors/

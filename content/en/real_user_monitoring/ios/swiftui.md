@@ -6,10 +6,10 @@ description: Use RUM to instrument your SwiftUI applications.
 further_reading:
 - link: 'https://github.com/DataDog/dd-sdk-ios'
   tag: 'GitHub'
-  text: 'dd-sdk-ios Source code'
+  text: 'Source code for dd-sdk-ios'
 - link: 'https://docs.datadoghq.com/real_user_monitoring/ios/'
   tag: 'Documentation'
-  text: 'Learn about iOS and tvOS Monitoring'
+  text: 'Learn about iOS and tvOS monitoring'
 ---
 
 ## Overview

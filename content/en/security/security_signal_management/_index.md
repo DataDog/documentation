@@ -56,7 +56,7 @@ Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal
 
 Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 
-{{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
+{{< img src="service_management/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
 
 ## Audit Trail for security signal actions
 

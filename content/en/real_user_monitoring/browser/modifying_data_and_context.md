@@ -10,7 +10,7 @@ further_reading:
   text: "Real User Monitoring"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
-  text: "RUM Browser Data Collected"
+  text: "RUM browser data collected"
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
@@ -19,7 +19,7 @@ further_reading:
   text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
-  text: "Datadog Standard Attributes"
+  text: "Datadog standard attributes"
 ---
 
 ## Overview

@@ -24,6 +24,9 @@ further_reading:
   - link: "https://securitylabs.datadoghq.com/"
     tag: "Security Labs"
     text: "Read about security-related topics on Datadog's Security Labs blog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to elevate your security and threat detection"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
     tag: "Blog"
     text: "Elevate AWS threat detection with Stratus Red Team"
@@ -36,6 +39,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< site-region region="gov" >}}

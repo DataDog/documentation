@@ -660,9 +660,12 @@ The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and 
 
 ## Out-of-the-box dashboards
 
-Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
 
-{{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
+1. Install the [OpenTelemetry integration][23].
+2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+
+   {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][21]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][22] you choose to enable.
 
@@ -692,3 +695,4 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [20]: https://opentelemetry.io/docs/collector/deployment/
 [21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[23]: https://app.datadoghq.com/integrations/otel

@@ -338,6 +338,71 @@ instances:
 
 ### Configuration from Kubernetes service annotations
 
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+The syntax for annotating services is similar to that for [annotating Kubernetes Pods][1]:
+
+```yaml
+ad.datadoghq.com/service.checks: |
+  {
+    "<INTEGRATION_NAME>": {
+      "init_config": <INIT_CONFIG>,
+      "instances": [<INSTANCE_CONFIG>]
+    }
+  }
+```
+
+This syntax supports a `%%host%%` [template variable][11], which is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
+
+#### Example: HTTP check on an NGINX-backed service
+
+The following service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: my-nginx
+    labels:
+        run: my-nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
+    annotations:
+      ad.datadoghq.com/service.checks: |
+        {
+          "http_check": {
+            "init_config": {},
+            "instances": [
+              {
+                "url":"http://%%host%%",
+                "name":"My Nginx",
+                "timeout":1
+              }
+            ]
+          }
+        }
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        run: my-nginx
+```
+
+In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
+
+[1]: /agent/kubernetes/integrations/
+[10]: /integrations/http_check/
+[11]: /agent/faq/template_variables/
+[12]: /integrations/nginx/
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
+
 The syntax for annotating services is similar to that for [annotating Kubernetes Pods][1]:
 
 ```yaml
@@ -382,6 +447,14 @@ spec:
 ```
 
 In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
+
+[1]: /agent/kubernetes/integrations/
+[10]: /integrations/http_check/
+[11]: /agent/faq/template_variables/
+[12]: /integrations/nginx/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Validation
 

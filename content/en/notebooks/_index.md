@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
