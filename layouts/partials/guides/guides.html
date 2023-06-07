@@ -1,0 +1,49 @@
+{{ $dot := . }}
+
+<!-- get lang specific data file -->
+{{ $.Scratch.Set "data" "" }}
+{{ if ne $dot.Page.Lang "en"}}
+    {{ if (fileExists (print "data/partials/home." $dot.Page.Lang ".yaml")) }}
+      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.home (print "guides." $dot.Page.Lang)) }}
+    {{ else }}
+      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+    {{ end }}
+{{ else }}
+    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
+{{ end }}
+{{ $datafile := ($.Scratch.Get "data") }}
+
+
+        {{ range $i, $nav_section := $datafile.nav_sections }}
+
+            <section class="row nav-tiles mb-2">
+
+                    {{ range $i, $tile := $nav_section }}
+
+                        {{ range $i, $section := $tile }}
+                            {{ if $section.name}}
+                                <div class="col-12">
+                                    <h3 class="text-center mb-2">{{ $section.name }}</h3>
+                                </div>
+                            {{ end }}
+
+                            {{ range $i, $navtile := $section.navtiles }}
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+                                        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="{{ $navtile.link | absLangURL }}">
+                                                {{ partial "icon" (dict "name" $navtile.icon "size" "18px" "color" "transparent" )}}
+                                                {{ $navtile.title }}
+                                                <span class="font-regular text-center smaller">{{ $navtile.desc }}</span>
+                                        </a>
+
+                                </div>
+                            {{ end }}
+
+                        {{ end }}
+                    {{ end }}
+            </section>
+
+        {{ end }}
+
+
+
+</body>
