@@ -178,19 +178,19 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
 
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
 
 
 {{% /tab %}}
@@ -326,18 +326,18 @@ Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature f
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
 
 {{% /tab %}}
 {{< /tabs >}}
