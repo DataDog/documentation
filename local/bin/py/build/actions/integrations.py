@@ -226,6 +226,7 @@ class Integrations:
         #integrations to learn more.
         See https://github.com/DataDog/documentation/wiki/Documentation-Build
         :param content: integrations content to process
+        
         """
         for file_name in chain.from_iterable(
             glob.iglob(pattern, recursive=True)
