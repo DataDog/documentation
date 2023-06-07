@@ -28,10 +28,10 @@ To create a custom Agent check, start by installing the [Datadog Agent][1].
 2. In the `conf.d` directory, create a new config file for your new Agent check. Name the file `custom_checkvalue.yaml`.
 3. Edit the file to include the following:
    {{< code-block lang="yaml" filename="custom_checkvalue.yaml" >}}
-   init_config:
-   instances:
-     [{}]
-   {{< /code-block >}}
+init_config:
+instances:
+  [{}]
+{{< /code-block >}}
 4. Create a new check file in the `checks.d` directory. Name the file `custom_checkvalue.py`.
 5. Edit the file to include the following:
   ```python
