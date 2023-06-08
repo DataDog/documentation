@@ -161,7 +161,7 @@ Find out how to monitor individual client and aggregate usage of the Datadog pla
 [16]: /monitors/
 [17]: https://www.youtube.com/watch?v=Ma5pr-u9bjk
 [18]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect/
-[19]: /monitors/notify/downtimes/
+[19]: /monitors/downtimes/
 [20]: https://www.datadoghq.com/blog/mute-datadog-alerts-planned-downtime/
 [21]: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
 [22]: /api/latest/downtimes/
