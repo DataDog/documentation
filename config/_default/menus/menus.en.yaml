@@ -195,6 +195,12 @@ main:
     identifier: glossary
     parent: essentials_heading
     weight: 15000
+  - name: Guides
+    url: guides/
+    pre: features
+    identifier: guides
+    parent: essentials_heading
+    weight: 16000
   - name: Agent
     url: agent/
     pre: agent-fill
