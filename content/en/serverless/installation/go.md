@@ -172,7 +172,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - Turn on [threat monitoring][4] to get alerted on attackers targeting your service
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
-- See the [advanced configurations][3] to:
+- See the [advanced configurations][3] to
     - connect your telemetry using tags
     - collect telemetry for AWS API Gateway, SQS, etc.
     - capture the Lambda request and response payloads
