@@ -245,8 +245,8 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 {{< /tabs >}}
 
 ## What's next?
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry
 - See the [advanced configurations][5] to
