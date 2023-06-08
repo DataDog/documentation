@@ -680,15 +680,41 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         @media(min-width: 768px){
             height: 297px;
         }
+        .carousel-asset-horizontal:hover{
+            .carousel-control{
+                opacity: 1;
+            }
+        }
         .carousel-asset-horizontal {
+            p{
+                font-size: 16px;
+            }
             .carousel-control {
+                opacity: 0;
                 width: 26px;
                 height: 26px;
+                box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
+                transition: all .3s;
+                .control-arrow{
+                    height: 10px;
+                    width: 10px;
+                    border-bottom: solid 2px #969696;
+                    border-left: solid 2px #969696;
+                    position: relative;
+                }
+                
                 &.prev{
                     left: 8px;
+                    .control-arrow{
+                        left: 4px;
+                        transform: rotate(45deg);
+                    }
                 }
                 &.next{
                     right: 8px;
+                    .control-arrow{
+                        transform: rotate(-135deg);
+                    }
                 }
             }
         }

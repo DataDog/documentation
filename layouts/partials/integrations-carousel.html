@@ -1,21 +1,6 @@
 {{ $media := .Params.tile.media | default slice}}
-{{ $newCarousel := slice }}
 {{ $asset_len := ($media | default slice) | len  }}
-{{ $cardView := 3 }}
 {{ $isScrollableCarousel := (gt $asset_len 3)}}
-{{ range $idx, $el := $media }}
-    {{ if gt $idx (sub $asset_len 4)}}
-    {{ $newCarousel = $newCarousel | append . }}
-    {{ end }}
-{{ end }}
-{{ $newCarousel = $newCarousel | append $media }}
-{{ range $idx, $el := $media }}
-    {{ if lt $idx  $cardView}}
-    {{ $newCarousel = $newCarousel | append . }}
-    {{ end }}
-{{ end }}
-
-{{ $new_asset_len := ($newCarousel | default slice) | len  }}
 
 <div 
 class="integrations-carousel container border border-primary container p-0"
@@ -23,7 +8,7 @@ x-data="{
     activeSlide: 0,
     distanceConstant: 0,
     activeBtnOffsetTop: 0,
-    cardView: {{$cardView}},
+    isScrollable: {{$isScrollableCarousel}},
     verticalCarouselEl: {},
     navigateCarousel (direction) {
         const max = {{ $asset_len }} - 1
@@ -50,7 +35,7 @@ x-data="{
             }
         }
 
-        // navigate vertical carousel. everything is offset by -206px. i need to scroll up by 103px 
+        // navigate vertical carousel. everything is offset by -206px. i need to navigate by 103px 
         this.verticalCarouselEl.scrollTop = this.activeSlide * this.distanceConstant
         if(endReached){
             this.verticalCarouselEl.style.scrollBehavior = 'smooth'
@@ -61,7 +46,7 @@ x-data="{
     },
     setDistanceConstant (carouselVertEl) {
         // sets the distance from middle btn to top of vertical carousel as a constant
-        this.distanceConstant = {{ $isScrollableCarousel }} && carouselVertEl.children[1].offsetTop
+        this.distanceConstant = this.isScrollable && carouselVertEl.children[1].offsetTop
     },
     setVerticalCarouselEl (carouselVertEl) {
         this.verticalCarouselEl = carouselVertEl
@@ -85,18 +70,20 @@ x-data="{
                 </div>
                 {{ end }}
             </div>
+            {{ if gt $asset_len 1 }}
             <button 
             class="carousel-control prev position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" 
             @click="navigateCarousel('prev')">
-                <span><</span>
+                <div class="control-arrow"></div>
                 <div class="visually-hidden">Previous</div>
             </button>
             <button 
             class="carousel-control next position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" 
             @click="navigateCarousel('next')">
-                <span>></span>
+                <div class="control-arrow"></div>
                 <div class="visually-hidden">Next</div>
             </button>
+            {{ end }}
         </div>
         {{/*  Carousel (vertical)  */}}
         <div 
@@ -109,7 +96,7 @@ x-data="{
                 @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
                 x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
-                :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
+                :disabled="isScrollable ? ($el.offsetTop === activeBtnOffsetTop): ({{ $idx }} === activeSlide)"
                 >
                 </button>
                 {{ end }}
@@ -120,7 +107,7 @@ x-data="{
             @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
             :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
             x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
-            :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
+            :disabled="isScrollable ? ($el.offsetTop === activeBtnOffsetTop): ({{ $idx }} === activeSlide)"
             >
             </button>
             {{ end }}
@@ -131,7 +118,7 @@ x-data="{
                 @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
                 x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
-                :disabled="{{ $isScrollableCarousel }} && ($el.offsetTop === activeBtnOffsetTop)"
+                :disabled="isScrollable ? ($el.offsetTop === activeBtnOffsetTop): ({{ $idx }} === activeSlide)"
                 >
                 </button>
                 {{ end }}
