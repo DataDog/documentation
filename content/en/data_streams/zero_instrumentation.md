@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-  Zero instrumentation data streams capturing is in beta. Contact <a href="/help">Support</a> to have it enabled for your organization.
+  This instrumentation method is in beta. Contact <a href="/help">Support</a> to have it enabled for your organization.
 {{< /callout >}}
 
 ## Overview
