@@ -1095,6 +1095,11 @@ main:
     parent: monitor_types
     identifier: monitor_types_watchdog
     weight: 221
+  - name: Database Monitoring
+    url: monitors/types/database_monitoring/
+    parent: monitor_types
+    identifier: monitor_types_database_monitoring
+    weight: 222
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -1104,35 +1109,35 @@ main:
     url: monitors/notify/variables/
     parent: monitors_notify
     identifier: monitors_notify_variables
-    weight: 201
+    weight: 301
   - name: Downtimes
-    url: monitors/notify/downtimes/
-    parent: monitors_notify
+    url: monitors/downtimes/
+    parent: alerting
     identifier: monitors_notify_downtimes
-    weight: 202
+    weight: 4
   - name: Manage Monitors
     url: monitors/manage/
     parent: alerting
     identifier: monitors_manage
-    weight: 4
+    weight: 5
   - name: Search Monitors
     url: monitors/manage/search/
     parent: monitors_manage
     identifier: monitors_manage_search
-    weight: 301
+    weight: 501
   - name: Monitor Status
     url: monitors/manage/status/
     parent: monitors_manage
     identifier: monitors_manage_status
-    weight: 302
+    weight: 502
   - name: Check Summary
     url: monitors/manage/check_summary/
     parent: monitors_manage
     identifier: monitors_check_summary
-    weight: 303
+    weight: 503
   - name: Monitor Settings
     url: monitors/settings/
-    weight: 5
+    weight: 6
     parent: alerting
     identifier: monitor_settings
   - name: Guides
@@ -2721,8 +2726,8 @@ main:
     parent: cspm
     identifier: cspm_setup
     weight: 101
-  - name: Detection Rules
-    url: security/cspm/detection_rules
+  - name: Compliance Rules
+    url: security/cspm/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 102
