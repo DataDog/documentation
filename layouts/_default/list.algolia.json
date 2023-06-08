@@ -1,4 +1,4 @@
-{{- if ne hugo.Environment "ddd" -}}
+{{- if ne hugo.Environment "development" -}}
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
@@ -22,7 +22,7 @@
             {{ $record := (
                 dict "objectID" $object_id
                 "title" $title
-                "content" $title
+                "content" $content
                 "type" $page.Type
                 "relpermalink" $page.RelPermalink
                 "full_url" $page.Permalink
