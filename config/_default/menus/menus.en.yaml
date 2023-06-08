@@ -1095,6 +1095,11 @@ main:
     parent: monitor_types
     identifier: monitor_types_watchdog
     weight: 221
+  - name: Database Monitoring
+    url: monitors/types/database_monitoring/
+    parent: monitor_types
+    identifier: monitor_types_database_monitoring
+    weight: 222
   - name: Notifications
     url: monitors/notify/
     parent: alerting
