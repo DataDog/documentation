@@ -119,7 +119,7 @@ Redeploy the function and invoke it. After a few minutes, it appears in [ASM vie
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
-To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][5] attempt:
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
    ```sh
    curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
    ```
@@ -878,7 +878,6 @@ If you have trouble configuring your installations, set the environment variable
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-
 [1]: /serverless/installation/
 [2]: /serverless/libraries_integrations/extension/
 [3]: /integrations/amazon_web_services/
@@ -922,3 +921,4 @@ If you have trouble configuring your installations, set the environment variable
 [41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 [42]: /profiler/
 [43]: /serverless/installation#installation-instructions
+[44]: /security/default_rules/security-scan-detected/
