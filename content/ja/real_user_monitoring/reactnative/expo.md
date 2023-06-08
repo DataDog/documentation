@@ -1,11 +1,9 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-reactnative/blob/main/docs/expo_development.md
 description: Expo と Expo Go を使用して React Native プロジェクトを Datadog で監視します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの調査方法
@@ -17,6 +15,8 @@ title: Expo
 RUM React Native SDK は Expo と Expo Go をサポートしています。使用するには、`expo-datadog` と `@datadog/mobile-react-native` をインストールします。
 
 `expo-datadog` は SDK 45 から Expo をサポートしており、プラグインのバージョンは Expo のバージョンに従います。例えば、Expo SDK 45 を使用している場合は、`expo-datadog` のバージョン `45.x.x` を使用します。Datadog では、最小バージョンとして **Expo SDK 45** を使用することを推奨しており、それ以前のバージョンでは手動による手順が必要になる場合があります。
+
+Datadog SDK を Expo アプリケーションで設定する際に問題が発生した場合は、弊社の[サンプルアプリケーション][8]を参考にすることができます。
 
 ## セットアップ
 
@@ -199,10 +199,9 @@ DdSdkReactNative.initialize(config);
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.0.0-rc9
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/#setup
 [3]: https://docs.expo.dev/development/introduction/
 [4]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
 [5]: https://docs.expo.dev/development/getting-started/
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/expo/
+[6]: /ja/real_user_monitoring/error_tracking/expo/
 [7]: https://expo.github.io/router/docs/
+[8]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation

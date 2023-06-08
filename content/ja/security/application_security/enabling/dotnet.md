@@ -30,9 +30,9 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する .NET アプリのア
 
 ## 詳細はこちら
 
-1. **[Datadog .NET ライブラリ][1]を、ターゲット OS アーキテクチャのバージョン 2.2.0 以上 (Risk Management の脆弱性検出機能についてはバージョン 2.16.0 以上) に更新してください**。
+1. **[Datadog .NET ライブラリ][1]を、ターゲット OS アーキテクチャのバージョン 2.2.0 以上 (Application Vulnerability Management の脆弱性検出機能についてはバージョン 2.16.0 以上) に更新してください**。
 
-   ライブラリが対応している言語やフレームワークのバージョンについては、[互換性][2]をご覧ください。
+   サービスの言語やフレームワークのバージョンが ASM 機能に対応しているかどうかは、[互換性][2]をご参照ください。
 
 2. 環境変数 `DD_APPSEC_ENABLED` を `true` に設定し、**ASM を有効化**します。例えば、Windows のセルフホストでは、アプリケーションの起動スクリプトの一部として、次の PowerShell スニペットを実行します。
    ```
@@ -197,4 +197,4 @@ ENV DD_APPSEC_ENABLED=true
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /ja/security/application_security/setup_and_configure/?code-lang=dotnet#compatibility
+[2]: /ja/security/application_security/enabling/compatibility/dotnet

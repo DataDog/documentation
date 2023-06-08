@@ -193,7 +193,7 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 
 `--xpath-tag`
 :  キーと xpath 表現を `key=expression` の形式で指定します。これにより、ファイル内のテスト用タグをカスタマイズできます (`--xpath-tag` パラメーターは複数回指定できます)。<br/>
-サポートされている表現の詳細については、[XPath 表現によるメタデータの提供][9]を参照してください。<br/>
+サポートされている表現の詳細については、[XPath 表現によるメタデータの提供](#providing-metadata-with-xpath-expressions)を参照してください。<br/>
 **デフォルト**: (none)<br/>
 **例**: `test.suite=/testcase/@classname`<br/>
 **注**: `--xpath-tag` を使用し、`--tags` または `DD_TAGS` 環境変数とともに指定されたタグはマージされます。xpath-tag の値は通常テストごとに異なるため、最優先されます。
@@ -278,6 +278,11 @@ Datadog は、テスト結果を可視化し、リポジトリやコミットご
 : ISO 8601 形式のコミットのコミッターの日付。<br/>
 **例**: `2021-03-12T16:00:28Z`
 
+## Git メタデータのアップロード
+
+`datadog-ci` バージョン `2.9.0` 以降では、CI Visibility は Git のメタデータ情報 (コミット履歴) を自動的にアップロードします。このメタデータには、ファイル名は含まれていますが、ファイルのコンテンツは含まれていません。この動作を無効にしたい場合は、フラグ `--skip-git-metadata-upload` を渡します。
+
+
 ## 環境構成メタデータの収集
 
 Datadog では、特別な専用タグを使用して、OS、ランタイム、デバイス情報など、テストが実行される環境の構成を特定します (該当する場合)。同じコミットに対する同じテストが複数の構成で実行される場合 (例えば、Windows 上と Linux 上)、タグは障害やフレーク性の検出におけるテストの区別に使用されます。
@@ -333,10 +338,9 @@ Datadog では、特別な専用タグを使用して、OS、ランタイム、�
 
 アップロードされた XML レポートに含まれるすべてのテストにカスタムタグをグローバルに適用する `--tags` CLI パラメーターと `DD_TAGS` 環境変数に加え、`--xpath-tag` パラメーターは、XML 内の各種属性から各テストにタグを追加するカスタムルールを提供します。
 
-提供されるパラメーターは `key=expression` の形式でなければならず、`key` は追加されるカスタムタグの名前、`expression` はサポートされている有効な [XPath][10] 表現になります。
+提供されるパラメーターは `key=expression` の形式でなければならず、`key` は追加されるカスタムタグの名前、`expression` はサポートされている有効な [XPath][9] 表現になります。
 
 XPath 構文が馴染みが深いため使用されますが、サポートされている表現は下記のみとなります。
-
 
 `/testcase/@attribute-name`
 :  `<testcase attribute-name="value">` の XML 属性。
@@ -376,7 +380,7 @@ datadog-ci junit upload --service service_name \
   --xpath-tag test.suite=/testcase/@classname ./junit.xml
 {{< /code-block >}}
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "属性からタグを追加" %}}
 各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
@@ -396,7 +400,7 @@ datadog-ci junit upload --service service_name \
   --xpath-tag custom_tag=/testcase/@attr ./junit.xml
 {{< /code-block >}}
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "testsuite プロパティからタグを追加" %}}
 各テストに `value 1`、`value 2`の値とともに `custom_tag` を追加する方法:
@@ -435,7 +439,7 @@ datadog-ci junit upload --service service_name \
 
 この処理を行うには、 `<property>` 要素の `name` 属性が `dd_tags[key]` という形式である必要があります。ここで `key` は追加されるカスタムタグの名前です。その他のプロパティは無視されます。
 
-**例**: `<testcase>` 要素にタグを追加する
+**例**: `<testcase>` 要素にタグを追加する。
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -451,7 +455,7 @@ datadog-ci junit upload --service service_name \
 </testsuites>
 {{< /code-block >}}
 
-**例**: `<testsuite>` 要素にタグを追加する
+**例**: `<testsuite>` 要素にタグを追加する。
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -466,6 +470,8 @@ datadog-ci junit upload --service service_name \
 </testsuites>
 {{< /code-block >}}
 
+Datadog に送信する値は文字列なので、ファセットは辞書順で表示されます。文字列の代わりに整数を送信するには、`--metrics` フラグと `DD_METRICS` 環境変数を使用します。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -478,5 +484,4 @@ datadog-ci junit upload --service service_name \
 [6]: /ja/logs/
 [7]: /ja/getting_started/site/
 [8]: https://git-scm.com/downloads
-[9]: #providing-metadata-with-xpath-expressions
-[10]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: https://www.w3schools.com/xml/xpath_syntax.asp

@@ -52,7 +52,7 @@ The names collected by the Agent (detailed above) are added as aliases for the c
 
 See the list of all hosts in your account from the [Infrastructure List][4]. The aliases associated with each host are available in the inspect panel, which is accessed by clicking the **Inspect** button while hovering over a host row:
 
-{{< img src="agent/faq/host_aliases.png" alt="Host aliases"  >}}
+{{< img src="agent/faq/host_aliases.png" alt="Host aliases" >}}
 
 **Note**: These aliases are not available for searching or filtering. They are available only in the inspect panel mentioned above.
 
@@ -119,7 +119,7 @@ If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to fa
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme"  >}}
+{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent hostname scheme" >}}
 
 {{% /tab %}}
 {{< /tabs >}}

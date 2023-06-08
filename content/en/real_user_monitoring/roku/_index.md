@@ -9,6 +9,9 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+- link: https://www.datadoghq.com/blog/monitor-roku-with-rum/
+  tag: Blog
+  text: Monitor your Roku channels with Datadog RUM
 ---
 
 {{< site-region region="gov" >}}
@@ -149,9 +152,30 @@ end sub
 ```
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+```brightscript
+sub RunUserInterface(args as dynamic)
+    screen = CreateObject("roSGScreen")
+    scene = screen.CreateScene("MyScene")
+    screen.show()
+
+    datadogroku_initialize({
+        clientToken: "<CLIENT_TOKEN>",
+        applicationId: "<APPLICATION_ID>"
+        site: "ap1",
+        env: "<ENV_NAME>",
+        sessionSampleRate: 100, ' the percentage (integer) of sessions to track
+        launchArgs: args
+    })
+
+    ' complete your channel setup here
+end sub
+```
+{{< /site-region >}}
+
 ### Instrument the channel
 
-See [**Track RUM Resources**][8] to enable automatic tracking of all your views (activities, fragments, and more), and [**Enrich user sessions**][9] to add custom global or user information to your events.
+See [**Track RUM Resources**][8] to enable automatic tracking of all your resources, and [**Enrich user sessions**][9] to add custom global or user information to your events.
 
 #### Track RUM Views
 

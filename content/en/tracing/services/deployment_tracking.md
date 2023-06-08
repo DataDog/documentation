@@ -23,7 +23,7 @@ If you have not set up the `version` tag refer to the [Unified Service Tagging d
 
 ## Using version tags on the Service page
 
-{{< img src="tracing/deployment_tracking/ServicePageRequestsErrorsByVersion.png" alt="Versions on the Service page"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ServicePageRequestsErrorsByVersion.png" alt="Versions on the Service page" style="width:100%;">}}
 
 On the Service page, if the `version` tag is available, you can scope the Requests widget to:
 
@@ -61,7 +61,7 @@ By default you will see:
 - Error rate as a percentage of total requests.
 
 
-You can add columns to or remove columns from this overview table and your selections will be saved.  The additional available columns are:
+You can add columns to or remove columns from this overview table and your selections will be saved. The additional available columns are:
 
 - Endpoints that are active in a version that were not in the previous version.
 - Time active, showing the length of time from the first trace to the last trace sent to Datadog for that version.
@@ -69,13 +69,13 @@ You can add columns to or remove columns from this overview table and your selec
 - Total number of Errors.
 - Latency measured by p50, p75, p90, p95, p99, or max.
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
 
 **Note:** The version section appears only if there is more than one version reporting during the time interval that is selected at the top of the page.
 
 ## Deployment comparison
 
-Click on any version row in the version summary table to open a version comparison page, allowing you to compare two versions of the same service.  By default, the selected version will be compared to the immediately previous version but you can change it to compare any two versions within the past 30 days.
+Click on any version row in the version summary table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version will be compared to the immediately previous version but you can change it to compare any two versions within the past 30 days.
 
 You can find the following information on version comparison page:
 
@@ -107,7 +107,7 @@ From this table, you can pivot into live or historical traces corresponding to t
 
 This section lets you compare the performance (requests, latency, and errors) of each endpoint in the service. Sort the table by Value to validate that the highest-throughput endpoints are still healthy following a deploy, or by % Change to spot large changes in latency or error rates.
 
-{{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="Endpoint Comparison"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/EndpointComparison.png" alt="Endpoint Comparison" style="width:100%;">}}
 
 ## Deployment strategies
 
@@ -119,7 +119,7 @@ Rolling deploys provide zero-downtime by directing traffic to other instances wh
 
 Using Datadog, you can monitor your rolling deploys and detect any resulting error increases.
 
-{{< img src="tracing/deployment_tracking/rolling.png" alt="Rolling Deployment"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/rolling.png" alt="Rolling Deployment" style="width:100%;">}}
 
 ### Blue and green deploys
 
@@ -127,7 +127,7 @@ Blue and green (or other color combination) deployments reduce downtime by runni
 
 Setting and viewing the `version` tags for these services lets you compare requests and errors to detect if one of the clusters has an error rate higher than the other cluster, if a cluster is not meeting SLOs, or if a cluster that is not supposed to be receiving traffic is.
 
-{{< img src="tracing/deployment_tracking/BlueGreenDeploy.png" alt="Blue/Green Deployment"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/BlueGreenDeploy.png" alt="Blue/Green Deployment" style="width:100%;">}}
 
 ### Canary deploys
 
@@ -137,7 +137,7 @@ Using `version` tags within Datadog allows you to compare error rates, traces, a
 
 For example, you can see in the following image that a canary version was deployed, had a few errors, and was removed, with traces corresponding to that version available for investigation without any further impact.
 
-{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="Canary Deployment"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/canarydeployment.png" alt="Canary Deployment" style="width:100%;">}}
 
 ### Shadow deploys
 
@@ -151,7 +151,7 @@ The `version` tag can be used anywhere within Datadog, whether to filter a searc
 
 ### Resource page
 
-{{< img src="tracing/deployment_tracking/ResourcePage.png" alt="Versions on the Resource Page"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/ResourcePage.png" alt="Versions on the Resource Page" style="width:100%;">}}
 
 On the Resource page, if the version tag is available, the requests widget can be scoped to either of:
 
@@ -178,7 +178,7 @@ Analytics, including filtering on the `version` tag, can be exported to dashboar
 
 You can search for profiles that correspond to a particular version. You can also click **View Profiles** on the top right of the [Deployment Comparison](#deployment-comparison) page to open the Continuous Profiler scoped to either version being compared.
 
-{{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionProfiler.png" alt="Filter Profiles by Version" style="width:100%;">}}
 
 <br>
 

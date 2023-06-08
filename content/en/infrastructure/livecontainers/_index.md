@@ -209,7 +209,7 @@ Streaming logs can be searched with simple string matching. See [Live Tail][13] 
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Side panel" video="true"  >}}
+{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Side panel" video="true" >}}
 
 #### Indexed logs
 

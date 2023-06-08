@@ -7,7 +7,7 @@ description: Set up Error Tracking for your iOS projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios Source code
+  text: Source code for dd-sdk-ios
 - link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: Blog
   text: Introducing iOS Crash Reporting and Error Tracking

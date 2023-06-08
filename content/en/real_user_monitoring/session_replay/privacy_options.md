@@ -18,7 +18,7 @@ Session Replay provides privacy controls to ensure organizations of any scale do
 
 Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected.
 
-By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK.
+By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
 ## Configuration
 

@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
+  - link: "/monitors/types/cloud_cost/"
+    tag: "Documentation"
+    text: "Configure a Cloud Cost monitor"
 ---
 ## Overview
 
@@ -166,21 +169,6 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
-### Tag pipelines (beta)
-
-You can use tag pipelines to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic.
-
-There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic. 
-
-### Rule types
-
-<div class="alert alert-info"><strong>Note</strong>: A maximum of 100 rules can be created. </div>
-
-**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
-
-**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
-
-The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
@@ -191,7 +179,6 @@ The rule stops executing for each resource, once a first match is found. For exa
 {{% /tab %}}
 
 {{% tab "Azure" %}}
-<div class="alert alert-warning">Azure Cloud Cost Management is in private beta. Fill out this <a href="https://docs.google.com/forms/d/e/1FAIpQLSftAIq_g4GxBAKdWV5OjP0Ui4CAjWTzH3YCKy3n930gMz0Krg/viewform?usp=sf_link">form</a> to request access.</div>
 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
@@ -208,20 +195,20 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
 3. Once the scope is selected, click **Add**.
 
-{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope"  >}}
+{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
   
-{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On"  >}}
+{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
 5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. 
 6. Select **Create**.
 
 Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
-{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports"  >}}
+{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
 
 ### Provide Datadog access to your exports
 
@@ -264,12 +251,32 @@ You can visualize your ingested data using the following cost types:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Tag pipelines 
+
+<div class="alert alert-info">Tag pipelines is a beta feature.</div>
+
+You can use [tag pipelines][1] to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic. 
+
+### Rule types
+
+<div class="alert alert-warning"> A maximum of 100 rules can be created. </div>
+
+There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic. 
+
+**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
+
+**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
+
+The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
+
 ## Cloud costs in dashboards
 
 Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/cost/tag-pipelines

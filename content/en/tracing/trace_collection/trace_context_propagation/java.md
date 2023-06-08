@@ -20,15 +20,15 @@ The Java Tracer supports the following styles:
 
 Injection styles can be configured using:
 
-- System Property: `-Ddd.propagation.style.inject=Datadog,b3multi`
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT=Datadog,b3multi`
+- System Property: `-Ddd.trace.propagation.style.inject=datadog,b3multi`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,b3multi`
 
 The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
 
 Extraction styles can be configured using:
 
-- System Property: `-Ddd.propagation.style.extract=Datadog,b3multi`
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,b3multi`
+- System Property: `-Ddd.trace.propagation.style.extract=datadog,b3multi`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,b3multi`
 
 The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
 

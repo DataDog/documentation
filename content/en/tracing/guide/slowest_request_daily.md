@@ -21,7 +21,7 @@ further_reading:
 
 _3 minutes to complete_
 
-{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it"  style="width:90%;">}}
+{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it" style="width:90%;">}}
 
 With Datadog APM, you can investigate the performance of your endpoints, identify slow requests, and investigate the root cause of latency issues. This example shows the slowest [trace][1] of the day for an e-commerce checkout endpoint and how it slows down because of high CPU usage.
 
@@ -33,7 +33,7 @@ With Datadog APM, you can investigate the performance of your endpoints, identif
 
     The web-store service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services.
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifying the slowest trace and finding the bottleneck causing it"  style="width:90%;">}}
+    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
     In addition to throughput, latency and error rate information, the Service Page contains a list of Resources (major operations like API endpoints, SQL queries, and web requests) identified for the service.
 

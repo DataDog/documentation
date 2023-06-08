@@ -103,7 +103,8 @@ The definition of module changes slightly per language:
 
 * In .NET a test module groups every test that is run under the same [unit test project][8].
 * In Swift a test module groups every test that is run for a given bundle.
-* In JavaScript there are no test modules.
+* In JavaScript the test modules map one-to-one to test sessions.
+* In Java a test module groups every test that is run by the same Maven Surefire/Failsafe or Gradle Test task execution.
 
 An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][9].
 
@@ -118,7 +119,7 @@ Not every language supported by CI Visibility has support for test suite level v
 * [Swift][11] has complete support since `dd-sdk-swift-testing>=2.1.0`.
 * [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`.
 * [Javascript][13] has limited support since `dd-trace-js>=3.3.0`.
-* Java does not support test suite level visibility.
+* Java has complete support since `dd-trace-java>=1.12.0`.
 * JUnit report uploads does not support test suite level visibility.
 
 Additionally, test suite level visibility is only supported in Agentless mode.

@@ -1,4 +1,6 @@
 ---
+core_product:
+- security
 synonyms:
 - XSRF
 title: falsification de requête intersite (CSRF)

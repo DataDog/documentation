@@ -1,7 +1,8 @@
 ---
 is_beta: false
 kind: faq
-title: Pourquoi mon bouton « Save » est-il grisé lorsque je configure des tags de métriques ?
+title: Pourquoi mon bouton « Save » est-il grisé lorsque je configure des tags de
+  métriques ?
 ---
 Il arrive parfois qu'une configuration suggérée génère un volume de métriques custom indexées plus élevé que le volume initial de métriques ingérées. Le bouton « Save » est intentionnellement grisé dans les cas peu fréquents où il est plus rentable de ne pas du tout configurer une métrique et de ne pas utiliser Metrics Without Limits™.
 
@@ -31,6 +32,6 @@ Le nombre de métriques custom obtenues pour cette configuration suggérée est 
 
 {{< img src="metrics/faq/mwl-diagram.jpg" alt="Répartition des métriques custom avec la configuration MWL">}}
 
-Il peut ainsi arriver qu'une configuration suggérée donne lieu à un volume plus élevé de métriques custom indexées (6 métriques custom) que le volume initial ingéré (4 métriques custom). **Dans ces cas-là, il est préférable de ne pas configurer cette métrique avec l'option « All Tags » afin d'optimiser le coût de cette métrique.**
+Il peut ainsi arriver qu'une configuration suggérée donne lieu à un volume plus élevé de métriques custom indexées (6 métriques custom) que le volume initial ingéré (4 métriques custom). **Dans ces cas-là, il est préférable de ne pas configurer cette métrique avec l'option All Tags afin d'optimiser le coût de cette métrique.**
 
 [1]: /fr/metrics/metrics-without-limits/

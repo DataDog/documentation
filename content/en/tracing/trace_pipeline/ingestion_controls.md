@@ -167,4 +167,4 @@ To specify a specific percentage of a service's traffic to be sent, add an envir
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/
 [12]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
 [13]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[14]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+[14]: /agent/remote_config/#enabling-remote-configuration

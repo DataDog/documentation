@@ -1,9 +1,18 @@
 {{ define "main" }}
 {{ $dot := .}}
-	<a class="text-uppercase fw-bold text-gray mb-1 d-block" href="/security_monitoring/default_rules/">&lt;&nbsp; Back to rules search</a>
-
-	<h1 id="pagetitle">{{ .Title }}</h1>
+	<div class="row">
+		<div class="col-12 order-1">
+			<h1 id="pagetitle">{{ .Title }}</h1>
+		</div>
+		<div class="col-12">
+			{{ partial "breadcrumbs.html" . }}
+		</div>
+	</div>
 	{{ partial "translate_status_banner/translate_status_banner.html" . }}
+
+  {{- with .Params.is_beta -}}
+  <div class="alert alert-warning">This rule is part of a beta feature. To learn more, <a href="{{ "help/" | absLangURL }}">contact Support</a>.</div>
+  {{- end -}}
 
 	<div class="rule-specification row align-items-center mb-3">
     {{ $basename := .Params.integration_id | default .Params.source }}

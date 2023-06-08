@@ -273,6 +273,36 @@
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
   },
+  "ListGCPSTSAccounts": {
+    "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
+    "summary": "List all GCP STS-enabled service accounts"
+  },
+  "CreateGCPSTSAccount": {
+    "description": "Create a new entry within Datadog for your STS enabled service account.",
+    "summary": "Create a new entry for your service account",
+    "request_description": "",
+    "request_schema_description": "Data on your newly generated service account."
+  },
+  "DeleteGCPSTSAccount": {
+    "description": "Delete an STS enabled GCP account from within Datadog.",
+    "summary": "Delete an STS enabled GCP Account"
+  },
+  "UpdateGCPSTSAccount": {
+    "description": "Update an STS enabled service account.",
+    "summary": "Update STS Service Account",
+    "request_description": "",
+    "request_schema_description": "Service account info."
+  },
+  "GetGCPSTSDelegate": {
+    "description": "List your Datadog-GCP STS delegate account configured in your Datadog account.",
+    "summary": "List delegate account"
+  },
+  "MakeGCPSTSDelegate": {
+    "description": "Create a Datadog GCP principal.",
+    "summary": "Create a Datadog GCP principal",
+    "request_description": "Create a delegate service account within Datadog.",
+    "request_schema_description": ""
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -428,7 +458,7 @@
     "request_schema_description": "Update the IP allowlist."
   },
   "SubmitLog": {
-    "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted up to 18 hours in the past and 2 hours in the future.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
+    "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
     "summary": "Send logs",
     "request_description": "Log to send (JSON format).",
     "request_schema_description": "Structured log message."
@@ -577,7 +607,7 @@
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Configure tags for multiple metrics",
+    "summary": "Delete tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag deletion request."
   },
@@ -658,6 +688,12 @@
   "GetFinding": {
     "description": "Returns a single finding with message and resource configuration.",
     "summary": "Get a finding"
+  },
+  "UpdateFinding": {
+    "description": "Mute or unmute a specific finding.\nThe API returns the updated finding object when the request is successful.",
+    "summary": "Mute or unmute a finding",
+    "request_description": "To mute or unmute a finding, the request body should include at least two attributes: `muted` and `reason`. The allowed reasons depend on whether the finding is being muted or unmuted:\n- To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n- To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n",
+    "request_schema_description": "The new mute finding request."
   },
   "ListProcesses": {
     "description": "Get all processes for your organization.",

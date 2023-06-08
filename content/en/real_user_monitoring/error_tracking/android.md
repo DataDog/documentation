@@ -1,19 +1,16 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
-further_reading:
-- link: https://www.datadoghq.com/blog/debug-android-crashes/
-  tag: Blog
-  text: Debug Android crashes faster with Datadog
-- link: /real_user_monitoring/error_tracking/
-  tag: Documentation
-  text: Learn about Error Tracking
-- link: /real_user_monitoring/error_tracking/explorer
-  tag: Documentation
-  text: Visualize Error Tracking data in the RUM Explorer
-kind: documentation
 title: Android Crash Reporting and Error Tracking
+kind: documentation
+description: Set up Error Tracking for your Android applications.
+further_reading:
+- link: '/real_user_monitoring/error_tracking/'
+  tag: 'Error Tracking'
+  text: 'Get started with Error Tracking'
+- link: '/real_user_monitoring/error_tracking/explorer'
+  tag: 'Documentation'
+  text: 'Visualize Error Tracking data in the Explorer'
 ---
+
 ## Overview
 
 Error Tracking processes errors collected from the RUM Android SDK. 
@@ -154,7 +151,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## Limitations
 
-Mapping files are limited to 100 Mb when targeting our US1 site, and 50 Mb for other sites. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+Mapping files are limited to 200 MB when targeting our US1 or EU1 sites, and 50 MB for other sites. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.

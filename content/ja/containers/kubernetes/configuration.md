@@ -66,37 +66,12 @@ datadog:
 agents:
   rbac:
     create: true
-
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-
-Kubernetes のイベントを Datadog Cluster Agent で収集したい場合は、以下の手順を使用します。
-
-1. `leader_election` 変数または `DD_LEADER_ELECTION` 環境変数を `false` に設定し、Node Agent でリーダー選出を無効にします。
-
-2. Cluster Agent のデプロイメントファイルで、`DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` 環境変数を `true` に設定します。
-
-      ```yaml
-        - name: DD_COLLECT_KUBERNETES_EVENTS
-          value: "true"
-        - name: DD_LEADER_ELECTION
-          value: "true"
-      ```
-
-
-上記の手順でリーダー選出を構成することで、イベントを収集する Cluster Agent が 1 つだけになるようにします。
-
-また、Node Agent から Kubernetes イベントを収集するには、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定してください。
-
-```yaml
-- name: DD_COLLECT_KUBERNETES_EVENTS
-  value: "true"
-- name: DD_LEADER_ELECTION
-  value: "true"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+DaemonSet の構成については、[DaemonSet Cluster Agent のイベント収集][14]を参照してください。
 
 ## インテグレーション
 
@@ -218,3 +193,4 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 [11]: /ja/agent/kubernetes/tag/
 [12]: /ja/agent/guide/secrets-management/
 [13]: /ja/agent/guide/autodiscovery-management/
+[14]: /ja/containers/guide/kubernetes_daemonset#cluster-agent-event-collection

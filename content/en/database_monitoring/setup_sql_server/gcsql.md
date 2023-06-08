@@ -238,23 +238,23 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <HOSTNAME>
     port: 1433
     username: datadog
-    password: '<PASSWORD>'
-    connector: 'odbc'
-    driver: 'FreeTDS'
+    password: "<PASSWORD>"
+    connector: "odbc"
+    driver: "FreeTDS"
     tags:  # Optional
-      - 'service:<CUSTOM_SERVICE>'
-      - 'env:<CUSTOM_ENV>'
+      - "service:<CUSTOM_SERVICE>"
+      - "env:<CUSTOM_ENV>"
     gcp:
-      project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_ID>' \
-  datadog/datadog"
+      project_id: "<PROJECT_ID>"
+      instance_id: "<INSTANCE_ID>"' \
+  datadog/datadog
 ```
 
 ### Configure with mounted files

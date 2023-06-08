@@ -26,6 +26,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
   tag: GitHub
   text: クラウドネイティブ環境におけるアプリケーションのセキュリティ対策のベストプラクティス
+- link: https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/
+  tag: ブログ
+  text: Datadog Cloud Security Management でクラウドの誤構成を検出するルールをカスタマイズする
 kind: documentation
 title: Cloud Security Management
 ---

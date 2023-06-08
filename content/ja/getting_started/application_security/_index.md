@@ -6,9 +6,15 @@ further_reading:
 - link: /security/application_security/how-appsec-works
   tag: Documentation
   text: Application Security Management の仕組み
-- link: /security/application_security/getting_started
+- link: /security/application_security/enabling/
   tag: Documentation
   text: ASM の有効化
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
+- link: /getting_started/application_security/vulnerability_management
+  tag: ガイド
+  text: Application Vulnerability Management を始める
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
@@ -46,7 +52,7 @@ Datadog ASM を使い始めてからの 3 日間:
 
 4. これで、ASM がサービス上の疑わしいリクエストをリアルタイムで検出するように設定されましたので、**数日間製品を稼動させてみてください**。
 
-<div class="alert alert-info">サービスが最近のバージョンのトレーシングライブラリを使用している場合、ASM はサービスが依存関係にあるアップストリームライブラリの<a href="/security/application_security/risk_management">セキュリティ脆弱性を直ちに検出</a>し、APM はその情報をセキュリティビューでプレビューします。オプションとして、<strong>ASM の統合<a href="https://app.datadoghq.com/security/appsec/vm">脆弱性ビュー</a></strong> (ベータ版) を使用して、脆弱性のトリアージと優先順位付けにどのように役立つかを確認することもできます。</div>
+サービスが最近のバージョンのトレーシングライブラリを使用している場合、ASM はサービスが依存関係にあるアップストリームライブラリの[セキュリティ脆弱性を直ちに検出][13]し、APM はその情報をセキュリティビューでプレビューします。オプションとして、ASM の統合[脆弱性ビュー][14]を使用して、脆弱性のトリアージと優先順位付けにどのように役立つかを確認することもできます。
 
 **注**: ASM を使用すると、**ユーザーのアクティビティを追跡**し、疑わしいリクエストを行う認証済みユーザーを特定することもできます。[認証済みユーザー追跡を設定][5]することは、ASM を使用する上で必須ではありませんが、認証済み攻撃や攻撃者を可視化するのに役立ちます。
 
@@ -84,13 +90,15 @@ done{{< /code-block >}}
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
 [2]: /ja/security/application_security/enabling/
-[3]: /ja/security/application_security/threats/setup_and_configure/#configuring-a-client-ip-header
+[3]: /ja/security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /ja/security/application_security/how-appsec-works/
 [5]: /ja/security/application_security/threats/add-user-info/
 [6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal&viz=stream&start=1674824351640&end=1675429151640&paused=false
 [7]: https://app.datadoghq.com/security/appsec
 [8]: https://app.datadoghq.com/security/appsec/traces
-[9]: /ja/security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
+[9]: /ja/security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [10]: https://app.datadoghq.com/security/appsec/reports-configuration
 [11]: https://app.datadoghq.com/security/configuration/notification-rules
 [12]: /ja/security/notifications/rules/
+[13]: /ja/security/application_security/risk_management
+[14]: https://app.datadoghq.com/security/appsec/vm

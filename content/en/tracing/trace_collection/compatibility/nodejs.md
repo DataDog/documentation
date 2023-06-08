@@ -91,7 +91,6 @@ For details about how to how to toggle and configure plugins, check out the [API
 | Module      | Support Type        | Notes |
 | ----------- | ------------------- | ------------------------------------------ |
 | [dns][22]   | Fully supported     |       |
-| [fs][23]    | Fully supported     |       |
 | [http][24]  | Fully supported     |       |
 | [https][25] | Fully supported     |       |
 | [http2][26] | Partially supported | Only HTTP2 clients are currently supported and not servers. |

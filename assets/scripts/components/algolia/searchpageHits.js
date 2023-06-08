@@ -17,6 +17,20 @@ const renderHits = (renderOptions, isFirstRender) => {
         container.querySelector('.ais-Hits-list').innerHTML = joinedListItemsHTML;
     };
 
+    const getTitleHierarchyHTML = (hit) => {
+        const spacer = '<span class="ais-Hits-category-spacer">&#187;</span>'
+        const category = `<p class="ais-Hits-category">${hit.category}</p>`
+        const subcategory = `<p class="ais-Hits-subcategory">${hit.subcategory}</p>`
+        const pageTitle = `<p class="ais-Hits-title">${hit.title}</p>`
+        const baseTitleHierarchy = hit.subcategory === hit.title 
+            ? `${category}${spacer}${pageTitle}`
+            : `${category}${spacer}${subcategory}${spacer}${pageTitle}`
+
+        return hit.section_header
+            ? `${baseTitleHierarchy}${spacer}<p class="ais-Hits-title">${hit.section_header}</p>`
+            : `${baseTitleHierarchy}`
+    }
+
     // Returns a bunch of <li>s
     const generateJoinedHits = (hitsArray) => {
         return hitsArray
@@ -28,17 +42,7 @@ const renderHits = (renderOptions, isFirstRender) => {
                 return `
                     <li class="ais-Hits-item">
                         <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
-                            <div class="ais-Hits-row">
-                                <p class="ais-Hits-category">${hit.category}</p>
-                                
-                                <span class="ais-Hits-category-spacer">&#187;</span>
-
-                                ${
-                                    hit.subcategory === hit.title
-                                        ? `<p class="ais-Hits-title">${hit.title}</p>`
-                                        : `<p class="ais-Hits-subcategory">${hit.subcategory}</p><span class="ais-Hits-category-spacer">&#187;</span><p class="ais-Hits-title">${hit.title}</p>`
-                                }   
-                            </div>
+                            <div class="ais-Hits-row">${getTitleHierarchyHTML(item)}</div>
                             <div class="ais-Hits-row">
                                 <p class="ais-Hits-content">${displayContent}</p>
                             </div>

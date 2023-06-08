@@ -9,6 +9,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/network-performance-monitoring'
       tag: 'Blog'
       text: 'Network Performance Monitoring'
+    - link: 'https://www.datadoghq.com/blog/datadog-npm-search-map-updates/'
+      tag: 'Blog'
+      text: 'Streamline network investigations with an enhanced querying and map experience'
     - link: '/network_monitoring/devices'
       tag: 'Documentation'
       text: 'Network Device Monitoring'
@@ -17,31 +20,35 @@ further_reading:
       text: 'Collect your Network Data with the Datadog Agent.'
 ---
 
-{{< img src="network_performance_monitoring/network_page/main_page_npm.png" alt="Main page" >}}
+{{< img src="network_performance_monitoring/network_page/main_page_npm2.png" alt="Main page" >}}
 
 ## Queries
 
-To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the **_source_** and **_destination_** by using the search bar at the top of the page.
+To refine your search to traffic between particular endpoints, aggregate and filter your network aggregate connections **with tags**. You can select tags for the client and server using the search bar at the top of the page. The client is where the connection originated, and the server is where the connection terminated.
 
-The following screenshot shows the default view, which aggregates the _source_ and _destination_ by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
+{{< img src="network_performance_monitoring/network_page/network_diagram2.png" alt="network diagram showing inbound and outbound requests" style="width:100%;">}}
 
-{{< img src="network_performance_monitoring/network_page/context_npm.png" alt="context" style="width:80%;">}}
+The following screenshot shows the default view, which aggregates the client and server by the `service` tag. Accordingly, each row in the table represents service-to-service aggregate connections when aggregated over a one hour time period.
+
+{{< img src="network_performance_monitoring/network_page/context_npm2.png" alt="context" style="width:80%;">}}
 
 The next example shows all aggregate connections from IP addresses representing services in region `us-east-1` to availability zones:
 
-{{< img src="network_performance_monitoring/network_page/flow_table_region_az.png" alt="Aggregate connection table filtered" style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_table_region_az2.png" alt="Aggregate connection table filtered" style="width:80%;">}}
 
 You can set the timeframe over which traffic is aggregated using the time selector at the top right of the page:
 
 {{< img src="network_performance_monitoring/network_page/npm_timeframe.png" alt="Time frame NPM" style="width:30%;">}}
 
-Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Popular Tags" to aggregate on, using a combination of `service`, `kube_service`, `short_image`, `container_name`, and other common tags.
+Tags from Datadog integrations or Unified Service Tagging can be used for aggregating and filtering automatically. See [custom facets](#custom-facets), below, for other tags. You can also select "Auto-grouped traffic" to see traffic bucketed into several commonly used tags such as `service`, `kube_service`, `short_image`, and `container_name`.
+
+You can filter to traffic where the client or server matches a CIDR using `CIDR(network.client.ip, 10.0.0.0/8)` or `CIDR(network.server.ip, 10.0.0.0/8)`  
 
 ### Facet panels
 
-Facet panels mirror the tags in your search bar query. Switch between the facet panels with the _Source_ and _Destination_ tabs on top:
+You can use the facet panels to browse through all of the tags available on your flows, or filter traffic when you don't remember the exact tags you were looking for. Facet panels mirror the tags in your search bar query. Switch between the facet panels with the **Client** and **Server** tabs on top:
 
-{{< img src="network_performance_monitoring/network_page/destination_panel.png" alt="Destination panel" style="width:20%;">}}
+{{< img src="network_performance_monitoring/network_page/destination_panel2.png" alt="Destination panel" style="width:20%;">}}
 
 #### Custom facets
 
@@ -60,19 +67,23 @@ Once the custom facet is created, use this tag to filter and aggregate traffic i
 ### Wildcard search
 To perform a multi-character wildcard search, use the `*` symbol as follows:
 
-- `service:web*` matches all services that start with web
-- `service:*web` matches all services that end with web
-- `service:*web*` matches all services that contain the string web
+- `client_service:web*` matches all client services that start with web
+- `client_service:*web` matches all client services that end with web
+- `client_service:*web*` matches all client services that contain the string web
 
-Wildcard searches work within facets with this syntax. This query returns all the services that end with the string mongo:
+Wildcard searches work within facets with this syntax. This query returns all the client services that end with the string "mongo":
 
-`service:*mongo`
+`client_service:*mongo`
 
 To learn more, see the [search syntax][1] documentation.
 
+### Group by
+
+Groups allow you to group your data by a given tag's value. For example, if you select a grouping such as **host**, results are grouped by individual hosts. You can also choose to view all your data in a single group using the **Ungrouped traffic** option. Additionally, you may have large chunks of data that are not tagged by the grouping you're interested in. In these situations, you can use **Auto-grouped traffic** to group data by whichever tags are available.
+
 ## Network data
 
-{{< img src="network_performance_monitoring/network_page/network_data.png" alt="network data"  style="width:90%;" >}}
+{{< img src="network_performance_monitoring/network_page/network_data2.png" alt="network data" style="width:90%;" >}}
 
 Your network metrics are displayed through the graphs and the associated table. All sent and received metrics are displayed from the perspective of the source:
 
@@ -96,27 +107,27 @@ The following network load metrics are available:
 
 #### TCP
 
-TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available:
+TCP is a connection-oriented protocol that guarantees in-order delivery of packets. The following TCP metrics are available: All metrics are instrumented from the perspective of the `client` side of the connection when available, or the server if not.
 
-| Metric                    |  Description                                                                                                                           |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **TCP Retransmits** | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the `source`. |
-| **TCP Latency** | Measured as TCP smoothed round-trip time, that is the time between a TCP frame being sent and acknowledged. |
-| **TCP Jitter** | Measured as TCP smoothed round-trip time variance. |
-| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the `source`. |
-| **Closed Connections** | The number of TCP connections in a closed state. Measured in connections per second from the `source`. |
+| Metric                      | Description                                                                                                                              |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| **TCP Retransmits**         | TCP Retransmits represent detected failures that are retransmitted to ensure delivery. Measured in count of retransmits from the client. |
+| **TCP Latency**             | Measured as TCP smoothed round-trip time, that is, the time between a TCP frame being sent and acknowledged.                              |
+| **TCP Jitter**              | Measured as TCP smoothed round-trip time variance.                                                                                       |
+| **Established Connections** | The number of TCP connections in an established state. Measured in connections per second from the client.                               |
+| **Closed Connections**      | The number of TCP connections in a closed state. Measured in connections per second from the client.                                     |
 
 ### Cloud service autodetection
 
 If you're relying on managed cloud services like S3 or Kinesis, you can monitor the performance of traffic to those services from your internal applications. Scope your view to a particular AWS or Google Cloud dependency to pinpoint latency, assess database performance, and visualize your network more completely.
 
-{{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs.png" alt="Cloud Service Map" >}}
+{{< img src="network_performance_monitoring/network_page/cloud-service-hero-docs2.png" alt="Cloud Service Map" >}}
 
 For instance, you can
 
-- visualize data flow from your internal Kubernetes cluster to `service:aws.s3` in the [Network Map][2]
+- visualize data flow from your internal Kubernetes cluster to `server_service:aws.s3` in the [Network Map][2].
 - pivot to the [Network Page](#table) to isolate which pods are establishing the most connections to that service, and
-- validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic perfromance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab.
+- validate that their request are successful by analyzing S3 performance metrics, which are correlated with traffic performance directly in the sidepanel for a given dependency, under the *Integration Metrics* tab.
 
 NPM automatically maps
 
@@ -126,7 +137,7 @@ NPM automatically maps
 To monitor other endpoints where an Agent cannot be installed (such as public APIs), group the destination in the Network Overview by the [`domain` tag](#domain-resolution). Or, see the section below for cloud service resolution.
 
 ### Cloud service enhanced resolution
-If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Azure loadbalancers only have user-defined tags. For AWS, Datadog applies the tags defined below in addition to the user-defined tags.
+If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and group network traffic with several resources collected from these cloud providers. Depending on the cloud provider and resource, you have different sets of tags available to query with. Datadog applies the tags defined below in addition to the user-defined tags.
 
  #### Amazon Web Services
  {{< tabs >}}
@@ -170,11 +181,26 @@ If you have [setup][9] enhanced resolution for AWS or Azure, NPM can filter and 
 
  {{< /tabs >}}
 
+#### Azure
+##### Loadbalancers and Application Gateways
+ - name
+ - loadbalancer
+ - cloud_provider
+ - region
+ - type
+ - resource_group
+ - tenant_name
+ - subscription_name
+ - subscription_id
+ - sku_name
+ - custom (user-defined) tags applied to Azure Loadbalancers and Application Gateways
+
+
 ### Domain resolution
 
 Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names for external and internal traffic. Domain allows you to monitor cloud provider endpoints where a Datadog Agent cannot be installed, such as S3 buckets, application load balancers, and APIs. Unrecognizable domain names such as DGA domains from C&C servers may point to network security threats. `domain` **is encoded as a tag in Datadog**, so you can use it in search bar queries and the facet panel to aggregate and filter traffic.
 
-{{< img src="network_performance_monitoring/network_page/domain_aggregation.png" alt="Domain aggregation" >}}
+{{< img src="network_performance_monitoring/network_page/domain_aggregation2.png" alt="Domain aggregation" >}}
 
 **Note**: DNS resolution is supported for hosts where the system probe is running on the root network namespace, which is usually caused by running the system-probe in a container without using the host network.
 
@@ -182,9 +208,9 @@ Starting with Agent 7.17+, the Agent resolves IPs to human-readable domain names
 
 NAT is a tool used by Kubernetes and other systems to route traffic between containers. When investigating a specific dependency (for example, service to service), you can use the presence or absence of pre-NAT IPs to distinguish between Kubernetes-native services, which do their own routing, and services that rely on external clients for routing. This feature does not currently include resolution of NAT gateways.
 
-To view pre-NAT and post-NAT IPs, use the _Show pre-NAT IPs_ toggle in the table settings. When this setting is toggled off, IPs shown in the Source IP and Dest IP columns are by default post-NAT IPs. In cases where you have multiple pre-NAT IPs for one post-NAT IP, the top 5 most common pre-NAT IPs will be displayed. `pre_nat.ip` is a tag like any other in the product, so you can use it to aggregate and filter traffic.
+To view pre-NAT and post-NAT IPs, use the **Show pre-NAT IPs** toggle in the table settings. When this setting is toggled off, IPs shown in the **Client IP** and **Server IP** columns are by default post-NAT IPs. In cases where you have multiple pre-NAT IPs for one post-NAT IP, the top 5 most common pre-NAT IPs are displayed. `pre_nat.ip` is a tag like any other in the product, so you can use it to aggregate and filter traffic.
 
-{{< img src="network_performance_monitoring/network_page/prenat_ip.png" alt="pre-NAT IPs" >}}
+{{< img src="network_performance_monitoring/network_page/prenat_ip2.png" alt="pre-NAT IPs" >}}
 
 ### Network ID
 
@@ -203,7 +229,7 @@ In AWS and Google Cloud, the network ID is automatically set to the VPC ID. For 
 
 Organize and share views of traffic data. Saved Views make debugging faster and empower collaboration. For instance, you can create a view, save it for the future for common queries, and copy its link to share network data with your teammates.
 
-{{< img src="network_performance_monitoring/network_page/npm_saved_views.png" alt="Saved Views" >}}
+{{< img src="network_performance_monitoring/network_page/npm_saved_views2.png" alt="Saved Views" >}}
 
 - To save a view: click the *+ Save* button and name the view to record your current query, table configuration, and graph metric selections.
 - To load a view: click *Views* at the top left to see your Saved Views and select a view from the list.
@@ -217,42 +243,42 @@ To learn more, see the [Saved Views][5] documentation.
 
 The network table breaks down the _Volume_, _Throughput_, _TCP Retransmits_, _Round-trip Time (RTT)_, and _RTT variance_ metrics between each _source_ and _destination_ defined by your query.
 
-{{< img src="network_performance_monitoring/network_page/network_table.png" alt="Data table" >}}
+{{< img src="network_performance_monitoring/network_page/network_table2.png" alt="Data table" >}}
 
 You can configure the columns in your table using the `Customize` button at the top right of the table.
 
 Configure the traffic shown with the `Filter Traffic` button.
 
-{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/filter_traffic_toggles_v2.png" alt="Flow Details" style="width:80%;">}}
 
 External traffic (to public IPs) and Datadog Agent traffic is shown by default. To narrow down your view, you can choose to toggle off the `Show Datadog Traffic` and `Show External Traffic` toggles.
 
 ### Unresolved traffic
 
-Unresolved source and destination tags are marked as `N/A`. A traffic source or destination endpoint may be unresolved because:
+Unresolved client and server tags are marked as `N/A`. A traffic client or server endpoint may be unresolved because:
 
-* The host or container source or destination IPs are not tagged with the source or destination tags used for traffic aggregation.
+* The host or container client or server IPs are not tagged with the client or server tags used for traffic aggregation.
 * The endpoint is outside of your private network, and accordingly is not tagged by the Datadog Agent.
 * The endpoint is a firewall, service mesh or other entity where a Datadog Agent cannot be installed.
 
-Use the _Show N/A (Unresolved Traffic)_ toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) sources or destinations.
+Use the **Show N/A (Unresolved Traffic)** toggle in the upper right corner of the data table to filter out aggregate connections with unresolved (`N/A`) clients or servers.
 
-Select any row from the data table to see associated logs, traces, and processes for a given _source_ <=> _destination_ aggregate connection:
+Select any row from the data table to see associated logs, traces, and processes for a given **client** <=> **server** aggregate connection:
 
-{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/flow_details.png" alt="Aggregate Connection Details" style="width:80%;">}}
 
 ## Sidepanel
 
 The sidepanel provides contextual telemetry to help you debug network dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a high retransmit count or latency in traffic between two endpoints is due to:
 - A spike in traffic volume from a particular port or IP.
 - Heavy processes consuming the CPU or memory of the destination endpoint.
-- Application errors in the code of the source endpoint.
+- Application errors in the code of the client endpoint.
 
-{{< img src="network_performance_monitoring/network_page/npm_sidepanel.png" alt="Flow Details"  style="width:80%;">}}
+{{< img src="network_performance_monitoring/network_page/npm_sidepanel2.png" alt="Flow Details" style="width:80%;">}}
 
 ### Common tags
 
-The top of the sidepanel displays common source and destination tags shared by the inspected dependency's most recent connections. Use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags will surface:
+The top of the sidepanel displays common client and server tags shared by the inspected dependency's most recent connections. Use common tags to gain additional context into a faulty endpoint. For instance, when troubleshooting latent communication to a particular service, common destination tags surface the following:
 - Granular context such as the container, task, or host to which traffic is flowing.
 - Wider context such as the availability zone, cloud provider account, or deployment in which the service runs.
 

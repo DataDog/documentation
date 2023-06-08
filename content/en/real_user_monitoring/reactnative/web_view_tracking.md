@@ -54,7 +54,7 @@ Filter on your React Native applications, and click a session. A side panel with
 
 Click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/browser/#npm
+[1]: /real_user_monitoring/browser/#npm
 [2]: https://app.datadoghq.com/rum/explorer?_gl=1*1ftt3v2*_gcl_aw*R0NMLjE2NzE1MzAwMzUuQ2owS0NRaUExNFdkQmhEOEFSSXNBTmFvMDdnVzZFSGZaVXQ0dGRFY3ZwcERPVkpFUTJEWEZHYVhSd0djQmNGdDRnZ0pra0xGbW5uUjFHQWFBcjlZRUFMd193Y0I.*_ga*MTkyMzQ5MTc1MC4xNjc4MjczMTI3*_ga_KN80RDFSQK*MTY3ODI3OTIzNC4yLjAuMTY3ODI3OTIzNC42MC4wLjA.
 [3]: https://github.com/react-native-webview/react-native-webview
 [4]: https://github.com/react-native-webview/react-native-webview/blob/master/docs/Getting-Started.md

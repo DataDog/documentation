@@ -1,13 +1,13 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: インテグレーションガイド
 disable_toc: true
-kind: guide
+kind: ガイド
 private: true
 title: インテグレーションガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: インテグレーションガイド
 ---
 
 {{< whatsnext desc="一般ガイド:" >}}

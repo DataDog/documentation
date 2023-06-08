@@ -72,11 +72,13 @@ yarn add --dev @datadog/datadog-ci
 
 3. または[グローバル JSON コンフィギュレーションファイル](#global-configuration-file-options)で定義されています。
 
-   [テストを起動するとき](#run-tests)に `--config` フラグを使用して、このファイルへのパスを指定します。グローバルコンフィギュレーションファイルの名前が `datadog-ci.json` に設定されている場合、その名前がデフォルトになります。
+   システム上に JSON コンフィギュレーションファイルを作成します。[テストの起動時](#run-tests)に `--config` フラグを使用してファイルへのパスを指定します。ファイルパスを指定しない場合、Datadog はデフォルトのファイル名である `datadog-ci.json` を使用します。
 
 ### グローバルコンフィギュレーションファイルのオプション
 
-グローバルコンフィギュレーションファイルでは、次の高度なオプションを設定できます。
+テストを実行する際には、コマンドラインで `--config` フラグを使用して、グローバルコンフィグレーションファイルのパスを指定します。
+
+グローバルコンフィギュレーションファイルの高度なオプションの一覧は、以下を参照してください。コンフィギュレーションファイルの例としては、この [`global.config.json` ファイル][9]を参照してください。
 
 `apiKey`
 : Datadog API にクエリーを送信する際に使用される API キー。
@@ -97,10 +99,13 @@ yarn add --dev @datadog/datadog-ci
 : 少なくとも一つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させるブーリアンフラグ。デフォルトでは `true` に設定されています。
 
 `files`
-: Synthetic テスト用コンフィギュレーションファイルを検出するグロブパターン。
+: Synthetic テスト用[コンフィギュレーションファイル](#test-files)を検出するグロブパターン。
 
 `global`
 : すべてのテストに適用される Synthetic テストのオーバーライド。
+
+`mobileApplicationVersionFilePath`
+: すべての Synthetic モバイルアプリケーションテストのアプリケーションバージョンをオーバーライドします。
 
 `pollingTimeout`
 : **タイプ**: 整数<br>
@@ -113,7 +118,7 @@ yarn add --dev @datadog/datadog-ci
 : Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。Datadog へのアクセスに使用する URL が `myorg.datadoghq.com` の場合、`subdomain` の値は `myorg` にする必要があります。
 
 `tunnel`
-: [テストトンネル][3]を使って、テストバッチを実行します。
+: [Continuous Testing Tunnel](#use-the-testing-tunnel) を使って、テストバッチを実行します。
 
 `testSearchQuery`
 : 実行する Synthetic テストを選択するためのクエリを渡します。CLI でテストを実行する場合は、`-s` フラグを使用します。
@@ -132,7 +137,7 @@ yarn add --dev @datadog/datadog-ci
 {
     "apiKey": "<DATADOG_API_KEY>",
     "appKey": "<DATADOG_APPLICATION_KEY>",
-    "datadogSite": "datadoghq.com", // 他の Datadog サイトを使用することもできます。デフォルトでは、リクエストは Datadog US1 に送信されます。
+    "datadogSite": "datadoghq.com", // https://docs.datadoghq.com/getting_started/site/ で他の Datadog サイトを使用することもできます。デフォルトでは、リクエストは Datadog US1 に送信されます。
     "files": "{,!(node_modules)/**/}*.synthetics.json",
     "failOnCriticalErrors": false,
     "failOnMissingTests": false,
@@ -178,7 +183,7 @@ yarn add --dev @datadog/datadog-ci
 export DATADOG_SUBDOMAIN="myorg"
 ```
 
-`DATADOG_SYNTHETICS_LOCATIONS` を使用すると、テストが実行される場所をオーバーライドすることができます。ロケーションは `;` で区切ってください。テストファイル内の構成は、他のオーバーライドよりも優先されます。
+`DATADOG_SYNTHETICS_LOCATIONS` を使用すると、テストが実行される場所をオーバーライドすることができます。ロケーションは `;` で区切ってください。[テストファイル](#test-files)内の構成は、他のオーバーライドよりも優先されます。
 
 ```bash
 export DATADOG_SYNTHETICS_LOCATIONS="aws:us-east-1;aws:us-east-2"
@@ -194,7 +199,7 @@ export DATADOG_SYNTHETICS_LOCATIONS="aws:us-east-1;aws:us-east-2"
 {
   "apiKey": "<DATADOG_API_KEY>",
   "appKey": "<DATADOG_APPLICATION_KEY>",
-  "datadogSite": "datadoghq.com",
+  "datadogSite": "datadoghq.com", // https://docs.datadoghq.com/getting_started/site/ で他の Datadog サイトを使用することもできます。デフォルトでは、リクエストは Datadog US1 に送信されます。
   "failOnCriticalErrors": true,
   "failOnMissingTests": true,
   "failOnTimeout": true,
@@ -211,6 +216,7 @@ export DATADOG_SYNTHETICS_LOCATIONS="aws:us-east-1;aws:us-east-2"
     "followRedirects": true,
     "headers": {"NEW_HEADER": "NEW VALUE"},
     "locations": ["aws:us-east-1"],
+    "mobileApplicationVersionFilePath": "path/to/application.apk",
     "retry": {"count": 2, "interval": 300},
     "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
     "startUrlSubstitutionRegex": "s/(https://www.)(.*)/$1extra-$2/",
@@ -237,8 +243,29 @@ CLI にすべての `**/*.synthetics.json` Synthetic テスト (または[グロ
 
 CLI を実行してテストを実行する
 
-<!-- xxx tabs xxx -->
-<!-- xxx tab "Yarn" xxx -->
+{{< tabs >}}
+{{% tab "NPM" %}}
+
+`package.json` に下記を追加します。
+
+```json
+{
+  "scripts": {
+    "datadog-ci-synthetics": "datadog-ci synthetics run-tests"
+  }
+}
+```
+
+次に、以下を実行します。
+
+```bash
+npm run datadog-ci-synthetics
+```
+
+**注**: カスタムグローバルコンフィギュレーションファイルを使用してテストを起動している場合は、`datadog-ci-synthetics` スクリプトに紐付けられたコマンドに `--config <PATH_TO_GLOBAL_CONFIG_FILE>` を追加します。
+
+{{% /tab %}}
+{{% tab "Yarn" %}}
 
 `run-tests` サブコマンドは `files` コンフィギュレーションキーにしたがって、フォルダ内で検出されたテストを実行します。`--public-id` (または短縮形の `-p`) 引数を指定することで、指定したテストのみをトリガーすることができます。複数のテストを実行するために、複数回設定することができます。
 
@@ -266,29 +293,8 @@ yarn datadog-ci synthetics run-tests -f ./component-1/**/*.synthetics.json -v PA
 
 **注**: カスタムグローバルコンフィギュレーションファイルを使用してテストを起動している場合は、コマンドに `--config <PATH_TO_GLOBAL_CONFIG_FILE>` を追加します。
 
-<!-- xxz tab xxx -->
-<!-- xxx tab "NPM" xxx -->
-
-`package.json` に下記を追加します。
-
-```json
-{
-  "scripts": {
-    "datadog-ci-synthetics": "datadog-ci synthetics run-tests"
-  }
-}
-```
-
-次に、以下を実行します。
-
-```bash
-npm run datadog-ci-synthetics
-```
-
-**注**: カスタムグローバルコンフィギュレーションファイルを使用してテストを起動している場合は、`datadog-ci-synthetics` スクリプトに紐付けられたコマンドに `--config <PATH_TO_GLOBAL_CONFIG_FILE>` を追加します。
-
-<!-- xxz tab xxx -->
-<!-- xxz tabs xxx -->
+{{% /tab %}}
+{{< /tabs >}}
 
 ### 障害モードフラグ
 
@@ -318,6 +324,7 @@ npm run datadog-ci-synthetics
         "followRedirects": true,
         "headers": {"NEW_HEADER": "NEW VALUE"},
         "locations": ["aws:us-east-1"],
+        "mobileApplicationVersionFilePath": "path/to/application.apk",
         "pollingTimeout": 30000,
         "retry": {"count": 2, "interval": 300},
         "startUrl": "{{URL}}?static_hash={{STATIC_HASH}}",
@@ -333,28 +340,31 @@ npm run datadog-ci-synthetics
 
 `config` キーの下にあるオプションはすべてオプションで、Datadog に保存されているテストの構成をオーバーライドすることができます。
 
-| オプション                     | タイプ             | 定義                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|-----------------------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `allowInsecureCertificates` | Boolean          | Synthetic API テストでの証明書チェックを無効にします。                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `basicAuth`                 | オブジェクト           | 基本認証が必要な場合に提供する資格情報。<br><br>- `username` (文字列): 基本認証のユーザー名。<br>- `password` (文字列): 基本認証のパスワード。                                                                                                                                                                                                                                                                                                      |
-| `body`                      | 文字列           | API テストで送信するデータ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `bodyType`                  | 文字列           | API テストで送信されるデータのタイプ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `cookies`                   | 文字列またはオブジェクト | API やブラウザのテストにおいて、提供された文字列をクッキーのヘッダーとして使用します (追加または置換)。<br><br>- これが文字列である場合、オリジナルのクッキーを置き換えるために使用されます。<br>- これがオブジェクトの場合、フォーマットは `{append?: boolean, value: string}` でなければならず、`append` の値によって、オリジナルのクッキーに追加されるか置き換えられるかが決まります。                                                                                                                                      |
-| `defaultStepTimeout`        | 数値           | ブラウザテストにおけるステップの最大継続時間を秒単位で指定し、個別に設定されたステップのタイムアウトをオーバーライドしません。                                                                                                                                                                                                                                                                                                                                                                                    |
-| `deviceIds`                 | 配列            | ブラウザテストを実行するデバイスのリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `executionRule`             | 文字列           | テストの実行ルールは、テストが失敗した場合の CLI の振る舞いを定義します。<br><br>- `blocking`: テストが失敗した場合、CLI はエラーを返します。<br>- `non_blocking`: テストが失敗した場合、CLI はエラーを返します。テストが失敗した場合に、CLI は警告を表示するだけである。<br>- `skipped`: テストは全く実行されません。                                                                                                                                                                                                                     |
-| `followRedirects`           | Boolean          | Synthetic API テストにおいて、HTTP リダイレクトに従うか否かを示します。                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| `headers`                   | オブジェクト           | テスト内で置換するヘッダー。このオブジェクトは、キーが置換するヘッダーの名前、そして値が置換するヘッダーの新しい値である必要があります。                                                                                                                                                                                                                                                                                                                                         |
-| `locations`                 | 配列            | テストを実行する場所のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `pollingTimeout`            | 整数          | テストの最大継続時間をミリ秒単位で指定します。実行がこの値を超えた場合、失敗とみなされます。                                                                                                                                                                                                                                                                                                                                                                                          |
-| `retry`                     | オブジェクト           | テストの再試行ポリシー。<br><br>- `count` (整数): テストに失敗した場合に実行する試行回数を指定します。<br>- `interval` (整数): 再試行の間隔をミリ秒で指定します。                                                                                                                                                                                                                                                                                                        |
-| `startUrl`                  | 文字列           | テストに提供する新しい開始 URL。環境変数にある、大括弧で指定された変数 (例えば `{{ EXAMPLE }}`) は置き換えられます。                                                                                                                                                                                                                                                                                                                                                  |
-| `startUrlSubstitutionRegex` | 文字列           | テストの開始 URL を変更する正規表現 (ブラウザテストと HTTP テストのみ) で、元のテストや構成のオーバーライド `startUrl` によって与えられたものであるかどうかを指定します。<br><br>URL が変数を含んでいる場合、この正規表現は変数の補間の後に適用されます。可能なフォーマットは 2 つです: <br>- `your_regex\|your_substitution`: パイプベースの正規表現。例: `https://example.com(.*)\|http://subdomain.example.com$1` は、`https://example.com/test` を `http://subdomain.example.com/test` に変換します。<br>- `s/your_regex/your_substitution/modifiers`: より複雑な変換を行うための JavaScript の正規表現構文。例: `s/(https://www.)(.*)/$1extra-$2/` は、`https://www.example.com` を `https://www.extra-example.com` に変換します。 |
-| `variables`                 | オブジェクト           | テスト内で置換する変数。このオブジェクトは、キーが置換する変数の名前、そして値が置換する変数の新しい値である必要があります。                                                                                                                                                                                                                                                                                                                                    |
+| オプション                            | タイプ             | 定義                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|------------------------------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `allowInsecureCertificates`        | Boolean          | Synthetic API テストでの証明書チェックを無効にします。                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `basicAuth`                        | オブジェクト           | 基本認証が必要な場合に提供する資格情報。<br><br>- `username` (文字列): 基本認証のユーザー名。<br>- `password` (文字列): 基本認証のパスワード。                                                                                                                                                                                                                                                                                                      |
+| `body`                             | 文字列           | API テストで送信するデータ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `bodyType`                         | 文字列           | API テストで送信されるデータのタイプ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `cookies`                          | 文字列またはオブジェクト | API やブラウザのテストにおいて、提供された文字列をクッキーのヘッダーとして使用します (追加または置換)。<br><br>- これが文字列である場合、オリジナルのクッキーを置き換えるために使用されます。<br>- これがオブジェクトの場合、フォーマットは `{append?: boolean, value: string}` でなければならず、`append` の値によって、オリジナルのクッキーに追加されるか置き換えられるかが決まります。                                                                                                                                      |
+| `defaultStepTimeout`               | 数値           | ブラウザテストにおけるステップの最大継続時間を秒単位で指定し、個別に設定されたステップのタイムアウトをオーバーライドしません。                                                                                                                                                                                                                                                                                                                                                                                    |
+| `deviceIds`                        | 配列            | ブラウザテストを実行するデバイスのリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `executionRule`                    | 文字列           | テストの実行ルールは、テストが失敗した場合の CLI の振る舞いを定義します。<br><br>- `blocking`: テストが失敗した場合、CLI はエラーを返します。<br>- `non_blocking`: テストが失敗した場合、CLI はエラーを返します。テストが失敗した場合に、CLI は警告を表示するだけである。<br>- `skipped`: テストは全く実行されません。                                                                                                                                                                                                                     |
+| `followRedirects`                  | Boolean          | Synthetic API テストにおいて、HTTP リダイレクトに従うか否かを示します。                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `headers`                          | オブジェクト           | テスト内で置換するヘッダー。このオブジェクトは、キーが置換するヘッダーの名前、そして値が置換するヘッダーの新しい値である必要があります。                                                                                                                                                                                                                                                                                                                                         |
+| `locations`                        | 配列            | テストを実行する場所のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `mobileApplicationVersionFilePath` | 文字列           | Synthetic モバイルアプリケーションテストのアプリケーションバージョンをオーバーライドします。                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `pollingTimeout`                   | 整数          | テストの最大継続時間をミリ秒単位で指定します。実行がこの値を超えた場合、失敗とみなされます。                                                                                                                                                                                                                                                                                                                                                                                          |
+| `retry`                            | オブジェクト           | テストの再試行ポリシー。<br><br>- `count` (整数): テストに失敗した場合に実行する試行回数を指定します。<br>- `interval` (整数): 再試行の間隔をミリ秒で指定します。                                                                                                                                                                                                                                                                                                        |
+| `startUrl`                         | 文字列           | テストに提供する新しい開始 URL。環境変数にある、大括弧で指定された変数 (例えば `{{ EXAMPLE }}`) は置き換えられます。                                                                                                                                                                                                                                                                                                                                                  |
+| `startUrlSubstitutionRegex`        | 文字列           | テストの開始 URL を変更する正規表現 (ブラウザテストと HTTP テストのみ) で、元のテストや構成のオーバーライド `startUrl` によって与えられたものであるかどうかを指定します。<br><br>URL が変数を含んでいる場合、この正規表現は変数の補間の後に適用されます。可能なフォーマットは 2 つです: <br>- `your_regex\|your_substitution`: URL の `/` 文字との衝突を避けるために、パイプベースの構文を使用します。例: `https://example.com(.*)\|http://subdomain.example.com$1` は、`https://example.com/test` を `http://subdomain.example.com/test` に変換します。<br>- `s/your_regex/your_substitution/modifiers`: スラッシュ構文で、修飾語をサポートします。例: `s/(https://www.)(.*)/$1extra-$2/` は、`https://www.example.com` を `https://www.extra-example.com` に変換します。 |
+| `variables`                        | オブジェクト           | テスト内で置換する変数。このオブジェクトは、キーが置換する変数の名前、そして値が置換する変数の新しい値である必要があります。                                                                                                                                                                                                                                                                                                                                    |
 
 ## テストトンネルを使用する
 
-変数のオーバーライドと [Continuous Testing Tunnel][3] を組み合わせることで、開発環境内でテストを実行することができます。テストトンネルは、インフラストラクチャーと Datadog の間にエンドツーエンドで暗号化された HTTP プロキシを作成し、CLI を通して送信された全てのテストリクエストが自動的に `datadog-ci` クライアントを経由してルーティングされることを可能にします。これにより、本番前環境から本番システムまで、ソフトウェア開発のライフサイクルのあらゆる段階で、エンドツーエンドで暗号化されたテストを実行することが可能になります。
+変数のオーバーライドと [Continuous Testing Tunnel][3] を組み合わせることで、開発環境内でテストを実行することができます。テストトンネルは、インフラストラクチャーと Datadog の間にエンドツーエンドで暗号化された HTTP プロキシを作成し、CLI を通して送信された全てのテストリクエストが自動的に `datadog-ci` クライアントを経由してルーティングされることを可能にします。
+
+これにより、本番前環境から本番システムまで、ソフトウェア開発のライフサイクルのあらゆる段階で、エンドツーエンドで暗号化されたテストを実行することが可能になります。
 
 ## エンドツーエンドのテストプロセス
 
@@ -415,7 +425,7 @@ yarn datadog-ci synthetics run-tests -s 'tag:e2e-tests' --config global.config.j
 
 ## テスト結果の表示
 
-CI バッチの結果は、[Continuous Testing Explorer][4] でバッチをクリックするか、[Synthetic Tests ページ][5]でテストをクリックすることで確認できます。
+CI バッチの結果は、[Synthetic Monitoring と Continuous Testing Explorer][4] でバッチをクリックするか、[**Synthetic Tests** ページ][5]でテストをクリックすることで確認できます。
 
 また、テストが実行される際に、CI の中で直接テストの実行結果を確認することができます。テストが失敗した原因を特定するには、実行ログを見てアサーションが失敗した原因を探します。
 
@@ -445,6 +455,8 @@ CI バッチの結果は、[Continuous Testing Explorer][4] でバッチをク�
 
 ## その他の参考資料
 
+お役に立つドキュメント、リンクや記事:
+
 - [Datadog の GitHub Action を使用して、ワークフローに Continuous Testing を追加する][6]
 - [Continuous Testing と CI/CD について][7]
 - [Continuous Testing Explorer について][8]
@@ -458,3 +470,4 @@ CI バッチの結果は、[Continuous Testing Explorer][4] でバッチをク�
 [6]: https://www.datadoghq.com/blog/datadog-github-action-synthetics-ci-visibility/
 [7]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/
 [8]: https://docs.datadoghq.com/ja/continuous_testing/explorer/
+[9]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json

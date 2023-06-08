@@ -20,6 +20,9 @@ further_reading:
   - link: "/monitors/"
     tag: "Documentation"
     text: "Monitors, SLOs, notifications, downtimes, and incidents"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on better visualizations with Dashboards"  
 ---
 
 ## Overview
@@ -84,7 +87,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
 
  - **Alert values and Check statuses**: Show big red, yellow, and green numbers to bring attention to successes or problems.
  - **Heatmaps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
-   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example"  >}}
+   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example" >}}
  - **iFrames, formatted text, and images**: Show any number of website-like details to help explain the dashboard contents and provide additional resources.
  - **Tables**: Show lists of metrics grouped by tag keys.
  - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
@@ -144,6 +147,6 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [12]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [13]: /integrations/slack/
 [14]: /api/v1/dashboards/
-[15]: /mobile/
+[15]: /service_management/mobile/
 [16]: https://apps.apple.com/app/datadog/id1391380318
 [17]: https://play.google.com/store/apps/details?id=com.datadog.app

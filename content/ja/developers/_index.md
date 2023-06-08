@@ -79,7 +79,7 @@ Datadog Marketplace またはコミュニティインテグレーションのた
 
 {{< whatsnext desc="Datadog に送信できるデータのタイプとその送信方法について説明します。" >}}
     {{< nextlink href="/metrics" >}}<u>カスタムメトリクス</u>: Datadog のカスタムメトリクスについて掘り下げて説明します。メトリクスのタイプや、それぞれのタイプが表すもの、送信方法、および Datadog 全体でどのように使用されるかを、このセクションで説明します。{{< /nextlink >}}
-    {{< nextlink href="events/guides/" >}}<u>イベント</u>: カスタム Agent チェック、DogStatsD、または Datadog API を使用して、Datadog にイベントを送信する方法について説明します。{{< /nextlink >}}
+    {{< nextlink href="service_management/events/guides/" >}}<u>イベント</u>: カスタム Agent チェック、DogStatsD、または Datadog API を使用して、Datadog にイベントを送信する方法について説明します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>サービスチェック</u>: 特定のサービスのアップまたはダウンステータスを Datadog に送信する方法について説明します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -94,12 +94,12 @@ Datadog Marketplace またはコミュニティインテグレーションのた
 ## その他
 
 {{< whatsnext desc="Other developer resources:" >}}
-    {{< nextlink href="/developers/marketplace" >}}<u>マーケットプレイス</u>: Datadog 上にサービスを構築し、顧客に提供します。{{< /nextlink >}}
+    {{< nextlink href="/developers/integrations/marketplace_offering" >}}<u>マーケットプレイス</u>: Datadog 上にサービスを構築し、顧客に提供します。{{< /nextlink >}}
     {{< nextlink href="/developers/amazon_cloudformation" >}}<u>Amazon CloudFormation</u>: テンプレートを使用して、お使いの環境内のすべての AWS リソースを一度に記述、構成、プロビジョニングできます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -112,6 +112,6 @@ Datadog Marketplace またはコミュニティインテグレーションのた
 [7]: https://github.com/DataDog/integrations-extras
 [8]: https://www.datadoghq.com/pricing/
 [9]: https://github.com/DataDog/integrations-core
-[10]: /ja/developers/marketplace/
+[10]: /ja/developers/integrations/marketplace_offering
 [11]: /ja/developers/custom_checks/
 [12]: /ja/developers/service_checks/

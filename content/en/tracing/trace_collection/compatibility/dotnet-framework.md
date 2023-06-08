@@ -22,7 +22,7 @@ The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual B
 
 ## Supported .NET Framework runtimes
 
-The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core][2].
+The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core][2]. The .NET Tracer does not support code running in partial trust environments.
 
 | .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             | Datadog End of Life |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- | ------------------- |

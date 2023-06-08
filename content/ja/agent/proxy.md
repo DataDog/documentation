@@ -385,7 +385,7 @@ option tcplog
 default_backend datadog-network-devices-snmp-traps
 
 # これは、Agent がインスツルメンテーションのテレメトリーデータを
-# 送信するために接続するエンドポイントを宣言します (例: "apm_config.telemetry.dd_url" の値)
+# 送信するために接続するエンドポイントを宣言します (例えば、"apm_config.telemetry.dd_url" の値)
 frontend instrumentation_telemetry_data_frontend
 bind *:3843
 mode tcp
@@ -393,12 +393,20 @@ option tcplog
 default_backend datadog-instrumentations-telemetry
 
 # これは、Agent がネットワークデバイスモニタリングの NetFlow フローを
-# 送信するために接続するエンドポイントを宣言します (例えば"network_devices.netflow.dd_url" の値)。
+# 送信するために接続するエンドポイントを宣言します (例えば、"network_devices.netflow.dd_url" の値)。
 frontend network_devices_netflow_frontend
 bind *:3845
 mode http
 option tcplog
 default_backend datadog-network-devices-netflow
+
+# これは、Agent がリモート構成を受信するために接続する
+# エンドポイントを宣言します (例えば、"remote_configuration.rc_dd_url" の値)
+frontend remote_configuration_frontend
+bind *:3846
+mode http
+option tcplog
+default_backend datadog-remote-configuration
 
 # これは Datadog のサーバーです。事実上、上記で定義した
 # フォワーダーフロントエンドに来る全ての TCP リクエストは、
@@ -504,6 +512,14 @@ backend datadog-network-devices-netflow
     server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
+backend datadog-remote-configuration
+    balance roundrobin
+    mode http
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 
@@ -636,7 +652,7 @@ option tcplog
 default_backend datadog-network-devices-snmp-traps
 
 # これは、Agent がインスツルメンテーションのテレメトリーデータを
-# 送信するために接続するエンドポイントを宣言します (例: "apm_config.telemetry.dd_url" の値)
+# 送信するために接続するエンドポイントを宣言します (例えば、"apm_config.telemetry.dd_url" の値)
 frontend instrumentation_telemetry_data_frontend
 bind *:3843 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
 mode tcp
@@ -650,6 +666,14 @@ frontend network_devices_netflow_frontend
     mode http
     option tcplog
     default_backend datadog-network-devices-netflow
+
+# これは、Agent がリモート構成を受信するために接続する
+# エンドポイントを宣言します (例えば、"remote_configuration.rc_dd_url" の値)
+frontend remote_configuration_frontend
+bind *:3846 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
+mode http
+option tcplog
+default_backend datadog-remote-configuration
 
 # これは Datadog のサーバーです。事実上、上記で定義した
 # フォワーダーフロントエンドに来る全ての TCP リクエストは、
@@ -755,6 +779,14 @@ backend datadog-network-devices-netflow
     server-template mothership 5 ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
     # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
     # server mothership ndmflow-intake.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
+
+backend datadog-remote-configuration
+    balance roundrobin
+    mode http
+    # 以下の構成は、HAProxy 1.8 以降の場合です
+    server-template mothership 5 config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES> check resolvers my-dns init-addr none resolve-prefer ipv4
+    # 古いバージョンの HAProxy では、以下の構成のコメント解除を行います
+    # server mothership config.{{< region-param key="dd_site" >}}:443 check port 443 ssl verify required ca-file <PATH_TO_CERTIFICATES>
 ```
 
 
@@ -820,6 +852,11 @@ network_devices:
            logs_dd_url: haproxy.example.com:3845
            # Agent と HAProxy の間で暗号化を使用する場合は、以下の行をコメント化します
            logs_no_ssl: true
+
+remote_configuration:
+    rc_dd_url: haproxy.example.com:3846
+    # Agent と HAProxy の間で暗号化を使用する場合は、以下の行をコメント化します
+    no_tls: true
 ```
 
 Agent と HAProxy 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent 構成ファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
@@ -998,6 +1035,12 @@ stream {
         proxy_ssl on;
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
+    server {
+        listen 3846; #リモート構成リクエストのリッスン
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass config.{{< region-param key="dd_site" >}}:443;
+    }
 }
 ```
 
@@ -1109,6 +1152,12 @@ stream {
         proxy_ssl on;
         proxy_pass ndmflow-intake.{{< region-param key="dd_site" >}}:443;
     }
+    server {
+        listen 3846 ssl; #リモート構成リクエストのリッスン
+        proxy_ssl_verify on;
+        proxy_ssl on;
+        proxy_pass config.{{< region-param key="dd_site" >}}:443;
+    }
 }
 ```
 
@@ -1170,7 +1219,13 @@ network_devices:
            logs_dd_url: nginx.example.com:3845
            # Agent と NGINX の間で暗号化を使用する場合は、以下の行をコメント化します
            logs_no_ssl: true
+
+remote_configuration:
+    rc_dd_url: nginx.example.com:3846
+    # Agent と NGINX の間で暗号化を使用する場合は、以下の行をコメント化します
+    no_tls: true
 ```
+
 
 Agent と NGINX 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent 構成ファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
 このオプションを `true` に設定すると、Agent は証明書の検証ステップをスキップし、プロキシの身元を検証しませんが、通信は SSL/TLS で暗号化されます。
@@ -1222,7 +1277,7 @@ TCP 経由でログを送信する場合は、[ログの TCP プロキシ][7]を
 {{% /tab %}}
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

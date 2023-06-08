@@ -17,7 +17,7 @@ There are some key differences between the Lambda extension and the Forwarder. T
 
 ### Differences in functionality
 
-{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications"  style="width:100%;">}}
+{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrument AWS Serverless Applications" style="width:100%;">}}
 
 Although the Lambda Extension replaces the Forwarder as the recommended way to collect telemetry from Lambda functions, the Forwarder is required to collect and add metadata to other AWS service logs — including those from API Gateway, AppSync, and Lambda@Edge.
 

@@ -128,7 +128,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
-6.  Add a message, for example:
+6. Add a message, for example:
     ```
     The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
     ```
@@ -203,13 +203,13 @@ If you want to see user activities, such as who changed the retention of an inde
 [14]: https://app.datadoghq.com/logs
 [15]: /logs/explorer/search/
 [16]: /logs/indexes/#set-daily-quota
-[17]: /events/explorer/#facets
+[17]: /service_management/events/explorer/#facets
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /logs/log_configuration/indexes/#exclusion-filters
 [21]: /logs/explorer/analytics/patterns
 [22]: /logs/log_configuration/logs_to_metrics/
-[23]: /account_management/org_settings/sensitive_data_detection/
+[23]: /sensitive_data_scanner/
 [24]: https://www.datadoghq.com/pricing/?product=sensitive-data-scanner#sensitive-data-scanner
 [25]: /account_management/audit_trail/events/
 [26]: /account_management/audit_trail/

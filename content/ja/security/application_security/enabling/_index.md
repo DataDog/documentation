@@ -6,7 +6,7 @@ further_reading:
 - link: /security/application_security/
   tag: Documentation
   text: Datadog Application Security Management で脅威から守る
-- link: /security/application_security/setup_and_configure/#compatibility
+- link: /security/application_security/enabling/compatibility/
   tag: Documentation
   text: プログラミング言語とフレームワークの互換性
 - link: /security/application_security/add-user-info/

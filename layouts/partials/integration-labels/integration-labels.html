@@ -29,6 +29,16 @@
                             {{ partial "img.html" (dict "root" $dot "src" "os-windows-bw.png" "class" "static" "alt" "Windows" "width" "24") }}
                         </span>
                     {{ end }}
+                    {{ if eq . "android" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/android-logo.png" "class" "static" "alt" "Android" "width" "24") }}
+                        </span>
+                    {{ end }}
+                    {{ if eq . "ios" }}
+                        <span>
+                            {{ partial "img.html" (dict "root" $dot "src" "integrations_logos/ios_stacked.png" "class" "static" "alt" "iOS" "width" "24") }}
+                        </span>
+                    {{ end }}
                     {{ if eq . "solaris" }}
                         <span>
                             {{ partial "img.html" (dict "root" $dot "src" "os-solaris.png" "class" "static" "alt" "Solaris" "width" "64") }}
@@ -62,7 +72,7 @@
 {{ with .Params.integration_version }}
 <div class="row integration-labels">
     <div class="integration-version col-12">
-        <span>{{ i18n "integration_version" }}</span><span>v{{ . }}</span>
+        <span>{{ i18n "integration_version" }}</span><span>{{ . }}</span>
     </div>
 
 </div>

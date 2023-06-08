@@ -4,7 +4,7 @@ import json
 import os
 import re
 from itertools import chain
-
+from datetime import date
 import yaml
 import logging
 from pathlib import Path
@@ -100,10 +100,20 @@ def security_rules(content, content_dir):
             if not message_file_name.exists():
                 continue
 
-        # delete file or skip if staged
-        # any() will return True when at least one of the elements is Truthy
-        if len(data.get('restrictedToOrgs', [])) > 0 or data.get('isShadowDeployed', False) \
-            or data.get('isDeleted', False) or data.get('isDeprecated', False):
+        is_beta = bool(data.get("isBeta", False))
+
+        # Logic for when to remove a rule.
+        # 1. if rule is restricted to orgs as It's likely not public. The exception being if it's a rule in beta
+        is_restricted_and_not_beta = (len(data.get('restrictedToOrgs', [])) > 0 and not is_beta)
+        # 2. if we past the deprecation date we should remove
+        # we don’t set isDeleted to true for 15months either due to the retention period on signals when we deprecate a rule.
+        # If we did, the customer’s signals would disappear sooner than the retention time period.
+        deprecation_date = data.get('deprecationDate', None)
+        is_past_deprecation_date = date(*[int(x) for x in deprecation_date.split('-')]) < date.today() if deprecation_date else False
+        # 3. general flags we should respect for removal. At least one true to cause removal
+        is_removed = (data.get('isShadowDeployed', False) or data.get('isDeleted', False) or data.get('isDeprecated', False))
+
+        if is_restricted_and_not_beta or is_removed or is_past_deprecation_date:
             if p.exists():
                 logger.info(f"removing file {p.name}")
                 global_aliases.append(f"/security/default_rules/{p.stem}")
@@ -129,7 +139,8 @@ def security_rules(content, content_dir):
                     f"/security_monitoring/default_rules/{p.stem}"
                 ],
                 "rule_category": [],
-                "integration_id": ""
+                "integration_id": "",
+                "is_beta": is_beta
             }
 
             # we need to get the path relative to the repo root for comparisons

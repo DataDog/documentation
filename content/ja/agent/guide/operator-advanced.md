@@ -1,13 +1,11 @@
 ---
-title: Datadog Operator の高度なセットアップ
-kind: faq
 further_reading:
-  - link: agent/kubernetes/log
-    tag: Documentation
-    text: Datadog と Kubernetes
+- link: agent/kubernetes/log
+  tag: Documentation
+  text: Datadog と Kubernetes
+kind: faq
+title: Datadog Operator の高度なセットアップ
 ---
-
-<div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
 
 [Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
 
@@ -15,7 +13,7 @@ further_reading:
 
 Datadog Operator を使用するには、次の前提条件が必要です。
 
-- **Kubernetes Cluster バージョン >= v1.14.X**: テストはバージョン >= `1.14.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
+- **Kubernetes Cluster バージョン >= v1.20.X**: テストはバージョン >= `1.20.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
 - `datadog-operator` をデプロイするための [`Helm`][2]。
 - `datadog-agent` をインストールするための [`Kubectl` CLI][3]。
 
@@ -57,6 +55,7 @@ datadogagent.datadoghq.com/datadog created
 
 ```shell
 kubectl get -n $DD_NAMESPACE dd datadog
+
 NAME            ACTIVE   AGENT             CLUSTER-AGENT   CLUSTER-CHECKS-RUNNER   AGE
 datadog-agent   True     Running (2/2/2)                                           110m
 ```

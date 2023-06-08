@@ -46,7 +46,7 @@ Use the source and destination search bars at the top of the page to query for d
 
 To refine your search to a particular client, aggregate and filter DNS traffic using tags in the source search bar. In the default view, the source is aggregated by the `service` tag. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
 
-{{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring default view"  style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_default.png" alt="DNS Monitoring default view" style="width:100%;">}}
 
 To refine your search to a particular DNS server, filter the destination search bar using tags. To configure your destination display, select one of the following options from the **Group by** dropdown menu:
 
@@ -58,7 +58,7 @@ To refine your search to a particular DNS server, filter the destination search 
 
 This example shows all flows from pods in the production environment's availability zone to hosts receiving DNS requests:
 
-{{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="Query of pods making requests to multiple DNS servers"  style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="Query of pods making requests to multiple DNS servers" style="width:100%;">}}
 
 ## Metrics
 
@@ -96,7 +96,7 @@ The sidepanel provides contextual telemetry to help you quickly debug DNS server
 * Application errors in the code on the client side
 * A high number of requests originating from a particular port or IP
 
-{{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS Monitoring sidepanel"  style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
 
 ## Further Reading
 

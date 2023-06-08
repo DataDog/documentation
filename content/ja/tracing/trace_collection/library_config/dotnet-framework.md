@@ -8,11 +8,14 @@ further_reading:
 - link: /tracing/metrics/runtime_metrics/dotnet/
   tag: ドキュメント
   text: ランタイムメトリクス
+- link: /tracing/trace_collection/trace_context_propagation/dotnet/
+  tag: ドキュメント
+  text: トレースコンテキストの伝搬
 - link: /serverless/azure_app_services/
   tag: ドキュメント
   text: Microsoft Azure App Service 拡張機能
 - link: /tracing/glossary/
-  tag: ドキュメント
+  tag: Documentation
   text: サービス、リソース、トレースの詳細
 - link: https://www.datadoghq.com/blog/net-monitoring-apm/
   tag: GitHub
@@ -21,7 +24,7 @@ further_reading:
   tag: GitHub
   text: コンテナ化された ASP.NET コアアプリケーションを監視する
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-aws-fargate/
-  tag: GitHub
+  tag: ブログ
   text: AWS Fargate でコンテナ化された ASP.NET コアアプリケーションを監視する
 - link: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples
   tag: GitHub
@@ -36,9 +39,7 @@ type: multi-code-lang
 
 コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成した後、オプションで[統合サービスタグ付け][4]のセットアップなど、必要に応じてトレーシングライブラリを構成してください。
 
-
-{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET トレーサーコンフィギュレーション設定の優先度"  >}}
-
+{{< img src="tracing/dotnet/dotnet_framework_configuration.png" alt=".NET Framework トレーサーの構成設定の優先度" style="width:100%" >}}
 
 .NET Tracer のコンフィギュレーション設定は、以下のいずれかの方法で行うことができます。
 
@@ -50,7 +51,7 @@ type: multi-code-lang
 
 [1]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/#configuring-process-environment-variables
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "コード" %}}
 
@@ -77,7 +78,7 @@ settings.Exporter.AgentUri = new Uri("http://localhost:8126/");
 Tracer.Configure(settings);
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "web.config" %}}
 
@@ -94,7 +95,7 @@ Tracer.Configure(settings);
 </configuration>
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "JSON ファイル" %}}
 
@@ -109,7 +110,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 }
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -139,15 +140,15 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 
 `DD_TRACE_AGENT_URL`
 : **TracerSettings プロパティ**: `Exporter.AgentUri`<br>
-<br>トレースが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。
-**デフォルト**: 設定されている場合は `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` または `http://localhost:8126`。
+トレースが送信される URL のエンドポイントを設定します。設定されている場合は `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。[Agent 構成][13]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` はそれにマッチしなければなりません。<br>
+**デフォルト**: 設定されている場合は `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`、または `http://localhost:8126`。
 
 `DD_AGENT_HOST`
 : Agent が接続をリッスンするホストを設定します。ホスト名または IP アドレスを指定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
 **デフォルト**: `localhost`
 
 `DD_TRACE_AGENT_PORT`
-: Agent が接続をリッスンする TCP ポートを設定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。 <br>
+: Agent が接続を待機している TCP ポートを設定します。このパラメーターより優先される `DD_TRACE_AGENT_URL` を使用します。[Agent 構成][13]で `receiver_port` または `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` または `DD_TRACE_AGENT_URL` はそれにマッチしなければなりません。<br>
 **デフォルト**: `8126`
 
 `DD_TRACE_SAMPLE_RATE`
@@ -168,14 +169,12 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings プロパティ**: `MaxTracesSubmittedPerSecond` <br>
 1 秒間に送信できるトレースの数 (`DD_MAX_TRACES_PER_SECOND` は非推奨)。 <br>
-**デフォルト**: `DD_TRACE_SAMPLE_RATE` が設定されている場合、`100`。それ以外の場合は、Datadog Agent にレート制限を委ねます。 <br>
+**デフォルト**: `DD_TRACE_SAMPLE_RATE` が設定されている場合、`100`。それ以外の場合は、Datadog Agent にレート制限を委ねます。
 
 `DD_SPAN_SAMPLING_RULES`
-**デフォルト**: `null`<br>
-オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は 0.0 から 1.0 の間でなければなりません (この値を含む)。<br>
-詳細は、[取り込みメカニズム][3]を参照してください。
-**例:**<br>
-  - サービス名 `my-service` と演算子名 `http.request` のスパンサンプリングレートを 50% に設定し、1 秒間に最大 50 トレースします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+: **デフォルト**: `null`<br>
+<br>オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は、0.0 から 1.0 までの間でなければなりません (この値を含む)。詳しくは、[取り込みメカニズム][1]を参照してください。
+**例**: サービス名 `my-service` と操作名 `http.request` のスパンのサンプルレートを 50% に設定し、最大で 1 秒間に 50 個のトレースにします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
 `DD_TRACE_GLOBAL_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
@@ -196,10 +195,15 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 バージョン `2.19.0` で追加されました。<br>
 **デフォルト**: `false`<br>
 
+`DD_TRACE_CLIENT_IP_HEADER`
+: クライアント IP の収集に使用する IP ヘッダー、例: `x-forwarded-for` <br>
+バージョン `2.19.0` で追加されました。<br>
+**デフォルト**: Datadog は以下をパースします: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"` 複数存在する場合は、何も報告されません。<br>
+
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
-**例**: `layer:api,team:intake` <br>
+**例**: `layer:api,team:intake,key:value` <br>
 バージョン 1.17.0 で追加されました。<br>
 
 `DD_TRACE_LOG_DIRECTORY`
@@ -214,6 +218,16 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 **例**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 `from-key` はインテグレーションタイプに固有で、アプリケーション名のプレフィックスを除外する必要があります。たとえば、`my-application-sql-server` の名前を `main-db` に変更するには、`sql-server:main-db` を使用します。バージョン 1.23.0 で追加されました。
 
+`DD_HTTP_SERVER_TAG_QUERY_STRING`
+: `true` に設定すると、`http.url` にクエリ文字列パラメーターが含まれます。詳しくは、[url 内のクエリを再編集する][14]に記載されています。
+**デフォルト**: `true`
+
+`DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
+: `DD_HTTP_SERVER_TAG_QUERY_STRING` が true のとき、難読化する前に報告するクエリ文字列の最大サイズを設定します。サイズに制限を設けない場合は 0 を設定します。<br>
+**デフォルト**: `5000`
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: `DD_HTTP_SERVER_TAG_QUERY_STRING` が true の場合、この正規表現は `http.url` タグで報告されるリクエストのクエリ文字列から機密データを削除します (マッチすると `<redacted>` に置き換えられます)。この正規表現は、受信するリクエストごとに実行されます。
 #### 自動インスツルメンテーションオプションコンフィギュレーション
 
 以下の構成変数は、自動インスツルメンテーションの使用時に**のみ**利用できます。
@@ -222,6 +236,10 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : **TracerSettings プロパティ**: `TraceEnabled`<br>
 <br>すべての自動インスツルメンテーションを有効または無効にします。環境変数を `false` に設定すると、CLR プロファイラーが完全に無効になります。他の構成メソッドの場合は、CLR プロファイラーはロードされ続けますが、トレースは生成されません。有効な値は `true` または `false`。
 **デフォルト**: `true`
+
+`DD_DBM_PROPAGATION_MODE`
+: `'service'` または `'full'` に設定すると、APM から送信されるデータとデータベースモニタリング製品との連携が可能になります。`'service'` オプションは、DBM と APM のサービス間の接続を有効にします。`'full'` オプションは、データベースクエリイベントを持つデータベーススパン間の接続を有効にします。Postgres と MySQL で利用可能です。<br>
+**デフォルト**: `'disabled'`
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : HTTP クライアントスパンがエラーとしてマークされる原因となるステータスコード範囲を設定します。 <br>
@@ -257,7 +275,7 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : Kafka コンシューマースパンの動作を変更します<br>
 **デフォルト**: `true`<br>
 `true` に設定すると、メッセージが消費されたときにコンシューマースパンが作成され、次のメッセージを消費する前に閉じられます。このスパンの長さは、あるメッセージの消費と次のメッセージの消費との間の計算を代表するものです。この設定は、メッセージの消費がループで実行される場合に使用します。<br>
-`false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。
+`false` に設定すると、メッセージが消費されたときにコンシューマスパンが作成され、すぐに閉じられます。この設定は、メッセージが完全に処理されないまま次のメッセージを消費する場合や、複数のメッセージを一度に消費する場合に使用します。このパラメーターを `false` に設定すると、コンシューマースパンはすぐに閉じられます。トレースする子スパンがある場合は、コンテキストを手動で抽出する必要があります。詳しくは、[ヘッダーの抽出と挿入][12]をお読みください。
 
 #### 自動インスツルメンテーションインテグレーションコンフィギュレーション
 
@@ -289,28 +307,6 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 : `true` に設定すると、Web スパンに対する改善されたリソース名を有効化します。利用可能なルートテンプレート情報を使用して ASP.NET のコアインテグレーションにスパンを追加し、追加のタグを有効化します。バージョン 1.26.0 で追加されました。2.0.0 ではデフォルトで有効になっています。<br>
 **デフォルト**: `true`
 
-### ヘッダーの抽出と挿入
-
-Datadog APM トレーサーは、分散型トレーシングのための [B3][9] と [W3C (TraceParent)][10] のヘッダー抽出と挿入をサポートしています。
-
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
-
-.NET トレーサーは、以下のスタイルをサポートしています。
-
-- Datadog: `Datadog`
-- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
-- W3C (TraceParent): `tracecontext` (`W3C` は非推奨)
-- B3 シングルヘッダー: `B3 single header` (`B3SingleHeader` は非推奨)
-
-以下の環境変数を使用して、挿入および抽出のスタイルを構成することができます。
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
-
-環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りのリストです。デフォルトでは、`Datadog` 挿入スタイルのみが有効になっています。
-
-複数の抽出スタイルが有効な場合、抽出の試みは構成されたスタイルの順に完了し、最初に成功した抽出値を使用します。
-
 
 ## その他の参考資料
 
@@ -324,3 +320,6 @@ Datadog APM トレーサーは、分散型トレーシングのための [B3][9]
 [8]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
+[12]: /ja/tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
+[13]: /ja/agent/guide/network/#configure-ports
+[14]: /ja/tracing/configure_data_security/#redacting-the-query-in-the-url

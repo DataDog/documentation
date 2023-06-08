@@ -35,7 +35,7 @@ Example: if you tag your hosts by the environment they are in, you can filter by
 
 A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts are further subdivided into groups, first by availability zone and then by instance type, as seen below.
 
-{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups"  >}}
+{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups" >}}
 
 ### Tags
 

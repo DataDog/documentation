@@ -28,7 +28,7 @@ title: ネットワークデバイスモニタリング
 
 ## 概要
 
-{{< vimeo 673243317 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
 
 <br/>
 
@@ -84,9 +84,9 @@ title: ネットワークデバイスモニタリング
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/network_monitoring/devices/setup/#monitoring-individual-devices
-[2]: /ja/network_monitoring/devices/setup/#autodiscovery
+[1]: /ja/network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
+[2]: /ja/network_monitoring/devices/snmp_metrics/#autodiscovery
 [3]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[5]: /ja/monitors/create/types/metric/
+[5]: /ja/monitors/types/metric/
 [6]: /ja/network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported

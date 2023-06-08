@@ -1,5 +1,5 @@
 ---
-title: Ruby Compatibility Requirements 
+title: Ruby Compatibility Requirements
 kind: documentation
 code_lang: ruby
 type: multi-code-lang
@@ -36,10 +36,10 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | ASM capability                   | Minimum Ruby tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> Business logic API  | 1.9.0<br/>   |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | not supported<br/><br/><br/>     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
+| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   | 1.11.0<br/><br/><br/>     |
+| Vulnerability Management <br/> --> Open source vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
 
-The minimum tracer version to get all supported ASM capabilities for Ruby is 1.9.0.
+The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 

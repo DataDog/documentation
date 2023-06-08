@@ -11,6 +11,8 @@ assets:
       check: pulsar.active_connections
       metadata_path: metadata.csv
       prefix: pulsar.
+    process_signatures:
+    - java org.apache.pulsar.PulsarStandaloneStarter
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: pulsar
@@ -31,7 +33,7 @@ draft: false
 git_integration_title: pulsar
 integration_id: pulsar
 integration_title: Pulsar
-integration_version: 1.2.0
+integration_version: 1.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

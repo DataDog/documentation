@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: "https://github.com/DataDog/dd-sdk-reactnative"
     tag: "Github"
-    text: "dd-sdk-reactnative Source code"
+    text: "Source code for dd-sdk-reactnative"
   - link: "/real_user_monitoring"
     tag: "Documentation"
     text: "Datadog Real User Monitoring"
@@ -72,7 +72,7 @@ Reviewing native logs can give you more input on what could be going wrong.
 - Build your project for a simulator or a device.
 - Native logs start appearing on the bottom right corner:
 
-  {{< img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="Reviewing native logs can help you figure out why no data is being sent"  >}}
+  {{< img src="real_user_monitoring/react_native/troubleshooting-xcode-logs.png" alt="Reviewing native logs can help you figure out why no data is being sent" >}}
 
 You can filter logs by "DATADOG" and look for any error.
 

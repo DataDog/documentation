@@ -42,12 +42,11 @@ _それ以前のバージョン (1.632+) の Jenkins をご使用の場合は、
 
 プラグインから Datadog へのデータ送信については、以下の 2 つの方法で構成することができます。
 
-* **推奨**: Jenkins と Datadog 間で Forwarder として機能する Datadog Agent の使用を推奨します。
+* Jenkins と Datadog 間で Forwarder として機能する Datadog Agent の使用 (推奨)。
   - 完全な Datadog Agent の代わりに DogStatsD サーバーを使用する場合、メトリクスとイベントのみがサポートされます。
   - 外部ホストから送信されたデータの場合、Datadog Agent は `dogstatsd_non_local_traffic: true` と `apm_non_local_traffic: true` のコンフィギュレーションを必要とします。これは、`datadog.yaml` [コンフィギュレーションファイル][17]を使用して構成できます。
 * HTTP 経由で Datadog に直接データを送信します。
   - 現在実装されている HTTP クライアントはタイムアウト間隔 1 分でブロッキングを行います。Datadog との接続で問題が発生すると、Jenkins インスタンスにも遅延が起こる可能性があります。
-  - この方法は現在、"CI Visibility" 製品で使用されるトレース収集をサポートしていません。
 
 コンフィギュレーションは[プラグインのユーザーインターフェース](#plugin-user-interface)で [Groovy スクリプト](#groovy-script)または[環境変数](#environment-variables)を使用して実施可能です。
 
@@ -62,7 +61,8 @@ Datadog のプラグインを構成するには、お使いの Jenkins の `Mana
 3. Jenkins コンフィギュレーション画面の `Test Key` ボタンをクリックして、入力した Datadog の API キーをテストします。ボタンは API Key テキストボックスのすぐ下にあります。
 4. (オプション) Advanced タブで Jenkins サーバーのホスト名を入力すると、そのサーバーをイベントに含めることができます。
 5. (オプション) [Datadog ログインテーク URL][15] を入力し、Advanced タブで "Enable Log Collection" を選択します。
-6. 構成を保存します。
+6. (オプション) "Enable CI Visibility" を選択し、オプションで CI インスタンス名を構成します。
+7. 構成を保存します。
 
 ##### Datadog Agent 転送
 
@@ -71,7 +71,7 @@ Datadog のプラグインを構成するには、お使いの Jenkins の `Mana
 3. (オプション) Advanced タブで Jenkins サーバーのホスト名を入力すると、そのサーバーをイベントに含めることができます。
 4. (オプション) ログ収集ポートを入力し、Datadog Agent で[ログ収集](#log-collection-for-agents)を構成し、"Enable Log Collection" を選択します。
 5. (オプション) トレース収集ポートを入力し、"Enable CI Visibility" を選択し、オプションで CI インスタンス名を構成します。
-5. 構成を保存します。
+6. 構成を保存します。
 
 #### Groovy スクリプト
 
@@ -139,7 +139,13 @@ d.save()
 1. `DATADOG_JENKINS_PLUGIN_REPORT_WITH` 変数を `HTTP` に設定します。
 2. Datadog の API エンドポイントを指定する `DATADOG_JENKINS_PLUGIN_TARGET_API_URL` 変数を設定します (デフォルト値は `https://api.datadoghq.com/api/`) 。
 3. [Datadog の API キー][4]を指定する `DATADOG_JENKINS_PLUGIN_TARGET_API_KEY` 変数を設定します。
-4. (オプション) Datadog のログインテーク URL を指定する `DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL` 変数を設定します (デフォルト値は `https://http-intake.logs.datadoghq.com/v1/input/`) 。
+4. (オプション) ログ収集:
+  - ログ収集を有効にするには、`DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` 変数を `true` に設定します (デフォルトでは無効になっています)。
+  - Datadog のログインテーク URL を指定する `DATADOG_JENKINS_PLUGIN_TARGET_LOG_INTAKE_URL` 変数を設定します (デフォルト値は `https://http-intake.logs.datadoghq.com/v1/input/`) 。
+5. (オプション) CI Visibility (トレース収集):
+  - CI Visibility を有効にするには、`DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` 変数を `true` に設定します (デフォルトでは無効になっています)。
+  - Datadog の Webhook インテーク URL を指定する `DATADOG_JENKINS_TARGET_WEBHOOK_INTAKE_URL` 変数を設定します (デフォルト値は `https://webhook-intake.datadoghq.com/api/v2/webhook/`) 。
+  - CI Visibility の Jenkins インスタンスの名前を指定する `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME` 変数を設定します (デフォルトは `jenkins`)。
 
 ##### 環境変数を使用した Datadog Agent 転送
 
@@ -148,11 +154,11 @@ d.save()
 3. DogStatsD のサーバーポートを指定する `DATADOG_JENKINS_PLUGIN_TARGET_PORT` 変数を設定します (デフォルト値は `8125`)。
 4. (オプション) ログ収集:
    -  Datadog Agent で[ログ収集](#log-collection-for-agents)を有効にします。
-   - Datadog Agent のログ収集用ポートを指定する `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT` を設定します。
    - ログ収集を有効にするには、`DATADOG_JENKINS_PLUGIN_COLLECT_BUILD_LOGS` 変数を `true` に設定します (デフォルトでは無効になっています)。
+   - Datadog Agent のログ収集用ポートを指定する `DATADOG_JENKINS_PLUGIN_TARGET_LOG_COLLECTION_PORT` を設定します。
 5. (オプション) CI Visibility (トレース収集): 
-   - Datadog Agent トレース収集ポート (デフォルトは `8126`) を指定する `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT` 変数を設定します。
    - CI Visibility を有効にするには、`DATADOG_JENKINS_PLUGIN_ENABLE_CI_VISIBILITY` 変数を `true` に設定します (デフォルトでは無効になっています)。
+   - Datadog Agent トレース収集ポート (デフォルトは `8126`) を指定する `DATADOG_JENKINS_PLUGIN_TARGET_TRACE_COLLECTION_PORT` 変数を設定します。
    - CI Visibility の Jenkins インスタンスの名前を指定する `DATADOG_JENKINS_PLUGIN_CI_VISIBILITY_CI_INSTANCE_NAME` 変数を設定します (デフォルトは `jenkins`)。
 
 さらに、標準の Datadog 環境変数を使用できます。
@@ -171,8 +177,14 @@ d.save()
 
 ### パイプラインのカスタマイズ
 
-Datadog プラグインにより "datadog" のステップが追加され、パイプラインベースのジョブに対するコンフィギュレーションオプションが提供されます。
-宣言型パイプラインでは、トップレベルのオプションブロックにステップを追加します。
+Datadog プラグインは、パイプラインベースのジョブの構成オプションを提供する `datadog` ステップを追加します。
+
+| オプション (タイプ)              | 説明                                                                 |
+|----------------------------|-----------------------------------------------------------------------------|
+| `collectLogs` (`boolean`)  | ログ収集がグローバルで無効になっている場合、パイプラインで有効にします。 |
+| `tags` (`String[]`)        | パイプラインについて収集されたすべてのデータにアタッチするタグのリスト。      |
+
+宣言的パイプラインでは、トップレベルの `options` ブロックに、次のようにステップを追加します。
 
 ```groovy
 pipeline {
@@ -193,7 +205,7 @@ pipeline {
 スクリプト化されたパイプラインでは、関連セクションを Datadog ステップでラップします。
 
 ```groovy
-datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]){
+datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
   node {
     stage('Example') {
       echo "Hello world."

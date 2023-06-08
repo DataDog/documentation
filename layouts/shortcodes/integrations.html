@@ -69,7 +69,7 @@
     <div id="integration-popper" class="dropdown-menu" style="display:none;" data-ref="mobilecontrols">
         <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">{{ i18n "all" }}</a>
         {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
-            <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+            <a id="cat-{{ replace $e "/" "" | urlize }}" data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
         {{ end }}
     </div>
 </div>

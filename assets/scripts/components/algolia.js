@@ -18,12 +18,13 @@ function getPageLanguage() {
     return 'en';
 }
 
-function sendSearchRumAction(searchQuery) {
-    if (window.DD_RUM && searchQuery !== '') {
+function sendSearchRumAction(searchQuery, clickthroughLink = '') {
+    if (window.DD_RUM && window._DATADOG_SYNTHETICS_BROWSER === undefined && searchQuery !== '') {
         window.DD_RUM.addAction('userSearch', {
-            query: searchQuery,
+            query: searchQuery.toLowerCase(),
             page: window.location.pathname,
-            lang: getPageLanguage()
+            lang: getPageLanguage(),
+            clickthroughLink
         })
     }
 }
@@ -182,7 +183,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                     if (target === searchBoxContainerContainer) return;
 
                     if (target && target.href && hitsContainer.contains(e.target)) {
-                        sendSearchRumAction(search.helper.state.query)
+                        sendSearchRumAction(search.helper.state.query, target.href)
                         window.history.pushState({}, '', target.href)
                         window.location.reload()
                     }
@@ -204,7 +205,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
                 do {
                     if (target.href) {
-                        sendSearchRumAction(search.helper.state.query)
+                        sendSearchRumAction(search.helper.state.query, target.href)
                         window.history.pushState({}, '', target.href)
                         window.location.reload()
                     }

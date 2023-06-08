@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "500"
+    "other": "600"
   },
 
   "beta_sentence": {
@@ -48,15 +48,15 @@
   },
 
   "email_support_sentence": {
-    "other": "<a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">help.datadoghq.com</a> にアクセスして、サポート チームに連絡することができます。"
+    "other": "サポートチームへのお問い合わせは、<a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog のサポート Web サイト</a>で受け付けています。(すべてのサイト)。<br><br>サポート Web サイトへのログイン方法の詳細については、<a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">サポートチケットにアクセスする</a>を参照してください。"
   },
 
   "live_chat_support_sentence": {
-    "other": "また、月曜から金曜の 10:00 から 19:00 ET までは、アプリ内チャットまたは <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Datadog Slack</a> を使ってサポートチームにお問い合わせいただけます（アメリカ合衆国および EU）"
+    "other": "アプリ内チャットで Datadog サポートチームと月曜日から金曜日の 10:00 から 19:00 (東部標準時) にチャットできます。ベストプラクティスについては、<a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">チャットで連絡を取る</a>を参照してください。"
   },
 
   "event_stream_support_sentence": {
-    "other": "Datadog <a href=\"http://app.datadoghq.com/event/stream\" target=\"_blank\" rel=\"noopener\">イベントストリーム</a>のメッセージに <code>@support-datadog</code> を含めた場合は、サポートチームのチケットが作成されます。これは、グラフのスナップショットを参照する場合に便利です（アメリカ合衆国および EU）"
+    "other": "<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community プログラム</a>は、Datadog ユーザーが Datadog ユーザーのために構築したネットワークで、お互いに質問の答えを見つけたり、製品のヒントやトリックを共有したりすることができます。"
   },
 
   "agent_started_sentence": {
@@ -112,11 +112,11 @@
   },
 
   "get_started_free": {
-    "other": "無料で試す"
+    "other": "無償トライアルを開始"
   },
 
   "get_started_free_short": {
-    "other": "無料で試す"
+    "other": "無料トライアル"
   },
 
   "documentation_search": {
@@ -216,16 +216,16 @@
     "other": "Ops Twitter"
   },
 
-  "email": {
-    "other": "Email"
+  "platform": {
+    "other": "Datadog サポート<br>プラットフォーム"
   },
 
   "live_chat": {
-    "other": "ライブチャット"
+    "other": "サポートチームと<br>ライブチャット"
   },
 
   "event_stream_messaging": {
-    "other": "イベントストリームのメッセージ"
+    "other": "Slack で<br>連絡"
   },
 
   "questions": {
@@ -311,11 +311,13 @@
   "footer_blurb_desc": {
     "other": "知識豊富なエンジニアがサポートします。"
   },
+  "integration_version": {
+    "other": "インテグレーションバージョン"
+  },
   "beta_check":{
-    "other": "Beta"
+    "other": "ベータ"
   },
   "learn_more": {
     "other": "詳細はこちら"
   }
-
 }

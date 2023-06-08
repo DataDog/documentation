@@ -8,6 +8,9 @@ further_reading:
 - link: tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
+- link: /tracing/trace_collection/trace_context_propagation/java/
+  tag: Documentation
+  text: ヘッダーを使ったトレースコンテキストの伝搬
 kind: documentation
 title: Java トレーシングライブラリの構成
 type: multi-code-lang
@@ -56,7 +59,7 @@ Datadog トレース ID とスパン ID に対する自動 MDC キー挿入の�
 `dd.service.mapping`
 : **環境変数**: `DD_SERVICE_MAPPING`<br>
 **デフォルト**: `null`<br>
-**例**: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`<br>
+**例**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
 コンフィギュレーション経由でサービス名を動的に変更します。サービス間でデータベースの名前を区別する場合に便利です。
 
 `dd.writer.type`
@@ -228,6 +231,11 @@ JMX メトリクスの送信先の Statsd ホスト。Unix Domain Sockets を使
 **デフォルト**: `8125`<br>
 JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使用している場合、0 を入力します。
 
+`dd.trace.obfuscation.query.string.regexp`
+: **環境変数**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
+**デフォルト**: `null`<br>
+`http.url` タグで報告されるリクエストのクエリ文字列から機密データを削除するための正規表現 (マッチした場合は <redacted> に置き換え)。
+
 `dd.integration.opentracing.enabled`
 : **環境変数**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
 **デフォルト**: `true`<br>
@@ -258,6 +266,18 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 **デフォルト**: `true`<br>
 `true` の場合、トレーサーは[テレメトリーデータ][6]を収集します。バージョン 0.104+ で利用可能です。バージョン 0.115+ では `true` がデフォルトとなります。
 
+`dd.trace.128.bit.traceid.generation.enabled`
+: **環境変数**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
+**デフォルト**: `false` <br>
+128 ビットのトレース ID の生成を有効にします。デフォルトでは、64 ビットの ID のみが生成されます。
+
+`dd.trace.128.bit.traceid.logging.enabled`
+: **環境変数**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
+**デフォルト**: `false` <br>
+MDC を使ってログ内のスパンをでフォーマットするときに、完全な 128 ビット ID を出力できるようにします。
+false (デフォルト) の場合、トレース ID の下位 64 ビットのみが出力され、整数としてフォーマットされます。つまり、トレース ID が 64 ビットしかない場合、完全な ID が出力されます。
+true の場合、トレース ID は 16 進数形式で 128 ビットの完全な ID として出力されます。これは、ID 自体が 64 ビットしかない場合でも同じです。
+
 **注**:
 
 - 両方に同じキータイプが設定された場合、システムプロパティコンフィギュレーションが優先されます。
@@ -281,7 +301,7 @@ JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/service_mapping.png" alt="サービスマッピング"  >}}
+{{< img src="tracing/setup/java/service_mapping.png" alt="サービスマッピング" >}}
 
 #### `dd.tags`
 
@@ -291,7 +311,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.map
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_global_tags.png" alt="グローバルタグのトレース"  >}}
+{{< img src="tracing/setup/java/trace_global_tags.png" alt="グローバルタグのトレース" >}}
 
 #### `dd.trace.span.tags`
 
@@ -301,7 +321,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -ja
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_span_tags.png" alt="スパンタグのトレース"  >}}
+{{< img src="tracing/setup/java/trace_span_tags.png" alt="スパンタグのトレース" >}}
 
 #### `dd.trace.jmx.tags`
 
@@ -311,7 +331,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="JMX タグのトレース"  >}}
+{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="JMX タグのトレース" >}}
 
 #### `dd.trace.methods`
 
@@ -321,7 +341,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_methods.png" alt="メソッドのトレース"  >}}
+{{< img src="tracing/setup/java/trace_methods.png" alt="メソッドのトレース" >}}
 
 #### `dd.trace.db.client.split-by-instance`
 
@@ -333,11 +353,11 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Dd
 
 これで、DB インスタンス 1 である `webappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
 
-{{< img src="tracing/setup/java/split_by_instance_1.png" alt="インスタンス 1"  >}}
+{{< img src="tracing/setup/java/split_by_instance_1.png" alt="インスタンス 1" >}}
 
 これで、DB インスタンス 2 である `secondwebappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます:
 
-{{< img src="tracing/setup/java/split_by_instance_2.png" alt="インスタンス 2"  >}}
+{{< img src="tracing/setup/java/split_by_instance_2.png" alt="インスタンス 2" >}}
 
 同様に、サービスマップで、1 つの Web アプリが 2 つの異なる Postgres データベースに呼び出しを行っていることがわかります。
 
@@ -349,7 +369,7 @@ java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Dd
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/query_string.png" alt="クエリ文字列"  >}}
+{{< img src="tracing/setup/java/query_string.png" alt="クエリ文字列" >}}
 
 #### `dd.trace.enabled`
 
@@ -387,22 +407,12 @@ instances:
 
 次の結果が生成されます。
 
-{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX のフェッチ例"  >}}
+{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX のフェッチ例" >}}
 
 JMX フェッチを使った Java メトリクス収集についての詳細は [Java インテグレーションドキュメント][12]を参照してください。
-
 ### ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][13] と [W3C (TraceParent)][14] のヘッダー抽出と挿入をサポートしています。
-
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
-
-Java トレーサーは、以下のスタイルをサポートしています。
-
-- Datadog: `datadog`
-- B3 マルチヘッダー: `b3multi` (`b3` エイリアスは非推奨)
-- W3C トレースコンテキスト: `tracecontext` (1.11.0 以降で利用可能)
-- B3 シングルヘッダー: `b3 single header`
+有効な値と以下のコンフィギュレーションオプションの使用に関する情報については、[Java トレースコンテキストの伝播][13]を参照してください。
 
 `dd.trace.propagation.style.inject`
 : **環境変数**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
@@ -424,9 +434,7 @@ Java トレーサーは、以下のスタイルをサポートしています。
 
 #### 非推奨の抽出と挿入の設定
 
-これらの抽出および挿入の設定は、バージョン 1.9.0 以降、非推奨となっています。
-
-- B3: `b3` (B3 マルチヘッダー、B3 シングルヘッダーとも)
+これらの `b3` (B3 マルチヘッダーおよび B3 シングルヘッダーの両方) 用の抽出および挿入の設定は、バージョン 1.9.0. 以降、非推奨となっています。
 
 `dd.propagation.style.inject`
 : **環境変数**: `DD_PROPAGATION_STYLE_INJECT`<br>
@@ -456,5 +464,4 @@ Java トレーサーは、以下のスタイルをサポートしています。
 [10]: /ja/agent/amazon_ecs/#create-an-ecs-task
 [11]: /ja/tracing/compatibility_requirements/java#disabling-integrations
 [12]: /ja/integrations/java/?tab=host#metric-collection
-[13]: https://github.com/openzipkin/b3-propagation
-[14]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[13]: /ja/tracing/trace_collection/trace_context_propagation/java/

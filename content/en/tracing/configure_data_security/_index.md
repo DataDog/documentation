@@ -50,7 +50,7 @@ This option works with the following services:
 * `http`
 * `remove_stack_traces`
 
-**Note:** You can use automatic scrubbing for multiple types of services at the same time.  Configure each in the `obfuscation` section of your `datadog.yaml` file.
+**Note:** You can use automatic scrubbing for multiple types of services at the same time. Configure each in the `obfuscation` section of your `datadog.yaml` file.
 {{< tabs >}}
 {{% tab "MongoDB" %}}
 

@@ -39,6 +39,10 @@
     "name": "Fastly インテグレーション",
     "description": "Datadog API を通じて、Datadog Fastly インテグレーションを直接構成します。"
   },
+  "gcp-integration": {
+    "name": "GCP インテグレーション",
+    "description": "Datadog-Google Cloud Platform (GCP) インテグレーションの構成は、Datadog API から直接行います。[Datadog-Google Cloud Platform インテグレーションについては、こちらを参照してください](https://docs.datadoghq.com/integrations/google_cloud_platform)。"
+  },
   "ip-allowlist": {
     "name": "IP 許可リスト",
     "description": "IP allowlist API は、Datadog API および Web UI にアクセスできる IP アドレスを管理するために使用されます。インテーク API や公開ダッシュボードへのアクセスをブロックするものではありません。\n\nこれはエンタープライズ専用の機能です。Datadog のサポートに連絡してアクセスをリクエストしてください。"
@@ -49,7 +53,7 @@
   },
   "incident-teams": {
     "name": "インシデントサービス",
-    "description": "インシデントに関連付けられるチームを作成、更新、削除、取得します。"
+    "description": "Incident Teams エンドポイントは非推奨です。インシデントに関連付けることができるチームの作成、更新、削除、および取得を行うには、[Teams API エンドポイント](https://docs.datadoghq.com/api/latest/teams/)を参照してください。"
   },
   "incidents": {
     "name": "インシデント",
@@ -123,9 +127,17 @@
     "name": "サービス定義",
     "description": "サービス定義の作成、更新、取得、削除を行うための API。"
   },
+  "spans-metrics": {
+    "name": "スパンメトリクス",
+    "description": "組織の[スパンベースメトリクス](https://app.datadoghq.com/apm/traces/generate-metrics)の構成を管理します。"
+  },
   "synthetics": {
     "name": "Synthetics",
     "description": "Datadog Synthetics は、シミュレートされたユーザーリクエストとブラウザレンダリングを使用して、アップタイムを確保し、地域の問題を特定し、アプリケーションのパフォーマンスを追跡します。Datadog Synthetics テストには、[API テスト](https://docs.datadoghq.com/synthetics/api_tests/)と[ブラウザテスト](https://docs.datadoghq.com/synthetics/browser_tests)の 2 つの異なる種類があります。Datadog の API を使用して、両方のテストタイプをプログラムで管理できます。\n\nSynthetics の詳細については、[Synthetics の概要](https://docs.datadoghq.com/synthetics/)を参照してください。"
+  },
+  "teams": {
+    "name": "チーム",
+    "description": "Datadog 内のチームを表示・管理します。"
   },
   "usage-metering": {
     "name": "使用料のメータリング",

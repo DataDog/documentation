@@ -35,7 +35,7 @@ Agent 6 の RPM パッケージは [https://yum.datadoghq.com/stable/6/][3] に�
 sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.<CPU_ARCHITECTURE>.rpm
 ```
 
-Debian ベースのディストリビューションで、deb ファイルをカレントディレクターにインストールするには
+Debian ベースのディストリビューションで、deb ファイルをカレントディレクトリにインストールするには
 
 ```bash
 sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb

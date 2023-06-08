@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
   tag: ブログ
   text: Datadog Workflows でエンドツーエンドプロセスを自動化する
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
@@ -24,7 +27,7 @@ title: Cloud Security Management の概要
 
 ## フェーズ 1: デプロイメント
 
-1. [Datadog Agent (バージョン 7.40 以上)][4] をインストールします。
+1. [Datadog Agent (バージョン 7.44 以上)][4] をインストールします。
 2. クラウドリソースとインフラストラクチャーに対して、CSM を有効にします。
     - **CWS**: [Kubernetes][5]、[Docker][6]、[ホストベース][7]のインストール。
     - **CSPM**: [AWS][10]、[Azure][11]、[GCP][12]、[Kubernetes][8]、[Docker][9] の手順。

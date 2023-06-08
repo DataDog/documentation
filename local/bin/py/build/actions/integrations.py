@@ -26,6 +26,7 @@ from os.path import (
 )
 
 from actions.format_link import format_link_file
+from actions.comment_conversion import replace_comments
 
 try:
     from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
@@ -84,27 +85,6 @@ class Integrations:
         )
         self.regex_h1_replace = re.compile(
             r"^(#{1})(?!#)(.*)", re.MULTILINE
-        )
-        self.regex_tabs_open = re.compile(
-            r"<!-- xxx tabs xxx -->", re.MULTILINE
-        )
-        self.regex_tabs_close = re.compile(
-            r"<!-- xxz tabs xxx -->", re.MULTILINE
-        )
-        self.regex_tab_open = re.compile(
-            r"<!-- xxx tab", re.MULTILINE
-        )
-        self.regex_tab_close = re.compile(
-            r"<!-- xxz tab xxx -->", re.MULTILINE
-        )
-        self.regex_tab_end = re.compile(
-            r" xxx -->", re.MULTILINE
-        )
-        self.regex_partial_open = re.compile(
-            r"<!-- partial", re.MULTILINE
-        )
-        self.regex_partial_close = re.compile(
-            r"partial -->", re.MULTILINE
         )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
@@ -777,27 +757,7 @@ class Integrations:
             result = re.sub(
                 self.regex_h1, "", result, 1
             )
-            result = re.sub(
-                self.regex_tabs_open, "{{< tabs >}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tabs_close, "{{< /tabs >}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_open, "{{% tab", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_close, "{{% /tab %}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_end, " %}}", result, 0
-            )
-            result = re.sub(
-                self.regex_partial_open, "", result, 0
-            )
-            result = re.sub(
-                self.regex_partial_close, "", result, 0
-            )
+            result = replace_comments(result)
             # result = re.sub(
             #     self.regex_site_region, r"{{% \1 %}}", result, 0
             # )

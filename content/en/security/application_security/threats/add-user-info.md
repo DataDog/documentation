@@ -17,9 +17,9 @@ further_reading:
 
 Instrument your services and track user activity to detect and block bad actors.
 
-[Add authenticated user information on traces][2] to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
+[Add authenticated user information on traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
-[Track user logins and activity][3] to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
+[Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
 The custom user activity for which out-of-the-box detection rules are available are as follow:
 
@@ -50,8 +50,10 @@ User monitoring tags are applied on the root span and start with the prefix `usr
 The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
 
 ```java
-import datadog.trace.api.GlobalTracer;
-import datadog.appsec.api.Blocking;
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+import datadog.appsec.api.blocking.Blocking;
+import datadog.trace.api.interceptor.MutableSpan;
 
 // Get the active span
 final Span span = GlobalTracer.get().activeSpan();
@@ -681,11 +683,9 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/trace_collection/custom_instrumentation/
-[2]: /security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
-[3]: /security/application_security/threats/add-user-info/#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
+[3]: /tracing/trace_collection/custom_instrumentation/
 [4]: /security/default_rules/bl-rate-limiting/
-[5]: /security/default_rules/bl-privilege-violation/
+[5]: /security/default_rules/bl-privilege-violation-user/
 [6]: /security/default_rules/appsec-ato-groupby-ip/
 [7]: /security/default_rules/bl-signup-ratelimit/
 [8]: /security/default_rules/bl-account-deletion-ratelimit/

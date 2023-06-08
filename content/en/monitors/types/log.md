@@ -8,7 +8,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -64,9 +64,9 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 **Examples**:
 
 * This monitor triggers if and only if there are no logs for all services:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" style="width:60%;" >}}
 * This monitor triggers if there are no logs for the service `backend`:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" style="width:60%;" >}}
 
 #### Advanced alert conditions
 
@@ -96,10 +96,10 @@ To disable log samples, uncheck the box at the bottom of the **Say what's happen
 #### Examples
 
 Include a table of the top 10 breaching values:
-{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values" style="width:60%;" >}}
 
 Include a sample of 10 logs in the alert notification:
-{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values" style="width:60%;" >}}
 
 ## Further Reading
 
