@@ -3,6 +3,10 @@ title: Setup Data Streams Monitoring without code instrumentation
 kind: documentation
 ---
 
+{{< callout url="#" btn_hidden="true" >}}
+  Service Scorecards are in beta. Contact <a href="/help">Support</a> to have it enabled for your organization.
+{{< /callout >}}
+
 ## Overview
 
 Data Streams Monitoring supports an option that provides visibility into your Kafka client-server metrics, universally, across your entire stack—without having to instrument your code. This option relies on the Datadog Agent and [Unified Service Tagging][1], and provides performance data about your uninstrumented Kafka services.
