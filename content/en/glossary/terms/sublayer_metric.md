@@ -1,5 +1,7 @@
 ---
 title: sublayer metric
+core_product:
+  - apm
 ---
 A sublayer metric is the execution duration of a given type or service within a trace.
 

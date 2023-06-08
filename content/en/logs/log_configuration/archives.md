@@ -58,7 +58,7 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**Note:** Archiving to Azure ChinaCloud is not supported.
+**Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -452,5 +452,5 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [10]: /account_management/rbac/permissions#logs_read_index_data
 [11]: /account_management/rbac/permissions#logs_read_data
 [12]: /logs/explorer/live_tail/
-[13]: /events/explorer/
+[13]: /service_management/events/explorer/
 [14]: https://app.datadoghq.com/logs/pipelines/log-forwarding

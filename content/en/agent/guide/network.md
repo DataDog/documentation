@@ -52,22 +52,28 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
 `session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+{{% site-region region="us,eu,us3,us5,ap1" %}}
+[Remote Configuration][1]
+: `config.`{{< region-param key="dd_site" code="true" >}}
+
+[1]: /agent/remote_config
+{{% /site-region %}}
+
 [Synthetics private location][8]
 : Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint to configure.<br>
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3,us5,ap1" >}}
+{{% site-region region="us,eu,us3,us5,ap1" %}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [2]: /database_monitoring/
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us" >}}
-
+{{% site-region region="us" %}}
 [Logs][1] & [HIPAA logs][2]
 : TCP: `agent-intake.logs.datadoghq.com`<br>
 HTTP: `agent-http-intake.logs.datadoghq.com`<br>
@@ -82,11 +88,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
+{{% site-region region="eu" %}}
 [Logs][1] & [HIPAA logs][2]
 : TCP: `agent-intake.logs.datadoghq.eu`<br>
 HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
@@ -101,11 +105,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
+{{% site-region region="us3" %}}
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
 Other: See [logs endpoints][3]
@@ -118,11 +120,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
+{{% site-region region="us5" %}}
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
 Other: See [logs endpoints][3]
@@ -135,11 +135,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
+{{% site-region region="ap1" %}}
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
 Other: See [logs endpoints][3]
@@ -147,11 +145,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
+{{% site-region region="gov" %}}
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
 Other: See [logs endpoints][3]
@@ -164,8 +160,7 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
-
-{{< /site-region >}}
+{{% /site-region %}}
 
 All other Agent data
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -225,7 +220,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 #### Outbound
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -249,9 +244,9 @@ See [logs endpoints][3] for other connection types.
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -275,9 +270,9 @@ See [logs endpoints][3] for other connection types.
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{% site-region region="us3,us5,gov" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -297,7 +292,7 @@ See [default NTP targets][2].
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### Inbound
 
@@ -449,3 +444,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [8]: /synthetics/private_locations
 [9]: /agent/proxy/
 [10]: /network_monitoring/devices
+

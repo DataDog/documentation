@@ -80,6 +80,9 @@ heroku labs:enable runtime-dyno-metadata -a $APPNAME
 # メトリクスが連続するよう、Datadog でホスト名を appname.dynotype.dynonumber に設定
 heroku config:add DD_DYNO_HOST=true
 
+# Datadog サイトを設定 (例: us5.datadoghq.com)
+heroku config:add DD_SITE=$DD_SITE
+
 # このビルドパックを追加して Datadog API キーを設定
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
 heroku config:add DD_API_KEY=$DD_API_KEY
@@ -731,7 +734,7 @@ heroku restart -a $APPNAME
 
 パースされたパラメーターに基づき、レイテンシーメトリクスを生成できます。
 
-Logs -> Generate Metrics へ移動し「+ New Metric」ボタンをクリックします。
+Logs -> Generate Metrics へ移動し "+ New Metric" ボタンをクリックします。
 
 {{< img src="agent/guide/heroku_ruby/new_custom_metric.png" alt="新しいログベースのメトリクス" >}}
 
@@ -741,7 +744,7 @@ Logs -> Generate Metrics へ移動し「+ New Metric」ボタンをクリック�
 
 {{< img src="agent/guide/heroku_ruby/custom_metric.png" alt="新しいログベースのメトリクスの作成" >}}
 
-ルールを作成したら、新しいメトリクスが収集されるまで数分待ちます。「See in Metric Explorer」をクリックして新しいメトリクスを確認します。
+ルールを作成したら、新しいメトリクスが収集されるまで数分待ちます。"See in Metric Explorer" をクリックして新しいメトリクスを確認します。
 
 {{< img src="agent/guide/heroku_ruby/generated_metric.png" alt="ログベースの利用可能なメトリクス" >}}
 {{< img src="agent/guide/heroku_ruby/metrics_explorer.png" alt="メトリクスエクスプローラービュー" >}}

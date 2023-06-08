@@ -3,7 +3,7 @@ description: React Native プロジェクトから RUM データを収集しま�
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: ブログ
   text: React Native アプリケーションの監視
@@ -33,6 +33,12 @@ Yarn でインストールするには、以下を実行します。
 
 ```sh
 yarn add @datadog/mobile-react-native
+```
+
+追加したポッドをインストールします。
+
+```sh
+(cd ios && pod install)
 ```
 
 バージョン `1.0.0-rc5` 以降では、Android アプリケーションのセットアップで `compileSdkVersion = 31` が必要です。これは Build Tools バージョン 31、Android Gradle Plugin バージョン 7、および Gradle バージョン 7 以上が必要であることを意味します。バージョンを変更するには、アプリケーションのトップレベル `build.gradle` ファイルの `buildscript.ext` ブロックの値を変更します。Datadogは、React Native バージョン 0.67 以上の使用を推奨しています。
@@ -284,6 +290,8 @@ DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 -   [`react-native-navigation`][5] ライブラリを使用する場合は、`@datadog/mobile-react-native-navigation` パッケージを追加し、[セットアップ手順][6]に従います。
 -   [`react-navigation`][7] ライブラリを使用する場合は、`@datadog/mobile-react-navigation` パッケージを追加し、[セットアップ手順][8]に従います。
 
+`@datadog/mobile-react-navigation` で View 追跡を設定する際に問題がある場合は、弊社の[サンプルアプリケーション][16]を参考にすることができます。
+
 ## カスタム属性の追跡
 
 すべての RUM イベントにユーザー情報をアタッチして、RUM セッションのより詳しい情報を入手することができます。
@@ -335,7 +343,7 @@ DdSdkReactNative.setAttributes({
 
 これらのイベントがダッシュボードに表示されないようにするには、`__DEV__` フラグを使用して、開発モードでのエラーとリソースの追跡を無効にします。
 
-```
+```js
 const config = new DdSdkReactNativeConfiguration(
     CLIENT_TOKEN,
     ENVIRONMENT,
@@ -377,11 +385,7 @@ pre_install do |installer|
 end
 ```
 
-**注:** この解決策は、この [StackOverflow][14] の投稿に由来しています。
-
-## ライセンス
-
-詳細については、[Apache ライセンス、v2.0][9]を参照
+**注**: この解決策は、この [StackOverflow][14] の投稿に由来しています。
 
 ## その他の参考資料
 
@@ -402,3 +406,4 @@ end
 [13]: /ja/real_user_monitoring/reactnative/expo/
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 [15]: /ja/getting_started/tagging/#define-tags
+[16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation

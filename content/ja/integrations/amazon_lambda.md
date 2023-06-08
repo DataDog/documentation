@@ -29,6 +29,11 @@ integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  lambda_high_error_rate: assets/monitors/lambda_high_error_rate.json
+  lambda_high_iterator_rate: assets/monitors/lambda_high_iterator_rate.json
+  lambda_high_throttles: assets/monitors/lambda_high_throttles.json
+  lambda_timeout: assets/monitors/lambda_timeout.json
 name: amazon_lambda
 public_title: Datadog-Amazon Lambda インテグレーション
 short_description: Lambda の実行、エラー、呼び出しの回数などを追跡
@@ -45,7 +50,7 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

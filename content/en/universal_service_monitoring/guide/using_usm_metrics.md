@@ -119,7 +119,7 @@ For more information, see the [Dashboards documentation][7].
 
 [1]: /universal_service_monitoring
 [2]: /tracing/service_catalog
-[3]: /monitors/service_level_objectives
+[3]: /service_management/service_level_objectives
 [4]: /tracing/metrics/metrics_namespace
 [5]: https://app.datadoghq.com/services
 [6]: /monitors/create/types/apm

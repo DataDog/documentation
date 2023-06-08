@@ -15,13 +15,13 @@ aliases:
     - /serverless/datadog_lambda_library/java/
 ---
 
-<div class="alert alert-warning">To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (<code>java8.al2</code>) or Java 11 (<code>java11</code>) runtimes with at least 1024 MB of memory.</div>
+To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`) or Java 17 (`java17`) runtimes with at least 1024 MB of memory.
 
-<div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
+If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either [using AWS PrivateLink][6] for the `datadoghq.com` [Datadog site][7], or [using a proxy][8] for all other sites.
 
-<div class="alert alert-warning">If you previously set up your Lambda functions using the Datadog Forwarder, see <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_java">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
+If you previously set up your Lambda functions using the Datadog Forwarder, see [instrumenting using the Datadog Forwarder][9]. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.
 
-<div class="alert alert-warning">If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the <a href="https://docs.datadoghq.com/serverless/guide/upgrade_java_instrumentation">special instructions to upgrade</a>.</div>
+If you are using the Datadog Lambda layers `dd-trace-java:4` (or older) and `Datadog-Extension:24` (or older), follow the [special instructions to upgrade][10].
 
 ## Installation
 
@@ -307,7 +307,7 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 
 ## What's next?
 
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
+- Turn on [threat monitoring][11] to get alerted on attackers targeting your service.
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry
@@ -327,5 +327,9 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 [3]: /tracing/custom_instrumentation/java/
 [4]: /serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /serverless/configuration/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
-
+[6]: /agent/guide/private-link/
+[7]: /getting_started/site/
+[8]: /agent/proxy/
+[9]: /serverless/guide/datadog_forwarder_java
+[10]: /serverless/guide/upgrade_java_instrumentation
+[11]: /security/application_security/enabling/serverless/?tab=serverlessframework

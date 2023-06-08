@@ -49,6 +49,24 @@ function processIncomingQueueMessage($message) {
 );
 ```
 
+Alternatively, starting with version **0.87.0**, if the raw headers are available, a function `DDTrace\consume_distributed_tracing_headers(array|callable $headersOrCallback)` is provided. Note that the header names must be in lowercase.
+
+```php
+$headers = [
+	"x-datadog-trace-id" => "1234567890",
+	"x-datadog-parent-id" => "987654321",
+];
+
+\DDTrace\consume_distributed_tracing_headers($headers);
+```
+
+To extract the trace context directly as headers, a function `DDTrace\generate_distributed_tracing_headers(?array $inject = null): array` is provided. Its sole optional argument accepts an array of injection style names. It defaults to the configured injection style.
+
+```php
+$headers = DDTrace\generate_distributed_tracing_headers();
+// Store headers somewhere, inject them in an outbound request, ...
+// These $headers can also be read back by \DDTrace\consume_distributed_tracing_headers from another process.
+```
 
 
 [7]: https://github.com/openzipkin/b3-propagation

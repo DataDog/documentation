@@ -6,10 +6,10 @@ description: Monitor web views in your hybrid Android applications.
 further_reading:
 - link: "/real_user_monitoring/android/"
   tag: "Documentation"
-  text: "Android Monitoring"
+  text: "Android monitoring"
 - link: "/real_user_monitoring/browser/"
   tag: "Documentation"
-  text: "Browser Monitoring"
+  text: "Browser monitoring"
 ---
 
 ## Overview

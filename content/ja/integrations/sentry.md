@@ -1,8 +1,7 @@
 ---
 categories:
+- collaboration
 - issue tracking
-- Collaboration
-- exceptions
 dependencies: []
 description: Datadog イベントストリームで Sentry の例外を参照。
 doc_link: https://docs.datadoghq.com/integrations/sentry/
@@ -42,7 +41,7 @@ Sentry を Datadog に接続して、以下のことができます。
 2. **Settings > Projects** に移動し、適切なプロジェクトを選択します。
 3. 左側で、**Legacy Integrations** を選択します。
 4. **Webhooks integration** までスクロールダウンし、スライダートグルをクリックしてインテグレーションを有効化し、次に **Configure Plugin** をクリックします。
-5. **Callback URLs'** の下に、`https://app.datadoghq.com/intake/webhook/sentry?api_key=<DATADOG_API_キー>` を入力します。
+5. **Callback URLs'** の下に、`https://{{< region-param key=dd_full_site >}}/intake/webhook/sentry?api_key=<YOUR_DATADOG_API_KEY>` を入力します。
 6. **Save changes** をクリックします。
 7. 必要に応じて、**Enable Plugin** をクリックしてインテグレーションを有効にします。
 

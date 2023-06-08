@@ -1,6 +1,6 @@
 ---
-title: Datadog Agent イメージのビルド
 kind: ガイド
+title: Datadog Agent イメージのビルド
 ---
 
 Datadog Docker Agent を特定の `<AGENT_VERSION>` でビルドするには、以下の手順に従います。Agent のバージョンは v6.0 以降です。

@@ -214,7 +214,6 @@ runtime_security_config:
 
   remote_configuration:
     ## @param enabled - boolean - optional - default: false
-    ## For [Datadog Agent] version 7.42 only, to enable remote configuration
     enabled: true
 ```
 
@@ -366,6 +365,6 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: /security/cloud_security_management/troubleshooting
-[4]: /agent/guide/how_remote_config_works
-[5]: /agent/guide/how_remote_config_works/?tab=environmentvariable#enabling-remote-configuration
+[4]: /agent/remote_config
+[5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [6]: https://app.datadoghq.com/security/setup

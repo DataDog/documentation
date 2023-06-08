@@ -92,7 +92,7 @@ instances:
 
 アプリケーションに `datadog` 資格情報をアタッチしたときに作成された環境変数 (以下の例では `HEROKU_POSTGRESQL_PINK_URL` と仮定) を使用して、Datadog Agent の起動前にこれらの値を置き換えるために[事前実行スクリプト][5]に以下を追加してください。
 
-```shell
+```bash
 #!/usr/bin/env bash
 
 # Heroku アプリケーションの環境変数を使用して、Postgres の構成を上記の設定から更新します

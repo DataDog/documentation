@@ -1,6 +1,6 @@
 ---
 title: Advanced setup for Datadog Operator
-kind: faq
+kind: guide
 further_reading:
   - link: 'agent/kubernetes/log'
     tag: 'Documentation'

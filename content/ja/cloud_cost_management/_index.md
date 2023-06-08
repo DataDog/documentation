@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/infrastructure/cloud_cost_management
+- /ja/integrations/cloudability
 further_reading:
 - link: https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/
   tag: GitHub
@@ -190,32 +191,36 @@ Datadog は取り込まれたコストデータにすぐに使えるタグを追
 {{% /tab %}}
 
 {{% tab "Azure" %}}
-<div class="alert alert-warning">Azure Cloud Cost Management は非公開ベータ版です。この<a href="https://docs.google.com/forms/d/e/1FAIpQLSftAIq_g4GxBAKdWV5OjP0Ui4CAjWTzH3YCKy3n930gMz0Krg/viewform?usp=sf_link">フォーム</a>にご記入の上、アクセスをリクエストしてください。</div>
 
 Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure インテグレーションを設定し、**amortized** と **actual** のエクスポートをセットアップする必要があります。さらに、Datadog はコンテナからエクスポートを読み取る権限が必要です。
 
-**注**: US3 のお客様であれば、Azure ポータルから推奨されている [Datadog Resource メソッド][1]を使用して Datadog とのインテグレーションをセットアップしていると思います。Cloud Cost Management をサポートするためには、[App Registration を作成する][4]必要があります。
+{{% site-region region="us3" %}}
+**注**: US3 のお客様であれば、Azure ポータルから推奨される [Datadog リソース方法][1]を使用して Datadog インテグレーションをセットアップしているかと思います。クラウドコストマネジメントに対応するためには、[App Registration の作成][2]が必要です。
+
+[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]: /ja/integrations/azure/?tab=azurecliv20#setup
+{{% /site-region %}}
 
 ### コストエクスポートの生成
 
-1. Azure ポータルの *Cost Management + Billing* の下にある [Exports][2] に移動します。
-2. エクスポートのスコープを選択します。**注:** スコープは *subscription* または *resource group* でなければなりません。
+1. Azure ポータルの *Cost Management + Billing* の下にある [Exports][3] に移動します。
+2. エクスポートのスコープを選択します。**注:** スコープは *billing account*、*subscription* または *resource group* でなければなりません。
 3. スコープを選択したら、**Add** をクリックします。
 
-{{< img src="cloud_cost/exports_scope.png" alt="Azure ポータルで、ナビゲーションのエクスポートオプションとエクスポートスコープをハイライト表示"  >}}
+{{< img src="cloud_cost/exports_scope.png" alt="Azure ポータルで、ナビゲーションのエクスポートオプションとエクスポートスコープをハイライト表示" >}}
 
 4. 次のエクスポートの詳細を選択します。
     - Metric: **Actual Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
 
-{{< img src="cloud_cost/new_export.png" alt="Metric: Actual、Export type: Daily、File Partitioning: On のエクスポートの詳細"  >}}
+{{< img src="cloud_cost/new_export.png" alt="Metric: Actual、Export type: Daily、File Partitioning: On のエクスポートの詳細" >}}
 
-5. エクスポート用のストレージアカウント、コンテナ、およびディレクトリを選択します。請求エクスポートは、エクスポートが対象とするサブスクリプションに保存する必要があります。
+5. エクスポートのためのストレージアカウント、コンテナ、およびディレクトリを選択します。**注:** 請求エクスポートは、エクスポートが対象としているサブスクリプションに保存される必要はありません。複数のサブスクリプションのエクスポートを作成する場合、Datadog は 1 つのサブスクリプションのストレージアカウントに保存することを推奨しています。
 6. **Create** を選択します。
 
 メトリクス **Amortized Cost (usage and purchases)** について、ステップ 1～6 を繰り返します。Datadog は、両方のエクスポートに同じストレージコンテナを使用することを推奨します。より速く処理するために、**Run Now** をクリックして最初のエクスポートを手動で生成します。
-{{< img src="cloud_cost/run_now.png" alt="エクスポートサイドパネルの Run Now ボタンをクリックし、エクスポートを生成します"  >}}
+{{< img src="cloud_cost/run_now.png" alt="エクスポートサイドパネルの Run Now ボタンをクリックし、エクスポートを生成します" >}}
 
 ### Datadog がエクスポートにアクセスできるようにする
 
@@ -232,6 +237,7 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 エクスポートが別のコンテナに入っている場合は、他のコンテナについて手順 1〜7 を繰り返します。
 
 ### コストマネジメントリーダーへのアクセス構成
+**注:** スコープが **Billing Account** の場合、このアクセスは構成する必要はありません。
 
 1. [サブスクリプション][4]に移動し、サブスクリプションの名前をクリックします。
 2. Access Control (IAM) タブを選択します。
@@ -240,6 +246,15 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 5. これらの権限をサブスクリプションに割り当てます。
 
 これにより、Azure Cost Management に対して定期的にコスト計算を行うことができ、完全なコスト精度を確保することができます。
+
+### コストタイプ
+
+インジェストしたデータは、以下のコストタイプで可視化することができます。
+
+| コストタイプ            | 説明           |
+| -------------------- | --------------------- |
+| `azure.cost.amortized` | 適用される割引率に基づくコストと、割引期間中の使用量に応じたプリペイドの配分 (発生主義)。|
+| `azure.cost.actual` | コストは、使用時に請求される金額で表示されます (現金主義)。実際のコストには、プライベート割引、リザーブドインスタンスやセービングプランの割引が別の料金タイプとして含まれています。|
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#setup
@@ -252,7 +267,7 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 
 インフラストラクチャーの支出を、関連する使用量メトリクスと一緒に可視化することで、潜在的な非効率性と節約の機会を発見することができます。Datadog ダッシュボードのウィジェットにクラウドコストを追加するには、*Cloud Cost* データソースを選択します。
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト"  >}}
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト" >}}
 
 ## その他の参考資料
 

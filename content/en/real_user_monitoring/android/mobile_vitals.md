@@ -5,10 +5,10 @@ description: Discover insights about your iOS application's health and performan
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: dd-sdk-android Source code
+  text:  Source code for dd-sdk-android
 - link: https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/
   tag: Blog
-  text: Monitor Mobile Vitals in Datadog
+  text: Monitor mobile vitals in Datadog
 ---
 
 ## Overview

@@ -14,7 +14,6 @@ further_reading:
   tag: Documentation
   text: モニターステータスの参照
 kind: documentation
-private: true
 title: クラウドコストモニター
 ---
 
@@ -46,7 +45,7 @@ Datadog に報告するコストタイプであれば、モニターとして利
 
 | 手順                              | 必須 | デフォルト              | 例             |
 |-----------------------------------|----------|----------------------|---------------------|
-| コストメトリクスを選択する                 | 〇      | `aws.cost.amortized` | `azure.cost.actual` |
+| コストメトリクスを選択する                 | はい      | `aws.cost.amortized` | `azure.cost.actual` |
 | `filter by` を定義する            | ✕       | すべての条件           | `aws_product:s3`    |
 | グループ化                          | ✕       | すべての条件           | `aws_availability_zone` |
 

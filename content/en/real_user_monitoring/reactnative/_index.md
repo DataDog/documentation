@@ -5,7 +5,7 @@ description: Collect RUM data from your React Native projects.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative Source code
+  text: Source code for dd-sdk-reactnative
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog
   text: Monitor React Native applications
@@ -34,6 +34,12 @@ To install with Yarn, run:
 
 ```sh
 yarn add @datadog/mobile-react-native
+```
+
+Install the added pod:
+
+```sh
+(cd ios && pod install)
 ```
 
 Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
@@ -285,6 +291,8 @@ Use one of Datadog's integrations to automatically track views for the following
 -   If you use the [`react-native-navigation`][5] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][6].
 -   If you use the [`react-navigation`][7] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][8].
 
+If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see our [example application][16] as a reference.
+
 ## Track custom attributes
 
 You can attach user information to all RUM events to get more detailed information from your RUM sessions.
@@ -336,7 +344,7 @@ While in development mode, your application can submit extra events related to t
 
 To prevent these events from showing in the dashboard, you can disable errors and resources tracking in dev mode using the `__DEV__` flag:
 
-```
+```js
 const config = new DdSdkReactNativeConfiguration(
 	CLIENT_TOKEN,
 	ENVIRONMENT,
@@ -378,11 +386,7 @@ pre_install do |installer|
 end
 ```
 
-**Note:** This solution comes from this [StackOverflow][14] post.
-
-## License
-
-For more information, see [Apache License, v2.0][9]
+**Note**: This solution comes from this [StackOverflow][14] post.
 
 ## Further Reading
 
@@ -403,3 +407,4 @@ For more information, see [Apache License, v2.0][9]
 [13]: /real_user_monitoring/reactnative/expo/
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 [15]: /getting_started/tagging/#define-tags
+[16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation

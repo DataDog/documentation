@@ -3,7 +3,6 @@ title: Amazon ECS
 kind: documentation
 aliases:
   - /agent/amazon_ecs/
-  - /containers/amazon_ecs/data_collected
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
   tag: "Documentation"
@@ -11,6 +10,9 @@ further_reading:
 - link: "/agent/amazon_ecs/apm/"
   tag: "Documentation"
   text: "Collect your application traces"
+- link: "/agent/amazon_ecs/data_collected/#metrics"
+  tag: "Documentation"
+  text: "Collect ECS metrics"
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"
@@ -232,7 +234,7 @@ To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar cont
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.0",
+            "image": "datadog/fips-proxy:0.5.3",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -319,6 +321,10 @@ You also need to update the environment variables of the Datadog Agent's contain
             (...)
             "environment": [
               (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
                 {
                     "name": "DD_FIPS_PORT_RANGE_START",
                     "value": "9803"

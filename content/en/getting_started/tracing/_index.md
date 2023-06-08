@@ -13,6 +13,9 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to boost your APM understanding'  
 ---
 
 ## Overview

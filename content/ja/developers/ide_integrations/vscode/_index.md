@@ -37,7 +37,7 @@ Datadog 拡張機能を利用することで、以下のことが可能になり
 
 ## セットアップ
 
-[Datadog 拡張機能][6]をインストールすることができます。
+Visual Studio Marketplace から [Datadog 拡張機能][6]をインストールします。
 
 ## Synthetic テストをローカルで実行する
 

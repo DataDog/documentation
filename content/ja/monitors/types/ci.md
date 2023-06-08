@@ -163,7 +163,7 @@ CI テストまたはパイプラインモニターがトリガーされると�
 #### サンプル例
 
 アラート通知に CI テスト 10 サンプルのテーブルを含めます。
-{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="CI テストサンプルトップ 10"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="CI テストサンプルトップ 10" style="width:60%;" >}}
 
 アラート通知に CI パイプライン 10 サンプルのテーブルを含めます。
 {{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="CI Pipeline サンプルトップ 10" style="width:60%;" >}}
