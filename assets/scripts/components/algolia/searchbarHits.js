@@ -88,7 +88,8 @@ const renderHits = (renderOptions, isFirstRender) => {
         const joinedListItems = hitsArray
             .map((item) => {
                 const hit = getHitData(item);
-                const displayContent = truncateContent(hit.content, 145);
+                const displayContent = truncateContent(hit.content_snippet_match_level === "full" ? hit.content_snippet : hit.content, 145);
+                console.log(hit.content_snippet_match_level);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
 
                 return `

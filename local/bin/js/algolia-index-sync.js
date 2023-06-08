@@ -32,6 +32,9 @@ const updateSettings = (index) => {
         customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
+        attributesToSnippet: [
+            'content:20'
+        ],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
         attributeForDistinct: 'full_url',
