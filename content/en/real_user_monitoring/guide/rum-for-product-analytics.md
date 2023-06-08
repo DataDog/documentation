@@ -40,11 +40,11 @@ If you are interested in learning what buttons your users click on the most, you
 
 This example displays the top actions on Shopist's `/cart` page.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-1.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-2.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
 
 To investigate which users are clicking on these buttons, modify the search query by selecting the **Table** visualization type and clicking **+** to add another `group` field for `@user.name`.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-1.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
 ## Analyze the conversion rate of core workflows
 
@@ -58,11 +58,11 @@ Once you have created a funnel based on views or actions on your website, you ca
 
 ### Add a saved view
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_saved_view-1.mp4" alt="Add a saved view in the RUM Explorer" video="true" width=90% >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_saved_view.mp4" alt="Add a saved view in the RUM Explorer" video="true" width=90% >}}
 
 ### Export the funnel
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export-1.png" alt="Export a funnel visualization in the RUM Explorer" style="width:90%;" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export.png" alt="Export a funnel visualization in the RUM Explorer" style="width:90%;" >}}
 
 ### View funnel analysis
 
@@ -91,7 +91,7 @@ In addition to analyzing top views, you also want to investigate the buttons and
 
 This query lists anytime a user expresses any type of frustration signal and counts the unique actions where frustration occurred.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search-1.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search-3.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
 
 ## Watch the user experience in Session Replay
 
@@ -99,7 +99,7 @@ You can visually watch the impact that poor user experiences have on your users.
 
 In a funnel visualization, you can access the **Funnel Analysis** side panel and click **Sample Replay Session** on sessions where users continued onto another step or dropped off.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay-1.mp4" alt="The Funnel Analysis side panel contains links to Session Replay" width=90%; video="true" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay-2.mp4" alt="The Funnel Analysis side panel contains links to Session Replay" width=90%; video="true" >}}
 
 With Session Replay, you can identify what parts of your product are confusing to users and need improving in order to drive up conversion. 
 
