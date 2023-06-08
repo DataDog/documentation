@@ -5,7 +5,7 @@ aliases:
 further_reading:
 - link: security/default_rules
   tag: ドキュメント
-  text: デフォルトの Posture Management クラウド構成検出ルールを調べる
+  text: デフォルトの Posture Management クラウド構成コンプライアンスルールを調べる
 - link: security/cspm/frameworks_and_benchmarks
   tag: ドキュメント
   text: フレームワークおよび業界のベンチマークの詳細
@@ -22,7 +22,7 @@ title: Security Findings Explorer
 Cloud Security Posture Management (CSPM) [Security Findings Explorer][1] を使用すると、以下のことが可能になります。
 
 - リソースのコンフィギュレーションの詳細を確認する。
-- CSPM によりリソースに適用される検出ルールを確認する。
+- CSPM によりリソースに適用されるコンプライアンスルールを確認する。
 - タグにより、リソースの所有者や環境内での所在地などの詳細を確認する。
 - 誤って構成されたリソースを修復するため、業界のリソースに基づいた説明やガイドラインにアクセスする。
 - タイムセレクターを使い、過去のセキュリティコンフィギュレーション態勢を調査する。
@@ -35,7 +35,7 @@ Cloud Security Posture Management (CSPM) [Security Findings Explorer][1] を使�
 
 ## クラウドの構成ミスを調査する
 
-発見は、[Security Findings Explorer][1] に表示されます。**Group by** フィルターとクエリ検索バーを使用して、発見をルールごとに集計します。例えば、`evaluation:fail` でフィルターをかけると、対処が必要な問題があるすべての検出ルールにリストが絞られます。また、発見をリソース別に集計し、失敗した発見が多いリソースをランク付けし、改善の優先順位をつけることもできます。
+発見は、[Security Findings Explorer][1] に表示されます。**Group by** フィルターとクエリ検索バーを使用して、発見をルールごとに集計します。例えば、`evaluation:fail` でフィルターをかけると、対処が必要な問題があるすべてのコンプライアンスルールにリストが絞られます。また、発見をリソース別に集計し、失敗した発見が多いリソースをランク付けし、改善の優先順位をつけることもできます。
 
 {{< img src="security/cspm/findings/posture-management-overview-2.png" alt="ポスチャ管理の発見ページの概要" style="width:100%;">}}
 
@@ -43,7 +43,7 @@ Cloud Security Posture Management (CSPM) [Security Findings Explorer][1] を使�
 
 {{< img src="security/cspm/findings/finding-side-panel.png" alt="サイドパネルにあるランク付けされたリソース" style="width:65%;">}}
 
-Security Findings Explorer で **Resources** でグループ化し、リソースを選択すると、そのリソースに対して評価された検出ルールの全リストとそのステータスが表示されます。
+Security Findings Explorer で **Resources** でグループ化し、リソースを選択すると、そのリソースに対して評価されたコンプライアンスルールの全リストとそのステータスが表示されます。
 
 {{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="検索でリソースごとにグループ化および集計" style="width:65%;">}}
 
