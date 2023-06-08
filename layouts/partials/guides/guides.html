@@ -1,49 +1,212 @@
-{{ $dot := . }}
+<div class="col-12">
+    <h3 class="text-center mb-2">Platform</h3>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/agent/guide">
+<i class="icon-agent-fill" style='font-size: 18px; color: transparent'></i>
+                Agent
+                <span class="font-regular text-center smaller">Install and configure the Datadog Agent to collect and send data</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/integrations/guide">
+<i class="icon-integrations" style='font-size: 18px; color: transparent'></i>
+                Integrations
+                <span class="font-regular text-center smaller">Gather data about your applications, services, and systems</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/opentelemetry/guide">
+<i class="icon-open-telemetry" style='font-size: 18px; color: transparent'></i>
+                OpenTelemetry
+                <span class="font-regular text-center smaller">Pipe your OpenTelemetry metrics, logs, and traces into Datadog</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/dashboards/guide">
+<i class="icon-dashboard" style='font-size: 18px; color: transparent'></i>
+                Dashboards
+                <span class="font-regular text-center smaller">Visualize, analyze, and generate insights about your data</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/infrastructure/guide">
+<i class="icon-host-map" style='font-size: 18px; color: transparent'></i>
+                Infrastructure
+                <span class="font-regular text-center smaller">Track your hosts, containers, processes, and serverless functions</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/events/guide">
+<i class="icon-events" style='font-size: 18px; color: transparent'></i>
+                Events
+                <span class="font-regular text-center smaller">Track notable changes and alerts in your applications and infrastructure</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/metrics/guide">
+<i class="icon-metric" style='font-size: 18px; color: transparent'></i>
+                Metrics
+                <span class="font-regular text-center smaller">Explore, search, and create distributions for your metrics</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/monitors/guide">
+<i class="icon-monitor" style='font-size: 18px; color: transparent'></i>
+                Alerting
+                <span class="font-regular text-center smaller">Create, edit, and manage your monitors and notifications</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/tracing/guide">
+<i class="icon-apm" style='font-size: 18px; color: transparent'></i>
+                APM
+                <span class="font-regular text-center smaller">Explore out-of-the-box performance dashboards and distributed traces</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/profiler/guide">
+<i class="icon-profiling-1" style='font-size: 18px; color: transparent'></i>
+                Continuous Profiler
+                <span class="font-regular text-center smaller">Compare performance snapshots and investigate bottlenecks</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/logs/guide">
+<i class="icon-log" style='font-size: 18px; color: transparent'></i>
+                Log Management
+                <span class="font-regular text-center smaller">Process, monitor, and archive your ingested logs</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/security/guide">
+<i class="icon-security-platform" style='font-size: 18px; color: transparent'></i>
+                Security
+                <span class="font-regular text-center smaller">Detect threats and misconfigurations in your applications and infrastructure</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/synthetics/guide">
+<i class="icon-synthetics" style='font-size: 18px; color: transparent'></i>
+                Synthetic Monitoring
+                <span class="font-regular text-center smaller">Ensure uptime, flag regional issues, and test application performance</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/continuous_testing/guide">
+<i class="icon-continuous-testing" style='font-size: 18px; color: transparent'></i>
+                Continuous Testing
+                <span class="font-regular text-center smaller">Perform codeless integration and end-to-end testing with CI/CD providers</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/real_user_monitoring/guide">
+<i class="icon-rum" style='font-size: 18px; color: transparent'></i>
+                Real User Monitoring
+                <span class="font-regular text-center smaller">Capture, observe, and analyze the user experience of your applications</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/network_monitoring/guide">
+<i class="icon-network" style='font-size: 18px; color: transparent'></i>
+                Network Monitoring
+                <span class="font-regular text-center smaller">Use tagged objects to collect and graph data about your network traffic</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/serverless/guide">
+<i class="icon-serverless" style='font-size: 18px; color: transparent'></i>
+                Serverless
+                <span class="font-regular text-center smaller">Detect and resolve performance issues in your serverless applications</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/mobile/guide">
+<i class="icon-mobile" style='font-size: 18px; color: transparent'></i>
+                Mobile Application
+                <span class="font-regular text-center smaller">View Datadog alerts, incidents, and more on your mobile device</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/watchdog/guide">
+<i class="icon-watchdog" style='font-size: 18px; color: transparent'></i>
+                Datadog Watchdog
+                <span class="font-regular text-center smaller">Detect and surface application and infrastructure anomalies</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/continuous_integration/guide">
+<i class="icon-ci" style='font-size: 18px; color: transparent'></i>
+                CI Visibility
+                <span class="font-regular text-center smaller">See test metrics, build results, and pipeline executions for your CI pipeline</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/cloud_cost_management/guide">
+<i class="icon-cloud-cost-management" style='font-size: 18px; color: transparent'></i>
+                Cloud Cost Management
+                <span class="font-regular text-center smaller">Take control of your cloud spend with unified observability and cost data</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/database_monitoring/guide">
+<i class="icon-database-2" style='font-size: 18px; color: transparent'></i>
+                Database Monitoring
+                <span class="font-regular text-center smaller">Explore enriched dashboards, query metrics, and query samples</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/data_streams/guide">
+<i class="icon-datastreams-monitoring" style='font-size: 18px; color: transparent'></i>
+                Data Streams Monitoring
+                <span class="font-regular text-center smaller">Track and improve performance of your data streaming pipelines</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/observability_pipelines/guide">
+<i class="icon-pipelines" style='font-size: 18px; color: transparent'></i>
+                Observability Pipelines
+                <span class="font-regular text-center smaller">Manage and monitor your telemetry pipelines</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/universal_service_monitoring/guide">
+<i class="icon-usm" style='font-size: 18px; color: transparent'></i>
+                Universal Service Monitoring
+                <span class="font-regular text-center smaller">Discover, map, and monitor services without changing code</span>
+        </a>
+</div>
 
-<!-- get lang specific data file -->
-{{ $.Scratch.Set "data" "" }}
-{{ if ne $dot.Page.Lang "en"}}
-    {{ if (fileExists (print "data/partials/home." $dot.Page.Lang ".yaml")) }}
-      {{ $.Scratch.Set "data" (index $dot.Page.Site.Data.home (print "guides." $dot.Page.Lang)) }}
-    {{ else }}
-      {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
-    {{ end }}
-{{ else }}
-    {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.home }}
-{{ end }}
-{{ $datafile := ($.Scratch.Get "data") }}
+<div class="col-12">
+    <h3 class="text-center mb-2">Configuration</h3>
+</div>
 
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/api/latest/guide">
+<i class="icon-api" style='font-size: 18px; color: transparent'></i>
+                API
+                <span class="font-regular text-center smaller">Try the Datadog API</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/account_management/guide">
+<i class="icon-cog-2" style='font-size: 18px; color: transparent'></i>
+                Account Management
+                <span class="font-regular text-center smaller">Access org-based settings and billing</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/data_security/guide">
+<i class="icon-security-lock" style='font-size: 18px; color: transparent'></i>
 
-        {{ range $i, $nav_section := $datafile.nav_sections }}
-
-            <section class="row nav-tiles mb-2">
-
-                    {{ range $i, $tile := $nav_section }}
-
-                        {{ range $i, $section := $tile }}
-                            {{ if $section.name}}
-                                <div class="col-12">
-                                    <h3 class="text-center mb-2">{{ $section.name }}</h3>
-                                </div>
-                            {{ end }}
-
-                            {{ range $i, $navtile := $section.navtiles }}
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
-                                        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="{{ $navtile.link | absLangURL }}/guide">
-                                                {{ partial "icon" (dict "name" $navtile.icon "size" "18px" "color" "transparent" )}}
-                                                {{ $navtile.title }}
-                                                <span class="font-regular text-center smaller">{{ $navtile.desc }}</span>
-                                        </a>
-
-                                </div>
-                            {{ end }}
-
-                        {{ end }}
-                    {{ end }}
-            </section>
-
-        {{ end }}
-
-
-
-</body>
+                Data Security
+                <span class="font-regular text-center smaller">Learn how Datadog protects your data</span>
+        </a>
+</div>
+<div class="col-12 col-md-6 col-lg-4 col-xl-3 nav-tile d-flex mb-2 mb-md-3">
+        <a class="d-flex flex-column align-items-center w-100 small font-semibold" href="http://localhost:1313/developers/guide">
+<i class="icon-dev-code" style='font-size: 18px; color: transparent'></i>
+                Developers
+                <span class="font-regular text-center smaller">Develop on the Datadog platform</span>
+        </a>
+</div>
