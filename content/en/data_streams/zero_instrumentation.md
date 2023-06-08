@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 {{< callout url="#" btn_hidden="true" >}}
-  Service Scorecards are in beta. Contact <a href="/help">Support</a> to have it enabled for your organization.
+  Zero instrumentation data streams capturing is in beta. Contact <a href="/help">Support</a> to have it enabled for your organization.
 {{< /callout >}}
 
 ## Overview
