@@ -36,13 +36,13 @@ Linux Azure App Service Web Apps built using the code deployment option on built
 
 Set these values in the `DD_START_APP` environment variable. Examples below are for an application named `datadog-demo`, where relevant.
 
-| Runtime | `DD_START_APP` Example Value | Description
-| ---- | --- | --- |
-| Node.js | `node ./bin/www` | Runs the [Node PM2 configuration file][12], or your script file |
-| .NET Core | `dotnet datadog-demo.dll` | Runs a .dll file that uses your Web App name by default |
-| PHP | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Copies script to correct location and starts application |
-| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | Custom [startup script][13]. This example shows a Gunicorn command for starting a Django app. |
-| Java | `java -jar /home/site/wwwroot/datadog-demo.jar` | The command to start your app |
+| Runtime   | `DD_START_APP` Example Value                                                               | Description                                                                                                                                                                                                                        |
+|-----------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Node.js   | `node ./bin/www`                                                                           | Runs the [Node PM2 configuration file][12], or your script file.                                                                                                                                                                   |
+| .NET Core | `dotnet datadog-demo.dll`                                                                  | Runs a `.dll` file that uses your Web App name by default. <br /><br /> **Note**: The `.dll` file name in the command should match the file name of your `.dll` file. In certain cases, this might not match your Web App.         |
+| PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | Copies script to correct location and starts applicatio.                                                                                                                                                                           |
+| Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | Custom [startup script][13]. This example shows a Gunicorn command for starting a Django app.                                                                                                                                      |
+| Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | The command to start your app.                                                                                                                                                                                                     |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server
