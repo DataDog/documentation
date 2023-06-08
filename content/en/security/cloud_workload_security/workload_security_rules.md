@@ -58,7 +58,7 @@ Detection rules run in the Datadog backend after events are sent over as logs. T
 
 ## Create custom rules
 
-In addition to the default rules, you can write custom Agent and detection rules. Custom Agent rules are deployed to the Agent in a custom policy separate from the default one. The custom policy contains custom Agent rules as well as [default rules](#disable-default-agent-rules) that have been disabled.
+In addition to the default rules, you can write custom Agent and detection rules. Custom Agent rules are deployed to the Agent in a custom policy separate from the default one. The custom policy contains custom Agent rules as well as [default rules that have been disabled](#disable-default-agent-rules).
 
 ### Define the agent rule
 
