@@ -36,6 +36,8 @@ Linux Azure App Service Web Apps built using the code deployment option on built
 
 Set these values in the `DD_START_APP` environment variable. Examples below are for an application named `datadog-demo`, where relevant.
 
+Note: For .NET Core Apps, in case your .dll file does not have the same name as your Web App, please use your application's .dll file name in the command.
+
 | Runtime | `DD_START_APP` Example Value | Description
 | ---- | --- | --- |
 | Node.js | `node ./bin/www` | Runs the [Node PM2 configuration file][12], or your script file |
