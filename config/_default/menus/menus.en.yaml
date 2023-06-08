@@ -1030,76 +1030,76 @@ main:
     parent: monitor_types
     identifier: monitor_types_composite
     weight: 208
-  - name: Error Tracking
-    url: monitors/types/error_tracking/
-    parent: monitor_types
-    identifier: monitor_types_error_tracking
-    weight: 209
-  - name: Event
-    url: monitors/types/event/
-    parent: monitor_types
-    identifier: monitor_types_event
-    weight: 210
-  - name: Forecast
-    url: monitors/types/forecasts/
-    parent: monitor_types
-    identifier: monitor_types_forecasts
-    weight: 211
-  - name: Integration
-    url: monitors/types/integration/
-    parent: monitor_types
-    identifier: monitor_types_integration
-    weight: 212
-  - name: Live Process
-    url: monitors/types/process/
-    parent: monitor_types
-    identifier: monitor_types_process
-    weight: 213
-  - name: Logs
-    url: monitors/types/log/
-    parent: monitor_types
-    identifier: monitor_types_log
-    weight: 214
-  - name: Network
-    url: monitors/types/network/
-    parent: monitor_types
-    identifier: monitor_types_network
-    weight: 215
-  - name: Outlier
-    url: monitors/types/outlier/
-    parent: monitor_types
-    identifier: monitor_types_outlier
-    weight: 216
-  - name: Process Check
-    url: monitors/types/process_check/
-    parent: monitor_types
-    identifier: monitor_types_process_check
-    weight: 217
-  - name: Real User Monitoring
-    url: monitors/types/real_user_monitoring/
-    parent: monitor_types
-    identifier: monitor_types_rum
-    weight: 218
-  - name: Service Check
-    url: monitors/types/service_check/
-    parent: monitor_types
-    identifier: monitor_types_service_check
-    weight: 219
-  - name: SLO Alerts
-    url: monitors/types/slo/
-    parent: monitor_types
-    identifier: monitor_types_slo
-    weight: 220
-  - name: Watchdog
-    url: monitors/types/watchdog/
-    parent: monitor_types
-    identifier: monitor_types_watchdog
-    weight: 221
   - name: Database Monitoring
     url: monitors/types/database_monitoring/
     parent: monitor_types
     identifier: monitor_types_database_monitoring
-    weight: 222
+    weight: 211
+  - name: Error Tracking
+    url: monitors/types/error_tracking/
+    parent: monitor_types
+    identifier: monitor_types_error_tracking
+    weight: 213
+  - name: Event
+    url: monitors/types/event/
+    parent: monitor_types
+    identifier: monitor_types_event
+    weight: 215
+  - name: Forecast
+    url: monitors/types/forecasts/
+    parent: monitor_types
+    identifier: monitor_types_forecasts
+    weight: 217
+  - name: Integration
+    url: monitors/types/integration/
+    parent: monitor_types
+    identifier: monitor_types_integration
+    weight: 219
+  - name: Live Process
+    url: monitors/types/process/
+    parent: monitor_types
+    identifier: monitor_types_process
+    weight: 221
+  - name: Logs
+    url: monitors/types/log/
+    parent: monitor_types
+    identifier: monitor_types_log
+    weight: 223
+  - name: Network
+    url: monitors/types/network/
+    parent: monitor_types
+    identifier: monitor_types_network
+    weight: 225
+  - name: Outlier
+    url: monitors/types/outlier/
+    parent: monitor_types
+    identifier: monitor_types_outlier
+    weight: 227
+  - name: Process Check
+    url: monitors/types/process_check/
+    parent: monitor_types
+    identifier: monitor_types_process_check
+    weight: 229
+  - name: Real User Monitoring
+    url: monitors/types/real_user_monitoring/
+    parent: monitor_types
+    identifier: monitor_types_rum
+    weight: 231
+  - name: Service Check
+    url: monitors/types/service_check/
+    parent: monitor_types
+    identifier: monitor_types_service_check
+    weight: 233
+  - name: SLO Alerts
+    url: monitors/types/slo/
+    parent: monitor_types
+    identifier: monitor_types_slo
+    weight: 235
+  - name: Watchdog
+    url: monitors/types/watchdog/
+    parent: monitor_types
+    identifier: monitor_types_watchdog
+    weight: 237
   - name: Notifications
     url: monitors/notify/
     parent: alerting
