@@ -58,7 +58,7 @@ title: トレースビュー
 | `error.type`  | 専用のエラータイプを表示します。利用可能なタイプには、たとえば、Python の `ValueError` または `Exception` や、Java の `ClassNotFoundException` または`NullPointerException` があります。 |
 | `error.stack` | Datadog の UI（赤いボックスなど）で例外のスタックトレースをより適切に表示できます。                                                                                         |
 
-{{< img src="tracing/visualization/trace/trace_error_formating.png" alt="フォーマットエラー"  >}}
+{{< img src="tracing/visualization/trace/trace_error_formating.png" alt="フォーマットエラー" >}}
 
 [1]: /ja/tracing/glossary/#trace
 {{% /tab %}}
@@ -73,7 +73,7 @@ title: トレースビュー
 
 トレース時にサービスに関連するログを参照します。ログにカーソルを合わせると、そのタイムスタンプを示すラインがトレースフレームグラフに表示されます。ログをクリックすると、[ログエクスプローラー検索][1]が表示されます。
 
-{{< img src="tracing/visualization/trace/trace_logs.png" alt="トレースログ"  style="width:90%;">}}
+{{< img src="tracing/visualization/trace/trace_logs.png" alt="トレースログ" style="width:90%;">}}
 
 
 [1]: /ja/logs/explorer/search/
@@ -82,7 +82,7 @@ title: トレースビュー
 
 サービスのスパンをクリックすると、基礎インフラストラクチャーで実行中のプロセスを確認できます。サービスのスパンプロセスは、リクエスト時にサービスが実行されているホストまたはポッドと相関関係にあります。CPU および RSS メモリなどのプロセスメトリクスをコードレベルのエラーとともに分析することで、アプリケーション特有の問題かインフラストラクチャーの問題かを見分けることができます。プロセスをクリックすると、[ライブプロセス ページ][1]が開きます。スパン固有のプロセスを表示するには、[プロセスの収集][2]を有効にします。現在、関連するプロセスはサーバーレスおよびブラウザのトレースでサポートされていません。
 
-{{< img src="tracing/visualization/trace/trace_processes.png" alt="トレースのプロセス"  style="width:90%;">}}
+{{< img src="tracing/visualization/trace/trace_processes.png" alt="トレースのプロセス" style="width:90%;">}}
 
 [1]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows
 [2]: https://docs.datadoghq.com/ja/infrastructure/process/?tab=linuxwindows#installation
@@ -98,10 +98,21 @@ title: トレースビュー
 
 [1]: /ja/network_monitoring/performance/network_page
 [2]: /ja/network_monitoring/performance/setup
+{{< /tabs >}}
+
+{{% tab "セキュリティ" %}}
+
+分散型トレーシングのサービスを対象とした攻撃の試行を確認できます。攻撃者が使用したパターン、攻撃を検出したルール、攻撃者がサービスの脆弱性を発見したかどうかを確認することができます。
+
+[Datadog Application Security Management][1] を使用してさらに調査するには、**View in ASM** をクリックします。
+
+{{< img src="tracing/visualization/trace/trace_security.png" alt="攻撃の試行をトレースする" style="width:90%;">}}
+
+[1]: /ja/security/application_security/how-appsec-works/
 {{% /tab %}}
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

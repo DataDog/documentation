@@ -19,12 +19,13 @@ author:
   sales_email: team@pulumi.com
   support_email: team@pulumi.com
 categories:
-- orchestration
 - AWS
-- azure
-- cloud
-- google cloud
+- 自動化
+- クラウド
 - 構成 & デプロイ
+- developer tools
+- orchestration
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md
 display_on_public_website: true
@@ -42,20 +43,21 @@ public_title: Pulumi
 short_description: 好きなプログラミング言語を使って、あらゆるクラウドに対応する Infrastructure as Code を実現
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
   - Category::AWS
-  - Category::Azure
+  - Category::Automation
   - Category::Cloud
-  - Category::Google Cloud
   - Category::Configuration & Deployment
+  - Category::Developer Tools
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 好きなプログラミング言語を使って、あらゆるクラウドに対応する Infrastructure as Code を実現
   media: []
@@ -74,7 +76,7 @@ Pulumi インテグレーションは、Datadog で利用可能な任意のク�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Pulumi と Datadog のインテグレーション][2]では、Datadog SDK を使用してリソースの管理およびプロビジョニングを行います。
 

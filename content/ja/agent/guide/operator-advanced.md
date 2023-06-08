@@ -1,13 +1,11 @@
 ---
-title: Datadog Operator の高度なセットアップ
-kind: faq
 further_reading:
-  - link: agent/kubernetes/log
-    tag: Documentation
-    text: Datadog と Kubernetes
+- link: agent/kubernetes/log
+  tag: Documentation
+  text: Datadog と Kubernetes
+kind: faq
+title: Datadog Operator の高度なセットアップ
 ---
-
-<div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
 
 [Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
 
@@ -15,7 +13,7 @@ further_reading:
 
 Datadog Operator を使用するには、次の前提条件が必要です。
 
-- **Kubernetes Cluster バージョン >= v1.14.X**: テストはバージョン >= `1.14.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
+- **Kubernetes Cluster バージョン >= v1.20.X**: テストはバージョン >= `1.20.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
 - `datadog-operator` をデプロイするための [`Helm`][2]。
 - `datadog-agent` をインストールするための [`Kubectl` CLI][3]。
 
@@ -57,6 +55,7 @@ datadogagent.datadoghq.com/datadog created
 
 ```shell
 kubectl get -n $DD_NAMESPACE dd datadog
+
 NAME            ACTIVE   AGENT             CLUSTER-AGENT   CLUSTER-CHECKS-RUNNER   AGE
 datadog-agent   True     Running (2/2/2)                                           110m
 ```
@@ -90,20 +89,21 @@ helm delete datadog
 `datadog-agent.yaml` ファイルを次のコンフィギュレーションで更新して、`DaemonSet` の `Daemonset.spec.template` に許容範囲を追加します。
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: "<DATADOG_API_KEY>"
-    appKey: "<DATADOG_APP_KEY>"
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    config:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  override:
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-       - operator: Exists
+        - operator: Exists
 ```
 
 この新しいコンフィギュレーションを適用します。
@@ -135,10 +135,10 @@ datadog-agent-zvdbw                          1/1     Running    0          8m1s
 [1]: https://github.com/DataDog/datadog-operator
 [2]: https://helm.sh
 [3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-all.yaml
-[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs-apm.yaml
-[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-logs.yaml
-[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-apm.yaml
-[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-clusteragent.yaml
-[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-tolerations.yaml
+[4]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-all.yaml
+[5]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs-apm.yaml
+[6]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-logs.yaml
+[7]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-apm.yaml
+[8]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-clusteragent.yaml
+[9]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-tolerations.yaml
 [10]: https://app.datadoghq.com/organization-settings/api-keys

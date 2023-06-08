@@ -2,10 +2,10 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/oauth/
   tag: GitHub
-  text: OAuth によるデータインテグレーションの効率化と安全性の確保
-- link: /developers/integrations/oauth_for_data_integrations
+  text: OAuth で Datadog のインテグレーションを認可する
+- link: /developers/integrations/oauth_for_integrations
   tag: ドキュメント
-  text: データインテグレーションのための OAuth の実装
+  text: インテグレーションに OAuth を実装する
 - link: /developers/authorization/oauth2_in_datadog/
   tag: ドキュメント
   text: Datadog の OAuth2 について
@@ -28,7 +28,7 @@ OAuth2 クライアントは、ユーザーに代わって Datadog リソース�
 : 一般的にブラウザベースのアプリケーションに使用され、機密情報を保存することができません。パブリッククライアントの例としては、[Datadog アプリ][4]の OAuth クライアントが挙げられます。
 
 機密クライアント
-: 機密データを保存することができ、認可リクエストを行うために追加の `client_secret` を必要とします。データインテグレーション用の OAuth クライアントは機密クライアントです。
+: 機密データを保存することができ、認可リクエストを行うために追加の `client_secret` を必要とします。インテグレーション用の OAuth クライアントは機密クライアントです。
 
 OAuth クライアントを作成すると、クライアント ID、およびオプションで機密クライアントのためのクライアントシークレットの形で、クライアント資格情報のセットが発行されます。
 

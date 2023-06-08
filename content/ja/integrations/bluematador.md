@@ -19,7 +19,8 @@ author:
   sales_email: support@bluematador.com
   support_email: support@bluematador.com
 categories:
-- 監視
+- アラート設定
+- 自動化
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md
 display_on_public_website: true
@@ -37,15 +38,16 @@ public_title: Blue Matador
 short_description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Alerting
+  - Category::Automation
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
   media: []

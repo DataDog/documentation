@@ -34,7 +34,7 @@ Using overrides, you can change the available login methods for individual users
 
 In [User Management][3], you can filter users by the override methods set, or view users who have the Default login methods enabled:
 
-{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to login override methods enabled." style="width:80%;">}}
+{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to show users by login methods set." style="width:80%;">}}
 
 You can edit the user's overrides or remove the override altogether to allow the user to only use the defaults. For more information see [Edit a user's login methods][1].
 

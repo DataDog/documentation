@@ -28,7 +28,7 @@ further_reading:
 ## Compatibility requirements
 The latest Python Tracer supports CPython versions 2.7 and 3.5-3.10.
 
-For a full list of Datadog’s Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
+For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -103,7 +103,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
      dogstatsd_url="unix:///var/run/datadog/dsd.socket",
    )
    ```
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -122,7 +122,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 
 Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
-For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
@@ -134,13 +134,15 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Instrument Your Application
 
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+
 Once the agent is installed, to begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
 
 ```python
 pip install ddtrace
 ```
 
-**Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
+**Note:** This command requires pip version `18.0.0` or greater. For Ubuntu, Debian, or another package manager, update your pip version with the following command:
 
 ```python
 pip install --upgrade pip

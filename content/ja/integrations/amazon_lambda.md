@@ -3,9 +3,10 @@ aliases:
 - /ja/integrations/awslambda/
 - /ja/serverless/real-time-enhanced-metrics/
 categories:
-- cloud
 - aws
+- cloud
 - log collection
+- tracing
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
@@ -28,6 +29,11 @@ integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  lambda_high_error_rate: assets/monitors/lambda_high_error_rate.json
+  lambda_high_iterator_rate: assets/monitors/lambda_high_iterator_rate.json
+  lambda_high_throttles: assets/monitors/lambda_high_throttles.json
+  lambda_timeout: assets/monitors/lambda_timeout.json
 name: amazon_lambda
 public_title: Datadog-Amazon Lambda インテグレーション
 short_description: Lambda の実行、エラー、呼び出しの回数などを追跡
@@ -44,7 +50,7 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -67,11 +73,13 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 
 ## 収集データ
 
+<div class="alert alert-warning">AWS Lambda 拡張機能を使用する場合、AWS が報告する <em>duration</em> メトリクスには、<a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">関数の応答が返された後にアクティビティを実行する</a> Lambda 拡張機能によって消費される <em>post_runtime_extensions_duration</em> が含まれています。関数の実際のパフォーマンスをモニターするには、<em>duration - post_runtime_extensions_duration</em> または <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">Datadog の拡張メトリクス</a> <em>aws.lambda.enhanced.runtime_duration</em> を使用します。</div>
+
+AWS から取得される各メトリクスには、関数名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+
 ### メトリクス
 {{< get-metrics-from-git "amazon_lambda" >}}
 
-
-AWS から取得される各メトリクスには、関数名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
 
 ### イベント
 

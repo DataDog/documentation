@@ -38,14 +38,14 @@ API テストにより、最も重要なサービスを **能動的に監視** �
 
 API テストは、Datadog [管理ロケーション][3]または[プライベートロケーション][4]から実行してシステムの**外部および内部をカバー**します。
 
-**注**: API テストは、サービスに対して実行される単一のリクエストです。API レベルまたは認証を必要とするエンドポイントで高度なビジネストランザクションを監視する場合は、[Multistep API テスト][5]を使用してリクエストをチェーンします。
+**注:** API テストは、サービスに対して実行される単一のリクエストです。API レベルまたは認証を必要とするエンドポイントで高度なビジネストランザクションを監視する場合は、[Multistep API テスト][5]を使用してリクエストをチェーンします。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/api_tests/http_tests?tab=requestoptions#notify-your-team
-[2]: /ja/synthetics/cicd_integrations
-[3]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
+[2]: /ja/continuous_testing/cicd_integrations
+[3]: /ja/synthetics/api_tests/http_tests/#select-locations
 [4]: /ja/synthetics/private_locations
 [5]: /ja/synthetics/multistep/

@@ -15,18 +15,18 @@ further_reading:
 - link: "/continuous_testing/explorer"
   tag: "Documentation"
   text: "Learn about the Synthetic Monitoring & Continuous Testing Explorer"
-- link: "/events/explorer"
+- link: "/service_management/events/explorer"
   tag: "Documentation"
   text: "Learn about the Events Explorer"
 ---
 
 ## Overview
 
-You can search, access, and manage all of your tests on the [Synthetic Tests page][1]. 
+You can access, [search](#search-for-tests), and [manage](#manage-tests) all of your tests on the [Synthetic Tests page][1]. 
 
-To better understand the state of your application, click **Show Metrics**. The **Overview Metrics** section appears with graphs about your overall tests' uptime and response time. Explore [out-of-the-box Synthetic dashboards][3] to better understand your tests' performance and usage. For more information about the data displayed, see [Synthetic Monitoring Metrics][2].
+{{< img src="synthetics/search/synthetic_tests_page.png" alt="Synthetic Monitoring Tests page" style="width:100%" >}}
 
-You can use facets to accomplish the following actions:
+By using [facets](#facets-and-tags), you can accomplish the following actions:
 
 - Search for specific Synthetic tests
 - Investigate every CI/CD job execution to identify and troubleshoot failing test runs
@@ -76,29 +76,33 @@ When you select and deselect facets, the search bar automatically reflects your 
 * **Search on free text**: Enter your text in the search bar to search on a test name.
 * **Search on a single facet**: Click a facet value to create a search query that includes only that facet value. For example, `type:api`. To add another value of the same facet to your search, click on an additional value's checkbox. You can also add the additional value with an `OR` Boolean operator and wrap the values using quotes and parentheses. For example, `type:("api" OR "api-ssl")`.
 * **Search on multiple facets and text**: Click on facet values from different facet types to customize a search query that filters for multiple facets. For example, `type:api region:aws:us-east-2`. You can also mix facets and text. For example, `checkout type:browser`. Although invisible, the `AND` Boolean operator is applied when searching on multiple terms.
-* **Search on message**: Add a message to create a search query that filters on your tests’ notification messages configured in the [test monitor][5]. For example, `message:testcontent`.
+* **Search on message**: Add a message to create a search query that filters on your tests' notification messages configured in the [test monitor][5]. For example, `message:testcontent`.
 * **Exclude facets or text**: Click on an already-filled checkbox to deselect a facet value or prepend a term with `-` to exclude it from the search query. For example, `-state:paused`.
 * **Perform custom matches**: Use wildcards (`*`). For example, `valid*`.
 
-To search on a type of Synthetics test, select the test type under the **Type** variable.
+To search on a type of Synthetics test, select the test type under the **Type** facet.
 
-{{< img src="synthetics/search/facet-search.mp4" alt="Facet Search" video=true >}}
+{{< img src="synthetics/search/facet_search.mp4" alt="Search for tests using facets in the Tests page" video=true >}}
 
 ## Manage tests
 
-### Batch actions
+### Bulk actions
 
-Manage your Synthetic tests in bulk by selecting multiple test checkboxes in the list on the [Synthetic Tests page][1]. Click **Run Tests Now** or **Delete** to bulk run or delete the Synthetic tests you selected.
+Manage your Synthetic tests in bulk by selecting one or more tests on the [Synthetic Tests page][1] and clicking **Edit Tags**, **Run Tests Now**, or **Delete**. 
+
+{{< img src="synthetics/search/edit_tags.mp4" alt="Edit bulk tags of Synthetic tests" video=true >}}
 
 ### Test actions
 
 Hovering over a test populates option icons on the right such as `Pause`, `Run Test Now`, `Edit`, `Clone`, and `Delete`. The `Edit Recording` option is available for browser tests.
 
-{{< img src="synthetics/search/action_tray.mp4" alt="Action tray options" video="true" width="100%">}}
+{{< img src="synthetics/search/manage_test_options.mp4" alt="Action tray options that appear when hovering on a Synthetic test" video="true" width="100%">}}
 
 ### Track events
 
 Creating, adding, and deleting Synthetic tests, global variables, and private locations generates events in the [Events Explorer][6]. Events describe changes that occurred and display the users who performed the changes.
+
+{{< img src="synthetics/search/synthetic_events.png" alt="Synthetic test alerts in the Events Explorer" style="width:100%" >}}
 
 Find all Synthetics-related changes by searching for your test monitors' alerts in the search bar, or by selecting an event type under the **Event** template variable. For example, `Event Type:synthetics_alert`.
 

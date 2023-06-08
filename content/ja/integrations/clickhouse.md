@@ -24,6 +24,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 - ログの収集
 dependencies:
@@ -33,7 +34,7 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 2.8.0
+integration_version: 2.8.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -43,16 +44,17 @@ public_title: ClickHouse
 short_description: ClickHouse クラスターの健全性とパフォーマンスを監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Data Store
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ClickHouse クラスターの健全性とパフォーマンスを監視。
   media: []
@@ -71,7 +73,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 ClickHouse チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

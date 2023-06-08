@@ -9,6 +9,8 @@ further_reading:
 - link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
+algolia:
+  tags: ['agent status command']
 ---
 
 <div class="alert alert-warning">
@@ -268,7 +270,6 @@ Some options have flags and options detailed under `--help`. For example, use he
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
 | `jmx`             | JMX troubleshooting.                                                        |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
-| `regimport`       | Import the registry settings into `datadog.yaml`. Windows only. Deprecated since 7.27.0             |
 | `restart-service` | Restart the Agent within the service control manager. Windows only.         |
 | `start-service`   | Start the Agent within the service control manager. Windows only.           |
 | `stream-logs`     | Stream the logs being processed by a running agent.                         |

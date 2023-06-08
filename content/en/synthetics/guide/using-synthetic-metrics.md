@@ -35,7 +35,7 @@ This guide demonstrates how to set up a metric monitor using a general metric su
 
 1. To create a metric monitor, navigate to [Monitors > New Monitor][4] and click **Metric**. 
 
-2. Select a detection method to customize your monitor’s alerting conditions. For this example, you can create a threshold alert metric monitor.
+2. Select a detection method to customize your monitor's alerting conditions. For this example, you can create a threshold alert metric monitor.
 
    Threshold Alert
    : An alert is triggered whenever a metric crosses a threshold.
@@ -63,6 +63,6 @@ This guide demonstrates how to set up a metric monitor using a general metric su
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/metrics/
-[2]: /monitors/create/types/metric/
+[2]: /monitors/types/metric/
 [3]: /synthetics/guide/synthetic-test-monitors/
 [4]: https://app.datadoghq.com/monitors/create/metric

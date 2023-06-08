@@ -11,11 +11,14 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/database-performance-monitoring-datadog/'
       tag: 'Blog'
       text: 'Database performance monitoring with Datadog'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to level up your Database Monitoring'
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Database Monitoring is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Overview
 

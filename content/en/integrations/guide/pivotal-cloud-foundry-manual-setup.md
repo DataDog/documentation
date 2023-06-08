@@ -192,11 +192,11 @@ Since runtime configuration applies globally, BOSH redeploys every node in your 
 
 To check if the Agent installations were successful, filter by `cloudfoundry` on the [Host Map][20]. The Datadog Agent BOSH release tags each host with `cloudfoundry`. Optionally, group hosts by any tag, such as `bosh_job`, as in the following screenshot:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="The host map in Datadog with cloudfoundry entered in the Filter section and bosh_job in the Group section"  >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="The host map in Datadog with cloudfoundry entered in the Filter section and bosh_job in the Group section" >}}
 
 Click on any host to zoom in, then click **system** within its hexagon to make sure Datadog is receiving system metrics:
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="The detail view for a host in the Datadog host map with the system integration selected and multiple graphs displaying data"  >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="The detail view for a host in the Datadog host map with the system integration selected and multiple graphs displaying data" >}}
 
 #### Collect CAPI metadata and Cluster Agent tags in PCF containers
 
@@ -239,6 +239,8 @@ jobs:
       aliases:
         - domain: <DNS_NAME (e.g. datadog-cluster-agent)>
 ```
+
+Replace `<TOKEN>` with your [Cluster Agent token][34].
 
 **Note**: This creates a DNS alias for the Datadog Cluster Agent service which makes it addressable through a static alias. See [Aliases to services](https://bosh.io/docs/dns/#aliases-to-services) in the BOSH documentation for more details on BOSH DNS aliases.
 
@@ -461,7 +463,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 In the [Metrics Explorer][23], search for metrics beginning with `cloudfoundry.nozzle`.
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="The Metrics Explorer in Datadog with cloudfoundry.nozzle entered in the search bar"  >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="The Metrics Explorer in Datadog with cloudfoundry.nozzle entered in the search bar" >}}
 
 #### Control the application metadata prefix
 
@@ -499,3 +501,4 @@ You can enable or disable the application metadata prefix in the Firehose Nozzle
 [30]: /profiler/enabling/
 [32]: /integrations/faq/pivotal_architecture
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
+[34]: https://docs.datadoghq.com/containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication

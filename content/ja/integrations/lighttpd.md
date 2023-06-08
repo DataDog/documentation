@@ -28,8 +28,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md
@@ -48,17 +46,15 @@ public_title: Lighttpd
 short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
-  - Category::オートディスカバリー
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
   media: []
@@ -77,7 +73,7 @@ Agent の lighttpd チェックは、アップタイム、処理バイト数、�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Lighttpd チェックは [Datadog Agent][2] パッケージに含まれています。Lighttpd サーバーに追加でインストールする必要はありません。
 

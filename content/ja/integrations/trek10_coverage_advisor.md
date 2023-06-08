@@ -49,13 +49,13 @@ public_title: Trek10 AWS Coverage Advisor
 short_description: 120 種類の AWS メトリクスをチェックしてカバレッジのギャップを確認
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::AWS

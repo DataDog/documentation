@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
       text: 'API documentation'
+    - link: "/tracing/trace_collection/trace_context_propagation/nodejs/"
+      tag: "Documentation"
+      text: "Propagating trace context"
     - link: 'tracing/glossary/'
       tag: 'Use the APM UI'
       text: 'Explore your services, resources and traces'
@@ -229,6 +232,22 @@ A regex string to redact sensitive data by its value in attack reports.
 **Default**: 5<br>
 Remote configuration polling interval in seconds.
 
+<a id="headers-extraction-and-injection">
+
+`DD_TRACE_PROPAGATION_STYLE_INJECT`
+: **Configuration**: `tracePropagationStyle.inject`<br>
+**Default**: `Datadog,tracecontext`<br>
+A comma-separated list of header formats to include to propagate distributed traces between services.
+
+`DD_TRACE_PROPAGATION_STYLE_EXTRACT`
+: **Configuration**: `tracePropagationStyle.extract`<br>
+**Default**: `Datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.
+
+`DD_TRACE_PROPAGATION_STYLE`
+: **Configuration**: `tracePropagationStyle`<br>
+**Default**: `Datadog,tracecontext`<br>
+A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT` configurations take priority when present.
 
 For more examples of how to work with the library see [API documentation][2].
 

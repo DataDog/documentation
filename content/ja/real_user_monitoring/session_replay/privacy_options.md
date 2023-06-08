@@ -18,7 +18,7 @@ title: セッションリプレイのプライバシーオプション
 
 セッションリプレイのデフォルトのプライバシー オプションは、エンドユーザーのプライバシーを保護し、重要な組織情報が収集されるのを防ぐように設計されています。
 
-セッションリプレイを有効にすることで、RUM ブラウザ SDK を通じて記録される機密要素を自動的にマスクすることができます。
+セッションリプレイを有効にすることで、RUM ブラウザ SDK を通じて記録される機密要素を自動的にマスクすることができます。データがマスクされると、そのデータは Datadog の SDK によって元の形で収集されないため、バックエンドに送信されることはありません。
 
 ## コンフィギュレーション
 
@@ -36,11 +36,11 @@ datadogRum.init({
     //  service: 'my-web-application',
     //  env: 'production',
     //  version: '1.0.0',
-    sampleRate: 100,
+    sessionSampleRate: 100,
     sessionReplaySampleRate: 100,
     trackResources: true,
     trackLongTasks: true,
-    trackInteractions: true,
+    trackUserInteractions: true,
     defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
 });
 
@@ -53,16 +53,16 @@ datadogRum.startSessionReplayRecording();
 
 入力、テキストエリア、チェックボックスの値など、ほとんどのフォームフィールドをマスクし、その他のテキストはそのまま記録します。入力は 3 つのアスタリスク (`***`) に置き換えられ、テキストエリアはスペースを保持する `x` 文字で難読化されます。
 
-{{< img src="real_user_monitoring/session_replay/mask-user-input.png" alt="ユーザー入力マスクモード" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="ユーザー入力マスクモード" style="width:70%;">}}
 
-**注:** デフォルトでは、セッションリプレイを有効にすると、`mask-user-input` がプライバシー設定になります。
+**注:** デフォルトでは、セッションリプレイを有効にすると、`mask-user-input` がプライバシー設定になり、すべての入力フィールドが自動的にマスクされます。
 
 ### マスクモード
+`defaultPrivacyLevel` を `mask` に設定すると、すべての HTML テキスト、ユーザー入力、画像、リンクがマスクされます。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
 
-すべての HTML テキスト、ユーザー入力、画像、リンクをマスクします。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
+{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="マスクモード" style="width:70%;">}}
 
-{{< img src="real_user_monitoring/session_replay/mask.png" alt="マスクモード" style="width:70%;">}}
-
+**注**: マスクされたデータは Datadog のサーバーには保管されません。
 ### 許可モード
 
 マスクされていないすべてが記録されます。
@@ -105,7 +105,7 @@ datadogRum.startSessionReplayRecording();
 
 `hidden` は高度なプライバシー設定で、テキストを見えなくする代わりに、特定の要素を完全に隠します。
 
-機密性の高いフィールドで可視要素の数が気になる場合は、特定の要素に対して ‘hidden’ を有効にしてください。これらの HTML 要素は、記録時にグレーのブロックに置き換えられます。
+機密性の高いフィールドで可視要素の数が気になる場合は、特定の要素に対して `hidden` を有効にしてください。これらの HTML 要素は、記録時にグレーのブロックに置き換えられます。
 
 このリプレイセッションの例では、Datadog のナビゲーションにあるユーザー名が難読化されています。
 
@@ -117,7 +117,7 @@ datadogRum.startSessionReplayRecording();
 
 特定の HTML 要素の名前をより一般的な名前で上書きすることで、デフォルトのアクション名を変更することができます。デフォルトでは、Datadog はカスタムオーバーライド名を表示します。
 
-例えば、以下の名前を `<div data-dd-action-name="Address" > → Action: “Click on Address”` でオーバーライドします。
+例えば、以下の名前を `<div data-dd-action-name="Address" > → Action: "Click on Address"` でオーバーライドします。
 
 デフォルトのアクション名をオーバーライドするその他のユースケースとしては、RUM エクスプローラーで機密データをマスクする、カスタム命名規則で分析と検索を合理化するなどがあります。
 
@@ -127,6 +127,6 @@ Datadog は、RUM とセッションリプレイにさらなるプライバシ�
 
 </div>
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

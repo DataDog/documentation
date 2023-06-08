@@ -113,6 +113,7 @@ snmp_listener:
   use_device_id_as_hostname: true  # recommended
   configs:
     - network_address: 10.10.0.0/24  # CIDR subnet
+      loader: core
       snmp_version: 2
       port: 161
       community_string: '***'  # enclose with single quote
@@ -120,6 +121,7 @@ snmp_listener:
       - "key1:val1"
       - "key2:val2"
     - network_address: 10.20.0.0/24
+      loader: core
       snmp_version: 2
       port: 161
       community_string: '***'

@@ -21,7 +21,7 @@ title: ウェブサービスの最も遅いエンドポイントで最も遅い�
 
 _所要時間 3 分_
 
-{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="最も遅いトレースを特定し、そのホストメトリクスを解明する"  style="width:90%;">}}
+{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="最も遅いトレースを特定し、そのホストメトリクスを解明する" style="width:90%;">}}
 
 Datadog APM を使用すると、エンドポイントのパフォーマンスを調査して遅いリクエストを特定し、レイテンシー問題の根本原因を調査できます。上記の例では、E コマースチェックポイントのエンドポイントについて、1 日のうちで最も遅い[トレース][1]と、CPU 使用率が高いためにそのトレースが遅くなっている様子を示しています。
 
@@ -33,7 +33,7 @@ Datadog APM を使用すると、エンドポイントのパフォーマンス�
 
    ここでは、テクノロジースタックのプライマリサーバーであり、サードパーティのサービスへのコールのほとんどを制御しているウェブストアサービスを例として使用しています。
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する"  style="width:90%;">}}
+    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する" style="width:90%;">}}
 
     スループット、レイテンシー、エラー率に関する情報のほか、サービス詳細画面では、サービスで特定されたリソース (API エンドポイント、SQL クエリ、ウェブリクエストなどの主なオペレーション) の一覧も確認できます。
 

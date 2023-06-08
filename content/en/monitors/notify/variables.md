@@ -315,6 +315,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 |-----------------|--------------------------------------------------|
 | Log             | `{{log.attributes.key}}` or `{{log.tags.key}}`   |
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
+| Error Tracking  | `{{span.attributes.[error.message]}}`             |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
@@ -329,7 +330,7 @@ For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the
 ...
 ```
 
-{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax"  style="width:90%;">}}
+{{< img src="monitors/notifications/tag_attribute_variables.png" alt="Matching attribute variable syntax" style="width:90%;">}}
 
 The message renders the `error.message` attribute of a chosen log matching the query, **if the attribute exists**.
 
@@ -339,13 +340,16 @@ If a monitor uses Formulas & Functions in its queries, the values are resolved w
 
 #### Reserved attributes
 
-Logs, spans, and RUM events have generic reserved attributes, which you can use in variables with the following syntax:
+Logs, Event Management, spans, RUM, CI Pipeline, and CI Test events have generic reserved attributes, which you can use in variables with the following syntax:
 
 | Monitor type    | Variable syntax   | First level attributes |
 |-----------------|-------------------|------------------------|
-| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id` |
-| Trace Analytics | `{{span.key}}`    | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type` |
-| RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp` |
+| Log             | `{{log.key}}`     | `message`, `service`, `status`, `source`, `span_id`, `timestamp`, `trace_id`, `link` |
+| Trace Analytics | `{{span.key}}`    | `env`, `operation_name`, `resource_name`, `service`, `status`, `span_id`, `timestamp`, `trace_id`, `type`, `link` |
+| RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp`, `link` |
+| Event             | `{{event.key}}`     | `id`, `title`, `text`, `host.name`, `tags` |
+| CI Pipeline             | `{{cipipeline.key}}`     | `service`, `env`, `resource_name`, `ci_level`, `trace_id`, `span_id`, `pipeline_fingerprint`, `operation_name`, `ci_partial_array`, `status`, `timestamp`, `link` |
+| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `error.message`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
 
 If the matching event does not contain the attribute in its definition, the variable is rendered empty.
 
@@ -390,7 +394,7 @@ Use template variables to customize your monitor notifications. The built-in var
 | `{{value}}`                    | The value that breached the alert for metric based query monitors.            |
 | `{{threshold}}`                | The value of the alert threshold set in the monitor's alert conditions.       |
 | `{{warn_threshold}}`           | The value of the warning threshold set in the monitor's alert conditions.     |
-| `{{ok_threshold}}`             | The value that recovered the monitor.                                         |
+| `{{ok_threshold}}`             | The value that recovered the Service Check monitor.                            |
 | `{{comparator}}`               | The relational value set in the monitor's alert conditions.                   |
 | `{{first_triggered_at}}`       | The UTC date and time when the monitor first triggered.                       |
 | `{{first_triggered_at_epoch}}` | The UTC date and time when the monitor first triggered in epoch milliseconds. |
@@ -563,10 +567,10 @@ If your alert message includes information that needs to be encoded in a URL (fo
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
 
-[1]: /monitors/create/configuration/#alert-grouping
-[2]: /monitors/create/types/log/
-[3]: /monitors/create/types/apm/?tab=analytics
-[4]: /monitors/create/types/real_user_monitoring/
-[5]: /monitors/create/types/ci/
+[1]: /monitors/configuration/#alert-grouping
+[2]: /monitors/types/log/
+[3]: /monitors/types/apm/?tab=analytics
+[4]: /monitors/types/real_user_monitoring/
+[5]: /monitors/types/ci/
 [6]: /monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

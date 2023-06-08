@@ -1,7 +1,5 @@
 ---
 beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/swiftui.md
 description: Utilisez RUM pour instrumenter vos applications SwiftUI.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
@@ -13,13 +11,14 @@ further_reading:
 kind: documentation
 title: SwiftUI
 ---
+
 ## Présentation
 
 Le SDK iOS Datadog pour RUM vous permet d'instrumenter les vues et les actions de vos applications `SwiftUI`. L'instrumentation fonctionne également avec les applications `UIKit` et `SwiftUI` hybrides. 
 
 La prise en charge de SwiftUI est disponible à partir de la [version 1.9.0][1] du SDK. 
 
-## Configuration
+## Implémentation
 
 Pour en savoir plus sur la configuration, consultez [Surveillance iOS et tvOS][2].
 

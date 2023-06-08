@@ -51,7 +51,7 @@ PHP ログとトレースを手動で接続する方法については、以下�
 ?>
 ```
 
-ロガーが [**monolog/monolog** ライブラリ][4]を実装する場合、`Logger::pushProcessor()` を使ってすべてのログメッセージに識別子を自動的に付加します:
+ロガーが [**monolog/monolog** ライブラリ][4]を実装する場合、`Logger::pushProcessor()` を使ってすべてのログメッセージに識別子を自動的に付加します。monolog v1 の場合:
 
 ```php
 <?php
@@ -64,6 +64,36 @@ PHP ログとトレースを手動で接続する方法については、以下�
       );
       return $record;
   });
+?>
+```
+
+monolog v2 の場合:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+      $context = \DDTrace\current_context();
+      return $record->with(message: $record['message'] . sprintf(
+          ' [dd.trace_id=%s dd.span_id=%s]',
+          $context['trace_id'],
+          $context['span_id']
+      ));
+    });
+  ?>
+```
+
+monolog v3 の場合:
+
+```php
+<?php
+  $logger->pushProcessor(function ($record) {
+        $context = \DDTrace\current_context();
+        $record->extra['dd'] = [
+            'trace_id' => $context['trace_id'],
+            'span_id'  => $context['span_id'],
+        ];
+        return $record;
+    });
 ?>
 ```
 
@@ -83,7 +113,7 @@ PHP ログとトレースを手動で接続する方法については、以下�
 ?>
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

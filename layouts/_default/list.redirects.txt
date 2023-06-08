@@ -1,0 +1,8 @@
+{{- range $p := .Site.Pages -}}
+    {{- range .Aliases -}}
+        {{- $temp := strings.TrimPrefix "/" . -}}
+        {{- $alias := strings.TrimSuffix "/" $temp -}}
+        {{- $target := strings.TrimSuffix "/" $p.RelPermalink -}}
+        {{- printf "%s/ %s\n" $alias $p.RelPermalink -}}
+    {{- end -}}
+{{- end -}}

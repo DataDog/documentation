@@ -1,6 +1,6 @@
 ---
 title: profile
-synonyms:
-  - network profile
+core_product:
+  - code profiling
 ---
-A network profile is a set of attributes that describe how a network is configured.
+A profile is snapshot in time of how much work (CPU usage, memory usage) is being done by code.

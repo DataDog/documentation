@@ -437,8 +437,8 @@ The `from` and `to` parameters can be:
 ```javascript
 {
   "filter": {
-    "from": "now",
-    "to": "now-1h"
+    "from": "now-1h",
+    "to": "now"
   }
 }
 ```

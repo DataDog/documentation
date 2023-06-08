@@ -35,9 +35,9 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-### Amazon Linux 2、Amazon Linux 2022
+### Amazon Linux 2、Amazon Linux 2022/2023
 
-<div class="alert alert-info">Amazon Linux 2022 を Agent バージョン <= 6.39/7.39 でインストールする場合、<code>libxcrypt-compat</code> パッケージが必要です。このパッケージをインストールするには、<pre><code>dnf install -y libxcrypt-compat</code></pre> を実行してください。</div>
+<div class="alert alert-info">Amazon Linux 2022/2023 を Agent バージョン <= 6.39/7.39 でインストールする場合、<code>libxcrypt-compat</code> パッケージが必要です。このパッケージをインストールするには、<pre><code>dnf install -y libxcrypt-compat</code></pre> を実行してください。</div>
 
 | 説明                        | コマンド                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -125,7 +125,7 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 詳細については、[埋め込み Agent へのパッケージの追加方法][3]の手順を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

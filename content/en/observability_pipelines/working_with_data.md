@@ -4,6 +4,9 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/working_with_data/
 further_reading:
+  - link: /observability_pipelines/setup/
+    tag: Documentation
+    text: Set up Observability Pipelines
   - link: /observability_pipelines/reference/transforms/#awsec2metadata
     tag: Documentation
     text: Parsing metadata emitted by AWS EC2 instance
@@ -19,9 +22,6 @@ further_reading:
   - link: /observability_pipelines/reference/transforms/#metrictolog
     tag: Documentation
     text: Convert metrics to log events
-  - link: /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-    tag: Documentation
-    text: Configure Datadog Agents to send data to Observability Pipelines
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations

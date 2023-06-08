@@ -1,33 +1,34 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- configuration & deployment
+- google cloud
+- log collection
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Load\_Balancing."
+description: Surveillez des métriques clés de Google Cloud Load Balancing.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/
 draft: false
 git_integration_title: google_cloud_loadbalancing
 has_logo: true
 integration_id: google-cloud-loadbalancing
-integration_title: "Google\_Cloud\_Load\_Balancing"
+integration_title: Google Cloud Load Balancing
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_loadbalancing
-public_title: "Intégration Datadog/Google\_Cloud\_Load\_Balancing"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Load\_Balancing."
+public_title: Intégration Datadog/Google Cloud Load Balancing
+short_description: Surveillez des métriques clés de Google Cloud Load Balancing.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Load Balancing vous permet de répartir vos ressources informatiques à équilibrage de charge dans une seule ou plusieurs régions, près de vos utilisateurs, et de bénéficier de la haute disponibilité dont vous avez besoin. Associez vos ressources à une seule adresse IP Anycast et faites-les évoluer à la hausse ou à la baisse grâce à la fonctionnalité d'autoscaling intelligent.
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Load Balancing.
 
-## Configuration
+## Implémentation
 
 ### Collecte de métriques
 

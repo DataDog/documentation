@@ -45,5 +45,5 @@ Options available for some visualization types are not supported in others. For 
 [3]: /real_user_monitoring/explorer/
 [4]: https://docs.datadoghq.com/api/latest/rum/
 [5]: /dashboards/
-[6]: /monitors/create/types/real_user_monitoring/
+[6]: /monitors/types/real_user_monitoring/
 [7]: /notebooks/

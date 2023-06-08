@@ -15,6 +15,9 @@ further_reading:
 - link: "/agent/guide/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
+- link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
+  tag: "Blog"
+  text: "Performance Improvements in the Datadog Agent Metrics Pipeline"
 ---
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
@@ -84,7 +87,7 @@ Agent v5 is composed of four major components, each written in Python running as
 * **Forwarder** (`ddagent.py`): The forwarder retrieves data from both DogStatsD and the collector, queues it up, and then sends it to Datadog.
 * **SupervisorD**: This is all controlled by a single supervisor process. It is kept separate to limit the overhead of each application if you aren't running all parts. However, it is generally recommended to run all parts.
 
-**Note**: For Windows users, all four Agent processes appear as instances of `ddagent.exe` with the description `DevOps’ best friend`.
+**Note**: For Windows users, all four Agent processes appear as instances of `ddagent.exe` with the description `DevOps' best friend`.
 
 ### Supervision, privileges, and network ports
 
@@ -152,7 +155,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [macOS][9]                               | macOS 10.12+ in Agent < 6.35.0/7.35.0, macOS 10.13+ in Agent < 7.39.0, macOS 10.14+ in Agent 7.39.0+ |
 | [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
 | [Windows][10]                            | Windows 7+                                                |
-| [Windows Azure Stack HCI OS][10]         | All Versions                                              |
+| [Azure Stack HCI OS][10]                 | All Versions                                              |
 
 | Platform (64-bit Arm v8)                 | Supported versions                                        |
 |------------------------------------------|-----------------------------------------------------------|
@@ -166,7 +169,7 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 | [macOS][9]                               | macOS 11.0+                                               |
 
 
-**Notes**: 
+**Notes**:
 - [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
 - Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
 
@@ -244,7 +247,6 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `hostname`        | Print the hostname used by the Agent.                                       |
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
-| `regimport`       | Import the registry settings into `datadog.yaml`.                           |
 | `restart`         | [Restart the Agent][2].                                                     |
 | `restart-service` | Restart the Agent within the service control manager.                       |
 | `start`           | [Start the Agent][3].                                                       |
@@ -311,7 +313,7 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
 
-Note: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
+**Note**: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
 
 ### Configuration files
 
@@ -325,9 +327,11 @@ Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site
 site: {{< region-param key="dd_site" >}}
 ```
 
+**Note**: See the [Getting Started with Datadog Sites documentation][11] for further details on the `site` parameter.
+
 ### Log location
 
-See the [Agent log files documentation][11].
+See the [Agent log files documentation][12].
 
 ## Further Reading
 
@@ -343,4 +347,5 @@ See the [Agent log files documentation][11].
 [8]: /agent/guide/integration-management/
 [9]: /agent/guide/agent-configuration-files/
 [10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-log-files/
+[11]: /getting_started/site/
+[12]: /agent/guide/agent-log-files/

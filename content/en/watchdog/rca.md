@@ -52,7 +52,7 @@ The Critical Failure section highlights where and how the root cause first (and 
 
 Watchdog RCA also identifies services indirectly affected by the root cause. Any performance degradation listed in Impact is expected to recover once the Critical Failure is resolved. For RUM users, Watchdog also automatically assesses which view paths and users were affected by the performance anomalies.
 
-{{< img src="watchdog/rca/views_impacted.png" alt="Screenshot of Watchdog Root Cause Analysis detail showing Views impacted popup">}}
+{{< img src="watchdog/rca/views_impacted.png" alt="Screenshot of Watchdog Root Cause Analysis detail showing Views impacted pop-up">}}
 
 ## Further reading
 

@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- data store
 - ログの収集
 dependencies: []
 description: Amazon FSx のキーメトリクスを追跡
@@ -29,7 +30,7 @@ Amazon FSx は、Windows File Server または Lustre にスケーラブルな�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

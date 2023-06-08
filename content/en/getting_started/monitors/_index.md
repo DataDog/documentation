@@ -13,6 +13,12 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+  tag: "Blog"
+  text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session on creating effective monitors"
 ---
 
 ## Overview
@@ -35,7 +41,7 @@ When you create a metric monitor, **Threshold Alert** is automatically selected 
 
 To get an alert on low disk space, use the `system.disk.in_use` metric from the [Disk integration][6] and average the metric over `host` and `device`:
 
-{{< img src="getting_started/application/metric_query.png" alt="alert setup"  >}}
+{{< img src="getting_started/application/metric_query.png" alt="alert setup" >}}
 
 After this is set, the monitor automatically updates to a `Multi Alert` that triggers a separate alert for each `host`, `device` reporting your metric.
 
@@ -45,7 +51,7 @@ According to the [Disk integration documentation][6], `system.disk.in_use` is *t
 
 To alert on low disk space, the monitor should trigger when the metric is `above` the threshold. The threshold values are based on your preference. For this metric, values between `0` and `1` are appropriate:
 
-{{< img src="getting_started/application/monitor_configuration.png" alt="Metric monitor configuration settings within the Create Monitor page, with Multi Alert selected and configured to alert on the average of the query over the last 5 minutes for each host and device reporting the metric. The Set alert conditions section is configured to trigger when the evaluated value is above the threshold for any host or device, with the Alert threshold set at 0.9, the Warning threshold set at 0.8, and the monitor configured not to notify if data is missing"  >}}
+{{< img src="getting_started/application/monitor_configuration.png" alt="Metric monitor configuration settings within the Create Monitor page, with Multi Alert selected and configured to alert on the average of the query over the last 5 minutes for each host and device reporting the metric. The Set alert conditions section is configured to trigger when the evaluated value is above the threshold for any host or device, with the Alert threshold set at 0.9, the Warning threshold set at 0.8, and the monitor configured not to notify if data is missing" >}}
 
 For this example, the other settings in this section are left on the defaults. For more details, see the [Metric Monitors][7] documentation.
 
@@ -75,7 +81,7 @@ For different messages based on alert vs. warning thresholds, see the [Notificat
 
 ### Notify your team
 
-Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the drop-down box. When an `@notification` is added to this box, the notification is automatically added to the message box:
+Use this section to send notifications to your team through Email, Slack, PagerDuty, etc. You can search for team members and connected accounts with the dropdown box. When an `@notification` is added to this box, the notification is automatically added to the message box:
 
 {{< img src="getting_started/application/message_notify.png" alt="Message and Notifications" style="width:70%;" >}}
 
@@ -97,15 +103,15 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/metric/
+[1]: /monitors/types/metric/
 [2]: https://www.datadoghq.com
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://app.datadoghq.com/infrastructure
 [5]: https://app.datadoghq.com/monitors#create/metric
 [6]: /integrations/disk/
-[7]: /monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/#conditional-variables
 [9]: /account_management/rbac/
-[10]: /mobile/
+[10]: /service_management/mobile/
 [11]: https://apps.apple.com/app/datadog/id1391380318
 [12]: https://play.google.com/store/apps/details?id=com.datadog.app

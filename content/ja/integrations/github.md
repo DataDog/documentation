@@ -1,8 +1,9 @@
 ---
 categories:
-- Source Control
-- Collaboration
-- Issue Tracking
+- collaboration
+- developer tools
+- issue tracking
+- source control
 dependencies: []
 description: GitHub と Datadog を接続し、サービスのパフォーマンスに影響を与えるコミットやプルリクエストを監視する
 doc_link: https://docs.datadoghq.com/integrations/github/
@@ -112,20 +113,20 @@ GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert �
 3. **Payload URL** フィールドに以下の URL を追加します: `https://{{< region-param key="dd_full_site" code="true" >}}/intake/webhook/github?api_key=<DATADOG_API_KEY>`。`<DATADOG_API_KEY>` を [Datadog API キー][10]に置き換えることを忘れないでください。
 4. **Content type** ドロップダウンメニューで `application/json` を選択します。
 5. オプションで、**Secret** フィールドにシークレットを追加します。
-6. **Which events would you like to trigger this webhook?** セクションで、**Let me select individual events.** をクリックし、以下のサポートされるオプションから選択して、Datadog にイベントを送信します。
+6. **Which events would you like to trigger this webhook?** セクションで、**Let me select individual events.** をクリックし、以下のサポートされるオプションから選択して、Datadog に[イベント][11]を送信します。
 
    | イベント名                   |
    |------------------------------|
-   | プッシュ                       |
-   | ブランチまたはタグの作成       |
-   | プルリクエスト                |
-   | 問題                       |
-   | 問題のコメント               |
-   | コミットコメント              |
-   | プルリクエストレビューのコメント |
-   | リポジトリ                 |
-   | セキュリティと分析        |
-   | チームの追加                    |
+   | [プッシュ][12]                       |
+   | [ブランチまたはタグの作成][13]       |
+   | [プルリクエスト][14]               |
+   | [問題][15]                       |
+   | [問題のコメント][16]               |
+   | [コミットコメント][17]              |
+   | [プルリクエストレビューのコメント][18] |
+   | [リポジトリ][19]                 |
+   | [セキュリティと分析][20]        |
+   | [チームの追加][21]                    |
 
 7. **Active** を選択すると、フックがトリガーされたときにイベントの詳細を受け取ることができます。
 8. **Add webhook** をクリックして、Webhook を保存します。
@@ -142,7 +143,7 @@ GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert �
 3. **Commits** と **Issues** のチェックボックスをクリックすると、これらのイベントがアラートされます。
 4. **Update Configuration** をクリックすると、Webhook の構成が保存されます。
 
-インテグレーションタイルの **Webhooks** タブで Webhook を追加すると、上記で指定した GitHub リポジトリのイベントが[イベントエクスプローラー][11]に表示されるようになります。詳しくは、[イベントエクスプローラーのドキュメント][12]をご覧ください。
+インテグレーションタイルの **Webhooks** タブで Webhook を追加すると、上記で指定した GitHub リポジトリのイベントが[イベントエクスプローラー][22]に表示されるようになります。詳しくは、[イベントエクスプローラーのドキュメント][23]をご覧ください。
 
 GitHub からのイベントをフィルターするには、**Core** の下にある **Source** ファセットメニューで **Github** を選択するか、検索クエリに `source:github` と入力してください。イベントの棒グラフは、検索クエリを編集すると自動的に更新されます。
 
@@ -152,9 +153,9 @@ GitHub インテグレーションには、サービスのチェック機能は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][24]までお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -168,6 +169,17 @@ GitHub インテグレーションには、サービスのチェック機能は�
 [8]: https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/reviewing-the-audit-log-for-your-organization#audit-log-actions
 [9]: https://docs.github.com/en/enterprise-cloud@latest/admin/monitoring-activity-in-your-enterprise/reviewing-audit-logs-for-your-enterprise/streaming-the-audit-log-for-your-enterprise#setting-up-streaming-to-datadog
 [10]: https://app.datadoghq.com/organization-settings/api-keys
-[11]: https://app.datadoghq.com/event/explorer/
-[12]: https://docs.datadoghq.com/ja/events/explorer/
-[13]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads
+[12]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+[13]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#create
+[14]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request
+[15]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#issues
+[16]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
+[17]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#commit_comment
+[18]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request_review_comment
+[19]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#repository
+[20]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#security_and_analysis
+[21]: https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#team_add
+[22]: https://app.datadoghq.com/event/explorer/
+[23]: https://docs.datadoghq.com/ja/events/explorer/
+[24]: https://docs.datadoghq.com/ja/help/

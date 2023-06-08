@@ -24,7 +24,7 @@ Ingested span and traces are kept for 15 minutes. Indexed spans and traces that 
 
 ## Runtime metrics
 
-Enable [runtime metrics collection][3] in supported tracing libraries to gain insights into an application’s performance.
+Enable [runtime metrics collection][3] in supported tracing libraries to gain insights into an application's performance.
 
 
 ## Next steps

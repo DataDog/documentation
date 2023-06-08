@@ -1,24 +1,20 @@
 ---
-title: Online Archives
-kind: documentation
 description: ログの長期保存に対応したコスト効率の高いライブクエリ機能
-is_beta: true
 further_reading:
-  - link: /logs/log_configuration/indexes/#indexes-filters
-    tag: ドキュメント
-    text: インデックスフィルター
-  - link: /logs/log_configuration/indexes/#exclusion-filters
-    tag: ドキュメント
-    text: 除外フィルター
-  - link: https://www.datadoghq.com/blog/online-archives-datadog/
-    tag: ブログ
-    text: Online Archives による履歴ログ解析・調査
+- link: /logs/log_configuration/indexes/#indexes-filters
+  tag: ドキュメント
+  text: インデックスフィルター
+- link: /logs/log_configuration/indexes/#exclusion-filters
+  tag: ドキュメント
+  text: 除外フィルター
+- link: https://www.datadoghq.com/blog/online-archives-datadog/
+  tag: ブログ
+  text: Online Archives による履歴ログ解析・調査
+is_beta: true
+kind: documentation
+private: true
+title: Online Archives
 ---
-{{< site-region region="us3,us5,eu,gov" >}}
-
-Online Archives は、AWS でホストされている Datadog のお客様 (US1) サイトのみご利用いただけます。
-
-{{< /site-region >}}
 
 <div class="alert alert-warning">
 Online Archives は、数に限りがあります。アクセス権をリクエストする場合は、<a href="/help/">Datadog サポート</a>にお問い合わせください。
@@ -48,11 +44,16 @@ Online Archives は、Log インデックスごとに設定されています。
 
 ## Online Archives で検索する
 
-ログエクスプローラーのドロップダウンから Online Archives を選択すると、インデックスではなく Online Archives での検索を開始します。このドロップダウンは、タイムピッカーの隣にあります。
+ログエクスプローラーのドロップダウンから Online Archives を選択すると、インデックスではなく Online Archives での検索を開始します。このドロップダウンは、タイムピッカーの隣にあります。タイムピッカーでは、事前設定オプションで最大 3 か月まで選択できるほか、カレンダービューで過去にさかのぼって検索できます。
+
 
 {{< img src="logs/log_configuration/online_archives/searching.png" alt="オンラインアーカイブの検索方法" style="width:100%;">}}
 
 [検索][4]は、検索バーにクエリを入力するか、ファセットパネルで該当するファセットを選択することで行います。
+
+**注**: 
+- オンラインアーカイブのログは、ダッシュボード、ノートブック、モニターへはエクスポートできません。
+- 「トランザクション」および「パターン」のビューは、オンラインアーカイブでは利用できません。
 
 ## Online Archives における Analytics
 
@@ -84,9 +85,10 @@ Online Archives は、Log インデックスごとに設定されています。
 
 {{< img src="logs/log_configuration/online_archives/exclusion.png" alt="インデックスからモノを除外する方法" style="width:100%;">}}
 
-**注:** インデックスの順番は重要で、複数のインデックスがある場合、`team:security` のログはインデックスフィルターにマッチする最初のインデックスに入るからです。
+### Online Archives を無効にする
+Online Archives をオフにしたいインデックスを選択し、Online Archives のトグルをオフの位置に切り替えてください。
 
-**注:** ダッシュボード、ログモニター、パターン、トランザクションは、Online Archives では利用できません。
+**注:** インデックスの順番は重要で、複数のインデックスがある場合、`team:security` のログはインデックスフィルターにマッチする最初のインデックスに入るからです。
 
 [1]: /ja/logs/log_configuration/indexes/#indexes-filters
 [2]: /ja/logs/log_configuration/indexes/#exclusion-filters

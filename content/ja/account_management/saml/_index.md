@@ -40,13 +40,15 @@ Datadog アカウントに [SAML (Security Assertion Markup Language)][1] を構
 
 4. Datadog の[サービスプロバイダーメタデータ][18]をダウンロードして、Datadog をサービスプロバイダーとして認識するように IdP を構成します。
 
-5. IdP メタデータをアップロードし、IdP を構成したら、**Enable** ボタンをクリックして Datadog で SAML を有効にします。
-    {{< img src="account_management/saml/saml_enable.png" alt="saml 有効化"  >}}
+5. IdP メタデータをアップロードし、IdP を構成したら、**Upload and Enable** ボタンをクリックして Datadog で SAML を有効にします。
+    {{< img src="account_management/saml/saml_enable.png" alt="saml 有効化" >}}
 
-6. Datadog で SAML を構成し、Datadog からのリクエストを受け付けるように IdP をセットアップしたら、ユーザーはログインできます。
+6. IdP メタデータをアップロードした後、**Login Methods** のページに戻り、SAML をデフォルトで ‘on‘ にします。
+
+7. Datadog で SAML を構成し、Datadog からのリクエストを受け付けるように IdP をセットアップしたら、ユーザーはログインできます。
 
    - **SP 始動のログイン** (サービスプロバイダー、または Datadog から始動されたログイン) を使用する場合: [SAML Configuration ページ][19]上部のステータスボックスに表示される**シングルサインオン URL** を使用してログインできます。**シングルサインオン URL** は、[Team ページ][20]にも表示されます。この URL をロードすると、IdP に対する SAML 認証が開始されます。**注**: この URL は、アカウントで SAML が有効になっていて、SP 始動のログインを使用していないと表示されません。
-    {{< img src="account_management/saml/saml_enabled.png" alt="Saml 有効"  >}}
+    {{< img src="account_management/saml/saml_enabled.png" alt="Saml 有効" >}}
 
    - **IdP 始動のログインを使用する場合** (ID プロバイダー、またはアプリポータルから始動されたログイン): アプリポータル (Google アプリドロワーや Okta アプリポータルなど) のアプリアイコンをクリックしてログインできます。一部のシナリオでは、SP 始動のログイン URL を使用してログインするユーザーは、IdP 始動のログインエクスペリエンスでも機能しますが、これは ID プロバイダーのコンフィギュレーションとサポートによって異なります。
 
@@ -63,7 +65,7 @@ Datadog アカウントに [SAML (Security Assertion Markup Language)][1] を構
 * Datadog  は、アサーションリクエストの **NameIDPolicy** の形式として `urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress` を指定します。
 * アサーションには署名が必要です。
 * アサーションは暗号化できますが、暗号化されていないアサーションも許可されます。
-* 詳細は、[Datadog  の SP メタデータ][18]を参照してください。
+* 詳細は [Datadog のサービスプロバイダーのメタデータ][18]を参照してください。ファイルにアクセスするには、Datadog にサインインしている必要があります。
 
 SAML アサーションに属性を含めることができます。Datadog は、`AttributeStatement` で次の 3 つの属性を探します。
 
@@ -105,7 +107,7 @@ Datadog で、IdP の応答の属性を Datadog ロールにマッピングで�
 
    たとえば、`member_of` 属性に `Development` の値を持つすべてのユーザーに `Devs` という Datadog のカスタムロールを割り当てたい場合は、以下のようにします。
 
-    {{< img src="account_management/saml/create_mapping.png" alt="SAML の Datadog ロールへのマッピング作成"  >}}
+    {{< img src="account_management/saml/create_mapping.png" alt="SAML の Datadog ロールへのマッピング作成" >}}
 
 
    **注**: すべての ID プロバイダーは異なります。属性キーまたはラベルを設定できるプロバイダーもあります。デフォルトで 1 つを提供するプロバイダーもあります。ログイン時にアサーションインスペクターを使用して特定のアサーションの詳細を表示し、ID プロバイダーがグループメンバーシップを送信する方法を理解することをお勧めします。
@@ -148,7 +150,7 @@ IdP 始動のログイン機能を有効にしてコンフィギュレーショ�
 
 ### SAML 限定
 
-**Login Methods** UI で他のログインメソッドタイプを無効にすることで、オーガニゼーションを SAML 限定にすることができます。このオプションが設定されている場合、すべてのユーザーはデフォルトで SAML でログインする必要があります。既存のユーザー名/パスワードまたは Google OAuth ログインは機能しません。これにより、Datadog にアクセスできるすべてのユーザーが、Datadog アカウントにアクセスするために、会社の ID プロバイダー/ディレクトリサービスで有効な資格情報を持っている必要があります。オーガニゼーション管理者は、ユーザーごとのオーバーライドを設定して、特定のユーザーが SAML 限定から免除されるようにすることができます。
+**Login Methods** UI で他のログインメソッドタイプを無効にすることで、オーガニゼーションを SAML 限定にすることができます。このオプションが設定されている場合、すべてのユーザーはデフォルトで SAML でログインする必要があります。既存のユーザー名/パスワードまたは Google OAuth ログインは機能しません。これにより、Datadog にアクセスできるすべてのユーザーが、Datadog アカウントにアクセスするために、会社の ID プロバイダー/ディレクトリサービスで有効な資格情報を持っている必要があります。オーガニゼーション管理者は、ユーザーごとの[オーバーライド][26]を設定して、特定のユーザーが SAML 限定から免除されるようにすることができます。
 
 ### 自己更新 Datadog SP メタデータ
 
@@ -185,3 +187,4 @@ IdP 始動のログイン機能を有効にしてコンフィギュレーショ�
 [23]: https://support.okta.com/help/s/article/How-to-View-a-SAML-Response-in-Your-Browser-for-Troubleshooting?language=en_US
 [24]: https://www.samltool.com/validate_response.php
 [25]: /ja/account_management/authn_mapping/
+[26]: /ja/account_management/login_methods/#reviewing-user-overrides

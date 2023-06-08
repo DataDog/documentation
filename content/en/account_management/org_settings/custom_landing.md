@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-The Datadog organization landing page is the first page your users see when they log on to Datadog or navigate to the Datadog root page. Datadog sets a default landing page for your organization. If you use APM, Datadog sets the APM root as the landing page. If you don’t use APM, then the list of dashboards is the default landing page.
+The Datadog organization landing page is the first page your users see when they log on to Datadog or navigate to the Datadog root page. Datadog sets a default landing page for your organization. If you use APM, Datadog sets the APM root as the landing page. If you don't use APM, then the list of dashboards is the default landing page.
 
 As an alternative to the default page, Datadog allows administrators to set a dashboard as the landing page for the organization. A custom landing page helps a large or small organization control the narrative for their users.
 
@@ -20,7 +20,7 @@ To set a custom landing page, follow the steps below:
 1. Navigate to [Organization settings][1].
 2. From the tabs on the left, select **Preferences**.
 3. In the Datadog Homepage section, click the **Dashboard** button.
-4. Use the drop-down list to select a dashboard.
+4. Use the dropdown list to select a dashboard.
 5. Click the **Save** button.
 
 ## Use the default landing page

@@ -1,18 +1,19 @@
 ---
-title: Assigner des tags
-kind: documentation
 aliases:
-  - /fr/agent/tagging
-  - /fr/getting_started/tagging/assigning_tags
-  - /fr/tagging/assigning_tags/
+- /fr/agent/tagging
+- /fr/tagging/assigning_tags/
+description: Découvrez comment attribuer des tags dans Datadog
 further_reading:
-  - link: /getting_started/tagging/
-    tag: Documentation
-    text: Débuter avec les tags
-  - link: /getting_started/tagging/using_tags/
-    tag: Documentation
-    text: Apprendre à utiliser des tags dans Datadog
+- link: /getting_started/tagging/
+  tag: Documentation
+  text: Débuter avec les tags
+- link: /getting_started/tagging/using_tags/
+  tag: Documentation
+  text: Apprendre à utiliser des tags dans Datadog
+kind: documentation
+title: Assigner des tags
 ---
+
 ## Présentation
 
 Les tags vous permettent d'interroger les machines et métriques que vous surveillez avec Datadog. Pour identifier les problèmes au sein de votre environnement et affiner suffisamment les données afin d'en découvrir les causes précises, vous devez être en mesure d'assigner des tags et d'appliquer des filtres à partir de ces derniers. Découvrez comment [définir des tags][1] dans Datadog avant d'aller plus loin.
@@ -20,7 +21,7 @@ Les tags vous permettent d'interroger les machines et métriques que vous survei
 Les tags peuvent être configurés de différentes manières :
 
 - Dans le [fichier de configuration](#fichier-de-configuration) de l'Agent Datadog ou dans chaque fichier de configuration d'intégration
-- Dans l'[IU](#iu) Datadog
+- Dans l'[interface](#interface) Datadog
 - Avec l'[API](#api) Datadog
 - Avec [DogStatsD](#dogstatsd)
 
@@ -88,7 +89,7 @@ hostname: mamachine.mondomaine
 
 ##### Modifier le hostname
 
-* L'ancien hostname reste dans l'IU pendant deux heures, mais n'affiche pas les nouvelles métriques.
+* L'ancien hostname reste dans l'interface pendant deux heures, mais n'affiche pas les nouvelles métriques.
 * Vous pouvez interroger les données provenant de hosts avec l'ancien hostname grâce à l'API.
 * Pour représenter des métriques avec l'ancien hostname et le nouveau hostname dans un seul graphique, utilisez [des opérations arithmétiques entre deux métriques][5].
 
@@ -96,7 +97,7 @@ hostname: mamachine.mondomaine
 [1]: /fr/getting_started/integrations/
 [2]: /fr/agent/guide/agent-configuration-files/
 [3]: /fr/getting_started/tagging/#defining-tags
-[4]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /fr/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{% tab "Agent v5" %}}
@@ -138,7 +139,7 @@ hostname: mamachine.mondomaine
 [1]: /fr/getting_started/integrations/
 [2]: /fr/agent/guide/agent-configuration-files/
 [3]: /fr/getting_started/tagging/#defining-tags
-[4]: /fr/metrics/dogstatsd_metrics_submission/#host-tag-key
+[4]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /fr/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
 {{< /tabs >}}
@@ -147,7 +148,7 @@ hostname: mamachine.mondomaine
 
 Pour assigner facilement des tags, nous vous conseillons de faire appel à la fonction d'héritage des intégrations. Les tags que vous assignez à vos instances AWS, à vos recettes Chef ainsi qu'à d'autres intégrations sont automatiquement appliqués aux hosts et aux métriques que vous envoyez à Datadog.
 
-Dans les environnements conteneurisés, nous vous recommandons de suivre la documentation relative au [tagging de service unifié][2] afin d'effectuer une seule configuration pour toutes vos données de télémétrie Datadog.
+Dans les environnements conteneurisés, il est recommandé de suivre la documentation relative au [tagging de service unifié][2] afin d'effectuer une seule configuration pour toutes vos données de télémétrie Datadog.
 
 ##### Intégrations cloud
 
@@ -163,19 +164,19 @@ Après avoir installé l'Agent Datadog conteneurisé, vous pouvez définir vos t
 
 Datadog recueille automatiquement les tags courants à partir de [Docker, Kubernetes, ECS, Swarm, Mesos, Nomad et Rancher][6]. Pour extraire des tags supplémentaires, utilisez les options suivantes :
 
-| Variable d'environnement               | Description                                          |
-|------------------------------------|------------------------------------------------------|
-| `DD_DOCKER_LABELS_AS_TAGS`         | Extrait les étiquettes de conteneur Docker                      |
-| `DD_DOCKER_ENV_AS_TAGS`            | Extrait les variables d'environnement de conteneur Docker       |
-| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Extrait les étiquettes de pod                                   |
-| `DD_CHECKS_TAG_CARDINALITY`        | Ajouter des tags aux métriques de check (low, orchestrator, high)  |
-| `DD_DOGSTATSD_TAG_CARDINALITY`     | Ajouter des tags aux métriques custom (low, orchestrator, high) |
+| Variable d'environnement               | Description                                                                                             |
+|------------------------------------|---------------------------------------------------------------------------------------------------------|
+| `DD_CONTAINER_LABELS_AS_TAGS`      | Permet d'extraire les étiquettes du conteneur. Remplace l'ancienne variable d'environnement `DD_DOCKER_LABELS_AS_TAGS`.             |
+| `DD_CONTAINER_ENV_AS_TAGS`         | Permet d'extraire les variables d'environnement du conteneur. Remplace l'ancienne variable d'environnement `DD_DOCKER_ENV_AS_TAGS`. |
+| `DD_KUBERNETES_POD_LABELS_AS_TAGS` | Permet d'extraire les étiquettes de pod.                                                                                      |
+| `DD_CHECKS_TAG_CARDINALITY`        | Permet d'ajouter des tags aux métriques de check (low, orchestrator, high).                                                     |
+| `DD_DOGSTATSD_TAG_CARDINALITY`     | Permet d'ajouter des tags aux métriques custom (low, orchestrator, high).                                                    |
 
 **Exemples :**
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
-DD_DOCKER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
+DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
 Lorsque vous utilisez `DD_KUBERNETES_POD_LABELS_AS_TAGS`, vous pouvez utiliser des wildcards au format suivant :
@@ -186,17 +187,17 @@ Lorsque vous utilisez `DD_KUBERNETES_POD_LABELS_AS_TAGS`, vous pouvez utiliser d
 
 Par exemple, `{"app*": "kube_%%label%%"}` correspond au nom de tag `kube_application` pour l'étiquette `application`. En outre, `{"*": "kube_%%label%%"}` ajoute toutes les étiquettes de pod en tant que tags avec le préfixe `kube_`.
 
-Lorsque vous utilisez la variable `DD_DOCKER_LABELS_AS_TAGS` dans un fichier `docker-compose.yaml` Docker Swarm, assurez-vous de supprimer les apostrophes. Exemple :
+Lorsque vous utilisez la variable `DD_CONTAINER_LABELS_AS_TAGS` dans un fichier `docker-compose.yaml` Docker Swarm, assurez-vous de supprimer les apostrophes. Exemple :
 
-```shell
-DD_DOCKER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```yaml
+- DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 Lorsque vous ajoutez des étiquettes à des conteneurs Docker, le placement du mot-clé `labels:` à l'intérieur du fichier `docker-compose.yaml` est important. Pour éviter tout problème, reportez-vous à la documentation relative au [tagging de service unifié Docker][2].
 
  Si les étiquettes doivent être appliquées au conteneur en dehors de cette configuration, placez le mot-clé `labels:` **dans** la section `services:`, **et non** dans la section `deploy:`. Placez le mot-clé `labels:` dans la section `deploy:` uniquement lorsque les étiquettes doivent être appliquées au service. L'Agent Datadog n'a aucune étiquette à extraire des conteneurs si ce placement n'est pas utilisé.
 
-Un exemple de fichier `docker-compose.yaml` valide illustrant cette notion est présenté ci-dessous. Dans cet exemple, les étiquettes `my.custom.label.project` et `my.custom.label.version` dans la section `myapplication:` ont chacune des valeurs uniques. L'utilisation de la variable d'environnement `DD_DOCKER_LABELS_AS_TAGS` dans la section `datadog:` permet d'extraire les étiquettes et de générer ces tags pour le conteneur `myapplication` :
+Un exemple de fichier `docker-compose.yaml` valide illustrant cette notion est présenté ci-dessous. Dans cet exemple, les étiquettes `my.custom.label.project` et `my.custom.label.version` dans la section `myapplication:` ont chacune des valeurs uniques. L'utilisation de la variable d'environnement `DD_CONTAINER_LABELS_AS_TAGS` dans la section `datadog:` permet d'extraire les étiquettes et de générer ces tags pour le conteneur `myapplication` :
 
 À l'intérieur du conteneur `myapplication`, les étiquettes sont : `my.custom.label.project` et `my.custom.label.version`
 
@@ -215,7 +216,7 @@ services:
       - '/sys/fs/cgroup/:/host/sys/fs/cgroup:ro'
     environment:
       - DD_API_KEY= "<CLÉ_API_DATADOG>"
-      - DD_DOCKER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
+      - DD_CONTAINER_LABELS_AS_TAGS={"my.custom.label.project":"projecttag","my.custom.label.version":"versiontag"}
       - DD_TAGS="key1:value1 key2:value2 key3:value3"
     image: 'gcr.io/datadoghq/agent:latest'
     deploy:
@@ -258,12 +259,12 @@ Par exemple, un nœud ne peut pas être à la fois un objet (avec des sous-nœud
 ```
 Les métadonnées de span ci-dessus ne sont pas valides, car la valeur de `key` ne peut pas faire référence à une chaîne (`"value"`) ainsi qu'à une sous-arborescence (`{"subkey": "value_2"}`).
 
-### IU
+### Interface
 
 {{< tabs >}}
 {{% tab "Hostmap" %}}
 
-Vous pouvez assigner des tags de host depuis l'IU via la [page Host Map][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : lorsque vous modifiez des tags de métrique via l'IU, la prise en compte des modifications peut prendre jusqu'à 30 minutes.
+Vous pouvez assigner des tags de host depuis l'interface via la [page Host Map][1]. Cliquez sur l'hexagone (host) de votre choix pour superposer le host en bas de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. L'application des modifications de tags de host effectuées dans l'interface peut prendre jusqu'à cinq minutes.
 
 {{< img src="tagging/assigning_tags/hostmapuitags.png" alt="Tags hostmap" style="width:80%;">}}
 
@@ -271,7 +272,7 @@ Vous pouvez assigner des tags de host depuis l'IU via la [page Host Map][1]. Cli
 {{% /tab %}}
 {{% tab "Liste d'infrastructures" %}}
 
-Vous pouvez assigner des tags de host depuis l'IU via la [page Infrastructure List][1]. Cliquez sur le host de votre choix pour le superposer à droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. **Remarque** : lorsque vous modifiez des tags de métrique via l'IU, la prise en compte des modifications peut prendre jusqu'à 30 minutes.
+Vous pouvez assigner des tags de host depuis l'interface via la [page Infrastructure List][1]. Cliquez sur le host de votre choix pour le superposer à droite de la page. Depuis la section *User*, cliquez ensuite sur le bouton **Edit Tags**. Saisissez les tags sous forme de liste de valeurs séparées par des virgules, puis cliquez sur **Save Tags**. L'application des modifications de tags de host effectuées dans l'interface peut prendre jusqu'à cinq minutes. Une fois les tags ajoutés, vérifiez qu'ils sont affichés dans l'interface avant d'ajouter des tags supplémentaires.
 
 {{< img src="tagging/assigning_tags/hostuitags.png" alt="Tags liste d'infrastructures" style="width:80%;">}}
 

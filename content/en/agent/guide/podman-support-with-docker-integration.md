@@ -37,7 +37,6 @@ When running Podman in daemonless mode, instead of these options, you must mount
 
 ## Known limitations
 
-* Container logs aggregation is not supported.
 * The activation of the Podman socket can be optional depending on your setup. It may need to be enabled.
 
 

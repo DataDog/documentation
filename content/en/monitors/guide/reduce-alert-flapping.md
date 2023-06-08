@@ -2,7 +2,7 @@
 title: Reduce alert flapping
 kind: guide
 further_reading:
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 aliases:
@@ -38,7 +38,7 @@ If the issue is alert routing, [template variables][4] and the separation of **w
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/alert-rollup
-[2]: /monitors/create/types/anomaly/
-[3]: /monitors/create/types/outlier/
+[2]: /monitors/types/anomaly/
+[3]: /monitors/types/outlier/
 [4]: /monitors/notify/variables/?tab=is_alert#template-variables
 [5]: /monitors/notify/variables/?tab=is_alert#conditional-variables

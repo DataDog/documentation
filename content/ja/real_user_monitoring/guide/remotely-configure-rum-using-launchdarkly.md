@@ -37,13 +37,13 @@ LaunchDarkly は多変量フラグをサポートしており、返すバリエ�
 
 ### 個々のパラメーターオプション
 
-以下の例では、RUM 構成の個々のパラメーターである `SampleRate` に対する機能フラグを作成しています。
+以下の例では、RUM 構成の個々のパラメーターである `sessionSampleRate` に対する機能フラグを作成しています。
 
 1. LaunchDarkly で新しい機能フラグを作成し、名前とキーを指定します。
 
 {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-sample-rate-new-flag.png" alt="LaunchDarkly で RUM サンプルレートのフラグを新規作成する" style="width:75%;">}}
 
-2. フラグのバリエーションを指定します。`SampleRate`パラメーターには、数値の値を渡したいので、フラグタイプを Number にし、バリエーションフィールドに値として必要な Sample Rates を追加してください。
+2. フラグのバリエーションを指定します。`sessionSampleRate` パラメーターには、数値の値を渡したいので、フラグタイプを Number にし、バリエーションフィールドに値として必要な Sample Rates を追加してください。
 
    **注:** 必要であれば、複数の異なるフラグのバリエーションを作成することができます。今、必要と思われるすべてのサンプルレートを追加する必要はありません。後でいつでも新しい値のバリエーションを追加することができます。
 
@@ -91,11 +91,11 @@ datadogRum.init({
   service: 'my-web-application',
   env: 'production',
   version: '1.0.0',
-  sampleRate: RUM_sample_rate,
+  sessionSampleRate: RUM_sample_rate,
   sessionReplaySampleRate: 100,
   trackResources: true,
   trackLongTasks: true,
-  trackInteractions: true,
+  trackUserInteractions: true,
 })
 ```
 

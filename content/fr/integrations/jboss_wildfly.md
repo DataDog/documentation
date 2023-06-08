@@ -26,7 +26,6 @@ author:
 categories:
 - web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md
 display_on_public_website: true
@@ -55,7 +54,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Recueille diverses métriques JMX fournies par des applications JBoss
     et WildFly
@@ -71,7 +69,7 @@ tile:
 
 Ce check permet de surveiller les applications [JBoss][1] et [WildFly][2].
 
-## Configuration
+## Implémentation
 
 ### Installation
 

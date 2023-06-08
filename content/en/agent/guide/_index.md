@@ -3,13 +3,20 @@ title: Agent Guides
 kind: guide
 private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 70
+        category: Guide
+        subcategory: Agent Guides
 ---
 
 {{< whatsnext desc="General guides:" >}}
     {{< nextlink href="agent/guide/agent-commands" >}}Agent Commands{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent Configuration Files{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-fips-proxy" >}}Datadog FIPS Compliance{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent Log Files{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent Environment Variables{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/setup" >}}Aggregating Agents{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 Status Page{{< /nextlink >}}
     {{< nextlink href="agent/guide/dual-shipping" >}}Dual Shipping{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}Integration Management{{< /nextlink >}}

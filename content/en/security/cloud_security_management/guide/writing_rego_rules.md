@@ -20,7 +20,7 @@ Cloud Security Posture Management is not available in this site.
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true">}}
-Creating and using custom CSPM rules is a beta feature, available only for Google Cloud Platform (GCP).
+Writing custom rules is a beta feature available to all CSPM customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
 {{< /callout >}} 
 
 

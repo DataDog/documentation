@@ -11,6 +11,9 @@ further_reading:
   - link: "/tracing/metrics/runtime_metrics/dotnet/"
     tag: "Documentation"
     text: "Runtime metrics"
+  - link: "/tracing/trace_collection/trace_context_propagation/dotnet/"
+    tag: "Documentation"
+    text: "Propagating trace context"
   - link: "/serverless/azure_app_services/"
     tag: "Documentation"
     text: "Microsoft Azure App Service extension"
@@ -36,9 +39,7 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].
 
-
-{{< img src="tracing/dotnet/diagram_docs_net.png" alt=".NET Tracer configuration setting precedence"  >}}
-
+{{< img src="tracing/dotnet/dotnet_framework_configuration.png" alt=".NET Framework Tracer configuration setting precedence" style="width:100%" >}}
 
 You can set configuration settings in the .NET Tracer with any of the following methods:
 
@@ -196,10 +197,15 @@ Added in version 1.18.3. Response header support and entries without tag names a
 Added in version `2.19.0`.<br>
 **Default**: `false`<br>
 
+`DD_TRACE_CLIENT_IP_HEADER`
+: The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
+Added in version `2.19.0`.<br>
+**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"`. If several are present, none will be reported.<br>
+
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api,team:intake` <br>
+**Example**: `layer:api,team:intake,key:value` <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`
@@ -214,6 +220,16 @@ Added in version 1.17.0. <br>
 **Example**: `mysql:main-mysql-db, mongodb:offsite-mongodb-service`<br>
 The `from-key` value is specific to the integration type, and should exclude the application name prefix. For example, to rename `my-application-sql-server` to `main-db`, use `sql-server:main-db`. Added in version 1.23.0
 
+`DD_HTTP_SERVER_TAG_QUERY_STRING`
+: When set to `true`, the `http.url` includes query string parameters. You can find more details in [Redacting the query in the url][14].
+**Default**: `true`
+
+`DD_HTTP_SERVER_TAG_QUERY_STRING_SIZE`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, sets the max size of the querystring to report, before obfuscation. Set 0 for no limit in size<br>
+**Default**: `5000`
+
+`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
+: When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
@@ -222,6 +238,10 @@ The following configuration variables are available **only** when using automati
 : **TracerSettings property**: `TraceEnabled`<br>
 Enables or disables all automatic instrumentation. Setting the environment variable to `false` completely disables the CLR profiler. For other configuration methods, the CLR profiler is still loaded, but traces will not be generated. Valid values are: `true` or `false`.<br>
 **Default**: `true`
+
+`DD_DBM_PROPAGATION_MODE`
+: Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+**Default**: `'disabled'`
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
@@ -290,28 +310,6 @@ The following configuration variables are for features that are available for us
 : Enables improved resource names for web spans when set to `true`. Uses route template information where available, adds an additional span for ASP.NET Core integrations, and enables additional tags. Added in version 1.26.0. Enabled by default in 2.0.0<br>
 **Default**: `true`
 
-### Headers extraction and injection
-
-The Datadog APM Tracer supports [B3][9] and [W3C (TraceParent)][10] headers extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The .NET Tracer supports the following styles:
-
-- Datadog: `Datadog`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
-- W3C (TraceParent): `tracecontext` (`W3C` is deprecated)
-- B3 Single Header: `B3 single header` (`B3SingleHeader` is deprecated)
-
-You can use the following environment variables to configure injection and extraction styles:
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog, b3multi, tracecontext`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog, b3multi, tracecontext`
-
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `Datadog` injection style is enabled.
-
-If multiple extraction styles are enabled, the extraction attempt is completed in order of configured styles, and uses the first successful extracted value.
-
 
 ## Further reading
 
@@ -327,3 +325,4 @@ If multiple extraction styles are enabled, the extraction attempt is completed i
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/configure_data_security/#redacting-the-query-in-the-url

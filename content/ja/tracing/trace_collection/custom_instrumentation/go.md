@@ -6,7 +6,7 @@ aliases:
 - /ja/tracing/setup_overview/custom_instrumentation/go
 code_lang: go
 code_lang_weight: 30
-description: Datadog Go APM トレーサーを使用して OpenTracing 標準を実装します。
+description: Datadog Go APM トレーサーを使用してコードをインスツルメンテーションします。
 further_reading:
 - link: tracing/other_telemetry/connect_logs_and_traces
   tag: ドキュメント
@@ -15,7 +15,7 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: Go カスタムインスツルメンテーション
+title: Datadog ライブラリを使った Go カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 <div class="alert alert-info">
@@ -197,29 +197,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 トレーシングクライアントと Datadog Agent の両方でコンフィギュレーションを追加することで、B3 ヘッダーを使用したコンテキスト伝播や、ヘルスチェックなどの計算されたメトリクスでこれらのトレースが不要な場合に、特定のリソースがトレースを Datadog に送信しないよう除外することができます。
 
-### B3 ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][8]と挿入をサポートしています。
+### ヘッダー抽出と挿入によるコンテキストの伝搬
 
-分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。`Datadog` と `B3` の 2 つのスタイルがサポートされています。
-
-以下の環境変数を使用して挿入スタイルを構成します。
-`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-以下の環境変数を使用して抽出スタイルを構成します。
-`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-これらの環境変数の値は、挿入または抽出が有効になっている
-ヘッダースタイルのコンマ区切りリストです。デフォルトでは、
-`Datadog` 抽出スタイルが有効になっています。
-
-複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
+分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][11]をお読みください。
 
 ### リソースのフィルター
 
 トレースはそれぞれのリソース名に基づいて除外可能で、これによりヘルスチェックなどの外形監視トラフィックが Datadog にレポートされるトレースから削除されます。この設定およびその他のセキュリティ/微調整に関するコンフィギュレーションについては[セキュリティ][9]ページを参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -230,5 +217,5 @@ Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダー
 [5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /ja/tracing/glossary/#trace
-[8]: https://github.com/openzipkin/b3-propagation
 [9]: /ja/tracing/security
+[11]: /ja/tracing/trace_collection/trace_context_propagation/go/

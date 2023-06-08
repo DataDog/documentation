@@ -16,7 +16,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
+- os & system
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
 display_on_public_website: true
@@ -37,8 +37,8 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::OS とシステム
   - Supported OS::Windows
-  - Category::モニタリング
   configuration: README.md#Setup
   description: WMI メトリクスを収集してグラフを作成。
   media: []

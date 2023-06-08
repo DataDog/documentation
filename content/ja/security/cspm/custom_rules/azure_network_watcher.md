@@ -1,0 +1,81 @@
+---
+dependencies: []
+disable_edit: true
+---
+# azure_network_watcher
+
+## `etag`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `etag`<br>
+**説明**: リソースが更新されるたびに変更される、一意の読み取り専用文字列。<br>
+## `flow_logs`
+**タイプ**: `UNORDERED_LIST_STRUCT`<br>
+**プロバイダー名**: `FlowLog`<br>
+   - `enabled`<br>
+    **タイプ**: `BOOLEAN`<br>
+    **プロバイダー名**: `properties.enabled`<br>
+    **説明**: フローロギングを有効/無効にするためのフラグ。<br>
+   - `etag`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `etag`<br>
+    **説明**: リソースが更新されるたびに変更される、一意の読み取り専用文字列。<br>
+   - `name`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `name`<br>
+    **説明**: リソース名。<br>
+   - `provisioning_state`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `properties.provisioningState`<br>
+    **説明**: フローログのプロビジョニング状態。<br>
+   - `retention_policy`<br>
+    **タイプ**: `STRUCT`<br>
+    **プロバイダー名**: `properties.retentionPolicy`<br>
+    **説明**: フローログの保持ポリシーを定義するパラメーター。<br>
+       - `days`<br>
+        **タイプ**: `INT32`<br>
+        **プロバイダー名**: `days`<br>
+        **説明**: フローログの記録を保持する日数。<br>
+       - `enabled`<br>
+        **タイプ**: `BOOLEAN`<br>
+        **プロバイダー名**: `enabled`<br>
+        **説明**: 保持を有効/無効にするためのフラグ。<br>
+   - `storage_id`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `properties.storageId`<br>
+    **説明**: フローログの保存に使用されるストレージアカウントの ID。<br>
+   - `target_resource_guid`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `properties.targetResourceGuid`<br>
+    **説明**: フローログの適用先となるネットワークセキュリティグループの Guid。<br>
+   - `target_resource_id`<br>
+    **タイプ**: `STRING`<br>
+    **プロバイダー名**: `properties.targetResourceId`<br>
+    **説明**: フローログの適用先となるネットワークセキュリティグループの ID。<br>
+## `id`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `id`<br>
+**説明**: リソース ID。<br>
+## `location`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `location`<br>
+**説明**: リソースロケーション。<br>
+## `name`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `name`<br>
+**説明**: リソース名。<br>
+## `provisioning_state`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `properties.provisioningState`<br>
+**説明**: ネットワークウォッチャーリソースのプロビジョニング状態。<br>
+## `resource_group`
+**タイプ**: `STRING`<br>
+## `subscription_id`
+**タイプ**: `STRING`<br>
+## `subscription_name`
+**タイプ**: `STRING`<br>
+## `tags`
+**タイプ**: `UNORDERED_LIST_STRING`<br>
+## `type`
+**タイプ**: `STRING`<br>
+**プロバイダー名**: `type`<br>
+**説明**: リソースタイプ。<br>

@@ -1,6 +1,6 @@
 ---
 kind: ドキュメント
-title: サーバーレスアプリケーションからのカスタムメトリクス
+title: AWS Lambda サーバーレスアプリケーションからのカスタムメトリクス
 ---
 
 ## 概要
@@ -11,8 +11,8 @@ Lambda 関数から Datadog へカスタムメトリクスを送信するには�
 - **[Datadog Lambda 拡張機能を使ったカスタムメトリクスの送信](#with-the-datadog-lambda-extension)**: Lambda 関数から直接カスタムメトリクスを送信したい場合、Datadog では [Datadog Lambda 拡張機能][1]の使用を推奨しています。
 - **[Datadog Forwarder Lambda を使用したカスタムメトリクスの送信](#with-the-datadog-forwarder)**: Lambda 関数から Datadog Forwarder Lambda 経由でテレメトリーを送信する場合、Datadog が提供するヘルパー関数を使用してログ経由で顧客のメトリクスを送信することができます。
 - **[(非推奨) CloudWatch ログからカスタムメトリクスを送信](#deprecated-cloudwatch-logs)**: `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` 形式のログを出力してカスタムメトリクスを送信する方法は非推奨となりました。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
-- **(非推奨) Datadog Lambda ライブラリを使用したカスタムメトリクスの送信**: Python、Node.js、Go 用の Datadog Lambda ライブラリは、`DD_FLUSH_TO_LOG` を `false` に設定すると呼び出しをブロックし、ランタイムから Datadog にカスタムメトリクスを同期的に送ることをサポートしています。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
-- **(非推奨) サードパーティのライブラリを使用**: ほとんどのサードパーティライブラリは、メトリクスをディストリビューションとして送信しないため、実際数より少なく数えられる恐れがあります。
+- **(非推奨) Datadog Lambda ライブラリを使用したカスタムメトリクスの送信**: Python、Node.js、Go 用の Datadog Lambda ライブラリは、`DD_FLUSH_TO_LOG` を `false` に設定すると呼び出しをブロックし、ランタイムから Datadog にカスタムメトリクスを同期的に送ることをサポートしています。パフォーマンスのオーバーヘッドに加え、メトリクス送信は、過渡的なネットワークの問題のためにリトライができないため、断続的にエラーが発生する可能性があります。Datadog では、代わりに [Datadog Lambda 拡張機能](#with-the-datadog-lambda-extension)を使用することを推奨しています。
+- **(非推奨) サードパーティライブラリの使用について**: ほとんどのサードパーティライブラリは、ディストリビューションとしてメトリクスを送信しないため、カウント不足の結果になることがあります。また、一過性のネットワークの問題でリトライが行われないため、断続的なエラーが発生することがあります。
 
 ### ディストリビューションメトリクスについて
 
@@ -183,13 +183,14 @@ namespace Example
   {
     static Function()
     {
-        // statsd クライアントのインスタンスを作成する 
+        // statsd クライアントのインスタンスを作成する
         var dogstatsdConfig = new StatsdConfig
         {
             StatsdServerName = "127.0.0.1",
             StatsdPort = 8125,
         };
-        DogStatsd.Configure(dogstatsdConfig);
+        if (!DogStatsd.Configure(dogstatsdConfig))
+            throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     }
 
     public Stream MyHandler(Stream stream)
@@ -259,13 +260,13 @@ async function myHandler(event, context) {
         'order:online'              // 2 番目のタグ
     );
 
-    // 過去 20 分以内のタイムスタンプでメトリクスを送信します
+    // 過去 20 分以内のタイムスタンプでメトリクスを送信します 
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // メトリクス名
         12.45,                      // メトリクス値
-        'product:latte',            // 最初のタグ
-        'order:online'              // 2 番目のタグ
         new Date(Date.now()),       // 日付
+        'product:latte',            // 最初のタグ
+        'order:online',             // 2 番目のタグ
     );
 }
 ```

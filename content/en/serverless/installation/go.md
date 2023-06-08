@@ -15,7 +15,7 @@ aliases:
     - /serverless/datadog_lambda_library/go/
 ---
 
-<div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a> instead.</div>
+<div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
@@ -79,6 +79,7 @@ For more information and additional settings, see the [plugin documentation][1].
 
 [Add the Lambda layer][1] of Datadog Lambda Extension to your Lambda functions, using the ARN format based on your AWS region and architecture:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```sh
 # Use this format for x86-based Lambda deployed in AWS commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
@@ -92,6 +93,23 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< late
 # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```sh
+# Use this format for x86-based Lambda deployed in AWS commercial regions
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for arm64-based Lambda deployed in AWS commercial regions
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for x86-based Lambda deployed in AWS GovCloud regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+```
+{{< /site-region >}}
 
 Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 

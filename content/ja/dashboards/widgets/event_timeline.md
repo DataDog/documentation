@@ -3,8 +3,14 @@ aliases:
 - /ja/graphing/widgets/event_timeline/
 description: イベントストリームのタイムラインをウィジェットに表示する
 further_reading:
-- link: /ja/dashboards/graphing_json/
+- link: /events/explorer/
   tag: ドキュメント
+  text: イベントエクスプローラー
+- link: /dashboards/widgets/event_stream/
+  tag: Documentation
+  text: イベントストリームウィジェット
+- link: /ja/dashboards/graphing_json/
+  tag: Documentation
   text: JSON を使用したダッシュボードの構築
 kind: documentation
 title: イベントタイムラインウィジェット
@@ -12,26 +18,14 @@ title: イベントタイムラインウィジェット
 
 イベントタイムラインは、[イベントエクスプローラービュー][1]の上部に表示されるタイムラインのウィジェット版です。
 
-{{< img src="dashboards/widgets/event_timeline/event_timeline.png" alt="イベントのタイムラインの例"  >}}
+{{< img src="dashboards/widgets/event_timeline/event_timeline_example.png" alt="過去 2 日間の Error ステータスのイベントタイムライン" >}}
 
 ## セットアップ
-
-{{< img src="dashboards/widgets/event_timeline/event_timeline_setup.png" alt="イベントのタイムラインの例" style="width:80%;">}}
 
 ### コンフィギュレーション
 
 1. [検索クエリ][1]を入力して、イベントストリームを絞り込みます。
-2. スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
-
-### オプション
-
-#### タイトル
-
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
+2. ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
 
 ## API
 

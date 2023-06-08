@@ -1,11 +1,12 @@
 ---
 categories:
-  - cloud
-  - gestion des coûts
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- gestion des coûts
+- network
 dependencies: []
-description: Surveillez votre utilisation des ressources réseau, de calcul et de stockage Azure en la comparant aux limites prédéfinies pour votre abonnement.
+description: Surveillez votre utilisation des ressources réseau, de calcul et de stockage
+  Azure en la comparant aux limites prédéfinies pour votre abonnement.
 doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/
 draft: false
 git_integration_title: azure_usage_and_quotas
@@ -18,9 +19,11 @@ kind: integration
 manifest_version: '1.0'
 name: azure_usage_and_quotas
 public_title: Intégration Datadog/Utilisation et quotas Microsoft Azure
-short_description: Surveillez votre utilisation d'Azure et comparez-la aux limites prédéfinies pour votre abonnement.
+short_description: Surveillez votre utilisation d'Azure et comparez-la aux limites
+  prédéfinies pour votre abonnement.
 version: '1.0'
 ---
+
 ## Présentation
 
 Votre utilisation des ressources Azure doit respecter certaines limites prédéfinies en fonction de votre abonnement. Pour éviter tout problème de provisionnement inattendu, il est important de tenir compte de ces limites lors de la création ou de la mise à l'échelle de votre environnement Azure. Recueillez des métriques via l'intégration Utilisation et quotas Azure pour :
@@ -28,7 +31,7 @@ Votre utilisation des ressources Azure doit respecter certaines limites prédéf
 - Comparer votre utilisation des ressources réseau, de calcul et de stockage par rapport à vos quotas
 - Identifier et éviter les échecs de provisionnement liés à l'atteinte de vos quotas
 
-## Configuration
+## Implémentation
 
 ### Installation
 

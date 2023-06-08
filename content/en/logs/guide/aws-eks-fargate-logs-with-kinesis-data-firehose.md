@@ -4,7 +4,7 @@ kind: guide
 further_reading:
 - link: https://docs.datadoghq.com/logs/log_configuration/processors/
   tag: Documentation
-  text: Processors 
+  text: Processors
 - link: https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html
   tag: Documentation
   text: Fargate logging
@@ -18,15 +18,15 @@ further_reading:
 AWS Fargate on EKS provides a fully managed experience for running Kubernetes workloads. Kinesis Data Firehose can be used with EKS's Fluent Bit log router to collect logs in Datadog. This guide provides a comparison of log forwarding through Kinesis Data Firehose and CloudWatch logs, as well as a sample EKS Fargate application to send logs to Datadog through Kinesis Data Firehose.
 
 {{< img src="logs/guide/aws-eks-fargate-logs-with-kinesis-data-firehose/log_streaming_diagram.png" alt="Diagram of the log flow depicting a Fargate EKS cluster sending container logs through Fluent Bit log router to Kinesis data firehose and an S3 backup bucket within AWS and then on to Datadog" responsive="true">}}
- 
-   
+
+
 ### Kinesis Data Firehose and CloudWatch log forwarding
 
 The following are key differences between using Kinesis Data Firehose and CloudWatch log forwarding.
 
 - **Metadata and tagging**: Metadata such as Kubernetes namespace and container ID are accessible as structured attributes when sending logs with Kinesis Data Firehose.
 
-- **AWS Costs**: AWS Costs may vary for individual use cases but Kinesis Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion. 
+- **AWS Costs**: AWS Costs may vary for individual use cases but Kinesis Data Firehose ingestion is generally less expensive than comparable Cloudwatch Log ingestion.
 
 ## Requirements
 1. The following command line tools: [`kubectl`][6], [`aws`][7].
@@ -34,7 +34,7 @@ The following are key differences between using Kinesis Data Firehose and CloudW
 
 
 ## Setup
- 
+
 The following steps outline the process for sending logs from a sample application deployed on an EKS cluster through Fluent Bit and a Kinesis Data Firehose delivery stream to Datadog. To maximize consistency with standard Kubernetes tags in Datadog, instructions are included to remap selected attributes to tag keys.
 
 1. [Create a Kinesis Data Firehose delivery stream](#create-kinesis-delivery-stream) that delivers logs to Datadog, along with an S3 Backup for any failed log deliveries.
@@ -44,14 +44,14 @@ The following steps outline the process for sending logs from a sample applicati
 
 ### Create Kinesis Delivery Stream
 
-See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4] guide to set up a Kinesis Firehose Delivery stream.  
+See the [Send AWS service logs with the Datadog Kinesis Firehose Destination][4] guide to set up a Kinesis Firehose Delivery stream.
 **Note**: Set the **Source** as `Direct PUT`.
- 
+
 ### Configure Fluent Bit for Firehose on an EKS Fargate cluster
- 
+
 1. Create the `aws-observability` namespace.
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
 kubectl create namespace aws-observability
 {{< /code-block >}}
 
@@ -71,9 +71,9 @@ data:
         Merge_Log           On
         Buffer_Size         0
         Kube_Meta_Cache_TTL 300s
-        
+
   flb_log_cw: 'true'
-  
+
   output.conf: |
     [OUTPUT]
         Name kinesis_firehose
@@ -84,7 +84,7 @@ data:
 
 3. Use `kubectl` to apply the ConfigMap manifest.
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
 kubectl apply -f aws-logging-configmap.yaml
 {{< /code-block >}}
 
@@ -110,15 +110,15 @@ kubectl apply -f aws-logging-configmap.yaml
 
    a. Create the policy.
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
 aws iam create-policy \
          --policy-name FluentBitEKSFargate \
-         --policy-document file://allow_kinesis_put_permission.json 
+         --policy-document file://allow_kinesis_put_permission.json
 {{< /code-block >}}
 
    b. Retrieve the Fargate Pod Execution Role and attach the IAM policy.
 
-{{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+{{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  POD_EXEC_ROLE=$(aws eks describe-fargate-profile \
    --cluster-name fargate-cluster \
    --fargate-profile-name fargate-profile \
@@ -133,7 +133,7 @@ aws iam create-policy \
 To generate logs and test the Kinesis pipeline, deploy a sample workload to your EKS Fargate cluster.
 
 1. Create a deployment manifest `sample-deployment.yaml`.
- 
+
 {{< code-block lang="yaml" filename="sample-deployment.yaml" disable_copy="false" collapsible="false" >}}
  apiVersion: apps/v1
  kind: Deployment
@@ -156,16 +156,16 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
          ports:
          - containerPort: 80
 {{< /code-block >}}
- 
+
  2. Create the `fargate-namespace` namespace.
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl create namespace fargate-namespace
  {{< /code-block >}}
 
  3. Use `kubectl` to apply the deployment manifest.
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl apply -f sample-deployment.yaml
  {{< /code-block >}}
 
@@ -173,7 +173,7 @@ To generate logs and test the Kinesis pipeline, deploy a sample workload to your
 
 1. Verify that `sample-app` pods are running in the namespace `fargate-namespace`.
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl get pods -n fargate-namespace
  {{< /code-block >}}
 
@@ -186,9 +186,9 @@ Expected output:
  sample-app-6c8b449b8f-wzsjj   1/1     Running   0          3m56s
  {{< /code-block >}}
 
-2. Use `kubectl describe pod` to confirm that the Fargate logging feature is enabled.  
+2. Use `kubectl describe pod` to confirm that the Fargate logging feature is enabled.
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl describe pod <POD-NAME> -n fargate-namespace |grep Logging
  {{< /code-block >}}
 
@@ -201,7 +201,7 @@ Expected output:
 
 3. Inspect deployment logs.
 
- {{< code-block lang="bash" filename="" disable_copy="false" collapsible="false" >}}
+ {{< code-block lang="shell" filename="" disable_copy="false" collapsible="false" >}}
  kubectl logs -l app=nginx -n fargate-namespace
  {{< /code-block >}}
 
@@ -215,7 +215,7 @@ Expected output:
  2023/01/27 16:53:42 [notice] 1#1: built by gcc 10.2.1 20210110 (Debian 10.2.1-6)
  2023/01/27 16:53:42 [notice] 1#1: OS: Linux 4.14.294-220.533.amzn2.x86_64
  2023/01/27 16:53:42 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:65535
- 2023/01/27 16:53:42 [notice] 1#1: start worker processes 
+ 2023/01/27 16:53:42 [notice] 1#1: start worker processes
  ...
  {{< /code-block >}}
 
@@ -224,7 +224,7 @@ Expected output:
 
 ### Remap attributes for log correlation
 
-Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.  
+Logs from this configuration require some attributes to be remapped to maximize consistency with standard Kubernetes tags in Datadog.
 1. Go to the [Datadog Log Pipelines][3] page.
 2. Create a new pipeline with **Name** `EKS Fargate Log Pipeline` and **Filter** `service:aws source:aws`.
 3. Create four [Remapper processors][5] to remap the following attributes to tag keys:
@@ -240,8 +240,8 @@ Logs from this configuration require some attributes to be remapped to maximize 
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
- 
-[1]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html 
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/logs/pipelines
 [4]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream#setup

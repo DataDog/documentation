@@ -1,4 +1,9 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 70
+    subcategory: Agent ガイド
 disable_toc: true
 kind: ガイド
 private: true
@@ -8,8 +13,10 @@ title: Agent ガイド
 {{< whatsnext desc="全般ガイド:" >}}
     {{< nextlink href="agent/guide/agent-commands" >}}Agent のコマンド{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent コンフィギュレーションファイル{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-fips-proxy" >}}Datadog FIPS コンプライアンス{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent のログファイル{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent 環境変数{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/setup" >}}集計 Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 ステータスページ{{< /nextlink >}}
     {{< nextlink href="agent/guide/dual-shipping" >}}デュアルシッピング{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}インテグレーション管理{{< /nextlink >}}
@@ -37,7 +44,7 @@ title: Agent ガイド
     {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}JMX を使用したオートディスカバリー{{< /nextlink >}}
     {{< nextlink href="agent/guide/build-container-agent" >}}Datadog Agent イメージの構築{{< /nextlink >}}
     {{< nextlink href="agent/guide/autodiscovery-management" >}}Agent でコンテナのディスカバリーを管理{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifers パラメーターを使用して、指定されたコンテナにオートディスカバリーのコンフィギュレーションファイルテンプレートを適用{{< /nextlink >}}
+    {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifiers パラメーターを使用して、指定されたコンテナにオートディスカバリーのコンフィギュレーションファイルテンプレートを適用{{< /nextlink >}}
     {{< nextlink href="agent/guide/operator-advanced" >}}Datadog Operator の高度なセットアップ{{< /nextlink >}}
     {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Docker 環境のコンテナイメージ{{< /nextlink >}}
     {{< nextlink href="/agent/guide/compose-and-the-datadog-agent" >}}コンポーズと Datadog Agent{{< /nextlink >}}

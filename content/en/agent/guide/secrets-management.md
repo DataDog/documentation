@@ -9,7 +9,7 @@ further_reading:
   text: "Autodiscovery"
 ---
 
-If you wish to avoid storing secrets in plaintext in the Agent’s configuration files, you can use the secrets management package.
+If you wish to avoid storing secrets in plaintext in the Agent's configuration files, you can use the secrets management package.
 
 The Agent is able to leverage the `secrets` package to call a user-provided executable to handle retrieval and decryption of secrets, which are then loaded in memory by the Agent. This approach allows users to rely on any secrets management backend (such as HashiCorp Vault or AWS Secrets Manager), and select their preferred authentication method to establish initial trust with it. As a convenience containerized deployments of the Agent are pre-packaged with [Helper Scripts](#helper-scripts-for-autodiscovery) to use for this executable.
 
@@ -41,7 +41,7 @@ instances:
     password2: "db-ENC[prod_password]"
 ```
 
-Here, there are two secrets: `db_prod_user` and `db_prod_password`. These are the secrets’ _handles_, and each uniquely identifies a secret within your secrets management backend.
+Here, there are two secrets: `db_prod_user` and `db_prod_password`. These are the secrets' _handles_, and each uniquely identifies a secret within your secrets management backend.
 
 Between the brackets, any character is allowed as long as the YAML configuration is valid. This means that quotes must be escaped. For instance:
 
@@ -49,15 +49,15 @@ Between the brackets, any character is allowed as long as the YAML configuration
 "ENC[{\"env\": \"prod\", \"check\": \"postgres\", \"id\": \"user_password\"}]"
 ```
 
-In the above example, the secret’s handle is the string `{"env": "prod", "check": "postgres", "id": "user_password"}`.
+In the above example, the secret's handle is the string `{"env": "prod", "check": "postgres", "id": "user_password"}`.
 
 There is no need to escape inner `[` and `]`. For instance:
 
 ```text
-“ENC[user_array[1234]]”
+"ENC[user_array[1234]]"
 ```
 
-In the above example, the secret’s handle is the string `user_array[1234]`.
+In the above example, the secret's handle is the string `user_array[1234]`.
 
 Secrets are resolved after [Autodiscovery][1] template variables are resolved, this means you can use them in a secret handle. For instance:
 

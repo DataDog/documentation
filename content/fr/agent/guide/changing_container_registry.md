@@ -62,16 +62,16 @@ Pour mettre à jour votre registre lorsque vous déployez l'Agent Datadog (ou l'
 
 1. Mettez à jour le fichier manifeste de l'Agent Datadog afin de remplacer le registre par défaut (`gcr.io/datadoghq`). Par exemple, pour `public.ecr.aws/datadog` :
 
-    ```yaml
-    apiVersion: datadoghq.com/v1alpha1
-    kind: DatadogAgent
-    metadata:
-      name: datadog
-    spec:
-      // ..
-      registry: gcr.io/datadoghq
-    ```
-2. Supprimez les éventuelles valeurs personnalisées définies pour les champs `spec.agents.image.name`, `spec.clusterAgent.image.name` et `spec.clusterChecksRunner.image.name`.
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    registry: gcr.io/datadoghq
+```
+2. Supprimez les éventuelles valeurs personnalisées définies pour les champs `spec.override.nodeAgent.image.name`, `spec.override.clusterAgent.image.name` et `spec.override.clusterChecksRunner.image.name`.
 
 Pour en savoir plus sur l'Operator Datadog, consultez [Déployer un Agent avec l'Operator][4].
 

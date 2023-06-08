@@ -23,18 +23,27 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"
     tag: "Blog"
     text: "Understand user impact scope with Watchdog Impact Analysis"
+algolia:
+  tags: ['watchdog']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with two ongoing critical alerts for error rates" >}}
 
 ## Overview
 
-Watchdog is an algorithmic feature for APM performance and infrastructure metrics that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
+Watchdog is an algorithmic feature for APM performance, infrastructure metrics, and logs that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
 
 * APM metrics:
   * Hits (request rate)
   * Error rate
   * Latency
+
+* Logs
+  * New error logs
+  * Increases in existing error logs
 
 * Infrastructure metrics from integrations:
   * [System][1], for the Host-level memory usage (memory leaks) and TCP retransmit rate.

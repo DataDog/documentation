@@ -64,7 +64,7 @@ Use a [Category Processor][6] to create a new `team` attribute for your logs.
       b. Enter `service_a` in the **Appear under the value name** field.  
       c. Click **Add**.
 6. Add the other teams as separate categories.
-7.  Click **Create**.
+7. Click **Create**.
 
 #### Create a remapper to convert the `team` attribute to a tag
 
@@ -114,7 +114,7 @@ Then, in the **Populate category** section:
       b. Enter `retention-7` in the **Appear under the value name** field.  
       c. Click **Add**
 6. Add the other indexes as separate categories.
-7.  Click **Create**.
+7. Click **Create**.
 
 {{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="The category processor form fill in with data to create an index_name attribute" style="width:75%" >}} 
 

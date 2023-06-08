@@ -53,13 +53,13 @@ public_title: NerdVision
 short_description: Outil de debugging en temps réel pour .NET, Java, Python et Node
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Containers

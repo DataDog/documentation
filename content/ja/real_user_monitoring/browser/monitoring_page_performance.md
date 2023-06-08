@@ -1,8 +1,11 @@
 ---
 further_reading:
+- link: https://learn.datadoghq.com/courses/core-web-vitals-lab
+  tag: ラーニングセンター
+  text: 'インタラクティブラボ: コアウェブバイタル'
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: ブログ
-  text: リアルユーザーモニタリング
+  text: リアルユーザーモニタリング (RUM)
 - link: https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/
   tag: ブログ
   text: Datadog RUM および Synthetic モニタリングでウェブに関する主な指標を監視
@@ -10,10 +13,10 @@ further_reading:
   tag: Documentation
   text: Datadog でビューを検索する
 - link: /real_user_monitoring/explorer/visualize/
-  tag: Documentation
+  tag: ドキュメント
   text: イベントへの視覚化の適用
 - link: /real_user_monitoring/dashboards/
-  tag: ドキュメント
+  tag: Documentation
   text: RUM ダッシュボードについて
 kind: documentation
 title: ページのパフォーマンスの監視
@@ -33,15 +36,15 @@ RUM のビューイベントは、すべてのページビューについて、�
 ## イベントのタイミングとコア Web バイタル
 
 <div class="alert alert-warning">
-Datadog のコア Web バイタルメトリクスは、<a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
+Datadog の Core Web Vitals メトリクスは、<a href="https://github.com/DataDog/browser-sdk">@datadog/browser-rum</a> パッケージ v2.2.0 以降から入手できます。
 </div>
 
 [Google のウェブに関する主な指標][5]は、サイトのユーザーエクスペリエンスを監視するために設計された 3 つのメトリクスのセットです。これらのメトリクスは、負荷パフォーマンス、対話性、視覚的安定性のビューを提供することに重点を置いています。各メトリクスには、優れたユーザーエクスペリエンスにつながる値の範囲に関するガイダンスが付属しています。Datadog では、このメトリクスの 75 パーセンタイルの監視をおすすめしています。
 
-{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="コアウェブバイタルの概要の視覚化"  >}}
+{{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="コアウェブバイタルの概要の視覚化" >}}
 
 - バックグラウンドで開かれたページの First Input Delay および Largest Contentful Paint は収集されません（たとえば、新規タブや焦点のないウィンドウ）。
-- 実際のユーザーページビューから収集されたメトリクスは、 [Synthetic ブラウザテスト][6]など固定環境で読み込まれたページ用に計算されたメトリクスと異なる場合があります。
+- 実際のユーザーのページビューから収集されたメトリクスは、[Synthetic ブラウザテスト][6]などの固定され制御された環境で読み込まれたページに対して計算されたものと異なる場合があります。Synthetic Monitoring では、Largest Contentful Paint と Cumulative Layout Shift は、実際のメトリクスではなく、ラボのメトリクスとして表示されます。
 
 | メトリクス                   | 焦点            | 説明                                                                                           | 対象値 |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|
@@ -72,7 +75,7 @@ Datadog のコア Web バイタルメトリクスは、<a href="https://github.c
 
 ## シングルページアプリケーション (SPA) の監視
 
-シングルページアプリケーション (SPA) の場合、RUM ブラウザ SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページをクリックすると、ページが完全に更新されずに新しいページが表示される場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][16] を使用してページの変更を追跡します。
+シングルページアプリケーション (SPA) の場合、RUM ブラウザ SDK は、`loading_type` 属性を使用して、`initial_load` ナビゲーションと `route_change` ナビゲーションを区別します。ウェブページを操作すると、ページが完全に更新されずに異なる URL に移動する場合、RUM SDK は、`loading_type:route_change` を使用して新しいビューイベントを開始します。RUM は、[履歴 API][16] を使用して URL の変更を追跡します。
 
 Datadog は、ページの読み込みに必要な時間を計算する独自のパフォーマンスメトリクス、`loading_time` を提供します。このメトリクスは、`initial_load` と `route_change` の両方のナビゲーションで機能します。
 
@@ -82,14 +85,24 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 
 - **Initial Load**: 読み込み時間は、次の_どちらか長い方_になります。
 
-  - `navigationStart` と `loadEventEnd` の差。
-  - または、`navigationStart` からページにアクティビティがない最初の時間までの差。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
+  - `navigationStart` と `loadEventEnd` の差、または
+  - `navigationStart` からページにアクティビティがない最初の時間までの差。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
 
-- **SPA Route Change**: ロード時間は、ユーザーがクリックしてから、そのページに初めてアクティビティが発生するまでの差に相当します。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
+- **SPA Route Change**: ロード時間は、URL が変わってから、そのページに初めてアクティビティが発生するまでの差に相当します。詳しくは、[ページアクティビティの計算方法](#how-page-activity-is-calculated)をご覧ください。
 
 ### ページアクティビティの計算方法
 
-ナビゲーションやクリックが発生するたびに、RUM ブラウザ SDK はページのアクティビティを追跡し、インターフェイスが再び安定するまでの時間を推定します。ネットワークリクエストと DOM の変異を見ることで、ページにアクティビティがあると判断されます。100ms 以上継続的なリクエストがなく、DOM の変異もない場合、ページアクティビティは終了します。100ms の間にリクエストも DOM ミューテーションも発生しなかった場合、そのページはアクティビティがないと判断されます。
+RUM ブラウザ SDK は、インターフェイスが再び安定するまでの時間を推定するために、ページのアクティビティを追跡します。ページは、以下の場合にアクティビティがあるとみなされます。
+
+- `xhr` または `fetch` リクエストが進行中です。
+- ブラウザは、パフォーマンスリソースのタイミングエントリ (JS や CSS などの読み込み終了) を発行します。
+- ブラウザは DOM のミューテーションを発行します。
+
+ページのアクティビティは、100ms 間アクティビティがなかった場合に終了したと判断されます。
+
+**注**: SDK の初期化後に発生したアクティビティのみを考慮します。
+
+**注意事項:**
 
 最後のリクエストまたは DOM 変異から 100ms という基準は、以下のシナリオではアクティビティの正確な判断にならないかもしれません。
 
@@ -99,14 +112,17 @@ Datadog は、ページの読み込みに必要な時間を計算する独自の
 このような場合のアクティビティ判定の精度を向上させるには、`excludedActivityUrls` を指定します。これは、ページアクティビティを計算する際に RUM ブラウザ SDK が除外するリソースのリストです。
 
 ```javascript
-DD_RUM.init({
+window.DD_RUM.init({
     ...
     excludedActivityUrls: [
         // 正確な URL を除外する
         'https://third-party-analytics-provider.com/endpoint',
 
         // /comet で終わる URL を除外する
-        /\/comet$/
+        /\/comet$/,
+
+        // 関数が true を返す URL を除外する
+        (url) => url === 'https://third-party-analytics-provider.com/endpoint',
     ]
 })
 ```
@@ -123,7 +139,7 @@ RUM のデフォルトのパフォーマンスタイミングに加えて、ア�
 ```html
 <html>
   <body>
-    <img onload="DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
+    <img onload="window.DD_RUM.addTiming('hero_image')" src="/path/to/img.png" />
   </body>
 </html>
 ```
@@ -134,7 +150,7 @@ RUM のデフォルトのパフォーマンスタイミングに加えて、ア�
 document.addEventListener("scroll", function handler() {
     //1度だけトリガーするよう、イベントリスナーを削除
     document.removeEventListener("scroll", handler);
-    DD_RUM.addTiming('first_scroll');
+    window.DD_RUM.addTiming('first_scroll');
 });
 ```
 
@@ -148,12 +164,12 @@ document.addEventListener("scroll", function handler() {
 
 ```javascript
 document.addEventListener("scroll", function handler() {
-    //1 度だけトリガーするよう、イベントリスナーを削除
+    //1 度だけトリガーするよう、イベントリスナーを削除 
     document.removeEventListener("scroll", handler);
 
     const timing = Date.now()
-    DD_RUM.onReady(function() {
-      DD_RUM.addTiming('first_scroll', timing);
+    window.DD_RUM.onReady(function() {
+      window.DD_RUM.addTiming('first_scroll', timing);
     });
 });
 

@@ -625,7 +625,7 @@ Si vous n'avez jamais utilisé de fonction Azure, consultez l'article [Bien dém
 [50]: https://app.datadoghq.com/screen/integration/azure_vm
 [52]: https://docs.datadoghq.com/fr/events/
 [57]: https://docs.microsoft.com/en-us/azure/azure-monitor/platform/platform-logs-overview
-[58]: https://app.datadoghq.com/monitors#recommended
+[58]: https://app.datadoghq.com/monitors/recommended
 [59]: /fr/monitors/notify/#notify-your-team
 [60]: https://docs.datadoghq.com/fr/integrations/azure/?site=us3
 [61]: https://docs.datadoghq.com/fr/integrations/azure/?tab=azurecliv20#overview
@@ -908,7 +908,7 @@ Suivez les étapes ci-dessous pour configurer une application d'entreprise :
 [8]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
 [9]: https://docs.datadoghq.com/fr/integrations/guide/azure-portal/
 [10]: https://docs.datadoghq.com/fr/integrations/guide/azure-portal/#azure-active-directory-logs
-[11]: https://app.datadoghq.com/monitors#recommended
+[11]: https://app.datadoghq.com/monitors/recommended
 [12]: /fr/monitors/notify/#notify-your-team
 [13]: https://docs.datadoghq.com/fr/security_platform/cspm/
 {{< /site-region >}}

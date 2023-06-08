@@ -80,7 +80,7 @@ This example monitor warns when the LCP takes 2 seconds to load and alerts when 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/types/real_user_monitoring/#create-a-rum-monitor
+[1]: /monitors/types/real_user_monitoring/#create-a-rum-monitor
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-your-new-attributes
 [4]: /real_user_monitoring/explorer/export/

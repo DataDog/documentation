@@ -22,10 +22,8 @@ author:
   support_email: support@nerd.vision
   vendor_id: nerdvision
 categories:
-- マーケットプレイス
-- containers
 - ログの収集
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -53,20 +51,18 @@ public_title: NerdVision
 short_description: .NET、Java、Python、Node 向けのライブデバッガ
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
-  - Category::Containers
   - Category::Log Collection
-  - Category::Monitoring
-  - Offering::Software License
+  - Category::Marketplace
   - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: .NET、Java、Python、Node 向けのライブデバッガ
   media:
@@ -135,11 +131,22 @@ NerdVision には、サービスのチェック機能は含まれません。
 
 ## サポート
 
-サポートまたはリクエストをご希望の場合は、以下のチャンネルから NerdVision にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから NerdVision にお問い合わせください。
 
-メールアドレス: support@nerd.vision
+- メール: [support@nerd.vision][4]
 
-[こちら](https://docs.nerd.vision/)でドキュメントをご確認いただけます。
+### その他の参考資料
 
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の NerdVision のインテグレーションを使ってデバッグデータを監視する][5]
+- [NerdVision ドキュメント][6]
+
+[1]: https://app.nerd.vision
+[2]: https://app.nerd.vision/setup
+[3]: https://app.nerd.vision
+[4]: mailto:support@nerd.vision
+[5]: https://www.datadoghq.com/blog/monitor-nerdvision-datadog-marketplace/
+[6]: https://docs.nerd.vision/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/nerdvision" target="_blank">こちらをクリック</a>してください。

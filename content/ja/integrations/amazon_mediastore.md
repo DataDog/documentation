@@ -1,7 +1,8 @@
 ---
 categories:
-- クラウド
 - AWS
+- クラウド
+- data store
 - ログの収集
 dependencies: []
 description: Amazon Elemental MediaStore のキーメトリクスを追跡
@@ -21,7 +22,6 @@ short_description: Amazon Elemental MediaStore のキーメトリクスを追跡
 version: '1.0'
 ---
 
-
 ## 概要
 
 AWS Elemental MediaStore は、メディア向けに最適化された AWS のストレージサービスです。
@@ -30,7 +30,7 @@ AWS Elemental MediaStore は、メディア向けに最適化された AWS の�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -59,7 +59,7 @@ MediaStore インテグレーションには、サービスのチェック機能
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-mediastore
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediastore/amazon_mediastore_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

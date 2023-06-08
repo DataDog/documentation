@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "assignees": [
+        "@test.user@test.com"
+      ],
+      "content": "Restore lost data.",
+      "completed": "2023-03-06T22:00:00.000000+00:00",
+      "due_date": "2023-07-10T05:00:00.000000+00:00"
+    },
+    "type": "incident_todos"
+  }
+}

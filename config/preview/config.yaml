@@ -17,7 +17,7 @@ deployment:
     targets:
     - name: "preview"
       URL: "s3://datadog-docs-preview?region=us-east-1&prefix=$CI_COMMIT_REF_NAME/"
-      exclude: "**.{go,java,py,rb}"
+      exclude: "**.{go,java,py,rb,jpg,jpeg,png,gif,mp4,svg}"
       cloudFrontDistributionID: E3EYIYXXL26MK1
     - name: "previewAssets"
       URL: "s3://dd-staging-static-assets?region=us-east-1&prefix=documentation/"

@@ -173,3 +173,5 @@ class GitHub:
             makedirs(dirname(file_out), exist_ok=True)
             with open(file_out, mode="wb+") as f:
                 f.write(raw_response.content)
+        else:
+            print(f"\x1b[33mWARNING\x1b[0m: Github request returned an unexpected response {raw_response.status_code} {raw_response.reason} for {path_to_file}")

@@ -29,7 +29,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog’s Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -43,7 +43,7 @@ Follow the [Quick start instructions][2] in Datadog for the best experience, inc
 
 ### Configure the Datadog Agent for APM
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -55,19 +55,23 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables by running:
+3. The tracing client sends traces to `localhost:8126` by default. If this is not the correct host and port for your Agent, set the `DD_TRACE_AGENT_HOSTNAME` and `DD_TRACE_AGENT_PORT` environment variables by running:
 
     ```sh
-    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    DD_TRACE_AGENT_HOSTNAME=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
     ```
 
    To use Unix domain sockets, specify the entire URL as a single environment variable, `DD_TRACE_AGENT_URL`.
 
-    ```sh
-    DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
-    ```
+   If you require a different socket, host, or port, use the `DD_TRACE_AGENT_URL` environment variable or the `DD_TRACE_AGENT_HOST` and `DD_TRACE_AGENT_PORT` environment variables. Some examples:
 
-{{< site-region region="us3,us5,eu,gov" >}}
+   ```sh
+   DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+   DD_TRACE_AGENT_URL=http://<HOSTNAME>:<PORT> node server
+   DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+   ```
+
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -101,7 +105,7 @@ Read [tracer settings][3] for a list of initialization options.
 
 ### Instrument your application
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/admission_controller">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
@@ -119,7 +123,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
 
 2. Import and initialize the tracer either in code or via command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
-   Once you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm step 2 has been correctly done**.  The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
+   Once you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm step 2 has been correctly done**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
    When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
@@ -127,7 +131,7 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
 
 #### JavaScript
 
-```js
+```javascript
 // This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
 ```
@@ -166,6 +170,45 @@ node --require dd-trace/init app.js
 
 **Note:** This approach requires using environment variables for all
 configuration of the tracer.
+
+### Bundling
+
+`dd-trace` works by intercepting `require()` calls that a Node.js application makes when loading modules. This includes modules that are built-in to Node.js, like the `fs` module for accessing the filesystem, as well as modules installed from the NPM registry, like the `pg` database module.
+
+Bundlers crawl all of the `require()` calls that an application makes to files on disk. It replaces the `require()` calls with custom code and combines all of the resulting JavaScript into one "bundled" file. When a built-in module is loaded, such as `require('fs')`, that call can then remain the same in the resulting bundle.
+
+APM tools like `dd-trace` stop working at this point. They can continue to intercept the calls for built-in modules but don't intercept calls to third party libraries. This means that when you bundle a `dd-trace` app with a bundler it is likely to capture information about disk access (through `fs`) and outbound HTTP requests (through `http`), but omit calls to third party libraries. For example:
+- Extracting incoming request route information for the `express` framework. 
+- Showing which query is run for the `mysql` database client.
+
+A common workaround is to treat all third party modules that the APM needs to instrument as being "external" to the bundler. With this setting the instrumented modules remain on disk and continue to be loaded with `require()` while the non-instrumented modules are bundled. However, this results in a build with many extraneous files and starts to defeat the purpose of bundling.
+
+Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require()` calls. As a result, more packages are included in the bundled JavaScript file. 
+
+**Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
+
+#### Esbuild support
+
+This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
+
+Here's an example of how one might use `dd-trace` with esbuild:
+
+```javascript
+const ddPlugin = require('dd-trace/esbuild')
+const esbuild = require('esbuild')
+
+esbuild.build({
+  entryPoints: ['app.js'],
+  bundle: true,
+  outfile: 'out.js',
+  plugins: [ddPlugin],
+  platform: 'node', // allows built-in modules to be required
+  target: ['node16']
+}).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
+```
 
 ## Configuration
 

@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_dbforpostgresql
+- /fr/integrations/azure_dbforpostgresql
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data store
 dependencies: []
 description: Surveillez des métriques clés d'Azure Database pour PostgreSQL.
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_postgresql/
@@ -22,6 +22,7 @@ public_title: Intégration Datadog/Microsoft Azure Database pour PostgreSQL
 short_description: Surveillez des métriques clés d'Azure Database pour PostgreSQL.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Database pour PostgreSQL fournit une base de données en tant que service PostgreSQL community entièrement managée et conçue pour l'entreprise.
@@ -31,7 +32,7 @@ Recueillez des métriques d'Azure Database pour PostgreSQL pour :
 - Visualiser les performances de vos bases de données PostgreSQL
 - Corréler les performances de vos bases de données PostgreSQL avec vos applications
 
-## Configuration
+## Implémentation
 
 ### Installation
 

@@ -15,7 +15,7 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: Python のカスタムインスツルメンテーション
+title: Datadog ライブラリを使った Python カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 <div class="alert alert-info">
@@ -60,10 +60,10 @@ def make_sandwich_request(request):
       return
 ```
 
-`ddtrace.Tracer.wrap()` 向けデコレータの API 詳細は、[こちら][1]で確認できます。
+詳しくは、[`ddtrace.Tracer.wrap()` のデコレータの API 詳細][1]をご覧ください。
 
 
-[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
+[1]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Context Manager" %}}
 
@@ -89,7 +89,7 @@ def make_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-`ddtrace.Tracer()` の API 詳細は[こちら][2]で確認できます
+詳しくは、[`ddtrace.Tracer()` の API 詳細][2]全文をお読みください。
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
@@ -113,7 +113,7 @@ def make_sandwich_request(request):
     span.finish()  # ここでスパンを閉じる
 ```
 
-デコレータの API 詳細は、`ddtrace.Tracer.trace` の[ドキュメント][2]または `ddtrace.Span.finish` の[ドキュメント][3]で確認できます。
+デコレータの API 詳細については、[`ddtrace.Tracer.trace` ドキュメント][2]または [`ddtrace.Span.finish` ドキュメント][3]をお読みください。
 
 
 
@@ -217,14 +217,20 @@ span.finish()
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## ヘッダー抽出と挿入によるコンテキストの伝搬
+
+分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][8]をお読みください。
+
 ## リソースのフィルター
 
-トレースはそれぞれのリソース名に基づいて除外可能で、これによりヘルスチェックなどの外形監視トラフィックが Datadog にレポートされるトレースから削除されます。この設定およびその他のセキュリティ/微調整に関するコンフィギュレーションについては[セキュリティ][2]ページまたは[不要なリソースを無視する][3]を参照してください。
+トレースはそれぞれのリソース名に基づいて除外可能で、これによりヘルスチェックなどの外形監視トラフィックが Datadog にレポートされるトレースから削除されます。この設定およびその他のセキュリティ/微調整に関するコンフィギュレーションについては[セキュリティ][4]ページまたは[不要なリソースを無視する][5]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/python
-[2]: /ja/tracing/security
-[3]: /ja/tracing/guide/ignoring_apm_resources/
+[2]: /ja/tracing/trace_collection/trace_context_propagation/python/
+[4]: /ja/tracing/security
+[5]: /ja/tracing/guide/ignoring_apm_resources/

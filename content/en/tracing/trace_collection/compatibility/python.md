@@ -16,7 +16,7 @@ further_reading:
 
 ## Releases
 
-The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime. 
+The Python APM Client library follows a [versioning policy][1] that specifies the support level for the different versions of the library and Python runtime.
 
 Two release branches are supported:
 
@@ -29,9 +29,9 @@ And the library supports the following runtimes:
 
 | OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
 |---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.10   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.10   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.10   | `<2`                     |
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
 
 ## Integrations
 
@@ -73,7 +73,7 @@ The `ddtrace` library includes support for the following data stores:
 | [algoliasearch][18]                | >= 1.20.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#algoliasearch                       |
 | [asyncpg][19]                      | >= 0.18.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncpg                             |
 | [Cassandra][20]                    | >= 3.5            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#cassandra                           |
-| [Elasticsearch][21]                | >= 1.6            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
+| [Elasticsearch][21]                | >= 1.6, < 8.0     | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#elasticsearch                       |
 | [Flask Cache][22]                  | >= 0.12           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#flask-cache                         |
 | [Mariadb][23]                      | >= 1.0.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mariadb                             |
 | [Memcached][24] [pylibmc][25]      | >= 1.4            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#pylibmc                             |

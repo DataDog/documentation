@@ -38,13 +38,13 @@ RUM は 3 種類のフラストレーションシグナルを収集します。
 フラストレーションシグナルの収集を開始するには、SDK の構成に以下を追加します。
 
 ```
-DD_RUM.init({
-  trackInteractions: true,
+window.DD_RUM.init({
+  trackUserInteractions: true,
   trackFrustrations: true
 })
 ```
 
-フラストレーションシグナルにはアクションが必須です。`trackFrustrations` を有効にすると、自動的に `trackInteractions` が有効になります。
+フラストレーションシグナルにはアクションが必須です。`trackFrustrations` を有効にすると、自動的に `trackUserInteractions` が有効になります。
 
 ## 使用方法
 
@@ -147,8 +147,8 @@ Frustration Count
 [3]: /ja/real_user_monitoring/dashboards/frustration_signals_dashboard/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /ja/dashboards/
-[6]: /ja/monitors/create/
+[6]: /ja/monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
 [8]: /ja/real_user_monitoring/session_replay/
-[9]: /ja/monitors/create/types/real_user_monitoring/
+[9]: /ja/monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

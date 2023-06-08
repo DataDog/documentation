@@ -31,4 +31,4 @@ You should now have a monitor based on your Windows Service Integration.
 
 [1]: /agent/guide/agent-commands/#start-stop-restart-the-agent
 [2]: https://app.datadoghq.com/account/settings#integrations/windows_service
-[3]: /monitors/create/types/integration/
+[3]: /monitors/types/integration/

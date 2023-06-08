@@ -107,7 +107,7 @@ In Python 3, the `dict.iterkeys()`, `dict.iteritems()` and `dict.itervalues()` m
 | `for key, value in mydict.iteritems():`<br/> &nbsp;&nbsp;`  ...` | `from six import iteritems` <br/><br/> `for key, value in iteritems(mydict):`<br/> &nbsp;&nbsp;`  ...` |
 | `for value in mydict.itervalues():`<br/> &nbsp;&nbsp;`  ...`     | `from six import itervalues` <br/><br/> `for value in itervalues(mydict):`<br/> &nbsp;&nbsp;`  ...`    |
 
-Also, in Python 3, the `dict.keys()`, `dict.items()`, `dict.values()` methods return iterators. Therefore, if the dictionary needs to be modified during iteration, make a copy first. To retrieve a dictionary’s keys/items/values as a list:
+Also, in Python 3, the `dict.keys()`, `dict.items()`, `dict.values()` methods return iterators. Therefore, if the dictionary needs to be modified during iteration, make a copy first. To retrieve a dictionary's keys/items/values as a list:
 
 | Python 2                        | Python 2 and 3                       |
 |---------------------------------|--------------------------------------|
@@ -147,7 +147,7 @@ Text data is Unicode code points; you must encode with `.encode(encoding)` for s
 from io import open
 
 f = open('textfile.txt', encoding='utf-8')
-contents = f.read()  # contents will be decoded to unicode using ‘utf-8’; these are not bytes!
+contents = f.read()  # contents will be decoded to unicode using 'utf-8'; these are not bytes!
 ```
 
 Consult Ned Batchelder's [Pragmatic Unicode][8] for further details.
@@ -230,9 +230,9 @@ mypackage/
 	foo.py
 ```
 
-Suppose also that `math.py` contains a function called `gcd`—which contains subtleties distinct from the standard library `math` module’s `gcd` function—and you want to use the `gcd` function from your local package, not the one from the standard library.
+Suppose also that `math.py` contains a function called `gcd`—which contains subtleties distinct from the standard library `math` module's `gcd` function—and you want to use the `gcd` function from your local package, not the one from the standard library.
 
-In Python 2, if you are inside a package, this package’s own modules take precedence before global modules. Using `from math import gcd` imports the `gcd` from `mypackage/math.py`.
+In Python 2, if you are inside a package, this package's own modules take precedence before global modules. Using `from math import gcd` imports the `gcd` from `mypackage/math.py`.
 
 In Python 3, import forms not starting with `.` are interpreted as absolute imports. Using `from math import gcd` imports the `gcd` from the standard library.
 

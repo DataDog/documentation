@@ -22,10 +22,10 @@ Il existe d'autres [métriques et attributs propres à un type d'événement don
 | Type d'événement     | Rétention | Description                                                                                                                                                                                                                                                   |
 |----------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Session  | 30 jours   | Une session représente le parcours d'un utilisateur réel sur votre application mobile. Elle débute lorsque l'utilisateur lance l'application et se poursuit tant qu'il reste actif. Lors du parcours de l'utilisateur, tous les événements RUM générés au sein de la session partagent le même attribut `session.id`. **Remarque** : la session se réinitialise après 15 minutes d'inactivité. Si l'application est arrêtée par le système d'exploitation, vous pouvez réinitialiser la session pendant que l'application est exécutée en arrière-plan. |
-| Vue     | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Une vue est lancée et mise en pause lorsque les rappels `viewDidAppear(animated:)` et `viewDidDisappear(animated:)` sont effectués sur la classe `UIViewController`. Chaque `ViewController` est considéré comme une vue distincte. Tant que l'utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources et Actions) sont joints à la vue, avec un `view.id` unique.                     |
+| Vue     | 30 jours   | Une vue représente un écran unique (ou un segment d'écran) de votre application mobile. Une vue est lancée et mise en pause lorsque les callbacks `onActivityResumed` et `onActivityPaused` sont effectués via l'interface `ActivityLifecycleCallbacks`. Chaque occurrence est considérée comme une vue distincte. Tant que l'utilisateur reste sur une vue, des attributs d'événement RUM (Erreurs, Ressources et Actions) sont joints à la vue, avec un `view.id` unique.                     |
 | Ressource  | 15 jours   | Une ressource représente les requêtes réseau envoyées par votre application mobile à des hosts first party, des API et des fournisseurs tiers. Toutes les requêtes générées lors d'une session utilisateur sont jointes à la vue, avec un `resource.id` unique.                                                                                           |
 | Error     | 30 jours   | Une erreur représente une exception ou une défaillance générée par l'application mobile et jointe à la vue à son origine.                                                                                                                                            |
-| Action    | 30 jours   | Une action représente l'activité utilisateur dans votre application mobile (lancement de l'application, toucher, balayage, retour, etc.). Chaque action possède un `action.id` unique associé à la vue à son origine.                                                                                                                                              |
+| Action    | 30 jours   | Une action représente une activité utilisateur dans votre application mobile (par exemple, le lancement de l'application ou une action de toucher, de balayage ou de retour). Chaque action possède un `action.id` unique joint à la vue à son origine.                                                                                                                                              |
 | Tâche longue | 15 jours | Un événement de tâche longue est généré lorsqu'une tâche bloque dans l'application le thread principal pendant une durée supérieure au seuil défini. |
 
 Le schéma suivant présente la hiérarchie des événements RUM :
@@ -56,8 +56,8 @@ Les attributs sur l'appareil suivants sont joints automatiquement à tous les é
 | `device.brand`  | chaîne | La marque d'appareil indiquée par l'appareil (User-Agent système)  |
 | `device.model`   | chaîne | Le modèle d'appareil indiqué par l'appareil (User-Agent système)    |
 | `device.name` | chaîne | Le nom d'appareil indiqué par l'appareil (User-Agent système)  |
-| `connectivity.status` | chaîne | Le statut de l'accessibilité au réseau de l'appareil (`connected`, `not connected`, `maybe`). |
-| `connectivity.interfaces` | chaîne | La liste des interfaces réseau disponibles (par exemple, `bluetooth`, `cellular`, `ethernet`, `wifi`). |
+| `connectivity.status` | chaîne | Le statut de l'accessibilité au réseau de l'appareil (`connected`, `not connected` ou `maybe`). |
+| `connectivity.interfaces` | chaîne | La liste des interfaces réseau disponibles (par exemple, `bluetooth`, `cellular`, `ethernet` ou `wifi`). |
 | `connectivity.cellular.technology` | chaîne | Le type de technologie radio utilisée pour la connexion cellulaire. |
 | `connectivity.cellular.carrier_name` | chaîne | Le nom de l'opérateur de la carte SIM. |
 
@@ -68,14 +68,16 @@ Les attributs sur le système d'exploitation suivants sont joints automatiquemen
 
 | Nom de l'attribut                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
-| `os.name`       | chaîne | Le nom du système d'exploitation indiqué par l'appareil (User-Agent système)       |
-| `os.version`  | chaîne | La version du système d'exploitation indiquée par l'appareil (User-Agent système)  |
-| `os.version_major`   | chaîne | La version majeure du système d'exploitation indiquée par l'appareil (User-Agent système)   |
+| `os.name`       | chaîne | Le nom du système d'exploitation indiqué par l'appareil (User-Agent système).       |
+| `os.version`  | chaîne | La version du système d'exploitation indiquée par l'appareil (User-Agent système).  |
+| `os.version_major`   | chaîne | La version majeure du système d'exploitation indiquée par l'appareil (User-Agent système).   |
 
 
 ### Géolocalisation
 
-Les attributs suivants sont liés à la géolocalisation des adresses IP :
+Les attributs ci-dessous sont liés à la géolocalisation des adresses IP :
+
+**Remarque :** si vous souhaitez arrêter de recueillir les attributs de géolocalisation, modifiez le paramètre correspondant dans les [détails de votre application][9].
 
 | Nom complet                                    | Type   | Description                                                                                                                          |
 |:--------------------------------------------|:-------|:-------------------------------------------------------------------------------------------------------------------------------------|
@@ -119,12 +121,12 @@ Les métriques sont des valeurs quantifiables servant à effectuer des mesures a
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `session.id` | chaîne | L'identifiant unique de la session. |
 | `session.type` | chaîne | Le type de la session (`user`). |
-| `session.is_active` | booléen | Indique si la session est actuellement active. Une session prend fin lorsqu'un utilisateur quitte l'application ou ferme la fenêtre du navigateur. Elle expire après 4 heures ou 15 minutes d'inactivité. |
+| `session.is_active` | booléen | Indique si la session est actuellement active. Une session prend fin lorsqu'un utilisateur quitte l'application ou ferme la fenêtre du navigateur. Elle expire après 4 heures d'activité ou 15 minutes d'inactivité. |
 | `session.initial_view.url` | chaîne | L'URL de la vue initiale de la session. |
 | `session.initial_view.name` | chaîne | Le nom de la vue initiale de la session. |
 | `session.last_view.url` | chaîne | L'URL de la dernière vue de la session. |
 | `session.last_view.name` | chaîne | Le nom de la dernière vue de la session. |
-| `session.ip` | chaîne | L'adresse IP de la session extraite à partir de la connexion TCP de l'admission. |
+| `session.ip` | chaîne | L'adresse IP de la session extraite à partir de la connexion TCP de l'admission. Si vous souhaitez arrêter de recueillir cet attribut, modifiez le paramètre correspondant dans les [détails de votre application][8]. |
 | `session.useragent` | chaîne | Les informations de l'Agent utilisateur système interprétant les informations de l'appareil.  |
 
 ### Métriques des vues
@@ -146,7 +148,7 @@ Les événements RUM de type Action, Erreur, Ressource et Tâche longue contienn
 | Nom de l'attribut                 | Type   | Description                                                                                                    |
 |--------------------------------|--------|----------------------------------------------------------------------------------------------------------------|
 | `view.id`                      | chaîne | L'ID unique de la vue initiale correspondant à l'événement.                                                                      |
-| `view.url`                     | chaîne | URL de la classe `UIViewController` correspondant à l'événement.                                                           |
+| `view.url`                     | chaîne | Nom canonique de la classe correspondant à l'événement.                                                           |
 | `view.name` | chaîne | Nom personnalisable de la vue correspondant à l'événement. |                                                                                 
 
 ### Métriques des ressources
@@ -224,6 +226,10 @@ Les erreurs réseau comprennent des informations sur la requête HTTP ayant éch
 
 Avant que les données ne soient importées dans Datadog, elles sont stockées en clair dans le répertoire cache de votre application. Ce répertoire est protégé par le [bac à sable d'applications Android][6]. Ainsi, sur la plupart des appareils, ces données ne peuvent pas être lues par d'autres applications. Toutefois, si l'appareil mobile est en mode root, ou si l'intégrité du kernel Linux a été compromise, il est possible que les données stockées soient lisibles.
 
+## Prise en charge du mode Direct Boot
+
+Si votre application prend en charge le [mode Direct Boot][7], notez que les données capturées avant le déverrouillage de l'appareil ne seront pas enregistrées, étant donné que l'espace de stockage chiffré n'est pas encore disponible.
+
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -234,3 +240,6 @@ Avant que les données ne soient importées dans Datadog, elles sont stockées e
 [4]: https://docs.datadoghq.com/fr/getting_started/tagging/unified_service_tagging/
 [5]: https://docs.datadoghq.com/fr/real_user_monitoring/android/advanced_configuration/#track-user-sessions
 [6]: https://source.android.com/security/app-sandbox
+[7]: https://developer.android.com/training/articles/direct-boot
+[8]: https://docs.datadoghq.com/fr/data_security/real_user_monitoring/#ip-address
+[9]: https://docs.datadoghq.com/fr/data_security/real_user_monitoring/#geolocation

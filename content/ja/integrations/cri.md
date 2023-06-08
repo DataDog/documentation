@@ -22,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
 display_on_public_website: true
@@ -42,8 +43,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Containers
+  - Category::Kubernetes
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: CRI のすべてのメトリクスを Datadog で追跡
   media: []
@@ -60,7 +62,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 CRI は [Datadog Agent][1] の中核となるチェックで、`datadog.yaml` に `cri.d/conf.yaml` と共に構成する必要があります。
 

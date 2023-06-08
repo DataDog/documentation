@@ -1,16 +1,15 @@
 ---
-title: 除外
-kind: ドキュメント
 aliases:
-  - /ja/graphing/functions/exclusion/
+- /ja/graphing/functions/exclusion/
+kind: ドキュメント
+title: 除外
 ---
+
 ## null を除外
 
 | 関数         | 説明                                                    | 例                                        |
 | ---------------- | -------------------------------------------------------------- | ---------------------------------------------- |
 | `exclude_null()` | グラフまたはトップリストから、タグの値に N/A を持つグループを削除します。 | `exclude_null(avg:system.load.1{*} by {host})` |
-
-例:
 
 たとえば、`account` と `region` の 2 つのタグを持つメトリクスがあるとします。`account` には、3 種類の値 (`prod`、`build`、`N/A`)、`region` には 4 種類の値 (`us-east-1`、`us-west-1`、`eu-central-1`、`N/A`) が指定される可能性があります。
 

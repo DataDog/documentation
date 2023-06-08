@@ -1,8 +1,6 @@
 ---
 title: Monitor Arithmetic and Sparse Metrics
 kind: guide
-aliases:
-  - /monitors/guide/monitor-arithmetic-and-sparse-metrics
 ---
 
 ## Overview

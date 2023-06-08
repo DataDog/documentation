@@ -59,7 +59,7 @@ Apdex スコアを計算するには、APM のサービスモニタリング、�
 
 1. クエリ `b` を作成するには、**+ Add Query** をクリックします。
 2. クエリ `b` のデータソースとして `RUM` を選択し、 `@view.largest_contentful_paint:[2s TO 8s]` と入力します。
-3. Enter キーを押すか、ドロップダウンメニューから **Update query** をクリックします。クエリ `b` の `RUM` の隣に、`Largest Contentful Paint:[2s - 3s]` クエリが表示されます。
+3. Enter キーを押すか、ドロップダウンメニューから **Update query** をクリックします。クエリ `b` の `RUM` の隣に、`Largest Contentful Paint:[2s - 8s]` クエリが表示されます。
 
 #### クエリ C
 
@@ -145,7 +145,7 @@ Apdex スコアを計算するには、APM のサービスモニタリング、�
 その他の Apdex スコアは、以下の方法で算出することができます。
 
 - Apdex スコアの経時変化を見るには、**Select your visualization** で `Query Value` の代わりに `Timeseries` を選択します。
-- 特定のアプリケーションの Apdex スコアを計算するには、`@application.id` クエリを追加し、計算式を更新します。
+- 特定のアプリケーションの Apdex スコアを計算するには、`@application.name` クエリを追加し、計算式を更新します。
 - Apdex スコアを First Contentful Paint のような別の RUM パフォーマンスメトリクスで計算するには、クエリ内の `@view.LargestContentfulPaint` を `@view.FirstContentfulPaint` に置き換えます。
 
 アプリケーションの追加パフォーマンス指標を計算するには、[クイックグラフを作成する](#create-a-quick-graph)前に、どのデータポイントが必要で、どの RUM イベントが関連するかを決定します。

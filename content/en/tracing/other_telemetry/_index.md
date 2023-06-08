@@ -14,7 +14,7 @@ Correlating data by various Datadog products gives context to help estimate the 
 
 Inject trace IDs into logs, and leverage unified service tagging to find the exact logs associated with a specific service and version, or all logs correlated to an observed trace. See [Connect Logs and Traces][1] to set it up.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
 
 ## Connect RUM and Traces
 

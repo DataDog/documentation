@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure Cosmos DB のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_cosmosdb/
@@ -32,7 +33,7 @@ Datadog Azure インテグレーションを使用して、Cosmos DB からメ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

@@ -1,7 +1,6 @@
 ---
 categories:
-- monitoring
-ddtype: crawler
+- metrics
 dependencies: []
 description: Surveillez les métriques relatives aux insights de qualité Conviva pour
   les plates-formes de streaming vidéo.
@@ -32,7 +31,7 @@ Associez Datadog à votre compte Conviva pour consulter vos métriques MetricLen
 
 Installez l'intégration avec le [carré d'intégration Conviva][1] de Datadog.
 
-### Procédure à suivre
+### Configuration
 1. Accédez à l'onglet Configuration dans le [carré d'intégration Conviva][1] de Datadog.
 2. Cliquez sur **Add New Credentials** et saisissez votre clé d'API et votre secret d'API Conviva. Datadog recherche alors les comptes associés à ces identifiants.
 3. Une fois les comptes identifiés, ajoutez un _MetricLens_ pour déterminer les métriques à ingérer dans Datadog. Attribuez un nom au MetricLens ainsi qu'un _filter_ et une _dimension_. Le nom est automatiquement ajouté au MetricLens en question sous la forme de tag.

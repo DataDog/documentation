@@ -11,8 +11,8 @@ There are a few different ways to submit custom metrics to Datadog from a Lambda
 - **[Submitting custom metrics using the Datadog Lambda extension](#with-the-datadog-lambda-extension)**: If you want to submit custom metrics directly from your Lambda function, Datadog recommends using the [Datadog Lambda extension][1].
 - **[Submitting custom metrics using the Datadog Forwarder Lambda](#with-the-datadog-forwarder)**: If you are sending telemetry from your Lambda function over the Datadog Forwarder Lambda, you can submit customer metrics over logs using the Datadog-provided helper functions.
 - **[(Deprecated) Submitting custom metrics from CloudWatch logs](#deprecated-cloudwatch-logs)**: The method to submit custom metrics by printing a log formatted as `MONITORING|<UNIX_EPOCH_TIMESTAMP>|<METRIC_VALUE>|<METRIC_TYPE>|<METRIC_NAME>|#<TAG_LIST>` has been deprecated. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
-- **(Deprecated) Submitting custom metrics using the Datadog Lambda library**: The Datadog Lambda library for Python, Node.js and Go support sending custom metrics synchronously from the runtime to Datadog by blocking the invocation when `DD_FLUSH_TO_LOG` is set to `false`. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
-- **(Not recommended) Using a third-party library**: Most third-party libraries do not submit metrics as distributions and can lead to under-counted results.
+- **(Deprecated) Submitting custom metrics using the Datadog Lambda library**: The Datadog Lambda library for Python, Node.js and Go support sending custom metrics synchronously from the runtime to Datadog by blocking the invocation when `DD_FLUSH_TO_LOG` is set to `false`. Besides the performance overhead, metric submissions may also encounter intermittent errors due to the lack of retries because of transient network issues. Datadog recommends using the [Datadog Lambda extension](#with-the-datadog-lambda-extension) instead.
+- **(Not recommended) Using a third-party library**: Most third-party libraries do not submit metrics as distributions and can lead to under-counted results. You may also encounter intermittent errors due to the lack of retries because of transient network issues.
 
 ### Understanding distribution metrics
 
@@ -264,9 +264,9 @@ async function myHandler(event, context) {
     sendDistributionMetricWithDate(
         'coffee_house.order_value', // Metric name
         12.45,                      // Metric value
-        'product:latte',            // First tag
-        'order:online'              // Second tag
         new Date(Date.now()),       // date
+        'product:latte',            // First tag
+        'order:online',             // Second tag
     );
 }
 ```

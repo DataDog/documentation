@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-This tutorial walks you through the steps for enabling tracing on a sample Python application installed in a container. In this scenario, the Datadog Agent is installed on a host. 
+This tutorial walks you through the steps for enabling tracing on a sample Python application installed in a container. In this scenario, the Datadog Agent is installed on a host.
 
 {{< img src="tracing/guide/tutorials/tutorial-python-container-agent-host-overview.png" alt="Diagram showing installation scenario for this tutorial" style="width:100%;" >}}
 
@@ -39,7 +39,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 {{< /code-block >}}
 
@@ -75,7 +75,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml build 
 docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db notes_app
 {{< /code-block >}}
 
-   The application is ready to use when you see the following output in the terminal: 
+   The application is ready to use when you see the following output in the terminal:
 
    ```
    notes          |  * Debug mode: on
@@ -103,7 +103,7 @@ docker-compose -f docker/host-and-containers/exercise/docker-compose.yaml up db 
 : `(1, hello)`
 
 `curl -X GET 'localhost:8080/notes'`
-: `{”1”, "hello"}`
+: `{"1", "hello"}`
 
 `curl -X PUT 'localhost:8080/notes?id=1&desc=UpdatedNote'`
 : `(1, UpdatedNote)`
@@ -141,7 +141,7 @@ Now that you have a working Python application, configure it to enable tracing.
 2. Within the notes application Dockerfile, `docker/host-and-containers/exercise/Dockerfile.notes`, change the CMD line that starts the application to use the `ddtrace` package:
 
    ```
-   # Run the application with Datadog 
+   # Run the application with Datadog
    CMD ["ddtrace-run", "python", "-m", "notes_app.app"]
    ```
 
@@ -155,7 +155,7 @@ Now that you have a working Python application, configure it to enable tracing.
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Add Docker labels that correspond to the Universal Service Tags. This allows you also to get Docker metrics once your application is running. 
+4. Add Docker labels that correspond to the Universal Service Tags. This allows you also to get Docker metrics once your application is running.
 
    ```
    LABEL com.datadoghq.tags.service="notes"
@@ -188,7 +188,7 @@ To check that you've set things up correctly, compare your Dockerfile file with 
           - "8080:8080"
        depends_on:
           - db
-       extra_hosts:                             # Linux only configuration 
+       extra_hosts:                             # Linux only configuration
          - "host.docker.internal:host-gateway"  # Linux only configuration
       environment:
          - DB_HOST=test_postgres                 # the Postgres container
@@ -247,9 +247,9 @@ If you don't see traces after several minutes, clear any filter in the Traces Se
 
 ### Examine a trace
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
 The flame graph for a `POST` trace looks something like this:
 
@@ -298,13 +298,13 @@ For more information, read [Custom Instrumentation][12].
 
 ## Add a second application to see distributed traces
 
-Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. 
+Tracing a single application is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_.
 
 The sample project includes a second application called `calendar_app` that returns a random date whenever it is invoked. The `POST` endpoint in the Notes application has a second query parameter named `add_date`. When it is set to `y`, Notes calls the calendar application to get a date to add to the note.
 
 1. Configure the calendar app for tracing by adding `dd_trace` to the startup command in the Dockerfile, like you previously did for the notes app. Open `docker/host-and-containers/exercise/Dockerfile.calendar` and update the CMD line like this:
    ```
-   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"] 
+   CMD ["ddtrace-run", "python", "-m", "calendar_app.app"]
    ```
 
 3. Apply Universal Service Tags, just like we did for the notes app. Add the following environment variables in the `Dockerfile.calendar` file:
@@ -315,7 +315,7 @@ The sample project includes a second application called `calendar_app` that retu
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Again, add Docker labels that correspond to the Universal Service Tags, allowing you to also get Docker metrics once your application runs. 
+4. Again, add Docker labels that correspond to the Universal Service Tags, allowing you to also get Docker metrics once your application runs.
 
    ```
    LABEL com.datadoghq.tags.service="calendar"
@@ -362,9 +362,9 @@ The sample project includes a second application called `calendar_app` that retu
 
 ## Add more custom instrumentation
 
-You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace: 
+You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
 
-1. Open `notes_app/notes_logic.py`. 
+1. Open `notes_app/notes_logic.py`.
 2. Add the following import
 
    ```python

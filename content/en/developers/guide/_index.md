@@ -3,6 +3,11 @@ title: Developer Guides
 kind: guide
 private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Developer Guides
 ---
 
 {{< whatsnext desc="General:" >}}

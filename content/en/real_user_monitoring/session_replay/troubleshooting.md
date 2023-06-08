@@ -19,11 +19,7 @@ If you experience unexpected behavior with Datadog Session Replay, use this page
 
 ### Some HTML elements are not visible at replay
 
-Session Replay does not support the following HTML elements: `iframe`, `video`, `audio`, or `canvas`. Session Replay does not support Web Components nor Shadow DOM.
-
-{{< callout url="#" btn_hidden="true" >}}
-Shadow DOM support is in beta. To request access, contact Datadog support at support@datadoghq.com.
-{{< /callout >}}
+Session Replay does not support the following HTML elements: `iframe`, `video`, `audio`, or `canvas`. 
 
 Session Replay requires you to use an HTTPS connection. If you aren't using a secure connection, the resources time out and you can't see images and some page elements.
 
@@ -51,7 +47,7 @@ For example, if your application is on the `example.com` domain and depends on a
 
 ```html
 <link rel="stylesheet" crossorigin="anonymous"
-      href="https://assets.example.com/style.css”>
+      href="https://assets.example.com/style.css">
 ```
 
 Additionally, authorize the `example.com` domain in the `assets.example.com`. This allows the assets file to load the resource by setting the [`Access-Control-Allow-Origin`][3] header.

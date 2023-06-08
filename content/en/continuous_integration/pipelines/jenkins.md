@@ -120,11 +120,11 @@ Install and enable the [Datadog Jenkins plugin][3] v3.3.0 or newer:
 3. Select the checkbox next to the plugin, and install using one of the two install buttons at the bottom of the screen.
 4. To verify that the plugin is installed, search for `Datadog Plugin` on the **Installed** tab.
 
-## Enabling CI Visibility on the plugin
+## Enable CI Visibility on the plugin
 
 There are several ways you can configure the Datadog Jenkins plugin.
 
-### Using the Jenkins configuration UI
+### Configure with the Jenkins configuration UI
 
 {{< tabs >}}
 
@@ -160,7 +160,7 @@ Use this option to make the Jenkins plugin report directly to Datadog without us
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using configuration-as-code
+### Configuration-as-code
 
 {{< tabs >}}
 
@@ -222,7 +222,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using Groovy
+### Configure with Groovy
 
 {{< tabs >}}
 
@@ -295,7 +295,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using environment variables
+### Use environment variables
 
 {{< tabs >}}
 
@@ -351,7 +351,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Validating the configuration
+## Validate the configuration
 
 To verify that CI Visibility is enabled, go to `Jenkins Log` and search for:
 
@@ -360,7 +360,7 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-### Infrastructure metric correlation
+### Correlate infrastructure metrics 
 
 If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
 
@@ -370,11 +370,7 @@ If you are using Jenkins workers, you can correlate pipelines with the infrastru
   * You can use fixed values or other environment variables as valid values.
 
 ```bash
-# Using fixed value
 export DD_CI_HOSTNAME=my-hostname
-
-# Using other environment variable
-export DD_CI_HOSTNAME=$HOSTNAME
 ```
 
 If you are using Kubernetes to manage your Jenkins instances, add the `DD_CI_HOSTNAME` environment variable to the [pod that executes the Jenkins job][9]. The value of this environment variable depends on what you are using in your Datadog Agent daemonset when reporting the infrastructure metrics.
@@ -387,7 +383,7 @@ This is only required for Jenkins workers. For the Jenkins controller, the infra
 
 This is an optional step that enables the collection of job logs.
 
-### Using the Jenkins configuration UI
+### Enable with the Jenkins configuration UI
 
 {{< tabs >}}
 
@@ -413,7 +409,7 @@ This is an optional step that enables the collection of job logs.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using configuration-as-code
+### Enable with configuration-as-code
 
 {{< tabs >}}
 
@@ -458,7 +454,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using Groovy
+### Enable with Groovy
 
 {{< tabs >}}
 
@@ -507,7 +503,7 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using environment variables
+### Use environment variables
 
 {{< tabs >}}
 
@@ -558,7 +554,7 @@ pipeline {
 }
 {{< /code-block >}}
 
-## Propagate Git information in pipelines without a Jenkinsfile from SCM.
+## Propagate Git information in pipelines without a Jenkinsfile from SCM
 
 The Jenkins plugin uses environment variables to determine the Git information. However, these environment variables may not be available if you are not using a `Jenkinsfile` in your repository, and you're configuring the pipeline directly in Jenkins using the `checkout` step.
 
@@ -708,7 +704,7 @@ pipeline {
 
 ## Customization
 
-### Setting custom tags for your pipelines
+### Set custom tags for your pipelines
 
 The Datadog plugin adds a `datadog` step that allows adding custom tags to your pipeline-based jobs.
 
@@ -743,7 +739,7 @@ datadog(tags: ["team:backend", "release:canary"]){
 }
 {{< /code-block >}}
 
-### Setting global custom tags
+### Set global custom tags
 
 You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 
@@ -764,7 +760,7 @@ You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`<br/>
 **Example**: `(.*?)_job_(.*?)_release, owner:$1, release_env:$2, optional:Tag3`
 
-### Including or excluding pipelines
+### Include or exclude pipelines
 
 You can configure the Jenkins Plugin to include or exclude some pipelines:
 
@@ -880,7 +876,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [7]: https://app.datadoghq.com/ci/pipelines
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
-[10]: /continuous_integration/pipelines/jenkins/#enable-job-log-collection
-[11]: /continuous_integration/pipelines/jenkins/#infrastructure-metric-correlation
+[10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
+[11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
 [12]: /continuous_integration/pipelines/custom_tags_and_metrics/
 [14]: /agent/

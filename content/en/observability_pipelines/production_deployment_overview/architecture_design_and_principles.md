@@ -37,6 +37,8 @@ If you prefer to use a HTTP proxy, Observability Pipelines Worker offers a globa
 
 Discovery of your Observability Pipelines Worker aggregators and services should resolve through DNS or service discovery. This strategy facilitates routing and load balancing of your traffic, and is how your agents and load balancers discover your aggregators. For proper separation of concerns, the Observability Pipelines Worker does not resolve DNS queries and, instead, delegates this to a system-level resolver (for example, [Linux resolving][1]).
 
+{{< img src="observability_pipelines/production_deployment_overview/dns_service_discovery.png" alt="A diagram showing a cloud region with a cluster of agents, cluster of load balancers, and aggregate of Observability Pipelines Workers, where each group is sending separate queries to the DNS or service registry" style="width:60%;" >}}
+
 ### Choosing protocols
 
 When sending data to the Observability Pipelines Worker, Datadog recommends choosing a protocol that allows easy load-balancing and application-level delivery acknowledgment. HTTP and gRPC are preferred due to their ubiquitous nature and the amount of available tools and documentation to help operate HTTP/gRPC-based services effectively and efficiently.
@@ -64,6 +66,8 @@ These functions collect and forward existing data without modifying data. Since 
 
 If you decide to replace an agent, configure Observability Pipelines Worker to perform the same function as the agent you are replacing. Use source components such as the `file`, `journald`, and `host_metrics` sources to collect and forward data. You can process data locally on the node or remotely on your aggregators. See [Choosing where to process data](#choosing-where-to-process-data) for more information.
 
+{{< img src="observability_pipelines/production_deployment_overview/as_an_agent.png" alt="A diagram showing a node containing multiple services and the Observability Pipelines Worker, where the services are sending data to the Worker and the Worker is sending data out" style="width:30%;" >}}
+
 #### When Observability Pipelines Worker should integrate with agents
 
 The Observability Pipelines Worker should integrate with agents that produce vendor-specific data that the Observability Pipelines Worker cannot replicate.
@@ -73,6 +77,8 @@ For example, Datadog [Network Performance Monitoring][4] integrates the Datadog 
 As another example, the Datadog Agent collects service metrics and enriches them with vendor-specific Datadog tags. In this case, the Datadog Agent should send the metrics directly to Datadog or route them through the Observability Pipelines Worker. The Observability Pipelines Worker should not replace the Datadog Agent because the data being produced is enriched in a vendor-specific way.
 
 If you integrate with an agent, configure the Observability Pipelines Worker to receive data directly from the agent over the local network, routing data through the Observability Pipelines Worker. Use source components such as the `datadog_agent` or `open_telemetry` to receive data from your agents.
+
+{{< img src="observability_pipelines/production_deployment_overview/from_other_agents.png" alt="A diagram showing a node containing multiple services, other agents, and the Observability Pipelines Worker, where the services and agents are sending data to the Worker and the Worker is sending data out" style="width:35%;" >}}
 
 Alternatively, you can deploy the Observability Pipelines Worker on separate nodes as an aggregator. See [Choosing where to process data](#choosing-where-to-process-data) for more details.
 
@@ -94,7 +100,11 @@ Observability Pipelines Worker can be deployed anywhere in your infrastructure. 
 
 #### Local processing
 
-With local processing, Observability Pipelines Worker is deployed on each node as an agent. Data is processed on the same node from which the data originated. This provides operational simplicity since the Observability Pipelines Worker has direct access to your data and scales along with your infrastructure.
+With local processing, Observability Pipelines Worker is deployed on each node as an agent. 
+
+{{< img src="observability_pipelines/production_deployment_overview/agent.png" alt="A diagram showing two separate nodes, each containing services, other agents, other node data, and an Observability Pipelines Worker, and the node and agent data is sent to the Worker, and then to the sinks" style="width:70%;" >}}
+
+Data is processed on the same node from which the data originated. This provides operational simplicity since the Observability Pipelines Worker has direct access to your data and scales along with your infrastructure.
 
 Local processing is recommended for:
 
@@ -104,13 +114,19 @@ Local processing is recommended for:
 
 #### Remote processing
 
-For remote processing, the Observability Pipelines Worker can be deployed on separate nodes as an aggregator. Data processing is shifted off your nodes and onto remote aggregator nodes. Remote processing is recommended for environments that require high durability and high availability (most environments). In addition, this is easier to set up since it does not require the infrastructure restructuring necessary when adding an agent.
+For remote processing, the Observability Pipelines Worker can be deployed on separate nodes as an aggregator. 
+
+{{< img src="observability_pipelines/production_deployment_overview/aggregator_role.png" alt="A diagram showing an Observability Pipelines Worker aggregator containing multiple Workers that are receiving data from the network load balancer and sending data to different sinks" style="width:100%;" >}}
+
+Data processing is shifted off your nodes and onto remote aggregator nodes. Remote processing is recommended for environments that require high durability and high availability (most environments). In addition, this is easier to set up since it does not require the infrastructure restructuring necessary when adding an agent.
 
 See [Aggregator Architecture][5] for more details.
 
 #### Unified processing
 
 Finally, you can also combine local and remote data processing to create a unified observability data pipeline. Datadog recommends evolving towards unified processing after starting with [remote processing](#remote-processing).
+
+{{< img src="observability_pipelines/production_deployment_overview/unified.png" alt="A diagram showing a node containing multiple services and another agent, both sending data to the Worker in the node, and the Worker sends the data to the load balancers. The load balancer then sends data to the aggregator, which containers multiple Workers" style="width:70%;" >}}
 
 ## Buffering data
 
@@ -125,11 +141,15 @@ Buffering should happen close to your destinations, and each destination should 
 
 For these reasons, the Observability Pipelines Worker couples buffers with its sinks.
 
+{{< img src="observability_pipelines/production_deployment_overview/where_to_buffer.png" alt="A diagram showing the agent in a node sending data to an Observability Pipelines Worker with a buffer in a different node" style="width:50%;" >}}
+
 ### Choosing how to buffer data
 
 Observability Pipelines Worker's built-in buffers simplify operation and eliminate the need for complex external buffers.
 
 When choosing an Observability Pipelines Worker buffer type, select the type that is optimal for the destination's purpose. For example, your system of record should use disk buffers for high durability, and your system of analysis should use memory buffers for low latency. Additionally, both buffers can overflow to another buffer to prevent back pressure from propagating to your clients.
+
+{{< img src="observability_pipelines/production_deployment_overview/how_to_buffer.png" alt="A diagram showing an Observability Pipelines Worker's sources sending data to the disk buffer and memory buffer that are located close to the sinks" style="width:100%;" >}}
 
 ## Routing data
 
@@ -138,6 +158,8 @@ Routing data, so that your aggregators send data to the proper destination, is t
 ### Separating systems of record and analysis
 
 Separate your system of record from your system of analysis to optimize cost without making trade-offs that affect their purpose. For example, your system of record can batch large amounts of data over time and compress it to minimize cost while ensuring high durability for all data. And your system of analysis can sample and clean data to reduce cost while keeping latency low for real-time analysis.
+
+{{< img src="observability_pipelines/production_deployment_overview/separating_concerns.png" alt="A diagram showing an Observability Pipelines Worker's sources sending data to the disk buffer that then sends the data for archiving or to a block storage disk for sampling" style="width:100%;" >}}
 
 ### Routing to your systems of record (Archiving)
 

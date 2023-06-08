@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -81,5 +81,5 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/host
-[2]: /monitors/create/configuration/#advanced-alert-conditions
+[2]: /monitors/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/

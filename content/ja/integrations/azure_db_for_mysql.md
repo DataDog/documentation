@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_dbformysql
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure DB for MySQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/
@@ -33,7 +34,7 @@ Azure Database for MySQL からメトリクスを取得すると、以下のこ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 

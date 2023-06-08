@@ -4,8 +4,8 @@
       "exclusion_filters": [],
       "filtered_data_type": "logs",
       "is_enabled": true,
-      "name": "Example-Update_a_security_filter_returns_OK_response",
-      "query": "service:ExampleUpdateasecurityfilterreturnsOKresponse",
+      "name": "Example-Security-Monitoring",
+      "query": "service:ExampleSecurityMonitoring",
       "version": 1
     },
     "type": "security_filters"

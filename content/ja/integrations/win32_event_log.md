@@ -115,6 +115,8 @@ Windows Event Log を Datadog イベントとして収集するには、`win32_e
 
 Agent は、2 つの方法で Windows Event Log を Datadog イベントとして収集するよう構成することができます。各方法は、チャンネルとフィルターのための独自の構成構文を持っています ([イベントのフィルタリング](?tab=events#filtering-events)を参照してください)。従来の方法は WMI を使用し、インスタンスのデフォルトモードです。新しい方法は、Event Log API を使用します。Event Log API を使用する方がパフォーマンスが良いので、Event Log API を使用することをお勧めします。Event Log API の収集メソッドを使用するには、各インスタンスで `legacy_mode: false` を設定します。
 
+`legacy_mode: false` が設定されている場合、`path` は `win32_event_log.dconf.yaml` ファイルで設定する必要があります。`legacy_mode` が設定されていないか `true` に設定されている場合、`source_name`、`event_id`、`message_filters`、`log_file`、`type` のフィルターのうち少なくとも 1 つが設定されている必要があります。
+
 この例では、`Security` と `<CHANNEL_2>` チャンネルのエントリーを示します。
 
 ```yaml
@@ -122,7 +124,8 @@ init_config:
 instances:
   - # WMI - レガシーモード (デフォルト)
     legacy_mode: true
-    log_file: Security
+    log_file:
+      - Security
 
   - # Event Log API (パフォーマンスが優れている)
     path: Security
@@ -276,7 +279,7 @@ Windows イベントビューア GUI を使用して、このインテグレー�
       log_processing_rules:
       - type: include_at_match
         name: relevant_security_events
-        pattern: '"EventID":"(1102|4624|4625|4634|4648|4728|4732|4735|4737|4740|4755|4756)"'
+        pattern: '"EventID":(?:{"value":)?"(1102|4624|4625|4634|4648|4728|4732|4735|4737|4740|4755|4756)"'
 
     - type: windows_event
       channel_path: Security
@@ -285,7 +288,7 @@ Windows イベントビューア GUI を使用して、このインテグレー�
       log_processing_rules:
       - type: exclude_at_match
         name: relevant_security_events
-        pattern: '"EventID":"(1102|4624)"'
+        pattern: '"EventID":(?:{"value":)?"(1102|4624)"'
 
     - type: windows_event
       channel_path: System
@@ -317,7 +320,7 @@ Windows イベントビューア GUI を使用して、このインテグレー�
       log_processing_rules:
         - type: include_at_match
           name: include_x01
-          pattern: '"EventID":"(101|201|301)"'
+          pattern: '"EventID":(?:{"value":)?"(101|201|301)"'
   ```
 
 **注**: このパターンはログの形式によって異なる場合があります。[Agent `stream-logs` サブコマンド][1]を使用すると、この形式を表示することができます。
@@ -342,10 +345,22 @@ Legacy Provider EventID は、[Windows Event Schema][3] で見られるように
       log_processing_rules:
         - type: include_at_match
           name: include_legacy_x01
-          pattern: '"EventID":{"value":"(101|201|301)"'
+          pattern: '"EventID":(?:{"value":)?"(101|201|301)"'
   ```
 
-Agent バージョン 7.41 以降では、EventID フィールドが正規化され、このレガシーパターンは適用されなくなりました。
+Agent バージョン 7.41 以降では、EventID フィールドが正規化されます。このため、レガシーパターンから部分文字列 `(?:{"value":)?` が不要になりました。7.41 以降では、以下のような短い正規表現パターンを使用することができます。
+
+  ```yaml
+  logs:
+    - type: windows_event
+      channel_path: Security
+      source: windows.event
+      service: Windows
+      log_processing_rules:
+        - type: include_at_match
+          name: include_x01
+          pattern: '"EventID":"(101|201|301)"'
+  ```
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/
 [2]: https://docs.datadoghq.com/ja/agent/logs/advanced_log_collection/?tab=configurationfile
@@ -415,13 +430,13 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
-### ドキュメント
+### Documentation
 
 - (レガシー) [イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する][9]
 
-### GitHub
+### ブログ
 
 - [Windows Server 2012 の監視][10]
 - [Windows Server 2012 メトリクスの収集方法][11]

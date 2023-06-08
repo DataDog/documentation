@@ -3,9 +3,18 @@ aliases:
 - /ja/graphing/widgets/event_stream/
 description: イベントストリームからイベントを絞り込んで表示する
 further_reading:
-- link: /ja/dashboards/graphing_json/
+- link: /events/explorer/
   tag: ドキュメント
+  text: イベントエクスプローラー
+- link: /ja/dashboards/graphing_json/
+  tag: Documentation
   text: JSON を使用したダッシュボードの構築
+- link: /dashboards/graphing_json/widget_json/
+  tag: Documentation
+  text: ウィジェット JSON スキーマ
+- link: /dashboards/graphing_json/request_json/
+  tag: Documentation
+  text: リクエスト JSON スキーマ
 kind: documentation
 title: イベントストリームウィジェット
 ---
@@ -19,10 +28,9 @@ title: イベントストリームウィジェット
 ### コンフィギュレーション
 
 1. [検索クエリ][2]を入力して、イベントストリームを絞り込みます。
-2. スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
-3. Size パラメーターを使用して、イベントタイトルのみを表示するか、イベント本文全体を表示するかを選択します。
-4. グラフにタイトルをつけます。
-5. **Done** ボタンをクリックします。
+1. Size パラメーターを使用して、イベントタイトルのみを表示するか、イベント本文全体を表示するかを選択します。
+1. ウィジェットにカスタムタイムフレームがあるか、グローバルタイムフレームがあるかを選択します。
+1. グラフにタイトルをつけます。
 
 ## API
 

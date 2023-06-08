@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - サービスカタログ
 aliases:
 - /ja/tracing/faq/service_catalog/
 further_reading:
@@ -17,10 +20,16 @@ further_reading:
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: ブログ
   text: APM セキュリティビューでリスク、脆弱性、攻撃を視覚化する
+- link: https://www.datadoghq.com/blog/service-catalog-setup/
+  tag: ブログ
+  text: サービスカタログの設定を簡素化することで、サービスにタグやメタデータを簡単に追加できます
 kind: documentation
 title: Datadog サービスカタログ
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) ではサービスカタログは利用できません。</div>
+{{< /site-region >}}
 
 {{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="サービスカタログのナビゲーション" style="width:100%;" >}}
 
@@ -52,11 +61,9 @@ APM サービスリストと比較して、サービスカタログには、ト�
 
 ### Ownership ビュー
 
-**Ownership** タブでは、**Contact** と **</>** 列のアイコンをクリックすると、サービス定義で指定されたツールやプロジェクトに移動することができます。例えば、所有するチームの Slack チャンネルや、サービスコードを含む GitHub リポジトリにアクセスすることができます。
+**Ownership** タブでは、**Contact** と **Repo** 列のアイコンをクリックすると、サービス定義で指定されたツールやプロジェクトに移動することができます。例えば、所有するチームの Slack チャンネルや、サービスコードを含む GitHub リポジトリにアクセスすることができます。
 
 **Telemetry** 列には、Datadog がサービスに対して収集しているテレメトリーデータの種類が表示されます。アイコンをクリックすると、対応する Datadog 製品のビューに誘導されます。例えば、Agent は Datadog にトレースを送信し、**Traces** アイコンをクリックすると APM でそれらを表示することができます。
-
-右側のケバブメニューをクリックして、サービス定義を編集するか (存在する場合)、サービスが定義されていない場合は、サービスにリンクします。最初に[ソースコードシステムとのインテグレーションをセットアップする][2]必要があるかもしれません。
 
 **Team** または **On Call** の列で表を並べ替えると、各チームがどのサービスを担当しているかがわかり、所有権と責任がまだ特定されていないサービスを特定できます。
 
@@ -71,26 +78,16 @@ APM サービスリストと比較して、サービスカタログには、ト�
 
 右側の設定アイコンをクリックすると、サービスリストから列を非表示にすることができます。
 
-
-#### PagerDuty インテグレーション
-サービスカタログに PagerDuty のメタデータを追加して、Reliability ビューを完成させることができます。
-
-- [PagerDuty インテグレーションページ][3]の説明に従って、PagerDuty インテグレーションの設定を行います。
-- [PagerDuty から API アクセスキー][4]を取得します。
-- PagerDuty のサービスを Service Definition YAML にリンクします。
-```yaml
-schema-version: v2
-dd-service: product-recommendation-lite
-team: Shopist
-integrations:
-  pagerduty: https://www.pagerduty.com/service-directory/shopping-cart
-tags: []
-```
-
 ### Performance ビュー
 
-**Performance** タブでは、サービスのパフォーマンスや最も注意を払う必要があるものを表示する方法がいくつか用意されています。列をクリックして表をソートすると、以下のことがわかります。
+**Performance** タブでは、サービスのパフォーマンスや最も注意を払う必要があるものを表示する方法がいくつか用意されています。
 
+環境のドロップダウンはフィルターとして機能します。例えば、`env:prod` を選択すると、直近 1 時間に `env:prod` にパフォーマンスデータ (APM/USM テレメトリー) があるサービスだけがリストに表示されます。`env:*` を選択すると、サービスがテレメトリーを発するすべての環境を一目で確認でき、展開すると環境ごとの詳細なパフォーマンスメトリクスを見ることができます。
+2 つ目のドロップダウンでは、Performance ビューにある APM データを、APM の[トレースメトリクス][13]の[second primary tag][12] に再スコープすることができます。このドロップダウンは、リストに表示されるサービスの数には影響しません。 
+
+{{< img src="tracing/service_catalog/svc-cat-perf-view.png" alt="env:* でフィルターされ、クラスター名でスコープされたパフォーマンスビュー:*" style="width:100%;" >}}
+
+列をクリックして表をソートすると、以下のことがわかります。
 - 最近デプロイされたサービス、または長い間デプロイされていないサービス
 - 1 秒間に最も多くのリクエストを受信している、またはトラフィックを受信していないサービス
 - 様々なパーセンタイルで最も高いレイテンシーを持つサービス
@@ -100,7 +97,7 @@ tags: []
 - [Apdex スコア][5]が最高または最低であるサービス
 - トリガーされるモニターを持つサービス
 
-右側の設定アイコンをクリックすると、サービスリストからメトリクス列を非表示にすることができます。
+右側の設定アイコンをクリックすると、リストからメトリクス列を非表示にすることができます。
 
 ### Security ビュー
 *Security** タブでは、サービスのセキュリティポスチャを評価し、改善するためのいくつかの方法が用意されています。これには、オープンソースライブラリに存在する既知のセキュリティ脆弱性の数と重大度を理解する方法や、サービスが攻撃者からどのように狙われているかを確認する方法が含まれます。列をクリックして表をソートすると、以下のことがわかります。
@@ -130,52 +127,13 @@ tags: []
 
 **View Related** をクリックし、ドロップダウンメニューからページを選択すると、APM サービスページやこのサービスのサービスマップなど、Datadog の関連ページ、または分散型トレーシング、インフラストラクチャー、ネットワークパフォーマンス、ログ管理、RUM、Continuous Profiler などの関連テレメトリーデータページにナビゲートします。
 
-## サービス定義
-
-サービスとは、独立した、デプロイ可能なソフトウェアの単位です。Datadog [統合サービスタグ付け][6]と `DD_SERVICE` タグは、インフラストラクチャーのメトリクス、ログ、トレースなど複数のテレメトリータイプで一貫してサービスを管理・監視するための標準的な方法を提供します。追加の基準を使用してサービスを定義するには、アーキテクチャーのスタイルに合うようにサービス定義をカスタマイズすることができます。
-
-サービス定義には以下の要素が含まれ、すべて任意です (サービス名を除く)。
-
-Service name
-: サービスの識別子で、Datadog 内で一意のもの。デフォルトでは、受信データの `DD_SERVICE` の値です。
-
-Team
-: サービスの開発・保守を担当するチーム名。
-
-Contacts
-: Slack チャンネルやメールアドレスなど、チームと連絡を取るための 1 つ以上の方法。
-
-Links
-: ランブックなど、サービスに関する重要なリソースへのリンクのリスト。
-
-Repos
-: サービスの保守、テスト、デプロイのためのソースコードと関連ファイルを含むソースコントロールリポジトリーのリスト。
-
-Docs
-: サービスに関するドキュメントへのリンク。
-
-Tags
-: Datadog の他のタグと同様に、サービス定義など、適用されるものの検索、フィルター、グループ化を支援します。
-
-Integrations
-: PagerDuty などのインテグレーションを接続し、オンコールサービスを特定するためのカスタム文字列。
-
-## 既存の APM サービスを充実させる
-
-すでに APM を使用してアプリケーションを追跡している場合は、それらのサービスに関する情報を追加します。初期状態では、Service Catalog ページにリストされた APM 監視対象サービスにはグレーのチェックマークがあります。
-
-チーム名、Slack チャンネル、ソースコードリポジトリなどのサービス所有権情報を、POST エンドポイントを用いて YAML ファイルを [Service Definition API][7] にプッシュすることで追加します。詳しくは、[サービスカタログの設定][8]をお読みください。
-
-## 新規サービスの登録
-[Service Definition API][7] を使って Datadog テレメトリー (APM トレースなど) を発信していないサービスでも、Service Catalog でサービスの所有権情報を管理することができます。YAML ファイルでサービスの所有権、オンコール情報、カスタムタグを指定すると、その情報が Service Catalog に反映されます。詳しくは、[サービスカタログの設定][8]をお読みください。
-
 ## ロールベースアクセスおよび権限
 
 一般的な情報は、[ロールベースアクセスコントロール][9]および[ロール権限][10]を参照してください。
 ### 読み取り権限
 
 サービスカタログの読み取り権限により、サービスカタログのデータを読み取ることができ、以下の機能が有効になります。
-- サービスカタログ一覧 
+- サービスカタログ一覧
 - Discover UI
 - サービス定義エンドポイント: `/api/v2/services/definition/<service_name>`
 
@@ -196,8 +154,6 @@ Integrations
 
 [1]: https://app.datadoghq.com/services
 [2]: /ja/integrations/github/
-[3]: https://docs.datadoghq.com/ja/integrations/pagerduty/
-[4]: https://support.pagerduty.com/docs/api-access-keys
 [5]: /ja/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/
 [6]: https://www.datadoghq.com/blog/unified-service-tagging/
 [7]: /ja/tracing/service_catalog/service_definition_api/
@@ -205,3 +161,5 @@ Integrations
 [9]: /ja/account_management/rbac/
 [10]: /ja/account_management/rbac/permissions/
 [11]: /ja/security/application_security/how-appsec-works/
+[12]: /ja/tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[13]: /ja/tracing/metrics/metrics_namespace/

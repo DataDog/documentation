@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/serverless/datadog_lambda_library/extension
-- /ja/serverless/libraries_integrations/extension
 dependencies:
 - https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
 kind: documentation
@@ -14,7 +13,7 @@ title: Datadog Lambda 拡張機能
 
 Datadog Lambda 拡張機能は、AWS Lambda 関数の実行中に非同期にカスタムメトリクス、トレース、ログを送信することをサポートする AWS Lambda 拡張機能です。
 
-## インストール
+## APM に Datadog Agent を構成する
 
 [インストール手順](https://docs.datadoghq.com/serverless/installation)に従って、Datadog で関数の拡張メトリクス、トレース、ログを表示します。
 

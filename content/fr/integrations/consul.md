@@ -30,12 +30,12 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- containers
-- orchestration
 - configuration & deployment
-- notification
+- containers
 - log collection
-- autodiscovery
+- network
+- notification
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/consul/README.md
 display_on_public_website: true
@@ -43,7 +43,7 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.2.0
+integration_version: 2.2.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -54,20 +54,20 @@ short_description: Recevez des alertes en fonction des checks de santé Consul, 
   les mappages entre services et nœuds, et plus encore.
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Containers
-  - Category::Orchestration
   - Category::Configuration & Deployment
-  - Category::Notification
+  - Category::Containers
   - Category::Log Collection
-  - Category::Autodiscovery
+  - Category::Network
+  - Category::Notification
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Recevez des alertes en fonction des checks de santé Consul, visualisez
     les mappages entre services et nœuds, et plus encore.
@@ -92,7 +92,7 @@ L'Agent Datadog recueille de nombreuses métriques sur les nœuds Consul, notamm
 
 L'Agent _Consul_ peut fournir davantage de métriques par l'intermédiaire de DogStatsD. Ces métriques sont davantage orientées sur la santé interne de Consul, et non sur celle des services qui dépendent de Consul. Elles concernent :
 
-- Les événements Serf et les bagottements de membre
+- Les événements Serf et les bagotements de membre
 - Le protocole Raft
 - Les performances DNS
 
@@ -100,7 +100,7 @@ Et bien plus encore.
 
 Enfin, en plus des métriques, l'Agent Datadog envoie également un check de service pour chaque check de santé de Consul, ainsi qu'un événement après chaque nouvelle élection de leader.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

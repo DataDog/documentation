@@ -6,6 +6,11 @@ disable_toc: true
 aliases:
 - /tracing/getting_further/
 - /tracing/guide/ecommerce_and_retail_use_cases/
+cascade:
+    algolia:
+        rank: 50
+        category: Guide
+        subcategory: APM Guides
 ---
 
 
@@ -36,12 +41,24 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> Enabling Tracing for a Java Application on AWS EKS{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Enabling Tracing for a Java Application in AWS ECS with EC2{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Enabling Tracing for a Java Application in AWS ECS with Fargate{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Go Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Go Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Enabling Tracing for a Go Application in AWS ECS with EC2{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Enabling Tracing for a Go Application in AWS ECS with Fargate{{< /nextlink >}}
+
 {{< /whatsnext >}}
 <br>
 
 {{< whatsnext desc="APM Integrations in action" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Tracing Kafka Queues{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}Tracing PHP CLI Scripts{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
+{{< whatsnext desc="Ingestion Sampling Configuration" >}}
+    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}Ingestion Sampling Use Cases{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 
@@ -57,6 +74,5 @@ These tutorials walk you through setting up a sample multi-service application w
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Understand Datadog Trace Retention Policy{{< /nextlink >}}
 {{< /whatsnext >}}

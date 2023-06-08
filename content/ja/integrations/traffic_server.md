@@ -36,7 +36,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- web
 - キャッシュ
 - ログの収集
 dependencies:
@@ -56,17 +55,16 @@ public_title: Traffic Server
 short_description: 接続、キャッシュ、DNS のメトリクスの監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::Caching
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 接続、キャッシュ、DNS のメトリクスの監視
   media: []

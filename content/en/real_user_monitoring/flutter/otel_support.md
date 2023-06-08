@@ -1,6 +1,6 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/otel_support.md
+title: OpenTelemetry Support
+kind: documentation
 description: Learn about using OpenTelemetry with RUM Flutter.
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
@@ -8,12 +8,11 @@ further_reading:
   text: Monitor Flutter application performance with Datadog Mobile RUM
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter Source code
+  text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
-kind: documentation
-title: OpenTelemetry Support
+
 ---
 The [Datadog Tracking HTTP Client][1] package and [gRPC Interceptor][2] package both support distributed traces through both automatic header generation and header ingestion.
 
@@ -38,7 +37,7 @@ final configuration = DdSdkConfiguration(
 );
 ```
 
-Then enable tracing as normal.
+You can then enable tracing as usual.
 
 This information is merged with any hosts set on `DdSdkConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
 

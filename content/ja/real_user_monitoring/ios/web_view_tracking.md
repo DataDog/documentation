@@ -1,7 +1,5 @@
 ---
 beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/web_view_tracking.md
 description: ハイブリッド iOS アプリケーションの Web ビューを監視します。
 further_reading:
 - link: /real_user_monitoring/ios/
@@ -9,10 +7,11 @@ further_reading:
   text: iOS モニタリング
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
-  text: ブラウザのモニタリング
+  text: ブラウザモニタリング
 kind: documentation
 title: iOS Web ビュー追跡
 ---
+
 ## 概要
 
 Real User Monitoring により、iOS と tvOS のハイブリッドアプリケーションの Web ビューを監視し、死角をなくすことができます。
@@ -62,7 +61,7 @@ iOS や tvOS のアプリケーションでフィルタリングし、セッシ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/#npm
+[1]: /ja/real_user_monitoring/browser/#npm
 [2]: https://github.com/DataDog/dd-sdk-ios/releases/tag/1.10.0-beta1
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/
+[3]: /ja/real_user_monitoring/ios/
 [4]: https://app.datadoghq.com/rum/explorer

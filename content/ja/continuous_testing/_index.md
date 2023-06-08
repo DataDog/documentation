@@ -53,11 +53,15 @@ gRPC や WebSocket を含む複数のプロトコル、フレームワーク、A
 
 ## トラブルシューティングの高速化
 
-統一されたモニタリングプラットフォームでテストを実行することにより、失敗したテストの根本原因を迅速に発見し、MTTR を短縮することができます。Datadog [APM インテグレーション][12]によって表示される相関メトリクス、トレース、ログによって、ツールを切り替えることなくトラブルシューティングのための完全なコンテキストを取得することができます。
+統一されたモニタリングプラットフォームでテストを実行することにより、失敗したテストの根本原因を迅速に発見し、MTTR を短縮することができます。Datadog [APM インテグレーション][12]によって表示される相関メトリクス、トレース、ログによって、ツールを切り替えることなくトラブルシューティングのための完全なコンテキストを取得することができ、[Continuous Testing Explorer][11] で実行ジョブを見ることでができます。
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="Continuous Testing エクスプローラーの CI バッチ" style="width:100%;">}}
 
-[Continuous Testing エクスプローラー][13] で実行されたジョブを確認することで、CI パイプラインで実行中のブラウザテストを調べたり、失敗したテスト結果のトラブルシューティングを行ったりすることができます。
+## Synthetic Monitoring & Continuous Testing Explorer を使用する
+
+Synthetic テストの実行や、CI/CD パイプラインで実行されているテストのバッチに対して、[検索クエリおよび視覚化][11]を作成します。
+
+{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## 準備はいいですか？
 

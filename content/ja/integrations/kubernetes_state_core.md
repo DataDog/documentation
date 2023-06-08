@@ -20,6 +20,10 @@ kind: インテグレーション
 name: kubernetes_state_core
 public_title: Datadog-Kubernetes State Metrics Core インテグレーション
 short_description: Kubernetes オブジェクトのステータスを追跡し、マイクロサービスメトリクスを相互に関連付けます。
+supported_os:
+- linux
+- mac_os
+- windows
 title: Kubernetes State Metrics Core
 ---
 
@@ -38,7 +42,7 @@ Kubernetes State Metrics Core は、より詳細なメトリクスとタグを�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Kubernetes State Metrics Core チェックは [Datadog Cluster Agent][4] イメージに含まれているため、Kubernetes サーバーに他に何もインストールする必要はありません。
 
@@ -66,18 +70,18 @@ datadog:
 `kubernetes_state_core` のチェックを有効にするには、DatadogAgent リソースの設定 `spec.features.kubeStateMetricsCore.enabled` を `true` に設定する必要があります。
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
   features:
     kubeStateMetricsCore:
       enabled: true
-  # (...)
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
 ```
 
 注: Datadog Operator v0.7.0 以降が必要です。
@@ -118,7 +122,7 @@ spec:
 Kubernetes State Metrics Core チェックには後方互換性がありません。レガシーの `kubernetes_state` チェックから移行する前に、変更点を注意深くお読みください。
 
 `kubernetes_state.node.by_condition`
-: ノード名の粒度を備えた新しいメトリクス。`kubernetes_state.nodes.by_condition` を置き換えます。
+: ノード名の粒度を持つ新しいメトリクス。レガシーメトリクスの `kubernetes_state.nodes.by_condition` は非推奨となり、このメトリクスが採用されます。**注:** このメトリクスはレガシーチェックにバックポートされ、両方のメトリクス (このメトリクスおよびこのメトリクスと置き換えられるレガシーメトリクス) が利用できます。
 
 `kubernetes_state.persistentvolume.by_phase`
 : 永続ボリューム名の粒度を備えた新しいメトリクス。`kubernetes_state.persistentvolumes.by_phase` を置き換えます。
@@ -134,6 +138,9 @@ Kubernetes State Metrics Core チェックには後方互換性がありませ�
 
 `kube_job`
 : `kubernetes_state` では、`Job` が `CronJob` をオーナーとしていた場合は `kube_job` タグの値が `CronJob` 名となり、それ以外の場合は `Job` 名となります。`kubernetes_state_core` では、`kube_job` タグの値は常に `Job` 名となり、新たに `kube_cronjob` タグキーが追加されて `CronJob` 名をタグ値として持つようになります。`kubernetes_state_core` に移行する場合、クエリフィルターには新しいタグか `kube_job:foo*` (`foo` は `CronJob` 名) を使用することが推奨されます。
+
+`kubernetes_state.job.succeeded`
+: `kubernetes_state` では `kuberenetes.job.succeeded` は `count` 型でした。`kubernetes_state_core` では `gauge` 型です。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -160,6 +167,12 @@ datadog:
 ## 収集データ
 
 ### メトリクス
+
+`kubernetes_state.apiservice.count`
+: Kubernetes API サービスの数。
+
+`kubernetes_state.apiservice.condition`
+: この API サービスの状態。タグ:`apiservice` `condition` `status`。
 
 `kubernetes_state.daemonset.count`
 : DaemonSets の数。タグ: `kube_namespace`。
@@ -206,6 +219,9 @@ datadog:
 `kubernetes_state.deployment.replicas_available`
 : デプロイごとに使用可能なレプリカの数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
+`kubernetes_state.deployment.replicas_ready `
+: デプロイごとの準備ができたレプリカの数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
 `kubernetes_state.deployment.replicas_unavailable`
 : デプロイごとに使用できないレプリカの数。タグ: `kube_deployment` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
@@ -242,6 +258,9 @@ datadog:
 `kubernetes_state.node.ephemeral_storage_allocatable`
 : スケジューリングに使用できるノードの割り当て可能なエフェメラルストレージ。タグ:`node` `resource` `unit`。
 
+`kubernetes_state.node.network_bandwidth_allocatable`
+: スケジューリングに使用できるノードの割り当て可能なネットワーク帯域幅。タグ: `node` `resource` `unit`。
+
 `kubernetes_state.node.cpu_capacity`
 : ノードの CPU 容量。タグ: `node` `resource` `unit`。
 
@@ -254,6 +273,9 @@ datadog:
 `kubernetes_state.node.ephemeral_storage_capacity`
 : ノードのエフェメラルストレージ容量。タグ:`node` `resource` `unit`。
 
+`kubernetes_state.node.network_bandwidth_capacity`
+: ノードのネットワーク帯域幅容量。タグ: `node` `resource` `unit`。
+
 `kubernetes_state.node.by_condition`
 : クラスターノードの状態。タグ: `condition` `node` `status`。
 
@@ -264,7 +286,7 @@ datadog:
 : ノードが新しいポッドをスケジュールできるかどうか。タグ: `node`。
 
 `kubernetes_state.container.terminated`
-: コンテナが終了状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
+: コンテナが現在終了状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.cpu_limit`
 : コンテナによる CPU 制限の値。タグ: `kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (標準ラベルの `env` `service` `version`)。
@@ -272,11 +294,17 @@ datadog:
 `kubernetes_state.container.memory_limit`
 : コンテナによるメモリ制限の値。タグ: `kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (標準ラベルの `env` `service` `version`)。
 
+`kubernetes_state.container.network_bandwidth_limit`
+: コンテナによるネットワーク帯域幅制限の値。タグ: `kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (標準ラベルの `env` `service` `version`)。
+
 `kubernetes_state.container.cpu_requested`
 : コンテナによってリクエストされた CPU の値。タグ: `kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.memory_requested`
 : コンテナによってリクエストされたメモリの値。タグ: `kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.container.network_bandwidth_requested`
+: コンテナによってリクエストされたネットワーク帯域幅の値。タグ: `kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.ready`
 : コンテナの準備チェックが成功したかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
@@ -285,43 +313,55 @@ datadog:
 : コンテナごとのコンテナー再起動の数。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.running`
-: コンテナが実行状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
+: コンテナが現在実行状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.waiting`
-: コンテナが待機状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
+: コンテナが現在待機状態にあるかどうかを説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.status_report.count.waiting`
-: コンテナが待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+: コンテナが現在待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.container.status_report.count.terminated`
-: コンテナが終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+: コンテナが現在終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.container.status_report.count.waiting`
+: コンテナが現在待機状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.container.status_report.count.terminated`
+: コンテナが現在終了状態にある理由を説明します。タグ: `kube_namespace` `pod_name` `kube_container_name` `reason` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.crd.count`
+: カスタムリソース定義の数。
+
+`kubernetes_state.crd.condition`
+: このカスタムリソース定義の状態。タグ:`customresourcedefinition` `condition` `status`。
 
 `kubernetes_state.pod.ready`
-: ポッドがリクエストを処理する準備ができているかどうかを説明します。 タグ: `kube_namespace` `pod_name` `condition` (標準ラベルの `env` `service` `version`)。
+: ポッドがリクエストを処理する準備ができているかどうかを説明します。 タグ: `node` `kube_namespace` `pod_name` `condition` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.scheduled`
-: ポッドのスケジューリングプロセスのステータスについて説明します。タグ: `kube_namespace` `pod_name` `condition` (標準ラベルの `env` `service` `version`)。
+: ポッドのスケジューリングプロセスのステータスについて説明します。タグ: `node` `kube_namespace` `pod_name` `condition` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.volumes.persistentvolumeclaims_readonly`
-: 永続ボリュームクレームが読み取り専用でマウントされているかどうかを説明します。 タグ: `kube_namespace` `pod_name` `volume` `persistentvolumeclaim` (標準ラベルの `env` `service` `version`)。
+: 永続ボリュームクレームが読み取り専用でマウントされているかどうかを説明します。 タグ: `node` `kube_namespace` `pod_name` `volume` `persistentvolumeclaim` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.unschedulable`
 : ポッドのスケジュール不可能なステータスについて説明します。 タグ: `kube_namespace` `pod_name` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.status_phase`
-: ポッドの現在のフェーズ。タグ: `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
+: ポッドの現在のフェーズ。タグ: `node` `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.age`
-: ポッドが作成されてからの秒単位の時間。タグ: `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
+: ポッドが作成されてからの秒単位の時間。タグ: `node` `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.uptime`
-: ポッドが Kubelet によってスケジュールされ、確認されてからの秒単位の時間。タグ: `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
+: ポッドが Kubelet によってスケジュールされ、確認されてからの秒単位の時間。タグ: `node` `kube_namespace` `pod_name` `pod_phase` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.pod.count`
-: ポッドの数。タグ: `kube_namespace` `kube_<owner kind>`。
+: ポッドの数。タグ: `node` `kube_namespace` `kube_<owner kind>`。
 
 `kubernetes_state.persistentvolumeclaim.status`
-: 永続ボリュームクレームが進行中のフェーズ。タグ: `kube_namespace` `persistentvolumeclaim` `phase` `storageclass`。
+: 永続ボリュームクレームが現在進行中のフェーズ。タグ: `kube_namespace` `persistentvolumeclaim` `phase` `storageclass`。
 
 `kubernetes_state.persistentvolumeclaim.access_mode`
 : 永続ボリュームクレームで指定されたアクセスモード。タグ: `kube_namespace` `persistentvolumeclaim` `access_mode` `storageclass`。
@@ -342,7 +382,7 @@ datadog:
 : 正常なポッドの最小希望数。タグ: `kube_namespace` `poddisruptionbudget`。
 
 `kubernetes_state.pdb.disruptions_allowed`
-: 許可されているポッドの中断の数。タグ: `kube_namespace` `poddisruptionbudget`。
+: 現在許可されているポッドの中断の数。タグ: `kube_namespace` `poddisruptionbudget`。
 
 `kubernetes_state.pdb.pods_total`
 : この停止状態の予算によってカウントされたポッドの総数。タグ: `kube_namespace` `poddisruptionbudget`。
@@ -419,6 +459,9 @@ datadog:
 `kubernetes_state.hpa.spec_target_metric`
 : このオートスケーラーが望ましいレプリカ数を計算するときに使用するメトリクス仕様。タグ: `kube_namespace` `horizontalpodautoscaler` `metric_name` `metric_target_type`。
 
+`kubernetes_state.hpa.status_target_metric`
+: このオートスケーラーが望ましいレプリカ数を計算するときに使用する現在のメトリクスステータス。タグ: `kube_namespace` `horizontalpodautoscaler` `metric_name` `metric_target_type`。
+
 `kubernetes_state.vpa.count`
 : 垂直ポッドオートスケーラーの数。タグ: `kube_namespace`。
 
@@ -467,6 +510,9 @@ datadog:
 `kubernetes_state.job.completion.failed`
 : ジョブの実行に失敗しました。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
+`kubernetes_state.job.duration`
+: ジョブの開始時刻から完了時刻までの経過時間、またはジョブが実行中の場合は現在時刻。タグ: `kube_job` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
 `kubernetes_state.resourcequota.<resource>.limit`
 : リソースごとのリソース割り当て制限に関する情報。タグ: `kube_namespace` `resourcequota`。
 
@@ -509,6 +555,12 @@ datadog:
 `kubernetes_state.service.type`
 : サービスのタイプ。タグ: `kube_namespace` `kube_service` `type`。
 
+`kubernetes_state.ingress.count`
+: Ingress の数。タグ:`kube_namespace`。
+
+`kubernetes_state.ingress.path`
+: Ingress パスに関する情報。タグ: `kube_namespace` `kube_ingress_path` `kube_ingress` `kube_service` `kube_service_port` `kube_ingress_host`。
+
 **注:** Kubernetes オブジェクトで [Datadog 標準ラベル][5]を構成して、`env` `service` `version` タグを取得できます。
 
 ### イベント
@@ -547,9 +599,9 @@ Cluster Agent コンテナ内で [Cluster Agent の `status` サブコマンド�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

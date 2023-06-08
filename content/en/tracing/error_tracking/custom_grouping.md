@@ -26,7 +26,7 @@ If `error.fingerprint` is provided, the grouping behavior follows these rules:
 
 Custom grouping only needs an error span and an `error.fingerprint` string span tag.
 
-If you aren’t already collecting APM traces with Datadog, see the [APM documentation][1] to set up APM.
+If you aren't already collecting APM traces with Datadog, see the [APM documentation][1] to set up APM.
 
 ### Example
 

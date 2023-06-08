@@ -23,6 +23,7 @@ author:
 categories:
 - 自動化
 - cloud
+- コスト管理
 - notification
 - orchestration
 - プロビジョニング
@@ -43,19 +44,20 @@ public_title: Sedai
 short_description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Automation
   - Category::Cloud
+  - Category::Cost Management
   - Category::Notification
   - Category::Orchestration
   - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラウドアプリケーションをインテリジェントに管理する自律的なプラットフォーム
   media: []

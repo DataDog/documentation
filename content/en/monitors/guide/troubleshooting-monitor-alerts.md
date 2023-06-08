@@ -40,7 +40,7 @@ The state of a monitor may also sometimes update in the absence of a monitor eva
 
 ### Verify the presence of data
 
-If your monitor’s state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][20] with a formatted graph of the monitor query.
+If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][20] with a formatted graph of the monitor query.
 
 {{< img src="monitors/monitor_status/notebook-button.png" alt="The monitor status page with the mouse cursor hovering over the Open in a notebook button next to one monitor group status bar" style="width:60%;">}}
 
@@ -84,17 +84,17 @@ Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplic
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/create/configuration/?tabs=thresholdalert#no-data
+[1]: /monitors/configuration/?tabs=thresholdalert#no-data
 [2]: /monitors/manage/status/#history
 [3]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[4]: /monitors/create/configuration/?tabs=thresholdalert#auto-resolve
-[5]: /monitors/create/configuration/?tabs=thresholdalert#set-alert-conditions
+[4]: /monitors/configuration/?tabs=thresholdalert#auto-resolve
+[5]: /monitors/configuration/?tabs=thresholdalert#set-alert-conditions
 [6]: /monitors/types
 [7]: /monitors/guide/as-count-in-monitor-evaluations/
 [8]: /monitors/guide/recovery-thresholds/#behavior
 [9]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect
-[10]: /monitors/create/configuration/?tabs=thresholdalert#new-group-delay
-[11]: /monitors/create/configuration/?tabs=thresholdalert#evaluation-delay
+[10]: /monitors/configuration/?tabs=thresholdalert#new-group-delay
+[11]: /monitors/configuration/?tabs=thresholdalert#evaluation-delay
 [12]: /integrations/faq/cloud-metric-delay/
 [13]: /monitors/guide/reduce-alert-flapping/
 [14]: /monitors/guide/suppress-alert-with-downtimes/

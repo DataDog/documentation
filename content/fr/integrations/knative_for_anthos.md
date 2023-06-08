@@ -1,9 +1,12 @@
 ---
 categories:
 - cloud
-- orchestration
+- configuration & deployment
+- containers
 - google cloud
+- kubernetes
 - log collection
+- orchestration
 dependencies: []
 description: Recueillez des métriques et des logs depuis vos clusters Knative for
   Anthos et analysez-les dans Datadog.
@@ -30,7 +33,7 @@ Knative for Anthos est une plateforme flexible de développement sans serveur po
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Knative for Anthos.
 
-## Configuration
+## Implémentation
 
 ### Collecte de métriques
 

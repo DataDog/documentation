@@ -116,7 +116,7 @@ and mount it into `/conf.d/`. The file name can be anything:
 -v <absolute path>/logs.yaml:/conf.d/logs.yaml
 ```
 
-Your Agent’s Docker installation command should look like this:
+Your Agent's Docker installation command should look like this:
 
 ```
 docker run -d --name datadog-agent \

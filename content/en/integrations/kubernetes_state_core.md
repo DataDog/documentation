@@ -16,6 +16,10 @@ has_logo: true
 integration_title: Kubernetes State Metrics Core
 is_public: true
 public_title: Datadog-Kubernetes State Metrics Core Integration
+supported_os:
+    - linux
+    - mac_os
+    - windows
 # forcing integration_id to kube-state-metrics so it loads kubernetes svg
 integration_id: "kube-state-metrics"
 further_reading:
@@ -67,18 +71,18 @@ datadog:
 To enable the `kubernetes_state_core` check, the setting `spec.features.kubeStateMetricsCore.enabled` must be set to `true` in the DatadogAgent resource:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
   features:
     kubeStateMetricsCore:
       enabled: true
-  # (...)
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
 ```
 
 Note: Datadog Operator v0.7.0 or greater is required.
@@ -119,7 +123,7 @@ Here is the mapping between deprecated tags and the official tags that have repl
 The Kubernetes State Metrics Core check is not backward compatible, be sure to read the changes carefully before migrating from the legacy `kubernetes_state` check.
 
 `kubernetes_state.node.by_condition`
-: A new metric with node name granularity. It replaces `kubernetes_state.nodes.by_condition`.
+: A new metric with node name granularity. The legacy metric `kubernetes_state.nodes.by_condition` is deprecated in favor of this one. **Note:** This metric is backported into the Legacy check, where both metrics (it and the legacy metric it replaces) are available. 
 
 `kubernetes_state.persistentvolume.by_phase`
 : A new metric with persistentvolume name granularity. It replaces `kubernetes_state.persistentvolumes.by_phase`.
@@ -164,6 +168,12 @@ datadog:
 ## Data Collected
 
 ### Metrics
+
+`kubernetes_state.apiservice.count`
+: Number of Kubernetes API services.
+
+`kubernetes_state.apiservice.condition`
+: The condition of this API service. Tags:`apiservice` `condition` `status`.
 
 `kubernetes_state.daemonset.count`
 : Number of DaemonSets. Tags:`kube_namespace`.
@@ -210,6 +220,9 @@ datadog:
 `kubernetes_state.deployment.replicas_available`
 : The number of available replicas per deployment. Tags:`kube_deployment` `kube_namespace` (`env` `service` `version` from standard labels).
 
+`kubernetes_state.deployment.replicas_ready	`
+: The number of ready replicas per deployment. Tags:`kube_deployment` `kube_namespace` (`env` `service` `version` from standard labels).
+
 `kubernetes_state.deployment.replicas_unavailable`
 : The number of unavailable replicas per deployment. Tags:`kube_deployment` `kube_namespace` (`env` `service` `version` from standard labels).
 
@@ -246,6 +259,9 @@ datadog:
 `kubernetes_state.node.ephemeral_storage_allocatable`
 : The allocatable ephemeral-storage of a node that is available for scheduling. Tags:`node` `resource` `unit`.
 
+`kubernetes_state.node.network_bandwidth_allocatable`
+: The allocatable network bandwidth of a node that is available for scheduling. Tags:`node` `resource` `unit`.
+
 `kubernetes_state.node.cpu_capacity`
 : The CPU capacity of a node. Tags:`node` `resource` `unit`.
 
@@ -258,6 +274,9 @@ datadog:
 `kubernetes_state.node.ephemeral_storage_capacity`
 : The ephemeral-storage capacity of a node. Tags:`node` `resource` `unit`.
 
+`kubernetes_state.node.network_bandwidth_capacity`
+: The network bandwidth capacity of a node. Tags:`node` `resource` `unit`.
+
 `kubernetes_state.node.by_condition`
 : The condition of a cluster node. Tags:`condition` `node` `status`.
 
@@ -268,7 +287,7 @@ datadog:
 : The time in seconds since the creation of the node. Tags:`node`.
 
 `kubernetes_state.container.terminated`
-: Describes whether the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.cpu_limit`
 : The value of CPU limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
@@ -276,11 +295,17 @@ datadog:
 `kubernetes_state.container.memory_limit`
 : The value of memory limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
 
+`kubernetes_state.container.network_bandwidth_limit`
+: The value of network bandwidth limit by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
+
 `kubernetes_state.container.cpu_requested`
 : The value of CPU requested by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.memory_requested`
 : The value of memory requested by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.container.network_bandwidth_requested`
+: The value of network bandwidth requested by a container. Tags:`kube_namespace` `pod_name` `kube_container_name` `node` `resource` `unit` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.ready`
 : Describes whether the containers readiness check succeeded. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
@@ -289,43 +314,55 @@ datadog:
 : The number of container restarts per container. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.running`
-: Describes whether the container is in a running state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is currently in a running state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.waiting`
-: Describes whether the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
+: Describes whether the container is currently in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.waiting`
-: Describes the reason the container is in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is currently in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.container.status_report.count.terminated`
-: Describes the reason the container is in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+: Describes the reason the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.container.status_report.count.waiting`
+: Describes the reason the container is currently in a waiting state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.container.status_report.count.terminated`
+: Describes the reason the container is currently in a terminated state. Tags:`kube_namespace` `pod_name` `kube_container_name` `reason` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.crd.count`
+: Number of custom resource definition.
+
+`kubernetes_state.crd.condition`
+: The condition of this custom resource definition. Tags:`customresourcedefinition` `condition` `status`.
 
 `kubernetes_state.pod.ready`
-: Describes whether the pod is ready to serve requests. Tags:`kube_namespace` `pod_name` `condition` (`env` `service` `version` from standard labels).
+: Describes whether the pod is ready to serve requests. Tags:`node` `kube_namespace` `pod_name` `condition` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.scheduled`
-: Describes the status of the scheduling process for the pod. Tags:`kube_namespace` `pod_name` `condition` (`env` `service` `version` from standard labels).
+: Describes the status of the scheduling process for the pod. Tags:`node` `kube_namespace` `pod_name` `condition` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.volumes.persistentvolumeclaims_readonly`
-: Describes whether a persistentvolumeclaim is mounted read only. Tags:`kube_namespace` `pod_name` `volume` `persistentvolumeclaim` (`env` `service` `version` from standard labels).
+: Describes whether a persistentvolumeclaim is mounted read only. Tags:`node` `kube_namespace` `pod_name` `volume` `persistentvolumeclaim` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.unschedulable`
 : Describes the unschedulable status for the pod. Tags:`kube_namespace` `pod_name` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.status_phase`
-: The pods current phase. Tags:`kube_namespace` `pod_name` `pod_phase` (`env` `service` `version` from standard labels).
+: The pods current phase. Tags:`node` `kube_namespace` `pod_name` `pod_phase` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.age`
-: The time in seconds since the creation of the pod. Tags:`kube_namespace` `pod_name` `pod_phase` (`env` `service` `version` from standard labels).
+: The time in seconds since the creation of the pod. Tags:`node` `kube_namespace` `pod_name` `pod_phase` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.uptime`
-: The time in seconds since the pod has been scheduled and acknowledged by the Kubelet. Tags:`kube_namespace` `pod_name` `pod_phase` (`env` `service` `version` from standard labels).
+: The time in seconds since the pod has been scheduled and acknowledged by the Kubelet. Tags:`node` `kube_namespace` `pod_name` `pod_phase` (`env` `service` `version` from standard labels).
 
 `kubernetes_state.pod.count`
-: Number of Pods. Tags:`kube_namespace` `kube_<owner kind>`.
+: Number of Pods. Tags:`node` `kube_namespace` `kube_<owner kind>`.
 
 `kubernetes_state.persistentvolumeclaim.status`
-: The phase the persistent volume claim is in. Tags:`kube_namespace` `persistentvolumeclaim` `phase` `storageclass`.
+: The phase the persistent volume claim is currently in. Tags:`kube_namespace` `persistentvolumeclaim` `phase` `storageclass`.
 
 `kubernetes_state.persistentvolumeclaim.access_mode`
 : The access mode(s) specified by the persistent volume claim. Tags:`kube_namespace` `persistentvolumeclaim` `access_mode` `storageclass`.
@@ -346,7 +383,7 @@ datadog:
 : Minimum desired number of healthy pods. Tags:`kube_namespace` `poddisruptionbudget`.
 
 `kubernetes_state.pdb.disruptions_allowed`
-: Number of pod disruptions that are allowed. Tags:`kube_namespace` `poddisruptionbudget`.
+: Number of pod disruptions that are currently allowed. Tags:`kube_namespace` `poddisruptionbudget`.
 
 `kubernetes_state.pdb.pods_total`
 : Total number of pods counted by this disruption budget. Tags:`kube_namespace` `poddisruptionbudget`.
@@ -423,6 +460,9 @@ datadog:
 `kubernetes_state.hpa.spec_target_metric`
 : The metric specifications used by this autoscaler when calculating the desired replica count. Tags:`kube_namespace` `horizontalpodautoscaler` `metric_name` `metric_target_type`.
 
+`kubernetes_state.hpa.status_target_metric`
+: The current metric status used by this autoscaler when calculating the desired replica count. Tags:`kube_namespace` `horizontalpodautoscaler` `metric_name` `metric_target_type`.
+
 `kubernetes_state.vpa.count`
 : Number of vertical pod autoscaler. Tags: `kube_namespace`.
 
@@ -471,6 +511,9 @@ datadog:
 `kubernetes_state.job.completion.failed`
 : The job has failed its execution. Tags:`kube_job` or `kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
 
+`kubernetes_state.job.duration`
+: Time elapsed between the start and completion time of the job, or the current time if the job is still running. Tags:`kube_job` `kube_namespace` (`env` `service` `version` from standard labels).
+
 `kubernetes_state.resourcequota.<resource>.limit`
 : Information about resource quota limits by resource. Tags:`kube_namespace` `resourcequota`.
 
@@ -512,6 +555,12 @@ datadog:
 
 `kubernetes_state.service.type`
 : Service types. Tags:`kube_namespace` `kube_service` `type`.
+
+`kubernetes_state.ingress.count`
+: Number of ingresses. Tags:`kube_namespace`.
+
+`kubernetes_state.ingress.path`
+: Information about the ingress path. Tags:`kube_namespace` `kube_ingress_path` `kube_ingress` `kube_service` `kube_service_port` `kube_ingress_host` .
 
 **Note:** You can configure [Datadog Standard labels][5] on your Kubernetes objects to get the `env` `service` `version` tags.
 

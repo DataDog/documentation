@@ -53,4 +53,6 @@ const getCookieByName = (name) => {
     return value;
 }
 
-export {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName}
+const bodyClassContains = (string) => document.body.classList.contains(string);
+
+export {updateMainContentAnchors, reloadWistiaVidScripts, gtag, getCookieByName, bodyClassContains}

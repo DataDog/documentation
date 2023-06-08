@@ -18,6 +18,15 @@ further_reading:
   - link: "/api/v1/monitors/"
     tag: "Documentation"
     text: "Datadog Monitors API"
+  - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
+    tag: "Blog"
+    text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on creating effective monitors"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -58,16 +67,23 @@ You can download a JSON file containing the definition of a monitor from the mon
 
 [Manage Monitors][11]: Edit, clone, delete, mute, and resolve monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time in the Monitor Status page.
 
+## Control monitor tags with tag policies
+
+[Monitor tag policies][12] enforce data validation on tags and tag values on your Datadog monitors. Add one of the following rules to prevent monitors with unexpected tags from being created.
+- Require tags with mandatory values
+- Require tags only
+- Optional tags with mandatory values
+
 ## View and search for monitors on mobile devices
 
-[Mobile-Friendly Monitors on iOS and Android][12]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][13] to access a collection of monitors in a few taps on mobile.
+[Mobile-Friendly Monitors on iOS and Android][13]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][14] to access a collection of monitors in a few taps on mobile.
 
 {{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
 
 ## Other sections
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/monitors/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
+    {{< nextlink href="/service_management/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
     {{< nextlink href="/monitors/incident_management" >}}<u>Incident Management</u>: Declare and manage incidents.{{< /nextlink >}}
     {{< nextlink href="/monitors/guide" >}}<u>Guides</u>: Additional helpful articles about monitors and alerting.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -85,7 +101,8 @@ You can download a JSON file containing the definition of a monitor from the mon
 [7]: /developers/community/libraries/#managing-monitors
 [8]: https://app.datadoghq.com/monitors#create/import
 [9]: /monitors/notify
-[10]: /monitors/notify/downtimes
+[10]: /monitors/downtimes
 [11]: /monitors/manage
-[12]: /mobile/?tab=ios#monitors
-[13]: /monitors/manage/search/#saved-view
+[12]: /monitors/settings/
+[13]: /service_management/mobile/?tab=ios#monitors
+[14]: /monitors/manage/search/#saved-view

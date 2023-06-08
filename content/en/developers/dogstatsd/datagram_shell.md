@@ -74,6 +74,22 @@ The container ID is prefixed by `c:`, for example:
 
 Read more about container tags in the [Kubernetes][4] and [Docker][5] tagging documentation.
 
+### DogStatsD protocol v1.3
+
+Agents v6.40.0+ and v7.40.0+ support an optional Unix timestamp field.
+
+When this field is provided, the Datadog Agent doesn't do any processing with the metrics (no aggregation) except from enriching the metrics with tags. This can be useful if you already aggregate your metrics in your application, and you want to send them to Datadog without extra processing.
+
+The Unix timestamp should be a valid positive number in the past. Only GAUGE and COUNT metrics are supported.
+
+The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|T<METRIC_TIMESTAMP>`
+
+### Example datagram
+
+- `page.views:15|c|#env:dev|T1656581400`: A COUNT indicating that 15 page views happened on the 30th of June, 2022 at 9:30am UTC
+
 [1]: /metrics/#naming-metrics
 [2]: /metrics/types/
 [3]: /getting_started/tagging/

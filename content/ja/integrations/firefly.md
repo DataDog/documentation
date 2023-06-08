@@ -8,12 +8,11 @@ author:
   sales_email: contact@gofirefly.io
   support_email: contact@gofirefly.io
 categories:
-- autodiscovery
 - 自動化
 - クラウド
+- 構成 & デプロイ
 - developer tools
-- google cloud
-- AWS
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md
 display_on_public_website: true
@@ -31,21 +30,20 @@ public_title: Firefly
 short_description: クラウドを規約に準拠させる
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Autodiscovery
   - Category::Automation
   - Category::Cloud
+  - Category::Configuration & Deployment
   - Category::Developer Tools
-  - Category::Google Cloud
-  - Category::AWS
+  - Category::Notification
   - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::Mac OS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラウドを規約に準拠させる
   media:

@@ -4,7 +4,6 @@ kind: documentation
 description: 'Learn how to assign tags in Datadog.'
 aliases:
     - /agent/tagging
-    - /getting_started/tagging/assigning_tags
     - /tagging/assigning_tags/
 further_reading:
 - link: "/getting_started/tagging/"
@@ -175,7 +174,7 @@ Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm,
 
 **Examples:**
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
@@ -190,8 +189,8 @@ For example, `{"app*": "kube_%%label%%"}` resolves to the tag name `kube_applica
 
 When using the `DD_CONTAINER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
-```shell
-DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```yaml
+- DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is important. To avoid issues, follow the [Docker unified service tagging][2] documentation.

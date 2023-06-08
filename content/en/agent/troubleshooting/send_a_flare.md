@@ -10,6 +10,8 @@ further_reading:
 - link: "/agent/troubleshooting/agent_check_status/"
   tag: "Agent Troubleshooting"
   text: "Get the Status of an Agent Check"
+algolia:
+  tags: ['agent flare']
 ---
 
 If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
@@ -127,9 +129,10 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% tab "Cluster Agent" %}}
 
-| Platform   | Command                                                             |
-|------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Platform      | Command                                                                     |
+|---------------|-----------------------------------------------------------------------------|
+| Kubernetes    | `kubectl exec <CLUSTER_POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}

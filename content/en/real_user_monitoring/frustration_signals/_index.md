@@ -38,7 +38,7 @@ First, you need the Browser RUM SDK version >= 4.14.0.
 To start collecting frustration signals, add the following to your SDK configuration:
 
 ```
-DD_RUM.init({
+window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
 })
@@ -147,8 +147,8 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 [3]: /real_user_monitoring/dashboards/frustration_signals_dashboard/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
-[6]: /monitors/create/
+[6]: /monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
 [8]: /real_user_monitoring/session_replay/
-[9]: /monitors/create/types/real_user_monitoring/
+[9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

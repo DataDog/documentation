@@ -1,182 +1,88 @@
 ---
+further_reading:
+- link: /integrations/kafka/
+  tag: ドキュメント
+  text: Kafka インテグレーション
+- link: /tracing/service_catalog/
+  tag: ドキュメント
+  text: サービスカタログ
+- link: https://www.datadoghq.com/blog/data-streams-monitoring/
+  tag: ブログ
+  text: Datadog Data Streams Monitoring でストリーミングデータパイプラインのパフォーマンスを追跡し、改善する
 kind: documentation
 title: データストリーム モニタリング
 ---
 
-{{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
-## 概要
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring は、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
+</div>
+{{% /site-region %}}
+
+{{< img src="data_streams/data_streams_hero_feature.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring は、大規模なパイプラインを理解し管理するための標準的な方法を提供し、以下を容易にします。
-
 * システム内を通過するイベントのエンドツーエンドのレイテンシーでパイプラインの健全性を測定します。
 * 障害のあるプロデューサー、コンシューマー、キューを特定し、関連するログやクラスターにピボットして、トラブルシューティングを迅速に行います。
 * バックアップされたイベントがダウンストリームのサービスを圧倒するのを阻止するために、サービスオーナーが装備することによって、連鎖的な遅延を防止します。
 
 ## セットアップ
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+まずは、インストールの説明に従って、Data Streams Monitoring でサービスを構成してください。
 
-{{< programming-lang lang="java" >}}
+{{< partial name="data_streams/setup-languages.html" >}}
 
-### 前提条件
+<br/>
 
-Data Streams Monitoring を開始するには、Datadog Agent と Java ライブラリの最新バージョンが必要です。
-* [Datadog Agent v7.34.0+][1]
-* [Java Agent v0.105+ で APM を有効にする][2]
-
-### APM に Datadog Agent を構成する
-
-Java は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka または RabbitMQ にメッセージを送信する (またはメッセージを消費する) サービス上で環境変数 `DD_DATA_STREAMS_ENABLED` を `true` に設定します。
-
-例:
-```yaml
-environment:
-  - DD_DATA_STREAMS_ENABLED: "true"
-```
-
-代わりに、Java アプリケーションの起動時に以下を実行して、システムプロパティ `-Ddd.data.streams.enabled=true` を設定することも可能です。
-
-```bash
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
-```
+| ランタイム | 対応テクノロジー |
+|---|----|
+| Java | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC |
+| Go | 全て ([手動インスツルメンテーション][1]で) |
+| .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ |
 
 
-[1]: /ja/agent
-[2]: /ja/tracing/trace_collection/dd_libraries/java/
-{{< /programming-lang >}}
+## Data Streams Monitoring の調査
 
-{{< programming-lang lang="dotnet" >}}
+### 新しいメトリクスでエンドツーエンドのパイプラインの健全性を測定する
 
-### 前提条件
+Data Streams Monitoring を構成すると、非同期システム内の任意の 2 点間をイベントが通過するのにかかる時間を測定することができます。
 
-Data Streams Monitoring を開始するには、Datadog Agent と .NET ライブラリの最新バージョンが必要です。
-* [Datadog Agent v7.34.0+][1]
-* .NET Tracer v2.17.0+ ([.NET Core][2]、[.NET Framework][3])
+| メトリクス名 | 注目タグ | 説明 |
+|---|---|-----|
+| data_streams.latency | `start`、`end`、`env` | 指定された送信元から宛先までの経路のエンドツーエンドのレイテンシー |
+| data_streams.kafka.lag_seconds | `consumer_group`、`partition`、`topic`、`env` | プロデューサーとコンシューマーとの間のラグ (秒単位)。Java Agent v1.9.0 以降が必要。 |
 
-### APM に Datadog Agent を構成する
+また、これらのメトリクスを任意のダッシュボードやノートブックでグラフ化し、視覚化することができます。
 
-.NET は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka にメッセージを送信する (またはメッセージを消費する) サービス上で環境変数 `DD_DATA_STREAMS_ENABLED` を `true` に設定します。
+{{< img src="data_streams/data_streams_monitor.jpg" alt="Datadog Data Streams Monitoring モニター" style="width:100%;" >}}
 
-例:
-```yaml
-environment:
-  - DD_DATA_STREAMS_ENABLED: "true"
-```
+### あらゆる経路のエンドツーエンドのレイテンシーを監視する
 
+イベントがシステム内をどのように通過するかによって、異なる経路でレイテンシーが増加する可能性があります。**Pathways** タブでは、キュー、プロデューサー、コンシューマーを含むパイプラインの任意の 2 点間のレイテンシーを表示し、ボトルネックの特定とパフォーマンスの最適化を行うことができます。経路のモニターを簡単に作成したり、ダッシュボードにエクスポートすることができます。
 
-[1]: /ja/agent
-[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
-[3]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
-{{< /programming-lang >}}
+{{< img src="data_streams/data_streams_pathway.jpg" alt="Datadog Data Streams Monitoring の Pathway タブ" style="width:100%;" >}}
 
-{{< programming-lang lang="go" >}}
+### 受信したメッセージを任意のキュー、サービス、クラスターに属性付けする
 
-### 前提条件
+消費型サービスでの遅延の増加、Kafka ブローカーでのリソース使用の増加、RabbitMQ キューサイズの増加は、隣接するサービスがこれらのエンティティに生成またはエンティティから消費する方法の変更によって、頻繁に説明されます。
 
-Data Streams Monitoring を開始するには、Datadog Agent と Data Streams Monitoring ライブラリの最新バージョンが必要です。
-* [Datadog Agent v7.34.0+][1]
-* [Data Streams Library v0.2+][2]
+Data Streams Monitoring の任意のサービスやキューで **Throughput** タブをクリックすると、スループットの変化と、その変化がどの上流または下流のサービスに起因するものかを迅速に検出できます。[サービスカタログ][2]を構成すると、対応するチームの Slack チャンネルやオンコールエンジニアにすぐにピボットすることができます。
 
-### APM に Datadog Agent を構成する
+単一の Kafka または RabbitMQ クラスターにフィルターをかけることで、そのクラスター上で動作するすべての検出されたトピックまたはキューについて、送受信トラフィックの変化を検出することができます。
 
-パイプラインの最初に `datastreams.Start()` でデータストリームの経路を開始します。すると、2 種類のインスツルメンテーションが利用できるようになります。
-- Kafka ベースのワークロードのためのインスツルメンテーション
-- その他のキューイング技術やプロトコルのためのカスタムインスツルメンテーション
+{{< img src="data_streams/data_streams_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
-<div class="alert alert-info">Trace Agent のデフォルトの URL は <code>localhost:8126</code> です。これがアプリケーションによって異なる場合は、オプション <code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code> を使ってください。</div>
+### インフラストラクチャー、ログ、トレースから根本原因を特定するために素早くピボットする
 
-### Kafka インスツルメンテーション
+Datadog は、[統合サービスタグ付け][3]を通して、サービスを駆動するインフラストラクチャーと関連するログを自動的にリンクするので、ボトルネックを簡単に特定することができます。経路のレイテンシーやコンシューマーの遅延が増加した理由をさらにトラブルシューティングするには、**Infra** または **Logs** タブをクリックします。経路内のトレースを表示するには、**Processing Latency** タブをクリックします。
 
-1. Kafka メッセージを送信する前に、`TraceKafkaProduce()` を呼び出すようにプロデューサーを構成します。
+{{< img src="data_streams/data_streams_infra.jpg" alt="Datadog Data Streams Monitoring の Infra タブ" style="width:100%;" >}}
 
-```go
-import (ddkafka "github.com/DataDog/data-streams-go/integrations/kafka")
-...
-ctx = ddkafka.TraceKafkaProduce(ctx, &kafkaMsg)
-```
+## その他の参考資料
 
-この関数は、指定した Go コンテキスト内の既存の経路に新しいチェックポイントを追加し、 見つからなければ新しい経路を作成します。そして、そのパスウェイを Kafka メッセージのヘッダーに追加します。
+{{< partial name="whats-next/whats-next.html" >}}
 
-2. コンシューマーが `TraceKafkaConsume()` を呼び出すように構成します。
-
-```go
-import ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
-...
-ctx = ddkafka.TraceKafkaConsume(ctx, &kafkaMsg, consumer_group)
-```
-
-この関数は、Kafka メッセージがこれまでに通過した経路を抽出します。メッセージの消費に成功したことを記録するために、経路上に新しいチェックポイントを設定し、提供された Go コンテキストに経路を格納します。
-
-**注**: `TraceKafkaProduce()` の出力 `ctx` と `TraceKafkaConsume()` の出力 `ctx` の両方が、更新された経路に関する情報を含んでいます。
-
-`TraceKafkaProduce()` では、複数の Kafka メッセージを一度に送信する場合 (ファンアウト)、コール間で出力 `ctx` を再利用しないようにします。
-
-`TraceKafkaConsume()` では、複数のメッセージを集計してより少ないペイロードを作成する場合 (ファンイン)、`MergeContext()` を呼び出してコンテキストをマージし、次の `TraceKafkaProduce()` コールに渡せるコンテキストを 1 つ作ります。
-
-```go
-import (
-    datastreams "github.com/DataDog/data-streams-go"
-    ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
-)
-
-...
-
-contexts := []Context{}
-for (...) {
-    contexts.append(contexts, ddkafka.TraceKafkaConsume(ctx, &consumedMsg, consumer_group))
-}
-mergedContext = datastreams.MergeContexts(contexts...)
-
-...
-
-ddkafka.TraceKafkaProduce(mergedContext, &producedMsg)
-```
-
-### 手動インスツルメンテーション
-
-また、手動インスツルメンテーションを使用することもできます。
-
-例えば、HTTP では、HTTP ヘッダーで経路を伝搬させることができます。
-
-経路を挿入するには
-
-```go
-req, err := http.NewRequest(...)
-...
-p, ok := datastreams.PathwayFromContext(ctx)
-if ok {
-   req.Headers.Set(datastreams.PropagationKeyBase64, p.EncodeStr())
-}
-```
-
-経路を抽出するには
-
-```go
-func extractPathwayToContext(req *http.Request) context.Context {
-    ctx := req.Context()
-    p, err := datastreams.DecodeStr(req.Header.Get(datastreams.PropagationKeyBase64))
-    if err != nil {
-        return ctx
-    }
-    ctx = datastreams.ContextWithPathway(ctx, p)
-    _, ctx = datastreams.SetCheckpoint(ctx, "type:http")
-}
-```
-
-### ディメンションを追加する
-
-`event_type` タグを使用すると、エンドツーエンドのレイテンシーメトリクスに追加のディメンションを追加することができます。
-
-```go
-_, ctx = datastreams.SetCheckpoint(ctx, "type:internal", "event_type:sell")
-```
-
-各経路の最初のサービスに対してのみ `event_type` タグを追加する必要があります。カーディナリティの高いデータ (リクエスト ID やホストなど) は `event_type` タグの値としてサポートされていません。
-
-
-[1]: /ja/agent
-[2]: https://github.com/DataDog/data-streams-go
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
+[1]: /ja/data_streams/go#manual-instrumentation
+[2]: /ja/tracing/service_catalog/
+[3]: /ja/getting_started/tagging/unified_service_tagging

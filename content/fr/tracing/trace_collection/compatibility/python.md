@@ -27,11 +27,11 @@ Deux branches de publication sont prises en charge :
 
 La bibliothèque prend en charge les runtimes suivants :
 
-| Système d'exploitation      | CPU                   | Runtime | Version du runtime | Versions de ddtrace prises en charge |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5 à 3.10   | `<2`                     |
-| macOS   | Intel, puce Apple  | CPython | 2.7, 3.5 à 3.10   | `<2`                     |
-| Windows | 64 bits, 32 bits          | CPython | 2.7, 3.5 à 3.10   | `<2`                     |
+| Système d'exploitation | CPU                    | Runtime  | Version du runtime | Versions de ddtrace prises en charge |
+|------------------------|------------------------|----------|--------------------|--------------------------------------|
+| Linux                  | x86-64, i686, AArch64  | CPython  | 2.7, 3.5 à 3.11    | `<2`                                 |
+| macOS                  | Intel, puce Apple      | CPython  | 2.7, 3.5 à 3.11    | `<2`                                 |
+| Windows                | 64 bits, 32 bits | CPython  | 2.7, 3.5 à 3.11    | `<2`                                 |
 
 ## Intégrations
 

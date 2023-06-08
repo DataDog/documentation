@@ -6,10 +6,10 @@ aliases:
 further_reading:
 - link: "/account_management/audit_trail/events/"
   tag: "Documentation"
-  text: "See the different Audit Trail events"
+  text: "Learn about Audit Trail events"
 - link: "/account_management/org_settings/"
   tag: "Documentation"
-  text: "Learn more about organization settings"
+  text: "Learn about organization settings"
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Build compliance, governance, and transparency across your teams with Datadog Audit Trail"
@@ -22,7 +22,7 @@ further_reading:
 
 As an administrator or security team member, you can use [Datadog Audit Trail][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
 
-There are two types of events that can occur within an audit trail: **request events**, which translate all requests made to Datadog’s API into customer records, or **product-specific events**.
+There are two types of events that can occur within an audit trail: **request events**, which translate all requests made to Datadog's API into customer records, or **product-specific events**.
 
 For example, track **request events** so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit trail events to track user events that change the state of your infrastructure.
 
@@ -49,7 +49,7 @@ To enable Datadog Audit Trail, navigate to your [Organization Settings][2] and s
 To see who enabled Audit Trail:
 1. Navigate to [Events Explorer][3].
 2. Enter `Datadog Audit Trail was enabled by` in the search bar. You may have to select a wider time range to capture the event.
-3.  The most recent event with the title "A user enabled Datadog Audit Trail" shows who last enabled Audit Trail.
+3. The most recent event with the title "A user enabled Datadog Audit Trail" shows who last enabled Audit Trail.
 
 ## Configuration
 
@@ -72,13 +72,13 @@ The default retention period for an audit trail event is seven days. You can set
 
 To explore an audit event, navigate to the [Audit Trail][1] section, also accessible from your [Organization Settings][2] in Datadog.
 
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail in the Organization Settings menu" style="width:30%;">}}
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail Settings in the Organization Settings menu" style="width:30%;">}}
 
 Audit Trail events have the same functionality as logs within the [Log Explorer][4]:
 
-- Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, etc), Authentication Attributes (Actor, API Key ID, User email, etc), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
+- Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, and more), Authentication Attributes (Actor, API Key ID, User email, and more), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
 
-- Inspect related audit trail events by selecting an event and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, etc.
+- Inspect related audit trail events by selecting an event and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, and more.
 
 {{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
@@ -117,6 +117,33 @@ At any moment, from the default view entry in the Views panel:
 * **Update** your default view with the current parameters.
 * **Reset** your default view to Datadog's defaults for a fresh restart.
 
+### Notable Events
+
+Notable events are a subset of audit events that show potential critical configuration changes that could impact billing or have security implications as identified by Datadog. This allows org admins to hone in on the most important events out of the many events generated, and without having to learn about all available events and their properties.
+
+{{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
+
+Events that match the following queries are marked as notable.
+
+| Description of audit event                                          | Query in audit explorer                           |
+| ------------------------------------------------------------------- | --------------------------------------------------|
+| Changes to log-based metrics | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
+| Changes to Log Management index exclusion filters | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
+| Changes to Log Management indexes | `@evt.name:"Log Management" @asset.type:index` |
+| Changes to APM retention filters | `@evt.name:APM @asset.type:retention_filter` |
+| Changes to APM custom metrics | `@evt.name:APM @asset.type:custom_metrics` |
+| Changes to metrics tags | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
+| Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| Changes to Sensitive Data Scanner scanning groups | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+
+### Inspect Changes (Diff)
+
+The Inspect Changes (Diff) tab in the audit event details panel compares the configuration changes that were made to what was previously set. It shows the changes made to dashboard, notebook, and monitor configurations, which are represented as JSON objects.
+
+{{< img src="account_management/audit_logs/inspect_changes.png" alt="The audit event side panel showing the changes to a composite monitor configuration, where the text highlighted in green is what was changed and the text highlighted in red is what was removed." style="width:70%;">}}
+
+
 ## Create a monitor
 
 To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][6]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
@@ -131,9 +158,25 @@ Give more visual context to your audit trail events with dashboards. To create a
 {{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
 4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
+## Create a scheduled report
+
+Datadog Audit Trail allows you to send out audit analytics views as routinely scheduled emails. These reports are useful for regular monitoring of the Datadog platform usage. For example, you can choose to get a weekly report of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
+
+To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
+
+{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
+
+1. Enter a name for the dashboard, which is created with the query widget. A new dashboard is created for every scheduled report. This dashboard can be referenced and changed later if you need to change the report content or schedule.
+2. Schedule the email report by customizing the report frequency and time frame.
+3. Add recipients that you want to send the email to.
+4. Add any additional customized messages that needs to be part of the email report.
+5. Click **Create Dashboard and Schedule Report**.
+
+{{< img src="account_management/audit_logs/export_workflow.png" alt="Exporting a audit analytics view into a scheduled email" style="width:80%;" >}}
+
 ## Out-of-the-box dashboard
 
-Datadog Audit Trail comes with an [out-of-the-box dashboard][12] that shows various audit events, such as index retention changes, log pipeline changes, dashboard changes, etc. Clone this dashboard to customize queries and visualizations for your auditing needs.
+Datadog Audit Trail comes with an [out-of-the-box dashboard][12] that shows various audit events, such as index retention changes, log pipeline changes, dashboard changes, and more. Clone this dashboard to customize queries and visualizations for your auditing needs.
 
 {{< img src="account_management/audit_logs/audit_dashboard.png" alt="Audit Trail dashboard" style="width:100%;">}}
 
@@ -146,10 +189,10 @@ Datadog Audit Trail comes with an [out-of-the-box dashboard][12] that shows vari
 [3]: https://app.datadoghq.com/event/explorer
 [4]: /logs/explorer/
 [5]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
-[6]: /monitors/create/types/audit_trail/
+[6]: /monitors/types/audit_trail/
 [7]: /dashboards/
 [8]: /dashboards/widgets/top_list/
 [9]: /dashboards/widgets/timeseries/
 [10]: /dashboards/widgets/list/
-[11]: /dashboards/querying/#choose-the-metric-to-graph/
+[11]: /dashboards/querying/#define-the-metric/
 [12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

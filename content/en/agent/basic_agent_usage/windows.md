@@ -31,7 +31,7 @@ For installation and configuration to the Datadog EU site, use the `SITE=` param
 
 ### Installation
 
-Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 If installing the Datadog Agent on a domain environment, see the [installation requirements for the Agent][4].
 
@@ -111,7 +111,7 @@ Each configuration item is added as a property to the command line. The followin
 {{% /tab %}}
 {{% tab "Upgrading" %}}
 
-Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][1] guide for more information. If you’re not using custom checks or have already confirmed their compatibility, upgrade using the [GUI](?tab=gui) or [Command line](?tab=commandline) instructions.
+Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][1] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade using the [GUI](?tab=gui) or [Command line](?tab=commandline) instructions.
 
 If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][2] and then upgrade to Datadog Agent version >= 6.
 
@@ -151,7 +151,6 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | hostname        | Prints the hostname used by the Agent.                                           |
 | import          | Imports and converts configuration files from previous versions of the Agent.    |
 | launch-gui      | Starts the Datadog Agent Manager.                                                |
-| regimport       | Import the registry settings into `datadog.yaml`.                                |
 | restart-service | Restarts the Agent within the service control manager.                           |
 | run             | Starts the Agent.                                                                |
 | start           | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.) |
