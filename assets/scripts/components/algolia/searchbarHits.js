@@ -91,13 +91,14 @@ const renderHits = (renderOptions, isFirstRender) => {
                 const displayContent = truncateContent(hit.content_snippet_match_level === "full" ? hit.content_snippet : hit.content, 145);
                 console.log(hit.content_snippet_match_level);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
+                const section_header = (hit.section_header) ? `&raquo; ${hit.section_header}` : ""
 
                 return `
                     <li class="ais-Hits-item">
                         <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
                             <p class="ais-Hits-subcategory">${hit.subcategory}</p>
                             <div>
-                                <p class="ais-Hits-title"><strong>${hit.title}</strong></p>
+                                <p class="ais-Hits-title"><strong>${hit.title} ${section_header}</strong></p>
                                 <p class="ais-Hits-content">${displayContent}</p>
                             </div>
                         </a>
