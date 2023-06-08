@@ -23812,7 +23812,8 @@ paths:
         type: safe
   /api/v1/integration/gcp:
     delete:
-      description: Delete a given Datadog-GCP integration.
+      deprecated: true
+      description: This endpoint is deprecated. Delete a given Datadog-GCP integration.
       operationId: DeleteGCPIntegration
       requestBody:
         content:
@@ -23851,7 +23852,9 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: List all Datadog-GCP integrations configured in your Datadog account.
+      deprecated: true
+      description: This endpoint is deprecated. List all Datadog-GCP integrations
+        configured in your Datadog account.
       operationId: ListGCPIntegration
       responses:
         '200':
@@ -23881,7 +23884,8 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Create a Datadog-GCP integration.
+      deprecated: true
+      description: This endpoint is deprecated. Create a Datadog-GCP integration.
       operationId: CreateGCPIntegration
       requestBody:
         content:
@@ -23922,7 +23926,9 @@ paths:
         parameters: []
         type: unsafe
     put:
-      description: 'Update a Datadog-GCP integrations host_filters and/or auto-mute.
+      deprecated: true
+      description: 'This endpoint is deprecated. Update a Datadog-GCP integrations
+        host_filters and/or auto-mute.
 
         Requires a `project_id` and `client_email`, however these fields cannot be
         updated.
