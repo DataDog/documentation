@@ -40,24 +40,6 @@ cascade:
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Container guides:" >}}
-    {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}Autodiscovery with JMX{{< /nextlink >}}
-    {{< nextlink href="agent/guide/build-container-agent" >}}Build a Datadog Agent image{{< /nextlink >}}
-    {{< nextlink href="agent/guide/autodiscovery-management" >}}Manage container discovery with the Agent{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ad_identifiers" >}}Apply an Autodiscovery configuration file template to a given container with the ad_identifiers parameter{{< /nextlink >}}
-    {{< nextlink href="agent/guide/operator-advanced" >}}Advanced setup for Datadog Operator{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Container Images for Docker Environments{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/compose-and-the-datadog-agent" >}}Compose and the Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/docker-deprecation" >}}Deprecating Docker in Kubernetes{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/podman-support-with-docker-integration" >}}Using the Docker integration with Podman container runtime{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/changing_container_registry" >}}Changing Your Container Registry{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/template_variables" >}}Autodiscovery Template Variables{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/auto_conf" >}}Autodiscovery Auto-Configuration{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/how-to-import-datadog-resources-into-terraform/" >}}How to Import Datadog Resources into Terraform{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/kubernetes-cluster-name-detection/" >}}Kubernetes Cluster Name Detection{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/kubernetes-legacy/" >}}Kubernetes Legacy{{< /nextlink >}}
-{{< /whatsnext >}}
-
 {{< whatsnext desc="Agent v5 guides:" >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}

@@ -1,6 +1,8 @@
 ---
 title: Using the Docker integration with Podman container runtime
 kind: documentation
+aliases:
+ - /agent/guide/podman-support-with-docker-integration
 ---
 
 Podman is a daemonless container engine for developing, managing, and running OCI Containers on your Linux System. Read more on [https://podman.io/][1].
