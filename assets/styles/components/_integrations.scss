@@ -720,13 +720,17 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         }
         .carousel-items-vertical {
             scroll-behavior: smooth;
-            .carousel-item-vert {
+            .carousel-item-vertical {
                 height: 91px;
                 // width: 182px;
                 margin-top: 12px;
                 margin-bottom: 12px;
+                border: none;
                 &:first-child{
                     margin-top: 0px;
+                }
+                &.active{
+                    box-shadow: 0 0 0 2px #006bc2
                 }
             }
         }

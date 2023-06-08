@@ -10,6 +10,7 @@ x-data="{
     activeBtnOffsetTop: 0,
     isScrollable: {{$isScrollableCarousel}},
     verticalCarouselEl: {},
+    verticalCarouselElScrollTop: 0,
     navigateCarousel (direction) {
         const max = {{ $asset_len }} - 1
         let endReached = false
@@ -23,7 +24,7 @@ x-data="{
                 this.activeSlide += 1
                 this.activeBtnOffsetTop += this.distanceConstant
             }
-        }else{
+        }else if(direction === 'prev'){
             if(!this.activeSlide){
                 this.activeSlide = {{ $asset_len }} - 1
                 this.activeBtnOffsetTop = this.verticalCarouselEl.scrollHeight - (this.distanceConstant*2)
@@ -37,19 +38,52 @@ x-data="{
 
         // navigate vertical carousel. everything is offset by -206px. i need to navigate by 103px 
         this.verticalCarouselEl.scrollTop = this.activeSlide * this.distanceConstant
+
+        // track scrollTop position on mobile
+        this.verticalCarouselElScrollTop = this.activeSlide * this.distanceConstant
+
         if(endReached){
             this.verticalCarouselEl.style.scrollBehavior = 'smooth'
         }
     },
-    isHidden (idx) {
-        return idx !== this.activeSlide && 'd-none'
+    chooseVerticalDirection (btn) {
+        if (btn.offsetTop > this.activeBtnOffsetTop) {
+            return 'next'
+        }else if(btn.offsetTop < this.activeBtnOffsetTop) {
+            return 'prev'
+        }
+    },
+    navigateVerticalNavOnResize (carouselVertEl) {
+        // assign vertical carousel position on resize
+        this.verticalCarouselEl.scrollTop = this.verticalCarouselElScrollTop
+    },
+    isActiveHorizontal (idx) {
+        return idx === this.activeSlide ? 'active': 'd-none'
+    },
+    isActiveVertical (idx, btn) {
+        if(this.isScrollable && (btn.offsetTop === this.activeBtnOffsetTop)){
+            return 'active'
+        }else if (!this.isScrollable && (idx === this.activeSlide)){
+            return 'active'
+        }
     },
     setDistanceConstant (carouselVertEl) {
         // sets the distance from middle btn to top of vertical carousel as a constant
-        this.distanceConstant = this.isScrollable && carouselVertEl.children[1].offsetTop
+        if(this.isScrollable){
+            this.distanceConstant = carouselVertEl.children[1].offsetTop
+            if(!carouselVertEl.scrollTop){
+                // if in mobile view on page load
+                this.distanceConstant = 103
+            }
+        }
     },
     setVerticalCarouselEl (carouselVertEl) {
         this.verticalCarouselEl = carouselVertEl
+        this.verticalCarouselElScrollTop = carouselVertEl.scrollTop
+    },
+    setActiveBtnOffsetTop () {
+        // if the item is not scrollable or if in mobile
+        this.activeBtnOffsetTop = this.distanceConstant ? this.distanceConstant*3: 103
     }
 }">
     <div class="carousel-top-row row g-0">
@@ -59,7 +93,10 @@ x-data="{
             class="carousel-items-horizontal h-100"
             >
                 {{ range $idx, $elm := $media }}
-                <div class="carousel-item h-100" :class="isHidden({{ $idx }})">
+                <div 
+                id="{{add $idx 1}}-horizontal" 
+                class="carousel-item h-100" 
+                :class="isActiveHorizontal({{ $idx }})">
                     {{ if eq $elm.media_type "image"}}
                     <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
                     {{ else }}
@@ -88,37 +125,38 @@ x-data="{
         {{/*  Carousel (vertical)  */}}
         <div 
         class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
-        x-init="setDistanceConstant($el); setVerticalCarouselEl($el); activeBtnOffsetTop = distanceConstant ? distanceConstant*3: 103">
+        x-init="setDistanceConstant($el); setVerticalCarouselEl($el); setActiveBtnOffsetTop()"
+        @resize.window="navigateVerticalNavOnResize($el)">
             {{ range $idx, $elm := $media }}
                 {{ if and (gt $idx (sub $asset_len 4)) $isScrollableCarousel}}
                 <button 
-                class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-                @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
+                class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
+                :class="isActiveVertical({{$idx}}, $el)"
+                @click="navigateCarousel(chooseVerticalDirection($el))"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-                x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
-                :disabled="isScrollable ? ($el.offsetTop === activeBtnOffsetTop): ({{ $idx }} === activeSlide)"
+                x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
                 >
                 </button>
                 {{ end }}
             {{ end }}
             {{ range $idx, $elm := $media }}
             <button
-            class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-            @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
+            class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
+            :class="isActiveVertical({{$idx}}, $el)"
+            @click="navigateCarousel(chooseVerticalDirection($el))"
             :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-            x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
-            :disabled="isScrollable ? ($el.offsetTop === activeBtnOffsetTop): ({{ $idx }} === activeSlide)"
+            x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
             >
             </button>
             {{ end }}
             {{ range $idx, $elm := first 1 $media }}
                 {{ if $isScrollableCarousel}}
                 <button 
-                class="carousel-item-vert row g-0 p-0 w-100 mx-auto"
-                @click="navigateCarousel($el.offsetTop > activeBtnOffsetTop ? 'next': 'prev')"
+                class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
+                :class="isActiveVertical({{$idx}}, $el)"
+                @click="navigateCarousel(chooseVerticalDirection($el))"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
-                x-text="'{{ $elm.image_url }} {{add $idx 1}}'"
-                :disabled="isScrollable ? ($el.offsetTop === activeBtnOffsetTop): ({{ $idx }} === activeSlide)"
+                x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
                 >
                 </button>
                 {{ end }}
@@ -129,7 +167,7 @@ x-data="{
     <div class="row g-0">
         <div class="col-12 p-0 carousel-item-descriptions border border-secondary">
             {{ range $idx, $el := $media }}
-            <div class="row g-0 carousel-item-description" :class="isHidden({{ $idx }})">
+            <div class="row g-0 carousel-item-description" :class="isActiveHorizontal({{ $idx }})">
                 <div class="col-1">
                     <span class="fw-bold" x-text="(activeSlide + 1) + '/{{$asset_len}}'"></span>
                 </div>
