@@ -8859,7 +8859,7 @@ components:
       - data
       type: object
     OpsgenieServicesResponse:
-      description: Response with a list of Opsgenie services.
+      description: Response with a list of Opsgenie services. Test coverage.
       properties:
         data:
           description: An array of Opsgenie services.
