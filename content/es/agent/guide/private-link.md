@@ -166,7 +166,7 @@ Esto devuelve `metrics.agent.datadoghq.com`, que es el nombre de la zona alojada
 2. En cada una de las nuevas zonas alojadas privadas de Route53, crea un registro A con el mismo nombre. Activa la opción **Alias**; luego, en **Route traffic to** (Dirigir tráfico hacia), elige **Alias to VPC endpoint** (Alias al endpoint de la VPC), **us-east-1**, e introduce el nombre del DNS del endpoint de la VPC asociado con el nombre del DNS.
 
    **Notas**:
-      - Para obtener el nombre de tu DNS, consulta la [documentación dedicada a la configuración del nombre del DNS privado del servicio del endpoint][4].
+      - Para obtener el nombre de tu DNS, consulta la [documentación dedicada a la configuración del nombre de DNS privado de los servicios de endpoint][4].
       - El Agent envía telemetría a endpoints con versión, como`<version>-app.agent.datadoghq.com`, que cambia el nombre a `metrics.agent.datadoghq.com` mediante un alias CNAME. Por lo tanto, solo es necesario configurar una zona alojada privada para `metrics.agent.datadoghq.com`.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="Crear un registro A" style="width:90%;" >}}
