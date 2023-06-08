@@ -3,7 +3,7 @@ title: Scoping downtimes schedules
 kind: Guide
 disable_toc: false
 further_reading:
-- link: "/monitors/notify/downtimes"
+- link: "/monitors/downtimes"
   tag: "Documentation"
   text: "Downtimes Overview"
 - link: "/monitors/guide/suppress-alert-with-downtimes"

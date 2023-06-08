@@ -157,12 +157,6 @@ Ces erreurs peuvent indiquer que votre emplacement privé ne parvient pas à att
 
 Cette erreur survient lorsque vous essayez de monter un fichier unique dans un conteneur Windows, ce qui n'est pas possible. Pour en savoir plus, consultez la [documentation Docker relative au volume de montage][16] (en anglais). Vérifiez que la source du montage lié correspond à un répertoire local.
 
-## Synthetics et CI/CD
-
-### Les métadonnées CI ne s'affichent pas dans l'explorateur de résultats CI
-
-Vérifiez si vous utilisez les endpoints d'API pour déclencher vos exécutions de test CI/CD. Pour que les métadonnées CI s'affichent dans l'explorateur de résultats CI, vous devez utiliser le [package NPM][17].
-
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -183,4 +177,3 @@ Vérifiez si vous utilisez les endpoints d'API pour déclencher vos exécutions 
 [14]: https://docs.docker.com/config/containers/resource_constraints/
 [15]: /fr/synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
-[17]: /fr/synthetics/cicd_integrations#use-the-cli

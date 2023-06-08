@@ -6,4 +6,4 @@ core_product:
   - incident management
 ---
 Downtimes are scheduled periods during which monitors' alerts and notifications are silenced.
-For more information, <a href="/monitors/notify/downtimes">see the documentation</a>.
+For more information, <a href="/monitors/downtimes">see the documentation</a>.

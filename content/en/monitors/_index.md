@@ -101,7 +101,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 [7]: /developers/community/libraries/#managing-monitors
 [8]: https://app.datadoghq.com/monitors#create/import
 [9]: /monitors/notify
-[10]: /monitors/notify/downtimes
+[10]: /monitors/downtimes
 [11]: /monitors/manage
 [12]: /monitors/settings/
 [13]: /service_management/mobile/?tab=ios#monitors

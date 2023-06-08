@@ -95,7 +95,7 @@ To create, edit, and delete status corrections, users require the `slos_correcti
 
 Restrict access to individual SLOs by specifying a list of [roles][8] that are allowed to edit it. 
 
-{{< img src="monitors/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
+{{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
 
 1. Click on the SLO to open the details side panel. 
 1. Click the cog icon in the upper right of the panel. 
@@ -129,13 +129,13 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by context.
 
-{{< img src="/monitors/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
 **Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google Play Store][14].
 
-{{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
+{{< img src="service_management/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
 
 ### SLO tags
 
@@ -205,11 +205,11 @@ You can also query the Event Explorer programmatically using the [Datadog Events
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
-{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO audit events" >}}
+{{< img src="service_management/service_level_objectives/slo-audit-events.png" alt="SLO audit events" >}}
 
 For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
-{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor" >}}
+{{< img src="service_management/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor" >}}
 
 ## SLO widgets
 
@@ -252,7 +252,7 @@ The 90-day limits per SLO are as follows:
 
 You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][23], or a [Terraform resource][24].
 
-{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" >}}
+{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" >}}
 
 #### Access in the UI
 
