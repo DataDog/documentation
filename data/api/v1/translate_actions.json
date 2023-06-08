@@ -370,23 +370,23 @@
     "request_schema_description": "Datadog-Azure integrations configured for your organization."
   },
   "DeleteGCPIntegration": {
-    "description": "This endpoint is deprecated. Delete a given Datadog-GCP integration.",
+    "description": "Delete a given Datadog-GCP integration.",
     "summary": "Delete a GCP integration",
     "request_description": "Delete a given Datadog-GCP integration.",
     "request_schema_description": "Your Google Cloud Platform Account."
   },
   "ListGCPIntegration": {
-    "description": "This endpoint is deprecated. List all Datadog-GCP integrations configured in your Datadog account.",
+    "description": "List all Datadog-GCP integrations configured in your Datadog account.",
     "summary": "List all GCP integrations"
   },
   "CreateGCPIntegration": {
-    "description": "This endpoint is deprecated. Create a Datadog-GCP integration.",
+    "description": "Create a Datadog-GCP integration.",
     "summary": "Create a GCP integration",
     "request_description": "Create a Datadog-GCP integration.",
     "request_schema_description": "Your Google Cloud Platform Account."
   },
   "UpdateGCPIntegration": {
-    "description": "This endpoint is deprecated. Update a Datadog-GCP integrations host_filters and/or auto-mute.\nRequires a `project_id` and `client_email`, however these fields cannot be updated.\nIf you need to update these fields, delete and use the create (`POST`) endpoint.\nThe unspecified fields will keep their original values.",
+    "description": "Update a Datadog-GCP integrations host_filters and/or auto-mute.\nRequires a `project_id` and `client_email`, however these fields cannot be updated.\nIf you need to update these fields, delete and use the create (`POST`) endpoint.\nThe unspecified fields will keep their original values.",
     "summary": "Update a GCP integration",
     "request_description": "Update a Datadog-GCP integration.",
     "request_schema_description": "Your Google Cloud Platform Account."
