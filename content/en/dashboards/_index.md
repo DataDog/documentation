@@ -44,6 +44,9 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on better visualizations with Dashboards"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview

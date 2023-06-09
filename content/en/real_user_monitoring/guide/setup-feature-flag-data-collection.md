@@ -178,19 +178,19 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
 
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
 
 
 {{% /tab %}}
@@ -326,18 +326,18 @@ Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature f
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -357,7 +357,7 @@ const dvcOptions = { ... };
 const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
 ...
 dvcClient.subscribe(
-    "variableEvaluted:*",
+    "variableEvaluated:*",
     (key, variable) => {
         // track all variable evaluations
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
@@ -365,7 +365,7 @@ dvcClient.subscribe(
 )
 ...
 dvcClient.subscribe(
-    "variableEvaluted:my-variable-key",
+    "variableEvaluated:my-variable-key",
     (key, variable) => {
         // track a particular variable evaluation
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
@@ -392,6 +392,91 @@ DevCycle does not support this integration. Create a ticket with DevCycle to req
 {{% tab "Flutter" %}}
 
 DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Amplitude integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Initialize Amplitude's SDK and and create an exposure listener reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing Amplitude's SDK, see Apmplitude's [JavaScript SDK documentation][1].
+
+```javascript
+  const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
+    exposureTrackingProvider: {
+      track(exposure: Exposure)  {
+        // Send the feature flag when Amplitude reports the exposure
+        datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
+      }
+    }
+  })
+```
+
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascript-sdk/
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Amplitude's SDK, see Amplitude's [iOS SDK documentation][1].
+
+```swift
+  class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    func track(exposure: Exposure) {
+      // Send the feature flag when Amplitude reports the exposure
+      if let variant = exposure.variant {
+        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+      }
+    }
+  }
+
+  // In initialization:
+  ExperimentConfig config = ExperimentConfigBuilder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
+    .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/ios-sdk/
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Initialize Amplitude's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+
+For more information about initializing Amplitude's SDK, see Amplitude's [Android SDK documentation][1].
+
+```kotlin
+  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    override fun track(exposure: Exposure) {
+        // Send the feature flag when Amplitude reports the exposure
+        GlobalRum.get().addFeatureFlagEvaluation(
+            exposure.flagKey,
+            exposure.variant.orEmpty()
+        )
+    }
+  }
+
+  // In initialization:
+  val config = ExperimentConfig.Builder()
+      .exposureTrackingProvider(DatadogExposureTrackingProvider())
+      .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
 
 
 {{% /tab %}}

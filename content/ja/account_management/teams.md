@@ -3,8 +3,6 @@ kind: documentation
 title: チーム
 ---
 
-<div class="alert alert-warning">Teams 機能はベータ版で、一般にはまだ提供されていません。</div>
-
 ## 概要
 Datadog Teams は、ユーザーグループが Datadog 内でチームのアセットを整理し、Datadog 全体のエクスペリエンスに自動的にフィルターをかけて、これらのアセットに優先順位をつけることができるようにします。
 
@@ -60,7 +58,10 @@ Datadog は、以下のリソースをチームハンドルに関連付けるこ
 - [ダッシュボード][2]
 - [インシデント][3]
 - [モニター][4]
+- [Resource Catalog][14]
 - [サービスカタログ][5]
+- [サービスレベル目標][6]
+- Synthetic テスト、グローバル変数、プライベートロケーション
 
 ## フィルター
 
@@ -77,12 +78,16 @@ Datadog は、以下のリソースをチームハンドルに関連付けるこ
 
 | 製品リストページ       | フィルターベース                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [ダッシュボード][6]         | チームハンドル                                                                      |
-| [サービスカタログ][7]    | チームハンドル                                                                      |
-| [インシデント][8]          | チームハンドル                                                                      |
-| [モニター][9]           | チームハンドル                                                                      |
-| [APM エラー追跡][10] | チームが所有するサービス ([サービスカタログ][7]内の所有権によって決定されます) |
-| [ログエラー追跡][11] | チームが所有するサービス ([サービスカタログ][7]内の所有権によって決定されます) |
+| [ダッシュボード][7]         | チームハンドル                                                                      |
+| [Resource Catalog][14]   | チームハンドル                                                                      |
+| [サービスカタログ][8]    | チームハンドル                                                                      |
+| [インシデント][9]          | チームハンドル                                                                      |
+| [モニター][10]          | チームハンドル                                                                      |
+| [APM エラー追跡][11] | チームが所有するサービス ([サービスカタログ][8]内の所有権によって決定されます) |
+| [ログエラー追跡][12] | チームが所有するサービス ([サービスカタログ][8]内の所有権によって決定されます) |
+| [サービスレベル目標][13] | チームハンドル                                                                 |
+| [Data Streams Monitoring][15]  | チームハンドル                                                                 |
+| [Synthetic テスト][16]          | チームハンドル                                                                 |
 
 
 ## アクセス許可
@@ -113,12 +118,17 @@ Teams Manage 権限を持つロールのユーザーは、チームの作成、�
 
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /ja/dashboards/#edit-details
-[3]: /ja/monitors/incident_management/incident_details#overview-section
+[3]: /ja/service_management/incident_management/incident_details#overview-section
 [4]: /ja/monitors/configuration/?tab=thresholdalert#add-metadata
 [5]: /ja/tracing/service_catalog/setup#add-service-definition-metadata
-[6]: https://app.datadoghq.com/dashboard/lists
-[7]: https://app.datadoghq.com/services
-[8]: https://app.datadoghq.com/incidents
-[9]: https://app.datadoghq.com/monitors/manage
-[10]: https://app.datadoghq.com/apm/error-tracking
-[11]: https://app.datadoghq.com/logs/error-tracking
+[6]: /ja/service_management/service_level_objectives/#slo-tags
+[7]: https://app.datadoghq.com/dashboard/lists
+[8]: https://app.datadoghq.com/services
+[9]: https://app.datadoghq.com/incidents
+[10]: https://app.datadoghq.com/monitors/manage
+[11]: https://app.datadoghq.com/apm/error-tracking
+[12]: https://app.datadoghq.com/logs/error-tracking
+[13]: https://app.datadoghq.com/slo/manage
+[14]: /ja/security/cspm/resource_catalog
+[15]: https://app.datadoghq.com/data-streams
+[16]: https://app.datadoghq.com/synthetics

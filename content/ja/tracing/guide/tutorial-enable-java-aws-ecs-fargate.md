@@ -57,7 +57,7 @@ git clone https://github.com/DataDog/apm-tutorial-java-host.git
 
 このアプリケーションでは、AWS プロファイル (ECS クラスターを作成し、ECR から読み取るための正しい権限で構成済み)、AWS リージョン、AWS ECR リポジトリの追加など、いくつかの初期構成が必要です。
 
-`terraform/Fargate/global_constants/variables.tf` を開きます。 以下の変数の値を、正しい AWS アカウント情報に置き換えます。
+`terraform/Fargate/global_constants/variables.tf` を開きます。以下の変数の値を、正しい AWS アカウント情報に置き換えます。
 
 ```
 output "aws_profile" {

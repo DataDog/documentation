@@ -7267,6 +7267,7 @@ components:
       - ci-pipelines alert
       - ci-tests alert
       - error-tracking alert
+      - database-monitoring alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -7286,6 +7287,7 @@ components:
       - CI_PIPELINES_ALERT
       - CI_TESTS_ALERT
       - ERROR_TRACKING_ALERT
+      - DATABASE_MONITORING_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -7347,6 +7349,7 @@ components:
           items:
             description: A role UUID.
             type: string
+          nullable: true
           type: array
         state:
           $ref: '#/components/schemas/MonitorState'
@@ -16987,6 +16990,7 @@ components:
         iot_device_count:
           description: The total number of IoT devices during a given hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -17114,6 +17118,7 @@ components:
         retention:
           description: The retention period in days or "custom" for all custom retention
             usage.
+          nullable: true
           type: string
       type: object
     UsageLogsByRetentionResponse:
@@ -17238,6 +17243,7 @@ components:
         host_count:
           description: Contains the number of active NPM hosts.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -25731,6 +25737,8 @@ paths:
 
         - error-tracking: `error-tracking alert`
 
+        - database-monitoring: `database-monitoring alert`
+
 
         **Note**: Synthetic monitors are created through the Synthetics API. See the
         [Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation
@@ -26056,7 +26064,32 @@ paths:
 
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.'
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **Database Monitoring Alert Query**
+
+
+        Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
+
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Database Monitoring monitors are in alpha on US1.'
       operationId: CreateMonitor
       requestBody:
         content:
@@ -27754,7 +27787,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: idempotent
   /api/v1/security_analytics/signals/{signal_id}/assignee:
@@ -27929,6 +27962,11 @@ paths:
           - file: metric_payload.json
             name: body
           step: there is a valid "metric" in the system
+        metric_static:
+          parameters:
+          - file: metric_payload_static.json
+            name: body
+          step: there is a valid "metric_static" in the system
       x-menu-order: 1
       x-undo:
         type: safe

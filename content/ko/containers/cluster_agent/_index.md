@@ -33,6 +33,10 @@ Datadog 클러스터 에이전트를 사용하면 다음을 수행할 수 있습
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
 
+<div class="alert alert-warning">도커(Docker) 허브는 2023년 7월 10일부터 데이터독의 도커(Docker) 허브 레지스트리에 대한 다운로드 속도 제한을 시행할 예정입니다. 레지스트리에서 이미지를 다운로드하면 제한 할당량에 따라 제한이 적용됩니다.<br/><br/>
+
+Datadog는 Datadog 에이전트와 클러스터 에이전트 구성을 업데이트하여 다운로드 속도 제한이 적용되지 않는 다른 레지스트리에서 가져오도록 권장하고 있습니다. 자세한 내용은<a href="/agent/guide/changing_container_registry">컨테이너 레지스트리 변경"을 참조하세요</a>.</div>
+
 **참고**: Datadog 클러스터 에이전트의 모든 기능을 활용하려면 쿠버네티스(Kubernetes) v1.10 이상을 실행해야 합니다.
 
 {{< whatsnext desc="이 섹션에는 다음 항목이 포함됩니다:">}}
