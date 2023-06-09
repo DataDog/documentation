@@ -737,11 +737,11 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 // width: 182px;
                 margin-top: 12px;
                 margin-bottom: 12px;
-                border: solid 1px #e2e5ed;
+                border: solid 2px #e2e5ed;
                 &:first-child{
                     margin-top: 0px;
                 }
-                &.active{
+                &.active, &:hover{
                     border: solid 2px #006bc2;
                 }
             }

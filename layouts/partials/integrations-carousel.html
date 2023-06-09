@@ -35,6 +35,9 @@ x-data="{
                 this.activeSlide -= 1
                 this.activeBtnOffsetTop -= this.distanceConstant
             }
+        }else{
+            // if vertical carousel is not scrollable, 'direction' is the index of the selected btn
+            this.activeSlide = direction
         }
 
         // navigate vertical carousel. everything is offset by -206px. i need to navigate by 103px 
@@ -47,12 +50,15 @@ x-data="{
             this.verticalCarouselEl.style.scrollBehavior = 'smooth'
         }
     },
-    chooseVerticalDirection (btn) {
-        if (btn.offsetTop > this.activeBtnOffsetTop) {
-            return 'next'
-        }else if(btn.offsetTop < this.activeBtnOffsetTop) {
-            return 'prev'
+    chooseVerticalDirection (btn, btnIdx) {
+        if(this.isScrollable){
+            if (btn.offsetTop > this.activeBtnOffsetTop) {
+                return 'next'
+            }else if(btn.offsetTop < this.activeBtnOffsetTop) {
+                return 'prev'
+            }
         }
+        return btnIdx
     },
     navigateVerticalNavOnResize (carouselVertEl) {
         // assign vertical carousel position on resize
@@ -141,7 +147,7 @@ x-data="{
             <button
             class="carousel-item-vertical row g-0 p-0 w-100 mx-auto rounded-1"
             :class="isActiveVertical({{$idx}}, $el)"
-            @click="navigateCarousel(chooseVerticalDirection($el))"
+            @click="navigateCarousel(chooseVerticalDirection($el, {{ $idx }}))"
             :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }})'}"
             >
             </button>
