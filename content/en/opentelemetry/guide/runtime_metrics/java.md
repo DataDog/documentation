@@ -4,8 +4,6 @@ kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
-aliases:
-- /opentelemetry/guide/runtime_metrics/java
 ---
 
 ## OpenTelemetry SDK Configuration

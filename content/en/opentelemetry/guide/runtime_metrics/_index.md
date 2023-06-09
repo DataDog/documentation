@@ -10,9 +10,9 @@ aliases:
 Runtime metrics are application metrics that collect information about memory usage, garbage collection, or parallelization. Datadog provides [runtime metrics collection](https://docs.datadoghq.com/tracing/metrics/runtime_metrics/) with the officially supported Datadog native libraries. OpenTelemetry (OTel) has also started adding the collection of runtime metrics which can be sent to Datadog through OTel SDKs.
 
 Datadog currently supports OTel runtime metrics in the following languages:
-- Java
-- .NET
-- Go
+- [Java][1]
+- [.NET][2]
+- [Go][3]
 
 ## Metric Naming Conventions
 
@@ -21,16 +21,18 @@ Runtime metrics follow different naming conventions between their implementation
 | --- | --- | --- |
 | <code>process.runtime.<sup>*</sup></code> | <code>otel.process.runtime.<sup>*</sup></code> | <code>runtime.dotnet.<sup>*</sup></code> |
 
+**Note**: OTel runtime metrics are mapped to Datadog by metric name, so host metrics mapping renaming of OTel runtime metrics is not recommended and is a breaking change for this feature.
+
 ## Setup
 
-This guide assumes you already have a [functioning setup for sending OpenTelemetry metrics to Datadog][1].
+This guide assumes you already have a [functioning setup for sending OpenTelemetry metrics to Datadog][4].
 
 ### OpenTelemetry SDK configuration
 
 If you are producing metrics from an OTel SDK, follow the corresponding language guide to configure them:
-- Java
-- .NET
-- Go
+- [Java][1]
+- [.NET][2]
+- [Go][3]
 
 ### Install Language Integration
 
@@ -43,4 +45,7 @@ Datadog runtime metric dashboards are linked to their respective language integr
 
 After setup is complete, runtime metrics can be viewed in your [APM Service Page](https://app.datadoghq.com/apm/services), the flame graph metrics tab, and in [default runtime dashboards](https://app.datadoghq.com/dash/integration/256/jvm-metrics).
 
-[1]: /opentelemetry/otel_metrics
+[1]: /opentelemetry/guide/runtime_metrics/java
+[2]: /opentelemetry/guide/runtime_metrics/dotnet
+[3]: /opentelemetry/guide/runtime_metrics/go
+[4]: /opentelemetry/otel_metrics
