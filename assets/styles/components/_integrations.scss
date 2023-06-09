@@ -690,6 +690,9 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             .carousel-control-horizontal{
                 opacity: 1;
             }
+            .play-btn {
+                background-color: rgba(0, 0, 0, 0.4) !important;
+            }
         }
 
         .carousel-asset-horizontal {
@@ -697,6 +700,26 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 margin-right: 12px;
                 .carousel-item-horizontal {
                     border: 1px solid #e2e5ed;
+                    video {
+                        object-fit: fill;
+                        cursor: pointer;
+                    }
+                    .play-btn {
+                        width: 64px;
+                        height: 64px;
+                        background-color: rgba(0, 0, 0, 0.6);
+                        border: none;
+                        transition: all .3s linear;
+                        .play-icon {
+                            width: 0;
+                            height: 0;
+                            border-left: 15px solid transparent;
+                            border-right: 15px solid transparent;
+                            border-bottom: 30px solid rgba(255, 255, 255, 0.6);
+                            transform: rotate(90deg);
+                            left: 30%;
+                        }
+                    }
                 }
             }
             .carousel-control-horizontal {

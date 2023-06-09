@@ -96,7 +96,7 @@ x-data="{
     <div class="carousel-top-row row g-0">
         {{/*  Carousel (horizontal)  */}}
         <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9">
-            <div class="carousel-items-horizontal h-100">
+            <div class="carousel-items-horizontal h-100 position-relative">
                 {{ range $idx, $elm := $media }}
                 <div 
                 id="{{add $idx 1}}-horizontal" 
@@ -105,9 +105,12 @@ x-data="{
                     {{ if eq $elm.media_type "image"}}
                     <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
                     {{ else }}
-                    <video class="h-100 w-100 rounded-1" poster="{{$elm.image_url}}" preload="none" alt="{{ $elm.image_url }}-{{add $idx 1}}">
-                        <source type="video/mp4">
+                    <video class="h-100 w-100 rounded-1" poster="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }}" preload="none" alt="{{ $elm.image_url }}-{{add $idx 1}}">
+                        <source src="" type="video/mp4">
                     </video>
+                    <button class="play-btn rounded-circle position-absolute top-50 start-50 translate-middle">
+                        <div class="play-icon position-relative"></div>
+                    </button>
                     {{ end }}
                 </div>
                 {{ end }}
