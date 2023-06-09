@@ -33,7 +33,7 @@ Supported Agent versions
 
 Complete the following steps to enable Database Monitoring with your database:
 
-1. Configure the Agent for each RAC node by following the instructions for self-hosted Oracle database "dbm/dbm-setup-oracle/database_monitoring/setup_oracle/rac".
+1. Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle database](dbm/dbm-setup-oracle/database_monitoring/setup_oracle/rac).
 2. Add the following custom tag to each node:
     ```yaml
     tags:
