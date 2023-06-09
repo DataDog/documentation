@@ -4,7 +4,7 @@
 {{ $isScrollableCarousel := (gt $asset_len 3)}}
 
 <div 
-class="integrations-carousel container border border-primary container p-0"
+class="integrations-carousel container container p-0"
 x-data="{
     activeSlide: 0,
     distanceConstant: 0,
@@ -89,19 +89,17 @@ x-data="{
 }">
     <div class="carousel-top-row row g-0">
         {{/*  Carousel (horizontal)  */}}
-        <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9 bg-light border border-warning">
-            <div 
-            class="carousel-items-horizontal h-100"
-            >
+        <div class="carousel-asset-horizontal col-12 h-100 pr-1 position-relative col-md-9">
+            <div class="carousel-items-horizontal h-100">
                 {{ range $idx, $elm := $media }}
                 <div 
                 id="{{add $idx 1}}-horizontal" 
-                class="carousel-item h-100" 
+                class="carousel-item-horizontal h-100 rounded-1" 
                 :class="isActiveHorizontal({{ $idx }})">
                     {{ if eq $elm.media_type "image"}}
-                    <img class="h-100 w-100" src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
+                    <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
                     {{ else }}
-                    <video class="h-100 w-100" poster="{{$elm.image_url}}" preload="none" alt="{{ $elm.image_url }}-{{add $idx 1}}">
+                    <video class="h-100 w-100 rounded-1" poster="{{$elm.image_url}}" preload="none" alt="{{ $elm.image_url }}-{{add $idx 1}}">
                         <source type="video/mp4">
                     </video>
                     {{ end }}
@@ -110,13 +108,13 @@ x-data="{
             </div>
             {{ if gt $asset_len 1 }}
             <button 
-            class="carousel-control prev position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" 
+            class="carousel-control-horizontal prev position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0" 
             @click="navigateCarousel('prev')">
                 <div class="control-arrow"></div>
                 <div class="visually-hidden">Previous</div>
             </button>
             <button 
-            class="carousel-control next position-absolute top-50 translate-middle-y rounded-circle border border-0 bg-white" 
+            class="carousel-control-horizontal next position-absolute top-50 translate-middle-y rounded-circle bg-white border border-0" 
             @click="navigateCarousel('next')">
                 <div class="control-arrow"></div>
                 <div class="visually-hidden">Next</div>
@@ -125,39 +123,36 @@ x-data="{
         </div>
         {{/*  Carousel (vertical)  */}}
         <div 
-        class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3 border border-primary"
+        class="carousel-items-vertical d-none overflow-hidden h-100 d-md-block col-md-3"
         x-init="setDistanceConstant($el); setVerticalCarouselEl($el); setActiveBtnOffsetTop()"
         @resize.window="navigateVerticalNavOnResize($el)">
             {{ range $idx, $elm := $media }}
                 {{ if and (gt $idx (sub $asset_len 4)) $isScrollableCarousel}}
                 <button 
-                class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
+                class="carousel-item-vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }})'}"
-                x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
                 >
                 </button>
                 {{ end }}
             {{ end }}
             {{ range $idx, $elm := $media }}
             <button
-            class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
+            class="carousel-item-vertical row g-0 p-0 w-100 mx-auto rounded-1"
             :class="isActiveVertical({{$idx}}, $el)"
             @click="navigateCarousel(chooseVerticalDirection($el))"
             :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }})'}"
-            x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
             >
             </button>
             {{ end }}
             {{ range $idx, $elm := first 1 $media }}
                 {{ if $isScrollableCarousel}}
                 <button 
-                class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
+                class="carousel-item-vertical row g-0 p-0 w-100 mx-auto rounded-1"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
                 :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }})'}"
-                x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
                 >
                 </button>
                 {{ end }}
@@ -166,7 +161,7 @@ x-data="{
     </div>
     {{/*  Carousel item description  */}}
     <div class="row g-0">
-        <div class="col-12 p-0 carousel-item-descriptions border border-secondary">
+        <div class="col-12 p-0 carousel-item-descriptions">
             {{ range $idx, $el := $media }}
             <div class="row g-0 carousel-item-description" :class="isActiveHorizontal({{ $idx }})">
                 <div class="col-1">

@@ -675,21 +675,31 @@ $screen-md-max: ($screen-lg-min - 1) !default;
 }
 
 .integrations-carousel {
+    margin-bottom: 36px;
+    p{
+        font-size: 16px;
+    }
     .carousel-top-row{
         height: 194px;
+        margin-bottom: 12px;
         @media(min-width: 768px){
             height: 297px;
         }
+
         .carousel-asset-horizontal:hover{
-            .carousel-control{
+            .carousel-control-horizontal{
                 opacity: 1;
             }
         }
+
         .carousel-asset-horizontal {
-            p{
-                font-size: 16px;
+            .carousel-items-horizontal{
+                margin-right: 12px;
+                .carousel-item-horizontal {
+                    border: 1px solid #e2e5ed;
+                }
             }
-            .carousel-control {
+            .carousel-control-horizontal {
                 opacity: 0;
                 width: 26px;
                 height: 26px;
@@ -711,26 +721,28 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                     }
                 }
                 &.next{
-                    right: 8px;
+                    right: 20px;
                     .control-arrow{
                         transform: rotate(-135deg);
                     }
                 }
             }
         }
+
         .carousel-items-vertical {
             scroll-behavior: smooth;
             .carousel-item-vertical {
+                background-size: contain;
                 height: 91px;
                 // width: 182px;
                 margin-top: 12px;
                 margin-bottom: 12px;
-                border: none;
+                border: solid 1px #e2e5ed;
                 &:first-child{
                     margin-top: 0px;
                 }
                 &.active{
-                    box-shadow: 0 0 0 2px #006bc2
+                    border: solid 2px #006bc2;
                 }
             }
         }
