@@ -46,4 +46,5 @@ cascade:
 {{< whatsnext desc="Querying:" >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitor arithmetic and sparse metrics{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() monitor evaluations{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor_aggregators" >}}Monitor aggregators{{< /nextlink >}}
 {{< /whatsnext >}}
