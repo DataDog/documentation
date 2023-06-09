@@ -700,11 +700,12 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 margin-right: 12px;
                 .carousel-item-horizontal {
                     border: 1px solid #e2e5ed;
-                    video {
-                        object-fit: fill;
+                    .play-overlay {
+                        z-index: 2;
                         cursor: pointer;
                     }
                     .play-btn {
+                        z-index: 2;
                         width: 64px;
                         height: 64px;
                         background-color: rgba(0, 0, 0, 0.6);
@@ -723,6 +724,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 }
             }
             .carousel-control-horizontal {
+                z-index: 2;
                 opacity: 0;
                 width: 26px;
                 height: 26px;
