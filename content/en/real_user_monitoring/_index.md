@@ -49,7 +49,7 @@ cascade:
         rank: 70
 ---
 
-{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM Dashboard" >}}
 
 ## What is Real User Monitoring?
 
@@ -128,13 +128,13 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**UX Monitoring > RUM Applications**][1].
+Access RUM by navigating to [**UX Monitoring > Real User Monitoring**][1].
 
 ### Out-of-the-box dashboards
 
 Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][2].
 
-{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM dashboard" >}}
 
 ### RUM Explorer and visualizations
 
