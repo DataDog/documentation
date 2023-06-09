@@ -1,13 +1,14 @@
 ---
-title: Live Containers
+title: Containers View
 kind: documentation
 aliases:
   - /guides/livecontainers
   - /graphing/infrastructure/livecontainers/
+  - /infrastructure/livecontainers
 further_reading:
 - link: "/infrastructure/livecontainers/configuration"
   tag: "Documentation"
-  text: "Configure Live Containers"
+  text: "Configure Containers View"
 - link: "/infrastructure/hostmap/"
   tag: "Documentation"
   text: "See all of your hosts together on one screen with the hostmap"
@@ -22,29 +23,113 @@ further_reading:
   text: "Practical tips for rightsizing your Kubernetes workloads"
 ---
 
-## Overview
+In Datadog, the [Containers][1] page provides real-time visibility into all containers across your environment.
 
-[Datadog Live Containers][1] enables real-time visibility into all containers across your environment.
+Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, the Containers page gives you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
 
-Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, live containers give you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
-
-Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the live container view provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
+Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the Containers page provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
 
 {{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="Live containers with summaries" >}}
 
-To see your live containers, navigate to the [Containers page][1]. This automatically brings you to the **Containers** view.
+## Setup
 
-## Configuration
+To use the Containers page, enable process collection.
 
-See the [Live Containers Configuration documentation][5] for detailed configuration steps for Helm and DaemonSets.
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+Set the `DD_PROCESS_AGENT_ENABLED` env variable to `true`.
+
+For example:
+
+```
+-v /etc/passwd:/etc/passwd:ro
+-e DD_PROCESS_AGENT_ENABLED=true
+```
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+Use the `features.liveProcessCollection` parameter in your `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  features:
+    liveProcessCollection:
+      enabled: true
+```
+
+Then, apply the new configuration:
+
+```bash
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+If you are using the [official Helm chart][1], enable the `processAgent.enabled` and `processAgent.processCollection` parameters in your [`values.yaml`][2] file:
+
+```yaml
+datadog:
+  # (...)
+  processAgent:
+    enabled: true
+    processCollection: true
+```
+
+Then, upgrade your Helm chart.
+
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
+
+```yaml
+datadog:
+  #(...)
+  clusterName: <YOUR_CLUSTER_NAME>
+  #(...)
+  processAgent:
+    enabled: true
+    processCollection: true
+```
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Amazon ECS" %}}
+
+Update your Task Definitions with the following environment variable:
+
+```json
+{
+  "name": "DD_PROCESS_AGENT_ENABLED",
+  "value": "true"
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Configuration
+For configuration options, like filtering containers and scrubbing sensitive information, see [Configure Containers View][16]. To set up this page for older Agent versions (Datadog Agent v7.21.1 - v7.27.0 and Cluster Agent v1.9.0 - 1.11.0), see [Live Containers legacy configuration][17].
+
+## Kubernetes Orchestrator Explorer
+
+In the **Select Resources** box at the top left of the Containers page, you can expand the **Kubernetes** heading to look at pods, clusters, namespaces, etc. in the Kubernetes [Orchestrator Explorer][18]. For more information, see the [Orchestrator Explorer documentation][19].
+
+You can also use the [Kubernetes page][20] to see an overview of your Kubernetes resources.
 
 ## Searching, filtering, and pivoting
 
 ### String search
 
 Containers are, by their nature, extremely high cardinality objects. Datadog's flexible string search matches substrings in the container name, ID, or image fields.
-
-If you've enabled Kubernetes Resources, strings such as `pod`, `deployment`, `ReplicaSet`, and `service name`, as well as Kubernetes labels are searchable in a [Kubernetes Resources view](#kubernetes-resources-view).
 
 To combine multiple string searches into a complex query, you can use any of the following Boolean operators:
 
@@ -73,8 +158,6 @@ You could pivot by ECS `ecs_task_name` and `ecs_task_version` to understand chan
 
 {{< img src="infrastructure/livecontainers/tasksxversion2.png" alt="Tasks x version" style="width:80%;">}}
 
-For Kubernetes resources, select Datadog tags such as `environment`, `service`, or `pod_phase` to filter by. You can also use the container facets on the left to filter a specific Kubernetes resource. Group pods by Datadog tags to get an aggregated view which allows you to find information quicker. You can search Kubernetes labels, but they are not available in the cluster map.
-
 ## Tagging
 
 Containers are [tagged][6] with all existing host-level tags, as well as with metadata associated with individual containers.
@@ -99,14 +182,11 @@ Kubernetes containers are tagged by:
 * `kube_deployment`
 * `kube_cluster`
 
-If you have a configuration for [Unified Service Tagging][7] in place, `env`, `service`, and `version` is picked up automatically.
-Having these tags available lets you tie together APM, logs, metrics, and live container data.
+If you have a configuration for [Unified Service Tagging][7] in place, Datadog automatically picks up `env`, `service`, and `version` tags. Having these tags available lets you tie together APM, logs, metrics, and container data.
 
 ## Views
 
-### Containers view
-
-The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][8] views, and a table to better organize your container data by fields such as container name, status, and start time.
+The Containers page includes [Scatter Plot](#scatter-plot) and [Timeseries][8] views, and a table to better organize your container data by fields such as container name, status, and start time.
 
 #### Scatter plot
 
@@ -129,73 +209,6 @@ The query at the top of the scatter plot analytic allows you to control your sca
 #### Real-time monitoring
 
 While actively working with the containers page, metrics are collected at a 2-second resolution. This is important for volatile metrics such as CPU. In the background, for historical context, metrics are collected at 10s resolution.
-
-### Kubernetes resources view
-
-If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **StatefulSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the "Select a resource" dropdown menu in the top left corner of the page.
-
-Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
-
-{{< img src="infrastructure/livecontainers/kubernetes-resources-view.png" alt="A data table organize by field" style="width:80%;">}}
-
-#### Group by functionality and facets
-
-Group pods by tags or Kubernetes labels to get an aggregated view which allows you to find information quicker. You can perform a group by using the "Group by" bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
-
-{{< img src="infrastructure/livecontainers/group-by.mp4" alt="An example of grouping by team" video=true style="width:80%;">}}
-
-You can also leverage facets on the left hand side of the page to quickly group resources or filter for resources you care most about, such as pods with a CrashLoopBackOff pod status.
-
-{{< img src="infrastructure/livecontainers/crashloopbackoff.mp4" alt="An example of grouping the CrashLoopBackOff pod status" video=true style="width:80%;">}}
-
-#### Cluster map
-
-A Kubernetes Cluster Map gives you a bigger picture of your pods and Kubernetes clusters. You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the pods by.
-
-Examine resources from Cluster Maps by clicking on any circle or group to populate a detailed panel.
-
-You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the pods by.
-
-{{< img src="infrastructure/livecontainers/cluster-map.mp4" alt="A cluster map with customized groups and filters" video=true style="width:80%;">}}
-
-#### Information panel
-
-Click on any row in the table or on any object in a Cluster Map to view information about a specific resource in a side panel.
-
-{{< img src="infrastructure/livecontainers/information-panel.mp4" alt="A view of resources in the side panel" video=true style="width:80%;">}}
-
-For a detailed dashboard of this resource, click the View Dashboard in the top right corner of this panel.
-
-{{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="A link to a pod dashboard from Live Containers overview" style="width:80%;">}}
-
-This panel is useful for troubleshooting and finding information about a selected container or resource, such as:
-
-* [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
-* [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
-* **Network**: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
-* [**Traces**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
-
-Kubernetes Resources views have a few additional tabs:
-
-* **Processes**: View all processes running in the container of this resource.
-* **YAML**: A detailed YAML overview for the resource.
-* [**Events**][12]: View all Kubernetes events for your resource.
-
-For a detailed dashboard of this resource, click the **View Dashboard** in the top right corner of this panel.
-
-#### Resource utilization
-
-The **Resource Utilization** tab is to the right of to the **Cluster Map** tab. 
-
-{{< img src="infrastructure/livecontainers/resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
-
-This tab displays your CPU and memory usage over time. This information helps you detect where resources may be over- or under-provisioned.
-
-Click on any row in the table to view informatiion about a specific resource in a side panel.
-
-{{< img src="infrastructure/livecontainers/resource_utilization_panel.png" alt="Container Resource Utilization Side Panel Details" style="width:80%;">}}
-
-In the above screenshot, pods are grouped by cluster name. The side panel is opened for pods within a particular cluster. Average CPU and memory usage for these pods is displayed.
 
 ### Container logs
 
@@ -223,11 +236,6 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 * RBAC settings can restrict Kubernetes metadata collection. See the [RBAC entities for the Datadog Agent][14].
 * In Kubernetes the `health` value is the containers' readiness probe, not its liveness probe.
 
-### Kubernetes resources
-
-* Data is updated automatically in constant intervals. Update intervals may change during beta.
-* In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart, see [the Helm Chart repo][15] for more details.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -247,3 +255,8 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 [13]: /logs/explorer/live_tail
 [14]: https://github.com/DataDog/datadog-agent/blob/7.23.1/Dockerfiles/manifests/cluster-agent/rbac.yaml
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
+[16]: /infrastructure/containers/configuration
+[17]: /infrastructure/faq/live-containers-legacy-configuration
+[18]: https://app.datadoghq.com/orchestration/overview/
+[19]: /infrastructure/containers/orchestrator_explorer/
+[20]: /infrastructure/containers/kubernetes_resources

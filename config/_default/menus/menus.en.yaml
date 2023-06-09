@@ -856,17 +856,19 @@ main:
     parent: infrastructure
     weight: 2
   - name: Containers View
-    url: infrastructure/livecontainers/
+    url: infrastructure/containers/
     parent: infrastructure
     identifier: infrastructure_livecontainers
     weight: 3
   - name: Configuration
-    url: infrastructure/livecontainers/configuration
+    url: infrastructure/containers/configuration
     parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_configuration
     weight: 301
-  - name: Legacy Configuration
-    url: infrastructure/livecontainers/legacy
+  - name: Orchestrator Explorer
+    url: infrastructure/containers/orchestrator_explorer
     parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_explorer
     weight: 302
   - name: Processes View
     url: infrastructure/process/
