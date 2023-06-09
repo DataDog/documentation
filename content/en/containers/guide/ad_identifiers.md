@@ -3,6 +3,7 @@ title: Autodiscovery Container Identifiers
 kind: documentation
 aliases:
  - /agent/autodiscovery/ad_identifiers
+ - /agent/guide/ad_identifiers
 further_reading:
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"

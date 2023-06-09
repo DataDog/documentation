@@ -1,6 +1,8 @@
 ---
 title: Container Images for Docker Environments
 kind: documentation
+aliases:
+  - /agent/guide/container-images-for-docker-environments
 further_reading:
 - link: "/agent/docker/"
   tag: "Documentation"
