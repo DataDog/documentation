@@ -107,7 +107,8 @@ The **Context Variables** tab for each step provides a map of all context variab
 
 {{< img src="service_management/workflows/context-variables.png" alt="The Context Variables tab" >}}
 
-Access a context variable in a step by enclosing it in double braces (`{{`). Context variables are available in fields marked with the `{{` notation. To access fields within context variables, use [Handlebars expression syntax][2].
+Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
+
 {{< img src="service_management/workflows/use-context-variable.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true" >}}
 
 ### Workflow variables
