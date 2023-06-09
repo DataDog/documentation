@@ -33,13 +33,6 @@ Supported Agent versions
 
 Complete the following steps to enable Database Monitoring with your database:
 
-1. Configure the Agent for each RAC node by following the instructions for [self-hosted Oracle database](dbm/dbm-setup-oracle/database_monitoring/setup_oracle/rac).
-2. Add the following custom tag to each node:
-    ```yaml
-    tags:
-      - rac_cluster:'cluster_name'
-    ```
-
 ### Validate
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Databases][6] page in Datadog to get started.
