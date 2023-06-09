@@ -17,11 +17,11 @@ This guide walks through the different [types of data][1] that RUM collects and 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="Diagram of the RUM event hierarchy, displaying a single session containing multiple views." style="width:50%;">}}
 
 ## Sessions
-All RUM data refers to user or synthetics sessions, which are at the top of the event hierarchy. A session is a unique user journey and encompasses everything (for example, pages viewed, views, clicks, scrolls, and errors) the user triggered. A session can last up to four hours of continuous activity, or it can expire after [15 minutes of inactivity][2]. Since a session encompasses the entire journey, all [attributes][3] tied to that user are also tied to that session. For example, you may want to query on a default attribute, like `application.name`, then add something more custom, like [user attributes][4].
+All RUM data refers to user or synthetics sessions, which are at the top of the event hierarchy. A session is a unique user journey and encompasses everything (for example, pages viewed, views, clicks, scrolls, and errors) the user triggered. A session can last up to four hours of continuous activity, or it can expire after [15 minutes of inactivity][2]. Since a session encompasses the entire journey, all [attributes][3] tied to that user are also tied to that session. For example, you may want to query on a default attribute, like `action count`, then add something more custom, like [user attributes][4].
 
 #### Sample search: List all sessions from a user
 
-To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the user and application.
+To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the session status and user.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-all-session-user-1.png" alt="Sample search listing all sessions from user 'Lee Davis'." style="width:80%;">}}
 
@@ -30,7 +30,7 @@ Each session is automatically associated with a unique `session.id`.
 ## Views
 Within a session, a view event is created each time a user navigates to a page (Browser RUM) or to a screen or screen segment (Mobile RUM) of an application. 
 
-Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the video below.
+Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the image below.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.png" alt="RUM views." style="width:80%;">}}
 
@@ -58,7 +58,7 @@ Errors can be viewed in both RUM and Error Tracking. Source and custom errors ar
 
 #### Sample search: List of all crashes that occurred on a page in the application
 
-This example displays query that searches within the errors event to view all crashes that occurred on the "HomeViewController" page for a particular application.
+This example displays a query that searches within the errors event to view all crashes that occurred on the "HomeViewController" page for a particular application.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
 
