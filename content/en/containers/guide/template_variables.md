@@ -4,6 +4,7 @@ kind: guide
 aliases:
  - /agent/autodiscovery/template_variables
  - /agent/faq/template_variables
+ - /agent/guide/template_variables
 further_reading:
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"

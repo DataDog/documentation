@@ -4,6 +4,7 @@ kind: guide
 aliases:
     - /agent/kubernetes/legacy
     - /agent/faq/kubernetes-legacy
+    - /agent/guide/kubernetes-legacy
 further_reading:
 - link: "/agent/kubernetes/daemonset_setup/"
   tag: "documentation"
