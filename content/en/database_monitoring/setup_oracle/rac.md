@@ -21,6 +21,16 @@ The features described on this page are in private beta. Contact your Customer S
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
+## Before you begin
+
+Supported Oracle versions
+: 19c, 21c
+
+Supported Agent versions
+: For more information on the required Agent build, contact your Customer Success Manager.
+
+## Setup
+
 Complete the following steps to enable Database Monitoring with your database:
 
 1. Configure the Agent for each RAC node by following the instructions for self-hosted Oracle database.
@@ -29,14 +39,6 @@ Complete the following steps to enable Database Monitoring with your database:
     tags:
       - rac_cluster:'cluster_name'
     ```
-
-## Before you begin
-
-Supported Oracle versions
-: 19c, 21c
-
-Supported Agent versions
-: For more information on the required Agent build, contact your Customer Success Manager.
 
 ### Validate
 
