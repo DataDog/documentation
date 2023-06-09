@@ -32,7 +32,7 @@ Within a session, a view event is created each time a user navigates to a page (
 
 Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the image below.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.png" alt="RUM views." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views-3.png" alt="RUM views." style="width:80%;">}}
 
 Similarly to the `session.id`, each view automatically has a unique `view.id` connected to it. 
 
@@ -48,7 +48,7 @@ Actions represent user activity on a page. In browsers, all click actions are au
 
 This example displays a query that searches for all actions from users clicking on the "Add to cart" button that resulted in an error.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart.png" alt="Sample search of all 'Add to Cart' actions that led to an error." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart-1.png" alt="Sample search of all 'Add to Cart' actions that led to an error." style="width:80%;">}}
 
 ### Errors
 
@@ -60,7 +60,7 @@ Errors can be viewed in both RUM and Error Tracking. Source and custom errors ar
 
 This example displays a query that searches within the errors event to view all crashes that occurred on the "HomeViewController" page for a particular application.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller-1.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
 
 ### Resources
 Resources are collected from views and include external requests from your application to a network provider, things like XHR, JS loading, images, or fonts, for example. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
