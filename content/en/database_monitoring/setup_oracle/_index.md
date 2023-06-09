@@ -16,9 +16,9 @@ The features described on this page are in private beta. Contact your Customer S
 </div>
 
 Supported:
-- versions: 19c and 21c,
-- deployment configurations: self-managed, RDS, RAC, Exadata,
-- architecture: multi-tenant.
+- versions: 19c and 21c
+- deployment configurations: self-managed, RDS, RAC, Exadata
+- architecture: multi-tenant
 
 For setup instructions, select your hosting type:
 
