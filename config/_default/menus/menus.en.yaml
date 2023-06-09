@@ -3441,41 +3441,26 @@ main:
     parent: rum
     identifier: rum_dashboards
     weight: 9
-  - name: Performance Overview
-    url: real_user_monitoring/dashboards/performance_overview_dashboard
+  - name: Performance
+    url: real_user_monitoring/dashboards/performance
     parent: rum_dashboards
     identifier: rum_dashboards_performance
     weight: 901
-  - name: Frustration Signals
-    url: real_user_monitoring/dashboards/frustration_signals_dashboard
+  - name: Testing and Deployment
+    url: real_user_monitoring/dashboards/testing_and_deployment
     parent: rum_dashboards
-    identifier: rum_dashboards_frustration_signals
+    identifier: rum_dashboards_testing_and_deployment
     weight: 902
-  - name: User Sessions
-    url: real_user_monitoring/dashboards/user_sessions_dashboard
+  - name: Usage
+    url: real_user_monitoring/dashboards/usage
     parent: rum_dashboards
-    identifier: rum_dashboards_sessions
+    identifier: rum_dashboards_usage
     weight: 903
   - name: Errors
-    url: real_user_monitoring/dashboards/errors_dashboard
+    url: real_user_monitoring/dashboards/errors
     parent: rum_dashboards
     identifier: rum_dashboards_errors
     weight: 904
-  - name: Testing Coverage
-    url: real_user_monitoring/dashboards/testing_coverage
-    parent: rum_dashboards
-    identifier: rum_dashboards_testing_coverage
-    weight: 905
-  - name: Resources
-    url: real_user_monitoring/dashboards/resources_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_resources
-    weight: 906
-  - name: Mobile
-    url: real_user_monitoring/dashboards/mobile_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_mobile
-    weight: 907
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
