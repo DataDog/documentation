@@ -1,3 +1,4 @@
+{{ $app_id := .Params.app_id | default "" }}
 {{ $media := .Params.tile.media | default slice}}
 {{ $asset_len := ($media | default slice) | len  }}
 {{ $isScrollableCarousel := (gt $asset_len 3)}}
@@ -98,7 +99,7 @@ x-data="{
                 class="carousel-item h-100" 
                 :class="isActiveHorizontal({{ $idx }})">
                     {{ if eq $elm.media_type "image"}}
-                    <img class="h-100 w-100" src="{{$elm.image_url}}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
+                    <img class="h-100 w-100" src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
                     {{ else }}
                     <video class="h-100 w-100" poster="{{$elm.image_url}}" preload="none" alt="{{ $elm.image_url }}-{{add $idx 1}}">
                         <source type="video/mp4">
@@ -133,7 +134,7 @@ x-data="{
                 class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+                :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }})'}"
                 x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
                 >
                 </button>
@@ -144,7 +145,7 @@ x-data="{
             class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
             :class="isActiveVertical({{$idx}}, $el)"
             @click="navigateCarousel(chooseVerticalDirection($el))"
-            :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+            :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }})'}"
             x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
             >
             </button>
@@ -155,7 +156,7 @@ x-data="{
                 class="carousel-item-vertical row g-0 p-0 w-100 mx-auto"
                 :class="isActiveVertical({{$idx}}, $el)"
                 @click="navigateCarousel(chooseVerticalDirection($el))"
-                :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url({{ $elm.image_url }})'}"
+                :style="{transform: `translateY(-${distanceConstant * 2}px)`, backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }})'}"
                 x-text="'{{ $elm.image_url }} {{add $idx 1}}-' + $el.offsetTop"
                 >
                 </button>
