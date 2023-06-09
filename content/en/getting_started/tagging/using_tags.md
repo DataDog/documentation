@@ -162,7 +162,7 @@ To filter [downtimes][1] by monitor tag, type the tag name in the search bar, fo
 
 {{< img src="tagging/using_tags/managedowntimetags.png" alt="Manage Monitors Tags" style="width:80%;">}}
 
-[1]: /monitors/notify/downtimes/
+[1]: /monitors/downtimes/
 {{% /tab %}}
 {{< /tabs >}}
 

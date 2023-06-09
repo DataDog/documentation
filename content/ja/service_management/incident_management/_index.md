@@ -9,6 +9,9 @@ further_reading:
 - link: dashboards/querying/#incident-management-analytics
   tag: Documentation
   text: インシデント管理分析
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: インシデントマネジメントを向上させるためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
   tag: ブログ
   text: Datadog CoScreen でより効率的なペアプログラミングを実現

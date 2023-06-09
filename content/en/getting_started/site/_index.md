@@ -5,6 +5,8 @@ further_reading:
  - link: 'https://learn.datadoghq.com/courses/dd-201'
    tag: 'Learning Center'
    text: 'Datadog 201: Becoming a Power User'
+algolia:
+  tags: ['site','datadog site']
 ---
 
 ## Overview

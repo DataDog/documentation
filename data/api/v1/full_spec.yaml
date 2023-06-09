@@ -7267,6 +7267,7 @@ components:
       - ci-pipelines alert
       - ci-tests alert
       - error-tracking alert
+      - database-monitoring alert
       example: query alert
       type: string
       x-enum-varnames:
@@ -7286,6 +7287,7 @@ components:
       - CI_PIPELINES_ALERT
       - CI_TESTS_ALERT
       - ERROR_TRACKING_ALERT
+      - DATABASE_MONITORING_ALERT
     MonitorUpdateRequest:
       description: Object describing a monitor update request.
       properties:
@@ -7347,6 +7349,7 @@ components:
           items:
             description: A role UUID.
             type: string
+          nullable: true
           type: array
         state:
           $ref: '#/components/schemas/MonitorState'
@@ -25731,6 +25734,8 @@ paths:
 
         - error-tracking: `error-tracking alert`
 
+        - database-monitoring: `database-monitoring alert`
+
 
         **Note**: Synthetic monitors are created through the Synthetics API. See the
         [Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation
@@ -26056,7 +26061,32 @@ paths:
 
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.'
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **Database Monitoring Alert Query**
+
+
+        Example: `database-monitoring(query).rollup(rollup_method[, measure]).last(time_window)
+        operator #`
+
+
+        - `query` The search query - following the [Log search syntax](https://docs.datadoghq.com/logs/search_syntax/).
+
+        - `rollup_method` The stats roll-up method - supports `count`, `avg`, and
+        `cardinality`.
+
+        - `measure` For `avg` and cardinality `rollup_method` - specify the measure
+        or the facet name you want to use.
+
+        - `time_window` #m (between 1 and 2880), #h (between 1 and 48).
+
+        - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
+
+        - `#` an integer or decimal number used to set the threshold.
+
+
+        **NOTE** Database Monitoring monitors are in alpha on US1.'
       operationId: CreateMonitor
       requestBody:
         content:
