@@ -17,7 +17,7 @@ If services that you know are instrumented for APM are not appearing in the Serv
 
 ## SLOs not listed in Setup Guidance section
 
-The count in the Service Catalog Setup Guidance section reflects the number of SLOs with `service` tags. If your SLOs are not listed, you can first verify if they have `service` tag values specified and matched with the service names in other product (e.g., APM, USM). 
+The count in the Service Catalog Setup Guidance section reflects the number of SLOs with `service` tags. If your SLOs are not listed, verify that they have `service` tag values specified and that they match with the service names in other products such as APM and USM.
 
 ## Additional telemetry is available to a service but it's not listed
 
