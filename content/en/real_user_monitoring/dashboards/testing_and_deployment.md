@@ -82,8 +82,3 @@ For more information about the data displayed, see our documentation for each pl
 [6]: /real_user_monitoring/android/data_collected/
 [7]: /real_user_monitoring/reactnative/data_collected/
 [8]: /real_user_monitoring/flutter/data_collected/
-
-<!-- [4]: /synthetics/cicd_integrations/
-[5]: /real_user_monitoring/explorer
-[6]: /dashboards/template_variables/
-[7]: /real_user_monitoring/guide/send-rum-custom-actions/ -->
