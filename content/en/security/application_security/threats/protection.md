@@ -44,7 +44,7 @@ To get started, navigate to **Security > Application Security > Configuration > 
 ## Block attackers at the perimeter - integrate ASM with your existing WAF deployments
 
 Datadog ASM enables customers to block attackers at the perimeter, directly from the Security Signal. ASM integrates with [Workflows][17] to push the attackers' IP addresses to perimeter Web Application Firewalls (AWS WAF, Cloudflare, Fastly) and ensure requests from these attackers are blocked at the edge even before they enter the customer's environment.
-Create Workflows from the [blueprints][18] available (can be accessed from the Service Management menu) and run these workflows directly from ASM’s Signal side panel.
+Create workflows from the available [blueprints][18] and run them directly from ASM's Signal side panel.
 
 ## Denylist
 
