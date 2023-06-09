@@ -6,13 +6,13 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-## OpenTelemetry SDK Configuration
+## OpenTelemetry SDK configuration
 
-OpenTelemetry (OTel) .NET applications can be instrumented [automatically](https://opentelemetry.io/docs/instrumentation/net/automatic/) or [manually](https://opentelemetry.io/docs/instrumentation/net/manual/). Runtime metrics are automatically enabled when using automatic instrumentation. In order to enable runtime metrics when using manual instrumentation, refer to the documentation for the [OpenTelemetry.Instrumentation.Runtime library](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime).
+OpenTelemetry (OTel) .NET applications can be instrumented [automatically](https://opentelemetry.io/docs/instrumentation/net/automatic/) or [manually](https://opentelemetry.io/docs/instrumentation/net/manual/). Runtime metrics are automatically enabled when using automatic instrumentation. In order to enable runtime metrics when using manual instrumentation, see the documentation for the [OpenTelemetry.Instrumentation.Runtime library](https://github.com/open-telemetry/opentelemetry-dotnet-contrib/tree/main/src/OpenTelemetry.Instrumentation.Runtime).
 
-## Runtime Metric Mappings
+## Runtime metric mappings
 
-This table lists all of the Datadog runtime metrics that we currently support by mapping OTel runtime metrics. At the bottom, metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
+This table lists all of the Datadog runtime metrics that are supported by mapping OTel runtime metrics. At the bottom, metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
 
 | Datadog metric | Description |  OTel counterpart |
 | --- | --- | --- |

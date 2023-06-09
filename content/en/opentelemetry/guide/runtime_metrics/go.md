@@ -6,13 +6,13 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-## OpenTelemetry SDK Configuration
+## OpenTelemetry SDK configuration
 
-OpenTelemetry (OTel) Go applications can be instrumented [manually](https://opentelemetry.io/docs/instrumentation/go/manual/). In order to enable runtime metrics when using manual instrumentation, refer to the documentation for the [runtime package](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime).
+OpenTelemetry (OTel) Go applications can be instrumented [manually](https://opentelemetry.io/docs/instrumentation/go/manual/). In order to enable runtime metrics when using manual instrumentation, see the documentation for the [runtime package](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/runtime).
 
-## Runtime Metric Mappings
+## Runtime metric mappings
 
-This table lists all of the Datadog runtime metrics that we currently support by mapping OTel runtime metrics. At the bottom, metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
+This table lists all of the Datadog runtime metrics that are supported by mapping OTel runtime metrics. At the bottom, metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
 
 | Datadog metric | Description |  OTel counterpart |
 | --- | --- | --- |

@@ -6,15 +6,15 @@ type: multi-code-lang
 code_lang_weight: 10
 ---
 
-## OpenTelemetry SDK Configuration
+## OpenTelemetry SDK configuration
 
-OpenTelemetry (OTel) Java applications can be instrumented [automatically](https://opentelemetry.io/docs/instrumentation/java/automatic/) or [manually](https://opentelemetry.io/docs/instrumentation/java/manual/). Runtime metrics are automatically enabled when using automatic instrumentation. In order to enable runtime metrics when using manual instrumentation, refer to the following guides for your Java version:
+OpenTelemetry (OTel) Java applications can be instrumented [automatically](https://opentelemetry.io/docs/instrumentation/java/automatic/) or [manually](https://opentelemetry.io/docs/instrumentation/java/manual/). Runtime metrics are automatically enabled when using automatic instrumentation. In order to enable runtime metrics when using manual instrumentation, see the following guides for your Java version:
 - [Java 8](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-metrics/runtime-metrics-java8/library)
 - [Java 17](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/runtime-metrics/runtime-metrics-java17/library)
 
-## Runtime Metric Mappings
+## Runtime metric mappings
 
-This table lists all of the Datadog runtime metrics that we currently support by mapping OTel runtime metrics. At the bottom, metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
+This table lists all of the Datadog runtime metrics that are supported by mapping OTel runtime metrics. At the bottom, metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
 
 | Datadog metric | Description |  OTel counterpart |
 | --- | --- | --- |
