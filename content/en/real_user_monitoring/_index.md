@@ -79,22 +79,22 @@ Select an application type to start collecting RUM data:
 
 The following RUM capabilities are supported relative to each platform:
 
-| Feature                   | Browser | iOS | Android | Flutter | React Native | Roku |
-| ------------------------- | --------|--------|---------|---------|--------------|--------|
-| Send logs to Datadog  | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Fully supported |
-| Global attribute tracking in Logs  | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
-| Client side tracking | Not supported | Fully supported | Fully supported | Not supported | Not supported  | Not supported |
-| Distributed tracing of network requests | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Fully supported <br> <br> **Note**: The Datadog Roku SDK is only able to track some types of HTTP requests. </br> |
-| Track Views and Actions (RUM) | Fully supported  | Fully supported | Fully supported | Fully supported <br> <br> **Note**: All actions tracked in Flutter Web are recorded as `custom` | Fully supported  | Fully supported <br> <br> **Note**: Roku only supports manual action tracking. |
-| Feature Flags tracking and release tracking | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
-| Frustration signals | Fully supported  | Partially supported | Partially supported | Partially supported | Partially supported  | Not supported |
-| Error tracking and source mapping | Fully supported  | Fully supported | Fully supported | Partially supported <br> <br> **Note**: Source mapping is not supported for Flutter. | Fully supported | Not supported |
-| Crash tracking, symbolication, and deobfuscation | Not supported | Fully supported | Fully supported | Fully supported | Fully supported | Fully supported |
-| Stop sessions (Kiosk Monitoring) | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
-| Track Events in WebViews | Not supported | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
-| Monitor platform-specific vitals | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
-| Session Replay | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
-| Heatmaps | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
+| Feature                               | Supported Platforms | Notes |
+| ------------------------------------- | --------------------|-------|
+| Send logs to Datadog  | Browser, iOS, Android, Flutter, React Native, Roku |
+| Distributed tracing of network requests | Browser, iOS, Android, Flutter, React Native, Roku | - The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
+| Track Views and Actions (RUM) | Browser, iOS, Android, Flutter, React Native, Roku | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** only supports manual action tracking. |
+| Feature Flags tracking and release tracking | Browser, iOS, Android, Flutter, React Native | |
+| Error tracking and source mapping | Browser, iOS, Android, Flutter (Error Tracking only), React Native (partially supported) | |
+| Crash tracking, symbolication, and deobfuscation | iOS, Android, Flutter, React Native, Roku | |
+| Stop sessions (Kiosk Monitoring) | Browser, iOS, Android, Flutter, React Native | |
+| Track Events in WebViews | iOS, Android, Flutter, React Native | |
+| Monitor platform-specific vitals | Browser, iOS, Android, Flutter, React Native | |
+| Global attribute tracking in Logs  | Browser |  |
+| Client side tracking | iOS, Android | |
+| Session Replay | Browser | |
+| Heatmaps | Browser | |
+| Frustration signals | Browser, iOS (partially supported), Android (partially supported), Flutter (partially supported), React Native (partially supported) | |
 
 ## Supported endpoints for SDK domains
 
