@@ -12,9 +12,6 @@
 {{ else }}
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
-{{ $datafile := ($.Scratch.Get "data") }}
-<!-- only ja pages on corp -->
-{{ $langPrefix := cond (eq $dot.Page.Lang "ja") "ja/" "" }}
 
 {{ partial "footer.html" . }}
 
