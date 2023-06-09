@@ -25,7 +25,7 @@ All RUM events that match your filter query are aggregated into groups based on 
 
 - Unique count of coded values for a facet per group
 
-  {{< img src="real_user_monitoring/explorer/group-unique-count-coded-values-1.png" alt="Group by unique count of coded values" style="width:90%;" >}}
+  {{< img src="real_user_monitoring/explorer/group-unique-count-coded-values-2.png" alt="Group by unique count of coded values" style="width:90%;" >}}
 
 - Statistical operations (such as minimum, maximum, average, and percentiles) on a facet's numerical values per group
 
