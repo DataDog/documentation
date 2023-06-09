@@ -22,7 +22,7 @@ This page contains instructions for setting up the Orchestrator Explorer using a
 
     Note in particular that for the `apps` and `batch` apiGroups, Live Containers need
     permissions to collect common Kubernetes resources (`pods`, `services`,
-    `nodes`, etc.), which should be already in the RBAC if you followed [Cluster
+    `nodes`, and others), which should be already in the RBAC if you followed [Cluster
     Agent Setup][2]. But if they are missing, ensure they are
     added (after `deployments`, `replicasets`):
 

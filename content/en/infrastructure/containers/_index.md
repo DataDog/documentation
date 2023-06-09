@@ -121,7 +121,7 @@ For configuration options, like filtering containers and scrubbing sensitive inf
 
 ## Kubernetes Orchestrator Explorer
 
-In the **Select Resources** box at the top left of the Containers page, you can expand the **Kubernetes** heading to look at pods, clusters, namespaces, etc. in the Kubernetes [Orchestrator Explorer][18]. For more information, see the [Orchestrator Explorer documentation][19].
+In the **Select Resources** box at the top left of the Containers page, you can expand the **Kubernetes** heading to look at pods, clusters, namespaces, and other resources in the Kubernetes [Orchestrator Explorer][18]. For more information, see the [Orchestrator Explorer documentation][19].
 
 You can also use the [Kubernetes page][20] to see an overview of your Kubernetes resources.
 
