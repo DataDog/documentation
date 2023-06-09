@@ -15,14 +15,10 @@ is_beta: true
 The features described on this page are in private beta. Contact your Customer Success Manager for information on the required Agent build and installation instructions.
 </div>
 
-### Oracle versions supported
-
-|  | Self-hosted | RDS |
-|--|-------------|-----| 
-| Oracle 19c | {{< X >}} | {{< X >}} |
-| Oracle 21c | {{< X >}} | {{< X >}} |
-
-The following deployment configurations are supported: self-managed, RDS, single-node, and multi-tenant. Note these do not include RAC and Exadata or legacy architectures.
+Supported:
+- versions: 19c and 21c,
+- deployment configurations: self-managed, RDS, RAC, Exadata,
+- architecture: multi-tenant.
 
 For setup instructions, select your hosting type:
 
