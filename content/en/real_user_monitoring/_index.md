@@ -65,7 +65,15 @@ Datadog's *Session Replay* allows you to capture and visually replay the web bro
 
 Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
 
-## Compatibility requirements
+## Get started
+
+Select an application type to start collecting RUM data:
+
+{{< partial name="rum/rum-getting-started.html" >}}
+
+</br>
+
+### Compatibility requirements
 
 **Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.
 
@@ -87,14 +95,6 @@ The following RUM capabilities are supported relative to each platform:
 | Monitor platform-specific vitals | Fully supported  | Fully supported | Fully supported | Fully supported | Fully supported  | Not supported |
 | Session Replay | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
 | Heatmaps | Fully supported | Not supported | Not supported  | Not supported |  Not supported  |  Not supported |
-
-## Get started
-
-Select an application type to start collecting RUM data:
-
-{{< partial name="rum/rum-getting-started.html" >}}
-
-</br>
 
 ## Supported endpoints for SDK domains
 
