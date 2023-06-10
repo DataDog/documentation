@@ -107,7 +107,7 @@ x-data="{
     },
     pauseVideo () {
         const {iframe, playBtn, playOverlay} = $refs
-        if(iframe.parentElement.classList.contains('active')){
+        if(iframe?.parentElement.classList.contains('active')){
             const player = new Vimeo.Player(iframe);
             player.pause().then(() => {
                 playBtn.classList.remove('d-none');
