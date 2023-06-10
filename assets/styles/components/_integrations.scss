@@ -675,6 +675,9 @@ $screen-md-max: ($screen-lg-min - 1) !default;
 }
 
 .integrations-carousel {
+    [x-cloak] {
+        display: none;
+    }
     margin-bottom: 36px;
     p{
         font-size: 16px;

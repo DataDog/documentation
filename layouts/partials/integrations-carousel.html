@@ -67,8 +67,8 @@ x-data="{
         // assign vertical carousel position on resize
         this.verticalCarouselEl.scrollTop = this.verticalCarouselElScrollTop
     },
-    isActiveHorizontal (idx) {
-        return idx === this.activeSlide ? 'active': 'd-none'
+    shouldShowActiveHorizontalSlide (idx) {
+        return idx === this.activeSlide
     },
     isActiveVertical (idx, btn) {
         if(this.isScrollable && (btn.offsetTop === this.activeBtnOffsetTop)){
@@ -127,7 +127,8 @@ x-data="{
                 <div 
                 id="{{add $idx 1}}-horizontal" 
                 class="carousel-item-horizontal h-100 rounded-1 {{if $elm.vimeo_id}}video-item{{end}}" 
-                :class="isActiveHorizontal({{ $idx }})">
+                :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+                x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
                     {{ if eq $elm.media_type "image"}}
                     <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
                     {{ else }}
@@ -205,7 +206,10 @@ x-data="{
     <div class="row g-0">
         <div class="col-12 p-0 carousel-item-descriptions">
             {{ range $idx, $el := $media }}
-            <div class="row g-0 carousel-item-description" :class="isActiveHorizontal({{ $idx }})">
+            <div 
+            class="row g-0 carousel-item-description" 
+            :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+            x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
                 <div class="col-1">
                     <span class="fw-bold" x-text="(activeSlide + 1) + '/{{$asset_len}}'"></span>
                 </div>
