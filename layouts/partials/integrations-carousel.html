@@ -126,7 +126,7 @@ x-data="{
                 {{ range $idx, $elm := $media }}
                 <div 
                 id="{{add $idx 1}}-horizontal" 
-                class="carousel-item-horizontal h-100 rounded-1" 
+                class="carousel-item-horizontal h-100 rounded-1 {{if $elm.vimeo_id}}video-item{{end}}" 
                 :class="isActiveHorizontal({{ $idx }})">
                     {{ if eq $elm.media_type "image"}}
                     <img class="h-100 w-100 rounded-1" src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }}" alt="{{ $elm.image_url }}-{{add $idx 1}}" >
@@ -135,7 +135,7 @@ x-data="{
                     <img 
                     @click="playVideo()"
                     x-ref="playOverlay"
-                    class="play-overlay position-relative h-100 w-100" 
+                    class="play-overlay position-relative h-100 w-100 rounded-1" 
                     src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replace $elm.image_url "images/" "" }}" 
                     alt="">
                     <button 

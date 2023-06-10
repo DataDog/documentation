@@ -699,7 +699,9 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             .carousel-items-horizontal{
                 margin-right: 12px;
                 .carousel-item-horizontal {
-                    border: 1px solid #e2e5ed;
+                    &:not(.video-item) {
+                        border: 1px solid #e2e5ed;
+                    }
                     .play-overlay {
                         z-index: 2;
                         cursor: pointer;
