@@ -26673,7 +26673,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - monitors_read
-      summary: Get all downtimes for a monitor
+      summary: Get active downtimes for a monitor
       tags:
       - Downtimes
       x-codegen-request-body-name: body
