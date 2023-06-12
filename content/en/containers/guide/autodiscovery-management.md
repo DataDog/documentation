@@ -4,6 +4,7 @@ kind: guide
 aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management
+ - /agent/guide/autodiscovery-management
 further_reading:
 - link: "/agent/kubernetes/integrations/"
   tag: "Documentation"

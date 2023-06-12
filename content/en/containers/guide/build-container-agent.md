@@ -1,6 +1,8 @@
 ---
 title: Build Datadog Agent image
 kind: guide
+aliases:
+ - /agent/guide/build-container-agent
 ---
 
 Follow the instructions below to build the Datadog Docker Agent image for a given `<AGENT_VERSION>` Agent version (above v6.0).
