@@ -9,15 +9,15 @@ concurrency:
 ### Code freeze documentation: https://datadoghq.atlassian.net/wiki/spaces/ENG/pages/2754481240/CodeFreeze+Runbook
 
 ### To enable a freeze:
-# 1. First edit the ACTIVE_FREEZE to "true"
-# 2. Update the check-unfrozen to check-YYYYmmdd format `echo "check-$(date -u +'%Y%m%d')"`
-# 3. Update the protected main/master/prod branch in the Settings to require the new check name be required to pass
-# 4. Update this PR to change these ^ with 'codefreeze-approved' label (or MERGE-NOW)
+# 1. Set ACTIVE_FREEZE to "true".
+# 2. Change codefreeze-check-unfrozen to codefreeze-check-YYYYmmdd format `echo "check-$(date -u +'%Y%m%d')"`.
+# 3. Push the changes to the Github repo and open a PR.
+# 4. In the Github repo settings, add codefreeze-check-YYYYmmdd as a required status check for the master branch.
 
 ### To disable a freeze:
-# 1. First edit the ACTIVE_FREEZE to "false"
-# 2. Change the check name back to `check-unfrozen`
-# 3. Remove the required status check branch name requirement.
+# 1. Set ACTIVE_FREEZE to "false".
+# 2. Change codefreeze-check-YYYYmmdd to `codefreeze-check-unfrozen`.
+# 3. In the Github repo settings, remove the codefreeze-check-YYYYmmdd required status check from the master branch.
 
 on:
   pull_request:
