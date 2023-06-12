@@ -347,7 +347,7 @@ The Autodiscovery configuration can be based on container names, Kubernetes anno
 
 **Example:**
 
-This example advanced configuration is targeting a container named `my-app` running in a pod with the annotation `app=my-app`. The OpenMetrics check configuration is customized by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
+This example of advanced configuration is targeting a container named `my-app` running in a pod with the annotation `app=my-app`. The OpenMetrics check configuration is customized by enabling the `send_distribution_buckets` option and defining a custom timeout of 5 seconds.
 
 ```yaml
 - name: DD_PROMETHEUS_SCRAPE_ENABLED

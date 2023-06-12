@@ -18,22 +18,10 @@ This page walks you through how Prometheus or OpenMetrics check metrics map to e
 
 ## Prometheus and OpenMetrics metric types
 
-{{< tabs >}}
-{{% tab "Latest Version" %}}
-* `gauge`: A metric that represents a single numeric value, which can arbitrarily go up and down.
-* `counter`: A cumulative metric that represents a single monotonically increasing counter, whose value can only increase—or be reset to zero.
-* `histogram`: Samples observations and counts them in configurable buckets; also provides a sum of all observed values.
-* `summary`: Similar to `histogram`; samples observations, provides a sum of all observed values, and calculates configurable quantiles over a sliding time window.
-
-{{% /tab %}}
-{{% tab "Legacy" %}}
-
 * `counter`: A cumulative metric that represents a single monotonically increasing counter, whose value can only increase—or be reset to zero.
 * `gauge`: A metric that represents a single numeric value, which can arbitrarily go up and down.
 * `histogram`: Samples observations and counts them in configurable buckets; also provides a sum of all observed values.
 * `summary`: Similar to `histogram`; samples observations, provides a sum of all observed values, and calculates configurable quantiles over a sliding time window.
-{{% /tab %}}
-{{< /tabs >}}
 
 ## How Prometheus/OpenMetrics metrics map to Datadog metrics
 
@@ -48,13 +36,6 @@ For more information, see [OpenMetrics Metric Types][2] and [Datadog Metric Type
 ### Counter
 
 [Prometheus/OpenMetrics `counter`][102] is mapped to Datadog's `count`.
-
-### StateSet
-
-TBD.
-
-### Info
-TBD.
 
 ### Histogram
 
