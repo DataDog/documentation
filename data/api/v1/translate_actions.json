@@ -838,6 +838,10 @@
     "request_description": "Details of the private location to be updated.",
     "request_schema_description": "Object containing information about the private location to create."
   },
+  "GetSyntheticsDefaultLocations": {
+    "description": "Get the default locations settings.",
+    "summary": "Get the default locations"
+  },
   "ListTests": {
     "description": "Get the list of all Synthetic tests.",
     "summary": "Get the list of all Synthetic tests"
