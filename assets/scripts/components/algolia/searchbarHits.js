@@ -89,7 +89,6 @@ const renderHits = (renderOptions, isFirstRender) => {
             .map((item) => {
                 const hit = getHitData(item);
                 const displayContent = truncateContent(hit.content_snippet_match_level === "full" ? hit.content_snippet : hit.content, 145);
-                console.log(hit.content_snippet_match_level);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
                 const section_header = (hit.section_header) ? `&raquo; ${hit.section_header}` : ""
 
