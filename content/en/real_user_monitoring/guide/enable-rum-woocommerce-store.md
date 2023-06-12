@@ -19,19 +19,19 @@ Understanding how customers interact with your web pages is crucial to the succe
 1. Log in your WordPress administration panel.
 2. Under **Plugins**, click on **Add New**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-1.png" alt="Enable RUM on your WooCommerce store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-1.png" alt="Enable RUM on your WooCommerce store" style="width:40%;">}}
 
 3. Search for **WPCode** and click on **Install Now**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-2.png" alt="Enable RUM on your WooCommerce store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-2.png" alt="Enable RUM on your WooCommerce store" style="width:60%;">}}
 
 4. Once installed, click on **Activate**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-3.png" alt="Enable RUM on your WooCommerce store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-3.png" alt="Enable RUM on your WooCommerce store" style="width:60%;">}}
 
 5. You will now see a **Code Snippets** section in your WordPress menu, click on **Header & Footer**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-4.png" alt="Enable RUM on your WooCommerce store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-4.png" alt="Enable RUM on your WooCommerce store" style="width:25%;">}}
 
 6. Initialise the Browser RUM SDK by adding the SDK code snippet inside the **Header** section and save the changes by clicking on the **Save** button. For more information about which installation method to choose, you can refer to the [RUM Browser Monitoring documentation][1].
 

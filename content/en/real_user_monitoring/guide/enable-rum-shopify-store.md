@@ -19,11 +19,11 @@ Understanding how customers interact with your web pages is crucial to the succe
 1. Log in your Shopify administration panel.
 2. Under **Sales channels**, click on **Online Store**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Enable RUM on your Shopify store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Enable RUM on your Shopify store" style="width:40%;">}}
 
 3. This will open up a new menu, click on **Themes**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-2.png" alt="Enable RUM on your Shopify store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-2.png" alt="Enable RUM on your Shopify store" style="width:40%;">}}
 
 4. Click on the **Edit code** button for your current theme.
 
@@ -31,7 +31,7 @@ Understanding how customers interact with your web pages is crucial to the succe
 
 5. Under the **Layout** directory, you will find the main file of your theme **theme.liquid**. Click on the file in order to edit it. 
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-4.png" alt="Enable RUM on your Shopify store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-4.png" alt="Enable RUM on your Shopify store" style="width:40%;">}}
 
 6. Initialise the Browser RUM SDK by adding the SDK code snippet inside the `<head>` tag. For more information about which installation method to choose, you can refer to the [RUM Browser Monitoring documentation][1].
 
@@ -346,7 +346,7 @@ Understanding how customers interact with your web pages is crucial to the succe
 
 7. Save the changes by clicking on the **Save** button.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-6.png" alt="Enable RUM on your Shopify store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-6.png" alt="Enable RUM on your Shopify store" style="width:75%;">}}
 
 If needed, more information regarding theme code's editing can be found in [Shopify's documentation][2].
 

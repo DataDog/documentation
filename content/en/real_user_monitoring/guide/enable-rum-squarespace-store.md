@@ -18,15 +18,15 @@ Understanding how customers interact with your web pages is crucial to the succe
 
 1. Log in your Squarespace administration panel and click on **Settings**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Enable RUM on your Squarespace store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Enable RUM on your Squarespace store" style="width:40%;">}}
 
 2. Under **Settings**, click on **Advanced**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Enable RUM on your Squarespace store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Enable RUM on your Squarespace store" style="width:40%;">}}
 
 3. This will open up a new menu, click on **Code Injection**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Enable RUM on your Squarespace store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Enable RUM on your Squarespace store" style="width:40%;">}}
 
 4. Initialise the Browser RUM SDK by adding the SDK code snippet inside the **Header** section. For more information about which installation method to choose, you can refer to the [RUM Browser Monitoring documentation][1].
 
@@ -341,7 +341,7 @@ Understanding how customers interact with your web pages is crucial to the succe
 
 5. Save the changes by clicking on the **Save** button.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Enable RUM on your Squaresapce store" >}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Enable RUM on your Squaresapce store" style="width:60%;">}}
 
 If needed, more information regarding code injection can be found in [Squarespace's documentation][2].
 
