@@ -91,7 +91,7 @@ The following RUM capabilities are supported relative to each platform:
 | Track Events in WebViews | iOS, Android, Flutter, React Native | |
 | Monitor platform-specific vitals | Browser, iOS, Android, Flutter, React Native | |
 | Global attribute tracking in Logs  | Browser |  |
-| Client side tracking | iOS, Android | |
+| Client side tracing | iOS, Android | |
 | Session Replay | Browser | |
 | Heatmaps | Browser | |
 | Frustration signals | Browser, iOS (partially supported), Android (partially supported), Flutter (partially supported), React Native (partially supported) | |
