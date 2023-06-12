@@ -57,7 +57,7 @@ The top list includes the top ten browsers used to visit the Shopist website ove
 
 ## Nested tables
 
-Visualize the top values from up to three [facet][5] according to your chosen [measure][5] (the first measure you choose in the list) and display the value of additional measures for elements that appear in the table. Update the search query or investigate the RUM events corresponding to either dimension.
+Visualize the top values from up to three [facets][5] according to your chosen [measure][5] (the first measure you choose in the list) and display the value of additional measures for elements that appear in the nested table. Update the search query or investigate the RUM events corresponding to either dimension.
 
 * When there are multiple measures, the top or bottom list is determined according to the first measure.
 * The subtotal may differ from the actual sum of values in a group since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
@@ -76,13 +76,28 @@ You can display the distribution of measure attributes over the selected time fr
 
 The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page. 
 
-## Geomap
+## Geomaps
 
 Visualize a single [measure][5] (or a [facet][5] unique count of values) on the world map.
 
 {{< img src="real_user_monitoring/explorer/visualize/geomap-1.png" alt="Geographical map in the RUM Explorer" style="width:90%;">}}
 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
+
+## Funnels
+Learn about [funnel analysis][].
+## Tree Maps
+A tree map helps you organize and show data as a percentage of a whole in a visually appealing format. Tree maps display data in nested rectangles. Compare different dimensions using both size and colors of the rectangles. You can also select multiple attributes to view a hierarchy of rectangles.
+
+The following tree map shows the percentage breakdown by **View Name**.
+
+{{< img src="real_user_monitoring/explorer/visualize/tree-map.png" alt="Tree map in the RUM Explorer" style="width:90%;">}}
+## Pie charts
+A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, countries, etc. within your log data.
+
+The following pie chart shows the percentage breakdown by **View Path**.
+
+{{< img src="real_user_monitoring/explorer/visualize/pie-chart.png" alt="Pie chart in the RUM Explorer" style="width:90%;">}}
 
 ## Related events
 
