@@ -49,7 +49,24 @@ For example:
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-The Datadog Operator enables the Process Agent by default.
+The Datadog Operator enables the Process Agent by default. 
+
+For verification, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  features:
+    liveContainerCollection:
+      enabled: true
+```
 
 {{% /tab %}}
 {{% tab "Helm" %}}
