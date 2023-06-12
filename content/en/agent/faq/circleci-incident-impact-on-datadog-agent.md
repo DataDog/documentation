@@ -128,7 +128,7 @@ Hosts can no longer install:
 
 ## What Datadog is doing
 
-We released a **new Agent 5 RPM** for CentOS/RHEL, [5.32.9-1][5], signed with the [current RPM signing key][6], `C6559B690CA882F023BDF3F63F4D1729FD4BF915`. The RPM is available through the [Agent 5 RPM repository][7].
+We released a **new Agent 5 RPM** for CentOS/RHEL, [5.32.9-1][5], signed with the [current RPM signing key][6], `7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3`. The RPM is available through the [Agent 5 RPM repository][7].
 
 We released new versions of **Agent installation methods** to ensure they make hosts safe by explicitly removing the affected key from the RPM database and the Datadog repo file:
   * [Datadog Ansible role][8] release [4.18.0][9]

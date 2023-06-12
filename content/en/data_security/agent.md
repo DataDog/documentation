@@ -21,9 +21,11 @@ The official repositories and binary packages of the Agent are signed. Verify th
 - Linux DEB packages and repo metadata:
   - [A2923DFF56EDA6E76E55E492D3A80E30382E94DE][3]
   - [D75CEA17048B9ACBF186794B32637D44F14F620E][4]
+  - [5F1E256061D813B125E156E8E6266D4AC0962C7D][5]
 - Linux RPM packages and repo metadata:
-  - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
+  - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][7]
+  - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][8]
 - Windows MSI:
   - DigiCert certificate fingerprint `21fe8679bdfb16b879a87df228003758b62abf5e`
 - MacOS PKG:
@@ -37,11 +39,11 @@ The Datadog Agent submits data to Datadog over a TLS-encrypted TCP connection by
 
 ## Networking and proxying
 
-Datadog is a SaaS product: you need to establish an outbound connection from your network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog from TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][7] page for more information on configuring firewalls to allow list the required Datadog domains and ports. Additionally, if you want to monitor hosts with no direct connectivity to the public internet, or with restricted outbound traffic, consider submitting monitoring data from a [proxy][8].
+Datadog is a SaaS product: you need to establish an outbound connection from your network to the public internet in order to submit monitoring data. Traffic is always initiated by the Agent to Datadog from TLS-encrypted TCP connection by default. No sessions are ever initiated from Datadog back to the Agent. See the Agent's [Network][9] page for more information on configuring firewalls to allow list the required Datadog domains and ports. Additionally, if you want to monitor hosts with no direct connectivity to the public internet, or with restricted outbound traffic, consider submitting monitoring data from a [proxy][10].
 
 ## Agent logs obfuscation
 
-The Datadog Agent generates local logs in order to support [Agent troubleshooting][9] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (for example, API key, password, and token keywords), which are then obfuscated before being written to disk.
+The Datadog Agent generates local logs in order to support [Agent troubleshooting][11] as required. As a safety precaution, these local logs are filtered for some specific keywords and patterns that could indicate a potential credential (for example, API key, password, and token keywords), which are then obfuscated before being written to disk.
 
 ## Local HTTPS server
 
@@ -55,13 +57,13 @@ Agent v6/7 comes bundled with a Graphical User Interface (GUI) by default, which
 
 Datadog's Vulnerability Management program includes regular assessments of supporting infrastructure and application components, including active scans of core supporting services. Datadog Security teams perform monthly scans to identify configuration and software vulnerabilities, and track remediation of findings according to Datadog's Vulnerability Management policy.
 
-Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][10] and [snyk.io][11]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][12], as well as the [Red Hat Container Catalog][13]. In addition to Datadog's internal Vulnerability Management program, Datadog also partners with container security vendors.
+Regarding its Container Agent specifically, Datadog performs regular vulnerability static analysis using [clair by CoreOS][12] and [snyk.io][13]. Additionally, Datadog leverages security scanning as part of its releases of the Container Agent to the [Docker Trusted Registry][14], as well as the [Red Hat Container Catalog][15]. In addition to Datadog's internal Vulnerability Management program, Datadog also partners with container security vendors.
 
-If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][14] and we will get back to you within 24 hours. Datadog's [PGP key][15] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
+If you believe you've discovered a bug in Datadog's security, get in touch at [security@datadoghq.com][16] and we will get back to you within 24 hours. Datadog's [PGP key][17] is available for download in case you need to encrypt communications with us. We request that you not publicly disclose the issue until we have had a chance to address it.
 
 ## Running as an unprivileged user
 
-By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][16]. The exceptions are as follows:
+By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentuser` account on [Windows][18]. The exceptions are as follows:
 
 - The `system-probe` runs as `root` on Linux and as `LOCAL_SYSTEM` on Windows.
 - The `process-agent` runs as `LOCAL_SYSTEM` on Windows.
@@ -69,9 +71,9 @@ By default, the Agent runs as the `dd-agent` user on Linux and as the `ddagentus
 
 ## Secrets management
 
-If you have a requirement to avoid storing secrets in plaintext in the Agent's configuration files, you can leverage the [secrets management][17] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. You can design your executable according to your preferred key management service, authentication method, and continuous integration workflow.
+If you have a requirement to avoid storing secrets in plaintext in the Agent's configuration files, you can leverage the [secrets management][19] package. This package allows the Agent to call a user-provided executable to handle retrieval or decryption of secrets, which are then loaded in memory by the Agent. You can design your executable according to your preferred key management service, authentication method, and continuous integration workflow.
 
-For more information, see the [Secrets Management][18] documentation.
+For more information, see the [Secrets Management][20] documentation.
 
 ### Further Reading
 
@@ -81,17 +83,19 @@ For more information, see the [Secrets Management][18] documentation.
 [2]: /api/
 [3]: https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public
 [4]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
-[5]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+[5]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-[7]: /agent/faq/network/
-[8]: /agent/proxy/
-[9]: /agent/troubleshooting/
-[10]: https://coreos.com/clair
-[11]: https://snyk.io
-[12]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides
-[13]: https://access.redhat.com/containers
-[14]: mailto:security@datadoghq.com
-[15]: https://www.datadoghq.com/8869756E.asc.txt
-[16]: /agent/faq/windows-agent-ddagent-user/
-[17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[18]: /agent/guide/secrets-management/
+[7]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
+[8]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
+[9]: /agent/faq/network/
+[10]: /agent/proxy/
+[11]: /agent/troubleshooting/
+[12]: https://coreos.com/clair
+[13]: https://snyk.io
+[14]: https://docs.docker.com/v17.09/datacenter/dtr/2.4/guides
+[15]: https://access.redhat.com/containers
+[16]: mailto:security@datadoghq.com
+[17]: https://www.datadoghq.com/8869756E.asc.txt
+[18]: /agent/faq/windows-agent-ddagent-user/
+[19]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
+[20]: /agent/guide/secrets-management/
