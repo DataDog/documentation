@@ -41,7 +41,7 @@ draft: false
 git_integration_title: sqlserver
 integration_id: sql-server
 integration_title: SQL Server
-integration_version: 11.2.1
+integration_version: 11.2.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
