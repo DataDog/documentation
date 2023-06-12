@@ -96,6 +96,23 @@ The following RUM capabilities are supported relative to each platform:
 | Heatmaps | Browser | |
 | Frustration signals | Browser, iOS (partially supported), Android (partially supported), Flutter (partially supported), React Native (partially supported) | |
 
+| Feature                               | Browser | Android | Flutter | iOS     | React Native | Roku | Notes |
+| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
+| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
+| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** only supports manual action tracking. |
+| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - For **Flutter**, only Error Tracking is supported <br> - Only partially supported for React Native |
+| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Global attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
+| Client side tracing |  | | {{< X >}}  |  | {{< X >}} |  |  |  |
+| Session Replay | {{< X >}} |  |  |  |  |  |  |
+| Heatmaps | {{< X >}} |  |  |  |  |  |  |
+| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all mobile and Roku devices |
+
 ## Supported endpoints for SDK domains
 
 All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
