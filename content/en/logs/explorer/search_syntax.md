@@ -77,6 +77,18 @@ Examples:
 | `@http.url:\/api\/v1\/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api/v1/`                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
 
+### Search using CIDR notation
+Classless Inter Domain Routing (CIDR) is a notation that allows users to define a range of IP addresses (also called CIDR block) succinctly. It is most commonly used to define a network (such as a VPC) or a sub-network(Such as Public/Private Subnet within a VPC).
+
+Users can use “CIDR()” function to query attributes in logs using CIDR notation. The CIDR() function needs to be passed in an log attribute as a parameter to filter against followed by one or multiple CIDR blocks. 
+
+Examples
+1. `CIDR(@network.client.ip,13.0.0.0/8)` would match and filter logs that have ip addresses in the field `network.client.ip` that fall under the 13.0.0.0/8 CIDR block
+2. `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` would match and filter logs that have any ip addresses in an array attribute `network.ip.list` that fall under the 13.0.0.0/8 **OR** 15.0.0.0/8 CIDR block
+
+CIDR() function supports both IPv4 and IPv6 CIDR notations and works in Log Explorer, Live Tail, Log widgets in Dashboards, Log monitors and Log configurations.
+
+
 ## Wildcards
 
 ### Multi-character wildcard
