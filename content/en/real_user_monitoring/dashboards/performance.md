@@ -2,8 +2,10 @@
 title: RUM Performance Overview Dashboards
 kind: documentation
 aliases:
-- '/real_user_monitoring/performance_overview_dashboard/'
+- '/real_user_monitoring/dashboards/performance_overview_dashboard/'
 - '/real_user_monitoring/dashboards/resources_dashboard'
+- '/real_user_monitoring/dashboards/mobile_dashboard'
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
