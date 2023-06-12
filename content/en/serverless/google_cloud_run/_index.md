@@ -226,7 +226,7 @@ Follow [these instructions][2] to install and configure the Go tracing library i
 
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[2]: /tracing/trace_collection/dd_libraries/go/?tab=containers#instrument-your-application
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
