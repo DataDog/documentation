@@ -55,22 +55,12 @@ After you configure your CI pipelines to run the Datadog Static Analyzer, violat
 
 Each violation is associated with a specific commit and branch from your repository on which the CI pipeline ran. The rows represent every violation per commit. 
 
-{{< img src="monitors/incidents/TODO.png" alt="Static Analysis results list view" style="width:80%;">}}
-
 Click on a violation to open a side panel that contains information about the scope of the violation and where it originated. 
 
 The content of the violation is shown in tabs:
 
-* Source Code: A description of the violation and the lines of code that caused it. 
-
-  To see the offending code snippet, configure the [Datadog GitHub App][4].
-  
-  {{< img src="monitors/incidents/TODO.png" alt="Static Analysis result Source Code Tab" style="width:80%;">}}
-
+* Source Code: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
 * Fix: Where possible, one or more code fixes that can resolve the violation, which you can copy and paste.
-
-  {{< img src="monitors/incidents/TODO.png" alt="Static Analysis result Fix Tab" style="width:80%;">}}
-
 * Event: JSON metadata regarding the the Static Analysis violation event.
 
 ## Further Reading
