@@ -85,7 +85,7 @@ Visualize a single [measure][5] (or a [facet][5] unique count of values) on the 
 The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
 
 ## Funnels
-Learn about [funnel analysis][].
+Learn about [funnel analysis][9].
 ## Tree Maps
 A tree map helps you organize and show data as a percentage of a whole in a visually appealing format. Tree maps display data in nested rectangles. Compare different dimensions using both size and colors of the rectangles. You can also select multiple attributes to view a hierarchy of rectangles.
 
@@ -101,7 +101,7 @@ The following pie chart shows the percentage breakdown by **View Path**.
 
 ## Related events
 
-For all visualizations besides the [funnel](#funnel), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
+For all visualizations besides the [funnel](#funnels), select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
 
 {{< img src="real_user_monitoring/explorer/visualize/related_events-1.png" alt="Related events link available when you click on the graph" width="90%" >}}
 
@@ -121,3 +121,4 @@ For the remaining visualization options, click on the graph and click **View eve
 [6]: /notebooks
 [7]: /real_user_monitoring/explorer/export/
 [8]: /dashboards/widgets/list/
+[9]: /real_user_monitoring/funnel_analysis
