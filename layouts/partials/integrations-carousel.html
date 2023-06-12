@@ -13,7 +13,6 @@ x-data="{
     activeBtnOffsetTop: 0,
     isScrollable: {{$isScrollableCarousel}},
     verticalCarouselEl: {},
-    verticalCarouselElScrollTop: 0,
     navigateCarousel (direction) {
         // pause any video in the carousel that could be playing
         this.pauseVideo()
@@ -48,9 +47,6 @@ x-data="{
         // navigate vertical carousel. everything is offset by -206px. i need to navigate by 103px 
         this.verticalCarouselEl.scrollTop = this.activeSlide * this.distanceConstant
 
-        // track scrollTop position on mobile
-        this.verticalCarouselElScrollTop = this.activeSlide * this.distanceConstant
-
         if(endReached){
             this.verticalCarouselEl.style.scrollBehavior = 'smooth'
         }
@@ -67,7 +63,12 @@ x-data="{
     },
     navigateVerticalNavOnResize (carouselVertEl) {
         // assign vertical carousel position on resize
-        this.verticalCarouselEl.scrollTop = this.verticalCarouselElScrollTop
+        if(this.isScrollable){
+            this.verticalCarouselEl.style.scrollBehavior = 'auto'
+            this.verticalCarouselEl.scrollTop = this.activeSlide * this.distanceConstant
+            this.distanceConstant = carouselVertEl.children[1].offsetTop
+            this.verticalCarouselEl.style.scrollBehavior = 'smooth'
+        }
     },
     shouldShowActiveHorizontalSlide (idx) {
         return idx === this.activeSlide
@@ -83,7 +84,7 @@ x-data="{
         // sets the distance from middle btn to top of vertical carousel as a constant
         if(this.isScrollable){
             this.distanceConstant = carouselVertEl.children[1].offsetTop
-            if(!carouselVertEl.scrollTop){
+            if(window.innerWidth < 768){
                 // if in mobile view on page load
                 this.distanceConstant = 103
             }
@@ -91,7 +92,6 @@ x-data="{
     },
     setVerticalCarouselEl (carouselVertEl) {
         this.verticalCarouselEl = carouselVertEl
-        this.verticalCarouselElScrollTop = carouselVertEl.scrollTop
     },
     setActiveBtnOffsetTop () {
         // if the item is not scrollable or if in mobile

@@ -683,10 +683,16 @@ $screen-md-max: ($screen-lg-min - 1) !default;
         font-size: 16px;
     }
     .carousel-top-row{
-        height: 194px;
+        min-height: 194px;
         margin-bottom: 12px;
         @media(min-width: 768px){
             height: 297px;
+        }
+        @media(min-width: 992px){
+            height: 200px;
+        }
+        @media(min-width: 1200px){
+            height: 326px;
         }
 
         .carousel-asset-horizontal:hover{
@@ -764,7 +770,6 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             .carousel-item-vertical {
                 background-size: cover;
                 height: 91px;
-                // width: 182px;
                 margin-top: 12px;
                 margin-bottom: 12px;
                 border: solid 2px #e2e5ed;
@@ -773,6 +778,14 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 }
                 &.active, &:hover{
                     border: solid 2px #006bc2;
+                }
+                @media(min-width: 992px){
+                    height: 58px;
+                }
+                @media(min-width: 1200px){
+                    height: 98px;
+                    margin-top: 16px;
+                    margin-bottom: 16px;
                 }
             }
         }
