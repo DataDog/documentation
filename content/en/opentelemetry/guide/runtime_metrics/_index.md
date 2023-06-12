@@ -7,7 +7,7 @@ aliases:
 
 ## Overview
 
-Runtime metrics are application metrics that collect information about memory usage, garbage collection, or parallelization. Datadog provides [runtime metrics collection](https://docs.datadoghq.com/tracing/metrics/runtime_metrics/) with the officially supported Datadog native libraries. OpenTelemetry (OTel) has also started adding the collection of runtime metrics which can be sent to Datadog through OTel SDKs.
+Runtime metrics are application metrics about memory usage, garbage collection, or parallelization. Datadog provides [runtime metrics collection](https://docs.datadoghq.com/tracing/metrics/runtime_metrics/) with the officially supported Datadog native libraries. OpenTelemetry (OTel) has also started adding the collection of runtime metrics which can be sent to Datadog through OTel SDKs.
 
 Datadog supports OTel runtime metrics in the following languages:
 - [Java][1]
@@ -23,7 +23,7 @@ The following conventions are used for runtime metric prefixes:
 | --- | --- | --- |
 | <code>process.runtime.<sup>*</sup></code> | <code>otel.process.runtime.<sup>*</sup></code> | <code>runtime.dotnet.<sup>*</sup></code> |
 
-**Note**: OTel runtime metrics are mapped to Datadog by metric name. We do not recommend host metrics mapping renaming of OTel runtime metrics, as this is a breaking change for this feature.
+**Note**: OTel runtime metrics are mapped to Datadog by metric name. It is not recommended to do host metrics mapping renaming for OTel runtime metrics, as this is a breaking change for this feature.
 
 ## Setup
 

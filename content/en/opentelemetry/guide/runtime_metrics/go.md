@@ -12,7 +12,7 @@ OpenTelemetry (OTel) Go applications can be instrumented [manually](https://open
 
 ## Runtime metric mappings
 
-This table lists all of the Datadog runtime metrics that are supported by mapping OTel runtime metrics. At the bottom, metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
+This table lists all of the Datadog runtime metrics that are supported by mapping OTel runtime metrics. Metrics with a N/A OTel counterpart are metrics that don't have mappings because there is no OTel counterpart yet.
 
 | Datadog metric | Description |  OTel counterpart |
 | --- | --- | --- |
