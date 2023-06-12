@@ -13665,6 +13665,14 @@ components:
           description: URL attached to the metrics.
           type: string
       type: object
+    SyntheticsDefaultLocations:
+      description: List of Synthetics default locations settings.
+      example:
+      - aws:eu-west-3
+      items:
+        description: Name of the location.
+        type: string
+      type: array
     SyntheticsDeleteTestsPayload:
       description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
 
@@ -29172,6 +29180,30 @@ paths:
       x-menu-order: 24
       x-undo:
         type: idempotent
+  /api/v1/synthetics/settings/default_locations:
+    get:
+      description: Get the default locations settings.
+      operationId: GetSyntheticsDefaultLocations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsDefaultLocations'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_default_settings_read
+      summary: Get the default locations
+      tags:
+      - Synthetics
+      x-menu-order: 28
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests.

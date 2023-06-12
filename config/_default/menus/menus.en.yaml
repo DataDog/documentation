@@ -7006,6 +7006,18 @@ api:
         - ListTests
       unstable: []
       order: 10
+  - name: Get the default locations
+    url: '#get-the-default-locations'
+    identifier: synthetics-get-the-default-locations
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsDefaultLocations
+      unstable: []
+      order: 28
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: synthetics-edit-a-private-location
