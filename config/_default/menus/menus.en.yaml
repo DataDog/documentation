@@ -196,7 +196,7 @@ main:
     parent: essentials_heading
     weight: 15000
   - name: Guides
-    url: guides/
+    url: all_guides/
     pre: compass
     identifier: guides
     parent: essentials_heading
