@@ -17,10 +17,10 @@ further_reading:
   tag: 'Documentation'
   text: 'Troubleshoot Continuous Testing and CI/CD'
 - link: 'https://www.datadoghq.com/blog/release-confidently-with-datadog-continuous-testing/'
-  tag: 'blog'
+  tag: 'Blog'
   text: 'Use Datadog Continuous Testing to release with confidence'
 - link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
-  tag: 'blog'
+  tag: 'Blog'
   text: 'Best practices for continuous testing with Datadog'
 ---
 
@@ -30,7 +30,7 @@ Datadog Continuous Testing offers a set of tools that enable you to automate sof
 
 ## Test with ease and speed
 
-Use scalable features such as a [codeless web recorder][2], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team.
+Use scalable features such as a codeless [web recorder][2], [mobile application recorder][15], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team.
 
 {{< img src="continuous_testing/continuous_testing_selection.png" alt="Choose between running your tests sequentially and customizing the number of tests you want to run at the same time in the Continuous Testing Settings page" style="width:100%;">}}
 
@@ -39,7 +39,7 @@ With support for multiple protocols, frameworks, and APIs—including gRPC and W
 
 ## Improve test reliability 
 
-Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2].
+Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile tests, and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16].
 
 ## Increase efficiency through seamless integrations
 
@@ -80,3 +80,5 @@ Once you have configured some [Synthetic tests][4], see the documentation for yo
 [12]: /synthetics/apm/
 [13]: https://app.datadoghq.com/synthetics/create#
 [14]: /continuous_testing/cicd_integrations/configuration
+[15]: /mobile_testing/mobile_tests
+[16]: /mobile_testing/
