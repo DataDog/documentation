@@ -1,11 +1,9 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/advanced_configuration.md
 description: Flutter Monitoring の構成について説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter ソースコード
+  text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの調査方法
@@ -29,7 +27,7 @@ RUM のデフォルト属性に加えて、`DdRum.addTiming` を使用して、�
 ```dart
 void _onHeroImageLoaded() {
     DatadogSdk.instance.rum?.addTiming("hero_image");
-} 
+}
 ```
 
 一度設定したタイミングは `@view.custom_timings.<timing_name>` としてアクセス可能です。例えば、`@view.custom_timings.hero_image` のようになります。
@@ -70,7 +68,7 @@ void _downloadResourceTapped(String resourceName) {
 // ネットワーククライアントで
 
 DatadogSdk.instance.rum?.startResourceLoading(
-    "resource-key", 
+    "resource-key",
     RumHttpMethod.get,
     url,
 );
@@ -125,7 +123,7 @@ RUM セッションにユーザー情報を追加すると、次のことが簡�
 | `usr.name`  | 文字列 | RUM UI にデフォルトで表示されるユーザーフレンドリーな名前。                                                  |
 | `usr.email` | 文字列 | ユーザー名が存在しない場合に RUM UI に表示されるユーザーのメール。Gravatar をフェッチするためにも使用されます。 |
 
-ユーザーセッションを識別するには、`DatadogSdk.setUserInfo` を使用します。
+ユーザーセッションを識別するには、`DdRum.setUserInfo` を使用します。
 
 例:
 
@@ -134,6 +132,8 @@ DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
 ```
 
 ## RUM イベントの変更または削除
+
+**注**: この機能は、Flutter で構築された Web アプリケーションではまだ利用できません。
 
 Datadog に送信される前に RUM イベントの属性を変更したり、イベントを完全に削除したりするには、Flutter RUM SDK を構成するときに Event Mappers API を使用します。
 
@@ -156,7 +156,7 @@ final config = DdSdkConfiguration(
 例えば、RUM Resource の `url` に含まれる機密情報をリダクティングするには、カスタム `redacted` 関数を実装して、`rumResourceEventMapper` で使用します。
 
 ```dart
-    rumResourceEventMapper = (event) { 
+    rumResourceEventMapper = (event) {
         var resourceEvent = resourceEvent
         resourceEvent.resource.url = redacted(resourceEvent.resource.url)
         return resourceEvent
@@ -170,23 +170,25 @@ final config = DdSdkConfiguration(
 
 | イベントタイプ       | 属性キー                     | 説明                                   |
 |------------------|-----------------------------------|-----------------------------------------------|
-| RumViewEvent     | `viewEvent.view.name`             | ビューの名前。                             |
+| RumViewEvent     | `viewEvent.view.name`             | ビューの名前。1                            |
 |                  | `viewEvent.view.url`              | ビューの URL。                              |
 |                  | `viewEvent.view.referrer`         | ビューの参照元。                         |
 | RumActionEvent   | `actionEvent.action.target?.name` | アクションの名前。                           |
-|                  | `actionEvent.view.name`           | このアクションにリンクしているビューに名前を付けます。          |
+|                  | `actionEvent.view.name`           | このアクションにリンクしているビューに名前を付けます。1         |
 |                  | `actionEvent.view.referrer`       | このアクションにリンクしているビューの参照元。   |
 |                  | `actionEvent.view.url`            | このアクションにリンクされているビューの URL。        |
 | RumErrorEvent    | `errorEvent.error.message`        | エラーメッセージ。                                |
 |                  | `errorEvent.error.stack`          | エラーのスタックトレース。                      |
 |                  | `errorEvent.error.resource?.url`  | エラーが参照するリソースの URL。      |
-|                  | `errorEvent.view.name`            | このアクションにリンクしているビューに名前を付けます。          |
+|                  | `errorEvent.view.name`            | このアクションにリンクしているビューに名前を付けます。1         |
 |                  | `errorEvent.view.referrer`        | このアクションにリンクしているビューの参照元。   |
 |                  | `errorEvent.view.url`             | このエラーにリンクされているビューの URL。         |
 | RumResourceEvent | `resourceEvent.resource.url`      | リソースの URL。                          |
-|                  | `resourceEvent.view.name`         | このアクションにリンクしているビューに名前を付けます。          |
+|                  | `resourceEvent.view.name`         | このアクションにリンクしているビューに名前を付けます。1         |
 |                  | `resourceEvent.view.referrer`     | このアクションにリンクしているビューの参照元。   |
 |                  | `resourceEvent.view.url`          | このリソースにリンクされているビューの URL。      |
+
+1 イベントマッパーでビュー名を変更することができますが、ビュー名の変更方法としては非推奨です。代わりに、[`DatadogNavigationObserver`][7] の`viewInfoExtractor`  パラメーターを使用してください。
 
 ## トラッキングの同意を設定（GDPR と CCPA の遵守）
 
@@ -204,22 +206,6 @@ Flutter RUM SDK の初期化後に追跡同意値を変更するには、`Datado
 
 同様に、値を `TrackingConsent.pending` から `TrackingConsent.notGranted` に変更すると、Flutter RUM SDK はすべてのデータを消去し、今後データを収集しないようにします。
 
-## RUM セッションのサンプリング
-
-アプリケーションが Datadog RUM に送信するデータを制御するには、[Flutter RUM SDK を初期化][2]し、RUM セッションのサンプリングレートを 0～100 の間に指定します。
-
-たとえば、セッションの使用の 50% のみを維持するには、
-
-```dart
-final config = DdSdkConfiguration(
-    // 他の構成...
-    rumConfiguration: RumConfiguration(
-        applicationId: '<YOUR_APPLICATION_ID>',
-        sessionSamplingRate: 50.0,
-    ),
-);
-```
-
 ## デバイスがオフラインの時のデータ送信
 
 RUM では、ユーザーのデバイスがオフラインのときにもデータを確実に利用できます。ネットワークの状態が悪いエリアやデバイスのバッテリーが非常に少ないなどの場合でも、すべての RUM イベントは最初にローカルデバイスにバッチで格納されます。ネットワークが利用可能で、Flutter RUM SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドで実行している状態でネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
@@ -233,8 +219,9 @@ RUM では、ユーザーのデバイスがオフラインのときにもデー�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/#setup
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/data_collected
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[2]: /ja/real_user_monitoring/flutter/#setup
+[3]: /ja/real_user_monitoring/flutter/data_collected
+[4]: /ja/real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [5]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
+[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogNavigationObserver-class.html

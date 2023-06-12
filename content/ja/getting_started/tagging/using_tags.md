@@ -152,9 +152,9 @@ title: タグの使用方法
 
 * 対応するメトリクスをモニター範囲から削除する **excluding** テキストボックス。
 
-* モニターを各タグ値で複数警告モニターに変換する **avg by** テキストボックス。
+* 各タグ値に対するマルチアラートモニターに変換する **avg by** テキストボックス。
 
-[1]: /ja/monitors/create/#monitor-types
+[1]: /ja/monitors/types
 {{% /tab %}}
 {{% tab "Manage Downtime" %}}
 
@@ -237,14 +237,14 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{% tab "トレースエクスプローラー" %}}
 
-[トレース検索][1]では、検索バーまたはファセットのチェックボックスを使用して、タグでトレースを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[トレース検索][2]のページを参照してください。
+[トレースエクスプローラー][1]では、検索バーやファセットチェックボックスを使用して、タグでトレースをフィルターすることができます。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `service:coffee-house` のようになります。高度な検索については、[クエリ構文][2]を参照してください。
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="トレース検索タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="トレースエクスプローラータグ" style="width:80%;">}}
 
-[1]: /ja/tracing/app_analytics/search/
-[2]: /ja/tracing/app_analytics/search/#search-bar
+[1]: /ja/tracing/trace_explorer/search/
+[2]: /ja/tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -325,18 +325,18 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /ja/synthetics/search/
 {{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{% tab "エクスプローラー" %}}
 
-[CI Results Explorer][1] は、[CI パイプライン][2]で実行されているブラウザテスト結果を表示します。
+[Synthetic Monitoring & Continuous Testing Explorer][1] は、[CI パイプライン][2]内のテスト実行や実行のバッチを表示します。
 
-テスト実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:github` のようになります。詳細な検索については、[Synthetic テストの検索と管理][3]を参照してください。
+テスト実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:github` のようになります。詳細な検索については、[テストバッチを検索する][3]を参照してください。
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics と CI タグ" style="width:80%;">}}
 
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /ja/synthetics/cicd_integrations
-[3]: /ja/synthetics/search/
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /ja/continuous_testing/cicd_integrations
+[3]: /ja/continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -363,7 +363,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="メトリクスベースの SLO タグ" style="width:80%;">}}
 
-[1]: /ja/monitors/service_level_objectives/metric/
+[1]: /ja/service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
@@ -371,7 +371,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="モニターベースの SLO タグ" style="width:80%;">}}
 
-[1]: /ja/monitors/service_level_objectives/monitor/
+[1]: /ja/service_management/service_level_objectives/monitor/
 [2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
@@ -402,7 +402,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/
-[2]: /ja/events/explorer
+[2]: /ja/service_management/events/explorer
 [3]: /ja/integrations/
 [4]: /ja/infrastructure/hostmap/
 [5]: /ja/infrastructure/

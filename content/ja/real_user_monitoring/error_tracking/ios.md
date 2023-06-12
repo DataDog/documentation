@@ -5,7 +5,7 @@ description: iOS プロジェクトにエラー追跡を設定します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: ブログ
   text: iOS のクラッシュレポートとエラー追跡のご紹介

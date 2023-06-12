@@ -8,6 +8,9 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Understand APM terminology'
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 

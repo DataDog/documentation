@@ -13,7 +13,7 @@ title: Continuous Testing と Datadog CI Azure DevOps 拡張機能
 
 ## 概要
 
-Datadog CI Azure DevOps 拡張機能を使用すると、Azure パイプラインの構成内で Synthetic テストを実行し、Azure DevOps を使用しているすべてのチームが、ソフトウェアライフサイクルの各段階で Synthetic テストの恩恵を受けられるようにすることができます。タスクとして [`SyntheticsRunTests`](#available-tasks) を実行することができます。
+Datadog CI Azure DevOps 拡張機能を使用すると、Azure パイプラインの構成内で Synthetic テストを実行し、Azure DevOps を使用しているすべてのチームが、ソフトウェアライフサイクルの各段階で Synthetic テストの恩恵を受けられるようにすることができます。タスクとして [`SyntheticsRunTests`][3] を実行することができます。
 
 ## Authentication
 
@@ -72,6 +72,8 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     files: 'e2e-tests/*.synthetics.json'
 ```
 
+テストファイルの例としては、この [`test.synthetics.json` ファイル][14]を参照してください。
+
 ### 認証にパイプラインシークレットを使用したタスク例
 
 ```yaml
@@ -113,6 +115,8 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 
 ### `configPath` によるグローバル構成オーバーライドを使用したタスク例
 
+このタスクは、グローバルな `datadog-ci.config.json` ファイルへのパスをオーバーライドします。
+
 ```yaml
 - task: SyntheticsRunTests@0
   displayName: Run Datadog Synthetic tests
@@ -121,6 +125,8 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
     connectedService: 'my-datadog-ci-connected-service'
     configPath: './synthetics-config.json'
 ```
+
+コンフィギュレーションファイルの例としては、この [`global.config.json` ファイル][13] をご覧ください。
 
 ## 入力
 
@@ -138,6 +144,7 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 | `configPath`         | _オプション_  | テストを起動するときに使用されるグローバル JSON 構成。詳細は[構成例][9]を参照してください。**デフォルト:** `datadog-ci.json`。                                                                                              |
 | `variables`          | _オプション_  | Synthetic テストに使用するグローバル変数のリストで、改行またはカンマで区切って指定します。例: `START_URL=https://example.org,MY_VARIABLE=My title`。**デフォルト:** `[]`。                                                                  |
 | `jUnitReport`        | _オプション_  | JUnit レポートを生成したい場合のファイル名。                                                                                                                                                                                    |
+| `pollingTimeout`     | _オプション_  | タスクがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。**デフォルト:** 30 分。                                                 |
 
 
 ## その他の参考資料
@@ -149,13 +156,15 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 
 [1]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-ci
 [2]: https://github.com/DataDog/datadog-ci
-[3]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics
+[3]: https://github.com/DataDog/datadog-ci-azure-devops/tree/main/SyntheticsRunTestsTask
 [4]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration
 [5]: https://docs.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints
 [6]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
 [7]: https://docs.microsoft.com/en-us/azure/devops/pipelines/process/set-secret-variables
 [8]: https://docs.datadoghq.com/ja/synthetics/search/#search
-[9]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-a-client
+[9]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#setup-the-client
 [10]: https://docs.datadoghq.com/ja/developers/guide/what-best-practices-are-recommended-for-naming-metrics-and-tags/#rules-and-best-practices-for-naming-tags
 [11]: https://docs.datadoghq.com/ja/getting_started/site/
 [12]: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
+[13]: https://github.com/DataDog/datadog-ci/blob/master/.github/workflows/e2e/global.config.json
+[14]: https://docs.datadoghq.com/ja/continuous_testing/cicd_integrations/configuration/?tab=npm#test-files

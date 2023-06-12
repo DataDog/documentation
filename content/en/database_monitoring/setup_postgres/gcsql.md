@@ -55,7 +55,7 @@ Configure the following [parameters][3] in [Database flags][4] and then **restar
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
+The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
@@ -79,8 +79,7 @@ GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
-
+<div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
@@ -137,7 +136,7 @@ To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and
 
 To configure Database Monitoring metrics collection for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
 
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
+1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options. The location of the `postgres.d` directory depends on your operating system. For more information, see [Agent configuration directory][4].
    ```yaml
    init_config:
    instances:
@@ -161,6 +160,7 @@ See the [Postgres integration spec][3] for additional information on setting `pr
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L417-L444
+[4]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 {{% /tab %}}
 {{% tab "Docker" %}}
 

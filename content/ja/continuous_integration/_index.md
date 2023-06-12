@@ -21,7 +21,7 @@ kind: documentation
 title: Continuous Integration Visibility
 ---
 
-{{< vimeo 664357090 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>

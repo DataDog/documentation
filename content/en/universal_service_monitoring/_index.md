@@ -19,6 +19,9 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -826,4 +829,4 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [3]: /tracing/service_catalog/
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
-[6]: /monitors/service_level_objectives/metric/
+[6]: /service_management/service_level_objectives/metric/

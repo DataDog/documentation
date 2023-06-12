@@ -5,27 +5,30 @@ main:
   - name: In The App
     identifier: platform_heading
     weight: 2000000
+  - name: Service Management
+    identifier: service_management_heading
+    weight: 3000000
   - name: Infrastructure
     identifier: infrastructure_heading
-    weight: 3000000
+    weight: 4000000
   - name: Application Performance
     identifier: apm_heading
-    weight: 4000000
+    weight: 5000000
   - name: Continuous Integration
     identifier: ci_visibility_heading
-    weight: 5000000
+    weight: 6000000
   - name: Log Management
     identifier: log_management_heading
-    weight: 6000000
+    weight: 7000000
   - name: Security
     identifier: security_platform_heading
-    weight: 7000000
+    weight: 8000000
   - name: UX Monitoring
     identifier: ux_monitoring_heading
-    weight: 8000000
+    weight: 9000000
   - name: Administration
     identifier: administration_heading
-    weight: 9000000
+    weight: 10000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -169,15 +172,21 @@ main:
     parent: getting_started
     weight: 19
   - name: Application Security Management
-    url: getting_started/application_security/
+    identifier: getting_started_application_security
+    url: getting_started/application_security
     parent: getting_started
     weight: 19
-  - name: Observability Pipelines
-    url: getting_started/observability_pipelines/
-    parent: getting_started
-    weight: 20
+  - name: Application Vulnerability Management
+    identifier: getting_started_application_vulnerability
+    url: getting_started/application_security/vulnerability_management
+    parent: getting_started_application_security
+    weight: 101
   - name: Learning Center
     url: getting_started/learning_center/
+    parent: getting_started
+    weight: 20
+  - name: Support
+    url: getting_started/support/
     parent: getting_started
     weight: 21
   - name: Glossary
@@ -281,24 +290,28 @@ main:
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 7
+    weight: 5
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 8
+    weight: 6
   - name: Advanced Configurations
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 801
+    weight: 601
   - name: Proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 802
+    weight: 602
   - name: Transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 803
+    weight: 603
+  - name: Remote Configuration
+    url: agent/remote_config
+    parent: agent
+    weight: 7
   - name: Proxy
     url: agent/proxy/
     parent: agent
@@ -379,16 +392,11 @@ main:
     identifier: agent_guides
     parent: agent
     weight: 12
-  - name: Aggregating Agents
-    url: getting_started/observability_pipelines/
-    parent: agent
-    identifier: opw_aggregation
-    weight: 13
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 14
+    weight: 13
   - name: Containers
     url: containers/
     identifier: containers
@@ -537,6 +545,11 @@ main:
     parent: containers_amazon_ecs
     identifier: containers_amazon_ecs_tags
     weight: 503
+  - name: Data collected
+    url: containers/amazon_ecs/data_collected/
+    parent: containers_amazon_ecs
+    identifier: containers_amazon_ecs_data_collected
+    weight: 504
   - name: AWS Fargate
     url: integrations/ecs_fargate/
     parent: containers
@@ -624,44 +637,12 @@ main:
     identifier: watchdog_faulty_deployment_detection
     parent: watchdog_top_level
     weight: 5
-  - name: Events
-    url: events/
-    identifier: events_top_level
-    pre: events
-    parent: platform_heading
-    weight: 60000
-  - name: Explorer
-    url: events/explorer/
-    identifier: event_explorer
-    parent: events_top_level
-    weight: 2
-  - name: Guides
-    url: events/guides/
-    identifier: events_guides
-    parent: events_top_level
-    weight: 3
-  - name: Custom Agent Check
-    url: events/guides/agent/
-    parent: events_guides
-    weight: 300
-  - name: DogStatsD
-    url: events/guides/dogstatsd/
-    parent: events_guides
-    weight: 301
-  - name: Email
-    url: events/guides/email/
-    parent: events_guides
-    weight: 302
-  - name: API
-    url: api/latest/events/#post-an-event
-    parent: events_guides
-    weight: 303
   - name: Dashboards
     url: dashboards/
     pre: dashboard
     identifier: dashboards
     parent: platform_heading
-    weight: 70000
+    weight: 60000
   - name: Widgets
     url: dashboards/widgets/
     parent: dashboards
@@ -760,12 +741,6 @@ main:
     parent: dashboards
     identifier: guides
     weight: 9
-  - name: Mobile Application
-    url: mobile/
-    identifier: mobile
-    pre: mobile
-    parent: platform_heading
-    weight: 80000
   - name: Infrastructure
     url: infrastructure/
     identifier: infrastructure
@@ -911,7 +886,7 @@ main:
     identifier: metrics_top_level
     pre: metric
     parent: platform_heading
-    weight: 110000
+    weight: 80000
   - name: Explorer
     url: metrics/explorer/
     parent: metrics_top_level
@@ -993,7 +968,7 @@ main:
     identifier: notebooks
     pre: notebook
     parent: platform_heading
-    weight: 120000
+    weight: 90000
   - name: Guides
     url: notebooks/guide
     parent: notebooks
@@ -1004,7 +979,7 @@ main:
     pre: monitor
     identifier: alerting
     parent: platform_heading
-    weight: 130000
+    weight: 100000
   - name: Configure Monitors
     url: monitors/configuration/
     parent: alerting
@@ -1045,76 +1020,86 @@ main:
     parent: monitor_types
     identifier: monitor_types_ci
     weight: 206
+  - name: Cloud Cost
+    url: monitors/types/cloud_cost/
+    parent: monitor_types
+    identifier: monitor_types_cloud_cost
+    weight: 207
   - name: Composite
     url: monitors/types/composite/
     parent: monitor_types
     identifier: monitor_types_composite
-    weight: 207
+    weight: 208
+  - name: Database Monitoring
+    url: monitors/types/database_monitoring/
+    parent: monitor_types
+    identifier: monitor_types_database_monitoring
+    weight: 211
   - name: Error Tracking
     url: monitors/types/error_tracking/
     parent: monitor_types
     identifier: monitor_types_error_tracking
-    weight: 208
+    weight: 213
   - name: Event
     url: monitors/types/event/
     parent: monitor_types
     identifier: monitor_types_event
-    weight: 209
+    weight: 215
   - name: Forecast
     url: monitors/types/forecasts/
     parent: monitor_types
     identifier: monitor_types_forecasts
-    weight: 210
+    weight: 217
   - name: Integration
     url: monitors/types/integration/
     parent: monitor_types
     identifier: monitor_types_integration
-    weight: 211
+    weight: 219
   - name: Live Process
     url: monitors/types/process/
     parent: monitor_types
     identifier: monitor_types_process
-    weight: 212
+    weight: 221
   - name: Logs
     url: monitors/types/log/
     parent: monitor_types
     identifier: monitor_types_log
-    weight: 213
+    weight: 223
   - name: Network
     url: monitors/types/network/
     parent: monitor_types
     identifier: monitor_types_network
-    weight: 214
+    weight: 225
   - name: Outlier
     url: monitors/types/outlier/
     parent: monitor_types
     identifier: monitor_types_outlier
-    weight: 215
+    weight: 227
   - name: Process Check
     url: monitors/types/process_check/
     parent: monitor_types
     identifier: monitor_types_process_check
-    weight: 216
+    weight: 229
   - name: Real User Monitoring
     url: monitors/types/real_user_monitoring/
     parent: monitor_types
     identifier: monitor_types_rum
-    weight: 217
+    weight: 231
   - name: Service Check
     url: monitors/types/service_check/
     parent: monitor_types
     identifier: monitor_types_service_check
-    weight: 218
+    weight: 233
   - name: SLO Alerts
     url: monitors/types/slo/
     parent: monitor_types
     identifier: monitor_types_slo
-    weight: 219
+    weight: 235
   - name: Watchdog
     url: monitors/types/watchdog/
     parent: monitor_types
     identifier: monitor_types_watchdog
-    weight: 220
+    weight: 237
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -1124,130 +1109,160 @@ main:
     url: monitors/notify/variables/
     parent: monitors_notify
     identifier: monitors_notify_variables
-    weight: 201
+    weight: 301
   - name: Downtimes
-    url: monitors/notify/downtimes/
-    parent: monitors_notify
+    url: monitors/downtimes/
+    parent: alerting
     identifier: monitors_notify_downtimes
-    weight: 202
+    weight: 4
   - name: Manage Monitors
     url: monitors/manage/
     parent: alerting
     identifier: monitors_manage
-    weight: 4
+    weight: 5
   - name: Search Monitors
     url: monitors/manage/search/
     parent: monitors_manage
     identifier: monitors_manage_search
-    weight: 301
+    weight: 501
   - name: Monitor Status
     url: monitors/manage/status/
     parent: monitors_manage
     identifier: monitors_manage_status
-    weight: 302
+    weight: 502
   - name: Check Summary
     url: monitors/manage/check_summary/
     parent: monitors_manage
     identifier: monitors_check_summary
-    weight: 303
+    weight: 503
   - name: Monitor Settings
     url: monitors/settings/
-    weight: 5
-    parent: alerting
-    identifier: monitor_settings
-  - name: Service Level Objectives
-    url: monitors/service_level_objectives/
     weight: 6
     parent: alerting
-    identifier: slos
-  - name: Incident Management
-    url: monitors/incident_management
-    parent: alerting
-    identifier: incidents
-    weight: 8
-  - name: Incident Details
-    url: monitors/incident_management/incident_details
-    parent: incidents
-    identifier: incident_details
-    weight: 801
-  - name: Incident Settings
-    url: monitors/incident_management/incident_settings
-    parent: incidents
-    identifier: incidents_settings
-    weight: 802
-  - name: Incident Analytics
-    url: monitors/incident_management/analytics
-    parent: incidents
-    identifier: analytics
-    weight: 803
-  - name: Datadog Clipboard
-    url: monitors/incident_management/datadog_clipboard
-    parent: incidents
-    identifier: incidents_clipboard
-    weight: 804
-  - name: Monitor-based SLOs
-    url: monitors/service_level_objectives/monitor/
-    parent: slos
-    identifier: slos_monitor
-    weight: 401
-  - name: Metric-based SLOs
-    url: monitors/service_level_objectives/metric/
-    parent: slos
-    identifier: slos_metric
-    weight: 402
-  - name: Error Budget Alerts
-    url: monitors/service_level_objectives/error_budget/
-    parent: slos
-    identifier: error_budget
-    weight: 403
-  - name: Burn Rate Alerts
-    url: monitors/service_level_objectives/burn_rate/
-    parent: slos
-    identifier: burn_rate
-    weight: 404
-  - name: Case Management
-    url: monitors/case_management
-    parent: alerting
-    identifier: case_management
-    weight: 10
+    identifier: monitor_settings
   - name: Guides
     url: monitors/guide/
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Service Level Objectives
+    url: service_management/service_level_objectives/
+    pre: slos
+    weight: 20000
+    parent: service_management_heading
+    identifier: slos
+  - name: Monitor-based SLOs
+    url: service_management/service_level_objectives/monitor/
+    parent: slos
+    identifier: slos_monitor
+    weight: 1
+  - name: Metric-based SLOs
+    url: service_management/service_level_objectives/metric/
+    parent: slos
+    identifier: slos_metric
+    weight: 2
+  - name: Error Budget Alerts
+    url: service_management/service_level_objectives/error_budget/
+    parent: slos
+    identifier: error_budget
+    weight: 3
+  - name: Burn Rate Alerts
+    url: service_management/service_level_objectives/burn_rate/
+    parent: slos
+    identifier: burn_rate
+    weight: 4
+  - name: Guides
+    url: service_management/service_level_objectives/guide/
+    parent: slos
+    identifier: slos_guides
+    weight: 99
+  - name: Events
+    url: service_management/events/
+    pre: events
+    identifier: events
+    parent: service_management_heading
+    weight: 30000
+  - name: Explorer
+    url: service_management/events/explorer/
+    identifier: event_explorer
+    parent: events
+    weight: 1
+  - name: Guides
+    url: service_management/events/guides/
+    identifier: events_guides
+    parent: events
+    weight: 2
+  - name: Case Management
+    url: service_management/case_management/
+    pre: case-management
+    parent: service_management_heading
+    identifier: case_management
+    weight: 40000
+  - name: Incident Management
+    url: service_management/incident_management/
+    pre: incidents
+    parent: service_management_heading
+    identifier: incidents
+    weight: 50000
+  - name: Incident Details
+    url: service_management/incident_management/incident_details
+    parent: incidents
+    identifier: incident_details
+    weight: 1
+  - name: Incident Settings
+    url: service_management/incident_management/incident_settings
+    parent: incidents
+    identifier: incidents_settings
+    weight: 2
+  - name: Incident Analytics
+    url: service_management/incident_management/analytics
+    parent: incidents
+    identifier: analytics
+    weight: 3
+  - name: Datadog Clipboard
+    url: service_management/incident_management/datadog_clipboard
+    parent: incidents
+    identifier: incidents_clipboard
+    weight: 4
+  - name: Mobile Application
+    url: service_management/mobile/
+    identifier: mobile
+    pre: mobile
+    parent: service_management_heading
+    weight: 60000
   - name: Workflows
-    url: workflows/
+    url: service_management/workflows/
     pre: workflows
     identifier: workflows
-    parent: platform_heading
-    weight: 140000
+    parent: service_management_heading
+    weight: 70000
   - name: Build Workflows
-    url: workflows/build/
+    url: service_management/workflows/build/
     parent: workflows
     identifier: workflows_build
     weight: 1
   - name: Authentication
-    url: workflows/access/
+    url: service_management/workflows/access/
     parent: workflows
     identifier: workflows_access
     weight: 2
   - name: Trigger Workflows
-    url: workflows/trigger/
+    url: service_management/workflows/trigger/
     parent: workflows
     identifier: workflows_trigger
     weight: 3
   - name: Actions Catalog
-    url: workflows/actions_catalog/
+    url: service_management/workflows/actions_catalog/
     parent: workflows
     identifier: workflows_actions_catalog
     weight: 4
   - name: Generic Actions
-    url: workflows/actions_catalog/generic_actions/
+    url: service_management/workflows/actions_catalog/generic_actions/
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
   - name: Connections
-    url: workflows/connections/
+    url: service_management/workflows/connections/
     parent: workflows
     identifier: workflows_connections
     weight: 5
@@ -1810,31 +1825,36 @@ main:
     parent: service_catalog
     identifier: service_catalog_setup
     weight: 901
+  - name: Service Scorecards
+    url: tracing/service_catalog/scorecards
+    parent: service_catalog
+    identifier: service_catalog_scorecards
+    weight: 902
   - name: Service Catalog API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
-    weight: 902
+    weight: 903
   - name: Service Metadata Structure
     url: tracing/service_catalog/service_metadata_structure
     parent: service_catalog
     identifier: service_metadata_structure
-    weight: 903
+    weight: 904
   - name: Integrations
     url: tracing/service_catalog/integrations
     parent: service_catalog
     identifier: service_catalog_integrations
-    weight: 904
+    weight: 905
   - name: Troubleshooting
     url: tracing/service_catalog/troubleshooting
     parent: service_catalog
     identifier: service_catalog_troubleshooting
-    weight: 905
+    weight: 906
   - name: Guides
     url: tracing/service_catalog/guides
     parent: service_catalog
     identifier: service_catalog_guides
-    weight: 906
+    weight: 907
   - name: Error Tracking
     url: tracing/error_tracking/
     parent: tracing
@@ -2559,10 +2579,9 @@ main:
     identifier: observability_pipelines
     parent: log_management_heading
     weight: 175000
-  - name: Installation
-    url: observability_pipelines/installation/
+  - name: Setup
+    url: observability_pipelines/setup/
     parent: observability_pipelines
-    identifier: observability_pipelines_installation
     weight: 1
   - name: Production Deployment Overview
     url: observability_pipelines/production_deployment_overview/
@@ -2707,8 +2726,8 @@ main:
     parent: cspm
     identifier: cspm_setup
     weight: 101
-  - name: Detection Rules
-    url: security/cspm/detection_rules
+  - name: Compliance Rules
+    url: security/cspm/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 102
@@ -3722,73 +3741,77 @@ main:
     identifier: dev_tools_integrations
     weight: 4
   - name: Create an Agent-based Integration
-    url: developers/integrations/new_check_howto/
+    url: developers/integrations/agent_integration/
     parent: dev_tools_integrations
     weight: 401
   - name: Create an API Integration
     url: developers/integrations/api_integration/
     parent: dev_tools_integrations
     weight: 402
+  - name: Create a Log Integration
+    url: developers/integrations/log_integration/
+    parent: dev_tools_integrations
+    weight: 403
   - name: Integration Assets Reference
     url: developers/integrations/check_references/
     parent: dev_tools_integrations
-    weight: 403
+    weight: 404
+  - name: Build a Marketplace Offering
+    url: developers/integrations/marketplace_offering/
+    parent: dev_tools_integrations
+    identifier: dev_tools__integrations_marketplace_offering
+    weight: 405
+  - name: Create a Tile
+    url: developers/integrations/create_a_tile/
+    parent: dev_tools_integrations
+    identifier: dev_tools_integrations_tile
+    weight: 406
   - name: Create an Integration Dashboard
     url: developers/integrations/create-an-integration-dashboard
     parent: dev_tools_integrations
-    weight: 404
+    weight: 407
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 405
+    weight: 408
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 406
+    weight: 409
   - name: Legacy
     url: developers/integrations/legacy/
     parent: dev_tools_integrations
-    weight: 407
-  - name: Marketplace
-    url: developers/marketplace/
-    parent: dev_tools
-    identifier: dev_tools_marketplace
-    weight: 5
-  - name: Develop A Marketplace Offering
-    url: developers/marketplace/offering
-    parent: dev_tools_marketplace
-    identifier: dev_tools_marketplace_offering
-    weight: 501
+    weight: 410
   - name: Datadog Apps
     url: developers/datadog_apps
     parent: dev_tools
     identifier: dev_tools_datadog_apps
-    weight: 6
+    weight: 5
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check
-    weight: 7
+    weight: 6
   - name: 'Submission - Agent Check '
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
-    weight: 701
+    weight: 601
   - name: Submission - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
-    weight: 702
+    weight: 602
   - name: Submission - API
     url: api/v1/service-checks/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
-    weight: 703
+    weight: 603
   - name: IDE Integrations
     url: developers/ide_integrations/
     parent: dev_tools
     identifier: ide_integrations
-    weight: 8
+    weight: 7
   - name: IntelliJ IDEA
     url: developers/ide_integrations/idea/
     parent: ide_integrations
@@ -3803,20 +3826,20 @@ main:
     url: developers/community/
     parent: dev_tools
     identifier: dev_community
-    weight: 9
+    weight: 8
   - name: Libraries
     url: developers/community/libraries/
     parent: dev_community
-    weight: 901
+    weight: 801
   - name: Community Office Hours
     url: developers/community/office_hours/
     parent: dev_community
-    weight: 902
+    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
-    weight: 10
+    weight: 9
   - name: API
     url: api/
     pre: api
@@ -3863,22 +3886,18 @@ main:
     url: account_management/org_settings/oauth_apps
     parent: organization_settings
     weight: 203
-  - name: Sensitive Data Scanner
-    url: account_management/org_settings/sensitive_data_detection
-    parent: organization_settings
-    weight: 204
   - name: Custom Organization Landing Page
     url: account_management/org_settings/custom_landing
     parent: organization_settings
-    weight: 205
+    weight: 204
   - name: Service Accounts
     url: account_management/org_settings/service_accounts
     parent: organization_settings
-    weight: 206
+    weight: 205
   - name: IP Allowlist
     url: account_management/org_settings/ip_allowlist
     parent: organization_settings
-    weight: 207
+    weight: 206
   - name: RBAC
     url: account_management/rbac/
     parent: account_management
@@ -3990,12 +4009,18 @@ main:
     url: data_security/guide/
     parent: data_security
     weight: 6
+  - name: Sensitive Data Scanner
+    url: sensitive_data_scanner/
+    pre: sensitive-data-scanner
+    identifier: sds_top_level
+    parent: administration_heading
+    weight: 240000
   - name: Help
     url: help/
     pre: info-fill
     identifier: help_top_level
     parent: administration_heading
-    weight: 240000
+    weight: 250000
 api:
   - name: Overview
     url: /api/latest/
@@ -4583,9 +4608,9 @@ api:
     url: /api/latest/downtimes/
     identifier: downtimes
     generated: true
-  - name: Get all downtimes for a monitor
-    url: '#get-all-downtimes-for-a-monitor'
-    identifier: downtimes-get-all-downtimes-for-a-monitor
+  - name: Get active downtimes for a monitor
+    url: '#get-active-downtimes-for-a-monitor'
+    identifier: downtimes-get-active-downtimes-for-a-monitor
     parent: downtimes
     generated: true
     params:
@@ -4790,6 +4815,78 @@ api:
     url: /api/latest/gcp-integration/
     identifier: gcp-integration
     generated: true
+  - name: Create a Datadog GCP principal
+    url: '#create-a-datadog-gcp-principal'
+    identifier: gcp-integration-create-a-datadog-gcp-principal
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - MakeGCPSTSDelegate
+      unstable: []
+      order: 5
+  - name: List delegate account
+    url: '#list-delegate-account'
+    identifier: gcp-integration-list-delegate-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetGCPSTSDelegate
+      unstable: []
+      order: 6
+  - name: Update STS Service Account
+    url: '#update-sts-service-account'
+    identifier: gcp-integration-update-sts-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateGCPSTSAccount
+      unstable: []
+      order: 4
+  - name: Delete an STS enabled GCP Account
+    url: '#delete-an-sts-enabled-gcp-account'
+    identifier: gcp-integration-delete-an-sts-enabled-gcp-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteGCPSTSAccount
+      unstable: []
+      order: 3
+  - name: Create a new entry for your service account
+    url: '#create-a-new-entry-for-your-service-account'
+    identifier: gcp-integration-create-a-new-entry-for-your-service-account
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateGCPSTSAccount
+      unstable: []
+      order: 2
+  - name: List all GCP STS-enabled service accounts
+    url: '#list-all-gcp-sts-enabled-service-accounts'
+    identifier: gcp-integration-list-all-gcp-sts-enabled-service-accounts
+    parent: gcp-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListGCPSTSAccounts
+      unstable: []
+      order: 1
   - name: Update a GCP integration
     url: '#update-a-gcp-integration'
     identifier: gcp-integration-update-a-gcp-integration
@@ -5452,8 +5549,19 @@ api:
       versions:
         - v2
       operationids:
-        - DeleteBulkTagsMetricsConfiguration
         - CreateBulkTagsMetricsConfiguration
+      unstable: []
+      order: 9
+  - name: Delete tags for multiple metrics
+    url: '#delete-tags-for-multiple-metrics'
+    identifier: metrics-delete-tags-for-multiple-metrics
+    parent: metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteBulkTagsMetricsConfiguration
       unstable: []
       order: 10
   - name: Get a list of metrics
@@ -6094,7 +6202,7 @@ api:
       operationids:
         - ListSecurityMonitoringRules
       unstable: []
-      order: 3
+      order: 4
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
@@ -6155,6 +6263,19 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 18
+  - name: Mute or unmute a finding
+    url: '#mute-or-unmute-a-finding'
+    identifier: security-monitoring-mute-or-unmute-a-finding
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateFinding
+      unstable:
+        - v2
+      order: 3
   - name: Get a finding
     url: '#get-a-finding'
     identifier: security-monitoring-get-a-finding
@@ -6218,7 +6339,7 @@ api:
       operationids:
         - AddSecurityMonitoringSignalToIncident
       unstable: []
-      order: 3
+      order: 4
   - name: Service Checks
     url: /api/latest/service-checks/
     identifier: service-checks
@@ -6741,9 +6862,9 @@ api:
         - TriggerCITests
       unstable: []
       order: 6
-  - name: Trigger Synthetics tests
-    url: '#trigger-synthetics-tests'
-    identifier: synthetics-trigger-synthetics-tests
+  - name: Trigger Synthetic tests
+    url: '#trigger-synthetic-tests'
+    identifier: synthetics-trigger-synthetic-tests
     parent: synthetics
     generated: true
     params:
@@ -6885,6 +7006,18 @@ api:
         - ListTests
       unstable: []
       order: 10
+  - name: Get the default locations
+    url: '#get-the-default-locations'
+    identifier: synthetics-get-the-default-locations
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsDefaultLocations
+      unstable: []
+      order: 28
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: synthetics-edit-a-private-location

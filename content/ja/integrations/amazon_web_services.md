@@ -6,8 +6,9 @@ aliases:
 - /ja/integrations/faq/additional-aws-metrics-min-max-sum
 - /ja/integrations/faq/why-am-i-only-seeing-the-average-values-of-my-custom-aws-cloudwatch-metrics/
 categories:
-- cloud
 - aws
+- cloud
+- iot
 - log collection
 dependencies: []
 description: AWS サービスを Datadog と統合。

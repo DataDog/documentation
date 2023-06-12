@@ -8,6 +8,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   tag: GitHub
   text: Datadog と OpenTelemetry のパートナーシップ
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: GitHub
+  text: W3C Trace Context に対応した OTel インスツルメンテーションされたアプリのモニタリング
 - link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: GitHub
   text: OpenTelemetry コレクターから Datadog エクスポーター経由で Datadog にメトリクスとトレースを送信する
@@ -18,7 +21,7 @@ further_reading:
   tag: GitHub
   text: Agent における OTLP の取り込み
 - link: https://www.datadoghq.com/blog/aws-opentelemetry-lambda-layer-datadog/
-  tag: GitHub
+  tag: ブログ
   text: OpenTelemetry 用の AWS のマネージド Lambda レイヤーについて
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: ブログ
@@ -39,7 +42,9 @@ title: Datadog の OpenTelemetry
 
 {{< img src="tracing/setup/open_standards/otel-flow.png" alt="テレメトリーデータを生成し、観測可能性製品に送信するためのマップオプション。">}}
 
-<div class="alert alert-info"><strong>ベータ版: Datadog ライブラリ用カスタムインスツルメンテーション</strong></br>サポートされている一部の言語では、スパンとトレースを処理するために Datadog トレーシングライブラリを使用するように、OTel インスツルメンテーションアプリケーションを構成することができます。詳しくは、<a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry API を使用したカスタムインスツルメンテーション</a>をお読みください。</div>
+<div class="alert alert-info"><strong>ベータ版: OpenTelemetry API を使用したカスタムインスツルメンテーション</strong></br>サポートされている一部の言語では、スパンとトレースを処理するために Datadog トレーシングライブラリを使用するように、OTel インスツルメンテーションアプリケーションを構成することができます。詳しくは、<a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry API を使用したカスタムインスツルメンテーション</a>をお読みください。</div>
+
+Datadog は、[W3C トレースコンテキスト規格][6]をサポートしており、リクエストが異なるツールでインスツルメンテーションされたサービス間を移動する場合でも、完全なトレースをキャプチャすることを保証します。サービスは、OpenTelemetry (OTel) ライブラリや Datadog トレーシングライブラリなど、W3C トレースコンテキスト規格に準拠したシステムでインスツルメンテーションされればよいのです。詳しくは、[トレースコンテキストの伝搬][5]をお読みください。
 
 ## その他の参考資料
 
@@ -49,3 +54,5 @@ title: Datadog の OpenTelemetry
 [2]: https://www.cncf.io/
 [3]: /ja/opentelemetry/otel_collector_datadog_exporter/
 [4]: /ja/opentelemetry/otlp_ingest_in_the_agent/
+[5]: /ja/tracing/trace_collection/trace_context_propagation/
+[6]: https://www.w3.org/TR/trace-context/

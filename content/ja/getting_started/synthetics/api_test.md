@@ -69,7 +69,7 @@ HTTP テストは、API エンドポイントを監視し、レスポンス遅�
 
 アサーションは完全にカスタマイズ可能です。カスタムアサーションを追加するには、ヘッダーなどの応答プレビューの要素をクリックするか、**New Assertion** をクリックして新しいアサーションを最初から定義します。
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="API テストのコンフィギュレーション例" video="true"  >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="API テストのコンフィギュレーション例" video="true" >}}
 
 ### ロケーションを選択する
 
@@ -202,7 +202,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
 
 Datadog の [APM と Synthetic モニタリングのインテグレーション][14]を使用して、**Traces** タブでテスト実行から生成されたトレースを確認して、失敗したテスト実行の根本原因にアクセスします。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

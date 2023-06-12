@@ -103,8 +103,10 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 **Note**:
 
 * **Log events can be submitted up to 18h in the past and 2h in the future**.
+* As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 * If multiple log date remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+
 
 {{< tabs >}}
 {{% tab "UI" %}}

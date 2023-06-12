@@ -20,7 +20,7 @@ Amazon EKS 監査ログは、クラスター管理者に EKS クラスター内�
 
 1. すでに Amazon EKS クラスターを構成している場合は、[Amazon EKSコンソール][2]でクラスターに移動します。
 1. EKS クラスターをクリックします。
-1. **Configuration** タブをクリックし、次に **Logging** タブをクリックします。
+1. **Logging** タブをクリックします。
 1. **Manage logging** ボタンをクリックします。
 1. **Audit** オプションを **Enabled** にトグルし、**Save changes** ボタンをクリックします。
 
@@ -66,20 +66,20 @@ Cloud SIEM がセットアップされ、構成されると、ゼロから新し
 
 1. ログエクスプローラーの検索バーでクエリを作成します。例えば、`source:kubernetes.audit @objectRef.resource:pods @objectRef.subresource:exec @http.method:create @http.status_code:[101 TO 299]` でフィルタリングします。
 1. **Export** ボタンをクリックし、**Export to detection rule** を選択します。
-1. この機能は、クエリをエクスポートして、ログ検出ルール設定の 2 番目のステップで定義します。検出方法を選択します。この例では、**New Value** を選択します。Detect new value ドロップダウンメニューで `@usr.name` 属性を選択します。これにより、ユーザーがポッドに実行したときに初めてアラートが出されます。最初のアラートの後、Datadog は同じユーザーに対して再度アラートを出すことはありません。また、これらのイベントがユーザー定義のしきい値を超えたときに検出するには、検出方法に **threshold rule** を使用します。
+1. この機能は、クエリをエクスポートして、ログ検出ルール設定の 2 番目のステップで定義します。検出方法を選択します。この例では、**New Value** を選択します。Detect new value ドロップダウンメニューで `@usr.name` 属性を選択します。これにより、ユーザーがポッドに対して exec を実行したときに初めてアラートが出されます。最初のアラートの後、Datadog は同じユーザーに対して再度アラートを出すことはありません。また、これらのイベントがユーザー定義のしきい値を超えたときに検出するには、検出方法に **threshold rule** を使用します。
 1. [ログ検出ルールのドキュメント][14]に従って、残りのルール構成を完了させる方法を学びます。
 
-[1]: /ja/security_platform/cloud_siem/
+[1]: /ja/security/cloud_siem/
 [2]: https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html
 [3]: /ja/integrations/amazon_web_services/?tab=roledelegation#setup
-[4]: /ja/serverless/libraries_integrations/forwarder/
+[4]: /ja/logs/guide/forwarder/
 [5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#set-up-triggers
 [6]: https://console.aws.amazon.com/lambda/home#/functions
 [7]: https://app.datadoghq.com/logs
-[8]: /ja/security_platform/cloud_siem/log_detection_rules/
-[9]: /ja/security_platform/cloud_siem/getting_started#review-detection-rules
+[8]: /ja/security/cloud_siem/log_detection_rules/
+[9]: /ja/getting_started/cloud_siem/#phase-2-signal-exploration
 [10]: https://app.datadoghq.com/security
-[11]: /ja/security_platform/default_rules/#cat-cloud-siem
-[12]: /ja/security_platform/detection_rules/#creating-and-managing-detection-rules
+[11]: /ja/security/default_rules/#cat-cloud-siem
+[12]: /ja/security/detection_rules/#creating-and-managing-detection-rules
 [13]: https://app.datadoghq.com/security/configuration/rules/new?product=siem
-[14]: /ja/security_platform/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method
+[14]: /ja/security/cloud_siem/log_detection_rules/?tab=threshold#choose-a-detection-method

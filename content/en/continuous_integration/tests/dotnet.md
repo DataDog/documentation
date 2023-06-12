@@ -176,6 +176,16 @@ if (scope != null) {
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][7] section of the .NET custom instrumentation documentation.
 
+### Reporting code coverage
+
+When code coverage is available, the Datadog Tracer (v2.31.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+If you are using [Coverlet][14] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the env var `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true`. 
+
+**Note**: When using Intelligent Test Runner, the tracer's built-in code coverage is enabled by default.
+
+You can see the evolution of the test coverage in the **Coverage** tab of a test session.
+
 ### Instrumenting BenchmarkDotNet tests
 
 To instrument your benchmark tests you need to:
@@ -885,3 +895,4 @@ In addition to that, if [Intelligent Test Runner][10] is enabled, the following 
 [11]: /continuous_integration/tests/dotnet/#instrumenting-benchmarkdotnet-tests
 [12]: https://www.nuget.org/packages/Datadog.Trace.BenchmarkDotNet
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
+[14]: https://github.com/coverlet-coverage/coverlet

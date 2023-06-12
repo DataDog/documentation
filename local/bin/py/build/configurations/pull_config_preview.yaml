@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: false
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -85,6 +85,16 @@
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
+        - action: pull-and-push-file
+          branch: master
+          globs:
+          - docs/dev/README.md
+          options:
+            dest_path: '/developers/integrations/'
+            file_name: '_index.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
+              
         - action: pull-and-push-folder
           branch: master
           globs:
@@ -387,7 +397,7 @@
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
-      - repo_name: synthetics-ci-orb
+      - repo_name: synthetics-test-automation-circleci-orb
         contents:
         - action: pull-and-push-file
           branch: main
@@ -397,7 +407,7 @@
             dest_path: '/continuous_testing/cicd_integrations/'
             file_name: 'circleci_orb.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/synthetics-ci-orb/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"]
               title: Continuous Testing and CircleCI Orb
               kind: documentation
               aliases:
@@ -499,7 +509,7 @@
             - "domains/workflow/actionplatform/apps/tools/manifest_generator/manifest.schema.json"
             - "domains/workflow/actionplatform/apps/wf-actions-worker/src/runner/bundles/com.datadoghq.*/manifest.json"
           options:
-            dest_path: '/workflows/actions_catalog/'
+            dest_path: '/service_management/workflows/actions_catalog/'
             bundle_excludes:
               - "com.datadoghq.test"
               - "com.datadoghq.sample"

@@ -2,7 +2,7 @@
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: /real_user_monitoring/
   tag: ドキュメント
   text: Datadog Real User Monitoring
@@ -53,6 +53,7 @@ RUM は、すべてのイベントに共通の属性および以下に挙げた�
 | `type`           | 文字列  | イベントのタイプ (`view` や `resource` など)。                         |
 | `service`        | 文字列  | ユーザーセッションを関連付けるために使用した、このアプリケーションの[統合サービス名][2]。 |
 | `application.id` | 文字列  | Datadog アプリケーション ID。                                                        |
+| `application.name` | 文字列  | Datadog アプリケーション名。                                                        |
 
 ### デバイス
 

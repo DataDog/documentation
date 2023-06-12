@@ -28,6 +28,8 @@ cascade:
     {{< nextlink href="dashboards/guide/powerpacks-best-practices" >}}Powerpacks best practices{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/slo_data_source" >}}Graph historical SLO data on Dashboards{{< /nextlink >}}
     {{< nextlink href="/dashboards/guide/slo_graph_query" >}}Scope metric-based SLO queries{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/apm-stats-graph" >}}Configuring an APM stats graph{{< /nextlink >}}
+    {{< nextlink href="/dashboards/guide/version_history" >}}Version History{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Functions:" >}}

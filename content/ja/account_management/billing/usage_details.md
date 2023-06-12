@@ -64,7 +64,7 @@ API ユーザーの場合、エンドポイントを使用して ["All"][2] (す
 
 ## 使用量の傾向
 
-[Usage Trends][10] セクションには、アカウント内の全組織の使用量の合計を表示する製品使用量グラフが含まれています。使用量レポートは、**Download as CSV** ボタンでダウンロードできます。これらのレポートには、各組織の製品別使用量の 1 時間ごとの内訳が含まれています。
+[Usage Trends][5] セクションには、アカウント内の全組織の使用量の合計を表示する製品使用量グラフが含まれています。使用量レポートは、**Download as CSV** ボタンでダウンロードできます。これらのレポートには、各組織の製品別使用量の 1 時間ごとの内訳が含まれています。
 
 {{< img src="account_management/billing/UsageTrendsOverviewAndCSV.png" alt="Datadog アプリケーションの使用量傾向グラフのページで、CSV としてダウンロードするオプションが強調表示された状態" style="width:100%; align:left" >}}
 
@@ -72,7 +72,7 @@ API ユーザーの場合、エンドポイントを使用して ["All"][2] (す
 
 {{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="インフラストラクチャータブを選択した使用量サマリーと、インフラストラクチャー使用量のサブタイプ (インフラホスト、Agent ホスト、コンテナなど) の複数のグラフ" style="width:100%; align:left" >}}
 
-より詳細な製品のサブタイプのグラフは、各製品のタブで見ることができます。 例えば、Infrastructure タブでは、ホストタイプ別の内訳を見ることができます。
+より詳細な製品のサブタイプのグラフは、各製品のタブで見ることができます。例えば、Infrastructure タブでは、ホストタイプ別の内訳を見ることができます。
 
 {{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Agent ホストと AWS ホストを含む Infra Hosts グラフ、Daily Indexed Live Logs と Cumulative Indexed Live Logs を含む Indexed Logs グラフが表示された Infrastructure タブの使用量傾向セクション" style="width:100%; align:left" >}}
 
@@ -107,16 +107,16 @@ Custom Metrics タブの Top Custom Metrics テーブルには、当月内使用
 * 1 時間ごと平均カスタムメトリクス数
 * 1 時間ごと最大カスタムメトリクス数
 * すべてのカスタムメトリクス内のメトリクスを検索します
-* このデータは、最大 300,000 のカスタムメトリクスを CSV ファイルとしてダウンロードできます。[API エンドポイント][5]を使用すれば、300,000 を超えるカスタムメトリクスをダウンロードできます。
+* このデータは、最大 300,000 のカスタムメトリクスを CSV ファイルとしてダウンロードできます。[API エンドポイント][6]を使用すれば、300,000 を超えるカスタムメトリクスをダウンロードできます。
 
 
-メトリクスの詳細については、目的のメトリクスの行にカーソルを合わせ、右側に表示されるメーターアイコンをクリックして、[Metrics Summary][6] に移動します。
+メトリクスの詳細については、目的のメトリクスの行にカーソルを合わせ、右側に表示されるメーターアイコンをクリックして、[Metrics Summary][7] に移動します。
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="上位カスタムメトリクスの概要テーブル" >}}
 
 ## インデックス別ログ使用量
 
-Log Management タブにあるこの表には、インデックス名および保持期間別の時、日、月、年ごとのインデックス化済みのログ使用量が表示されます。以下の情報が含まれます。また、ライブログと[リハイドレートされたログ][7]の内訳も示しています。以下の情報が提供されます。
+Log Management タブにあるこの表には、インデックス名および保持期間別の時、日、月、年ごとのインデックス化済みのログ使用量が表示されます。以下の情報が含まれます。また、ライブログと[リハイドレートされたログ][8]の内訳も示しています。以下の情報が提供されます。
 
 * インデックス名
 * 保持期間（日数）
@@ -129,18 +129,18 @@ Log Management タブにあるこの表には、インデックス名および�
 
 ## トラブルシューティング
 
-技術的な質問については、[Datadog のサポートチーム][8]にお問い合わせください。
+技術的な質問については、[Datadog のサポートチーム][9]にお問い合わせください。
 
-請求に関するご質問は、[カスタマーサクセス][9]マネージャーにお問い合わせください。
+課金に関するご質問は、[カスタマーサクセス][10]マネージャーにお問い合わせください。
 
 
 [1]: https://app.datadoghq.com/account/usage/hourly
 [2]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-usage-across-your-multi-org-account
 [3]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-billable-usage-across-your-account
 [4]: /ja/metrics/custom_metrics/
-[5]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
-[6]: https://docs.datadoghq.com/ja/metrics/summary/#overview
-[7]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
-[8]: /ja/help/
-[9]: mailto:success@datadoghq.com
-[10]: https://app.datadoghq.com/billing/usage
+[5]: https://app.datadoghq.com/billing/usage
+[6]: https://docs.datadoghq.com/ja/api/latest/usage-metering/#get-all-custom-metrics-by-hourly-average
+[7]: https://docs.datadoghq.com/ja/metrics/summary/#overview
+[8]: https://docs.datadoghq.com/ja/logs/archives/rehydrating/?tab=awss3#overview
+[9]: /ja/help/
+[10]: mailto:success@datadoghq.com

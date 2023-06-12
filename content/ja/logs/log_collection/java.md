@@ -519,7 +519,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 **注:** MDC は文字列タイプのみを許可するため、数値メトリクスには使用しないでください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

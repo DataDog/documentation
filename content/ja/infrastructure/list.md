@@ -52,7 +52,7 @@ Operating System
 : 追跡対象のオペレーティングシステム
 
 Cloud Platform
-: ホストが実行されているクラウドプラットフォーム。(例: AWS、GCP、Azure など)
+: ホストが実行されているクラウドプラットフォーム。(例: AWS、Google Cloud、Azure など)
 
 Datadog Agent
 : ホストでデータを収集する Agent のバージョン。
@@ -116,7 +116,7 @@ Agent のバージョンを監査して、最新バージョンを実行して�
 
 JSON エクスポートのもう 1 つのユースケースは、Agent がインストールされていない AWS EC2 インスタンスのリストを取得することです。これらのインスタンスは、Datadog AWS インテグレーションタイルで AWS アカウントを設定することにより、インフラストラクチャーリストに表示されます。この[サンプルスクリプト][10]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

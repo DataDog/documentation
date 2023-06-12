@@ -75,7 +75,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
+The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
 
@@ -129,7 +129,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See  the explanation of [PostgreSQL custom metric collection][5] for more information.
+<div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
@@ -227,7 +227,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
        azure:
         deployment_type: '<DEPLOYMENT_TYPE>'
-        name: '<YOUR_INSTANCE_NAME>'
+        name: '<AZURE_INSTANCE_ENDPOINT>'
    ```
 2. [Restart the Agent][2].
 
@@ -264,7 +264,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "ssl": true,
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
-      "name": "<YOUR_INSTANCE_NAME>"
+      "name": "<AZURE_INSTANCE_ENDPOINT>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -286,7 +286,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": true, "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": true, "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -335,7 +335,7 @@ instances:
     ssl: true
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<YOUR_INSTANCE_NAME>"' \
+      name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -363,7 +363,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      name: '<AZURE_INSTANCE_ENDPOINT>'
 
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -397,7 +397,7 @@ metadata:
           "ssl": true,
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<YOUR_INSTANCE_NAME>"
+            "name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]

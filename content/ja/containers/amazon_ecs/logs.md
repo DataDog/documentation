@@ -5,6 +5,9 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: ドキュメント
   text: アプリケーショントレースの収集
+- link: /agent/amazon_ecs/data_collected/#metrics
+  tag: Documentation
+  text: ECS メトリクスの収集
 kind: documentation
 title: Amazon ECS ログ収集
 ---

@@ -42,6 +42,13 @@ Ensure the [RabbitMQ integration][6] is set up correctly.
   
 ### Queue metrics are missing
 The [Kafka integration][7] must be set up for self-hosted, MSK, and Confluent Platform/Cloud environments for metrics to populate on the Queue tab.
+ 
+### Cluster tag is not appearing
+The cluster tag is set differently depending on the environment:  
+* Self-hosted Kafka: The `kafka_cluster` tag must be added to the configuration of your agent running in the same cluster as your Kafka brokers, with the key set to `kafka_cluster` and value set to your cluster name.
+* Amazon MSK: Cluster information is automatically propagated to DSM if the [MSK Integration][9] is turned on. MSK sends the cluster to DSM as `cluster_name`.
+* Confluent Cloud: Cluster information is automatically propagated to DSM if the [Confluent Cloud Integration][10] is set up on the cluster you instrumented with DSM. 
+* Confluent Platform: Similar to self-hosted Kafka above, the `kafka_cluster` tag must be added to your agent configuration. 
   
 [1]: /data_streams/#setup  
 [2]: /data_streams/go/
@@ -51,3 +58,5 @@ The [Kafka integration][7] must be set up for self-hosted, MSK, and Confluent Pl
 [6]: /integrations/rabbitmq/?tab=host
 [7]: /integrations/kafka/?tab=host
 [8]: /help/
+[9]: https://docs.datadoghq.com/integrations/amazon_msk/ 
+[10]: https://docs.datadoghq.com/integrations/confluent_cloud/

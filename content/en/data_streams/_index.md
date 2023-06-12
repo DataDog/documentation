@@ -11,6 +11,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
       tag: 'Blog'
       text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
+cascade:
+    algolia:
+        rank: 70
 ---
 
 
@@ -39,7 +42,7 @@ To get started, follow the installation instructions to configure services with 
 |---|----|
 | Java | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC |
 | Go | All (with [manual instrumentation][1]) |
-| .NET | Kafka (self-hosted, Amazon MSK), RabbitMQ |
+| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ |
 
 
 ## Explore Data Streams Monitoring

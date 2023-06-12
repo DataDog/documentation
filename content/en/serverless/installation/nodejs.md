@@ -5,9 +5,9 @@ further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'
       text: 'Configure Serverless Monitoring'
-    - link: '/serverless/guide/serverless_tracing_and_webpack/'
+    - link: '/serverless/guide/serverless_tracing_and_bundlers/'
       tag: 'Documentation'
-      text: 'Node.js Lambda Tracing and Webpack Compatibility'
+      text: 'Node.js Lambda Tracing and Bundlers Compatibility'
     - link: '/serverless/guide/troubleshoot_serverless_monitoring'
       tag: 'Documentation'
       text: 'Troubleshoot Serverless Monitoring'
@@ -23,7 +23,7 @@ aliases:
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
-<div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_webpack/">mark the Datadog libraries as external</a>.</div>
+<div class="alert alert-warning">If you are bundling using webpack or esbuild, you may need to <a href="/serverless/guide/serverless_tracing_and_bundlers/">mark the Datadog libraries as external</a>.</div>
 
 ## Installation
 

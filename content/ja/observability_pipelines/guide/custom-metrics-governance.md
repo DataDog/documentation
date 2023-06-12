@@ -4,7 +4,7 @@ aliases:
 - /ja/integrations/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags/
 - /ja/observability_pipelines/guide/custom-metrics-governance-drop-metrics-missing-specific-tags
 further_reading:
-- link: /observability_pipelines/installation/
+- link: /observability_pipelines/setup/
   tag: ドキュメント
   text: 観測可能性パイプラインを設定する
 kind: ガイド
@@ -84,14 +84,14 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2-
-           # .tag_to_drop タグを削除する
-           del(.tags.tag_to_drop) 
+    source: |
+      # `tag_to_drop` タグを削除します。
+      del(.tags.tag_to_drop) 
 ```
 
 ### 解決策 2: 保持するタグの許可リスト配列を定義する
 
-ドロップしたいタグがたくさんあり、どのタグを残したいかがわかっている場合、`filter()` 関数を使用して、残すべきタグの許可リストを定義してください。これにより、許可リストに含まれないタグは自動的にドロップされます。以下の構成例を参照してください。
+許可リスト以外のタグをすべて削除したい場合は、許可リストを定義して `filter()` 関数を使用します。これにより、許可リストに含まれないタグは自動的にドロップされます。以下の構成例を参照してください。
 
 ```yaml
 transforms:
@@ -99,18 +99,17 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
+    source: |
+      # 許可されるべきタグのリスト。
+      tags_allowlist = ["tag 1", "tag 2", "tag 3", "tag 4"]
 
-           # 保持するタグのリスト
-           tags_allowlist = ["tag 1", "tag 2", "tag 3", "tag 4"]
-
-           # tag_to_keep にあるタグと一致しないタグをフィルターにかけ、ドロップする
-           .tags = [filter(.tags) -> |_index, value| { includes(tags_allowlist, value)}
+      # `tags_allowlist` にないタグをフィルターにかけ、ドロップします。
+      .tags = filter(object!(.tags)) -> |key, _value| { includes(tags_allowlist, key) }
 ```
 
 ### 解決策 3: ドロップするタグをブロックリスト配列で定義する
 
-どのタグをドロップしたいかがわかっている場合は、`filter()` 関数を使って、それらのタグのブロックリストを定義してください。これは、解決策 2 の `includes(tags_blocklist, value)` に `!` を追加することで実現できます。
+落としたいタグが決まっている場合は、解決策 2 と同じ手順で、`includes` の呼び出しの結果を `!` でプレフィックスして否定します。
 
 ```yaml
 transforms:
@@ -118,18 +117,17 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
+    source: |
+      # ブロックされるべきタグのリスト。
+      tags_blocklist = ["tag 1", "tag 2", "tag 3", "tag 4"]
 
-           # 保持するタグのリスト
-           tags_blocklist = ["tag 1", "tag 2", "tag 3", "tag 4"]
-
-           # tag_to_keep にあるタグと一致しないタグをフィルターにかけ、ドロップする
-           .tags = [filter(.tags) -> |_index, value| { !includes(tags_blocklist, value)}
+      # `tags_blocklist` にあるタグをフィルターにかけ、ドロップします。
+      .tags = filter(object!(.tags)) -> |key, _value| { !includes(tags_blocklist, key) }
 ```
 
 ### 解決策 4: リファレンステーブルで有効なタグの許可リストを定義する
 
-有効なタグのリストが決まっている場合、観測可能性パイプラインの `get_enrichment_tables` と `find_enrichment_tables` 関数を利用することが可能です。これにより、観測可能性パイプラインで `csv` 形式のリッチメントテーブルを参照することができます。サポートされているファイル形式は `csv` のみです。
+有効なタグのリストが決まっている場合、観測可能性パイプラインの `get_enrichment_table_records` と `find_enrichment_table_records` 関数を利用することが可能です。これにより、観測可能性パイプラインで `csv` 形式のリッチメントテーブルを参照することができます。サポートされているファイル形式は `csv` のみです。
 
 この例では、`valid_tags.csv` という名前の `csv` ファイルに、以下のような有効なタグが含まれています。
 
@@ -164,9 +162,11 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
-           # tag_to_keep にあるタグと一致しないタグをフィルターにかけ、ドロップする
-           .tags = [filter(.tags) -> |_index, value| {!is_empty(find_enrichment_table_records(valid_tag_table, value))}
+    source: |
+      # `valid_tags.csv` のタグと一致しないタグをフィルターにかけ、ドロップします。
+      .tags = filter(object!(.tags)) -> |key, _value| {
+        !is_empty(find_enrichment_table_records!("valid_tag_table", { "tag_name": key }))
+      }
 ```
 
 ## タグのカーディナリティの急上昇を防ぐ
@@ -202,14 +202,14 @@ transforms:
     mode: exact
     value_limit: 500
 ```
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/account_management/billing/usage_metrics/#types-of-usage
 [2]: /ja/account_management/billing/usage_attribution/
 [3]: /ja/metrics/metrics-without-limits/
-[4]: /ja/observability_pipelines/installation/
+[4]: /ja/observability_pipelines/setup/
 [5]: https://vector.dev/docs/reference/vrl/
 [6]: /ja/account_management/billing/usage_attribution/
 [7]: https://vector.dev/docs/reference/vrl/
