@@ -100,9 +100,8 @@ content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
 # Static Analysis
 content/en/continuous_integration/static_analysis/github_actions.md
 content/en/continuous_integration/static_analysis/circleci_orb.md
-content/en/continuous_integration/static_analysis/default_rules/python/best-practices/*.md
-content/en/continuous_integration/static_analysis/default_rules/python/code-style/*.md
-content/en/continuous_integration/static_analysis/default_rules/python/security/*.md
+content/en/continuous_integration/static_analysis/rules/python-best-practices/*.md
+content/en/continuous_integration/static_analysis/rules/python-code-style/*.md
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md
