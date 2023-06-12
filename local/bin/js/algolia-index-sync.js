@@ -10,7 +10,7 @@ const getIndexName = () => {
             algoliaIndexName = configDocs['live'].algoliaConfig.index;
             break;
         case 'preview':
-            algoliaIndexName = 'docs_preview_nick';
+            algoliaIndexName = configDocs['preview'].algoliaConfig.index;
             break;
         default:
             algoliaIndexName = '';
