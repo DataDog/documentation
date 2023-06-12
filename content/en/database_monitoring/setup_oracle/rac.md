@@ -38,7 +38,7 @@ Complete the following steps to enable Database Monitoring with your database:
 2. Add the following custom tag to each node:
     ```yaml
     tags:
-      - rac_cluster:'cluster_name'
+      - rac_cluster:your_cluster_name
     ```
 
 ### Validate
