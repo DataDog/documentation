@@ -27,6 +27,7 @@ further_reading:
 {{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: Monitor cost changes associated with cloud platforms.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/database_monitoring" >}}<strong>Database Monitoring</strong>: Monitor query execution and explain plan data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/error_tracking" >}}<strong>Error Tracking</strong>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/event" >}}<strong>Event</strong>: Monitor events gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/forecasts" >}}<strong>Forecast</strong>: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
