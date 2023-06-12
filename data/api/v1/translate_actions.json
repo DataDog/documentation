@@ -370,23 +370,23 @@
     "request_schema_description": "Datadog-Azure integrations configured for your organization."
   },
   "DeleteGCPIntegration": {
-    "description": "Delete a given Datadog-GCP integration.",
+    "description": "This endpoint is deprecated – use the V2 endpoints instead. Delete a given Datadog-GCP integration.",
     "summary": "Delete a GCP integration",
     "request_description": "Delete a given Datadog-GCP integration.",
     "request_schema_description": "Your Google Cloud Platform Account."
   },
   "ListGCPIntegration": {
-    "description": "List all Datadog-GCP integrations configured in your Datadog account.",
+    "description": "This endpoint is deprecated – use the V2 endpoints instead. List all Datadog-GCP integrations configured in your Datadog account.",
     "summary": "List all GCP integrations"
   },
   "CreateGCPIntegration": {
-    "description": "Create a Datadog-GCP integration.",
+    "description": "This endpoint is deprecated – use the V2 endpoints instead. Create a Datadog-GCP integration.",
     "summary": "Create a GCP integration",
     "request_description": "Create a Datadog-GCP integration.",
     "request_schema_description": "Your Google Cloud Platform Account."
   },
   "UpdateGCPIntegration": {
-    "description": "Update a Datadog-GCP integrations host_filters and/or auto-mute.\nRequires a `project_id` and `client_email`, however these fields cannot be updated.\nIf you need to update these fields, delete and use the create (`POST`) endpoint.\nThe unspecified fields will keep their original values.",
+    "description": "This endpoint is deprecated – use the V2 endpoints instead. Update a Datadog-GCP integrations host_filters and/or auto-mute.\nRequires a `project_id` and `client_email`, however these fields cannot be updated.\nIf you need to update these fields, delete and use the create (`POST`) endpoint.\nThe unspecified fields will keep their original values.",
     "summary": "Update a GCP integration",
     "request_description": "Update a Datadog-GCP integration.",
     "request_schema_description": "Your Google Cloud Platform Account."
@@ -623,7 +623,7 @@
   },
   "ListMonitorDowntimes": {
     "description": "Get all active downtimes for the specified monitor.",
-    "summary": "Get all downtimes for a monitor"
+    "summary": "Get active downtimes for a monitor"
   },
   "MuteMonitor": {
     "description": "Mute the specified monitor.",
@@ -837,6 +837,10 @@
     "summary": "Edit a private location",
     "request_description": "Details of the private location to be updated.",
     "request_schema_description": "Object containing information about the private location to create."
+  },
+  "GetSyntheticsDefaultLocations": {
+    "description": "Get the default locations settings.",
+    "summary": "Get the default locations"
   },
   "ListTests": {
     "description": "Get the list of all Synthetic tests.",
