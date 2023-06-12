@@ -28,13 +28,13 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< whatsnext desc="Infrastructure:">}}
 {{< nextlink href="/containers/guide" >}}<i class="icon-container" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Containers{{< /nextlink >}}
 {{< nextlink href="/serverless/guide" >}}<i class="icon-serverless" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Serverless{{< /nextlink >}}
-{{< nextlink href="/network_monitoring/performance/guides" >}}<i class="icon-network" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Performance Monitoring{{< /nextlink >}}
-{{< nextlink href="/network_monitoring/devices/guides" >}}<i class="icon-ndm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Device Monitoring{{< /nextlink >}}
+{{< nextlink href="/network_monitoring/performance/guide" >}}<i class="icon-network" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Performance Monitoring{{< /nextlink >}}
+{{< nextlink href="/network_monitoring/devices/guide" >}}<i class="icon-ndm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Network Device Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Application Performance:">}}{{< nextlink href="/tracing/guides" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
-{{< nextlink href="/database_monitoring/guides" >}}<i class="icon-database-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Database Monitoring{{< /nextlink >}}
-{{< nextlink href="/universal_service_monitoring/guides" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
+{{< whatsnext desc="Application Performance:">}}{{< nextlink href="/tracing/guide" >}}<i class="icon-apm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;APM{{< /nextlink >}}
+{{< nextlink href="/database_monitoring/guide" >}}<i class="icon-database-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Database Monitoring{{< /nextlink >}}
+{{< nextlink href="/universal_service_monitoring/guide" >}}<i class="icon-usm" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Universal Service Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Continuous Integration:">}}
@@ -42,21 +42,21 @@ Guides in the Datadog documentation are pages that provide background knowledge,
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Log Management:">}}
-{{< nextlink href="/logs/guides" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log Management{{< /nextlink >}}
-{{< nextlink href="/observability_pipelines/guides" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
+{{< nextlink href="/logs/guide" >}}<i class="icon-log" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Log Management{{< /nextlink >}}
+{{< nextlink href="/observability_pipelines/guide" >}}<i class="icon-pipelines" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Observability Pipelines{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Security:">}}
-{{< nextlink href="/security/cloud_siem/guides" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud SIEM{{< /nextlink >}}
-{{< nextlink href="/security/cloud_security_management/guides" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security Management{{< /nextlink >}}
-{{< nextlink href="/security/application_security/guides" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Application Security Management{{< /nextlink >}}
+{{< nextlink href="/security/cloud_siem/guide" >}}<i class="icon-siem" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud SIEM{{< /nextlink >}}
+{{< nextlink href="/security/cloud_security_management/guide" >}}<i class="icon-cloud-security-management" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Cloud Security Management{{< /nextlink >}}
+{{< nextlink href="/security/application_security/guide" >}}<i class="icon-app-sec" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Application Security Management{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="User Experience Monitoring:">}}
-{{< nextlink href="/synthetics/guides" >}}<i class="icon-synthetics" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Synthetic Monitoring{{< /nextlink >}}
-{{< nextlink href="/real_user_monitoring/guides" >}}<i class="icon-rum" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Real User Monitoring{{< /nextlink >}}
+{{< nextlink href="/synthetics/guide" >}}<i class="icon-synthetics" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Synthetic Monitoring{{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/guide" >}}<i class="icon-rum" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Real User Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Administration:">}}
-{{< nextlink href="/account_management/guides" >}}<i class="icon-cog-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Account Management{{< /nextlink >}}
+{{< nextlink href="/account_management/guide" >}}<i class="icon-cog-2" style="font-size:25px;color:#7c3eb9;vertical-align:middle"></i>&nbsp;&nbsp;&nbsp;&nbsp;Account Management{{< /nextlink >}}
 {{< /whatsnext >}}
