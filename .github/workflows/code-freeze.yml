@@ -13,11 +13,13 @@ concurrency:
 # 2. Change codefreeze-check-unfrozen to codefreeze-check-YYYYmmdd format `echo "check-$(date -u +'%Y%m%d')"`.
 # 3. Push the changes to the Github repo and open a PR.
 # 4. In the Github repo settings, add codefreeze-check-YYYYmmdd as a required status check for the master branch.
+# 5. Merge the PR.
 
 ### To disable a freeze:
 # 1. Set ACTIVE_FREEZE to "false".
 # 2. Change codefreeze-check-YYYYmmdd to `codefreeze-check-unfrozen`.
 # 3. In the Github repo settings, remove the codefreeze-check-YYYYmmdd required status check from the master branch.
+# 4. Open a PR and merge the changes.
 
 on:
   pull_request:
