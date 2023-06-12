@@ -17,7 +17,7 @@ module.exports = {
         ddApplicationId: '3493b4e7-ab12-4852-8836-ba96af7bc745',
         loggingHandler: 'http',
         algoliaConfig: {
-            index: 'docs_preview_nick',
+            index: 'docs_preview',
             api_index: 'docs_preview_api',
             appId: 'K8XL4ROVCR',
             apiKey: 'c00312a19630387f86998847cca3b65c'
