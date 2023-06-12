@@ -63,7 +63,7 @@ This data is also available in Dashboards, Notebooks, and more for more precise 
 
 ## Retention
 
-NetFlow data is retained for 15 days by default.
+NetFlow data is retained for 30 days by default.
 
 
 ## Further Reading
