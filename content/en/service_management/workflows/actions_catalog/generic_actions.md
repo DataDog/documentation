@@ -28,7 +28,7 @@ Begin by specifying the request method and any necessary [authentication][3]. Re
 
 Enter any desired headers, cookies, and a comma-delineated list of any status codes on which to return an error. Use the `Response Parsing` dropdown to override the default response parsing method inferred from the headers, and `Response Encoding` if the target server specifies the wrong encoding in its response headers. You can also decide if the request should allow for expired certificates or follow redirects.
 
-{{< img src="service_management/workflows/http-request-options-tab.png" alt="The workflow canvas open with an HTTP request action selected and the configuration tab open. The Request Options tab is selected and the action is configured with a header with the name Connection and the value keep-alive, and the Error on Status field has been filled in with the values 202, 300-305" >}}
+{{< img src="service_management/workflows/http-request-options-tab2.png" alt="The workflow canvas open with an HTTP request action selected and the configuration tab open. The Request Options tab is selected and the action is configured with a header with the name Connection and the value keep-alive, and the Error on Status field has been filled in with the values 202, 300-305" >}}
 
 ### Request Body
 
@@ -77,9 +77,9 @@ Logic actions enable you to implement custom logic in the execution of your work
 
 ### Branch workflow from condition
 
-You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. For example, in the screenshot below a branch workflow action considers if the status code of a previous HTTP request action is `200` **and** a function returns `true`. Statements can be evaluated with `and` as well as `or` logic through the `Join operand` dropdown.
+You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. For example, in the screenshot below a branch workflow action considers if the status code of a previous HTTP request action is `200`.
 
-{{< img src="service_management/workflows/branch-workflow-configuration.png" alt="The workflow canvas with a branch workflow from condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200 and the returned value of a previous function must be true." >}}
+{{< img src="service_management/workflows/branch-workflow-configuration2.png" alt="The workflow canvas with a branch workflow from condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200 and the returned value of a previous function must be true." >}}
 
 ### Sleep
 
