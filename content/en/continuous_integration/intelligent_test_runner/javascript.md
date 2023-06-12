@@ -46,7 +46,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIV
 
 ### Cypress setup
 
-For Intelligent Test Runner for Cypress to work, you need to instrument your web application with code coverage. You can read more about it in the [Cypress documentation][4]. A quick way to check that you've successfully enabled code coverage is navigating to your web app with Cypress and check the global variable `window.__coverage__`. This is what `dd-trace` leverages to collect code coverage for Intelligent Test Runner.
+For Intelligent Test Runner for Cypress to work, you must instrument your web application with code coverage. You can read more about enabling code coverage in the [Cypress documentation][4]. To check that you've successfully enabled code coverage, navigate to your web app with Cypress and check the global variable `window.__coverage__`. This is what `dd-trace` uses to collect code coverage for Intelligent Test Runner.
 
 
 #### UI activation
