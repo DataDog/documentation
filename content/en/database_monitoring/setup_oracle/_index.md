@@ -22,6 +22,13 @@ Supported:
 
 Not supported components and features: ASM, Data Guard.
 
+# Prerequisites
+
+1. Install Oracle integration in your org in-app.
+2. Disable checks in `oracle.d`
+
+# Setup
+
 For setup instructions, select your hosting type:
 
 {{< partial name="dbm/dbm-setup-oracle" >}}
