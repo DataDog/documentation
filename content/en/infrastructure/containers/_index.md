@@ -33,7 +33,7 @@ Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technol
 
 ## Setup
 
-To use the Containers page, enable process collection.
+To use the Containers page, enable the Process Agent.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -49,40 +49,18 @@ For example:
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Use the `features.liveProcessCollection` parameter in your `datadog-agent.yaml`:
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    credentials:
-      apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_APP_KEY>
-  features:
-    liveProcessCollection:
-      enabled: true
-```
-
-Then, apply the new configuration:
-
-```bash
-kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
-```
+The Datadog Operator enables the Process Agent by default.
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-If you are using the [official Helm chart][1], enable the `processAgent.enabled` and `processAgent.processCollection` parameters in your [`values.yaml`][2] file:
+If you are using the [official Helm chart][1], enable the `processAgent.enabled` parameter in your [`values.yaml`][2] file:
 
 ```yaml
 datadog:
   # (...)
   processAgent:
     enabled: true
-    processCollection: true
 ```
 
 Then, upgrade your Helm chart.
@@ -96,7 +74,6 @@ datadog:
   #(...)
   processAgent:
     enabled: true
-    processCollection: true
 ```
 
 [1]: https://github.com/DataDog/helm-charts

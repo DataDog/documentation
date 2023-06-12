@@ -15,7 +15,7 @@ Orchestrator Explorer requires **Agent version >= 7.27.0** and **Cluster Agent v
 
 ## Setup
 
-Ensure that you have [enabled process collection][2]. If you are using Datadog Operator or the official Helm chart, the Orchestrator Explorer is enabled by default.
+Ensure that you have [enabled the Process Agent][2]. If you are using Datadog Operator or the official Helm chart, the Orchestrator Explorer is enabled by default.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -35,8 +35,6 @@ spec:
       apiKey: <DATADOG_API_KEY>
       appKey: <DATADOG_APP_KEY>
   features:
-    liveProcessCollection:
-      enabled: true
     orchestratorExplorer:
       enabled: true
 ```
@@ -53,7 +51,6 @@ datadog:
   # (...)
   processAgent:
     enabled: true
-    processCollection: true
   orchestratorExplorer:
     enabled: true
 ```
