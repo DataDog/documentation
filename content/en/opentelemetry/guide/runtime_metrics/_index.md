@@ -1,8 +1,6 @@
 ---
 title: OpenTelemetry Runtime Metrics
 kind: documentation
-aliases:
-- /opentelemetry/guide/runtime_metrics
 ---
 
 ## Overview
