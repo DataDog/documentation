@@ -80,7 +80,7 @@ Examples:
 ### Search using CIDR notation
 Classless Inter Domain Routing (CIDR) is a notation that allows users to define a range of IP addresses (also called CIDR block) succinctly. It is most commonly used to define a network (such as a VPC) or a sub-network(Such as Public/Private Subnet within a VPC).
 
-Users can use “CIDR()” function to query attributes in logs using CIDR notation. The CIDR() function needs to be passed in an log attribute as a parameter to filter against followed by one or multiple CIDR blocks. 
+Users can use `CIDR()` function to query attributes in logs using CIDR notation. The CIDR() function needs to be passed in an log attribute as a parameter to filter against followed by one or multiple CIDR blocks. 
 
 Examples
 1. `CIDR(@network.client.ip,13.0.0.0/8)` would match and filter logs that have ip addresses in the field `network.client.ip` that fall under the 13.0.0.0/8 CIDR block
