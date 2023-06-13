@@ -24,72 +24,82 @@ further_reading:
 
 ## Overview
 
-Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into any bad actors targeting your systems. ASM helps you quickly respond to threats and remediate vulnerabilities on your web applications and APIs.
+Datadog Application Security Management (ASM) is meant to help you easily secure your web applications and APIs in production. It provides visibility into application-level vulnerabilities in your services and protects in real-time from attacks and attackers that aim to exploit these vulnerabilities.
 
 This guide walks you through best practices for getting your team up and running with ASM.
 
-## Phase 1: Enable ASM on your exposed services
+## Identify services under security risk
 
-In your first three days with Datadog ASM:
+Identify which of your services are exposed to security risks and would most benefit from ASM by checking your ASM landing page.
 
-1. **Identify the most exposed services.** Go to the [Service Catalog Security view][1] and sort the data by the `Suspicious Requests` column.  
+1. **Identify services vulnerable or exposed to attacks.** Head to the [ASM Setup page][1] and select services recommended by Datadog.
 
-   {{< img src="getting_started/appsec/gs-appsec-most-exposed.png" alt="Service Catalog Security view sorted by the Suspicious requests column. The web-store service, for example, shows thousands of suspicious requests detected." style="width:100%;" >}}
+   {{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="ASM Setup page view, sorted by Suspicious requests columns. The product-recommendation service, for example, shows tens of vulnerabilities and thousands of suspicious requests detected." style="width:100%;" >}}
 
-   This data is collected from APM traces (through Datadog libraries). It provides you with visibility on the services that are exposed to the most suspicious traffic.
+   These security insights are detected from data reported by APM. They help you prioritize your security investments. ASM will then identify, prioritize and help remediate all security risks on your services.
 
-2. **Enable ASM on the most exposed services.** Click `Enable ASM` in the ASM Status column to see the instructions or share them with the service's owner. 
+2. **No service recommended by Datadog?.** In case no vulnerabilities or suspicious requests are reported yet:
 
-   Because ASM relies on the same library as APM, configuring a single environment variable is all that is needed to get ASM enabled on a service that is already sending traces. Read more in the [Enabling ASM documentation][2].
+   - Ensure your services are using a recent Datadog tracing library version. From [APM Service Catalog][2]: click on service to open sidepanel > Tracing Configuration.
+  // Add image for Tracing configuration here 
+   - Identify services that are exposed to traffic coming from the internet and go ahead with the ASM setup.
+  
+    Once you’ve identified a couple of services under security risks, it is time to enable ASM.
 
-3. **Explore your first suspicious requests.** Go to **[Security --> Application Security][7]** to see suspicious requests listed in ASM.
+## Setup ASM
 
-   - If the client IP is not well-resolved (for example, if it's showing an internal or proxy IP), [configure the client IP header][3].
+ASM relies on the same library as Datadog Application Performance Monitoring (APM). 
+To benefit from all the ASM capabilities - detections auto-updates, protection - we recommend enabling [Remote Configuration][15] first.
 
-   - Open the **[Traces][8]** page and click one of the traces for a suspicious request. The Attack Flow diagram helps you understand all the services hit by the attack. Scroll down to the Security section to read about why this request was flagged as suspicious. Read more in [How Application Security Management Works][4].
+### Enable ASM with in-app instructions
 
-   You don't need to examine every suspicious request individually. ASM generates _signals_ when your attention is required, which you can learn about in Phase 2.
+Go to the [ASM Setup page][1] and follow the instructions to get started with the product. This includes:
+- Guided selection of services that would benefit from ASM
+- Configuring your Datadog tracing libraries with an environment variable
+- Restarting your services
 
-4. Now that ASM is set up detecting suspicious requests on your service in real-time, **let the product run for a couple days**.
+### Enable ASM in a few clicks with Remote Configuration
+#### Prerequisites
+- Datadog Agent versions 7.42.0 or higher are installed on your hosts or containers
+- Datadog Tracer versions are [compatible with Remote Configuration][16]
 
-If your services use recent versions of tracing libraries, ASM immediately [detects security vulnerabilities][13] in the upstream libraries that your services have as dependencies, and APM previews this information for you in its Security view. Optionally, explore ASM's consolidated [Vulnerabilities view][14] to see how it helps you triage and prioritize vulnerabilities.
+#### Setup Remote Configuration (if not enabled already)
+  Follow the steps to enable [Remote Configuration][17] in your Datadog interface. You will only need to:
+  1. Activate the capability for your Datadog organization
+  2. Add Remote Configuration rights to an existing API key, or create a new one
+  3. Update your Datadog Agent configuration to use the API key with Remote Configuration rights
 
-**Note**: ASM also enables you to **track user activity**, identifying authenticated users making suspicious requests. [Setting up authenticated user tracking][5] is not required to use ASM, but it does help you get visibility on authenticated attacks and attackers. 
+#### Enable ASM in a few clicks
+  1. [Go to ASM][18] and click “Get Started with ASM”
+  2. Select services exposed to risk that are recommended by Datadog
+  3. Follow the instructions to get started with ASM.
 
-## Phase 2: Review your first security signals and vulnerabilities
+## Test ASM
+Once enabled, ASM will immediately identify application vulnerabilities and start detecting attacks and attackers targeting your services:
 
-After a few days of usage, you typically get your first security signals. If you have not received your first security signal, you can simulate an attack and trigger a signal by running the following script from a terminal:
+1. Validate vulnerabilities are reported by checking the [Vulnerabilities tab][14], helping you triage and remediate them.
+2. Validate attacks are being monitored in traffic by sending attack patterns triggering a test detection rule. From your terminal, run the following script:
 
-{{< code-block lang="sh" >}}
-for ((i=1;i<=200;i++)); do
-# Target existing service's routes
-curl https://your-application-url/<EXISTING ROUTE> -A
-'dd-test-scanner-log';
-# Target non existing service's routes
-curl https://your-application-url/<NON-EXISTING ROUTE> -A
-'dd-test-scanner-log';
-done{{< /code-block >}}
+  {{< code-block lang="sh" >}}
+  for ((i=1;i<=200;i++)); do
+  # Target existing service's routes
+  curl https://your-application-url/<EXISTING ROUTE> -A
+  'dd-test-scanner-log';
+  # Target non existing service's routes
+  curl https://your-application-url/<NON-EXISTING ROUTE> -A
+  'dd-test-scanner-log';
+  done{{< /code-block >}}
 
-Over the next few days:
+3. A first [Security Signal][6] should be generated within a few seconds.
 
-1. **Review security signals at [Security --> Application Security --> Signals][6].** Security signals are generated by ASM when your attention is required. The signal severity provides you with insights on how quickly you need to react. 
-   
-   Aim to review `INFO` and `LOW` signals once a week, `MEDIUM` and `HIGH` once a day, and `CRITICAL` signals immediately.
-
-2. **Click a signal to see its details.** The signal details tell you what happened, who the attackers are, and what you should do next. On the Traces tab, you can investigate the traces that generated the signals.
-
-3. **Archive the signal after it's been investigated.** If the signal is a false positive, set up a [passlist entry][9] to eliminate noisy signal patterns.
-
-4. **[Subscribe to the weekly digest][10]** to receive weekly updates on your detected security activity.
-
-5. **Set up a [notification rule][12]** to alert you in real-time when attacks require your attention, over email, Slack, or other communication integrations. Datadog recommends [setting a notification rule][11] for `Medium` and higher severity signals.
+ASM is now up and running with basic configuration. Interested in best practices to go further? Check our [in-product Quickstart Guide.][19]
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
-[2]: /security/application_security/enabling/
+[1]: https://app.datadoghq.com/security/configuration/asm/services-setup/services-selection?services=recommended
+[2]: https://app.datadoghq.com/services?hostGroup=%2A&lens=Security
 [3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /security/application_security/how-appsec-works/
 [5]: /security/application_security/threats/add-user-info/
@@ -101,4 +111,9 @@ Over the next few days:
 [11]: https://app.datadoghq.com/security/configuration/notification-rules
 [12]: /security/notifications/rules/
 [13]: /security/application_security/risk_management
-[14]: https://app.datadoghq.com/security/appsec/vm
+[14]: https://app.datadoghq.com/security/appsec/vm?&group=vulnerability
+[15]: https://docs.datadoghq.com/agent/guide/how_remote_config_works/?tab=configurationyamlfile#overview
+[16]: https://docs.datadoghq.com/fr/security/application_security/enabling/compatibility/
+[17]: https://app.datadoghq.com/organization-settings/remote-config
+[18]: https://app.datadoghq.com/security/appsec/landing
+[19]: https://app.datadoghq.com/security/configuration/asm/onboarding
