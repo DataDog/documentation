@@ -209,7 +209,7 @@ Datadog provides a recommended monitor you can use as a template to get started.
 
 1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][8] tab.
 2. Select the recommended monitor titled `[Azure] Integration Errors`.
-3. Make any desired modifications to the search query or alert conditions. By default, the monitor will trigger whenever a new error is detected, and resolve when the error has not been detected for the past 15 minutes.
+3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][9] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
 
