@@ -7,9 +7,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
   text: "Monitor all your CI pipelines with Datadog"
-- link: "/continuous_integration/static_analysis/configuration"
-  tag: "Documentation"
-  text: "Learn how to set up Static Analysis"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
@@ -39,15 +36,14 @@ Using Static Analysis provides organizations with the following benefits:
 
 ## Integrations
 
-{{< whatsnext desc="With Static Analysis, you can integrate feedback in a supporting CI platform provider, with native integrations for GitHub and CircleCI. See the documentation for information about the following integrations, or read more about configuring the Datadog CI NPM package:">}}
-    {{< nextlink href="continuous_integration/static_analysis/configuration" >}}Configuring the NPM package{{< /nextlink >}}
+{{< whatsnext desc="With Static Analysis, you can integrate feedback in a supporting CI platform provider, with native integrations for GitHub and CircleCI. See the documentation for information about the following integrations:">}}
     {{< nextlink href="continuous_integration/static_analysis/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Usage
 
-Datadog Static Analysis runs in your CI pipelines using the [datadog-ci CLI][2] and checks your code against Datadog's default rulesets. To install and configure the [`@datadog/datadog-ci` CLI using the NPM package][2], see [Configuration][3].
+Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][2] and checks your code against Datadog's default rulesets.
 
 ### Search and filter results
 
@@ -59,7 +55,7 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-* Source Code: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
+* Source Code: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][3].
 * Fix: Where possible, one or more code fixes that can resolve the violation, which you can copy and paste.
 * Event: JSON metadata regarding the the Static Analysis violation event.
 
@@ -69,5 +65,4 @@ The content of the violation is shown in tabs:
 
 [1]: https://app.datadoghq.com/ci/static-analysis
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /continuous_integration/static_analysis/configuration/
-[4]: /integrations/github/
+[3]: /integrations/github/
