@@ -137,7 +137,7 @@
                     {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1)) }}
                       {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
                       <div class="alert alert-warning mb-2 unstable-newer">
-                        <p class="alert-warning">Note: For the "v2" version of this endpoint, which is in public beta, see <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
+                        <p class="alert-warning">Note: For the "v2" version of this endpoint, which is in beta, see <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
                       </div>
                     {{ end }}
 

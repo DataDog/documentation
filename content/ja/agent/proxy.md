@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - agent proxy
 aliases:
 - /ja/account_management/faq/can-i-use-a-proxy-to-connect-my-servers-to-datadog/
 further_reading:
@@ -11,6 +14,9 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: トレースとプロファイルを収集する
+- link: /agent/guide/agent-fips-proxy
+  tag: Documentation
+  text: Datadog FIPS コンプライアンス
 kind: documentation
 title: Agent プロキシのコンフィギュレーション
 ---
@@ -25,15 +31,19 @@ title: Agent プロキシのコンフィギュレーション
 2. HAProxy を使用する (**16～20 以上の Agent** に対して同じプロキシを使用する場合)
 3. Agent をプロキシとして使用する (プロキシあたり**最大 16 Agent**、**Agent v5 のみ**)
 
+## FIPS コンプライアンス
+
+Datadog Agent FIPS Proxy の設定については、[Datadog FIPS コンプライアンス][8]を参照してください。FIPS プロキシは US1-FED リージョンでのみ利用可能です。Datadog Agent FIPS Proxy は、通常のプロキシと併用することはできません。
+
 ## Web プロキシ
 
 Squid に関する具体的な情報は、本ページの [Squid](#squid) のセクションを参照してください。
 
-Agent は従来の Web プロキシをネイティブにサポートします。プロキシ経由でインターネットに接続する必要がある場合は、Agent 構成ファイルを編集します。
+Agent は従来の Web プロキシをネイティブにサポートします。プロキシ経由でインターネットに接続する必要がある場合は、Agent コンフィギュレーションファイルを編集します。
 
 **Agent v6 & v7**
 
-Agent `datadog.yaml` コンフィギュレーションファイルで、`https` リクエスト用と `http` リクエスト用にそれぞれプロキシサーバーを設定します。Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたいずれのリクエストでも、プロキシサーバーで SSL を有効化することができます。`datadog.yaml` ファイルのコンフィギュレーション例は以下の通りです。
+Agent `datadog.yaml` コンフィギュレーションファイルで、`https` リクエスト用と `http` リクエスト用にそれぞれプロキシサーバーを設定します。Agent は `https` を使用して Datadog にデータを送信しますが、インテグレーションは `http` を使用してメトリクスを収集することがあります。プロキシ転送されたいずれのリクエストでも、プロキシサーバーで SSL を有効化することができます。`datadog.yaml` ファイルの構成例は以下の通りです。
 
 <div class="alert alert-warning">
 ログ収集が有効になっている場合は、特定のトランスポートが<a href="/agent/logs/log_transport?tab=https#enforce-a-specific-transport">強制</a>されていることを確認してください。
@@ -81,13 +91,13 @@ proxy:
 
 ##### NO_PROXY 許容値
 
-デフォルトで、`no_proxy`/`NO_PROXY` は Agent HTTP(S) リクエストのエンドポイントに一致する必要があります（Agent のインテグレーションにより実行されたリクエストを除く）。Agent で `NO_PROXY` の値がインテグレーションに使用した同じルール（下記）と一致するようにするため、`no_proxy_nonexact_match` を有効にすることをおすすめします。
+デフォルトで、`no_proxy`/`NO_PROXY` は Agent HTTP(S) リクエストのエンドポイントに一致する必要があります (Agent のインテグレーションにより実行されたリクエストを除く)。Agent で `NO_PROXY` の値がインテグレーションに使用した同じルール (下記) と一致するようにするため、`no_proxy_nonexact_match` を有効にすることをおすすめします。
 
 ```yaml
 no_proxy_nonexact_match: true
 ```
 
-Agent のインテグレーション（および `no_proxy_nonexact_match` が有効の場合は Agent 全体）に以下のルールが適用されます。
+Agent のインテグレーション (および `no_proxy_nonexact_match` が有効の場合は Agent 全体) に以下のルールが適用されます。
 * ドメイン名は同じ名称およびすべてのサブドメインに一致します。例:
   - `datadoghq.com` は `app.agent.datadoghq.com`、`www.datadoghq.com`、`datadoghq.com` に一致しますが、 `www.notdatadoghq.com` は**例外**となります。 
   - `datadoghq` は `frontend.datadoghq`、`backend.datadoghq` に一致しますが、`www.datadoghq.com` および `www.datadoghq.eu` は**例外**となります。 
@@ -146,7 +156,7 @@ proxy_password: my_password
 
 内部 Agent と Datadog の両方に接続可能なホストに Squid をインストールします。オペレーティングシステムのパッケージマネージャーを使用するか、[Squid のプロジェクトページ][2]から直接ソフトウェアをインストールします。
 
-Squid を構成するには、コンフィギュレーションファイルを編集します。このファイルは通常、Linuxでは `/etc/squid/squid.conf`、Windowsでは `C:\squid\etc\squid.conf` にあります。
+Squid を構成するには、コンフィギュレーションファイルを編集します。このファイルは通常、Linuxでは `/etc/squid/squid.conf`、Windows では `C:\squid\etc\squid.conf` にあります。
 
 Squid がローカルトラフィックを受け入れ、必要な Datadog インテークに転送できるように、`squid.conf` コンフィギュレーションファイルを編集します。
 
@@ -252,11 +262,11 @@ yum install ca-certificates # (CentOS, Red Hat)
 
 ### HAProxy によるプロキシ転送
 
-#### HAProxy コンフィギュレーション
+#### HAProxy 構成
 
-Datadog への接続があるホストに HAProxy をインストールする必要があります。次の構成ファイルのいずれかを使用することができます (まだ構成していない場合)。
+Datadog への接続があるホストに HAProxy をインストールする必要があります。次のコンフィギュレーションファイルのいずれかを使用することができます (まだ構成していない場合)。
 
-**注**: Agent と HAProxy が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` 構成ファイルを使用することが推奨されます。
+**注**: Agent と HAProxy が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` コンフィギュレーションファイルを使用することが推奨されます。
 
 ##### HTTP
 
@@ -859,7 +869,7 @@ remote_configuration:
     no_tls: true
 ```
 
-Agent と HAProxy 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent 構成ファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
+Agent と HAProxy 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent コンフィギュレーションファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
 このオプションを `true` に設定すると、Agent は証明書の検証ステップをスキップし、プロキシの身元を検証しませんが、通信は SSL/TLS で暗号化されます。
 
 ```yaml
@@ -886,7 +896,7 @@ endpoint = http://haproxy.example.com:3835
 endpoint = http://haproxy.example.com:3837
 ```
 
-Supervisor コンフィギュレーションを編集して SSL 証明書の検証を無効にします。これは、SSL 証明書 (`app.datadoghq.com`) のホスト名と HAProxy のホスト名の不一致を Python が訴えることを避けるために必要です。Supervisor コンフィギュレーションは次の場所にあります:
+Supervisor 構成を編集して SSL 証明書の検証を無効にします。これは、SSL 証明書 (`app.datadoghq.com`) のホスト名と HAProxy のホスト名の不一致を Python が訴えることを避けるために必要です。Supervisor 構成は次の場所にあります。
 
 * Debian ベースのシステムの場合、`/etc/dd-agent/supervisor_ddagent.conf`
 * Red Hat ベースのシステムの場合、`/etc/dd-agent/supervisor.conf`
@@ -900,7 +910,7 @@ Supervisor ファイルが `<SUP_FILE>` にあると仮定すると、
 sed -i 's/ddagent.py/ddagent.py --sslcheck=0/' <SUP_FILE>
 ```
 
-Windows Agent の場合は、構成ファイル `datadog.conf` を編集してこのオプションを追加します:
+Windows Agent の場合は、コンフィギュレーションファイル `datadog.conf` を編集してこのオプションを追加します。
 
 ```conf
 skip_ssl_validation: yes
@@ -932,9 +942,9 @@ yum install ca-certificates # (CentOS, Red Hat)
 
 #### NGINX コンフィギュレーション
 
-Datadog への接続があるホストに NGINX をインストールする必要があります。次の構成ファイルのいずれかを使用することができます (まだ構成していない場合)。
+Datadog への接続があるホストに NGINX をインストールする必要があります。次のコンフィギュレーションファイルのいずれかを使用することができます (まだ構成していない場合)。
 
-**注**: Agent と NGINX が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` 構成ファイルを使用することが推奨されます。
+**注**: Agent と NGINX が同じ孤立したローカルネットワークの一部でない場合、`HTTPS` コンフィギュレーションファイルを使用することが推奨されます。
 
 ##### HTTP
 
@@ -1227,7 +1237,7 @@ remote_configuration:
 ```
 
 
-Agent と NGINX 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent 構成ファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
+Agent と NGINX 間で暗号化を使用する場合、Agent がプロキシ証明書にアクセスできない、証明書を検証できない、または検証が必要ない場合、`datadog.yaml` Agent コンフィギュレーションファイルを編集して `skip_ssl_validation` を `true` に設定することができます。
 このオプションを `true` に設定すると、Agent は証明書の検証ステップをスキップし、プロキシの身元を検証しませんが、通信は SSL/TLS で暗号化されます。
 
 ```yaml
@@ -1289,3 +1299,4 @@ TCP 経由でログを送信する場合は、[ログの TCP プロキシ][7]を
 [5]: https://www.haproxy.com/blog/haproxy-ssl-termination/
 [6]: https://www.nginx.com
 [7]: /ja/agent/logs/proxy
+[8]: /ja/agent/guide/agent-fips-proxy
