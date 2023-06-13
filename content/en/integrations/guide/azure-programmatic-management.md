@@ -112,25 +112,23 @@ You can use Terraform to create and manage the Datadog Agent extension. Follow t
 
 See the [Virtual Machine Extension resource][10] in the Terraform registry for more information about the available arguments.
 
-## Log collection
+### Monitor the integration status
 
-The best method for submitting logs from Azure to Datadog is with the Agent or DaemonSet. For some resources it may not be possible. In these cases, Datadog recommends creating a log forwarding pipeline using an Azure Event Hub to collect Azure Platform Logs. For resources that cannot stream Azure Platform Logs to an Event Hub, you can use the Blob Storage forwarding option.
+Once the integration is configured, Datadog begins running a continuous series of calls to Azure APIs to collect critical monitoring data from your Azure environment. Sometimes these calls return errors (for example, if the provided credentials have expired). These errors can inhibit or block Datadog's ability to collect monitoring data.
 
-To get started, click the button below and fill in the form on Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account are deployed for you.
+When critical errors are encountered, the Azure integration generates events in the Datadog Events Explorer, and republishes them every five minutes. You can configure an Event Monitor to trigger when these events are detected and notify the appropriate team.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
+Datadog provides a recommended monitor you can use as a template to get started. To use the recommended monitor:
 
-Use the Azure CLI to create diagnostic settings that forward logs to your event hub:
+1. In Datadog, go to **Monitors** -> **New Monitor** and select the [Recommended Monitors][19] tab.
+2. Select the recommended monitor titled `[Azure] Integration Errors`.
+3. Make any desired modifications to the search query or alert conditions. By default, the monitor triggers whenever a new error is detected, and resolves when the error has not been detected for the past 15 minutes.
+4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
+5. [Configure notifications][20] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
 
-{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
+#### Sending logs
 
-az monitor diagnostic-settings create --name
-                                      --resource
-                                      [--event-hub]
-                                      
-{{< /code-block >}}
-
-See the [az monitor diagnostic-settings create][16] section in the Azure CLI reference for more information.
+See the [Azure Logging guide][18] to set up log forwarding from your Azure environment to Datadog.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -150,3 +148,6 @@ See the [az monitor diagnostic-settings create][16] section in the Azure CLI ref
 [15]: /integrations/terraform/#overview
 [16]: https://learn.microsoft.com/en-us/cli/azure/monitor/diagnostic-settings?view=azure-cli-latest#az-monitor-diagnostic-settings-create
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
+[18]: /logs/guide/azure-logging-guide
+[19]: https://app.datadoghq.com/monitors/recommended
+[20]: /monitors/notify/#notify-your-team
