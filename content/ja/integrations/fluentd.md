@@ -29,6 +29,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
+- metrics
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
 display_on_public_website: true
@@ -46,15 +47,16 @@ public_title: FluentD
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
   - Category::ログの収集
+  - Category::Metrics
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
   media: []

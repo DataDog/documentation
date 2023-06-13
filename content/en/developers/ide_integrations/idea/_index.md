@@ -142,7 +142,7 @@ The active Profiling tab also affects the IDEA project tree view, which is annot
 
 ## Feedback
 
-Let us know what you think about the plugin! Provide feedback on our [discussion forum][5], or send an e-mail to `team-ide-integration@datadoghq.com`.
+Let us know what you think about the plugin! Provide feedback on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
 
 ## Further reading
 

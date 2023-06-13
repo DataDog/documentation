@@ -23,6 +23,30 @@
     "request_description": "",
     "request_schema_description": "Request used to update an API key."
   },
+  "ListSpansMetrics": {
+    "description": "Get the list of configured span-based metrics with their definitions.",
+    "summary": "Get all span-based metrics"
+  },
+  "CreateSpansMetric": {
+    "description": "Create a metric based on your ingested spans in your organization.\nReturns the span-based metric object from the request body when the request is successful.",
+    "summary": "Create a span-based metric",
+    "request_description": "The definition of the new span-based metric.",
+    "request_schema_description": "The new span-based metric body."
+  },
+  "DeleteSpansMetric": {
+    "description": "Delete a specific span-based metric from your organization.",
+    "summary": "Delete a span-based metric"
+  },
+  "GetSpansMetric": {
+    "description": "Get a specific span-based metric from your organization.",
+    "summary": "Get a span-based metric"
+  },
+  "UpdateSpansMetric": {
+    "description": "Update a specific span-based metric from your organization.\nReturns the span-based metric object from the request body when the request is successful.",
+    "summary": "Update a span-based metric",
+    "request_description": "New definition of the span-based metric.",
+    "request_schema_description": "The new span-based metric body."
+  },
   "ListApplicationKeys": {
     "description": "List all application keys available for your org",
     "summary": "Get all application keys"
@@ -225,6 +249,60 @@
     "request_description": "Incident integration metadata payload.",
     "request_schema_description": "Patch request for an incident integration metadata."
   },
+  "ListIncidentTodos": {
+    "description": "Get all todos for an incident.",
+    "summary": "Get a list of an incident's todos"
+  },
+  "CreateIncidentTodo": {
+    "description": "Create an incident todo.",
+    "summary": "Create an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Create request for an incident todo."
+  },
+  "DeleteIncidentTodo": {
+    "description": "Delete an incident todo.",
+    "summary": "Delete an incident todo"
+  },
+  "GetIncidentTodo": {
+    "description": "Get incident todo details.",
+    "summary": "Get incident todo details"
+  },
+  "UpdateIncidentTodo": {
+    "description": "Update an incident todo.",
+    "summary": "Update an incident todo",
+    "request_description": "Incident todo payload.",
+    "request_schema_description": "Patch request for an incident todo."
+  },
+  "ListGCPSTSAccounts": {
+    "description": "List all GCP STS-enabled service accounts configured in your Datadog account.",
+    "summary": "List all GCP STS-enabled service accounts"
+  },
+  "CreateGCPSTSAccount": {
+    "description": "Create a new entry within Datadog for your STS enabled service account.",
+    "summary": "Create a new entry for your service account",
+    "request_description": "",
+    "request_schema_description": "Data on your newly generated service account."
+  },
+  "DeleteGCPSTSAccount": {
+    "description": "Delete an STS enabled GCP account from within Datadog.",
+    "summary": "Delete an STS enabled GCP Account"
+  },
+  "UpdateGCPSTSAccount": {
+    "description": "Update an STS enabled service account.",
+    "summary": "Update STS Service Account",
+    "request_description": "",
+    "request_schema_description": "Service account info."
+  },
+  "GetGCPSTSDelegate": {
+    "description": "List your Datadog-GCP STS delegate account configured in your Datadog account.",
+    "summary": "List delegate account"
+  },
+  "MakeGCPSTSDelegate": {
+    "description": "Create a Datadog GCP principal.",
+    "summary": "Create a Datadog GCP principal",
+    "request_description": "Create a delegate service account within Datadog.",
+    "request_schema_description": ""
+  },
   "ListOpsgenieServices": {
     "description": "Get a list of all services from the Datadog Opsgenie integration.",
     "summary": "Get all service objects"
@@ -380,7 +458,7 @@
     "request_schema_description": "Update the IP allowlist."
   },
   "SubmitLog": {
-    "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted up to 18 hours in the past and 2 hours in the future.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
+    "description": "Send your logs to your Datadog platform over HTTP. Limits per HTTP request are:\n\n- Maximum content size per payload (uncompressed): 5MB\n- Maximum size for a single log: 1MB\n- Maximum array size if sending multiple logs in an array: 1000 entries\n\nAny log exceeding 1MB is accepted and truncated by Datadog:\n- For a single log request, the API truncates the log at 1MB and returns a 2xx.\n- For a multi-logs request, the API processes all logs, truncates only logs larger than 1MB, and returns a 2xx.\n\nDatadog recommends sending your logs compressed.\nAdd the `Content-Encoding: gzip` header to the request when sending compressed logs.\nLog events can be submitted with a timestamp that is up to 18 hours in the past.\n\nThe status codes answered by the HTTP API are:\n- 202: Accepted: the request has been accepted for processing\n- 400: Bad request (likely an issue in the payload formatting)\n- 401: Unauthorized (likely a missing API Key)\n- 403: Permission issue (likely using an invalid API Key)\n- 408: Request Timeout, request should be retried after some time\n- 413: Payload too large (batch is above 5MB uncompressed)\n- 429: Too Many Requests, request should be retried after some time\n- 500: Internal Server Error, the server encountered an unexpected condition that prevented it from fulfilling the request, request should be retried after some time\n- 503: Service Unavailable, the server is not ready to handle the request probably because it is overloaded, request should be retried after some time",
     "summary": "Send logs",
     "request_description": "Log to send (JSON format).",
     "request_schema_description": "Structured log message."
@@ -529,7 +607,7 @@
   },
   "DeleteBulkTagsMetricsConfiguration": {
     "description": "Delete all custom lists of queryable tag keys for a set of existing count, gauge, rate, and distribution metrics.\nMetrics are selected by passing a metric name prefix.\nResults can be sent to a set of account email addresses, just like the same operation in the Datadog web app.\nCan only be used with application keys of users with the `Manage Tags for Metrics` permission.",
-    "summary": "Configure tags for multiple metrics",
+    "summary": "Delete tags for multiple metrics",
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag deletion request."
   },
@@ -603,6 +681,20 @@
     "description": "Returns a list of all permissions, including name, description, and ID.",
     "summary": "List permissions"
   },
+  "ListFindings": {
+    "description": "Get a list of CSPM findings.\n\n### Filtering\n\nFilters can be applied by appending query parameters to the URL.\n\n  - Using a single filter: `?filter[attribute_key]=attribute_value`\n  - Chaining filters: `?filter[attribute_key]=attribute_value&filter[attribute_key]=attribute_value...`\n  - Filtering on tags: `?filter[tags]=tag_key:tag_value&filter[tags]=tag_key_2:tag_value_2`\n\nHere, `attribute_key` can be any of the filter keys described further below.\n\nQuery parameters of type `integer` support comparison operators (`>`, `>=`, `<`, `<=`). This is particularly useful when filtering by `evaluation_changed_at` or `resource_discovery_timestamp`. For example: `?filter[evaluation_changed_at]=>20123123121`.\n\nYou can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*` to filter for any non-AWS resources.\n\nThe operator must come after the equal sign. For example, to filter with the `>=` operator, add the operator after the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\n### Response\n\nThe response includes an array of finding objects, pagination metadata, and a count of items that match the query.\n\nEach finding object contains the following:\n\n- The finding ID that can be used in a `GetFinding` request to retrieve the full finding details.\n- Core attributes, including status, evaluation, high-level resource details, muted state, and rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time stamps.\n- An array of associated tags.\n",
+    "summary": "List findings"
+  },
+  "GetFinding": {
+    "description": "Returns a single finding with message and resource configuration.",
+    "summary": "Get a finding"
+  },
+  "UpdateFinding": {
+    "description": "Mute or unmute a specific finding.\nThe API returns the updated finding object when the request is successful.",
+    "summary": "Mute or unmute a finding",
+    "request_description": "To mute or unmute a finding, the request body should include at least two attributes: `muted` and `reason`. The allowed reasons depend on whether the finding is being muted or unmuted:\n- To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.\n- To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`, `OTHER`.\n",
+    "request_schema_description": "The new mute finding request."
+  },
   "ListProcesses": {
     "description": "Get all processes for your organization.",
     "summary": "Get all processes"
@@ -628,7 +720,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Connections: `connection`\n- Dashboards: `dashboard`\n- Notebooks: `notebook`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n\n#### Supported relations for resources\nResource Type            | Supported Relations\n-------------------------|--------------------------\nConnections              | `viewer`, `editor`, `resolver`\nDashboards               | `viewer`, `editor`\nNotebooks                | `viewer`, `editor`\nSecurity Rules           | `viewer`, `editor`\nService Level Objectives | `viewer`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -985,6 +1077,84 @@
     "summary": "Save new value for on-demand concurrency cap",
     "request_description": ".",
     "request_schema_description": "On-demand concurrency cap attributes."
+  },
+  "ListTeams": {
+    "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",
+    "summary": "Get all teams"
+  },
+  "CreateTeam": {
+    "description": "Create a new team.\nUser IDs passed through the `users` relationship field are added to the team.",
+    "summary": "Create a team",
+    "request_description": "",
+    "request_schema_description": "Request to create a team"
+  },
+  "DeleteTeam": {
+    "description": "Remove a team using the team's `id`.",
+    "summary": "Remove a team"
+  },
+  "GetTeam": {
+    "description": "Get a single team using the team's `id`.",
+    "summary": "Get a team"
+  },
+  "UpdateTeam": {
+    "description": "Update a team using the team's `id`.\nIf the `team_links` relationship is present, the associated links are updated to be in the order they appear in the array, and any existing team links not present are removed.",
+    "summary": "Update a team",
+    "request_description": "",
+    "request_schema_description": "Team update request"
+  },
+  "GetTeamLinks": {
+    "description": "Get all links for a given team.",
+    "summary": "Get links for a team"
+  },
+  "CreateTeamLink": {
+    "description": "Add a new link to a team.",
+    "summary": "Create a team link",
+    "request_description": "",
+    "request_schema_description": "Team link create request"
+  },
+  "DeleteTeamLink": {
+    "description": "Remove a link from a team.",
+    "summary": "Remove a team link"
+  },
+  "GetTeamLink": {
+    "description": "Get a single link for a team.",
+    "summary": "Get a team link"
+  },
+  "UpdateTeamLink": {
+    "description": "Update a team link.",
+    "summary": "Update a team link",
+    "request_description": "",
+    "request_schema_description": "Team link create request"
+  },
+  "GetTeamMemberships": {
+    "description": "Get a paginated list of members for a team",
+    "summary": "Get team memberships"
+  },
+  "CreateTeamMembership": {
+    "description": "Add a user to a team.",
+    "summary": "Add a user to a team",
+    "request_description": "",
+    "request_schema_description": "Team membership request"
+  },
+  "DeleteTeamMembership": {
+    "description": "Remove a user from a team.",
+    "summary": "Remove a user from a team"
+  },
+  "UpdateTeamMembership": {
+    "description": "Update a user's membership attributes on a team.",
+    "summary": "Update a user's membership attributes on a team",
+    "request_description": "",
+    "request_schema_description": "Team membership request"
+  },
+  "GetTeamPermissionSettings": {
+    "description": "Get all permission settings for a given team.",
+    "summary": "Get permission settings for a team"
+  },
+  "UpdateTeamPermissionSetting": {
+    "description": "Update a team permission setting for a given team.",
+    "summary": "Update permission setting for team",
+    "request_description": "",
+    "request_schema_description": "Team permission setting update request"
   },
   "ListIncidentTeams": {
     "description": "Get all incident teams for the requesting user's organization. If the `include[users]` query parameter is provided, the included attribute will contain the users related to these incident teams.",

@@ -96,7 +96,7 @@ For example, you can set different priorities for `alert` and `warning` notifica
 
 ## Notify your team
 
-Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the drop-down box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
+Use this section to send notifications to your team through email, Slack, PagerDuty, etc. You can search for team members and connected integrations with the dropdown box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
 
 **Note**: An `@notification` must have a space between it and the last line character, for example:
 
@@ -159,7 +159,7 @@ Test notifications are supported for the [monitor types][15]: host, metric, anom
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor’s configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][16] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][16] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 

@@ -10,6 +10,8 @@ further_reading:
 - link: "/agent/troubleshooting/agent_check_status/"
   tag: "Agent Troubleshooting"
   text: "Get the Status of an Agent Check"
+algolia:
+  tags: ['agent flare']
 ---
 
 If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.

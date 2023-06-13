@@ -68,7 +68,7 @@ For example, you can:
 
 {{< img src="tracing/api_catalog/endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph, and click through to related traces to investigate." video="true" >}}
 
-The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope drop-downs. 
+The performance graphs on the page are initially scoped to the same settings as on the API Catalog page, and you can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
 
 
 ## Exploring endpoints during incidents

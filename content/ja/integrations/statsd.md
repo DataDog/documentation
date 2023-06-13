@@ -22,7 +22,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/statsd/README.md
@@ -41,16 +40,15 @@ public_title: StatsD
 short_description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::モニタリング
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。
   media: []

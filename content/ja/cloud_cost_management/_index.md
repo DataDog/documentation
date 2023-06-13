@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/infrastructure/cloud_cost_management
+- /ja/integrations/cloudability
 further_reading:
 - link: https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/
   tag: GitHub
@@ -35,7 +36,7 @@ AWS の [Cost and Usage Report の作成][1]の説明に従い、Datadog Cloud C
 
 ### AWS インテグレーションの構成
 
-ドロップダウンメニューから AWS 管理アカウントを選択し、Datadog がこのアカウントに関連するタグを表示できるようにします。同じような名前の管理アカウントが複数ある場合、選択したアカウントに関連するタグを表示し、必要な特定のアカウントを選択したことを確認します。
+[Setup & Configuration](https://app.datadoghq.com/cost/setup) に移動し、ドロップダウンメニューから AWS 管理アカウントを選択し、Datadog がこのアカウントに関連するタグを表示できるようにします。同じような名前の管理アカウントが複数ある場合、選択したアカウントに関連するタグを表示し、必要な特定のアカウントを選択したことを確認します。
 
 **注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][2]からコストと使用量のレポートを送信することを推奨しています。AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、**管理アカウント**の[設定][3]で次のオプションが選択されていることを確認してください。
 
@@ -190,48 +191,75 @@ Datadog は取り込まれたコストデータにすぐに使えるタグを追
 {{% /tab %}}
 
 {{% tab "Azure" %}}
-<div class="alert alert-warning">Azure Cloud Cost Management は非公開ベータ版です。この<a href="https://docs.google.com/forms/d/e/1FAIpQLSftAIq_g4GxBAKdWV5OjP0Ui4CAjWTzH3YCKy3n930gMz0Krg/viewform?usp=sf_link">フォーム</a>にご記入の上、アクセスをリクエストしてください。</div>
 
-Datadog で Azure Cloud Cost Management を使用するには、Azure アカウントを持ち、**amortized** と **actual exports** の請求エクスポートを設定する必要があります。さらに、Datadog はコンテナからエクスポートを読み取る権限を持っている必要があります。
+Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure インテグレーションを設定し、**amortized** と **actual** のエクスポートをセットアップする必要があります。さらに、Datadog はコンテナからエクスポートを読み取る権限が必要です。
 
-**注**: Azure ポータルから推奨の [Datadog Resource メソッド][1] を使用して Datadog とのインテグレーションを設定した場合、Cloud Cost Management をサポートするために App Registration を作成する必要があります。
-
-### エクスポートのスケジュール
-
-1. Azure ポータルの *Cost Management + Billing* の下にある [Exports][2] に移動します。
-2. 請求のスコープを選択します。**注:** スコープは *subscription* または *resource group* でなければなりません。
-3. スコープを選択したら、**Add** をクリックします。
-4. メトリクスは、**Actual Cost (usage and purchases)** です。
-5. Export type が `Daily export of month-to-date costs` であることを確認します。
-6. File Partitioning が ** on** になっていることを確認します。
-
-エクスポートのメトリクスタイプを **Amortized Cost (usage and purchases)** として、ステップ 1～6 を繰り返します。Datadog は、同じストレージアカウントコンテナを使用することを推奨します。
-
-### Datadog がデータにアクセスできるようにする
-
-1. エクスポートが保存されているストレージコンテナへ移動します。
-    - Exports タブで、Storage Account の下のリンクをクリックし、移動します。
-    -  Containers タブをクリックします。
-    -  請求書の入っているストレージコンテナを選びます。
-2. Access Control (IAM) タブを選択します。
-3. Role Assignments タブをクリックし、**Add** をクリックします。
-4. **Storage Blob Data Reader** と **Cost Management Reader** を選択し、Next をクリックします。
-5. これらの権限を、Datadog と接続した App Registration のいずれかに割り当てます。
-    - どの App Registration が Datadog に接続されているかは、[Datadog の Azure インテグレーション][3]で確認することができます。
-    -  **Select members** をクリックし、App Registration の名前を選んで、**Select** をクリックします。
-    - *review + assign* を選択します。
-
-エクスポートが別のコンテナに入っている場合は、他のコンテナについて手順 1〜5 を繰り返します。
-
-### スコープ ID を探す手順
-
-エクスポートから、スコープのリンクをクリックします。スコープタイプに一致する ID を選択します。
-- スコープタイプが *subscription* の場合、サブスクリプション ID を使用します。
-- スコープタイプが *resource groups* の場合は、リソースグループ名を使用します。
+{{% site-region region="us3" %}}
+**注**: US3 のお客様であれば、Azure ポータルから推奨される [Datadog リソース方法][1]を使用して Datadog インテグレーションをセットアップしているかと思います。クラウドコストマネジメントに対応するためには、[App Registration の作成][2]が必要です。
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
-[3]: https://app.datadoghq.com/integrations/azure
+[2]: /ja/integrations/azure/?tab=azurecliv20#setup
+{{% /site-region %}}
+
+### コストエクスポートの生成
+
+1. Azure ポータルの *Cost Management + Billing* の下にある [Exports][3] に移動します。
+2. エクスポートのスコープを選択します。**注:** スコープは *billing account*、*subscription* または *resource group* でなければなりません。
+3. スコープを選択したら、**Add** をクリックします。
+
+{{< img src="cloud_cost/exports_scope.png" alt="Azure ポータルで、ナビゲーションのエクスポートオプションとエクスポートスコープをハイライト表示" >}}
+
+4. 次のエクスポートの詳細を選択します。
+    - Metric: **Actual Cost (usage and purchases)**
+    - Export type: **Daily export of month-to-date costs**
+    - File Partitioning: `On`
+
+{{< img src="cloud_cost/new_export.png" alt="Metric: Actual、Export type: Daily、File Partitioning: On のエクスポートの詳細" >}}
+
+5. エクスポートのためのストレージアカウント、コンテナ、およびディレクトリを選択します。**注:** 請求エクスポートは、エクスポートが対象としているサブスクリプションに保存される必要はありません。複数のサブスクリプションのエクスポートを作成する場合、Datadog は 1 つのサブスクリプションのストレージアカウントに保存することを推奨しています。
+6. **Create** を選択します。
+
+メトリクス **Amortized Cost (usage and purchases)** について、ステップ 1～6 を繰り返します。Datadog は、両方のエクスポートに同じストレージコンテナを使用することを推奨します。より速く処理するために、**Run Now** をクリックして最初のエクスポートを手動で生成します。
+{{< img src="cloud_cost/run_now.png" alt="エクスポートサイドパネルの Run Now ボタンをクリックし、エクスポートを生成します" >}}
+
+### Datadog がエクスポートにアクセスできるようにする
+
+1. Exports タブで、エクスポートの Storage Account をクリックし、移動します。
+2. Containers タブをクリックします。
+3. 請求書の入っているストレージコンテナを選びます。
+4. Access Control (IAM) タブを選択します。
+5. **Add** をクリックします。
+6. **Storage Blob Data Reader** を選択し、Next をクリックします。
+7. これらの権限を、Datadog と接続した App Registration のいずれかに割り当てます。
+    - **Select members** をクリックし、App Registration の名前を選んで、**Select** をクリックします。
+    - *review + assign* を選択します。
+
+エクスポートが別のコンテナに入っている場合は、他のコンテナについて手順 1〜7 を繰り返します。
+
+### コストマネジメントリーダーへのアクセス構成
+**注:** スコープが **Billing Account** の場合、このアクセスは構成する必要はありません。
+
+1. [サブスクリプション][4]に移動し、サブスクリプションの名前をクリックします。
+2. Access Control (IAM) タブを選択します。
+3. **Add** をクリックします。
+4. **Cost Management Reader** を選択し、Next をクリックします。
+5. これらの権限をサブスクリプションに割り当てます。
+
+これにより、Azure Cost Management に対して定期的にコスト計算を行うことができ、完全なコスト精度を確保することができます。
+
+### コストタイプ
+
+インジェストしたデータは、以下のコストタイプで可視化することができます。
+
+| コストタイプ            | 説明           |
+| -------------------- | --------------------- |
+| `azure.cost.amortized` | 適用される割引率に基づくコストと、割引期間中の使用量に応じたプリペイドの配分 (発生主義)。|
+| `azure.cost.actual` | コストは、使用時に請求される金額で表示されます (現金主義)。実際のコストには、プライベート割引、リザーブドインスタンスやセービングプランの割引が別の料金タイプとして含まれています。|
+
+[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#setup
+[3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -239,7 +267,7 @@ Datadog で Azure Cloud Cost Management を使用するには、Azure アカウ�
 
 インフラストラクチャーの支出を、関連する使用量メトリクスと一緒に可視化することで、潜在的な非効率性と節約の機会を発見することができます。Datadog ダッシュボードのウィジェットにクラウドコストを追加するには、*Cloud Cost* データソースを選択します。
 
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト"  >}}
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="ダッシュボードウィジェット作成時にデータソースとして利用できるクラウドコスト" >}}
 
 ## その他の参考資料
 

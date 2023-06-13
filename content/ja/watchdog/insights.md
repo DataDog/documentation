@@ -70,6 +70,8 @@ Watchdog Insights は、[インフラストラクチャー][1]、[APM][2]、[ロ
 
 ### インフラストラクチャー
 
+#### ライブコンテナ
+
 Watchdog Insights は、[Live Containers][5] の Kubernetes Explorer タブに表示されます。
 
 1. 左側のナビゲーションで、**Infrastructure** にカーソルを合わせます。
@@ -77,6 +79,27 @@ Watchdog Insights は、[Live Containers][5] の Kubernetes Explorer タブに�
 3. ページ上部の **Explorer** タブを選択します。
 4. **Select Resources** ボックスで、Kubernetes リソースタイプのいずれかを選択します。
 5. Kubernetes リソースのリストが表示され、Watchdog Insights パネルが上部に表示されます。
+
+#### ライブプロセス
+
+Watchdog Insights は[ライブプロセス][12]に表示されます。
+
+1. 左側のナビゲーションで、**Infrastructure** にカーソルを合わせます。
+2. **Processes** をクリックします。
+
+プロセスおよび関連データのリストが表示され、Watchdog Insights パネルが上部に表示されます。
+
+#### サーバーレス
+
+サーバーレスインフラストラクチャーに対して、Watchdog は以下のようなインサイトを提示します。
+
+- `Cold Start Ratio Up/Down`
+- `Error Invocation Ratio Up/Down`
+- `Memory Usage Up/Down`
+- `OOM Ratio Up/Down`
+- `Estimated Cost Up/Down`
+- `Init Duration Up/Down`
+- `Runtime Duration Up/Down`
 
 ### APM
 
@@ -101,7 +124,7 @@ Watchdog Insights は APM 内のいくつかのページに表示されます。
 RUM UI で Watchdog Insights を見つけるには、次の手順を実行します。
 1. 左側のナビゲーションで、**UX Monitoring** にカーソルを合わせます。
 2. **Sessions & Replays** をクリックします。
-3. ページの上部にある **In** ドロップダウンには、**Sessions** レベルにいることが表示されています。ドロップダウンを **Views** に変更します。
+3. ページの上部にある **In** ドロップダウンには、**Sessions** レベルにいることが表示されています。ドロップダウンオプションを **Views** に変更します。
 
 画面の真ん中、ビューの上にピンクの Watchdog Insights バナーが表示されます。
 
@@ -122,3 +145,4 @@ RUM UI で Watchdog Insights を見つけるには、次の手順を実行しま
 [9]: /ja/tracing/services/resource_page/
 [10]: /ja/logs/explorer/watchdog_insights/
 [11]: /ja/real_user_monitoring/explorer/watchdog_insights/
+[12]: /ja/infrastructure/process

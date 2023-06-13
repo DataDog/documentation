@@ -18,7 +18,7 @@ Available integrations endpoints:
 - [AWS Integration][1]
 - [AWS Logs Integration][2]
 - [Azure Integration][3]
-- [GCP Integration][4]
+- [Google Cloud Integration][4]
 - [Slack Integration][5]
 - [PagerDuty Integration][6]
 - [Webhooks Integration][7]
@@ -27,7 +27,7 @@ Available integrations endpoints:
 
 Use these endpoints to post and fetch data to and from other parts of the Datadog platform:
 
-- The [metrics][8] endpoints allow you to post [metrics][9] data so it can be graphed on Datadog’s dashboards and query metrics from any time period.
+- The [metrics][8] endpoints allow you to post [metrics][9] data so it can be graphed on Datadog's dashboards and query metrics from any time period.
 - The [events][10] endpoints allow you to post and fetch events to and from  [Datadog events][11].
 - Use the [Synthetic Monitoring][12] endpoints to create, start, stop, and see [Synthetic tests][13] results.
 - Use the [Tracing Agent API][14] to send traces to your Datadog Agent, which then forwards them to Datadog.

@@ -52,7 +52,7 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 ## Metric details sidepanel
 
-Click on any metric name to display its details sidepanel for more information regarding the metric’s metadata and tags: 
+Click on any metric name to display its details sidepanel for more information regarding the metric's metadata and tags: 
 
 {{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
 
@@ -112,7 +112,7 @@ The metric description helps you understand what a metric does. Descriptions are
 
 ### Tags table
 
-The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric’s data.
+The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric's data.
 
 Use the tags table to:
 

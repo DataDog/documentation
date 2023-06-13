@@ -24,7 +24,7 @@ Datadog のサイトには、[Build Diagrams with Mermaid JS][3] というテン
 
 トップダウンで基本的なフローチャートを構築します。
 
-{{< code-block lang="shell" disable_copy="true" >}}
+{{< code-block lang="bash" disable_copy="true" >}}
 ```mermaid
 graph TD;
     A-->B;

@@ -1,5 +1,5 @@
 {
-  "message": "Example-Schedule_a_downtime_until_date",
+  "message": "Example-Downtime",
   "recurrence": {
     "period": 1,
     "type": "weeks",
@@ -21,5 +21,11 @@
   "mute_first_recovery_notification": true,
   "monitor_tags": [
     "tag0"
+  ],
+  "notify_end_states": [
+    "alert"
+  ],
+  "notify_end_types": [
+    "canceled"
   ]
 }

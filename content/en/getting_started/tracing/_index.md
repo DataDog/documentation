@@ -13,6 +13,9 @@ further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-apm'
       tag: 'Learning Center'
       text: 'Introduction to Application Performance Monitoring'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to boost your APM understanding'  
 ---
 
 ## Overview
@@ -74,7 +77,7 @@ For the latest versions of Agent v6 and v7, APM is enabled by default. You can s
 
 And in `trace-agent.log`:
 
-```shell
+```bash
 # /var/log/datadog/trace-agent.log:
 2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
@@ -129,7 +132,7 @@ ddtrace-run python hello.py
 
 You should see a similar output to:
 
-```shell
+```bash
 * Serving Flask app "hello" (lazy loading)
   ...
 * Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)

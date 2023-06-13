@@ -11,18 +11,24 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-cloud-siem
   tag: ラーニングセンター
   text: Cloud SIEM 入門コース
-- link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
+- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
   tag: ブログ
-  text: Datadog Workflows でエンドツーエンドプロセスを自動化し、イベントに迅速に対応する
+  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
 - link: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
   tag: App
   text: Workflows のセキュリティ設計図で応答を自動化する
 - link: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
   tag: Documentation
   text: Cloud SIEM の AWS 構成ガイド
+- link: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
+  tag: Documentation
+  text: Cloud SIEM のための Google Cloud 構成ガイド
 - link: /security/notifications/variables/
   tag: Documentation
   text: 通知をカスタマイズするための通知変数について
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog の Security Labs でセキュリティ関連のトピックを読む
@@ -55,7 +61,7 @@ title: Cloud SIEM の概要
 
 2. [セキュリティシグナル][11]を確認します。検出ルールで脅威が検出されると、セキュリティシグナルが生成されます。詳しくは、[セキュリティシグナル][12]のドキュメントをご覧ください。
 
-    - [通知ルールの設定][13]を行い、シグナルが発生した際にアラートを出します。Slack、Jira、メール、Webhook を使用してアラートを出すことができます。詳しくは[通知ルール][14]のドキュメントを参照してください。
+    - [通知ルールの設定][13]を行い、シグナルが発生した際にアラートを出します。Slack、Jira、メール、Webhook、および他のインテグレーションを使用してアラートを出すことができます。詳しくは[通知ルール][14]のドキュメントを参照してください。
 
 ## フェーズ 3: 調査
 

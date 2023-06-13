@@ -22,20 +22,25 @@ Kubernetes 環境に Datadog Agent をインストールした後、追加の構
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Cluster Agent で Kubernetes のイベントを収集するには、`datadog-agent.yaml` マニフェストで `clusterAgent.config.collectEvents` を true に設定します。
+Datadog Operator では、イベント収集がデフォルトで有効になっています。これは `DatadogAgent` 構成の `features.eventCollection.collectKubernetesEvents` で管理することができます。
 
 ```yaml
-clusterAgent:
-  config:
-    collectEvents: true 
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+    site: <DATADOG_SITE>
+
+  features:
+    eventCollection:
+      collectKubernetesEvents: true
 ```
 
-また、Node Agent で Kubernetes のイベントを収集する場合は、`datadog-agent.yaml` マニフェストで `agent.config.collectEvents` を true に設定します。
-```yaml
-agent:
-  config:
-    collectEvents: true
-```
+Cluster Agent は、Kubernetes のイベントを収集し報告します。
 
 
 {{% /tab %}}
@@ -61,37 +66,12 @@ datadog:
 agents:
   rbac:
     create: true
-
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
-
-Kubernetes のイベントを Datadog Cluster Agent で収集したい場合は、以下の手順を使用します。
-
-1. `leader_election` 変数または `DD_LEADER_ELECTION` 環境変数を `false` に設定し、Node Agent でリーダー選出を無効にします。
-
-2. Cluster Agent のデプロイメントファイルで、`DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` 環境変数を `true` に設定します。
-
-      ```yaml
-        - name: DD_COLLECT_KUBERNETES_EVENTS
-          value: "true"
-        - name: DD_LEADER_ELECTION
-          value: "true"
-      ```
-
-
-上記の手順でリーダー選出を構成することで、イベントを収集する Cluster Agent が 1 つだけになるようにします。
-
-また、Node Agent から Kubernetes イベントを収集するには、Agent マニフェストで環境変数 `DD_COLLECT_KUBERNETES_EVENTS` と `DD_LEADER_ELECTION` を `true` に設定してください。
-
-```yaml
-- name: DD_COLLECT_KUBERNETES_EVENTS
-  value: "true"
-- name: DD_LEADER_ELECTION
-  value: "true"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+DaemonSet の構成については、[DaemonSet Cluster Agent のイベント収集][14]を参照してください。
 
 ## インテグレーション
 
@@ -213,3 +193,4 @@ Datadog は Kubernetes から一般的なタグを自動的に収集します。
 [11]: /ja/agent/kubernetes/tag/
 [12]: /ja/agent/guide/secrets-management/
 [13]: /ja/agent/guide/autodiscovery-management/
+[14]: /ja/containers/guide/kubernetes_daemonset#cluster-agent-event-collection

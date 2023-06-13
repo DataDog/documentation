@@ -86,7 +86,7 @@ For example:
 
 ```html
 <script>
-  DD_RUM.init({
+  window.DD_RUM.init({
     ...
     trackUserInteractions: true,
     actionNameAttribute: 'data-custom-name',

@@ -20,7 +20,7 @@ further_reading:
 
 After [creating your monitor][1], use the monitor status page to view the status over time.
 
-{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page"  >}}
+{{< img src="monitors/monitor_status/monitor_status_page.png" alt="monitor status page" >}}
 
 ## Header
 
@@ -45,7 +45,7 @@ Manually resolving a monitor is appropriate for cases where data is reported int
 **Typical use case**: A monitor based on error metrics that are not generated when there are no errors (`aws.elb.httpcode_elb_5xx`, or any DogStatsD counter in your code reporting an error _only when there is an error_).
 
 ### Create an incident
-Create an incident from a monitor by selecting **Declare incident**. Configure the *Declare Incident* popup modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
+Create an incident from a monitor by selecting **Declare incident**. Configure the *Declare Incident* pop-up modal with the severity level, notifications, and additional notes. For more information, see the [Incident Management][3] documentation.
 
 ### Settings
 
@@ -86,7 +86,9 @@ The status graph shows your monitor's status over time, broken out by group. **N
 * The monitor's timeframe is too short for a metric that provides data infrequently.
 * A host's name previously included in the query has changed. Hostname changes age out of the UI within 2 hours.
 
-The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `host` and `device`, but you only want to receive alerts for the `host`. The status graph shows the monitor's status grouped by `host`. You can see the `device` subgroups by clicking **View all** which opens a panel showing status graphs for each subgroup. For more information on alert groupings, see [Configure Monitors][13].
+The status graph shows you the dimensions you configured for your alerts, not the dimensions in your monitor query. For example: your monitor query is grouped by `service` and `host`, but you only want to receive alerts for the `service`. The status graph shows the monitor's status grouped by `service`. You can see the `host` subgroups by clicking **View all** which opens a panel showing status graphs for each subgroup. For more information on alert groupings, see [Configure Monitors][13].
+
+{{< img src="monitors/monitor_status/monitor_status_group_subgroup.png" alt="Monitor status grouped by service, highlighting option to view subgroups " style="width:100%;" >}}
 
 #### Investigate a Monitor in a Notebook
 
@@ -122,7 +124,7 @@ If you made changes to a monitor, you can see examples with the following event 
 https://app.datadoghq.com/event/stream?per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20monitor%20modified
 ```
 
-Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the drop-down next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
+Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the dropdown next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
 
 The notify setting sends an email with the monitor audit event to all people who are alerted in the specific monitor as well as to the monitor creator. The monitor audit event also appears in the [Events Explorer][10].
 
@@ -138,8 +140,8 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 
 
 [1]: /monitors/configuration/
-[2]: /monitors/notify/downtimes/
-[3]: /monitors/incident_management/#from-a-monitor
+[2]: /monitors/downtimes/
+[3]: /service_management/incident_management/#from-a-monitor
 [4]: /monitors/types/
 [5]: /api/v1/monitors/
 [6]: /dashboards/querying/

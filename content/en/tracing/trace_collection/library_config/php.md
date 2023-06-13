@@ -11,6 +11,9 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-php"
   tag: "GitHub"
   text: "Source code"
+- link: "/tracing/trace_collection/trace_context_propagation/php/"
+  tag: "Documentation"
+  text: "Propagating trace context"
 - link: "/tracing/glossary/"
   tag: "Documentation"
   text: "Explore your services, resources and traces"
@@ -102,7 +105,7 @@ Whether to enable distributed tracing.
 `DD_ENV`
 : **INI**: `datadog.env`<br>
 **Default**: `null`<br>
-Set an application’s environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
+Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
@@ -192,12 +195,12 @@ The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
-Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes](#long-running-cli-scripts).
+Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
 **Default**: `0`<br>
-Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts](#tracing-cli-scripts).
+Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
@@ -217,7 +220,7 @@ Enable the tracer globally.
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
 **Default**: `1`<br>
-Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes](#long-running-cli-scripts).
+Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes][14].
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
@@ -306,12 +309,26 @@ Enable URL's as resource names (see [Map resource names to normalized URI](#map-
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
 **Default**: `null`<br>
-Set an application’s version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
+Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Added in version `0.47.0`.
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
 **Default**: `*`<br>
 A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+
+`DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
+: **INI**: `datadog.trace.http_post_data_param_allowed`<br>
+**Default**: ""<br>
+A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
+**Example**: 
+  - The posted data is `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
+  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`
+  - In this scenario, the collected metadata is:
+    - `http.request.foo.bar.password=Password12!`
+    - `http.request.foo.bar.username=<redacted>`
+    - `http.request.foo.baz.bar=qux`
+    - `http.request.foo.baz.key=value`
+    - `http.request.qux=<redacted>`
 
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
@@ -334,7 +351,7 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
-  Regular expression used to obfuscate the query string included as part of the URL. Added in version `0.76.0`.
+  Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
@@ -355,6 +372,14 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
   - [b3multi][7]
   - [B3 single header][8]
   - Datadog
+
+`DD_DBM_PROPAGATION_MODE`
+: **INI**: `datadog.dbm_propagation_mode`<br>
+**Default**: `'disabled'`<br>
+Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
+The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
+The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+
 
 #### Integration names
 
@@ -451,26 +476,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ### Headers extraction and injection
 
-The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
-
-You can configure injection and extraction styles for distributed headers.
-
-The PHP Tracer supports the following styles:
-
-- Datadog: `Datadog`
-- W3C: `tracecontext`
-- B3 Multi Header: `b3multi` (`B3` is deprecated)
-- B3 Single Header: `B3 single header`
-
-You can use the following environment variables to configure injection and extraction styles. For instance:
-
-- `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,tracecontext`
-- `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,tracecontext`
-
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. By default, only the `tracecontext` and `Datadog` injection styles are enabled.
-
-If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then B3.
-
+Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context. 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -485,4 +491,7 @@ If multiple extraction styles are enabled, the extraction attempt is completed w
 [8]: https://github.com/openzipkin/b3-propagation#single-header
 [9]: https://www.php.net/manual/en/ini.core.php#ini.open-basedir
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[11]: /tracing/trace_collection/trace_context_propagation/php/
 [13]: /agent/guide/network/#configure-ports
+[14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
+[15]: /tracing/guide/trace-php-cli-scripts/

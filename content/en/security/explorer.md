@@ -26,17 +26,20 @@ From the [Security Signals Explorer][1], correlate and triage security signals. 
 
 The Security Signals search results are displayed in the Security Signals Table.
 
-{{< img src="security/security_monitoring/explorer/security_signals_table.png" alt="The Security Signals table showing two account takeover signals" >}}
+{{< img src="security/security_monitoring/explorer/signal_panel_v2.png" alt="The Security Signals table showing two account takeover signals" >}}
 
-Filter the contents of the table with the list of available facets. Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button in the upper right.
+Filter the contents of the table with the list of available facets such as `Source` and `Status`. Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button in the upper right.
 
 ## Inspect a Security Signal
 
-Click on any Security Signal to open the Security Signal Panel and see more details about it.
+View additional details by clicking on any Security Signal. This opens a panel which includes information about the severity of the signal, and when it was generated.
+Actionable information includes the ability to:
+ 
+  - Change the status of the signal.
+  - Access the rule settings of the signal.
+  - Share or assign the signal to a teammate.
 
-{{< img src="security/security_monitoring/explorer/signal_panel.png" alt="The Security Signal panel showing a critical signal for AWS S3 Public access block removed" style="width:80%;" >}}
-
-The details and actions you need first when triaging an issue can be found in the top portion of the Security Signal Panel. From here, you can determine the severity of the signal, when it was generated, access the rule settings, change the state of the signal and quickly share or assign this signal to a teammate.
+{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="The Security Signal panel showing a critical signal for AWS S3 Public access block removed" style="width:90%;" >}}
 
 The first seen and last seen date are updated, if new data is made available from the past or the attack continues. For Cloud SIEM and Cloud Workload Security signals, a "What Happened" section is displayed in the Overview tab and any configured group bys or rule customizations related to the detection rule is displayed. This example detection rule is configured with a group by of `usr.name`. Finally, any tags which are set on the detection rule are displayed below the group bys in the header for CSPM findings and in the Context section for Cloud SIEM and Cloud Workload Security signals.
 
@@ -44,16 +47,24 @@ To better understand activity, the Security Signal Panel summarizes tags and att
 
 Below the header of Cloud SIEM and Cloud Workload Security signals are tabs with detailed information related to the signal:
 
-- `Overview` displays why the rule generated a security signal in the What Happened section, including group by tag and customization based on rule type. In addition, context information and JSON associated to the signal is displayed.
+- `Overview` displays why the rule generated a security signal in the What Happened section, including group by tag and customization based on rule type. In addition, context information and JSON associated to the signal is displayed along with any security profiles related to the signal and any suppression suggestions, if available (CWS only).
 - `Rule Details` displays rule details, such as the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The users can also pivot into rule modification, such as modifying suppression queries for the rule.
 - `Logs` includes a visualization and list of log samples to provide context on why the signal triggered. Click on any of the samples in the table to see the full log.
 - `Related Signals` are displayed as a timeline of other signals which contain the same group by values to assist with triaging the signal.
-- `Suggested Actions (beta)` provides investigation queries, related dashboards, and links to cloud provider consoles based on Security Signal characteristics that guide investigations and provide insights to a resolution.
+- `Suggested Actions` provides investigation queries, related dashboards, and links to cloud provider consoles based on Security Signal characteristics that guide investigations and provide insights to a resolution.
 
 Below the header of Cloud Security Posture Management signals are tabs with detailed information related to the signal:
 - `Message` displays the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond.
 - `Findings` includes a list of each resource that has been evaluated by the rule.
 - `Related Issues` includes a list of other signals which contain the same group by values to assist with triaging the signal.
+
+### Case Management
+
+You can create a case from a Cloud SIEM security signal to track, triage, and investigate your signals. Click **Escalate** to see the dropdown menu. Select **Create a case** to start a security investigation. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][6] for more information.
+
+### Workflows
+
+You can trigger a [Workflow][7] automatically for any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] for more information.
 
 ### Threat intelligence
 
@@ -65,8 +76,8 @@ Datadog automatically implements threat intelligence by analyzing all ingested l
 
 The query to see all threat intelligence matches in the Security Signals Explorer is `@threat_intel.indicators_matched:*`. The following are additional attributes to query for threat intelligence:
 
-* `@threat_intel.results.category “anonymizer”, “scanner”`
-* `@threat_intel.results.intention “malicious”, “unknown”`
+* `@threat_intel.results.category "anonymizer", "scanner"`
+* `@threat_intel.results.intention "malicious", "unknown"`
 * `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
     **Note**: Proxy, Tor, and VPN subcategory attributes are provided only by threat intelligence partner IPinfo.
 
@@ -104,7 +115,7 @@ Switch between the Security Signals Table and the Security Signals Analytics mod
 
 After Security Signals are generated by the Security Rules Engine, you can graph Security Signal queries and see maximums, minimums, percentiles, unique counts, and more.
 
-Follow the [log graphing guide][6] to learn more about all the graphing options.
+Follow the [log graphing guide][9] to learn more about all the graphing options.
 
 ## Further Reading
 
@@ -116,4 +127,7 @@ Follow the [log graphing guide][6] to learn more about all the graphing options.
 [3]: https://app.datadoghq.com/security/compliance
 [4]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22
-[6]: /logs/explorer/analytics/?tab=timeseries
+[6]: /monitors/case_management/
+[7]: /service_management/workflows/
+[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[9]: /logs/explorer/analytics/?tab=timeseries

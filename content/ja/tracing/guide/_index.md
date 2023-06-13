@@ -2,6 +2,11 @@
 aliases:
 - /ja/tracing/getting_further/
 - /ja/tracing/guide/ecommerce_and_retail_use_cases/
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: APM ガイド
 disable_toc: true
 kind: ガイド
 private: true
@@ -36,12 +41,24 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> AWS EKS で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> AWS ECS with EC2 で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> AWS ECS with Fargate で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホストの Go アプリケーションでトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Go アプリケーションとコンテナ内の Datadog Agent でトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> EC2 で AWS ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Fargate で AWS ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
+
 {{< /whatsnext >}}
 <br>
 
 {{< whatsnext desc="APM インテグレーションのアクション" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Kafka キューをトレースする{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}PHP CLI スクリプトをトレースする{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
+{{< whatsnext desc="取り込みサンプリングの構成" >}}
+    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによるスパン取り込み量の制御{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}取り込みサンプリングのユースケース{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 
@@ -57,6 +74,5 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
-     {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}取り込みメカニズムによる取り込み量の制御{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}OpenTelemetry による取り込みサンプリング{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Datadog トレース保持ポリシーの理解{{< /nextlink >}}
 {{< /whatsnext >}}

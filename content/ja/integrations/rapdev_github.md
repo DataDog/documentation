@@ -23,8 +23,9 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
 - クラウド
+- コラボレーション
+- マーケットプレイス
 - メトリクス
 dependencies: []
 display_on_public_website: true
@@ -49,22 +50,23 @@ pricing:
   tag: repo_name
   unit_label: GitHub リポジトリ
   unit_price: 1
-public_title: GitHub インテグレーション
+public_title: GitHub
 short_description: GitHub の組織やエンタープライズを監視する
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
+  - Category::Collaboration
+  - Category::Marketplace
   - Category::Metrics
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: GitHub の組織やエンタープライズを監視する
   media:
@@ -79,7 +81,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: GitHub インテグレーション
+  title: GitHub
   uninstallation: README.md#Uninstallation
 ---
 

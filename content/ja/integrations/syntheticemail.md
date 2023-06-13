@@ -50,7 +50,7 @@ pricing:
   tag: mailbox
   unit_label: Mailbox
   unit_price: 250
-public_title: Synthetic Email インテグレーション
+public_title: Synthetic Email
 short_description: 世界中からのメールメールボックスのラウンドトリップパフォーマンスを監視する
 supported_os:
 - linux
@@ -76,7 +76,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Synthetic Email インテグレーション
+  title: Synthetic Email
   uninstallation: README.md#Uninstallation
 ---
 

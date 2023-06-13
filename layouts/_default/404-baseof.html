@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang='{{ if eq .Site.Language.Lang "en" }}en-US{{ else }}{{ .Site.Language.Lang }}{{ end }}' data-type="{{.Type}}" data-relpermalink="{{.RelPermalink}}"
   data-env="{{.Site.Params.environment}}" data-commit-ref="{{ .Site.Params.branch }}" style="opacity:0"
-  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner{{ end }}">
+  class="{{ if or $.Site.Params.announcement_banner.link $.Site.Params.announcement_banner.desktop_message }}banner announcement{{ end }}">
 
 <head>
-  {{ partial "header-scripts.html" . }}
+  {{ partialCached "header-scripts.html" . }}
 
   <meta charset="utf-8">
   {{ partial "prefetch.html" . }}
@@ -40,7 +40,7 @@
   </div>
   {{ partial "header/header.html" . }}
 
-  <div class="container container__content h-100">
+  <div class="container container__content h-100 pt-1">
     <div class="row h-100">
       <div class="d-none d-lg-flex col-12 col-sm-3 side">
         {{ partial "sidenav/main-sidenav.html" . }}

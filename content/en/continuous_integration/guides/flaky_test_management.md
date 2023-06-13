@@ -35,7 +35,7 @@ If a flaky test has not failed in the past 30 days, it is automatically removed 
 
 ## Watch for new flaky tests
 
-These are tests that exhibit flaky behavior and didn’t previously exist in the Flaky Tests table for the current branch or default branch of the repository.
+These are tests that exhibit flaky behavior and didn't previously exist in the Flaky Tests table for the current branch or default branch of the repository.
 
 ### Test Runs page
 
@@ -85,7 +85,7 @@ Test runs that are flaky, new flaky or known flaky contain attributes that can b
 | Name        | Attribute                   | Description                                                                                                                                                                                                                                                                                                  |
 |-------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Flaky       | `@test.is_flaky:true`       | The test run has flaked in the commit. Either this test run has failed and there was a previous test run for the same test and commit that passed, or this test run passed and there is a previous failure. This attribute is only present the first time a test is detected flaky in a commit. |
-| New Flaky   | `@test.is_new_flaky:true` | The test run has flaked in the commit (according to the "Flaky" definition above) and didn’t previously exist in the "Flaky tests" table for the branch of the test run or default branch of the repository. This also means that the test has been added to the "Flaky tests" table. |
+| New Flaky   | `@test.is_new_flaky:true` | The test run has flaked in the commit (according to the "Flaky" definition above) and didn't previously exist in the "Flaky tests" table for the branch of the test run or default branch of the repository. This also means that the test has been added to the "Flaky tests" table. |
 | Known Flaky | `@test.is_known_flaky:true`   | The test run has flaked in the commit (according to the "Flaky" definition above) and it was already present on the "Flaky test" table of either the branch of the test run or the default branch of the repository. This means that the test was detected as flaky in the past, and that this failure may not be the result of a change in this commit. |
 
 [1]: https://app.datadoghq.com/ci/test-runs

@@ -9,7 +9,7 @@ aliases:
 
 In the Windows world, operating systems and applications metrics are exposed using the Windows Management Instrumentation. The Datadog Agent for Windows comes with a WMI Integration out of the box, so you can monitor the information that matters to you.
 
-Data in WMI is grouped into classes. There are several hundreds classes that come by default, and each additional role and feature brings its own. Some Applications can also add classes such as Microsoft SQL Server, Microsoft Exchange along with various 3rd party apps.
+Data in WMI is grouped into classes. There are several hundreds classes that come by default, and each additional role and feature brings its own. Some Applications can also add classes such as Microsoft SQL Server, Microsoft Exchange along with various third party apps.
 
 Microsoft Powershell is considered the standard way to interact with a Windows system programmatically, and it comes with the tools to manage WMI.
 

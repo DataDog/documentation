@@ -73,7 +73,7 @@ For products with subtypes, each category is distinguished on the graph for that
 
 {{< img src="account_management/billing/UsageGraphsByProductTab.png" alt="Usage summary with infrastructure tab selected and multiple graphs for infrastructure usage subtypes such as infra hosts, agent hosts, and containers" style="width:100%; align:left" >}}
 
-More detailed product subtype graphs can be found on each product’s tab.  For example, a breakdown by host type is available on the Infrastructure tab.
+More detailed product subtype graphs can be found on each product's tab. For example, a breakdown by host type is available on the Infrastructure tab.
 
 {{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Usage trends section of the Infrastructure tab with Infra Hosts graph containing Agent hosts and AWS hosts, Indexed Logs graph containing Daily Indexed Live Logs and Cumulative Indexed Live Logs" style="width:100%; align:left" >}}
  

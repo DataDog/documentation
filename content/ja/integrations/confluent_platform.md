@@ -27,8 +27,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
-- メッセージング
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
@@ -47,17 +45,15 @@ public_title: Confluent Platform
 short_description: Confluent Platform のコンポーネントを監視する。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
-  - Category::Messaging
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Confluent Platform のコンポーネントを監視する。
   media: []

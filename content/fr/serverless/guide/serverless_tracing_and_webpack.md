@@ -9,7 +9,7 @@ kind: documentation
 title: Tracing Lambda Node.js et compatibilité de Webpack
 ---
 
-# Compatibilité
+## Présentation
 
 Les bibliothèques de tracing Datadog (`dd-trace`) ne sont malheureusement pas compatibles avec les bundlers tels que [webpack][1], en raison de l'utilisation d'importations conditionnelles ainsi que d'autres problèmes. Bien que webpack ne puisse pas générer `dd-trace`, votre application peut tout de même utiliser les bibliothèques `dd-trace` et `datadog-lambda-js` fournies par la couche Lambda Datadog prédéfinie. Pour ce faire, suivez les instructions ci-dessous.
 

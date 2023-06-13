@@ -77,7 +77,7 @@ Use one of the following methods to dynamically get the private IP address:
 {{< tabs >}}
 {{% tab "EC2 metadata endpoint" %}}
 
-The [Amazon’s EC2 metadata endpoint (IMDSv1)][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
+The [Amazon's EC2 metadata endpoint (IMDSv1)][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
 
 {{< code-block lang="curl" >}}
 curl http://169.254.169.254/latest/meta-data/local-ipv4

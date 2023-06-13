@@ -34,7 +34,7 @@ kind: ドキュメント
 title: Continuous Profiler
 ---
 
-{{< vimeo 441865141 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
 
 </br>
 
@@ -58,7 +58,15 @@ Continuous Profiler は、JDK Flight Recorder などの技術を活用し、す�
 
 ## Datadog でのプロファイラー確認
 
-Datadog にプロファイルを送信するようにアプリケーションを構成したら、コードのパフォーマンスに関する洞察を得ることを開始します。デフォルトでは、プロファイルは 7 日間保持され、プロファイルデータから生成されたメトリクスは 1 ヶ月間保持されます。
+アプリケーションからプロファイルを Datadog に送信するための構成が完了した後は、コードのパフォーマンスに関するインサイトを確認してみましょう。
+
+デフォルトでは、プロファイルは 7 日間、プロファイルデータから生成されたメトリクスは 1 か月間保持されます。
+
+### プロファイルタイプ
+
+対応言語ごとに収集されるプロファイルデータの種類については、[プロファイルのデータタイプ][6]を参照してください。
+
+{{< img src="profiler/profile-types.png" alt="Java アプリケーションで収集されるプロファイルタイプのリスト" style="width:100%;" >}}
 
 ### タグを使用してプロファイルを検索
 
@@ -91,3 +99,4 @@ Datadog にプロファイルを送信するようにアプリケーションを
 [3]: /ja/tracing/
 [4]: /ja/profiler/connect_traces_and_profiles/
 [5]: /ja/profiler/compare_profiles/
+[6]: /ja/profiler/profile_types/

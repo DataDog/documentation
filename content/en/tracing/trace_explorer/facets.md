@@ -20,7 +20,7 @@ The [Trace Explorer][6] includes out-of-the-box facets such as `Status` and `Ser
 
 {{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="The Facets panel in the Trace Explorer" style="width:90%;">}}
 
-{{< site-region region="us,eu,us3,us5" >}}
+{{< site-region region="us,eu,us3,us5,ap1" >}}
 
 [Creating facets](#creating-facets) is **not required** for [searching spans][1], [generating metrics from spans][2], or [indexing spans with retention filters][3]. In these contexts, autocomplete capabilities use existing facets, but also any input that matches incoming spans applies.
 
@@ -55,7 +55,7 @@ Measures have either a (long) integer or double value, for equivalent capabiliti
 
 Measures support units (**time** in seconds or **size** in bytes) for handling of orders of magnitude at query time and display time. The unit is a property of the measure itself, not of the field.
 
-For example, consider a `duration` measure in nanoseconds. Suppose spans from `service:A` have `duration:1000`, meaning `1000 milliseconds`. Supposed spans from `service:B` have `duration:500`, meaning `500 microseconds`. Use `duration:>20ms` to consistently query span tags from both services at once. Read [query syntax][1] for more reference information about queries. 
+For example, consider a `duration` measure in nanoseconds. Suppose spans from `service:A` have `duration:1000`, meaning `1000 milliseconds`. Supposed spans from `service:B` have `duration:500`, meaning `500 microseconds`. Use `duration:>20ms` to consistently query span tags from both services at once. Read [query syntax][1] for more reference information about queries.
 
 ## Facet panel
 

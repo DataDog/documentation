@@ -39,7 +39,7 @@ draft: false
 git_integration_title: zk
 integration_id: zookeeper
 integration_title: ZooKeeper
-integration_version: 4.2.1
+integration_version: 4.2.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

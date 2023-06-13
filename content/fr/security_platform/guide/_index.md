@@ -5,6 +5,11 @@ disable_toc: true
 kind: guide
 private: true
 title: Guides sur la plateforme de sécurité
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Guides sur la plateforme de sécurité
 ---
 
 {{< whatsnext desc="Guides généraux :" >}}

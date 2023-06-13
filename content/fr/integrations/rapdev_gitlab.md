@@ -49,7 +49,7 @@ pricing:
   tag: project_name
   unit_label: Projet GitLab
   unit_price: 1
-public_title: Intégration GitLab
+public_title: GitLab
 short_description: Surveillez vos projets, applications et instances GitLab.
 supported_os:
 - linux
@@ -80,7 +80,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration GitLab
+  title: GitLab
   uninstallation: README.md#Uninstallation
 ---
 

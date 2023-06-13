@@ -35,7 +35,7 @@ This configuration still works. Every Terraform run detects any changes to roles
 
 This is because your browser converts the old permission flag to the newer and more advanced permissions scheme. If you update terraform to 3.1.0 or above, the new restricted roles fields is available.
 
-This change is an aesthetic change only, and doesn’t change any functionality or security settings of the dashboard. When you re-apply your Terraform configuration, it replaces the change with the original `is_read_only` attribute.
+This change is an aesthetic change only, and doesn't change any functionality or security settings of the dashboard. When you re-apply your Terraform configuration, it replaces the change with the original `is_read_only` attribute.
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard
 [2]: /api/latest/roles/#list-roles

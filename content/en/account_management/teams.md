@@ -29,7 +29,7 @@ The [team directory page][1] lists all teams within your organization. Use the *
 1. Choose a **Team Name**.
 1. The **Handle** populates based on your team name.
 1. Provide an optional **Description**.
-1. Use the drop-down to select team members.
+1. Use the dropdown menu to select team members.
 1. Click **Create**.
 
 ### Modify team
@@ -49,16 +49,19 @@ To find a team handle:
 
 To associate a resource with a defined team, a Team must exist in Datadog with a matching team handle. When you click on a resource associated with a defined team, a small window appears with the team handle and additional information. Defined teams provide additional functionality such as the Team filter below. 
 
-Team handles that aren’t associated with a defined team in Datadog behave similarly to tags. Convert any undefined team handles to defined teams to take advantage of Teams features.
+Team handles that aren't associated with a defined team in Datadog behave similarly to tags. Convert any undefined team handles to defined teams to take advantage of Teams features.
 
 ### Associate resources with team handles
 
 Datadog supports associating the following resources with team handles:
 
-- Dashboards
-- Service Catalog
-- Incidents
-- Monitors
+- [Dashboards][2]
+- [Incidents][3]
+- [Monitors][4]
+- [Resource Catalog][14]
+- [Service Catalog][5]
+- [Service Level Objectives][6]
+- Synthetic Tests, Global Variables, Private Locations
 
 ## Filter
 
@@ -75,12 +78,16 @@ The table below describes the products in which you can use the team filter:
 
 | Product List Page       | Filter basis                                                                     |
 |-------------------------|----------------------------------------------------------------------------------|
-| [Dashboards][2]         | Team handle                                                                      |
-| [Service Catalog][3]    | Team handle                                                                      |
-| [Incidents][4]          | Team handle                                                                      |
-| [Monitors][5]           | Team handle                                                                      |
-| [APM Error Tracking][6] | Service owned by teams (determined by ownership inside the [Service Catalog][3]) |
-| [Logs Error Tracking][7] | Service owned by teams (determined by ownership inside the [Service Catalog][3]) |
+| [Dashboards][7]         | Team handle                                                                      |
+| [Resource Catalog][14]   | Team handle                                                                      |
+| [Service Catalog][8]    | Team handle                                                                      |
+| [Incidents][9]          | Team handle                                                                      |
+| [Monitors][10]          | Team handle                                                                      |
+| [APM Error Tracking][11] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
+| [Logs Error Tracking][12] | Service owned by teams (determined by ownership inside the [Service Catalog][8]) |
+| [Service Level Objectives][13] | Team handle                                                                 |
+| [Data Streams Monitoring][15]  | Team handle                                                                 |
+| [Synthetic Tests][16]          | Team handle                                                                 |
 
 
 ## Permissions
@@ -110,9 +117,18 @@ If you prefer a team-driven membership model, set your default team settings so 
 To enforce a strict membership model, configure your default team settings so **Only users with user_access_manage** can add or remove members. Assign the `teams_manage` permission only to organization administrators.
 
 [1]: https://app.datadoghq.com/organization-settings/teams
-[2]: https://app.datadoghq.com/dashboard/lists
-[3]: https://app.datadoghq.com/services
-[4]: https://app.datadoghq.com/incidents
-[5]: https://app.datadoghq.com/monitors/manage
-[6]: https://app.datadoghq.com/apm/error-tracking
-[7]: https://app.datadoghq.com/logs/error-tracking
+[2]: /dashboards/#edit-details
+[3]: /service_management/incident_management/incident_details#overview-section
+[4]: /monitors/configuration/?tab=thresholdalert#add-metadata
+[5]: /tracing/service_catalog/setup#add-service-definition-metadata
+[6]: /service_management/service_level_objectives/#slo-tags
+[7]: https://app.datadoghq.com/dashboard/lists
+[8]: https://app.datadoghq.com/services
+[9]: https://app.datadoghq.com/incidents
+[10]: https://app.datadoghq.com/monitors/manage
+[11]: https://app.datadoghq.com/apm/error-tracking
+[12]: https://app.datadoghq.com/logs/error-tracking
+[13]: https://app.datadoghq.com/slo/manage
+[14]: /security/cspm/resource_catalog
+[15]: https://app.datadoghq.com/data-streams
+[16]: https://app.datadoghq.com/synthetics

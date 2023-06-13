@@ -6,9 +6,9 @@ further_reading:
 - link: /serverless/configuration
   tag: Documentation
   text: サーバーレスモニタリングの構成
-- link: /serverless/guide/serverless_tracing_and_webpack/
+- link: /serverless/guide/serverless_tracing_and_bundlers/
   tag: Documentation
-  text: Node.js Lambda トレースと Webpack の互換性
+  text: Node.js Lambda トレースとバンドラーの互換性
 - link: /serverless/guide/troubleshoot_serverless_monitoring
   tag: Documentation
   text: サーバーレスモニタリングのトラブルシューティング
@@ -19,15 +19,15 @@ kind: ドキュメント
 title: Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
 
-<div class="alert alert-warning">以前に Datadog Forwarder を使用して Lambda 関数をセットアップした場合は、<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">Datadog Forwarder を使用したインスツルメント</a>を参照してください。</div>
+<div class="alert alert-warning">以前に Datadog Forwarder を使用して Lambda 関数をセットアップした場合は、<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_node">Datadog Forwarder を使用したインスツルメント</a>を参照してください。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。</div>
 
 <div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 
-<div class="alert alert-warning">webpack や esbuild を使ってバンドルしている場合、<a href="/serverless/guide/serverless_tracing_and_webpack/">Datadog のライブラリを external としてマークする</a>必要があるかもしれません。</div>
+<div class="alert alert-warning">webpack や esbuild を使ってバンドルしている場合、<a href="/serverless/guide/serverless_tracing_and_bundlers/">Datadog のライブラリを external としてマークする</a>必要があるかもしれません。</div>
 
 ## インストール
 
-Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。
+Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。アプリケーションがコンテナイメージとしてデプロイされる場合は、「コンテナイメージ」の指示に従うことが*必要です*。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -259,6 +259,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 
 <div class="alert alert-info">Serverless Framework や AWS CDK といった Datadog をサポートするサーバーレス開発ツールを使用していない場合は、Datadog はお使いのサーバーレスアプリケーションを <a href="./?tab=datadogcli">Datadog CLI</a> でインスツルメントすることを強く推奨します。</div>
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Datadog Lambda ライブラリのインストール
 
    Datadog Lambda ライブラリは、レイヤー (推奨) _または_ JavaScript パッケージのいずれかとしてインポートすることができます。
@@ -275,7 +276,7 @@ Datadog サーバーレスプラグインをインストールして構成する
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
       ```
 
-      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Node12-x`、`Node14-x` または `Node16-x` が利用可能です。
+      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
 
     - オプション B: もし、ビルド済みの Datadog Lambda レイヤーを使用できない場合は、お気に入りのパッケージマネージャーを使用して、パッケージ `datadog-lambda-js` と `dd-trace` をインストールすることができます。
 
@@ -303,6 +304,57 @@ Datadog サーバーレスプラグインをインストールして構成する
 
    `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Datadog Lambda ライブラリのインストール
+
+   Datadog Lambda ライブラリは、レイヤー (推奨) _または_ JavaScript パッケージのいずれかとしてインポートすることができます。
+
+   `datadog-lambda-js` パッケージのマイナーバージョンは、常にレイヤーのバージョンに一致します。たとえば、datadog-lambda-js v0.5.0 は、レイヤーバージョン 5 のコンテンツに一致します。
+
+    - オプション A: 以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+      ```sh
+      # Use this format for AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
+
+      # Use this format for AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
+      ```
+
+      `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
+
+    - オプション B: もし、ビルド済みの Datadog Lambda レイヤーを使用できない場合は、お気に入りのパッケージマネージャーを使用して、パッケージ `datadog-lambda-js` と `dd-trace` をインストールすることができます。
+
+      ```
+      npm install datadog-lambda-js dd-trace
+      ```
+
+2. Datadog Lambda 拡張機能のインストール
+
+   以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+   `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
 3. ハンドラー関数のリダイレクト
 
     - 関数のハンドラーを、レイヤーを使用する場合は `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` に、パッケージを使用する場合は `node_modules/datadog-lambda-js/dist/handler.handler` に設定します。
@@ -315,7 +367,6 @@ Datadog サーバーレスプラグインをインストールして構成する
     - 環境変数 `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - 環境変数 `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][3]が安全に保存されている AWS シークレットの ARN で設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://docs.datadoghq.com/ja/serverless/guide/handler_wrapper
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}

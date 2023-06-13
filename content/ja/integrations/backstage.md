@@ -19,7 +19,7 @@ author:
   sales_email: oss@roadie.io
   support_email: oss@roadie.io
 categories:
-- モニタリング
+- developer tools
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/backstage/README.md
 display_on_public_website: true
@@ -37,15 +37,15 @@ public_title: Backstage
 short_description: Datadog のダッシュボードとグラフを Backstage インスタンスに埋め込むことができます。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Developer Tools
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog のダッシュボードとグラフを Backstage インスタンスに埋め込むことができます。
   media: []

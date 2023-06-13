@@ -26,7 +26,6 @@ author:
 categories:
 - data store
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Data Store
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: IBM Db2 データベースからのテーブルスペース、バッファプールなどのメトリクスを監視
   media: []
@@ -73,7 +71,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれています。
 
@@ -110,10 +108,15 @@ Agent バージョン >= 7.0 の場合
 Linux では、XML 機能が必要になる場合があります。ビルドプロセス中にエラーが発生した場合は、
 `libxslt-dev` (RPM では `libxslt-devel`) をインストールしてください。
 
-#### 権限
+#### モニタリングを有効にする
 
-一部のテーブルからのメトリクスを問い合わせるには、選択した Db2 ユーザーに特別な権限を付与する必要があります。
-インスタンスマスターユーザーに切り替えて、`db2` プロンプトで次のコマンドを実行します。
+インスタンス、関連するデータベース、およびデータベースオブジェクトの健全性を監視するには、監視したいオブジェクトごとにデータベースシステムモニタスイッチを有効にします。
+* ステートメント
+* Lock
+* テーブル
+* バッファプール
+
+インスタンスマスターユーザーに切り替えて、`db2` プロンプトで以下のコマンドを実行します。
 
 ```text
 update dbm cfg using HEALTH_MON on

@@ -9,6 +9,8 @@ further_reading:
 - link: "/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
+algolia:
+  tags: ['agent status command']
 ---
 
 <div class="alert alert-warning">

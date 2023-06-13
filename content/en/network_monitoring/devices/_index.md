@@ -28,7 +28,7 @@ further_reading:
 
 ## Overview
 
-{{< vimeo 673243317 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
 
 <br/>
 
@@ -52,7 +52,7 @@ The generic profile collects metrics for all devices not supported by a vendor p
 
 ### Vendor profiles
 
-The following vendor devices are supported with dedicated profiles. If a vendor/device type is supported but the specific model isn’t supported, refer to the [FAQ page][6].
+The following vendor devices are supported with dedicated profiles. If a vendor/device type is supported but the specific model isn't supported, refer to the [FAQ page][6].
 
 -   Cisco Catalyst
 -   Cisco ASA

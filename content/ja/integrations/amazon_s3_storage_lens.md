@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- data store
 - ログの収集
 dependencies: []
 description: Amazon S3 Storage Lens の主要なメトリクスを追跡します。
@@ -33,7 +34,7 @@ Amazon S3 Storage Lens は、Amazon S3 ストレージ全体の使用状況と�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

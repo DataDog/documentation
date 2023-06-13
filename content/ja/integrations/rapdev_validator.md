@@ -29,6 +29,8 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- コンプライアンス
+- 構成 & デプロイ
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -54,16 +56,18 @@ public_title: Tag Validator
 short_description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - カテゴリ::コンプライアンス
+  - Category::Configuration & Deployment
   - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: モニタータグを検証し、DD 環境での Agent コンプライアンスを確保します
   media:
@@ -82,7 +86,9 @@ tile:
 RapDev Validator は、Datadog 環境でのタグモニタリングと Agent のコンプライアンス問題を解決するのに役立ちます。インテグレーションはタグキーのリストと、お使いの環境のタグ付け戦略に基づく許容値を受け取り、それらをメトリクスおよびサービスチェックとして Datadog インスタンスに報告します。このようにして、お使いの環境内のホストに正しいタグが割り当てられているかを表示することができます。
 
 ### ダッシュボード  
-1. RapDev Validator ダッシュボード
+1. RapDev Validator ホストダッシュボード
+2. RapDev Validator Synthetic ダッシュボード
+3. RapDev Validator ダッシュボード
 
 ### アラート設定
 1. ホストに必要なタグキーが割り当てられていない

@@ -1,7 +1,8 @@
 ---
 categories:
-- クラウド
 - AWS
+- クラウド
+- ネットワーク
 dependencies: []
 description: Amazon Transit Gateway のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_transit_gateway/
@@ -28,7 +29,7 @@ Amazon Transit Gateway を使用して、仮想プライベートクラウド (V
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

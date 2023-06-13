@@ -19,9 +19,8 @@ author:
   sales_email: support@nobl9.com
   support_email: support@nobl9.com
 categories:
-- notification
 - メトリクス
-- モニタリング
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md
 display_on_public_website: true
@@ -39,17 +38,16 @@ public_title: Nobl9
 short_description: Nobl9 は、SLI 収集、SLO 計算、エラーバジェットアラートを可能にします
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Notification
   - Category::Metrics
-  - Category::Monitoring
+  - Category::Notification
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Nobl9 は、SLI 収集、SLO 計算、エラーバジェットアラートを可能にします
   media: []

@@ -35,7 +35,7 @@ This feature is supported on Kubernetes for Datadog Agent v6.12.0+ and Datadog C
 In the example below, a Kubernetes deployment for NGINX was created with three Pods.
 
 ```shell
-# kubectl get pods --selector app=nginx -o wide
+kubectl get pods --selector app=nginx -o wide
 NAME                     READY   STATUS    RESTARTS   AGE   IP           NODE
 nginx-66d557f4cf-m4c7t   1/1     Running   0          3d    10.0.0.117   gke-cluster-default-pool-4658d5d4-k2sn
 nginx-66d557f4cf-smsxv   1/1     Running   0          3d    10.0.1.209   gke-cluster-default-pool-4658d5d4-p39c
@@ -45,13 +45,13 @@ nginx-66d557f4cf-x2wzq   1/1     Running   0          3d    10.0.1.210   gke-clu
 A service was also created. It links to the Pods through these three endpoints.
 
 ```shell
-# kubectl get service nginx -o wide
+kubectl get service nginx -o wide
 NAME    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
 nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 ```
 
 ```shell
-# kubectl get endpoints nginx -o yaml
+kubectl get endpoints nginx -o yaml
 ...
 - addresses:
   - ip: 10.0.0.117
@@ -74,7 +74,7 @@ nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
       ...
 ```
 
-While a service-based cluster check tests the service's single IP address, endpoint checks are scheduled for **each** of the three endpoints associated with this service. 
+While a service-based cluster check tests the service's single IP address, endpoint checks are scheduled for **each** of the three endpoints associated with this service.
 
 By design, endpoint checks are dispatched to Agents that run on the same node as the Pods that back the endpoints of this `nginx` service. In this example, the Agents running on the nodes `gke-cluster-default-pool-4658d5d4-k2sn` and `gke-cluster-default-pool-4658d5d4-p39c` run the checks against these `nginx` Pods.
 
@@ -83,17 +83,16 @@ By design, endpoint checks are dispatched to Agents that run on the same node as
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `clusterAgent.config.clusterChecksEnabled` configuration key:
+Endpoint check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `features.clusterChecks.enabled` configuration key:
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  # (...)
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+  features:
+    clusterChecks:
+      enabled: true
 ```
 
 This configuration enables both cluster check and endpoint check dispatching between the Cluster Agent and the Agents.
@@ -218,6 +217,91 @@ instances:
 
 ### Configuration from Kubernetes service annotations
 
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
+
+The syntax for annotating services is similar to that for [annotating Kubernetes Pods][1]:
+
+```yaml
+ad.datadoghq.com/endpoints.checks: |
+  {
+    "<INTEGRATION_NAME>": {
+      "init_config": <INIT_CONFIG>,
+      "instances": [<INSTANCE_CONFIG>]
+    }
+  }
+ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
+```
+
+This syntax supports a `%%host%%` [template variable][11] which is replaced by the IP of each endpoint. The `kube_namespace`, `kube_service`, and `kube_endpoint_ip` tags are automatically added to the instances.
+
+**Note**: Custom endpoints log configuration is only supported during Docker socket log collection, and not Kubernetes log file collection.
+
+#### Example: HTTP check on an NGINX-backed service with an NGINX check on the service's endpoints
+
+This service is associated with the Pods of the `nginx` deployment. Based on this configuration:
+
+- An [`nginx`][12]-based endpoint check is dispatched for each NGINX Pod backing this service. This check is run by Agents on the same respective nodes as the NGINX Pods (using the Pod IP as `%%host%%`).
+- An [`http_check`][9]-based cluster check is dispatched to a single Agent in the cluster. This check uses the IP of the service as `%%host%%`, automatically getting load balanced to the respective endpoints.
+- The checks are dispatched with the tags `env:prod`, `service:my-nginx`, and `version:1.19.0`, corresponding to [Unified Service Tagging][13] labels.
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    labels:
+        app: nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
+    annotations:
+      ad.datadoghq.com/service.checks: |
+        {
+          "http_check": {
+            "init_config": {},
+            "instances": [
+              {
+                "url": "http://%%host%%",
+                "name": "My Nginx",
+                "timeout": 1
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.checks: |
+        {
+          "nginx": {
+            "init_config": {},
+            "instances": [
+              {
+                "name": "My Nginx Service Endpoints",
+                "nginx_status_url": "http://%%host%%:%%port%%/status/"
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        app: nginx
+```
+
+[1]: /containers/kubernetes/integrations/?tab=kubernetesadv2
+[9]: /integrations/http_check/
+[11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /integrations/nginx/
+[13]: /getting_started/tagging/unified_service_tagging
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (AD v1)" %}}
+
 The syntax for annotating services is similar to that for [annotating Kubernetes Pods][10]:
 
 ```yaml
@@ -276,6 +360,14 @@ spec:
     selector:
         app: nginx
 ```
+
+[9]: /integrations/http_check/
+[10]: /agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /integrations/nginx/
+[13]: /getting_started/tagging/unified_service_tagging
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

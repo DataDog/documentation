@@ -19,45 +19,47 @@ author:
   sales_email: success@signl4.com
   support_email: success@signl4.com
 categories:
-- 問題追跡
+- アラート設定
 - コラボレーション
+- インシデント
+- 問題追跡
 - notification
-- モニタリング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: signl4
 integration_id: signl4
-integration_title: SIGNL4  for Datadog
+integration_title: SIGNL4
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: signl4
 oauth: {}
-public_title: Datadog と SIGNL4 のインテグレーション
+public_title: SIGNL4
 short_description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Issue Tracking
+  - Category::Alerting
   - Category::Collaboration
+  - Category::Incidents
+  - Category::Issue Tracking
   - Category::Notification
-  - Category::Monitoring
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Datadog と SIGNL4 のインテグレーション
+  title: SIGNL4
 ---
 
 ## 概要

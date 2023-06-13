@@ -231,7 +231,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "環境変数" %}}
 
-```shell
+```json
 DD_APM_REPLACE_TAGS=[
       {
         "name": "http.url",

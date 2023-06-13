@@ -109,13 +109,11 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-7. Agent の再起動
+7. Agent を再起動します。
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 8. `/etc/datadog-agent` をクリーンアウトします (オプション)。
@@ -158,13 +156,11 @@ DD_AGENT_MAJOR_VERSION=6 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
     sudo -u dd-agent -- cp /etc/datadog-agent/checks.d/<CHECK>.py /etc/dd-agent/checks.d/
     ```
 
-5. Agent の再起動
+5. Agent を再起動します。
 
     ```shell
-    # Systemd
-    sudo systemctl restart datadog-agent
-    # Upstart
-    sudo /etc/init.d/datadog-agent restart
+    sudo systemctl restart datadog-agent # Systemd
+    sudo /etc/init.d/datadog-agent restart # Upstart
     ```
 
 6. `/etc/datadog-agent` をクリーンアウトします (オプション)。

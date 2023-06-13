@@ -44,7 +44,7 @@ GlobalRum.addAttribute('department', 'marketing')
 Global.rum.addAttribute(forKey: 'department', value: 'marketing')
 ```
 
-**Note**: A few tags are included by default (`service`, `env`, `version`, and `application.id`). For anything else, set the global context using the method above.
+**Note**: A few tags are included by default (`service`, `env`, `version`, `application.id`, and `application.name`). For anything else, set the global context using the method above.
 
 Once you've deployed this step, new RUM sessions are tracked according to the tags you added.
 

@@ -25,9 +25,7 @@ author:
   sales_email: dev@apisix.apache.org
   support_email: dev@apisix.apache.org
 categories:
-- モニタリング
-- web
-- cloud
+- クラウド
 - メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
@@ -45,19 +43,17 @@ oauth: {}
 public_title: Apache APISIX
 short_description: Datadog-APISIX インテグレーション
 supported_os:
+- linux
 - windows
 - macos
-- linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Supported OS::Linux
-  - Category::Monitoring
-  - Category::Web
   - Category::Cloud
   - Category::Metrics
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog-APISIX インテグレーション
   media: []

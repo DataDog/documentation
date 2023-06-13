@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure Data Explorer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_explorer/
@@ -30,7 +31,7 @@ Azure Data Explorer からメトリクスを取得すると、以下のことが
 * Data Explorer のコンピューティング、メモリ、ネットワークリソースの使用状況を監視する。
 
 ## セットアップ
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

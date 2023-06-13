@@ -15,8 +15,9 @@ author:
   sales_email: sales@drata.com
   support_email: support@drata.com
 categories:
-- セキュリティ
 - コンプライアンス
+- ログの収集
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/drata/README.md
 display_on_public_website: true
@@ -34,17 +35,18 @@ public_title: Drata
 short_description: Datadog のコンプライアンス情報を Drata に取り込む
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Offering::Integration
-  - Category::Security
   - カテゴリ::コンプライアンス
+  - Category::Log Collection
+  - Category::Security
+  - Offering::Integration
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog のコンプライアンス情報を Drata に取り込む
   media: []

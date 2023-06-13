@@ -8,7 +8,7 @@ further_reading:
   text: 'Session Replay'
 ---
 
-{{< img src="real_user_monitoring/heatmaps/heatmap.jpeg" alt="An overview of the heatmap functionality." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmap_v2.png" alt="An overview of the heatmap functionality." style="width:100%;">}}
 
 A heatmap (or heat map) is a visualization of your user's Session Replay data, where your user's interactions (clicks) are represented by color in the image. Seeing where a user clicks helps you understand if users engage with your page the way you expect and if they are finding all of your call to actions (CTAs) and important buttons. Visualizing these interactions in a heatmap makes it easy to understand complex data at a glance. Taking the insights from heatmaps helps you make UI decisions to optimize your user experience and increase retention.
 
@@ -16,16 +16,9 @@ A heatmap (or heat map) is a visualization of your user's Session Replay data, w
 
 To get started with heatmaps:
 
-- You must be on the latest version of the SDK (v4.20.0 or later)
+- You must be on the latest version of the SDK (v4.40.0 or later)
 - Enable [Session Replay][1].
-- While heatmaps are in beta, enable the feature flag by adding the following code to the [package.json][2] file in the SDK:
-
-```json
-datadogRum.init({
-    ...
-    enableExperimentalFeatures: ['clickmap']
-})
-```
+- Set`trackUserInteractions: true` in the SDK initialization to enable action tracking.
 
 ### Getting started
 
@@ -37,7 +30,7 @@ This will take you to the [heatmap page][3] for a particular view. You can switc
 
 To adjust the filters (to look at specific geography, for example), you can add a filter from the panel on the left side.
 
-{{< img src="real_user_monitoring/heatmaps/application-and-view.jpeg" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
+{{< img src="real_user_monitoring/heatmaps/heatmaps-filters.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
 ## Insights
 
@@ -64,7 +57,7 @@ After understanding analytics, the next step is to understand the action in the 
 
 ## Troubleshooting
 
-### I am looking at a heatmap for a given view, but it’s showing me an unexpected page.
+### I am looking at a heatmap for a given view, but it's showing me an unexpected page.
 
 Heatmaps are based on RUM view names. Depending on how your RUM application is configured, many pages can start being grouped under the same view name, or you can start having very specific view names. If you think the default view name gathering is not sufficient, you can override it manually with the [startView][6] function. 
 

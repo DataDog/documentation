@@ -1,7 +1,8 @@
 ---
 categories:
-- クラウド
 - AWS
+- キャッシュ
+- クラウド
 - ログの収集
 dependencies: []
 description: Amazon DynamoDB Accelerator のキーメトリクスを追跡します。
@@ -21,7 +22,6 @@ short_description: Amazon DynamoDB Accelerator のキーメトリクスを追跡
 version: '1.0'
 ---
 
-
 ## 概要
 
 DAX は DynamoDB と互換性のあるキャッシュサービスで、要求の厳しいアプリケーションで高速なインメモリパフォーマンスの恩恵を受けることができます。
@@ -30,7 +30,7 @@ DAX は DynamoDB と互換性のあるキャッシュサービスで、要求の
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -59,7 +59,7 @@ Amazon DynamoDB Accelerator インテグレーションには、サービスの�
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
-[2]: https://app.datadoghq.com/account/settings#integrations/amazon_web_services
+[2]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [3]: https://app.datadoghq.com/account/settings#integrations/amazon-DynamoDB-accelerator
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_DynamoDB_accelerator/amazon_DynamoDB_accelerator_metadata.csv
 [5]: https://docs.datadoghq.com/ja/help/

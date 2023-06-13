@@ -1,33 +1,34 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- google cloud
+- log collection
+- network
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Interconnect."
+description: Surveillez des métriques clés de Google Cloud Interconnect.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_interconnect/
 draft: false
 git_integration_title: google_cloud_interconnect
 has_logo: true
 integration_id: google-cloud-interconnect
-integration_title: "Google\_Cloud\_Interconnect"
+integration_title: Google Cloud Interconnect
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_interconnect
-public_title: "Intégration Datadog/Google\_Cloud\_Interconnect"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Interconnect."
+public_title: Intégration Datadog/Google Cloud Interconnect
+short_description: Surveillez des métriques clés de Google Cloud Interconnect.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Interconnect étend votre réseau sur site au réseau de Google via une connexion hautement disponible et à faible latence.
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Interconnect.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

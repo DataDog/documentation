@@ -23,6 +23,11 @@ aliases:
   - /agent/faq/install-core-extra
   - /logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
   - /agent/faq/the-datadog-agent-for-logs-or-traces-only
+algolia:
+  tags: ['agent']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">
@@ -65,6 +70,7 @@ Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a>
   {{< nextlink href="/agent/troubleshooting">}}<u>Troubleshooting</u>: Find troubleshooting information for the Datadog Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>Guides</u>: These are in-depth, step-by-step tutorials for using the Agent.{{< /nextlink >}}
   {{< nextlink href="/agent/security">}}<u>Security</u>: Information on the main security capabilities and features available to customers to ensure their environment is secure.{{< /nextlink >}}
+  {{< nextlink href="/getting_started/observability_pipelines">}}<u>Configure Observability Pipelines and Datadog</u>: Deploy the Observability Pipelines Worker as an aggregator to collect, transform, and route all of your logs and metrics to any destination.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading

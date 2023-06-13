@@ -24,7 +24,6 @@ author:
   support_email: support@getcensus.com
 categories:
 - 自動化
-- モニタリング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/census/README.md
 display_on_public_website: true
@@ -47,14 +46,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Automation
+  - Offering::Integration
+  - Submitted Data Type::Events
+  - Submitted Data Type::Metrics
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Automation
-  - Category::Monitoring
-  - Offering::Integration
-  - Submitted Data Type::Metrics
-  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: Census 同期のメトリクスとイベントを Datadog に送信します。
   media:

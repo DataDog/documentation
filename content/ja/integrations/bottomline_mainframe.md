@@ -9,9 +9,8 @@ author:
   support_email: partner.cfrm@bottomline.com
   vendor_id: bottomline
 categories:
+- mainframe
 - マーケットプレイス
-- クラウド
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -43,12 +42,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Mainframe
+  - Category::Marketplace
+  - Offering::Software License
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
-  - Offering::Software License
   configuration: README.md#Setup
   description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
   media:

@@ -32,7 +32,7 @@ Online Archives allows you to retain and search all of your log data for 15 mont
 
 Online Archives are set up per Log index. [Index filters][1] that apply to that index also apply to Online Archives.
 
-**Note**: However, that index's [exclusion filters][2] and daily quotas don’t apply to Online Archives. For instance you may only choose to Index error logs while retaining all  logs in Online Archives by excluding non error logs from Indexes.
+**Note**: However, that index's [exclusion filters][2] and daily quotas don't apply to Online Archives. For instance you may only choose to Index error logs while retaining all logs in Online Archives by excluding non error logs from Indexes.
 
 Configure Online Archives in the [Logs Index Configuration][3] page:
 
@@ -65,7 +65,7 @@ Setting the storage type to **Online Archives** lets you query Online Archives i
 
 You can configure the setup to send certain logs to Online Archives while others go to an index based on log attributes and tags. Mix and match logs between storage types depending upon your logging use cases and retention strategy.
 
-To configure storage types, use index filters that apply to Online Archives, and use index exclusion filters that don’t apply to Online Archives.
+To configure storage types, use index filters that apply to Online Archives, and use index exclusion filters that don't apply to Online Archives.
 
 Here are examples of different log retention strategies and how to implement them:
 

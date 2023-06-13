@@ -9,7 +9,7 @@ kind: documentation
 title: Node.js Lambda トレースと Webpack の互換性
 ---
 
-# 互換性
+## 概要
 
 Datadog のトレーシングライブラリ (`dd-trace`) は、条件付きインポートの使用やその他の問題により、[Webpack][1] などのバンドラーと互換性がないことが知られています。Webpack は `dd-trace` をビルドできませんが、アプリケーションは、ビルド済みの Datadog Lambda レイヤーによって提供される `dd-trace` および `datadog-lambda-js` ライブラリを引き続き使用できます。以下の手順に従ってください。
 

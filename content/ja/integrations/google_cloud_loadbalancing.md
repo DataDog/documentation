@@ -1,6 +1,7 @@
 ---
 categories:
 - cloud
+- 構成 & デプロイ
 - google cloud
 - ログの収集
 dependencies: []
@@ -31,7 +32,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 ### メトリクスの収集
 
-#### インストール
+#### APM に Datadog Agent を構成する
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

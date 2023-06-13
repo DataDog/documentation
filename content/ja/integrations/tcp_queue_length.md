@@ -19,6 +19,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- developer tools
 - ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md
@@ -40,8 +41,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
+  - Category::Developer Tools
   - Category::Network
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Datadog で、TCP バッファのサイズを追跡します。
   media: []
@@ -58,7 +60,7 @@ tile:
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 `tcp_queue_length` はコア Agent 6/7 のチェックで、`system-probe` に実装された eBPF パートに依存します。Agent バージョン 7.24.1/6.24.1 以上が必要です。
 
@@ -75,7 +77,7 @@ yum install -y kernel-headers-$(uname -r)
 yum install -y kernel-devel-$(uname -r)
 ```
 
-**注**: バージョン 8 以前の Windows、Container-Optimized OS、および CentOS/RHEL はサポートされません。
+**注**: バージョン 8 以前の Windows および CentOS/RHEL はサポートされません。
 
 ### コンフィギュレーション
 
@@ -98,6 +100,37 @@ system_probe_config:
 
 [Datadog Helm チャート][3]を使用して、`values.yaml` ファイルで `datadog.systemProbe.enabled` を `true` に設定し、`system-probe` がアクティベートされている必要があります。
 次に、`datadog.systemProbe.enableTCPQueueLength` パラメーターを設定してチェックをアクティベートします。
+
+### Operator (v1.0.0+) による構成
+
+DatadogAgent マニフェストで `features.tcpQueueLength.enabled` パラメーターを設定します。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    tcpQueueLength:
+      enabled: true
+```
+
+**注**: COS (Container Optimized OS) を使用する場合は、ノード Agent で `src` ボリュームをオーバーライドしてください。
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    tcpQueueLength:
+      enabled: true
+  override:
+    nodeAgent:
+      volumes: 
+      - emptyDir: {}
+        name: src
+```
 
 ### 検証
 

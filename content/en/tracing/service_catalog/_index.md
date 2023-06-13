@@ -19,8 +19,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+- link: "https://www.datadoghq.com/blog/service-catalog-setup/"
+  tag: "Blog"
+  text: "Easily add tags and metadata to your services using the simplified Service Catalog setup"
+algolia:
+  tags: ['service catalog']
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Service Catalog is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 
@@ -52,11 +60,9 @@ Information about the service provided by the service definition or by Datadog p
 
 ### Ownership view
 
-In the **Ownership** tab, you can click the icons in the **Contact** and **</>** columns and be directed to the tools and projects specified in the service definition. For example, you can access the owning team's Slack channel or GitHub repository containing the service code.
+In the **Ownership** tab, you can click the icons in the **Contact** and **Repo** columns and be directed to the tools and projects specified in the service definition. For example, you can access the owning team's Slack channel or GitHub repository containing the service code.
 
 The **Telemetry** column displays what types of telemetry data Datadog is collecting for the service. Clicking on the icons directs you into the corresponding Datadog product view. For example, the Agent sends traces to Datadog, and you can click the **Traces** icon to view them in APM.
-
-Click the kebab menu to the right hand corner to edit the service definition (if it exists) or link to one if the service is not defined. You may have to [set up an integration with your source code system][2] first.
 
 Sort the table by **Team** or **On Call** columns to see which services each team is responsible for, and identify services where ownership and responsibility are not specified yet.
 
@@ -73,8 +79,14 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 
 ### Performance view
 
-The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. Sort the table by clicking columns to reveal services that:
+The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. 
 
+The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment. 
+The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][12] on APM [trace metrics][13]. This dropdown does not affect how many services you see in the list.  
+
+{{< img src="tracing/service_catalog/svc-cat-perf-view.png" alt="Performance view filtered on env:* and scoped to cluster-name:*" style="width:100%;" >}}
+
+Sort the table by clicking columns to reveal services that:
 - Deployed most recently, or have not deployed for a long time
 - Are receiving the most requests per second, or are not receiving any traffic
 - Have the highest latency at various percentiles
@@ -84,7 +96,7 @@ The **Performance** tab provides several ways to view how your services are perf
 - Have the highest or lowest [Apdex scores][5]
 - Have monitors that are triggered
 
-Click the Settings icon on the right hand corner to hide metric columns from the service list.
+Click the Settings icon on the right hand corner to hide metric columns from the list.
 
 ### Security view
 The **Security tab** provides several ways to assess and improve the security posture of your services. This includes understanding the number and severity of known security vulnerabilities in the open source libraries, and viewing how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
@@ -106,7 +118,7 @@ Clicking on a service opens a side panel with details including:
 - **Ownership information** from the service definition such as links to team contacts, source code, and supplemental information like documentation and dashboards.
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
-- **Security information** including known vulnerabilities exposed in the service’s libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
+- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
 - **Configuration completeness status** for Datadog products that can collect data for the service.
 - **Service definition** in YAML with a link to the service's source code.
 - An interactive service map displaying services upstream and downstream from this service.
@@ -148,3 +160,5 @@ The permission is enabled by default in the **Datadog Admin Role** and **Datadog
 [9]: /account_management/rbac/
 [10]: /account_management/rbac/permissions/
 [11]: /security/application_security/how-appsec-works/
+[12]: /tracing/guide/setting_primary_tags_to_scope/?tab=helm#add-a-second-primary-tag-in-datadog
+[13]: /tracing/metrics/metrics_namespace/

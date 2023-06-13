@@ -33,8 +33,8 @@ The families and usage types:
     * `analyzed_logs`
 - **application_security**
     * `app_sec_host_count`
-- **audit_logs**
-    * `lines_indexed`
+- **audit_trail**
+    * `enabled`
 - **serverless**
     * `func_count`
     * `invocations_sum`
@@ -119,6 +119,7 @@ The families and usage types:
     * `billable_ingested_bytes`
     * `indexed_events_count`
     * `ingested_events_bytes`
+    * `logs_forwarding_events_bytes`
     * `logs_live_indexed_count`
     * `logs_live_ingested_bytes`
     * `logs_rehydrated_indexed_count`

@@ -21,6 +21,7 @@ author:
   sales_email: sales@launchdarkly.com
   support_email: support@launchdarkly.com
 categories:
+- 構成 & デプロイ
 - notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md
@@ -39,17 +40,18 @@ public_title: LaunchDarkly
 short_description: 機能リリースとインフラストラクチャーの変更を自信を持ってコントロールすることができます。
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
   - Category::Notification
-  - Offering::UI Extension
   - Offering::Integration
+  - Offering::UI Extension
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 機能リリースとインフラストラクチャーの変更を自信を持ってコントロールすることができます。
   media:
@@ -70,10 +72,6 @@ tile:
 
 
 
-{{< callout url="#" btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
-LaunchDarkly 機能フラグで RUM データを補強し、パフォーマンス監視や行動の変化を可視化するには、<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>の非公開ベータ版に参加しましょう。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
-
-{{< /callout >}}
 ## 概要
 
 LaunchDarkly は、Datadog と以下のインテグレーションを提供しています。

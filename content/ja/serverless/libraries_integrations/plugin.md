@@ -35,7 +35,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 
 | パラメーター                     | 説明                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `site`                        | データを送信する Datadog サイトを設定します。例えば、 `datadoghq.com` (デフォルト)、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、または `ddog-gov.com` などに設定します。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する場合に必要です。 |
+| `site`                        | データを送信する Datadog サイトを設定します。例えば、 `datadoghq.com` (デフォルト)、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com` または `ddog-gov.com` などに設定します。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する場合に必要です。 |
 | `apiKey`                      | [Datadog API キー][7]。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する際に必要です。また、デプロイ環境で `DATADOG_API_KEY` 環境変数を設定することも可能です。 |
 | `appKey`                      | Datadog アプリキー。`monitors` フィールドが定義されている場合のみ必要です。また、デプロイ環境で `DATADOG_APP_KEY` 環境変数を設定することも可能です。 |
 | `apiKeySecretArn`             | `apiKey` フィールドを使用する代替です。AWS Secrets Manager に Datadog API キーを保存しているシークレットの ARN です。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加することを忘れないようにします。 |
@@ -53,6 +53,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `uploadGitMetadata`           | ソースコードインテグレーションの一部として、関数の Git メタデータアップロードを有効にします。Datadog Github インテグレーションをインストールしている場合は、これを false に設定すると、Git メタデータのアップロードが不要になります。デフォルトは `true` です。 |
 | `subscribeToAccessLogs`       | Datadog Forwarder の API Gateway アクセスロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
 | `subscribeToExecutionLogs`    | Datadog Forwarder の HTTP API と Websocket ロググループへの自動サブスクリプションを有効化します。`forwarderArn` の設定が必要です。デフォルトは `true` です。 |
+| `subscribeToStepFunctionLogs`    | Datadog Forwarder の Step Function ロググループへの自動サブスクリプションを有効にします。Step Function のロググループが構成されていない場合は、自動的に作成されます。`forwarderArn` の設定が必要です。デフォルトは `false` です。 |
 | `forwarderArn`                | Lambda または API Gateway のロググループにサブスクライブされる Datadog Forwarder の ARN。 |
 | `addLayers`                   | Datadog Lambda ライブラリをレイヤーとしてインストールするかどうか。デフォルトは `true` です。特定のバージョンの Datadog Lambda ライブラリ ([Python][8] または [Node.js][9]) をインストールできるように Datadog Lambda ライブラリを関数のデプロイパッケージに独自にパッケージ化する場合は、`false` に設定します。 |
 | `addExtension`                | Datadog Lambda 拡張機能をレイヤーとしてインストールするかどうか。デフォルトは `true` です。有効にすると、`apiKey` と `site` を設定する必要があります。 |
@@ -70,6 +71,8 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `enableProfiling`             | Datadog Continuous Profiler を `true` で有効にします。NodeJS と Python のベータ版でサポートされています。デフォルトは `false` です。 |
 | `encodeAuthorizerContext`     | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
 | `decodeAuthorizerContext`     | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
+| `apmFlushDeadline`            | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。 |
+
 上記のパラメーターを使用するには、以下の例のように `custom` > `datadog` セクションを `serverless.yml` に追加します。
 
 ```yaml

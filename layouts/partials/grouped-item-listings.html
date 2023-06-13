@@ -64,7 +64,7 @@
           {{ else }}
             <img height="17" src="{{ partial "img-resource.html" (dict "context" $ctx "src" (print "images/svg-icons/agent.svg")) }}" alt="{{ $v.Key }}" />
           {{ end }}
-          <span class="ps-1">{{ .Title }}</span><br/>
+      <span class="ps-1">{{- with .Params.is_beta -}}<span class="text-primary text-uppercase font-bold"> BETA </span>{{- end -}}{{ .Title }}</span><br/>
         </a>
       {{ end }}
     </div>

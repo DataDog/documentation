@@ -52,7 +52,7 @@ Operating System
 : The tracked operating system.
 
 Cloud Platform
-: Cloud platform the host is running on (for example, AWS, GCP, or Azure).
+: Cloud platform the host is running on (for example, AWS, Google Cloud, or Azure).
 
 Datadog Agent
 : Agent version that is collecting data on the host.

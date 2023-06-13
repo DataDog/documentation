@@ -36,9 +36,9 @@ author:
   support_email: support_ddp@ioconnectservices.com
   vendor_id: ioconnect
 categories:
-- marketplace
 - cloud
-- collaboration
+- marketplace
+- network
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -62,23 +62,23 @@ pricing:
   tag: vcoreid
   unit_label: production vCore
   unit_price: 200
-public_title: Intégration Mule®
+public_title: Mule®
 short_description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les
   à Datadog
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
-  - Category::Collaboration
+  - Category::Marketplace
+  - Category::Network
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les
     à Datadog
@@ -106,7 +106,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Mule®
+  title: Mule®
   uninstallation: README.md#Uninstallation
 ---
 

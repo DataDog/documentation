@@ -1,5 +1,6 @@
 ---
 categories:
+- クラウド
 - ログの収集
 dependencies: []
 description: Salesforce Marketing Cloud

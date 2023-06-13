@@ -33,11 +33,11 @@ The status code of the request can be used to determine the log status. Datadog 
 Assume the status code of your log is stored in the `http.status_code` attribute.
 Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/guide/category_processor.png" alt="Category Processor "  >}}
+{{< img src="logs/guide/category_processor.png" alt="Category Processor " >}}
 
 Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/guide/log_status_remapper.png" alt="log status remapper"  >}}
+{{< img src="logs/guide/log_status_remapper.png" alt="log status remapper" >}}
 
 ## Bunyan levels
 
@@ -53,11 +53,11 @@ Bunyan levels are similar to those of Syslog, but their values are multiplied by
 Assume the bunyan level is stored in the `bunyan_level` attribute.
 Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/guide/category_processor_bunyan.png" alt="category Processor bunyan"  >}}
+{{< img src="logs/guide/category_processor_bunyan.png" alt="category Processor bunyan" >}}
 
 Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/guide/status_remapper_bunyan.png" alt="log status remapper bunyan"  >}}
+{{< img src="logs/guide/status_remapper_bunyan.png" alt="log status remapper bunyan" >}}
 
 ## Further Reading
 

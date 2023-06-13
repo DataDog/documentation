@@ -23,7 +23,7 @@ type: multi-code-lang
 
 一般的な APM ドキュメントについては、[セットアップドキュメント][セットアップドキュメント]を参照してください。
 
-アプリケーションが Datadog に情報を送信した後の APM の詳細については、[APM データで可視化する][可視化ドキュメント]をご覧ください。
+アプリケーションが Datadog に情報を送信した後の APM の詳細については、[用語と概念][visualization docs]をご覧ください。
 
 ライブラリ API のドキュメントについては、[YARD ドキュメント][yard docs]をご覧ください。
 
@@ -31,7 +31,7 @@ type: multi-code-lang
 
 [セットアップドキュメント]: https://docs.datadoghq.com/tracing/
 [開発ドキュメント]: https://github.com/DataDog/dd-trace-rb/blob/master/README.md#development
-[可視化ドキュメント]: https://docs.datadoghq.com/tracing/visualization/
+[可視化ドキュメント]: https://docs.datadoghq.com/tracing/glossary/
 [寄稿ドキュメント]: https://github.com/DataDog/dd-trace-rb/blob/master/CONTRIBUTING.md
 [開発ドキュメント]: https://github.com/DataDog/dd-trace-rb/blob/master/docs/DevelopmentGuide.md
 [yard docs]: https://www.rubydoc.info/gems/ddtrace/
@@ -42,8 +42,8 @@ type: multi-code-lang
  - [インストール](#installation)
      - [トレース用の Datadog Agent のセットアップ](#setup-the-datadog-agent-for-tracing)
      - [アプリケーションのインスツルメント](#instrument-your-application)
-        - [Rails アプリケーション](#rails-applications)
-        - [Ruby アプリケーション](#ruby-applications)
+        - [Rails または Hanami アプリケーション](#rails-or-hanami-applications)
+        - [その他の Ruby アプリケーション](#other-ruby-applications)
         - [OpenTracing の構成](#configuring-opentracing)
         - [OpenTelemetry の構成](#configuring-opentelemetry)
      - [アプリケーションと Datadog Agent を接続する](#connect-your-application-to-the-datadog-agent)
@@ -88,6 +88,7 @@ type: multi-code-lang
      - [Redis](#redis)
      - [Resque](#resque)
      - [Rest Client](#rest-client)
+     - [Roda](#roda)
      - [RSpec](#rspec)
      - [Sequel](#sequel)
      - [Shoryuken](#shoryuken)
@@ -140,7 +141,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 |       |                            | 2.5     | フル                                 | 最新              |
 |       |                            | 2.4     | フル                                 | 最新              |
 |       |                            | 2.3     | フル                                 | 最新              |
-|       |                            | 2.2     | フル                                 | 最新              |
+|       |                            | 2.2     | フル (プロファイリングを除く)          | 最新              |
 |       |                            | 2.1     | フル (プロファイリングを除く)          | 最新              |
 |       |                            | 2.0     | 2021 年 6 月 7 日以降 EOL             | < 0.50.0            |
 |       |                            | 1.9.3   | 2020 年 8 月 6 日以降 EOL           | < 0.27.0            |
@@ -232,7 +233,7 @@ Agent がトレースデータをリッスンするプロトコルやポート�
 
 ### アプリケーションをインスツルメントする
 
-#### Rails/Hanami アプリケーション
+#### Rails または Hanami アプリケーション
 
 1. `ddtrace` gem を Gemfile に追加します。
 
@@ -257,7 +258,9 @@ Agent がトレースデータをリッスンするプロトコルやポート�
       - [コンフィギュレーション設定の追加](#additional-configuration)
       - [インスツルメンテーションの有効化または再構成](#integration-instrumentation)
 
-#### Ruby アプリケーション
+#### その他の Ruby アプリケーション
+
+上記対応 gem (Rails、Hanami) を使用しないアプリケーションの場合、以下のように設定します。
 
 1. `ddtrace` gem を Gemfile に追加します。
 
@@ -424,7 +427,7 @@ end
 
 ブロックなしで `Datadog::Tracing.trace` を呼び出すと、関数は開始されたが終了していない `Datadog::Tracing::SpanOperation` を返します。次に、このスパンを必要に応じて変更してから、`finish` で閉じます。
 
-*未完了のスパンを残してはいけません。*トレースが完了したときにスパンが開いたままになっていると、トレースは破棄されます。[デバッグモードをアクティブにする](#tracer-settings)ことで、これが発生していると思われる場合に警告を確認できます。
+*未完了のスパンを残してはいけません。*トレースが完了したときにスパンが開いたままになっていると、トレースは破棄されます。[デバッグモードをアクティブにする](#additional-configuration)ことで、これが発生していると思われる場合に警告を確認できます。
 
 開始/終了イベントを処理するときにこのシナリオを回避するには、`Datadog::Tracing.active_span` を使用して現在のアクティブなスパンを取得できます。
 
@@ -526,6 +529,7 @@ https://github.com/datadog/documentation/blob/master/content/en/tracing/setup_ov
 | Redis                      | `redis`                    | `>= 3.2`                 | `>= 3.2`                 | *[リンク](#redis)*                    | *[リンク](https://github.com/redis/redis-rb)*                                    |
 | Resque                     | `resque`                   | `>= 1.0`                 | `>= 1.0`                  | *[リンク](#resque)*                   | *[リンク](https://github.com/resque/resque)*                                     |
 | Rest Client                | `rest-client`              | `>= 1.8`                 | `>= 1.8`                  | *[リンク](#rest-client)*              | *[リンク](https://github.com/rest-client/rest-client)*                           |
+| Roda                       | `roda`                     | `>= 2.1, <4`             | `>= 2.1, <4`              | *[リンク](#roda)*                     | *[リンク](https://github.com/jeremyevans/roda)*                                  |
 | Sequel                     | `sequel`                   | `>= 3.41`                | `>= 3.41`                 | *[リンク](#sequel)*                   | *[リンク](https://github.com/jeremyevans/sequel)*                                |
 | Shoryuken                  | `shoryuken`                | `>= 3.2`                 | `>= 3.2`                  | *[リンク](#shoryuken)*                | *[リンク](https://github.com/phstc/shoryuken)*                                   |
 | Sidekiq                    | `sidekiq`                  | `>= 3.5.4`               | `>= 3.5.4`                | *[リンク](#sidekiq)*                  | *[リンク](https://github.com/mperham/sidekiq)*                                   |
@@ -1575,7 +1579,7 @@ run app
 | `quantize.query.obfuscate.with` | 難読化されたマッチを置換するための文字列を定義します。文字列を指定することができます。オプションは `query.obfuscate` オプションの中にネストする必要があります。 | `'<redacted>'` |
 | `quantize.query.obfuscate.regex` | クエリ文字列を冗長化するための正規表現を定義します。正規表現、またはデフォルトの内部正規表現を使用するには `:internal` を指定することができます。後者では、よく知られている機密データが冗長化されます。マッチした文字列は `query.obfuscate.with` に置き換えられて、完全に冗長化されます。オプションは `query.obfuscate` オプションの中にネストする必要があります。 | `:internal` |
 | `quantize.fragment` | URL フラグメントの動作を定義します。URL フラグメントを表示するには `:show` を、フラグメントを削除するには `nil` を指定できます。オプションは `quantize` オプション内にネストする必要があります。 | `nil` |
-| `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。 有効にするには、`true` に設定します。 | `false` |
+| `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。  | `false` |
 | `web_service_name` | フロントエンドサーバーリクエストのキュースパンのサービス名。（例: `'nginx'`） | `'web-server'` |
 
 非推奨のお知らせ
@@ -1652,8 +1656,7 @@ end
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
 | `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にして、トレースヘッダーを受信した場合にこのサービストレースが別のサービスのトレースに接続されるようにします | `true` |
-| `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。 有効にするには、`true` に設定します。 | `false` |
-| `exception_controller` | カスタム例外コントローラークラスを識別するクラスまたはモジュール。トレーサーは、カスタム例外コントローラーを識別できる場合のエラー動作を改善します。デフォルトでは、このオプションを使用しない場合、カスタム例外コントローラーがどのようなものかは「推測」されます。このオプションを指定すると、この識別が容易になります。 | `nil` |
+| `request_queuing` | フロントエンドサーバーのキューで費やされた HTTP リクエスト時間を追跡します。設定の詳細については、[HTTP リクエストキュー](#http-request-queuing)をご覧ください。  | `false` |
 | `middleware` | トレースミドルウェアを Rails アプリケーションに追加します。ミドルウェアをロードしたくない場合は、`false` に設定します。 | `true` |
 | `middleware_names` | 短絡したミドルウェアリクエストがトレースのリソースとしてミドルウェア名を表示できるようにします。 | `false` |
 | `service_name` | アプリケーションのリクエストをトレースするときに使用されるサービス名（`rack` レベル） | `'<アプリ名>'`（Rails アプリケーションのネームスペースから推測） |
@@ -1882,6 +1885,39 @@ end
 | `service_name` | `rest_client` インスツルメンテーションのサービス名。 | `'rest_client'` |
 | `split_by_domain` | `true` に設定されている場合、リクエストドメインをサービス名として使用します。 | `false` |
 
+### Roda
+
+Roda インテグレーションはリクエストをトレースします。
+
+`Datadog.configure` で **Roda** インテグレーションを有効にすることができます。分散型トレーシングを行うためには、`use Datadog::Tracing::Contrib::Rack::TraceMiddleware` を通して **Rack** とこのインテグレーションを使用することが推奨されています。
+
+```ruby
+require "roda"
+require "ddtrace"
+
+class SampleApp < Roda
+  use Datadog::Tracing::Contrib::Rack::TraceMiddleware
+
+  Datadog.configure do |c|
+    c.tracing.instrument :roda, **options
+  end
+
+  route do |r|
+    r.root do
+      r.get do
+        'Hello World!'
+      end
+    end
+  end
+end
+```
+
+`options` は以下のキーワード引数です。
+
+| キー | 説明 | デフォルト |
+| --- | ----------- | ------- |
+| `service_name` | `roda` インスツルメンテーションのサービス名。 | `'nil'` |
+
 ### RSpec
 
 RSpec インテグレーションでは、`rspec` テストフレームワーク使用時に、グループ単位や個別での例の実行すべてをトレースできます。
@@ -1990,6 +2026,7 @@ end
 
 | キー | 説明 | デフォルト |
 | --- | ----------- | ------- |
+| `distributed_tracing` | [分散型トレーシング](#distributed-tracing)を有効にすると、`sidekiq.push` スパンと `sidekiq.job` スパンの間に親子関係が作成されます。<br /><br />**重要**: *非同期処理のために distributed_tracing を有効にすると、トレースグラフが大幅に変化することがあります。このようなケースには、長時間実行されているジョブ、再試行されたジョブ、遠い将来に予定されているジョブが含まれます。この機能を有効にした後は、必ずトレースを点検してください。* | `false` |
 | `tag_args` | ジョブ引数のタグ付けを有効にします。オンの場合は `true`、オフの場合は `false` です。 | `false` |
 | `error_handler` | ジョブでエラーが発生したときに呼び出されるカスタムエラーハンドラー。引数として `span` と `error` が指定されます。デフォルトでスパンにエラーを設定します。一時的なエラーを無視したい場合に役立ちます。 | `proc { \|span, error\| span.set_error(error) unless span.nil? }` |
 | `quantize` | ジョブ引数の量子化のためのオプションを含むハッシュ。 | `{}` |
@@ -2134,9 +2171,9 @@ end
 | `env`                                                   | `DD_ENV`                       | `nil`                                                             | アプリケーション環境。(例: `production`、`staging` など) この値はすべてのトレースにタグとして設定されます。                                                                                                                              |
 | `service`                                               | `DD_SERVICE`                   | *Ruby filename*                                                   | アプリケーションのデフォルトのサービス名。(例: `billing-api`) この値は、すべてのトレースにタグとして設定されます。                                                                                                                                   |
 | `tags`                                                  | `DD_TAGS`                      | `nil`                                                             | カスタムタグを `,` で区切った値のペアで指定します (例: `layer:api,team:intake`) これらのタグは全てのトレースに対して設定されます。詳しくは [環境とタグ](#environment-and-tags)を参照してください。                                                          |
-| `time_now_provider`                                     |                                | `->{ Time.now }`                                                  | 時刻の取得方法を変更します。詳しくは、[タイムプロバイダーの設定](#Setting the time provider)を参照してください。                                                                                                                              |
+| `time_now_provider`                                     |                                | `->{ Time.now }`                                                  | 時刻の取得方法を変更します。詳しくは、[タイムプロバイダーの設定](#setting-the-time-provide)を参照してください。                                                                                                                              |
 | `version`                                               | `DD_VERSION`                   | `nil`                                                             | アプリケーションのバージョン (例: `2.5`、`202003181415`、`1.3-alpha` など) この値は、すべてのトレースにタグとして設定されます。                                                                                                                        |
-| `telemetry.enabled`                                     | `DD_INSTRUMENTATION_TELEMETRY_ENABLED` | `false`                                                             | Datadog へのテレメトリーデータの送信を有効にすることができます。将来のリリースでは、[こちら](https://docs.datadoghq.com/tracing/configure_data_security/#telemetry-collection)のドキュメントにあるように、デフォルトで `true` に設定される予定です。                                                                                                                                                                                          |
+| `telemetry.enabled`                                     | `DD_INSTRUMENTATION_TELEMETRY_ENABLED` | `true`                                                             | Datadog へのテレメトリーデータの送信を有効にすることができます。将来のリリースでは、[こちら](https://docs.datadoghq.com/tracing/configure_data_security/#telemetry-collection)のドキュメントにあるように、無効にすることも可能です。                                                                                                                                                                                          |
 | **Tracing**                                             |                                |                                                                   |                                                                                                                                                                                                                                           |
 | `tracing.analytics.enabled`                             | `DD_TRACE_ANALYTICS_ENABLED`   | `nil`                                                             | トレース解析の有効/無効を設定します。詳しくは、[サンプリング](#sampling)を参照してください。                                                                                                                                                          |
 | `tracing.distributed_tracing.propagation_extract_style` | `DD_TRACE_PROPAGATION_STYLE_EXTRACT` | `['Datadog','b3multi','b3']` | 抽出する分散型トレーシング伝播フォーマット。`DD_TRACE_PROPAGATION_STYLE` をオーバーライドします。詳しくは、[分散型トレーシング](#distributed-tracing)を参照してください。                                                                             |
@@ -2151,6 +2188,7 @@ end
 | `tracing.sampling.default_rate`                         | `DD_TRACE_SAMPLE_RATE`         | `nil`                                                             | トレースのサンプリングレートを `0.0` (0%) と `1.0` (100%) の間で設定します。詳しくは [アプリケーション側サンプリング](#application-side-sampling)を参照してください。                                                                                                  |
 | `tracing.sampling.rate_limit`                           | `DD_TRACE_RATE_LIMIT`          | `100` (毎秒)                                                | サンプリングするトレースの最大数/秒を設定します。トラフィック急増時の取り込み量オーバーを回避するためのレート制限を設定します。                                                                    |
 | `tracing.sampling.span_rules`                           | `DD_SPAN_SAMPLING_RULES`、`ENV_SPAN_SAMPLING_RULES_FILE` | `nil`                                    | [シングルスパンサンプリング](#single-span-sampling)ルールを設定します。これらのルールにより、それぞれのトレースがドロップされた場合でもスパンを保持することができます。                                                                                              |
+| `tracing.trace_id_128_bit_generation_enabled` | `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED` | `false` | 128 ビットのトレース ID を生成する場合は `true` 、64 ビットのトレース ID を生成する場合は `false`  |
 | `tracing.report_hostname`                               | `DD_TRACE_REPORT_HOSTNAME`     | `false`                                                           | トレースにホスト名タグを追加します。                                                                                                                                                                                                              |
 | `tracing.test_mode.enabled`                             | `DD_TRACE_TEST_MODE_ENABLED`   | `false`                                                           | テストスイートでトレースを使用するための、テストモードを有効または無効にします。                                                                                                                                                                         |
 | `tracing.test_mode.trace_flush`                         |                                | `nil`                                                             | トレースフラッシュの動作を決定するオブジェクト。                                                                                                                                                                                           |
@@ -2280,7 +2318,9 @@ trace.keep!
 
 トレースレベルのサンプリングルールによってそれぞれのトレースが削除されてもスパンを保持することができるサンプリングルールを構成することができます。
 
-[//]: # (TODO: See <Single Span Sampling documentation URL here> for the full documentation on Single Span Sampling.)
+これにより、トレースレベルサンプリングが適用されても、重要なスパンを維持することができます。シングルスパンサンプリングでは、スパンを削除することはできません。
+
+構成は、[取り込みメカニズムのドキュメント](https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/?tab=ruby#single-spans)を参照してください。
 
 #### アプリケーション側サンプリング
 
@@ -2489,7 +2529,14 @@ server {
 }
 ```
 
-次に、リクエストを処理するインテグレーションで `request_queuing: true` を設定して、リクエストキューイング機能を有効にする必要があります。Rack ベースのアプリケーションの詳細については、[ドキュメント](#rack)を参照してください。
+次に、リクエストキューイング機能を有効にする必要があります。`request_queuing` の構成では、以下のオプションが利用可能です。
+
+| オプション             | 説明 |
+| ------------------ | ----------- |
+| `:include_request` | `http_server.queue` スパンはトレースのルートスパンとなり、リクエストの処理開始を待つ時間に*加えて*、リクエストの処理に費やされた合計時間も含まれます。これは構成が `true` に設定されている場合の動作です。これは、`true` に設定されたときに選択される構成です。 |
+| `:exclude_request` | `http.proxy.request` のスパンがトレースのルートスパンとなり、`http.proxy.queue` の子スパンの期間は、リクエストの処理開始を待つ時間のみを表します。*これは実験的な機能です！* |
+
+Rack ベースのアプリケーションの場合、詳細については、[ドキュメント](#rack)を参照してください。
 
 ### 処理パイプライン
 
@@ -2546,6 +2593,12 @@ Datadog::Tracing.before_flush(MyCustomProcessor.new)
 ```
 
 どちらの場合も、プロセッサーのメソッドは `trace` オブジェクトを返す必要があります。この戻り値は、パイプラインの次のプロセッサーに渡されます。
+
+#### 注意事項
+
+1. 削除されたスパンは、トレースメトリクスを生成せず、モニターやダッシュボードに影響を与えます。
+2. スパンを削除すると、削除されたスパンからすべての子スパンも削除されます。これにより、トレースグラフの孤児スパンを防ぐことができます。
+3. [デバッグモードログ](#enabling-debug-mode)は、処理パイプラインが実行される*前に*スパンの状態を報告します。スパンを変更または削除すると、デバッグモードログに元の状態が表示されます。
 
 ### トレース相関
 
@@ -2742,8 +2795,10 @@ end
 | `runtime.ruby.class_count`  | `gauge` | メモリスペース内のクラスの数。                       | CRuby        |
 | `runtime.ruby.gc.*`         | `gauge` | ガベージコレクションの統計: `GC.stat` から収集されます。 | すべてのランタイム |
 | `runtime.ruby.thread_count` | `gauge` | スレッドの数。                                       | すべてのランタイム |
-| `runtime.ruby.global_constant_state` | `gauge` | グローバル定数キャッシュの生成。               | CRuby        |
-| `runtime.ruby.global_method_state`   | `gauge` | [グローバルメソッドキャッシュの生成。](https://tenderlovemaking.com/2015/12/23/inline-caching-in-mri.html) | [CRuby < 3.0.0](https://docs.ruby-lang.org/en/3.0.0/NEWS_md.html#label-Implementation+improvements) |
+| `runtime.ruby.global_constant_state`        | `gauge` | グローバル定数キャッシュの生成。                                                                     | CRuby ≤ 3.1                                                                                     |
+| `runtime.ruby.global_method_state`          | `gauge` | [グローバルメソッドキャッシュの生成。](https://tenderlovemaking.com/2015/12/23/inline-caching-in-mri.html) | [CRuby 2.x](https://docs.ruby-lang.org/en/3.0.0/NEWS_md.html#label-Implementation+improvements) |
+| `runtime.ruby.constant_cache_invalidations` | `gauge` | キャッシュの無効化が絶えない。                                                                         | CRuby ≥ 3.2                                                                                     |
+| `runtime.ruby.constant_cache_misses`        | `gauge` | キャッシュミスが絶えない。                                                                                | CRuby ≥ 3.2                                                                                     |
 
 さらに、すべてのメトリクスには次のタグが含まれます。
 

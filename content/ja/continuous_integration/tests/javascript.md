@@ -8,8 +8,11 @@ further_reading:
 - link: /continuous_integration/tests
   tag: ドキュメント
   text: テスト結果とパフォーマンスを確認する
-- link: /continuous_integration/troubleshooting/
+- link: /continuous_integration/intelligent_test_runner/javascript
   tag: ドキュメント
+  text: Intelligent Test Runner でテストジョブを高速化する
+- link: /continuous_integration/troubleshooting/
+  tag: Documentation
   text: トラブルシューティング CI
 kind: documentation
 title: JavaScript と TypeScript のテスト
@@ -24,10 +27,11 @@ title: JavaScript と TypeScript のテスト
 対応するテストフレームワーク:
 * Jest >= 24.8.0
   * テスト環境としてサポートされているのは、`jsdom` (パッケージ `jest-environment-jsdom`) と `node` (パッケージ `jest-environment-node`) のみです。`jest-electron-runner` に含まれる `@jest-runner/electron/environment` のようなカスタム環境はサポートされていません。
-  * [`testRunner`][3] としては、[`jest-circus`][1] と [`jest-jasmine2`][2] のみをサポートしています。
+  * [`testRunner`][2] としては、[`jest-circus`][1] のみをサポートしています。
   * Jest >= 28 は `dd-trace>=2.7.0` からしかサポートされません
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 は[部分的なサポート](#known-limitations)があります。
+  * Mocha の[パラレルモード][3]はサポートされていません。
 * Cucumber-js >= 7.0.0
 * Cypress >= 6.7.0
   * `dd-trace>=1.4.0` 以降
@@ -41,7 +45,7 @@ title: JavaScript と TypeScript のテスト
 
 * Jest >= 24.8.0
 * `dd-trace>=3.10.0` 以降
-* [`testRunner`][3] としては、[`jest-circus`][1] のみサポートされます
+* [`testRunner`][2] としては、[`jest-circus`][1] のみサポートされます
 * Mocha >= 5.2.0
 * 2.x リリースラインの `dd-trace>=3.10.0` と `dd-trace>=2.12.0` 以降
 * Playwright >= 1.18.0
@@ -94,7 +98,7 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /ja/getting_started/site/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -282,7 +286,7 @@ require('dd-trace/ci/cypress/support')
 
 `DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_ENV=ci DD_SERVICE=my-ui-app npm test
 {{< /code-block >}}
 
@@ -316,6 +320,7 @@ it('renders a hello world', () => {
 
 テスト対象のブラウザアプリケーションが [RUM][6] を使用してインスツルメントされている場合、Cypress テストの結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。詳しくは、[RUM インテグレーション][7]ガイドをご参照ください。
 
+
 [1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
 [2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
@@ -326,6 +331,12 @@ it('renders a hello world', () => {
 {{% /tab %}}
 
 {{< /tabs >}}
+
+### コードカバレッジを報告する
+
+テストに [Istanbul][7] がインスツルメンテーションされると、Datadog トレーサー (v3.20.0+) はテストセッションの `test.code_coverage.lines_pct` タグでそれを報告します。
+
+テストセッションの **Coverage** タブで、テストカバレッジの推移を見ることができます。
 
 ### Yarn >=2 を使用する場合
 
@@ -363,7 +374,7 @@ NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 **環境変数**: `DD_TRACE_AGENT_URL`<br/>
 **デフォルト**: `http://localhost:8126`
 
-他のすべての [Datadog トレーサーコンフィギュレーション][7]オプションも使用できます。
+他のすべての [Datadog トレーサーコンフィギュレーション][8]オプションも使用できます。
 
 ### Git のメタデータを収集する
 
@@ -415,17 +426,32 @@ Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、
 : ISO 8601 形式のコミットのコミッターの日付。<br/>
 **例**: `2021-03-12T16:00:28Z`
 
+## Git メタデータのアップロード
+
+`dd-trace>=3.15.0` および `dd-trace>=2.28.0` から、CI Visibility は git メタデータ情報 (コミット履歴) を自動的にアップロードします。このメタデータにはファイル名は含まれていますが、ファイルの内容は含まれていません。この動作をオプトアウトしたい場合は、`DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` を `false` に設定することで可能です。しかし、Intelligent Test Runner などの機能はこの設定なしでは動作しないため、この設定は推奨されません。
+
 ## 既知の制限
 
 ### ES モジュール
-[Mocha >=9.0.0][8] はテストファイルの読み込みに ESM-first アプローチを採用しています。つまり、ES モジュールが使用されている場合 (たとえば、テストファイルの拡張子を `.mjs` にして定義している場合) は_インスツルメンテーションが制限されます_。テストは検出されますが、自分のテストを可視化することはできません。ES モジュールについて詳しくは、[Node.js に関するドキュメント][9]を参照してください。
+[Mocha >=9.0.0][9] はテストファイルの読み込みに ESM-first アプローチを採用しています。つまり、ES モジュールが使用されている場合 (たとえば、テストファイルの拡張子を `.mjs` にして定義している場合) は_インスツルメンテーションが制限されます_。テストは検出されますが、自分のテストを可視化することはできません。ES モジュールについて詳しくは、[Node.js に関するドキュメント][10]を参照してください。
 
 ### ブラウザテスト
 `mocha`、`jest`、`cucumber`、`cypress`、`playwright` で実行されるブラウザテストは `dd-trace-js` によりインスツルメントされますが、ブラウザセッション自体の可視性はデフォルトでは提供されません（ネットワーク呼び出し、ユーザーのアクション、ページロードなど）。
 
-ブラウザ処理の可視性を希望する場合は、[RUM とセッションリプレイ][10]の使用をご検討ください。Cypress を使用していると、テスト結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。詳しくは、[RUM インテグレーション][11]ガイドをご参照ください。
+ブラウザ処理の可視性を希望する場合は、[RUM とセッションリプレイ][11]の使用をご検討ください。Cypress を使用していると、テスト結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。詳しくは、[RUM インテグレーション][12]ガイドをご参照ください。
 
+### Cypress インタラクティブモード
 
+Cypress インタラクティブモード (`cypress open` を実行することで入ることができる) は、[`before:run`][14] など一部の cypress イベントが発生しないため、CI Visibility ではサポートされていません。もし試してみたい場合は、[cypress コンフィグレーションファイル][15]に `experimentalInteractiveRunEvents: true` を渡してください。
+
+### Mocha のパラレルテスト
+Mocha の[パラレルモード][4]はサポートされていません。パラレルモードで実行されたテストは、CI Visibility のインスツルメンテーションを受けません。
+
+### Cucumber のパラレルテスト
+Cucumber の[パラレルモード][16]はサポートされていません。パラレルモードで実行されたテストは、CI Visibility のインスツルメンテーションを受けません。
+
+### Jest の `test.concurrent`
+Jest の [test.concurrent][17] はサポートされていません。
 
 ## ベストプラクティス
 
@@ -444,14 +470,16 @@ Datadog は、テスト結果を可視化し、リポジトリ、ブランチ、
 })
 {{< /code-block >}}
 
-代わりに [`test.each`][12] を使用:
+そして、代わりに [`test.each`][18] を使ってください。
+
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
   expect(a+b).toEqual(expected)
 })
 {{< /code-block >}}
 
-`mocha` の場合は、[`mocha-each`][13] を使用:
+`mocha` の場合は、[`mocha-each`][19] を使ってください。
+
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
 forEach([
@@ -474,7 +502,7 @@ CI Visibility を有効にすると、プロジェクトから以下のデータ
 * Git のコミット履歴。ハッシュ、メッセージ、作成者情報、変更されたファイル (ファイルの内容は含まず) が含まれます。
 * CODEOWNERS ファイルからの情報。
 
-さらに、[Intelligent Test Runner][14] を有効にすると、プロジェクトから以下のデータが収集されます。
+さらに、[Intelligent Test Runner][20] を有効にすると、プロジェクトから以下のデータが収集されます。
 
 * 各テストでカバーされるファイル名と行数を含むコードカバレッジ情報。
 
@@ -486,14 +514,20 @@ CI Visibility を有効にすると、プロジェクトから以下のデータ
 [1]: https://github.com/facebook/jest/tree/main/packages/jest-circus
 [2]: https://github.com/facebook/jest/tree/main/packages/jest-jasmine2
 [3]: https://jestjs.io/docs/configuration#testrunner-string
-[4]: /ja/continuous_integration/tests/#test-suite-level-visibility
-[5]: https://github.com/DataDog/dd-trace-js
-[6]: /ja/tracing/trace_collection/dd_libraries/nodejs
-[7]: /ja/tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
-[8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: /ja/real_user_monitoring/browser/
-[11]: /ja/continuous_integration/guides/rum_integration/
-[12]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[13]: https://www.npmjs.com/package/mocha-each
-[14]: /ja/continuous_integration/intelligent_test_runner/
+[4]: https://mochajs.org/#parallel-tests
+[5]: /ja/continuous_integration/tests/#test-suite-level-visibility
+[6]: https://github.com/DataDog/dd-trace-js
+[7]: /ja/tracing/trace_collection/dd_libraries/nodejs
+[8]: https://istanbul.js.org/
+[9]: /ja/tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
+[10]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
+[11]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[12]: /ja/real_user_monitoring/browser/
+[13]: /ja/continuous_integration/guides/rum_integration/
+[14]: https://docs.cypress.io/api/plugins/before-run-api
+[15]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[16]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
+[17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[19]: https://www.npmjs.com/package/mocha-each
+[20]: /ja/continuous_integration/intelligent_test_runner/

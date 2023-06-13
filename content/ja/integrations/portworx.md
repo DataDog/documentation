@@ -19,7 +19,8 @@ author:
   sales_email: paul@portworx.com
   support_email: paul@portworx.com
 categories:
-- モニター
+- kubernetes
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md
 display_on_public_website: true
@@ -40,8 +41,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Kubernetes
+  - Category::Data Store
   - Supported OS::Linux
-  - Category::Monitoring
   configuration: README.md#Setup
   description: Portworx インスタンスからランタイムメトリクスを収集
   media: []
@@ -63,7 +65,7 @@ Portworx サービスからメトリクスをリアルタイムに取得して�
 
 Portworx チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Portworx チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

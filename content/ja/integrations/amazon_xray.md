@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/awsxray/
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
+- トレーシング
 dependencies: []
 description: AWS サービス間で交わされるリクエストをトレース
 doc_link: https://docs.datadoghq.com/integrations/amazon_xray/
@@ -32,7 +33,7 @@ AWS X-Ray を使用すると、開発者は AWS 製品を使用して構築さ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 最初に、[AWS インテグレーションを有効化][3]し、以下のアクセス許可が Datadog インテグレーションロールのポリシードキュメントに含まれていることを確認します。
 

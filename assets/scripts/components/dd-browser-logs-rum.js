@@ -1,19 +1,9 @@
 /* eslint import/no-unresolved: 0 */
-import configDocs from '../config/config-docs';
+import { getConfig } from '../helpers/getConfig';
 const { env, branch } = document.documentElement.dataset;
 const lang = document.documentElement.lang || 'en';
 
-function getConfig() {
-    if (env === 'live') {
-        return configDocs['live'];
-    } else if (env === 'preview') {
-        return configDocs['preview'];
-    } else {
-        return configDocs['development'];
-    }
-}
-
-const Config = getConfig();
+const Config = getConfig(env);
 
 const generateRumDeviceId = () => Math.floor(Math.random() * (2 ** 53)).toString(36)
 

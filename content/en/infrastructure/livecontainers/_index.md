@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
   tag: "Blog"
   text: "Expedite infrastructure investigations with Kubernetes Anomalies"
+- link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
+  tag: "Blog"
+  text: "Practical tips for rightsizing your Kubernetes workloads"
 ---
 
 ## Overview
@@ -109,7 +112,7 @@ The **Containers** view includes [Scatter Plot](#scatter-plot) and [Timeseries][
 
 Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
 
-You can switch between the “Scatter Plot” and “Timeseries” tabs in the collapsible **Summary Graphs** section in the Containers page:
+You can switch between the "Scatter Plot" and "Timeseries" tabs in the collapsible **Summary Graphs** section in the Containers page:
 
 {{< img src="infrastructure/livecontainers/scatterplot_selection.png" alt="Scatter plot selection" style="width:80%;">}}
 
@@ -129,7 +132,7 @@ While actively working with the containers page, metrics are collected at a 2-se
 
 ### Kubernetes resources view
 
-If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **StatefulSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the “Select a resource” dropdown menu in the top left corner of the page.
+If you have enabled Kubernetes Resources for Live Containers, toggle among the **Clusters**, **Pods**, **Deployments**, **ReplicaSets**, **DaemonSets**, **StatefulSets**, **Services**, **CronJobs**, **Jobs**, and **Nodes** views in the "Select a resource" dropdown menu in the top left corner of the page.
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
@@ -137,7 +140,7 @@ Each of these views includes a data table to help you better organize your data 
 
 #### Group by functionality and facets
 
-Group pods by tags or Kubernetes labels to get an aggregated view which allows you to find information quicker. You can perform a group by using the “Group by” bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
+Group pods by tags or Kubernetes labels to get an aggregated view which allows you to find information quicker. You can perform a group by using the "Group by" bar on the top right of the page or by clicking on a particular tag or label and locating the group by function in the context menu as shown below.
 
 {{< img src="infrastructure/livecontainers/group-by.mp4" alt="An example of grouping by team" video=true style="width:80%;">}}
 
@@ -169,7 +172,7 @@ This panel is useful for troubleshooting and finding information about a selecte
 
 * [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
 * [**Metrics**][10]: View live metrics for your container or resource. You can view any graph full screen, share a snapshot of it, or export it from this tab.
-* **Network**: View a container or resource’s network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
+* **Network**: View a container or resource's network performance, including source, destination, sent and received volume, and throughput fields. Use the **Destination** field to search by tags like `DNS` or `ip_type`, or use the **Group by** filter in this view to group network data by tags, like `pod_name` or `service`.
 * [**Traces**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
 
 Kubernetes Resources views have a few additional tabs:
@@ -206,7 +209,7 @@ Streaming logs can be searched with simple string matching. See [Live Tail][13] 
 
 **Note**: Streaming logs are not persisted, and entering a new search or refreshing the page clears the stream.
 
-{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Side panel" video="true"  >}}
+{{< img src="infrastructure/livecontainers/livecontainerlogssidepanel.mp4" alt="Preview Logs Side panel" video="true" >}}
 
 #### Indexed logs
 

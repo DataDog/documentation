@@ -2,6 +2,9 @@
 aliases:
 - /ja/integrations/observability_pipelines/working_with_data/
 further_reading:
+- link: /observability_pipelines/setup/
+  tag: ドキュメント
+  text: 観測可能性パイプラインを設定する
 - link: /observability_pipelines/reference/transforms/#awsec2metadata
   tag: ドキュメント
   text: AWS EC2 インスタンスが発するメタデータのパース
@@ -18,7 +21,7 @@ further_reading:
   tag: ドキュメント
   text: メトリクスをログイベントに変換する
 - link: /observability_pipelines/configurations/
-  tag: ドキュメント
+  tag: Documentation
   text: 観測可能性パイプラインの構成の詳細
 kind: ドキュメント
 title: データを活用する

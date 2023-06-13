@@ -1,10 +1,10 @@
 ---
-aliases:
-- /ja/integrations/amazon_vpc/
+aliases: []
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
 - ログの収集
+- ネットワーク
 dependencies: []
 description: AWS VPC ログを収集
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/

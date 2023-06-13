@@ -2,7 +2,7 @@
 aliases:
 - /ja/security_platform/cspm/frameworks_and_benchmarks
 further_reading:
-- link: security/cspm/getting_started
+- link: security/cspm/setup
   tag: ドキュメント
   text: CSPM の概要
 - link: security/default_rules
@@ -23,7 +23,7 @@ title: コンプライアンスレポート
 
 Cloud Security Posture Management (CSPM) には、クラウドリソースの構成を評価し、潜在的な誤構成を特定する 400 以上の検出ルールがすぐに使える状態で提供されています。各[検出ルール][1]は、以下のコンプライアンス基準および業界ベンチマーク内の 1 つまたは複数のコントロールに対応します。
 
-- [CIS AWS Foundations ベンチマーク v1.3.0*][2]
+- [CIS AWS Foundations ベンチマーク v1.5.0*][2]
 - [CIS Azure Foundations ベンチマーク v1.3.0][3]
 - [CIS GCP Foundations ベンチマーク v1.3.0][22]
 - [CIS Docker ベンチマーク v1.2.0][4]
@@ -50,17 +50,17 @@ CSPM [概要][20]のページで、各フレームワークのコンプライア
 - **Explore Resources**: 選択したフレームワークに対する所見を含むリソースを表示する、** Findings** ページのフィルター表示。
 - **Configure Rules**: 各フレームワークの検出ルールを変更することで、環境のスキャン方法や通知先をカスタマイズすることができます。
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview.png" alt="CSPM 概要ページのコンプライアンスレポートのセクションでは、コンプライアンス状況の概要が表示されます" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance-reports-overview2.png" alt="CSPM 概要ページのコンプライアンスレポートのセクションでは、コンプライアンス状況の概要が表示されます" style="width:100%;">}}
 
 ## コンプライアンスフレームワークレポートを見る
 
 コンプライアンスフレームワークレポートでは、お客様の環境でどのルールが失敗しているのか、誤構成されたリソースの詳細とともに表示されます。
 
-レポート上部のサマリーには、Pass/Fail の結果が出たルールの数、重大度の高いルール失敗の上位 3 つ、重大度に基づくルールの詳細な内訳が表示されます。また、時間セレクタで過去の姿勢を調べたり、レポートの PDF をダウンロードすることも可能です。
+レポート上部のサマリーには、合格/不合格の結果が出たルールの数、重大度の高いルール失敗の上位 3 つ、重大度に基づくルールの詳細な内訳が表示されます。また、時間セレクタで過去の姿勢を調べたり、レポートの PDF をダウンロードしたり、アカウント、チーム、サービス、環境のタグでページをフィルターすることも可能です。
 
 サマリーの下には、フレームワークに関連するすべてのルールの完全なリストが、要件とコントロールごとに整理されており、ルールによってチェックされたリソースの数と失敗の割合も表示されます。
 
-{{< img src="security/cspm/frameworks_and_benchmarks/report-2.png" alt="CIS の AWS コンプライアンスフレームワークレポートは、重大なルールの失敗に関する詳細を提供します" style="width:100%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/report3.png" alt="CIS の AWS コンプライアンスフレームワークレポートは、重大なルールの失敗に関する詳細を提供します" style="width:100%;">}}
 
 ルールを選択すると、誤構成されたリソースの詳細、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。
 
@@ -82,7 +82,7 @@ CSPM [概要][20]のページで、各フレームワークのコンプライア
 [10]: https://gdpr.eu/
 [11]: /ja/security/cloud_siem/
 [12]: /ja/integrations/amazon_cloudtrail/
-[13]: https://app.datadoghq.com/security/configuration/rules/
+[13]: https://app.datadoghq.com/security/configuration/rules?product=cspm
 [14]: /ja/integrations/slack/
 [15]: /ja/integrations/jira/
 [16]: /ja/integrations/pagerduty

@@ -10,194 +10,71 @@ is_beta: true
 kind: documentation
 title: Intelligent Test Runner
 ---
-{{< callout url="https://app.datadoghq.com/ci/getting-started" >}}
-Intelligent Test Runner for CI Visibility は非公開ベータ版です。CI Visibility の概要のページにあるフォームに記入して、アクセスをリクエストすることができます。
-{{< /callout >}}
 
-## 概要
+<div class="alert alert-warning">Intelligent Test Runner はベータ版製品です。</div>
 
-Intelligent Test Runner は、Datadog のテストインパクト分析ソリューションです。これにより、与えられたコミットに対して影響を与えるテストのみを実行し、無関係なテストはスキップすることができます。
+Intelligent Test Runner は、Datadog のテスト影響度分析ソリューションです。変更されたコードに基づいて、与えられたコミットに対して関連するテストのみを自動的に選択し、実行することができます。テストカバレッジを維持しながら、テストにかかる時間や CI 全体のコストを大幅に削減します。
 
 
-{{< img src="continuous_integration/itr_overview.png" alt="Datadog の CI セクションのテストサービス設定で Intelligent test runner を有効にする">}}
+{{< img src="continuous_integration/itr_savings.png" alt="時間短縮を示す、テストセッションで有効化された Intelligent Test Runner。">}}
 
-関連するコードに対してのみテストを実行することで、テストが失敗した場合、それは変更されたコードに関連する正当な失敗である可能性が高くなります。
+Intelligent Test Runner は、テストスイートを分析して各テストがカバーしているコードを決定し、そのカバー率と新しいコード変更によって影響を受けるファイルをクロスリファレンスすることで動作します。Datadog はこの情報を使って、影響を受ける関連テストを選択し、コード変更の影響を受けないテストは除外して、全体のテスト期間を短縮します。
 
-## ベータ版での制限事項
+Intelligent Test Runner は、コミットごとに実行されるテストの数を最小限に抑えることで、パイプラインを混乱させる不安定なテストの発生頻度を低減します。不安定なテストとは、同じコミットでランダムに合格したり失敗したりするテストのことです。テストが失敗するのが、テスト対象のコード変更と無関係な場合、特にイライラさせられることがあります。テストサービスで Intelligent Test Runner を有効にすると、各コミットを関連するテストに制限することができ、コード変更に無関係な不安定なテストがビルドを恣意的に破壊してしまうことがなくなります。
 
-Intelligent Test Runner のベータ版では、一定の制限があります。
+### ベータ版での制限事項
 
-- 以下のセクションで必要とされる環境変数の中には、ベータ版の間だけ必要とされるものがあります。
-- Intelligent Test Runner は、Datadog Agent を使用しない場合のみ動作します。このページの構成ステップでは、Datadog ライブラリが Agent を介さずにバックエンドに直接データを送信します。現在 Agent を使用している場合、ホストメトリクスとの相関が失われます。
-- Intelligent Test Runner の現在の実装には、実行すべきテストをスキップする可能性のある既知の制限がありま す。Intelligent Test Runner は、以下を検出できません。
-  - ライブラリの依存関係の変更。
-  - コンパイラーオプションの変更。
-  - 外部サービスの変更。
-  - データ駆動型テストにおけるデータファイルの変更。
+Intelligent Test Runner の現在の実装には、特定の条件下で実行されるべきテストをスキップする原因となる、既知の制限が存在します。具体的には、Intelligent Test Runner は、ライブラリ依存関係、コンパイラオプション、外部サービス、またはデータ駆動型テストにおけるデータファイルの変更を検出することができません。
 
 Intelligent Test Runner をオーバーライドしてすべてのテストを実行するには、Git のコミットメッセージのどこかに `ITR:NoSkip` (大文字小文字を区別しない) を追加してください。
 
 ## Datadog ライブラリのセットアップ
 
-Intelligent Test Runner を設定する前に、特定の言語の [Test Visibility][1] の設定を完了している必要があります。
+Intelligent Test Runner を設定する前に、特定の言語に対して [Test Visibility][1] を設定する必要があります。Agent を通してデータを報告する場合は、v6.40+/v7.40+ を使用してください。
 
-### JavaScript
-
-Intelligent Test Runner を有効にするには、以下の環境変数の設定が必要です。
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
-: Agentless モードを有効または無効にします。<br/>
-**デフォルト**: `false`<br/>
-**注**: ベータ版のみ必要
-
-`DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][2]。<br/>
-**デフォルト**: `(empty)`
-
-`DD_APPLICATION_KEY` (必須)
-: スキップするテストをクエリするために使用する [Datadog アプリケーションキー][3]。<br/>
-**デフォルト**: `(empty)`
-
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][4]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
-
-`DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true` (必須)
-: git メタデータのアップロードを有効にするためのフラグ。<br/>
-**デフォルト**: `false`<br/>
-**注**: ベータ版のみ必要
-
-`DD_CIVISIBILITY_ITR_ENABLED=true` (必須)
-: テストスキップを有効にするためのフラグ。 <br/>
-**デフォルト**: `false`<br/>
-**注**: ベータ版のみ必要
-
-これらの環境変数を設定した後、通常通りテストを実行します。
-
-{{< code-block lang="bash" >}}
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_CIVISIBILITY_GIT_UPLOAD_ENABLED=true DD_CIVISIBILITY_ITR_ENABLED=true yarn test
-{{< /code-block >}}
-
-
-#### UI アクティベーション
-環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
-
-#### 互換性
-
-Intelligent Test Runner は、以下のバージョンとテストフレームワークでのみサポートされています。
-
-* `jest>=24.8.0`
-  * `dd-trace>=3.4.0` 以降
-  * `testRunner` としてサポートされているのは `jest-circus/runner` のみです。
-  * テスト環境としてサポートされているのは `jsdom` と `node` のみです。
-* `mocha>=5.2.0`
-  * `dd-trace>=3.9.0` 以降
-
-#### スイートスキップ
-Intelligent test runner for Javascript は、個々のテストではなく、_テストスイート_ (テストファイル) 全体をスキップします。
-
-### .NET
-
-Intelligent Test Runner を有効にするには、`dd-trace` ツールのバージョンが >= 2.22.0 であること (ツールのバージョンを取得するには `dd-trace --version` を実行します)、および以下の環境変数が設定されている必要があります。
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (必須)
-: Agentless モードを有効または無効にします。<br/>
-**デフォルト**: `false`<br/>
-**注**: ベータ版のみ必要
-
-`DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][2]。<br/>
-**デフォルト**: `(empty)`
-
-`DD_APPLICATION_KEY` (必須)
-: スキップするテストをクエリするために使用する [Datadog アプリケーションキー][3]。<br/>
-**デフォルト**: `(empty)`
-
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][4]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
-
-これらの環境変数の設定後、通常通り [dotnet テスト][6]や [VSTest.Console.exe][7] を使ってテストを実行します。
-
-{{< tabs >}}
-
-{{% tab "dotnet テスト" %}}
-
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- dotnet test
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "VSTest.Console" %}}
-
-
-{{< code-block lang="bash" >}}
-dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {test_assembly}.dll
-{{< /code-block >}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-#### UI アクティベーション
-
-環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
-
-### Swift
-
-Intelligent Test Runner を有効にするには、`dd-sdk-swift` フレームワークのバージョンが >= 2.2.0 である必要があります。また、スキームやテストプランのテスト設定で `Code Coverage` オプションを有効にするか、`swift test` コマンドに `--enable-code-coverage` を追加しなければなりません (SPM ターゲットを使用している場合)。
-
-また、以下の環境変数も設定する必要があります。
-
-`DD_TEST_RUNNER`
-: テストのインスツルメンテーションを有効または無効にします。この値を `$(DD_TEST_RUNNER)` に設定すると、テストプロセスの外部 (CI ビルドなど) で定義された環境変数を使用してテストインスツルメンテーションを有効または無効にできます。<br/>
-**デフォルト**: `false`<br/>
-**推奨**: `$(DD_TEST_RUNNER)`
-
-`DD_API_KEY` (必須)
-: テスト結果のアップロードに使用される [Datadog API キー][2]。<br/>
-**デフォルト**: `(empty)`
-
-`DD_APPLICATION_KEY` (必須)
-: スキップするテストをクエリするために使用する [Datadog アプリケーションキー][3]。<br/>
-**デフォルト**: `(empty)`
-
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][4]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
-
-#### UI アクティベーション
-
-環境変数の設定に加えて、お客様またはお客様の組織で管理者権限を持つユーザーが、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
-
-## CI ジョブのセットアップ
-
-Intelligent Test Runner は、git のメタデータ情報 (コミット履歴) を使って動作します。しかし、CI プロバイダーによっては git shallow clone (`git clone --depth=0`) を使って、過去のコミット情報を一切ダウンロードせずに対象のコミットだけをダウンロードするものがあります。この設定では、Intelligent Test Runner が動作するのに十分な情報が含まれていません。CI で shallow clone を使用している場合は、それを変更する必要があります。
-
-shallow clone に代わる効率的な方法として、partial clone (Git v2.27+ でサポート) があります。これは、現在のコミットと必要な git メタデータを複製し、すべてのファイルの過去のバージョンを取得することはありません: `git clone --filter=blob:none`
+{{< whatsnext desc="Datadog で Intelligent Test Runner をセットアップする言語を選択します。" >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/intelligent_test_runner/swift" >}}Swift{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## コンフィギュレーション
 
-リポジトリのデフォルトブランチは、自動的に Intelligent Test Runner の有効化から除外されます。上記の制限により、Intelligent Test Runner は実行すべきテストの一部をスキップする可能性があるため、Datadog はデフォルトブランチ (またはリリース元のブランチ) の全てのテストの実行を継続することを推奨しています。
+Intelligent Test Runner に Datadog ライブラリを設定したら、[Test Service Settings][2] ページから構成します。
 
-他に除外したいブランチがある場合、Intelligent Test Runner の設定ページから追加することができます。クエリバーは、ワイルドカード文字 `*` をサポートしており、一致するブランチを除外することができます。
+{{< img src="continuous_integration/itr_overview.png" alt="Datadog の CI セクションのテストサービス設定で Intelligent test runner を有効にする" style="width:80%;">}}
+
+上記の制限により、リポジトリのデフォルトブランチは、自動的に Intelligent Test Runner の有効化から除外されます。Datadog は、本番に到達する前にすべてのテストが実行されるようにするために、この構成を推奨します。
+
+他に除外したいブランチがある場合、Intelligent Test Runner の設定ページから追加します。クエリバーは、ワイルドカード文字 `*` の使用をサポートしており、`release_*` など、一致するブランチを除外することができます。
 
 {{< img src="continuous_integration/itr_configuration.png" alt="Intelligent Test Runner から除外するブランチを選択" style="width:80%;">}}
 
+## テストセッションを確認する
+
+テストコミットページやテストセッションパネルを見ることで、Intelligent Test Runner で得られる時間短縮を確認することができます。
+
+{{< img src="continuous_integration/itr_commit.png" alt="Intelligent Test Runner のテストコミットページ" style="width:80%;">}}
+
+{{< img src="continuous_integration/itr_savings.png" alt="時間短縮を示す、テストセッションで有効化された Intelligent Test Runner。" style="width:80%;">}}
+
+Intelligent Test Runner がアクティブでテストをスキップしている場合、紫色のテキストで、各テストセッションまたは各コミットで節約した時間の量が表示されます。期間バーも紫色に変わるので、[Test Runs][3] ページで Intelligent Test Runner を使用しているテストセッションをすぐに識別できます。
+
+## 導入とグローバルな節約を確認する
+
+すぐに使える [Intelligent Test Runner ダッシュボード][4]で、組織の節約と Intelligent Test Runner の導入を追跡します。ダッシュボードには、全体の保存を追跡するウィジェットと、リポジトリごと、コミッターごと、サービスごとのデータビューがあります。ダッシュボードを見ることで、組織のどの部分が Intelligent Test Runner を使用し、最大限の効果を得ているかを理解することができます。
+
+{{< img src="continuous_integration/itr_dashboard1.png" alt="Intelligent Test Runner ダッシュボード" style="width:80%;">}}
+
+また、ダッシュボードでは、組織全体における Intelligent Test Runner の導入状況を追跡することができます。
+
+{{< img src="continuous_integration/itr_dashboard2.png" alt="Intelligent Test Runner ダッシュボード" style="width:80%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/continuous_integration/tests/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: /ja/getting_started/site/
-[5]: https://app.datadoghq.com/ci/settings/test-service
-[6]: https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-test
-[7]: https://docs.microsoft.com/en-us/visualstudio/test/vstest-console-options
+[2]: https://app.datadoghq.com/ci/settings/test-service
+[3]: https://app.datadoghq.com//ci/test-runs
+[4]: https://app.datadoghq.com/dash/integration/30941/ci-visibility-intelligent-test-runner-beta

@@ -3,21 +3,27 @@ kind: documentation
 title: Data Streams Monitoring for Go のセットアップ
 ---
 
+{{< site-region region="ap1" >}}
+<div class="alert alert-info">Data Streams Monitoring は、AP1 リージョンではサポートされていません。</a></div>
+{{< /site-region >}}
+
 ### 前提条件
 
-Data Streams Monitoring を開始するには、Datadog Agent と Data Streams Monitoring ライブラリの最新バージョンが必要です。
+Data Streams Monitoring を始めるには、Datadog Agent と Data Streams Monitoring ライブラリの最近のバージョンが必要です。
 * [Datadog Agent v7.34.0 以降][1]
 * [Data Streams Library v0.2 以降][2]
 
-### APM に Datadog Agent を構成する
+### インストール
 
-パイプラインの最初に `datastreams.Start()` でデータストリームの経路を開始します。
+パイプラインの開始時に `datastreams.Start()` で Data Streams の経路を開始します。
 
 2 種類のインスツルメンテーションが用意されています。
 - Kafka ベースのワークロードのためのインスツルメンテーション
-- その他のキューイング技術やプロトコルのためのカスタムインスツルメンテーション
+- その他のキューイング技術やプロトコルに対応したカスタムインスツルメンテーション
 
-<div class="alert alert-info">Trace Agent のデフォルトの URL は <code>localhost:8126</code> です。これがアプリケーションによって異なる場合は、<code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code> オプションを使ってください。</div>
+<div class="alert alert-info">デフォルトの Trace Agent URL は <code>localhost:8126</code>アプリケーションでこれが異なる場合は、<code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code> オプションを使用してください。</div>
+
+
 
 ### Kafka インスツルメンテーション
 

@@ -84,6 +84,34 @@ providers:
 ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+[Datadog Agent][1] でユニバーサルサービスモニタリングを有効にするには、`datadog-agent.yaml` マニフェストを更新します。`DatadogAgent` リソースで `spec.features.usm.enabled` を `true` に設定します。
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+**注:** Datadog Operator v1.0.0 以降が必要です。
+
+[1]: https://github.com/DataDog/datadog-operator
+
+{{% /tab %}}
 {{% tab "Helm を使用しない Kubernetes" %}}
 
 1. `datadog-agent` テンプレートにアノテーション `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` を追加します。
@@ -161,8 +189,6 @@ providers:
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
-           - name: HOST_PROC
-             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -315,7 +341,6 @@ docker run --cgroupns host \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
--e HOST_PROC=/host/root/proc \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -340,13 +365,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
-     - HOST_PROC: '/host/proc'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
@@ -695,7 +718,7 @@ OS のイメージが Ubuntu や Debian の場合は、`environment` の後に�
 * AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。また、ENI および EC2 のメトリクス収集を有効にする必要があります。
 
 次に、各ロードバランサーに以下のタグを追加します。
-```shell
+```conf
 ENV=<env>
 SERVICE=<service>
 ```
@@ -787,7 +810,7 @@ network_config:
 {{% tab "環境変数" %}}
 次のエントリーを追加します。
 
-```shell
+```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}
@@ -803,4 +826,4 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [3]: /ja/tracing/service_catalog/
 [4]: /ja/monitors/types/apm/?tab=apmmetrics
 [5]: /ja/dashboards/
-[6]: /ja/monitors/service_level_objectives/metric/
+[6]: /ja/service_management/service_level_objectives/metric/

@@ -4,16 +4,20 @@ aliases:
 beta: true
 description: RUM をセットアップして機能フラグデータをキャプチャし、Datadog でパフォーマンスを分析する方法をご紹介します。
 further_reading:
-- link: /real_user_monitoring/explorer
+- link: /real_user_monitoring/feature_flag_tracking
   tag: ドキュメント
+  text: 機能フラグ追跡で機能フラグデータを分析する
+- link: /real_user_monitoring/explorer
+  tag: Documentation
   text: RUM エクスプローラーで RUM データを視覚化する
 kind: ガイド
 title: RUM の機能フラグデータの概要
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-RUM の機能フラグデータ収集は非公開ベータ版です。アクセスをリクエストするには、サポート (support@datadoghq.com) までご連絡ください。
-{{< /callout >}}
+<div class="alert alert-warning">
+    機能フラグ追跡はベータ版です。
+</div>
+
 
 ## 概要
 機能フラグデータにより、どのユーザーに特定の機能が表示されているか、導入した変更がユーザー体験に影響を与えているか、パフォーマンスに悪影響を与えているかを判断できるため、ユーザー体験やパフォーマンス監視の可視性が高まります。
@@ -21,88 +25,126 @@ RUM の機能フラグデータ収集は非公開ベータ版です。アクセ�
 RUM データを機能フラグデータでリッチ化することにより、意図せずにバグやパフォーマンスの低下を引き起こすことなく、その機能が正常に起動することを確信することができます。この追加的な洞察により、機能のリリースとパフォーマンスを関連付け、問題を特定のリリースにピンポイントで特定し、より迅速にトラブルシューティングを行うことができます。
 
 ## セットアップ
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
 機能フラグの追跡は、RUM ブラウザ SDK で利用可能です。開始するには、[RUM ブラウザモニタリング][1]をセットアップします。ブラウザ RUM SDK バージョン >= 4.25.0 が必要です。
 
-機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、またはインテグレーションパートナーのいずれかを使用して開始することができます。
+機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
 
-現在、以下とのインテグレーションをサポートしています。
-- [LaunchDarkly](#launchdarkly-integration)
-- [Split](#split-integration)
-- [Flagsmith](#flagsmith-integration)
+<details open>
+  <summary>npm</summary>
+
+```javascript
+  import { datadogRum } from '@datadog/browser-rum';
+
+  // Datadog ブラウザ SDK を初期化します
+  datadogRum.init({
+    ...
+    enableExperimentalFeatures: ["feature_flags"],
+    ...
+});
+```
+
+</details>
+
+<details>
+  <summary>CDN async</summary>
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ["feature_flags"],
+      ...
+    })
+})
+```
+</details>
+
+<details>
+  <summary>CDN sync</summary>
+
+```javascript
+window.DD_RUM &&
+    window.DD_RUM.init({
+      ...
+      enableExperimentalFeatures: ["feature_flags"],
+      ...
+    })
+```
+</details>
+<br/>
+
+[1]: /ja/real_user_monitoring/browser#setup
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+機能フラグの追跡は、RUM iOS SDK で利用可能です。開始するには、[RUM iOS モニタリング][1]をセットアップします。iOS RUM SDK バージョン 1.16.0 以上が必要です。
+
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/?tab=swift
+{{% /tab %}}
+{{% tab "Android" %}}
+
+機能フラグの追跡は、RUM Android SDK で利用可能です。開始するには、[RUM Android モニタリング][1]をセットアップします。Android RUM SDK バージョン 1.18.0 以上が必要です。
+
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=kotlin
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+機能フラグの追跡は、Flutter アプリケーションで利用可能です。開始するには、[RUM Flutter モニタリング][1]をセットアップします。Flutter プラグインバージョン 1.3.2 以上が必要です。
+
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/
+{{% /tab %}}
+{{< /tabs >}}
+
+## インテグレーション
+
+機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション](#custom-feature-flag-management)、または Datadog のインテグレーションパートナーのいずれかを使用して開始することができます。
+
+Datadog は、以下とのインテグレーションをサポートしています。
+{{< partial name="rum/rum-feature-flag-tracking.html" >}}
+
+
+</br>
 
 ### カスタム機能フラグ管理
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "ブラウザ" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
+```javascript
+datadogRum.addFeatureFlagEvaluation(key, value);
+```
 
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     ...
-     enableExperimentalFeatures: ["feature_flags"],
-     ...
-   });
-   ```
+{{% /tab %}}
+{{% tab "iOS" %}}
 
-2. 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```javascript
-   datadogRum.addFeatureFlagEvaluation(key, value);
+   ```swift
+   Global.rum.addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
-{{% tab "CDN async" %}}
+{{% tab "Android" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
-
-2. 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
-
-   ```javascript
-   datadogRum.addFeatureFlagEvaluation(key, value);
+   ```kotlin
+   GlobalRum.get().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+{{% tab "Flutter" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
-
-2. 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
-
-   ```javascript
-   datadogRum.addFeatureFlagEvaluation(key, value);
+   ```dart
+   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -111,120 +153,46 @@ RUM データを機能フラグデータでリッチ化することにより、�
 ### LaunchDarkly インテグレーション
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "ブラウザ" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+LaunchDarkly の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
+LaunchDarkly の SDK の初期化については、[LaunchDarkly の JavaScript SDK ドキュメント][1]を参照してください。
 
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     ...
-     enableExperimentalFeatures: ["feature_flags"],
-     ...
-   });
-   ```
-
-2. LaunchDarkly の SDK を初期化し、以下に示すコードのスニペットを使用して、Datadog へのインスペクターレポート機能フラグ評価を作成します。
-
-   LaunchDarkly の SDK の初期化については、[LaunchDarkly の JavaScript SDK ドキュメント][1]をご確認ください。
-
-   ```javascript
-   const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
-     inspectors: [
-       {
-         type: "flag-used",
-         name: "dd-inspector",
-         method: (key: string, detail: LDClient.LDEvaluationDetail) => {
-           datadogRum.addFeatureFlagEvaluation(key, detail.value);
-         },
-       },
-     ],
-   });
-   ```
+```javascript
+const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+  inspectors: [
+    {
+      type: "flag-used",
+      name: "dd-inspector",
+      method: (key: string, detail: LDClient.LDEvaluationDetail) => {
+        datadogRum.addFeatureFlagEvaluation(key, detail.value);
+      },
+    },
+  ],
+});
+```
 
 
 [1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 {{% /tab %}}
-{{% tab "CDN async" %}}
+{{% tab "iOS" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
-
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
-
-2. LaunchDarkly の SDK を初期化し、以下に示すコードのスニペットを使用して、Datadog へのインスペクターレポート機能フラグ評価を作成します。
-
-   LaunchDarkly の SDK の初期化については、[LaunchDarkly の JavaScript SDK ドキュメント][1]をご確認ください。
-
-   ```javascript
-   const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
-     inspectors: [
-       {
-         type: "flag-used",
-         name: "dd-inspector",
-         method: (key: string, detail: LDClient.LDEvaluationDetail) => {
-           datadogRum.addFeatureFlagEvaluation(key, detail.value);
-         },
-       },
-     ],
-   });
-   ```
+LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
 
-[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+{{% tab "Android" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
-
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
-
-2. LaunchDarkly の SDK を初期化し、以下に示すコードのスニペットを使用して、Datadog へのインスペクターレポート機能フラグ評価を作成します。
-
-   LaunchDarkly の SDK の初期化については、[LaunchDarkly の JavaScript SDK ドキュメント][1]をご確認ください。
-
-   ```javascript
-   const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
-     inspectors: [
-       {
-         type: "flag-used",
-         name: "dd-inspector",
-         method: (key: string, detail: LDClient.LDEvaluationDetail) => {
-           datadogRum.addFeatureFlagEvaluation(key, detail.value);
-         },
-       },
-     ],
-   });
-   ```
+LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
 
-[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -232,138 +200,103 @@ RUM データを機能フラグデータでリッチ化することにより、�
 ### Split インテグレーション
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "ブラウザ" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+Split の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します
 
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
+Split の SDK の初期化については、[Split の JavaScript SDK ドキュメント][1]を参照してください。
 
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     ...
-     enableExperimentalFeatures: ["feature_flags"],
-     ...
-   });
-   ```
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {
+          datadogRum
+              .addFeatureFlagEvaluation(
+                  impressionData.impression.feature,
+                  impressionData.impression.treatment
+              );
+    },
+  },
+});
 
-2. Split の SDK を初期化し、次のコードのスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します
-
-   Split の SDK の初期化については、[Split の JavaScript SDK ドキュメント][1]をご確認ください。
-
-   ```javascript
-   const factory = SplitFactory({
-       core: {
-         authorizationKey: "<APP_KEY>",
-         key: "<USER_ID>",
-       },
-       impressionListener: {
-         logImpression(impressionData) {              
-             datadogRum
-                 .addFeatureFlagEvaluation(
-                      impressionData.impression.feature,
-                      impressionData.impression.treatment
-                 );
-        },
-     },
-   });
-
-   const client = factory.client();
-   ```
+const client = factory.client();
+```
 
 
 [1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 {{% /tab %}}
-{{% tab "CDN async" %}}
+{{% tab "iOS" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
+Split の SDK の初期化については、[Split の iOS SDK ドキュメント][1]を参照してください。
 
-2. Split の SDK を初期化し、以下に示すコードのスニペットを使用して、Datadog へのインスペクターレポート機能フラグ評価を作成します。
-
-   Split の SDK の初期化については、[Split の JavaScript SDK ドキュメント][1]をご確認ください。
-
-   ```javascript
-   const factory = SplitFactory({
-       core: {
-         authorizationKey: "<APP_KEY>",
-         key: "<USER_ID>",
-       },
-       impressionListener: {
-         logImpression(impressionData) {              
-             datadogRum
-                 .addFeatureFlagEvaluation(
-                      impressionData.impression.feature,
-                      impressionData.impression.treatment
-                 );
-        },
-     },
-   });
-
-   const client = factory.client();
-   ```
+```swift
+  let config = SplitClientConfig()
+  // Split がインプレッションを報告する際に機能フラグを送信します
+  config.impressionListener = { impression in
+      if let feature = impression.feature,
+          let treatment = impression.treatment {
+          Global.rum.addFeatureFlagEvaluation(name: feature, value: treatment)
+      }
+  }
+```
 
 
-[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+[1]: https://help.split.io/hc/en-us/articles/360020401491-iOS-SDK
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+{{% tab "Android" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
+Split の SDK の初期化については、[Split の Android SDK ドキュメント][1]を参照してください。
 
-2. Split の SDK を初期化し、以下に示すコードのスニペットを使用して、Datadog へのインスペクターレポート機能フラグ評価を作成します。
+```kotlin
+  internal class DatadogSplitImpressionListener : ImpressionListener {
+    override fun log(impression: Impression) {
+        // Split がインプレッションを報告する際に機能フラグを送信します
+        GlobalRum.get().addFeatureFlagEvaluation(
+            impression.split(),
+            impression.treatment()
+        )
+    }
+    override fun close() {
+    }
+  }
 
-   Split の SDK の初期化については、[Split の JavaScript SDK ドキュメント][1]をご確認ください。
-
-   ```javascript
-   const factory = SplitFactory({
-       core: {
-         authorizationKey: "<APP_KEY>",
-         key: "<USER_ID>",
-       },
-       impressionListener: {
-         logImpression(impressionData) {              
-             datadogRum
-                 .addFeatureFlagEvaluation(
-                      impressionData.impression.feature,
-                      impressionData.impression.treatment
-                 );
-        },
-     },
-   });
-
-   const client = factory.client();
-   ```
+  // 初期化時:
+  val apikey = BuildConfig.SPLIT_API_KEY
+  val config = SplitClientConfig.builder()
+      .impressionListener(DatadogSplitImpressionListener())
+      .build()
+```
 
 
-[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+[1]: https://help.split.io/hc/en-us/articles/360020343291-Android-SDK
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
+
+Split の SDK の初期化については、Split の [Flutter プラグインのドキュメント][1]を参照してください。
+
+```dart
+  StreamSubscription<Impression> impressionsStream = _split.impressionsStream().listen((impression) {
+    // Split がインプレッションを報告する際に機能フラグを送信します
+    final split = impression.split;
+    final treatment = impression.treatment;
+    if (split != null && treatment != null) {
+      DatadogSdk.instance.rum?.addFeatureFlagEvaluation(split, treatment);
+    }
+  });
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/8096158017165-Flutter-plugin
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -371,27 +304,14 @@ RUM データを機能フラグデータでリッチ化することにより、�
 ### Flagsmith インテグレーション
 
 {{< tabs >}}
-{{% tab "npm" %}}
+{{% tab "ブラウザ" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
 
-   ```javascript
-   import { datadogRum } from '@datadog/browser-rum';
-
-   // Initialize Datadog Browser SDK
-   datadogRum.init({
-     ...
-     enableExperimentalFeatures: ["feature_flags"],
-     ...
-   });
-   ```
-
-2. Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
-
-   オプションとして、`datadogRum.setUser()` を介して Flagsmith の特徴が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
+ オプションとして、`datadogRum.setUser()` を介して Flagsmith の Trait が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
 
    ```javascript
-    // Initialize the Flagsmith SDK
+    // Flagsmith SDK を初期化します
     flagsmith.init({
         datadogRum: {
             client: datadogRum,
@@ -404,78 +324,76 @@ RUM データを機能フラグデータでリッチ化することにより、�
 
 [1]: https://docs.flagsmith.com/clients/javascript
 {{% /tab %}}
-{{% tab "CDN async" %}}
+{{% tab "iOS" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
-
-   ```html
-   <script>
-     (function(h,o,u,n,d) {
-        h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-        d=o.createElement(u);d.async=1;d.src=n
-        n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-     })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-     DD_RUM.onReady(function() {
-       DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-     })
-   </script>
-   ```
-
-2. Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
-
-   オプションとして、`datadogRum.setUser()` を介して Flagsmith の特徴が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
-
-   ```javascript
-    // Initialize the Flagsmith SDK
-    flagsmith.init({
-        datadogRum: {
-            client: datadogRum,
-            trackTraits: true,
-        },
-        ...
-    })
-   ```
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
 
-[1]: https://docs.flagsmith.com/clients/javascript
 {{% /tab %}}
-{{% tab "CDN sync" %}}
+{{% tab "Android" %}}
 
-1. 機能フラグデータの収集を開始するには、RUM SDK を初期化し、` ["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
-   ```html
-   <script src="https://www.datadoghq-browser-agent.com/datadog-rum-v4.js" type="text/javascript"></script>
-   <script>
-     window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   </script>
-   ```
+{{% /tab %}}
+{{% tab "Flutter" %}}
 
-2. Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
-   オプションとして、`datadogRum.setUser()` を介して Flagsmith の特徴が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
+{{% /tab %}}
+{{< /tabs >}}
 
-   ```javascript
-    // Initialize the Flagsmith SDK
-    flagsmith.init({
-        datadogRum: {
-            client: datadogRum,
-            trackTraits: true,
-        },
-        ...
-    })
-   ```
+### DevCycle インテグレーション
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+DevCycle の SDK を初期化し、`variableEvaluated` イベントにサブスクライブします。すべての変数評価 `variableEvaluated:*` または特定の変数評価 `variableEvaluated:my-variable-key` にサブスクライブすることを選択します。
+
+DevCycle の SDK の初期化については、[DevCycle の JavaScript SDK ドキュメント][5]を、DevCycle のイベントシステムについては、[DevCycle の SDK イベントドキュメント][6]を参照してください。
+
+```javascript
+const user = { user_id: "<USER_ID>" };
+const dvcOptions = { ... };
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
+...
+dvcClient.subscribe(
+    "variableEvaluted:*",
+    (key, variable) => {
+        // すべての変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+...
+dvcClient.subscribe(
+    "variableEvaluted:my-variable-key",
+    (key, variable) => {
+        // 特定の変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+```
 
 
-[1]: https://docs.flagsmith.com/clients/javascript
+[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
+[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -524,7 +442,6 @@ RUM データを機能フラグデータでリッチ化することにより、�
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser#setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/dashboards/
 [4]: /ja/monitors/#create-monitors

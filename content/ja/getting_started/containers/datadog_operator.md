@@ -17,7 +17,7 @@ title: Datadog Operator の概要
 
 ## 前提条件
 
-- Kubernetes v1.14.X+
+- Kubernetes v1.20.X+
 - Datadog Operator をデプロイするための [Helm][3]
 - Datadog Agent をインストールするための Kubernetes コマンドラインツール、[kubectl][4]
 
@@ -36,22 +36,23 @@ title: Datadog Operator の概要
 
 3. `DatadogAgent` のデプロイメント構成の仕様を記述した `datadog-agent.yaml` ファイルを作成します。以下のサンプル構成では、メトリクス、ログ、APM を有効にしています。
   ```yaml
-  apiVersion: datadoghq.com/v1alpha1
+  apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
   metadata:
     name: datadog
   spec:
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-    agent:
+    global:
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
       apm:
         enabled: true
-      log:
+      logCollection:
         enabled: true
   ```
 

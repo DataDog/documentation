@@ -24,7 +24,6 @@ author:
 categories:
 - コラボレーション
 - ソースコントロール
-- 問題追跡
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/gitea/README.md
 display_on_public_website: true
@@ -32,7 +31,7 @@ draft: false
 git_integration_title: gitea
 integration_id: gitea
 integration_title: Gitea
-integration_version: 1.0.0
+integration_version: 1.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -42,17 +41,16 @@ public_title: Gitea
 short_description: Gitea のすべてのメトリクスを Datadog で追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Collaboration
   - カテゴリ::ソースコントロール
-  - Category::Issue Tracking
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Gitea のすべてのメトリクスを Datadog で追跡
   media: []

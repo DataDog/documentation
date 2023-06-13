@@ -13,8 +13,8 @@ categories:
 - 構成 & デプロイ
 - コンテナ
 - コスト管理
+- kubernetes
 - orchestration
-- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -45,14 +45,14 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Cloud
   - Category::Configuration & Deployment
   - Category::Containers
   - Category::Cost Management
+  - Category::Kubernetes
   - Category::Orchestration
-  - Category::Marketplace
   - Offering::Software License
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: 機械学習を用いた Kubernetes リソースのリアルタイム最適化
   media:
@@ -75,7 +75,7 @@ tile:
 
 ## 概要
 
-[StormForge Optimize Live](https://www.stormforge.io/how-stormforge-optimize-live-works/) は、観測可能性メトリクスに機械学習を適用し、Kubernetes で実行されるあらゆるデプロイのリソースリクエストに対してリアルタイムに提案を行うことができます。
+[StormForge Optimize Live][1] は、観測可能性メトリクスに機械学習を適用し、Kubernetes で実行されるあらゆるデプロイのリソースリクエストに対してリアルタイムに提案を行うことができます。
 
 
 **StormForge ライセンスを使用すると、以下のことが可能になります。**
@@ -88,7 +88,20 @@ tile:
 
 ## サポート
 
-ご質問やその他のサポートについては、StormForge ([support@stormforge.io](mailto:support@stormforge.io)) にお問い合わせください。
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから StormForge にお問い合わせください。
 
+- メール: [support@stormforge.io][4]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [StormForge と Datadog で Kubernetes のワークロードリソース管理を最適化する][5]
+
+[1]: https://www.stormforge.io/how-stormforge-optimize-live-works/
+[2]: https://www.stormforge.io/try-free/
+[3]: https://app.datadoghq.com/marketplace/integration/stormforge
+[4]: mailto:support@stormforge.io
+[5]: https://www.datadoghq.com/blog/optimize-kubernetes-stormforge-datadog/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/stormforge-stormforge-license" target="_blank">こちらをクリック</a>してください。

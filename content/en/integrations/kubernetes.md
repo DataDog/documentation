@@ -32,7 +32,7 @@ further_reading:
     text: "Monitoring in the Kubernetes era"
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard"  >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
 ## Overview
 

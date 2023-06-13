@@ -20,7 +20,7 @@ Network Device Monitoring uses profiles to tell the Datadog Agent the metrics an
 
 By default, all profiles in the Agent configuration directory are loaded. To customize the specific profiles for collection, explicitly reference them by filename under `definition_file`, or provide an inline list under `definition`. Any of the Datadog profiles can be listed by name. Additional custom profiles can be referenced by the file path in the config, or placed in the configuration directory.
 
-**Note**: The generic profile is [generic_router.yaml][1], which supports routers, switches, etc.
+**Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, etc.
 
 ### sysOID mapped devices
 
@@ -65,5 +65,5 @@ For more Datadog provided profiles, see the [GitHub repository][2].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
+[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-device.yaml
 [2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles

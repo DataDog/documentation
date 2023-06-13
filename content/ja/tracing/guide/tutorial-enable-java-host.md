@@ -39,7 +39,7 @@ Java の一般的なトレース設定ドキュメントについては、[Java 
 
 Datadog Agent をマシンにインストールしていない場合は、[**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
 {{< /code-block >}}
 
@@ -56,7 +56,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
 
 次に、トレースするためのサンプルアプリケーションをインストールします。このチュートリアルのコードサンプルは [github.com/DataDog/apm-tutorial-java-host][9] で見ることができます。以下を実行することで git リポジトリの複製を行います。
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
@@ -288,7 +288,7 @@ Java Agent を有効にする `javaagent` フラグに加え、起動コマン�
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -394,7 +394,7 @@ sh ./scripts/mvn_instrumented_run.sh
 
 {{% tab "Gradle" %}}
 
-以下を実行します。
+次を実行します。
 ```sh
 ./gradlew bootJar
 

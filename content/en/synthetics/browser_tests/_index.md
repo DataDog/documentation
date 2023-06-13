@@ -135,15 +135,19 @@ To obfuscate local variable values in test results, select **Hide and obfuscate 
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][3] in the **Starting URL** and **Advanced Options** of your browser test detail, as well as in your test recording to define local variables. To display a list of available variables, type `{{` in the desired field.
+You can use the [global variables defined in **Settings**][3] in the **Starting URL** and **Advanced Options** of your browser test details, as well as in your test recording. 
 
-{{< img src="synthetics/browser_tests/recording_global_variable.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
+To display a list of available variables:
 
-Define the variables you want to incorporate into the user journey before you start recording.
+- In your browser test's details: Type `{{` in the desired field.
 
-{{< img src="synthetics/browser_tests/recording_inject_variable.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
 
-You can inject the variables available to you while recording. For more information about using variables in your browser test recording, see [Browser Test Steps][4].
+- In your browser test's recorder: Import the variable in your test, then type `{{` in the desired field or inject the variable in your application to use it.
+
+  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
+
+For more information about using variables in your browser test recording, see [Browser Test Steps][4]. 
 
 ### Define alert conditions
 
@@ -230,3 +234,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [13]: /account_management/rbac#custom-roles
 [14]: /account_management/rbac/#create-a-custom-role
 [15]: /continuous_testing/testing_tunnel
+[16]: /synthetics/guide/browser-tests-passkeys

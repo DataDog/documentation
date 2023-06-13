@@ -40,7 +40,7 @@ Datadog Agent をマシンにインストールしていない場合は、今す
 
 1. [**Integrations > Agent**][5] にアクセスし、お使いの OS を選択してください。例えば、ほとんどの Linux プラットフォームでは、`<YOUR_API_KEY>` を [Datadog API キー][3]に置き換えて、以下のスクリプトを実行することで Agent をインストールすることができます。
 
-   {{< code-block lang="bash" >}}
+   {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
    {{< /code-block >}}
 
@@ -179,7 +179,7 @@ Java アプリケーションが動作するようになったので、トレー
      notes:
        container_name: notes
        restart: always
-       build: 
+       build:
          context: ../
          dockerfile: notes/dockerfile.notes.maven
        ports:
@@ -290,7 +290,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
@@ -339,7 +339,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
 
 1. ノートアプリと同様に、Dockerfile の起動コマンドに `dd-java-agent` を追加して、トレース用のカレンダーアプリの構成を確認します。`calendar/Dockerfile.calendar.maven` を開き、すでに `dd-java-agent` がダウンロードされていることを確認します。
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer 
+   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
 2. 同じ `calendar/dockerfile.calendar.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
@@ -356,7 +356,7 @@ Java トレーシングライブラリは、Java のビルトイン Agent とモ
      calendar:
        container_name: calendar
        restart: always
-       build: 
+       build:
          context: ../
          dockerfile: calendar/dockerfile.calendar.maven
        ports:

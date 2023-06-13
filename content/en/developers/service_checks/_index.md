@@ -40,7 +40,7 @@ Service checks can be visualized and used in 3 Datadog sections:
 
 Click **Monitors** > **Check Summary** to see the [Check Summary][1] page.
 
-{{< img src="developers/service_checks/check_summary.png" alt="Check summary"  >}}
+{{< img src="developers/service_checks/check_summary.png" alt="Check summary" >}}
 
 This is a list of all your checks and their statuses, reporting across your infrastructure in the past day. Select a check to get insights on the number of distinct checks for each of its associated tags.
 
@@ -48,11 +48,11 @@ This is a list of all your checks and their statuses, reporting across your infr
 
 You can visualize service checks with a **Check status** widget in a screenboard:
 
-{{< img src="developers/service_checks/check_status_widget.png" alt="Check status widget"  >}}
+{{< img src="developers/service_checks/check_status_widget.png" alt="Check status widget" >}}
 
 After clicking on the **Check status** widget icon, the following pop-up appears:
 
-{{< img src="developers/service_checks/check_widget_config.png" alt="Check widget config"  >}}
+{{< img src="developers/service_checks/check_widget_config.png" alt="Check widget config" >}}
 
 In this form, you can:
 
@@ -66,7 +66,7 @@ In this form, you can:
 Even if you can't graph a service check over time as you would for metrics, you can still monitor it.
 Go to **Monitors** > **New Monitor** and select **Service Check**:
 
-{{< img src="developers/service_checks/service_check_monitor.png" alt="Check monitor"  >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="Check monitor" >}}
 
 In this form, you can:
 

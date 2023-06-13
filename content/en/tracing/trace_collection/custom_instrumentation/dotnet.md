@@ -1,5 +1,5 @@
 ---
-title: .NET Custom Instrumentation
+title: .NET Custom Instrumentation with Datadog Library
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang
@@ -59,7 +59,7 @@ If you want to customize the span's attributes and you have the ability to modif
 
 Add `[Trace]` to methods for Datadog to trace them when running with automatic instrumentation. If automatic instrumentation is not enabled, this attribute has no effect on your application.
 
-`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. You can set **operation name** and **resource name** as named arguments of the `[Trace]` attribute to better reflect what is being instrumented.  Operation name and resource name are the only possible arguments that can be set for the `[Trace]` attribute. For example:
+`[Trace]` attributes have the default operation name `trace.annotation` and resource name of the traced method. You can set **operation name** and **resource name** as named arguments of the `[Trace]` attribute to better reflect what is being instrumented. Operation name and resource name are the only possible arguments that can be set for the `[Trace]` attribute. For example:
 
 ```csharp
 using Datadog.Trace.Annotations;
@@ -132,7 +132,7 @@ using (var scope = Tracer.Instance.StartActive("custom-operation"))
 }
 ```
 
-Add custom [span tags][5] to your [spans][6] to customize your observability within Datadog.  The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
+Add custom [span tags][5] to your [spans][6] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
 ### Manually creating a new span
 
@@ -199,61 +199,14 @@ catch(Exception e)
 }
 ```
 
-This sets the following tags on the span: 
+This sets the following tags on the span:
 - `"error.msg":exception.Message`
 - `"error.stack":exception.ToString()`
 - `"error.type":exception.GetType().ToString()`
 
-### Headers extraction and injection
+## Propagating context with headers extraction and injection
 
-The Datadog APM Tracer supports [B3][5] and [W3C][6] headers extraction and injection for distributed tracing. For more information, see the [setup documentation][7].
-
-In most cases, headers extraction and injection are transparent. There are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In that case, you can add a custom trace using the following code:
-
-```csharp
-var spanContextExtractor = new SpanContextExtractor();
-var parentContext = spanContextExtractor.Extract(headers, (headers, key) => GetHeaderValues(headers, key));
-var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext };
-using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
-```
-
-Provide the `GetHeaderValues` method. The way this method is implemented depends on the structure that carries `SpanContext`.
-
-Here are some examples:
-
-```csharp
-// Confluent.Kafka
-IEnumerable<string> GetHeaderValues(Headers headers, string name)
-{
-    if (headers.TryGetLastBytes(name, out var bytes))
-    {
-        try
-        {
-            return new[] { Encoding.UTF8.GetString(bytes) };
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
-    }
-
-    return Enumerable.Empty<string>();
-}
-
-// RabbitMQ
-IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string name)
-{
-    if (headers.TryGetValue(name, out object value) && value is byte[] bytes)
-    {
-        return new[] { Encoding.UTF8.GetString(bytes) };
-    }
-
-    return Enumerable.Empty<string>();
-}
-```
-
-When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
-
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][12] for information.
 
 ## Adding tags globally to all spans
 
@@ -282,3 +235,4 @@ You can exclude traces based on the resource name to remove Synthetics traffic s
 [9]: /tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
 [10]: /tracing/security
 [11]: /tracing/trace_collection/library_config/dotnet-core/
+[12]: /tracing/trace_collection/trace_context_propagation/dotnet/

@@ -93,7 +93,7 @@ exporters:
 service:
   pipelines:
     metrics:
-      receivers: [hostmetrics, otlp]
+      receivers: [hostmetrics, prometheus, otlp]
       processors: [batch]
       exporters: [datadog]
     traces:
@@ -125,7 +125,7 @@ To get better metadata for traces and for smooth integration with Datadog:
 
 - **Use resource detectors**: If they are provided by the language SDK, attach container information as resource attributes. For example, in Go, use the [`WithContainer()`][9] resource option.
 
-- **Apply [Unified Service Tagging][10]**: Make sure you’ve configured your application with the appropriate resource attributes for unified service tagging. This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
+- **Apply [Unified Service Tagging][10]**: Make sure you've configured your application with the appropriate resource attributes for unified service tagging. This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
 
 ### 4. Configure the logger for your application
 
@@ -170,7 +170,8 @@ filelog:
     - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
     - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog. 
 
-#### Using Kubernetes
+<details>
+<summary><strong>Optional: Using Kubernetes</strong></summary>
 
 There are multiple ways to deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure. For the filelog receiver to work, the [Agent/DaemonSet deployment][16] is the recommended deployment method.
 
@@ -196,7 +197,7 @@ spec:
           command:
             - "/otelcol-contrib"
             - "--config=/conf/otel-agent-config.yaml"
-          image: otel/opentelemetry-collector-contrib:0.61.0
+          image: otel/opentelemetry-collector-contrib:0.71.0
           env:
             - name: POD_IP
               valueFrom:
@@ -235,6 +236,7 @@ spec:
           hostPath:
             path: /var/lib/docker/containers
 ```
+</details>
 
 ### 5. Run the collector
 
@@ -658,9 +660,12 @@ The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and 
 
 ## Out-of-the-box dashboards
 
-Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
 
-{{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
+1. Install the [OpenTelemetry integration][23].
+2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+
+   {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][21]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][22] you choose to enable.
 
@@ -690,3 +695,4 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [20]: https://opentelemetry.io/docs/collector/deployment/
 [21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[23]: https://app.datadoghq.com/integrations/otel

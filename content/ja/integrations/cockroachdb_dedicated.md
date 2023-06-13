@@ -22,7 +22,8 @@ author:
   name: Datadog
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
-categories: []
+categories:
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md
 display_on_public_website: true
@@ -40,14 +41,15 @@ public_title: CockroachDB Dedicated
 short_description: Cockroach Cloud のメトリクスを DataDog に送信します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Data Store
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Cockroach Cloud のメトリクスを DataDog に送信します。
   media: []
@@ -64,7 +66,7 @@ Datadog の Cockroach Cloud インテグレーションは、Datadog プラッ�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Cockroach Cloud クラスターに対して Datadog のモニタリングを有効にするには
 

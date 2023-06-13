@@ -21,7 +21,7 @@ further_reading:
   tag: GitHub
   text: .NET コードサンプル
 kind: documentation
-title: .NET カスタムインスツルメンテーション
+title: Datadog ライブラリを使った .NET カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 
@@ -204,56 +204,9 @@ catch(Exception e)
 - `"error.stack":exception.ToString()`
 - `"error.type":exception.GetType().ToString()`
 
-### ヘッダーの抽出と挿入
+## ヘッダー抽出と挿入によるコンテキストの伝搬
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C][6] のヘッダー抽出と注入をサポートしています。詳細については、[セットアップドキュメント][7]を参照してください。
-
-ほとんどの場合、ヘッダーの抽出と注入は透過的に行われます。分散トレースが切断される可能性があるケースも知られています。例えば、分散キューからメッセージを読み込むとき、ライブラリによってはスパンコンテキストを失うことがあります。また、Kafka メッセージを消費する際に `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定した場合にも発生することがあります。そのような場合、以下のコードを使ってカスタムトレースを追加することができます。
-
-```csharp
-var spanContextExtractor = new SpanContextExtractor();
-var parentContext = spanContextExtractor.Extract(headers, (headers, key) => GetHeaderValues(headers, key));
-var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext };
-using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
-```
-
-`GetHeaderValues` メソッドを提供します。このメソッドの実装方法は、`SpanContext` を保持する構造に依存します。
-
-以下はその例です。
-
-```csharp
-// Confluent.Kafka
-IEnumerable<string> GetHeaderValues(Headers headers, string name)
-{
-    if (headers.TryGetLastBytes(name, out var bytes))
-    {
-        try
-        {
-            return new[] { Encoding.UTF8.GetString(bytes) };
-        }
-        catch (Exception)
-        {
-            // 無視
-        }
-    }
-
-    return Enumerable.Empty<string>();
-}
-
-// RabbitMQ
-IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string name)
-{
-    if (headers.TryGetValue(name, out object value) && value is byte[] bytes)
-    {
-        return new[] { Encoding.UTF8.GetString(bytes) };
-    }
-
-    return Enumerable.Empty<string>();
-}
-```
-
-Kafka コンシューマースパンをトレースするために `SpanContextExtractor` API を使用する場合、`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定します。これにより、メッセージがトピックから消費された直後にコンシューマースパンが正しく閉じられ、メタデータ (`partition` や `offset` など) が正しく記録されることが保証されます。`SpanContextExtractor` API を使用して Kafka メッセージから作成されたスパンは、プロデューサーのスパンの子であり、コンシューマーのスパンの兄弟になります。
-
+分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][12]をお読みください。
 
 ## すべてのスパンにグローバルにタグを追加する
 
@@ -282,3 +235,4 @@ DD_TAGS=datacenter:njc,key2:value2
 [9]: /ja/tracing/trace_collection/library_config/dotnet-core/#automatic-instrumentation-optional-configuration
 [10]: /ja/tracing/security
 [11]: /ja/tracing/trace_collection/library_config/dotnet-core/
+[12]: /ja/tracing/trace_collection/trace_context_propagation/dotnet/

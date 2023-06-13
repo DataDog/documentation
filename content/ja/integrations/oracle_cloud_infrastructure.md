@@ -1,9 +1,10 @@
 ---
 aliases: []
 categories:
-  - cloud
-  - oracle
-  - ログの収集
+- cloud
+- ログの収集
+- ネットワーク
+- oracle
 dependencies: []
 description: カスタムログとサービスログを Oracle Cloud Infrastructure から Datadog に送信します。
 doc_link: https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/
@@ -23,6 +24,7 @@ short_description: Oracle Cloud からログを収集、監視します。
 type: ''
 version: '1.0'
 ---
+
 ## 概要
 
 Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業で使用されるInfrastructure-as-a-Service (IaaS) および Platform-as-a-Service (PaaS) です。ホスティング、ストレージ、ネットワーキング、データベースなどのマネージドサービスの完全なスイートを備えています。

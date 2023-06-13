@@ -8,9 +8,15 @@ further_reading:
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How Application Security Management works"
-- link: "/security/application_security/getting_started"
+- link: "/security/application_security/enabling/"
   tag: "Documentation"
-  text: "Setting up ASM"
+  text: "Enabling ASM"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to elevate your security and threat detection"
+- link: "/getting_started/application_security/vulnerability_management"
+  tag: "Guide"
+  text: "Getting Started with Application Vulnerability Management"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -34,7 +40,7 @@ In your first three days with Datadog ASM:
 
 2. **Enable ASM on the most exposed services.** Click `Enable ASM` in the ASM Status column to see the instructions or share them with the service's owner. 
 
-   Because ASM relies on the same library as APM, configuring a single environment variable is all that is needed to get ASM enabled on a service that is already sending traces. Read more in the [ASM setup documentation][2].
+   Because ASM relies on the same library as APM, configuring a single environment variable is all that is needed to get ASM enabled on a service that is already sending traces. Read more in the [Enabling ASM documentation][2].
 
 3. **Explore your first suspicious requests.** Go to **[Security --> Application Security][7]** to see suspicious requests listed in ASM.
 
@@ -46,7 +52,7 @@ In your first three days with Datadog ASM:
 
 4. Now that ASM is set up detecting suspicious requests on your service in real-time, **let the product run for a couple days**.
 
-<div class="alert alert-info">If your services use recent versions of tracing libraries, ASM immediately <a href="/security/application_security/risk_management">detects security vulnerabilities</a> in the upstream libraries that your services have as dependencies, and APM previews this information for you in its Security view. Optionally, <strong>explore ASM's consolidated <a href="https://app.datadoghq.com/security/appsec/vm">Vulnerabilities view</a></strong> (beta) to see how it helps you triage and prioritize vulnerabilities.</div>
+If your services use recent versions of tracing libraries, ASM immediately [detects security vulnerabilities][13] in the upstream libraries that your services have as dependencies, and APM previews this information for you in its Security view. Optionally, explore ASM's consolidated [Vulnerabilities view][14] to see how it helps you triage and prioritize vulnerabilities.
 
 **Note**: ASM also enables you to **track user activity**, identifying authenticated users making suspicious requests. [Setting up authenticated user tracking][5] is not required to use ASM, but it does help you get visibility on authenticated attacks and attackers. 
 
@@ -56,10 +62,10 @@ After a few days of usage, you typically get your first security signals. If you
 
 {{< code-block lang="sh" >}}
 for ((i=1;i<=200;i++)); do
-# Target existing service’s routes
+# Target existing service's routes
 curl https://your-application-url/<EXISTING ROUTE> -A
 'dd-test-scanner-log';
-# Target non existing service’s routes
+# Target non existing service's routes
 curl https://your-application-url/<NON-EXISTING ROUTE> -A
 'dd-test-scanner-log';
 done{{< /code-block >}}
@@ -83,14 +89,16 @@ Over the next few days:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/services?env=prod&hostGroup=%2A&lens=Security
-[2]: /security/application_security/getting_started/
-[3]: /security/application_security/threats/setup_and_configure/#configuring-a-client-ip-header
+[2]: /security/application_security/enabling/
+[3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /security/application_security/how-appsec-works/
 [5]: /security/application_security/threats/add-user-info/
 [6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&view=signal&viz=stream&start=1674824351640&end=1675429151640&paused=false
 [7]: https://app.datadoghq.com/security/appsec
 [8]: https://app.datadoghq.com/security/appsec/traces
-[9]: /security/application_security/threats/setup_and_configure/#exclude-specific-parameters-from-triggering-detections
+[9]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [10]: https://app.datadoghq.com/security/appsec/reports-configuration
 [11]: https://app.datadoghq.com/security/configuration/notification-rules
 [12]: /security/notifications/rules/
+[13]: /security/application_security/risk_management
+[14]: https://app.datadoghq.com/security/appsec/vm

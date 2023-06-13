@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -27,7 +27,7 @@ To create a [service check monitor][6] in Datadog, use the main navigation: **Mo
 
 ### Pick a service check
 
-Choose a service check from the drop-down menu.
+Choose a service check from the dropdown menu.
 
 ### Pick monitor scope
 

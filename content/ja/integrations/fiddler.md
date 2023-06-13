@@ -42,13 +42,13 @@ public_title: Fiddler
 short_description: Fiddler Datadog インテグレーションによる ML システムの可視化
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Alerting
   - Category::Monitoring

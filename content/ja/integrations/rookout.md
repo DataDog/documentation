@@ -38,13 +38,13 @@ public_title: Rookout ライブデバッグ
 short_description: Rookout を使って本番環境で動作するコードからメトリクスを収集する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::UI Extension
   configuration: README.md#Setup

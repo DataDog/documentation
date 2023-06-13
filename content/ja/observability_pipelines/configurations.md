@@ -7,6 +7,9 @@ further_reading:
 - link: /observability_pipelines/working_with_data/
   tag: ドキュメント
   text: 観測可能性パイプラインを使ったデータの操作
+- link: /observability_pipelines/setup
+  tag: Documentation
+  text: 観測可能性パイプラインを設定する
 kind: ドキュメント
 title: 構成
 ---

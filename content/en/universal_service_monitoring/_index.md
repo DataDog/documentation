@@ -19,6 +19,9 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -81,6 +84,34 @@ providers:
   gke:
     cos: true
 ```
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+To enable Universal Service Monitoring with the [Datadog Operator][1], update your `datadog-agent.yaml` manifest. In the `DatadogAgent` resource, set `spec.features.usm.enabled` to `true`:
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+**Note:** Datadog Operator v1.0.0 or greater is required.
+
+[1]: https://github.com/DataDog/datadog-operator
 
 {{% /tab %}}
 {{% tab "Kubernetes without Helm" %}}
@@ -160,8 +191,6 @@ providers:
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
-           - name: HOST_PROC
-             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -314,7 +343,6 @@ docker run --cgroupns host \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
--e HOST_PROC=/host/root/proc \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -339,13 +367,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
-     - HOST_PROC: '/host/proc'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
@@ -695,7 +721,7 @@ If you are using load balancers with your services, enable additional cloud inte
 * Install the [AWS Integration][2] for visibility in AWS Load Balancer. You must also enable ENI and EC2 metric collection.
 
 Then, add the following tags to each load balancer:
-```shell
+```conf
 ENV=<env>
 SERVICE=<service>
 ```
@@ -735,7 +761,7 @@ After you configure the Agent, wait about five minutes for your service to appea
 
 The `universal.http.server` operation name captures health metrics for inbound traffic to your service. The corresponding `universal.http.client` operation name represents outbound traffic to other destinations.
 
-{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation drop-down menu on the Services tab shows the available operation names" style="width:100%;" >}}
+{{< img src="universal_service_monitoring/select_service_operation.png" alt="The operation dropdown menu on the Services tab shows the available operation names" style="width:100%;" >}}
 
 After enabling Universal Service Monitoring, you can:
 
@@ -787,7 +813,7 @@ network_config:
 {{% tab "Environment Variable" %}}
 Add the following entry:
 
-```shell
+```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
 ```
 {{% /tab %}}
@@ -803,4 +829,4 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [3]: /tracing/service_catalog/
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
-[6]: /monitors/service_level_objectives/metric/
+[6]: /service_management/service_level_objectives/metric/

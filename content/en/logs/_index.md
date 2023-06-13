@@ -16,12 +16,21 @@ further_reading:
   - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
     tag: "Learning Center"
     text: "Introduction to Log Management"
+  - link: 'https://dtdg.co/fe'
+    tag: 'Foundation Enablement'
+    text: 'Join an interactive session to optimize your Log Management'
   - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
     tag: "Blog"
     text: "Accelerate Incident Investigations with Log Anomaly Detection"
   - link: "https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/"
     tag: "Blog"
     text: "Monitor your IoT devices at scale with Datadog Log Management"
+  - link: "https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/"
+    tag: "Blog"
+    text: "Monitor your firewall logs with Datadog"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -32,7 +41,7 @@ Datadog Log Management, also referred to as Datadog logs or logging, removes the
 
 Logging without Limits\* enables a streamlined troubleshooting experience in the [Log Explorer][1], which empowers you and your teams to quickly assess and fix your infrastructure issues. It provides intuitive archiving to support your security and IT teams during audits and assessments. Logging without Limits* also powers [Datadog Cloud SIEM][2], which detects security threats in your environment, without requiring you to index logs.
 
-{{< vimeo 293195142 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
 </br>
 

@@ -1,6 +1,11 @@
 ---
 aliases:
 - /ja/metrics/custom_metrics/guide/
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: メトリクスガイド
 description: メトリクスガイドのインデックス
 disable_toc: true
 kind: ガイド

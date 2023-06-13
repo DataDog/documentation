@@ -38,7 +38,7 @@ First, you need the Browser RUM SDK version >= 4.14.0.
 To start collecting frustration signals, add the following to your SDK configuration:
 
 ```
-DD_RUM.init({
+window.DD_RUM.init({
   trackUserInteractions: true,
   trackFrustrations: true
 })

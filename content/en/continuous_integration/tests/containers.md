@@ -93,6 +93,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `BITRISE_GIT_BRANCH`
 - `BITRISE_GIT_TAG`
 - `BITRISE_GIT_MESSAGE`
+- `BITRISE_APP_TITLE`
 - `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
 - `GIT_CLONE_COMMIT_MESSAGE_BODY`
 - `GIT_CLONE_COMMIT_AUTHOR_NAME`
@@ -123,6 +124,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILDKITE_BUILD_AUTHOR_EMAIL`
 - `BUILDKITE_BUILD_CREATOR`
 - `BUILDKITE_BUILD_CREATOR_EMAIL`
+- `BUILDKITE_AGENT_ID`
+- `BUILDKITE_AGENT_META_DATA_*`
 
 [Full list of build environment variables provided by Buildkite][1]
 
@@ -148,6 +151,20 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 {{% /tab %}}
+{{% tab "Codefresh" %}}
+
+- `CF_BUILD_ID`
+- `CF_PIPELINE_NAME`
+- `CF_BUILD_URL`
+- `CF_STEP_NAME`
+- `CF_BRANCH`
+- `CF_REVISION`
+
+[Full list of build environment variables provided by Codefresh][1]
+
+
+[1]: https://codefresh.io/docs/docs/pipelines/variables/
+{{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
@@ -161,6 +178,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `GITHUB_SHA`
 - `GITHUB_HEAD_REF`
 - `GITHUB_REF`
+- `GITHUB_JOB`
 
 [Full list of build environment variables provided by GitHub Actions][1]
 
@@ -178,6 +196,9 @@ Additionally, you need to pass in the environment variables required to configur
 - `CI_JOB_STAGE`
 - `CI_JOB_NAME`
 - `CI_JOB_URL`
+- `CI_JOB_ID`
+- `CI_RUNNER_ID`
+- `CI_RUNNER_TAGS`
 - `CI_REPOSITORY_URL`
 - `CI_COMMIT_SHA`
 - `CI_COMMIT_REF_NAME`
@@ -205,6 +226,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
+- `NODE_NAME`
+- `NODE_LABELS`
 - `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
 - `DD_CUSTOM_PARENT_ID` (idem)
 
@@ -247,6 +270,26 @@ Additionally, you need to pass in the environment variables required to configur
 
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+{{% /tab %}}
+{{% tab "Buddy CI" %}}
+
+- `BUDDY`
+- `BUDDY_SCM_URL`
+- `BUDDY_EXECUTION_REVISION`
+- `BUDDY_EXECUTION_BRANCH`
+- `BUDDY_EXECUTION_TAG`
+- `BUDDY_PIPELINE_ID`
+- `BUDDY_EXECUTION_ID`
+- `BUDDY_PIPELINE_NAME`
+- `BUDDY_EXECUTION_URL`
+- `BUDDY_EXECUTION_REVISION_MESSAGE`
+- `BUDDY_EXECUTION_REVISION_COMMITTER_NAME`
+- `BUDDY_EXECUTION_REVISION_COMMITTER_EMAIL`
+
+[Full list of build environment variables provided by Buddy CI][1]
+
+
+[1]: https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -36,7 +36,7 @@ The Technical Solutions team may try to understand the following questions:
 
 ## Investigate the root cause
 
-If there were a way to view the customer’s user journey in Datadog and see associated backend requests, the Technical Solutions team would have a better understanding of what may be causing this issue.
+If there were a way to view the customer's user journey in Datadog and see associated backend requests, the Technical Solutions team would have a better understanding of what may be causing this issue.
 
 {{< img src="real_user_monitoring/guide/session-replay/apm-traces-in-session-replay.png" alt="An APM stack trace associated with a RUM view action" style="width:100%;">}}
 
@@ -50,7 +50,7 @@ The Technical Solutions team may have internal tools that connect a support plat
 
 The Technical Solutions team can use Session Replay to view a replica of the user journey in Datadog and use Browser Dev Tools to access additional errors that may appear in the frontend. With access to frontend errors and backend traces, your Technical Solutions team is empowered to use the RUM & Session Replay and APM integration to help troubleshoot customer issues.
 
-Click on a user session with a replay recording to observe the user’s behavior on the Datadog platform. By using Session Replay, you can locate the corresponding RUM events and identify the specific `click` action to save the multistep API test. Clicking **Save** in the UI triggers the backend call to save the test’s configuration.
+Click on a user session with a replay recording to observe the user's behavior on the Datadog platform. By using Session Replay, you can locate the corresponding RUM events and identify the specific `click` action to save the multistep API test. Clicking **Save** in the UI triggers the backend call to save the test's configuration.
 
 ## Uncover errors in backend traces
 
@@ -58,7 +58,7 @@ While examining errors in the multistep API tests' APM trace, the Technical Solu
 
 {{< img src="real_user_monitoring/guide/session-replay/view-traces.png" alt="An APM stack trace associated with a RUM view action" style="width:100%;">}}
 
-The multistep API test did not save because of a character limit in the step’s name. 
+The multistep API test did not save because of a character limit in the step's name. 
 
 ## Resolve user problems
 

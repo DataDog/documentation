@@ -2,7 +2,7 @@
 title: AWS Configuration Guide for Cloud SIEM
 kind: documentation
 further_reading:
-- link: "/security/default_rules/#cat-cloud-siem"
+- link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: "Documentation"
   text: "Explore Cloud SIEM default detection rules"
 - link: "/security/explorer/"

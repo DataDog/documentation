@@ -33,7 +33,7 @@ An APM alert is created when Watchdog detects anomalous behavior on your system'
 
 ### Select sources {#select-sources-1}
 
-Choose your [primary tags][1], [service][2], and [resource][3] from the drop-down menus.
+Choose your [primary tags][1], [service][2], and [resource][3] from the dropdown menus.
 
 After your selections are made, the graph at the top of the monitor creation page displays the matching Watchdog events over time, along with a list of events.
 
@@ -77,7 +77,7 @@ A logs alert indicates that either a new pattern of error logs has been detected
 
 ### Select sources {#select-sources-3}
 
-Choose your environment, service, log source, log status, and log anomaly type from the drop-down menus.
+Choose your environment, service, log source, log status, and log anomaly type from the dropdown menus.
 
 The first four parameters (environment, service, log source, log status) refer to attributes of the logs themselves. The monitor only triggers if Watchdog finds an anomaly on logs with attributes that match the ones specified.
 

@@ -35,7 +35,7 @@ Example: if you tag your hosts by the environment they are in, you can filter by
 
 A simple example is grouping your hosts by AWS availability zone. If you add a second grouping tag, such as instance type, then the hosts are further subdivided into groups, first by availability zone and then by instance type, as seen below.
 
-{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups"  >}}
+{{< img src="infrastructure/hostmap/hostmappart2image2.png" alt="Datadog Host Maps AZ Instance Groups" >}}
 
 ### Tags
 
@@ -80,7 +80,7 @@ By default, the Host Map only shows hosts that are reporting the selected metric
 
 ### Data freshness and meaning
 
-Data in the Host Map is refreshed about once a minute—unless you are continuously interacting with the map. The bottom right of the screen tells you when data was last updated.
+Data in the Host Map is refreshed about once a minute—unless you are continuously interacting with the map. The bottom left of the screen tells you when data was last updated.
 
 ## Use cases
 

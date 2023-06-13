@@ -9,11 +9,11 @@ Starting with ddtrace version `0.48.0`, the PHP tracer uses the `zend_execute_ex
 To accommodate PHP applications with deep call stacks, adjust the stack size limit on the host machine. To see the existing stack size, run:
 
 ```shell
-$ ulimit -s
+ulimit -s
 ```
 
 For example: if the existing stack size is `8192`, you may wish to double it by setting a new stack size of `16384`.
 
 ```shell
-$ sudo ulimit -s 16384
+sudo ulimit -s 16384
 ```

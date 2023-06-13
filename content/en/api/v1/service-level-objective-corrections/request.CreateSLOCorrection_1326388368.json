@@ -2,7 +2,7 @@
   "data": {
     "attributes": {
       "category": "Scheduled Maintenance",
-      "description": "Example-Create_an_SLO_correction_with_rrule_returns_OK_response",
+      "description": "Example-Service-Level-Objective-Correction",
       "slo_id": "string",
       "start": 1636629071,
       "duration": 3600,

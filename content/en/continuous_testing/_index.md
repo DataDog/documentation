@@ -22,11 +22,14 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
   tag: 'blog'
   text: 'Best practices for continuous testing with Datadog'
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
 
-Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product’s entire lifecycle. By offering code-free, reliable end-to-end testing and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
+Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product's entire lifecycle. By offering code-free, reliable end-to-end testing and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
 
 ## Test with ease and speed
 

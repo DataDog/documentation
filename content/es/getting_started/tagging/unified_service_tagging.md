@@ -1,6 +1,4 @@
 ---
-aliases:
-- /es/getting_started/tagging/unified_service_tagging
 further_reading:
 - link: /getting_started/tagging/using_tags
   tag: Documentación

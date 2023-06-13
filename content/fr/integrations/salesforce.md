@@ -1,8 +1,7 @@
 ---
 categories:
-- monitoring
-- network
 - cloud
+- network
 dependencies: []
 description: Recueillez des événements de la plateforme Salesforce en temps réel et
   convertissez-les en logs Datadog.
@@ -35,13 +34,13 @@ Intégrez Salesforce à Datadog pour :
 - Tirer profit de la [plateforme de sécurité][4] de Datadog afin de surveiller et de détecter les menaces dans toute votre plateforme Salesforce
 - Surveiller votre utilisation de l'API Salesforce afin de vérifier que vous respectez les limites associées
 
-## Configuration
+## Implémentation
 
 ### Installation
 
 Aucune installation n'est requise.
 
-### Procédure à suivre
+### Configuration
 
 Pour configurer Salesforce de façon à envoyer des données à Datadog, vous devez accéder à la fonctionnalité de [surveillance des événements Salesforce][5], activer le stockage de vos événements Salesforce, puis connecter votre organisation Salesforce à Datadog.
 
@@ -90,7 +89,7 @@ Après un certain temps, les [logs][1] commencent à apparaître depuis la sourc
 
 Pour découvrir la liste complète des événements de log, consultez les sections [Stockage des données de la surveillance des événements en temps réel][12] et [Événements EventLogFile][13] (en anglais).
 
-### Service Checks
+### Checks de service
 
 L'intégration Salesforce n'inclut aucun check de service.
 

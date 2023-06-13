@@ -23,4 +23,4 @@ You can [get started managing threats to your functions with ASM][3] today.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: /security/application_security/
-[3]: /security/application_security/getting_started/serverless/
+[3]: /security/application_security/enabling/serverless/
