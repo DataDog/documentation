@@ -26,7 +26,7 @@ Make sure you have a [Datadog API Key][1] and are using a programming language [
 [1]: /account_management/api-app-keys/#api-keys
 [2]: /tracing/trace_collection/#for-setup-instructions-select-your-language
 
-### 1. Instrument your application
+### Instrument your application
 
 #### Install Agent with Dockerfile
 
@@ -118,7 +118,7 @@ Follow [these instructions][2] to install and configure the Go tracing library i
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### 2. Configure your application
+### Configure your application
 
 To instrument your application, begin by adding the following key-value pairs under **Application Settings** in your Azure configuration settings.
 
@@ -130,7 +130,7 @@ To instrument your application, begin by adding the following key-value pairs un
 
 **Note**: The application restarts when new settings are saved. These settings can alternatively be included in the Dockerfile. The only downside being the need to redeploy the application rather than updating the setting and restarting.
 
-### 3. Results
+### Results
 
 Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure -> Serverless** to see your serverless metrics and traces.
 
@@ -158,7 +158,7 @@ To configure your application to submit metrics, follow the appropriate steps fo
 
 If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
 
-{{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
+{{< img src="serverless/azure_app_service/app-service-logs.png" style="width:100%;" >}}
 
 Share the content of the **Log stream** with [Datadog Support][14].
 
