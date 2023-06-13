@@ -26,14 +26,6 @@ Complete the following steps to enable Database Monitoring with your database:
 1. [Grant the Agent access to the database](#grant-the-agent-access).
 2. [Install the Agent](#install-the-agent).
 
-## Before you begin
-
-Supported Oracle versions
-: 19c, 21c
-
-Supported Agent versions
-: For more information on the required Agent build, contact your Customer Success Manager.
-
 ## Grant the Agent access
 
 The Datadog Agent requires read-only access to the database server in order to collect samples.

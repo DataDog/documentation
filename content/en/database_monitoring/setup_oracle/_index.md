@@ -19,6 +19,7 @@ Supported:
 - Versions: 19c and 21c
 - Deployment configurations: self-managed, RDS, RAC, Exadata
 - Architecture: multi-tenant
+- Agent versions: `7.44.1~dbm~oracle~beta~0.28-1`
 
 The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
 
