@@ -19,14 +19,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
-**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.  
-
-### Levels of framework support
-
-| **Level**                                              | **Support provided**                                                                                                                                |
-|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Not Supported</span>      |  No implementation. Contact [Datadog support][2] for special requests.                                                                              |
-| <span id="full-support">Supported</span>                    |  All capabilities work as intended. ASM can detect threats, block requests and report vulnerabilities. |                                                                                                                                       
+**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.      
 
 ## Language and framework compatibility
 
@@ -47,6 +40,13 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 ## Integrations
 
+### Levels of framework support
+
+| **Level**                                              | **Support provided**                                                                                                                                |
+|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| <span id="support-unsupported">Not Supported</span>      |  No implementation. Contact [Datadog support][2] for special requests.                                                                              |
+| <span id="full-support">Supported</span>                    |  All capabilities work as intended. ASM can detect threats, block requests and report vulnerabilities. |                                                                                                                                   
+
 ### Web framework compatibility
 
 - Attacker source HTTP request details
@@ -60,18 +60,18 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 | Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Grizzly                 | 2.0+       |  Supported |  Supported |  Supported |
-| Glassfish               |            |  Supported |  Supported |  Supported |
-| Java Servlet Compatible | 2.3+, 3.0+ |   Supported |  Supported |  Supported |
-| Jetty                   | 7.0-9.x    |  Supported |  Supported |  Supported |
-| Spring Boot             | 1.5        |  Supported |  Supported |  Supported |
-| Spring Web (MVC)        | 4.0+       |  Supported |  Supported |  Supported |
-| Spring WebFlux          | 5.0+       |  Not Supported   | Not Supported |  Supported |
-| Tomcat                  | 5.5+       |   Supported |  Supported |  Supported |
-| Vert.x                  | 3.4-3.9.x  |   Supported |  Supported |  Supported |
-| WebLogic                |            |   Supported |  Supported |  Supported |
-| Websphere               |            |   Supported |  Supported |  Supported |
-| Wildfly                 |            |   Supported |  Supported |  Supported |
+| Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Java Servlet Compatible | 2.3+, 3.0+ |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Jetty                   | 7.0-9.x    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Spring Boot             | 1.5        |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Spring Web (MVC)        | 4.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Spring WebFlux          | 5.0+       |            |            |  {{< X >}} |
+| Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Vert.x                  | 3.4-3.9.x  |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| WebLogic                |            |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Websphere               |            |   {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Wildfly                 |            |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -92,14 +92,14 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Apache HTTP Client       | 4.0+        |  Supported | Not Supported | Not Supported |
-| gRPC                     | 1.5+        |  Supported | Not Supported | Not Supported |
-| HttpURLConnection        | all         |  Supported | Not Supported | Not Supported |
-| Jax RS Clients           | 2.0+        |  Supported |  Supported |  Supported  |
-| Jersey Server            | 1.9-2.29    |  Supported |  Supported |  Supported |
-| Netty HTTP Server        |      |  Supported | Not Supported   | Not Supported |
-| RESTEasy                 |             |  Supported | Not Supported   | Not Supported |
-| Spring SessionAwareMessageListener     | 3.1+            |  Supported | Not Supported | Not Supported  |
+| Apache HTTP Client       | 4.0+        |  {{< X >}} |  |  |
+| gRPC                     | 1.5+        |  {{< X >}} |  |  |
+| HttpURLConnection        | all         |  {{< X >}} |  |  |
+| Jax RS Clients           | 2.0+        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
+| Jersey Server            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
+| Netty HTTP Server        |             |  {{< X >}} |    |  |
+| RESTEasy                 |             |  {{< X >}} |    |  |
+| Spring SessionAwareMessageListener     | 3.1+            |  {{< X >}} |  |  |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
@@ -119,18 +119,18 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 | Database                | Versions | Threat Detection supported? |  Custom Code Vulnerability Detection supported? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
-| Aerospike               | 4.0+     |  Supported |  Not Supported |
-| Couchbase               | 2.0+     |  Supported |  Not Supported |
-| JDBC                    | N/A      |  Supported |   Supported |
-| MongoDB                 | 3.0-4.0+ |  Supported |  Not Supported |
-| MySQL                   |          |  Supported |   Supported |
-| Hibernate               |          |  Supported |  Not Supported |
-| SQLite JDBC driver      |          |  Supported |   Supported |
-| Redis DB                |          |  Supported | Not Supported |
-| PostgreSQL JDBC driver  |          |  Supported |  Supported |
+| Aerospike               | 4.0+     |  {{< X >}} |   |
+| Couchbase               | 2.0+     |  {{< X >}} |   |
+| JDBC                    | N/A      |  {{< X >}} |   {{< X >}} |
+| MongoDB                 | 3.0-4.0+ |  {{< X >}} |   |
+| MySQL                   |          |  {{< X >}} |   {{< X >}} |
+| Hibernate               |          |  {{< X >}} |   |
+| SQLite JDBC driver      |          |  {{< X >}} |   {{< X >}} |
+| Redis DB                |          |  {{< X >}} |  |
+| PostgreSQL JDBC driver  |          |  {{< X >}} |  {{< X >}} |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /agent/remote_config/#enabling-remote-configuration
+[2]: /help
