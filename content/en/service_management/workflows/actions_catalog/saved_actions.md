@@ -31,7 +31,7 @@ You may store, modify, and reuse the preset inputs of an Action using Saved Acti
 4. A dialog box appears with the list of available Saved Actions for you to choose from.
 5. Once you have made a choice, you can click on **Use Saved Action** to confirm your selection.
 
-## Preview/edit a saved action
+## Preview or edit a saved action
 
 1. Navigate to the [Action Catalog][1].
 2. Toggle to **Saved Actions** and browse through the list to choose which Saved Action you want to preview or edit.
@@ -44,7 +44,7 @@ You may store, modify, and reuse the preset inputs of an Action using Saved Acti
 1. Navigate to the [Action Catalog][1].
 2. Toggle to **Saved Actions** and browse through the list to choose which Saved Action you want to delete.
 3. Hover over the Saved Action of your choice to reveal the option on the right-side of the screen to **Preview/Edit saved configurations**. Click on that to navigate to the dialog box with the preview of the Saved Action.
-4. Please click on the trash (**Delete**) icon to lead you to a confirmation box where you can click on **Delete** to delete the Saved Action.
+4. Click on the trash (**Delete**) icon to lead you to a confirmation box where you can click on **Delete** to delete the Saved Action.
 **Note:** you cannot delete a Saved Action that was created by somebody else.
 
 ## Further Reading
