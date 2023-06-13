@@ -17,7 +17,7 @@ further_reading:
 ## Requirements and limitations
 
 <!-- TODO: version needs to corrected after release -->
-- Datadog Node.js tracing library `dd-trace` version 4.0.0 or greater.
+- Datadog Node.js tracing library `dd-trace` version 4.2.0+, 3.23.0+, or v2.36.0+.
 
 The following OTel features implemented in the Datadog library as noted:
 
