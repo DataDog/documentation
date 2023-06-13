@@ -217,7 +217,7 @@ Configure your Azure services to forward their logs to the Event Hub by creating
 
 {{% tab "Blob Storage" %}}
 
-To collect logs from all of your Azure App Services, follow this general process:
+Datadog recommends using the Event Hub setup for Azure log collection. However, you can also follow the steps below to forward all of your Azure App Services logs from Blob storage:
 
 1. Set up [Azure Blob Storage][1] from the [Azure portal][2], [Azure Storage Explorer][3], [Azure CLI][4], or [Powershell][5].
 2. Set up the [Datadog-Azure Function](#create-a-new-azure-blob-storage-function) which forwards logs from your blob storage to Datadog.
