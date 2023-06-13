@@ -39,7 +39,7 @@ Configure the Agent for each node by following the instructions for [Oracle RAC]
 
 ### Single-node Exadata
 
-Configure the Agent by following the instructions for [self-hosted Oracle database](/database_monitoring/setup_oracle/selfhosted).
+Configure the Agent by following the instructions for [self-hosted Oracle databases][7].
 
 ### Validate
 
