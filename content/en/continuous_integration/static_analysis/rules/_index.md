@@ -3,6 +3,107 @@ title: Static Analysis Rules
 kind: documentation
 description: View rules for multiple languages for Static Analysis.
 is_beta: true
+python_code_style_type:
+  - link: "/continuous_integration/static_analysis/rules/python-code-style/assignment-names"
+    tag: "Assignment Names"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-code-style/function-naming"
+    tag: "Function Naming"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-code-style/max-function-lines"
+    tag: "Maximum Function Lines"
+    text: "TBD"
+python_best_practices_type:
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/argument-same-name"
+    tag: "Argument Same Name"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/class-methods-use-self"
+    tag: "Class Methods Use Self"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/ctx-manager-enter-exit-define"
+    tag: "Context Manager Enter Exit Defined"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/exception-inherit"
+    tag: "Exception Inherit"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/finally-no-break-continue-return"
+    tag: "Finally No Break Continue Return"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/format-string"
+    tag: "Format String"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/function-variable-argument-name"
+    tag: "Function Variable Argument Name"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/generic-exception-last"
+    tag: "Generic Exception Last"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/if-return-no-else"
+    tag: "If Return No Else"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/if-return-no-else"
+    tag: "Import Modules Twice"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/init-method-required"
+    tag: "Init Method Required"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/init-no-return-value"
+    tag: "Init No Return Value"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/logging-no-format"
+    tag: "Logging No Format"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/nested-blocks"
+    tag: "Nested Blocks"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-assert-on-tuples"
+    tag: "No Assert On Tuples"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-assert"
+    tag: "No Assert"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-base-exception"
+    tag: "No Base Exception"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-datetime-today"
+    tag: "No Date Time Today"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-double-not"
+    tag: "No Double Not"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-exit"
+    tag: "No Exit"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-generic-exception"
+    tag: "No Generic Exception"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-if-true"
+    tag: "No If True"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-range-loop-with-len"
+    tag: "No Range Loop with Len"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/no-silent-exception"
+    tag: "No Silent Exception"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/open-add-flag"
+    tag: "Open Add Flag"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/raising-not-implemented"
+    tag: "Raising Not Implemented"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/replace-format-string"
+    tag: "Replace Format String"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/self-assignment"
+    tag: "Self Assignment"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/special-methods-arguments"
+    tag: "Special Methods Argument"
+    text: "TBD"
+  - link: "/continuous_integration/static_analysis/rules/python-best-practices/unreachable-code"
+    tag: "Unreachable Code"
+    text: "TBD"
 further_reading:
   - link: "/continuous_integration/static_analysis/configuration"
     tag: "Documentation"
@@ -25,50 +126,23 @@ further_reading:
 
 Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
 
-## Default rules
+## Rules
 
 ### `python-best-practices`
 
-{{< whatsnext desc="See the following documentation about rules for Static Analysis to detect violations in best practices:">}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/argument-same-name" >}}Argument Same Name{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/class-methods-use-self" >}}Class Methods Use Self{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/ctx-manager-enter-exit-defined" >}}Context Manager Enter/Exit Defined{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/exception-inherit" >}}Exception Inherit{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/finally-no-break-continue-return" >}}Finally No Break Continue Return{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/format-string" >}}Format String{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/function-variable-argument-name" >}}Function Variable Argument Name{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/generic-exception-last" >}}Generic Exception Last{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/if-return-no-else" >}}If Return No Else{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/import-modules-twice" >}}Import Modules Twice{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/init-method-required" >}}Init Method Required{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/init-no-return-value" >}}Init No Return Value{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/logging-no-format" >}}Logging No Format{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/nested-blocks" >}}Nested Blocks{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-assert-on-tuples" >}}No Assert On Tuples{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-assert" >}}No Assert{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-base-exception" >}}No Base Exception{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-datetime-today" >}}No Date Time Today{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-double-not" >}}No Double Not{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-exit" >}}No Exit{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-generic-exception" >}}No Generic Exception{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-if-true" >}}No If True{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-range-loop-with-len" >}}No Range Loop With Len{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/no-silent-exception" >}}No Silent Exception{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/open-add-flag" >}}Open Add Flag{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/raising-not-implemented" >}}Raising Not Implemented{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/replace-format-string" >}}Replace Format String{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/self-assignment" >}}Self Assignment{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/special-methods-arguments" >}}Special Methods Argument{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-best-practices/unreachable-code" >}}Unreachable Code{{< /nextlink >}}
-{{< /whatsnext >}}
+Best practices for Python to write efficient and bug-free code.
+
+{{< partial name="continuous_integration/rule-type.html" >}}
+
+</br>
 
 ### `python-code-style`
 
-{{< whatsnext desc="See the following documentation about rules for Static Analysis to detect violations in code style:">}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-code-style/assignment-names" >}}Assignment Names{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-code-style/function-naming" >}}Function Naming{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/rules/python-code-style/max-function-lines" >}}Maximum Function Lines{{< /nextlink >}}
-{{< /whatsnext >}}
+Rulesets to enforce Python code style.
+
+{{< partial name="continuous_integration/ruleset-type.html" >}}
+
+</br>
 
 ## Further Reading
 
