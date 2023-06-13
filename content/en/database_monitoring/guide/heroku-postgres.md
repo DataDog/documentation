@@ -9,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+<div class="alert alert-warning">Database Monitoring is not supported on {{< region-param key=dd_datacenter >}}.</div>
 {{< /site-region >}}
 
 This guide assumes that you have configured the [Datadog Heroku buildpack][1] in your application dynos.
