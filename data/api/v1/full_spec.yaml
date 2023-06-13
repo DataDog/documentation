@@ -17881,6 +17881,11 @@ components:
             all hours in the current date for all organizations.
           format: int64
           type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for all organizations.
+          format: int64
+          type: integer
         mobile_rum_session_count_sum:
           description: Shows the sum of all mobile RUM Sessions over all hours in
             the current date for all organizations
@@ -18285,6 +18290,11 @@ components:
         mobile_rum_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -18729,6 +18739,11 @@ components:
         mobile_rum_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
