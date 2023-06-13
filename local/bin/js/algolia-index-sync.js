@@ -41,6 +41,8 @@ const updateSettings = (index) => {
         distinct: true,
         minWordSizefor1Typo: 3,
         minWordSizefor2Typos: 7,
+        highlightPreTag: '<span class="algolia-docsearch-suggestion--highlight">',
+        highlightPostTag: '</span>',
         ignorePlurals: true,
         optionalWords: ['the', 'without'],
         separatorsToIndex: '_@.#',
