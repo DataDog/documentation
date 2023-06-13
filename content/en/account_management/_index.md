@@ -5,6 +5,9 @@ description: "Manage your Datadog account and organization"
 aliases:
     - /guides/billing
     - /account_management/settings
+cascade:
+    algolia:
+        rank: 70
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>

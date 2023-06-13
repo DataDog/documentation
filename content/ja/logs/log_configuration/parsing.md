@@ -586,7 +586,7 @@ rule %{data::xml}
 CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` で定義されます。それぞれの内容は以下の通りです。
 
 * `headers`: `,` で区切られたキーの名前を定義します。キー名にはアルファベットと `_` を使用できますが、冒頭の文字はアルファベットでなければなりません。
-* `separator`: それぞれの値を区切るために使用する区切り文字を定義します。種類は 1 つのみ指定でき、デフォルトは `,` です。**注意**: タブ文字を表すには `tab` を使用します。
+* `separator`: 異なる値の区切りに使用する区切り文字を定義します。1 文字のみ使用可能です。デフォルト: `,`。**注**: TSV のタブ文字を表すには、`separator` に `tab` を使用します。
 * `quotingcharacter`: 引用符を定義します。許可されるのは 1 文字だけです。デフォルトは `"` 。
 
 **注**:
@@ -633,6 +633,7 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 | `value1,value2,value3`       | `%{data::csv("key1,key2")}`                                              | {"key1": "value1", "key2":"value2"}             |
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
+| <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
 ### ASCII 制御文字
 

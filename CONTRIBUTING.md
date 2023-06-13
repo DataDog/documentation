@@ -2,6 +2,8 @@
 
 This document is a guide to writing and editing documentation for the [Datadog Documentation site][7] (Docs site). Treat this as a guide rather than a rulebook. You should strive to follow what's prescribed, but there are exceptions to most rules.
 
+Some of these guidelines are enforced by [the Datadog docs implementation of the Vale linter][4]. After you make a PR, check its **Files changed** tab to see and fix warnings and errors flagged by the linter.
+
 ## Language
 
 - Use the American English **en_US** dialect when writing documentation, code comments, [wiki entries][1], and more in the English language. This is the default language for all `*.md` files.  

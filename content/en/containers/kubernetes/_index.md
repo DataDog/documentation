@@ -22,6 +22,9 @@ further_reading:
     - link: '/agent/guide/docker-deprecation'
       tag: 'Documentation'
       text: 'Docker runtime deprecation in Kubernetes'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session for insights on Kubernetes monitoring'
 ---
 
 ## Overview

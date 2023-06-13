@@ -4,12 +4,9 @@ kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/azure
 further_reading:
-    - link: "/continuous_integration/pipelines"
-      tag: "Documentation"
-      text: "Explore Pipeline Execution Results and Performance"
-    - link: "/continuous_integration/pipelines/custom_commands/"
-      tag: "Documentation"
-      text: "Extend Pipeline Visibility by tracing individual commands"
+    - link: "https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/"
+      tag: "Blog"
+      text: "Monitor Azure Pipelines with Datadog CI Visibility"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"

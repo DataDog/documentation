@@ -41,7 +41,7 @@ All users can read all data types. Admin and Standard users have write permissio
 
 **Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated with that user in order to enforce the new role permissions.
 
-In addition to the general permissions, you can define more granular permissions for specific assets or data types. Permissions can be either global or scoped to a subset of elements. Find below the details of these options and the impact they have on each available permission.
+In addition to the general permissions, you can define more granular permissions for specific assets or data types. In the tables below, find the details of these options and the impact they have on each available permission.
 
 {{% permissions %}}
 

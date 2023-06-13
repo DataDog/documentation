@@ -1,4 +1,6 @@
 ---
+core_product:
+- serverless monitoring
 synonyms:
 - 拡張 Lambda メトリクス
 title: 拡張メトリクス

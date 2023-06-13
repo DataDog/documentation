@@ -46,7 +46,7 @@ draft: false
 git_integration_title: rabbitmq
 integration_id: rabbitmq
 integration_title: RabbitMQ
-integration_version: 4.0.1
+integration_version: 4.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -114,7 +114,7 @@ RabbitMQ は、[RabbitMQ Management Plugin][4] と [Rabbitmq Prometheus Plugin][
        url: http://<HOST>:15692
  ```
 
-これにより、1 つの RabbitMQ ノードで [`/metrics` エンドポイント][6]のスクレイピングが可能になります。また、[`/metrics/detailed` エンドポイント][7]からもデータを収集することができます。
+これにより、1 つの RabbitMQ ノードで [`/metrics` エンドポイント][6]のスクレイピングが可能になります。また、Datadog は [`/metrics/detailed` エンドポイント][7]からもデータを収集することができます。
 
  ```yaml
  instances:
@@ -258,11 +258,21 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### Prometheus Plugin への移行
 
-Management Plugin から Prometheus Plugin に移行する場合、使用しているメトリクスが新しい名前になったり、使えなくなったりする可能性があるので、確認してください。
+Prometheus Plugin は、Management Plugin とは異なるメトリクスを公開します。
+ここでは、Management Plugin から Prometheus Plugin に移行する際に注意すべき点を説明します。
 
-[この表][14]でメトリクスを検索してください。メトリクスの説明に `[OpenMetricsV2]` タグが含まれていれば、Prometheus Plugin で利用可能です。
+- [この表][14]でメトリクスを検索してください。メトリクスの説明に `[OpenMetricsV2]` タグが含まれていれば、Prometheus Plugin で利用可能です。Management Plugin のみで利用可能なメトリクスは、説明にタグを持ちません。
+- Management Plugin のメトリクスを使用しているダッシュボードやモニターは機能しません。*OpenMetrics Version* と表示されているダッシュボードやモニターに切り替えてください。
+- デフォルトの構成では、集計されたメトリクスが収集されます。これは、例えば、キューによってタグ付けされたメトリクスが存在しないことを意味します。オプション `prometheus_plugin.unaggregated_endpoint` を構成すると、集計せずにメトリクスを取得することができます。
+- サービスチェックの `rabbitmq.status` は `rabbitmq.openmetrics.health` に置き換えられました。サービスチェックの `rabbitmq.aliveness` は、Prometheus Plugin では同等のものはありません。
 
-Management Plugin のみで利用可能なメトリクスは、説明文にタグを持ちません。
+Prometheus Plugin では、いくつかのタグが変更されます。以下の表は、より一般的なタグの変更点を説明したものです。
+
+| 管理          | Prometheus                               |
+|:--------------------|:-----------------------------------------|
+| `queue_name`        | `queue`                                  |
+| `rabbitmq_vhost`    | `vhost`、`exchange_vhost`、`queue_vhost` |
+| `rabbitmq_exchange` | `exchange`                               |
 
 
 ### よくあるご質問

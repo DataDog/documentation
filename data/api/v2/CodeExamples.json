@@ -162,6 +162,13 @@
       "description": "Update Fastly account returns \"OK\" response"
     }
   ],
+  "MakeGCPSTSDelegate": [
+    {
+      "group": "gcp_integration",
+      "suffix": "_962598975",
+      "description": "Create a Datadog GCP principal with empty body returns \"OK\" response"
+    }
+  ],
   "UpdateIPAllowlist": [
     {
       "group": "ip_allowlist",
@@ -585,6 +592,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
+    }
+  ],
+  "UpdateFinding": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Mute or unmute a finding returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [

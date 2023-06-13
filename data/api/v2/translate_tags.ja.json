@@ -39,6 +39,10 @@
     "name": "Fastly インテグレーション",
     "description": "Datadog API を通じて、Datadog Fastly インテグレーションを直接構成します。"
   },
+  "gcp-integration": {
+    "name": "GCP インテグレーション",
+    "description": "Datadog-Google Cloud Platform (GCP) インテグレーションの構成は、Datadog API から直接行います。[Datadog-Google Cloud Platform インテグレーションについては、こちらを参照してください](https://docs.datadoghq.com/integrations/google_cloud_platform)。"
+  },
   "ip-allowlist": {
     "name": "IP 許可リスト",
     "description": "IP allowlist API は、Datadog API および Web UI にアクセスできる IP アドレスを管理するために使用されます。インテーク API や公開ダッシュボードへのアクセスをブロックするものではありません。\n\nこれはエンタープライズ専用の機能です。Datadog のサポートに連絡してアクセスをリクエストしてください。"

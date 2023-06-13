@@ -3,7 +3,7 @@ description: React Native のセットアップのための高度な構成オプ
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: real_user_monitoring/reactnative/
   tag: ドキュメント
   text: React Native のモニタリングについて
@@ -211,6 +211,8 @@ RUM SDK とのすべてのインタラクション (ビュー追跡、アクシ�
 
 ログは記録されないので、実際の初期化の前に `DdLogs` メソッドを呼び出すとロギングが中断される可能性があります。
 
+Datadog の非同期初期化の設定に問題がある場合は、弊社の[サンプルアプリケーション][7]をご確認ください。
+
 ## 初期化の遅延
 
 SDK を初期化する前に待ちたい状況があるかもしれません。例えば、ユーザーのロールに応じて異なる構成を使用したい場合や、サーバーの 1 つから構成を取得する場合などです。
@@ -284,3 +286,4 @@ const configuration = {
 [4]: https://jestjs.io/
 [5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+[7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async

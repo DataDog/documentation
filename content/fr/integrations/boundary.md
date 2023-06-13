@@ -33,7 +33,7 @@ draft: false
 git_integration_title: boundary
 integration_id: boundary
 integration_title: Boundary
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0

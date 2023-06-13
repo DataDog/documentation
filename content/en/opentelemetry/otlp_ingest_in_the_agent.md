@@ -213,9 +213,12 @@ There are many other environment variables and settings supported in the Datadog
 
 ## Out-of-the-box dashboards
 
-Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards, go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
 
-{{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
+1. Install the [OpenTelemetry integration][9].
+2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
+
+   {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][7]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][8] you choose to enable.
 
@@ -231,3 +234,4 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[9]: https://app.datadoghq.com/integrations/otel

@@ -31,6 +31,10 @@ integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  rds_cpu_utilization: assets/monitors/rds_cpu_utilization.json
+  rds_database_connections_anomaly: assets/monitors/rds_database_connections_anomaly.json
+  rds_storage_utilization: assets/monitors/rds_storage_utilization.json
 name: amazon_rds
 public_title: Datadog-Amazon RDS インテグレーション
 short_description: Amazon RDS に関連する大量のメトリクスを追跡する。
@@ -83,7 +87,7 @@ RDS インスタンスを監視するには、Standard、Enhanced、Native の 3
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 {{< tabs >}}
 {{% tab "標準" %}}

@@ -89,6 +89,10 @@ Heroku は、dyno メトリクスをログから生成します。ログをメ�
 * [Oz][36] による Nodejs 版 [Heroku Datadog ログドレイン][35]
 * [Apiary][38] による Go 版 [Heroku Datadog ログドレイン][37]
 
+Heroku で PHP トレーサーやプロファイラーを使用するには、以下のビルドパックを使用します。
+
+* [SpeedCurve][66] によって保守されている [Heroku Datadog PHP Tracer and Profiler Buildpack][65]。
+
 ### Jira
 
 Jira にデータをポーリングし、Datadog にメトリクスとしてアップロードするための[ツール][39]です。
@@ -192,7 +196,7 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [36]: https://web.oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://github.com/evernote/jiradog
+[39]: https://bitbucket.org/atlassian/jiradog/src/master/
 [40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
@@ -218,3 +222,5 @@ Datadog ライブラリを作成し、このページに追加する場合は、
 [62]: https://github.com/urosgruber/dd-agent-FreeBSD
 [63]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [64]: mailto:opensource@datadoghq.com
+[65]: https://github.com/SpeedCurve-Metrics/heroku-buildpack-php-ddtrace
+[66]: https://www.speedcurve.com/

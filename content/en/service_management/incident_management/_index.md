@@ -11,6 +11,9 @@ further_reading:
   - link: "dashboards/querying/#incident-management-analytics"
     tag: "Documentation"
     text: "Incident Management Analytics"
+  - link: 'https://dtdg.co/fe'
+    tag: 'Foundation Enablement'
+    text: 'Join an interactive session to improve your Incident Management'
   - link: 'https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/'
     tag: 'Blog'
     text: 'More efficient pair programming with Datadog CoScreen'
@@ -25,8 +28,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Incident Management is not available on the Datadog for Government site.</div>
 {{< /site-region >}}
-
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="From Graph" style="width:80%;">}}
 
 Any event that may lead to a disruption in your organization's services can be described as an incident, and it is often necessary to have a set framework for handling these events. Datadog's Incident Management feature provides a system through which your organization can effectively identify and mitigate incidents.
 
@@ -43,7 +44,7 @@ Incident Management requires no installation. To view your incidents, go to the 
 
 **Note**: View your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
 
 ### Creating an incident
 
@@ -51,15 +52,15 @@ Incident Management requires no installation. To view your incidents, go to the 
 
 You can declare an incident directly from a graph by clicking the export button on the graph and then clicking **Declare incident**. The incident creation modal appears, and the graph is added to the incident as a signal.
 
-{{< img src="monitors/incidents/from-a-graph.png" alt="Create in incident from a graph" style="width:80%;">}}
+{{< img src="service_management/incidents/from-a-graph.png" alt="Create in incident from a graph" style="width:80%;">}}
 
 #### From the Clipboard
 
 Use the Datadog Clipboard to gather multiple monitors and graphs and to generate an incident. To add a dashboard to the Clipboard, copy any graph, and then select **Open Clipboard**. Add all of the relevant graphs and monitors to the Clipboard and then click **Add to New Incident**. Everything on the Clipboard is added to the incident as a signal.
 
-{{< img src="monitors/incidents/from-clipboard.png" alt="Add a dashboard to the clipboard" style="width:80%;">}}
+{{< img src="service_management/incidents/from-clipboard.png" alt="Add a dashboard to the clipboard" style="width:80%;">}}
 
-{{< img src="monitors/incidents/clipboard.png" alt="Create in incident from the clipboard" style="width:80%;">}}
+{{< img src="service_management/incidents/clipboard.png" alt="Create in incident from the clipboard" style="width:80%;">}}
 
 **Note**: In addition to exporting from an incident, data on the Clipboard can be exported to a new dashboard or a notebook.
 
@@ -67,11 +68,11 @@ Use the Datadog Clipboard to gather multiple monitors and graphs and to generate
 
 You can declare an incident directly from a monitor by clicking **Declare incident**. The incident creation modal appears, and the monitor is added into the incident as a signal.
 
-{{< img src="monitors/incidents/incident-from-monitor.png" alt="Create an incident from a monitor" style="width:80%;">}}
+{{< img src="service_management/incidents/incident-from-monitor.png" alt="Create an incident from a monitor" style="width:80%;">}}
 
 You can also add a monitor to an existing incident.
 
-{{< img src="monitors/incidents/existing.png" alt="Add a monitor to an existing incident" style="width:80%;">}}
+{{< img src="service_management/incidents/existing.png" alt="Add a monitor to an existing incident" style="width:80%;">}}
 
 #### From a Security Signal
 
@@ -79,17 +80,17 @@ Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal
 
 Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 
-{{< img src="monitors/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
+{{< img src="service_management/incidents/security-signal-incidents.png" alt="Create an incident from a security signal" style="width:80%;">}}
 
 #### From the Incidents page
 
 In the [Datadog UI][1], click **New Incident** to create an incident.
 
-{{< img src="monitors/incidents/incident_declaration_modal.jpeg" alt="Incident Declaration Modal" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_declaration_modal.jpeg" alt="Incident Declaration Modal" style="width:80%;">}}
 
 The incident creation modal provides responders with a collapsible side panel that contains helper text and descriptions for the severities and statuses used by your organization. The helper text and descriptions are customizable in the [Incident Settings][6].
 
-{{< img src="monitors/incidents/incident_information_settings.jpeg" alt="Incident Information Settings" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_information_settings.jpeg" alt="Incident Information Settings" style="width:80%;">}}
 
 #### From Slack
 
@@ -101,7 +102,7 @@ If the user declaring the incident has connected their Slack to their Datadog ac
 
 Read more about using the Datadog Slack App [here][8].
 
-{{< img src="monitors/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
+{{< img src="service_management/incidents/from-slack.png" alt="Create in incident from Slack" style="width:60%;">}}
 
 If the user declaring the incident is a part of your Datadog account, then that user becomes the Incident Commander (IC) by default. If the person declaring an incident is not part of your Datadog account, then the IC is assigned to a generic `Slack app user`. The IC can be changed on the [incidents page][1] in the Datadog app.
 

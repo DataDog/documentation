@@ -1,6 +1,6 @@
 ---
-related_terms:
-- チェック
+core_product:
+- apm
 synonyms:
 - トレーシング
 - 分散型トレーシング
