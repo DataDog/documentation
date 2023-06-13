@@ -67,7 +67,15 @@ $spacers: (
     ),
     9: (
         $spacer * 5.625
-    )
+    ),
+    
+    // Spacers that aren't divisible by 10 (>',')> WOW <(','<)
+
+    12: ($spacer * 0.75),
+    16: ($spacer * 1),
+    18: ($spacer * 1.125),
+    28: ($spacer * 1.75),
+    36: ($spacer * 2.25)
 );
 
 $grid-gutter-width: 1.875rem;
