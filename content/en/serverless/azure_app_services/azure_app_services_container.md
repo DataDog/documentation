@@ -55,9 +55,9 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 #### Install tracing library
 
-Tracing should work via the Dockerfile in the previous step. You can alternatively follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces.
+Tracing should work with the Dockerfile in the previous step. You can alternatively follow [these instructions][2] to install and configure the Node tracing library in your application to capture and submit traces.
 
-[Sample code for a simple Node.js application][1].
+[Sample code for a sample Node.js application][1].
 
 [1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/nodejs/express
 [2]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
@@ -83,9 +83,9 @@ CMD ["ddtrace-run", "python", "app.py"]
 
 #### Install tracing library
 
-Tracing should work via the Dockerfile in the previous step. You can alternatively follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces.
+Tracing should work with the Dockerfile in the previous step. You can alternatively follow [these instructions][2] to install and configure the Python tracing library in your application to capture and submit traces.
 
-[Sample code for a simple Python application][1].
+[Sample code for a sample Python application][1].
 
 [1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/python/flask
 [2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
@@ -110,7 +110,7 @@ CMD ["/path/to/your-go-binary"]
 
 Follow [these instructions][2] to install and configure the Go tracing library in your application to capture and submit traces.
 
-[Sample code for a simple Go application][1].
+[Sample code for a sample Go application][1].
 
 [1]: https://github.com/DataDog/serverless-self-monitoring/tree/main/self_monitor/azure/App_Service_Linux/container/go
 [2]: /tracing/trace_collection/dd_libraries/go/?tab=containers#instrument-your-application
