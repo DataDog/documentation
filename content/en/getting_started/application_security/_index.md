@@ -34,7 +34,7 @@ In your first three days with Datadog ASM:
 
 1. **Identify the most exposed services.** Go to the [Service Catalog Security view][1] and sort the data by the `Suspicious Requests` column.  
 
-   {{< img src="getting_started/appsec/gs-appsec-most-exposed.png" alt="Service Catalog Security view sorted by the Suspicious requests column. The web-store service, for example, shows thousands of suspicious requests detected." style="width:100%;" >}}
+   {{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="Service Catalog Security view sorted by the Suspicious requests column. The web-store service, for example, shows thousands of suspicious requests detected." style="width:100%;" >}}
 
    This data is collected from APM traces (through Datadog libraries). It provides you with visibility on the services that are exposed to the most suspicious traffic.
 
