@@ -20,14 +20,12 @@ Integrations with `latest` and `legacy` modes may produce a different subset of 
 
 ## OpenMetrics-based integration modes
 
-While it may very for each OpenMetrics-based integration, you can enable the `latest` mode by either:
+While it may vary for each OpenMetrics-based integration, you can enable the `latest` mode by either:
 
 * Setting `openmetrics_endpoint` to a target endpoint.
 * Setting `use_openmetrics` to true.
 
 For more information, see the appropriate OpenMetrics-based integration documentation.
 
-[1]: /integrations/guide/prometheus-metrics/?tab=latestversion
-[2]: /integrations/guide/prometheus-metrics/?tab=beforeopenemetricsv200
 [3]: /dashboards/
 [4]: /monitors/
