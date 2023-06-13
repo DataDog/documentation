@@ -71,7 +71,7 @@ Follow these steps to enable the Azure Native integration:
 As an [external ISV][6], there is an additional, separate process to request and use this access:
 
 1. Datadog authenticates into Azure and uses a private Azure service to request the customer token associated with the given Datadog resource.
-1. This Azure service verifies Datadog’s identity, and ensures the requested Datadog resource exists and is enabled.
+1. This Azure service verifies Datadog's identity, and ensures the requested Datadog resource exists and is enabled.
 1. Azure returns a short-lived customer token to Datadog. This token enables the same level of access granted to the associated system managed identity.
 1. Datadog uses this customer token to query data in the monitored environment until it approaches expiration, at which point the process repeats.
 
