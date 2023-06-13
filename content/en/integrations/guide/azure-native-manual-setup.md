@@ -39,7 +39,7 @@ To set up the Azure Native integration, you must be an **Owner** on any Azure su
 
 ## Setup
 
-Configuring the Azure integration requires the creation of a Datadog resource in Azure. These resources represent the connection or link between a Datadog organization and an Azure subscription. A Datadog resource is needed for each subscription you wish to monitor with Datadog. 
+Configuring the Azure integration requires the creation of a Datadog resource in Azure. These resources represent the connection or link between a Datadog organization and an Azure subscription. Multiple Azure subscriptions can be connected to Datadog with a single Datadog resource. 
 
 There are two options when you create a Datadog resource in Azure:
 
