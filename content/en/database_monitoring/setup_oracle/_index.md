@@ -25,7 +25,7 @@ Not supported deployment configurations, components and features: Oracle Autonom
 # Prerequisites
 
 1. Install Oracle integration in your org in-app.
-2. Disable checks in `oracle.d`
+2. Disable checks in `oracle.d`.
 
 # Setup
 
