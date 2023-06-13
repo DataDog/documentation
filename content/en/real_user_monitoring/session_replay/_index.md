@@ -14,6 +14,9 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: '/integrations/content_security_policy_logs'
+  tag: 'Documentation'
+  text: 'Detect and aggregate CSP violations with Datadog'
 ---
 
 ## Overview

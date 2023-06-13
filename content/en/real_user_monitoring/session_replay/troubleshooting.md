@@ -9,6 +9,9 @@ further_reading:
 - link: '/real_user_monitoring/session_replay'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
+- link: '/integrations/content_security_policy_logs'
+  tag: 'Documentation'
+  text: 'Detect and aggregate CSP violations with Datadog'
 ---
 
 ## Overview
