@@ -67,10 +67,10 @@ az ad sp create-for-rbac --role "Monitoring Reader" --scopes /subscriptions/{sub
 Example Output:
 ```text
 {
-  "appId": "0dd17b1e-54a4-45ae-b168-232b14b01f88",
+  "appId": "4ce52v13k-39j6-98ea-b632-965b77d02f36",
   "displayName": "azure-cli-2025-02-23-04-27-19",
-  "password": "dj-8Q~hKbQwU93Q0FBfIZ_pI5ZtaLoRxaws8Dca5",
-  "tenant": "4d3bac44-0230-4732-9e70-cc00736f0a97"
+  "password": "fe-3T~bEcFxY23R7NHwVS_qP5AmxLuTwgap5Dea6",
+  "tenant": "abc123de-12f1-82de-97bb-4b2cd023bd31"
 }
 ```
 
@@ -189,7 +189,7 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 
 ### Configuration
 
-To limit resource collection for Azure-based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
+To limit metric collection for Azure-based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
 
 This list of tags in `<KEY>:<VALUE>` form is separated by commas and defines a filter used while collecting metrics. Wildcards such as `?` (for single characters) and `*` (for multiple characters) can also be used. 
 
