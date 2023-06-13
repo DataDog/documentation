@@ -22,6 +22,8 @@ Supported:
 
 The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
 
+The Oracle versions below 19c are not supported.
+
 # Prerequisites
 
 1. In Datadog, install the Oracle integration for your organization.
