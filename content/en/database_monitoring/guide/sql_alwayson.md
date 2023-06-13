@@ -25,7 +25,7 @@ To access the AlwaysOn Clusters view, navigate to the **APM** > **Database Monit
 
 Use the AlwaysOn Clusters view to evaluate the health of your SQL Server availability groups. When selected, the page shows a color-coded visualization based on the current status of the primary (P) and secondary (S) nodes in each availability group.
 
-To identify groups that are experiencing issues, use the status filters to show groups with nodes that are Reverting, Not Synchronizing, and so forth. You can also use the timeseries graphs to spot unusual performance activity in your clusters based on log, redo, and secondary lag time metrics.
+To identify groups that are experiencing issues, use the status filters to show groups with nodes that are **Reverting**, **Not Synchronizing**, and so forth. You can also use the timeseries graphs to spot unusual performance activity in your clusters based on log, redo, and secondary lag time metrics.
 
 {{< img src="database_monitoring/dbm_alwayson.png" alt="View SQL Server AlwaysOn groups" style="width:100%;">}}
 
