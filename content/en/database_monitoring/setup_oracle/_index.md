@@ -20,7 +20,7 @@ Supported:
 - deployment configurations: self-managed, RDS, RAC, Exadata
 - architecture: multi-tenant
 
-Not supported deployment configurations, components and features: Oracle Autonomous Databae, ASM, Data Guard.
+The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
 
 # Prerequisites
 
