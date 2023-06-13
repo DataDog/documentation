@@ -79,27 +79,10 @@ Select an application type to start collecting RUM data:
 
 The following RUM capabilities are supported relative to each platform:
 
-| Feature                               | Supported Platforms | Notes |
-| ------------------------------------- | --------------------|-------|
-| Send logs to Datadog  | Browser, iOS, Android, Flutter, React Native, Roku |
-| Distributed tracing of network requests | Browser, iOS, Android, Flutter, React Native, Roku | - The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
-| Track Views and Actions (RUM) | Browser, iOS, Android, Flutter, React Native, Roku | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** only supports manual action tracking. |
-| Feature Flags tracking and release tracking | Browser, iOS, Android, Flutter, React Native | |
-| Error tracking and source mapping | Browser, iOS, Android, Flutter (Error Tracking only), React Native (partially supported) | |
-| Crash tracking, symbolication, and deobfuscation | iOS, Android, Flutter, React Native, Roku | |
-| Stop sessions (Kiosk Monitoring) | Browser, iOS, Android, Flutter, React Native | |
-| Track Events in WebViews | iOS, Android, Flutter, React Native | |
-| Monitor platform-specific vitals | Browser, iOS, Android, Flutter, React Native | |
-| Global attribute tracking in Logs  | Browser |  |
-| Client side tracing | iOS, Android | |
-| Session Replay | Browser | |
-| Heatmaps | Browser | |
-| Frustration signals | Browser, iOS (partially supported), Android (partially supported), Flutter (partially supported), React Native (partially supported) | |
-
-| Feature                               | Browser | Android | Flutter | iOS     | React Native | Roku | Notes |
+| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | Notes |
 | ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
 | Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
 | Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** only supports manual action tracking. |
 | Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - For **Flutter**, only Error Tracking is supported <br> - Only partially supported for **React Native** |
@@ -108,7 +91,7 @@ The following RUM capabilities are supported relative to each platform:
 | Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Global attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
-| Client side tracing |  | | {{< X >}}  |  | {{< X >}} |  |  |  |
+| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
 | Session Replay | {{< X >}} |  |  |  |  |  |  |
 | Heatmaps | {{< X >}} |  |  |  |  |  |  |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
