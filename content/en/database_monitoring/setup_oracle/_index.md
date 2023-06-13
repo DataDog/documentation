@@ -25,7 +25,7 @@ The following deployment configurations, components, and features are not suppor
 # Prerequisites
 
 1. In Datadog, install the Oracle integration for your organization.
-2. Disable checks in `oracle.d`.
+2. The new Oracle DBM check is configured in the configuration directory `oracle-dbm.d`. The legacy Oracle check, which is configured in the conifguration directory `oracle.d`, has to be deactivated for the databases configured in `oracle-dbm.d`.
 
 # Setup
 

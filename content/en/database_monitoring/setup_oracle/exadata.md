@@ -1,7 +1,7 @@
 ---
-title: Setting Up Database Monitoring for Oracle RAC
+title: Setting Up Database Monitoring for Oracle Exadata
 kind: documentation
-description: Install and configure Database Monitoring for Oracle RAC
+description: Install and configure Database Monitoring for Oracle Exadata
 private: true
 is_beta: true
 further_reading:
