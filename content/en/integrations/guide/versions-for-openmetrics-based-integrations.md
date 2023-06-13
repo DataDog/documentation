@@ -25,6 +25,12 @@ While it may vary for each OpenMetrics-based integration, you can enable the `la
 * Setting `openmetrics_endpoint` to a target endpoint.
 * Setting `use_openmetrics` to true.
 
+## History of latest and legacy versions
+
+<div class="alert alert-info">Datadog avoids introducing breaking changes to integrations as much as possible so customers can update the Datadog Agent without feeling afraid of investing time in making configuration adjustments. Our commitment to backwards compatibility makes it difficult to address existing design choices in the configuration and default behavior.</a>
+
+Since Prometheus/OpenMetrics is a commonly used format for exposing metrics, many integrations are based on it and share a majority of its configuration and default behavior. Datadog is committed to providing an improved experience in the `latest` version, and maintaining the original experience in the `legacy` version.  
+
 For more information, see the appropriate OpenMetrics-based integration documentation.
 
 [3]: /dashboards/
