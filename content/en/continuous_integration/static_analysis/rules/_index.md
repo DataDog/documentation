@@ -105,9 +105,9 @@ python_best_practices_type:
     tag: "Unreachable Code"
     text: "TBD"
 further_reading:
-  - link: "/continuous_integration/static_analysis/configuration"
+  - link: "/continuous_integration/static_analysis/"
     tag: "Documentation"
-    text: "Learn how to set up Static Analysis"
+    text: "Learn about Datadog Static Analysis"
 ---
 
 ## Overview

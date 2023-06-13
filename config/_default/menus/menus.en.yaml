@@ -2172,26 +2172,21 @@ main:
     parent: ci
     identifier: ci_static_analysis
     weight: 4
-  - name: Configuration
-    url: continuous_integration/static_analysis/configuration
+  - name: Rules
+    url: continuous_integration/static_analysis/rules
     parent: ci_static_analysis
-    identifier: ci_static_analysis_configuration
+    identifier: ci_static_analysis_rules
     weight: 401
-  - name: CircleCI Orb
-    url: continuous_integration/static_analysis/circleci_orb
+  - name: CircleCI Orbs
+    url: continuous_integration/static_analysis/circleci_orbs
     parent: ci_static_analysis
-    identifier: ci_static_analysis_circleci_orb
+    identifier: ci_static_analysis_circleci_orbs
     weight: 402
   - name: GitHub Actions
     url: continuous_integration/static_analysis/github_actions
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
     weight: 403
-  - name: Rules
-    url: continuous_integration/static_analysis/rules
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_rules
-    weight: 404
   - name: Guides
     url: continuous_integration/guides/
     parent: ci

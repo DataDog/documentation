@@ -342,10 +342,10 @@
           - 'README.md'
           options:
             dest_path: '/continuous_integration/static_analysis/'
-            file_name: 'circleci_orb.md'
+            file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
-              title: Static Analysis and CircleCI Orb
+              title: Static Analysis and CircleCI Orbs
               kind: documentation
               description: Use the Datadog Static Analysis CI extension to run Static Analysis tests in a CI pipeline.
       

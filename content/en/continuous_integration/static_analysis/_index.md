@@ -7,9 +7,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
   text: "Monitor all your CI pipelines with Datadog"
-- link: "/continuous_integration/static_analysis/configuration"
-  tag: "Documentation"
-  text: "Learn how to set up Static Analysis"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
@@ -39,15 +36,48 @@ Using Static Analysis provides organizations with the following benefits:
 
 ## Integrations
 
-{{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of choice. See the documentation for information about the following integrations, or read more about the Datadog CI NPM package:">}}
-    {{< nextlink href="continuous_integration/static_analysis/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
+{{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of choice. See the documentation for information about the following integrations:">}}
+    {{< nextlink href="continuous_integration/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/configuration" >}}NPM package{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Use the CLI
+## Configuration
 
-The [`@datadog/datadog-ci` package][2] allows you to run Static Analysis directly within your CI/CD pipeline. To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
+The [`@datadog/datadog-ci` package][2] allows you to run Static Analysis directly within your CI/CD pipeline.
+
+### Python
+
+Add a `datadog.yml` file at the root of your project.
+
+Configure your Datadog API and application keys and select from the following CI providers:
+
+{{< tabs >}}
+{{% tab "CircleCI Orb" %}}
+
+Text inside tab. [Link references][101] must be inside the tab.
+
+[101]: /agent/guide/agent-commands/
+
+{{% /tab %}}
+{{% tab "GitHub Actions" %}}
+
+Text inside tab. [Link references][101] must be inside the tab.
+
+[101]: /agent/guide/agent-commands/
+
+{{% /tab %}}
+{{% tab "Other" %}}
+
+Text inside tab. [Link references][101] must be inside the tab.
+
+[101]: /agent/guide/agent-commands/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Other programming languages
+
+Upload a SARIF report using [`datadog-ci`][2].
 
 ## Further Reading
 
@@ -55,4 +85,3 @@ The [`@datadog/datadog-ci` package][2] allows you to run Static Analysis directl
 
 [1]: https://app.datadoghq.com/ci/static-analysis
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /continuous_integration/static_analysis/configuration/
