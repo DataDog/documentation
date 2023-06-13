@@ -51,7 +51,7 @@ Configure the Agent by following the instructions for [self-hosted Oracle databa
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
-
+[7]: /database_monitoring/setup_oracle/selfhosted
 
 ## Further reading
 
