@@ -27,6 +27,8 @@ algolia:
   - 'script-src'
   - 'worker-src'
   - 'connect-src'
+aliases:
+  - /real_user_monitoring/faq/content_security_policy
 further_reading:
   - link: "/getting_started/tagging/unified_service_tagging/"
     tag: "Documentation"
