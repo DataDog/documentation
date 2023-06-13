@@ -1,5 +1,5 @@
 ---
-title: Azure Architecture and Configuration
+title: Azure Integration Architecture and Configuration
 kind: guide
 description: "Guide to architecture of the Datadog Azure integration and alternate configuration options"
 further_reading:
@@ -25,7 +25,7 @@ The setup processes documented in the [Azure integration page][1] are the recomm
 Enabling Datadog's Azure integration allows Datadog to:
 
   - Discover and monitor all resources in all subscriptions within the given scope
-  - Automatically update the metric definitions, to ensure that all of the metrics available from Azure Monitor are collected
+  - Automatically update discovered metric definitions, to ensure that all of the metrics available from Azure Monitor are collected
   - Ingest a range of both general and resource-specific metadata (including custom Azure tags), and apply it to the associated resource metrics in Datadog as tags
   - Query Azure metadata APIs and use the responses to [generate useful metrics in Datadog][2] for insights that Azure Monitor does not support
 
