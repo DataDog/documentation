@@ -120,7 +120,7 @@ nav_sections:
         link: universal_service_monitoring/
         icon: usm
         desc: Discover, map, and monitor services without changing code
-      - title: Workflows
+      - title: Workflow Automation
         link: workflows
         icon: workflows
         desc: Automate and orchestrate processes across your tech stack

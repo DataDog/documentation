@@ -105,7 +105,7 @@ Context variables come in the following varieties:
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
-{{< img src="service_management/workflows/context-variables2.png" alt="The Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables3.png" alt="The Context Variables tab" >}}
 
 Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
 

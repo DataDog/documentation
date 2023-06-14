@@ -1,7 +1,7 @@
 ---
 title: Access and Authentication
 kind: documentation
-description: Access and authentication for Workflows
+description: Access and authentication for Workflow Automation
 aliases:
 - /workflows/access
 - /workflows/service_accounts
