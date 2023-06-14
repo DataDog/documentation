@@ -48,7 +48,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 <div class="alert alert-warning">Remote configuration for ingestion configuration in the Agent is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
 
-Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][14] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][23] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
 
 #### Local configuration
 
@@ -789,3 +789,4 @@ Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Col
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
 [21]: /agent/remote_config/#enabling-remote-configuration
 [22]: /opentelemetry/guide/ingestion_sampling_with_opentelemetry
+[23]: /agent/remote_config/

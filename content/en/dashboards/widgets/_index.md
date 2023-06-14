@@ -18,57 +18,57 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Graphs
 {{< whatsnext desc="Generic widgets to graph data from Datadog products: ">}}
-    {{< nextlink href="/dashboards/widgets/change" >}}Change{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/distribution" >}}Distribution{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel" >}}Funnel{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" >}}Geomap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/heat_map" >}}Heatmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/pie_chart" >}}Pie Chart{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/query_value" >}}Query Value{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/scatter_plot" >}}Scatter Plot{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/table" >}}Table{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/treemap" >}}Treemap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/timeseries" >}}Timeseries{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list" >}}Top List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/change" >}}<img src="/images/dashboards/widgets/icons/change_light_large.png" /> Change{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/distribution" >}}<img src="/images/dashboards/widgets/icons/distribution_light_large.png" /> Distribution{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel" >}}<img src="/images/dashboards/widgets/icons/funnel_light_large.png" /> Funnel{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/geomap" >}}<img src="/images/dashboards/widgets/icons/geomap_light_large.png" /> Geomap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/heat_map" >}}<img src="/images/dashboards/widgets/icons/heatmap_light_large.png" /> Heatmap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/pie_chart" >}}<img src="/images/dashboards/widgets/icons/pie_light_large.png" /> Pie Chart{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/query_value" >}}<img src="/images/dashboards/widgets/icons/query-value_light_large.png" /> Query Value{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/scatter_plot" >}}<img src="/images/dashboards/widgets/icons/scatter-plot_light_large.png" /> Scatter Plot{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/table" >}}<img src="/images/dashboards/widgets/icons/table_light_large.png" /> Table{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/treemap" >}}<img src="/images/dashboards/widgets/icons/treemap_light_large.png" /> Treemap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/timeseries" >}}<img src="/images/dashboards/widgets/icons/timeseries_light_large.png" /> Timeseries{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/top_list" >}}<img src="/images/dashboards/widgets/icons/top-list_light_large.png" /> Top List{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Groups
 {{< whatsnext desc="Display your widgets under groups: ">}}
-    {{< nextlink href="/dashboards/widgets/group" >}}Group{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/group" >}}<img src="/images/dashboards/widgets/icons/placeholder_light_large.png" /> Group{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
 {{< whatsnext desc="Decoration widgets to visually structure and annotate dashboards: ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" >}}Free Text{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" >}}Iframe{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" >}}Image{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" >}}Notes and Links{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/free_text" >}}<img src="/images/dashboards/widgets/icons/free-text_light_large.png" /> Free Text{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/iframe" >}}<img src="/images/dashboards/widgets/icons/iframe_light_large.png" /> Iframe{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/image" >}}<img src="/images/dashboards/widgets/icons/image_light_large.png" /> Image{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/note" >}}<img src="/images/dashboards/widgets/icons/notes_light_large.png" /> Notes and Links{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Lists and streams
 {{< whatsnext desc="Display a list of events and issues coming from different sources: ">}}
-    {{< nextlink href="/dashboards/widgets/list" >}}List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/list" >}}<img src="/images/dashboards/widgets/icons/change_light_large.png" /> List{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Alerting and response
 {{< whatsnext desc="Summary widgets to display Monitoring information: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" >}}Alert Graph{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" >}}Alert Value{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" >}}Check Status{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" >}}Monitor Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/alert_graph" >}}<img src="/images/dashboards/widgets/icons/alert-graph_light_large.png" /> Alert Graph{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/alert_value" >}}<img src="/images/dashboards/widgets/icons/alert-value_light_large.png" /> Alert Value{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/check_status" >}}<img src="/images/dashboards/widgets/icons/check-status_light_large.png" /> Check Status{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/monitor_summary" >}}<img src="/images/dashboards/widgets/icons/monitor-summary_light_large.png" /> Monitor Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Architecture
 {{< whatsnext desc="Visualize infrastructure and architecture data: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" >}}Hostmap{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" >}}Topology Map{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" >}}Service Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/hostmap" >}}<img src="/images/dashboards/widgets/icons/host-map_light_large.png" /> Hostmap{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" >}}<img src="/images/dashboards/widgets/icons/service-map_light_large.png" /> Topology Map{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_summary" >}}<img src="/images/dashboards/widgets/icons/service-summary_light_large.png" /> Service Summary{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Performance and reliability
 {{< whatsnext desc="Site reliability visualizations: ">}}
-    {{< nextlink href="/dashboards/widgets/slo" >}}Service Level Objective (SLO) Summary{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" >}}Service Level Objective (SLO) List{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo" >}}<img src="/images/dashboards/widgets/icons/slo-summary_light_large.png" /> Service Level Objective (SLO) Summary{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo_list" >}}<img src="/images/dashboards/widgets/icons/slo-list_light_large.png" /> Service Level Objective (SLO) List{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Full screen
