@@ -63,7 +63,7 @@ Using five APM Pro hosts and sending 30 million Indexed Spans, with 900 GB of to
 
 ### APM Enterprise Hosts with six profiled containers per host
 
-Using 5 APM Enterprise hosts, with the five hosts with six apps running in separate containers per each host.
+Using five APM Enterprise hosts with six apps running in separate containers per each host.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
