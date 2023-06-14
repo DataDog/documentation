@@ -12,7 +12,7 @@ aliases:
 further_reading:
   - link: "/observability_pipelines/production_deployment_overview/"
     tag: "Documentation"
-    text: "Production deployment overview for the Observability Pipelines Worker"
+    text: "Production deployment design and principles for the Observability Pipelines Worker"
   - link: "https://dtdg.co/d22op"
     tag: "Learning Center"
     text: "Safe and Secure Local Processing with Observability Pipelines"
