@@ -77,7 +77,7 @@ The highlight color of the node indicates the service's [monitor status][5]. If 
 
 ### Load amplification
 
-A service has load amplification if it's receiving more than 100% of the requests received by the selected resource upstream. Services with call paths highlighted in orange have load amplification, and the amplification (multiplier) is shown in the list on the panel. The amplification is calculated based on the requests received by the resource (shown on the map in the image below), and the requests received by the service (shown in the service node on the map). By clicking on a service in the list, you can see the spans contributing to the amplification.
+A service has load amplification if it's receiving more than 100% of the requests received by the selected resource upstream. Services with call paths highlighted in orange have load amplification, and the amplification multiplier is shown in the list on the panel. The amplification is calculated based on the requests received by the resource (shown highlighted on the map in the image below), and the requests received by the downstream service (shown inside the downstream service node on the map). By clicking on a service in the list, you can see the spans contributing to the amplification.
 
 {{< img src="tracing/visualization/resource/dependency-map-requests.png" alt="Dependency map showing request count of a resource" style="width:100%;" >}}
 
