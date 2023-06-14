@@ -4,6 +4,16 @@ kind: documentation
 description: "Datadog support for Azure App Services"
 ---
 
+| Abbreviation | Feature | Description |
+| ------------ | ------- | ----------- |
+| IM | Integration Metrics | TK |
+| IL | Azure Integration Logs | TK |
+| T | Tracing | TK |
+| CM | Custom Metrics | TK |
+| P | Profiling | TK |
+| DL | Direct Logging | TK |
+
+
 <table>
     <tr>
         <th>OS</th>
