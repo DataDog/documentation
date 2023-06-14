@@ -689,6 +689,12 @@
     "description": "メッセージとリソースの構成を持つ 1 つの発見を返します。",
     "summary": "発見を取得する"
   },
+  "UpdateFinding": {
+    "description": "特定の診断結果をミュートまたはミュート解除します。\nリクエストに成功すると、API は更新された診断結果オブジェクトを返します。",
+    "summary": "Mute or unmute a finding",
+    "request_description": "診断結果をミュートまたはミュート解除するには、リクエスト本文に少なくとも 2 つの属性 (`muted` と `reason`) を含める必要があります。許可される理由は、診断結果がミュートされるかミュート解除されるかに依存します。\n- 診断結果をミュートするには: `PENDING_FIX`、`FALSE_POSITIVE`、`ACCEPTED_RISK`、`OTHER`\n- 診断結果をミュート解除するには: `NO_PENDING_FIX`、`HUMAN_ERROR`、`NO_LONGER_ACCEPTED_RISK`、`OTHER` ",
+    "request_schema_description": "新しい診断結果のミュートリクエスト。"
+  },
   "ListProcesses": {
     "description": "組織のすべてのプロセスを取得します。",
     "summary": "すべてのプロセスを取得"
