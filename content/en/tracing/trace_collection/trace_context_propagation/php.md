@@ -4,6 +4,10 @@ kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 The Datadog APM Tracer supports [B3][7] and [W3C][10] headers extraction and injection for distributed tracing.
@@ -68,6 +72,9 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 // These $headers can also be read back by \DDTrace\consume_distributed_tracing_headers from another process.
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [7]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
