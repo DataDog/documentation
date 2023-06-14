@@ -36,14 +36,14 @@ further_reading:
 
 ## Overview
 
-Get metrics and logs from kubernetes service in real time to:
+Get metrics and logs from Kubernetes in real time to:
 
-- Visualize and monitor kubernetes states
-- Be notified about kubernetes failovers and events.
+- Visualize and monitor Kubernetes states
+- Be notified about Kubernetes failovers and events.
 
 ## Setup
 
-For Kubernetes, it's recommended to run the Agent as a container in your cluster.
+For Kubernetes, Datadog recommends that you run the Agent as a container in your cluster.
 
 **[See the dedicated Kubernetes documentation to deploy the Agent in your Kubernetes cluster][1]**.
 
