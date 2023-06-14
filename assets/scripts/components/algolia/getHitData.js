@@ -7,7 +7,7 @@ export function getHitData(hit) {
         relpermalink: cleanRelPermalink,
         category: hit.category ? hit.category : 'Documentation',
         subcategory: hit.subcategory ? hit.subcategory : title,
-        title,
+        title: hit._highlightResult.title ? hit._highlightResult.title.value : title,
         section_header: hit.section_header || null,
         content: hit._highlightResult.content ? hit._highlightResult.content.value : '',
         content_snippet: hit._snippetResult ? hit._snippetResult.content.value : '',
