@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
   tag: "Blog"
   text: "Using Datadog Audit Trail"
+- link: "https://www.datadoghq.com/blog/remote-configuration-for-datadog/"
+  tag: "Blog"
+  text: "Apply real-time updates to Datadog components with Remote Configuration"
 ---
 
 {{% site-region region="gov" %}}

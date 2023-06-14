@@ -223,7 +223,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更し�
 
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[2]: /ja/tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}

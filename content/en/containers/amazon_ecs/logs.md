@@ -21,6 +21,10 @@ Once enabled, the Datadog Agent container collects the logs emitted from the oth
 - If your containers are creating log files isolated within *their* containers, you need to perform some [extra steps](#log-file-within-a-container) to ensure the Agent container has visibility to those log files.
 - If your containers are using the `awslogs` [logging driver to send the logs to CloudWatch][9], then those logs are not be visible to the Agent. Instead, use one of the [AWS log collection integrations][10] in order to collect those logs.
 
+#### AWS Fargate
+
+To set up log collection for AWS Fargate, see [AWS Fargate Log Collection][13].
+
 ## Installation
 
 ### ECS task definition
@@ -268,3 +272,4 @@ The `source` attribute is used to identify the integration to use for each conta
 [10]: /integrations/amazon_web_services/?tab=allpermissions#log-collection
 [11]: /containers/amazon_ecs/?tab=awscli#setup
 [12]: /containers/docker/log/?tab=dockerfile#log-integrations
+[13]: /integrations/ecs_fargate/?tab=webui#log-collection
