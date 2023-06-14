@@ -192,6 +192,7 @@ title: 監査証跡イベント
 | 名前                 | 監査イベントの説明                                                       | 監査エクスプローラーのクエリ                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
 | [トークンリーク][80］ | Datadog は、失効させるべき Datadog API またはアプリケーションキーのリークを検出しました。| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [異常なログイン][84] | Datadog は、異常なログインイベントを検出しました。| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
 
 ### 機密データスキャナーイベント
 | 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
@@ -309,3 +310,4 @@ title: 監査証跡イベント
 [81]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apasslist_entry
 [82]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apolicy_entry
 [83]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Awaf_custom_rule
+[84]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Aunusual_login
