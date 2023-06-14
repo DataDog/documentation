@@ -45,7 +45,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     ```shell
     echo -n '<Your API key>' | base64
     ```
-4. In the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. To get the base64 version of it, you can run:
+4. If you are using the `datadog-agent-all-features.yaml` manifest template: in the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. To get the base64 version of it, you can run:
 
     ```shell
     echo -n 'Random string' | base64
@@ -55,7 +55,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 5. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
 
-    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites, this results in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
 
 6. **Deploy the DaemonSet** with the command:
 
