@@ -93,7 +93,7 @@ yarn add --dev @datadog/datadog-ci
 : テストがトリガーされなかったり、Datadog から結果を取得できなかった場合に CI ジョブを失敗させるためのブーリアンフラグ。デフォルトでは `false` に設定されています。
 
 `failOnMissingTests`
-: 少なくとも一つのテストが実行中に欠落している場合 (例えば、削除されている場合など)、CI ジョブを失敗させるブーリアンフラグ。デフォルトでは `false` に設定されています。
+: 公開 ID (`--public-id` CLI 引数、または[テストファイル](#test-files)にリストされている) を持つ指定したテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム的に削除されたか Datadog サイトで削除された場合)、CI ジョブが失敗するブール値フラグ。デフォルトは `false` に設定されています。
 
 `failOnTimeout`
 : 少なくとも一つのテストがデフォルトのテストタイムアウトを超えた場合、CI ジョブを失敗させるブーリアンフラグ。デフォルトでは `true` に設定されています。
@@ -241,10 +241,10 @@ export DATADOG_SYNTHETICS_LOCATIONS="aws:us-east-1;aws:us-east-2"
 
 CLI にすべての `**/*.synthetics.json` Synthetic テスト (または[グローバルコンフィギュレーションファイル](#global-configuration-file-options))で指定したパスに紐付いたすべてのテスト) を自動検知させるか、`-p,--public-id` フラグを使用して実行するテストを指定するか、定義できます。
 
-CLI を実行してテストを実行する
-
 {{< tabs >}}
 {{% tab "NPM" %}}
+
+**NPM** を通じて CLI を実行し、テストを実行します。
 
 `package.json` に下記を追加します。
 
@@ -266,6 +266,8 @@ npm run datadog-ci-synthetics
 
 {{% /tab %}}
 {{% tab "Yarn" %}}
+
+**Yarn** を通じて CLI を実行し、テストを実行します。
 
 `run-tests` サブコマンドは `files` コンフィギュレーションキーにしたがって、フォルダ内で検出されたテストを実行します。`--public-id` (または短縮形の `-p`) 引数を指定することで、指定したテストのみをトリガーすることができます。複数のテストを実行するために、複数回設定することができます。
 
@@ -300,7 +302,7 @@ yarn datadog-ci synthetics run-tests -f ./component-1/**/*.synthetics.json -v PA
 
 - `--failOnTimeout` (または `--no-failOnTimeout`) は、テストタイムアウトを超えたら CI を失敗 (または成功) させます。
 - `--failOnCriticalErrors` は、テストがトリガーされなかったり、結果を取得できなかった場合に、CI を失敗させます。
-- `--failOnMissingTests` は、少なくとも 1 つのテストが欠落している場合に、CI を失敗させます。
+- `--failOnMissingTests` は、公開 ID (`--public-id` CLI 引数またはテストファイルにリストされている) を持つ指定したテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム的に削除されたか Datadog サイトで削除された場合)、CI を失敗させます。
 
 ### テストファイル
 

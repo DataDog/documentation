@@ -4,6 +4,10 @@ kind: documentation
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 ## Overview
@@ -68,6 +72,10 @@ void example() {
   // `headers` now populated with the headers needed to propagate the span.
 }
 ```
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter

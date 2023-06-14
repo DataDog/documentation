@@ -19,7 +19,7 @@ further_reading:
 
 デフォルトでは、Agent コンフィギュレーションディレクトリ内のすべてのプロファイルがロードされます。コレクションの特定のプロファイルをカスタマイズするには、`definition_file` でファイル名別に明示的に参照するか、`definition` でインラインリストを指定します。Datadog プロファイルはいずれも名前別にリストできます。追加のカスタムプロファイルは、コンフィギュレーション内でファイルパスで参照するか、コンフィギュレーションディレクトリに配置できます。
 
-**注**: 一般的なプロファイルは [generic_router.yaml][1] で、ルーターやスイッチなどをサポートしています。
+**注**: 一般的なプロファイルは [generic-device.yaml][1] で、ルーターやスイッチなどをサポートしています。
 
 ### sysOID マップデバイス
 
@@ -64,5 +64,5 @@ Datadog が提供するプロファイルの詳細については、[GitHub リ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
+[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-device.yaml
 [2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles

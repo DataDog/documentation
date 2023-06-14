@@ -13665,6 +13665,14 @@ components:
           description: URL attached to the metrics.
           type: string
       type: object
+    SyntheticsDefaultLocations:
+      description: List of Synthetics default locations settings.
+      example:
+      - aws:eu-west-3
+      items:
+        description: Name of the location.
+        type: string
+      type: array
     SyntheticsDeleteTestsPayload:
       description: 'A JSON list of the ID or IDs of the Synthetic tests that you want
 
@@ -16990,6 +16998,7 @@ components:
         iot_device_count:
           description: The total number of IoT devices during a given hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -17117,6 +17126,7 @@ components:
         retention:
           description: The retention period in days or "custom" for all custom retention
             usage.
+          nullable: true
           type: string
       type: object
     UsageLogsByRetentionResponse:
@@ -17241,6 +17251,7 @@ components:
         host_count:
           description: Contains the number of active NPM hosts.
           format: int64
+          nullable: true
           type: integer
         hour:
           description: The hour for the usage.
@@ -17706,9 +17717,19 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg:
+          description: Host count average of Cloud Cost Management for AWS for the
+            given date and given organization.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg:
+          description: Host count average of Cloud Cost Management for Azure for the
+            given date and given organization.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg:
-          description: Host count average of Cloud Cost Management for the given date
-            and given organization.
+          description: Host count average of Cloud Cost Management for all cloud providers
+            for the given date and given organization.
           format: int64
           type: integer
         container_avg:
@@ -17868,6 +17889,11 @@ components:
         mobile_rum_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -18113,9 +18139,19 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg:
+          description: Host count average of Cloud Cost Management for AWS for the
+            given date and given org.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg:
+          description: Host count average of Cloud Cost Management for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg:
-          description: Host count average of Cloud Cost Management for the given date
-            and given org.
+          description: Host count average of Cloud Cost Management for all cloud providers
+            for the given date and given org.
           format: int64
           type: integer
         container_avg:
@@ -18274,6 +18310,11 @@ components:
         mobile_rum_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -18529,8 +18570,19 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management for
+            AWS.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management for
+            Azure.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg_sum:
-          description: Sum of the host count average for Cloud Cost Management.
+          description: Sum of the host count average for Cloud Cost Management for
+            all cloud providers.
           format: int64
           type: integer
         container_avg_sum:
@@ -18718,6 +18770,11 @@ components:
         mobile_rum_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
@@ -23815,7 +23872,8 @@ paths:
   /api/v1/integration/gcp:
     delete:
       deprecated: true
-      description: This endpoint is deprecated. Delete a given Datadog-GCP integration.
+      description: "This endpoint is deprecated \u2013 use the V2 endpoints instead.
+        Delete a given Datadog-GCP integration."
       operationId: DeleteGCPIntegration
       requestBody:
         content:
@@ -23855,8 +23913,8 @@ paths:
         type: idempotent
     get:
       deprecated: true
-      description: This endpoint is deprecated. List all Datadog-GCP integrations
-        configured in your Datadog account.
+      description: "This endpoint is deprecated \u2013 use the V2 endpoints instead.
+        List all Datadog-GCP integrations configured in your Datadog account."
       operationId: ListGCPIntegration
       responses:
         '200':
@@ -23887,7 +23945,8 @@ paths:
         type: safe
     post:
       deprecated: true
-      description: This endpoint is deprecated. Create a Datadog-GCP integration.
+      description: "This endpoint is deprecated \u2013 use the V2 endpoints instead.
+        Create a Datadog-GCP integration."
       operationId: CreateGCPIntegration
       requestBody:
         content:
@@ -23929,15 +23988,11 @@ paths:
         type: unsafe
     put:
       deprecated: true
-      description: 'This endpoint is deprecated. Update a Datadog-GCP integrations
-        host_filters and/or auto-mute.
-
-        Requires a `project_id` and `client_email`, however these fields cannot be
-        updated.
-
-        If you need to update these fields, delete and use the create (`POST`) endpoint.
-
-        The unspecified fields will keep their original values.'
+      description: "This endpoint is deprecated \u2013 use the V2 endpoints instead.
+        Update a Datadog-GCP integrations host_filters and/or auto-mute.\nRequires
+        a `project_id` and `client_email`, however these fields cannot be updated.\nIf
+        you need to update these fields, delete and use the create (`POST`) endpoint.\nThe
+        unspecified fields will keep their original values."
       operationId: UpdateGCPIntegration
       requestBody:
         content:
@@ -26668,7 +26723,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - monitors_read
-      summary: Get all downtimes for a monitor
+      summary: Get active downtimes for a monitor
       tags:
       - Downtimes
       x-codegen-request-body-name: body
@@ -29175,6 +29230,30 @@ paths:
       x-menu-order: 24
       x-undo:
         type: idempotent
+  /api/v1/synthetics/settings/default_locations:
+    get:
+      description: Get the default locations settings.
+      operationId: GetSyntheticsDefaultLocations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsDefaultLocations'
+          description: OK
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_default_settings_read
+      summary: Get the default locations
+      tags:
+      - Synthetics
+      x-menu-order: 28
+      x-undo:
+        type: safe
   /api/v1/synthetics/tests:
     get:
       description: Get the list of all Synthetic tests.

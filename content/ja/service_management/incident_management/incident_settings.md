@@ -17,7 +17,7 @@ title: インシデント設定
 
 インシデント設定の General サブセクションは、組織の深刻度レベルとステータスレベルを定義し、インシデントヘルパーテキストを宣言するために使用します。
 
-{{< img src="monitors/incidents/severity_settings.jpeg" alt="インシデントの重大度レベルの設定" style="width:80%;">}}
+{{< img src="service_management/incidents/severity_settings.jpeg" alt="インシデントの重大度レベルの設定" style="width:80%;">}}
 
 重大度レベルの設定を使用して次のことを行います。
 
@@ -28,7 +28,7 @@ title: インシデント設定
 
 **注**: 通知ルールで参照されている重大度を削除しようとすると、その決定を確認するプロンプトが表示されます。続行を選択すると、影響を受ける通知ルールは無効となります。重大度の削除または開始重大度の変更によって、[Incident Management Analytics][2] のクエリが自動的に更新されることはありません。
 
-{{< img src="monitors/incidents/status_settings.jpeg" alt="インシデントステータスレベルの設定" style="width:80%;">}}
+{{< img src="service_management/incidents/status_settings.jpeg" alt="インシデントステータスレベルの設定" style="width:80%;">}}
 
 ステータスレベルの設定を使用して次のことを行います。
 
@@ -37,13 +37,13 @@ title: インシデント設定
 
 **注**: `Completed` ステータスを削除しても、すでに `Completed` ステータスになっているインシデントは自動的に更新されず、またそれを明示的に参照している [Incident Management Analytics][2] クエリも自動的に更新されません。また、`Completed` ステータスを参照している通知ルールは、そのルールが無効となるため、無効になります。
 
-{{< img src="monitors/incidents/helper_text_settings.jpeg" alt="インシデントヘルパーテキスト設定の宣言" style="width:80%;">}}
+{{< img src="service_management/incidents/helper_text_settings.jpeg" alt="インシデントヘルパーテキスト設定の宣言" style="width:80%;">}}
 
 Declare Incident Helper Text 設定では、[インシデント作成モーダル][3]で重大度とステータスレベルの説明と一緒に表示されるヘルパーテキストをカスタマイズできます。ヘルパー テキストは Markdown をサポートしており、インデント リスト、テキスト フォーマット、およびインシデント対応者のための他の指示リソースへのハイパーリンクを使用できます。
 
 ### プロパティフィールド
 
-{{< img src="monitors/incidents/property_field_settings.jpeg" alt="プロパティフィールドの設定" style="width:80%;">}}
+{{< img src="service_management/incidents/property_field_settings.jpeg" alt="プロパティフィールドの設定" style="width:80%;">}}
 
 プロパティフィールドは、インシデントにタグを付けることができるメタデータの主要な部分です。これにより、[Homepage][4] でインシデントの特定のサブセットを検索したり、[Incident Management Analytics][2] でより堅牢なクエリを作成したりすることが容易になります。デフォルトのプロパティフィールドは 5 つあります。
 
@@ -88,7 +88,7 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 これはオープンベータ版の機能です。
 </div>
 
-{{< img src="monitors/incidents/responder_types_settings.png" alt="カスタム対応者タイプの作成に特化した設定セクション" style="width:80%;">}}
+{{< img src="service_management/incidents/responder_types_settings.png" alt="カスタム対応者タイプの作成に特化した設定セクション" style="width:80%;">}}
 
 対応者タイプの設定では、[インシデント対応者に割り当てる][11]カスタムロールを作成し、そのロールがインシデントごとに 1 人または複数人によって保持されることを意図しているかどうかを指定する機能を提供します。このロールは、[ロールベースアクセス制御 (RBAC)][12] システムとは無関係です。対応者タイプは、対応者が、独自のインシデント対応プロセスの定義に基づいて、インシデントでどのような責任を負うかを理解することを可能にします。デフォルトでは、2 つのロールがあります。
 
@@ -107,7 +107,7 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 
 ### インテグレーション
 
-{{< img src="monitors/incidents/integration_settings.jpeg" alt="インテグレーション設定" style="width:80%;">}}
+{{< img src="service_management/incidents/integration_settings.jpeg" alt="インテグレーション設定" style="width:80%;">}}
 
 インテグレーション設定は、Datadog [Slack アプリ][13]のインシデント管理機能を設定するための追加設定を提供します。構成するための設定は 2 つあります。
 
@@ -132,7 +132,7 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 
 ### メッセージテンプレート
 
-{{< img src="monitors/incidents/message_templates_settings.jpeg" alt="メッセージテンプレートの設定" style="width:80%;">}}
+{{< img src="service_management/incidents/message_templates_settings.jpeg" alt="メッセージテンプレートの設定" style="width:80%;">}}
 
 メッセージテンプレートは、動的で再利用可能なメッセージであり、[手動インシデント通知][15]や自動通知ルールで使用することができます。メッセージテンプレートは `{{incident.severity}}` のようなテンプレート変数を利用して、通知が送信されるインシデントから対応する値を動的に注入します。メッセージテンプレートは Markdown をサポートしており、インシデント通知にはテキストフォーマット、テーブル、インデントリスト、ハイパーリンクを含めることができます。多数のメッセージテンプレートをよりよく整理するために、各テンプレートは、作成プロセスでカテゴリを必要とします。
 
@@ -149,7 +149,7 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 
 ### ルール
 
-{{< img src="monitors/incidents/notification_rules_example.jpeg" alt="通知ルールの例" style="width:80%;">}}
+{{< img src="service_management/incidents/notification_rules_example.jpeg" alt="通知ルールの例" style="width:80%;">}}
 
 通知ルールを使用すると、インシデントについて特定のステークホルダーが自動的に通知されるシナリオを構成することができます。通知ルールにより、重要なステークホルダーに優先度の高いインシデントを知らせたり、新規インシデントが宣言または更新されたことを外部システムに知らせたり、特定のサービスやチームがインシデントを経験した場合、特定のレスポンダに通知したりすることが可能になります。
 
@@ -171,13 +171,13 @@ Declare Incident Helper Text 設定では、[インシデント作成モーダ�
 - *Copy* - 該当する通知ルールの上にカーソルを合わせ、ルールのトグルボタンの隣にある **Copy** アイコンをクリックします
 - *Delete* - 該当する通知ルールの上にカーソルを合わせ、ルールのトグルボタンの隣にある **Delete** アイコンをクリックします
 
-{{< img src="monitors/incidents/notification_rules_list.jpeg" alt="通知ルールリスト" style="width:80%;">}}
+{{< img src="service_management/incidents/notification_rules_list.jpeg" alt="通知ルールリスト" style="width:80%;">}}
 
 ## 修復
 
 ### Postmortem テンプレート
 
-{{< img src="monitors/incidents/postmortem_template_settings.jpeg" alt="Postmortem テンプレートの設定" style="width:80%;">}}
+{{< img src="service_management/incidents/postmortem_template_settings.jpeg" alt="Postmortem テンプレートの設定" style="width:80%;">}}
 
 Postmortem テンプレートは、動的で再利用可能なテンプレートで、インシデントが解決された後にインシデント情報が自動的に入力される [Datadog ノートブック][10]を作成するために使用されます。Postmortem テンプレートは、`{{incident.severity}}` のようなテンプレート変数を利用して、Postmortem が作成されているインシデントから対応する値を動的に注入します。Postmortem テンプレートは Markdown をサポートしており、結果のノートブックにテキストフォーマット、テーブル、インデントされたリスト、ハイパーリンクが含まれます。
 

@@ -195,6 +195,12 @@ main:
     identifier: glossary
     parent: essentials_heading
     weight: 15000
+  - name: Guides
+    url: all_guides/
+    pre: compass
+    identifier: guides
+    parent: essentials_heading
+    weight: 16000
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -1030,76 +1036,76 @@ main:
     parent: monitor_types
     identifier: monitor_types_composite
     weight: 208
-  - name: Error Tracking
-    url: monitors/types/error_tracking/
-    parent: monitor_types
-    identifier: monitor_types_error_tracking
-    weight: 209
-  - name: Event
-    url: monitors/types/event/
-    parent: monitor_types
-    identifier: monitor_types_event
-    weight: 210
-  - name: Forecast
-    url: monitors/types/forecasts/
-    parent: monitor_types
-    identifier: monitor_types_forecasts
-    weight: 211
-  - name: Integration
-    url: monitors/types/integration/
-    parent: monitor_types
-    identifier: monitor_types_integration
-    weight: 212
-  - name: Live Process
-    url: monitors/types/process/
-    parent: monitor_types
-    identifier: monitor_types_process
-    weight: 213
-  - name: Logs
-    url: monitors/types/log/
-    parent: monitor_types
-    identifier: monitor_types_log
-    weight: 214
-  - name: Network
-    url: monitors/types/network/
-    parent: monitor_types
-    identifier: monitor_types_network
-    weight: 215
-  - name: Outlier
-    url: monitors/types/outlier/
-    parent: monitor_types
-    identifier: monitor_types_outlier
-    weight: 216
-  - name: Process Check
-    url: monitors/types/process_check/
-    parent: monitor_types
-    identifier: monitor_types_process_check
-    weight: 217
-  - name: Real User Monitoring
-    url: monitors/types/real_user_monitoring/
-    parent: monitor_types
-    identifier: monitor_types_rum
-    weight: 218
-  - name: Service Check
-    url: monitors/types/service_check/
-    parent: monitor_types
-    identifier: monitor_types_service_check
-    weight: 219
-  - name: SLO Alerts
-    url: monitors/types/slo/
-    parent: monitor_types
-    identifier: monitor_types_slo
-    weight: 220
-  - name: Watchdog
-    url: monitors/types/watchdog/
-    parent: monitor_types
-    identifier: monitor_types_watchdog
-    weight: 221
   - name: Database Monitoring
     url: monitors/types/database_monitoring/
     parent: monitor_types
     identifier: monitor_types_database_monitoring
-    weight: 222
+    weight: 211
+  - name: Error Tracking
+    url: monitors/types/error_tracking/
+    parent: monitor_types
+    identifier: monitor_types_error_tracking
+    weight: 213
+  - name: Event
+    url: monitors/types/event/
+    parent: monitor_types
+    identifier: monitor_types_event
+    weight: 215
+  - name: Forecast
+    url: monitors/types/forecasts/
+    parent: monitor_types
+    identifier: monitor_types_forecasts
+    weight: 217
+  - name: Integration
+    url: monitors/types/integration/
+    parent: monitor_types
+    identifier: monitor_types_integration
+    weight: 219
+  - name: Live Process
+    url: monitors/types/process/
+    parent: monitor_types
+    identifier: monitor_types_process
+    weight: 221
+  - name: Logs
+    url: monitors/types/log/
+    parent: monitor_types
+    identifier: monitor_types_log
+    weight: 223
+  - name: Network
+    url: monitors/types/network/
+    parent: monitor_types
+    identifier: monitor_types_network
+    weight: 225
+  - name: Outlier
+    url: monitors/types/outlier/
+    parent: monitor_types
+    identifier: monitor_types_outlier
+    weight: 227
+  - name: Process Check
+    url: monitors/types/process_check/
+    parent: monitor_types
+    identifier: monitor_types_process_check
+    weight: 229
+  - name: Real User Monitoring
+    url: monitors/types/real_user_monitoring/
+    parent: monitor_types
+    identifier: monitor_types_rum
+    weight: 231
+  - name: Service Check
+    url: monitors/types/service_check/
+    parent: monitor_types
+    identifier: monitor_types_service_check
+    weight: 233
+  - name: SLO Alerts
+    url: monitors/types/slo/
+    parent: monitor_types
+    identifier: monitor_types_slo
+    weight: 235
+  - name: Watchdog
+    url: monitors/types/watchdog/
+    parent: monitor_types
+    identifier: monitor_types_watchdog
+    weight: 237
   - name: Notifications
     url: monitors/notify/
     parent: alerting
@@ -1462,6 +1468,11 @@ main:
     parent: tracing_otel_inst
     identifier: tracing_otel_inst_go
     weight: 104
+  - name: Node.js
+    url: tracing/trace_collection/otel_instrumentation/nodejs/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_nodejs
+    weight: 105
   - name: .NET
     url: tracing/trace_collection/otel_instrumentation/dotnet/
     parent: tracing_otel_inst
@@ -4608,9 +4619,9 @@ api:
     url: /api/latest/downtimes/
     identifier: downtimes
     generated: true
-  - name: Get all downtimes for a monitor
-    url: '#get-all-downtimes-for-a-monitor'
-    identifier: downtimes-get-all-downtimes-for-a-monitor
+  - name: Get active downtimes for a monitor
+    url: '#get-active-downtimes-for-a-monitor'
+    identifier: downtimes-get-active-downtimes-for-a-monitor
     parent: downtimes
     generated: true
     params:
@@ -7006,6 +7017,18 @@ api:
         - ListTests
       unstable: []
       order: 10
+  - name: Get the default locations
+    url: '#get-the-default-locations'
+    identifier: synthetics-get-the-default-locations
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsDefaultLocations
+      unstable: []
+      order: 28
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: synthetics-edit-a-private-location
@@ -8014,7 +8037,7 @@ api:
       operationids:
         - SearchCIAppPipelineEvents
       unstable: []
-      order: 2
+      order: 3
   - name: Get a list of pipelines events
     url: '#get-a-list-of-pipelines-events'
     identifier: ci-visibility-pipelines-get-a-list-of-pipelines-events
@@ -8026,7 +8049,7 @@ api:
       operationids:
         - ListCIAppPipelineEvents
       unstable: []
-      order: 1
+      order: 2
   - name: Aggregate pipelines events
     url: '#aggregate-pipelines-events'
     identifier: ci-visibility-pipelines-aggregate-pipelines-events
@@ -8038,7 +8061,19 @@ api:
       operationids:
         - AggregateCIAppPipelineEvents
       unstable: []
-      order: 3
+      order: 4
+  - name: Send pipeline event
+    url: '#send-pipeline-event'
+    identifier: ci-visibility-pipelines-send-pipeline-event
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCIAppPipelineEvent
+      unstable: []
+      order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
     identifier: ci-visibility-tests

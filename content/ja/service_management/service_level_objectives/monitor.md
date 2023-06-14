@@ -18,7 +18,7 @@ title: モニターベース SLO
 
 時間ベースのデータセットは、通常、モニターベースの SLO にうまく対応します。モニターベースの SLO を使用すると、システムが正常な動作を示した時間を総時間で割ることで、 サービスレベル指標 (SLI) を計算することができます。
 
-{{< img src="monitors/service_level_objectives/grouped_monitor_based_slo.png" alt="モニターベース SLO の例" >}}
+{{< img src="service_management/service_level_objectives/grouped_monitor_based_slo.png" alt="モニターベース SLO の例" >}}
 
 ## 前提条件
 
@@ -73,7 +73,7 @@ SLO の名前と詳細な説明を選択します。SLO に関連付けるタグ
 
 ## ステータス計算
 
-{{< img src="monitors/service_level_objectives/aggregate_slo.jpg" alt="SLO の詳細では、8 つのグループが集計され、99% が緑色であることが表示されている" >}}
+{{< img src="service_management/service_level_objectives/aggregate_slo.jpg" alt="SLO の詳細では、8 つのグループが集計され、99% が緑色であることが表示されている" >}}
 
 Datadog は、特定のグループが選択されていない限り、すべてのモニターまたはモニターグループのアップタイム率として、全体的な SLO ステータスを計算します。特定のグループが選択されている場合、SLO ステータスはそれらのグループのみを使って計算されます。特定のグループが選択されていない場合、UI はステータスが最も悪い 5 つのグループを表示します。
 
