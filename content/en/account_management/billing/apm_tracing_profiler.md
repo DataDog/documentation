@@ -73,7 +73,7 @@ Using five APM Enterprise hosts with six apps running in separate containers per
 
 ### APM Hosts, Fargate, and indexed spans
 
-Using 5 APM hosts, sending 20 million Indexed Spans, and have deployed APM on average 20 Fargate Tasks over the month.
+Using five APM hosts, sending 20 million Indexed Spans, and have deployed APM on average 20 Fargate Tasks over the month.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula             | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
