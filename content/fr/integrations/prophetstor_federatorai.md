@@ -108,7 +108,7 @@ tile:
 
 [Federator.ai de ProphetStor][1] est une solution basée sur l'IA qui permet aux entreprises de gérer, optimiser et redimensionner automatiquement les ressources de toutes les applications sur Kubernetes. En utilisant des algorithmes d'apprentissage automatique avancés pour prévoir la charge de travail des applications, Federator.ai déploie la bonne quantité de ressources au bon moment pour optimiser les performances des applications.
 
-* Un système de prédiction de la charge de travail basé sur l'IA pour les applications conteneurisées dans les clusters Kubernetes et les machines virtuelles dans les clusters VMware
+* Un système de prédiction de la charge de travail basé sur l'IA pour les applications conteneurisées dans les clusters Kubernetes et les machines virtuelles dans les clusters VMware 
 * Des recommandations de ressources basées sur des métriques relatives à la prédiction des charges, aux applications ou encore à Kubernetes
 * Un autoscaling des conteneurs d'application
 * Des analyses de coûts pour des environnements avec plusieurs clouds, ainsi que des recommandations reposant sur les prédictions de charge pour les clusters Kubernetes et clusters de VM
