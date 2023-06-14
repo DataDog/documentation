@@ -36,12 +36,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 ## Integrations
 
-### Levels of framework support
-
-| **Level**                                              | **Support provided**                                                                                                                                |
-|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Not Supported</span>      |  No implementation. Contact [Datadog support][2] for special requests.                                                                              |
-| <span id="full-support">Supported</span>                    |  All capabilities work as intended. ASM can detect threats, block requests and report vulnerabilities. |                                                                                                                                   
+                                                                                                                                 
 
 ### Web framework compatibility
 
