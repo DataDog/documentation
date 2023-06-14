@@ -1,7 +1,7 @@
 ---
-title: Configure the Datadog Agent or Tracer for Data Security
+title: Configure for Data Security
 kind: documentation
-description: "Configure the Datadog Tracer or Agent to modify or discard spans for security or fine-tuning purposes."
+description: "Configure the Client library or Agent to control the collection of sensitive data in traces."
 aliases:
     - /tracing/security
     - /tracing/guide/security
@@ -13,11 +13,10 @@ aliases:
 ---
 ## Overview
 
-The performance data and traces that you're collecting with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, it may contain synthetic traffic that might cause your error counts to be inaccurate or Datadog to not accurately indicate the health of your services.
+The Tracing Library collects data from an instrumented application that are sent to Datadog as traces. Instrumentations may collect data like personally identifiable information. If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent and the Tracing Libraries to remediate sensitive data at collection before traces are sent to Datadog.
 
-The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans, and various options are described below. These docs cover several common methods for configuring Tracer and Agent to achieve these security requirements.
+If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
-If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
 ## Generalizing resource names and filtering baseline
 
@@ -387,3 +386,4 @@ PCI compliance for APM is not available for the {{< region-param key="dd_site_na
 [9]: /tracing/trace_collection/custom_instrumentation/java/#extending-tracers
 [10]: /tracing/trace_collection/custom_instrumentation/ruby/?tab=activespan#post-processing-traces
 [11]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace-filtering
+[12]: /sensitive_data_scanner/
