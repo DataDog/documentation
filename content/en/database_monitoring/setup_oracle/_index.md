@@ -26,7 +26,7 @@ The Oracle versions below 19c are not supported.
 
 # Supported Agent versions: 
 
-The following custom build is supported: `7.44.1~dbm~oracle~beta~0.28-1`
+The following custom build is supported: `7.44.1~dbm~oracle~beta~0.28`
 
 # Prerequisites
 
