@@ -57,7 +57,7 @@ To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualization
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/explorer
+[1]: https://app.datadoghq.com/rum/sessions
 [2]: /real_user_monitoring/explorer/group
 [3]: /real_user_monitoring/explorer/search_syntax
 [4]: /real_user_monitoring/explorer/visualize
