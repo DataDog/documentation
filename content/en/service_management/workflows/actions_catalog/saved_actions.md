@@ -17,7 +17,7 @@ You may store, modify, and reuse the preset inputs of an Action using Saved Acti
 ## Save a configured action
 
 1. From the Workflow Canvas, click on the step with the configured Action.
-2. Click on the **Saved Actions** ({{< img src="service_management/workflows/saved-actions-button.png" alt="Saved Actions button" widht="24px">}}) button that appears in the top right of the side panel.
+2. Click on the **Saved Actions** ({{< img src="service_management/workflows/saved-actions-button.png" alt="Saved Actions button" width="24px" height="24px">}}) button that appears in the top right of the side panel.
 3. From the popover that shows up, click on **Save action configurations**.
 4. A dialog box appears with the Action configurations filled in for you to verify.
 5. Add a name and description to the Saved Action, choose whether or not you want to make it accessible for others in your organization to use.
@@ -26,7 +26,7 @@ You may store, modify, and reuse the preset inputs of an Action using Saved Acti
 ## Use a saved action
 
 1. Click on the plus (`+`) icon from the Workflow Canvas, toggle to Saved Actions. Search for a Saved Action using the search bar or browse through the list to find the Saved Action you're looking for. Click a Saved Action to add it as a configured step on your Workflow Canvas.
-2. Alternatively, if you already have a step added to the Workflow Canvas, select the step and click on the **Saved Actions** ({{< img src="service_management/workflows/saved-actions-button.png" alt="Saved Actions button" widht="24px">}}) button that appears on the top right of the configuration side panel. Select **Configure using a saved action** from the popover that opens.
+2. Alternatively, if you already have a step added to the Workflow Canvas, select the step and click on the **Saved Actions** ({{< img src="service_management/workflows/saved-actions-button.png" alt="Saved Actions button" width="24px" height="24px">}}) button that appears on the top right of the configuration side panel. Select **Configure using a saved action** from the popover that opens.
 3. A dialog box appears with the list of available Saved Actions for you to choose from.
 4. Click on **Use Saved Action** to confirm your selection.
 
