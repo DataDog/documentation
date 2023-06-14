@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 0
 ---
 
-## ASM capabilities support
+## ASM capabilities
 
 The following ASM capabilities are supported in the Java library, for the specified tracer version:
 
