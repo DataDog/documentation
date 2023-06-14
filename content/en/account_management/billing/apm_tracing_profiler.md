@@ -167,7 +167,7 @@ Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `d
 
 Yes. Let Datadog know if you are interested in buying the Continuous Profiler without APM. Reach out to [Sales][8] or your [Customer Success Manager][9].
 
-**10. Is the Data Streams Monitoring available as a standalone product?**
+**10. Is Data Streams Monitoring available as a standalone product?**
 
 Yes. Let Datadog know if you are interested in using Data Streams Monitoring without APM. Reach out to [Sales][8] or your [Customer Success Manager][9].
 
