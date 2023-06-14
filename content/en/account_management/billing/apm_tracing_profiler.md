@@ -53,7 +53,7 @@ Using 5 APM hosts and sending 30 million Indexed Spans, with 900 GB of total Ing
 
 ### APM Pro Hosts, indexed spans, and extra ingested spans 
 
-Using 5 APM Pro hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans.
+Using five APM Pro hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans.
 
 | Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
