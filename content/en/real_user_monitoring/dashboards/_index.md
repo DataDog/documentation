@@ -14,7 +14,7 @@ When you create a RUM application, Datadog [collects data][1] and generates dash
 
 {{< img src="real_user_monitoring/dashboards/rum_application_overview_dashboard-3.png" alt="RUM Application Overview page" style="width:90%;" >}}
 
-Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or by clicking on a dashboard's **Application Overview** in the [**RUM Applications** page][3].
+Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or from your application summary pages (**Real User Monitoring > Performance Summary** and **Real User Monitoring > Analytics Summary**).
 
 {{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
 
@@ -27,7 +27,7 @@ Access your RUM dashboards by filtering for `RUM` in the search query of the [**
 
 ## Interact with RUM dashboards
 
-You can clone [dashboards][4] and customize them to explore your application's data in the [RUM Explorer][5].
+You can clone [dashboards][3] and customize them to explore your application's data in the [RUM Explorer][4].
 
 ### Template variables
 
@@ -45,7 +45,7 @@ To explore individual events, click on a graph and click **View RUM events**. Th
 
 To clone your RUM dashboards, click the **Settings** icon and select **Clone dashboard**. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the **+** icon. 
 
-You can also modify the template variables and create a [saved view][6].
+You can also modify the template variables and create a [saved view][5].
 
 ## Further Reading
 
@@ -53,7 +53,6 @@ You can also modify the template variables and create a [saved view][6].
 
 [1]: /real_user_monitoring/data_collected/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: https://app.datadoghq.com/rum/list
-[4]: /dashboards/
-[5]: /real_user_monitoring/explorer/
-[6]: /real_user_monitoring/explorer/saved_views/
+[3]: /dashboards/
+[4]: /real_user_monitoring/explorer/
+[5]: /real_user_monitoring/explorer/saved_views/

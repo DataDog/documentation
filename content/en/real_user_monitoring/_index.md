@@ -179,7 +179,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/list
+[1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /real_user_monitoring/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/
