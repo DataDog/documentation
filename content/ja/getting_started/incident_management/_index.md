@@ -187,7 +187,7 @@ Incident Management をカスタマイズするには、[インシデント設�
 
 また、インシデントの宣言と編集、Slack や Zoom などとのインテグレーションにより、チームへの迅速なコミュニケーションも可能です。
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
 
 ## その他の参考資料
 
