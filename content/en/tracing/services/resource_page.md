@@ -67,7 +67,7 @@ You can also view a map of all of a resource's upstream and downstream service d
 
 The dependency map is only available for resources containing service entry spans.
 
-{{< img src="tracing/visualization/resource/dependency-map-navigator.png" alt="dependency map navigator" style="width:100%;">}}
+{{< img src="tracing/visualization/resource/dependency-map-navigator.png" alt="dependency map navigator" style="width:100%;" >}}
 
 Hover over a node to view metrics of each service including requests/second, error rate, and average latency. Click on a node to open a context menu with options to view the Service Page, related traces, and more.
 
