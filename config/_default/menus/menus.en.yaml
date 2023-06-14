@@ -8037,7 +8037,7 @@ api:
       operationids:
         - SearchCIAppPipelineEvents
       unstable: []
-      order: 2
+      order: 3
   - name: Get a list of pipelines events
     url: '#get-a-list-of-pipelines-events'
     identifier: ci-visibility-pipelines-get-a-list-of-pipelines-events
@@ -8049,7 +8049,7 @@ api:
       operationids:
         - ListCIAppPipelineEvents
       unstable: []
-      order: 1
+      order: 2
   - name: Aggregate pipelines events
     url: '#aggregate-pipelines-events'
     identifier: ci-visibility-pipelines-aggregate-pipelines-events
@@ -8061,7 +8061,19 @@ api:
       operationids:
         - AggregateCIAppPipelineEvents
       unstable: []
-      order: 3
+      order: 4
+  - name: Send pipeline event
+    url: '#send-pipeline-event'
+    identifier: ci-visibility-pipelines-send-pipeline-event
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCIAppPipelineEvent
+      unstable: []
+      order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
     identifier: ci-visibility-tests
