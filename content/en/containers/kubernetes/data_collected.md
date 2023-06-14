@@ -25,6 +25,17 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
+This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. These include:
+
+- Metrics
+  - [Kubernetes](#kubernetes)
+  - [Kubelet](#kubelet)
+  - [Kubernetes state](#kubernetes-state)
+  - [Kubernetes DNS](#kubernetes-dns)
+  - [Kubernetes proxy](#kubernetes-proxy)
+- Events
+- Service Checks
+
 ## Metrics
 
 Metrics collected by the Agent when deployed on your Kubernetes cluster:
