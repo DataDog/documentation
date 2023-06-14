@@ -23,7 +23,7 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 
 To build a funnel, navigate to **UX Monitoring > Funnels** . You can also find the Funnels tab by going to the **Product Analytics** page within RUM.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab-new.png" alt="Navigate to the Funnels tab within RUM" style="width:100%;" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab-updated.png" alt="Navigate to the Funnels tab within RUM" style="width:100%;" >}}
 
 From this view, build your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
 
