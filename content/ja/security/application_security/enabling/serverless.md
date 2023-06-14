@@ -77,6 +77,32 @@ Datadog Serverless Framework プラグインをインストールして構成す
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 1. Datadog トレーサーをインストールします。
+   - **Python** 
+       ```sh
+       # Use this format for x86-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+
+          # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          ```
+          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Python37`、`Python38` または `Python39` が利用可能です。
+
+   - **Node**   
+       ``` sh
+       # Use this format for AWS commercial regions
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+
+         # Use this format for AWS GovCloud regions
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         ```  
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
+
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
      # In AWS commercial regions
@@ -115,6 +141,33 @@ Datadog Serverless Framework プラグインをインストールして構成す
 
 {{< site-region region="ap1" >}}
 1. Datadog トレーサーをインストールします。
+   - **Python** 
+       ```sh
+       # Use this format for x86-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS commercial regions
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+
+          # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+
+          # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          ```
+          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Python37`、`Python38` または `Python39` が利用可能です。
+
+   - **Node**   
+       ``` sh
+       # Use this format for AWS commercial regions
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+
+         # Use this format for AWS GovCloud regions
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         ```  
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
+
+
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
      # In AWS commercial regions
@@ -167,7 +220,14 @@ Datadog Serverless Framework プラグインをインストールして構成す
    environment:
      DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+     DD_TRACE_ENABLED: true
    ```
+4. **Node** 関数と **Python** 関数のみ、関数のハンドラーが正しく設定されていることを再確認してください。
+    - **Node**: 関数のハンドラーを `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler` に設定します。
+       - また、元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
+    - **Python**: 関数のハンドラーを `datadog_lambda.handler.handler` に設定します。
+       - また、元のハンドラーに、環境変数 `DD_LAMBDA_HANDLER` を設定します。例: `myfunc.handler`。
+
 4. 関数を再デプロイして呼び出します。数分後、[ASM ビュー][3]に表示されます。
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
