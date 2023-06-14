@@ -41,7 +41,7 @@ Identify which of your services are exposed to security risks and would most ben
 2. **No service recommended by Datadog?.** In case no vulnerabilities or suspicious requests are reported yet:
 
    - Ensure your services are using a recent Datadog tracing library version. From [APM Service Catalog][2]: click on service to open sidepanel > Tracing Configuration.
-  // Add image for Tracing configuration here 
+ {{< img src="getting_started/appsec/ASM_Tracing_Configuration_View.png" alt="Tracer Configuration tab in APM Service Catalog page view. Highlighting which version of the Datadog Agent and Datadog tracing library are being used by your services." style="width:100%;" >}}
    - Identify services that are exposed to traffic coming from the internet and go ahead with the ASM setup.
   
     Once you’ve identified a couple of services under security risks, it is time to enable ASM.
