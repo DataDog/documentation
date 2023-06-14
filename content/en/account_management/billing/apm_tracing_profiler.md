@@ -108,7 +108,7 @@ App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 
 
 ### APM Enterprise Hosts with Kubernetes nodes and indexed spans
 
-APM Enterprise for apps with a Datadog Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans. 10 of these worker nodes have 8 pods each with 1 container per pod, the other 10 have 2 pods each with 1 container per pod. 
+APM Enterprise for apps with a Datadog Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans. 10 of these worker nodes have eight pods each with one container per pod, the other 10 have two pods each with one container per pod. 
 
 | Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
