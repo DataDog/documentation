@@ -84,7 +84,7 @@ Using five APM hosts, sending 20 million Indexed Spans, and have deployed APM on
 
 ### APM Enterprise Hosts, services, containers, and indexed spans
 
-APM Enterprise for service 1 running on container 1, service 2 running on container 2. Both Containers are running on 1 host and are sending 20 million Indexed Spans on App Analytics. 
+APM Enterprise for service 1 running on container 1, service 2 running on container 2. Both Containers are running on one host and are sending 20 million Indexed Spans on App Analytics. 
 
 | Billable Unit  | Quantity   | Price                                                                                          | Formula      | Subtotal             |
 |----------------|------------|------------------------------------------------------------------------------------------------|--------------|----------------------|
