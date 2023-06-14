@@ -16,18 +16,10 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta. Contact your Customer Success Manager for information on the required Agent build and installation instructions.
+The features described on this page are in private beta.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
-
-## Before you begin
-
-Supported Oracle versions
-: 19c, 21c
-
-Supported Agent versions
-: For more information on the required Agent build, contact your Customer Success Manager.
 
 ## Setup
 

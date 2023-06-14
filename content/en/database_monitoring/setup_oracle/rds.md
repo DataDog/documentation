@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta. Contact your Customer Success Manager for information on the required Agent build and installation instructions.
+The features described on this page are in private beta.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
@@ -55,7 +55,7 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAFILE','DATADOG','SELECT',p_
 
 ## Install the Agent
 
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note you must install the correct version to participate in the beta. Contact your Customer Success Manager for more information.
+To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note you must install the correct version to participate in the beta. 
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
 
@@ -86,6 +86,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][4].
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
+[7]: /database_monitoring/setup_oracle/selfhosted#Supported agent versions
 
 
 ## Further reading
