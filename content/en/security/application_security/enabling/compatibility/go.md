@@ -35,10 +35,6 @@ You must be running Datadog Agent v5.21.1+.
 You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
 
 ## Integrations
-Integrate the Go tracer with the following list of web frameworks using one of the corresponding APM tracer integrations. Refer to [Go's integrations documentation][1] for a detailed overview of the supported packages and their APIs, along with usage examples.
-
- 
-
 
 
 ### Web framework compatibility

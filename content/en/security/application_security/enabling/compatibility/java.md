@@ -45,7 +45,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detections is supported on all libraries
+- Open Source Vulnerability Detections is supported on all frameworks
 
 
 
@@ -75,7 +75,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 - Request-based blocking
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all libraries
+- Open Source Vulnerability Detection is supported on all frameworks
 
 
 
@@ -103,7 +103,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all libraries
+- Open Source Vulnerability Detection is supported on all frameworks
 - Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
 
 | Database                | Versions | Threat Detection supported? |  Custom Code Vulnerability Detection supported? |
