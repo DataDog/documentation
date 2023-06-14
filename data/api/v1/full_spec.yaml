@@ -17717,9 +17717,19 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg:
+          description: Host count average of Cloud Cost Management for AWS for the
+            given date and given organization.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg:
+          description: Host count average of Cloud Cost Management for Azure for the
+            given date and given organization.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg:
-          description: Host count average of Cloud Cost Management for the given date
-            and given organization.
+          description: Host count average of Cloud Cost Management for all cloud providers
+            for the given date and given organization.
           format: int64
           type: integer
         container_avg:
@@ -17879,6 +17889,11 @@ components:
         mobile_rum_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -18124,9 +18139,19 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg:
+          description: Host count average of Cloud Cost Management for AWS for the
+            given date and given org.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg:
+          description: Host count average of Cloud Cost Management for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg:
-          description: Host count average of Cloud Cost Management for the given date
-            and given org.
+          description: Host count average of Cloud Cost Management for all cloud providers
+            for the given date and given org.
           format: int64
           type: integer
         container_avg:
@@ -18285,6 +18310,11 @@ components:
         mobile_rum_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -18540,8 +18570,19 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management for
+            AWS.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management for
+            Azure.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg_sum:
-          description: Sum of the host count average for Cloud Cost Management.
+          description: Sum of the host count average for Cloud Cost Management for
+            all cloud providers.
           format: int64
           type: integer
         container_avg_sum:
@@ -18729,6 +18770,11 @@ components:
         mobile_rum_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         mobile_rum_units_agg_sum:

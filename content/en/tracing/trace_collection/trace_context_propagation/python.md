@@ -4,6 +4,10 @@ kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 The Datadog APM tracer supports extraction and injection of [B3][2] and [W3C][3] headers for distributed tracing.
@@ -31,6 +35,10 @@ override any value provided in `DD_TRACE_PROPAGATION_STYLE`.
 If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://github.com/openzipkin/b3-propagation
 [3]: https://github.com/w3c/trace-context
