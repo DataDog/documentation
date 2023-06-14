@@ -119,16 +119,31 @@ Additional tags are added through the `DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS` envi
 Add the environment variable on both the Process Agent and the Cluster Agent by setting `agents.containers.processAgent.env` and `clusterAgent.env` in `datadog-agent.yaml`.
 
 ```yaml
-agents:
-  containers:
-    processAgent:
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  features:
+    liveContainerCollection:
+      enabled: true
+    orchestratorExplorer:
+      enabled: true
+  override:
+    agents:
+      containers:
+        processAgent:
+          env:
+            - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
+              value: "tag1:value1 tag2:value2"
+    clusterAgent:
       env:
         - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
           value: "tag1:value1 tag2:value2"
-clusterAgent:
-  env:
-    - name: "DD_ORCHESTRATOR_EXPLORER_EXTRA_TAGS"
-      value: "tag1:value1 tag2:value2"
 ```
 
 Then, apply the new configuration:
