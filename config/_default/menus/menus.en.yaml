@@ -608,7 +608,7 @@ main:
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
     weight: 2
-  - name: OTel Runtime Metrics
+  - name: Runtime Metrics
     url: opentelemetry/runtime_metrics
     identifier: otel_runtime_metrics
     parent: opentelemetry_top_level
