@@ -9,6 +9,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/
   tag: ブログ
   text: Datadog Workflows でエンドツーエンドプロセスを自動化する
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ

@@ -214,7 +214,6 @@ runtime_security_config:
 
   remote_configuration:
     ## @param 有効 - ブール値 - オプション - デフォルト: false
-    ## [Datadog Agent] バージョン 7.42 のみ、リモート構成を有効にする場合
     enabled: true
 ```
 

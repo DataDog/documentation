@@ -45,6 +45,165 @@ describe('App', () => {
 
 If you use a test runner other than Jest, you need to create the mocks for your test runner.
 
+## Initialization paramaters
+
+You can specify the following parameters in your configuration when initializing the SDK:
+
+`clientToken`
+: Required<br/>
+**Type**: String<br/>
+A [Datadog client token][8].
+
+`env`
+: Required<br/>
+**Type**: String<br/>
+The application's environment, for example: prod, pre-prod, and staging. Follows the [tag syntax requirements][15].
+
+`applicationId`
+: Required<br/>
+**Type**: String<br/>
+The RUM application ID.
+
+`trackInteractions`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false` <br/>
+Enables automatic collection of user actions.
+
+`trackResources`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false` <br/>
+Enables collection of resource events.
+
+`trackErrors`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false` <br/>
+Enables collection of React Native crashes.
+
+`site`
+: Optional<br/>
+**Type**: String<br/>
+**Default**: `US1`<br/>
+[The Datadog site parameter of your organization][9].
+
+`serviceName`
+: Optional<br/>
+**Type**: String<br/>
+The service name for your application. Follows the [tag syntax requirements][15].
+
+`version`
+: Optional<br/>
+**Type**: String<br/>
+The application's version. For example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][15].
+
+`versionSuffix`
+: Optional<br/>
+**Type**: String<br/>
+Add a suffix to the reported version of the app. Accepted characters are alphanumerics and `_`, `-`, `:`, `.`, `/`. Other special characters are converted to underscores. A dash (`-`) is automatically added between the version and the suffix. Follows the [tag syntax requirements][15].
+
+`trackFrustrations`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `true` <br/>
+Enables [automatic collection of user frustrations][11]. Implies `trackInteractions: true`.
+
+`nativeCrashReportEnabled`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false` <br/>
+Enables crash reporting for native plaforms (iOS, Android).
+
+`sampleRate`
+: Optional - **Deprecated**<br/>
+**Type**: Number<br/>
+**Default**: `100`<br/>
+See `sessionSampleRate`.
+
+`sessionSampleRate`
+: Optional<br/>
+**Type**: Number<br/>
+**Default**: `100`<br/>
+The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events.
+
+`resourceTracingSamplingRate`
+: Optional<br/>
+**Type**: Number<br/>
+**Default**: `20`<br/>
+The percentage of requests to trace: `100` for all, `0` for none. For more information, see [Connect RUM and Traces][12].
+
+`verbosity`
+: Optional<br/>
+**Type**: SdkVerbosity<br/>
+**Default**: `undefined`<br/>
+Verbosity for internal SDK logging. Set to `SdkVerbosity.DEBUG` to debug your SDK implementation.
+
+`nativeViewTracking`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Enables native views tracking. Set to `true` if you use a custom navigation system relying on native views.
+
+`nativeInteractionTracking`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Enables native interaction tracking. Set to `true` if you want to track interactions on native screens.
+
+`firstPartyHosts`
+: Optional<br/>
+**Type**: List<br/>
+**Default**: `[]`<br/>
+Enables native views tracking. Set to `true` if you use a custom navigation system relying on native views. For more information, see [Connect RUM and Traces][12].
+
+`telemetrySampleRate`
+: Optional<br/>
+**Type**: Number<br/>
+**Default**: `20`<br/>
+Telemetry data (such as errors and debug logs) about SDK execution is sent to Datadog in order to detect and solve potential issues. Set this option to `0` to opt out from telemetry collection.
+
+`longTaskThresholdMs`
+: Optional<br/>
+**Type**: Number | false<br/>
+**Default**: `0`<br/>
+The threshold for javascript long tasks reporting in milliseconds. Setting it to `0` or `false` disables javascript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
+
+`nativeLongTaskThresholdMs`
+: Optional<br/>
+**Type**: Number | false<br/>
+**Default**: `200`<br/>
+The threshold for native long tasks reporting in milliseconds. Setting it to `0` or `false` disables javascript long task reporting. Values below `100` are raised to `100`. Values above `5000` are lowered to `5000`.
+
+`vitalsUpdateFrequency`
+: Optional<br/>
+**Type**: VitalsUpdateFrequency<br/>
+**Default**: `VitalsUpdateFrequency.AVERAGE`<br/>
+Sets the preferred frequency for collecting mobile vitals.
+
+`uploadFrequency`
+: Optional<br/>
+**Type**: UploadFrequency<br/>
+**Default**: `UploadFrequency.AVERAGE`<br/>
+Sets the preferred frequency for uploading batches of data.
+
+`batchSize`
+: Optional<br/>
+**Type**: BatchSize<br/>
+**Default**: `BatchSize.MEDIUM`<br/>
+Defines the Datadog SDK policy when batching data together before uploading it to Datadog servers. Smaller batches mean smaller but more network requests, whereas larger batches mean fewer but larger network requests.
+
+`trackBackgroundEvents`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Enables tracking of RUM event when no RUM View is active. By default, background events are not tracked. Enabling this feature might increase the number of sessions tracked and impact your billing.
+
+`proxyConfig`
+: Optional<br/>
+**Type**: ProxyConfiguration<br/>
+Optional proxy configuration.
+
 ## Manual instrumentation
 
 If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
@@ -290,3 +449,8 @@ const configuration = {
 [5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
+[8]: /account_management/api-app-keys/#client-tokens
+[9]: /getting_started/site/
+[11]: /real_user_monitoring/frustration_signals/
+[12]: /real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
+[15]: /getting_started/tagging/#defining-tags
