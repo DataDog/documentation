@@ -34,7 +34,7 @@ on:
       - master
 
 env:
-  ACTIVE_FREEZE: "true"
+  ACTIVE_FREEZE: "false"
   # toggle to true like below to enable + change the job unique name and add a required branch protection!
   # ACTIVE_FREEZE: "true"
 
