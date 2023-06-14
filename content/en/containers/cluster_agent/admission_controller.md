@@ -150,7 +150,7 @@ Only missing environment variables are added. For example, if a pod manifest def
 | `AVAILABILITY_ZONE` | Cloud provider availability zone where the pod is running |
 | `CONSUL_HTTP_ADDR` | Endpoint for Consul HTTP |
 | `DD_DATACENTER` | Datacenter name (for example, `US1` or `AP1`) |
-| `DD_ENTITY_ID` | Pod ID for origin detection. This is used by the Agent to attach the pod’s tags to metrics. |
+| `DD_ENTITY_ID` | Pod ID for origin detection. This is used by the Agent to attach the pod's tags to metrics. |
 | `DD_ENV` | Datacenter environment (for example, `staging` or `prod`) |
 | `DD_SERVICE` | The container service inherited from one of the following pod labels: `tags.datadoghq.com/service`, `service` |
 | `DD_SITE` | Datadog site for the datacenter (for example, `datadoghq.com` or `ap1.datadoghq.com`) |
