@@ -11,6 +11,9 @@ further_reading:
   - link: "/monitors/types/cloud_cost/"
     tag: "Documentation"
     text: "Configure a Cloud Cost monitor"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
+    tag: "blog"
+    text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
 ---
 ## Overview
 

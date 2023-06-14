@@ -97,6 +97,12 @@ Feature flag tracking is available for your Flutter applications. To start, set 
 
 [1]: https://docs.datadoghq.com/real_user_monitoring/flutter/
 {{% /tab %}}
+{{% tab "React Native" %}}
+
+Feature flag tracking is available for your React Native applications. To start, set up [RUM React Native monitoring][1]. You need the React Native RUM SDK version >= 1.7.0.
+
+[1]: https://docs.datadoghq.com/real_user_monitoring/reactnative/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Integrations
@@ -146,6 +152,14 @@ Each time a feature flag is evaluated, add the following function to send the fe
    ```dart
    DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
    ```
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+
+   ```javascript
+   DdRum.addFeatureFlagEvaluation(key, value);
+   ```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -191,6 +205,12 @@ LaunchDarkly does not support this integration. Create a ticket with LaunchDarkl
 {{% tab "Flutter" %}}
 
 LaunchDarkly does not support this integration. Create a ticket with LaunchDarkly to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
 
 
 {{% /tab %}}
@@ -298,6 +318,35 @@ For more information about initializing Split's SDK, see Split's [Flutter plugin
 
 [1]: https://help.split.io/hc/en-us/articles/8096158017165-Flutter-plugin
 {{% /tab %}}
+{{% tab "React Native" %}}
+
+Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+
+For more information about initializing Split's SDK, see Split's [React Native SDK documentation][1].
+
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {
+          DdRum
+              .addFeatureFlagEvaluation(
+                  impressionData.impression.feature,
+                  impressionData.impression.treatment
+              );
+    },
+  },
+});
+
+const client = factory.client();
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/4406066357901-React-Native-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+{{% /tab %}}
 {{< /tabs >}}
 
 
@@ -338,6 +387,11 @@ Flagsmith does not support this integration. Create a ticket with Flagsmith to r
 {{% tab "Flutter" %}}
 
 Flagsmith does not support this integration. Create a ticket with Flagsmith to request this feature.
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -390,6 +444,12 @@ DevCycle does not support this integration. Create a ticket with DevCycle to req
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
+
+DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
 
 DevCycle does not support this integration. Create a ticket with DevCycle to request this feature.
 
@@ -478,6 +538,52 @@ For more information about initializing Amplitude's SDK, see Amplitude's [Androi
 
 Amplitude does not support this integration. Create a ticket with Amplitude to request this feature.
 
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Statsig Integration
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Feature flag tracking is available in the RUM Browser SDK. For detailed set up instructions, visit [Getting started with feature flag data in RUM](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection).
+
+1. Update your Browser RUM SDK version 4.25.0 or above.
+2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]`.
+3. Initialize Statsig's SDK (`>= v4.34.0`) and implement the `gateEvaluationCallback` option as shown below:
+
+   ```javascript
+    await statsig.initialize('client-<STATSIG CLIENT KEY>',
+    {userID: '<USER ID>'},
+    {     
+        gateEvaluationCallback: (key, value) => {
+            datadogRum.addFeatureFlagEvaluation(key, value);
+        }
+    }
+    ); 
+   ```
+
+[1]: https://docs.statsig.com/client/jsClientSDK
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Statsig does not support this integration. Contact support@statsig.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Statsig does not support this integration. Contact support@statsig.com to request this feature.
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Statsig does not support this integration. Contact support@statsig.com to request this feature.
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Statsig does not currently support this integration. Contact support@statsig.com to request this feature.
 
 {{% /tab %}}
 {{< /tabs >}}

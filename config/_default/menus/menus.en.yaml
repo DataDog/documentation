@@ -195,6 +195,12 @@ main:
     identifier: glossary
     parent: essentials_heading
     weight: 15000
+  - name: Guides
+    url: all_guides/
+    pre: compass
+    identifier: guides
+    parent: essentials_heading
+    weight: 16000
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -1462,6 +1468,11 @@ main:
     parent: tracing_otel_inst
     identifier: tracing_otel_inst_go
     weight: 104
+  - name: Node.js
+    url: tracing/trace_collection/otel_instrumentation/nodejs/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_nodejs
+    weight: 105
   - name: .NET
     url: tracing/trace_collection/otel_instrumentation/dotnet/
     parent: tracing_otel_inst
@@ -4593,9 +4604,9 @@ api:
     url: /api/latest/downtimes/
     identifier: downtimes
     generated: true
-  - name: Get all downtimes for a monitor
-    url: '#get-all-downtimes-for-a-monitor'
-    identifier: downtimes-get-all-downtimes-for-a-monitor
+  - name: Get active downtimes for a monitor
+    url: '#get-active-downtimes-for-a-monitor'
+    identifier: downtimes-get-active-downtimes-for-a-monitor
     parent: downtimes
     generated: true
     params:
@@ -6991,6 +7002,18 @@ api:
         - ListTests
       unstable: []
       order: 10
+  - name: Get the default locations
+    url: '#get-the-default-locations'
+    identifier: synthetics-get-the-default-locations
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - GetSyntheticsDefaultLocations
+      unstable: []
+      order: 28
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: synthetics-edit-a-private-location
@@ -7999,7 +8022,7 @@ api:
       operationids:
         - SearchCIAppPipelineEvents
       unstable: []
-      order: 2
+      order: 3
   - name: Get a list of pipelines events
     url: '#get-a-list-of-pipelines-events'
     identifier: ci-visibility-pipelines-get-a-list-of-pipelines-events
@@ -8011,7 +8034,7 @@ api:
       operationids:
         - ListCIAppPipelineEvents
       unstable: []
-      order: 1
+      order: 2
   - name: Aggregate pipelines events
     url: '#aggregate-pipelines-events'
     identifier: ci-visibility-pipelines-aggregate-pipelines-events
@@ -8023,7 +8046,19 @@ api:
       operationids:
         - AggregateCIAppPipelineEvents
       unstable: []
-      order: 3
+      order: 4
+  - name: Send pipeline event
+    url: '#send-pipeline-event'
+    identifier: ci-visibility-pipelines-send-pipeline-event
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCIAppPipelineEvent
+      unstable: []
+      order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
     identifier: ci-visibility-tests
