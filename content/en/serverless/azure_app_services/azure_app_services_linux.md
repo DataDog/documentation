@@ -28,7 +28,7 @@ To instrument your application, begin by adding the following key-value pairs un
 - `DD_CUSTOM_METRICS_ENABLED` (optional) enables [custom metrics](#custom-metrics).
 - `DD_SITE` is the Datadog site [parameter][2]. Your site is {{< region-param key="dd_site" code="true" >}}. This value defaults to `datadoghq.com`.
 - `DD_SERVICE` is the service name used for this program. Defaults to the name field value in `package.json`.
-- `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (Unnecessary for applications running in Tomcat).
+- `DD_START_APP` is the command used to start your application. For example, `node ./bin/www` (unnecessary for applications running in Tomcat).
 
 ### Identifying your startup command
 
