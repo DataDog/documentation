@@ -25,22 +25,11 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. These include:
+This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. 
 
-- Metrics
-  - [Kubernetes](#kubernetes)
-  - [Kubelet](#kubelet)
-  - [Kubernetes state](#kubernetes-state)
-  - [Kubernetes DNS](#kubernetes-dns)
-  - [Kubernetes proxy](#kubernetes-proxy)
-- Events
-- Service Checks
+The set of metrics collected may vary depending on the version of Kubernetes in use.
 
 ## Metrics
-
-Metrics collected by the Agent when deployed on your Kubernetes cluster:
-
-**Note**: The set of metrics collected by the Datadog Kubernetes integration may vary depending on the version of Kubernetes in use.
 
 ### Kubernetes
 
@@ -48,11 +37,19 @@ Metrics collected by the Agent when deployed on your Kubernetes cluster:
 
 ### Kubelet
 
+For more information, see the documentation for the [Kubelet][1] integration.
+
 {{< get-metrics-from-git "kubelet" >}}
+
+### Kubernetes state metrics core
+
+For more information, see the documentation for the [Kubernetes state metrics core][6] integration. This check requires Datadog Cluster Agent v1.12+.
+
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes state
 
-Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics` API.
+Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics` API. The `kubernetes_state` check is a legacy check. For an alternative, see [Kubernetes state metrics core][6]. Datadog recommends that you do not enable both checks simultaneously.
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
@@ -63,6 +60,31 @@ Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics
 ### Kubernetes proxy
 
 {{< get-metrics-from-git "kube_proxy" >}}
+
+### Kubernetes API server
+
+For more information, see the documentation for the [Kubernetes API server][3] integration.
+
+{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+
+### Kubernetes controller manager
+
+For more information, see the documentation for the [Kubernetes controller anager][2] integration.
+
+{{< get-metrics-from-git "kube_controller_manager" >}}
+
+### Kubernetes metrics server
+
+For more information, see the documentation for the [Kubernetes metrics server][4] integration.
+
+{{< get-metrics-from-git "kube_metrics_server" >}}
+
+### Kubernetes scheduler
+
+For more information, see the documentation for the [Kubernetes scheduler][5] integration.
+
+{{< get-metrics-from-git "kube_scheduler" >}}
+
 
 ## Events
 
@@ -97,12 +119,41 @@ Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics
 
 ### Kubelet
 
+For more information, see the documentation for the [Kubelet][1] integration.
+
 {{< get-service-checks-from-git "kubelet" >}}
 
-### Kubernetes state
+### Kubernetes controller manager
 
-{{< get-service-checks-from-git "kubernetes_state" >}}
+For more information, see the documentation for the [Kubernetes controller manager][2] integration.
+
+{{< get-service-checks-from-git "kube_controller_manager" >}}
+
+### Kubernetes metrics server
+
+For more information, see the documentation for the [Kubernetes metrics server][4] integration.
+
+{{< get-service-checks-from-git "kube_metrics_server" >}}
+
+### Kubernetes scheduler
+
+For more information, see the documentation for the [Kubernetes scheduler][5] integration.
+
+{{< get-service-checks-from-git "kube_scheduler" >}}
+
+### Kubernetes state metrics core
+
+For more information, see the documentation for the [Kubernetes state metrics core][6] integration.
+
+{{< get-service-checks-from-git "kubernetes_state_core" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /integrations/kubelet/
+[2]: /integrations/kube_controller_manager/
+[3]: /integrations/kube_apiserver_metrics/
+[4]: /integrations/kube_metrics_server
+[5]: /integrations/kube_scheduler
+[6]: /integrations/kubernetes_state_core/
