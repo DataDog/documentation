@@ -16211,6 +16211,7 @@ components:
           description: The total number of audit logs lines indexed during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
