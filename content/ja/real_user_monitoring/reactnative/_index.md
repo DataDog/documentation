@@ -327,6 +327,19 @@ DdSdkReactNative.setAttributes({
 });
 ```
 
+## バックグラウンドイベントの追跡
+
+<div class="alert alert-info"><p>バックグラウンドイベントを追跡すると、セッションが追加され、課金に影響を与える可能性があります。ご質問は、<a href="https://docs.datadoghq.com/help/">Datadog サポートまでお問い合わせ</a>ください。</p>
+</div>
+
+アプリケーションがバックグラウンドにあるとき (例えば、アクティブなビューがないとき)、クラッシュやネットワークリクエストなどのイベントを追跡することができます。
+
+Datadog の構成で、初期化時に以下のスニペットを追加します。
+
+```javascript
+configuration.trackBackgroundEvents = true;
+```
+
 ## データストレージ
 
 ### Android
