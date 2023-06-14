@@ -18,24 +18,13 @@ The performance data and traces that you're collecting with Datadog can contain 
 The Datadog Agent and some tracing libraries have options available to address these situations and modify or discard spans, and various options are described below. These docs cover several common methods for configuring Tracer and Agent to achieve these security requirements.
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
+## Resource names
 
-## Generalizing resource names and filtering baseline
+Datadog spans include a resource name attribute which may contain sensitive data. The Datadog Agent implements obfuscation for several known cases:
 
-Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource names to facilitate grouping during analysis. In particular:
-
-* **Environment variables are not collected by the Agent**
-* **SQL variables are obfuscated, even when not using prepared statements**: For example, the following `sql.query` attribute: `SELECT data FROM table WHERE key=123 LIMIT 10` has its variables obfuscated, to become the following Resource name: `SELECT data FROM table WHERE key = ? LIMIT ?`
-* **SQL strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and does not obfuscate them.
-* **Numbers in Resource names (for example, request URLs) are obfuscated** For example, the following `elasticsearch` attribute:
-
-    ```text
-    Elasticsearch : {
-        method : GET,
-        url : /user.0123456789/friends/_count
-    }
-    ```
-
-    has its number in the URL obfuscated, to become the following Resource name: `GET /user.?/friends/_count`
+* **SQL numeric literals and bind variables are obfuscated**: For example, the following query `SELECT data FROM table WHERE key=123 LIMIT 10` is obfuscated to `SELECT data FROM table WHERE key = ? LIMIT ?` before setting the resource name for the query span.
+* **SQL literal strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and does not obfuscate them.
+* **Redis queries are quantized by selecting only command tokens**: For example, the following query `MULTI\nSET k1 v1\nSET k2 v2` is quantized to `MULTI SET SET`.
 
 ## Agent trace obfuscation
 
