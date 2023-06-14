@@ -28,11 +28,7 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 
 | JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
-| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
-| 8 to 17      | Linux (arm64)<br>Mac (arm64)                                                    | [Beta](#levels-of-support)               | Latest         |
-| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) | v0             |
-| 7            | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support)         | v0             |
+| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | Supported                | Latest         |
 
 Datadog does not officially support any early-access versions of Java.
 
@@ -69,10 +65,8 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 | Spring WebFlux          | 5.0+       |            |            |  {{< X >}} |
 | Tomcat                  | 5.5+       |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Vert.x                  | 3.4-3.9.x  |   {{< X >}} |  {{< X >}} |  {{< X >}} |
-| WebLogic                |            |   {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Websphere               |            |   {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Wildfly                 |            |   {{< X >}} |  {{< X >}} |  {{< X >}} |
 
+**Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss. Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
@@ -97,8 +91,8 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 | HttpURLConnection        | all         |  {{< X >}} |  |  |
 | Jax RS Clients           | 2.0+        |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
 | Jersey Server            | 1.9-2.29    |  {{< X >}} |  {{< X >}} |  {{< X >}} |
-| Netty HTTP Server        |             |  {{< X >}} |    |  |
-| RESTEasy                 |             |  {{< X >}} |    |  |
+| Netty HTTP Server        |  3.8+           |  {{< X >}} |    |  |
+| RESTEasy                 |  3.0.x          |  {{< X >}} |    |  |
 | Spring SessionAwareMessageListener     | 3.1+            |  {{< X >}} |  |  |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
@@ -115,7 +109,7 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 ##### ASM Capability Notes
 - Open Source Vulnerability Detection is supported on all libraries
-- Threat Protection is at the HTTP request (input) stage, and so works for all databases by default
+- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
 
 | Database                | Versions | Threat Detection supported? |  Custom Code Vulnerability Detection supported? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
@@ -123,11 +117,20 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 | Couchbase               | 2.0+     |  {{< X >}} |   |
 | JDBC                    | N/A      |  {{< X >}} |   {{< X >}} |
 | MongoDB                 | 3.0-4.0+ |  {{< X >}} |   |
-| MySQL                   |          |  {{< X >}} |   {{< X >}} |
-| Hibernate               |          |  {{< X >}} |   |
-| SQLite JDBC driver      |          |  {{< X >}} |   {{< X >}} |
-| Redis DB                |          |  {{< X >}} |  |
-| PostgreSQL JDBC driver  |          |  {{< X >}} |  {{< X >}} |
+
+`dd-java-agent` is also compatible with common JDBC drivers for Threat Detection, such as:
+
+- Apache Derby
+- Firebird SQL
+- H2 Database Engine
+- HSQLDB
+- IBM DB2
+- MariaDB
+- MSSQL (Microsoft SQL Server)
+- MySQL
+- Oracle
+- Postgres SQL
+- ScalikeJDBC
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
