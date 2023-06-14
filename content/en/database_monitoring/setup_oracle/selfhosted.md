@@ -180,7 +180,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][4].
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
-[7]: /database_monitoring/setup_oracle/_index#Supported-agent-versions
+[7]: /database_monitoring/setup_oracle/_index/#Supported-agent-versions
 
 
 ## Further reading
