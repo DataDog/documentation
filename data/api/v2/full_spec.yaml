@@ -498,6 +498,31 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Conflict
+    FindingsBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Bad Request: The server cannot process the request due to invalid
+        syntax in the request.'
+    FindingsForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Forbidden: Access denied'
+    FindingsNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Not Found: The requested finding cannot be found.'
+    FindingsTooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Too many requests: The rate limit set by the API has been exceeded.'
     ForbiddenResponse:
       content:
         application/json:
@@ -4541,34 +4566,6 @@ components:
       type: string
       x-enum-varnames:
       - FINDING
-    FindingsErrorItem:
-      description: API error response body
-      properties:
-        detail:
-          description: A human-readable explanation specific to this occurrence of
-            the error.
-          example: attribute "muted" is required
-          type: string
-        status:
-          description: Status code of the response.
-          example: '400'
-          type: string
-        title:
-          description: Short human-readable summary of the error.
-          example: Bad Request
-          type: string
-      type: object
-    FindingsErrorResponse:
-      description: API error response.
-      properties:
-        errors:
-          description: A list of errors.
-          items:
-            $ref: '#/components/schemas/FindingsErrorItem'
-          type: array
-      required:
-      - errors
-      type: object
     FormulaLimit:
       description: Message for specifying limits to the number of values returned
         by a query.
@@ -6863,6 +6860,34 @@ components:
             description: An empty error list.
             type: string
           type: array
+      type: object
+    JSONAPIErrorItem:
+      description: API error response body
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the error.
+          example: Missing required attribute in body
+          type: string
+        status:
+          description: Status code of the response.
+          example: '400'
+          type: string
+        title:
+          description: Short human-readable summary of the error.
+          example: Bad Request
+          type: string
+      type: object
+    JSONAPIErrorResponse:
+      description: API error response.
+      properties:
+        errors:
+          description: A list of errors.
+          items:
+            $ref: '#/components/schemas/JSONAPIErrorItem'
+          type: array
+      required:
+      - errors
       type: object
     JiraIntegrationMetadata:
       description: Incident integration metadata for the Jira integration.
@@ -22045,13 +22070,16 @@ paths:
         can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*`
         to filter for any non-AWS resources.\n\nThe operator must come after the equal
         sign. For example, to filter with the `>=` operator, add the operator after
-        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\n### Response\n\nThe
-        response includes an array of finding objects, pagination metadata, and a
-        count of items that match the query.\n\nEach finding object contains the following:\n\n-
-        The finding ID that can be used in a `GetFinding` request to retrieve the
-        full finding details.\n- Core attributes, including status, evaluation, high-level
-        resource details, muted state, and rule details.\n- `evaluation_changed_at`
-        and `resource_discovery_date` time stamps.\n- An array of associated tags.\n"
+        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery
+        parameters must be only among the documented ones and with values of correct
+        types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`)
+        are not allowed.\n\n### Response\n\nThe response includes an array of finding
+        objects, pagination metadata, and a count of items that match the query.\n\nEach
+        finding object contains the following:\n\n- The finding ID that can be used
+        in a `GetFinding` request to retrieve the full finding details.\n- Core attributes,
+        including status, evaluation, high-level resource details, muted state, and
+        rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time
+        stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
       - description: Limit the number of findings returned. Must be <= 1000.
@@ -22151,17 +22179,13 @@ paths:
                 $ref: '#/components/schemas/ListFindingsResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
+          $ref: '#/components/responses/FindingsBadRequestResponse'
         '403':
-          $ref: '#/components/responses/ForbiddenResponse'
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          $ref: '#/components/responses/NotFoundResponse'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -22209,17 +22233,13 @@ paths:
                 $ref: '#/components/schemas/GetFindingResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
+          $ref: '#/components/responses/FindingsBadRequestResponse'
         '403':
-          $ref: '#/components/responses/ForbiddenResponse'
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          $ref: '#/components/responses/NotFoundResponse'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -22270,39 +22290,27 @@ paths:
                 $ref: '#/components/schemas/MuteFindingResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
-          description: 'Bad Request: The server cannot process the request due to
-            invalid syntax in the request.'
+          $ref: '#/components/responses/FindingsBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
-          description: 'Not Found: The requested finding cannot be found.'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '409':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: 'Resource Conflict: The finding has already been muted or unmuted
             within the last 60 seconds.'
         '422':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: 'Invalid Request: The server understands the request syntax
             but cannot process it due to invalid data.'
         '429':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
-          description: 'Too many requests: The rate limit set by the API has been
-            exceeded.'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
