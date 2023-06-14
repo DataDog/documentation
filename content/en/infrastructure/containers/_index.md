@@ -27,13 +27,13 @@ In Datadog, the [Containers][1] page provides real-time visibility into all cont
 
 Taking inspiration from bedrock tools like *htop*, *ctop*, and *kubectl*, the Containers page gives you complete coverage of your container infrastructure in a continuously updated table with resource metrics at two-second resolution, faceted search, and streaming container logs.
 
-Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the Containers page provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real time:
+Coupled with [Docker][2], [Kubernetes][3], [ECS][4], and other container technologies, plus built-in tagging of dynamic components, the Containers page provides a detailed overview of your containers' health, resource consumption, logs, and deployment in real-time:
 
 {{< img src="infrastructure/livecontainers/live-containers-overview.png" alt="Live containers with summaries" >}}
 
 ## Setup
 
-To use the Containers page, enable the Process Agent.
+To display data on the Containers view, enable the Process Agent.
 
 {{< tabs >}}
 {{% tab "Docker" %}}

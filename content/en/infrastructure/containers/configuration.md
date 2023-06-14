@@ -18,7 +18,7 @@ This page lists configuration options for the [Containers][1] page in Datadog. T
 
 ### Include or exclude containers
 
-It is possible to include and/or exclude containers from real-time collection:
+Include and exclude containers from real-time collection:
 
 - Exclude containers either by passing the environment variable `DD_CONTAINER_EXCLUDE` or by adding `container_exclude:` in your `datadog.yaml` main configuration file.
 - Include containers either by passing the environment variable `DD_CONTAINER_INCLUDE` or by adding `container_include:` in your `datadog.yaml` main configuration file.

@@ -3,6 +3,7 @@ title: Host and Container Maps
 kind: documentation
 aliases:
   - /graphing/infrastructure/hostmap/
+  - /infrastructure/containermap/
   - /guides/hostmap
 further_reading:
 - link: "/infrastructure/livecontainers/"

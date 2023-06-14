@@ -18,7 +18,7 @@ cascade:
 {{< whatsnext desc="This section includes the following topics:">}}
     {{< nextlink href="/infrastructure/list" >}}<u>Infrastructure List</u> - See a list of all your hosts monitored by Datadog.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/hostmap" >}}<u>Host and Container Maps</u> - Visualize your hosts together on one screen with customized groupings, filters, and metrics made comprehensible by color and shape.{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/livecontainers" >}}<u>Containers View</u> - Monitor the containers across your environment with real-time visibility.{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/containers" >}}<u>Containers View</u> - Monitor the containers across your environment with real-time visibility.{{< /nextlink >}}
     {{< nextlink href="/infrastructure/process" >}}<u>Processes View</u> - Monitor your processes with real-time visibility of the most granular elements in a deployment.{{< /nextlink >}}
 
 {{< /whatsnext >}}
