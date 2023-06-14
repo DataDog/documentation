@@ -40,7 +40,7 @@ If you are interested in learning what buttons your users click on the most, you
 
 This example displays the top actions on Shopist's `/cart` page.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-1.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-2.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
 
 To investigate which users are clicking on these buttons, modify the search query by selecting the **Table** visualization type and clicking **+** to add another `group` field for `@user.name`.
 
@@ -58,11 +58,11 @@ Once you have created a funnel based on views or actions on your website, you ca
 
 ### Add a saved view
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_saved_view-1.mp4" alt="Add a saved view in the RUM Explorer" video="true" width=90% >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_saved_view.mp4" alt="Add a saved view in the RUM Explorer" video="true" width=90% >}}
 
 ### Export the funnel
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export-1.png" alt="Export a funnel visualization in the RUM Explorer" style="width:90%;" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/explorer_funnel_export.png" alt="Export a funnel visualization in the RUM Explorer" style="width:90%;" >}}
 
 ### View funnel analysis
 
