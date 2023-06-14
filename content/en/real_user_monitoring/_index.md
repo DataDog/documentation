@@ -5,6 +5,7 @@ description: "Visualize, observe, and analyze the performance of your front-end 
 disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
+  - /real_user_monitoring/faq/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
   tag: "Release Notes"
