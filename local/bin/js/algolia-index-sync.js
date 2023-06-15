@@ -32,9 +32,7 @@ const updateSettings = (index) => {
         customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
-        attributesToSnippet: [
-            'content:20'
-        ],
+        attributesToSnippet: ['content:20'],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
         attributeForDistinct: 'full_url',
@@ -151,10 +149,12 @@ const sync = () => {
         .catch((err) => console.error(err));
 
     updateSynonyms(index)
-        .then(() => console.log(`${indexName} synonyms update complete`))
+        .then(() => {
+            console.log(`${indexName} synonyms update complete`);
+            updateReplicas(client, indexName);
+        })
         .catch((err) => console.error(err));
 
-    updateReplicas(client, indexName);
     updateIndex(indexName);
 };
 
