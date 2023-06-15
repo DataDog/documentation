@@ -28,17 +28,17 @@ Supported test frameworks:
 * Jest >= 24.8.0
   * Only `jsdom` (in package `jest-environment-jsdom`) and `node` (in package `jest-environment-node`) are supported as test environments. Custom environments like `@jest-runner/electron/environment` in `jest-electron-runner` are not supported.
   * Only [`jest-circus`][1] is supported as [`testRunner`][2].
-  * Jest >= 28 is only supported from `dd-trace>=2.7.0`
+  * Jest >= 28 is only supported from `dd-trace>=2.7.0`.
 * Mocha >= 5.2.0
   * Mocha >= 9.0.0 has [partial support](#known-limitations).
   * Mocha [parallel mode][3] is not supported.
 * Cucumber-js >= 7.0.0
 * Cypress >= 6.7.0
-  * From `dd-trace>=1.4.0`
+  * From `dd-trace>=1.4.0`.
 * Playwright >= 1.18.0
   * From `dd-trace>=3.13.0` and `dd-trace>=2.26.0` for 2.x release line.
 
-The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, Babel, or others are supported out of the box.
+The instrumentation works at runtime, so any transpilers such as TypeScript, Webpack, or Babel are supported out-of-the-box.
 
 ### Test suite level visibility compatibility
 [Test suite level visibility][4] is fully supported from `dd-trace>=3.14.0` and `dd-trace>=2.27.0`. Jest, Mocha, Playwright, Cypress, and Cucumber are supported.
@@ -104,13 +104,13 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 
 ## Installing the JavaScript tracer
 
-To install the [JavaScript tracer][5], run:
+To install the [JavaScript Tracer][5], run:
 
 ```bash
 yarn add --dev dd-trace
 ```
 
-For more information, see the [JavaScript tracer installation docs][6].
+For more information, see the [JavaScript Tracer installation documentation][6].
 
 
 ## Instrument your tests
@@ -123,7 +123,7 @@ Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your t
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 ```
 
-**Important**: if you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -158,7 +158,7 @@ Set the `NODE_OPTIONS` environment variable to `-r dd-trace/ci/init`. Run your t
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn test
 ```
 
-**Important**: if you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `-r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
 
 {{< code-block lang="json" filename="package.json" >}}
 {
@@ -211,9 +211,9 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 {{% tab "Cypress" %}}
 
-### Cypress >=10
+### Cypress version 10 or later
 
-Use the Cypress API documentation to [learn how to write plugins][1] for `cypress>=10`.
+Use the Cypress API documentation to [learn how to write plugins][101] for `cypress>=10`.
 
 In your `cypress.config.js` file, set the following:
 
@@ -255,33 +255,33 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-### Cypress<10
+### Cypress before version 10
 
 These are the instructions if you're using a version older than `cypress@10`.
 
-1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example through [`cypress.json`][3]:
-{{< code-block lang="json" filename="cypress.json" >}}
-{
-  "pluginsFile": "dd-trace/ci/cypress/plugin"
-}
-{{< /code-block >}}
+1. Set [`pluginsFile`][102] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][103]:
+   {{< code-block lang="json" filename="cypress.json" >}}
+   {
+     "pluginsFile": "dd-trace/ci/cypress/plugin"
+   }
+   {{< /code-block >}}
 
-If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
-{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-module.exports = (on, config) => {
-  // your previous code is before this line
-  require('dd-trace/ci/cypress/plugin')(on, config)
-}
-{{< /code-block >}}
+   If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
+   {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+   module.exports = (on, config) => {
+     // your previous code is before this line
+     require('dd-trace/ci/cypress/plugin')(on, config)
+   }
+   {{< /code-block >}}
 
-2. Add the following line to the **top level** of your [`supportFile`][4]:
-{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-// Your code can be before this line
-// require('./commands')
-require('dd-trace/ci/cypress/support')
-// Your code can also be after this line
-// Cypress.Commands.add('login', (email, pw) => {})
-{{< /code-block >}}
+2. Add the following line to the **top level** of your [`supportFile`][104]:
+   {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+   // Your code can be before this line
+   // require('./commands')
+   require('dd-trace/ci/cypress/support')
+   // Your code can also be after this line
+   // Cypress.Commands.add('login', (email, pw) => {})
+   {{< /code-block >}}
 
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
@@ -314,31 +314,31 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][105] section of the Node.js custom instrumentation documentation.
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [RUM][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][7] guide.
+If the browser application being tested is instrumented using [Browser Monitoring][106], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][107].
 
 
-[1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
-[2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[3]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[6]: /real_user_monitoring/browser/#setup
-[7]: /continuous_integration/guides/rum_integration/
+[101]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[102]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[103]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[104]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[105]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[106]: /real_user_monitoring/browser/#setup
+[107]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}
 
 ### Reporting code coverage
 
-When tests are instrumented with [Istanbul][7], the Datadog Tracer (v3.20.0+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+When tests are instrumented with [Istanbul][7], the Datadog Tracer (v3.20.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
 You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
-### Using Yarn >=2
+### Using Yarn 2 or later
 
 If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
 
@@ -433,12 +433,12 @@ From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uplo
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][9] uses an ESM-first approach to load test files. That means that if ES modules are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
+[Mocha >=9.0.0][10] uses an ESM-first approach to load test files. That means that if [ES modules][11] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
 
 ### Browser tests
-Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, etc.).
+Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. Learn more in the [RUM integration][12] guide.
+If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated [RUM browser sessions][12] and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][13].
 
 ### Cypress interactive mode
 

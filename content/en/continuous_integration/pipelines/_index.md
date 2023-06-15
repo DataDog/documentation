@@ -5,20 +5,25 @@ aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/
 further_reading:
+    - link: "/monitors/types/ci/"
+      tag: "Documentation"
+      text: "Creating CI Pipeline Monitors"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-Your pipelines appear in the [Pipelines][1] page under the CI menu.
+## Overview
+
+The [**Pipelines**][1] page provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
 
 ## Setup
 
-{{< whatsnext desc="Select your CI provider to set up pipeline visibility in Datadog:" >}}
+{{< whatsnext desc="Select your CI provider to set up Pipeline Visibility in Datadog:" >}}
     {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
@@ -30,6 +35,11 @@ Your pipelines appear in the [Pipelines][1] page under the CI menu.
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Explore pipelines
+
+To see your pipelines, navigate to **CI** > **Pipelines**.
+
 ## Pipelines health overview
 
 The Pipelines page shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. The Pipelines page shows metrics for the _default_ branch, usually named something like `main` or `prod`.
@@ -89,9 +99,13 @@ Alternatively, click the [**Analytics**][6] button to interactively filter and g
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
-## Communicate about CI pipelines data
+## Use CI pipelines data
 
-CI pipeline data is available when you create widgets in [Dashboards][7] and [Notebooks][8].
+When creating a [dashboards][9] and [notebooks][10], you can use pipeline execution data in your search query, which updates the visualization widget options.
+
+## Export data to a monitor
+
+You can export your search query to a [CI Pipeline monitor][11] on the Pipelines Executions page by clicking the **Export** button in the **All Test Runs** or **Pipeline Executions**.
 
 ## Further reading
 
@@ -106,3 +120,6 @@ CI pipeline data is available when you create widgets in [Dashboards][7] and [No
 [6]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
 [7]: https://app.datadoghq.com/dashboard/lists
 [8]: https://app.datadoghq.com/notebook/list
+[9]: /dashboards/
+[10]: /notebooks/
+[11]: /monitors/types/ci/
