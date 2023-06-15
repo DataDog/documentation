@@ -22,9 +22,9 @@ further_reading:
 
 The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. The [Datadog Exporter][1] for the OpenTelemetry Collector allows you to forward trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs][2].
 
-{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OTel Collector -> Datadog" style="width:100%;">}}
+{{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OpenTelemetry Collector -> Datadog" style="width:100%;">}}
 
-## Setting up the OTel Collector with the Datadog Exporter
+## Setting up the OpenTelemetry Collector with the Datadog Exporter
 
 To run the OpenTelemetry Collector along with the Datadog Exporter:
 
@@ -306,7 +306,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
 {{% /tab %}}
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Using a DaemonSet is the most common and recommended way to configure OTel collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
+Using a DaemonSet is the most common and recommended way to configure OpenTelemetry collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
 
 1. Use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
 

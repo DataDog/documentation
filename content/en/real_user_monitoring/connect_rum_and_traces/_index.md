@@ -22,7 +22,7 @@ further_reading:
     text: "Troubleshoot with Session Replay browser dev tools"
   - link: "https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/"
     tag: "Blog"
-    text: "Correlate Datadog RUM events with traces from OTel-instrumented applications"
+    text: "Correlate Datadog RUM events with traces from-instrumented applications"
 algolia:
   tags: ['rum traces']
 ---
