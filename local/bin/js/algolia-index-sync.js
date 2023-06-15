@@ -109,7 +109,8 @@ const updateReplicas = (client, indexName) => {
 
     Object.entries(replicas).forEach(([replicaIndexName, replicaSettings]) => {
         console.log(`Updating replica ${replicaIndexName}..`);
-        console.log(`Replica settings as follows: ${replicaSettings}`);
+        console.log(`Replica settings as follows:`);
+        console.log(replicaSettings);
         const index = client.initIndex(replicaIndexName);
         index.setSettings(replicaSettings).then((response) => {
             console.log(`Index ${replicaIndexName} configuration update complete...`);
