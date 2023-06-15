@@ -13,11 +13,13 @@ aliases:
 ---
 ## Overview
 
-The Tracing Library collects data from an instrumented application that are sent to Datadog as traces. Instrumentations may collect data like personally identifiable information. If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent and the Tracing Libraries to remediate sensitive data at collection before traces are sent to Datadog.
+The Tracing Library collects data from an instrumented application that are sent to Datadog as traces. Instrumentations may collect data like personally identifiable information. If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the Tracing Library to remediate sensitive data at collection before traces are sent to Datadog.
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
-## Resource names
+## Agent
+
+### Resource names
 
 Datadog spans include a resource name attribute which may contain sensitive data. The Datadog Agent implements obfuscation for several known cases:
 
@@ -25,7 +27,7 @@ Datadog spans include a resource name attribute which may contain sensitive data
 * **SQL literal strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and does not obfuscate them.
 * **Redis queries are quantized by selecting only command tokens**: For example, the following query `MULTI\nSET k1 v1\nSET k2 v2` is quantized to `MULTI SET SET`.
 
-## Agent trace obfuscation
+### Trace obfuscation
 
 Agent [trace][2] obfuscation is disabled by default. Enable it in your `datadog.yaml` configuration file to obfuscate all information attached to your traces.
 
@@ -161,25 +163,7 @@ apm_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## HTTP data collected
-
-Datadog is standardizing the tags collected for web spans across the supported tracing libraries. Check your library's release notes to see if it has implemented collecting these tags. For fully standardized libraries, see [Span Tags Semantics][3].
-
-### Redacting the query in the URL
-
-The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
-
-If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
-
-### Applying header tags to root spans
-
-To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
-
-```
-DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
-```
-
-## Scrub sensitive data from your spans
+### Replace tags
 
 To scrub sensitive data from your [span][4]'s tags, use the `replace_tags` setting [in your datadog.yaml configuration file][5] or the `DD_APM_REPLACE_TAGS` environment variable. The value of the setting or environment variable is a list of one or more groups of parameters that specify how to replace sensitive data in your tags. These parameters are:
 
@@ -295,7 +279,7 @@ Put this environment variable in the trace-agent container if you are using the 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Exclude resources from being collected
+### Ignore resources
 
 For an in depth overview of the options to avoid tracing specific resources, see [Ignoring Unwanted Resources][6].
 
@@ -306,15 +290,40 @@ The Agent can be configured to exclude a specific resource from traces sent by t
 If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][7] for details.
 
 ```text
-## @param ignore_resources - list of strings - optional
-## A list of regular expressions can be provided to exclude certain traces based on their resource name.
-## All entries must be surrounded by double quotes and separated by commas.
-# ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
+
+###### @param ignore_resources - list of strings - optional
+
+###### A list of regular expressions can be provided to exclude certain traces based on their resource name.
+
+###### All entries must be surrounded by double quotes and separated by commas.
+
+###### ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
+
 ```
 
-## Modifying spans with the Datadog tracer
+## Library
 
-While this page deals with modifying data once it has reached the Datadog Agent, some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (for example, based on a regular expression match). View the Custom Instrumentation documentation for your language for more information.
+### HTTP
+
+Datadog is standardizing a [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries support a number of configuration options to control sensitive data collected in HTTP spans.
+    
+#### Redact query strings
+
+The `http.url` tag is assigned the full URL value, including the query string. The query string could contain sensitive data, so by default Datadog parses it and redacts suspicious-looking values. This redaction process is configurable. To modify the regular expression used for redaction, set the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` environment variable to a valid regex of your choice. Valid regex is platform-specific. When the regex finds a suspicious key-value pair, it replaces it with `<redacted>`.
+
+If you do not want to collect the query string, set the `DD_HTTP_SERVER_TAG_QUERY_STRING` environment variable to `false`. The default value is `true`.
+
+#### Collect headers
+
+To collect trace header tags, set the `DD_TRACE_HEADER_TAGS` environment variable with a map of case-insensitive header keys to tag names. The library applies matching header values as tags on root spans. The setting also accepts entries without a specified tag name, for example:
+
+```
+DD_TRACE_HEADER_TAGS=CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name
+```
+
+### Processing 
+
+Some tracing libraries provide an interface for processing spans to manually modify or remove sensitive data collected in traces:
 
 * Java: [TraceInterceptor interface][9]
 * Ruby: [Processing Pipeline][10]
