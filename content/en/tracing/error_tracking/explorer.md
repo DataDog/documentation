@@ -75,7 +75,7 @@ Each error sample displays the information needed to understand why an error hap
 
 Set up the [GitHub integration][4] to see code snippets in your stack traces.
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:100%;">}}
+{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="An inline code snippet in a stack trace" style="width:100%;" >}}
 
 To get started with configuring your repository, see the [Source Code Integration documentation][5].
 

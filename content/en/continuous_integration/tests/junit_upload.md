@@ -198,7 +198,7 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 **Example**: `test.suite=/testcase/@classname`<br/>
 **Note**: Tags specified using `--xpath-tag` and with `--tags` or `DD_TAGS` environment variable are merged. xpath-tag gets the highest precedence, as the value is usually different for each test.
 
-`--logs` **(beta)**
+`--logs`
 : Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
