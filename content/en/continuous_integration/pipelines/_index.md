@@ -101,7 +101,7 @@ Alternatively, click the [**Analytics**][6] button to interactively filter and g
 
 ## Use CI pipelines data
 
-When creating a [dashboards][9] and [notebooks][10], you can use pipeline execution data in your search query, which updates the visualization widget options.
+When creating a [dashboards][9] and [notebooks][10], you can use CI pipeline data in your search query, which updates the visualization widget options.
 
 ## Export data to a monitor
 
