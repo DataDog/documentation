@@ -19,8 +19,6 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 
 {{< img src="/dashboards/widgets/table/table_conditional_formatting.png" alt="Table widget with conditional formatting" style="width:100%;">}}
 
-**Note:** Only numerical data is supported for the table widget.
-
 ## Setup
 
 ### Configuration
