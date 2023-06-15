@@ -107,8 +107,6 @@ const updateReplicas = (client, indexName) => {
 
     Object.entries(replicas).forEach(([replicaIndexName, replicaSettings]) => {
         console.log(`Updating replica ${replicaIndexName}..`);
-        console.log(`Replica settings as follows:`);
-        console.log(replicaSettings);
         const index = client.initIndex(replicaIndexName);
         index.setSettings(replicaSettings).then((response) => {
             console.log(`Index ${replicaIndexName} configuration update complete...`);
@@ -145,14 +143,14 @@ const sync = () => {
     const index = client.initIndex(indexName);
 
     updateSettings(index)
-        .then(() => console.log(`${indexName} settings update complete`))
+        .then(() => {
+            console.log(`${indexName} settings update complete`);
+            updateReplicas(client, indexName);
+        })
         .catch((err) => console.error(err));
 
     updateSynonyms(index)
-        .then(() => {
-            console.log(`${indexName} synonyms update complete`);
-            updateReplicas(client, indexName);
-        })
+        .then(() => console.log(`${indexName} synonyms update complete`))
         .catch((err) => console.error(err));
 
     updateIndex(indexName);
