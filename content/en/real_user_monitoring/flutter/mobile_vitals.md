@@ -16,11 +16,15 @@ further_reading:
 ---
 ## Overview
 
-Real User Monitoring offers Mobile Vitals, a set of metrics that can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good. 
+Real User Monitoring offers Mobile Vitals, a set of metrics that can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good.
 
-Mobile Vitals appear in your application's **Overview** tab and in the side panel under **Performance** > **Event Timings and Mobile Vitals** when you click on an individual view in the [RUM Explorer][2]. Click on a graph in **Mobile Vitals** to apply a filter by version or examine filtered sessions. 
+You can view Mobile Vitals for your application by navigating to  **UX Monitoring > Performance Summary** and selecting your application.
 
-{{< img src="real_user_monitoring/ios/ios_mobile_vitals.png" alt="Mobile Vitals in the Performance Tab" style="width:70%;">}}
+{{< img src="real_user_monitoring/flutter/flutter-mobile-vitals-1.png" alt="Mobile Vitals in the Performance Summary tab" style="width:90%;">}}
+
+To access the RUM mobile app performance dashboard, scroll down to the Monitor Performance Metrics section from the application summary page and click **Performance Overview**.
+
+{{< img src="real_user_monitoring/flutter/flutter-performance-overview.png" alt="Mobile performance overview dashboard" style="width:90%;">}}
 
 Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph. 
 
