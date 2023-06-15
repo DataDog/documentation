@@ -54,6 +54,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `0` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `0` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
 {{% /tab %}}
@@ -65,6 +66,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `0` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `0` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
 [1]: https://www.postgresql.org/docs/current/pgstatstatements.html

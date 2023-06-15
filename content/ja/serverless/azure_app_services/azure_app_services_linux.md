@@ -36,13 +36,13 @@ Linux Azure App Service の Web アプリは、組み込みランタイムのコ
 
 これらの値を `DD_START_APP` 環境変数に設定します。以下の例は、関連する場合、`datadog-demo` という名前のアプリケーションの場合です。
 
-| ランタイム | `DD_START_APP` 値の例 | 説明
-| ---- | --- | --- |
-| Node.js | `node ./bin/www` | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します |
-| .NET コア | `dotnet datadog-demo.dll` | デフォルトで Web アプリ名を使用する .dll ファイルを実行します。 |
-| PHP | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します |
-| Python | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi` | カスタム[起動スクリプト][13]。この例では、Django アプリを起動するための Gunicorn コマンドを示します。 |
-| Java | `java -jar /home/site/wwwroot/datadog-demo.jar` | アプリを起動するためのコマンド |
+| ランタイム   | `DD_START_APP` 値の例                                                               | 説明                                                                                                                                                                                                                        |
+|-----------|--------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Node.js   | `node ./bin/www`                                                                           | [Node PM2 構成ファイル][12]、またはスクリプトファイルを実行します                                                                                                                                                                   |
+| .NET コア | `dotnet datadog-demo.dll`                                                                  | デフォルトで Web アプリ名を使用する `.dll` ファイルを実行します。<br /><br />**注**: コマンドの `.dll` ファイル名は、`.dll` ファイルのファイル名と一致する必要があります。場合によっては、Web アプリと一致しないことがあります。         |
+| PHP       | `cp /home/site/wwwroot/default /etc/nginx/sites-available/default && service nginx reload` | スクリプトを正しい場所にコピーし、アプリケーションを起動します                                                                                                                                                                           |
+| Python    | `gunicorn --bind=0.0.0.0 --timeout 600 quickstartproject.wsgi`                             | カスタム[起動スクリプト][13]。この例では、Django アプリを起動するための Gunicorn コマンドを示します。                                                                                                                                      |
+| Java      | `java -jar /home/site/wwwroot/datadog-demo.jar`                                            | アプリを起動するためのコマンド。                                                                                                                                                                                                     |
 
 [7]: https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/faqs-app-service-linux#what-are-the-expected-values-for-the-startup-file-section-when-i-configure-the-runtime-stack-
 [12]: https://learn.microsoft.com/en-us/azure/app-service/configure-language-nodejs?pivots=platform-linux#configure-nodejs-server

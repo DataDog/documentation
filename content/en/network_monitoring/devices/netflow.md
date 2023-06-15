@@ -8,8 +8,6 @@ further_reading:
   text: "Using Profiles with Network Device Monitoring"
 ---
 
-<div class="alert alert-warning">NetFlow Monitoring for Datadog Network Device Monitoring is in public beta.</div>
-
 ## Overview
 
 Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your Netflow-enabled devices.
