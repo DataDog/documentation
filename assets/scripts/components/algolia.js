@@ -25,7 +25,7 @@ function sendSearchRumAction(searchQuery, clickthroughLink = '') {
             page: window.location.pathname,
             lang: getPageLanguage(),
             clickthroughLink
-        })
+        });
     }
 }
 
@@ -176,21 +176,21 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 }
             };
 
-            const handleOutsideSearchbarClick = (e) => {                
+            const handleOutsideSearchbarClick = (e) => {
                 // Intercept user clicks within algolia dropdown to send custom RUM event before redirect.
                 if (hitsContainer.contains(e.target)) {
-                    e.preventDefault()
+                    e.preventDefault();
                 }
-                
+
                 let target = e.target;
 
                 do {
                     if (target === searchBoxContainerContainer) return;
 
                     if (target && target.href && hitsContainer.contains(e.target)) {
-                        sendSearchRumAction(search.helper.state.query, target.href)
-                        window.history.pushState({}, '', target.href)
-                        window.location.reload()
+                        sendSearchRumAction(search.helper.state.query, target.href);
+                        window.history.pushState({}, '', target.href);
+                        window.location.reload();
                     }
 
                     target = target.parentNode;
@@ -205,19 +205,19 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         } else {
             // Handle sending search RUM events from click events on the search results page.
             hitsContainer.addEventListener('click', (e) => {
-                e.preventDefault()
-                let target = e.target
+                e.preventDefault();
+                let target = e.target;
 
                 do {
                     if (target.href) {
-                        sendSearchRumAction(search.helper.state.query, target.href)
-                        window.history.pushState({}, '', target.href)
-                        window.location.reload()
+                        sendSearchRumAction(search.helper.state.query, target.href);
+                        window.history.pushState({}, '', target.href);
+                        window.location.reload();
                     }
 
-                    target = target.parentNode
-                } while (target)
-            })
+                    target = target.parentNode;
+                } while (target);
+            });
         }
 
         // Pages that aren't homepage or search page need to move the searchbar on mobile
