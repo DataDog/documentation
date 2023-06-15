@@ -30,7 +30,7 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `runtime.go.mem_stats.heap_inuse` | Bytes in in-use spans. | `process.runtime.go.mem.heap_inuse` |
 | `runtime.go.mem_stats.heap_released` | Bytes of physical memory returned to the operating system. | `process.runtime.go.mem.heap_released` |
 | `runtime.go.mem_stats.heap_objects` | Number of allocated heap objects. | `process.runtime.go.mem.heap_objects` |
-| `runtime.go.mem_stats.pause_total_ns` | Cumulative nanoseconds in GC. | `process.runtime.go.gc.pause_total_ns` |
+| `runtime.go.mem_stats.pause_total_ns` | Cumulative nanoseconds in garbage collection (GC). | `process.runtime.go.gc.pause_total_ns` |
 | `runtime.go.mem_stats.num_gc` | Number of completed GC cycles. | `process.runtime.go.gc.count` |
 | `runtime.go.num_cpu` | Number of CPUs detected by the runtime. | N/A |
 | `runtime.go.mem_stats.alloc` | Bytes of allocated heap objects. | N/A |

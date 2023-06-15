@@ -39,7 +39,7 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `runtime.dotnet.threads.count` | The number of threads. | N/A |
 | `runtime.dotnet.threads.workers_count` | The number of workers in the threadpool. (.NET Core only) | N/A |
 | `runtime.dotnet.threads.contention_time` | The cumulated time spent by threads waiting on a lock. (.NET Core only) | N/A |
-| `runtime.dotnet.gc.memory_load` | The percentage of the total memory used by the process. The GC changes its behavior when this value gets above 85. (.NET Core only) | N/A |
+| `runtime.dotnet.gc.memory_load` | The percentage of the total memory used by the process. The garbage collection (GC) changes its behavior when this value gets above 85. (.NET Core only) | N/A |
 | `runtime.dotnet.gc.pause_time` | The amount of time the GC paused the application threads. (.NET Core only) | N/A |
 | `runtime.dotnet.aspnetcore.`<br/>`requests.total` | The total number of HTTP requests received by the server. (.NET Core only) | N/A |
 | `runtime.dotnet.aspnetcore.`<br/>`requests.failed` | The number of failed HTTP requests received by the server. (.NET Core only) | N/A |
