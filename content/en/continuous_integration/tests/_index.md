@@ -122,8 +122,6 @@ Not every language supported by CI Visibility has support for test suite level v
 * Java has complete support since `dd-trace-java>=1.12.0`.
 * JUnit report uploads does not support test suite level visibility.
 
-Additionally, test suite level visibility is only supported in Agentless mode.
-
 ## Communicate about CI tests data
 
 Test execution data is available when you create widgets in [Dashboards][14] and [Notebooks][15].
