@@ -1,16 +1,17 @@
 ---
-title: NDM プロファイル
-kind: documentation
 aliases:
-  - /ja/network_performance_monitoring/devices/profiles/
+- /ja/network_performance_monitoring/devices/profiles/
 further_reading:
-  - link: /network_monitoring/devices/data
-    tag: Documentation
-    text: ネットワークデバイスモニタリングで収集されるデータ
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-    tag: ブログ
-    text: Datadog での SNMP モニタリング
+- link: /network_monitoring/devices/data
+  tag: Documentation
+  text: ネットワークデバイスモニタリングで収集されるデータ
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  tag: ブログ
+  text: Datadog での SNMP モニタリング
+kind: documentation
+title: NDM プロファイル
 ---
+
 ## 概要
 
 ネットワークデバイスモニタリングはプロファイルを使用して、収集するメトリクスと関連タグを Datadog Agent に通知します。プロファイルは、デバイスに関連付けられた OID のコレクションです。
