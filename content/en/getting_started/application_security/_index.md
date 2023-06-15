@@ -28,27 +28,24 @@ Datadog Application Security Management (ASM) helps secure your web applications
 
 This guide walks you through best practices for getting your team up and running with ASM.
 
-## Identify services under security risk
+## Identify services that have security risk
 
-Identify which services are exposed to security risks that would benefit from ASM by reviewing the [ASM landing page][18].
 
-1. **Identify services vulnerable or exposed to attacks.** Navigate to the [ASM Setup page][1] and select services recommended by Datadog.
+**Identify services vulnerable or exposed to attacks** that would benefit from ASM. Navigate to the [ASM Setup page][1] and select the services recommended there.
 
-   {{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
 
-   These security insights are detected from data reported by APM which help prioritize your security investments. ASM identifies, prioritizes, and helps remediate all security risks on your services.
+These security insights are detected from data reported by APM. The insights help prioritize your security efforts. ASM identifies, prioritizes, and helps remediate all security risks on your services.
 
-   **Note**: If no vulnerabilities or suspicious requests are reported:
+**Note**: If no vulnerabilities or suspicious requests are reported, ensure your services are using a recent Datadog tracing library version. From the [APM Service Catalog][2], open any service's side panel and look at its **Tracing Configuration**.
 
-   - Ensure your services are using a recent Datadog tracing library version. From the [APM Service Catalog][2]: Open any service, navigate to: **Sidepanel > Tracing Configuration**. 
 
-     {{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Service Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_Tracing_Configuration.png" alt="Tracer Configuration tab in APM Service Catalog page view. Highlighting which version of the Datadog Agent, and Datadog tracing library are being used by your services." style="width:100%;" >}}
 
-2. After you have identified a few services under security risks, proceed to [enable ASM][20].
 
-## Setup ASM
+## Enable ASM
 
-ASM relies on the same library as Datadog Application Performance Monitoring (APM). 
+ASM relies on the same libraries as Application Performance Monitoring (APM). 
 To benefit from all the ASM capabilities such as detections, automatic updates, and protection, first enable [Remote Configuration][15].
 
 ### Enable ASM with in-app instructions
@@ -92,7 +89,7 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
   'dd-test-scanner-log';
   done{{< /code-block >}}
 
-3. A [Security Signal][6] should be generated within a few seconds.
+3. Go to [Security Signal][6] to see the signal that is generated after a few seconds.
 
 Interested in best practices to go further? View the [in-product Quickstart Guide.][19]
 
