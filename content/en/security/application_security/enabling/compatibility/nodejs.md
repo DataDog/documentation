@@ -127,7 +127,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 | [elasticsearch][30]    | `>=10`   |{{< X >}}|          |          |
 | [ioredis][31]          | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [knex][32]             | `>=0.8`  |{{< X >}}|{{< X >}} |          |
-| [mariadb][63]          | `>=3`    |{{< X >}}|{{< X >}} |          |
+| [mariadb][42]          | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [memcached][33]        | `>=2.2`  |{{< X >}}|{{< X >}} |          |
 | [mongodb-core][34]     | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [mysql][35]            | `>=2`    |{{< X >}}|          |{{< X >}} |
@@ -156,3 +156,4 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 [39]: https://github.com/NodeRedis/node_redis
 [40]: https://share.github.io/sharedb/
 [41]: http://tediousjs.github.io/tedious
+[42]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
