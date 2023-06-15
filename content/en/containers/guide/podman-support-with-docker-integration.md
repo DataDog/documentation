@@ -17,10 +17,10 @@ Podman is an alternative to Docker as it provides a Docker-compatible CLI interf
 
 ## Agent deployment as a podman container
 
-To deploy the Agent as a Podman container, the command to run is similar to the one used for [Docker][3].
+To deploy the Agent as a Podman container, the command to run is similar to the one used for [Docker][3]. The agent needs to be `rootful` mode to access podman communication socket.
 
 ```
-$ podman run -d --name dd-agent \
+$ sudo podman run -d --name dd-agent \
     -v /run/podman/podman.sock:/run/podman/podman.sock:ro \
     -v /proc/:/host/proc/:ro \
     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
@@ -33,9 +33,6 @@ $ podman run -d --name dd-agent \
 The two important differences are:
 * `-v /run/podman/podman.sock:/run/podman/podman.sock:ro` to mount the Podman socket instead of the Docker socket.
 * `-e DOCKER_HOST=unix:///run/podman/podman.sock` to configure the Agent communication with the Podman socket.
-
-When running Podman in daemonless mode, instead of these options, you must mount the directory where the Podman database is located, which is `/var/lib/containers` by default:
-* `-v /var/lib/containers/:/var/lib/containers/`.
 
 ## Known limitations
 
