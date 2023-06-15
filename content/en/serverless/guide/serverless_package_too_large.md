@@ -63,7 +63,7 @@ Also inspect other dependencies (the `node_modules` folder) that are included in
 
 Using a bundler like [Webpack][6] or [esbuild][7] can dramatically reduce your deployment package size by only including the code that is used. See [Node.js Lambda Tracing and Bundlers Compatibility][8] for required webpack configurations.
 
-## Alternately use datadog-ci
+## Datadog-ci
 
 Depending on your use case, you may find it easier to use the `datadog-ci lambda instrument` command to work around issues with package sizes. The `datadog-ci lambda instrument` command configures the same instrumentation as serverless-plugin-datadog. For more information, see the [datadog-ci repo][9].
 
