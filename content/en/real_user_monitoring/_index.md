@@ -90,7 +90,7 @@ The following RUM capabilities are supported relative to each platform:
 | Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Global attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
+| Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
 | Session Replay | {{< X >}} |  |  |  |  |  |  |
 | Heatmaps | {{< X >}} |  |  |  |  |  |  |
