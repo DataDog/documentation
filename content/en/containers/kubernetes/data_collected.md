@@ -43,13 +43,13 @@ For more information, see the documentation for the [Kubelet][1] integration.
 
 ### Kubernetes state metrics core
 
-For more information, see the documentation for the [Kubernetes state metrics core][6] integration. This check requires Datadog Cluster Agent v1.12+.
+For more information, see the documentation for the [Kubernetes state metrics core][6] integration. This check requires Datadog Cluster Agent v1.12 or later.
 
 {{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes state
 
-Note that `kubernetes_state.*` metrics are gathered from the `kube-state-metrics` API. The `kubernetes_state` check is a legacy check. For an alternative, see [Kubernetes state metrics core][6]. Datadog recommends that you do not enable both checks simultaneously.
+**Note**: `kubernetes_state.*` metrics are gathered from the `kube-state-metrics` API. The `kubernetes_state` check is a legacy check. For an alternative, see [Kubernetes state metrics core][6]. Datadog recommends that you do not enable both checks simultaneously.
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
@@ -69,7 +69,7 @@ For more information, see the documentation for the [Kubernetes API server][3] i
 
 ### Kubernetes controller manager
 
-For more information, see the documentation for the [Kubernetes controller anager][2] integration.
+For more information, see the documentation for the [Kubernetes controller manager][2] integration.
 
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
