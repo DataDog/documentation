@@ -3,10 +3,10 @@ description: iOS アプリケーションの健全性とパフォーマンスに
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
-  text: dd-sdk-android ソースコード
+  text: dd-sdk-android のソースコード
 - link: https://www.datadoghq.com/blog/monitor-mobile-vitals-datadog/
   tag: ブログ
-  text: Datadog でモバイル バイタルを監視
+  text: Datadog でモバイルバイタルを監視
 kind: documentation
 title: モバイル バイタル
 ---

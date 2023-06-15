@@ -64,7 +64,7 @@ title: 関連するログがトレース ID パネルに表示されない
 
 この例では、Java インテグレーションパイプラインを紹介します。
 
-   {{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="Trace Id リマッパーがハイライトされた Java ログパイプライン"  style="width:90%;">}}
+   {{< img src="tracing/troubleshooting/tracing_java_traceid_remapping.png" alt="Trace Id リマッパーがハイライトされた Java ログパイプライン" style="width:90%;">}}
 
 ログのフォーマットがインテグレーションパイプラインによって認識されていない可能性があります。この場合、パイプラインを複製し、[パーストラブルシューティングガイド][2]に従って、パイプラインがログ形式を受け入れることを確認します。
 
@@ -77,7 +77,7 @@ title: 関連するログがトレース ID パネルに表示されない
 
    1. カスタムパースルールが、次の例のように、[トレース][1]と[スパン][2]の ID を文字列として抽出することを確認してください。
 
-      {{< img src="tracing/troubleshooting/tracing_custom_parsing.png" alt="サンプルログ、パースルール、抽出セクションでトレース ID がハイライトされたカスタムパーサー"  style="width:90%;">}}
+      {{< img src="tracing/troubleshooting/tracing_custom_parsing.png" alt="サンプルログ、パースルール、抽出セクションでトレース ID がハイライトされたカスタムパーサー" style="width:90%;">}}
 
    2. そして、抽出した属性に[トレースリマッパー][3]を定義して、ログの公式トレース ID にリマップします。
 
@@ -89,9 +89,9 @@ title: 関連するログがトレース ID パネルに表示されない
 
 ID が正しく挿入され、ログにリマップされると、トレースパネルでトレースと相関のあるログを見ることができます。
 
-{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ"  style="width:90%;">}}
+{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ" style="width:90%;">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

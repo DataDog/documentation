@@ -80,6 +80,9 @@ heroku labs:enable runtime-dyno-metadata -a $APPNAME
 # メトリクスが連続するよう、Datadog でホスト名を appname.dynotype.dynonumber に設定
 heroku config:add DD_DYNO_HOST=true
 
+# Datadog サイトを設定 (例: us5.datadoghq.com)
+heroku config:add DD_SITE=$DD_SITE
+
 # このビルドパックを追加して Datadog API キーを設定
 heroku buildpacks:add --index 1 https://github.com/DataDog/heroku-buildpack-datadog.git
 heroku config:add DD_API_KEY=$DD_API_KEY

@@ -25,4 +25,4 @@ Votre alerte se déclenchera si le tag cesse de transmettre des données.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/monitors/
-[2]: /fr/monitors/create/types/metric/
+[2]: /fr/monitors/types/metric/

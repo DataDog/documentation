@@ -5,10 +5,14 @@ description: "Visualize, observe, and analyze the performance of your front-end 
 disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
+  - /real_user_monitoring/faq/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to gain insights through Real User Monitoring"
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"
@@ -41,9 +45,12 @@ further_reading:
   text: "RUM Browser Data Collected"
 algolia:
   tags: ['rum', 'real user monitoring']
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM Dashboard" >}}
 
 ## What is Real User Monitoring?
 
@@ -70,15 +77,65 @@ Select an application type to start collecting RUM data:
 
 </br>
 
+## Supported endpoints for SDK domains
+
+All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
+
+### Mobile
+
+| Site | Site URL                                      |
+|------|-----------------------------------------------|
+| US1  | `https://browser-intake-datadoghq.com`        |
+| US3  | `https://browser-intake-us3-datadoghq.com`    |
+| US5  | `https://browser-intake-us5-datadoghq.com`    |
+| EU1  | `https://browser-intake-datadoghq.eu`         |
+| US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+
+### Browser
+
+#### Logs
+
+| Site | Site URL                                        |
+|------|-------------------------------------------------|
+| US1  | `https://logs.browser-intake-datadoghq.com`     |
+| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
+| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
+
+#### Session Replay
+
+| Site | Site URL                                                  |
+|------|-----------------------------------------------------------|
+| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
+| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
+| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
+
+#### RUM
+
+| Site | Site URL                                       |
+|------|------------------------------------------------|
+| US1  | `https://rum.browser-intake-datadoghq.com`     |
+| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
+| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
+
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**UX Monitoring > RUM Applications**][1].
+Access RUM by navigating to [**UX Monitoring > Real User Monitoring**][1].
 
 ### Out-of-the-box dashboards
 
 Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][2].
 
-{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM dashboard" >}}
 
 ### RUM Explorer and visualizations
 
@@ -122,7 +179,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/list
+[1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /real_user_monitoring/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/

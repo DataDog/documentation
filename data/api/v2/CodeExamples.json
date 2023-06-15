@@ -44,6 +44,18 @@
       "description": "Search pipelines events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCIAppPipelineEvent": [
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "",
+      "description": "Send pipeline event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
+      "suffix": "_129899466",
+      "description": "Send pipeline job event returns \"Request accepted for processing\" response"
+    }
+  ],
   "AggregateCIAppTestEvents": [
     {
       "group": "ci_visibility_tests",
@@ -160,6 +172,13 @@
       "group": "fastly_integration",
       "suffix": "",
       "description": "Update Fastly account returns \"OK\" response"
+    }
+  ],
+  "MakeGCPSTSDelegate": [
+    {
+      "group": "gcp_integration",
+      "suffix": "_962598975",
+      "description": "Create a Datadog GCP principal with empty body returns \"OK\" response"
     }
   ],
   "UpdateIPAllowlist": [
@@ -585,6 +604,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
+    }
+  ],
+  "UpdateFinding": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Mute or unmute a finding returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [

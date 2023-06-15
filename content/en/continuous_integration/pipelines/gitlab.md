@@ -232,7 +232,7 @@ See the table below for the message and domain correlated with each error type. 
 <!-- | ---------- | ---------- | ---------- | -->
 <!-- | :---        |    :----:   |          ---: | -->
 
-## Enable job log collection (beta)
+## Enable job log collection
 
 The following GitLab versions support collecting job logs:
 * GitLab.com (SaaS)

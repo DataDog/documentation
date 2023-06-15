@@ -31,7 +31,7 @@ draft: false
 git_integration_title: kube_apiserver_metrics
 integration_id: kube-apiserver-metrics
 integration_title: Kubernetes API サーバーメトリクス
-integration_version: 3.5.0
+integration_version: 3.6.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

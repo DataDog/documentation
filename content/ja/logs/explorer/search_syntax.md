@@ -1,14 +1,12 @@
 ---
 aliases:
-- /ja/logs/search
 - /ja/logs/search-syntax
-- /ja/logs/explorer/search/
 - /ja/logs/search_syntax/
 description: すべてのログを検索する
 further_reading:
 - link: /logs/explorer/#visualize
   tag: ドキュメント
-  text: ログ分析の実行
+  text: ログを視覚化する方法
 - link: /logs/explorer/#patterns
   tag: ドキュメント
   text: ログ内のパターン検出
@@ -17,7 +15,7 @@ further_reading:
   text: ログの処理方法
 - link: /logs/explorer/saved_views/
   tag: ドキュメント
-  text: ログエクスプローラーの自動構成
+  text: 保存ビューについて
 kind: documentation
 title: ログ検索構文
 ---
@@ -41,20 +39,13 @@ title: ログ検索構文
 | `OR`         | **和**: いずれかの条件を含むイベントが選択されます。                                             | authentication OR password   |
 | `-`          | **除外**: 以下の用語はイベントに含まれません (個々の生テキスト検索に適用されます)。                                                  | authentication AND -password |
 
-## オートコンプリート
+## 特殊文字とスペースのエスケープ
 
-検索バーのオートコンプリート機能を使用すると、以下を使用してクエリを完成させることができます。
-    - ログにある既存のキーと値
-    - ユーザーごとの最近の検索
-    - 保存ビュー
+特殊文字と見なされる `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`、ならびにスペースは、`\` 文字を使用してエスケープする必要があります。
 
-{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="クエリとして service: が、オートコンプリートオプションとして emailer、balancer-checker、ad-server、vpc が表示されているログ検索バー" style="width:80%;">}}
+ログメッセージ内の特殊文字を検索することはできません。特殊文字が属性の中にある場合は、検索することができます。
 
-明確なエラー状態は、クエリのどの部分に構文エラーがあり、それをどのように修正すればよいかを知らせます。例えば、クエリ `service:` に値がない状態で入力した場合、クエリにカーソルを合わせると "Missing value in key:value pair" というメッセージが表示されます。
-
-## 特殊文字のエスケープ
-
-次の文字は特殊文字とみなされます:  `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\` `/` は、`\` 文字でエスケープすることが必要です。ログメッセージから特殊文字を検索することはできません。しかし、特殊文字が属性の中にある場合は、検索することができます。特殊文字を検索するには、[grok parser][1] で特殊文字を属性にパースし、その属性を含むログを検索してください。
+特殊文字を検索するには、[Grok Parser][1] で特殊文字を属性にパースし、その属性を含むログを検索してください。
 
 
 ## 属性検索
@@ -176,3 +167,4 @@ service:*mongo
 [4]: /ja/integrations/#cat-log-collection
 [5]: /ja/getting_started/tagging/#tags-best-practices
 [6]: /ja/logs/explorer/saved_views/
+[7]: /ja/logs/explorer/facets/#facet-panel

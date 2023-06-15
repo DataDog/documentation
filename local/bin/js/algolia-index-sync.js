@@ -32,6 +32,9 @@ const updateSettings = (index) => {
         customRanking: ['desc(rank)'],
         attributesToHighlight: ['title', 'section_header', 'content', 'tags'],
         attributesForFaceting: ['language', 'searchable(tags)'],
+        attributesToSnippet: [
+            'content:20'
+        ],
         indexLanguages: ['ja', 'en', 'fr'],
         queryLanguages: ['ja', 'en', 'fr'],
         attributeForDistinct: 'full_url',
@@ -40,7 +43,8 @@ const updateSettings = (index) => {
         minWordSizefor2Typos: 7,
         ignorePlurals: true,
         optionalWords: ['the', 'without'],
-        separatorsToIndex: '_@.#'
+        separatorsToIndex: '_@.#',
+        advancedSyntax: true
     };
 
     return index.setSettings(settings, { forwardToReplicas: true });

@@ -6,10 +6,10 @@ beta: true
 further_reading:
 - link: "/real_user_monitoring/ios/"
   tag: "Documentation"
-  text: "iOS Monitoring"
+  text: "iOS monitoring"
 - link: "/real_user_monitoring/browser/"
   tag: "Documentation"
-  text: "Browser Monitoring"
+  text: "Browser monitoring"
 ---
 
 ## Overview

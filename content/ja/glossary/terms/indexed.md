@@ -1,4 +1,7 @@
 ---
+core_product:
+- log management
+- apm
 title: インデックス化
 ---
 インデックス化された[ログ][1]とは、分析、アラート、トラブルシューティングのために収集、処理、保持されているログのことです。
@@ -6,7 +9,7 @@ title: インデックス化
 インデックス化スパンは、Datadog に 15 日間保存された[保持フィルター][3]によってインデックス化された[スパン][2]で、スパンに含まれる[タグ][5]によって[検索スパン][4]で検索、クエリ、監視に利用できることを表します。
 
 <div class="alert alert-info">
-取り込み後に<a href="https://app.datadoghq.com/apm/traces/retention-filters">タグベースの Retention Filter</a> を作成して、サービスごとにインデックス化されたスパンの正確な数を制御および可視化することができます。
+取り込み後に<a href="/tracing/trace_pipeline/trace_retention/">タグベースの Retention Filter</a> を作成して、サービスごとにインデックス化されたスパンの正確な数を制御および可視化することができます。
 </div>
 
 {{< img src="tracing/visualization/span_tag.png" alt="スパンタグ" style="width:80%" >}}
