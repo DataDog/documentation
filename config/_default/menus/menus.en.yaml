@@ -842,16 +842,16 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 2
-  - name: Linux
+  - name: Linux - Code
     url: serverless/azure_app_services/azure_app_services_linux
     parent: serverless_app_services
     weight: 201
-  - name: Windows
-    url: serverless/azure_app_services/azure_app_services_windows
+  - name: Linux - Container
+    url: serverless/azure_app_services/azure_app_services_container
     parent: serverless_app_services
     weight: 202
-  - name: Container
-    url: serverless/azure_app_services/azure_app_services_container
+  - name: Windows - Code
+    url: serverless/azure_app_services/azure_app_services_windows
     parent: serverless_app_services
     weight: 203
   - name: Azure Container Apps

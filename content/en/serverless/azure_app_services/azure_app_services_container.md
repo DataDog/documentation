@@ -1,5 +1,5 @@
 ---
-title: Azure App Service - Container
+title: Azure App Service - Linux Container
 kind: documentation
 further_reading:
 - link: "/integrations/azure_app_services/"
@@ -11,7 +11,7 @@ further_reading:
 ---
 ## Overview
 
-This instrumentation method provides the following additional monitoring capabilities for Containerized Azure App Service workloads:
+This instrumentation method provides the following additional monitoring capabilities for Containerized Linux Azure App Service workloads:
 
 - Fully distributed APM tracing using automatic instrumentation.
 - Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
