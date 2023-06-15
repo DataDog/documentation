@@ -291,6 +291,8 @@ If you configure tags or dimensions in your query, these values are available fo
 
 ## Add metadata
 
+<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations. See the <a href="/monitors/manage/">Manage Monitors documentation</a>.</div>
+
 1. Use the **Tags** dropdown to associate [tags][9] with your monitor.
 1. Use the **Teams** dropdown to associate [teams][10] with your monitor.
 1. Choose a **Priority**.

@@ -4,6 +4,10 @@ kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 
@@ -32,6 +36,10 @@ override any value provided in `DD_TRACE_PROPAGATION_STYLE`.
 If multiple extraction styles are enabled, extraction attempts are made
 in the order that those styles are specified. The first successfully
 extracted value is used.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [8]: https://github.com/openzipkin/b3-propagation

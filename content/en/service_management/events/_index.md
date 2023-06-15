@@ -17,7 +17,7 @@ further_reading:
   text: "Identify and redact sensitive data in Events with Sensitive Data Scanner"
 ---
 
-{{< img src="events/events-overview.png" alt="Events explorer" >}}
+{{< img src="service_management/events/events_explorer.png" alt="Events explorer display" >}}
 
 ## Getting started
 
@@ -39,13 +39,13 @@ You can also submit your own custom events using the [Datadog API][10], [Custom 
 
 Use the [Events Explorer][14] to aggregate and view events coming into Datadog. Group or filter events by attribute and graphically represent them with [event analytics][15]. Use the [query syntax][16] to filter events using Boolean and wildcard operators.
 
-{{< img src="events/events-explorer.mp4" alt="Sorting events by attributes and exploring analytics" video=true >}}
+{{< img src="service_management/events/events-explorer.mp4" alt="Sorting events by attributes and exploring analytics" video=true >}}
 
 ### Events as a source in dashboards widgets
 
 You can use events as a data source in [graph widgets][17]. You can build timeseries, tables, and top list widgets of your event search queries.
 
-{{< img src="events/events-dashboard.mp4" alt="A graph widget that uses events as the source" video=true >}}
+{{< img src="service_management/events/events-dashboard.mp4" alt="A graph widget that uses events as the source" video=true >}}
 
 For example, check out the [Monitor Notifications Overview][18] dashboard, which analyzes monitor alert event trends to help you improve your configuration and reduce alert fatigue.
 
@@ -53,7 +53,7 @@ For example, check out the [Monitor Notifications Overview][18] dashboard, which
 
 [Generate metrics][15] with 15-month retention from any event search query to create and monitor historical events and alerts.
 
-{{< img src="events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
+{{< img src="service_management/events/generate-metrics.png" alt="Image of metrics with the events search query." >}}
 
 ### Normalize and enrich events with processing pipelines
 

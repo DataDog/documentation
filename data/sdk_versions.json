@@ -9,7 +9,7 @@
   },
   {
     "client": "datadog-api-client-python",
-    "version": "2.13.1"
+    "version": "2.13.2"
   },
   {
     "client": "datadog-api-client-ruby",

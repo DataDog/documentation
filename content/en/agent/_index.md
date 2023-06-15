@@ -25,6 +25,9 @@ aliases:
   - /agent/faq/the-datadog-agent-for-logs-or-traces-only
 algolia:
   tags: ['agent']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">

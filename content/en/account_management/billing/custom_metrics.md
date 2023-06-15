@@ -309,7 +309,7 @@ The following standard integrations can potentially emit custom metrics.
 | Type of integrations                           | Integrations                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
 | Limited to 350 custom metrics by default.      | [ActiveMQ XML][11] / [Go-Expvar][12] / [Java-JMX][13]                              |
-| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[OpenMetrics][16] /[Windows Services][17] /[WMI][18] /[Prometheus][27] |
+| No default limit on custom metrics collection. | [Nagios][14] /[PDH Check][15] /[OpenMetrics][16] /[Windows performance counters][17] /[WMI][18] /[Prometheus][27] |
 | Can be configured to collect custom metrics.   | [MySQL][19] /[Oracle][20] /[Postgres][21] /[SQL Server][22]                        |
 | Custom metrics sent from cloud integrations    | [AWS][23]                                                                          |
 
@@ -339,7 +339,7 @@ For billing questions, contact your [Customer Success][10] Manager.
 [14]: /integrations/nagios/
 [15]: /integrations/pdh_check/
 [16]: /integrations/openmetrics/
-[17]: /integrations/windows_service/
+[17]: /integrations/windows_performance_counters/
 [18]: /integrations/wmi_check/
 [19]: /integrations/mysql/
 [20]: /integrations/oracle/

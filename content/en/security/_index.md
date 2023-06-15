@@ -39,6 +39,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< site-region region="gov" >}}

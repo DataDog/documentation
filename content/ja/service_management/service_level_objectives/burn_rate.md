@@ -13,7 +13,7 @@ SLO バーンレートアラートは、SLO エラーバジェットの消費率
 
 **注:** バーンレートアラートは、メトリクスモニターの種類（メトリクス、インテグレーション、APM メトリクス、異常検知、予測値、外れ値モニター）のみで構成された[メトリクスベースの SLO][1] または[モニターベースの SLO][2] でのみ利用可能です。
 
-{{< img src="monitors/service_level_objectives/burn_rate_alert_config.jpeg" alt="バーンレートアラートのコンフィギュレーション">}}
+{{< img src="service_management/service_level_objectives/burn_rate_alert_config.jpeg" alt="バーンレートアラートのコンフィギュレーション">}}
 
 ## バーンレートアラートの仕組み
 

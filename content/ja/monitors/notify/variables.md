@@ -305,7 +305,7 @@ This alert was triggered on {{ @machine_id.name }}
 
 ### 一致する属性/タグ変数
 
-_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI モニター][5]で使用できます。_
+_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI モニター][5]、[データベースモニタリングモニター][8]で使用できます。_
 
 モニタークエリに一致するログ、トレーススパン、RUM イベント、CI パイプラインまたは CI テストイベントから**任意の**属性またはタグを含めるには、次の変数を使用します。
 
@@ -317,6 +317,7 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 | RUM             | `{{rum.attributes.key}}` または `{{rum.tags.key}}`   |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
+| データベース モニタリング | `{{databasemonitoring.attributes.key}}`      |
 
 `key:value` ペアの場合、変数 `{{log.tags.key}}` はアラートメッセージに `value` をレンダリングします。
 
@@ -572,3 +573,4 @@ https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 [5]: /ja/monitors/types/ci/
 [6]: /ja/monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[8]: /ja/monitors/types/database_monitoring/

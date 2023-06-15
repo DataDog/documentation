@@ -26,17 +26,20 @@ title: セキュリティシグナルエクスプローラー
 
 セキュリティシグナルの検索結果が、セキュリティシグナルテーブルに表示されます。
 
-{{< img src="security/security_monitoring/explorer/security_signals_table.png" alt="2 つのアカウント乗っ取りシグナルを示す Security Signals テーブル" >}}
+{{< img src="security/security_monitoring/explorer/signal_panel_v2.png" alt="2 つのアカウント乗っ取りシグナルを示す Security Signals テーブル" >}}
 
-テーブルのコンテンツを、使用可能なファセットのリストで絞り込むことができます。右上に表示される **Options** ボタンを使用して、セキュリティシグナルテーブルのコンテンツを要件や好みに応じて構成できます。
+テーブルのコンテンツを、`Source` や `Status` などの使用可能なファセットのリストで絞り込むことができます。右上に表示される **Options** ボタンを使用して、セキュリティシグナルテーブルのコンテンツを要件や好みに応じて構成できます。
 
 ## セキュリティシグナルの検査
 
-セキュリティシグナルをクリックすると、セキュリティシグナルパネルが開いて詳細が表示されます。
+セキュリティシグナルをクリックすると、詳細が表示されます。シグナルの重大度や発生時期に関する情報を含むパネルが表示されます。
+アクション可能な情報には、以下のような機能があります。
 
-{{< img src="security/security_monitoring/explorer/signal_panel.png" alt="AWS S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:80%;" >}}
+  - シグナルのステータスを変更します。
+  - シグナルのルール設定にアクセスします。
+  - シグナルを共有したり、チームメイトに割り当てたりします。
 
-問題を選別する際に最初に必要になる情報とアクションが、セキュリティシグナルパネルの最上部に表示されます。これらの情報から、シグナルの重要度や生成日時を判断したり、規則の設定にアクセスしたり、シグナルの状態を変更したり、シグナルをチームメイトとすばやく共有したり割り当てたりできます。
+{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="AWS S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:90%;" >}}
 
 過去の新しいデータが利用可能になった場合、または攻撃が継続している場合、最初に見た日付と最後に見た日付が更新されます。Cloud SIEM と Cloud Workload Security のシグナルの場合、Overview タブに "What Happened" セクションが表示され、検出ルールに関連する構成済みのグループ化やルールカスタマイズも表示されます。この検出ルールの例では、グループ化が `usr.name` で構成されています。最後に、検出ルールに設定されたタグは、CSPM の調査結果ではヘッダーのグループ化の下に、Cloud SIEM および Cloud Workload Security のシグナルでは Context セクションに表示されます。
 
@@ -48,7 +51,7 @@ Cloud SIEM と Cloud Workload Security シグナルのヘッダーの下には�
 - `Rule Details` では、検出ルールに構成されたテキストなどのルール詳細が表示され、シグナルを確認する人がシグナルの目的や対応策を理解するのに役立ちます。また、ユーザーは、ルールの抑制クエリの修正など、ルールの修正に移ることもできます。
 - `Logs` には、シグナルがトリガーされた理由に関するコンテキストを提供するログサンプルの視覚化とリストが含まれています。完全なログを表示するには、表のサンプルのいずれかをクリックしてください。
 - `Related Signals` は、シグナルのトリアージを支援するために同じグループ化値を含む他のシグナルのタイムラインとして表示されます。
-- `Suggested Actions (beta)` は、セキュリティシグナルの特性に基づいて、調査クエリ、関連ダッシュボード、クラウドプロバイダーコンソールへのリンクを提供し、調査を誘導して解決への洞察を提供するものです。
+- `Suggested Actions` は、セキュリティシグナルの特性に基づいて、調査クエリ、関連ダッシュボード、クラウドプロバイダーコンソールへのリンクを提供し、調査を誘導して解決への洞察を提供するものです。
 
 Cloud Security Posture Management シグナルのヘッダーの下には、シグナルに関連する詳細情報を表示するタブがあります。
 - `Message` は、シグナルをレビューする人がシグナルの目的と応答方法を理解するのに役立つように、検出ルールで構成されたテキストを表示します。
@@ -125,6 +128,6 @@ Datadog クラウドワークロードセキュリティシグナルには、シ
 [4]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Workload%20Security%22
 [5]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22
 [6]: /ja/monitors/case_management/
-[7]: /ja/workflows/
-[8]: /ja/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[7]: /ja/service_management/workflows/
+[8]: /ja/service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /ja/logs/explorer/analytics/?tab=timeseries
