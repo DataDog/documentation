@@ -1,10 +1,12 @@
 ---
 title: Live Containers Legacy Configuration
-kind: documentation
+kind: faq
+aliases:
+  - /infrastructure/livecontainers/legacy
 further_reading:
-- link: "/infrastructure/livecontainers/configuration"
+- link: "/infrastructure/containers"
   tag: "Documentation"
-  text: "Configure live containers"
+  text: "Containers View"
 ---
 
 ## Overview
