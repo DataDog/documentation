@@ -312,10 +312,6 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 # ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 ```
 
-## Submit Traces directly to the Agent API
-
-If you require tailored instrumentation for a specific application, consider using the Agent-side tracing API to select individual spans to include in traces. See the [API documentation][8] for additional information.
-
 ## Modifying spans with the Datadog tracer
 
 While this page deals with modifying data once it has reached the Datadog Agent, some tracing libraries are extensible. You can write a custom post-processor to intercept spans and adjust or discard them accordingly (for example, based on a regular expression match). View the Custom Instrumentation documentation for your language for more information.
