@@ -25,7 +25,7 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 
 ### Node.js Version Support
 
-When the Node.js project drops support for an LTS major release line (when it goes EOL), support for it is dropped in the next major version of `dd-trace`.
+When the Node.js project drops support for an LTS major release line (when it goes End of Life), support for it is dropped in the next major version of `dd-trace`.
 The last major supporting release line of `dd-trace` library supports that EOL version of Node.js for at least another year on a maintenance mode basis.
 
 Some issues cannot be solved in `dd-trace` and instead must be solved in Node.js. When this happens and the Node.js release in question is EOL, it's not possible to solve the issue without moving to another non-EOL release.
@@ -110,9 +110,9 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 **Datastore tracing provides:**
 
-- timing request to response
-- query info (for example, a sanitized query string)
-- error and stacktrace capturing
+- Timing request to response
+- Query info (for example, a sanitized query string)
+- Error and stacktrace capturing
 
 ##### ASM Capability Notes
 - Open Source Vulnerability Detection is supported on all frameworks
@@ -141,6 +141,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
 [2]: /agent/remote_config/#enabling-remote-configuration
+[4]: https://nodejs.org/en/docs
 [28]: https://github.com/datastax/nodejs-driver
 [29]: https://github.com/couchbase/couchnode
 [30]: https://github.com/elastic/elasticsearch-js

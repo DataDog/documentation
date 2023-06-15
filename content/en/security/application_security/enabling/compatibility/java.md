@@ -98,9 +98,9 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 **Datastore tracing provides:**
 
-- timing request to response
-- query info (for example, a sanitized query string)
-- error and stacktrace capturing
+- Timing request to response
+- Query info (for example, a sanitized query string)
+- Error and stacktrace capturing
 
 ##### ASM Capability Notes
 - Open Source Vulnerability Detection is supported on all frameworks
@@ -131,4 +131,4 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 
 [1]: /tracing/trace_collection/compatibility/java/
-[2]: /help
+[2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
