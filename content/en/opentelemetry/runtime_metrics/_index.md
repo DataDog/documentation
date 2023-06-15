@@ -15,7 +15,7 @@ Datadog collects OpenTelemetry runtime metrics in the following languages:
 
 ## Metric naming conventions
 
-Runtime metrics follow different naming conventions depending on their source: OpenTelemetry Collector Datadog Exporter, Datadog Agent OTLP Ingestion, or Datadog tracing libraries. When using OpenTelemetry runtime metrics with Datadog, you receive both the original OpenTelemetry runtime metrics as well as mapped Datadog runtime metrics for equivalent metrics. Runtime metric have the following prefixes which indicate their source:
+Runtime metrics follow different naming conventions depending on their source: OpenTelemetry Collector Datadog Exporter, Datadog Agent OTLP Ingestion, or Datadog tracing libraries. When using OpenTelemetry runtime metrics with Datadog, you receive both the original OpenTelemetry runtime metrics as well as mapped Datadog runtime metrics for equivalent metrics. Runtime metrics have the following prefixes which indicate their source:
 
 | OTel Collector Datadog Exporter | Datadog Agent OTLP Ingest |  Datadog tracing library |
 | --- | --- | --- |
