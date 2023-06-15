@@ -33,7 +33,7 @@ const { env } = document.documentElement.dataset;
 const pageLanguage = getPageLanguage();
 const algoliaConfig = getConfig(env).algoliaConfig;
 const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
-const indexName = algoliaConfig.index;
+let indexName = algoliaConfig.index;
 
 function loadInstantSearch(currentPageWasAsyncLoaded) {
     const searchBoxContainerContainer = document.querySelector('.searchbox-container');
@@ -44,6 +44,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     const pageTitleScrollTo = document.querySelector('#pagetitle');
     const filtersDocs = `language: ${pageLanguage}`;
     const homepage = document.querySelector('.kind-home');
+    const apiPage = document.querySelector('body.api');
     let searchResultsPage = document.querySelector('.search_results_page');
     let basePathName = '/';
     let numHits = 5;
@@ -60,6 +61,10 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
     if (pageLanguage !== 'en') {
         basePathName += `${pageLanguage}/`;
+    }
+
+    if (apiPage) {
+        indexName = algoliaConfig.api_index;
     }
 
     if (searchResultsPage) {
