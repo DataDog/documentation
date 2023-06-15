@@ -1,4 +1,12 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - websocket
+  - websocket テスト
+  - websocket テスト
 aliases: null
 description: WebSocket リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します
 further_reading:

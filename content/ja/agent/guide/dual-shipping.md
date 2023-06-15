@@ -55,17 +55,10 @@ Agent バージョン >= 6.7.0 が必要です。
 apm_config:
   [...]
   additional_endpoints:
-    "intake.profile.datadoghq.com":
+    "https://trace.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "intake.profile.datadoghq.eu":
-    - apikey4
-
-  profiling_additional_endpoints:
-    "intake.profile.datadoghq.com":
-    - apikey2
-    - apikey3
-    "intake.profile.datadoghq.eu":
+    "https://trace.agent.datadoghq.eu":
     - apikey4
 ```
 
@@ -75,9 +68,35 @@ Agent バージョン >= 6.19 または 7.19 が必要です。
 
 ```bash
 DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
-
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
+
+## Continuous Profiler
+
+### YAML 構成
+
+Agent バージョン >= 6.7.0 が必要です。
+
+`datadog.yaml` で:
+
+```yaml
+apm_config:
+  [...]
+  profiling_additional_endpoints:
+    "https://intake.profile.datadoghq.com/api/v2/profile":
+    - apikey2
+    - apikey3
+    "https://intake.profile.datadoghq.eu/api/v2/profile":
+    - apikey4
+```
+
+### 環境変数コンフィギュレーション
+
+Agent バージョン >= 6.19 または 7.19 が必要です。
+
+```bash
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
+```
+
 
 ## ライブプロセス
 
