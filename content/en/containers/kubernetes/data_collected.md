@@ -145,7 +145,29 @@ For more information, see the documentation for the [Kubernetes scheduler][5] in
 
 For more information, see the documentation for the [Kubernetes state metrics core][6] integration.
 
-{{< get-service-checks-from-git "kubernetes_state_core" >}}
+`kubernetes_state.cronjob.complete`
+: Whether the last job of the cronjob is failed or not. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.cronjob.on_schedule_check`
+: Alert if the cronjob's next schedule is in the past. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.job.complete`
+: Whether the job is failed or not. Tags:`kube_job` or `kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
+
+`kubernetes_state.node.ready`
+: Whether the node is ready. Tags:`node` `condition` `status`.
+
+`kubernetes_state.node.out_of_disk`
+: Whether the node is out of disk. Tags:`node` `condition` `status`.
+
+`kubernetes_state.node.disk_pressure`
+: Whether the node is under disk pressure. Tags:`node` `condition` `status`.
+
+`kubernetes_state.node.network_unavailable`
+: Whether the node network is unavailable. Tags:`node` `condition` `status`.
+
+`kubernetes_state.node.memory_pressure`
+: Whether the node network is under memory pressure. Tags:`node` `condition` `status`.
 
 ## Further Reading
 
