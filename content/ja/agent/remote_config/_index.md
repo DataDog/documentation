@@ -15,6 +15,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
   tag: ブログ
   text: Datadog 監査証跡の使用
+- link: https://www.datadoghq.com/blog/remote-configuration-for-datadog/
+  tag: ブログ
+  text: リモート構成で Datadog コンポーネントにリアルタイムの更新を適用
 kind: documentation
 title: リモート構成
 ---
