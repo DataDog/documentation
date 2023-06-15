@@ -20,7 +20,7 @@ This guide describes how to manage pop-ups such as modals or application windows
 Synthetic browser tests automatically handle [JavaScript modals][1]:
 
  - `alert` modals are closed. 
- - `prompt` modals are answered with the text returned, or if the Cancel button or `Esc` is clicked, `null` is returned.
+ - `prompt` modals are answered with the text returned or `null` if the Cancel button or `Esc` is clicked.
  - `confirm` modals are answered with `true` for OK and `false` if the Cancel button or `Esc` is clicked.
 
 ### Basic authentication
