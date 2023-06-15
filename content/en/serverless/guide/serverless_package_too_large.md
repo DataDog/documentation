@@ -65,7 +65,7 @@ Using a bundler like [Webpack][6] or [esbuild][7] can dramatically reduce your d
 
 ## Alternately use datadog-ci
 
-Depending on your use case, you may find it easier to use the `datadog-ci lambda instrument` command to work around issues with package sizes. The `datadog-ci lambda instrument` command configures the same instrumentation as serverless-plugin-datadog. You can find documentation for this command in the [datadog-ci repo][9].
+Depending on your use case, you may find it easier to use the `datadog-ci lambda instrument` command to work around issues with package sizes. The `datadog-ci lambda instrument` command configures the same instrumentation as serverless-plugin-datadog. For more information, see the [datadog-ci repo][9].
 
 ## Get help
 
