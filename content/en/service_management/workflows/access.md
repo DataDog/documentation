@@ -93,7 +93,7 @@ Resolving a connection includes getting the connection object assigned to a step
 
 Follow the steps below to modify the permissions on a specific connection:
 
-1. Navigate to the [Workflows list][9].
+1. Navigate to the [Workflow Automation page][9].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.

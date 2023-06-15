@@ -1,5 +1,5 @@
 ---
-title: Build Workflows
+title: Build workflows
 kind: documentation
 disable_toc: false
 aliases:
@@ -10,7 +10,7 @@ further_reading:
   text: "Browse the available actions in the Actions Catalog"
 ---
 
-You can create workflows or edit existing workflows from the [**Workflows** page][1] in Datadog. The Workflows page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed.
+You can create workflows or edit existing workflows from the [**Workflow Automation** page][1] in Datadog. The Workflow Automation page lists existing workflows together with each workflow's author and the dates that each workflow was last modified and executed.
 - Hover over a workflow for the options to delete or clone the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.
 

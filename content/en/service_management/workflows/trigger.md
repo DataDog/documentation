@@ -21,7 +21,7 @@ further_reading:
 
 You can trigger a workflow manually or automatically.
 
-A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated to the Workflow. For more information on service accounts, see [Service accounts for Workflows][1].
+A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
 
 ## Manually trigger a workflow
 
@@ -96,7 +96,7 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 To schedule a workflow run:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **Schedule**.
-1. Click **Create** to create a service account. For more information, see [Service Accounts for Workflows][1].
+1. Click **Create** to create a service account. For more information, see [Use a service account][1].
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
@@ -115,6 +115,6 @@ The initial **Debug** view for a workflow provides a panel with the list of prev
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/access/#service-accounts
+[1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules

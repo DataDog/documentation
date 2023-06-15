@@ -18,7 +18,7 @@ Workflow actions can be authenticated in two ways:
 
 ## Integration tile credentials
 
-Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in Workflows:
+Credentials and account authentication that you set up in the following Datadog integration tiles automatically propagate to the corresponding actions in Workflow Automation:
 - Jira
 - PagerDuty
 - Slack
@@ -30,7 +30,7 @@ If the integration you need to set up is not listed above, set up connection cre
 
 ## Connection credentials
 
-Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflows product.
+Workflow connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8] or any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation product.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.
@@ -48,7 +48,7 @@ Where possible, use granular connections for different workflows. For example, i
 
 ### View connections
 
-1. From the [Workflows list][2], click **Connections** in the upper right. The [connections list][3] opens.
+1. From the [Workflow Automation page][2], click **Connections** in the upper right. The [connections list][3] opens.
 1. Click on a single line to view connection details.
 
 ### Create a connection
@@ -64,7 +64,7 @@ To create a connection:
 1. Fill in the appropriate fields. Click **Create**.
 
 Alternatively, add a connection from the workflow page:
-1. Navigate to the [Workflows list][9].
+1. Navigate to the [Workflow Automation list][9].
 1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
 1. In the workflow visualization, click the action to which you need to add a credential. The right side panel populates with the action details.
 1. Under the **Configure** tab, look for the **Connection** dropdown and click the **+** icon.
