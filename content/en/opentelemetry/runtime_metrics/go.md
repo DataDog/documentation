@@ -23,7 +23,7 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | --- | --- | --- |
 | `runtime.go.num_goroutine` | Number of goroutines spawned. | `process.runtime.go.goroutines` |
 | `runtime.go.num_cgo_call` | Number of CGO calls made. |`process.runtime.go.cgo.calls` |
-| `runtime.go.mem_stats.lookups` | Number of pointer lookups performed by the | `process.runtime.go.mem.lookups` |
+| `runtime.go.mem_stats.lookups` | Number of pointer lookups performed by the runtime. | `process.runtime.go.mem.lookups` |
 | `runtime.go.mem_stats.heap_alloc` | Bytes of allocated heap objects. | `process.runtime.go.mem.heap_alloc` |
 | `runtime.go.mem_stats.heap_sys` | Bytes of heap memory obtained from the operating system. | `process.runtime.go.mem.heap_sys` |
 | `runtime.go.mem_stats.heap_idle` | Bytes in idle (unused) spans. | `process.runtime.go.mem.heap_idle` |
@@ -43,7 +43,7 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `runtime.go.mem_stats.m_span_inuse` | Bytes of allocated mspan structures. | N/A |
 | `runtime.go.mem_stats.m_span_sys` | Bytes of memory obtained from the operating system for mspan structures. | N/A |
 | `runtime.go.mem_stats.m_cache_inuse` | Bytes of allocated mcache structures. | N/A |
-| `runtime.go.mem_stats.m_cache_sys` | Bytes of memory obtained from the operating system for | N/A |
+| `runtime.go.mem_stats.m_cache_sys` | Bytes of memory obtained from the operating system for mcache structures. | N/A |
 | `runtime.go.mem_stats.buck_hash_sys` | Bytes of memory in profiling bucket hash tables. | N/A |
 | `runtime.go.mem_stats.gc_sys` | Bytes of memory in garbage collection metadata. | N/A |
 | `runtime.go.mem_stats.other_sys` | Bytes of memory in miscellaneous off-heap. | N/A |
