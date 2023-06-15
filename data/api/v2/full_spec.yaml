@@ -18501,7 +18501,7 @@ paths:
               $ref: '#/components/schemas/GCPSTSServiceAccountCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
@@ -18521,12 +18521,20 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-given:
+        gcp_sts_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"client_email\":
+              \"{{ unique_hash }}@example.com\",\n      \"host_filters\": []\n    },\n
+              \   \"type\": \"gcp_service_account\"\n  }\n}"
+          step: there is a valid "gcp_sts_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteGCPSTSAccount
         parameters:
         - name: account_id
-          source: id
+          source: data.id
         type: unsafe
   /api/v2/integration/gcp/accounts/{account_id}:
     delete:

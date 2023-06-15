@@ -1,6 +1,7 @@
 export function getHitData(hit) {
     const title = hit.title ? hit.title : hit.type;
-    const cleanRelPermalink = hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '')
+    const cleanRelPermalink =
+        hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
 
     return {
         relpermalink: cleanRelPermalink,
