@@ -200,7 +200,7 @@ Added in version `2.19.0`.<br>
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
 **Example**: `layer:api, team:intake, key:value` <br>
-**Note**: The delimiter is a comma and a space: `, `.
+**Note**: The delimiter is a comma and a space: `, `. <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`
