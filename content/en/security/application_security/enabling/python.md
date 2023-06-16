@@ -24,7 +24,7 @@ further_reading:
 
 You can monitor the security of your Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 
 ## Get started
 
@@ -103,7 +103,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
    {{% /tab %}}
    {{< /tabs >}}
 
-{{% appsec-getstarted-2-plusrisk %}}
+{{% reuse appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 

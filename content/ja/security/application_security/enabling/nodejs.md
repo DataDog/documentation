@@ -24,9 +24,9 @@ type: multi-code-lang
 
 Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Node.js アプリのアプリケーションセキュリティを監視することができます。
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
+{{% reuse appsec-getstarted-with-rc %}}
 
 ## 詳細はこちら
 
@@ -145,7 +145,7 @@ DD_APPSEC_ENABLED=true node app.js
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% appsec-getstarted-2-plusrisk %}}
+{{% reuse appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="シグナルエクスプローラーとその詳細、脆弱性エクスプローラーとその詳細をビデオでご紹介しています。" video="true" >}}
 

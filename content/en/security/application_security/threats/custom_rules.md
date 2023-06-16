@@ -35,7 +35,7 @@ In these situations, a custom detection rule can be created to exclude such even
 ## Business logic abuse detection rule
 ASM offers out of the box rules to detect business logic abuse (for example, resetting a password through brute force). Those rules require [adding business logic information to traces][7].
 
-You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic. 
+You can filter the rules, and identify which business logic to start tracking. Additionally, you can use these rules as a blueprint to create custom rules based on your own business logic.
 
 See the section below to see how to configure your rules.
 
@@ -85,11 +85,11 @@ Provide a **name** for each rule case. This name is appended to the rule name wh
 
 #### Severity and notification
 
-{{% security-rule-severity-notification %}}
+{{% reuse security-rule-severity-notification %}}
 
 ### Time windows
 
-{{% security-rule-time-windows %}}
+{{% reuse security-rule-time-windows %}}
 
 Click **Add Case** to add additional cases.
 
@@ -97,7 +97,7 @@ Click **Add Case** to add additional cases.
 
 ### Say what's happening
 
-{{% security-rule-say-whats-happening %}}
+{{% reuse security-rule-say-whats-happening %}}
 
 Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `attack:sql-injection-attempt`.
 

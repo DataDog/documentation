@@ -24,7 +24,7 @@ type: multi-code-lang
 
 Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Ruby アプリのアプリケーションセキュリティを監視することができます。
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 
 ## 詳細はこちら
 
@@ -187,7 +187,7 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{< /tabs >}}
 
-{{% appsec-getstarted-2-canary %}}
+{{% reuse appsec-getstarted-2-canary %}}
 
 {{< img src="/security/application_security/application-security-signal.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
 

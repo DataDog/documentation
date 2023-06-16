@@ -11,7 +11,7 @@ title: OpenTelemetry API を使った Java アプリケーションのカスタ�
 type: multi-code-lang
 ---
 
-{{% otel-custom-instrumentation %}}
+{{% reuse otel-custom-instrumentation %}}
 
 ## 要件と制限
 
@@ -21,8 +21,8 @@ type: multi-code-lang
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|-------------------------------------------|
-| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
-| [スパンプロセッサー][2]                  | 非サポート                                          | 
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 |
+| [スパンプロセッサー][2]                  | 非サポート                                          |
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 
@@ -47,3 +47,4 @@ Datadog は、これらの OpenTelemetry スパンと他の Datadog APM スパ�
 [8]: https://opentelemetry.io/docs/instrumentation/java/automatic/
 [9]: /ja/tracing/trace_collection/trace_context_propagation/java/
 [11]: /ja/tracing/trace_collection/dd_libraries/java/?tab=springboot#add-the-java-tracer-to-the-jvm
+

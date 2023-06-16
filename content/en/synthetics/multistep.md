@@ -50,7 +50,7 @@ Multistep API tests can run from Datadog [managed](#select-locations) and [priva
 
 Select the **Locations** for your Multistep API test. Multistep API tests can run from both managed and [private locations][5] depending on your preference for running the test from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% reuse managed-locations %}}
 
 ### Define steps
 
@@ -81,9 +81,9 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    * **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.
    * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **Digest Auth**: Add Digest authentication credentials. 
+   * **Digest Auth**: Add Digest authentication credentials.
    * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.  
+   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as AWS S3 are not supported out-of-the box.
    For "Single Chunk" transfer requests to AWS S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
    * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).
 
@@ -91,7 +91,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    {{% tab "Query Parameters" %}}
 
-   * **Encode parameters**: Add the name and value of query parameters that require encoding. 
+   * **Encode parameters**: Add the name and value of query parameters that require encoding.
 
    {{% /tab %}}
 
@@ -108,7 +108,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
    * **Proxy Header**: Add headers to include in the HTTP request to the proxy.
 
    {{% /tab %}}
-  
+
    {{% tab "Privacy" %}}
 
    * **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For information about security recommendations, see [Synthetic Monitoring Data Security][1].
@@ -145,7 +145,7 @@ You can create up to 20 assertions per step by clicking **New Assertion** or by 
 
 #### Add execution parameters
 
-Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource. 
+Click **Continue with test if this step fails** to allow your test to move on with subsequent steps after step failure. This ensures your tests are able to clean up after themselves. For example, a test may create a resource, perform a number of actions on that resource, and end with the deletion of that resource.
 
 In case one of the intermediary steps fail, you want to have this setting enabled on every intermediary step to ensure that the resource is deleted at the end of the test and that no false positives are created.
 
@@ -240,7 +240,7 @@ To create a local variable, click **Create a Local Variable** at the top right h
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
-`{{ timestamp(n, unit) }}` 
+`{{ timestamp(n, unit) }}`
 : Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
 
 To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
@@ -266,7 +266,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 `DNS`
 : DNS entry not found for the test URL. Possible causes include a misconfigured test URL or a wrong configuration in your DNS entries.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
@@ -274,11 +274,11 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (60.5s).
 
-`MALFORMED_RESPONSE` 
+`MALFORMED_RESPONSE`
 : The remote server responded with a payload that does not comply with HTTP specifications.
 
 ## Permissions
@@ -291,7 +291,7 @@ If you are using the [custom role feature][17], add your user to any custom role
 
 Access restriction is available for customers using [custom roles][18] on their accounts.
 
-You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
+You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test.
 
 {{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 

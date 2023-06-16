@@ -85,7 +85,7 @@ Security --> Application Security --> Configuration --> [In-App WAF][9] と進�
 
 ### ブロックされたリクエストへの対応をカスタマイズする
 
-{{% asm-protection-page-configuration %}}
+{{% reuse asm-protection-page-configuration %}}
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="ASM がブロックされた IP からのリクエストをブロックする際に表示されるページ" width="75%" >}}
 

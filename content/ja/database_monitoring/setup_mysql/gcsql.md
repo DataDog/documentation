@@ -372,7 +372,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `mysql` を探します。または、[データベース][6]のページを参照してください。
 
 ## Agent の構成例
-{{% dbm-mysql-agent-config-examples %}}
+{{% reuse dbm-mysql-agent-config-examples %}}
 
 ## Cloud SQL インテグレーションをインストールする
 

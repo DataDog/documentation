@@ -25,7 +25,7 @@ title: Google Cloud SQL マネージド SQL Server のデータベースモニ�
 サポートされている SQL Server バージョン
 : 2012、2014、2016、2017、2019
 
-{{% dbm-sqlserver-before-you-begin %}}
+{{% reuse dbm-sqlserver-before-you-begin %}}
 
 ## Agent にアクセスを付与する
 
@@ -332,7 +332,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 {{< /tabs >}}
 
 ## Agent の構成例
-{{% dbm-sqlserver-agent-config-examples %}}
+{{% reuse dbm-sqlserver-agent-config-examples %}}
 
 ## Google Cloud SQL インテグレーションをインストールする
 

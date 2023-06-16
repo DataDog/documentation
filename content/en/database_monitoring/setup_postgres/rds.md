@@ -393,7 +393,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [Run the Agent's status subcommand][9] and look for `postgres` under the Checks section. Or visit the [Databases][10] page to get started!
 
 ## Example Agent Configurations
-{{% dbm-postgres-agent-config-examples %}}
+{{% reuse dbm-postgres-agent-config-examples %}}
 
 ## Install the RDS Integration
 

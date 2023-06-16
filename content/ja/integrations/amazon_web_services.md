@@ -60,13 +60,13 @@ Datadog の Amazon Web Services インテグレーションは、[90 以上の A
 
 ### 自動
 
-  * **CloudFormation (手早く始めるには最適)**  
+  * **CloudFormation (手早く始めるには最適)**
     CloudFormation で AWS インテグレーションを設定するには、[AWS スタートガイド][1]を参照してください。
 
-  * **Terraform**  
+  * **Terraform**
     AWS と Terraform のインテグレーションを設定するには、[AWS と Terraform のインテグレーション][4]を参照してください。
 
-  * **Control Tower**  
+  * **Control Tower**
     [Control Tower Account Factory][5] で新規に AWS アカウントをプロビジョニングする際の AWS インテグレーション設定は、[Control Tower セットアップガイド][6]をご覧ください。
 
   * **AWS 組織向けマルチアカウント設定**
@@ -74,13 +74,13 @@ Datadog の Amazon Web Services インテグレーションは、[90 以上の A
 
 ### 手動
 
-   * **ロールの委任**  
+   * **ロールの委任**
      AWS インテグレーションをロールの委任で手動設定する場合は、[手動設定ガイド][8]を参照してください。
 
-   * **アクセスキー (GovCloud または中国のみ)**  
+   * **アクセスキー (GovCloud または中国のみ)**
      アクセスキーによる AWS インテグレーションを設定する場合は、[手動設定ガイド][9]を参照してください。
 
-{{% aws-permissions %}}
+{{% reuse aws-permissions %}}
 
 ## ログの収集
 

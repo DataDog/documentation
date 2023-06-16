@@ -73,7 +73,7 @@ HTTP テストは、API エンドポイントを監視し、レスポンス遅�
 
 ### ロケーションを選択する
 
-テストを実行する 1 つ以上の **Managed Locations** または **Private Locations** を選択します。{{% managed-locations %}}
+テストを実行する 1 つ以上の **Managed Locations** または **Private Locations** を選択します。{{% reuse managed-locations %}}
 
 Shopist アプリケーションは `https://www.shopist.io/` で公開されているので、管理された任意の場所からテストを実行することができます。内部アプリケーションのテストや、地理的に離れた場所でのユーザーの行動をシミュレートするには、代わりに[プライベートロケーション][8]を使ってください。
 
@@ -178,7 +178,7 @@ An alert is triggered if your test fails for 3 minutes from any 2 of 13 location
         "quantity": 1
       },
       "cart_id": "{{ CART_ID }}"
-    } 
+    }
     {{< /code-block >}}
 
 5. **Test URL** をクリックします。これにより、ステップ 2 で抽出した商品が、ステップ 1 で作成したカートに追加され、チェックアウト URL が返されます。

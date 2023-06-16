@@ -132,21 +132,21 @@ Usa uno de los siguientes métodos para integrar tus cuentas de AWS en Datadog c
 
 ### Automática
 
-  * **CloudFormation (el mejor método para empezar cuanto antes)**  
+  * **CloudFormation (el mejor método para empezar cuanto antes)**
       Para configurar la integración de AWS con CloudFormation, consulta la [guía sobre cómo empezar con AWS][1].
 
-  * **Terraform**  
+  * **Terraform**
       Para configurar la integración de AWS con Terraform, consulta la [integración de AWS con Terraform][73].
 
-### Manual 
+### Manual
 
-   * **Delegación de roles**  
+   * **Delegación de roles**
       Para configurar la integración de AWS manualmente con delegación de roles, consulta la [guía de configuración manual][74].
 
-   * **Claves de acceso (solo para GovCloud o China)**  
+   * **Claves de acceso (solo para GovCloud o China)**
       Para configurar la integración de AWS con claves de acceso, consulta la [guía de configuración manual][75].
 
-{{% aws-permissions %}}
+{{% reuse aws-permissions %}}
 
 ## Recopilación de logs
 
@@ -170,7 +170,7 @@ Algunos productos de Datadog aprovechan la información relacionada con la confi
 
 #### Configuración
 
-Si no has configurado la integración de AWS en tu cuenta de AWS, completa el [proceso de configuración][80] que te presentamos más abajo. No olvides habilitar la recopilación de recursos cuando se indique.  
+Si no has configurado la integración de AWS en tu cuenta de AWS, completa el [proceso de configuración][80] que te presentamos más abajo. No olvides habilitar la recopilación de recursos cuando se indique.
 
 **Nota:** Para usar esta función, es necesario configurar la integración de AWS con **Delegación de roles*.*
 
@@ -178,14 +178,14 @@ Para añadir la administración de la posición de seguridad en la nube a una in
 
 1. Concédele los permisos necesarios al rol IAM de Datadog siguiendo los siguientes pasos de configuración automática **o** manual:
 
-    **Automática**: Actualiza tu plantilla de CloudFormation.    
-    a. Dirígete a la consola de CloudFormation, busca el stack principal que hayas utilizado para instalar la integración de Datadog y selecciona `Update`.  
-    b. Selecciona `Replace current template`.  
-    c. Selecciona `Amazon S3 URL`, introduce `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml` y haz clic en `Next`.  
-    d. Configura `CloudSecurityPostureManagementPermissions` como `true` y haz clic en `Next` sin modificar ningún otro parámetro hasta que llegues a la página `Review`. Una vez allí, podrás previsualizar los cambios para verificarlos.  
-    e. Marca las dos casillas de confirmación de la parte inferior y haz clic en `Update stack`.  
+    **Automática**: Actualiza tu plantilla de CloudFormation.
+    a. Dirígete a la consola de CloudFormation, busca el stack principal que hayas utilizado para instalar la integración de Datadog y selecciona `Update`.
+    b. Selecciona `Replace current template`.
+    c. Selecciona `Amazon S3 URL`, introduce `https://datadog-cloudformation-template.s3.amazonaws.com/aws/main.yaml` y haz clic en `Next`.
+    d. Configura `CloudSecurityPostureManagementPermissions` como `true` y haz clic en `Next` sin modificar ningún otro parámetro hasta que llegues a la página `Review`. Una vez allí, podrás previsualizar los cambios para verificarlos.
+    e. Marca las dos casillas de confirmación de la parte inferior y haz clic en `Update stack`.
 
-   **Manual**: Adjunta la [política gestionada `SecurityAudit` de AWS][81] a tu rol de IAM de Datadog AWS. La encontrarás en la [consola de AWS][81].  
+   **Manual**: Adjunta la [política gestionada `SecurityAudit` de AWS][81] a tu rol de IAM de Datadog AWS. La encontrarás en la [consola de AWS][81].
 
 2. Completa la configuración en el [cuadro de integración de Datadog AWS][82] con los pasos que aparecen a continuación. Si lo prefieres, también puedes usar el punto de conexión de API para [actualizar una integración de AWS][74].
 

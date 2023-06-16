@@ -393,7 +393,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `postgres` を探します。または、[データベース][10]のページを参照してください。
 
 ## Agent の構成例
-{{% dbm-postgres-agent-config-examples %}}
+{{% reuse dbm-postgres-agent-config-examples %}}
 
 ## RDS インテグレーションをインストール
 

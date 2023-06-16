@@ -51,11 +51,11 @@ Provide a **name**, for example "Case 1", for each rule case. This name is appen
 
 #### Severity and notification
 
-{{% security-rule-severity-notification %}}
+{{% reuse security-rule-severity-notification %}}
 
 #### Time windows
 
-{{% security-rule-time-windows %}}
+{{% reuse security-rule-time-windows %}}
 
 Click **Add Case** to add additional cases.
 
@@ -63,7 +63,7 @@ Click **Add Case** to add additional cases.
 
 ### Say what's happening
 
-{{% security-rule-say-whats-happening %}}
+{{% reuse security-rule-say-whats-happening %}}
 
 Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
 

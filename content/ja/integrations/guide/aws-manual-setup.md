@@ -61,7 +61,7 @@ AWS インテグレーションを手動で設定するには、AWS アカウン
 ### Datadog のための AWS IAM ポリシー
 Datadog が提供するすべての AWS インテグレーションを利用するために、AWS アカウントの Datadog ロールに[必要な権限](#aws-integration-iam-policy)を持つ IAM ポリシーを作成します。インテグレーションに他のコンポーネントが追加されると、これらの権限は変更される可能性があります。
 
-3. AWS [IAM コンソール][3]で新しいポリシーを作成します。 
+3. AWS [IAM コンソール][3]で新しいポリシーを作成します。
 4. **JSON** タブを選択します。テキストボックスに[権限ポリシー](#aws-integration-iam-policy)を貼り付けます。
 5. **Next: Tags** と **Next: Review** をクリックします。
 6. ポリシーに `DatadogIntegrationPolicy`、または自分が選択した名前を付け、適切な説明を入力します。
@@ -125,7 +125,7 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% aws-permissions %}}
+{{% reuse aws-permissions %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

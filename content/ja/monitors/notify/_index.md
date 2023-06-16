@@ -109,11 +109,11 @@ Disk space is low @ops-team@company.com
 
 #### Email
 
-{{% notifications-email %}}
+{{% reuse notifications-email %}}
 
 #### インテグレーション
 
-{{% notifications-integrations %}}
+{{% reuse notifications-integrations %}}
 
 ### 追加コンテンツのトグル
 

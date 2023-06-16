@@ -93,7 +93,7 @@ Datadog は、[OWASP ModSecurity Core Rule Set][12] を含む複数のパター�
 
 ## 内蔵保護機能
 
-{{% asm-protect %}}
+{{% reuse asm-protect %}}
 
 
 ## 攻撃試行の分類

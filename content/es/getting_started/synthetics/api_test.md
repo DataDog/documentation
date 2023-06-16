@@ -51,7 +51,7 @@ El siguiente ejemplo muestra cómo crear un [test HTTP][3], que es un subtipo de
     - Añade la URL del endpoint que quieres monitorizar. Si no sabes con qué empezar, puedes utilizar `https://www.shopist.io/`, una aplicación web de comercio electrónico de prueba. Al definir el endpoint que deseas probar, se rellena automáticamente el nombre de tu test en `Test on www.shopist.io`.
     - Puedes seleccionar **Advanced Options** (Opciones avanzadas) para establecer las opciones de solicitud, certificados, credenciales de autenticación y otros parámetros personalizados.
 
-      **Nota:** Puedes crear [variables globales][6] seguras para almacenar credenciales y [variables locales][7] para generar marcas de tiempo dinámicas para la carga útil de tu solicitud. Después de crear estas variables, escribe `{{` en cualquier campo relevante y selecciona la variable para introducir su valor en tus opciones de test.  
+      **Nota:** Puedes crear [variables globales][6] seguras para almacenar credenciales y [variables locales][7] para generar marcas de tiempo dinámicas para la carga útil de tu solicitud. Después de crear estas variables, escribe `{{` en cualquier campo relevante y selecciona la variable para introducir su valor en tus opciones de test.
 
       En este ejemplo, no se necesita ninguna opción avanzada en concreto.
     - Puedes definir etiquetas (tags) tales como `env:prod` y `app:shopist` en tu test. Las etiquetas te permiten mantener organizado tu conjunto de tests, así como encontrar rápidamente en la página de inicio los tests que te interesan.
@@ -68,13 +68,13 @@ En este ejemplo, se rellenan tres aserciones predeterminadas después de activar
 
 {{< img src="getting_started/synthetics/assertions-example-2.png" alt="Aserciones predeterminadas" style="width:100%;">}}
 
-Las aserciones son totalmente personalizables. Para añadir una aserción personalizada, haz clic en los elementos de la vista previa de la respuesta, como los encabezados, o haz clic en **New Assertion** (Nueva aserción) para definir una nueva aserción desde cero. 
+Las aserciones son totalmente personalizables. Para añadir una aserción personalizada, haz clic en los elementos de la vista previa de la respuesta, como los encabezados, o haz clic en **New Assertion** (Nueva aserción) para definir una nueva aserción desde cero.
 
 {{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Ejemplo de configuración de test de API" video="true" >}}
 
 ### Seleccionar localizaciones
 
-Selecciona una o varias **Localizaciones gestionadas** o **Localizaciones privadas** desde las que ejecutar tu test. {{% managed-locations %}}
+Selecciona una o varias **Localizaciones gestionadas** o **Localizaciones privadas** desde las que ejecutar tu test. {{% reuse managed-locations %}}
 
 La aplicación de Shopist está disponible públicamente en `https://www.shopist.io/`, por lo que puedes elegir cualquier localización gestionada desde la que ejecutar tu test. Para probar aplicaciones internas o simular el comportamiento del usuario en regiones geográficas concretas, mejor utiliza las [localizaciones privadas][8].
 
@@ -108,7 +108,7 @@ Cuando estés listo para guardar la configuración y el monitor del test, haz cl
 
 ## Crear un test de API multipaso
 
-Los [test de API multipaso][2] te permiten monitorizar las transacciones empresariales clave en la API. 
+Los [test de API multipaso][2] te permiten monitorizar las transacciones empresariales clave en la API.
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="Información general de un test de API multipaso de Synthetics" style="width:100%;" >}}
 
@@ -133,9 +133,9 @@ Para crear un test de API multipaso nuevo, haz clic en **New Test** (Nuevo test)
 5. Puedes mantener las aserciones predeterminadas o modificarlas.
 6. Si lo deseas, puedes definir los parámetros de ejecución.
 
-    Si seleccionas **Continue with test if this step fails** (Continuar con el test si este paso sale mal), podrás asegurarte de que se comprueba una recopilación completa de endpoints o de que se ha ejecutado el último paso de la limpieza, independientemente de que los pasos anteriores hayan salido bien o mal. La función del paso **Retry** (Reintentar) es útil en situaciones en las que sabes que el endpoint de la API puede tardar algún tiempo en responder. 
+    Si seleccionas **Continue with test if this step fails** (Continuar con el test si este paso sale mal), podrás asegurarte de que se comprueba una recopilación completa de endpoints o de que se ha ejecutado el último paso de la limpieza, independientemente de que los pasos anteriores hayan salido bien o mal. La función del paso **Retry** (Reintentar) es útil en situaciones en las que sabes que el endpoint de la API puede tardar algún tiempo en responder.
 
-    En este ejemplo, no se necesita ningún parámetro de ejecución en concreto. 
+    En este ejemplo, no se necesita ningún parámetro de ejecución en concreto.
 
 7. Para crear una variable a partir del valor del ID del carrito situado al final del encabezado `location`:
     - Haz clic en **Extract a variable from response content** (Extraer una variable del contenido de la respuesta).
@@ -179,7 +179,7 @@ Para crear un test de API multipaso nuevo, haz clic en **New Test** (Nuevo test)
         "quantity": 1
       },
       "cart_id": "{{ CART_ID }}"
-    } 
+    }
     {{< /code-block >}}
 
 5. Haz clic en **Test URL** para añadir el producto extraído en el paso 2 al carrito que has creado en el paso 1 y devolver una URL para proceder al pago.

@@ -218,7 +218,7 @@ CloudFormation으로 AWS를 구성하려면 [AWS 시작하기 가이드][1]를 �
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% aws-permissions %}}
+{{% reuse aws-permissions %}}
 
 ## 로그 수집
 

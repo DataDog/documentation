@@ -44,7 +44,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 ## Postgres 設定を構成する
 
-[Server パラメーター][4]で以下の[パラメーター][3]を構成し、**サーバーを再起動する**と設定が反映されます。 
+[Server パラメーター][4]で以下の[パラメーター][3]を構成し、**サーバーを再起動する**と設定が反映されます。
 
 {{< tabs >}}
 {{% tab "Single Server" %}}
@@ -436,7 +436,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションで `postgres` を探します。または、[データベース][9]のページを参照してください。
 ## Agent の構成例
-{{% dbm-postgres-agent-config-examples %}}
+{{% reuse dbm-postgres-agent-config-examples %}}
 ## Azure PostgreSQL インテグレーションをインストールする
 
 Azure からより包括的なデータベースメトリクスを収集するには、[Azure PostgreSQL インテグレーション][10]をインストールします (オプション)。

@@ -435,7 +435,7 @@ Pour éviter d'exposer le mot de passe de l'utilisateur `datadog` en clair, util
 
 [Lancez la sous-commande status de l'Agent][8] et cherchez `postgres` dans la section Checks. Vous pouvez également consulter la page [Databases][9] pour commencer à surveiller vos bases de données.
 ## Exemples de configuration de l'Agent
-{{% dbm-postgres-agent-config-examples %}}
+{{% reuse dbm-postgres-agent-config-examples %}}
 ## Installer l'intégration Azure PostgreSQL
 
 Pour recueillir des métriques de base de données plus complètes depuis Azure, installez l'[intégration Azure PostgreSQL][10] (facultatif).

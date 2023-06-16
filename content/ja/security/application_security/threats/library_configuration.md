@@ -99,7 +99,7 @@ ASM を無効にするには、アプリケーションの構成から `DD_APPSE
 
 ## カスタムブロッキングページまたはペイロードの構成
 
-{{% asm-protection-page-configuration %}}
+{{% reuse asm-protection-page-configuration %}}
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="ASM がブロックされた IP からのリクエストをブロックする際に表示されるページ" width="75%" >}}
 

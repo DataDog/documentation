@@ -110,11 +110,11 @@ Vous pouvez envoyer des `@notifications` de différentes façons :
 
 #### E-mail
 
-{{% notifications-email %}}
+{{% reuse notifications-email %}}
 
 #### Intégrations
 
-{{% notifications-integrations %}}
+{{% reuse notifications-integrations %}}
 
 ### Choisir le contenu supplémentaire à afficher
 

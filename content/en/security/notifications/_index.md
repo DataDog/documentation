@@ -17,37 +17,37 @@ further_reading:
 
 ## Overview
 
-A security signal is generated when a threat is detected in Datadog Security. You can send notifications to keep your team informed when these signals are generated. 
+A security signal is generated when a threat is detected in Datadog Security. You can send notifications to keep your team informed when these signals are generated.
 
-Notifications can be set up for specific [detection rules](#detection-rules-notifications) and also more broadly with [notification rules](#notification-rules). See [Notification Variables][1] to learn how to customize the notifications based on the signal's severity and specific context on the threat. 
+Notifications can be set up for specific [detection rules](#detection-rules-notifications) and also more broadly with [notification rules](#notification-rules). See [Notification Variables][1] to learn how to customize the notifications based on the signal's severity and specific context on the threat.
 
 ## Notification channels
 
-Send notifications through email, Slack, Jira, PagerDuty, or a webhook. 
+Send notifications through email, Slack, Jira, PagerDuty, or a webhook.
 
 ### Email
 
-{{% notifications-email %}}
+{{% reuse notifications-email %}}
 
 ### Integrations
 
-{{% notifications-integrations %}}
+{{% reuse notifications-integrations %}}
 
 ## Detection Rule notifications
 
-When you [create or modify a new detection rule][2], you can use the **Set rule case** and **Say what's happening** section to define the notifications that are sent. 
+When you [create or modify a new detection rule][2], you can use the **Set rule case** and **Say what's happening** section to define the notifications that are sent.
 
 ### Set rule case
 
-In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the [selected recipient(s)](#notification-channels). 
+In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the [selected recipient(s)](#notification-channels).
 
 ### Say what's happening
 
-Use the **Say what's happening** section to determine the content that is sent when a signal is generated. 
+Use the **Say what's happening** section to determine the content that is sent when a signal is generated.
 
 #### Rule name
 
-Add a rule name for your detection rule. The rule name appears in the **Detection Rules** list view, as well as the title of the signal. 
+Add a rule name for your detection rule. The rule name appears in the **Detection Rules** list view, as well as the title of the signal.
 
 #### Message
 
@@ -55,7 +55,7 @@ Use standard Markdown and [notification variables][1] to provide specific detail
 
 #### Tags
 
-Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`. 
+Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
 
 ## Notification rules
 

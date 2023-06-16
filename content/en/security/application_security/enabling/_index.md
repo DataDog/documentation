@@ -31,9 +31,9 @@ further_reading:
 
 Enable your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
+{{% reuse appsec-getstarted-with-rc %}}
 
 Select your application language for details on how to do these steps for your language and infrastructure types.
 

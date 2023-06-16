@@ -281,7 +281,7 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
 [Agent の status サブコマンドを実行][13]し、Checks セクションで `postgres` を探します。または、[データベース][14]のページを参照してください。
 
 ## Agent の構成例
-{{% dbm-postgres-agent-config-examples %}}
+{{% reuse dbm-postgres-agent-config-examples %}}
 
 ## トラブルシューティング
 

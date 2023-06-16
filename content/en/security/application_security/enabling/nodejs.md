@@ -24,9 +24,9 @@ further_reading:
 
 You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
+{{% reuse appsec-getstarted-with-rc %}}
 
 ## Get started
 
@@ -147,7 +147,7 @@ DD_APPSEC_ENABLED=true node app.js
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% appsec-getstarted-2-plusrisk %}}
+{{% reuse appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 

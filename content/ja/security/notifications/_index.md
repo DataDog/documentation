@@ -27,11 +27,11 @@ Datadog Security で脅威が検出されると、セキュリティシグナル
 
 ### Email
 
-{{% notifications-email %}}
+{{% reuse notifications-email %}}
 
 ### インテグレーション
 
-{{% notifications-integrations %}}
+{{% reuse notifications-integrations %}}
 
 ## 検出ルールの通知
 

@@ -24,7 +24,7 @@ type: multi-code-lang
 
 Docker、Kubernetes、AWS ECS で動作する Go アプリのアプリケーションセキュリティを監視することができます。
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 - [supportedサポートされている APM トレーシングインテグレーション][1]のうちのいずれか 1 つ。
 - ビルド環境で、C 言語ライブラリのヘッダーとコンパイルターゲット用の C 言語ツールチェーンとともに、[CGO][2] が有効になっていること。詳細な手順については、[CGO を有効にする][3]を参照してください。
 
@@ -102,7 +102,7 @@ spec:
 
 {{< /tabs >}}
 
-{{% appsec-getstarted-2 %}}
+{{% reuse appsec-getstarted-2 %}}
 
 {{< img src="/security/application_security/application-security-signal.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
 

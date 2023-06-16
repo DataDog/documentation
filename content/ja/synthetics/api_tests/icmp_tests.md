@@ -73,7 +73,7 @@ ICMP テストは、ネットワークの外部または内部のどちらから
 
 ICMP テストを実行する**ロケーション**を選択します。ICMP テストは、ネットワークの外部または内部のどちらから ICMP ping をトリガーするかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
 
-{{% managed-locations %}} 
+{{% reuse managed-locations %}}
 
 ### テストの頻度を指定する
 
@@ -125,7 +125,7 @@ ICMP テストは次の頻度で実行できます。
 
 詳しくは、[Synthetic テストモニターの使用][7]をご覧ください。
 
-{{% synthetics-variables %}}
+{{% reuse synthetics-variables %}}
 
 ### 変数を使用する
 

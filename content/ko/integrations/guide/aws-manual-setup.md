@@ -64,7 +64,7 @@ Datadog에서 제공하는 모든 AWS 통합을 활용하려면 [필수 권한](
 3. AWS [IAM 콘솔][3]에서 새 정책을 생성합니다.
 4. **JSON** 탭을 선택하고 [권한 정책](#aws-integration-iam-policy)을 텍스트 상자에 붙여 넣습니다.
 5. **Next: Tags**와 **Next: Review**를 클릭합니다.
-6. 정책 이름을 `DatadogIntegrationPolicy` 또는 원하는 이름으로 지정하고 적절한 설명을 제공합니다. 
+6. 정책 이름을 `DatadogIntegrationPolicy` 또는 원하는 이름으로 지정하고 적절한 설명을 제공합니다.
 7. **Create policy**을 클릭합니다.
 
 ### Datadog에 대한 AWS IAM 역할
@@ -125,7 +125,7 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% aws-permissions %}}
+{{% reuse aws-permissions %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

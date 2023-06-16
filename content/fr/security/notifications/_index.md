@@ -28,11 +28,11 @@ Envoyez des notifications par e-mail, sur Slack, Jira ou PagerDuty, ou via un we
 
 ### E-mail
 
-{{% notifications-email %}}
+{{% reuse notifications-email %}}
 
 ### Intégrations
 
-{{% notifications-integrations %}}
+{{% reuse notifications-integrations %}}
 
 ## Notifications des règles de détection
 

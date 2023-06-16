@@ -100,7 +100,7 @@ If you need additional help, contact [Datadog support][6].
 
 ## Configure a custom blocking page or payload
 
-{{% asm-protection-page-configuration %}}
+{{% reuse asm-protection-page-configuration %}}
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
 

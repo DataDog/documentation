@@ -31,9 +31,9 @@ type: multi-code-lang
 
 アプリケーション言語用の Datadog ライブラリを使用して、本番システムを標的とした[脅威の検出と保護][1]、およびコードとそのオープンソース依存関係における[リスク管理][2]を可能にします。サーバー、Docker、Kubernetes、AWS ECS、(対応言語の) AWS Fargate でホストされているアプリの脆弱性と脅威を検出することができます。
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 
-{{% appsec-getstarted-with-rc %}}
+{{% reuse appsec-getstarted-with-rc %}}
 
 アプリケーション言語を選択すると、言語とインフラストラクチャーの種類に応じてこれらの手順を実行する方法の詳細が表示されます。
 

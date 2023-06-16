@@ -17,7 +17,7 @@ type: multi-code-lang
 ---
 
 
-{{% otel-custom-instrumentation %}}
+{{% reuse otel-custom-instrumentation %}}
 
 {{< partial name="apm/apm-otel-instrumentation.html" >}}
 

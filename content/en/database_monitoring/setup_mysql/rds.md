@@ -178,8 +178,8 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
-    
-    
+
+
      # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.
     aws:
       instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
@@ -334,7 +334,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
 ## Example Agent Configurations
-{{% dbm-mysql-agent-config-examples %}}
+{{% reuse dbm-mysql-agent-config-examples %}}
 
 ## Install the RDS Integration
 

@@ -51,11 +51,11 @@ type: documentation
 
 #### 重大度および通知
 
-{{% security-rule-severity-notification %}}
+{{% reuse security-rule-severity-notification %}}
 
 #### タイムウィンドウ
 
-{{% security-rule-time-windows %}}
+{{% reuse security-rule-time-windows %}}
 
 ケースを追加する場合は、**Add Case** をクリックします。
 
@@ -63,7 +63,7 @@ type: documentation
 
 ### Say what's happening
 
-{{% security-rule-say-whats-happening %}}
+{{% reuse security-rule-say-whats-happening %}}
 
 シグナルにタグを追加するには、**Tag resulting signals** ドロップダウンメニューを使用します。例えば、`security:attack` や `technique:T1110-brute-force` のようになります。
 

@@ -33,7 +33,7 @@ Pour activer la solution Database Monitoring pour votre base de données, suive
 
 Versions de SQL Server prises en charge : 2012, 2014, 2016, 2017, 2019
 
-{{% dbm-sqlserver-before-you-begin %}}
+{{% reuse dbm-sqlserver-before-you-begin %}}
 
 ## Accorder un accès à l'Agent
 
@@ -77,21 +77,21 @@ Il est conseillé d'installer directement l'Agent sur le host SQL Server. En ef
 
 {{< tabs >}}
 {{% tab "Host Windows" %}}
-{{% dbm-sqlserver-agent-setup-windows %}}
+{{% reuse dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
 {{% tab "Host Linux" %}}
-{{% dbm-sqlserver-agent-setup-linux %}}
+{{% reuse dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
-{{% dbm-sqlserver-agent-setup-docker %}}
+{{% reuse dbm-sqlserver-agent-setup-docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-{{% dbm-sqlserver-agent-setup-kubernetes %}}
+{{% reuse dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Exemples de configuration de l'Agent
-{{% dbm-sqlserver-agent-config-examples %}}
+{{% reuse dbm-sqlserver-agent-config-examples %}}
 
 ## Pour aller plus loin
 

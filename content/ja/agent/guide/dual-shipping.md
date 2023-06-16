@@ -198,7 +198,7 @@ DD_LOGS_CONFIG_USE_HTTP=true
 DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"agent-http-intake.logs.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{% agent-dual-shipping %}}
+{{% reuse agent-dual-shipping %}}
 
 ## データベース モニタリング
 
@@ -243,7 +243,7 @@ DD_DATABASE_MONITORING_METRICS_USE_HTTP=true
 DD_DATABASE_MONITORING_METRICS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"dbm-metrics-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{% agent-dual-shipping %}}
+{{% reuse agent-dual-shipping %}}
 
 ## Network Devices
 
@@ -286,7 +286,7 @@ DD_NETWORK_DEVICES_METADATA_USE_HTTP=true
 DD_NETWORK_DEVICES_METADATA_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"ndm-intake.datadoghq.com\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{% agent-dual-shipping %}}
+{{% reuse agent-dual-shipping %}}
 
 ## Cloud Security Posture Management (CSPM)
 
@@ -311,7 +311,7 @@ DD_COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{% agent-dual-shipping %}}
+{{% reuse agent-dual-shipping %}}
 
 ## クラウドワークロードセキュリティ (CWS)
 
@@ -335,7 +335,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
 DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.datadoghq.eu\", \"Port\": 443, \"is_reliable\": true}]"
 ```
 
-{{% agent-dual-shipping %}}
+{{% reuse agent-dual-shipping %}}
 
 ## Kubernetes のデュアルシッピング
 
@@ -345,7 +345,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 # agents.useConfigMap -- Agent 構成を提供するために、configmap を構成します。これは `agents.customAgentConfig` パラメーターと組み合わせて使用します。
   useConfigMap:  true
 
-  # agents.customAgentConfig -- Datadog Agent 構成 (datadog.yaml) のカスタムコンテンツを指定します。 
+  # agents.customAgentConfig -- Datadog Agent 構成 (datadog.yaml) のカスタムコンテンツを指定します。
   ## ref: https://docs.datadoghq.com/agent/guide/agent-configuration-files/?tab=agentv6
   ## ref: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
   ## このパラメーターを考慮するには `agents.useConfigMap` が `true` に設定されている必要があることに注意してください。

@@ -373,7 +373,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [Run the Agent's status subcommand][5] and look for `mysql` under the Checks section. Or visit the [Databases][6] page to get started!
 
 ## Example Agent Configurations
-{{% dbm-mysql-agent-config-examples %}}
+{{% reuse dbm-mysql-agent-config-examples %}}
 
 ## Install the Cloud SQL integration
 

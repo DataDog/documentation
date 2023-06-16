@@ -126,7 +126,7 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% aws-permissions %}}
+{{% reuse aws-permissions %}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

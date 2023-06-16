@@ -195,11 +195,11 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 ### 重大度および通知
 
-{{% security-rule-severity-notification %}}
+{{% reuse security-rule-severity-notification %}}
 
 ### タイムウィンドウ
 
-{{% security-rule-time-windows %}}
+{{% reuse security-rule-time-windows %}}
 
 ケースを追加する場合は、**Add Case** をクリックします。
 
@@ -213,7 +213,7 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 ### 重大度および通知
 
-{{% security-rule-severity-notification %}}
+{{% reuse security-rule-severity-notification %}}
 
 ### 価値を忘れる
 
@@ -231,7 +231,7 @@ Third Party では、外部のベンダーやアプリケーションからの�
 
 ### 重大度および通知
 
-{{% security-rule-severity-notification %}}
+{{% reuse security-rule-severity-notification %}}
 
 ### タイムウィンドウ
 
@@ -249,11 +249,11 @@ Datadog は、データの季節性を自動的に検出し、異常と判断さ
 
 ### 重大度および通知
 
-{{% security-rule-severity-notification %}}
+{{% reuse security-rule-severity-notification %}}
 
 ### タイムウィンドウ
 
-{{% security-rule-time-windows %}}
+{{% reuse security-rule-time-windows %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -273,7 +273,7 @@ Datadog は、データの季節性を自動的に検出し、異常と判断さ
 
 ## Say what's happening
 
-{{% security-rule-say-whats-happening %}}
+{{% reuse security-rule-say-whats-happening %}}
 
 シグナルにタグを追加するには、**Tag resulting signals** ドロップダウンメニューを使用します。例えば、`security:attack` や `technique:T1110-brute-force` のようになります。
 

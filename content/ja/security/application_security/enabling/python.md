@@ -24,7 +24,7 @@ type: multi-code-lang
 
 Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Python アプリのセキュリティを監視することができます。
 
-{{% appsec-getstarted %}}
+{{% reuse appsec-getstarted %}}
 
 ## 詳細はこちら
 
@@ -95,7 +95,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Python アプリの�
    {{% /tab %}}
    {{% tab "AWS Fargate" %}}
 
-   {{% appsec-getstarted-2-canary %}}
+   {{% reuse appsec-getstarted-2-canary %}}
    ```shell
    DD_APPSEC_ENABLED=true ddtrace-run python app.py
    ```
@@ -103,7 +103,7 @@ Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Python アプリの�
    {{% /tab %}}
    {{< /tabs >}}
 
-{{% appsec-getstarted-2-plusrisk %}}
+{{% reuse appsec-getstarted-2-plusrisk %}}
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="シグナルエクスプローラーとその詳細、脆弱性エクスプローラーとその詳細をビデオでご紹介しています。" video="true" >}}
 

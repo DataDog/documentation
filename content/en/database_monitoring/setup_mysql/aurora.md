@@ -26,7 +26,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6, 5.7, and 8.0 or later 
+: 5.6, 5.7, and 8.0 or later
 
 Supported Agent versions
 : 7.36.1 or later
@@ -343,7 +343,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [Run the Agent's status subcommand][6] and look for `mysql` under the Checks section. Or visit the [Databases][7] page to get started!
 
 ## Example Agent Configurations
-{{% dbm-mysql-agent-config-examples %}}
+{{% reuse dbm-mysql-agent-config-examples %}}
 
 ## Install the RDS Integration
 

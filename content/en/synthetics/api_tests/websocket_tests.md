@@ -35,7 +35,7 @@ After choosing to create an `WebSocket` test, define your test's request.
 ### Define request
 
 1. Specify the **URL** to run your test on.
-2. Enter the string you want to send in your test. 
+2. Enter the string you want to send in your test.
 3. Add **Advanced Options** (optional) to your test:
 
    {{< tabs >}}
@@ -88,7 +88,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 
 Select the **Locations** to run your WebSocket test from. WebSocket tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network.
 
-{{% managed-locations %}} 
+{{% reuse managed-locations %}}
 
 ### Specify test frequency
 
@@ -140,7 +140,7 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
 For more information, see [Using Synthetic Test Monitors][8].
 
-{{% synthetics-variables %}} 
+{{% reuse synthetics-variables %}}
 
 ### Use variables
 
@@ -150,7 +150,7 @@ To display your list of variables, type `{{` in your desired field.
 
 ## Test failure
 
-A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint. 
+A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
 These reasons include the following:
 
@@ -160,7 +160,7 @@ These reasons include the following:
 `DNS`
 : DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
 
-`INVALID_REQUEST` 
+`INVALID_REQUEST`
 : The configuration of the test is invalid (for example, a typo in the URL).
 
 `SSL`
@@ -168,7 +168,7 @@ These reasons include the following:
 
 `TIMEOUT`
 : The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
 
@@ -182,7 +182,7 @@ If you are using the [custom role feature][11], add your user to any custom role
 
 Access restriction is available for customers using [custom roles][12] on their accounts.
 
-You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test. 
+You can restrict access to a WebSocket test based on the roles in your organization. When creating a WebSocket test, choose which roles (in addition to your user) can read and write your test.
 
 {{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 

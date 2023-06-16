@@ -38,11 +38,11 @@ From this page you can block and unblock users and IPs, or investigate what infr
 
 ## Create In-App WAF rules for identifying attack patterns
 
-You can [create In-App WAF rules][5] that define what suspicious behavior looks like in your application, augmenting the default rules that come with ASM. Then [specify custom rules][6] to generate security signals from the attack attempts triggered from these rules, raising them in the Threat Monitoring views for your investigation. 
+You can [create In-App WAF rules][5] that define what suspicious behavior looks like in your application, augmenting the default rules that come with ASM. Then [specify custom rules][6] to generate security signals from the attack attempts triggered from these rules, raising them in the Threat Monitoring views for your investigation.
 
 ## Slow down attacks and attackers with ASM Protect
 
-{{% asm-protect %}}
+{{% reuse asm-protect %}}
 
 ## Further reading
 

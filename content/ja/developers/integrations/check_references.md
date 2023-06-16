@@ -84,7 +84,7 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 
 [**Integrations** ページ][4]または [**Marketplace** ページ][11]にあるすべての製品には、動作パラメーター、より大きなDatadog インテグレーションエコシステム内での位置づけ、追加のメタデータを定義する `manifest.json` ファイルがあります。
 
-{{% integration-assets-reference %}}
+{{% reuse integration-assets-reference %}}
 
 ### 分類子タグ
 
@@ -92,7 +92,7 @@ YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]�
 
 `manifest.json` ファイルに対する分類子タグの完全なリストは、以下の通りです。
 
-{{% integration_categories %}}
+{{% reuse integration_categories %}}
 
 ## サービスチェックファイル
 

@@ -11,7 +11,7 @@ title: OpenTelemetry API を使った .NET アプリケーションのカスタ�
 type: multi-code-lang
 ---
 
-{{% otel-custom-instrumentation %}}
+{{% reuse otel-custom-instrumentation %}}
 
 ## 要件と制限
 

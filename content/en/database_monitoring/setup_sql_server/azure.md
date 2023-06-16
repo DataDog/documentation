@@ -30,7 +30,7 @@ Do the following steps to enable Database Monitoring with your database:
 Supported SQL Server versions
 : 2012, 2014, 2016, 2017, 2019
 
-{{% dbm-sqlserver-before-you-begin %}}
+{{% reuse dbm-sqlserver-before-you-begin %}}
 
 ## Grant the Agent access
 
@@ -408,7 +408,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{< /tabs >}}
 
 ## Example Agent Configurations
-{{% dbm-sqlserver-agent-config-examples %}}
+{{% reuse dbm-sqlserver-agent-config-examples %}}
 
 ## Install the Azure integration
 

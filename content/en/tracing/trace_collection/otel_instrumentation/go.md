@@ -11,7 +11,7 @@ further_reading:
       text: 'Explore your services, resources, and traces'
 ---
 
-{{% otel-custom-instrumentation %}}
+{{% reuse otel-custom-instrumentation %}}
 
 ## Requirements and limitations
 
@@ -66,7 +66,7 @@ The following OpenTelemetry features are implemented in the Datadog library as n
    ```go
    otel.SetTracerProvider(provider)
    ```
-   
+
 7. Run your application.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.

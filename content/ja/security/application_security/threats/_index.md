@@ -42,7 +42,7 @@ ASM に付属するデフォルトのルールを拡張して、アプリケー�
 
 ## ASM Protect で攻撃と攻撃者の速度を落とす
 
-{{% asm-protect %}}
+{{% reuse asm-protect %}}
 
 ## その他の参考資料
 
