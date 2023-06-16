@@ -9,6 +9,9 @@ further_reading:
     - link: 'logs/log_configuration/processors'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
+    - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+      tag: "Blog"
+      text: "Use CIDR notation queries to filter your network traffic logs"
 algolia:
   tags: ['log metrics', 'generating logs from metrics']
 ---

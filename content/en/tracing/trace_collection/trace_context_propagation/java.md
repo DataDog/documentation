@@ -4,6 +4,10 @@ kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 
@@ -35,6 +39,10 @@ The value of the property or environment variable is a comma (or space) separate
 If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
 For reference details about the context propagation settings and other configuration, read [Java Tracing Library Configuration][1].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/library_config/java/#headers-extraction-and-injection
 [13]: https://github.com/openzipkin/b3-propagation

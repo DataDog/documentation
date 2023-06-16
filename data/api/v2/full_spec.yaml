@@ -498,6 +498,31 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Conflict
+    FindingsBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Bad Request: The server cannot process the request due to invalid
+        syntax in the request.'
+    FindingsForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Forbidden: Access denied'
+    FindingsNotFoundResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Not Found: The requested finding cannot be found.'
+    FindingsTooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Too many requests: The rate limit set by the API has been exceeded.'
     ForbiddenResponse:
       content:
         application/json:
@@ -1336,6 +1361,39 @@ components:
       - EARLIEST
       - MOST_FREQUENT
       - DELTA
+    CIAppCIError:
+      description: Contains information of the CI error.
+      nullable: true
+      properties:
+        domain:
+          $ref: '#/components/schemas/CIAppCIErrorDomain'
+        message:
+          description: Error message.
+          maxLength: 5000
+          nullable: true
+          type: string
+        stack:
+          description: The stack trace of the reported errors.
+          nullable: true
+          type: string
+        type:
+          description: Short description of the error type.
+          maxLength: 100
+          nullable: true
+          type: string
+      type: object
+    CIAppCIErrorDomain:
+      description: Error category used to differentiate between issues related to
+        the developer or provider environments.
+      enum:
+      - provider
+      - user
+      - unknown
+      type: string
+      x-enum-varnames:
+      - PROVIDER
+      - USER
+      - UNKNOWN
     CIAppCompute:
       description: A compute rule to compute metrics or timeseries.
       properties:
@@ -1372,6 +1430,52 @@ components:
       description: A map of the metric name to value for regular compute, or a list
         of values for a timeseries.
       type: object
+    CIAppCreatePipelineEventRequest:
+      description: Request object.
+      properties:
+        data:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestData'
+      type: object
+    CIAppCreatePipelineEventRequestAttributes:
+      description: Attributes of the pipeline event to create.
+      properties:
+        env:
+          description: The Datadog environment.
+          type: string
+        resource:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestAttributesResource'
+        service:
+          description: If the CI provider is SaaS, use this to differentiate between
+            instances.
+          type: string
+      required:
+      - resource
+      type: object
+    CIAppCreatePipelineEventRequestAttributesResource:
+      description: Details of the CI pipeline event.
+      example: Details TBD
+      oneOf:
+      - $ref: '#/components/schemas/CIAppPipelineEventPipeline'
+      - $ref: '#/components/schemas/CIAppPipelineEventStage'
+      - $ref: '#/components/schemas/CIAppPipelineEventJob'
+      - $ref: '#/components/schemas/CIAppPipelineEventStep'
+    CIAppCreatePipelineEventRequestData:
+      description: Data of the pipeline event to create.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestAttributes'
+        type:
+          $ref: '#/components/schemas/CIAppCreatePipelineEventRequestDataType'
+      type: object
+    CIAppCreatePipelineEventRequestDataType:
+      default: cipipeline_resource_request
+      description: Type of the event.
+      enum:
+      - cipipeline_resource_request
+      example: cipipeline_resource_request
+      type: string
+      x-enum-varnames:
+      - CIPIPELINE_RESOURCE_REQUEST
     CIAppEventAttributes:
       description: JSON object containing all event attributes and their associated
         values.
@@ -1397,6 +1501,77 @@ components:
           $ref: '#/components/schemas/TagsEventAttribute'
         timestamp:
           $ref: '#/components/schemas/TimestampEventAttribute'
+      type: object
+    CIAppGitInfo:
+      description: 'If pipelines are triggered due to actions to a Git repository,
+        then all payloads must contain this.
+
+        Note that either `tag` or `branch` has to be provided, but not both.'
+      nullable: true
+      properties:
+        author_email:
+          description: The commit author email.
+          example: author@example.com
+          format: email
+          type: string
+        author_name:
+          description: The commit author name.
+          example: John Doe
+          nullable: true
+          type: string
+        author_time:
+          description: The commit author timestamp in RFC3339 format.
+          example: '2023-05-31T15:30:00Z'
+          nullable: true
+          type: string
+        branch:
+          description: The branch name (if a tag use the tag parameter).
+          example: feature-1
+          nullable: true
+          type: string
+        commit_time:
+          description: The commit timestamp in RFC3339 format.
+          example: '2023-05-31T15:30:00Z'
+          nullable: true
+          type: string
+        committer_email:
+          description: The committer email.
+          example: committer@example.com
+          format: email
+          nullable: true
+          type: string
+        committer_name:
+          description: The committer name.
+          nullable: true
+          type: string
+        default_branch:
+          description: The Git repository's default branch.
+          example: main
+          nullable: true
+          type: string
+        message:
+          description: The commit message.
+          example: Instrumenting tests with CI Visibility.
+          nullable: true
+          type: string
+        repository_url:
+          description: The URL of the repository.
+          example: https://github.com/username/repository
+          type: string
+        sha:
+          description: The git commit SHA.
+          example: da39a3ee5e6b4b0d3255bfef95601890afd80709
+          pattern: ^[a-fA-f0-9]{40}$
+          type: string
+        tag:
+          description: The tag name (if a branch use the branch parameter).
+          example: v1.0.0
+          nullable: true
+          type: string
+      required:
+      - repository_url
+      - sha
+      - author_email
       type: object
     CIAppGroupByHistogram:
       description: 'Used to perform a histogram computation (only for measure facets).
@@ -1457,6 +1632,31 @@ components:
     CIAppGroupByTotalString:
       description: A string to use as the key value for the total bucket.
       type: string
+    CIAppHostInfo:
+      description: Contains information of the host running the pipeline, stage, job,
+        or step.
+      nullable: true
+      properties:
+        hostname:
+          description: FQDN of the host.
+          example: www.example.com
+          type: string
+        labels:
+          description: A list of labels used to select or identify the node.
+          example:
+          - ubuntu-18.04
+          - n2.large
+          items:
+            type: string
+          type: array
+        name:
+          description: Name for the host.
+          type: string
+        workspace:
+          description: The path where the code is checked out.
+          example: /home/workspace/code/my-repo
+          type: string
+      type: object
     CIAppPipelineEvent:
       description: Object description of a pipeline event after being processed and
         stored by Datadog.
@@ -1470,6 +1670,497 @@ components:
         type:
           $ref: '#/components/schemas/CIAppPipelineEventTypeName'
       type: object
+    CIAppPipelineEventJob:
+      description: Details of a CI job.
+      properties:
+        dependencies:
+          description: A list of job IDs that this job depends on.
+          example:
+          - f7e6a006-a029-46c3-b0cc-742c9d7d363b
+          - c8a69849-3c3b-4721-8b33-3e8ec2df1ebe
+          items:
+            description: A list of job IDs.
+            type: string
+          nullable: true
+          type: array
+        end:
+          description: Time when the job run finished. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        id:
+          description: The UUID for the job. It has to be unique within each pipeline
+            execution.
+          example: c865bad4-de82-44b8-ade7-2c987528eb54
+          type: string
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventJobLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: The name for the job.
+          example: test
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: 76b572af-a078-42b2-a08a-cc28f98b944f
+          type: string
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        stage_id:
+          description: The parent stage UUID (if applicable).
+          nullable: true
+          type: string
+        stage_name:
+          description: The parent stage name (if applicable).
+          nullable: true
+          type: string
+        start:
+          description: Time when the job run instance started (it should not include
+            any queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventJobStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        url:
+          description: The URL to look at the job in the CI provider UI.
+          example: https://ci-platform.com/job/your-job-name/build/123
+          type: string
+        user:
+          $ref: '#/components/schemas/CIAppUserInfo'
+      required:
+      - level
+      - id
+      - name
+      - pipeline_unique_id
+      - pipeline_name
+      - start
+      - end
+      - status
+      - url
+      type: object
+    CIAppPipelineEventJobLevel:
+      default: job
+      description: Used to distinguish between pipelines, stages, jobs, and steps.
+      enum:
+      - job
+      example: job
+      type: string
+      x-enum-varnames:
+      - JOB
+    CIAppPipelineEventJobStatus:
+      description: The final status of the job.
+      enum:
+      - success
+      - error
+      - canceled
+      - skipped
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+      - CANCELED
+      - SKIPPED
+    CIAppPipelineEventMetrics:
+      description: A list of user-defined metrics. The metrics must follow the `key:value`
+        pattern and the value must be numeric.
+      example:
+      - bundle_size:370
+      - build_time:50021
+      items:
+        description: Metrics in the form of `key:value`. The value needs to be numeric.
+        type: string
+      nullable: true
+      type: array
+    CIAppPipelineEventParameters:
+      additionalProperties:
+        type: string
+      description: A map of key-value parameters or environment variables that were
+        defined for the pipeline.
+      example:
+        LOG_LEVEL: debug
+      nullable: true
+      type: object
+    CIAppPipelineEventParentPipeline:
+      description: If the pipeline is triggered as child of another pipeline, this
+        should contain the details of the parent pipeline.
+      nullable: true
+      properties:
+        id:
+          description: UUID of a pipeline.
+          example: 93bfeb70-af47-424d-908a-948d3f08e37f
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://ci-platform.com/pipelines/123456789
+          type: string
+      required:
+      - id
+      type: object
+    CIAppPipelineEventPipeline:
+      description: Details of the top level pipeline, build, or workflow of your CI.
+      properties:
+        end:
+          description: Time when the pipeline run finished. The time format must be
+            RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        is_manual:
+          description: Whether or not the pipeline was triggered manually by the user.
+          example: false
+          nullable: true
+          type: boolean
+        is_resumed:
+          description: Whether or not the pipeline was resumed after being blocked.
+          example: false
+          nullable: true
+          type: boolean
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: Name of the pipeline. All pipeline runs for the builds should
+            have the same name.
+          example: Deploy to AWS
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        parent_pipeline:
+          $ref: '#/components/schemas/CIAppPipelineEventParentPipeline'
+        partial_retry:
+          description: 'Whether or not the pipeline was a partial retry of a previous
+            attempt. A partial retry is one
+
+            which only runs a subset of the original jobs.'
+          example: false
+          type: boolean
+        pipeline_id:
+          description: 'Any ID used in the provider to identify the pipeline run even
+            if it is not unique across retries.
+
+            If the `pipeline_id` is unique, then both `unique_id` and `pipeline_id`
+            can be set to the same value.'
+          example: '#023'
+          type: string
+        previous_attempt:
+          $ref: '#/components/schemas/CIAppPipelineEventPreviousPipeline'
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the pipeline run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventPipelineStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        unique_id:
+          description: 'UUID of the pipeline run. The ID has to be unique across retries
+            and pipelines,
+
+            including partial retries.'
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
+          type: string
+        user:
+          $ref: '#/components/schemas/CIAppUserInfo'
+      required:
+      - level
+      - unique_id
+      - name
+      - url
+      - start
+      - end
+      - status
+      - partial_retry
+      type: object
+    CIAppPipelineEventPipelineLevel:
+      default: pipeline
+      description: Used to distinguish between pipelines, stages, jobs, and steps.
+      enum:
+      - pipeline
+      example: pipeline
+      type: string
+      x-enum-varnames:
+      - PIPELINE
+    CIAppPipelineEventPipelineStatus:
+      description: The final status of the pipeline.
+      enum:
+      - success
+      - error
+      - canceled
+      - skipped
+      - blocked
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+      - CANCELED
+      - SKIPPED
+      - BLOCKED
+    CIAppPipelineEventPreviousPipeline:
+      description: If the pipeline is a retry, this should contain the details of
+        the previous attempt.
+      nullable: true
+      properties:
+        id:
+          description: UUID of a pipeline.
+          example: 93bfeb70-af47-424d-908a-948d3f08e37f
+          type: string
+        url:
+          description: The URL to look at the pipeline in the CI provider UI.
+          example: https://ci-platform.com/pipelines/123456789
+          type: string
+      required:
+      - id
+      type: object
+    CIAppPipelineEventStage:
+      description: Details of a CI stage.
+      properties:
+        dependencies:
+          description: A list of stage IDs that this stage depends on.
+          example:
+          - f7e6a006-a029-46c3-b0cc-742c9d7d363b
+          - c8a69849-3c3b-4721-8b33-3e8ec2df1ebe
+          items:
+            description: A list of stage IDs.
+            type: string
+          nullable: true
+          type: array
+        end:
+          description: Time when the stage run finished. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        id:
+          description: UUID for the stage. It has to be unique at least in the pipeline
+            scope.
+          example: 562bdbbb-7cab-48c8-851c-b24ca14628bf
+          type: string
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventStageLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: The name for the stage.
+          example: build
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: 76b572af-a078-42b2-a08a-cc28f98b944f
+          type: string
+        queue_time:
+          description: The queue time in milliseconds, if applicable.
+          example: 1004
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        start:
+          description: Time when the stage run started (it should not include any
+            queue time). The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventStageStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        user:
+          $ref: '#/components/schemas/CIAppUserInfo'
+      required:
+      - level
+      - id
+      - name
+      - pipeline_unique_id
+      - pipeline_name
+      - start
+      - end
+      - status
+      type: object
+    CIAppPipelineEventStageLevel:
+      default: stage
+      description: Used to distinguish between pipelines, stages, jobs and steps.
+      enum:
+      - stage
+      example: stage
+      type: string
+      x-enum-varnames:
+      - STAGE
+    CIAppPipelineEventStageStatus:
+      description: The final status of the stage.
+      enum:
+      - success
+      - error
+      - canceled
+      - skipped
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+      - CANCELED
+      - SKIPPED
+    CIAppPipelineEventStep:
+      description: Details of a CI step.
+      properties:
+        end:
+          description: Time when the step run finished. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        error:
+          $ref: '#/components/schemas/CIAppCIError'
+        git:
+          $ref: '#/components/schemas/CIAppGitInfo'
+        id:
+          description: UUID for the step. It has to be unique within each pipeline
+            execution.
+          example: c2d517a8-4f3a-4b41-b4ae-69df0c864c79
+          type: string
+        job_id:
+          description: The parent job UUID (if applicable).
+          nullable: true
+          type: string
+        job_name:
+          description: The parent job name (if applicable).
+          nullable: true
+          type: string
+        level:
+          $ref: '#/components/schemas/CIAppPipelineEventStepLevel'
+        metrics:
+          $ref: '#/components/schemas/CIAppPipelineEventMetrics'
+        name:
+          description: The name for the step.
+          example: test-server
+          type: string
+        node:
+          $ref: '#/components/schemas/CIAppHostInfo'
+        parameters:
+          $ref: '#/components/schemas/CIAppPipelineEventParameters'
+        pipeline_name:
+          description: The parent pipeline name.
+          example: Build
+          type: string
+        pipeline_unique_id:
+          description: The parent pipeline UUID.
+          example: 76b572af-a078-42b2-a08a-cc28f98b944f
+          type: string
+        stage_id:
+          description: The parent stage UUID (if applicable).
+          nullable: true
+          type: string
+        stage_name:
+          description: The parent stage name (if applicable).
+          nullable: true
+          type: string
+        start:
+          description: Time when the step run started. The time format must be RFC3339.
+          example: '2023-05-31T15:30:00Z'
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/CIAppPipelineEventStepStatus'
+        tags:
+          $ref: '#/components/schemas/CIAppPipelineEventTags'
+        url:
+          description: The URL to look at the step in the CI provider UI.
+          nullable: true
+          type: string
+        user:
+          $ref: '#/components/schemas/CIAppUserInfo'
+      required:
+      - level
+      - id
+      - name
+      - pipeline_unique_id
+      - pipeline_name
+      - start
+      - end
+      - status
+      type: object
+    CIAppPipelineEventStepLevel:
+      default: step
+      description: Used to distinguish between pipelines, stages, jobs and steps.
+      enum:
+      - step
+      example: step
+      type: string
+      x-enum-varnames:
+      - STEP
+    CIAppPipelineEventStepStatus:
+      description: The final status of the step.
+      enum:
+      - success
+      - error
+      example: success
+      type: string
+      x-enum-varnames:
+      - SUCCESS
+      - ERROR
+    CIAppPipelineEventTags:
+      description: A list of user-defined tags. The tags must follow the `key:value`
+        pattern.
+      example:
+      - team:backend
+      - type:deployment
+      items:
+        description: Tags in the form of `key:value`.
+        type: string
+      nullable: true
+      type: array
     CIAppPipelineEventTypeName:
       description: Type of the event.
       enum:
@@ -1477,7 +2168,7 @@ components:
       example: cipipeline
       type: string
       x-enum-varnames:
-      - cipipeline
+      - CIPIPELINE
     CIAppPipelineEventsRequest:
       description: The request for a pipelines search.
       properties:
@@ -1750,7 +2441,7 @@ components:
       example: citest
       type: string
       x-enum-varnames:
-      - citest
+      - CITEST
     CIAppTestEventsRequest:
       description: The request for a tests search.
       properties:
@@ -1872,6 +2563,23 @@ components:
           description: The maximum time for the requested events, supports date, math,
             and regular timestamps (in milliseconds).
           example: now
+          type: string
+      type: object
+    CIAppUserInfo:
+      description: 'Used to specify user-related information when the payload does
+        not have Git information.
+
+        For example, if Git information is missing for manually triggered pipelines,
+        this field can be used instead.'
+      nullable: true
+      properties:
+        email:
+          description: Email of the user.
+          format: email
+          type: string
+        name:
+          description: Name of the user.
+          example: John Doe
           type: string
       type: object
     CIAppWarning:
@@ -3858,34 +4566,6 @@ components:
       type: string
       x-enum-varnames:
       - FINDING
-    FindingsErrorItem:
-      description: API error response body
-      properties:
-        detail:
-          description: A human-readable explanation specific to this occurrence of
-            the error.
-          example: attribute "muted" is required
-          type: string
-        status:
-          description: Status code of the response.
-          example: '400'
-          type: string
-        title:
-          description: Short human-readable summary of the error.
-          example: Bad Request
-          type: string
-      type: object
-    FindingsErrorResponse:
-      description: API error response.
-      properties:
-        errors:
-          description: A list of errors.
-          items:
-            $ref: '#/components/schemas/FindingsErrorItem'
-          type: array
-      required:
-      - errors
-      type: object
     FormulaLimit:
       description: Message for specifying limits to the number of values returned
         by a query.
@@ -4193,6 +4873,31 @@ components:
         example: env:production
         type: string
       type: array
+    HTTPCIAppError:
+      description: List of errors.
+      properties:
+        detail:
+          description: Error message.
+          example: Malformed payload
+          type: string
+        status:
+          description: Error code.
+          example: '400'
+          type: string
+        title:
+          description: Error title.
+          example: Bad Request
+          type: string
+      type: object
+    HTTPCIAppErrors:
+      description: Errors occurred.
+      properties:
+        errors:
+          description: Structured errors.
+          items:
+            $ref: '#/components/schemas/HTTPCIAppError'
+          type: array
+      type: object
     HTTPLog:
       description: Structured log message.
       items:
@@ -6155,6 +6860,34 @@ components:
             description: An empty error list.
             type: string
           type: array
+      type: object
+    JSONAPIErrorItem:
+      description: API error response body
+      properties:
+        detail:
+          description: A human-readable explanation specific to this occurrence of
+            the error.
+          example: Missing required attribute in body
+          type: string
+        status:
+          description: Status code of the response.
+          example: '400'
+          type: string
+        title:
+          description: Short human-readable summary of the error.
+          example: Bad Request
+          type: string
+      type: object
+    JSONAPIErrorResponse:
+      description: API error response.
+      properties:
+        errors:
+          description: A list of errors.
+          items:
+            $ref: '#/components/schemas/JSONAPIErrorItem'
+          type: array
+      required:
+      - errors
       type: object
     JiraIntegrationMetadata:
       description: Incident integration metadata for the Jira integration.
@@ -16022,6 +16755,78 @@ paths:
       x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
+  /api/v2/ci/pipeline:
+    post:
+      description: Send your pipeline event to your Datadog platform over HTTP.
+      operationId: CreateCIAppPipelineEvent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CIAppCreatePipelineEventRequest'
+        required: true
+      responses:
+        '202':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Request accepted for processing
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Forbidden
+        '408':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Request Timeout
+        '413':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Payload Too Large
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Too Many Requests
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Internal Server Error
+        '503':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPCIAppErrors'
+          description: Service Unavailable
+      summary: Send pipeline event
+      tags:
+      - CI Visibility Pipelines
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
       description: The API endpoint to aggregate CI Visibility pipeline events into
@@ -16050,7 +16855,7 @@ paths:
       tags:
       - CI Visibility Pipelines
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 4
       x-undo:
         type: safe
   /api/v2/ci/pipelines/events:
@@ -16127,7 +16932,7 @@ paths:
       summary: Get a list of pipelines events
       tags:
       - CI Visibility Pipelines
-      x-menu-order: 1
+      x-menu-order: 2
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -16168,7 +16973,7 @@ paths:
       tags:
       - CI Visibility Pipelines
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after
@@ -17696,7 +18501,7 @@ paths:
               $ref: '#/components/schemas/GCPSTSServiceAccountCreateRequest'
         required: true
       responses:
-        '201':
+        '200':
           content:
             application/json:
               schema:
@@ -17716,12 +18521,20 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-given:
+        gcp_sts_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"client_email\":
+              \"{{ unique_hash }}@example.com\",\n      \"host_filters\": []\n    },\n
+              \   \"type\": \"gcp_service_account\"\n  }\n}"
+          step: there is a valid "gcp_sts_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteGCPSTSAccount
         parameters:
         - name: account_id
-          source: id
+          source: data.id
         type: unsafe
   /api/v2/integration/gcp/accounts/{account_id}:
     delete:
@@ -21265,13 +22078,16 @@ paths:
         can also use the negation operator on strings. For example, use `filter[resource_type]=-aws*`
         to filter for any non-AWS resources.\n\nThe operator must come after the equal
         sign. For example, to filter with the `>=` operator, add the operator after
-        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\n### Response\n\nThe
-        response includes an array of finding objects, pagination metadata, and a
-        count of items that match the query.\n\nEach finding object contains the following:\n\n-
-        The finding ID that can be used in a `GetFinding` request to retrieve the
-        full finding details.\n- Core attributes, including status, evaluation, high-level
-        resource details, muted state, and rule details.\n- `evaluation_changed_at`
-        and `resource_discovery_date` time stamps.\n- An array of associated tags.\n"
+        the equal sign: `filter[evaluation_changed_at]=>=1678809373257`.\n\nQuery
+        parameters must be only among the documented ones and with values of correct
+        types. Duplicated query parameters (e.g. `filter[status]=low&filter[status]=info`)
+        are not allowed.\n\n### Response\n\nThe response includes an array of finding
+        objects, pagination metadata, and a count of items that match the query.\n\nEach
+        finding object contains the following:\n\n- The finding ID that can be used
+        in a `GetFinding` request to retrieve the full finding details.\n- Core attributes,
+        including status, evaluation, high-level resource details, muted state, and
+        rule details.\n- `evaluation_changed_at` and `resource_discovery_date` time
+        stamps.\n- An array of associated tags.\n"
       operationId: ListFindings
       parameters:
       - description: Limit the number of findings returned. Must be <= 1000.
@@ -21371,17 +22187,13 @@ paths:
                 $ref: '#/components/schemas/ListFindingsResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
+          $ref: '#/components/responses/FindingsBadRequestResponse'
         '403':
-          $ref: '#/components/responses/ForbiddenResponse'
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          $ref: '#/components/responses/NotFoundResponse'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21429,17 +22241,13 @@ paths:
                 $ref: '#/components/schemas/GetFindingResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Bad Request
+          $ref: '#/components/responses/FindingsBadRequestResponse'
         '403':
-          $ref: '#/components/responses/ForbiddenResponse'
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          $ref: '#/components/responses/NotFoundResponse'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '429':
-          $ref: '#/components/responses/TooManyRequestsResponse'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -21490,39 +22298,27 @@ paths:
                 $ref: '#/components/schemas/MuteFindingResponse'
           description: OK
         '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
-          description: 'Bad Request: The server cannot process the request due to
-            invalid syntax in the request.'
+          $ref: '#/components/responses/FindingsBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/FindingsForbiddenResponse'
         '404':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
-          description: 'Not Found: The requested finding cannot be found.'
+          $ref: '#/components/responses/FindingsNotFoundResponse'
         '409':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: 'Resource Conflict: The finding has already been muted or unmuted
             within the last 60 seconds.'
         '422':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
           description: 'Invalid Request: The server understands the request syntax
             but cannot process it due to invalid data.'
         '429':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FindingsErrorResponse'
-          description: 'Too many requests: The rate limit set by the API has been
-            exceeded.'
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
       security:
       - apiKeyAuth: []
         appKeyAuth: []
@@ -26834,7 +27630,8 @@ tags:
 
     sent from Identity Providers.'
   name: AuthN Mappings
-- description: Search or aggregate your CI Visibility pipeline events over HTTP.
+- description: Search or aggregate your CI Visibility pipeline events and send them
+    to your Datadog site over HTTP.
   name: CI Visibility Pipelines
 - description: Search or aggregate your CI Visibility test events over HTTP.
   name: CI Visibility Tests
