@@ -45,15 +45,16 @@ These security insights are detected from data reported by APM. The insights hel
 
 ## Enable ASM
 
-ASM relies on the same libraries as Application Performance Monitoring (APM). 
-To benefit from all the ASM capabilities such as detections, automatic updates, and protection, first enable [Remote Configuration][15].
-
 ### Enable ASM with in-app instructions
 
 Go to the [ASM Setup page][1] and follow the instructions to get started. This includes:
 - Guided selection of services that would benefit from ASM.
 - Configuring your Datadog tracing libraries with an environment variable.
-- Restarting your services.
+- Restarting your services. </br>
+
+1. [Go to ASM][18] and click **Get Started with ASM**.
+2. Select services exposed to risk that are recommended by Datadog.
+3. Follow the instructions to get started with ASM.
 
 ### Enable ASM with Remote Configuration
 #### Prerequisites:
@@ -67,11 +68,6 @@ Go to the [ASM Setup page][1] and follow the instructions to get started. This i
   3. Update your Datadog Agent configuration to use the API key with Remote Configuration capability.
 
   See [Setting up Remote Configuration][21] for more information.
-
-#### Enable ASM 
-  1. [Go to ASM][18] and click **Get Started with ASM**.
-  2. Select services exposed to risk that are recommended by Datadog.
-  3. Follow the instructions to get started with ASM.
 
 ### Test ASM
 Once enabled, ASM immediately identifies application vulnerabilities and detects attacks and attackers targeting your services.
@@ -89,7 +85,7 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
   'dd-test-scanner-log';
   done{{< /code-block >}}
 
-3. Go to [Security Signal][6] to see the signal that is generated after a few seconds.
+3. Go to [Security Signals Explorer][6] to see the signal that is generated after a few seconds.
 
 Interested in best practices to go further? View the [in-product Quickstart Guide.][19]
 
