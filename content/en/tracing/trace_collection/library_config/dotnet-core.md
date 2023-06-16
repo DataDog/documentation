@@ -187,7 +187,6 @@ If specified, adds all of the specified tags to all generated spans. <br>
 **Note**: The delimiter is a comma and a space: `, `.
 Added in version 1.17.0. <br>
 
-
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\` on Windows, `/var/log/datadog/dotnet` on Linux
