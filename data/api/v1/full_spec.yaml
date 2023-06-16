@@ -12636,6 +12636,7 @@ components:
       - isInMoreThan
       - isInLessThan
       - doesNotExist
+      - isUndefined
       example: contains
       type: string
       x-enum-varnames:
@@ -12653,6 +12654,7 @@ components:
       - IS_IN_MORE_DAYS_THAN
       - IS_IN_LESS_DAYS_THAN
       - DOES_NOT_EXIST
+      - IS_UNDEFINED
     SyntheticsAssertionTarget:
       description: An assertion which uses a simple target.
       properties:
@@ -16211,6 +16213,7 @@ components:
           description: The total number of audit logs lines indexed during a given
             hour.
           format: int64
+          nullable: true
           type: integer
         org_name:
           description: The organization name.
@@ -17717,9 +17720,19 @@ components:
             over all hours in the current month for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg:
+          description: Host count average of Cloud Cost Management for AWS for the
+            given date and given organization.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg:
+          description: Host count average of Cloud Cost Management for Azure for the
+            given date and given organization.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg:
-          description: Host count average of Cloud Cost Management for the given date
-            and given organization.
+          description: Host count average of Cloud Cost Management for all cloud providers
+            for the given date and given organization.
           format: int64
           type: integer
         container_avg:
@@ -17879,6 +17892,11 @@ components:
         mobile_rum_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current date for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for all organizations.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -18124,9 +18142,19 @@ components:
             over all hours in the current date for the given org.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg:
+          description: Host count average of Cloud Cost Management for AWS for the
+            given date and given org.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg:
+          description: Host count average of Cloud Cost Management for Azure for the
+            given date and given org.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg:
-          description: Host count average of Cloud Cost Management for the given date
-            and given org.
+          description: Host count average of Cloud Cost Management for all cloud providers
+            for the given date and given org.
           format: int64
           type: integer
         container_avg:
@@ -18285,6 +18313,11 @@ components:
         mobile_rum_session_count_reactnative_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current date for the given org.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current date for the given org.
           format: int64
           type: integer
         mobile_rum_session_count_sum:
@@ -18540,8 +18573,19 @@ components:
             over all hours in the current months for all organizations.
           format: int64
           type: integer
+        cloud_cost_management_aws_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management for
+            AWS.
+          format: int64
+          type: integer
+        cloud_cost_management_azure_host_count_avg_sum:
+          description: Sum of the host count average for Cloud Cost Management for
+            Azure.
+          format: int64
+          type: integer
         cloud_cost_management_host_count_avg_sum:
-          description: Sum of the host count average for Cloud Cost Management.
+          description: Sum of the host count average for Cloud Cost Management for
+            all cloud providers.
           format: int64
           type: integer
         container_avg_sum:
@@ -18729,6 +18773,11 @@ components:
         mobile_rum_session_count_reactnative_agg_sum:
           description: Shows the sum of all mobile RUM Sessions on React Native over
             all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        mobile_rum_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
+            in the current months for all organizations.
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
@@ -19328,25 +19377,26 @@ components:
       description: Axis controls for the widget.
       properties:
         include_zero:
-          description: True includes zero.
+          description: Set to `true` to include zero.
           type: boolean
         label:
-          description: The label of the axis to display on the graph.
+          description: The label of the axis to display on the graph. Only usable
+            on Scatterplot Widgets.
           type: string
         max:
           default: auto
-          description: Specifies the maximum value to show on the y-axis. It takes
-            a number, or auto for default behavior.
+          description: Specifies maximum numeric value to show on the axis. Defaults
+            to `auto`.
           type: string
         min:
           default: auto
-          description: Specifies minimum value to show on the y-axis. It takes a number,
-            or auto for default behavior.
+          description: Specifies minimum numeric value to show on the axis. Defaults
+            to `auto`.
           type: string
         scale:
           default: linear
           description: Specifies the scale type. Possible values are `linear`, `log`,
-            `sqrt`, `pow##` (for example `pow2`, `pow0.5` etc.).
+            `sqrt`, and `pow##` (for example `pow2` or `pow0.5`).
           type: string
       type: object
     WidgetChangeType:
@@ -28637,38 +28687,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      servers:
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: The regional site for Datadog customers.
-            enum:
-            - datadoghq.com
-            - datadoghq.eu
-            - us3.datadoghq.com
-            - us5.datadoghq.com
-            - ap1.datadoghq.com
-            - ddog-gov.com
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
-      - url: '{protocol}://{name}'
-        variables:
-          name:
-            default: api.datadoghq.com
-            description: Full site DNS name.
-          protocol:
-            default: https
-            description: The protocol for accessing the API.
-      - url: https://{subdomain}.{site}
-        variables:
-          site:
-            default: datadoghq.com
-            description: Any Datadog deployment.
-          subdomain:
-            default: api
-            description: The subdomain where the API is deployed.
       summary: Search for SLOs
       tags:
       - Service Level Objectives

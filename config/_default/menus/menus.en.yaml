@@ -195,6 +195,12 @@ main:
     identifier: glossary
     parent: essentials_heading
     weight: 15000
+  - name: Guides
+    url: all_guides/
+    pre: compass
+    identifier: guides
+    parent: essentials_heading
+    weight: 16000
   - name: Agent
     url: agent/
     pre: agent-fill
@@ -741,47 +747,6 @@ main:
     parent: dashboards
     identifier: guides
     weight: 9
-  - name: Infrastructure
-    url: infrastructure/
-    identifier: infrastructure
-    pre: host-map
-    parent: infrastructure_heading
-    weight: 90000
-  - name: Infrastructure List
-    url: infrastructure/list/
-    parent: infrastructure
-    weight: 1
-  - name: Host Map
-    url: infrastructure/hostmap/
-    parent: infrastructure
-    weight: 2
-    identifier: infrastructure_host_map
-  - name: Container Map
-    url: infrastructure/containermap/
-    parent: infrastructure
-    weight: 3
-  - name: Live Processes
-    url: infrastructure/process/
-    parent: infrastructure
-    identifier: infrastructure_process
-    weight: 4
-  - name: Increase Process Retention
-    url: infrastructure/process/increase_process_retention/
-    parent: infrastructure_process
-    weight: 401
-  - name: Live Containers
-    url: infrastructure/livecontainers/
-    parent: infrastructure
-    identifier: infrastructure_livecontainers
-    weight: 5
-  - name: Configuration
-    url: infrastructure/livecontainers/configuration
-    parent: infrastructure_livecontainers
-    weight: 501
-  - name: Legacy Configuration
-    url: infrastructure/livecontainers/legacy
-    parent: infrastructure_livecontainers
-    weight: 502
   - name: Serverless
     url: serverless
     pre: serverless
@@ -881,6 +846,45 @@ main:
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
     weight: 1
+  - name: Infrastructure
+    url: infrastructure/
+    identifier: infrastructure
+    pre: host-map
+    parent: platform_heading
+    weight: 70000
+  - name: Host and Container Maps
+    url: infrastructure/hostmap/
+    parent: infrastructure
+    weight: 1
+    identifier: infrastructure_host_map
+  - name: Infrastructure List
+    url: infrastructure/list/
+    parent: infrastructure
+    weight: 2
+  - name: Containers View
+    url: infrastructure/containers/
+    parent: infrastructure
+    identifier: infrastructure_livecontainers
+    weight: 3
+  - name: Configuration
+    url: infrastructure/containers/configuration
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_configuration
+    weight: 301
+  - name: Orchestrator Explorer
+    url: infrastructure/containers/orchestrator_explorer
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_explorer
+    weight: 302
+  - name: Processes View
+    url: infrastructure/process/
+    parent: infrastructure
+    identifier: infrastructure_process
+    weight: 4
+  - name: Increase Process Retention
+    url: infrastructure/process/increase_process_retention/
+    parent: infrastructure_process
+    weight: 401
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1462,6 +1466,11 @@ main:
     parent: tracing_otel_inst
     identifier: tracing_otel_inst_go
     weight: 104
+  - name: Node.js
+    url: tracing/trace_collection/otel_instrumentation/nodejs/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_nodejs
+    weight: 105
   - name: .NET
     url: tracing/trace_collection/otel_instrumentation/dotnet/
     parent: tracing_otel_inst
@@ -3446,41 +3455,26 @@ main:
     parent: rum
     identifier: rum_dashboards
     weight: 9
-  - name: Performance Overview
-    url: real_user_monitoring/dashboards/performance_overview_dashboard
+  - name: Performance
+    url: real_user_monitoring/dashboards/performance
     parent: rum_dashboards
     identifier: rum_dashboards_performance
     weight: 901
-  - name: Frustration Signals
-    url: real_user_monitoring/dashboards/frustration_signals_dashboard
+  - name: Testing and Deployment
+    url: real_user_monitoring/dashboards/testing_and_deployment
     parent: rum_dashboards
-    identifier: rum_dashboards_frustration_signals
+    identifier: rum_dashboards_testing_and_deployment
     weight: 902
-  - name: User Sessions
-    url: real_user_monitoring/dashboards/user_sessions_dashboard
+  - name: Usage
+    url: real_user_monitoring/dashboards/usage
     parent: rum_dashboards
-    identifier: rum_dashboards_sessions
+    identifier: rum_dashboards_usage
     weight: 903
   - name: Errors
-    url: real_user_monitoring/dashboards/errors_dashboard
+    url: real_user_monitoring/dashboards/errors
     parent: rum_dashboards
     identifier: rum_dashboards_errors
     weight: 904
-  - name: Testing Coverage
-    url: real_user_monitoring/dashboards/testing_coverage
-    parent: rum_dashboards
-    identifier: rum_dashboards_testing_coverage
-    weight: 905
-  - name: Resources
-    url: real_user_monitoring/dashboards/resources_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_resources
-    weight: 906
-  - name: Mobile
-    url: real_user_monitoring/dashboards/mobile_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_mobile
-    weight: 907
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
@@ -8026,7 +8020,7 @@ api:
       operationids:
         - SearchCIAppPipelineEvents
       unstable: []
-      order: 2
+      order: 3
   - name: Get a list of pipelines events
     url: '#get-a-list-of-pipelines-events'
     identifier: ci-visibility-pipelines-get-a-list-of-pipelines-events
@@ -8038,7 +8032,7 @@ api:
       operationids:
         - ListCIAppPipelineEvents
       unstable: []
-      order: 1
+      order: 2
   - name: Aggregate pipelines events
     url: '#aggregate-pipelines-events'
     identifier: ci-visibility-pipelines-aggregate-pipelines-events
@@ -8050,7 +8044,19 @@ api:
       operationids:
         - AggregateCIAppPipelineEvents
       unstable: []
-      order: 3
+      order: 4
+  - name: Send pipeline event
+    url: '#send-pipeline-event'
+    identifier: ci-visibility-pipelines-send-pipeline-event
+    parent: ci-visibility-pipelines
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCIAppPipelineEvent
+      unstable: []
+      order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
     identifier: ci-visibility-tests

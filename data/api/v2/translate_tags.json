@@ -9,7 +9,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
-    "description": "Search or aggregate your CI Visibility pipeline events over HTTP."
+    "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP."
   },
   "ci-visibility-tests": {
     "name": "CI Visibility Tests",

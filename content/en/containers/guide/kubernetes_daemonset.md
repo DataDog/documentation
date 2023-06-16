@@ -27,14 +27,14 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 2. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
 
-    | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
-    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>                         | <i class="icon-check-bold"></i> | [Manifest template][2]  | [Manifest template][3] (no security)  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][4]  | [Manifest template][5]  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][6]  | [Manifest template][7]  |
-    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][8]  | [Manifest template][9] |
-    |                           |                           |                           |                           | <i class="icon-check-bold"></i> |                           | [Manifest template][10] | no template             |
-    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [Manifest template][11] | [Manifest template][12] |
+    | Metrics                         | Logs                            | APM                             | Process                         | NPM                             | Security                        | Linux                   | Windows                              |
+    |---------------------------------|---------------------------------|---------------------------------|---------------------------------|---------------------------------|---------------------------------|-------------------------|--------------------------------------|
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [Manifest template][2]  | [Manifest template][3] (no security) |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                                 |                                 |                                 | [Manifest template][4]  | [Manifest template][5]               |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 | [Manifest template][6]  | [Manifest template][7]               |
+    | <i class="icon-check-bold"></i> |                                 | <i class="icon-check-bold"></i> |                                 |                                 |                                 | [Manifest template][8]  | [Manifest template][9]               |
+    |                                 |                                 |                                 |                                 | <i class="icon-check-bold"></i> |                                 | [Manifest template][10] | no template                          |
+    | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 |                                 | [Manifest template][11] | [Manifest template][12]              |
 
      To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Network Performance Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
 
@@ -45,7 +45,7 @@ To install the Datadog Agent on your Kubernetes cluster:
     ```shell
     echo -n '<Your API key>' | base64
     ```
-4. In the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. To get the base64 version of it, you can run:
+4. If you are using the `datadog-agent-all-features.yaml` manifest template: in the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. To get the base64 version of it, you can run:
 
     ```shell
     echo -n 'Random string' | base64
@@ -55,7 +55,7 @@ To install the Datadog Agent on your Kubernetes cluster:
 
 5. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
 
-    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
+    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites, this results in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
 
 6. **Deploy the DaemonSet** with the command:
 
@@ -72,42 +72,15 @@ To install the Datadog Agent on your Kubernetes cluster:
      If the Agent is deployed, output similar to the text below appears, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
 
     ```shell
-    NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-    datadog-agent   2         2         2         2            2           <none>          10s
+    NAME      DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+    datadog   2         2         2         2            2           <none>          10s
     ```
-
-8. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][21] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][22]:
-
-    ```shell
-    kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
-    ```
-
-### Unprivileged
-
-(Optional) To run an unprivileged installation, add the following to your [pod template][19]:
-
-```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: placeholder
-  namespace: placeholder
-spec:
-  override:
-    nodeAgent:
-      securityContext:
-        runAsUser: 1 # <USER_ID>
-        supplementalGroups:
-          - 123 # "<DOCKER_GROUP_ID>"
-```
-
-where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the Docker or containerd socket.
 
 ## Configuration
 
 ### Log collection
 
-**Note**: This option is not supported on Windows. Use the [Helm][24] option instead.
+**Note**: This option is not supported on Windows. Use the [Helm][22] option instead.
 
 To enable log collection with your DaemonSet:
 
@@ -126,7 +99,7 @@ To enable log collection with your DaemonSet:
      # (...)
     ```
 
-    **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [environment variable for ignoring containers][23] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
+    **Note**: Setting `DD_CONTAINER_EXCLUDE_LOGS` prevents the Datadog Agent from collecting and sending its own logs. Remove this parameter if you want to collect the Datadog Agent logs. See the [environment variable for ignoring containers][21] to learn more. When using ImageStreams inside OpenShift environments, set `DD_CONTAINER_INCLUDE_LOGS` with the container `name` to collect logs. Both of these Exclude/Include parameter value supports regular expressions.
 
 2. Mount the `pointerdir` volume to prevent loss of container logs during restarts or network issues and  `/var/lib/docker/containers` to collect logs through kubernetes log file as well, since `/var/log/pods` is symlink to this directory:
 
@@ -229,7 +202,5 @@ Alternatively, to collect the Kubernetes events from a Node Agent, set the envir
 [18]: /data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /getting_started/site/
-[21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[22]: /agent/kubernetes/data_collected/#kube-state-metrics
-[23]: /agent/docker/?tab=standard#ignore-containers
-[24]: /containers/kubernetes/log
+[21]: /agent/docker/?tab=standard#ignore-containers
+[22]: /containers/kubernetes/log

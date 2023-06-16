@@ -132,39 +132,16 @@ title: タグの使用方法
 
 ## アラート設定
 
-{{< tabs >}}
-{{% tab "Manage Monitors" %}}
+[割り当てられたタグ][32]によってモニターや[モニターのダウンタイム][31]を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
 
-[割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
+{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="検索バーのモニターをタグでフィルター" style="width:80%;">}}
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理タグ" style="width:80%;">}}
+**注**: モニタータグは、メトリクスタグとは異なり、独立しています。詳しくは、[モニタータグ][30]のドキュメントをご覧ください。
 
-モニタータグは、メトリクスタグとは異なる別のものです。
-
-[1]: /ja/getting_started/tagging/assigning_tags/
-{{% /tab %}}
-
-{{% tab "New Monitor" %}}
-
-[モニター][1]を作成する場合は、以下の場所でメトリクス タグを使用します。
-
+新しいモニターを作成する場合は、以下の場所で*メトリクス タグ*を使用します。
 * これらのタグがあるメトリクスのみにモニター範囲を制限する **from** テキストボックス。
-
 * 対応するメトリクスをモニター範囲から削除する **excluding** テキストボックス。
-
 * 各タグ値に対するマルチアラートモニターに変換する **avg by** テキストボックス。
-
-[1]: /ja/monitors/types
-{{% /tab %}}
-{{% tab "Manage Downtime" %}}
-
-モニター タグ別に[ダウンタイム][1]を絞り込むには、検索バーに `service:coffee-house` などのタグ名を入力します。
-
-{{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理タグ" style="width:80%;">}}
-
-[1]: /ja/monitors/notify/downtimes/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## メトリクス
 
@@ -430,3 +407,6 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 [27]: /ja/api/v1/service-level-objectives/#create-a-slo-object
 [28]: /ja/api/v1/service-level-objectives/#get-a-slos-details
 [29]: /ja/api/v1/service-level-objectives/#update-a-slo
+[30]: /ja/monitors/manage/#monitor-tags
+[31]: /ja/monitors/downtimes/
+[32]: /ja/getting_started/tagging/assigning_tags?tab=monitors
