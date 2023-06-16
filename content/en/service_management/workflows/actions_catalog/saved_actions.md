@@ -1,53 +1,55 @@
 ---
-title: Saved Actions
+title: Store and Reuse Actions
 kind: documentation
 disable_toc: false
-type: workflows
-is_beta: true
-aliases:
-- /workflows/saved_actions
+disable_sidebar: false
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
 ---
 
-You may store, modify, and reuse the preset inputs of an Action using Saved Actions, allowing you to build further Actions with pre-populated inputs.
+Use the _Saved Actions_ feature to store and reuse an action and its parameters. You can insert a saved action into your workflow as a new step, or use one to populate an existing step's parameters.
 
-## Save a configured action
+## Save an action
 
-1. From the Workflow Canvas, click on the step with the configured Action.
-2. Click on the **Saved Actions** ({{< img src="service_management/workflows/saved-actions-button.png" alt="Saved Actions button" width="24px" height="24px" style="display: inline-block; display: inline;" >}}) button that appears in the top right of the side panel.
-3. From the popover that shows up, click on **Save action configurations**.
-4. A dialog box appears with the Action configurations filled in for you to verify.
-5. Add a name and description to the Saved Action, choose whether or not you want to make it accessible for others in your organization to use.
-6. Once you are satisfied with the configurations, click on **Save Action Configuration**.
+1. From the workflow canvas, click an action that you'd like to save.
+1. Click the **Saved Actions** icon and select **Save action configurations**.
+1. Enter a name and description for the action.
+1. If you want anyone in your organization to have access to the action, toggle **Usable by others in the organization**.
+1. Verify the configuration details for the action and click **Save Action Configuration**.
 
-## Use a saved action
+{{< img src="service_management/workflows/save_action.mp4" alt="Click the Saved Action icon to save an action for later use." video=true >}}
 
-1. Click on the plus (`+`) icon from the Workflow Canvas, toggle to Saved Actions. Search for a Saved Action using the search bar or browse through the list to find the Saved Action you're looking for. Click a Saved Action to add it as a configured step on your Workflow Canvas.
-2. Alternatively, if you already have a step added to the Workflow Canvas, select the step and click on the **Saved Actions** ({{< img src="service_management/workflows/saved-actions-button.png" alt="Saved Actions button" width="24px" height="24px" style="display: inline-block; display: inline;" >}}) button that appears on the top right of the configuration side panel. Select **Configure using a saved action** from the popover that opens.
-3. A dialog box appears with the list of available Saved Actions for you to choose from.
-4. Click on **Use Saved Action** to confirm your selection.
+## Use a saved action in your workflow
 
-## Preview or edit a saved action
+To add a saved action as a new step in your workflow:
+1. Click the plus (`+`) icon from the workflow canvas and select Saved Actions.
+1. Use the search bar or browse through the list to find the Saved Action you're looking for.
+1. Select the Saved Action to add it as a configured step on your workflow canvas.
 
-1. Navigate to the [Action Catalog][1].
-2. Toggle to **Saved Actions** and browse through the list to choose which Saved Action you want to preview or edit.
-3. Hover over the Saved Action of your choice to reveal the option on the right side of the screen to **Preview/Edit saved configurations**. Click on this option to navigate to the dialog box with the preview of the Saved Action.
-4. If you wish to edit it, click on the pencil (**Edit**) icon, make the desired changes and click on **Save** to persist your modifications.
-**Note:** if the Saved Action you want to edit was created by somebody else, you would need to clone that first by clicking on the **Clone** icon next to the **Edit** icon.
+To configure an existing step using a saved action:
+1. Select a step in your workflow that you'd like to populate with a pre-configured action.
+1. Click the **Saved Actions** icon and select **Configure using a saved action**.
+1. Select the Saved Action you'd like to use to configure your step and click **Use Saved Action**.
 
-## Delete a saved action
+## Manage a saved action
 
-1. Navigate to the [Action Catalog][1].
-2. Toggle to **Saved Actions** and browse through the list to choose which Saved Action you want to delete.
-3. Hover over the Saved Action of your choice to reveal the option on the right side of the screen to **Preview/Edit saved configurations**. Click on this option to navigate to the dialog box with the preview of the Saved Action.
-4. Click on the trash (**Delete**) icon to lead you to a confirmation box. Click on **Delete** to delete the Saved Action.
-**Note:** you cannot delete a Saved Action that was created by somebody else.
+You can preview, edit, or delete your Saved Actions from the [Action Catalog][1] tab.
+
+To find a saved action:
+1. From the [Workflow Automation][2] page, click [**Action Catalog**][1].
+1. Click **Saved Actions** and browse through the list for the Saved Action you'd like to preview, edit, or edit.
+1. Hover over the action and click **Preview/Edit saved configurations** to be presented with a preview of the action.
+1. From the preview screen, select the action to edit or delete it.
+
+If you did not create the action, you cannot edit it directly. Instead select the **Clone** icon to copy it and make your configuration changes. You cannot delete an action that you did not create.
+
+{{< img src="service_management/workflows/edit_saved_action.png" alt="Preview, edit, or delete a saved action from the Action Catalog." style="width:80%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/workflow/action-catalog
+[2]: https://app.datadoghq.com/workflow/

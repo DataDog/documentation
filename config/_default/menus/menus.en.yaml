@@ -1267,7 +1267,7 @@ main:
     parent: workflows_actions_catalog
     identifier: workflows_generic_actions
     weight: 101
-  - name: Saved Actions
+  - name: Save and Load Actions
     url: service_management/workflows/actions_catalog/saved_actions/
     parent: workflows_actions_catalog
     identifier: workflows_saved_actions
