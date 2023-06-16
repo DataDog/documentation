@@ -1,5 +1,5 @@
 ---
-title: Aggregator Architecture
+title: Best Practices for OPW Aggregator Architecture
 kind: Documentation
 ---
 
@@ -11,9 +11,9 @@ The Observability Pipelines Worker's (OPW) aggregator architecture deploys the O
 
 Deploy Observability Pipelines Worker into your infrastructure, like any other service to intercept and manipulate data, and then forward it to your destinations. Each Observability Pipelines Worker instance operates independently, so that you can scale the architecture with a simple load balancer.
 
-This guide walks you through the recommended aggregator architecture for new Observability Pipelines Worker users. Specifically, these topics:
+This guide walks you through the recommended aggregator architecture for new Observability Pipelines Worker users. Specifically, these topics include:
 
-- [Configuring the Observability Pipelines Worker](#configuring-observability-pipelines-worker) to collect, process, and route data. 
+- [Configuring the Observability Pipelines Worker](#configuring-the-observability-pipelines-worker) to collect, process, and route data. 
 - [Optimizing the instance][3] so you can horizontally scale the Observability Pipelines Worker aggregator. 
 - Starting points to estimate your resource capacity for [capacity planning and scaling][4] the Observability Pipelines Worker.
 - Determining your [network topology and configurations][5] for the Observability Pipelines Worker.
@@ -29,10 +29,6 @@ This guide walks you through the recommended aggregator architecture for new Obs
 | CPU Architectures | X86_64, AMD64, ARM64, ARMHF, ARMv7                   		 		|
 | Memory            | ≥ 2 GiB per vCPU (see [memory sizing](#memory-sizing))			|
 | Disk              | ≥ 1 Gib, more for disk buffers (see [disk sizing](#disk-sizing))  |
-
- ## Install the Observability Pipelines Worker
-
- See the [Installation][1] documentation.
 
 ## Configuring the Observability Pipelines Worker
 
@@ -56,7 +52,6 @@ Use the Observability Pipelines Worker aggregator for processing most of your da
 
 Separate your system of analysis (for example, Datadog) from your system of record (for example, AWS S3). This allows you to optimize them independently towards their respective goals.
 
-[1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/working_with_data/
 [3]: /observability_pipelines/architecture/optimize
 [4]: /observability_pipelines/architecture/capacity_planning_scaling
