@@ -34,8 +34,6 @@ The two important differences are:
 * `-v /run/podman/podman.sock:/run/podman/podman.sock:ro` to mount the Podman socket instead of the Docker socket.
 * `-e DOCKER_HOST=unix:///run/podman/podman.sock` to configure the Agent communication with the Podman socket.
 
-For Log collection and APM collection, please refer to corresponding Docker document.
-
 ## Known limitations
 
 * The activation of the Podman socket can be optional depending on your setup. It may need to be enabled.
