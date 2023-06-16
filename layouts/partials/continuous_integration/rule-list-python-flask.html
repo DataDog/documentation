@@ -1,7 +1,7 @@
 {{- $dot := . -}}
 <div class="whatsnext">
   <div class="list-group">
-    {{- range $dot.Page.Params.python_code_style_type -}}
+    {{- range $dot.Page.Params.python_flask_data -}}
       {{- if eq (substr .link 0 4) "http" -}}
           {{- $.Scratch.Set "link" .link -}}
       {{- else -}}
@@ -23,9 +23,9 @@
       {{- $link := $.Scratch.Get "link" -}}
       <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href="{{- $link -}}">
         <span class="w-100 d-flex justify-content-between">
-            <span class="text">{{- .text -}}</span>
+            <span class="text">{{- .text | lower -}}</span>
             {{- if .tag -}}
-                <span class="badge badge-white pe-2 border-0">{{- .tag | upper -}}</span>
+                <span class="badge badge-white pe-2 border-0 text-lowercase">{{- .tag | upper -}}</span>
             {{- end -}}
         </span>
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
