@@ -113,6 +113,12 @@ Download the official installer:
 curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
 ```
 
+In case you are using Alpine Linux you might need to install a prerequisite prior to running the installer:
+
+```shell
+apk add libgcc
+```
+
 Run the installer:
 
 ```shell
