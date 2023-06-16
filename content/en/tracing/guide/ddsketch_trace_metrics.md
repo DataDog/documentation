@@ -23,7 +23,7 @@ Trace metrics are collected automatically for your services and resources and ar
   - *Metric type:* [DISTRIBUTION][2]
   - *Tags:* `env`, `service`, `version`, `resource`, and [the second primary tag][3].
 
-The APM Service and Resource pages use this metric type automatically. You can alose use these metrics to power your dashboards and monitors.
+The APM Service and Resource pages use this metric type automatically. You can use these metrics to power your dashboards and monitors.
 
 **How am I seeing a full history of this new metric?**
 - Datadog stitches any existing query on the new metric to an equivalent query based on the long-existing latency metrics, so you do not have to create multiple queries.
