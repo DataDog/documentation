@@ -32,7 +32,12 @@ The following custom build is supported: `7.44.1~dbm~oracle~beta~0.28`
 # Prerequisites
 
 1. **Install the Oracle integration.** Install the Oracle integration in your organization by opening the [Oracle integration](https://app.datadoghq.com/integrations/oracle) in the Datadog App and clicking "Install." This will install an Oracle dashboard in your account which can be used to monitor the performance of your Oracle databases.
-2. The new Oracle DBM check is configured in the configuration directory `oracle-dbm.d`. The legacy Oracle check, which is configured in the conifguration directory `oracle.d`, has to be deactivated for the databases configured in `oracle-dbm.d`.
+2. **Upgrade the Oracle integration in your Agent.** You may skip this step if this is your first time installing the Oracle integration. Migrate the Oracle configuration from the the legacy `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
+
+Use the following command to migrate the Oracle integration from the legacy integration to the new one:
+
+```bash
+mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
 
 # Setup
 
