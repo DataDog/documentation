@@ -54,7 +54,7 @@
   },
   "CreateGCPSTSAccount": {
     "responses": {
-      "200": {
+      "201": {
         "json": {
           "data": {
             "attributes": {

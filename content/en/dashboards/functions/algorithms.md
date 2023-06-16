@@ -1,6 +1,8 @@
 ---
 title: Algorithms
 kind: documentation
+algolia:
+  tags: ['anomaly', 'anomaly graph']
 aliases:
     - /graphing/functions/algorithms/
 ---
