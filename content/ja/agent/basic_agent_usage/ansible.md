@@ -122,7 +122,7 @@ Python チェックをプレイブックに渡すには、以下の構成を使�
 
 この構成では、Datadog の[プレイとロール][12]が、[Linux][13] または [Windows][14] のための実際のタスクへの相対ファイルパスとして渡される大きなプレイブックの一部であることが要求されます。
 
-これは Agent v6+ でのみ利用可能です。
+これは Agent v6+ 以降でのみ利用可能です。
 
 キーはチェックディレクトリ `checks.d/{{ item }}.py` に作成されるファイル名である必要があります。
 
@@ -203,6 +203,8 @@ datadog_config:
 [Cloud Workload Security][8] は `runtime_security_config` 変数の下で構成されます。その下にネストされる変数はすべて、`runtime_security_config` セクションの `system-probe.yaml` および `security-agent.yaml` に書き込まれます。
 
 [Universal Service Monitoring][17] (USM) は `service_monitoring_config` 変数で構成されます。その下にネストされた変数は `system-probe.yaml` の `service_monitoring_config` セクションに書き込まれます。
+
+[Compliance][18] は `compliance_config` 変数の下で構成されます。その下にネストされる変数はすべて、`compliance_config` セクションの `security-agent.yaml` に書き込まれます。
 
 **Windows をご利用の方へのご注意**: NPM は Agent v6.27+ と v7.27+ で Windows 上でサポートされています。NPM はオプションコンポーネントとして出荷され、Agent のインストールまたはアップグレード時に `network_config.enabled` が true に設定された場合にのみインストールされます。このため、Agent を同時にアップグレードしない限り、既存のインストールでは NPM コンポーネントをインストールするために一旦 Agent をアンインストールして再インストールする必要があるかもしれません。
 
@@ -644,3 +646,4 @@ localhost | FAILED! => {
 [15]: https://www.datadoghq.com/blog/datadog-marketplace/
 [16]: https://github.com/ansible/ansible/blob/stable-2.9/changelogs/CHANGELOG-v2.9.rst#id61
 [17]: https://docs.datadoghq.com/ja/tracing/universal_service_monitoring/?tab=configurationfiles#enabling-universal-service-monitoring
+[18]: https://docs.datadoghq.com/ja/security/cspm/setup/?tab=docker
