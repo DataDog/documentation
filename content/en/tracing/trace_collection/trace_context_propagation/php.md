@@ -74,7 +74,7 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 
 ## RabbitMQ
 
-Although the PHP tracer supports automatic tracing of the `php-amqplib/php-amqplib` library starting with version **0.87.0**, there are some known cases where your distributed trace can be disconnected. Most notably, when reading messages from a distributed queue using the `basic_get` method while not already in a trace, you would need to add a custom trace surrounding the `basic_get` call(s) and the corresponding message(s) processing.
+Although the PHP tracer supports automatic tracing of the `php-amqplib/php-amqplib` library starting with version **0.87.0**, there are some known cases where your distributed trace can be disconnected. Most notably, when reading messages from a distributed queue using the `basic_get` method while not already in a trace, you would need to add a custom trace surrounding a `basic_get` call and the corresponding message processing.
 
 Here is an example:
 
