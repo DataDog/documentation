@@ -27,7 +27,7 @@ Complete the following steps to enable Database Monitoring with your database:
 
 ### Multi-node Exadata
 
-Configure the Agent for each node by following the instructions for [Oracle RAC](/database_monitoring/setup_oracle/rac).
+Configure the Agent for each node by following the instructions for [Oracle RAC][8].
 
 ### Single-node Exadata
 
