@@ -327,7 +327,7 @@ A comma-separated list of query parameters to be collected as part of the URL. S
 : **INI**: `datadog.trace.http_post_data_param_allowed`<br>
 **Default**: ""<br>
 A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
-**Example**: 
+**Example**:
   - The posted data is `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
   - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`
   - In this scenario, the collected metadata is:
@@ -483,7 +483,7 @@ When the application runs in a docker container, the path `/proc/self` should al
 
 ### Headers extraction and injection
 
-Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context. 
+Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
