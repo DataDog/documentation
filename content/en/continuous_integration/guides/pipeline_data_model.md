@@ -19,7 +19,7 @@ Pipeline executions are modeled as traces, similar to an [APM distributed trace]
 | Job        | The smallest unit of work where commands are executed. All tasks at this level should be performed on a single node. |
 | Step       | In some CI providers, this level represents a shell script or an action executed within a job. |
 
-When a pipeline, stage, job, or step finishes, its execution data should be sent to Datadog. Refer to the list of [supported CI providers][3] to set up your pipeline visibility. If your CI provider or workflow is not supported, you can use the [public API endpoint][2] to send your pipeline executions to CI Visibility.
+When a pipeline, stage, job, or step finishes, its execution data should be sent to Datadog. Refer to the list of [supported CI providers][2] to set up your pipeline visibility. If your CI provider or workflow is not supported, you can use the [public API endpoint][3] to send your pipeline executions to CI Visibility.
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
 
@@ -79,13 +79,10 @@ If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
 ## Git Information
 
-Payloads must contain Git information as specified in the public API endpoint [specification][2], if it can be retrieved.
+Payloads must contain Git information as specified in the public API endpoint [specification][3], if it can be retrieved.
 
 In cases where Git information is not accessible (e.g., if the CI provider cannot access the Git information on manually triggered pipelines), the `user` field can be populated instead with the user name and email.
 
-## Further reading
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /continuous_integration/pipelines/#setup
-[2]: /tracing/glossary/#trace
+[1]: /tracing/glossary/#trace
+[2]: /continuous_integration/pipelines/#setup
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
