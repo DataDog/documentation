@@ -28,7 +28,7 @@ The following deployment configurations, components, and features are not suppor
 
 The following custom build is supported: `7.44.1~dbm~oracle~beta~0.28`.
 
-# Prerequisites
+## Prerequisites
 
 1. **Install the Oracle integration**: On the [**Integrations**][1] page in Datadog, install the [Oracle integration][2] for your organization. This will install an Oracle dashboard in your account which can be used to monitor the performance of your Oracle databases.
 2. **Upgrade the Oracle integration in your Agent**: You can skip this step if this is your first time installing the Oracle integration. If you've previously installed the Oracle integration, migrate the legacy configuration from the `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
