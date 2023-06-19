@@ -19,7 +19,7 @@ Pipeline executions are modeled as traces, similar to an [APM distributed trace]
 | Job        | The smallest unit of work where commands are executed. All tasks at this level should be performed on a single node. |
 | Step       | In some CI providers, this level represents a shell script or an action executed within a job. |
 
-When a pipeline, stage, job, or step finishes, its execution data should be sent to Datadog. Refer to the list of [supported CI providers][2] to set up your pipeline visibility. If your CI provider or workflow is not supported, you can use the [public API endpoint][3] to send your pipeline executions to CI Visibility.
+When a pipeline, stage, job, or step finishes, its execution data should be sent to Datadog. See the list of [supported CI providers][2] to set up your pipeline visibility. If your CI provider or workflow is not supported, you can use the [public API endpoint][3] to send your pipeline executions to CI Visibility.
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
 
@@ -49,7 +49,7 @@ In the public API endpoint, you can populate the `previous_attempt` field to lin
 
 When retrying a subset of jobs within a pipeline, you must send a new pipeline event with a new pipeline unique ID, and the payload for any new jobs must be linked to the new pipeline unique ID. To link them to the previous retry, you can provide the `previous_attempt` field. Partial retries will be treated as separate pipelines as well. The start and end time must not include the time of the original retry. For a partial retry, do not send payloads for jobs that ran in the previous attempt. Also, set the `partial_retry` field to `true` on partial retries to exclude them from aggregation when calculating run times.
 
-For example, let's assume a pipeline named `P` has three different jobs, namely `J1`, `J2`, and `J3`, executed sequentially. In the first run of `P`, only `J1` and `J2` are executed, and `J2` fails. Therefore, you need to send a total of three payloads:
+For example, a pipeline named `P` has three different jobs, namely `J1`, `J2`, and `J3`, executed sequentially. In the first run of `P`, only `J1` and `J2` are executed, and `J2` fails. Therefore, you need to send a total of three payloads:
 
 1. Job payload for `J1`, with ID `J1_1` and pipeline ID `P_1`.
 2. Job payload for `J2`, with ID `J2_1` and pipeline ID `P_1`.
@@ -81,7 +81,7 @@ If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
 Payloads must contain Git information as specified in the public API endpoint [specification][3], if it can be retrieved.
 
-In cases where Git information is not accessible (e.g., if the CI provider cannot access the Git information on manually triggered pipelines), the `user` field can be populated instead with the user name and email.
+In cases where Git information is not accessible (for example, if the CI provider cannot access the Git information on manually triggered pipelines), the `user` field can be populated instead with the user name and email.
 
 [1]: /tracing/glossary/#trace
 [2]: /continuous_integration/pipelines/#setup
