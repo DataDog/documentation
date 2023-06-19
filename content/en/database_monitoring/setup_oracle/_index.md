@@ -40,7 +40,7 @@ Use the following command to migrate the Oracle integration from the legacy inte
 mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
 ```
 
-# Setup
+## Setup
 
 For setup instructions, select your hosting type:
 
