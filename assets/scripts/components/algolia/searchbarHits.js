@@ -87,7 +87,7 @@ const renderHits = (renderOptions, isFirstRender) => {
     const generateJoinedHits = (hitsArray, category) => {
         const joinedListItems = hitsArray
             .map((item) => {
-                const hit = getHitData(item);
+                const hit = getHitData(item, renderOptions.results.query);
                 const displayContent = truncateContentAtHighlight(
                     hit.content_snippet_match_level === 'full' ? hit.content_snippet : hit.content,
                     145
