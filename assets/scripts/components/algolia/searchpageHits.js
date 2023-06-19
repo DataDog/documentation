@@ -36,11 +36,8 @@ const renderHits = (renderOptions, isFirstRender) => {
     const generateJoinedHits = (hitsArray) => {
         return hitsArray
             .map((item) => {
-                const hit = getHitData(item);
-                const displayContent = truncateContentAtHighlight(
-                    hit.content_snippet_match_level === 'full' ? hit.content_snippet : hit.content,
-                    145
-                );
+                const hit = getHitData(item, renderOptions.results.query);
+                const displayContent = truncateContentAtHighlight(hit.content, 145);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
 
                 return `

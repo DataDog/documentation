@@ -88,10 +88,7 @@ const renderHits = (renderOptions, isFirstRender) => {
         const joinedListItems = hitsArray
             .map((item) => {
                 const hit = getHitData(item, renderOptions.results.query);
-                const displayContent = truncateContentAtHighlight(
-                    hit.content_snippet_match_level === 'full' ? hit.content_snippet : hit.content,
-                    145
-                );
+                const displayContent = truncateContentAtHighlight(hit.content, 145);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
                 const section_header = hit.section_header ? `&raquo; ${hit.section_header}` : '';
 
