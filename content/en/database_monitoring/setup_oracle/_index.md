@@ -17,9 +17,9 @@ The features described on this page are in private beta.
 
 ## Supported Oracle versions, features, and architectures
 
-- Versions: 19c and 21c
-- Deployment configurations: self-managed, RDS, RAC, Exadata
-- Architecture: multi-tenant
+- **Versions**: 19c and 21c
+- **Deployment configurations**: self-managed, RDS, RAC, Exadata
+- **Architecture**: multi-tenant
 
 The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
 
