@@ -125,7 +125,19 @@ To automatically inject correlation identifiers into your log messages:
 
 2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
 
-3. Enable mapped diagnostic context (MDC), as shown in the following example code for NLog version 4.6+:
+3. Enable mapped diagnostic context (MDC), as shown in the following example code for NLog version 5.0+:
+
+```xml
+  <!-- Add includeScopeProperties="true" to emit ScopeContext properties -->
+  <layout xsi:type="JsonLayout" includeScopeProperties="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+
+For NLog version 4.6+:
 
 ```xml
   <!-- Add includeMdlc="true" to emit MDC properties -->
