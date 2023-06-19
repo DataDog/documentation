@@ -120,13 +120,13 @@ Whether to enable the endpoint data collection in profiles. Added in version `0.
 `DD_PROFILING_ALLOCATION_ENABLED`
 : **INI**: `datadog.profiling.allocation_enabled`. INI available since `0.88.0`.<br>
 **Default**: `1`<br>
-Enable the experimental allocation size and allocation bytes profile type. Added in version `0.88.0`.
+Enable the experimental allocation size and allocation bytes profile type. Added in version `0.88.0`.<br>
 **Note:** Supersedes `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`, if both are set this one takes precedence.
 
-`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
+`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` (deprecated since v0.88)
 : **INI**: `datadog.profiling.experimental_allocation_enabled`. INI available since `0.84.0`.<br>
 **Default**: `0`<br>
-Enable the experimental allocation size and allocation bytes profile type. Added in version `0.84.0`.
+Enable the experimental allocation size and allocation bytes profile type. Added in version `0.84.0`.<br>
 **Note:** Superseded by `DD_PROFILING_ALLOCATION_ENABLED`, if both are set `DD_PROFILING_ALLOCATION_ENABLED` takes precedence.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
