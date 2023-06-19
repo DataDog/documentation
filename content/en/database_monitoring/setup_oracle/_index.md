@@ -26,7 +26,7 @@ The following deployment configurations, components, and features are not suppor
 
 ## Supported Agent versions
 
-The following custom build is supported: `7.44.1~dbm~oracle~beta~0.28`
+The following custom build is supported: `7.44.1~dbm~oracle~beta~0.28`.
 
 # Prerequisites
 
