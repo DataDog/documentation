@@ -23,7 +23,7 @@ Supported tagging formats
 
 
 ### Manual tag injection
-Using any database API with support for execution of SQL statements, add a comment in your statement with tags formatted as per the [sqlcommenter][2] or [marginalia][3] formats.
+Using any database API supporting execution of SQL statements, add a comment in your statement with tags formatted as per the [sqlcommenter][2] or [marginalia][3] formats.
 
 ```sql
 /*key='val'*/ SELECT * from FOO
