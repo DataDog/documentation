@@ -23,7 +23,6 @@ The features described on this page are in private beta.
 
 The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
 
-The Oracle versions below 19c are not supported.
 
 ## Supported Agent versions
 
