@@ -15,7 +15,7 @@ is_beta: true
 The features described on this page are in private beta.
 </div>
 
-# Supported Oracle versions, features and architectures
+## Supported Oracle versions, features, and architectures
 
 - Versions: 19c and 21c
 - Deployment configurations: self-managed, RDS, RAC, Exadata
