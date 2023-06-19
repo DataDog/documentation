@@ -8,7 +8,7 @@ Datadog Teams permite a los grupos de usuarios organizar los activos de sus equi
 
 Puedes utilizar Teams para vincular recursos como dashboards, servicios, monitores e incidencias a un grupo de usuarios. También puedes añadir enlaces específicos para equipos a los canales de Slack, paneles de Jira o repositorios de GitHub, entre otros.
 
-Existen varias formas de unirse a un equipo en Teams: puedes unirte por tu cuenta, o bien pueden agregarte otros miembros o un administrador. Además, un usuario puede estar en varios equipos al mismo tiempo.
+Existen varias formas de unirse a un equipo: puedes unirte por tu cuenta, o bien pueden agregarte otros miembros o un administrador. Además, un usuario puede estar en varios equipos al mismo tiempo.
 
 ## Configuración
 
