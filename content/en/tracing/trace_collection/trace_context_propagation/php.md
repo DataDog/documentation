@@ -96,7 +96,7 @@ if ($msg) {
 \DDTrace\close_span();
 ```
 
-Creating this surrounding trace to your consuming-processing logic will ensure observability of your distributed queue.
+Creating this surrounding trace to your consuming-processing logic ensures observability of your distributed queue.
 
 ## Further Reading
 
