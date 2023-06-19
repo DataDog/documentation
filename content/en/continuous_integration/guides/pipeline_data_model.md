@@ -67,7 +67,7 @@ The actual values of the IDs are not important. What matters is that they are co
 
 If a pipeline is indefinitely blocked due to requiring manual intervention, a pipeline event payload must be sent as soon as the pipeline reaches the blocked state. The pipeline status must be set to `blocked`. The remaining pipeline data must be sent in separate payloads with a different pipeline unique ID. This second pipeline should have `is_resumed` set to `true`.
 
-{{< img src="ci/ci-pipeline-blocked-pipelines-execution.png" alt="Flow of a blocked pipeline execution" style="width:100%;">}}
+{{< img src="ci/ci-pipeline-blocked-pipelines-execution.png" alt="Flow of a blocked pipeline execution" style="width:90%;">}}
 
 ### Downstream Pipelines
 
