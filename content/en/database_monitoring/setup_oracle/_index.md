@@ -18,8 +18,8 @@ The features described on this page are in private beta.
 ## Supported Oracle versions, features, and architectures
 
 - **Versions**: 19c and 21c
-- **Deployment configurations**: self-managed, RDS, RAC, Exadata
-- **Architecture**: multi-tenant
+- **Deployment configurations**: Self-managed, RDS, RAC, Exadata
+- **Architecture**: Multi-tenant
 
 The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
 
@@ -44,3 +44,6 @@ mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 For setup instructions, select your hosting type:
 
 {{< partial name="dbm/dbm-setup-oracle" >}}
+
+[1]: https://app.datadoghq.com/integrations
+[2]: https://app.datadoghq.com/integrations/oracle
