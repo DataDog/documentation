@@ -16757,7 +16757,10 @@ paths:
         type: idempotent
   /api/v2/ci/pipeline:
     post:
-      description: Send your pipeline event to your Datadog platform over HTTP.
+      description: 'Send your pipeline event to your Datadog platform over HTTP.
+
+
+        This API endpoint is in private beta.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
         content:
@@ -16861,7 +16864,7 @@ paths:
   /api/v2/ci/pipelines/events:
     get:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a log search query.
+        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -16943,7 +16946,7 @@ paths:
   /api/v2/ci/pipelines/events/search:
     post:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a log search query.
+        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -17014,8 +17017,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events:
     get:
-      description: 'List endpoint returns CI Visibility test events that match a log
-        search query.
+      description: 'List endpoint returns CI Visibility test events that match a [log
+        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -17096,8 +17099,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events/search:
     post:
-      description: 'List endpoint returns CI Visibility test events that match a log
-        search query.
+      description: 'List endpoint returns CI Visibility test events that match a [log
+        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
