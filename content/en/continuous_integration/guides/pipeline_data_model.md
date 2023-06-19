@@ -85,6 +85,7 @@ In cases where Git information is not accessible (e.g., if the CI provider canno
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /continuous_integration/pipelines/#setup
 [2]: /tracing/glossary/#trace
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
