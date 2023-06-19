@@ -182,8 +182,8 @@ Only Datadog users with the [`logs_write_archive` permission][3] can create, mod
 {{% tab "Google Cloud Storage" %}}
 
 1. Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
-2. Select your Datadog Google Cloud service account principal from the [Google Cloud IAM Admin page][1] and select **Edit principal**
-3. Select **ADD ANOTHER ROLE**, and input the Role called **Storage Object Admin**, and save.
+2. Select your Datadog Google Cloud service account principal from the [Google Cloud IAM Admin page][1] and select **Edit principal**.
+3. Select **ADD ANOTHER ROLE**, select the **Storage Object Admin** role, and save.
 
    {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
