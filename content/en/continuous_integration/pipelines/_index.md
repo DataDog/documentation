@@ -102,7 +102,7 @@ CI pipeline data is available when you create widgets in [Dashboards][8] and [No
 
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /continuous_integration/pipelines/#setup
+[2]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
 [3]: /continuous_integration/pipelines/github/#enable-log-collection
 [4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
