@@ -53,7 +53,7 @@ For example, a pipeline named `P` has three different jobs, namely `J1`, `J2`, a
 
 1. Job payload for `J1`, with ID `J1_1` and pipeline ID `P_1`.
 2. Job payload for `J2`, with ID `J2_1` and pipeline ID `P_1`.
-3. Pipeline payloda for `P`, with ID `P_1`.
+3. Pipeline payload for `P`, with ID `P_1`.
 
 Now, suppose there is a partial retry of the pipeline starting from `J2`, where all the remaining jobs succeed. You need to send three additional payloads:
 
