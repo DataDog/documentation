@@ -113,6 +113,12 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
 ```
 
+Alpine Linux をお使いの場合は、インストーラーを実行する前に `libgcc_s` をインストールする必要があります。
+
+```shell
+apk add libgcc
+```
+
 インストーラーを実行します。
 
 ```shell
