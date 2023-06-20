@@ -17,7 +17,7 @@ Real User Monitoring offers Mobile Vitals, a set of metrics inspired by [Android
 
 You can view Mobile Vitals for your application by navigating to  **UX Monitoring > Performance Summary** and selecting your application.
 
-{{< img src="real_user_monitoring/android/android_mobile_vitals-1.png" alt="Mobile Vitals in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/android/android_mobile_vitals-2.png" alt="Mobile Vitals in the RUM Explorer" style="width:90%;">}}
 
 To access the RUM mobile app performance dashboard, scroll down to the Monitor Performance Metrics section from the application summary page and click **Performance Overview**.
 

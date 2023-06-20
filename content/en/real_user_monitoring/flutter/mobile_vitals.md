@@ -36,7 +36,7 @@ When viewing performance details by the **View** event type, the following event
 - View Flutter Build TIme Average
 - Raster Time Average
 
-{{< img src="real_user_monitoring/flutter/rum_explorer_mobile_vitals-1.png" alt="Event Timings and Mobile Vitals in the RUM Explorer" style="width:90%;">}}
+{{< img src="real_user_monitoring/flutter/rum_explorer_mobile_vitals-2.png" alt="Event Timings and Mobile Vitals in the RUM Explorer" style="width:90%;">}}
 
 You can also select a view in the RUM Explorer and observe recommended benchmark ranges that directly correlate to your application's user experience in the session. Click on a metric such as **Refresh Rate Average** and click **Search Views With Poor Performance** to apply a filter in your search query and examine additional views.
 
