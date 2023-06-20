@@ -45,7 +45,7 @@ The PHP tracer provides various ways to configure the injection of trace correla
 - [Append the trace correlation identifiers to your message][#append-the-trace-correlation-identifiers-to-your-message]
 - [Add the trace correlation identifiers to the log context][#add-the-trace-correlation-identifiers-to-the-log-context]
 
-#### Use placeholders in your message
+#### Use placeholders in your message {#use-placeholders-in-your-message}
 
 You can use placeholders in your message to automatically inject trace correlation identifiers into your logs. The PHP tracer supports the following placeholders:
 - `%dd.trace_id%`: the trace ID
@@ -73,7 +73,7 @@ The PHP tracer will replace the placeholders with the corresponding values. For 
 
 Note that the brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][7]. If you are using a custom parsing rule, you can omit the brackets if needed.
 
-#### Append the trace correlation identifiers to your message
+#### Append the trace correlation identifiers to your message {#append-the-trace-correlation-identifiers-to-your-message}
 
 You can append the trace correlation identifiers to your message by using the `DD_TRACE_APPEND_TRACE_IDS_TO_LOGS` environment variable. The PHP tracer will append the available trace correlation identifiers at the end of your message enclosed in brackets, **hence modifying the original message**.
 
@@ -93,7 +93,7 @@ The PHP tracer will append the available trace correlation identifiers to the lo
 
 Note that if there is a placeholder in your message or if a trace id already present in the message, it will take precedence and the PHP tracer will **not** further modify the message.
 
-#### Add the trace correlation identifiers to the log context
+#### Add the trace correlation identifiers to the log context {#add-the-trace-correlation-identifiers-to-the-log-context}
 
 The default behavior of the PHP tracer is to add the trace correlation identifiers to the log context.
 
