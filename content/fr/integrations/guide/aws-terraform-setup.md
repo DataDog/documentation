@@ -15,7 +15,7 @@ L'utilisation de [Terraform][1] vous permet de créer le rôle IAM Datadog, le d
 
 1. Configurez le [fournisseur Terraform Datadog][2] pour interagir avec l'API Datadog via une configuration Terraform.
 
-{{< site-region region="us,us3,us5,ap1,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 2. Définissez votre fichier de configuration Terraform en utilisant l'exemple ci-dessous comme modèle. Mettez à jour les paramètres suivants avant d'appliquer les modifications :
    * `AWS_PERMISSIONS_LIST` : Les stratégies IAM requises pour les intégrations Datadog/AWS. La liste actuelle est disponible dans la documentation de l'[intégration Datadog/AWS][1].
