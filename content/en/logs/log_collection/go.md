@@ -36,7 +36,7 @@ For a classic Go configuration, open a `main.go` file and paste in the following
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -57,7 +57,7 @@ These metas can be `hostname`, `username`, `customers`, `metric` or any informat
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {
