@@ -36,8 +36,9 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 ## Requirements
 
 - **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Continuous Profiler**: To display code-level insights, the plugin requires the Continuous Profiler to be configured for your Java Services. For more information, see [Getting Started with the Continuous Profiler][2].
-- **JetBrains Toolbox**: To use the **View in IntelliJ** feature, the plugin requires the JetBrains Toolbox to be installed on the developer's machine.
+- **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Java Services. For more information, see [Getting Started with the Continuous Profiler][2].
+- **JetBrains Toolbox**: To use the [View in IntelliJ](#view-in-intellij-idea) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
+
 ## Setup
 
 ### Install the Datadog plugin
@@ -187,3 +188,4 @@ Let us know what you think about the plugin! Provide feedback on our [discussion
 [4]: https://plugins.jetbrains.com/plugin/19495-datadog
 [5]: /logs/explorer/
 [6]: /tracing/error_tracking/
+[7]: https://www.jetbrains.com/lp/toolbox/
