@@ -7,10 +7,16 @@
         {{ end }}
     {{ end }}
 
-    <div class="mt-7">{{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}</div>
-
-    <h1 id="pagetitle">{{ .Title }}</h1>
-    {{ partial "breadcrumbs.html" . }}
+    <div class="row">
+        <div class="col-12 order-1">
+            <div class="mt-2">{{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}</div>
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
+    
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
 
     <div>{{ .Content }}</div>

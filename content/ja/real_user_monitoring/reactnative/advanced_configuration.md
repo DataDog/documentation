@@ -43,6 +43,165 @@ describe('App', () => {
 
 Jest 以外のテストランナーを使用する場合、テストランナー用のモックを作成する必要があります。
 
+## 初期化パラメーター
+
+SDK 初期化時の構成で、以下のパラメーターを指定することができます。
+
+`clientToken`
+: 必須<br/>
+**タイプ**: 文字列<br/>
+[Datadog クライアントトークン][8]。
+
+`env`
+: 必須<br/>
+**タイプ**: 文字列<br/>
+アプリケーションの環境 (例: prod、pre-prod、staging)。[タグの構文要件][15]に従います。
+
+`applicationId`
+: 必須<br/>
+**種類**: 文字列<br/>
+RUM アプリケーションの ID。
+
+`trackInteractions`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+ユーザーアクションの自動収集を有効にします。
+
+`trackResources`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+リソースイベントの収集を可能にします。
+
+`trackErrors`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+React Native のクラッシュの収集を有効にします。
+
+`site`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+**デフォルト**: `US1`<br/>
+[組織の Datadog のサイトパラメーター][9]。
+
+`serviceName`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+アプリケーションのサービス名。[タグの構文要件][15]に従います。
+
+`version`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13。[タグの構文要件][15]に従います。
+
+`versionSuffix`
+: オプション<br/>
+**タイプ**: 文字列<br/>
+報告されたアプリのバージョンにサフィックスを追加します。使用できる文字は、英数字と `_`、`-`、`:`、`.`、`/` です。その他の特殊文字はアンダースコアに変換されます。バージョンとサフィックスの間には、自動的にダッシュ (`-`) が追加されます。[タグの構文要件][15]に従います。
+
+`trackFrustrations`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `true` <br/>
+[ユーザーのフラストレーションの自動収集][11]を有効にします。`trackInteractions: true` を意味します。
+
+`nativeCrashReportEnabled`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false` <br/>
+ネイティブプラットフォーム (iOS、Android) のクラッシュレポートを有効にします。
+
+`sampleRate`
+: オプション - **非推奨**<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+`sessionSampleRate` を参照してください。
+
+`sessionSampleRate`
+: オプション<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `100`<br/>
+追跡するセッションの割合: すべてなら `100`、なければ `0` です。追跡されたセッションのみが RUM イベントを送信します。
+
+`resourceTracingSamplingRate`
+: オプション<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `20`<br/>
+トレースするリクエストの割合: すべてなら `100`、なければ `0` です。詳細は、[RUM とトレースの接続][12]を参照してください。
+
+`verbosity`
+: オプション<br/>
+**タイプ**: SdkVerbosity<br/>
+**デフォルト**: `undefined`<br/>
+内部 SDK のロギングに使用する Verbosity。SDK の実装をデバッグするには、`SdkVerbosity.DEBUG` に設定します。
+
+`nativeViewTracking`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false`<br/>
+ネイティブビューの追跡を有効にします。ネイティブビューに依存するカスタムナビゲーションシステムを使用する場合は、`true` に設定します。
+
+`nativeInteractionTracking`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false`<br/>
+ネイティブインタラクションの追跡を有効にします。ネイティブ画面でのインタラクションを追跡したい場合は、`true` に設定します。
+
+`firstPartyHosts`
+: オプション<br/>
+**タイプ**: リスト<br/>
+**デフォルト**: `[]`<br/>
+ネイティブビューの追跡を有効にします。ネイティブビューに依存するカスタムナビゲーションシステムを使用する場合は、`true` に設定します。詳しくは、[RUM とトレースの接続][12]を参照してください。
+
+`telemetrySampleRate`
+: オプション<br/>
+**タイプ**: 数値<br/>
+**デフォルト**: `20`<br/>
+SDK の実行に関するテレメトリーデータ (エラーやデバッグログなど) は、潜在的な問題を検出して解決するために、Datadog に送信されます。このオプションを `0` に設定すると、テレメトリー収集がオプトアウトされます。
+
+`longTaskThresholdMs`
+: オプション<br/>
+**タイプ**: 数値 | false<br/>
+**デフォルト**: `0`<br/>
+javascript のロングタスク報告のしきい値 (ミリ秒単位)。`0` または `false` に設定すると、javascript のロングタスクの報告が無効になります。`100` 未満の値は `100` に引き上げられます。`5000` 以上の値は `5000` に下げられます。
+
+`nativeLongTaskThresholdMs`
+: オプション<br/>
+**タイプ**: 数値 | false<br/>
+**デフォルト**: `200`<br/>
+ネイティブロングタスク報告のしきい値 (ミリ秒単位)。`0` または `false` に設定すると、javascript のロングタスクの報告が無効になります。`100` 未満の値は `100` に引き上げられます。`5000` 以上の値は `5000` に下げられます。
+
+`vitalsUpdateFrequency`
+: オプション<br/>
+**タイプ**: VitalsUpdateFrequency<br/>
+**デフォルト**: `VitalsUpdateFrequency.AVERAGE`<br/>
+モバイルバイタルを収集する際の好ましい頻度を設定します。
+
+`uploadFrequency`
+: オプション<br/>
+**タイプ**: UploadFrequency<br/>
+**デフォルト**: `UploadFrequency.AVERAGE`<br/>
+データのバッチをアップロードする際の好ましい頻度を設定します。
+
+`batchSize`
+: オプション<br/>
+**タイプ**: BatchSize<br/>
+**デフォルト**: `BatchSize.MEDIUM`<br/>
+Datadog サーバーにアップロードする前にデータをまとめてバッチ処理する際の Datadog SDK のポリシーを定義します。小さなバッチは、より小さいがより多くのネットワークリクエストを意味し、大きなバッチは、より少ないがより大きなネットワークリクエストを意味します。
+
+`trackBackgroundEvents`
+: オプション<br/>
+**タイプ**: ブール値<br/>
+**デフォルト**: `false`<br/>
+RUM View がアクティブでない場合に、RUM イベントの追跡を有効にします。デフォルトでは、バックグランドイベントは追跡されません。この機能を有効にすると、追跡されるセッション数が増加し、請求に影響を与える可能性があります。
+
+`proxyConfig`
+: オプション<br/>
+**タイプ**: ProxyConfiguration<br/>
+オプションのプロキシ構成。
+
 ## 手動インスツルメンテーション
 
 自動インスツルメンテーションがニーズに合わない場合は、手動で RUM イベントとログを作成できます。
@@ -287,3 +446,8 @@ const configuration = {
 [5]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react-native/v0.70/index.d.ts#L548
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [7]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
+[8]: /ja/account_management/api-app-keys/#client-tokens
+[9]: /ja/getting_started/site/
+[11]: /ja/real_user_monitoring/frustration_signals/
+[12]: /ja/real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
+[15]: /ja/getting_started/tagging/#defining-tags

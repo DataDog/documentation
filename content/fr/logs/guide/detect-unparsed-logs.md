@@ -1,14 +1,15 @@
 ---
-title: Surveiller et interroger les logs non parsés
-kind: guide
 further_reading:
-  - link: /logs/explorer/
-    tag: Documentation
-    text: Découvrir comment explorer vos logs
-  - link: /logs/faq/log-parsing-best-practice
-    tag: Documentation
-    text: "Parsing de log\_: bonnes pratiques à adopter"
+- link: /logs/explorer/
+  tag: Documentation
+  text: Découvrir comment explorer vos logs
+- link: /logs/faq/log-parsing-best-practice
+  tag: Documentation
+  text: 'Parsing de log : bonnes pratiques à adopter'
+kind: guide
+title: Surveiller et interroger les logs non parsés
 ---
+
 ## Présentation
 Le parsing des logs est essentiel pour pouvoir utiliser la pleine capacité de Datadog Log Management, pour les requêtes, les monitors, les agrégations ou les enrichissements automatiques comme le scanner de données sensibles.
 Lorsque vous redimensionnez le volume de logs, il peut s'avérer difficile d'identifier et de corriger les modèles de logs qui ne sont pas soumis au parsing par vos pipelines.
@@ -68,5 +69,5 @@ Pour surveiller le volume de logs non parsés, procédez comme suit :
 [5]: /fr/logs/archives/?tab=awss3
 [6]: /fr/logs/logs_to_metrics/
 [7]: /fr/logs/indexes#set-daily-quota
-[8]: /fr/monitors/create/types/metric/?tab=threshold#overview
-[9]: /fr/monitors/create/types/metric/?tab=threshold#set-alert-conditions
+[8]: /fr/monitors/types/metric/?tab=threshold#overview
+[9]: /fr/monitors/types/metric/?tab=threshold#set-alert-conditions

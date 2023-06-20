@@ -18,7 +18,7 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 
 *エラーバジェット*を含む SLO に関する主要な用語の説明については、[サービスレベル目標][3]を参照してください。
 
-{{< img src="monitors/service_level_objectives/error_budget_alert_config.png" alt="エラーバジェットアラートのコンフィギュレーション">}}
+{{< img src="service_management/service_level_objectives/error_budget_alert_config.png" alt="エラーバジェットアラートのコンフィギュレーション">}}
 
 ## モニターの作成
 
@@ -30,7 +30,7 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 4. **Say what's happening** セクションと **Notify your team** セクションに、[通知情報][5]を追加します。
 5. SLO コンフィギュレーションページで **Save and Set Alert** ボタンをクリックします。
 
-{{< img src="monitors/service_level_objectives/save_set_alert.png" alt="SLO を保存してエラーバジェットアラートをセットアップ">}}
+{{< img src="service_management/service_level_objectives/save_set_alert.png" alt="SLO を保存してエラーバジェットアラートをセットアップ">}}
 
 ### API および Terraform
 

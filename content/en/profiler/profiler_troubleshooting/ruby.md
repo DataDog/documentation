@@ -59,7 +59,7 @@ Datadog.configure do |c|
 end
 ```
 
-## Unexpected run-time failures and errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
+## Unexpected failures or errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
 
 Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
 
@@ -72,15 +72,18 @@ The following incompatibilities are known:
 
 In these cases, the profiler automatically detects the incompatibility and applies a workaround.
 
-If you encounter run-time failures or errors from Ruby gems that use native extensions, you can revert back to the legacy profiler which does not use `SIGPROF` signals. To revert to the legacy profiler, set the `DD_PROFILING_FORCE_ENABLE_LEGACY` environment variable to `true`, or in code:
+If you encounter failures or errors from Ruby gems that use native extensions other than those listed above, you can manually enable the "no signals" workaround, which avoids the use of `SIGPROF` signals.
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
 
 ```ruby
 Datadog.configure do |c|
-  c.profiling.advanced.force_enable_legacy_profiler = true
+  c.profiling.advanced.no_signals_workaround_enabled = true
 end
 ```
 
-Let our team know if you find or suspect any such incompatibilities [by opening a support ticket][2].
+**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
+
+Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
 
 ## Further Reading

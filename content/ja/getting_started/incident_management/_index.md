@@ -12,11 +12,14 @@ further_reading:
 - link: /monitors/incident_management
   tag: Documentation
   text: インシデント管理
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: インシデントマネジメントを向上させるためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/incident-response-with-datadog/
   tag: ブログ
   text: Datadog でのインシデント管理
 - link: /service_management/incident_management/incident_settings
-  tag: ドキュメント
+  tag: Documentation
   text: 通知ルール
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: Documentation
@@ -184,7 +187,7 @@ Incident Management をカスタマイズするには、[インシデント設�
 
 また、インシデントの宣言と編集、Slack や Zoom などとのインテグレーションにより、チームへの迅速なコミュニケーションも可能です。
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
 
 ## その他の参考資料
 

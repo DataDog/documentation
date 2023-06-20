@@ -20,6 +20,9 @@ further_reading:
 - link: /agent/guide/docker-deprecation
   tag: ドキュメント
   text: Kubernetes における Docker ランタイムの非推奨化
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Kubernetes のモニタリングに関する知見を得るためのインタラクティブなセッションに参加できます
 kind: documentation
 title: Kubernetes
 ---
