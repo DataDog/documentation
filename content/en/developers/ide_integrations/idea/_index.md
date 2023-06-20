@@ -10,6 +10,8 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
+- link: "https://www.jetbrains.com/lp/toolbox/"
+  text: "Learn about the JetBrains Toolbox."
 ---
 
 {{< callout url="#" btn_hidden="true">}}
