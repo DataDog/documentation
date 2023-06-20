@@ -47,8 +47,6 @@ Group by **Resources** on the Security Findings Explorer and select a resource t
 
 {{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="Group and aggregate by resource in search" style="width:65%;">}}
 
-### 
-
 ## Mute findings
 
 Sometimes, a finding does not match the use case for your business, or you choose to accept it as a known risk. To ignore these findings, mute the finding for the impacted resource so you can focus on high-severity and critical findings.
