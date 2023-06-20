@@ -65,7 +65,7 @@ After installing the Datadog plugin and restarting IDEA, log in to Datadog:
 
 ### Link a service
 
-To provide relevant data from the Datadog platform, add relevant services to a project:
+To provide relevant data from the Datadog platform, add related services to a project:
 1. With your project open in IDEA, open the **Datadog** tool window and select **Manage Linked Services...** from the **Options** menu.
 1. A settings dialog opens, click the plus icon (**+**).
 1. Search for and select the services that you want to add to the current project.
