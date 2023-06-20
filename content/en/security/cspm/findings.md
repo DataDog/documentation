@@ -41,7 +41,7 @@ Findings are displayed on the [Security Findings Explorer][1]. Aggregate finding
 
 Select a finding to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mapping, and suggested remediation steps. Click **View Finding** to see details about the misconfigured resource.
 
-{{< img src="security/cspm/findings/finding-side-panel.png" alt="Ranked order resources in the side panel" style="width:65%;">}}
+{{< img src="security/cspm/findings/finding-side-panel2.png" alt="Ranked order resources in the side panel" style="width:65%;">}}
 
 Group by **Resources** on the Security Findings Explorer and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
 
