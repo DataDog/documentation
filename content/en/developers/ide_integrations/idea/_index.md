@@ -147,7 +147,7 @@ You can navigate to the [Log Explorer][5] on the Datadog platform directly from 
 
 {{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
-The Datadog plugin will preconfigure a query that matches the logger name, log level and log message as closely as possible, taking you to relevant log information quickly and easily.
+The Datadog plugin will open the **Log Explorer** with a query that matches the logger name, log level and log message as closely as possible, taking you to relevant log information quickly and easily.
 
 ## View In IntelliJ IDEA
 
