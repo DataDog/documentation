@@ -191,6 +191,10 @@ Added in version 1.17.0. <br>
 : Sets the directory for .NET Tracer logs. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\` on Windows, `/var/log/datadog/dotnet` on Linux
 
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: During the tracer's startup this configuration will use the tracers current log directory to delete log files equal and older than the given amount of days.  Added in version 2.19.0. <br>
+**Default**: `31`
+
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
 
