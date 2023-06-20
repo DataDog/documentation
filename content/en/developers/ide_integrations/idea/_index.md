@@ -145,9 +145,17 @@ The active Profiling tab also affects the IDEA project tree view, which is annot
 
 You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java source files.  Look out for **View Logs** links following log statements in your source code:
 
-{{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
+{{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
 The Datadog plugin will preconfigure a query that matches the logger name, log level and log message as closely as possible, taking you to relevant log information quickly and easily.
+
+## View In IntelliJ IDEA
+
+The **View in IntelliJ** feature provides a link from the Datadog platform directly to your source files.  Look out for the button next to frames in stack traces displayed on the platform (for example, in Error Tracking):
+
+{{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
+
+<div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
 
 ## Feedback
 
