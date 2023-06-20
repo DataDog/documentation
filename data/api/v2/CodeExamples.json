@@ -181,6 +181,20 @@
       "description": "Create a Datadog GCP principal with empty body returns \"OK\" response"
     }
   ],
+  "CreateGCPSTSAccount": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a new entry for your service account returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPSTSAccount": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update STS Service Account returns \"OK\" response"
+    }
+  ],
   "UpdateIPAllowlist": [
     {
       "group": "ip_allowlist",
