@@ -6,7 +6,9 @@ kind: guide
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">
 This guide assumes that you have configured [Database Monitoring][1].
+</div>
 
 [Datadog Database Monitoring (DBM)][1] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to add tags as SQL comments to your database queries, which can then be surfaced and leveraged in DBM.
 
@@ -60,7 +62,7 @@ You can also view a timeseries of explain plan costs filtered by tag.
 
 {{< img src="database_monitoring/dbm_timeseries_by_custom_tag.png" alt="Explain plan cost by custom tag.">}}
 
-When you select a query, the custom tags are shown on the **Sample Details** page.
+When you select a query, the custom tags are shown on the **Sample Details** page under Propagated Tags.
 
 {{< img src="database_monitoring/dbm_explain_plan_with_custom_tags.png" alt="View custom tags on explain plans.">}}
 
