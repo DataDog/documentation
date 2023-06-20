@@ -146,9 +146,9 @@ Profiling samples include stack trace and line number information. Use the **Sep
 
 {{< img src="/developers/ide_integrations/idea/separate-flamegraph-by.png" alt="Use the tooltip button to separate frames by method or line number" style="width:40%;" >}}
 
-### Datadog Insights
+### Source Highlighting
 
-When a Profiling tab is active, Datadog Insights adds code highlights to the source code editor margin. The Datadog plugin displays an icon in the editor margin and highlights code based on the active Profiling data.
+When the Continuous Profiler tab is active, the plugin adds code highlights to the source code editor margin. For Top Methods an icon appears in the editor margin, and line-level highlights appear in the code based on the active Profiling data.
 - Hover over the icon to see more information.
 - Click the icon to open the top list Profiling tab or open Profiling in Datadog.
   {{< img src="/developers/ide_integrations/idea/interest-options.png" alt="Click the Datadog icon to open the Profiling data in a tab or in Datadog" style="width:100%;" >}}
