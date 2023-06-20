@@ -29,14 +29,16 @@ Starting in version **0.89.0**, the PHP tracer automatically injects trace corre
 The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Laminas Log][5].
 
 <div class="alert alert-warning">
-<strong>Note:</strong> It is strongly encouraged setting up your logging library to produce your logs in JSON format to:
-- Avoid the need for [custom parsing rules][6].
-- Ensure that stack traces are properly wrapped into the log event.
+  <strong>Note:</strong> It is strongly encouraged setting up your logging library to produce your logs in JSON format to:
+  <ul>
+    <li>Avoid the need for <a href="/logs/log_configuration/parsing">custom parsing rules</a>.</li>
+    <li>Ensure that stack traces are properly wrapped into the log event.</li>
+  </ul>
 </div>
 
 ### Configure injection in logs
 
-If you haven’t done so already, configure the PHP tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience for adding `env`, `service`, and `version` to your logs (see [Unified Service Tagging][7] for more details).
+If you haven’t done so already, configure the PHP tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience for adding `env`, `service`, and `version` to your logs (see [Unified Service Tagging][6] for more details).
 
 The PHP tracer provides various ways to configure the injection of trace correlation identifiers into your logs:
 - [Use placeholders in your message][#use-placeholders-in-your-message]
@@ -71,7 +73,7 @@ The PHP tracer will replace the placeholders with the corresponding values. For 
 [2022-12-09 16:02:42] production.INFO: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" status="info"]
 ```
 
-Note that the brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][8]. If you are using a custom parsing rule, you can omit the brackets if needed.
+Note that the brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][7]. If you are using a custom parsing rule, you can omit the brackets if needed.
 
 #### Append the trace correlation identifiers to your message
 
@@ -213,6 +215,5 @@ If your application uses json logs format instead of appending trace_id and span
 [3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog
 [5]: https://github.com/laminas/laminas-log
-[6]: /logs/log_configuration/parsing
-[7]: /getting_started/tagging/unified_service_tagging
-[8]: /logs/log_configuration/pipelines
+[6]: /getting_started/tagging/unified_service_tagging
+[7]: /logs/log_configuration/pipelines
