@@ -34,7 +34,7 @@ Datadog does not officially support any early-access versions of Java.
 
 You can monitor application security for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
-## Integrations
+
 
                                                                                                                                  
 

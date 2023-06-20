@@ -118,7 +118,6 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 - Open Source Vulnerability Detection is supported on all frameworks
 - Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
 
-### Data store compatibility
 
 | Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
@@ -127,7 +126,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 | [elasticsearch][30]    | `>=10`   |{{< X >}}|          |          |
 | [ioredis][31]          | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [knex][32]             | `>=0.8`  |{{< X >}}|{{< X >}} |          |
-| [mariadb][63]          | `>=3`    |{{< X >}}|{{< X >}} |          |
+| [mariadb][5]          | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [memcached][33]        | `>=2.2`  |{{< X >}}|{{< X >}} |          |
 | [mongodb-core][34]     | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [mysql][35]            | `>=2`    |{{< X >}}|          |{{< X >}} |
@@ -141,6 +140,8 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
 [2]: /agent/remote_config/#enabling-remote-configuration
+[4]: https://github.com/nodejs/release#release-schedule
+[5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
 [28]: https://github.com/datastax/nodejs-driver
 [29]: https://github.com/couchbase/couchnode
 [30]: https://github.com/elastic/elasticsearch-js
