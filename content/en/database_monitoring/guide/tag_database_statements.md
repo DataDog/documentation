@@ -8,6 +8,8 @@ kind: guide
 
 <div class="alert alert-info">
 This guide assumes that you have configured [Database Monitoring][1].
+
+[1]: /database_monitoring/#getting-started
 </div>
 
 [Datadog Database Monitoring (DBM)][1] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to add tags as SQL comments to your database queries, which can then be surfaced and leveraged in DBM.
