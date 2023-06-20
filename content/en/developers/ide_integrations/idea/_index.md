@@ -47,7 +47,7 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 
 {{< img src="/developers/ide_integrations/idea/datadog-plugin1.png" alt="The Datadog plugin" style="width:100%;" >}}
 
-Alternatively, you can install the plugin from the [Jetbrains Marketplace][4].
+Alternatively, you can install the plugin from the [JetBrains Marketplace][4].
 
 <span id="datadog_plugin_install_button"></span>
 
