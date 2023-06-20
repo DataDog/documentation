@@ -15,7 +15,7 @@ title: AWS と Terraform のインテグレーション
 
 1. [Datadog Terraform プロバイダー][2]を構成し、Terraform の構成で Datadog API と対話するように設定します。
 
-{{< site-region region="us,us3,us5,ap1,eu" >}}
+{{< site-region region="us,us3,us5,eu" >}}
 
 2. 以下の例を基本テンプレートとして、Terraform の構成ファイルを設定します。変更を適用する前に、以下のパラメーターを確実に更新してください。
    * `AWS_PERMISSIONS_LIST`: Datadog AWS インテグレーションが必要とする IAM ポリシー。現在のリストは、[Datadog AWS インテグレーション][1]のドキュメントで確認できます。
