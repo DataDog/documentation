@@ -1,26 +1,14 @@
 {{- $dot := . -}}
+{{- $selected_param := .Get 0 }}
 <div class="whatsnext">
   <div class="list-group">
-    {{- range $dot.Page.Params.python_flask_data -}}
-      {{- if eq (substr .link 0 4) "http" -}}
-          {{- $.Scratch.Set "link" .link -}}
+    {{- range (index $dot.Page.Params $selected_param) -}}
+      {{- $link := cond (hasPrefix .link "http") .link (strings.TrimPrefix "/" .link) -}}
+      {{- if in $link "#" -}}
+        {{- $link = ($link | relLangURL) -}}
       {{- else -}}
-          {{- if eq (substr .link 0 1) "/" -}}
-              {{- if in .link "#" -}}
-                  {{- $.Scratch.Set "link" ((substr .link 1) | relLangURL) -}}
-              {{- else -}}
-                  {{- $.Scratch.Set "link" ((substr .link 1) | absLangURL) -}}
-              {{- end -}}
-          {{- else -}}
-              {{- $.Scratch.Set "link" (.link | absLangURL) -}}
-              {{- if in .link "#" -}}
-                  {{- $.Scratch.Set "link" (.link | relLangURL) -}}
-              {{- else -}}
-                  {{- $.Scratch.Set "link" (.link | absLangURL) -}}
-              {{- end -}}
-          {{- end -}}
+        {{- $link = ($link | absLangURL) -}}
       {{- end -}}
-      {{- $link := $.Scratch.Get "link" -}}
       <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href="{{- $link -}}">
         <span class="w-100 d-flex justify-content-between">
             <span class="text">{{- .text | lower -}}</span>

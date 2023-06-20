@@ -1,5 +1,5 @@
 ---
-title: Static Analysis Rules 
+title: Static Analysis Rules
 kind: documentation
 description: View rules for multiple languages for Static Analysis.
 is_beta: true
@@ -276,7 +276,7 @@ Datadog Static Analysis provides out-of-the-box rules to help detect violations 
 
 Best practices for Python to write efficient and bug-free code.
 
-{{< partial name="continuous_integration/rule-list-python-best-practices.html" >}}
+{{< sa-rule-list "python_best_practices_data" >}}
 
 <br>
 
@@ -286,7 +286,7 @@ Best practices for Python to write efficient and bug-free code.
 
 Rules to enforce Python code style
 
-{{< partial name="continuous_integration/rule-list-python-code-style.html" >}}
+{{< sa-rule-list "python_code_style_data" >}}
 
 <br>
 
@@ -296,7 +296,7 @@ Rules to enforce Python code style
 
 Rules to check your Python program structure
 
-{{< partial name="continuous_integration/rule-list-python-design.html" >}}
+{{< sa-rule-list "python_design_data" >}}
 
 <br>
 
@@ -306,7 +306,7 @@ Rules to check your Python program structure
 
 Rules made specifically for Django best practices and security
 
-{{< partial name="continuous_integration/rule-list-python-django.html" >}}
+{{< sa-rule-list "python_django_data" >}}
 
 <br>
 
@@ -316,7 +316,7 @@ Rules made specifically for Django best practices and security
 
 Rules made specifically for Flask best practices and security
 
-{{< partial name="continuous_integration/rule-list-python-flask.html" >}}
+{{< sa-rule-list "python_flask_data" >}}
 
 <br>
 
@@ -326,7 +326,7 @@ Rules made specifically for Flask best practices and security
 
 Rules for Python to avoid inappropriate wording in the code and comments.
 
-{{< partial name="continuous_integration/rule-list-python-inclusive.html" >}}
+{{< sa-rule-list "python_inclusive_data" >}}
 
 <br>
 
