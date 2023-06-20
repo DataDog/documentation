@@ -7,6 +7,9 @@ further_reading:
 - link: "/getting_started/profiler/"
   tag: "Documentation"
   text: "Getting started with Continuous Profiler."
+- link: "/integrations/guide/source-code-integration/"
+  tag: "Documentation"
+  text: "Learn about Source Code Integration."
 ---
 
 {{< callout url="#" btn_hidden="true">}}
