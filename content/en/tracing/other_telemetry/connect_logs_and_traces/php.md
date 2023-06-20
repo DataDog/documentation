@@ -71,7 +71,7 @@ The PHP tracer replaces the placeholders with the corresponding values. For exam
 [2022-12-09 16:02:42] production.INFO: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" status="info"]
 ```
 
-Note that the brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][7]. If you are using a custom parsing rule, you can omit the brackets if needed.
+**Note**: the brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][7]. If you are using a custom parsing rule, you can omit the brackets if needed.
 
 #### Append the trace correlation identifiers to your message {#append-the-trace-correlation-identifiers-to-your-message}
 
@@ -91,7 +91,7 @@ The PHP tracer appends the available trace correlation identifiers to the log me
 [2022-12-09 16:02:42] production.DEBUG: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" dd.service="laravel" dd.version="8.0.0" dd.env="production" status="debug"]
 ```
 
-Note that if there is a placeholder in your message or if a trace id already present in the message, it takes precedence and the PHP tracer does **not** further modify the message.
+**Note**: if there is a placeholder in your message or if a trace id already present in the message, it takes precedence and the PHP tracer does **not** further modify the message.
 
 #### Add the trace correlation identifiers to the log context {#add-the-trace-correlation-identifiers-to-the-log-context}
 
@@ -111,7 +111,7 @@ The PHP tracer adds the available trace correlation identifiers to the log conte
 [2022-12-09 16:02:42] production.DEBUG: Hello, World! {"dd.trace_id":"1234567890abcdef","dd.span_id":"1234567890abcdef","dd.service":"laravel","dd.version":"8.0.0","dd.env":"production","status":"debug"}
 ```
 
-Note that if there is a placeholder in your message or if the trace id is already present in the message, the PHP tracer does **not** add the trace correlation identifiers to the log context.
+**Note**: if there is a placeholder in your message or if the trace id is already present in the message, the PHP tracer does **not** add the trace correlation identifiers to the log context.
 
 
 ## Manual injection
