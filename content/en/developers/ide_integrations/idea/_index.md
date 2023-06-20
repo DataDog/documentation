@@ -4,9 +4,6 @@ kind: documentation
 disable_toc: false
 is_beta: true
 further_reading:
-- link: "/account_management/api-app-keys/"
-  tag: "Documentation"
-  text: "Find out more about API and application keys."
 - link: "/getting_started/profiler/"
   tag: "Documentation"
   text: "Getting started with Continuous Profiler."
