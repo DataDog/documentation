@@ -148,6 +148,13 @@ The default app name. For versions <0.47.0 this is `DD_SERVICE_NAME`.
 **Default**: `null`<br>
 Change the default name of an APM integration. Rename one or more integrations at a time, for example: `DD_SERVICE_MAPPING=pdo:payments-db,mysqli:orders-db` (see [Integration names](#integration-names)).
 
+`DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
+: **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
+**Default**: `0`<br>
+Enable printing of the full 128-bit ID when formatting trace IDs for logs correlation.
+When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
+When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
 **Default**: `false`<br>
@@ -197,6 +204,11 @@ The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` 
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
 Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
+
+`DD_TRACE_APPEND_TRACE_IDS_TO_LOGS`
+: **INI**: `datadog.trace.append_trace_ids_to_logs`<br>
+**Default**: `0`<br>
+Append the logs correlation identifiers to logged messages. Use with caution as the message is modified. Refer to the [logs correlation documentation][16] for more information on its usage. Added in version `0.88.0`.
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
@@ -496,3 +508,4 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [13]: /agent/guide/network/#configure-ports
 [14]: /tracing/guide/trace-php-cli-scripts/#long-running-cli-scripts
 [15]: /tracing/guide/trace-php-cli-scripts/
+[16]: /tracing/other_telemetry/connect_logs_and_traces/php

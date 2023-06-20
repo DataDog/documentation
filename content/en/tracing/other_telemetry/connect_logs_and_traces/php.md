@@ -24,8 +24,99 @@ further_reading:
 
 ## Automatic injection
 
-Given the many different ways to implement logging in PHP<span class="x x-first x-last">,</span> with some completely circumventing PHP's built-in error-logging API, the Datadog PHP tracing library cannot reliably inject trace and span <span class="x x-first x-last">IDs</span> into logs automatically.
-See the section below to learn how to connect your PHP Logs and traces manually.
+Starting in version **0.89.0**, the PHP tracer automatically injects trace correlation identifiers into application logs. For automatic injection to be enabled, the environment variable (resp. directive) `DD_TRACE_LOGS_ENABLED` (resp. `datadog.trace.logs_enabled`) must be set to `true`.
+
+The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Laminas Log][5].
+
+<div class="alert alert-warning">
+<strong>Note:</strong> It is strongly encouraged setting up your logging library to produce your logs in JSON format to:
+- Avoid the need for [custom parsing rules][6].
+- Ensure that stack traces are properly wrapped into the log event.
+</div>
+
+### Configure injection in logs
+
+If you haven’t done so already, configure the PHP tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience for adding `env`, `service`, and `version` to your logs (see [Unified Service Tagging][7] for more details).
+
+The PHP tracer provides various ways to configure the injection of trace correlation identifiers into your logs:
+- [Use placeholders in your message][#use-placeholders-in-your-message]
+- [Append the trace correlation identifiers to your message][#append-the-trace-correlation-identifiers-to-your-message]
+- [Add the trace correlation identifiers to the log context][#add-the-trace-correlation-identifiers-to-the-log-context]
+
+#### Use placeholders in your message
+
+You can use placeholders in your message to automatically inject trace correlation identifiers into your logs. The PHP tracer supports the following placeholders:
+- `%dd.trace_id%`: the trace ID
+- `%dd.span_id%`: the span ID
+- `%dd.service%`: the service name
+- `%dd.version%`: the service version
+- `%dd.env%`: the service environment
+- `%status%`: the severity level of the log event
+
+Placeholders are case-sensitive and must be enclosed in `%` characters.
+
+For example, if you are using the [Monolog][4] library in a Laravel application, you can configure the injection of trace correlation identifiers into a log message as follows:
+
+```php
+use Illuminate\Support\Facades\Log;
+
+...
+
+Log::info('Hello, World! [%dd.trace_id% %dd.span_id% %status%]');
+```
+
+The PHP tracer will replace the placeholders with the corresponding values. For example, the logged message above could be transformed into:
+
+```
+[2022-12-09 16:02:42] production.INFO: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" status="info"]
+```
+
+Note that the brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][8]. If you are using a custom parsing rule, you can omit the brackets if needed.
+
+#### Append the trace correlation identifiers to your message
+
+You can append the trace correlation identifiers to your message by using the `DD_TRACE_APPEND_TRACE_IDS_TO_LOGS` environment variable. The PHP tracer will append the available trace correlation identifiers at the end of your message enclosed in brackets, **hence modifying the original message**.
+
+For example, if you are using the [Monolog][4] library in a Laravel application as follows:
+
+```php
+use Illuminate\Support\Facades\Log;
+
+...
+
+Log::debug('Hello, World!');
+```
+
+The PHP tracer will append the available trace correlation identifiers to the log message. The logged message above could be transformed into:
+
+```
+[2022-12-09 16:02:42] production.DEBUG: Hello, World! [dd.trace_id="1234567890abcdef" dd.span_id="1234567890abcdef" dd.service="laravel" dd.version="8.0.0" dd.env="production" status="debug"]
+```
+
+Note that if there is a placeholder in your message or if a trace id already present in the message, it will take precedence and the PHP tracer will **not** further modify the message.
+
+#### Add the trace correlation identifiers to the log context
+
+The default behavior of the PHP tracer is to add the trace correlation identifiers to the log context.
+
+For example, if you are using the [Monolog][4] library in a Laravel application as follows:
+
+```php
+use Illuminate\Support\Facades\Log;
+
+...
+
+Log::debug('Hello, World!');
+```
+
+The PHP tracer will add the available trace correlation identifiers to the log context. The logged message above could be transformed into:
+
+```
+[2022-12-09 16:02:42] production.DEBUG: Hello, World! {"dd.trace_id":"1234567890abcdef","dd.span_id":"1234567890abcdef","dd.service":"laravel","dd.version":"8.0.0","dd.env":"production","status":"debug"}
+```
+
+Note that if there is a placeholder in your message or if the trace id is already present in the message, the PHP tracer **will not** add the trace correlation identifiers to the log context.
+
 
 ## Manual injection
 
@@ -121,3 +212,7 @@ If your application uses json logs format instead of appending trace_id and span
 [2]: /logs/log_configuration/processors/#trace-remapper
 [3]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [4]: https://github.com/Seldaek/monolog
+[5]: https://github.com/laminas/laminas-log
+[6]: /logs/log_configuration/parsing
+[7]: /getting_started/tagging/unified_service_tagging
+[8]: /logs/log_configuration/pipelines
