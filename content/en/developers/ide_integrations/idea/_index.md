@@ -140,9 +140,9 @@ The active Profiling tab also affects the IDEA project tree view, which is annot
 
 ## Logs Navigation
 
-You can navigate to the [Log Explorer] on the Datadog platform directly from your Java source files.  Look out for **View Logs** links following log statements in your source code:
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java source files.  Look out for **View Logs** links following log statements in your source code:
 
-{{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
+{{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
 
 The Datadog plugin will preconfigure a query that matches the logger name, log level and log message as closely as possible, taking you to relevant log information quickly and easily.
 
@@ -164,3 +164,4 @@ Let us know what you think about the plugin! Provide feedback on our [discussion
 [2]: /getting_started/profiler/
 [3]: https://www.datadoghq.com/
 [4]: https://plugins.jetbrains.com/plugin/19495-datadog
+[5]: /logs/explorer/
