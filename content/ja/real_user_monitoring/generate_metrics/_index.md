@@ -30,9 +30,9 @@ RUM ベースのカスタムメトリクスは、RUM イベントのセットか
 
 ## RUM ベースのカスタムメトリクスを作成する
 
-RUM イベントデータからカスタムメトリクスを作成するには、[**UX Monitoring** > **Generate Metrics**][4] に移動して **+ New Metric** をクリックします。
+RUM イベントデータからカスタムメトリクスを作成するには、[**UX Monitoring** > **Setup & Configuration** > **Generate Metrics**][4] に移動して **+ New Metric** をクリックします。
 
-{{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="RUM ベースのカスタムメトリクスを作成するには、+ New Metric をクリックします" width="80%" >}}
+{{< img src="real_user_monitoring/generate_metrics/new_metrics_button-2.png" alt="RUM ベースのカスタムメトリクスを作成するには、+ New Metric をクリックします" width="80%" >}}
 
 [RUM エクスプローラー][5]で検索クエリからカスタムメトリクスを作成するには、**Export** ボタンをクリックし、ドロップダウンメニューから **Generate new metric** を選択します。
 
@@ -101,7 +101,7 @@ RUM ベースのカスタムメトリクスは、以下のアクションに使�
 - [予測モニター][14]で、あるメトリクスが将来的にしきい値を超えると予測された場合にアラートをトリガーする
 - [メトリクスベースの SLO][15] を作成し、チームや組織のユーザー中心のパフォーマンス目標を追跡する
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -119,4 +119,4 @@ RUM ベースのカスタムメトリクスは、以下のアクションに使�
 [12]: /ja/dashboards/querying/#configuring-a-graph
 [13]: /ja/monitors/types/anomaly/
 [14]: /ja/monitors/types/forecasts/
-[15]: /ja/monitors/service_level_objectives/metric/
+[15]: /ja/service_management/service_level_objectives/metric/

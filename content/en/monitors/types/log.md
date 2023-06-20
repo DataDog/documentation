@@ -14,6 +14,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+  tag: "Blog"
+  text: "Use CIDR notation queries to filter your network traffic logs"
 ---
 
 ## Overview
