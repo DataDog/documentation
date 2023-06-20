@@ -126,11 +126,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 | [elasticsearch][30]    | `>=10`   |{{< X >}}|          |          |
 | [ioredis][31]          | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [knex][32]             | `>=0.8`  |{{< X >}}|{{< X >}} |          |
-<<<<<<< HEAD
 | [mariadb][5]          | `>=3`    |{{< X >}}|{{< X >}} |          |
-=======
-| [mariadb][42]          | `>=3`    |{{< X >}}|{{< X >}} |          |
->>>>>>> refs/remotes/origin/sourabhkatti/update-java-framework
 | [memcached][33]        | `>=2.2`  |{{< X >}}|{{< X >}} |          |
 | [mongodb-core][34]     | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [mysql][35]            | `>=2`    |{{< X >}}|          |{{< X >}} |
@@ -144,12 +140,8 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
 [2]: /agent/remote_config/#enabling-remote-configuration
-<<<<<<< HEAD
 [4]: https://github.com/nodejs/release#release-schedule
 [5]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
-=======
-[4]: https://nodejs.org/en/docs
->>>>>>> refs/remotes/origin/sourabhkatti/update-java-framework
 [28]: https://github.com/datastax/nodejs-driver
 [29]: https://github.com/couchbase/couchnode
 [30]: https://github.com/elastic/elasticsearch-js
@@ -164,4 +156,3 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 [39]: https://github.com/NodeRedis/node_redis
 [40]: https://share.github.io/sharedb/
 [41]: http://tediousjs.github.io/tedious
-[42]: https://github.com/mariadb-corporation/mariadb-connector-nodejs
