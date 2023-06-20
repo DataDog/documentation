@@ -61,9 +61,7 @@ For example, if you are using the [Monolog][4] library in a Laravel application,
 
 ```php
 use Illuminate\Support\Facades\Log;
-
-...
-
+# ...
 Log::info('Hello, World! [%dd.trace_id% %dd.span_id% %status%]');
 ```
 
@@ -83,9 +81,7 @@ For example, if you are using the [Monolog][4] library in a Laravel application 
 
 ```php
 use Illuminate\Support\Facades\Log;
-
-...
-
+# ...
 Log::debug('Hello, World!');
 ```
 
@@ -105,9 +101,7 @@ For example, if you are using the [Monolog][4] library in a Laravel application 
 
 ```php
 use Illuminate\Support\Facades\Log;
-
-...
-
+# ...
 Log::debug('Hello, World!');
 ```
 
