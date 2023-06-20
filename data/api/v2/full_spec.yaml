@@ -15832,11 +15832,22 @@ components:
               an organization. The ability to write monitors is not required to set
               downtimes.
             monitors_read: View monitors.
+            org_management: Edit organization configurations, including authentication
+              and certain security preferences.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_write: Mute CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            synthetics_default_settings_read: View the default settings for Synthetic
+              Monitoring.
+            teams_manage: Manage Teams. Create, delete, rename, and edit the metadata
+              of all Teams. To control Team membership across all Teams, use the User
+              Access Manage permission.
+            teams_read: Read Teams data. View Team names, metadata, and which users
+              are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
