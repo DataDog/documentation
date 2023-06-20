@@ -138,6 +138,14 @@ When a Profiling tab is active, Datadog Insights adds code highlights to the sou
 The active Profiling tab also affects the IDEA project tree view, which is annotated with the selected profile's metrics:
 {{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
 
+## Logs Navigation
+
+You can navigate to the [Log Explorer] on the Datadog platform directly from your Java source files.  Look out for **View Logs** links following log statements in your source code:
+
+{{< img src="/developers/ide_integrations/idea/project-tree-view.png" alt="The project tree annotated with profile metrics from a profile tab" style="width:60%;" >}}
+
+The Datadog plugin will preconfigure a query that matches the logger name, log level and log message as closely as possible, taking you to relevant log information quickly and easily.
+
 ## Feedback
 
 Let us know what you think about the plugin! Provide feedback on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
