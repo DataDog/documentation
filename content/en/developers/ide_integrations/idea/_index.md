@@ -71,6 +71,14 @@ To remove a service, select it in the **Services** table and click the minus ico
 
 <div class="alert alert-info">The names of linked services persist with the project when you close it.</div>
 
+## Code Insights
+The **Code Insights** tab displays relevant insights about your current project, grouped into three categories:
+- performance
+- reliability
+- security
+
+{{< img src="/developers/ide_integrations/idea/code-insights.png" alt="The Code Insights tab." style="width:100%;" >}}
+
 ## Using the plugin
 
 After you add a service to your project, right-click on the service and click **Open in Profiling** to open a Profiling tab for the service. A profiling tab displays data for only one service, but you can have multiple tabs open simultaneously.
