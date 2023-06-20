@@ -8,7 +8,7 @@ kind: guide
 
 This guide assumes that you have configured [Database Monitoring][1].
 
-[Datadog Database Monitoring][1] allows you to view explain plans and query samples running on your database hosts. This guide covers how to add tags as SQL comments to your database queries that can be surfaced and leveraged in Database Monitoring.
+[Datadog Database Monitoring (DBM)][1] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to add tags as SQL comments to your database queries, which can then be surfaced and leveraged in DBM.
 
 ## Before you begin
 
@@ -22,7 +22,7 @@ Supported tagging formats
 : [sqlcommenter][2], [marginalia][3]
 
 
-### Manual tag injection
+## Manual tag injection
 Using any database API supporting execution of SQL statements, add a comment in your statement with tags formatted as per the [sqlcommenter][2] or [marginalia][3] formats.
 
 ```sql
@@ -52,24 +52,19 @@ func main() {
 
 ## Explore the tags in DBM
 
-### View the custom tag on explain plans or query samples
-
-{{< img src="database_monitoring/dbm_explain_plan_with_custom_tags.png" alt="View custom tags on explain plans.">}}
-
-When viewing an Explain Plan or Query Sample in Database Monitoring, you can view your custom injected tags. 
-
-### Filter explain plans or query samples by custom tag
+On the [**DBM > Samples**][4] page, filter the **Explain Plans** and **Query Samples** views by custom tag.
 
 {{< img src="database_monitoring/dbm_filter_explain_plans_by_custom_tag.png" alt="Filter explain plans by custom tag.">}}
 
-Filter Explain Plans or Query Samples by a your custom tags. 
-
-### View timeseries of explain plans or query samples by custom tag
+You can also view a timeseries of explain plan costs filtered by tag.
 
 {{< img src="database_monitoring/dbm_timeseries_by_custom_tag.png" alt="Explain plan cost by custom tag.">}}
 
-View a timeseries of explain plan cost by any custom tag.
+When you select a query, the custom tags are shown on the **Sample Details** page.
+
+{{< img src="database_monitoring/dbm_explain_plan_with_custom_tags.png" alt="View custom tags on explain plans.">}}
 
 [1]: /database_monitoring/#getting-started
 [2]: https://google.github.io/sqlcommenter
 [3]: https://github.com/basecamp/marginalia
+[4]: /database_monitoring/query_samples/
