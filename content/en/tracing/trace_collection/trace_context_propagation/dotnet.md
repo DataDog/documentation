@@ -4,6 +4,10 @@ kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 
@@ -94,6 +98,9 @@ public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAtt
 
 When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [5]: https://github.com/openzipkin/b3-propagation

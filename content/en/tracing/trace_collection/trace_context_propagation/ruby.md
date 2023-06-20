@@ -4,6 +4,10 @@ kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OTel-instrumented apps with support for W3C Trace Context'
 ---
 
 ### B3 headers extraction and injection
@@ -45,6 +49,10 @@ end
 ```
 
 For more information about trace context propagation configuration, read [the Distributed Tracing section][1] in the Ruby Tracing Library Configuration docs.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/dd_libraries/ruby/#distributed-tracing
 [6]: https://github.com/openzipkin/b3-propagation

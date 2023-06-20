@@ -132,39 +132,16 @@ Here are the filter and group by text boxes on the Live Processes page:
 
 ## Monitors
 
-{{< tabs >}}
-{{% tab "Manage Monitors" %}}
+To filter monitors and [monitor downtimes][31] by [assigned tags][32], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`.
 
-To filter monitors by [assigned tags][1], use the search bar or facet checkboxes. The search bar format is `tag:<KEY>:<VALUE>`, for example: `tag:service:coffee-house`. To exclude monitors with a specific tag from your search, use `-`, for example: `tag:-service:coffee-house`.
+{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="Filter monitors in the search bar with tags" style="width:80%;">}}
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="Manage Monitors Tags" style="width:80%;">}}
+**Note**: Monitor tags are different and separate from metric tags. For more information, see the documentation on [Monitor tags][30].
 
-Monitor tags are different and separate from metric tags.
-
-[1]: /getting_started/tagging/assigning_tags/
-{{% /tab %}}
-
-{{% tab "New Monitor" %}}
-
-When creating a [monitor][1], use metric tags in the:
-
+When creating a new monitor, use *metric tags* in the:
 * **from** text box to limit the monitor scope to only metrics that have those tags.
-
 * **excluding** text box to remove the corresponding metrics from the monitor scope.
-
 * **avg by** text box to transform the monitor into a multi alert monitor on each tag value.
-
-[1]: /monitors/types
-{{% /tab %}}
-{{% tab "Manage Downtime" %}}
-
-To filter [downtimes][1] by monitor tag, type the tag name in the search bar, for example `service:coffee-house`.
-
-{{< img src="tagging/using_tags/managedowntimetags.png" alt="Manage Monitors Tags" style="width:80%;">}}
-
-[1]: /monitors/downtimes/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## Metrics
 
@@ -430,3 +407,6 @@ See this list for links to respective sections:
 [27]: /api/v1/service-level-objectives/#create-a-slo-object
 [28]: /api/v1/service-level-objectives/#get-a-slos-details
 [29]: /api/v1/service-level-objectives/#update-a-slo
+[30]: /monitors/manage/#monitor-tags
+[31]: /monitors/downtimes/
+[32]: /getting_started/tagging/assigning_tags?tab=monitors
