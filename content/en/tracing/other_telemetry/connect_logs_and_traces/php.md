@@ -41,9 +41,9 @@ The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Lamina
 If you haven't done so already, configure the PHP tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This provides the best experience for adding `env`, `service`, and `version` to your logs (see [Unified Service Tagging][6] for more details).
 
 The PHP tracer provides various ways to configure the injection of trace correlation identifiers into your logs:
-- [Use placeholders in your message][#use-placeholders-in-your-message]
-- [Append the trace correlation identifiers to your message][#append-the-trace-correlation-identifiers-to-your-message]
-- [Add the trace correlation identifiers to the log context][#add-the-trace-correlation-identifiers-to-the-log-context]
+- [Use placeholders in your message](#use-placeholders-in-your-message)
+- [Append the trace correlation identifiers to your message](#append-the-trace-correlation-identifiers-to-your-message)
+- [Add the trace correlation identifiers to the log context](#add-the-trace-correlation-identifiers-to-the-log-context)
 
 #### Use placeholders in your message {#use-placeholders-in-your-message}
 
