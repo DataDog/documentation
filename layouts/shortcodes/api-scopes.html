@@ -38,9 +38,11 @@ For each scope find the common tags and group them together
 -->
 {{ $tagGroups := slice }}
 {{ $scopeGroups := slice }}
+{{ $counter := 0 }}
+{{ $total := len ($s.Get "scopes") }}
 {{ range $scope, $scope_obj := ($s.Get "scopes") }}
   {{ $intersect := len (intersect $tagGroups $scope_obj.tags) }}
-  {{ if eq $intersect 0 }}
+  {{ if or (and (eq $intersect 0) (ne $counter 0)) (eq $counter (sub $total 1)) }}
     {{ if $tagGroups}}
       {{ $tagStr := (print (delimit $tagGroups ", ")) }}
       {{ $s.SetInMap "tags" $tagStr $scopeGroups }}
@@ -50,6 +52,7 @@ For each scope find the common tags and group them together
   {{ end }}
   {{ $tagGroups = ($tagGroups | append $scope_obj.tags) | uniq }}
   {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
+  {{ $counter = add $counter 1 }}
 {{ end }}
 
 {{ range $tagString, $scopeSlice := ($s.Get "tags") }}
