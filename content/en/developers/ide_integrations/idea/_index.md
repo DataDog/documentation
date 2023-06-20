@@ -81,11 +81,11 @@ The **Code Insights** tab displays relevant insights about your current project,
 
 {{< img src="/developers/ide_integrations/idea/code-insights.png" alt="The Code Insights tab." style="width:100%;" >}}
 
-## Using the plugin
+## Continuous Profiler
 
 After you add a service to your project, right-click on the service and click **Open in Profiling** to open a Profiling tab for the service. A profiling tab displays data for only one service, but you can have multiple tabs open simultaneously.
 
-The Profiling tab shows Continuous Profiling information for the service in a selected environment, aggregated over a specific time frame. Available views are:
+The **Continuous Profiler** tab shows profiling information for the service in a selected environment, aggregated over a specific time frame. Available views are:
 - [Top list](#top-list): Displays a list of the most resource intensive methods for the current profiling measure.
 - [Flame graph](#flame-graph): A flame graph representing stack traces in the profiles.
 
@@ -96,7 +96,7 @@ You can specify the following parameters for the profiling data:
 
 The available profiling types usually include options like **CPU Time** and **Allocated Memory**, but are determined by the platform and vary by language.
 
-## Top list
+### Top list
 
 The **Top List** sub-tab shows the methods that consume the most resources based on the aggregated profile data loaded from the Datadog servers. **Top List** is designed to show a summary of the methods that are most likely to be interesting from a resource consumption point of view.
 
@@ -105,7 +105,7 @@ The **Top List** sub-tab shows the methods that consume the most resources based
 - Double-clicking an item in the list (or selecting **Jump to Source** from the context menu) opens a source code editor showing where the method is defined.
 - To see a flame graph visualization of a method, select **Search in Flame Graph** from the context menu.
 
-### Call tree
+#### Call tree
 
 The call tree to the right of the method list shows the paths that lead to (and from) the selected method.
 
@@ -119,7 +119,7 @@ To view the callees (or successors), click **Callee Hierarchy**.
 
 Right-click on a method in the call tree to see options to navigate to the source editor or flame graph.
 
-## Flame graph
+### Flame graph
 
 A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin aggregates data collected over the requested time frame, and multiple individual profiles are aggregated together. Each individual profile covers a 60 second interval within the requested time frame.
 
@@ -141,7 +141,7 @@ Profiling samples include stack trace and line number information. Use the **Sep
 
 {{< img src="/developers/ide_integrations/idea/separate-flamegraph-by.png" alt="Use the tooltip button to separate frames by method or line number" style="width:40%;" >}}
 
-## Datadog Insights
+### Datadog Insights
 
 When a Profiling tab is active, Datadog Insights adds code highlights to the source code editor margin. The Datadog plugin displays an icon in the editor margin and highlights code based on the active Profiling data.
 - Hover over the icon to see more information.
