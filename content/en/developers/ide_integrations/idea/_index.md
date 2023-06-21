@@ -129,9 +129,9 @@ Right-click on a method in the call tree to see options to navigate to the sourc
 
 ### Flame graph
 
-A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin aggregates data collected over the requested time frame, and multiple individual profiles are aggregated together. Each individual profile covers a 60 second interval within the requested time frame.
+A flame graph is a visualization of profiling samples that shows stack traces and their relative frequency during the sample period. The Datadog plugin take multiple individual profiles collected over the requested time frame, and aggregates them. Each individual profile covers a 60 second interval within the requested time frame.
 
-{{< img src="/developers/ide_integrations/idea/flamegraph1.png" alt="A flame graph showing CPU Time over the last 4 hours" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/flamegraph1.png" alt="A flame graph showing CPU Time over the past hour" style="width:100%;" >}}
 
 Each time you change the profile type, the time frame, or the environment, the Datadog plugin generates a new flame graph.
 
