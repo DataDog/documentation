@@ -25,7 +25,7 @@ When a pipeline, stage, job, or step finishes, its execution data should be sent
 
 ### Pipeline unique IDs
 
-All pipeline executions within a level must have a unique identifier. Providing repeated IDs result in undefined behavior in CI Visibility.
+All pipeline executions within a level must have an unique identifier. For example, a pipeline and a job may have the same unique ID, but not two pipelines. When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For instance, flamegraphs might display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only one pipeline execution will be stored while the others will be ignored.
 
 ## Pipeline execution types
 
