@@ -116,10 +116,11 @@ Datadog プロファイラーを有効にします。バージョン `0.69.0` �
 **デフォルト**: `1`<br>
 プロファイルでエンドポイントデータの収集を有効にするかどうか。バージョン `0.79.0` で追加されました。
 
-`DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED`
-: **INI**: `datadog.profiling.experimental_allocation_enabled` INI は `0.84.0`から利用可能です。<br>
-**デフォルト**: `0`<br>
-実験的な割り当てサイズと割り当てバイトのプロファイルの種類を有効にします。バージョン `0.84.0` で追加されました。
+`DD_PROFILING_ALLOCATION_ENABLED`
+: **INI**: `datadog.profiling.allocation_enabled`。`0.88.0` 以降で利用可能な INI。<br>
+**デフォルト**: `1`<br>
+<br>アロケーションサイズとアロケーションバイトのプロファイルタイプを有効にします。バージョン `0.88.0` で追加されました。
+**注**: これは `0.84` から利用できるようになった `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` 環境変数 (`datadog.profiling.experimental_allocation_enabled` INI 設定) よりも優先されます。両方が設定されている場合は、こちらが優先されます。
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`。INI は `0.82.0` から利用可能です。<br>
@@ -319,7 +320,7 @@ URL の一部として収集するクエリパラメータのカンマ区切り�
 : **INI**: `datadog.trace.http_post_data_param_allowed`<br>
 **デフォルト**: ""<br>
 収集される HTTP POST データフィールドのカンマ区切りリスト。POST 送信された値を収集しない場合は、空のままにします。この値をワイルドカードの `*` に設定した場合、POST 送信されたすべてのデータが収集されますが、`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` 難読化ルールに一致するフィールドの値は編集されます。特定のフィールドが指定された場合、これらのフィールドの値のみが表示され、その他すべてのフィールドの値は編集されます。バージョン `0.86.0` で追加されました。<br>
-**例**: 
+**例**:
   - POST 送信されたデータは `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
   - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` は `foo.baz,foo.bar.password` に設定
   - このシナリオにおいて、収集されるメタデータ:

@@ -15827,16 +15827,30 @@ components:
             incident_read: View incidents in Datadog.
             incident_settings_write: Configure Incidents settings.
             incident_write: Create, view, and manage incidents in Datadog.
+            metric_tags_write: Create and edit tag configurations for custom metrics.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. The ability to write monitors is not required to set
               downtimes.
             monitors_read: View monitors.
+            org_management: Edit organization configurations, including authentication
+              and certain security preferences.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
+            security_monitoring_findings_read: View CSPM Findings.
+            security_monitoring_findings_write: Mute CSPM Findings.
             security_monitoring_rules_read: Read Detection Rules.
             security_monitoring_rules_write: Create and edit Detection Rules.
             security_monitoring_signals_read: View Security Signals.
+            synthetics_default_settings_read: View the default settings for Synthetic
+              Monitoring.
+            synthetics_default_settings_write: Create and edit default settings for
+              Synthetic Monitoring.
+            teams_manage: Manage Teams. Create, delete, rename, and edit the metadata
+              of all Teams. To control Team membership across all Teams, use the User
+              Access Manage permission.
+            teams_read: Read Teams data. View Team names, metadata, and which users
+              are on each Team.
             timeseries_query: Query Timeseries data.
             usage_read: View your organization's usage and usage attribution.
             user_access_invite: Invite other users to your organization.
@@ -16757,7 +16771,10 @@ paths:
         type: idempotent
   /api/v2/ci/pipeline:
     post:
-      description: Send your pipeline event to your Datadog platform over HTTP.
+      description: 'Send your pipeline event to your Datadog platform over HTTP.
+
+
+        This API endpoint is in private beta.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
         content:
@@ -16861,7 +16878,7 @@ paths:
   /api/v2/ci/pipelines/events:
     get:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a log search query.
+        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -16943,7 +16960,7 @@ paths:
   /api/v2/ci/pipelines/events/search:
     post:
       description: 'List endpoint returns CI Visibility pipeline events that match
-        a log search query.
+        a [log search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -17014,8 +17031,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events:
     get:
-      description: 'List endpoint returns CI Visibility test events that match a log
-        search query.
+      description: 'List endpoint returns CI Visibility test events that match a [log
+        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -17096,8 +17113,8 @@ paths:
         type: safe
   /api/v2/ci/tests/events/search:
     post:
-      description: 'List endpoint returns CI Visibility test events that match a log
-        search query.
+      description: 'List endpoint returns CI Visibility test events that match a [log
+        search query](https://docs.datadoghq.com/logs/explorer/search_syntax/).
 
         [Results are paginated similarly to logs](https://docs.datadoghq.com/logs/guide/collect-multiple-logs-with-pagination).
 
@@ -18501,7 +18518,7 @@ paths:
               $ref: '#/components/schemas/GCPSTSServiceAccountCreateRequest'
         required: true
       responses:
-        '200':
+        '201':
           content:
             application/json:
               schema:

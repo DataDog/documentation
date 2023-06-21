@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_acm_requestPrivateCertificate
 bundle: com.datadoghq.aws.acm
 bundle_title: AWS Certificate Manager
 description: 他の AWS サービスで使用するための非公開証明書をリクエストします。

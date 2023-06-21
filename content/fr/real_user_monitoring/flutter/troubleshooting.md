@@ -3,7 +3,7 @@ description: Découvrez comment résoudre les problèmes liés à la surveillanc
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: Code source dd-sdk-flutter
+  text: Code source de dd-sdk-flutter
 - link: real_user_monitoring/flutter/
   tag: Documentation
   text: En savoir plus sur la surveillance Flutter

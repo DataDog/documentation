@@ -24,6 +24,9 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on creating effective monitors"
+  - link: "https://www.datadoghq.com/blog/aws-recommended-monitors/"
+    tag: "Blog"
+    text: "Enable preconfigured alerts with recommended monitors for AWS"
 cascade:
     algolia:
         rank: 70

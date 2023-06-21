@@ -12,12 +12,12 @@ APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM give
 
 | Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [APM Host][4]      | $31 per underlying [APM host][4] per month | 1 million Indexed Spans and 150 GB of Ingested Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More information.][5] |
+| [APM Host][5]      | $31 per underlying [APM host][5] per month | 1 million Indexed Spans and 150 GB of Ingested Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement. [More APM pricing information.][5] |
 | APM Pro (APM Host with Data Streams Monitoring) | $35 per underlying [APM host][5]. Includes Data Streams Monitoring. | Same as APM Host | Datadog records the number of unique APM hosts in the Datadog APM service and unique DSM hosts you are concurrently monitoring once an hour. The hourly measurements and billing for APM Pro are conducted the same as for APM Hosts.  |
 | APM Enterprise (APM Host with Data Streams Monitoring & [Continuous Profiler)][6] | $40 per underlying [APM host][5]. Includes Data Streams Monitoring and [Continuous Profiler][6] with four profiled containers per host per month. | Same as APM Host | Datadog records the number of unique APM hosts in the APM service, unique DSM hosts, and unique Continuous Profiler hosts you are concurrently monitoring once per hour. The hourly measurements and billing for APM Enterprise are conducted the same as for APM Hosts. |
-| [Fargate][4]       | APM: $2 per concurrent task per month <br> APM Pro: $2.30 per concurrent task per month <br> APM Enterprise: $2.60 per concurrent task per month              | 65,000 Indexed Spans and 10 GB of Ingested Spans included in pricing.              | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the average number of hours your applications were run and monitored. [More information.][4]              |
-| [Indexed span][5] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed with retention filters or legacy Analyzed Spans to the Datadog APM service at the end of the month. [More information.][5]                                                                                          |
-| [Ingested span][5] | $.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More information.][5]                                                                                          |
+| [Fargate][4]       | APM: $2 per concurrent task per month <br> APM Pro: $2.30 per concurrent task per month <br> APM Enterprise: $2.60 per concurrent task per month              | 65,000 Indexed Spans and 10 GB of Ingested Spans included in pricing.              | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the average number of hours your applications were run and monitored. [More Fargate pricing information.][4]              |
+| [Indexed span][5] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed with retention filters or legacy Analyzed Spans to the Datadog APM service at the end of the month. [More APM pricing information.][5]                                                                                          |
+| [Ingested span][5] | $.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More APM pricing information.][5]                                                                                          |
 
 **Notes**:  
    - If you're using a container based environment, you get billed for the underlying host deploying the Datadog Agent.
@@ -132,11 +132,11 @@ An AWS-Lambda based serverless application being invoked 10 million times in a m
 
 **1. What is classified as an APM host for billing?**
 
-A [host][4] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][11] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][5].
+A [host][4] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][12] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][5].
 
 **2. How is billing calculated when deploying one Agent per container?**
 
-It is recommended to [setup running][12] one agent per underlying host for container deployment. If you still choose to run one agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (Number of containers)
+It is recommended that you set up _one Agent per underlying host_ for container deployment. If you choose instead to run one Agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (Number of containers).
 
 **3. What is classified as an APM Fargate task for billing?**
 
@@ -152,7 +152,7 @@ Kubernetes creates pause containers to acquire the respective pod's IP address a
 
 **6. How is the host billing related to your services?**
 
-APM is billed on the basis of [hosts][4] deployed with agents sending traces and not services. Additionally, over the monthly allocation by host, APM is billed on the basis of Ingested span volume and Indexed span count. To estimate how many ingested and indexed spans each of your services is sending, see the [ingestion][2] and [retention][13] documentation.
+APM is billed on the basis of [hosts][5] deployed with agents sending traces and not services. Additionally, over the monthly allocation by host, APM is billed on the basis of Ingested span volume and Indexed span count. To estimate how many ingested and indexed spans each of your services is sending, see the [ingestion][2] and [retention][13] documentation.
 
 **7. What happens to your existing App Analytics filters?**
 
@@ -188,9 +188,9 @@ Yes. Let Datadog know if you are interested in buying Data Streams Monitoring wi
 [7]: https://www.datadoghq.com/pricing/
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
-[10]: https://docs.datadoghq.com/account_management/billing/serverless/#serverless-functions
+[10]: /account_management/billing/serverless/#serverless-functions
 [11]: /account_management/billing/
-[12]: /tracing/trace_collection/dd_libraries/java/?tab=containers#configure-the-datadog-agent-for-apm
+[12]: /tracing/trace_collection/dd_libraries/
 [13]: /tracing/trace_pipeline/trace_retention/
 [14]: /tracing/trace_pipeline/metrics
 [15]: /universal_service_monitoring/

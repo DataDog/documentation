@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - 異常値
+  - 異常グラフ
 aliases:
 - /ja/graphing/functions/algorithms/
 kind: documentation
