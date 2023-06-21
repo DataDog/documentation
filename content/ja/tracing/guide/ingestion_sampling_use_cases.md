@@ -83,7 +83,7 @@ Datadog Agent のパラメーター `max_traces_per_second` または環境変�
 例えば、`my-service` という名前のサービスのトレースの 20% を送信するには
 
 ```
-DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
+DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 [サンプリングルールの取り込みメカニズム][6]について詳しくはこちら。
@@ -98,7 +98,9 @@ DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="エラーサンプリング" style="width:100%;" >}}
 
-**注:** Datadog Agent レベルでローカルにサンプリングが行われるため、トレースチャンクの分散された断片は取り込まれない可能性があります。
+**注:**
+- Datadog Agent レベルでローカルにサンプリングが行われるため、トレースチャンクの分散された断片は取り込まれない可能性があります。
+- **Datadog Agent 6/7.41.0 以降**では、`DD_APM_FEATURES=error_rare_sample_tracer_drop` を設定することで、トレーシングライブラリルールまたは `manual.drop` でドロップしたスパンが含まれます。詳細は、[取り込みのメカニズムのドキュメントのエラートレースセクション][9]に記載されています。
 
 #### エラーサンプリングの構成
 
@@ -131,13 +133,13 @@ DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 - バックエンドサービス `web-store` の **トレースサンプリングルール** を構成し、Mongo スパンを含むトレース全体の 10% を保持します。
 
   ```
-  DD_TRACE_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 0.1}]
+  DD_TRACE_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 0.1}]'
   ```
 
 - オプションとして、すべての `web-store` スパンを保持したい場合は、バックエンドサービス `web-store` のスパンの 100% を保持する**シングルスパンサンプリングルール**を構成してください。このサンプリングでは、上記の 10% 以外のデータベース呼び出しスパンは取り込まれません。
 
   ```
-  DD_SPAN_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 1}]
+  DD_SPAN_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 1}]'
   ```
 
   **注**: スパンサンプリングルールの構成は、取り込みスパンから得られる[スパンベースメトリクス][8]を使用する場合に特に有効です。
@@ -157,3 +159,4 @@ DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
 [6]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
 [7]: /ja/tracing/trace_pipeline/ingestion_controls/#service-ingestion-summary
 [8]: /ja/tracing/trace_pipeline/generate_metrics/
+[9]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java#error-and-rare-traces

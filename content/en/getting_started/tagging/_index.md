@@ -19,6 +19,9 @@ further_reading:
     - link: '/getting_started/tagging/using_tags/'
       tag: 'Documentation'
       text: 'Learn how to use tags'
+    - link: "https://dtdg.co/fe"
+      tag: "Foundation Enablement"
+      text: "Join an interactive session on effective tagging with Datadog"
 ---
 
 ## Overview

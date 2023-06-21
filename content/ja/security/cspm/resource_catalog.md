@@ -5,23 +5,21 @@ further_reading:
 - link: /security/cspm/custom_rules/schema/
   tag: ドキュメント
   text: Cloud Resource Schema
-is_beta: true
 kind: documentation
-private: true
 title: Datadog Resource Catalog
 ---
 
-{{< callout url="https://dashcon.io/security" >}}
-  Resource Catalog は非公開ベータ版です。アクセスしたい場合は、このフォームに記入してください。
-{{< /callout >}}
-
-{{< img src="security/cspm/resource_catalog/resource_catalog.png" alt="ホストとクラウドのリソースをカテゴリー別、地域別に分類して表示する Resource Catalog のマップビュー。" style="width:100%;" >}}
-
-## 概要
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">
+Resource Catalog は、現在このサイトでは利用できません。
+</div>
+{{< /site-region >}}
 
 Datadog Resource Catalog は、クラウドやハイブリッド環境におけるホストやリソースの大まかな概要を提供します。タグ、構成の詳細、アセット間の関係、誤構成、脅威などの情報を表示します。各リソースを担当するチームと、報告されたセキュリティ上の発見事項を確認できます。ダッシュボードと Datadog ビューにアクセスし、各リソースのテレメトリーとセキュリティデータを受信して監視します。
 
-Resource Catalog は、Datadog のクラウドインテグレーションと、既にインストールされているであろう Datadog Agent を活用し、データベース、ストレージサービス、ホストなどのクラウドリソースからデータを収集することができます。
+Resource Catalog は、Datadog のクラウドインテグレーションと Datadog Agent を活用し、データベース、ストレージサービス、ホストなどのクラウドリソースからデータを収集することができます。
+
+{{< img src="security/cspm/resource_catalog/resource_catalog2.png" alt="ホストとクラウドのリソースをカテゴリー別、地域別に分類して表示する Resource Catalog のマップビュー。" style="width:100%;" >}}
 
 ## Resource Catalog にリソースを追加する
 
@@ -43,11 +41,15 @@ Resource Catalog は、以下のような場合に有効です。
 
 リソースカタログのリストでは、クラウドプラットフォーム、リソースの種類、アカウント、チーム、地域、調査結果、脅威によってリソースを並べ替えることができます。**Threats** で並べ替えると、過去 4 時間以内に影響を受けたワークロードを特定することができます。誤構成が最も発生しやすいクラウドリソースを特定するには、**Findings** で並べ替えます。
 
-特定のリソースを見つけるには、その名前で検索します。リストをフィルターして、最も関心のあるリソースのサブセットを表示するには、左側のファセットを選択します。たとえば、チーム名でフィルターをかけたり、特定の環境やクラスターに調査結果を絞り込むことができます。
+特定のリソースを見つけるには、その名前で検索します。リストをフィルターして、最も関心のあるリソースのサブセットを表示するには、左のパネルでファセットを選択します。たとえば、チーム名でフィルターをかけたり、特定の環境やクラスターに調査結果を絞り込むことができます。
+
+[Datadog Teams][4] を使用している場合、左パネルの **Teams** トグルを選択し、割り当てられたチームのトグルを選択すると、そのチームに割り当てられたリソースのみを表示できます。
 
 ### マップビュー
 
 Resource Catalog マップは、組織内のリソースを視覚化したものです。特定のリソースを見つけるには、その名前で検索します。リソースを地域別にグループ化し、クラウドプロバイダーやリソースタイプなどのフィルターを適用して、 一致するリソースのみを表示することもできます。また、`Fill by` セレクターを使用すると、マップ要素に所見や脅威を記入することができます。
+
+[Datadog Teams][4] を使用している場合、左パネルの **Teams** トグルを選択し、割り当てられたチームのトグルを選択すると、そのチームに割り当てられたリソースのみを表示できます。
 
 #### 診断結果
 
@@ -76,3 +78,4 @@ Resource Catalog マップは、組織内のリソースを視覚化したもの
 [1]: /ja/security/cloud_security_management
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /ja/integrations/#cat-notification
+[4]: /ja/account_management/teams

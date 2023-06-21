@@ -61,6 +61,7 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
 
 2. RUM SDK を初期化します。ブラウザアプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`allowedTracingUrls` 初期化パラメーターを設定します。
 
+   **npm インストール**の場合:
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -72,6 +73,25 @@ iOS アプリケーションのトレースだけを Datadog に送信し始め�
         allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
     })
     ```
+
+   **CDN インストール**の場合:
+
+   ```javascript
+   window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<http://datadoghq.com|datadoghq.com>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      allowedTracingUrls: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("<https://api.example.com>")]
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    })
+   ```
 
    RUM をトレースに接続するには、`service` フィールドにブラウザアプリケーションを指定する必要があります。
 

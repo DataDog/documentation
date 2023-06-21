@@ -35,7 +35,7 @@ APM はアプリケーションのトラフィックのサンプルを収集す�
 Datadog Threat Monitoring and Detection は、すべてのリクエストでクライアントの IP アドレスと手動で追加したユーザータグを収集することで、悪質な行為者を特定します。
 
 <div class="alert alert-info"><strong>ベータ版: 1 クリック有効化</strong><br>
-サービスが<a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
+サービスが<a href="/agent/remote_config/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
 
 ### 脆弱なサービスの特定
 
@@ -149,4 +149,4 @@ Datadog ASM は、Log4j Log4Shell 攻撃ペイロードを識別し、悪意の�
 [16]: /ja/security/cloud_siem/
 [17]: /ja/security/application_security/threats/library_configuration/#data-security-considerations
 [25]: /ja/security/application_security/threats/add-user-info#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
-[26]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[26]: /ja/agent/remote_config/#enabling-remote-configuration

@@ -152,7 +152,7 @@ You can choose to set your organization homepage to a Dashboard List or an indiv
 [7]: /account_management/saml/#mapping-saml-attributes-to-datadog-roles
 [8]: /account_management/api-app-keys/
 [9]: /account_management/rbac/
-[10]: /agent/guide/how_remote_config_works/?tab=configurationyamlfile#how-it-works
+[10]: /agent/remote_config/?tab=configurationyamlfile#how-it-works
 [11]: /account_management/api-app-keys/#client-tokens
 [12]: /events/guides/email/
 [13]: /synthetics/settings/?tab=specifyvalue#overview

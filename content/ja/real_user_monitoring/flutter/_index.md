@@ -6,7 +6,7 @@ further_reading:
   text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter ソースコード
+  text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの調査方法
@@ -86,6 +86,8 @@ final configuration = DdSdkConfiguration(
 )..enableHttpTracking()
 ```
 
+**注**: Datadog Tracking HTTP Client は、[`HttpOverrides.global`][9] を変更します。独自のカスタム `HttpOverrides` を使用している場合は、[`DatadogHttpOverrides`][10] を継承する必要があるかもしれません。この場合、`enableHttpTracking` を呼び出す必要はありません。`datadog_tracking_http_client` >= 1.3 のバージョンでは、`HttpOverrides.current` の値をチェックし、これをクライアント作成に使用するので、 Datadog を初期化する前に `HttpOverrides.global` を必ず初期化しておく必要だけがあります。
+
 Datadog [分散型トレーシング][6]を有効にするには、構成オブジェクトの `DdSdkConfiguration.firstPartyHosts` プロパティを、分散型トレーシングをサポートするドメインに設定する必要があります。また、`RumConfiguration` で `tracingSamplingRate` を設定することで、分散型トレーシングのサンプリングレートを変更することができます。
 
 - `firstPartyHosts` はワイルドカードを許可しませんが、与えられたドメインのサブドメインにマッチします。例えば、`api.example.com` は `staging.api.example.com` と `prod.api.example.com` にマッチし、`news.example.com` にはマッチしません。
@@ -104,3 +106,5 @@ Datadog [分散型トレーシング][6]を有効にするには、構成オブ�
 [6]: /ja/serverless/distributed_tracing
 [7]: /ja/real_user_monitoring/flutter/data_collected/
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
+[9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
+[10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html

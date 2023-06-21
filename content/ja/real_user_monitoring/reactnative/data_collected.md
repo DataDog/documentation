@@ -3,7 +3,7 @@ description: React Native Monitoring で収集されるデータについて説�
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative ソースコード
+  text: dd-sdk-reactnative のソースコード
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: RUM データの調査方法

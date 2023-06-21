@@ -6,10 +6,10 @@ description: Learn how to use a client-side React Native module to interact with
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub
-  text: dd-sdk-reactnative Source code
+  text: Source code for dd-sdk-reactnative
 - link: real_user_monitoring/reactnative/
   tag: Documentation
-  text: Learn about React Native Monitoring
+  text: Learn about React Native monitoring
 
 ---
 ## Overview

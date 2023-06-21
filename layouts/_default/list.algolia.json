@@ -20,7 +20,7 @@
 
             {{- /* Full page record */ -}}
             {{ $record := (
-                dict "objectID" $object_id 
+                dict "objectID" $object_id
                 "title" $title
                 "content" $content
                 "type" $page.Type

@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - site
+  - Datadog サイト
 further_reading:
 - link: https://learn.datadoghq.com/courses/dd-201
   tag: ラーニングセンター
@@ -28,53 +32,7 @@ Datadog では、世界中でさまざまなサイトを提供しています。
 
 ## SDK ドメイン
 
-Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
-
-### Mobile
-
-| サイト | サイト URL                                      |
-|------|-----------------------------------------------|
-| US1  | `https://browser-intake-datadoghq.com`        |
-| US3  | `https://browser-intake-us3-datadoghq.com`    |
-| US5  | `https://browser-intake-us5-datadoghq.com`    |
-| EU1  | `https://browser-intake-datadoghq.eu`         |
-| US1-FED  | `https://browser-intake-ddog-gov.com`     |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
-
-### Browser
-
-#### ログ管理
-
-| サイト | サイト URL                                        |
-|------|-------------------------------------------------|
-| US1  | `https://logs.browser-intake-datadoghq.com`     |
-| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
-| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
-
-#### セッション リプレイ
-
-| サイト | サイト URL                                                  |
-|------|-----------------------------------------------------------|
-| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
-| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
-| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
-
-#### RUM
-
-| サイト | サイト URL                                       |
-|------|------------------------------------------------|
-| US1  | `https://rum.browser-intake-datadoghq.com`     |
-| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
-| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
+[SDK ドメインの対応エンドポイント][2]をご参照ください。
 
 ## Datadog のドキュメントをサイト別に見る
 
@@ -96,3 +54,5 @@ Datadog for Government Site (US1-FED) は、アメリカ政府機関およびパ
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[2]: /ja/real_user_monitoring/#supported-endpoints-for-sdk-domains

@@ -41,7 +41,7 @@ draft: false
 git_integration_title: argocd
 integration_id: argocd
 integration_title: Argo CD
-integration_version: 1.0.1
+integration_version: 1.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0

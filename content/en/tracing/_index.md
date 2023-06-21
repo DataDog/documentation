@@ -30,6 +30,10 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
     tag: "Blog"
     text: "Monitor your Linux web apps on Azure App Service with Datadog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to boost your APM understanding"  
+
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -39,6 +43,9 @@ aliases:
   - /tracing/faq/distributed-tracing/
 algolia:
   tags: ['apm', 'application performance monitoring', 'distributed tracing']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}

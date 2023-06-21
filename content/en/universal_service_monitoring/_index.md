@@ -19,6 +19,9 @@ further_reading:
 - link: "/tracing/services/services_map/"
   tag: "Documentation"
   text: "Read about the Service Map"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview

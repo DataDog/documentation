@@ -82,8 +82,10 @@ IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれていま�
 ##### Unix
 
 ```text
-sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.0.1
+sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
 ```
+
+注: Python 2 が動作する Agent をお使いの場合は、代わりに `ibm_db==3.0.1` を使用してください。
 
 ##### Windows
 
@@ -184,7 +186,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -233,13 +235,63 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+### オフラインで `ibm_db` クライアントライブラリをインストールする
+
+エアギャップ環境、または制限されたネットワーク上で `pip install ibm_db==3.0.1` を実行できない場合、以下の方法で `ibm_db` をインストールすることが可能です。
+
+**注**: 以下の例は Ubuntu マシンを想定していますが、ほとんどのオペレーティングシステムで同様の手順が可能です。
+
+1. ネットワークに接続できるマシンで、[ソース tarball ][6] をダウンロードします。
+
+   ```
+   curl -Lo ibm_db.tar.gz https://github.com/ibmdb/python-ibmdb/archive/refs/tags/v3.1.0.tar.gz
+   ```
+
+1. 制限されたホストにファイルを転送し、アーカイブを展開します。
+
+   ```
+   tar xvf ibm_db.tar.gz
+   ```
+
+1. Agent に組み込まれた [`pip`][7] を使用して、以下のコマンドを実行します。
+
+   ```
+   /opt/datadog-agent/embedded/bin/pip install --no-index --no-deps --no-build-isolation  python-ibmdb- 
+   3.1.0/IBM_DB/ibm_db/
+   ```
+
+以下のエラーが発生した場合
+
+```
+  error: subprocess-exited-with-error
+
+  × Preparing metadata (pyproject.toml) did not run successfully.
+  | exit code: 1
+   -> [8 lines of output]
+      Detected 64-bit Python
+      Detected platform = linux, uname = x86_64
+      Downloading https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/linuxx64_odbc_cli.tar.gz
+       Downloading DSDriver from url =  https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/linuxx64_odbc_cli.tar.gz
+      Pre-requisite check [which gcc] : Failed
+
+      No Gcc installation detected.
+      Please install gcc and continue with the installation of the ibm_db.
+      [end of output]
+```
+
+`gcc` のインストールが必要な場合があります。これは以下で行います。
+
+```
+apt-get install gcc
+```
+
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM DB2 の監視][7]
+- [Datadog を使用した IBM DB2 の監視][9]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
@@ -247,5 +299,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
+[6]: https://pypi.org/project/ibm-db/#files
+[7]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
