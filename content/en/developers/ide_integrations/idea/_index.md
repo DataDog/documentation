@@ -121,9 +121,7 @@ The **Top List** sub-tab shows the methods that consume the most resources based
 
 #### Call tree
 
-The call tree to the right of the method list shows the paths that lead to (and from) the selected method.
-
-{{< img src="/developers/ide_integrations/idea/call-tree1.png" alt="The method call tree" style="width:100%;" >}}
+The call tree to the right of the **Top List** shows the paths that lead to (and from) the selected method.
 
 The default **Caller Hierarchy** view shows the callers (or predecessors) of the target method and the frequency with which they appear in the call stack. To view the callees (or successors), click the **Callee Hierarchy** button on the toolbar.
 
