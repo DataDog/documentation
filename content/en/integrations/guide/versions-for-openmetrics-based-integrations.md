@@ -27,7 +27,7 @@ While it may vary for each OpenMetrics-based integration, you can enable the `la
 
 ## History of latest and legacy versions
 
-<div class="alert alert-info">Datadog avoids introducing breaking changes to integrations as much as possible, so customers can update the Datadog Agent without needing to make large configuration changes. This commitment to backwards compatibility makes it difficult to address existing design issues in the configuration and default behavior.</a>
+<div class="alert alert-info">Datadog avoids introducing breaking changes to integrations as much as possible, so customers can update the Datadog Agent without needing to make large configuration changes. This commitment to backwards compatibility makes it difficult to address existing design issues in the configuration and default behavior.</div>
 
 Since the OpenMetrics format is commonly used to export metrics, many integrations are based on it. These integrations share a set of configuration options and default behavior. Datadog is committed to providing an improved experience in the `latest` version, and maintaining the original experience in the `legacy` version.  
 
