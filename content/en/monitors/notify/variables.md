@@ -3,8 +3,11 @@ title: Variables
 kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
+- link: "/monitors/guide/template-variable-evaluation/)"
+  tag: "Guide"
+  text: "Create monitors"
 - link: "/monitors/"
-  tag: "Documentation"
+  tag: "Perform arithmetic operations and functions with template variable evaluations"
   text: "Create monitors"
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -567,6 +570,10 @@ If your alert message includes information that needs to be encoded in a URL (fo
 ```
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration/#alert-grouping
 [2]: /monitors/types/log/
