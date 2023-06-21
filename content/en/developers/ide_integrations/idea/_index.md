@@ -42,7 +42,7 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 - Navigate directly from the top list and flame graph to the relevant lines in your code.
 - Find resource consumption broken down by method name and line number.
 
-The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which the developer is working.
+The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
 
 ## Requirements
 
