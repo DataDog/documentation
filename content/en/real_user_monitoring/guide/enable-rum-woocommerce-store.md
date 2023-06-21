@@ -27,7 +27,7 @@ Understanding how customers interact with your web pages is crucial to the succe
 
 4. Once installed, click on **Activate**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-3.png" alt="Enable RUM on your WooCommerce store" style="width:60%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-3.png" alt="Enable RUM on your WooCommerce store" style="width:50%;">}}
 
 5. You will now see a **Code Snippets** section in your WordPress menu, click on **Header & Footer**.
 
