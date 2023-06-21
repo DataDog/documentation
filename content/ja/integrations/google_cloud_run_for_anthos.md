@@ -88,7 +88,7 @@ Google Cloud Run for Anthos インテグレーションには、サービスの�
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

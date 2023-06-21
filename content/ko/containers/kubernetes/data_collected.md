@@ -92,6 +92,6 @@ title: 수집된 쿠버네티스(Kubernetes) 데이터
 
 {{< get-service-checks-from-git "kubernetes_state" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
