@@ -34,6 +34,12 @@ In addition to code highlighting, you can use the Datadog plugin for Intellij ID
 - Navigate directly from the top list and flame graph to the relevant lines in your code.
 - Find resource consumption broken down by method name and line number.
 
+The **Code Insights** feature provides visibility for:
+- issues reported by [Error Tracking][6]
+- [vulnerability][8] reports from Application Security Management
+- [flaky tests][9] from CI Visibility
+- profiling insights via [Watchdog Insights][10]
+
 ## Requirements
 
 - **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
@@ -194,3 +200,6 @@ Let us know what you think about the plugin! Provide feedback on our [discussion
 [5]: /logs/explorer/
 [6]: /tracing/error_tracking/
 [7]: https://www.jetbrains.com/lp/toolbox/
+[8]: /security/application_security/vulnerability_management/
+[9]: /continuous_integration/guides/flaky_test_management/
+[10]: /watchdog/insights
