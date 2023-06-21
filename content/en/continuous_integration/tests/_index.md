@@ -121,7 +121,7 @@ Not every language supported by CI Visibility has support for test suite level v
 
 * [Swift][11] has complete support since `dd-sdk-swift-testing>=2.1.0`.
 * [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`.
-* [Javascript][13] has limited support since `dd-trace-js>=3.3.0`.
+* [JavaScript][13] has limited support since `dd-trace-js>=3.3.0`.
 * Java has complete support since `dd-trace-java>=1.12.0`.
 * JUnit report uploads does not support test suite level visibility.
 
@@ -133,7 +133,7 @@ When creating a [dashboard][14] or a [notebook][15], you can use test execution 
 
 ## Create a monitor
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the Test Runs page, click **Create Monitor** to create a [CI Test monitor][16]. 
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16]. 
 
 ## Further reading
 

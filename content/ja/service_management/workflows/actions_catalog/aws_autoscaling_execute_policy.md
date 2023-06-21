@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_autoscaling_execute_policy
 bundle: com.datadoghq.aws.autoscaling
 bundle_title: AWS Autoscaling
 description: 指定されたポリシーを実行します。これは、スケーリングポリシーの設計をテストするのに便利です。

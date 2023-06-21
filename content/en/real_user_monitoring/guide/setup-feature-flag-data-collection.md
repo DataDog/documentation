@@ -613,6 +613,8 @@ Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you w
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
 
+## Troubleshooting
+
 ### Why doesn't my feature flag data reflect what I expect to see?
 Feature flags will show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
 
@@ -631,9 +633,18 @@ Here are a few examples of reasons why your feature flag is being evaluated on u
 
 When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
 
+### Feature flag naming
+
+The following special characters are not supported for [Feature Flag Tracking][5]: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
+
+```javascript
+datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+```
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /dashboards/
 [4]: /monitors/#create-monitors
+[5]: /real_user_monitoring/feature_flag_tracking

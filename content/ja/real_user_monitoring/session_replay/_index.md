@@ -12,6 +12,9 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
   text: RUM データを Explorer で確認
+- link: /integrations/content_security_policy_logs
+  tag: Documentation
+  text: Datadog で CSP 違反の検出と集計を行う
 kind: documentation
 title: Session Replay
 ---
