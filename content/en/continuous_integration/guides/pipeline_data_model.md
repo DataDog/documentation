@@ -92,6 +92,10 @@ If a pipeline is triggered as a child of another pipeline, the `parent_pipeline`
 
 If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /tracing/glossary/#trace
 [2]: /continuous_integration/pipelines/#setup
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
