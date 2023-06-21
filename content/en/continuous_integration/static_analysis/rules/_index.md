@@ -284,37 +284,37 @@ Best practices for Python to write efficient and bug-free code.
 
 **Ruleset ID:** `python-code-style`
 
-Rules to enforce Python code style
+Rules to enforce Python code style.
 
 {{< sa-rule-list "python_code_style_data" >}}
 
 <br>
 
-### Check Python program structure (such as nested loops and more)
+### Check Python program structure
 
 **Ruleset ID:** `python-design`
 
-Rules to check your Python program structure
+Rules to check your Python program structure, including things like nested loops.
 
 {{< sa-rule-list "python_design_data" >}}
 
 <br>
 
-### Rules specific for Django best practices and security
+### Check for Django best practices and security
 
 **Ruleset ID:** `python-django`
 
-Rules made specifically for Django best practices and security
+Rules specifically for Django best practices and security.
 
 {{< sa-rule-list "python_django_data" >}}
 
 <br>
 
-### Rules for Flask best practices and security
+### Check for Flask best practices and security
 
 **Ruleset ID:** `python-flask`
 
-Rules made specifically for Flask best practices and security
+Rules specifically for Flask best practices and security.
 
 {{< sa-rule-list "python_flask_data" >}}
 
