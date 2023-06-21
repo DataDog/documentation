@@ -18,7 +18,7 @@ This guide walks through how you can set up Real User Monitoring on your Shopify
 
 ## Setup
 
-1. Log in your Shopify administration panel.
+1. Log into your Shopify administration panel.
 2. Under **Sales channels**, click on **Online Store**.
 
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Enable RUM on your Shopify store" style="width:40%;">}}
