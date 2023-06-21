@@ -39,7 +39,7 @@ The normal run of a pipeline execution follows the flow depicted below:
 
 **Note**: depending on the provider, some levels may be missing. For example, stages might not exist, and jobs may run in parallel or sequence, or a combination of both.
 
-After the completion of each component, a payload must be sent to Datadog with all the necessary data to represent the execution. Datadog will process this data, store it as pipeline events, and display it as traces in the CI Visibility product.
+After the completion of each component, a payload must be sent to Datadog with all the necessary data to represent the execution. Datadog will process this data, store it as a pipeline event, and display it in the CI Visibility product. Pipeline executions must have ended before sending them to Datadog.
 
 ### Full retries
 
