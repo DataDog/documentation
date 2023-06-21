@@ -3,11 +3,11 @@ title: Variables
 kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
-- link: "/monitors/guide/template-variable-evaluation/)"
+- link: "/monitors/guide/template-variable-evaluation/"
   tag: "Guide"
-  text: "Create monitors"
+  text: "Perform arithmetic operations and functions with template variable evaluations"
 - link: "/monitors/"
-  tag: "Perform arithmetic operations and functions with template variable evaluations"
+  tag: "Documentation"
   text: "Create monitors"
 - link: "/monitors/notify/"
   tag: "Documentation"
