@@ -12,7 +12,9 @@ further_reading:
 
 ## Overview
 
-Understanding how customers interact with your web pages is crucial to the success of your online store. This guide will walk through how you can set up Real User Monitoring on your Shopify-powered store.
+Understanding how customers interact with your web pages is crucial to the success of your online store.
+
+This guide walks through how you can set up Real User Monitoring on your Shopify-powered store.
 
 ## Setup
 
