@@ -18,8 +18,8 @@
                             {{ $tags = $tags | append $tag }}
                         {{ end }}
                         {{ $endpoints := ($scopeMap.endpoints | default slice) }}
-                        {{ $slug := (replaceRE " " "-" ($action.summary | humanize | lower)) }}
-                        {{ $url := (printf "api/latest/%s/" (replaceRE " " "-" ($tag | humanize | lower))) | absLangURL }}
+                        {{ $slug := $action.summary | urlize }}
+                        {{ $url := (printf "api/latest/%s/" $tag | urlize) | absLangURL }}
                         {{ $endpoints = $endpoints | append (dict "url" (printf "%s#%s" $url $slug) "summary" $action.summary) }}
                         {{ $updateMap := (dict "endpoints" $endpoints "tags" $tags "desc" (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope)) }}
                         {{ $scopeMap = merge $scopeMap $updateMap }}
