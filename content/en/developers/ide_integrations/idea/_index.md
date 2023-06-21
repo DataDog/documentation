@@ -123,11 +123,7 @@ The call tree to the right of the method list shows the paths that lead to (and 
 
 {{< img src="/developers/ide_integrations/idea/call-tree1.png" alt="The method call tree" style="width:100%;" >}}
 
-The default **Caller Hierarchy** view shows the callers (or predecessors) of the target method and the frequency with which they appear in the call stack.
-
-To view the callees (or successors), click **Callee Hierarchy**.
-
-{{< img src="/developers/ide_integrations/idea/callee-hierarchy.png" alt="The callee hierarchy view" style="width:100%;" >}}
+The default **Caller Hierarchy** view shows the callers (or predecessors) of the target method and the frequency with which they appear in the call stack. To view the callees (or successors), click the **Callee Hierarchy** button on the toolbar.
 
 Right-click on a method in the call tree to see options to navigate to the source editor or flame graph.
 
