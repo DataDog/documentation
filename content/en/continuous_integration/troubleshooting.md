@@ -35,7 +35,7 @@ If you are uploading JUnit test report files with `datadog-ci` CLI, make sure th
 
 ### Data appears in test runs but not tests
 
-If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit and/or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [**Tests**][5] section.
+If you can see test results data in the **Test Runs** tab, but not the **Tests** tab, Git metadata (repository, commit, or branch) is probably missing. To confirm this is the case, open a test execution in the [**Test Runs**][4] section, and check that there is no `git.repository_url`, `git.commit.sha`, or `git.branch`. If these tags are not populated, nothing shows in the [**Tests**][5] section.
 
 1. Tracers first use the environment variables, if any, set by the CI provider to collect Git information. See [Running tests inside a container][7] for a list of environment variables that the tracer attempts to read for each supported CI provider. At a minimum, this populates the repository, commit hash, and branch information.
 2. Next, tracers fetch Git metadata using the local `.git` folder, if present, by executing `git` commands. This populates all Git metadata fields, including commit message, author, and committer information. Ensure the `.git` folder is present and the `git` binary is installed and in `$PATH`. This information is used to populate attributes not detected in the previous step.
