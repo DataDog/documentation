@@ -2172,10 +2172,10 @@ main:
     parent: ci
     identifier: ci_static_analysis
     weight: 4
-  - name: CircleCI Orb
-    url: continuous_integration/static_analysis/circleci_orb
+  - name: CircleCI Orbs
+    url: continuous_integration/static_analysis/circleci_orbs
     parent: ci_static_analysis
-    identifier: ci_static_analysis_circleci_orb
+    identifier: ci_static_analysis_circleci_orbs
     weight: 401
   - name: GitHub Actions
     url: continuous_integration/static_analysis/github_actions

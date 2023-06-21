@@ -37,7 +37,7 @@ Using Static Analysis provides organizations with the following benefits:
 ## Integrations
 
 {{< whatsnext desc="With Static Analysis, you can integrate feedback in a supporting CI platform provider, with native integrations for GitHub and CircleCI. See the documentation for information about the following integrations:">}}
-    {{< nextlink href="continuous_integration/static_analysis/circleci_orb" >}}CircleCI Orb{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -67,7 +67,7 @@ Configure your [Datadog API and application keys][4] and run Static Analysis in 
 
 To run Static Analysis with CircleCI, [follow these instructions for setting up a CircleCI Orb][101].
 
-[101]: /continuous_integration/static_analysis/circleci_orb
+[101]: /continuous_integration/static_analysis/circleci_orbs
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
