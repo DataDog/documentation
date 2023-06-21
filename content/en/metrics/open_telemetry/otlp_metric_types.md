@@ -137,7 +137,7 @@ You may add all resource attributes as tags by using the `resource_attributes_as
 
 OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog honors these conventions and tries to use its value as a hostname. The semantic conventions are considered in the following order:
 
-1. the `host` attribute to avoid double tagging if present.
+1. The `host` attribute, to avoid double tagging if present.
 1. `datadog.host.name`, a Datadog-specific hostname convention
 1. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
 1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions
@@ -152,7 +152,7 @@ The following host names are deemed invalid and discarded:
 1. `localhost6.localdomain6`
 1. `ip6-localhost`
 
-If no valid host names are present, Datadog assigns a system-level hostname to payloads.
+If no valid host names are present, Datadog assigns a system-level host name to payloads.
 If sending data from a remote host, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
 
 ### Example
