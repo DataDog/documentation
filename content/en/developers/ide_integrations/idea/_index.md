@@ -23,18 +23,18 @@ further_reading:
 
 The Datadog plugin for IntelliJ IDEA helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
 
+{{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
+
 The **Code Insights** view keeps you informed about:
 - issues from [Error Tracking][6]
 - [vulnerability][8] reports by Application Security Management
 - [flaky tests][9] detected by CI Visibility
 - profiling insights from [Watchdog Insights][10]
 
-Together with the **Continuous Profiler**, the plugin helps you to reduce latency and lower cloud costs by highlighting code lines that:
+With the **Continuous Profiler**, the plugin helps you to reduce latency and lower cloud costs by highlighting code lines that:
 - consume the most CPU
 - allocate the most memory
 - spend the most time on locks, disk I/O, socket I/O, and so on
-
-{{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
 In addition to code highlighting, you can use the Datadog plugin for Intellij IDEA to:
 - Identify methods that consume the most resources with the **Top List** view.
