@@ -129,7 +129,7 @@ Additionally, test suite level visibility is only supported in Agentless mode.
 
 ## Use CI tests data
 
-When creating a [dashboards][14] and [notebooks][15], you can use test execution data in your search query, which updates the visualization widget options.
+When creating a [dashboard][14] or a [notebook][15], you can use test execution data in your search query, which updates the visualization widget options.
 
 ## Create a monitor
 
