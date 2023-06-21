@@ -107,11 +107,11 @@ Add the following to your CI pipeline:
 ```bash
 # Install dependencies
 npm install -g @datadog/datadog-ci
-TEMP_DIR=$(mktemp -d) && curl -L -o $TEMP_DIR -O http://dtdg.co/latest-static-analyzer
-unzip $TEMP_DIR/latest-static-analyzer
+curl -L http://dtdg.co/latest-static-analyzer > /tmp/ddog-static-analyzer
+unzip /tmp/ddog-static-analyzer -d /tmp
 
 # Run Static Analysis (requires a pre-installed JVM)
-$TEMP_DIR/cli-1.0-SNAPSHOT/bin/cli --directory . -t true -o results.sarif -f sarif
+/tmp/cli-1.0-SNAPSHOT/bin/cli --directory . -t true -o results.sarif -f sarif
 
 # Upload results
 datadog-ci sarif upload results.sarif --service "$DD_SERVICE" --env "$DD_ENV" --site "$DD_SITE"
