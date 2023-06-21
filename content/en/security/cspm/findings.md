@@ -37,7 +37,7 @@ A finding is the primary primitive for a rule evaluation against a resource. Eve
 
 Findings are displayed on the [Security Findings Explorer][1]. Aggregate findings by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. Findings can also be aggregated by resource to rank resources that have the most failed findings so you can prioritize remediation.
 
-{{< img src="security/cspm/findings/posture-management-overview-2.png" alt="An overview of the Posture Management Findings page" style="width:100%;">}}
+{{< img src="security/cspm/findings/posture-management-overview3.png" alt="An overview of the Posture Management Findings page" style="width:100%;">}}
 
 Select a finding to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mapping, and suggested remediation steps. Click **View Finding** to see details about the misconfigured resource.
 
@@ -46,6 +46,12 @@ Select a finding to view the resources that have been evaluated by the rule, the
 Group by **Resources** on the Security Findings Explorer and select a resource to see the full list of compliance rules that were evaluated against the resource, along with their statuses.
 
 {{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="Group and aggregate by resource in search" style="width:65%;">}}
+
+## Export findings
+
+To export the list of findings as a CSV, click **Download as CSV** on the Security Findings Explorer, select the maximum number of findings to export, and then click **Download as CSV**. You can export up to a maximum of 50,000 findings.
+
+{{< img src="security/cspm/findings/export-csv.png" alt="The Export Findings as CSV dialog box with option to specify the maximum number of findings to export" style="width:65%;">}}
 
 ## Mute findings
 
