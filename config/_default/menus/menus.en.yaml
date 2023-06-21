@@ -2804,21 +2804,26 @@ main:
     parent: cloud_workload_security
     identifier: cws_backend_event_schema_documentation
     weight: 205
+  - name: Identities
+    url: security/identities/
+    parent: csm
+    identifier: csm_identities
+    weight: 10
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
-    weight: 4
+    weight: 15
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
     identifier: csm_guides
-    weight: 6
+    weight: 20
   - name: Troubleshooting
     url: security/cloud_security_management/troubleshooting/
     parent: csm
     identifier: csm_troubleshooting
-    weight: 7
+    weight: 25
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
