@@ -95,11 +95,11 @@ Weekly
 **Required data history for Anomaly Detection algorithm**: Machine learning algorithms require at least three time as much historical data time as the chosen seasonality time to compute the baseline.
 For example:
 
-* a `weekly` seasonality requires at least three weeks of data
-* a `daily` seasonality requires at least 3 days of data
-* a `hourly` seasonality requires at least 3 hours of data
+* _weekly_ seasonality requires at least three weeks of data
+* _daily_ seasonality requires at least three days of data
+* _hourly_ seasonality requires at least three hours of data
 
-All of the seasonal algorithms may use up to 6 weeks of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
+All of the seasonal algorithms may use up to six weeks of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
 ### Anomaly detection algorithms
 Basic

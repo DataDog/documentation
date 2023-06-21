@@ -24,7 +24,7 @@ Here's a two-minute video walkthrough:
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/188833506/rendition/1080p/file.mp4?loc=external&signature=96eacc46a18438ce0f45d5b57952cd924482f8f18e011ceb7b76b6ce1b4587a2" poster="/images/poster/algorithms.png" >}}
 
-**Seasonality**: By default, the `robust` and `agile` algorithms uses the [weekly seasonality][4] which requires 3 weeks of historical data to compute the baseline.
+**Seasonality**: By default, the `robust` and `agile` algorithms use [weekly seasonality][4], which requires three weeks of historical data to compute the baseline.
 
 See the [Anomaly Monitor][1] page for more info.
 
