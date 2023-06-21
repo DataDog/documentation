@@ -4,8 +4,12 @@ export function getHitData(hit, qry = '') {
         hit.language == 'en' ? hit.relpermalink : hit.relpermalink.replace(`/${hit.language}/`, '');
     const orMatches = qry.split(' ').filter(word => word).join('|');
     const regexQry = new RegExp(`(${orMatches})`, 'gi');
-    const highlightedTitle = (hit._highlightResult.title.value || title).replace(regexQry, '<mark>$1</mark>');
-    const highlightedContent = (hit._highlightResult.content.value || '').replace(regexQry, '<mark>$1</mark>');
+    let highlightedTitle = (hit._highlightResult.title.value || title);
+    let highlightedContent = (hit._highlightResult.content.value || '');
+    if(qry) {
+      highlightedTitle = highlightedTitle.replace(regexQry, '<mark>$1</mark>');
+      highlightedContent = highlightedContent.replace(regexQry, '<mark>$1</mark>');
+    }
 
     return {
         relpermalink: cleanRelPermalink,
