@@ -19,7 +19,7 @@ Pipeline executions are modeled as traces, similar to an [APM distributed trace]
 | Job        | The smallest unit of work where commands are executed. All tasks at this level should be performed on a single node. |
 | Step       | In some CI providers, this level represents a shell script or an action executed within a job. |
 
-When a pipeline, stage, job, or step finishes, its execution data should be sent to Datadog. See the list of [supported CI providers][2] to set up your pipeline visibility. If your CI provider or workflow is not supported, you can use the [public API endpoint][3] to send your pipeline executions to CI Visibility.
+When a pipeline, stage, job, or step finishes, its execution data should be sent to Datadog. See the list of [supported CI providers][2] to set up Pipeline Visibility. If your CI provider or workflow is not supported, you can use the [public API endpoint][3] to send your pipeline executions to CI Visibility.
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
 
