@@ -635,7 +635,7 @@ When performing your investigations, you can also scope your data for `View Name
 
 ### Feature flag naming
 
-The following special characters are not supported for [Feature Flag Tracking][5]: `.` `:` `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `\`, . Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
+The following special characters are not supported for [Feature Flag Tracking][5]: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
 
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
