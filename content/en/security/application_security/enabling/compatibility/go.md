@@ -21,6 +21,15 @@ The minimum tracer version to get all supported ASM capabilities for Go is 1.50.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.  
 
+### Supported deployment types
+|Type           | Threats support   |  Vulnerabilities support  |
+| ---           |   ---             |           ----            |
+| Docker        | {{< X >}}         | {{< X >}}                 |
+| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
+| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
+| AWS Lambda    | {{< X >}}         |                           |  
+
 ## Language and framework compatibility
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Go framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
@@ -33,6 +42,8 @@ The Go Datadog Trace Library has a [version support policy][3] defined for Go ve
 You must be running Datadog Agent v5.21.1+.
 
 You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
+
+ 
 
 ## Integrations
 

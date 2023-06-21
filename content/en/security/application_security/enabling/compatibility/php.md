@@ -22,6 +22,15 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
+### Supported deployment types
+|Type           | Threats support   |  Vulnerabilities support  |
+| ---           |   ---             |           ----            |
+| Docker        | {{< X >}}         |                           |
+| Kubernetes    | {{< X >}}         |                           | 
+| AWS ECS       | {{< X >}}         |                           |
+| AWS Fargate   |                   |                           |
+| AWS Lambda    |                   |                           |   
+
 ## Language and framework compatibility
 
 <div class="alert alert-info">
@@ -78,9 +87,6 @@ The Datadog PHP library supports PHP version 7.0 and above on the following arch
 You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS.
 
 The library supports the use of all PHP frameworks, and also the use of no framework.
-
-
-## Integrations
 
 
 ### Web framework compatibility

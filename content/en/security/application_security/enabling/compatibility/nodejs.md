@@ -21,6 +21,15 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.  
 
+### Supported deployment types
+|Type           | Threats support   |  Vulnerabilities support  |
+| ---           |   ---             |           ----            |
+| Docker        | {{< X >}}         | {{< X >}}                 |
+| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
+| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
+| AWS Lambda    | {{< X >}}         | beta                      |   
+
 ## Language and framework compatibility
 
 ### Node.js Version Support
@@ -55,7 +64,8 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 |                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
 
 
-## Integrations
+
+
 
 ### Web framework compatibility
 
