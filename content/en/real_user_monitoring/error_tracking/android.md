@@ -35,8 +35,6 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Upload your mapping file
 
-**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
-
 {{< tabs >}}
 {{% tab "US" %}}
 

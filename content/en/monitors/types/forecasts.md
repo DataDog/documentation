@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -40,9 +40,7 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 * Trigger an alert when the edge of the forecast confidence bounds goes `above` or `below`.
 * the threshold within the next `24 hours`, `1 week`, `1 month`, etc. or `custom` to set a value between 12 hours and 3 months.
 * Alert threshold: >= `<NUMBER>`
-* Warning threshold: >= `<NUMBER>`
 * Alert [recovery threshold][3]: < `<NUMBER>`
-* Warning [recovery threshold][3]: < `<NUMBER>`
 
 #### Advanced options
 

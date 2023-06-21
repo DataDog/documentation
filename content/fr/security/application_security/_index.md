@@ -75,6 +75,8 @@ Dans la vue [Security Signals Explorer][6], cliquez sur un signal de sécurité 
 
 ## Étudiez les risques découlant des dépendances et bibliothèques open source en amont
 
+<div class="alert alert-info">La solution Application Vulnerability Management est disponible en version bêta.</a></div>
+
 Grâce à la solution [Application Vulnerability Management][8], vous pouvez vérifier si l'intégrité de vos services est compromise par des dépendances à des bibliothèques open source ayant des vulnérabilités connues. Vous pouvez ensuite analyser les informations sur ces vulnérabilités et améliorer la sécurité de votre application en appliquant des conseils de remédiation ou en recherchant d'où proviennent ces vulnérabilités.
 
 ## Étapes suivantes

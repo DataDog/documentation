@@ -1,12 +1,4 @@
 ---
-algolia:
-  category: Documentation
-  rank: 70
-  subcategory: Synthetic API テスト
-  tags:
-  - udp
-  - udp テスト
-  - udp テスト
 description: ホストで UDP 接続をシミュレートする
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/

@@ -58,7 +58,7 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 
 新しいストレージアカウントのあるサブスクリプション内で [Azure インテグレーション][1]をセットアップしていない場合、セットアップします。これには、[Datadog が統合に使用できるアプリ登録の作成][2]も含まれます。
 
-**注:** Azure ChinaCloud、GermanyCloud、GovCloud へのアーカイブはサポートされていません。
+**注:** Azure ChinaCloud へのアーカイブはサポートされていません。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /ja/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -452,5 +452,5 @@ Datadog がストレージバケットに転送するログアーカイブは、
 [10]: /ja/account_management/rbac/permissions#logs_read_index_data
 [11]: /ja/account_management/rbac/permissions#logs_read_data
 [12]: /ja/logs/explorer/live_tail/
-[13]: /ja/service_management/events/explorer/
+[13]: /ja/events/explorer/
 [14]: https://app.datadoghq.com/logs/pipelines/log-forwarding

@@ -1,5 +1,5 @@
 ---
-title: Azure App Service - Windows Code
+title: Azure App Service - Windows
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/

@@ -8,7 +8,7 @@ aliases:
 - /tracing/guide/ecommerce_and_retail_use_cases/
 cascade:
     algolia:
-        rank: 50
+        rank: 20
         category: Guide
         subcategory: APM Guides
 ---

@@ -10,7 +10,7 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: mergify.queue_checks_outcome
+      check: mergify.merge_queue_length
       metadata_path: metadata.csv
       prefix: mergify.
     service_checks:
@@ -21,8 +21,7 @@ author:
   name: コミュニティ
   sales_email: hello@mergify.com
   support_email: support@mergify.com
-categories:
-- developer tools
+categories: []
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/mergify/README.md
 display_on_public_website: true
@@ -30,7 +29,7 @@ draft: false
 git_integration_title: mergify
 integration_id: mergify
 integration_title: Mergify
-integration_version: 1.0.0
+integration_version: 0.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -48,8 +47,6 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Submitted Data Type::Metrics
-  - Category::Developer Tools
   configuration: README.md#Setup
   description: Mergify マージキュー統計のインテグレーション
   media: []

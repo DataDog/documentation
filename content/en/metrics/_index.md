@@ -6,9 +6,6 @@ aliases:
   - /metrics/introduction/
   - /graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
   - /dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
-cascade:
-    algolia:
-        rank: 70
 ---
 
 

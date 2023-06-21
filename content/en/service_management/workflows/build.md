@@ -35,7 +35,7 @@ To create a workflow:
 
 1. Click **Add a step to get started** to add the first step to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
-{{< img src="service_management/workflows/workflow-builder.mp4" alt="Drag a step onto the workflow canvas" video="true" >}}
+{{< img src="service/management/workflows/workflow-builder.mp4" alt="Drag a step onto the workflow canvas" video="true" >}}
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
 1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
 

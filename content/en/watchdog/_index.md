@@ -25,9 +25,6 @@ further_reading:
     text: "Understand user impact scope with Watchdog Impact Analysis"
 algolia:
   tags: ['watchdog']
-cascade:
-    algolia:
-        rank: 70
 ---
 
 {{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with two ongoing critical alerts for error rates" >}}

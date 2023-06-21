@@ -3,7 +3,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
   tag: ブログ
   text: Datadog フラストレーションシグナルによるユーザーのペインポイントの検出
-- link: /real_user_monitoring/dashboards/usage#frustration-signals
+- link: /real_user_monitoring/dashboards/frustration_signals_dashboard/
   tag: ドキュメント
   text: フラストレーションシグナルダッシュボード
 - link: /real_user_monitoring/explorer
@@ -144,7 +144,7 @@ Frustration Count
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /ja/real_user_monitoring/explorer/
-[3]: /ja/real_user_monitoring/dashboards/usage#frustration-signals
+[3]: /ja/real_user_monitoring/dashboards/frustration_signals_dashboard/
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /ja/dashboards/
 [6]: /ja/monitors/

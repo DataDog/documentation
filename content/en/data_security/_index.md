@@ -23,9 +23,6 @@ further_reading:
 - link: "/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
-cascade:
-    algolia:
-        rank: 70
 ---
 
 <div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>

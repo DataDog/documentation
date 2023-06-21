@@ -5,9 +5,6 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/'
   tag: 'Blog'
   text: 'Leverage collaborative screen sharing with Datadog CoScreen'
-cascade:
-    algolia:
-        rank: 70
 ---
 
 {{< img src="coscreen/collab-v2.mp4" alt="Three users share three windows at the same time." width=80% video="true">}}

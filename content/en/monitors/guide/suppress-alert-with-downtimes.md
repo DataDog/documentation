@@ -7,7 +7,7 @@ further_reading:
 - link: "api/v1/downtimes/"
   tag: "Documentation"
   text: "Downtime API reference"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Downtime documentation"
 ---
@@ -27,7 +27,7 @@ This guide describes how to configure downtimes for the following use cases:
 ## Prerequisites
 
 Since this guide describes the usage of the API, you will need an API key and an application key with admin privileges. These are available in your [Datadog account API key page][2].
-Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog Application key, respectively.
+Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
 
 This guide also assumes that you have a terminal with `CURL` and have reviewed the main [Downtime documentation page][3]
 
@@ -231,6 +231,6 @@ Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
 [1]: https://docs.datadoghq.com/api/v1/downtimes/
 [2]: https://docs.datadoghq.com/api/v1/authentication/
-[3]: https://docs.datadoghq.com/monitors/downtimes/
+[3]: https://docs.datadoghq.com/monitors/notify/downtimes/
 [4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [5]: https://icalendar.org/rrule-tool.html

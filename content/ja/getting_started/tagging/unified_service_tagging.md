@@ -1,10 +1,4 @@
 ---
-algolia:
-  tags:
-  - 統合サービスタグ
-  - 統合
-  - 統合サービス
-  - サービスタグ
 further_reading:
 - link: /getting_started/tagging/using_tags
   tag: Documentation

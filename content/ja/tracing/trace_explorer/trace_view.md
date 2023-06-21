@@ -112,7 +112,7 @@ title: トレースビュー
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

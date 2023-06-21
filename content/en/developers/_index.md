@@ -14,9 +14,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/"
   tag: "Blog"
   text: "DRUIDS, the design system that powers Datadog"
-cascade:
-    algolia:
-        rank: 70
 ---
 
 ## Overview

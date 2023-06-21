@@ -18,11 +18,6 @@ further_reading:
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
-algolia:
-  rank: 70
-  category: Documentation
-  subcategory: Synthetic API Tests
-  tags: ["ssl", "ssl test", "ssl tests"]
 ---
 
 ## Overview

@@ -1,12 +1,6 @@
 {{ define "main" }}
-    <div class="row">
-      <div class="col-12 order-1">
-          <h1 id="pagetitle">{{ .Title }}</h1>
-      </div>
-      <div class="col-12">
-          {{ partial "breadcrumbs.html" . }}
-      </div>
-    </div>
+    <h1 id="pagetitle">{{ .Title }}</h1>
+    {{ partial "breadcrumbs.html" . }}
     {{ with .Content }}{{ . }}{{ end }}
 
     {{ $t := (index .Site.Data.reference "schema.tables") }}

@@ -43,9 +43,6 @@ aliases:
   - /tracing/faq/distributed-tracing/
 algolia:
   tags: ['apm', 'application performance monitoring', 'distributed tracing']
-cascade:
-    algolia:
-        rank: 70
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}

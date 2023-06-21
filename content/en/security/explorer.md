@@ -26,20 +26,17 @@ From the [Security Signals Explorer][1], correlate and triage security signals. 
 
 The Security Signals search results are displayed in the Security Signals Table.
 
-{{< img src="security/security_monitoring/explorer/signal_panel_v2.png" alt="The Security Signals table showing two account takeover signals" >}}
+{{< img src="security/security_monitoring/explorer/security_signals_table.png" alt="The Security Signals table showing two account takeover signals" >}}
 
-Filter the contents of the table with the list of available facets such as `Source` and `Status`. Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button in the upper right.
+Filter the contents of the table with the list of available facets. Configure the content of your Security Signals Table according to your needs and preferences with the **Options** button in the upper right.
 
 ## Inspect a Security Signal
 
-View additional details by clicking on any Security Signal. This opens a panel which includes information about the severity of the signal, and when it was generated.
-Actionable information includes the ability to:
- 
-  - Change the status of the signal.
-  - Access the rule settings of the signal.
-  - Share or assign the signal to a teammate.
+Click on any Security Signal to open the Security Signal Panel and see more details about it.
 
-{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="The Security Signal panel showing a critical signal for AWS S3 Public access block removed" style="width:90%;" >}}
+{{< img src="security/security_monitoring/explorer/signal_panel.png" alt="The Security Signal panel showing a critical signal for AWS S3 Public access block removed" style="width:80%;" >}}
+
+The details and actions you need first when triaging an issue can be found in the top portion of the Security Signal Panel. From here, you can determine the severity of the signal, when it was generated, access the rule settings, change the state of the signal and quickly share or assign this signal to a teammate.
 
 The first seen and last seen date are updated, if new data is made available from the past or the attack continues. For Cloud SIEM and Cloud Workload Security signals, a "What Happened" section is displayed in the Overview tab and any configured group bys or rule customizations related to the detection rule is displayed. This example detection rule is configured with a group by of `usr.name`. Finally, any tags which are set on the detection rule are displayed below the group bys in the header for CSPM findings and in the Context section for Cloud SIEM and Cloud Workload Security signals.
 
@@ -51,7 +48,7 @@ Below the header of Cloud SIEM and Cloud Workload Security signals are tabs with
 - `Rule Details` displays rule details, such as the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The users can also pivot into rule modification, such as modifying suppression queries for the rule.
 - `Logs` includes a visualization and list of log samples to provide context on why the signal triggered. Click on any of the samples in the table to see the full log.
 - `Related Signals` are displayed as a timeline of other signals which contain the same group by values to assist with triaging the signal.
-- `Suggested Actions` provides investigation queries, related dashboards, and links to cloud provider consoles based on Security Signal characteristics that guide investigations and provide insights to a resolution.
+- `Suggested Actions (beta)` provides investigation queries, related dashboards, and links to cloud provider consoles based on Security Signal characteristics that guide investigations and provide insights to a resolution.
 
 Below the header of Cloud Security Posture Management signals are tabs with detailed information related to the signal:
 - `Message` displays the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond.

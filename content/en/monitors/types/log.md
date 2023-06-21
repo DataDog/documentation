@@ -8,15 +8,12 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/downtimes/"
+- link: "/monitors/notify/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
-- link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
-  tag: "Blog"
-  text: "Use CIDR notation queries to filter your network traffic logs"
 ---
 
 ## Overview

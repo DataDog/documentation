@@ -352,7 +352,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
+      name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
 ### Configure with Kubernetes service annotations

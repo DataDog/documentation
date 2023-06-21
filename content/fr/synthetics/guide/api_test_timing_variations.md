@@ -1,16 +1,14 @@
 ---
-aliases:
-- /fr/synthetics/api_test_timing_variations
-description: Fonctionnement des durées de test API et correction des écarts
-further_reading:
-- link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
-  tag: Documentation
-  text: Métriques des tests API Synthetic
-kind: documentation
 title: Fonctionnement des durées de test API et correction des écarts
+kind: documentation
+description: Fonctionnement des durées de test API et correction des écarts
+aliases:
+  - /fr/synthetics/api_test_timing_variations
+further_reading:
+  - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
+    tag: Documentation
+    text: Métriques des tests API Synthetic
 ---
-
-
 ## Présentation
 
 Grâce aux [métriques de durée][1] recueillies par les tests API Synthetic, vous pouvez identifier les goulots d'étranglement qui ralentissent les échanges entre votre serveur et le client.

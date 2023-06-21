@@ -7,7 +7,7 @@ further_reading:
   text: "Start writing your own Rego rules"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default Posture Management cloud configuration compliance rules"
+  text: "Explore default Posture Management cloud configuration detection rules"
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
@@ -26,7 +26,7 @@ Cloud Security Posture Management is not available in this site.
 
 ## Overview
 
-To extend the rules being applied to your environment to evaluate your security posture, you can clone compliance rules and edit the copies, and you can create your own rules from scratch.
+To extend the rules being applied to your environment to evaluate your security posture, you can clone detection rules and edit the copies, and you can create your own rules from scratch.
 
 ## Cloning rules
 
@@ -62,7 +62,7 @@ To create a rule from scratch:
 
 ## Tagging findings
 
-When you create, clone, or modify CSPM compliance rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
+When you create, clone, or modify CSPM detection rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
 
 You can assign almost any key-value as a tag. The following table shows tags that are useful in common security scenarios.
 

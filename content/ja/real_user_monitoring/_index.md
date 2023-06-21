@@ -11,9 +11,6 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring
   tag: リリースノート
   text: Datadog RUM の最新リリースをチェック！ (アプリログインが必要です)
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: リアルユーザーモニタリングによるインサイトを得るためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: ブログ
   text: Datadog リアルユーザーモニタリングのご紹介
@@ -42,7 +39,7 @@ further_reading:
   tag: ブログ
   text: Datadog のテクニカルソリューションチームが RUM、セッションリプレイ、エラー追跡を使用して顧客の問題を解決する方法
 - link: /real_user_monitoring/browser/data_collected/
-  tag: Documentation
+  tag: ドキュメント
   text: 収集された RUM ブラウザデータ
 kind: documentation
 title: RUM & セッションリプレイ
@@ -74,56 +71,6 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 {{< partial name="rum/rum-getting-started.html" >}}
 
 </br>
-
-## SDK ドメインの対応エンドポイント
-
-Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
-
-### Mobile
-
-| サイト | サイト URL                                      |
-|------|-----------------------------------------------|
-| US1  | `https://browser-intake-datadoghq.com`        |
-| US3  | `https://browser-intake-us3-datadoghq.com`    |
-| US5  | `https://browser-intake-us5-datadoghq.com`    |
-| EU1  | `https://browser-intake-datadoghq.eu`         |
-| US1-FED  | `https://browser-intake-ddog-gov.com`     |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
-
-### Browser
-
-#### ログ管理
-
-| サイト | サイト URL                                        |
-|------|-------------------------------------------------|
-| US1  | `https://logs.browser-intake-datadoghq.com`     |
-| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
-| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
-
-#### セッション リプレイ
-
-| サイト | サイト URL                                                  |
-|------|-----------------------------------------------------------|
-| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
-| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
-| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
-
-#### RUM
-
-| サイト | サイト URL                                       |
-|------|------------------------------------------------|
-| US1  | `https://rum.browser-intake-datadoghq.com`     |
-| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
-| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
-| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
-| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
 
 ## Datadog RUM を探索する
 

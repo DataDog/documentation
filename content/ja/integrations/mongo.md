@@ -108,12 +108,15 @@ Mongo シェルで、`admin` データベースに Datadog Agent 用の読み取
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
+db.auth("admin", "<MongoDB_管理者パスワード>")
 
-# Datadog Agent のユーザーを作成します。
+# MongoDB 2.x では、addUser コマンドを使用します。
+db.addUser("datadog", "<一意のパスワード>", true)
+
+# MongoDB 3.x 以降では、createUser コマンドを使用します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<UNIQUEPASSWORD>",
+  "pwd": "<一意のパスワード>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -136,12 +139,15 @@ Mongo シェルで、プライマリに対して認証し、`admin` データベ
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
+db.auth("admin", "<MongoDB_管理者パスワード>")
 
-# Datadog Agent のユーザーを作成します。
+# MongoDB 2.x では、addUser コマンドを使用します。
+db.addUser("datadog", "<一意のパスワード>", true)
+
+# MongoDB 3.x 以降では、createUser コマンドを使用します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<UNIQUEPASSWORD>",
+  "pwd": "<一意のパスワード>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -193,12 +199,15 @@ instances:
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
+db.auth("admin", "<MongoDB_管理者パスワード>")
 
-# Datadog Agent のユーザーを作成します。
+# MongoDB 2.x では、addUser コマンドを使用します。
+db.addUser("datadog", "<一意のパスワード>", true)
+
+# MongoDB 3.x 以降では、createUser コマンドを使用します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<UNIQUEPASSWORD>",
+  "pwd": "<一意のパスワード>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -548,9 +557,7 @@ Agent コンテナで必要な環境変数
 
 メトリクスの詳細については、[MongoDB 3.0 マニュアル][4]を参照してください。
 
-#### 追加のメトリクス
-
-次のメトリクスは、デフォルトでは収集**されません**。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
+**注**: 次のメトリクスは、デフォルトでは収集されません。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
 
 | メトリクスのプレフィックス            | 収集するために `additional_metrics` に追加する項目 |
 | ------------------------ | ------------------------------------------------- |

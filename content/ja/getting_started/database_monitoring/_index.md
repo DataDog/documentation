@@ -9,9 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog/
   tag: ブログ
   text: Datadog によるデータベースパフォーマンスの監視
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
 kind: documentation
 title: Database モニタリングの概要
 ---

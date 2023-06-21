@@ -25,9 +25,6 @@ further_reading:
   text: "Correlate Datadog RUM events with traces from OTel-instrumented applications"
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel']
-cascade:
-    algolia:
-        rank: 70
 ---
 
 ## Overview

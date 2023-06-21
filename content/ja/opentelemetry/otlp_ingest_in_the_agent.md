@@ -213,12 +213,9 @@ Datadog Agent でサポートされている環境変数や設定は、他にも
 
 ## すぐに使えるダッシュボード
 
-Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには
+Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには、**Dashboards** > **Dashboards list** に移動し、`opentelemetry` を検索してください。
 
-1. [OpenTelemetry インテグレーション][9]をインストールします。
-2. **Dashboards** > **Dashboards list** にアクセスし、`opentelemetry` を検索します。
-
-   {{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
+{{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
 
 **Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][7] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][8]に応じて収集された他の種類のメトリクス用です。
 
@@ -234,4 +231,3 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 [6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[9]: https://app.datadoghq.com/integrations/otel

@@ -828,7 +828,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -851,7 +850,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -874,7 +872,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -897,7 +894,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -920,7 +916,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -943,7 +938,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackUserInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -972,7 +966,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -995,7 +988,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1018,7 +1010,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1041,7 +1032,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1064,7 +1054,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1087,7 +1076,6 @@ datadogRum.startSessionReplayRecording();
       trackLongTasks: true,
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1114,7 +1102,6 @@ datadogRum.startSessionReplayRecording();
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1135,7 +1122,6 @@ datadogRum.startSessionReplayRecording();
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1156,7 +1142,6 @@ datadogRum.startSessionReplayRecording();
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1177,7 +1162,6 @@ datadogRum.startSessionReplayRecording();
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1198,7 +1182,6 @@ datadogRum.startSessionReplayRecording();
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1219,7 +1202,6 @@ datadogRum.startSessionReplayRecording();
       premiumSampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1246,7 +1228,6 @@ datadogRum.startSessionReplayRecording();
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1267,7 +1248,6 @@ datadogRum.startSessionReplayRecording();
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1288,7 +1268,6 @@ datadogRum.startSessionReplayRecording();
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1309,7 +1288,6 @@ datadogRum.startSessionReplayRecording();
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1330,7 +1308,6 @@ datadogRum.startSessionReplayRecording();
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
@@ -1351,7 +1328,6 @@ datadogRum.startSessionReplayRecording();
       replaySampleRate: 100, // 含まれない場合 - デフォルト 100
       trackInteractions: true,
     });
-  window.DD_RUM &&
     window.DD_RUM.startSessionReplayRecording();
 </script>
 ```

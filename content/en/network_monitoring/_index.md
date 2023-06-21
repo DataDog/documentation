@@ -22,9 +22,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-cilium-cni-with-datadog/"
     tag: "Blog"
     text: "Monitor Cilium-managed infrastructure with Datadog"
-cascade:
-    algolia:
-        rank: 70
 ---
 
 {{< whatsnext desc="This section includes the following topics:">}}

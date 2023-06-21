@@ -79,15 +79,15 @@ Puedes actualizar al [Agent 7][3] o al [Agent 6][4] para resolver este problem
 
 ### Actualiza el Agent después de eliminar el certificado
 
-Datadog recomienda mantener el Agent al día y actualizarlo siempre a la última versión. Los despliegues configurados para actualizarse automáticamente vienen activados de forma predeterminada en la versión 5.32.7.
+Datadog recomienda mantener el Agent al día y actualizarlo siempre a la última versión. Los despliegues configurados para actualizarse automáticamente vienen activados de forma predeterminada en la versión 5.32.7.
 
 ### Cifrar el tráfico con SSL
 
 Cifra el tráfico con SSL, incluso si eliminas el certificado. El certificado es solo una configuración preestablecida para uso del cliente, y no es necesario conectar con SSL. Los endpoints del Datadog Agent solo aceptan tráfico SSL.
 
-### Agent 5.x de Windows configurado para usar un proxy o el cliente curl HTTP
+### Agent 5.x de Windows configurado para usar un proxy o el cliente curl HTTP
 
-Esta sección se aplica al Agent 5.x (`<= 5.32.6`) de Windows siempre que el Agent esté configurado para:
+Esta sección se aplica al Agent 5.x (`<= 5.32.6`) de Windows siempre que el Agent esté configurado para:
 
 * utilizar un proxy con la opción de configuración `proxy_host` en `datadog.conf` o la variable de entorno `HTTPS_PROXY`, o
 * utilizar el cliente curl HTTP con la opción de configuración`use_curl_http_client: yes` en `datadog.conf`.
@@ -103,7 +103,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/5.32.
 restart-service -Force datadogagent
 ```
 
-* Agent v5 de Windows, `<= 5.11.x`: establece la siguiente opción en `datadog.conf` utilizando el programa `Datadog Agent Manager` que viene con el Agent o editando directamente el archivo `datadog.conf`:
+* Agent v5 de Windows, `<= 5.11.x`: establece la siguiente opción en `datadog.conf` utilizando el programa `Datadog Agent Manager` que viene con el Agent o editando directamente el archivo `datadog.conf`:
   * Windows de 64 bits: `ca_certs: C:\Program Files (x86)\Datadog\Datadog Agent\files\ca-certificates.crt`
   * Windows de 32 bits: `ca_certs: C:\Program Files\Datadog\Datadog Agent\files\ca-certificates.crt`
 

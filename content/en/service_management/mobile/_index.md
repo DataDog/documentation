@@ -39,7 +39,7 @@ Optionally, you may also authenticate through a QR Code or manual entry, outline
 ##### QR code
 
 1. Start by logging in to your [Datadog account profile page][4] in a browser and click the **Link mobile device** button of the organization you want to log into. This pops up a QR code.
-    {{< img src="service_management/mobile/link-device.png" alt="Link mobile device" style="width:80%;">}}
+    {{< img src="mobile/link-device.png" alt="Link mobile device" style="width:80%;">}}
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. The org UDID is automatically inserted into the login screen.
 
 ##### Manual entry
@@ -55,7 +55,7 @@ If you keep getting errors while trying to login with SAML, your identity provid
 
 ## Monitors
 
-{{< img src="service_management/mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
 
 On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
 
@@ -65,7 +65,7 @@ For example, to filter on metric monitors related to the SRE team that is being 
 
 ## Dashboards
 
-{{< img src="service_management/mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
+{{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
 
 On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it.
 
@@ -73,7 +73,7 @@ On the Dashboards page, you can view and search all of the dashboards that you h
 
 ## Incidents
 
-{{< img src="service_management/mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
 
@@ -98,7 +98,7 @@ For more information on configuring Incident Notification Rules, see the [Incide
 
 ### Open Incidents widget
 
-{{< img src="service_management/mobile/incident_widget.png" alt="Datadog incident mobile widget displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/incident_widget.png" alt="Datadog incident mobile widget displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 View your [open incidents][12] from your mobile home screen with Datadog widgets.
 
@@ -207,7 +207,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the **Rem
 
 ### SLOs widget
 
-{{< img src="service_management/mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 View your [SLOs][15] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
 
@@ -317,7 +317,7 @@ Delete a widget by long pressing, dragging, and dropping the widget to the "Remo
 
 ### Monitors widget
 
-{{< img src="service_management/mobile/monitor_widget.png" alt="Configured monitor widgets displayed on Android and iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/monitor_widget.png" alt="Configured monitor widgets displayed on Android and iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 View your [monitors][16] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
 
@@ -415,13 +415,13 @@ Delete a widget by long pressing, dragging, and dropping the widget on the "Remo
 
 ## Quick actions
 
-{{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
+{{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
 
 Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][17] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
 
 ## Search from home screen
 
-{{< img src="service_management/mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
+{{< img src="mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
 
 **iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the "Search in App" button to open the search query in the in-app Dashboard List page.
 
@@ -437,7 +437,7 @@ With the shortcut, you can access your dashboards and monitors through three key
 - Siri Voice: say your shortcut name, such as "Open AWS Overview", and Siri opens your dashboard in-app.
 - Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
 
-{{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
 
 For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][18].
 

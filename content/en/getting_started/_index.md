@@ -11,7 +11,7 @@ further_reading:
       text: 'Take a course to get started with Datadog'
 cascade:
     algolia:
-        rank: 50
+        rank: 90
         category: Getting Started
 ---
 

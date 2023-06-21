@@ -35,7 +35,7 @@
             window.scroll(0, 0)
         },
         setGlossaryNavHeight (nav) {
-            this.glossaryNavHeight = nav.getBoundingClientRect().height - 50
+            this.glossaryNavHeight = nav.getBoundingClientRect().height - 25
         },
         setActiveGlossaryLetterToHighlight (glossaryLetterEl) {
             const letterDistanceFromTop = glossaryLetterEl.getBoundingClientRect().top
@@ -55,8 +55,9 @@
                     {{ $first_char := substr .Title 0 1 | upper }}
                     {{ $curr_letter := $.Scratch.Get "curr_letter" }}
                     {{ $core_products_string := (delimit (.Params.core_product | default "") ",") }}
+
                     <!-- Letter Header -->
-                    {{ if and (ne $first_char $curr_letter) (not (in $letters $first_char)) }}
+                    {{ if ne $first_char $curr_letter }}
                         {{ $.Scratch.Set "curr_letter" $first_char }}
                         {{ $letters = $letters | append $first_char }}
                         <h2 
@@ -72,7 +73,6 @@
                     :class="shouldShowGlossaryTerm('{{ $core_products_string }}') && 'show'" 
                     x-cloak x-show="shouldShowGlossaryTerm('{{ $core_products_string }}')" 
                     data-letter='{{ $first_char | lower }}'
-                    data-products="{{ $core_products_string }}"
                     x-init="$watch('filterValue', _ => appendToFilteredLetters($el))"
                     >
                     
@@ -91,7 +91,7 @@
                         <h4 
                         id="{{ anchorize .Params.Title }}" 
                         class="glossary-term font-24-28"
-                        :style="{scrollMarginTop: `${glossaryNavHeight+30}px`}"
+                        :style="{scrollMarginTop: `${glossaryNavHeight+10}px`}"
                         x-init="$nextTick(() => appendToFilteredLetters($el.parentElement))"
                         >
                             {{ .Params.Title }}

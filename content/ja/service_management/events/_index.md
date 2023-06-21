@@ -17,7 +17,7 @@ kind: documentation
 title: イベント
 ---
 
-{{< img src="service_management/events/events_explorer.png" alt="イベントエクスプローラー表示" >}}
+{{< img src="events/events-overview.png" alt="イベントエクスプローラー" >}}
 
 ## はじめに
 
@@ -39,13 +39,13 @@ Datadog Events は、あらゆるソースからのイベントを一箇所で�
 
 [イベントエクスプローラー][14]を使用して、Datadog に流入するイベントを集計・表示します。イベントを属性でグループ化またはフィルタリングし、[イベント分析][15]でグラフィカルに表現します。[クエリ構文][16]を使用して、ブール演算子やワイルドカード演算子を使用してイベントをフィルタリングします。
 
-{{< img src="service_management/events/events-explorer.mp4" alt="イベントを属性でソートし、分析結果を調べる" video=true >}}
+{{< img src="events/events-explorer.mp4" alt="イベントを属性でソートし、分析結果を調べる" video=true >}}
 
 ### ダッシュボードウィジェットのソースとしてのイベント
 
 [グラフウィジェット][17]でイベントをデータソースとして利用することができます。イベント検索クエリの時系列、表、上位リストウィジェットを構築することができます。
 
-{{< img src="service_management/events/events-dashboard.mp4" alt="イベントをソースとするグラフウィジェット" video=true >}}
+{{< img src="events/events-dashboard.mp4" alt="イベントをソースとするグラフウィジェット" video=true >}}
 
 例えば、[Monitor Notifications Overview][18] ダッシュボードは、モニターアラートイベントの傾向を分析し、構成の改善とアラートの疲労を軽減するのに役立ちます。
 
@@ -53,7 +53,7 @@ Datadog Events は、あらゆるソースからのイベントを一箇所で�
 
 イベント検索クエリから 15 ヶ月間保持される[メトリクスを生成][15]し、過去のイベントやアラートを作成、監視します。
 
-{{< img src="service_management/events/generate-metrics.png" alt="イベント検索クエリによるメトリクスのイメージ。" >}}
+{{< img src="events/generate-metrics.png" alt="イベント検索クエリによるメトリクスのイメージ。" >}}
 
 ### 処理パイプラインによるイベントの正規化およびリッチ化
 

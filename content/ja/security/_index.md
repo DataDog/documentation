@@ -22,11 +22,8 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog の Security Labs ブログでセキュリティ関連のトピックを読む
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/
-  tag: ブログ
+  tag: GitHub
   text: Stratus Red Team で AWS の脅威検出を高度化する
 - link: https://www.datadoghq.com/blog/kubernetes-security-best-practices/
   tag: ブログ

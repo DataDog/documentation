@@ -173,7 +173,7 @@ For autoscaling to work correctly, custom queries must follow these rules:
 
 - The query **must** be syntactically correct, otherwise it prevents the refresh of **ALL** metrics used for autoscaling (effectively stopping autoscaling).
 - The query result **must** output only one series (otherwise, the results are considered invalid).
-- The query **should** yield at least two non-null timestamped points (it's possible to use a query that returns a single point, though in this case, autoscaling may use incomplete points).
+- The query **should** yield at least two timestamped points (it's possible to use a query that returns a single point, though in this case, autoscaling may use incomplete points).
 
 **Note**: While the query is arbitrary, the start and end times are still set at `Now() - 5 minutes` and `Now()` by default.
 

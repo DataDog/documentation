@@ -1,12 +1,4 @@
 ---
-algolia:
-  category: Documentation
-  rank: 70
-  subcategory: Synthetic API テスト
-  tags:
-  - dns
-  - dns テスト
-  - dns テスト
 aliases:
 - /ja/synthetics/dns_test
 - /ja/synthetics/dns_check

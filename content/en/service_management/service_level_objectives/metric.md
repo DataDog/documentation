@@ -18,7 +18,7 @@ further_reading:
 
 Metric-based SLOs are useful for a count-based stream of data where you are differentiating good and bad events. A metric query uses the sum of the good events divided by the sum of total events over time to calculate a Service Level Indicator (or SLI). You can use any metric to create SLOs, including custom metrics generated from [APM spans][1], [RUM events][2], and [logs][3]. For an overview on how SLOs are configured and calculated, see the [Service Level Objective][4] page.
 
-{{< img src="service_management/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO" >}}
+{{< img src="monitors/service_level_objectives/metric-based-slo-example.png" alt="example metric-based SLO" >}}
 
 ## Setup
 
@@ -40,11 +40,11 @@ Why is `HTTP 3xx` excluded? - These are typically redirects and should not count
 
 Metric-based SLIs allow you to focus on the most important attributes of your SLIs. You can add groups to your metric-based SLIs in the editor by using tags like `datacenter`, `partition`, `availability-zone`, `resource`, or any other relevant group:
 
-{{< img src="service_management/service_level_objectives/metric_editor.png" alt="grouped metric-based SLO editor" >}}
+{{< img src="monitors/service_level_objectives/metric_editor.png" alt="grouped metric-based SLO editor" >}}
 
 By grouping these SLIs you can visualize each individual group's status, good request counts, and remaining error budget on the detail panel:
 
-{{< img src="service_management/service_level_objectives/metric_results.png" alt="metric-based SLO group results" >}}
+{{< img src="monitors/service_level_objectives/metric_results.png" alt="metric-based SLO group results" >}}
 
 By default, the bar graph shows the overall counts of good and bad requests for the entire SLO. You can scope the bar graph down to an individual group's good and bad requests counts by clicking on its corresponding row in the table. In addition, you can also choose to show or hide good request counts or bad request counts by selecting the appropriate option in the legend directly below the bar graph. 
 

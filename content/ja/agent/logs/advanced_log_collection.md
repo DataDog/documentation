@@ -90,7 +90,7 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。オートディスカバリーを使用して構成してポッド内の特定の `<CONTAINER_IDENTIFIER>` でコンテナログを収集するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
+特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。ポッド内の特定の `<CONTAINER_IDENTIFIER>` で Datadog コンテナログのオートディスカバリーを構成するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
 
 ```yaml
 apiVersion: apps/v1

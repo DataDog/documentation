@@ -17,9 +17,9 @@ title: ユーザーモニタリングと保護
 
 サービスをインスツルメンテーションし、ユーザーのアクティビティを追跡することで、悪質なユーザーを検出・ブロックします。
 
-[認証されたユーザー情報をトレースに追加する](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability)ことで、認証された攻撃対象領域を狙う悪質なユーザーを特定し、ブロックすることができます。これを行うには、実行中の APM トレースにユーザー ID タグを設定し、ASM が認証済み攻撃者をブロックするために必要なインストルメンテーションを提供します。これにより、ASM は攻撃やビジネスロジックのイベントをユーザーに関連付けることができます。
+[認証されたユーザー情報をトレースに追加する][2]ことで、認証された攻撃対象領域を狙う悪質なユーザーを特定し、ブロックすることができます。これを行うには、実行中の APM トレースにユーザー ID タグを設定し、ASM が認証済み攻撃者をブロックするために必要なインストルメンテーションを提供します。これにより、ASM は攻撃やビジネスロジックのイベントをユーザーに関連付けることができます。
 
-[ユーザーのログインとアクティビティを追跡](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces)し、すぐに使える検出ルールでアカウントの乗っ取りやビジネスロジックの乱用を検出し、最終的に攻撃者をブロックすることができます。
+[ユーザーのログインとアクティビティを追跡][3]し、すぐに使える検出ルールでアカウントの乗っ取りやビジネスロジックの乱用を検出し、最終的に攻撃者をブロックすることができます。
 
 すぐに使える検出ルールとして、以下のようなカスタムユーザーアクティビティがあります。
 
@@ -50,10 +50,8 @@ title: ユーザーモニタリングと保護
 以下の例では、ルートスパンを取得し、関連するユーザー監視タグを追加し、ユーザーブロック機能を有効にする方法を示しています。
 
 ```java
-import io.opentracing.Span;
-import io.opentracing.util.GlobalTracer;
-import datadog.appsec.api.blocking.Blocking;
-import datadog.trace.api.interceptor.MutableSpan;
+import datadog.trace.api.GlobalTracer;
+import datadog.appsec.api.Blocking;
 
 // アクティブスパンの取得
 final Span span = GlobalTracer.get().activeSpan();
@@ -61,7 +59,7 @@ if ((span instanceof MutableSpan)) {
    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
    // 必須ユーザー ID タグの設定
    localRootSpan.setTag("usr.id", "d131dd02c56eec4");
-   // オプションのユーザーモニタリングタグの設定
+   // オプションのユーザーモニタリングタグを設定する
    localRootSpan.setTag("usr.name", "Jean Example");
    localRootSpan.setTag("usr.email", "jean.example@example.com");
    localRootSpan.setTag("usr.session_id", "987654321");
@@ -683,7 +681,9 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: /ja/tracing/trace_collection/custom_instrumentation/
+[1]: /ja/tracing/trace_collection/custom_instrumentation/
+[2]: /ja/security/application_security/threats/add-user-info/#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
+[3]: /ja/security/application_security/threats/add-user-info/#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces
 [4]: /ja/security/default_rules/bl-rate-limiting/
 [5]: /ja/security/default_rules/bl-privilege-violation-user/
 [6]: /ja/security/default_rules/appsec-ato-groupby-ip/

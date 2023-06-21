@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/downtimes/
+- link: /monitors/notify/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 kind: ガイド

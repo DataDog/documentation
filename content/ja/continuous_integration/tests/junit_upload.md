@@ -198,7 +198,7 @@ if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
 **例**: `test.suite=/testcase/@classname`<br/>
 **注**: `--xpath-tag` を使用し、`--tags` または `DD_TAGS` 環境変数とともに指定されたタグはマージされます。xpath-tag の値は通常テストごとに異なるため、最優先されます。
 
-`--logs`
+`--logs` **(ベータ版)**
 : XML レポートの内容を [Logs][6] として転送できるようにします。`<system-out>`、`<system-err>`、`<failure>` 内のコンテンツはログとして収集されます。`<testcase>` 内の要素からのログは自動的にテストに接続されます。<br/>
 **環境変数**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **デフォルト**: `false`<br/>

@@ -47,9 +47,6 @@ further_reading:
 - link: https://docs.datadoghq.com/agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: Documentation
   text: クラウドインスタンスに Datadog Agent をインストールするメリットは何ですか？
-- link: https://www.datadoghq.com/blog/monitor-azure-openai-with-datadog/
-  tag: ブログ
-  text: Datadog で Azure OpenAI を監視する
 git_integration_title: azure
 has_logo: true
 integration_id: azure

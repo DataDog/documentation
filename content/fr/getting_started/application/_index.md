@@ -62,7 +62,7 @@ Consultez la section [Hostmap][9] pour en savoir plus.
 
 ## Événements
 
-{{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
+{{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
 
 La vue [Events Explorer][10] affiche les événements les plus récents générés par votre infrastructure et vos services.
 

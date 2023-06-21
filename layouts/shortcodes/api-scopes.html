@@ -18,8 +18,8 @@
                             {{ $tags = $tags | append $tag }}
                         {{ end }}
                         {{ $endpoints := ($scopeMap.endpoints | default slice) }}
-                        {{ $slug := $action.summary | urlize }}
-                        {{ $url := (printf "api/latest/%s/" $tag | urlize) | absLangURL }}
+                        {{ $slug := (replaceRE " " "-" ($action.summary | humanize | lower)) }}
+                        {{ $url := (printf "api/latest/%s/" (replaceRE " " "-" ($tag | humanize | lower))) | absLangURL }}
                         {{ $endpoints = $endpoints | append (dict "url" (printf "%s#%s" $url $slug) "summary" $action.summary) }}
                         {{ $updateMap := (dict "endpoints" $endpoints "tags" $tags "desc" (index $spec.components.securitySchemes.AuthZ.flows.authorizationCode.scopes $scope)) }}
                         {{ $scopeMap = merge $scopeMap $updateMap }}
@@ -38,11 +38,9 @@ For each scope find the common tags and group them together
 -->
 {{ $tagGroups := slice }}
 {{ $scopeGroups := slice }}
-{{ $counter := 0 }}
-{{ $total := len ($s.Get "scopes") }}
 {{ range $scope, $scope_obj := ($s.Get "scopes") }}
   {{ $intersect := len (intersect $tagGroups $scope_obj.tags) }}
-  {{ if or (and (eq $intersect 0) (ne $counter 0)) (eq $counter (sub $total 1)) }}
+  {{ if eq $intersect 0 }}
     {{ if $tagGroups}}
       {{ $tagStr := (print (delimit $tagGroups ", ")) }}
       {{ $s.SetInMap "tags" $tagStr $scopeGroups }}
@@ -52,7 +50,6 @@ For each scope find the common tags and group them together
   {{ end }}
   {{ $tagGroups = ($tagGroups | append $scope_obj.tags) | uniq }}
   {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
-  {{ $counter = add $counter 1 }}
 {{ end }}
 
 {{ range $tagString, $scopeSlice := ($s.Get "tags") }}

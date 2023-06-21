@@ -22,6 +22,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- 処理
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_ace/README.md
@@ -30,7 +31,7 @@ draft: false
 git_integration_title: ibm_ace
 integration_id: ibm-ace
 integration_title: IBM ACE
-integration_version: 1.1.0
+integration_version: 1.0.4
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -40,15 +41,16 @@ public_title: IBM ACE
 short_description: IBM ACE のリソース統計とメッセージフローを監視します。
 supported_os:
 - linux
-- windows
 - macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Log Collection
   - Supported OS::Linux
-  - Supported OS::Windows
   - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Processing
+  - Category::Log Collection
   configuration: README.md#Setup
   description: IBM ACE のリソース統計とメッセージフローを監視します。
   media: []

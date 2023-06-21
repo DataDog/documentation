@@ -57,7 +57,7 @@ Datadog は各リポジトリのルートにある `service.datadog.yaml` ファ
 
 ## Terraform でサービス定義の更新を自動化する
 
-サービスカタログは、[Terraform リソース][14]としてサービス定義を提供します。自動化されたパイプラインによるサービスカタログのサービスの作成と管理には、[Datadog Provider][8] v3.16.0 以降が必要です。
+サービスカタログは、Terraform リソースとしてサービス定義を提供します。自動化されたパイプラインによるサービスカタログのサービスの作成と管理には、[Datadog Provider][8] v3.16.0 以降が必要です。
 
 詳細については、[Datadog Provider のドキュメント][9]を参照してください。
 
@@ -96,4 +96,3 @@ GitHub インテグレーションや Terraform の代わりに、オープン�
 [11]: https://docs.datadoghq.com/ja/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
 [12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
 [13]: https://app.datadoghq.com/personal-settings/profile
-[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml

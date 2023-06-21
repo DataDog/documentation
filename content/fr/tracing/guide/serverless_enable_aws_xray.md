@@ -1,9 +1,9 @@
 ---
-aliases:
-- /fr/tracing/serverless_functions/enable_aws_xray/
-description: Tracer vos fonctions Lambda avec AWS X-Ray
-kind: documentation
 title: Activer les traces AWS X-Ray
+kind: documentation
+description: Tracer vos fonctions Lambda avec AWS X-Ray
+aliases:
+  - /fr/tracing/serverless_functions/enable_aws_xray/
 ---
 ## Activer AWS X-Ray
 

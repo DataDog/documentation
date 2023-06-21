@@ -399,11 +399,10 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 ## What's next?
 
-- You can now view metrics, logs, and traces on the [Serverless Homepage][4].
-- Turn on [threat monitoring][9] to get alerted on attackers targeting your service.
+- You can view metrics, logs, and traces on the [Serverless Homepage][1].
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
-- See the [troubleshooting guide][5] if you have trouble collecting the telemetry
-- See the [advanced configurations][6] to
+- See the [troubleshooting guide][2] if you have trouble collecting the telemetry
+- See the [advanced configurations][3] to
     - connect your telemetry using tags
     - collect telemetry for AWS API Gateway, SQS, etc.
     - capture the Lambda request and response payloads
@@ -412,7 +411,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 ### Monitor custom business logic
 
-To monitor your custom business logic, submit a custom metric or span using the sample code below. For additional options, see [custom metric submission for serverless applications][7] and the APM guide for [custom instrumentation][8].
+To monitor your custom business logic, submit a custom metric or span using the sample code below. For additional options, see [custom metric submission for serverless applications][4] and the APM guide for [custom instrumentation][5].
 
 ```ruby
 require 'ddtrace'
@@ -455,19 +454,15 @@ def some_operation()
 end
 ```
 
-For more information on custom metric submission, see [Serverless Custom Metrics][7]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][8].
+For more information on custom metric submission, see [Serverless Custom Metrics][4]. For additional details on custom instrumentation, see the Datadog APM documentation for [custom instrumentation][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /serverless/forwarder/
-[2]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[3]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[4]: https://app.datadoghq.com/functions
-[5]: /serverless/guide/troubleshoot_serverless_monitoring/
-[6]: /serverless/configuration
-[7]: /serverless/custom_metrics?tab=ruby
-[8]: /tracing/custom_instrumentation/ruby/
-[9]: /security/application_security/enabling/serverless/?tab=serverlessframework
+[1]: https://app.datadoghq.com/functions
+[2]: /serverless/guide/troubleshoot_serverless_monitoring/
+[3]: /serverless/configuration/
+[4]: /serverless/custom_metrics?tab=ruby
+[5]: /tracing/custom_instrumentation/ruby/

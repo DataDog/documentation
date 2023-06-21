@@ -5,7 +5,7 @@ kind: documentation
 list_section:
   AWS: AWS のリソースタイプの詳細については、以下のページで確認してください。
   Azure: Azure のリソースタイプの詳細については、以下のページで確認してください。
-  GCP: Google Cloud のリソースタイプの詳細については、以下のページで確認してください。
+  GCP: GCP のリソースタイプの詳細については、以下のページで確認してください。
 title: Cloud Resources Schema リファレンス
 type: schema
 ---

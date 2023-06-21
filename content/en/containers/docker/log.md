@@ -49,8 +49,7 @@ The CLI commands on this page are for the Docker runtime. Replace `docker` with 
 To run a [Docker container][1] that embeds the Datadog Agent to monitor your host, use the following command for your respective operating system:
 
 ### Linux
-For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
-{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
+
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -59,7 +58,6 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /proc/:/host/proc/:ro \
@@ -67,11 +65,9 @@ docker run -d --name datadog-agent \
            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
            gcr.io/datadoghq/agent:latest
 ```
-{{< /site-region >}}
 
 ### Windows
-For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
-{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
+
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -80,18 +76,15 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_ENABLED=true \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
            -v \\.\pipe\docker_engine:\\.\pipe\docker_engine \
            -v c:\programdata\docker\containers:c:\programdata\docker\containers:ro
            gcr.io/datadoghq/agent:latest
 ```
-{{< /site-region >}}
 
 ### macOS
+
 Add the path `/opt/datadog-agent/run` under Docker Desktop -> Settings -> Resources -> File sharing.
 
-For the following configuration, replace `<DD_SITE>` with {{< region-param key="dd_site" >}}:
-{{< site-region region="us,eu,us3,us5,ap1,gov" >}}
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -101,13 +94,11 @@ docker run -d --name datadog-agent \
            -e DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true \
            -e DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE=true \
            -e DD_CONTAINER_EXCLUDE="name:datadog-agent" \
-           -e DD_SITE=<DD_SITE>
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
            -v /opt/datadog-agent/run:/opt/datadog-agent/run:rw \
            gcr.io/datadoghq/agent:latest
 ```
-{{< /site-region >}}
 
 It is recommended that you pick the latest version of the Datadog Agent. Consult the full list of available [images for Agent v6][2] on GCR.
 

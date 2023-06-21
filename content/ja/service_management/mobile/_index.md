@@ -39,7 +39,7 @@ QR コードを使用または手動入力で認証することも可能です�
 ##### QR コード
 
 1. まず、ブラウザで [Datadog アカウントプロファイルページ][4]にログインし、ログインする組織の **Link mobile device** ボタンをクリックします。QR コードがポップアップします。
-    {{< img src="service_management/mobile/link-device.png" alt="モバイルデバイスのリンク" style="width:80%;">}}
+    {{< img src="mobile/link-device.png" alt="モバイルデバイスのリンク" style="width:80%;">}}
 2. デフォルトのスマホカメラアプリを使用して QR コードをスキャンし、提案されたリンクをタップして Datadog アプリを開きます。組織 UDID がログイン画面に自動的に挿入されます。
 
 ##### 手動入力
@@ -55,7 +55,7 @@ SAML でログインしようとしているときにエラーが発生し続け
 
 ## アラート設定
 
-{{< img src="service_management/mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モニターページ">}}
+{{< img src="mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モニターページ">}}
 
 モニターページでは、Datadog 組織でアクセスできるすべてのモニターを表示、検索できます。タグ付け戦略に基づいて、フィールド名とビルド固有の検索クエリで指定できます。検索の詳細については、[モニター検索の管理セクション][6]を参照してください。
 
@@ -65,7 +65,7 @@ SAML でログインしようとしているときにエラーが発生し続け
 
 ## ダッシュボード  
 
-{{< img src="service_management/mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ダッシュボードページ">}}
+{{< img src="mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ダッシュボードページ">}}
 
 ダッシュボードページでは、Datadog 組織でアクセスできるすべてのダッシュボードを表示、検索し、Datadog Web アプリで設定したものと同じテンプレート変数を使用してそれらをフィルタリングできます。個々のダッシュボードをクリックして表示します。テンプレート変数の保存済みビューを使用して、ダッシュボードをすばやくフィルタリングします。テンプレート変数の保存済みビューの詳細については、[ダッシュボードの保存済みビュー][9]を参照してください。個々のダッシュボードをクリックして表示します。
 
@@ -73,7 +73,7 @@ SAML でログインしようとしているときにエラーが発生し続け
 
 ## インシデント
 
-{{< img src="service_management/mobile/incidents.png" alt="インシデントページ" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/incidents.png" alt="インシデントページ" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 インシデントページでは、Datadog モバイルアプリから Datadog アカウントでアクセスできるすべてのインシデントを表示、検索、およびフィルタリングして、どこからでも迅速な対応と解決を保証できます。また、Slack、Zoom などとの統合を通じて、インシデントを宣言および編集し、チームとシームレスに通信することもできます。インシデントの詳細については、[Datadog インシデント管理ドキュメント][12]を参照してください。
 
@@ -98,7 +98,7 @@ SAML でログインしようとしているときにエラーが発生し続け
 
 ### オープンインシデントウィジェット
 
-{{< img src="service_management/mobile/incident_widget.png" alt="Android および iOS デバイスに表示された Datadog インシデントモバイルウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/incident_widget.png" alt="Android および iOS デバイスに表示された Datadog インシデントモバイルウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 Datadog ウィジェットで、[オープンインシデント][12]をモバイルのホームスクリーンで確認。
 
@@ -207,7 +207,7 @@ Datadog ウィジェットで、[オープンインシデント][12]をモバイ
 
 ### SLO ウィジェット
 
-{{< img src="service_management/mobile/slo_widget.png" alt="Android および iOS デバイスに表示されたアプリケーションアップタイム SLO ウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/slo_widget.png" alt="Android および iOS デバイスに表示されたアプリケーションアップタイム SLO ウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 Datadog ウィジェットを使用してモバイルホーム画面から [SLO][15] を表示します。オーガニゼーションの SLO を、タイムフレームとともにウィジェットとして追加できます。
 
@@ -317,7 +317,7 @@ SLO ウィジェットをタップするとデフォルトで開くダッシュ�
 
 ### モニターウィジェット
 
-{{< img src="service_management/mobile/monitor_widget.png" alt="Android および iOS 画面に表示された構成済みモニターウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="mobile/monitor_widget.png" alt="Android および iOS 画面に表示された構成済みモニターウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
 Datadog ウィジェットを使用して、ホーム画面から[モニター][16]を表示します。セルをタップして、モニターがすでに入力された状態で、アプリで **Monitor Search** 画面を開きます。
 
@@ -415,14 +415,14 @@ Datadog ウィジェットを使用して、ホーム画面から[モニター][
 
 ## クイックアクション
 
-{{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="クイックアクション">}}
+{{< img src="mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="クイックアクション">}}
 
 
 アプリアイコンを長押しすると、iOS 用の上位 5 つの [Frequently Viewed By Me][17] ダッシュボード (表示数と最新性で測定) または Android 用モバイルで最も開いている 5 つのダッシュボードのクイックアクションシートが表示されます。結果をタップして、アプリ内ダッシュボードを開きます。
 
 ## ホーム画面から検索
 
-{{< img src="service_management/mobile/iphone_search_doc.png" alt="ホーム画面の検索" style="width:40%;">}}
+{{< img src="mobile/iphone_search_doc.png" alt="ホーム画面の検索" style="width:40%;">}}
 
 **iOS のみ**: iPhone Search 内で、必要なダッシュボードの名前をフィルタリングして検索します。結果を押してモバイルアプリで直接ダッシュボードビューを開くか、"Search in App" ボタンを押してアプリ内ダッシュボードリストページで検索クエリを開きます。
 
@@ -438,7 +438,7 @@ Datadog ウィジェットを使用して、ホーム画面から[モニター][
 - Siri 音声: 「AWS の概要を開く」などのショートカット名を言うと、Siri はアプリ内でダッシュボードを開きます。
 - Siri の提案: Siri はあなたのルーチンを学習し、ホームまたはロック画面のバナー、iPhone 検索、または iOS 14 の Siri の提案ウィジェットを介して、最も必要なときにダッシュボードのショートカットを提案します。
 
-{{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ショートカット">}}
+{{< img src="mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ショートカット">}}
 
 Siri のショートカットと提案の詳細については、[Apple Siri のドキュメント][18]をお読みください。
 

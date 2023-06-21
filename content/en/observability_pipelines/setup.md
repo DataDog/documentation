@@ -157,9 +157,9 @@ There are no provider-specific requirements for RPM-based Linux.
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
-    DD_API_KEY=<API_KEY>
-    DD_OP_PIPELINE_ID=<PIPELINE_ID>
-    DD_SITE=<SITE>
+    DD_API_KEY: <API_KEY>
+    DD_OP_PIPELINE_ID: <PIPELINE_ID>
+    DD_SITE: <SITE>
     EOF
     ```
 
@@ -201,9 +201,9 @@ There are no provider-specific requirements for RPM-based Linux.
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
-    DD_API_KEY=<API_KEY>
-    DD_OP_PIPELINE_ID=<PIPELINE_ID>
-    DD_SITE=<SITE>
+    DD_API_KEY: <API_KEY>
+    DD_OP_PIPELINE_ID: <PIPELINE_ID>
+    DD_SITE: <SITE>
     EOF
     ```
 

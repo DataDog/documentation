@@ -10,7 +10,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/downtimes/
+- link: /monitors/notify/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 - link: /monitors/manage/status/
@@ -123,7 +123,7 @@ Datadog で [APM モニター][2]を作成するには、メインナビゲー�
 
 **注**: サービスレベルモニターについては[サービスページ][4]および[サービスマップ][5]で、リソースレベルモニターについては個々のリソースページで確認できます（[サービスページ][4]に記載されているリソースをクリックすると、特定のアクセスできます）。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -23,15 +23,9 @@ further_reading:
 - link: /security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/
   tag: Documentation
   text: Cloud SIEM のための Google Cloud 構成ガイド
-- link: /security/cloud_siem/guide/azure-config-guide-for-cloud-siem/
-  tag: Documentation
-  text: Cloud SIEM の Azure 構成ガイド
 - link: /security/notifications/variables/
   tag: Documentation
   text: 通知をカスタマイズするための通知変数について
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: セキュリティと脅威検出を高めるインタラクティブなセッションに参加できます
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog の Security Labs でセキュリティ関連のトピックを読む

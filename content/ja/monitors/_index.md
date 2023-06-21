@@ -19,9 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: ブログ
   text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: 効果的なモニターの作成に関するインタラクティブなセッションに参加できます
 kind: documentation
 title: アラート設定
 ---

@@ -61,11 +61,11 @@ For all graph types, Datadog offers various color options to differentiate multi
 | Green       | A gradient color scheme made from green.                                                                    |
 | Blue        | A gradient color scheme made from blue.                                                                     |
 
-For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON. For more information, see the guide for [Selecting the right colors for your graphs][6].
+For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
 
 ### Metric aliasing
 
-Each query or formula, along with any [filtering tags][7], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
+Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
 
 {{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Adding an alias to a search query in the Timeseries widget editor" style="width:100%;" >}}
 
@@ -83,13 +83,13 @@ With the event overlay, you can quickly see how actions within the organization 
 
 You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. 
 
-Use the same query format as for the [Event Explorer][8], for example:
+Use the same query format as for the [Event Explorer][7], for example:
 
 | Query                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Shows all events from the Jenkins source.                  |
 | `tag:role:web`              | Shows all events with the `role:web` tag.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [template variable][9]. |
+| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [template variable][8]. |
 
 ### Markers
 
@@ -133,19 +133,19 @@ For timeboards, legends display automatically when a dashboard is set to L or XL
 
 To add a context link in the dropdown menu that appears when you click in a dashboard widget, click **Add a Context Link** in the **Context Links** section.
 
-For more information about editing and deleting context links, see [Context Links][10].
+For more information about editing and deleting context links, see [Context Links][9].
 
 ### Full screen
 
-In addition to the [standard full screen options][11], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+In addition to the [standard full screen options][10], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
 
-For more information, see [Explore your data in full-screen graph mode][12].
+For more information, see [Explore your data in full-screen graph mode][11].
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][13] for additional reference.
+This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][12] for additional reference.
 
-The dedicated [widget JSON schema definition][14] for the timeseries widget is:
+The dedicated [widget JSON schema definition][13] for the timeseries widget is:
 
 {{< dashboards-widgets-api >}}
 
@@ -158,12 +158,11 @@ The dedicated [widget JSON schema definition][14] for the timeseries widget is:
 [3]: /dashboards/querying/
 [4]: /tracing/trace_explorer/query_syntax/#search-bar
 [5]: /logs/search_syntax/
-[6]: /dashboards/guide/widget_colors/
-[7]: /dashboards/querying/#filter
-[8]: /events/
-[9]: /dashboards/template_variables/
-[10]: /dashboards/guide/context-links/
-[11]: /dashboards/widgets/#full-screen
-[12]: https://www.datadoghq.com/blog/full-screen-graphs
-[13]: /api/v1/dashboards/
-[14]: /dashboards/graphing_json/widget_json/
+[6]: /dashboards/querying/#filter
+[7]: /events/
+[8]: /dashboards/template_variables/
+[9]: /dashboards/guide/context-links/
+[10]: /dashboards/widgets/#full-screen
+[11]: https://www.datadoghq.com/blog/full-screen-graphs
+[12]: /api/v1/dashboards/
+[13]: /dashboards/graphing_json/widget_json/

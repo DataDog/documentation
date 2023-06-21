@@ -176,6 +176,12 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
 **Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
+`DD_TRACE_GLOBAL_TAGS`
+: **TracerSettings property**: `GlobalTags`<br>
+If specified, adds all of the specified tags to all generated spans.
+**Example**: `layer:api, team:intake` <br>
+Note that the delimiter is a comma and a space: `, `.
+
 `DD_TRACE_DEBUG`
 : Enables or disables debug logging. Valid values are `true` or `false`.<br>
 **Default**: `false`
@@ -199,8 +205,7 @@ Added in version `2.19.0`.<br>
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api, team:intake, key:value` <br>
-**Note**: The delimiter is a comma and a space: `, `. <br>
+**Example**: `layer:api,team:intake,key:value` <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`

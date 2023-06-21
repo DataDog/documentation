@@ -1,22 +1,20 @@
 ---
 aliases:
-- /ja/integrations/awscodedeploy/
+  - /ja/integrations/awscodedeploy/
 categories:
-- automation
-- aws
-- cloud
-- configuration & deployment
-- log collection
-- provisioning
+  - cloud
+  - configuration & deployment
+  - aws
+  - log collection
+ddtype: crawler
 dependencies: []
-description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_codedeploy/
+description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡します。
+doc_link: 'https://docs.datadoghq.com/integrations/amazon_codedeploy/'
 draft: false
 git_integration_title: amazon_codedeploy
 has_logo: true
 integration_id: amazon-codedeploy
 integration_title: Amazon CodeDeploy
-integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
@@ -25,7 +23,6 @@ public_title: Datadog-Amazon CodeDeploy インテグレーション
 short_description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 version: '1.0'
 ---
-
 {{< img src="integrations/amazon_codedeploy/monitor-aws-codedeploy-dashboard.png" alt="CodeDeploy デフォルトダッシュボード" popup="true">}}
 
 ## 概要
@@ -42,7 +39,7 @@ AWS CodeDeploy は、クラウドおよびオンプレミスのインスタン�
 
 ### メトリクスの収集
 
-1. Amazon CodeDeploy のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [CodeDeploy ポリシー][3]を参照してください。
+1. Amazon CodeDeploy のメトリクスを収集するために、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。CodeDeploy ポリシーの詳細については、[AWS Web サイトのガイド][3]を参照してください。
 
     | AWS アクセス許可                        | 説明                                                                   |
     | ------------------------------------- | ----------------------------------------------------------------------------- |
@@ -64,8 +61,8 @@ Amazon CodeDeploy から S3 バケットまたは CloudWatch のいずれかに�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon CodeDeploy ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. [Datadog ログコレクション AWS Lambda 関数][5] をまだ設定していない場合は、設定を行ってください。
+2. lambda 関数がインストールされたら、AWS コンソールから、Amazon CodeDeploy ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
@@ -94,9 +91,9 @@ AWS Codedeploy インテグレーションには、サービスのチェック�
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
-[3]: https://docs.aws.amazon.com/codedeploy/latest/userguide/security-iam.html
-[4]: https://app.datadoghq.com/integrations/amazon_codedeploy
-[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_codedeploy.html
+[4]: https://app.datadoghq.com/account/settings#integrations/amazon_codedeploy
+[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_codedeploy/amazon_codedeploy_metadata.csv

@@ -308,7 +308,6 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
-- Turn on [threat monitoring][11] to get alerted on attackers targeting your service.
 - Submit a [custom metric][2] or [APM span][3] to monitor your business logic.
 - See the [troubleshooting guide][4] if you have trouble collecting the telemetry
 - See the [advanced configurations][5] to
@@ -332,4 +331,3 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 [8]: /agent/proxy/
 [9]: /serverless/guide/datadog_forwarder_java
 [10]: /serverless/guide/upgrade_java_instrumentation
-[11]: /security/application_security/enabling/serverless/?tab=serverlessframework

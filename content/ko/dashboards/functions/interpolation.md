@@ -101,7 +101,7 @@ default_zero(avg:custom_metric{*})
     {{< nextlink href="/dashboards/functions/timeshift" >}}타임시프트: 타임라인을 따라 메트릭 데이터 포인트를 이동합니다. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ko/metrics/guide/interpolation-the-fill-modifier-explained/
+[1]: /ko/dashboards/faq/interpolation-the-fill-modifier-explained/
 [2]: /ko/getting_started/from_the_query_to_the_graph/#proceed-to-space-aggregation
 [3]: /ko/monitors/guide/as-count-in-monitor-evaluations/
 [4]: /ko/metrics/

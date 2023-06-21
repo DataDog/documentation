@@ -192,11 +192,11 @@ bosh -n -d <YOUR_DEPLOYMENT> -e <BOSH_ENV> deploy --recreate <YOUR_DEPLOYMENT_MA
 
 Agent のインストールが成功したかどうかを確認するには、[ホストマップ][20]で `cloudfoundry` でフィルタリングします。Datadog Agent BOSH リリースでは、各ホストに `cloudfoundry` のタグを付けています。オプションとして、以下のスクリーンショットのように、`bosh_job` など、任意のタグでホストをグループ化します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="Datadog のホストマップの Filter セクションに cloudfoundry を、Group セクションに bosh_job を入力したもの" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="Datadog のホストマップの Filter セクションに cloudfoundry を、Group セクションに bosh_job を入力したもの"  >}}
 
 いずれかのホストをクリックしてズームインし、六角形の中の **system** をクリックして、Datadog がシステムメトリクスを受信していることを確認します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="Datadog ホストマップのホストの詳細表示で、システムインテグレーションが選択され、複数のグラフでデータが表示されている様子" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="Datadog ホストマップのホストの詳細表示で、システムインテグレーションが選択され、複数のグラフでデータが表示されている様子"  >}}
 
 #### PCF コンテナ内の CAPI メタデータと Cluster Agent タグを収集する
 
@@ -463,7 +463,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 [メトリクスエクスプローラー][23]で、`cloudfoundry.nozzle` で始まるメトリクスを検索します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="検索バーに cloudfoundry.nozle を入力した Datadog のメトリクスエクスプローラー" >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="検索バーに cloudfoundry.nozle を入力した Datadog のメトリクスエクスプローラー"  >}}
 
 #### アプリケーションのメタデータプレフィックスを制御する
 

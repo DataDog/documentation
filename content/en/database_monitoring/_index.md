@@ -20,9 +20,6 @@ further_reading:
   text: "Join an interactive session to level up your Database Monitoring"
 algolia:
   tags: ['database monitoring', 'dbm']
-cascade:
-    algolia:
-        rank: 70
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>

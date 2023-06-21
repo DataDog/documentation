@@ -1,8 +1,7 @@
 ---
 categories:
-- AWS
-- クラウド
-- data store
+- cloud
+- aws
 - ログの収集
 dependencies: []
 description: AWS AppSync のキーメトリクスを追跡。
@@ -30,7 +29,7 @@ Amazon AppSync は、1 つ以上のデータソースのデータに安全にア
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -49,8 +48,8 @@ Amazon AppSync から S3 バケットまたは CloudWatch のいずれかにロ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon AppSync ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
+1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
+2. lambda 関数がインストールされたら、AWS コンソールから、Amazon AppSync ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -76,7 +75,7 @@ Amazon AppSync インテグレーションには、サービスのチェック�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-appsync
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_appsync/amazon_appsync_metadata.csv

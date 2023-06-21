@@ -15,14 +15,14 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: Datadog ライブラリを使った Ruby カスタムインスツルメンテーション
+title: Ruby カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 <div class="alert alert-info">
-自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/python/">Python セットアップ手順</a>をお読みください。
+自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、 <a href="https://docs.datadoghq.com/tracing/setup/python/">Pythonセットアップ手順</a>からご覧ください。
 </div>
 
-このページでは、Datadog APM で観測可能性を追加・カスタマイズするユースケースを詳しく説明します。
+このページでは、Datadog APM を使用して可観測性を追加およびカスタマイズする一般的な使用例について説明します。
 
 ## `ddtrace` ライブラリの機能性を拡張したり、アプリケーションのインスツルメントをより精確に制御するのに役立つ方法がライブラリにあります。
 
@@ -33,10 +33,8 @@ type: multi-code-lang
 `customer.id` などのアプリケーションコード内の動的な値に対応するカスタムタグをスパンに追加します。
 
 {{< tabs >}}
-{{% tab "アクティブスパン" %}}
-コード内のどのメソッドからでも、現在のアクティブ[スパン][1]にアクセスできます。
-
-**注**: このメソッドが呼び出されたときにアクティブスパンがない場合、`active_span` は `nil` になります。
+{{% tab "Active Span" %}}
+コード内の任意のメソッドから現在アクティブな[スパン][1]にアクセスします。**注**: メソッドが呼び出され、現在アクティブなスパンがない場合、`active_span` は `nil` です。
 
 ```ruby
 require 'ddtrace'
@@ -91,13 +89,13 @@ Datadog.configure do |c|
 end
 ```
 
-環境変数 `DD_TAGS` を使用してアプリケーションのすべてのスパンにタグを設定することも可能です。Ruby の環境変数に関する詳細は、[セットアップドキュメント][3]をお読みください。
+環境変数 `DD_TAGS` を使用してアプリケーションのすべてのスパンにタグを設定することも可能です。Ruby の環境変数に関する詳細は、[セットアップドキュメント][3]を参照してください。
 
 ### スパンにエラーを設定する
 
-スパンにエラーを設定する方法には 2 つあります。
+スパンにエラーを設定する方法には 2 つあります
 
-- `span.set_error` を呼び出し、Exception オブジェクトを渡します。これにより、エラーの種類、メッセージ、バックトレースが自動的に抽出されます。
+- まず、`span.set_error` を呼び出し、Exception オブジェクトを渡します。これにより、エラーの種類、メッセージ、バックトレースが自動的に抽出されます。
 
 ```ruby
 require 'ddtrace'
@@ -118,9 +116,12 @@ end
 example_method()
 ```
 
-- また、`tracer.trace` を使用すると、デフォルトでエラータイプ、メッセージ、バックトレースを設定することができます。この動作を構成するには、`on_error` オプションを使用します。これは、`trace` にブロックが提供され、ブロックがエラーを発生させたときに呼び出されるハンドラーです。Proc には `span` と `error` が引数として渡されます。デフォルトでは、`on_error` はスパンにエラーを設定します。
+- 2 つ目は、デフォルトでエラータイプ、メッセージ、バックトレースを設定する `tracer.trace` を使用する方法。
+- この動作を構成するには、`on_error` オプションを使用します。これは、ブロックが `trace` に提供されブロックがエラーを発生すると呼び出されるハンドラーです。
+- `span` および `error` を引数として Proc が提供されます。
+- デフォルトで、`on_error` がスパンにエラーを設定します。
 
-`on_error` のデフォルトの動作:
+デフォルトの動作: `on_error`
 
 ```ruby
 require 'ddtrace'
@@ -137,7 +138,7 @@ Datadog::Tracing.trace('example.trace') do |span|
 end
 ```
 
-`on_error` のカスタム動作:
+カスタムの動作: `on_error`
 
 ```ruby
 require 'ddtrace'
@@ -284,10 +285,28 @@ Datadog::Tracing.before_flush(MyCustomProcessor.new)
 
 トレーシングクライアントと Datadog Agent の両方で、コンフィギュレーションを追加することで、B3 ヘッダーを使用したコンテキスト伝播や、ヘルスチェックなどの計算されたメトリクスでこれらのトレースがカウントされないように、特定のリソースがトレースを Datadog に送信しないように除外することができます。
 
-### ヘッダー抽出と挿入によるコンテキストの伝搬
+### B3 ヘッダーの抽出と挿入
 
-分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][6]をお読みください。
+Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][6]と挿入をサポートしています。
 
+分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。現在、次の 2 つのスタイルがサポートされています:
+
+- Datadog: `Datadog`
+- B3: `B3`
+
+挿入スタイルは次を使って構成できます:
+
+- 環境変数: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
+
+環境変数の値は、挿入が有効になっているヘッダースタイルのカンマ区切りリストです。デフォルトでは、Datadog 挿入スタイルのみが有効になっています。
+
+抽出スタイルは次を使って構成できます:
+
+- 環境変数: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
+
+環境変数の値は、抽出が有効になっているヘッダースタイルのカンマ区切りリストです。デフォルトでは、Datadog と B3 の抽出スタイルが有効になっています。
+
+複数の抽出スタイルが有効になっている場合、抽出試行はスタイルの構成順で実行され、最初に成功した抽出値が使われます。
 
 ### リソースのフィルター
 
@@ -302,5 +321,5 @@ Datadog::Tracing.before_flush(MyCustomProcessor.new)
 [3]: /ja/tracing/setup/ruby/#environment-and-tags
 [4]: /ja/tracing/compatibility_requirements/ruby/
 [5]: /ja/tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
-[6]: /ja/tracing/trace_collection/trace_context_propagation/ruby/
+[6]: https://github.com/openzipkin/b3-propagation
 [7]: /ja/tracing/security

@@ -10,10 +10,10 @@ title: Datadog Windows Agent ユーザー
 Agent のインストーラーは、デフォルトで新しいアカウント (`ddagentuser`) を作成しますが、ユーザーから提供されたアカウントを使用することも可能です。
 このアカウントは、インストール時に以下のグループに割り当てられます。
 
-* "Performance Monitor Users" グループのメンバーになる
+* “Performance Monitor Users” グループのメンバーになる
   * WMI 情報にアクセスするために必要
   * Windows のパフォーマンスカウンターデータにアクセスするために必要
-* "Event Log Readers" グループのメンバーになる
+* “Event Log Readers” グループのメンバーになる
 
 **注**: インストーラーは、作成したアカウントをデフォルトで `Users` グループに追加しません。まれに、権限の問題が発生することがあります。その場合、作成したユーザーを手動で `Users` グループに追加してください。
 
@@ -45,7 +45,7 @@ msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWOR
 
 **注**: MSI インストーラーの制限により、`DDAGENTUSER_PASSWORD` プロパティにセミコロン文字 `;` を含めることができません。
 
-**注**: インストール時に `system` と `winproc` のチェックで権限の問題が発生した場合、`ddagentuser` が Performance Monitor Users と Event Log Readers グループのメンバであることを確認してください。
+**注**: インストール時に `system` と `winproc` のチェックで権限の問題が発生した場合、`ddagentuser` が Performance Monitoring と Event Log Viewer グループのメンバであることを確認してください。
 
 **注**: インストーラーの UI ではユーザーを指定することができません。コマンドラインを使用して `DDAGENTUSER_NAME` と他のパラメータを渡してください。UI インストールであっても、それらは考慮されます。
 

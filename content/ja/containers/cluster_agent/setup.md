@@ -1,7 +1,4 @@
 ---
-algolia:
-  tags:
-  - Cluster Agent
 aliases:
 - /ja/agent/cluster_agent/setup
 - /ja/agent/cluster_agent/event_collection
@@ -44,35 +41,25 @@ Helm チャート v2.7.0 以降、Cluster Agent はデフォルトで有効に�
 
 これにより、Cluster Agent と Datadog Agent に必要な RBAC ファイルが自動的に更新されます。両方の Agent が同じ API キーを使用します。
 
-また、Cluster Agent と Datadog Agent の両方で共有される `Secret` にランダムなトークンを自動生成し、通信を安全にします。このトークンは `clusterAgent.token` 構成を使用して手動で指定することができます。また、`clusterAgent.tokenExistingSecret` 構成により、`token` 値を含む既存の `Secret` の名前を参照することでも設定できます。
-
-手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
+これにより、Cluster Agent と Datadog Agent の両方で共有される `Secret` にランダムトークンが自動的に生成されます。`clusterAgent.token` コンフィギュレーションでトークンを指定することにより、これを手動で設定できます。`clusterAgent.tokenExistingSecret` コンフィギュレーションを介して `token` 値を含む既存の `Secret` 名を指定することにより、これを手動で設定することもできます。手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-Datadog Operator v1.0.0 から Cluster Agent はデフォルトで有効になっています。 Operator は必要な RBAC の作成、Cluster Agent のデプロイ、Agent DaemonSet の構成を変更します。
+Datadog Operator v0.7.0 以降、Cluster Agent はデフォルトで有効になっています。
 
-また、Cluster Agent と Datadog Agent の両方で共有される `Secret` にランダムなトークンを自動生成し、通信の安全性を確保します。このトークンは `global.clusterAgentToken` フィールドを設定することで、手動で指定することができます。また、既存の `Secret` の名前と、このトークンを含むデータキーを参照することでも設定できます。
+明示的に有効にするには、`DatadogAgent` オブジェクトを以下のコンフィギュレーションで更新します。
 
   ```yaml
-  apiVersion: datadoghq.com/v2alpha1
-  kind: DatadogAgent
-  metadata:
-    name: datadog
-  spec:
-    global:
-      credentials:
-        apiKey: <DATADOG_API_KEY>
-      clusterAgentTokenSecret:
-        secretName: <SECRET_NAME>
-        keyName: <KEY_NAME>
+spec:
+  clusterAgent:
+    # clusterAgent.enabled -- これを false に設定すると、Datadog Cluster Agent が無効になります
+    enabled: true
   ```
 
-手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
+Operator は次に、必要な RBAC を作成し、Cluster Agent をデプロイし、ランダムに生成されたトークン (Agent と Cluster Agent 間の通信を保護するため) を使用するように Agent DaemonSet コンフィギュレーションを変更します。このトークンは、`credentials.token` フィールドを設定することで手動で指定することができます。手動で設定する場合、このトークンは 32 文字の英数字である必要があります。
 
-[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 

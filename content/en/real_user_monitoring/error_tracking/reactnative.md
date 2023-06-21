@@ -407,8 +407,6 @@ Inside the loop, add the following snippet:
         }
 ```
 
-**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

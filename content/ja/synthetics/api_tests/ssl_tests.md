@@ -1,12 +1,4 @@
 ---
-algolia:
-  category: Documentation
-  rank: 70
-  subcategory: Synthetic API テスト
-  tags:
-  - ssl
-  - ssl テスト
-  - ssl テスト
 aliases:
 - /ja/synthetics/ssl_test
 - /ja/synthetics/ssl_check

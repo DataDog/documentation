@@ -235,7 +235,7 @@ Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーショ�
 
 GKE Autopilot にはコンフィギュレーションが必要です（以下を参照）。
 
-Datadog では、Agent コンテナにリソースの上限を指定することをおすすめします。Autopilot は、比較的低いデフォルトの上限 (50m CPU、100Mi メモリ) を設定するため、ご使用の環境によってはすぐに Agent コンテナが OOMKill に達する可能性があります。該当する場合は、Trace Agent および Process Agent のコンテナにもリソース上限を指定することをおすすめします。さらに、Agent が確実にスケジュールされるように、Agent の優先クラスを作成することができます。
+Datadog では、Agent コンテナにリソースの上限を指定することをおすすめします。Autopilot は、比較的低いデフォルトの上限 (50m CPU、100Mi メモリ) を設定するため、ご使用の環境によってはすぐに Agent コンテナが OOMKill に達する可能性があります。該当する場合は、トレースエージェントおよびプロセスエージェントのコンテナにもリソース上限を指定することをおすすめします。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -263,22 +263,29 @@ agents:
         requests:
           cpu: 200m
           memory: 256Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
 
     traceAgent:
-      # Trace Agent コンテナのリソース
+      # トレースエージェントコンテナのリソースcontainer
       resources:
         requests:
+          cpu: 100m
+          memory: 200Mi
+        limits:
           cpu: 100m
           memory: 200Mi
 
     processAgent:
-      # Process Agent コンテナのリソース
+      # プロセスエージェントコンテナのリソース
       resources:
         requests:
           cpu: 100m
           memory: 200Mi
-
-    priorityClassCreate: true
+        limits:
+          cpu: 100m
+          memory: 200Mi
 
 providers:
   gke:

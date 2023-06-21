@@ -61,7 +61,7 @@ Datadog では、どの種類のグラフについても、同じグラフ内に
 | 緑       | 緑色のグラデーション。                                                                    |
 | 青        | 青色のグラデーション。                                                                     |
 
-折れ線グラフの場合、JSON でクエリを区切ることで、異なるメトリクスに特定のパレットを割り当てることができます。詳しくは、[グラフに適した色を選ぶ][6]のガイドをご覧ください。
+折れ線グラフでは、JSON でクエリを分けることで、メトリクスごとにパレットを割り当てることができます。
 
 ### メトリクスのエイリアス作成
 
@@ -133,7 +133,7 @@ Y 軸のコントロールは、UIとJSONエディターで利用できます。
 
 ダッシュボードウィジェット内をクリックすると表示されるドロップダウンメニューにコンテキストリンクを追加するには、**Context Links** セクションの **Add a Context Link** をクリックします。
 
-コンテキストリンクの編集と削除については、[コンテキストリンク][10]を参照してください。
+コンテキストリンクの編集と削除については、[コンテキストリンク][9]を参照してください。
 
 ### 全画面
 
@@ -143,7 +143,7 @@ Y 軸のコントロールは、UIとJSONエディターで利用できます。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][12] ドキュメントをご参照ください。
 
 時系列ウィジェットの[ウィジェット JSON スキーマ定義][13]は次のとおりです。
 
@@ -158,12 +158,11 @@ Y 軸のコントロールは、UIとJSONエディターで利用できます。
 [3]: /ja/dashboards/querying/
 [4]: /ja/tracing/trace_explorer/query_syntax/#search-bar
 [5]: /ja/logs/search_syntax/
-[6]: /ja/dashboards/guide/widget_colors/
-[7]: /ja/dashboards/querying/#filter
-[8]: /ja/events/
-[9]: /ja/dashboards/template_variables/
-[10]: /ja/dashboards/guide/context-links/
-[11]: /ja/dashboards/widgets/#full-screen
-[12]: https://www.datadoghq.com/blog/full-screen-graphs
-[13]: /ja/api/v1/dashboards/
-[14]: /ja/dashboards/graphing_json/widget_json/
+[6]: /ja/dashboards/querying/#filter
+[7]: /ja/events/
+[8]: /ja/dashboards/template_variables/
+[9]: /ja/dashboards/guide/context-links/
+[10]: /ja/dashboards/widgets/#full-screen
+[11]: https://www.datadoghq.com/blog/full-screen-graphs
+[12]: /ja/api/v1/dashboards/
+[13]: /ja/dashboards/graphing_json/widget_json/

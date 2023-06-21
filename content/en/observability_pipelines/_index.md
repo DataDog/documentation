@@ -13,9 +13,6 @@ further_reading:
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
-cascade:
-    algolia:
-        rank: 70
 ---
 
 {{< site-region region="gov" >}}

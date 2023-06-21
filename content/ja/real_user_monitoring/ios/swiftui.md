@@ -4,7 +4,7 @@ description: SwiftUI アプリケーションのインスツルメンテーシ�
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios のソースコード
+  text: dd-sdk-ios ソースコード
 - link: https://docs.datadoghq.com/real_user_monitoring/ios/
   tag: ドキュメント
   text: iOS と tvOS のモニタリングについて

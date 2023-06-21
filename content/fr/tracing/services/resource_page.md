@@ -107,7 +107,7 @@ Consultez la liste des [traces][7] associées à cette ressource dans la fenêtr
 
 {{< img src="tracing/visualization/resource/traces_list.png" alt="Liste de traces"  style="width:90%;">}}
 
-## Pour aller plus loin
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

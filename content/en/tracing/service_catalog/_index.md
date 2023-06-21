@@ -84,8 +84,6 @@ The **Performance** tab provides several ways to view how your services are perf
 The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment. 
 The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][12] on APM [trace metrics][13]. This dropdown does not affect how many services you see in the list.  
 
-{{< img src="tracing/service_catalog/svc-cat-perf-view.png" alt="Performance view filtered on env:* and scoped to cluster-name:*" style="width:100%;" >}}
-
 Sort the table by clicking columns to reveal services that:
 - Deployed most recently, or have not deployed for a long time
 - Are receiving the most requests per second, or are not receiving any traffic

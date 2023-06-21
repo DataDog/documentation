@@ -15,17 +15,13 @@ further_reading:
 
 Real User Monitoring offers Mobile Vitals, a set of metrics inspired by [Android Vitals][1], that can help compute insights about your mobile application's responsiveness, stability, and resource consumption. Mobile Vitals range from poor, moderate, to good.
 
-You can view Mobile Vitals for your application by navigating to  **UX Monitoring > Performance Summary** and selecting your application.
+Mobile Vitals appear on your your application's **Performance Overview** page when you navigate to **UX Monitoring > Performance Monitoring** and click your application. From the mobile performance dashboard for your application, click on a graph in **Mobile Vitals** to apply a filter by version or examine filtered sessions.
 
-{{< img src="real_user_monitoring/android/android_mobile_vitals-1.png" alt="Mobile Vitals in the RUM Explorer" style="width:90%;">}}
-
-To access the RUM mobile app performance dashboard, scroll down to the Monitor Performance Metrics section from the application summary page and click **Performance Overview**.
-
-{{< img src="real_user_monitoring/android/mobile-performance-dashboard-3.png" alt="Mobile Vitals in the Performance Tab" style="width:90%;">}}
+{{< img src="real_user_monitoring/android/android-mobile-vitals-new.png" alt="Mobile Vitals in the RUM Explorer" style="width:100%;">}}
 
 Understand your application's overall health and performance with the line graphs displaying metrics across various application versions. To filter on application version or see specific sessions and views, click on a graph. 
 
-Mobile Vitals appear on your application's **Performance Overview** page when you navigate to **UX Monitoring > Performance Summary** and click your application. From the mobile performance dashboard for your application, click on a graph in **Mobile Vitals** to filter by version or examine filtered sessions.
+{{< img src="real_user_monitoring/android/refresh_rate_and_mobile_vitals.png" alt="Event Timings and Mobile Vitals" style="width:70%;">}}
 
 You can also select a view in the RUM Explorer and observe recommended benchmark ranges that directly correlate to your application's user experience in the session. Click on a metric such as **Refresh Rate Average** and click **Search Views With Poor Performance** to apply a filter in your search query and examine additional views.
 

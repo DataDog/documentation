@@ -6,12 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/
   tag: GitHub
   text: Datadog Cloud Cost Management でクラウドコストの可視化とコントロールを実現する
-- link: /monitors/types/cloud_cost/
-  tag: Documentation
-  text: クラウドコストモニターの構成
-- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
-  tag: blog
-  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
 kind: documentation
 title: クラウド コスト マネジメント
 ---
@@ -172,6 +166,21 @@ Datadog は取り込まれたコストデータにすぐに使えるタグを追
 | `is_aws_ec2_spot_instance`   | 使用がスポットインスタンスと関連しているかどうか。|
 | `is_aws_ec2_savings_plan`    | 使用がセービングプランと関連しているかどうか。|
 
+### タグパイプライン (ベータ版)
+
+タグパイプラインを使用してタグルールを作成し、クラウド請求書に記載されていないタグや不正確なタグを修正したり、ビジネスロジックに沿った新しい推論タグを作成したりすることができます。
+
+2 種類のルールがサポートされています。**Create new tag** (*新しいタグを作成する) と **Alias existing tag keys** (既存のタグキーを別名にする) です。ルールセットを活用することで、ルールを整理することができます。ルールセットは、ルールのフォルダーとして機能します。ルールは、実行順序を決定的にするために、(上から下へ) 順番に実行されます。ルールとルールセットを整理することで、実行順序をビジネスロジックと一致させることができます。
+
+### ルールタイプ
+
+<div class="alert alert-info"><strong>注</strong>: ルールは最大 100 個まで作成可能です。 </div>
+
+**Create new tag** - これにより、既存のタグの存在に基づいて、新しいタグ (キー＋値) を作成することができます。例えば、チーム A、B、C に所属し、指定されたアプリケーションを実行するすべてのリソースに、新しい `cost-center:webstore` タグを付けるルールを作成することができます。
+
+**Alias existing tag keys** - これにより、既存のタグの値を使用して、より標準化されたタグキーにマッピングすることができます。例えば、組織全体で `application` というタグキーを使用するように標準化したいが、いくつかのチームが `app`、`web-app`、`apps` のようなタグのバリエーションを持っている場合、`apps` を `application` に別名で使用することができます。各エイリアスタグルールでは、最大で 25 個のタグキーを新しいタグにエイリアスすることができます。 
+
+ルールは各リソースに対して、最初に一致するものが見つかると実行を停止します。例えば、リソースが既に `web-app` タグを持っている場合、このルールは `apps` や `service` タグを識別しようとしません。
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
@@ -254,24 +263,6 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 {{% /tab %}}
 {{< /tabs >}}
 
-## タグパイプライン
-
-<div class="alert alert-info">タグパイプラインはベータ版の機能です。</div>
-
-[タグパイプライン][1]を使用してタグルールを作成し、クラウド請求書に記載されていないタグや不正確なタグを修正したり、ビジネスロジックに沿った新しい推論タグを作成したりすることができます。
-
-### ルールタイプ
-
-<div class="alert alert-warning"> ルールは最大 100 個まで作成可能です。 </div>
-
-2 種類のルールがサポートされています。**Create new tag** (*新しいタグを作成する) と **Alias existing tag keys** (既存のタグキーを別名にする) です。ルールセットを活用することで、ルールを整理することができます。ルールセットは、ルールのフォルダーとして機能します。ルールは、実行順序を決定的にするために、(上から下へ) 順番に実行されます。ルールとルールセットを整理することで、実行順序をビジネスロジックと一致させることができます。
-
-**Create new tag** - これにより、既存のタグの存在に基づいて、新しいタグ (キー＋値) を作成することができます。例えば、チーム A、B、C に所属し、指定されたアプリケーションを実行するすべてのリソースに、新しい `cost-center:webstore` タグを付けるルールを作成することができます。
-
-**Alias existing tag keys** - これにより、既存のタグの値を使用して、より標準化されたタグキーにマッピングすることができます。例えば、組織全体で `application` というタグキーを使用するように標準化したいが、いくつかのチームが `app`、`web-app`、`apps` のようなタグのバリエーションを持っている場合、`apps` を `application` に別名で使用することができます。各エイリアスタグルールでは、最大で 25 個のタグキーを新しいタグにエイリアスすることができます。 
-
-ルールは各リソースに対して、最初に一致するものが見つかると実行を停止します。例えば、リソースが既に `web-app` タグを持っている場合、このルールは `apps` や `service` タグを識別しようとしません。
-
 ## ダッシュボードに表示されるクラウドコスト
 
 インフラストラクチャーの支出を、関連する使用量メトリクスと一緒に可視化することで、潜在的な非効率性と節約の機会を発見することができます。Datadog ダッシュボードのウィジェットにクラウドコストを追加するには、*Cloud Cost* データソースを選択します。
@@ -281,5 +272,3 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/cost/tag-pipelines

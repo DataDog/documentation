@@ -3,21 +3,20 @@ title: Table Widget
 kind: documentation
 widget_type: "query_table"
 aliases:
-- /graphing/widgets/table/
+    - /graphing/widgets/table/
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
-- link: "/dashboards/querying/"
-  tag: "Documentation"
-  text: "Learn how to build a graphing query"
 ---
 
 ## Overview
 
-The table visualization displays columns of aggregated data grouped by tag key. Use tables to compare values across many groups of data and see trends, changes, and outliers.
+The table visualization displays columns of aggregated data grouped by tag key. For example, see `system.cpu.system` and `system.cpu.user` grouped by `service`:
 
-{{< img src="/dashboards/widgets/table/table_conditional_formatting.png" alt="Table widget with conditional formatting" style="width:100%;">}}
+{{< img src="dashboards/widgets/table/table_widget_1.png" alt="Table widget" style="width:80%;">}}
+
+**Note:** Only numerical data is supported for the table widget.
 
 ## Setup
 
@@ -25,27 +24,20 @@ The table visualization displays columns of aggregated data grouped by tag key. 
 
 1. Choose the data to graph:
     * Metric: See the [Main graphing documentation][1] to configure a metric query.
-    * Non-metric data sources: See the [Log search documentation][2] to configure an event query.
-
+    * Log Events: See the [Log search documentation][2] to configure a log event query.
+    * Indexed Spans: See the [Trace search documentation][3] to configure an indexed span query.
+    * RUM Events: See the [RUM search syntax documentation][4] to configure a RUM query.
+    * Profiling Metrics: See the [Search profiles documentation][5] to configure a profiling query.
+    * Security Signals: See the [Security signals explorer documentation][6] to configure a security signals query.
+    * APM Statistics: See the [APM stats documentation][7] to configure an APM stats query.
 2. Add additional columns to the table by using the **+ Add Query** and **+ Add Formula** buttons.
 
 ### Options
-
 * Rename column headers by setting aliases, click the **as...** button.
+* Customize the visualization of cell values for each column with Visual Formatting Rules.
 * Configure whether or not the search bar displays. **Auto** is the default and shows the search bar depending on the size of the widget, this means if your screen gets too small, it prioritizes displaying the data on the widget and hides the search bar, but is still available in full-screen mode.
-
-#### Column formatting
-Customize the visualization of cell values for each column with Column Formatting Rules. Create color codes for your data to visualize trends and changes.
-* Threshold formatting: highlight cells with colors when specific value ranges are met.
-* Range formatting: color code cells with a range of values.
-* Text formatting: replace cells with alias text values to improve readability.
-
-{{< img src="/dashboards/widgets/table/range_conditional_formatting.png" alt="Widget configuration showing the column formatting options" style="width:90%;" >}}
-
-#### Context links
-
-[Context links][10] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
-
+* Customize context links to specify the pages users are directed to. See the [Context Links][10] Guide.
+* Apply mathematic functions to your queries. See the [Dashboard Graphing documentation][11].
 
 ## N/A values
 

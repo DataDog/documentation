@@ -17,9 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-service-performance-with-slo-alerts/
   tag: ブログ
   text: SLO アラートによるサービスパフォーマンスのプロアクティブな監視
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: 効果的なモニターと SLO の作成に関するインタラクティブなセッションに参加できます
 kind: documentation
 title: サービスレベル目標（SLO）
 ---
@@ -95,7 +92,7 @@ SLO を編集するには、リストビューで SLO の行にカーソルを�
 
 編集を許可する[ロール][8]のリストを指定することで、個々の SLO へのアクセスを制限します。
 
-{{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="歯車メニューの SLO 権限オプション">}}
+{{< img src="monitors/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="歯車メニューの SLO 権限オプション">}}
 
 1. SLO をクリックすると、詳細サイドパネルが表示されます。
 1. パネル右上の歯車アイコンをクリックします。
@@ -129,13 +126,13 @@ SLO への編集アクセス権を維持するために、システムは保存�
 
 SLOを*チーム*、*サービス*、*環境*でグループ化し、データのサマリービューを得ることができます。各状態 (違反、警告、OK、データなし) にある SLO の数を、コンテキストごとにグループ化して素早く分析することができます。
 
-{{< img src="service_management/service_level_objectives/slo_group_by.png" alt="チームごとにグループ化された SLO のサマリービュー" style="width:100%;" >}}
+{{< img src="/monitors/service_level_objectives/slo_group_by.png" alt="チームごとにグループ化された SLO のサマリービュー" style="width:100%;" >}}
 
 ステータス*とエラー予算*の列で SLO を並べ替え、注意が必要な SLO に優先順位をつけることができます。SLO リストには、[構成](#configuration)で選択した主要なタイムウィンドウの SLO の詳細が表示されます。その他の構成タイムウィンドウはすべて、個別のサイドパネルで表示できます。それぞれのテーブル行をクリックして、SLO 詳細サイドパネルを開きます。
 
 **注**: [Apple App Store][13] および [Google Play Store][14] で入手できる [Datadog モバイルアプリ][12]をダウンロードすれば、モバイルデバイスのホーム画面から SLO を表示することが可能です。
 
-{{< img src="service_management/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android 上の SLO">}}
+{{< img src="monitors/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS と Android 上の SLO">}}
 
 ### SLO タグ
 
@@ -153,7 +150,7 @@ SLO のリストビューに移動すると、デフォルトの SLO ビュー�
 - オーガニゼーションで定義されているすべての SLO リスト
 - 左側のファセットリストで利用可能なファセットのリスト
 
-### 保存ビュー
+### 保存済みビュー
 
 以下を共有することで、チームに最も関連性の高い SLO についてカスタマイズした検索を保存ビューの SLO リストビューに保存し共有することができます。
 
@@ -205,11 +202,11 @@ SLO 監査イベントの全リストを取得するには、イベントエク�
 
 **注:** UI にイベントが表示されない場合は、イベントエクスプローラーの時間枠を長くしてみてください（過去 7 日間など）。
 
-{{< img src="service_management/service_level_objectives/slo-audit-events.png" alt="SLO 監査イベント" >}}
+{{< img src="monitors/service_level_objectives/slo-audit-events.png" alt="SLO 監査イベント" >}}
 
 たとえば、特定の SLO コンフィギュレーションが変更されたときに通知を受信するには、タグ `audit,slo_id:<SLO ID>` に対して `[SLO Modified]` テキストを追跡するようイベントモニターをセットします。
 
-{{< img src="service_management/service_level_objectives/slo-event-monitor.png" alt="SLO イベントモニター" >}}
+{{< img src="monitors/service_level_objectives/slo-event-monitor.png" alt="SLO イベントモニター" >}}
 
 ## SLO ウィジェット
 
@@ -252,7 +249,7 @@ SLO ごとの 90 日制限は、以下の通りです。
 
 SLO のサイドパネルで `Correct Status` を選択するか、[SLO ステータス修正 API][23] または [Terraform リソース][24]を使用して、UI からステータス修正を構成することができます。
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO 修正 UI" >}}
+{{< img src="monitors/service_level_objectives/slo-corrections-ui.png" alt="SLO 修正 UI" >}}
 
 #### UI でのアクセス
 

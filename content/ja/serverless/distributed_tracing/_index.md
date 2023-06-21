@@ -34,11 +34,20 @@ Datadog では、サーバーレストレースをメトリクスに接続する
 
 Datadog Python、Node.js、Ruby、Go、Java、.NET トレーシングライブラリは、AWS Lambda の分散型トレーシングをサポートしています。
 
-## サーバーレスアプリケーションからトレースを送信する
+## トレーシングソリューションの選択
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Datadog で AWS Lambda をトレースするためのアーキテクチャ図" >}}
 
-Datadog Python、Node.js、Ruby、Go、Java、.NET トレーシングライブラリは、AWS Lambda の分散型トレーシングをサポートしています。トレーサーは、[インストール手順][5]を使用してインストールできます。すでに拡張機能をインストールしている場合は、環境変数 `DD_ENABLE_TRACING` が `true` に設定されていることを確認してください。
+<div class="alert alert-info"> サーバーレスモニタリングは初めてですか？<a href="/serverless/installation/">こちら</a>のインストール手順に従って開始します。</div>
+
+サーバーレスアプリケーションで Datadog APM を使い始めるには、Datadog のトレーシングクライアント (`dd-trace`) を使ってトレースを生成するか、AWS から X-Ray トレースを引っ張ってくるかを選択できます。
+
+| [dd-trace を使用した Datadog APM][1]          | [AWS X-Ray を使用した Datadog APM][2]           |
+|---------------------------------|-------------------------------------------------------------------------|
+| Datadog APM のインテグレーションライブラリを使用してエンドツーエンドのトレーシングを行います。  | AWS X-Ray からトレースを取得します。 |
+| Datadog でトレースをリアルタイムで視覚化します。 | トレースデータは数分後に Datadog で利用可能。 |
+| テールベースのサンプリングと完全にカスタマイズ可能なタグベースの保持フィルター。 | サンプリングレートは構成できません。 |
+| すべての Lambda ランタイムをサポートしています。 |  すべての Lambda ランタイムをサポートしています。 |
 
 ### ランタイムの推奨事項
 
@@ -51,7 +60,6 @@ Python および Node.js をサポートする Datadog Lambda ライブラリと
 - Serverless Framework、AWS SAM、AWS CDK インテグレーションを使用したコード変更なしのインストール。
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - AWS SDK で実行された連続 Lambda 呼び出しのトレース。
-- コールドスタートトレーシング
 - AWS Managed Services を利用して非同期 Lambda 呼び出しをトレースする
   - API Gateway
   - SQS
@@ -61,7 +69,9 @@ Python および Node.js をサポートする Datadog Lambda ライブラリと
   - EventBridge
 - すぐに使用できる数十の追加の [Python][3] および [Node.js][4] ライブラリをトレース。
 
-Python や Node.js のサーバーレスアプリケーションでは、Datadog は [Datadog のトレーシングライブラリをインストールする][5]ことを推奨しています。
+Python および Node.js サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリをインストールする][5]ことをお勧めします。Datadog では、アプリケーションで AppSync や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、[サーバーレストレースマージ][6]で説明されているように AWS X-Ray と Datadog APM の_両方_のトレースライブラリを構成して、Datadog APM で AWS X-Ray トレースを拡張することをお勧めします。
+
+すでに X-Ray でサーバーレス関数をトレースしていて、X-Ray を引き続き使用したい場合は、[AWS X-Ray インテグレーションをインストール][2]できます。
 
 *上記にリストされていないサーバーレスリソースのトレースをご希望の場合は、[機能リクエストを開いてください][7]。*
 
@@ -72,7 +82,7 @@ Ruby サポート用の Datadog Lambda ライブラリとトレースライブ�
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加の [Ruby][8] ライブラリをトレース。
 
-[Datadog のトレーシングライブラリ][5]を使って、Datadog でサーバーレストレーシングの関数をトレースすることができます。
+[Datadog のトレースライブラリ][5]または [AWS X-Ray インテグレーションのインストール][2]を使用して、Datadog でサーバーレス関数をトレースできます。Datadog では、[Datadog のトレースライブラリ][5]を使用していて、AWS マネージドサービス間で Lambda 関数トレースを接続する必要がある場合は、[AWS X-Ray と Datadog APM][6] の_両方_のトレースライブラリを構成して、トレースを拡張することをお勧めします。
 
 *上記にリストされていないサーバーレスリソースのトレースをご希望の場合は、[機能リクエストを開いてください][7]。*
 
@@ -83,7 +93,7 @@ Go サポート用の Datadog Lambda ライブラリとトレースライブラ�
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加 [Go][9] ライブラリをトレース。
 
-Go のサーバーレスアプリケーションでは、Datadog は [Datadog のトレーシングライブラリ][5]をインストールすることを推奨しています。
+Go サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][5]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、代わりに、[Datadog APM と AWS X-Ray トレース][2]の使用を検討することをお勧めします。
 
 *上記にリストされていないサーバーレスリソースのトレースをご希望の場合は、[機能リクエストを開いてください][7]。*
 
@@ -94,7 +104,7 @@ Java サポート用の Datadog Lambda ライブラリとトレースライブ�
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加 [Java][11] ライブラリをトレース。
 
-Java のサーバーレスアプリケーションでは、Datadog は [Datadog のトレーシングライブラリ][5]をインストールすることを推奨しています。
+Java サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][5]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、代わりに、[Datadog APM と AWS X-Ray トレース][2]の使用を検討することをお勧めします。
 
 *Java Lambda 関数用の Datadog のトレースライブラリに関してフィードバックがございましたら、[Datadog Slack コミュニティ][13]の [#serverless][12] チャネルで行われているディスカッションをご確認ください。*
 
@@ -104,7 +114,7 @@ Java のサーバーレスアプリケーションでは、Datadog は [Datadog 
 - ダウンストリームの Lambda 関数またはコンテナを呼び出す HTTP リクエストをトレース。
 - すぐに使用できる数十の追加 [.NET][14] ライブラリをトレース。
 
-.NET のサーバーレスアプリケーションでは、Datadog は [Datadog のトレーシングライブラリ][5]をインストールすることを推奨しています。
+.NET サーバーレスアプリケーションの場合、Datadog では [Datadog のトレースライブラリ][5]をインストールすることをお勧めします。アプリケーションで API Gateway や Step Functions などの AWS マネージドサービスで AWS X-Ray アクティブトレースが必要な場合は、代わりに、[Datadog APM と AWS X-Ray トレース][2]の使用を検討することをお勧めします。
 
 [.NET Azure サーバーレスアプリケーションを介したトレース][15]の詳細をご覧ください。
 
@@ -116,13 +126,11 @@ Datadog Agent でホストに `dd-trace` がインストールされていて、
 
 Datadog の [AWS X-Ray インテグレーション][2]は、Lambda 関数のトレースのみを提供します。コンテナまたはホストベースの環境でのトレースの詳細については、[Datadog APM のドキュメント][16]をご覧ください。
 
-## Lambda 関数のプロファイリング (公開ベータ版)
+## Datadog APM を有効にする
 
-<div class="alert alert-info">ベータ期間中は、プロファイリングを追加料金なしで利用できます。</div>
+{{< img src="tracing/live_search/livesearchmain.mp4" alt="Live Search" video=true >}}
 
-Datadog の [Continuous Profiler][27] は、Python ではバージョン 4.62.0、Layer ではバージョン 62 以上のベータ版で利用できます。このオプション機能は、環境変数 `DD_PROFILING_ENABLED` を `true` に設定することで有効になります。
-
-Continuous Profiler は、定期的に起動するスレッドを生成し、実行中のすべての Python コードの CPU とヒープのスナップショットを取得することで動作します。これにはプロファイラー自体も含まれることがあります。プロファイラー自身を無視したい場合は、`DD_PROFILING_IGNORE_PROFILER` を `true` に設定します。
+Datadog Python、Node.js、Ruby、Go、Java、.NET トレースライブラリは、AWS Lambda の分散トレースをサポートします。ご使用の関数にトレースを有効にするには、[インストール手順][5]に従ってください。
 
 ## トレースマージ
 
@@ -323,10 +331,6 @@ ddlambda.WrapFunction(handler, cfg)
 {{% /tab %}}
 {{< /tabs >}}
 
-## X-Ray インテグレーションで Datadog にトレースを送信する
-
-すでに X-Ray でサーバーレスアプリケーションをトレースしていて、X-Ray を引き続き使用したい場合は、[AWS X-Ray インテグレーションをインストール][2]して X-Ray から Datadog にトレースを送信できます。
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -357,4 +361,3 @@ ddlambda.WrapFunction(handler, cfg)
 [24]: /ja/serverless/distributed_tracing#runtime-recommendations
 [25]: /ja/tracing/trace_collection/custom_instrumentation/
 [26]: /ja/serverless/guide/handler_wrapper/
-[27]: /ja/profiler/

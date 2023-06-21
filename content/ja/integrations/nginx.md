@@ -209,7 +209,7 @@ data:
     }
 ```
 
-次に、NGINX ポッドで `81` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
+次に、NGINX ポッドで `18080` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
 
 ```yaml
 spec:
@@ -228,6 +228,20 @@ spec:
           name: "nginx-conf"
 ```
 
+最後に、NGINX サービスでそのポートを公開します。
+
+```yaml
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+    name: default
+  - port: 81
+    protocol: TCP
+    targetPort: 18080
+    name: status
+```
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -517,7 +531,7 @@ NGINX チェックには、イベントは含まれません。
 
 - [あるはずのタイムスタンプがログに含まれないのはなぜですか？][6]
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 

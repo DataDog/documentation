@@ -5,7 +5,6 @@ description: "Visualize, observe, and analyze the performance of your front-end 
 disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
-  - /real_user_monitoring/faq/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
   tag: "Release Notes"
@@ -45,12 +44,9 @@ further_reading:
   text: "RUM Browser Data Collected"
 algolia:
   tags: ['rum', 'real user monitoring']
-cascade:
-    algolia:
-        rank: 70
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
 
 ## What is Real User Monitoring?
 
@@ -76,29 +72,6 @@ Select an application type to start collecting RUM data:
 {{< partial name="rum/rum-getting-started.html" >}}
 
 </br>
-
-### Capabilities and platform support
-
-**Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.
-
-The following table shows which RUM capabilities are supported on each platform:
-
-| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | Notes |
-| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
-| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
-| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** supports only manual action tracking. |
-| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for **React Native** |
-| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
-| Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
-| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} |  |  |  |  |  |  |
-| Heatmaps | {{< X >}} |  |  |  |  |  |  |
-| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
 ## Supported endpoints for SDK domains
 
@@ -152,13 +125,13 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**UX Monitoring > Real User Monitoring**][1].
+Access RUM by navigating to [**UX Monitoring > RUM Applications**][1].
 
 ### Out-of-the-box dashboards
 
 Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][2].
 
-{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
 
 ### RUM Explorer and visualizations
 
@@ -202,7 +175,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/performance-monitoring
+[1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/

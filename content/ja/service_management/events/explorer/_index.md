@@ -13,25 +13,25 @@ kind: documentation
 title: イベントエクスプローラー
 ---
 
-{{< img src="service_management/events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
+{{< img src="events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
 
 イベントエクスプローラーには、コードのデプロイ、サービスの状態、コンフィギュレーションの変更、アラートのモニタリングなど、インフラストラクチャーとサービスによって生成された最新のイベントが表示されます。
 
 ## エクスプローラーの操作
 
-{{< img src="service_management/events/explorer/navigate.png" alt="イベントエクスプローラーの操作方法" style="width:100%;" >}}
+{{< img src="events/explorer/navigate.png" alt="イベントエクスプローラーの操作方法" style="width:100%;" >}}
 
 イベントエクスプローラーには、デフォルトですべてのイベントタイプが表示されます。ファセットまたは検索クエリでイベントをフィルタリングできます。
 
 ### イベントのサイドパネル
 
-{{< img src="service_management/events/explorer/side-panel.mp4" alt="イベントエクスプローラーの行をクリックすると、イベントサイドパネルが開きます" style="width:100%;" video=true >}}
+{{< img src="events/explorer/side-panel.mp4" alt="イベントエクスプローラーの行をクリックすると、イベントサイドパネルが開きます" style="width:100%;" video=true >}}
 
 イベントエクスプローラーの行をクリックして、イベントサイドパネルを開きます。このパネルには、イベントに関連付けられたタグとメッセージが表示されます。
 
 ### 属性タブ
 
-{{< img src="service_management/events/explorer/event-attribute.png" alt="Event Attributes タブの例" style="width:100%;" >}}
+{{< img src="events/explorer/event-attribute.png" alt="Event Attributes タブの例" style="width:100%;" >}}
 
 サイドパネルの attributes タブには、イベント属性が JSON として一覧表示されます。属性をクリックして、既存のクエリに追加または除外するか、この属性の列を追加します。
 
@@ -98,7 +98,7 @@ Datadog は、イベント属性を、イベントエクスプローラーのフ
 
 ファセットには、1 つの属性またはタグの個別メンバーが表示されると共に、表示されたイベントの数などの基本的な分析が提供されます。ファセットを使用すると、特定の属性に基づきデータセットの絞り込みや切り口の切り替えができます。絞り込むには、表示する値を選択します。
 
-{{< img src="service_management/events/explorer/facets-location.png" alt="ファセットサイドパネル" style="width:100%;" >}}
+{{< img src="events/explorer/facets-location.png" alt="ファセットサイドパネル" style="width:100%;" >}}
 
 ### ファセットの作成
 
@@ -158,13 +158,13 @@ Datadog は、API によって投稿されたときに、イベントのメッ�
 クエリを使用して、イベント分析に何を表示するかを制御できます。
 
 1. グラフ化する属性またはタグを選択し、ファセットとして追加します。ファセットをグラフ化すると、変数の一意のカウントが表示されます。
-    {{< img src="service_management/events/explorer/facet-to-graph.png" alt="グラフ化できるファセットのリストを表示します。" style="width:100%;" >}}
+    {{< img src="events/explorer/facet-to-graph.png" alt="グラフ化できるファセットのリストを表示します。" style="width:100%;" >}}
 2. ファセットを使用してグラフをグループ化します。ここで使用できるようにするには、ファセットとして属性を追加する必要があります。
-    {{< img src="service_management/events/explorer/split-graph.png" alt="データをグループ化できるファセットのリストを表示します。" style="width:100%;" >}}
+    {{< img src="events/explorer/split-graph.png" alt="データをグループ化できるファセットのリストを表示します。" style="width:100%;" >}}
 3. グラフの時間間隔を選択します。グローバルタイムフレームを変更すると、使用可能なタイムステップ値のリストが変更されます。結果は、時系列、表、またはトップリストとして表示できます。
-    {{< img src="service_management/events/explorer/time-interval.png" alt="デフォルトの 5 秒を含む、可能な時間間隔のリストを表示します。" style="width:100%;" >}}
+    {{< img src="events/explorer/time-interval.png" alt="デフォルトの 5 秒を含む、可能な時間間隔のリストを表示します。" style="width:100%;" >}}
 4. 選択したメジャーに応じて、上位と下位のどちらの値を表示するかを選択します。
-    {{< img src="service_management/events/explorer/display-values.png" alt="値を上から表示するか下から表示するかを選択します。" style="width:100%;" >}}
+    {{< img src="events/explorer/display-values.png" alt="値を上から表示するか下から表示するかを選択します。" style="width:100%;" >}}
 
 ## その他の参考資料
 

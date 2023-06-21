@@ -6,24 +6,21 @@ aliases:
 - /ja/tracing/setup_overview/custom_instrumentation/nodejs
 code_lang: nodejs
 code_lang_weight: 40
-description: Node.js アプリケーションを手動でインスツルメントしてカスタムトレースを Datadog に送信します。
+description: Nodejs アプリケーションを手動でインスツルメントしてカスタムトレースを Datadog に送信します。
 further_reading:
-- link: /tracing/trace_collection/trace_context_propagation/nodejs/
-  tag: ドキュメント
-  text: トレースコンテキストの伝搬
 - link: tracing/other_telemetry/connect_logs_and_traces
   tag: ドキュメント
   text: ログとトレースの接続
 - link: tracing/glossary/
-  tag: Documentation
+  tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: Datadog ライブラリを使った Node.js カスタムインスツルメンテーション
+title: NodeJS カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 
 <div class="alert alert-info">
-自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="/tracing/setup/nodejs/">Node.js セットアップ手順</a>からご覧ください。
+自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/nodejs/">NodeJS セットアップ手順</a>からご覧ください。
 </div>
 
 対応するライブラリインスツルメンテーションを使用しない場合（ [ライブラリの互換性][1]参照）、手動でコードをインスツルメントする必要があります。
@@ -43,7 +40,7 @@ type: multi-code-lang
 const span = tracer.scope().active()
 ```
 
-詳しくは [`Scope` の API 詳細][1]をご覧ください。
+`Scope` の API 詳細は[こちら][1]で確認できます。
 
 タグはスパンで `setTag` または `addTags` メソッドを使用してスパンに追加できます。サポートされている値のタイプは、文字列、数値、オブジェクトです。
 
@@ -66,7 +63,7 @@ span.addTags({
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "グローバル" %}}
 
@@ -84,11 +81,11 @@ tracer.init({
 // すべてのスパンにこれらのタグが追加されます
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "コンポーネント" %}}
 
-一部の Datadog インテグレーションでは、スパンフックをサポートしています。スパンフックを使用すると、スパンが完了する直前に更新できます。これは、タグを変更したり、コードからアクセスできないスパンにタグを追加する場合に役立ちます。
+一部のインテグレーションでは、スパンフックをサポートしています。スパンフックを使用すると、スパンが完了する直前に更新できます。これは、タグを変更したり、コードからアクセスできないスパンにタグを追加する場合に役立ちます。
 
 ```javascript
 // tracer.init() の直後のエントリポイントの上部
@@ -102,11 +99,11 @@ tracer.use('express', {
 })
 ```
 
-詳しくは、[個々のプラグインの API 詳細][1]をご覧ください。
+個々のプラグインの API 詳細は[こちら][1]で確認できます。
 
 
 [1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "エラー" %}}
 
@@ -153,11 +150,11 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-詳しくは [`tracer.trace()` の API 詳細][1]をご覧ください。
+`tracer.trace()` の API 詳細は[こちら][1]で確認できます。
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Promise" %}}
 
@@ -182,11 +179,11 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-詳しくは [`tracer.trace()` の API 詳細][1]をご覧ください。
+`tracer.trace()` の API 詳細は[こちら][1]で確認できます。
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Async/await" %}}
 
@@ -208,15 +205,15 @@ app.get('/make-sandwich', async (req, res) => {
 })
 ```
 
-詳しくは [`tracer.trace()` の API 詳細][1]をご覧ください。
+`tracer.trace()` の API 詳細は[こちら][1]で確認できます。
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "ラッパー" %}}
 
-コードを変更せずに既存の関数をラップすることができます。これは、コードを自分で制御できない関数をトレースするのに役立ちます。これは、最後の引数がコールバックの代わりにラップする関数であることを除いて、 `tracer.trace()` と同じ引数を取る `tracer.wrap()` で実行できます。
+コードを変更せずに既存の関数をラップすることもできます。これは、コードを制御しない関数をトレースするのに役立ちます。これは、最後の引数がコールバックの代わりにラップする関数であることを除いて、 `tracer.trace()` と同じ引数を取る `tracer.wrap()` で実行できます。
 
 ```javascript
 
@@ -237,7 +234,7 @@ app.get('/make-sandwich', (req, res) => {
 })
 ```
 
-詳しくは [`tracer.trace()` の API 詳細][1]をご覧ください。
+`tracer.trace()` の API 詳細は[こちら][1]で確認できます。
 
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
@@ -267,7 +264,7 @@ tracer.use('http', {
 
 さらに、Agent が Datadog に送信しないように、リソース名に基づいてトレースを除外することができます。この他、セキュリティや Agent の細かい設定については、[セキュリティ][3]ページや[不要なリソースの無視][4]で確認することができます。
 
-## その他の参考資料
+## {{< partial name="whats-next/whats-next.html" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

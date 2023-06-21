@@ -418,7 +418,6 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
-- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
@@ -475,4 +474,3 @@ def get_message():
 [3]: /serverless/configuration/
 [4]: /serverless/custom_metrics?tab=python
 [5]: /tracing/custom_instrumentation/python/
-[6]: /security/application_security/enabling/serverless/?tab=serverlessframework
