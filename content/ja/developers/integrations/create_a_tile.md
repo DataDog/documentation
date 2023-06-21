@@ -263,7 +263,7 @@ ddev validate all <INTEGRATION_NAME>
 
 ## レビュープロセス
 
-プルリクエストが全てのチェックを通過すると、`Datadog/agent-integrations`、`Datadog/marketplace-review`、`Datadog/documentation` チームのレビュアーが、ベストプラクティスに関する提案やフィードバックを提供します。
+プルリクエストが全てのチェックを通過すると、`Datadog/agent-integrations`、`Datadog/ecosystems-review`、`Datadog/documentation` チームのレビュアーが、ベストプラクティスに関する提案やフィードバックを提供します。
 
 フィードバックに対応し、レビューを再要求すると、これらのレビュアーがあなたのプルリクエストを承認します。サンドボックスアカウントでタイルをプレビューしたい場合は、マーケットプレイスチームに連絡してください。これにより、タイルがすべての顧客に公開される前に、タイルの検証やプレビューを行うことができます。
 

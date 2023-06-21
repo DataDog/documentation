@@ -15,6 +15,7 @@ cascade:
     {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template variable evaluation{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring ranges{{< /nextlink >}}
     {{< nextlink href="monitors/guide/suppress-alert-with-downtimes" >}}Suppress alerts with downtimes{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}Scoping downtimes schedules{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}Alert on no change in value{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}Create cluster alerts for metric monitor{{< /nextlink >}}
     {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}Create monitor dependencies{{< /nextlink >}}

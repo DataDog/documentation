@@ -20,21 +20,10 @@
             background: white;
             width: 100%;
             top: 89px;
-
-            &:lang(ja) {
-                height: 130px;
-            }
         }
 
         @include media-breakpoint-up(lg) {
             top: 95px;
-
-            &:lang(ja) {
-                height: 150px;
-            }
-        }
-        .nav{
-            height: 50px;
         }
 
         button.filter-btn{

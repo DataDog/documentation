@@ -226,7 +226,7 @@ Follow [these instructions][2] to install and configure the Go tracing library i
 
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[2]: /tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -298,7 +298,6 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
-  --allow-unauthenticated
 
 ```
 

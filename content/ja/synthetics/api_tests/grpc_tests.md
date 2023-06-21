@@ -1,4 +1,12 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - grpc
+  - grpc テスト
+  - grpc テスト
 description: gRPC リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します。
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
@@ -230,7 +238,7 @@ gRPC テストの URL、高度なオプション、アサーションで、[**Se
 
 組織内の役割に基づいて、ブラウザテストへのアクセスを制限することができます。ブラウザテストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access.png" alt="テストの権限の設定" style="width:70%;" >}}
 
 
 ## その他の参考資料

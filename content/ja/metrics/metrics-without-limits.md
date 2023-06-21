@@ -12,6 +12,9 @@ further_reading:
 - link: /observability_pipelines/guide/custom-metrics-governance
   tag: ドキュメント
   text: 観測可能性パイプラインを使用したカスタムメトリクスの管理
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます
 kind: documentation
 title: Metrics without LimitsTM
 ---

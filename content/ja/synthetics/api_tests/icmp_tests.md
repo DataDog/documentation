@@ -1,4 +1,12 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - icmp
+  - icmp テスト
+  - icmp テスト
 aliases:
 - /ja/synthetics/icmp_test
 - /ja/synthetics/icmp_check
@@ -134,7 +142,7 @@ ICMP テストの URL およびアサーションで、[**Settings** ページ�
 `DNS`
 : テスト URL に対応する DNS エントリが見つかりませんでした。テスト URL の構成の誤りまたは DNS エントリの構成の誤りの原因が考えられます。
 
-## アクセス許可
+## 権限
 
 デフォルトでは、[Datadog 管理者および Datadog 標準ロール][9]を持つユーザーのみが、Synthetic ICMP テストを作成、編集、削除できます。Synthetic ICMP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードします。
 
@@ -146,7 +154,7 @@ ICMP テストの URL およびアサーションで、[**Settings** ページ�
 
 組織内の役割に基づいて、ICMP テストへのアクセスを制限することができます。ICMP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access.png" alt="テストの権限の設定" style="width:70%;" >}}
 
 ## その他の参考資料
 

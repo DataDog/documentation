@@ -50,6 +50,7 @@ CWS には、セキュリティ専門家チームによって維持されてい�
 
 {{< whatsnext >}}
   {{< nextlink href="/security/cloud_workload_security/setup">}}セットアップとコンフィギュレーションを完了する{{< /nextlink >}}
+  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}CWS の Datadog ロール権限{{< /nextlink >}}
   {{< nextlink href="/security/cloud_workload_security/workload_security_rules">}}クラウドワークロードセキュリティ検出ルールについて学ぶ{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-workload-security">}}すぐに使えるクラウドワークロードセキュリティ検出ルールの利用を開始する{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Cloud Security Management の概要{{< /nextlink >}}
