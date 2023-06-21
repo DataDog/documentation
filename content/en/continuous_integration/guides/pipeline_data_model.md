@@ -83,8 +83,6 @@ If a pipeline is triggered manually, the `is_manual` field must be set to true.
 
 Payloads must contain Git information as specified in the public API endpoint [specification][3], if it can be retrieved.
 
-Sometimes Git information is not accessible, for example, when the CI provider cannot access the Git information on manually triggered pipelines. In these cases the `user` field can be populated instead with the user name and email.
-
 [1]: /tracing/glossary/#trace
 [2]: /continuous_integration/pipelines/#setup
 [3]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
