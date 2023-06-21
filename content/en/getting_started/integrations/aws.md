@@ -204,7 +204,7 @@ Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the o
 Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box Posture Management [Cloud][55] and [Infrastructure][56] Detection Rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
-If you encounter any issues, be sure to check out the [Troubleshooting][57] section.
+If you encounter any issues, see the [AWS integration troubleshooting guide][57].
 
 ## Further Reading
 
@@ -266,7 +266,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [54]: /security/cspm/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
-[57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
+[57]: /integrations/guide/aws-integration-troubleshooting/
 [58]: https://app.datadoghq.com/organization-settings/api-keys
 [59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
 [60]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
