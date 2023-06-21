@@ -1,5 +1,5 @@
 ---
-title: Configure the Datadog Agent on Kubernetes
+title: Further Configure the Datadog Agent on Kubernetes
 kind: documentation
 aliases:
     - /integrations/faq/gathering-kubernetes-events
@@ -11,18 +11,79 @@ aliases:
 
 After you have installed the Datadog Agent in your Kubernetes environment, you may choose additional configuration options.
 
-## Live Containers
+This page contains instructions for the following:
 
-The [Datadog Agent][1] and [Cluster Agent][2] can be configured to retrieve Kubernetes resources for [Live Containers][3]. This feature allows you to monitor the state of pods, deployments and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more.
+- Configure DogStatsD
+- Enable APM
+- Enable log collection
+- Enable process collection
+- Enable NPM
+- Enable event collection
 
-See the [Live Containers][4] documentation for configuration instructions and additional information.
+## Containers view
+
+To make use of Datadog's [Container Explorer][3], enable the Process Agent. 
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+The Datadog Operator enables the Process Agent by default. 
+
+For verification, ensure that `features.liveContainerCollection.enabled` is set to `true` in your `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+  features:
+    liveContainerCollection:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+If you are using the [official Helm chart][1], enable the `processAgent.enabled` parameter in your [`values.yaml`][2] file:
+
+```yaml
+datadog:
+  # (...)
+  processAgent:
+    enabled: true
+```
+
+Then, upgrade your Helm chart.
+
+In some setups, the Process Agent and Cluster Agent cannot automatically detect a Kubernetes cluster name. If this happens, the feature does not start, and the following warning displays in the Cluster Agent log: `Orchestrator explorer enabled but no cluster name set: disabling.` In this case, you must set `datadog.clusterName` to your cluster name in `values.yaml`.
+
+```yaml
+datadog:
+  #(...)
+  clusterName: <YOUR_CLUSTER_NAME>
+  #(...)
+  processAgent:
+    enabled: true
+```
+
+[1]: https://github.com/DataDog/helm-charts
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{< /tabs >}}
+
+See the [Containers view][15] documentation for additional information.
 
 ## Event collection
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
-Event collection is enabled by default by the Datadog Operator. This can be managed by the configuration `features.eventCollection.collectKubernetesEvents` in your `DatadogAgent` configuration.
+Event collection is enabled by default by the Datadog Operator. This can be managed in the configuration `features.eventCollection.collectKubernetesEvents` in your `datadog-agent.yaml`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -40,13 +101,14 @@ spec:
       collectKubernetesEvents: true
 ```
 
-The Cluster Agent collects and reports the Kubernetes events.
+The [Cluster Agent][1] collects and reports the Kubernetes events.
 
+[1]: /containers/cluster_agent
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-If you want Kubernetes events to be collected by the Datadog Cluster Agent, ensure that the `clusterAgent.enabled`, `datadog.collectEvents` and `clusterAgent.rbac.create` options are set to true in your `values.yaml` file.
+To collect Kubernetes events with the Datadog Cluster Agent, ensure that the `clusterAgent.enabled`, `datadog.collectEvents` and `clusterAgent.rbac.create` options are set to `true` in your `values.yaml` file.
 
 ```yaml
 datadog:
@@ -57,7 +119,7 @@ clusterAgent:
     create: true
 ```
 
-If you don't want to use the Cluster Agent, you can still have a Node Agent collect Kubernetes events by setting `datadog.leaderElection`, `datadog.collectEvents` and `agents.rbac.create` options to true in your `values.yaml` file.
+If you don't want to use the Cluster Agent, you can still have a Node Agent collect Kubernetes events by setting `datadog.leaderElection`, `datadog.collectEvents`, and `agents.rbac.create` options to `true` in your `values.yaml` file.
 
 ```yaml
 datadog:
@@ -67,6 +129,8 @@ agents:
   rbac:
     create: true
 ```
+
+[1]: /containers/cluster_agent
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -194,3 +258,4 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 [12]: /agent/guide/secrets-management/
 [13]: /agent/guide/autodiscovery-management/
 [14]: /containers/guide/kubernetes_daemonset#cluster-agent-event-collection
+[15]: https://docs.datadoghq.com/infrastructure/containers/?tab=datadogoperator
