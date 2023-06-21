@@ -12,23 +12,25 @@ further_reading:
 
 ## Overview
 
-Understanding how customers interact with your web pages is crucial to the success of your online store. This guide will walk through how you can set up Real User Monitoring on your Squarespace-powered store.
+Understanding how customers interact with your web pages is crucial to the success of your online store.
+
+This guide walks through how you can set up Real User Monitoring on your Squarespace-powered store.
 
 ## Setup
 
-1. Log in your Squarespace administration panel and click on **Settings**.
+1. Log into your Squarespace administration panel and click **Settings**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Enable RUM on your Squarespace store" style="width:40%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-1.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
 
-2. Under **Settings**, click on **Advanced**.
+2. Under **Settings**, click **Advanced**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Enable RUM on your Squarespace store" style="width:40%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-2.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
 
-3. This will open up a new menu, click on **Code Injection**.
+3. In the open menu, click **Code Injection**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Enable RUM on your Squarespace store" style="width:40%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-3.png" alt="Enable RUM on your Squarespace store" style="width:30%;">}}
 
-4. Initialise the Browser RUM SDK by adding the SDK code snippet inside the **Header** section. For more information about which installation method to choose, you can refer to the [RUM Browser Monitoring documentation][1].
+4. Initialize the Browser RUM SDK by adding the SDK code snippet inside the **Header** section. See more information about which installation method to choose in the [RUM Browser Monitoring documentation][1].
 
 {{< tabs >}}
 {{% tab "CDN async" %}}
@@ -339,15 +341,23 @@ Understanding how customers interact with your web pages is crucial to the succe
   
    {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-4.png" alt="Enable RUM on your Squarespace store" >}}
 
-5. Save the changes by clicking on the **Save** button.
+5. Click the **Save** button to save your changes.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Enable RUM on your Squaresapce store" style="width:60%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-squarespace-store/enable-rum-squarespace-5.png" alt="Enable RUM on your Squarespace store" style="width:50%;">}}
 
-If needed, more information regarding code injection can be found in [Squarespace's documentation][2].
+See more information regarding code injection in [Squarespace's documentation][2].
 
 ## Start exploring
 
-You can now start using Real User Monitoring with your Squarespace store. Get valuable insights about your customers behavior, make data-driven decisions to improve your store, and increase conversion by watching browser recordings enriched sessions with [Session Replay][3], building [funnel analysis][4] to better understand customer journey, or [generating metrics][5] from those newly captured sessions.
+Once you've initialized the RUM Browser SDK, you can start using Real User Monitoring with your Squarespace store.
+
+For example, you can:
+
+- Get valuable insights about your customers' behavior by
+making data-driven decisions to improve your store
+- Increase conversion by watching browser recordings enriched sessions with [Session Replay][3]
+- Use [funnel analysis][4] to better understand the customer journey, or 
+- [Generate metrics][5] from those newly captured sessions
 
 ## Further Reading
 

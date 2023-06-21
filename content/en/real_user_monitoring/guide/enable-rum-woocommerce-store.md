@@ -12,28 +12,32 @@ further_reading:
 
 ## Overview
 
-Understanding how customers interact with your web pages is crucial to the success of your online store. This guide will walk through how you can set up Real User Monitoring on your WordPress + WooCommerce-powered store.
+Understanding how customers interact with your web pages is crucial to the success of your online store.
+
+
+
+This guide walks through how you can set up Real User Monitoring on your WordPress + WooCommerce-powered store.
 
 ## Setup
 
-1. Log in your WordPress administration panel.
+1. Log into your WordPress administration panel.
 2. Under **Plugins**, click on **Add New**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-1.png" alt="Enable RUM on your WooCommerce store" style="width:40%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-1.png" alt="Enable RUM on your WooCommerce store" style="width:30%;">}}
 
-3. Search for **WPCode** and click on **Install Now**.
+3. Search for **WPCode** and click **Install Now**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-2.png" alt="Enable RUM on your WooCommerce store" style="width:60%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-2.png" alt="Enable RUM on your WooCommerce store" style="width:50%;">}}
 
 4. Once installed, click on **Activate**.
 
    {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-3.png" alt="Enable RUM on your WooCommerce store" style="width:50%;">}}
 
-5. You will now see a **Code Snippets** section in your WordPress menu, click on **Header & Footer**.
+5. Find the newly added **Code Snippets** section in your WordPress menu, and click **Header & Footer**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-4.png" alt="Enable RUM on your WooCommerce store" style="width:25%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-woocommerce-store/enable-rum-woocommerce-4.png" alt="Enable RUM on your WooCommerce store" style="width:30%;">}}
 
-6. Initialise the Browser RUM SDK by adding the SDK code snippet inside the **Header** section and save the changes by clicking on the **Save** button. For more information about which installation method to choose, you can refer to the [RUM Browser Monitoring documentation][1].
+6. Initialize the Browser RUM SDK by adding the SDK code snippet inside the **Header** section and save the changes by clicking the **Save** button. For more information about which installation method to choose, see the [RUM Browser Monitoring documentation][1].
 
 {{< tabs >}}
 {{% tab "CDN async" %}}
@@ -346,7 +350,15 @@ Understanding how customers interact with your web pages is crucial to the succe
 
 ## Start exploring
 
-You can now start using Real User Monitoring with your WooCommerce store. Get valuable insights about your customers behavior, make data-driven decisions to improve your store, and increase conversion by watching browser recordings enriched sessions with [Session Replay][2], building [funnel analysis][3] to better understand customer journey, or [generating metrics][4] from those newly captured sessions.
+Once you've initialized the Browser RUM SDK, you can start using Real User Monitoring with your WooCommerce store.
+
+For example, you can:
+
+- Get valuable insights about your customers' behavior by
+making data-driven decisions to improve your store
+- Increase conversion by watching browser recordings enriched sessions with [Session Replay][2]
+- Use [funnel analysis][3] to better understand the customer journey, or 
+- [Generate metrics][4] from those newly captured sessions
 
 ## Further Reading
 

@@ -19,23 +19,23 @@ This guide walks through how you can set up Real User Monitoring on your Shopify
 ## Setup
 
 1. Log into your Shopify administration panel.
-2. Under **Sales channels**, click on **Online Store**.
+2. Under **Sales channels**, click **Online Store**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Enable RUM on your Shopify store" style="width:40%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-1.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-3. This will open up a new menu, click on **Themes**.
+3. This opens up a new menu, click on **Themes**.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-2.png" alt="Enable RUM on your Shopify store" style="width:40%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-2.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-4. Click on the **Edit code** button for your current theme.
+4. Click the **Edit code** button for your current theme.
 
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-3.png" alt="Enable RUM on your Shopify store" >}}
 
-5. Under the **Layout** directory, you will find the main file of your theme **theme.liquid**. Click on the file in order to edit it. 
+5. Under the **Layout** directory, find the main file of your theme **theme.liquid**. Click the file to edit it. 
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-4.png" alt="Enable RUM on your Shopify store" style="width:40%;">}}
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-4.png" alt="Enable RUM on your Shopify store" style="width:30%;">}}
 
-6. Initialise the Browser RUM SDK by adding the SDK code snippet inside the `<head>` tag. For more information about which installation method to choose, you can refer to the [RUM Browser Monitoring documentation][1].
+6. Initialize the Browser RUM SDK by adding the SDK code snippet inside the `<head>` tag. For more information about which installation method to choose, see the [RUM Browser Monitoring documentation][1].
 
 {{< tabs >}}
 {{% tab "CDN async" %}}
@@ -346,15 +346,25 @@ This guide walks through how you can set up Real User Monitoring on your Shopify
   
    {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-5.png" alt="Enable RUM on your Shopify store" >}}
 
-7. Save the changes by clicking on the **Save** button.
+7. Click the **Save** button to save your changes.
 
-   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-6.png" alt="Enable RUM on your Shopify store" style="width:75%;">}}
+The updated looks like the following in the Shopify UI:
 
-If needed, more information regarding theme code's editing can be found in [Shopify's documentation][2].
+   {{< img src="real_user_monitoring/guide/enable-rum-shopify-store/enable-rum-shopify-6.png" alt="Enable RUM on your Shopify store" style="width:50%;">}}
+
+See more information regarding theme code's editing in [Shopify's documentation][2].
 
 ## Start exploring
 
-You can now start using Real User Monitoring with your Shopify store. Get valuable insights about your customers behavior, make data-driven decisions to improve your store, and increase conversion by watching browser recordings enriched sessions with [Session Replay][3], building [funnel analysis][4] to better understand customer journey, or [generating metrics][5] from those newly captured sessions.
+Once you've initialized the Browser RUM SDK, you can start using Real User Monitoring with your Shopify store.
+
+For example, you can:
+
+- Get valuable insights about your customers' behavior by
+making data-driven decisions to improve your store
+- Increase conversion by watching browser recordings enriched sessions with [Session Replay][3]
+- Use [funnel analysis][4] to better understand the customer journey, or 
+- [Generate metrics][5] from those newly captured sessions
 
 ## Further Reading
 
