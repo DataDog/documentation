@@ -290,7 +290,7 @@ Rules to enforce Python code style
 
 <br>
 
-### Check Python program structure (e.g. nested loops, etc.)
+### Check Python program structure (such as nested loops and more)
 
 **Ruleset ID:** `python-design`
 
@@ -320,7 +320,7 @@ Rules made specifically for Flask best practices and security
 
 <br>
 
-### Check your Python code for wording issues
+### Check Python code for wording issues
 
 **Ruleset ID:** `python-inclusive`
 
