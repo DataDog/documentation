@@ -63,7 +63,7 @@ rulesets:
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
 {{< tabs >}}
-{{% tab "CircleCI Orb" %}}
+{{% tab "CircleCI Orbs" %}}
 
 To run Static Analysis with CircleCI, [follow these instructions for setting up a CircleCI Orb][101].
 
@@ -84,7 +84,7 @@ If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI di
 Prerequisites:
 
 - UnZip
-- Node.js
+- Node.js 14 or later
 - Java 17 or later
 
 Configure the following environment variables:
