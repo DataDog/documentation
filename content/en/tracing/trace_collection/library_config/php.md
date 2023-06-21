@@ -208,7 +208,7 @@ Automatically flush the tracer when all the spans are closed; set to `1` in conj
 `DD_TRACE_APPEND_TRACE_IDS_TO_LOGS`
 : **INI**: `datadog.trace.append_trace_ids_to_logs`<br>
 **Default**: `0`<br>
-Append the logs correlation identifiers to logged messages. Use with caution as the message is modified. See [logs correlation documentation][16] for more information on its usage. Added in version `0.88.0`.
+Append the logs correlation identifiers to logged messages. Use with caution because this modifies the message. See [logs correlation documentation][16] for more information on its usage. Added in version `0.88.0`.
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
