@@ -16,7 +16,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  The Datadog plugin for IntelliJ IDEA is in public beta. It is intended for Java developers who use Datadog products, including the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>, for their Java services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
+  The Datadog plugin for IntelliJ IDEA is in public beta. It is intended for Java developers who use Datadog products, such as the <a href="https://docs.datadoghq.com/logs/explorer/">Log Explorer</a> and the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>, for their Java services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
 {{< /callout >}}
 
 ## Overview
