@@ -39,7 +39,7 @@ To report test results to Datadog, you need to configure the Datadog Python libr
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
+Install the [Datadog Agent][1] on each worker if you are running tests on an on-premises CI provider (eg Jenkins or self-managed GitLab CI). This is the recommended option as test results are then automatically linked to the underlying host metrics.
 
 If the CI provider is using a container-based executor, set the `DD_AGENT_HOST` environment variable on all builds (which defaults to `http://localhost:8126`) to an endpoint that is accessible from within build containers, as using `localhost` inside the build references the container itself and not the underlying worker node where the Datadog Agent is running.
 
