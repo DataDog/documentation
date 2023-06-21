@@ -38,7 +38,7 @@ Datadog Continuous Integration (CI) Visibility unifies information about CI test
 
 CI Visibility brings CI metrics and data into Datadog dashboards so you can communicate the health of your CI environment and focus your efforts in improving your team's ability to deliver quality code every time.
 
-CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. Using the same libraries you are using to trace application performance with [APM][5], you can instrument your tests amd generate traces from your testing frameworks as they execute in CI. 
+CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. Using the same libraries you are using to trace application performance with [APM][5], you can instrument your tests and generate traces from your testing frameworks as they execute in CI. 
 
 Similarly, Datadog integrates with CI providers to gather pipeline metrics which track the performance and results from the moment a commit enters the pipeline until it is ready to be deployed. Use the data aggregated over time to track trends in the performance of tests and builds and identify what is most important to fix.
 
@@ -50,7 +50,7 @@ The [Pipelines page][3] is useful for developers who keep an eye on the build pi
 
 {{< img src="/continuous_integration/pipelines.png" text="CI Pipelines page" style="width:100%" >}}
 
-For build engineers, the [Pipeline Executions page][3] provides answers to the following questions:
+For build engineers, the [Pipeline Executions page][3] provides:
 
 - An overview of the health of the whole build system, with aggregated stats for pipeline runs and branches.
 - A window to quickly spotting and fixing immediate, urgent issues like broken pipelines to production.
@@ -63,7 +63,7 @@ CI pipeline data is available in [Dashboards][1] and [Notebooks][2], enabling bu
 
 ## Gain insights into your tests
 
-The [Tests and Test Runs pages][4] are useful for developers who keep an eye on their test results. It answers questions on two levels:
+The [Tests and Test Runs pages][4] are useful for developers who keep an eye on their test results. It provides insight on two levels:
 
 - Low-level and immediate insights:
     - See what tests are failing and why.
