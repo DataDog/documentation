@@ -2809,6 +2809,11 @@ main:
     parent: csm
     identifier: csm_identities
     weight: 10
+  - name: Remediate Identity Risks
+    url: security/identities/remediate_identity_risks/
+    parent: csm_identities
+    identifier: csm_identities_remediation
+    weight: 301
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
