@@ -44,9 +44,9 @@ The minimum tracer version to get all supported ASM capabilities for .NET is 2.2
 
 
 These are supported on the following architectures:
-- Linux (GNU) x86, x86-64
-- Alpine Linux (musl) x86, x86-64
-- macOS (Darwin) x86, x86-64
+- Linux (GNU) x86-64, ARM64
+- Alpine Linux (musl) x86-64, ARM64
+- macOS (Darwin) x86-64, ARM64
 - Windows (msvc) x86, x86-64
 
 
