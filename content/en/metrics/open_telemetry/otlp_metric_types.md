@@ -144,7 +144,7 @@ OpenTelemetry defines certain semantic conventions related to host names. If an 
 1. `host.id`, the unique host ID
 1. `host.name`, the system hostname
 
-The following host names are deemed invalid and will be discarded:
+The following host names are deemed invalid and discarded:
 1. `0.0.0.0`
 1. `127.0.0.1`
 1. `localhost`
