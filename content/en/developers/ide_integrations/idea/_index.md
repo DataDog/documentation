@@ -168,7 +168,7 @@ The Datadog plugin will open the **Log Explorer** with a query that matches the 
 
 ## View In IntelliJ IDEA
 
-The **View in IntelliJ** feature provides a link from the Datadog platform directly to your source files.  Look out for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IntelliJ** feature provides a link from the Datadog platform directly to your source files. Look out for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
 
 {{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
@@ -176,7 +176,7 @@ The **View in IntelliJ** feature provides a link from the Datadog platform direc
 
 ## Feedback
 
-Let us know what you think about the plugin! Provide feedback on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
+You can give feedback in the [discussion forum][1], or send an e-mail to [team-ide-integration@datadoghq.com][11].
 
 ## Further reading
 
@@ -198,3 +198,4 @@ Let us know what you think about the plugin! Provide feedback on our [discussion
 [8]: /security/application_security/vulnerability_management/
 [9]: /continuous_integration/guides/flaky_test_management/
 [10]: /watchdog/insights
+[11]: mailto:team-ide-integration@datadoghq.com
