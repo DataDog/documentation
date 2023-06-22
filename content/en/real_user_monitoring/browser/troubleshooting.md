@@ -106,7 +106,7 @@ If an event or a request goes beyond any of the following limitations, it is rej
 
 The RUM browser SDK allows you to set [global context](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context), [user information](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session) and [feature flags](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser) which are then included with the collected events.
 
-To prevent impacting the user bandwidth the RUM browser SDK throttles the data sent to the Datadog intake. However, to be able to handle heavy RUM traffic it does not cover lower connectivity (<4g). If a large volume of data is sent on a low-connectivity network, it can slow down the requests made by the host application.
+To prevent using the full user bandwidth, the RUM browser SDK throttles the data sent to the Datadog intake. Although the RUM browser SDK ensures that the maximum bandwidth usage is below the limits of 4G and higher connectivity, it may still exhaust the bandwidth on lower connectivity. This decision was made to have enough bandwidth for effectively handling heavy RUM traffic. Consequently, if a large volume of data is sent on a low-connectivity network, it can slow down the requests made by the host application.
 
 We recommend keeping the size of the global context, the user information, and the feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data is over 3KiB. On low connectivity, the SDK has the potential to exhaust the user's upload bandwidth.`
 
