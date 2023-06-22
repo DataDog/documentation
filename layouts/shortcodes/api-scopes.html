@@ -44,6 +44,9 @@ For each scope find the common tags and group them together
   {{ $intersect := len (intersect $tagGroups $scope_obj.tags) }}
   {{ if or (and (eq $intersect 0) (ne $counter 0)) (eq $counter (sub $total 1)) }}
     {{ if $tagGroups}}
+      {{ if (eq $counter (sub $total 1)) }}
+        {{ $scopeGroups = ($scopeGroups | append $scope) | uniq }}
+      {{ end }}
       {{ $tagStr := (print (delimit $tagGroups ", ")) }}
       {{ $s.SetInMap "tags" $tagStr $scopeGroups }}
     {{ end }}
