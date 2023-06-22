@@ -1,7 +1,7 @@
 ---
 title: Datadog Extension for Visual Studio
 kind: documentation
-disable_toc: false
+description: The Datadog extension for .NET developers
 is_beta: true
 further_reading:
 - link: "/getting_started/profiler/"
