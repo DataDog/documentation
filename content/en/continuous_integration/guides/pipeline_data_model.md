@@ -12,11 +12,6 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-
-## Git information
-
-All payloads must contain Git information of the commit that triggered the pipeline execution. As specified in the [public API endpoint specification][3], you need to provide the repository URL, commit SHA and author email.
-
 ## Overview
 
 This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports.
@@ -99,6 +94,10 @@ If a pipeline is triggered as a child of another pipeline, the `parent_pipeline`
 ### Manual pipelines
 
 If a pipeline is triggered manually, the `is_manual` field must be set to true.
+
+## Git information
+
+All payloads must contain Git information of the commit that triggered the pipeline execution. As specified in the [public API endpoint specification][3], you need to provide the repository URL, commit SHA and author email.
 
 ## Further reading
 
