@@ -734,7 +734,8 @@ SERVICE=<service>
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network driver component enabled. During installation, pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select **Network Performance Monitoring** when running the Agent installation through the UI.
+1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.  
+   [DEPRECATED] _(version 7.44 or previous)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 

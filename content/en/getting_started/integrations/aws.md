@@ -107,7 +107,7 @@ Before getting started, ensure you have the following prerequisites:
 
 3. Configure the integration's settings under the **Automatically using CloudFormation** option.  
     a. Select the AWS regions to integrate with.  
-    b. Add your Datadog [API key][58].  
+    b. Add your Datadog [API key][9].  
     c. Optionally, send logs and other data to Datadog with the [Datadog Forwarder Lambda][1].  
     d. Optionally, enable [Cloud Security Posture Management][54] (CSPM) to scan your cloud environment, hosts, and containers for misconfigurations and security risks.
 
@@ -129,8 +129,8 @@ See the [Integrations page][13] for a full listing of the available sub-integrat
 
 There are two ways of sending AWS service logs to Datadog:
 
-- [Kinesis Firehose destination][63]: Use the Datadog destination in your Kinesis Firehose delivery stream to forward logs to Datadog. It is recommended to use this approach when sending logs from CloudWatch in a very high volume.
-- [Forwarder Lambda function][64]: Deploy the Datadog Forwarder Lambda function, which subscribes to S3 buckets or your CloudWatch log groups and forwards logs to Datadog. You **must** use this approach to send traces, enhanced metrics, or custom metrics from Lambda functions asynchronously through logs. Datadog also recommends you use this approach to sending logs from S3 or other resources that cannot directly stream data to Kinesis.
+- [Kinesis Firehose destination][10]: Use the Datadog destination in your Kinesis Firehose delivery stream to forward logs to Datadog. It is recommended to use this approach when sending logs from CloudWatch in a very high volume.
+- [Forwarder Lambda function][11]: Deploy the Datadog Forwarder Lambda function, which subscribes to S3 buckets or your CloudWatch log groups and forwards logs to Datadog. You **must** use this approach to send traces, enhanced metrics, or custom metrics from Lambda functions asynchronously through logs. Datadog also recommends you use this approach to sending logs from S3 or other resources that cannot directly stream data to Kinesis.
 
 Read the [Enable logging for your AWS service][14] section to get logs flowing for the most-used AWS services.
 
@@ -204,23 +204,24 @@ Review [Getting Started with Cloud SIEM][50] to evaluate your logs against the o
 Use the [Getting Started with CSPM][54] guide to learn about detecting and assessing misconfigurations in your cloud environment. Resource configuration data is evaluated against the out-of-the-box Posture Management [Cloud][55] and [Infrastructure][56] Detection Rules to flag attacker techniques and potential misconfigurations, allowing for fast response and remediation.
 
 ### Troubleshooting
-If you encounter any issues, be sure to check out the [Troubleshooting][57] section.
+
+If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`, see its dedicated [troubleshooting page][2]. For any other issues, see the [AWS integration troubleshooting guide][57].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/guide/forwarder/
-[2]: https://aws.amazon.com/cloudtrail/
+[2]: /integrations/guide/error-datadog-not-authorized-sts-assume-role/
 [3]: /api/latest/aws-integration/#create-an-aws-integration
 [4]: https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/index.html
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [6]: /integrations/guide/amazon_cloudformation/
 [7]: https://aws.amazon.com/getting-started/?nc1=f_cc
 [8]: https://app.datadoghq.com/integrations/amazon-web-services
-[9]: /integrations/amazon_ec2/#ec2-automuting
-[10]: /integrations/amazon_web_services/?tab=roledelegation#alarm-collection
-[11]: /events/explorer
+[9]: https://app.datadoghq.com/organization-settings/api-keys
+[10]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
+[11]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [12]: https://app.datadoghq.com/dash/integration/7/aws-overview
 [13]: /integrations/#cat-aws
 [14]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#enable-logging-for-your-aws-service
@@ -266,11 +267,7 @@ If you encounter any issues, be sure to check out the [Troubleshooting][57] sect
 [54]: /security/cspm/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud
 [56]: /security/default_rules/#cat-posture-management-infra
-[57]: /integrations/amazon_web_services/?tab=roledelegation#troubleshooting
-[58]: https://app.datadoghq.com/organization-settings/api-keys
-[59]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/??tab=cloudformation
-[60]: /logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
-[61]: /integrations/amazon_xray/
-[62]: /getting_started/tagging/using_tags?tab=aws#integrations
-[63]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/
-[64]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[57]: /integrations/guide/aws-integration-troubleshooting/
+
+
+

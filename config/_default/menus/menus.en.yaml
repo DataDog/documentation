@@ -2606,11 +2606,6 @@ main:
     parent: observability_pipelines_production_deployment_overview
     identifier: observability_pipelines_architecture_design_and_principles
     weight: 201
-  - name: Aggregator Architecture
-    url: observability_pipelines/production_deployment_overview/aggregator_architecture/
-    parent: observability_pipelines_production_deployment_overview
-    identifier: observability_pipelines_aggregator_architecture
-    weight: 202
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
@@ -2646,6 +2641,41 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_guides
     weight: 6
+  - name: Architecture
+    url: observability_pipelines/architecture/
+    parent: observability_pipelines
+    identifier: observability_pipelines_architecture
+    weight: 8
+  - name: Optimizing the Instance
+    url: observability_pipelines/architecture/optimize
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_optimize
+    weight: 100
+  - name: Capacity Planning and Scaling
+    url: observability_pipelines/architecture/capacity_planning_scaling
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_capacity_planning_scaling
+    weight: 105
+  - name: Networking
+    url: observability_pipelines/architecture/networking
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_networking
+    weight: 110
+  - name: Preventing Data Loss
+    url: observability_pipelines/architecture/preventing_data_loss
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_preventing_data_loss
+    weight: 115
+  - name: High Availability and Disaster Recovery
+    url: observability_pipelines/architecture/availability_disaster_recovery
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_availability_disaster_recovery
+    weight: 120
+  - name: Advanced Configurations
+    url: observability_pipelines/architecture/advanced_configurations
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_advanced_configurations
+    weight: 125
   - name: Security Overview
     url: security/
     pre: security-platform
@@ -3964,7 +3994,12 @@ main:
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
+    identifier: account_management_plan_and_usage
     weight: 8
+  - name: Usage Details
+    url: account_management/plan_and_usage/usage_details/
+    parent: account_management_plan_and_usage
+    weight: 801
   - name: Billing
     url: account_management/billing/
     parent: account_management

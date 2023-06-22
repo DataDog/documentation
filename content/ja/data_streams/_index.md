@@ -1,4 +1,7 @@
 ---
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /integrations/kafka/
   tag: ドキュメント
@@ -38,8 +41,9 @@ Data Streams Monitoring は、大規模なパイプラインを理解し管理�
 | ランタイム | 対応テクノロジー |
 |---|----|
 | Java | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC |
-| Go | 全て ([手動インスツルメンテーション][1]で) |
 | .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ |
+| Python | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform) |
+| Go | 全て ([手動インスツルメンテーション][1]で) |
 
 
 ## Data Streams Monitoring の調査

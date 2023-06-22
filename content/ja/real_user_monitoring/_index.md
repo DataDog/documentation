@@ -5,6 +5,10 @@ algolia:
   - リアルユーザーモニタリング
 aliases:
 - /ja/real_user_monitoring/installation
+- /ja/real_user_monitoring/faq/
+cascade:
+  algolia:
+    rank: 70
 description: ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化、観察、分析します。
 disable_sidebar: true
 further_reading:
@@ -48,7 +52,7 @@ kind: documentation
 title: RUM & セッションリプレイ
 ---
 
-{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM ダッシュボード" >}}
 
 ## リアルユーザーモニタリングとは？
 
@@ -127,13 +131,13 @@ Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以�
 
 ## Datadog RUM を探索する
 
-[**UX Monitoring > RUM Applications**][1] に移動して、RUM にアクセスします。
+[**UX Monitoring > Real User Monitoring**][1] に移動して、RUM にアクセスします。
 
 ### すぐに使えるダッシュボード
 
 [すぐに使える RUM ダッシュボード][2]で自動的に収集されたユーザーセッション、パフォーマンス、モバイルアプリケーション、フラストレーションシグナル、ネットワークリソース、エラーに関する情報を分析することができます。
 
-{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM ダッシュボード" >}}
 
 ### RUM エクスプローラーと視覚化
 
@@ -177,7 +181,7 @@ Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/list
+[1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /ja/real_user_monitoring/dashboards/
 [3]: /ja/real_user_monitoring/explorer/visualize/
 [4]: /ja/monitors/types/real_user_monitoring/

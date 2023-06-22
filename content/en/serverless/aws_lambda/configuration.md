@@ -61,6 +61,9 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
+### Security
+- [Enable Threat Detection to observe attack attempts](#enable-threat-detection-to-observe-attack-attempts)
+
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
@@ -88,6 +91,39 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
+
+## Enable Threat Detection to observe attack attempts
+
+Get alerted on attackers targeting your serverless applications and respond quickly. 
+
+To get started, first ensure that you have [tracing enabled][43] for your functions.
+
+To enable threat monitoring, add the following environment variables depending on the language:
+   ```yaml
+   environment:
+     DD_SERVERLESS_APPSEC_ENABLED: true
+   ```
+   For **Go functions only** also add:
+   ```yaml
+   environment:
+     DD_UNIVERSAL_INSTRUMENTATION: true
+   ```
+   For **NodeJS or Python functions** also add:
+   ```yaml
+   environment:
+     DD_EXPERIMENTAL_ENABLE_PROXY: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+   ```
+
+Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+
+[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+   ```sh
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   ```
+A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
 ## Connect telemetry using tags
 
@@ -185,7 +221,7 @@ Datadog can also enrich the collected telemetry with existing AWS resource tags 
 
 ## Collect the request and response payloads
 
-<div class="alert alert-info">This feature is supported for Python, Node.js, Go, and .NET.</div>
+<div class="alert alert-info">This feature is supported for Python, Node.js, Go, Java, and .NET.</div>
 
 Datadog can [collect and visualize the JSON request and response payloads of AWS Lambda functions][5], giving you deeper insight into your serverless applications and helping troubleshoot Lambda function failures.
 
@@ -645,7 +681,7 @@ You can monitor your custom business logic by [submitting custom metrics][27].
          NODE_OPTIONS: --require instrument
    ```
 
-4. Enable OTel using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
+4. Enable OpenTelemetry using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
 
    ```yaml
    # serverless.yml
@@ -842,7 +878,6 @@ If you have trouble configuring your installations, set the environment variable
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-
 [1]: /serverless/installation/
 [2]: /serverless/libraries_integrations/extension/
 [3]: /integrations/amazon_web_services/
@@ -883,4 +918,7 @@ If you have trouble configuring your installations, set the environment variable
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
 [40]: /serverless/libraries_integrations/extension/
+[41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 [42]: /profiler/
+[43]: /serverless/installation#installation-instructions
+[44]: /security/default_rules/security-scan-detected/

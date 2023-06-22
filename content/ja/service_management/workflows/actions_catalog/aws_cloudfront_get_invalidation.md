@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_cloudfront_get_invalidation
 bundle: com.datadoghq.aws.cloudfront
 bundle_title: AWS CloudFront
 description: 無効化に関する情報を取得します。
