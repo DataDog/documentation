@@ -1561,7 +1561,7 @@ components:
         sha:
           description: The git commit SHA.
           example: da39a3ee5e6b4b0d3255bfef95601890afd80709
-          pattern: ^[a-fA-f0-9]{40}$
+          pattern: ^[a-fA-F0-9]{40}$
           type: string
         tag:
           description: The tag name (if a branch use the branch parameter).
@@ -1746,8 +1746,6 @@ components:
           description: The URL to look at the job in the CI provider UI.
           example: https://ci-platform.com/job/your-job-name/build/123
           type: string
-        user:
-          $ref: '#/components/schemas/CIAppUserInfo'
       required:
       - level
       - id
@@ -1758,6 +1756,7 @@ components:
       - end
       - status
       - url
+      - git
       type: object
     CIAppPipelineEventJobLevel:
       default: job
@@ -1901,8 +1900,6 @@ components:
           description: The URL to look at the pipeline in the CI provider UI.
           example: https://my-ci-provider.example/pipelines/my-pipeline/run/1
           type: string
-        user:
-          $ref: '#/components/schemas/CIAppUserInfo'
       required:
       - level
       - unique_id
@@ -1912,6 +1909,7 @@ components:
       - end
       - status
       - partial_retry
+      - git
       type: object
     CIAppPipelineEventPipelineLevel:
       default: pipeline
@@ -2018,8 +2016,6 @@ components:
           $ref: '#/components/schemas/CIAppPipelineEventStageStatus'
         tags:
           $ref: '#/components/schemas/CIAppPipelineEventTags'
-        user:
-          $ref: '#/components/schemas/CIAppUserInfo'
       required:
       - level
       - id
@@ -2029,6 +2025,7 @@ components:
       - start
       - end
       - status
+      - git
       type: object
     CIAppPipelineEventStageLevel:
       default: stage
@@ -2119,8 +2116,6 @@ components:
           description: The URL to look at the step in the CI provider UI.
           nullable: true
           type: string
-        user:
-          $ref: '#/components/schemas/CIAppUserInfo'
       required:
       - level
       - id
@@ -2130,6 +2125,7 @@ components:
       - start
       - end
       - status
+      - git
       type: object
     CIAppPipelineEventStepLevel:
       default: step
@@ -2563,23 +2559,6 @@ components:
           description: The maximum time for the requested events, supports date, math,
             and regular timestamps (in milliseconds).
           example: now
-          type: string
-      type: object
-    CIAppUserInfo:
-      description: 'Used to specify user-related information when the payload does
-        not have Git information.
-
-        For example, if Git information is missing for manually triggered pipelines,
-        this field can be used instead.'
-      nullable: true
-      properties:
-        email:
-          description: Email of the user.
-          format: email
-          type: string
-        name:
-          description: Name of the user.
-          example: John Doe
           type: string
       type: object
     CIAppWarning:
@@ -15827,6 +15806,7 @@ components:
             incident_read: View incidents in Datadog.
             incident_settings_write: Configure Incidents settings.
             incident_write: Create, view, and manage incidents in Datadog.
+            metric_tags_write: Create and edit tag configurations for custom metrics.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
               an organization. The ability to write monitors is not required to set
@@ -15843,6 +15823,8 @@ components:
             security_monitoring_signals_read: View Security Signals.
             synthetics_default_settings_read: View the default settings for Synthetic
               Monitoring.
+            synthetics_default_settings_write: Create and edit default settings for
+              Synthetic Monitoring.
             teams_manage: Manage Teams. Create, delete, rename, and edit the metadata
               of all Teams. To control Team membership across all Teams, use the User
               Access Manage permission.

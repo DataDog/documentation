@@ -1,6 +1,10 @@
 ---
 code_lang: cpp
 code_lang_weight: 50
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: ブログ
+  text: W3C Trace Context に対応した OTel インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: C++ トレースコンテキストの伝搬
 type: multi-code-lang
@@ -68,6 +72,10 @@ void example() {
   // `headers` now populated with the headers needed to propagate the span.
 }
 ```
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter

@@ -63,6 +63,10 @@ Datadog Lambda レイヤーはインスツルメンテーションライブラ�
 
 [Webpack][6] や [esbuild][7] のようなバンドラーを使用すると、使われているコードのみを含めることができ、デプロイパッケージのサイズを劇的に削減することができます。必要な Webpack の構成は [Node.js の Lambda Tracing とバンドラーの互換性][7]を参照してください。
 
+## Datadog-ci
+
+ユースケースによっては、パッケージサイズの問題を回避するために `datadog-ci lambda instrument` コマンドを使用する方が簡単だと感じるかもしれません。`datadog-ci lambda instrument` コマンドは、serverless-plugin-datadog と同じインスツルメンテーションを構成します。詳しくは、[datadog-ci リポジトリ][9]を参照してください。
+
 ## サポート
 
 Datadog のサポートチームによる調査が必要な場合は、チケットに以下の情報を含めてください。
@@ -83,3 +87,4 @@ Datadog のサポートチームによる調査が必要な場合は、チケッ
 [6]: https://webpack.js.org
 [7]: https://esbuild.github.io/
 [8]: /ja/serverless/guide/serverless_tracing_and_bundlers/
+[9]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda#readme

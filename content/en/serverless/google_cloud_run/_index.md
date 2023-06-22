@@ -330,9 +330,9 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 ### OpenTelemetry
 
-Follow these steps to send OpenTelemetry (OTel) data to Datadog.
+Follow these steps to send OpenTelemetry data to Datadog.
 
-1. Tell OTel to export spans to Datadog `serverless-init`.
+1. Tell OpenTelemetry to export spans to Datadog `serverless-init`.
 
    ```js
    // instrument.js
@@ -359,7 +359,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
    provider.register();
    ```
 
-2. Add OTel's instrumentation for Express. This is akin to adding `ddtrace`.
+2. Add OpenTelemetry's instrumentation for Express. This is akin to adding `ddtrace`.
 
    ```js
    // instrument.js
@@ -399,7 +399,7 @@ Follow these steps to send OpenTelemetry (OTel) data to Datadog.
    COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
    ```
-5. Enable OTel in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
+5. Enable OpenTelemetry in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
 
    ```
    # Dockerfile

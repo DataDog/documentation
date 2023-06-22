@@ -117,7 +117,7 @@ Datadog에는 공유 그래프(내장)와 상호 작용할 수 있는 [전용 AP
 | [Enable embed][11]       | 특정 내장 요소를 활성화합니다.                                             |
 | [Revoke embed][12]       | 특정 내장 요소를 취소합니다.                                             |
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

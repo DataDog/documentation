@@ -730,7 +730,7 @@ You can monitor your custom business logic by [submitting custom metrics][27].
          NODE_OPTIONS: --require instrument
    ```
 
-4. Enable OTel using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
+4. Enable OpenTelemetry using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
 
    ```yaml
    # serverless.yml
