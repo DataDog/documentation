@@ -19,5 +19,5 @@ cascade:
     {{< nextlink href="/continuous_integration/guides/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/developer_workflows" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
     {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}Creating exclusion filters for ingestion control{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Pipeline data model and execution types{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Understanding the pipeline data model and execution types{{< /nextlink >}}
 {{< /whatsnext >}}
