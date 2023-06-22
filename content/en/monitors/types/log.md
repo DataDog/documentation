@@ -81,7 +81,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Log samples and breaching values toplist
 
-When a logs monitor is triggered, samples or values can be added to the notification message.
+When a logs monitor is triggered, samples or values can be added to the notification message. Logs without a message are not included in samples. In order to add the content of a log attribute to the monitor's message, use Log monitor [template variables][9] directly in the monitor's message body.
 
 | Monitor Setup                    | Can be added to notification message |
 |----------------------------------|--------------------------------------|
@@ -116,3 +116,4 @@ Include a sample of 10 logs in the alert notification:
 [6]: /logs/explorer/facets/#measures
 [7]: /monitors/configuration/#advanced-alert-conditions
 [8]: /monitors/notify/
+[9]: /monitors/notify/variables/?tab=is_alert#matching-attributetag-variables
