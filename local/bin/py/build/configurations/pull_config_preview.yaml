@@ -367,7 +367,7 @@
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
         - action: pull-and-push-folder
-          branch: dastrong/create-new-doc-files
+          branch: main
           globs:
           - rulesets/python-best-practices/*.md
           options:
@@ -377,7 +377,7 @@
               disable_edit: true
 
         - action: pull-and-push-folder
-          branch: dastrong/create-new-doc-files
+          branch: main
           globs:
           - rulesets/python-code-style/*.md
           options:
@@ -387,7 +387,7 @@
               disable_edit: true
 
         - action: pull-and-push-folder
-          branch: dastrong/create-new-doc-files
+          branch: main
           globs:
           - rulesets/python-design/*.md
           options:
@@ -397,7 +397,7 @@
               disable_edit: true
 
         - action: pull-and-push-folder
-          branch: dastrong/create-new-doc-files
+          branch: main
           globs:
           - rulesets/python-django/*.md
           options:
@@ -407,7 +407,7 @@
               disable_edit: true
 
         - action: pull-and-push-folder
-          branch: dastrong/create-new-doc-files
+          branch: main
           globs:
           - rulesets/python-flask/*.md
           options:
@@ -417,7 +417,7 @@
               disable_edit: true
 
         - action: pull-and-push-folder
-          branch: dastrong/create-new-doc-files
+          branch: main
           globs:
           - rulesets/python-inclusive/*.md
           options:
