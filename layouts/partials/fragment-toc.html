@@ -1,0 +1,8 @@
+
+{{ range $headings := .Page.Fragments.Headings}}
+  {{/*  <p>Title: {{ $v.Title }}, ID: {{$v.ID}}</p>  */}}
+  <p>{{$headings}}</p>
+  {{/*  {{ range $childk, $childv := $v.Headings }}
+    {{ $childk }} => {{ $childv.ID }},
+  {{ end }}  */}}
+{{ end }}
