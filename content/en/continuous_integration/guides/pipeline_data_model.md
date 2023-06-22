@@ -17,6 +17,10 @@ further_reading:
 
 As specified in the [public API endpoint specification][3], if pipelines are triggered by actions to a Git repository, then all payloads must contain Git information. You can provide the repository URL, commit SHA and author email.
 
+## Overview
+
+This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports.
+
 ## Data model
 
 Pipeline executions are modeled as traces, similar to an [APM distributed trace][1], where spans represent the execution of different parts of the pipeline. The CI Visibility data model for representing pipeline executions consists of four levels:
