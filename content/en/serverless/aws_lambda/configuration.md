@@ -364,6 +364,55 @@ The following resources are currently supported:
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
 
+### DD_SERVICE_MAPPING
+
+`DD_SERVICE_MAPPING` is an environment variable that renames upstream non-Lambda [services names][46]. It operates with `old-service:new-service` pairs.
+
+#### Syntax
+
+`DD_SERVICE_MAPPING=key1:value1,key2:value2`...
+
+There are two ways to interact with this variable:
+
+#### Rename all services of a type
+
+To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
+
+| AWS Lambda Integration | DD_SERVICE_MAPPING Value |
+|---|---|
+| `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| `lambda_sns` | `"lambda_sns:newServiceName"` |
+| `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| `lambda_s3` | `"lambda_s3:newServiceName"` |
+| `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| `lambda_url` | `"lambda_url:newServiceName"` |
+
+#### Rename specific services
+
+For a more granular approach, use these service-specific identifiers:
+
+| Service | Identifier | DD_SERVICE_MAPPING Value |
+|---|---|---|
+| API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| SNS | Topic name | `"ExampleTopic:newServiceName"` |
+| SQS | Queue name | `"MyQueue:newServiceName"` |
+| S3 | Bucket name | `"example-bucket:newServiceName"` |
+| EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
+| Kinesis | Stream name | `"MyStream:newServiceName"` |
+| DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
+| Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
+
+#### Examples with description
+
+| Command | Description |
+|---|---|
+| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Renames all `lambda_api_gateway` upstream services to `new-service-name` |
+| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
+
+For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][45].
+
 ## Filter or scrub information from logs
 
 To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
@@ -922,3 +971,5 @@ If you have trouble configuring your installations, set the environment variable
 [42]: /profiler/
 [43]: /serverless/installation#installation-instructions
 [44]: /security/default_rules/security-scan-detected/
+[45]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
+[46]: https://docs.datadoghq.com/tracing/glossary/#services
