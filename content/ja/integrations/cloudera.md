@@ -266,6 +266,11 @@ Cloudera ホストからメトリクスを収集する際に、Agent のステ�
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog で Cloudera クラスターを視覚化する][11]
 
 
 [1]: https://www.cloudera.com/products/cloudera-data-platform.html
@@ -278,3 +283,4 @@ Cloudera ホストからメトリクスを収集する際に、Agent のステ�
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.cloudera.com/data-hub/cloud/access-clusters/topics/mc-accessing-cluster-via-ssh.html
 [10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/cloudera-integration-announcement/

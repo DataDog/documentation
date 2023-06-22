@@ -58,7 +58,7 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 
 新しいストレージアカウントのあるサブスクリプション内で [Azure インテグレーション][1]をセットアップしていない場合、セットアップします。これには、[Datadog が統合に使用できるアプリ登録の作成][2]も含まれます。
 
-**注:** Azure ChinaCloud へのアーカイブはサポートされていません。
+**注:** Azure ChinaCloud、GermanyCloud、GovCloud へのアーカイブはサポートされていません。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /ja/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -182,16 +182,12 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{% tab "Google Cloud Storage" %}}
 
 1. Datadog Google Cloud サービスアカウントに、バケットへアーカイブを書き込むための許可を与えます。
+2. [Google Cloud IAM Admin ページ][1]から Datadog の Google Cloud サービスアカウントのプリンシパルを選択し、**Edit principal** を選択します。
+3. **ADD ANOTHER ROLE** をクリックし、**Storage Object Admin** ロールを選択し、保存します。
 
-   * 新しいサービスアカウントを作成する場合は、[Google Cloud Credentials ページ][1]でこれを実行できます。
-   * 既存のサービスアカウントを更新する場合は、[Google Cloud IAM Admin ページ][2]で実行できます。
+   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Datadog Google Cloud サービスアカウントに Storage Object Admin ロールを追加。" style="width:75%;">}}
 
-2. **Storage** の下に **Storage Object Admin** というロールを追加します。
-
-   {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Datadog Google Cloud サービスアカウントに Storage Object Admin ロールを追加。" style="width:75%;">}}
-
-[1]: https://console.cloud.google.com/apis/credentials
-[2]: https://console.cloud.google.com/iam-admin/iam
+[1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -452,5 +448,5 @@ Datadog がストレージバケットに転送するログアーカイブは、
 [10]: /ja/account_management/rbac/permissions#logs_read_index_data
 [11]: /ja/account_management/rbac/permissions#logs_read_data
 [12]: /ja/logs/explorer/live_tail/
-[13]: /ja/events/explorer/
+[13]: /ja/service_management/events/explorer/
 [14]: https://app.datadoghq.com/logs/pipelines/log-forwarding

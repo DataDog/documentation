@@ -56,7 +56,7 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 [Remote Configuration][1]
 : `config.`{{< region-param key="dd_site" code="true" >}}
 
-[1]: /agent/guide/how_remote_config_works
+[1]: /agent/remote_config
 {{% /site-region %}}
 
 [Synthetics private location][8]

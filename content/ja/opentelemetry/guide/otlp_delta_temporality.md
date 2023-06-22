@@ -22,6 +22,7 @@ OTLP の単調和、ヒストグラム、または累積集計一時性を持つ
 
 - デプロイはステートフルなので、時系列のすべてのポイントを同じ Datadog Agent または Datadog エクスポーターに送信する必要があります。これは、OpenTelemetry Collector のデプロイをスケールする方法に影響します。
 - Datadog は、ある時系列から受信した最初のポイントが、その時系列の真の開始点であることを確認できない場合、そのポイントを送信しないことがあります。このため、再起動時にポイントが欠落することがあります。
+- 累積 OTLP ヒストグラムの場合、最小値と最大値は復元できません。ヒストグラムのエクスポートモードによっては、欠落するか近似値になる可能性があります。
 
 ## OpenTelemetry SDK の構成
 
@@ -29,7 +30,7 @@ OpenTelemetry SDK から OTLP メトリクスを生成する場合、これら�
 
 SDK がこの環境変数をサポートしていない場合は、コードでデルタ一時性を構成することができます。次の例は、OTLP HTTP エクスポーターを構成し、2 秒ごとにカウンターに `1` を追加し、合計で 5 分とします。
 
-{{< programming-lang-wrapper langs="python,go,java" >}}
+{{< programming-lang-wrapper langs="python,go,java,.net" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -173,6 +174,42 @@ public final class Main {
       Thread.sleep(2000);
     }
   }
+}
+```
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".net" >}}
+```c#
+// 必須: $ dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+
+using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+
+namespace GettingStarted;
+
+public class Program
+{
+    public static void Main()
+    {
+        using var meter = new Meter("my-meter");
+        var providerBuilder = Sdk.CreateMeterProviderBuilder().AddMeter(meter.Name);
+        providerBuilder.AddOtlpExporter((exporterOptions, metricReaderOptions) =>
+            {
+                exporterOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
+                metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+            });
+        using var provider = providerBuilder.Build();
+
+        Counter<int> counter = meter.CreateCounter<int>("example.counter", "1", "Example counter");
+        for (int i = 0; i < 150; i++) {
+            counter?.Add(1);
+            Task.Delay(2000).Wait();
+        }
+    }
 }
 ```
 {{< /programming-lang >}}

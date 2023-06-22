@@ -31,6 +31,7 @@ Datadog Cloud SIEM (Security Information and Event Management) は、開発、�
   {{< nextlink href="/getting_started/cloud_siem/">}}Cloud SIEM 入門ガイド{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/">}}AWS for Cloud SIEM の構成{{< /nextlink >}}
   {{< nextlink href="/security/cloud_siem/guide/google-cloud-config-guide-for-cloud-siem/">}}Google Cloud for Cloud SIEM の構成{{< /nextlink >}}
+  {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/">}}Azure for Cloud SIEM の構成{{< /nextlink >}}
   {{< nextlink href="/integrations/">}}特定のインテグレーションを検索して、そのインテグレーションのログ収集の設定を行う{{< /nextlink >}}
   {{< nextlink href="/security/default_rules#cat-cloud-siem-log-detection">}}すぐに使える Cloud SIEM の検出ルールの使用開始{{< /nextlink >}}
   {{< nextlink href="/security/detection_rules">}}独自の検出ルールの作成{{< /nextlink >}}

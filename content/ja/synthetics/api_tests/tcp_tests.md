@@ -1,4 +1,12 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - tcp
+  - tcp テスト
+  - tcp テスト
 aliases:
 - /ja/synthetics/tcp_test
 - /ja/synthetics/tcp_check

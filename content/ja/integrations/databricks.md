@@ -140,8 +140,8 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
 
   # マスターパラメータが読み込まれるまで待ってから、IP とポートを取得します
   while [ -z \$gotparams ]; do
-    if [ -e "/tmp/master-params" ]; then
-      DB_DRIVER_PORT=\$(cat /tmp/master-params | cut -d' ' -f2)
+    if [ -e "/tmp/driver-env.sh" ]; then
+      DB_DRIVER_PORT=\$(cat /tmp/driver-env.sh | cut -d' ' -f2)
       gotparams=TRUE
     fi
     sleep 2

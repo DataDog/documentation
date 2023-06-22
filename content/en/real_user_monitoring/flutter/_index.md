@@ -8,7 +8,7 @@ further_reading:
   text: Monitor Flutter application performance with Datadog Mobile RUM
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter Source code
+  text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
@@ -87,6 +87,8 @@ final configuration = DdSdkConfiguration(
 )..enableHttpTracking()
 ```
 
+**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][9]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][10]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
+
 In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `RumConfiguration`.
 
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
@@ -105,3 +107,5 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 [6]: /serverless/distributed_tracing
 [7]: /real_user_monitoring/flutter/data_collected/
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
+[9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
+[10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html

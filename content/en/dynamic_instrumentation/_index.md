@@ -127,7 +127,7 @@ To create a metric probe:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[2]: /agent/guide/how_remote_config_works/
+[2]: /agent/remote_config/
 [3]: https://github.com/DataDog/dd-trace-java
 [4]: https://github.com/DataDog/dd-trace-py
 [5]: https://github.com/DataDog/dd-trace-dotnet

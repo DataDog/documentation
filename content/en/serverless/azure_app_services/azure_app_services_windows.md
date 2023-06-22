@@ -1,5 +1,5 @@
 ---
-title: Azure App Service - Windows
+title: Azure App Service - Windows Code
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
@@ -230,7 +230,7 @@ client.Increment("sample.startup");
 Learn more about [custom metrics][10].
 
 [1]: /integrations/azure
-[2]: /tracing/setup/dotnet/
+[2]: /tracing/setup/java/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration

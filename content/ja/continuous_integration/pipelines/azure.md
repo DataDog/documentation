@@ -2,12 +2,9 @@
 aliases:
 - /ja/continuous_integration/setup_pipelines/azure
 further_reading:
-- link: /continuous_integration/pipelines
-  tag: Documentation
-  text: パイプラインの実行結果とパフォーマンスを確認する
-- link: /continuous_integration/pipelines/custom_commands/
-  tag: Documentation
-  text: 個々のコマンドをトレースしてパイプラインの可視性を拡張する
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で Azure Pipelines を監視する
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: トラブルシューティング CI
@@ -25,8 +22,6 @@ title: Azure パイプラインでトレースを設定する
 ## 互換性
 
 - **ランタイムのカスタムタグとメトリクス**: ランタイムの[カスタムタグ][6]とメトリクスを構成します
-
-- **事前定義されたカスタムタグ**: 生成されたすべてのパイプライン、ステージ、およびジョブスパンに[カスタムタグ][7]を設定します。
 
 ## Datadog インテグレーションの構成
 
@@ -91,11 +86,6 @@ title: Azure パイプラインでトレースを設定する
     projectName1 projectName2
 ```
 
-### カスタムタグの設定
-インテグレーションによって生成されたすべてのパイプラインとジョブのスパンにカスタムタグを設定するには、**Service hook URL** に URL エンコードされたクエリパラメーター `tags` を追加し、`key:value` ペアをカンマで区切って指定します。key:value のペアにカンマが含まれる場合は、引用符で囲んでください。例えば、`key1:value1,"key2: value with , comma",key3:value3` を追加するには、**Service hook URL** に以下の文字列を追加します。
-
-`?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`
-
 ## Datadog でパイプラインデータを視覚化する
 
 ワークフローが終了した後、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが入力されます。
@@ -112,5 +102,4 @@ title: Azure パイプラインでトレースを設定する
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
-[7]: /ja/continuous_integration/pipelines/azure/#set-custom-tags
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility

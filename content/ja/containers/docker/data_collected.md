@@ -32,6 +32,8 @@ Docker Agent は以下のイベントを生成します。
 
 {{< get-service-checks-from-git "docker" >}}
 
+**注**: `docker.exit` を使用するには、Docker `conf.yaml` ファイルに `collect_exit_codes: true` を追加し、Agent を再起動します。
+
 ## コンテナインテグレーション
 
 ### メトリクス

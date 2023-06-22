@@ -1,7 +1,4 @@
 ---
-beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/log_collection.md
 description: Flutter プロジェクトからログデータを収集します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
@@ -47,9 +44,9 @@ myLogger.info('Info from my additional logger.');
 
 利用可能なロギングオプションの詳細については、[LoggingConfiguration クラスのドキュメント][3]を参照してください。
 
-## タグと属性の管理
+## タグの管理
 
-ロガーに設定されたタグおよび属性は、各ロガーにローカルです。
+ロガーに設定されたタグは、各ロガーにローカルです。
 
 ### タグを追加
 
@@ -71,7 +68,11 @@ logger.removeTag("build_configuration")
 
 詳しくは、[タグ入門][4]をご覧ください。
 
-## デフォルト属性
+## 属性の管理
+
+ロガーに設定された属性は、各ロガーにローカルです。
+
+### デフォルト属性
 
 デフォルトで、ロガーにより送信されるすべてのログに次の属性が追加されます。
 
@@ -107,7 +108,7 @@ logger.removeAttribute("user-status")
 
 
 [1]: https://pub.dev/packages/datadog_flutter_plugin
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/setup
+[2]: /ja/real_user_monitoring/flutter/setup
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/LoggingConfiguration-class.html
-[4]: https://docs.datadoghq.com/ja/getting_started/tagging/
+[4]: /ja/getting_started/tagging/
 [5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html

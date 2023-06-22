@@ -33,6 +33,10 @@ If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
 
+<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
+
+Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+
 **Note**: To take advantage of all features from the Datadog Cluster Agent, you must run Kubernetes v1.10+.
 
 {{< whatsnext desc="This section includes the following topics:">}}

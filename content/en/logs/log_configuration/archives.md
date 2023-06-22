@@ -58,7 +58,7 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**Note:** Archiving to Azure ChinaCloud is not supported.
+**Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -182,16 +182,12 @@ Only Datadog users with the [`logs_write_archive` permission][3] can create, mod
 {{% tab "Google Cloud Storage" %}}
 
 1. Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
+2. Select your Datadog Google Cloud service account principal from the [Google Cloud IAM Admin page][1] and select **Edit principal**.
+3. Click **ADD ANOTHER ROLE**, select the **Storage Object Admin** role, and save.
 
-   * If you're creating a new Service Account, this can be done from the [Google Cloud Credentials page][1].
-   * If you're updating an existing Service Account, this can be done from the [Google Cloud IAM Admin page][2].
+   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
-2. Add the role under **Storage** called **Storage Object Admin**.
-
-   {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
-
-[1]: https://console.cloud.google.com/apis/credentials
-[2]: https://console.cloud.google.com/iam-admin/iam
+[1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 

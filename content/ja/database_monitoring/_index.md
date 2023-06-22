@@ -17,6 +17,9 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
 kind: documentation
 title: データベース モニタリング
 ---

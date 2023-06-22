@@ -27,7 +27,7 @@ title: AppDynamics のイベントを Datadog に投稿する
 }
 ```
 
-{{< img src="developers/faq/step_1_appdynamics.png" alt="step_1_appdynamics"  >}}
+{{< img src="developers/faq/step_1_appdynamics.png" alt="step_1_appdynamics" >}}
 
 最新イベント:
 
@@ -48,7 +48,7 @@ title: AppDynamics のイベントを Datadog に投稿する
 }
 ```
 
-{{< img src="developers/faq/latest_event.png" alt="latest_event"  >}}
+{{< img src="developers/faq/latest_event.png" alt="latest_event" >}}
 
 また、メールテンプレートを利用することもできます。
 
@@ -62,6 +62,6 @@ title: AppDynamics のイベントを Datadog に投稿する
 }
 ```
 
-{{< img src="developers/faq/email_template.png" alt="email_template"  >}}
+{{< img src="developers/faq/email_template.png" alt="email_template" >}}
 
 [1]: https://www.appdynamics.com/support

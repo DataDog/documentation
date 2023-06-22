@@ -89,6 +89,10 @@ Heroku emits dyno metrics through logs. To convert these logs into metrics and s
 * [Heroku Datadog Log Drain][35] written in Nodejs by [Oz][36].
 * [Heroku Datadog Log Drain][37] written in Go by [Apiary][38].
 
+To use the PHP tracer or profiler on Heroku, use the following buildpack.
+
+* [Heroku Datadog PHP Tracer and Profiler Buildpack][65] maintained by [SpeedCurve][66].
+
 ### Jira
 
 A [tool][39] to poll data from Jira and upload it as metrics to Datadog.
@@ -189,7 +193,7 @@ If you've written a Datadog library and would like to add it to this page, send 
 [31]: https://github.com/wimactel
 [34]: /logs/guide/collect-heroku-logs/
 [35]: https://github.com/ozinc/heroku-datadog-drain
-[36]: https://web.oz.com/
+[36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
 [39]: https://bitbucket.org/atlassian/jiradog/src/master/
@@ -218,3 +222,5 @@ If you've written a Datadog library and would like to add it to this page, send 
 [62]: https://github.com/urosgruber/dd-agent-FreeBSD
 [63]: https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/networking/dd-agent
 [64]: mailto:opensource@datadoghq.com
+[65]: https://github.com/SpeedCurve-Metrics/heroku-buildpack-php-ddtrace
+[66]: https://www.speedcurve.com/

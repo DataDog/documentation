@@ -24,6 +24,9 @@ further_reading:
   - link: "https://securitylabs.datadoghq.com/"
     tag: "Security Labs"
     text: "Read about security-related topics on Datadog's Security Labs blog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to elevate your security and threat detection"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
     tag: "Blog"
     text: "Elevate AWS threat detection with Stratus Red Team"
@@ -36,6 +39,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< site-region region="gov" >}}
@@ -51,10 +57,6 @@ Bring speed and scale to your production security operations. Datadog Security d
 Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), [Cloud Security Posture Management (CSPM)](#cloud-security-posture-management), and [Cloud Workload Security (CWS)](#cloud-workload-security).
 
 Check out the [30-second Product Guided Tour](https://www.datadoghq.com/guided-tour/security/) to see more.
-
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/669874306/rendition/1080p/file.mp4?loc=external&signature=9cdb7724c414862115c85af15edb1bb8eb0cd6f7b5d38d89f6f99e65376cfc0c" poster="/images/poster/security.png" >}}
-
-</br>
 
 ## Application Security Management
 
