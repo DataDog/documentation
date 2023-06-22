@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - スナップショット
 aliases:
 - /ja/guides/templating/
 - /ja/graphing/dashboards/
@@ -10,6 +13,9 @@ aliases:
 - /ja/dashboards/dashboards/
 - /ja/dashboards/screenboards/
 - /ja/dashboards/timeboards/
+cascade:
+  algolia:
+    rank: 70
 description: データを可視化して詳細な情報を把握
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Dashboards
@@ -155,7 +161,7 @@ tags:audit,dash
 
 検索を特定のダッシュボードに制限するには、検索にダッシュボードの名前を含めます。
 
-#### アクセス許可
+#### 権限
 
 ダッシュボードの上部で、設定をクリックし、*Permissions* を選択します。
 

@@ -47,6 +47,7 @@ def workflows(content, content_dir):
                         action_data['bundle'] = data.get('name')
                         action_data['bundle_title'] = data.get('title').strip()
                         action_data['source'] = data.get('icon', {}).get('integration_id', '')
+                        action_data['aliases'] = [f'/workflows/actions_catalog/{output_file_name}_{action_name}']
                         # if this is a dd. bundle then lets use the datadog integration id
                         if not action_data['source'] and 'datadog' in action_data['bundle_title'].lower():
                             action_data['source'] = '_datadog'

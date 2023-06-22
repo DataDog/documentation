@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_acm_deleteCertificate
 bundle: com.datadoghq.aws.acm
 bundle_title: AWS Certificate Manager
 description: 証明書とそれに関連する秘密キーを削除します。
