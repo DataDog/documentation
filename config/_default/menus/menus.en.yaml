@@ -2185,16 +2185,36 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_swift
     weight: 306
+  - name: Static Analysis
+    url: continuous_integration/static_analysis/
+    parent: ci
+    identifier: ci_static_analysis
+    weight: 4
+  - name: Rules
+    url: continuous_integration/static_analysis/rules
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_rules
+    weight: 401
+  - name: CircleCI Orbs
+    url: continuous_integration/static_analysis/circleci_orbs
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_circleci_orbs
+    weight: 402
+  - name: GitHub Actions
+    url: continuous_integration/static_analysis/github_actions
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_github_actions
+    weight: 403
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 4
+    weight: 5
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 5
+    weight: 6
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -3994,7 +4014,12 @@ main:
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
+    identifier: account_management_plan_and_usage
     weight: 8
+  - name: Usage Details
+    url: account_management/plan_and_usage/usage_details/
+    parent: account_management_plan_and_usage
+    weight: 801
   - name: Billing
     url: account_management/billing/
     parent: account_management

@@ -256,7 +256,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
 
 1. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib`][1].
 
-2. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4138.
+2. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4318.
 
 3. Run the container and expose the necessary port, using the previously defined `collector.yaml` file. For example, considering you are using port 4317:
 
