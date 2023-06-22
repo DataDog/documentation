@@ -3,7 +3,7 @@ title: Processors
 kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
-  - /logs/log_configuration/processors/
+  - /logs/processing/processors/
 further_reading:
 - link: "/logs/log_configuration/pipelines"
   tag: "Documentation"
@@ -102,7 +102,7 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 
 **Notes**:
 
-* Log events can be submitted up to 18 hours in the past and 2 hours in the future.
+* Log events can be submitted up to 18 hours in the past and two hours in the future.
 * As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
 * If multiple log date remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
@@ -577,7 +577,7 @@ Request GET https://app.datadoghq.com/users was answered with response 200
    123,456,789
    ```
 
-* Whereas `%{array_users}` does not return anything because it is a list of objects. However, `%{array_users.first_name}` returns a list of `first_name` contained in the array:
+* `%{array_users}` does not return anything because it is a list of objects. However, `%{array_users.first_name}` returns a list of `first_name`s contained in the array:
 
   ```text
   John,Jack
@@ -607,7 +607,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following string builder
 | `is_enabled`         | Boolean | No       | If the processor is enabled or not, defaults to `false`.                                                                                          |
 | `template`           | String  | Yes      | A formula with one or more attributes and raw text.                                                                                               |
 | `target`             | String  | Yes      | The name of the attribute that contains the result of the template.                                                                               |
-| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false` (by default), skips the operation for missing attributes. |
+| `is_replace_missing` | Boolean | No       | If `true`, it replaces all missing attributes of `template` by an empty string. If `false`, skips the operation for missing attributes. Default: `false`. |
 
 [1]: /api/v1/logs-pipelines/
 {{% /tab %}}
@@ -669,13 +669,13 @@ The lookup processor performs the following actions:
 * Looks if the current log contains the source attribute.
 * Checks if the source attribute value exists in the mapping table.
   * If it does, creates the target attribute with the corresponding value in the table.
-  * Optionally, if it does not find the value in the mapping table, creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab. 
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab. 
     
     {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="Lookup processor" style="width:80%;">}}
 
-    The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform, however, Reference Tables support larger file sizes.
+    The size limit for the mapping table is 100Kb. This limit applies across all Lookup Processors on the platform. However, Reference Tables support larger file sizes.
 
-  * Optionally, if it does not find the value in the mapping table, creates a target attribute with the value of the reference table. You can select a value for a [Reference Table][101] on the **Reference Table** tab.
+  * Optionally, if it does not find the value in the mapping table, it creates a target attribute with the value of the reference table. You can select a value for a [Reference Table][101] on the **Reference Table** tab.
    
     {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" 
     style="width:80%;">}}
