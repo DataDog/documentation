@@ -26,7 +26,7 @@ title: Tracer des applications Python
 type: multi-code-lang
 ---
 ## Exigences de compatibilité
-Le dernier traceur PHP prend en charge les versions 2.7 et 3.5-3.10 de CPython.
+Le dernier traceur Python prend en charge les versions 2.7 et 3.5-3.10 de CPython.
 
 Pour obtenir la liste complète des frameworks et versions Python pris en charge (y compris les anciennes versions et les versions de maintenance), consultez la page relative aux [exigences de compatibilité][1].
 
