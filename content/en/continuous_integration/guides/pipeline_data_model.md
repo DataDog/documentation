@@ -15,7 +15,7 @@ further_reading:
 
 ## Git information
 
-As specified in the [public API endpoint specification][3], if pipelines are triggered by actions to a Git repository, then all payloads must contain Git information. You can provide the repository URL, commit SHA and author email.
+All payloads must contain Git information of the commit that triggered the pipeline execution. As specified in the [public API endpoint specification][3], you need to provide the repository URL, commit SHA and author email.
 
 ## Overview
 
