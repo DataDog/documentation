@@ -747,47 +747,6 @@ main:
     parent: dashboards
     identifier: guides
     weight: 9
-  - name: Infrastructure
-    url: infrastructure/
-    identifier: infrastructure
-    pre: host-map
-    parent: infrastructure_heading
-    weight: 90000
-  - name: Infrastructure List
-    url: infrastructure/list/
-    parent: infrastructure
-    weight: 1
-  - name: Host Map
-    url: infrastructure/hostmap/
-    parent: infrastructure
-    weight: 2
-    identifier: infrastructure_host_map
-  - name: Container Map
-    url: infrastructure/containermap/
-    parent: infrastructure
-    weight: 3
-  - name: Live Processes
-    url: infrastructure/process/
-    parent: infrastructure
-    identifier: infrastructure_process
-    weight: 4
-  - name: Increase Process Retention
-    url: infrastructure/process/increase_process_retention/
-    parent: infrastructure_process
-    weight: 401
-  - name: Live Containers
-    url: infrastructure/livecontainers/
-    parent: infrastructure
-    identifier: infrastructure_livecontainers
-    weight: 5
-  - name: Configuration
-    url: infrastructure/livecontainers/configuration
-    parent: infrastructure_livecontainers
-    weight: 501
-  - name: Legacy Configuration
-    url: infrastructure/livecontainers/legacy
-    parent: infrastructure_livecontainers
-    weight: 502
   - name: Serverless
     url: serverless
     pre: serverless
@@ -848,14 +807,18 @@ main:
     parent: serverless
     identifier: serverless_app_services
     weight: 2
-  - name: Linux
+  - name: Linux - Code
     url: serverless/azure_app_services/azure_app_services_linux
     parent: serverless_app_services
     weight: 201
-  - name: Windows
-    url: serverless/azure_app_services/azure_app_services_windows
+  - name: Linux - Container
+    url: serverless/azure_app_services/azure_app_services_container
     parent: serverless_app_services
     weight: 202
+  - name: Windows - Code
+    url: serverless/azure_app_services/azure_app_services_windows
+    parent: serverless_app_services
+    weight: 203
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
@@ -887,6 +850,45 @@ main:
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
     weight: 1
+  - name: Infrastructure
+    url: infrastructure/
+    identifier: infrastructure
+    pre: host-map
+    parent: platform_heading
+    weight: 70000
+  - name: Host and Container Maps
+    url: infrastructure/hostmap/
+    parent: infrastructure
+    weight: 1
+    identifier: infrastructure_host_map
+  - name: Infrastructure List
+    url: infrastructure/list/
+    parent: infrastructure
+    weight: 2
+  - name: Containers View
+    url: infrastructure/containers/
+    parent: infrastructure
+    identifier: infrastructure_livecontainers
+    weight: 3
+  - name: Configuration
+    url: infrastructure/containers/configuration
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_configuration
+    weight: 301
+  - name: Orchestrator Explorer
+    url: infrastructure/containers/orchestrator_explorer
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_explorer
+    weight: 302
+  - name: Processes View
+    url: infrastructure/process/
+    parent: infrastructure
+    identifier: infrastructure_process
+    weight: 4
+  - name: Increase Process Retention
+    url: infrastructure/process/increase_process_retention/
+    parent: infrastructure_process
+    weight: 401
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -2604,11 +2606,6 @@ main:
     parent: observability_pipelines_production_deployment_overview
     identifier: observability_pipelines_architecture_design_and_principles
     weight: 201
-  - name: Aggregator Architecture
-    url: observability_pipelines/production_deployment_overview/aggregator_architecture/
-    parent: observability_pipelines_production_deployment_overview
-    identifier: observability_pipelines_aggregator_architecture
-    weight: 202
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
@@ -2644,6 +2641,41 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_guides
     weight: 6
+  - name: Architecture
+    url: observability_pipelines/architecture/
+    parent: observability_pipelines
+    identifier: observability_pipelines_architecture
+    weight: 8
+  - name: Optimizing the Instance
+    url: observability_pipelines/architecture/optimize
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_optimize
+    weight: 100
+  - name: Capacity Planning and Scaling
+    url: observability_pipelines/architecture/capacity_planning_scaling
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_capacity_planning_scaling
+    weight: 105
+  - name: Networking
+    url: observability_pipelines/architecture/networking
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_networking
+    weight: 110
+  - name: Preventing Data Loss
+    url: observability_pipelines/architecture/preventing_data_loss
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_preventing_data_loss
+    weight: 115
+  - name: High Availability and Disaster Recovery
+    url: observability_pipelines/architecture/availability_disaster_recovery
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_availability_disaster_recovery
+    weight: 120
+  - name: Advanced Configurations
+    url: observability_pipelines/architecture/advanced_configurations
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_advanced_configurations
+    weight: 125
   - name: Security Overview
     url: security/
     pre: security-platform
@@ -3457,41 +3489,26 @@ main:
     parent: rum
     identifier: rum_dashboards
     weight: 9
-  - name: Performance Overview
-    url: real_user_monitoring/dashboards/performance_overview_dashboard
+  - name: Performance
+    url: real_user_monitoring/dashboards/performance
     parent: rum_dashboards
     identifier: rum_dashboards_performance
     weight: 901
-  - name: Frustration Signals
-    url: real_user_monitoring/dashboards/frustration_signals_dashboard
+  - name: Testing and Deployment
+    url: real_user_monitoring/dashboards/testing_and_deployment
     parent: rum_dashboards
-    identifier: rum_dashboards_frustration_signals
+    identifier: rum_dashboards_testing_and_deployment
     weight: 902
-  - name: User Sessions
-    url: real_user_monitoring/dashboards/user_sessions_dashboard
+  - name: Usage
+    url: real_user_monitoring/dashboards/usage
     parent: rum_dashboards
-    identifier: rum_dashboards_sessions
+    identifier: rum_dashboards_usage
     weight: 903
   - name: Errors
-    url: real_user_monitoring/dashboards/errors_dashboard
+    url: real_user_monitoring/dashboards/errors
     parent: rum_dashboards
     identifier: rum_dashboards_errors
     weight: 904
-  - name: Testing Coverage
-    url: real_user_monitoring/dashboards/testing_coverage
-    parent: rum_dashboards
-    identifier: rum_dashboards_testing_coverage
-    weight: 905
-  - name: Resources
-    url: real_user_monitoring/dashboards/resources_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_resources
-    weight: 906
-  - name: Mobile
-    url: real_user_monitoring/dashboards/mobile_dashboard
-    parent: rum_dashboards
-    identifier: rum_dashboards_mobile
-    weight: 907
   - name: Explorer
     url: real_user_monitoring/explorer/
     parent: rum
@@ -3977,7 +3994,12 @@ main:
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
+    identifier: account_management_plan_and_usage
     weight: 8
+  - name: Usage Details
+    url: account_management/plan_and_usage/usage_details/
+    parent: account_management_plan_and_usage
+    weight: 801
   - name: Billing
     url: account_management/billing/
     parent: account_management

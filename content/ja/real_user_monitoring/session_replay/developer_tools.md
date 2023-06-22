@@ -1,24 +1,23 @@
 ---
-title: セッションリプレイ開発ツール
-kind: documentation
-description: セッションリプレイで利用可能な開発ツールについて説明します
 aliases: null
+description: セッションリプレイで利用可能な開発ツールについて説明します
 further_reading:
-  - link: /real_user_monitoring/session_replay
-    tag: ドキュメント
-    text: Session Replay
+- link: /real_user_monitoring/session_replay
+  tag: ドキュメント
+  text: Session Replay
+kind: documentation
+title: セッションリプレイブラウザ開発ツール
 ---
-<div class="alert alert-warning">開発ツールは公開ベータ版です。</div>  
 
 ## 概要
 
-セッションリプレイの開発ツールは、アプリケーションの問題のトラブルシューティングに役立つ組み込みのデバッグツールです。開発ツールの構成は必要ありません。
+セッションリプレイのブラウザ開発ツールは、アプリケーションの問題のトラブルシューティングに役立つ組み込みのデバッグツールです。ブラウザ開発ツールを使用するために、何かを構成する必要はありません。
 
-## 開発ツール
+## ブラウザ開発ツール
 
-開発ツールにアクセスするには、**Sessions** タブのセッションの左側にある **Jump to Replay** ボタンをクリックするか、セッションをクリックして [RUM Explorer][1] の右上にある **Replay Session** をクリックします。
+ブラウザ開発ツールにアクセスするには、**Sessions** タブのセッションの左側にある **Jump to Replay** ボタンをクリックするか、セッションをクリックして [RUM Explorer][1] の右上にある **Replay Session** をクリックします。
 
-{{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-beta.png" alt="開発ツールボタン" style="width:80%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-1.png" alt="開発ツールボタン" style="width:80%;">}}
 
 **Share** ボタンの右側に、**</> Dev Tools** ボタンが表示されます。パフォーマンスデータ、コンソールログ、エラー、リプレイに関する属性などを確認することができます。
 
@@ -28,7 +27,7 @@ further_reading:
 
 **Network**、**Events**、**Timings** の各フィルターを選択して適用すると、表示されるリソースやイベントの種類を変更することができます。また、ウォーターフォールのスライダーをドラッグアンドドロップすると、時間範囲を拡大することができます。 
 
-{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters.mp4" alt="パフォーマンスフィルター" video="true" style="width:60%;">}}
+{{< img src="real_user_monitoring/session_replay/dev_tools/performance-filters-1.mp4" alt="パフォーマンスフィルター" video="true" style="width:60%;">}}
 
 ### コンソール
 

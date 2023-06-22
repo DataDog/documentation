@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_autoscaling_setDesiredCapacity
 bundle: com.datadoghq.aws.autoscaling
 bundle_title: AWS Autoscaling
 description: 指定したオートスケーリンググループのサイズを設定します。

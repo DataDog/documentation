@@ -36,7 +36,7 @@ Datadog は、[カスタムパース規則][2]の使用を避け、ログを JSO
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -57,7 +57,7 @@ func main() {
 package main
 
 import (
-  log "github.com/Sirupsen/logrus"
+  log "github.com/sirupsen/logrus"
 )
 
 func main() {

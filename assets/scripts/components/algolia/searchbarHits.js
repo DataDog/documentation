@@ -88,9 +88,12 @@ const renderHits = (renderOptions, isFirstRender) => {
         const joinedListItems = hitsArray
             .map((item) => {
                 const hit = getHitData(item);
-                const displayContent = truncateContent(hit.content_snippet_match_level === "full" ? hit.content_snippet : hit.content, 145);
+                const displayContent = truncateContent(
+                    hit.content_snippet_match_level === 'full' ? hit.content_snippet : hit.content,
+                    145
+                );
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
-                const section_header = (hit.section_header) ? `&raquo; ${hit.section_header}` : ""
+                const section_header = hit.section_header ? `&raquo; ${hit.section_header}` : '';
 
                 return `
                     <li class="ais-Hits-item">
@@ -106,12 +109,15 @@ const renderHits = (renderOptions, isFirstRender) => {
             })
             .join('');
 
-        const enhanceApiCategoryHeader = category.toLowerCase() === 'api' && bodyClassContains('api')
-        const categoryLiClassList = 'ais-Hits-item ais-Hits-category'
-        const categoryParagraphClassList = enhanceApiCategoryHeader ? 'fw-bold text-primary' : ''
+        const enhanceApiCategoryHeader = category.toLowerCase() === 'api' && bodyClassContains('api');
+        const categoryLiClassList = 'ais-Hits-item ais-Hits-category';
+        const categoryParagraphClassList = enhanceApiCategoryHeader ? 'fw-bold text-primary' : '';
 
         return hitsArray.length
-            ? [`<li class="${categoryLiClassList}"><p class="${categoryParagraphClassList}">${category}</p></li>`, joinedListItems].join('')
+            ? [
+                  `<li class="${categoryLiClassList}"><p class="${categoryParagraphClassList}">${category}</p></li>`,
+                  joinedListItems
+              ].join('')
             : null;
     };
 
@@ -134,8 +140,8 @@ const renderHits = (renderOptions, isFirstRender) => {
 
     // Ensure API results render first if user performs a search from an API page.
     if (bodyClassContains('api')) {
-        allJoinedListItemsHTML.pop()
-        allJoinedListItemsHTML.unshift(generateJoinedHits(apiHitsArray, 'API'))
+        allJoinedListItemsHTML.pop();
+        allJoinedListItemsHTML.unshift(generateJoinedHits(apiHitsArray, 'API'));
     }
 
     if (isFirstRender) {
