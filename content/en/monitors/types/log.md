@@ -81,7 +81,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Log samples and breaching values toplist
 
-When a logs monitor is triggered, samples or values can be added to the notification message. Samples include solely the message of a log. Logs without a message are not included in samples. In order to add the content of a log attribute to the monitor’s message, use Log monitor [template variables][9] directly in the monitor’s message body.
+When a logs monitor is triggered, samples or values can be added to the notification message. Logs without a message are not included in samples. In order to add the content of a log attribute to the monitor's message, use Log monitor [template variables][9] directly in the monitor's message body.
 
 | Monitor Setup                    | Can be added to notification message |
 |----------------------------------|--------------------------------------|
