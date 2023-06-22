@@ -19,7 +19,7 @@ Pipeline executions are modeled as traces, similar to an [APM distributed trace]
 
 | Level Name | Description |
 | ---------- | ----------- |
-| Pipeline (required)  | The top-level root span that contains all other levels as children. It represents the overall execution of a pipeline from start to finish. This level is sometimes called build or workflow in some CI providers. |
+| Pipeline (required)  | The top-level root span that contains all other levels as children. It represents the overall execution of a pipeline from start to finish. This level is sometimes called `build` or `workflow` in some CI providers. |
 | Stage      | Serves as a grouping of jobs under a user-defined name. Some CI providers do not have this level. |
 | Job        | The smallest unit of work where commands are executed. All tasks at this level should be performed on a single node. |
 | Step       | In some CI providers, this level represents a shell script or an action executed within a job. |
