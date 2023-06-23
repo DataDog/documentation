@@ -29,7 +29,7 @@ Starting in version `0.89.0`, the PHP tracer automatically injects trace correla
 The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Laminas Log][5].
 
 <div class="alert alert-warning">
-  <strong></strong>: Set up your logging library to produce logs in JSON format so that:
+  <strong>Note</strong>: Set up your logging library to produce logs in JSON format so that:
   <ul>
     <li>You don't need <a href="/logs/log_configuration/parsing">custom parsing rules</a>.</li>
     <li>Stack traces are properly wrapped into the log event.</li>
