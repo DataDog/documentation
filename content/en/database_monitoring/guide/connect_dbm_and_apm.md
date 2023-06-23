@@ -16,7 +16,7 @@ This guide assumes that you have configured [Database Monitoring][1] and are usi
 ## Before you begin
 
 Supported databases
-: postgres, mysql
+: postgres, mysql, sqlserver
 
 Supported Agent versions
 : 7.46+
@@ -44,7 +44,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |                                          | [database/sql][4]    | {{< X >}} | {{< X >}} | `service` mode only                    |
 |                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |                                        |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |                                        |
-|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} |                                        |
+|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} | `service` mode only                    |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |                                        |
 |                                          | [pg][8]              | {{< X >}} |           |                                        |
 |                                          | [mysql2][7]          |           | {{< X >}} |                                        |
