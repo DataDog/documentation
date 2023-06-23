@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="http://docs.datadoghq.com/help/">}}
-  Estimated Cost Summary and Cost Chargebacks are in beta. To request access, contact your account representative or Support.
+  Estimated Cost Summary and Cost Chargebacks are in beta. To request access and confirm your organization is supported, contact your account representative or Support.
 {{< /callout >}} 
 
 ## Overview
