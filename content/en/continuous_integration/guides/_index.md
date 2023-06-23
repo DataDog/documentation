@@ -24,8 +24,6 @@ cascade:
     {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Understanding the Pipeline Data Model and Execution Types{{< /nextlink >}}
 {{< /whatsnext >}}
     
-{{< whatsnext desc="Intelligent Test Runner Guides:" >}}
-{{< /whatsnext >}}
 
 {{< whatsnext desc="Quality Gates Guides:" >}}
     {{< nextlink href="/continuous_integration/guides/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
