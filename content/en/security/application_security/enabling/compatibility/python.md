@@ -14,7 +14,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | Threat Detection | 1.9.0   |
 | Threat Protection | 1.10.0  |
 | Open Source Vulnerability detection | 1.5.0  |
-| Custom Code Vulnerability detection  |  private beta  |
+| Custom Code Vulnerability detection (beta)  |  private beta  |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version. 
 
@@ -49,7 +49,6 @@ And the library supports the following runtimes:
 | MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
 | Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
 
-You can monitor application security for Python apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 ### Web framework compatibility
 

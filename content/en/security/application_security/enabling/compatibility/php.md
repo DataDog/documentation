@@ -14,8 +14,8 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | -------------------------------- | ----------------------------|
 | Threat Detection | 0.84.0     |
 | Threat Protection  | 0.86.0   |
-| Open source vulnerability detection| not supported |
-| Custom code vulnerability detection | not supported|
+| Open source vulnerability detection | not supported |
+| Custom code vulnerability detection (beta) | not supported|
 
 The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
 
@@ -83,8 +83,6 @@ The Datadog PHP library supports PHP version 7.0 and above on the following arch
 
 - Linux (GNU) x86-64
 - Alpine Linux (musl) x86-64
-
-You can monitor application security for PHP apps running in Docker, Kubernetes, and AWS ECS.
 
 The library supports the use of all PHP frameworks, and also the use of no framework.
 

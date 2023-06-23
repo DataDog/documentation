@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | Threat Detection| 1.47.0  |
 | Threat Protection |  1.50.0   |
 | Open Source Vulnerability detection | not supported |
-| Custom Code Vulnerability detection | not supported |
+| Custom Code Vulnerability detection (beta) | not supported |
 
 The minimum tracer version to get all supported ASM capabilities for Go is 1.50.0.
 
@@ -31,7 +31,6 @@ The minimum tracer version to get all supported ASM capabilities for Go is 1.50.
 | AWS Lambda    | {{< X >}}         |                           |  
 
 ## Language and framework compatibility
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Go framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported Go versions
 
@@ -39,10 +38,7 @@ The Go Datadog Trace library is open source. View the [GitHub repository][2] for
 
 The Go Datadog Trace Library has a [version support policy][3] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][4]. Older versions may function, but no support is provided by default. For special requests, [contact support][5]. 
 
-You must be running Datadog Agent v5.21.1+.
-
-You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
-
+You must be running Datadog Agent v5.21.1+
  
 
 ## Integrations

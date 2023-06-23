@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | Threat Detection | 1.8.0  |
 | Threat Protection| 1.9.0 |
 | Open Source Vulnerability detection | 1.1.4 |
-| Custom Code Vulnerability detection | 1.15.0|
+| Custom Code Vulnerability detection (beta) | 1.15.0|
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
@@ -38,11 +38,11 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 
 | JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | Supported                | Latest         |
+| 8 to 17      | Windows (x86-64)<br>Linux (glibc, musl) (arm64, x86-64)<br>MacOS (arm64, x86-64)               | Supported                | Latest         |
+
 
 Datadog does not officially support any early-access versions of Java.
 
-You can monitor application security for Java apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 
 

@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
 | Open Source Vulnerability detection |  2.16.0  |
-| Custom code vulnerability detection | private beta  |
+| Custom code vulnerability detection (beta) | private beta  |
 
 The minimum tracer version to get all supported ASM capabilities for .NET is 2.26.0.
 
