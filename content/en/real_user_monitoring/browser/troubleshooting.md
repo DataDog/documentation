@@ -102,13 +102,13 @@ If an event or a request goes beyond any of the following limitations, it is rej
 | Maximum event size                       | 256 KB       |
 | Maximum intake payload size              | 5 MB         |
 
-## Customer data is over 3KiB warning
+## Customer data exceeds the recommended 3KiB warning
 
 The RUM browser SDK allows you to set [global context](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context), [user information](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session) and [feature flags](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser) which are then included with the collected events.
 
-To prevent using the full user bandwidth, the RUM browser SDK throttles the data sent to the Datadog intake. This ensures that the maximum bandwidth usage is below the limits of 4G and higher connectivity. However, it may still exhaust the bandwidth on lower connectivity. This decision was made to have enough bandwidth for effectively handling heavy RUM traffic. Consequently, if a large volume of data is sent on a low-connectivity network, it can slow down the requests made by the host application.
+To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However sending large volumes of data can still impact the performance for users on slow internet connections.
 
-We recommend keeping the size of the global context, the user information, and the feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data is over 3KiB. On low connectivity, the SDK has the potential to exhaust the user's upload bandwidth.`
+Therefore, we recommend keeping the size of the global context, the user information, and the feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
 
 ## Cross origin read blocking warning
 
