@@ -32,11 +32,6 @@ Understand your application's overall health and performance with the line graph
 
 You can also select a view in the RUM Explorer and observe recommended benchmark ranges that directly correlate to your application's user experience in the session. Click on a metric such as **Refresh Rate Average** and click **Search Views With Poor Performance** to apply a filter in your search query and examine additional views.
 
-Most Flutter mobile vitals are powered by native Datadog iOS and Android SDKs for RUM.
-
-- For iOS metrics, see [RUM iOS Mobile Vitals][1].
-- For Android metrics, see [RUM Android Mobile Vitals][2].
-
 ## Metrics
 
 The following metrics provide insight into your mobile application's performance.
@@ -48,11 +43,8 @@ The following metrics provide insight into your mobile application's performance
 | Crash-free sessions by version | An [application crash][6] is reported due to an unexpected exit in the application typically caused by an unhandled exception or signal. Crash-free user sessions in your application directly correspond to your end user's experience and overall satisfaction. <br /><br />   RUM tracks complete crash reports and presents trends over time with [Error Tracking][7]. <br /><br />  With crash-free sessions, you can stay up to speed on industry benchmarks and ensure that your application is ranked highly on the Google Play Store.                                                                                                 |
 | CPU ticks per second           | High CPU usage impacts the [battery life][8] on your users' devices.  <br /><br />  RUM tracks CPU ticks per second for each view and the CPU utilization over the course of a session. The recommended range is <40 for good and <60 for moderate. <br /><br />  You can see the top views with the most number of CPU ticks on average over a selected time period under **Mobile Vitals** in your application's Overview page.                                                                                                                                                                                                                                                                                                                                                        |
 | Memory utilization             | High memory usage can lead to [out-of-memory crashes][9], which causes a poor user experience. <br /><br />  RUM tracks the amount of physical memory used by your application in bytes for each view, over the course of a session. The recommended range is <200MB for good and <400MB for moderate. <br /><br />  You can see the top views with the most memory consumption on average over a selected time period under **Mobile Vitals** in your application's Overview page.                                                                                                                                                                                                                                                                                            |
-| Refresh rate average | |
-| CPU tickets per second | |
-| Memory average | |
-| Build time average | |
-| Raster time average | |
+| Widget build time             | This is the duration of time taken build the frame on the UI thread. To ensure a smooth animations, this should not exceed 16ms for 60 FPS, and 8ms for 120 FPS. <br /><br />  High values here mean you need to look into optimizing your build methods for this view. See [Control Build Cost][3] in the Flutter documentation.                                                                                                                                                                                                                                                                                            |
+| Raster time             | This is the duration of time taken to rasterize the frame on the raster thread. To ensure a smooth animations, this should not exceed 16ms for 60 FPS, and 8ms for 120 FPS. <br /><br />  High values here may mean your view is complex to render. See [Identifying Problems in the GPU Graph][4] in the Flutter documentation.                                                                                                                                                                                                                                                                                            |
 
 ## Further reading
 
@@ -60,3 +52,5 @@ The following metrics provide insight into your mobile application's performance
 
 [1]: /real_user_monitoring/ios/mobile_vitals/
 [2]: /real_user_monitoring/android/mobile_vitals/
+[3]: https://docs.flutter.dev/perf/best-practices#control-build-cost
+[4]: https://docs.flutter.dev/perf/ui-performance#identifying-problems-in-the-gpu-graph
