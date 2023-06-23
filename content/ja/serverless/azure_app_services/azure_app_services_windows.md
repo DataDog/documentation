@@ -18,7 +18,7 @@ further_reading:
   tag: ブログ
   text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
 kind: documentation
-title: Azure App Service - Windows
+title: Azure App Service - Windows コード
 ---
 
 ## 概要
@@ -229,7 +229,7 @@ client.Increment("sample.startup");
 [カスタムメトリクス][10]に関する詳細を参照してください。
 
 [1]: /ja/integrations/azure
-[2]: /ja/tracing/setup/dotnet/
+[2]: /ja/tracing/setup/java/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /ja/tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
