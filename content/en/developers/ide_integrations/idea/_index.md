@@ -160,7 +160,7 @@ The active Profiling tab also affects the IDEA project tree view, which is annot
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java source files. Look for the**View Logs** links following the log statements in your source code:
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java source files. Look for the **View Logs** links following the log statements in your source code:
 
 {{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
