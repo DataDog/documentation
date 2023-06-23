@@ -75,7 +75,7 @@ You can mute up to 50 findings at a single time. Muting a finding removes it fro
 Muted findings automatically unmute after the specified mute duration expires. You can also manually unmute a finding.
 
 1. On the [finding side panel](#explore-your-cloud-misconfigurations), select the resources with the muted finding.
-2.  Select **Actions** > **Unute**.
+2. Select **Actions** > **Unute**.
 3. Select a reason for the unmute, for example, there's no pending fix, it was a human error, or it's no longer an accepted risk.
 4. Enter an optional **Description**.
 5. Click **Unmute**.
