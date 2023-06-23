@@ -110,7 +110,7 @@ Estimated cost data is available for the current month. If historical cost data 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Select the **Usage** tab.
 1. Click **Individual Organizations**.
-1. Ensure the **Billable** and **Cost** toggles is selected.
+1. Ensure the **Billable** and **Cost** toggles are selected.
 1. Ensure the date selector shows the current or prior month.
 
 ### Download
