@@ -745,8 +745,8 @@ main:
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
-    identifier: guides
-    weight: 9
+    identifier: dashboards_guides
+    weight: 99
   - name: Serverless
     url: serverless
     pre: serverless
