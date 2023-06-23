@@ -15,11 +15,14 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | Threat Detection  | 3.13.1|
 | Threat Protection  | 3.19.0  |
 | Open Source Vulnerability detection |  2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
-| Custom Code Vulnerability detection  | 2.32.0 for NodeJS 12+, or 3.19.1 for NodeJS 14+ |
+| Custom Code Vulnerability detection (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
 
-The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.1.
+The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.0.
 
-**Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.  
+
+**Note**: 
+- Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
+- Custom Code Vulnerability detection is in beta  
 
 ### Supported deployment types
 |Type           | Threats support   |  Vulnerabilities support  |
@@ -50,18 +53,17 @@ For more information about Node.js release, see the [official Node.js documentat
 
 The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
-You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
-| 3.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
-|                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
+| 3.x                 | Linux (glibc)         | arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm64, x64       | Alpine 3.13                              |
 |                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
-|                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
-| 2.x                 | Linux (glibc)         | arm, arm64, ia32, x64 | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
-|                     | Linux (musl)          | arm, arm64, ia32, x64 | Alpine 3.10                              |
+|                     | Windows               | x64             | Windows 8.1, Windows Server 2012         |
+| 2.x                 | Linux (glibc)         | arm64, x64 | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
+|                     | Linux (musl)          | arm64, x64 | Alpine 3.10                              |
 |                     | macOS                 | arm64, x64            | Yosemite (10.10)                         |
-|                     | Windows               | ia32, x64             | Windows 8.1, Windows Server 2012         |
+|                     | Windows               |  x64             | Windows 8.1, Windows Server 2012         |
 
 
 
@@ -80,10 +82,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 | Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | express | >=4| {{< X >}}  |{{< X >}}  | {{< X >}} |
-| next | >=9.5| {{< X >}} | | |
-| microgateway-core |>=2.1 | {{< X >}}  | | |
-| moleculer |>=0.14 | {{< X >}} | | |
-| paperplane | >=2.3| {{< X >}} | | |
+
 
 
 
@@ -136,7 +135,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 | [elasticsearch][30]    | `>=10`   |{{< X >}}|          |          |
 | [ioredis][31]          | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [knex][32]             | `>=0.8`  |{{< X >}}|{{< X >}} |          |
-| [mariadb][5]          | `>=3`    |{{< X >}}|{{< X >}} |          |
+| [mariadb][5]           | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [memcached][33]        | `>=2.2`  |{{< X >}}|{{< X >}} |          |
 | [mongodb-core][34]     | `>=2`    |{{< X >}}|{{< X >}} |          |
 | [mysql][35]            | `>=2`    |{{< X >}}|          |{{< X >}} |
@@ -146,6 +145,7 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 | [redis][39]            | `>=0.12` |{{< X >}}|{{< X >}} |          |
 | [sharedb][40]          | `>=1`    |{{< X >}}|{{< X >}} |          |
 | [tedious][41]          | `>=1`    |{{< X >}}|{{< X >}} |          |
+| [sequelize][42]        | `>=4`    |         |          | {{< X >}}|
 
 
 [1]: /tracing/trace_collection/compatibility/nodejs/
@@ -166,3 +166,4 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 [39]: https://github.com/NodeRedis/node_redis
 [40]: https://share.github.io/sharedb/
 [41]: http://tediousjs.github.io/tedious
+[42]: https://github.com/sequelize/sequelize
