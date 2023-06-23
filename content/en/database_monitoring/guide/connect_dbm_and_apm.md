@@ -27,29 +27,30 @@ Data privacy
 
 **Supported tracers**
 
-| Language                                 | Library or Framework | Postgres  |   MySQL   |
-|:-----------------------------------------|:---------------------|:---------:|:---------:|
-| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |
-|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} |
-|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |
-| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |
-|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} |
-| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |
-|                                          | [pg][8]              | {{< X >}} |           |
-|                                          | [mysql2][7]          |           | {{< X >}} |
-| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |
-|                                          | [psycopg2][12]       | {{< X >}} |           |
-| **.NET** [dd-trace-dotnet][15] >= 2.26.0 ||                      |           |
-|                                          | [Npgsql][16]         | {{< X >}} |           |
-|                                          | [MySql.Data][17]     |           | {{< X >}} |
-|                                          | [MySqlConnector][18] |           | {{< X >}} |
-| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |
-|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |
-|                                          | [MySQLi][21]         |           | {{< X >}} |
-| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |
-|                                          | [postgres][10]       | {{< X >}} |           |
-|                                          | [mysql][13]          |           | {{< X >}} |
-|                                          | [mysql2][14]         |           | {{< X >}} |
+| Language                                 | Library or Framework | Postgres  |   MySQL   |                SQL Server              |
+|:-----------------------------------------|:---------------------|:---------:|:---------:|:--------------------------------------:|
+| **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |                                        |
+|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} |                                        |
+|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |                                        |
+| **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |                                        |
+|                                          | [jdbc][22]           | {{< X >}} | {{< X >}} |                                        |
+| **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |                                        |
+|                                          | [pg][8]              | {{< X >}} |           |                                        |
+|                                          | [mysql2][7]          |           | {{< X >}} |                                        |
+| **Python:** [dd-trace-py][11] >= 1.9.0   |                      |           |           |                                        |
+|                                          | [psycopg2][12]       | {{< X >}} |           |                                        |
+| **.NET** [dd-trace-dotnet][15] >= 2.26.0 |                      |           |           |                                        |
+|                                          | [Npgsql][16]         | {{< X >}} |           |                                        |
+|                                          | [MySql.Data][17]     |           | {{< X >}} |                                        |
+|                                          | [MySqlConnector][18] |           | {{< X >}} |                                        |
+|                                          | [ADO.NET](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview) |           |           | `DD_DBM_PROPAGATION_MODE=service` only |
+| **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |           |                                        |
+|                                          | [pdo][20]            | {{< X >}} | {{< X >}} |                                        |
+|                                          | [MySQLi][21]         |           | {{< X >}} |                                        |
+| **Node.js:** [dd-trace-js][9] >= 3.17.0  |                      |           |           |                                        |
+|                                          | [postgres][10]       | {{< X >}} |           |                                        |
+|                                          | [mysql][13]          |           | {{< X >}} |                                        |
+|                                          | [mysql2][14]         |           | {{< X >}} |                                        |
 
 
 
@@ -360,7 +361,7 @@ Break down active connections for a given host by the upstream APM services maki
 
 {{< img src="database_monitoring/dbm_filter_by_calling_service.png" alt="Filter your database hosts by the APM services that call them.">}}
 
-Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream dependencies have blocking activity that may impact service performance.   
+Quickly filter the Database List to display only the database hosts that your specific APM services depend on. Easily identify if any of your downstream dependencies have blocking activity that may impact service performance.
 
 ### View the associated trace for a query sample
 
@@ -376,7 +377,7 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
 
-### Identify potential optimizations using explain plans for database queries in traces 
+### Identify potential optimizations using explain plans for database queries in traces
 
 {{< img src="database_monitoring/explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
