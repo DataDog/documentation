@@ -58,9 +58,9 @@ There's also information about the wall time of the most recent test suite run, 
 Hovering over the commit author avatar shows detailed information about the latest commit.
 
 #### Benchmark test regressions
-Regression is a test run that has a duration of 5 times standard deviation above the mean of latest test runs on the default branch. It's being detected only for test runs that have @test.type:benchmark
+A benchmark test run is marked as a regression when its duration is five times the standard deviation above the mean for the same test in the default branch. The mean of the default branch is calculated over the 200 most recent test runs. A benchmark test will have @test.type:benchmark.
 
-For each branch there is a number of benchmark regressions for the latest commit.
+Benchmark test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
 #### Investigate for more details
 
