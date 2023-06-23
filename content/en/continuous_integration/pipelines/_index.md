@@ -31,7 +31,7 @@ Your pipelines appear in the [Pipelines][1] page under the CI menu.
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If your CI provider is not supported, you can try setting up pipeline visibility through the [public API endpoint][2].
+If your CI provider is not supported, you can try setting up Pipeline Visibility through the [public API endpoint][2].
 
 ## Pipelines health overview
 
