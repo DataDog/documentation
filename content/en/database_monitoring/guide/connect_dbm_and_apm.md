@@ -19,7 +19,7 @@ Supported databases
 : postgres, mysql
 
 Supported Agent versions
-: 7.36.1+
+: 7.46+
 
 Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
@@ -41,7 +41,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 | Language                                 | Library or Framework | Postgres  |   MySQL   |                SQL Server              |
 |:-----------------------------------------|:---------------------|:---------:|:---------:|:--------------------------------------:|
 | **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |                                        |
-|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} |                                        |
+|                                          | [database/sql][4]    | {{< X >}} | {{< X >}} | `service` mode only                    |
 |                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |                                        |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |                                        |
 |                                          | [jdbc][22]           | {{< X >}} | {{< X >}} |                                        |
