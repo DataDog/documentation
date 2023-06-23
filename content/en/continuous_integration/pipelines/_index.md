@@ -36,6 +36,8 @@ The [**Pipelines**][1] page provides a pipeline-first view into your CI health b
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
+If your CI provider is not supported, you can try setting up Pipeline Visibility through the [public API endpoint][2].
+  
 ## Explore pipelines
 
 To see your pipelines, navigate to **CI** > **Pipelines**.
@@ -81,13 +83,13 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
 
 **Note**: Job log collection is supported for a limited set of providers:
-- [GitHub Actions][2]
-- [GitLab][3] (beta)
-- [Jenkins][4]
+- [GitHub Actions][3]
+- [GitLab][4] (beta)
+- [Jenkins][5]
 
 ## Pipeline executions details and traces
 
-On the [Pipeline Executions][5] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
+On the [Pipeline Executions][6] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
 
 Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left (`Pipeline`, `Stage`, `Job`, and more.)
 
@@ -95,17 +97,17 @@ Below are three graphs that visualize the durations of your most active pipeline
 
 Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
 
-Alternatively, click the [**Analytics**][6] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and share on dashboards.
+Alternatively, click the [**Analytics**][7] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and share on dashboards.
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
 ## Use CI pipelines data
 
-When creating a [dashboard][9] or a [notebook][10], you can use CI pipeline data in your search query, which updates the visualization widget options.
+When creating a [dashboard][8] or a [notebook][9], you can use CI pipeline data in your search query, which updates the visualization widget options. For more information, see the [Dashboards][10] and [Notebooks documentation][11].
 
 ## Export data to a monitor
 
-You can export your search query to a [CI Pipeline monitor][11] on the Pipelines Executions page by clicking the **Export** button in the **All Test Runs** or **Pipeline Executions**.
+You can export your search query to a [CI Pipeline monitor][12] on the [**Pipelines Executions** page][6] or the [**Test Runs** page][13] by clicking the **Export** button.
 
 ## Further reading
 
@@ -113,13 +115,15 @@ You can export your search query to a [CI Pipeline monitor][11] on the Pipelines
 
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /continuous_integration/pipelines/github/#enable-log-collection
-[3]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
-[4]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
-[5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[7]: https://app.datadoghq.com/dashboard/lists
-[8]: https://app.datadoghq.com/notebook/list
-[9]: /dashboards/
-[10]: /notebooks/
-[11]: /monitors/types/ci/
+[2]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[3]: /continuous_integration/pipelines/github/#enable-log-collection
+[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
+[5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
+[6]: https://app.datadoghq.com/ci/pipeline-executions
+[7]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/notebook/list
+[10]: /dashboards
+[11]: /notebooks
+[12]: /monitors/types/ci
+[13]: https://app.datadoghq.com/ci/test-runs
