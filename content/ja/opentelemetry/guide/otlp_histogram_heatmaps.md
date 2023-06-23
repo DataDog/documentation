@@ -36,7 +36,7 @@ OpenTelemetry SDK からメトリクスを生成する場合は、以下の手�
 Datadog Exporter または Datadog Agent で、ヒストグラムモードを設定し、集計メトリクスを有効にします。
 
 {{< tabs >}}
-{{% tab "Datadog Exporter (OTel Collector)" %}}
+{{% tab "Datadog Exporter (OpenTelemetry Collector)" %}}
 
 Datadog Exporter の `collector.yaml` ファイルで、ヒストグラムモードを `counters` に構成し、`send_aggregation_metrics` フラグで集計メトリクスを有効にします。
 

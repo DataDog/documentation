@@ -94,7 +94,7 @@ IoT のご請求に関する詳細については、[Datadog 料金ページ][7]
 
 {{< whatsnext desc="課金に関するトピック:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_details/" >}}使用料の詳細{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}使用量の詳細{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}使用量のメトリクス{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}クレジットカード{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}カスタムメトリクス{{< /nextlink >}}
