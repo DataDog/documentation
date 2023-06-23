@@ -112,7 +112,7 @@ Scalr は、実行結果をイベントとして[イベントエクスプロー�
 
 ヘルプが必要ですか？[Datadog サポート][13]または [Scalr サポート][14]にお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 - [Scalr の顧客向けドキュメント][15]
 - [Scalr Datadog インテグレーションドキュメント][16]

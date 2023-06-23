@@ -70,6 +70,8 @@ Then, you can use the following command to upload all the necessary files for sy
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms
 ```
 
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
 For a full list of options, see the `datadog-ci` [Flutter Symbols documentation][6].
 
 ## Advanced Configuration - Flavors and Build Numbers

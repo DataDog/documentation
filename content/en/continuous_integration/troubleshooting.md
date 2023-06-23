@@ -159,13 +159,13 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 - Your repository needs to have a commit history of at least two commits in the past month.
 - You need to have collected test code coverage in past commits, which happens on test runs where Intelligent Test Runner was enabled.
-- You git clone must contain commit and tree history. Shallow git clones (`git clone --depth=0`) are not supported.
+- Your git clone must contain commit and tree history. Intelligent Test Runner tries to unshallow git clones that do not contain history (`git clone --depth=0`), but that might not work on older versions of git. If your CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
 
 Due to these restrictions, the first time you enable Intelligent Test Runner, you cannot see any tests skipped and the test execution time may be slower than usual because the code coverage is collected automatically.
 
 Intelligent Test Runner only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
 
-If your CI job is using shallow git clones, you can change it to use partial git clones by using the following command: `git clone --filter=blob:none`.
+There is a limitation when [synchronizing a fork through GitHub's UI][13] which causes all tests to be run for the generated synchronization commit.
 
 ### Intelligent Test Runner incorrectly skipped a test
 
@@ -194,3 +194,4 @@ Still need help? Contact [Datadog support][2].
 [10]: /continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [11]: https://app.datadoghq.com/ci/settings/repository
 [12]: /continuous_integration/intelligent_test_runner/
+[13]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui

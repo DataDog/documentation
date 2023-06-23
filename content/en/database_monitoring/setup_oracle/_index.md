@@ -12,18 +12,38 @@ is_beta: true
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta. Contact your Customer Success Manager for information on the required Agent build and installation instructions.
+The features described on this page are in private beta.
 </div>
 
-### Oracle versions supported
+## Supported Oracle versions, features, and architectures
 
-|  | Self-hosted | RDS |
-|--|-------------|-----| 
-| Oracle 19c | {{< X >}} | {{< X >}} |
-| Oracle 21c | {{< X >}} | {{< X >}} |
+- **Versions**: 19c and 21c
+- **Deployment configurations**: Self-managed, RDS, RAC, Exadata
+- **Architecture**: Multi-tenant
 
-The following deployment configurations are supported: self-managed, RDS, single-node, and multi-tenant. Note these do not include RAC and Exadata or legacy architectures.
+The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
+
+
+## Supported Agent versions
+
+The following custom build is supported: `7.44.1~dbm~oracle~beta~0.28`.
+
+## Prerequisites
+
+1. **Install the Oracle integration**: On the [**Integrations**][1] page in Datadog, install the [Oracle integration][2] for your organization. This will install an Oracle dashboard in your account which can be used to monitor the performance of your Oracle databases.
+2. **Upgrade the Oracle integration in your Agent**: You can skip this step if this is your first time installing the Oracle integration. If you've previously installed the Oracle integration, migrate the legacy configuration from the `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
+
+Use the following command to migrate the Oracle integration from the legacy integration to the new one:
+
+```bash
+mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
+```
+
+## Setup
 
 For setup instructions, select your hosting type:
 
 {{< partial name="dbm/dbm-setup-oracle" >}}
+
+[1]: https://app.datadoghq.com/integrations
+[2]: https://app.datadoghq.com/integrations/oracle

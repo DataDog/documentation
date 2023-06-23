@@ -1,6 +1,8 @@
 ---
 title: Usage Details
 kind: documentation
+aliases:
+  - /account_management/billing/usage_details/
 ---
 
 ## Overview

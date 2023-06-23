@@ -790,6 +790,10 @@ video {
 }
 
 // Tables
+.table-wrapper {
+    overflow-x: auto;
+}
+
 table,
 .table {
     width: 100%;

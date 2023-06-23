@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_cloudfront_list_distributions
 bundle: com.datadoghq.aws.cloudfront
 bundle_title: AWS CloudFront
 description: CloudFront のディストリビューションをリストアップします。ディストリビューションは、コンテンツをどこから配信させたいか、コンテンツ配信の追跡・管理方法の詳細を
