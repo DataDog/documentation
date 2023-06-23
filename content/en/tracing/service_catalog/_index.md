@@ -118,7 +118,7 @@ Clicking on a service opens a side panel with details including:
 - **Ownership information** from the service definition such as links to team contacts, source code, and supplemental information like documentation and dashboards.
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
-- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, security threats impacting your services, and the ability to download the SBOM (Software Bill of Materials) from the libraries tab. 
+- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, security threats impacting your services, and the ability to download the Software Bill of Materials (SBOM) from the libraries tab. 
 
   {{< img src="tracing/service_catalog/libraries_sbom.png" alt="Showing an individual service from Service Catalog, highlighting the libraries tab and ability to download the SBOM" style="width:100%;" >}}
 
