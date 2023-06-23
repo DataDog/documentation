@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -72,6 +72,12 @@
           - integration/*/service_checks.json
           - integration/*/README.md
           - integration/*/__init__.py
+          options:
+            front_matters:
+              cascade:
+                algolia:
+                  rank: 60
+                  category: Integration
 
       - repo_name: integrations-core
         contents:
@@ -84,6 +90,12 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          options:
+            front_matters:
+              cascade:
+                algolia:
+                  rank: 60
+                  category: Integration
 
         - action: pull-and-push-file
           branch: master
@@ -94,6 +106,10 @@
             file_name: '_index.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
+              cascade:
+                algolia:
+                  rank: 70
+                  category: Documentation            
               
         - action: pull-and-push-folder
           branch: master
@@ -104,6 +120,10 @@
             path_to_remove: 'docs/dev/'
             front_matters:
               dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
+              cascade:
+                algolia:
+                  rank: 70
+                  category: Documentation  
 
       - repo_name: integrations-extras
         contents:
@@ -116,6 +136,12 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          options:
+            front_matters:
+              cascade:
+                algolia:
+                  rank: 60
+                  category: Integration
 
       - repo_name: integrations-internal-core
         contents:
@@ -128,6 +154,12 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
+          options:
+            front_matters:
+              cascade:
+                algolia:
+                  rank: 60
+                  category: Integration
 
       - repo_name: marketplace
         contents:
@@ -143,6 +175,13 @@
           - "*/images/*.jpg"
           - "*/images/*.jpeg"
           - "*/images/*.svg"
+          options:
+            front_matters:
+              cascade:
+                algolia:
+                  rank: 60
+                  category: Marketplace Integration
+
 
       - repo_name: ansible-datadog
         contents:
