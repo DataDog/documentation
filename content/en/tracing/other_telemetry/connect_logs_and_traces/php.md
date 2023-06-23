@@ -41,8 +41,28 @@ The PHP tracer supports PSR-3 compliant loggers, such as [Monolog][4] or [Lamina
 If you haven't done so already, configure the PHP tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This provides the best experience for adding `env`, `service`, and `version` to your logs (see [Unified Service Tagging][6] for more details).
 
 The PHP tracer provides various ways to configure the injection of trace correlation identifiers into your logs:
-- [Use placeholders in your message](#use-placeholders-in-your-message)
 - [Add the trace correlation identifiers to the log context](#add-the-trace-correlation-identifiers-to-the-log-context)
+- [Use placeholders in your message](#use-placeholders-in-your-message)
+
+#### Add the trace correlation identifiers to the log context {#add-the-trace-correlation-identifiers-to-the-log-context}
+
+The default behavior of the PHP tracer is to add the trace correlation identifiers to the log context.
+
+For example, if you are using the [Monolog][4] library in a Laravel application as follows:
+
+```php
+use Illuminate\Support\Facades\Log;
+# ...
+Log::debug('Hello, World!');
+```
+
+The PHP tracer adds the available trace correlation identifiers to the log context. The logged message above could be transformed into:
+
+```
+[2022-12-09 16:02:42] production.DEBUG: Hello, World! {"dd.trace_id":"1234567890abcdef","dd.span_id":"1234567890abcdef","dd.service":"laravel","dd.version":"8.0.0","dd.env":"production","status":"debug"}
+```
+
+**Note**: If there is a placeholder in your message or if a trace ID is already present in the message, the PHP tracer does **not** add the trace correlation identifiers to the log context.
 
 #### Use placeholders in your message {#use-placeholders-in-your-message}
 
@@ -70,26 +90,6 @@ The PHP tracer replaces the placeholders with the corresponding values. For exam
 ```
 
 **Note**: The brackets are mandatory if you plan on using the default parsing rules provided in the PHP [log pipeline][7]. If you are using a custom parsing rule, you can omit the brackets if needed.
-
-#### Add the trace correlation identifiers to the log context {#add-the-trace-correlation-identifiers-to-the-log-context}
-
-The default behavior of the PHP tracer is to add the trace correlation identifiers to the log context.
-
-For example, if you are using the [Monolog][4] library in a Laravel application as follows:
-
-```php
-use Illuminate\Support\Facades\Log;
-# ...
-Log::debug('Hello, World!');
-```
-
-The PHP tracer adds the available trace correlation identifiers to the log context. The logged message above could be transformed into:
-
-```
-[2022-12-09 16:02:42] production.DEBUG: Hello, World! {"dd.trace_id":"1234567890abcdef","dd.span_id":"1234567890abcdef","dd.service":"laravel","dd.version":"8.0.0","dd.env":"production","status":"debug"}
-```
-
-**Note**: If there is a placeholder in your message or if a trace ID is already present in the message, the PHP tracer does **not** add the trace correlation identifiers to the log context.
 
 
 ## Manual injection
