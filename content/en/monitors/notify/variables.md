@@ -230,13 +230,15 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle. 
 
-**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition. 
 
 ## Attribute and tag variables
 
-Use attribute and tag variables to render alert messages that are customized, informative, and specific to help people quickly understand the nature of the alert.
+Use attribute and tag variables to render alert messages that are customized, informative, and specific to help understand the nature of the alert.
+
+**Note**: If the monitor is configured to recover after there are no more results for the query (example, setting an above threshold `> 0`), the recovery message doesn't contain any data. To persist information in the recovery message, group by additional tags, which are accessible by `{{tag.name}}`.
 
 ### Multi alert variables
 
