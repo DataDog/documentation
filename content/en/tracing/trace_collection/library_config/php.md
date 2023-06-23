@@ -107,6 +107,12 @@ Whether to enable distributed tracing.
 **Default**: `null`<br>
 Set an application's environment, for example: `prod`, `pre-prod`, `stage`. Added in version `0.47.0`.
 
+`DD_LOGS_INJECTION`
+: **INI**: `datadog.logs_injection`<br>
+**Default**: `0`<br>
+Enables or disables automatic injection of correlation identifiers into application logs. Added in version `0.89.0`<br>
+See [logs correlation documentation][16] for more information.
+
 `DD_PROFILING_ENABLED`
 : **INI**: `datadog.profiling.enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
@@ -204,11 +210,6 @@ The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` 
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
 **Default**: `0`<br>
 Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
-
-`DD_TRACE_APPEND_TRACE_IDS_TO_LOGS`
-: **INI**: `datadog.trace.append_trace_ids_to_logs`<br>
-**Default**: `0`<br>
-Append the logs correlation identifiers to logged messages. Use with caution as the message is modified. See [logs correlation documentation][16] for more information on its usage. Added in version `0.88.0`.
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
