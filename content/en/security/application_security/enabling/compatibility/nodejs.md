@@ -105,11 +105,8 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | Framework                | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| dns     | {{< X >}} |  |  |
-| fs      |  {{< X >}} |  |  {{< X >}}  |
 | http    |  {{< X >}} |  {{< X >}}  |  {{< X >}}  |
 | https   |  {{< X >}} |  {{< X >}} |  |
-| http2   |  {{< X >}} |  {{< X >}} |  |
 
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
