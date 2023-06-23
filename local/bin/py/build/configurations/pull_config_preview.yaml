@@ -106,10 +106,9 @@
             file_name: '_index.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
-              cascade:
-                algolia:
-                  rank: 70
-                  category: Documentation            
+              algolia:
+                rank: 70
+                category: Documentation            
               
         - action: pull-and-push-folder
           branch: master
