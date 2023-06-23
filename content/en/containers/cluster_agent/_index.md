@@ -27,7 +27,7 @@ Using the Datadog Cluster Agent allows you to:
 * Enable the collection of cluster level data, such as the monitoring of services or SPOF and events.
 * Use Horizontal Pod Autoscaling (HPA) with custom Kubernetes metrics and external metrics. See the [Autoscaling on custom and external metrics guide][1] for more details.
 
-If you installed the Datadog Agent using Helm chart v2.7.0 or Datadog Operator v1.0.0+, the Datadog Cluster Agent is enabled by default.
+If you installed the Datadog Agent using Helm chart v2.7.0 or Datadog Operator v1.0.0+, the **Datadog Cluster Agent is enabled by default**.
 
 If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and GCR:
 
@@ -50,7 +50,7 @@ Some features related to later Kubernetes versions require a minimum Datadog Age
 | 1.22.0+            | 7.37.0+        | 7.37.0+               | Support dynamic service account token |
 
 {{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup your Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup the Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commands & Options</u>: List of all commands and options available for the Cluster Agent.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Cluster Checks</u>: Cluster checks provide the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes services.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>Endpoint Checks</u>: Endpoint checks extend cluster checks to monitor any endpoint behind cluster services.{{< /nextlink >}}

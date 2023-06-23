@@ -146,7 +146,7 @@ To install the chart with a custom release name, `<RELEASE_NAME>` (for example, 
     appKeyExistingSecret: datadog-secret
     site: <DATADOG_SITE>
    ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][13]. For example, `datadoghq.com` or `datadoghq.eu`.
+   Replace `<DATADOG_SITE>` with your [Datadog site][13]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 3. Run the following command:
    ```bash
    helm install <RELEASE_NAME> \
