@@ -143,7 +143,7 @@ tile:
 
 ---
 ボストンより ❤️ を込めて
-*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？[こちら](mailto:support@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
-
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？
+[こちら](mailto:support@rapdev.io)から RapDev へメッセージをお送りいただければ、導入をサポートいたします！*
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-github" target="_blank">こちらをクリック</a>してください。

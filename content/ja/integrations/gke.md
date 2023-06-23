@@ -94,14 +94,10 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
 
 #### 標準的な方法
 
-[コンテナ化されたバージョンの Datadog Agent][1] を Kubernetes クラスターにデプロイします。
-
-Agent は、[Helm チャート][2]を使用してデプロイすることも、[DaemonSet][3] を使用して直接デプロイすることもできます。
-
+[コンテナ化されたバージョンの Datadog Agent][1] を Kubernetes クラスターにデプロイします。[Kubernetes に Datadog Agent をインストールする][2]を参照してください。
 
 [1]: https://app.datadoghq.com/account/settings#agent/kubernetes
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=helm
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset
+[2]: https://docs.datadoghq.com/ja/containers/kubernetes/installation?tab=operator
 {{% /tab %}}
 {{% tab "Autopilot" %}}
 

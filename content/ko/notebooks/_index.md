@@ -167,7 +167,7 @@ title: 노트북
 * [퍼널][13]
 * [파이][14]
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 
