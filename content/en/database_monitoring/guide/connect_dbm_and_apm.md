@@ -25,7 +25,18 @@ Data privacy
 : Enabling SQL comment propagation results in potentially confidential data (service names) being stored in the databases which can then be accessed by other third-parties that have been granted access to the database.
 
 
-**Supported tracers**
+APM tracer integrations support a *Propagation Mode*, which controls the amount of information passed from applications to the database.
+
+- `full` mode sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations.
+- `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for SQL Server applications.
+- `none` mode disables propagation and does not send any information from applications.
+
+| DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
+|:-------------------------|:---------:|:---------:|:------------:|
+| `full`                   | {{< X >}} | {{< X >}} | unsupported  |
+| `service`                | {{< X >}} | {{< X >}} | {{< X >}}    |
+
+**Supported application tracers and drivers**
 
 | Language                                 | Library or Framework | Postgres  |   MySQL   |                SQL Server              |
 |:-----------------------------------------|:---------------------|:---------:|:---------:|:--------------------------------------:|
@@ -43,7 +54,7 @@ Data privacy
 |                                          | [Npgsql][16]         | {{< X >}} |           |                                        |
 |                                          | [MySql.Data][17]     |           | {{< X >}} |                                        |
 |                                          | [MySqlConnector][18] |           | {{< X >}} |                                        |
-|                                          | [ADO.NET](https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview) |           |           | `DD_DBM_PROPAGATION_MODE=service` only |
+|                                          | [ADO.NET][24]        |           |           | `service` mode only                    |
 | **PHP**  [dd-trace-php][19] >= 0.86.0    |                      |           |           |                                        |
 |                                          | [pdo][20]            | {{< X >}} | {{< X >}} |                                        |
 |                                          | [MySQLi][21]         |           | {{< X >}} |                                        |
@@ -51,9 +62,6 @@ Data privacy
 |                                          | [postgres][10]       | {{< X >}} |           |                                        |
 |                                          | [mysql][13]          |           | {{< X >}} |                                        |
 |                                          | [mysql2][14]         |           | {{< X >}} |                                        |
-
-
-
 
 ## Setup
 For the best user experience, ensure the following environment variables are set in your application:
@@ -273,7 +281,10 @@ Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing in
 Ensure that you are using a supported client library. For example, `Npgsql`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
-   - `DD_DBM_PROPAGATION_MODE=full`
+   - For Postgres & MySQL: `DD_DBM_PROPAGATION_MODE=full`
+   - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
+
+SQL Server does not support full propagation mode due to the inability for the server to cache statements which contain full trace context.
 
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
@@ -406,3 +417,4 @@ View historical performance of similar queries to those executed in your trace, 
 [21]: https://www.php.net/manual/en/book.mysqli.php
 [22]: https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/
 [23]: https://github.com/DataDog/dd-trace-java
+[24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
