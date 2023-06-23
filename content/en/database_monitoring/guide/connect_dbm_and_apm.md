@@ -42,7 +42,7 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 |:-----------------------------------------|:---------------------|:---------:|:---------:|:--------------------------------------:|
 | **Go:** [dd-trace-go][3] >= 1.44.0       |                      |           |           |                                        |
 |                                          | [database/sql][4]    | {{< X >}} | {{< X >}} | `service` mode only                    |
-|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} |                                        |
+|                                          | [sqlx][5]            | {{< X >}} | {{< X >}} | `service` mode only                    |
 | **Java** [dd-trace-java][23] >= 1.11.0   |                      |           |           |                                        |
 |                                          | [jdbc][22]           | {{< X >}} | {{< X >}} | `service` mode only                    |
 | **Ruby:** [dd-trace-rb][6] >= 1.8.0      |                      |           |           |                                        |
