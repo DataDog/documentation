@@ -103,7 +103,7 @@ Context variables come in the following varieties:
 - **Trigger variables** are passed into the workflow by the triggering event.
 - **Source object variables** are passed into the workflow by the triggering event.
 
-The **Context Variables** tab for each step provides a map of all context variables available to that step.
+The **Context Variables** tab for each step provides a map of all context variables available to that step. The syntax used for accessing context variables is [Handlebars](https://handlebarsjs.com/guide/expressions.html#expressions).
 
 {{< img src="service_management/workflows/context-variables.png" alt="The Context Variables tab" >}}
 
