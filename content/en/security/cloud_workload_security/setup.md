@@ -56,10 +56,7 @@ In general, installing CWS involves the following steps:
 
 To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
 
-**Notes**:
-
-- Without Remote Configuration, new and updated Agent rules must be manually deployed to the Datadog Agent.
-- At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
+**Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
 
 ### Configure the CWS Agent
 
@@ -214,7 +211,6 @@ runtime_security_config:
 
   remote_configuration:
     ## @param enabled - boolean - optional - default: false
-    ## For [Datadog Agent] version 7.42 only, to enable remote configuration
     enabled: true
 ```
 
@@ -366,6 +362,6 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{< partial name="whats-next/whats-next.html" >}}
 
 [3]: /security/cloud_security_management/troubleshooting
-[4]: /agent/guide/how_remote_config_works
-[5]: /agent/guide/how_remote_config_works/?tab=environmentvariable#enabling-remote-configuration
+[4]: /agent/remote_config
+[5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [6]: https://app.datadoghq.com/security/setup

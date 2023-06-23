@@ -49,6 +49,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Link errors to your source code](#link-errors-to-your-source-code)
 - [Submit custom metrics](#submit-custom-metrics)
 - [Send OpenTelemetry data to Datadog](#send-opentelemetry-data-to-datadog)
+- [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
 - [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
@@ -59,6 +60,9 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
+
+### Security
+- [Enable Threat Detection to observe attack attempts](#enable-threat-detection-to-observe-attack-attempts)
 
 ### Others
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
@@ -87,6 +91,39 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
+
+## Enable Threat Detection to observe attack attempts
+
+Get alerted on attackers targeting your serverless applications and respond quickly. 
+
+To get started, first ensure that you have [tracing enabled][43] for your functions.
+
+To enable threat monitoring, add the following environment variables depending on the language:
+   ```yaml
+   environment:
+     DD_SERVERLESS_APPSEC_ENABLED: true
+   ```
+   For **Go functions only** also add:
+   ```yaml
+   environment:
+     DD_UNIVERSAL_INSTRUMENTATION: true
+   ```
+   For **NodeJS or Python functions** also add:
+   ```yaml
+   environment:
+     DD_EXPERIMENTAL_ENABLE_PROXY: true
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
+   ```
+
+Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+
+[3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+
+To see Application Security Management threat detection in action, send known attack patterns to your application. For example, send an HTTP header with value `acunetix-product` to trigger a [security scanner attack][44] attempt:
+   ```sh
+   curl -H 'My-ASM-Test-Header: acunetix-product' https://<YOUR_FUNCTION_URL>/<EXISTING_ROUTE>
+   ```
+A few minutes after you enable your application and send the attack patterns, **threat information appears in the [Application Signals Explorer][41]**.
 
 ## Connect telemetry using tags
 
@@ -184,7 +221,7 @@ Datadog can also enrich the collected telemetry with existing AWS resource tags 
 
 ## Collect the request and response payloads
 
-<div class="alert alert-info">This feature is supported for Python, Node.js, Go, and .NET.</div>
+<div class="alert alert-info">This feature is supported for Python, Node.js, Go, Java, and .NET.</div>
 
 Datadog can [collect and visualize the JSON request and response payloads of AWS Lambda functions][5], giving you deeper insight into your serverless applications and helping troubleshoot Lambda function failures.
 
@@ -326,6 +363,55 @@ The following resources are currently supported:
 - DynamoDB
 
 To disable this feature, set `DD_TRACE_MANAGED_SERVICES` to `false`.
+
+### DD_SERVICE_MAPPING
+
+`DD_SERVICE_MAPPING` is an environment variable that renames upstream non-Lambda [services names][46]. It operates with `old-service:new-service` pairs.
+
+#### Syntax
+
+`DD_SERVICE_MAPPING=key1:value1,key2:value2`...
+
+There are two ways to interact with this variable:
+
+#### Rename all services of a type
+
+To rename all upstream services associated with an AWS Lambda integration, use these identifiers:
+
+| AWS Lambda Integration | DD_SERVICE_MAPPING Value |
+|---|---|
+| `lambda_api_gateway` | `"lambda_api_gateway:newServiceName"` |
+| `lambda_sns` | `"lambda_sns:newServiceName"` |
+| `lambda_sqs` | `"lambda_sqs:newServiceName"` |
+| `lambda_s3` | `"lambda_s3:newServiceName"` |
+| `lambda_eventbridge` | `"lambda_eventbridge:newServiceName"` |
+| `lambda_kinesis` | `"lambda_kinesis:newServiceName"` |
+| `lambda_dynamodb` | `"lambda_dynamodb:newServiceName"` |
+| `lambda_url` | `"lambda_url:newServiceName"` |
+
+#### Rename specific services
+
+For a more granular approach, use these service-specific identifiers:
+
+| Service | Identifier | DD_SERVICE_MAPPING Value |
+|---|---|---|
+| API Gateway | API ID | `"r3pmxmplak:newServiceName"` |
+| SNS | Topic name | `"ExampleTopic:newServiceName"` |
+| SQS | Queue name | `"MyQueue:newServiceName"` |
+| S3 | Bucket name | `"example-bucket:newServiceName"` |
+| EventBridge | Event source | `"eventbridge.custom.event.sender:newServiceName"` |
+| Kinesis | Stream name | `"MyStream:newServiceName"` |
+| DynamoDB | Table name | `"ExampleTableWithStream:newServiceName"` |
+| Lambda URLs | API ID | `"a8hyhsshac:newServiceName"` |
+
+#### Examples with description
+
+| Command | Description |
+|---|---|
+| `DD_SERVICE_MAPPING="lambda_api_gateway:new-service-name"` | Renames all `lambda_api_gateway` upstream services to `new-service-name` |
+| `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
+
+For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][45].
 
 ## Filter or scrub information from logs
 
@@ -644,7 +730,7 @@ You can monitor your custom business logic by [submitting custom metrics][27].
          NODE_OPTIONS: --require instrument
    ```
 
-4. Enable OTel using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
+4. Enable OpenTelemetry using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable. Add the Datadog Extension v41 or later. Do not add the Datadog tracing layer.
 
    ```yaml
    # serverless.yml
@@ -661,6 +747,12 @@ You can monitor your custom business logic by [submitting custom metrics][27].
    ```
 
 5. Deploy.
+
+## Collect Profiling data (public beta)
+
+Datadog's [Continuous Profiler][42] is available in beta for Python version 4.62.0 and layer version 62 and earlier. This optional feature is enabled by setting the `DD_PROFILING_ENABLED` environment variable to `true`.
+
+The Continuous Profiler works by spawning a thread that periodically takes a snapshot of the CPU and heap of all running Python code. This can include the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
 ## Send telemetry over PrivateLink or proxy
 
@@ -835,7 +927,6 @@ If you have trouble configuring your installations, set the environment variable
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-
 [1]: /serverless/installation/
 [2]: /serverless/libraries_integrations/extension/
 [3]: /integrations/amazon_web_services/
@@ -876,3 +967,9 @@ If you have trouble configuring your installations, set the environment variable
 [38]: /serverless/guide#install-using-the-datadog-forwarder
 [39]: /serverless/guide/troubleshoot_serverless_monitoring/
 [40]: /serverless/libraries_integrations/extension/
+[41]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[42]: /profiler/
+[43]: /serverless/installation#installation-instructions
+[44]: /security/default_rules/security-scan-detected/
+[45]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
+[46]: https://docs.datadoghq.com/tracing/glossary/#services

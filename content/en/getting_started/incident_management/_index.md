@@ -14,6 +14,9 @@ further_reading:
     - link: '/monitors/incident_management'
       tag: 'Documentation'
       text: 'Incident Management'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to improve your Incident Management'
     - link: 'https://www.datadoghq.com/blog/incident-response-with-datadog/'
       tag: 'Blog'
       text: 'Incident Management with Datadog'
@@ -31,9 +34,9 @@ further_reading:
       text: 'Best practices for writing incident postmortems'
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">Incident Management is not available for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Overview
 
@@ -184,7 +187,7 @@ The [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google
 
 You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
   
 ## Further Reading
 

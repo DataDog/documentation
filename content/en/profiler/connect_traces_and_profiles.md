@@ -21,7 +21,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ## Identify code hotspots in slow traces
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab-2.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
 
 ### Prerequisites
 
@@ -96,41 +96,31 @@ Requires `dd-trace-php` version 0.71+.
 
 ### Link from a span to profiling data
 
-From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected span.
+From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
 
-The breakdown view on the left side is a list of types of time spent executing that span. Depending on the runtime and language, this list of types varies:
+The values on the left side is the time spent in that method call during the selected span. Depending on the runtime and language, this list of types varies:
 
 - **Method durations** shows the overall time taken by each method from your code.
 - **CPU** shows the time taken executing CPU tasks.
-- **Synchronization** shows the time taken waiting for a lock of a synchronized object.
-- **Garbage collection** shows the time taken waiting for the garbage collector to execute.
+- **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
 - **VM operations** (Java only) shows the time taken waiting for VM operations that are not related to garbage collection (for example, heap dumps).
 - **File I/O** shows the time taken waiting for a disk read/write operation to execute.
 - **Socket I/O** shows the time taken waiting for a network read/write operation to execute.
-- **Object wait** shows the time waiting for a notify call on an object.
-- **Other** shows the time taken to execute the span that cannot be explained by profiling data.
+- **Monitor enter** shows the time a thread is blocked on a lock.
+- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
 
-Click on one of these types to see a corresponding list, ordered by time, of the methods that are taking time. Clicking on the plus `+` will expand the stack trace to that method **in reverse order**.
-
-#### What does time spent in the 'Other' category mean?
-
-It is not uncommon to have a small amount of **Other** unexplained time (less than 10%). Potential reasons for Other time include:
-
-  - The span you selected isn't directly mapped to any execution. Profiling data is associated uniquely to spans when they are executing on a specific thread. For example, some spans are created and used uniquely as virtual containers of a series of related processing steps and never directly associated with any thread execution.
-  - Your application process cannot access CPU resources to execute and is paused. There is no way for the profiler to know about competing resources from other processes or containers.
-  - The application is locked in synchronization or in I/O events that are individually lower than 10ms: the Java profiler receives data for paused thread events (locks, I/O, parks) that are larger than 10ms. If you want to reduce that threshold, see [the documentation for changing setup defaults][1].
-  - The span you selected is short. Profiling is a sampling mechanism that regularly looks at how your code behaves. There might not be enough representative data for spans shorter than 50ms
-  - Missing instrumentation: Profiling breakdown requires that spans are associated with executing threads by activating these spans in the ScopeManager. Some custom instrumentations don't activate these spans properly, so you can't map them to executing threads. If this span comes from a custom integration, see the [Custom Instrumentation docs][2] for information on how to improve this.
+Click the plus icon `+` to expand the stack trace to that method **in reverse order**. Hover over the value to see the percentage of time explained by category.
 
 ### Viewing a profile from a trace
 
-{{< img src="profiler/flamegraph_view.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
+{{< img src="profiler/flamegraph_view-1.mp4" alt="Opening a view of the profile in a flame graph" video=true >}}
 
-For each type from the breakdown, click **View profile** to view the same data as what is shown in the flame graph.
-Click the **Span/Trace/Full profile** selector to define the scope of the data:
+For each type from the breakdown, click **View In Full Page** to see the same data opened up in a in a new page . From there you can change visualization to the flame graph.
+Click the **Focus On** selector to define the scope of the data:
 
-- **Span** scopes the profiling data to the previously selected span.
-- **Trace** scopes the profiling data to all spans of the same service process of the previously selected span.
+- **Span & Children** scopes the profiling data to the selected span and all descendant spans in the same service.
+- **Span only** scopes the profiling data to the previously selected span.
+- **Span time period** scopes the profiling data to all threads during the time period the span was active.
 - **Full profile** scopes the data to 60 seconds of the whole service process that executed the previously selected span.
 
 ## Break down code performance by API endpoints

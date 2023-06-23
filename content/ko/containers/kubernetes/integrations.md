@@ -41,8 +41,6 @@ title: 쿠버네티스 통합 자동 탐지
 | `<INSTANCE_CONFIG>`  | 예      | `<INIT_CONFIG>`의 일부이자 `conf.yaml`의 `instances:` 아래에 나열된 설정 매개 변수는 사용되는 모든 통합에 필요합니다.         |
 | `<LOG_CONFIG>`  | 예      | `<INIT_CONFIG>`의 일부이자 `conf.yaml`의 `logs:` 아래에 나열된 설정 매개 변수는 Datadog으로 전송할 로그를 정의합니다.        |
 
-[**해당 매개 변수에 대한 예제 및 자동 탐지가 지원되는 에이전트 통합의 전체 목록을 확인하세요**][4]
-
 아래 섹션의 각 탭은 지정된 컨테이너에 통합 템플릿을 적용하는 다른 방법을 보여줍니다. 사용 가능한 방법은 다음과 같습니다:
 
 * [쿠버네티스 포드 어노테이션](?tab=kubernetes#configuration)
@@ -58,11 +56,11 @@ title: 쿠버네티스 통합 자동 탐지
 {{< tabs >}}
 {{% tab "Kubernetes (AD v2)" %}}
 
-**참고: 통합 설정을 간소화하기 위해 Datadog 에이전트 7.36에 AD Annotations v2가 도입되었습니다. 이전 버전의 Datadog 에이전트에 대해서는 AD Annotations v1을 사용하십시오.
+**참고: 통합 설정 간소화를 위해 Datadog 에이전트 7.36에 AD Annotations v2가 도입되었습니다. 이전 버전의 Datadog 에이전트에 대해서는 AD Annotations v1을 사용하세요.
 
-통합 템플릿은 쿠버네티스 포드 어노테이션에 저장할 수 있습니다. 자동 탐지를 사용하면 에이전트가 쿠버네티스에서 실행 중인지 감지하고 모든 포드 어노테이션에서 통합 템플릿을 자동으로 검색합니다.
+통합 템플릿은 쿠버네티스 포드 어노테이션에 저장할 수 있습니다. 자동 탐지를 통해 에이전트가 쿠버네티스에서 실행 중인지 감지하고 모든 포드 어노테이션에서 통합 템플릿을 자동으로 검색합니다.
 
-지정된 컨테이너에 특정 설정을 적용하기 위해 자동 탐지는 이미지가 아닌 **이름**으로 컨테이너를 식별합니다. `.spec.containers[0].image`가 아닌 `<CONTAINER_IDENTIFIER>`를 `.spec.containers[0].name`와 연결하려고 시도합니다. 포드 내에서 지정된 Datadog 통합 자동 탐지를 설정하려면, 포드에 다음 어노테이션을 추가하세요:
+자동 탐지는 지정된 컨테이너에 특정한 설정을 적용하기 위해 이미지가 아닌 **이름**으로 컨테이너를 식별합니다.  `<CONTAINER_IDENTIFIER>`를 `.spec.containers[0].image`가 아닌 `.spec.containers[0].name`과 연결시키려고 시도합니다. 포드 내에서 `<CONTAINER_IDENTIFIER>`에 대한 Datadog 통합 자동 탐지를 설정하려면, 포드에 다음 어노테이션을 추가하세요:
 
 ```yaml
 apiVersion: v1
@@ -87,7 +85,7 @@ spec:
 
 일반적으로 `init_config`는 비어 있는 `{}`입니다. AD Annotations v2에서는 선택 사항입니다.
 
-포드 내에서 두 개의 다른 통합 템플릿을  `<CONTAINER_IDENTIFIER_1>`, `<CONTAINER_IDENTIFIER_2>` 각기 다른 다른 컨테이너에 적용하려면, 다음 어노테이션을 포드에 추가하세요:
+포드 내에서 두 개의 다른 통합 템플릿을 두 개의 다른 컨테이너 `<CONTAINER_IDENTIFIER_1>`, `<CONTAINER_IDENTIFIER_2>`에 적용하려면, 다음 어노테이션을 포드에 추가하세요:
 
 ```yaml
 apiVersion: v1
@@ -125,13 +123,13 @@ spec:
 
 
 [1]: /ko/getting_started/tagging/unified_service_tagging
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Kubernetes (AD v1)" %}}
 
-통합 템플릿은 쿠버네티스 포드 어노테이션에 저장할 수 있습니다. 자동 탐지를 사용하면 에이전트가 쿠버네티스에서 실행 중인지 감지하고 모든 포드 어노테이션에서 통합 템플릿을 자동으로 검색합니다.
+통합 템플릿은 쿠버네티스 포드 어노테이션에 저장할 수 있습니다. 자동 탐지를 통해 에이전트가 쿠버네티스에서 실행 중인지 감지하고 모든 포드 어노테이션에서 통합 템플릿을 자동으로 검색합니다.
 
-지정된 컨테이너에 특정 설정을 적용하기 위해 자동 탐지는 이미지가 아닌 **이름**으로 컨테이너를 식별합니다. `.spec.containers[0].image`가 아닌 `<CONTAINER_IDENTIFIER>`를 `.spec.containers[0].name`와 연결하려고 시도합니다. 포드 내에서 지정된 Datadog 통합 자동 탐지를 설정하려면, 포드에 다음 어노테이션을 추가하세요:
+자동 탐지는 지정된 컨테이너에 특정한 설정을 적용하기 위해 이미지가 아닌 **이름**으로 컨테이너를 식별합니다.  `<CONTAINER_IDENTIFIER>`를 `.spec.containers[0].image`가 아닌 `.spec.containers[0].name`과 연결시키려고 시도합니다. 포드 내에서 `<CONTAINER_IDENTIFIER>`에 대한 Datadog 통합 자동 탐지를 설정하려면, 포드에 다음 어노테이션을 추가하세요:
 
 ```yaml
 apiVersion: v1
@@ -150,7 +148,7 @@ spec:
 # (...)
 ```
 
-포드 내에서 두 개의 다른 통합 템플릿을  `<CONTAINER_IDENTIFIER_1>`, `<CONTAINER_IDENTIFIER_2>` 각기 다른 다른 컨테이너에 적용하려면, 다음 어노테이션을 포드에 추가하세요:
+포드 내에서 두 개의 다른 통합 템플릿을 두 개의 다른 컨테이너 `<CONTAINER_IDENTIFIER_1>`, `<CONTAINER_IDENTIFIER_2>`에 적용하려면, 다음 어노테이션을 포드에 추가하세요:
 
 ```yaml
 apiVersion: v1
@@ -174,20 +172,20 @@ spec:
 # (...)
 ```
 
-`kind: Pod`를 사용하여 쿠버네티스 포드를 직접 정의하는 경우, 각 포드의 어노테이션을 해당 `metadata` 섹션 바로 아래에 추가합니다. 레플리케이션 컨트롤러, 레플리카셋 또는 디플로이먼트를 사용하여 간접적으로 포드를 정의하는 경우, `.spec.template.metadata` 아래에 포드 어노테이션을 추가합니다.
+`kind: Pod`로 쿠버네티스 포드를 직접 정의하는 경우, 각 포드의 어노테이션을 해당 `metadata` 섹션 바로 아래에 추가합니다. 레플리케이션 컨트롤러, 레플리카셋 또는 디플로이먼트를 사용하여 간접적으로 포드를 정의하는 경우, `.spec.template.metadata` 아래에 포드 어노테이션을 추가합니다.
 
-**참고:** 컨테이너화된 환경의 모범 사례로서, 태그를 할당할 때 통합 서비스 태깅을 사용할 것을 권장합니다. 통합 서비스 태깅은 세 가지 표준 태그: `env`, `service`, `version`를 사용하여 Datadog 텔레메트리를 하나로 묶습니다. 통합 태깅으로 환경 설정하는 방법을 알아보려면 전용 [통합 서비스 태깅][1] 설명서를 참조하세요.
+**참고:** 컨테이너화된 환경의 모범 사례로서, Datadog은 태그를 할당할 때 통합 서비스 태깅을 사용할 것을 권장합니다. 통합 서비스 태깅은 세 가지 표준 태그: `env`, `service`, `version`을 사용하여 Datadog 텔레메트리를 하나로 묶습니다. 통합 태깅으로 환경 설정하는 방법을 알아보려면 전용 [통합 서비스 태깅][1] 설명서를 참조하세요.
 
 
 [1]: /ko/getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 {{% tab "File" %}}
 
-템플릿을 로컬 파일로 저장하고 컨테이너화된 에이전트 내부에 마운트할 경우 외부 서비스나 특정 오케스트레이션 플랫폼이 필요하지 않습니다. 단점은 템플릿을 변경, 추가 또는 제거할 때마다 에이전트 컨테이너를 재시작해야 한다는 것입니다. 에이전트는 마운트된 `/conf.d` 디렉토리에서 자동 탐지 템플릿을 찾습니다.
+템플릿을 로컬 파일로 저장하고 컨테이너화된 에이전트 내부에 마운트 할 경우 외부 서비스나 특정 오케스트레이션 플랫폼이 필요하지 않습니다. 단점은 템플릿을 변경, 추가 또는 제거할 때마다 에이전트 컨테이너를 재시작해야 한다는 것입니다. 에이전트는 마운트 된 `/conf.d` 디렉토리에서 자동 탐지 템플릿을 찾습니다.
 
 에이전트 v6.2.0(및 v5.24.0) 이후, 기본 템플릿은 포트를 자동 감지하는 대신 모니터링되는 소프트웨어의 기본 포트를 사용합니다. 다른 포트를 사용해야 하는 경우, [쿠버네티스 포드 어노테이션](?tab=kubernetes-annotations)에서 커스텀 자동 탐지 템플릿을 제공하세요.
 
-이러한 통합 템플릿은 기본적인 경우를 위한 것입니다. 추가 옵션 활성화를 위해 사용자 지정 Datadog 통합 설정이 필요한 경우 다른 컨테이너 식별자 또는 템플릿 변수 인덱싱을 사용하거나 자체 자동 설정 파일을 작성하세요:
+이러한 통합 템플릿은 기본적인 경우를 위한 것입니다. 추가 옵션 활성화를 위해 사용자 지정 Datadog 통합 설정이 필요하다면 다른 컨테이너 식별자 또는 템플릿 변수 인덱싱을 사용하거나 자체 자동 설정 파일을 작성하세요:
 
 1. 호스트에 `conf.d/<INTEGRATION_NAME>.d/conf.yaml` 파일을 생성하고 사용자 지정 자동 설정을 추가합니다.
 2. 호스트 `conf.d/` 폴더를 컨테이너화된 에이전트 `conf.d` 폴더에 마운트합니다.
@@ -231,7 +229,7 @@ data:
       <INSTANCES_CONFIG>
 ```
 
-`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`에 대한 자세한 내용은 [자동 탐지 컨테이너 식별자][3] 문서를 참조하세요.
+`<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`에 대한 자세한 내용은 [자동 탐지 컨테이너 식별자][3] 설명서를 참조하세요.
 
 [1]: /ko/agent/kubernetes/integrations/#configmap
 [2]: /ko/agent/kubernetes/integrations/
@@ -239,11 +237,11 @@ data:
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-자동 탐지는  [Consul][1], Etsd 및 Zookeper를 통합 템플릿 원본으로 사용할 수 있습니다. 키 값 저장소를 사용하려면 에이전트 설정 파일에서 키 값 저장소를 설정하고 이 파일을 컨테이너화된 에이전트 내부에 마운트합니다. 또는 키 값 저장소를 환경 변수로 컨테이너화된 에이전트에 전달합니다.
+자동 탐지는  [Consul][1], Etcd 및 Zookeeper를 통합 템플릿 소스로 사용할 수 있습니다. 키-값 저장소를 사용하려면 에이전트 `datadog.yaml` 설정 파일에서 키-값 저장소를 설정하고, 이 파일을 컨테이너화된 에이전트 내부에 마운트합니다. 또는 컨테이너화된 에이전트에 키-값 저장소를 환경 변수로 전달합니다. 
 
 ** datadog.yaml에서 설정하기**
 
-`datadog.yaml` 파일에서 키-값 저장소의  `<KEY_VALUE_STORE_PORT>`와 `<KEY_VALUE_STORE_IP>` 주소를 설정합니다.
+`datadog.yaml` 파일에서 `<KEY_VALUE_STORE_IP>` 주소와 키-값 저장소의 `<KEY_VALUE_STORE_PORT>`를 설정합니다.
 
   ```yaml
   config_providers:
@@ -274,13 +272,13 @@ data:
       password:
   ```
 
-그런 다음 [에이전트 재시작][2]를 클릭해 설정 변경사항을 적용합니다.
+그런 다음 [에이전트를 재시작][2]하여 설정 변경사항을 적용합니다.
 
 **환경 변수 설정**:
 
 **참고: 컨테이너화된 환경의 모범 사례로서, Datadog은 태그 및 환경 변수를 설정할 때 통합 서비스 태깅을 사용할 것을 권장합니다. 통합 서비스 태깅은 세 가지 표준 태그: `env`, `service`, `version`을 사용하여 Datadog 텔레메트리를 하나로 묶습니다. 통합 태깅으로 환경 설정하는 방법을 알아보려면 전용 [통합 서비스 태깅][9] 설명서를 참조하세요.
 
-키값 스토어가 템플릿 소스로 활성화되어 있는 경우 Agent는 키`/datadog/check_configs`에서 템플릿을 찾습니다. 자동탐지는 아래와 같은 키값 위계를 전제로 합니다.
+키-값 저장소가 템플릿 소스로 활성화되어 있는 경우 에이전트는 키`/datadog/check_configs`에서 템플릿을 찾습니다. 자동 탐지에서는 다음과 같은 키-값 위계가 필요합니다:
 
 ```yaml
 /datadog/
@@ -292,7 +290,7 @@ data:
     ...
 ```
 
-**참고**: 지정된 컨테이너에 특정 설정을 적용하기 위해 자동 탐지는 키-값 저장소를 사용할 때 `<CONTAINER_IDENTIFIER>`와 `.spec.containers[0].image`를 맞춰봄으로써 **image**로 컨테이너를 식별합니다.
+**참고**: 자동 탐지는 지정된 컨테이너에 특정 설정을 적용하기 위해 키-값 저장소 사용 시 `<CONTAINER_IDENTIFIER>`와 `.spec.containers[0].image`를 조합하여 **image**로 컨테이너를 식별합니다.
 
 [1]: /ko/integrations/consul/
 [2]: /ko/agent/guide/agent-commands/
@@ -344,9 +342,9 @@ metadata:
 {{< tabs >}}
 {{% tab "Kubernetes (AD v2)" %}}
 
-**참고: 통합 설정을 간소화하기 위해 Datadog 에이전트 7.36에 AD Annotations v2가 도입되었습니다. 이전 버전의 Datadog 에이전트에 대해서는 AD Annotations v1을 사용하십시오.
+**참고: 통합 설정 간소화를 위해 Datadog 에이전트 7.36에 AD Annotations v2가 도입되었습니다. 이전 버전의 Datadog 에이전트에 대해서는 AD Annotations v1을 사용하세요.
 
-다음 포드 어노테이션은 커스텀 `password` 매개 변수로  `redis` 컨테이너에 대한 통합 템플릿을 정의합니다:
+다음 포드 어노테이션은 커스텀 `password` 매개 변수로 `redis` 컨테이너에 대한 통합 템플릿을 정의합니다:
 
 ```yaml
 apiVersion: v1
@@ -376,10 +374,10 @@ spec:
         - containerPort: 6379
 ```
 
-**참고**: `"%%env_<ENV_VAR>%%"` 템플릿 변수 로직은 암호를 일반 텍스트로 저장하지 않기 위해 사용되므로 `REDIS_PASSWORD`환경 변수를 에이전트에게 전달해야 합니다. [자동 탐지 템플릿 변수 설명서][1]을 참조하세요.
+**참고**: `"%%env_<ENV_VAR>%%"` 템플릿 변수 로직은 암호를 일반 텍스트로 저장하지 않기 위해 사용되므로 `REDIS_PASSWORD`환경 변수가 에이전트에게 전달되어야 합니다. [자동 탐지 템플릿 변수 설명서][1]를 참조하세요.
 
 [1]: /ko/agent/faq/template_variables/
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Kubernetes (AD v1)" %}}
 
@@ -411,7 +409,7 @@ spec:
         - containerPort: 6379
 ```
 
-**참고**: `"%%env_<ENV_VAR>%%"` 템플릿 변수 로직은 암호를 일반 텍스트로 저장하지 않기 위해 사용되므로 `REDIS_PASSWORD`환경 변수를 에이전트에게 전달해야 합니다. [자동 탐지 템플릿 변수 설명서][1]을 참조하세요.
+**참고**: `"%%env_<ENV_VAR>%%"` 템플릿 변수 로직은 암호를 일반 텍스트로 저장하지 않기 위해 사용되므로 `REDIS_PASSWORD`환경 변수가 에이전트에게 전달되어야 합니다. [자동 탐지 템플릿 변수 설명서][1]를 참조하세요.
 
 [1]: /ko/agent/faq/template_variables/
 {{% /tab %}}
@@ -459,7 +457,7 @@ data:
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-다음 etcd 명령은 사용자 지정 `password` 매개 변수를 사용하여 Redis 통합 템플릿을 만듭니다:
+다음 etcd 명령은 사용자 지정 `password` 매개 변수를 사용하여 Redis 통합 템플릿을 생성합니다.
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
@@ -468,9 +466,9 @@ etcdctl set /datadog/check_configs/redis/init_configs '[{}]'
 etcdctl set /datadog/check_configs/redis/instances '[{"host": "%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
 ```
 
-세 값은 각각 리스트입니다. 자동 탐지는 공유 목록 인덱스를 기반으로 목록에 있는 항목을 통합 설정으로 맞춥니다. 이 경우 `check_names[0]`, `init_configs[0]` 및 `instances[0]`에서 첫 번째(그리고 유일한) 검사 설정을 구성합니다.
+세 값은 각각의 목록입니다. 자동 탐지는 공유 목록 인덱스를 기반으로 목록의 항목들을 통합 설정에 맞춥니다. 이 경우 `check_names[0]`, `init_configs[0]` 및 `instances[0]`에서 첫 번째(그리고 유일한) 검사 설정을 구성합니다.
 
-**참고**: `"%%env_<ENV_VAR>%%"` 템플릿 변수 로직은 암호를 일반 텍스트로 저장하지 않기 위해 사용되므로 `REDIS_PASSWORD`환경 변수를 에이전트에게 전달해야 합니다. [자동 탐지 템플릿 변수 설명서][1]을 참조하세요.
+**참고**: `"%%env_<ENV_VAR>%%"` 템플릿 변수 로직은 암호를 일반 텍스트로 저장하지 않기 위해 사용되므로 `REDIS_PASSWORD`환경 변수가 에이전트에게 전달되어야 합니다. [자동 탐지 템플릿 변수 설명서][1]를 참조하세요.
 
 auto-conf 파일과 달리 **키-값 저장소는 컨테이너 식별자로 짧거나 긴 이미지 이름을 사용할 수 있습니다.** (예: `redis` 또는 `redis:latest`)
 
@@ -506,7 +504,7 @@ auto-conf 파일과 달리 **키-값 저장소는 컨테이너 식별자로 짧�
 {{< tabs >}}
 {{% tab "Kubernetes (AD v2)" %}}
 
-**참고: 통합 설정을 간소화하기 위해 Datadog 에이전트 7.36에 AD Annotations v2가 도입되었습니다. 이전 버전의 Datadog 에이전트에 대해서는 AD Annotations v1을 사용하십시오.
+**참고: 통합 설정 간소화를 위해 Datadog 에이전트 7.36에 AD Annotations v2가 도입되었습니다. 이전 버전의 Datadog 에이전트에 대해서는 AD Annotations v1을 사용하세요.
 
 ```yaml
 apiVersion: v1
@@ -548,7 +546,7 @@ spec:
         - containerPort: 80
 ```
 
-{{% /tab %}}
+{{< /tabs >}}
 
 {{% tab "Kubernetes (AD v1)" %}}
 
@@ -606,7 +604,7 @@ instances:
   - apache_status_url: http://%%host%%/server-status?auto
 ```
 
-**참고**: 이는 최소한의 [Apache 검사 설정][1]처럼 보이지만 `ad_identifiers` 옵션에 유의하세요. 이 필수 옵션을 사용하여 컨테이너 식별자를 제공할 수 있습니다. 자동 탐지는 `httpd` 이미지를 실행하는 동일한 호스트의 모든 컨테이너에 이 템플릿을 적용합니다. 자세한 내용은 [자동 탐지 식별자][2] 설명서를 참조하세요.
+**참고**: 이는 최소한의 [Apache 검사 설정][1]처럼 보이지만 `ad_identifiers` 옵션에 주목할 필요가 있습니다. 이 필수 옵션을 사용하여 컨테이너 식별자를 제공할 수 있습니다. 자동 탐지는 `httpd` 이미지를 실행하는 동일한 호스트의 모든 컨테이너에 이 템플릿을 적용합니다. 자세한 내용은 [자동 탐지 식별자][2] 설명서를 참조하세요.
 
 * 다음으로 호스트에서 `conf.d/http_check.d` 폴더를 생성하세요.
 * 호스트에서 아래의 사용자 지정 자동 설정을 `conf.d/http_check.d/conf.yaml`에 추가합니다.
@@ -711,7 +709,6 @@ etcdctl set /datadog/check_configs/httpd/instances '[[{"apache_status_url": "htt
 [1]: /ko/agent/docker/integrations/
 [2]: /ko/getting_started/integrations/#configuring-agent-integrations
 [3]: /ko/agent/guide/secrets-management/
-[4]: /ko/integrations/#cat-autodiscovery
 [5]: /ko/integrations/ceph/
 [6]: /ko/integrations/varnish/#autodiscovery
 [7]: /ko/integrations/postfix/

@@ -26,7 +26,7 @@ further_reading:
 
 RUM view events collect extensive performance metrics for every page view. Monitor your application's page views and explore performance metrics in dashboards and the RUM Explorer.
 
-{{< img src="real_user_monitoring/browser/waterfall.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/waterfall-4.png" alt="A waterfall graph on the Performance tab of a RUM view in the RUM Explorer" style="width:100%;" >}}
 
 You can access performance metrics for your views in:
 
@@ -182,7 +182,7 @@ document.addEventListener("scroll", function handler() {
 
 [1]: /real_user_monitoring/dashboards/
 [2]: /real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /real_user_monitoring/dashboards/performance_overview_dashboard
+[3]: /real_user_monitoring/dashboards/performance
 [4]: /real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /synthetics/browser_tests/

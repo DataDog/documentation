@@ -45,7 +45,7 @@ Datadog Agent v7.35.0 以降が必要です。
 
 <div class="alert alert-warning">
 この方法は、Docker、または containerd >= 1.5.6 を必要とします。AWS Fargate 上で動作するコンテナには対応していません。
-その他のコンテナ設定については、<a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=other#tag-your-telemetry">その他</a>のセクションを参照してください。
+その他のコンテナ設定については、<a href="https://docs.datadoghq.com/integrations/guide/source-code-integration/?tab=host#tag-your-telemetry">Host</a> タブを参照してください。
 </div>
 
 コンテナでアプリを実行している場合、Datadog はイメージの Docker ラベルから直接ソースコード情報を抽出することができます。ビルド時に、[オープンコンテナスタンダード][1]に従って、git commit SHA とリポジトリ URL を Docker ラベルとして追加します。
@@ -101,7 +101,7 @@ export DD_TAGS="git.commit.sha:<FULL_GIT_COMMIT_SHA>,git.repository_url:git-prov
 
 Datadog はリポジトリの URL、現在のブランチのコミット SHA、追跡されたファイルパスのリストをキャプチャするだけで、ユーザーコードを取り込んだり保存したりすることはありません。
 
-### Git 情報をアーティファクトに埋め込む
+### git 情報を CI のアーティファクトに埋め込む
 
 リポジトリ URL やコミットハッシュなどの git 情報をアーティファクトに埋め込むことができます。[Datadog トレーシングライブラリ][9]はこの情報を使って、アクティブコミットを APM サービスに自動的にリンクさせます。
 
@@ -110,7 +110,7 @@ git 情報の埋め込みに対応している言語を、次の中から 1 つ�
 {{< tabs >}}
 {{% tab "Go" %}}
 
-Go はバージョン 1.18 からバイナリに[バージョン管理情報を埋め込む][101]ようになりました。
+Go はバージョン 1.18 からバイナリに[バージョン管理情報を埋め込む][1]ようになりました。
 
 サービスが以下の要件をすべて満たしていることを確認します。
 
@@ -118,22 +118,7 @@ Go はバージョン 1.18 からバイナリに[バージョン管理情報を�
 * Datadog Go Tracer >= 1.48.0 のバージョンを使用している。
 * アプリケーションは `go.mod` を使ってモジュールとしてビルドされました。モジュールパスはコードリポジトリの URL です。
 
-[101]: https://tip.golang.org/doc/go1.18
-{{% /tab %}}
-{{% tab "Java" %}}
-
-Java の設定に基づき、Java のアーティファクトにバージョン管理情報を挿入できるライブラリがあります。これらのプラグインは、アプリケーションの JAR アーカイブのルートディレクトリに `git.properties` ファイルを生成します。
-
-1. `version-control-information` インジェクタライブラリをインストールします。
-
-   - Maven の場合は、[`git-commit-id-maven-plugin`][101] をインストールしてセットアップします。
-   - Gradle の場合は、[`gradle-git-properties`][102] をインストールし、セットアップします。
-
-2. [Datadog Java トレーサー][103]をバージョン 1.12.1 以降にアップグレードします。
-
-[101]: https://github.com/git-commit-id/git-commit-id-maven-plugin
-[102]: https://github.com/n0mer/gradle-git-properties
-[103]: https://github.com/DataDog/dd-trace-java
+[1]: https://tip.golang.org/doc/go1.18
 {{% /tab %}}
 {{< /tabs >}}
 

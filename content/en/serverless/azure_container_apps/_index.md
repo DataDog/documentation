@@ -51,7 +51,7 @@ Follow [these instructions][2] to install and configure the Go tracing library i
 
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[2]: /tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -99,7 +99,7 @@ COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
 # install the Datadog js tracing library, either here or in package.json
 
-npm i dd-trace@2.2.0
+RUN npm i dd-trace@2.2.0
 
 # enable the Datadog tracing library
 ENV NODE_OPTIONS="--require dd-trace/init"

@@ -3,6 +3,9 @@ title: Variables
 kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
+- link: "/monitors/guide/template-variable-evaluation/"
+  tag: "Guide"
+  text: "Perform arithmetic operations and functions with template variable evaluations"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Create monitors"
@@ -307,7 +310,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4] and [CI monitors][5]_
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][8]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -319,6 +322,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
+| Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
 
 For any `key:value` pair, the variable `{{log.tags.key}}` renders `value` in the alert message.
 
@@ -567,6 +571,10 @@ If your alert message includes information that needs to be encoded in a URL (fo
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /monitors/configuration/#alert-grouping
 [2]: /monitors/types/log/
 [3]: /monitors/types/apm/?tab=analytics
@@ -574,3 +582,4 @@ https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 [5]: /monitors/types/ci/
 [6]: /monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[8]: /monitors/types/database_monitoring/

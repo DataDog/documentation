@@ -42,7 +42,7 @@ draft: false
 git_integration_title: gitlab
 integration_id: gitlab
 integration_title: GitLab
-integration_version: 6.0.2
+integration_version: 6.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -185,6 +185,8 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 ### メトリクス
 {{< get-metrics-from-git "gitlab" >}}
 
+
+**注**: `[Legacy]`、`[OpenMetricsV1]`、`[OpenMetricsV2]` とマークされているメトリクスは、GitLab インテグレーションで対応する実装でのみ利用可能です。マークされていないメトリクスは、3 つの実装すべてで収集されます。
 
 ### イベント
 
