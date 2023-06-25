@@ -150,7 +150,8 @@ To create a span probe:
 [10]: /logs/log_configuration/indexes/#add-indexes
 [11]: /dynamic_instrumentation/how-it-works/
 [12]: https://app.datadoghq.com/dynamic-instrumentation
-[14]: /tracing/trace_collection/custom_instrumentation/java#adding-tags
+[13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
+[14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [15]: /how-it-works/#expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [2]: /agent/remote_config/
