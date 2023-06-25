@@ -17,7 +17,7 @@ title: Lambda 함수를 호출하는 리소스에 대한 심층적인 가시성
 
 다음 조건이 모두 충족되면 관리형 리소스가 자동으로 AWS Lambda 함수에 연결됩니다:
 - 함수는 Node.js 또는 Python Lambda 런타임으로 작성됩니다.
-- [Datadog의 X-Ray 통합이 포함된 APM][2]이 함수에 설정되고, [AWS X-Ray 세그먼트를 강화하도록 설정된 Datadog의 Lambda 라이브러리][3], **또는** [Datadog 추적 라이브러리가 포함된 APM][2](`dd-trace`)이 함수에 설정됩니다.
+- [Datadog의 X-Ray 통합이 포함된 APM][2]이 함수에 구성되고, [AWS X-Ray 세그먼트를 강화하도록 설정된 Datadog의 Lambda 라이브러리][3], **또는** [Datadog 추적 라이브러리가 포함된 APM][2](`dd-trace`)이 함수에 구성됩니다.
 - 함수를 호출하는 관리 리소스는 다음 중 하나입니다: API Gateway, SQS, SNS, EventBridge, Kinesis, DynamoDB, S3.
 - 사용자의 함수는 Datadog의  Lambda 라이브러리 최신 버전 (Node의 경우 `v3.46.0` 이상, Python의 경우 `v28` 이상)으로 계측됩니다.
 
