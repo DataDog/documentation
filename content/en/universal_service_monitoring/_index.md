@@ -821,7 +821,7 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 
 {{< /tabs >}}
 
-### Non Containerized Support
+### Non containerized support
 
 Universal Service Monitoring is now available in *beta* to monitor services running bare-metal on Linux virtual machines.
 
