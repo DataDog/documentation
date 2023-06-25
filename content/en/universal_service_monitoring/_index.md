@@ -734,7 +734,7 @@ SERVICE=<service>
 
 **For services running on IIS:**
 
-1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.  
+1. Install the [Datadog Agent][1] (version 6.41 or 7.41 and later) with the network kernel device driver component enabled.
    [DEPRECATED] _(version 7.44 or previous)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
 2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
@@ -816,6 +816,34 @@ Add the following entry:
 
 ```conf
 DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""},{"pattern":"<replace regex>","repl":"<replace pattern>"}]
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Non Containerized Support
+
+Universal Service Monitoring is now available in *beta* to monitor services running bare-metal on Linux virtual machines.
+
+Requires agent of version 7.42+
+
+{{< tabs >}}
+{{% tab "Configuration File" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```conf
+DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 ```
 {{% /tab %}}
 
