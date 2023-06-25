@@ -52,7 +52,9 @@ If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not f
 
 ### Enable Dynamic Instrumentation
 
-To enable Dynamic Instrumentation on a service, select its runtime and follow the setup instructions:
+To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16]. 
+
+For more details instructions, select the relevant runtime below:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
@@ -113,7 +115,7 @@ To create a metric probe:
 1. Complete the generic probe setup (choose service, environment, version, and probe location).
 1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
-1. Choose the value of the metric using the Debugger expression language. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
+1. Choose the value of the metric using the [Dynamic Instrumenation expression language][15]. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
 {{< img src="dynamic_instrumentation/metric_probe.png" alt="Creating a Dynamic Instrumentation metric probe" >}}
 
@@ -136,7 +138,7 @@ To create a span probe:
 1. Select **Span Tag** as the probe type.
 1. Complete the generic probe setup (choose service, environment, version, and probe location). 
 1. Specify a name for the tag.
-1. Specify the value of the tag using the Debugger expression language. 
+1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15]. 
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
  
@@ -145,6 +147,12 @@ To create a span probe:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
+[10]: /logs/log_configuration/indexes/#add-indexes
+[11]: /dynamic_instrumentation/how-it-works/
+[12]: https://app.datadoghq.com/dynamic-instrumentation
+[14]: /tracing/trace_collection/custom_instrumentation/java#adding-tags
+[15]: /how-it-works/#expression-language
+[16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [2]: /agent/remote_config/
 [3]: https://github.com/DataDog/dd-trace-java
 [4]: https://github.com/DataDog/dd-trace-py
@@ -153,8 +161,3 @@ To create a span probe:
 [7]: /integrations/guide/source-code-integration/
 [8]: /account_management/rbac/permissions#apm
 [9]: /logs/log_configuration/indexes/#exclusion-filters
-[10]: /logs/log_configuration/indexes/#add-indexes
-[11]: /dynamic_instrumentation/how-it-works/
-[12]: https://app.datadoghq.com/dynamic-instrumentation
-[13]: /tracing/trace_collection/custom_instrumentation/java#adding-spans
-[14]: /tracing/trace_collection/custom_instrumentation/java#adding-tags

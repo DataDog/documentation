@@ -11,8 +11,6 @@ Dynamic instrumentation allows you to add probes to your production systems at a
 
 ## Probe types
 
-You can create *log probes* and *metric probes*.
-
 ### Log probes
 
 Log probes are enabled by default on all service instances that match the specified environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
@@ -32,8 +30,6 @@ You must set a log message template on every log probe. The template supports em
 
 You can also set a condition on a log probe using the [expression language](#expression-language). The expression must evaluate to a Boolean. The probe executes if the expression is true, and does not capture or emit any data if the expression is false.
 
-**Note**: The capture limits are configurable and subject to change while Dynamic Instrumentation is in beta.
-
 ### Metric probes
 
 Metric probes are enabled by default on all service instances that match the specified environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
@@ -45,7 +41,7 @@ Dynamic Instrumentation metric probes support the following metric types:
 - [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression](#expression-language).
 
 
-#### Expression language
+## Expression language
 
 Use the Dynamic Instrumentation expression language in log message templates, metric expressions, and probe conditions.
 
