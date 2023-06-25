@@ -23,11 +23,6 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
-{{< callout url="https://www.datadoghq.com/dynamic-instrumentation-request/" >}}
-  Dynamic Instrumentation is in private beta. Fill out this form if you would like to
-  access it.
-{{< /callout >}}
-
 Dynamic Instrumentation lets you capture data from your live applications without needing to do any code changes or redeployment.
 
 ## Getting started
@@ -37,17 +32,17 @@ Dynamic Instrumentation requires the following:
 
 - [Datadog Agent][1] 7.41.1 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][3] 1.8.0 or higher.
+- For Java applications, tracing library [`dd-trace-java`][3] 1.15.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 1.7.5 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.23.0 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.32.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][7] is set up for your service.
 
-**Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
+**Note**: The "Dynamic Instrumentation Read Configuration" (`debugger_read`) permission is required to access the Dynamic Instrumentation page, and the "Dynamic Instrumentation Write Configuration" (`debugger_write`) permission is required to create or modify instrumentations. For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
 
 ### Create a logs index
 
-Dynamic Instrumentation logs are sent to Datadog and they appear alongside your application logs.
+Dynamic Instrumentation allows you to create "Dynamic Logs" that are sent to Datadog and appear alongside your regular application logs.
 
 If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not filtered:
 
@@ -88,16 +83,16 @@ If you enable `Capture method parameters and local variables` on the log probe, 
 - exceptions 
 You can see the captured values in the Datadog UI. 
 
-Because capturing this data is performance-intensive, it is enabled on only one instance of your service that matches the probe's environment and version settings. Probes with capture enabled are rate limited to execute once per second.
+Because capturing this data is performance-intensive, it is enabled on only one instance of your service that matches the probe's environment and version settings. Probes with this setting enabled are rate limited to one hit per second.
 
-Log probes without extra data capturing are enabled on all service instances that match the specified environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
+Log probes without extra data capturing are enabled on all service instances that match the specified environment and version. They are rate limited to execute at most 5000 times per second, on each instance of your service.
 
 For more information, read [How Dynamic Instrumentation Works][11].
 
 To create a log probe:
 
-1. Complete the generic probe setup (choose service, environment, version, and probe location).
 1. Select **Log** as the probe type.
+1. Complete the generic probe setup (choose service, environment, version, and probe location).
 1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
 1. Optionally enable extra data capturing from the probe.
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
@@ -114,14 +109,37 @@ For more information, read [How Dynamic Instrumentation Works][11].
 
 To create a metric probe:
 
-1. Complete the generic probe setup (choose service, environment, version, and probe location).
 1. Select **Metric** as the probe type.
+1. Complete the generic probe setup (choose service, environment, version, and probe location).
 1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
 1. Choose the value of the metric using the Debugger expression language. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
 {{< img src="dynamic_instrumentation/metric_probe.png" alt="Creating a Dynamic Instrumentation metric probe" >}}
 
+### Creating a span probe
+
+A *span probe* emits a span when a method is executed. You can use a *span probe* as a more efficient alternative to [creating new spans with Custom Instrumentation]][13], as it does not require making code changes and redeploying your software. If the method throws an exception, the details of the exception will be associated with the newly created span's `error` tag.
+
+To create a span probe:
+
+1. Select **Span** as the probe type.
+1. Complete the generic probe setup (choose service, environment, version, and probe location). 
+
+
+### Creating a span tag probe
+
+A *span tag* probe decorates an existing span with a tag value.  You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to addings tags in code][14], as it does not require making code changes and redeploying your software.
+
+To create a span probe:
+
+1. Select **Span Tag** as the probe type.
+1. Complete the generic probe setup (choose service, environment, version, and probe location). 
+1. Specify a name for the tag.
+1. Specify the value of the tag using the Debugger expression language. 
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
+1. Optionally add additional tags, each with their own name, expression, and optional condition.
+ 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,3 +156,5 @@ To create a metric probe:
 [10]: /logs/log_configuration/indexes/#add-indexes
 [11]: /dynamic_instrumentation/how-it-works/
 [12]: https://app.datadoghq.com/dynamic-instrumentation
+[13]: /tracing/trace_collection/custom_instrumentation/java#adding-spans
+[14]: /tracing/trace_collection/custom_instrumentation/java#adding-tags
