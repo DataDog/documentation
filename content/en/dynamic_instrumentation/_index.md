@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /tracing/dynamic_instrumentation/
 is_beta: true
-private: true
+private: false
 further_reading:
 - link: "/dynamic_instrumentation/how-it-works/"
   tag: "Documentation"
