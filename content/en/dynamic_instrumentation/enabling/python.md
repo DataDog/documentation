@@ -4,7 +4,7 @@ kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/python/
 is_beta: true
-private: true
+private: false
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 20
