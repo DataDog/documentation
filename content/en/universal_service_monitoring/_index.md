@@ -823,7 +823,7 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 
 ### Non containerized support
 
-Universal Service Monitoring is now available in *beta* to monitor services running bare-metal on Linux virtual machines.
+Universal Service Monitoring available in *beta* to monitor services running bare-metal on Linux virtual machines.
 
 Requires agent of version 7.42+
 
