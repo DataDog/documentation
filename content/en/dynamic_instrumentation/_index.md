@@ -97,7 +97,7 @@ If you enable `Capture method parameters and local variables` on the log probe, 
   - Call **stack trace**.
   - Caught and uncaught **exceptions**.
 
-Because capturing this data is performance-intensive, by default it is enabled on only one instance of your service that matches the specified environment and version. Probes with this setting enabled are rate limited to one hit per second.
+Because capturing the execution context is performance-intensive, by default it is enabled on only one instance of your service that matches the specified environment and version. Probes with this setting enabled are rate limited to one hit per second.
 
 You must set a log message template on every log probe. The template supports embedding [expressions](#expression-language) inside curly brackets. For example: `User {user.id} purchased {count(products)} products`.
 
