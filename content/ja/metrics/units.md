@@ -48,7 +48,7 @@ further_reading:
 | 電流     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
 | 電位   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
 | APM         | スパン                                                                                                                                                                                                                                                                                                                       |
-| SYNTHETICS  | run / step                                                                                                                                                                                                                                                                                                                       |
+| SYNTHETICS  | run                                                                                                                                                                                                                                                                                                                        |
 
 ## 数値のフォーマット
 

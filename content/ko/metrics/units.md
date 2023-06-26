@@ -54,7 +54,7 @@ title: 메트릭 단위
 | 전류     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
 | 퍼텐셜   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
 | APM         | span                                                                                                                                                                                                                                                                                                                       |
-| 신서틱(Synthetic)  | run / step                                                                                                                                                                                                                                                                                                                       |
+| 신서틱(Synthetic)  | run                                                                                                                                                                                                                                                                                                                        |
 
 ## 숫자 형식
 

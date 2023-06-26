@@ -54,7 +54,7 @@ Les unités suivantes peuvent être associées aux métriques transmises à Data
 | COURANT     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
 | TENSION   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
 | APM         | span                                                                                                                                                                                                                                                                                                                       |
-| SYNTHETICS  | run / step                                                                                                                                                                                                                                                                                                                        |
+| SYNTHETICS  | run                                                                                                                                                                                                                                                                                                                        |
 
 ## Format des nombres
 
