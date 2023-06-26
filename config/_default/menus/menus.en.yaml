@@ -745,8 +745,8 @@ main:
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
-    identifier: guides
-    weight: 9
+    identifier: dashboards_guides
+    weight: 99
   - name: Serverless
     url: serverless
     pre: serverless
@@ -4020,6 +4020,10 @@ main:
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
     weight: 801
+  - name: Cost Details
+    url: account_management/plan_and_usage/cost_details/
+    parent: account_management_plan_and_usage
+    weight: 802
   - name: Billing
     url: account_management/billing/
     parent: account_management
