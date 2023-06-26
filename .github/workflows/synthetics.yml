@@ -13,7 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          ref: ${{ github.ref }}
+          path: repo
+          sparse-checkout: |
+            .
 
       - name: Extract branch name
         shell: bash
@@ -49,4 +52,4 @@ jobs:
         with:
           api_key: ${{secrets.DD_API_KEY}}
           app_key: ${{secrets.DD_APP_KEY}}
-          config_path: './datadog-ci.preview.json'
+          config_path: 'repo/datadog-ci.preview.json'

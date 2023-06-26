@@ -107,7 +107,7 @@ The **Context Variables** tab for each step provides a map of all context variab
 
 {{< img src="service_management/workflows/context-variables.png" alt="The Context Variables tab" >}}
 
-Access a context variable in a step by enclosing it in double braces (`{{`). Context variables are available in fields marked with the `{{` notation.
+Access a context variable in a step by enclosing it in double braces (`{{`). Context variables are available in fields marked with the `{{` notation. To access fields within context variables, use [Handlebars expression syntax][2].
 {{< img src="service_management/workflows/use-context-variable.mp4" alt="Use double fences in a supported text field to insert a context variable" video="true" >}}
 
 ### Workflow variables
@@ -145,7 +145,7 @@ To reference the input parameter in a step, use the syntax `{{ Trigger.<paramete
 
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
 
-You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][2].
+You can add an implicit input parameter (a parameter that doesn't already exist in the workflow) by typing it into a workflow step using the `{{ Trigger.<parameter name> }}` syntax. The next time you save the workflow, a dialog appears allowing you to convert the parameter to an explicit parameter. For more information on triggering workflows, see [Trigger a workflow][3].
 
 If you're looking for an existing input parameter, start typing `{{ Trigger.` to see if it appears as a suggestion. Alternatively, consult the [Context Variables](#context-variables) tab for a list of available parameters.
 
@@ -194,4 +194,5 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/workflow
-[2]: /service_management/workflows/trigger
+[2]: https://handlebarsjs.com/guide/expressions.html#expressions
+[3]: /service_management/workflows/trigger

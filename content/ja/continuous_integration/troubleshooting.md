@@ -159,13 +159,13 @@ Ruby の [timecop][8] や Python の [FreezeGun][9] など、時間に依存す�
 
 - リポジトリには、過去 1 か月間に少なくとも 2 回のコミット履歴が必要です。
 - 過去のコミットでテストコードカバレッジを収集している必要があり、これは Intelligent Test Runner が有効になっているテスト実行で発生します。
-- git クローンにはコミット履歴とツリー履歴が含まれている必要があります。シャロー git クローン (`git clone --depth=0`) はサポートされていません。
+- git clone にはコミット履歴とツリー履歴が含まれていなければなりません。Intelligent Test Runner は、履歴を含まないシャロー git クローン (`git clone --depth=0`) をアンシャローしようとしますが、古いバージョンの git ではうまくいかないかもしれません。CI ジョブがシャロー git クローンを使用している場合は、次のコマンドを使用して部分的な git クローンを使用するように変更できます: `git clone --filter=blob:none`
 
 これらの制限により、Intelligent Test Runner を初めて有効にした場合、スキップされたテストが確認できず、コードカバレッジが自動的に収集されるため、テストの実行時間が通常より遅くなる場合があります。
 
 Intelligent Test Runner は、過去 1 か月間のコミット履歴とテストコードカバレッジ情報のみを考慮します。さらに、コミット後 1 週間以上経過したコードカバレッジ情報は考慮されません。
 
-CI ジョブがシャロー git クローンを使用している場合、コマンド `git clone --filter=blob:none` を使用して部分的な git クローンを使用するように変更することができます。
+[GitHub の UI からフォークの同期を行う][13]と、生成された同期コミットに対してすべてのテストが実行されてしまうという制限があります。
 
 ### Intelligent Test Runner が誤ってテストをスキップしてしまう
 
@@ -194,3 +194,4 @@ Intelligent Test Runner は、コードカバレッジに基づいてテスト�
 [10]: /ja/continuous_integration/tests/junit_upload/?tabs=linux#collecting-environment-configuration-metadata
 [11]: https://app.datadoghq.com/ci/settings/repository
 [12]: /ja/continuous_integration/intelligent_test_runner/
+[13]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
