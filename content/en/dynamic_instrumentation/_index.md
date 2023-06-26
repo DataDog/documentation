@@ -113,7 +113,7 @@ To create a log probe:
 
 {{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
 
-### Creating a metric probe
+### Metric probes
 
 A *metric probe* emits a metric when it executes. 
 
