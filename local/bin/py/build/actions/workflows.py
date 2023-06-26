@@ -55,7 +55,7 @@ def workflows(content, content_dir):
                         output_content = TEMPLATE.format(front_matter=yaml.dump(action_data, default_flow_style=False).strip(), content=content)
                         dest_dir = Path(f"{content_dir}{dest_path}")
                         dest_dir.mkdir(exist_ok=True)
-                        name = f"{output_file_name}_{action_name}"
+                        name = f"{output_file_name}_{action_name}".lower()
                         dest_file = dest_dir.joinpath(name).with_suffix('.md')
                         with open(dest_file, mode='w', encoding='utf-8') as out_file:
                             out_file.write(output_content)
