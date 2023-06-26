@@ -36,8 +36,9 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 
 Required Agent version
 : Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40.
+For non-containerized services see instructions [here](7)
 
-Your containerized service must be running on one of the following supported platforms
+Your service must be running on one of the following supported platforms
 : Linux Kernel 4.14 and greater<br/>
 CentOS or RHEL 8.0 and greater
 
@@ -773,6 +774,35 @@ After enabling Universal Service Monitoring, you can:
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
+### Support for non-containerized services (Public Beta)
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in *beta* to monitor services running bare-metal on Linux virtual machines.
+</div>
+
+Requires agent of version 7.42+
+
+{{< tabs >}}
+{{% tab "Configuration File" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  process_service_inference:
+    enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```conf
+DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Path exclusion and replacement
 
@@ -821,36 +851,6 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 
 {{< /tabs >}}
 
-### Non-containerized support
-
-<div class="alert alert-info">
-Universal Service Monitoring is available in *beta* to monitor services running bare-metal on Linux virtual machines.
-</div>
-
-Requires agent of version 7.42+
-
-{{< tabs >}}
-{{% tab "Configuration File" %}}
-
-Add the following configuration to the `system-probe.yaml`:
-
-```yaml
-service_monitoring_config:
-  enabled: true
-  process_service_inference:
-    enabled: true
-```
-
-{{% /tab %}}
-{{% tab "Environment Variable" %}}
-
-```conf
-DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
-```
-{{% /tab %}}
-
-{{< /tabs >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -861,3 +861,4 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
 [6]: /service_management/service_level_objectives/metric/
+[7]: #support-for-non-containerized-services-(Public-Beta)
