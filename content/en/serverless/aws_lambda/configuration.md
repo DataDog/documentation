@@ -555,7 +555,7 @@ To scrub trace attributes for data security, see [Configure the Datadog Agent or
 
 Trace collection through the Datadog Lambda extension is enabled by default. 
 
-If you want to stop collecting traces from your Lambda functions, follow the instructions below:
+If you want to start collecting traces from your Lambda functions, apply the configurations below:
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -608,7 +608,7 @@ Set the environment variable `DD_TRACE_ENABLED` to `true` on your Lambda functio
 
 #### Disable trace collection
 
-If you want to stop collecting traces from your Lambda functions, follow the instructions below:
+If you want to stop collecting traces from your Lambda functions, apply the configurations below:
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
