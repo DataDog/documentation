@@ -31,16 +31,10 @@ The **Code Insights** view keeps you informed about:
 - [Flaky tests][9] detected by CI Visibility
 - Profiling insights from [Watchdog Insights][10]
 
-With the **Continuous Profiler**, the plugin helps you to reduce latency and lower cloud costs by highlighting code lines that:
+The **Continuous Profiler** helps you to reduce latency and lower cloud costs by highlighting code lines that:
 - Consume the most CPU
 - Allocate the most memory
 - Spend the most time on locks, disk I/O, and socket I/O
-
-In addition to code highlighting, you can use the Datadog plugin for Intellij IDEA to:
-- Identify methods that consume the most resources with the **Top List** view.
-- Visualize aggregated profile data with the **Flame Graph** view.
-- Navigate directly from the top list and flame graph to the relevant lines in your code.
-- Find resource consumption broken down by method name and line number.
 
 The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
 
