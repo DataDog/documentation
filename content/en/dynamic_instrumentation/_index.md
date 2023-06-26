@@ -54,7 +54,7 @@ If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not f
 
 To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16]. 
 
-For more details instructions, select the relevant runtime below:
+For more detailed instructions, select the relevant runtime below:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
