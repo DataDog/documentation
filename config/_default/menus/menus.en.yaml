@@ -9894,6 +9894,46 @@ api:
         - ListServiceDefinitions
       unstable: []
       order: 1
+  - name: Spans
+    url: /api/latest/spans/
+    identifier: spans
+    generated: true
+  - name: Search spans
+    url: '#search-spans'
+    identifier: spans-search-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSpans
+      unstable: []
+      order: 3
+  - name: Get a list of spans
+    url: '#get-a-list-of-spans'
+    identifier: spans-get-a-list-of-spans
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSpansGet
+      unstable: []
+      order: 4
+  - name: Aggregate events
+    url: '#aggregate-events'
+    identifier: spans-aggregate-events
+    parent: spans
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AggregateSpans
+      unstable: []
+      order: 2
   - name: Spans Metrics
     url: /api/latest/spans-metrics/
     identifier: spans-metrics
