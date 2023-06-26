@@ -238,7 +238,7 @@ If you configure a conditional block for a state transition into `alert` or `war
 
 Use attribute and tag variables to render alert messages that are customized, informative, and specific to help understand the nature of the alert.
 
-**Note**: If the monitor is configured to recover after there are no more results for the query (example, setting an above threshold `> 0`), the recovery message doesn't contain any data. To persist information in the recovery message, group by additional tags, which are accessible by `{{tag.name}}`.
+**Note**: If the monitor is configured to recover in no-data conditions (for example, when there are no events matching the query), the recovery message doesn't contain any data. To persist information in the recovery message, group by additional tags, which are accessible by `{{<tag.name>}}`.
 
 ### Multi alert variables
 
