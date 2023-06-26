@@ -30,7 +30,7 @@ Dynamic Instrumentation lets you capture data from your live applications withou
 ### Requirements
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.41.1 or higher is installed alongside your service.
+- [Datadog Agent][1] 7.44.0 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
 - For Java applications, tracing library [`dd-trace-java`][3] 1.15.0 or higher.
 - For Python applications, tracing library [`dd-trace-py`][4] 1.7.5 or higher.
