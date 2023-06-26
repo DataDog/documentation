@@ -172,7 +172,7 @@ To create a span tag probe:
 [12]: https://app.datadoghq.com/dynamic-instrumentation
 [13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
 [14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
-[15]: /dynamic_instrumentation/how-it-works/#expression-language
+[15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [2]: /agent/remote_config/
 [3]: https://github.com/DataDog/dd-trace-java
