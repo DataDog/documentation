@@ -48,10 +48,14 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 
 ## シンプルの使用
 
+> **注**: 最近、タスクのメジャーバージョンを `SyntheticsRunTests@0` から `SyntheticsRunTests@1` に変更しました。
+>
+> これは**重大な変更ではありません**が、タスクバージョンと拡張機能バージョンの間の調整です。
+
 ### 公開 ID を使用したタスク例
 
 ```yaml
-- task: SyntheticsRunTests@0
+- task: SyntheticsRunTests@1
   displayName: Run Datadog Synthetic tests
   inputs:
     authenticationType: 'connectedService'
@@ -64,7 +68,7 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 ### 既存の `synthetics.json` ファイルを使用したタスク例
 
 ```yaml
-- task: SyntheticsRunTests@0
+- task: SyntheticsRunTests@1
   displayName: Run Datadog Synthetic tests
   inputs:
     authenticationType: 'connectedService'
@@ -77,7 +81,7 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 ### 認証にパイプラインシークレットを使用したタスク例
 
 ```yaml
-- task: SyntheticsRunTests@0
+- task: SyntheticsRunTests@1
   inputs:
     authenticationType: 'apiAppKeys'
     apiKey: '$(DatadogApiKey)'
@@ -88,10 +92,14 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 
 ## 複雑の使用
 
+> **注**: 最近、タスクのメジャーバージョンを `SyntheticsRunTests@0` から `SyntheticsRunTests@1` に変更しました。
+>
+> これは**重大な変更ではありません**が、タスクバージョンと拡張機能バージョンの間の調整です。
+
 ### `testSearchQuery` を使用したタスク例
 
 ```yaml
-- task: SyntheticsRunTests@0
+- task: SyntheticsRunTests@1
   displayName: Run Datadog Synthetic tests
   inputs:
     authenticationType: 'connectedService'
@@ -105,7 +113,7 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 ### `testSearchQuery` と変数のオーバーライドを使用したタスク例
 
 ```yaml
-- task: SyntheticsRunTests@0
+- task: SyntheticsRunTests@1
   displayName: Run Datadog Synthetic tests
   inputs:
     authenticationType: 'connectedService'
@@ -118,7 +126,7 @@ Datadog アカウントに接続するために、Azure パイプラインプロ
 このタスクは、グローバルな `datadog-ci.config.json` ファイルへのパスをオーバーライドします。
 
 ```yaml
-- task: SyntheticsRunTests@0
+- task: SyntheticsRunTests@1
   displayName: Run Datadog Synthetic tests
   inputs:
     authenticationType: 'connectedService'
