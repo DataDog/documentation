@@ -58,7 +58,7 @@ The following device-related attributes are attached automatically to all events
 
 ### Connectivity
 
-The following netowrk-related attributes are attached automatically to Resource and Error events collected by Datadog:
+The following network-related attributes are attached automatically to Resource and Error events collected by Datadog:
 
 | Attribute name                           | Type   | Description                                     |
 |------------------------------------------|--------|-------------------------------------------------|
