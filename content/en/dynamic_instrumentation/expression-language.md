@@ -4,7 +4,7 @@ kind: documentation
 private: false
 ---
 
-Use the Dynamic Instrumentation expression language in log message templates, metric expressions, tag values, and probe conditions.
+The Dynamic Instrumentation Expression Language is a language that's designed to handle tasks such as formulating log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but stands as its own entity with unique rules. The language allows for the accessing of local variables, method parameters, and nested fields within objects, and supports the use of comparison and logical operators. 
 
 For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
 
@@ -19,6 +19,8 @@ Some general guidelines on what the Expression Language supports:
 * You CAN use the `null` literal (equivalent of `nil` in Python)
 * You CANNOT call methods, as Dynamic Instrumentation does not allow users to execute code that may have side effects.
 * You CANNOT use syntax that is used in your native programming language if it does not appear in this document. While the Dynamic Instrumentation Expression Language includes many constructs that appear in popular programming language, it is its own language with syntax.
+
+The following sections summarize the different variables and operations that the Dynamic Instrumentation Expression Language supports.
 
 ### Contextual variables
 
