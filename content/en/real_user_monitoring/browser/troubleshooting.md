@@ -108,7 +108,7 @@ The RUM browser SDK allows you to set [global context](https://docs.datadoghq.co
 
 To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However sending large volumes of data can still impact the performance for users on slow internet connections.
 
-Therefore, we recommend keeping the size of the global context, the user information, and the feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
+Therefore, it is recommended to keep the size of the global context, the user information, and the feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
 
 ## Cross origin read blocking warning
 
