@@ -38,7 +38,7 @@ further_reading:
 
 Get metrics and logs from Kubernetes in real time to:
 
-- Visualize and monitor Kubernetes states
+- Visualize and monitor Kubernetes states.
 - Be notified about Kubernetes failovers and events.
 
 ## Setup
