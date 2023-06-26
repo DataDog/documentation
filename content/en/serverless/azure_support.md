@@ -4,33 +4,28 @@ kind: documentation
 description: "Datadog support for Azure App Services"
 ---
 
-| Abbreviation | Feature | Description |
-| ------------ | ------- | ----------- |
-| IM | Integration Metrics | TK |
-| IL | Azure Integration Logs | TK |
-| T | Tracing | TK |
-| CM | Custom Metrics | TK |
-| P | Profiling | TK |
-| DL | Direct Logging | TK |
+| Abbreviation | Feature |
+| ------------ | ------- |
+| IM | Integration Metrics |
+| IL | Azure Integration Logs |
+| T | Tracing |
+| CM | Custom Metrics |
+| P | Profiling |
+| DL | Direct Logging |
 
+### Windows
 
 <table>
     <tr>
-        <th>OS</th>
         <th>App Type</th>
         <th>Plan</th>
         <th>.NET</th>
         <th>Java</th>
         <th>Node</th>
-        <th>Python</th>
-        <th>Ruby</th>
         <th>PHP</th>
         <th>Container</th>
     </tr>
     <tr>
-        <td rowspan="9">
-            Windows
-        </td>
         <td rowspan="3">
             Web/API App
         </td>
@@ -40,8 +35,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL, T, CM, P</td>
         <td>IM, IL, T+, CM+</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -52,8 +45,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -64,8 +55,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -79,8 +68,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL, T, CM, P</td>
         <td>IM, IL, T+, CM+</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -91,8 +78,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -103,8 +88,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -118,8 +101,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -130,8 +111,6 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
@@ -142,15 +121,26 @@ description: "Datadog support for Azure App Services"
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
-        <td>n/a</td>
-        <td>n/a</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
     </tr>
+</table>
+
+### Linux 
+
+<table>
     <tr>
-        <td rowspan="9">
-            Linux
-        </td>
+        <th>App Type</th>
+        <th>Plan</th>
+        <th>.NET</th>
+        <th>Java</th>
+        <th>Node</th>
+        <th>Python</th>
+        <th>Ruby</th>
+        <th>PHP</th>
+        <th>Container</th>
+    </tr>
+    <tr>
         <td rowspan="3">
             Web/API App
         </td>
