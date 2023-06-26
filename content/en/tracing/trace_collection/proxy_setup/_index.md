@@ -571,7 +571,7 @@ by the Datadog Agent</a>. We are working to resolve this bug.
 [13]: https://github.com/kubernetes/ingress-nginx
 [14]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#main-snippet
 [15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
-[16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ #datadog-sample-rate
+[16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
 [17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
 {{% /tab %}}
 {{% tab "Istio" %}}
