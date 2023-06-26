@@ -180,6 +180,8 @@ Run the agent installer package for the latest 5.x version, instructions can be 
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
+test
+
 1. Stop the Agent with the systray app, if it's running.
 2. Exit the systray app.
 3. Uninstall the Datadog Agent application.
