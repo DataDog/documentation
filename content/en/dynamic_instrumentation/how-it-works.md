@@ -61,7 +61,7 @@ Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name,
 
 Some general guidelines on what the Expression Language supports:
 * You CAN access local variables, method parameters, and deeply nested fields/attributes within objects
-* You CAN use comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`) to compare variables, fields, and constants in your conditions. For example, you could write localVar1.field1.field2 != 15.
+* You CAN use comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`) to compare variables, fields, and constants in your conditions, as shown in the example `localVar1.field1.field2 != 15.`
 * You CAN use logical operators (`&&`, `||`, and `not` or `!`) to build complex Boolean conditions.
 * You CAN use the `null` literal (equivalent of `nil` in Python)
 * You CANNOT call methods, as Dynamic Instrumentation does not allow users to execute code that may have side effects.
@@ -95,8 +95,8 @@ Assuming we have a variable `myCollection` defined as `[1,2,3]`:
 
 | Operation | Description | Example |
 |-----------|-------------|---------|
-| `any(value_src, {predicate})` | Checks a collection for the presence of an element passing the predicate. The current element is accessed as `@it` reference. | `any(myCollection, @it > 2)` -> `True` |
-| `all(value_src, {predicate})` | Checks a collection for all elements passing the predicate. The current element is accessed as `@it` reference. | `all(myCollection, @it < 4)` -> `True` |
+| `any(value_src, {predicate})` | Check if there is at least one element in the collection that satisfies the given predicate. The current element is accessed as `@it` reference. | `any(myCollection, @it > 2)` -> `True` |
+| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed as `@it` reference. | `all(myCollection, @it < 4)` -> `True` |
 | `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed as `@it` reference. | `filter(myCollection, @it > 1)` -> `[2,3]` |
 | `len(value_src)` | Get the collection size. | `len(myCollection)` -> `3` |
 | `[ n ]` | For collections, returns the nth item in the collection. For maps/dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | `myCollection[1]` -> `2` |
