@@ -131,7 +131,7 @@ Additionally, test suite level visibility is only supported in Agentless mode.
 
 When creating a [dashboard][14] or a [notebook][15], you can use test execution data in your search query, which updates the visualization widget options.
 
-## Create a monitor
+## Alert on test data
 
 When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16]. 
 

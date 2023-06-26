@@ -105,7 +105,7 @@ Alternatively, click the [**Analytics**][7] button to interactively filter and g
 
 When creating a [dashboard][8] or a [notebook][9], you can use CI pipeline data in your search query, which updates the visualization widget options. For more information, see the [Dashboards][10] and [Notebooks documentation][11].
 
-## Export data to a monitor
+## Alert on pipeline data
 
 You can export your search query to a [CI Pipeline monitor][12] on the [**Pipelines Executions** page][6] or the [**Test Runs** page][13] by clicking the **Export** button.
 
