@@ -26,9 +26,13 @@ Complete the following steps to enable Database Monitoring with your database:
 1. [Grant the Agent access to the database](#grant-the-agent-access).
 2. [Install the Agent](#install-the-agent).
 
-## Grant the Agent access
+## Agent database user setup
 
 The Datadog Agent requires read-only access to the database server in order to collect samples.
+
+### Create user
+
+If you've previously installed the Oracle integration, skip this step because the user already exists. You must, however, execute the subsequent steps.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
@@ -36,7 +40,11 @@ Create a read-only login to connect to your server and grant the required permis
 CREATE USER c##datadog IDENTIFIED BY &password CONTAINER = ALL ;
 
 ALTER USER c##datadog SET CONTAINER_DATA=ALL CONTAINER=CURRENT;
+```
 
+### Grant permissions
+
+```SQL
 grant create session to c##datadog ;
 grant select on v_$session to c##datadog ;
 grant select on v_$database to c##datadog ;
@@ -55,6 +63,8 @@ grant select on V_$DATAFILE to c##datadog ;
 grant select on V_$SYSMETRIC to c##datadog ;
 grant select on V_$SGAINFO to c##datadog ;
 ```
+
+### Create view
 
 Create a new `view`, and give the Agent user access to it:
 
@@ -149,20 +159,28 @@ WHERE
 GRANT SELECT ON dd_session TO c##datadog ;
 ```
 
-## Install the Agent
+## Configure the Agent
 
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note you must install the [correct version][7] to participate in the beta.
+To start collecting Oracle telemetry, first [install the Datadog Agent][1]. 
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
 
 ```yaml
 init_config:
 instances:
-  - dbm: true
-    server: '<HOSTNAME>:<SQL_PORT>'
+  - server: '<HOSTNAME_1>:<PORT>'
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
+    dbm: true
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+  - server: '<HOSTNAME_2>:<PORT>'
+    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    username: 'c##datadog'
+    password: '<PASSWORD>'
+    dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -176,14 +194,12 @@ Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Databases][6] page in Datadog to get started.
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: /database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
-[7]: /database_monitoring/setup_oracle/#supported-agent-versions
-
 
 ## Further reading
 
