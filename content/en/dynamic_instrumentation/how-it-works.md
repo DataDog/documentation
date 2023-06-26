@@ -13,7 +13,7 @@ Dynamic instrumentation allows you to add probes to your production systems at a
 
 ### Log probes
 
-Log probes are enabled by default on all service instances that match the specified environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
+A *log probe* emits a log when it executes. Log probes are enabled by default on all service instances that match the specified environment and version. They are rate limited to execute at most 5000 times per second, on each service instance.
 
 If you enable `Capture method parameters and local variables` on the log probe, Dynamic Instrumentation captures the following data and adds it to the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following limits by default:
@@ -32,7 +32,7 @@ You can also set a condition on a log probe using the [expression language](#exp
 
 ### Metric probes
 
-Metric probes are enabled by default on all service instances that match the specified environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
+A *metric probe* emits a metric when it executes. Metric probes are enabled by default on all service instances that match the specified environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
 
 Dynamic Instrumentation metric probes support the following metric types:
 
@@ -47,7 +47,7 @@ A *span probe* emits a span when a method is executed. You can use a *span probe
 
 ### Span Tag probes
 
-A *span tag* probe decorates an existing span with a tag value.  You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to addings tags in code][5], as it does not require making code changes and redeploying your software.
+A *span tag probe* decorates an existing span with a tag value.  You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to addings tags in code][5], as it does not require making code changes and redeploying your software.
 
 ## Expression language
 

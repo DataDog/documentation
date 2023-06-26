@@ -64,18 +64,17 @@ Dynamic Instrumentation can help you understand what your application is doing a
 
 ### Creating a probe
 
-Both log and metric probes require the same initial setup:
+All probe types require the same initial setup:
 
 1. Go to the [Dynamic Instrumentation page][12].
 1. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
-1. If not prefilled, choose a service from the list.
-1. If not prefilled, choose runtime, environment and version.
+1. If not prefilled, choose service, runtime, environment and version.
 1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. 
    If you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a file and displays the file's code so you can choose the line.
 
 ### Creating a log probe
 
-A *log probe* emits a log when it executes.
+A *log probe* emits a log when it executes. 
 
 If you enable `Capture method parameters and local variables` on the log probe, it also captures the following values from the execution context and adds them to the log event:
 - method arguments
@@ -103,7 +102,7 @@ To create a log probe:
 
 ### Creating a metric probe
 
-A *metric probe* emits a metric when it executes.
+A *metric probe* emits a metric when it executes. 
 
 Metric probes are automatically enabled on all service instances that match the configured environment and version.
 You can use the Dynamic Instrumentation expression language to reference numeric values from the context, such as a variable, a class field, or an expression that yields a numeric value.
@@ -121,7 +120,9 @@ To create a metric probe:
 
 ### Creating a span probe
 
-A *span probe* emits a span when a method is executed. You can use a *span probe* as a more efficient alternative to [creating new spans with Custom Instrumentation]][13], as it does not require making code changes and redeploying your software. If the method throws an exception, the details of the exception will be associated with the newly created span's `error` tag.
+A *span probe* emits a span when a method is executed. 
+
+You can use a *span probe* as a more efficient alternative to [creating new spans with Custom Instrumentation][13], as it does not require making code changes and redeploying your software. If the method throws an exception, the details of the exception will be associated with the newly created span's `error` tag.
 
 To create a span probe:
 
@@ -131,9 +132,11 @@ To create a span probe:
 
 ### Creating a span tag probe
 
-A *span tag* probe decorates an existing span with a tag value.  You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to addings tags in code][14], as it does not require making code changes and redeploying your software.
+A *span tag* probe decorates an existing span with a tag value.  
 
-To create a span probe:
+You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to addings tags in code][14], as it does not require making code changes and redeploying your software.
+
+To create a span tag probe:
 
 1. Select **Span Tag** as the probe type.
 1. Complete the generic probe setup (choose service, environment, version, and probe location). 
