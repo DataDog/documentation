@@ -94,7 +94,7 @@
             file_name: '_index.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
-              
+
         - action: pull-and-push-folder
           branch: master
           globs:
@@ -348,7 +348,7 @@
               title: Static Analysis and CircleCI Orbs
               kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
-      
+
       - repo_name: datadog-static-analyzer-github-action
         contents:
         - action: pull-and-push-file
