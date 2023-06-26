@@ -1,6 +1,6 @@
 ---
 title: Support for Azure App Services
-kind: documentation
+kind: faq
 description: "Datadog support for Azure App Services"
 ---
 
