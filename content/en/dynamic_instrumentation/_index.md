@@ -66,7 +66,7 @@ Dynamic Instrumentation can help you understand what your application is doing a
 
 A probe allows you to collect data from specific points in your code without halting the execution of the program. 
 
-If you're a SRE, you can think of probes as a way of enhancing your observability by adding dynamic logs, metrics, and spans to running application without needing to stop or restart anything. This meant you can gather data immediately without disturbing the user experience or requiring lengthy deployments.
+If you're a SRE, you can think of probes as a way of enhancing your observability by adding dynamic logs, metrics, and spans to running application without needing to change code, deploy or restart a service. This means you can gather data immediately without disturbing the user experience or requiring lengthy deployments.
 
 If you're a developer, you can think of a probe as a "non-breaking breakpoint". In traditional debugging, a breakpoint is a point in the program where the execution stops, allowing the developer to inspect the state of the program at that point. However, in real-world production environments, it's not practical or even possible to stop the execution of the program. Probes fill in this gap by allowing you to inspect variable state in production environments in a completely non-intrusive way.
 
