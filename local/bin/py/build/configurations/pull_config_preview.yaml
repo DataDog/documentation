@@ -77,7 +77,7 @@
         contents:
 
         - action: integrations
-          branch: alai97/legacy-integration-page-readme-cleanup
+          branch: master
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
