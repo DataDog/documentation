@@ -72,12 +72,6 @@
           - integration/*/service_checks.json
           - integration/*/README.md
           - integration/*/__init__.py
-          options:
-            front_matters:
-              cascade:
-                algolia:
-                  rank: 60
-                  category: Integration
 
       - repo_name: integrations-core
         contents:
@@ -90,12 +84,6 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          options:
-            front_matters:
-              cascade:
-                algolia:
-                  rank: 60
-                  category: Integration
 
         - action: pull-and-push-file
           branch: master
@@ -106,10 +94,7 @@
             file_name: '_index.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
-              algolia:
-                rank: 70
-                category: Documentation            
-              
+
         - action: pull-and-push-folder
           branch: master
           globs:
@@ -119,10 +104,6 @@
             path_to_remove: 'docs/dev/'
             front_matters:
               dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
-              cascade:
-                algolia:
-                  rank: 70
-                  category: Documentation  
 
       - repo_name: integrations-extras
         contents:
@@ -135,12 +116,6 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          options:
-            front_matters:
-              cascade:
-                algolia:
-                  rank: 60
-                  category: Integration
 
       - repo_name: integrations-internal-core
         contents:
@@ -153,12 +128,6 @@
           - "*/assets/service_checks.json"
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
-          options:
-            front_matters:
-              cascade:
-                algolia:
-                  rank: 60
-                  category: Integration
 
       - repo_name: marketplace
         contents:
@@ -176,10 +145,8 @@
           - "*/images/*.svg"
           options:
             front_matters:
-              cascade:
-                algolia:
-                  rank: 60
-                  category: Marketplace Integration
+              algolia:
+                subcategory: Marketplace Integration
 
 
       - repo_name: ansible-datadog
@@ -386,7 +353,7 @@
               title: Static Analysis and CircleCI Orbs
               kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
-      
+
       - repo_name: datadog-static-analyzer-github-action
         contents:
         - action: pull-and-push-file
