@@ -60,7 +60,7 @@ To start collecting Oracle telemetry, first install the Datadog Agent [install t
 
 The Agent does not need to run on the same server nor the same platform as the monitored databases.
 
-Install the version mentioned in ##latest-agent-version because it contains all the currently implemented Oracle monitoring features and bug fixes.
+Datadog recommends you install the version listed in the [Latest agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
 
 If the latest agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in ###official-release. If the latest Agent version is a beta build, such as `7.44.1~dbm~oracle~beta~0.28`, follow the instructions in ####beta-build.
 
