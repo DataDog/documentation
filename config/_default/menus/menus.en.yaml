@@ -2377,12 +2377,43 @@ main:
     pre: datastreams-monitoring
     identifier: data_streams
     parent: apm_heading
-    weight: 170000
+    weight: 166000
   - name: Troubleshooting
     url: data_streams/troubleshooting
     identifier: data_streams_troubleshooting
     parent: data_streams
     weight: 1
+  - name: Dynamic Instrumentation
+    url: dynamic_instrumentation/
+    pre: apm
+    identifier: dyninst
+    parent: apm_heading
+    weight: 167000
+  - name: Enabling
+    url: dynamic_instrumentation/enabling
+    identifier: dyninst_enable
+    parent: dyninst
+    weight: 1
+  - name: Java
+    url: dynamic_instrumentation/enabling/java
+    identifier: dyninst_enable_java
+    parent: dyninst_enable
+    weight: 101
+  - name: Python
+    url: dynamic_instrumentation/enabling/python
+    identifier: dyninst_enable_python
+    parent: dyninst_enable
+    weight: 102
+  - name: .NET
+    url: dynamic_instrumentation/enabling/dotnet
+    identifier: dyninst_enable_dotnet
+    parent: dyninst_enable
+    weight: 103
+  - name: Expression Language
+    url: dynamic_instrumentation/expression-language
+    identifier: dyninst_explang
+    parent: dyninst
+    weight: 2
   - name: Log Management
     url: logs/
     pre: log

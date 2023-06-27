@@ -24,6 +24,8 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
+## Overview
+
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
 
 ## Getting started
@@ -60,11 +62,11 @@ For more detailed instructions, select your runtime below:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
-### Explore Dynamic Instrumentation
+## Explore Dynamic Instrumentation
 
 Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding a Dynamic Instrumentation probe you are exporting additional data from your application, without the need to change code or redeploy it.
 
-## Using probes
+### Using probes
 
 A probe allows you to collect data from specific points in your code without halting the execution of the program. 
 
@@ -116,7 +118,7 @@ You can also set a condition on a log probe using the [expression language][15].
 To create a log probe:
 
 1. Select **Log** as the probe type.
-1. Complete the generic probe setup (choose service, environment, version, and probe location).
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
 1. Optionally enable extra data capturing from the probe.
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
@@ -138,7 +140,7 @@ Dynamic Instrumentation metric probes support the following metric types:
 To create a metric probe:
 
 1. Select **Metric** as the probe type.
-1. Complete the generic probe setup (choose service, environment, version, and probe location).
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
 1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
@@ -154,7 +156,7 @@ You can use a *span probe* as a more efficient alternative to [creating new span
 To create a span probe:
 
 1. Select **Span** as the probe type.
-1. Complete the generic probe setup (choose service, environment, version, and probe location). 
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location). 
 
 
 ### Creating span tag probes
@@ -167,7 +169,7 @@ You can use a *span tag probe* as a more efficient alternative to [using Custom 
 To create a span tag probe:
 
 1. Select **Span Tag** as the probe type.
-1. Complete the generic probe setup (choose service, environment, version, and probe location). 
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location). 
 1. Specify a name for the tag.
 1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15]. 
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.

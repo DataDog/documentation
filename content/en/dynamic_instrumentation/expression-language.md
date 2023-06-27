@@ -16,12 +16,12 @@ Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name,
 
 Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
-* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15.`
+* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * Using logical operators (`&&`, `||`, and `not` or `!`) to build complex Boolean conditions.
 * Using the `null` literal (equivalent to `nil` in Python).
 
 It does **not** support:
-* Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects.
+* Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
 * Other native programming language syntax beyond what is described on this page.
 
 The following sections summarize the variables and operations that the Dynamic Instrumentation Expression Language supports.
