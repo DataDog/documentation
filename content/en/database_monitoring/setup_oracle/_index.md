@@ -58,7 +58,7 @@ Since the Agent doesn't require an external Oracle client, remove the `jdbc_driv
 
 To start collecting Oracle telemetry, first install the Datadog Agent [install the Datadog Agent][3]. 
 
-Agent need not to run on the same server or even the platform as the monitored databases.
+The Agent does not need to run on the same server nor the same platform as the monitored databases.
 
 Install the version mentioned in ##latest-agent-version because it contains all the currently implemented Oracle monitoring features and bug fixes.
 
