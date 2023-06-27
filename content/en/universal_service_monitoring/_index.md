@@ -861,4 +861,4 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
 [6]: /service_management/service_level_objectives/metric/
-[7]: #support-for-non-containerized-services-public-beta
+[7]: #support-for-non-containerized-services
