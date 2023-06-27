@@ -59,7 +59,7 @@ Still not seeing the type of data that you need? Developers have several choices
 
 The primary difference between custom checks and integrations is that integrations are reusable components that can become part of the Datadog's ecosystem. They generally take more effort (time to develop) and are best suited for general use-cases such as application frameworks, open source projects, or commonly used software. For more unique scenarios, such as monitoring services that are not widely used outside your team or organization, writing a custom check may be the most efficient option. 
 
-However, you may choose to write an integration instead of a custom check if your particular use-case requires you to publish and deploy your solution as a Python wheel (`.whl`). Metrics emitted through custom checks are considered custom metrics, which have a cost associated based on your subscription plan. However, once an integration gets accepted into the Datadog ecosystem, metrics that it emits are no longer considered custom metrics, and do not count against your custom metric count. For more information about how this might impact cost, see [Datadog Pricing][8].
+However, you may choose to write an integration instead of a custom check if your particular use case requires you to publish and deploy your solution as a Python wheel (`.whl`). Metrics emitted through custom checks are considered custom metrics, which have a cost associated based on your subscription plan. However, once an integration gets accepted into the Datadog ecosystem, metrics that it emits are no longer considered custom metrics, and do not count against your custom metric count. For more information about how this might impact cost, see [Datadog Pricing][8].
 
 ### How do I create an integration? 
 
@@ -69,7 +69,7 @@ The initial goal is to generate some code that collects the desired metrics in a
 
 Next, open a pull request against the [`integrations-extras` repository][7]. This signals to Datadog that you're ready to start reviewing code together. Don't worry if you have questions about tests, Datadog internals, or other topics—the Datadog Ecosystems team is ready to help, and the pull request is a good place to go over those concerns. Be sure to take advantage of the [Community Office Hours][4] as well.
 
-Once the integration has been validated (functionality, framework compliance, and general code quality) it is merged into `integrations-extras`. Once there, it becomes part of the Datadog ecosystem. 
+Once the integration has been validated for functionality, framework compliance, and general code quality, it is merged into `integrations-extras` where it becomes part of the Datadog ecosystem. 
 
 When deciding how to send unsupported data to Datadog, the main considerations are effort (time to develop) and budget (cost of custom metrics). If you are trying to see data that Datadog doesn't support, start by deciding which method makes the most sense to start sending data:
 
@@ -82,7 +82,7 @@ When deciding how to send unsupported data to Datadog, the main considerations a
 
 ### Why create an integration?
 
-[Custom Checks][1] are great for occasional reporting, or in cases where the data source is either unique or very limited. For more general use-cases - such as application frameworks, open source projects, or commonly-used software - it makes sense to write an integration.
+[Custom Checks][1] are great for occasional reporting, or in cases where the data source is either unique or very limited. For more general use cases - such as application frameworks, open source projects, or commonly-used software - it makes sense to write an integration.
 
 Metrics reported from accepted integrations are not counted as custom metrics, and therefore don't impact your custom metric allocation. (Integrations that emit potentially unlimited metrics may still be considered custom.) Ensuring native support for Datadog reduces friction to adoption, and incentivizes people to use your product, service, or project. Also, being featured within the Datadog ecosystem is a great avenue for added visibility.
 
