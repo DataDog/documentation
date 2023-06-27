@@ -67,6 +67,26 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
+
+## Import Data from Backstage 
+
+If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
+
+If you use API / Terraform, replace the content of YAML content in your requests. 
+If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Note that the file must be located at the root folder of a repo, and the file must be named `service.datadog.yaml`. 
+
+
+It’s a partial translation, specifically, 
+- We only recognize `kind:component` and `spec.type=service` in Backstage YAMLs as services in Datadog
+- `name` will be converted to `DD-SERVICE`
+- `namespace` values will be mapped to custom tags
+- `lifecycle` will be mapped to `lifecycle`
+- `owner` will be mapped to `team`
+- `metadata.links` will be mapped to `links`
+- `metadata.description` will be mapped to `description`
+- Other `specs` value will be mapped to custom tags
+
+
 ## Discover services being reported in other Datadog telemetry data
 
 To discover other services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
