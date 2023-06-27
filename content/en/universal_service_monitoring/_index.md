@@ -56,7 +56,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 - If on Linux:
     - Your service is running in a container.
-    - For non-containerized services see instructions [here][7]
+    - For non-containerized services see the [instructions here](#support-for-non-containerized-services).
 - If on Windows and using IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -861,4 +861,3 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [4]: /monitors/types/apm/?tab=apmmetrics
 [5]: /dashboards/
 [6]: /service_management/service_level_objectives/metric/
-[7]: #support-for-non-containerized-services
