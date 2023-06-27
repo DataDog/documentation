@@ -44,6 +44,8 @@ ALTER USER c##datadog SET CONTAINER_DATA=ALL CONTAINER=CURRENT;
 
 ### Grant permissions
 
+Log on as `sysdba`, and grant the following permissions:
+
 ```SQL
 grant create session to c##datadog ;
 grant select on v_$session to c##datadog ;
@@ -66,7 +68,7 @@ grant select on V_$SGAINFO to c##datadog ;
 
 ### Create view
 
-Create a new `view`, and give the Agent user access to it:
+Log on as `sysdba`, create a new `view`, and give the Agent user access to it:
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS

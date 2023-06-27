@@ -32,7 +32,7 @@ The following beta build contains implemented Oracle DBM features: `7.44.1~dbm~o
 
 ### Install the Oracle integration
 
-On the [**Integrations**][1] page in Datadog, install the [Oracle integration][2] for your organization. This will install an Oracle dashboard in your account which can be used to monitor the performance of your Oracle databases.
+On the [**Integrations**][1] page in Datadog, install the [Oracle integration][2] for your organization. This will install an [Oracle dashboard][5] in your account which can be used to monitor the performance of your Oracle databases.
 
 ### Upgrade the Oracle integration in your Agent
 
@@ -113,3 +113,4 @@ For setup instructions, select your hosting type:
 [2]: https://app.datadoghq.com/integrations/oracle
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.msi
+[5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
