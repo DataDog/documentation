@@ -87,7 +87,8 @@ Download the [beta build][4].
 
 Set `APIKEY`ß and run the following command in the command prompt inside the directory where you downloaded the installer, for example:
 
-```start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.msi APIKEY="" SITE="datadoghq.com"```
+```shell
+start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.msi APIKEY="" SITE="datadoghq.com"```
 
 ##### Docker
 
