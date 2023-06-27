@@ -14,7 +14,7 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 ### Enable Datadog to collect:
 - [Traces (APM)](#enable-apm-and-tracing)
 - [Kubernetes events](#enable-kubernetes-event-collection)
-- [NPM](#enable-npm)
+- [NPM](#enable-npm-collection)
 - [Logs](#enable-log-collection)
 - [Processes](#enable-process-collection)
 
@@ -23,7 +23,7 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 - [Integrations](#integrations)
 - [Containers view](#containers-view)
 - [Orchestrator Explorer](#orchestrator-explorer)
-- [External metrics server](#external-metrics-server)
+- [External metrics server](#custom-metrics-server)
 
 ### More configurations
 - [Environment variables](#environment-variables)
