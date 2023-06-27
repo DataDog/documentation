@@ -26,7 +26,7 @@ The following deployment configurations, components, and features are not suppor
 
 ## Latest Agent version
 
-The following beta build contains all the currently implemented Oracle DBM features: `7.44.1~dbm~oracle~beta~0.28`.
+The following beta build contains implemented Oracle DBM features: `7.44.1~dbm~oracle~beta~0.28`.
 
 ## Prerequisites
 
