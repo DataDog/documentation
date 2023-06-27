@@ -39,9 +39,9 @@ A template variable is defined by:
 * **Default Value**: The tag or attribute value that appears automatically when the dashboard is loaded. Defaults to `*`.
 * **Available Values**: The tag or attribute values available for selection in the dropdown menu. Defaults to `(all)`. The list of available values always includes `*`, which queries all values of the tag or attribute.
 
-## Create
+## Add a template variable
 
-To create a template variable in a dashboard:
+To add a template variable in a dashboard:
 1. Click **Add Template Variables**. 
 1. If template variables are already defined, click the *pencil* icon to open the template variable editor. 
 1. In edit mode, click **+ Add Template Variable** to create a new template variable.
