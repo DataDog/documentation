@@ -36,7 +36,6 @@ Universal Service Monitoring (USM) provides visibility into your service health 
 
 Required Agent version
 : Universal Service Monitoring requires that the Datadog Agent installed alongside your containerized service be at least version 6.40 or 7.40.
-For non-containerized services see instructions [here](7)
 
 Your service must be running on one of the following supported platforms
 : Linux Kernel 4.14 and greater<br/>
@@ -57,6 +56,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 - If on Linux:
     - Your service is running in a container.
+    - For non-containerized services see instructions [here](7)
 - If on Windows and using IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
@@ -774,7 +774,7 @@ After enabling Universal Service Monitoring, you can:
 
 - Create [monitors][4], [dashboards][5], and [SLOs][6] using the `universal.http.*` metrics.
 
-### Support for non-containerized services (Public Beta)
+### Support for non-containerized services
 
 <div class="alert alert-info">
 Universal Service Monitoring is available in *beta* to monitor services running bare-metal on Linux virtual machines.
