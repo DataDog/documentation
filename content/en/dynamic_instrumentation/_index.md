@@ -23,7 +23,7 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
-Dynamic Instrumentation lets you capture data from your production systems at any location in your application's code, including third-party libraries. Dynamic Instrumentation has low overhead and is guaranteed to have no side effects on your system.
+Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry along the main observability pillars namely, logs, metrcs, spans and respective tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and is guaranteed to have no side effects on your system.
 
 # Getting started
 
@@ -79,6 +79,14 @@ All probe types require the same initial setup:
 1. If not prefilled, choose service, runtime, environment and version.
 1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. 
    If you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a file and displays the file's code so you can choose the line.
+
+Creating a probe from other contexts:
+
+Profiling:
+  Inside the profiling flamegraph you can easily create a probe for a particular method by clicking on the context menu of the frame in the flamegraph and select "Instrument this frame with a probe"
+
+Error Tracking
+  
 
 ## Probe Types
 
@@ -149,7 +157,8 @@ To create a span probe:
 
 ### Span tag probes
 
-A *span tag* probe decorates an existing span with a tag value.  
+A *span tag* probe adds a tag value to an existing span. You have two options either adding a tag to the currently active span or adding a tag to the service entry span.
+Note: internal spans are not indexed by default and thus might not be searchable in the APM trace UI.  
 
 You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to addings tags in code][14].
 
