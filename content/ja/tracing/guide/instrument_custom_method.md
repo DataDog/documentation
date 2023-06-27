@@ -230,9 +230,11 @@ function write (transactions) {
   // `tracer.trace` コンテキストマネージャーを使用してインラインコードのブロックをトレースします
   tracer.trace('BackupLedger.write', () => {
     for (const transaction of transactions) {
+     tracer.trace('BackupLedger.persist' , (span) => {
       // "persist_transaction" スパンにカスタムメタデータを追加します
-      span.setTag('transaction.id', transaction.id)
-      this.ledger[transaction.id] = transaction
+       span.setTag('transaction.id', transaction.id)
+       this.ledger[transaction.id] = transaction
+      })
     }
   })
 
