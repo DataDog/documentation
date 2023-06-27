@@ -115,51 +115,195 @@ Datadog は、以下とのインテグレーションをサポートしていま
 
 </br>
 
-### カスタム機能フラグ管理
+### Amplitude インテグレーション
 
 {{< tabs >}}
 {{% tab "ブラウザ" %}}
 
-機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告する露出リスナーを作成します。
+
+Amplitude の SDK の初期化については、Amplitude の [JavaScript SDK ドキュメント][1]を参照してください。
 
 ```javascript
-datadogRum.addFeatureFlagEvaluation(key, value);
+  const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
+    exposureTrackingProvider: {
+      track(exposure: Exposure)  {
+        // Amplitude が露出を報告したときに機能フラグを送信します
+        datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
+      }
+    }
+  })
 ```
+
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascript-sdk/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-   ```swift
-   Global.rum.addFeatureFlagEvaluation(key, value);
-   ```
+Amplitude の SDK の初期化については、Amplitude の [iOS SDK ドキュメント][1]を参照してください。
+
+```swift
+  class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    func track(exposure: Exposure) {
+      // Amplitude が露出を報告したときに機能フラグを送信します
+      if let variant = exposure.variant {
+        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+      }
+    }
+  }
+
+  // 初期化時:
+  ExperimentConfig config = ExperimentConfigBuilder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
+    .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/ios-sdk/
+
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-   ```kotlin
-   GlobalRum.get().addFeatureFlagEvaluation(key, value);
-   ```
+Amplitude の SDK の初期化については、Amplitude の [Android SDK ドキュメント][1]を参照してください。
+
+```kotlin
+  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    override fun track(exposure: Exposure) {
+        // Amplitude が露出を報告したときに機能フラグを送信します
+        GlobalRum.get().addFeatureFlagEvaluation(
+            exposure.flagKey,
+            exposure.variant.orEmpty()
+        )
+    }
+  }
+
+  // 初期化時:
+  val config = ExperimentConfig.Builder()
+      .exposureTrackingProvider(DatadogExposureTrackingProvider())
+      .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
+
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+Amplitude はこのインテグレーションをサポートしていません。この機能をリクエストするには、Amplitude にチケットを作成してください。
 
-   ```dart
-   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
-   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### DevCycle インテグレーション
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+DevCycle の SDK を初期化し、`variableEvaluated` イベントにサブスクライブします。すべての変数評価 `variableEvaluated:*` または特定の変数評価 `variableEvaluated:my-variable-key` にサブスクライブすることを選択します。
+
+DevCycle の SDK の初期化については、[DevCycle の JavaScript SDK ドキュメント][5]を、DevCycle のイベントシステムについては、[DevCycle の SDK イベントドキュメント][6]を参照してください。
+
+```javascript
+const user = { user_id: "<USER_ID>" };
+const dvcOptions = { ... };
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
+...
+dvcClient.subscribe(
+    "variableEvaluated:*",
+    (key, variable) => {
+        // すべての変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+...
+dvcClient.subscribe(
+    "variableEvaluated:my-variable-key",
+    (key, variable) => {
+        // 特定の変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+```
+
+
+[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
+[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Flagsmith インテグレーション
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
+
+ オプションとして、`datadogRum.setUser()` を介して Flagsmith の Trait が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
 
    ```javascript
-   DdRum.addFeatureFlagEvaluation(key, value);
+    // Flagsmith SDK を初期化します
+    flagsmith.init({
+        datadogRum: {
+            client: datadogRum,
+            trackTraits: true,
+        },
+        ...
+    })
    ```
+
+
+[1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -349,199 +493,6 @@ const client = factory.client();
 {{% /tab %}}
 {{< /tabs >}}
 
-
-### Flagsmith インテグレーション
-
-{{< tabs >}}
-{{% tab "ブラウザ" %}}
-
-Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
-
- オプションとして、`datadogRum.setUser()` を介して Flagsmith の Trait が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
-
-   ```javascript
-    // Flagsmith SDK を初期化します
-    flagsmith.init({
-        datadogRum: {
-            client: datadogRum,
-            trackTraits: true,
-        },
-        ...
-    })
-   ```
-
-
-[1]: https://docs.flagsmith.com/clients/javascript
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### DevCycle インテグレーション
-
-{{< tabs >}}
-{{% tab "ブラウザ" %}}
-
-DevCycle の SDK を初期化し、`variableEvaluated` イベントにサブスクライブします。すべての変数評価 `variableEvaluated:*` または特定の変数評価 `variableEvaluated:my-variable-key` にサブスクライブすることを選択します。
-
-DevCycle の SDK の初期化については、[DevCycle の JavaScript SDK ドキュメント][5]を、DevCycle のイベントシステムについては、[DevCycle の SDK イベントドキュメント][6]を参照してください。
-
-```javascript
-const user = { user_id: "<USER_ID>" };
-const dvcOptions = { ... };
-const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
-...
-dvcClient.subscribe(
-    "variableEvaluated:*",
-    (key, variable) => {
-        // すべての変数評価を追跡します
-        datadogRum.addFeatureFlagEvaluation(key, variable.value);
-    }
-)
-...
-dvcClient.subscribe(
-    "variableEvaluated:my-variable-key",
-    (key, variable) => {
-        // 特定の変数評価を追跡します
-        datadogRum.addFeatureFlagEvaluation(key, variable.value);
-    }
-)
-```
-
-
-[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
-[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
-
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
-
-
-{{% /tab %}}
-{{% tab "React Native" %}}
-
-DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
-### Amplitude インテグレーション
-
-{{< tabs >}}
-{{% tab "ブラウザ" %}}
-
-Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告する露出リスナーを作成します。
-
-Amplitude の SDK の初期化については、Amplitude の [JavaScript SDK ドキュメント][1]を参照してください。
-
-```javascript
-  const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
-    exposureTrackingProvider: {
-      track(exposure: Exposure)  {
-        // Amplitude が露出を報告したときに機能フラグを送信します
-        datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
-      }
-    }
-  })
-```
-
-
-[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascript-sdk/
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
-
-Amplitude の SDK の初期化については、Amplitude の [iOS SDK ドキュメント][1]を参照してください。
-
-```swift
-  class DatadogExposureTrackingProvider : ExposureTrackingProvider {
-    func track(exposure: Exposure) {
-      // Amplitude が露出を報告したときに機能フラグを送信します
-      if let variant = exposure.variant {
-        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
-      }
-    }
-  }
-
-  // 初期化時:
-  ExperimentConfig config = ExperimentConfigBuilder()
-    .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
-    .build()
-```
-
-[1]: https://www.docs.developers.amplitude.com/experiment/sdks/ios-sdk/
-
-
-{{% /tab %}}
-{{% tab "Android" %}}
-
-Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
-
-Amplitude の SDK の初期化については、Amplitude の [Android SDK ドキュメント][1]を参照してください。
-
-```kotlin
-  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
-    override fun track(exposure: Exposure) {
-        // Amplitude が露出を報告したときに機能フラグを送信します
-        GlobalRum.get().addFeatureFlagEvaluation(
-            exposure.flagKey,
-            exposure.variant.orEmpty()
-        )
-    }
-  }
-
-  // 初期化時:
-  val config = ExperimentConfig.Builder()
-      .exposureTrackingProvider(DatadogExposureTrackingProvider())
-      .build()
-```
-
-[1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
-
-
-{{% /tab %}}
-{{% tab "Flutter" %}}
-
-Amplitude はこのインテグレーションをサポートしていません。この機能をリクエストするには、Amplitude にチケットを作成してください。
-
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ### Statsig インテグレーション
 
 {{< tabs >}}
@@ -588,6 +539,56 @@ Statsig は現在このインテグレーションをサポートしていませ
 {{% /tab %}}
 {{< /tabs >}}
 
+
+### カスタム機能フラグ管理
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+```javascript
+datadogRum.addFeatureFlagEvaluation(key, value);
+```
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+   ```swift
+   Global.rum.addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+   ```kotlin
+   GlobalRum.get().addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+   ```dart
+   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
+   ```
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+   ```javascript
+   DdRum.addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## RUM で機能フラグのパフォーマンスを分析する
 
 機能フラグは、RUM のセッション、ビュー、およびエラーのコンテキストにリストとして表示されます。
@@ -612,6 +613,8 @@ Statsig は現在このインテグレーションをサポートしていませ
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="RUM エクスプローラーでの機能フラグのエラー検索" style="width:75%;">}}
 
+## トラブルシューティング
+
 ### 機能フラグのデータが期待通りに反映されないのはなぜですか？
 機能フラグは、それが評価されるイベントのコンテキストに表示されます。つまり、機能フラグのコードロジックが実行されるビューに表示されるはずです。
 
@@ -630,9 +633,18 @@ Statsig は現在このインテグレーションをサポートしていませ
 
 調査を行う際、機能フラグに関連する `View Name` のデータをスコープすることも可能です。
 
+### 機能フラグの命名
+
+以下の特殊文字は [機能フラグ追跡][5] ではサポートされていません: `.`、`:`、`+`、`-`、`=`、`&&`、`||`、`>`、`<`、`!`、`(`、`)`、`{`、`}`、`[`、`]`、`^`、`"`、`"`、`~`、`*`、`?`、``。Datadogでは、機能フラグ名にこれらの文字を使用しないことを推奨しています。これらの文字を使用する必要がある場合は、 Datadog にデータを送信する前に文字を置き換えてください。例:
+
+```javascript
+datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+```
+
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/dashboards/
 [4]: /ja/monitors/#create-monitors
+[5]: /ja/real_user_monitoring/feature_flag_tracking
