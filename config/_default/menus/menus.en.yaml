@@ -454,7 +454,7 @@ main:
     parent: containers_kubernetes
     identifier: containers_kubernetes_installation
     weight: 301
-  - name: Configuration
+  - name: Further Configuration
     url: containers/kubernetes/configuration
     parent: containers_kubernetes
     identifier: containers_kubernetes_configuration
