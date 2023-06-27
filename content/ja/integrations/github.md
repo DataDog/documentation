@@ -86,6 +86,8 @@ GitHub アプリに問題やプルリクエストの読み取り権限を与え�
 
 監査ログは、GitHub の組織全体のすべてのアクティビティとイベントを網羅します。アプリケーションのインストール時に、**Organization Administration** 権限で読み取りアクセスを許可します。これにより、アプリケーションは GitHub の監査ストリームを GitHub 組織に代わってログとして収集し始めます。
 
+**注**: 監査ログを収集するには GitHub Enterprise アカウントが必要です。
+
 監査ログの収集を停止するには、GitHub インテグレーションタイルの **Telemetery** タブで該当する組織を探し、**Audit Log collection** のトグルをクリックし、**Update Account** をクリックしてください。
 
 監査ログについては、GitHub のドキュメントの[監査ログアクション][8]と [Datadog へのストリーミングの設定][9]を参照してください。
@@ -103,7 +105,7 @@ GitHub インテグレーションは、Code Scan Alert と Secret Scan Alert �
 ### イベント
 
 <div class="alert alert-info">
-以下の手順で、GitHub と Datadog に Webhook を構成し、イベントエクスプローラーにイベントを表示できるようにします。 
+以下の手順で、GitHub と Datadog に Webhook を構成し、イベントエクスプローラーにイベントを表示できるようにします。
 </div>
 
 #### GitHub で Webhook を追加する

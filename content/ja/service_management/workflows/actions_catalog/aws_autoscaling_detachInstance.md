@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_autoscaling_detachInstance
 bundle: com.datadoghq.aws.autoscaling
 bundle_title: AWS Autoscaling
 description: 指定したオートスケーリンググループから 1 つまたは複数のインスタンスを削除します。

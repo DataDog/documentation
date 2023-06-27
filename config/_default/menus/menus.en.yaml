@@ -745,8 +745,8 @@ main:
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
-    identifier: guides
-    weight: 9
+    identifier: dashboards_guides
+    weight: 99
   - name: Serverless
     url: serverless
     pre: serverless
@@ -1238,7 +1238,7 @@ main:
     pre: mobile
     parent: service_management_heading
     weight: 60000
-  - name: Workflows
+  - name: Workflow Automation
     url: service_management/workflows/
     pre: workflows
     identifier: workflows
@@ -2185,16 +2185,36 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_swift
     weight: 306
+  - name: Static Analysis
+    url: continuous_integration/static_analysis/
+    parent: ci
+    identifier: ci_static_analysis
+    weight: 4
+  - name: Rules
+    url: continuous_integration/static_analysis/rules
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_rules
+    weight: 401
+  - name: CircleCI Orbs
+    url: continuous_integration/static_analysis/circleci_orbs
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_circleci_orbs
+    weight: 402
+  - name: GitHub Actions
+    url: continuous_integration/static_analysis/github_actions
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_github_actions
+    weight: 403
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 4
+    weight: 5
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 5
+    weight: 6
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -2606,11 +2626,6 @@ main:
     parent: observability_pipelines_production_deployment_overview
     identifier: observability_pipelines_architecture_design_and_principles
     weight: 201
-  - name: Aggregator Architecture
-    url: observability_pipelines/production_deployment_overview/aggregator_architecture/
-    parent: observability_pipelines_production_deployment_overview
-    identifier: observability_pipelines_aggregator_architecture
-    weight: 202
   - name: Working with Data
     url: observability_pipelines/working_with_data/
     parent: observability_pipelines
@@ -2646,6 +2661,41 @@ main:
     parent: observability_pipelines
     identifier: observability_pipelines_guides
     weight: 6
+  - name: Architecture
+    url: observability_pipelines/architecture/
+    parent: observability_pipelines
+    identifier: observability_pipelines_architecture
+    weight: 8
+  - name: Optimizing the Instance
+    url: observability_pipelines/architecture/optimize
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_optimize
+    weight: 100
+  - name: Capacity Planning and Scaling
+    url: observability_pipelines/architecture/capacity_planning_scaling
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_capacity_planning_scaling
+    weight: 105
+  - name: Networking
+    url: observability_pipelines/architecture/networking
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_networking
+    weight: 110
+  - name: Preventing Data Loss
+    url: observability_pipelines/architecture/preventing_data_loss
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_preventing_data_loss
+    weight: 115
+  - name: High Availability and Disaster Recovery
+    url: observability_pipelines/architecture/availability_disaster_recovery
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_availability_disaster_recovery
+    weight: 120
+  - name: Advanced Configurations
+    url: observability_pipelines/architecture/advanced_configurations
+    parent: observability_pipelines_architecture
+    identifier: observability_pipelines_architecture_advanced_configurations
+    weight: 125
   - name: Security Overview
     url: security/
     pre: security-platform
@@ -3584,11 +3634,16 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1407
+  - name: Track Roku Errors
+    url: real_user_monitoring/error_tracking/roku/
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_roku
+    weight: 1408
   - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1408
+    weight: 1409
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -3964,7 +4019,16 @@ main:
   - name: Plan and Usage
     url: account_management/plan_and_usage/
     parent: account_management
+    identifier: account_management_plan_and_usage
     weight: 8
+  - name: Usage Details
+    url: account_management/plan_and_usage/usage_details/
+    parent: account_management_plan_and_usage
+    weight: 801
+  - name: Cost Details
+    url: account_management/plan_and_usage/cost_details/
+    parent: account_management_plan_and_usage
+    weight: 802
   - name: Billing
     url: account_management/billing/
     parent: account_management

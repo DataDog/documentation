@@ -21,7 +21,9 @@ type: multi-code-lang
 ---
 
 
-.NET トレーサーは、すべての .NET ベースの言語 (例えば、C#、F#、Visual Basic など) をサポートしています。オープンソースです。詳細は、[.NET トレーサーのリポジトリ][1]を参照してください。
+.NET トレーサーは、すべての .NET ベースの言語 (例えば、C#、F#、Visual Basic など) をサポートしています。[トリミングアプリのベータ版サポート][12]があります。
+
+.NET トレーサーはオープンソースです。詳細については、[.NET トレーサーリポジトリ][1]を参照してください。
 
 ## サポートされている .NET Core のランタイム
 
@@ -62,6 +64,7 @@ type: multi-code-lang
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ および 3.0+                              | `AspNetCore`         |
 | Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
+| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
 | AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                               | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
@@ -142,3 +145,4 @@ Datadog APM for .NET Core は、[セマンティックバージョニング][11]
 [9]: /ja/agent/basic_agent_usage/?tab=agentv5
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
+[12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/

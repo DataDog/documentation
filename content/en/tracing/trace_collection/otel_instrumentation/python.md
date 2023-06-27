@@ -1,7 +1,7 @@
 ---
 title: Custom Instrumentation of Python Applications with the OpenTelemetry API
 kind: documentation
-description: 'Instrument your Python application with OTel API to send traces to Datadog.'
+description: 'Instrument your Python application with OpenTelemetry API to send traces to Datadog.'
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
@@ -18,19 +18,19 @@ further_reading:
 - Datadog python tracing library `dd-trace-py` version 1.12.0 or greater.
 - Python version 3.7 or greater.
 
-The following OTel features implemented in the Datadog library as noted:
+The following OpenTelemetry features implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
 |---------------------------------------|---------------------------------------|
-| [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog Tracer Provider
+## Configuring OpenTelemetry to use the Datadog Tracer Provider
 
-1. Add your desired manual OTel instrumentation to your Python code following the [OTel Python Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Python code following the [OpenTelemetry Python Manual Instrumentation documentation][5].
 2. Install the python tracer:
 
     ```

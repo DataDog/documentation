@@ -6,6 +6,12 @@ further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
+- link: "https://www.datadoghq.com/blog/monitor-netflow-with-datadog/"
+  tag: "Blog"
+  text: "Monitor NetFlow traffic data with Datadog"
+- link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
+  tag: "Blog"
+  text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
 
 ## Overview

@@ -138,6 +138,7 @@ data:
             "fstatfs",
             "fsync",
             "futex",
+            "futimens",
             "getcwd",
             "getdents",
             "getdents64",
@@ -257,6 +258,9 @@ data:
             "uname",
             "unlink",
             "unlinkat",
+            "utime",
+            "utimensat",
+            "utimes",
             "wait4",
             "waitid",
             "waitpid",
@@ -461,6 +465,8 @@ spec:
               value: "8125"
             - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
               value: "true"
+            - name: DD_DOGSTATSD_TAG_CARDINALITY
+              value: "low"
             - name: DD_LEADER_ELECTION
               value: "true"
             - name: DD_COLLECT_KUBERNETES_EVENTS
