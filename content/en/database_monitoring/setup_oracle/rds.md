@@ -32,7 +32,7 @@ The Datadog Agent requires read-only access to the database server in order to c
 
 ### Create user
 
-If you installed the Oracle integration, skip this step because the user already exists. You must, however, execute the subsequent steps.
+If you installed the legacy Oracle integration, skip this step because the user already exists. You must, however, execute the subsequent steps.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
