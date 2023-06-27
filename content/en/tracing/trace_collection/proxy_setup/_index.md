@@ -545,7 +545,7 @@ metadata:
 data:
   datadog-collector-host: $HOST_IP
   enable-opentracing: "true"
-  datadog-sample-rate: 0.4
+  datadog-sample-rate: "0.4"
 ```
 
 <div class="alert alert-warning">
