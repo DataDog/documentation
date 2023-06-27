@@ -56,7 +56,7 @@ If you have feedback about what platforms and protocols you'd like to see suppor
 
 - If on Linux:
     - Your service is running in a container.
-    - For non-containerized services see instructions [here][1]
+    - For non-containerized services see instructions [here][7]
 - If on Windows and using IIS:
     - Your service is running on a virtual machine.
 - Datadog Agent is installed alongside your service. Installing a tracing library is _not_ required.
