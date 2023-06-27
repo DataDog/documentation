@@ -119,8 +119,6 @@ Using the Datadog Operator requires the following prerequisites:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-To install the chart with a custom release name, `<RELEASE_NAME>` (for example, `datadog-agent`):
-
 ### Prerequisites
 
 - [Helm][1]
