@@ -5,20 +5,25 @@ aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/
 further_reading:
+    - link: "/monitors/types/ci/"
+      tag: "Documentation"
+      text: "Creating CI Pipeline Monitors"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-Your pipelines appear in the [Pipelines][1] page under the CI menu.
+## Overview
+
+The [**Pipelines**][1] page provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
 
 ## Setup
 
-{{< whatsnext desc="Select your CI provider to set up pipeline visibility in Datadog:" >}}
+{{< whatsnext desc="Select your CI provider to set up Pipeline Visibility in Datadog:" >}}
     {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
@@ -32,6 +37,10 @@ Your pipelines appear in the [Pipelines][1] page under the CI menu.
 {{< /whatsnext >}}
 
 If your CI provider is not supported, you can try setting up Pipeline Visibility through the [public API endpoint][2].
+  
+## Explore pipelines
+
+To see your pipelines, navigate to **CI** > **Pipelines**.
 
 ## Pipelines health overview
 
@@ -92,9 +101,13 @@ Alternatively, click the [**Analytics**][7] button to interactively filter and g
 
 {{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
 
-## Communicate about CI pipelines data
+## Use CI pipelines data
 
-CI pipeline data is available when you create widgets in [Dashboards][8] and [Notebooks][9].
+When creating a [dashboard][8] or a [notebook][9], you can use CI pipeline data in your search query, which updates the visualization widget options. For more information, see the [Dashboards][10] and [Notebooks documentation][11].
+
+## Alert on pipeline data
+
+You can export your search query to a [CI Pipeline monitor][12] on the [**Pipelines Executions** page][6] or the [**Test Runs** page][13] by clicking the **Export** button.
 
 ## Further reading
 
@@ -110,3 +123,7 @@ CI pipeline data is available when you create widgets in [Dashboards][8] and [No
 [7]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
 [8]: https://app.datadoghq.com/dashboard/lists
 [9]: https://app.datadoghq.com/notebook/list
+[10]: /dashboards
+[11]: /notebooks
+[12]: /monitors/types/ci
+[13]: https://app.datadoghq.com/ci/test-runs

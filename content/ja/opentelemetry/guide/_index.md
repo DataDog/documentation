@@ -6,7 +6,7 @@ further_reading:
   text: Datadog と OpenTelemetry のパートナーシップ
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
-  text: W3C Trace Context に対応した OTel インスツルメンテーションされたアプリのモニタリング
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 - link: https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/
   tag: ブログ
   text: OpenTelemetry コレクターから Datadog エクスポーター経由で Datadog にメトリクスとトレースを送信する
@@ -21,7 +21,7 @@ further_reading:
   text: OpenTelemetry 用の AWS のマネージド Lambda レイヤーについて
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: ブログ
-  text: Datadog RUM イベントと OTel インスツルメンテーションされたアプリケーションのトレースを相関させる
+  text: Datadog RUM イベントと OpenTelemetry インスツルメンテーションされたアプリケーションのトレースを相関させる
 kind: ガイド
 private: true
 title: OpenTelemetry ガイド

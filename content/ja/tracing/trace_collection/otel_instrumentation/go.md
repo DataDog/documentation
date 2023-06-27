@@ -1,7 +1,7 @@
 ---
 code_lang: go
 code_lang_weight: 30
-description: OTel API で Go アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します
+description: OpenTelemetry API で Go アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します
 further_reading:
 - link: tracing/glossary/
   tag: Documentation
@@ -17,21 +17,21 @@ type: multi-code-lang
 
 - Datadog Go トレースライブラリ `dd-trace-go` バージョン 1.5.0 以上。
 - Go バージョン 1.18 以上。
-- Datadog OTel API の実装は、アップストリーム [OpenTelemetry Go][6] に依存しています。
+- Datadog OpenTelemetry API の実装は、アップストリーム [OpenTelemetry Go][6] に依存しています。
 
-特記されている通り、以下の OTel 機能が Datadog のライブラリに実装されています。
+特記されている通り、以下の OpenTelemetry 機能は、Datadog ライブラリに実装されています。
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|------------------------------------|
-| [OTel コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 |
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 |
 | [スパンプロセッサー][2]                  | 非サポート                                          |
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 
 
-## Datadog トレースプロバイダーを使用するための OTel の構成
+## Datadog トレースプロバイダーを使用するための OpenTelemetry の構成
 
-1. [OTel Go Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OTel インスツルメンテーションを Go コードに追加します。
+1. [OpenTelemetry Go Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OpenTelemetry インスツルメンテーションを Go コードに追加します。
 
 2. OpenTelemetry パッケージ `go.opentelemetry.io/otel` を以下のコマンドでインストールします。
 
