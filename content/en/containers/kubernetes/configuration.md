@@ -243,6 +243,7 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
+For more information, see [Live Processes][23]
 ## Datadog Cluster Agent
 
 The Datadog Cluster Agent provides a streamlined, centralized approach to collecting cluster level monitoring data. Datadog strongly recommends using the Cluster Agent for monitoring Kubernetes.
@@ -333,11 +334,11 @@ For more information, see the [Datadog Cluster Agent documentation][2].
 
 ## Custom metrics server
 
-To use the Cluster Agent's [custom metrics server][22] feature, you must supply a Datadog app key and enable the metrics provider.
+To use the Cluster Agent's [custom metrics server][22] feature, you must supply a Datadog [application key][24] and enable the metrics provider.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-In `datadog-agent.yaml`, supply an app key and set `features.externalMetricsServer.enabled` to `true`.
+In `datadog-agent.yaml`, supply an application key under `spec.global.credentials.appKey` and set `features.externalMetricsServer.enabled` to `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -348,7 +349,7 @@ spec:
   global:
     credentials:
       apiKey: <DATADOG_API_KEY>
-      appKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
 
   features:
     externalMetricsServer:
@@ -362,7 +363,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 {{% /tab %}}
 {{% tab "Helm" %}}
-In `datadog-values.yaml`, supply an app key and set `clusterAgent.metricsProvider.enabled` to `true`.
+In `datadog-values.yaml`, supply an application key under `datadog.appKey` and set `clusterAgent.metricsProvider.enabled` to `true`.
 
 ```yaml
 datadog:
@@ -536,13 +537,35 @@ For a complete list of environment variables for the Helm chart, see the [full l
 [1]: /getting_started/site
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog#all-configuration-options
 {{% /tab %}}
+{{% tab "DaemonSet" %}}
+| Env Variable         | Description                                                                                                                                                                                                                                                                                                                                      |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_API_KEY`         | Your Datadog API key (**required**)                                                                                                                                                                                                                                                                                                              |
+| `DD_ENV`             | Sets the global `env` tag for all data emitted.                                                                                                                                                                                                                                                                                                  |
+| `DD_HOSTNAME`        | Hostname to use for metrics (if autodetection fails)                                                                                                                                                                                                                                                                                             |
+| `DD_TAGS`            | Host tags separated by spaces. For example: `simple-tag-0 tag-key-1:tag-value-1`                                                                                                                                                                                                                                                                 |
+| `DD_SITE`            | Destination site for your metrics, traces, and logs. Your `DD_SITE` is {{< region-param key="dd_site" code="true">}}. Defaults to `datadoghq.com`.                                                                                                                                                                                               |
+| `DD_DD_URL`          | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
+| `DD_URL` (6.36+/7.36+)            | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                                                                                                                                                    |
+| `DD_CHECK_RUNNERS`   | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
+| `DD_LEADER_ELECTION` | If multiple instances of the Agent are running in your cluster, set this variable to `true` to avoid the duplication of event collection.                                                                                                                                                                                                                         |
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Configure DogStatsD
 
 DogStatsD can send custom metrics over UDP with the StatsD protocol. **DogStatsD is enabled by default by the Datadog Operator and Helm**. See the [DogStatsD documentation][19] for more information.
 
-You can use the following environment variables to configure DogStatsD.
+You can use the following environment variables to configure DogStatsD with DaemonSet:
+
+| Env Variable                     | Description                                                                                                                                                |
+|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` | Listen to DogStatsD packets from other containers (required to send custom metrics).                                                                       |
+| `DD_HISTOGRAM_PERCENTILES`       | The histogram percentiles to compute (separated by spaces). The default is `0.95`.                                                                         |
+| `DD_HISTOGRAM_AGGREGATES`        | The histogram aggregates to compute (separated by spaces). The default is `"max median avg count"`.                                                          |
+| `DD_DOGSTATSD_SOCKET`            | Path to the Unix socket to listen to. Must be in a `rw` mounted volume.                                                                                    |
+| `DD_DOGSTATSD_ORIGIN_DETECTION`  | Enable container detection and tagging for Unix socket metrics.                                                                                            |
+| `DD_DOGSTATSD_TAGS`              | Additional tags to append to all metrics, events, and service checks received by this DogStatsD server, for example: `"env:golden group:retrievers"`. |
 
 ## Configure tag mapping
 
@@ -629,19 +652,31 @@ Integration credentials can be stored in Docker or Kubernetes secrets and used i
 
 Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. These allowlists and blocklists apply to Autodiscovery only; traces and DogStatsD are not affected. These environment variables support regular expressions in their values.
 
-| Helm Parameter |  Description |
-| --------------------------- | ----------- |
-| `datadog.containerExclude` | Blocklist of containers to exclude from Agent Autodiscovery, as a space-separated list.|
-| `datadog.containerExcludeLogs` | Blocklist of containers whose logs are to be excluded from Agent Autodiscovery, as a space-separated list. |
-| `datadog.containerExcludeMetrics` | Blocklist of containers whose metrics are to be excluded from Agent Autodiscovery, as a space-separated list. |
-| `datadog.containerInclude` | Allowlist of containers to include in Agent Autodiscovery, as a space-separated list. If a container matches an include rule, it’s always included in the Autodiscovery. |
-| `datadog.containerIncludeLogs` | Allowlist of containers whose logs are to be included in Agent Autodiscovery, as a space-separated list. |
-| `datadog.containerIncludeMetrics` | Allowlist of containers whose metrics are to be included in Agent Autodiscovery, as a space-separated list. |
-
-Additional examples are available on the [Container Discover Management][13] page.
+See the [Container Discover Management][13] page for examples.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted.
 
+### Proxy settings
+
+Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override the Agent proxy settings with the following environment variables:
+
+| Env Variable             | Description                                                            |
+|--------------------------|------------------------------------------------------------------------|
+| `DD_PROXY_HTTP`          | An HTTP URL to use as a proxy for `http` requests.                     |
+| `DD_PROXY_HTTPS`         | An HTTPS URL to use as a proxy for `https` requests.                   |
+| `DD_PROXY_NO_PROXY`      | A space-separated list of URLs for which no proxy should be used.      |
+| `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
+
+### Misc
+
+| Env Variable                        | Description                                                                                                                                                                                                                                                         |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_PROCESS_AGENT_CONTAINER_SOURCE` | Overrides container source auto-detection to force a single source. e.g `"docker"`, `"ecs_fargate"`, `"kubelet"`. This is no longer needed since Agent v7.35.0.                                                                                                     |
+| `DD_HEALTH_PORT`                    | Set this to `5555` to expose the Agent health check at port `5555`.                                                                                                                                                                                                 |
+| `DD_CLUSTER_NAME`                   | Set a custom Kubernetes cluster identifier to avoid host alias collisions. The cluster name can be up to 40 characters with the following restrictions: Lowercase letters, numbers, and hyphens only. Must start with a letter. Must end with a number or a letter. |
+| `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple instances of the Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well.                                                                                                                       |
+
+You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 
 [1]: /agent/
 [2]: /containers/cluster_agent/
@@ -665,3 +700,5 @@ Additional examples are available on the [Container Discover Management][13] pag
 [20]: https://app.datadoghq.com/orchestration/overview/
 [21]: /infrastructure/containers/orchestrator_explorer
 [22]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
+[23]: /infrastructure/process/ 
+[24]: /account_management/api-app-keys/#application-keys
