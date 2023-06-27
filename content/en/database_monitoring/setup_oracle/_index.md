@@ -36,7 +36,7 @@ On the [**Integrations**][1] page in Datadog, install the [Oracle integration][2
 
 ### Upgrade the Oracle integration in your Agent
 
-You can skip this step if this is your first time installing the Oracle integration. If you already installed the Oracle integration, migrate the legacy configuration from the ```shell conf.d/oracle.d/``` directory to the new integration path located in the ```shell conf.d/oracle-dbm.d/``` directory.
+You can skip this step if this is your first time installing the Oracle integration. If you already installed the Oracle integration, migrate the legacy configuration from the `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
 
 Use the following command to migrate the Oracle integration from the legacy integration to the new one:
 
@@ -88,14 +88,16 @@ Download the [beta build][4].
 Set `APIKEY` and run the following command in the command prompt inside the directory where you downloaded the installer, for example:
 
 ```shell
-start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.msi APIKEY="" SITE="datadoghq.com"```
+start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.msi APIKEY="" SITE="datadoghq.com"
+```
 
 ##### Docker
 
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
 ```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.44.1-dbm-oracle-beta-0.28```
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.44.1-dbm-oracle-beta-0.28
+```
 
 ### Oracle client
 
