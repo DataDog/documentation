@@ -71,7 +71,7 @@ To stop session recordings, remove `startSessionReplayRecording()` and set `sess
 
 ## Retention
 
-By default, Session Replay Retention is 30 days. You can enable extended retention, for 15 months, on indivdual session replays from the Session Replay UI.
+By default, Session Replay Retention is 30 days. You can enable extended retention, for 15 months, on indivdual session replays from the Session Replay UI. To add extended retention, this must be done on non-active sessions (sessions where the user has completed their experience). 
 
 {{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Enable extended retention" style="width:100%;" >}}
 
