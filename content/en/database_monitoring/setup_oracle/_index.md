@@ -94,7 +94,8 @@ start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.ms
 
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
-```docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.44.1-dbm-oracle-beta-0.28```
+```shell
+docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.44.1-dbm-oracle-beta-0.28```
 
 ### Oracle client
 
