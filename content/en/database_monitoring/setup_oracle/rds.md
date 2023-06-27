@@ -23,8 +23,8 @@ Database Monitoring provides deep visibility into your Oracle databases by expos
 
 Complete the following steps to enable Database Monitoring with your database:
 
-1. [Grant the Agent access to the database](#grant-the-agent-access).
-2. [Install the Agent](#install-the-agent).
+1. [Agent database user setup](#agent-database-user-setup).
+2. [Install the Agent][1].
 
 ## Agent database user setup
 
@@ -94,13 +94,13 @@ instances:
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] to learn more about how these tags are used in Datadog.
 
-You can use the `reported_hostname` hostname parameter to define a user friendly hostname instead of the default cryptic hostname containing the IP address.
+You can use the `reported_hostname` configuration parameter to define a user friendly hostname instead of the default cryptic hostname containing the IP address.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
 ### Validate
 
-[Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Databases][6] page in Datadog to get started.
+[Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][7] and [Databases][6] page in Datadog to get started.
 
 [1]: /database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
@@ -108,6 +108,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][4].
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
+[7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
 ## Further reading
 

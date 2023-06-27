@@ -83,7 +83,7 @@ DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/
 
 ##### Windows
 
-Download the [beta build][4].
+Download the MSI file for the [beta build][4].
 
 Set `APIKEY` and run the following command in the command prompt inside the directory where you downloaded the installer, for example:
 
