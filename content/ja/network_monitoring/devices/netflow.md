@@ -3,6 +3,12 @@ further_reading:
 - link: /network_monitoring/devices/profiles
   tag: ドキュメント
   text: ネットワークデバイスモニタリングのプロファイルの使用
+- link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
+  tag: ブログ
+  text: Datadog で NetFlow トラフィックデータを監視する
+- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
+  tag: ブログ
+  text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
 is_beta: true
 kind: documentation
 title: NetFlow Monitoring

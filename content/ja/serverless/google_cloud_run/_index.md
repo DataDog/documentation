@@ -327,9 +327,9 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
 
 ### OpenTelemetry
 
-以下の手順で、OpenTelemetry (OTel) データを Datadog に送信します。
+以下の手順で、OpenTelemetry データを Datadog に送信します。
 
-1. Datadog `serverless-init` にスパンをエクスポートするよう OTel に指示します。
+1. Datadog `serverless-init` にスパンをエクスポートするよう OpenTelemetry に指示します。
 
    ```js
    // instrument.js
@@ -356,7 +356,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
    provider.register();
    ```
 
-2. Express 用の OTel のインスツルメンテーションを追加します。これは `ddtrace` を追加するのと同じようなものです。
+2. Express 用の OpenTelemetry のインスツルメンテーションを追加します。これは `ddtrace` を追加するのと同じようなものです。
 
    ```js
    // instrument.js
@@ -396,7 +396,7 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
    COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
    ENTRYPOINT ["/app/datadog-init"]
    ```
-5. Datadog の `serverless-init` で、`DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 環境変数で OTel を有効にします。
+5. Datadog の `serverless-init` で、`DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 環境変数で OpenTelemetry を有効にします。
 
    ```
    # Dockerfile

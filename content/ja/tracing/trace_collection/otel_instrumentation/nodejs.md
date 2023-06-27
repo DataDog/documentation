@@ -1,7 +1,7 @@
 ---
 code_lang: nodejs
 code_lang_weight: 40
-description: OTel API で Node.js アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
+description: OpenTelemetry API で Node.js アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
 further_reading:
 - link: tracing/glossary/
   tag: Documentation
@@ -19,19 +19,19 @@ type: multi-code-lang
 <!-- TODO: リリース後、バージョンを修正する必要があります -->
 - Datadog Node.js トレーシングライブラリ `dd-trace` バージョン 4.2.0+、3.23.0+、または v2.36.0+。
 
-特記されている通り、Datadog のライブラリに実装されている以下の OTel 機能:
+特記されている通り、Datadog のライブラリに実装されている以下の OpenTelemetry 機能:
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|--------------------------------------|
-| [OTel コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
 | [スパンプロセッサー][2]                  | 非サポート                                          | 
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 
 
-## Datadog トレーシングライブラリを使用するための OTel の構成
+## Datadog トレーシングライブラリを使用するための OpenTelemetry の構成
 
-1. [OTel Node.js Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OTel インスツルメンテーションを Node.js コードに追加します。
+1. [OpenTelemetry Node.js Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OpenTelemetry インスツルメンテーションを Node.js コードに追加します。
 2. package.json に `dd-trace` モジュールを追加します。
 
     ```sh
