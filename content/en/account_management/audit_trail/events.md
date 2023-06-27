@@ -101,9 +101,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User login][29]                     | A user logs into Datadog and the authentication method used.                                  | `@evt.name:Authentication @action:login`                |
 
 ### CI Visibility events
-| Name                            | Description of audit event                                                                             | Query in audit explorer                                                                          |
-|---------------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
-| [Repository Default Branch][30] | A user modified the default branch of a repository, and the previous and new values for the default branch. | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`   
+| Name                            | Description of audit event                                                                                  | Query in audit explorer                                                                          |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
+| [Repository Default Branch][30] | A user modified the default branch of a repository, and the previous and new values for the default branch. | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`
+| [Test Service Settings][87]     | A user created or modified the settings of a Test Service.                                                  | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings`
+| [GitHub Account Settings][88]   | A user has modified the GitHub Account Settings.                                                            | `@evt.name:"CI Visibility" @asset.type:github_opt_ins`
+| [Exclusion filters][89]         | The exclusion filters has been modified.                                                                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters`
+| [Quality Gates Rule][90]        | A user has created, modified or deleted a Quality Gate Rule.                                                | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates_rule`
 
 ### Cloud Security Platform events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -258,7 +262,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [27]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40asset.type%3Aapplication_key
 [28]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40asset.type%3Apublic_api_key
 [29]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40action%3Alogin
-[30]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table_file%20%40action%3A%28uploaded%20OR%20imported%29
+[30]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_repository
 [31]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%E2%80%9CCloud%20Security%20Platform%E2%80%9D%20%40asset.type%3Acws_agent_rule%20%40action%3Aaccessed
 [32]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Cloud%20Security%20Platform%22%20%40asset.type%3Anotification_profile
 [33]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Cloud%20Security%20Platform%22%20%40asset.type%3Asecurity_rule
@@ -315,3 +319,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [84]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Aunusual_login
 [85]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser
 [86]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Arestriction_policy
+[87]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_test_service_settings
+[88]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Agithub_opt_ins
+[89]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_exclusion_filters
+[90]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_quality_gates_rule
