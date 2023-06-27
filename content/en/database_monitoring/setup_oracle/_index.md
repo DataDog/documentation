@@ -40,13 +40,13 @@ You can skip this step if this is your first time installing the Oracle integrat
 
 Use the following command to migrate the Oracle integration from the legacy integration to the new one:
 
-```bash
+```shell
 cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
 ```
 
 Deactivate the legacy integration:
 
-```bash
+```shell
 mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml
 ```
 
@@ -74,7 +74,7 @@ Follow the [instructions for your platform][3].
 
 Set `DD_API_KEY` and run the following commands to install the beta release, for example:
 
-```bash
+```shell
 export DD_AGENT_DIST_CHANNEL=beta
 export DD_AGENT_MINOR_VERSION="44.1~dbm~oracle~beta~0.28-1"
 
