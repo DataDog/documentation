@@ -36,7 +36,7 @@ On the [**Integrations**][1] page in Datadog, install the [Oracle integration][2
 
 ### Upgrade the Oracle integration in your Agent
 
-You can skip this step if this is your first time installing the Oracle integration. If you already installed the Oracle integration, migrate the legacy configuration from the `conf.d/oracle.d/` directory to the new integration path located in the `conf.d/oracle-dbm.d/` directory.
+You can skip this step if this is your first time installing the Oracle integration. If you already installed the Oracle integration, migrate the legacy configuration from the ```shell conf.d/oracle.d/``` directory to the new integration path located in the ```shell conf.d/oracle-dbm.d/``` directory.
 
 Use the following command to migrate the Oracle integration from the legacy integration to the new one:
 
