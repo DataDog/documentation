@@ -146,7 +146,7 @@
           options:
             front_matters:
               algolia:
-                subcategory: Marketplace Integration
+                subcategory: Marketplace Integrations
 
 
       - repo_name: ansible-datadog
