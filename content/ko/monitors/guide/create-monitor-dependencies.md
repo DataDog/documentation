@@ -8,7 +8,7 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터 알림 설정
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: 설명서
   text: 다운타임을 예약하여 모니터 음소거
 kind: 가이드
@@ -64,7 +64,7 @@ API 엔드포인트의 전체 텍스트(왼쪽 열에 있는 각각의 두 번�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/monitors/create/types/composite/
+[1]: /ko/monitors/types/composite/
 [2]: /ko/api/v1/downtimes/
 [3]: /ko/api/v1/downtimes/#cancel-downtimes-by-scope
 [4]: https://app.datadoghq.com/account/settings#integrations/webhooks

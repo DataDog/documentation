@@ -1,5 +1,5 @@
 ---
-description: GitHub と CI Visibility のインテグレーションの使い方をご紹介します。
+description: GitHub プルリクエストでテスト結果のサマリーを自動生成する方法についてご紹介します。
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: GitHub
@@ -8,16 +8,16 @@ further_reading:
   tag: ドキュメント
   text: GitHub インテグレーションについて
 kind: ガイド
-title: GitHub のプルリクエストコメントでテストサマリーを有効にする
+title: GitHub のプルリクエストでテストサマリーを有効にする
 ---
 
 ## 概要
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点では CI Visibility は使用できません。</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-Datadog は GitHub とインテグレーションし、テスト結果のサマリーや失敗したテストのエラーメッセージをプルリクエストコメントに表示することができます。
+Test Visibility 製品を使用している場合、Datadog は GitHub とインテグレーションして、プルリクエストにテスト結果のサマリーを直接表示することができます。サマリーには、テスト実行の概要、不安定性情報、失敗したテストのエラーメッセージが含まれています。このレポートにより、開発者はプルリクエストのビューを離れることなく、失敗したテストや不安定なテストをデバッグする機能など、テスト結果に関するフィードバックをすぐに得ることができます。
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub プルリクエストコメントプレビュー" style="width:100%;">}}
 
@@ -25,20 +25,16 @@ Datadog は GitHub とインテグレーションし、テスト結果のサマ�
 
 このインテグレーションは、`github.com` にホストされているテストサービスでのみ利用可能です。
 
-## GitHub インテグレーションをインストールする
+## テストサマリーの有効化
 
-<div class="alert alert-info"><code>pull_request*</code> イベントでトリガーされた場合、GitHub Actions ではインテグレーションを利用することはできません。 </div>
+以下の手順で、プルリクエストでテストサマリーを有効にすることができます。
 
-[GitHub インテグレーション][1]をインストールするには
+1. [GitHub インテグレーション][1]をインストールします。
+   1. [GitHub インテグレーションタイル][2]の ** Configuration** タブに移動し、**+ Create GitHub App** をクリックします。
+   2. アプリケーションにプルリクエストの読み取り権限と書き込み権限を与えます。
+2. 1 つまたは複数のテストサービスに対して、テストサマリーを有効にします。[テストサービス設定ページ][3]またはコミット/ブランチページから行うことができます。
 
-1. [GitHub インテグレーションタイル][2]の ** Configuration** タブに移動し、**+ Create GitHub App** をクリックします。
-2. アプリケーションにプルリクエストの読み取り権限と書き込み権限を与えます。
-
-## プルリクエストコメントを有効にする
-
-GitHub コメントを有効にするには、Test Service Settings ページまたは commit や branch ページから行います。
-
-### Test Service Settings ページ
+### テストサービス設定ページ
 
 1. [Test Service Settings ページ][3]を開き、リポジトリやテストサービスを検索します。
 2. 希望するサービスの **GitHub Comments** 列の下にあるトグルをクリックします。

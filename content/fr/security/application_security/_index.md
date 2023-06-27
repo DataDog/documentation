@@ -3,31 +3,44 @@ aliases:
 - /fr/security_platform/application_security
 description: Surveillez les menaces visant votre système de production en utilisant
   le contexte d'exécution fourni par les traces distribuées.
-disable_sidebar: true
 further_reading:
-- link: /security/application_security/setup_and_configure/#compatibilite
-  tag: Documentation
-  text: En savoir plus sur les langages et frameworks compatibles
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: Fonctionnement d'Application Security Management
+- link: /security/application_security/threats/
+  tag: Documentation
+  text: Surveillance et protection contre les menaces
+- link: /security/application_security/risk_management/
+  tag: Documentation
+  text: Application Vulnerability Management
+- link: /security/application_security/enabling/#compatibilite
+  tag: Documentation
+  text: En savoir plus sur les langages et frameworks compatibles
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
   tag: Page de la solution
   text: Solution Application Security Management Datadog
 - link: https://www.datadoghq.com/blog/datadog-application-security/
-  tag: Blog
+  tag: GitHub
   text: Présentation de la solution Application Security Datadog
 - link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
-  tag: GitHub
+  tag: Blog
   text: Applications sans serveur sécurisées grâce à la solution ASM Datadog
 - link: https://www.datadoghq.com/blog/securing-cloud-native-applications/
-  tag: GitHub
+  tag: Blog
   text: Pratiques de sécurité recommandées pour les applications dans des environnements
     cloud natifs.
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: Blog
   text: Gagner en visibilité sur les risques, vulnérabilités et attaques avec la vue
     Security d'APM
+- link: https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/
+  tag: Blog
+  text: Bloquer les attaques ciblant vos apps et API avec la solution Application
+    Security Mangement de Datadog
+- link: https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/
+  tag: Blog
+  text: Modélisation des menaces avec la solution Application Security Management
+    de Datadog
 kind: documentation
 title: Application Security Management
 ---
@@ -44,7 +57,7 @@ Lorsqu'un signal de sécurité est déclenché, vous pouvez réagir rapidement, 
 
 La solution ASM vous permet d'ignorer toutes les traces inutiles et de vous focaliser sur les données importantes pour la sécurité et la protection de votre environnement.
 
-Tant que les vulnérabilités potentielles n'ont pas été entièrement corrigées dans le code de votre application, ASM vous permet de réduire l'impact des attaques en bloquant temporairement ou définitivement les adresses IP malveillantes, le tout d'un simple clic. Cette fonctionnalité est disponible en bêta privée. Remplissez [ce formulaire][7] pour faire partie des premières personnes à la tester.
+Tant que les vulnérabilités potentielles n'ont pas été entièrement corrigées dans le code de votre application, ASM vous permet de réduire l'impact des attaques en bloquant temporairement ou définitivement les adresses IP malveillantes, le tout d'un simple clic. Cette fonctionnalité est disponible en bêta.
 
 ## Mise en œuvre de la sécurité au niveau des applications dans Datadog
 
@@ -54,11 +67,15 @@ Pour mieux comprendre le fonctionnement structurel d'ASM et découvrir comment c
 
 Grâce à ses [règles prêtes à l'emploi][4], ASM détecte les menaces sans la moindre configuration manuelle. Si vous avez déjà configuré la solution [APM][1] Datadog sur un host physique ou virtuel, vous avez simplement besoin de définir une variable d'environnement pour commencer à utiliser ASM.
 
-Pour configurer votre environnement afin de détecter et de neutraliser les menaces avec ASM, consultez la [documentation de prise en main][5]. Une fois la solution ASM configurée, vous pouvez commencer à étudier et à résoudre les problèmes liés aux signaux de sécurité depuis la vue [Security Signals Explorer][6].
+Pour configurer votre environnement afin de détecter et de neutraliser les menaces avec ASM, consultez la [documentation relative à l'activation de la solution][5]. Une fois ASM configuré, vous pouvez commencer à étudier et à résoudre les problèmes liés aux signaux de sécurité depuis la vue [Security Signals Explorer][6].
 
 ## Étudier des signaux de sécurité et résoudre les problèmes associés
 
 Dans la vue [Security Signals Explorer][6], cliquez sur un signal de sécurité afin de consulter l'événement associé ainsi que les étapes d'atténuation suggérées. Depuis ce volet, vous pouvez également visualiser des traces et le flux d'attaques associé, et obtenir des informations de contexte supplémentaires.
+
+## Étudiez les risques découlant des dépendances et bibliothèques open source en amont
+
+Grâce à la solution [Application Vulnerability Management][8], vous pouvez vérifier si l'intégrité de vos services est compromise par des dépendances à des bibliothèques open source ayant des vulnérabilités connues. Vous pouvez ensuite analyser les informations sur ces vulnérabilités et améliorer la sécurité de votre application en appliquant des conseils de remédiation ou en recherchant d'où proviennent ces vulnérabilités.
 
 ## Étapes suivantes
 
@@ -68,6 +85,7 @@ Dans la vue [Security Signals Explorer][6], cliquez sur un signal de sécurité 
 [2]: /fr/agent/
 [3]: /fr/security/application_security/how-appsec-works/
 [4]: /fr/security/default_rules/#cat-application-security
-[5]: /fr/security/application_security/getting_started/
+[5]: /fr/security/application_security/enabling/
 [6]: /fr/security/explorer/
 [7]: https://dashcon.io/appsec
+[8]: /fr/security/application_security/risk_management/

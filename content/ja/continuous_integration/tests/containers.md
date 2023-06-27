@@ -93,6 +93,7 @@ title: コンテナでのテスト
 - `BITRISE_GIT_BRANCH`
 - `BITRISE_GIT_TAG`
 - `BITRISE_GIT_MESSAGE`
+- `BITRISE_APP_TITLE`
 - `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
 - `GIT_CLONE_COMMIT_MESSAGE_BODY`
 - `GIT_CLONE_COMMIT_AUTHOR_NAME`
@@ -177,6 +178,7 @@ title: コンテナでのテスト
 - `GITHUB_SHA`
 - `GITHUB_HEAD_REF`
 - `GITHUB_REF`
+- `GITHUB_JOB`
 
 [GitHub Actions により提供されたビルド環境変数の完全リスト][1]
 
@@ -194,6 +196,7 @@ title: コンテナでのテスト
 - `CI_JOB_STAGE`
 - `CI_JOB_NAME`
 - `CI_JOB_URL`
+- `CI_JOB_ID`
 - `CI_RUNNER_ID`
 - `CI_RUNNER_TAGS`
 - `CI_REPOSITORY_URL`
@@ -267,6 +270,26 @@ title: コンテナでのテスト
 
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
+{{% /tab %}}
+{{% tab "Buddy CI" %}}
+
+- `BUDDY`
+- `BUDDY_SCM_URL`
+- `BUDDY_EXECUTION_REVISION`
+- `BUDDY_EXECUTION_BRANCH`
+- `BUDDY_EXECUTION_TAG`
+- `BUDDY_PIPELINE_ID`
+- `BUDDY_EXECUTION_ID`
+- `BUDDY_PIPELINE_NAME`
+- `BUDDY_EXECUTION_URL`
+- `BUDDY_EXECUTION_REVISION_MESSAGE`
+- `BUDDY_EXECUTION_REVISION_COMMITTER_NAME`
+- `BUDDY_EXECUTION_REVISION_COMMITTER_EMAIL`
+
+[Buddy CI により提供されたビルド環境変数の完全リスト][1]
+
+
+[1]: https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 

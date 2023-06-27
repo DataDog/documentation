@@ -4,18 +4,18 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/
 further_reading:
-  - link: /getting_started/observability_pipelines/
+  - link: /observability_pipelines/setup/
     tag: Documentation
-    text: Install the Observability Pipelines Worker
-  - link: /getting_started/observability_pipelines/
-    tag: Documentation
-    text: Get started with Observability Pipelines and Datadog
+    text: Set up Observability Pipelines
   - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
     tag: Blog
     text: Take control of your telemetry data with Observability Pipelines
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< site-region region="gov" >}}
@@ -44,7 +44,7 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 ## Get started
 
-1. [Install the Observability Pipelines Worker][1].
+1. [Set up the Observability Pipelines Worker][1].
 2. [Create pipelines to collect, transform and route your data][2].
 
 ## Explore Observability Pipelines
@@ -80,5 +80,5 @@ Get a holistic view of all of your pipelines' topologies and monitor key perform
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/installation/
+[1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/configurations/

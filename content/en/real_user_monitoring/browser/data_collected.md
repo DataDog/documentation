@@ -23,7 +23,7 @@ further_reading:
   text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
   tag: "Documentation"
-  text: "Datadog Standard Attributes"
+  text: "Datadog standard attributes"
 ---
 
 ## Overview

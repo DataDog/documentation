@@ -9,7 +9,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility パイプライン",
-    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計します。"
+    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計し、Datadog サイトに送信します。"
   },
   "ci-visibility-tests": {
     "name": "CI Visibility テスト",
@@ -38,6 +38,10 @@
   "fastly-integration": {
     "name": "Fastly インテグレーション",
     "description": "Datadog API を通じて、Datadog Fastly インテグレーションを直接構成します。"
+  },
+  "gcp-integration": {
+    "name": "GCP インテグレーション",
+    "description": "Datadog-Google Cloud Platform (GCP) インテグレーションの構成は、Datadog API から直接行います。[Datadog-Google Cloud Platform インテグレーションについては、こちらを参照してください](https://docs.datadoghq.com/integrations/google_cloud_platform)。"
   },
   "ip-allowlist": {
     "name": "IP 許可リスト",

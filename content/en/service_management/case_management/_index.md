@@ -49,7 +49,7 @@ Click into a Security Signal to open up the side panel. From the side panel, cli
 ### Error Tracking for Logs
 Click into an individual Error Tracking issue to open the side panel. From the side panel, click  **Create Case** or **Add to an existing case**.
 
-### Workflows
+### Workflow Automation
 In a new or existing workflow, add a step in the [workflow builder][4] and search for "case management" and select **Create Case** or **Update the status from a Case**.
 
 ### Case Management
@@ -62,4 +62,4 @@ In the [Case Management][1] page, click the button **New Case** to create a new 
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/
 [3]: https://app.datadoghq.com/cases/contexts/new
-[4]: /workflows/build/#build-a-workflow-with-the-workflow-builder
+[4]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder

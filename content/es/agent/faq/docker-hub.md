@@ -2,11 +2,16 @@
 kind: faq
 title: Docker Hub
 ---
+
+<div class="alert alert-warning">El 10 de julio de 2023, Docker Hub comenzará a aplicar límites de velocidad de descarga a los registros Docker Hub de Datadog. Las imágenes extraídas de estos registros cuentan para tu cuota de límite de velocidad.<br/><br/>
+
+Datadog recomienda que actualices la configuración de tu Datadog Agent y Cluster Agent para utilizar otros registros donde no se apliquen límites de velocidad. Para obtener instrucciones, consulta <a href="/agent/guide/changing_container_registry">Cambiar el registro de tu contenedor.</a>.</div>
+
 Si utilizas Docker, hay varias imágenes de contenedor disponibles a través de [GCR][11] y [ECR][12]. Si necesitas usar Docker Hub:
 
 | Servicio de Datadog                         | Docker Hub                               | Comando Pull de Docker                                        |
 |-----------------------------------------|------------------------------------------|------------------------------------------------------------|
-| [Docker Agent][1]                       | [Docker Agent (v6+)][2]                  | `DOCKER_CONTENT_TRUST=1 docker pull datadog/agent`         |
+| [Docker Agent][1]                       | [Docker Agent (v6 y posteriores)][2]                  | `DOCKER_CONTENT_TRUST=1 docker pull datadog/agent`         |
 | Docker Agent (v5)                      | [Docker Agent (v5)][3]                   | `docker pull datadog/docker-dd-agent`                      |
 | [DogStatsD][4]                          | [DogStatsD][5]                           | `DOCKER_CONTENT_TRUST=1 docker pull datadog/dogstatsd`     |
 | [Datadog Cluster Agent][6]              | [Cluster Agent][7]                       | `DOCKER_CONTENT_TRUST=1 docker pull datadog/cluster-agent` |

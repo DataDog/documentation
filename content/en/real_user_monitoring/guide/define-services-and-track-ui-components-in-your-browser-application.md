@@ -102,7 +102,7 @@ Get insights into the performance or the adoption of a given team's scope by usi
    - Errors by service
    - Page views by service
 
-{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page.jpg" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
 ### Teams own UI components
 

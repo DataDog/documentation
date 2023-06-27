@@ -43,11 +43,11 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/announcement-banner'; // imported from websites-modules
 @import 'components/badge';
 @import 'components/cards';
-@import 'components/footer';
+@import 'components/footer'; // imported from websites-modules
 @import 'components/global-modals';
 @import 'components/header';
 @import 'components/integration-labels';
-@import 'components/integration-breadcrumbs';
+@import 'components/breadcrumbs';
 @import 'components/integrations';
 @import 'components/platforms';
 @import 'components/preview_banner';

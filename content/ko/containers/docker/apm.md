@@ -291,7 +291,7 @@ from ddtrace import tracer
 tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -59,7 +59,7 @@ Optional path to a file where configuration properties are provided one per each
 `dd.service.mapping`
 : **Environment Variable**: `DD_SERVICE_MAPPING`<br>
 **Default**: `null`<br>
-**Example**: `mysql:my-mysql-service-name-db, postgres:my-postgres-service-name-db`<br>
+**Example**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
 Dynamically rename services via configuration. Useful for making databases have distinct names across different services.
 
 `dd.writer.type`
@@ -265,6 +265,18 @@ When `true`, user principal is collected. Available for versions 0.61+.
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
 **Default**: `true`<br>
 When `true`, the tracer collects [telemetry data][6]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+
+`dd.trace.128.bit.traceid.generation.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
+**Default**: `false` <br>
+Enable generation of 128-bit trace IDs. By default, only 64-bit IDs are generated.
+
+`dd.trace.128.bit.traceid.logging.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
+**Default**: `false` <br>
+Enable printing of the full 128-bit ID when formatting a span within logs using MDC.
+When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
+When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
 **Note**:
 

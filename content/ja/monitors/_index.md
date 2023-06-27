@@ -4,6 +4,9 @@ aliases:
 - /ja/guides/monitoring/
 - /ja/guides/alerting/
 - /ja/guides/monitors/the-conditions
+cascade:
+  algolia:
+    rank: 70
 description: 「アラート設定プラットフォームを使用して、モニターを作成し、必要な時にチームへ通知してモニターを管理」
 disable_sidebar: true
 further_reading:
@@ -19,6 +22,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: ブログ
   text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: 効果的なモニターの作成に関するインタラクティブなセッションに参加できます
+- link: https://www.datadoghq.com/blog/aws-recommended-monitors/
+  tag: ブログ
+  text: AWS の推奨モニターであらかじめ構成されたアラートを有効にする
 kind: documentation
 title: アラート設定
 ---
@@ -95,7 +104,7 @@ Datadog でモニターを作成するには
 [7]: /ja/developers/community/libraries/#managing-monitors
 [8]: https://app.datadoghq.com/monitors#create/import
 [9]: /ja/monitors/notify
-[10]: /ja/monitors/notify/downtimes
+[10]: /ja/monitors/downtimes
 [11]: /ja/monitors/manage
 [12]: /ja/monitors/settings/
 [13]: /ja/service_management/mobile/?tab=ios#monitors

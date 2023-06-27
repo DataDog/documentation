@@ -49,6 +49,7 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `0` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `0` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `1` | Optional. Enables collection of block read and write times for queries. |
 
 
@@ -56,7 +57,7 @@ Configure the following [parameters][3] in the [DB parameter group][4] and then 
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
+The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
