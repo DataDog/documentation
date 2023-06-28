@@ -17,6 +17,54 @@ The Tracing Library collects data from an instrumented application that are sent
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
+### Sensitive data 
+
+Sensitive data categories are based on the possible risk(s) they may pose to an organization's data handling policies. Values from each of these categories can be collected in traces as span resource names and tags. 
+
+| Risk level | Description                                                                                                           | Examples                                                    |
+|:-----------|:----------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------|
+| High       | Data whose collection could result in a security or privacy risk to your organization                                 | Names, email, geographic location, IP addresses (end-users) |
+| Moderate   | Data which by convention does not contain PII but can be subject to your organization's privacy and security policies | Service names, IP addresses (not end-users)                 |
+| Low        | Data which is available publicly or contains non-identifying system information                                       | Geographic region, host port                                |
+
+Values attributed to these categories are collected differently dependending on the language library. Generally, we refer to the following higher-risk categories:
+
+| Data category       | Description                                                                                                                               |
+|:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+| Name                | The real name of an internal user (employee) or end-user.                                                                                 |
+| Email               | The email address of an internal user (employee) or end-user.                                                                             |
+| Client IP           | The IP address of your end-user associated with an incoming request or the external IP address of an outgoing request.                    |
+| Database statements | The literal, sequence of literals, or bind variables used in an executed database statement.                                              |
+| Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                                               |
+| URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                                               |
+| URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                                      |
+
+These categories are collected by the following language Tracing Libraries:
+
+| Category            | Dotnet | Java | Node.js | PHP | Python |
+|:--------------------|:-------|:-----|:--------|:----|:-------|
+| Name                | 1      | 1    | 1       | 4   | 1      |
+| Email               | 1      | 1    | 1       | 4   | 1      |
+| Client IP           | 1      | 3    | 1       | 4   | 5      |
+| Database statements | 2      | 1    | 1       | 2   | 2      |
+| Geographic location | 4      | 0    | 0       | 4   | 1      |
+| URI parameters      | 2      | 2    | 3       | 2   | 3      |
+| URI userinfo        | 4      | 4    | 4       | 2   | 4      |
+
+- 1: Collected by default without obfuscation
+- 2: Collected by default with obfuscation
+- 3: Not collected by default, enabled with obfuscation
+- 4: Not collected always
+- 5: Not collected by default, enabled without obfuscation
+
+The Application Security Management product also collects the following HTTP data in traces (obfuscation is applied):
+
+| Category     | Description                                                                                                                               |
+|:-------------|:------------------------------------------------------------------------------------------------------------------------------------------|
+| HTTP body    | The HTTP request or response payload, which may contain personal information that can be reasonable linked to an individual or household. |
+| HTTP cookies | The Set-Cookie HTTP response header sent by the server that can be sent by the user's browser in the HTTP request header.                 |
+| HTTP headers | The HTTP request or response headers.                                                                                                     |
+
 ## Agent
 
 ### Resource names
