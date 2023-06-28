@@ -682,7 +682,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     p{
         font-size: 16px;
     }
-    .carousel-top-row{
+    .carousel-top-row {
         min-height: 194px;
         margin-bottom: 12px;
         @media(min-width: 768px){
@@ -716,6 +716,11 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                     grid-row: 1/-1;
                     &:not(.video-item) {
                         border: 1px solid #e2e5ed;
+                        pointer-events: none;
+                        @media(min-width: 768px){
+                            pointer-events: initial;
+                            cursor: zoom-in;
+                        }
                     }
                     .play-overlay {
                         z-index: 2;
@@ -792,6 +797,115 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                     height: 98px;
                     margin-top: 16px;
                     margin-bottom: 16px;
+                }
+            }
+        }
+    }
+}
+
+
+
+.integrations-carousel-modal {
+    z-index: 1081;
+    background-color: rgba(0, 0, 0, 0.5);
+    .modal-container {
+        width: 80vw;
+        // height: 892px;
+        // min-height: 892px;
+        background-color: white;
+        margin-top: 104px;
+        position: relative;
+
+        .modal-info {
+            display: grid;
+            grid-template-rows: repeat(12, 1fr);
+            // border: solid 1px red;
+
+            .modal-info-header {
+                grid-row: 1/2;
+                // border: solid 1px blue;
+                .btn-close{
+                    position: absolute;
+                    top: 48px;
+                    right: 48px;
+                }
+            }
+            .modal-info-body:hover {
+                .play-btn {
+                    background-color: rgba(0, 0, 0, 0.4) !important;
+                }
+            }
+            .modal-info-body {
+                grid-row: 2/ -1;
+                // border: solid 1px green;
+                display: grid;
+                grid-template-rows: repeat(12, 1fr);
+                .modal-slides {
+                    grid-row: 1/12;
+                    // height: 540px;
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    grid-template-rows: 1fr;
+                    .modal-slide:not(.video-item){
+                        border: 1px solid #e2e5ed;
+                    }
+                    .modal-slide {
+                        grid-column: 1/-1;
+                        grid-row: 1/-1;
+
+                        .play-overlay {
+                            z-index: 2;
+                            cursor: pointer;
+                        }
+                        .play-btn {
+                            z-index: 2;
+                            width: 64px;
+                            height: 64px;
+                            background-color: rgba(0, 0, 0, 0.6);
+                            border: none;
+                            transition: all .3s linear;
+                            .play-icon {
+                                width: 0;
+                                height: 0;
+                                border-left: 15px solid transparent;
+                                border-right: 15px solid transparent;
+                                border-bottom: 30px solid rgba(255, 255, 255, 0.6);
+                                transform: rotate(90deg);
+                                left: 30%;
+                            }
+                        }
+                    }
+                }
+                .modal-item-descriptions {
+                    margin-top: 12px;
+                    .modal-item-description {
+                        display: grid;
+                        grid-template-columns: repeat(12, 1fr);
+                        .count {
+                            grid-column: 1;
+                        }
+                        .caption {
+                            grid-column: 2/-1;
+                        }
+                    }
+                }
+
+            }
+        }
+        .modal-items {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 60%;
+            button.modal-item {
+                width: 120px;
+                height: 60px;
+                background-repeat: no-repeat;
+                background-size: cover;
+                border: solid 2px #e2e5ed;
+                &.active, &:hover{
+                    border: solid 2px #006bc2;
                 }
             }
         }
