@@ -20,42 +20,42 @@ Datadog calculates your current estimated usage in near real-time. Estimated usa
 
 Estimated usage metrics are generally available for the following usage types:
 
-| Usage Type                    | Metric                                   |
-|-------------------------------|------------------------------------------|
-| Infrastructure Hosts          | `datadog.estimated_usage.hosts`          |
-| Containers                    | `datadog.estimated_usage.containers`     |
-| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`     |
-| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` |
-| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` |
-| Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes`    |
-| Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events`   |
-| Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes`   |
-| APM Hosts                     | `datadog.estimated_usage.apm_hosts` (does not include Azure App Services hosts)      |
-| APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` |
-| APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` |
-| APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` |
-| APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks` |
-| RUM Sessions                  | `datadog.estimated_usage.rum.sessions`  |
-| Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` |
-| Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`|
-| API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` |
-| Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`|
-| Parallel Testing Slots        | `datadog.estimated_usage.synthetics.parallel_testing_slots` |
-| Network Hosts                 | `datadog.estimated_usage.network.hosts` |
-| Network Devices               | `datadog.estimated_usage.network.devices` |
-| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` |
-| Profiled Containers           | `datadog.estimated_usage.profiling.containers` |
-| Profiler Fargate Tasks        | `datadog.estimated_usage.profiling.fargate_tasks` |
-| CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts` |
-| CSPM Containers               | `datadog.estimated_usage.cspm.containers` |
-| CWS Hosts                     | `datadog.estimated_usage.cws.hosts` |
-| CWS Containers                | `datadog.estimated_usage.cws.containers` | 
-| Database Hosts                | `datadog.estimated_usage.dbm.hosts` |
-| ASM Hosts                     | `datadog.estimated_usage.asm.hosts` |
-| ASM Tasks                     | `datadog.estimated_usage.asm.tasks` |
-| Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` |
-| CI Visibility                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`, `datadog.estimated_usage.ci_visibility.test.committers` |
-| IOT devices                   | `datadog.estimated_usage.iot.devices` |
+| Usage Type                    | Metric                                   | Description |
+|-------------------------------|------------------------------------------| ----------- |
+| Infrastructure Hosts          | `datadog.estimated_usage.hosts`          | Unique hosts seen in the last hour. See [Infrastructure monitoring][3] for more information. |
+| Containers                    | `datadog.estimated_usage.containers`     | Unique containers seen in the last hour. See [Infrastructure monitoring][3] for more information. |
+| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`  | Unique Fargate Tasks seen in the last 5 minutes. |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` | Unique indexed Custom Metrics seen in the last hour. For more information, see [Custom Metrics Billing][4]. |
+| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` | Unique ingested Custom Metrics seen in the last hour. For more information, see [Custom Metrics Billing][5]. |
+| Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` ||
+| Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events`   ||
+| Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes`   ||
+| APM Hosts                     | `datadog.estimated_usage.apm_hosts` (does not include Azure App Services hosts)      ||
+| APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` ||
+| APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` ||
+| APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` ||
+| APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks` ||
+| RUM Sessions                  | `datadog.estimated_usage.rum.sessions`  ||
+| Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` ||
+| Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`||
+| API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` ||
+| Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`||
+| Parallel Testing Slots        | `datadog.estimated_usage.synthetics.parallel_testing_slots` ||
+| Network Hosts                 | `datadog.estimated_usage.network.hosts` ||
+| Network Devices               | `datadog.estimated_usage.network.devices` ||
+| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` ||
+| Profiled Containers           | `datadog.estimated_usage.profiling.containers` ||
+| Profiler Fargate Tasks        | `datadog.estimated_usage.profiling.fargate_tasks` ||
+| CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts` ||
+| CSPM Containers               | `datadog.estimated_usage.cspm.containers` ||
+| CWS Hosts                     | `datadog.estimated_usage.cws.hosts` ||
+| CWS Containers                | `datadog.estimated_usage.cws.containers` ||
+| Database Hosts                | `datadog.estimated_usage.dbm.hosts` ||
+| ASM Hosts                     | `datadog.estimated_usage.asm.hosts` ||
+| ASM Tasks                     | `datadog.estimated_usage.asm.tasks` ||
+| Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` ||
+| CI Visibility                 | `datadog.estimated_usage.ci_visibility.pipeline.committers`, `datadog.estimated_usage.ci_visibility.test.committers` ||
+| IOT devices                   | `datadog.estimated_usage.iot.devices` ||
 
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
@@ -74,3 +74,6 @@ For billing questions, contact your [Customer Success][2] Manager.
 
 [1]: /help/
 [2]: mailto:success@datadoghq.com
+[3]: /account_management/billing/pricing/#infrastructure-monitoring
+[4]: /account_management/billing/custom_metrics/
+[5]: /account_management/billing/custom_metrics/#configure-tags-and-aggregations-with-metrics-without-limits
