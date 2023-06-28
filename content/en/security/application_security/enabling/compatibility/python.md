@@ -62,7 +62,7 @@ And the library supports the following runtimes:
 ### Supported frameworks
 
 
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Django    | 1.8   |  {{< X >}} | {{< X >}}  |  |
 | Flask     | 0.10  |  {{< X >}} | {{< X >}}  |  |

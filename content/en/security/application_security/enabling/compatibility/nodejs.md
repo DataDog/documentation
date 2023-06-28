@@ -14,15 +14,14 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 3.13.1|
 | Threat Protection  | 3.19.0  |
-| Open Source Vulnerability detection |  2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
-| Custom Code Vulnerability detection (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
+| Vulnerability Management for Open Source Software (OSS) |  2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
+| Vulnerability Management for Code (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.0.
 
 
 **Note**: 
 - Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
-- Custom Code Vulnerability detection is in beta  
 
 ### Supported deployment types
 |Type           | Threats support   |  Vulnerabilities support  |
@@ -76,10 +75,11 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detections is supported on all frameworks
+- **Vulnerability Management for OSS** is supported on all frameworks
+- If your framework is not listed below, **Vulnerability Management for Code** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | express | >=4| {{< X >}}  |{{< X >}}  | {{< X >}} |
 
@@ -99,11 +99,11 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Request-based blocking
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all frameworks
+- **Vulnerability Management for OSS**  is supported on all frameworks
 
 
 
-| Framework                | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework                | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | http    |  {{< X >}} |  {{< X >}}  |  {{< X >}}  |
 | https   |  {{< X >}} |  {{< X >}} |  |
@@ -121,11 +121,11 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Error and stacktrace capturing
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all frameworks
-- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
+- **Vulnerability Management for OSS**  is supported on all frameworks
+- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
 
 
-| Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Code Vulnerability Detection supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | [cassandra-driver][28] | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [couchbase][29]        | `^2.4.2` |{{< X >}}|          |          |

@@ -14,8 +14,8 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
-| Open Source Vulnerability detection |  2.16.0  |
-| Custom code vulnerability detection (beta) | private beta  |
+| Vulnerability Management for Open Source Software (OSS) |  2.16.0  |
+| Vulnerability Management for Code (beta)| private beta  |
 
 The minimum tracer version to get all supported ASM capabilities for .NET is 2.26.0.
 
@@ -29,6 +29,9 @@ The minimum tracer version to get all supported ASM capabilities for .NET is 2.2
 | AWS ECS | {{< X >}}  | {{< X >}} |
 | AWS Fargate | {{< X >}}  | {{< X >}} |
 | AWS Lambda | {{< X >}} | | 
+| Azure App Service | {{< X >}}  | |
+
+**Note**: Azure App Service is supported for **web applications only**. ASM doesn't support Azure Functions.
 
 ## Language and framework compatibility
 
@@ -58,10 +61,11 @@ These are supported on the following architectures:
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detections is supported on all frameworks
+- **Vulnerability Management for OSS** is supported on all frameworks
+- If your framework is not listed below, **Vulnerability Management for  Code** will still detect Insecure Cookie vulnerabilities.
 
 
-| Framework                  | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework                  | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for  Code supported? |
 | ----------------------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | ASP.NET MVC | {{< X >}}  |{{< X >}}  | {{< X >}} |
 | ASP.NET Web API 2 | {{< X >}} | {{< X >}} | {{< X >}}  |
@@ -77,9 +81,9 @@ These are supported on the following architectures:
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
+- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
 
-| Framework         | Threat Detection supported?    | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework         | Threat Detection supported?    | Threat Protection supported? | Vulnerability Management for  Code supported? |
 |-------------------|-----------------|---------------------|---|
 | OracleDB         | {{< X >}} |   {{< X >}}    |{{< X >}}    |
 | ADO.NET         | {{< X >}} |   {{< X >}}    |{{< X >}}    |

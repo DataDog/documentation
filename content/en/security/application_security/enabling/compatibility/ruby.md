@@ -14,8 +14,8 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
-| Open Source Vulnerability detection | not supported |
-| Custom code vulnerability detection (beta) | not supported |
+| Vulnerability Management for Open Source Software (OSS) | not supported |
+| Vulnerability Management for Code (beta) | not supported |
 
 The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
 
@@ -52,8 +52,8 @@ These are supported on the following architectures:
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is not supported
-- Custom Code Vulnerability Detection is not supported
+- **Vulnerability Management for OSS** is not supported
+- **Vulnerability Management for Code** is not supported
 
 | Framework                | Threat Detection supported? | Threat Protection supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
@@ -78,8 +78,8 @@ These are supported on the following architectures:
 - Request-based blocking
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is not supported
-- Custom Code Vulnerability Detection is not supported
+- **Vulnerability Management for OSS** is not supported
+- **Vulnerability Management for Code** is not supported
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -97,9 +97,9 @@ These are supported on the following architectures:
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is not supported
-- Custom Code Vulnerability Detection is not supported
-- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
+- **Vulnerability Management for OSS** is not supported
+- **Vulnerability Management for Code** is not supported
+- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
