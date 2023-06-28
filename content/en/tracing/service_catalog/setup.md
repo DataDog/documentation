@@ -83,7 +83,7 @@ It’s a partial translation, specifically,
 - `name` will be converted to `DD-SERVICE`
 - `namespace` values will be mapped to custom tags
 - `lifecycle` gets mapped to `lifecycle`
-- `owner` will be mapped to `team`
+- `owner` gets mapped to `team`
 - `metadata.links` will be mapped to `links`
 - `metadata.description` will be mapped to `description`
 - Other `specs` value will be mapped to custom tags
