@@ -16,7 +16,7 @@ x-data="{
     navigateCarousel (direction) {
         // Navigates the carousel based on the provided direction.
 
-        this.pauseVideo()
+        $store.integrationsModal.pauseVideo($refs)
 
         const max = {{ $asset_len }} - 1
         let endReached = false
@@ -73,7 +73,7 @@ x-data="{
         }
     },
     shouldShowActiveHorizontalSlide (idx) {
-        // Determine the active state of the horizontal carousel item 
+        // Determine whether horizontal carousel item should be visible 
         return idx === this.activeSlide
     },
     isActiveVertical (idx, btn) {
@@ -96,31 +96,6 @@ x-data="{
     setActiveBtnOffsetTop () {
         // Determine the initial offset position of the active button.
         this.activeBtnOffsetTop = window.innerWidth < 768 ? 103 : this.scrollByHeight * 3
-    },
-    playVideo () {
-        // Plays active video
-        const {iframe, playBtn, playOverlay} = $refs
-        const player = new Vimeo.Player(iframe);
-
-        playBtn.classList.add('d-none');
-        playOverlay.classList.add('d-none');
-        iframe.classList.remove('d-none');
-
-        player.play()
-    },
-    pauseVideo () {
-        // Pauses active video
-        const {iframe, playBtn, playOverlay} = $refs
-        if(iframe?.parentElement.classList.contains('active')){
-            const player = new Vimeo.Player(iframe);
-            player.pause().then(() => {
-                playBtn.classList.remove('d-none');
-                playOverlay.classList.remove('d-none');
-                iframe.classList.add('d-none');
-            }).catch((err) => {
-                console.log(err)
-            })
-        }
     }
 }">
     <div class="carousel-top-row row g-0">
@@ -128,7 +103,8 @@ x-data="{
         <div class="carousel-wrapper__horizontal col-12 h-100 pr-1 position-relative col-md-9">
             <div class="carousel-items__horizontal h-100 position-relative">
                 {{ range $idx, $elm := $media }}
-                <div 
+                <div
+                @click="{{if not $elm.vimeo_id}}$store.integrationsModal.openModal(activeSlide){{end}}" 
                 id="{{add $idx 1}}-horizontal" 
                 class="carousel-item__horizontal h-100 rounded-1 {{if $elm.vimeo_id}}video-item{{end}}" 
                 :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
@@ -139,13 +115,13 @@ x-data="{
                     {{ else }}
                     <iframe x-ref="iframe" class="d-none" src="https://player.vimeo.com/video/{{ $elm.vimeo_id }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
                     <img 
-                    @click="playVideo()"
+                    @click="$store.integrationsModal.playVideo($refs)"
                     x-ref="playOverlay"
                     class="play-overlay position-relative h-100 w-100 rounded-1" 
                     src="https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }}" 
                     alt="{{ $elm.caption }}">
                     <button 
-                    @click="playVideo()"
+                    @click="$store.integrationsModal.playVideo($refs)"
                     x-ref="playBtn" 
                     class="play-btn rounded-circle position-absolute top-50 start-50 translate-middle">
                         <div class="play-icon position-relative"></div>
@@ -210,10 +186,10 @@ x-data="{
     </div>
     {{/*  Carousel item description  */}}
     <div class="row g-0">
-        <div class="col-12 p-0 carousel-item-descriptions">
+        <div class="carousel-item-descriptions col-12 p-0">
             {{ range $idx, $el := $media }}
             <div 
-            class="row g-0 carousel-item-description" 
+            class="carousel-item-description row g-0" 
             :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
             x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
                 <div class="col-1">
@@ -227,4 +203,5 @@ x-data="{
         </div>
     </div>
 </div>
+
 <script src="https://player.vimeo.com/api/player.js"></script>
