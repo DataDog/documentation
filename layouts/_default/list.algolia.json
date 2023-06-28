@@ -2,8 +2,9 @@
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
+    {{ $apiPagesWithoutTypeAPI := slice "api/latest/_index.md" "api/latest/rate-limits/_index.md" "api/latest/scopes/_index.md" }}
 
-    {{ range where (where .Site.AllPages "Kind" "!=" "home") "Type" "!=" "api" }}
+    {{ range (where (where (where .Site.AllPages "Kind" "!=" "home") "Type" "!=" "api") "File.Path" "not in" $apiPagesWithoutTypeAPI) }}
         {{ $page := . }}
         {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (not $page.Draft) (not (isset .Params "external_redirect")) }}
             {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}

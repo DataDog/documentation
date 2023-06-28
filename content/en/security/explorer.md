@@ -62,7 +62,7 @@ Below the header of Cloud Security Posture Management signals are tabs with deta
 
 You can create a case from a Cloud SIEM security signal to track, triage, and investigate your signals. Click **Escalate** to see the dropdown menu. Select **Create a case** to start a security investigation. If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident. See [Case Management][6] for more information.
 
-### Workflows
+### Workflow Automation
 
 You can trigger a [Workflow][7] automatically for any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] for more information.
 

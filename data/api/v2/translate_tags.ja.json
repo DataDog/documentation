@@ -9,7 +9,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility パイプライン",
-    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計します。"
+    "description": "CI Visibility のパイプラインイベントを HTTP で検索・集計し、Datadog サイトに送信します。"
   },
   "ci-visibility-tests": {
     "name": "CI Visibility テスト",

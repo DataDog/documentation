@@ -88,7 +88,7 @@ Archivos de configuración para las [integraciones][1]:
 
 Consulta la [documentación sobre cómo solucionar problemas relacionados con el Agent][2].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -2,7 +2,7 @@
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: Code source dd-sdk-ios
+  text: Code source de dd-sdk-ios
 - link: /real_user_monitoring
   tag: Documentation
   text: Service Real User Monitoring Datadog
