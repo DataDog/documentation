@@ -82,7 +82,7 @@ It’s a partial translation, specifically,
 - Datadog only recognizes `kind:component` and `spec.type=service` in Backstage YAMLs as services
 - `name` will be converted to `DD-SERVICE`
 - `namespace` values will be mapped to custom tags
-- `lifecycle` will be mapped to `lifecycle`
+- `lifecycle` gets mapped to `lifecycle`
 - `owner` will be mapped to `team`
 - `metadata.links` will be mapped to `links`
 - `metadata.description` will be mapped to `description`
