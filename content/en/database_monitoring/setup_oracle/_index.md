@@ -51,7 +51,7 @@ Since the Agent doesn't require an external Oracle client, remove the `jdbc_driv
 
 ### Install Agent
 
-To start collecting Oracle telemetry, first [install the Datadog Agent][3]. 
+To start collecting Oracle telemetry, first install the Datadog Agent. 
 
 The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
 
@@ -92,7 +92,7 @@ start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.ms
 
 ##### Docker
 
-The docker beta images can be found [here][8].
+The docker beta images can be found [here][9].
 
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
