@@ -72,7 +72,7 @@ This GitHub Action allows you to register your services with the Service Catalog
 
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
 
-If you use API / Terraform, replace the content of YAML content in your requests. 
+If you use API or Terraform, replace the content of YAML content in your requests. 
 If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Note that the file must be located at the root folder of a repo, and the file must be named `service.datadog.yaml`. 
 
 
