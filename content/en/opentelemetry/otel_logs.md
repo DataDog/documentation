@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-[OpenTelemetry][1] (OTel) is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OTel provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
+[OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
 The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. Datadog has an [Exporter][3] available for the OpenTelemetry Collector which allows you to forward traces, metrics, and logs data from OpenTelemetry to Datadog. 
 
@@ -29,7 +29,7 @@ For collecting logs, Datadog recommends using the Collector's [filelog receiver]
 
 ## Setup
 
-If your applications and services are instrumented with [OpenTelemetry][4] libraries, send the logs data to the Datadog backend by using the OTel Collector with the Datadog Exporter.
+If your applications and services are instrumented with [OpenTelemetry][4] libraries, send the logs data to the Datadog backend by using the OpenTelemetry Collector with the Datadog Exporter.
 
 [Send logs to the OpenTelemetry collector, and use the Datadog exporter to forward them to Datadog][5]
 

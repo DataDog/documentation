@@ -25,7 +25,7 @@ OpenTelemetry のインスツルメンテーションのドキュメントを読
 
 {{< img src="metrics/otel/otlp_ingestion_update.png" alt="OTel SDK/ライブラリ、Datadog トレースライブラリ、Datadog インテグレーション -> Datadog Agent -> Datadog" style="width:100%;">}}
 
-<div class="alert alert-warning"><strong>注</strong>: サポートされているセットアップは、すべての OTel データ生成ホスト上に配置された取り込み Agent です。あるホストを実行しているコレクターまたはインスツルメンテーションアプリから、別のホストの Agent に OTel テレメトリーを送信することはできません。しかし、Agent がコレクターまたは SDK インストルメンテーションアプリにローカルであれば、複数のパイプラインをセットアップすることができます。</div>
+<div class="alert alert-warning"><strong>注</strong>: サポートされているセットアップは、すべての OpenTelemetry データ生成ホスト上に配置された取り込み Agent です。あるホストを実行しているコレクターまたはインスツルメンテーションアプリから、別のホストの Agent に OpenTelemetry テレメトリーを送信することはできません。しかし、Agent がコレクターまたは SDK インストルメンテーションアプリにローカルであれば、複数のパイプラインをセットアップすることができます。</div>
 
 ## Datadog Agent で OTLP の取り込みを有効にする
 

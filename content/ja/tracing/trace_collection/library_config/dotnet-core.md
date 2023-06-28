@@ -160,10 +160,6 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 <br>オブジェクトの JSON 配列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は、0.0 から 1.0 までの間でなければなりません (この値を含む)。詳しくは、[取り込みメカニズム][1]を参照してください。
 **例**: サービス名 `my-service` と操作名 `http.request` のスパンのサンプルレートを 50% に設定し、最大で 1 秒間に 50 個のトレースにします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
 
-`DD_TRACE_GLOBAL_TAGS`
-: **TracerSettings プロパティ**: `GlobalTags`<br>
-指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。
-
 自動インスツルメンテーションオプションコンフィギュレーション
 
 `DD_TRACE_HEADER_TAGS`
@@ -182,17 +178,20 @@ JSON ファイルを使ってトレーサーを構成するには、インスツ
 バージョン `2.19.0` で追加されました。<br>
 **デフォルト**: Datadog は以下をパースします: `"x-forwarded-for", "x-real-ip", "true-client-ip", "x-client-ip", "x-forwarded", "forwarded-for", "x-cluster-client-ip", "fastly-client-ip", "cf-connecting-ip", "cf-connecting-ipv6",` 複数存在する場合は、リストの中から正しくパースされた最初のものが使用されます。<br>
 
-
 `DD_TAGS`
 : **TracerSettings プロパティ**: `GlobalTags`<br>
 指定した場合、指定したすべてのタグを、生成されたすべてのスパンに追加します。<br>
 **例**: `layer:api, team:intake, key:value` <br>
-バージョン 1.17.0 で追加されました。
-デリミタはコンマとスペース: `, ` であることに注意してください。
+**注**: デリミタはコンマとスペース: `, ` です。<br>
+バージョン 1.17.0 で追加されました。<br>
 
 `DD_TRACE_LOG_DIRECTORY`
 : .NET Tracer ログのディレクトリを設定します。<br>
 **デフォルト**: Windows は `%ProgramData%\Datadog .NET Tracer\logs\`、Linux は `/var/log/datadog/dotnet`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: トレーサーの起動中に、この構成は、トレーサーの現在のログディレクトリを使用して、指定された日数と同じかそれよりも古いログファイルを削除します。バージョン 2.19.0 で追加されました。 <br>
+**デフォルト**: `31`
 
 `DD_TRACE_LOGGING_RATE`
 : ログメッセージへのレート制限を設定します。設定した場合、`x` 秒ごとに一意のログ行が記述されます。たとえば、任意のメッセージを 60 秒ごとに一回ログに残したい場合は `60` を設定します。ログのレート制限を無効化したい場合は `0` を設定します。バージョン 1.24.0 で追加されました。デフォルトでは無効です。

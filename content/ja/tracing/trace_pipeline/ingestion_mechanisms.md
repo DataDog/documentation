@@ -48,7 +48,7 @@ Datadog Agent は、トレーシングライブラリにサンプリングレー
 
 <div class="alert alert-warning">Agent の取り込み構成のためのリモート構成はベータ版です。アクセスリクエストは <a href="/help/">Datadog サポート</a>にご連絡ください。</div>
 
-Agent のバージョン [7.42.0][20] 以降を使用している場合、Agent のサンプリングレート構成はリモートで構成可能です。Agent でリモート構成を有効にする方法については、[リモート構成の仕組み][14]をお読みください。リモート構成では、Agent を再起動することなく、パラメーターを変更することができます。
+Agent のバージョン [7.42.0][20] 以降を使用している場合、Agent のサンプリングレート構成はリモートで構成可能です。Agent でリモート構成を有効にする方法については、[リモート構成の仕組み][23]をお読みください。リモート構成では、Agent を再起動することなく、パラメーターを変更することができます。
 
 #### ローカル構成
 
@@ -118,13 +118,12 @@ Python アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を�
 [1]: /ja/tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
-Ruby アプリケーションでは、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。環境変数 `DD_TRACE_SAMPLING_RULES` を使って、サービスごとのサンプリングレートを設定します。
+Ruby アプリケーションの場合は、`DD_TRACE_SAMPLE_RATE` 環境変数を使って、ライブラリのグローバルサンプリングレートを設定します。
 
-例えば、`my-service` という名前のサービスのトレースを 50% 送信し、残りのトレースを 10% 送信するには
+例えば、トレースの 10% を送信するには
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
-@env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
 環境変数 `DD_TRACE_RATE_LIMIT` に、サービスインスタンスごとの秒あたりのトレース数を設定して、レートリミットを構成します。`DD_TRACE_RATE_LIMIT` の値が設定されていない場合、1 秒あたり 100 のトレース制限が適用されます。
@@ -760,7 +759,7 @@ HTTP テストとブラウザテストは、バックエンドサービスがイ
 ## OpenTelemetry の取り込みメカニズム
 `ingestion_reason:otel`
 
-OpenTelemetry SDK のセットアップ (OpenTelemetry Collector または Datadog Agent を使用) に応じて、取り込みサンプリングを制御する複数の方法があります。様々な OpenTelemetry のセットアップで OTel SDK、OTel Collector、Datadog Agent レベルでのサンプリングに利用できるオプションの詳細は [OpenTelemetry による取り込みサンプリング][22] を参照してください。
+OpenTelemetry SDK のセットアップ (OpenTelemetry Collector または Datadog Agent を使用) に応じて、取り込みサンプリングを制御する複数の方法があります。様々な OpenTelemetry のセットアップで OpenTelemetry SDK、OpenTelemetry Collector、Datadog Agent レベルでのサンプリングに利用できるオプションの詳細は [OpenTelemetry による取り込みサンプリング][22] を参照してください。
 
 ## その他の参考資料
 
@@ -786,5 +785,6 @@ OpenTelemetry SDK のセットアップ (OpenTelemetry Collector または Datad
 [18]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/1.2.0
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.40.0
 [20]: https://github.com/DataDog/datadog-agent/releases/tag/7.42.0
-[21]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[21]: /ja/agent/remote_config/#enabling-remote-configuration
 [22]: /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry
+[23]: /ja/agent/remote_config/

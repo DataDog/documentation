@@ -66,7 +66,7 @@ Below the summary is a complete listing of all rules associated with the framewo
 
 Select a rule to view details about the misconfigured resources, the rule description, its framework or industry benchmark mapping, and suggested remediation steps.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding.png" alt="The compliance rule side panel includes information about the rule and resources with failed findings" style="width:75%;">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/failed-finding2.png" alt="The compliance rule side panel includes information about the rule and resources with failed findings" style="width:75%;">}}
 
 ## Further reading
 

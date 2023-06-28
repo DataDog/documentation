@@ -5,7 +5,7 @@ further_reading:
 - link: api/v1/downtimes/
   tag: Documentation
   text: Référence sur l'API Downtime
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: Documentation
   text: Documentation sur les downtimes
 kind: guide
@@ -229,6 +229,6 @@ Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sé
 
 [1]: https://docs.datadoghq.com/fr/api/v1/downtimes/
 [2]: https://docs.datadoghq.com/fr/api/v1/authentication/
-[3]: https://docs.datadoghq.com/fr/monitors/notify/downtimes/
+[3]: https://docs.datadoghq.com/fr/monitors/downtimes/
 [4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [5]: https://icalendar.org/rrule-tool.html

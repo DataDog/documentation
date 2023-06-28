@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 
 <div class="alert alert-info">
-The features described on this page are in private beta. Contact your Customer Success Manager for information on the required Agent build and installation instructions.
+The features described on this page are in private beta.
 </div>
 
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
@@ -25,14 +25,6 @@ Complete the following steps to enable Database Monitoring with your database:
 
 1. [Grant the Agent access to the database](#grant-the-agent-access).
 2. [Install the Agent](#install-the-agent).
-
-## Before you begin
-
-Supported Oracle versions
-: 19c, 21c
-
-Supported Agent versions
-: For more information on the required Agent build, contact your Customer Success Manager.
 
 ## Grant the Agent access
 
@@ -60,6 +52,8 @@ grant select on CDB_TABLESPACE_USAGE_METRICS to c##datadog ;
 grant select on CDB_TABLESPACES to c##datadog ;
 grant select on V_$SQLCOMMAND to c##datadog ;
 grant select on V_$DATAFILE to c##datadog ;
+grant select on V_$SYSMETRIC to c##datadog ;
+grant select on V_$SGAINFO to c##datadog ;
 ```
 
 Create a new `view`, and give the Agent user access to it:
@@ -157,7 +151,7 @@ GRANT SELECT ON dd_session TO c##datadog ;
 
 ## Install the Agent
 
-To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note you must install the correct version to participate in the beta. Contact your Customer Success Manager for more information.
+To start collecting Oracle telemetry, first [install the Datadog Agent][1]. Note you must install the [correct version][7] to participate in the beta.
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`. See the [sample conf file][2] for all available configuration options.
 
@@ -188,6 +182,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][4].
 [4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: /agent/guide/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
+[7]: /database_monitoring/setup_oracle/#supported-agent-versions
 
 
 ## Further reading

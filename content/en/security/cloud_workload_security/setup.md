@@ -35,12 +35,13 @@ Cloud Workload Security (CWS) monitors file, network, and process activity acros
 
 * Datadog Agent 7.44 or later.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. CWS supports the following Linux distributions:
-  * Ubuntu 18.04 or later
+  * Ubuntu LTS (18.04, 20.04, and 22.04)
   * Debian 10 or later
-  * Amazon Linux 2
-  * Fedora 26 or later
-  * SUSE 15 or later
-  * CentOS/RHEL 7.6 or later
+  * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
+  * SUSE Linux Enterprise Server 12 and 15
+  * Red Hat Enterprise Linux 7, 8, and 9
+  * Oracle Linux 7, 8, and 9
+  * CentOS 7
   * Custom kernel builds are not supported.
 * For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][3].
 
@@ -56,10 +57,7 @@ In general, installing CWS involves the following steps:
 
 To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
 
-**Notes**:
-
-- Without Remote Configuration, new and updated Agent rules must be manually deployed to the Datadog Agent.
-- At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
+**Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
 
 ### Configure the CWS Agent
 

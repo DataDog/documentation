@@ -22,7 +22,7 @@ type: multi-code-lang
 ### 対応言語とその要件
 
 Node.js
-: webpack や esbuild を使ってバンドルしている場合は、[Datadog ライブラリを external としてマーク][4]してください。
+: webpack や esbuild を使ってバンドルしている場合は、[特定のバンドラーの指示に従ってください][4]。
 
 Python
 : 
