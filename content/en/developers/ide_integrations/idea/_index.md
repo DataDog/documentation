@@ -1,5 +1,5 @@
 ---
-title: Datadog Plugin For IntelliJ Platform
+title: Datadog Plugin for the IntelliJ Platform
 kind: documentation
 disable_toc: false
 is_beta: true
