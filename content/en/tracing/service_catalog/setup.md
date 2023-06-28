@@ -85,7 +85,7 @@ It’s a partial translation, specifically,
 - `lifecycle` gets mapped to `lifecycle`
 - `owner` gets mapped to `team`
 - `metadata.links` gets mapped to `links`
-- `metadata.description` will be mapped to `description`
+- `metadata.description` gets mapped to `description`
 - Other `specs` values get mapped to custom tags
 
 
