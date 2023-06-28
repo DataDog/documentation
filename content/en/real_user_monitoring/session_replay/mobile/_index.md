@@ -1,5 +1,5 @@
 ---
-title: Mobile Setup for Session Replay
+title: Session Replay for Mobile
 kind: documentation
 description: Describes how to setup Session Replay for mobile devices
 aliases:
@@ -25,7 +25,7 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 All Session Replay SDK versions can be found in the [Maven Snapshots Repository][1].
 
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2].
-2. In order to use the SNAPSHOTS in your Gradle dependencies, you will need to add this repository as a source in your repository configuration in your `build.gradle` file:
+2. In order to use the SNAPSHOTS in your Gradle dependencies, add this repository as a source in your repository configuration in your `build.gradle` file:
 
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
      repositories {
@@ -147,7 +147,7 @@ sessionReplay = SessionReplay.initialize(with: configuration)
 sessionReplay.start()
 ```
 
-### Troubleshooting
+## Troubleshooting
 
 To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. If everything works correctly, you should see following logs in the Xcode console soon (about 30 seconds) after launching the application:
 
@@ -163,5 +163,18 @@ To validate whether Session Replay data is being sent from the app, enable the `
 {{% /tab %}}
 {{< /tabs >}}
 
+## Privacy options
+
+See [Privacy Options][3].
+
 ## Troubleshooting
 
+### Some parts of my application are not visible in the player
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: 
+[2]: 
+[3]: /real_user_monitoring/session_replay/mobile/privacy_options

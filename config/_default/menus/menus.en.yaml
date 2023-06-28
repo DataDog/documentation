@@ -3509,31 +3509,26 @@ main:
     parent: rum
     identifier: rum_session_replay
     weight: 6
-  - name: Web Setup
-    url: real_user_monitoring/session_replay/web
-    parent: rum_session_replay
-    identifier: rum_session_replay_web
-    weight: 601
-  - name: Mobile Setup
+  - name: Mobile
     url: real_user_monitoring/session_replay/mobile
     parent: rum_session_replay
     identifier: rum_session_replay_mobile
-    weight: 602
+    weight: 601
   - name: Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
-    weight: 603
+    weight: 602
   - name: Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
-    weight: 604
+    weight: 603
   - name: Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
-    weight: 605
+    weight: 604
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
