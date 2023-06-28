@@ -67,7 +67,7 @@ import {
     DdSdkReactNativeConfiguration
 } from '@datadog/mobile-react-native';
 
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
     '<RUM_APPLICATION_ID>',
