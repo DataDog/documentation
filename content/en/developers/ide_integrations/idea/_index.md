@@ -42,7 +42,7 @@ The **Logs Navigation** support opens the Datadog Log Explorer with a view match
 
 - **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2].
-- **JetBrains Toolbox**: To use the [View in IDE](#view-in-intellij-idea) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
+- **JetBrains Toolbox**: To use the [View in IDE](#view-in-ide) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
 
 ## Setup
 
