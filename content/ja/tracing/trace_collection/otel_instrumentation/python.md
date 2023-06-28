@@ -1,7 +1,7 @@
 ---
 code_lang: php
 code_lang_weight: 10
-description: OTel API で Python アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
+description: OpenTelemetry API で Python アプリケーションをインスツルメンテーションし、Datadog にトレースを送信します。
 further_reading:
 - link: tracing/glossary/
   tag: Documentation
@@ -18,19 +18,19 @@ type: multi-code-lang
 - Datadog Python トレーシングライブラリ `dd-trace-py` バージョン 1.12.0 以上。
 - Python バージョン 3.7 以上。
 
-特記されている通り、Datadog のライブラリに実装されている以下の OTel 機能:
+特記されている通り、Datadog のライブラリに実装されている以下の OpenTelemetry 機能:
 
 | 機能                               | サポートノート                       |
 |---------------------------------------|---------------------------------------|
-| [OTel コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
+| [OpenTelemetry コンテキスト伝搬][1]         | [Datadog 分散ヘッダーフォーマット][9]が代わりに使用されます。 | 
 | [スパンプロセッサー][2]                  | 非サポート                                          | 
 | [スパンエクスポーター][3]                   | 非サポート                                            |
 | トレース/スパン [ID ジェネレーター][4]         | ID の生成は `ddtrace` が行います。           |
 
 
-## Datadog トレーサープロバイダーを使用するための OTel の構成
+## Datadog トレーサープロバイダーを使用するための OpenTelemetry の構成
 
-1. [OTel Python Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OTel インスツルメンテーションを Python コードに追加します。
+1. [OpenTelemetry Python Manual Instrumentation ドキュメント][5]に従って、ご希望の手動 OpenTelemetry インスツルメンテーションを Python コードに追加します。
 2. python トレーサーをインストールします。
 
     ```

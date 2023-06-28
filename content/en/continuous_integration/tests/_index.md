@@ -4,15 +4,18 @@ kind: documentation
 aliases:
   - /continuous_integration/explore_tests/
 further_reading:
+    - link: "/monitors/types/ci/"
+      tag: "Documentation"
+      text: "Creating CI Test Monitors"
     - link: "/continuous_integration/guides/find_flaky_tests/"
-      tag: "Guide"
+      tag: "Documentation"
       text: "Finding Flaky Tests"
     - link: "/continuous_integration/guides/rum_integration/"
-      tag: "Guide"
+      tag: "Documentation"
       text: "Linking CI Visibility and RUM"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
       tag: "Blog"
       text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
@@ -22,13 +25,13 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-The [Tests][1] page, under the CI menu in Datadog, provides a test-first view into your CI health by showing you important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you primarily because you work on the related code (and less because you maintain the pipelines they are run in).
+## Overview
+
+The [**Tests**][1] page provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
 
 ## Setup
 
-
-
-{{< whatsnext desc="Choose a language to set up test visibility in Datadog:" >}}
+{{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
     {{< nextlink href="continuous_integration/tests/dotnet" >}}.NET{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/java" >}}Java{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/javascript" >}}JavaScript{{< /nextlink >}}
@@ -39,7 +42,7 @@ The [Tests][1] page, under the CI menu in Datadog, provides a test-first view in
 {{< /whatsnext >}}
 ## Explore tests
 
-The Tests page shows the _Branches_ view and the _Default Branches_ view.
+To see your tests, navigate to **CI** > **Tests** and select between the [**Branches**](#branches-view) or [**Default Branches** view](#default-branches-view).
 
 ### Branches view
 
@@ -96,7 +99,7 @@ In addition to tests, CI Visibility provides visibility over the whole testing p
 {{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
 
 #### Sessions
-Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test` or `dotnet test`.
+Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
 
 #### Module
 The definition of module changes slightly per language:
@@ -111,20 +114,26 @@ An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test
 #### Suite
 A test suite is a group of tests exercising the same unit of code.
 
-An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][10]
+An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][10].
 
 #### Compatibility
 Not every language supported by CI Visibility has support for test suite level visibility:
 
 * [Swift][11] has complete support since `dd-sdk-swift-testing>=2.1.0`.
 * [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`.
-* [Javascript][13] has limited support since `dd-trace-js>=3.3.0`.
+* [JavaScript][13] has limited support since `dd-trace-js>=3.3.0`.
 * Java has complete support since `dd-trace-java>=1.12.0`.
 * JUnit report uploads does not support test suite level visibility.
 
-## Communicate about CI tests data
+Additionally, test suite level visibility is only supported in Agentless mode.
 
-Test execution data is available when you create widgets in [Dashboards][14] and [Notebooks][15].
+## Use CI tests data
+
+When creating a [dashboard][14] or a [notebook][15], you can use test execution data in your search query, which updates the visualization widget options.
+
+## Alert on test data
+
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][4], click **Create Monitor** to create a [CI Test monitor][16]. 
 
 ## Further reading
 
@@ -145,3 +154,4 @@ Test execution data is available when you create widgets in [Dashboards][14] and
 [13]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
 [14]: https://app.datadoghq.com/dashboard/lists
 [15]: https://app.datadoghq.com/notebook/list
+[16]: /monitors/types/ci/

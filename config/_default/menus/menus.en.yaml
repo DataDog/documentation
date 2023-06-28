@@ -454,7 +454,7 @@ main:
     parent: containers_kubernetes
     identifier: containers_kubernetes_installation
     weight: 301
-  - name: Configuration
+  - name: Further Configuration
     url: containers/kubernetes/configuration
     parent: containers_kubernetes
     identifier: containers_kubernetes_configuration
@@ -745,8 +745,8 @@ main:
   - name: Guides
     url: dashboards/guide/
     parent: dashboards
-    identifier: guides
-    weight: 9
+    identifier: dashboards_guides
+    weight: 99
   - name: Serverless
     url: serverless
     pre: serverless
@@ -1238,7 +1238,7 @@ main:
     pre: mobile
     parent: service_management_heading
     weight: 60000
-  - name: Workflows
+  - name: Workflow Automation
     url: service_management/workflows/
     pre: workflows
     identifier: workflows
@@ -2185,16 +2185,36 @@ main:
     parent: intelligent_test_runner
     identifier: ci_itr_swift
     weight: 306
+  - name: Static Analysis
+    url: continuous_integration/static_analysis/
+    parent: ci
+    identifier: ci_static_analysis
+    weight: 4
+  - name: Rules
+    url: continuous_integration/static_analysis/rules
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_rules
+    weight: 401
+  - name: CircleCI Orbs
+    url: continuous_integration/static_analysis/circleci_orbs
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_circleci_orbs
+    weight: 402
+  - name: GitHub Actions
+    url: continuous_integration/static_analysis/github_actions
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_github_actions
+    weight: 403
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 4
+    weight: 5
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 5
+    weight: 6
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -3614,11 +3634,16 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
     weight: 1407
+  - name: Track Roku Errors
+    url: real_user_monitoring/error_tracking/roku/
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_roku
+    weight: 1408
   - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1408
+    weight: 1409
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -4000,6 +4025,10 @@ main:
     url: account_management/plan_and_usage/usage_details/
     parent: account_management_plan_and_usage
     weight: 801
+  - name: Cost Details
+    url: account_management/plan_and_usage/cost_details/
+    parent: account_management_plan_and_usage
+    weight: 802
   - name: Billing
     url: account_management/billing/
     parent: account_management

@@ -1,6 +1,9 @@
 ---
 description: モニター通知をカスタマイズするには次の変数を使用します
 further_reading:
+- link: /monitors/guide/template-variable-evaluation/
+  tag: ガイド
+  text: テンプレート変数の評価による算術演算と関数の実行
 - link: /monitors/
   tag: ドキュメント
   text: モニターの作成
@@ -8,7 +11,7 @@ further_reading:
   tag: ドキュメント
   text: モニター通知
 - link: /monitors/manage/
-  tag: ドキュメント
+  tag: Documentation
   text: モニターの管理
 kind: documentation
 title: 変数
@@ -278,7 +281,7 @@ title: 変数
 {{ event.tags.[dot.key.test] }}
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "ファセットでグループ化" %}}
 
@@ -313,11 +316,11 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 |-----------------|--------------------------------------------------|
 | ログ             | `{{log.attributes.key}}` または `{{log.tags.key}}`   |
 | トレース分析 | `{{span.attributes.key}}` または `{{span.tags.key}}` |
-| エラー トラッキング  | `{{span.attributes.[error.message]}}`             |
+| エラー追跡  | `{{span.attributes.[error.message]}}`             |
 | RUM             | `{{rum.attributes.key}}` または `{{rum.tags.key}}`   |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
-| データベース モニタリング | `{{databasemonitoring.attributes.key}}`      |
+| データベースモニタリング | `{{databasemonitoring.attributes.key}}`      |
 
 `key:value` ペアの場合、変数 `{{log.tags.key}}` はアラートメッセージに `value` をレンダリングします。
 
@@ -565,6 +568,10 @@ https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*10
 ```
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/monitors/configuration/#alert-grouping
 [2]: /ja/monitors/types/log/

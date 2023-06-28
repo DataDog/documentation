@@ -6,7 +6,7 @@ automountServiceAccountToken: true
 metadata:
   labels:
     app: "datadog"
-    chart: "datadog-3.32.2"
+    chart: "datadog-3.32.4"
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
@@ -162,6 +162,7 @@ data:
             "fstatfs",
             "fsync",
             "futex",
+            "futimens",
             "getcwd",
             "getdents",
             "getdents64",
@@ -281,6 +282,9 @@ data:
             "uname",
             "unlink",
             "unlinkat",
+            "utime",
+            "utimensat",
+            "utimes",
             "wait4",
             "waitid",
             "waitpid",
@@ -758,7 +762,7 @@ metadata:
   namespace: default
   labels:
     app: "datadog"
-    chart: "datadog-3.32.2"
+    chart: "datadog-3.32.4"
     release: "datadog"
     heritage: "Helm"
 spec:
@@ -824,6 +828,8 @@ spec:
               value: "8125"
             - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
               value: "true"
+            - name: DD_DOGSTATSD_TAG_CARDINALITY
+              value: "low"
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "true"
             - name: DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME
