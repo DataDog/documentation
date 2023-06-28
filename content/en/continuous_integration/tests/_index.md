@@ -101,7 +101,7 @@ In addition to tests, CI Visibility provides visibility over the whole testing p
 #### Sessions
 Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
 
-For JUnit report uploads there is 1 session per report upload.
+For [JUnit report uploads][14] there is 1 session per report upload.
 
 #### Module
 The definition of module changes slightly per language:
@@ -126,7 +126,7 @@ Not every language supported by CI Visibility has support for test suite level v
 * [.NET][12] has complete support since `dd-trace-dotnet>2.16.0`.
 * [JavaScript][13] has limited support since `dd-trace-js>=3.3.0`.
 * Java has complete support since `dd-trace-java>=1.12.0`.
-* [JUnit report uploads][14] has complete support since `[datadog-ci][10]>=2.17`.
+* [JUnit report uploads][14] has complete support since `datadog-ci>=2.17`.
 
 Additionally, test suite level visibility is only supported in Agentless mode.
 
