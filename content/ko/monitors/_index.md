@@ -72,7 +72,7 @@ Datadog에서 모니터를 생성하려면 다음과 같이 하세요.
     {{< nextlink href="/monitors/guide" >}}<u>가이드</u>: 모니터 및 경고에 대한 기타 유용한 문서입니다.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

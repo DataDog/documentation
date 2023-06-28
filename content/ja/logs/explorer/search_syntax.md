@@ -76,6 +76,21 @@ title: ログ検索構文
 | `@http.url_details.path:"/api/v1/test"`                              | 属性 `http.url_details.path` に `/api/v1/test` と一致するすべてのログを検索します。                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | 属性 `http.url` に、`/api/v1/` で始まる値を含むすべてのログを検索します。                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | 200 から 299 の `http.status_code` 値を含み、`http.url_details.path` 属性に `/api/v1/` で始まる値を含むすべてのログを検索します。 |
+| `-@http.status_code:*`                                                | `http.status_code` 属性を含まないすべてのログを検索します |
+
+### CIDR 表記による検索
+CIDR (Classless Inter Domain Routing) は、IP アドレスの範囲 (CIDR ブロックとも呼ばれる) を簡潔に定義することができる表記法です。CIDR は、ネットワーク (VPC など) またはサブネットワーク (VPC 内のパブリック/プライベートサブネットなど) を定義するために最もよく使用されます。
+
+ユーザーは `CIDR()` 関数を使用して、CIDR 表記を使用してログの属性をクエリすることができます。`CIDR()` 関数は、フィルタリングのパラメーターとしてログ属性を渡し、その後に 1 つまたは複数の CIDR ブロックを渡す必要があります。
+
+#### 例
+- `CIDR(@network.client.ip,13.0.0.0/8)` は、フィールド `network.client.ip` の IP アドレスが 13.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
+- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` は、配列属性 `network.ip.list` の IP アドレスが 13.0.0.0/8 または 15.0.0.0/8 CIDR ブロックに該当するログにマッチしてフィルターをかけます。
+- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` は、13.0.0.0/8 サブネットで発信されるパロアルトファイアウォールの拒否イベントにマッチしてフィルターにかけます。
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` は、13.0.0.0/8 から発信されていない VPC ログをすべて表示しますが、これはサブネット間の環境におけるネットワークトラフィックを分析したいため、宛先サブネット 15.0.0.8 に指定されているものであることを示します
+
+`CIDR()` 関数は、IPv4 と IPv6 の CIDR 表記をサポートし、ログエクスプローラー、Live Tail、ダッシュボードのログウィジェット、ログモニター、およびログ構成で動作します。
+
 
 ## ワイルドカード
 

@@ -1,10 +1,12 @@
 ---
-title: Utiliser Terraform pour restreindre la modification d'un dashboard
-kind: guide
 aliases:
-  - /fr/dashboards/faq/how-to-use-terraform-to-restrict-dashboards
-  - /fr/dashboards/guide/how-to-use-terraform-to-restrict-dashboards
+- /fr/dashboards/faq/how-to-use-terraform-to-restrict-dashboards
+- /fr/dashboards/guide/how-to-use-terraform-to-restrict-dashboards
+kind: guide
+title: Utiliser Terraform pour restreindre la modification d'un dashboard
 ---
+
+
 ## Introduction
 
 Auparavant, pour restreindre la modification d'un dashboard créé et géré par [Terraform][1], vous deviez utiliser l'attribut `is_read_only`. Avec cet attribut, seuls le créateur ou les utilisateurs de votre organisation disposant de l'autorisation Access Management (`user_access_manage`) pouvaient modifier le dashboard en question. Désormais, grâce au nouvel attribut `restricted_roles`, vous pouvez énumérer les rôles de votre organisation autorisés de modifier le dashboard.

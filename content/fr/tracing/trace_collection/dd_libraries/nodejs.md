@@ -131,7 +131,7 @@ Une fois l'Agent installé, suivez les étapes ci-dessous afin d'ajouter la bibl
 
 #### JavaScript
 
-```js
+```javascript
 // Cette ligne doit précéder l'importation des modules instrumentés.
 const tracer = require('dd-trace').init();
 ```
@@ -165,6 +165,45 @@ node --require dd-trace/init app.js
 ```
 
 **Remarque :** pour procéder ainsi, vous devez utiliser des variables d'environnement pour toutes les configurations du traceur.
+
+### Création du bundle
+
+`dd-trace` fonctionne en interceptant les appels `require()` effectués par l'application Node.js lorsqu'elle charge des modules. Cela inclut les modules intégrés à Node.js, comme le module `fs` pour accéder au système de fichiers, ainsi que les modules installés depuis le registre NPM, comme le module de base de données `pg`.
+
+Les bundlers récupèrent tous les appels `require()` effectués par l'application aux fichiers sur le disque. Ils remplacent les appels `require()` par du code personnalisé et combinent l'intégralité du JavaScript qui en résulte en un seul fichier « bundle ». Lorsqu'un module intégré est chargé, tel que `require('fs')`, l'appel associé peut alors rester identique dans le bundle obtenu.
+
+À ce stade, les outils APM comme `dd-trace` cessent de fonctionner. Ils peuvent continuer à intercepter les appels aux modules intégrés, mais pas les appels aux bibliothèques tierces. Cela signifie que lorsque vous utilisez un bundler sur une application `dd-trace`, le bundler risque de capturer les informations sur l'accès au disque (via `fs`) et les requêtes HTTP sortantes (via `http`), mais pas les appels aux bibliothèques tierces. Par exemple :
+- Extraction des informations sur les parcours des requêtes entrantes pour le framework `express`.
+- Affichage de la requête exécutée par le client de base de données `mysql`.
+
+Une solution courante consiste à faire en sorte que tous les modules tiers devant être instrumentés par APM soient considérés comme « externes » au bundler. De cette façon, les modules instrumentés restent sur le disque et continuent d'être chargés avec `require()`, tandis que les modules non instrumentés sont inclus dans le bundle. Le build obtenu contient toutefois de nombreux fichiers superflus, ce qui va à l'encontre de l'objectif du bundling.
+
+Datadog vous conseille d'utiliser des plug-ins de bundler personnalisés. Ces plug-ins sont capables d'indiquer au bundler comment se comporter, d'injecter du code intermédiaire et d'intercepter les appels `require()` « traduits ». Le bundle JavaScript inclut ainsi un plus grand nombre de packages.
+
+**Remarque** : pour certaines applications, la totalité des modules peuvent être inclus dans le bundle. Toutefois, les modules natifs devront rester externes au bundle.
+
+#### Prise en charge d'esbuild
+
+Cette bibliothèque intègre une prise en charge expérimentale d'esbuild sous la forme d'un plug-in esbuild. Elle nécessite la version 16.17 ou 18.7 de Node.js au minimum. Pour utiliser le plug-in, assurez-vous d'avoir installé `dd-trace@3+`, puis utilisez require sur le module `dd-trace/esbuild` lors de la création de votre bundle.
+
+Voici un exemple d'utilisation de `dd-trace` avec esbuild :
+
+```javascript
+const ddPlugin = require('dd-trace/esbuild')
+const esbuild = require('esbuild')
+
+esbuild.build({
+  entryPoints: ['app.js'],
+  bundle: true,
+  outfile: 'out.js',
+  plugins: [ddPlugin],
+  platform: 'node', // permet d'utiliser require sur les modules intégrés
+  target: ['node16']
+}).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
+```
 
 ## Configuration
 

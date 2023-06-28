@@ -1,5 +1,5 @@
 ---
-title: Azure App Service - Windows
+title: Azure App Service - Windows Code
 kind: documentation
 aliases:
   - /infrastructure/serverless/azure_app_services/
@@ -74,7 +74,7 @@ For example:
 
 ### Installation
 
-1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
+1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_services.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
 
 2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
@@ -210,7 +210,7 @@ The Azure App Service extension includes an instance of [DogStatsD][7] (Datadog'
 Writing custom metrics and checks in this environment is similar to the process for doing so with an application on a standard host running the Datadog Agent. To submit custom metrics to Datadog from Azure App Service using the extension:
 
 1. Add the [DogStatsD client][8] to your project.
-2. Initialize DogStatdD and write custom metrics in your application.
+2. Initialize DogStatsD and write custom metrics in your application.
 3. Deploy your code to a supported Azure web app.
 4. Install the Datadog App Service extension.
 

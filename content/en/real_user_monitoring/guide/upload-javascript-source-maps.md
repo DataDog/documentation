@@ -115,6 +115,8 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
 
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+
 The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events and browser logs. For more information on how to setup these tags, refer to the [Browser RUM SDK initialization documentation][2] or [Browser Logs Collection documentation][3].
 
 <div class="alert alert-info">If you have defined multiple services in your RUM application, run the CI command as many times as there are services, even if you have one set of sourcemaps for the entire RUM application.</div>

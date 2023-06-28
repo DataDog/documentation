@@ -187,7 +187,7 @@ The [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google
 
 You can also declare and edit incidents and quickly communicate to your teams through integrations with Slack, Zoom, and many more.
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
   
 ## Further Reading
 

@@ -22,7 +22,7 @@ type: multi-code-lang
 ### 対応言語とその要件
 
 Node.js
-: webpack や esbuild を使ってバンドルしている場合は、[Datadog ライブラリを external としてマーク][4]してください。
+: webpack や esbuild を使ってバンドルしている場合は、[特定のバンドラーの指示に従ってください][4]。
 
 Python
 : 
@@ -50,8 +50,8 @@ Go
 | ASM の機能                   | 拡張機能の最小バージョン |
 | -------------------------------- | ----------------------------|
 | Threat Detection <br/> --> ビジネスロジック API  | Lambda Extension バージョン 39、Serverless プラグインバージョン 5.20.0 で、Node.js、Java、Python、Go、.NET に対応します。 <br/> --> ビジネスロジックの機能は、サービスが構築された言語固有のバージョンに従います。 |
-| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | 非対応<br/><br/><br/>     |
-| Risk Management <br/> --> サードパーティの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 非対応<br/> |
+| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | 非対応<br/><br/><br/> |
+| Vulnerability Management <br/> --> オープンソースの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 非対応<br/> |
 
 
 <div class="alert alert-info">サポートされていない機能のサポート追加を希望される場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>

@@ -28,6 +28,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/"
     tag: "Blog"
     text: "Monitor your firewall logs with Datadog"
+  - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+    tag: "Blog"
+    text: "Use CIDR notation queries to filter your network traffic logs"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview

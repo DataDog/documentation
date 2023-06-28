@@ -63,6 +63,6 @@ Synthetic テストから生成された[メトリクス][1]を使って、[テ�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/metrics/
-[2]: /ja/monitors/create/types/metric/
+[2]: /ja/monitors/types/metric/
 [3]: /ja/synthetics/guide/synthetic-test-monitors/
 [4]: https://app.datadoghq.com/monitors/create/metric

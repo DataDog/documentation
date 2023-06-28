@@ -55,17 +55,10 @@ In `datadog.yaml`:
 apm_config:
   [...]
   additional_endpoints:
-    "intake.profile.datadoghq.com":
+    "https://trace.agent.datadoghq.com":
     - apikey2
     - apikey3
-    "intake.profile.datadoghq.eu":
-    - apikey4
-
-  profiling_additional_endpoints:
-    "intake.profile.datadoghq.com":
-    - apikey2
-    - apikey3
-    "intake.profile.datadoghq.eu":
+    "https://trace.agent.datadoghq.eu":
     - apikey4
 ```
 
@@ -75,9 +68,38 @@ Requires Agent version >= 6.19 or 7.19.
 
 ```bash
 DD_APM_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
-
-DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://trace.agent.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://trace.agent.datadoghq.eu\": [\"apikey4\"]}'
 ```
+
+## Continuous Profiler
+
+### YAML configuration
+
+Requires Agent version >= 6.7.0.
+
+In `datadog.yaml`:
+
+```yaml
+apm_config:
+  [...]
+  profiling_additional_endpoints:
+    "https://intake.profile.datadoghq.com/api/v2/profile":
+    - apikey2
+    - apikey3
+    "https://intake.profile.datadoghq.eu/api/v2/profile":
+    - apikey4
+```
+
+### Environment variable configuration
+
+Requires Agent version >= 6.19 or 7.19.
+
+```bash
+DD_APM_PROFILING_ADDITIONAL_ENDPOINTS='{\"https://intake.profile.datadoghq.com/api/v2/profile\": [\"apikey2\", \"apikey3\"], \"https://intake.profile.datadoghq.eu/api/v2/profile\": [\"apikey4\"]}'
+```
+
+**Note:** Uploads to additional endpoints for the Continuous Profiler product are done through best-effort delivery.
+* The main endpoint has the highest priority. Uploads to additional endpoints are only handled after uploads to the main endpoint have completed successfully.
+* Responses from additional endpoints are not forwarded back to the profiler. Any errors during delivery to additional endpoints are logged in the Agent error logs.
 
 ## Live Processes
 

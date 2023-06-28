@@ -268,7 +268,7 @@ SLOs, Monitors 및 Open Incidents 위젯을 다른 개발 및 협업 도구와 �
 
 {{< img src="dashboards/dashboards-widget-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS 및 Android의 위젯">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

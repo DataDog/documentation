@@ -22,9 +22,9 @@ title: OpenTelemetry Collector Datadog エクスポーター
 
 OpenTelemetry Collector は、あらゆるベンダーに対応するエージェントプロセスで、さまざまなプロセスにより送信されたテレメトリデータを収集、エクスポートします。OpenTelemetry Collector 用の [Datadog エクスポーター][1]では、OpenTelemetry SDK から Datadog にトレース、メトリクス、ログデータを転送することができます (Datadog Agent は不要です)。すべての対応言語で動作するほか、[これらの OpenTelemetry トレースデータをアプリケーションログに接続する][2]ことができます。
 
-{{< img src="metrics/otel/datadog_exporter.png" alt="アプリケーションインスツルメンテーションライブラリ、クラウドインテグレーション、その他のモニタリングソリューション (Prometheus など) -> OTel コレクター内の Datadog エクスポーター -> Datadog" style="width:100%;">}}
+{{< img src="metrics/otel/datadog_exporter.png" alt="アプリケーションインスツルメンテーションライブラリ、クラウドインテグレーション、その他のモニタリングソリューション (Prometheus など) -> OpenTelemetry コレクター内の Datadog エクスポーター -> Datadog" style="width:100%;">}}
 
-## Datadog エクスポーターで OTel コレクターをセットアップする
+## Datadog エクスポーターで OpenTelemetry コレクターをセットアップする
 
 Datadog Exporter と一緒に OpenTelemetry Collector を実行するには
 
@@ -256,7 +256,7 @@ OpenTelemetry Collector を Docker イメージとして実行し、同じホス
 
 1. [`otel/opentelemetry-collector-contrib`][1] などの公開された Docker イメージを選択します。
 
-2. OpenTelemetry のトレースを OpenTelemetry Collector に送信するために、コンテナ上でどのポートをオープンするかを決定します。デフォルトでは、トレースはポート 4317 の gRPC で送信されます。gRPC を使用しない場合は、ポート 4138 を使用します。
+2. OpenTelemetry のトレースを OpenTelemetry Collector に送信するために、コンテナ上でどのポートをオープンするかを決定します。デフォルトでは、トレースはポート 4317 の gRPC で送信されます。gRPC を使用しない場合は、ポート 4318 を使用します。
 
 3. コンテナを実行し、事前に定義した `collector.yaml` ファイルを使用して、必要なポートを公開します。例えば、ポート 4317 を使用する場合を考えてみましょう。
 
@@ -306,7 +306,7 @@ OpenTelemetry Collector を Docker イメージとして実行し、その他の
 {{% /tab %}}
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Kubernetes 環境で OTel 収集を構成するには、DaemonSet を使用することが最も一般的で推奨される方法です。Kubernetes インフラクチャーに OpenTelemetry コレクターと Datadog エクスポーターをデプロイするには
+Kubernetes 環境で OpenTelemetry 収集を構成するには、DaemonSet を使用することが最も一般的で推奨される方法です。Kubernetes インフラクチャーに OpenTelemetry コレクターと Datadog エクスポーターをデプロイするには
 
 1. アプリケーションの構成例も含め、こちらの [Datadog Exporter を DaemonSet として使用した OpenTelemetry Collector の全構成例][11]を使用してください。
 
@@ -660,9 +660,12 @@ OpenTelemetry コレクターには、[2 つの主要なデプロイメント方
 
 ## すぐに使えるダッシュボード
 
-Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには、**Dashboards** > **Dashboards list** に移動し、`opentelemetry` を検索してください。
+Datadog は、すぐに使えるダッシュボードを提供しており、コピーしてカスタマイズすることができます。Datadog のすぐに使える OpenTelemetry ダッシュボードを使用するには
 
-{{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
+1. [OpenTelemetry インテグレーション][23]をインストールします。
+2. **Dashboards** > **Dashboards list** にアクセスし、`opentelemetry` を検索します。
+
+   {{< img src="metrics/otel/dashboard.png" alt="ダッシュボードリストには、OpenTelemetry のすぐに使えるダッシュボードが 2 つ (ホストメトリクスとコレクターメトリクス) 表示されています。" style="width:80%;">}}
 
 **Host Metrics** ダッシュボードは、[ホストメトリクスレシーバー][21] から収集されたデータ用です。**Collector Metrics** ダッシュボードは、有効化する[メトリクスレシーバー][22]に応じて収集された他の種類のメトリクス用です。
 
@@ -692,3 +695,4 @@ Datadog は、すぐに使えるダッシュボードを提供しており、コ
 [20]: https://opentelemetry.io/docs/collector/deployment/
 [21]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
+[23]: https://app.datadoghq.com/integrations/otel
