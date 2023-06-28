@@ -8735,7 +8735,7 @@ main:
     parent: dev_tools
     identifier: ide_integrations
     weight: 8
-  - name: IntelliJ IDEA
+  - name: JetBrains IDEs
     url: developers/ide_integrations/idea/
     parent: ide_integrations
     identifier: ide_integrations_idea
