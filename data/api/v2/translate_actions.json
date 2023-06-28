@@ -706,7 +706,7 @@
     "summary": "Get all processes"
   },
   "QueryScalarData": {
-    "description": "Query scalar values (as seen on Query Value, Table and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
+    "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",
     "request_description": "",
     "request_schema_description": "A wrapper request around one scalar query to be executed."
