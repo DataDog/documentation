@@ -21,6 +21,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
     tag: "Blog"
     text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on creating effective monitors"
+  - link: "https://www.datadoghq.com/blog/aws-recommended-monitors/"
+    tag: "Blog"
+    text: "Enable preconfigured alerts with recommended monitors for AWS"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -77,7 +86,7 @@ You can download a JSON file containing the definition of a monitor from the mon
 ## Other sections
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/monitors/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
+    {{< nextlink href="/service_management/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
     {{< nextlink href="/monitors/incident_management" >}}<u>Incident Management</u>: Declare and manage incidents.{{< /nextlink >}}
     {{< nextlink href="/monitors/guide" >}}<u>Guides</u>: Additional helpful articles about monitors and alerting.{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -95,8 +104,8 @@ You can download a JSON file containing the definition of a monitor from the mon
 [7]: /developers/community/libraries/#managing-monitors
 [8]: https://app.datadoghq.com/monitors#create/import
 [9]: /monitors/notify
-[10]: /monitors/notify/downtimes
+[10]: /monitors/downtimes
 [11]: /monitors/manage
 [12]: /monitors/settings/
-[13]: /mobile/?tab=ios#monitors
+[13]: /service_management/mobile/?tab=ios#monitors
 [14]: /monitors/manage/search/#saved-view

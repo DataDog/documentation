@@ -24,6 +24,7 @@ Estimated usage metrics are generally available for the following usage types:
 |-------------------------------|------------------------------------------|
 | Infrastructure Hosts          | `datadog.estimated_usage.hosts`          |
 | Containers                    | `datadog.estimated_usage.containers`     |
+| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`     |
 | Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` |
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes`    |
@@ -39,11 +40,12 @@ Estimated usage metrics are generally available for the following usage types:
 | Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`|
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` |
 | Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`|
+| Parallel Testing Slots        | `datadog.estimated_usage.synthetics.parallel_testing_slots` |
 | Network Hosts                 | `datadog.estimated_usage.network.hosts` |
 | Network Devices               | `datadog.estimated_usage.network.devices` |
 | Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` |
 | Profiled Containers           | `datadog.estimated_usage.profiling.containers` |
-| Profiler Fargate Tasks        | `datadog.estimated_usage.profiler.fargate_tasks` |
+| Profiler Fargate Tasks        | `datadog.estimated_usage.profiling.fargate_tasks` |
 | CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts` |
 | CSPM Containers               | `datadog.estimated_usage.cspm.containers` |
 | CWS Hosts                     | `datadog.estimated_usage.cws.hosts` |

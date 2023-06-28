@@ -1,25 +1,30 @@
 ---
-title: DNS モニタリング
-kind: documentation
-description: DNS サーバーに関する問題の診断とデバッグ
 aliases:
-  - /ja/network_performance_monitoring/network_table
-  - /ja/network_performance_monitoring/dns_monitoring
+- /ja/network_performance_monitoring/network_table
+- /ja/network_performance_monitoring/dns_monitoring
+description: DNS サーバーに関する問題の診断とデバッグ
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
-    tag: ブログ
-    text: Datadog での DNS モニタリング
-  - link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
-    tag: ブログ
-    text: Datadog での CoreDNS モニタリング
-  - link: /network_monitoring/performance/network_page
-    tag: Documentation
-    text: 各ソースと宛先間のネットワークデータを探索。
-  - link: https://www.datadoghq.com/blog/dns-resolution-datadog/
-    tag: ブログ
-    text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
+- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
+  tag: ブログ
+  text: Datadog での DNS モニタリング
+- link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
+  tag: ブログ
+  text: Datadog での CoreDNS モニタリング
+- link: /network_monitoring/performance/network_page
+  tag: Documentation
+  text: 各ソースと宛先間のネットワークデータを探索。
+- link: https://www.datadoghq.com/blog/dns-resolution-datadog/
+  tag: ブログ
+  text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
+kind: documentation
+title: DNS モニタリング
 ---
+
 {{< img src="network_performance_monitoring/dns_default.png" alt="DNS モニタリング" >}}
+
+<div class="alert alert-info">
+DNS モニタリングを有効にするには、Agent バージョン 7.33 にアップグレードします。
+</div>
 
 DNS モニタリングにより提供される DNS サーバーのパフォーマンス概要を把握することで、サーバー側およびクライアント側の DNS に関する問題を確認できます。フローレベルの DNS メトリクスを収集、表示するこのページを使用して、以下を確認できます。
 
@@ -27,14 +32,13 @@ DNS モニタリングにより提供される DNS サーバーのパフォー�
 * 最も多くのリクエストを作成または最高レートでリクエストを作成しているエンドポイント。
 * DNS サーバーによるリクエストへの応答時間が徐々にまたは急に増加した場合。
 * 高いエラー率の DNS サーバーと、送信されるエラーのタイプ。
+* どのドメインが解決されているか。
 
 ## セットアップ
 
-ホスト上を含め、Agent の最新バージョンを使用している場合、DNS モニタリングのメトリクスは、Linux OS の場合は Agent v7.23 以降、Windows Server の場合は v7.28 以降のシステムプローブにより自動的に収集されます。インストールすると、デフォルトでネットワークパフォーマンスモニタリング製品の ‘DNS’ タブにアクセス可能になります。他の操作は必要ありません。
+DNS モニタリングの使用を開始する前に、[ネットワークパフォーマンスモニタリングのセットアップ][1]を行ってください。また、最新バージョンの Agent、少なくとも Linux OS では Agent v7.23+、Windows Server では v7.28+ を使用していることを確認してください。インストールすると、ネットワークパフォーマンスモニタリング製品に **DNS** タブが表示されます。
 
-[Helm で Kubernetes][3] を使用している場合、DNS モニタリングを有効にするには [values.yaml][4] で `collectDNSStats:` を `true` に設定する必要があります。
-
-ネットワークパフォーマンスモニタリングをご希望の場合は、[NPM セットアップ手順][2]をご覧ください。
+ネットワークデバイスモニタリングをご希望の場合は、[NDM セットアップ手順][2]をご覧ください。
 
 ## クエリ
 
@@ -42,7 +46,7 @@ DNS モニタリングにより提供される DNS サーバーのパフォー�
 
 検索を特定のクライアントに絞るには、ソース検索バーでタグを使用して DNS トラフィックにフィルターをかけ集計します。デフォルトのビューでは、ソースに `service` タグが使用されています。したがって、表の各行は DNS サーバーへ DNS リクエストを作成しているサービスを表しています。
 
-{{< img src="network_performance_monitoring/dns_default.png" alt="DNS モニタリングデフォルトビュー"  style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_default.png" alt="DNS モニタリングデフォルトビュー" style="width:100%;">}}
 
 検索を特定の DNS サーバーに絞るには、宛先検索バーでタグを使用します。宛先の表示を構成するには、**Group by** のドロップダウンメニューで以下のオプションの 1 つを選択します。
 
@@ -50,16 +54,17 @@ DNS モニタリングにより提供される DNS サーバーのパフォー�
 * `host`: DNS サーバーのホスト名。
 * `service`: DNS サーバーで実行中のサービス。
 * `IP`: DNS サーバーの IP。
+* `dns_query`: **Agent バージョン 7.33 以降が必要** クエリされたドメイン。
 
 この例は、本番環境のアベイラビリティーゾーンのポッドから、DNS リクエストを受信するホストへのすべてのフローを示しています。
 
-{{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="複数の DNS サーバーへリクエストを送信するポッドのクエリ"  style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="複数の DNS サーバーへリクエストを送信するポッドのクエリ" style="width:100%;">}}
 
 ## メトリクス
 
 DNS メトリクスはグラフと関連する表を用いて表示されます。
 
-**注:** デフォルトの収集インターバルは 5 分で、保存期間は 7 日です。
+**注:** データは 30 秒ごとに収集され、5 分ごとに集計され、14 日間保持されます。
 
 次の DNS メトリクスを使用できます。
 
@@ -81,7 +86,7 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 
 表の右上にある **Customize** ボタンを使い、表中の列を構成します。
 
-**Filter Traffic** [オプション][1]で、ビュー内のトラフィックの詳細を表示できます。
+**Filter Traffic** [オプション][3]で、ビュー内のトラフィックの詳細を表示できます。
 
 ## サイドパネル
 
@@ -91,14 +96,13 @@ DNS メトリクスはグラフと関連する表を用いて表示されます�
 * クライアント側のコードでのアプリケーションエラー
 * 特定のポートまたは IP から発生している大量のリクエスト
 
-{{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS モニタリングのサイドパネル"  style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS モニタリングのサイドパネル" style="width:100%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/network_monitoring/performance/network_page#table
-[2]: /ja/network_monitoring/devices/setup?tab=snmpv2
-[3]: /ja/agent/kubernetes/?tab=helm
-[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml#L299-L300
+[1]: /ja/network_monitoring/performance/
+[2]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2
+[3]: /ja/network_monitoring/performance/network_page#table

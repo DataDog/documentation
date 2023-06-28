@@ -53,9 +53,9 @@ The following profiling features are available in the following minimum versions
 |----------------------|-----------------------------------------|---------------------------------------|
 | Wall time profiling        | 2.7.0+                     |All supported runtime versions.      |
 | CPU profiling        | 2.15.0+                       | All supported runtime versions.      |
-| Exceptions profiling        | beta, 2.10.0+                       | All supported runtime versions.      |
+| Exceptions profiling        | 2.31.0+                       | All supported runtime versions.      |
 | Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
-| Lock Contention profiling        | beta, 2.18.0+                       | .NET 5+      |
+| Lock Contention profiling        | 2.31.0+                       | .NET 5+      |
 | Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
 | [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
 | [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
@@ -123,6 +123,18 @@ To install the .NET Profiler per-application:
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
+{{% tab "Azure App Service (public beta)" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Only webapps are supported. Functions are not supported.
+</div>
+
+To install the .NET Profiler per-webapp:
+1. Install the Azure App Service [Datadog APM Extension][1] to your webapp.
+
+[1]: /serverless/azure_app_services/?tab=net#installation
+{{% /tab %}}
+
 {{< /tabs >}}
 
 <br>
@@ -175,7 +187,7 @@ To install the .NET Profiler per-application:
    DD_VERSION=1.2.3
    ```
 
-   {{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
 
    For .NET Framework:
    ```text
@@ -185,7 +197,7 @@ To install the .NET Profiler per-application:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorFrameworkIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
 
    <strong>Note</strong>: the environment variables are applied for <em>all</em> IIS applications. Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
 
@@ -341,6 +353,13 @@ To install the .NET Profiler per-application:
 4. For standalone applications, manually restart the application.
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
+{{% /tab %}}
+
+{{% tab "Azure App Service (public beta)" %}}
+
+2. Follow these [installation guidelines][1] to set `DD_PROFILING_ENABLED:true` to enable the profiler
+
+[1]: /serverless/azure_app_services/?tab=net#installation
 {{% /tab %}}
 
 {{< /tabs >}}

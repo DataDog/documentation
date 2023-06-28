@@ -493,7 +493,7 @@ del(.unecessary_tag_field)"""
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/installation/
+[1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/configurations/
 [3]: /observability_pipelines/reference/transforms/#dedupe
 [4]: /observability_pipelines/reference/transforms/#filter

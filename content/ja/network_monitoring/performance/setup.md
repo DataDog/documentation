@@ -132,16 +132,6 @@ Datadog Agent を使用してネットワークパフォーマンスのモニタ
 
     **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに次のコマンドを実行します: `sudo service datadog-agent restart`。
 
-{{< site-region region="us,us3,us5,eu" >}}
-
-6. オプションで、追加のクラウドインテグレーションを有効にして、ネットワークパフォーマンスモニタリングでクラウド管理型エンティティを検出できるようにします。
-      * Azure ロードバランサーを可視化するには、[Azure インテグレーション][1]をインストールします。
-      * AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
-
-  [1]: /integrations/azure
-  [2]: /integrations/amazon_web_services/
-{{< /site-region >}}
-
 ### SELinux 対応のシステム
 
 SELinux が有効化されたシステムでは、システムプローブのバイナリで eBPF 機能を使用するための特殊なアクセス許可が必要です。
@@ -362,7 +352,7 @@ Helm をお使いでない場合は、Kubernetes を使用してネットワー�
 [4]: /ja/agent/kubernetes/
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">Datadog Operator は公開ベータ版です。フィードバックや質問がございましたら、<a href="/help">Datadog サポートチーム</a>までお寄せください。</div>
+<div class="alert alert-warning">Datadog Operator は `1.0.0` バージョンで一般公開されており、DatadogAgent Custom Resource のバージョン `v2alpha1` と照合しています。 </div>
 
 [Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
 
@@ -387,7 +377,7 @@ spec:
 Docker でネットワークパフォーマンスのモニタリングを有効化するには、コンテナ Agent を起動する際に、次のコンフィギュレーションを使用します。
 
 ```shell
-$ docker run --cgroupns host \
+docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
 -e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
@@ -419,9 +409,9 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
-       DD_PROCESS_AGENT_ENABLED: 'true'
-       DD_API_KEY: '<DATADOG_API_KEY>'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+       DD_PROCESS_AGENT_ENABLED=true
+       DD_API_KEY=<DATADOG_API_KEY>
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - /proc/:/host/proc/:ro
@@ -449,6 +439,21 @@ AWS ECS での設定については、[AWS ECS][1] ドキュメントページ�
 [1]: /ja/agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
+
+{{< site-region region="us,us3,us5,eu" >}}
+### エンハンスドレゾリューション
+
+オプションで、クラウドインテグレーションのリソース収集を有効にして、ネットワークパフォーマンスモニタリングでクラウド管理型エンティティを検出できるようにします。
+- Azure ロードバランサーとアプリケーションゲートウェイを可視化するには、[Azure インテグレーション][1]をインストールします。
+- AWS ロードバランサーを可視化するには、[AWS インテグレーション][2]をインストールします。**ENI および EC2 のメトリクス収集を有効にする必要があります**
+
+これらの機能に関する追加情報は、[クラウドサービスエンハンスドレゾリューション][3]を参照してください。
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/#resource-collection
+  [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
+
+{{< /site-region >}}
 
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}

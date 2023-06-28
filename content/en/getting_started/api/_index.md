@@ -31,8 +31,9 @@ Start by [logging into Postman][4]. Datadog recommends [downloading the Postman 
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/fork"
-data-postman-var-1="20651290-9e894481-364e-48b3-ac87-c5ad96300f2f"
-data-postman-collection-url="entityId=20651290-9e894481-364e-48b3-ac87-c5ad96300f2f&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-visibility="public"
+data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
 data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {

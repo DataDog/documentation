@@ -1,11 +1,12 @@
 ---
-title: Agent v5 と Kubernetes での基本的な Agent の利用方法
+aliases:
+- /ja/agent/faq/agent-5-kubernetes-basic-agent-usage
 kind: ガイド
 private: true
-aliases:
-  - /ja/agent/faq/agent-5-kubernetes-basic-agent-usage
+title: Agent v5 と Kubernetes での基本的な Agent の利用方法
 ---
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード"  >}}
+
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード" >}}
 
 <div class="alert alert-warning">
 Datadog Agent v5 は、バージョン 1.8 以前の Kubernetes をサポートしています。最新バージョンの Kubernetes には Datadog Agent v6 をご使用ください。
@@ -16,7 +17,7 @@ Datadog Agent v5 は、バージョン 1.8 以前の Kubernetes をサポート�
 Kubernetes からメトリクスをリアルタイムに取得すると、以下のことが可能になります。
 
 * Kubernetes の状態を視覚化および監視できます。
-* Kubernetes のフェイルオーバーとイベントの通知を受けることができます。
+* Kubernetes のフェイルオーバーとイベントの通知を受ける
 
 Kubernetes の場合は、[DaemonSet で Agent を実行][1]することをお勧めします。Docker と Kubernetes 両方のインテグレーションを有効にして、[Docker イメージ][2]を利用可能です。
 
@@ -222,7 +223,7 @@ kubectl get daemonset
 
 Agent がデプロイされている場合、以下のような出力が表示されます。ここで、**desired** と **current** は、クラスター内で実行中のノードの数と一致します。
 
-```shell
+```bash
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
 dd-agent   3         3         <none>          11h
 ```
@@ -231,7 +232,7 @@ dd-agent   3         3         <none>          11h
 
 [Agent の info サブコマンドを実行][11]し、Checks セクションで `kubernetes_state` を探します。
 
-```shell
+```bash
 Checks
 ======
     kubernetes_state
@@ -274,7 +275,7 @@ metadata:
 
 [Agent の info サブコマンドを実行][11]し、Checks セクションで `kube_dns` を探します。
 
-```shell
+```bash
 Checks
 ======
     kube_dns

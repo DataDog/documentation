@@ -46,6 +46,10 @@ ENV DD_SERVICE=datadog-demo-run-go
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
+# this env var is needed for trace propagation to work properly in Cloud Run.
+# ensure to set this variable for all Datadog-instrumented downstream services.
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
 # execute your binary application wrapped in the entrypoint. Adapt this line to your needs
 CMD ["/path/to/your-go-binary"]
 ```
@@ -66,6 +70,10 @@ RUN pip install --no-cache-dir ddtrace==1.7.3
 ENV DD_SERVICE=datadog-demo-run-python
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
+
+# this env var is needed for trace propagation to work properly in cloud run.
+# ensure to set this variable for all Datadog-instrumented downstream services.
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
@@ -95,6 +103,10 @@ ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
+# this env var is needed for trace propagation to work properly in cloud run.
+# ensure to set this variable for all Datadog-instrumented downstream services.
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
 
@@ -116,6 +128,10 @@ COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
+
+# this env var is needed for trace propagation to work properly in cloud run.
+# ensure to set this variable for all Datadog-instrumented downstream services.
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
@@ -139,6 +155,10 @@ ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
+# this env var is needed for trace propagation to work properly in cloud run.
+# ensure to set this variable for all Datadog-instrumented downstream services.
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
 
@@ -160,6 +180,10 @@ COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 ENV DD_SERVICE=datadog-demo-run-ruby
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
+
+# this env var is needed for trace propagation to work properly in cloud run.
+# ensure to set this variable for all Datadog-instrumented downstream services.
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
@@ -202,7 +226,7 @@ Follow [these instructions][2] to install and configure the Go tracing library i
 
 
 [1]: https://github.com/DataDog/crpb/tree/main/go
-[2]: /tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[2]: /tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
@@ -274,7 +298,6 @@ gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
-  --allow-unauthenticated
 
 ```
 
@@ -290,6 +313,8 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
+- **Trace Propagation:** In order to propagate trace context for distributed tracing, set the `DD_TRACE_PROPAGATION_STYLE` environment variable to `'datadog'` for your Cloud Run app and any Datadog-instrumented services downstream of it.
+
 ### Environment Variables
 
 | Variable | Description |
@@ -302,6 +327,85 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_ENV`          | See [Unified Service Tagging][6].                                  |
 | `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
 | `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
+
+### OpenTelemetry
+
+Follow these steps to send OpenTelemetry data to Datadog.
+
+1. Tell OpenTelemetry to export spans to Datadog `serverless-init`.
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: '<your-service-name>',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+
+2. Add OpenTelemetry's instrumentation for Express. This is akin to adding `ddtrace`.
+
+   ```js
+   // instrument.js
+
+   const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
+   const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new HttpInstrumentation(),
+          new ExpressInstrumentation(),
+      ],
+   });
+
+   ```
+
+3. Add instrumentation at runtime. For instance, for Node.js, use `NODE_OPTIONS`.
+   ```
+   # Dockerfile
+
+   FROM node
+
+   WORKDIR /app
+   COPY package.json index.js instrument.js /app/
+   RUN npm i
+
+   ENV NODE_OPTIONS="--require ./instrument"
+
+   CMD npm run start
+   ```
+
+4. Add the Datadog `serverless-init`.
+   ```
+   # Dockerfile
+
+   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   ```
+5. Enable OpenTelemetry in the Datadog `serverless-init` using the `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` or `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` environment variable.
+
+   ```
+   # Dockerfile
+
+   ENV DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT="localhost:4318"
+   ```
 
 ## Troubleshooting
 

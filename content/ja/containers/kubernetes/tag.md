@@ -114,19 +114,19 @@ Agent v6.0 以降、Agent は特定のノードのラベルを収集し、それ
 
 特定のノードラベル `<ノードラベル>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
-DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<ノードラベル>": "<タグキー>"}'
+```bash
+DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
-```shell
+```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
 
-```shell
+```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
@@ -163,20 +163,20 @@ Agent v6.0 以降、Agent は特定のポッドのラベルを収集し、それ
 
 特定のポッドラベル `<ポッドラベル>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
-DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<ポッドラベル>": "<タグキー>"}'
+```bash
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<POD_LABEL>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 Agent v6.8.0 以降の場合、次の環境変数構成を使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
 
-```shell
-DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<プレフィックス>_%%label%%"}'
+```bash
+DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
 **注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][1]を参照してください。
@@ -221,19 +221,19 @@ Agent v6.0 以降、Agent は特定のポッドのアノテーションを収集
 
 特定のポッドラベル `<ポッドアノテーション>` を抽出し、Datadog 内のタグキー `<タグキー>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
-DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<ポッドアノテーション>": "<タグキー>"}'
+```bash
+DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
-```shell
+```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドアノテーションをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
 
-```shell
+```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 ```
 
@@ -270,19 +270,19 @@ Agent 7.27 以降、Agent は特定のネームスペースのラベルを収集
 
 特定のネームスペースラベル `<NAMESPACE_LABEL>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
+```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"<NAMESPACE_LABEL>": "<TAG_KEY>"}'
 ```
 
 たとえば、次のように設定できます。
 
-```shell
+```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 次の環境変数コンフィギュレーションを使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<PREFIX>_` が付いています。
 
-```shell
+```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
@@ -319,13 +319,13 @@ Agent v7.32+ から、Agent はコンテナ環境変数を収集し、コンテ�
 
 特定の環境変数 `<ENV_VAR>` を抽出し、Datadog 内のタグキー `<TAG_KEY>` として変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
 例:
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 ```
 
@@ -355,21 +355,21 @@ container_env_as_tags:
 
 ## タグとしてのコンテナラベル
 
-Agent v7.33+ から、Agent はコンテナラベルを収集し、タグとして使用することができます。Agent は、コンテナに関連するすべてのメトリクスにタグを付けます。
-Agent は、`docker` と `containerd` の両方のコンテナラベルからタグを生成することができます。`containerd` の場合は、v1.5.6 が最低限サポートされるバージョンです。
+Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics associated with the container.
+The Agent can generate tags from container labels for both `docker` and `containerd` containers. In the case of `containerd`, the minimum supported version is v1.5.6, because previous releases do not propagate labels correctly.
 
 {{< tabs >}}
 {{% tab "Containerized Agent" %}}
 
 特定のコンテナラベル `<CONTAINER_LABEL>` を抽出し、タグキー `<TAG_KEY>` に変換するには、次の環境変数を Datadog Agent に追加します。
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'
 ```
 
 例:
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 

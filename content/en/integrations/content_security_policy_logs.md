@@ -7,14 +7,28 @@ doc_link: /integrations/content_security_policy_logs/
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/content_security_policy_logs.md']
 has_logo: true
-integration_title: Content Security Policy Logs
+integration_title: Content Security Policy
 is_public: true
 kind: integration
 name: content_security_policy_logs
-public_title: Datadog-Content Security Policy logs
+public_title: Datadog-Content Security Policy
 short_description: 'Detect CSP violations'
 version: '1.0'
 integration_id: "content_security_policy_logs"
+algolia:
+  tags:
+  - 'csp-report'
+  - 'csp'
+  - 'report-uri'
+  - 'report-to'
+  - 'Content-Security-Policy'
+  - 'violated-directive'
+  - 'blocked-uri'
+  - 'script-src'
+  - 'worker-src'
+  - 'connect-src'
+aliases:
+  - /real_user_monitoring/faq/content_security_policy
 further_reading:
   - link: "/getting_started/tagging/unified_service_tagging/"
     tag: "Documentation"
@@ -25,7 +39,7 @@ further_reading:
 
 The Datadog Content Security Policy (CSP) integration sends logs to Datadog from web browsers as they interpret your CSP and detect violations. By using the CSP integration, you don't have to host or manage a dedicated endpoint to aggregate your CSP data.
 
-For more information about CSPs, see [Google's web.dev post][1].
+For more information about CSP, see [Content-Security-Policy][1].
 
 ## Prerequisites
 
@@ -38,7 +52,7 @@ Before you add a directive to a CSP header, [generate a client token in your Dat
 You need a URL where browsers can send policy violation reports. The URL must have the following format:
 
 ```
-https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
+https://csp-report.{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
 ```
 
 Optionally, add the `ddtags` key (service name, the environment, and service version) to the URL to set up [Unified Service Tagging][3]:
@@ -148,10 +162,42 @@ Each browser interprets the report format differently:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Use CSP with Real User Monitoring and Session Replay
+
+If you're using CSP on your websites, add the following URLs to your existing directives depending on your use case.
+
+### Intake URLs
+
+Depending on the `site` option used to initialize [Real User Monitoring][4] or [browser log collection][5], add the appropriate `connect-src` entry:
+
+```txt
+connect-src https://*.{{< region-param key="browser_sdk_endpoint_domain" >}}
+```
+
+### Session Replay worker
+
+If you are using Session Replay, make sure to allow workers with `blob:` URI schemes by adding the following `worker-src` entry:
+
+```txt
+worker-src blob:;
+```
+
+### CDN bundle URL
+
+If you are using the CDN async or CDN sync setup for [Real User Monitoring][6] or [browser log collection][7], also add the following `script-src` entry:
+
+```txt
+script-src https://www.datadoghq-browser-agent.com
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://web.dev/csp/
+[1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy
 [2]: https://app.datadoghq.com/organization-settings/client-tokens
 [3]: /getting_started/tagging/unified_service_tagging
+[4]: https://docs.datadoghq.com/real_user_monitoring/browser/#initialization-parameters
+[5]: /logs/log_collection/javascript/#initialization-parameters
+[6]: /real_user_monitoring/browser/#setup
+[7]: /logs/log_collection/javascript/#cdn-async

@@ -56,6 +56,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Role access request][8] | A user created, responded to, or deleted an access request for a role, and the value of the access request. | `@evt.name:"Access Management" @asset.type:role_request` |
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [Password][9] | A user modified their password in the org. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
+| [Restriction policy][86] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 
 ### API request events
 
@@ -74,12 +75,15 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Sampling rates remotely configured][21] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
 
 ### Application Security Management
+
 | Name | Description of audit event                                          | Query in audit explorer                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Denylist][22] | A user blocked, unblocked, or extended the blocking duration of an IP address. | `@evt.name:"Application Security" @asset.type:ip_denylist` |
-| [Event Rules][23] | A user enabled or disabled an ASM event rule. | `@evt.name:"Application Security" @asset.type:event_rules` |
 | [One-click Activation][24] | A user activated or de-activated ASM on a service. | `@evt.name:"Application Security" @asset.type:compatible_services` |
-
+| [Protection][23] | A user enabled or disabled the ASM protection. | `@evt.name:"Application Security" @asset.type:blocking_configuration` |
+| [Denylist][22] | A user blocked, unblocked, or extended the blocking duration of an IP address or a user ID. | `@evt.name:"Application Security" @asset.type:ip_user_denylist` |
+| [Passlist][81] | A user added, modified, or deleted an entry to the passlist. | `@evt.name:"Application Security" @asset.type:passlist_entry` |
+| [In-App WAF Policy][82] | A user created, modified, or deleted an In-App WAF policy. | `@evt.name:"Application Security" @asset.type:policy_entry` |
+| [In-App WAF Custom Rule][83] | A user created, modified, or deleted an In-App WAF custom rule. | `@evt.name:"Application Security" @asset.type:waf_custom_rule` |
 
 ### Audit Trail events
 
@@ -189,6 +193,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | Name                 | Description of audit event                                                       | Query in audit explorer                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
 | [Token leaked][80] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [Login method override][85] | Datadog has detected a user login method override that is different from the default login methods set for the organization.| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
+| [Unusual login][84] | Datadog has detected a unusual login event.| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
 
 ### Sensitive Data Scanner events
 | Name | Description of audit event                                          | Query in audit explorer                           |
@@ -244,8 +250,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [19]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22APM%22%20%40asset.type%3Asecond_primary_tag
 [20]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [21]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAPM%20%40asset.type%3Asamplerconfig
-[22]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aip_denylist
-[23]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aevent_rules
+[22]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Aip_user_denylist
+[23]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Application%20Security%22%20%40asset.type%3Ablocking_configuration
 [24]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Acompatible_services
 [25]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Audit%20Trail%22%20%40asset.type%3Aaudit_events_csv
 [26]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AAuthentication%20%40asset.type%3Aapi_key
@@ -303,3 +309,9 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [78]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Synthetics%20Monitoring%22%20%40asset.type%3Asynthetics_settings%20%40action%3Amodified
 [79]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Reference%20Tables%22%20%40asset.type%3Areference_table%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
 [80]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40asset.type%3A%28api_key%20OR%20application_key%29
+[81]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apasslist_entry
+[82]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Apolicy_entry
+[83]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A"Application%20Security"%20%40asset.type%3Awaf_custom_rule
+[84]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Aunusual_login
+[85]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Security%20Notification%22%20%40action%3Anotification%20%40asset.type%3Auser
+[86]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40asset.type%3Arestriction_policy

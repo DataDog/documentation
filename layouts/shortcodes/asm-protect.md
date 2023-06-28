@@ -1,6 +1,5 @@
 
-<div class="alert alert-info"><strong>Beta: IP blocking, user blocking, and suspicious request blocking (In-App WAF)</strong><br>
-If your service is running <a href="/agent/guide/how_remote_config_works/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
+If your service is running [an Agent with Remote Configuration enabled and a tracing library version that supports it][108], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
 
 ASM Protect goes beyond Threat Detection and enables you to take blocking action to slow down attacks and attackers. Unlike perimeter WAFs that apply a broad range of rules to inspect traffic, ASM uses the full context of your application---its databases, frameworks, and programming language---to narrowly apply the most efficient set of inspection rules. 
 

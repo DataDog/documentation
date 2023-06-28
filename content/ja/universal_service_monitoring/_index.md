@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/tracing/universal_service_monitoring/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: https://www.datadoghq.com/blog/universal-service-monitoring-datadog/
   tag: GitHub
@@ -84,6 +87,34 @@ providers:
 ```
 
 {{% /tab %}}
+{{% tab "Operator" %}}
+
+[Datadog Agent][1] でユニバーサルサービスモニタリングを有効にするには、`datadog-agent.yaml` マニフェストを更新します。`DatadogAgent` リソースで `spec.features.usm.enabled` を `true` に設定します。
+
+   ```yaml
+   apiVersion: datadoghq.com/v2alpha1
+   kind: DatadogAgent
+   metadata:
+     name: datadog
+   spec:
+     global:
+       credentials:
+        apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+        appSecret:
+         secretName: datadog-secret
+         keyName: app-key
+     features:
+       usm:
+         enabled: true
+   ```
+
+**注:** Datadog Operator v1.0.0 以降が必要です。
+
+[1]: https://github.com/DataDog/datadog-operator
+
+{{% /tab %}}
 {{% tab "Helm を使用しない Kubernetes" %}}
 
 1. `datadog-agent` テンプレートにアノテーション `container.apparmor.security.beta.kubernetes.io/system-probe: unconfined` を追加します。
@@ -161,8 +192,6 @@ providers:
              value: 'true'
            - name: DD_SYSPROBE_SOCKET
              value: /var/run/sysprobe/sysprobe.sock
-           - name: HOST_PROC
-             value: /host/proc
          resources: {}
          volumeMounts:
            - name: procdir
@@ -315,7 +344,6 @@ docker run --cgroupns host \
 -v /etc/dnf/vars:/host/etc/dnf/vars:ro \
 -v /etc/rhsm:/host/etc/rhsm:ro \
 -e DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED=true \
--e HOST_PROC=/host/root/proc \
 -e HOST_ROOT=/host/root \
 --security-opt apparmor:unconfined \
 --cap-add=SYS_ADMIN \
@@ -340,13 +368,11 @@ services:
   datadog:
     ...
     environment:
-     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED: 'true'
-     - HOST_PROC: '/host/proc'
+     - DD_SYSTEM_PROBE_SERVICE_MONITORING_ENABLED='true'
     volumes:
      - /var/run/docker.sock:/var/run/docker.sock:ro
      - /proc/:/host/proc/:ro
      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-     - /sys/kernel/debug:/sys/kernel/debug
      - /sys/kernel/debug:/sys/kernel/debug
      - /lib/modules:/lib/modules
      - /usr/src:/usr/src
@@ -708,7 +734,8 @@ SERVICE=<service>
 
 **IIS 上で動作するサービスの場合:**
 
-1. ネットワークドライバーコンポーネントを有効にして、[Datadog Agent][1] (バージョン 6.41 または 7.41 以降) をインストールします。インストール中、`msiexec` コマンドに `ADDLOCAL="MainApplication,NPM"` を渡すか、UI から Agent のインストールを実行するときに **Network Performance Monitoring** を選択します。
+1. [Datadog Agent][1] (バージョン 6.41 または 7.41 以降) をネットワークカーネルデバイスドライバーコンポーネントを有効にしてインストールします。 
+   [非推奨] _(バージョン 7.44 以前)_ インストール時に `ADDLOCAL="MainApplication,NPM"` を `msiexec` コマンドに渡すか、Agent のインストールを GUI で実行する際に "Network Performance Monitoring" を選択します。
 
 2. `C:\ProgramData\Datadog\system-probe.yaml` を編集し、有効フラグを `true` に設定します。
 
@@ -803,4 +830,4 @@ DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES=[{"pattern":"<drop regex>","repl":""}
 [3]: /ja/tracing/service_catalog/
 [4]: /ja/monitors/types/apm/?tab=apmmetrics
 [5]: /ja/dashboards/
-[6]: /ja/monitors/service_level_objectives/metric/
+[6]: /ja/service_management/service_level_objectives/metric/

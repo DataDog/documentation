@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - 異常値
+  - 異常グラフ
 aliases:
 - /ja/graphing/functions/algorithms/
 kind: documentation
@@ -20,7 +24,9 @@ title: アルゴリズム
 
 次は 2 分間の説明ビデオです。
 
-{{< vimeo 188833506 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/188833506/rendition/1080p/file.mp4?loc=external&signature=96eacc46a18438ce0f45d5b57952cd924482f8f18e011ceb7b76b6ce1b4587a2" poster="/images/poster/algorithms.png" >}}
+
+**季節性**: デフォルトでは、`robust` と `agile` アルゴリズムは[週ごとの季節性][4]を使用します。これは、ベースラインを計算するために 3 週間の履歴データを必要とします。
 
 詳細については、[異常値モニター][1]のページを参照してください。
 
@@ -66,6 +72,7 @@ title: アルゴリズム
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/monitors/create/types/anomaly/
-[2]: /ja/monitors/create/types/outlier/
-[3]: /ja/monitors/create/types/forecasts/#forecast-algorithms
+[1]: /ja/monitors/types/anomaly/
+[2]: /ja/monitors/types/outlier/
+[3]: /ja/monitors/types/forecasts/#forecast-algorithms
+[4]: /ja/monitors/types/anomaly/?s=anomaly%20algorithm#seasonality

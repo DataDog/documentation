@@ -89,7 +89,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+To apply a specific configuration to a given container, Autodiscovery identifies containers by name, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image.` To configure using Autodiscovery to collect container logs on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod's `log_processing_rules`:
 
 ```yaml
 apiVersion: apps/v1
@@ -103,7 +103,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -118,7 +118,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -220,7 +220,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -235,7 +235,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -308,7 +308,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -324,7 +324,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -409,7 +409,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -424,7 +424,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: postgres
+        - name: '<CONTAINER_IDENTIFIER>'
           image: postgres:latest
 ```
 
@@ -502,7 +502,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/testApp.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -513,7 +513,7 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: testApp
+        - name: '<CONTAINER_IDENTIFIER>'
           image: testApp:latest
 ```
 

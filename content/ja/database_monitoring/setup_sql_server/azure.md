@@ -63,11 +63,19 @@ instances:
     database: '<DATABASE_1>'
     username: datadog
     password: '<PASSWORD>'
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    azure:
+      deployment_type: 'sql_database'
+      name: '<SERVER_NAME>.database.windows.net'
 
   - host: '<SERVER_NAME>.database.windows.net,1433'
     database: '<DATABASE_2>'
     username: datadog
     password: '<PASSWORD>'
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
+    azure:
+      deployment_type: 'sql_database'
+      name: '<SERVER_NAME>.database.windows.net'
 ```
 
 Datadog Agent のインストールと構成の詳細については、[Agent のインストール](#install-the-agent)を参照してください。
@@ -140,7 +148,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 `deployment_type` と `name` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
@@ -213,7 +221,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
 `deployment_type` と `name` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][4]を参照してください。
@@ -264,7 +272,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     ],
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
-      "name": "<YOUR_INSTANCE_NAME>"
+      "name": "<AZURE_ENDPOINT_ADDRESS>"
     }
   }]' \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
@@ -302,11 +310,12 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
+  --set 'clusterChecksRunner.enabled=true' \
   --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
-    host: <HOSTNAME>,1433
+    host: <HOSTNAME>\,1433
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
@@ -317,8 +326,8 @@ instances:
       - 'env:<CUSTOM_ENV>'
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>' \
-  datadog/datadog"
+      name: '<AZURE_ENDPOINT_ADDRESS>'" \
+  datadog/datadog
 ```
 
 ### マウントされたファイルで構成する
@@ -341,7 +350,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_ENDPOINT_ADDRESS>'
 ```
 
 ### Kubernetes サービスアノテーションで構成する
@@ -369,7 +378,7 @@ metadata:
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<YOUR_INSTANCE_NAME>"
+            "name": "<AZURE_ENDPOINT_ADDRESS>"
           }
         }
       ]

@@ -1,5 +1,6 @@
 ---
 categories:
+- developer tools
 - notification
 dependencies: []
 description: 「Datadog のアラートやイベントで任意の Webhook を通知チャンネルとして使用します。」
@@ -72,15 +73,16 @@ $ALERT_STATUS
 **注**: Logs Monitor アラートからの Webhook ペイロードでこの変数を入力するには、Webhook インテグレーションタイルで `$ALERT_STATUS` を手動で追加する必要があります。
 
 $ALERT_TITLE
-: アラートのタイトル<br />
-**例**: `error`、`warning`、`success`、`info`
+: アラートのタイトル。<br />
+**例**: `[Triggered on {host:ip-012345}] Host is Down`
 
 $ALERT_TRANSITION
 : アラート通知のタイプ。<br />
 **例**: `Recovered`、`Triggered`/`Re-Triggered`、`No Data`/`Re-No Data`、`Warn`/`Re-Warn`、`Renotify`
 
 $ALERT_TYPE
-: アラートのタイプ。
+: アラートのタイプ。<br />
+**例**: `error`、`warning`、`success`、`info`
 
 $DATE
 : イベントが発生した日付 _(epoch)_。<br />
@@ -99,7 +101,7 @@ $EVENT_TITLE
 
 $EVENT_TYPE
 : イベントのタイプ。<br />
-**例**: `metric_alert_monitor`、`event_alert`、または `service_check`.
+[イベントタイプ](#event-types)の一覧は、[例](#examples)をご覧ください。
 
 $HOSTNAME
 : イベントに関連付けられたサーバーのホスト名 (ある場合)。
@@ -123,12 +125,16 @@ $INCIDENT_FIELDS
 : 各インシデントのフィールドを値にマッピングする JSON オブジェクト。<br />
 **例**: `{"state": "active", "datacenter": ["eu1", "us1"]}`
 
+$INCIDENT_INTEGRATIONS
+: Slack や Jira など、インシデントのインテグレーションを持つ JSON オブジェクトのリスト。<br />
+**例**: `[{"uuid": "11a15def-eb08-52c8-84cd-714e6651829b", "integration_type": 1, "status": 2, "metadata": {"channels": [{"channel_name": "#incident-1", "channel_id": "<channel_id>", "team_id": "<team_id>", "redirect_url": "<redirect_url>"}]}}]`
+
+$INCIDENT_MSG
+: インシデント通知のメッセージ。<br />
+
 $INCIDENT_PUBLIC_ID
 : 関連するインシデントのパブリック ID。<br />
 **例**: `123`
-
-$INCIDENT_TITLE
-: インシデントのタイトル。
 
 $INCIDENT_SEVERITY
 : インシデントの重大度。
@@ -136,12 +142,20 @@ $INCIDENT_SEVERITY
 $INCIDENT_STATUS
 : インシデントのステータス。
 
+$INCIDENT_TITLE
+: インシデントのタイトル。
+
+$INCIDENT_TODOS
+: インシデントの修復タスクを持つ JSON オブジェクトのリスト。<br />
+**例**: `[{"uuid": "01c03111-172a-50c7-8df3-d61e64b0e74b", "content": "task description", "due_date": "2022-12-02T05:00:00+00:00", "completed": "2022-12-01T20:15:00.112207+00:00", "assignees": []}]`
+
 $INCIDENT_URL
 : インシデントの URL。<br />
 **例**: `https://app.datadoghq.com/incidents/1`
 
-$INCIDENT_MSG
-: インシデント通知のメッセージ。<br />
+$INCIDENT_UUID
+: 関連するインシデントの UUID。<br />
+**例**: `01c03111-172a-50c7-8df3-d61e64b0e74b`
 
 $LAST_UPDATED
 : イベントが最後に更新された日付。
@@ -193,8 +207,8 @@ $SECURITY_RULE_ID
 : セキュリティルール ID。<br />
 **例**: `aaa-aaa-aaa`
 
-$SECURITY_RULE_QUERY
-: セキュリティルールに関連付けられた 1 つまたは複数のクエリ。<br />
+$SECURITY_RULE_MATCHED_QUERIES
+: セキュリティルールに関連するクエリ。<br />
 **例**: `["@evt.name:authentication"]`
 
 $SECURITY_RULE_GROUP_BY_FIELDS
@@ -258,6 +272,10 @@ $USER
 $USERNAME
 : Webhook をトリガーしたイベントをポストしたユーザーのユーザー名。
 
+### カスタム変数
+
+組み込み変数のリストに加えて、インテグレーションタイルで独自のカスタム変数を作成することができます。これらの変数は、Webhook URL、ペイロード、カスタムヘッダーで使用することができます。一般的な使用例は、ユーザー名やパスワードのような資格情報の保存です。
+
 ### Authentication
 
 認証を必要とするサービスに Webhook をポストする場合は、URL を `https://my.service.example.com` から `https://<USERNAME>:<PASSWORD>@my.service.example.com` に変更することで、Basic HTTP 認証を使用できます。
@@ -272,8 +290,8 @@ $USERNAME
 
 ### Twilio を使用した SMS の送信
 
-使用する URL:
-`https://<ACCOUNT_ID>:<AUTH_TOKENT>@api.twilio.com/2010-04-01/Accounts/<ACCOUNT_ID>/Messages.json`
+URL として使用する:
+`https://<ACCOUNT_ID>:<AUTH_TOKEN>@api.twilio.com/2010-04-01/Accounts/<ACCOUNT_ID>/Messages.json`
 
 ペイロードの例:
 
@@ -310,5 +328,26 @@ $USERNAME
 ```
 
 "Encode as form" チェックボックスはオンにしないでください。
+
+### Webhook ペイロードのイベントタイプ一覧 {#event-types}
+
+| イベントタイプ | 関連するモニター |
+| ---------  | ------------------- |
+| `ci_pipelines_alert` | CI パイプライン |
+| `ci_tests_alert` | CI テスト |
+| `composite_monitor` | 複合条件 |
+| `error_tracking_alert` | エラー トラッキング |
+| `event_alert` | V1 エンドポイントを使用したイベント |
+| `event_v2_alert` | V2 エンドポイントを持つイベント |
+| `log_alert` | ログ管理 |
+| `monitor_slo_alert` | モニターベース SLO |
+| `metric_slo_alert` | メトリクスベース SLO |
+| `outlier_monitor` | 外れ値 |
+| `process_alert` | プロセス |
+| `query_alert_monitor` | メトリクス、異常値、予測 |
+| `rum_alert` | RUM |
+| `service_check` | ホスト、サービスチェック |
+| `synthetics_alert` | Synthetics |
+| `trace_analytics_alert` | トレース分析 |
 
 [1]: https://app.datadoghq.com/account/settings#integrations/webhooks

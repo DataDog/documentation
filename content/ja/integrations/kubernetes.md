@@ -1,38 +1,39 @@
 ---
-integration_title: Kubernetes
-name: Kubernetes
-kind: インテグレーション
-git_integration_title: Kubernetes
-newhlevel: true
-updated_for_agent: 6
-description: Kubernetes クラスターとそこで実行されているアプリケーションの状態を監視します。Pod スケジュールイベントをキャプチャし、Kubelets のステータスのトレースなどを実行します。
-is_public: true
 aliases:
-  - /ja/integrations/kubernetes_state
-  - /ja/integrations/kube_proxy
-  - /ja/integrations/Kubernetes
+- /ja/integrations/kubernetes_state
+- /ja/integrations/kube_proxy
+- /ja/integrations/Kubernetes
+categories:
+- cloud
+- configuration & deployment
+- containers
+- orchestration
+- log collection
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md
+description: Kubernetes クラスターとそこで実行されているアプリケーションの状態を監視します。Pod スケジュールイベントをキャプチャし、Kubelets
+  のステータスのトレースなどを実行します。
+doc_link: /integrations/kubernetes/
+further_reading:
+- link: https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/
+  tag: ブログ
+  text: Kubernetes の保留中のポッドとスケジュールの失敗をデバッグする方法
+- link: https://www.datadoghq.com/blog/monitoring-kubernetes-era
+  tag: ブログ
+  text: Kubernetes 時代のモニタリング
+git_integration_title: Kubernetes
+integration_id: kubernetes
+integration_title: Kubernetes
+is_public: true
+kind: インテグレーション
+name: Kubernetes
+newhlevel: true
 public_title: Datadog-Kubernetes インテグレーション
 short_description: Pod スケジュールイベントをキャプチャし、Kubelets のステータスのトレースなどを実行します。
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md
-categories:
-  - cloud
-  - configuration & deployment
-  - containers
-  - orchestration
-  - log collection
-doc_link: /integrations/kubernetes/
-ddtype: check
-integration_id: kubernetes
-further_reading:
-  - link: https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/
-    tag: ブログ
-    text: Kubernetes の保留中のポッドとスケジュールの失敗をデバッグする方法
-  - link: https://www.datadoghq.com/blog/monitoring-kubernetes-era
-    tag: ブログ
-    text: Kubernetes 時代のモニタリング
+updated_for_agent: 6.0
 ---
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード"  >}}
+
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード" >}}
 
 ## 概要
 

@@ -8,7 +8,10 @@ further_reading:
   text: "Set up Feature Flag data collection"
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
-  text: "RUM Explorer"
+  text: "Learn about the RUM Explorer"
+- link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
+  tag: "Blog"
+  text: "Ensure release safety with feature flag tracking in Datadog RUM"
 ---
 
 <div class="alert alert-warning">
@@ -32,7 +35,7 @@ Feature flag tracking is available in the RUM Browser SDK. To start, set up [RUM
 
 You can start collecting feature flag data for [custom feature flag management solutions][3], or using one of our integration partners. 
 
-We currently support integrations with:
+We support integrations with:
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 

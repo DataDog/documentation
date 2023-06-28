@@ -8,7 +8,7 @@ kind: documentation
 title: Aurora マネージド MySQL のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -25,10 +25,10 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 ## はじめに
 
 サポートされている MySQL バージョン
-: 5.6 または 5.7
+: 5.6、5.7、8.0 以降
 
 サポートされている Agent バージョン
-: 7.36.1+
+: 7.36.1 以降
 
 パフォーマンスへの影響
 : データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
@@ -81,8 +81,24 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 
 次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
+{{< tabs >}}
+{{% tab "MySQL ≥ 8.0" %}}
 
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
+`datadog` ユーザーを作成し、基本的な権限を付与します。
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+
+{{% tab "MySQL 5.6 and 5.7" %}}
+
+`datadog` ユーザーを作成し、基本的な権限を付与します。
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
@@ -90,6 +106,9 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 次のスキーマを作成します。
 
@@ -246,14 +265,14 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD>" \
+    password: "<UNIQUEPASSWORD>"' \
   datadog/datadog
 ```
 
@@ -321,6 +340,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 ### 検証
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
+
+## Agent の構成例
+{{% dbm-mysql-agent-config-examples %}}
 
 ## RDS インテグレーションをインストール
 

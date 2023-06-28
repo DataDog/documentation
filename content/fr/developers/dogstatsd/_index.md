@@ -336,6 +336,10 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
+<div class="alert alert-info">
+  Si vous utilisez DogStatsD avec l'Agent de conteneur ou dans Kubernetes, vous devez instancier le host auquel les métriques StatsD sont transmises avec la variable d'environnement <code>$DD_DOGSTATSD_SOCKET</code> si vous utilisez un socket de domaine Unix, ou avec la variable d'environnement <code>$DD_AGENT_HOST</code> si vous avez lié le port DogStatsD à un port du host.
+</div>
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
@@ -431,10 +435,6 @@ using (var dogStatsdService = new DogStatsdService())
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-<div class="alert alert-info">
-  Si vous utilisez DogStatsD avec l'Agent de conteneur ou dans Kubernetes, vous devez instancier le host auquel les métriques StatsD sont transmises avec la variable d'environnement <code>$DD_DOGSTATSD_SOCKET</code> si vous utilisez un socket de domaine Unix, ou avec la variable d'environnement <code>$DD_AGENT_HOST</code> si vous avez lié le port DogStatsD à un port du host.
-</div>
 
 ### Paramètres d'instanciation du client
 
