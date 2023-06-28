@@ -79,7 +79,7 @@ If you use GitHub integration, directly save your Backstage YAMLs to a repo with
 
 
 It’s a partial translation, specifically, 
-- We only recognize `kind:component` and `spec.type=service` in Backstage YAMLs as services in Datadog
+- Datadog only recognizes `kind:component` and `spec.type=service` in Backstage YAMLs as services
 - `name` will be converted to `DD-SERVICE`
 - `namespace` values will be mapped to custom tags
 - `lifecycle` will be mapped to `lifecycle`
