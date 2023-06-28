@@ -14,8 +14,8 @@ The following ASM capabilities are supported in the Java library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
 | Threat Protection| 1.9.0 |
-| Open Source Vulnerability detection | 1.1.4 |
-| Custom Code Vulnerability detection (beta) | 1.15.0|
+| Vulnerability Management for Open Source Software (OSS) | 1.1.4 |
+| Vulnerability Management for Code (beta) | 1.15.0|
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
@@ -55,11 +55,12 @@ Datadog does not officially support any early-access versions of Java.
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detections is supported on all frameworks
+- **Vulnerability Management for OSS** is supported on all frameworks
+- If **Vulnerability Management for Code** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code  supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -85,11 +86,11 @@ Datadog does not officially support any early-access versions of Java.
 - Request-based blocking
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all frameworks
+- **Vulnerability Management for OSS** is supported on all frameworks
+- If **Vulnerability Management for Custom Code** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Custom Code Vulnerability Detection supported? |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Apache HTTP Client       | 4.0+        |  {{< X >}} |  |  |
 | gRPC                     | 1.5+        |  {{< X >}} |  |  |
@@ -113,10 +114,11 @@ Datadog does not officially support any early-access versions of Java.
 - Error and stacktrace capturing
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all frameworks
+- **Vulnerability Management for OSS** is supported on all frameworks
 - Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
+- If your framework is not supported below, **Vulnerability Management for Custom Code** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
-| Database                | Versions | Threat Detection supported? |  Custom Code Vulnerability Detection supported? |
+| Database                | Versions | Threat Detection supported? |  Vulnerability Management for Code supported? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
 | Aerospike               | 4.0+     |  {{< X >}} |   |
 | Couchbase               | 2.0+     |  {{< X >}} |   |
@@ -142,3 +144,4 @@ Datadog does not officially support any early-access versions of Java.
 
 [1]: /tracing/trace_collection/compatibility/java/
 [2]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[3]: security/application_security/vulnerability_management/#detect-custom-code-vulnerabilities
