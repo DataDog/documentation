@@ -3948,8 +3948,8 @@ components:
         aggregation:
           $ref: '#/components/schemas/EventsAggregation'
         metric:
-          description: Metric whose calculated value should be used to define the
-            sort order of a query's results.
+          description: The metric's calculated value which should be used to define
+            the sort order of a query's results.
           example: '@duration'
           type: string
         order:
@@ -8937,7 +8937,8 @@ components:
       type: object
     MetricsAggregator:
       default: avg
-      description: The type of aggregation that can be performed on metrics queries.
+      description: The type of aggregation that can be performed on metrics-based
+        queries.
       enum:
       - avg
       - min
@@ -22432,7 +22433,7 @@ paths:
         type: safe
   /api/v2/query/scalar:
     post:
-      description: 'Query scalar values (as seen on Query Value, Table and Toplist
+      description: 'Query scalar values (as seen on Query Value, Table, and Toplist
         widgets).
 
         Multiple data sources are supported with the ability to
@@ -22472,13 +22473,13 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
-        (RUM) and cloud cost data sources.
+      x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
+        (RUM), and Cloud Cost Management data sources.
 
         Support for logs is in beta. We are gradually onboarding support for more
         sources. If you have any
 
-        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
     post:
       description: 'Query timeseries data across various data sources and
@@ -22511,6 +22512,8 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - timeseries_query
+        - metrics_read
+        - metric_tags_write
       summary: Query timeseries data across multiple products
       tags:
       - Metrics
@@ -22518,13 +22521,13 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is GA for the metrics, real user monitoring
-        (RUM) and cloud cost data sources.
+      x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
+        (RUM), and Cloud Cost Management data sources.
 
         Support for logs is in beta. We are gradually onboarding support for more
         sources. If you have any
 
-        feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/restriction_policy/{resource_id}:
     delete:
       description: Deletes the restriction policy associated with a specified resource.
