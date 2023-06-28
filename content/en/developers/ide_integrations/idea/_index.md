@@ -1,5 +1,5 @@
 ---
-title: Datadog Plugin For JetBrains IDEs
+title: Datadog Plugin For IntelliJ Platform
 kind: documentation
 disable_toc: false
 is_beta: true
@@ -16,12 +16,12 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  The Datadog plugin for IntelliJ IDEA and GoLand is in public beta. It is intended for developers who use Datadog products, such as the <a href="https://docs.datadoghq.com/logs/explorer/">Log Explorer</a> and the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>, for their Go and Java services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
+  The Datadog plugin for IntelliJ IDEA and GoLand is in public beta. It is intended for developers who use Datadog products, such as the <a href="https://docs.datadoghq.com/logs/explorer/">Log Explorer</a> and the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a>, for their Java and Go services. If the plugin stops working unexpectedly, check for plugin updates or <a href=#feedback>reach out to the team</a>.
 {{< /callout >}}
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs (IDEA and GoLand) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog plugin for the IntelliJ Platform (IDEA and GoLand) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -51,7 +51,7 @@ The **Logs Navigation** support opens the Datadog Log Explorer with a view match
 1. Click **Plugins** and search for `Datadog`.
 1. Click **Install** to download and install the plugin in your IDE.
 1. If you receive a prompt notifying you that Datadog is a third-party plugin, click **Accept**.
-1. Click **Restart IDE** to restart the IDE.
+1. Click **Restart IDE**.
 
 {{< img src="/developers/ide_integrations/idea/marketplace.png" alt="The Datadog plugin" style="width:100%;" >}}
 
@@ -88,7 +88,7 @@ Code Insights include a detailed description for each issue, and links to:
 - The related source code location
 - The Datadog platform for additional information
 
-Developers can dismiss individual insights and set filters to view the categories of insights that they are most interested to see.
+You can dismiss individual insights and set filters to view the categories of insights that you are interested in.
 
 ## Continuous Profiler
 
@@ -154,7 +154,7 @@ The active Profiling tab also affects the project tree view, which is annotated 
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java source files. Look for the **View Logs** links following the log statements in your source code:
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java or Go source files. Look for the **View Logs** links following the log statements in your source code:
 
 {{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
