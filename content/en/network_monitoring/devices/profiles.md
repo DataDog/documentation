@@ -58,12 +58,13 @@ If necessary, additional metrics can be defined in the instances. These metrics 
 
 Profiles can be used interchangeably, meaning devices that share MIB dependencies can reuse the same profiles. For example, the [Cisco c3850 profile][2] can be used across many Cisco switches.
 
-For more Datadog provided profiles, see the [GitHub repository][2].
+For more Datadog provided profiles, see the [GitHub repository][3].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-device.yaml
-[2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
+[2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
+[3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles

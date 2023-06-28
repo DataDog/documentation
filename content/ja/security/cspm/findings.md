@@ -37,15 +37,21 @@ Cloud Security Posture Management (CSPM) [Security Findings Explorer][1] を使�
 
 発見は、[Security Findings Explorer][1] に表示されます。**Group by** フィルターとクエリ検索バーを使用して、発見をルールごとに集計します。例えば、`evaluation:fail` でフィルターをかけると、対処が必要な問題があるすべてのコンプライアンスルールにリストが絞られます。また、発見をリソース別に集計し、失敗した発見が多いリソースをランク付けし、改善の優先順位をつけることもできます。
 
-{{< img src="security/cspm/findings/posture-management-overview-2.png" alt="ポスチャ管理の発見ページの概要" style="width:100%;">}}
+{{< img src="security/cspm/findings/posture-management-overview3.png" alt="ポスチャ管理の診断結果ページの概要" style="width:100%;">}}
 
 発見を選択すると、そのルールで評価されたリソース、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。誤構成されたリソースの詳細を表示するには、**View Finding** をクリックします。
 
-{{< img src="security/cspm/findings/finding-side-panel.png" alt="サイドパネルにあるランク付けされたリソース" style="width:65%;">}}
+{{< img src="security/cspm/findings/finding-side-panel2.png" alt="サイドパネルにあるランク付けされたリソース" style="width:65%;">}}
 
 Security Findings Explorer で **Resources** でグループ化し、リソースを選択すると、そのリソースに対して評価されたコンプライアンスルールの全リストとそのステータスが表示されます。
 
 {{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="検索でリソースごとにグループ化および集計" style="width:65%;">}}
+
+## 発見をエクスポートする
+
+発見のリストを CSV としてエクスポートするには、Security Findings Explorer の **Download as CSV** をクリックし、エクスポートする発見の最大数を選択した後、**Download as CSV** をクリックします。最大で 50,000 件の発見をエクスポートできます。
+
+{{< img src="security/cspm/findings/export-csv.png" alt="発見を CSV としてエクスポートするためのダイアログボックスと、エクスポートする発見の最大数を指定するオプション" style="width:65%;">}}
 
 ## 発見のミュート
 

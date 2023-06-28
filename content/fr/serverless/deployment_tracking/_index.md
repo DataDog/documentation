@@ -1,14 +1,15 @@
 ---
-title: Suivi des déploiements pour les applications sans serveur
-kind: documentation
 further_reading:
-  - link: /serverless/distributed_tracing
-    tag: Documentation
-    text: Tracing distribué pour les applications sans serveur
-  - link: /serverless/serverless_tagging
-    tag: Documentation
-    text: Tagging de fonctions sans serveur
+- link: /serverless/distributed_tracing
+  tag: Documentation
+  text: Tracing distribué pour les applications sans serveur
+- link: /serverless/serverless_tagging
+  tag: Documentation
+  text: Tagging de fonctions sans serveur
+kind: documentation
+title: Suivi des déploiements pour les applications sans serveur AWS Lambda
 ---
+
 {{< img src="serverless/deployment_tracking.jpeg" alt="Suivi des déploiements sans serveur"  style="width:100%;">}}
 
 Le suivi des déploiements vous aide à identifier lorsqu'une nouvelle version de code ou un changement de configuration entraîne une hausse soudaine d'erreurs, une dégradation des performances ou un changement d'état de votre environnement cloud.
