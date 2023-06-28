@@ -68,7 +68,7 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
 
-## Import Data from Backstage 
+## Import data from Backstage 
 
 If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
 
