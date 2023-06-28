@@ -13,17 +13,17 @@ further_reading:
 
 Use this guide to set up and manage logging directly from your Azure subscriptions to Datadog through the [Datadog resource in Azure][7]. You can manage the collection of three kinds of Azure logs. Find instructions and additional details in the sections below:
 
-   - [Subscription level logs](#subscription-level-logs)
+   - [Activity logs](#activity-logs)
    - [Azure resource logs](#azure-resource-logs)
    - [Azure Active Directory (Azure AD) logs](#azure-active-directory-azure-ad-logs)
 
 **Note**: The Datadog resource in Azure is only available to Datadog organizations on the Datadog US3 site. If you are using any other [Datadog site][5], see the [Send Azure Logs to Datadog][6] guide for configuration options.
 
-## Subscription level logs 
+## Activity logs 
 
 Provide insight into the operations on your resources at the [control plane][1]. Updates on service health events are also included. Use the activity log to determine the what, who, and when for any write operations (`PUT`, `POST`, `DELETE`).
 
-To send subscription level logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the subscription level logs are sent to Datadog.
+To send activity logs to Datadog, select **Send subscription activity logs**. If this option is left unchecked, none of the activity logs are sent to Datadog.
 
 ## Azure resource logs 
 
