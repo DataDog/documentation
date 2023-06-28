@@ -2,15 +2,19 @@
 title: Default Standard Attributes
 kind: documentation
 disable_sidebar: true
+further_reading:
+    - link: "/data_security/"
+      tag: "Documentation"
+      text: "Ensuring the security of the data sent to Datadog"
 ---
 
 This page lists the default standard attributes used for data collected by Datadog. 
 
-More:
+More?
  - RUM Feature flags
  - RUM event-specific attributes (sessions, views, resources, errors, actions, network errors, )
 
-FR:
+Further Reading:
  - Data security
 
 
@@ -110,33 +114,30 @@ FR:
 | `geo.continent_code`       | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, `OC`).         | `string` | Geolocation | RUM |
 | `geo.continent`       | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, `Oceania`).    | `string` | Geolocation | RUM |
 | `geo.city`            | The name of the city (for example, `Paris` or `New York`).             | `string` | Geolocation | RUM |
-
-
-RUM android core
-| `date` | integer  | Start of the event in milliseconds from epoch. |
-
-RUM android connectivity
-
-| `connectivity.status` | string | Status of device network reachability (`connected`, `not connected`, or `maybe`). |
-| `connectivity.interfaces` | string | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`). |
-| `connectivity.cellular.technology` | string | The type of a radio technology used for cellular connection. |
-| `connectivity.cellular.carrier_name` | string | The name of the SIM carrier. |
-
-RUM android views
-| `view.name` | string | Customizable name of the view corresponding to the event. | 
+| `date` | Start of the event in milliseconds from epoch. | `integer` | Core | RUM Android |
+| `connectivity.status` | Status of device network reachability (`connected`, `not connected`, or `maybe`). | `string` | Connectivity | RUM Android |
+| `connectivity.interfaces` | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`). | `string` | Connectivity | RUM Android |
+| `connectivity.cellular.technology` |The type of a radio technology used for cellular connection. | `string` | Connectivity | RUM Android |
+| `connectivity.cellular.carrier_name` | The name of the SIM carrier. | `string` | Connectivity | RUM Android |
+| `view.name` | Customizable name of the view corresponding to the event. |  `string` | Views | RUM Android |
 
 
 
 
-## APM
+### APM
 
 
-## RUM - iOS
+### RUM - iOS
 
-## RUM - Roku
+### RUM - Roku
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 [7]: /logs/explorer/patterns/
 [13]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 [20]: /logs/log_configuration/processors/#remapper
+[27]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
