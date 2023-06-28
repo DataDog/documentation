@@ -26,7 +26,7 @@ Set a specific evaluation time for monitors and control the evaluation frequency
 
 Click **+ Add Custom Schedule** to configure your evaluation frequency. Custom schedule monitors are not interchangeable with default monitors. You cannot switch between evaluation frequencies once this is configured. 
 
-Use [recurrence rules (RRULEs)][3] to define custom schedules. Use the [official RRULE generator][4] as a tool to generate recurring rules. 
+Use [recurrence rules (RRULEs)][1] to define custom schedules. Use the [official RRULE generator][2] as a tool to generate recurring rules. 
 
 **Note**: Attributes specifying the duration in RRULE are not supported (for example, DTSTART, DTEND, DURATION).
 
@@ -57,7 +57,5 @@ With custom schedules, you can set the evaluation to Daily. The monitor evaluate
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/configuration/?tab=thresholdalert#evaluation-window
-[2]: /monitors/downtimes/
-[3]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[4]: https://icalendar.org/rrule-tool.html
+[1]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[2]: https://icalendar.org/rrule-tool.html
