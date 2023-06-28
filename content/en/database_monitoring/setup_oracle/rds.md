@@ -76,7 +76,6 @@ instances:
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
-    reported_hostname: '<USER_FRIENDLY_HOSTNAME>' #Optional
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
