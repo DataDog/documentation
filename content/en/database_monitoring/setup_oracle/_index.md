@@ -21,18 +21,13 @@ The features described on this page are in private beta.
 - **Deployment configurations**: Self-managed, RDS, RAC, Exadata
 - **Architecture**: Multi-tenant
 
-The following deployment configurations, components, and features are not supported: Oracle Autonomous Database, ASM, and Data Guard.
-
-
-## Latest Agent version
-
-The following beta build contains implemented Oracle DBM features: `7.44.1~dbm~oracle~beta~0.28`.
+The following deployment configurations, components, and features are not supported: Oracle Autonomous Database and Data Guard.
 
 ## Prerequisites
 
 ### Install the Oracle integration
 
-On the [**Integrations**][1] page in Datadog, install the [Oracle integration][2] for your organization. This will install an [Oracle dashboard][5] in your account which can be used to monitor the performance of your Oracle databases.
+On the [Integrations][1] page in Datadog, install the [Oracle integration][2] for your organization. This will install an [Oracle dashboard][5] in your account which can be used to monitor the performance of your Oracle databases.
 
 ### Upgrade the Oracle integration in your Agent
 
@@ -47,7 +42,7 @@ cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle
 Deactivate the legacy integration:
 
 ```shell
-mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml
+mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml.bak
 ```
 
 Deactivating the legacy integration prevents sending the system metrics twice.
@@ -56,13 +51,13 @@ Since the Agent doesn't require an external Oracle client, remove the `jdbc_driv
 
 ### Install Agent
 
-To start collecting Oracle telemetry, first install the Datadog Agent [install the Datadog Agent][3]. 
+To start collecting Oracle telemetry, first [install the Datadog Agent][3]. 
 
-The Agent does not need to run on the same server nor the same platform as the monitored databases.
+The Agent does not need to run on the same server nor the same platform as the monitored databases, and can be installed remotely using one of the suggested [setup architectures][10].
 
-Datadog recommends you install the version listed in the [Latest agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
+Datadog recommends you install the version listed in the [Latest Agent version](#latest-agent-version). It contains all the implemented Oracle monitoring features and bug fixes.
 
-If the latest agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is a beta build, such as `7.44.1~dbm~oracle~beta~0.28`, follow the instructions in [Beta build](#beta-build).
+If the latest Agent version is an official Datadog Agent release, like `7.46.0`, follow the instructions in [Official release](#official-release). If the latest Agent version is a beta build, such as `7.44.1~dbm~oracle~beta~0.28`, follow the instructions in [Beta build](#beta-build).
 
 #### Official release
 
@@ -71,6 +66,8 @@ Follow the [instructions for your platform][3].
 #### Beta build
 
 ##### Linux
+
+The repository with RHEL and Ubuntu beta builds are [here][6] and [here][7], respectively.
 
 Set `DD_API_KEY` and run the following commands to install the beta release, for example:
 
@@ -83,6 +80,8 @@ DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/
 
 ##### Windows
 
+The repository with Windows builds is [here][8].
+
 Download the MSI file for the [beta build][4].
 
 Set `APIKEY` and run the following command in the command prompt inside the directory where you downloaded the installer, for example:
@@ -93,15 +92,24 @@ start /wait msiexec /qn /i datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.ms
 
 ##### Docker
 
+The docker beta images can be found [here][8].
+
 Set `DD_API_KEY` and run the following command to install the beta release, for example:
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.44.1-dbm-oracle-beta-0.28
 ```
 
+##### Latest Agent version
+
+The following beta builds contain implemented Oracle DBM features:
+- Linux: `7.44.1~dbm~oracle~beta~0.28-1`
+- Windows: `7.44.1-dbm-oracle-beta-0.28-1`
+- Docker: `7.44.1-dbm-oracle-beta-0.28`
+
 ### Oracle client
 
-Agent doesn't require any external Oracle clients.
+The Agent doesn't require any external Oracle clients.
 
 ## Setup
 
@@ -114,3 +122,8 @@ For setup instructions, select your hosting type:
 [3]: https://app.datadoghq.com/account/settings#agent
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.44.1-dbm-oracle-beta-0.28-1.x86_64.msi
 [5]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
+[6]: https://yum.datadoghq.com/beta/7/x86_64/
+[7]: https://apt.datadoghq.com/dists/beta/7/
+[8]: https://ddagent-windows-stable.s3.amazonaws.com/
+[9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
+[10]: /database_monitoring/architecture/

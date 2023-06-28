@@ -85,7 +85,6 @@ instances:
     service_name: "<SERVICE_NAME>" # The Oracle CDB service name
     username: 'c##datadog'
     password: '<PASSWORD>'
-    reported_hostname: '<USER_FRIENDLY_HOSTNAME>' #Optional
     dbm: true
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
@@ -93,8 +92,6 @@ instances:
 ```
 
 Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][3] to learn more about how these tags are used in Datadog.
-
-You can use the `reported_hostname` configuration parameter to define a user friendly hostname instead of the default cryptic hostname containing the IP address.
 
 Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
