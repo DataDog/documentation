@@ -91,7 +91,7 @@ Profiling
 : On a profiler flame graph, you can create a probe for a method by selecting **Instrument this frame with a probe** from the frame's context menu.
 
 Error Tracking
-: 
+: When you hover inside the stack trace over a stack frame you can click on **Instrument** this pre-fill the probe creation form with the Issue context.
   
 
 ### Creating log probes
