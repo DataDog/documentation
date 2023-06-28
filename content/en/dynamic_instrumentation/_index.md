@@ -158,6 +158,8 @@ To create a span probe:
 1. Select **Span** as the probe type.
 1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location). 
 
+{{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span probe" >}}
+
 
 ### Creating span tag probes
 
@@ -174,6 +176,9 @@ To create a span tag probe:
 1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15]. 
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
+
+
+{{< img src="dynamic_instrumentation/span_tag_probe.png" alt="Creating a Dynamic Instrumentation span tag probe" >}}
  
 ## Further Reading
 
