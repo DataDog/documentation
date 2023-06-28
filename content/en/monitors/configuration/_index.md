@@ -84,13 +84,15 @@ A cumulative time window is reset once its maximum time span is reached. For exa
 
 The evaluation frequency defines how often Datadog performs the monitor query. For most configurations, the evaluation frequency is `1 minute`, which means that every minute, the monitor queries the [selected data](#define-the-search-query) over the [selected evaluation window](#evaluation-window) and compares the aggregated value against the [defined thresholds](#thresholds).
 
-Evaluation frequencies depend on the [evaluation window](#evaluation-window) that is being used. A longer window results in lower evaluation frequencies. The table below illustrates how the evaluation frequency is controlled by larger time windows:
+By default, evaluation frequencies depend on the [evaluation window](#evaluation-window) that is being used. A longer window results in lower evaluation frequencies. The table below illustrates how the evaluation frequency is controlled by larger time windows:
 
 | Evaluation Window Ranges        | Evaluation Frequency  |
 |---------------------------------|-----------------------|
 | window < 24 hours               | 1 minute              |
 | 24 hours <= window < 48 hours   | 10 minutes            |
 | window >= 48 hours              | 30 minutes            |
+
+You can add a custom schedule so that a monitor query is performed once daily, weekly, or monthly. In this configuration, the evaluation frequency is not dependent on the evaluation window, but on a fixed schedule. For more information see the guide on how to [Customize monitor evaluation frequencies][4].
 
 ### Thresholds
 
@@ -115,6 +117,7 @@ As you change a threshold, the preview graph in the editor displays a marker sho
 [1]: /monitors/guide/as-count-in-monitor-evaluations/
 [2]: https://docs.datadoghq.com/logs/log_configuration/indexes/#set-daily-quota
 [3]: /monitors/guide/recovery-thresholds/
+[4]: /monitors/guide/custom_schedules
 {{% /tab %}}
 {{% tab "Check alert" %}}
 
