@@ -78,7 +78,7 @@ If you use GitHub integration, directly save your Backstage YAMLs to a repo with
 **Note**: The file must be named `service.datadog.yaml` and be located at the root folder of a repo.
 
 
-It’s a partial translation, specifically, 
+Upon import, the following occurs:
 - Datadog only recognizes `kind:component` and `spec.type=service` in Backstage YAMLs as services
 - `name` gets converted to `DD-SERVICE`
 - `namespace` values get mapped to custom tags
