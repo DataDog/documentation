@@ -33,12 +33,12 @@ Allocated Memory
 
 Heap Live Objects
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11_
+_Requires: Java 11_ <br />
 _Since: 1.17.0_
 
 Heap Live Size
 : The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
-_Requires: Java 11_
+_Requires: Java 11_ <br />
 _Since: 1.17.0_
 
 Wall Time in Native Code

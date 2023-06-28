@@ -230,7 +230,7 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 _Since: v1.17.0_
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
-The engine samples allocations and keeps track of whether those samples survived the most recent GC cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
+The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
 The number of tracked samples is limited to avoid unbounded growth of the profiler's memory usage.
 
 The engine is disabled by default, but you can enable it with:
