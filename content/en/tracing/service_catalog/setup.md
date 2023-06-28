@@ -86,7 +86,7 @@ It’s a partial translation, specifically,
 - `owner` gets mapped to `team`
 - `metadata.links` gets mapped to `links`
 - `metadata.description` will be mapped to `description`
-- Other `specs` value will be mapped to custom tags
+- Other `specs` values get mapped to custom tags
 
 
 ## Discover services being reported in other Datadog telemetry data
