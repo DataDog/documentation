@@ -81,8 +81,8 @@ Support for query strings is not available for Flask.
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all frameworks
-- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
+- Open Source Vulnerability Detection is supported on all frameworks.
+- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default.
 
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 

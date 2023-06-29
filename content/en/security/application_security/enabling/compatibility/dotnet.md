@@ -61,7 +61,7 @@ These are supported on the following architectures:
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- **Vulnerability Management for OSS** is supported on all frameworks
+- **Vulnerability Management for OSS** is supported on all frameworks.
 - If your framework is not listed below, **Vulnerability Management for  Code** will still detect Insecure Cookie vulnerabilities.
 
 
@@ -81,7 +81,7 @@ These are supported on the following architectures:
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
+- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default.
 
 | Framework         | Threat Detection supported?    | Threat Protection supported? | Vulnerability Management for  Code supported? |
 |-------------------|-----------------|---------------------|---|

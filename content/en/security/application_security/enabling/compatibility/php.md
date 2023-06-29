@@ -74,10 +74,10 @@ PHP ASM supports the following architectures:
 
 | Processor architectures                   | Support level         | Package version                        |
 | ------------------------------------------|-----------------------|----------------------------------------|
-| Linux GNU amd64 (`x86-64-linux-gnu`)      | [GA](#support-ga)     | All                                    |
-| Linux MUSL amd64 (`x86-64-linux-musl`)    | [GA](#support-ga)     | All                                    |
-| Linux GNU arm64 (`aarch64-linux-gnu`)     | [GA](#support-ga)     | > `0.78.0`                             |
-| Linux MUSL arm64 (`aarch64-linux-musl`)   | [GA](#support-ga)     | > `0.78.0`                             |
+| Linux GNU amd64 (`x86-64-linux-gnu`)      | GA                    | All                                    |
+| Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
+| Linux GNU arm64 (`aarch64-linux-gnu`)     | GA                    | > `0.78.0`                             |
+| Linux MUSL arm64 (`aarch64-linux-musl`)   | GA                    | > `0.78.0`                             |
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
