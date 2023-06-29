@@ -185,22 +185,20 @@ x-data="{
         </div>
     </div>
     {{/*  Carousel item description  */}}
-    <div class="row g-0">
-        <div class="carousel-item-descriptions col-12 p-0">
-            {{ range $idx, $el := $media }}
-            <div 
-            class="carousel-item-description row g-0" 
-            :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
-            x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
-                <div class="col-1">
-                    <span class="fw-bold" x-text="(activeSlide + 1) + '/{{$asset_len}}'"></span>
-                </div>
-                <div class="col">
-                    <p>{{$el.caption}}</p>
-                </div>
+    <div class="carousel-item-descriptions p-0">
+        {{ range $idx, $el := $media }}
+        <div 
+        class="carousel-item-description" 
+        :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
+        x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
+            <div class="item-counter">
+                <span class="fw-bold" x-text="(activeSlide + 1) + '/{{$asset_len}}'"></span>
             </div>
-            {{ end }}
+            <div class="item-caption">
+                <p class="m-0">{{$el.caption}}</p>
+            </div>
         </div>
+        {{ end }}
     </div>
 </div>
 

@@ -87,10 +87,10 @@ x-cloak x-show="$store.integrationsModal.isOpen"
                     class="modal-item-description" 
                     :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
                     x-cloak x-show="shouldShowActiveHorizontalSlide({{ $idx }})">
-                        <div class="count">
+                        <div class="item-counter">
                             <span class="fw-bold" x-text="($store.integrationsModal.activeSlide + 1) + '/{{$asset_len}}'"></span>
                         </div>
-                        <div class="caption">
+                        <div class="item-caption">
                             <p class="m-0">{{$el.caption}}</p>
                         </div>
                     </div>
