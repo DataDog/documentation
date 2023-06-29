@@ -213,6 +213,10 @@ Datadog provides a recommended monitor you can use as a template to get started.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][9] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
 
+### Metrics collection
+
+After the integration tile is set up, metrics are collected by a crawler. To collect additional metrics, deploy the Datadog Agent to your VMs:
+
 #### Agent installation
 
 You can use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs.
