@@ -28,7 +28,7 @@ draft: false
 git_integration_title: traefik
 integration_id: traefik
 integration_title: Traefik
-integration_version: 1.0.0
+integration_version: 1.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

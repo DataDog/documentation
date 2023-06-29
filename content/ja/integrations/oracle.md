@@ -3,6 +3,7 @@ app_id: oracle
 app_uuid: 34835d2b-a812-4aac-8cc2-d298db851b80
 assets:
   dashboards:
+    DBM Oracle Database Overview: assets/dashboards/dbm_oracle_database_overview.json
     oracle: assets/dashboards/oracle_overview.json
   integration:
     configuration:

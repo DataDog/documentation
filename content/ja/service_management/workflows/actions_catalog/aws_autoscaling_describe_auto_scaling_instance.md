@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_autoscaling_describe_auto_scaling_instance
 bundle: com.datadoghq.aws.autoscaling
 bundle_title: AWS Autoscaling
 description: アカウントおよびリージョン内のオートスケーリングインスタンスに関する情報を取得します。

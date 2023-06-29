@@ -218,8 +218,8 @@ Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Da
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
 3. Choose the storage container your bills are in.
-4. Select the Access Control (IAM) tab.
-5. Click **Add**.  
+4. Select the Access Control (IAM) tab, and click **Add**.
+5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
@@ -232,7 +232,7 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 1. Navigate to your [subscriptions][4] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
-3. Click **Add**.
+3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
 5. Assign these permissions to the subscription.
 

@@ -27,7 +27,7 @@ title: OpenTelemetry によるトレース収集
 
 詳しくは [OpenTelemetry][4] をお読みください。
 
-<div class="alert alert-info"><strong>ベータ版: Datadog ライブラリ用カスタムインスツルメンテーション</strong></br>サポートされている一部の言語では、スパンとトレースを処理するために Datadog トレーシングライブラリを使用するように、OTel インスツルメンテーションアプリケーションを構成することができます。詳しくは、<a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry API を使用したカスタムインスツルメンテーション</a>をお読みください。</div>
+<div class="alert alert-info"><strong>ベータ版: Datadog ライブラリ用カスタムインスツルメンテーション</strong></br>サポートされている一部の言語では、スパンとトレースを処理するために Datadog トレーシングライブラリを使用するように、OpenTelemetry インスツルメンテーションアプリケーションを構成することができます。詳しくは、<a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry API を使用したカスタムインスツルメンテーション</a>をお読みください。</div>
 
 ## OpenTelemetry のトレースとログを接続する
 

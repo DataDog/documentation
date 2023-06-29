@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_acm_renewCertificate
 bundle: com.datadoghq.aws.acm
 bundle_title: AWS Certificate Manager
 description: 対象となる証明書を更新します。

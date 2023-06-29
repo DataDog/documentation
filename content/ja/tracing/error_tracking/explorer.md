@@ -75,7 +75,7 @@ title: Error Tracking Explorer
 
 [GitHub インテグレーション][4]を設定し、スタックトレースでコードスニペットを確認できるようにします。
 
-{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="スタックトレース内のインラインコードスニペット" style="width:100%;">}}
+{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="スタックトレース内のインラインコードスニペット" style="width:100%;" >}}
 
 リポジトリの構成を始めるには、[ソースコードインテグレーションドキュメント][5]を参照してください。
 

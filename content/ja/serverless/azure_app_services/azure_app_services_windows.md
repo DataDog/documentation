@@ -18,7 +18,7 @@ further_reading:
   tag: ブログ
   text: ASP.NET Core アプリケーションを Azure App Service にデプロイする
 kind: documentation
-title: Azure App Service - Windows
+title: Azure App Service - Windows コード
 ---
 
 ## 概要
@@ -209,7 +209,7 @@ Azure App Service の拡張機能には、[DogStatsD][7] (Datadog のメトリ�
 この環境でカスタムメトリクスおよびチェックを書き込むことは、Datadog Agent が実行されている標準ホスト上のアプリケーションでそれを実行するプロセスと同様です。拡張機能を使用して Azure App Service から Datadog へカスタムメトリクスを送信するには、以下を実行します。
 
 1. [DogStatsD クライアント][8]をプロジェクトに追加します。
-2. アプリケーション内で DogStatdD を初期化し、カスタムメトリクスを作成します。
+2. アプリケーション内で DogStatsD を初期化し、カスタムメトリクスを作成します。
 3. サポートされている Azure ウェブアプリにコードをデプロイします。
 4. Datadog App Service 拡張機能をインストールします。
 
@@ -229,7 +229,7 @@ client.Increment("sample.startup");
 [カスタムメトリクス][10]に関する詳細を参照してください。
 
 [1]: /ja/integrations/azure
-[2]: /ja/tracing/setup/dotnet/
+[2]: /ja/tracing/setup/java/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /ja/tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration

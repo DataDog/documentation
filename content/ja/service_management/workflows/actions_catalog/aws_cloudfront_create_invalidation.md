@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/workflows/actions_catalog/aws_cloudfront_create_invalidation
 bundle: com.datadoghq.aws.cloudfront
 bundle_title: AWS CloudFront
 description: 新しい無効化を作成します。

@@ -27,14 +27,14 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 
 2. **Datadog Agent マニフェストを作成**。以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します。
 
-    | メトリクス                   | ログ                      | APM                       | Process                   | NPM                       | セキュリティ                       | Linux                   | Windows                 |
-    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>                         | <i class="icon-check-bold"></i> | [マニフェストテンプレート][2]  | [マニフェストテンプレート][3] (セキュリティなし)  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][4]  | [マニフェストテンプレート][5]  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [マニフェストテンプレート][6]  | [マニフェストテンプレート][7]  |
-    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [マニフェストテンプレート][8]  | [マニフェストテンプレート][9] |
-    |                           |                           |                           |                           | <i class="icon-check-bold"></i> |                           | [マニフェストテンプレート][10] | テンプレートなし             |
-    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [マニフェストテンプレート][11] | [マニフェストテンプレート][12] |
+    | メトリクス                         | ログ                            | APM                             | プロセス                         | NPM                             | セキュリティ                        | Linux                   | Windows                              |
+    |---------------------------------|---------------------------------|---------------------------------|---------------------------------|---------------------------------|---------------------------------|-------------------------|--------------------------------------|
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | [マニフェストテンプレート][2]  | [マニフェストテンプレート][3] (セキュリティなし) |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                                 |                                 |                                 | [マニフェストテンプレート][4]  | [マニフェストテンプレート][5]               |
+    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 | [マニフェストテンプレート][6]  | [マニフェストテンプレート][7]               |
+    | <i class="icon-check-bold"></i> |                                 | <i class="icon-check-bold"></i> |                                 |                                 |                                 | [マニフェストテンプレート][8]  | [マニフェストテンプレート][9]               |
+    |                                 |                                 |                                 |                                 | <i class="icon-check-bold"></i> |                                 | [マニフェストテンプレート][10] | テンプレートなし                          |
+    | <i class="icon-check-bold"></i> |                                 |                                 |                                 |                                 |                                 | [マニフェストテンプレート][11] | [マニフェストテンプレート][12]              |
 
    トレース収集を完全に有効にするには、[アプリケーションのポッドコンフィギュレーションで追加の手順が必要となります][13]。それぞれの機能を個別に有効にする方法については、[ログ][14]、[APM][15]、[プロセス][16]、[ネットワークパフォーマンスモニタリング][17]、[セキュリティ][18]に関するドキュメントページを参照してください。
 
@@ -45,7 +45,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
     ```shell
     echo -n '<Your API key>' | base64
     ```
-4. `secret-cluster-agent-token.yaml` マニフェストの `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` を base64 でエンコードしたランダムな文字列に置き換えてください。base64 版を取得するには、次のように実行します。
+4. `datadog-agent-all-features.yaml` マニフェストテンプレートを使用している場合: `secret-cluster-agent-token.yaml` マニフェストの `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` を base64 でエンコードしたランダムな文字列に置き換えてください。base64 版を取得するには、次のように実行します。
 
     ```shell
     echo -n 'Random string' | base64
@@ -55,7 +55,7 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
 
 5. `datadog-agent.yaml` マニフェストで、`DD_SITE` 環境変数を使用して **Datadog サイト**を {{< region-param key="dd_site" code="true" >}} に設定します。
 
-    **注**: `DD_SITE` 環境変数が明示的に設定されていない場合、値はデフォルトで `US` サイトの `datadoghq.com` に設定されます。その他のサイト (`EU`、`US3`、または `US1-FED`) のいずれかを使用している場合は、API キーのメッセージが無効になります。[ドキュメントのサイト選択ドロップダウン][20]を使用して、使用中のサイトに適したドキュメントを確認してください。
+    **注**: `DD_SITE` 環境変数が明示的に設定されていない場合、値はデフォルトで `US` サイトの `datadoghq.com` に設定されます。その他のサイトのいずれかを使用している場合は、API キーのメッセージが無効になります。[ドキュメントのサイト選択ドロップダウン][20]を使用して、使用中のサイトに適したドキュメントを確認してください。
 
 6. 次のコマンドで **DaemonSet をデプロイ**します。
 
@@ -72,42 +72,15 @@ Datadog Agent を Kubernetes クラスターにインストールするには:
    Agent がデプロイされた場合は、以下のようなテキスト出力が表示されます。`DESIRED` と `CURRENT` はクラスター内で実行中のノードの数と等しくなります。
 
     ```shell
-    NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-    datadog-agent   2         2         2         2            2           <none>          10s
+    NAME      DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+    datadog   2         2         2         2            2           <none>          10s
     ```
-
-8. 任意 - **Kubernetes State メトリクスの設定**: [Kube-State マニフェストフォルダー][21]をダウンロードし、それを Kubernetes クラスターに適用して [kube-state メトリクス][22]を自動収集します:
-
-    ```shell
-    kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
-    ```
-
-### 非特権
-
-(オプション) 非特権インストールを実行するには、[ポッドテンプレート][19]に以下を追加します。
-
-```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: placeholder
-  namespace: placeholder
-spec:
-  override:
-    nodeAgent:
-      securityContext:
-        runAsUser: 1 # <USER_ID>
-        supplementalGroups:
-          - 123 # "<DOCKER_GROUP_ID>"
-```
-
-`<USER_ID>` が、Agent を実行する UID で、`<DOCKER_GROUP_ID>` が、Docker または Containerd ソケットを所有するグループ ID の場合。
 
 ## コンフィギュレーション
 
 ### ログの収集
 
-**注**: このオプションは Windows ではサポートされません。代わりに [Helm][24] オプションを使用してください。
+**注**: このオプションは Windows ではサポートされません。代わりに [Helm][22] オプションを使用してください。
 
 DaemonSet によるログの収集を有効にするには
 
@@ -126,7 +99,7 @@ DaemonSet によるログの収集を有効にするには
      # (...)
     ```
 
-    **注**: `DD_CONTAINER_EXCLUDE_LOGS` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナを無視するための環境変数][23]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE_LOGS` にコンテナの `name` を設定してログを収集します。これらパラメーター値（除外/含む）は正規表現をサポートします。
+    **注**: `DD_CONTAINER_EXCLUDE_LOGS` を設定すると、Datadog Agent で自身のログ収集および送信が実行されなくなります。Datadog Agent ログを収集する場合は、このパラメーターを削除します。詳細については、[コンテナを無視するための環境変数][21]を参照してください。OpenShift 環境内で ImageStreams を使用する場合は、`DD_CONTAINER_INCLUDE_LOGS` にコンテナの `name` を設定してログを収集します。これらのパラメーター値 (除外/含む) は正規表現をサポートします。
 
 2. 再起動やネットワーク障害の際にコンテナログを失わないように、`pointerdir` ボリュームをマウントします。`/var/log/pods` がこのディレクトリへのシンボリックリンクであるため、Kubernetes ログファイルからログを収集するよう `/var/lib/docker/containers` もマウントします。
 
@@ -229,7 +202,5 @@ Kubernetes イベントを Datadog Cluster Agent で収集したい場合は、�
 [18]: /ja/data_security/agent/
 [19]: https://app.datadoghq.com/organization-settings/api-keys
 [20]: /ja/getting_started/site/
-[21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[22]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
-[23]: /ja/agent/docker/?tab=standard#ignore-containers
-[24]: /ja/containers/kubernetes/log
+[21]: /ja/agent/docker/?tab=standard#ignore-containers
+[22]: /ja/containers/kubernetes/log

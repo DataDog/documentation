@@ -1,6 +1,10 @@
 ---
 code_lang: php
 code_lang_weight: 40
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: ブログ
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: PHP トレースコンテキストの伝搬
 type: multi-code-lang
@@ -69,6 +73,9 @@ $headers = DDTrace\generate_distributed_tracing_headers();
 ```
 
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [7]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
