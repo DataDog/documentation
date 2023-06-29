@@ -75,10 +75,3 @@ For billing questions, contact your [Customer Success][2] Manager.
 
 [1]: /help/
 [2]: mailto:success@datadoghq.com
-[3]: /account_management/billing/pricing/#infrastructure-monitoring
-[4]: /account_management/billing/custom_metrics/
-[5]: /account_management/billing/custom_metrics/#configure-tags-and-aggregations-with-metrics-without-limits
-[6]: /account_management/billing/log_management/
-[7]: account_management/billing/apm_tracing_profiler/
-[8]: /account_management/billing/rum/
-[9]:
