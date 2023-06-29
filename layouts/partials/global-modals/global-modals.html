@@ -38,12 +38,13 @@ x-data="{
         $store.integrationsModal.activeSlide = idx
     }
 }"
-class="integrations-carousel-modal w-100 h-100 position-absolute top-0"
-x-cloak x-show="$store.integrationsModal.isOpen">
+class="integrations-carousel-modal w-100 h-100 fixed-top"
+x-cloak x-show="$store.integrationsModal.isOpen"
+@resize.window="window.innerWidth < 768 && $store.integrationsModal.closeModal()">
     <div 
     @click.outside="$store.integrationsModal.closeModal()"
-    class="modal-container mx-auto p-6">
-        <div class="modal-info h-100">
+    class="modal-container mx-auto p-5 p-lg-6">
+        <div class="modal-info">
             <div class="modal-info-header">
                 <h1 x-text="'{{ $title }}'"></h1>
                 <button type="button" class="btn-close" aria-label="Close" @click="$store.integrationsModal.closeModal()"></button>
@@ -102,7 +103,7 @@ x-cloak x-show="$store.integrationsModal.isOpen">
         <div class="modal-items mx-auto">
             {{ range $idx, $elm := $media }}
             <button
-            class="modal-item mx-1 my-2 p-0"
+            class="modal-item p-0"
             :class="shouldShowActiveHorizontalSlide({{ $idx }}) && 'active'"
             @click="selectCarouselItem({{ $idx }})"
             :style="{backgroundImage: 'url(https://s3.amazonaws.com/dd-integrations/{{ $app_id }}/media_gallery/{{ replaceRE `(./)?images/` "" $elm.image_url }})'}"
