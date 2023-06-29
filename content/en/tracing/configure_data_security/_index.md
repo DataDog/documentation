@@ -1,5 +1,5 @@
 ---
-title: Configure for Data Security
+title: Data Security
 kind: documentation
 description: "Configure the Client library or Agent to control the collection of sensitive data in traces."
 aliases:
