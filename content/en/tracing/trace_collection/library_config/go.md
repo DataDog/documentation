@@ -133,7 +133,7 @@ When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. T
 
 `DD_TRACE_HEADER_TAGS`
 : **Default**: `null` <br>
-List of comma-separated HTTP headers to be used as span tags. Optionally specify a "mapped" field that the request header will be renamed to. This feature is compatible with [HTTP1]([url](https://www.rfc-editor.org/rfc/rfc7230#section-3.2)). A list of integrations for which the header tags are applied can be found in the configuration documentation. (TODO: Link to the godocs, once they have been updated)
+List of comma-separated HTTP headers to be used as span tags. Optionally specify a "mapped" field to rename the request header as a tag. Configuration can be set globally or at the integration level. A list of integrations for which the header tags feature is available can be found in the configuration documentation. This feature is compatible with [HTTP1]([url](https://www.rfc-editor.org/rfc/rfc7230#section-3.2)). (TODO: Link to the godocs, once they have been updated)
 **Examples:**<br>
   - Capture request header `my-header`: `"DD_TRACE_HEADER_TAGS=my-header"`
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
