@@ -101,13 +101,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User login][29]                     | A user logs into Datadog and the authentication method used.                                  | `@evt.name:Authentication @action:login`                |
 
 ### CI Visibility events
-| Name                            | Description of audit event                                                                                  | Query in audit explorer                                              |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| [Repository Default Branch][30] | A user modified the default branch of a repository, and the previous and new values for the default branch. | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`            |
-| [Test Service Settings][87]     | A user created or modified the settings of a Test Service.                                                  | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings` |
-| [GitHub Account Settings][88]   | A user has modified the GitHub Account Settings.                                                            | `@evt.name:"CI Visibility" @asset.type:github_opt_ins`               |
-| [Exclusion filters][89]         | The exclusion filters have been modified.                                                                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters`     |
-| [Quality Gates Rule][90]        | A user has created, modified or deleted a Quality Gate Rule.                                                | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates_rule`    |
+| Name                            | Description of audit event                                   | Query in audit explorer                                               |
+|---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------|
+| [Repository Default Branch][30] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository`             |
+| [Test Service Settings][87]     | A user created or modified the settings of a Test Service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings`  |
+| [GitHub Account Settings][88]   | A user has modified the GitHub Account Settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins`                |
+| [Exclusion filters][89]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters`      |
+| [Quality Gates Rule][90]        | A user has created, modified or deleted a Quality Gate Rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates_rule`     |
 
 ### Cloud Security Platform events
 | Name | Description of audit event                                          | Query in audit explorer                           |
