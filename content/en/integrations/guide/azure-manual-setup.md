@@ -213,6 +213,17 @@ Datadog provides a recommended monitor you can use as a template to get started.
 4. Update the notification and re-notification messages as desired. Note that the events themselves contain pertinent information about the event and are included in the notification automatically. This includes detailed information about the scope, error response, and common steps to remediate.
 5. [Configure notifications][9] through your preferred channels (email, Slack, PagerDuty, or others) to make sure your team is alerted about issues affecting Azure data collection.
 
+#### Agent installation
+
+You can use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs.
+
+1. In the [Azure portal][14], navigate to your **VM** > **Settings** > **Extensions** > **Add** and select **Datadog Agent**.
+2. Click **Create**, enter your [Datadog API key][15], and click **OK**.
+
+To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][16].
+
+**Note**: Domain controllers are not supported when installing the Datadog Agent with the Azure extension.
+
 #### Sending logs
 
 See the [Azure Logging guide][5] to set up log forwarding from your Azure environment to Datadog.
@@ -232,3 +243,6 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [11]: https://docs.datadoghq.com/integrations/guide/azure-troubleshooting/#enable-diagnostics
 [12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
+[14]: https://portal.azure.com
+[15]: https://app.datadoghq.com/organization-settings/api-keys
+[16]: https://app.datadoghq.com/account/settings#agent
