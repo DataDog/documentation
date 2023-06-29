@@ -104,11 +104,11 @@ If an event or a request goes beyond any of the following limitations, it is rej
 
 ## Customer data exceeds the recommended 3KiB warning
 
-The RUM browser SDK allows you to set [global context](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context), [user information](https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session) and [feature flags](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser) which are then included with the collected events.
+The RUM browser SDK allows you to set [global context][9], [user information][10] and [feature flags][11] which are then included with the collected events.
 
-To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However sending large volumes of data can still impact the performance for users on slow internet connections.
+To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However, sending large volumes of data can still impact the performance for users on slow internet connections.
 
-Therefore, it is recommended to keep the size of the global context, the user information, and the feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
+For the best user experience, Datadog recommends keeping the size of the global context, user information, and feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
 
 ## Cross origin read blocking warning
 
@@ -128,3 +128,6 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
 [8]: /real_user_monitoring/guide/sampling-browser-plans/
+[9]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
+[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[11]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
