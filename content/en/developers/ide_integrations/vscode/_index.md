@@ -1,5 +1,5 @@
 ---
-title: Datadog Extension for Visual Studio Code
+title: Datadog Extension for VS Code
 kind: documentation
 description: Learn how to run Synthetic tests on local environments directly in Visual Studio Code.
 is_beta: true
@@ -10,6 +10,9 @@ further_reading:
 - link: "/continuous_testing/testing_tunnel/"
   tag: "Documentation"
   text: "Learn about the Continuous Testing Tunnel"
+- link: "/integrations/guide/source-code-integration/"
+  tag: "Documentation"
+  text: "Learn about Source Code Integration."
 ---
 
 {{< callout url="#" btn_hidden="true">}}
@@ -54,6 +57,14 @@ By default, only users with the [Datadog Admin and Datadog Standard roles][7] ca
 
 If you are using the [custom role feature][8], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
+## View in VS Code
+
+The **View in VS Code** feature provides a link from the Datadog platform directly to your source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][10]):
+
+{{< img src="/developers/ide_integrations/vscode/view-in-vscode.png" alt="A stack trace on the Datadog platform showing the View in VS Code button." style="width:100%;" >}}
+
+<div class="alert alert-info">A prerequisite for this feature is that Source Code Integration is configured for your service.</div>
+
 ## Feedback
 
 To share your feedback, email [team-ide-integration@datadoghq.com][9].
@@ -71,3 +82,4 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 [7]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [8]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [9]: mailto:team-ide-integration@datadoghq.com
+[10]: /tracing/error_tracking/
