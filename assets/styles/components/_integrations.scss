@@ -810,20 +810,15 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     background-color: rgba(0, 0, 0, 0.5);
     .modal-container {
         width: 80vw;
-        // height: 892px;
-        // min-height: 892px;
+        max-width: 1146px;
+        min-width: 714px;
+        min-height: 632px;
         background-color: white;
         margin-top: 104px;
         position: relative;
 
         .modal-info {
-            display: grid;
-            grid-template-rows: repeat(12, 1fr);
-            // border: solid 1px red;
-
             .modal-info-header {
-                grid-row: 1/2;
-                // border: solid 1px blue;
                 .btn-close{
                     position: absolute;
                     top: 48px;
@@ -836,13 +831,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 }
             }
             .modal-info-body {
-                grid-row: 2/ -1;
-                // border: solid 1px green;
-                display: grid;
-                grid-template-rows: repeat(12, 1fr);
                 .modal-slides {
-                    grid-row: 1/12;
-                    // height: 540px;
                     display: grid;
                     grid-template-columns: 1fr;
                     grid-template-rows: 1fr;
@@ -850,6 +839,8 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                         border: 1px solid #e2e5ed;
                     }
                     .modal-slide {
+                        max-height: 540px;
+                        max-width: 1026px;
                         grid-column: 1/-1;
                         grid-row: 1/-1;
 
@@ -897,15 +888,22 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            width: 60%;
+            gap: 16px 12px;
+            @media(min-width: 1200px){
+                width: 75%;
+                gap: 20px 16px;
+            }
             button.modal-item {
-                width: 120px;
+                width: 96px;
                 height: 60px;
                 background-repeat: no-repeat;
                 background-size: cover;
                 border: solid 2px #e2e5ed;
                 &.active, &:hover{
                     border: solid 2px #006bc2;
+                }
+                @media(min-width: 1200px){
+                    width: 120px;
                 }
             }
         }
