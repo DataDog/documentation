@@ -89,7 +89,6 @@ config.serviceName = 'com.example.reactnative';
 // Optional: let the SDK print internal logs above or equal to the provided level. Default is undefined (meaning no logs)
 config.verbosity = SdkVerbosity.WARN;
 
-const config = new DatadogProviderConfiguration();
 //Wrap the content of your App component by a DatadogProvider component, passing it your configuration:
 
 export default function App() {
