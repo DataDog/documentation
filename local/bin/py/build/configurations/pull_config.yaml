@@ -143,6 +143,10 @@
           - "*/images/*.jpg"
           - "*/images/*.jpeg"
           - "*/images/*.svg"
+          options:
+            front_matters:
+              algolia:
+                subcategory: Marketplace Integrations
 
       - repo_name: ansible-datadog
         contents:

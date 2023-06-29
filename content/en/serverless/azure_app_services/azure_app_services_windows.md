@@ -74,7 +74,7 @@ For example:
 
 ### Installation
 
-1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
+1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_services.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
 
 2. Open the [Azure Portal][3] and navigate to the dashboard for the Azure app you wish to instrument with Datadog.
 
