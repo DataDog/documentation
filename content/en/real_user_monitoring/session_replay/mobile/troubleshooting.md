@@ -12,31 +12,28 @@ further_reading:
       text: Session Replay
 ---
 
-## Some parts of my application are not visible in the player, or I see a blank screen
+## Some parts of the application are blank or not visible in the player
 
-Mobile Session Replay supports native frameworks only today. Within these frameworks, there may certain components/screens missing such as:
+Mobile Session Replay only supports native frameworks. Within these frameworks, there may be certain components or screens missing, such as:
 
 - Screens built with SwiftUI (iOS) or Jetpack Compose (Android)
 - Web Views
-- Certain system elements (continually being updated) such as actionBar in Android, progress bars, and spinners
-- Rich system contents such as video players, music player, map widgets
-- Views that are using direct canvas drawing
+- Certain system elements, such as actionBar in Android, progress bars, and spinners
+- Rich system contents, such as video players, music player, and map widgets
+- Views that use direct canvas drawing
 - Advanced text styling
 
-## The session replay rendering looks similar to, but does not exactly mirror my app
-Mobile Session Replay's approach combines performance with usability. To achieve that, it's not a pixel perfect recreation of your app, but instead it takes a hybrid approach to the visual: we build a scaffold of the screen that can later be enriched with styling and contextual images. 
+## The session replay rendering looks does not exactly mirror my application
+Mobile Session Replay's approach combines performance with usability. To achieve this, it's not a pixel-perfect recreation of your app, but instead it takes a hybrid approach to the visual: it displays a scaffold of the screen that can later be enriched with styling and contextual images. 
 
-## I am concerned about using Mobile Session replay in tandem with other SDKs
-There is no harm to this. Mobile Session Replay only reads application view hierarchy without ever modifying the property.
+## I need to account for mobile app consent when collecting mobile session replays
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. Upon starting the SDK, a tracking consent value needs to be set to one of the following:
 
-## I want to ensure we account for mobile app consent when collecting mobile session replays.
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. Upon starting the SDK, a tracking consent value needs to be set (granted, not granted or pending).
-
-- If the value is not granted, then no data is ever written on disk. 
-- If the value is pending, the data is written in a temporary folder which cannot be uploaded to Datadog. 
-- If the value is granted, data is written in an "upload" folder, which is processed in the background, and eventually uploaded to Datadog.
+- If the value is **not granted**, then no data is ever written on disk. 
+- If the value is **pending**, the data is written in a temporary folder which cannot be uploaded to Datadog. 
+- If the value is **granted**, data is written in an "upload" folder, which is processed in the background, and eventually uploaded to Datadog.
 
 At any time during the lifetime of the host app, it's possible to change the tracking consent. When the consent changes from pending to granted, the data in the temporary folder is moved to the "upload" folder. 
 
-## For my sessions that are very short, I see I have a replay attached but I am unable to view the replay.
+## For my sessions that are very short, I see I have a replay attached but I am unable to view the replay
 When sessions are 1 nanosecond long, we are unable to process the record and thus there would be no replay attached. 
