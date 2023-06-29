@@ -2,19 +2,19 @@ import Alpine from 'alpinejs'
  
 window.Alpine = Alpine
 
+/**
+ * A global store for the integrations carousel modal
+ */
 Alpine.store('integrationsModal', {
     isOpen: false,
-    activeSlide: null,
+    activeSlide: null, // a seperate tracker from the main carousel
     openModal(activeSlide) {
+        // Opens modal with selected(active) slide 
         this.isOpen = true
         this.activeSlide = activeSlide
-
-    },
-    closeModal() {
-        this.isOpen = false
     },
     playVideo (refs) {
-        // Plays active video
+        // Plays active video. shared between modal and main carousel
         const {iframe, playBtn, playOverlay} = refs
         const player = new Vimeo.Player(iframe);
 
@@ -25,7 +25,7 @@ Alpine.store('integrationsModal', {
         player.play()
     },
     pauseVideo (refs) {
-        // Pauses active video
+        // Pauses active video. shared between modal and main carousel
         const {iframe, playBtn, playOverlay} = refs
         if(iframe?.parentElement.classList.contains('active')){
             const player = new Vimeo.Player(iframe);

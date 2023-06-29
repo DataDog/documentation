@@ -7,24 +7,30 @@
 <div 
 x-data="{
     shouldShowActiveHorizontalSlide (idx) {
-        // Evaluate the active state of the horizontal carousel item 
+        // Evaluate the active state of the modal item.
+        // a seperate action from the main carousel 
         return idx === $store.integrationsModal.activeSlide
     },
     selectCarouselItem (idx) {
+        // Sets a new active slide(item). pauses any active video in modal
         $store.integrationsModal.pauseVideo($refs)
         $store.integrationsModal.activeSlide = idx
-    }
+    },
+    closeModal() {
+        // Closes the modal
+        $store.integrationsModal.isOpen = false
+    },
 }"
 class="integrations-carousel-modal w-100 h-100 fixed-top"
 x-cloak x-show="$store.integrationsModal.isOpen"
-@resize.window="window.innerWidth < 768 && $store.integrationsModal.closeModal()">
+@resize.window="window.innerWidth < 768 && closeModal()">
     <div 
-    @click.outside="$store.integrationsModal.closeModal()"
+    @click.outside="closeModal()"
     class="modal-container mx-auto p-5 p-lg-6">
         <div class="modal-info">
             <div class="modal-info-header">
                 <h1 x-text="'{{ $title }}'"></h1>
-                <button type="button" class="btn-close" aria-label="Close" @click="$store.integrationsModal.closeModal()"></button>
+                <button type="button" class="btn-close" aria-label="Close" @click="closeModal()"></button>
             </div>
             <div class="modal-info-body">
                 {{/*  Slides  */}}
