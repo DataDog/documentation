@@ -26,6 +26,10 @@ title: Java テスト
 * また、Spock Framework や Cucumber-Junit など、JUnit をベースにしたテストフレームワークも含まれます。**注**: JUnit 4 を使用する Cucumber v1 のみがサポートされています。
 * TestNG >= 6.4
 
+対応するビルドシステム:
+* Gradle >= 2.0
+* Maven >= 3.2.1
+
 ## 報告方法の構成
 
 Datadog にテスト結果を報告するには、Datadog の Java ライブラリを構成する必要があります。
@@ -36,7 +40,7 @@ Datadog にテスト結果を報告するには、Datadog の Java ライブラ�
 
 Jenkins や自己管理型の GitLab CI などのオンプレミス CI プロバイダーでテストを実行する場合、[Agent インストール手順][1]に従って各ワーカノードに Datadog Agent をインストールします。これは、テスト結果が自動的に基礎となるホストメトリクスにリンクされるため、推奨されるオプションです。
 
-CI プロバイダーがコンテナベースのエグゼキューターを使用している場合、ビルド内の `localhost` の使用ではコンテナ自体を参照しており、Datadog Agent が動作している基礎となるワーカーノードではないため、すべてのビルドで `DD_AGENT_HOST` 環境変数 (デフォルトは `http://localhost:8126`) を、ビルドコンテナの中からアクセスできるエンドポイントに設定します。
+CI プロバイダーがコンテナベースのエグゼキューターを使用している場合、すべてのビルドで `DD_AGENT_HOST` 環境変数 (デフォルトは `http://localhost:8126`) を、ビルドコンテナの中からアクセスできるエンドポイントに設定します。これは、ビルド内で `localhost` を使用すると、Datadog Agent が動作している基礎となるワーカーノードではなく、コンテナ自体が参照されてしまうためです。
 
 Kubernetes のエグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] の使用を推奨しており、これは自動的にビルドポッドの環境変数 `DD_AGENT_HOST` を設定してローカルの Datadog Agent と通信させます。
 
@@ -73,227 +77,111 @@ GitHub Actions や CircleCI など、基盤となるワーカーノードにア�
 
 {{< /tabs >}}
 
-## Java トレーサーのインストール
+## トレーサーライブラリのダウンロード
 
-Java トレーサー v0.101.0 以降をインストールし、有効にします。
+トレーサーライブラリのダウンロードは、サーバーごとに 1 回だけ行う必要があります。
 
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-ルートの `pom.xml` に新しい Maven プロファイルを追加し、Datadog Java トレーサーの依存関係と `javaagent` arg のプロパティを構成します。その際に、`$VERSION` を [Maven リポジトリ][1]からアクセス可能なトレーサーの最新のバージョンで置き換えます (先行する `v` なし): ![Maven Central][2]
-
-{{< code-block lang="xml" filename="pom.xml" >}}
-<profile>
-  <id>dd-civisibility</id>
-  <activation>
-    <activeByDefault>false</activeByDefault>
-  </activation>
-  <properties>
-    <dd.java.agent.arg>-javaagent:${settings.localRepository}/com/datadoghq/dd-java-agent/$VERSION/dd-java-agent-$VERSION.jar -Ddd.service=my-java-app -Ddd.civisibility.enabled=true</dd.java.agent.arg>
-  </properties>
-  <dependencies>
-    <dependency>
-        <groupId>com.datadoghq</groupId>
-        <artifactId>dd-java-agent</artifactId>
-        <version>$VERSION</version>
-        <scope>provided</scope>
-    </dependency>
-  </dependencies>
-</profile>
-{{< /code-block >}}
-
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-`ddTracerAgent` エントリを `configurations` タスクブロックに追加し、Datadog Java トレーサーの依存関係を追加します。その際に、`$VERSION` を [Maven リポジトリ][2]で利用可能なトレーサーの最新のバージョンで置き換えます (先行する `v` なし): ![Maven Central][2]
-
-{{< code-block lang="groovy" filename="build.gradle" >}}
-configurations {
-    ddTracerAgent
-}
-dependencies {
-    ddTracerAgent "com.datadoghq:dd-java-agent:$VERSION"
-}
-{{< /code-block >}}
-
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
-{{% /tab %}}
-{{< /tabs >}}
-
-### Java コンパイラープラグインのインストール
-
-Java コンパイラープラグインはトレーサーと連携し、ソースコードの情報を追加で提供します。
-プラグインをインストールすることで、特定の CI visibility 機能のパフォーマンスと精度を向上させることができます。
-
-このプラグインは標準的な `javac` コンパイラーで動作します (Eclipse JDT コンパイラーはサポートされていません)。
-
-構成が成功すると、コンパイラーの出力に `DatadogCompilerPlugin initialized` という行が表示されるはずです。
+トレースライブラリがすでにサーバー上でローカルで利用可能な場合は、直接テストの実行に進むことができます。
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-トレーサー設定用のルート `pom.xml` に追加したのと同じ Maven プロファイルの関連セクションに、以下のスニペットを含めます。
-`$VERSION` は、[Maven リポジトリ][1]からアクセスできるアーティファクトの最新バージョンに置き換えてください (前の `v` は削除してください): ![Maven Central][2]
+[Maven リポジトリ][1]からアクセスできるアーティファクトの最新バージョン (前の `v` は削除: ![Maven Central][2]) で、変数 `DD_TRACER_VERSION` を宣言します。
 
-{{< code-block lang="xml" filename="pom.xml" >}}
-<dependency>
-    <groupId>com.datadoghq</groupId>
-    <artifactId>dd-javac-plugin-client</artifactId>
-    <version>$VERSION</version>
-</dependency>
+{{< code-block lang="shell" >}}
+DD_TRACER_VERSION=... // 例: 1.14.0
 {{< /code-block >}}
 
-{{< code-block lang="xml" filename="pom.xml" >}}
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.5</version>
-            <configuration>
-                <annotationProcessorPaths>
-                    <annotationProcessorPath>
-                        <groupId>com.datadoghq</groupId>
-                        <artifactId>dd-javac-plugin</artifactId>
-                        <version>$VERSION</version>
-                    </annotationProcessorPath>
-                </annotationProcessorPaths>
-                <compilerArgs>
-                    <arg>-Xplugin:DatadogCompilerPlugin</arg>
-                </compilerArgs>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
+以下のコマンドを実行して、トレーサーの JAR ファイルをローカルの Maven リポジトリにダウンロードします。
+
+{{< code-block lang="shell" >}}
+mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadoghq:dd-java-agent:$DD_TRACER_VERSION
 {{< /code-block >}}
 
-Maven コンパイラープラグインは、バージョン 3.5 から [annotationProcessorPaths][3] プロパティをサポートしています。どうしても古いバージョンを使用したい場合は、プロジェクトで Datadog コンパイラープラグインを通常の依存関係として宣言してください。
-
-さらに、JDK 16 以降を使用している場合は、プロジェクトのベースディレクトリにある [.mvn/jvm.config][4] ファイルに以下の行を追加してください。
-
-{{< code-block lang="properties" filename=".mvn/jvm.config" >}}
---add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
---add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
---add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
---add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
-{{< /code-block >}}
-
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
-[3]: https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html#annotationProcessorPaths
-[4]: https://maven.apache.org/configure.html#mvn-jvm-config-file
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-plugin-client JAR をプロジェクトのクラスパスに追加し、plugin JAR をコンパイラーのアノテーション処理系パスに追加し、Java クラスをコンパイルするタスクに plugin の引数を渡します。
+[Maven リポジトリ][1]からアクセスできるアーティファクトの最新バージョン (前の `v` は削除: ![Maven Central][2]) で、変数 `DD_TRACER_VERSION` を宣言します。
 
-`$VERSION` は、[Maven リポジトリ][1]からアクセスできるアーティファクトの最新バージョンに置き換えてください (前の `v` は削除してください): ![Maven Central][2]
-
-{{< code-block lang="groovy" filename="build.gradle" >}}
-if (project.hasProperty("dd-civisibility")) {
-    dependencies {
-        implementation 'com.datadoghq:dd-javac-plugin-client:$VERSION'
-        annotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
-        testAnnotationProcessor 'com.datadoghq:dd-javac-plugin:$VERSION'
-    }
-
-    tasks.withType(JavaCompile).configureEach {
-        options.compilerArgs.add('-Xplugin:DatadogCompilerPlugin')
-    }
-}
+{{< code-block lang="shell" >}}
+DD_TRACER_VERSION=... // 例: 1.14.0
 {{< /code-block >}}
 
-さらに、JDK 16 以降を使用している場合は、[gradle.properties][3] ファイルに以下の行を追加してください。
+ダウンロードした JAR ファイルの保存先となるフォルダーへのパスで、変数 `DD_TRACER_FOLDER` を宣言します。
 
-{{< code-block lang="properties" filename="gradle.properties" >}}
-org.gradle.jvmargs=\
---add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED  \
---add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED \
---add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED \
---add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+{{< code-block lang="shell" >}}
+DD_TRACER_FOLDER=... // 例: ~/.datadog
 {{< /code-block >}}
 
-[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-javac-plugin
-[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-javac-plugin?style=flat-square
-[3]: https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties
+以下のコマンドを実行して、トレーサーの JAR ファイルを指定したフォルダーにダウンロードします。
+
+{{< code-block lang="shell" >}}
+curl https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar --output $DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-java-agent
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-java-agent?style=flat-square
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## テストのインスツルメンテーション
+## テストの実行
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-[Maven Surefire プラグイン][1]または [Maven Failsafe プラグイン][2] (または両方を使用する場合は両方) を構成して、Datadog Java Agent を使用し、テスト対象のサービスまたはライブラリの名前を `-Ddd.service` プロパティで指定します。
+環境変数が `DD_TRACER_VERSION` が、あらかじめダウンロードしているトレーサーのバージョンに設定されていることを確認してください。
 
-* [Maven Surefire プラグイン][1]を使用している場合:
+環境変数 `MAVEN_OPTS` を使って Datadog Java トレーサー JAR ファイルへのパスを指定し、テストを実行します。
 
-{{< code-block lang="xml" filename="pom.xml" >}}
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-surefire-plugin</artifactId>
-  <configuration>
-    <argLine>${dd.java.agent.arg}</argLine>
-  </configuration>
-</plugin>
-{{< /code-block >}}
+トレーサーの引数を指定する際は、以下の情報を設定します。
 
-* [Maven Failsafe プラグイン][2]を使用している場合:
+* プロパティ `dd.civisibility.enabled` を `true` に設定して、CI Visibility を有効にします。
+*  `dd.env property` を使用して、テストが実行される環境を定義します (例: 開発者のワークステーションでテストを実行するときは `local`、CI プロバイダーで実行するときは `ci`)。
+* テストされるサービスまたはライブラリの名前を `dd.service property`  で定義します。
 
-{{< code-block lang="xml" filename="pom.xml" >}}
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-failsafe-plugin</artifactId>
-  <configuration>
-     <argLine>${dd.java.agent.arg}</argLine>
-  </configuration>
-  <executions>
-      <execution>
-        <goals>
-           <goal>integration-test</goal>
-           <goal>verify</goal>
-        </goals>
-      </execution>
-  </executions>
-</plugin>
-{{< /code-block >}}
-
-`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
+例:
 
 {{< code-block lang="shell" >}}
-DD_ENV=ci mvn clean verify -Pdd-civisibility
+MVN_LOCAL_REPO=$(mvn help:evaluate -Dexpression=settings.localRepository -DforceStdout -q)
+MAVEN_OPTS=-javaagent:$MVN_LOCAL_REPO/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar=\
+dd.civisibility.enabled=true,\
+dd.env=ci,\
+dd.service=my-java-app \
+mvn clean verify -Pdd-civisibility
 {{< /code-block >}}
 
-
-[1]: https://maven.apache.org/surefire/maven-surefire-plugin/
-[2]: https://maven.apache.org/surefire/maven-failsafe-plugin/
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-`configurations.ddTracerAgent` プロパティに基づいて Datadog Java トレーサーをターゲットとする `-javaagent` 引数を `jvmArgs` 属性に追加し、`-Ddd.service` プロパティでテスト対象のサービスまたはライブラリの名前を指定して、`test` Gradle タスクを構成します。
+環境変数 `DD_TRACER_VERSION` があらかじめダウンロードしたトレーサーのバージョンに、そして変数 `DD_TRACER_FOLDER` がトレーサーのダウンロード先のパスに設定されていることを確認します。
 
-{{< code-block lang="groovy" filename="build.gradle" >}}
-test {
-  if(project.hasProperty("dd-civisibility")) {
-    jvmArgs = ["-javaagent:${configurations.ddTracerAgent.asPath}", "-Ddd.service=my-java-app", "-Ddd.civisibility.enabled=true"]
-  }
-}
-{{< /code-block >}}
+システムプロパティ `org.gradle.jvmargs` を使って Datadog Java トレーサー JAR ファイルへのパスを指定し、テストを実行します。
 
-`DD_ENV` 環境変数でテストを実行する環境 (たとえば、開発者ワークステーションでテストを実行する場合は `local`、CI プロバイダーでテストを実行する場合は `ci`) を指定して、通常どおりにテストを実行します。例:
+トレーサーの引数を指定する際は、以下の情報を設定します。
+
+* `dd.civisibility.enabled` プロパティを `true` に設定して、CI Visibility を有効にします。
+*  `dd.env property` を使用して、テストが実行される環境を定義します (例: 開発者のワークステーションでテストを実行するときは `local`、CI プロバイダーで実行するときは `ci`)。
+* テストされるサービスまたはライブラリの名前を `dd.service property`  で定義します。
+
+例:
 
 {{< code-block lang="shell" >}}
-DD_ENV=ci ./gradlew cleanTest test -Pdd-civisibility --rerun-tasks
+./gradlew cleanTest test -Pdd-civisibility --rerun-tasks -Dorg.gradle.jvmargs=\
+-javaagent:$DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar=\
+dd.civisibility.enabled=true,\
+dd.env=ci,\
+dd.service=my-java-app
 {{< /code-block >}}
 
-**注:** Gradle でのビルドはプログラムを通じてカスタマイズできるため、これらのステップを特定のビルドコンフィギュレーションに適応させなければならない場合があります。
+コマンドラインで `org.gradle.jvmargs` を指定すると、別の場所で指定された値がオーバーライドされます。`gradle.properties` ファイルでこのプロパティを指定している場合は、必ずコマンドラインの引数で必要な設定を再現するようにしてください。
+
+**注:** CI Visibility は [Gradle のコンフィギュレーションキャッシュ][1]と互換性がないため、トレーサーでテストを実行する際には、キャッシュを有効にしないでください。
+
+[1]: https://docs.gradle.org/current/userguide/configuration_cache.html
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -314,32 +202,166 @@ if (span != null) {
 
 これらのタグに対して、フィルターや `group by` フィールドを作成するには、まずファセットを作成する必要があります。タグの追加についての詳細は、Java カスタムインスツルメンテーションドキュメントの[タグの追加][1]セクションを参照してください。
 
+## 手動テスト API
+
+以下のサポートされているテストフレームワークのいずれかを使用する場合、Java トレーサーが自動的にテストのインスツルメンテーションを行い、Datadog バックエンドに結果を送信します。
+
+サポート対象外のフレームや特製のテストソリューションを使用している場合は、手動テスト API を利用して、バックエンドにテスト結果を報告することもできます。
+
+### 手動の API 依存関係の追加
+
+手動 API クラスは `com.datadoghq:dd-trace-api` アーティファクトで利用可能です。
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+トレース API 依存関係を Maven プロジェクトに追加し、`$VERSION` を [Maven リポジトリ][1]からアクセス可能なトレーサーの最新バージョン (前の `v` は削除してください: ![Maven Central][2]) に変更します。
+
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependency>
+    <groupId>com.datadoghq</groupId>
+    <artifactId>dd-trace-api</artifactId>
+    <version>$VERSION</version>
+    <scope>test</scope>
+</dependency>
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-trace-api?style=flat-square
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+トレース API 依存関係を Maven プロジェクトに追加し、`$VERSION` を [Maven リポジトリ][1]からアクセス可能なトレーサーの最新バージョン (前の `v` は削除してください: ![Maven Central][2]) に変更します。
+
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    testImplementation "com.datadoghq:dd-trace-api:$VERSION"
+}
+{{< /code-block >}}
+
+[1]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[2]: https://img.shields.io/maven-central/v/com.datadoghq/dd-trace-api?style=flat-square
+{{% /tab %}}
+{{< /tabs >}}
+
+### ドメインモデル
+
+この API は、テストセッション、テストモジュール、テストスイート、テストの 4 つの概念に基づいています。
+
+#### テストセッション
+
+テストセッションはプロジェクトのビルドを表し、通常はユーザーまたは CI スクリプトにより発行された 1 つのテストコマンドの実行に対応します。
+
+テストセッションを開始するには、`datadog.trace.api.civisibility.CIVisibility#startSession` を呼び出し、プロジェクトの名前と使用したテストフレームワークの名前を渡します。
+
+テストがすべて完了したら、`datadog.trace.api.civisibility.DDTestSession#end` を呼び出し、残りのテスト結果をすべてバックエンドに送信するようライブラリに強制します。
+
+#### テストモジュール
+
+テストモジュールはプロジェクトビルド内のより小さな作業単位を表し、通常はプロジェクトの 1 つのモジュールに対応します。例: Maven　のサブモジュールや Gradle のサブプロジェクト。
+
+テストモードを開始するには、`datadog.trace.api.civisibility.DDTestSession#testModuleStart` を呼び出し、モジュール名を渡します。
+
+モジュールでビルドとテストが完了したら、`datadog.trace.api.civisibility.DDTestModule#end` を呼び出します。
+
+#### テストスイート
+
+テストスイートは、共通の機能を持つテストのセットで構成されます。
+これらのテストは、共通の初期化および終了を共有することができ、また、いくつかの変数を共有することができます。
+各スイートは通常、テストケースを格納する 1 つの Java クラスに対応します。
+
+テストモジュール内にテストスイートを作成するには、`datadog.trace.api.civisibility.DDTestModule#testSuiteStart` を呼び出し、テストスイート名を渡します。
+
+スイートの中の関連するテストがすべて実行を終えたら `datadog.trace.api.civisibility.DDTestSuite#end` を呼び出します。
+
+#### テスト
+
+テストは、テストスイートの一部として実行される単一のテストケースを表します。
+通常、テストのロジックを含む 1 つのメソッドに対応します。
+
+スイート内にテストを作成するには、`datadog.trace.api.civisibility.DDTestSuite#testStart` を呼び出し、テスト名を渡します。
+
+テストが実行を終えたら、`datadog.trace.api.civisibility.DDTest#end` を呼び出します。
+
+### コード例
+
+次のコードは、API の簡単な使い方を表しています。
+
+```java
+package com.datadog.civisibility.example;
+
+import datadog.trace.api.civisibility.CIVisibility;
+import datadog.trace.api.civisibility.DDTest;
+import datadog.trace.api.civisibility.DDTestModule;
+import datadog.trace.api.civisibility.DDTestSession;
+import datadog.trace.api.civisibility.DDTestSuite;
+import java.lang.reflect.Method;
+
+// 下の呼び出しの中の引数 null は、オプションの startTime/endTime の値です:
+// 値の指定がない場合は、現在の時刻が使用されます
+public class ManualTest {
+    public static void main(String[] args) throws Exception {
+        DDTestSession testSession = CIVisibility.startSession("my-project-name", "my-test-framework", null);
+        testSession.setTag("my-tag", "additional-session-metadata");
+        try {
+            runTestModule(testSession);
+        } finally {
+            testSession.end(null);
+        }
+    }
+
+    private static void runTestModule(DDTestSession testSession) throws Exception {
+        DDTestModule testModule = testSession.testModuleStart("my-module", null);
+        testModule.setTag("my-module-tag", "additional-module-metadata");
+        try {
+            runFirstTestSuite(testModule);
+            runSecondTestSuite(testModule);
+        } finally {
+            testModule.end(null);
+        }
+    }
+
+    private static void runFirstTestSuite(DDTestModule testModule) throws Exception {
+        DDTestSuite testSuite = testModule.testSuiteStart("my-suite", ManualTest.class, null);
+        testSuite.setTag("my-suite-tag", "additional-suite-metadata");
+        try {
+            runTestCase(testSuite);
+        } finally {
+            testSuite.end(null);
+        }
+    }
+
+    private static void runTestCase(DDTestSuite testSuite) throws Exception {
+        Method myTestCaseMethod = ManualTest.class.getDeclaredMethod("myTestCase");
+        DDTest ddTest = testSuite.testStart("myTestCase", myTestCaseMethod, null);
+        ddTest.setTag("my-test-case-tag", "additional-test-case-metadata");
+        ddTest.setTag("my-test-case-tag", "more-test-case-metadata");
+        try {
+            myTestCase();
+        } catch (Exception e) {
+            ddTest.setErrorInfo(e); // テストケースを失敗としてマークするためのエラー情報を渡します
+        } finally {
+            ddTest.end(null);
+        }
+    }
+
+    private static void myTestCase() throws Exception {
+        // 何らかのテストロジックを実行します
+    }
+
+    private static void runSecondTestSuite(DDTestModule testModule) {
+        DDTestSuite secondTestSuite = testModule.testSuiteStart("my-second-suite", ManualTest.class, null);
+        secondTestSuite.setSkipReason("this test suite is skipped"); // テストスイートをスキップ済みとしてマークするためのスキップ理由を渡します
+        secondTestSuite.end(null);
+    }
+}
+```
+
+最後に必ず `datadog.trace.api.civisibility.DDTestSession#end` を呼び出し、すべてのテスト情報を Datadog に流すようにします。
+
 ## コンフィギュレーション設定
 
-次のシステムプロパティはコンフィギュレーションのオプションを設定するもので、環境変数と同等の値を持ちます。両方に同じキータイプが設定されている場合は、システムプロパティコンフィギュレーションが優先されます。 システムプロパティは、JVM フラグとして設定できます。
-
-`dd.service`
-: テスト中のサービスまたはライブラリの名前。<br/>
-**環境変数**: `DD_SERVICE`<br/>
-**デフォルト**: `unnamed-java-app`<br/>
-**例**: `my-java-app`
-
-`dd.env`
-: テストが実行されている環境の名前。<br/>
-**環境変数**: `DD_ENV`<br/>
-**デフォルト**: `none`<br/>
-**例**: `local`、`ci`
-
-`dd.trace.agent.url`
-: `http://hostname:port` の形式のトレース収集用の Datadog Agent URL。<br/>
-**環境変数**: `DD_TRACE_AGENT_URL`<br/>
-**デフォルト**: `http://localhost:8126`
-
-他のすべての [Datadog トレーサーコンフィギュレーション][2]オプションも使用できます。
-
-**重要:** インテグレーションテストを行う際に、より多くのインテグレーションを有効化したい場合があるかもしれません。特殊なインテグレーションを有効化するには、[Datadog Tracer Compatibility][3] テーブルを使用してインテグレーションテスト用のカスタム設定を作成してください。
-
-たとえば、`OkHttp3` クライアントリクエストのインテグレーションを有効化する場合は、設定に `-Ddd.integration.okhttp-3.enabled=true` を追加します。
+[Datadog トレーサーのコンフィギュレーション][2]オプションは、トレーサーの挙動を微調整するために利用可能です。
 
 ### Git のメタデータを収集する
 
@@ -398,19 +420,44 @@ CI Visibility を有効にすると、プロジェクトから以下のデータ
 * テストの名前と時間。
 * CI プロバイダーが設定する事前定義された環境変数。
 * Git のコミット履歴。ハッシュ、メッセージ、作成者情報、変更されたファイル (ファイルの内容は含まず) が含まれます。
+* ソースコード情報: テストクラスのソースへの相対パス、テストメソッドの行番号。
 * CODEOWNERS ファイルからの情報。
 
 ## トラブルシューティング
 
 ### トレーサーで CI Visibility を有効にした後、Datadog にテストが表示されない
 
-Datadog にテストが表示されない場合は、Java トレーサのバージョン 0.91.0 以降を使用していることを確認してください。
-`-Ddd.civisibility.enabled=true` のコンフィギュレーションプロパティは、そのバージョン以降でのみ利用可能です。
+最新バージョンのトレーサーを使用していることを確認してください。
 
-以前のバージョンのトレーサーを使用する必要がある場合、以下のシステムプロパティを使用して CI Visibility を構成することができます。
-{{< code-block lang="shell" >}}
--Ddd.prioritization.type=ENSURE_TRACE -Ddd.jmxfetch.enabled=false -Ddd.integrations.enabled=false -Ddd.integration.junit.enabled=true -Ddd.integration.testng.enabled=true
-{{< /code-block >}}
+ビルドシステムとテストフレームワークが CI Visibility でサポートされていることを確認します。[サポートされているビルドシステムとテストフレームワーク](#compatibility) のリストを参照してください。
+
+トレーサーの引数で、プロパティ `dd.civisibility.enabled` が `true` に設定されていることを確認します。
+
+ビルドのアウトプットで、環境変数 `DD_API_KEY` の未設定など、トレーサーの構成ミスを示すエラーがないか確認します。
+
+### トレーサーがアタッチされたプロジェクトをビルドする際に、テストやソースコードのコンパイルに失敗する
+
+CI Visibility はデフォルトで、コンパイラープラグインがアタッチされた状態で Java コードのコンパイルを実行できるようになっています。
+
+このプラグインは、パフォーマンスのオーバーヘッドを減らすためだけのもので、オプションです。
+
+ビルドの構成によっては、プラグインを追加することで、コンパイルのプロセスが妨げられる場合があります。
+
+プラグインがビルドに干渉する場合は、`-javaagent` 引数のリストに `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` を追加して、プラグインを無効にしてください。
+
+### トレーサーがアタッチされた状態でプロジェクトをビルトすると、テストに失敗する
+
+場合によっては、トレーサーをアタッチすることでテストが中断されることがあります。特に、JVM の内部状態やサードパーティライブラリのクラスのインスタンス上でアサーションを実行する場合、その可能性が高まります。
+
+そうしたケースに対する最適なアプローチは、テストをアップデートすることですが、トレーサーのサードパーティライブラリインテグレーションを無効にするという、より迅速なオプションも存在します。
+
+インテグレーションは、テスト対象のコードで何が起きるかについてより詳細なインサイトを提供し、HTTP リクエストやデータベースに対する呼び出しなどを監視する結合テストでは特に有用です。
+インテグレーションは、デフォルトで有効になっています。
+
+特定のインテグレーションを無効にするには、[Datadog Tracer Compatibility][3] テーブルを参照して、該当の構成プロパティ名を確認してください。
+たとえば、`OkHttp3` クライアントリクエストのインテグレーションを無効にするには、`-javaagent` 引数のリストに`dd.integration.okhttp-3.enabled=false` を追加します。
+
+すべてのインテグレーションを無効にするには、`-javaagent` 引数のリストに `dd.trace.enabled=false` を追加します。
 
 ## その他の参考資料
 
@@ -418,4 +465,4 @@ Datadog にテストが表示されない場合は、Java トレーサのバー�
 
 [1]: /ja/tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
 [2]: /ja/tracing/trace_collection/library_config/java/?tab=containers#configuration
-[3]: /ja/tracing/trace_collection/compatibility/java
+[3]: /ja/tracing/trace_collection/compatibility/java#integrations

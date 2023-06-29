@@ -38,6 +38,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_3513586382",
+      "description": "Create a geomap widget using an event_list request"
+    },
+    {
+      "group": "dashboards",
       "suffix": "",
       "description": "Create a new dashboard returns \"OK\" response"
     },
@@ -170,6 +175,16 @@
       "group": "dashboards",
       "suffix": "_2338918735",
       "description": "Create a new dashboard with list_stream widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1877023900",
+      "description": "Create a new dashboard with list_stream widget with a valid sort parameter ASC"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2361531620",
+      "description": "Create a new dashboard with list_stream widget with a valid sort parameter DESC"
     },
     {
       "group": "dashboards",

@@ -17,7 +17,7 @@ title: Instrumentar aplicaciones .NET serverless
 
 ## Instalación
 
-Datadog te permite habilitar la instrumentación de tus aplicaciones serverless de muchas formas diferentes. Elige el método que más te convenga de todos los que te presentamos a continuación. Por norma general, Datadog recomienda usar Datadog CLI.
+Datadog ofrece muchas formas diferentes de habilitar la instrumentación para tus aplicaciones serverless. Elige a continuación el método que mejor se adapte a tus necesidades. Por lo general, Datadog recomienda utilizar la CLI de Datadog. *Debes* seguir las instrucciones para "Imagen de contenedor" si tu aplicación se implementa como una imagen de contenedor.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -145,6 +145,7 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 {{% /tab %}}
 {{% tab "Personalizado" %}}
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Instala el rastreador de Datadog
 
     [Configura las capas][1] de tu función lambda usando el siguiente formato de ARN:
@@ -185,13 +186,60 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 
     Reemplaza `<AWS_REGION>` por una región de AWS válida, como puede ser `us-east-1`.
 
+    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Instala el rastreador de Datadog
+
+    [Configura las capas][1] de tu función lambda usando el siguiente formato de ARN:
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    ```
+
+    Reemplaza `<AWS_REGION>` por una región de AWS válida, como puede ser `us-east-1`.
+
+2. Instala la extensión Datadog Lambda
+
+    [Configura las capas][1] de tu función lambda usando el siguiente formato de ARN:
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    Reemplaza `<AWS_REGION>` por una región de AWS válida, como puede ser `us-east-1`.
+
+    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+
 3. Configura las variables de entorno obligatorias
 
     - Configura `AWS_LAMBDA_EXEC_WRAPPER` como `/opt/datadog_wrapper`.
     - Configura `DD_SITE` como {{< region-param key="dd_site" code="true" >}} [asegúrate de que has seleccionado el sitio (SITE) correcto a la derecha].
     - Configura `DD_API_KEY_SECRET_ARN` como ARN del secreto de AWS siempre que tu [clave de API de Datadog][2] se haya almacenado de forma segura. La clave tiene que almacenarse en una cadena de texto sin formato (no en un blob JSON). El permiso `secretsmanager:GetSecretValue` es obligatorio. Para agilizar la prueba, puedes usar `DD_API_KEY` y configurar la clave de API de Datadog en texto sin formato.
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
@@ -204,7 +252,7 @@ Para instalar y configurar el plugin serverless de Datadog, sigue estos pasos:
 - Consulta la [configuración avanzada][5] para:
     - conectar tu telemetría mediante el uso de tags,
     - recopilar la telemetría de Amazon API Gateway, Amazon SQS, etc.,
-    - capturar las cargas útiles de solicitud y respuesta de Lambda,
+    - capturar las cargas útiles de solicitud y respuesta de Lambda
     - vincular los errores de tus funciones lambda con tu código fuente,
     - filtrar o borrar información confidencial procedente de logs o trazas.
 

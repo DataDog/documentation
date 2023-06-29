@@ -53,7 +53,9 @@ Agent によって収集された名前 (上記の詳細) は、選択された�
 
 [インフラストラクチャーリスト][4]から、アカウントにあるすべてのホストのリストを見ることができます。各ホストに関連するエイリアスは、ホストの行にカーソルを置いた状態で **Inspect** ボタンをクリックすることでアクセスできる検査パネルで確認できます。
 
-{{< img src="agent/faq/host_aliases.png" alt="ホストのエイリアス"  >}}
+{{< img src="agent/faq/host_aliases.png" alt="ホストのエイリアス" >}}
+
+**注**: これらのエイリアスは、検索やフィルターには使用できません。これらのエイリアスは、上記の検査パネルでのみ利用可能です。
 
 ## Agent バージョン
 
@@ -118,7 +120,7 @@ Agent v5 で `gce_updated_hostname` が未設定または false に設定され�
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent のホスト名スキーム"  >}}
+{{< img src="agent/faq/agent_hostname.jpeg" alt="Agent のホスト名スキーム" >}}
 
 {{% /tab %}}
 {{< /tabs >}}

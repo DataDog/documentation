@@ -22,6 +22,9 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/'
   tag: 'Blog'
   text: 'Best practices for continuous testing with Datadog'
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>

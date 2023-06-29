@@ -53,7 +53,7 @@ config.nativeCrashReportEnabled = true; // enable native crash reporting
 Datadog can accept uploads up to 200 MB for US1 or EU1 sites, 50 MB for other sites.
 </p></div>
 
-To compute the size of your source maps and bundle, run this command:
+To compute the size of your source maps and bundle, run the following command:
 
 ```shell
 npx react-native bundle \
@@ -69,6 +69,8 @@ payloadsize=$(($sourcemapsize + $bundlesize))
 
 echo "Size of source maps and bundle is $(($payloadsize / 1000000))MB"
 ```
+
+If a `build` directory does not already exist, create it first by running `mkdir build`. Then run the command above.
 
 ## Symbolicate crash reports
 
@@ -404,6 +406,8 @@ Inside the loop, add the following snippet:
             tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
         }
 ```
+
+**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
 ## Further reading
 

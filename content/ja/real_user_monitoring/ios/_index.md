@@ -6,7 +6,7 @@ description: iOS および tvOS アプリケーションから RUM データを�
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: Github
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: RUM データの調査方法

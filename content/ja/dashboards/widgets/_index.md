@@ -13,19 +13,15 @@ title: ウィジェット
 
 ## 概要
 
-ウィジェットは、ダッシュボードを構成するブロックです。ウィジェットは 3 つのタイプに分類されます。
+ウィジェットは、ダッシュボードの構成要素です。ウィジェットによって、インフラストラクチャー全体のデータを視覚化し、相関させることができます。
 
+### グラフ
 {{< whatsnext desc="Datadog 製品のデータをグラフ化する汎用ウィジェット: ">}}
     {{< nextlink href="/dashboards/widgets/change" >}}変更{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/distribution" >}}分布{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/event_stream" >}}イベントストリーム{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/event_timeline" >}}イベントタイムライン{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/distribution" >}}ディストリビューション{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/funnel" >}}ファネル{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/geomap" >}}ジオマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/heat_map" >}}ヒートマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/hostmap" >}}ホストマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/list" >}}リスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/log_stream" >}}ログストリーム{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/pie_chart" >}}円グラフ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/query_value" >}}クエリ値{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/scatter_plot" >}}散布図{{< /nextlink >}}
@@ -33,25 +29,45 @@ title: ウィジェット
     {{< nextlink href="/dashboards/widgets/treemap" >}}ツリーマップ{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/timeseries" >}}時系列{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list" >}}トップリスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" >}}トポロジーマップ{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Synthetic Monitoring の情報を表示するサマリーウィジェット: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" >}}アラートグラフ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" >}}アラート値{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" >}}ステータス確認{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" >}}モニター概要{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" >}}サービスレベル目標 (SLO) サマリー{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" >}}サービスレベル目標 (SLO) リスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" >}}サービス概要{{< /nextlink >}}
+### グループ
+{{< whatsnext desc="Display your widgets under groups: ">}}
+    {{< nextlink href="/dashboards/widgets/group" >}}グループ{{< /nextlink >}}
 {{< /whatsnext >}}
 
+### アノテーションと埋め込み
 {{< whatsnext desc="ダッシュボードを視覚的に構成し、注釈を付けるための装飾ウィジェット: ">}}
     {{< nextlink href="/dashboards/widgets/free_text" >}}フリーテキスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/group" >}}グループ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" >}}画像{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/iframe" >}}Iframe{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/image" >}}画像{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/note" >}}注意事項とリンク{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### リストとストリーム
+{{< whatsnext desc="さまざまなソースからのイベントや問題のリストを表示します: ">}}
+    {{< nextlink href="/dashboards/widgets/list" >}}リスト{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### アラートと対応
+{{< whatsnext desc="モニタリング情報を表示するサマリーウィジェット: ">}}
+    {{< nextlink href="/dashboards/widgets/alert_graph" >}}アラートグラフ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/alert_value" >}}アラート値{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/check_status" >}}チェックステータス{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/monitor_summary" >}}モニターサマリー{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### アーキテクチャ
+{{< whatsnext desc="インフラストラクチャーやアーキテクチャーのデータを視覚化します: ">}}
+    {{< nextlink href="/dashboards/widgets/hostmap" >}}ホストマップ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" >}}トポロジーマップ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_summary" >}}サービスサマリー{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### パフォーマンスと信頼性
+{{< whatsnext desc="サイトの信頼性の視覚化: ">}}
+    {{< nextlink href="/dashboards/widgets/slo" >}}サービスレベル目標 (SLO) サマリー{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo_list" >}}サービスレベル目標 (SLO) リスト{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 全画面

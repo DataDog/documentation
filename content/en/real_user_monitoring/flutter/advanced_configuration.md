@@ -5,7 +5,7 @@ description: Learn how to configure Flutter Monitoring.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter Source code
+  text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
@@ -206,22 +206,6 @@ To change the tracking consent value after the Flutter RUM SDK is initialized, u
 For example, if the current tracking consent is `TrackingConsent.pending` and you change the value to `TrackingConsent.granted`, the Flutter RUM SDK sends all previously recorded and future data to Datadog.
 
 Likewise, if you change the value from `TrackingConsent.pending` to `TrackingConsent.notGranted`, the Flutter RUM SDK wipes all data and does not collect any future data.
-
-## Sample RUM sessions
-
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the Flutter RUM SDK][2] as a percentage between 0 and 100.
-
-For example, to keep only 50% of sessions, use:
-
-```dart
-final config = DdSdkConfiguration(
-    // other configuration...
-    rumConfiguration: RumConfiguration(
-        applicationId: '<YOUR_APPLICATION_ID>',
-        sessionSamplingRate: 50.0,
-    ),
-);
-```
 
 ## Sending data when device is offline
 
