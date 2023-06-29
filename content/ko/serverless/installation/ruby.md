@@ -24,7 +24,7 @@ title: 루비(Ruby) 서버리스 애플리케이션 계측하기
 
 ## 설치
 
-Datadog은 서버리스 애플리케이션 계측을 활성화하는 다양한 방법을 제공합니다. 아래에서 사용자의 요구에 가장 적합한 방법을 선택하세요. Datadog는 일반적으로 Datadog CLI 사용을 권장합니다. 애플리케이션이 컨테이너 이미지로 배포된 경우 *반드시* "컨테이너 이미지"에 대한 지침서를 따라야 합니다.
+Datadog은 서버리스 애플리케이션 계측을 활성화하는 다양한 방법을 제공합니다. 아래에서 사용자의 요구에 가장 적합한 방법을 선택하세요. Datadog은 일반적으로 Datadog CLI 사용을 권장합니다. 애플리케이션이 컨테이너 이미지로 배포된 경우 *반드시* "컨테이너 이미지"에 대한 지침서를 따라야 합니다.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -49,7 +49,7 @@ Datadog CLI는 기존 Lambda 함수의 설정을 변경하여, 새롭게 배포�
     end
     ```
 
-2. Datadog CLI 클라이언트를 설치합니다.
+2. Datadog CLI 클라이언트 설치
 
     ```sh
     npm install -g @datadog/datadog-ci
@@ -97,9 +97,9 @@ Datadog CLI는 기존 Lambda 함수의 설정을 변경하여, 새롭게 배포�
     datadog-ci lambda instrument -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="ruby" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
     ```
 
-   자리 표시자를 채우는 방법:
+   플레이스홀더를 채우는 방법:
     - `<functionname>` 및 `<another_functionname>`을 Lambda 함수 이름으로 대체합니다. 또는 `--functions-regex`를 사용해 특정 정규 표현식과 이름이 일치하는 여러 함수를 자동 계측할 수 있습니다.
-    - `<aws_region>`을 AWS 리전 이름으로 대체합니다.
+    - `<aws_region>`을 AWS 지역 이름으로 대체합니다.
 
     이외의 파라미터는 [CLI 설명서][3]에서 찾아볼 수 있습니다.
 
@@ -107,13 +107,13 @@ Datadog CLI는 기존 Lambda 함수의 설정을 변경하여, 새롭게 배포�
 [1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
 [2]: https://docs.datadoghq.com/ko/serverless/serverless_integrations/cli
 {{% /tab %}}
-{{% tab "Serverless Framework" %}}
+{{% tab "서버리스 프레임워크" %}}
 
 [Datadog 서버리스 플러그인][1]이 [Datadog 람다 확장][2]을 통해 메트릭, 트레이스, 로그를 Datadog로 전송하도록 함수를 자동 설정합니다.
 
-Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차를 따라주세요.
+Datadog 서버리스 플러그인을 설치 및 설정하려면 다음 단계를 따르세요:
 
-1. 람다 기능/함수 설정하기
+1. 람다 함수 설정하기
 
    Datadog APM을 활성화하고 Datadog 람다 라이브러리에서 제공하는 래퍼를 사용하여 람다 핸들러 함수를 래핑합니다.
 
@@ -146,7 +146,7 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
     ```
 
-   자리 표시자를 채우는 방법:
+   플레이스홀더를 채우는 방법:
     - `<DATADOG_SITE>`를 {{< region-param key="dd_site" code="true" >}}로 대체하세요. (오른쪽에 올바른 사이트가 선택되었는지 확인합니다.)
     - `<DATADOG_API_KEY_SECRET_ARN>`을 [Datadog API 키][4]가 안전하게 저장된 AWS 암호 ARN으로 대체합니다. 키는 일반 텍스트 문자열로로 저장해야 합니다(JSON blob 안 됨). 또한, `secretsmanager:GetSecretValue` 권한이 있어야 합니다. 빠른 테스트를 위해 대신 `apiKey`를 사용하고 Datadog API 키를 일반 텍스트로 설정할 수 있습니다.
 
@@ -250,7 +250,7 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
       gem 'ddtrace'
       ```
 
-      `ddtrace`는 네이티브 확장을 포함하며 네이티브 확장은 아마존 리눅스(Amazon Linux)에 대해 컴파일되어야 AWS 람바와 함께 작동할 수 있습니다. 그러므로 Datadog는 람다를 컨테이너 이미지로 빌드하고 구축할 것을 권장합니다. 함수를 컨테이너 이미지로 구축할 수 없고 Datadog APM을 사용하길 원한다면 Datadog는 람다 라이브러리를 젬 대신 레이어로 설치할 것을 권장합니다.
+      `ddtrace`는 네이티브 확장을 포함하며 네이티브 확장은 아마존 리눅스(Amazon Linux)에 대해 컴파일되어야 AWS 람바와 함께 작동할 수 있습니다. 그러므로 Datadog은 람다를 컨테이너 이미지로 빌드하고 구축할 것을 권장합니다. 함수를 컨테이너 이미지로 구축할 수 없고 Datadog APM을 사용하길 원한다면 Datadog는 람다 라이브러리를 gem 대신 레이어로 설치할 것을 권장합니다.
 
       함수의 Dockerfile에서 `bundle install` 실행 전 `gcc`, `gmp-devel`, `make`를 설치하여 네이티브 확장이 성공적으로 컴파일되도록 합니다.
 
@@ -264,9 +264,9 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
       RUN bundle install
       ```
 
-2. Datadog Lambda Extension을 설치합니다.
+2. Datadog 람다 확장 설치
 
-    - 옵션 A: 다음 형식의 ARN을 사용하여 람다 기능/함수에 사용할 [레이어 설정][1]:
+    - 옵션 A: 다음 형식의 ARN을 사용하여 람다 함수에 사용할 [레이어 설정][1]:
 
       ```sh
       # Use this format for x86-based Lambda deployed in AWS commercial regions
@@ -300,9 +300,9 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
 {{< site-region region="ap1" >}}
 1. Datadog 람다 라이브러리 설치하기
 
-   Datadog 람다 라이브러리는 레이어 또는 젬으로 설치할 수 있습니다. 대부분의 기능/함수에 대해 Datadog는 라이브러리를 레이어로 설치할 것을 권장합니다. 람다 기능이 컨테이너 이미지로 배포된 경우 라이브러리를 젬으로 설치해야 합니다.
+   Datadog 람다 라이브러리는 레이어 또는 gem으로 설치할 수 있습니다. 대부분의 함수에 대해 Datadog은 라이브러리를 레이어로 설치할 것을 권장합니다. 람다 기능이 컨테이너 이미지로 배포된 경우 라이브러리를 gem으로 설치해야 합니다.
 
-   `datadog-lambda`젬의 부 버전은 항상 레이어 버전과 일치합니다. 예를 들어 datadog-람다 v0.5.0은 계층 버전 5의 내용과 일치합니다.
+   `datadog-lambda` gem의 보조 버전은 항상 레이어 버전과 일치합니다. 예를 들어 datadog-lambda v0.5.0은 레이어 버전 5의 내용과 일치합니다.
 
     - 옵션 A: 다음 형식의 ARN을 사용하여 람다 기능/함수에 사용할 [레이어 설정][1]:
 
@@ -316,16 +316,16 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
 
       `<AWS_REGION>`를 `us-east-1`와 같이 유효한 AWS 지역으로 대체합니다. 가능한 `RUNTIME`옵션은 `Ruby2-7`와 `Ruby3-2`입니다.
 
-    - 옵션 B: 사전 구축된 Datadog 람다 레이어를 사용할 수 없는 경우, 대신 젬파일에 추가하여 젬`datadog-lambda`와 `ddtrace`을 설치할 수 있습니다:
+    - 옵션 B: 사전 구축된 Datadog 람다 레이어를 사용할 수 없는 경우, 대신 Gemfile에 추가하여 gem `datadog-lambda`와 `ddtrace`을 설치할 수 있습니다:
 
       ```Gemfile
       gem 'datadog-lambda'
       gem 'ddtrace'
       ```
 
-      `ddtrace`는 네이티브 확장을 포함하며 네이티브 확장은 아마존 리눅스(Amazon Linux)에 대해 컴파일되어야 AWS 람바와 함께 작동할 수 있습니다. 그러므로 Datadog는 람다를 컨테이너 이미지로 빌드하고 구축할 것을 권장합니다. 함수를 컨테이너 이미지로 구축할 수 없고 Datadog APM을 사용하길 원한다면 Datadog는 람다 라이브러리를 젬 대신 레이어로 설치할 것을 권장합니다.
+      `ddtrace`는 네이티브 확장을 포함하며 네이티브 확장은 아마존 리눅스(Amazon Linux)에 대해 컴파일되어야 AWS 람바와 함께 작동할 수 있습니다. 그러므로 Datadog은 람다를 컨테이너 이미지로 빌드하고 구축할 것을 권장합니다. 함수를 컨테이너 이미지로 구축할 수 없고 Datadog APM을 사용하길 원한다면 Datadog은 람다 라이브러리를 gem 대신 레이어로 설치할 것을 권장합니다.
 
-      함수의 Dockerfile에서 `bundle install` 실행 전 `gcc`, `gmp-devel`, `make`를 설치하여 네이티브 확장이 성공적으로 컴파일되도록 합니다.
+      함수의 도커 파일에서 `bundle install` 실행 전 `gcc`, `gmp-devel`, `make`를 설치하여 네이티브 확장이 성공적으로 컴파일되도록 합니다.
 
       ```dockerfile
       FROM <base image>
@@ -337,9 +337,9 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
       RUN bundle install
       ```
 
-2. Datadog Lambda Extension을 설치합니다.
+2. Datadog 람다 확장 설치
 
-    - 옵션 A: 다음 형식의 ARN을 사용하여 람다 기능/함수에 사용할 [레이어 설정][1]:
+    - 옵션 A: 다음 형식의 ARN을 사용하여 람다 함수에 사용할 [레이어 설정][1]:
 
       ```sh
       # Use this format for x86-based Lambda deployed in AWS commercial regions
@@ -357,7 +357,7 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
 
       `<AWS_REGION>`를 `us-east-1`와 같이 유효한 AWS 지역으로 대체합니다. 
 
-    - 옵션 B: 도커파일에 다음을 추가하여 Datadog 람다 확장을 컨테이너 이미지에 추가합니다:
+    - 옵션 B: 도커 파일에 다음을 추가하여 Datadog 람다 확장을 컨테이너 이미지에 추가합니다:
 
       ```dockerfile
       COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
@@ -370,7 +370,7 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
 [2]: https://gallery.ecr.aws/datadog/lambda-extension
 {{< /site-region >}}
 
-3. 람다 기능/함수 설정하기
+3. 람다 함수 설정하기
 
    Datadog APM을 활성화하고 Datadog 람다 라이브러리에서 제공하는 래퍼를 사용하여 람다 핸들러 함수를 래핑합니다.
 
@@ -406,7 +406,7 @@ Datadog 서버리스 플러그인을 설치하고 설정하려면 다음 절차�
 - [고급 설정][6]을 참조하여
     - 태그를 활용해 텔레메트리 연결
     - AWS API Gateway, SQS 등의 텔레메트리 수집
-    - Lambda 리퀘스트 및 리스폰스 페이로드 확인
+    - 람다 요청과 응답 페이로드 캡처
     - Lambda 함수의 오류를 소스 코드에 링크
     - 로그나 트레이스에서 민감 정보를 필터링 또는 스크러빙
 
