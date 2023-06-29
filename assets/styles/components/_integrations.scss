@@ -841,14 +841,14 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 }
             }
             .modal-info-body {
-                .modal-slides {
+                .modal-items {
                     display: grid;
                     grid-template-columns: 1fr;
                     grid-template-rows: 1fr;
-                    .modal-slide:not(.video-item){
+                    .modal-item:not(.video-item){
                         border: 1px solid #e2e5ed;
                     }
-                    .modal-slide {
+                    .modal-item {
                         max-height: 540px;
                         max-width: 1026px;
                         grid-column: 1/-1;
@@ -896,7 +896,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
 
             }
         }
-        .modal-items {
+        .modal__all-items {
             margin-top: 28px;
             display: flex;
             justify-content: center;
@@ -906,7 +906,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 width: 75%;
                 gap: 20px 16px;
             }
-            button.modal-item {
+            button.modal__item {
                 width: 96px;
                 height: 60px;
                 background-repeat: no-repeat;
