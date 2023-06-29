@@ -122,8 +122,6 @@ Provide the following values:
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: https://us3.datadoghq.com/signup
 [2]: https://docs.datadoghq.com/integrations/guide/azure-portal/
 [3]: https://portal.azure.com/#blade/HubsExtension/BrowseResource/resourceType/Microsoft.Datadog%2Fmonitors
@@ -136,3 +134,5 @@ Provide the following values:
 
 [1]: ?site=us3
 {{< /site-region >}}
+
+{{< partial name="whats-next/whats-next.html" >}}
