@@ -17,7 +17,7 @@ If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app s
 
 ## Automatic View Tracking
 
-If you are using Flutter Navigator v2.0, your setup for automatic view tracking will differ depending on your routing middleware. Here, we document how to integrate with the most popular routing packages.
+If you are using Flutter Navigator v2.0, your setup for automatic view tracking differs depending on your routing middleware. Here, we document how to integrate with the most popular routing packages.
 
 ### go_router
 
@@ -79,7 +79,7 @@ This new object replaces the simpler `DatadogNavigationObserver` in creation of 
 
 ### Beamer
 
-[Beamer][10] can use the `DatadogNavigationObserver` as an argument to `BeamerDelegate`
+[Beamer][10] can use the `DatadogNavigationObserver` as an argument to `BeamerDelegate`:
 
 ```dart
 final routerDelegate = BeamerDelegate(

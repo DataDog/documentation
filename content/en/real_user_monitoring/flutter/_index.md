@@ -56,7 +56,7 @@ If you are not using named routes, you can use `DatadogRouteAwareMixin` in conju
 
 ### Flutter Navigator v2
 
-If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup will vary based on the routing middleware you are using, if any. Since [go_router][11], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [go_router][11], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
 
 ```dart
 final _router = GoRouter(
@@ -73,7 +73,7 @@ MaterialApp.router(
 )
 ```
 
-For examples that use routers other than `go_router` see Advanced Configuration - Automatic View Tracking
+For examples that use routers other than `go_router`, see [Advanced Configuration - Automatic View Tracking][12].
 
 
 ### Renaming Views
@@ -135,3 +135,4 @@ In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConf
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [11]: https://pub.dev/packages/go_router
+[12]: /real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking
