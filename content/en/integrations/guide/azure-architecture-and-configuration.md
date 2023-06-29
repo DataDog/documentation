@@ -206,7 +206,7 @@ Reasons for manually managing diagnostic settings include:
        **Note**: You can also use [exclusion filters][1] to exclude these logs from being indexed upon ingestion into Datadog.
 
   3. Cross-subscription log forwarding
-       This can be useful if you only want to send logs and no other data from a specific subscription. The Datadog resource used for log forwarding still collects metrics and data from its own subscription. You must register the resource provider `Microsoft.Datadog` in each subscription intended to send logs before creating the diagnostic settings.
+       Cross-subscription log forwarding is useful for sending logs and no other data from a specific subscription. To enable cross-subscription log forwarding, register the `Microsoft.Datadog` resource provider in each subscription intended to send logs before creating the diagnostic settings. The Datadog resource used for log forwarding still collects metrics and data from its own subscription and any subscriptions configured through the Monitored resources blade.
 
        {{< img src="integrations/guide/azure_architecture_and_configuration/datadog_agent_build_resource_providers.png" alt="Screenshot of the resource providers page in the Azure Portal with Microsoft. Datadog showing the status of registered." >}}
 
