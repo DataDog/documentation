@@ -47,7 +47,7 @@ These categories are collected by the following language Tracing Libraries:
 | Email               | 1      | 1    | 1       | 4   | 1      |
 | Client IP           | 1      | 3    | 1       | 4   | 5      |
 | Database statements | 2      | 1    | 1       | 2   | 2      |
-| Geographic location | 4      | 0    | 0       | 4   | 1      |
+| Geographic location | 4      | 4    | 4       | 4   | 1      |
 | URI parameters      | 2      | 2    | 3       | 2   | 3      |
 | URI userinfo        | 4      | 4    | 4       | 2   | 4      |
 
