@@ -869,14 +869,17 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 }
                 .modal-item-descriptions {
                     margin-top: 12px;
+                    @media(min-width: 1200px){
+                        margin-top: 16px;
+                    }
                     .modal-item-description {
-                        display: grid;
-                        grid-template-columns: repeat(12, 1fr);
+                        display: flex;
                         .count {
-                            grid-column: 1;
-                        }
-                        .caption {
-                            grid-column: 2/-1;
+                            margin-top: 3px;
+                            margin-right: 12px;
+                            @media(min-width: 1200px){
+                                margin-right: 16px;
+                            }
                         }
                     }
                 }
