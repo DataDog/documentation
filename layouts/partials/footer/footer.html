@@ -16,7 +16,9 @@
 {{ partial "footer.html" . }}
 
 <!--- global modals --->
-{{ partial "global-modals/global-modals.html" . }}
+{{ partialCached "global-modals/global-modals.html" . }}
 
+{{ if in .Params.categories "marketplace" }}
 <!--- integrations carousel modal --->
 {{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
+{{ end }}
