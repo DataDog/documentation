@@ -71,9 +71,9 @@ To stop session recordings, remove `startSessionReplayRecording()` and set `sess
 
 [1]: /real_user_monitoring/browser/#setup
 [2]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
-## Mobile Setup
+## Mobile Session Replay
 
-Learn more about the [Mobile Setup for Session Replay][5].
+Learn more about the [Session Replay for Mobile][5].
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

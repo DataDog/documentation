@@ -12,3 +12,28 @@ further_reading:
       text: Session Replay
 ---
 
+{{< tabs >}}
+{{% tab "Android" %}}
+
+[ add android content]
+
+   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+
+   insert code block content
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "iOS" %}}
+
+[ add iOS content]
+
+   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+
+   insert code block content
+
+   {{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}

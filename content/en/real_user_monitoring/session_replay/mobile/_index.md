@@ -1,5 +1,5 @@
 ---
-title: Session Replay for Mobile
+title: Mobile Session Replay
 kind: documentation
 description: Describes how to setup Session Replay for mobile devices
 aliases:
@@ -36,7 +36,7 @@ Learn how to [Troubleshoot Mobile Session Replay][4].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/mobile/setup_and_configure
+[1]: /real_user_monitoring/session_replay/mobile/setup_and_configuration
 [2]: /real_user_monitoring/session_replay/mobile/privacy_options
 [3]: /real_user_monitoring/session_replay/mobile/performance_benchmarks
 [4]: /real_user_monitoring/session_replay/mobile/troubleshooting
