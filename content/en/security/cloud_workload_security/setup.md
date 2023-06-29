@@ -140,7 +140,6 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
-  -e DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=true \ # to enable the collection of CWS network events
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
@@ -181,17 +180,15 @@ Add the following settings to the `env` section of `security-agent` and `system-
 
 {{% /tab %}}
 
-{{% tab "Host (Others)" %}}
+{{% tab "Host" %}}
 
 For a package-based deployment, the Datadog package has to be deployed. Install the package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
-
-By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and the `system-probe.yaml` files need to be updated.
 
 ```bash
 # /etc/datadog-agent/datadog.yaml file
 remote_configuration:
   ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable remote configuration.
+  ## Set to true to enable full Cloud Workload Security.
   enabled: true
 ```
 
@@ -215,7 +212,14 @@ runtime_security_config:
     enabled: true
 ```
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+```bash
+# /etc/datadog-agent/datadog.yaml file
+remote_configuration:
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable remote configuration.
+  enabled: true
+```
+
 {{% /tab %}}
 
 {{% tab "Amazon Elastic Beanstalk" %}}
@@ -357,6 +361,19 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Enable Remote Configuration
+
+<div class="alert alert-info">Remote Configuration for CWS is in beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+
+[Remote Configuration][4] is a Datadog capability that allows you to remotely configure the behavior of Datadog resources deployed in your infrastructure. For CWS, enabling Remote Configuration allows you to receive new and updated Agent rules automatically when they're released.
+
+To use Remote Configuration with CWS, add the Remote Configuration scope to a new or existing API key, and then update your Datadog Agent configuration. See the [Remote Configuration setup instructions][5] for more information.
+
+**Notes**:
+
+- Without Remote Configuration, new and updated Agent rules must be manually deployed to the Datadog Agent.
+- At this time, Remote Configuration is only available for default rules. Custom rules must be manually deployed to the Datadog Agent.
 
 ## Further Reading
 
