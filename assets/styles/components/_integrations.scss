@@ -804,7 +804,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     .carousel-item-description {
         display: flex;
         .item-counter {
-            margin-top: 3px;
+            margin-top: 2px;
             margin-right: 12px;
             @media(min-width: 1200px){
                 margin-right: 16px;
