@@ -94,6 +94,34 @@ By default, Azure links your current Datadog organization to your Datadog resour
 
 When the OAuth flow is complete, verify the Datadog organization name is correct.
 
+[1]: https://docs.datadoghq.com/getting_started/site/
+[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+[5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+{{% /tab %}}
+{{% tab "Create" %}}
+
+#### Basics {#basics-create}
+
+After selecting to create a new Datadog organization, the portal displays a form for creating both the Datadog resource and the new Datadog organization:
+{{< img src="integrations/azure/azure-us3-create-dd-resource2.png" alt="Azure US3 create a Datadog resource" responsive="true" style="width:90%;">}}
+
+Provide the following values:
+
+| Property             | Description                                                                                                                                                                                                                  |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Subscription         | The Azure subscription you want to monitor with Datadog. The Datadog resource exists in this subscription. You must have owner access.                                                                                       |
+| Resource group       | Create a new resource group or use an existing one. A [resource group][2] is a container that holds related resources for an Azure solution.                                                                                 |
+| Resource name        | The name for the Datadog resource. This name is assigned to the new Datadog organization.                                                                                                                                    |
+| Location             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
+| Datadog organization | The Datadog organization name is set to the resource name, and the Datadog site is set to US3.                                                                                                                                |
+| Pricing plan         | A list of the available Datadog pricing plans. If you have a private offer, it iss available in this dropdown.                                                                                                                 |
+| Billing term         | Monthly.                                                                                                                                                                                                                      |
+
+[1]: https://docs.datadoghq.com/getting_started/site/
+[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Virtual machine agent
 
 To see a list of virtual machines (VMs) in the subscription, select **Virtual machine agent** in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
@@ -122,34 +150,6 @@ If the Datadog Agent was installed with the Azure VM extension, you can uninstal
 
 If the Agent was installed using a different method, you can not use the Datadog resource to deploy or remove the Agent, but information about the Agent is still reflected on this page.
 
-
-[1]: https://docs.datadoghq.com/getting_started/site/
-[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
-[5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
-{{% /tab %}}
-{{% tab "Create" %}}
-
-#### Basics {#basics-create}
-
-After selecting to create a new Datadog organization, the portal displays a form for creating both the Datadog resource and the new Datadog organization:
-{{< img src="integrations/azure/azure-us3-create-dd-resource2.png" alt="Azure US3 create a Datadog resource" responsive="true" style="width:90%;">}}
-
-Provide the following values:
-
-| Property             | Description                                                                                                                                                                                                                  |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Subscription         | The Azure subscription you want to monitor with Datadog. The Datadog resource exists in this subscription. You must have owner access.                                                                                       |
-| Resource group       | Create a new resource group or use an existing one. A [resource group][2] is a container that holds related resources for an Azure solution.                                                                                 |
-| Resource name        | The name for the Datadog resource. This name is assigned to the new Datadog organization.                                                                                                                                    |
-| Location             | The location is West US2—this is the location where Datadog's US3 site is hosted in Azure. This has no impact on your use of Datadog. Like all [Datadog sites][1], the US3 site is entirely SaaS and supports monitoring all Azure regions as well as other cloud providers and on-premises hosts. |
-| Datadog organization | The Datadog organization name is set to the resource name, and the Datadog site is set to US3.                                                                                                                                |
-| Pricing plan         | A list of the available Datadog pricing plans. If you have a private offer, it iss available in this dropdown.                                                                                                                 |
-| Billing term         | Monthly.                                                                                                                                                                                                                      |
-
-[1]: https://docs.datadoghq.com/getting_started/site/
-[2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
-{{% /tab %}}
-{{< /tabs >}}
 
 [1]: https://us3.datadoghq.com/signup
 [2]: https://docs.datadoghq.com/integrations/guide/azure-portal/
