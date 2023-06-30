@@ -31,13 +31,13 @@ Allocations
 Allocated Memory
 : The amount of heap memory allocated by each method, including allocations which were subsequently freed.
 
-Heap Live Objects
-: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+Heap Live Objects (beta)
+: The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for identifying potential memory leaks.<br />
 _Requires: Java 11_ <br />
 _Since: 1.17.0_
 
-Heap Live Size
-: The amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />
+Heap Live Size (beta)
+: The estimated amount of heap memory allocated by each method that has not yet been garbage collected. This is useful for establishing the lower boundary of the heap memory usage of your service and identifying potential memory leaks.<br />
 _Requires: Java 11_ <br />
 _Since: 1.17.0_
 
