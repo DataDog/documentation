@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | Threat Detection | 1.8.0  |
 | Threat Protection| 1.9.0 |
 | Vulnerability Management for Open Source Software (OSS) | 1.1.4 |
-| Vulnerability Management for Code (beta) | 1.15.0|
+| Vulnerability Management for Code-level (beta) | 1.15.0|
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.
 
@@ -29,6 +29,7 @@ The minimum tracer version to get all supported ASM capabilities for Java is 1.1
 | AWS ECS       | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
 | AWS Lambda    | {{< X >}}         |                           |   
+| Azure App Service | {{< X >}}     | {{< X >}}                 |
 
 
 ## Language and framework compatibility
@@ -56,11 +57,11 @@ Datadog does not officially support any early-access versions of Java.
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is supported on all frameworks
-- If **Vulnerability Management for Code** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If **Vulnerability Management for Code-level** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code  supported? |
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level  supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -87,7 +88,7 @@ Datadog does not officially support any early-access versions of Java.
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is supported on all frameworks
-- If **Vulnerability Management for Code** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+- If **Vulnerability Management for Code-level** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
@@ -115,8 +116,8 @@ Datadog does not officially support any early-access versions of Java.
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is supported on all frameworks
-- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default
-- If your framework is not supported below, **Vulnerability Management for Code** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+- If your framework is not supported below, **Vulnerability Management for Code-level** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
 | Database                | Versions | Threat Detection supported? |  Vulnerability Management for Code supported? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
