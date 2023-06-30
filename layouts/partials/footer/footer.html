@@ -13,12 +13,10 @@
     {{ $.Scratch.Set "data" $dot.Page.Site.Data.partials.footer }}
 {{ end }}
 
-{{ partial "footer.html" . }}
-
 <!--- global modals --->
-{{ partial "global-modals/global-modals.html" . }}
+{{ partialCached "global-modals/global-modals.html" . }}
 
-{{ if in .Params.categories "marketplace" }}
 <!--- integrations carousel modal --->
+{{ if in .Params.categories "marketplace" }}
 {{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
 {{ end }}
