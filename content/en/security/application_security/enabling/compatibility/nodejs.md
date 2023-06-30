@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | Threat Detection  | 3.13.1|
 | Threat Protection  | 3.19.0  |
 | Vulnerability Management for Open Source Software (OSS) |  2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
-| Vulnerability Management for Code (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
+| Vulnerability Management for Code-level (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.0.
 
@@ -79,7 +79,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - If your framework is not listed below, **Vulnerability Management for Code** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | express | >=4| {{< X >}}  |{{< X >}}  | {{< X >}} |
 
