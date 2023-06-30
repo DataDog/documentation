@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Test runs appear in a test details page after a Synthetic test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
+Test runs appear in a test details page after a Synthetic mobile test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
 ## Test properties
 
@@ -99,7 +99,7 @@ Common mobile test errors include:
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear in the **Events** tab under **Test Runs**. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][18] and enter `Event Type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
+Alerts from your Synthetic test monitors appear in the **Events** tab under **Test Runs**. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][7] and enter `Event Type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
 
 ## Further reading
 
@@ -111,4 +111,4 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [4]: /mobile_testing/mobile_tests/#define-scheduling-and-alert-conditions
 [5]: /synthetics/guide/uptime-percentage-widget/
 [6]: /help
-[7]: 
+[7]: /service_management/events/explorer/

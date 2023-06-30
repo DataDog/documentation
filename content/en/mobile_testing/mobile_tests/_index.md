@@ -11,50 +11,30 @@ further_reading:
   text: "Learn how to create Synthetic browser tests"
 ---
 
+<div class="alert alert-info">Mobile Application Testing is in private beta. To register, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" target="_blank">request access</a>.</div>
+
 ## Overview
 
 Mobile application tests are scenarios executed by Datadog on your iOS and Android applications. They run at configurable periodic intervals—from multiple device types—to verify that your applications are up and responding to requests and actions, and that any conditions defined in your scenarios are met. 
 
 Mobile tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
 
-<div class="alert alert-info">Mobile Application Testing is in private beta. To register, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" target="_blank">request access</a>.</div>
+You can create mobile tests in Datadog by navigating to [**UX Monitoring** > **New Test**][12] and selecting **Mobile Application Test**.
+
+{{< img src="mobile_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
 
 ## Configuration
 
 Define the configuration of your mobile test.
 
-1. Create a mobile application on the [Applications List section][2] in the [Synthetic Monitoring & Continuous Testing Settings page][3] and select it from the application dropdown menu.
+1. Create a mobile application on the [Applications List section][2] in the [Synthetic Monitoring & Continuous Testing Settings page][3] and select it from the mobile application dropdown menu.
 2. Select a **version** of your mobile application or click **Always run the latest version**.
 3. Add a **name** for your mobile test.
 4. Select **environment and additional tags** that relate to your mobile test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 4. Select **devices** including mobile devices and tablets to run your mobile test on.
 5. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency. 
 
-## Variables
-
-### Create local variables
-
-To create a local variable, click **Create a Local Variable** at the top right hand corner. You can select one of the following available builtins:
-
-`{{ numeric(n) }}`
-: Generates a numeric string with `n` digits.
-
-`{{ alphabetic(n) }}`
-: Generates an alphabetic string with `n` letters.
-
-`{{ alphanumeric(n) }}`
-: Generates an alphanumeric string with `n` characters.
-
-`{{ uuid }}`
-: Generates a version 4 universally unique identifier (UUID).
-
-`{{ date(n unit, format) }}`
-: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
-
-`{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
-
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
+{{% synthetics-variables %}}
 
 ### Use global variables
 
@@ -105,6 +85,28 @@ A notification is sent according to the set of alerting conditions. Use this sec
 
 For more information, see [Using Synthetic Test Monitors][7].
 
+## Run tests in CI
+
+You can run mobile tests in a CI pipeline by defining the `mobileApplicationVersionFilePath` option in a [test `synthetics.json` file][13] and a [global configuration `synthetics-ci.config` file][14] as needed. Global configuration file options take precedence over test configuration file options.
+
+In this example, the test `aaa-aaa-aaa` runs with the override application version found in `application/path`.
+
+```json
+// myTest.synthetics.json
+{
+  "tests": [
+    {
+      "id": "aaa-aaa-aaa",
+      "config": {
+        "mobileApplicationVersionFilePath": "application/path"
+      }
+    }
+  ]
+}
+```
+
+Then, run `$ datadog-ci synthetics run-tests --config synthetics-ci.config`.
+
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][8] can create, edit, and delete Synthetic mobile tests. To get create, edit, and delete access to Synthetic mobile tests, upgrade your user to one of those two [default roles][8].
@@ -134,3 +136,6 @@ You can restrict access to a mobile test based on the roles in your organization
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [10]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
 [11]: /mobile_testing/mobile_tests/steps/
+[12]: https://app.datadoghq.com/synthetics/mobile/create
+[13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
+[14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options

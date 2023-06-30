@@ -12,13 +12,23 @@ further_reading:
 
 Steps are a series of actions that you can record for a mobile test and edit or build on. To define the steps you want your mobile test to execute, either directly record them with the mobile test recording or add them manually. 
 
+## Launch a device
+
+To start recording and adding steps, select a device to launch a mobile test from the dropdown menu and click **Launch Device**. 
+
+{{< img src="mobile_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:70%" >}}
+
+Select **Show only available devices. Available devices load faster** to see the most available devices for shorter wait times. Click the **Device Connection Notification** button to enable notifications for when your device is ready.
+
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the Datadog mobile test recorder automatically launches a mobile application and records steps on your device.
+Once you click **Start Recording**, the Datadog mobile test recorder automatically launches your mobile application on a real device and records steps as you interact with your application.
+
+To stop recording, click **End Device Session** or **Save & Quit**.
 
 ## Manually added steps
 
-You can manually add and arrange steps on the left side of the mobile test recording.
+You can manually add, customize, and arrange steps on the left side of the mobile test recording.
 
 ### Assertion
 
@@ -26,9 +36,7 @@ Assertions allow you to validate that your browser test is in the state you expe
 
 To confirm your test ends in an expected state, you must end your mobile tests with an **assertion**.
 
-// replace
-
-{{< img src="synthetics/browser_tests/browser_test_assertions.png" alt="Options for assertions in a browser test step" style="width:70%;" >}}
+{{< img src="mobile_testing/assertions.png" alt="Options for assertions in a mobile test" style="width:60%;" >}}
 
 Some assertions validate the active page, the page the user last interacted with, such as a **click** or an **assertion** on a page element.
 
@@ -57,7 +65,9 @@ Create this assertion step to have your browser test confirm that the text you s
 
 ### Special actions
 
-To automatically record steps such as **Tap**, **Double Tap**, **Type Text**, **Scroll**, **Wait**, **Rotate Device**, and **Open Deep Link**, create this assertion step manually by clicking **Special Actions** and selecting an action type.
+To automatically record steps such as **Tap**, **Double Tap**, **Type Text**, **Scroll**, **Press Back**, **Wait**, **Device Rotation**, and **Open Deep Link**, create this assertion step manually by clicking **Special Actions** and selecting an action type.
+
+{{< img src="mobile_testing/special_actions.png" alt="Choose an action type to add an assertion step" style="width:60%;" >}}
 
 #### Scroll
 
@@ -65,31 +75,23 @@ Mobile tests automatically scroll to the elements that need to be interacted wit
 
 Specify the number of pixels you want the mobile test to scroll vertically and horizontally.
 
-// replace
+{{< img src="mobile_testing/scroll_step.png" alt="Scroll step in a mobile tst recording" style="width:60%;" >}}
 
-{{< img src="synthetics/browser_tests/browser_test_scroll_step.png" alt="Scroll step in a browser test recording Test Scroll Step" style="width:50%;" >}}
-
-By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Target Element** and select an element you want the browser test to scroll on.
+By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile test to scroll on.
 
 #### Wait
 
-By default, mobile tests wait for a page to be fully loaded before performing a step or the next step with a timeout of 60 seconds. 
-
 If you know that a page or page element takes more than 60 seconds to load, you can add a wait step with a max value of 300 seconds.
 
-// replace
+{{< img src="mobile_testing/wait_step.png" alt="Wait step in a mobile test recording" style="width:60%;" >}}
 
-{{< img src="synthetics/browser_tests/browser_test_wait_step.png" alt="Wait step in a browser test recording" style="width:50%;" >}}
-
-This additional time is systematically added to **every run** of your mobile test's recording.
+By default, mobile tests wait for a page to be fully loaded before performing a step or the next step with a timeout of 60 seconds. This additional time is systematically added to **every run** of your mobile test's recording.
 
 ### Variables
 
 Click **Variables** and select a variable creation type from the dropdown menu. 
 
-// replace
-
-{{< img src="synthetics/browser_tests/variables.png" alt="Browser Test Variables" style="width:60%;" >}}
+{{< img src="mobile_testing/builtin_variables.png" alt="Out-of-the-box variable templates" style="width:80%;" >}}
 
 To learn how to use variables inside of your steps, see [Use variables](#use-variables). For more information, see the [Variables section][1].
 
@@ -106,14 +108,14 @@ You can select one of the following available builtins:
 `{{ alphanumeric(n) }}`
 : Generates an alphanumeric string with `n` characters.
 
-`{{ uuid }}`
-: Generates a version 4 universally unique identifier (UUID).
-
 `{{ date(n unit, format) }}`
 : Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
 
 `{{ timestamp(n, unit) }}` 
 : Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
+
+`{{ uuid }}`
+: Generates a version 4 universally unique identifier (UUID).
 
 To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
 
@@ -135,19 +137,15 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
 3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
 
-// replace
-
-{{< img src="synthetics/browser_tests/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
+{{< img src="mobile_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
 
 ## Use variables
 
 To see all available variables on manually added steps, type `{{` in the input field.
 
-To use a variable on automatically recorded steps, click the **Inject this variable** icon to input the variable value while recording. 
+{{< img src="mobile_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:30%" >}}
 
-// replace
-
-{{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="Click on the test step to inject the value in your recorder page" video="true" width="100%" >}}
+To use a variable on automatically recorded steps, add a step name and specify the variable value in the **Type Text step** modal to input the variable value while recording. 
 
 ## Further reading
 

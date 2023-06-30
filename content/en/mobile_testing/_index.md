@@ -19,25 +19,22 @@ algolia:
 
 Mobile tests allow you to observe how your mobile applications are performing using **simulated requests and actions from real devices**. Datadog tracks the performance of your mobile applications and alerts you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes. 
 
-[**Computing SLOs**][4] on your key endpoints and user journeys makes it easier to stick to your application performance targets and ultimately provide a consistent customer experience.
-
-You can create mobile tests in Datadog by navigating to [**UX Monitoring** > **New Test**][1] and selecting **Mobile Application Test**.
+[**Computing SLOs**][1] on your key endpoints and user journeys makes it easier to stick to your application performance targets and provide a consistent customer experience.
 
 ## Upload a mobile application
 
-[Create a mobile application][2] for your Android or iOS application, upload the `.apk` or `.ipa` file, and specify an application version.
+[Create a mobile application][2] for your Android or iOS application by uploading an `.apk` or `.ipa` file and specifying the application version.
 
 ## Record mobile application tests
 
-[Create mobile tests][3] on critical user journeys and business journeys to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
+{{< img src="mobile_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:80%;">}}
 
-{{< img src="mobile_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:90%;">}}
+[Create mobile tests][3] on critical user journeys and business journeys to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/synthetics/mobile/create
+[1]: /service_management/service_level_objectives
 [2]: /mobile_testing/settings
 [3]: /mobile_testing/mobile_tests
-[4]: /service_management/service_level_objectives
