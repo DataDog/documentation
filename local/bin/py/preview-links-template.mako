@@ -27,7 +27,7 @@ ${h3} New or renamed files
 % endif
 
 % if deleted:
-${h3} New or renamed files
+${h3} Removed or renamed files (these should redirect)
 % for filename in added:
 * https://docs-staging.datadoghq.com/${branch}/${compile_filename(filename)}
 % endfor 
@@ -35,14 +35,13 @@ ${h3} New or renamed files
 
 % if renamed:
 ${h3} Renamed files
-${h3} New or renamed files
 % for filename in added:
 * https://docs-staging.datadoghq.com/${branch}/${compile_filename(filename)}
 % endfor 
 % endif
 
 % if modified:
-${h3} New or renamed files
+${h3} Modified Files
 % for filename in added:
 * https://docs-staging.datadoghq.com/${branch}/${compile_filename(filename)}
 % endfor 
