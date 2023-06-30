@@ -5,8 +5,6 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-aliases:
-- /integrations/azure/#log-collection
 ---
 
 ## Overview
