@@ -30,11 +30,11 @@ The **Code Insights** view keeps you informed about:
 - Profiling insights from [Watchdog Insights][13]
 
 The **Synthetic Test** feature allows you to:
-- Run Synthetic tests on your local environments.
-- Set custom parameters without altering the original test definition.
-- See test results locally in VS Code and in Datadog to access additional information.
-- Test only what matters by executing relevant tests at the same time.
-- Create a list of most frequently used Synthetic tests by adding them to **Favorites**. 
+- Run Synthetic tests on your local environments
+- Set custom parameters without altering the original test definition
+- See test results locally in VS Code and in Datadog to access additional information
+- Test only what matters by executing relevant tests at the same time
+- Create a list of most frequently used Synthetic tests by adding them to **Favorites** 
 
 ## Requirements
 
