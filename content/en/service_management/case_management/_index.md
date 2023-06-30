@@ -22,7 +22,7 @@ You can assign cases to users or teams, establishing clear lines of ownership th
 
 ## Create or update a case
 
-In the [Case Management][1] page, click the button **New Case** to create a new case. 
+On the [Case Management][1] page, click the **New Case** button to create a new case. 
 
 You can create or update cases from several other locations in Datadog:
 
@@ -74,7 +74,7 @@ Automate the creation of cases. In a new or existing workflow, add a step in the
 
 ## Take action
 
-Use case management to gather information, context, and resources to determine the proper action. This includes further investigation, escalating to an incident, or closing out a case. 
+Use Case Management to gather information, context, and resources to determine the proper action. This includes further investigation, escalating to an incident, or closing out a case. 
 
 {{< img src="/service_management/case_management/close_case.png" alt="Close a case by updating the status to Closed" style="width:100%;" >}}
 
