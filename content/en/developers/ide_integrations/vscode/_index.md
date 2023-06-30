@@ -16,12 +16,14 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  The Datadog extension for VS Code is in public beta. It is intended for Datadog users who have <a href="https://docs.datadoghq.com/synthetics/#pagetitle">Synthetic tests</a> set up already. The extension supports running <a href="https://docs.datadoghq.com/synthetics/api_tests/http_tests">HTTP tests</a> and <a href="https://docs.datadoghq.com/synthetics/browser_tests">browser tests</a>. If the extensions stops working unexpectedly, check for extension updates or <a href=#feedback>reach out to the team</a>.
+  The Datadog extension for VS Code is in public beta. It is intended for all developers that use Datadog products, and especially those using <a href="https://docs.datadoghq.com/synthetics/#pagetitle">Synthetic tests</a>. If the extension stops working unexpectedly, check for extension updates or <a href=#feedback>reach out to the team</a>.
 {{< /callout >}}
 
 ## Overview
 
 The Datadog extension for VS Code integrates with the Datadog platform to accelerate your development.
+
+{{< img src="/developers/ide_integrations/vscode/code-insights.png" alt="The Code Insights view." style="width:100%;" >}}
 
 The **Code Insights** view keeps you informed about:
 - Issues from [Error Tracking][10]
