@@ -13,13 +13,13 @@ The following ASM capabilities are supported in the Python library, for the spec
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.9.0   |
 | Threat Protection | 1.10.0  |
-| Open Source Vulnerability detection | 1.5.0  |
-| Custom Code Vulnerability detection (beta)  |  private beta  |
+| Vulnerability Management for Open Source Software (OSS) | 1.5.0  |
+| Vulnerability Management for Code-level (beta)  |  private beta  |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version. 
 
 ### Supported deployment types
-|Type           | Threats support   |  Vulnerabilities support  |
+|Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
@@ -57,15 +57,15 @@ And the library supports the following runtimes:
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detections is supported on all frameworks
+- **Vulnerability Management for OSS** is supported on all frameworks
 
 ### Supported frameworks
 
 
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
-| Django    | 1.8   |  {{< X >}} | {{< X >}}  |  |
-| Flask     | 0.10  |  {{< X >}} | {{< X >}}  |  |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
+| ------------------------ | ----------- | --------------- | ---------------------------------------------- | 
+| Django    | 1.8   |  {{< X >}} | {{< X >}}  |
+| Flask     | 0.10  |  {{< X >}} | {{< X >}}  |
 
 Support for query strings is not available for Flask.
 
@@ -81,9 +81,9 @@ Support for query strings is not available for Flask.
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- Open Source Vulnerability Detection is supported on all frameworks.
-- Threat Protection works at the HTTP request (input) layer, and so works for all databases by default.
-
+- **Vulnerability Management for OSS** is supported on all frameworks.
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+- 
 The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
 
 [1]: /tracing/trace_collection/compatibility/python/
