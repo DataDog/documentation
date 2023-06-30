@@ -98,7 +98,7 @@ When the OAuth flow is complete, verify the Datadog organization name is correct
 
 To see a list of virtual machines (VMs) in the subscription, select **Virtual machine agent** in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
 
-{{< img src="integrations/guide/azure_native_manual_setup.png" alt="The Datadog resource in Azure with Virtual machine agent selected and the Install extension option highlighted" responsive="true" style="width:90%;">}}
+{{< img src="integrations/guide/azure_native_manual_setup/azure_native_vm_extension.png" alt="The Datadog resource in Azure with Virtual machine agent selected and the Install extension option highlighted" responsive="true" style="width:90%;">}}
 
 For each VM, the following information is displayed:
 
