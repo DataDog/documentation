@@ -733,6 +733,25 @@
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
     }
   ],
+  "AggregateSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Aggregate spans returns \"OK\" response"
+    }
+  ],
+  "ListSpans": [
+    {
+      "group": "spans",
+      "suffix": "",
+      "description": "Search spans returns \"OK\" response"
+    },
+    {
+      "group": "spans",
+      "suffix": "_3495563906",
+      "description": "Search spans returns \"OK\" response with pagination"
+    }
+  ],
   "CreateSpansMetric": [
     {
       "group": "spans_metrics",

@@ -706,7 +706,7 @@
     "summary": "Get all processes"
   },
   "QueryScalarData": {
-    "description": "Query scalar values (as seen on Query Value, Table and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
+    "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",
     "request_description": "",
     "request_schema_description": "A wrapper request around one scalar query to be executed."
@@ -1073,6 +1073,22 @@
     "summary": "Update an existing incident service",
     "request_description": "Incident Service Payload.",
     "request_schema_description": "Update request with an incident service payload."
+  },
+  "AggregateSpans": {
+    "description": "The API endpoint to aggregate spans into buckets and compute metrics and timeseries.",
+    "summary": "Aggregate spans",
+    "request_description": "",
+    "request_schema_description": "The object sent with the request to retrieve a list of aggregated spans from your organization."
+  },
+  "ListSpansGet": {
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to see your latest spans.",
+    "summary": "Get a list of spans"
+  },
+  "ListSpans": {
+    "description": "List endpoint returns spans that match a span search query.\n[Results are paginated][1].\n\nUse this endpoint to build complex spans filtering and search.",
+    "summary": "Search spans",
+    "request_description": "",
+    "request_schema_description": "The request for a spans list."
   },
   "GetOnDemandConcurrencyCap": {
     "description": "Get the on-demand concurrency cap.",

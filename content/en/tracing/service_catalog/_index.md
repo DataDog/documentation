@@ -147,6 +147,7 @@ The Service Catalog write permission allows a user to modify service catalog dat
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
 - Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
 - Completing the onboarding process in the Discover Services UI
+- Updating service metadata in the UI
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 
