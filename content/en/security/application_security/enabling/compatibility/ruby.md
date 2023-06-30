@@ -56,7 +56,7 @@ These are supported on the following architectures:
 - **Vulnerability Management for Code** is not supported
 
 | Framework                | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
+| ------------------------ | ----------- | --------------- |
 | Rack          |  {{< X >}} |  {{< X >}} |
 | Rails         |  {{< X >}} |  {{< X >}} |
 | Sinatra       |  {{< X >}} |  {{< X >}} |
@@ -99,7 +99,7 @@ These are supported on the following architectures:
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
 - **Vulnerability Management for Code** is not supported
-- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below. 
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
