@@ -10,7 +10,7 @@ parser.add_argument('--added', help="A list of added files")
 
 args=parser.parse_args()
 
-comment_template = Template(filename='local/bin/py/preview-links-template.mako')             
+comment_template = Template(filename='local/bin/py/preview-links-template.mako')
 
 # It looks like renamed files are counted as removed/added. I'm going to leave "renamed" in for
 # now to see if this behavior is consistent. 
