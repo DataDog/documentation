@@ -94,6 +94,35 @@ By default, Azure links your current Datadog organization to your Datadog resour
 
 When the OAuth flow is complete, verify the Datadog organization name is correct.
 
+## Virtual machine agent
+
+To see a list of virtual machines (VMs) in the subscription, select **Virtual machine agent** in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
+
+{{< img src="integrations/guide/azure_native_manual_setup.png" alt="The Datadog resource in Azure with Virtual machine agent selected and the Install extension option highlighted" responsive="true" style="width:90%;">}}
+
+For each VM, the following information is displayed:
+
+| Column               | Description                                                                                                                                                    |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Resource name        | The VM's name                                                                                                                                                  |
+| Resource status      | Whether the VM is stopped or running. The Datadog Agent can only be installed on a running VM. If the VM is stopped, installing the Datadog Agent is disabled. |
+| Agent version        | The Datadog Agent version number                                                                                                                               |
+| Agent status         | Whether the Datadog Agent is running on the VM.                                                                                                                |
+| Integrations enabled | The key metrics being collected by enabled integrations in the Datadog Agent.                                                                                  |
+| Install method       | The specific tool used to install the Datadog Agent, such as Chef, Azure VM extension, etc.                                                                    |
+| Sending logs         | Whether the Datadog Agent is sending logs to Datadog.                                                                                                          |
+
+#### Install
+
+To install the Datadog Agent, select the appropriate VM, then click **Install Agent**. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
+
+#### Uninstall
+
+If the Datadog Agent was installed with the Azure VM extension, you can uninstall the Agent by selecting the appropriate VM, then click **Uninstall Agent**.
+
+If the Agent was installed using a different method, you can not use the Datadog resource to deploy or remove the Agent, but information about the Agent is still reflected on this page.
+
+
 [1]: https://docs.datadoghq.com/getting_started/site/
 [2]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
 [5]: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview#resource-groups
