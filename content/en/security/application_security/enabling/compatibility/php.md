@@ -23,7 +23,7 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type           | Threats support   |  Vulnerabilities support  |
+|Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         |                           |
 | Kubernetes    | {{< X >}}         |                           | 
