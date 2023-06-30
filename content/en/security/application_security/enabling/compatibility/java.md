@@ -22,7 +22,7 @@ The minimum tracer version to get all supported ASM capabilities for Java is 1.1
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.      
 
 ### Supported deployment types
-|Type           | Threats support   |  Vulnerabilities support  |
+|Type           | Threat Detection support |  Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
@@ -31,6 +31,7 @@ The minimum tracer version to get all supported ASM capabilities for Java is 1.1
 | AWS Lambda    | {{< X >}}         |                           |   
 | Azure App Service | {{< X >}}     | {{< X >}}                 |
 
+**Note**: Azure App Service is supported for **web applications only**. ASM doesn't support Azure Functions.
 
 ## Language and framework compatibility
 
