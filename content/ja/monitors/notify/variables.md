@@ -1,14 +1,17 @@
 ---
 description: モニター通知をカスタマイズするには次の変数を使用します
 further_reading:
-- link: /monitors/create/
+- link: /monitors/guide/template-variable-evaluation/
+  tag: ガイド
+  text: テンプレート変数の評価による算術演算と関数の実行
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知
 - link: /monitors/manage/
-  tag: ドキュメント
+  tag: Documentation
   text: モニターの管理
 kind: documentation
 title: 変数
@@ -225,6 +228,9 @@ title: 変数
 {{% /tab %}}
 {{< /tabs >}}
 
+`alert` または `warning` の状態に遷移する条件ブロックを **@-notifications** ハンドルで構成した場合、そのハンドルに回復通知を送るために、対応する `recovery` 条件を構成することが推奨されます。
+
+**注**: 構成された条件変数の**外側**に置かれたテキストまたは通知ハンドルは、モニターの状態遷移ごとに起動されます。構成された条件変数の**内側**に置かれたテキストまたは通知ハンドルは、モニター状態の遷移がその条件に一致する場合にのみ呼び出されます。
 
 ## 属性変数とタグ変数
 
@@ -302,7 +308,7 @@ This alert was triggered on {{ @machine_id.name }}
 
 ### 一致する属性/タグ変数
 
-_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI モニター][5]で使用できます。_
+_[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モニター][4]、[CI モニター][5]、[データベースモニタリングモニター][8]で使用できます。_
 
 モニタークエリに一致するログ、トレーススパン、RUM イベント、CI パイプラインまたは CI テストイベントから**任意の**属性またはタグを含めるには、次の変数を使用します。
 
@@ -310,9 +316,11 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 |-----------------|--------------------------------------------------|
 | ログ             | `{{log.attributes.key}}` または `{{log.tags.key}}`   |
 | トレース分析 | `{{span.attributes.key}}` または `{{span.tags.key}}` |
+| エラー追跡  | `{{span.attributes.[error.message]}}`             |
 | RUM             | `{{rum.attributes.key}}` または `{{rum.tags.key}}`   |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
+| データベースモニタリング | `{{databasemonitoring.attributes.key}}`      |
 
 `key:value` ペアの場合、変数 `{{log.tags.key}}` はアラートメッセージに `value` をレンダリングします。
 
@@ -324,7 +332,7 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 ...
 ```
 
-{{< img src="monitors/notifications/tag_attribute_variables.png" alt="一致する属性変数の構文"  style="width:90%;">}}
+{{< img src="monitors/notifications/tag_attribute_variables.png" alt="一致する属性変数の構文" style="width:90%;">}}
 
 メッセージは、**属性が存在する場合**、クエリに一致する選択されたログの `error.message` 属性をレンダリングします。
 
@@ -334,13 +342,16 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 
 #### 予約済み属性
 
-ログ、スパン、RUM イベントには、次の構文の変数で使用できる一般的な予約済み属性があります。
+ログ、イベント管理、スパン、RUM、CI パイプライン、CI テストイベントには、次の構文の変数で使用できる一般的な予約済み属性があります。
 
 | モニターの種類    | 変数構文   | 第 1 レベルの属性 |
 |-----------------|-------------------|------------------------|
-| ログ             | `{{log.key}}`     | `message`、`service`、`status`、`source`、`span_id`、`timestamp`、`trace_id` |
-| トレース分析 | `{{span.key}}`    | `env`、`operation_name`、`resource_name`、`service`、`status`、`span_id`、`timestamp`、`trace_id`、`type` |
-| RUM             | `{{rum.key}}`     | `service`、`status`、`timestamp` |
+| ログ             | `{{log.key}}`     | `message`、`service`、`status`、`source`、`span_id`、`timestamp`、`trace_id`、`link` |
+| トレース分析 | `{{span.key}}`    | `env`、`operation_name`、`resource_name`、`service`、`status`、`span_id`、`timestamp`、`trace_id`、`type`、`link` |
+| RUM             | `{{rum.key}}`     | `service`、`status`、`timestamp`、`link` |
+| イベント             | `{{event.key}}`     | `id`、`title`、`text`、`host.name`、`tags` |
+| CI Pipeline             | `{{cipipeline.key}}`     | `service`、`env`、`resource_name`、`ci_level`、`trace_id`、`span_id`、`pipeline_fingerprint`、`operation_name`、`ci_partial_array`、`status`、`timestamp`、`link` |
+| CI Test             | `{{citest.key}}`     | `service`、`env`、`resource_name`、`error.message`、`trace_id`、`span_id`、`operation_name`、`status`、`timestamp`、`link` |
 
 一致するイベントの定義に属性が含まれていない場合、変数は空になります。
 
@@ -385,7 +396,7 @@ _[ログモニター][2]、[トレース分析モニター][3] (APM)、[RUM モ�
 | `{{value}}`                    | メトリクスベースのクエリモニターのアラートに違反した値。            |
 | `{{threshold}}`                | モニターのアラート条件に設定されたアラートしきい値の値。       |
 | `{{warn_threshold}}`           | モニターのアラート条件に設定された警告しきい値の値。     |
-| `{{ok_threshold}}`             | モニターを回復した値。                                         |
+| `{{ok_threshold}}`             | サービスチェックモニターを回復した値。                            |
 | `{{comparator}}`               | モニターのアラート条件に設定された関係値。                   |
 | `{{first_triggered_at}}`       | モニターが最初にトリガーされた UTC 日時。                       |
 | `{{first_triggered_at_epoch}}` | モニターが最初にトリガーされた UTC 日時（エポックミリ秒）。 |
@@ -488,7 +499,7 @@ https://app.datadoghq.com/monitors/manage?q=scope:host:{{host.name}}
 
 
 
-[1]: /ja/monitors/create/#monitor-types
+[1]: /ja/monitors/types
 {{% /tab %}}
 {{% tab "Logs" %}}
 
@@ -558,10 +569,15 @@ https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*10
 https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
 ```
 
-[1]: /ja/monitors/create/configuration/#alert-grouping
-[2]: /ja/monitors/create/types/log/
-[3]: /ja/monitors/create/types/apm/?tab=analytics
-[4]: /ja/monitors/create/types/real_user_monitoring/
-[5]: /ja/monitors/create/types/ci/
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/monitors/configuration/#alert-grouping
+[2]: /ja/monitors/types/log/
+[3]: /ja/monitors/types/apm/?tab=analytics
+[4]: /ja/monitors/types/real_user_monitoring/
+[5]: /ja/monitors/types/ci/
 [6]: /ja/monitors/guide/template-variable-evaluation/
 [7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+[8]: /ja/monitors/types/database_monitoring/

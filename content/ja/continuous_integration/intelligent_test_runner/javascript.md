@@ -24,6 +24,9 @@ Intelligent Test Runner は、以下のバージョンとテストフレーム�
 * `cucumber-js>=7.0.0`
   * `dd-trace>=3.16.0` または `dd-trace>=2.29.0` 以降
   * コードカバレッジを有効にするために [`nyc`][1] で cucumber-js を実行します。
+* `cypress>=6.7.0`
+  * `dd-trace>=4.2.0`、`dd-trace>=3.23.0` または `dd-trace>=2.36.0` 以降。
+  * コードカバレッジで Web アプリケーションをインスツルメンテーションします。詳しくは [Cypress の設定](#cypress-setup)でご確認ください。
 
 ## セットアップ
 
@@ -41,9 +44,13 @@ Intelligent Test Runner を有効にするには、以下の環境変数を設�
 NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app DD_CIVISIBILITY_AGENTLESS_ENABLED=true DD_API_KEY=$API_KEY DD_APPLICATION_KEY=$APP_KEY yarn test
 {{< /code-block >}}
 
+### Cypress の設定
+
+Intelligent Test Runner for Cypress を動作させるためには、Web アプリケーションにコードカバレッジをインスツルメンテーションする必要があります。コードカバレッジの有効化については、[Cypress ドキュメント][4]で詳しく説明されています。コードカバレッジを有効にしたことを確認するには、Cypress で Web アプリに移動して、グローバル変数 `window.__coverage__` を確認します。これは、`dd-trace` が Intelligent Test Runner のコードカバレッジを収集するために使用するものです。
+
 
 #### UI アクティベーション
-環境変数の設定に加えて、お客様またはお客様の組織で "Intelligent Test Runner Activation" 権限を持つユーザーが、[テストサービス設定][4]ページで Intelligent Test Runner を有効にする必要があります。
+環境変数の設定に加えて、お客様またはお客様の組織で "Intelligent Test Runner Activation" 権限を持つユーザーが、[テストサービス設定][5]ページで Intelligent Test Runner を有効にする必要があります。
 
 {{< img src="continuous_integration/itr_overview.png" alt="Datadog の CI セクションのテストサービス設定で Intelligent test runner を有効にする">}}
 
@@ -57,4 +64,5 @@ Intelligent test runner for Javascript は、個々のテストではなく、_�
 [1]: https://www.npmjs.com/package/nyc
 [2]: /ja/continuous_integration/tests/javascript
 [3]: https://app.datadoghq.com/organization-settings/application-keys
-[4]: https://app.datadoghq.com/ci/settings/test-service
+[4]: https://docs.cypress.io/guides/tooling/code-coverage#Instrumenting-code
+[5]: https://app.datadoghq.com/ci/settings/test-service

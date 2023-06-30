@@ -18,7 +18,7 @@ title: カスタムメソッドをインスツルメントして、ビジネス�
 
 _8 分で読了_
 
-{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="分析ビュー"  style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_1.png" alt="分析ビュー" style="width:90%;">}}
 
 ビジネスロジックを詳細に可視化するために、Datadog APM では、ニーズと実装に基づいてトレースを構成するスパンをカスタマイズできます。これにより、コードベース内のあらゆるメソッド、さらにはメソッド内の特定のコンポーネントをトレースすることができます。これを使用すれば、アプリケーションの重要な領域を最適な粒度で最適化、監視できます。
 
@@ -30,7 +30,7 @@ Datadog は、ウェブサービス、データベース、キャッシュなど
 
 以下の例では、`BackupLedger.write` メソッド全体をトレースして、実行時間とステータスを測定します。`BackupLedger.write` は、トランザクション台帳の現在の状態をメモリに保存してから、支払いデータベースを呼び出して新しい顧客請求を送信するアクションです。これは、支払いサービスの `charge` エンドポイントがヒットしたときに発生します。
 
-{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="分析ビュー"  style="width:90%;">}}
+{{< img src="tracing/guide/custom_span/custom_span_2.png" alt="分析ビュー" style="width:90%;">}}
 
 `http.request POST /charge/` スパンは、直接の子スパンがないと多くの時間がかかります。これは、このリクエストがその動作に対するより優れた情報を得るために、さらなるインスツルメンテーションを必要とする手がかりです。使用しているプログラミング言語に応じて、関数を異なる方法で装飾する必要があります。
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
@@ -77,6 +77,10 @@ public class BackupLedger {
     for (Transaction transaction : transactions) {
       // `GlobalTracer` を使用してインラインコードのブロックをトレースします
       Tracer tracer = GlobalTracer.get();
+     // 注: 以下の try with resource ブロックのスコープは、
+     // コードブロックの最後で自動的に閉じられます。
+     // resource 文で try を使用しない場合は、scope.close() 
+     // を呼び出す必要があります。
       try (Scope scope = tracer.buildSpan("BackupLedger.persist").startActive(true)) {
         // スパンにカスタムメタデータを追加します
         scope.span().setTag("transaction.id", transaction.getId());
@@ -226,9 +230,11 @@ function write (transactions) {
   // `tracer.trace` コンテキストマネージャーを使用してインラインコードのブロックをトレースします
   tracer.trace('BackupLedger.write', () => {
     for (const transaction of transactions) {
+     tracer.trace('BackupLedger.persist' , (span) => {
       // "persist_transaction" スパンにカスタムメタデータを追加します
-      span.setTag('transaction.id', transaction.id)
-      this.ledger[transaction.id] = transaction
+       span.setTag('transaction.id', transaction.id)
+       this.ledger[transaction.id] = transaction
+      })
     }
   })
 
@@ -347,7 +353,7 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
 1. **[Service List][1]** に移動し、カスタムスパンを追加したサービスを特定してから、**サービス詳細画面**に移動します。サービス詳細画面で、追加した**特定のリソース**をクリックし、時間フィルターを `The past 15 minutes` に変更して、スパンサマリーテーブルまでスクロールします。
 
-    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="スパンサマリーテーブル"  style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="スパンサマリーテーブル" style="width:90%;">}}
 
    *これで、追加した新しいスパンを見つけることができるはずです*
 
@@ -355,7 +361,7 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
 2. **トレースの一覧画面**までスクロールダウンし、トレースのいずれかをクリックします。
 
-    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="分析ビュー"  style="width:90%;">}}
+    {{< img src="tracing/guide/custom_span/custom_span_4.png" alt="分析ビュー" style="width:90%;">}}
 
 これで、カスタムスパンがコードベースに正常に追加され、フレームグラフと [App Analytics][3] で利用できるようになりました。これは、Datadog のツールを最大限に活用するための最初のステップです。次に[カスタムタグをスパンに追加][4]すれば、さらに強力にすることができます。
 
@@ -365,5 +371,5 @@ PHP の場合、Datadog APM により、メソッドラッパーを使用する�
 
 [1]: https://app.datadoghq.com/apm/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
-[3]: https://app.datadoghq.com/apm/analytics
+[3]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [4]: /ja/tracing/guide/add_span_md_and_graph_it/

@@ -722,7 +722,8 @@ const descColumn = (key, value) => {
   if(value.deprecated) {
     desc = `**DEPRECATED**: ${desc}`;
   }
-  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}</div>`.trim();
+  const def = (value.default) ? `<p>default: <code>${value.default}</code></p>` : '';
+  return `<div class="col-6 column">${marked(desc) ? marked(desc).trim() : ""}${def}</div>`.trim();
 };
 
 

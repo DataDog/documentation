@@ -31,8 +31,9 @@ Datadog API を使用すると、Datadog との間でデータをやり取りで
 </br>
 <div class="postman-run-button"
 data-postman-action="collection/fork"
-data-postman-var-1="20651290-b051b74a-bbe6-433a-8670-7ec450e80199"
-data-postman-collection-url="entityId=20651290-b051b74a-bbe6-433a-8670-7ec450e80199&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
+data-postman-visibility="public"
+data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
 data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
@@ -56,7 +57,7 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 以下の手順に従って環境をセットアップします。
 
-1. Postman の右上隅にある **Environments** ドロップダウンをクリックします。
+1. Postman の右上隅にある **Environments** ドロップダウンをクリックします。現時点で環境が選択されていない場合は、**Environments** ドロップダウンに `No Environment` と表示されます。
 
 2. **Datadog Authentication** を選択します
 
@@ -90,7 +91,7 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 
 エンドポイント名をクリックすると、エンドポイントの説明と、すべての必須/オプションパラメーターが表示されるため、容易にリクエストを構築できます。
 
-{{< img src="getting_started/postman/description.mp4" alt="Postman の説明" video="true"  >}}
+{{< img src="getting_started/postman/description.mp4" alt="Postman の説明" video="true" >}}
 
 ### Params
 
@@ -111,5 +112,5 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
 [6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
-[7]: /ja/api/v1/organizations/
+[7]: /ja/api/latest/#api-reference
 [8]: /ja/api/

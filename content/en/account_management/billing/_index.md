@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-The billing cycle begins the first of the month regardless of when you sign up. Your first month is prorated based on your actual sign-up date.
+The billing cycle begins the first of the month (UTC) regardless of when you sign up. Your first month is prorated based on your actual sign-up date.
 
 Datadog meters the count of hosts and custom metrics hourly. The billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill. The billable count of custom metrics is based on the average number of custom metric hours for the month. See your [Usage][1] in Datadog. Billing pages are only accessible to users with the Datadog Admin Role.
 
@@ -94,7 +94,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
 
 {{< whatsnext desc="Specific billing topics:">}}
     {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_details/" >}}Usage details{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Usage details{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_metrics/" >}}Usage Metrics{{< /nextlink >}}
     {{< nextlink href="account_management/billing/credit_card/" >}}Credit card{{< /nextlink >}}
     {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}

@@ -28,7 +28,7 @@ Datadog は、Datadog Cloud SIEM サービスによって取り込まれ分析�
 
 * API を使用するには**管理者ユーザーが保有する** API キーとアプリケーションキーが必要です。これらは [Datadog アカウントの API キーページ][3]で確認できます。`<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を Datadog API キーおよび Datadog アプリケーションキーで置き換えてください。
 
-* このガイドでは `curl` の例を解説しています。[curl][4] をまだインストールしていない場合はインストールするか、[API ドキュメント][2]でこの API エンドポイントについての他言語の例を参照してください。
+* このガイドでは `curl` の例を解説しています。[cURL][4] をまだインストールしていない場合はインストールするか、[API ドキュメント][2]でこの API エンドポイントについての他言語の例を参照してください。
 
 ## 例
 
@@ -164,6 +164,8 @@ curl -L -X POST 'https://api.{{< region-param key="dd_site" code="true" >}}/api/
 }
 ```
 
+**注**: `version` は、更新したいフィルターの現在のバージョンを示します。このフィールドはオプションです。このフィールドを省略した場合は、最新バージョンが更新されます。
+
 セキュリティフィルターは包括的です。つまり、特定のログが**少なくとも 1 つのセキュリティフィルタに一致する場合**に分析されます。分析するログのサブセットを指定する場合は、`all ingested logs` という名前のデフォルトの組み込みフィルターを無効にすることもできます。これを行うには、次のように、その `is_enabled` 属性を `false` に設定します。
 
 **API call:**
@@ -176,8 +178,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 --data-raw '{
     "data": {
         "attributes": {
-            "is_enabled": false,
-            "version": 2
+            "is_enabled": false
         },
         "type": "security_filters"
     }
@@ -209,6 +210,8 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 }
 ```
 
+**注**: `version` は、更新したいフィルターの現在のバージョンを示します。このフィールドはオプションです。このフィールドを省略した場合は、最新バージョンが更新されます。
+
 ## 主要なセキュリティ関連のタグと属性
 
 明示的に指定されたログのカテゴリのみを分析する場合は、セキュリティに関連する貴重なユーザーやエンティティ、またはセキュリティログの主要なソースを含むログを除外しないように注意してください。以下の表は、有用な例を示しています。
@@ -229,7 +232,7 @@ curl -L -X PATCH 'https://api.{{< region-param key="dd_site" code="true" >}}/api
 | --------------------- |--------------------------------------------------|
 | AWS セキュリティログ     | `source:(cloudtrail OR guardduty OR route53)`    |
 | AWS ネットワークログ      | `source:(vpc OR waf OR elb OR alb)`              |
-| GCP ログ              | `source:gcp*`                                    |
+| Google Cloud Logs     | `source:gcp*`                                    |
 | Azure ログ            | `source:azure*`                                  |
 | Kubernetes 監査ログ | `source:kubernetes.audit`                        |
 | ID プロバイダーログ| `source:(okta OR gsuite OR auth0)`               |

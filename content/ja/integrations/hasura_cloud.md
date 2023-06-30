@@ -20,13 +20,13 @@ assets:
     source_type_name: Hasura Cloud
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Hasura
   sales_email: support@hasura.io
   support_email: support@hasura.io
 categories:
-- モニタリング
+- クラウド
 - ログの収集
-- cloud
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md
 display_on_public_website: true
@@ -44,17 +44,17 @@ public_title: Hasura Cloud
 short_description: Hasura Cloud プロジェクトを監視します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Log Collection
   - Category::Cloud
+  - Category::Log Collection
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Hasura Cloud プロジェクトを監視します
   media: []
@@ -70,14 +70,13 @@ tile:
 [Hasura Cloud][1] は、スケーラブルで可用性が高くグローバルに分散された
 セキュアで実稼働準備の整った GraphQL API をデータソースに提供します。
 
-Datadog インテグレーションは Hasura Cloud の可観測性機能で、
-Hasura Cloud プロジェクトのオペレーションログやメトリクスを Datadog ダッシュボードにエクスポートします。
+Datadog インテグレーションは Hasura Cloud の観測可能性機能で、Hasura Cloud プロジェクトのオペレーションログ、メトリクス、トレースを Datadog ダッシュボードにエクスポートします。
 
 ## セットアップ
 
 Hasura Cloud プロジェクトに Hasura Cloud Datadog インテグレーションをセットアップするには、Datadog API キーとリージョンを Hasura Cloud に提供します。
 
-Hasura Cloud プロジェクトの Datadog インテグレーションを構成するには、[Hasura Cloud のドキュメント][2]を参照してください。
+Hasura Cloud プロジェクトの Datadog インテグレーションを構成する方法については、[Hasura Cloud のドキュメント][2]を参照してください。
 
 完了したら、Datadog の[ログセンション][3]に移動し、以下の上位レベルのフィールドのファセットを作成します。
 
@@ -87,6 +86,8 @@ Hasura Cloud プロジェクトの Datadog インテグレーションを構成�
 * `is_error`
 
 ログからファセットを作成する方法については、[Datadog のログファセットのドキュメント][4]を参照してください。
+
+Hasura Cloud プロジェクトのログ、メトリクス、トレースは、プロジェクトがトラフィックを受けると、自動的に Datadog に送信されます。
 
 ## 収集データ
 
@@ -107,7 +108,7 @@ Hasura Cloud インテグレーションには、イベントは含まれませ�
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
 [1]: https://hasura.io/cloud/
-[2]: https://hasura.io/docs/latest/graphql/cloud/metrics/integrations/datadog.html
+[2]: https://hasura.io/docs/latest/observability/integrations/datadog/
 [3]: http://app.datadoghq.com/logs
 [4]: https://docs.datadoghq.com/ja/logs/explorer/facets/#create-facets
 [5]: https://docs.datadoghq.com/ja/help/

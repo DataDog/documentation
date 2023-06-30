@@ -21,6 +21,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+- oracle
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -51,6 +52,7 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Marketplace
+  - Category::Oracle
   - Offering::Integration
   configuration: README.md#Setup
   description: sparc と i86pc の Solaris 10 および 11 のメトリクスを提供する Agent
@@ -77,7 +79,7 @@ Solaris Agent を使用すると、Datadog 内の Solaris システムメトリ�
 
 Solaris Agent は、Datadog インフラストラクチャーリストをサポートするために必要なホストメタデータを提供し、組織が他のサポートされている Datadog ホストオペレーティングシステムと同様の Solaris ホストシステムで作業できるようにします。
 
-Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。カスタム Agent チェック、インテグレーション、またはサービスチェックはサポートしていません。
+Solaris Agent は、ネイティブ Agent と同じ URL とポートを使用します。Solaris Agent は、コアインフラストラクチャーメトリクス、プロセスチェック、ログ追跡をサポートしています。インテグレーションまたはサービスチェックはサポートしていません。
 
 ## サポート
 

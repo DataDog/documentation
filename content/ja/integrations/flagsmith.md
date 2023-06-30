@@ -61,13 +61,13 @@ tile:
 
 
 {{< callout url="#" btn_hidden="true" header="機能フラグ追跡のベータ版に参加しよう！">}}
-Flagsmith 機能フラグで RUM データを補強し、パフォーマンス監視や行動の変化を可視化するには、<a href="https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection/">機能フラグ追跡</a>の非公開ベータ版に参加しましょう。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
+Flagsmith 機能フラグで RUM データを補強し、パフォーマンス監視や行動の変化を可視化するには、[機能フラグ追跡][1]の非公開ベータ版に参加しましょう。アクセス権をリクエストするには、Datadog サポート (support@datadoghq.com) までご連絡ください。
 
 {{< /callout >}}
 
 ## 概要
 
-[Flagsmith][1] は、Web、モバイル、およびサーバー側のアプリケーション全体の機能管理を容易にします。Datadog Flagsmith インテグレーションにより、Datadog 内でフラグの変更に関する情報を直接表示できるようになります。
+[Flagsmith][2] は、Web、モバイル、およびサーバー側のアプリケーション全体の機能管理を容易にします。Datadog Flagsmith インテグレーションにより、Datadog 内でフラグの変更に関する情報を直接表示できるようになります。
 
 Flagsmith は、Datadog と以下のインテグレーションを提供しています。
 
@@ -78,6 +78,10 @@ Flagsmith は、Datadog と以下のインテグレーションを提供して�
 ### 機能フラグ追跡インテグレーション
 
 Flagsmith の機能フラグ追跡インテグレーションは、RUM データを機能フラグで強化し、パフォーマンスの監視と行動の変化を可視化します。どのユーザーにユーザーエクスペリエンスが表示され、それがユーザーのパフォーマンスに悪影響を及ぼしているかどうかを判断します。
+
+### ダッシュボードウィジェット
+
+Flagsmith のダッシュボードウィジェットを使用すると、Flagsmith のフラグと監査ログを Datadog で直接確認することができます。
 
 ## セットアップ
 
@@ -94,12 +98,25 @@ Flagsmith の機能フラグ追跡インテグレーションは、RUM データ
 ```javascript
 flagsmith.init({
      datadogRum: {
-         client: datadogRum,
-         trackTraits: true,
-     },
-     ...
- })
+        client: datadogRum,
+        trackTraits: true,
+    },
+    ...
+})
 ```
+
+### Flagsmith ダッシュボードウィジェット
+
+1. [Flagsmith インテグレーションタイル][5]で、Flagsmith インテグレーションがインストールされていることを確認します。
+2. Datadog で確認したいアカウントで Flagsmith にログインしていることを確認します。
+3. Datadog で、既存のダッシュボードに移動するか、新しいダッシュボードを作成します。
+4. **Add Widgets** ボタンを押すと、ウィジェットドローワが表示されます。
+5. **Flagsmith** と検索すると、ウィジェットドローワの **Apps** セクションに Flagsmith ウィジェットが見つかります。
+6. **Flagsmith ウィジェットアイコン**を選択すると、ダッシュボードに追加され、**Flagsmith エディタ**モーダルが表示されます。Flag または監査ログビューアウィジェットのいずれかを選択して追加することができます。
+7. ダッシュボードに追加したい Flagsmith Organization、Project、Environment を選択します。
+8. 選択したら、**Project ID** と **Environment ID** をコピーして Datadog に貼り付けます。
+9. ページサイズと、オプションでフィルターにかけるウィジェットタイトルと Flagsmith Tag を選択します。
+10. **Save** をクリックして、ダッシュボードウィジェットの構成を完了します。
 
 ## 収集データ
 
@@ -117,11 +134,11 @@ Flagsmith インテグレーションには、サービスのチェック機能�
 
 ## トラブルシューティング
 
-サポートが必要な場合は、 [Flagsmith のドキュメント][5]をご覧いただくか、[Datadog サポート][6]までお問い合わせください。
+サポートが必要な場合は、 [Flagsmith のドキュメント][4]をご覧いただくか、[Datadog サポート][6]までお問い合わせください。
 
 [1]: https://www.flagsmith.com/
 [2]: https://app.flagsmith.com/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/setup-feature-flag-data-collection/
+[4]: https://docs.datadoghq.com/ja/help/
 [5]: https://docs.flagsmith.com/integrations/datadog/
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/guide/setup-feature-flag-data-collection/

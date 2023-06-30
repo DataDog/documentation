@@ -9,7 +9,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
-    "description": "Search or aggregate your CI Visibility pipeline events over HTTP."
+    "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP."
   },
   "ci-visibility-tests": {
     "name": "CI Visibility Tests",
@@ -38,6 +38,10 @@
   "fastly-integration": {
     "name": "Fastly Integration",
     "description": "Configure your Datadog Fastly integration directly through the Datadog API."
+  },
+  "gcp-integration": {
+    "name": "GCP Integration",
+    "description": "Configure your Datadog-Google Cloud Platform (GCP) integration directly\nthrough the Datadog API. Read more about the [Datadog-Google Cloud Platform integration](https://docs.datadoghq.com/integrations/google_cloud_platform)."
   },
   "ip-allowlist": {
     "name": "IP Allowlist",
@@ -122,6 +126,10 @@
   "service-definition": {
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
+  },
+  "spans": {
+    "name": "Spans",
+    "description": "Search and aggregate your spans from your Datadog platform over HTTP."
   },
   "spans-metrics": {
     "name": "Spans Metrics",

@@ -19,6 +19,7 @@ title: Datadog におけるパイプラインの可視化
 ## セットアップ
 
 {{< whatsnext desc="Datadog でパイプラインの可視化を設定するための CI プロバイダーを選択します。" >}}
+    {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/codefresh" >}}Codefresh{{< /nextlink >}}
@@ -41,7 +42,7 @@ Pipelines ページには、選択した時間枠での各パイプラインの�
 
 特定のパイプラインをクリックすると、_Pipeline Details_ ページが表示されます。このページには、指定した時間枠で選択したパイプラインのデータのビューが表示され、デフォルト以外のブランチを表示できます。
 
-{{< img src="ci/ci-single-pipeline.png" alt="単一パイプラインの詳細" style="width:100%;">}}
+{{< img src="ci/pipeline_branch_overview_updated.png" alt="単一パイプラインの詳細" style="width:100%;">}}
 
 時間の経過に伴う実行の合計と失敗、ビルド期間のパーセンタイル、ステージごとの内訳に費やされた合計時間など、選択したパイプラインに関する情報を取得します。ステージとジョブの要約テーブルもあるため、期間、全体的な実行時間の割合、または失敗率の観点からそれらをすばやく並べ替えることができます。
 

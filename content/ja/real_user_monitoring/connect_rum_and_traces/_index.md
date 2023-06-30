@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - rum トレース
 further_reading:
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: GitHub
@@ -20,7 +23,7 @@ further_reading:
   text: セッションリプレイブラウザ開発ツールによるトラブルシューティング
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: ブログ
-  text: Datadog RUM イベントと OTel インスツルメンテーションされたアプリケーションのトレースを相関させる
+  text: Datadog RUM イベントと OpenTelemetry インスツルメンテーションされたアプリケーションのトレースを相関させる
 kind: documentation
 title: RUM とトレースの接続
 ---
@@ -33,11 +36,13 @@ APM と Real User Monitoring のインテグレーションにより、Web お�
 
 RUM のフロントエンドデータに加えて、トレース ID 挿入のバックエンド、インフラストラクチャー、ログ情報を使用して、スタック内の問題を特定し、ユーザーに起こっていることを理解します。
 
+iOS アプリケーションのトレースだけを Datadog に送信し始めるには、[iOS トレース収集][1]をご覧ください。
+
 ## 使用方法
 
 ### 前提条件
 
--   RUM アプリケーションの対象となるサービスに [APM トレース][1]を設定していること。
+-   RUM アプリケーションの対象となるサービスに [APM トレース][2]を設定していること。
 -   サービスが HTTP サーバーを使用していること。
 -   HTTP サーバーで、[分散型トレーシングをサポートするライブラリ](#supported-libraries)が使用されていること。
 -   ご利用の SDK に応じて次の設定を行っていること。
@@ -47,13 +52,16 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 
 ### RUM の設定
 
+**注:** RUM とトレースの構成では、RUM で APM の有料データを使用するため、APM の請求に影響を与える可能性があります。
+
 {{< tabs >}}
 {{% tab "ブラウザ RUM" %}}
 
-1.  [RUM ブラウザモニタリング][1]を設定します。
+1. [RUM ブラウザモニタリング][1]を設定します。
 
-2.  RUM SDK を初期化します。ブラウザアプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`allowedTracingUrls` 初期化パラメーターを設定します。
+2. RUM SDK を初期化します。ブラウザアプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`allowedTracingUrls` 初期化パラメーターを設定します。
 
+   **npm インストール**の場合:
     ```javascript
     import { datadogRum } from '@datadog/browser-rum'
 
@@ -66,9 +74,28 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
     })
     ```
 
-    RUM をトレースに接続するには、`service` フィールドにブラウザアプリケーションを指定する必要があります。
+   **CDN インストール**の場合:
 
-    `allowedTracingUrls` は完全な URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`) に一致します。次のタイプを指定できます。
+   ```javascript
+   window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: '<http://datadoghq.com|datadoghq.com>',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      allowedTracingUrls: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("<https://api.example.com>")]
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100, // if not included, the default is 100
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    })
+   ```
+
+   RUM をトレースに接続するには、`service` フィールドにブラウザアプリケーションを指定する必要があります。
+
+   `allowedTracingUrls` は完全な URL (`<scheme>://<host>[:<port>]/<path>[?<query>][#<fragment>]`) に一致します。次のタイプを指定できます。
       - `string`: 指定した値で始まるすべての URL に一致します。したがって、`https://api.example.com` は `https://api.example.com/v1/resource` に一致します。
       - `RegExp`: 指定された正規表現と URL で検証を実行します。
       - `function`: URL をパラメーターとして評価を実行します。戻り値の `boolean` が `true` に設定されていた場合は、一致することを示します。
@@ -92,9 +119,9 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 {{% /tab %}}
 {{% tab "Android RUM" %}}
 
-1.  [RUM Android モニタリング][1]を設定します。
+1. [RUM Android モニタリング][1]を設定します。
 
-2.  Android アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`OkHttpClient` インターセプターを構成します。
+2. Android アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、`OkHttpClient` インターセプターを構成します。
     ```java
     val tracedHosts = listOf("example.com", "example.eu")
 
@@ -105,7 +132,7 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
        .build()
     ```
 
-    デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
+   デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
 
 3.  _(オプション)_ `traceSamplingRate` パラメーターを構成して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。バックエンドトレースの 100% を保持する場合:
 
@@ -121,9 +148,9 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 {{% /tab %}}
 {{% tab "iOS RUM" %}}
 
-1.  [RUM iOS モニタリング][1]を設定します。
+1. [RUM iOS モニタリング][1]を設定します。
 
-2.  iOS アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、ビルダー関数 `trackURLSession(firstPartyHosts:)` を呼び出します。
+2. iOS アプリケーションによって呼び出される内部のファーストパーティオリジンのリストを使用して、ビルダー関数 `trackURLSession(firstPartyHosts:)` を呼び出します。
     ```swift
     Datadog.initialize(
         appContext: .init(),
@@ -176,9 +203,9 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 {{% /tab %}}
 {{% tab "React Native RUM" %}}
 
-1.  [RUM React Native モニタリング][1]を設定します。
+1. [RUM React Native モニタリング][1]を設定します。
 
-2.  `firstPartyHosts` の初期化パラメーターを設定して、React Native アプリケーションが呼び出す内部のファーストパーティオリジンのリストを定義します。
+2. `firstPartyHosts` の初期化パラメーターを設定して、React Native アプリケーションが呼び出す内部のファーストパーティオリジンのリストを定義します。
     ```javascript
     const config = new DatadogProviderConfiguration(
         // ...
@@ -186,7 +213,7 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
     config.firstPartyHosts = ["example.com", "api.yourdomain.com"];
     ```
 
-    デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
+   デフォルトでは、リストされたホストのすべてのサブドメインがトレースされます。たとえば、`example.com` を追加すると、`api.example.com` と `foo.example.com` のトレースも有効になります。
 
 3. _(オプション)_ `resourceTracingSamplingRate` 初期化パラメーターを設定して、バックエンドトレースの定義されたパーセンテージを保持するように設定します。設定しない場合、アプリケーションのリクエストから来るトレースの 20% が Datadog に送信されます。
 
@@ -219,21 +246,47 @@ RUM のフロントエンドデータに加えて、トレース ID 挿入のバ
 [2]: /ja/real_user_monitoring/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
+
+
+{{% tab "Roku RUM" %}}
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
+{{< /site-region >}}
+
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+<div class="alert alert-info">RUM for Roku はベータ版です。</div>
+
+1. [RUM Roku モニタリング][1]を設定します。
+
+2. ネットワークリクエストを行うには、`datadogroku_DdUrlTransfer` コンポーネントを使用します。
+    ```brightscript
+        ddUrlTransfer = datadogroku_DdUrlTransfer(m.global.datadogRumAgent)
+        ddUrlTransfer.SetUrl(url)
+        ddUrlTransfer.EnablePeerVerification(false)
+        ddUrlTransfer.EnableHostVerification(false)
+        result = ddUrlTransfer.GetToString()
+    ```
+
+[1]: /ja/real_user_monitoring/roku/
+{{< /site-region >}}
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## サポートされるライブラリ
 
 以下の Datadog トレーシングライブラリがサポートされています。
 
-| ライブラリ                             | 最小バージョン                                                                                                             |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Python][2]                  | [0.22.0][3]                |
-| [Go][4]                  | [1.10.0][5]                |
-| [Java][6]                  | [0.24.1][7]                |
-| [Ruby][8]                  | [0.20.0][9]                |
-| [JavaScript][10]                  | [0.10.0][11]                |
-| [PHP][12]                  | [0.33.0][13]                |
-| [.NET][14]                  | [1.18.2][15]                |
+| ライブラリ          | 最小バージョン |
+| ---------------- | --------------- |
+| [Python][3]      | [0.22.0][4]     |
+| [Go][5]          | [1.10.0][6]     |
+| [Java][7]        | [0.24.1][8]     |
+| [Ruby][9]        | [0.20.0][10]     |
+| [JavaScript][11] | [0.10.0][12]    |
+| [PHP][13]        | [0.33.0][14]    |
+| [.NET][15]       | [1.18.2][16]    |
 
 
 ## OpenTelemetry のサポート
@@ -407,7 +460,7 @@ b3 マルチヘッダーの例:
 {{% /tab %}}
 {{< /tabs >}}
 
-上記 HTTP ヘッダーは CORS セーフリストに登録されていないため、SDK が監視するように設定されているリクエストを扱うサーバーで [Access-Control-Allow-Headers を構成][16]する必要があります。サーバーは、すべてのリクエストの前に SDK によって作られる[プレフライトリクエスト][17]も許可する必要があります (OPTIONS リクエスト)。
+上記 HTTP ヘッダーは CORS セーフリストに登録されていないため、SDK が監視するように設定されているリクエストを扱うサーバーで [Access-Control-Allow-Headers を構成][17]する必要があります。サーバーは、すべてのリクエストの前に SDK によって作られる[プレフライトリクエスト][18]も許可する必要があります (OPTIONS リクエスト)。
 
 ## APM クオータへの影響
 
@@ -415,28 +468,29 @@ RUM とトレースを接続すると、APM の取り込み量が大幅に増加
 
 ## トレースの保持期間
 
-これらのトレースは、[Live Search][18] エクスプローラーで 15 分間利用可能です。より長い期間、トレースを保持するには、[保持フィルター][19]を作成します。重要なページとユーザーアクションのトレースを保持するために、任意のスパンタグにこれらの保持フィルターを適用します。
+これらのトレースは、[Live Search][19] エクスプローラーで 15 分間利用可能です。より長い期間、トレースを保持するには、[保持フィルター][20]を作成します。重要なページとユーザーアクションのトレースを保持するために、任意のスパンタグにこれらの保持フィルターを適用します。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing
-[2]: /ja/tracing/trace_collection/dd_libraries/python/
-[3]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
-[4]: /ja/tracing/trace_collection/dd_libraries/go/
-[5]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
-[6]: /ja/tracing/trace_collection/dd_libraries/java/
-[7]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
-[8]: /ja/tracing/trace_collection/dd_libraries/ruby/
-[9]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
-[10]: /ja/tracing/trace_collection/dd_libraries/nodejs/
-[11]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
-[12]: /ja/tracing/trace_collection/dd_libraries/php/
-[13]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
-[14]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/
-[15]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[16]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
-[17]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[18]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
-[19]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters
+[1]: /ja/tracing/trace_collection/dd_libraries/ios/?tab=swiftpackagemanagerspm
+[2]: /ja/tracing
+[3]: /ja/tracing/trace_collection/dd_libraries/python/
+[4]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0
+[5]: /ja/tracing/trace_collection/dd_libraries/go/
+[6]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.10.0
+[7]: /ja/tracing/trace_collection/dd_libraries/java/
+[8]: https://github.com/DataDog/dd-trace-java/releases/tag/v0.24.1
+[9]: /ja/tracing/trace_collection/dd_libraries/ruby/
+[10]: https://github.com/DataDog/dd-trace-rb/releases/tag/v0.20.0
+[11]: /ja/tracing/trace_collection/dd_libraries/nodejs/
+[12]: https://github.com/DataDog/dd-trace-js/releases/tag/v0.10.0
+[13]: /ja/tracing/trace_collection/dd_libraries/php/
+[14]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
+[15]: /ja/tracing/trace_collection/dd_libraries/dotnet-core/
+[16]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
+[17]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+[18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
+[19]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
+[20]: /ja/tracing/trace_pipeline/trace_retention/#retention-filters

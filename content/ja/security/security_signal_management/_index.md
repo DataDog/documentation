@@ -56,7 +56,7 @@ Datadog のデフォルトのロールについては [RBAC ドキュメント][
 
 サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、Application Security Management のシグナルからインシデントを宣言します。
 
-{{< img src="monitors/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
+{{< img src="service_management/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
 
 ## セキュリティシグナルアクションの監査証跡
 
@@ -70,6 +70,6 @@ Datadog Security で行われたアクションによって生成された監査
 [1]: /ja/account_management/rbac/?tab=datadogapplication#pagetitle
 [2]: /ja/account_management/rbac/permissions/#cloud-security-platform
 [3]: /ja/security/notifications/rules/
-[4]: /ja/monitors/incident_management/#pagetitle
+[4]: /ja/service_management/incident_management/#pagetitle
 [5]: /ja/account_management/audit_trail/#overview
 [6]: /ja/account_management/audit_trail/#retention

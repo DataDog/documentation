@@ -35,7 +35,7 @@ A single OTLP metric may be mapped to several Datadog metrics with a suffix indi
 
 **Note**: OpenTelemetry provides metric API instruments (`Gauge`, `Counter`, `UpDownCounter`, `Histogram`, and so on), whose measurements can be exported as OTLP metrics (Sum, Gauge, Histogram). Other sources for OTLP metrics are possible. Applications and libraries may provide customization into the OTLP metrics they produce. Read the documentation of your OpenTelemetry SDK or OTLP-producing application to understand the OTLP metrics produced and how to customize them.
 
-**Note**: OpenTelemetry protocol supports two ways of representing metrics in time: [Cumulative and Delta temporality][2], affecting the metrics described below. Set the temporality preference of the OTel implementation to **DELTA**, because setting it to CUMULATIVE may discard some data points during application (or collector) startup. For more information, read [Producing Delta Temporality Metrics with OpenTelemetry][3].
+**Note**: OpenTelemetry protocol supports two ways of representing metrics in time: [Cumulative and Delta temporality][2], affecting the metrics described below. Set the temporality preference of the OpenTelemetry implementation to **DELTA**, because setting it to CUMULATIVE may discard some data points during application (or collector) startup. For more information, read [Producing Delta Temporality Metrics with OpenTelemetry][3].
 
 ## Metric types
 
@@ -137,13 +137,22 @@ You may add all resource attributes as tags by using the `resource_attributes_as
 
 OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload has a known hostname attribute, Datadog honors these conventions and tries to use its value as a hostname. The semantic conventions are considered in the following order:
 
+1. The `host` attribute, to avoid double tagging if present.
 1. `datadog.host.name`, a Datadog-specific hostname convention
 1. Cloud provider-specific conventions, based on the `cloud.provider` semantic convention
 1. Kubernetes-specific conventions from the `k8s.node.name` and `k8s.cluster.name` semantic conventions
 1. `host.id`, the unique host ID
 1. `host.name`, the system hostname
 
-If none are present, Datadog assigns a system-level hostname to payloads.
+The following host names are deemed invalid and discarded:
+1. `0.0.0.0`
+1. `127.0.0.1`
+1. `localhost`
+1. `localhost.localdomain`
+1. `localhost6.localdomain6`
+1. `ip6-localhost`
+
+If no valid host names are present, Datadog assigns a system-level host name to payloads.
 If sending data from a remote host, add the ['resource detection' processor][1] to your pipelines for accurate hostname resolution.
 
 ### Example

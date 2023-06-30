@@ -1,20 +1,22 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 70
+    subcategory: Agent ガイド
 disable_toc: true
-kind: guide
+kind: ガイド
 private: true
 title: Agent ガイド
-cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: Agent ガイド
 ---
 
 {{< whatsnext desc="全般ガイド:" >}}
     {{< nextlink href="agent/guide/agent-commands" >}}Agent のコマンド{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-configuration-files" >}}Agent コンフィギュレーションファイル{{< /nextlink >}}
+    {{< nextlink href="agent/guide/agent-fips-proxy" >}}Datadog FIPS コンプライアンス{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-log-files" >}}Agent のログファイル{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent 環境変数{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/setup" >}}集計 Agent{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-status-page" >}}Agent v6 ステータスページ{{< /nextlink >}}
     {{< nextlink href="agent/guide/dual-shipping" >}}デュアルシッピング{{< /nextlink >}}
     {{< nextlink href="agent/guide/integration-management" >}}インテグレーション管理{{< /nextlink >}}
@@ -36,24 +38,6 @@ cascade:
     {{< nextlink href="agent/guide/python-3" >}}Python 2 から 3 へのカスタムチェックのマイグレーション{{< /nextlink >}}
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}インターネット接続が制限されているサーバーへの Agent のインストール{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Agent をアンインストールするにはどうしたらいいですか？{{< /nextlink >}}
-{{< /whatsnext >}}
-
-{{< whatsnext desc="コンテナガイド:" >}}
-    {{< nextlink href="agent/guide/autodiscovery-with-jmx" >}}JMX を使用したオートディスカバリー{{< /nextlink >}}
-    {{< nextlink href="agent/guide/build-container-agent" >}}Datadog Agent イメージの構築{{< /nextlink >}}
-    {{< nextlink href="agent/guide/autodiscovery-management" >}}Agent でコンテナのディスカバリーを管理{{< /nextlink >}}
-    {{< nextlink href="agent/guide/ad_identifiers" >}}ad_identifers パラメーターを使用して、指定されたコンテナにオートディスカバリーのコンフィギュレーションファイルテンプレートを適用{{< /nextlink >}}
-    {{< nextlink href="agent/guide/operator-advanced" >}}Datadog Operator の高度なセットアップ{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/container-images-for-docker-environments" >}}Docker 環境のコンテナイメージ{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/compose-and-the-datadog-agent" >}}コンポーズと Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/docker-deprecation" >}}Kubernetes における Docker の廃止{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/podman-support-with-docker-integration" >}}Podman コンテナランタイムとの Docker インテグレーションの使用{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/changing_container_registry" >}}コンテナレジストリの変更{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/template_variables" >}}オートディスカバリーテンプレート変数{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/auto_conf" >}}オートディスカバリーの自動構成{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/how-to-import-datadog-resources-into-terraform/" >}}Datadog のリソースを Terraform にインポートする方法{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/kubernetes-cluster-name-detection/" >}}Kubernetes クラスター名検出{{< /nextlink >}}
-    {{< nextlink href="/agent/guide/kubernetes-legacy/" >}}Kubernetes レガシー{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent v5 ガイド:" >}}

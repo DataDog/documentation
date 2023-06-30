@@ -2,6 +2,9 @@
 aliases:
 - /ja/guides/logs/
 - /ja/logs/logging_without_limits
+cascade:
+  algolia:
+    rank: 70
 description: Datadog Agent を設定して、ホスト、コンテナー、およびサービスからログを収集します。
 disable_sidebar: true
 further_reading:
@@ -11,15 +14,24 @@ further_reading:
 - link: /logs/log_collection/
   tag: Documentation
   text: ログの収集開始
-- link: https://learn.datadoghq.com
+- link: https://learn.datadoghq.com/courses/intro-to-log-management
   tag: ラーニング センター
-  text: Datadog ログ管理の詳細はこちら
+  text: ログ管理の紹介
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: ログ管理を最適化するためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/
   tag: ブログ
   text: ログ異常検出によるインシデント調査の迅速化
 - link: https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/
   tag: ブログ
   text: Datadog のログ管理で IoT デバイスを大規模に監視する
+- link: https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/
+  tag: ブログ
+  text: Datadog でファイアウォールのログを監視する
+- link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
+  tag: ブログ
+  text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
 kind: Documentation
 title: ログ管理
 ---
@@ -32,7 +44,7 @@ Datadog ログ管理 (Datadog Logs または Logging とも呼ばれる) は、�
 
 Logging without Limits\* は、[ログエクスプローラー][1]でトラブルシューティングを合理化し、インフラストラクチャーの問題を迅速に評価および修正する力を提供します。また、直感的なアーカイブ機能により、監査や評価時にセキュリティチームや IT チームをサポートします。[Datadog Cloud SIEM][2] は、ログのインデックスを作成することなく、環境内のセキュリティ脅威を検出します。
 
-{{< vimeo 293195142 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
 </br>
 
@@ -59,7 +71,7 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
 
 [ログエクスプローラー][1]でインジェストしたログの確認を開始します。
 
-{{< img src="/logs/explore.jpg" alt="インジェストしたログを確認する" style="width:80%;">}}
+{{< img src="/logs/explore.png" alt="取り込んだログを確認する" style="width:80%;">}}
 
 - [検索][7]: すべてのログを検索します。
 - [Live Tail][8]: 取り込んだログをすべての環境でリアルタイムに確認できます。
@@ -74,10 +86,10 @@ Logging without Limits\* は、[ログエクスプローラー][1]でトラブ�
 \*Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: /ja/logs/explorer/
-[2]: /ja/security_platform/cloud_siem/
+[2]: /ja/security/cloud_siem/
 [3]: /ja/logs/log_collection/
 [4]: /ja/logs/log_configuration/
-[5]: /ja/tracing/connect_logs_and_traces/
+[5]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [6]: /ja/logs/guide/correlate-logs-with-metrics/
 [7]: /ja/logs/explorer/search_syntax/
 [8]: /ja/logs/live_tail/

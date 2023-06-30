@@ -9,13 +9,13 @@ further_reading:
 - link: /profiler/enabling/
   tag: ドキュメント
   text: プロファイラーの有効化
-- link: https://learn.datadoghq.com/course/view.php?id=18
+- link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: ラーニングセンター
-  text: Datadog 入門
+  text: Application Performance Monitoring の紹介
 - link: https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/
-  tags: ブログ
+  tag: GitHub
   text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
-kind: ドキュメント
+kind: documentation
 title: Continuous Profiler の概要
 ---
 
@@ -66,7 +66,7 @@ docker-compose up -d
 コンテナが構築・実行されると、「toolbox」コンテナを使用して次のことを調べることができます。
 
 ```
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ```
 
 API を以下と共に使用します。
@@ -198,7 +198,7 @@ docker-compose up -d
 結果をテストし、トラフィックを再度生成します。
 
 ```shell
-docker exec -it dd-continuous-profiler-example_toolbox_1 bash
+docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 

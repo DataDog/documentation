@@ -167,10 +167,11 @@ SECL にはヘルパーが存在し、ユーザーは正規表現のような汎
 
 | プロパティ | 定義 |
 | -------- | ------------- |
-| [`async`](#async-doc) | syscall が非同期の場合、true |
 | [`container.created_at`](#container-created_at-doc) | コンテナ作成時のタイムスタンプ |
 | [`container.id`](#container-id-doc) | コンテナの ID |
 | [`container.tags`](#container-tags-doc) | コンテナのタグ |
+| [`event.async`](#event-async-doc) | syscall が非同期の場合、true |
+| [`event.timestamp`](#event-timestamp-doc) | イベントのタイムスタンプ |
 | [`network.destination.ip`](#common-ipportcontext-ip-doc) | IP アドレス |
 | [`network.destination.port`](#common-ipportcontext-port-doc) | ポート番号 |
 | [`network.device.ifindex`](#network-device-ifindex-doc) | インターフェイス ifindex |
@@ -711,6 +712,9 @@ DNS リクエストが送信された
 
 | プロパティ | 定義 |
 | -------- | ------------- |
+| [`load_module.args`](#load_module-args-doc) | 新しいカーネルモジュールのパラメーター (文字列) |
+| [`load_module.args_truncated`](#load_module-args_truncated-doc) | 引数が切り捨てられたか否かを示します |
+| [`load_module.argv`](#load_module-argv-doc) | 新しいカーネルモジュールのパラメーター (配列) |
 | [`load_module.file.change_time`](#common-filefields-change_time-doc) | ファイルの変更時間 |
 | [`load_module.file.filesystem`](#common-fileevent-filesystem-doc) | ファイルの filesystem |
 | [`load_module.file.gid`](#common-filefields-gid-doc) | ファイルの所有者の GID |
@@ -1930,6 +1934,9 @@ exec.argv in ["127.0.0.1"]
 `*.mode` には 38 個のプレフィックスを付けることができます。
 `chmod.file` `chown.file` `exec.file` `exec.interpreter.file` `exit.file` `exit.interpreter.file` `link.file` `link.file.destination` `load_module.file` `mkdir.file` `mmap.file` `open.file` `process.ancestors.file` `process.ancestors.interpreter.file` `process.file` `process.interpreter.file` `process.parent.file` `process.parent.interpreter.file` `ptrace.tracee.ancestors.file` `ptrace.tracee.ancestors.interpreter.file` `ptrace.tracee.file` `ptrace.tracee.interpreter.file` `ptrace.tracee.parent.file` `ptrace.tracee.parent.interpreter.file` `removexattr.file` `rename.file` `rename.file.destination` `rmdir.file` `setxattr.file` `signal.target.ancestors.file` `signal.target.ancestors.interpreter.file` `signal.target.file` `signal.target.interpreter.file` `signal.target.parent.file` `signal.target.parent.interpreter.file` `splice.file` `unlink.file` `utimes.file`
 
+定数: [Inode モード定数](#inode-mode-constants)
+
+
 
 ### `*.modification_time` {#common-filefields-modification_time-doc}
 タイプ: 整数
@@ -2067,7 +2074,7 @@ etc/passwd ファイルを開いているすべてのプロセスにマッチし
 `*.rights` には 38 個のプレフィックスを付けることができます。
 `chmod.file` `chown.file` `exec.file` `exec.interpreter.file` `exit.file` `exit.interpreter.file` `link.file` `link.file.destination` `load_module.file` `mkdir.file` `mmap.file` `open.file` `process.ancestors.file` `process.ancestors.interpreter.file` `process.file` `process.interpreter.file` `process.parent.file` `process.parent.interpreter.file` `ptrace.tracee.ancestors.file` `ptrace.tracee.ancestors.interpreter.file` `ptrace.tracee.file` `ptrace.tracee.interpreter.file` `ptrace.tracee.parent.file` `ptrace.tracee.parent.interpreter.file` `removexattr.file` `rename.file` `rename.file.destination` `rmdir.file` `setxattr.file` `signal.target.ancestors.file` `signal.target.ancestors.interpreter.file` `signal.target.file` `signal.target.interpreter.file` `signal.target.parent.file` `signal.target.parent.interpreter.file` `splice.file` `unlink.file` `utimes.file`
 
-定数: [Chmod モード定数](#chmod-mode-constants)
+定数: [ファイルモード定数](#file-mode-constants)
 
 
 
@@ -2132,13 +2139,6 @@ process.user == "root"
 
 `*.user` には 38 個のプレフィックスを付けることができます。
 `chmod.file` `chown.file` `exec.file` `exec.interpreter.file` `exit.file` `exit.interpreter.file` `link.file` `link.file.destination` `load_module.file` `mkdir.file` `mmap.file` `open.file` `process.ancestors.file` `process.ancestors.interpreter.file` `process.file` `process.interpreter.file` `process.parent.file` `process.parent.interpreter.file` `ptrace.tracee.ancestors.file` `ptrace.tracee.ancestors.interpreter.file` `ptrace.tracee.file` `ptrace.tracee.interpreter.file` `ptrace.tracee.parent.file` `ptrace.tracee.parent.interpreter.file` `removexattr.file` `rename.file` `rename.file.destination` `rmdir.file` `setxattr.file` `signal.target.ancestors.file` `signal.target.ancestors.interpreter.file` `signal.target.file` `signal.target.interpreter.file` `signal.target.parent.file` `signal.target.parent.interpreter.file` `splice.file` `unlink.file` `utimes.file`
-
-
-### `async` {#async-doc}
-タイプ: ブール
-
-定義: syscall が非同期の場合、true
-
 
 
 ### `bind.addr.family` {#bind-addr-family-doc}
@@ -2245,7 +2245,7 @@ process.user == "root"
 定義: chmod されたファイルの新しいモード
 
 
-定数: [Chmod モード定数](#chmod-mode-constants)
+定数: [ファイルモード定数](#file-mode-constants)
 
 
 
@@ -2255,7 +2255,7 @@ process.user == "root"
 定義: chmod されたファイルの新しい権限
 
 
-定数: [Chmod モード定数](#chmod-mode-constants)
+定数: [ファイルモード定数](#file-mode-constants)
 
 
 
@@ -2356,6 +2356,20 @@ process.user == "root"
 
 
 
+### `event.async` {#event-async-doc}
+タイプ: ブール
+
+定義: syscall が非同期の場合、true
+
+
+
+### `event.timestamp` {#event-timestamp-doc}
+タイプ: 整数
+
+定義: イベントのタイムスタンプ
+
+
+
 ### `exit.cause` {#exit-cause-doc}
 タイプ: 整数
 
@@ -2367,6 +2381,27 @@ process.user == "root"
 タイプ: 整数
 
 定義: プロセスの終了コード、またはプロセスを終了させたシグナルの番号
+
+
+
+### `load_module.args` {#load_module-args-doc}
+タイプ: 文字列
+
+定義: 新しいカーネルモジュールのパラメーター (文字列)
+
+
+
+### `load_module.args_truncated` {#load_module-args_truncated-doc}
+タイプ: ブール
+
+定義: 引数が切り捨てられたか否かを示します
+
+
+
+### `load_module.argv` {#load_module-argv-doc}
+タイプ: 文字列
+
+定義: 新しいカーネルモジュールのパラメーター (配列)
 
 
 
@@ -2390,7 +2425,7 @@ process.user == "root"
 定義: 新しいディレクトリのモード
 
 
-定数: [Chmod モード定数](#chmod-mode-constants)
+定数: [ファイルモード定数](#file-mode-constants)
 
 
 
@@ -2400,7 +2435,7 @@ process.user == "root"
 定義: 新しいディレクトリの権限
 
 
-定数: [Chmod モード定数](#chmod-mode-constants)
+定数: [ファイルモード定数](#file-mode-constants)
 
 
 
@@ -2512,7 +2547,7 @@ process.user == "root"
 定義: 作成されたファイルのモード
 
 
-定数: [Chmod モード定数](#chmod-mode-constants)
+定数: [ファイルモード定数](#file-mode-constants)
 
 
 
@@ -3039,35 +3074,6 @@ BPF プログラムタイプは、サポートされている eBPF プログラ�
 | `BPF_PROG_TYPE_LSM` | すべて |
 | `BPF_PROG_TYPE_SK_LOOKUP` | すべて |
 
-### `Chmod mode constants` {#chmod-mode-constants}
-Chmod モード定数は、chmod syscall でサポートされているモードです。
-
-| 名前 | アーキテクチャ |
-| ---- |---------------|
-| `S_IFBLK` | すべて |
-| `S_IFCHR` | すべて |
-| `S_IFDIR` | すべて |
-| `S_IFIFO` | すべて |
-| `S_IFLNK` | すべて |
-| `S_IFMT` | すべて |
-| `S_IFREG` | すべて |
-| `S_IFSOCK` | すべて |
-| `S_IRGRP` | すべて |
-| `S_IROTH` | すべて |
-| `S_IRUSR` | すべて |
-| `S_IRWXG` | すべて |
-| `S_IRWXO` | すべて |
-| `S_IRWXU` | すべて |
-| `S_ISGID` | すべて |
-| `S_ISUID` | すべて |
-| `S_ISVTX` | すべて |
-| `S_IWGRP` | すべて |
-| `S_IWOTH` | すべて |
-| `S_IWUSR` | すべて |
-| `S_IXGRP` | すべて |
-| `S_IXOTH` | すべて |
-| `S_IXUSR` | すべて |
-
 ### `DNS qclasses` {#dns-qclasses}
 DNS qclasses は、サポートされている DNS クエリクラスです。
 
@@ -3309,6 +3315,56 @@ DNS qtypes は、サポートされている DNS クエリタイプです。
 | `EXDEV` | すべて |
 | `EXFULL` | すべて |
 
+### `File mode constants` {#file-mode-constants}
+ファイルモード定数は、サポートされるファイル権限のほか、set-user-ID、set-group-ID、スティッキービットの定数です。
+
+| 名前 | アーキテクチャ |
+| ---- |---------------|
+| `S_ISUID` | すべて |
+| `S_ISGID` | すべて |
+| `S_ISVTX` | すべて |
+| `S_IRWXU` | すべて |
+| `S_IRUSR` | すべて |
+| `S_IWUSR` | すべて |
+| `S_IXUSR` | すべて |
+| `S_IRWXG` | すべて |
+| `S_IRGRP` | すべて |
+| `S_IWGRP` | すべて |
+| `S_IXGRP` | すべて |
+| `S_IRWXO` | すべて |
+| `S_IROTH` | すべて |
+| `S_IWOTH` | すべて |
+| `S_IXOTH` | すべて |
+
+### `Inode mode constants` {#inode-mode-constants}
+Inode モード定数は、ファイルモード定数と同様に、サポートされるファイルタイプ定数です。
+
+| 名前 | アーキテクチャ |
+| ---- |---------------|
+| `S_IFMT` | すべて |
+| `S_IFSOCK` | すべて |
+| `S_IFLNK` | すべて |
+| `S_IFREG` | すべて |
+| `S_IFBLK` | すべて |
+| `S_IFDIR` | すべて |
+| `S_IFCHR` | すべて |
+| `S_IFIFO` | すべて |
+| `S_ISUID` | すべて |
+| `S_ISGID` | すべて |
+| `S_ISVTX` | すべて |
+| `S_IRWXU` | すべて |
+| `S_IRUSR` | すべて |
+| `S_IWUSR` | すべて |
+| `S_IXUSR` | すべて |
+| `S_IRWXG` | すべて |
+| `S_IRGRP` | すべて |
+| `S_IWGRP` | すべて |
+| `S_IXGRP` | すべて |
+| `S_IRWXO` | すべて |
+| `S_IROTH` | すべて |
+| `S_IWOTH` | すべて |
+| `S_IXOTH` | すべて |
+
 ### `Kernel Capability constants` {#kernel-capability-constants}
 カーネルケイパビリティ定数は、サポートされている Linux カーネルケイパビリティです。
 
@@ -3328,7 +3384,6 @@ DNS qtypes は、サポートされている DNS クエリタイプです。
 | `CAP_IPC_LOCK` | すべて |
 | `CAP_IPC_OWNER` | すべて |
 | `CAP_KILL` | すべて |
-| `CAP_LAST_CAP` | すべて |
 | `CAP_LEASE` | すべて |
 | `CAP_LINUX_IMMUTABLE` | すべて |
 | `CAP_MAC_ADMIN` | すべて |

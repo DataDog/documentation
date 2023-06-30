@@ -1,12 +1,23 @@
 ---
+algolia:
+  tags:
+  - rum
+  - リアルユーザーモニタリング
 aliases:
 - /ja/real_user_monitoring/installation
+- /ja/real_user_monitoring/faq/
+cascade:
+  algolia:
+    rank: 70
 description: ユーザーから見たフロントエンドアプリケーションのパフォーマンスを視覚化、観察、分析します。
 disable_sidebar: true
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring
   tag: リリースノート
   text: Datadog RUM の最新リリースをチェック！ (アプリログインが必要です)
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: リアルユーザーモニタリングによるインサイトを得るためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/
   tag: ブログ
   text: Datadog リアルユーザーモニタリングのご紹介
@@ -35,13 +46,13 @@ further_reading:
   tag: ブログ
   text: Datadog のテクニカルソリューションチームが RUM、セッションリプレイ、エラー追跡を使用して顧客の問題を解決する方法
 - link: /real_user_monitoring/browser/data_collected/
-  tag: ドキュメント
+  tag: Documentation
   text: 収集された RUM ブラウザデータ
 kind: documentation
 title: RUM & セッションリプレイ
 ---
 
-{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM ダッシュボード" >}}
 
 ## リアルユーザーモニタリングとは？
 
@@ -58,9 +69,9 @@ Datadog の*リアルユーザーモニタリング (RUM)* は、個々のユー
 
 Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジング体験をキャプチャし、視覚的に再生することができます。
 
-セッションリプレイを RUM パフォーマンスデータと組み合わせることで、エラーの特定、再現、解決に役立ち、ウェブアプリケーションの使用パターンや設計上の落とし穴を把握することができます。
+セッションリプレイを RUM パフォーマンスデータと組み合わせることで、エラーの特定、再現、解決に役立ち、Web アプリケーションの使用パターンや設計上の落とし穴を把握することができます。
 
-## はじめましょう
+## 詳細はこちら
 
 アプリケーションタイプを選択して、RUM データの収集を開始します。
 
@@ -68,39 +79,114 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 
 </br>
 
+### 機能とプラットフォームのサポート
+
+**注**: Datadog Flutter SDK は MacOS、Windows、Linux には対応していません。
+
+次の表に、各プラットフォームでサポートされている RUM 機能を示します。
+
+| 機能                               | ブラウザ | Android | iOS |   Flutter   | React Native | Roku | 注 |
+| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
+| ログを Datadog に送信する方法  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| ネットワークリクエストの分散型トレーシング | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | **Datadog Roku SDK** は、一部の HTTP リクエストのみを追跡することができます。 |
+| ビューとアクションの追跡 (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - **Flutter Web** で追跡されるすべてのアクションは `custom` として記録されます <br> - **Roku** は手動アクション追跡のみをサポートしています。 |
+| 機能フラグの追跡とリリースの追跡 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| エラー追跡とソースマッピング | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | **React Native** は部分的にサポートされています |
+| クラッシュ追跡、シンボル化、難読化解除 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| セッションを停止 (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| WebView でイベントを追跡 |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| プラットフォーム固有のバイタルを監視 | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| ログのグローバルコンテキスト/属性追跡  | {{< X >}} |  |  |  |  |  |  |
+| クライアント側のトレース |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
+| セッションリプレイ | {{< X >}} |  |  |  |  |  |  |
+| ヒートマップ | {{< X >}} |  |  |  |  |  |  |
+| フラストレーションシグナル | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | すべての**モバイル**および **Roku** デバイスは部分的にサポートされています |
+
+## SDK ドメインの対応エンドポイント
+
+Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
+
+### Mobile
+
+| サイト | サイト URL                                      |
+|------|-----------------------------------------------|
+| US1  | `https://browser-intake-datadoghq.com`        |
+| US3  | `https://browser-intake-us3-datadoghq.com`    |
+| US5  | `https://browser-intake-us5-datadoghq.com`    |
+| EU1  | `https://browser-intake-datadoghq.eu`         |
+| US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+
+### ブラウザ
+
+#### ログ
+
+| サイト | サイト URL                                        |
+|------|-------------------------------------------------|
+| US1  | `https://logs.browser-intake-datadoghq.com`     |
+| US3  | `https://logs.browser-intake-us3-datadoghq.com` |
+| US5  | `https://logs.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://logs.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://logs.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`      |
+
+#### セッションリプレイ
+
+| サイト | サイト URL                                                  |
+|------|-----------------------------------------------------------|
+| US1  | `https://session-replay.browser-intake-datadoghq.com`     |
+| US3  | `https://session-replay.browser-intake-us3-datadoghq.com` |
+| US5  | `https://session-replay.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://session-replay.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://session-replay.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`                |
+
+#### RUM
+
+| サイト | サイト URL                                       |
+|------|------------------------------------------------|
+| US1  | `https://rum.browser-intake-datadoghq.com`     |
+| US3  | `https://rum.browser-intake-us3-datadoghq.com` |
+| US5  | `https://rum.browser-intake-us5-datadoghq.com` |
+| EU1  | `https://rum.browser-intake-datadoghq.eu`      |
+| US1-FED  | `https://rum.browser-intake-ddog-gov.com`  |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`     |
+
 ## Datadog RUM を探索する
+
+[**UX Monitoring > Real User Monitoring**][1] に移動して、RUM にアクセスします。
 
 ### すぐに使えるダッシュボード
 
-[すぐに使える RUM ダッシュボード][1]で自動的に収集されたユーザーセッション、パフォーマンス、モバイルアプリケーション、フラストレーションシグナル、ネットワークリソース、エラーに関する情報を分析することができます。
+[すぐに使える RUM ダッシュボード][2]で自動的に収集されたユーザーセッション、パフォーマンス、モバイルアプリケーション、フラストレーションシグナル、ネットワークリソース、エラーに関する情報を分析することができます。
 
-{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM ダッシュボード" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM ダッシュボード" >}}
 
 ### RUM エクスプローラーと視覚化
 
-[視覚化][2]を使用して、レイテンシーがプレミアム顧客に影響を与えるタイミングを確認するなど、ユーザーセッションをセグメントで表示します。カスタマイズした検索で、データを探索し、ビューを保存し、[モニター][3]を作成します。
+[視覚化][3]を使用して、レイテンシーがプレミアム顧客に影響を与えるタイミングを確認するなど、ユーザーセッションをセグメントで表示します。カスタマイズした検索で、データを探索し、ビューを保存し、[モニター][4]を作成します。
 
 {{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM 分析" video=true >}}
 
 ### ログ、APM、プロファイラーとのインテグレーション
 
-[バックエンドトレース、ログ、インフラストラクチャーメトリクス][4]を、ユーザーエクスペリエンスと報告された問題に対応して、アプリケーションのパフォーマンスに影響を与えるコードの正確な行まで表示します。
+[バックエンドトレース、ログ、インフラストラクチャーメトリクス][5]を、ユーザーエクスペリエンスと報告された問題に対応して、アプリケーションのパフォーマンスに影響を与えるコードの正確な行まで表示します。
 
 {{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM と APM" >}}
 
 ### エラー追跡とクラッシュレポート
 
-[エラー追跡][5]を使用して、外れ値およびエラー、タイムアウト、クラッシュのグループに関する自動アラートを取得し、MTTR を大幅に削減します。
+[エラー追跡][6]を使用して、外れ値およびエラー、タイムアウト、クラッシュのグループに関する自動アラートを取得し、MTTR を大幅に削減します。
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM エラー追跡" video=true >}}
 
 ### Web とモバイルバイタル
 
-[iOS および tvOS][7] または [Android および Android TV アプリケーション][8]の Core Web Vitals および Mobile Vitals などの[ブラウザアプリケーション][6]のパフォーマンススコアとメトリクスを表示します。
+[iOS および tvOS][8] または [Android および Android TV アプリケーション][9]の Core Web Vitals および Mobile Vitals などの[ブラウザアプリケーション][7]のパフォーマンススコアとメトリクスを表示します。
 
 ### Web ビュー追跡
 
-[iOS と tvOS][9] または [Android と Android TV][10] 用の Web ビュー追跡を使用して、ネイティブ Web アプリケーションから情報を収集し、ハイブリッドビューを調査します。
+[iOS と tvOS][10] または [Android と Android TV][11] 用の Web ビュー追跡を使用して、ネイティブ Web アプリケーションから情報を収集し、ハイブリッドビューを調査します。
 
 {{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="RUM エクスプローラーのユーザーセッションで取得した Web ビュー" >}}
 
@@ -108,26 +194,27 @@ Datadog の*セッションリプレイ*は、ユーザーの Web ブラウジ�
 
 ### セッションリプレイ
 
-Web サイトを利用する実際のユーザーの[ブラウザ記録][11]を見て、組織の[プライバシーコントロール][12]を設定します。
+Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を見て、組織の[プライバシーコントロール][13]を設定します。
 
 ### 開発ツール
 
-[ブラウザ開発ツール][13]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
+[ブラウザ開発ツール][14]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/dashboards/
-[2]: /ja/real_user_monitoring/explorer/visualize/
-[3]: /ja/monitors/create/types/real_user_monitoring/
-[4]: /ja/real_user_monitoring/connect_rum_and_traces/
-[5]: /ja/real_user_monitoring/error_tracking/
-[6]: /ja/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[7]: /ja/real_user_monitoring/ios/mobile_vitals/
-[8]: /ja/real_user_monitoring/android/mobile_vitals/
-[9]: /ja/real_user_monitoring/ios/web_view_tracking/
-[10]: /ja/real_user_monitoring/android/web_view_tracking/
-[11]: /ja/real_user_monitoring/session_replay/
-[12]: /ja/real_user_monitoring/session_replay/privacy_options/
-[13]: /ja/real_user_monitoring/session_replay/developer_tools/
+[1]: https://app.datadoghq.com/rum/performance-monitoring
+[2]: /ja/real_user_monitoring/dashboards/
+[3]: /ja/real_user_monitoring/explorer/visualize/
+[4]: /ja/monitors/types/real_user_monitoring/
+[5]: /ja/real_user_monitoring/connect_rum_and_traces/
+[6]: /ja/real_user_monitoring/error_tracking/
+[7]: /ja/real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[8]: /ja/real_user_monitoring/ios/mobile_vitals/
+[9]: /ja/real_user_monitoring/android/mobile_vitals/
+[10]: /ja/real_user_monitoring/ios/web_view_tracking/
+[11]: /ja/real_user_monitoring/android/web_view_tracking/
+[12]: /ja/real_user_monitoring/session_replay/
+[13]: /ja/real_user_monitoring/session_replay/privacy_options/
+[14]: /ja/real_user_monitoring/session_replay/developer_tools/

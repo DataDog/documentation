@@ -7,7 +7,7 @@ further_reading:
   text: Android モニタリング
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
-  text: ブラウザのモニタリング
+  text: ブラウザモニタリング
 kind: documentation
 title: Android Web ビュー追跡
 ---

@@ -58,7 +58,7 @@ You can start the authorization process in Datadog by clicking **Connect Account
 
 When kicking off authorization from a third-party location—anywhere outside of the Datadog integration tile—you need to account for the [Datadog site][17] (such as EU, US1, US3, or US5) when routing users through the authorization flow and building out the URL for the `authorization` and `token` endpoints. 
 
-To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region. Once the authorization flow is complete, ensure that all followup API calls use the correct site that is returned as a query parameter with the `redirect_uri` (See Step 5 in [Implement the OAuth protocol](#Implement-the-oauth-protocol)).
+To ensure that users are authorizing in the correct site, always direct them to the US1 Datadog site (`app.datadoghq.com`), and from there, they can select their region. Once the authorization flow is complete, ensure that all followup API calls use the correct site that is returned as a query parameter with the `redirect_uri` (See Step 5 in [Implement the OAuth protocol](#implement-the-oauth-protocol)).
 
 When users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when returning to the integration tile). To avoid this, users should be routed from third-party platforms to the Datadog integration tile to begin authorization. 
 

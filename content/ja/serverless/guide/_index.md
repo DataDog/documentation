@@ -1,19 +1,22 @@
 ---
-kind: guide
-title: サーバーレスモニタリングガイド
 cascade:
-    algolia:
-        rank: 20
-        category: Guide
-        subcategory: サーバーレスモニタリングガイド
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: サーバーレスモニタリングガイド
+disable_toc: true
+kind: ガイド
+private: true
+title: サーバーレスモニタリングガイド
 ---
 
-## サーバーレスアプリケーションを監視する
+## 一般的なサーバーレスガイド
 
 {{< whatsnext desc="サーバーレスアプリケーションを監視するためのベストプラクティス" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Lambda 関数を呼び出すリソースの詳細な視覚化{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/insights" >}}Serverless Insights{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
     {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Forwarder を使ったインストール

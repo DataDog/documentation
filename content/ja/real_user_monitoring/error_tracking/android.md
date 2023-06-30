@@ -1,19 +1,16 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
+description: Android アプリケーションにエラー追跡を設定します。
 further_reading:
-- link: https://www.datadoghq.com/blog/debug-android-crashes/
-  tag: ブログ
-  text: Datadog で Android のクラッシュをより速くデバッグする
 - link: /real_user_monitoring/error_tracking/
-  tag: ドキュメント
-  text: エラートラッキングについて
+  tag: Error Tracking
+  text: エラー追跡を開始する
 - link: /real_user_monitoring/error_tracking/explorer
-  tag: Documentation
-  text: RUM エクスプローラーでエラー追跡データを視覚化する
+  tag: ドキュメント
+  text: エクスプローラーでエラー追跡データを視覚化する
 kind: documentation
 title: Android のクラッシュレポートとエラー追跡
 ---
+
 ## 概要
 
 エラー追跡は、RUM Android SDK から収集されたエラーを処理します。
@@ -37,6 +34,8 @@ Android のクラッシュレポートとエラー追跡を有効にすると、
 任意のエラーについて、ファイルパス、行番号、関連するスタックトレースの各フレームのコードスニペットにアクセスすることができます。
 
 ## マッピングファイルのアップロード
+
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
 
 {{< tabs >}}
 {{% tab "US" %}}
@@ -154,7 +153,7 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## 制限
 
-マッピングファイルは、US1 サイトをターゲットとする場合は 100 Mb、その他のサイトでは 50 Mb に制限されています。プロジェクトでこれより大きなマッピングファイルを使用する場合は、以下のオプションのいずれかを使用してファイルサイズを縮小してください。
+マッピングファイルは、US1 または EU1 サイトをターゲットとする場合は 200 MB、その他のサイトでは 50 MB に制限されています。プロジェクトでこれより大きなマッピングファイルを使用する場合は、以下のオプションのいずれかを使用してファイルサイズを縮小してください。
 
 - `mappingFileTrimIndents` オプションを `true` に設定します。これにより、ファイルサイズが平均で 5% 小さくなります。
 - `mappingFilePackagesAliases` のマップを設定します。これは、パッケージ名をより短いエイリアスで置き換えるものです。**注**: Datadog のスタックトレースは元のパッケージ名の代わりに同じエイリアスを使うので、サードパーティの依存関係にはこのオプションを使うのがよいでしょう。

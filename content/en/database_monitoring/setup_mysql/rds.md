@@ -80,7 +80,7 @@ The following instructions grant the Agent permission to login from any host usi
 Create the `datadog` user and grant basic permissions:
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
@@ -178,6 +178,11 @@ instances:
     port: 3306
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
+    
+    
+     # After adding your project and instance, configure the Datadog AWS integration to pull additional cloud data such as CPU, Memory, etc.
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 **Note**: Wrap your password in single quotes in case a special character is present.

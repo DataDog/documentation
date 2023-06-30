@@ -25,7 +25,9 @@ title: モニターの種類
 {{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>:APM メトリクスの監視やクエリのトレースを行います。{{< /nextlink >}}
 {{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: 指定した種類の監査ログが、一定期間内にユーザー定義のしきい値を超えた場合にアラートを発します。{{< /nextlink >}}
 {{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Datadog で収集した CI パイプラインとテストのデータを監視します。{{< /nextlink >}}
+{{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: クラウドプラットフォームに関連するコストの変化を監視します。{{< /nextlink >}}
 {{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: 複数のモニターを組み合わせた式でアラートを発します。{{< /nextlink >}}
+{{< nextlink href="/monitors/types/database_monitoring" >}}<strong>データベースモニタリング</strong>: Datadog が収集したクエリ実行と実行計画データを監視します。{{< /nextlink >}}
 {{< nextlink href="/monitors/types/error_tracking" >}}<strong>Error Tracking</strong>: Datadog で収集したアプリケーションの問題を監視します。{{< /nextlink >}}
 {{< nextlink href="/monitors/types/event" >}}<strong>Event</strong>: Datadog が収集したイベントを監視します。{{< /nextlink >}}
 {{< nextlink href="/monitors/types/forecasts" >}}<strong>Forecast</strong>: あるメトリクスがしきい値を超えると予測される場合にアラートを発します。{{< /nextlink >}}

@@ -48,6 +48,8 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ログとトレースを接続する](#connect-logs-and-traces)
 - [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
 - [カスタムメトリクスの送信](#submit-custom-metrics)
+- [OpenTelemetry のデータを Datadog に送信する](#send-opentelemetry-data-to-datadog)
+- [プロファイリングデータの収集 (公開ベータ版)](#collect-profiling-data-public-beta)
 - [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
@@ -75,6 +77,7 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ログとトレースを接続する](#connect-logs-and-traces)
 - [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
 - [カスタムメトリクスの送信](#submit-custom-metrics)
+- [OpenTelemetry のデータを Datadog に送信する](#send-opentelemetry-data-to-datadog)
 - [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
@@ -582,6 +585,90 @@ export class ExampleStack extends cdk.Stack {
 
 [カスタムメトリクスの送信][27]により、カスタムビジネスロジックを監視することができます。
 
+## OpenTelemetry のデータを Datadog に送信する
+
+1. OpenTelemetry にスパンを [Datadog Lambda 拡張機能][40]にエクスポートするよう指示します。
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: 'rey-app-otlp-dev-node',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+2. AWS Lambda 用の OpenTelemetry のインスツルメンテーションを追加します。これはトレースレイヤーを追加するようなものです。
+   ```js
+   // instrument.js
+
+   const { AwsInstrumentation } = require('@opentelemetry/instrumentation-aws-sdk');
+   const { AwsLambdaInstrumentation } = require('@opentelemetry/instrumentation-aws-lambda');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new AwsInstrumentation({
+              suppressInternalInstrumentation: true,
+          }),
+          new AwsLambdaInstrumentation({
+              disableAwsContextPropagation: true,
+          }),
+      ],
+   });
+
+   ```
+3. 実行時にインスツルメンテーションを適用します。例えば、Node.js の場合、`NODE_OPTIONS` を使用します。
+
+   ```yaml
+   # serverless.yml
+
+   functions:
+     node:
+       handler: handler.handler
+       environment:
+         NODE_OPTIONS: --require instrument
+   ```
+
+4. `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 環境変数を使って OTel を有効にします。Datadog 拡張機能 v41 以降を追加してください。Datadog のトレーシングレイヤーを追加しないでください。
+
+   ```yaml
+   # serverless.yml
+
+   provider:
+     name: aws
+     region: sa-east-1
+     runtime: nodejs18.x
+     environment:
+       DD_API_KEY: ${env:DD_API_KEY}
+       DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT: localhost:4318
+     layers:
+       - arn:aws:lambda:sa-east-1:464622532012:layer:Datadog-Extension:42
+   ```
+
+5. デプロイします。
+
+## プロファイリングデータの収集 (公開ベータ版)
+
+Datadog の [Continuous Profiler][42] は、Python ではバージョン 4.62.0、Layer ではバージョン 62 以前のベータ版で利用できます。このオプション機能は、環境変数 `DD_PROFILING_ENABLED` を `true` に設定することで有効になります。
+
+Continuous Profiler は、実行中のすべての Python コードの CPU とヒープのスナップショットを定期的に取得するスレッドを生成して動作します。これにはプロファイラー自体も含まれることがあります。プロファイラー自身を無視したい場合は、`DD_PROFILING_IGNORE_PROFILER` を `true` に設定します。
+
 ## PrivateLink またはプロキシ経由でテレメトリーを送信する
 
 Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][29] には [AWS PrivateLink 経由でデータを送信][28]し、それ以外のサイトには[プロキシ経由でデータを送信][30]することができます。
@@ -612,7 +699,7 @@ DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS=[{"api_key": "<your_api_key_2>", "Host": "ag
 {{% /tab %}}
 {{% tab "AWS Secrets Manager" %}}
 
-Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任意の環境変数について、[AWS Secrets Manager][40] の値の自動取得をサポートしています。これを利用することで、環境変数を Secrets Manager に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
+Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任意の環境変数について、[AWS Secrets Manager][1] の値の自動取得をサポートしています。これを利用することで、環境変数を Secrets Manager に安全に格納し、Datadog でのデュアルシッピングを可能にすることができます。
 
 1. Lambda 関数に環境変数 `DD_LOGS_CONFIG_USE_HTTP=true` を設定します。
 2. Lambda 関数の IAM ロールの権限に `secretsmanager:GetSecretValue` の権限を追加します。
@@ -624,6 +711,8 @@ Datadog 拡張機能は、`_SECRET_ARN` のプレフィックスが付いた任�
 8. Lambda 関数の環境変数 `DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN と同じ値を設定します。
 9. Secrets Manager に、ログのデュアルシッピング用の環境変数を格納するための新しいシークレットを作成します。その内容は、`[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]`と**似た**内容になります。
 10. Lambda 関数の環境変数 `DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_SECRET_ARN` に上記シークレットの ARN と同じ値を設定します。
+
+[1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
 
 {{% /tab %}}
 {{% tab "AWS KMS" %}}
@@ -637,6 +726,7 @@ Datadog 拡張機能は、`_KMS_ENCRYPTED` のプレフィックスが付いた�
 5. プロファイリングのデュアルシッピングの場合は、KMS を使用して  `{"https://trace.agent.datadoghq.com": ["<your_api_key_2>", "<your_api_key_3>"], "https://trace.agent.datadoghq.eu": ["<your_api_key_4>"]}` を暗号化し、`DD_APM_PROFILING_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
 5. ログのデュアルシッピングの場合は、KMS を使用して `[{"api_key": "<your_api_key_2>", "Host": "agent-http-intake.logs.datadoghq.com", "Port": 443, "is_reliable": true}]` を暗号化し、`DD_LOGS_CONFIG_ADDITIONAL_ENDPOINTS_KMS_ENCRYPTED` 環境変数にその値を設定します。
 
+[41]: https://docs.aws.amazon.com/kms/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -792,3 +882,5 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 [37]: /ja/serverless/guide/extension_motivation/
 [38]: /ja/serverless/guide#install-using-the-datadog-forwarder
 [39]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
+[40]: /ja/serverless/libraries_integrations/extension/
+[42]: /ja/profiler/
