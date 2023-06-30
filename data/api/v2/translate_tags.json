@@ -9,7 +9,7 @@
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
-    "description": "Search or aggregate your CI Visibility pipeline events over HTTP."
+    "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP."
   },
   "ci-visibility-tests": {
     "name": "CI Visibility Tests",
@@ -126,6 +126,10 @@
   "service-definition": {
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
+  },
+  "spans": {
+    "name": "Spans",
+    "description": "Search and aggregate your spans from your Datadog platform over HTTP."
   },
   "spans-metrics": {
     "name": "Spans Metrics",

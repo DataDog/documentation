@@ -67,7 +67,9 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -90,7 +92,9 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -111,7 +115,9 @@ datadogRum.init({
   sampleRate: 100,
   premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -132,7 +138,9 @@ datadogRum.init({
   sampleRate: 100,
   replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
   trackInteractions: true,
-})
+  });
+datadogRum.startSessionReplayRecording();
+
 ```
 
 </details>
@@ -167,8 +175,9 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
-  })
+     });
+    window.DD_RUM.startSessionReplayRecording();
+   })
 </script>
 ```
 {{</ site-region>}}
@@ -180,8 +189,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<TOKEN_CLIENT>',
       applicationId: '<ID_APPLICATION>',
       site: 'ap1.datadoghq.com',
@@ -193,7 +202,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -219,7 +229,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -245,7 +256,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -271,7 +283,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -297,7 +310,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -329,7 +343,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -342,8 +357,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<TOKEN_CLIENT>',
       applicationId: '<ID_APPLICATION>',
       site: 'ap1.datadoghq.com',
@@ -355,7 +370,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -381,7 +397,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -407,7 +424,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -433,7 +451,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -459,7 +478,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -487,9 +507,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -502,8 +523,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<TOKEN_CLIENT>',
       applicationId: '<ID_APPLICATION>',
       site: 'ap1.datadoghq.com',
@@ -511,9 +532,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+   window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -535,9 +557,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -559,9 +582,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -583,9 +607,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -607,9 +632,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -637,9 +663,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -652,8 +679,8 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
      d=o.createElement(u);d.async=1;d.src=n
      n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
   })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
       clientToken: '<TOKEN_CLIENT>',
       applicationId: '<ID_APPLICATION>',
       site: 'ap1.datadoghq.com',
@@ -661,9 +688,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -685,9 +713,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -709,9 +738,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -733,9 +763,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -757,9 +788,10 @@ Ajoutez l'extrait de code généré dans le tag head de toutes les pages HTML qu
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM.startSessionReplayRecording();
   })
 </script>
 ```
@@ -791,11 +823,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -812,11 +846,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -833,11 +869,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -854,11 +892,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -875,11 +915,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -896,11 +938,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sessionSampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -923,11 +967,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -944,11 +990,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -965,11 +1013,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -986,11 +1036,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1007,11 +1059,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1028,11 +1082,13 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      sessionReplaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackResources: true,
       trackLongTasks: true,
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1055,9 +1111,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1074,9 +1132,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1093,9 +1153,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1112,9 +1174,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1131,9 +1195,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1150,9 +1216,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      premiumSampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      premiumSampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1175,9 +1243,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1194,9 +1264,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1213,9 +1285,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1232,9 +1306,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1251,9 +1327,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}
@@ -1270,9 +1348,11 @@ Ajoutez l'extrait de code généré dans le tag head (avant tous les autres tags
       //  env: 'production',
       //  version: '1.0.0',
       sampleRate: 100,
-      replaySampleRate: 100, // si le taux n'est pas inclus, il est défini par défaut sur 100
+      replaySampleRate: 100, // si le taux n'est pas inclus, il est définit par défaut sur 100
       trackInteractions: true,
-    })
+    });
+  window.DD_RUM &&
+    window.DD_RUM.startSessionReplayRecording();
 </script>
 ```
 {{</ site-region>}}

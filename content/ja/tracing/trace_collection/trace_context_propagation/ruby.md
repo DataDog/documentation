@@ -1,6 +1,10 @@
 ---
 code_lang: ruby
 code_lang_weight: 20
+further_reading:
+- link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
+  tag: ブログ
+  text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
 kind: documentation
 title: Ruby トレースコンテキストの伝搬
 type: multi-code-lang
@@ -45,6 +49,10 @@ end
 ```
 
 トレースコンテキストの伝播の構成については、Ruby トレーシングライブラリ構成ドキュメントの[分散型トレーシングのセクション][1]をお読みください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/trace_collection/dd_libraries/ruby/#distributed-tracing
 [6]: https://github.com/openzipkin/b3-propagation

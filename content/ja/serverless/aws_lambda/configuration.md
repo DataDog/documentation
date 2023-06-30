@@ -49,6 +49,7 @@ title: AWS Lambda のためのサーバーレスモニタリングの構成
 - [ソースコードにエラーをリンクさせる](#link-errors-to-your-source-code)
 - [カスタムメトリクスの送信](#submit-custom-metrics)
 - [OpenTelemetry のデータを Datadog に送信する](#send-opentelemetry-data-to-datadog)
+- [プロファイリングデータの収集 (公開ベータ版)](#collect-profiling-data-public-beta)
 - [PrivateLink またはプロキシ経由でテレメトリーを送信する](#send-telemetry-over-privatelink-or-proxy)
 - [複数の Datadog 組織にテレメトリーを送信する](#send-telemetry-to-multiple-datadog-organizations)
 - [AWS リソース上でトレースコンテキストを伝播させる](#propagate-trace-context-over-aws-resources)
@@ -662,6 +663,12 @@ export class ExampleStack extends cdk.Stack {
 
 5. デプロイします。
 
+## プロファイリングデータの収集 (公開ベータ版)
+
+Datadog の [Continuous Profiler][42] は、Python ではバージョン 4.62.0、Layer ではバージョン 62 以前のベータ版で利用できます。このオプション機能は、環境変数 `DD_PROFILING_ENABLED` を `true` に設定することで有効になります。
+
+Continuous Profiler は、実行中のすべての Python コードの CPU とヒープのスナップショットを定期的に取得するスレッドを生成して動作します。これにはプロファイラー自体も含まれることがあります。プロファイラー自身を無視したい場合は、`DD_PROFILING_IGNORE_PROFILER` を `true` に設定します。
+
 ## PrivateLink またはプロキシ経由でテレメトリーを送信する
 
 Datadog Lambda 拡張機能は、Datadog にデータを送信するために公衆インターネットにアクセスする必要があります。Lambda 関数が公衆インターネットにアクセスできない VPC にデプロイされている場合、`datadoghq.com` [Datadog サイト][29] には [AWS PrivateLink 経由でデータを送信][28]し、それ以外のサイトには[プロキシ経由でデータを送信][30]することができます。
@@ -876,3 +883,4 @@ Datadog Lambda 拡張機能をインストールして、Lambda 関数のコン�
 [38]: /ja/serverless/guide#install-using-the-datadog-forwarder
 [39]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
 [40]: /ja/serverless/libraries_integrations/extension/
+[42]: /ja/profiler/

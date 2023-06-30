@@ -502,6 +502,7 @@ Agent コンテナで必要な環境変数
 - `pshard_stats` は、**elasticsearch.primaries.\*** および **elasticsearch.indices.count** メトリクスを送信します。
 - `index_stats` は、**elasticsearch.index.\*** メトリクスを送信します。
 - `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
+- `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
 
 ### メトリクス
 {{< get-metrics-from-git "elastic" >}}

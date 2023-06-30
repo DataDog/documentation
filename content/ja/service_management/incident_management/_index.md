@@ -29,8 +29,6 @@ title: インシデント管理
 <div class="alert alert-warning">Datadog for Government site では、インシデント管理をご利用いただけません。</div>
 {{< /site-region >}}
 
-{{< img src="monitors/incidents/workflow-1-graph-1.png" alt="グラフから" style="width:80%;">}}
-
 組織のサービス中断につながる可能性のあるイベントは、すべてインシデントと見なすことができます。多くの場合、こうしたイベントを処理するためのフレームワークを用意する必要があります。Datadog のインシデント管理機能は、組織がインシデントを効果的に識別して軽減できるシステムを提供します。
 
 インシデントは、収集しているメトリクス、トレース、ログとともに Datadog に存在します。自分に関連するインシデントを表示してフィルタリングできます。
@@ -46,7 +44,7 @@ Datadog パラダイムでは、次のいずれかがインシデントを宣言
 
 **注**: [Apple App Store][4] および [Google Play Store][5] で入手できる [Datadog モバイルアプリ][3]をダウンロードして、モバイルデバイスのホーム画面からインシデント一覧を表示し、インシデントを管理/作成することができます。
 
-{{< img src="monitors/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのインシデント">}}
+{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのインシデント">}}
 
 ### インシデントの作成
 
@@ -54,15 +52,15 @@ Datadog パラダイムでは、次のいずれかがインシデントを宣言
 
 グラフ上でエクスポートボタンをクリックすると表示される **Declare incident** ボタンをクリックすることで、グラフから直接インシデントを宣言できます。インシデント作成モーダルが表示され、グラフがシグナルとして追加されます。
 
-{{< img src="monitors/incidents/from-a-graph.png" alt="グラフからインシデントを作成" style="width:80%;">}}
+{{< img src="service_management/incidents/from-a-graph.png" alt="グラフからインシデントを作成" style="width:80%;">}}
 
 #### クリップボードから作成
 
 Datadog クリップボードから複数のモニターとグラフを収集し、インシデントを生成します。クリップボードにダッシュボードを追加するには、いずれかのグラフを複製し、**Open Clipboard** を選択します。次に、関連するグラフとモニターすべてをクリップボードに追加し、**Add to New Incident** をクリックします。クリップボード上のすべてがシグナルとしてインシデントに追加されます。
 
-{{< img src="monitors/incidents/from-clipboard.png" alt="クリップボードにダッシュボードを追加" style="width:80%;">}}
+{{< img src="service_management/incidents/from-clipboard.png" alt="クリップボードにダッシュボードを追加" style="width:80%;">}}
 
-{{< img src="monitors/incidents/clipboard.png" alt="クリップボードからインシデントを作成" style="width:80%;">}}
+{{< img src="service_management/incidents/clipboard.png" alt="クリップボードからインシデントを作成" style="width:80%;">}}
 
 **注**: インシデントからのエクスポートに加え、クリップボードのデータを新しいダッシュボードやノートブックにエクスポートできます。
 
@@ -70,11 +68,11 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 **Declare incident** ボタンをクリックすることで、モニターから直接インシデントを宣言できます。インシデント作成モーダルが表示され、モニターがシグナルとして追加されます。
 
-{{< img src="monitors/incidents/incident-from-monitor.png" alt="モニターからインシデントを作成" style="width:80%;">}}
+{{< img src="service_management/incidents/incident-from-monitor.png" alt="モニターからインシデントを作成" style="width:80%;">}}
 
 既存のインシデントにモニターを追加することもできます。
 
-{{< img src="monitors/incidents/existing.png" alt="既存のインシデントにモニターを追加" style="width:80%;">}}
+{{< img src="service_management/incidents/existing.png" alt="既存のインシデントにモニターを追加" style="width:80%;">}}
 
 #### セキュリティシグナルから
 
@@ -82,17 +80,17 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 サイドパネルの右上にあるエクスポートボタンを選択し、**Export to incident** をクリックして、Application Security Management のシグナルからインシデントを宣言します。
 
-{{< img src="monitors/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
+{{< img src="service_management/incidents/security-signal-incidents.png" alt="セキュリティシグナルからインシデントを作成" style="width:80%;">}}
 
 #### Incidents ページから作成
 
 [Datadog UI][1] で **New Incident** をクリックし、インシデントを作成します。
 
-{{< img src="monitors/incidents/incident_declaration_modal.jpeg" alt="インシデント宣言モーダル" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_declaration_modal.jpeg" alt="インシデント宣言モーダル" style="width:80%;">}}
 
 インシデント作成モーダルは、オーガニゼーションで使用されている重大度とステータスのヘルパーテキストと説明を含む折りたたみ可能なサイドパネルをレスポンダーに提供します。ヘルパーのテキストと説明は、[Incident Settings][6] でカスタマイズできます。
 
-{{< img src="monitors/incidents/incident_information_settings.jpeg" alt="インシデント情報の設定" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_information_settings.jpeg" alt="インシデント情報の設定" style="width:80%;">}}
 
 #### Slack から作成
 
@@ -104,7 +102,7 @@ Datadog クリップボードから複数のモニターとグラフを収集し
 
 Datadog Slack アプリの使用については、[こちら][8]を確認してください。
 
-{{< img src="monitors/incidents/from-slack.png" alt="Slack からインシデントを作成" style="width:60%;">}}
+{{< img src="service_management/incidents/from-slack.png" alt="Slack からインシデントを作成" style="width:60%;">}}
 
 インシデントを宣言しているユーザーが Datadog アカウントを所有している場合、デフォルトではそのユーザーがインシデント調査責任者 (IC) になります。インシデントを宣言しているユーザーが Datadog アカウントを所有していない場合、IC は一般の `Slack app user` に割り当てられます。IC は Datadog アプリの[インシデントページ][1]で変更できます。
 
