@@ -11,7 +11,7 @@ kind: 가이드
 title: 서버리스 경고
 ---
 
-Datadog은 성능 문제와 오류를 해결할 수 있는 해결 방법을 자동으로 제안하고 서버리스 애플리케이션 비용을 최적화 합니다.
+Datadog은 성능 문제와 오류를 해결할 수 있는 해결 방법을 자동으로 제안하고 서버리스 애플리케이션 비용을 최적화합니다.
 
 [서버리스용 Watchdog][1]이 제공하는 인사이트 외에도 Datadog 서버리스 모니터링이 함수와 관련한 여러 문제를 감지하고 **경고**를 보냅니다.
 
@@ -24,11 +24,11 @@ Datadog은 AWS CloudWatch 메트릭, Datadog의 향상된 AWS Lambda 메트릭, 
  2. [Datadog 포워더][4]를 설정해 Lambda `REPORT` 로그가 Datadog에 인덱싱되었는지 확인합니다.
  3. 함수에 [향상된 Lambda 메트릭][5]을 활성화합니다.
 
-**참고**: Datadog에서 [AWS 통합][3]을 설정하면 기본적으로 [High Errors](#high-errors), [High Duration](#high-duration), [Throttled](#throttles), [High Iterator Age](#high-iterator-age) 경고를 생성합니다. 개별 호출에서 생성되는 경고 등 다른 경고를 사용하려면 [Datadog 포워더][4]와 [향상된 Lambda 메트릭][5]이 있어야 합니다.
+**참고**: Datadog에서 [AWS 통합][3]을 설정하면 기본적으로 [높은 오류 발생률](#high-errors), [높은 지속 시간](#high-duration), [스로틀](#throttles), [높은 반복기 나이](#high-iterator-age) 경고를 생성합니다. 개별 호출에서 생성되는 경고 등 다른 경고를 사용하려면 [Datadog 포워더][4]와 [향상된 Lambda 메트릭][5]이 있어야 합니다.
 
 ## 경고 생성
 
-### Error
+### 오류
 
 선택한 시간 범위에서 함수 호출의 1% 이상에 오류가 있습니다.
 
@@ -48,7 +48,7 @@ Datadog은 AWS CloudWatch 메트릭, Datadog의 향상된 AWS Lambda 메트릭, 
 
 **해결 방법: 설정된 최대 메모리에 가까운 메모리를 사용하는 Lambda 함수는 Lambda 런타임에 의해 종료될 위험이 있으며, 이로 인해 사용자에게 오류가 발생할 수 있습니다. 함수에 설정된 메모리를 증량하는 것을 고려해 보세요. 이는 AWS 청구서에 영향을 줄 수 있으니 참고하세요.
 
-### 높은 기간
+### 높은 지속 기간
 
 선택한 시간 범위에서 적어도 하나의 호출이 설정된 시간 제한의 95%를 초과했습니다.
 
