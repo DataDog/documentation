@@ -46,7 +46,7 @@ You can generate both of these in [Observability Pipelines][3].
 
 You will also need a Splunk index to send logs to.
 
-## Provider-specific requirements
+### Provider-specific requirements
 
 ## Installing the Observability Pipelines Worker
 

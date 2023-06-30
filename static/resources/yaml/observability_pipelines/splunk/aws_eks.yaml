@@ -1,0 +1,131 @@
+datadog:
+  apiKey: "<datadog_api_key>"
+  pipelineId: "<observability_pipelines_configuration_id>"
+  site: "datadoghq.com"
+
+env:
+  - name: SPLUNK_HEC_ENDPOINT
+    value: <https://your.splunk.index:8088/>
+  - name: SPLUNK_TOKEN
+    value: <a_random_token_usually_a_uuid>
+
+## Autoscaling
+##
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  targetCPUUtilizationPercentage: 80
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+## HorizontalPodAutoscaler (HPA) requires resource requests to function,
+## so this example configures several default values. Datadog recommends
+## that you change the values to match the actual size of instances that
+## you are using.
+resources:
+  requests:
+    cpu: 1000m
+    memory: 512Mi
+
+affinity:
+  ## To prevent a single datacenter from causing a complete system failure,
+  ## this example defaults to running pods in different availability zones.
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - observability-pipelines-worker
+          topologyKey: topology.kubernetes.io/zone
+
+
+## Load Balancing
+## This example configuration avoids cross-availability-zone costs where possible.
+service:
+  enabled: true
+  type: "LoadBalancer"
+  externalTrafficPolicy: "Local"
+  annotations:
+    ## This example marks the service as ignored by the in-tree AWS LB controller.
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    ## This is the default for the AWS LB Controller but it is worthwhile to be explicit.
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
+    ## NLBs should communicate directly with the OP container instead of
+    ## passing through kube-proxy. This avoids cross-availability-zone traffic
+    ## to keep things within the availability zone, which kube-proxy might change.
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+
+
+## Buffering
+## This creates an EBS drive that can be used for buffers, which
+## must then be configured in the sinks themselves.
+##
+## The default drive is `io2`. Alternatively, you can also use `gp3` drives.
+persistence:
+  enabled: true
+  storageClassName: "io2"
+  accessModes:
+    - ReadWriteOnce
+  size: 288Gi
+
+## Observability Pipelines (OP) Configuration
+## This is a sample configuration that Datadog recommends for
+## getting started with OP.
+pipelineConfig:
+  sources:
+    splunk_receiver:
+      type: splunk_hec
+      valid_tokens:
+          - ${SPLUNK_TOKEN}
+
+  transforms:
+    ## This is a placeholder for your own remap (or other transform)
+    ## steps with tags set up. Datadog recommends these tag assignments.
+    ## They show which data has been moved over to OP and what still needs
+    ## to be moved.
+    LOGS_YOUR_STEPS:
+      type: remap
+      inputs:
+        - splunk_receiver
+      source: |
+        .sender = "observability_pipelines_worker"
+        .opw_aggregator = get_hostname!()
+
+  ## This buffer configuration is split into 144GB buffers for both of the Datadog and Splunk sinks.
+  ##
+  ## This should work for the vast majority of OP Worker deployments and should rarely
+  ## need to be adjusted. If you do change it, be sure to update the size of the persistence
+  ## block above.
+  ##
+  ## The "${DD_API_KEY}" parameter is automatically replaced by the API
+  ## key you entered in the `datadog` section at the top of this file.
+  ##
+  ## The "${SPLUNK_HEC_ENDPOINT}" and "${SPLUNK_TOKEN}" parameters are automatically replaced
+  ## by the settings configured in the `env` section above this config.
+  sinks:
+    datadog_logs:
+      type: datadog_logs
+      inputs:
+        - LOGS_YOUR_STEPS
+      default_api_key: "${DD_API_KEY}"
+      compression: gzip
+      buffer:
+          type: disk
+          max_size: 154618822656
+    splunk_logs:
+      type: splunk_hec_logs
+      inputs:
+        - LOGS_YOUR_STEPS
+      endpoint: ${SPLUNK_HEC_ENDPOINT}
+      default_token: ${SPLUNK_TOKEN}
+      encoding:
+        codec: json
+      buffer:
+          type: disk
+          max_size: 154618822656
