@@ -17,9 +17,4 @@
 {{ partial "footer.html" . }}
 
 <!--- global modals --->
-{{ partialCached "global-modals/global-modals.html" . }}
-
-<!--- integrations carousel modal --->
-{{ if and (in .Params.Kind "integration") (.Params.tile) (.Params.tile.media | len) }}
-{{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
-{{ end }}
+{{ partial "global-modals/global-modals.html" . }}
