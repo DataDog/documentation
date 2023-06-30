@@ -103,7 +103,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 
 
-| Framework                | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
+| Framework                | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | http    |  {{< X >}} |  {{< X >}}  |  {{< X >}}  |
 | https   |  {{< X >}} |  {{< X >}} |  |
