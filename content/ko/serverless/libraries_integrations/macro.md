@@ -152,7 +152,7 @@ aws cloudformation update-stack \
 
 ## 문제 해결
 
-### Debug 로그
+### 디버그 로그
 
 문제를 디버깅하는 데 도움이 되도록 매크로 람다 함수에 대한 CloudWatch 로그를 살펴볼 수 있습니다. CloudWatch 로그를 찾으려면 다음과 같이 하세요:
 
@@ -207,7 +207,7 @@ Resources:
 
 ## 커뮤니티
 
-제품 피드백 및 질문은 [슬랙의 Datadog 커뮤니티](https://chat.datadoghq.com/)의 `#serverless`에 가입하세요.
+제품 피드백 및 질문이 있는 경우 [슬랙의 Datadog 커뮤니티](https://chat.datadoghq.com/)의 `#serverless` 채널에 가입하세요.
 
 [1]: https://github.com/DataDog/datadog-lambda-layer-python
 [2]: https://github.com/DataDog/datadog-lambda-layer-js
