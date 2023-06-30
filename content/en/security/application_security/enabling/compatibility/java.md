@@ -62,7 +62,7 @@ Datadog does not officially support any early-access versions of Java.
 
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code  supported? |
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -92,7 +92,7 @@ Datadog does not officially support any early-access versions of Java.
 - If **Vulnerability Management for Code-level** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Apache HTTP Client       | 4.0+        |  {{< X >}} |  |  |
 | gRPC                     | 1.5+        |  {{< X >}} |  |  |
@@ -120,7 +120,7 @@ Datadog does not officially support any early-access versions of Java.
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 - If your framework is not supported below, **Vulnerability Management for Code-level** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
-| Database                | Versions | Threat Detection supported? |  Vulnerability Management for Code supported? |
+| Database                | Versions | Threat Detection supported? |  Vulnerability Management for Code-level supported? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
 | Aerospike               | 4.0+     |  {{< X >}} |   |
 | Couchbase               | 2.0+     |  {{< X >}} |   |
