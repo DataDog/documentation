@@ -17,7 +17,8 @@ x-data="{
         $store.integrationsModal.activeSlide = idx
     },
     closeModal() {
-        // Closes the modal
+        // Closes the modal. pauses any active video in moda
+        $store.integrationsModal.pauseVideo($refs)
         $store.integrationsModal.isOpen = false
     },
 }"
