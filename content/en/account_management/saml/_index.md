@@ -36,7 +36,7 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 2. In the Datadog app, hover over your username in the bottom left corner and select Organization Settings. Select [Login Methods][17] and click on **Configure** under SAML.
 
-3. Upload the IdP metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
+3. Upload the IdP metadata from your SAML identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
 
 **Note:** The IdP metadata must contain ASCII characters only.
 
