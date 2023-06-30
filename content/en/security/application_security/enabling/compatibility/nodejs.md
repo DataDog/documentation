@@ -104,7 +104,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 
 | Framework                | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | http    |  {{< X >}} |  {{< X >}}  |  {{< X >}}  |
 | https   |  {{< X >}} |  {{< X >}} |  |
 
@@ -122,10 +122,10 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS**  is supported on all frameworks
-- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 
-| Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Code Vulnerability Detection supported? |
+| Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | [cassandra-driver][28] | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [couchbase][29]        | `^2.4.2` |{{< X >}}|          |          |
