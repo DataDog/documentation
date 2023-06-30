@@ -17,11 +17,8 @@ Alpine.store('integrationsModal', {
         // Plays active video. shared between modal and main carousel
         const {iframe, playBtn, playOverlay} = refs
         const player = new Vimeo.Player(iframe);
-
-        playBtn.classList.add('d-none');
-        playOverlay.classList.add('d-none');
-        iframe.classList.remove('d-none');
-
+       
+        iframe.classList.remove('d-none'); // this iframe has a z-index that puts in front of the play overay
         player.play()
     },
     pauseVideo (refs) {
