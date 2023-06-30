@@ -125,7 +125,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 
-| Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code supported? |
+| Framework                 | Versions | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | [cassandra-driver][28] | `>=3`    |{{< X >}}|{{< X >}} |          |
 | [couchbase][29]        | `^2.4.2` |{{< X >}}|          |          |
