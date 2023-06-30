@@ -61,7 +61,7 @@ Developers can dismiss individual insights and set filters to view the categorie
 ## Synthetic Tests
 The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in the IDE. This ensures that any potential issue resulting from code changes is identified and addressed before the code is deployed into production and impacts your end users.
 
-{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="The Datadog Extension in Visual Studio Code" style="width:100%;" >}}
+{{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="The Datadog Extension in VS Code" style="width:100%;" >}}
 
 ### Run Synthetic tests locally
 
