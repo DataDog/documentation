@@ -52,7 +52,7 @@ You can specify how much time a test needs to fail before triggering a notificat
 
 ### Define scheduling and alert conditions
 
-By default, mobile tests are set up for on-demand testing, meaning these tests can run [directly in a CI pipeline][1].
+By default, mobile tests are set up for on-demand testing, meaning these tests can run [directly in a CI pipeline](#run-tests-in-ci).
 
 {{< img src="mobile_testing/alerting_rules.png" alt="Scheduling and alerting conditions for a mobile test" style="width:90%" >}}
 
@@ -106,6 +106,8 @@ In this example, the test `aaa-aaa-aaa` runs with the override application versi
 ```
 
 Then, run `$ datadog-ci synthetics run-tests --config synthetics-ci.config`.
+
+For more information, see [Continuous Testing and CI/CD][1].
 
 ## Permissions
 

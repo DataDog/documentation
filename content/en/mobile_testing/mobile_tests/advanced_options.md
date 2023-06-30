@@ -15,7 +15,6 @@ further_reading:
 
 This page describes advanced options for Synthetic mobile tests. 
 
-
 ## Locate an element
 
 ### Datadog algorithm
@@ -26,7 +25,7 @@ To prevent flaky tests, Datadog uses an algorithm that leverages a set of locato
 
 When the test runs successfully, the mobile test recomputes (or "self heals") any broken locators with updated values, ensuring your tests do not break from simple UI updates and that your tests are automatically adapting to your application's UI. 
 
-To ensure that your mobile test does not validate an unexpected change, use [assertions][5] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
+To ensure that your mobile test does not validate an unexpected change, use [assertions][1] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
 
 ### User specified locator
 
@@ -34,7 +33,7 @@ By default, mobile tests use the Datadog locator system. When a test searches fo
 
 These points of reference become a set of locators, each of which uniquely define the element. You should only use custom selectors in edge cases because the Datadog locator system enables tests to be self-maintaining.
 
-Custom selectors are created by performing a step of interest in the recorder (such as a **click**, **hover**, or **assert**) on any element of your page. This specifies the kind of step that needs to be performed.
+Custom selectors are created by performing a step of interest in the recorder (such as a **tap**, **double tap**, or **open deep link**) on any element of your page. This specifies the kind of step that needs to be performed.
 
 To use a specific identifier (for example, to click on the `nth` element in a dropdown menu regardless of what the content of the element is):
 
@@ -61,4 +60,4 @@ You can decide to fall back on the regular browser test algorithm by clearing th
 [2]: /data_security/synthetics/
 [3]: /synthetics/browser_tests/?tab=privacy#test-configuration
 [4]: /synthetics/browser_tests/actions/#subtests
-[5]: /synthetics/browser_tests/actions/#assertion
+[1]: /synthetics/browser_tests/steps/#assertion

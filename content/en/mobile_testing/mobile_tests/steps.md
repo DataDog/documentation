@@ -6,6 +6,9 @@ further_reading:
 - link: "/mobile_testing/mobile_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
+- link: "/mobile_testing/advanced_options/"
+  tag: "Documentation"
+  text: "Learn about advanced options in mobile tests"
 ---
 
 ## Overview
@@ -16,7 +19,7 @@ Steps are a series of actions that you can record for a mobile test and edit or 
 
 To start recording and adding steps, select a device to launch a mobile test from the dropdown menu and click **Launch Device**. 
 
-{{< img src="mobile_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:70%" >}}
+{{< img src="mobile_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:60%" >}}
 
 Select **Show only available devices. Available devices load faster** to see the most available devices for shorter wait times. Click the **Device Connection Notification** button to enable notifications for when your device is ready.
 
@@ -143,7 +146,7 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 
 To see all available variables on manually added steps, type `{{` in the input field.
 
-{{< img src="mobile_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:30%" >}}
+{{< img src="mobile_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:25%" >}}
 
 To use a variable on automatically recorded steps, add a step name and specify the variable value in the **Type Text step** modal to input the variable value while recording. 
 
