@@ -14,7 +14,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 | Threat Detection | 1.9.0   |
 | Threat Protection | 1.10.0  |
 | Vulnerability Management for Open Source Software (OSS) | 1.5.0  |
-| Vulnerability Management for Code (beta)  |  private beta  |
+| Vulnerability Management for Code-level (beta)  |  private beta  |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version. 
 
