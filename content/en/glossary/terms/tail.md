@@ -1,10 +1,8 @@
 ---
 title: tail
-synonyms:
-  - tailing
 core_product:
   - log management
 ---
-Tailing is derived from the `tail` command in Unix and Linux operating systems. When you tail a log file, you print out the last few lines of the file instead of printing the entire log file. Usually, you tail a file when you're trying to find the most recent events in a log file. You can set the Datadog Agent up to tail a log file. For more information see [Custom log collection][1]
+Tailing is derived from the `tail` command in Unix and Linux operating systems. Tailing is an alternative to printing the entire contents of a file. When you tail a log file, you print the last few lines of the file to the terminal. Tailing is commonly used with log files to find the most recently logged events for a process or service. You can set the Datadog Agent up to tail a log file. For more information see [Custom log collection][1].
 
 [1]: /agent/logs/?tab=tailfiles#custom-log-collection
