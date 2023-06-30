@@ -24,7 +24,7 @@ The minimum tracer version to get all supported ASM capabilities for Node.js is 
 - Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-|Type           | Threats support   |  Vulnerabilities support  |
+|Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
