@@ -23,7 +23,7 @@ further_reading:
 
 The Datadog extension for VS Code integrates with the Datadog platform to accelerate your development.
 
-{{< img src="/developers/ide_integrations/vscode/code-insights.png" alt="The Code Insights view." style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/vscode/datadog-vscode.png" alt="The Datadog for VS Code extension" style="width:100%;" >}}
 
 The **Code Insights** view keeps you informed about:
 - Issues from [Error Tracking][10]
@@ -31,7 +31,7 @@ The **Code Insights** view keeps you informed about:
 - [Flaky tests][12] detected by CI Visibility
 - Profiling insights from [Watchdog Insights][13]
 
-The **Synthetic Test** feature allows you to:
+The **Synthetic Tests** feature allows you to:
 - Run Synthetic tests on your local environments
 - Set custom parameters without altering the original test definition
 - See test results locally in VS Code and in Datadog to access additional information
