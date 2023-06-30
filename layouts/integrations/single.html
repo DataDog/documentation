@@ -1,8 +1,7 @@
 {{ define "main" }}
-    {{$title := .Params.integration_title | default .Title}}
     <div class="row">
         <div class="col-12 order-1">
-            <h1 id="pagetitle">{{$title}}</h1>
+            <h1 id="pagetitle">{{ .Params.integration_title | default .Title }}</h1>
         </div>
         <div class="col-12">
             {{ partial "breadcrumbs.html" . }}
