@@ -17,8 +17,11 @@ Alpine.store('integrationsModal', {
         // Plays active video. shared between modal and main carousel
         const {iframe, playBtn, playOverlay} = refs
         const player = new Vimeo.Player(iframe);
-       
-        iframe.classList.remove('d-none'); // this iframe has a z-index that puts in front of the play overay
+
+        playBtn.classList.add('d-none')
+        playOverlay.classList.add('invisible')
+        iframe.classList.remove('d-none'); 
+
         player.play()
     },
     pauseVideo (refs) {
@@ -27,8 +30,8 @@ Alpine.store('integrationsModal', {
         if(iframe?.parentElement.classList.contains('active')){
             const player = new Vimeo.Player(iframe);
             player.pause().then(() => {
-                playBtn.classList.remove('d-none');
-                playOverlay.classList.remove('d-none');
+                playBtn.classList.remove('d-none')
+                playOverlay.classList.remove('invisible')
                 iframe.classList.add('d-none');
             }).catch((err) => {
                 console.log(err)
