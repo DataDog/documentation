@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | Threat Detection | 0.84.0     |
 | Threat Protection  | 0.86.0   |
 | Vulnerability Management for Open Source Software (OSS) | not supported |
-| Vulnerability Management for Code (beta) | not supported|
+| Vulnerability Management for Code-level (beta) | not supported|
 
 The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
 
@@ -95,7 +95,7 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
+- **Vulnerability Management for Code-level** is not supported
 
 The following frameworks aren't directly instrumented by ASM, but indirectly supported through runtime instrumentation.
 
@@ -131,7 +131,7 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
+- **Vulnerability Management for Code-level** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|
