@@ -19,7 +19,7 @@ The following ASM capabilities are supported in the Python library, for the spec
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version. 
 
 ### Supported deployment types
-|Type           | Threats support   |  Vulnerabilities support  |
+|Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
 | Kubernetes    | {{< X >}}         | {{< X >}}                 | 
