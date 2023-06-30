@@ -20,6 +20,6 @@
 {{ partialCached "global-modals/global-modals.html" . }}
 
 <!--- integrations carousel modal --->
-{{ if in .Params.categories "marketplace" }}
+{{ if and (in .Params.categories "marketplace") (.Params.tile.media | len) }}
 {{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
 {{ end }}

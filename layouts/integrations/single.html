@@ -10,9 +10,9 @@
     </div>
     {{ partial "integration-labels/integration-labels.html" . }}
     
-    {{ if in .Params.categories "marketplace" }}
+    {{ if and (in .Params.categories "marketplace") (.Params.tile.media | len) }}
     {{ partial "integrations-carousel/integrations-carousel.html" . }}
     {{ end }}
-    
+
     {{ .Content }}
 {{ end }}
