@@ -100,7 +100,7 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 The following frameworks aren't directly instrumented by ASM, but indirectly supported through runtime instrumentation.
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | CakePHP       | 2.x       |  {{< X >}} | {{< X >}} |
 | CodeIgniter   | 2.x       |  {{< X >}} | {{< X >}} |
 | FuelPHP       | 1.1        |  {{< X >}} | {{< X >}} |
@@ -132,7 +132,7 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
 - **Vulnerability Management for Code** is not supported
-- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|
 |-------------------|-----------------|-----------------|---------------|
