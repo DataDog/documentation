@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
 | Vulnerability Management for Open Source Software (OSS) | not supported |
-| Vulnerability Management for Code (beta) | not supported |
+| Vulnerability Management for Code-level (beta) | not supported |
 
 The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
 
@@ -42,9 +42,6 @@ These are supported on the following architectures:
 - Linux (GNU) x86-64, aarch64
 - Alpine Linux (musl) x86-64, aarch64
 - macOS (Darwin) x86-64, arm64
-
-
-
 
 ### Supported web servers
 - Attacker source HTTP request details
@@ -79,7 +76,7 @@ These are supported on the following architectures:
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
+- **Vulnerability Management for Code-level** is not supported
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -98,7 +95,7 @@ These are supported on the following architectures:
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
+- **Vulnerability Management for Code-level** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below. 
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
