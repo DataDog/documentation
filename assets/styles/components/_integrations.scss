@@ -746,7 +746,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 }
             }
             .carousel-controller__arrow {
-                z-index: 2;
+                z-index: 4;
                 opacity: 0;
                 width: 26px;
                 height: 26px;
@@ -765,12 +765,18 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                     .control-arrow{
                         left: 4px;
                         transform: rotate(45deg);
+                        @-moz-document url-prefix() { 
+                            left: 6px;
+                        }
                     }
                 }
                 &.next{
                     right: 20px;
                     .control-arrow{
                         transform: rotate(-135deg);
+                        @-moz-document url-prefix() { 
+                            left: 2px
+                        }
                     }
                 }
             }
