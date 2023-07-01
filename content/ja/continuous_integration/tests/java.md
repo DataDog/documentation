@@ -10,7 +10,7 @@ further_reading:
   text: テスト結果とパフォーマンスを確認する
 - link: /continuous_integration/troubleshooting/
   tag: ドキュメント
-  text: トラブルシューティング CI
+  text: CI のトラブルシューティング
 kind: documentation
 title: Java テスト
 ---
@@ -40,10 +40,13 @@ Datadog にテスト結果を報告するには、Datadog の Java ライブラ�
 
 Jenkins や自己管理型の GitLab CI などのオンプレミス CI プロバイダーでテストを実行する場合、[Agent インストール手順][1]に従って各ワーカノードに Datadog Agent をインストールします。これは、テスト結果が自動的に基礎となるホストメトリクスにリンクされるため、推奨されるオプションです。
 
-CI プロバイダーがコンテナベースのエグゼキューターを使用している場合、すべてのビルドで `DD_AGENT_HOST` 環境変数 (デフォルトは `http://localhost:8126`) を、ビルドコンテナの中からアクセスできるエンドポイントに設定します。これは、ビルド内で `localhost` を使用すると、Datadog Agent が動作している基礎となるワーカーノードではなく、コンテナ自体が参照されてしまうためです。
+Kubernetes エグゼキュータを使用している場合、Datadog は [Datadog Admission Controller][2] を使用することをお勧めします。これにより、ビルドポッドの環境変数が自動的に設定されてローカルの Datadog Agent と通信します。
 
-Kubernetes のエグゼキューターを使用している場合、Datadog は [Datadog Admission Controller][2] の使用を推奨しており、これは自動的にビルドポッドの環境変数 `DD_AGENT_HOST` を設定してローカルの Datadog Agent と通信させます。
+Kubernetes を使用していない場合、または [Datadog Admission Controller][2] を使用できない場合で、CI プロバイダーがコンテナベースのエクゼキュータを使用している場合は、トレーサーを実行するビルドコンテナ内の環境変数 `DD_TRACE_AGENT_URL` (デフォルトは `http://localhost:8126`) を、そのコンテナ内からアクセス可能なエンドポイントに設定します。_ビルド内で `localhost` を使用すると、コンテナ自体を参照し、基盤となるワーカーノードや Container Agent が動作しているコンテナを参照しないことに注意してください_。
 
+`DD_TRACE_AGENT_URL` は、プロトコルとポート (例えば、`http://localhost:8126`) を含み、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` よりも優先され、CI Visibility のために Datadog Agent の URL を構成するために推奨される構成パラメーターです。
+
+それでも Datadog Agent への接続に問題がある場合は、[Agentless Mode](?tab=cloudciprovideragentless#configuring-reporting-method) を使用してください。**注**: この方法を使用すると、テストとインフラストラクチャーメトリクスの相関がなくなります。
 
 [1]: /ja/agent/
 [2]: https://docs.datadoghq.com/ja/agent/cluster_agent/admission_controller/
@@ -51,7 +54,7 @@ Kubernetes のエグゼキューターを使用している場合、Datadog は 
 
 {{% tab "クラウド CI プロバイダー (Agentless)" %}}
 
-<div class="alert alert-info">Agentless モードは、Datadog Java ライブラリのバージョン >= 0.101.0 で使用できます</div>
+<div class="alert alert-info">Agentless モードは、Datadog .NET ライブラリのバージョン >= 0.101.0 で使用できます</div>
 
 GitHub Actions や CircleCI など、基盤となるワーカーノードにアクセスできないクラウド CI プロバイダーを使用している場合は、Agentless モードを使用するようにライブラリを構成します。そのためには、以下の環境変数を設定します。
 
