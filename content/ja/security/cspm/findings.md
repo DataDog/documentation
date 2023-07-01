@@ -59,12 +59,12 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 
 例えば、['Block Public Access' feature is enabled for S3 bucket][4] ルールは、S3 バケットが一般にアクセス可能かどうかを評価します。一般に共有されることを意図した静的アセットを持つ S3 バケットがある場合、その S3 バケットに対する発見をミュートすることができます。
 
-合格・不合格の発見は、いつでもミュートすることができます。発見をミュートすると、その発見はポスチャスコアの計算から除外されます。
+一度に最大 50 の発見をミュートすることができます。発見をミュートすると、その発見はポスチャスコアの計算から除外されます。
 
-{{< img src="security/cspm/findings/muted-findings2.png" alt="Mute findings ダイアログボックスには、ミュートの理由と期間を指定するためのフィールドがあります" style="width:100%;">}}
+{{< img src="security/cspm/findings/muted-findings2.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
-1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、リソースを選択します。
-2. **Mute** をクリックします。
+1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、1 つ以上のリソースを選択します。
+2. **Actions** > **Mute** を選択します。
 3. ミュートの理由を選択します。例えば、修正待ち、誤検出、受容されたリスクなどです。
 4. オプションで **Description** を入力します。
 5. ミュートの継続時間を選択します。
@@ -75,7 +75,7 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 ミュートされた発見は、指定されたミュート時間が経過すると自動的にミュートが解除されます。また、手動でミュートを解除することもできます。
 
 1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、ミュートされた発見のあるリソースを選択します。
-2. **Unmute** をクリックします。
+2. **Actions** > **Unute** を選択します。
 3. ミュート解除の理由を選択します。例えば、未解決の修正がない、ヒューマンエラーである、または受け入れ可能なリスクでなくなった、などです。
 4. オプションで **Description** を入力します。
 5. **Unmute** をクリックします。
