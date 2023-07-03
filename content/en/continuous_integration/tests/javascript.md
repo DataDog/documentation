@@ -337,12 +337,6 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 {{< /tabs >}}
 
-### Reporting code coverage
-
-When tests are instrumented with [Istanbul][6], the Datadog Tracer (v3.20.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
-
-You can see the evolution of the test coverage in the **Coverage** tab of a test session.
-
 ### Using Yarn 2 or later
 
 If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
