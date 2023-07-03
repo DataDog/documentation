@@ -40,11 +40,12 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 
 ```
 
-Requires:
-- OpenJDK 11+ and `dd-trace-java` version 0.65.0+; or
-- OpenJDK 8: 8u282+ and `dd-trace-java` version 0.77.0+.
+<div class="alert alert-warning">
+  We highly recommend [using the Datadog profiler][2] instead of JFR.
+</div>
 
 [1]: /profiler/enabling/java
+[2]: /profiler/enabling/java/?tab=datadog#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
@@ -70,6 +71,8 @@ Require `dd-trace-go` version 1.37.0+.
 
 **Note:** This feature works best with Go version 1.18 or newer. Go 1.17 and below have several bugs (see [GH-35057][2], [GH-48577][3], [CL-369741][4], and [CL-369983][5]) that can reduce the accuracy of this feature, especially when using a lot of CGO.
 
+TODO go timeline recommendation
+
 [1]: /profiler/enabling/go
 [2]: https://github.com/golang/go/issues/35057
 [3]: https://github.com/golang/go/issues/48577
@@ -80,7 +83,7 @@ Require `dd-trace-go` version 1.37.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your .NET service][1].
 
-Requires `dd-trace-dotnet` version 2.7.0+.
+Requires `dd-trace-dotnet` version 2.30.0+.
 
 [1]: /profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -94,22 +97,72 @@ Requires `dd-trace-php` version 0.71+.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Link from a span to profiling data
+### Span execution breakdown
 
 From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
 
-The values on the left side is the time spent in that method call during the selected span. Depending on the runtime and language, this list of types varies:
-
-- **Method durations** shows the overall time taken by each method from your code.
+The values on the left side is the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang lang="java" >}}
 - **CPU** shows the time taken executing CPU tasks.
 - **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
-- **VM operations** (Java only) shows the time taken waiting for VM operations that are not related to garbage collection (for example, heap dumps).
+- **VM operations** shows the time taken waiting for VM operations (garbage collections, compilation, safepoints, heap dumps, ...).
 - **File I/O** shows the time taken waiting for a disk read/write operation to execute.
 - **Socket I/O** shows the time taken waiting for a network read/write operation to execute.
 - **Monitor enter** shows the time a thread is blocked on a lock.
 - **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+- **CPU** shows the time taken executing CPU tasks.
+- **Lock Wait** shows the time a thread is blocked on a lock.
+- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+- **CPU** shows the time taken executing CPU tasks.
+- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+- **CPU** shows the time taken executing CPU tasks.
+- **Off-CPU** shows the time taken to execute the span that is not CPU execution.
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+- **CPU** shows the time taken executing CPU tasks.
+- **Lock Wait** shows the time a thread is blocked on a lock.
+- **Uncategorized** shows the time taken to execute the span that cannot be placed into one of the above categories.
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+- **CPU** shows the time taken executing CPU tasks.
+- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 Click the plus icon `+` to expand the stack trace to that method **in reverse order**. Hover over the value to see the percentage of time explained by category.
+
+### Span execution timeline view
+
+{{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" video=true >}}
+
+The timeline view surface time-based patterns and work distribution over the period of the span. Drag and drop to see detailed breakdowns
+
+Depending on the runtime and language, the timeline lines vary:
+
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang lang="java" >}}
+Each line is a thread. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+
+Lines are top are runtime activities that may add extra latency. They are unrelated to the request itself.
+{{< /programming-lang >}}
+{{< programming-lang lang="go" >}}
+Each line is a goroutine. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
+
+TODO For each goroutine, you see the goroutine state (waiting, scheduled, running, ...) as well as the stack traces
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+Each line is a thread. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+
+Lines are top are runtime activities that may add extra latency. They are unrelated to the request itself.
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 ### Viewing a profile from a trace
 
