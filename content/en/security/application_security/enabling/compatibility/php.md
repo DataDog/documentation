@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | Threat Detection | 0.84.0     |
 | Threat Protection  | 0.86.0   |
 | Vulnerability Management for Open Source Software (OSS) | not supported |
-| Vulnerability Management for Code (beta) | not supported|
+| Vulnerability Management for Code-level (beta) | not supported|
 
 The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
 
@@ -23,7 +23,7 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type           | Threats support   |  Vulnerabilities support  |
+|Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         |                           |
 | Kubernetes    | {{< X >}}         |                           | 
@@ -95,12 +95,12 @@ The library supports the use of all PHP frameworks, and also the use of no frame
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
+- **Vulnerability Management for Code-level** is not supported
 
 The following frameworks aren't directly instrumented by ASM, but indirectly supported through runtime instrumentation.
 
 | Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
+| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | CakePHP       | 2.x       |  {{< X >}} | {{< X >}} |
 | CodeIgniter   | 2.x       |  {{< X >}} | {{< X >}} |
 | FuelPHP       | 1.1        |  {{< X >}} | {{< X >}} |
@@ -131,8 +131,8 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 
 ##### ASM Capability Notes
 - **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
-- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
+- **Vulnerability Management for Code-level** is not supported
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|
 |-------------------|-----------------|-----------------|---------------|
