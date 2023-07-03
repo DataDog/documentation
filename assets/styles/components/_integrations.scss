@@ -824,6 +824,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
 .integrations-carousel-modal {
     z-index: 1081;
     background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: scroll;
     .modal-container {
         width: 80vw;
         max-width: 1146px;
