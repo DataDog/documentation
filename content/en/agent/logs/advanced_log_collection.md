@@ -18,6 +18,9 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 algolia:
   tags: ['advanced log filter']
 ---
