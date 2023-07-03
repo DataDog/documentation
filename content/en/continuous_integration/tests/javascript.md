@@ -357,6 +357,11 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 ```
 
+## Reporting code coverage
+
+When tests are instrumented with [Istanbul][6], the Datadog Tracer (v3.20.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
 ## Configuration settings
 
@@ -381,7 +386,7 @@ The following is a list of the most important configuration settings that can be
 
 All other [Datadog Tracer configuration][7] options can also be used.
 
-### Collecting Git metadata
+## Collecting Git metadata
 
 Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
 
@@ -434,6 +439,113 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 ## Git metadata upload
 
 From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uploads git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`. However, this is not recommended, as features like Intelligent Test Runner and others do not work without it.
+
+
+## Manual testing API
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
+</div>
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Manual testing API is currently in <strong>beta</strong>, so its API might change.
+</div>
+
+If you use Jest, Mocha, Cypress, Playwright or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+
+The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
+
+```javascript
+const { channel } = require('node:diagnostics_channel')
+
+const { describe, test, beforeEach, afterEach, assert } = require('my-custom-test-framework')
+
+const testStartCh = channel('dd-trace:ci:manual:test:start')
+const testFinishCh = channel('dd-trace:ci:manual:test:finish')
+const testSuite = __filename
+
+describe('can run tests', () => {
+  beforeEach((testName) => {
+    testStartCh.publish({ testName, testSuite })
+  })
+  afterEach((status, error) => {
+    testFinishCh.publish({ status, error })
+  })
+  test('first test will pass', () => {
+    assert.equal(1, 1)
+  })
+})
+```
+
+### Test start channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:start` to publish that a test is going to start. A good place to do this might be a `beforeEach` hook, or similar.
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testStartCh = channel('dd-trace:ci:manual:test:start')
+
+// ... code for your testing framework goes here
+  beforeEach(() => {
+    const testDefinition = {
+      testName: 'a-string-that-identifies-this-test',
+      testSuite: 'what-suite-this-test-is-from.js'
+    }
+    testStartCh.publish(testDefinition)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload that needs to be published has attributes `testName` and `testSuite`, both of which are strings, that identify the test about to start.
+
+### Test finish channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:finish` to publish that a test is about to end. A good place to do this might be a `afterEach` hook, or similar.
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testFinishCh = channel('dd-trace:ci:manual:test:finish')
+
+// ... code for your testing framework goes here
+  afterEach(() => {
+    const testStatusPayload = {
+      status: 'fail',
+      error: new Error('assertion error')
+    }
+    testStartCh.publish(testStatusPayload)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload that needs to be published has attributes `status` and `error`:
+
+* `status` is a string that can only take three values:
+  * `'pass'` when a test passes.
+  * `'fail'` when a test fails.
+  * `'skip'` when a test has been skipped.
+
+* `error` is an `Error` object containing the reason why a test failed.
+
+### Add tags channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:addTags` to publish that a test needs custom tags. This can be done within the test function:
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
+
+// ... code for your testing framework goes here
+  test('can sum', () => {
+    testAddTagsCh.publish({ 'test.owner': 'my-team', 'number.assertions': 3 })
+    const result = sum(2, 1)
+    assert.equal(result, 3)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload that needs to be published is a dictionary `<string, string|number>` of tags or metrics that will be added to the test.
+
+
 
 ## Known limitations
 
