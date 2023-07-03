@@ -19,7 +19,7 @@ Datadog Cloud Security Posture Management (CSPM) は、お使いのクラウド�
 
 ## クラウドリソース全体の誤構成の検出
 
-Datadog の[すぐに使えるコンプライアンスルール](#manage-out-of-the-box and-custom-detection-rules)を使用して、すべてのクラウドリソースで誤構成を検出、優先順位付け、修正することにより、セキュリティ体制を強化し、継続的にコンプライアンスを実現します。
+Datadog の[すぐに使えるコンプライアンスルール](#manage-out-of-the-box-and-custom-compliance-rules)を使用して、すべてのクラウドリソースで誤構成を検出、優先順位付け、修正することにより、セキュリティ体制を強化し、継続的にコンプライアンスを実現します。
 
 [Overview ページ][1]では、セキュリティ状況の概要を見ることができます。[Security Findings Explorer][2] で、発見内容の詳細や過去の構成を分析することができます。
 

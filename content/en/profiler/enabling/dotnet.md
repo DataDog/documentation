@@ -35,7 +35,7 @@ Windows 10<br/>
 Windows Server starting from version 2012
 
 Serverless
-: Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+: Azure App Services - public beta (webapps only, functions are not supported)
 
 Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
