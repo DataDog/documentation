@@ -57,7 +57,8 @@ datadog:
 
 Then, upgrade your Helm chart.
 
-[4]: https://github.com/DataDog/helm-charts
+[3]: https://github.com/DataDog/helm-charts
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Manual" %}}
 For manual setup, see [Set up Orchestrator Explorer with DaemonSet][5].
@@ -102,11 +103,11 @@ Click on any row in the table or on any object in a Cluster Map to view informat
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="A view of resources in the side panel, opened to processes." style="width:80%;">}}
 
-By opening the side panel you will find the full resource definition in **Yaml** tab. Starting the **Agent version >= 7.44.0**, we are able to provide a 7 days history of this definition allowing you to compare what changed over time and across different versions.
+The side panel's **YAML** tab shows the full resource definition. Starting in **Agent version 7.44.0**, it also includes seven days of definition history, so you can compare what changed over time and across different versions.
 
 {{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="A view of resources in the side panel, showing the yaml history feature" style="width:80%;">}}
 
-You will also find more information for troubleshooting a selected resource, such as:
+The other tabs show more information for troubleshooting the selected resource:
 
 * [**Logs**][9]: View logs from your container or resource. Click on any log to view related logs in Logs Explorer.
 * [**APM**][11]: View traces from your container or resource, including the date, service, duration, method, and status code of a trace.
