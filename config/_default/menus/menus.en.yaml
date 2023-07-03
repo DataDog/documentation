@@ -9931,7 +9931,7 @@ api:
       operationids:
         - ListSpans
       unstable: []
-      order: 3
+      order: 2
   - name: Get a list of spans
     url: '#get-a-list-of-spans'
     identifier: spans-get-a-list-of-spans
@@ -9943,7 +9943,7 @@ api:
       operationids:
         - ListSpansGet
       unstable: []
-      order: 4
+      order: 1
   - name: Aggregate spans
     url: '#aggregate-spans'
     identifier: spans-aggregate-spans
@@ -9955,7 +9955,7 @@ api:
       operationids:
         - AggregateSpans
       unstable: []
-      order: 2
+      order: 3
   - name: Spans Metrics
     url: /api/latest/spans-metrics/
     identifier: spans-metrics
