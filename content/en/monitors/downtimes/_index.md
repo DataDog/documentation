@@ -25,13 +25,17 @@ Schedule downtimes for system shutdowns, off-line maintenance, or upgrades witho
 
 ## Create a new downtime schedule
 
-To schedule a [monitor downtime][1] in Datadog use the main navigation: _Monitors –> Manage Downtime_. Then, click the **Schedule Downtime** button in the upper right.
+To schedule a [monitor downtime][1] in Datadog navigate to _Monitors > Manage Downtimes_. Then, click the **Schedule Downtime** button in the upper right.
 
-To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for the monitor.
+To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
+
+{{< img src="/monitors/downtimes/downtime_fm_monitor.png" alt="Add a downtime schedule from an individual monitor with Mute" style="width:100%;" >}}
 
 ## Choose what to silence
 
-Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the *Group scope*. Click **Preview affected monitors** to see the monitors included. Any monitors created or edited after the downtime is scheduled are automatically included in the downtime if they match the scope.
+Apply downtime schedules to specific monitors by [name](#by-monitor-name) or to a broad range of monitors by monitor [tags](#by-monitor-tags). Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][4].
+
+**Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if they match the scope. 
 
 ### By Monitor Name
 
@@ -43,13 +47,11 @@ Schedule a downtime based on one or more [monitor tags][2]. The maximum number o
 
 ### Downtime scope
 
-If a downtime is scheduled for a [simple alert monitor][3], the `Group scope` field can be ignored since a simple alert monitor aggregates over all reporting sources to send a single alert.
+The downtime query follows the same syntax as the Logs Search, for more information see the [Log Search Syntax][17] documentation. The `Group scope` field does not apply to [simple alert monitors][3] since those monitors aggregate over all reporting sources. Select `All` for the Group scope.
 
-If a multi alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi alert is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
+If a multi alert monitor is included, it is only silenced for groups covered by the scope. For example, if a downtime is scoped for `host:X` and a multi alert monitor is triggered on both `host:X` and `host:Y`, Datadog generates a monitor notification for `host:Y`, but not `host:X`.
 
 To include all groups in the scope of a Downtime that applies to multi alert monitors, select `All` for the `Group scope`.
-
-See the guide on [Scoping downtimes schedules][4] for more example use cases on how group scope is applied to multi alert monitors.
 
 ## Set a downtime schedule
 
@@ -64,7 +66,7 @@ Set a one time downtime by entering the start date, time, and time zone. Optiona
 Recurring downtimes are useful for recurring maintenance windows. Set a recurring downtime by entering the start date, time, time zone, repeat, and duration. Optionally, specify an end date or number of occurrences.
 
 When a single downtime of a recurring downtime ends, the single downtime is cancelled and a new downtime is created with the same constraints and updated start and end times. <br>
-**Note**: The original creator is associated to all the newly created downtimes.
+**Note**: The original creator is associated with all the newly created downtimes.
 
 {{< img src="/monitors/downtimes/downtime_recurring_rrule.png" alt="Fields for scheduling recurring downtime with RRULE" style="width:90%;">}}
 
@@ -160,3 +162,4 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [14]: /integrations/amazon_ec2/#ec2-automuting
 [15]: /integrations/google_compute_engine/#gce-automuting
 [16]: /integrations/azure_vm/#automuting-monitors
+[17]: /logs/explorer/search_syntax/

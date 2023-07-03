@@ -13,16 +13,18 @@ further_reading:
 
 ## Overview
 
-Use group scope to apply additional filters to your downtime schedule and have more control over which monitors to mute. 
+Use group scope to apply additional filters to your downtime schedule and have more control over which monitors to mute. The examples in this guide show how the `Group scope` may be applied to monitors where [multi alert grouping][2] is configured.
 
-The examples in this guide show how the `Group scope` may be applied to multi alert monitors.
-
+{{< tabs >}}
+{{% tab "Monitor Name" %}}
 ## By Monitor Name
 
-### Mute notification for a specific service
+We have a monitor "Average CPU for {{service.name}} hosts in high". In the monitor configurations, we set up multi alerts to be sent for each `host` and `service`.
 
-1. To schedule downtime on only one group (in this case, `service:web-store`), enter that group in the `Group scope` field.
-2. **Preview affected monitors** indicates that the monitor chosen is still in scope, so alerts for the group `service:web-store` are muted during the scheduled downtime.
+### Mute monitors for a specific tag
+
+1. To schedule a downtime on only one group (in this case, `service:web-store`), enter that group in the `Group scope` field.
+2. Click **Preview affected monitors** to verify that the monitor chosen is still in scope, so alerts for the group `service:web-store` are muted during the scheduled downtime.
 
 {{< img src="monitors/downtimes/downtime_examplebyname1_downtime.jpg" alt="downtime example of 'By Monitor Name' with preview of affected monitors" style="width:80%;">}}
 
@@ -30,11 +32,11 @@ The examples in this guide show how the `Group scope` may be applied to multi al
 
 {{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Evaluation graph showing downtime for group service:web-store" style="width:80%;">}}
 
-4. To schedule a downtime on more than one group (such as `service:synthesizer` and `service:consul`), you can create an additional downtime per group.
+This mutes any alerts that includes `service:web-store` 
 
-### Mute notifications for a specific environment of a monitor grouped by `env` and `service`
+### Mute monitors for multiple tags
 
-1. To schedule downtime on one of the groups (in this case, `env:dev`), enter that group in the `Group scope` field.
+1. To schedule downtime on multiple groups (in this case, `env:dev`), enter that group in the `Group scope` field.
 2. **Preview affected monitors** indicates that the monitor chosen is still in scope, so alerts for the group `env:dev` are muted during the scheduled downtime.
 
 {{< img src="monitors/downtimes/downtime_examplebyname2_downtime.jpg" alt="downtime by monitor name with dev environment in scope" style="width:80%;">}}
@@ -45,11 +47,18 @@ The examples in this guide show how the `Group scope` may be applied to multi al
 
 4. To schedule a downtime on more than one "group by" (for example, `env:dev` AND `service:web-store`), add the additional scope to the downtime.
 
+{{% /tab %}}
+
+{{% tab "Monitor Tag" %}}
 ## By Monitor Tags
 
-If a scheduled downtime is based on a common monitor tag, and the monitors in scope are multi alert monitors with one group by scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
+A downtime can be scheduled for monitors based on their monitor tags, and the monitors in scope are multi alert monitors with one group by scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
 
-### Two multi alert monitors, each with one "group by" scope, have the `downtime:true` monitor tag in common
+<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations and tags assigned to the data you are querying.</div>
+
+The `Group scope` field filters the downtime to the data that matches the tags listed. For more information on monitor tags, see the documentation on how to [Manage Monitors][1].
+
+### Multiple monitors scoped with the same tag
 
 1. *Monitor A* is a multi alert monitor for hosts reporting a metric averaged across multiple `service` groups.
 2. *Monitor B* is a multi alert monitor for hosts reporting the same metric for `service:web-store`.
@@ -67,6 +76,13 @@ If a scheduled downtime is based on a common monitor tag, and the monitors in sc
 
 {{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.jpg" alt="Evaluation graph showing downtime for group service:web-store and both affected hosts" style="width:80%;">}}
 
+[1]: /monitors/manage/#monitor-tags
+
+{{% /tab %}}
+{{< /tabs >}}
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /monitors/manage/#monitor-tags
+[2]: /monitors/configuration/#multi-alert
