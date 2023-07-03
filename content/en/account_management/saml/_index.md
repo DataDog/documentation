@@ -36,11 +36,13 @@ Configuring [SAML (Security Assertion Markup Language)][1] for your Datadog acco
 
 2. In the Datadog app, hover over your username in the bottom left corner and select Organization Settings. Select [Login Methods][17] and click on **Configure** under SAML.
 
-3. Upload the IdP Metadata from your SAML Identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
+3. Upload the IdP metadata from your SAML identity provider by clicking the **Choose File** button. After choosing the file, click **Upload File**.
+
+**Note:** The IdP metadata must contain ASCII characters only.
 
 4. Download Datadog's [Service Provider metadata][18] to configure your IdP to recognize Datadog as a Service Provider.
 
-5. After you upload the IdP Meta-data and configure your IdP, enable SAML in Datadog by clicking the **Upload and Enable** button.
+5. After you upload the IdP metadata and configure your IdP, enable SAML in Datadog by clicking the **Upload and Enable** button.
     {{< img src="account_management/saml/saml_enable.png" alt="saml enable" >}}
     
 6. After uploading the IdP metadata, return to the **Login Methods** page and turn SAML `on` by default. 
@@ -143,15 +145,15 @@ Administrators can set the default role for new JIT users. The default role is *
 
 When the Datadog URL is loaded, the browser is redirected to the customer IdP where the user enters their credentials, then the IdP redirects back to Datadog. Some IdPs have the ability to send an assertion directly to Datadog without first getting an AuthnRequest (IdP Initiated Login).
 
-After enabling the IdP-initiated login feature and saving your configuration, you can download the latest version of the SP Metadata for your Identity Provider. Your new SP metadata contains a different, organization-specific `AssertionConsumerService` endpoint to send assertions to.
+After enabling the IdP-initiated login feature and saving your configuration, you can download the latest version of the Service Provider (SP) metadata for your Identity Provider. Your new SP metadata contains a different, organization-specific `AssertionConsumerService` endpoint to send assertions to.
 
-If you do not use the updated SP Metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the "InResponseTo" attribute.
+If you do not use the updated SP metadata, Datadog is not able to associate the assertion with your organization and displays an error page with a message that the SAML response is missing the "InResponseTo" attribute.
 
 ### SAML strict
 
 You can make your organization SAML Strict by disabling other login method types in the the **Login Methods** UI. When this option is configured, all users must, by default, log in with SAML. An existing username/password or Google OAuth login does not work. This ensures that all users with access to Datadog must have valid credentials in your company's identity provider/directory service to access your Datadog account. Org administrators can set per-user [overrides][26] to allow certain users to be SAML Strict exempt.
 
-### Self-updating Datadog SP Metadata
+### Self-updating Datadog SP metadata
 
 Certain Identity Providers (such as Microsoft's ADFS) can be configured to pull the latest SAML service provider metadata from Datadog. After you configure SAML in Datadog, you can get the metadata URL for your organization from the SAML Configuration page and use that with your Identity Provider to get the latest service provider metadata whenever changes are published.
 
