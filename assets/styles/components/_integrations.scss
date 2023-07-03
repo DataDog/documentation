@@ -714,6 +714,7 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 grid-template-rows: 1fr;
 
                 .carousel-item__horizontal {
+                    min-height: fit-content;
                     grid-column: 1/-1;
                     grid-row: 1/-1;
                     &:not(.video-item) {
