@@ -220,7 +220,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 [9]: /synthetics/multistep?tab=requestoptions#use-variables
 [10]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[12]: /account_management/rbac/?tab=datadogapplication#custom-role
+[12]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites
