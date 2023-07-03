@@ -768,20 +768,15 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                 &.prev{
                     left: 8px;
                     .control-arrow{
-                        left: 4px;
+                        left: 10px;
                         transform: rotate(45deg);
-                        @-moz-document url-prefix() { 
-                            left: 6px;
-                        }
                     }
                 }
                 &.next{
                     right: 20px;
                     .control-arrow{
+                        left: 6px;
                         transform: rotate(-135deg);
-                        @-moz-document url-prefix() { 
-                            left: 2px
-                        }
                     }
                 }
             }
