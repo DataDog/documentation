@@ -695,12 +695,14 @@ $screen-md-max: ($screen-lg-min - 1) !default;
             height: 326px;
         }
 
-        .carousel-wrapper__horizontal:hover{
-            .carousel-controller__arrow{
-                opacity: 1;
-            }
-            .play-btn {
-                background-color: rgba(0, 0, 0, 0.4) !important;
+        @media (min-width: 768px) {
+            .carousel-wrapper__horizontal:hover{
+                .carousel-controller__arrow{
+                    opacity: 1;
+                }
+                .play-btn {
+                    background-color: rgba(0, 0, 0, 0.4) !important;
+                }
             }
         }
 
@@ -758,6 +760,9 @@ $screen-md-max: ($screen-lg-min - 1) !default;
                     border-bottom: solid 2px #969696;
                     border-left: solid 2px #969696;
                     position: relative;
+                }
+                @media (max-width: 767px) {
+                    opacity: 1;
                 }
                 
                 &.prev{
