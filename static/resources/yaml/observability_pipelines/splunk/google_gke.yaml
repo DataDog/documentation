@@ -76,6 +76,7 @@ pipelineConfig:
   sources:
     splunk_receiver:
       type: splunk_hec
+      address: 0.0.0.0:8088
       valid_tokens:
           - ${SPLUNK_TOKEN}
 
