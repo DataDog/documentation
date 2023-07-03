@@ -131,7 +131,7 @@ Click the **Focus On** selector to define the scope of the data:
 {{< programming-lang lang="java" >}}
 Endpoint profiling is enabled by default when you [turn on profiling for your Java service][1].
 
-Requires to [use the Datadog profiler][2], JFR is not supported.
+Requires [using the Datadog profiler][2]. JFR is not supported.
 
 [1]: /profiler/enabling/java
 [2]: /profiler/enabling/java/?tab=datadog#requirements
