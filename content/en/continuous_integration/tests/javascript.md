@@ -259,7 +259,7 @@ module.exports = defineConfig({
   }
 })
 {{< /code-block >}}
-<div class="alert alert-warning"><strong>Note</strong>: Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, <code>dd-trace</code> will not work properly.</div>
+<div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">after:run</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
 
 ### Cypress before version 10
 
@@ -279,7 +279,7 @@ These are the instructions if you're using a version older than `cypress@10`.
      require('dd-trace/ci/cypress/plugin')(on, config)
    }
    {{< /code-block >}}
-   <div class="alert alert-warning"><strong>Note</strong>: Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, <code>dd-trace</code> will not work properly.</div>
+   <div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
 
 2. Add the following line to the **top level** of your [`supportFile`][104]:
    {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
