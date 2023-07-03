@@ -250,7 +250,7 @@ Use the load balancers provided by your cloud provider.
 They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
 so they are only accessible inside your network.
 
-Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
+Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
 NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
 
@@ -273,7 +273,7 @@ Use the load balancers provided by your cloud provider.
 They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
 so they are only accessible inside your network.
 
-Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
+Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
@@ -283,7 +283,7 @@ Use the load balancers provided by your cloud provider.
 They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
 so they are only accessible inside your network.
 
-Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
+Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
@@ -326,7 +326,7 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 ## Connect forwarder(s) to the Worker
 Once you have the Observability Pipelines Worker installed and configured to send to your Splunk index, you must update your existing collectors to point at the Worker.
 
-For most collectors that exist, simply changing the URL (and token) should suffice.
+For most collectors that exist, simply changing the URL to the load balancer provisioned by these configurations, and updating the token, should suffice.
 
 At this point, your logs should be going to the Worker and is available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
