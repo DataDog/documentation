@@ -39,7 +39,7 @@ To report test results to Datadog, you need to configure the Datadog Python libr
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 {{< include-markdown "/content/en/continuous_integration/tests/includes/on_premises_datadog_agent_tab.md.inc" >}}
-{{ %/tab %}}
+{{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 {{< include-markdown "/content/en/continuous_integration/tests/includes/cloud_ci_agentless.md.inc" >}}
