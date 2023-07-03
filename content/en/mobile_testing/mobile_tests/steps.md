@@ -68,9 +68,27 @@ Create this assertion step to have your browser test confirm that the text you s
 
 ### Special actions
 
-To automatically record steps such as **Tap**, **Double Tap**, **Type Text**, **Scroll**, **Press Back**, **Wait**, **Device Rotation**, and **Open Deep Link**, create this assertion step manually by clicking **Special Actions** and selecting an action type.
+To automatically record steps such as **Tap**, **Double Tap**, **Type Text**, **Scroll**, **Press Back**, **Wait**, **Rotate Device**, and **Open Deep Link**, create this assertion step manually by clicking **Special Actions** and selecting an action type.
 
 {{< img src="mobile_testing/special_actions.png" alt="Choose an action type to add an assertion step" style="width:60%;" >}}
+
+#### Tap
+
+Interacting with elements with a tap on your mobile application records a step.
+
+{{< img src="mobile_testing/tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+
+#### Double tap
+
+Interacting with elements with a double tap on your mobile application records a step.
+
+{{< img src="mobile_testing/double_tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+
+#### Type text
+
+Interacting with a text input field on your mobile application, adding a name, and setting a value records a step.
+
+{{< img src="mobile_testing/type_text.mp4" alt="Recording a Type Text step in a mobile test" video=true >}}
 
 #### Scroll
 
@@ -78,17 +96,37 @@ Mobile tests automatically scroll to the elements that need to be interacted wit
 
 Specify the number of pixels you want the mobile test to scroll vertically and horizontally.
 
-{{< img src="mobile_testing/scroll_step.png" alt="Scroll step in a mobile tst recording" style="width:60%;" >}}
+{{< img src="mobile_testing/scroll_step.png" alt="Scroll step in a mobile test recording" style="width:60%;" >}}
 
 By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile test to scroll on.
+
+#### Press back
+
+Interacting with the **Back** button below the mobile application records a step.
+
+{{< img src="mobile_testing/press_back.mp4" alt="Recording a Press Back step in a mobile test" video=true >}}
 
 #### Wait
 
 If you know that a page or page element takes more than 60 seconds to load, you can add a wait step with a max value of 300 seconds.
 
-{{< img src="mobile_testing/wait_step.png" alt="Wait step in a mobile test recording" style="width:60%;" >}}
+{{< img src="mobile_testing/wait_step.png" alt="Recording a Wait step in a mobile test" style="width:60%;" >}}
 
 By default, mobile tests wait for a page to be fully loaded before performing a step or the next step with a timeout of 60 seconds. This additional time is systematically added to **every run** of your mobile test's recording.
+
+#### Rotate device
+
+Add a name to the step and select **Portrait** or **Landscape** mode.
+
+{{< img src="mobile_testing/rotate_device.png" alt="Recording a Rotate Device step in a mobile test" style="width:60%" >}}
+
+#### Open deep link
+
+Add a name to the step and enter a deep link URI.
+
+{{< img src="mobile_testing/open_deep_link.png" alt="Recording an Open Deep Link step in a mobile test" style="width:60%" >}}
+
+For more information about additional configuration in test steps, see [Advanced Options for Mobile Test Steps][4].
 
 ### Variables
 
@@ -157,3 +195,4 @@ To use a variable on automatically recorded steps, add a step name and specify t
 [1]: /mobile_testing/mobile_tests/#variables
 [2]: /synthetics/settings/#global-variables
 [3]: /synthetics/guide/browser-tests-totp/
+[4]: /mobile_testing/mobile_tests/advanced_options
