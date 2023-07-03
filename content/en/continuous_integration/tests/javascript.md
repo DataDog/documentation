@@ -438,14 +438,14 @@ From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uplo
 ## Manual testing API
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
+  <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Manual testing API is currently in <strong>beta</strong>, so its API might change. It is is available from <code>dd-trace>=4.4.0</code>, <code>dd-trace>=3.25.0</code> and <code>dd-trace>=2.38.0</code>.
+  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+If you use Jest, Mocha, Cypress, Playwright, or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
 
 The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
 
@@ -473,7 +473,7 @@ describe('can run tests', () => {
 
 ### Test start channel
 
-Grab this channel by its ID `dd-trace:ci:manual:test:start` to publish that a test is going to start. A good place to do this might be a `beforeEach` hook, or similar.
+Grab this channel by its ID `dd-trace:ci:manual:test:start` to publish that a test is starting. A good place to do this is a `beforeEach` hook or similar.
 
 ```typescript
 const { channel } = require('node:diagnostics_channel')
@@ -490,11 +490,11 @@ const testStartCh = channel('dd-trace:ci:manual:test:start')
 // code for your testing framework continues here ...
 ```
 
-The payload that needs to be published has attributes `testName` and `testSuite`, both of which are strings, that identify the test about to start.
+The payload to be published has attributes `testName` and `testSuite`, both strings, that identify the test that is about to start.
 
 ### Test finish channel
 
-Grab this channel by its ID `dd-trace:ci:manual:test:finish` to publish that a test is about to end. A good place to do this might be a `afterEach` hook, or similar.
+Grab this channel by its ID `dd-trace:ci:manual:test:finish` to publish that a test is ending. A good place to do this is an `afterEach` hook or similar.
 
 ```typescript
 const { channel } = require('node:diagnostics_channel')
@@ -511,9 +511,9 @@ const testFinishCh = channel('dd-trace:ci:manual:test:finish')
 // code for your testing framework continues here ...
 ```
 
-The payload that needs to be published has attributes `status` and `error`:
+The payload to be published has attributes `status` and `error`:
 
-* `status` is a string that can only take three values:
+* `status` is a string that takes one of three values:
   * `'pass'` when a test passes.
   * `'fail'` when a test fails.
   * `'skip'` when a test has been skipped.
@@ -537,10 +537,10 @@ const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
 // code for your testing framework continues here ...
 ```
 
-The payload that needs to be published is a dictionary `<string, string|number>` of tags or metrics that will be added to the test.
+The payload to be published is a dictionary `<string, string|number>` of tags or metrics that are added to the test.
 
 
-### How to run
+### Run the tests
 
 Once the test start and end channels are put in place in your code, you may run your testing framework like you normally do, including the following environment variables:
 
