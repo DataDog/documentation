@@ -67,7 +67,7 @@ If you are using a cloud CI provider without access to the underlying worker nod
 : The [Datadog API key][1] used to upload the test results.<br/>
 **Default**: `(empty)`
 
-Additionally, configure which [Datadog site][2] to which you want to send data.
+Additionally, configure [Datadog site][2] to which you want to send data.
 
 `DD_SITE` (Required)
 : The [Datadog site][2] to upload results to.<br/>
@@ -93,7 +93,7 @@ If the tracer library is already available locally on the server, you can procee
 Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.14.0
+DD_TRACER_VERSION=... // e.g. 1.17.0
 {{< /code-block >}}
 
 Run the command below to download the tracer JAR to your local Maven repository:
@@ -111,7 +111,7 @@ mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dartifact=com.datadogh
 Declare `DD_TRACER_VERSION` variable with the latest version of the artifacts accessible from the [Maven Repository][1] (without the preceding `v`: ![Maven Central][2]):
 
 {{< code-block lang="shell" >}}
-DD_TRACER_VERSION=... // e.g. 1.14.0
+DD_TRACER_VERSION=... // e.g. 1.17.0
 {{< /code-block >}}
 
 Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded JAR:
@@ -150,13 +150,15 @@ When specifying tracer arguments, include the following:
 For example:
 
 {{< code-block lang="shell" >}}
-MVN_LOCAL_REPO=$(mvn help:evaluate -Dexpression=settings.localRepository -DforceStdout -q)
-MAVEN_OPTS=-javaagent:$MVN_LOCAL_REPO/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar=\
+MAVEN_LOCAL_REPO=$(mvn help:evaluate -Dexpression=settings.localRepository -DforceStdout -q)
+MAVEN_OPTS=-javaagent:$MAVEN_LOCAL_REPO/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app \
-mvn clean verify -Pdd-civisibility
+mvn clean verify
 {{< /code-block >}}
+
+Either `mvn verify` or `mvn test` goals are fine, depending on whether you want to execute Maven Failsafe plugin to run integration tests (if you have any) or not.
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
@@ -174,7 +176,7 @@ When specifying tracer arguments, include the following:
 For example:
 
 {{< code-block lang="shell" >}}
-./gradlew cleanTest test -Pdd-civisibility --rerun-tasks -Dorg.gradle.jvmargs=\
+./gradlew cleanTest test --rerun-tasks -Dorg.gradle.jvmargs=\
 -javaagent:$DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
