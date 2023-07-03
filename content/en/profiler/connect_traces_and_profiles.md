@@ -127,7 +127,15 @@ Click the **Focus On** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang lang="java" >}}
+Endpoint profiling is enabled by default when you [turn on profiling for your Java service][1].
+
+Requires to [use the Datadog profiler][2], JFR is not supported.
+
+[1]: /profiler/enabling/java
+[2]: /profiler/enabling/java/?tab=datadog#requirements
+{{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
 Endpoint profiling is enabled by default when you [turn on profiling for your Python service][1].
