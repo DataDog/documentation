@@ -65,7 +65,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-Windows では、パス `"<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log"` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
+Windows では、パス `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
 
 [1]: /ja/agent/guide/agent-configuration-files/
 {{< /tabs >}}

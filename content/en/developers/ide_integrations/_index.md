@@ -10,6 +10,6 @@ disable_toc: false
 Use Datadog integrations in your preferred integrated development environment (IDE) to interact with Datadog services as you code.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
-    {{< nextlink href="developers/ide_integrations/idea/" >}}<u>IntelliJ Platform</u>: Improve software performance by providing meaningful code-level insights in IDEA or GoLand based on real-time observability data.{{< /nextlink >}}
+    {{< nextlink href="developers/ide_integrations/idea/" >}}<u>JetBrains IDEs</u>: Improve software performance by providing meaningful code-level insights in IDEA and GoLand based on real-time observability data.{{< /nextlink >}}
     {{< nextlink href="developers/ide_integrations/vscode/" >}}<u>VS Code</u>: The extension features Code Insights and an integration for running Synthetic tests on local environments.{{< /nextlink >}}
 {{< /whatsnext >}}
