@@ -10,11 +10,15 @@ further_reading:
 - link: "/mobile_testing/mobile_tests"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile tests"
+- link: "/mobile_testing/settings"
+  tag: "Documentation"
+  text: "Learn how to upload your iOS or Android mobile applications"
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
-algolia:
-  tags: ['mobile_testing']
+cascade:
+  algolia:
+    tags: ['mobile_testing']
 ---
 
 Mobile tests allow you to observe how your mobile applications are performing using **simulated requests and actions from real devices**. Datadog tracks the performance of your mobile applications and alerts you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes. 
