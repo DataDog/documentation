@@ -26223,8 +26223,10 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/spans/analytics/aggregate:
     post:
-      description: The API endpoint to aggregate spans into buckets and compute metrics
+      description: 'The API endpoint to aggregate spans into buckets and compute metrics
         and timeseries.
+
+        This endpoint is rate limited to `300` requests per hour.'
       operationId: AggregateSpans
       requestBody:
         content:
@@ -26249,7 +26251,7 @@ paths:
       tags:
       - Spans
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v2/spans/events:
@@ -26259,7 +26261,12 @@ paths:
         [Results are paginated][1].
 
 
-        Use this endpoint to see your latest spans.'
+        Use this endpoint to see your latest spans.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination'
       operationId: ListSpansGet
       parameters:
       - description: Search query following spans syntax.
@@ -26327,7 +26334,7 @@ paths:
       summary: Get a list of spans
       tags:
       - Spans
-      x-menu-order: 4
+      x-menu-order: 1
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -26342,7 +26349,12 @@ paths:
         [Results are paginated][1].
 
 
-        Use this endpoint to build complex spans filtering and search.'
+        Use this endpoint to build complex spans filtering and search.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination'
       operationId: ListSpans
       requestBody:
         content:
@@ -26369,7 +26381,7 @@ paths:
       tags:
       - Spans
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 2
       x-pagination:
         cursorParam: body.data.attributes.page.cursor
         cursorPath: meta.page.after
