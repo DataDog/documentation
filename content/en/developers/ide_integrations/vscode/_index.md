@@ -56,7 +56,7 @@ Code Insights include a detailed description for each issue, and links to:
 - The related source code location
 - The Datadog platform for additional information
 
-Developers can dismiss individual insights and set filters to view the categories of insights that they are most interested to see.
+You can dismiss individual insights and set filters to view the categories of insights that you are most interested to see.
 
 ## Synthetic Tests
 The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in the IDE. This ensures that any potential issue resulting from code changes is identified and addressed before the code is deployed into production and impacts your end users.
