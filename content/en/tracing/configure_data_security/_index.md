@@ -41,21 +41,74 @@ Values attributed to these categories are collected differently dependending on 
 
 These categories are collected by the following language Tracing Libraries:
 
-| Category            | Dotnet | Java | Node.js | PHP | Python |
-|:--------------------|:-------|:-----|:--------|:----|:-------|
-| Name                | 1      | 1    | 1       | 4   | 1      |
-| Email               | 1      | 1    | 1       | 4   | 1      |
-| Client IP           | 1      | 3    | 1       | 4   | 5      |
-| Database statements | 2      | 1    | 1       | 2   | 2      |
-| Geographic location | 4      | 4    | 4       | 4   | 1      |
-| URI parameters      | 2      | 2    | 3       | 2   | 3      |
-| URI userinfo        | 4      | 4    | 4       | 2   | 4      |
+{{< tabs >}}
+{{< tab ".NET" >}}
+| Category            | How the data is collected      |
+|---------------------|--------------|
+| Name                | Collected by default without obfuscation      |
+| Email               | Collected by default without obfuscation      |
+| Client IP           | Collected by default without obfuscation      |
+| Database statements | Collected by default with obfuscation      |
+| Geographic location | Never collected      |
+| URI parameters      | Collected by default with obfuscation      |
+| URI userinfo        | Never collected      |
 
-- 1: Collected by default without obfuscation
-- 2: Collected by default with obfuscation
-- 3: Not collected by default, enabled with obfuscation
-- 4: Not collected always
-- 5: Not collected by default, enabled without obfuscation
+{{< /tab >}}
+
+{{< tab "Java" >}}
+
+| Category            | How the data is collected      |
+|---------------------|--------------|
+| Name                | Collected by default without obfuscation      |
+| Email               | Collected by default without obfuscation      |
+| Client IP           | Not collected by default, enabled with obfuscation     |
+| Database statements | Collected by default without obfuscation      |
+| Geographic location | Never collected      |
+| URI parameters      | Collected by default with obfuscation      |
+| URI userinfo        | Never collected      |
+
+{{< /tab >}}
+{{< tab "Node.js" >}}
+
+| Category            | How the data is collected      |
+|---------------------|--------------|
+| Name                | Collected by default without obfuscation      |
+| Email               | Collected by default without obfuscation      |
+| Client IP           | Collected by default without obfuscation     |
+| Database statements | Collected by default without obfuscation      |
+| Geographic location | Never collected      |
+| URI parameters      | Not collected by default, enabled with obfuscation      |
+| URI userinfo        | Never collected      |
+
+{{< /tab >}}
+{{< tab "PHP" >}}
+
+| Category            | How the data is collected      |
+|---------------------|--------------|
+| Name                | Never collected      |
+| Email               | Never collected      |
+| Client IP           | Never collected     |
+| Database statements | Collected by default with obfuscation      |
+| Geographic location | Never collected      |
+| URI parameters      | Collected by default with obfuscation      |
+| URI userinfo        | Collected by default with obfuscation      |
+
+{{< /tab >}}
+{{< tab "Python" >}}
+
+| Category            | How the data is collected      |
+|---------------------|--------------|
+| Name                | Collected by default without obfuscation      |
+| Email               | Collected by default without obfuscation      |
+| Client IP           | Not collected by default, enabled without obfuscation     |
+| Database statements | Collected by default with obfuscation      |
+| Geographic location | Collected by default without obfuscation      |
+| URI parameters      | Not collected by default, enabled with obfuscation      |
+| URI userinfo        | Never collected      |
+
+{{< /tab >}}
+{{< /tabs >}}
+
 
 The Application Security Management product also collects the following HTTP data in traces (obfuscation is applied):
 
