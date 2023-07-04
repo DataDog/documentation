@@ -141,25 +141,31 @@ Click the plus icon `+` to expand the stack trace to that method **in reverse or
 
 {{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots tab has a timeline view that breakdown execution over time and threads" video=true >}}
 
-The timeline view surface time-based patterns and work distribution over the period of the span. Drag and drop to see detailed breakdowns
+The timeline view surface time-based patterns and work distribution over the period of the span.
+
+With the span timeline view, you can:
+
+- Isolate time-consuming methods
+- Sort out complex interactions between threads
+- Surface runtime activity that impacted the request
 
 Depending on the runtime and language, the timeline lines vary:
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,go,dotnet" >}}
 {{< programming-lang lang="java" >}}
-Each line is a thread. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lines are top are runtime activities that may add extra latency. They are unrelated to the request itself.
+Lines on top are runtime activities that may add extra latency. They are unrelated to the request itself.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Each line is a goroutine. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
+Each line is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
 
 TODO For each goroutine, you see the goroutine state (waiting, scheduled, running, ...) as well as the stack traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each line is a thread. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lines are top are runtime activities that may add extra latency. They are unrelated to the request itself.
+Lines on top are runtime activities that may add extra latency. They are unrelated to the request itself.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

@@ -69,7 +69,7 @@ The dedicated [widget JSON schema definition][9] for the table widget is:
 [2]: /logs/search_syntax/
 [3]: /tracing/trace_explorer/query_syntax/
 [4]: /real_user_monitoring/explorer/search_syntax
-[5]: /profiler/search_profiles
+[5]: /profiler/profile_visualization
 [6]: /security_monitoring/explorer/
 [7]: /dashboards/guide/apm-stats-graph
 [8]: /api/v1/dashboards/

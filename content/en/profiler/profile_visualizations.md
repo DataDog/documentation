@@ -82,29 +82,33 @@ Four tabs are below the profile header:
 
 ### Timeline view
 
-The timeline view is the equivalent of the flame graph over time.
+The timeline view is the equivalent of the flame graph, with a distribution over time.
 
 {{< img src="profiler/profiling_viz-timeline.png" alt="A timeline" >}}
 
 It shows time-based patterns and work distribution over the period of a single profile.
 
-Select a line, then drag and drop to see detailed breakdowns
+Compared to the flame graph, the timeline view can help you:
+
+- Isolate spiky methods
+- Sort out complex interactions between threads
+- Surface runtime activity that impacted the process
 
 Depending on the runtime and language, the timeline lines vary:
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,go,dotnet" >}}
 {{< programming-lang lang="java" >}}
-Each line is a thread. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
 Lines are top are runtime activities. They may affect your code performance.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Each line is a goroutine. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
+Each line is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
 
 TODO For each goroutine, you see the goroutine state (waiting, scheduled, running, ...) as well as the stack traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each line is a thread. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
 Lines are top are runtime activities. They may affect your code performance.
 {{< /programming-lang >}}
