@@ -66,7 +66,7 @@ The Datadog extension enables you to [run Synthetic HTTP tests and browser tests
 ### Run Synthetic tests locally
 
 1. Select a Synthetic test to execute. You can search for specific tests by clicking the **Search** icon.
-2. To run a test in a local environment, update a Synthetic test's configuration by enabling the conversion of the start URL and specifying a `localhost` URL on the **Settings** page.
+2. Change the test's configuration to convert the start URL and specify a `localhost` URL on the **Settings** page.
 3. Run the test.
 
 {{< img src="developers/ide_integrations/vscode/test_configuration_modified_starturl.png" alt="The Test Configuration panel and Settings page where you can specify the start URL of a Synthetics test to a localhost URL" style="width:100%;" >}}
