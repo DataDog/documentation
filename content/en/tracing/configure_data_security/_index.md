@@ -13,25 +13,25 @@ aliases:
 ---
 ## Overview
 
-The Tracing Library collects data from an instrumented application that are sent to Datadog as traces. Instrumentations may collect data like personally identifiable information. If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the Tracing Library to remediate sensitive data at collection before traces are sent to Datadog.
+Datadog tracing libraries collect data from an instrumented application. That data is sent to Datadog as traces and it may contain sensitive data such as personally identifiable information (PII). If you are ingesting sensitive data as traces into Datadog, remediations can be added at ingestion with [Sensitive Data Scanner][12]. You can also configure the Datadog Agent or the tracing library to remediate sensitive data at collection before traces are sent to Datadog.
 
 If the configurations described here do not cover your compliance requirements, reach out to [the Datadog support team][1].
 
 ### Sensitive data 
 
-Sensitive data categories are based on the possible risk(s) they may pose to an organization's data handling policies. Values from each of these categories can be collected in traces as span resource names and tags. 
+Sensitive data categories are based on the possible risks they may pose to an organization's data handling policies. Values from each of these categories can be collected in traces as span resource names and tags. 
 
 | Risk level | Description                                                                                                           | Examples                                                    |
 |:-----------|:----------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------|
-| High       | Data whose collection could result in a security or privacy risk to your organization                                 | Names, email, geographic location, IP addresses (end-users) |
-| Moderate   | Data which by convention does not contain PII but can be subject to your organization's privacy and security policies | Service names, IP addresses (not end-users)                 |
-| Low        | Data which is available publicly or contains non-identifying system information                                       | Geographic region, host port                                |
+| High       | Data whose collection could result in a security or privacy risk to your organization                                 | Names, email, geographic location, IP addresses of end-users |
+| Moderate   | Data that by convention does not contain PII but can be subject to your organization's privacy and security policies | Service names, IP addresses (not end-users)                 |
+| Low        | Data that is available publicly or contains non-identifying system information                                       | Geographic regions, host ports                                |
 
-Values attributed to these categories are collected differently dependending on the language library. Generally, we refer to the following higher-risk categories:
+Values attributed to these categories are collected differently dependending on the language library. Generally, the following are considered higher-risk categories:
 
 | Data category       | Description                                                                                                                               |
 |:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| Name                | The real name of an internal user (employee) or end-user.                                                                                 |
+| Name                | The real name of an internal user (your employee) or end-user.                                                                                 |
 | Email               | The email address of an internal user (employee) or end-user.                                                                             |
 | Client IP           | The IP address of your end-user associated with an incoming request or the external IP address of an outgoing request.                    |
 | Database statements | The literal, sequence of literals, or bind variables used in an executed database statement.                                              |
@@ -69,7 +69,7 @@ The Application Security Management product also collects the following HTTP dat
 
 ### Resource names
 
-Datadog spans include a resource name attribute which may contain sensitive data. The Datadog Agent implements obfuscation for several known cases:
+Datadog spans include a resource name attribute that may contain sensitive data. The Datadog Agent implements obfuscation for several known cases:
 
 * **SQL numeric literals and bind variables are obfuscated**: For example, the following query `SELECT data FROM table WHERE key=123 LIMIT 10` is obfuscated to `SELECT data FROM table WHERE key = ? LIMIT ?` before setting the resource name for the query span.
 * **SQL literal strings are identified using standard ANSI SQL quotes**: This means strings should be surrounded in single quotes (`'`). Some SQL variants optionally support double-quotes (`"`) for strings, but most treat double-quoted things as identifiers. The Datadog obfuscator treats these as identifiers rather than strings and does not obfuscate them.
@@ -338,7 +338,6 @@ The Agent can be configured to exclude a specific resource from traces sent by t
 If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES` on the container with the Datadog Agent instead. See the [Docker APM Agent environment variables][7] for details.
 
 ```text
-
 ###### @param ignore_resources - list of strings - optional
 
 ###### A list of regular expressions can be provided to exclude certain traces based on their resource name.
@@ -353,7 +352,7 @@ If you are running in a containerized environment, set `DD_APM_IGNORE_RESOURCES`
 
 ### HTTP
 
-Datadog is standardizing a [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries support a number of configuration options to control sensitive data collected in HTTP spans.
+Datadog is standardizing [span tag semantics][3] across tracing libraries. Information from HTTP requests are added as span tags prefixed with `http.`. The libraries support a number of configuration options to control sensitive data collected in HTTP spans.
     
 #### Redact query strings
 
