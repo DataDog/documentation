@@ -27231,7 +27231,7 @@ paths:
         This endpoint is rate limited to `300` requests per hour.
 
 
-        [1]: /logs/guide/collect-multiple-logs-with-pagination'
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
       operationId: ListSpansGet
       parameters:
       - description: Search query following spans syntax.
@@ -27319,7 +27319,7 @@ paths:
         This endpoint is rate limited to `300` requests per hour.
 
 
-        [1]: /logs/guide/collect-multiple-logs-with-pagination'
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
       operationId: ListSpans
       requestBody:
         content:
