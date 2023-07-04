@@ -6326,7 +6326,7 @@ main:
 - identifier: guides
   name: ガイド
   parent: essentials_heading
-  pre: Compass
+  pre: compass
   url: all_guides/
   weight: 16000
 - identifier: agent
