@@ -1,5 +1,5 @@
 ---
-title: Datadog Extension for VS Code
+title: Datadog Extension for Visual Studio Code
 kind: documentation
 description: Learn how to run Synthetic tests on local environments directly in VS Code.
 is_beta: true
