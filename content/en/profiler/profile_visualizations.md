@@ -17,9 +17,11 @@ further_reading:
       text: 'Introducing always-on production profiling in Datadog'
 ---
 
+## Search profiles
+
 {{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
 
-Select a service to view its profiles. Select a profile type to view different resources (CPU, Memory, Exception, I/O, ...).
+Go to **APM -> Profiles** and select a service to view its profiles. Select a profile type to view different resources (CPU, Memory, Exception, I/O, ...).
 
 You can filter according to infrastructure tags or application tags set up from your [environment tracing configuration][1]. By default the following facets are available:
 
@@ -40,6 +42,12 @@ The following measures are available:
 | Wall time              | The elapsed time used by the code. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while it is running.  |
 
 For each runtime, there is also a broader set of metrics available, which you can see [listed by timeseries][4].
+
+## Profile types
+
+In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs. See [Profile types][3] for a list of profile types available for each language.
+
+## Visualizations
 
 ### Flame Graph
 
@@ -113,11 +121,6 @@ Each line is a **thread**. Threads from a common pool are grouped together. You 
 Lines are top are runtime activities. They may affect your code performance.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
-
-### Profile types
-
-In the **Profiles** tab, you can see all profile types available for a given language. Depending on the language, the information collected about your profile differs. See [Profile types][3] for a list of profile types available for each language.
-
 
 ## Further Reading
 
