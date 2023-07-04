@@ -83,7 +83,7 @@ The **View in VS Code** feature provides a link from Datadog directly to your so
 
 {{< img src="/developers/ide_integrations/vscode/view-in-vscode.png" alt="A stack trace on the Datadog platform showing the View in VS Code button." style="width:100%;" >}}
 
-<div class="alert alert-info">A prerequisite for this feature is that Source Code Integration is configured for your service.</div>
+<div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
 ## Feedback
 
