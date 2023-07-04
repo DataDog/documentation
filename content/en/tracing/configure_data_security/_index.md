@@ -41,8 +41,10 @@ Values attributed to these categories are collected differently dependending on 
 
 These categories are collected by the following language Tracing Libraries:
 
-{{< tabs >}}
-{{< tab ".NET" >}}
+{{% tabs %}}
+
+{{% tab ".NET" %}}
+
 | Category            | How the data is collected      |
 |---------------------|--------------|
 | Name                | Collected by default without obfuscation      |
@@ -53,9 +55,10 @@ These categories are collected by the following language Tracing Libraries:
 | URI parameters      | Collected by default with obfuscation      |
 | URI userinfo        | Never collected      |
 
-{{< /tab >}}
 
-{{< tab "Java" >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
 
 | Category            | How the data is collected      |
 |---------------------|--------------|
@@ -67,8 +70,9 @@ These categories are collected by the following language Tracing Libraries:
 | URI parameters      | Collected by default with obfuscation      |
 | URI userinfo        | Never collected      |
 
-{{< /tab >}}
-{{< tab "Node.js" >}}
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
 
 | Category            | How the data is collected      |
 |---------------------|--------------|
@@ -80,8 +84,9 @@ These categories are collected by the following language Tracing Libraries:
 | URI parameters      | Not collected by default, enabled with obfuscation      |
 | URI userinfo        | Never collected      |
 
-{{< /tab >}}
-{{< tab "PHP" >}}
+{{% /tab %}}
+
+{{% tab "PHP" %}}
 
 | Category            | How the data is collected      |
 |---------------------|--------------|
@@ -93,8 +98,9 @@ These categories are collected by the following language Tracing Libraries:
 | URI parameters      | Collected by default with obfuscation      |
 | URI userinfo        | Collected by default with obfuscation      |
 
-{{< /tab >}}
-{{< tab "Python" >}}
+{{% /tab %}}
+
+{{% tab "Python" %}}
 
 | Category            | How the data is collected      |
 |---------------------|--------------|
@@ -106,8 +112,9 @@ These categories are collected by the following language Tracing Libraries:
 | URI parameters      | Not collected by default, enabled with obfuscation      |
 | URI userinfo        | Never collected      |
 
-{{< /tab >}}
-{{< /tabs >}}
+{{% /tab %}}
+
+{{% /tabs %}}
 
 
 The Application Security Management product also collects the following HTTP data in traces (obfuscation is applied):
