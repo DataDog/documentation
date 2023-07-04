@@ -7089,7 +7089,7 @@ main:
 - identifier: monitors_notify_downtimes
   name: ダウンタイム
   parent: monitors_notify
-  url: monitors/notify/downtimes/
+  url: monitors/downtimes/
   weight: 202
 - identifier: monitors_manage
   name: モニターの管理
