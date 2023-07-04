@@ -58,12 +58,13 @@ instances:
 
 プロファイルは互いに交換して使用できます。つまり、MIB 依存関係を共有するデバイスは同じプロファイルを再利用できます。たとえば、[Cisco c3850 のプロファイル][2]は多くの Cisco スイッチで使用できます。
 
-Datadog が提供するプロファイルの詳細については、[GitHub リポジトリ][2]を参照してください。
+Datadog が提供するプロファイルの詳細については、[GitHub リポジトリ][3]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-device.yaml
-[2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
+[2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
+[3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles

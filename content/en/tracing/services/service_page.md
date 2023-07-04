@@ -22,6 +22,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/apm-security-view/"
   tag: "Blog"
   text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+algolia:
+  tags: ['service page']
 ---
 
 {{< img src="tracing/visualization/service/overview_service_page.png" alt="Detailed service page" style="width:100%;">}}
