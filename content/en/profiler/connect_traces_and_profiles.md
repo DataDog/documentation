@@ -41,11 +41,10 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 ```
 
 <div class="alert alert-warning">
-  We highly recommend [using the Datadog profiler][2] instead of JFR.
+  We highly recommend <a href="/profiler/enabling/java/?tab=datadog#requirements">using the Datadog profiler</a> instead of JFR.
 </div>
 
 [1]: /profiler/enabling/java
-[2]: /profiler/enabling/java/?tab=datadog#requirements
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
