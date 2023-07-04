@@ -79,7 +79,7 @@ If you are using the [custom role feature][8], add your user to any custom role 
 
 ## View in VS Code
 
-The **View in VS Code** feature provides a link from the Datadog platform directly to your source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][10]):
+The **View in VS Code** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][10]):
 
 {{< img src="/developers/ide_integrations/vscode/view-in-vscode.png" alt="A stack trace on the Datadog platform showing the View in VS Code button." style="width:100%;" >}}
 
