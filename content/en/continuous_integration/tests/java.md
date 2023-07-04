@@ -333,11 +333,11 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 [Datadog Tracer configuration][2] options can be used for fine-tuning the tracer behavior.
 
+### Collecting Git metadata
+
 {{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
 
 ## Information collected
-
-### Collecting Git metadata
 
 {{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
 
