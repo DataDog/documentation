@@ -113,16 +113,13 @@ The following environment variable can be used to configure the location of the 
 
 All other [Datadog Tracer configuration][6] options can also be used.
 
+### Collecting Git metadata
+
 {{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
 
 ## Information collected
 
-When CI Visibility is enabled, the following data is collected from your project:
-
-* Test names and durations.
-* Predefined environment variables set by CI providers.
-* Git commit history including the hash, message, author information, and files changed (without file contents).
-* Information from the CODEOWNERS file.
+{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
 
 ## Further reading
 

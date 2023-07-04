@@ -228,6 +228,8 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
+### Collecting Git metadata
+
 {{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
 
 ## Git metadata upload

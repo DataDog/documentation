@@ -184,6 +184,8 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
+### Collecting Git metadata
+
 {{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
 
 ### Running tests
@@ -743,12 +745,7 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 
 ## Information collected
 
-When CI Visibility is enabled, the following data is collected from your project:
-
-* Test names and durations.
-* Predefined environment variables set by CI providers.
-* Git commit history including the hash, message, author information, and files changed (without file contents).
-* Information from the CODEOWNERS file.
+{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
 
 In addition to that, if [Intelligent Test Runner][7] is enabled, the following data is collected from your project:
 

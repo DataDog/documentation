@@ -41,9 +41,7 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
-
 <div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
-
 {{< include-markdown "/content/en/continuous_integration/tests/includes/cloud_ci_agentless.md.inc" >}}
 {{% /tab %}}
 
@@ -339,13 +337,9 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 ## Information collected
 
-When CI Visibility is enabled, the following data is collected from your project:
+### Collecting Git metadata
 
-* Test names and durations.
-* Predefined environment variables set by CI providers.
-* Git commit history including the hash, message, author information, and files changed (without file contents).
-* Source code information: relative paths to sources of test classes, line numbers of test methods.
-* Information from the CODEOWNERS file.
+{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
 
 ## Troubleshooting
 
