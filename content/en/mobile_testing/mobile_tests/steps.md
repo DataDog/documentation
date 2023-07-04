@@ -178,7 +178,7 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 2. Record additional [test steps](#automatically-recorded-steps) or add [steps manually](#manually-added-steps).
 3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
 
-{{< img src="mobile_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video="true" width="100%" >}}
+{{< img src="mobile_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
 
 ## Use variables
 
@@ -186,7 +186,7 @@ To see all available variables on manually added steps, type `{{` in the input f
 
 {{< img src="mobile_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:25%" >}}
 
-To use a variable on automatically recorded steps, add a step name and specify the variable value in the **Type Text step** modal to input the variable value while recording. 
+To use a variable on automatically recorded steps, add a step name and specify the variable value in the [**Type Text step** modal](#type-text) to input the variable value while recording. 
 
 ## Further reading
 

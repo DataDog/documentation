@@ -36,7 +36,7 @@ In the **History** section, you can see the **Global Uptime** graph, which displ
 
 ## Sample results
 
-Mobile test runs include components such as [screenshots](#screenshots-and-actions), errors, and [resources] to help troubleshoot your [test failure](#failed-results).
+Mobile test runs include components such as [screenshots](#screenshots-and-actions) to help troubleshoot your [test failure](#failed-results).
 
 In the **Sample Runs** section, you can examine the latest failed test runs and compare them to recent successful test runs.
 
@@ -49,13 +49,13 @@ Starting URL
 : The URL of your mobile test scenario.
 
 Steps
-: The number of test steps completed in your sample run.
+: The number of [test steps][10] completed in your sample run.
 
 Duration
 : The amount of time it took your test to run.
 
 Location
-: The managed or private location your test was executed from.
+: The [managed][8] or [private location][9] your test was executed from.
 
 Device
 : The type of device your test was executed from.
@@ -65,7 +65,7 @@ Run type
 
 ### Screenshots and actions
 
-Every executed test step contains a screenshot of the step action, the step description, starting URL for a given step, step ID, and step duration.
+Every executed test step contains a screenshot of the step action, step action name, step ID, and step duration.
 
 ## Failed results
 
@@ -103,3 +103,6 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [5]: /synthetics/guide/uptime-percentage-widget/
 [6]: /help
 [7]: /service_management/events/explorer/
+[8]: /getting_started/synthetics/browser_test#select-locations
+[9]: /synthetics/private_locations
+[10]: /mobile_testing/mobile_tests/steps
