@@ -4,6 +4,7 @@ kind: documentation
 aliases:
     - /tracing/profiling/search_profiles/
     - /tracing/profiler/search_profiles/
+    - /profiler/search_profiles/
 further_reading:
     - link: 'profiler/enabling'
       tag: 'Documentation'
@@ -40,7 +41,7 @@ The following measures are available:
 
 For each runtime, there is also a broader set of metrics available, which you can see [listed by timeseries][4].
 
-## Flame Graph
+### Flame Graph
 
 Continuous Profiler default visualization is the flame graph.
 
@@ -52,7 +53,7 @@ For example, starting from the first row, `Thread.run()` called `ThreadPoolExecu
 
 The width of a frame represents how much of the total CPU it consumed. On the right, you can see a "CPU time by Method" top list that only accounts for self time, which is the time a method spent on CPU without calling another method.
 
-## Single Profile
+### Single Profile
 
 By default, profiles are uploaded once a minute. Depending on the language, these processes are profiled between 15s and 60s.
 
@@ -79,7 +80,7 @@ Four tabs are below the profile header:
 - Download the profile
 - Open the profile in full page
 
-## Timeline view
+### Timeline view
 
 The timeline view is the equivalent of the flame graph over time.
 
