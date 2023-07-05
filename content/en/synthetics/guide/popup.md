@@ -20,8 +20,8 @@ This guide describes how to manage pop-ups such as modals or application windows
 Synthetic browser tests automatically handle [JavaScript modals][1]:
 
  - `alert` modals are immediately dismissed for OK. 
- - `prompt` modals are answered with the text returned or `null` if the Cancel button or `Esc` is clicked. `prompt` modals that offer a text input field are filled with `Lorem Ipsum` for tests on Google Chrome or Microsoft Edge.
- - `confirm` modals that ask for confirmation are answered with `true` for OK and `false` if the Cancel button or `Esc` is clicked.
+ - `prompt` modals are filled with `Lorem Ipsum` for tests on Google Chrome or Microsoft Edge.
+ - `confirm` modals that ask for confirmation are accepted.
 
 ### Basic authentication
 
