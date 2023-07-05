@@ -359,8 +359,7 @@ For example:
 ```javascript
 beforeEach(() => {
   cy.task('dd:addTags', {
-    'before.each':
-    'certain.information'
+    'before.each': 'certain.information'
   })
 })
 it('renders a hello world', () => {
