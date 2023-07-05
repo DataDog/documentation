@@ -24,11 +24,9 @@ Powered by [out-of-the-box detection rules][1], CSM Identities...
 
 **Note**: At this time, CSM Identities is available for AWS IAM only.
 
-**Screenshot**
+{{< img src="security/identities/identity-risks-explorer.png" alt="CSM Identities explorers page" width="100%">}}
 
 ## Installation
-
-*Must be CWS and CSPM customer.
 
 If you've already enabled Cloud Security Posture Management (CSPM) for AWS, no additional setup is required. To enable CSPM for AWS, see [Setting up CSPM][2].
 
