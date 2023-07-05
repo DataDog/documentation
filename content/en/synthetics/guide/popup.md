@@ -11,7 +11,7 @@ further_reading:
 ---
 ## Overview
 
-This guide describes how to manage pop-ups such as modals or application windows in a Synthetics [browser test][5].
+This guide describes how to manage pop-ups such as modals or application windows in a Synthetic [browser test][5].
 
 ## Modals
 
