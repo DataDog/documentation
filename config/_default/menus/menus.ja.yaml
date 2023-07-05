@@ -411,7 +411,7 @@ api:
   url: '#get-all-dashboard-lists'
 - generated: true
   identifier: dashboards
-  name: "ダッシュボード  "
+  name: 'ダッシュボード  '
   url: /api/latest/dashboards/
 - generated: true
   identifier: dashboards-update-a-dashboard
@@ -4781,7 +4781,7 @@ api:
   parent: インシデント
   url: '#get-a-list-of-an-incidents-integration-metadata'
 - generated: true
-  identifier: "incidents-create,-update,-and-delete-incident-attachments"
+  identifier: incidents-create,-update,-and-delete-incident-attachments
   name: インシデントの添付ファイルの作成、更新、削除
   params:
     operationids:
@@ -6214,7 +6214,7 @@ main:
   url: getting_started/integrations/terraform/
   weight: 702
 - identifier: getting_started_dashboards
-  name: "ダッシュボード  "
+  name: 'ダッシュボード  '
   parent: getting_started
   url: getting_started/dashboards/
   weight: 8
@@ -6317,16 +6317,16 @@ main:
   parent: getting_started
   url: getting_started/support/
   weight: 21
-- identifier: glossary
+- identifier: 用語集
   name: 用語集
   parent: essentials_heading
   pre: features
   url: glossary/
   weight: 15000
-- identifier: guides
+- identifier: ガイド
   name: ガイド
   parent: essentials_heading
-  pre: compass
+  pre: Compass
   url: all_guides/
   weight: 16000
 - identifier: agent
@@ -6531,7 +6531,7 @@ main:
   parent: agent
   url: data_security/agent/
   weight: 13
-- identifier: containers
+- identifier: コンテナ
   name: コンテナ
   parent: infrastructure_heading
   pre: container
@@ -6539,7 +6539,7 @@ main:
   weight: 40000
 - identifier: containers_docker
   name: Docker やその他のランタイム
-  parent: containers
+  parent: コンテナ
   url: containers/docker/
   weight: 2
 - identifier: containers_docker_apm
@@ -6574,7 +6574,7 @@ main:
   weight: 207
 - identifier: containers_kubernetes
   name: Kubernetes
-  parent: containers
+  parent: コンテナ
   url: containers/kubernetes/
   weight: 3
 - identifier: containers_kubernetes_installation
@@ -6629,7 +6629,7 @@ main:
   weight: 310
 - identifier: containers_cluster
   name: Cluster Agent
-  parent: containers
+  parent: コンテナ
   url: containers/cluster_agent/
   weight: 4
 - identifier: cluster_agent_setup
@@ -6661,7 +6661,7 @@ main:
   weight: 406
 - identifier: containers_amazon_ecs
   name: Amazon ECS
-  parent: containers
+  parent: コンテナ
   url: containers/amazon_ecs/
   weight: 5
 - identifier: containers_amazon_ecs_apm
@@ -6686,17 +6686,17 @@ main:
   weight: 504
 - identifier: ecs_fargate
   name: AWS Fargate
-  parent: containers
+  parent: コンテナ
   url: integrations/ecs_fargate/
   weight: 6
 - identifier: containers_datadog_operator
   name: Datadog Operator
-  parent: containers
+  parent: コンテナ
   url: containers/datadog_operator
   weight: 7
 - identifier: containers_troubleshooting
   name: トラブルシューティング
-  parent: containers
+  parent: コンテナ
   url: containers/troubleshooting/
   weight: 8
 - identifier: containers_troubleshooting_duplicate_hosts
@@ -6706,7 +6706,7 @@ main:
   weight: 801
 - identifier: containers_guide
   name: ガイド
-  parent: containers
+  parent: コンテナ
   url: containers/guide
   weight: 9
 - identifier: integrations_top_level
@@ -6772,9 +6772,9 @@ main:
   url: watchdog/faulty_deployment_detection/
   weight: 5
 - identifier: dashboards
-  name: "ダッシュボード  "
+  name: 'ダッシュボード  '
   parent: platform_heading
-  pre: dashboard
+  pre: ダッシュボード
   url: dashboards/
   weight: 60000
 - identifier: dashboards_widgets
@@ -6862,15 +6862,15 @@ main:
   parent: dashboards
   url: dashboards/guide/
   weight: 99
-- identifier: serverless
+- identifier: サーバーレス
   name: サーバーレス
   parent: infrastructure_heading
-  pre: serverless
-  url: serverless
+  pre: サーバーレス
+  url: サーバーレス
   weight: 100000
 - identifier: serverless_aws_lambda
   name: AWS Lambda
-  parent: serverless
+  parent: サーバーレス
   url: serverless/aws_lambda
   weight: 1
 - identifier: serverless_aws_lambda_installation
@@ -6919,7 +6919,7 @@ main:
   weight: 109
 - identifier: serverless_app_services
   name: Azure App Service
-  parent: serverless
+  parent: サーバーレス
   url: serverless/azure_app_services
   weight: 2
 - name: Linux - コード
@@ -6936,22 +6936,22 @@ main:
   weight: 203
 - identifier: serverless_container_apps
   name: Azure Container Apps
-  parent: serverless
+  parent: サーバーレス
   url: serverless/azure_container_apps
   weight: 3
 - identifier: serverless_gcr
   name: Google Cloud Run
-  parent: serverless
+  parent: サーバーレス
   url: serverless/google_cloud_run
   weight: 4
 - identifier: serverless_glossary
   name: 用語集
-  parent: serverless
+  parent: サーバーレス
   url: serverless/glossary
   weight: 5
 - identifier: serverless_guides
   name: ガイド
-  parent: serverless
+  parent: サーバーレス
   url: serverless/guide/
   weight: 6
 - identifier: cloud_cost_top_level
@@ -6965,7 +6965,7 @@ main:
   parent: cloud_cost_top_level
   url: cloud_cost_management/container_cost_allocation
   weight: 1
-- identifier: infrastructure
+- identifier: インフラストラクチャー
   name: インフラストラクチャー
   parent: platform_heading
   pre: host-map
@@ -6973,16 +6973,16 @@ main:
   weight: 70000
 - identifier: infrastructure_host_map
   name: ホストとコンテナマップ
-  parent: infrastructure
+  parent: インフラストラクチャー
   url: infrastructure/hostmap/
   weight: 1
 - name: インフラストラクチャーリスト
-  parent: infrastructure
+  parent: インフラストラクチャー
   url: infrastructure/list/
   weight: 2
 - identifier: infrastructure_livecontainers
   name: コンテナビュー
-  parent: infrastructure
+  parent: インフラストラクチャー
   url: infrastructure/containers/
   weight: 3
 - identifier: infrastructure_livecontainers_configuration
@@ -6997,7 +6997,7 @@ main:
   weight: 302
 - identifier: infrastructure_process
   name: プロセスビュー
-  parent: infrastructure
+  parent: インフラストラクチャー
   url: infrastructure/process/
   weight: 4
 - name: プロセスの保持を増やす
@@ -7007,7 +7007,7 @@ main:
 - identifier: metrics_top_level
   name: メトリクス
   parent: platform_heading
-  pre: metric
+  pre: メトリクス
   url: metrics/
   weight: 80000
 - identifier: metrics_explorer
@@ -7032,7 +7032,7 @@ main:
   parent: metrics_top_level
   url: metrics/units/
   weight: 4
-- name: "Metrics Without Limits™"
+- name: Metrics Without Limits™
   parent: metrics_top_level
   url: metrics/metrics-without-limits/
   weight: 5
@@ -7052,7 +7052,7 @@ main:
   url: metrics/custom_metrics/type_modifiers/
   weight: 701
 - identifier: dev_tools_metrics_agent
-  name: '送信 - Agent チェック'
+  name: 送信 - Agent チェック
   parent: metrics_custom_metrics
   url: metrics/custom_metrics/agent_metrics_submission/
   weight: 702
@@ -7086,18 +7086,18 @@ main:
   parent: metrics_top_level
   url: metrics/guide
   weight: 9
-- identifier: notebooks
+- identifier: ノートブック
   name: ノートブック
   parent: platform_heading
-  pre: notebook
+  pre: ノートブック
   url: notebooks/
   weight: 90000
 - identifier: notebooks_guide
   name: ガイド
-  parent: notebooks
+  parent: ノートブック
   url: notebooks/guide
   weight: 1
-- identifier: alerting
+- identifier: アラート設定
   name: アラート設定
   parent: platform_heading
   pre: monitor
@@ -7105,12 +7105,12 @@ main:
   weight: 100000
 - identifier: monitor_configuration
   name: モニターの構成
-  parent: alerting
+  parent: アラート設定
   url: monitors/configuration/
   weight: 1
 - identifier: monitor_types
   name: モニターの種類
-  parent: alerting
+  parent: アラート設定
   url: monitors/types/
   weight: 2
 - identifier: monitor_types_host
@@ -7225,7 +7225,7 @@ main:
   weight: 237
 - identifier: monitors_notify
   name: 通知
-  parent: alerting
+  parent: アラート設定
   url: monitors/notify/
   weight: 3
 - identifier: monitors_notify_variables
@@ -7235,12 +7235,12 @@ main:
   weight: 301
 - identifier: monitors_notify_downtimes
   name: ダウンタイム
-  parent: alerting
+  parent: アラート設定
   url: monitors/downtimes/
   weight: 4
 - identifier: monitors_manage
   name: モニターの管理
-  parent: alerting
+  parent: アラート設定
   url: monitors/manage/
   weight: 5
 - identifier: monitors_manage_search
@@ -7260,12 +7260,12 @@ main:
   weight: 503
 - identifier: monitor_settings
   name: モニター設定
-  parent: alerting
+  parent: アラート設定
   url: monitors/settings/
   weight: 6
 - identifier: alerting_guide
   name: ガイド
-  parent: alerting
+  parent: アラート設定
   url: monitors/guide/
   weight: 100
 - identifier: slos
@@ -7299,20 +7299,20 @@ main:
   parent: slos
   url: service_management/service_level_objectives/guide/
   weight: 99
-- identifier: events
+- identifier: イベント
   name: イベント
   parent: service_management_heading
-  pre: events
+  pre: イベント
   url: service_management/events/
   weight: 30000
 - identifier: event_explorer
   name: エクスプローラー
-  parent: events
+  parent: イベント
   url: service_management/events/explorer/
   weight: 1
 - identifier: events_guides
   name: ガイド
-  parent: events
+  parent: イベント
   url: service_management/events/guides/
   weight: 2
 - identifier: case_management
@@ -7321,62 +7321,62 @@ main:
   pre: case-management
   url: service_management/case_management/
   weight: 40000
-- identifier: incidents
+- identifier: インシデント
   name: インシデント管理
   parent: service_management_heading
-  pre: incidents
+  pre: インシデント
   url: service_management/incident_management/
   weight: 50000
 - identifier: incident_details
   name: インシデント詳細
-  parent: incidents
+  parent: インシデント
   url: service_management/incident_management/incident_details
   weight: 1
 - identifier: incidents_settings
   name: インシデント設定
-  parent: incidents
+  parent: インシデント
   url: service_management/incident_management/incident_settings
   weight: 2
-- identifier: analytics
+- identifier: 分析
   name: インシデント分析
-  parent: incidents
+  parent: インシデント
   url: service_management/incident_management/analytics
   weight: 3
 - identifier: incidents_clipboard
   name: Datadog クリップボード
-  parent: incidents
+  parent: インシデント
   url: service_management/incident_management/datadog_clipboard
   weight: 4
-- identifier: mobile
+- identifier: モバイル
   name: モバイルアプリケーション
   parent: service_management_heading
-  pre: mobile
+  pre: モバイル
   url: service_management/mobile/
   weight: 60000
-- identifier: workflows
+- identifier: ワークフロー
   name: ワークフローの自動化
   parent: service_management_heading
-  pre: workflows
+  pre: ワークフロー
   url: service_management/workflows/
   weight: 70000
 - identifier: workflows_build
   name: ワークフローの構築
-  parent: workflows
+  parent: ワークフロー
   url: service_management/workflows/build/
   weight: 1
 - identifier: workflows_access
   name: Authentication
-  parent: workflows
+  parent: ワークフロー
   url: service_management/workflows/access/
   weight: 2
 - identifier: workflows_trigger
   name: ワークフローをトリガーする
-  parent: workflows
+  parent: ワークフロー
   url: service_management/workflows/trigger/
   weight: 3
 - identifier: workflows_actions_catalog
   name: アクションカタログ
-  parent: workflows
+  parent: ワークフロー
   url: service_management/workflows/actions_catalog/
   weight: 4
 - identifier: workflows_generic_actions
@@ -7386,10 +7386,10 @@ main:
   weight: 101
 - identifier: workflows_connections
   name: 接続
-  parent: workflows
+  parent: ワークフロー
   url: service_management/workflows/connections/
   weight: 5
-- identifier: tracing
+- identifier: トレーシング
   name: APM
   parent: apm_heading
   pre: apm
@@ -7397,12 +7397,12 @@ main:
   weight: 140000
 - identifier: tracing_glossary
   name: APM の用語と概念
-  parent: tracing
+  parent: トレーシング
   url: tracing/glossary/
   weight: 1
 - identifier: tracing_trace_collection
   name: Datadog へのトレースの送信
-  parent: tracing
+  parent: トレーシング
   url: tracing/trace_collection/
   weight: 2
 - identifier: tracing_dd_libraries
@@ -7742,7 +7742,7 @@ main:
   weight: 111
 - identifier: tracing_metrics
   name: APM メトリクス収集
-  parent: tracing
+  parent: トレーシング
   url: tracing/metrics/
   weight: 3
 - identifier: tracing_trace_metrics
@@ -7787,7 +7787,7 @@ main:
   weight: 106
 - identifier: tracing_trace_pipeline
   name: トレースパイプラインの構成
-  parent: tracing
+  parent: トレーシング
   url: tracing/trace_pipeline/
   weight: 4
 - identifier: tracing_ingestion_mechanisms
@@ -7817,7 +7817,7 @@ main:
   weight: 305
 - identifier: tracing_other_telemetry
   name: トレースと他のテレメトリーとの接続
-  parent: tracing
+  parent: トレーシング
   url: tracing/other_telemetry/
   weight: 5
 - identifier: tracing_connect_logs
@@ -7877,7 +7877,7 @@ main:
   weight: 403
 - identifier: trace_explorer
   name: トレースエクスプローラー
-  parent: tracing
+  parent: トレーシング
   url: tracing/trace_explorer/
   weight: 6
 - identifier: span_search
@@ -7910,7 +7910,7 @@ main:
   weight: 506
 - identifier: tracing_services
   name: サービス観測可能性
-  parent: tracing
+  parent: トレーシング
   url: tracing/services/
   weight: 7
 - identifier: tracing_services_list
@@ -7945,7 +7945,7 @@ main:
   weight: 607
 - identifier: service_catalog
   name: サービスカタログ
-  parent: tracing
+  parent: トレーシング
   url: tracing/service_catalog/
   weight: 9
 - identifier: service_catalog_setup
@@ -7985,7 +7985,7 @@ main:
   weight: 907
 - identifier: dyninst
   name: ダイナミックインスツルメンテーション
-  parent: dyninst
+  parent: トレーシング
   url: dynamic_instrumentation/
   weight: 10
 - identifier: dyninst_enable
@@ -8015,7 +8015,7 @@ main:
   weight: 1002
 - identifier: tracing_error_tracking
   name: エラー追跡
-  parent: tracing
+  parent: トレーシング
   url: tracing/error_tracking/
   weight: 11
 - identifier: tracing_error_tracking_explorer
@@ -8030,17 +8030,17 @@ main:
   weight: 1102
 - identifier: tracing_data_security
   name: データセキュリティ
-  parent: tracing
+  parent: トレーシング
   url: tracing/configure_data_security/
   weight: 12
 - identifier: tracing_guides
   name: ガイド
-  parent: tracing
+  parent: トレーシング
   url: tracing/guide/
   weight: 13
 - identifier: tracing_troubleshooting
   name: トラブルシューティング
-  parent: tracing
+  parent: トレーシング
   url: tracing/troubleshooting/
   weight: 14
 - identifier: tracing_troubleshooting_startup_logs
@@ -8627,7 +8627,7 @@ main:
   weight: 203
 - name: 属性とエイリアス設定
   parent: log_processing
-  url: "logs/log_collection/?tab=host#attributes-and-tags"
+  url: logs/log_collection/?tab=host#attributes-and-tags
   weight: 204
 - name: 属性とエイリアス設定
   parent: log_configuration
@@ -8754,7 +8754,7 @@ main:
 - identifier: observability_pipelines
   name: 観測可能性パイプライン
   parent: log_management_heading
-  pre: pipelines
+  pre: パイプライン
   url: observability_pipelines/
   weight: 175000
 - name: セットアップ
@@ -8959,7 +8959,7 @@ main:
   parent: cspm
   url: /security/cspm/findings
   weight: 107
-- identifier: signals
+- identifier: シグナル
   name: シグナルエクスプローラー
   parent: cspm
   url: /security/cspm/signals_explorer/
@@ -9291,7 +9291,7 @@ main:
   url: synthetics/test_coverage
   weight: 7
 - identifier: synthetics_dashboards
-  name: "ダッシュボード  "
+  name: 'ダッシュボード  '
   parent: synthetics
   url: synthetics/dashboards
   weight: 8
@@ -9650,7 +9650,7 @@ main:
   url: real_user_monitoring/frustration_signals/
   weight: 8
 - identifier: rum_dashboards
-  name: "ダッシュボード  "
+  name: 'ダッシュボード  '
   parent: rum
   url: real_user_monitoring/dashboards/
   weight: 9
@@ -9801,7 +9801,7 @@ main:
 - identifier: nm_parent
   name: ネットワークモニタリング
   parent: infrastructure_heading
-  pre: network
+  pre: ネットワーク
   url: network_monitoring/
   weight: 220000
 - identifier: npm
@@ -9991,7 +9991,7 @@ main:
   url: developers/service_checks/
   weight: 6
 - identifier: dev_tools_service_check_agent_check
-  name: '送信 - Agent チェック'
+  name: 送信 - Agent チェック
   parent: dev_tools_service_check
   url: developers/service_checks/agent_service_checks_submission/
   weight: 601
@@ -10001,7 +10001,7 @@ main:
   url: developers/service_checks/dogstatsd_service_checks_submission/
   weight: 602
 - identifier: dev_tools_service_check_api
-  name: "送信 - API "
+  name: '送信 - API '
   parent: dev_tools_service_check
   url: api/v1/service-checks/
   weight: 603
