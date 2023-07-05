@@ -38,6 +38,12 @@ You can instrument your application with a Datadog Agent by adding the following
 # copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
+# install Orchestrion, which will modify the source code and automatically add tracing.
+# make sure to do this before you `go build` your app.
+RUN go install github.com/datadog/orchestrion@latest
+RUN orchestrion -w ./
+RUN go mod tidy
+
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
 
@@ -45,10 +51,6 @@ ENTRYPOINT ["/app/datadog-init"]
 ENV DD_SERVICE=datadog-demo-run-go
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in Cloud Run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # execute your binary application wrapped in the entrypoint. Adapt this line to your needs
 CMD ["/path/to/your-go-binary"]
@@ -63,23 +65,19 @@ Instrument your application with the Datadog Agent by adding the following lines
 # copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
-# install the python tracing library here or in requirements.txt
-RUN pip install --no-cache-dir ddtrace==1.7.3
+# install the Datadog Python Tracer
+RUN pip install --target /dd_tracer/python/ ddtrace
 
 # optionally add Datadog tags
 ENV DD_SERVICE=datadog-demo-run-python
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
 
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
-
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
 
 # execute your binary application wrapped in the entrypoint, launched by the Datadog trace library. Adapt this line to your needs
-CMD ["ddtrace-run", "python", "app.py"]
+CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
 ```
 
 {{< /programming-lang >}}
@@ -91,21 +89,13 @@ Instrument your application with the Datadog Agent by adding the following lines
 # copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
-# install the Datadog js tracing library, either here or in package.json
-
-npm i dd-trace@2.2.0
-
-# enable the Datadog tracing library
-ENV NODE_OPTIONS="--require dd-trace/init"
+# copy the Datadog NodeJS Tracer into your Docker image
+COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
 
 # optionally add Datadog tags
 ENV DD_SERVICE=datadog-demo-run-nodejs
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
@@ -124,14 +114,13 @@ Instrument your application with the Datadog Agent by adding the following lines
 # copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
+# add the Datadog Java Tracer into your Docker image
+ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+
 # optionally add Datadog tags
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
@@ -150,14 +139,13 @@ Instrument your application with the Datadog Agent by adding the following lines
 # copy the Datadog `serverless-init` into your Docker image
 COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
 
+# copy the Datadog Dotnet Tracer into your Docker image
+COPY --from=datadog/dd-lib-dotnet-init /datadog-init/monitoring-home/ /dd_tracer/dotnet/
+
 # optionally add Datadog tags
 ENV DD_SERVICE=datadog-demo-run-dotnet
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-
-# this env var is needed for trace propagation to work properly in cloud run.
-# ensure to set this variable for all Datadog-instrumented downstream services.
-ENV DD_TRACE_PROPAGATION_STYLE=datadog
 
 # change the entrypoint to wrap your application into the Datadog serverless-init process
 ENTRYPOINT ["/app/datadog-init"]
