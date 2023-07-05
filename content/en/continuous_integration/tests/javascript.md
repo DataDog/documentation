@@ -228,6 +228,7 @@ You can add custom tags to your test by grabbing the current active span:
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+
 ### Adding custom metrics to tests
 
 You may also add custom metrics to your test by grabbing the current active span:
