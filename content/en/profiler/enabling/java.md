@@ -29,7 +29,7 @@ As of dd-trace-java version 1.0.0, you have two options for the engine that gene
 
 Minimum JDK versions:
 
-- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it like Amazon Corretto, Azul Zulu, ...)
+- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it, including Amazon Corretto, Azul Zulu, and others)
 - Oracle JDK 8u352+, 11.0.17+, 17.0.5+
 - OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+
 
