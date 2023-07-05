@@ -19,6 +19,9 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: ドキュメント
   text: Logging without Limits (無制限のログ)*
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: ログ収集の高度な構成
 ---
@@ -572,7 +575,6 @@ logs:
 **注**: Agent がディレクトリ内にあるファイルをリストするには、そのディレクトリへの読み取りおよび実行アクセス許可が必要です。
 
 ## 最近更新されたファイルを最初に追跡する
-**注:** この機能は公開ベータ版です。
 
 Datadog Agent は、ファイルを優先的に追跡する際、ディレクトリパスのファイル名を逆辞典順でソートします。ファイルの修正時間に基づいてファイルをソートするには、構成オプション `logs_config.file_wildcard_selection_mode` に値 `by_modification_time` を設定します。
 
