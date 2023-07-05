@@ -41,7 +41,7 @@ With the following API call, you can mute alert during the weekend for all monit
 {{< tabs >}}
 {{% tab "API " %}}
 
-```bash
+```shell
 curl -X POST "https://api.<DATADOG_SITE>/api/v2/downtime" \
 -H "Content-type: application/json" \
 -H "DD-API-KEY: ${api_key}" \
@@ -51,7 +51,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v2/downtime" \
 
 Optionally, add a `message` to your Downtime to let others know the reason and purpose of the Downtime you are creating. For instance, `Muting all monitors in production environment over the weekend`.
 
-Replace the placeholder value `<DATADOG_SITE>` with the right site parameter of your Datadog account, see [here][1]. Replace the `start` and `end` parameter to match your wanted schedule. For example:
+Replace the placeholder value `<DATADOG_SITE>` with the site parameter of your Datadog account, see the [Datadog Sites][1] documentation. Replace the `start` and `end` parameter to match your wanted schedule. For example:
 
 * `start=$(date +%s)`
 * `end=$(date -v+24H +%s)`
@@ -103,9 +103,9 @@ And then in the cURL command, use: `"start": '"${start}"'`.
 {{% /tab %}}
 {{% tab "UI" %}}
 
-Open the [manage Downtime page][1] and schedule a new downtime. Select `recurring`:
+Open the [Manage Downtime page][1] and schedule a new downtime. Select `recurring`:
 
-{{< img src="monitors/guide/downtimes_weekend.png" alt="Downtimes over the week end" style="width:100%;" >}}
+{{< img src="monitors/guide/downtimes_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the weekend" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -120,7 +120,7 @@ Using the same example, you may want to also mute this service during the weekda
 
 With the following API call, you can mute alerts every weekday from 8pm to 6am:
 
-```bash
+```shell
 curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -H "Content-type: application/json" \
 -H "DD-API-KEY: ${api_key}" \
@@ -128,7 +128,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-10T18:00","duration":"12h","rrule":"FREQ=DAILY;INTERVAL=1"}]}}},"_authentication_token":"b6c9ec89cdff687d29c0ee54923c52f57c9e102a"}'
 ```
 
-Optionally, add a `message` to your Downtime to let others know the reason and purpose of the Downtime you are creating. Replace the placeholder value `<DATADOG_SITE>` with the right site parameter of your Datadog account, see [here][1]. Replace the `start` and `end` parameter to match your wanted schedule.
+Optionally, add a `message` to your Downtime to let others know the reason and purpose of the Downtime you are creating. Replace the placeholder value `<DATADOG_SITE>` with the site parameter of your Datadog account, see the [Datadog Sites][1] documentation. Replace the `start` and `end` parameter to match your wanted schedule.
 
 **Response:**
 
@@ -174,9 +174,9 @@ Optionally, add a `message` to your Downtime to let others know the reason and p
 {{% /tab %}}
 {{% tab "UI" %}}
 
-Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
+Open the [Manage Downtime page][1] and schedule a new downtime. Select `recurring`:
 
-{{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes outside of business hours" style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_businesshour.png" alt="Downtimes configuration using recurring schedule to mute alerts outside of business hours" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -184,7 +184,7 @@ Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
 ### Combined downtime for outside business hours and weekend
 
-For use cases where you strictly want to be notified by your monitors only during actual business hours, you will need to mute monitors during the week as well as during the weekend. This can be combined in a single Downtime. Continuing the example above:
+For use cases where you only want monitor notifications during business hours, mute monitors during the week as well as during the weekend. This can be combined in a single Downtime. Continuing from the [Downtime outside of business hours](#downtime-outside-of-business-hours) example above:
 
 {{< tabs >}}
 {{% tab "API " %}}
@@ -198,7 +198,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -H "DD-APPLICATION-KEY: ${app_key}" \
 -d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-09T18:00","duration":"12h","rrule":"FREQ=WEEKLY;INTERVAL=1;BYDAY=SU,MO,TU,WE,TH,FR"},{"start":"2023-07-09T00:00","duration":"24h","rrule":"FREQ=WEEKLY;INTERVAL=1;BYDAY=SA,SU"}]}}}'
 ```
-Optionally, add a `message` to your Downtime to let others know the reason and purpose of the Downtime you are creating. Replace the placeholder value `<DATADOG_SITE>` with the right site parameter of your Datadog account, see [here][1]. Replace the `start` and `end` parameter to match your wanted schedule.
+Optionally, add a `message` to your Downtime to let others know the reason and purpose of the Downtime you are creating. Replace the placeholder value `<DATADOG_SITE>` with the site parameter of your Datadog account, see the [Datadog Sites][1] documentation. Replace the `start` and `end` parameter to match your wanted schedule.
 
 **Response:**
 
@@ -251,7 +251,7 @@ Optionally, add a `message` to your Downtime to let others know the reason and p
 
 Open the [manage Downtime page][1] and add a new downtime. Select `recurring`:
 
-{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes outside of business hours and during the weekend" style="width:100%;" >}}
+{{< img src="monitors/guide/downtime_business_hour_weekend.png" alt="Downtimes configuration using recurring schedule to mute alerts over the outside of business hours and during the weekend" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -282,7 +282,7 @@ curl -X POST "https://api.<DATADOG_SITE>/api/v1/downtime" \
 -d '{"data":{"type":"downtime","attributes":{"monitor_identifier":{"monitor_tags":["*"]},"scope":"env:prod","display_timezone":"Europe/Berlin","message":"","mute_first_recovery_notification":false,"notify_end_types":["expired","canceled"],"notify_end_states":["alert","warn","no data"],"schedule":{"timezone":"Europe/Berlin","recurrences":[{"start":"2023-07-11T08:00","duration":"2h","rrule":"FREQ=DAILY;INTERVAL=1;BYDAY=2TU"}]}}}'
 ```
 
-Replace the placeholder value `<DATADOG_SITE>` with the right site parameter of your Datadog account, see [here][1]. Replace the `start` and `end` parameter to match your wanted schedule.
+Replace the placeholder value `<DATADOG_SITE>` with the site parameter of your Datadog account, see the [Datadog Sites][1] documentation. Replace the `start` and `end` parameter to match your wanted schedule.
 
 **Response:**
 
@@ -328,9 +328,9 @@ Replace the placeholder value `<DATADOG_SITE>` with the right site parameter of 
 {{% /tab %}}
 {{% tab "UI" %}}
 
-Open the [manage Downtime page][1] and add a new downtime. Select `recurring` first and afterwards select `Use RRULE`.
+Open the [manage Downtime page][1] and add a new downtime. Select `recurring` and then select `Use RRULE`.
 
-{{< img src="monitors/downtimes/downtime_guide_rrule.png" alt="rrule downtime" style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.png" alt="Downtimes configuration using recurring RRULE schedule to mute alerts on the 2nd Tuesday of every month" style="width:100%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
