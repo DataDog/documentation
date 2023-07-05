@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: isdown-isdown
 app_uuid: 761b63c9-9efc-48ea-881b-c94be6b2fb53
 author:
