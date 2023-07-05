@@ -42,7 +42,7 @@ Datadog では、[CloudFormation](#cloudformation) を使用して Forwarder を
 
 以前に Datadog の AWS インテグレーションページから[以下の CloudFormation テンプレート][102]を使用して AWS インテグレーションを有効にした場合、それを含めることにした場合、アカウントにはすでに Datadog Lambda Forwarder 関数がプロビジョニングされている場合があります。その場合、ログをエクスポートしたいアカウント内の追加の AWS リージョンに Datadog Lambda をインストールするだけで済みます。
 
-**注:** Datadog Lambda Forwarder 関数のコードブロックは、Lambda レイヤーを通してロジックが実装されているため、空になっています。
+**注:** Datadog Lambda Forwarder 関数コードブロックは、Lambda レイヤーを通してロジックが実装されているため、空であることが期待されます。
 
 [101]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#set-up-triggers
 [102]: https://github.com/DataDog/cloudformation-template/tree/master/aws

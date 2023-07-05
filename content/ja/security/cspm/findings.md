@@ -37,15 +37,21 @@ Cloud Security Posture Management (CSPM) [Security Findings Explorer][1] を使�
 
 発見は、[Security Findings Explorer][1] に表示されます。**Group by** フィルターとクエリ検索バーを使用して、発見をルールごとに集計します。例えば、`evaluation:fail` でフィルターをかけると、対処が必要な問題があるすべてのコンプライアンスルールにリストが絞られます。また、発見をリソース別に集計し、失敗した発見が多いリソースをランク付けし、改善の優先順位をつけることもできます。
 
-{{< img src="security/cspm/findings/posture-management-overview-2.png" alt="ポスチャ管理の発見ページの概要" style="width:100%;">}}
+{{< img src="security/cspm/findings/posture-management-overview3.png" alt="ポスチャ管理の診断結果ページの概要" style="width:100%;">}}
 
 発見を選択すると、そのルールで評価されたリソース、ルールの説明、フレームワークまたは業界ベンチマークへのマッピング、および推奨される改善手順が表示されます。誤構成されたリソースの詳細を表示するには、**View Finding** をクリックします。
 
-{{< img src="security/cspm/findings/finding-side-panel.png" alt="サイドパネルにあるランク付けされたリソース" style="width:65%;">}}
+{{< img src="security/cspm/findings/finding-side-panel2.png" alt="サイドパネルにあるランク付けされたリソース" style="width:65%;">}}
 
 Security Findings Explorer で **Resources** でグループ化し、リソースを選択すると、そのリソースに対して評価されたコンプライアンスルールの全リストとそのステータスが表示されます。
 
 {{< img src="security/cspm/findings/resource-rules-evaluated2.png" alt="検索でリソースごとにグループ化および集計" style="width:65%;">}}
+
+## 発見をエクスポートする
+
+発見のリストを CSV としてエクスポートするには、Security Findings Explorer の **Download as CSV** をクリックし、エクスポートする発見の最大数を選択した後、**Download as CSV** をクリックします。最大で 50,000 件の発見をエクスポートできます。
+
+{{< img src="security/cspm/findings/export-csv.png" alt="発見を CSV としてエクスポートするためのダイアログボックスと、エクスポートする発見の最大数を指定するオプション" style="width:65%;">}}
 
 ## 発見のミュート
 
@@ -53,12 +59,12 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 
 例えば、['Block Public Access' feature is enabled for S3 bucket][4] ルールは、S3 バケットが一般にアクセス可能かどうかを評価します。一般に共有されることを意図した静的アセットを持つ S3 バケットがある場合、その S3 バケットに対する発見をミュートすることができます。
 
-合格・不合格の発見は、いつでもミュートすることができます。発見をミュートすると、その発見はポスチャスコアの計算から除外されます。
+一度に最大 50 の発見をミュートすることができます。発見をミュートすると、その発見はポスチャスコアの計算から除外されます。
 
-{{< img src="security/cspm/findings/muted-findings2.png" alt="Mute findings ダイアログボックスには、ミュートの理由と期間を指定するためのフィールドがあります" style="width:100%;">}}
+{{< img src="security/cspm/findings/muted-findings2.png" alt="The Mute findings dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
-1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、リソースを選択します。
-2. **Mute** をクリックします。
+1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、1 つ以上のリソースを選択します。
+2. **Actions** > **Mute** を選択します。
 3. ミュートの理由を選択します。例えば、修正待ち、誤検出、受容されたリスクなどです。
 4. オプションで **Description** を入力します。
 5. ミュートの継続時間を選択します。
@@ -69,7 +75,7 @@ Security Findings Explorer で **Resources** でグループ化し、リソー�
 ミュートされた発見は、指定されたミュート時間が経過すると自動的にミュートが解除されます。また、手動でミュートを解除することもできます。
 
 1. [発見サイドパネル](#explore-your-cloud-misconfigurations)で、ミュートされた発見のあるリソースを選択します。
-2. **Unmute** をクリックします。
+2. **Actions** > **Unute** を選択します。
 3. ミュート解除の理由を選択します。例えば、未解決の修正がない、ヒューマンエラーである、または受け入れ可能なリスクでなくなった、などです。
 4. オプションで **Description** を入力します。
 5. **Unmute** をクリックします。

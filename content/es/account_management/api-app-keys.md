@@ -1,9 +1,12 @@
 ---
+algolia:
+  tags:
+  - clave de API
 aliases:
 - /es/account_management/faq/how-do-i-reset-my-application-keys/
 - /es/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /es/account_management/faq/api-app-key-management/
-kind: faq
+kind: documentación
 title: Claves de API y aplicación
 ---
 
@@ -26,7 +29,7 @@ La forma recomendada de determinar el contexto de las claves de aplicación es o
 - Los usuarios o cuentas de servicio con [permisos][4] para crear o editar claves de aplicación pueden definir el contexto de las claves de aplicación. Los usuarios deben tener el permiso `user_app_keys` para definir el contexto de sus propias claves de aplicación, o el permiso `org_app_keys_write` para definir el contexto de las claves de aplicación que pertenezcan a cualquier usuario de su organización. Los usuarios deben tener el permiso `service_account_write` para definir el contexto de las claves de aplicación en el caso de las cuentas de servicio.
 - Los propietarios de aplicaciones no pueden autorizar una aplicación si les faltan los permisos necesarios, ni siquiera si definen el contexto de una clave de aplicación con contextos de autorización de otra persona.
 - Los errores debido a la falta de permisos al escribir claves de aplicación o autorizar aplicaciones mostrarán el código `403 Forbidden`. Encontrarás más información sobre las distintas respuestas de error en la documentación acerca de la [API de Datadog][5].
-- Si el rol o los permisos de algún usuario cambian, los contextos de autorización indicados para sus claves de aplicación no se modificarán.
+- Si el rol o los permisos de algún usuario cambian, los contextos de autorización indicados para sus claves de aplicación seguirán iguales.
 
 ## Tokens de cliente
 

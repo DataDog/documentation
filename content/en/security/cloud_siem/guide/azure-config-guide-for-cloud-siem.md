@@ -39,7 +39,7 @@ Click the button below and fill in the form on Azure portal. After completing th
 
 After the deployment is completed successfully, go to [Log Explorer][2] and enter `service:azure` in the search query to view your Azure logs.
 
-[1]: /integrations/azure/#optional-parameters
+[1]: /logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
 [2]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
