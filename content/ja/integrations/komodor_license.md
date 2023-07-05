@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: komodor-komodor
 app_uuid: d62310ba-c7a8-4c5b-ab9f-60bb46527f1b
 assets: {}
