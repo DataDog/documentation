@@ -154,6 +154,18 @@ You can add custom tags to your tests by using the current active span:
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+### Adding custom metrics to tests
+
+Just like tags, you can add custom metrics to your tests by using the current active span:
+
+```javascript
+  it('sum function can sum', () => {
+    const testSpan = require('dd-trace').scope().active()
+    testSpan.setTag('memory_allocations', 16)
+    // test continues normally
+    // ...
+  })
+```
 {{% /tab %}}
 
 {{% tab "Playwright" %}}
@@ -177,6 +189,9 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-app yarn t
 
 Custom tags are not supported for Playwright.
 
+### Adding custom metrics to tests
+
+Custom metrics are not supported for Playwright.
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -212,6 +227,18 @@ You can add custom tags to your test by grabbing the current active span:
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
 
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+### Adding custom metrics to tests
+
+You may also add custom metrics to your test by grabbing the current active span:
+
+```javascript
+  When('the function is called', function () {
+    const stepSpan = require('dd-trace').scope().active()
+    testSpan.setTag('memory_allocations', 16)
+    // test continues normally
+    // ...
+  })
+```
 {{% /tab %}}
 
 {{% tab "Cypress" %}}
@@ -323,6 +350,28 @@ it('renders a hello world', () => {
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][105] section of the Node.js custom instrumentation documentation.
 
+### Adding custom metrics to tests
+
+To add custom metrics to your tests, such as the memory allocations, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
+
+For example:
+
+```javascript
+beforeEach(() => {
+  cy.task('dd:addTags', {
+    'before.each':
+    'certain.information'
+  })
+})
+it('renders a hello world', () => {
+  cy.task('dd:addTags', {
+    'memory_allocation': 16,
+    'test.importance': 3
+  })
+  cy.get('.hello-world')
+    .should('have.text', 'Hello World')
+})
+```
 ### Cypress - RUM integration
 
 If the browser application being tested is instrumented using [Browser Monitoring][106], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][107].
