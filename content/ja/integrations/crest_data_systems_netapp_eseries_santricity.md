@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-netapp-eseries-santricity
 app_uuid: 018234fd-7290-4477-9982-38d8df86803e
 assets:
