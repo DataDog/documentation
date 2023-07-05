@@ -364,8 +364,7 @@ beforeEach(() => {
 })
 it('renders a hello world', () => {
   cy.task('dd:addTags', {
-    'memory_allocation': 16,
-    'test.importance': 3
+    'memory_allocation': 16
   })
   cy.get('.hello-world')
     .should('have.text', 'Hello World')
