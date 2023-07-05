@@ -542,7 +542,7 @@ The payload to be published is a dictionary `<string, string|number>` of tags or
 
 ### Run the tests
 
-Once the test start and end channels are put in place in your code, you may run your testing framework like you normally do, including the following environment variables:
+When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
 
 ```shell
 NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
