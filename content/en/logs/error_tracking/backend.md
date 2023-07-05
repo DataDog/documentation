@@ -26,14 +26,12 @@ If you are already sending stack traces to Datadog but they are not in `error.st
 
 To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in Error Tracking for Logs does not require APM; the enrichment tags and linked repository is the same for both.
 
-#### Attributes for stack traces
+#### Attributes for error tracking
 
-When logging stack traces, there are specific attributes that have a dedicated UI display within your Datadog application such as the logger name, the current thread, the error type, and the stack trace itself. To enable these functionalities use the following attribute names:
+There are specific attributes that have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking use the following attribute names:
 
 | Attribute            | Description                                                             |
 |----------------------|-------------------------------------------------------------------------|
-| `logger.name`        | Name of the logger                                                      |
-| `logger.thread_name` | Name of the current thread                                              |
 | `error.stack`        | Actual stack trace                                                      |
 | `error.message`      | Error message contained in the stack trace                              |
 | `error.kind`         | The type or "kind" of an error (for example, "Exception", or "OSError") |
