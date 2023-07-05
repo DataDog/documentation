@@ -292,7 +292,7 @@ For mobile apps (Swift, Android):
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
 
-The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][9] expression within the ones supported.
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][8] expression within the ones supported.
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
 
@@ -437,5 +437,4 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /logs/
 [7]: /getting_started/site/
-[8]: https://git-scm.com/downloads
 [9]: https://www.w3schools.com/xml/xpath_syntax.asp
