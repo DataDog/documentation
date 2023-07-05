@@ -77,17 +77,17 @@ En el caso de los productos con subtipos, las categorías aparecen diferenciadas
 
 En la pestaña de cada producto, encontrarás gráficos más detallados sobre los subtipos de productos. Por ejemplo, en la pestaña Infrastructure, se ofrece un desglose según el tipo de host.
 
-{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Sección de tendencias de uso de la pestaña Infraestructura con el gráfico de hosts de infraestructura que contiene los hosts del Agent y los hosts de AWS, el gráfico de logs indexados que contiene los logs diarios indexados en tiempo real y logs en tiempo real indexados acumulados" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/UsageBreakdownByProductSubtype.png" alt="Sección Usage Trends de la pestaña Infrastructure con el gráfico de hosts de infraestructura, que contiene los hosts del Agent y los hosts de AWS; el gráfico de logs indexados, que contiene los logs diarios indexados en tiempo real y los logs acumulativos indexados en tiempo real" style="width:100%; align:left" >}}
 
-Es posible consultar el uso acumulado a lo largo del tiempo de los productos basados en sumas.
+Es posible consultar el uso acumulativo a lo largo del tiempo de los productos basados en sumas.
 
-{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Gráficos de tramos ingeridos y tramos indexados, cada uno de ellos con datos de las sumas diarias y acumuladas de sus respectivos tramos" style="width:100%; align:left" >}}
+{{< img src="account_management/billing/CumulativeUsageLine.png" alt="Gráficos de tramos ingeridos y tramos indexados, cada uno de ellos con datos de las sumas diarias y acumulativas de sus respectivos tramos" style="width:100%; align:left" >}}
 
 La opción de seleccionar el tiempo permite ver los gráficos de uso en intervalos de tiempo diarios, semanales, mensuales o anuales.
 
 {{< img src="account_management/billing/TimeGranularity.png" alt="Intervalos de tiempo en los gráficos de uso" style="width:100%; align:left" >}}
 
-La línea discontinua `Committed` muestra los compromisos por producto, sin tener en cuenta las asignaciones incluidas (como métricas personalizadas o contenedores).
+La línea discontinua `Committed` muestra los compromisos por producto sin concesiones (como las métricas personalizadas o los contenedores).
 
 {{< img src="account_management/billing/CommittedLine.png" alt="Línea de uso Committed en el gráfico de hosts de APM configurada con el valor 10" style="width:100%; align:left" >}}
 
@@ -95,38 +95,38 @@ La línea discontinua `Committed` muestra los compromisos por producto, sin tene
 
 ## Principales métricas personalizadas
 
-En la pestaña Custom Metrics (Métricas personalizadas), la tabla Top Custom Metrics (Principales métricas personalizadas) ofrece dos tipos de vistas para saber el uso del último mes y el del día más reciente; por ejemplo, si quieres conocer el uso realizado el día de la última actualización.
+En la pestaña Custom Metrics (Métricas personalizadas), la tabla Top Custom Metrics (Principales métricas personalizadas) ofrece dos tipos de vistas para mostrar el uso realizado durante lo que va de mes y el uso del último día (por ejemplo, el uso realizado durante el día de la última actualización).
 
-La vista "Top 5000" proporciona la siguiente información sobre tus 5000 métricas personalizadas principales:
+La vista "Top 5000" proporciona la siguiente información sobre tus 5000 métricas personalizadas principales:
 * Nombre de la métrica
 * Promedio de métricas personalizadas por hora
 * Número máx. de métricas personalizadas por hora
 * Porcentaje de contribución de la métrica al uso general de las métricas personalizadas
-* Permite buscar una métrica entre las 5000 métricas personalizadas principales
-* Estos datos se pueden guardar como un archivo CSV.
+* Búsqueda de una métrica entre las 5000 métricas personalizadas principales
+* Estos datos se pueden descargar como un archivo CSV.
 
 La vista "All" proporciona la siguiente información sobre todas tus métricas personalizadas:
 * Nombre de la métrica
 * Promedio de métricas personalizadas por hora
-* Número máximo de métricas personalizadas por hora
-* Permite buscar una métrica entre todas tus métricas personalizadas
-* Estos datos pueden descargarse como un archivo CSV, con un máximo de 300 000 métricas personalizadas. Si quieres descargar más de 300 000 métricas personalizadas puedes utilizar nuestro [endpoint de la API][6].
+* Número máx. de métricas personalizadas por hora
+* Búsqueda de una métrica entre todas tus métricas personalizadas
+* Estos datos pueden descargarse como un archivo CSV, con un máximo de 300 000 métricas personalizadas. Si quieres descargar más de 300 000 métricas personalizadas, puedes utilizar nuestro [endpoint de API][6].
 
 
-Para obtener más información sobre tus métricas, accede al [Metrics Summary][7] (Resumen de métricas) pasando el ratón por encima de la fila de la métrica que te interese y haciendo clic en el icono del medidor que aparece a la derecha.
+Para obtener más información sobre tus métricas, accede a [Metrics Summary][7] (Resumen de métricas) pasando el ratón por encima de la fila de la métrica que te interese y haciendo clic en el icono del medidor que aparece a la derecha.
 
 {{< img src="account_management/billing/usage-metrics-05.png" alt="Vista general de la tabla de las principales métricas personalizadas" >}}
 
 ## Uso de logs por índice
 
-En la pestaña Log Management (Gestión de logs), la tabla Log usage by Index (Uso de logs por índice) muestra el uso de logs indexados por hora, día, mes y año clasificado por nombre de índice y periodo de retención. Además, muestra el desglose en logs activos y [logs rehidratados][8]. Esta pestaña ofrece la siguiente información:
+En la pestaña Log Management (Gestión de logs), la tabla Log usage by Index (Uso de logs por índice) muestra el uso que se hace de los logs indexados por hora, día, mes y año según el nombre del índice y periodo de retención. Además, muestra el desglose en logs activos y [logs rehidratados][8]. Esta pestaña ofrece la siguiente información:
 
-* Nombre de índice
+* Nombre del índice
 * Periodo de retención en días
-* Número de logs indexados
+* Count de logs indexados
 * Porcentaje de contribución del índice al uso total de logs indexados durante el periodo de tiempo seleccionado
 
-Estos datos se pueden guardar como un archivo CSV.
+Estos datos se pueden descargar como un archivo CSV.
 
 {{< img src="account_management/billing/usage-details-v3-03.png" alt="Uso de logs por índice" >}}
 
