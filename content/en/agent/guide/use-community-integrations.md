@@ -34,7 +34,7 @@ For Agent v7.21+ / v6.21+:
     ```
     datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
-   The version for the integration can be found in the respective changelog on the integration's Github repository 
+   The version for the integration can be found in the respective changelog on the integration's Github repository
 2. Configure your integration similar to core [integrations][1].
 3. [Restart the Agent][2].
 
@@ -59,6 +59,46 @@ Use this new Agent image in combination with [Autodiscovery][1] to enable the `<
 [1]: /agent/autodiscovery/
 {{% /tab %}}
 
+{{% tab "Helm" %}}
+
+When deploying the Agent in your Kubernetes environment using the Datadog Helm chart, you can use `datadog.communityIntegrations` to specify community integrations to install in the Agent Daemonset, providing the integration name and its version.
+
+```yaml
+datadog:
+  [...]
+  communityIntegrations:
+  - name: <INTEGRATION_NAME>
+    version: <INTEGRATION_VERSION>
+```
+
+**Note**: This requires version `3.33.0+` of the Datadog Helm chart.
+
+{{% /tab %}}
+{{% tab "Operator" %}}
+
+When deploying the Agent in your Kubernetes environment using the Datadog Operator, you can specify an override for the `agent` container entrypoint inside the `nodeAgent` to install community integrations before starting the Agent with `agent run`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+  [...]
+  features:
+  [...]
+  override:
+    nodeAgent:
+      containers:
+        agent:
+          command:
+          - bash
+          - -c
+          - agent integration install -t -r datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION> && agent run
+```
+
+{{% /tab %}}
 {{% tab "Agent earlier versions" %}}
 
 For Agent < v7.21 / v6.21:
