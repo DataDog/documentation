@@ -2881,6 +2881,7 @@ components:
     FormulaAndFunctionSLOQueryDefinition:
       description: A formula and functions metrics query.
       example:
+        additional_query_filters: '*'
         data_source: slo
         group_mode: overall
         measure: good_events
@@ -2888,6 +2889,10 @@ components:
         slo_id: '12345678910'
         slo_query_type: metric
       properties:
+        additional_query_filters:
+          description: Additional filters applied to the SLO query.
+          example: host:host_a,env:prod
+          type: string
         data_source:
           $ref: '#/components/schemas/FormulaAndFunctionSLODataSource'
         group_mode:
