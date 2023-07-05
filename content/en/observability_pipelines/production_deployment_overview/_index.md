@@ -25,7 +25,7 @@ The first step to architecting your Observability Pipelines Worker deployment is
 
 ### Working with network boundaries
 
-When deploying the Observability Pipelines Worker as an aggregator, it should be deployed within your network boundaries to minimize egress costs. Ingress into the Observability Pipelines Worker should never travel over the public internet. Therefore, Datadog recommends starting with one aggregator per region to keep things simple.
+Because Observability Pipelines Worker is deployed as an aggregrator, it should be deployed within your network boundaries to minimize egress costs. Ingress into the Observability Pipelines Worker should never travel over the public internet. Therefore, Datadog recommends starting with one aggregator per region to keep things simple.
 
 ### Using firewalls and proxies
 
@@ -51,36 +51,13 @@ Your pipeline begins with data collection. Your services and systems generate lo
 
 ### Choosing agents
 
-You should choose the agent that optimizes your engineering team's ability to monitor their systems. Therefore, integrate Observability Pipelines Worker with the best agent for the job and replace the other agents with the Observability Pipelines Worker. 
-
-#### When Observability Pipelines Worker can replace agents
-
-The Observability Pipelines Worker can replace agents performing generic data forwarding functions, such as:
-
-- Tailing and forwarding log files
-- Collecting and forwarding service metrics without enrichment
-- Collecting and forwarding service logs without enrichment
-- Collecting and forwarding service traces without enrichment
-
-These functions collect and forward existing data without modifying data. Since these functions are not unique, these agents can be replaced with the Observability Pipelines Worker to provide more configuration options that may be needed as your environment evolves. 
-
-If you decide to replace an agent, configure Observability Pipelines Worker to perform the same function as the agent you are replacing. Use source components such as the `file`, `journald`, and `host_metrics` sources to collect and forward data. You can process data locally on the node or remotely on your aggregators. See [Choosing where to process data](#choosing-where-to-process-data) for more information.
-
-{{< img src="observability_pipelines/production_deployment_overview/as_an_agent.png" alt="A diagram showing a node containing multiple services and the Observability Pipelines Worker, where the services are sending data to the Worker and the Worker is sending data out" style="width:30%;" >}}
-
-#### When Observability Pipelines Worker should integrate with agents
-
-The Observability Pipelines Worker should integrate with agents that produce vendor-specific data that the Observability Pipelines Worker cannot replicate.
+You should choose the agent that optimizes your engineering team's ability to monitor their systems. Therefore, integrate Observability Pipelines Worker with the best agent for the job and deploy the Observability Pipelines Worker on separate nodes as an aggregator. 
 
 For example, Datadog [Network Performance Monitoring][4] integrates the Datadog Agent with vendor-specific systems and produces vendor-specific data. Therefore, the Datadog Agent should collect the data and send it directly to Datadog, since the data is not a supported data type in the Observability Pipelines Worker.
 
 As another example, the Datadog Agent collects service metrics and enriches them with vendor-specific Datadog tags. In this case, the Datadog Agent should send the metrics directly to Datadog or route them through the Observability Pipelines Worker. The Observability Pipelines Worker should not replace the Datadog Agent because the data being produced is enriched in a vendor-specific way.
 
-If you integrate with an agent, configure the Observability Pipelines Worker to receive data directly from the agent over the local network, routing data through the Observability Pipelines Worker. Use source components such as the `datadog_agent` or `open_telemetry` to receive data from your agents.
-
-{{< img src="observability_pipelines/production_deployment_overview/from_other_agents.png" alt="A diagram showing a node containing multiple services, other agents, and the Observability Pipelines Worker, where the services and agents are sending data to the Worker and the Worker is sending data out" style="width:35%;" >}}
-
-Alternatively, you can deploy the Observability Pipelines Worker on separate nodes as an aggregator. See [Choosing where to process data](#choosing-where-to-process-data) for more details.
+When you integrate with an agent, configure the Observability Pipelines Worker to receive data directly from the agent over the local network, routing data through the Observability Pipelines Worker. Use source components such as the `datadog_agent` or `open_telemetry` to receive data from your agents.
 
 ##### Reducing agent risk
 
@@ -121,12 +98,6 @@ For remote processing, the Observability Pipelines Worker can be deployed on sep
 Data processing is shifted off your nodes and onto remote aggregator nodes. Remote processing is recommended for environments that require high durability and high availability (most environments). In addition, this is easier to set up since it does not require the infrastructure restructuring necessary when adding an agent.
 
 See [Aggregator Architecture][5] for more details.
-
-#### Unified processing
-
-Finally, you can also combine local and remote data processing to create a unified observability data pipeline. Datadog recommends evolving towards unified processing after starting with [remote processing](#remote-processing).
-
-{{< img src="observability_pipelines/production_deployment_overview/unified.png" alt="A diagram showing a node containing multiple services and another agent, both sending data to the Worker in the node, and the Worker sends the data to the load balancers. The load balancer then sends data to the aggregator, which containers multiple Workers" style="width:70%;" >}}
 
 ## Buffering data
 
