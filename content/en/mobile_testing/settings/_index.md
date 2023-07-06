@@ -77,6 +77,10 @@ To add a version of an existing mobile application:
 
 For more information about parallelizing your Synthetic tests, see [Continuous Testing Settings][7].
 
+## Customize your parallelization
+
+For more information about parallelizing your Synthetic tests, see [Continuous Testing Settings][7].
+
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][2] can access the Synthetic Monitoring **Applications List** page. To get access to the **Applications List** page, upgrade your user to one of those two [default roles][2]. 
