@@ -1,9 +1,9 @@
 ---
-title: Mobile Test Steps
+title: Mobile App Test Steps
 kind: documentation
 description: Learn how to automatically record and manually set steps in a mobile test recording.
 further_reading:
-- link: "/mobile_testing/mobile_tests/"
+- link: "/mobile_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
 - link: "/mobile_testing/advanced_options/"
@@ -162,9 +162,9 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile_testing/mobile_tests/#variables
+[1]: /mobile_testing/mobile_app_tests/#variables
 [2]: /synthetics/settings/#global-variables
 [3]: /synthetics/guide/browser-tests-totp/
-[4]: /mobile_testing/mobile_tests/advanced_options
-[5]: /mobile_testing/mobile_tests/advanced_options#subtests
+[4]: /mobile_testing/mobile_app_tests/advanced_options
+[5]: /mobile_testing/mobile_app_tests/advanced_options#subtests
 [6]: /synthetics/guide/reusing-browser-test-journeys/

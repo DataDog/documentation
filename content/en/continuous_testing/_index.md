@@ -33,7 +33,7 @@ Datadog Continuous Testing offers a set of tools that enable you to automate sof
 
 ## Test with ease and speed
 
-Use scalable features such as a codeless [web recorder][2], [mobile application recorder][15], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team.
+Use scalable features such as a codeless [web recorder][2], [mobile app recorder][15], [parallel test runs][3], and built-in multi-location testing to save time and effort for your QA team.
 
 {{< img src="continuous_testing/continuous_testing_selection.png" alt="Choose between running your tests sequentially and customizing the number of tests you want to run at the same time in the Continuous Testing Settings page" style="width:100%;">}}
 
@@ -56,7 +56,7 @@ You can use the [Datadog Terraform provider][10] to control test creation and st
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs the [Continuous Testing Explorer][11]. 
+Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs the [Synthetic Monitoring & Continuous Testing Explorer][11]. 
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 
@@ -68,7 +68,7 @@ Create [search queries and visualizations][11] for your Synthetic test runs or b
 
 ## Ready to start?
 
-Once you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][14] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Continuous Testing Explorer][11].
+Once you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][14] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
 
 ## Further reading
 
@@ -83,5 +83,5 @@ Once you have configured some [Synthetic tests][4], see the documentation for yo
 [12]: /synthetics/apm/
 [13]: https://app.datadoghq.com/synthetics/create#
 [14]: /continuous_testing/cicd_integrations/configuration
-[15]: /mobile_testing/mobile_tests
+[15]: /mobile_testing/mobile_app_tests
 [16]: /mobile_testing/

@@ -6,10 +6,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
   tag: "Blog"
   text: "Best practices for maintaining end-to-end tests"
-- link: "/mobile_testing/mobile_tests//"
+- link: "/mobile_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn how to create mobile app tests"
-- link: "/mobile_testing/mobile_tests/steps/"
+- link: "/mobile_testing/mobile_app_tests/steps/"
   tag: "Documentation"
   text: "Learn how to create steps in mobile app tests"
 - link: "/data_security/synthetics/"
@@ -77,6 +77,6 @@ Click **Continue with test if this step fails** to ensure your mobile app test c
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /mobile_testing/mobile_tests/steps/
+[1]: /mobile_testing/mobile_app_tests/steps/
 [2]: /data_security/synthetics/
-[3]: /mobile_testing/mobile_tests/steps/#subtests
+[3]: /mobile_testing/mobile_app_tests/steps/#subtests

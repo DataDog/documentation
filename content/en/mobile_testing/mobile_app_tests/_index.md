@@ -139,7 +139,7 @@ You can restrict access to a mobile app test based on the roles in your organiza
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [10]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
-[11]: /mobile_testing/mobile_tests/steps/
+[11]: /mobile_testing/mobile_app_tests/steps/
 [12]: https://app.datadoghq.com/synthetics/mobile/create
 [13]: /continuous_testing/cicd_integrations/configuration?tab=npm#test-files
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options

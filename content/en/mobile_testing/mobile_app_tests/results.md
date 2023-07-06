@@ -1,9 +1,9 @@
 ---
-title: Test Results
+title: Mobile App Test Results
 kind: documentation
 description: View Synthetic mobile app test results and compare successful or failed sample runs to test runs. 
 further_reading:
-- link: "/mobile_testing/mobile_tests/"
+- link: "/mobile_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
 - link: "/service_management/events/explorer"
@@ -99,10 +99,10 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [1]: /synthetics/guide/synthetic-test-monitors/
 [2]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [3]: /continuous_testing/cicd_integrations
-[4]: /mobile_testing/mobile_tests/#define-scheduling-and-alert-conditions
+[4]: /mobile_testing/mobile_app_tests/#define-scheduling-and-alert-conditions
 [5]: /synthetics/guide/uptime-percentage-widget/
 [6]: /help
 [7]: /service_management/events/explorer/
 [8]: /getting_started/synthetics/browser_test#select-locations
 [9]: /synthetics/private_locations
-[10]: /mobile_testing/mobile_tests/steps
+[10]: /mobile_testing/mobile_app_tests/steps

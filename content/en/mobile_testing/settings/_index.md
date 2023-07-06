@@ -2,7 +2,7 @@
 title: Mobile Application Testing Settings
 kind: documentation
 further_reading:
-- link: "/mobile_testing/mobile_tests"
+- link: "/mobile_testing/mobile_app_tests"
   tag: "Documentation"
   text: "Learn how to create a mobile test"
 - link: "/continuous_testing/cicd_integrations"
@@ -92,5 +92,5 @@ If you are using the [custom role feature][3], add your user to any custom role 
 [3]: /account_management/rbac/#custom-roles
 [4]: https://developer.android.com/tools/bundletool
 [5]: https://app.datadoghq.com/synthetics/settings/mobile-applications
-[6]: /mobile_testing/mobile_tests/
+[6]: /mobile_testing/mobile_app_tests/
 [7]: /continuous_testing/settings/
