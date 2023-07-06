@@ -186,7 +186,9 @@ The following out-of-the-box tags are also available for filtering and grouping 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
 {{% site-region region="us3" %}}
-**Note**: If you are a US3 customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+**Note**: 
+- If you are a **US3** customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+- Microsoft Customer Agreement exports must be configured at the subscription level. Customers with an Enterprise Agreement can configure their billing accounts to onboard all subscriptions.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -234,9 +236,9 @@ If your exports are in different storage containers, repeat steps one to seven f
 2. Select the Access Control (IAM) tab.
 3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
-5. Assign these permissions to the subscription.
+5. Assign these permissions to the app registration.
 
-This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
+This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
 ### Cost types
 
