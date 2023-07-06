@@ -64,9 +64,9 @@ SAML setup is _not_ inherited by child-organizations from the parent-organizatio
 
 To configure SAML for multi-organizations:
 
-1. Create a new organization as a different user, with a different username/password.
+1. Create a new organization.
 2. Invite SAML users.
-3. Login as a SAML user and set SAML.
+3. Login as a SAML user and [set up SAML][9].
 
 ### SAML strict parent organizations
 
@@ -127,11 +127,11 @@ On the **Individual Organizations** usage tab, you can view the usage of your ch
 
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][9] of a child-organization, you can click on the child-organization's name.
+To view the [Usage Details][10] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][10] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][11] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
 When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -165,5 +165,6 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [6]: /api/
 [7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
 [8]: /monitors/manage/
-[9]: /account_management/plan_and_usage/usage_details/
-[10]: /account_management/billing/usage_attribution/
+[9]: /account_management/saml/
+[10]: /account_management/plan_and_usage/usage_details/
+[11]: /account_management/billing/usage_attribution/

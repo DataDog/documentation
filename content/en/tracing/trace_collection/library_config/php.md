@@ -128,6 +128,11 @@ Enable the allocation size and allocation bytes profile type. Added in version `
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
 
+`DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
+: **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
+**Default**: `0`<br>
+Enable the experimental timeline profile type. Added in version `0.89.0`.
+
 `DD_PROFILING_LOG_LEVEL`
 : **INI**: `datadog.profiling.log_level`. INI available since `0.82.0`.<br>
 **Default**: `off`<br>

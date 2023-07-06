@@ -541,6 +541,30 @@ components:
           schema:
             $ref: '#/components/schemas/APIErrorResponse'
       description: Not Found
+    SpansBadRequestResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: Bad Request.
+    SpansForbiddenResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Forbidden: Access denied.'
+    SpansTooManyRequestsResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: 'Too many requests: The rate limit set by the API has been exceeded.'
+    SpansUnprocessableEntityResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/JSONAPIErrorResponse'
+      description: Unprocessable Entity.
     TooManyRequestsResponse:
       content:
         application/json:
@@ -1821,8 +1845,8 @@ components:
       description: Details of the top level pipeline, build, or workflow of your CI.
       properties:
         end:
-          description: Time when the pipeline run finished. The time format must be
-            RFC3339.
+          description: Time when the pipeline run finished. It cannot be older than
+            18 hours in the past from the current time. The time format must be RFC3339.
           example: '2023-05-31T15:30:00Z'
           format: date-time
           type: string
@@ -3681,6 +3705,578 @@ components:
       type: string
       x-enum-varnames:
       - DETAILED_FINDING
+    DowntimeCreateRequest:
+      description: Request for creating a downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeCreateRequestData'
+      required:
+      - data
+      type: object
+    DowntimeCreateRequestAttributes:
+      description: Downtime details.
+      properties:
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleCreateRequest'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+      required:
+      - scope
+      - monitor_identifier
+      type: object
+    DowntimeCreateRequestData:
+      description: Object to create a downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    DowntimeDisplayTimezone:
+      default: UTC
+      description: 'The timezone in which to display the downtime''s start and end
+        times in Datadog applications. This is not used
+
+        as an offset for scheduling.'
+      example: America/New_York
+      nullable: true
+      type: string
+    DowntimeIncludedMonitorType:
+      default: monitors
+      description: Monitor resource type.
+      enum:
+      - monitors
+      example: monitors
+      type: string
+      x-enum-varnames:
+      - MONITORS
+    DowntimeMessage:
+      description: 'A message to include with notifications for this downtime. Email
+        notifications can be sent to specific users
+
+        by using the same `@username` notation as events.'
+      example: Message about the downtime
+      nullable: true
+      type: string
+    DowntimeMeta:
+      description: Pagination metadata returned by the API.
+      properties:
+        page:
+          $ref: '#/components/schemas/DowntimeMetaPage'
+      type: object
+    DowntimeMetaPage:
+      description: Object containing the total filtered count.
+      properties:
+        total_filtered_count:
+          description: Total count of elements matched by the filter.
+          format: int64
+          type: integer
+      type: object
+    DowntimeMonitorIdentifier:
+      description: Monitor identifier for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeMonitorIdentifierId'
+      - $ref: '#/components/schemas/DowntimeMonitorIdentifierTags'
+      type: object
+    DowntimeMonitorIdentifierId:
+      additionalProperties: {}
+      description: Object of the monitor identifier.
+      properties:
+        monitor_id:
+          description: ID of the monitor to prevent notifications.
+          example: 123
+          format: int64
+          type: integer
+      required:
+      - monitor_id
+      type: object
+    DowntimeMonitorIdentifierTags:
+      additionalProperties: {}
+      description: Object of the monitor tags.
+      properties:
+        monitor_tags:
+          description: 'A list of monitor tags. For example, tags that are applied
+            directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match **all** provided
+            monitor tags. Setting `monitor_tags`
+
+            to `[*]` configures the downtime to mute all monitors for the given scope.'
+          example:
+          - service:postgres
+          - team:frontend
+          items:
+            description: A list of monitor tags.
+            example: service:postgres
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - monitor_tags
+      type: object
+    DowntimeMonitorIncludedAttributes:
+      description: Attributes of the monitor identified by the downtime.
+      properties:
+        name:
+          description: The name of the monitor identified by the downtime.
+          example: A monitor name
+          type: string
+      type: object
+    DowntimeMonitorIncludedItem:
+      description: Information about the monitor identified by the downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeMonitorIncludedAttributes'
+        id:
+          description: ID of the monitor identified by the downtime.
+          example: 12345
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DowntimeIncludedMonitorType'
+      type: object
+    DowntimeMuteFirstRecoveryNotification:
+      description: If the first recovery notification during a downtime should be
+        muted.
+      example: false
+      type: boolean
+    DowntimeNotifyEndStateActions:
+      description: Action that will trigger a monitor notification if the downtime
+        is in the `notify_end_types` state.
+      enum:
+      - canceled
+      - expired
+      example: canceled
+      type: string
+      x-enum-varnames:
+      - CANCELED
+      - EXPIRED
+    DowntimeNotifyEndStateTypes:
+      description: State that will trigger a monitor notification when the `notify_end_types`
+        action occurs.
+      enum:
+      - alert
+      - no data
+      - warn
+      example: alert
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - NO_DATA
+      - WARN
+    DowntimeNotifyEndStates:
+      description: States that will trigger a monitor notification when the `notify_end_types`
+        action occurs.
+      example:
+      - alert
+      - warn
+      items:
+        $ref: '#/components/schemas/DowntimeNotifyEndStateTypes'
+      type: array
+    DowntimeNotifyEndTypes:
+      description: Actions that will trigger a monitor notification if the downtime
+        is in the `notify_end_types` state.
+      example:
+      - canceled
+      - expired
+      items:
+        $ref: '#/components/schemas/DowntimeNotifyEndStateActions'
+      type: array
+    DowntimeRelationships:
+      description: All relationships associated with downtime.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/DowntimeRelationshipsCreatedBy'
+        monitor:
+          $ref: '#/components/schemas/DowntimeRelationshipsMonitor'
+      type: object
+    DowntimeRelationshipsCreatedBy:
+      description: The user who created the downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeRelationshipsCreatedByData'
+      type: object
+    DowntimeRelationshipsCreatedByData:
+      description: Data for the user who created the downtime.
+      nullable: true
+      properties:
+        id:
+          description: User ID of the downtime creator.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
+      type: object
+    DowntimeRelationshipsMonitor:
+      description: The monitor identified by the downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeRelationshipsMonitorData'
+      type: object
+    DowntimeRelationshipsMonitorData:
+      description: Data for the monitor.
+      nullable: true
+      properties:
+        id:
+          description: Monitor ID of the downtime.
+          example: 12345
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DowntimeIncludedMonitorType'
+      type: object
+    DowntimeResourceType:
+      default: downtime
+      description: Downtime resource type.
+      enum:
+      - downtime
+      example: downtime
+      type: string
+      x-enum-varnames:
+      - DOWNTIME
+    DowntimeResponse:
+      description: 'Downtiming gives you greater control over monitor notifications
+        by
+
+        allowing you to globally exclude scopes from alerting.
+
+        Downtime settings, which can be scheduled with start and end times,
+
+        prevent all alerting related to specified Datadog tags.'
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeResponseData'
+        included:
+          description: Array of objects related to the downtime that the user requested.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseIncludedItem'
+          type: array
+      type: object
+    DowntimeResponseAttributes:
+      description: Downtime details.
+      properties:
+        created_at:
+          description: Creation time of the downtime.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          type: string
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        modified_at:
+          description: Time that the downtime was last modified.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          type: string
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleResponse'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+        status:
+          $ref: '#/components/schemas/DowntimeStatus'
+      type: object
+    DowntimeResponseData:
+      description: Downtime data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeResponseAttributes'
+        id:
+          description: The downtime ID.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/DowntimeRelationships'
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      type: object
+    DowntimeResponseIncludedItem:
+      description: An object related to a downtime.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/DowntimeMonitorIncludedItem'
+      type: object
+    DowntimeScheduleCreateRequest:
+      description: Schedule for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesCreateRequest'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
+      type: object
+    DowntimeScheduleCurrentDowntimeResponse:
+      description: 'The most recent actual start and end dates for a recurring downtime.
+        For a canceled downtime,
+
+        this is the previously occurring downtime. For active downtimes, this is the
+        ongoing downtime, and for scheduled
+
+        downtimes it is the upcoming downtime.'
+      properties:
+        end:
+          description: The end of the current downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: The start of the current downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    DowntimeScheduleOneTimeCreateUpdateRequest:
+      additionalProperties: {}
+      description: A one-time downtime definition.
+      properties:
+        end:
+          description: 'ISO-8601 Datetime to end the downtime. Must include a UTC
+            offset of zero. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must include a UTC
+            offset of zero. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    DowntimeScheduleOneTimeResponse:
+      description: A one-time downtime definition.
+      properties:
+        end:
+          description: ISO-8601 Datetime to end the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: ISO-8601 Datetime to start the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    DowntimeScheduleRecurrenceCreateUpdateRequest:
+      additionalProperties: {}
+      description: An object defining the recurrence of the downtime.
+      properties:
+        duration:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceDuration'
+        rrule:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceRrule'
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must not include
+            a UTC offset. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02T03:04
+          nullable: true
+          type: string
+      required:
+      - duration
+      - rrule
+      type: object
+    DowntimeScheduleRecurrenceDuration:
+      description: The length of the downtime. Must begin with an integer and end
+        with one of 'm', 'h', d', or 'w'.
+      example: 123d
+      type: string
+    DowntimeScheduleRecurrenceResponse:
+      description: An RRULE-based recurring downtime.
+      properties:
+        duration:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceDuration'
+        rrule:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceRrule'
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must not include
+            a UTC offset. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02T03:04
+          type: string
+      type: object
+    DowntimeScheduleRecurrenceRrule:
+      description: 'The `RRULE` standard for defining recurring events.
+
+        For example, to have a recurring event on the first day of each month, set
+        the type to `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY` to `1`.
+
+        Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
+        are supported.
+
+
+        **Note**: Attributes specifying the duration in `RRULE` are not supported
+        (for example, `DTSTART`, `DTEND`, `DURATION`).
+
+        More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api).'
+      example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+      type: string
+    DowntimeScheduleRecurrencesCreateRequest:
+      description: A recurring downtime schedule definition.
+      properties:
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceCreateUpdateRequest'
+          type: array
+        timezone:
+          default: UTC
+          description: The timezone in which to schedule the downtime.
+          example: America/New_York
+          type: string
+      required:
+      - recurrences
+      type: object
+    DowntimeScheduleRecurrencesResponse:
+      description: A recurring downtime schedule definition.
+      properties:
+        current_downtime:
+          $ref: '#/components/schemas/DowntimeScheduleCurrentDowntimeResponse'
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceResponse'
+          maxItems: 5
+          minItems: 1
+          type: array
+        timezone:
+          default: UTC
+          description: 'The timezone in which to schedule the downtime. This affects
+            recurring start and end dates.
+
+            Must match `display_timezone`.'
+          example: America/New_York
+          type: string
+      required:
+      - recurrences
+      type: object
+    DowntimeScheduleRecurrencesUpdateRequest:
+      description: A recurring downtime schedule definition.
+      properties:
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceCreateUpdateRequest'
+          type: array
+        timezone:
+          default: UTC
+          description: The timezone in which to schedule the downtime.
+          example: America/New_York
+          type: string
+      type: object
+    DowntimeScheduleResponse:
+      description: 'The schedule that defines when the monitor starts, stops, and
+        recurs. There are two types of schedules:
+
+        one-time and recurring. Recurring schedules may have up to five RRULE-based
+        recurrences. If no schedules are
+
+        provided, the downtime will begin immediately and never end.'
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesResponse'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeResponse'
+      type: object
+    DowntimeScheduleUpdateRequest:
+      description: Schedule for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesUpdateRequest'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
+      type: object
+    DowntimeScope:
+      description: The scope to which the downtime applies. Must follow the [common
+        search syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+      example: env:(staging OR prod) AND datacenter:us-east-1
+      type: string
+    DowntimeStatus:
+      description: The current status of the downtime.
+      enum:
+      - active
+      - canceled
+      - ended
+      - scheduled
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - CANCELED
+      - ENDED
+      - SCHEDULED
+    DowntimeUpdateRequest:
+      description: Request for editing a downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeUpdateRequestData'
+      required:
+      - data
+      type: object
+    DowntimeUpdateRequestAttributes:
+      description: Attributes of the downtime to update.
+      properties:
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleUpdateRequest'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+      type: object
+    DowntimeUpdateRequestData:
+      description: Object to update a downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeUpdateRequestAttributes'
+        id:
+          description: ID of this downtime.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -6921,6 +7517,22 @@ components:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
       type: object
+    ListDowntimesResponse:
+      description: Response for retrieving all downtimes.
+      properties:
+        data:
+          description: An array of downtimes.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseData'
+          type: array
+        included:
+          description: Array of objects related to the downtimes.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseIncludedItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DowntimeMeta'
+      type: object
     ListFindingsData:
       description: Array of findings.
       items:
@@ -9199,6 +9811,66 @@ components:
       type: string
       x-enum-varnames:
       - TAG
+    MonitorDowntimeMatchResourceType:
+      default: downtime_match
+      description: Monitor Downtime Match resource type.
+      enum:
+      - downtime_match
+      example: downtime_match
+      type: string
+      x-enum-varnames:
+      - DOWNTIME_MATCH
+    MonitorDowntimeMatchResponse:
+      description: Response for retrieving all downtime matches for a monitor.
+      properties:
+        data:
+          description: An array of downtime matches.
+          items:
+            $ref: '#/components/schemas/MonitorDowntimeMatchResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DowntimeMeta'
+      type: object
+    MonitorDowntimeMatchResponseAttributes:
+      description: Downtime match details.
+      properties:
+        end:
+          description: The end of the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        groups:
+          description: An array of groups associated with the downtime.
+          example:
+          - service:postgres
+          - team:frontend
+          items:
+            description: An array of groups.
+            example: service:postgres
+            type: string
+          type: array
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+        start:
+          description: The start of the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    MonitorDowntimeMatchResponseData:
+      description: A downtime match.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorDowntimeMatchResponseAttributes'
+        id:
+          description: The downtime ID.
+          example: 00000000-0000-1234-0000-000000000000
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
+      type: object
     MonitorType:
       description: Attributes from the monitor that triggered the event.
       nullable: true
@@ -14439,6 +15111,511 @@ components:
       - channel_name
       - redirect_url
       type: object
+    Span:
+      description: Object description of a spans after being processed and stored
+        by Datadog.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAttributes'
+        id:
+          description: Unique ID of the Span.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansType'
+      type: object
+    SpansAggregateBucket:
+      description: A bucket values.
+      properties:
+        by:
+          additionalProperties:
+            description: The values for each group by.
+          description: The key, value pairs for each group by.
+          example:
+            '@state': success
+            '@version': abc
+          type: object
+        computes:
+          additionalProperties:
+            $ref: '#/components/schemas/SpansAggregateBucketValue'
+          description: A map of the metric name -> value for regular compute or list
+            of values for a timeseries.
+          type: object
+      type: object
+    SpansAggregateBucketValue:
+      description: A bucket value, can be either a timeseries or a single value.
+      oneOf:
+      - $ref: '#/components/schemas/SpansAggregateBucketValueSingleString'
+      - $ref: '#/components/schemas/SpansAggregateBucketValueSingleNumber'
+      - $ref: '#/components/schemas/SpansAggregateBucketValueTimeseries'
+    SpansAggregateBucketValueSingleNumber:
+      description: A single number value.
+      format: double
+      type: number
+    SpansAggregateBucketValueSingleString:
+      description: A single string value.
+      type: string
+    SpansAggregateBucketValueTimeseries:
+      description: A timeseries array.
+      items:
+        $ref: '#/components/schemas/SpansAggregateBucketValueTimeseriesPoint'
+      type: array
+      x-generate-alias-as-model: true
+    SpansAggregateBucketValueTimeseriesPoint:
+      description: A timeseries point.
+      properties:
+        time:
+          description: The time value for this point.
+          example: '2023-06-08T11:55:00Z'
+          type: string
+        value:
+          description: The value for this point.
+          example: 19
+          format: double
+          type: number
+      type: object
+    SpansAggregateData:
+      description: The object containing the query content.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansAggregateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SpansAggregateRequestType'
+      type: object
+    SpansAggregateRequest:
+      description: The object sent with the request to retrieve a list of aggregated
+        spans from your organization.
+      properties:
+        data:
+          $ref: '#/components/schemas/SpansAggregateData'
+      type: object
+    SpansAggregateRequestAttributes:
+      description: The object containing all the query parameters.
+      properties:
+        compute:
+          description: The list of metrics or timeseries to compute for the retrieved
+            buckets.
+          items:
+            $ref: '#/components/schemas/SpansCompute'
+          type: array
+        filter:
+          $ref: '#/components/schemas/SpansQueryFilter'
+        group_by:
+          description: The rules for the group by.
+          items:
+            $ref: '#/components/schemas/SpansGroupBy'
+          type: array
+        options:
+          $ref: '#/components/schemas/SpansQueryOptions'
+      type: object
+    SpansAggregateRequestType:
+      default: aggregate_request
+      description: The type of resource. The value should always be aggregate_request.
+      enum:
+      - aggregate_request
+      example: aggregate_request
+      type: string
+      x-enum-varnames:
+      - AGGREGATE_REQUEST
+    SpansAggregateResponse:
+      description: The response object for the spans aggregate API endpoint.
+      properties:
+        data:
+          description: The list of matching buckets, one item per bucket.
+          items:
+            $ref: '#/components/schemas/SpansAggregateBucket'
+          type: array
+        meta:
+          $ref: '#/components/schemas/SpansAggregateResponseMetadata'
+      type: object
+    SpansAggregateResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/SpansAggregateResponseStatus'
+        warnings:
+          description: 'A list of warnings (non fatal errors) encountered, partial
+            results might be returned if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/SpansWarning'
+          type: array
+      type: object
+    SpansAggregateResponseStatus:
+      description: The status of the response.
+      enum:
+      - done
+      - timeout
+      example: done
+      type: string
+      x-enum-varnames:
+      - DONE
+      - TIMEOUT
+    SpansAggregateSort:
+      description: A sort rule.
+      example:
+        aggregation: count
+        order: asc
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SpansAggregationFunction'
+        metric:
+          description: The metric to sort by (only used for `type=measure`).
+          example: '@duration'
+          type: string
+        order:
+          $ref: '#/components/schemas/SpansSortOrder'
+        type:
+          $ref: '#/components/schemas/SpansAggregateSortType'
+      type: object
+    SpansAggregateSortType:
+      default: alphabetical
+      description: The type of sorting algorithm.
+      enum:
+      - alphabetical
+      - measure
+      type: string
+      x-enum-varnames:
+      - ALPHABETICAL
+      - MEASURE
+    SpansAggregationFunction:
+      description: An aggregation function.
+      enum:
+      - count
+      - cardinality
+      - pc75
+      - pc90
+      - pc95
+      - pc98
+      - pc99
+      - sum
+      - min
+      - max
+      - avg
+      - median
+      example: pc90
+      type: string
+      x-enum-varnames:
+      - COUNT
+      - CARDINALITY
+      - PERCENTILE_75
+      - PERCENTILE_90
+      - PERCENTILE_95
+      - PERCENTILE_98
+      - PERCENTILE_99
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - MEDIAN
+    SpansAttributes:
+      description: JSON object containing all span attributes and their associated
+        values.
+      properties:
+        attributes:
+          additionalProperties: {}
+          description: JSON object of attributes from your span.
+          example:
+            customAttribute: 123
+            duration: 2345
+          type: object
+        end_timestamp:
+          description: End timestamp of your span.
+          example: '2023-01-02T09:42:36.420Z'
+          format: date-time
+          type: string
+        env:
+          description: Name of the environment from where the spans are being sent.
+          example: prod
+          type: string
+        host:
+          description: Name of the machine from where the spans are being sent.
+          example: i-0123
+          type: string
+        ingestion_reason:
+          description: The reason why the span was ingested.
+          example: rule
+          type: string
+        parent_id:
+          description: Id of the span that's parent of this span.
+          example: '0'
+          type: string
+        resource_hash:
+          description: Unique identifier of the resource.
+          example: a12345678b91c23d
+          type: string
+        resource_name:
+          description: The name of the resource.
+          example: agent
+          type: string
+        retained_by:
+          description: The reason why the span was indexed.
+          example: retention_filter
+          type: string
+        service:
+          description: 'The name of the application or service generating the span
+            events.
+
+            It is used to switch from APM to Logs, so make sure you define the same
+
+            value when you use both products.'
+          example: agent
+          type: string
+        single_span:
+          description: Whether or not the span was collected as a stand-alone span.
+            Always associated to "single_span" ingestion_reason if true.
+          example: true
+          type: boolean
+        span_id:
+          description: Id of the span.
+          example: '1234567890987654321'
+          type: string
+        start_timestamp:
+          description: Start timestamp of your span.
+          example: '2023-01-02T09:42:36.320Z'
+          format: date-time
+          type: string
+        tags:
+          description: Array of tags associated with your span.
+          example:
+          - team:A
+          items:
+            description: Tag associated with your span.
+            type: string
+          type: array
+        trace_id:
+          description: Id of the trace to which the span belongs.
+          example: '1234567890987654321'
+          type: string
+        type:
+          description: The type of the span.
+          example: web
+          type: string
+      type: object
+    SpansCompute:
+      description: A compute rule to compute metrics or timeseries.
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/SpansAggregationFunction'
+        interval:
+          description: 'The time buckets'' size (only used for type=timeseries)
+
+            Defaults to a resolution of 150 points.'
+          example: 5m
+          type: string
+        metric:
+          description: The metric to use.
+          example: '@duration'
+          type: string
+        type:
+          $ref: '#/components/schemas/SpansComputeType'
+      required:
+      - aggregation
+      type: object
+    SpansComputeType:
+      default: total
+      description: The type of compute.
+      enum:
+      - timeseries
+      - total
+      type: string
+      x-enum-varnames:
+      - TIMESERIES
+      - TOTAL
+    SpansGroupBy:
+      description: A group by rule.
+      properties:
+        facet:
+          description: The name of the facet to use (required).
+          example: host
+          type: string
+        histogram:
+          $ref: '#/components/schemas/SpansGroupByHistogram'
+        limit:
+          default: 10
+          description: The maximum buckets to return for this group by.
+          format: int64
+          type: integer
+        missing:
+          $ref: '#/components/schemas/SpansGroupByMissing'
+        sort:
+          $ref: '#/components/schemas/SpansAggregateSort'
+        total:
+          $ref: '#/components/schemas/SpansGroupByTotal'
+      required:
+      - facet
+      type: object
+    SpansGroupByHistogram:
+      description: 'Used to perform a histogram computation (only for measure facets).
+
+        Note: At most 100 buckets are allowed, the number of buckets is (max - min)/interval.'
+      properties:
+        interval:
+          description: The bin size of the histogram buckets.
+          example: 10
+          format: double
+          type: number
+        max:
+          description: 'The maximum value for the measure used in the histogram
+
+            (values greater than this one are filtered out).'
+          example: 100
+          format: double
+          type: number
+        min:
+          description: 'The minimum value for the measure used in the histogram
+
+            (values smaller than this one are filtered out).'
+          example: 50
+          format: double
+          type: number
+      required:
+      - interval
+      - min
+      - max
+      type: object
+    SpansGroupByMissing:
+      description: The value to use for spans that don't have the facet used to group
+        by.
+      oneOf:
+      - $ref: '#/components/schemas/SpansGroupByMissingString'
+      - $ref: '#/components/schemas/SpansGroupByMissingNumber'
+    SpansGroupByMissingNumber:
+      description: The missing value to use if there is a number valued facet.
+      format: double
+      type: number
+    SpansGroupByMissingString:
+      description: The missing value to use if there is string valued facet.
+      type: string
+    SpansGroupByTotal:
+      default: false
+      description: A resulting object to put the given computes in over all the matching
+        records.
+      oneOf:
+      - $ref: '#/components/schemas/SpansGroupByTotalBoolean'
+      - $ref: '#/components/schemas/SpansGroupByTotalString'
+      - $ref: '#/components/schemas/SpansGroupByTotalNumber'
+    SpansGroupByTotalBoolean:
+      description: If set to true, creates an additional bucket labeled "$facet_total".
+      type: boolean
+    SpansGroupByTotalNumber:
+      description: A number to use as the key value for the total bucket.
+      format: double
+      type: number
+    SpansGroupByTotalString:
+      description: A string to use as the key value for the total bucket.
+      type: string
+    SpansListRequest:
+      description: The request for a spans list.
+      properties:
+        data:
+          $ref: '#/components/schemas/SpansListRequestData'
+      type: object
+    SpansListRequestAttributes:
+      description: The object containing all the query parameters.
+      properties:
+        filter:
+          $ref: '#/components/schemas/SpansQueryFilter'
+        options:
+          $ref: '#/components/schemas/SpansQueryOptions'
+        page:
+          $ref: '#/components/schemas/SpansListRequestPage'
+        sort:
+          $ref: '#/components/schemas/SpansSort'
+      type: object
+    SpansListRequestData:
+      description: The object containing the query content.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SpansListRequestAttributes'
+        type:
+          $ref: '#/components/schemas/SpansListRequestType'
+      type: object
+    SpansListRequestPage:
+      description: Paging attributes for listing spans.
+      properties:
+        cursor:
+          description: List following results with a cursor provided in the previous
+            query.
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+        limit:
+          default: 10
+          description: Maximum number of spans in the response.
+          example: 25
+          format: int32
+          maximum: 1000
+          type: integer
+      type: object
+    SpansListRequestType:
+      default: search_request
+      description: The type of resource. The value should always be search_request.
+      enum:
+      - search_request
+      example: search_request
+      type: string
+      x-enum-varnames:
+      - SEARCH_REQUEST
+    SpansListResponse:
+      description: Response object with all spans matching the request and pagination
+        information.
+      properties:
+        data:
+          description: Array of spans matching the request.
+          items:
+            $ref: '#/components/schemas/Span'
+          type: array
+        links:
+          $ref: '#/components/schemas/SpansListResponseLinks'
+        meta:
+          $ref: '#/components/schemas/SpansListResponseMetadata'
+      type: object
+    SpansListResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: 'Link for the next set of results. Note that the request can
+            also be made using the
+
+            POST endpoint.'
+          example: https://app.datadoghq.com/api/v2/spans/event?filter[query]=foo&page[cursor]=eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    SpansListResponseMetadata:
+      description: The metadata associated with a request.
+      properties:
+        elapsed:
+          description: The time elapsed in milliseconds.
+          example: 132
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/SpansResponseMetadataPage'
+        request_id:
+          description: The identifier of the request.
+          example: MWlFUjVaWGZTTTZPYzM0VXp1OXU2d3xLSVpEMjZKQ0VKUTI0dEYtM3RSOFVR
+          type: string
+        status:
+          $ref: '#/components/schemas/SpansAggregateResponseStatus'
+        warnings:
+          description: 'A list of warnings (non fatal errors) encountered, partial
+            results might be returned if
+
+            warnings are present in the response.'
+          items:
+            $ref: '#/components/schemas/SpansWarning'
+          type: array
+      type: object
     SpansMetricCompute:
       description: The compute rule to compute the span-based metric.
       properties:
@@ -14658,6 +15835,101 @@ components:
           items:
             $ref: '#/components/schemas/SpansMetricResponseData'
           type: array
+      type: object
+    SpansQueryFilter:
+      description: The search and filter query settings.
+      properties:
+        from:
+          default: now-15m
+          description: The minimum time for the requested spans, supports date-time
+            ISO8601, date math, and regular timestamps (milliseconds).
+          example: now-15m
+          type: string
+        query:
+          default: '*'
+          description: The search query - following the span search syntax.
+          example: service:web* AND @http.status_code:[200 TO 299]
+          type: string
+        to:
+          default: now
+          description: The maximum time for the requested spans, supports date-time
+            ISO8601, date math, and regular timestamps (milliseconds).
+          example: now
+          type: string
+      type: object
+    SpansQueryOptions:
+      description: 'Global query options that are used during the query.
+
+        Note: You should only supply timezone or time offset but not both otherwise
+        the query will fail.'
+      properties:
+        timeOffset:
+          description: The time offset (in seconds) to apply to the query.
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: The timezone can be specified as GMT, UTC, an offset from UTC
+            (like UTC+1), or as a Timezone Database identifier (like America/New_York).
+          example: GMT
+          type: string
+      type: object
+    SpansResponseMetadataPage:
+      description: Paging attributes.
+      properties:
+        after:
+          description: 'The cursor to use to get the next results, if any. To make
+            the next request, use the same
+
+            parameters with the addition of the `page[cursor]`.'
+          example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+          type: string
+      type: object
+    SpansSort:
+      description: Sort parameters when querying spans.
+      enum:
+      - timestamp
+      - -timestamp
+      type: string
+      x-enum-varnames:
+      - TIMESTAMP_ASCENDING
+      - TIMESTAMP_DESCENDING
+    SpansSortOrder:
+      description: The order to use, ascending or descending.
+      enum:
+      - asc
+      - desc
+      example: asc
+      type: string
+      x-enum-varnames:
+      - ASCENDING
+      - DESCENDING
+    SpansType:
+      default: spans
+      description: Type of the span.
+      enum:
+      - spans
+      example: spans
+      type: string
+      x-enum-varnames:
+      - SPANS
+    SpansWarning:
+      description: A warning message indicating something that went wrong with the
+        query.
+      properties:
+        code:
+          description: A unique code for this type of warning.
+          example: unknown_index
+          type: string
+        detail:
+          description: A detailed explanation of this specific warning.
+          example: 'indexes: foo, bar'
+          type: string
+        title:
+          description: A short human-readable summary of the warning.
+          example: One or several indexes are missing or invalid, results hold data
+            from the other indexes
+          type: string
       type: object
     TagsEventAttribute:
       description: Array of tags associated with your event.
@@ -16756,6 +18028,10 @@ paths:
         we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
 
 
+        Pipeline events can be submitted with a timestamp that is up to 18 hours in
+        the past.
+
+
         This API endpoint is in private beta.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
@@ -17549,6 +18825,281 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/downtime:
+    get:
+      description: Get all scheduled downtimes.
+      operationId: ListDowntimes
+      parameters:
+      - description: Only return downtimes that are active when the request is made.
+        in: query
+        name: current_only
+        required: false
+        schema:
+          type: boolean
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          paths are `created_by` and `monitor`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by,monitor
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDowntimesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all downtimes
+      tags:
+      - Downtimes
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Schedule a downtime.
+      operationId: CreateDowntime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DowntimeCreateRequest'
+        description: Schedule a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Schedule a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-given:
+        downtime_v2:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"message\": \"test
+              message\",\n      \"monitor_identifier\": {\n        \"monitor_tags\":
+              [\"cat:hat\"]\n      },\n      \"scope\": \"test:{{ unique_lower_alnum
+              }}\",\n      \"schedule\": {\n        \"start\": null\n      }\n    },\n
+              \   \"type\": \"downtime\"\n  }\n}"
+          step: there is a valid "downtime_v2" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: CancelDowntime
+        parameters:
+        - name: downtime_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/downtime/{downtime_id}:
+    delete:
+      description: Cancel a downtime.
+      operationId: CancelDowntime
+      parameters:
+      - description: ID of the downtime to cancel.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Cancel a downtime
+      tags:
+      - Downtimes
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get downtime detail by `downtime_id`.
+      operationId: GetDowntime
+      parameters:
+      - description: ID of the downtime to fetch.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          paths are `created_by` and `monitor`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by,monitor
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a downtime
+      tags:
+      - Downtimes
+      x-menu-order: 5
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a downtime by `downtime_id`.
+      operationId: UpdateDowntime
+      parameters:
+      - description: ID of the downtime to update.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00e000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DowntimeUpdateRequest'
+        description: Update a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Update a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events:
     get:
       description: 'List endpoint returns events that match an events search query.
@@ -22024,6 +23575,48 @@ paths:
       x-menu-order: 12
       x-undo:
         type: idempotent
+  /api/v2/monitor/{monitor_id}/downtime_matches:
+    get:
+      description: Get all active downtimes for the specified monitor.
+      operationId: ListMonitorDowntimes
+      parameters:
+      - description: The id of the monitor.
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorDowntimeMatchResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get active downtimes for a monitor
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -25597,6 +27190,174 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/spans/analytics/aggregate:
+    post:
+      description: 'The API endpoint to aggregate spans into buckets and compute metrics
+        and timeseries.
+
+        This endpoint is rate limited to `300` requests per hour.'
+      operationId: AggregateSpans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpansAggregateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansAggregateResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Aggregate spans
+      tags:
+      - Spans
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/spans/events:
+    get:
+      description: 'List endpoint returns spans that match a span search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to see your latest spans.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
+      operationId: ListSpansGet
+      parameters:
+      - description: Search query following spans syntax.
+        example: '@datacenter:us @role:db'
+        in: query
+        name: filter[query]
+        required: false
+        schema:
+          type: string
+      - description: Minimum timestamp for requested spans. Supports date-time ISO8601,
+          date math, and regular timestamps (milliseconds).
+        example: '2023-01-02T09:42:36.320Z'
+        in: query
+        name: filter[from]
+        required: false
+        schema:
+          type: string
+      - description: Maximum timestamp for requested spans. Supports date-time ISO8601,
+          date math, and regular timestamps (milliseconds).
+        example: '2023-01-03T09:42:36.320Z'
+        in: query
+        name: filter[to]
+        required: false
+        schema:
+          type: string
+      - description: Order of spans in results.
+        in: query
+        name: sort
+        required: false
+        schema:
+          $ref: '#/components/schemas/SpansSort'
+      - description: List following results with a cursor provided in the previous
+          query.
+        example: eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ==
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of spans in the response.
+        example: 25
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 10
+          format: int32
+          maximum: 1000
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/SpansBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/SpansForbiddenResponse'
+        '422':
+          $ref: '#/components/responses/SpansUnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      summary: Get a list of spans
+      tags:
+      - Spans
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.page.after
+        limitParam: page[limit]
+        resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/spans/events/search:
+    post:
+      description: 'List endpoint returns spans that match a span search query.
+
+        [Results are paginated][1].
+
+
+        Use this endpoint to build complex spans filtering and search.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
+      operationId: ListSpans
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpansListRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpansListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/SpansBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/SpansForbiddenResponse'
+        '422':
+          $ref: '#/components/responses/SpansUnprocessableEntityResponse'
+        '429':
+          $ref: '#/components/responses/SpansTooManyRequestsResponse'
+      summary: Search spans
+      tags:
+      - Spans
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-pagination:
+        cursorParam: body.data.attributes.page.cursor
+        cursorPath: meta.page.after
+        limitParam: body.data.attributes.page.limit
+        resultsPath: data
+      x-undo:
+        type: safe
   /api/v2/synthetics/settings/on_demand_concurrency_cap:
     get:
       description: Get the on-demand concurrency cap.
@@ -27651,6 +29412,18 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: '**Note**: Downtime V2 is currently in private beta. To request access,
+    contact [Datadog support](https://docs.datadoghq.com/help/).
+
+
+    [Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives
+
+    you greater control over monitor notifications by allowing you to globally exclude
+
+    scopes from alerting. Downtime settings, which can be scheduled with start and
+
+    end times, prevent all alerting related to specified Datadog tags.'
+  name: Downtimes
 - description: 'The events service allows you to programmatically post events to the
     event stream
 
@@ -27815,6 +29588,8 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: Search and aggregate your spans from your Datadog platform over HTTP.
+  name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
     for your organization.
   externalDocs:

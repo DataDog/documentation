@@ -18,6 +18,9 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 algolia:
   tags: ['advanced log filter']
 ---
@@ -571,7 +574,6 @@ The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
 ## Tail most recently modified files first
-**Note:** This feature is in public beta.
 
 When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
 

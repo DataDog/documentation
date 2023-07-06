@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-rapid7
 app_uuid: 388017a0-e4cc-45ad-b038-c2141abf20c1
 assets:

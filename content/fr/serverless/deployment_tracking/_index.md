@@ -20,7 +20,7 @@ Pour consulter plus facilement l'ancien code et les changements de configuration
 
 ## Configuration
 
-Datadog recueille des événements de changement de code et de configuration pour vos fonctions Lambda AWS à partir d'AWS CloudTrail.
+Datadog recueille des événements de changement de code et de configuration pour vos fonctions AWS Lambda à partir d'AWS CloudTrail.
 
 Si vous ne l'avez pas déjà fait, configurez d'abord l'intégration [Amazon Web Services][2]. Ajoutez ensuite les autorisations suivantes au document de stratégie pour votre rôle AWS/Datadog :
 

@@ -259,6 +259,7 @@ module.exports = defineConfig({
   }
 })
 {{< /code-block >}}
+<div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">after:run</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
 
 ### Cypress before version 10
 
@@ -278,6 +279,7 @@ These are the instructions if you're using a version older than `cypress@10`.
      require('dd-trace/ci/cypress/plugin')(on, config)
    }
    {{< /code-block >}}
+   <div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
 
 2. Add the following line to the **top level** of your [`supportFile`][104]:
    {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
@@ -337,12 +339,6 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 {{< /tabs >}}
 
-### Reporting code coverage
-
-When tests are instrumented with [Istanbul][6], the Datadog Tracer (v3.20.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
-
-You can see the evolution of the test coverage in the **Coverage** tab of a test session.
-
 ### Using Yarn 2 or later
 
 If you're using `yarn>=2` and a `.pnp.cjs` file, and you get the following error message when using `NODE_OPTIONS`:
@@ -357,6 +353,11 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 ```
 
+## Reporting code coverage
+
+When tests are instrumented with [Istanbul][6], the Datadog Tracer (v3.20.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
 ## Configuration settings
 
@@ -381,7 +382,7 @@ The following is a list of the most important configuration settings that can be
 
 All other [Datadog Tracer configuration][7] options can also be used.
 
-### Collecting Git metadata
+## Collecting Git metadata
 
 Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
 
@@ -435,28 +436,148 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uploads git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`. However, this is not recommended, as features like Intelligent Test Runner and others do not work without it.
 
+
+## Manual testing API
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
+</div>
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
+</div>
+
+If you use Jest, Mocha, Cypress, Playwright, or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+
+The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
+
+```javascript
+const { channel } = require('node:diagnostics_channel')
+
+const { describe, test, beforeEach, afterEach, assert } = require('my-custom-test-framework')
+
+const testStartCh = channel('dd-trace:ci:manual:test:start')
+const testFinishCh = channel('dd-trace:ci:manual:test:finish')
+const testSuite = __filename
+
+describe('can run tests', () => {
+  beforeEach((testName) => {
+    testStartCh.publish({ testName, testSuite })
+  })
+  afterEach((status, error) => {
+    testFinishCh.publish({ status, error })
+  })
+  test('first test will pass', () => {
+    assert.equal(1, 1)
+  })
+})
+```
+
+### Test start channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:start` to publish that a test is starting. A good place to do this is a `beforeEach` hook or similar.
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testStartCh = channel('dd-trace:ci:manual:test:start')
+
+// ... code for your testing framework goes here
+  beforeEach(() => {
+    const testDefinition = {
+      testName: 'a-string-that-identifies-this-test',
+      testSuite: 'what-suite-this-test-is-from.js'
+    }
+    testStartCh.publish(testDefinition)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload to be published has attributes `testName` and `testSuite`, both strings, that identify the test that is about to start.
+
+### Test finish channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:finish` to publish that a test is ending. A good place to do this is an `afterEach` hook or similar.
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testFinishCh = channel('dd-trace:ci:manual:test:finish')
+
+// ... code for your testing framework goes here
+  afterEach(() => {
+    const testStatusPayload = {
+      status: 'fail',
+      error: new Error('assertion error')
+    }
+    testStartCh.publish(testStatusPayload)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload to be published has attributes `status` and `error`:
+
+* `status` is a string that takes one of three values:
+  * `'pass'` when a test passes.
+  * `'fail'` when a test fails.
+  * `'skip'` when a test has been skipped.
+
+* `error` is an `Error` object containing the reason why a test failed.
+
+### Add tags channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:addTags` to publish that a test needs custom tags. This can be done within the test function:
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
+
+// ... code for your testing framework goes here
+  test('can sum', () => {
+    testAddTagsCh.publish({ 'test.owner': 'my-team', 'number.assertions': 3 })
+    const result = sum(2, 1)
+    assert.equal(result, 3)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload to be published is a dictionary `<string, string|number>` of tags or metrics that are added to the test.
+
+
+### Run the tests
+
+When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
+
+```shell
+NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
+```
+
+
+
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][11] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
+[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
+If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][9].
 
 ### Cypress interactive mode
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][12], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][13].
 
+### Cypress `after:run` event
+
+Datadog requires usage of the Cypress [`after:run` event][14]. Cypress only allows a single listener for this event, so if your custom Cypress plugin requires `after:run`, it is incompatible with `dd-trace`.
+
 ### Mocha parallel tests
-Mocha's [parallel mode][14] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
+Mocha's [parallel mode][15] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
 ### Cucumber parallel tests
-Cucumber's [parallel mode][15] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
+Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
 ### Jest's `test.concurrent`
-Jest's [test.concurrent][16] is not supported.
+Jest's [test.concurrent][17] is not supported.
 
 ## Best practices
 
@@ -475,7 +596,7 @@ Avoid this:
 })
 {{< /code-block >}}
 
-And use [`test.each`][17] instead:
+And use [`test.each`][18] instead:
 
 {{< code-block lang="javascript" >}}
 test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
@@ -483,7 +604,7 @@ test.each([[1,2,3], [3,4,7]])('sums correctly %i and %i', (a,b,expected) => {
 })
 {{< /code-block >}}
 
-For `mocha`, use [`mocha-each`][18]:
+For `mocha`, use [`mocha-each`][19]:
 
 {{< code-block lang="javascript" >}}
 const forEach = require('mocha-each');
@@ -507,7 +628,7 @@ When CI Visibility is enabled, the following data is collected from your project
 * Git commit history including the hash, message, author information, and files changed (without file contents).
 * Information from the CODEOWNERS file.
 
-In addition to that, if [Intelligent Test Runner][19] is enabled, the following data is collected from your project:
+In addition to that, if [Intelligent Test Runner][20] is enabled, the following data is collected from your project:
 
 * Code coverage information, including file names and line numbers covered by each test.
 
@@ -524,14 +645,15 @@ In addition to that, if [Intelligent Test Runner][19] is enabled, the following 
 [6]: https://istanbul.js.org/
 [7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[10]: /real_user_monitoring/browser/
-[11]: /continuous_integration/guides/rum_integration/
+[9]: /continuous_integration/guides/rum_integration/
+[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[11]: /real_user_monitoring/browser/
 [12]: https://docs.cypress.io/api/plugins/before-run-api
 [13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[14]: https://mochajs.org/#parallel-tests
-[15]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
-[16]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
-[17]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
-[18]: https://www.npmjs.com/package/mocha-each
-[19]: /continuous_integration/intelligent_test_runner/
+[14]: https://docs.cypress.io/api/plugins/after-run-api
+[15]: https://mochajs.org/#parallel-tests
+[16]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
+[17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
+[18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
+[19]: https://www.npmjs.com/package/mocha-each
+[20]: /continuous_integration/intelligent_test_runner/
