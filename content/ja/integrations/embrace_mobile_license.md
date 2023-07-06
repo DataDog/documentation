@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: embrace-mobile-license
 app_uuid: 2996b6e0-1aed-46cc-9fe5-4ea72aeae636
 assets: {}

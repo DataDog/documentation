@@ -10,7 +10,7 @@ kind: documentation
 title: ワークフローの構築
 ---
 
-Datadog の [**Workflows** ページ][1]からワークフローを作成したり、既存のワークフローを編集したりすることができます。Workflows ページには、既存のワークフロー、各ワークフローの作成者、各ワークフローの最終修正日および実行日が一覧表示されます。
+Datadog の [**Workflow Automation** ページ][1]からワークフローを作成したり、既存のワークフローを編集したりすることができます。Workflow Automation ページには、既存のワークフロー、各ワークフローの作成者、各ワークフローの最終修正日および実行日が一覧表示されます。
 - ワークフローにカーソルを合わせると、ワークフローの削除や複製を行うことができます。
 - 自分が作成したワークフローだけを表示したい場合は、**My workflows** をトグルします。
 
@@ -35,7 +35,7 @@ Datadog の [**Workflows** ページ][1]からワークフローを作成した�
 
 1. **Add a step to get started** をクリックして、ワークフローに最初のステップを追加します。
 1. 検索バーを使ってアクションを検索するか、インテグレーションとその関連アクションをブラウズして、探しているアクションを見つけます。アクションをクリックすると、ワークフローキャンバスのステップに追加されます。
-{{< img src="service/management/workflows/workflow-builder.mp4" alt="ワークフローキャンバスにステップをドラッグする" video="true" >}}
+{{< img src="service_management/workflows/workflow-builder2.mp4" alt="ワークフローキャンバスにステップをドラッグする" video="true" >}}
 1. ワークフローキャンバスでステップをクリックすると、そのステップを構成したり、出力やコンテキスト変数を表示したりすることができます。出力やコンテキスト変数の詳細については、[コンテキスト変数](#context-variables)を参照してください。
 1. ステップの構成が完了したら、プラス (`+`) アイコンをクリックして別のステップを追加するか、ワークフローを保存してください。
 
@@ -105,10 +105,11 @@ Datadog の [**Workflows** ページ][1]からワークフローを作成した�
 
 各ステップの **Context Variables** タブには、そのステップで利用可能なすべてのコンテキスト変数のマップが表示されます。
 
-{{< img src="service_management/workflows/context-variables.png" alt="Context Variables タブ" >}}
+{{< img src="service_management/workflows/context-variables3.png" alt="Context Variables タブ" >}}
 
-ステップ内のコンテキスト変数は、二重中括弧 (`{{`) で囲んでアクセスします。コンテキスト変数は `{{` 表記でマークされたフィールドで利用可能です。
-{{< img src="service_management/workflows/use-context-variable.mp4" alt="サポートされているテキストフィールドで二重フェンスを使用し、コンテキスト変数を挿入する" video="true" >}}
+二重中括弧 (`{{`) で囲んで、ステップ内のコンテキスト変数にアクセスします。コンテキスト変数内のフィールドにアクセスするには、[ハンドルバー式構文][2]を使います。
+
+{{< img src="service_management/workflows/use-context-variable1.png" alt="サポートされているテキストフィールドで二重中括弧を使用して、コンテキスト変数を挿入します" >}}
 
 ### ワークフロー変数
 
@@ -141,11 +142,11 @@ Datadog の [**Workflows** ページ][1]からワークフローを作成した�
 
 ステップ内の入力パラメーターを参照するには、`{{ Trigger.<parameter name>}}` という構文を使用します。例えば、`user` という名前の入力パラメーターを参照するには、`{{Trigger.user}}` を使用します。
 
-{{< img src="service_management/workflows/input-parameter.png" alt="入力パラメーターをステップに追加すると、自動的にワークフローに追加される" style="width:100%;">}}
+{{< img src="service_management/workflows/input-parameter1.png" alt="入力パラメーターをステップに追加すると、自動的にワークフローに追加される" style="width:100%;">}}
 
 **Input Parameters** セクションには、既存のすべての入力パラメーターの名前とカウンターが表示されます。カウンターにカーソルを合わせると、そのパラメーターを使用しているステップを確認できます。
 
-暗黙の入力パラメーター (ワークフロー内に存在しないパラメーター) を追加するには、ワークフローのステップに `{{ Trigger.<parameter name> }}` 構文を使用して入力します。次にワークフローを保存すると、パラメーターを明示的パラメーターに変換するためのダイアログが表示されます。ワークフローのトリガーについて詳しくは、[ワークフローのトリガー][2]を参照してください。
+暗黙の入力パラメーター (ワークフロー内に存在しないパラメーター) を追加するには、ワークフローのステップに `{{ Trigger.<parameter name> }}` 構文を使用して入力します。次にワークフローを保存すると、パラメーターを明示的パラメーターに変換するためのダイアログが表示されます。ワークフローのトリガーについて詳しくは、[ワークフローのトリガー][3]を参照してください。
 
 既存の入力パラメーターを探している場合は、`{{ Trigger.` と入力して、候補として表示されるかどうかを確認します。また、[Context Variables](#context-variables) タブで利用可能なパラメーターの一覧を確認することもできます。
 
@@ -168,7 +169,7 @@ Datadog の [**Workflows** ページ][1]からワークフローを作成した�
 1. オプションで、[フォールバックステップを追加](#add-a-fallback)します。
 1. ワークフローを保存して、変更を適用します。 
 
-{{< img src="service_management/workflows/error-handling.png" alt="エラー処理と再試行のセクション" style="width:100%;" >}}
+{{< img src="service_management/workflows/error-handling1.png" alt="エラー処理と再試行のセクション" style="width:100%;" >}}
 
 ### フォールバックを追加する
 
@@ -182,7 +183,7 @@ Datadog の [**Workflows** ページ][1]からワークフローを作成した�
 
 メインのワークフローキャンバスに戻るには、フォールバックツリーの上にある **Main** をクリックします。ワークフローキャンバスから、フォールバックがあるステップの横にフォールバックアイコンが表示されます。アイコンをクリックし、フォールバックステップを選択すると、フォールバックツリーが表示されます。または、ステップの **Error Handling & Retries** セクションの **Edit Fallback Tree** をクリックして、フォールバックツリーにアクセスすることもできます。**Edit Fallback Tree** ボタンは、フォールバックステップがメインワークフローの既存のダウンストリームステップでない場合にのみ表示されます。
 
-{{< img src="service_management/workflows/fallback-icon.png" alt="フォールバックのあるステップ" style="width:60%;" >}}
+{{< img src="service_management/workflows/fallback-icon2.png" alt="フォールバックのあるステップ" style="width:60%;" >}}
 
 ### フォールバックを削除する
 
@@ -194,4 +195,5 @@ Datadog の [**Workflows** ページ][1]からワークフローを作成した�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/workflow
-[2]: /ja/service_management/workflows/trigger
+[2]: https://handlebarsjs.com/guide/expressions.html#expressions
+[3]: /ja/service_management/workflows/trigger

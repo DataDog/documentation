@@ -23,7 +23,8 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: ArgoCD
-  logs: {}
+  logs:
+    source: argocd
   monitors:
     Sync Status: assets/recommended_monitors/application_sync_status.json
 author:
@@ -84,7 +85,7 @@ Argo CD チェックは [Datadog Agent][2] パッケージに含まれていま�
 
 **注**: この機能を使用するには、Agent v7.42.0 以上が必要です。
 
-### コンフィギュレーション
+### 構成
 
 Argo CD は、以下の 3 つのコンポーネントについて Prometheus 形式のメトリクスを公開しています。
    - アプリケーションコントローラー
