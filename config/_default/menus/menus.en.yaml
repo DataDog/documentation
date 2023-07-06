@@ -2182,56 +2182,76 @@ main:
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
     weight: 210
+  - name: Search and Manage
+    url: continuous_integration/search/
+    parent: ci
+    identifier: ci_search
+    weight: 3
+  - name: Explorer
+    url: continuous_integration/explorer/
+    parent: ci
+    identifier: ci_explorer
+    weight: 4
+  - name: Search Syntax
+    url: continuous_integration/explorer/search_syntax/
+    parent: ci_explorer
+    identifier: ci_explorer_search_syntax
+    weight: 401
+  - name: Facets
+    url: continuous_integration/explorer/facets/
+    parent: ci_explorer
+    identifier: ci_explorer_facets
+    weight: 402
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
     identifier: intelligent_test_runner
-    weight: 3
+    weight: 5
   - name: .NET
     url: continuous_integration/intelligent_test_runner/dotnet/
     parent: intelligent_test_runner
     identifier: ci_itr_dotnet
-    weight: 301
+    weight: 501
   - name: JavaScript and TypeScript
     url: continuous_integration/intelligent_test_runner/javascript/
     parent: intelligent_test_runner
     identifier: ci_itr_javascript
-    weight: 303
+    weight: 503
   - name: Swift
     url: continuous_integration/intelligent_test_runner/swift/
     parent: intelligent_test_runner
     identifier: ci_itr_swift
-    weight: 306
+    weight: 506
   - name: Static Analysis
     url: continuous_integration/static_analysis/
     parent: ci
     identifier: ci_static_analysis
-    weight: 4
+    weight: 6
   - name: Rules
     url: continuous_integration/static_analysis/rules
     parent: ci_static_analysis
     identifier: ci_static_analysis_rules
-    weight: 401
+    weight: 601
   - name: CircleCI Orbs
     url: continuous_integration/static_analysis/circleci_orbs
     parent: ci_static_analysis
     identifier: ci_static_analysis_circleci_orbs
-    weight: 402
+    weight: 602
   - name: GitHub Actions
     url: continuous_integration/static_analysis/github_actions
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
-    weight: 403
+    weight: 603
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 5
+    weight: 7
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 6
+    weight: 8
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
