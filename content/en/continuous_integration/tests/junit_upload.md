@@ -191,6 +191,13 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
+`--metrics`
+: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--metrics` parameter can be specified multiple times). When specifying metrics using `DD_METRICS`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
+**Environment variable**: `DD_METRICS`<br/>
+**Default**: (none)<br/>
+**Example**: `memory_allocations:13`<br/>
+**Note**: Metrics specified using `--metrics` and with the `DD_METRICS` environment variable are merged. If the same key appears in both `--metrics` and `DD_METRICS`, the value in the environment variable `DD_METRICS` takes precedence.
+
 `--xpath-tag`
 : Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
 See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-expressions) for more details on the supported expressions.<br/>
@@ -211,6 +218,19 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 `--dry-run`
 : Runs the command without actually uploading the file to Datadog. All other checks are performed.<br/>
 **Default**: `false`
+
+`--skip-git-metadata-upload`
+: Flag used to skip git metadata upload. If you want to upload git metadata, you may pass --skip-git-metadata-upload=0 or --skip-git-metadata-upload=false.<br/>
+**Default**: `true`<br/>
+
+`--git-repository-url`
+: The repository URL to retrieve git metadata from. If it is not passed, the URL is retrieved from the local git repository.<br/>
+**Default**: local git repository<br/>
+**Example**: `git@github.com:DataDog/documentation.git`<br/>
+
+`--verbose`
+: Flag used to add extra verbosity to the output of the command<br/>
+**Default**: `false`<br/>
 
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.

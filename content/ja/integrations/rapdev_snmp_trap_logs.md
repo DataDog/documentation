@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-snmp-trap-logs
 app_uuid: 754df420-1cf8-4742-b98c-9d3a76f83c41
 assets:

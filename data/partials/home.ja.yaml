@@ -116,6 +116,10 @@ nav_sections:
       icon: usm
       link: universal_service_monitoring/
       title: ユニバーサルサービスモニタリング
+    - desc: 技術スタック全体のプロセスの自動化とオーケストレーション
+      icon: ワークフロー
+      link: ワークフロー
+      title: ワークフローの自動化
 - nav_section:
   - name: コンフィギュレーション
   - navtiles:
