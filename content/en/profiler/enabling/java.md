@@ -25,7 +25,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 As of dd-trace-java version 1.0.0, you have two options for the engine that generates CPU profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of version 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
 
 Minimum JDK versions:
 
@@ -134,7 +134,7 @@ The Datadog profiler consists of several profiling engines, including CPU, wallc
 
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
 
 The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
