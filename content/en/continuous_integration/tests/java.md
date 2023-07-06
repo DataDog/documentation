@@ -90,7 +90,7 @@ If the tracer library is already available locally on the server, you can procee
 Declare `DD_TRACER_FOLDER` variable with the path to the folder where you want to store the downloaded tracer JAR:
 
 {{< code-block lang="shell" >}}
-DD_TRACER_FOLDER=... // e.g. ~/.datadog
+export DD_TRACER_FOLDER=... // e.g. ~/.datadog
 {{< /code-block >}}
 
 Run the command below to download the tracer JAR to the specified folder:
