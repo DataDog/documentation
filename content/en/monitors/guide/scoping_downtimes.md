@@ -6,6 +6,9 @@ further_reading:
 - link: "/monitors/downtimes"
   tag: "Documentation"
   text: "Downtimes Overview"
+- link: "/monitors/manage/search"
+  tag: "Documentation"
+  text: "Query syntax to search monitors"
 - link: "/monitors/guide/suppress-alert-with-downtimes"
   tag: "Guide"
   text: "Suppress Alerts through the Downtimes API and UI"
@@ -28,22 +31,37 @@ We have a monitor "Average CPU for {{service.name}} hosts in high". In the monit
 
 {{< img src="monitors/downtimes/downtime_examplebyname1_downtime.jpg" alt="downtime example of 'By Monitor Name' with preview of affected monitors" style="width:80%;">}}
 
-3. Scheduled downtime begins, with only alerts for the group `service:web-store` muted for this monitor.
+After the scheduled downtime begins, only alerts for the group `service:web-store` are muted for this monitor.
 
 {{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Evaluation graph showing downtime for group service:web-store" style="width:80%;">}}
 
-This mutes any alerts that includes `service:web-store` 
+This mutes any alerts that includes the tag `service:web-store`, for example:
+
+| Group Status     | Muted    |
+| ---  | ----------- |
+| `host:A`, `service:web-store`| Yes |
+| `host:A`, `host:B`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
+| `host:A`, `host:B`, `service:synthesizer`| No (missing `service:web-store`) |
 
 ### Mute monitors for multiple tags
 
-1. To schedule downtime on multiple groups (in this case, `env:dev`), enter that group in the `Group scope` field.
-2. **Preview affected monitors** indicates that the monitor chosen is still in scope, so alerts for the group `env:dev` are muted during the scheduled downtime.
+1. To schedule a downtime on multiple groups (for example, `service:web-store` and `env:prod`), enter that group in the `Group scope` field. By default, multiple tags added to the field query as boolean AND logic: `service:webstore` AND `env:prod`. However, you can specify OR logic as well: `service:webstore` OR `env:prod`.
+2. Click **Preview affected monitors** to verify the monitors that are in scope.
+3. After the scheduled downtime begins, alerts are muted for the group:
+`env:prod` **AND** `service:web-store`
+
+| Group Status     | Muted    |
+| ---  | ----------- |
+| `env:prod`, `service:web-store`| Yes |
+| `env:prod`, `env:dev`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
+| `env:dev`, `env:demo`, `service:web-store`| No (missing `env:prod`) |
+| `env:prod`, `env:demo`, `service:synthesizer`| No (missing `service:web-store`) |
 
 {{< img src="monitors/downtimes/downtime_examplebyname2_downtime.jpg" alt="downtime by monitor name with dev environment in scope" style="width:80%;">}}
 
 3. Scheduled downtime begins, and alerts are muted for the group `env:dev` **and** any service related to the `dev` environment.
 
-{{< img src="monitors/downtimes/downtime_examplebyname2_monitor.jpg" alt="group status shows dev environment and related services muted during downtime" style="width:80%;">}}
+
 
 4. To schedule a downtime on more than one "group by" (for example, `env:dev` AND `service:web-store`), add the additional scope to the downtime.
 
