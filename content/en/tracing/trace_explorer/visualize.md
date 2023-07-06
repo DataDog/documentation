@@ -30,7 +30,7 @@ The configuration of the columns is stored alongside other elements of your trou
 
 The `Latency Breakdown` of the trace might be missing for some spans if the trace is malformed or incomplete. For instance, the error and the rare samplers capture pieces of traces, without the guarantee of capturing the complete trace. In this case, the data is omitted to avoid displaying inconsistent of misleading latency information that would only make sense when the trace is complete.
 
-When the query is filtered on error spans, select the `Group into Issues` option to visualise a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional error information about this group of errors.
+When the query is filtered on error spans, select the **Group into Issues** option to visualize a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional information about this group of errors.
 
 {{< img src="tracing/trace_explorer/visualize/trace_explorer_issue_grouping.png" alt="Error Tracking Issue Grouping" style="width:100%;">}}
 
