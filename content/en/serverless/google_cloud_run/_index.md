@@ -177,9 +177,14 @@ ENV DD_TRACE_PROPAGATION_STYLE=datadog
 ENTRYPOINT ["/app/datadog-init"]
 
 # execute your binary application wrapped in the entrypoint. Adapt this line to your needs
-CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
+CMD ["rails", "server", "-b", "0.0.0.0"]
 
 ```
+
+**Note**: [Manually install][1] the Ruby tracer before you deploy your application. You can find an example application [here][2].
+
+[1]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+[2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -188,7 +193,19 @@ CMD ["rails", "server", "-b", "0.0.0.0"] (adapt this line to your needs)
 
 [`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the Google Cloud container registry and Datadog serverless buildpack.
 
-**Note**: [Install the tracing library](#install-tracing-library) for your language before running the buildpack.
+**Note**: Install the tracing library for your language before running the buildpack. If you're using a Dockerfile, you can skip this step.
+
+[Go library][1]
+[Python library][2]
+[NodeJS library][3]
+[Java library][4]
+[Ruby library][5]
+
+[1]: /tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started 
+[2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+[3]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+[4]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+[5]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
 
 Build your application by running the following command:
 
@@ -210,11 +227,11 @@ Once the container is built and pushed to your registry, the last step is to set
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-This command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 80.
+This command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 8080.
 
 ```shell
 gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
-  --port=80 \
+  --port=8080 \
   --update-env-vars=DD_API_KEY=$DD_API_KEY \
   --update-env-vars=DD_TRACE_ENABLED=true \
   --update-env-vars=DD_SITE='datadoghq.com' \
@@ -232,8 +249,6 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 - **Logs:** If you use the [Google Cloud integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
-
-- **Trace Propagation:** In order to propagate trace context for distributed tracing, set the `DD_TRACE_PROPAGATION_STYLE` environment variable to `'datadog'` for your Cloud Run app and any Datadog-instrumented services downstream of it.
 
 ### Environment Variables
 
