@@ -88,6 +88,12 @@ Interacting with a text input field on your mobile application, adding a name, a
 
 {{< img src="mobile_testing/type_text.mp4" alt="Recording a Type Text step in a mobile test" video=true >}}
 
+To see all available variables on manually added steps, type `{{` in the input field.
+
+{{< img src="mobile_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:25%" >}}
+
+To use a variable on automatically recorded steps, add a step name and specify the variable value to input the variable value while recording. 
+
 #### Scroll
 
 Mobile tests automatically scroll to the elements that need to be interacted with. In most cases, you do not need to add a scroll step manually. Use the scroll step when you need to trigger an additional interaction, such as an infinite scroll.
@@ -126,7 +132,6 @@ Add a name to the step and enter a deep link URI.
 
 For more information about additional configuration in test steps, see [Advanced Options for Mobile Test Steps][4].
 
-
 ## Manage step order
 
 Instead of manually reordering new steps by dragging and dropping individual steps, you can set a cursor on a test step at a particular stage in your recording and insert additional steps. 
@@ -136,14 +141,6 @@ Instead of manually reordering new steps by dragging and dropping individual ste
 3. When you complete adding additional steps above your tests step, click **Clear Cursor** to exit.
 
 {{< img src="mobile_testing/recording_cursor_step.mp4" alt="Set the cursor on a test step to add additional steps before this step" video=true >}}
-
-## Use variables
-
-To see all available variables on manually added steps, type `{{` in the input field.
-
-{{< img src="mobile_testing/injecting_variable.png" alt="Type Text step to use variables in mobile tests" style="width:25%" >}}
-
-To use a variable on automatically recorded steps, add a step name and specify the variable value in the [**Type Text step** modal](#type-text) to input the variable value while recording. 
 
 ## Further reading
 
