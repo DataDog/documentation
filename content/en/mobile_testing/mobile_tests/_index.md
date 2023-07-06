@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Mobile application tests are scenarios executed by Datadog on your iOS and Android applications. They run at configurable periodic intervals—from multiple device types—to verify that your applications are up and responding to requests and actions, and that any conditions defined in your scenarios are met. 
+Mobile Application Testing allows you to test and monitor key business flows for Android and iOS using real devices. 
 
 Mobile tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
 
@@ -28,10 +28,10 @@ You can create mobile tests in Datadog by navigating to [**UX Monitoring** > **N
 Define the configuration of your mobile test.
 
 1. Create a mobile application on the [Applications List section][2] in the [Synthetic Monitoring & Continuous Testing Settings page][3] and select it from the mobile application dropdown menu.
-2. Select a **version** of your mobile application or click **Always run the latest version**.
-3. Add a **name** for your mobile test.
-4. Select **environment and additional tags** that relate to your mobile test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
-4. Select **devices** including mobile devices and tablets to run your mobile test on.
+2. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
+3. Add a **name** for your test.
+4. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+4. Select the **devices** to run your test on.
 5. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency. 
 
 {{% synthetics-variables %}}

@@ -1,5 +1,5 @@
 ---
-title: Mobile Application Testing
+title: Mobile Application Testing and Monitoring
 kind: documentation
 description: "Create intelligent, self-maintaining mobile tests to ensure the most critical parts of your mobile applications are up and running from real devices."
 disable_sidebar: true
@@ -21,11 +21,11 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-Mobile tests allow you to observe how your mobile applications are performing using **simulated requests and actions from real devices**. Datadog tracks the performance of your mobile applications and alerts you about faulty behavior such as regressions, broken features, high response times, and unexpected status codes. 
+Mobile Application Testing allows you to test and monitor key business flows for Android and iOS using real devices. 
 
 [**Computing SLOs**][1] on your key endpoints and user journeys makes it easier to stick to your application performance targets and provide a consistent customer experience.
 
-## Upload a mobile application
+## Upload your mobile application
 
 [Create a mobile application][2] for your Android or iOS application by uploading an `.apk` or `.ipa` file and specifying the application version.
 

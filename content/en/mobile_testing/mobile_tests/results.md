@@ -1,5 +1,5 @@
 ---
-title: Mobile Test Results
+title: Test Results
 kind: documentation
 description: View Synthetic mobile test results and compare successful or failed sample runs to test runs. 
 further_reading:

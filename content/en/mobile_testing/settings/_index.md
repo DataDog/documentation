@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-You can manage your mobile applications on the [Synthetic Monitoring & Continuous Testing Settings page][1].
+Manage your uploaded mobile applications and your parallelization settings on the [Synthetic Monitoring & Continuous Testing Settings page][1].
 
 {{< img src="mobile_testing/applications_list.png" alt="Mobile Applications Settings" style="width:100%;">}}
 

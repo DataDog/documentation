@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Steps are a series of actions that you can record for a mobile test and edit or build on. To define the steps you want your mobile test to execute, either directly record them with the mobile test recording or add them manually. 
+Steps represent individually recorded interactions or assertions that you want to execute in your test. To define a step, click **Start Recording** and interact with the device as you would normally, or create a step manually by clicking **Assertions** or **Special Actions**. 
 
 ## Launch a device
 
@@ -35,13 +35,11 @@ You can manually add, customize, and arrange steps on the left side of the mobil
 
 ### Assertion
 
-Assertions allow you to validate that your browser test is in the state you expect it to be in at any point of a simulated user journey. 
+Assertions allow you to validate the content displayed (or not displayed) within a particular section of your test flow.
 
-To confirm your test ends in an expected state, you must end your mobile tests with an **assertion**.
 
 {{< img src="mobile_testing/assertions.png" alt="Options for assertions in a mobile test" style="width:60%;" >}}
 
-Some assertions validate the active page, the page the user last interacted with, such as a **click** or an **assertion** on a page element.
 
 To create a step, select an assertion type:
 
@@ -128,47 +126,6 @@ Add a name to the step and enter a deep link URI.
 
 For more information about additional configuration in test steps, see [Advanced Options for Mobile Test Steps][4].
 
-### Variables
-
-Click **Variables** and select a variable creation type from the dropdown menu. 
-
-{{< img src="mobile_testing/builtin_variables.png" alt="Out-of-the-box variable templates" style="width:80%;" >}}
-
-To learn how to use variables inside of your steps, see [Use variables](#use-variables). For more information, see the [Variables section][1].
-
-#### Pattern
-
-You can select one of the following available builtins:
-
-`{{ numeric(n) }}`
-: Generates a numeric string with `n` digits.
-
-`{{ alphabetic(n) }}`
-: Generates an alphabetic string with `n` letters.
-
-`{{ alphanumeric(n) }}`
-: Generates an alphanumeric string with `n` characters.
-
-`{{ date(n unit, format) }}`
-: Generates a date in one of Datadog's accepted formats with a value corresponding to the UTC date the test is initiated at + or - `n` units.
-
-`{{ timestamp(n, unit) }}` 
-: Generates a timestamp in one of Datadog's accepted units with a value corresponding to the UTC timestamp the test is initiated at + or - `n` units.
-
-`{{ uuid }}`
-: Generates a version 4 universally unique identifier (UUID).
-
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
-
-#### Global variable
-
-Select any global variables defined in [Synthetic Monitoring & Continuous Testing Settings][2].
-
-#### Global variable - MFA
-
-Select any MFA global variables defined in [Synthetic Monitoring & Continuous Testing Settings][2].
-
-This type of global variable stores time-based one time password (TOTP) secret keys, allowing you to test your MFA modules and MFA-protected workflows. For more information, see [TOTPs For Multi-Factor Authentication (MFA) In Browser Tests][3].
 
 ## Manage step order
 
