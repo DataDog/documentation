@@ -359,14 +359,9 @@ To add custom metrics to your tests, such as the memory allocations, use `cy.tas
 For example:
 
 ```javascript
-beforeEach(() => {
-  cy.task('dd:addTags', {
-    'before.each': 'certain.information'
-  })
-})
 it('renders a hello world', () => {
   cy.task('dd:addTags', {
-    'memory_allocation': 16
+    'memory_allocations': 16
   })
   cy.get('.hello-world')
     .should('have.text', 'Hello World')
