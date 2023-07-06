@@ -112,5 +112,5 @@ Export your view in the CI Visibility Explorer to reuse it later or in different
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/search
-[2]: /continuous_integration/search_syntax
+[2]: /continuous_integration/explorer/search_syntax
 [3]: /continuous_integration/explorer/facets
