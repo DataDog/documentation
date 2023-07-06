@@ -183,24 +183,33 @@ Requires `dd-trace-php` version 0.79.0+.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Scope flame graphs by endpoints
+### Endpoint profiling
 
 Endpoint profiling allows you to scope your flame graphs by any endpoint of your web service to find endpoints that are slow, latency-heavy, and causing poor end-user experience. These endpoints can be tricky to debug and understand why they are slow. The slowness could be caused by an unintended large amount of resource consumption such as the endpoint consuming lots of CPU cycles.
 
 With endpoint profiling you can:
 
 - Identify the bottleneck methods that are slowing down your endpoint's overall response time.
-- Isolate the top endpoints responsible for the consumption of valuable resources such as CPU and wall time. This is particularly helpful when you are generally trying to optimize your service for performance gains.
-- Understand if third party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
+- Isolate the top endpoints responsible for the consumption of valuable resources such as CPU, memory or exceptions. This is particularly helpful when you are generally trying to optimize your service for performance gains.
+- Understand if third-party code or runtime libraries are the reason for your endpoints being slow or resource-consumption heavy.
 
-{{< img src="profiler/endpoint_agg_gif.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
-
+{{< img src="profiler/endpoint_agg.mp4" alt="Troubleshooting a slow endpoint by using endpoint aggregation" video=true >}}
 
 ### Track the endpoints that consume the most resources
 
 It is valuable to track top endpoints that are consuming valuable resources such as CPU and wall time. The list can help you identify if your endpoints have regressed or if you have newly introduced endpoints that are consuming drastically more resources, slowing down your overall service.
 
-{{< img src="profiler/endpoint_metric.mp4" alt="Graphing top endpoints in terms of resource consumption" video=true >}}
+Here, you can see that `GET /store_history` is periodically impacting this service by consuming 20% of its CPU:
+
+{{< img src="profiler/endpoint_metric.png" alt="Graphing top endpoints in terms of resource consumption" >}}
+
+### Track average resource consumption per request
+
+Select `Per endpoint call` to see behavior changes even as traffic shifts over time. This is useful for progressive rollout sanity checks or analyzing daily traffic patterns
+
+Here, you can see that CPU per request doubled for `/GET train`:
+
+{{< img src="profiler/endpoint_per_request.mp4" alt="Troubleshooting a endpoint that started using more resource per request" video=true >}}
 
 ## Further reading
 
