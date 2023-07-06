@@ -447,7 +447,9 @@ From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uplo
   <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog. **The manual testing API is not compatible with Jest, Mocha, Cypress, Playwright, or Cucumber**.
+If you use Jest, Mocha, Cypress, Playwright, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+
+Use the manual testing API only if you use an unsupported testing framework or if you have a different testing mechanism.
 
 The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
 
