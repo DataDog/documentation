@@ -3,30 +3,42 @@ title: Add Custom Metrics to your Tests
 kind: guide
 ---
 
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
 
-You can add custom tags to your tests by using the current active span:
+Depending on your choice of language, adding a custom metric to your test is slightly different:
 
+{{< tabs >}}
+{{% tab "Javascript/Typescript" %}}
 ```javascript
   it('sum function can sum', () => {
     const testSpan = require('dd-trace').scope().active()
-    testSpan.setTag('team_owner', 'my_team')
+    testSpan.setTag('test.memory.rss', process.memoryUsage().rss)
     // test continues normally
     // ...
   })
 ```
+{{% /tab %}}
+{{< /tabs >}}
 
-To create filters or `group by` fields for these tags, you must first create facets.
+Now that the test includes this custom metric, you can do certain operations with it, but you must first create a facet.
+
 
 ### Facet creation
 
-Creating a facet on a span attribute/tag is not a mandatory step to search for spans. Facets are useful if you wish to add a meaningful description to a specific span attribute, or if you want the span attribute values to appear on the Facet list on the left-hand side of the span list.
+You can create a facet by going to [Test Runs][1] and clicking on Add on the facet list:
 
-You can read more in [creating facets][1]
+{{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
+
+Then make sure that the type of facet is "Measure", which represents a numerical value:
+
+{{< img src="/continuous_integration/measure_creation.png" text="Test Runs measure creation" style="width:100%" >}}
 
 
-[1]: tracing/trace_explorer/facets/#creating-facets
+
+
+[1]: https://app.datadoghq.com/ci/test-runs
