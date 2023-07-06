@@ -272,22 +272,22 @@ Alerts are grouped automatically based on your selection of the `group by` step 
 
 #### Simple alert
 
-`Simple Alert` mode triggers a notification by aggregating over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions. For example, you might set up a monitor to notify you if the average CPU usage of all servers exceeds a certain threshold. If that threshold is breached, you'll receive a single notification, regardless of the number of individual servers that contributed to the breach. This can be useful for monitoring broad system trends or behaviors.
+`Simple Alert` mode triggers a notification by aggregating over all reporting sources. You receive **one alert** when the aggregated value meets the set conditions. For example, you might set up a monitor to notify you if the average CPU usage of all servers exceeds a certain threshold. If that threshold is met, you'll receive a single notification, regardless of the number of individual servers that met the threshold. This can be useful for monitoring broad system trends or behaviors.
 
 
-{{< img src="/monitors/create/simple-alert.png" alt="How monitor notifications are sent in simple alert mode" style="width:100%;">}}
+{{< img src="/monitors/create/simple-alert.png" alt="Diagram showing how monitor notifications are sent in simple alert mode" style="width:90%;">}}
 
 #### Multi alert
 
-Unlike `Simple Alert`, a `Multi Alert` monitor triggers individual notifications for each entity in a monitor that breaches the alert threshold.
+A `Multi Alert` monitor triggers individual notifications for each entity in a monitor that meets the alert threshold.
 
-{{< img src="/monitors/create/multi-alert.png" alt="How monitor notifications are sent in simple alert mode" style="width:100%;">}}
+{{< img src="/monitors/create/multi-alert.png" alt="Diagram of how monitor notifications are sent in multi alert mode" style="width:90%;">}}
 
-For example, when setting up a monitor to notify you if the P99 latency of all services exceeds a certain threshold, you would receive a **separate** alert for each individual service whose P99 latency exceeded the alert threshold. This can be useful for identifying and addressing specific instances of system or application issues. It allows you to track problems on a more granular level.
+For example, when setting up a monitor to notify you if the P99 latency, aggregated by service, exceeds a certain threshold, you would receive a **separate** alert for each individual service whose P99 latency exceeded the alert threshold. This can be useful for identifying and addressing specific instances of system or application issues. It allows you to track problems on a more granular level.
 
-When monitoring a large group of entities however, this can create noisy monitors. To mitigate, customize which dimensions trigger alerts to reduce the noise and focus on the alerts that matter most to you. This is called **Notification Grouping**. For instance, you are monitoring the average CPU usage of all your hosts. If you group your query by `service` and `host` but only want alerts to be sent once for each `service` attribute meeting the threshold, remove the `host` attribute from your multi alert options and reduce the number of notifications that are sent.
+When monitoring a large group of entities, multi alerts can lead to noisy monitors. To mitigate this, customize which dimensions trigger alerts. This reduces the noise and allows you to focus on the alerts that matter most. For instance, you are monitoring the average CPU usage of all your hosts. If you group your query by `service` and `host` but only want alerts to be sent once for each `service` attribute meeting the threshold, remove the `host` attribute from your multi alert options and reduce the number of notifications that are sent.
 
-{{< img src="/monitors/create/multi-alert-aggregated.png" alt="Aggregate notifications to some dimensions when using multi alerts" style="width:100%;">}}
+{{< img src="/monitors/create/multi-alert-aggregated.png" alt="Diagram of how notifications are sent when set to specific dimensions in multi alerts" style="width:90%;">}}
 
 When aggregating notifications in `Multi Alert` mode, the dimensions that are not aggregated on become `Sub Groups` in the UI.
 
