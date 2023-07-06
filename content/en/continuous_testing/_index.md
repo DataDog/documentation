@@ -42,7 +42,7 @@ With support for multiple protocols, frameworks, and APIs—including gRPC and W
 
 ## Improve test reliability 
 
-Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile tests, and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16].
+Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile app tests, and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16].
 
 ## Increase efficiency through seamless integrations
 

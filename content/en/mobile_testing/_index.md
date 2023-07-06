@@ -9,7 +9,7 @@ further_reading:
   text: "Best practices for creating end-to-end tests"
 - link: "/mobile_testing/mobile_tests"
   tag: "Documentation"
-  text: "Learn how to create Synthetic mobile tests"
+  text: "Learn how to create Synthetic mobile app tests"
 - link: "/mobile_testing/settings"
   tag: "Documentation"
   text: "Learn how to upload your iOS or Android mobile applications"
@@ -33,7 +33,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 {{< img src="mobile_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:80%;">}}
 
-[Create mobile tests][3] on critical user journeys and business journeys to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
+[Create mobile app tests][3] on critical user journeys and business journeys to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
 
 ## Further reading
 

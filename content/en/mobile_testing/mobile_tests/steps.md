@@ -17,7 +17,7 @@ Steps represent individually recorded interactions or assertions that you want t
 
 ## Launch a device
 
-To start recording and adding steps, select a device to launch a mobile test from the dropdown menu and click **Launch Device**. 
+To start recording and adding steps, select a device to launch a mobile app test from the dropdown menu and click **Launch Device**. 
 
 {{< img src="mobile_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:60%" >}}
 
@@ -48,18 +48,18 @@ To create a step, select an assertion type:
 
 #### Test an element's content
 
-Create this assertion step to have your mobile test select a page element and check if it contains a specific value. 
+Create this assertion step to have your mobile app test select a page element and check if it contains a specific value. 
 
 {{% /tab %}}
 {{% tab "Test Active Screen Content" %}}
 
 #### Test that some text is present on the active screen
 
-Create this assertion step to have your browser test confirm that the text you specified in the `Value` field is present on the current page being recorded.
+Create this assertion step to have your mobile app test confirm that the text you specified in the `Value` field is present on the current page being recorded.
 
 #### Test that some text is not present on the active screen
 
-Create this assertion step to have your browser test confirm that the text you specified in the `Value` field is **not** present on the current page being recorded.
+Create this assertion step to have your mobile app test confirm that the text you specified in the `Value` field is **not** present on the current page being recorded.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -96,13 +96,13 @@ To use a variable on automatically recorded steps, add a step name and specify t
 
 #### Scroll
 
-Mobile tests automatically scroll to the elements that need to be interacted with. In most cases, you do not need to add a scroll step manually. Use the scroll step when you need to trigger an additional interaction, such as an infinite scroll.
+Mobile app tests automatically scroll to the elements that need to be interacted with. In most cases, you do not need to add a scroll step manually. Use the scroll step when you need to trigger an additional interaction, such as an infinite scroll.
 
-Specify the number of pixels you want the mobile test to scroll vertically and horizontally.
+Specify the number of pixels you want the mobile app test to scroll vertically and horizontally.
 
 {{< img src="mobile_testing/scroll_step.png" alt="Scroll step in a mobile test recording" style="width:60%;" >}}
 
-By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile test to scroll on.
+By default, the **Scroll** step scrolls through the entire page. If you need to scroll on a specific element (for example, a specific `<div>`), click **Starting Element** and select an element you want the mobile app test to scroll on.
 
 #### Press back
 
@@ -116,7 +116,7 @@ If you know that a page or page element takes more than 60 seconds to load, you 
 
 {{< img src="mobile_testing/wait_step.png" alt="Recording a Wait step in a mobile test" style="width:60%;" >}}
 
-By default, mobile tests wait for a page to be fully loaded before performing a step or the next step with a timeout of 60 seconds. This additional time is systematically added to **every run** of your mobile test's recording.
+By default, mobile app tests wait for a page to be fully loaded before performing a step or the next step with a timeout of 60 seconds. This additional time is systematically added to **every run** of your mobile app test's recording.
 
 #### Rotate device
 
@@ -130,7 +130,7 @@ Add a name to the step and enter a deep link URI.
 
 {{< img src="mobile_testing/open_deep_link.png" alt="Recording an Open Deep Link step in a mobile test" style="width:60%" >}}
 
-For more information about additional configuration in test steps, see [Advanced Options for Mobile Test Steps][4].
+For more information about additional configuration in test steps, see [Advanced Options for Mobile App Test Steps][4].
 
 ## Manage step order
 

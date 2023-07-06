@@ -1,7 +1,7 @@
 ---
-title: Mobile Application Tests
+title: Mobile App Tests
 kind: documentation
-description: Learn how to start monitoring key business flows with mobile application tests.
+description: Learn how to start monitoring key business flows with mobile app tests.
 further_reading:
 - link: "/mobile_testing/settings"
   tag: "Documentation"
@@ -17,42 +17,44 @@ further_reading:
 
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS using real devices. 
 
-Mobile tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
+Mobile app tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
 
-You can create mobile tests in Datadog by navigating to [**UX Monitoring** > **New Test**][12] and selecting **Mobile Application Test**.
+You can create mobile app tests in Datadog by navigating to [**UX Monitoring** > **New Test**][12] and selecting **Mobile Application Test**.
 
 {{< img src="mobile_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
 
 ## Configuration
 
-Define the configuration of your mobile test.
+Define the configuration of your mobile app test.
 
 1. Create a mobile application on the [Applications List section][2] in the [Synthetic Monitoring & Continuous Testing Settings page][3] and select it from the mobile application dropdown menu.
 2. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
 3. Add a **name** for your test.
 4. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
 4. Select the **devices** to run your test on.
-5. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency. 
+5. Set retry conditions for your test.
+6. Set the **test frequency** by clicking on basic time intervals or customizing your test frequency and **alert conditions** for your test monitor. 
+7. Enter a name for the test monitor, select a service or team member to notify, and add a message notification.
 
 {{% synthetics-variables %}}
 
 ### Use global variables
 
-You can use the [global variables defined in **Settings**][4] in the **Starting URL** and **Advanced Options** of your mobile test details, as well as in your test recording to define local variables. To display a list of available variables, type `{{` in the desired field.
+You can use the [global variables defined in **Settings**][4] in the **Starting URL** and **Advanced Options** of your mobile app test details, as well as in your test recording to define local variables. To display a list of available variables, type `{{` in the desired field.
 
 Define the variables you want to incorporate into the user journey before you start recording.
 
-You can inject the variables available to you while recording. For more information about using variables in your mobile test recording, see [Mobile Test Steps][11].
+You can inject the variables available to you while recording. For more information about using variables in your mobile test recording, see [Mobile App Test Steps][11].
 
-### Define retry conditions
+## Test retries
 
 You can specify how much time a test needs to fail before triggering a notification alert.
 
 * Retry `X` times after `Y` ms in case of failure. 
 
-### Define scheduling and alert conditions
+## Scheduling and alerts
 
-By default, mobile tests are set up for on-demand testing, meaning these tests can run [directly in a CI pipeline](#run-tests-in-ci).
+By default, mobile app tests are set up for on-demand testing, meaning these tests can run [directly in a CI pipeline](#run-tests-in-ci).
 
 {{< img src="mobile_testing/alerting_rules.png" alt="Scheduling and alerting conditions for a mobile test" style="width:90%" >}}
 
@@ -64,7 +66,7 @@ You can customize alert conditions to define how often you want to send an alert
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the mobile test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
+1. Enter a **message** for the mobile app test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -81,13 +83,13 @@ A notification is sent according to the set of alerting conditions. Use this sec
 
 2. Choose team members and services to notify.
 3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-4. Click **Save & Edit Recording** to save your test configuration and record your mobile test steps.
+4. Click **Save & Edit Recording** to save your test configuration and record your mobile app test steps.
 
 For more information, see [Using Synthetic Test Monitors][7].
 
 ## Run tests in CI
 
-You can run mobile tests in a CI pipeline by defining the `mobileApplicationVersionFilePath` option in a [test `synthetics.json` file][13] and a [global configuration `synthetics-ci.config` file][14] as needed. Global configuration file options take precedence over test configuration file options.
+You can run mobile app tests in a CI pipeline by defining the `mobileApplicationVersionFilePath` option in a [test `synthetics.json` file][13] and a [global configuration `synthetics-ci.config` file][14] as needed. Global configuration file options take precedence over test configuration file options.
 
 In this example, the test `aaa-aaa-aaa` runs with the override application version found in `application/path`.
 
@@ -111,7 +113,7 @@ For more information, see [Continuous Testing and CI/CD][1].
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][8] can create, edit, and delete Synthetic mobile tests. To get create, edit, and delete access to Synthetic mobile tests, upgrade your user to one of those two [default roles][8].
+By default, only users with the [Datadog Admin and Datadog Standard roles][8] can create, edit, and delete Synthetic mobile app tests. To get create, edit, and delete access to Synthetic mobile app tests, upgrade your user to one of those two [default roles][8].
 
 If you are using the [custom role feature][9], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
@@ -119,7 +121,7 @@ If you are using the [custom role feature][9], add your user to any custom role 
 
 Access restriction is available for customers using [custom roles][10] on their accounts.
 
-You can restrict access to a mobile test based on the roles in your organization. When creating a mobile test, choose which roles (in addition to your user) can read and write your test. 
+You can restrict access to a mobile app test based on the roles in your organization. When creating a mobile app test, choose which roles (in addition to your user) can read and write your test. 
 
 {{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
 

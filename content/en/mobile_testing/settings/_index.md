@@ -28,7 +28,7 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 
 1. Select **Android** as the OS for your mobile application.
 2. Name your mobile application.
-3. Add `env` tags as well as additional tags to your mobile application. You can use these tags to quickly filter through your mobile tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
+3. Add `env` tags as well as additional tags to your mobile application. You can use these tags to quickly filter through your mobile app tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
 4. Optionally, enter a description for your mobile application.
 5. Upload an [`.apk` file][102].
 6. Enter a name for the version of your mobile application. Optionally, select **Mark this version as latest**.
@@ -42,7 +42,7 @@ To add a mobile application, navigate to the [**Mobile Applications List** tab][
 
 1. Select **iOS** as the OS for your mobile application.
 2. Name your mobile application.
-3. Add `env` tags as well as additional tags to your mobile application. You can use these tags to quickly filter through your mobile tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
+3. Add `env` tags as well as additional tags to your mobile application. You can use these tags to quickly filter through your mobile app tests on the [Synthetic Monitoring & Continuous Testing page][101]. 
 4. Optionally, enter a description for your mobile application.
 5. Upload an `.ipa` file.
 6. Enter a name for the version of your mobile application. Optionally, select **Mark this version as latest**.
@@ -57,7 +57,7 @@ To edit or delete a mobile application, hover over a mobile application in the *
 
 ## Manage application versions
 
-Clicking on a mobile application in the **Mobile Applications List** displays existing versions of the application. Hover over a version and click the **+** icon to [create a mobile test][6] with the selected mobile application's version.
+Clicking on a mobile application in the **Mobile Applications List** displays existing versions of the application. Hover over a version and click the **+** icon to [create a mobile app test][6] with the selected mobile application's version.
 
 To edit or delete a version of a mobile application, hover over a version in the mobile application and click on the respective icon.
 
@@ -72,6 +72,10 @@ To add a version of an existing mobile application:
 5. Click **Add Version**.
 
 {{< img src="mobile_testing/add_new_version.png" alt="Add a new version of a mobile application" style="width:50%;">}}
+
+## Customize your parallelization
+
+For more information about parallelizing your Synthetic tests, see [Continuous Testing Settings][7].
 
 ## Permissions
 
@@ -89,3 +93,4 @@ If you are using the [custom role feature][3], add your user to any custom role 
 [4]: https://developer.android.com/tools/bundletool
 [5]: https://app.datadoghq.com/synthetics/settings/mobile-applications
 [6]: /mobile_testing/mobile_tests/
+[7]: /continuous_testing/settings/
