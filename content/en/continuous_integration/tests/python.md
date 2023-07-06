@@ -38,11 +38,11 @@ To report test results to Datadog, you need to configure the Datadog Python libr
 {{< tabs >}}
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{< include-markdown "/content/en/continuous_integration/tests/includes/on_premises_datadog_agent_tab.md.inc" >}}
+{{% reuse/continuous_integration/tests/on_premises_datadog_agent_tab %}}
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
-{{< include-markdown "/content/en/continuous_integration/tests/includes/cloud_ci_agentless.md.inc" >}}
+{{% reuse/continuous_integration/tests/cloud_ci_agentless %}}
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -115,11 +115,11 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Collecting Git metadata
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
+{{% reuse/continuous_integration/tests/collected_git_metadata %}}
 
 ## Information collected
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
+{{% reuse/continuous_integration/tests/information_collected %}}
 
 ## Further reading
 

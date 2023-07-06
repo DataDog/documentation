@@ -44,12 +44,13 @@ To report test results to Datadog, you need to configure the Datadog .NET librar
 {{< tabs >}}
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{< include-markdown "/content/en/continuous_integration/tests/includes/on_premises_datadog_agent_tab.md.inc" >}}
+{{% reuse/continuous_integration/tests/on_premises_datadog_agent_tab %}}
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 <div class="alert alert-info">Agentless mode is available in Datadog .NET library versions >= 2.5.1</div>
-{{< include-markdown "/content/en/continuous_integration/tests/includes/cloud_ci_agentless.md.inc" >}}
+
+{{% reuse/continuous_integration/tests/cloud_ci_agentless %}}
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -203,7 +204,7 @@ BenchmarkRunner.Run<OperationBenchmark>(config);
 
 ### Collecting Git metadata
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
+{{% reuse/continuous_integration/tests/collected_git_metadata %}}
 
 ## Custom instrumentation
 
@@ -790,7 +791,7 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 
 ## Information collected
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
+{{% reuse/continuous_integration/tests/information_collected %}}
 
 In addition to that, if [Intelligent Test Runner][10] is enabled, the following data is collected from your project:
 

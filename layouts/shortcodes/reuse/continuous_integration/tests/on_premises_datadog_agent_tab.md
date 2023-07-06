@@ -9,4 +9,4 @@ If you are not using Kubernetes or can't use [Datadog Admission Controller][2] a
 If you still have issues connecting to the Datadog Agent, use the [Agentless Mode](?tab=cloudciprovideragentless#configuring-reporting-method). **Note**: by using this method, there will be no correlation between tests and infrastructure metrics.
 
 [1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
+[2]: /agent/cluster_agent/admission_controller/

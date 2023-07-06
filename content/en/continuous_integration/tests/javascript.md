@@ -64,12 +64,13 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{< tabs >}}
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{< include-markdown "/content/en/continuous_integration/tests/includes/on_premises_datadog_agent_tab.md.inc" >}}
+{{% reuse/continuous_integration/tests/on_premises_datadog_agent_tab %}}
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 <div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
-{{< include-markdown "/content/en/continuous_integration/tests/includes/cloud_ci_agentless.md.inc" >}}
+
+{{% reuse/continuous_integration/tests/cloud_ci_agentless %}}
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -351,7 +352,7 @@ All other [Datadog Tracer configuration][7] options can also be used.
 
 ### Collecting Git metadata
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
+{{% reuse/continuous_integration/tests/collected_git_metadata %}}
 
 ## Git metadata upload
 
@@ -426,7 +427,7 @@ When you use this approach, both the testing framework and CI Visibility can tel
 
 ## Information collected
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
+{{% reuse/continuous_integration/tests/information_collected %}}
 
 In addition to that, if [Intelligent Test Runner][20] is enabled, the following data is collected from your project:
 

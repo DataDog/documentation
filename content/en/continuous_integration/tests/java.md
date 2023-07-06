@@ -37,12 +37,13 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 {{< tabs >}}
 
 {{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-{{< include-markdown "/content/en/continuous_integration/tests/includes/on_premises_datadog_agent_tab.md.inc" >}}
+{{% reuse/continuous_integration/tests/on_premises_datadog_agent_tab %}}
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 <div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
-{{< include-markdown "/content/en/continuous_integration/tests/includes/cloud_ci_agentless.md.inc" >}}
+
+{{% reuse/continuous_integration/tests/cloud_ci_agentless %}}
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -335,11 +336,11 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 ### Collecting Git metadata
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
+{{% reuse/continuous_integration/tests/collected_git_metadata %}}
 
 ## Information collected
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
+{{% reuse/continuous_integration/tests/information_collected %}}
 
 ## Troubleshooting
 

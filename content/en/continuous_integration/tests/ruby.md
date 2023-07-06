@@ -425,11 +425,11 @@ All other [Datadog Tracer configuration][6] options can also be used.
 
 ### Collecting Git metadata
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
+{{% reuse/continuous_integration/tests/collected_git_metadata %}}
 
 ## Information collected
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
+{{% reuse/continuous_integration/tests/information_collected %}}
 
 ## Further reading
 

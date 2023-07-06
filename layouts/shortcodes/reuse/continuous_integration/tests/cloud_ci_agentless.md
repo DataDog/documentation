@@ -13,7 +13,6 @@ Additionally, configure which [Datadog site][2] to which you want to send data.
 `DD_SITE` (Required)
 : The [Datadog site][2] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys

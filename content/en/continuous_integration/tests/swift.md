@@ -186,7 +186,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ### Collecting Git metadata
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
+{{% reuse/continuous_integration/tests/collected_git_metadata %}}
 
 ### Running tests
 
@@ -745,7 +745,7 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 
 ## Information collected
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/information_collected.md.inc" >}}
+{{% reuse/continuous_integration/tests/information_collected %}}
 
 In addition to that, if [Intelligent Test Runner][7] is enabled, the following data is collected from your project:
 

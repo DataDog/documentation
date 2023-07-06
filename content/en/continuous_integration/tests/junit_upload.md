@@ -230,7 +230,7 @@ Additionally, configure the Datadog site to use the selected one ({{< region-par
 
 ## Collecting repository and commit metadata
 
-{{< include-markdown "/content/en/continuous_integration/tests/includes/collected_git_metadata.md.inc" >}}
+{{% reuse/continuous_integration/tests/collected_git_metadata %}}
 
 ## Git metadata upload
 
