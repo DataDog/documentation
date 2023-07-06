@@ -1780,15 +1780,6 @@ main:
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
     weight: 506
-  - name: Trace Queries
-    url: tracing/trace_queries/
-    parent: tracing
-    identifier: trace_queries
-    weight: 7
-  - name: 1% Flat Sampling
-    url: tracing/trace_queries/one_percent_flat_sampling
-    parent: trace_queries
-    weight: 701
   - name: Service Observability
     url: tracing/services/
     parent: tracing
