@@ -22529,15 +22529,21 @@ paths:
         required: false
         schema:
           type: string
-      - description: 'For customers with multiple indexes, the indexes to search
+      - description: 'For customers with multiple indexes, the indexes to search.
 
           Defaults to ''*'' which means all indexes'
-        example: main
+        example:
+        - main
+        - web
+        explode: false
         in: query
-        name: filter[index]
+        name: filter[indexes]
         required: false
         schema:
-          type: string
+          items:
+            description: The name of a log index.
+            type: string
+          type: array
       - description: Minimum timestamp for requested logs.
         example: '2019-01-02T09:42:36.320Z'
         in: query
