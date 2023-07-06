@@ -209,7 +209,7 @@ CPU
 
 Allocations (v0.88+)
 : The number of allocations by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
-_Note: Not availble when JIT is active_
+_Note: Not available when JIT is active_
 
 Allocated memory (v0.88+)
 : The amount of heap memory allocated by each function during the profiling period (default: 67s), including allocations which were subsequently freed. Stack allocations are not tracked.<br />
