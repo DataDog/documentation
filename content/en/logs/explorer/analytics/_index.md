@@ -108,7 +108,7 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 
 ## Filter logs based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables and the feature to filter logs based on Reference Tables are in beta. There are no billing implications for defining and querying Reference Tables. There is a limit of 100 Reference Tables per account and a limit of 1000 rows in a Reference Table.</div>
+<div class="alert alert-warning">Reference Tables and the feature to filter logs based on Reference Tables are in beta. There is a limit of 100 Reference Tables per account and a limit of 1000 rows in a Reference Table.</div>
 
 Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][17] guide.
 
