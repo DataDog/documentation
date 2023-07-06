@@ -7,7 +7,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
   tag: "Blog"
   text: "Best practices for creating end-to-end tests"
-- link: "/mobile_testing/mobile_tests"
+- link: "/mobile_testing/mobile_app_tests"
   tag: "Documentation"
   text: "Learn how to create Synthetic mobile app tests"
 - link: "/mobile_testing/settings"
@@ -29,11 +29,15 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 [Create a mobile application][2] for your Android or iOS application by uploading an `.apk` or `.ipa` file and specifying the application version.
 
-## Record mobile application tests
+## Record mobile app tests
 
 {{< img src="mobile_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:80%;">}}
 
 [Create mobile app tests][3] on critical user journeys and business journeys to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
+
+## Run tests on CI or manually run tests
+
+You can [trigger mobile app tests][4] from your CI pipeline using [Continuous Testing][5], or [schedule mobile app tests][6] to run at regular intervals and manually trigger mobile app tests on the Datadog site.
 
 ## Further reading
 
@@ -41,4 +45,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 [1]: /service_management/service_level_objectives
 [2]: /mobile_testing/settings
-[3]: /mobile_testing/mobile_tests
+[3]: /mobile_testing/mobile_app_tests
+[4]: /mobile_testing/mobile_app_tests/#run-tests-in-ci
+[5]: /continuous_testing
+[6]: /mobile_testing/mobile_app_tests/#scheduling-and-alerting
