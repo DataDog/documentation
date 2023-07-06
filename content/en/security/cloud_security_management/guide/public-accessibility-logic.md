@@ -2,12 +2,12 @@
 title: Background for Public Accessibility
 kind: guide
 further_reading:
-- link: "/security/cloud_workload_security/workload_security_rules"
+- link: "/security/cspm"
   tag: "Documentation"
-  text: "Managing Cloud Workload Security Rules"
-- link: "/security/cloud_workload_security/agent_expressions"
+  text: "Cloud Security Posture Management"
+- link: "/security/default_rules/#cat-cloud-security-management"
   tag: "Documentation"
-  text: "Agent Expression Syntax"
+  text: "Out-of-the-box Detection Rules"
 ---
 
 Datadog uses a graph processing framework to map relationships between cloud resources and determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework. 
