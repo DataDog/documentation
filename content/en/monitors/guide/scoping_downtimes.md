@@ -29,52 +29,30 @@ We have a monitor "Average CPU for {{service.name}} hosts in high". In the monit
 1. To schedule a downtime on only one group (in this case, `service:web-store`), enter that group in the `Group scope` field.
 2. Click **Preview affected monitors** to verify that the monitor chosen is still in scope, so alerts for the group `service:web-store` are muted during the scheduled downtime.
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_downtime.jpg" alt="downtime example of 'By Monitor Name' with preview of affected monitors" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_downtime.jpg" alt="downtime example of 'By Monitor Name' with preview of affected monitors" style="width:90%;">}}
 
 After the scheduled downtime begins, only alerts for the group `service:web-store` are muted for this monitor.
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Evaluation graph showing downtime for group service:web-store" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.jpg" alt="Evaluation graph showing downtime for group service:web-store" style="width:90%;">}}
 
 This mutes any alerts that includes the tag `service:web-store`, for example:
 
-| Group Status     | Muted    |
-| ---  | ----------- |
+| Monitor Group                | Muted |
+| ---------------------------  | --- |
 | `host:A`, `service:web-store`| Yes |
 | `host:A`, `host:B`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
 | `host:A`, `host:B`, `service:synthesizer`| No (missing `service:web-store`) |
-
-### Mute monitors for multiple tags
-
-1. To schedule a downtime on multiple groups (for example, `service:web-store` and `env:prod`), enter that group in the `Group scope` field. By default, multiple tags added to the field query as boolean AND logic: `service:webstore` AND `env:prod`. However, you can specify OR logic as well: `service:webstore` OR `env:prod`.
-2. Click **Preview affected monitors** to verify the monitors that are in scope.
-3. After the scheduled downtime begins, alerts are muted for the group:
-`env:prod` **AND** `service:web-store`
-
-| Group Status     | Muted    |
-| ---  | ----------- |
-| `env:prod`, `service:web-store`| Yes |
-| `env:prod`, `env:dev`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
-| `env:dev`, `env:demo`, `service:web-store`| No (missing `env:prod`) |
-| `env:prod`, `env:demo`, `service:synthesizer`| No (missing `service:web-store`) |
-
-{{< img src="monitors/downtimes/downtime_examplebyname2_downtime.jpg" alt="downtime by monitor name with dev environment in scope" style="width:80%;">}}
-
-3. Scheduled downtime begins, and alerts are muted for the group `env:dev` **and** any service related to the `dev` environment.
-
-
-
-4. To schedule a downtime on more than one "group by" (for example, `env:dev` AND `service:web-store`), add the additional scope to the downtime.
 
 {{% /tab %}}
 
 {{% tab "Monitor Tag" %}}
 ## By Monitor Tags
 
-A downtime can be scheduled for monitors based on their monitor tags, and the monitors in scope are multi alert monitors with one group by scope, the `Group scope` field can be used to silence a group that the monitors in scope have in common.
-
 <div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations and tags assigned to the data you are querying.</div>
 
-The `Group scope` field filters the downtime to the data that matches the tags listed. For more information on monitor tags, see the documentation on how to [Manage Monitors][1].
+A downtime can be scheduled for monitors based on their monitor tags, and further scoped down by tag grouped in the monitor query. The `Group scope` field filters the downtime to the data that matches the tags listed. For more information on monitor tags, see the documentation on how to [Manage Monitors][1].
+
+As an example use case, we have several monitors with the same monitor tag `downtime:true`. In the monitor configurations, we set up multi alerts to be sent for each `host` and `service`.
 
 ### Multiple monitors scoped with the same tag
 
@@ -82,7 +60,7 @@ The `Group scope` field filters the downtime to the data that matches the tags l
 2. *Monitor B* is a multi alert monitor for hosts reporting the same metric for `service:web-store`.
 3. Downtime is scheduled for any monitor that has the `downtime:true` monitor tag.
 4. This downtime is constrained to the group `service:web-store`.
-5. Preview affected monitors shows both monitors have the group `service:web-store` in scope.
+5. Click **Preview affected monitors** to verify the monitors that are in scope. In our example, this shows both monitors have the group `service:web-store` in scope.
 
 {{< img src="monitors/downtimes/downtime_examplebytag1_downtime.jpg" alt="downtime example of 'By Monitor Tags' with preview of affected monitors" style="width:80%;">}}
 
@@ -98,9 +76,35 @@ The `Group scope` field filters the downtime to the data that matches the tags l
 
 {{% /tab %}}
 {{< /tabs >}}
+
+### Mute monitors scoped to multiple tags
+
+1. To schedule a downtime on multiple groups (for example, `service:web-store` and `env:prod`), enter that group in the `Group scope` field. By default, multiple tags added to the field result in a boolean *AND* logic query: `service:web-store` AND `env:prod`. However, you can specify *OR* logic as well: `service:web-store` OR `env:prod`.
+2. Click **Preview affected monitors** to verify the monitors that are in scope.
+3. After the scheduled downtime begins, alerts are muted for the group:
+`env:prod` **AND** `service:web-store`
+
+| Monitor Group                                                                    | Muted |
+| -----------                                                                      | ----  |
+| `env:prod`, `service:web-store`                                                  | Yes |
+| `env:prod`, `env:dev`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
+| `env:dev`, `env:demo`, `service:web-store`                                       | No (missing `env:prod`) |
+| `env:prod`, `env:demo`, `service:synthesizer`                                    | No (missing `service:web-store`) |
+
+`env:prod` **OR** `service:web-store`
+
+| Monitor Group                                                                    | Muted |
+| -----------                                                                      | ----  |
+| `env:prod`, `service:web-store`                                                  | Yes |
+| `env:prod`, `env:dev`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
+| `env:dev`, `env:demo`, `service:web-store`                                       | Yes |
+| `env:prod`, `env:demo`, `service:synthesizer`                                    | Yes |
+| `env:demo`, `service:synthesizer`                                                | No (missing both `env:prod` and `service:web-store`) |
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/manage/#monitor-tags
 [2]: /monitors/configuration/#multi-alert
+[3]: /monitors/manage/search/
