@@ -27,7 +27,7 @@ You can install the Agent using Dockerfile or a buildpack. If you use buildpack,
 
 #### Install Agent with Dockerfile
 
-{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
+{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby,php" >}}
 {{< programming-lang lang="go" >}}
 
 
@@ -189,6 +189,41 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+
+Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
+
+```
+# copy the Datadog `serverless-init` into your Docker image
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# Copy and install the Datadog PHP Tracer
+ADD https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php /datadog-setup.php
+RUN php /datadog-setup.php --php-bin=all
+
+# optionally add Datadog tags
+ENV DD_SERVICE=datadog-demo-run-ruby
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# change the entrypoint to wrap your application into the Datadog serverless-init process
+ENTRYPOINT ["/app/datadog-init"]
+
+# use the following for an apache and mod_php based image
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+EXPOSE 8080
+CMD ["apache2-foreground"]
+
+# use the following for an nginx and php-fpm based image
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
+EXPOSE 8080
+CMD php-fpm; nginx -g daemon off;
+```
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
 #### Install Agent with buildpack
 
 [`Pack Buildpacks`][3] provide a convenient way to package your container without using a Dockerfile. This example uses the Google Cloud container registry and Datadog serverless buildpack.
@@ -200,12 +235,14 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 [NodeJS library][3]
 [Java library][4]
 [Ruby library][5]
+[PHP Library][6]
 
 [1]: /tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started 
 [2]: /tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
 [3]: /tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
 [4]: /tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
 [5]: /tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+[6]: /tracing/trace_collection/dd_libraries/php/?tab=containers#install-the-extension
 
 Build your application by running the following command:
 
