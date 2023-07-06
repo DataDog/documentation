@@ -187,9 +187,6 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 [2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 
 {{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
-
-{{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
 Instrument your application with the Datadog Agent by adding the following lines to your Dockerfile. You may need to adjust these examples depending on your existing Dockerfile setup.
