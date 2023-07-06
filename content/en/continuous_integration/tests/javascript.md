@@ -218,7 +218,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Cypress version 10 or later
 
-Use the Cypress API documentation to [learn how to write plugins][101] for `cypress>=10`.
+Use the Cypress API documentation to [learn how to write plugins][1] for `cypress>=10`.
 
 In your `cypress.config.js` file, set the following:
 
@@ -265,7 +265,7 @@ module.exports = defineConfig({
 
 These are the instructions if you're using a version older than `cypress@10`.
 
-1. Set [`pluginsFile`][102] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][103]:
+1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][3]:
    {{< code-block lang="json" filename="cypress.json" >}}
    {
      "pluginsFile": "dd-trace/ci/cypress/plugin"
@@ -281,7 +281,7 @@ These are the instructions if you're using a version older than `cypress@10`.
    {{< /code-block >}}
    <div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
 
-2. Add the following line to the **top level** of your [`supportFile`][104]:
+2. Add the following line to the **top level** of your [`supportFile`][4]:
    {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
    // Your code can be before this line
    // require('./commands')
@@ -321,20 +321,20 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][105] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][106], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][107].
+If the browser application being tested is instrumented using [Browser Monitoring][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
 
 
-[101]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
-[102]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[103]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[104]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[105]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[106]: /real_user_monitoring/browser/#setup
-[107]: /continuous_integration/guides/rum_integration/
+[1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[3]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[6]: /real_user_monitoring/browser/#setup
+[7]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -447,7 +447,7 @@ From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uplo
   <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog.
+If you use Jest, Mocha, Cypress, Playwright, or Cucumber, CI Visibility automatically instruments them and sends the test results to Datadog. If you use an unsupported testing framework or if you have a different testing mechanism, you can instead use the API to report test results to Datadog. **The manual testing API is not compatible with Jest, Mocha, Cypress, Playwright, or Cucumber**.
 
 The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
 
@@ -555,12 +555,12 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=c
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
+[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][9] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][9].
+If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
 
 ### Cypress interactive mode
 
@@ -645,9 +645,9 @@ In addition to that, if [Intelligent Test Runner][20] is enabled, the following 
 [6]: https://istanbul.js.org/
 [7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: /continuous_integration/guides/rum_integration/
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /real_user_monitoring/browser/
+[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[10]: /real_user_monitoring/browser/
+[11]: /continuous_integration/guides/rum_integration/
 [12]: https://docs.cypress.io/api/plugins/before-run-api
 [13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
 [14]: https://docs.cypress.io/api/plugins/after-run-api
