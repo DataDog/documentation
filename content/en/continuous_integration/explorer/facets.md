@@ -124,9 +124,9 @@ Autocomplete based on the content in test runs or pipeline executions of the cur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/type/ci 
+[1]: /monitors/types/ci 
 [2]: /dashboards/ 
 [3]: /notebooks/ 
 [4]: /continuous_integration/explorer
-[5]: /continuous_integration/explorer/search
+[5]: /continuous_integration/search
 [6]: /continuous_integration/explorer/facets
