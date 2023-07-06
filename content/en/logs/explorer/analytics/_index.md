@@ -15,6 +15,9 @@ further_reading:
     - link: '/logs/explorer/export'
       tag: 'Documentation'
       text: 'Export Log Explorer views'
+    - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
+      tag: 'Blog'
+      text: 'Add more context to your logs with Reference Tables'
 ---
 
 ## Overview
@@ -103,6 +106,16 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 
 {{< img src="logs/explorer/group/timeshift_function_logs.jpg" alt="The query editor showing a formula with the week before timeshift function applied to it" style="width:100%;" >}}
 
+## Filter logs based on Reference Tables
+
+<div class="alert alert-warning">Reference Tables and the feature to filter logs based on Reference Tables are in beta. There are no billing implications for defining and querying Reference Tables. There is a limit of 100 Reference Tables per account and a limit of 1000 rows in a Reference Table.</div>
+
+Reference Tables allow you to combine metadata with logs data, providing more information to resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][19] guide.
+
+To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a thread intel reference table:
+
+{{< img src="/logs/explorer/group/reference_tables_logs.png" alt="Use Reference Tables in the Log Explorer" border="true" popup="true" style="width:100%;" >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -124,3 +137,4 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 [16]: https://app.datadoghq.com/logs
 [17]: /dashboards/widgets/treemap
 [18]: /dashboards/widgets/pie_chart
+[19]: /integrations/guide/reference-tables/?tab=manualupload
