@@ -789,43 +789,58 @@ main:
     parent: serverless_aws_lambda
     identifier: libraries_integrations
     weight: 109
+  - name: AWS Step Functions
+    url: serverless/step_functions
+    parent: serverless
+    identifier: serverless_step_functions
+    weight: 2
+  - name: Installation
+    url: serverless/step_functions/installation
+    parent: serverless_step_functions
+    identifier: serverless_step_functions_installation
+    weight: 201
+  - name: Troubleshooting
+    url: serverless/step_functions/troubleshooting
+    parent: serverless_step_functions
+    identifier: serverless_step_functions_troubleshooting
+    weight: 202
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 2
+    weight: 3
   - name: Linux - Code
     url: serverless/azure_app_services/azure_app_services_linux
     parent: serverless_app_services
-    weight: 201
+    weight: 301
   - name: Linux - Container
     url: serverless/azure_app_services/azure_app_services_container
     parent: serverless_app_services
-    weight: 202
+    weight: 302
   - name: Windows - Code
     url: serverless/azure_app_services/azure_app_services_windows
     parent: serverless_app_services
-    weight: 203
+    weight: 303
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
     identifier: serverless_container_apps
-    weight: 3
+    weight: 4
   - name: Google Cloud Run
     url: serverless/google_cloud_run
     parent: serverless
     identifier: serverless_gcr
-    weight: 4
+    weight: 5
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 5
+    weight: 6
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 6
+    weight: 7
   - name: Cloud Cost
     url: cloud_cost_management/
     identifier: cloud_cost_top_level
