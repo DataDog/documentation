@@ -324,7 +324,7 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 ## Connect forwarders to the Worker
 After you install and configure the Observability Pipelines Worker to send logs to your Splunk index, you must update your existing collectors to point to the Worker.
 
-For most collectors that exist, simply changing the URL to the load balancer provisioned by these configurations, and updating the token, should suffice.
+For most collectors, changing the URL to the load balancer provisioned by these configurations, and updating the token, should suffice.
 
 At this point, your logs should be going to the Worker and be available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
