@@ -359,10 +359,11 @@ Rules for Python to avoid inappropriate wording in the code and comments.
 
 **Ruleset ID:** `python-pandas`
 
-A set of rules to check that pandas code is used the right way
- - `import` declarations follow coding guidelines
- - avoid deprecated code and methods
- - avoid inefficient code whenever possible
+A set of rules to check that pandas code is used appropriately.
+
+ - Ensures `import` declarations follow coding guidelines.
+ - Avoid deprecated code and methods.
+ - Avoid inefficient code whenever possible.
 
 {{< sa-rule-list "python_pandas_data" >}}
 
