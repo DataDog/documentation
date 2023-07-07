@@ -29,15 +29,15 @@ The [identity health score][4] represents the percentage of your IAM resources t
 
 *Identity health score on CSM overview page.*
 
-## Review active identity risks
+## Review active identity risk detections
 
-View a list of available identity risk rules, as well as your organization's active identity risks on the [Identity Risks explorer page][3]. Use the **Group by** options to filter by **Rule**, **Resources**, or **None** (detections).
+View a list of available identity risk rules, as well as your organization's active identity risk detections on the [Identity Risks explorer page][3]. Use the **Group by** options to filter by **Rule**, **Resources**, or **None** (detections).
 
 View additional details by selecting a rule, resource, or detection.
 
 {{< img src="security/identity_risks/identity-risks-explorer.png" alt="CSM Identity Risks explorers page" width="100%">}}
 
-When viewing a resource, use the **Relationships** tab to view a graphical representation of the connections with other resources. The view includes both benign and at-risk connections and shows how a particular resource is at risk and for what reasons. 
+When viewing an individual resource, use the **Relationships** tab to view a graphical representation of the connections with other resources. The view includes both benign and at-risk connections and shows how a particular resource is at risk and for what reasons. 
 
 You can also review the configuration of the resource on the **Resource** tab, and a chronological history of the identity risks that have been detected for the resource on the **Timeline** tab.
 

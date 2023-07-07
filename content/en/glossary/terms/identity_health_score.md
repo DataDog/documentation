@@ -11,24 +11,20 @@ The identity health score represents the percentage of your IAM resources that a
 
 **Formula**: `(# of CIEM detections passed, weighed by severity) / (total # of CIEM detections run, weighed by severity)`
 
-In the following table, 
+In the following table, there are five IAM resources (R1-R5) with high, medium, and low risk detections. CSM Identity Risks assigns a weighting of 3 for having no high risk detections, 2 for having no medium risk detections, and 1 for having no low risk detections.
 
-For example, if you have five IAM resources (R1-R5) and CSM Identity Risks 
+| Resource | Detections failed       | Maximum possible identity health | Earned identity health              |
+|----------|-------------------------|----------------------------------|-------------------------------------|
+| R1       | 1 High, 1 Medium        | 3 + 2 + 1                        | 1 (for passing Low)                 |
+| R2       | 1 Medium                | 3 + 2 + 1                        | 3 + 1 (for passing High and Low)    |
+| R3       | 1 High, 1 Medium, 1 Low | 3 + 2 + 1                        | 0 (for passing none)                |
+| R4       | 1 Low                   | 3 + 2 + 1                        | 3 + 2 (for passing High and Medium) |
+| R5       | 0                       | 3 + 2 + 1                        | 3 + 2 + 1 (for passing all)         |
+| Total    |                         | 30                               | 16                                  |
 
+In this example, the identity health score = `Earned identity health / Maximum possible identity health`, or to put it another way, `16 / 30 = 53.3%`.
 
- with CIEM having 3 detections D1 (High - 3), D2 (Medium - 2), D3 (Low - 1) in the following manner:
+**Notes**: 
 
-| Resource | Detections failed | Maximum possible identity health          | Earned identity health        |
-|----------|-------------------|-------------------------------------------|-------------------------------|
-| R1       | D1, D2            | 3 + 2 + 1 (3 for D1, 2 for D2, 1 for D3)  | 1 (for passing D3)            |
-| R2       | D2                | 3 + 2 + 1 (3 for D1, 2 for D2, 1 for D3)  | 3 + 1 (for passing D1 and D3) |
-| R3       | D1, D2, D3        | 3 + 2 + 1 (3 for D1, 2 for D2, 1 for D3)  | 0 (for passing none)          |
-| R4       | D4                | 3 + 2 + 1  (3 for D1, 2 for D2, 1 for D3) | 3 + 2 (for passing D1 and D2) |
-| R5       | -                 | 3 + 2 + 1 (3 for D1, 2 for D2, 1 for D3)  | 3 + 2 + 1 (for passing all)   |
-| Total    |                   | 30                                        | 16                            |
-
-In this example, the identity health score = `Earned identity health / Maximum possible identity health (16 / 30 = 53.3%)`.
-
-**Note**: In an actual environment, not all identity risk detections apply to all resources. As a result, the "Maximum possible identity health" depends on the CIEM detections that are run on the resource.
-
-As Datadog adds more CIEM detections or customers change the number of IAM resources, the scores will change. Such changes reflect a change either in Datadog’s coverage or in the customers’ posture.
+- The numbers in the table are for example purposes only.
+- In an actual environment, not all identity risk detections apply to all resources. As a result, the maximum possible identity health depends on the CIEM detections that are run on the resource.
