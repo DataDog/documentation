@@ -74,7 +74,7 @@ PgBouncer チェックは、接続プールメトリクスを追跡し、アプ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 PgBouncer チェックは [Datadog Agent][1] パッケージに含まれています。PgBouncer ノードに追加でインストールする必要はありません。
 

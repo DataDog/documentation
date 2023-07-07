@@ -73,14 +73,14 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
   トリミングされたアプリをインスツルメンテーションするには、プロジェクトで <a href="https://www.nuget.org/packages/Datadog.Trace.Trimming/">Datadog.Trace.Trimming</a> NuGet パッケージを参照してください。トリミングされたアプリのサポートはベータ版です。
 </div>
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. [APM に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
 2. [トレーサーをインストールします。](#install-the-tracer)
 3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [ライブデータを表示します。](#view-your-live-data)
 
-### APM に Datadog Agent を構成する
+### インストール
 
 インスツルメントされたアプリケーションからトレースを受信するように [Datadog Agent をインストールして構成][2]します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。
 

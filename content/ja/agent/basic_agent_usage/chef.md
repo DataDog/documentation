@@ -47,7 +47,7 @@ Datadog Chef クックブックは 12.7 以降の `chef-client` と互換性が�
 
 **Chef 13 ユーザー**: Chef 13 と `chef_handler` 1.x を使用している場合、`dd-handler` レシピを使用できないことがあります。現在のところ、依存性のあるクックブック `chef_handler` を 2.1 以降へアップデートすることで、これを回避できます。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. [Berkshelf][5] または [Knife][6] を使用して、クックブックを Chef サーバーに追加します。
     ```text

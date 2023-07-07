@@ -29,7 +29,7 @@ Amazon Transit Gateway を使用して、仮想プライベートクラウド (V
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

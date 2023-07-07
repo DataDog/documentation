@@ -34,7 +34,7 @@ Datadog Azure インテグレーションは、Azure Diagnostic Extension から
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][3]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

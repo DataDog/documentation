@@ -27,7 +27,7 @@ Salesforce Marketing Cloud は、クラウドベースのマーケティング�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 インストールは必要ありません。
 

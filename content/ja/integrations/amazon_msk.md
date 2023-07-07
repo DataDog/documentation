@@ -35,7 +35,7 @@ Amazon Managed Streaming for Apache Kafka (MSK) は、Apache Kafka を使用し�
 
 Amazon MSK クローラーを有効にして、CloudWatch からの MSK メトリクスを Datadog で確認できるようにします。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
