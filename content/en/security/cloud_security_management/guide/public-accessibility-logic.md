@@ -164,8 +164,8 @@ An [EKS cluster][30] (`aws_eks_cluster`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|`endpoint_public_access` is set to `true` in the cluster’s configuration|This setting makes the cluster publicly accessible, when combined with an open public CIDR |
-|The cluster’s `public_access_cidrs` contains an open CIDR block (`"0.0.0.0/0"`)|You can limit the CIDR blocks that can access the public endpoint of the EKS cluster. An open CIDR block means anyone on the internet can access the endpoint.|
+|`endpoint_public_access` is set to `true` in the cluster’s configuration.|This setting makes the cluster publicly accessible when combined with an open public CIDR. |
+|The cluster’s `public_access_cidrs` contains an open CIDR block (`"0.0.0.0/0"`).|You can limit the CIDR blocks that can access the public endpoint of the EKS cluster. An open CIDR block means anyone on the internet can access the endpoint.|
 
 See [Amazon EKS cluster endpoint access control][31] for more information on public EKS clusters.
 
