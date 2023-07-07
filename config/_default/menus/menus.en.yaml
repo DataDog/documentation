@@ -3280,7 +3280,7 @@ main:
     parent: ux_monitoring_heading
     identifier: mobile_testing
     weight: 210000
-  - name: Mobile Tests
+  - name: Mobile App Tests
     url: /mobile_testing/mobile_app_tests
     parent: mobile_testing
     identifier: mobile_testing_mobile_app_tests
