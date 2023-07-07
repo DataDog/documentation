@@ -9,7 +9,7 @@ title: オーケストレータエクスプローラー
 
 Datadog Agent と Cluster Agent は、[オーケストレータエクスプローラー][1]用に Kubernetes リソースを取得できます。この機能により、特定のネームスペースまたはアベイラビリティーゾーンのポッド、デプロイメント、その他の Kubernetes の概念の状態を監視したり、デプロイメント内で失敗したポッドのリソース仕様を確認したり、ノードアクティビティを関係するログに関連付けたりすることが可能になります。
 
-オーケストレータエクスプローラーでは、**Agent バージョン >= 7.27.0** および **Cluster Agent バージョン >= 1.11.0** が必要です。 
+オーケストレータエクスプローラーでは、**Agent バージョン >= 7.27.0** および **Cluster Agent バージョン >= 1.11.0** が必要です。
 
 **注**: Kubernetes バージョン 1.25 以上の場合、必要な最小限の Cluster Agent のバージョンは 7.40.0 です。
 
@@ -42,9 +42,9 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-[公式の Helm チャート][1]を利用している場合は、オーケストレータエクスプローラーがデフォルトで有効になります。
+[公式の Helm チャート][3]を利用している場合は、オーケストレータエクスプローラーがデフォルトで有効になります。
 
-検証のため、 [`values.yaml`][2] ファイルで `orchestratorExplorer.enabled` パラメーターが `true` に設定されていることを確認してください。
+検証のため、 [`values.yaml`][4] ファイルで `orchestratorExplorer.enabled` パラメーターが `true` に設定されていることを確認してください。
 
 ```yaml
 datadog:
@@ -57,14 +57,13 @@ datadog:
 
 次に、Helm チャートをアップグレードします。
 
-
-[1]: https://github.com/DataDog/helm-charts
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[3]: https://github.com/DataDog/helm-charts
+[4]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "手動" %}}
-手動セットアップについては、[DaemonSet を使用してオーケストレータエクスプローラーをセットアップする][1]を参照してください。
+手動セットアップについては、[DaemonSet を使用してオーケストレータエクスプローラーをセットアップする][5]を参照してください。
 
-[1]: /ja/infrastructure/faq/set-up-orchestrator-explorer-daemonset
+[5]: /ja/infrastructure/faq/set-up-orchestrator-explorer-daemonset
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -104,9 +103,12 @@ datadog:
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="プロセスに対して開かれた、サイドパネルのリソースビュー。" style="width:80%;">}}
 
-このパネルはトラブルシューティングに加えて、選択したコンテナやリソースに関する次のような情報を検索するときに便利です。
+サイドパネルの **YAML** タブには、リソースの完全な定義が表示されます。**Agent バージョン 7.44.0** 以降は、定義の履歴も 7 日分表示されるため、時間の経過とともに各バージョンでどのような変更が行われたのかを比較することができます。
 
-* **YAML**: リソースの詳細な YAML の概要。
+{{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="yaml の履歴機能が表示されたサイドパネルのリソースビュー" style="width:80%;">}}
+
+その他のタブには、選択したリソースのトラブルシューティングに利用できる詳しい情報が表示されます。
+
 * [**Logs**][9]: コンテナまたはリソースからログを確認。関連ログを Logs Explorer で表示するには、ログをクリックします。
 * [**APM**][11]: コンテナまたはリソースのトレース (日付、サービス、期間、メソッド、トレースのステータスコードを含む) を確認。
 * [**Metrics**][10]: コンテナまたはリソースのライブメトリクスを確認。グラフを全画面表示したり、スナップショットを共有したりできるほか、このタブからエクスポートすることが可能です。
