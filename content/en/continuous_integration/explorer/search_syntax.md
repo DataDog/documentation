@@ -89,3 +89,4 @@ If your tags don't follow [tags best practices][5] and don't use the `key:value`
 [2]: /getting_started/tagging/using_tags
 [3]: /infrastructure
 [4]: /integrations
+[5]: /getting_started/tagging/#define-tags
