@@ -29,7 +29,7 @@ A Trace Query is composed of one or more [span queries](#span-query), combined t
 
 ### Span Query
 
-Query for spans from a specific environment, service or endpoint using the existing Trace Explorer query syntax. Refer to the [query syntax][1] documentation for more information on how to query spans.
+Query for spans from a specific environment, service or endpoint using the existing Trace Explorer query syntax. Use autocomplete suggestions to view facets and recent queries. Refer to the [query syntax][1] documentation for more information on how to query spans.
 
 Click `Add another span query` to add a new span query and use it in the trace query statement.
 
@@ -46,11 +46,11 @@ Operator | Description | Example
 
 ## Flow Map
 
-{{< img src="tracing/trace_queries/trace_flow_map.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query Editor" >}}
+{{< img src="tracing/trace_queries/trace_flow_map.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Flow Map" >}}
 
 The Flow Map helps you understand the request path and service dependencies from the resulting traces matching the Trace Query. Use the map to spot error paths, unusual service depencencies, or abnormally high request rates to a database.
 
-The Flow Map is powered by a sample of the ingested traffic. See below [what data are Trace Queries based on](#what-data-are-trace-queries-based-on)
+**Note**: The Flow Map is powered by a sample of the ingested traffic. See below [what data are Trace Queries based on](#what-data-are-trace-queries-based-on)
 
 Service nodes matching span queries are highlighted to let you understand which parts of the trace your query conditions are targeting.
 
@@ -62,7 +62,7 @@ Click with the map nodes to filter our traces that do not contain a dependency o
 
 ## Trace List
 
-{{< img src="tracing/trace_queries/trace_list.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query Editor" >}}
+{{< img src="tracing/trace_queries/trace_list.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace List" >}}
 
 The Trace list displays a list of 50 sample traces matching the query and within the selected time range.
 Hover on the Latency Breakdown to get a sense of where (in which services) the time is spent during the request execution.
@@ -71,15 +71,34 @@ Hover on the Latency Breakdown to get a sense of where (in which services) the t
 
 ## Analytics
 
-timeseries, top list
+Pivot to `Visualize as Timeseries`, `Top List`, `Table` etc... to aggregate results over time, grouped by one or multiple dimensions. Refer to the [Span Visualizations][2] for more information on the aggregation options. 
 
-## What data are Trace Queries based on
+In addition to the already existing aggregation options, you need to select from which query you want to aggregate the spans from. Select the query matching the spans from which you're using the tags and attributes in the aggregation options.
 
-1% flat sampling
+For instance, if you're querying for traces containing a span from the service `web-store` (Query **A**) and a span from the service `payments-go` with some errors (Query **B**), and visualising a count of spans grouped by `@merchant.tier`, use spans from the Query **A** as `merchant.tier` is an attribute from the spans of the service `web-store`, not from the service `payments-go`.
 
+{{< img src="tracing/trace_queries/timeseries_using_spans_from.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Timeseries view" >}}
+
+
+## What data are Trace Queries based on ?
+
+{{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
+
+
+Trace Queries are based on a **uniform 1% sample** of [ingested spans][3].
+
+The flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. Spans indexed by the 1% sampling can also be queried/found in the [Trace explorer][4].
+
+Spans indexed by [tag-based retention filters][5] cannot be used in Trace Queries as current retention filters do not guarantee that all the spans from a trace are indexed.
+
+**Note**: Spans indexed by the flat 1% sampling are not counted towards the usage of indexed spans, and so **do not impact your bill**.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_explorer/query_syntax/
+[2]: /tracing/trace_explorer/visualize/#timeseries
+[3]: /tracing/trace_pipeline/ingestion_controls/
+[4]: /tracing/trace_explorer/
+[5]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
