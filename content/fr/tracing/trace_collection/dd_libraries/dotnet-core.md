@@ -177,7 +177,7 @@ Pour installer le traceur .NET à l'échelle d'une machine, procédez comme suit
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 
-Pour les images Docker exécutées sous LInux, configurez l'image de façon à exécuter le script `createLogPath.sh` :
+{{% tab "NuGet" %}}
 
 <div class="alert alert-warning">
   <strong>Remarque :</strong> cette installation n'instrumente pas les applications s'exécutant dans IIS. Pour ces applications, suivez le processus d'installation Windows à l'échelle d'une machine.
