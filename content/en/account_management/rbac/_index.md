@@ -183,7 +183,7 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 ## Restrict access to individual resources
 
-Some resources allow you to restrict access to individual resources by roles, teams, or users.
+Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta).
 
 The resources supporting granular access controls include:
 - [Dashboards][11]
