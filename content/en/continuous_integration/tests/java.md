@@ -44,6 +44,8 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
+<div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
+
 {{% ci-agentless %}}
 
 {{% /tab %}}

@@ -71,6 +71,8 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
+<div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
+
 {{% ci-agentless %}}
 
 {{% /tab %}}
