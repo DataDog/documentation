@@ -69,7 +69,9 @@ There are no provider-specific requirements for RPM-based Linux.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Setting up the Splunk Index
+## Setting up the Splunk index
+
+<div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
 In order to receive logs from the Observability Pipelines Worker, you will need to provision a HEC input and HEC token on the index.
 
 Under **Settings > Data Inputs**, add a new HTTP Event Collector input. You can name it whatever you wish.
