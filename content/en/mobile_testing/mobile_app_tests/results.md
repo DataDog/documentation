@@ -13,7 +13,10 @@ further_reading:
 
 ## Overview
 
-The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.
+Click on a mobile app test on the [**Synthetic Tests** page][11] to see the Test Details page. The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.
+
+{{< img src="mobile_testing/test_details.png" alt="The Test Details page" style="width=80%" >}}
+
 
 Test runs appear in a test details page after a Synthetic mobile app test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
@@ -92,7 +95,7 @@ Common mobile app test errors include:
 
 ## Test events
 
-Alerts from your Synthetic test monitors appear in the **Events** tab under **Test Runs**. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][7] and enter `Event Type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
+Alerts from your Synthetic test monitors appear in the **Events** tab under **Test Runs**. To search for alerts from Synthetic tests in the Events Explorer, navigate to [**Events** > **Explorer**][7] and enter `@evt.type:synthetics_alert` in the search query. For more information, see [Using Synthetic Test Monitors][1].
 
 ## Further reading
 
@@ -101,10 +104,11 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [1]: /synthetics/guide/synthetic-test-monitors/
 [2]: /continuous_testing/cicd_integrations/configuration/?tab=npm#test-files
 [3]: /continuous_testing/cicd_integrations
-[4]: /mobile_testing/mobile_app_tests/#define-scheduling-and-alert-conditions
+[4]: /mobile_testing/mobile_app_tests/#scheduling-and-alert
 [5]: /synthetics/guide/uptime-percentage-widget/
 [6]: /help
-[7]: /service_management/events/explorer/
+[7]: https://app.datadoghq.com/event/explorer
 [8]: /getting_started/synthetics/browser_test#select-locations
 [9]: /synthetics/private_locations
 [10]: /mobile_testing/mobile_app_tests/steps
+[11]:  https://app.datadoghq.com/synthetics/tests

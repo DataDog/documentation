@@ -21,7 +21,7 @@ cascade:
     tags: ['mobile_testing']
 ---
 
-Mobile Application Testing allows you to test and monitor key business flows for Android and iOS using real devices. 
+Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. 
 
 ## Record mobile app tests
 

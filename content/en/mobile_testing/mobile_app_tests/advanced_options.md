@@ -25,11 +25,11 @@ This page describes advanced options for Synthetic mobile app tests.
 
 ### Datadog algorithm
 
-Flakiness is a pain point in end-to-end testing because tests occasionally fail when a frontend team implements changes, causing an identifier in your test to alert instead of an actual application issue.
+Flakiness is a pain point in end-to-end testing because tests occasionally fail. When a frontend team implements a change, an identifier in your test may alert on it instead of an actual application issue.
 
-To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in mobile app tests. A small change in the UI may modify an element (for example, moving it to another location). The mobile app test automatically locates the element again based on points of reference that were not affected by the change. 
+To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in mobile app tests. A small change in the UI may modify an element (for example, moving it to another location). The mobile app test automatically locates the element again based on points of reference that are not affected by the change. 
 
-When the test runs successfully, the mobile app test recomputes (or "self heals") any broken locators with updated values, ensuring your tests do not break from simple UI updates and that your tests are automatically adapting to your mobile application's UI. 
+When the test runs successfully, the mobile app test recomputes (or "self heals") any broken locators with updated values. This ensures your tests do not break from simple UI updates and your tests are automatically adapting to your mobile application's UI. 
 
 To ensure that your mobile app test does not validate an unexpected change, use [assertions][1] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
 
@@ -45,7 +45,7 @@ Custom selectors are created by performing a [step in the recorder][1] (such as 
 
 If a mobile app test cannot locate an element, it retries the step for 60 seconds by default.
 
-You can customize this time out up to 60 seconds if you want your test to wait for less time to be able to find the step targeted element.
+You can customize this timeout up to 60 seconds if you want your test to wait for less time to be able to find the step targeted element.
 
 {{< img src="mobile_testing/timeout.png" alt="Wait for 30 seconds before declaring the test step as failed" style="width:50%" >}}
 

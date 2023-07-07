@@ -1,6 +1,7 @@
 ---
 title: Mobile App Tests
 kind: documentation
+is_beta: true
 description: Learn how to start monitoring key business flows with mobile app tests.
 further_reading:
 - link: "/mobile_testing/settings"
@@ -11,11 +12,13 @@ further_reading:
   text: "Learn how to create Synthetic browser tests"
 ---
 
-<div class="alert alert-info">Mobile Application Testing is in private beta. To register, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" target="_blank">request access</a>.</div>
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
+Mobile Application Testing is in private beta. Register to request access!
+{{< /callout >}} 
 
 ## Overview
 
-Mobile Application Testing allows you to test and monitor key business flows for Android and iOS using real devices. 
+Mobile Application Testing allows you to test and monitor key business flows for Android and iOS applications using real devices. 
 
 Mobile app tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][1].
 
@@ -113,7 +116,7 @@ For more information, see [Continuous Testing and CI/CD][1].
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][8] can create, edit, and delete Synthetic mobile app tests. To get create, edit, and delete access to Synthetic mobile app tests, upgrade your user to one of those two [default roles][8].
+By default, only users with the Datadog Admin and Datadog Standard roles can create, edit, and delete Synthetic mobile app tests. To get create, edit, and delete access to Synthetic mobile app tests, upgrade your user to one of those two [default roles][8].
 
 If you are using the [custom role feature][9], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 

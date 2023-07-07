@@ -1,6 +1,7 @@
 ---
 title: Mobile Application Testing Settings
 kind: documentation
+is_beta: true
 further_reading:
 - link: "/mobile_testing/mobile_app_tests"
   tag: "Documentation"
@@ -11,7 +12,9 @@ further_reading:
 ---
 {{< jqmath-vanilla >}}
 
-<div class="alert alert-info">Mobile Application Testing is in private beta. To register, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" target="_blank">request access</a>.</div>
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
+Mobile Application Testing is in private beta. Register to request access!
+{{< /callout >}} 
 
 ## Overview
 
@@ -65,7 +68,7 @@ To edit or delete a version of a mobile application, hover over a version in the
 
 To add a version of an existing mobile application:
 
-1. Hover over a mobile application in the **Mobile Applications List** and click **Add new version**. 
+1. Hover over the `+` icon in a mobile application in the **Mobile Applications List** and click **Add new version**. 
 2. Upload an [`.apk`][4] or `.ipa` file.
 3. Enter a version name. 
 4. Optionally, select **Mark this version as latest**.
@@ -83,7 +86,7 @@ For more information about parallelizing your Synthetic tests, see [Continuous T
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][2] can access the Synthetic Monitoring **Applications List** page. To get access to the **Applications List** page, upgrade your user to one of those two [default roles][2]. 
+By default, only users with the Datadog Admin and Datadog Standard roles can access the Synthetic Monitoring **Applications List** page. To get access to the **Applications List** page, upgrade your user to one of those two [default roles][2]. 
 
 If you are using the [custom role feature][3], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions. 
 

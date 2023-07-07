@@ -6,7 +6,7 @@ further_reading:
 - link: "/mobile_testing/mobile_app_tests/"
   tag: "Documentation"
   text: "Learn about Synthetic mobile tests"
-- link: "/mobile_testing/advanced_options/"
+- link: "/mobile_testing/mobile_app_tests/advanced_options"
   tag: "Documentation"
   text: "Learn about advanced options in mobile tests"
 ---
@@ -31,7 +31,7 @@ To stop recording, click **End Device Session** or **Save & Quit**.
 
 ## Manually added steps
 
-In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using [assertions](#assertion) and [special actions](#special-actions)), update steps by clicking into a previously recorded step or [reorder a step](#manage-step-order) by dragging them up and down the step list.
+In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using [assertions](#assertion) and [special actions](#special-actions)). You can also update steps by clicking into a previously recorded step or [reorder steps](#manage-step-order) by dragging them up and down the step list.
 
 ### Assertion
 
