@@ -154,7 +154,7 @@ An [EBS snapshot][28] (`aws_ebs_snapshot`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|It has a `create_volume_permission` set to `all`|Each snapshot contains all of the information that is needed to restore the snapshot’s data to a new EBS volume. If anyone can create a volume from the snapshot, that information is publicly accessible.|
+|`create_volume_permission` is set to `all`.|Each snapshot contains all of the information that is needed to restore the snapshot’s data to a new EBS volume. If anyone can create a volume from the snapshot, that information is publicly accessible.|
 
 See [Share an Amazon EBS snapshot][29] for information about public EBS snapshots and how to make them private.
 
