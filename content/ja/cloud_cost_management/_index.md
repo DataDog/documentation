@@ -218,8 +218,8 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 1. Exports タブで、エクスポートの Storage Account をクリックし、移動します。
 2. Containers タブをクリックします。
 3. 請求書の入っているストレージコンテナを選びます。
-4. Access Control (IAM) タブを選択します。
-5. **Add** をクリックします。
+4. Access Control (IAM) タブを選択し、**Add** をクリックします。
+5. **Add role assignment** を選択します。
 6. **Storage Blob Data Reader** を選択し、Next をクリックします。
 7. これらの権限を、Datadog と接続した App Registration のいずれかに割り当てます。
     - **Select members** をクリックし、App Registration の名前を選んで、**Select** をクリックします。
@@ -232,7 +232,7 @@ Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure �
 
 1. [サブスクリプション][4]に移動し、サブスクリプションの名前をクリックします。
 2. Access Control (IAM) タブを選択します。
-3. **Add** をクリックします。
+3. **Add** をクリックし、次に **Add role assignment** をクリックします。
 4. **Cost Management Reader** を選択し、Next をクリックします。
 5. これらの権限をサブスクリプションに割り当てます。
 

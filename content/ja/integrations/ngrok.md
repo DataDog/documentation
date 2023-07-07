@@ -108,11 +108,9 @@ ngrok イベントを Datadog に転送するには、2 つの構成が必要で
 - event_type
 - object.conn.server_name
 - object.conn.client_ip
-- object.conn.server_name
 - object.http.response.status_code
 - object.http.request.method
 - object.http.request.url.path
-- object.conn.server_name
 
 ## トラブルシューティング
 

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: shoreline-software-license
 app_uuid: d1da5605-5ef5-47bc-af8d-16005945e21e
 assets: {}

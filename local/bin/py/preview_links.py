@@ -19,6 +19,6 @@ with open('.github/preview-links-template.md', 'w') as f:
                 deleted = args.deleted.split(" ") if args.deleted else False,
                 renamed = args.renamed.split(" ") if args.renamed else False,
                 modified = args.modified.split(" ") if args.modified else False,
-                added = args.added.split(" ") if args.added else False            
+                added = args.added.split(" ") if args.added else False
                 )
             )

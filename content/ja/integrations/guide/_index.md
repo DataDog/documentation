@@ -43,10 +43,15 @@ title: インテグレーションガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Azure ガイド" >}}
+    {{< nextlink href="integrations/guide/azure-manual-setup" tag=" Azure" >}}Azure 手動セットアップガイド{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-native-manual-setup" tag=" Azure" >}}Azure Native 手動セットアップガイド{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-cloud-adoption-framework" tag=" Azure" >}}Azure Cloud Adoption Framework と Datadog{{< /nextlink >}}
-{{< nextlink href="integrations/guide/azure-status-metric" tag="Azure" >}}Azure のステータスとカウントのメトリクス{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-status-metric" tag="Azure" >}}Azure のステータスとカウントのメトリクス{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-portal" tag=" Azure" >}}Azure ネイティブインテグレーションの管理{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-programmatic-management" tag=" Azure" >}}Azure インテグレーションプログラム管理ガイド{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-native-programmatic-management" tag=" Azure" >}}Azure Native インテグレーションプログラム管理ガイド{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-troubleshooting" tag="Azure" >}}Azure のトラブルシューティング{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/azure-architecture-and-configuration" tag=" Azure" >}}Azure アーキテクチャと構成{{< /nextlink >}}
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag="Azure" >}}Azure VM がメトリクスなしでアプリに表示される{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag="Azure" >}}インフラストラクチャーリストのパワーダウンした Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Azure Datadog 拡張機能をインストールするコマンド{{< /nextlink >}}

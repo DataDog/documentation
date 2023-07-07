@@ -84,6 +84,8 @@ The **Performance** tab provides several ways to view how your services are perf
 The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment. 
 The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][12] on APM [trace metrics][13]. This dropdown does not affect how many services you see in the list.  
 
+You can change the default environment in **APM > Setup & Configuration > Settings**. 
+
 {{< img src="tracing/service_catalog/svc-cat-perf-view.png" alt="Performance view filtered on env:* and scoped to cluster-name:*" style="width:100%;" >}}
 
 Sort the table by clicking columns to reveal services that:
@@ -147,6 +149,7 @@ The Service Catalog write permission allows a user to modify service catalog dat
 - Inserting or Updating a Service Definition with the `POST /api/v2/services/definitions` endpoint
 - Deleting a Service Definition with the `DELETE /api/v2/services/definition/<service_name>` endpoint
 - Completing the onboarding process in the Discover Services UI
+- Updating service metadata in the UI
 
 The permission is enabled by default in the **Datadog Admin Role** and **Datadog Standard Role**.
 

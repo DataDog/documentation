@@ -14,15 +14,15 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
-| Vulnerability Management for Open Source Software (OSS) | not supported |
-| Vulnerability Management for Code (beta) | not supported |
+| Vulnerability Management for Open Source Software (OSS) | 1.11.0 |
+| Vulnerability Management for Code-level (beta) | not supported |
 
 The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
 
 <div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Ruby framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 
 ### Supported deployment types
-|Type   | Threats support |  Vulnerabilities support |
+|Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  |  |
 | Kubernetes | {{< X >}}  | | 
@@ -43,20 +43,16 @@ These are supported on the following architectures:
 - Alpine Linux (musl) x86-64, aarch64
 - macOS (Darwin) x86-64, arm64
 
-
-
-
 ### Supported web servers
 - Attacker source HTTP request details
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
 - **Vulnerability Management for Code** is not supported
 
 | Framework                | Threat Detection supported? | Threat Protection supported? |
-| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
+| ------------------------ | ----------- | --------------- |
 | Rack          |  {{< X >}} |  {{< X >}} |
 | Rails         |  {{< X >}} |  {{< X >}} |
 | Sinatra       |  {{< X >}} |  {{< X >}} |
@@ -78,8 +74,7 @@ These are supported on the following architectures:
 - Request-based blocking
 
 ##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
+- **Vulnerability Management for Code-level** is not supported
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -97,9 +92,8 @@ These are supported on the following architectures:
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
-- **Vulnerability Management for Code** is not supported
-- **Threat Protection** works at the HTTP request (input) layer, and so works for all databases by default
+- **Vulnerability Management for Code-level** is not supported
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below. 
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|

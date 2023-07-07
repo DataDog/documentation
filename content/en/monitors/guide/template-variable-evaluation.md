@@ -63,6 +63,7 @@ The following functions use the value of a numerical template variable as the in
 | Function            | Description|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | round(var)          | Returns var rounded to the nearest integer|
+| round(var, n)       | Returns var rounded to a specified number of digits (n).<br>For example: round(12.376, 2) = 12.38|
 | ceil(var)           | Returns the ceiling of var (the smallest integer that is greater than or equal to var)|
 | floor(var)          | Returns the floor of var (the largest integer that is less than or equal to var)|
 | sgn(var)            | Returns the value of the sign function evaluated at var:<br>sgn(var) = 1 if var > 0<br>sgn(var) = 0 if var = 0<br>sgn(var) = -1 if var < 0|
