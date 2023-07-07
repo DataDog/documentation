@@ -329,7 +329,7 @@ For most collectors that exist, simply changing the URL to the load balancer pro
 At this point, your logs should be going to the Worker and be available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
 ## Working with data
-The sample configurations provided does the following:
+The sample configurations provided do the following:
 
 - **Tag logs coming through the Observability Pipelines Worker.** This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - **Dual-writes to Datadog.** This demonstrates how easy it is to write to multiple destinations.
