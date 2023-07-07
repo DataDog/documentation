@@ -175,7 +175,7 @@ An [SQS Queue][32] (`aws_sqs_queue`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The queue has a policy that allows any principal (principal set to `"*"`) to perform actions unconditionally (`statement_has_condition` set to `false`)|This setting makes the queue accessible by everyone in the world or by any authenticated AWS user.|
+|The queue has a policy that allows any principal (principal set to `"*"`) to perform actions unconditionally (`statement_has_condition` set to `false`).|This setting makes the queue accessible to everyone in the world or to any authenticated AWS user.|
 
 See [Amazon SQS security best practices][33] for more information about public SQS queues.
 
