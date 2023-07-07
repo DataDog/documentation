@@ -86,7 +86,8 @@ After you add the input, Splunk creates a token for you. The token is typically 
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment (and the token you created above). Then, install it in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk index](setting-up-the-splunk-index).
+3. Install the Helm chart in your cluster with the following commands:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
