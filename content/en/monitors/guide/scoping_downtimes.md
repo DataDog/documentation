@@ -22,7 +22,7 @@ Use group scope to apply additional filters to your downtime schedule and have m
 {{% tab "Monitor Name" %}}
 ## By Monitor Name
 
-As an example use case, we have a monitor "Average CPU for {{service.name}} hosts in high" that we want to mute. In the monitor configurations, we set up multi alerts to be sent for each `host` and `service`. 
+As an example use case, you have a monitor "Average CPU for {{service.name}} hosts in high" that you want to mute. In the monitor configurations, you set up multi alerts to be sent for each `host` and `service`. 
 
 ### Mute monitors for a specific tag
 
@@ -52,7 +52,7 @@ This mutes any alerts that includes the tag `service:web-store`, for example:
 
 A downtime can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. The `Group scope` field filters the downtime to the data that matches the tags listed. For more information on monitor tags, see the documentation on how to [Manage Monitors][1].
 
-As an example use case, we have several monitors with the same monitor tag `downtime:true` that we want to mute. In the monitor configurations, we set up multi alerts to be sent for each `host` and `service`.
+As an example use case, you  have several monitors with the same monitor tag `downtime:true` that you want to mute. In the monitor configurations, you set up multi alerts to be sent for each `host` and `service`.
 
 ### Multiple monitors scoped with the same tag
 
@@ -60,7 +60,7 @@ As an example use case, we have several monitors with the same monitor tag `down
 2. *Monitor B* is a multi alert monitor for hosts reporting the same metric for `service:web-store`.
 3. Downtime is scheduled for any monitor that has the `downtime:true` monitor tag.
 4. This downtime is constrained to the group `service:web-store`.
-5. Click **Preview affected monitors** to verify the monitors that are in scope. In our example, this shows both monitors have the group `service:web-store` in scope.
+5. Click **Preview affected monitors** to verify the monitors that are in scope. In this example, it shows both monitors have the group `service:web-store` in scope.
 
 {{< img src="monitors/downtimes/downtime_examplebytag1_downtime.jpg" alt="downtime example of 'By Monitor Tags' with preview of affected monitors" style="width:80%;">}}
 
