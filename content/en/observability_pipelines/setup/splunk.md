@@ -74,15 +74,12 @@ There are no provider-specific requirements for RPM-based Linux.
 <div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
-Under **Settings > Data Inputs**, add a new HTTP Event Collector input. You can name it whatever you wish.
 
-{{< callout url="#" btn_hidden="true" header="Acknowledgements" >}}
-  Observability Pipelines supports acknolwedgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on this input.
-{{< /callout >}}
+1. In Splunk, navigate to **Settings** > **Data Inputs**.
+2. Add a new HTTP Event Collector input and assign it a name.
+3. Select the indexes where you want the logs to be sent.
 
-Select whichever index(es) you wish for logs to flow into.
-
-Once the input is created, Splunk will create a token for you, usually in a UUID format. In the sample configurations below, you will add this token so that the Observability Pipelines Worker can authenticate itself.
+After you add the input, Splunk creates a token for you. The token is typically in a UUID format. In the sample configurations provided in later sections in this article, you will add this token to the configuration so that the Observability Pipelines Worker can authenticate itself.
 
 ## Installing the Observability Pipelines Worker
 
