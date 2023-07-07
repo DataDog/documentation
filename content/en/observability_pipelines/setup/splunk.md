@@ -326,7 +326,7 @@ After you install and configure the Observability Pipelines Worker to send logs 
 
 For most collectors that exist, simply changing the URL to the load balancer provisioned by these configurations, and updating the token, should suffice.
 
-At this point, your logs should be going to the Worker and is available for processing. The next section goes through what process is included by default, and the additional options that are available.
+At this point, your logs should be going to the Worker and be available for processing. The next section goes through what process is included by default, and the additional options that are available.
 
 ## Working with data
 The sample configurations provided does the following:
