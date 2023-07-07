@@ -345,7 +345,7 @@ The second item `postgres-service-name` is a configuration for a service bound t
 To resolve the template variables, it uses the `variables` dictionary to define the values used in the instance configuration.
 This dictionary contains a JSONPath object indicating where to find the variable values for the service `postgres-service-name` defined in the `VCAP_SERVICES` environment variable.
 
-See [Cluster Checks][35] for more information about autodiscovery through the DCA.
+See [Cluster Checks][35] for more information about Autodiscovery through the DCA.
 
 #### Improve CCCache performance on cache miss
 
