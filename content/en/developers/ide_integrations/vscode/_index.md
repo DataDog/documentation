@@ -36,12 +36,13 @@ The **Synthetic Tests** feature allows you to:
 - Set custom parameters without altering the original test definition
 - See test results locally in VS Code and in Datadog to access additional information
 - Test only what matters by executing relevant tests at the same time
-- Create a list of most frequently used Synthetic tests by adding them to **Favorites** 
+- Create a list of most frequently used Synthetic tests by linking them to your workspace
+
+The **View in VS Code** feature provides a link from Datadog directly to your source files. 
 
 ## Requirements
 
 - **A Datadog account**: The extension requires a Datadog account. If you're new to Datadog, go to the [Datadog website][2] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Synthetic tests**: The extension allows you to execute Synthetic tests. If you haven't set up Synthetic tests already, [create a test in Datadog][3]. For more information about running tests on a local environment, see [Getting Started with API Tests][4], [Getting Started with Browser Tests][5], and the [Continuous Testing Tunnel documentation][1].
 
 ## Setup
 
@@ -70,6 +71,8 @@ The Datadog extension enables you to [run Synthetic HTTP tests and browser tests
 3. Run the test.
 
 {{< img src="developers/ide_integrations/vscode/test_configuration_modified_starturl.png" alt="The Test Configuration panel and Settings page where you can specify the start URL of a Synthetics test to a localhost URL" style="width:100%;" >}}
+
+If you haven't set up Synthetic tests already, [create a test in Datadog][3]. For more information about running tests on a local environment, see [Getting Started with API Tests][4], [Getting Started with Browser Tests][5], and the [Continuous Testing Tunnel documentation][1].
 
 ### Permissions
 
