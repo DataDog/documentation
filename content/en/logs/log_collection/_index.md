@@ -295,7 +295,7 @@ The TCP endpoint is not recommended for this site. Contact [support][1] for more
 [1]: /help
 {{< /site-region >}}
 
-{{< site-region region="gov,us5" >}}
+{{< site-region region="gov,us5,ap1" >}}
 
 The TCP endpoint is not supported for this site.
 

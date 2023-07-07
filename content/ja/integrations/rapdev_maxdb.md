@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-maxdb
 app_uuid: f30ae17c-d58a-43f4-a8a6-693279394101
 assets:

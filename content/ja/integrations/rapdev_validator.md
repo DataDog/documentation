@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-validator
 app_uuid: d66f715a-4218-40f0-af35-a147c45c1d11
 assets:

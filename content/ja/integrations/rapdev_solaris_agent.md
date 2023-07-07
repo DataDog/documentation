@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-solaris-agent
 app_uuid: a994f2cf-1f77-4e74-803d-fb833455e224
 assets:
