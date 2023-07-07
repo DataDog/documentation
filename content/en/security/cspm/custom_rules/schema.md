@@ -12,6 +12,6 @@ list_section:
   GCP: Review detailed information about Google Cloud resource types in the following pages.
 
 ---
-When you [write custom rules for CSPM][1], you specify the resource types that are referenced by the rules.
+When you [write custom rules for CSM Misconfigurations][1], you specify the resource types that are referenced by the rules.
 
 [1]: /security/cspm/custom_rules/

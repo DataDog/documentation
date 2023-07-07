@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSPM
+title: Setting Up CSM Misconfigurations
 kind: documentation
 aliases:
   - /security_platform/cspm/getting_started
@@ -21,33 +21,33 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in this site.
+CSM Misconfigurations is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
+Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks.
 
-## Enable CSPM for your cloud resources
+## Enable CSM Misconfigurations for your cloud resources
 
-CSPM provides agentless onboarding using existing Datadog integrations with cloud providers such as AWS, Azure, Google Cloud, Docker, and Kubernetes. For details on how to configure CSPM, select your cloud provider and follow the instructions:
+CSM Misconfigurations provides agentless onboarding using existing Datadog integrations with cloud providers such as AWS, Azure, Google Cloud, Docker, and Kubernetes. For details on how to configure CSM Misconfigurations, select your cloud provider and follow the instructions:
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
 ### Set up the Datadog AWS integration
 
-If you haven't already, set up the [Amazon Web Services integration][1]. For CSPM, you must also add the [necessary permissions][2] for resource collection.
+If you haven't already, set up the [Amazon Web Services integration][1]. For  CSM Misconfigurations, you must also add the [necessary permissions][2] for resource collection.
 
-### Enable CSPM for AWS
+### Enable CSM Misconfigurations for AWS
 
-Use one of the following methods to enable CSPM for your AWS accounts:
+Use one of the following methods to enable CSM Misconfigurations for your AWS accounts:
 
 #### Security Setup
 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][3] to activate CSPM for your account.
 3. On the **Setup** > **Cloud Providers** tab, click the **[AWS][4]** tile.
-4. To enable CSPM for an AWS account, turn on the **Collect Resources** toggle.
+4. To enable CSM Misconfigurations for an AWS account, turn on the **Collect Resources** toggle.
 
 #### AWS integration tile
 
@@ -70,9 +70,9 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 
 **Note**: To access the full set of Azure compliance rules, you must enable the `Application.Read.All`, `Directory.Read.All`, `Group.Read.All`, `Policy.Read.All`, and `User.Read.All` permissions for the Microsoft Graph API.
 
-### Enable CSPM for Azure
+### Enable C CSM Misconfigurations for Azure
 
-Use one of the following methods to enable CSPM for your Azure subscriptions:
+Use one of the following methods to enable CSM Misconfigurations for your Azure subscriptions:
 
 #### Security Setup
 
@@ -97,7 +97,7 @@ Use one of the following methods to enable CSPM for your Azure subscriptions:
 
 ### Set up the Datadog Google Cloud integration
 
-The Datadog Google Cloud integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection for CSPM, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf.
+The Datadog Google Cloud integration uses service accounts to create an API connection between Google Cloud and Datadog. To enable metric collection for CSM Misconfigurations, create a service account, and then provide Datadog with the service account credentials to begin making API calls on your behalf.
 
 **Note**: [Google Cloud billing][4], the [Cloud Monitoring API][5], the [Compute Engine API][6], and the [Cloud Asset API][7] must all be enabled for the projects you wish to monitor.
 
@@ -123,16 +123,16 @@ The Datadog Google Cloud integration uses service accounts to create an API conn
     - Repeat the process above to use multiple service accounts.
     - Use the same service account by updating the `project_id` in the downloaded JSON file. Then, upload the file to Datadog as described in steps 1-3.
 
-### Enable CSPM for Google Cloud
+### Enable CSM Misconfigurations for Google Cloud
 
-Use one of the following methods to enable CSPM for your Google Cloud projects:
+Use one of the following methods to enable CSM Misconfigurations for your Google Cloud projects:
 
 #### Security Setup
 
 1. Navigate to **Security** > **Setup**.
-2. Follow the [in-app instructions][2] to activate CSPM for your account.
+2. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
 3. On the **Setup** > **Cloud Providers** tab, click the **[Google Cloud Platform][3]** tile.
-4. Enable CSPM for your Google Cloud projects by turning on the **CSPM Enabled** toggle.
+4. Enable CSM Misconfigurations for your Google Cloud projects by turning on the **CSPM Enabled** toggle.
 
 #### Google Cloud integration tile
 
@@ -157,10 +157,10 @@ Use one of the following methods to enable CSPM for your Google Cloud projects:
 ### Enable CSPM for Docker
 
 1. Navigate to **Security** > **Setup**.
-2. Follow the [in-app instructions][1] to activate CSPM for your account.
+2. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
 3. On the **Setup** > **Host and containers** tab, click the **[Docker][2]** tile.
-4. Click **Select API key** to choose the API key you want to use with CSPM.
-5. Copy the automatically generated command and run it in your Docker environment to enable CSPM.
+4. Click **Select API key** to choose the API key you want to use with CSM Misconfigurations.
+5. Copy the automatically generated command and run it in your Docker environment to enable CSM Misconfigurations.
 
 [1]: https://app.datadoghq.com/security/configuration
 [2]: https://app.datadoghq.com/security/configuration?sectionId=secureHostsAndContainers&secure-cloud-environment=google-cloud-platform&secure-hosts-and-containers=docker
@@ -169,17 +169,17 @@ Use one of the following methods to enable CSPM for your Google Cloud projects:
 
 {{% tab "Kubernetes" %}}
 
-### Enable CSPM for Kubernetes
+### Enable CSM Misconfigurations for Kubernetes
 
 1. If you haven't already, install the [Datadog Agent][1] (version 7.27+).
 2. Navigate to **Security** > **Setup**.
-3. Follow the [in-app instructions][2] to activate CSPM for your account.
+3. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
 4. Add the following to the `datadog` section of the `values.yaml` file:
     ```yaml
     # values.yaml file
     datadog:
     [...]
-      # Add this to enable Cloud Security Posture Management and Cloud Workload Security
+      # Add this to enable  CSM Misconfigurations and  CSM Threats
       securityAgent:
         runtime:
           enabled: true
@@ -206,7 +206,7 @@ To view the findings for your cloud resources, go to the [CSPM homepage][1].
 
 ## Explore default compliance rules
 
-CSPM comes with a set of [out-of-the-box compliance rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration compliance rules are added, they are automatically imported into your account.
+CSM Misconfigurations comes with a set of [out-of-the-box compliance rules][2] that evaluate the configuration of your cloud resources and identifies potential misconfigurations so you can immediately take steps to remediate. When new configuration compliance rules are added, they are automatically imported into your account.
 
 To filter the default compliance rules by cloud provider:
 
@@ -220,11 +220,11 @@ To filter the default compliance rules by cloud provider:
 
 After you explore the default compliance rules, you can review and take action on your cloud misconfigurations in the [Security Findings Explorer][3], [customize how each rule scans your environment][4], and [set up notification targets][5].
 
-## Disable CSPM
+## Disable CSM Misconfigurations
 
-Once you've disabled CSPM, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs. 
+Once you've disabled CSM Misconfigurations, your previous findings and the homepage are still available in-app, and you do not incur additional billing costs. 
 
-To disable CSPM for your cloud providers:
+To disable CSM Misconfigurations for your cloud providers:
 
 - **AWS**: On the **Setup** > **Cloud Providers** tab, click the **AWS** tile, and turn off the **Collect Resources** toggle for your AWS accounts. 
 - **Azure**: On the **Setup** > **Cloud Providers** tab, click the **Azure** tile, and turn off the **CSPM Enabled** toggle for your Azure subscriptions.

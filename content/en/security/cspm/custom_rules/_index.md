@@ -20,7 +20,7 @@ cascade:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not available in this site.
+CSM Misconfigurations is not available in this site.
 </div>
 {{< /site-region >}}
 
@@ -62,7 +62,7 @@ To create a rule from scratch:
 
 ## Tagging findings
 
-When you create, clone, or modify CSPM compliance rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
+When you create, clone, or modify CSM Misconfigurations compliance rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
 
 You can assign almost any key-value as a tag. The following table shows tags that are useful in common security scenarios.
 
@@ -73,7 +73,7 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 | `requirement` | String | Not allowed for custom rules. Indicates a requirement related to a compliance framework. Don't add this to rules not part of a compliance framework. |
 | `cloud_provider` | `aws`, `gcp`, `azure` | Cannot be removed. Is set automatically based on resource type.  |
 | `control` | String | Not allowed for custom rules. Indicates a control related to a compliance framework. Don't add this to rules not part of a compliance framework. |
-| `source` | String from a defined set given by cloud providers as listed in the [Source facet in CSPM Findings][2] | Cannot be removed. Automatically added to cloned rules. Facilitates grouping rules by cloud provider. |
+| `source` | String from a defined set given by cloud providers as listed in the [Source facet in the Misconfigurations explorer][2]. | Cannot be removed. Automatically added to cloned rules. Facilitates grouping rules by cloud provider. |
 | `framework` | String | Not allowed for custom rules. Indicates the compliance framework the rule belongs to. Not automatically added to cloned rules. |
 
 

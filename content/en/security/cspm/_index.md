@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Posture Management
+title: Cloud Security Management Misconfigurations
 kind: documentation
 aliases:
   - /security_platform/cspm/
@@ -10,11 +10,11 @@ algolia:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in this site.
+CSM Misconfigurations is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Datadog Cloud Security Posture Management (CSPM) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
+Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
 ## Detect misconfigurations across your cloud resources
 
@@ -60,7 +60,7 @@ Investigate details using the [Security Findings Explorer][10]. View detailed in
   {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSPM{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud detection rules{{< /nextlink >}}
   {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure detection rules{{< /nextlink >}}
-  {{< nextlink href="/security/cspm/findings">}} Learn about Cloud Security Posture Management findings{{< /nextlink >}}
+  {{< nextlink href="/security/cspm/findings">}} Learn about CSM Misconfigurations findings{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/">}} Improve the compliance and security posture of your Google Cloud environment{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -6,22 +6,22 @@ aliases:
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
-  text: "Getting started with CSPM"
+  text: "Getting started with CSM Misconfigurations"
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default Posture Management cloud configuration compliance rules"
+  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
-  text: "Search and explore CSPM findings"
+  text: "Search and explore CSM Misconfigurations findings"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Cloud Security Posture Management is not currently available in this site.
+CSM Misconfigurations is not currently available in this site.
 </div>
 {{< /site-region >}}
 
-Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
+Cloud Security Management Misconfigurations (CSM Misconfigurations) comes with more than 400 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 - [CIS AWS Foundations Benchmark v1.5.0*][2]
 - [CIS Azure Foundations Benchmark v1.3.0][3]
@@ -41,12 +41,12 @@ Cloud Security Posture Management (CSPM) comes with more than 400 out-of-the-box
 Datadog also provides Essential Cloud Security Controls, a set of recommendations developed by Datadog internal security experts. Based on common cloud security risks we have observed at Datadog, this ruleset aims to help users new to cloud security easily remediate high-impact misconfigurations across their cloud environments.
 
 **Notes**:
-- CSPM provides visibility into whether your resources are configured in accordance with certain compliance rules. These rules address various regulatory frameworks, benchmarks, and standards (Security Posture Frameworks). CSPM does not provide an assessment of your actual compliance with any Security Posture Framework, and the compliance rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use CSPM in consultation with your legal counsel or compliance experts.
+- CSM Misconfigurations provides visibility into whether your resources are configured in accordance with certain compliance rules. These rules address various regulatory frameworks, benchmarks, and standards (Security Posture Frameworks). CSM Misconfigurations does not provide an assessment of your actual compliance with any Security Posture Framework, and the compliance rules may not address all configuration settings that are relevant to a given framework. Datadog recommends that you use CSM Misconfigurations in consultation with your legal counsel or compliance experts.
 - The compliance rules for the CIS benchmarks follow the CIS automated recommendations. If you're obtaining CIS certification, Datadog recommends also reviewing the manual recommendations as part of your overall security assessment.
 
 ## View your compliance posture
 
-View a high-level overview of your compliance posture for each framework on the CSPM [Overview][20] page.
+View a high-level overview of your compliance posture for each framework on the CSM Misconfigurations [Overview][20] page.
 
 - **Framework Overview**: A [detailed report](#explore-compliance-framework-reports) that gives you insight into how you score against a framework's requirements and rules.
 - **Explore Resources**: A filtered view of the **Findings** page that shows resources with findings for the selected framework.
