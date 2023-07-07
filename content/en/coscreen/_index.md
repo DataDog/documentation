@@ -77,7 +77,7 @@ Screen sharing is deactivated by default when you join a CoScreen.
 
 {{< img src="coscreen/v5-control-tabs.mp4" alt="Two cursors interact with a shared window at the same time." video="true" width=70% >}}
 
-You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. When viewing a remote window, two tabs appear: **Control**, which enables you to interact with the window, click on buttons, type into text fields, etc.; and **Draw**, which enables you to draw on the window.
+You can see the mouse pointers of remote participants whenever they move their pointers over a shared window. When viewing a remote window, two tabs appear: **Control**, which enables you to interact with the window, click on buttons, and type into text fields; and **Draw**, which enables you to draw on the window.
 
 ### Integrations
 
