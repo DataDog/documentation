@@ -90,8 +90,6 @@ code_language_ids:
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
     serverless: "Serverless"
-    splunk: Splunk
-    datadog: Datadog
 
 branch: ""
 

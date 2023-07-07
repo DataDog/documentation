@@ -1,5 +1,5 @@
 ---
-title: Set up Observability Pipelines
+title: Set Up Observability Pipelines in Datadog
 kind: Documentation
 aliases:
   - /agent/vector_aggregation/
@@ -7,9 +7,6 @@ aliases:
   - /observability_pipelines/integrate_vector_with_datadog/
   - /observability_pipelines/integrations/integrate_vector_with_datadog/
   - /observability_pipelines/production_deployment_overview/integrate_datadog_and_the_observability_pipelines_worker/
-code_lang: datadog
-type: multi-code-lang
-code_lang_weight: 20
 further_reading:
   - link: "/observability_pipelines/production_deployment_overview/"
     tag: "Documentation"

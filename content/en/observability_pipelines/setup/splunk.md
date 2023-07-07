@@ -1,11 +1,8 @@
 ---
-title: Setup Observability Pipelines in your Splunk Environment
+title: Set Up Observability Pipelines in your Splunk Environment
 kind: documentation
 aliases:
   - /integrations/observability_pipelines/splunk
-code_lang: splunk
-type: multi-code-lang
-code_lang_weight: 50
 further_reading:
   - link: "/observability_pipelines/working_with_data/"
     tag: "Documentation"
@@ -18,9 +15,7 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Limited Protocol Support" >}}
-  Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol at this time.
-{{< /callout >}}
+<div class="alert alert-info">At this time, Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 
 ## Overview
 
