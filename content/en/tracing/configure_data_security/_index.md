@@ -113,6 +113,8 @@ apm_config:
   obfuscation:
     redis:
       enabled: true
+      # If true, replaces all arguments with a single "?".
+      remove_all_args: true
 ```
 
 [1]: /tracing/glossary/#spans

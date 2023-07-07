@@ -218,7 +218,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Cypress version 10 or later
 
-Use the Cypress API documentation to [learn how to write plugins][101] for `cypress>=10`.
+Use the Cypress API documentation to [learn how to write plugins][1] for `cypress>=10`.
 
 In your `cypress.config.js` file, set the following:
 
@@ -265,7 +265,7 @@ module.exports = defineConfig({
 
 These are the instructions if you're using a version older than `cypress@10`.
 
-1. Set [`pluginsFile`][102] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][103]:
+1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][3]:
    {{< code-block lang="json" filename="cypress.json" >}}
    {
      "pluginsFile": "dd-trace/ci/cypress/plugin"
@@ -281,7 +281,7 @@ These are the instructions if you're using a version older than `cypress@10`.
    {{< /code-block >}}
    <div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
 
-2. Add the following line to the **top level** of your [`supportFile`][104]:
+2. Add the following line to the **top level** of your [`supportFile`][4]:
    {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
    // Your code can be before this line
    // require('./commands')
@@ -321,29 +321,23 @@ it('renders a hello world', () => {
 })
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][105] section of the Node.js custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Node.js custom instrumentation documentation.
 
 ### Cypress - RUM integration
 
-If the browser application being tested is instrumented using [Browser Monitoring][106], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][107].
+If the browser application being tested is instrumented using [Browser Monitoring][6], your Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
 
 
-[101]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
-[102]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
-[103]: https://docs.cypress.io/guides/references/configuration#cypress-json
-[104]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
-[105]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
-[106]: /real_user_monitoring/browser/#setup
-[107]: /continuous_integration/guides/rum_integration/
+[1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
+[3]: https://docs.cypress.io/guides/references/configuration#cypress-json
+[4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
+[5]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[6]: /real_user_monitoring/browser/#setup
+[7]: /continuous_integration/guides/rum_integration/
 {{% /tab %}}
 
 {{< /tabs >}}
-
-### Reporting code coverage
-
-When tests are instrumented with [Istanbul][6], the Datadog Tracer (v3.20.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
-
-You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
 ### Using Yarn 2 or later
 
@@ -359,6 +353,11 @@ You can fix it by setting `NODE_OPTIONS` to the following:
 NODE_OPTIONS="-r $(pwd)/.pnp.cjs -r dd-trace/ci/init" yarn test
 ```
 
+## Reporting code coverage
+
+When tests are instrumented with [Istanbul][6], the Datadog Tracer (v3.20.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
 ## Configuration settings
 
@@ -383,7 +382,7 @@ The following is a list of the most important configuration settings that can be
 
 All other [Datadog Tracer configuration][7] options can also be used.
 
-### Collecting Git metadata
+## Collecting Git metadata
 
 Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
 
@@ -437,15 +436,133 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 
 From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uploads git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, you can do so by setting `DD_CIVISIBILITY_GIT_UPLOAD_ENABLED` to `false`. However, this is not recommended, as features like Intelligent Test Runner and others do not work without it.
 
+
+## Manual testing API
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: To use the manual testing API, you must pass <code>DD_CIVISIBILITY_MANUAL_API_ENABLED=1</code> as an environment variable.
+</div>
+
+<div class="alert alert-warning">
+  <strong>Note</strong>: The manual testing API is in <strong>beta</strong>, so its API might change. It is available starting in <code>dd-trace</code> versions <code>4.4.0</code>, <code>3.25.0</code>, and <code>2.38.0</code>.
+</div>
+
+If you use Jest, Mocha, Cypress, Playwright, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+
+Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
+
+The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
+
+```javascript
+const { channel } = require('node:diagnostics_channel')
+
+const { describe, test, beforeEach, afterEach, assert } = require('my-custom-test-framework')
+
+const testStartCh = channel('dd-trace:ci:manual:test:start')
+const testFinishCh = channel('dd-trace:ci:manual:test:finish')
+const testSuite = __filename
+
+describe('can run tests', () => {
+  beforeEach((testName) => {
+    testStartCh.publish({ testName, testSuite })
+  })
+  afterEach((status, error) => {
+    testFinishCh.publish({ status, error })
+  })
+  test('first test will pass', () => {
+    assert.equal(1, 1)
+  })
+})
+```
+
+### Test start channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:start` to publish that a test is starting. A good place to do this is a `beforeEach` hook or similar.
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testStartCh = channel('dd-trace:ci:manual:test:start')
+
+// ... code for your testing framework goes here
+  beforeEach(() => {
+    const testDefinition = {
+      testName: 'a-string-that-identifies-this-test',
+      testSuite: 'what-suite-this-test-is-from.js'
+    }
+    testStartCh.publish(testDefinition)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload to be published has attributes `testName` and `testSuite`, both strings, that identify the test that is about to start.
+
+### Test finish channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:finish` to publish that a test is ending. A good place to do this is an `afterEach` hook or similar.
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testFinishCh = channel('dd-trace:ci:manual:test:finish')
+
+// ... code for your testing framework goes here
+  afterEach(() => {
+    const testStatusPayload = {
+      status: 'fail',
+      error: new Error('assertion error')
+    }
+    testStartCh.publish(testStatusPayload)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload to be published has attributes `status` and `error`:
+
+* `status` is a string that takes one of three values:
+  * `'pass'` when a test passes.
+  * `'fail'` when a test fails.
+  * `'skip'` when a test has been skipped.
+
+* `error` is an `Error` object containing the reason why a test failed.
+
+### Add tags channel
+
+Grab this channel by its ID `dd-trace:ci:manual:test:addTags` to publish that a test needs custom tags. This can be done within the test function:
+
+```typescript
+const { channel } = require('node:diagnostics_channel')
+const testAddTagsCh = channel('dd-trace:ci:manual:test:addTags')
+
+// ... code for your testing framework goes here
+  test('can sum', () => {
+    testAddTagsCh.publish({ 'test.owner': 'my-team', 'number.assertions': 3 })
+    const result = sum(2, 1)
+    assert.equal(result, 3)
+  })
+// code for your testing framework continues here ...
+```
+
+The payload to be published is a dictionary `<string, string|number>` of tags or metrics that are added to the test.
+
+
+### Run the tests
+
+When the test start and end channels are in your code, run your testing framework like you normally do, including the following environment variables:
+
+```shell
+NODE_OPTIONS="-r dd-trace/ci/init" DD_CIVISIBILITY_MANUAL_API_ENABLED=1 DD_ENV=ci DD_SERVICE=my-custom-framework-tests yarn run-my-test-framework
+```
+
+
+
 ## Known limitations
 
 ### ES modules
-[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][10] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][10].
+[Mocha >=9.0.0][8] uses an ESM-first approach to load test files. That means that if [ES modules][9] are used (for example, by defining test files with the `.mjs` extension), _the instrumentation is limited_. Tests are detected, but there isn't visibility into your test. For more information about ES modules, see the [Node.js documentation][9].
 
 ### Browser tests
 Browser tests executed with `mocha`, `jest`, `cucumber`, `cypress`, and `playwright` are instrumented by `dd-trace-js`, but visibility into the browser session itself is not provided by default (for example, network calls, user actions, page loads, and more.).
 
-If you want visibility into the browser process, consider using [RUM & Session Replay][11]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][9].
+If you want visibility into the browser process, consider using [RUM & Session Replay][10]. When using Cypress, test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][11].
 
 ### Cypress interactive mode
 
@@ -530,9 +647,9 @@ In addition to that, if [Intelligent Test Runner][20] is enabled, the following 
 [6]: https://istanbul.js.org/
 [7]: /tracing/trace_collection/library_config/nodejs/?tab=containers#configuration
 [8]: https://github.com/mochajs/mocha/releases/tag/v9.0.0
-[9]: /continuous_integration/guides/rum_integration/
-[10]: https://nodejs.org/api/packages.html#packages_determining_module_system
-[11]: /real_user_monitoring/browser/
+[9]: https://nodejs.org/api/packages.html#packages_determining_module_system
+[10]: /real_user_monitoring/browser/
+[11]: /continuous_integration/guides/rum_integration/
 [12]: https://docs.cypress.io/api/plugins/before-run-api
 [13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
 [14]: https://docs.cypress.io/api/plugins/after-run-api

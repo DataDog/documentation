@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-oracle-timesten
 app_uuid: bddd0f6a-efe0-4e3f-bff4-46df8bb839f9
 assets:
