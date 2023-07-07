@@ -143,7 +143,7 @@ A [Machine Image][25] (`aws_ami`) is considered publicly accessible if:
 
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|It is customer-owned, which means it does not have an aliased owner (either `amazon` or `aws-marketplace` in the account field)|Public AMIs owned by verified providers (either Amazon or verified partners) have an aliased owner, which appears as `amazon` or `aws-marketplace` in the account field. See [Find a shared AMI][26] in the AWS docs.|
+|It is customer-owned, which means it does not have an aliased owner (either `amazon` or `aws-marketplace` in the account field).|Public AMIs owned by verified providers (either Amazon or verified partners) have an aliased owner, which appears as `amazon` or `aws-marketplace` in the account field. See [Find a shared AMI][26] in the AWS docs.|
 |Its image is set to `public`, meaning that the launch permissions for the image are public.|By modifying the `launchPermission` property of an AMI, you can make the AMI public (which grants launch permissions to all AWS accounts), or share it with only the AWS accounts that you specify.|
 
 See [Make an AMI public][27] for an explanation of how to make an AMI public or private. 
