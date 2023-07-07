@@ -183,7 +183,7 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 ## Restrict access to individual resources
 
-Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta).
+Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta). We recommend that you use teams to map access to functional groups in your organizations (ex: restrict editing of a dashboard to the application team owning it), roles to map access to personas (ex: restrict editing of a dashboard to administrators), and users only when necessary to encourage knowledge sharing and collaboration.
 
 The resources supporting granular access controls include:
 - [Dashboards][11]
