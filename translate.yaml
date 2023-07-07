@@ -50,3 +50,4 @@ sources:
   dst: "content/{lang}/workflows/actions_catalog/_index.md"
 - src: "content/en/workflows/actions_catalog/generic_actions.md"
   dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"
+
