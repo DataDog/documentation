@@ -78,7 +78,7 @@ Pour obtenir la liste complète des bibliothèques et architectures de processeu
 
 1. [Configurer l'Agent Datadog pour l'APM](#configurer-l-agent-datadog-pour-l-apm)
 2. [Installer le traceur](#installer-le-traceur)
-3. {{< tabs >}}
+3. [Activer le traceur](#enable-the-tracer-for-your-service)
 4. [Visualiser vos données en temps réel](#visualiser-vos-donnees-en-temps-reel)
 
 ### Configurer l'Agent Datadog pour l'APM
