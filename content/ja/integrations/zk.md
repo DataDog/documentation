@@ -76,7 +76,7 @@ ZooKeeper チェックは、クライアント接続とレイテンシーの追�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれています。ZooKeeper サーバーに追加でインストールする必要はありません。
 

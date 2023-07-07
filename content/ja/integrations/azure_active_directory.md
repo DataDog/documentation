@@ -67,7 +67,7 @@ Azure Active Directory は、Microsoft Azure によるクラウドホスト型 A
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 このインテグレーションにより、 Azure Event Hubs を使用してログが Datadog に転送されます。アクティビティログをイベントハブに転送するように Azure AD を構成します。
 

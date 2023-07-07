@@ -84,7 +84,7 @@ Cassandra からメトリクスをリアルタイムに取得すると、以下�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cassandra チェックは [Datadog Agent][2] パッケージに含まれています。Cassandra ノードに追加でインストールする必要はありません。このインテグレーションには、Oracle の JDK を使用することをお勧めします。
 
@@ -172,7 +172,7 @@ Cassandra チェックには、イベントは含まれません。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含まれています。Cassandra ノードに追加でインストールする必要はありません。
 
