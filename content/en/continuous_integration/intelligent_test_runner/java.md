@@ -10,6 +10,8 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
+<div class="alert alert-warning">Intelligent Test Runner for Java is a beta product.</div>
+
 ## Compatibility
 
 Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`
