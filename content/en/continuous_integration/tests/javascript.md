@@ -354,7 +354,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-To add custom metrics to your tests, such as the memory allocations, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
+To add custom metrics to your tests, such as memory allocations, use `cy.task('dd:addTags', { yourTags: 'here' })` in your test or hooks.
 
 For example:
 
