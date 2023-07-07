@@ -35,7 +35,7 @@ To mute an individual monitor, click the **Mute** button at the top of the monit
 
 Apply downtime schedules to specific monitors by [name](#by-monitor-name) or to a broad range of monitors by monitor [tags](#by-monitor-tags). Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
 
-**Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if they match the scope. 
+**Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope. 
 
 ### By Monitor Name
 
@@ -159,7 +159,7 @@ Datadog can proactively mute monitors related to the manual shutdown of certain 
 [11]: https://app.datadoghq.com/monitors/downtimes
 [12]: /monitors/manage/status/
 [13]: /service_management/events/explorer
-[14]: /api/v1/downtimes/#cancel-a-downtime
+[14]: /api/latest/downtimes/#cancel-a-downtime
 [15]: /account_management/#preferences
 [16]: /integrations/amazon_ec2/#ec2-automuting
 [17]: /integrations/google_compute_engine/#gce-automuting
