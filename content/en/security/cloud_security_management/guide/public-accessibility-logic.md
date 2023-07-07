@@ -12,7 +12,7 @@ further_reading:
 
 Datadog uses a graph processing framework to map relationships between cloud resources to determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework. 
 
-For more information on network reachability, see the AWS documentation and the AWS Network Reachability Analyser. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
+For more information on network reachability, see the [AWS documentation][34] and the [AWS Network Reachability Analyser][35]. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
 
 ## Resource Dependency Graph
 
@@ -220,3 +220,5 @@ See [Amazon SQS security best practices][33] for more information about public S
 [31]: https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html
 [32]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html
 [33]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-security-best-practices.html
+[34]: https://docs.aws.amazon.com/
+[35]: https://docs.aws.amazon.com/vpc/latest/reachability/what-is-reachability-analyzer.html
