@@ -112,9 +112,9 @@ You can apply a function to a formula by clicking on the `Σ` icon. Here is an e
 
 Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][17] guide.
 
-To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a thread intel reference table:
+To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a threat intel reference table:
 
-{{< img src="/logs/explorer/group/reference_tables_logs.png" alt="Use Reference Tables in the Log Explorer" border="true" popup="true" style="width:100%;" >}}
+{{< img src="/logs/explorer/group/reference_tables_logs.png" alt="The Datadog log explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ## Further reading
 
