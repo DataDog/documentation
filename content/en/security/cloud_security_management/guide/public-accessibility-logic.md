@@ -30,7 +30,7 @@ The following section details on a resource-by-resource basis the logic behind p
 
 ### Amazon S3 Bucket
 
-An [S3 Bucket][1] (`aws_s3_bucket`) is considered is considered publicly accessible if:
+An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
 * _ACL-determined access:_
 
