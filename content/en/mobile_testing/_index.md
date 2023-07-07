@@ -23,29 +23,21 @@ cascade:
 
 Mobile Application Testing allows you to test and monitor key business flows for Android and iOS using real devices. 
 
-[**Computing SLOs**][1] on your key endpoints and user journeys makes it easier to stick to your application performance targets and provide a consistent customer experience.
-
-## Upload your mobile application
-
-[Create a mobile application][2] for your Android or iOS application by uploading an `.apk` or `.ipa` file and specifying the application version.
-
 ## Record mobile app tests
 
 {{< img src="mobile_testing/mobile_application_testing_demo.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:80%;">}}
 
-[Create mobile app tests][3] on critical user journeys and business journeys to monitor how your customers experience your iOS and Android applications end-to-end from different device types.
+[Record mobile app tests][1] for Android and iOS using the no-code test recorder, which makes it easy to create robust and comprehensive tests.
 
 ## Run tests on CI or manually run tests
 
-You can [trigger mobile app tests][4] from your CI pipeline using [Continuous Testing][5], or [schedule mobile app tests][6] to run at regular intervals and manually trigger mobile app tests on the Datadog site.
+You can [trigger mobile app tests][2] from your CI pipeline using [Continuous Testing][3], or [schedule mobile app tests][4] to run at regular intervals and manually trigger mobile app tests on the Datadog site.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives
-[2]: /mobile_testing/settings
-[3]: /mobile_testing/mobile_app_tests
-[4]: /mobile_testing/mobile_app_tests/#run-tests-in-ci
-[5]: /continuous_testing
-[6]: /mobile_testing/mobile_app_tests/#scheduling-and-alerting
+[1]: /mobile_testing/mobile_app_tests
+[2]: /mobile_testing/mobile_app_tests/#run-tests-in-ci
+[3]: /continuous_testing
+[4]: /mobile_testing/mobile_app_tests/#scheduling-and-alerting

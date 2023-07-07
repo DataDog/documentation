@@ -25,13 +25,13 @@ Select **Show only available devices. Available devices load faster** to see the
 
 ## Automatically recorded steps
 
-Once you click **Start Recording**, the Datadog mobile test recorder automatically launches your mobile application on a real device and records steps as you interact with your application.
+Once you click **Start Recording**, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
 
 To stop recording, click **End Device Session** or **Save & Quit**.
 
 ## Manually added steps
 
-You can manually add, customize, and arrange steps on the left side of the mobile test recording.
+In addition to automatically creating steps by interacting directly with your device, you can manually create steps (using [assertions](#assertion) and [special actions](#special-actions)), update steps by clicking into a previously recorded step or [reorder a step](#manage-step-order) by dragging them up and down the step list.
 
 ### Assertion
 
@@ -66,7 +66,7 @@ Create this assertion step to have your mobile app test confirm that the text yo
 
 ### Special actions
 
-To automatically record steps such as **Tap**, **Double Tap**, **Type Text**, **Scroll**, **Press Back**, **Wait**, **Rotate Device**, and **Open Deep Link**, create this assertion step manually by clicking **Special Actions** and selecting an action type.
+In addition to automatically recording steps based on your device interactions, you can also manually create steps by clicking **Special Actions**. 
 
 {{< img src="mobile_testing/special_actions.png" alt="Choose an action type to add an assertion step" style="width:60%;" >}}
 

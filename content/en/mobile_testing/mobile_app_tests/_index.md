@@ -27,7 +27,7 @@ You can create mobile app tests in Datadog by navigating to [**UX Monitoring** >
 
 Define the configuration of your mobile app test.
 
-1. Create a mobile application on the [Applications List section][2] in the [Synthetic Monitoring & Continuous Testing Settings page][3] and select it from the mobile application dropdown menu.
+1. Select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [Applications List section][2] on the [Synthetic Monitoring & Continuous Testing Settings page][3]. 
 2. Select a **version** or click **Always run the latest version** to use the latest version of your mobile application whenever your test is run.
 3. Add a **name** for your test.
 4. Select **environment and additional tags** that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.

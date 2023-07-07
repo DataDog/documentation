@@ -13,6 +13,8 @@ further_reading:
 
 ## Overview
 
+The Test Details page contains all the information relating to your test, including test properties, test history, sample runs, and test runs.
+
 Test runs appear in a test details page after a Synthetic mobile app test executes. [Sample results](#sample-results) correlate to the latest passed and failed test executions over a time interval and in a specific number of locations and devices.
 
 ## Test properties
