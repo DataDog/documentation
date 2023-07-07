@@ -131,7 +131,7 @@ annotations:
 
     The final pod definition should look like the excerpt below. See also the full [YAML file][10] in the sample repo. The instructions you added to instrument the app are highlighted:
 
-    {{< highlight yaml "linenos=table,hl_lines=6-8 24-28" >}}
+    {{< highlight yaml "hl_lines=6-8 24-28" >}}
     apiVersion: apps/v1
     kind: Deployment
     metadata:
