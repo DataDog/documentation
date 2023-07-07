@@ -312,7 +312,7 @@ Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 [1]: https://www.nuget.org/packages/Datadog.Trace
 {{% /tab %}}
 
-Pour les images Docker exécutées sous LInux, configurez l'image de façon à exécuter le script `createLogPath.sh` :
+{{% tab "NuGet" %}}
 
 Pour utiliser l'instrumentation personnalisée dans votre application .NET :
 
