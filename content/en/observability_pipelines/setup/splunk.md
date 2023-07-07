@@ -27,7 +27,7 @@ This guide walks you through deploying the Worker in your common tools cluster a
 
 ## Assumptions
 * You are using a log collector that is compatible with the Splunk HTTP Event Collector (HEC) protocol.
-* You have administrative access to the collectors and the Splunk Index.
+* You have administrative access to the collectors and the Splunk index where logs will be sent to.
 * You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed.
 * You have a common tools or security cluster for your environment to which all other clusters are connected.
 
