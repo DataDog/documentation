@@ -1,6 +1,11 @@
 ---
 title: Add Custom Metrics to your Tests
 kind: guide
+description: Learn how to use custom metrics (measures) in your tests
+further_reading:
+  - link: "/continuous_integration/tests"
+    tag: "Documentation"
+    text: "Exploring tests"
 ---
 
 
@@ -8,10 +13,15 @@ kind: guide
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+<div class="alert alert-warning"><strong>Note</strong>: These custom metrics are <strong>not</strong> <a href="/metrics">Datadog Metrics</a>. They are numerical tags (also known as measures) that represent things like memory usage or request rates.</div>
+
 This guide will walk you through adding and using custom metrics for your tests.
 
 ### Add the custom metric to your test
-First step is to add the custom metric to your test by using the programmatic API:
+
+Before you can follow this guide, make sure that [Test Visibility][1] is already setup for your language.
+
+First step is to add the custom metric to your test. The native instrumentation allows you to use the programmatic API:
 
 {{< tabs >}}
 {{% tab "Javascript/Typescript" %}}
@@ -22,18 +32,6 @@ First step is to add the custom metric to your test by using the programmatic AP
     // test continues normally
     // ...
   })
-```
-{{% /tab %}}
-
-{{% tab ".NET" %}}
-```csharp
-// inside your test
-var scope = Tracer.Instance.ActiveScope; // from Datadog.Trace;
-if (scope != null) {
-    scope.Span.SetTag("test.memory.usage", 1e8);
-}
-// test continues normally
-// ...
 ```
 {{% /tab %}}
 
@@ -68,7 +66,7 @@ def test_simple_case(ddspan):
 
 For `datadog-ci`, use `DD_METRICS` environment variable or `--metrics` CLI argument:
 ```
-DD_METRICS="test.memory_usage:1000" datadog-ci junit upload --service my-service --metrics test.importance:3 report.xml
+DD_METRICS="test.memory_usage:1000" datadog-ci junit upload --service my-service --metrics test.request.rate:30 report.xml
 ```
 {{% /tab %}}
 
@@ -78,15 +76,15 @@ DD_METRICS="test.memory_usage:1000" datadog-ci junit upload --service my-service
 
 Now that the test includes this custom metric, the next step is to create a facet.
 
-You can create a facet by going to [Test Runs][1] and clicking on Add on the facet list:
+Create a facet by going to [Test Runs][2] and clicking on "Add" on the facet list:
 
 {{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
 
-Then make sure that the type of facet is "Measure", which represents a numerical value:
+Make sure that the type of facet is "Measure", which represents a numerical value:
 
 {{< img src="/continuous_integration/measure_creation.png" text="Test Runs measure creation" style="width:100%" >}}
 
-And that's it. Your metric is ready for usage. In the following sections you'll learn what you can do with it.
+Your metric is now ready to be used. See in the following sections what you can do with it.
 
 ### Graph the evolution of your metric
 
@@ -94,9 +92,11 @@ Plot the evolution of your metric across time by selecting the "Timeseries" visu
 
 {{< img src="/continuous_integration/plot_measure.png" text="Plot benchmark mean duration" style="width:100%" >}}
 
+Use this to track the evolution of the memory usage in your tests, for example.
+
 ### Export your graph
 
-It is possible to export your graph to a [dashboard][2] or a [notebook][3] and even create a [monitor][4] based on it, by clicking on "Export":
+It is possible to export your graph to a [dashboard][3] or a [notebook][4] and even create a [monitor][5] based on it, by clicking on "Export" on the right hand side:
 
 {{< img src="/continuous_integration/export_measure.png" text="Export benchmark mean duration graph" style="width:100%" >}}
 
@@ -106,8 +106,15 @@ Get alerted if the value of your metric goes above of below a certain threshold:
 
 {{< img src="/continuous_integration/monitor_measure.png" text="Monitor benchmark mean duration" style="width:100%" >}}
 
+Use this to inform you about the memory usage reaching a certain threshold, for example.
 
-[1]: https://app.datadoghq.com/ci/test-runs
-[2]: /dashboards
-[3]: /notebooks
-[4]: /monitors
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+
+[1]: /continuous_integration/tests/
+[2]: https://app.datadoghq.com/ci/test-runs
+[3]: /dashboards
+[4]: /notebooks
+[5]: /monitors
