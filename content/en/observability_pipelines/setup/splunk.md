@@ -128,7 +128,8 @@ Once the input is created, Splunk will create a token for you, usually in a UUID
 {{% tab "Google GKE" %}}
 1. Download the [Helm chart][1] for Google GKE.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment (and the token you created above). Then, install it in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk index](setting-up-the-splunk-index).
+3. Install the Helm chart in your cluster with the following commands:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
