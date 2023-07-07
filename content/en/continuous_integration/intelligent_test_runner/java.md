@@ -48,7 +48,7 @@ After setting these environment variables, run your tests as you normally do:
 
 {{< code-block lang="shell" >}}
 ./gradlew cleanTest test --rerun-tasks -Dorg.gradle.jvmargs=\
--javaagent:$DD_TRACER_FOLDER/dd-java-agent-$DD_TRACER_VERSION.jar=\
+-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app
@@ -58,8 +58,7 @@ dd.service=my-java-app
 {{% tab "Maven" %}}
 
 {{< code-block lang="shell" >}}
-MAVEN_LOCAL_REPO=$(mvn help:evaluate -Dexpression=settings.localRepository -DforceStdout -q)
-MAVEN_OPTS=-javaagent:$MAVEN_LOCAL_REPO/com/datadoghq/dd-java-agent/$DD_TRACER_VERSION/dd-java-agent-$DD_TRACER_VERSION.jar=\
+MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
 dd.civisibility.enabled=true,\
 dd.env=ci,\
 dd.service=my-java-app \
