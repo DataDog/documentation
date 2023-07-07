@@ -149,15 +149,15 @@ Starting with [version 2.17.0][3], you can add view names and assign them to a d
 
 If you are using React, Angular, Vue, or any other frontend framework, Datadog recommends implementing the `startView` logic at the framework router level.
 
-### React Native router instrumentation
+### React router instrumentation
 
-To override default RUM view names so that they are aligned with how you've defined them in your React Native application, you need to follow the below steps.
+To override default RUM view names so that they are aligned with how you've defined them in your React application, you need to follow the below steps.
 
 **Note**: These instructions are specific to the **React Router v6** library.
 
 1. Set `trackViewsManually` to `true` when initializing the RUM browser SDK as described [above](#override-default-rum-view-names).
 
-2. Start views for each new page or route change (for single-page applications).
+2. Start views for each route change.
 
    {{< tabs >}}
    {{% tab "NPM" %}}
@@ -174,7 +174,7 @@ To override default RUM view names so that they are aligned with how you've defi
          const routeMatches = matchRoutes(routes, location.pathname);
          const viewName = routeMatches && computeViewName(routeMatches);
          if (viewName) {
-           datadogRum.startView({name: viewName})
+           datadogRum.startView({name: viewName});
          }
        }, [location.pathname]);
 
@@ -220,8 +220,8 @@ To override default RUM view names so that they are aligned with how you've defi
          const viewName = routeMatches && computeViewName(routeMatches);
          if (viewName) {
            DD_RUM.onReady(function() {
-             DD_RUM.startView({name: viewName})
-           })
+             DD_RUM.startView({name: viewName});
+           });
          }
        }, [location.pathname]);
 
@@ -266,7 +266,7 @@ To override default RUM view names so that they are aligned with how you've defi
          const viewName = routeMatches && computeViewName(routeMatches);
          if (viewName) {
            window.DD_RUM &&
-             window.DD_RUM.startView({name: viewName})
+             window.DD_RUM.startView({name: viewName});
          }
        }, [location.pathname]);
 
