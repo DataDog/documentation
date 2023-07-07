@@ -75,12 +75,12 @@ Datadog の .NET Core ライブラリとプロセッサアーキテクチャー�
 
 ### インストール
 
-1. [APM に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
+1. [APM 用に Datadog Agent を構成します。](#configure-the-datadog-agent-for-apm)
 2. [トレーサーをインストールします。](#install-the-tracer)
 3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [ライブデータを表示します。](#view-your-live-data)
 
-### インストール
+### APM 用に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように [Datadog Agent をインストールして構成][2]します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。
 
