@@ -449,7 +449,7 @@ From `dd-trace>=3.15.0` and `dd-trace>=2.28.0`, CI Visibility automatically uplo
 
 If you use Jest, Mocha, Cypress, Playwright, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
-Use the manual testing API only if you use an unsupported testing framework or if you have a different testing mechanism.
+Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
 The manual testing API leverages the `node:diagnostics_channel` module from Node.js and is based on channels you can publish to:
 
