@@ -192,11 +192,11 @@ bosh -n -d <YOUR_DEPLOYMENT> -e <BOSH_ENV> deploy --recreate <YOUR_DEPLOYMENT_MA
 
 Agent のインストールが成功したかどうかを確認するには、[ホストマップ][20]で `cloudfoundry` でフィルタリングします。Datadog Agent BOSH リリースでは、各ホストに `cloudfoundry` のタグを付けています。オプションとして、以下のスクリーンショットのように、`bosh_job` など、任意のタグでホストをグループ化します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="Datadog のホストマップの Filter セクションに cloudfoundry を、Group セクションに bosh_job を入力したもの"  >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map.png" alt="Datadog のホストマップの Filter セクションに cloudfoundry を、Group セクションに bosh_job を入力したもの" >}}
 
 いずれかのホストをクリックしてズームインし、六角形の中の **system** をクリックして、Datadog がシステムメトリクスを受信していることを確認します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="Datadog ホストマップのホストの詳細表示で、システムインテグレーションが選択され、複数のグラフでデータが表示されている様子"  >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-host-map-detail.png" alt="Datadog ホストマップのホストの詳細表示で、システムインテグレーションが選択され、複数のグラフでデータが表示されている様子" >}}
 
 #### PCF コンテナ内の CAPI メタデータと Cluster Agent タグを収集する
 
@@ -239,6 +239,8 @@ jobs:
       aliases:
         - domain: <DNS_NAME (e.g. datadog-cluster-agent)>
 ```
+
+`<TOKEN>` を [Cluster Agent トークン][34]に置き換えてください。
 
 **注**: これは、Datadog Cluster Agent サービスの DNS エイリアスを作成し、静的なエイリアスを介してアドレスを取得できるようにします。BOSH DNS エイリアスに関する詳細は、BOSH ドキュメントの[サービスに対するエイリアス](https://bosh.io/docs/dns/#aliases-to-services)を参照してください。
 
@@ -461,7 +463,7 @@ bosh -n -d cf-manifest -e <BOSH_ENV> deploy --recreate cf-manifest.yml
 
 [メトリクスエクスプローラー][23]で、`cloudfoundry.nozzle` で始まるメトリクスを検索します。
 
-{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="検索バーに cloudfoundry.nozle を入力した Datadog のメトリクスエクスプローラー"  >}}
+{{< img src="integrations/cloud_foundry/cloud-foundry-nozzle-metrics.png" alt="検索バーに cloudfoundry.nozle を入力した Datadog のメトリクスエクスプローラー" >}}
 
 #### アプリケーションのメタデータプレフィックスを制御する
 
@@ -499,3 +501,4 @@ Firehose Nozzle のアプリメトリクスで、アプリケーションメタ�
 [30]: /ja/profiler/enabling/
 [32]: /ja/integrations/faq/pivotal_architecture
 [33]: https://github.com/DataDog/datadog-cluster-agent-boshrelease/blob/master/jobs/datadog-cluster-agent/spec
+[34]: https://docs.datadoghq.com/ja/containers/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication

@@ -42,11 +42,13 @@ Agent v6.19+/v7.19+ 以降、使用されるデフォルトのトランスポー
 
 Datadog Agent v6 は、収集したログをファイル、ネットワーク (TCP または UDP)、journald、Windows チャンネルから Datadog に転送できます。
 
-1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` ディレクトリに、`<CUSTOM_LOG_SOURCE>.d/` フォルダーを新規作成します。
+1. [Agent の構成ディレクトリ][4]のルートにある `conf.d/` ディレクトリに、Datadog ユーザーがアクセスできる新しい `<CUSTOM_LOG_SOURCE>.d/` フォルダを作成します。
 2. この新しいフォルダーに新しい `conf.yaml` ファイルを作成します。
 3. 下記のパラメーターを指定して、カスタムログ収集構成グループを追加します。
 4. [Agent を再起動][6]してこの新しい設定を適用します。
 5. [Agent の status サブコマンドを実行][7]し、Checks セクションで `<CUSTOM_LOG_SOURCE>` を検索します。
+
+権限エラーがある場合は、[ログファイルを追跡する権限の問題][12]を参照してトラブルシューティングを行ってください。
 
 以下に、カスタムログ収集設定の例を示します。
 
@@ -63,7 +65,7 @@ logs:
     source: "<SOURCE>"
 ```
 
-Windows では、パス `"<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log"` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
+Windows では、パス `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
 
 [1]: /ja/agent/guide/agent-configuration-files/
 {{< /tabs >}}
@@ -164,7 +166,7 @@ logs:
 | `encoding`       | ✕       | `type` が **file** の場合、Agent がファイルを読み込む際のエンコーディングを設定します。UTF-16 リトルエンディアン の場合は `utf-16-le` に、UTF-16 ビッグエンディアンの場合は `utf-16-be` に、Shift JIS の場合は `shift-jis` に設定します。その他の値に設定すると、Agent はファイルを UTF-8 形式で読み込みます。_`utf-16-le` および `utf-16be` は Agent v6.23/v7.23 の、`shift-jis` は Agent v6.34/v7.34 の追加機能です_                                                                                      |
 | `tags`           | ✕       | 収集される各ログに追加するタグのリスト ([タグ付けの詳細はこちら][11])。                                                                                                                                                                                                                                                                             |
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -179,3 +181,4 @@ logs:
 [9]: /ja/getting_started/tagging/unified_service_tagging
 [10]: /ja/metrics/custom_metrics/#overview
 [11]: /ja/getting_started/tagging/
+[12]: /ja/logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files

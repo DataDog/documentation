@@ -9,15 +9,12 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
-- link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-  tag: "Blog"
-  text: "Configure pipeline alerts with Datadog CI monitors"
 - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
   tag: "Blog"
   text: "Configure pipeline alerts with Datadog CI monitors"
@@ -166,7 +163,7 @@ To disable samples, uncheck the box at the bottom of the **Say what's happening*
 #### Sample examples
 
 Include a table of CI Test 10 samples in the alert notification:
-{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples" style="width:60%;" >}}
 
 Include a table of CI Pipeline 10 samples in the alert notification:
 {{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Pipeline samples" style="width:60%;" >}}
@@ -211,7 +208,7 @@ For more information on flaky tests, see the [flaky test management guide][6].
 
 [1]: /continuous_integration/
 [2]: https://app.datadoghq.com/monitors/create/ci-pipelines
-[3]: /monitors/create/configuration/#advanced-alert-conditions
+[3]: /monitors/configuration/#advanced-alert-conditions
 [4]: /monitors/notify/
 [5]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [6]: https://docs.datadoghq.com/continuous_integration/guides/flaky_test_management/

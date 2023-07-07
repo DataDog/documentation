@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-gitlab
 app_uuid: 629973c5-63ac-4f17-a9c2-5bda5b6677b4
 assets:
@@ -49,17 +51,17 @@ pricing:
   tag: project_name
   unit_label: GitLab プロジェクト
   unit_price: 1
-public_title: GitLab インテグレーション
+public_title: GitLab
 short_description: GitLab のプロジェクト、アプリケーション、インスタンスを監視します。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud
@@ -79,7 +81,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: GitLab インテグレーション
+  title: GitLab
   uninstallation: README.md#Uninstallation
 ---
 

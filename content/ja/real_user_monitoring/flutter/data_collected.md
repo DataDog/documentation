@@ -1,12 +1,9 @@
 ---
-beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/data_collected.md
 description: Flutter Monitoring で収集されるデータについて説明します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
-  text: dd-sdk-flutter ソースコード
+  text: dd-sdk-flutter のソースコード
 - link: real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM データの調査方法
@@ -26,5 +23,5 @@ Flutter Monitoring のデータのほとんどは、RUM 用のネイティブな
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/#event-specific-metrics-and-attributes
+[1]: /ja/real_user_monitoring/ios/data_collected/#event-specific-metrics-and-attributes
+[2]: /ja/real_user_monitoring/android/data_collected/#event-specific-metrics-and-attributes

@@ -1,0 +1,48 @@
+{
+  "contacts": [
+    {
+      "contact": "contact@datadoghq.com",
+      "name": "Team Email",
+      "type": "email"
+    }
+  ],
+  "dd-service": "service-exampleservicedefinition",
+  "dd-team": "my-team",
+  "docs": [
+    {
+      "name": "Architecture",
+      "provider": "google drive",
+      "url": "https://gdrive/mydoc"
+    }
+  ],
+  "extensions": {
+    "myorgextension": "extensionvalue"
+  },
+  "integrations": {
+    "opsgenie": {
+      "region": "US",
+      "service-url": "https://my-org.opsgenie.com/service/123e4567-e89b-12d3-a456-426614174000"
+    },
+    "pagerduty": "https://my-org.pagerduty.com/service-directory/PMyService"
+  },
+  "links": [
+    {
+      "name": "Runbook",
+      "type": "runbook",
+      "url": "https://my-runbook"
+    }
+  ],
+  "repos": [
+    {
+      "name": "Source Code",
+      "provider": "GitHub",
+      "url": "https://github.com/DataDog/schema"
+    }
+  ],
+  "schema-version": "v2",
+  "tags": [
+    "my:tag",
+    "service:tag"
+  ],
+  "team": "my-team"
+}

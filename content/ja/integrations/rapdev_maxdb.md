@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-maxdb
 app_uuid: f30ae17c-d58a-43f4-a8a6-693279394101
 assets:
@@ -29,8 +31,10 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
+- キャッシュ
 - data store
+- マーケットプレイス
+- sap
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -54,21 +58,23 @@ pricing:
   tag: db
   unit_label: データベース
   unit_price: 50
-public_title: MaxDB インテグレーション
+public_title: MaxDB
 short_description: MaxDB データベースのボリューム、キャッシュ、スキーマ、テーブルなどを監視します
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
+  - Category::Caching
   - Category::Data Store
+  - Category::Marketplace
+  - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: MaxDB データベースのボリューム、キャッシュ、スキーマ、テーブルなどを監視します
   media:
@@ -83,7 +89,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: MaxDB インテグレーション
+  title: MaxDB
   uninstallation: README.md#Uninstallation
 ---
 

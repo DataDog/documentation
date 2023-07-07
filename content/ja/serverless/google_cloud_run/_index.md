@@ -8,183 +8,409 @@ title: Google Cloud Run
 ---
 
 ## 概要
-Google Cloud Run は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[GCP インテグレーション][1]を通して Cloud Run のモニタリングとログ収集を提供しています。また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Cloud Run 実行アプリケーションをインスツルメントするソリューションも提供しています。
+
+Google Cloud Run は、コンテナベースのアプリケーションをデプロイし、スケーリングするためのフルマネージドサーバーレスプラットフォームです。Datadog は、[Google Cloud インテグレーション][1]を通して Cloud Run のモニタリングとログ収集を提供しています。また、Datadog は現在公開ベータ版として、トレース、カスタムメトリクス、直接ログ収集を可能にする専用 Agent で Cloud Run アプリケーションをインスツルメントするソリューションも提供しています。
 
   <div class="alert alert-warning">この機能は公開ベータ版です。<a href="https://forms.gle/HSiDGnTPvDvbzDAQA">フィードバックフォーム</a>、または標準的なサポートチャンネルを通じてフィードバックを提供することができます。ベータ期間中は、Cloud Run モニタリングと APM トレースは直接費用なしで利用できます。既存の APM のお客様は、スパンの取り込みとボリュームのコストが増加する可能性があります。</div>
 
-## トレースとカスタムメトリクス
-### コンテナの構築
+## はじめに
 
-Dockerfile を使用してアプリケーションを構築する場合は、以下を完了してください。
+### 前提条件
 
-1. [サポートされている Datadog トレーシングライブラリ][8]を使用して、アプリケーションをインスツルメントする
+[Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
 
-2. [Datadog `serverless-init` バイナリ][2] を `COPY` 命令を使用して、Docker イメージにコピーします。
+### 1. Agent のインストール
 
-3. `ENTRYPOINT` 命令を使用して、Docker コンテナが開始されるときに `serverless-init` バイナリを実行します。
+Dockerfile またはビルドパックを使用して Agent をインストールすることができます。ビルドパックを使用する場合、最初に[トレーシングライブラリのインストール](#install-tracing-library)が必要です。
 
-4. `CMD` 命令を使用して、既存のアプリケーションやその他の必要なコマンドを引数として実行します。
-
-以下は、これらの 3 つのステップを完了する方法の例です。これらの例は、既存の Dockerfile のセットアップに応じて調整する必要があるかもしれません。
-
+#### Dockerfile で Agent をインストールする
 
 {{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
 {{< programming-lang lang="go" >}}
+
+
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントすることができます。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+# Datadog `serverless-init` を Docker イメージにコピーします
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["/path/to/your-go-binary"] (adapt this line to your needs)
+
+# オプションで Datadog のタグを追加します
+ENV DD_SERVICE=datadog-demo-run-go
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# この環境変数は、Cloud Run でトレース伝播を正しく動作させるために必要です。
+# Datadog でインスツルメンテーションされたすべてのダウンストリームサービスにこの変数を設定します。
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
+# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
+CMD ["/path/to/your-go-binary"]
 ```
-詳しくは [Go アプリケーションのトレース][1]を参照してください。[簡単な Go アプリケーションのサンプルコード][2]をご覧ください。
 
-
-[1]: /ja/tracing/setup_overview/setup/go/?tabs=containers
-[2]: https://github.com/DataDog/crpb/tree/main/go
 {{< /programming-lang >}}
-
 {{< programming-lang lang="python" >}}
 
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+# Datadog `serverless-init` を Docker イメージにコピーします
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# python トレーシングライブラリをこちらか requirements.txt でインストールします
+RUN pip install --no-cache-dir ddtrace==1.7.3
+
+# オプションで Datadog のタグを追加します
+ENV DD_SERVICE=datadog-demo-run-python
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# この環境変数は、Cloud Run でトレース伝播を正しく動作させるために必要です。
+# Datadog でインスツルメンテーションされたすべてのダウンストリームサービスにこの変数を設定します。
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
+# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["ddtrace-run", "python", "app.py"] (adapt this line to your needs)
+
+# Datadog トレースライブラリによって起動されるエントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
+CMD ["ddtrace-run", "python", "app.py"]
 ```
 
-詳しくは [Python アプリケーションのトレース][1]を参照してください。[簡単な Python アプリケーションのサンプルコード][2]をご覧ください。
-
-[1]: /ja/tracing/setup_overview/setup/python/?tabs=containers
-[2]: https://github.com/DataDog/crpb/tree/main/python
 {{< /programming-lang >}}
-
 {{< programming-lang lang="nodejs" >}}
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+# Datadog `serverless-init` を Docker イメージにコピーします
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# Datadog js トレーシングライブラリをこちらか package.json でインストールします
+
+npm i dd-trace@2.2.0
+
+# enable the Datadog tracing library
+ENV NODE_OPTIONS="--require dd-trace/init"
+
+# オプションで Datadog のタグを追加します
+ENV DD_SERVICE=datadog-demo-run-nodejs
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# この環境変数は、Cloud Run でトレース伝播を正しく動作させるために必要です。
+# Datadog でインスツルメンテーションされたすべてのダウンストリームサービスにこの変数を設定します。
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
+# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["/nodejs/bin/node", "/path/to/your/app.js"] (adapt this line to your needs)
+
+# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
+CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
 
 ```
 
-詳しくは [Node.js アプリケーションのトレース][1]を参照してください。[簡単な Node.js アプリケーションのサンプルコード][2]をご覧ください。
-
-[1]: /ja/tracing/setup_overview/setup/nodejs/?tabs=containers
-[2]: https://github.com/DataDog/crpb/tree/main/js
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+# Datadog `serverless-init`  を Docker イメージにコピーします
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# オプションで Datadog のタグを追加します
+ENV DD_SERVICE=datadog-demo-run-java
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# この環境変数は、Cloud Run でトレース伝播を正しく動作させるために必要です。
+# Datadog でインスツルメンテーションされたすべてのダウンストリームサービスにこの変数を設定します。
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
+# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["./mvnw", "spring-boot:run"] (adapt this line to your needs)
+
+# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
+CMD ["./mvnw", "spring-boot:run"]
 
 ```
 
-詳しくは [Java アプリケーションのトレース][1]を参照してください。[簡単な Java アプリケーションのサンプルコード][2]をご覧ください。
-
-[1]: /ja/tracing/setup_overview/setup/java/?tabs=containers
-[2]: https://github.com/DataDog/crpb/tree/main/java
 {{< /programming-lang >}}
-
 {{< programming-lang lang="dotnet" >}}
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+# Datadog `serverless-init`  を Docker イメージにコピーします
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# オプションで Datadog のタグを追加します
+ENV DD_SERVICE=datadog-demo-run-dotnet
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# この環境変数は、Cloud Run でトレース伝播を正しく動作させるために必要です。
+# Datadog でインスツルメンテーションされたすべてのダウンストリームサービスにこの変数を設定します。
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
+# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["dotnet", "helloworld.dll"] (adapt this line to your needs)
+
+# エントリポイントにラップされたバイナリアプリケーションを実行します。必要に応じて内容を変更してください。
+CMD ["dotnet", "helloworld.dll"]
 
 ```
 
-詳しくは [.NET アプリケーションのトレース][1]を参照してください。[簡単な .NET アプリケーションのサンプルコード][2]をご覧ください。
-
-[1]: /ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers
-[2]: https://github.com/DataDog/crpb/tree/main/dotnet
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
+
+Dockerfile に次の記述を追加することで、Datadog Agent を使用してアプリケーションをインスツルメントします。以下の例は、既存の Dockerfile のセットアップに応じて調整が必要になる場合があります。
+
 ```
-COPY --from=datadog/serverless-init:beta4 /datadog-init /app/datadog-init
+# Datadog `serverless-init`  を Docker イメージにコピーします
+COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+
+# オプションで Datadog のタグを追加します
+ENV DD_SERVICE=datadog-demo-run-ruby
+ENV DD_ENV=datadog-demo
+ENV DD_VERSION=1
+
+# この環境変数は、Cloud Run でトレース伝播を正しく動作させるために必要です。
+# Datadog でインスツルメンテーションされたすべてのダウンストリームサービスにこの変数を設定します。
+ENV DD_TRACE_PROPAGATION_STYLE=datadog
+
+# アプリケーションを Datadog の serverless-init プロセスでラップするためエントリポイントを変更します
 ENTRYPOINT ["/app/datadog-init"]
-CMD ["rails", "server", "-b", "0.0.0.0"] (この行はあなたのニーズに合わせてください)
 
+# エントリポイントにラップされたバイナリアプリケーションを実行します。
+CMD ["rails", "server", "-b", "0.0.0.0"] (必要に応じて内容を変更してください)
 ```
 
-詳しくは [Ruby アプリケーションのトレース][1]を参照してください。[簡単な Ruby アプリケーションのサンプルコード][2]をご覧ください。
-
-[1]: /ja/tracing/trace_collection/dd_libraries/ruby/
-[2]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### トラブルシューティング
+#### ビルドパックで Agent をインストールする
+
+[`Pack Buildpacks`][3] は、Dockerfile を使用せずにコンテナをパッケージ化する便利な方法を提供します。この例では、Google Cloud コンテナレジストリと Datadog サーバーレスビルドパックを使用しています。
+
+**注**: ビルドパックを実行する前に、お使いの言語の[トレーシングライブラリ](#install-tracing-library)をインストールしてください。
+
+以下のコマンドを実行して、アプリケーションを構築します。
+
+   ```shell
+   pack build --builder=gcr.io/buildpacks/builder \
+   --buildpack from=builder \
+   --buildpack datadog/serverless-buildpack:latest \
+   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
+   ```
+
+**注**: Alpine とは互換性がありません。
+
+### 2. トレーシングライブラリのインストール {#install-tracing-library}
+
+ビルドパックを使用した場合は、[アプリケーションの構成](#3-configure-your-application)まで読み飛ばすことができます。
+
+{{< programming-lang-wrapper langs="go,python,nodejs,java,dotnet,ruby" >}}
+{{< programming-lang lang="go" >}}
+[こちらの手順][2]に従って、アプリケーションに Go トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信してください。
+
+
+[シンプルな Go アプリケーションのサンプルコード][1]。
+
+
+[1]: https://github.com/DataDog/crpb/tree/main/go
+[2]: /ja/tracing/trace_collection/dd_libraries/go/?tab=containers#installation-and-getting-started
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+[以下の手順][2]に従って、アプリケーションに Python トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Python アプリケーションのサンプルコード][1]。
+
+[1]: https://github.com/DataDog/crpb/tree/main/python
+[2]: /ja/tracing/trace_collection/dd_libraries/python/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+[以下の手順][2]に従って、アプリケーションに Node トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Node.js アプリケーションのサンプルコード][1]。
+
+[1]: https://github.com/DataDog/crpb/tree/main/js
+[2]: /ja/tracing/trace_collection/dd_libraries/nodejs/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+
+[以下の手順][2]に従って、アプリケーションに Java トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Java アプリケーションのサンプルコード][1]。
+
+[1]: https://github.com/DataDog/crpb/tree/main/java
+[2]: /ja/tracing/trace_collection/dd_libraries/java/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+#### 
+
+指示に従って、[.NET Core トレーシングライブラリ][1]と [.NET Framework トレーシングライブラリ][2]のインストールと構成を行います。
+
+[1]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[2]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework/?tab=containers#custom-instrumentation
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+[以下の手順][2]に従って、アプリケーションに Ruby トレーシングライブラリをインストールし、構成して、トレースをキャプチャして送信します。
+
+[シンプルな Ruby アプリケーションのサンプルコード][1]。
+
+[1]: https://github.com/DataDog/crpb/tree/main/ruby-on-rails
+[2]: /ja/tracing/trace_collection/dd_libraries/ruby/?tab=containers#instrument-your-application
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
+### 3. アプリケーションを構成する
+
+コンテナが構築され、レジストリにプッシュされたら、最後の手順として Datadog Agent 用に必要な環境変数を設定します。
+- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Google Cloud シークレット][10]に設定する必要があります。
+- `DD_SITE`: Datadog のエンドポイントと Web サイト。このページの右側で自分のサイトを選択します。あなたのサイトは {{< region-param key="dd_site" code="true" >}} です。
+- `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします
+
+環境変数とその機能の詳細については、[追加の構成](#additional-configurations)を参照してください。
+
+次のコマンドはサービスをデプロイし、外部からの接続がサービスに到達できるようにするためのコマンドです。`DD_API_KEY` を環境変数として設定し、サービスのリスニングポートを 80 に設定します。
+
+```shell
+gcloud run deploy APP_NAME --image=gcr.io/YOUR_PROJECT/APP_NAME \
+  --port=80 \
+  --update-env-vars=DD_API_KEY=$DD_API_KEY \
+  --update-env-vars=DD_TRACE_ENABLED=true \
+  --update-env-vars=DD_SITE='datadoghq.com' \
+
+```
+
+### 3. 結果
+
+デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
+
+## 追加の構成
+
+- **高度なトレース:** Datadog Agent は、一般的なフレームワーク向けに基本的なトレース機能をすでにいくつか提供しています。さらに詳しい情報については、[高度なトレースガイド][2]に従ってください。
+
+- **ログ:** [Google Cloud インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
+
+- **カスタムメトリクス:** [DogStatsd クライアント][4]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][9]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][11]の両方で `avg`を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
+
+- **トレース伝播:** 分散型トレーシングのためにトレースコンテキストを伝播させるには、Cloud Run アプリとそのダウンストリームにある Datadog インスツルメンテーションサービスに対して `DD_TRACE_PROPAGATION_STYLE` 環境変数を `'datadog'` に設定してください。
+
+### 環境変数
+
+| 変数 | 説明 |
+| -------- | ----------- |
+|`DD_API_KEY`| [Datadog API キー][7] - **必須**|
+| `DD_SITE` | [Datadog サイト][5] - **必須** |
+| `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
+| `DD_SERVICE`      | [統合サービスタグ付け][6]を参照してください。                                  |
+| `DD_VERSION`      | [統合サービスタグ付け][6]を参照してください。                                  |
+| `DD_ENV`          | [統合サービスタグ付け][6]を参照してください。                                  |
+| `DD_SOURCE`       | [統合サービスタグ付け][6]を参照してください。                                  |
+| `DD_TAGS`         | [統合サービスタグ付け][6]を参照してください。                                  |
+
+### OpenTelemetry
+
+以下の手順で、OpenTelemetry データを Datadog に送信します。
+
+1. Datadog `serverless-init` にスパンをエクスポートするよう OpenTelemetry に指示します。
+
+   ```js
+   // instrument.js
+
+   const { NodeTracerProvider } = require("@opentelemetry/sdk-trace-node");
+   const { OTLPTraceExporter } = require('@opentelemetry/exporter-trace-otlp-http');
+   const { Resource } = require('@opentelemetry/resources');
+   const { SemanticResourceAttributes } = require('@opentelemetry/semantic-conventions');
+   const { SimpleSpanProcessor } = require('@opentelemetry/sdk-trace-base');
+
+   const provider = new NodeTracerProvider({
+      resource: new Resource({
+          [ SemanticResourceAttributes.SERVICE_NAME ]: '<your-service-name>',
+      })
+   });
+
+   provider.addSpanProcessor(
+      new SimpleSpanProcessor(
+          new OTLPTraceExporter(
+              { url: 'http://localhost:4318/v1/traces' },
+          ),
+      ),
+   );
+   provider.register();
+   ```
+
+2. Express 用の OpenTelemetry のインスツルメンテーションを追加します。これは `ddtrace` を追加するのと同じようなものです。
+
+   ```js
+   // instrument.js
+
+   const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-express');
+   const { HttpInstrumentation } = require('@opentelemetry/instrumentation-http');
+   const { registerInstrumentations } = require('@opentelemetry/instrumentation');
+
+   registerInstrumentations({
+      instrumentations: [
+          new HttpInstrumentation(),
+          new ExpressInstrumentation(),
+      ],
+   });
+
+   ```
+
+3. 実行時にインスツルメンテーションを追加します。例えば、Node.js の場合、`NODE_OPTIONS` を使用します。
+   ```
+   # Dockerfile
+
+   FROM node
+
+   WORKDIR /app
+   COPY package.json index.js instrument.js /app/
+   RUN npm i
+
+   ENV NODE_OPTIONS="--require ./instrument"
+
+   CMD npm run start
+   ```
+
+4. Datadog の `serverless-init` を追加します。
+   ```
+   # Dockerfile
+
+   COPY --from=datadog/serverless-init /datadog-init /app/datadog-init
+   ENTRYPOINT ["/app/datadog-init"]
+   ```
+5. Datadog の `serverless-init` で、`DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT`または `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` 環境変数で OpenTelemetry を有効にします。
+
+   ```
+   # Dockerfile
+
+   ENV DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT="localhost:4318"
+   ```
+
+## トラブルシューティング
+
 このインテグレーションは、お使いのランタイムが完全な SSL を実装しているかどうかに依存します。Node の slim イメージを使用している場合、証明書を含めるために Dockerfile に次のコマンドを追加する必要があるかもしれません。
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
 ```
-
-#### Datadog のビルドパックで構築する
-
-1. 以下を実行して、アプリケーションを構築します。
-   ```
-   pack build --builder=gcr.io/buildpacks/builder \
-   --buildpack from=builder \
-   --buildpack datadog/serverless-buildpack:beta4 \
-   gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-
-   ```
-
-   **注**: Alpine とは互換性がありません。
-
- 2. GCP にイメージをプッシュします。
-    ```
-    docker push gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-    ```
-
-### Cloud Run へのデプロイ
-以下は、標準的な GCP ツールを使用して Cloud Run サービスをデプロイするための手順です。コンテナイメージ、シークレット、デプロイメントを管理するための他のシステムがある場合は、それを代わりに使用することができます。
-
-3. このコマンドを実行すると、GCP にビルドが送信されます。
-
-   ```
-   gcloud builds submit --tag gcr.io/YOUR_PROJECT/YOUR_APP_NAME
-   ```
-4. Datadog API キーからシークレットを作成します。
-   GCP コンソールの[シークレットマネージャー][3]から、**Create secret** をクリックします。
-
-   **Name** フィールドに名前 (例えば、`datadog-api-key`) を設定します。次に、Datadog API キーを **Secret value** フィールドに貼り付けます。
-5. サービスをデプロイします。
-   GCP コンソールの [Cloud Run][4] から、**Create service** をクリックします。
-
-   **Deploy one revision from an existing container image** (既存のコンテナイメージから 1 つのリビジョンをデプロイする) を選択します。以前にビルドしたイメージを選択します。
-
-   認証方法を選択します。
-
-   以前に作成したシークレットを参照します。**Container, Variables & Secrets, Connections, Security** (コンテナ、変数とシークレット、接続、セキュリティ) セクションに移動し、**Variables & Secrets** タブを選択します。
-
-   **Secrets** で、**Reference a secret** をクリックし、Datadog API キーから作成したシークレットを選択します。ユーザーにシークレットへのアクセス権を付与する必要があるかもしれません。
-
-   **Reference method** で、**Exposed as environment variable** を選択します。
-
-   **Environment variables** セクションで、名前が `DD_API_KEY` に設定されていることを確認します。
-
-### カスタムメトリクス
-[DogStatsd クライアント][5]を使って、カスタムメトリクスの送信を行うことができます。
-
-**注**: `DISTRIBUTION` メトリクスのみを使用してください。
-
-### 高度なオプションと構成
-
-#### 環境変数
-
-| 変数 | 説明 |
-| -------- | ----------- |
-| `DD_SITE` | [Datadog サイト][6]。 |
-| `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
-| `DD_SERVICE` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_VERSION` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_ENV` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_SOURCE` | [統合サービスタグ付け][7]を参照してください。 |
-| `DD_TAGS` | [統合サービスタグ付け][7]を参照してください。 |
-
-## ログの収集
-
-[GCP インテグレーション][1]を使用してログを収集することができます。また、環境変数 `DD_LOGS_ENABLED` を true に設定することで、Agent を通じてアプリケーションログをキャプチャすることも可能です。
 
 ## その他の参考資料
 
@@ -192,10 +418,13 @@ RUN apt-get update && apt-get install -y ca-certificates
 
 
 [1]: /ja/integrations/google_cloud_platform/#log-collection
-[2]: https://registry.hub.docker.com/r/datadog/serverless-init
-[3]: https://console.cloud.google.com/security/secret-manager
-[4]: https://console.cloud.google.com/run
-[5]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
-[6]: /ja/getting_started/site/
-[7]: /ja/getting_started/tagging/unified_service_tagging/
-[8]: /ja/tracing/trace_collection/#for-setup-instructions-select-your-language
+[2]: /ja/tracing/trace_collection/#for-setup-instructions-select-your-language
+[3]: https://buildpacks.io/docs/tools/pack/
+[4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[5]: /ja/getting_started/site/
+[6]: /ja/getting_started/tagging/unified_service_tagging/
+[7]: /ja/account_management/api-app-keys/#api-keys
+[8]: https://github.com/DataDog/crpb/tree/main
+[9]: /ja/metrics/distributions/
+[10]: /ja/metrics/#time-and-space-aggregation
+[11]: https://cloud.google.com/run/docs/configuring/secrets

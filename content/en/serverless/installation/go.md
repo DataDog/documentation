@@ -15,7 +15,7 @@ aliases:
     - /serverless/datadog_lambda_library/go/
 ---
 
-<div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a> instead.</div>
+<div class="alert alert-warning">If your Go Lambda functions are still using runtime <code>go1.x</code> and you cannot migrate to the <code>provided.al2</code> runtime, you must <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">instrument using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in a VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
@@ -54,11 +54,32 @@ For more information and additional settings, see the [plugin documentation][1].
 [3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Container Image" %}}
+
+1. Install the Datadog Lambda Extension
+
+    ```dockerfile
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
+    ```
+
+    Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
+
+2. Set the required environment variables
+
+    - Set `DD_SITE` to {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Set `DD_API_KEY_SECRET_ARN` to the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `DD_API_KEY` instead and set the Datadog API key in plaintext.
+    - Optionally set `DD_UNIVERSAL_INSTRUMENTATION: true` to take advantage of [advanced configurations][3] such as capturing the Lambda request and response payloads and inferring APM spans from incoming Lambda events.
+
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /serverless/configuration/
+{{% /tab %}}
 {{% tab "Custom" %}}
 ### Install the Datadog Lambda Extension
 
 [Add the Lambda layer][1] of Datadog Lambda Extension to your Lambda functions, using the ARN format based on your AWS region and architecture:
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```sh
 # Use this format for x86-based Lambda deployed in AWS commercial regions
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
@@ -72,6 +93,23 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< late
 # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```sh
+# Use this format for x86-based Lambda deployed in AWS commercial regions
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for arm64-based Lambda deployed in AWS commercial regions
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for x86-based Lambda deployed in AWS GovCloud regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+```
+{{< /site-region >}}
 
 Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
@@ -132,6 +170,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 ## What's next?
 
 - Congratulations! You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- Turn on [threat monitoring][4] to get alerted on attackers targeting your service
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
     - connect your telemetry using tags
@@ -147,3 +186,5 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [1]: https://app.datadoghq.com/functions
 [2]: /serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /serverless/configuration/
+[4]: /security/application_security/enabling/serverless/?tab=serverlessframework
+

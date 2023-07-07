@@ -163,7 +163,7 @@ Documentation about [StatsD/DogStatsD][10].
 [2]: /dashboards/#screenboards
 [3]: /agent/
 [4]: /metrics/custom_metrics/
-[5]: /dashboards/querying/#rollup-to-aggregate-over-time
+[5]: /dashboards/querying/#aggregate-and-rollup
 [6]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
 [7]: /dashboards/functions/rollup/
 [8]: /metrics/guide/different-aggregators-look-same/

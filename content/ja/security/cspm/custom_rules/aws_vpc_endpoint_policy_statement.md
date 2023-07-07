@@ -1,0 +1,65 @@
+---
+dependencies: []
+disable_edit: true
+---
+# aws_vpc_endpoint_policy_statement
+詳細は AWS のドキュメントをご参照ください [1]
+
+[1]: https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html#vpc-endpoint-policies
+
+## `account_id`
+**タイプ**: `STRING`<br>
+## `policy_id`
+**タイプ**: `STRING`<br>
+## `policy_not_principal`
+**タイプ**: `STRUCT`<br>
+**プロバイダー名**: `policy_not_principal`<br>
+   - `policy_id`<br>
+    **タイプ**: `STRING`<br>
+   - `principal`<br>
+    **タイプ**: `STRING`<br>
+   - `principal_aws`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+   - `principal_canonical_user`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+   - `principal_federated`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+   - `principal_service`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+## `policy_principal`
+**タイプ**: `STRUCT`<br>
+**プロバイダー名**: `policy_principal`<br>
+   - `policy_id`<br>
+    **タイプ**: `STRING`<br>
+   - `principal`<br>
+    **タイプ**: `STRING`<br>
+   - `principal_aws`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+   - `principal_canonical_user`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+   - `principal_federated`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+   - `principal_service`<br>
+    **タイプ**: `UNORDERED_LIST_STRING`<br>
+## `principal_aws`
+**タイプ**: `UNORDERED_LIST_STRING`<br>
+## `statement_action`
+**タイプ**: `UNORDERED_LIST_STRING`<br>
+## `statement_effect`
+**タイプ**: `STRING`<br>
+## `statement_has_condition`
+**タイプ**: `BOOLEAN`<br>
+## `statement_id`
+**タイプ**: `INT32`<br>
+## `statement_not_action`
+**タイプ**: `UNORDERED_LIST_STRING`<br>
+## `statement_not_resource`
+**タイプ**: `STRING`<br>
+## `statement_resource`
+**タイプ**: `STRING`<br>
+## `statement_sid`
+**タイプ**: `STRING`<br>
+## `vpc_endpoint_arn`
+**タイプ**: `STRING`<br>
+## `vpc_endpoint_id`
+**タイプ**: `STRING`<br>

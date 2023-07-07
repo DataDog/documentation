@@ -28,8 +28,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- caching
 - data store
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/solr/README.md
@@ -48,17 +48,17 @@ public_title: Solr
 short_description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::キャッシュ
   - Category::データストア
-  - Category::オートディスカバリー
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視
   media: []
@@ -77,7 +77,7 @@ Solr チェックは、Solr クラスターの状態とパフォーマンスを�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Solr チェックは [Datadog Agent][2] パッケージに含まれています。Solr ノードに追加でインストールする必要はありません。
 

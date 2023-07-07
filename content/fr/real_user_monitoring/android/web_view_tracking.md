@@ -1,7 +1,5 @@
 ---
 beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/web_view_tracking.md
 description: Surveillez des vues Web dans vos applications Android hybrides.
 further_reading:
 - link: /real_user_monitoring/android/
@@ -18,13 +16,13 @@ title: Suivi des vues Web Android
 
 Grâce à la solution Real User Monitoring, vous pouvez surveiller des vues Web et bénéficier d'une visibilité complète sur vos applications Android et Android TV hybrides.
 
-Datadog vous permet d'accomplir ce qui suit 
+Cette fonctionnalité vous permet d'accomplir ce qui suit :
 
 - Surveiller des parcours utilisateur dans les composants Web et natifs de vos applications mobiles
 - Identifier les pages Web ou composants natifs à l'origine des problèmes de latence de vos applications mobiles
 - Venir en aide aux utilisateurs qui ne parviennent pas à charger des pages Web sur leur appareil mobile
 
-## Configuration
+## Implémentation
 
 ### Prérequis
 
@@ -68,7 +66,7 @@ Cliquez sur **Open View waterfall** dans l'onglet **Performance** pour passer d'
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/fr/real_user_monitoring/browser/#npm
+[1]: /fr/real_user_monitoring/browser/#npm
 [2]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android/1.12.0-beta1/aar
-[3]: https://docs.datadoghq.com/fr/real_user_monitoring/android/?tab=kotlin#setup
+[3]: /fr/real_user_monitoring/android/?tab=kotlin#setup
 [4]: https://app.datadoghq.com/rum/explorer

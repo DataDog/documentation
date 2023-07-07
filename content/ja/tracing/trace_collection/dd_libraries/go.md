@@ -12,7 +12,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-go/tree/v1
   tag: GitHub
   text: ソースコード
-- link: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+- link: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
   tag: GoDoc
   text: パッケージページ
 - link: /tracing/glossary/
@@ -65,7 +65,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
    DD_DOGSTATSD_PORT=8125    # The port to send Dogstatsd metrics to. Defaults to 8125.
    ```
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -82,14 +82,13 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{% tab "その他の環境" %}}
 
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の多くの環境で利用できます。
+トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、さまざまな環境で利用できます。
 
 その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
 
 [1]: /ja/agent/basic_agent_usage/heroku/#installation
 [2]: /ja/integrations/cloud_foundry/#trace-collection
 [3]: /ja/integrations/amazon_elasticbeanstalk/
-[4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
 {{% /tab %}}
@@ -112,4 +111,4 @@ Datadog には、一連のライブラリとフレームワークをインスツ
 [1]: /ja/tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /ja/tracing/trace_collection/library_config/go/
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

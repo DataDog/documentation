@@ -10,7 +10,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -38,7 +38,7 @@ Any metric reporting to Datadog is available for monitors. For more information,
 **Note**: The `anomalies` function uses the past to predict what is expected in the future, so using it on a new metric may yield poor results.
 
 After defining the metric, the anomaly detection monitor provides two preview graphs in the editor:
-{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" style="width:80%;">}}
 
 * The **Historical View** allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
 * The **Evaluation Preview** is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
@@ -60,7 +60,7 @@ Recovery window
 
 Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
 
-{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds" style="width:80%;">}}
 
 
 Deviations
@@ -70,7 +70,7 @@ Algorithm
 : The [anomaly detection algorithm](#anomaly-detection-algorithms) (`basic`, `agile`, or `robust`).
 
 Seasonality
-: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric. For the `agile` algorithm, `monthly` is also available.
+: The [seasonality](#seasonality) (`hourly`, `daily`, or `weekly`) of the cycle for the `agile` or `robust` algorithm to analyze the metric.
 
 Daylight savings
 : Available for `agile` or `robust` anomaly detection with `weekly` or `daily` seasonality. For more information, see [Anomaly Detection and Time Zones][4].
@@ -82,7 +82,6 @@ Thresholds
 : The percentage of points that need to be anomalous for alerting, warning, and recovery.
 
 ### Seasonality
-<div class="alert alert-info"><strong>Note</strong>: Machine learning algorithms require at least twice as much historical data time as the chosen seasonality time to be fully efficient. For example, a weekly seasonality requires at least two weeks of data.</div>
 
 Hourly
 : The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.
@@ -93,8 +92,14 @@ Daily
 Weekly
 : The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.
 
-Monthly
-: The algorithm expects that a given day of the month behaves like past days of the month, for example the first day of the month behaves like past first days of a month. Available for the `agile` algorithm.
+**Required data history for Anomaly Detection algorithm**: Machine learning algorithms require at least three time as much historical data time as the chosen seasonality time to compute the baseline.
+For example:
+
+* _weekly_ seasonality requires at least three weeks of data
+* _daily_ seasonality requires at least three days of data
+* _hourly_ seasonality requires at least three hours of data
+
+All of the seasonal algorithms may use up to six weeks of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
 ### Anomaly detection algorithms
 Basic
@@ -105,8 +110,6 @@ Agile
 
 Robust
 : Use when seasonal metrics expected to be stable, and slow, level shifts are considered anomalies. A [seasonal-trend decomposition][7] algorithm, it is stable and predictions remain constant even through long-lasting anomalies at the expense of taking longer to respond to intended level shifts (for example, if the level of a metric shifts due to a code change.)
-
-All of the seasonal algorithms may use up to a couple of months of historical data when calculating a metric's expected normal range of behavior. By using a significant amount of past data, the algorithms can avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
 ## Examples
 The graphs below illustrate how and when these three algorithms behave differently from one another.
@@ -179,13 +182,13 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 : The timeframe to be checked for anomalies (for example, `last_5m`, `last_1h`).
 
 `interval`
-: A positive integer representing the number of seconds in the rollup interval. The `interval` should be at least a fifth of the `alert_window` duration.
+: A positive integer representing the number of seconds in the rollup interval. It should be smaller or equal to a fifth of the `alert_window` duration.
 
 `count_default_zero`
 : Use `true` for most monitors. Set to `false` only if submitting a count metric in which the lack of a value should _not_ be interpreted as a zero.
 
 `seasonality`
-: `hourly`, `daily`, `weekly`, or `monthly`. Exclude this parameter when using the `basic` algorithm. The `monthly` parameter is available when using the `agile` algorithm.
+: `hourly`, `daily`, or `weekly`. Exclude this parameter when using the `basic` algorithm.
 
 `threshold`
 : A positive number no larger than 1. The fraction of points in the `alert_window` that must be anomalous in order for a critical alert to trigger.
@@ -234,14 +237,14 @@ A standard configuration of thresholds and threshold window looks like:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/anomaly
-[2]: /monitors/create/types/metric/#define-the-metric
+[2]: /monitors/types/metric/#define-the-metric
 [3]: /dashboards/functions/algorithms/#anomalies
 [4]: /monitors/guide/how-to-update-anomaly-monitor-timezone/
 [5]: /dashboards/functions/rollup/
 [6]: https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average
 [7]: https://en.wikipedia.org/wiki/Decomposition_of_time_series
-[8]: /monitors/create/configuration/#advanced-alert-conditions
-[9]: /monitors/create/types/metric/#data-window
+[8]: /monitors/configuration/#advanced-alert-conditions
+[9]: /monitors/types/metric/#data-window
 [10]: /monitors/notify/
 [11]: /api/v1/monitors/#create-a-monitor
 [12]: /monitors/manage/status/#settings

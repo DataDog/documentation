@@ -14,13 +14,13 @@ The following login methods are available:
 
 - Datadog Username and Password (also known as Standard)
 - Sign in with Google
-- Sign in with SAML
+- [Sign in with SAML][2]
 
 ## Enabling or disabling a default login method
 
 As an organization manager you can enable or disable the default login methods for your organization. New organizations start with **Datadog Username and Password** and **Sign in with Google** enabled and configured for all organizations and users. After you configure SAML, **Sign in with SAML** is also enabled.
 
-1. Navigate to [Login Methods][2].
+1. Navigate to [Login Methods][3].
 2. Set the **Enabled by Default** setting for each method to `On` or `Off`, according to your organization's preference or policy requirements.
 3. Confirm your selection.
 
@@ -32,12 +32,13 @@ Using overrides, you can change the available login methods for individual users
 
 {{< img src="account_management/login_methods_disabled_overrides_set.png" alt="Login method disabled, with user override enabled" style="width:80%;">}}
 
-In [User Management][3], you can filter users by the override methods set, or view users who have the Default login methods enabled:
+In [User Management][4], you can filter users by the override methods set, or view users who have the Default login methods enabled:
 
-{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to login override methods enabled." style="width:80%;">}}
+{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to show users by login methods set." style="width:80%;">}}
 
 You can edit the user's overrides or remove the override altogether to allow the user to only use the defaults. For more information see [Edit a user's login methods][1].
 
 [1]: /account_management/users/#edit-a-users-login-methods
-[2]: https://app.datadoghq.com/organization-settings/login-methods
-[3]: https://app.datadoghq.com/organization-settings/users
+[2]: /account_management/saml/
+[3]: https://app.datadoghq.com/organization-settings/login-methods
+[4]: https://app.datadoghq.com/organization-settings/users

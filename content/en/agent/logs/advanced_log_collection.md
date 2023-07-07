@@ -1,5 +1,5 @@
 ---
-title: Advanced Log Collection
+title: Advanced Log Collection Configurations
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
@@ -18,6 +18,11 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
+algolia:
+  tags: ['advanced log filter']
 ---
 
 Customize your log collection configuration:
@@ -87,7 +92,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+To apply a specific configuration to a given container, Autodiscovery identifies containers by name, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image.` To configure using Autodiscovery to collect container logs on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod's `log_processing_rules`:
 
 ```yaml
 apiVersion: apps/v1
@@ -101,7 +106,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -116,7 +121,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -218,7 +223,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -233,7 +238,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -306,7 +311,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -322,7 +327,7 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
@@ -407,7 +412,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -422,7 +427,7 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: postgres
+        - name: '<CONTAINER_IDENTIFIER>'
           image: postgres:latest
 ```
 
@@ -435,14 +440,14 @@ spec:
 
 More examples:
 
-| **Raw string**           | **Pattern**                                   |
-|--------------------------|-----------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
-| 20180228                 | `\d{8}`                                       |
-| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
-| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
+| **Raw string**           | **Pattern**                                       |
+|--------------------------|---------------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
+| 20180228                 | `\d{8}`                                           |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Automatic multi-line aggregation
 With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][2] automatically. 
@@ -500,7 +505,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/testApp.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -511,7 +516,7 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: testApp
+        - name: '<CONTAINER_IDENTIFIER>'
           image: testApp:latest
 ```
 
@@ -525,7 +530,7 @@ logs_config:
   auto_multi_line_detection: true
   auto_multi_line_extra_patterns:
    - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
@@ -569,7 +574,6 @@ The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 
 ## Tail most recently modified files first
-**Note:** This feature is in public beta.
 
 When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
 

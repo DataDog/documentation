@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: komodor-komodor
 app_uuid: d62310ba-c7a8-4c5b-ab9f-60bb46527f1b
 assets: {}
@@ -9,6 +11,10 @@ author:
   support_email: support@komodor.com
   vendor_id: komodor
 categories:
+- 構成 & デプロイ
+- コンテナ
+- 問題追跡
+- kubernetes
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -37,16 +43,20 @@ public_title: Komodor
 short_description: Kubernetes トラブルシューティングプラットフォーム
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
+  - Category::Containers
+  - Category::Issue Tracking
+  - Category::Kubernetes
   - Category::Marketplace
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes トラブルシューティングプラットフォーム
   media:

@@ -21,7 +21,6 @@ author:
   support_email: KosukeKamiya@users.noreply.github.com
 categories:
 - ネットワーク
-- モニタリング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_on_public_website: true
@@ -39,16 +38,15 @@ public_title: zabbix
 short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Network
-  - Category::Monitoring
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
   media: []
@@ -70,7 +68,7 @@ Zabbix に接続して
 
 Zabbix チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Zabbix チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

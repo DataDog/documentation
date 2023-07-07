@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure Table Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_table_storage/
@@ -31,7 +32,7 @@ Azure Table Storage からメトリクスを取得すると、以下のことが
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 

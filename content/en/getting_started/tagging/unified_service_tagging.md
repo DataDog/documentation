@@ -1,8 +1,6 @@
 ---
 title: Unified Service Tagging
 kind: documentation
-aliases:
-- /getting_started/tagging/unified_service_tagging
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
@@ -13,11 +11,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
+algolia:
+  tags: ['unified service tags','unified','unified service','service tags']
 ---
 
 ## Overview
 
-Unified service tagging ties Datadog telemetry together through using three [reserved tags][1]: `env`, `service`, and `version`.
+Unified service tagging ties Datadog telemetry together by using three [reserved tags][1]: `env`, `service`, and `version`.
 
 With these three tags, you can:
 
@@ -31,7 +31,7 @@ With these three tags, you can:
 
 ### Requirements
 
-- Unified service tagging requires setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
+- Unified service tagging requires the setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
 
 - Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 

@@ -1,7 +1,7 @@
 ---
 title: Alert Value Widget
 kind: documentation
-description: "Graph the current value of a metric in any metric monitor defined on your system."
+description: "Graph the current value of a metric in any simple-alert metric monitor defined on your system."
 aliases:
     - /graphing/widgets/alert_value/
 further_reading:
@@ -10,35 +10,21 @@ further_reading:
   text: "Building Dashboards using JSON"
 ---
 
-Alert values are query values showing the current value of the metric in any metric monitor defined on your system:
+Alert values are query values showing the current value of the metric in any simple-alert metric monitor defined on your system:
 
-{{< img src="dashboards/widgets/alert_value/alert_value.png" alt="Alert Value" >}}
+{{< img src="dashboards/widgets/alert_value/alert_value_2023.png" alt="Three alert value widgets with three different monitor statuses for disk space, high cpu and checkout error rate" >}}
 
 ## Setup
-{{< img src="dashboards/widgets/alert_value/alert_value_setup.png" alt="Alert Value Setup" style="width:80%;">}}
+{{< img src="dashboards/widgets/alert_value/alert_value_setup_2023.png" alt="Alert Value setup page for high cpu monitor" style="width:100%;">}}
 
 ### Configuration
 
-1. Choose a previously created metric monitor to graph.
+1. Choose an existing metric monitor to graph.
 2. Select the formatting to display:
-    * raw value
-    * 0/1/2/3 decimals
-3. Select to display:
-    * `Automatic`
-    * `/s` Per Second
-    * `b` Bits
-    * `B` Bytes
-    * `Custom`
-
-### Options
-
-#### Title
-
-Display a custom title for your widget by activating the `Show a Title` check box:
-
-{{< img src="dashboards/widgets/options/title.png" alt="Widget title" style="width:80%;">}}
-
-Optionally define its size and alignment.
+    * Decimal
+    * Units
+    * Alignment
+3. Give your graph a title.
 
 ## API
 

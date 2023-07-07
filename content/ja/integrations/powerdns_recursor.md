@@ -29,10 +29,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
-- network
-- autodiscovery
+- caching
 - log collection
+- network
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md
 display_on_public_website: true
@@ -50,18 +49,17 @@ public_title: Power DNS Recursor
 short_description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
-  - Category::ネットワーク
-  - Category::オートディスカバリー
+  - Category::キャッシュ
   - Category::ログの収集
+  - Category::ネットワーク
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: PowerDNS Recursor の異常な送受信トラフィックを常に監視。
   media: []
@@ -86,7 +84,7 @@ PowerDNS Recursor のパフォーマンスを追跡し、異常または注意�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 

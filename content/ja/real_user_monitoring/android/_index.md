@@ -1,10 +1,8 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/rum_getting_started.md
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
-  text: dd-sdk-android ソースコード
+  tag: Github
+  text: dd-sdk-android のソースコード
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
@@ -53,8 +51,9 @@ dependencies {
 1. [**UX Monitoring** > **RUM Applications** > **New Application**][2] へ移動します。
 2. アプリケーションタイプとして `android` を選択し、新しいアプリケーション名を入力して一意の Datadog アプリケーション ID とクライアントトークンを生成します。
 3. Web ビューをインスツルメントするには、**Instrument your webviews** トグルをクリックします。詳しくは、[Web ビュー追跡][13]を参照してください。
+4. クライアント IP またはジオロケーションデータの自動ユーザーデータ収集を無効にするには、これらの設定のチェックボックスをオフにします。詳しくは、[RUM Android データ収集][15]をご覧ください。
 
-{{< img src="real_user_monitoring/android/create_rum_application.png" alt="Datadog ワークフローで RUM アプリケーションを作成" style="width:90%;">}}
+   {{< img src="real_user_monitoring/android/android-new-application.png" alt="Datadog で Android 用 RUM アプリケーションを作成する" style="width:90%;">}}
 
 データの安全性を確保するため、クライアントトークンを使用する必要があります。`dd-sdk-android`  ライブラリの構成に [Datadog API キー][3]のみを使用した場合、クライアント側で Android アプリケーションの APK バイトコード内で公開されます。
 
@@ -372,15 +371,16 @@ Datadog の構成で、初期化時に以下のスニペットを追加します
 
 [1]: https://github.com/DataDog/dd-sdk-android
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[8]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/account_management/api-app-keys/#client-tokens
+[5]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-views
+[6]: /ja/real_user_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /ja/real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[8]: /ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [9]: https://square.github.io/okhttp/interceptors/
-[10]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#custom-views
-[11]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[10]: /ja/real_user_monitoring/android/advanced_configuration/#custom-views
+[11]: /ja/real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
 [12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
-[13]: https://docs.datadoghq.com/ja/real_user_monitoring/android/web_view_tracking/
-[14]: https://docs.datadoghq.com/ja/getting_started/tagging/using_tags/#rum--session-replay
+[13]: /ja/real_user_monitoring/android/web_view_tracking/
+[14]: /ja/getting_started/tagging/using_tags/#rum--session-replay
+[15]: /ja/real_user_monitoring/android/data_collected/

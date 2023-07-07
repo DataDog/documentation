@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure DB for MariaDB のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/
@@ -31,7 +32,7 @@ Azure Database for MariaDB からメトリクスを取得すると、以下の�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

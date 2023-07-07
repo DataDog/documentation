@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-If you aren’t already collecting logs with Datadog, see the [Logs documentation][10] to set up logs. Ensure that the `source` tag (specifying language) is properly configured. Datadog recommends setting up Agent-based log collection.
+If you aren't already collecting logs with Datadog, see the [Logs documentation][10] to set up logs. Ensure that the `source` tag (specifying language) is properly configured. Datadog recommends setting up Agent-based log collection.
 
 ## Setup
 
@@ -25,6 +25,21 @@ For backend languages such as **C#**, **.NET**, **Go**, and **Node.js**, the cod
 If you are already sending stack traces to Datadog but they are not in `error.stack`, you can set up a [generic log remapper][8] to remap the stack trace to the correct attribute in Datadog.
 
 To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in Error Tracking for Logs does not require APM; the enrichment tags and linked repository is the same for both.
+
+#### Attributes for error tracking
+
+There are specific attributes that have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking use the following attribute names:
+
+| Attribute            | Description                                                             |
+|----------------------|-------------------------------------------------------------------------|
+| `error.stack`        | Actual stack trace                                                      |
+| `error.message`      | Error message contained in the stack trace                              |
+| `error.kind`         | The type or "kind" of an error (for example, "Exception", or "OSError") |
+
+**Note**: By default, integration Pipelines attempt to remap default logging library parameters to those specific attributes and parse stack traces or traceback to automatically extract the `error.message` and `error.kind`.
+
+For more information, see the complete [source code attributes documentation][11].
+
 ### C# and .NET
 
 {{< tabs >}}
@@ -264,3 +279,4 @@ end
 [8]: /logs/log_configuration/processors/?tab=ui#remapper
 [9]: https://app.datadoghq.com/source-code/setup/apm
 [10]: /logs/log_collection/
+[11]: /logs/log_configuration/attributes_naming_convention/#source-code

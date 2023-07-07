@@ -9,7 +9,12 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/?tab=sqlserver"
   tag: "Documentation"
   text: "Troubleshoot Common Issues"
-
+- link: "https://www.datadoghq.com/blog/migrate-sql-workloads-to-azure-with-datadog/"
+  tag: "Blog"
+  text: "Strategize your Azure migration for SQL workloads with Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-monitoring-always-on/"
+  tag: "Blog"
+  text: "Monitor your AlwaysOn availability groups with Datadog Database Monitoring"
 
 ---
 

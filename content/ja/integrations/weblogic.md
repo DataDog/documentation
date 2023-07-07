@@ -31,7 +31,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ログの収集
-- web
 - oracle
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/weblogic/README.md
@@ -50,17 +49,16 @@ public_title: WebLogic
 short_description: WebLogic サーバーの健全性とパフォーマンスを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Log Collection
-  - Category::Web
   - Category::Oracle
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: WebLogic サーバーの健全性とパフォーマンスを監視します。
   media: []
@@ -84,7 +82,7 @@ Datadog による Oracle WebLogic のモニタリングでは、以下のこと�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 WebLogic チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。

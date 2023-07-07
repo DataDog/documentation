@@ -15,7 +15,7 @@ kind: ドキュメント
 title: Go サーバーレスアプリケーションのインスツルメンテーション
 ---
 
-<div class="alert alert-warning">Go Lambda 関数がまだランタイム <code>go1.x</code> を使用していて、<code>provided.al2</code> ランタイムに移行できない場合、代わりに <a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">Datadog Forwarder を使用してインスツルメントする</a>必要があります。</div>
+<div class="alert alert-warning">Go Lambda 関数がまだランタイム <code>go1.x</code> を使用していて、<code>provided.al2</code> ランタイムに移行できない場合、<a href="https://docs.datadoghq.com/serverless/guide/datadog_forwarder_go">Datadog Forwarder を使用してインスツルメントする</a>必要があります。それ以外の場合は、このガイドの指示に従って、Datadog Lambda 拡張機能を使用してインスツルメンテーションを行います。</div>
 
 <div class="alert alert-warning">Lambda 関数が公共のインターネットにアクセスできない VPC にデプロイされている場合、<code>datadoghq.com</code> <a href="/getting_started/site/">Datadog サイト</a>には <a href="/agent/guide/private-link/">AWS PrivateLink</a> を、それ以外のサイトには<a href="/agent/proxy/">プロキシを使用</a>してデータを送信することができます。</div>
 
@@ -54,11 +54,32 @@ custom:
 [3]: https://docs.datadoghq.com/ja/getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "Container Image" %}}
+
+1. Datadog Lambda 拡張機能のインストール
+
+    ```dockerfile
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
+    ```
+
+   `<TAG>` を特定のバージョン番号 (たとえば `{{< latest-lambda-layer-version layer="extension" >}}`) または `latest` に置き換えます。利用可能なタグのリストは、[Amazon ECR リポジトリ][1]で確認できます。
+
+2. 必要な環境変数を設定する
+
+    - `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
+    - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][2]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
+    - オプションで `DD_UNIVERSAL_INSTRUMENTATION: true` を設定すると、Lambda のリクエストとレスポンスのペイロードをキャプチャしたり、受信する Lambda イベントから APM スパンを推測したりといった[高度な構成][3]を活用できます。
+
+[1]: https://gallery.ecr.aws/datadog/lambda-extension
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /ja/serverless/configuration/
+{{% /tab %}}
 {{% tab "Custom" %}}
 ### Datadog Lambda 拡張機能のインストール
 
 AWS のリージョンやアーキテクチャに応じた ARN 形式で、Datadog Lambda 拡張機能の [Lambda レイヤーを Lambda 関数に追加][1]します。
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```sh
 # AWS 商用リージョンにデプロイされた x86 ベースの Lambda にはこの形式を使用します
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
@@ -72,6 +93,23 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< late
 # AWS GovCloud リージョンにデプロイされた arm64 ベースの Lambda にはこの形式を使用します
 arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```sh
+# AWS 商用リージョンにデプロイされた x86 ベースの Lambda にはこの形式を使用します
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# AWS 商用リージョンにデプロイされた arm64 ベースの Lambda にはこの形式を使用します
+arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+# AWS GovCloud リージョンにデプロイされた x86 ベースの Lambda にはこの形式を使用します
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+# AWS GovCloud リージョンにデプロイされた arm64 ベースの Lambda にはこの形式を使用します
+arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+```
+{{< /site-region >}}
 
 `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
 
@@ -132,6 +170,7 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 ## 次のステップ
 
 - おめでとうございます。[Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][4]を有効にします。
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][2]を参照してください
 - [高度な構成][3]を参照して以下のことを行ってください。
     - タグを使ったテレメトリー接続
@@ -147,3 +186,4 @@ func myHandler(ctx context.Context, event MyEvent) (string, error) {
 [1]: https://app.datadoghq.com/functions
 [2]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
 [3]: /ja/serverless/configuration/
+[4]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

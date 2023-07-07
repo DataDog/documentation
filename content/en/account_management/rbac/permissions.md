@@ -11,6 +11,10 @@ further_reading:
     - link: '/api/v2/roles/#list-permissions'
       tag: 'Documentation'
       text: 'Manage your permissions with the Permission API'
+algolia:
+    rank: 80
+    category: Documentation
+    subcategory: Datadog Role Permissions
 ---
 
 After creating a role, assign or remove permissions to this role directly by [updating the role in Datadog][1], or through the [Datadog Permission API][2]. Find below a list of available permissions.
@@ -37,7 +41,7 @@ All users can read all data types. Admin and Standard users have write permissio
 
 **Note**: When adding a new custom role to a user, make sure to remove the out-of-the-box Datadog role associated with that user in order to enforce the new role permissions.
 
-In addition to the general permissions, you can define more granular permissions for specific assets or data types. Permissions can be either global or scoped to a subset of elements. Find below the details of these options and the impact they have on each available permission.
+In addition to the general permissions, you can define more granular permissions for specific assets or data types. In the tables below, find the details of these options and the impact they have on each available permission.
 
 {{% permissions %}}
 

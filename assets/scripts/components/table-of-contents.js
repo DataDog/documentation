@@ -1,6 +1,18 @@
 let sidenavMapping = [];
 // let apiNavMapping = [];
 
+// fixes Chrome issue where pages with hash params are not scrolling to anchor
+window.addEventListener('load', function () {
+    const isChrome = /Chrome/.test(navigator.userAgent);
+    if (window.location.hash && isChrome) {
+        setTimeout(function () {
+            const hash = window.location.hash;
+            window.location.hash = "";
+            window.location.hash = hash;
+        }, 300);
+    }
+}, false);
+
 let tocContainer = document.querySelector('.js-toc-container');
 let tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
 const tocMobileBackdrop = document.querySelector('.js-mobile-toc-bg');

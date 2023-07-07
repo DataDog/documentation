@@ -336,6 +336,10 @@ require 'datadog/statsd'
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
 
+<div class="alert alert-info">
+  Si vous utilisez DogStatsD avec l'Agent de conteneur ou dans Kubernetes, vous devez instancier le host auquel les métriques StatsD sont transmises avec la variable d'environnement <code>$DD_DOGSTATSD_SOCKET</code> si vous utilisez un socket de domaine Unix, ou avec la variable d'environnement <code>$DD_AGENT_HOST</code> si vous avez lié le port DogStatsD à un port du host.
+</div>
+
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
@@ -351,7 +355,7 @@ Pour découvrir plus d'options, consultez la [documentation Datadog pour Go][1] 
 
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
@@ -432,10 +436,6 @@ using (var dogStatsdService = new DogStatsdService())
 
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-info">
-  Si vous utilisez DogStatsD avec l'Agent de conteneur ou dans Kubernetes, vous devez instancier le host auquel les métriques StatsD sont transmises avec la variable d'environnement <code>$DD_DOGSTATSD_SOCKET</code> si vous utilisez un socket de domaine Unix, ou avec la variable d'environnement <code>$DD_AGENT_HOST</code> si vous avez lié le port DogStatsD à un port du host.
-</div>
-
 ### Paramètres d'instanciation du client
 
 **Remarque** : Datadog vous conseille d'utiliser le tagging de service unifié lorsque vous assignez des tags. Le tagging de service unifié permet de lier les données de télémétrie Datadog entre elles via trois tags standards : `env`, `service` et `version`. Pour découvrir comment unifier votre environnement, consultez la section [Tagging de service unifié][8].
@@ -485,7 +485,7 @@ Le client Go dispose de plusieurs options pour la configuration du comportement 
 Pour découvrir toutes les options disponibles, consultez la [documentation Datadog pour Go][1] (en anglais).
 
 
-[1]: https://godoc.org/github.com/DataDog/datadog-go/v5/statsd#Option
+[1]: https://pkg.go.dev/github.com/DataDog/datadog-go/v5/statsd#Option
 {{< /programming-lang >}}
 {{< programming-lang lang="java" >}}
 

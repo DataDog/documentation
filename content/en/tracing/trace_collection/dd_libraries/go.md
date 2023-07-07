@@ -15,7 +15,7 @@ further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
   tag: "GitHub"
   text: "Source code"
-- link: "https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
+- link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
   tag: "GoDoc"
   text: "Package page"
 - link: "/tracing/glossary/"
@@ -25,7 +25,7 @@ further_reading:
 
 ## Compatibility requirements
 
-The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog’s Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
+The Go Tracer requires Go `1.17+` and Datadog Agent `>= 5.21.1`. For a full list of Datadog's Go version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
 ## Installation and getting started
 
@@ -65,7 +65,7 @@ Install and configure the Datadog Agent to receive traces from your now instrume
    DD_DOGSTATSD_PORT=8125    # The port to send Dogstatsd metrics to. Defaults to 8125.
    ```
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -82,14 +82,13 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
-For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
 {{% /tab %}}
@@ -112,4 +111,4 @@ For configuration instructions and details about using the API, see the Datadog 
 [1]: /tracing/compatibility_requirements/go
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace

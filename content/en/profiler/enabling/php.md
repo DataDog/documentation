@@ -11,7 +11,7 @@ further_reading:
     - link: 'profiler/search_profiles'
       tag: 'Documentation'
       text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting/php'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 aliases:
@@ -42,6 +42,12 @@ Datadog recommends running an OS version that is not EOL.
 
 Version 3.13 or newer of Alpine Linux is required because the profiler is built against musl v1.2.
 
+Additionally you need to install `libgcc_s` with:
+
+```shell
+apk add libgcc
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -64,8 +70,6 @@ To begin profiling applications:
 
 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
-4. Configure the profiler with environment variables. Unlike the tracer the profiler does not support INI settings.
-
    {{< tabs >}}
 {{% tab "CLI" %}}
 
@@ -85,7 +89,7 @@ php hello.php
 {{% /tab %}}
 {{% tab "PHP-FPM" %}}
 
-Use the `env` directive in the php-fpm’s `www.conf` file, for example:
+Use the `env` directive in the php-fpm's `www.conf` file, for example:
 
 ```
 ; DD_PROFILING_ENABLED is not required for v0.82.0+
@@ -115,7 +119,7 @@ SetEnv DD_VERSION 1.3.2
 
    See the [configuration docs][4] for more environment variables.
 
-5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+4. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 

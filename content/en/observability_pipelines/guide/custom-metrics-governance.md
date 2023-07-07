@@ -22,7 +22,7 @@ This guide walks you through how to use Observability Pipelines to govern and co
 
 ## Prerequisites
 
-This guide assumes that you have already set up Observability Pipelines, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Setup][4] documentation and [Vector Remap Language][5] for more information.
+This guide assumes that you have already set up the Observability Pipelines Worker, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Installation][4] documentation and [Vector Remap Language][5] for more information.
 
 ## Drop metrics missing specific tags or the metric's namespace
 
@@ -32,7 +32,7 @@ It is useful to break down your overall metrics usage with the [Usage Attributio
 
 ### Solution
 
-To prevent that issue, use Observability Pipelines to drop metrics missing tags that are meaningful to you. This can be done prior to metric ingestion and therefore before metrics contribute to your account's custom metrics usage. 
+To prevent that issue, use the Observability Pipelines Worker to drop metrics missing tags that are meaningful to you. This can be done prior to metric ingestion and therefore before metrics contribute to your account's custom metrics usage. 
 
 Observability Pipelines has a wide array of functions that can transform your metrics data before it is sent to Datadog. For example, use the `filter` transform to drop metrics that are missing specific tag keys. The following component filters out any metrics that do not have a `team_tag`, ensuring those metrics are dropped in your Observability Pipelines configuration.
 
@@ -84,14 +84,14 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2-
-           # remove .tag_to_drop tag
-           del(.tags.tag_to_drop) 
+    source: |
+      # Remove the `tag_to_drop` tag.
+      del(.tags.tag_to_drop) 
 ```
 
 ### Solution 2: Define an allowlist array of tags to keep
 
-In the scenario where you have many tags you want to drop and know which tags you want to keep, use the `filter()` function to define an allowlist of the tags to keep. This automatically drops any tags that aren't included in the allowlist. See the following configuration example:
+In the scenario where you want to drop all tags except for a list of allowed tags, define the allowlist and use the `filter()` function. This automatically drops any tags that aren't included in the allowlist. See the following configuration example:
 
 ```yaml
 transforms:
@@ -99,18 +99,17 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
+    source: |
+      # List of tags that should be allowed.
+      tags_allowlist = ["tag 1", "tag 2", "tag 3", "tag 4"]
 
-           # list of tags to keep
-           tags_allowlist = ["tag 1", "tag 2", "tag 3", "tag 4"]
-
-           # filter and drop any tags that don't match the tags in tags_to_keep
-           .tags = [filter(.tags) -> |_index, value| { includes(tags_allowlist, value)}
+      # Filter and drop any tags that are not in `tags_allowlist`.
+      .tags = filter(object!(.tags)) -> |key, _value| { includes(tags_allowlist, key) }
 ```
 
 ### Solution 3: Define a blocklist array of tags to drop
 
-In the case where you know which tags you want to drop, use the `filter()` function to define a blocklist of those tags. This is done by adding `!` to `includes(tags_blocklist, value)` from Solution 2.
+In the case where you know which tags you want to drop, you can use the same steps as in Solution 2, but negate the result of the `includes` call by prefixing it with `!`:
 
 ```yaml
 transforms:
@@ -118,18 +117,17 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
+    source: |
+      # List of tags that should be blocked.
+      tags_blocklist = ["tag 1", "tag 2", "tag 3", "tag 4"]
 
-           # list of tags to keep
-           tags_blocklist = ["tag 1", "tag 2", "tag 3", "tag 4"]
-
-           # filter and drop any tags that don't match the tags in tags_to_keep
-           .tags = [filter(.tags) -> |_index, value| { !includes(tags_blocklist, value)}
+      # Filter and drop any tags that are in `tags_blocklist`.
+      .tags = filter(object!(.tags)) -> |key, _value| { !includes(tags_blocklist, key) }
 ```
 
 ### Solution 4: Define an allowlist of valid tags in a Reference Table
 
-In cases when you have a specific list of valid tags, you can use Observability Pipelines' `get_enrichment_tables` and `find_enrichment_tables` functions. This allows you to reference an enrichment table in `csv` format in Observability Pipelines. `csv` is the only supported file format. 
+In cases when you have a specific list of valid tags, you can use Observability Pipelines' `get_enrichment_table_records` and `find_enrichment_table_records` functions. This allows you to reference an enrichment table in `csv` format in Observability Pipelines. `csv` is the only supported file format. 
 
 For this example, a `csv` file named `valid_tags.csv` contains the following valid tags:
 
@@ -164,9 +162,11 @@ transforms:
     type: remap
     inputs:
       - dd_agent.metrics
-    source: |2+
-           # filter and drop any tags that don't match the tags in tags_to_keep
-           .tags = [filter(.tags) -> |_index, value| {!is_empty(find_enrichment_table_records(valid_tag_table, value))}
+    source: |
+      # Filter and drop any tags that don't match the tags in `valid_tags.csv`.
+      .tags = filter(object!(.tags)) -> |key, _value| {
+        !is_empty(find_enrichment_table_records!("valid_tag_table", { "tag_name": key }))
+      }
 ```
 
 ## Prevent tag cardinality spikes
@@ -214,4 +214,4 @@ transforms:
 [6]: /account_management/billing/usage_attribution/
 [7]: https://vector.dev/docs/reference/vrl/
 [8]: /account_management/billing/custom_metrics/?tab=countrategauge
-[9]: https://vector.dev/docs/reference/configuration/transforms/tag_cardinality_limit/
+[9]: /observability_pipelines/reference/transforms/#tagcardinalitylimit

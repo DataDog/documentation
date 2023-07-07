@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-When using any Datadog cloud integration (AWS, Azure, GCP, etc.), metrics are pulled in by API with a crawler. You may see a delay in metrics due to constraints with the cloud provider API.
+When using any Datadog cloud integration (AWS, Azure, Google Cloud, etc.), metrics are pulled in by API with a crawler. You may see a delay in metrics due to constraints with the cloud provider API.
 
 ## Summary
 

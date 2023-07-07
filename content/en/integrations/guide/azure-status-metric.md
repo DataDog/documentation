@@ -30,7 +30,7 @@ Use the `azure.*.count` metric to:
 - Create monitors to alert you about the status of different Azure resources.
 
 **Note**: In some cases, the default visualization settings can make it appear as though resources are being double counted intermittently in charts or query widgets. This does not affect monitors or widgets scoped to a specific status.
-You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using ‘.fill(null)’. 
+You can reduce this effect by turning off [interpolation][2] in charts or query widgets by setting Interpolation > none or using `.fill(null)`. 
 
 For most resource types, the possible statuses are:
 
@@ -78,4 +78,4 @@ azure provider register Microsoft.ResourceHealth
 The `azure.*.status` metric should show in Datadog within 5 - 10 minutes.
 
 [1]: /integrations/azure/
-[2]: /dashboards/faq/interpolation-the-fill-modifier-explained/
+[2]: /metrics/guide/interpolation-the-fill-modifier-explained/

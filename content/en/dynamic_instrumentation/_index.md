@@ -3,12 +3,13 @@ title: Dynamic Instrumentation
 kind: documentation
 aliases:
     - /tracing/dynamic_instrumentation/
+    - /dynamic_instrumentation/how-it-works/
 is_beta: true
-private: true
+private: false
 further_reading:
-- link: "/dynamic_instrumentation/how-it-works/"
+- link: "/dynamic_instrumentation/expression-language/"
   tag: "Documentation"
-  text: "Learn more about how Dynamic Instrumentation works"
+  text: "Learn more about the Dynamic Instrumentation Expression Language"
 - link: "/tracing/trace_collection/dd_libraries"
   tag: "Documentation"
   text: "Learn more about how to instrument your application"
@@ -23,131 +24,183 @@ further_reading:
   text: "Learn more about Metrics"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/dynamic-instrumentation-request/" d-toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger">}}
-  Dynamic Instrumentation is in private beta. Fill out this form if you would like to
-  access it.
-{{< /beta-callout >}}
+## Overview
 
-Dynamic Instrumentation lets you capture data from your live applications without needing to do any code changes or redployment.
+Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
+
+{{< callout url="#" btn_hidden="true" >}}
+  Dynamic Instrumentation is in beta!
+{{< /callout >}} 
 
 ## Getting started
 
-### Requirements
+### Prerequisites
+
 Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.39.1 or higher is installed alongside your service.
-- For Java applications, tracing library [`dd-trace-java`][2] 0.109.0 or higher.
-- For Python applications, tracing library [`dd-trace-py`][3] 1.5 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][4] 2.15 or higher.
-- [Unified Service Tagging][5] tags `service`, `env`, and `version` are applied to your deployment.
-- Optionally, [Source Code Integration][6] is set up for your service.
-
-**Note**: `debugger_read` and `debugger_write` permissions are required to access the Dynamic Instrumentation page. For more information about roles and on how to assign roles to users, see [Role Based Access Control][7].
-
-### Enable Remote Configuration
-
-1. Go to the [Remote Configuration setup page][8] and enable the feature for your organization.
-2. Create a key. 
-3. Update your `datadog-agent` with the provided configuration snippet.
-4. Set `remote_configuration.refresh_interval` to be 5 seconds:
-   {{< tabs >}}
-   {{% tab "Configuration YAML" %}}
-   
-   Edit `datadog-agent.yaml` to add:
-   ```yaml
-   remote_configuration:
-     refresh_interval: 5s
-   ```
-   {{% /tab %}}
-   {{% tab "Environment variables" %}}
-   
-   Export the following environment variable:
-   ```shell
-   export DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=5s
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
-
-**Note**: Datadog Administrator permissions are required to enable Remote Configuration and create a key. This is a one-time setup per environment. If you do not have the necessary access rights, contact your Datadog administrator.
+- [Datadog Agent][1] 7.44.0 or higher is installed alongside your service.
+- [Remote Configuration][2] is enabled in that Agent.
+- For Java applications, tracing library [`dd-trace-java`][3] 1.15.0 or higher.
+- For Python applications, tracing library [`dd-trace-py`][4] 1.15.0 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.32.0 or higher.
+- [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
+- Optionally, [Source Code Integration][7] is set up for your service.
+- The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
+- The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations. For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
 
 ### Create a logs index
 
-Dynamic Instrumentation snapshots are sent to Datadog logs. They appear alongside your application logs.  
+Dynamic Instrumentation creates "dynamic logs" that are sent to Datadog and appear alongside your regular application logs.
 
-If you use Logs Indexes with [Exclusion filters][9], ensure Dynamic Instrumentation snapshots are not filtered from logs:
+If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not filtered:
 
 1. Create a logs index and [configure it][10] to the desired retention with **no sampling**.
-2. Set the filter to match on `source:dd_debugger`. 
-3. Ensure that the new index takes precedence over any other indexes with filters that might match on that tag, because logs enter the first index whose filter they match on.
+2. Set the filter to match on the `source:dd_debugger` tag. All Dynamic Instrumentation logs have this source.
+3. Ensure that the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
 ### Enable Dynamic Instrumentation
 
-To enable Dynamic Instrumentation on a service, select its runtime and follow the setup instructions:
+To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16]. 
+
+For more detailed instructions, select your runtime below:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
 ## Explore Dynamic Instrumentation
 
-Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding a Dynamic Instrumentation probe you are exporting additional data from your application, without the need to do any code change or redeployment.
+Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding a Dynamic Instrumentation probe you are exporting additional data from your application, without the need to change code or redeploy it.
 
-### Creating a snapshot probe
+### Using probes
 
-A *snapshot probe* exports the context in which it was configured to Datadog. It captures class properties, method arguments and local variables. For more information, read [How Dynamic Instrumentation Works][11].
+A probe allows you to collect data from specific points in your code without halting the execution of the program. 
 
-To create a snapshot probe:
+Think of using probes as enhancing your observability by adding dynamic logs, metrics, and spans to a running application without needing to change code, deploy it, or restart a service. You can gather data immediately without disturbing the user experience or requiring lengthy deployments.
+
+As a developer, you can also think of a probe as a "non-breaking breakpoint". In traditional debugging, a breakpoint is a point in the program where the execution stops, allowing the developer to inspect the state of the program at that point. However, in real-world production environments, it's not practical or even possible to stop the execution of the program. Probes fill in this gap by allowing you to inspect variable state in production environments in a non-intrusive way.
+
+### Creating a probe
+
+All probe types require the same initial setup:
 
 1. Go to the [Dynamic Instrumentation page][12].
-2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
-3. Select **Snapshot** as the probe type.
-4. If not prefilled, choose a service from the list.
-5. If not prefilled, choose runtime, environment and version.
-6. If you set up Source Code Integration for the service, you can select the file where you want to set the probe.
-7. In the source code, select a line on which to set the probe.
+1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
+1. If they are not prefilled, choose service, runtime, environment, and version.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a file, and displays the file's code so you can choose the line.
 
-### Creating a metric probe
+See the individual probe types below for specific creation steps for each probe type.
 
-Metric probes emit metrics at a chosen location in your code. Use the Dynamic Instrumentation expression language to reference numeric values from the context, such as from a local variable or a class field. For more information, read [How Dynamic Instrumentation Works][11].
+Alternatively, you can create a probe from these other contexts:
+
+Profiling
+: On a profiler flame graph, you can create a probe for a method by selecting **Instrument this frame with a probe** from the frame's context menu.
+
+Error Tracking
+: On a stack trace, mouse over a stack frame and click **Instrument**. This prefills the probe creation form with the Issue context.
+  
+
+### Creating log probes
+
+A *log probe* emits a log when it executes. 
+
+Log probes are enabled by default on all service instances that match the specified environment and version. They are rate-limited to execute at most 5000 times per second, on each instance of your service.
+
+If you enable **Capture method parameters and local variables** on the log probe, the following debugging data is captured and added to the log event:
+  - **Method arguments**, **local variables**, and **fields**, with the following default limits:
+    - Follow references three levels deep (configurable in the UI).
+    - The first 100 items inside collections.
+    - The first 255 characters for string values.
+    - 20 fields inside objects. Static fields are not collected.
+  - Call **stack trace**.
+  - Caught and uncaught **exceptions**.
+
+Because capturing the execution context is performance-intensive, by default it is enabled on only one instance of your service that matches the specified environment and version. Probes with this setting enabled are rate-limited to one hit per second.
+
+You must set a log message template on every log probe. The template supports embedding [expressions][15] inside curly brackets. For example: `User {user.id} purchased {count(products)} products`.
+
+You can also set a condition on a log probe using the [expression language][15]. The expression must evaluate to a Boolean. The probe executes if the expression is true, and does not capture or emit any data if the expression is false.
+
+To create a log probe:
+
+1. Select **Log** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
+1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
+1. Optionally enable extra data capturing from the probe.
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
+
+{{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
+
+### Creating metric probes
+
+A *metric probe* emits a metric when it executes. 
+
+Metric probes are automatically enabled on all service instances that match the configured environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
+
+Dynamic Instrumentation metric probes support the following metric types:
+
+- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
+- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
 To create a metric probe:
 
-1. Go to the [Dynamic Instrumentation page][12].
-2. Click **Create Probe** in the top right, or click the three dot context menu on a service and select **Add a probe for this service**.
-3. Select **Metric** as the probe type.
-4. Specify a name for the metric.
-5. Select a metric type.
-6. Input a metric expression.
-7. If not prefilled, choose a service from the list.
-5. If not prefilled, choose runtime, environment and version.
-9. If you set up Source Code Integration for the service, you can select the file where you want to set the probe.
-10. In the source code, select a line on which to set the probe.
+1. Select **Metric** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
+1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
+1. Select a metric type (count, gauge, or histogram).
+1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
-### Selecting instrumented instances
+{{< img src="dynamic_instrumentation/metric_probe.png" alt="Creating a Dynamic Instrumentation metric probe" >}}
 
-By default, Dynamic Instrumentation is enabled on only one randomly selected instance of your service for each environment and version combination. If the enabled instance is destroyed, a new one is selected at random from the remaining ones.
+### Creating span probes
 
-Alternatively, you can explicitly configure which instances of your service are enabled. You can use this feature to enable Dynamic Instrumentation on more service instances, or to restrict enablement in certain environments.
+A *span probe* emits a span when a method is executed. 
 
-To select a service:
+You can use a *span probe* as a more efficient alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
 
-1. Click the three dot context menu next to the service in the probes list and select **Apply filters for service instrumentation**. 
-2. Create one or more queries to select active instances based on tags. 
-3. Click **Apply Filter**.
+To create a span probe:
 
-To remove the filter, open the same menu item and click **Delete Filter**.
+1. Select **Span** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location). 
 
+{{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span probe" >}}
+
+
+### Creating span tag probes
+
+A *span tag* probe adds a tag value to an existing span. You can add a tag either to the _active_ span or to the _service entry_ span.
+Keep in mind that internal spans are not indexed by default and so might not be searchable in APM.  
+
+You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to add tags in code][14].
+
+To create a span tag probe:
+
+1. Select **Span Tag** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location). 
+1. Specify a name for the tag.
+1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15]. 
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
+1. Optionally add additional tags, each with their own name, expression, and optional condition.
+
+
+{{< img src="dynamic_instrumentation/span_tag_probe.png" alt="Creating a Dynamic Instrumentation span tag probe" >}}
+ 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/
-[2]: https://github.com/DataDog/dd-trace-java
-[3]: https://github.com/DataDog/dd-trace-py
-[4]: https://github.com/DataDog/dd-trace-dotnet
-[5]: /getting_started/tagging/unified_service_tagging/
-[6]: /integrations/guide/source-code-integration/
-[7]: /account_management/rbac/permissions#apm
-[8]: https://app.datadoghq.com/organization-settings/remote-config
+[2]: /agent/remote_config/
+[3]: https://github.com/DataDog/dd-trace-java
+[4]: https://github.com/DataDog/dd-trace-py
+[5]: https://github.com/DataDog/dd-trace-dotnet
+[6]: /getting_started/tagging/unified_service_tagging/
+[7]: /integrations/guide/source-code-integration/
+[8]: /account_management/rbac/permissions#apm
 [9]: /logs/log_configuration/indexes/#exclusion-filters
 [10]: /logs/log_configuration/indexes/#add-indexes
 [11]: /dynamic_instrumentation/how-it-works/
 [12]: https://app.datadoghq.com/dynamic-instrumentation
+[13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
+[14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[15]: /dynamic_instrumentation/expression-language
+[16]: https://app.datadoghq.com/dynamic-instrumentation/setup

@@ -77,13 +77,14 @@ Beta integrations are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+       | Fully Supported | `ratpack`                                      |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported | `restlet-http`.                                |
 | Spark Java              | 2.3+       | [Beta][3]       | `sparkjava` (requires `jetty`)                 |
+| Spring Boot             | 1.5        | Fully Supported | `spring-web` or `spring-webflux`               |
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
 | Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
-Also, frameworks like Spring Boot inherently work because it usually uses a supported embedded application server (Tomcat/Jetty/Netty).
+Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
 
 **Integrations Disabled By Default**
 
@@ -162,7 +163,10 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Jedis                   | 1.4+     | Fully Supported | `jedis`, `redis`                                                                         |
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                             |
 | MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                  |
-| RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
+| OpenSearch Rest         | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-rest`           |
+| OpenSearch Transport    | 1.0+     | Fully Supported | `opensearch`, `opensearch-transport`                                                     |
+| RediScala | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
+| Redisson | 2.x-3.x      | Fully Supported | `redisson`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
 | Vert.x Cassandra Client | 3.9		 | Fully Supported | `cassandra`																			  |
 | Vert.x Redis Client     | 3.9      | Fully Supported | `vertx-redis-client`                                                                     |
@@ -212,7 +216,7 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 | Spring Scheduling | 3.1+     | Fully Supported | `spring-scheduling`                            |
 | Twilio SDK        | < 8.0    | Fully Supported | `twilio-sdk`                                   |
 
-Don’t see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][3].
+Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][3].
 
 To improve visibility into applications using unsupported frameworks, consider:
 

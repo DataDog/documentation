@@ -2,9 +2,6 @@
 aliases:
 - /ja/tracing/setup_overview/setup/ios/
 - /ja/tracing/setup/ios/
-beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/trace_collection.md
 description: iOS アプリケーションからトレースを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
@@ -239,12 +236,13 @@ Datadog.verbosityLevel = .debug
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
+```
 DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Datadog トレーサーは [Open Tracing 規格][8]を実装しています。`Tracer` を Open Tracing の `Global.sharedTracer` としてグローバルに構成・登録します。この作業は一度だけで、通常は `AppDelegate` のコードで行います。
+3. Datadog トレーサーは [Open Tracing 標準][8]を実装します。`Tracer` を Open Tracing `Global.sharedTracer` としてグローバルに構成して登録します。通常、`AppDelegate` コードで 1 回実施するだけです。
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -443,6 +441,20 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 つまり、ユーザーがオフラインでアプリケーションを開いても、データが失われることはありません。
 
 ディスク上のデータは、古すぎる場合は SDK がディスク容量を使いすぎないようにするために自動的に破棄されます。
+
+## 初期化
+
+トレーサーを作成する際に、`Tracer.Configuration` の以下の属性を使用することができます。
+
+| メソッド                           | 説明                                                                                                                                                                                                                         |
+|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `serviceName`    | `service` に値を設定します。 |
+| `sendNetworkInfo` | `true` に設定すると、トレースにネットワーク接続情報 (到達ステータス、接続タイプ、携帯電話会社名など) が付加されます。|
+| `globalTags`     | トレーサーが作成するスパンに追加するタグを `<KEY>:<VALUE>` のペアで設定します。 |
+| `bundleWithRUM`    | スパンを現在の RUM View 情報でリッチ化することを有効にするには、`true` に設定します。これにより、RUM エクスプローラーで特定の View ライフスパン中に生成されたすべてのスパンを確認することができます。 |
+| `samplingRate`   | トレースを収集する割合を設定します (`0-100`)。 |
+
+
 
 ## その他の参考資料
 

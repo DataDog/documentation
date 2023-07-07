@@ -25,7 +25,7 @@ This tutorial walks you through the steps for enabling tracing on a sample Pytho
 
 {{< img src="tracing/guide/tutorials/tutorial-python-containers-overview.png" alt="Diagram showing installation scenario for this tutorial" style="width:100%;" >}}
 
-For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, and applications written in other languages, see the other [Enabling Tracing tutorials][1].
+For other scenarios, including the application and Agent on a host, the application in a container and Agent on a host, and on applications written in other languages, see the other [Enabling Tracing tutorials][1].
 
 See [Tracing Python Applications][2] for general comprehensive tracing setup documentation for Python.
 
@@ -139,7 +139,7 @@ Now that you have a working Python application, configure it to enable tracing.
    ENV DD_VERSION="0.1.0"
    ```
 
-4. Add Docker labels that correspond to the Universal Service Tags. This allows you to also get Docker metrics once your application is running. 
+4. Add Docker labels that correspond to the Universal Service Tags. This allows you also to get Docker metrics once your application is running. 
 
    ```
    LABEL com.datadoghq.tags.service="notes"
@@ -211,7 +211,7 @@ If you don't see traces after several minutes, clear any filter in the Traces Se
 
 ### Examine a trace
 
-On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into our notes application). 
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application). 
 
 The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth. 
 
@@ -226,7 +226,7 @@ A `GET /notes` trace looks something like this:
 
 ## Add custom instrumentation to the Python application
 
-While automatic instrumentation is convenient, sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
+Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Python DD Trace API allows you to specify spans within your code using annotations or code.
 
 The following steps walk you through adding annotations to the code to trace some sample methods.
 
@@ -252,7 +252,7 @@ docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
 docker-compose -f docker/containers/exercise/docker-compose.yaml up db datadog notes_app
 {{< /code-block >}}
 4. Resend some HTTP requests, specifically some `GET` requests.
-5. On the Trace Explorer, click into one of the new `GET` requests, and see a flame graph like this:
+5. On the Trace Explorer, click on one of the new `GET` requests, and see a flame graph like this:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
    

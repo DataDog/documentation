@@ -1,28 +1,28 @@
 ---
 categories:
-  - cloud
-ddtype: crawler
+- cloud
 dependencies: []
-description: "Intégrez vos services Alibaba\_Cloud à Datadog."
+description: Intégrez vos services Alibaba Cloud à Datadog.
 doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
 draft: false
 further_reading:
-  - link: https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/
-    tag: Blog
-    text: "Surveiller Alibaba\_Cloud avec Datadog"
+- link: https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/
+  tag: Blog
+  text: Surveiller Alibaba Cloud avec Datadog
 git_integration_title: alibaba_cloud
 has_logo: true
 integration_id: alibaba-cloud
-integration_title: "Alibaba\_Cloud"
+integration_title: Alibaba Cloud
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: alibaba_cloud
-public_title: "Intégration Datadog/Alibaba\_Cloud"
-short_description: "Intégrez vos services Alibaba\_Cloud à Datadog."
+public_title: Intégration Datadog/Alibaba Cloud
+short_description: Intégrez vos services Alibaba Cloud à Datadog.
 version: '1.0'
 ---
+
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">L'intégration Alibaba Cloud ne prend pas en charge le site gouvernemental de Datadog.</div>
 {{< /site-region >}}

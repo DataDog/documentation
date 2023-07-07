@@ -64,14 +64,13 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 {{% /tab %}}
 {{% tab "Other Environments" %}}
 
-Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
+Tracing is available for other environments, including [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
 
 For other environments, see the [Integrations][5] documentation for that environment and [contact support][6] if you encounter setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
 [3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
 [5]: /integrations/
 [6]: /help/
 {{% /tab %}}
@@ -87,23 +86,29 @@ After the Agent is installed, follow these steps to add the Datadog tracing libr
 ### Compile against dd-opentracing-cpp
 
 ```bash
-# Gets the latest release version number from GitHub.
-get_latest_release() {
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
-    grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/';
-}
-DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-# Download and install dd-opentracing-cpp library.
-wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
-mkdir -p dd-opentracing-cpp/.build
-tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
-cd dd-opentracing-cpp/.build
-# Download and install the correct version of opentracing-cpp, & other deps.
-../scripts/install_dependencies.sh
-cmake ..
-make
-make install
+# Requires the "jq" command, which can be installed via
+# the package manager, for example "apt install jq",
+# "apk add jq", "yum install jq".
+if ! command -v jq >/dev/null 2>&1; then
+  >&2 echo "jq command not found. Install using the local package manager."
+else
+  # Gets the latest release version number from GitHub.
+  get_latest_release() {
+    curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
+  }
+  DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
+  # Download and install dd-opentracing-cpp library.
+  wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
+  mkdir -p dd-opentracing-cpp/.build
+  tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
+  cd dd-opentracing-cpp/.build
+  # Download and install the correct version of opentracing-cpp, & other deps.
+  ../scripts/install_dependencies.sh
+  # Configure the project, build it, and install it.
+  cmake ..
+  make -j
+  make install
+fi
 ```
 
 Include `<datadog/opentracing.h>` and create the tracer:

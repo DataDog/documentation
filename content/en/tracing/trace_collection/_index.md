@@ -44,6 +44,9 @@ The following tutorials provide a walk-through of setting up distributed tracing
     {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}Enabling Tracing on a Java Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}Enabling Tracing on a Java Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}Enabling Tracing for a Java Application in a Container and an Agent on a Host{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /tracing/glossary/#trace

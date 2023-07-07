@@ -1,11 +1,12 @@
 ---
-title: サーバーレスパッケージが大きすぎるエラーのトラブルシューティング
-kind: documentation
 further_reading:
-  - link: /serverless/installation/nodejs
-    tag: ドキュメント
-    text: Node.js アプリケーションのインスツルメンテーション
+- link: /serverless/installation/nodejs
+  tag: ドキュメント
+  text: Node.js アプリケーションのインスツルメンテーション
+kind: documentation
+title: サーバーレスパッケージが大きすぎるエラーのトラブルシューティング
 ---
+
 このガイドは、"Code uncompressed size is greater than max allowed size of 272629760 "というエラーのトラブルシューティングを支援します。このエラーは、Datadog サーバーレスプラグインを使用して Node.js サーバーレスアプリケーションをインスツルメントするときに最も一般的に表示されます。また、他の言語やデプロイメント方法でこのエラーが発生した場合にも、このトラブルシューティングの方法が適用される場合があります。
 
 このエラーは、関数の_圧縮されていない_コードサイズが 250MB の制限を超えていることを示しています。[関数パッケージ][1] (関数のコードと依存関係を含む `.zip` アーティファクト) と関数に設定された [Lambda レイヤー][2]の両方が、この制限にカウントされます。両方を調べて、根本的な原因を探ってください。
@@ -17,17 +18,32 @@ further_reading:
 - 関数コードをインスツルメントする言語固有のライブラリと
 - 観測データを集計し、バッファリングし、Datadog のバックエンドに転送する拡張機能。
 
-AWS CLI コマンド [`aws lambda get-layer-version`][3] で Datadog Lambda レイヤーの内容やサイズを検査します。例えば、以下のコマンドを実行すると、_Datadog-Node14-x version 67_ と _Datadog-Extension version 19_ の Lambda レイヤーをダウンロードするリンクが得られ、圧縮されていないサイズ (合わせて約 30MB) を検査することが可能です。解凍サイズはレイヤーやバージョンによって異なります。以下の例のレイヤー名とバージョン番号は、アプリケーションで使用されているものに置き換えてください。
+AWS CLI コマンド [`aws lambda get-layer-version`][3] で Datadog Lambda レイヤーの内容やサイズを検査します。例えば、以下のコマンドを実行すると、_Datadog-Node16-x version 67_ と _Datadog-Extension version 19_ の Lambda レイヤーをダウンロードするリンクが得られ、圧縮されていないサイズ (合わせて約 30MB) を検査することが可能です。解凍サイズはレイヤーやバージョンによって異なります。以下の例のレイヤー名とバージョン番号は、アプリケーションで使用されているものに置き換えてください。
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node14-x \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
   --version-number 67
 
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension \
   --version-number 19
 ```
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+```
+aws lambda get-layer-version \
+  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Node16-x \
+  --version-number 67
+
+aws lambda get-layer-version \
+  --layer-name arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Extension \
+  --version-number 19
+```
+{{< /site-region >}}
+
 
 Datadog の Lambda レイヤー以外にも、関数に追加された (または追加される) Lambda レイヤーも検査します。[Serverless Framework][4] を利用している場合、CloudFormation のテンプレートは `deploy` または `package` コマンドを実行した後の隠しフォルダ `.serverless` から、Lambda レイヤー一覧は `Layers` セクションから確認することが可能です。
 
@@ -43,9 +59,13 @@ Datadog Lambda レイヤーはインスツルメンテーションライブラ�
 
 また、デプロイパッケージに含まれる他の依存関係 (`node_modules` フォルダ) を検査し、必要なものだけを `dependencies` に保存してください。
 
-## Webpack
+## バンドラー
 
-[Webpack][6] のようなバンドラーを使用すると、使用するコードのみを含めることでデプロイパッケージのサイズを劇的に削減することができます。必要な Webpack の構成は [Node.js の Lambda Tracing と Webpack の互換性][7]を参照してください。
+[Webpack][6] や [esbuild][7] のようなバンドラーを使用すると、使われているコードのみを含めることができ、デプロイパッケージのサイズを劇的に削減することができます。必要な Webpack の構成は [Node.js の Lambda Tracing とバンドラーの互換性][7]を参照してください。
+
+## Datadog-ci
+
+ユースケースによっては、パッケージサイズの問題を回避するために `datadog-ci lambda instrument` コマンドを使用する方が簡単だと感じるかもしれません。`datadog-ci lambda instrument` コマンドは、serverless-plugin-datadog と同じインスツルメンテーションを構成します。詳しくは、[datadog-ci リポジトリ][9]を参照してください。
 
 ## サポート
 
@@ -65,4 +85,6 @@ Datadog のサポートチームによる調査が必要な場合は、チケッ
 [4]: https://www.serverless.com/
 [5]: https://www.serverless.com/framework/docs/providers/aws/guide/serverless.yml/#package
 [6]: https://webpack.js.org
-[7]: /ja/serverless/guide/serverless_tracing_and_webpack/
+[7]: https://esbuild.github.io/
+[8]: /ja/serverless/guide/serverless_tracing_and_bundlers/
+[9]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/lambda#readme

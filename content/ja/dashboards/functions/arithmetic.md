@@ -1,9 +1,10 @@
 ---
-title: 算術演算
-kind: documentation
 aliases:
-  - /ja/graphing/functions/arithmetic/
+- /ja/graphing/functions/arithmetic/
+kind: documentation
+title: 算術演算
 ---
+
 ## 絶対値
 
 | 関数 | 説明                             | 例                 |
@@ -56,6 +57,12 @@ aliases:
 
 {{< img src="dashboards/functions/arithmetic/cumsum.png" alt="abs を使用した累計関数" style="width:80%;">}}
 
+## モニターの累積和
+
+累積和関数は視覚的な関数であるため、モニタークエリでは避ける必要があります。ダッシュボードやノートブックで使用する場合、ポイントは選択したタイムフレームに基づく値を反映することになります。モニターでは、どのタイムフレームを使用するかという感覚がないため、これはモニターではうまく反映されません。
+
+その代わり、モニター評価期間中に[累積タイムウィンドウ][1]を構成してください。
+
 ## Integral
 
 | 関数     | 説明                       | 例                             |
@@ -80,3 +87,5 @@ aliases:
     {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /ja/monitors/configuration/?tab=thresholdalert#cumulative-time-windows

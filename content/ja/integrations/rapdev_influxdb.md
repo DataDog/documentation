@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-influxdb
 app_uuid: e560c4c8-7983-4338-bc41-30b121a4ac98
 assets:
@@ -56,13 +58,13 @@ public_title: InfluxDB
 short_description: InfluxDB インスタンスの健全性とアクティビティを監視する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Data Store
   - Category::Marketplace
@@ -90,7 +92,7 @@ tile:
 
 ## 概要
 
-このインテグレーションは、[InfluxDB][1] の健全性と運用に関するメトリクスを報告します。
+このインテグレーションは、[InfluxDB][1] v2.0+ の健全性と運用に関するメトリクスを報告します。
 
 ### ダッシュボード  
 

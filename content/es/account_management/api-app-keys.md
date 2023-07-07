@@ -1,23 +1,24 @@
 ---
+algolia:
+  tags:
+  - clave de API
 aliases:
 - /es/account_management/faq/how-do-i-reset-my-application-keys/
 - /es/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /es/account_management/faq/api-app-key-management/
-kind: faq
+kind: documentación
 title: Claves de API y aplicación
 ---
 
 ## Claves de API
 
-Las claves de API son exclusivas de tu organización. Datadog Agent requiere una [clave de API][1] para enviar métricas y eventos a Datadog.
+Las claves de API son exclusivas de tu organización. El Datadog Agent requiere una [clave de API][1] para enviar métricas y eventos a Datadog.
 
 ## Claves de aplicación
 
 Las [claves de aplicación][2], junto con la clave de API de tu organización, ofrecen a los usuarios acceso a las API programáticas de Datadog. Las claves de aplicación están asociadas a la cuenta de usuario que las haya creado y, de manera predeterminada, tienen los permisos y contextos del usuario que las haya creado.
 
 ### Contextos
-
-<div class="alert alert-info"> Los contextos de autorización de las claves de aplicación son una funcionalidad de la versión beta privada. Ponte en contacto con el <a href="https://www.datadoghq.com/support/">equipo de asistencia de Datadog</a> para habilitar la compatibilidad con claves de aplicación con contexto para tu organización.</div>
 
 Para proteger mejor tus aplicaciones, puedes indicar [contextos de autorización][3] para tus claves de aplicación. De este modo, podrás definir permisos más específicos y minimizar el acceso que las aplicaciones tienen a tus datos de Datadog. Esto te da un control pormenorizado sobre tus aplicaciones y minimiza las vulnerabilidades de seguridad al limitar el acceso externo. Por ejemplo, una aplicación que solo lee dashboards no necesita derechos de administrador para gestionar usuarios ni eliminar los datos de tu organización.
 
@@ -38,7 +39,7 @@ Por motivos de seguridad, las claves de API no se pueden usar para enviar datos 
 - [Web Browser Log Collector][6] envía logs.
 - Las aplicaciones de [Real User Monitoring (RUM)][7] envían eventos y logs.
 
-Los tokens de cliente son exclusivos de tu organización. Para gestionarlos, accede a **Parámetros de organización** y haz clic en la pestaña **Tokens de cliente**.
+Los tokens de cliente son exclusivos de tu organización. Para gestionarlos, accede a **Organization Settings** (Parámetros de organización) y haz clic en la pestaña **Client Tokens** (Tokens de cliente).
 
 **Nota:** Si se desactiva un usuario que ha creado un token de cliente, este permanecerá activo.
 
@@ -46,10 +47,10 @@ Los tokens de cliente son exclusivos de tu organización. Para gestionarlos, acc
 
 Para añadir una clave de API o token de cliente de Datadog:
 
-1. Accede a Parámetros de organización y haz clic en la pestaña **Claves de API** o **Tokens de cliente**.
-2. Haz clic en el botón **Nueva clave** o **Nuevo token de cliente**, según lo que vayas a crear.
+1. Accede a Organization Settings (Parámetros de organización) y haz clic en la pestaña **API keys** (Claves de API) o **Client Tokens** (Tokens de cliente).
+2. Haz clic en el botón **New Key** (Nueva clave) o **New Client Token** (Nuevo token de cliente), según lo que vayas a crear.
 3. Indica un nombre para tu clave o token.
-4. Haz clic en **Crear clave de API** o **Crear token de cliente**.
+4. Haz clic en **Create API key** (Crear clave de API) o **Create Client Token** (Crear token de cliente).
 
 **Notas:**
 
@@ -58,11 +59,11 @@ Para añadir una clave de API o token de cliente de Datadog:
 
 ## Eliminar claves de API o tokens de cliente
 
-Para eliminar una clave de API o token de cliente de Datadog, accede a la lista de claves o tokens y haz clic en el icono de la **papelera** con **Revocar** junto a la clave o token que quieras eliminar.
+Para eliminar una clave de API o token de cliente de Datadog, accede a la lista de claves o tokens y haz clic en el icono de la **papelera** con **Revoke** (Revocar) junto a la clave o token que quieras eliminar.
 
 ## Añadir claves de aplicación
 
-Para añadir una clave de aplicación de Datadog, accede a **Parámetros de organización** > **Claves de aplicación**. Si tienes [permiso][4] para crear claves de aplicación, haz clic en **Nueva clave**.
+Para añadir una clave de aplicación de Datadog, accede a **Organization Settings** (Parámetros de organización) > **Application Keys** (Claves de aplicación). Si tienes [permiso][4] para crear claves de aplicación, haz clic en **New Key** (Nueva clave).
 
 **Notas:**
 
@@ -70,11 +71,11 @@ Para añadir una clave de aplicación de Datadog, accede a **Parámetros de orga
 
 ## Eliminar claves de aplicación
 
-Para eliminar una clave de aplicación de Datadog, accede a **Parámetros de organización** > **Claves de aplicación**. Si tienes [permiso][4] para crear y gestionar claves de aplicación, podrás ver tus claves y hacer clic en **Revocar** junto a la que quieras revocar. Si tienes permiso para gestionar todas las claves de aplicaciones de tu organización, podrás buscar la que quieres revocar y hacer clic en **Revocar** junto a ella.
+Para eliminar una clave de aplicación de Datadog, accede a **Organization Settings** (Parámetros de organización) > **Application Keys** (Claves de aplicación). Si tienes [permiso][4] para crear y gestionar claves de aplicación, podrás ver tus claves y hacer clic en **Revoke** (Revocar) junto a la que quieras revocar. Si tienes permiso para gestionar todas las claves de aplicaciones de tu organización, podrás buscar la que quieres revocar y hacer clic en **Revoke** junto a ella.
 
 ## Definir el contexto de las claves de aplicación
 
-Para indicar los [contextos de autorización][3] de las claves de aplicación, [haz una solicitud a la API de Datadog][5] para crear o editar una clave de aplicación. Los contextos se pueden definir para claves de aplicación que sean propiedad del [usuario actual][8] o de una [cuenta de servicio][9]. Si este campo no se indica, las claves de aplicación tendrán, de forma predeterminada, los mismos contextos y permisos que el usuario que las haya creado.
+Para indicar los [contextos de autorización][3] de las claves de aplicación, [haz una solicitud a la API de Datadog][5] o a la IU para crear o editar una clave de aplicación. Los contextos se pueden definir para claves de aplicación que sean propiedad del [usuario actual][8] o de una [cuenta de servicio][9]. Si este campo no se indica, las claves de aplicación tendrán, de forma predeterminada, los mismos contextos y permisos que el usuario que las haya creado.
 
 **Notas:**
 
@@ -82,7 +83,7 @@ Para indicar los [contextos de autorización][3] de las claves de aplicación, [
 
 ## Usar varias claves de API
 
-Valora la posibilidad de configurar varias claves de API para tu organización. Por ejemplo, usa distintas claves de API para cada uno de tus métodos de implementación: una para implementar Agent en Kubernetes, en AWS; otra para hacerlo localmente con Chef; otra para scripts de Terraform que automaticen tus dashboards o monitores, y otra para desarrolladores que hagan implementaciones en local.
+Valora la posibilidad de configurar varias claves de API para tu organización. Por ejemplo, usa distintas claves de API para cada uno de tus métodos de implementación: una para implementar un Agent en Kubernetes, en AWS; otra para hacerlo localmente con Chef; otra para scripts de Terraform que automaticen tus dashboards o monitores, y otra para desarrolladores que hagan implementaciones en local.
 
 El uso de varias claves de API te permite rotar las claves como parte de tus protocolos de seguridad, o revocar una clave en concreto si se expone inadvertidamente o si quieres dejar de usar el servicio al que está asociada.
 
@@ -94,9 +95,7 @@ Cuando la cuenta de un usuario está desactivada, se revocan todas las claves de
 
 ## Transferir claves
 
-Por razones de seguridad, Datadog no transfiere claves de API/aplicación entre usuarios. Lo recomendado es hacer un seguimiento de las claves de API/aplicación y rotarlas cada vez que un usuario deja la empresa. De esta forma, los usuarios que se marchen dejarán de tener acceso a tu cuenta y a la API de Datadog. La transferencia de la clave de API/aplicación permite a los usuarios que ya no están en la empresa seguir enviando y recibiendo datos de la API de Datadog. Los clientes también han solicitado cambiar el identificador al que están asociadas las claves de API/aplicación. Sin embargo, esto no resuelve el problema de base: un usuario que ya no está en la empresa sigue pudiendo enviar y recuperar datos de la API de Datadog.
-
-De manera alternativa, las organizaciones han preguntado si pueden crear una “cuenta de servicio” que sea la propietaria de claves de API/aplicación. Hay muchos casos en los que tiene sentido usar una “cuenta de servicio” para poseer claves de API. No obstante, es importante que no sea una mera cuenta compartida a la que todo el mundo tenga acceso. Si tienes previsto usar una “cuenta de servicio”, asegúrate de proteger el almacenamiento de sus credenciales (por ejemplo, mediante un administrador de contraseñas), además de seguir el principio de los mínimos privilegios. Para evitar la filtración accidental de las credenciales de la cuenta de servicio, solo un grupo reducido de personas debería tener acceso a ella (lo ideal es que sean solo aquellos que realmente necesitan encargarse de mantener la cuenta).
+Por motivos de seguridad, Datadog no transfiere claves de aplicación de un usuario a otro. Si necesitas compartir una clave de aplicación, usa una [cuenta de servicio][11].
 
 ## Qué hacer si una clave de API o aplicación se ve expuesta
 
@@ -133,3 +132,4 @@ Si identificas alguna actividad inusual o necesitas más ayuda para proteger tu 
 [8]: /es/api/latest/key-management/#create-an-application-key-for-current-user
 [9]: /es/api/latest/service-accounts/
 [10]: /es/help/
+[11]: /es/account_management/org_settings/service_accounts/

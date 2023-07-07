@@ -42,7 +42,7 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
    * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
 3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
 
-### Setting custom tags
+### Set custom tags
 
 Custom tags can be added to Buildkite traces by using the `buildkite-agent meta-data set` command.
 Any metadata tags with a key starting with `dd_tags.` are added to the job and pipeline spans. These
@@ -93,7 +93,7 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
-### Partial and downstream pipelines
+### View partial and downstream pipelines
 
 In the **Pipeline Executions** page, you can use the filters below in the search bar:
 
@@ -119,5 +119,5 @@ These filters can also be applied through the facet panel on the left hand side 
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
-[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#partial-and-downstream-pipelines
+[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
 [6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux

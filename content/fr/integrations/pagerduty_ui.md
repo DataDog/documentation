@@ -10,21 +10,12 @@ author:
   sales_email: sales@pagerduty.com
   support_email: support@pagerduty.com
 categories:
-  - alerting
-  - collaboration
-  - issue tracking
-  - notification
-classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Alerting
-  - Category::Collaboration
-  - Category::Issue Tracking
-  - Category::Notification
-  - Offering::UI Extension
+- alerting
+- collaboration
+- issue tracking
+- notification
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md
+- https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md
 display_on_public_website: true
 draft: false
 git_integration_title: pagerduty_ui
@@ -39,30 +30,42 @@ oauth: {}
 public_title: Interface PagerDuty
 short_description: Surveiller vos incidents PagerDuty depuis votre dashboard Datadog
 supported_os:
-  - linux
-  - mac os
-  - windows
+- linux
+- macos
+- windows
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Alerting
+  - Category::Collaboration
+  - Category::Issue Tracking
+  - Category::Notification
+  - Offering::UI Extension
   configuration: README.md#Setup
   description: Surveiller vos incidents PagerDuty depuis votre dashboard Datadog
   media:
-    - caption: Page d'accueil
-      image_url: images/landing_page.png
-      media_type: image
-    - caption: Status Dashboard de PagerDuty
-      image_url: images/status_dashboard.jpg
-      media_type: image
-    - caption: Status Dashboard de PagerDuty
-      image_url: images/status_dashboard2.jpg
-      media_type: image
-    - caption: Incidents de PagerDuty
-      image_url: images/incidents.jpg
-      media_type: image
+  - caption: Page d'accueil
+    image_url: images/landing_page.png
+    media_type: image
+  - caption: Status Dashboard de PagerDuty
+    image_url: images/status_dashboard.jpg
+    media_type: image
+  - caption: Status Dashboard de PagerDuty
+    image_url: images/status_dashboard2.jpg
+    media_type: image
+  - caption: Incidents de PagerDuty
+    image_url: images/incidents.jpg
+    media_type: image
   overview: README.md#Overview
   support: README.md#Support
   title: Interface PagerDuty
 ---
+
+
+
 ## Présentation
 
 PagerDuty est une plateforme de gestion des opérations en temps réel qui traite, analyse et achemine en continu des données. Ce système agit en tant que centre d'agrégation pour les données provenant de différents outils de surveillance. PagerDuty vous offre une vue d'ensemble de l'état de vos opérations. Grâce à PagerDuty, les utilisateurs Datadog peuvent gérer plus efficacement les incidents, tout en bénéficiant d'une visibilité et d'une responsabilisation accrues tout au long du cycle de vie des incidents. PagerDuty propose deux nouvelles applications afin que vous puissiez tirer pleinement profit de sa plateforme de gestion des opérations en temps réel où que vous soyez, sans avoir à changer d'outil. Ajoutez directement à vos dashboards les nouveaux widgets, à savoir Status Dashboard de PagerDuty et Incidents de PagerDuty. Vous pourrez ainsi consulter en temps réel le statut de vos services et réagir rapidement en cas d'incident urgent en prenant des mesures en temps réel, directement depuis Datadog.

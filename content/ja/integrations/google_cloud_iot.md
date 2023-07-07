@@ -2,6 +2,7 @@
 categories:
 - cloud
 - google cloud
+- iot
 - ログの収集
 dependencies: []
 description: Google Cloud IoT のキーメトリクスを追跡
@@ -29,7 +30,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

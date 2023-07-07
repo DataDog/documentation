@@ -26,28 +26,29 @@ On widgets, open the graphing editor by clicking on the pencil icon in the upper
 
 When you first open the graphing editor, you are on the **Edit** tab. Here, you can use the UI to choose most settings. Here is an example:
 
-{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:75%;" >}}
+{{< img src="dashboards/querying/references-graphing-edit-window-with-y-2.png" alt="Graphing Edit Tab" style="width:100%;" >}}
 
 ## Configuring a graph
 
 To configure your graph on dashboards, follow this process:
 
 1. [Select the visualization](#select-your-visualization)
-2. [Choose the metric to graph](#choose-the-metric-to-graph)
-3. [Filter](#filter)
-4. [Aggregate and rollup](#aggregate-and-rollup)
-5. [Apply additional functions](#advanced-graphing)
-6. [Title the graph](#create-a-title)
+2. [Define the metric](#define-the-metric)
+3. [Filter your metric](#filter)
+4. [Configure the time aggregation](#configure-the-time-aggregation)
+5. [Configure the space aggregation](#configure-the-space-aggregation)
+6. [Apply function](#advanced-graphing)
+7. [Title the graph](#create-a-title)
 
 ### Select your visualization
 
 Select your visualization from the available [widgets][3].
 
-### Choose the metric to graph
+### Define the metric
 
 Choose the metric to graph by searching or selecting it from the dropdown next to **Metric**. If you don't know which metric to use, the metric dropdown provides additional information, including the `unit`, `type`, `interval`, `description`, `tags`, and number of `tag values`. 
 
-{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:75%;">}}
+{{< img src="dashboards/querying/metric_dropdown.png" alt="Metric Selector Dropdown" responsive="true" style="width:100%;">}}
 
 Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or see a list of metrics on the [Metrics Summary][6] page.
 
@@ -55,11 +56,10 @@ Explore your metrics further with the [Metrics Explorer][4], a [Notebook][5], or
 
 Your chosen metric can be filtered by host or tag using the **from** dropdown to the right of the metric. The default filter is *(everywhere)*.
 
-{{< img src="dashboards/querying/filter-2.png" alt="Graphing Filter" style="width:75%;" >}}
+{{< img src="dashboards/querying/filter-3.png" alt="Filter the graph with the 'from' field, using template variables and boolean logic" style="width:100%;" >}}
 
-You can also use [advanced filtering][7] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries such as:
-
-{{< img src="dashboards/querying/booleanfilters.png" alt="Graphing with Boolean Filters" style="width:75%;" >}} 
+- Use [advanced filtering][7] within the `from` dropdown to evaluate boolean filtered or wildcard filtered queries.
+- Filter queries dynamically, using Template Variables. Add the `$` with the tag key and the graph automatically applies the tag you choose in the template variable dropdown. For more information, see the [Template Variable documentation][16].
 
 To learn more about tags, see the [Tagging documentation][8].
 
@@ -69,13 +69,7 @@ To learn more about tags, see the [Tagging documentation][8].
 
 Aggregation method is next to the filter dropdown. This defaults to `avg by` but you can change the method to `max by`, `min by`, or `sum by`. In most cases, the metric has many values for each time interval, coming from many hosts or instances. The aggregation method chosen determines how the metrics are aggregated into a single line.
 
-#### Aggregation groups
-
-Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
-
-Additionally, you can click the tags in the metric dropdown used for [choosing the metric](#choose-the-metric-to-graph) to group and aggregate your data.
-
-#### Rollup to aggregate over time
+#### Configure the time aggregation
 
 Regardless of the options chosen above, there is always some aggregation of data due to the physical size constraints of the window holding the graph. If a metric is updated every second, and you are looking at 4 hours of data, you need 14,400 points to display everything. Each graph displayed has about 300 points shown at any given time. Therefore, each point displayed on the screen represents 48 data points.
 
@@ -134,6 +128,12 @@ The full JSON looks like this:
 
 For more about using the JSON view, see [Graphing with JSON][1].
 
+#### Configure the space aggregation
+
+Next to the aggregation method dropdown, choose what constitutes a line or grouping on a graph. For example, if you choose `host`, there is a line for every `host`. Each line is made up of the selected metric on a particular `host` aggregated using the chosen method.
+
+Additionally, you can click the tags in the metric dropdown used for [defining the metric](#define-the-metric) to group and aggregate your data. 
+
 ### Advanced graphing
 
 Depending on your analysis needs, you may choose to apply other mathematical functions to the query. Examples include rates and derivatives, smoothing, and others. See the [list of available functions][12].
@@ -188,28 +188,32 @@ If you do not enter a title, one is automatically generated based on your select
 
 Click **Done** to save your work and exit the editor. You can always come back to the editor to change the graph. If you make changes you don't want to save, click **Cancel**.
 
-## Configuring an APM stats graph
-
-To configure your graph using APM stats data, follow these steps:
-
-1. [Select your visualization](#select-your-visualization) (same as for Metrics)
-2. [Choose your level of detail](#level-of-detail)
-3. [Choose your parameters](#apm-stats-parameters)
-4. [Title the graph](#create-a-title) (same as for Metrics)
-
-### Level of detail
-Choose what level of detail you want to see statistics for: one or more services, resources, or spans. (Not all of these are available for every widget type.)
-
-### APM stats parameters
-Select the following parameters from the graphing editor: Environment (`env`), Primary tag (`primary_tag`), Service (`service`), and Operation name (`name`).
-
-If your level of detail is resource or span, some widget types also require you to select a Resource name (`resource`) to narrow the scope of your query.
-
 ## Additional options
 
 ### Event overlays
 
-View event correlations by using the **Event Overlays** section in the graphing editor. In the search field, enter any text or structured search query. For details on searching, see the Datadog [Event Query Language][14].
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
+
+View event correlations by using the **Event Overlays** section in the graphing editor for the [Timeseries][15] visualization. In the search field, enter any text or structured search query. Events search uses the [logs search syntax][14].
+
+The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service. 
+
+With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
+- RUM error rates with deployment events overlaid
+- Correlating CPU usage with events related to provisioning extra servers
+- Correlating egress traffic with suspicious login activity
+- Correlating any timeseries data with monitor alerts to ensure that Datadog has been configured with the appropriate alerts
+
+
+### Split graph
+
+With split graphs, you can see your metric visualizations broken out by tags. 
+
+{{< img src="dashboards/querying/split_graph_beta.png" alt="View split graphs of metric container.cpu.usage in the fullscreen widget" style="width:100%;" >}}
+
+1. Access this feature through the **Split Graph** tab when viewing graphs.
+1. You can change the *sort by* metric to see the relationship between the data you are graphing and other metrics. 
+1. Limit the number of graphs that are displayed by changing the *limit to* value.
 
 ## Further Reading
 
@@ -228,4 +232,6 @@ View event correlations by using the **Event Overlays** section in the graphing 
 [11]: /dashboards/functions/rollup/
 [12]: /dashboards/functions/#apply-functions-optional
 [13]: /metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /events/#event-query-language
+[14]: /logs/explorer/search_syntax/
+[15]: /dashboards/widgets/timeseries/#event-overlay
+[16]: /dashboards/template_variables/

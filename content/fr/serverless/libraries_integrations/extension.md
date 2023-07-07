@@ -1,7 +1,6 @@
 ---
 aliases:
 - /fr/serverless/datadog_lambda_library/extension
-- /fr/serverless/libraries_integrations/extension
 dependencies:
 - https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
 kind: documentation
@@ -37,7 +36,7 @@ Pour les fonctions Lambda déployées dans une région éloignée du site Datado
 
 ## Créer un ticket
 
-Si vous rencontrez un bug avec ce package, faites-le nous savoir. Avant de créer un ticket, vérifiez que le problème n'a pas déjà été signalé dans les tickets existants pour éviter les doublons.
+Si vous rencontrez un bug avec ce package, faites-le-nous savoir. Avant de créer un ticket, vérifiez que le problème n'a pas déjà été signalé dans les tickets existants pour éviter les doublons.
 
 Lorsque vous créez un ticket, fournissez la version de l'extension ainsi que la stack trace, si possible. Indiquez également les étapes à reproduire le cas échéant.
 

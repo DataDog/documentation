@@ -3,7 +3,7 @@ description: データベースモニタリングセットアップのトラブ�
 kind: documentation
 title: MySQL のデータベースモニタリングセットアップのトラブルシューティング
 ---
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -160,7 +160,7 @@ BEGIN、COMMIT、SHOW、USE、ALTER などの一部のクエリでは、デー�
 Agent は、`performance_schema` オプションが有効になっていることを必要とします。これは、MySQL ではデフォルトで有効になっていますが、コンフィギュレーションやクラウドプロバイダーによっては無効になっている場合があります。有効にするには、[セットアップ手順][1]に従ってください。
 
 #### Google Cloud SQL の制限
-このホストは Google Cloud SQL で管理されており、`performance_schema` をサポートしていません。Google Cloud SQL の制限により、Datadog データベースモニタリングは[26GB 以下の RAM を持つインスタンスではサポートされません][6]。
+このホストは Google Cloud SQL で管理されており、`performance_schema` をサポートしていません。Google Cloud SQL の制限により、Datadog データベースモニタリングは[16GB 以下の RAM を持つインスタンスではサポートされません][6]。
 
 ### 特定のクエリが見つからない
 

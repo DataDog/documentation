@@ -45,13 +45,13 @@ title: リファレンステーブルでカスタムメタデータを追加す�
 
 **New Reference Table +** をクリックしてから、CSV ファイルをアップロードし、適切な列に名前を付けて、ルックアップのプライマリキーを定義します。
 
-{{< img src="integrations/guide/reference-tables/configure-enrichment-table.png" alt="Define the Schema セクションで、org_id を主キーとするテーブルと、org id、org name、parent org、account owner、および csm のデータを持つ列を表示しています " style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/enrichment-table-setup.png" alt="Define the Schema セクションで、org_id を主キーとするテーブルと、org id、org name、parent org、account owner、および csm のデータを持つ列を表示しています " style="width:100%;">}}
 
 **注**: CSV の手動アップロードは、4MB までのファイルをサポートしています。
 
 {{< /tabs >}}
 
-{{% tab "AWS S3 アップロード" %}}
+{{% tab "AWS S3" %}}
 
 リファレンステーブルは、AWS S3 バケットから CSV ファイルを自動的にプルして、データを最新の状態に保つことができます。インテグレーションでは、S3 で CSV ファイルへの変更が検索され、ファイルが更新されると、リファレンステーブルが新しいデータに置き換えられます。これにより、初期リファレンステーブルが構成されると、S3 API を使用した API 更新も可能になります。
 
@@ -88,6 +88,32 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#installation
+{{< /tabs >}}
+
+{{% tab "Azure ストレージ" %}}
+
+1. まだの場合は、リファレンステーブルをインポートするストレージアカウントを保持するサブスクリプション内で、[Azure インテグレーション][1]をセットアップしてください。これには、[Datadog がインテグレーションできるアプリ登録の作成][2]を伴います。
+2. Azure Portal で、リファレンステーブルファイルを保存するストレージアカウントを選択します。
+3. ストレージアカウント内で、**Access Control (IAM)** に移動し、**Add** > **Add Role Assignment** を選択します。
+4. **Storage Blob Data Reader** ロールを入力し、選択します。[Storage Blob Data Reader ロール][3]は、Datadog がストレージコンテナや Blob を読み込んで一覧表示できるようにするものです。
+5. **Members** タブで、**+ Select members** をクリックします。ステップ 1 で作成したアプリ登録を選択します。
+
+   {{< img src="integrations/guide/reference-tables/add_members.png" alt="Azure Portal の Members セクションで、メンバーが選択され、Name、Object ID、Type にデータが入力された状態" style="width:85%;">}}
+
+ロールの確認と割り当てが完了したら、Azure からリファレンステーブルにインポートすることができます。Datadog で Azure の構成が更新されるまで、数分かかる場合があります。
+
+{{< img src="integrations/guide/reference-tables/azure_storage.png" alt="新規リファレンステーブルのワークフローの Upload or import data セクションにある Azure Storage タイル" style="width:80%;">}}
+
+詳しくは、[Azure インテグレーションドキュメント][4]を参照してください。
+
+**注**: クラウドオブジェクトストレージからのアップロードは、200MB までのファイルをサポートしています。
+
+
+[1]: https://app.datadoghq.com/integrations/azure
+[2]: /ja/integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
+[4]: /ja/integrations/azure/
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -133,11 +159,11 @@ S3 からリファレンステーブルを更新するために、Datadog は [A
 
 **Monitors** タブからモニターを作成するか、**New Reference Table +** の横にある設定アイコンをクリックすると、あらかじめ入力されたモニターを生成することができます。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/log_configuration/processors/#lookup-processor
 [2]: /ja/account_management/audit_trail/
 [3]: /ja/events/
-[4]: /ja/monitors/create/types/event/
+[4]: /ja/monitors/types/event/

@@ -22,9 +22,9 @@ author:
   sales_email: sales@scalr.com
   support_email: support@scalr.com
 categories:
-- orchestration
-- コラボレーション
+- 自動化
 - 構成 & デプロイ
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/scalr/README.md
 display_on_public_website: true
@@ -47,13 +47,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Automation
+  - Category::Configuration & Deployment
+  - Category::Orchestration
+  - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Category::Orchestration
-  - Category::Collaboration
-  - Category::Configuration & Deployment
-  - Offering::Integration
   configuration: README.md#Setup
   description: Scalr は、Terraform Automation and COllaboration (TACO) 製品です。
   media:
@@ -112,7 +112,7 @@ Scalr は、実行結果をイベントとして[イベントエクスプロー�
 
 ヘルプが必要ですか？[Datadog サポート][13]または [Scalr サポート][14]にお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 - [Scalr の顧客向けドキュメント][15]
 - [Scalr Datadog インテグレーションドキュメント][16]

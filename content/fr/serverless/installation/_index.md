@@ -9,7 +9,7 @@ further_reading:
   tag: Documentation
   text: Intégration AWS Lambda
 kind: documentation
-title: Installation de la surveillance sans serveur
+title: Installer la surveillance sans serveur pour AWS Lambda
 ---
 
 ## Prise en main rapide

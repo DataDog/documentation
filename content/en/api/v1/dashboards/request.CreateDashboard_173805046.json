@@ -1,5 +1,5 @@
 {
-  "title": "Example-Create_a_new_dashboard_with_slo_widget",
+  "title": "Example-Dashboard",
   "description": "",
   "widgets": [
     {
@@ -20,7 +20,8 @@
         "slo_id": "string",
         "show_error_budget": true,
         "view_mode": "overall",
-        "global_time_target": "0"
+        "global_time_target": "0",
+        "additional_query_filters": "!host:excluded_host"
       }
     }
   ],

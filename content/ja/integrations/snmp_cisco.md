@@ -18,7 +18,6 @@ categories:
 - モニタリング
 - notification
 - ネットワーク
-- オートディスカバリー
 - snmp
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
@@ -48,7 +47,6 @@ tile:
   - Category::Monitoring
   - Category::Notification
   - Category::Network
-  - Category::Autodiscovery
   - Category::SNMP
   configuration: README.md#Setup
   description: Cisco ネットワークデバイスから SNMP メトリクスを収集

@@ -8,6 +8,8 @@ further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Notebooks"
+algolia:
+  tags: ['event stream']
 ---
 
 The list widget enables you to display a list of events and issues coming from different sources.
@@ -53,7 +55,6 @@ For logs, you can group by:
 * Patterns
 * Transactions
 
-<!-- Pending GA
 ### RUM event list options
 
 #### Sorting by
@@ -69,7 +70,7 @@ For RUM, you can sort by:
 * Initial view name
 * Last view name
 
-Ascending or descending -->
+Ascending or descending
 
 ### Events
 

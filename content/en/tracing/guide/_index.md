@@ -6,6 +6,11 @@ disable_toc: true
 aliases:
 - /tracing/getting_further/
 - /tracing/guide/ecommerce_and_retail_use_cases/
+cascade:
+    algolia:
+        rank: 50
+        category: Guide
+        subcategory: APM Guides
 ---
 
 
@@ -20,17 +25,40 @@ aliases:
 {{< /whatsnext >}}
 
 <br>
-{{< whatsnext desc="Tutorials: Enabling Tracing" >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
+
+### Tutorials: Enabling Tracing
+
+These tutorials walk you through setting up a sample multi-service application with automatic and custom/manual instrumentation, and configuring the stack until you see traces in Datadog APM. The tutorials all do the same thing, but with different programming languages and infrastructure setups. Choose the one most like your development and deployment environment to learn the basics of getting started with APM.
+
+{{< whatsnext desc="Choose your language and environment:" >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Python Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-containers" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Python Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-python-container-agent-host" >}}<img src="/images/integrations_logos/python-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing for a Python Application in a Container and an Agent on a Host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Java Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Java Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing for a Java Application in a Container and an Agent on a Host{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> Enabling Tracing for a Java Application on GKE{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> Enabling Tracing for a Java Application on AWS EKS{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Enabling Tracing for a Java Application in AWS ECS with EC2{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Enabling Tracing for a Java Application in AWS ECS with Fargate{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Enabling Tracing on a Go Application on the Same Host as Datadog Agent{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Enabling Tracing on a Go Application and Datadog Agent in Containers{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Enabling Tracing for a Go Application in AWS ECS with EC2{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Enabling Tracing for a Go Application in AWS ECS with Fargate{{< /nextlink >}}
+
 {{< /whatsnext >}}
 <br>
-
 
 {{< whatsnext desc="APM Integrations in action" >}}
     {{< nextlink href="/tracing/guide/monitor-kafka-queues/" >}}Tracing Kafka Queues{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/trace-php-cli-scripts/" >}}Tracing PHP CLI Scripts{{< /nextlink >}}
+{{< /whatsnext >}}
+<br>
+
+{{< whatsnext desc="Ingestion Sampling Configuration" >}}
+    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/ingestion_sampling_use_cases/" >}}Ingestion Sampling Use Cases{{< /nextlink >}}
 {{< /whatsnext >}}
 <br>
 
@@ -46,6 +74,5 @@ aliases:
     {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}Setting Primary Tags To Scope{{< /nextlink >}}
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Decide When to Use Datadog APM and AWS X-Ray {{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}Setting Up APM with C++{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/trace_ingestion_volume_control/" >}}Control span ingestion volume with Ingestion Mechanisms{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/ingestion_sampling_with_opentelemetry/" >}}Ingestion Sampling with OpenTelemetry{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Understand Datadog Trace Retention Policy{{< /nextlink >}}
 {{< /whatsnext >}}

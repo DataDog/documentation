@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - データベースモニタリング
+  - dbm
 description: Database Monitoring について学び、始めましょう
 further_reading:
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
@@ -13,9 +17,15 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: ドキュメント
   text: トラブルシューティング
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
 kind: documentation
 title: データベース モニタリング
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
+{{< /site-region >}}
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 

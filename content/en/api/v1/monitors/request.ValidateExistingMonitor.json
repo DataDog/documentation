@@ -1,10 +1,10 @@
 {
-  "name": "Example-Validate_an_existing_monitor_returns_OK_response",
+  "name": "Example-Monitor",
   "type": "log alert",
   "query": "logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2",
   "message": "some message Notify: @hipchat-channel",
   "tags": [
-    "test:examplevalidateanexistingmonitorreturnsokresponse",
+    "test:examplemonitor",
     "env:ci"
   ],
   "priority": 3,
@@ -20,6 +20,7 @@
     "notify_audit": false,
     "notify_no_data": false,
     "on_missing_data": "show_and_notify_no_data",
+    "notification_preset_name": "hide_handles",
     "renotify_interval": 60,
     "require_full_window": true,
     "timeout_h": 24,

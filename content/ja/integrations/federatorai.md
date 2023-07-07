@@ -31,6 +31,7 @@ author:
   support_email: support@prophetstor.com
 categories:
 - コンテナ
+- kubernetes
 - orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
@@ -52,9 +53,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Containers
+  - Category::Kubernetes
   - Category::Orchestration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
   media: []
@@ -206,7 +208,7 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
 
 * 以下の手順に従って、Federator.ai をダウンロードおよび設定してください。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 1. OpenShift/Kubernetes クラスターにログインします
 2. 次のコマンドで OpenShift/Kubernetes 用の Federator.ai をインストールします

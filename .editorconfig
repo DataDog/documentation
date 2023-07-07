@@ -8,6 +8,9 @@ charset = utf-8
 indent_style = space
 indent_size = 2
 
+[layouts/partials/img.html]
+insert_final_newline = false
+
 [Makefile]
 indent_style = tab
 indent_size = 2

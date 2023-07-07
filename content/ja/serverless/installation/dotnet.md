@@ -17,7 +17,7 @@ title: .NET サーバーレスアプリケーションのインスツルメン�
 
 ## インストール
 
-Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。
+Datadog は、サーバーレスアプリケーションのインスツルメンテーションを有効にするためのさまざまな方法を提供しています。以下からニーズに合った方法を選択してください。Datadog では、一般的に Datadog CLI の使用を推奨しています。アプリケーションがコンテナイメージとしてデプロイされる場合は、「コンテナイメージ」の指示に従うことが*必要です*。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -145,6 +145,7 @@ Datadog サーバーレスプラグインをインストールして構成する
 {{% /tab %}}
 {{% tab "Custom" %}}
 
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Datadog トレーサーのインストール
 
    以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
@@ -185,20 +186,67 @@ Datadog サーバーレスプラグインをインストールして構成する
 
    `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
 
+    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Datadog トレーサーのインストール
+
+   以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+    ```
+
+   `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
+
+2. Datadog Lambda 拡張機能のインストール
+
+   以下のフォーマットで、ARN を使用して Lambda 関数に[レイヤーを構成][1]します。
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+   `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。
+
+    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+{{< /site-region >}}
+
+
 3. 必要な環境変数を設定する
 
     - `AWS_LAMBDA_EXEC_WRAPPER` を `/opt/datadog_wrapper` に設定します。
     - `DD_SITE` に {{< region-param key="dd_site" code="true" >}} を設定します。(右側で正しい SITE が選択されていることを確認してください)。
     - `DD_API_KEY_SECRET_ARN` を、[Datadog API キー][2]が安全に保存されている AWS シークレットの ARN に設定します。キーはプレーンテキスト文字列として保存する必要があります (JSON blob ではありません)。また、`secretsmanager:GetSecretValue`権限が必要です。迅速なテストのために、代わりに `DD_API_KEY` を使用して、Datadog API キーをプレーンテキストで設定することができます。
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
 ## 次のステップ
-
 - [Serverless Homepage][1] でメトリクス、ログ、トレースを見ることができるようになりました。
+- サービスを標的にしている攻撃者についてアラートを受け取るには、[脅威の監視][6]を有効にします。
 - [カスタムメトリクス][2]または [APM スパン][3]を送信して、ビジネスロジックを監視します。
 - テレメトリーの収集に問題がある場合は、[トラブルシューティングガイド][4]を参照してください
 - [高度な構成][5]を参照して以下のことを行ってください。
@@ -218,3 +266,4 @@ Datadog サーバーレスプラグインをインストールして構成する
 [3]: /ja/tracing/custom_instrumentation/dotnet/
 [4]: /ja/serverless/guide/troubleshoot_serverless_monitoring/
 [5]: /ja/serverless/configuration/
+[6]: /ja/security/application_security/enabling/serverless/?tab=serverlessframework

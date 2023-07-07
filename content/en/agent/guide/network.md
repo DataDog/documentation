@@ -16,6 +16,8 @@ further_reading:
     - link: 'tracing'
       tag: 'Documentation'
       text: 'Collect your traces'
+algolia:
+  tags: ['network traffic']
 ---
 
 <div class="alert alert-warning">
@@ -29,7 +31,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 ## Destinations
 
 [APM][1]
-: `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+: `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+`instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}
@@ -50,22 +53,28 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 : `rum.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}<br>
 `session-replay.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}}
 
+{{% site-region region="us,eu,us3,us5,ap1" %}}
+[Remote Configuration][1]
+: `config.`{{< region-param key="dd_site" code="true" >}}
+
+[1]: /agent/remote_config
+{{% /site-region %}}
+
 [Synthetics private location][8]
 : Worker v>=1.5.0 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}} is the only endpoint to configure.<br>
 API test results for worker v>0.1.6 `intake.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Browser test results for worker v>0.2.0 `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for worker v<0.1.5 `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{< site-region region="us,eu,us3" >}}
+{{% site-region region="us,eu,us3,us5,ap1" %}}
 [Database Monitoring][2]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [2]: /database_monitoring/
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us" >}}
-
+{{% site-region region="us" %}}
 [Logs][1] & [HIPAA logs][2]
 : TCP: `agent-intake.logs.datadoghq.com`<br>
 HTTP: `agent-http-intake.logs.datadoghq.com`<br>
@@ -80,11 +89,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
+{{% site-region region="eu" %}}
 [Logs][1] & [HIPAA logs][2]
 : TCP: `agent-intake.logs.datadoghq.eu`<br>
 HTTP: `agent-http-intake.logs.datadoghq.eu`<br>
@@ -99,11 +106,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
+{{% site-region region="us3" %}}
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.us3.datadoghq.com`<br>
 Other: See [logs endpoints][3]
@@ -116,11 +121,9 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
+{{% site-region region="us5" %}}
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.us5.datadoghq.com`<br>
 Other: See [logs endpoints][3]
@@ -133,11 +136,19 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
-{{< /site-region >}}
+{{% site-region region="ap1" %}}
+[Logs][1] & [HIPAA logs][2]
+: HTTP: `agent-http-intake.logs.ap1.datadoghq.com`<br>
+Other: See [logs endpoints][3]
 
-{{< site-region region="gov" >}}
+[1]: /logs/
+[2]: /data_security/logs/#hipaa-enabled-customers
+[3]: /logs/log_collection/#logging-endpoints
+{{% /site-region %}}
 
+{{% site-region region="gov" %}}
 [Logs][1] & [HIPAA logs][2]
 : HTTP: `agent-http-intake.logs.ddog-gov.com`<br>
 Other: See [logs endpoints][3]
@@ -150,8 +161,7 @@ Other: See [logs endpoints][3]
 [1]: /logs/
 [2]: /data_security/logs/#hipaa-enabled-customers
 [3]: /logs/log_collection/#logging-endpoints
-
-{{< /site-region >}}
+{{% /site-region %}}
 
 All other Agent data
 : `<VERSION>-app.agent.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -201,16 +211,17 @@ Add all of the `ip-ranges` to your inclusion list. While only a subset are activ
 
 <div class="alert alert-warning">
 All outbound traffic is sent over SSL through TCP / UDP.
+<br><br>
+Ensure the Agent is only accessible by your applications or trusted network sources using a firewall rule or similar network restriction. Untrusted access can allow malicious actors to perform several invasive actions, including but not limited to writing traces and metrics to your Datadog account, or obtaining information about your configuration and services.
 </div>
 
 Open the following ports to benefit from all the **Agent** functionalities:
-
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
 #### Outbound
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -218,12 +229,6 @@ Open the following ports to benefit from all the **Agent** functionalities:
 123/udp
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
-
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
 
 10516/tcp
 : Port for log collection over TCP.<br>
@@ -240,9 +245,9 @@ See [logs endpoints][3] for other connection types.
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="eu" >}}
+{{% site-region region="eu" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -255,12 +260,6 @@ See [default NTP targets][2].
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.
 
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
-
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
 
@@ -272,9 +271,9 @@ See [logs endpoints][3] for other connection types.
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
-{{< site-region region="us3,us5,gov" >}}
+{{% site-region region="us3,us5,gov" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes/Containers)
@@ -283,12 +282,6 @@ See [logs endpoints][3] for other connection types.
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
 
-6062/tcp
-: Port for the debug endpoints for the Process Agent.
-
-6162/tcp
-: Port for configuring runtime settings for the Process Agent.
-
 10255/tcp
 : Port for the [Kubernetes HTTP Kubelet][4]
 
@@ -300,7 +293,7 @@ See [default NTP targets][2].
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 #### Inbound
 
@@ -314,6 +307,15 @@ Used for Agent services communicating with each other locally within the host on
 
 5002/tcp
 : Port for the [Agent browser GUI][2]
+
+5012/tcp
+: Port for the APM [go_expvar server][1]
+
+6062/tcp
+: Port for the debug endpoints for the Process Agent.
+
+6162/tcp
+: Port for configuring runtime settings for the Process Agent.
 
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
@@ -336,13 +338,13 @@ Used for Agent services communicating with each other locally within the host on
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
 
+#### Inbound
+
 6062/tcp
 : Port for the debug endpoints for the Process Agent.
 
 6162/tcp
 : Port for configuring runtime settings for the Process Agent.
-
-#### Inbound
 
 8125/udp
 : Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on localhost: `127.0.0.1`, `::1`, `fe80::1`.
@@ -443,3 +445,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [8]: /synthetics/private_locations
 [9]: /agent/proxy/
 [10]: /network_monitoring/devices
+

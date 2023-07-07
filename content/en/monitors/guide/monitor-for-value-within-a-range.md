@@ -20,7 +20,7 @@ Mathematically, the difference between the metric and the center of the range (6
 - To be notified if the value is outside the range, the monitor condition should be `abs(6-a) - 2 > 0`.
 - To be notified if the value is inside the range, the monitor condition should be `2 - abs(6-a) > 0`.
 
-{{< img src="monitors/faq/monitor_range.png" alt="metric monitor on a range"  >}}
+{{< img src="monitors/faq/monitor_range.png" alt="metric monitor on a range" >}}
 
 ### Theoretical
 

@@ -48,6 +48,8 @@ If the parameter `collect_histogram_buckets` is `true`, each `_bucket` value is 
 
 If the parameter `send_distribution_buckets` is `true`, each `_bucket` is mapped to Datadog's `distribution`. Prometheus/OpenMetrics histogram data is converted to Datadog distribution metrics to allow for monitoring Kubernetes metrics as percentiles in Datadog. Datadog distribution metrics are based on the [DDSketch algorithm][7]. For more information, see the relevant Datadog [blog post on OpenMetrics and distribution metrics][8].
 
+**Note**: For OpenMetrics v2, use `collect_counters_with_distributions` instead.
+
 If the parameter `send_distribution_counts_as_monotonic` is `true`, each metric ending in `_count` is submitted as `monotonic_count`. [Read more about monotonic counters][4].
 
 ### Summary

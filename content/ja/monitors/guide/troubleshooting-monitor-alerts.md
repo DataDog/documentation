@@ -38,6 +38,12 @@ title: モニターアラートのトラブルシューティング
 
 また、[自動解決][4]などにより、モニターの評価がない状態でもモニターの状態が更新されることがあります。
 
+### データの有無を確認する
+
+モニターの状態やステータスが期待したものと異なる場合、基礎となるデータソースの動作を確認します。メトリクスモニターの場合、[履歴][2]グラフを使用して、メトリクスクエリによって引き込まれたデータポイントを表示できます。メトリクスの進化をさらに調査するには、ステータスグラフのそばにある **Open in a notebook** をクリックします。これにより、モニタークエリのフォーマットされたグラフを持つ調査用[ノートブック][20]が生成されます。
+
+{{< img src="monitors/monitor_status/notebook-button.png" alt="1 つのモニターグループのステータスバーの横にある Open in a notebook ボタンにマウスカーソルを合わせた状態でのモニターのステータスページ" style="width:60%;">}}
+
 ### アラートの条件
 
 予期しないモニターの動作は、時には[モニタータイプ][6]によって異なる[ アラート条件][5]を誤って設定した結果である可能性があります。モニタークエリが `as_count()` 関数を使用している場合、[モニター評価における `as_count()`][7] のガイドを確認してください。
@@ -78,17 +84,17 @@ title: モニターアラートのトラブルシューティング
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/create/configuration/?tabs=thresholdalert#no-data
+[1]: /ja/monitors/configuration/?tabs=thresholdalert#no-data
 [2]: /ja/monitors/manage/status/#history
 [3]: /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[4]: /ja/monitors/create/configuration/?tabs=thresholdalert#auto-resolve
-[5]: /ja/monitors/create/configuration/?tabs=thresholdalert#set-alert-conditions
-[6]: /ja/monitors/create/#monitor-types
+[4]: /ja/monitors/configuration/?tabs=thresholdalert#auto-resolve
+[5]: /ja/monitors/configuration/?tabs=thresholdalert#set-alert-conditions
+[6]: /ja/monitors/types
 [7]: /ja/monitors/guide/as-count-in-monitor-evaluations/
 [8]: /ja/monitors/guide/recovery-thresholds/#behavior
 [9]: /ja/monitors/guide/why-did-my-monitor-settings-change-not-take-effect
-[10]: /ja/monitors/create/configuration/?tabs=thresholdalert#new-group-delay
-[11]: /ja/monitors/create/configuration/?tabs=thresholdalert#evaluation-delay
+[10]: /ja/monitors/configuration/?tabs=thresholdalert#new-group-delay
+[11]: /ja/monitors/configuration/?tabs=thresholdalert#evaluation-delay
 [12]: /ja/integrations/faq/cloud-metric-delay/
 [13]: /ja/monitors/guide/reduce-alert-flapping/
 [14]: /ja/monitors/guide/suppress-alert-with-downtimes/
@@ -97,3 +103,4 @@ title: モニターアラートのトラブルシューティング
 [17]: /ja/account_management/#preferences
 [18]: /ja/events/stream
 [19]: https://docs.opsgenie.com/docs/alert-deduplication
+[20]: /ja/notebooks

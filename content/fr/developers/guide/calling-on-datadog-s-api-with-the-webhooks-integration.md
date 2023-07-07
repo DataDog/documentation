@@ -1,9 +1,10 @@
 ---
-title: Appeler l'API de Datadog avec l'intégration Webhooks
-kind: guide
 aliases:
-  - /fr/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
+- /fr/developers/faq/calling-on-datadog-s-api-with-the-webhooks-integration
+kind: guide
+title: Appeler l'API de Datadog avec l'intégration Webhooks
 ---
+
 Vous pouvez utiliser l'[intégration Webhooks][1] pour déclencher des webhooks à partir de monitors et d'événements Datadog. Vous avez ainsi la possibilité de faire communiquer votre compte Datadog avec votre équipe à l'aide d'outils de communication personnalisés, ou encore de [transférer des alertes de monitor sous forme de messages texte][2].
 
 Il est également possible de configurer des notifications de webhook pour appeler l'[API Datadog][3], par exemple si vous souhaitez envoyer une métrique ou un événement à votre compte Datadog chaque fois qu'un monitor est déclenché.
@@ -62,4 +63,4 @@ Voici un exemple de ce widget (même si, dans cet exemple, le nom du check est �
 [1]: /fr/integrations/webhooks/
 [2]: https://www.datadoghq.com/blog/send-alerts-sms-customizable-webhooks-twilio
 [3]: /fr/api/
-[4]: /fr/dashboards/screenboard/
+[4]: /fr/dashboards/#screenboards

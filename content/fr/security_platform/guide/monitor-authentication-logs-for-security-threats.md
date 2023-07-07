@@ -115,8 +115,8 @@ Datadog ingère et analyse [tous vos logs][18] afin de détecter les menaces con
 [7]: /fr/logs/log_configuration/attributes_naming_convention/#events
 [8]: /fr/logs/log_configuration/attributes_naming_convention/#network
 [9]: https://developers.google.com/recaptcha/docs/v3
-[10]: https://app.datadoghq.com/security/configuration/rules?query=brute%20force%20attack&sort=rule
-[11]: https://app.datadoghq.com/security/configuration/rules?query=credential%20stuffing%20attack&sort=rule
+[10]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=brute%20force%20attack&sort=rule
+[11]: https://app.datadoghq.com/security/configuration/rules?product=siem&query=credential%20stuffing%20attack&sort=rule
 [12]: /fr/cloud_siem/default_rules/
 [13]: /fr/cloud_siem/explorer
 [14]: https://app.datadoghq.com/notebook/credentialstuffingrunbook

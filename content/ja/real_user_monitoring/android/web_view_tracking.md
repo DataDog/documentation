@@ -1,7 +1,5 @@
 ---
 beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/web_view_tracking.md
 description: ハイブリッド Android アプリケーションの Web ビューを監視します。
 further_reading:
 - link: /real_user_monitoring/android/
@@ -9,7 +7,7 @@ further_reading:
   text: Android モニタリング
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
-  text: ブラウザのモニタリング
+  text: ブラウザモニタリング
 kind: documentation
 title: Android Web ビュー追跡
 ---
@@ -68,7 +66,7 @@ Android や Android TV のアプリケーションでフィルタリングし、
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/#npm
+[1]: /ja/real_user_monitoring/browser/#npm
 [2]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android/1.12.0-beta1/aar
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=kotlin#setup
+[3]: /ja/real_user_monitoring/android/?tab=kotlin#setup
 [4]: https://app.datadoghq.com/rum/explorer

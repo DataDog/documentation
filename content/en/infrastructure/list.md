@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last 2 hours(default) and up to 1 week. Search your hosts, or group them by tags.
+The Infrastructure list shows all of your hosts monitored by Datadog with activity during the last two hours (default) and up to one week. Search your hosts or group them by tags.
 
 ## Hosts
 
@@ -34,7 +34,7 @@ Instance ID
 : A hostname [alias](#aliases).
 
 Status
-: Displays `UP` when the expected metrics are received and displays `???` if no metrics are received.
+: Displays `ACTIVE` when the expected metrics are received and displays `INACTIVE` if no metrics are received.
 
 CPU
 : The percent of CPU used (everything but idle).
@@ -52,7 +52,7 @@ Operating System
 : The tracked operating system.
 
 Cloud Platform
-: Cloud platform the host is running on (for example, AWS, GCP, or Azure).
+: Cloud platform the host is running on (for example, AWS, Google Cloud, or Azure).
 
 Datadog Agent
 : Agent version that is collecting data on the host.
@@ -83,9 +83,9 @@ Datadog creates aliases for host names when there are multiple uniquely identifi
 
 #### Agent configuration
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
   The Agent configuration view is in public beta and is available in Agent versions >= 7.39/6.39.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 The Agent can send its own configuration to Datadog to be displayed in the `Agent Configuration` section of the host detail panel.
 

@@ -19,7 +19,7 @@ author:
   sales_email: ashuvyas45@gmail.com
   support_email: ashuvyas45@gmail.com
 categories:
-- モニター
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md
 display_on_public_website: true
@@ -37,15 +37,15 @@ public_title: bind9
 short_description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Monitoring
+  - Category::Network
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
   media: []

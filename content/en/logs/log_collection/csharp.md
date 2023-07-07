@@ -25,6 +25,9 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
 To send your C# logs to Datadog, use one of the following approaches:
@@ -37,7 +40,7 @@ This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Micr
 
 ## File-tail logging with the Datadog Agent
 
-The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
+The recommended approach for C# log collection is to output your logs to a file and then [tail][20] that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
@@ -292,7 +295,7 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     ```
 
 3. [Restart the Agent][5].
-4. Run the [Agent’s status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][7] to extract log attributes. Use the [Log Explorer][8] to view and troubleshoot your logs.
 
@@ -399,6 +402,14 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -407,7 +418,7 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
@@ -484,6 +495,19 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 ```csharp
@@ -510,7 +534,7 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 ```csharp
 using (var log = new LoggerConfiguration()
@@ -523,10 +547,9 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][20]
-
 {{< site-region region="us" >}}
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
 For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
 
@@ -547,8 +570,12 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
 For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
 
@@ -568,6 +595,7 @@ using (var log = new LoggerConfiguration()
     // Some code
 }
 ```
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
@@ -615,7 +643,7 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /agent/logs/advanced_log_collection
 [11]: /serverless/azure_app_services
-[12]: /account_management/org_settings/sensitive_data_detection/#overview
+[12]: /sensitive_data_scanner/
 [13]: /tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
@@ -623,4 +651,4 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [17]: /logs/log_configuration/pipelines/?tab=source
 [18]: /api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[20]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[20]: /glossary/#tail

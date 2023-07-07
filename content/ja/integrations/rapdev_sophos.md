@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-sophos
 app_uuid: 86b68ae7-ba52-4160-bbf5-e1455fafa677
 assets:
@@ -28,6 +30,7 @@ author:
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+- セキュリティ
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -51,20 +54,21 @@ pricing:
   tag: endpoint_name
   unit_label: 登録されたエンドポイント
   unit_price: 1
-public_title: Sophos インテグレーション
+public_title: Sophos
 short_description: Sophos が管理するエンドポイントの健全性を監視
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Marketplace
+  - Category::Security
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Sophos が管理するエンドポイントの健全性を監視
   media:
@@ -73,7 +77,7 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Sophos インテグレーション
+  title: Sophos
   uninstallation: README.md#Uninstallation
 ---
 

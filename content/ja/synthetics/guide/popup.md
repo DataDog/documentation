@@ -1,19 +1,24 @@
 ---
-title: ブラウザテストでのポップアップの処理
-kind: ガイド
 further_reading:
-  - link: https://www.datadoghq.com/blog/browser-tests/
-    tag: ブログ
-    text: Datadog ブラウザテストによるユーザーエクスペリエンスの監視
-  - link: synthetics/browser_tests
-    tag: Documentation
-    text: ブラウザテストの設定
+- link: https://www.datadoghq.com/blog/browser-tests/
+  tag: ブログ
+  text: Datadog ブラウザテストによるユーザーエクスペリエンスの監視
+- link: synthetics/browser_tests
+  tag: Documentation
+  text: ブラウザテストの設定
+kind: ガイド
+title: ブラウザテストでのポップアップの処理
 ---
+## 概要
+
+Synthetic のブラウザテストで、モーダルやアプリケーションウィンドウなどのポップアップを管理する方法について説明します。
+
 ## モーダル
 
 ### JavaScript
 
 Synthetic ブラウザテストは自動的に [JavaScript モーダル][1]を処理します。 
+
  - `alert` モーダルは閉じています。
  - `prompt` と `confirm` モーダルは `Lorem Ipsum` で回答されます。
 

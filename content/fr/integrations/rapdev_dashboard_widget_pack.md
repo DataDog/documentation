@@ -10,7 +10,8 @@ author:
   sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
-categories: []
+categories:
+- marketplace
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -36,13 +37,14 @@ short_description: Un pack de widgets pour les dashboards contenant trois widget
   personnalisés pour vos visualisations de données.
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Marketplace
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::UI Extension
   configuration: README.md#Setup

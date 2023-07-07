@@ -1,9 +1,10 @@
 ---
-title: モニター評価での as_count()
-kind: ガイド
 aliases:
-  - /monitors/guide/as-count-monitor-evaluation
+- /ja/monitors/guide/as-count-monitor-evaluation
+kind: ガイド
+title: モニター評価での as_count()
 ---
+
 ## 概要
 
 **`as_count()`** および **`as_rate()`** モディファイアーを使用してクエリを計算すると、モニター評価でさまざまな結果を得ることができます。演算と少なくとも 1 つの **`as_count()`** モディファイアーを含むモニターは、演算と時間集計を行う順序を変更するために、異なる評価パスを使用します。
@@ -69,13 +70,11 @@ sum(last_5m):error/total
 
 ```text
 sum(last_5m):error
----
+-----------------
 sum(last_5m):total
 ```
 
-通常、エラー率の **`avg`** 時間集計には **`.as_rate()`** が合理的ですが、**`sum`** 集計には **`.as_count()`** が推奨されます。**`sum`** (アプリ内の表示は **in total**) 以外の集計方法を **`.as_count()`** と組み合わせて使用しても意味がありません。
-
-**注**: sum (アプリ内の表示は in total) 以外の集計方法を `.as_count()` と組み合わせて使用することはできません。
+通常、エラー率の **`avg`** 時間集計には **`.as_rate()`** が合理的ですが、**`sum`** 集計には **`.as_count()`** が推奨されます。**`sum`** 以外の集計方法を **`.as_count()`** と組み合わせて使用しても意味がありません (併用できません)。
 
 ご質問は、[Datadog のサポートチームまでお問い合わせください][1]。
 

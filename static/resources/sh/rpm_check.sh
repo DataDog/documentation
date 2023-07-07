@@ -4,8 +4,12 @@
 # Licensed under Apache-2.0 License.
 # Checks the system for packages signed with the 069b56f54172a230 GPG key,
 # and verifies the hash of all Datadog packages installed on the system.
+# Changelog:
+# * 1.0.0: initial version
+# * 1.1.0: reduce false positives by adding trusted datadog-dogstatsd packages
+# * 1.2.0: fix false positives when grep defaults to color output
 
-script_version=1.1.0
+script_version=1.2.0
 
 status=0
 datadog_fingerprint=069b56f54172a230
@@ -380,7 +384,7 @@ find_version_rhel_hash() {
     local version=$1
 
     for hash in ${rhel_hashes[@]}; do
-        found=$(echo "$hash" | grep "$version")
+        found=$(echo "$hash" | grep --color=never "$version")
         if [ -n "$found" ]; then
             # Extract the part after the second colon
             echo "${found#*:*:}"
@@ -393,7 +397,7 @@ find_version_suse_hash() {
     local version=$1
 
     for hash in ${suse_hashes[@]}; do
-        found=$(echo "$hash" | grep "$version")
+        found=$(echo "$hash" | grep --color=never "$version")
         if [ -n "$found" ]; then
             # Extract the part after the second colon
             echo "${found#*:*:}"
@@ -411,10 +415,10 @@ get_non_datadog_packages() {
     # Suffix package names with : to not match packages that are superstrings of known packages
     # : is not allowed in package names, so it should be safe to use
     read -d "\n" -r -a packages_suffixed <<< ${datadog_packages[@]/%/:}
-    # grep -v ${packages_suffixed[@]/#/-e } will be rendered as:
-    # grep -v -e <package name 1>: -e <package name 2>: ...
+    # grep --color=never -v ${packages_suffixed[@]/#/-e } will be rendered as:
+    # grep --color=never -v -e <package name 1>: -e <package name 2>: ...
     # which will exclude all lines that contain one of the package names
-    packages_string=$(rpm -qa --qf '%{NAME}:%{VERSION}-%{RELEASE} %{SIGPGP:pgpsig} %{SIGGPG:pgpsig}\n' | grep $datadog_fingerprint | grep -v ${packages_suffixed[@]/#/-e } | cut -d ' ' -f1)
+    packages_string=$(rpm -qa --qf '%{NAME}:%{VERSION}-%{RELEASE} %{SIGPGP:pgpsig} %{SIGGPG:pgpsig}\n' | grep --color=never $datadog_fingerprint | grep --color=never -v ${packages_suffixed[@]/#/-e } | cut -d ' ' -f1)
     read -d "\n" -r -a packages <<< $packages_string
 
     if [ -n "$packages" ]; then
@@ -433,7 +437,7 @@ check_datadog_package() {
     local package_name=$1
     # Suffix package names with : to not match packages that are superstrings of known packages
     # : is not allowed in package names, so it should be safe to use
-    datadog_package_version=$(rpm -qa --qf '%{NAME}:%{VERSION}-%{RELEASE}.%{ARCH}\n' | grep "$package_name:")
+    datadog_package_version=$(rpm -qa --qf '%{NAME}:%{VERSION}-%{RELEASE}.%{ARCH}\n' | grep --color=never "$package_name:")
 
     if [ -z "$datadog_package_version" ]; then
         # No version installed

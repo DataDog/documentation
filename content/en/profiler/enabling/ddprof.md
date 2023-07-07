@@ -11,7 +11,7 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/profiler_troubleshooting'
+    - link: 'profiler/profiler_troubleshooting/ddprof'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 ---

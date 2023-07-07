@@ -122,6 +122,9 @@ title: ブラウザテスト
 `{{ alphanumeric(n) }}`
 : `n` 文字の英数字文字列を生成します。
 
+`{{ uuid }}`
+: バージョン 4 の UUID (Universally unique identifier) を生成します。
+
 `{{ date(n unit, format) }}` 
 : テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
 
@@ -132,15 +135,19 @@ title: ブラウザテスト
 
 ### グローバル変数を使用する
 
-ブラウザテストの詳細の **Starting URL** と **Advanced Options**、およびテストの記録で [**Settings** で定義されているグローバル変数][3]を使用してローカル変数を定義することができます。利用可能な変数のリストを表示するには、目的のフィールドに `{{` と入力してください。
+ブラウザテストの詳細の **Starting URL** や **Advanced Options** で、[**Settings** で定義されたグローバル変数][3]をテスト記録で使用することができます。
 
-{{< img src="synthetics/browser_tests/recording_global_variable.mp4" alt="グローバル変数からローカル変数を定義する" video="true" width="90%" >}}
+利用可能な変数の一覧を表示するには
 
-記録を開始する前に、ユーザージャーニーに組み込む変数を定義します。
+- ブラウザテストの詳細で: 目的のフィールドに `{{` と入力します。
 
-{{< img src="synthetics/browser_tests/recording_inject_variable.mp4" alt="ブラウザレコーディング時にローカル変数をフィールドに挿入する" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="グローバル変数からローカル変数を定義する" video="true" width="90%" >}}
 
-記録中に利用可能な変数を注入することができます。ブラウザテストの記録で変数を使用する方法については、[ブラウザテストの手順][4]を参照してください。
+- ブラウザテストのレコーダーで: テストに変数をインポートし、目的のフィールドに `{{` を入力するか、アプリケーションに変数を挿入して使用します。
+
+  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="ブラウザレコーディング時にローカル変数をフィールドに挿入する" video="true" width="90%" >}}
+
+ブラウザテストの記録で変数を使用する方法については、[ブラウザテストの手順][4]を参照してください。
 
 ### アラート条件を定義する
 
@@ -227,3 +234,4 @@ title: ブラウザテスト
 [13]: /ja/account_management/rbac#custom-roles
 [14]: /ja/account_management/rbac/#create-a-custom-role
 [15]: /ja/continuous_testing/testing_tunnel
+[16]: /ja/synthetics/guide/browser-tests-passkeys

@@ -46,7 +46,9 @@ data:
         - volumeattachments
         - ingresses
         labels_as_tags:
-            {}
+          {}
+        annotations_as_tags:
+          {}
 ---
 # Source: datadog/templates/install_info-configmap.yaml
 apiVersion: v1
@@ -145,6 +147,13 @@ rules:
     verbs:
       - list
       - watch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - list
+      - watch
 ---
 # Source: datadog/templates/kube-state-metrics-core-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -180,10 +189,9 @@ spec:
       name: datadog
       annotations: {}
     spec:
-      hostPID: true
       containers:
         - name: agent
-          image: "gcr.io/datadoghq/agent:7.40.1"
+          image: "gcr.io/datadoghq/agent:7.45.0"
           imagePullPolicy: IfNotPresent
           command: ["agent", "run"]
           resources: {}
@@ -200,18 +208,22 @@ spec:
                 secretKeyRef:
                   name: "datadog"
                   key: api-key
+            - name: DD_AUTH_TOKEN_FILE_PATH
+              value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_LOG_LEVEL
               value: "INFO"
             - name: DD_DOGSTATSD_PORT
               value: "8125"
             - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
               value: "true"
+            - name: DD_DOGSTATSD_TAG_CARDINALITY
+              value: "low"
             - name: DD_LEADER_ELECTION
               value: "true"
             - name: DD_COLLECT_KUBERNETES_EVENTS
@@ -235,12 +247,17 @@ spec:
           volumeMounts:
             - name: config
               mountPath: C:/ProgramData/Datadog
+              readOnly: false # Need RW to mount to config path
+            - name: auth-token
+              mountPath: C:/ProgramData/Datadog/auth
+              readOnly: false # Need RW to write auth token
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
             - name: containerdsocket
               mountPath: \\.\pipe\containerd-containerd
             - name: pointerdir
-              mountPath: C:/var/log
+              mountPath: c:/programdata/datadog/run
+              readOnly: false # Need RW for logs pointer
             - name: logpodpath
               mountPath: C:/var/log/pods
               readOnly: true
@@ -268,7 +285,7 @@ spec:
             successThreshold: 1
             timeoutSeconds: 5
         - name: trace-agent
-          image: "gcr.io/datadoghq/agent:7.40.1"
+          image: "gcr.io/datadoghq/agent:7.45.0"
           imagePullPolicy: IfNotPresent
           command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
           resources: {}
@@ -286,12 +303,14 @@ spec:
                 secretKeyRef:
                   name: "datadog"
                   key: api-key
+            - name: DD_AUTH_TOKEN_FILE_PATH
+              value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
             - name: DD_CLUSTER_AGENT_ENABLED
               value: "false"
             - name: DD_LOG_LEVEL
@@ -305,6 +324,10 @@ spec:
           volumeMounts:
             - name: config
               mountPath: C:/ProgramData/Datadog
+              readOnly: true
+            - name: auth-token
+              mountPath: C:/ProgramData/Datadog/auth
+              readOnly: true
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
             - name: containerdsocket
@@ -317,7 +340,7 @@ spec:
             timeoutSeconds: 5
       initContainers:
         - name: init-volume
-          image: "gcr.io/datadoghq/agent:7.40.1"
+          image: "gcr.io/datadoghq/agent:7.45.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -327,11 +350,13 @@ spec:
           volumeMounts:
             - name: config
               mountPath: C:/Temp/Datadog
+              readOnly: false # Need RW for config path
             - name: installinfo
               mountPath: C:/Temp/install_info
+              readOnly: true
           resources: {}
         - name: init-config
-          image: "gcr.io/datadoghq/agent:7.40.1"
+          image: "gcr.io/datadoghq/agent:7.45.0"
           imagePullPolicy: IfNotPresent
           command: ["pwsh", "-Command"]
           args:
@@ -339,6 +364,7 @@ spec:
           volumeMounts:
             - name: config
               mountPath: C:/ProgramData/Datadog
+              readOnly: false # Need RW for config path
             - name: runtimesocket
               mountPath: \\.\pipe\docker_engine
             - name: containerdsocket
@@ -352,14 +378,18 @@ spec:
                 secretKeyRef:
                   name: "datadog"
                   key: api-key
+            - name: DD_AUTH_TOKEN_FILE_PATH
+              value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
             - name: DD_KUBERNETES_KUBELET_HOST
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            - name: KUBERNETES
-              value: "yes"
           resources: {}
       volumes:
+        - name: auth-token
+          emptyDir: {}
         - name: installinfo
           configMap:
             name: datadog-installinfo

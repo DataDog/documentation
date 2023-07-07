@@ -19,7 +19,7 @@ author:
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
+- クラウド
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md
@@ -28,7 +28,7 @@ draft: false
 git_integration_title: traefik
 integration_id: traefik
 integration_title: Traefik
-integration_version: 1.0.0
+integration_version: 1.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -38,16 +38,16 @@ public_title: Traefik
 short_description: traefik のメトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
+  - Category::Cloud
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: traefik のメトリクスを収集
   media: []
@@ -66,7 +66,7 @@ tile:
 
 Traefik チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### APM に Datadog Agent を構成する
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Traefik チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 

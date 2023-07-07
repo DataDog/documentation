@@ -1,26 +1,23 @@
 ---
 aliases:
 - /ja/real_user_monitoring/ios/crash_reporting/
-beta: true
-dependencies:
-- https://github.com/DataDog/dd-sdk-ios/blob/master/docs/rum_collection/crash_reporting.md
 description: iOS プロジェクトにエラー追跡を設定します。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
-  text: dd-sdk-ios ソースコード
+  text: dd-sdk-ios のソースコード
 - link: https://datadoghq.com/blog/ios-crash-reporting-datadog/
   tag: ブログ
   text: iOS のクラッシュレポートとエラー追跡のご紹介
-- link: real_user_monitoring/error_tracking/explorer
+- link: real_user_monitoring/error_tracking/
   tag: ドキュメント
-  text: エラートラッキングエクスプローラーについて
+  text: エラートラッキングについて
 kind: documentation
 title: iOS のクラッシュレポートとエラー追跡
 ---
 ## 概要
 
-iOS のクラッシュとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
+iOS のクラッシュレポートとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
 
  - 集計済みの iOS クラッシュダッシュボードおよび属性
  - シンボル化された iOS クラッシュレポート
@@ -103,6 +100,8 @@ Global.rum = RUMMonitor.initialize()
 Datadog に .dSYM ファイルをアップロードすることで、エラーの関連スタックトレースの各フレームのファイルパスと行番号にアクセスすることができるようになります。
 
 アプリケーションがクラッシュし、アプリケーションを再起動すると、iOS SDK は Datadog にクラッシュレポートをアップロードします。
+
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
 
 #### Datadog CI
 

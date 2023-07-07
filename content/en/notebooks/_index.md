@@ -13,6 +13,12 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/'
   tag: 'Blog'
   text: 'Best practices for writing incident postmortems'
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
+  tag: "blog"
+  text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -46,7 +52,7 @@ Notebook authors receive email notifications for new comments on their notebooks
 
 ### View mode
 
-{{< img src="notebooks/read_mode.png" alt="View mode drop down menu" style="width:100%;">}}
+{{< img src="notebooks/read_mode.png" alt="View mode dropdown menu" style="width:100%;">}}
 
 You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
@@ -87,7 +93,10 @@ The [Notebook List][2] allows you to view and search previously created notebook
 Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
 ## Template gallery
-From the [Template Gallery][3], see ready-to-use templates including an Incident Response postmortem and an Incident Report which you can create new notebooks from. You can also create a new custom template to build reusable notebook structures.
+From the [Template Gallery][3], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+
+## Version history
+From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][4].
 
 ## Notebook configuration
 
@@ -129,7 +138,7 @@ To share a version of your notebook with snapshots, from the cog menu, click **V
 
 ### Template variables
 
-Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][4].
+Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
 ### Cell configuration
 
@@ -153,19 +162,42 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 
 #### Types of content
 
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][15].
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][6], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][7].
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
 
-* [Timeseries][6]
-* [Top List][7]
-* [Table][8]
-* [Heatmap][9]
-* [Distribution][10]
-* [List][11]
-* [Query value][12]
-* [Funnel][13]
-* [Pie][14]
+* [Timeseries][8]
+* [Top List][9]
+* [Table][10]
+* [Heatmap][11]
+* [Distribution][12]
+* [List][13]
+* [Query value][14]
+* [Funnel][15]
+* [Pie][16]
+* [SLO Summary][17]
+
+### Limit edit access
+
+By default, all users have full access to notebooks.
+
+Use granular access controls to limit the [roles][18] that may edit a particular notebook:
+1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles that may edit the notebook.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**
+
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
+
+To restore general access to a notebook with restricted access, follow the steps below:
+1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
 
 ## Further Reading
 
@@ -174,15 +206,18 @@ Graphs in notebooks support all Datadog data sources: metrics, log events, Index
 [1]: https://app.datadoghq.com/notebook
 [2]: https://app.datadoghq.com/notebook/list
 [3]: https://app.datadoghq.com/notebook/template-gallery
-[4]: /dashboards/template_variables/
-[5]: https://daringfireball.net/projects/markdown/
-[6]: /dashboards/widgets/timeseries/
-[7]: /dashboards/widgets/top_list/
-[8]: /dashboards/widgets/table/
-[9]: /dashboards/widgets/heat_map/
-[10]: /dashboards/widgets/distribution/
-[11]: /dashboards/widgets/list/
-[12]: /dashboards/widgets/query_value/
-[13]: /dashboards/widgets/funnel/
-[14]: /dashboards/widgets/pie_chart/
-[15]: https://mermaid.js.org/
+[4]: /notebooks/guide/version_history
+[5]: /dashboards/template_variables/
+[6]: https://daringfireball.net/projects/markdown/
+[7]: https://mermaid.js.org/
+[8]: /dashboards/widgets/timeseries/
+[9]: /dashboards/widgets/top_list/
+[10]: /dashboards/widgets/table/
+[11]: /dashboards/widgets/heatmap/
+[12]: /dashboards/widgets/distribution/
+[13]: /dashboards/widgets/list/
+[14]: /dashboards/widgets/query_value/
+[15]: /dashboards/widgets/funnel/
+[16]: /dashboards/widgets/pie_chart/
+[17]: /dashboards/widgets/slo/
+[18]: /account_management/rbac/

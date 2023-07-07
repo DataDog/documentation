@@ -14,15 +14,17 @@ further_reading:
 aliases:
     - /serverless/datadog_lambda_library/python/
     - /serverless/guide/python/
+algolia:
+  tags: ['python lambda traces']
 ---
 
-<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>.</div>
+<div class="alert alert-warning">If your Python Lambda functions are written in <a href="https://docs.aws.amazon.com/lambda/latest/dg/runtimes-extensions-api.html">Python 3.6 or less</a>, or you previously set up your Lambda functions using the Datadog Forwarder, see <a href="/serverless/guide/datadog_forwarder_python">instrumenting using the Datadog Forwarder</a>. Otherwise, follow the instructions in this guide to instrument using the Datadog Lambda Extension.</div>
 
 <div class="alert alert-warning">If your Lambda functions are deployed in VPC without access to the public internet, you can send data either <a href="/agent/guide/private-link/">using AWS PrivateLink</a> for the <code>datadoghq.com</code> <a href="/getting_started/site/">Datadog site</a>, or <a href="/agent/proxy/">using a proxy</a> for all other sites.</div>
 
 ## Installation
 
-Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI.
+Datadog offers many different ways to enable instrumentation for your serverless applications. Choose a method below that best suits your needs. Datadog generally recommends using the Datadog CLI. You *must* follow the instructions for "Container Image" if your application is deployed as a container image.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -248,6 +250,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 <div class="alert alert-info">If you are not using a serverless development tool that Datadog supports, such as the Serverless Framework or AWS CDK, Datadog strongly encourages you instrument your serverless applications with the <a href="./?tab=datadogcli">Datadog CLI</a>.</div>
 
+
+{{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog Lambda library
 
     The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
@@ -302,6 +306,77 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
     Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+1. Install the Datadog Lambda library
+
+    The Datadog Lambda Library can be imported either as a layer (recommended) _OR_ as a Python package.
+
+    The minor version of the `datadog-lambda` package always matches the layer version. For example, datadog-lambda v0.5.0 matches the content of layer version 5.
+
+    - Option A: [Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+      ```sh
+      # Use this format for x86-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS commercial regions
+      arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
+
+      # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
+      ```
+
+      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
+
+    - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
+
+      ```sh
+      pip install datadog-lambda -t ./
+      ```
+
+      **Note**: `datadog-lambda` depends on `ddtrace`, which uses native extensions; therefore it must be installed and compiled in a Linux environment on the right architecture (`x86_64` or `arm64`). For example, you can use [dockerizePip][2] for the Serverless Framework and [--use-container][3] for AWS SAM. For more details, see [how to add dependencies to your function deployment package][4].
+
+      See the [latest release][5].
+
+2. Install the Datadog Lambda Extension
+
+    [Configure the layers][1] for your Lambda function using the ARN in the following format:
+
+    ```sh
+    # Use this format for x86-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS commercial regions
+    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for x86-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
+
+    # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
+    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
+
+[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
+[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
+[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
+[5]: https://pypi.org/project/datadog-lambda/
+{{< /site-region >}}
+
+
+
 3. Redirect the handler function
 
     - Set your function's handler to `datadog_lambda.handler.handler`.
@@ -318,7 +393,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 5. (AWS Chalice only) Register the middleware
 
     If you are using [AWS Chalice][8], you must install `datadog-lambda` using `pip`, and register `datadog_lambda_wrapper` as a [middleware][9] in your `app.py`:
-    
+
     ```python
     from chalice import Chalice, ConvertToMiddleware
     from datadog_lambda.wrapper import datadog_lambda_wrapper
@@ -333,11 +408,6 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     ```
 
 
-[1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
-[2]: https://github.com/UnitedIncome/serverless-python-requirements#cross-compiling
-[3]: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html
-[4]: https://docs.aws.amazon.com/lambda/latest/dg/python-package.html#python-package-dependencies
-[5]: https://pypi.org/project/datadog-lambda/
 [6]: https://docs.datadoghq.com/serverless/guide/handler_wrapper
 [7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: https://aws.github.io/chalice/
@@ -348,6 +418,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 ## What's next?
 
 - You can now view metrics, logs, and traces on the [Serverless Homepage][1].
+- Turn on [threat monitoring][6] to get alerted on attackers targeting your service.
 - See the sample code to [monitor custom business logic](#monitor-custom-business-logic)
 - See the [troubleshooting guide][2] if you have trouble collecting the telemetry
 - See the [advanced configurations][3] to
@@ -404,3 +475,4 @@ def get_message():
 [3]: /serverless/configuration/
 [4]: /serverless/custom_metrics?tab=python
 [5]: /tracing/custom_instrumentation/python/
+[6]: /security/application_security/enabling/serverless/?tab=serverlessframework

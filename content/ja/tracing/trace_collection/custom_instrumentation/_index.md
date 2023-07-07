@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - APM カスタムインスツルメンテーション
 aliases:
 - /ja/tracing/setup/php/manual-installation
 - /ja/agent/apm/php/manual-installation
@@ -23,14 +26,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/opentelemetry-instrumentation/
   text: Datadog および OpenTelemetry のイニシアティブのイニシアティブについて
 kind: documentation
-title: カスタムインスツルメンテーション
+title: Datadog ライブラリを使ったカスタムインスツルメンテーション
+type: multi-code-lang
 ---
 
 カスタムインスツルメンテーションにより、Datadog へ送信するトレースをプログラムで作成、変更、削除できます。これは、自動インスツルメンテーションでキャプチャできない社内コードのトレースや、不要なスパンのトレースからの削除、そして希望する[スパンタグ][1]の追加などスパンのより詳細な可視化とコンテキストの提供に役立ちます。
 
 アプリケーションのインスツルメンテーション前に、Datadog の [APM 用語][2] を確認し、Datadog APM の基本理念をよく理解してください。
 
-すでに OpenTracing または OpenTelemetry を使用している場合は、[OpenTracing と OpenTelemetry][3]を参照してください。
+オープンスタンダードを利用してインスツルメンテーションを行う場合は、[OpenTracing によるインスツルメンテーション][3]、[OpenTelemetry によるインスツルメンテーション][4]をご参照ください。
 
 {{< partial name="apm/apm-manual-instrumentation.html" >}}
 
@@ -44,4 +48,5 @@ title: カスタムインスツルメンテーション
 
 [1]: /ja/tracing/guide/add_span_md_and_graph_it/
 [2]: /ja/tracing/glossary
-[3]: /ja/opentelemetry/otel_tracing/
+[3]: /ja/tracing/trace_collection/opentracing/
+[4]: /ja/tracing/trace_collection/otel_instrumentation

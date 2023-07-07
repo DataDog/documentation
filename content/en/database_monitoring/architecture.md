@@ -14,7 +14,9 @@ further_reading:
   text: "Troubleshooting"
 
 ---
-
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -63,7 +65,7 @@ Database Monitoring collects system metrics such as CPU, memory, disk usage, log
 
 You can install the Agent on any cloud VM (for example, EC2) provided the Agent can connect to your database instances.
 
-If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider’s orchestration tools. For example, you can use [AWS ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
+If you are not running your own Kubernetes cluster, Datadog recommends using your cloud provider's orchestration tools. For example, you can use [AWS ECS][9] to host the Datadog Agent, as [the Agent already exists as a Docker container][10].
 
 ### Kubernetes
 
@@ -73,7 +75,7 @@ If you are running your apps on [Kubernetes][11], use the [Datadog Cluster Agent
 
 The [Cluster Agent][14] automatically distributes the database instances across a pool of Agents. This ensures that only one instance of each check runs, as opposed to each node-based Agent pod running this corresponding check. The Cluster Agent holds the configurations and dynamically dispatches them to node-based Agents. The Agents on each node connect to the Cluster Agent every 10 seconds and retrieve the configurations to run.
 
-If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of database instances ---  the Cluster Agent spreads the cluster checks across the different nodes.
+If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures one (and only one) instance always runs even as nodes are added and removed from the cluster. This becomes important when you have a large number of database instances --- the Cluster Agent spreads the cluster checks across the different nodes.
 
 
 

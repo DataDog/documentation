@@ -52,13 +52,14 @@ Configure the following [parameters][4] in the `postgresql.conf` file and then *
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value then queries longer than `1024` characters will not be collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
 | `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
 ## Grant the Agent access
 
 The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Choose a PostgreSQL database on the database server to which the Agent will connect. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
+The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
 Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
@@ -114,7 +115,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection explained][6] for more information.
+<div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
 
 Create the function **in every database** to enable the Agent to collect explain plans.
 
@@ -247,7 +248,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
    ```
 2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][12].
 
- This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration in milliseconds (check that logging the full SQL statement complies with your organization's privacy requirements):
+   This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration in milliseconds (check that logging the full SQL statement complies with your organization's privacy requirements):
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
                                        # and their durations, > 0 logs only
@@ -273,7 +274,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
        #    name: new_log_start_with_date
    ```
-      Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+   Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
 5. [Restart the Agent][10].
 
 ### Validate

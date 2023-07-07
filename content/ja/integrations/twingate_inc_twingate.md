@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: twingate-inc-twingate
 app_uuid: ae992049-e257-4322-a520-cb348a17ae5e
 assets: {}
@@ -9,13 +11,9 @@ author:
   support_email: support@twingate.com
   vendor_id: twingate
 categories:
+- マーケットプレイス
 - ネットワーク
 - セキュリティ
-- クラウド
-- AWS
-- azure
-- google cloud
-- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -43,24 +41,18 @@ public_title: Twingate
 short_description: 簡単にデプロイできるゼロトラストネットワークアクセス
 supported_os:
 - linux
-- macos
 - windows
-terms:
-  legal_email: legalnotices@twingate.com
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Marketplace
   - Category::Network
   - Category::Security
-  - Category::Cloud
-  - Category::AWS
-  - Category::Azure
-  - Category::Google Cloud
-  - Category::Marketplace
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 簡単にデプロイできるゼロトラストネットワークアクセス
   media:

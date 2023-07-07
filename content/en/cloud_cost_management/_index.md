@@ -3,22 +3,29 @@ title: Cloud Cost Management
 kind: documentation
 aliases:
   - /infrastructure/cloud_cost_management
+  - /integrations/cloudability
 further_reading:
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
+  - link: "/monitors/types/cloud_cost/"
+    tag: "Documentation"
+    text: "Configure a Cloud Cost monitor"
+  - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
+    tag: "blog"
+    text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
 ---
 ## Overview
 
 Cloud Cost Management provides insights for engineering and finance teams to see how changes to infrastructure can affect costs. It enables you to understand trends, allocate spend across your organization, and identify inefficiencies.
 Datadog ingests your cloud cost data and transforms it into queryable metrics. If costs rise, you can correlate the change with usage metrics to determine the root cause.
 
-To use Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog.
-
 ## Setup
+{{< tabs >}}
+{{% tab "AWS" %}}
 
-To setup Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
 
+To use AWS Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog. To set up Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
 ### Prerequisite: generate a Cost and Usage Report
 
 Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
@@ -35,7 +42,7 @@ Select the following Delivery options:
 
 ### Configure the AWS integration
 
-Select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
+Navigate to [Setup & Configuration](https://app.datadoghq.com/cost/setup) and select your AWS management account from the dropdown menu, allowing Datadog to display tags associated with this account. If you have multiple similarly-named management accounts, view the tags associated with a selected account to ensure you have selected the specific account you want.
 
 **Note**: Datadog recommends sending a Cost and Usage Report from an [AWS **management account**][2] for cost visibility into related **member accounts**. If you send a Cost and Usage report from an AWS **member account**, ensure that you have selected the following options in your **management account's** [preferences][3]:
 
@@ -122,7 +129,7 @@ Attach the new S3 policy to the Datadog integration role.
 5. Click **Attach policy**.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
-## Cost types
+### Cost types
 
 You can visualize your ingested data using the following cost types:
 
@@ -133,7 +140,7 @@ You can visualize your ingested data using the following cost types:
 | `aws.cost.blended`   | Cost based on the average rate paid for a usage type across an organization's member accounts.|
 | `aws.cost.ondemand`  | Cost based on the list rate provided by AWS. |
 
-## Tag enrichment
+### Tag enrichment
 
 Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6].
 
@@ -165,31 +172,6 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
-## Tag pipelines (beta)
-
-You can use tag pipelines to create tag rules to help fix missing or incorrect tags on your AWS bill, or to create new, inferred tags that align with business logic.
-
-There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic. 
-
-### Rule types
-
-**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
-
-**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you’re looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
-
-The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
-
-**Note:** A maximum of 100 rules can be created. 
-
-## Cloud costs in dashboards
-
-Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
-
-{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation"  >}}
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
 [2]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html
@@ -197,3 +179,107 @@ Visualizing infrastructure spend alongside related utilization metrics can help 
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+{{% /tab %}}
+
+{{% tab "Azure" %}}
+
+To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
+
+{{% site-region region="us3" %}}
+**Note**: If you are a US3 customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+
+[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]: /integrations/azure/?tab=azurecliv20#setup
+{{% /site-region %}}
+
+### Generate cost exports
+
+1. Navigate to [Exports][3] under Azure portal's *Cost Management + Billing*.
+2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
+3. Once the scope is selected, click **Add**.
+
+{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
+
+4. Select the following Export details:
+    - Metric: **Actual Cost (usage and purchases)**
+    - Export type: **Daily export of month-to-date costs**
+    - File Partitioning: `On`
+  
+{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
+
+5. Choose a storage account, container, and directory for the exports. **Note:** The billing exports do not have to be stored in the subscription the export is for. If you are creating exports for multiple subscriptions, Datadog recommends storing them in one subscription's storage account. 
+6. Select **Create**.
+
+Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Datadog recommends using the same storage container for both exports. For faster processing, generate the first exports manually by clicking **Run Now**.
+{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
+
+### Provide Datadog access to your exports
+
+1. In the Exports tab, click on the export's Storage Account to navigate to it.
+2. Click the Containers tab.
+3. Choose the storage container your bills are in.
+4. Select the Access Control (IAM) tab, and click **Add**.
+5. Choose **Add role assignment**.
+6. Choose **Storage Blob Data Reader**, then click Next.
+7. Assign these permissions to one of the App Registrations you have connected with Datadog.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**.
+    - Select *review + assign*.
+ 
+If your exports are in different storage containers, repeat steps one to seven for the other storage container.
+
+### Configure Cost Management Reader access
+**Note:** You do not need to configure this access if your scope is **Billing Account**.
+
+1. Navigate to your [subscriptions][4] and click your subscription's name.
+2. Select the Access Control (IAM) tab.
+3. Click **Add**, then **Add role assignment**.
+4. Choose **Cost Management Reader**, then click Next.
+5. Assign these permissions to the subscription.
+
+This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
+
+### Cost types
+
+You can visualize your ingested data using the following cost types:
+
+| Cost Type            | Description           |
+| -------------------- | --------------------- |
+| `azure.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis).|
+| `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate charge types.|
+
+[1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
+[2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
+[3]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
+[4]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
+{{% /tab %}}
+{{< /tabs >}}
+
+## Tag pipelines 
+
+<div class="alert alert-info">Tag pipelines is a beta feature.</div>
+
+You can use [tag pipelines][1] to create tag rules to help fix missing or incorrect tags on your Cloud bill, or to create new, inferred tags that align with business logic. 
+
+### Rule types
+
+<div class="alert alert-warning"> A maximum of 100 rules can be created. </div>
+
+There are two types of rules supported: **Create new tag**, and **Alias existing tag keys**. You can keep your rules organized by leveraging rules-sets, which act as folders for your rules. The rules are executed in order (from top to bottom), to keep the execution order deterministic. You can organize rules and rulesets to ensure the order of execution matches your business logic. 
+
+**Create new tag** - This allows you to create a new tag (key + value) based on the presence of existing tags. For example, you can create a rule to tag all resources that are part of team A, B, or C, and also run a specified application, with a new `cost-center:webstore` tag.
+
+**Alias existing tag keys** - This allows you to use values from an existing tag, to map to a more standardized tag key. For example, if you're looking to standardize across your organization to use the `application` tag key, but several teams have a variation of that tag (like `app`, `web-app`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.   
+
+The rule stops executing for each resource, once a first match is found. For example, if a resource already has a `web-app` tag, then the rule no longer attempts to identify an `apps` or `service` tag. 
+
+## Cloud costs in dashboards
+
+Visualizing infrastructure spend alongside related utilization metrics can help you spot potential inefficiencies and savings opportunities. You can add cloud costs to widgets in Datadog dashboards by selecting the *Cloud Cost* data source.
+
+{{< img src="cloud_cost/cloud_cost_data_source.png" alt="Cloud Cost available as a data source in dashboard widget creation" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/cost/tag-pipelines

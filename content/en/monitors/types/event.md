@@ -9,7 +9,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -25,17 +25,16 @@ Event monitors allow you to alert on events matching a search query.
 
 To create an [event monitor][1] in Datadog, navigate to **Monitors** > **New Monitor** > **Event**.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
 As you define the search query, the top graph updates.
 
 1. Construct a search query using the [Event Explorer search syntax][2].
-2. Choose to monitor over an event count, facet, or measure:
-    * **Monitor over an event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of events over a selected time frame, then compares it to the threshold conditions.
+2. Choose to monitor over an event count or facet:
+    * **Monitor over an event count**: Use the search bar (optional) and do **not** select a facet. Datadog evaluates the number of events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If a facet is selected, the monitor alerts over the unique value count of the facet.
-    * **Monitor over measure**: If a measure is selected, the monitor alerts over the numerical value of the event facet (similar to a metric monitor) and aggregation needs to be selected (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Configure the alert grouping strategy (optional):
     * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * **Multi Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 1000 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you can group by `host` to receive separate alerts for each host.
@@ -83,7 +82,7 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/monitors#create/event
-[2]: /events/explorer/#search-syntax
+[2]: /service_management/events/explorer/#search-syntax
 [3]: /help/
-[4]: /monitors/create/configuration/#advanced-alert-conditions
+[4]: /monitors/configuration/#advanced-alert-conditions
 [5]: /monitors/notify/

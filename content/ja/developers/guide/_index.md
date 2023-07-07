@@ -1,4 +1,10 @@
 ---
+cascade:
+  algolia:
+    category: ガイド
+    rank: 20
+    subcategory: 開発者ガイド
+disable_toc: true
 kind: ガイド
 private: true
 title: 開発者ガイド

@@ -1,20 +1,24 @@
 ---
-title: Synthetics の使用量を監視する
-kind: ガイド
+description: Synthetic テストで作成された推定使用量メトリクスについて説明します。
 further_reading:
-  - link: /synthetics/api_tests
-    tag: ドキュメント
-    text: API テストを作成する
-  - link: /synthetics/multistep
-    tag: ドキュメント
-    text: マルチステップ API テストを作成する
-  - link: /synthetics/browser_tests
-    tag: ドキュメント
-    text: ブラウザテストを作成する
-  - link: https://www.datadoghq.com/blog/test-creation-best-practices/
-    tag: ブログ
-    text: エンドツーエンドテスト作成のベストプラクティス
+- link: https://www.datadoghq.com/blog/test-creation-best-practices/
+  tag: ブログ
+  text: エンドツーエンドテスト作成のベストプラクティス
+- link: /synthetics/api_tests
+  tag: ドキュメント
+  text: API テストを作成する
+- link: /synthetics/multistep
+  tag: ドキュメント
+  text: マルチステップ API テストを作成する
+- link: /synthetics/browser_tests
+  tag: Documentation
+  text: ブラウザテストを作成する
+kind: ガイド
+title: 推定使用量メトリクスを使用する
 ---
+
+## 概要 
+
 Synthetic テストには[推定使用量メトリクス][1]が付属しており、使用量を追跡できます。このメトリクスにより、特に次のことが可能になります。
 
 * 時間の経過とともに使用量がどのように変化するかを理解します。
@@ -39,5 +43,5 @@ Synthetics の使用量を視覚化または警告するには、次のクエリ
 [2]: /ja/synthetics/api_tests
 [3]: /ja/synthetics/multistep
 [4]: /ja/synthetics/browser_tests
-[5]: /ja/monitors/create/types/anomaly/
-[6]: /ja/monitors/create/types/forecasts
+[5]: /ja/monitors/types/anomaly/
+[6]: /ja/monitors/types/forecasts

@@ -1,12 +1,13 @@
 ---
-title: Check de service
-kind: documentation
 aliases:
-  - /fr/developers/faq/how-can-i-submit-a-custom-status-check
-  - /fr/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
-  - /fr/guides/services_checks/
-  - /fr/monitors/guide/visualize-your-service-check-in-the-datadog-ui
+- /fr/developers/faq/how-can-i-submit-a-custom-status-check
+- /fr/developers/service_checks/visualize-your-service-check-in-the-datadog-ui
+- /fr/guides/services_checks/
+- /fr/monitors/guide/visualize-your-service-check-in-the-datadog-ui
+kind: documentation
+title: Check de service
 ---
+
 ## Présentation
 
 Grâce aux checks de service, vous pouvez définir le statut d'un service, afin de le surveiller dans Datadog. Les checks de service effectuent un suivi du statut de disponibilité d'un service donné. Après un certain nombre d'échecs successifs de connexion au service en question, l'Agent de surveillance vous envoie une alerte. Par exemple, si l'Agent surveillant un host Redis ne parvient pas à se connecter à Redis ni à recueillir des métriques après trois tentatives consécutives, vous en êtes informé.
@@ -33,11 +34,11 @@ Les checks de service peuvent être visualisés et utilisés dans 3 sections de
 
 - [Sommaire des checks][1]
 - [Screenboards][2]
-- [Monitor de checks custom][3]
+- [Monitor de check de service][3]
 
-### Résumé de check
+### Sommaire des checks
 
-Cliquez sur l'onglet _Monitors_, puis sur _Check Summary_ pour afficher le [Sommaire des checks][1].
+Cliquez sur **Monitors** > **Check Summary** pour afficher la page [Check Summary][1] contenant le sommaire des checks.
 
 {{< img src="developers/service_checks/check_summary.png" alt="Sommaire des checks" >}}
 
@@ -45,11 +46,11 @@ Cette section affiche la liste de tous les checks de votre infrastructure ainsi 
 
 ### Screenboards
 
-Vous pouvez visualiser vos checks de service en ajoutant un widget _Statut de check_ à un screenboard :
+Vous pouvez visualiser vos checks de service en ajoutant un widget **Statut de check** à un screenboard :
 
 {{< img src="developers/service_checks/check_status_widget.png" alt="Widget Statut de check" >}}
 
-Après avoir cliqué sur l'icône du widget _Statut de check_, la fenêtre contextuelle suivante apparaît :
+Lorsque vous cliquez sur l'icône du widget **Statut de check**, la fenêtre contextuelle suivante s'affiche :
 
 {{< img src="developers/service_checks/check_widget_config.png" alt="Configuration du widget Statut de check" >}}
 
@@ -60,33 +61,24 @@ Utilisez ce formulaire pour définir les options suivantes :
 - **Scoping** : permet de sélectionner un statut de check unique ou un cluster de statuts de check associés à une seule valeur de tag ou à une clé de tag.
 - **Widget Title** : permet de définir le titre de votre widget.
 
-## Monitor de checks custom
+## Monitor de check de service
 
-Même si vous ne pouvez pas représenter graphiquement un check custom (comme vous le feriez pour des métriques), vous pouvez quand même le surveiller.
-Accédez à l'onglet _Monitor_ > _new monitor_, puis sélectionnez la section **custom check** :
+Même si vous ne pouvez pas représenter graphiquement l'évolution d'un check de service (comme vous le feriez pour des métriques), vous pouvez quand même le surveiller. Accédez à l'onglet **Monitors** > **New Monitor**, puis sélectionnez **Service Check** :
 
-{{< img src="developers/service_checks/service_check_monitor.png" alt="Monitor de check"  >}}
-
-Configurez votre monitor de checks custom : 
-
-{{< img src="developers/service_checks/check_monitor_config.png" alt="Configuration de monitor de check" >}}
+{{< img src="developers/service_checks/service_check_monitor.png" alt="Monitor de check" >}}
 
 Utilisez ce formulaire pour définir les options suivantes :
 
-- **Pick a custom check** : permet de sélectionner le nom du statut de check à surveiller.
+- **Pick a service check** : permet de sélectionner le nom du statut de check à surveiller.
 - **Pick monitor scope** : permet de sélectionner le contexte de votre monitor (en incluant ou excluant des tags).
 - **Set alert conditions** : permet de choisir entre une alerte de check simple et une alerte de cluster.
-- **Say what's happening** : permet de modifier les notifications envoyées (en savoir plus sur les [notifications Datadog][4]).
 - **Notify your team** : permet de choisir les personnes qui doivent être notifiées par ce monitor.
+- **Say what's happening** : permet de modifier les notifications envoyées (en savoir plus sur les [notifications Datadog][4]).
 
-Les monitors de checks de service associés aux intégrations Datadog par défaut peuvent être définis dans l'onglet _Monitor_ > _Integration_ > onglet _Integration status_ sur la gauche. Par exemple, avec l'intégration HAProxy : 
-
-{{< img src="developers/service_checks/haproxy_service_check.mp4" alt="Check de service Haproxy" video="true" >}}
-
-Consultez la section [Présentation des intégrations basées sur l'Agent][5] pour découvrir comment rédiger une intégration.
+Pour en savoir plus sur la création d'un check de service, consultez la section [Monitor de check de service][5].
 
 [1]: https://app.datadoghq.com/check/summary
 [2]: https://app.datadoghq.com/dashboard
 [3]: https://app.datadoghq.com/monitors#create/custom
 [4]: /fr/monitors/notify/
-[5]: /fr/developers/integrations/
+[5]: /fr/monitors/types/service_check/

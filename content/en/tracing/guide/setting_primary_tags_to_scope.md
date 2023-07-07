@@ -70,13 +70,17 @@ Environments appear at the top of APM pages. Use the `env` dropdown to scope the
 
 ## Add a second primary tag in Datadog
 
-If you added a host tag other than `env:<ENVIRONMENT>` to your traces, it can be set as a primary tag along with the environment tag. Go to the [APM Settings][6] page to define, change, or remove your primary tags.
+If you need to aggregate your trace metrics across additional dimensions, we recommend setting up a second primary tag in addition to the
+default and mandatory primary tag `env:<ENVIRONMENT>`. Once configured, a second dropdown is available in the **Service Catalog Performance** tab. 
+
+Go to the [APM Settings][6] page to define, change, or remove your primary tags.
 
 **Note**:
 
 * Only organization administrators have access to this page.
 * Changes may take up to two hours to be reflected in the UI.
 * The tracer always adds `resource`, `name`, and `service` tags to spans. Datadog recommends never adding these as host level tags to avoid confusion.
+* The second primary tag supports up to 30 unique values. See [APM Data Volume Guidelines][9] for details.
 
 If you change a previously set primary tag, be aware of the following:
 
@@ -172,3 +176,4 @@ Primary tags appear at the top of APM pages. Use these selectors to filter the d
 [6]: https://app.datadoghq.com/apm/settings
 [7]: https://app.datadoghq.com/apm/services
 [8]: /getting_started/tagging/assigning_tags
+[9]: /tracing/troubleshooting/#data-volume-guidelines

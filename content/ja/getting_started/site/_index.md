@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - site
+  - Datadog サイト
 further_reading:
 - link: https://learn.datadoghq.com/courses/dd-201
   tag: ラーニングセンター
@@ -24,35 +28,11 @@ Datadog では、世界中でさまざまなサイトを提供しています。
 | US5     | `https://us5.datadoghq.com` | `us5.datadoghq.com` | US       |
 | EU1     | `https://app.datadoghq.eu`  | `datadoghq.eu`      | EU       |
 | US1-FED | `https://app.ddog-gov.com`  | `ddog-gov.com`      | US       |
+| AP1     | `https://ap1.datadoghq.com` | `ap1.datadoghq.com` | 日本 |
 
-Datadog のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
+## SDK ドメイン
 
-### ログ管理
-
-| サイト | サイト URL                                      |
-|------|-----------------------------------------------|
-| US1  | https://logs.browser-intake-datadoghq.com     |
-| US3  | https://logs.browser-intake-us3-datadoghq.com |
-| US5  | https://logs.browser-intake-us5-datadoghq.com |
-| EU1  | https://mobile-http-intake.logs.datadoghq.eu  |
-
-### トレース
-
-| サイト | サイト URL                                           |
-|------|----------------------------------------------------|
-| US1  | https://trace.browser-intake-datadoghq.com         |
-| US3  | https://trace.browser-intake-us3-datadoghq.com     |
-| US5  | https://trace.browser-intake-us5-datadoghq.com     |
-| EU1  | https://public-trace-http-intake.logs.datadoghq.eu |
-
-### RUM
-
-| サイト | サイト URL                                     |
-|------|----------------------------------------------|
-| US1  | https://rum.browser-intake-datadoghq.com     |
-| US3  | https://rum.browser-intake-us3-datadoghq.com |
-| US5  | https://rum.browser-intake-us5-datadoghq.com |
-| EU1  | https://rum-http-intake.logs.datadoghq.eu    |
+[SDK ドメインの対応エンドポイント][2]をご参照ください。
 
 ## Datadog のドキュメントをサイト別に見る
 
@@ -62,15 +42,17 @@ Datadog サイトによって、インスタンスのセキュリティ要件に
 
 例えば、Datadog for Government サイトのドキュメントを見るには、**US1-FED** を選択します。
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 
 ## Datadog for Government サイトにアクセスする
 
 Datadog for Government Site (US1-FED) は、アメリカ政府機関およびパートナーがそのアプリケーションやインフラストラクチャーを監視するためのサイトです。Datadog for Government site のセキュリティおよびコンプライアンスコントロール、フレームワークに関する詳細や、FedRAMP への対応については、[セキュリティページ][1]をご参照ください。
 
 [1]: https://www.datadoghq.com/security/
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[2]: /ja/real_user_monitoring/#supported-endpoints-for-sdk-domains

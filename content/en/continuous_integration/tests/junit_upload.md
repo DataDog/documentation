@@ -28,7 +28,7 @@ If your testing framework can generate JUnit XML test reports, you can use these
 
 Install the [`datadog-ci`][3] CLI globally using `npm`:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 npm install -g @datadog/datadog-ci
 {{< /code-block >}}
 
@@ -40,24 +40,24 @@ If installing Node.js in the CI is an issue, standalone binaries are provided wi
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_linux-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
 Then run any command with `datadog-ci`:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci version
 {{< /code-block >}}
 
 {{% /tab %}}
 
 {{% tab "MacOS" %}}
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
 
 Then run any command with `datadog-ci`:
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci version
 {{< /code-block >}}
 
@@ -83,7 +83,7 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 To upload your JUnit XML test reports to Datadog, run the following command, specifying the name of the service or library that was tested using the `--service` parameter, and one or more file paths to either the XML report files directly or directories containing them:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service <service_name> <path> [<path> ...]
 {{< /code-block >}}
 
@@ -158,7 +158,7 @@ pipeline {
 {{% tab "Bash" %}}
 If your CI system allows sub-shells:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 $(./run-tests.sh); export tests_exit_code=$?
 datadog-ci junit upload --service service_name ./junit.xml
 if [ $tests_exit_code -ne 0 ]; then exit $tests_exit_code; fi
@@ -191,14 +191,21 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
+`--metrics`
+: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--metrics` parameter can be specified multiple times). When specifying metrics using `DD_METRICS`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
+**Environment variable**: `DD_METRICS`<br/>
+**Default**: (none)<br/>
+**Example**: `memory_allocations:13`<br/>
+**Note**: Metrics specified using `--metrics` and with the `DD_METRICS` environment variable are merged. If the same key appears in both `--metrics` and `DD_METRICS`, the value in the environment variable `DD_METRICS` takes precedence.
+
 `--xpath-tag`
 : Key and xpath expression in the form `key=expression`. These provide a way to customize tags for test in the file (the `--xpath-tag` parameter can be specified multiple times).<br/>
-See [Providing metadata with XPath expressions][9] for more details on the supported expressions.<br/>
+See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-expressions) for more details on the supported expressions.<br/>
 **Default**: (none)<br/>
 **Example**: `test.suite=/testcase/@classname`<br/>
 **Note**: Tags specified using `--xpath-tag` and with `--tags` or `DD_TAGS` environment variable are merged. xpath-tag gets the highest precedence, as the value is usually different for each test.
 
-`--logs` **(beta)**
+`--logs`
 : Enable forwarding content from the XML reports as [Logs][6]. The content inside `<system-out>`, `<system-err>`, and `<failure>` is collected as logs. Logs from elements inside a `<testcase>` are automatically connected to the test.<br/>
 **Environment variable**: `DD_CIVISIBILITY_LOGS_ENABLED`<br/>
 **Default**: `false`<br/>
@@ -211,6 +218,19 @@ See [Providing metadata with XPath expressions][9] for more details on the suppo
 `--dry-run`
 : Runs the command without actually uploading the file to Datadog. All other checks are performed.<br/>
 **Default**: `false`
+
+`--skip-git-metadata-upload`
+: Flag used to skip git metadata upload. If you want to upload git metadata, you may pass --skip-git-metadata-upload=0 or --skip-git-metadata-upload=false.<br/>
+**Default**: `true`<br/>
+
+`--git-repository-url`
+: The repository URL to retrieve git metadata from. If it is not passed, the URL is retrieved from the local git repository.<br/>
+**Default**: local git repository<br/>
+**Example**: `git@github.com:DataDog/documentation.git`<br/>
+
+`--verbose`
+: Flag used to add extra verbosity to the output of the command<br/>
+**Default**: `false`<br/>
 
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
@@ -278,6 +298,11 @@ If you are running tests in non-supported CI providers or with no `.git` folder,
 : Commit committer date in ISO 8601 format.<br/>
 **Example**: `2021-03-12T16:00:28Z`
 
+## Git metadata upload
+
+From `datadog-ci` version `2.9.0` or later, CI Visibility automatically uploads Git metadata information (commit history). This metadata contains file names but no file contents. If you want to opt out of this behavior, pass the flag `--skip-git-metadata-upload`.
+
+
 ## Collecting environment configuration metadata
 
 Datadog uses special dedicated tags to identify the configuration of the environment in which tests run, including the operating system, runtime, and device information, if applicable. When the same test for the same commit runs in more than one configuration (for example, on Windows and on Linux), the tags are used to differentiate the test in failure and flakiness detection.
@@ -333,10 +358,9 @@ For mobile apps (Swift, Android):
 
 In addition to the `--tags` CLI parameter and the `DD_TAGS` environment variable, which apply custom tags globally to all tests included the uploaded XML report, the `--xpath-tag` parameter provides custom rules to add tags from different attributes within the XML to each test.
 
-The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][10] expression within the ones supported.
+The parameter provided must have the format `key=expression`, where `key` is the name of the custom tag to be added and `expression` is a valid [XPath][9] expression within the ones supported.
 
 While XPath syntax is used for familiarity, only the following expressions are supported:
-
 
 `/testcase/@attribute-name`
 : The XML attribute from `<testcase attribute-name="value">`.
@@ -371,9 +395,9 @@ To change `test.suite` tags from `value 1`, `value 2` to `SomeTestSuiteClass`, `
 </testsuites>
 {{< /code-block >}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service service_name \
-  --xpath-tag test.suite=/testcase/@aclassname ./junit.xml
+  --xpath-tag test.suite=/testcase/@classname ./junit.xml
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -391,7 +415,7 @@ To add `custom_tag` to each test with values `value 1`, `value 2`:
 </testsuites>
 {{< /code-block >}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service service_name \
   --xpath-tag custom_tag=/testcase/@attr ./junit.xml
 {{< /code-block >}}
@@ -419,7 +443,7 @@ To add `custom_tag` to each test with values `value 1`, `value 2`:
 </testsuites>
 {{< /code-block >}}
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 datadog-ci junit upload --service service_name \
   --xpath-tag custom_tag=/testcase/..//property[@name=\'prop\'] ./junit.xml
 {{< /code-block >}}
@@ -435,7 +459,7 @@ Another way to provide additional tags to specific tests is including `<property
 
 To be processed, the `name` attribute in the `<property>` element must have the format `dd_tags[key]`, where `key` is the name of the custom tag to be added. Other properties are ignored.
 
-**Example**: Adding tags to a `<testcase>` element
+**Example**: Adding tags to a `<testcase>` element.
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -451,7 +475,7 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-**Example**: Adding tags to a `<testsuite>` element
+**Example**: Adding tags to a `<testsuite>` element.
 
 {{< code-block lang="xml" >}}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -466,6 +490,8 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -478,5 +504,4 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 [6]: /logs/
 [7]: /getting_started/site/
 [8]: https://git-scm.com/downloads
-[9]: #providing-metadata-with-xpath-expressions
-[10]: https://www.w3schools.com/xml/xpath_syntax.asp
+[9]: https://www.w3schools.com/xml/xpath_syntax.asp

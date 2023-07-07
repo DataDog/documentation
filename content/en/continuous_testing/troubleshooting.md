@@ -26,7 +26,7 @@ Test run
 : A single run of a Continuous Testing test, which can be an [API][7] or [browser test][8]. If you have configured retries, they count as individual test runs. For example, a test with two retries can have up to three associated test runs.
 
 Parallel test
-: A Continuous Testing test that is run at the same time as another Continuous Testing test. To set how many tests you would like to run in parallel, configure parallelization on the [Continuous Testing Settings page][9].
+: A Continuous Testing test that is run at the same time as another Continuous Testing test in your CI/CD pipeline. To set how many tests you would like to run in parallel, configure parallelization on the [Continuous Testing Settings page][9].
 
 Batch timeout
 : A batch timeout occurs when your batch does not complete within a reasonable time based on the [polling timeout][3] set in your configuration file. 

@@ -8,12 +8,15 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+  tag: "Blog"
+  text: "Use CIDR notation queries to filter your network traffic logs"
 ---
 
 ## Overview
@@ -24,7 +27,7 @@ Once [log management is enabled][1] for your organization, you can create a logs
 
 To create a [logs monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Logs*.
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/create/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 Log monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 ### Define the search query
 
@@ -64,9 +67,9 @@ When splitting the monitor by any dimension (tag or facet) and using a `below` c
 **Examples**:
 
 * This monitor triggers if and only if there are no logs for all services:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_by_service.png" alt="Below monitor split by service" style="width:60%;" >}}
 * This monitor triggers if there are no logs for the service `backend`:
-  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service"  style="width:60%;" >}}
+  {{< img src="monitors/monitor_types/log/log_monitor_below_condition.png" alt="Below monitor for backend service" style="width:60%;" >}}
 
 #### Advanced alert conditions
 
@@ -78,7 +81,7 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 
 #### Log samples and breaching values toplist
 
-When a logs monitor is triggered, samples or values can be added to the notification message.
+When a logs monitor is triggered, samples or values can be added to the notification message. Logs without a message are not included in samples. In order to add the content of a log attribute to the monitor's message, use Log monitor [template variables][9] directly in the monitor's message body.
 
 | Monitor Setup                    | Can be added to notification message |
 |----------------------------------|--------------------------------------|
@@ -96,10 +99,10 @@ To disable log samples, uncheck the box at the bottom of the **Say what's happen
 #### Examples
 
 Include a table of the top 10 breaching values:
-{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/top_10_breaching_values.png" alt="Top 10 breaching values" style="width:60%;" >}}
 
 Include a sample of 10 logs in the alert notification:
-{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values"  style="width:60%;" >}}
+{{< img src="monitors/monitor_types/log/10_sample_logs.png" alt="Top 10 breaching values" style="width:60%;" >}}
 
 ## Further Reading
 
@@ -111,5 +114,6 @@ Include a sample of 10 logs in the alert notification:
 [4]: /logs/explorer/search/
 [5]: /logs/explorer/facets/
 [6]: /logs/explorer/facets/#measures
-[7]: /monitors/create/configuration/#advanced-alert-conditions
+[7]: /monitors/configuration/#advanced-alert-conditions
 [8]: /monitors/notify/
+[9]: /monitors/notify/variables/?tab=is_alert#matching-attributetag-variables

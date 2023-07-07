@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_filestorage
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/
@@ -30,7 +31,7 @@ Datadog Azure インテグレーションを使用すると、Azure File Storage
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

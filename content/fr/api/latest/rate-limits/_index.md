@@ -1,21 +1,21 @@
 ---
 title: Limites de débit
-type: api
+type: documentation
 ---
 
 {{< h2 >}}Limites de débit{{< /h2 >}}
 
-Tous les endpoints d'API ont une limite de débit. Lorsque vous dépassez un certain nombre de requêtes dans un intervalle donné, Datadog renvoie une erreur.
+De nombreux endpoints d'API ont une limite de débit. Lorsque vous dépassez un certain nombre de requêtes dans un intervalle donné, Datadog renvoie une erreur.
 
-Si vous dépassez la limite de débit, vous recevez un code de réponse 429. Datadog vous recommande de patienter pendant la durée correspondant à `X-RateLimit-Period` avant d'effectuer à nouveau des appels. Vous pouvez également effectuer des appels à une fréquence légèrement plus faible que `X-RateLimit-Limit` ou `X-RateLimit-Period`.
+Si vous dépassez la limite de débit, vous recevez un code de réponse 429. Vous pouvez soit patienter pendant la durée correspondant à `X-RateLimit-Period` avant d'effectuer à nouveau des appels, soit effectuer des appels à une fréquence légèrement plus faible que `X-RateLimit-Limit` ou `X-RateLimit-Period`.
 
 Pour revoir à la hausse les limites de débit par défaut, [contactez l'assistance Datadog][1].
 
 Quelques précisions concernant la politique de limitation de débit des API :
 
 - Datadog **n'applique aucune limite de débit** lors de l'envoi de points de données/métriques (consultez la [section relative aux métriques][2] pour en savoir plus sur le traitement du débit d'envoi des métriques). Les limites appliquées dépendent de la quantité de [métriques custom][3] prévue dans votre contrat.
+- L'API utilisée pour envoyer des logs n'a pas de limite de débit.
 - La limite de débit pour l'envoi de métriques est fixée à `500 000` événements par heure et par organisation.
-- La limite de débit pour l'agrégation d'événements est fixée à `1 000` événements par agrégat, par jour et par organisation. Un agrégat désigne un groupe d'événements similaires.
 - Les limites de débit varient selon les endpoints et sont précisées dans les en-têtes détaillés ci-dessous. Il est possible d'augmenter ces limites sur demande.
 
 <div class="alert alert-warning">

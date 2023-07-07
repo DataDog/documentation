@@ -20,11 +20,11 @@ Count of APM Events per second received by the Agent
 
 `datadog.trace_agent.events.max_eps.max_rate`
 : **Type**: Gauge<br>
-Same as the Agent config’s max_events_per_second parameter.
+Same as the Agent config's max_events_per_second parameter.
 
 `datadog.trace_agent.events.max_eps.reached_max`
 : **Type**: Gauge<br>
-Is set to `1` every time max_events_per_second is reached, otherwise it’s `0`.
+Is set to `1` every time max_events_per_second is reached, otherwise it's `0`.
 
 `datadog.trace_agent.events.max_eps.sample_rate`
 : **Type**: Gauge<br>
@@ -54,10 +54,6 @@ Increment by one on every code panic.
 : **Type**: Count<br>
 Increment by one every time a reverse proxy of profile endpoints is created.
 
-`datadog.trace_agent.ratelimit`
-: **Type**: Gauge<br>
-If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).
-
 `datadog.trace_agent.receiver.error`
 : **Type**: Count<br>
 Number of times that the API rejected a payload due to an error in either decoding, formatting or other.
@@ -76,7 +72,7 @@ Number of times the Agent killed itself due to excessive memory use (150% of max
 
 `datadog.trace_agent.receiver.out_chan_fill`
 : **Type**: Gauge<br>
-Internal metric. Percentage of fill on the receiver’s output channel.
+Internal metric. Percentage of fill on the receiver's output channel.
 
 `datadog.trace_agent.receiver.payload_accepted`
 : **Type**: Count<br>
@@ -85,6 +81,10 @@ Number of payloads accepted by the Agent.
 `datadog.trace_agent.receiver.payload_refused`
 : **Type**: Count<br>
 Number of payloads rejected by the receiver because of the sampling.
+
+`datadog.trace_agent.receiver.ratelimit`
+: **Type**: Gauge<br>
+If lower than `1`, it means payloads are being refused due to high resource usage (cpu or memory).
 
 `datadog.trace_agent.receiver.spans_dropped`
 : **Type**: Count<br>

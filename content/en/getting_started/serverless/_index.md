@@ -6,6 +6,9 @@ further_reading:
     - link: '/agent/basic_agent_usage/'
       tag: 'Documentation'
       text: 'Basic Agent Usage'
+    - link: "https://dtdg.co/fe"
+      tag: "Foundation Enablement"
+      text: "Join an interactive session to learn more about serverless monitoring"
 ---
 
 ## Overview
@@ -96,7 +99,7 @@ Datadog generates enhanced Lambda metrics out-of-the-box with low latency, sever
 
 
 ### Invocations
-The **Invocations** tab displays your function’s latest invocations. 
+The **Invocations** tab displays your function's latest invocations. 
 
 Each invocation is associated with a trace. Click on **Open Trace** to see the trace for each invocation:
 

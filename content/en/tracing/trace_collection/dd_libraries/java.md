@@ -23,7 +23,7 @@ further_reading:
 
 The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
-For a full list of Datadog’s Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
+For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
 ## Installation and getting started
 
@@ -56,7 +56,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
    ```
    DD_TRACE_AGENT_URL=http://custom-hostname:1234
    DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
-   
+
    ```
 
    ```bash
@@ -73,7 +73,7 @@ Install and configure the Datadog Agent to receive traces from your instrumented
 
    Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist, then stats are sent to `http://localhost:8125`.
 
-{{< site-region region="us3,us5,eu,gov" >}}
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
 
@@ -92,7 +92,7 @@ To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] d
 
 Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
 
-For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
+For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
 
 [1]: /agent/basic_agent_usage/heroku/#installation
 [2]: /integrations/cloud_foundry/#trace-collection
@@ -105,7 +105,7 @@ For other environments, please refer to the [Integrations][5] documentation for 
 
 ### Instrument Your Application
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/admission_controller">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
 
 After the agent is installed, to begin tracing your applications:
 
@@ -114,10 +114,9 @@ After the agent is installed, to begin tracing your applications:
    ```shell
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
-   
-   **Note:** To download a specific major version, use the `https://dtdg.co/java-tracer-vX` link instead, where `vX` is the desired version.
-   For example, use `https://dtdg.co/java-tracer-v0` for the latest version 0.
-   Alternatively, see Datadog's [Maven repository][3] for any specific version.
+
+   **Note:** To download the latest build of a specific **major** version, use the `https://dtdg.co/java-tracer-vX` link instead, where `X` is the desired major version.
+   For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][3] for any specific version.
 
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
@@ -135,7 +134,7 @@ After the agent is installed, to begin tracing your applications:
 | `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continous Profiler][5] |
 | `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. |
 | `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services.     |
-| `DD_TRACE_SAMPLING_SERVICE_RULES` | `dd.trace.sampling.service.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
+| `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
 
 Additional [configuration options](#configuration) are described below.
 

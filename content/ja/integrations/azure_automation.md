@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
+- 自動化
 - azure
+- クラウド
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_automation/
@@ -28,7 +29,7 @@ Datadog Azure インテグレーションを使用して、Azure Automation か�
 
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

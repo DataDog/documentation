@@ -1,3 +1,6 @@
+{{/* Due to weird Hugo process with nested shortcodes/partials and markdown,
+there MUST NOT be an empty line at the end of this file */}}
+
 {{ if .img_param }}
     {{ .root.Scratch.Set "img_param" .img_param }}
 {{ else }}
@@ -29,6 +32,6 @@
          class="{{ if $img_class }}{{ $img_class }}{{ end }}"
          srcset="{{ $url }}&auto=format&w=807"
          style="{{ if $img_style }}{{ $img_style | safeCSS }}{{ end }}"
-         loading="lazy"
+         {{ if ne $disable_lazy "true" }}loading="lazy"{{ end }} {{/* This must be all in one line */}}
          alt="{{ if $img_alt }}{{ $img_alt }}{{end}}">
 </picture>

@@ -20,6 +20,9 @@ further_reading:
   - link: "/monitors/"
     tag: "Documentation"
     text: "Monitors, SLOs, notifications, downtimes, and incidents"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session on better visualizations with Dashboards"  
 ---
 
 ## Overview
@@ -48,14 +51,14 @@ Datadog provides many out-of-the-box dashboards for features and integrations. F
 
 1. Go to **Dashboards > Dashboards list** and search for the name of an integration you have added, for example `Redis`, or a feature you use, such as `RUM`. 
 2. Browse the search results for dashboards marked *Preset* and see if at least some of the graphs show the answers you're looking for.
-3. Explore the links in the out-of-the-box dashboard's title drop-down to find more information about how people are using them.
+3. Explore the links in the out-of-the-box dashboard's title dropdown to find more information about how people are using them.
 
 ## Start by reusing other dashboards
 
 A common way to start a dashboard is by encountering a similar dashboard already in use, and adjusting it to suit your needs. If you find a dashboard that answers many of the questions you want your dashboard to answer: 
 
-1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the gear icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
-    {{< img src="getting_started/dashboards/cloning_dashboard.mp4" alt="Cloning a dashboard" video=true >}}
+1. Clone it by opening the dashboard and selecting **Clone dashboard** from the Settings menu (the export icon on the right-hand side). This creates an unlinked copy of the dashboard; changes you make in the new copy don't affect the source widget.
+  {{< img src="/getting_started/dashboards/clone_dashboard.png" alt="Clone dashboard option in the dropdown menu" style="width:100%;" >}}
 2. Edit the clone by opening it and clicking **Edit widgets**. 
 3. Delete widgets you don't need by selecting **Delete** from the widget's Settings menu.
 4. Move things around to suit your needs. Groups and individual widgets can be dragged and dropped into new locations in the dashboard.
@@ -72,7 +75,7 @@ For example, suppose you are looking at a time graph of the metric `aws.s3.first
 
 After you've selected a few metrics to add to your dashboard, experiment with various [widget types][5], [queries][6], [functions][7], and [aggregation approaches][8], to display the data in ways that best answer the questions you have. 
 
-By specifying Template variables, you can make one dashboard answer questions for a selection of scenarios. For example, you can create a time graph that shows latency metrics for whichever data center geography the user selects from the dashboard's variables drop-down, or for all of them together. For more information, see [Template Variables][9].
+By specifying Template variables, you can make one dashboard answer questions for a selection of scenarios. For example, you can create a time graph that shows latency metrics for whichever data center geography the user selects from the dashboard's variables dropdown, or for all of them together. For more information, see [Template Variables][9].
 
 You can make graphs easier to read by adjusting Y-axis ranges, colors, or legends, or by adding markers and event overlays. See the [Dashboards documentation][10] for all the ways you can customize and refine [timeseries][11] and [other widgets][5].
 
@@ -83,8 +86,8 @@ For more details and examples of these techniques, sign up for the online learni
 Timeseries graphs of metrics are useful, but dashboards can contain many types of widgets to communicate important information. Try:
 
  - **Alert values and Check statuses**: Show big red, yellow, and green numbers to bring attention to successes or problems.
- - **Heat maps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
-   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example"  >}}
+ - **Heatmaps**: Show complex metric-infrastructure relationships across multiple tags with intuitive color-intensity graphs.
+   {{< img src="getting_started/dashboards/heatmap_widget.png" alt="Heatmap example" >}}
  - **iFrames, formatted text, and images**: Show any number of website-like details to help explain the dashboard contents and provide additional resources.
  - **Tables**: Show lists of metrics grouped by tag keys.
  - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
@@ -144,6 +147,6 @@ The mobile app enables you to view and search all of the dashboards that you hav
 [12]: https://learn.datadoghq.com/courses/building-better-dashboards/
 [13]: /integrations/slack/
 [14]: /api/v1/dashboards/
-[15]: /mobile/
+[15]: /service_management/mobile/
 [16]: https://apps.apple.com/app/datadog/id1391380318
 [17]: https://play.google.com/store/apps/details?id=com.datadog.app

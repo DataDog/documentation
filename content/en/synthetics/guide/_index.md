@@ -5,6 +5,11 @@ aliases:
   - /synthetics/faq/uptime-check-internal-website/ 
 private: true
 disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Synthetic Monitoring Guides
 ---
 
 {{< whatsnext desc="General Guides:" >}}
@@ -29,7 +34,7 @@ disable_toc: true
     {{< nextlink href="synthetics/guide/custom-javascript-assertion/" >}}Using custom JavaScript assertions in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/email-validation/" >}}Email validation in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Test file upload and download{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/popup/" >}}Handling popups in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/popup/" >}}Handling pop-ups in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually adding the browser test Chrome extension{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Using a shadow DOM in browser tests{{< /nextlink >}}
@@ -46,7 +51,9 @@ disable_toc: true
     {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understanding API test timings and troubleshooting variations{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Security:" >}}
-    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs For multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
+{{< whatsnext desc="Data Security:" >}}
+    {{< nextlink href="synthetics/guide/authentication-protocols/" >}}Using authentication in API and multistep API tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}TOTPs for multi-factor authentication (MFA) in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-passkeys/" >}}Using passkeys (FIDO2) in browser tests{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -2,7 +2,6 @@
 title: Amazon ECS
 kind: documentation
 aliases:
-  - /integrations/amazon_ecs/
   - /agent/amazon_ecs/
 further_reading:
 - link: "/agent/amazon_ecs/logs/"
@@ -17,6 +16,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/"
   tag: "Blog"
   text: "Announcing support for Amazon ECS Anywhere"
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
+  tag: "blog"
+  text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
+algolia:
+  tags: ['ecs']
 ---
 
 ## Overview
@@ -85,7 +89,7 @@ For all of these examples the `DD_API_KEY` environment variable can alternativel
 Once you have your Task Definition file created you can execute the following command to register this in AWS.
 
 ```bash
-aws ecs register-task-definition --cli-input-json <path to datadog-agent-ecs.json>
+aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-ecs.json>
 ```
 {{% /tab %}}
 {{% tab "Web UI" %}}
@@ -125,7 +129,7 @@ If you're using:
 
 #### DogStatsD
 
-If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Dataog Agent's container definition:
+If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your Datadog Agent's container definition:
 ```json
 "portMappings": [
   {
@@ -136,9 +140,11 @@ If you're using [DogStatsD][8], add in a Host Port mapping for 8125/udp to your 
 ]
 ```
 
-You can also set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
+In addition to this port mapping, set the environment variable `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` to `true`.
 
-For APM and DogStatsD double check the security group settings on your EC2 instances. Make sure these ports are not open to the public. Datadog recommends using the host's private IP to route data from the application containers to the Datadog Agent container.
+This setup allows the DogStatsD traffic to be routed from the application containers, through the host and host port, to the Datadog Agent container. However, the application container must use the host's private IP address for this traffic. This can be enabled by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance, which can be retrieved from the Instance Metadata Service (IMDS). Alternatively, this can be set in the code during initialization. The implementation for DogStatsD is the same as for APM, see [configure the Trace Agent endpoint][17] for examples of setting the Agent endpoint.
+
+Ensure that the security group settings on your EC2 instances do not publicly expose the ports for APM and DogStatsD.
 
 #### Process collection
 
@@ -174,7 +180,7 @@ Live Container data is automatically collected by the Datadog Agent container. T
        "environment": [
          (...)
          {
-           "name": "DD_SYSTEM_PROBE_ENABLED",
+           "name": "DD_SYSTEM_PROBE_NETWORK_ENABLED",
            "value": "true"
          }
        ],
@@ -218,6 +224,126 @@ While it's possible to run the Agent in `awsvpc` mode, it's not the recommended 
 
 Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
 
+{{% site-region region="gov" %}}
+#### FIPS proxy for GOVCLOUD environments
+
+To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [all of the features](https://github.com/DataDog/datadog-agent/blob/7.45.x/pkg/config/config.go#L1564-L1577).
+
+**Note**: This feature is available for Linux only.
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:0.5.3",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+You also need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+{{% /site-region %}}
+
 ## Troubleshooting
 
 Need help? Contact [Datadog support][11].
@@ -242,6 +368,7 @@ Need help? Contact [Datadog support][11].
 [14]: https://app.datadoghq.com/organization-settings/api-keys
 [15]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[17]: /containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
 [20]: /resources/json/datadog-agent-ecs.json
 [21]: /resources/json/datadog-agent-ecs1.json
 [22]: /resources/json/datadog-agent-ecs-win.json
