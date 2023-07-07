@@ -252,7 +252,7 @@ Pour en savoir plus sur les différentes options disponibles pour définir les v
 
 {{% /tab %}}
 
-Pour les images Docker exécutées sous LInux, configurez l'image de façon à exécuter le script `createLogPath.sh` :
+{{% tab "NuGet" %}}
 
 Suivez les instructions fournies dans le package readme, qui se trouve également dans le [référentiel `dd-trace-dotnet`][1].
 Le [référentiel][2] contient également des exemples pour Docker.
