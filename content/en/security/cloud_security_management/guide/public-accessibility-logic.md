@@ -10,7 +10,7 @@ further_reading:
   text: "Out-of-the-box Detection Rules"
 ---
 
-Datadog uses a graph processing framework to map relationships between cloud resources and determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework. 
+Datadog uses a graph processing framework to map relationships between cloud resources to determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework. 
 
 For more information on network reachability, see the AWS documentation and the AWS Network Reachability Analyser. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
 
