@@ -23,7 +23,7 @@ With structure-based querying, you are able to answer new categories of question
 
 ## Trace Query Editor
 
-[add screenshot]
+{{< img src="tracing/trace_queries/trace_query_editor.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query Editor" >}}
 
 A Trace Query is composed of one or more [span queries](#span-query), combined together with [trace query operators](#trace-query-operators).
 
@@ -46,21 +46,28 @@ Operator | Description | Example
 
 ## Flow Map
 
-[add screenshot]
+{{< img src="tracing/trace_queries/trace_flow_map.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query Editor" >}}
 
 The Flow Map helps you understand the request path and service dependencies from the resulting traces matching the Trace Query. Use the map to spot error paths, unusual service depencencies, or abnormally high request rates to a database.
 
 The Flow Map is powered by a sample of the ingested traffic. See below [what data are Trace Queries based on](#what-data-are-trace-queries-based-on)
 
+Service nodes matching span queries are highlighted to let you understand which parts of the trace your query conditions are targeting.
 
+To get more information about the number of requests and errors **by** service and **between** services: 
 - Hover on a node to see metrics for the request rate and the error rate of a service.
 - Hover on an edge connecting two services to see metrics for the request rate and the error rate between two services.
 
-Interact with the map to filter traces based on the 
+Click with the map nodes to filter our traces that do not contain a dependency on the targeted service.
 
 ## Trace List
 
-Trace list  
+{{< img src="tracing/trace_queries/trace_list.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query Editor" >}}
+
+The Trace list displays a list of 50 sample traces matching the query and within the selected time range.
+Hover on the Latency Breakdown to get a sense of where (in which services) the time is spent during the request execution.
+
+**Note**: Information displayed in the table are attributes from the root span of the trace, including the duration, which **does not** represent the end-to-end duration of the trace.
 
 ## Analytics
 
