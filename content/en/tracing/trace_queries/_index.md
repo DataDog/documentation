@@ -8,90 +8,97 @@ further_reading:
 - link: 'tracing/trace_explorer'
   tag: 'Documentation'
   text: 'Trace Explorer'
+- link: '/tracing/trace_explorer/query_syntax/'
+  tag: 'Documentation'
+  text: 'Span Query Syntax'
 ---
 
 {{< beta-callout url="#" btn_hidden="true">}}
-Trace Queries is in private beta. Spans used for queries are from a <a href="/tracing/trace_queries/one_percent_flat_sampling">1% flat sampling</a>, not from your existing retention filters.
+Trace Queries is in private beta. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
 {{< /beta-callout >}}
 
-Trace Queries allow you to compose span queries by specifying trace structure conditions. Leverage Trace Queries to accelerate your investigations and quickly find relevant traces. You can search, filter, group and visualize traces from the Trace Query explorer.
+## Overview
 
-With structure-based querying, you are able to answer new categories of questions: 
-- Which traces include a dependency between two services (`service A` has a downstream call to `service B`)
+With Trace Queries, you can find entire traces based on the properties of multiple spans and the relationships between those spans within the structure of the trace. To create a trace query, you define two or more [span queries][1] and then specify the relationship within the searched-for trace structure of the spans that are returned by each span query.
+
+You can search, filter, group, and visualize the traces from the Trace Query explorer.
+
+With structure-based trace querying, you can answer questions such as:
+- Which traces include a dependency between two services (`service A` has a downstream call to `service B`)?
 - What API endpoints are affected by my erroring backend service?
-- And much more...
 
-## Trace Query Editor
+Use Trace Queries to accelerate your investigations and find relevant traces. 
+## Trace query editor
 
-{{< img src="tracing/trace_queries/trace_query_editor.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query Editor" >}}
+{{< img src="tracing/trace_queries/trace_query_editor.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Query editor" >}}
 
-A Trace Query is composed of one or more [span queries](#span-query), combined together with [trace query operators](#trace-query-operators).
+A trace query is composed of two or more [span queries](#span-queries), joined by [trace query operators](#trace-query-operators).
 
-### Span Query
+### Span queries
 
-Query for spans from a specific environment, service or endpoint using the existing Trace Explorer query syntax. Use autocomplete suggestions to view facets and recent queries. Refer to the [query syntax][1] documentation for more information on how to query spans.
+Query for spans from a specific environment, service, or endpoint using the [Span query syntax][1]. Use autocomplete suggestions to view facets and recent queries.
 
-Click `Add another span query` to add a new span query and use it in the trace query statement.
+Click **Add another span query** to add a span query and use it in the trace query statement.
 
-### Trace Query operators
+### Trace query operators
 
-To combine multiple span queries into a trace query, use any of the following operators:
+Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces where spans** field, using operators between the letters that represent each span query:
 
-Operator | Description | Example
------|-----|-----
-`&&` | **And**: both spans are in the trace | traces containing spans from the service `web-store` and spans from the service `payments-go`: `service:web-store && service:payments-go`
-`\|\|` | **Or**: one or the other span are in the trace | traces containing spans from the service `web-store` or from the service `mobile-store`: `service:web-store && service:mobile-store`
-`->` | **Indirect relationship**: Traces containing a span matching the left query that is upstream of spans matching the right query | traces where the service `checkoutservice` is upstream of the service `quoteservice`: `service:checkoutservice -> service:quoteservice`
-`=>` | **Direct relationship**: Traces containing a span matching the left query being the direct parent of a span matching the right query | traces where the service `checkoutservice` is directly calling the service `shippingservice`: `service:checkoutservice -> service:shippingservice`
+{{< img src="/tracing/trace_queries/joined_span_queries.png" alt="Span queries combined into a trace query" style="width:70%;" >}}
+
+| Operator | Description | Example |
+|-----|-----|-----|
+| `&&` | **And**: Both spans are in the trace | Traces that contain spans from the service `web-store` and spans from the service `payments-go`: <br/>`service:web-store && service:payments-go` |
+| `\|\|` | **Or**: One or the other span are in the trace | Traces that contain spans from the service `web-store` or from the service `mobile-store`: <br/>`service:web-store && service:mobile-store` |
+| `->` | **Indirect relationship**: Traces that contain a span matching the left query that is upstream of spans matching the right query | Traces where the service `checkoutservice` is upstream of the service `quoteservice`: <br/>`service:checkoutservice -> service:quoteservice` |
+| `=>` | **Direct relationship**: Traces that contain a span matching the left query that is the direct parent of a span matching the right query | Traces where the service `checkoutservice` is directly calling the service `shippingservice`: <br/>`service:checkoutservice => service:shippingservice` |
 
 ## Flow Map
 
 {{< img src="tracing/trace_queries/trace_flow_map.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Flow Map" >}}
 
-The Flow Map helps you understand the request path and service dependencies from the resulting traces matching the Trace Query. Use the map to spot error paths, unusual service depencencies, or abnormally high request rates to a database.
+The Flow Map helps you understand the request path and service dependencies from the resulting traces that match the Trace Query. Use the map to identify error paths, unusual service dependencies, or abnormally high request rates to a database.
 
-**Note**: The Flow Map is powered by a sample of the ingested traffic. See below [what data are Trace Queries based on](#what-data-are-trace-queries-based-on)
+**Note**: The Flow Map is powered by [a sample of the ingested traffic](#the-data-that-trace-queries-are-based-on).
 
-Service nodes matching span queries are highlighted to let you understand which parts of the trace your query conditions are targeting.
+Service nodes that match span queries are highlighted to show you which parts of the trace your query conditions are targeting.
 
-To get more information about the number of requests and errors **by** service and **between** services: 
-- Hover on a node to see metrics for the request rate and the error rate of a service.
-- Hover on an edge connecting two services to see metrics for the request rate and the error rate between two services.
+To get more information about **a single service**, hover on the service's node to see its metrics for request rate and error rate. To see metrics for the request rate and the error rate **between two services**, hover on an edge connecting the two services.
 
 Click with the map nodes to filter our traces that do not contain a dependency on the targeted service.
 
-## Trace List
+## Trace list
 
 {{< img src="tracing/trace_queries/trace_list.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace List" >}}
 
-The Trace list displays a list of 50 sample traces matching the query and within the selected time range.
-Hover on the Latency Breakdown to get a sense of where (in which services) the time is spent during the request execution.
+The Trace list shows up to fifty sample traces that match the query and are within the selected time range.
+Hover on the Latency Breakdown to get a sense of where (in which services) time is spent during the request execution.
 
 **Note**: Information displayed in the table are attributes from the root span of the trace, including the duration, which **does not** represent the end-to-end duration of the trace.
 
 ## Analytics
 
-Pivot to `Visualize as Timeseries`, `Top List`, `Table` etc... to aggregate results over time, grouped by one or multiple dimensions. Refer to the [Span Visualizations][2] for more information on the aggregation options. 
+Select one of the other visualizations, such as `Timeseries`, `Top List`, or `Table` to aggregate results over time, grouped by one or multiple dimensions. Read [Span Visualizations][2] for more information on the aggregation options. 
 
-In addition to the already existing aggregation options, you need to select from which query you want to aggregate the spans from. Select the query matching the spans from which you're using the tags and attributes in the aggregation options.
+In addition to those aggregation options, you must also select which span query (`a`, `b`, `c`, and so on) you want to aggregate the spans from. Select the query that matches the spans from which you're using the tags and attributes in the aggregation options.
 
-For instance, if you're querying for traces containing a span from the service `web-store` (Query **A**) and a span from the service `payments-go` with some errors (Query **B**), and visualising a count of spans grouped by `@merchant.tier`, use spans from the Query **A** as `merchant.tier` is an attribute from the spans of the service `web-store`, not from the service `payments-go`.
+For example, if you query for traces that contain a span from the service `web-store` (query `a`) and a span from the service `payments-go` with some errors (query `b`), and you visualize a count of spans grouped by `@merchant.tier`, use spans from query `a`, because `merchant.tier` is an attribute from the spans of the service `web-store`, not from the service `payments-go`.
 
 {{< img src="tracing/trace_queries/timeseries_using_spans_from.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Timeseries view" >}}
 
 
-## What data are Trace Queries based on ?
+## The data that Trace Queries are based on
 
 {{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
 
 
 Trace Queries are based on a **uniform 1% sample** of [ingested spans][3].
 
-The flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. Spans indexed by the 1% sampling can also be queried/found in the [Trace explorer][4].
+The flat 1% sampling is applied based on the `trace_id`, meaning that all spans that belong to the same trace share the same sampling decision. Spans indexed by the 1% sampling can also be queried and found in the [Trace explorer][4].
 
-Spans indexed by [tag-based retention filters][5] cannot be used in Trace Queries as current retention filters do not guarantee that all the spans from a trace are indexed.
+Spans indexed by [tag-based retention filters][5] cannot be used in Trace Queries because retention filters do not guarantee that all the spans from a trace are indexed.
 
-**Note**: Spans indexed by the flat 1% sampling are not counted towards the usage of indexed spans, and so **do not impact your bill**.
+**Note**: Spans indexed by the flat 1% sampling are not counted towards your usage of indexed spans, and so **do not impact your bill**.
 
 ## Further Reading
 
