@@ -95,7 +95,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 このインテグレーションを使用するには、[Buoyant Cloud][1] にアカウントが必要です。また、Datadog マーケットプレイスで Buoyant Cloud にサインアップすることができます。
 

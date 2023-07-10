@@ -88,7 +88,7 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 

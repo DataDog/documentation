@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "message": "dark forest",
+      "monitor_identifier": {
+        "monitor_tags": [
+          "cat:hat"
+        ]
+      },
+      "scope": "test:exampledowntime",
+      "schedule": {
+        "start": null
+      }
+    },
+    "type": "downtime"
+  }
+}

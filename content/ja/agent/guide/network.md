@@ -32,7 +32,8 @@ title: ネットワークトラフィック
 ## 送信先
 
 [APM][1]
-: `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+: `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+`instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [ライブコンテナ][3] & [ライブプロセス][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: twingate-inc-twingate
 app_uuid: ae992049-e257-4322-a520-cb348a17ae5e
 assets: {}

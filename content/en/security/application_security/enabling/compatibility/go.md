@@ -14,7 +14,7 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | -------------------------------- | ----------------------------|
 | Threat Detection| 1.47.0  |
 | Threat Protection |  1.50.0   |
-| Vulnerability Management for Open Source Software (OSS) | not supported |
+| Vulnerability Management for Open Source Software (OSS) | 1.49.0 |
 | Vulnerability Management for Code-level (beta) | not supported |
 
 The minimum tracer version to get all supported ASM capabilities for Go is 1.50.0.
@@ -51,7 +51,6 @@ You must be running Datadog Agent v5.21.1+
 - Distributed Tracing to see attack flows through your applications
 
 ##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
 - **Vulnerability Management for Code-level** is not supported
 
 
@@ -70,7 +69,6 @@ You must be running Datadog Agent v5.21.1+
 - Request-based blocking
 
 ##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
 - **Vulnerability Management for Code-level** is not supported
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
@@ -90,7 +88,6 @@ You must be running Datadog Agent v5.21.1+
 - error and stacktrace capturing
 
 ##### ASM Capability Notes
-- **Vulnerability Management for OSS** is not supported
 - **Vulnerability Management for Code-level** is not supported
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 

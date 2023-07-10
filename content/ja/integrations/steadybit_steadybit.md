@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: steadybit-steadybit
 app_uuid: bd3cef52-d435-4149-a78f-3c88c09fdfb2
 assets: {}

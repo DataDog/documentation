@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-reporter
 app_uuid: debb66b8-6675-4273-85a2-55d806e68e1b
 assets:
@@ -42,7 +44,7 @@ pricing:
   includes_assets: true
   product_id: reporter
   short_description: このインテグレーションの定額料金
-  unit_price: 1000
+  unit_price: 299
 public_title: Reporter
 short_description: Datadog ダッシュボードのメールレポートを生成する
 supported_os:
