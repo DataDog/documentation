@@ -3995,7 +3995,13 @@ components:
     DowntimeResponseAttributes:
       description: Downtime details.
       properties:
-        created_at:
+        canceled:
+          description: Time that the downtime was canceled.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          nullable: true
+          type: string
+        created:
           description: Creation time of the downtime.
           example: 2020-01-02T03:04:05.282979+0000
           format: date-time
@@ -4004,7 +4010,7 @@ components:
           $ref: '#/components/schemas/DowntimeDisplayTimezone'
         message:
           $ref: '#/components/schemas/DowntimeMessage'
-        modified_at:
+        modified:
           description: Time that the downtime was last modified.
           example: 2020-01-02T03:04:05.282979+0000
           format: date-time
