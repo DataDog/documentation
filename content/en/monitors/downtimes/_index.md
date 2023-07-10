@@ -95,7 +95,7 @@ The option to disable the first recovery notification is additive between multip
 
 ## Manage
 
-The [Manage Downtime page][11] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
+The [Manage Downtimes page][11] displays the list of active and scheduled downtimes. Select a downtime to view details, edit, or delete it. Details include its creator, its scope, and a list of the monitors it applies to.
 Use the facets panel and the search bar to filter the list on the `Creator`, the `Scope`, `Monitor Tags`, or `Active`, `Automuted`, `Recurring` parameters.
 
 {{< img src="monitors/downtimes/downtime_manage.png" alt="manage downtime page" style="width:100%;">}}

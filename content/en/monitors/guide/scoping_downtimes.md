@@ -52,7 +52,7 @@ This mutes any alerts that includes the tag `service:web-store`, for example:
 
 A downtime can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. The `Group scope` field filters the downtime to the data that matches the tags listed. For more information on monitor tags, see the documentation on how to [Manage Monitors][1].
 
-As an example use case, you  have several monitors with the same monitor tag `downtime:true` that you want to mute. In the monitor configurations, you set up multi alerts to be sent for each `host` and `service`.
+As an example use case, you have several monitors with the same monitor tag `downtime:true` that you want to mute. In the monitor configurations, you set up multi alerts to be sent for each `host` and `service`.
 
 ### Multiple monitors scoped with the same tag
 
