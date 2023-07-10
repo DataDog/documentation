@@ -225,17 +225,6 @@ The `from-key` value is specific to the integration type, and should exclude the
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
-
-`DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
-: Enable generation of 128-bit trace IDs. By default, only 64-bit IDs are generated. <br>
-**Default**: `false`
-
-`DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
-: Enable printing of the full 128-bit ID when formatting a span withing logs.
-When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
-When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits. <br>
-**Default**: `false`
-
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
