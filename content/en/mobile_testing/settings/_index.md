@@ -64,7 +64,7 @@ Clicking on a mobile application in the **Mobile Applications List** displays ex
 
 To edit or delete a version of a mobile application, hover over a version in the mobile application and click on the respective icon.
 
-## Add a version
+### Add a version
 
 To add a version of an existing mobile application:
 
@@ -80,7 +80,6 @@ To add a version of an existing mobile application:
 
 For more information about parallelizing your Synthetic tests, see [Continuous Testing Settings][7].
 
-## Customize your parallelization
 
 For more information about parallelizing your Synthetic tests, see [Continuous Testing Settings][7].
 

@@ -21,13 +21,17 @@ To start recording and adding steps, select a device to launch a mobile app test
 
 {{< img src="mobile_testing/launch_device.png" alt="Select a device to run a mobile test on" style="width:60%" >}}
 
-Select **Show only available devices. Available devices load faster** to see the most available devices for shorter wait times. Click the **Device Connection Notification** button to enable notifications for when your device is ready.
+Select **Show only available devices. Available devices load faster** to see the most available devices for shorter testing wait times. 
+
+### Notifications
+
+Click the **Device Connection Notification** button to enable notifications for when your device is ready and when your device is going to timeout because of inactivity.
 
 ## Automatically recorded steps
 
 Once you click **Start Recording**, Datadog automatically records any interactions you have with your device and displays them in the step list on the left.
 
-To stop recording, click **End Device Session** or **Save & Quit**.
+To stop recording, click **Stop Recording**.
 
 ## Manually added steps
 

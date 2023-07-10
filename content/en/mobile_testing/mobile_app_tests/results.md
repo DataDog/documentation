@@ -25,7 +25,7 @@ Test runs appear in a test details page after a Synthetic mobile app test execut
 In the **Properties** section, you can see the test ID, test creation and edit dates, test priority, environment tag, and additional tags.
 
 **Overview** 
-: This section describes the test on which mobile application, version, location, number of devices, test interval, and the number of test steps.
+: This section describes the Synthetic test details, including the mobile application, version, location, number of devices, test interval, and the number of test steps.
 
 **Monitor**
 : This section contains the name of the [Synthetic test's monitor][1] and the configured notification message.
