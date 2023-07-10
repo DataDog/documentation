@@ -39,7 +39,7 @@ Values attributed to these categories are collected differently dependending on 
 | URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                                               |
 | URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                                      |
 
-These categories are collected by the following language Tracing Libraries:
+These data categories are collected by the automatic instrumentation provided by each of the following language tracing libraries:
 
 {{% tabs %}}
 
@@ -108,10 +108,11 @@ These categories are collected by the following language Tracing Libraries:
 | Email               | Collected by default without obfuscation      |
 | Client IP           | Not collected by default, enabled without obfuscation     |
 | Database statements | Collected by default with obfuscation      |
-| Geographic location | Collected by default without obfuscation      |
+| Geographic location | Collected by default without obfuscation (by the [algoliasearch integration][1] only)      |
 | URI parameters      | Not collected by default, enabled with obfuscation      |
 | URI userinfo        | Never collected      |
 
+[1]: /tracing/trace_collection/compatibility/python/#datastore-compatibility
 {{% /tab %}}
 
 {{% /tabs %}}
