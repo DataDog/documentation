@@ -111,4 +111,4 @@ Alerts from your Synthetic test monitors appear in the **Events** tab under **Te
 [8]: /getting_started/synthetics/browser_test#select-locations
 [9]: /synthetics/private_locations
 [10]: /mobile_testing/mobile_app_tests/steps
-[11]:  https://app.datadoghq.com/synthetics/tests
+[11]: https://app.datadoghq.com/synthetics/tests

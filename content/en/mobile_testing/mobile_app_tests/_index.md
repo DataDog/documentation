@@ -138,7 +138,7 @@ You can restrict access to a mobile app test based on the roles in your organiza
 [4]: /synthetics/settings/?tab=specifyvalue#global-variables
 [5]: https://daringfireball.net/projects/markdown/syntax
 [6]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[7]: synthetics/guide/synthetic-test-monitors/
+[7]: /synthetics/guide/synthetic-test-monitors/
 [8]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
 [9]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [10]: /account_management/rbac/?tab=datadogapplication#create-a-custom-role
