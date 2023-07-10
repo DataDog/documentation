@@ -296,7 +296,7 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [3]: /profiler/profiler_troubleshooting/#java-8-support
 [4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[5]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://app.datadoghq.com/profiling
 [8]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler

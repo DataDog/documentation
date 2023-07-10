@@ -127,7 +127,7 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 
 [1]: /tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [4]: https://app.datadoghq.com/profiling
 [5]: https://ddtrace.readthedocs.io/en/stable/configuration.html#configuration
 [6]: /getting_started/profiler/

@@ -403,7 +403,7 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
 [5]: /tracing/trace_collection/

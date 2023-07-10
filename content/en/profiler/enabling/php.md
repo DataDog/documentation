@@ -130,7 +130,7 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: https://github.com/DataDog/dd-trace-php/releases
 [4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling

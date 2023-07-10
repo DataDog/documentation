@@ -127,7 +127,7 @@ The [Getting Started with Profiler][9] guide takes a sample service with a perfo
 
 [1]: /tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
-[3]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#pkg-constants
 [5]: https://app.datadoghq.com/profiling
 [6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithProfileTypes
