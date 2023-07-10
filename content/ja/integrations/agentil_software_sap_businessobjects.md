@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
