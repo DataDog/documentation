@@ -49,11 +49,15 @@ further_reading:
 {{< tabs >}}
 {{% tab "Android" %}}
 
-[ add android content]
+### Unmask data in all recorded content
+By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, add this option to **unmask data in all recorded content**:
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+   {{< code-block lang="kotlin" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-   insert code block content
+   val sessionReplayConfig = SessionReplayConfiguration.Builder()
+    ...
+   .setSessionReplayPrivacy(SessionReplayPrivacy.[PRIVACY])
+   .build()
 
    {{< /code-block >}}
 

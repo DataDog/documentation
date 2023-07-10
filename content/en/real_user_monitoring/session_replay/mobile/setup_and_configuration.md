@@ -59,14 +59,18 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
       Datadog.registerFeature(sessionReplayFeature)
    ```
 
-By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, there is an option to unmask data in all recorded content:
+## Additional settings
 
-```kotlin
+### Updating the sample rate for recorded sessions to appear
+Beginning with v1.20.0, the recorder sessions are sampled, and the default sample rate is 0 (meaning that no session will be recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
+
+```java
 val sessionReplayConfig = SessionReplayConfiguration.Builder()
  ...
-.setSessionReplayPrivacy(SessionReplayPrivacy.[PRIVACY])
+.setSessionReplaySampleRate([YOUR_SAMPLE_RATE_HERE])
 .build()
 ```
+
 
 [1]: https://oss.sonatype.org/content/repositories/snapshots/
 [2]: /real_user_monitoring/android/?tab=kotlin
