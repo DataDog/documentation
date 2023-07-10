@@ -44,7 +44,7 @@ Click **Add another span query** to add a span query and use it in the trace que
 
 Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces where spans** field, using operators between the letters that represent each span query:
 
-{{< img src="/tracing/trace_queries/joined_span_queries.png" alt="Span queries combined into a trace query" style="width:70%;" >}}
+{{< img src="/tracing/trace_queries/joined_span_queries.png" alt="Span queries combined into a trace query" style="width:50%;" >}}
 
 | Operator | Description | Example |
 |-----|-----|-----|
@@ -65,7 +65,7 @@ Service nodes that match span queries are highlighted to show you which parts of
 
 To get more information about **a single service**, hover on the service's node to see its metrics for request rate and error rate. To see metrics for the request rate and the error rate **between two services**, hover on an edge connecting the two services.
 
-Click with the map nodes to filter our traces that do not contain a dependency on the targeted service.
+To filter out traces that do not contain a dependency on a particular service, click on the service's node on the map.
 
 ## Trace list
 
