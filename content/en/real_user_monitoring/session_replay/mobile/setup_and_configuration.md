@@ -22,7 +22,7 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2].
 2. In order to use the SNAPSHOTS in your Gradle dependencies, add this repository as a source in your repository configuration in your `build.gradle` file:
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+   {{< code-block lang="groovy" filename="build.gradle" disable_copy="false" collapsible="true" >}}
      repositories {
           maven {
            url ="https://oss.sonatype.org/content/repositories/snapshots"
