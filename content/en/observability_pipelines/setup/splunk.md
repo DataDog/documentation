@@ -86,8 +86,24 @@ After you add the input, Splunk creates a token for you. The token is typically 
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk index](setting-up-the-splunk-index).
-3. Install the Helm chart in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values as follows:
+  ```yaml
+  datadog:
+    apiKey: "<datadog_api_key>"
+    pipelineId: "<observability_pipelines_configuration_id>"
+    site: "datadoghq.com"
+  ```
+
+3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+  ```yaml
+  env:
+    - name: SPLUNK_HEC_ENDPOINT
+      value: <https://your.splunk.index:8088/>
+    - name: SPLUNK_TOKEN
+      value: <a_random_token_usually_a_uuid>
+  ```
+
+4. Install the Helm chart in your cluster with the following commands:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -106,8 +122,24 @@ After you add the input, Splunk creates a token for you. The token is typically 
 {{% tab "Azure AKS" %}}
 1. Download the [Helm chart][1] for Azure AKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk index](setting-up-the-splunk-index).
-3. Install the Helm chart in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values as follows:
+  ```yaml
+  datadog:
+    apiKey: "<datadog_api_key>"
+    pipelineId: "<observability_pipelines_configuration_id>"
+    site: "datadoghq.com"
+  ```
+
+3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+  ```yaml
+  env:
+    - name: SPLUNK_HEC_ENDPOINT
+      value: <https://your.splunk.index:8088/>
+    - name: SPLUNK_TOKEN
+      value: <a_random_token_usually_a_uuid>
+  ```
+
+4. Install the Helm chart in your cluster with the following commands:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -126,8 +158,24 @@ After you add the input, Splunk creates a token for you. The token is typically 
 {{% tab "Google GKE" %}}
 1. Download the [Helm chart][1] for Google GKE.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline. Then, replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk index](setting-up-the-splunk-index).
-3. Install the Helm chart in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values as follows:
+  ```yaml
+  datadog:
+    apiKey: "<datadog_api_key>"
+    pipelineId: "<observability_pipelines_configuration_id>"
+    site: "datadoghq.com"
+  ```
+
+3. replace the values for `SPLUNK_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+  ```yaml
+  env:
+    - name: SPLUNK_HEC_ENDPOINT
+      value: <https://your.splunk.index:8088/>
+    - name: SPLUNK_TOKEN
+      value: <a_random_token_usually_a_uuid>
+  ```
+
+4. Install the Helm chart in your cluster with the following commands:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -169,7 +217,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-4. Add your keys to the Worker's environment variables:
+4. Add your keys and Splunk information to the Worker's environment variables:
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -215,7 +263,7 @@ After you add the input, Splunk creates a token for you. The token is typically 
     sudo yum install observability-pipelines-worker
     ```
 
-3. Add your keys to the Worker's environment variables:
+3. Add your keys and Splunk information to the Worker's environment variables:
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
