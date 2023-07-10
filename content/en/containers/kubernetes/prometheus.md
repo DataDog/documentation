@@ -287,9 +287,8 @@ Only the parameters [on this page][2] are supported for OpenMetrics v2 with Auto
 
 The Autodiscovery configuration can be based on container names, Kubernetes annotations, or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
-`kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
-
-`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
+- `kubernetes_container_names` is a list of container names to target, in regex format
+- `kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
@@ -338,9 +337,8 @@ Only the parameters [on this page][2] are supported for OpenMetrics v2 with Auto
 
 The Autodiscovery configuration can be based on container names, Kubernetes annotations, or both. When both `kubernetes_container_names` and `kubernetes_annotations` are defined, it uses AND logic (both rules must match).
 
-`kubernetes_container_names` is a list of container names to target, it supports the `*` wildcard.
-
-`kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
+- `kubernetes_container_names` is a list of container names to target, in regex format
+- `kubernetes_annotations` contains two maps of annotations to define the discovery rules: `include` and `exclude`.
 
 **Note:** The default value of `kubernetes_annotations` in the Datadog Agent configuration is the following:
 
