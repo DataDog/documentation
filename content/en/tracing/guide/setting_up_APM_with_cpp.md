@@ -166,4 +166,4 @@ Click on the service to view your traces.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup/cpp/#compile-against-dd-opentracing-cpp
-[2]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
