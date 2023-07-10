@@ -95,7 +95,7 @@ PagerDuty インシデントの重大度は、アラートの原因となって�
 
 Datadog では、PagerDuty に送信されるモニター通知の長さに上限を設けています。上限は **1024 文字**です。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

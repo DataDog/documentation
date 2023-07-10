@@ -196,7 +196,7 @@ To set [tag cardinality][6] for the metrics collected using origin detection, se
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+[5]: /developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
 [6]: /getting_started/tagging/assigning_tags/#environment-variables
 [7]: /metrics/custom_metrics/
 {{% /tab %}}

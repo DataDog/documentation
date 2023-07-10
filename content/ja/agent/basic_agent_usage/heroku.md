@@ -128,6 +128,7 @@ git push heroku main
 | `DD_REDIS_URL_VAR`    | *オプション。* デフォルトで、Redis インテグレーションのオートディスカバリーは、`REDIS_URL` に格納された接続文字列を使用します。これを上書きするには、接続文字列を格納した変数名のカンマ区切りリストをこの変数に設定します。詳細については、[Datadog Redis インテグレーションを有効にするのセクション](#enabling-the-datadog-redis-integration)を確認してください。 |
 | `DD_ENABLE_HEROKU_POSTGRES`    | *オプション.* Postgres インテグレーションのオートディスカバリーを有効にする場合は true に設定します。詳細については、[Datadog Postgres インテグレーションを有効にするのセクション](#enabling-the-datadog-postgresredis-integration)を確認してください。 |
 | `DD_POSTGRES_URL_VAR`    | *オプション。* デフォルトで、Postgres インテグレーションのオートディスカバリーは、`DATABASE_URL` に格納された接続文字列を使用します。これを上書きするには、接続文字列を格納した変数名のカンマ区切りリストをこの変数に設定します。詳細については、[Datadog Postgres インテグレーションを有効にするのセクション](#enabling-the-datadog-postgres-integration)を確認してください。 |
+| `DD_ENABLE_DBM`    | *オプション。*[このガイド](#enabling-the-datadog-postgres-integration)に従って Datadog Postgres インテグレーションを有効にする場合、`DD_ENABLE_DBM` を `true` に設定し、データベースモニタリングを有効にしてください。 |
 
 その他のドキュメントについては、[Datadog Agent のドキュメント][12]を参照してください。
 
@@ -202,17 +203,25 @@ heroku config:set DD_ENABLE_HEROKU_POSTGRES=true
 heroku config:set DD_POSTGRES_URL_VAR=POSTGRES_URL1,POSTGRES_URL2
 ```
 
+Postgres インスタンスの[データベースモニタリング][17]を有効にするには、[こちらの手順][18]に従って Agent にデータベースへのアクセスを許可し、`DD_ENABLE_DBM` を true に設定してください。
+
+```
+heroku config:set DD_ENABLE_DBM=true
+```
+
+データベースモニタリングは、Datadog Agent のデータベース資格情報を作成する必要があるため、Heroku Postgres Essential Tier プランでは DBM は利用できません。
+
 ### その他のインテグレーションを有効にする
 
-任意の [Datadog-<INTEGRATION_NAME> インテグレーション][17]を有効にするには:
+任意の [Datadog-<INTEGRATION_NAME> インテグレーション][19]を有効にするには:
 
 * アプリケーション内に `datadog/conf.d` フォルダーを作成します。
-* 有効にするインテグレーションごとに `<INTEGRATION_NAME>.d` フォルダーを作成します
-* そのフォルダーの配下に、[インテグレーションの構成][18]を記載した `conf.yaml` を作成します。
+* 有効にするインテグレーションごとに `<INTEGRATION_NAME>.d` フォルダーを作成します。
+* そのフォルダーの配下に、[インテグレーションの構成][20]を記載した `conf.yaml` を作成します。
 
 dyno 起動時、この YAML ファイルは該当する Datadog Agent 構成ディレクトリにコピーされます。
 
-例えば、[Datadog-Memcache インテグレーション][19]を有効にする場合、アプリケーションのルートにファイル `/datadog/conf.d/mcache.d/conf.yaml` (この[構成オプション](#configuration)を変更した場合は `/$DD_HEROKU_CONF_FOLDER/conf.d/mcache.d/conf.yaml`) を追加します。
+例えば、[Datadog-Memcache インテグレーション][21]を有効にする場合、アプリケーションのルートにファイル `/datadog/conf.d/mcache.d/conf.yaml` (この[構成オプション](#configuration)を変更した場合は `/$DD_HEROKU_CONF_FOLDER/conf.d/mcache.d/conf.yaml`) を追加します。
 
 ```yaml
 init_config:
@@ -224,17 +233,17 @@ instances:
   - url: localhost
 ```
 
-**注**: 使用可能なすべての構成オプションの詳細については、サンプル [mcache.d/conf.yaml][20] を参照してください。
+**注**: 使用可能なすべての構成オプションの詳細については、サンプル [mcache.d/conf.yaml][22] を参照してください。
 
 ### コミュニティのインテグレーション
 
-有効にするインテグレーションが[コミュニティインテグレーション][21]の一部である場合は、[事前実行スクリプト](#prerun-script)の一部としてパッケージをインストールします。
+有効にするインテグレーションが[コミュニティインテグレーション][23]の一部である場合は、[事前実行スクリプト](#prerun-script)の一部としてパッケージをインストールします。
 
 ```
 agent-wrapper integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
 ```
 
-例えば、[Ping インテグレーション][22]をインストールするには、コンフィギュレーションファイル `datadog/conf.d/ping.d/conf.yaml` を作成し、以下の行を事前実行スクリプトに追加します。
+例えば、[Ping インテグレーション][24]をインストールするには、コンフィギュレーションファイル `datadog/conf.d/ping.d/conf.yaml` を作成し、以下の行を事前実行スクリプトに追加します。
 
 ```
 agent-wrapper integration install -t datadog-ping==1.0.0
@@ -254,7 +263,7 @@ fi
 
 ## カスタムチェックを有効にする
 
-独自の [Agent カスタムチェック][23]を有効にするには、アプリケーション内の datadog コンフィギュレーションフォルダーに `checks.d` フォルダーを作成します。その下に、カスタムチェックのすべての `.py` と `.yaml` ファイルをコピーします。dyno の起動中に、ファイルは適切な Datadog Agent のコンフィギュレーションディレクトリにコピーされます。
+独自の [Agent カスタムチェック][25]を有効にするには、アプリケーション内の datadog コンフィギュレーションフォルダーに `checks.d` フォルダーを作成します。その下に、カスタムチェックのすべての `.py` と `.yaml` ファイルをコピーします。dyno の起動中に、ファイルは適切な Datadog Agent のコンフィギュレーションディレクトリにコピーされます。
 
 例えば、`foo` と `bar` という 2 つのカスタムチェックがある場合、これは正しいフォルダツリーになります。
 
@@ -316,7 +325,7 @@ heroku config:add DD_LOG_LEVEL=ERROR
 
 ## デバッグ作業
 
-[情報またはデバッグコマンド][24]のいずれかを実行するには、`agent-wrapper` コマンドを使用します。
+[情報またはデバッグコマンド][26]のいずれかを実行するには、`agent-wrapper` コマンドを使用します。
 
 たとえば、Datadog Agent と有効なインテグレーションのステータスを表示するには、以下を実行します。
 
@@ -336,7 +345,7 @@ Datadog ビルドパックは、Heroku プラットフォームからログを�
 
 ## Docker イメージと共に Heroku を使用する
 
-このビルドパックは、[Heroku のスラッグコンパイラ][25]を使用する Heroku デプロイメントにのみ有効です。Docker コンテナを使用して Heroku にアプリケーションをデプロイしている場合:
+このビルドパックは、[Heroku のスラッグコンパイラ][27]を使用する Heroku デプロイメントにのみ有効です。Docker コンテナを使用して Heroku にアプリケーションをデプロイしている場合:
 
 1. Datadog Agent を Docker イメージの一部として追加し、コンテナ内の別プロセスとして Agent を起動します。
 2. Heroku アプリケーションに以下の構成オプションを設定し、Datadog が Heroku dyno として正しく報告されるようにします。
@@ -359,6 +368,8 @@ RUN sh -c "echo 'deb [signed-by=${DATADOG_APT_KEYRING}] https://apt.datadoghq.co
 RUN touch ${DATADOG_APT_KEYRING}
 RUN curl -o /tmp/DATADOG_APT_KEY_CURRENT.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_CURRENT.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_CURRENT.public
+RUN curl -o /tmp/DATADOG_APT_KEY_C0962C7D.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_C0962C7D.public" && \
+gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_C0962C7D.public
 RUN curl -o /tmp/DATADOG_APT_KEY_F14F620E.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_F14F620E.public" && \
     gpg --ignore-time-conflict --no-default-keyring --keyring ${DATADOG_APT_KEYRING} --import /tmp/DATADOG_APT_KEY_F14F620E.public
 RUN curl -o /tmp/DATADOG_APT_KEY_382E94DE.public "${DATADOG_APT_KEYS_URL}/DATADOG_APT_KEY_382E94DE.public" && \
@@ -390,15 +401,15 @@ datadog-agent run &
 /opt/datadog-agent/embedded/bin/process-agent --config=/etc/datadog-agent/datadog.yaml
 ```
 
-Docker イメージのより高度なオプションについては、[Datadog Agent の Docker ファイル][26]を参照してください。
+Docker イメージのより高度なオプションについては、[Datadog Agent の Docker ファイル][28]を参照してください。
 
 ## 寄稿
 
-[Heroku-buildpack-datadog リポジトリ][27]で問題またはプルリクエストを投稿する方法については、[寄稿ガイドライン][28]を参照してください。
+[Heroku-buildpack-datadog リポジトリ][29]で問題またはプルリクエストを投稿する方法については、[寄稿ガイドライン][30]を参照してください。
 
 ## 履歴
 
-このプロジェクトの以前のバージョンは、[miketheman heroku-buildpack-datadog プロジェクト][29]から分岐したものです。その後、Datadog の Agent バージョン 6 向けに大幅な書き換えが行われました。変更内容と詳細は、[changelog][30] にあります。
+このプロジェクトの以前のバージョンは、[miketheman heroku-buildpack-datadog プロジェクト][31]から分岐したものです。その後、Datadog の Agent バージョン 6 向けに大幅な書き換えが行われました。変更内容と詳細は、[changelog][32] にあります。
 
 ## トラブルシューティング
 
@@ -535,17 +546,19 @@ APM Agent
 [14]: https://devcenter.heroku.com/articles/log-runtime-metrics
 [15]: https://docs.datadoghq.com/ja/logs/guide/collect-heroku-logs
 [16]: https://docs.datadoghq.com/ja/logs/logs_to_metrics/
-[17]: https://docs.datadoghq.com/ja/integrations/
-[18]: https://docs.datadoghq.com/ja/getting_started/integrations/#configuring-agent-integrations
-[19]: https://docs.datadoghq.com/ja/integrations/mcache/
-[20]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
-[21]: https://github.com/DataDog/integrations-extras/
-[22]: https://github.com/DataDog/integrations-extras/tree/master/ping
-[23]: https://docs.datadoghq.com/ja/developers/custom_checks/
-[24]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[25]: https://devcenter.heroku.com/articles/slug-compiler
-[26]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
-[27]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
-[28]: https://github.com/DataDog/heroku-buildpack-datadog
-[29]: https://github.com/miketheman/heroku-buildpack-datadog
-[30]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md
+[17]: https://docs.datadoghq.com/ja/database_monitoring/
+[18]: https://docs.datadoghq.com/ja/database_monitoring/setup_postgres/selfhosted/?tab=postgres10#grant-the-agent-access
+[19]: https://docs.datadoghq.com/ja/integrations/
+[20]: https://docs.datadoghq.com/ja/getting_started/integrations/#configuring-agent-integrations
+[21]: https://docs.datadoghq.com/ja/integrations/mcache/
+[22]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
+[23]: https://github.com/DataDog/integrations-extras/
+[24]: https://github.com/DataDog/integrations-extras/tree/master/ping
+[25]: https://docs.datadoghq.com/ja/developers/custom_checks/
+[26]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[27]: https://devcenter.heroku.com/articles/slug-compiler
+[28]: https://github.com/DataDog/datadog-agent/tree/master/Dockerfiles
+[29]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CONTRIBUTING.md
+[30]: https://github.com/DataDog/heroku-buildpack-datadog
+[31]: https://github.com/miketheman/heroku-buildpack-datadog
+[32]: https://github.com/DataDog/heroku-buildpack-datadog/blob/master/CHANGELOG.md

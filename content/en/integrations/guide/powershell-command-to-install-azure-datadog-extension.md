@@ -17,7 +17,8 @@ further_reading:
 Datadog provides an Azure extension to assist with Agent deployment on Azure instances:
 
 * [Introducing Azure monitoring with one-click Datadog deployment][1]
-* [Azure integration documentation][2]
+* [Azure Native integration][2] _US3 only_
+* [Standard Azure integration][7] _All sites_
 
 An alternative to the GUI installation is the command line.
 To run the Datadog Agent in your Azure instances as an extension, use the command that matches your environment. Replace `<SITE_PARAMETER>` with your Datadog account **site parameter** value in the [Datadog sites page][3], and `<DATADOG_API_KEY>` with your [Datadog API key][4]. 
@@ -142,8 +143,9 @@ More information on the syntax to set Azure `connectedmachine` extensions can be
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/introducing-azure-monitoring-with-one-click-datadog-deployment
-[2]: /integrations/azure/#deploy-agents
+[2]: /integrations/guide/azure-native-manual-setup/#virtual-machine-agent
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: /account_management/api-app-keys/#api-keys
 [5]: /integrations/azure_arc/
 [6]: https://learn.microsoft.com/en-us/cli/azure/connectedmachine/extension
+[7]: /integrations/guide/azure-manual-setup/#agent-installation

@@ -2,7 +2,7 @@
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: Github
-  text: Code source dd-sdk-android
+  text: Code source de dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
   text: Explorer le service RUM de Datadog
