@@ -19,25 +19,17 @@ If the configurations described here do not cover your compliance requirements, 
 
 ### Sensitive data 
 
-Sensitive data categories are based on the possible risks they may pose to an organization's data handling policies. Values from each of these categories can be collected in traces as span resource names and tags. 
+Opening sentence
 
-| Risk level | Description                                                                                                           | Examples                                                    |
-|:-----------|:----------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------|
-| High       | Data whose collection could result in a security or privacy risk to your organization                                 | Names, email, geographic location, IP addresses of end-users |
-| Moderate   | Data that by convention does not contain PII but can be subject to your organization's privacy and security policies | Service names, IP addresses (not end-users)                 |
-| Low        | Data that is available publicly or contains non-identifying system information                                       | Geographic regions, host ports                                |
-
-Values attributed to these categories are collected differently dependending on the language library. Generally, the following are considered higher-risk categories:
-
-| Data category       | Description                                                                                                                               |
-|:--------------------|:------------------------------------------------------------------------------------------------------------------------------------------|
-| Name                | The real name of an internal user (your employee) or end-user.                                                                                 |
-| Email               | The email address of an internal user (employee) or end-user.                                                                             |
-| Client IP           | The IP address of your end-user associated with an incoming request or the external IP address of an outgoing request.                    |
-| Database statements | The literal, sequence of literals, or bind variables used in an executed database statement.                                              |
-| Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                                               |
-| URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                                               |
-| URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                                      |
+| Data category       | Description                                                                                                            |
+|:--------------------|:-----------------------------------------------------------------------------------------------------------------------|
+| Name                | The real name of an internal user (your employee) or end-user.                                                         |
+| Email               | The email address of an internal user (employee) or end-user.                                                          |
+| Client IP           | The IP address of your end-user associated with an incoming request or the external IP address of an outgoing request. |
+| Database statements | The literal, sequence of literals, or bind variables used in an executed database statement.                           |
+| Geographic location | Longitude and latitude coordinates that can be used to identify an individual or household.                            |
+| URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
+| URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
 
 These data categories are collected by the automatic instrumentation provided by each of the following language tracing libraries:
 
