@@ -36,49 +36,19 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 
 {{< tabs >}}
 
-{{% tab "On-Premises CI provider (Datadog Agent)" %}}
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
 
-If you are running tests on an on-premises CI provider, such as Jenkins or self-managed GitLab CI, install the Datadog Agent on each worker node by following the [Agent installation instructions][1]. This is the recommended option as test results are then automatically linked to the underlying host metrics.
+{{% ci-agent %}}
 
-If you are using a Kubernetes executor, Datadog recommends using the [Datadog Admission Controller][2], which automatically sets the environment variables in the build pods to communicate with the local Datadog Agent.
-
-If you are not using Kubernetes or can't use [Datadog Admission Controller][2] and the CI provider is using a container-based executor, set the `DD_TRACE_AGENT_URL` environment variable (which defaults to `http://localhost:8126`) in the build container running the tracer to an endpoint that is accessible from within that container. _Note that using `localhost` inside the build references the container itself and not the underlying worker node or any container where the Agent might be running_.
-
-`DD_TRACE_AGENT_URL` includes the protocol and port (for example, `http://localhost:8126`) and takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`, and is the recommended configuration parameter to configure the Datadog Agent's URL for CI Visibility.
-
-If you still have issues connecting to the Datadog Agent, use the [Agentless Mode](?tab=cloudciprovideragentless#configuring-reporting-method). **Note**: by using this method, there will be no correlation between tests and infrastructure metrics.
-
-
-[1]: /agent/
-[2]: https://docs.datadoghq.com/agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 <div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
 
-If you are using a cloud CI provider without access to the underlying worker nodes, such as GitHub Actions or CircleCI, configure the library to use the Agentless mode. For this, set the following environment variables:
+{{% ci-agentless %}}
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required)
-: Enables or disables Agentless mode.<br/>
-**Default**: `false`
-
-`DD_API_KEY` (Required)
-: The [Datadog API key][1] used to upload the test results.<br/>
-**Default**: `(empty)`
-
-Additionally, configure which [Datadog site][2] to which you want to send data.
-
-`DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
 {{% /tab %}}
-
 {{< /tabs >}}
 
 ## Downloading tracer library
@@ -367,65 +337,9 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 [Datadog Tracer configuration][2] options can be used for fine-tuning the tracer behavior.
 
-### Collecting Git metadata
+{{% ci-git-metadata %}}
 
-Datadog uses Git information for visualizing your test results and grouping them by repository, branch, and commit. Git metadata is automatically collected by the test instrumentation from CI provider environment variables and the local `.git` folder in the project path, if available.
-
-If you are running tests in non-supported CI providers or with no `.git` folder, you can set the Git information manually using environment variables. These environment variables take precedence over any auto-detected information. Set the following environment variables to provide Git information:
-
-`DD_GIT_REPOSITORY_URL`
-: URL of the repository where the code is stored. Both HTTP and SSH URLs are supported.<br/>
-**Example**: `git@github.com:MyCompany/MyApp.git`, `https://github.com/MyCompany/MyApp.git`
-
-`DD_GIT_BRANCH`
-: Git branch being tested. Leave empty if providing tag information instead.<br/>
-**Example**: `develop`
-
-`DD_GIT_TAG`
-: Git tag being tested (if applicable). Leave empty if providing branch information instead.<br/>
-**Example**: `1.0.1`
-
-`DD_GIT_COMMIT_SHA`
-: Full commit hash.<br/>
-**Example**: `a18ebf361cc831f5535e58ec4fae04ffd98d8152`
-
-`DD_GIT_COMMIT_MESSAGE`
-: Commit message.<br/>
-**Example**: `Set release number`
-
-`DD_GIT_COMMIT_AUTHOR_NAME`
-: Commit author name.<br/>
-**Example**: `John Smith`
-
-`DD_GIT_COMMIT_AUTHOR_EMAIL`
-: Commit author email.<br/>
-**Example**: `john@example.com`
-
-`DD_GIT_COMMIT_AUTHOR_DATE`
-: Commit author date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
-
-`DD_GIT_COMMIT_COMMITTER_NAME`
-: Commit committer name.<br/>
-**Example**: `Jane Smith`
-
-`DD_GIT_COMMIT_COMMITTER_EMAIL`
-: Commit committer email.<br/>
-**Example**: `jane@example.com`
-
-`DD_GIT_COMMIT_COMMITTER_DATE`
-: Commit committer date in ISO 8601 format.<br/>
-**Example**: `2021-03-12T16:00:28Z`
-
-## Information collected
-
-When CI Visibility is enabled, the following data is collected from your project:
-
-* Test names and durations.
-* Predefined environment variables set by CI providers.
-* Git commit history including the hash, message, author information, and files changed (without file contents).
-* Source code information: relative paths to sources of test classes, line numbers of test methods.
-* Information from the CODEOWNERS file.
+{{% ci-information-collected %}}
 
 ## Troubleshooting
 

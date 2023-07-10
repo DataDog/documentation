@@ -177,7 +177,7 @@ python_best_practices_data:
     text: "do not use too many nested if conditions"
   - link: "/continuous_integration/static_analysis/rules/python-best-practices/too-many-while"
     tag: "too-many-while"
-    text: "do not use too many nested while"
+    text: "do not use too many nested loops and conditions "
   - link: "/continuous_integration/static_analysis/rules/python-best-practices/type-check-isinstance"
     tag: "type-check-isinstance"
     text: "use isinstance instead of type"
@@ -243,6 +243,34 @@ python_inclusive_data:
   - link: "/continuous_integration/static_analysis/rules/python-inclusive/variable-name"
     tag: "variable-name"
     text: "check variable names for wording issues"
+python_pandas_data:
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/arith-operator-not-functions"
+    tag: "arith-operator-not-functions"
+    text: "Use arithmetic operator instead of a function"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/avoid-inplace"
+    tag: "avoid-inplace"
+    text: "Avoid using inplace=True"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/comp-operator-not-function"
+    tag: "comp-operator-not-function"
+    text: "Use operators to compare values, not functions"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/import-as-pd"
+    tag: "import-as-pd"
+    text: "Import pandas according to coding guidelines"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/isna-instead-of-isnull"
+    tag: "isna-instead-of-isnull"
+    text: "Use isna instead of isnull"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/loc-not-ix"
+    tag: "loc-not-ix"
+    text: "prefer iloc or loc rather than ix"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/notna-instead-of-notnull"
+    tag: "notna-instead-of-notnull"
+    text: "prefer notna to notnull"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/pivot-table"
+    tag: "pivot-table"
+    text: "Use pivot_table instead of pivot or unstack"
+  - link: "/continuous_integration/static_analysis/rules/python-pandas/use-read-csv-not-read-table"
+    tag: "use-read-csv-not-read-table"
+    text: "prefer read_csv to read_table"
 further_reading:
   - link: "/continuous_integration/static_analysis/"
     tag: "Documentation"
@@ -324,6 +352,20 @@ Rules specifically for Flask best practices and security.
 Rules for Python to avoid inappropriate wording in the code and comments.
 
 {{< sa-rule-list "python_inclusive_data" >}}
+
+<br>
+
+### Good practices for data science with pandas
+
+**Ruleset ID:** `python-pandas`
+
+A set of rules to check that pandas code is used appropriately.
+
+ - Ensures `import` declarations follow coding guidelines.
+ - Avoid deprecated code and methods.
+ - Avoid inefficient code whenever possible.
+
+{{< sa-rule-list "python_pandas_data" >}}
 
 <br>
 

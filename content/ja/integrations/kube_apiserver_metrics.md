@@ -69,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Kube_apiserver_metrics チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 

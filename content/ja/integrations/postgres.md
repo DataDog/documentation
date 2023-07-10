@@ -95,7 +95,7 @@ Postgres インテグレーションは、Postgres データベースの健全�
 
 <div class="alert alert-info">このページでは、標準的な Postgres Agent のインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### APM に Datadog Agent を構成する
+### インストール
 
 PostgreSQL チェックは Agent にパッケージ化されています。PostgreSQL メトリクスとログの収集を開始するには、[Agent をインストールします][3]。
 
