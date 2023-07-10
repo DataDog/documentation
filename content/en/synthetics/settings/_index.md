@@ -152,7 +152,7 @@ Access restriction is available for customers using [custom roles][11] on their 
 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Restrict access to a global variable" style="width:100%;" >}}
 
 ## Default settings
 
@@ -227,7 +227,7 @@ If you are using the [custom role feature][12], add your user to any custom role
 [9]: /synthetics/multistep?tab=requestoptions#use-variables
 [10]: /synthetics/browser_tests/?tab=requestoptions#use-global-variables
 [11]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[12]: /account_management/rbac/?tab=datadogapplication#custom-role
+[12]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [13]: /account_management/billing/usage_attribution
 [14]: /synthetics/guide/explore-rum-through-synthetics/
 [15]: /synthetics/apm/#prerequisites

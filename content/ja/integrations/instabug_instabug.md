@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: instabug-instabug
 app_uuid: f1bde325-460f-4e8c-8f99-9f7de47ed3d7
 assets: {}

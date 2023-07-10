@@ -185,7 +185,7 @@ try (final Scope scope = tracer.activateSpan(span)) { // mandatory for Datadog c
 - CPU やウォールタイムなどの貴重なリソースを消費する上位のエンドポイントを切り分ける。これは、一般的にパフォーマンスを向上させるためにサービスを最適化しようとしている場合に特に役立ちます。
 - サードパーティのコードやランタイムライブラリが、エンドポイントの速度低下やリソース消費の重さの原因になっているかどうかを把握する。
 
-{{< img src="profiler/endpoint_agg_gif.mp4" alt="エンドポイント集計による遅いエンドポイントのトラブルシューティング" video=true >}}
+{{< img src="profiler/endpoint_agg.mp4" alt="エンドポイント集計による遅いエンドポイントのトラブルシューティング" video=true >}}
 
 
 ### 最もリソースを消費しているエンドポイントを追跡する

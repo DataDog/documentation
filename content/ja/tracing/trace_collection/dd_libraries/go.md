@@ -39,7 +39,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 
 それ以外の場合は、以下の指示に従って、Datadog トレーシングライブラリをコードに追加し、Go インテグレーションを開始します。
 
-### APM に Datadog Agent を構成する
+### APM 用に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
