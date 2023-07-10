@@ -149,23 +149,23 @@ With the span timeline view, you can:
 - Sort out complex interactions between threads
 - Surface runtime activity that impacted the request
 
-Depending on the runtime and language, the timeline lines vary:
+Depending on the runtime and language, the timeline lanes vary:
 
 {{< programming-lang-wrapper langs="java,go,dotnet" >}}
 {{< programming-lang lang="java" >}}
-Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lines on top are runtime activities that may add extra latency. They are unrelated to the request itself.
+Lanes on top are runtime activities that may add extra latency. They are unrelated to the request itself.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Each line is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
+Each lane is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
 
 TODO For each goroutine, you see the goroutine state (waiting, scheduled, running, ...) as well as the stack traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lines on top are runtime activities that may add extra latency. They are unrelated to the request itself.
+Lanes on top are runtime activities that may add extra latency. They are unrelated to the request itself.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

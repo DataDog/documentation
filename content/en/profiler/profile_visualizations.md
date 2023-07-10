@@ -102,23 +102,23 @@ Compared to the flame graph, the timeline view can help you:
 - Sort out complex interactions between threads
 - Surface runtime activity that impacted the process
 
-Depending on the runtime and language, the timeline lines vary:
+Depending on the runtime and language, the timeline lanes vary:
 
 {{< programming-lang-wrapper langs="java,go,dotnet" >}}
 {{< programming-lang lang="java" >}}
-Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lines are top are runtime activities. They may affect your code performance.
+Lanes are top are runtime activities. They may affect your code performance.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
-Each line is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
+Each lane is a **goroutine**. Goroutines from a common pool are grouped together. You can expand the pool to see each goroutine details.
 
 TODO For each goroutine, you see the goroutine state (waiting, scheduled, running, ...) as well as the stack traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
-Each line is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
+Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lines are top are runtime activities. They may affect your code performance.
+Lanes are top are runtime activities. They may affect your code performance.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
