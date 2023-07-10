@@ -1,7 +1,7 @@
 ---
 title: Custom Instrumentation of Ruby Applications with the OpenTelemetry API
 kind: documentation
-description: 'Instrument your Ruby application with OTel API to send traces to Datadog.'
+description: 'Instrument your Ruby application with OpenTelemetry API to send traces to Datadog.'
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
@@ -19,20 +19,20 @@ further_reading:
 - Datadog Ruby tracing library `dd-trace-rb` version 1.9.0 or greater.
 - Gem version support 1.1.0 or greater.
 
-The following OTel features implemented in the Datadog library as noted:
+The following OpenTelemetry features implemented in the Datadog library as noted:
 
 | Feature                               | Support notes                       |
 |---------------------------------------|--------------------------------------|
-| [OTel Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through [custom logging][10]. |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
 
 
-## Configuring OTel to use the Datadog tracing library
+## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OTel instrumentation to your Ruby code following the [OTel Ruby Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][5].
 1. Add the `ddtrace` gem to your Gemfile:
 
     ```ruby
@@ -48,7 +48,7 @@ The following OTel features implemented in the Datadog library as noted:
     require 'datadog/opentelemetry'
     ```
 
-1. Add a configuration block to your application where you can activate integrations and change tracer settings. Without additional configuration here, only code you have instrumented with OTel is traced:
+1. Add a configuration block to your application where you can activate integrations and change tracer settings. Without additional configuration here, only code you have instrumented with OpenTelemetry is traced:
 
     ```ruby
     Datadog.configure do |c|

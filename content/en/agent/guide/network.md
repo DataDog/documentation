@@ -31,7 +31,8 @@ All Agent traffic is sent over SSL. The destination is dependent on the Datadog 
 ## Destinations
 
 [APM][1]
-: `trace.agent.`{{< region-param key="dd_site" code="true" >}}
+: `trace.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+`instrumentation-telemetry-intake.`{{< region-param key="dd_site" code="true" >}}
 
 [Live Containers][3] & [Live Process][4]
 : `process.`{{< region-param key="dd_site" code="true" >}}

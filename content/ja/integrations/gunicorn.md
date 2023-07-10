@@ -82,7 +82,7 @@ Gunicorn 自身は、これ以外にも以下のようなメトリクスを DogS
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog Agent の Gunicorn チェックは [Datadog Agent][2] パッケージに含まれています。Gunicorn サーバーに追加でインストールする必要はありません。
 

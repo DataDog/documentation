@@ -1,5 +1,5 @@
 import { getHitData } from './getHitData';
-import { truncateContent } from '../../helpers/truncateContent';
+import { truncateContentAtHighlight } from '../../helpers/truncateContent';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
 const renderHits = (renderOptions, isFirstRender) => {
@@ -23,7 +23,7 @@ const renderHits = (renderOptions, isFirstRender) => {
         const subcategory = `<p class="ais-Hits-subcategory">${hit.subcategory}</p>`;
         const pageTitle = `<p class="ais-Hits-title">${hit.title}</p>`;
         const baseTitleHierarchy =
-            hit.subcategory === hit.title
+            hit.subcategory === hit.title.replace(/(<mark>|<\/mark>)/gm, '')
                 ? `${category}${spacer}${pageTitle}`
                 : `${category}${spacer}${subcategory}${spacer}${pageTitle}`;
 
@@ -36,17 +36,14 @@ const renderHits = (renderOptions, isFirstRender) => {
     const generateJoinedHits = (hitsArray) => {
         return hitsArray
             .map((item) => {
-                const hit = getHitData(item);
-                const displayContent = truncateContent(
-                    hit.content_snippet_match_level === 'full' ? hit.content_snippet : hit.content,
-                    100
-                );
+                const hit = getHitData(item, renderOptions.results.query);
+                const displayContent = truncateContentAtHighlight(hit.content, 300);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
 
                 return `
                     <li class="ais-Hits-item">
                         <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
-                            <div class="ais-Hits-row">${getTitleHierarchyHTML(item)}</div>
+                            <div class="ais-Hits-row">${getTitleHierarchyHTML(hit)}</div>
                             <div class="ais-Hits-row">
                                 <p class="ais-Hits-content">${displayContent}</p>
                             </div>

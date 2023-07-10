@@ -8,6 +8,8 @@ further_reading:
 - link: "/notebooks/"
   tag: "Documentation"
   text: "Notebooks"
+algolia:
+  tags: ['event stream']
 ---
 
 The list widget enables you to display a list of events and issues coming from different sources.

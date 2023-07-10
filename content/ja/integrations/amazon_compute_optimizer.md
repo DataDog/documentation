@@ -31,7 +31,7 @@ AWS Compute Optimizer は、ユーザーのワークロードを適正化する�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 #### AWS
 1. AWS Compute Optimizer のコンソールで、**Accounts** ページに移動し、外部メトリクス取り込みのアカウントレベルのプリファレンスを `Datadog` に設定してください。

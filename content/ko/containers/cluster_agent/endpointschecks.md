@@ -273,7 +273,7 @@ selector:
 app: nginx
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 
