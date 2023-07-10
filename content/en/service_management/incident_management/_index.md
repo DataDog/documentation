@@ -76,7 +76,7 @@ You can also add a monitor to an existing incident.
 
 #### From a Security Signal
 
-Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+Declare an incident directly from a Cloud SIEM or Cloud Security Management Threats signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
 
 Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 
