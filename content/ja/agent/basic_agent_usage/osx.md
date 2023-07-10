@@ -111,7 +111,7 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 詳細については、[埋め込み Agent へのパッケージの追加方法][3]の手順を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

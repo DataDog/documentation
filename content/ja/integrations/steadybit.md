@@ -88,7 +88,7 @@ Datadog と Steadybit のインテグレーションは、[Steadybit Datadog 拡
 
 Steadybit の[無償または有償ライセンス][3]が必要です。インテグレーションは、Steadybit の SAAS とオンプレミスの提供をサポートしています。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 いくつかの[インストール方法がサポートされています][4]。最高の体験を得るためには、以下のように専用の Helm チャートを介して Steadybit Datadog 拡張機能をインストールしてください。`datadog.siteParameter` と `datadog.siteUrl` にサポートされている値については、[Datadog サイト][5]のページを参照してください。
 

@@ -50,7 +50,7 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -111,9 +111,16 @@ Datadog は、Lambda のメトリクスに `at_edge`、`edge_master_name`、`edg
 
 Lambda@Edge 関数では、分散型トレーシングは_サポートされていません_。
 
+## すぐに使えるモニタリング
+
+AWS Lambda インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+
+- AWS Lambda ダッシュボード: すぐに使える [AWS Lambda ダッシュボード][14]を使用して、Lambda 関数の包括的な概要を得ることができます。
+- 推奨モニター: [AWS Lambda の推奨モニター][15]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
 
 ## その他の参考資料
 
@@ -134,4 +141,6 @@ Lambda@Edge 関数では、分散型トレーシングは_サポートされて�
 [11]: /ja/serverless/custom_metrics/#custom-metrics
 [12]: /ja/serverless/forwarder/
 [13]: /ja/serverless/distributed_tracing/
-[14]: /ja/help/
+[14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
+[15]: https://app.datadoghq.com/monitors/recommended
+[16]: /ja/help/

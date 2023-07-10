@@ -85,9 +85,9 @@ Datadog Agent の実行中、DogstatsD は `Tyk-pump` から `request_time` メ�
 
 Tyk インテグレーションは `tyk-pump` パッケージに含まれており、`pump.conf`age でコンフィギュレーションを設定するだけです（Tyk プラットフォームから何もインストールする必要はありません）。
 
-### APM に Datadog Agent を構成する
+### インストール
 
-#### APM に Datadog Agent を構成する
+#### インストール
 
 このインテグレーションに必要なのは、実行中の Tyk インストールのみです。[Tyk セルフマネージド][6] または [Tyk OSS][7] をインストールできます。両オプションに、`tyk-pump` が含まれています。
 

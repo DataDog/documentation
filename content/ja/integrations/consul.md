@@ -98,7 +98,7 @@ _Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 

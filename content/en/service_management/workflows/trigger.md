@@ -21,7 +21,7 @@ further_reading:
 
 You can trigger a workflow manually or automatically.
 
-A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated to the Workflow. For more information on service accounts, see [Service accounts for Workflows][1].
+A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
 
 ## Manually trigger a workflow
 
@@ -96,7 +96,7 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 To schedule a workflow run:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **Schedule**.
-1. Click **Create** to create a service account. For more information, see [Service Accounts for Workflows][1].
+1. Click **Create** to create a service account. For more information, see [Use a service account][1].
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the **Memo** field.
 1. Click **Save**.
@@ -107,7 +107,7 @@ After you trigger a workflow, the workflow page switches to the **Debug** view. 
 
 Use the **Debug** view to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed GitHub team membership step. The error message shows that the step failed due to missing permissions:
 
-{{< img src="service_management/workflows/failed-step2.png" alt="A workflow with a failed step." >}}
+{{< img src="service_management/workflows/failed-step3.png" alt="A workflow with a failed step." >}}
 
 The initial **Debug** view for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking on the workflow canvas.
 
@@ -115,6 +115,6 @@ The initial **Debug** view for a workflow provides a panel with the list of prev
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/access/#service-accounts
+[1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules

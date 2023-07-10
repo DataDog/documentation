@@ -42,7 +42,7 @@ Datadog メトリクスにおける Prometheus および OpenMetrics メトリ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Kubernetes クラスターに Datadog Agent をデプロイします][7]。OpenMetrics および Prometheus チェックは [Datadog Agent][8] パッケージに含まれています。コンテナまたはホストに追加でインストールする必要はありません。
 

@@ -13,10 +13,10 @@ further_reading:
   text: Continuous Testing と CI/CD について
 - link: /continuous_testing/explorer
   tag: ドキュメント
-  text: CI Results Explorer について学ぶ
+  text: Synthetic Monitoring & Continuous Testing Explorer について
 - link: /continuous_testing/testing_tunnel
   tag: ドキュメント
-  text: テストトンネルについて学ぶ
+  text: Continuous Testing Tunnel について
 kind: documentation
 title: Continuous Testing と CI/CD の構成
 ---
@@ -453,6 +453,41 @@ CI バッチの結果は、[Synthetic Monitoring と Continuous Testing Explorer
         [INCORRECT_ASSUMPTION] - [{"index":1,"operator":"is","property":"content-type","type":"header","target":"text/html","valid":false,"actual":"text/html"; charset=utf-8"}] 
   error Command failed with exit code 1.
   info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+```
+
+## アプリケーションのアップロードコマンド
+
+**既存のアプリケーション**に新しいバージョンをアップロードするには、`synthetic upload-application` コマンドを使うことができます。使うには
+
+`--mobileApplicationId` - 文字列 - 新しいバージョンをアップロードしたいアプリケーションの ID
+`--mobileApplicationVersionFilePath` - 文字列 - モバイルアプリへのパス (.apk/.ipa)
+`--versionName` - 文字列 - 新しいバージョンの名前。一意でなければなりません。
+`--latest` - ブール値 - 存在する場合は、そのアプリケーションを 'latest' としてマークします。最新バージョンで実行されたテストは、次回実行時にこのバージョンを使用します。
+
+例:
+```
+datadog-ci synthetics upload-application              \
+--mobileApplicationId '123-123-123'                   \
+--mobileApplicationVersionFilePath example/test.apk \
+--versionName 'example 1.0'                           \
+--latest
+```   
+
+これらのオプションは、コンフィギュレーションファイルで渡すこともできます
+```
+{
+  "apiKey": <DATADOG_API_KEY>,
+  "appKey": <DATADOG_APPLICATION_KEY>,
+  "mobileApplicationVersionFilePath": "example_path/example_app.apk",
+  "mobileApplicationId": "example-abc",
+  "versionName": "example",
+  "latest": true
+}
+```
+
+そして `—config` フラグを付けてコマンドに渡します。例:
+```
+datadog-ci synthetics upload-application --config global.config.json
 ```
 
 ## その他の参考資料

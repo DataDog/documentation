@@ -186,7 +186,10 @@ The following out-of-the-box tags are also available for filtering and grouping 
 To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports. Additionally, Datadog must have permissions to read the exports from the container.
 
 {{% site-region region="us3" %}}
-**Note**: If you are a US3 customer, you may have set up the Datadog integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2]. 
+**Notes**: 
+- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+- Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
+- Pay-as-you-go accounts are not supported.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
 [2]: /integrations/azure/?tab=azurecliv20#setup
@@ -218,8 +221,8 @@ Repeat steps one to six for Metric: **Amortized Cost (usage and purchases)**. Da
 1. In the Exports tab, click on the export's Storage Account to navigate to it.
 2. Click the Containers tab.
 3. Choose the storage container your bills are in.
-4. Select the Access Control (IAM) tab.
-5. Click **Add**.  
+4. Select the Access Control (IAM) tab, and click **Add**.
+5. Choose **Add role assignment**.
 6. Choose **Storage Blob Data Reader**, then click Next.
 7. Assign these permissions to one of the App Registrations you have connected with Datadog.
     - Click **Select members**, pick the name of the App Registration, and click **Select**.
@@ -232,11 +235,11 @@ If your exports are in different storage containers, repeat steps one to seven f
 
 1. Navigate to your [subscriptions][4] and click your subscription's name.
 2. Select the Access Control (IAM) tab.
-3. Click **Add**.
+3. Click **Add**, then **Add role assignment**.
 4. Choose **Cost Management Reader**, then click Next.
-5. Assign these permissions to the subscription.
+5. Assign these permissions to the app registration.
 
-This ensures complete cost accuracy by allowing periodic cost calculations against Azure Cost Management.
+This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
 ### Cost types
 

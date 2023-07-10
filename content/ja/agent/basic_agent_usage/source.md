@@ -88,7 +88,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 [Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

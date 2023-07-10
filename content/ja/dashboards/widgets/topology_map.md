@@ -33,7 +33,7 @@ Topology Map ウィジェットには、データソースとその関係が視�
 
 {{< dashboards-widgets-api >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 
