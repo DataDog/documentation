@@ -31,78 +31,83 @@ Opening sentence
 | URI parameters      | The parameter values in the variable part of the URI path or the URI query.                                            |
 | URI userinfo        | The userinfo subcomponent of the URI that may contain the user name.                                                   |
 
-These data categories are collected by the automatic instrumentation provided by each of the following language tracing libraries:
+For each language library, a data category is collected if it is supported by automatic instrumentation and collection is enabled by default. The data category can also be obfuscated by default. 
 
 {{% tabs %}}
 
 {{% tab ".NET" %}}
 
-| Category            | How the data is collected      |
-|---------------------|--------------|
-| Name                | Collected by default without obfuscation      |
-| Email               | Collected by default without obfuscation      |
-| Client IP           | Collected by default without obfuscation      |
-| Database statements | Collected by default with obfuscation      |
-| Geographic location | Never collected      |
-| URI parameters      | Collected by default with obfuscation      |
-| URI userinfo        | Never collected      |
-
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> |                                 |
+| URI userinfo        |                                 |                                 |
 
 {{% /tab %}}
 
 {{% tab "Java" %}}
 
-| Category            | How the data is collected      |
-|---------------------|--------------|
-| Name                | Collected by default without obfuscation      |
-| Email               | Collected by default without obfuscation      |
-| Client IP           | Not collected by default, enabled with obfuscation     |
-| Database statements | Collected by default without obfuscation      |
-| Geographic location | Never collected      |
-| URI parameters      | Collected by default with obfuscation      |
-| URI userinfo        | Never collected      |
+**Note:** Database statements are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Database statements | <i class="icon-check-bold"></i> |                                 |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
 
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
 
-| Category            | How the data is collected      |
-|---------------------|--------------|
-| Name                | Collected by default without obfuscation      |
-| Email               | Collected by default without obfuscation      |
-| Client IP           | Collected by default without obfuscation     |
-| Database statements | Collected by default without obfuscation      |
-| Geographic location | Never collected      |
-| URI parameters      | Not collected by default, enabled with obfuscation      |
-| URI userinfo        | Never collected      |
+**Note:** URI parameters are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> |                                 |
+| Email               | <i class="icon-check-bold"></i> |                                 |
+| Client IP           | <i class="icon-check-bold"></i> |                                 |
+| Database statements | <i class="icon-check-bold"></i> |                                 |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
 
 {{% /tab %}}
 
 {{% tab "PHP" %}}
 
-| Category            | How the data is collected      |
-|---------------------|--------------|
-| Name                | Never collected      |
-| Email               | Never collected      |
-| Client IP           | Never collected     |
-| Database statements | Collected by default with obfuscation      |
-| Geographic location | Never collected      |
-| URI parameters      | Collected by default with obfuscation      |
-| URI userinfo        | Collected by default with obfuscation      |
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                |                                 |                                 |
+| Email               |                                 |                                 |
+| Client IP           |                                 |                                 |
+| Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Geographic location |                                 |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 
 {{% /tab %}}
 
 {{% tab "Python" %}}
 
-| Category            | How the data is collected      |
-|---------------------|--------------|
-| Name                | Collected by default without obfuscation      |
-| Email               | Collected by default without obfuscation      |
-| Client IP           | Not collected by default, enabled without obfuscation     |
-| Database statements | Collected by default with obfuscation      |
-| Geographic location | Collected by default without obfuscation (by the [algoliasearch integration][1] only)      |
-| URI parameters      | Not collected by default, enabled with obfuscation      |
-| URI userinfo        | Never collected      |
+**Note:** Client IP, geographic location, and URI parameters are not collected by default and must be enabled.
+
+| Category            | Collected                       | Obfuscated                      |
+|:--------------------|:-------------------------------:|:-------------------------------:|
+| Name                | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Email               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Client IP           | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Database statements | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Geographic location | <i class="icon-check-bold"></i> |                                 |
+| URI parameters      | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| URI userinfo        |                                 |                                 |
 
 [1]: /tracing/trace_collection/compatibility/python/#datastore-compatibility
 {{% /tab %}}
