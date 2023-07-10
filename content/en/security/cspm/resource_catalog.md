@@ -53,7 +53,7 @@ If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, th
 
 #### Findings
 
-Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Posture Management.
+Each color corresponds to the highest severity misconfiguration detected on the resource. Green indicates a resource is configured correctly. White is displayed for resources that are not monitored by Cloud Security Management Misconfigurations.
 
 #### Threats
 

@@ -10,7 +10,7 @@ further_reading:
   text: "Explore default cloud configuration compliance rules"
 - link: "security/cspm/findings"
   tag: "Documentation"
-  text: "Search and explore CSPM findings"
+  text: "Search and explore CSM Misconfigurations findings"
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"
@@ -45,14 +45,14 @@ Use one of the following methods to enable CSM Misconfigurations for your AWS ac
 #### Security Setup
 
 1. Navigate to **Security** > **Setup**.
-2. Follow the [in-app instructions][3] to activate CSPM for your account.
+2. Follow the [in-app instructions][3] to activate CSM Misconfigurations for your account.
 3. On the **Setup** > **Cloud Providers** tab, click the **[AWS][4]** tile.
 4. To enable CSM Misconfigurations for an AWS account, turn on the **Collect Resources** toggle.
 
 #### AWS integration tile
 
 1. On the AWS integration tile, select an AWS account and click **Resource Collection**.
-2. Select **Cloud Security Posture Management Collection** to enable resource collection for CSPM.
+2. Select **Cloud Security Posture Management Collection** to enable resource collection for CSM Misconfigurations.
 3. Click **Save**.
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
@@ -70,16 +70,16 @@ If you haven't already, set up the [Microsoft Azure integration][1].
 
 **Note**: To access the full set of Azure compliance rules, you must enable the `Application.Read.All`, `Directory.Read.All`, `Group.Read.All`, `Policy.Read.All`, and `User.Read.All` permissions for the Microsoft Graph API.
 
-### Enable C CSM Misconfigurations for Azure
+### Enable CSM Misconfigurations for Azure
 
 Use one of the following methods to enable CSM Misconfigurations for your Azure subscriptions:
 
 #### Security Setup
 
 1. Navigate to **Security** > **Setup**.
-2. Follow the [in-app instructions][2] to activate CSPM for your account.
+2. Follow the [in-app instructions][2] to activate CSM Misconfigurations for your account.
 3. On the **Setup** > **Cloud Providers** tab, click the **[Azure][3]** tile.
-4. Enable CSPM for your Azure subscriptions by turning on the **CSPM Enabled** toggle.
+4. Enable CSM Misconfigurations for your Azure subscriptions by turning on the **CSPM Enabled** toggle.
 
 #### Azure integration tile
 
@@ -154,7 +154,7 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 
 {{% tab "Docker" %}}
 
-### Enable CSPM for Docker
+### Enable CSM Misconfigurations for Docker
 
 1. Navigate to **Security** > **Setup**.
 2. Follow the [in-app instructions][1] to activate CSM Misconfigurations for your account.
@@ -198,9 +198,9 @@ Use one of the following methods to enable CSM Misconfigurations for your Google
 
 ## Visualize the first results
 
-CSPM evaluates resources in increments between 15 minutes and four hours (depending on type). New findings from each scan are generated as soon as the scan completes.
+CSM Misconfigurations evaluates resources in increments between 15 minutes and four hours (depending on type). New findings from each scan are generated as soon as the scan completes.
 
-To view the findings for your cloud resources, go to the [CSPM homepage][1].
+To view the findings for your cloud resources, go to the [Misconfigurations Explorer][1].
 
 {{< img src="security/cspm/summary_page.png" alt="Cloud Security Posture Management summary page" width="100%">}}
 
@@ -210,7 +210,7 @@ CSM Misconfigurations comes with a set of [out-of-the-box compliance rules][2] t
 
 To filter the default compliance rules by cloud provider:
 
-1. Navigate to **Security** > **Posture Management** > **Compliance Rules**.
+1. Navigate to **Security** > **Cloud Security Management** > **Compliance** > **Compliance Rules**.
 2. Choose one of the following values from the **Tag** facet.
     - **AWS**: cloud_provider:aws
     - **Azure**: cloud_provider:azure
@@ -236,7 +236,7 @@ To disable CSM Misconfigurations for your cloud providers:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/compliance/homepage
+[1]: https://app.datadoghq.com/security/compliance/
 [2]: /security/default_rules/#cat-posture-management-cloud
 [3]: https://app.datadoghq.com/security/compliance?time=now
 [4]: /security/cspm/frameworks_and_benchmarks#customize-how-your-environment-is-scanned-by-each-rule

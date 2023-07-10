@@ -57,9 +57,9 @@ Investigate details using the [Security Findings Explorer][10]. View detailed in
 {{< whatsnext >}}
   {{< nextlink href="/security/cspm/setup">}}Complete setup and configuration{{< /nextlink >}}
   {{< nextlink href="/getting_started/cloud_security_management">}}Getting Started with Cloud Security Management{{< /nextlink >}}
-  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSPM{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box Posture Management Cloud detection rules{{< /nextlink >}}
-  {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box Posture Management Infrastructure detection rules{{< /nextlink >}}
+  {{< nextlink href="/account_management/rbac/permissions/#cloud-security-platform">}}Datadog role permissions for CSM Misconfigurations{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-cloud">}}Out-of-the-box cloud detection rules for CSM Misconfigurations{{< /nextlink >}}
+  {{< nextlink href="/security/default_rules/#cat-posture-management-infra">}}Out-of-the-box infrastructure detection rules for CSM Misconfigurations{{< /nextlink >}}
   {{< nextlink href="/security/cspm/findings">}} Learn about CSM Misconfigurations findings{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-azure-with-datadog/">}} Monitor the security and compliance posture of your Azure environment{{< /nextlink >}}
   {{< nextlink href="https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/">}} Improve the compliance and security posture of your Google Cloud environment{{< /nextlink >}}

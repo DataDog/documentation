@@ -7,7 +7,7 @@ aliases:
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default Posture Management cloud configuration compliance rules"
+  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
 - link: "security/cspm/frameworks_and_benchmarks"
   tag: "Documentation"
   text: "Learn about frameworks and industry benchmarks"

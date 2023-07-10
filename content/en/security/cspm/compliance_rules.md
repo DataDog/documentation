@@ -8,7 +8,7 @@ aliases:
 further_reading:
   - link: "/security/cspm/setup"
     tag: "Documentation"
-    text: Getting Started with CSPM
+    text: Getting Started with CSM Misconfigurations
   - link: "/security/cspm/custom_rules/"
     tag: "Documentation"
     text: Custom Rules

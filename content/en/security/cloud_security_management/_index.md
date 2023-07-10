@@ -35,21 +35,21 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Security Management delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
+Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure - in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat quickly by tracing the full attack flow and identify the resource owner where a vulnerability was triggered. Engineers are able to actively monitor their security risks by incorporating security metrics into their existing workflow.
 
 Cloud Security Management includes [Misconfigurations](#cloud-security-posture-management), and [Threats](#cloud-workload-security).
 
 {{< img src="security/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
-## Cloud Security Management Misconfigurations
+## Misconfigurations
 
-[Cloud Security Management Misconfigurations (CSM Misconfigurations)][1] tracks the security hygiene and compliance posture of your production environment, can automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. See security posture scores across your infrastructure and trace each score back to the applicable benchmark or framework criteria.
+[CSM Misconfigurations][1] tracks the security hygiene and compliance posture of your production environment, can automate audit evidence collection, and catch misconfigurations that leave your organization vulnerable to attacks. See security posture scores across your infrastructure and trace each score back to the applicable benchmark or framework criteria.
 
 {{< img src="security/cspm_overview.png" alt="Cloud Security Posture Management scores in Datadog" width="100%">}}
 
-## Cloud Security Management Threats
+## Threats
 
-[Cloud Security Management Misconfigurations (CSM Threats)][2] monitors file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. CSM Threats uses the unified Datadog Agent, so if you're already using Datadog to monitor your environment, there's no need to provision additional resources.
+[CSM Threats][2] monitors file and process activity across your environment to detect threats to your infrastructure, like AWS EC2 instances, and workloads, like Kubernetes clusters, in real time at the kernel level. CSM Threats uses the unified Datadog Agent, so if you're already using Datadog to monitor your environment, there's no need to provision additional resources.
 
 {{< img src="security/cws_overview.png" alt="Cloud Workload Security coverage views in Datadog" width="100%">}}
 
