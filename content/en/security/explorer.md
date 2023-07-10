@@ -53,7 +53,7 @@ Below the header of Cloud SIEM and Cloud Workload Security signals are tabs with
 - `Related Signals` are displayed as a timeline of other signals which contain the same group by values to assist with triaging the signal.
 - `Suggested Actions` provides investigation queries, related dashboards, and links to cloud provider consoles based on Security Signal characteristics that guide investigations and provide insights to a resolution.
 
-Below the header of Cloud Security Posture Management signals are tabs with detailed information related to the signal:
+Below the header of CSM Misconfigurations signals are tabs with detailed information related to the signal:
 - `Message` displays the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond.
 - `Findings` includes a list of each resource that has been evaluated by the rule.
 - `Related Issues` includes a list of other signals which contain the same group by values to assist with triaging the signal.

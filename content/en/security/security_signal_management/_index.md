@@ -52,7 +52,7 @@ To change signal state, follow the instructions below:
 
 Any security signal warning of a possible disruption to your organization's services can be considered an incident. It is often necessary to have a set framework for handling these threats. [Incident Management][4] provides a system to effectively identify and mitigate incidents.
 
-Declare an incident directly from a Cloud SIEM or Cloud Workload Security signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
+Declare an incident directly from a Cloud SIEM or Cloud Security Management Threats signal by clicking the kebab button on the top right of the side panel, and clicking **Declare incident**.
 
 Declare an incident from an Application Security Management signal by selecting the export button on the top right of the side panel, and clicking **Export to incident**.
 

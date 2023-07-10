@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
   - link: "/security/cloud_workload_security/setup"
     tag: "Documentation"
-    text: "Setting Up CWS"
+    text: "Setting Up Cloud Security Management Threats"
   - link: "/security/cloud_workload_security/workload_security_rules"
     tag: "Documentation"
     text: "Managing CSM Threats Detection Rules"

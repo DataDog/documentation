@@ -7,13 +7,13 @@ aliases:
   - /security_platform/cloud_security_management/guide/
 ---
 
-{{< whatsnext desc="Cloud Workload Security Guides" >}}
-    {{< nextlink href="/security/cloud_security_management/guide/tuning-rules" >}}Best Practices for Fine-Tuning CWS Security Signals{{< /nextlink >}}
+{{< whatsnext desc="Cloud Security Management Threats (CSM Threats) Guides" >}}
+    {{< nextlink href="/security/cloud_security_management/guide/tuning-rules" >}}Best Practices for Fine-Tuning CSM Threats Security Signals{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/custom-rules-guidelines" >}}Guidelines for Writing Custom Rules{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Cloud Security Posture Management Guides" >}}
-    {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Writing Custom CSPM Rules with Rego{{< /nextlink >}}
+{{< whatsnext desc="Cloud Security Management Misconfigurations (CSM Misconfigurations) Guides" >}}
+    {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Writing Custom CSM Misconfigurations Rules with Rego{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="General Guides" >}}

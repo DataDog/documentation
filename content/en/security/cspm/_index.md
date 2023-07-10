@@ -26,7 +26,7 @@ View a high-level overview of your security posture on the [Overview page][1]. E
 
 ## Maintain compliance with industry frameworks and benchmarks
 
-CSPM comes with more than 400 out-of-the-box compliance rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
+CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed findings, a comprehensive breakdown of the number of resources with pass/fail findings, and the top three high-severity rule failures.
 
