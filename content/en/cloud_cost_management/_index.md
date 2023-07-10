@@ -179,6 +179,13 @@ The following out-of-the-box tags are also available for filtering and grouping 
 [4]: https://docs.aws.amazon.com/cur/latest/userguide/view-cur.html
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [6]: https://docs.aws.amazon.com/cur/latest/userguide/data-dictionary.html
+
+### Billing conductor
+Billing conductor enables you to simplify the bill by customizing the billing rates, distribute credits and fees, and shared overhead costs at your discretion. You will also be able to select which accounts to include in the CUR.
+
+To create a billing conductor CUR, please follow [these instructions](https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html) from AWS. Make sure the CUR meets [Datadog's requirements](https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report).
+Once the billing conductor CUR created, please follow the instructions above to set it up in Datadog.
+
 {{% /tab %}}
 
 {{% tab "Azure" %}}
