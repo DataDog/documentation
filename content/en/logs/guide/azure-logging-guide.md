@@ -7,11 +7,7 @@ further_reading:
   text: "Learn how to explore your logs"
 ---
 
-<div class="alert alert-warning">
-<a href="https://nodejs.org/en/blog/announcements/nodejs16-eol">NodeJS 16</a> will deprecate September 23, 2023.
-</div>
-
-<div class="alert alert-warning">On September 11 2023, <a href="https://nodejs.org/en/blog/announcements/nodejs16-eol">Node.JS 16</a> will reach end of life. Datadog will update support for the newer version prior to deprecation. </div>
+<div class="alert alert-warning">On September 11 2023, <a href="https://nodejs.org/en/blog/announcements/nodejs16-eol">Node.JS 16</a> will reach end of life. Datadog plans to update support for the newer version prior to deprecation. </div>
 
 ## Overview
 
