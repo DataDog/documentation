@@ -23,7 +23,7 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Value of `/proc/sys/kernel/perf_event_paranoid`
 - Complete command line, including both profiler and application arguments
 
-The section bellow lists potential issues.
+The section bellow lists potential setup issues.
 
 ### "\<ERROR\> Error calling perfopen on watcher"
 
@@ -48,7 +48,7 @@ There are a few less common permissions issues:
 ### "\<ERROR\> Could not mmap memory for watcher
 
 The profiler uses pinned memory to store (performance) events. This type of memory is constrained by kernel settings. You can view your current setting using `ulimit -l`. The following capability can be used to bypass this limitation:
-- `CAP_IPC_LOCK`
+- `CAP_IPC_LOCK`: allows the use of locked memory (memory exempt from paging)
 
 ### "\<WARNING\> Could not finalize watcher"
 
