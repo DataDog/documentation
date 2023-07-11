@@ -47,11 +47,36 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | Test Traits      | The traits of the test such as `category:flaky`.                       |
 | Test Type        | The type of the test such as `test`.                                   |
 
+You can filter by test level: session, module, suite and test. Each test level represents a different level of aggregation of tests.
+
+{{< img src="ci/ci-test-suite-visibility.png" alt="Test Suite Visibility" style="width:100%;">}}
+
+### Sessions
+Test sessions are the highest level of aggregation. They correspond one to one to a test command, such as `yarn test`, `mvn test`, or `dotnet test`.
+
+### Module
+The definition of module changes slightly per language:
+
+* In .NET, a test module groups every test that is run under the same [unit test project][104].
+* In Swift, a test module groups every test that is run for a given bundle.
+* In JavaScript, the test modules map one-to-one to test sessions.
+* In Java, a test module groups every test that is run by the same Maven Surefire/Failsafe or Gradle Test task execution.
+
+An example of a module is `SwiftLintFrameworkTests`, which corresponds to a test target in [`SwiftLint`][105].
+
+### Suite
+A test suite is a group of tests exercising the same unit of code.
+
+An example of a test suite is `src/commands/junit/__tests__/upload.test.ts`, which corresponds to a test file in [`datadog-ci`][106].
+
 Test run data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
 [101]: https://app.datadoghq.com/ci/test-runs
 [102]: https://app.datadoghq.com/dashboards/list
 [103]: https://app.datadoghq.com/notebook/list
+[104]: https://learn.microsoft.com/en-us/visualstudio/test/create-a-unit-test-project?view=vs-2022#to-create-a-unit-test-project
+[105]: https://github.com/realm/SwiftLint/blob/7738f0c0a5990201ca6556bdb2f13f8e67b5191d/Package.swift#L71
+[106]: https://github.com/DataDog/datadog-ci/blob/6de6ea3bbffa57d8576422535061ca35c759feb6/src/commands/junit/__tests__/upload.test.ts
 
 {{% /tab %}}
 {{% tab "Pipeline Executions" %}}
@@ -75,11 +100,27 @@ The **CI** panel on the left lists default facets you can use to search for your
 | Pipeline URL    | The URL of the pipeline.                                      |
 | Queue time      | Length of time for the pipeline wait for the queue.           |
 
+## Pipeline executions details and traces
+
+You can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
+
+Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left (`Pipeline`, `Stage`, `Job`, and more.)
+
+{{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs" style="width:100%;">}}
+
+Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
+
+Alternatively, click the [**Analytics**][105] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and share on dashboards.
+
+{{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
+
 CI pipeline data is available in [dashboards][102] and [notebooks][103], enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
 
 [101]: https://app.datadoghq.com/ci/pipeline-executions
 [102]: https://app.datadoghq.com/dashboard/lists
 [103]: https://app.datadoghq.com/notebook/list
+[104]: https://app.datadoghq.com/ci/pipeline-executions
+[105]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
 
 {{% /tab %}}
 {{< /tabs >}}
