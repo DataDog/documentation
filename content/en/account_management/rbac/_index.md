@@ -181,7 +181,7 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 {{< img src="account_management/rbac/role_templates.png" alt="Role Templates dropdown menu with Datadog Billing Admin Role selected" style="width:90%;">}}
 
-## Restrict access to individual resources (Granular Access Control)
+## Restrict access to individual resources (granular access controls)
 
 Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of a dashboard to administrators), and individual users only when necessary. This encourages knowledge sharing and collaboration.
 
