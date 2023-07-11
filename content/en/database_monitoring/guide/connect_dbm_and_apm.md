@@ -281,7 +281,7 @@ Follow the [.NET Framework tracing instructions][1] or the [.NET Core tracing in
 Ensure that you are using a supported client library. For example, `Npgsql`.
 
 Enable the database monitoring propagation feature by setting the following environment variable:
-   - For Postgres & MySQL: `DD_DBM_PROPAGATION_MODE=full`
+   - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
    - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
 
 SQL Server does not support full propagation mode due to the inability for the server to cache statements which contain full trace context.
