@@ -74,7 +74,7 @@ nav_sections:
         desc: Ensure uptime, flag regional issues, and test application performance
       - title: Mobile Application Testing
         link: mobile_testing/
-        icon: rum
+        icon: mobile
         desc: Monitor user journeys and business transactions in mobile applications
       - title: Continuous Testing
         link: continuous_testing/

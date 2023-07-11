@@ -1,7 +1,6 @@
 ---
 title: Mobile App Tests
 kind: documentation
-is_beta: true
 description: Learn how to start monitoring key business flows with mobile app tests.
 further_reading:
 - link: "/mobile_testing/settings"
@@ -10,11 +9,10 @@ further_reading:
 - link: "/synthetics/browser_tests"
   tag: "Documentation"
   text: "Learn how to create Synthetic browser tests"
+- link: "https://www.datadoghq.com/blog/test-maintenance-best-practices/"
+  tag: "Blog"
+  text: "Best practices for maintaining end-to-end tests"
 ---
-
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSeHny7qHl5w3u3DCI4Ilc-r4IQZSAFOeZgMvP3CKBO9hEl1qA/viewform" >}}
-Mobile Application Testing is in private beta. Register to request access!
-{{< /callout >}} 
 
 ## Overview
 
@@ -25,6 +23,14 @@ Mobile app tests can run on a schedule, on-demand, or directly within your [CI/C
 You can create mobile app tests in Datadog by navigating to [**UX Monitoring** > **New Test**][12] and selecting **Mobile Application Test**.
 
 {{< img src="mobile_testing/new_test.png" alt="Create a Synthetic Mobile Test" style="width:50%;">}}
+
+### Flakiness 
+
+Flakiness is a pain point in end-to-end testing because tests occasionally fail. When a frontend team implements a change, an identifier in your test may alert on it instead of an actual application issue.
+
+To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in mobile app tests. A small change in the UI may modify an element (for example, moving it to another location). The mobile app test automatically locates the element again based on points of reference that are not affected by the change. 
+
+When the test runs successfully, the mobile app test recomputes (or "self heals") any broken locators with updated values. This ensures your tests do not break from simple UI updates and your tests are automatically adapting to your mobile application's UI. 
 
 ## Configuration
 
