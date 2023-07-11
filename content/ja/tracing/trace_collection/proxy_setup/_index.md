@@ -709,7 +709,7 @@ Kubernetes 1.18+ を使用している場合は、ポートの指定に `appProt
 
 Datadog APM は、[Kong Gateway][1] で [kong-plugin-ddtrace][2] プラグインを利用して利用できます。
 
-## APM に Datadog Agent を構成する
+## インストール
 
 プラグインは `luarocks` を使ってインストールします。
 ```

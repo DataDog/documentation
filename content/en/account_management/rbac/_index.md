@@ -183,9 +183,9 @@ When creating or updating a role on the Datadog site, use a Datadog role templat
 
 ## Restrict access to individual resources
 
-Once you have RBAC roles set up, you can restrict access to individual resources by user role.
+Some resources allow you to restrict access to individual resources by roles, teams (beta), or users (beta). Datadog recommends that you use teams to map access to functional groups in your organizations (for example, restrict editing of a dashboard to the application team owning it), roles to map access to personas (for example, restrict editing of a dashboard to administrators), and users only when necessary. This encourages knowledge sharing and collaboration.
 
-The following resources allow granular access control:
+The resources supporting granular access controls include:
 - [Dashboards][11]
 - [Monitors][12]
 - [Notebooks][6]

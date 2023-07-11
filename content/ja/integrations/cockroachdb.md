@@ -75,7 +75,7 @@ CockroachDB チェックは、[CockroachDB][1] クラスターの全体的な健
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 CockroachDB チェックは [Datadog Agent][2] パッケージに含まれているため、
 サーバーに追加でインストールする必要はありません。

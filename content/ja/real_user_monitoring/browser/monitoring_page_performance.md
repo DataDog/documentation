@@ -26,7 +26,7 @@ title: ページのパフォーマンスの監視
 
 RUM のビューイベントは、すべてのページビューについて、広範なパフォーマンスメトリクスを収集します。アプリケーションのページビューを監視し、ダッシュボードや RUM エクスプローラでパフォーマンスメトリクスを確認することができます。
 
-{{< img src="real_user_monitoring/browser/waterfall.png" alt="RUM エクスプローラーの RUM ビューの Performance タブに表示されるウォーターフォールグラフ" style="width:100%;" >}}
+{{< img src="real_user_monitoring/browser/waterfall-4.png" alt="RUM エクスプローラーの RUM ビューの Performance タブに表示されるウォーターフォールグラフ" style="width:100%;" >}}
 
 以下で、ビューのパフォーマンスメトリクスにアクセスできます。
 
@@ -182,7 +182,7 @@ document.addEventListener("scroll", function handler() {
 
 [1]: /ja/real_user_monitoring/dashboards/
 [2]: /ja/real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /ja/real_user_monitoring/dashboards/performance_overview_dashboard
+[3]: /ja/real_user_monitoring/dashboards/performance
 [4]: /ja/real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /ja/synthetics/browser_tests/

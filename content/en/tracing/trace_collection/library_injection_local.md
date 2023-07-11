@@ -36,9 +36,7 @@ To learn more about Kubernetes Admission Controller, read [Kubernetes Admission 
 
 ## Container registries
 
-<div class="alert alert-warning">On July 10 2023, Docker Hub will start enforcing download rate limits to Datadog's Docker Hub registries. Image pulls from these registries count against your rate limit quota.<br/><br/>
-
-Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from other registries where no rate limits apply. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
 
 Datadog publishes instrumentation libraries images on gcr.io, Docker Hub, and AWS ECR:
 | Language   | gcr.io                              | hub.docker.com                              | gallery.ecr.aws                            |

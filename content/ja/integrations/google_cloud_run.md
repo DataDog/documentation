@@ -42,7 +42,7 @@ Cloud Run for Anthos の詳細については、[Google Cloud Run for Anthos ド
 
 ### メトリクスの収集
 
-#### APM に Datadog Agent を構成する
+#### インストール
 
 [Google Cloud Platform インテグレーション][2]をセットアップして、すぐに使えるメトリクスの収集を開始します。カスタムメトリクスを設定するには、[Serverless ドキュメント][3]を参照してください。
 
