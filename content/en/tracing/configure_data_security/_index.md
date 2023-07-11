@@ -19,6 +19,16 @@ The Datadog Agent and some tracing libraries have options available to address t
 
 If your fine-tuning needs aren't covered and you need assistance, reach out to [the Datadog support team][1].
 
+## Top
+this is a new header above a site-region
+
+{{< site-region region="us3,eu">}}
+## Testing this Header 
+Does this header and info appear using the page fragment
+
+{{< /site-region >}}
+## Bottom
+this is a new header below a site-region
 ## Generalizing resource names and filtering baseline
 
 Datadog enforces several filtering mechanisms on spans as a baseline, to provide sound defaults for basic security and generalize resource names to facilitate grouping during analysis. In particular:
