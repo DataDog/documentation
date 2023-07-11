@@ -22,7 +22,7 @@ Strengthen your security posture and achieve continuous compliance by detecting,
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of findings and analyze historical configurations with the [Security Findings Explorer][2].
 
-{{< img src="security/cspm/overview_page.png" alt="Cloud Security Posture Management overview page" width="100%">}}
+{{< img src="security/cspm/datadog.png" alt="Cloud Security Posture Management overview page" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
