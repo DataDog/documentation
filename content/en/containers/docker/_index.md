@@ -41,7 +41,7 @@ Images are available for 64-bit x86 and Arm v8 architectures.
 
 | ECR-Public                                                           | GCR                                                             | Docker Hub                                             |
 |----------------------------------------------------------------------|-----------------------------------------------------------------|--------------------------------------------------------|
-| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          | 
+| [Agent v6+][4]<br>`docker pull public.ecr.aws/datadog/agent`         | [Agent v6+][3]<br>`docker pull gcr.io/datadoghq/agent`          | [Agent v6+][2]<br>`docker pull datadog/agent`          |
 | [Agent v5][7]<br>`docker pull public.ecr.aws/datadog/docker-dd-agent`| [Agent v5][6]<br>`docker pull gcr.io/datadoghq/docker-dd-agent` | [Agent v5][5]<br>`docker pull datadog/docker-dd-agent` |
 
 
@@ -285,7 +285,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [5]: https://hub.docker.com/r/datadog/docker-dd-agent
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
-[8]: https://app.datadoghq.com/account/settings#agent/docker
+[8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [9]: /agent/basic_agent_usage/#supported-os-versions
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: /agent/guide/compose-and-the-datadog-agent/

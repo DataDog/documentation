@@ -151,11 +151,11 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 #### Giving read permissions to the application
 
-1. To assign access at the individual subscription level, navigate to **Subscriptions** through the search box or the left sidebar. 
+1. To assign access at the individual subscription level, navigate to **Subscriptions** through the search box or the left sidebar.
 
 {{< img src="integrations/azure/subscriptions_icon.png" alt="Subscriptions icon" popup="true" style="width:25%">}}
 
-To assign access at the Management Group level, navigate to **Management Groups** and select the Management Group that contains the set of subscriptions you would like to monitor.  
+To assign access at the Management Group level, navigate to **Management Groups** and select the Management Group that contains the set of subscriptions you would like to monitor.
 **Note**: Assigning access at the Management Group level means that any new subscriptions added to the group are automatically discovered and monitored by Datadog.
 
 {{< img src="integrations/azure/azure_management_groups_icon.png" alt="Management groups icon" popup="true" style="width:25%">}}
@@ -191,7 +191,7 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 
 To limit metric collection for Azure-based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
 
-This list of tags in `<KEY>:<VALUE>` form is separated by commas and defines a filter used while collecting metrics. Wildcards such as `?` (for single characters) and `*` (for multiple characters) can also be used. 
+This list of tags in `<KEY>:<VALUE>` form is separated by commas and defines a filter used while collecting metrics. Wildcards such as `?` (for single characters) and `*` (for multiple characters) can also be used.
 
 Only VMs that match one of the defined tags are imported into Datadog. The rest are ignored. VMs matching a given tag can also be excluded by adding `!` before the tag. For example:
 
@@ -249,4 +249,4 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [13]: /integrations/guide/azure-native-manual-setup/
 [14]: https://portal.azure.com
 [15]: https://app.datadoghq.com/organization-settings/api-keys
-[16]: https://app.datadoghq.com/account/settings#agent
+[16]: https://app.datadoghq.com/account/settings/agent/latest

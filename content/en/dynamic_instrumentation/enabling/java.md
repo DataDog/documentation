@@ -93,7 +93,7 @@ See [Dynamic Instrumentation][6] for information about setting snapshot and metr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging
