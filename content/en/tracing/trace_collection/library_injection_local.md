@@ -442,7 +442,7 @@ DD_CONFIG_SOURCES=LOCAL:/etc/<SERVICE_2>/config.yaml;BASIC python <SERVICE_2>.py
 Exercise your application to start generating telemetry data, which you can see as [traces in APM][5].
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [3]: https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu
 [4]: /tracing/trace_collection/library_config/
@@ -638,7 +638,7 @@ Exercise your application to start generating telemetry data, which you can see 
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://docs.docker.com/engine/install/ubuntu/
 [3]: /agent/guide/agent-commands/?tab=agentv6v7#start-the-agent
 [4]: /tracing/trace_collection/library_config/

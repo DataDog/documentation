@@ -176,7 +176,7 @@ This guide assumes you upgraded to the Agent v6 using the [upgrade guide][1]. If
 Run the agent installer package for the latest 5.x version, instructions can be found
 [in the Datadog agent integration page][1].
 
-[1]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 {{% /tab %}}
 {{% tab "MacOS" %}}
 

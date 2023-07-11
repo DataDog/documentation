@@ -99,7 +99,7 @@ See the standard [Daemonset installation][2] and the [Docker Agent][3] informati
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: /agent/kubernetes/
 [3]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
@@ -200,10 +200,10 @@ datadog:
         containers:
             processAgent:
                 env:
-                - name: DD_SCRUB_ARGS 
+                - name: DD_SCRUB_ARGS
                   value: "true"
                 - name: DD_CUSTOM_SENSITIVE_WORDS
-                  value: "personal_key,*token,*token,sql*,*pass*d*" 
+                  value: "personal_key,*token,*token,sql*,*pass*d*"
 ```
 
 
@@ -224,7 +224,7 @@ datadog:
             processAgent:
                 env:
                 - name: DD_STRIP_PROCESS_ARGS
-                  value: "true" 
+                  value: "true"
 ```
 
 {{% /tab %}}

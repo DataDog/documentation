@@ -40,7 +40,7 @@ For hosts running older versions of the install methods listed above or older ve
 
 ## What happens if I don't trust the new key before it is rotated?
 
-Trying to install or upgrade Agent packages using `apt`, `yum`, `dnf` or `zypper` from `apt.datadoghq.com`/`yum.datadoghq.com` without trusting the new key results in an error. 
+Trying to install or upgrade Agent packages using `apt`, `yum`, `dnf` or `zypper` from `apt.datadoghq.com`/`yum.datadoghq.com` without trusting the new key results in an error.
 
 Possible errors include:
 
@@ -141,7 +141,7 @@ Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency
 Upon installation, this package:
 
 - Configures APT keys in the `/usr/share/keyrings/datadog-archive-keyring.gpg` keyring and also in `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` when necessary. **This ensures that the upcoming APT repository signing key is trusted.** Using the package [`datadog-signing-keys` version 1.1.0](#datadog-signing-keys-version-110) is recommended to ensure preparedness for the upcoming key rotation.
-- Sets up a [`debsig-verify` policy][12] for Datadog packages. This allows you to verify signatures for individual DEB packages locally. 
+- Sets up a [`debsig-verify` policy][12] for Datadog packages. This allows you to verify signatures for individual DEB packages locally.
 
 For example, to verify that a locally downloaded DEB package was built and signed by Datadog, run the following command:
 
@@ -192,4 +192,4 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 [10]: https://github.com/DataDog/heroku-buildpack-datadog
 [11]: https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk
 [12]: https://manpages.ubuntu.com/manpages/jammy/man1/debsig-verify.1.html
-[13]: https://app.datadoghq.com/account/settings#agent
+[13]: https://app.datadoghq.com/account/settings/agent/latest
