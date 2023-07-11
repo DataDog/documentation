@@ -25,14 +25,14 @@ A notification is sent by your test based on the [alerting conditions](#define-a
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | Show when the test alerts.                                          |
-    | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
-    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
-    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
-    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
-    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
+    | &#x7b;&#x7b; #is_alert &#x7d;&#x7d;            | Show when the test alerts.                                          |
+    | &#x7b;&#x7b; ^is_alert &#x7d;&#x7d;            | Show unless the test alerts.                                        |
+    | &#x7b;&#x7b; #is_recovery &#x7d;&#x7d;         | Show when the test recovers from alert.                             |
+    | &#x7b;&#x7b; ^is_recovery &#x7d;&#x7d;         | Show unless the test recovers from alert.                           |
+    | &#x7b;&#x7b; #is_renotify &#x7d;&#x7d;         | Show when the monitor renotifies.                                   |
+    | &#x7b;&#x7b; ^is_renotify &#x7d;&#x7d;         | Show unless the monitor renotifies.                                 |
+    | &#x7b;&#x7b; #is_priority &#x7d;&#x7d;         | Show when the monitor matches priority (P1 to P5).                  |
+    | &#x7b;&#x7b; ^is_priority &#x7d;&#x7d;         | Show unless the monitor matches priority (P1 to P5).                |
 
 3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
 
