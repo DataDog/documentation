@@ -167,10 +167,14 @@ These reasons include the following:
 : The SSL connection couldn't be performed. [See the dedicated error page for more information][9].
 
 `TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
+: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` errors can happen:
   - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
   For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
+
+`WEBSOCKET`
+: The WebSocket connection was closed or cannot be opened. One type of `WEBSOCKET` error can happen:
+  - `WEBSOCKET: Received message longer than the maximum supported length.` indicates that the response message length hits the maximum length (50kb). 
 
 ## Permissions
 
