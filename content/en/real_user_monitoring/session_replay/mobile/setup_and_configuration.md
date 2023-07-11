@@ -22,7 +22,7 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
 1. Make sure you've [setup and initialized the Datadog Android RUM SDK][2].
 2. In order to use the SNAPSHOTS in your Gradle dependencies, add this repository as a source in your repository configuration in your `build.gradle` file:
 
-   {{< code-block lang="groovy" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+   ```kotlin
      repositories {
           maven {
            url ="https://oss.sonatype.org/content/repositories/snapshots"
@@ -35,7 +35,7 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
              implementation 'com.datadoghq:dd-sdk-android-session-replay-material:1.19.0-sr-beta1-SNAPSHOT' // in case you need material support
 
           }
-   {{< /code-block >}}
+   ```
 
 3. Once the DD SDK and Session Replay SDK dependencies are imported, you can enable the feature when configuring the SDK:
    ```kotlin
@@ -59,24 +59,10 @@ All Session Replay SDK versions can be found in the [Maven Snapshots Repository]
       Datadog.registerFeature(sessionReplayFeature)
    ```
 
-## Additional settings
-
-### Updating the sample rate for recorded sessions to appear
-Beginning with v1.20.0, the recorder sessions are sampled, and the default sample rate is 0 (meaning that no session will be recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
-
-```java
-val sessionReplayConfig = SessionReplayConfiguration.Builder()
- ...
-.setSessionReplaySampleRate([YOUR_SAMPLE_RATE_HERE])
-.build()
-```
-
-
-[1]: https://oss.sonatype.org/content/repositories/snapshots/
+[1]: https://oss.sonatype.org/content/repositories/snapshots/com/datadoghq/dd-sdk-android/
 [2]: /real_user_monitoring/android/?tab=kotlin
 
 {{% /tab %}}
-
 {{% tab "iOS" %}}
 
 <div class="alert alert-warning">
@@ -146,18 +132,54 @@ sessionReplay = SessionReplay.initialize(with: configuration)
 sessionReplay.start()
 ```
 
+{{% /tab %}}
+{{< /tabs >}}
+
+## Additional configuration
+
+### Prevent recording uploads when a device battery is at 20% or below
+If an end user's device's battery is at 20% or below, you can enable a setting to prevent session replays from being uploaded. To enable this configuration, add the following snippet into your configuration:
+
+{{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+
+[ add code snippet here ]
+
+{{< /code-block >}}
+
+
+### Updating the sample rate for recorded sessions to appear
+Beginning with v1.20.0, the recorder sessions are sampled, and the default sample rate is 0 (meaning that no sessions are recorded). To ensure that you have some recorded sessions in your dashboard, you have to explicitly set the desired sample rate in the configuration:
+
+{{< code-block lang="java" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+
+val sessionReplayConfig = SessionReplayConfiguration.Builder()
+ ...
+.setSessionReplaySampleRate([YOUR_SAMPLE_RATE_HERE])
+.build()
+
+{{< /code-block >}}
+
+
 ## Troubleshooting
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+{{% /tab %}}
+{{% tab "iOS" %}}
 
 To validate whether Session Replay data is being sent from the app, enable the `Datadog.verbosityLevel = .debug` option. If everything works correctly, you should see following logs in the Xcode console soon (about 30 seconds) after launching the application:
 
-```swift
+{{< code-block lang="swift" filename="build.gradle" disable_copy="false" collapsible="true" >}}
+
 [DATADOG SDK] 🐶 → 18:21:29.812 ⏳ (session-replay) Uploading batch...
 [DATADOG SDK] 🐶 → 18:21:30.442    → (session-replay) accepted, won't be retransmitted: [response code: 202 (accepted), request ID: BD445EA-...-8AFCD3F3D16]
-```
+
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://github.com/DataDog/dd-sdk-ios/tree/session-replay-beta
 [2]: /real_user_monitoring/ios/?tab=swift
 [3]: https://github.com/DataDog/dd-sdk-ios
-
-{{% /tab %}}
-{{< /tabs >}}

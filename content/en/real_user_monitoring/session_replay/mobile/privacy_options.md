@@ -46,8 +46,14 @@ further_reading:
 
 ## Masking modes
 
-{{< tabs >}}
-{{% tab "Android" %}}
+By default, the `mask all` setting is enabled for all data. Using the masking modes below, you can override the default setup on a per-application basis.
+
+| Masking mode | Description | Example |
+|--------------|-------------|---------|
+| `mask all` | All text content on screen is replaced with X's | {{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all.png" alt="Enable mask all to replace all text content on the screen with X's" style="width:40%;">}} |
+| `mask user input` | Any input field is replaced with anonymized text | |
+| `allow all` | All text is revealed <br> <br> **Note**: Even with this option enabled, any sensitive text fields such as passwords, emails, phone numbers, and addresses are still masked. | |
+
 
 ### Unmask data in all recorded content
 By default, the Session Replay recorder masks all recorded content with `*` to ensure no sensitive information is visible in the recorded session. If you want to change this, add this option to **unmask data in all recorded content**:
@@ -61,136 +67,41 @@ By default, the Session Replay recorder masks all recorded content with `*` to e
 
    {{< /code-block >}}
 
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-[ add iOS content]
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Text masking
 
-{{< tabs >}}
-{{% tab "Android" %}}
+{{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-[ add android content]
+insert code block content
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-[ add iOS content]
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /code-block >}}
 
 ### Text masking strategies
 
-{{< tabs >}}
-{{% tab "Android" %}}
+{{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-[ add android content]
+insert code block content
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-[ add iOS content]
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /code-block >}}
 
 ### Definitions
 
 ## Appearance masking
 
-{{< tabs >}}
-{{% tab "Android" %}}
+{{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-[ add android content]
+insert code block content
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-[ add iOS content]
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /code-block >}}
 
 ### Definitions
 
 ## Touch interactions
 
-{{< tabs >}}
-{{% tab "Android" %}}
+{{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-[ add android content]
+insert code block content
 
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-
-{{% tab "iOS" %}}
-
-[ add iOS content]
-
-   {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
-
-   insert code block content
-
-   {{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< /code-block >}}
 
 ### Definitions
 
