@@ -14,7 +14,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
-        tags: ["ci pipeline", "ci pipelines"]
+        tags: ['ci pipeline', 'ci pipelines']
 ---
 
 {{< site-region region="gov" >}}
