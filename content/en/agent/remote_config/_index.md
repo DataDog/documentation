@@ -195,6 +195,18 @@ To authenticate and authorize the Agent to receive configurations and security d
 
 **Note:** If you have [`api_keys_write`][5] RBAC permission, but are missing Remote Configuration [Organization][8] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
 
+### Review Remote Configuration status events
+
+Gain visibility into the Remote Configuration status of your Agent through the [Remote Configuration UI][8]. The following table describes the meaning of each status:
+
+  | Status           | Description                                      |
+  |------------------|--------------------------------------------------|
+  | CONNECTED      | The Agent deployed in your environment is able to reach, authenticate, and authorize successfully to Datadog. This is the optimal state you want your Agents to be in for Remote Configuration.                                               |    
+  | ERROR          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize with Datadog for Remote Configuration operation. The most likely cause is the API Key used by the Agent is not Remote Configuration-enabled. To fix the issue, enable Remote Configuration capability on the API Key used by the Agent.                                                 | 
+  | CONNECTION ERROR        |   The Agent deployed in your environment has `remote_config.enabled` set to true in its `datadog.yaml` configuration file, however, the agent cannot be found in the Remote Configuration service. The most likely cause is that the Agent is unable to reach [Remote Configuration endpoints][17]. To fix the issue, allow outbound HTTPS access to Remote Configuration endpoints from your environment. This status displays when the Agent version is `7.45.0` or higher. 
+  | DISABLED       |   The Agent deployed in your environment has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. Set `remote_config.enabled` to true if you want to enable Remote Configuration on the Agent. This status displays when the Agent version is `7.45.0` or higher. | 
+  | NOT CONNECTED       | The Agent cannot be found in the Remote Configuration service and could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local agent configuration or your proxy settings. This status displays when the Agent version is higher than `7.41.1` but lower than `7.45.0`.            | 
+  | UNSUPPORTED AGENT   | The Agent is on a version that is not Remote Configuration capable. To fix this issue, update the Agent to the latest available version. |
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -217,3 +229,4 @@ To authenticate and authorize the Agent to receive configurations and security d
 [16]: /agent/remote_config/?tab=configurationyamlfile#setup
 [17]: /agent/guide/network
 [18]: /agent/proxy/
+
