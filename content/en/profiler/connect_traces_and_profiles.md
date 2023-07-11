@@ -160,7 +160,7 @@ Depending on the runtime and language, the timeline lanes vary:
 {{< programming-lang lang="java" >}}
 Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lanes on top are runtime activities that may add extra latency. They are unrelated to the request itself.
+Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Each lane is a **goroutine**. We include the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to see each goroutine's details.
@@ -170,7 +170,7 @@ Lanes on top are runtime activities that may add extra latency. They can be unre
 {{< programming-lang lang="dotnet" >}}
 Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lanes on top are runtime activities that may add extra latency. They are unrelated to the request itself.
+Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

@@ -108,7 +108,7 @@ Depending on the runtime and language, the timeline lanes vary:
 {{< programming-lang lang="java" >}}
 Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lanes are top are runtime activities. They may affect your code performance.
+Lanes are top are runtime activities that may impact performance
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 This feature needs to be explicitly enabled for Go, see [prerequisites][1].
@@ -116,12 +116,13 @@ This feature needs to be explicitly enabled for Go, see [prerequisites][1].
 Each lane is a **goroutine**. Goroutines created by the same `go` statement are grouped together. You can expand the group to see each goroutine's details.
 
 Lanes on top are runtime activities that may impact performance.
+
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane is a **thread**. Threads from a common pool are grouped together. You can expand the pool to see each thread details.
 
-Lanes are top are runtime activities. They may affect your code performance.
+Lanes are top are runtime activities that may impact performance.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
