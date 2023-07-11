@@ -16,14 +16,14 @@ further_reading:
 
 ## Missing profiles in the profile search page
 
-If you've configured the profiler and don't see profiles in the profile search page, turn on verbose logging (`-l debug`) and [open a support ticket][1] with log files and the following information:
+If you've configured the profiler and don't see profiles in the profile search page, turn on verbose logging (`-l debug`) and [open a support ticket][1]. In the support ticket, include log files along with the following information:
 
 - Linux kernel version (`uname -r`)
 - libc version (`ldd --version`)
 - Value of `/proc/sys/kernel/perf_event_paranoid`
 - Complete command line, including both profiler and application arguments
 
-The section bellow lists potential setup issues.
+The section below lists potential setup issues.
 
 ### "\<ERROR\> Error calling perfopen on watcher"
 
@@ -38,8 +38,8 @@ echo 1 | sudo tee /proc/sys/kernel/perf_event_paranoid
 **Note**: This must be executed from a mount namespace in which the `/proc/sys/kernel/perf_event_paranoid` object exists and is writable. Within a container, this setting is inherited from the host.
 
 There are two capabilities you can use to override the value of `perf_event_paranoid`:
-- `CAP_SYS_ADMIN`: adds many permissions and thus may be discouraged
-- `CAP_PERFMON`: adds BPF and `perf_event_open` capabilities (available on Linux v5.8 or later)
+- `CAP_SYS_ADMIN`: Adds many permissions and thus may be discouraged.
+- `CAP_PERFMON`: Adds BPF and `perf_event_open` capabilities (available on Linux v5.8 or later).
 
 There are a few less common permissions issues:
 - The profiler relies upon the `perf_event_open()` syscall, which is disallowed by some container runtimes. Check the appropriate documentation to see whether this might be the case.
@@ -47,8 +47,8 @@ There are a few less common permissions issues:
 
 ### "\<ERROR\> Could not mmap memory for watcher
 
-The profiler uses pinned memory to store (performance) events. This type of memory is constrained by kernel settings. You can view your current setting using `ulimit -l`. The following capability can be used to bypass this limitation:
-- `CAP_IPC_LOCK`: allows the use of locked memory (memory exempt from paging)
+The profiler requires pinned memory to operate. This type of memory is constrained by kernel settings. You can view your current setting using `ulimit -l`. The following capability can be used to bypass this limitation:
+- `CAP_IPC_LOCK`: Allows the use of locked memory (memory exempt from paging).
 
 ### "\<WARNING\> Could not finalize watcher"
 
@@ -58,7 +58,7 @@ Other profiling tools may contribute to the same limit.
 
 ### "\<WARNING\> Failure to establish connection"
 
-This error usually means that the profiler is unable to connect to the Datadog Agent. Enable configuration logging(`--show_config`) to identify the hostname and port number used by the profiler for uploads. Additionally, the content of the error message may relay the hostname and port used. Compare these values to your Agent configuration. Check the profiler's help section (`ddprof --help`) for further information on how to configure the agent's URL.
+This error usually means that the profiler is unable to connect to the Datadog Agent. Enable configuration logging(`--show_config`) to identify the hostname and port number used by the profiler for uploads. Additionally, the content of the error message may relay the hostname and port used. Compare these values to your Agent configuration. Check the profiler's help section (`ddprof --help`) for further information on how to configure the Agent's URL.
 
 ## Profiles are empty or sparse
 
@@ -66,7 +66,7 @@ The root of your profile is the frame annotated with the application's binary.  
 - Stripped binaries do not have symbols available. Try using a non-stripped binary or a non-minified container image.
 - Certain applications and libraries benefit from their debug packages being installed. This is true for services installed through your repo's package manager or similar.
 
-If you are seeing anonymous frames, you might be using a interpreted or JITed language. Consider enabling perf maps or JIT dump information.
+If you are seeing `Anonymous` where you would expect your function name, you might be using a interpreted or JITed language. Consider enabling perf maps or JIT dump information.
 
 Your profiles may be empty ("No CPU time reported") or contain few frames. Check that your application is under some amount of load. The profiler activates only when the instrumented application is scheduled on the CPU.
 
