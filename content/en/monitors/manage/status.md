@@ -93,7 +93,7 @@ The status graph shows you the dimensions you configured for your alerts, not th
 
 #### Filter the monitor status by groups or events
 
-To scope down the Status & History view to specific groups, use the filter field and enter the attributes you want to filter to. The group filter syntax follows the same principles of the [Monitor Search query][30]. Some best practices to follow:
+To scope down the **Status & History** view to specific groups, use the filter field and enter the attributes you want to filter by. The group filter syntax follows the same principles of the [Monitor Search query][30]. Some best practices to follow:
 
 - Filters are case sensitive, `env:prod` and `env:Prod` do not return the same monitor groups. Datadog recommends practicing uniformity in tags. For more information, see [Getting Started with Tags][31]. 
 - Queries automatically append a wildcard. To apply specific filters, surround your query with double quotes (`"`).
