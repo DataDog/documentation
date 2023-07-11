@@ -15,13 +15,13 @@ draft: false
 git_integration_title: amazon_codedeploy
 has_logo: true
 integration_id: amazon-codedeploy
-integration_title: Amazon CodeDeploy
+integration_title: AWS CodeDeploy
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_codedeploy
-public_title: Datadog-Amazon CodeDeploy インテグレーション
+public_title: Datadog-AWS CodeDeploy インテグレーション
 short_description: 行われているデプロイをリアルタイムで表示し、その所要時間を追跡。
 version: '1.0'
 ---
@@ -42,7 +42,7 @@ AWS CodeDeploy は、クラウドおよびオンプレミスのインスタン�
 
 ### メトリクスの収集
 
-1. Amazon CodeDeploy のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [CodeDeploy ポリシー][3]を参照してください。
+1. AWS CodeDeploy のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][2]に追加します。詳細については、AWS ウェブサイト上の [CodeDeploy ポリシー][3]を参照してください。
 
     | AWS アクセス許可                        | 説明                                                                   |
     | ------------------------------------- | ----------------------------------------------------------------------------- |
@@ -58,14 +58,14 @@ AWS CodeDeploy は、クラウドおよびオンプレミスのインスタン�
 
 #### ログの有効化
 
-Amazon CodeDeploy から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+S3 バケットまたは CloudWatch のいずれかにログを送信するよう AWS CodeDeploy を構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_codedeploy` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
 1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon CodeDeploy ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS CodeDeploy ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
