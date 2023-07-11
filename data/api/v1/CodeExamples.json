@@ -700,6 +700,13 @@
       "description": "Trigger Synthetic tests returns \"OK\" response"
     }
   ],
+  "CreateUser": [
+    {
+      "group": "users",
+      "suffix": "_266604071",
+      "description": "Create a user returns null access role"
+    }
+  ],
   "CreateWebhooksIntegrationCustomVariable": [
     {
       "group": "webhooks_integration",
