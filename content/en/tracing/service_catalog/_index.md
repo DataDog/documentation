@@ -82,7 +82,7 @@ Click the Settings icon on the right hand corner to hide columns from the servic
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. 
 
 The environment dropdown works as a filter. For example, when you select `env:prod`, the list displays only services that have performance data (APM/USM telemetry) in `env:prod` during the last hour. When you select `env:*`, you can see all environments where a service emits telemetry at a glance, and expand to see detailed performance metrics per environment. 
-The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][12] on APM [trace metrics][13]. This dropdown does not affect how many services you see in the list.  
+The second dropdown allows you to rescope any APM data you have in the Performance view to the [second primary tag][12] on APM [trace metrics][13]. This dropdown does not affect how many services you see in the list. RUM applications are not associated with specific environments (unlike APM or USM), and are only viewable when you select the `env*` option in the environment dropdown.  
 
 You can change the default environment in **APM > Setup & Configuration > Settings**. 
 
