@@ -20,7 +20,7 @@ further_reading:
 
 Leverage Datadog's JMX based integrations to collect the JMX-applications metrics from your pods in Kubernetes. In containerized environments there are a few differences in how the Agent connects to the JMX server. Autodiscovery features make it possible to dynamically setup these integrations.
 
-If you are using the Java tracer for your applications, you can alternatively take advantage of the [Java runtime metrics][12] feature to send these metrics to the Agent.
+If you are using the Java tracer for your applications, you can alternatively take advantage of the [Java runtime metrics][2] feature to send these metrics to the Agent.
 
 ## Prerequisites
 ### Agent JMX image
@@ -139,7 +139,7 @@ In this example:
 - The `<INTEGRATION_NAME>` matches the desired integration relative to the previous section
 - The `<JMX_PORT>` can be set as desired, as long as it matches between the annotations and `JAVA_OPTS`
 
-With this configuration the Datadog Agent discovers this pod and makes a request to the JMX Server relative to the `%%host%%` [Autodiscovery template variable][28], resolving to the IP address of the discovered pod. This is why the `java.rmi.server.hostname` is set to the `POD_IP` address previously populated with the [Kubernetes downward API][30].
+With this configuration the Datadog Agent discovers this pod and makes a request to the JMX Server relative to the `%%host%%` [Autodiscovery template variable][3], resolving to the IP address of the discovered pod. This is why the `java.rmi.server.hostname` is set to the `POD_IP` address previously populated with the [Kubernetes downward API][5].
 
 **Note**: The `JAVA_OPTS` environment variable is commonly used in Java based container images as a startup parameter (ex: `java $JAVA_OPTS -jar app.jar`). If you are using a custom application, or, your application doesn't follow this pattern set these system properties manually.
 
@@ -221,11 +221,11 @@ ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
   }
 ```          
 
-See the [JMX Integration docs][31] for more information about the formatting for these metrics.
+See the [JMX Integration docs][6] for more information about the formatting for these metrics.
 
 ## Autodiscovery configuration files
 
-If you need to pass a more complex custom configuration for your Datadog-JMX integration, having all the configurations within the annotations may be impractical. In these cases leverage [Autodiscovery Container Identifiers][11] to pass custom integration configuration files as well as a custom `metrics.yaml` file.
+If you need to pass a more complex custom configuration for your Datadog-JMX integration, having all the configurations within the annotations may be impractical. In these cases leverage [Autodiscovery Container Identifiers][1] to pass custom integration configuration files as well as a custom `metrics.yaml` file.
 
 ### Agent file format
 
@@ -256,11 +256,11 @@ instances:
 
 Replace `<SHORT_IMAGE>` with the short image name of your desired container. For example the container image `gcr.io/CompanyName/my-app:latest` would have short image name of `my-app`. As the Datadog Agent discovers that container it sets up the JMX configuration as described in this file. 
 
-You can alternatively reference and specify [custom identifiers to you containers][29] if you do not want to base this on the short image name. 
+You can alternatively reference and specify [custom identifiers to you containers][4] if you do not want to base this on the short image name.
 
-The configuration files similar to the annotations can use [Autodiscovery Template Variables][28], in this case the `host` configuration is using `%%host%%` to resolve to the IP Address of the discovered container.
+The configuration files similar to the annotations can use [Autodiscovery template variables][3], in this case the `host` configuration is using `%%host%%` to resolve to the IP Address of the discovered container.
 
-Consult the [JMX Integration docs][31] as well as the [example configurations for the pre-provided integrations](#available-jmx-integrations) for more information about structuring your `init_config` and `instances` configuration for the `<METRICS_TO_COLLECT>`.
+Consult the [JMX Integration docs][6] as well as the [example configurations for the pre-provided integrations](#available-jmx-integrations) for more information about structuring your `init_config` and `instances` configuration for the `<METRICS_TO_COLLECT>`.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -357,13 +357,12 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[11]: /containers/guide/ad_identifiers/?tab=kubernetes
-[12]: /tracing/metrics/runtime_metrics/java/
-[28]: /containers/guide/template_variables/
-[29]: /containers/guide/ad_identifiers/?tab=kubernetes#custom-autodiscovery-container-identifiers
-[30]: https://kubernetes.io/docs/concepts/workloads/pods/downward-api/
-[31]: /integrations/java/
-
+[1]: /containers/guide/ad_identifiers/?tab=kubernetes
+[2]: /tracing/metrics/runtime_metrics/java/
+[3]: /containers/guide/template_variables/
+[4]: /containers/guide/ad_identifiers/?tab=kubernetes#custom-autodiscovery-container-identifiers
+[5]: https://kubernetes.io/docs/concepts/workloads/pods/downward-api/
+[6]: /integrations/java/
 [41]: /integrations/activemq/
 [42]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/metrics.yaml
 [43]: https://github.com/DataDog/integrations-core/blob/master/activemq/datadog_checks/activemq/data/conf.yaml.example
