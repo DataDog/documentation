@@ -48,16 +48,6 @@ To report test results to Datadog, you need to configure the Datadog Java librar
 
 {{% ci-agentless %}}
 
-Additionally, configure [Datadog site][2] to which you want to send data.
-
-`DD_SITE` (Required)
-: The [Datadog site][2] to upload results to.<br/>
-**Default**: `datadoghq.com`<br/>
-**Selected site**: {{< region-param key="dd_site" code="true" >}}
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /getting_started/site/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -80,7 +70,7 @@ Run the command below to download the tracer JAR to the specified folder:
 wget -O $DD_TRACER_FOLDER/dd-java-agent.jar https://dtdg.co/latest-java-tracer
 {{< /code-block >}}
 
-You can run `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check the version of the tracer library
+You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check the version of the tracer library.
 
 ## Running your tests
 

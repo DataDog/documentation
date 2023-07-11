@@ -1,6 +1,7 @@
 ---
 title: Intelligent Test Runner for Java
 kind: documentation
+is_beta: true
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -10,11 +11,11 @@ further_reading:
       text: "Troubleshooting CI"
 ---
 
-<div class="alert alert-warning">Intelligent Test Runner for Java is a beta product.</div>
+{{< callout url="#" >}}Intelligent Test Runner for Java in beta.{{< /callout >}} 
 
 ## Compatibility
 
-Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`
+Intelligent Test Runner is supported in `dd-java-agent >= 1.18.0`.
 
 ## Setup
 
@@ -24,13 +25,13 @@ To enable Intelligent Test Runner, set the following environment variables:
 
 `DD_APPLICATION_KEY` (Required)
 : The [Datadog Application key][2] used to query the tests to be skipped.<br/>
-If you are reporting data through the Agent, then it is the agent process that will require the key.<br/>
-If you are using agentless mode, then they key will be used by the tracer process.<br/>
+If you are reporting data through the Agent, then the agent process requires the key.<br/>
+If you are using Agentless mode, then the tracer process uses the key.<br/>
 **Default**: `(empty)`<br/>
 
 `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` (Optional)
-: Intelligent test runner requires [Jacoco][4] for collecting code coverage.<br/>
-Set this variable to a valid Jacoco version (e.g. `0.8.10`) if you want the tracer run your build with Jacoco injected.<br/>
+: Intelligent Test Runner requires [Jacoco][4] for collecting code coverage.<br/>
+Set this variable to a valid Jacoco version (such as `0.8.10`) if you want the tracer to run your build with Jacoco injected.<br/>
 Omit it if your project already has Jacoco configured.<br/>
 **Default**: `(empty)`
 
