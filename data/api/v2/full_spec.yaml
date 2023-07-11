@@ -1845,8 +1845,8 @@ components:
       description: Details of the top level pipeline, build, or workflow of your CI.
       properties:
         end:
-          description: Time when the pipeline run finished. The time format must be
-            RFC3339.
+          description: Time when the pipeline run finished. It cannot be older than
+            18 hours in the past from the current time. The time format must be RFC3339.
           example: '2023-05-31T15:30:00Z'
           format: date-time
           type: string
@@ -3137,6 +3137,12 @@ components:
     ConfluentAccountResourceAttributes:
       description: Attributes object for updating a Confluent resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
         id:
           description: The ID associated with a Confluent resource.
           example: resource-id-123
@@ -3277,6 +3283,12 @@ components:
     ConfluentResourceRequestAttributes:
       description: Attributes object for updating a Confluent resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
         resource_type:
           description: The resource type of the Resource. Can be `kafka`, `connector`,
             `ksql`, or `schema_registry`.
@@ -3319,6 +3331,16 @@ components:
     ConfluentResourceResponseAttributes:
       description: Model representation of a Confluent Cloud resource.
       properties:
+        enable_custom_metrics:
+          default: false
+          description: Enable the `custom.consumer_lag_offset` metric, which contains
+            extra metric tags.
+          example: false
+          type: boolean
+        id:
+          description: The ID associated with the Confluent resource.
+          example: resource_id_abc123
+          type: string
         resource_type:
           description: The resource type of the Resource. Can be `kafka`, `connector`,
             `ksql`, or `schema_registry`.
@@ -3705,6 +3727,584 @@ components:
       type: string
       x-enum-varnames:
       - DETAILED_FINDING
+    DowntimeCreateRequest:
+      description: Request for creating a downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeCreateRequestData'
+      required:
+      - data
+      type: object
+    DowntimeCreateRequestAttributes:
+      description: Downtime details.
+      properties:
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleCreateRequest'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+      required:
+      - scope
+      - monitor_identifier
+      type: object
+    DowntimeCreateRequestData:
+      description: Object to create a downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeCreateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      required:
+      - type
+      - attributes
+      type: object
+    DowntimeDisplayTimezone:
+      default: UTC
+      description: 'The timezone in which to display the downtime''s start and end
+        times in Datadog applications. This is not used
+
+        as an offset for scheduling.'
+      example: America/New_York
+      nullable: true
+      type: string
+    DowntimeIncludedMonitorType:
+      default: monitors
+      description: Monitor resource type.
+      enum:
+      - monitors
+      example: monitors
+      type: string
+      x-enum-varnames:
+      - MONITORS
+    DowntimeMessage:
+      description: 'A message to include with notifications for this downtime. Email
+        notifications can be sent to specific users
+
+        by using the same `@username` notation as events.'
+      example: Message about the downtime
+      nullable: true
+      type: string
+    DowntimeMeta:
+      description: Pagination metadata returned by the API.
+      properties:
+        page:
+          $ref: '#/components/schemas/DowntimeMetaPage'
+      type: object
+    DowntimeMetaPage:
+      description: Object containing the total filtered count.
+      properties:
+        total_filtered_count:
+          description: Total count of elements matched by the filter.
+          format: int64
+          type: integer
+      type: object
+    DowntimeMonitorIdentifier:
+      description: Monitor identifier for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeMonitorIdentifierId'
+      - $ref: '#/components/schemas/DowntimeMonitorIdentifierTags'
+      type: object
+    DowntimeMonitorIdentifierId:
+      additionalProperties: {}
+      description: Object of the monitor identifier.
+      properties:
+        monitor_id:
+          description: ID of the monitor to prevent notifications.
+          example: 123
+          format: int64
+          type: integer
+      required:
+      - monitor_id
+      type: object
+    DowntimeMonitorIdentifierTags:
+      additionalProperties: {}
+      description: Object of the monitor tags.
+      properties:
+        monitor_tags:
+          description: 'A list of monitor tags. For example, tags that are applied
+            directly to monitors,
+
+            not tags that are used in monitor queries (which are filtered by the scope
+            parameter), to which the downtime applies.
+
+            The resulting downtime applies to monitors that match **all** provided
+            monitor tags. Setting `monitor_tags`
+
+            to `[*]` configures the downtime to mute all monitors for the given scope.'
+          example:
+          - service:postgres
+          - team:frontend
+          items:
+            description: A list of monitor tags.
+            example: service:postgres
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - monitor_tags
+      type: object
+    DowntimeMonitorIncludedAttributes:
+      description: Attributes of the monitor identified by the downtime.
+      properties:
+        name:
+          description: The name of the monitor identified by the downtime.
+          example: A monitor name
+          type: string
+      type: object
+    DowntimeMonitorIncludedItem:
+      description: Information about the monitor identified by the downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeMonitorIncludedAttributes'
+        id:
+          description: ID of the monitor identified by the downtime.
+          example: 12345
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DowntimeIncludedMonitorType'
+      type: object
+    DowntimeMuteFirstRecoveryNotification:
+      description: If the first recovery notification during a downtime should be
+        muted.
+      example: false
+      type: boolean
+    DowntimeNotifyEndStateActions:
+      description: Action that will trigger a monitor notification if the downtime
+        is in the `notify_end_types` state.
+      enum:
+      - canceled
+      - expired
+      example: canceled
+      type: string
+      x-enum-varnames:
+      - CANCELED
+      - EXPIRED
+    DowntimeNotifyEndStateTypes:
+      description: State that will trigger a monitor notification when the `notify_end_types`
+        action occurs.
+      enum:
+      - alert
+      - no data
+      - warn
+      example: alert
+      type: string
+      x-enum-varnames:
+      - ALERT
+      - NO_DATA
+      - WARN
+    DowntimeNotifyEndStates:
+      description: States that will trigger a monitor notification when the `notify_end_types`
+        action occurs.
+      example:
+      - alert
+      - warn
+      items:
+        $ref: '#/components/schemas/DowntimeNotifyEndStateTypes'
+      type: array
+    DowntimeNotifyEndTypes:
+      description: Actions that will trigger a monitor notification if the downtime
+        is in the `notify_end_types` state.
+      example:
+      - canceled
+      - expired
+      items:
+        $ref: '#/components/schemas/DowntimeNotifyEndStateActions'
+      type: array
+    DowntimeRelationships:
+      description: All relationships associated with downtime.
+      properties:
+        created_by:
+          $ref: '#/components/schemas/DowntimeRelationshipsCreatedBy'
+        monitor:
+          $ref: '#/components/schemas/DowntimeRelationshipsMonitor'
+      type: object
+    DowntimeRelationshipsCreatedBy:
+      description: The user who created the downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeRelationshipsCreatedByData'
+      type: object
+    DowntimeRelationshipsCreatedByData:
+      description: Data for the user who created the downtime.
+      nullable: true
+      properties:
+        id:
+          description: User ID of the downtime creator.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UsersType'
+      type: object
+    DowntimeRelationshipsMonitor:
+      description: The monitor identified by the downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeRelationshipsMonitorData'
+      type: object
+    DowntimeRelationshipsMonitorData:
+      description: Data for the monitor.
+      nullable: true
+      properties:
+        id:
+          description: Monitor ID of the downtime.
+          example: 12345
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DowntimeIncludedMonitorType'
+      type: object
+    DowntimeResourceType:
+      default: downtime
+      description: Downtime resource type.
+      enum:
+      - downtime
+      example: downtime
+      type: string
+      x-enum-varnames:
+      - DOWNTIME
+    DowntimeResponse:
+      description: 'Downtiming gives you greater control over monitor notifications
+        by
+
+        allowing you to globally exclude scopes from alerting.
+
+        Downtime settings, which can be scheduled with start and end times,
+
+        prevent all alerting related to specified Datadog tags.'
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeResponseData'
+        included:
+          description: Array of objects related to the downtime that the user requested.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseIncludedItem'
+          type: array
+      type: object
+    DowntimeResponseAttributes:
+      description: Downtime details.
+      properties:
+        canceled:
+          description: Time that the downtime was canceled.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          nullable: true
+          type: string
+        created:
+          description: Creation time of the downtime.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          type: string
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        modified:
+          description: Time that the downtime was last modified.
+          example: 2020-01-02T03:04:05.282979+0000
+          format: date-time
+          type: string
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleResponse'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+        status:
+          $ref: '#/components/schemas/DowntimeStatus'
+      type: object
+    DowntimeResponseData:
+      description: Downtime data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeResponseAttributes'
+        id:
+          description: The downtime ID.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        relationships:
+          $ref: '#/components/schemas/DowntimeRelationships'
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      type: object
+    DowntimeResponseIncludedItem:
+      description: An object related to a downtime.
+      oneOf:
+      - $ref: '#/components/schemas/User'
+      - $ref: '#/components/schemas/DowntimeMonitorIncludedItem'
+      type: object
+    DowntimeScheduleCreateRequest:
+      description: Schedule for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesCreateRequest'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
+      type: object
+    DowntimeScheduleCurrentDowntimeResponse:
+      description: 'The most recent actual start and end dates for a recurring downtime.
+        For a canceled downtime,
+
+        this is the previously occurring downtime. For active downtimes, this is the
+        ongoing downtime, and for scheduled
+
+        downtimes it is the upcoming downtime.'
+      properties:
+        end:
+          description: The end of the current downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: The start of the current downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    DowntimeScheduleOneTimeCreateUpdateRequest:
+      additionalProperties: {}
+      description: A one-time downtime definition.
+      properties:
+        end:
+          description: 'ISO-8601 Datetime to end the downtime. Must include a UTC
+            offset of zero. If not provided, the
+
+            downtime continues forever.'
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must include a UTC
+            offset of zero. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    DowntimeScheduleOneTimeResponse:
+      description: A one-time downtime definition.
+      properties:
+        end:
+          description: ISO-8601 Datetime to end the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        start:
+          description: ISO-8601 Datetime to start the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    DowntimeScheduleRecurrenceCreateUpdateRequest:
+      additionalProperties: {}
+      description: An object defining the recurrence of the downtime.
+      properties:
+        duration:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceDuration'
+        rrule:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceRrule'
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must not include
+            a UTC offset. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02T03:04
+          nullable: true
+          type: string
+      required:
+      - duration
+      - rrule
+      type: object
+    DowntimeScheduleRecurrenceDuration:
+      description: The length of the downtime. Must begin with an integer and end
+        with one of 'm', 'h', d', or 'w'.
+      example: 123d
+      type: string
+    DowntimeScheduleRecurrenceResponse:
+      description: An RRULE-based recurring downtime.
+      properties:
+        duration:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceDuration'
+        rrule:
+          $ref: '#/components/schemas/DowntimeScheduleRecurrenceRrule'
+        start:
+          description: 'ISO-8601 Datetime to start the downtime. Must not include
+            a UTC offset. If not provided, the
+
+            downtime starts the moment it is created.'
+          example: 2020-01-02T03:04
+          type: string
+      type: object
+    DowntimeScheduleRecurrenceRrule:
+      description: 'The `RRULE` standard for defining recurring events.
+
+        For example, to have a recurring event on the first day of each month, set
+        the type to `rrule` and set the `FREQ` to `MONTHLY` and `BYMONTHDAY` to `1`.
+
+        Most common `rrule` options from the [iCalendar Spec](https://tools.ietf.org/html/rfc5545)
+        are supported.
+
+
+        **Note**: Attributes specifying the duration in `RRULE` are not supported
+        (for example, `DTSTART`, `DTEND`, `DURATION`).
+
+        More examples available in this [downtime guide](https://docs.datadoghq.com/monitors/guide/suppress-alert-with-downtimes/?tab=api).'
+      example: FREQ=MONTHLY;BYSETPOS=3;BYDAY=WE;INTERVAL=1
+      type: string
+    DowntimeScheduleRecurrencesCreateRequest:
+      description: A recurring downtime schedule definition.
+      properties:
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceCreateUpdateRequest'
+          type: array
+        timezone:
+          default: UTC
+          description: The timezone in which to schedule the downtime.
+          example: America/New_York
+          type: string
+      required:
+      - recurrences
+      type: object
+    DowntimeScheduleRecurrencesResponse:
+      description: A recurring downtime schedule definition.
+      properties:
+        current_downtime:
+          $ref: '#/components/schemas/DowntimeScheduleCurrentDowntimeResponse'
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceResponse'
+          maxItems: 5
+          minItems: 1
+          type: array
+        timezone:
+          default: UTC
+          description: 'The timezone in which to schedule the downtime. This affects
+            recurring start and end dates.
+
+            Must match `display_timezone`.'
+          example: America/New_York
+          type: string
+      required:
+      - recurrences
+      type: object
+    DowntimeScheduleRecurrencesUpdateRequest:
+      description: A recurring downtime schedule definition.
+      properties:
+        recurrences:
+          description: A list of downtime recurrences.
+          items:
+            $ref: '#/components/schemas/DowntimeScheduleRecurrenceCreateUpdateRequest'
+          type: array
+        timezone:
+          default: UTC
+          description: The timezone in which to schedule the downtime.
+          example: America/New_York
+          type: string
+      type: object
+    DowntimeScheduleResponse:
+      description: 'The schedule that defines when the monitor starts, stops, and
+        recurs. There are two types of schedules:
+
+        one-time and recurring. Recurring schedules may have up to five RRULE-based
+        recurrences. If no schedules are
+
+        provided, the downtime will begin immediately and never end.'
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesResponse'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeResponse'
+      type: object
+    DowntimeScheduleUpdateRequest:
+      description: Schedule for the downtime.
+      oneOf:
+      - $ref: '#/components/schemas/DowntimeScheduleRecurrencesUpdateRequest'
+      - $ref: '#/components/schemas/DowntimeScheduleOneTimeCreateUpdateRequest'
+      type: object
+    DowntimeScope:
+      description: The scope to which the downtime applies. Must follow the [common
+        search syntax](https://docs.datadoghq.com/logs/explorer/search_syntax/).
+      example: env:(staging OR prod) AND datacenter:us-east-1
+      type: string
+    DowntimeStatus:
+      description: The current status of the downtime.
+      enum:
+      - active
+      - canceled
+      - ended
+      - scheduled
+      example: active
+      type: string
+      x-enum-varnames:
+      - ACTIVE
+      - CANCELED
+      - ENDED
+      - SCHEDULED
+    DowntimeUpdateRequest:
+      description: Request for editing a downtime.
+      properties:
+        data:
+          $ref: '#/components/schemas/DowntimeUpdateRequestData'
+      required:
+      - data
+      type: object
+    DowntimeUpdateRequestAttributes:
+      description: Attributes of the downtime to update.
+      properties:
+        display_timezone:
+          $ref: '#/components/schemas/DowntimeDisplayTimezone'
+        message:
+          $ref: '#/components/schemas/DowntimeMessage'
+        monitor_identifier:
+          $ref: '#/components/schemas/DowntimeMonitorIdentifier'
+        mute_first_recovery_notification:
+          $ref: '#/components/schemas/DowntimeMuteFirstRecoveryNotification'
+        notify_end_states:
+          $ref: '#/components/schemas/DowntimeNotifyEndStates'
+        notify_end_types:
+          $ref: '#/components/schemas/DowntimeNotifyEndTypes'
+        schedule:
+          $ref: '#/components/schemas/DowntimeScheduleUpdateRequest'
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+      type: object
+    DowntimeUpdateRequestData:
+      description: Object to update a downtime.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DowntimeUpdateRequestAttributes'
+        id:
+          description: ID of this downtime.
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/DowntimeResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
     Event:
       description: The metadata associated with a request.
       properties:
@@ -6945,6 +7545,22 @@ components:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
       type: object
+    ListDowntimesResponse:
+      description: Response for retrieving all downtimes.
+      properties:
+        data:
+          description: An array of downtimes.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseData'
+          type: array
+        included:
+          description: Array of objects related to the downtimes.
+          items:
+            $ref: '#/components/schemas/DowntimeResponseIncludedItem'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DowntimeMeta'
+      type: object
     ListFindingsData:
       description: Array of findings.
       items:
@@ -9223,6 +9839,66 @@ components:
       type: string
       x-enum-varnames:
       - TAG
+    MonitorDowntimeMatchResourceType:
+      default: downtime_match
+      description: Monitor Downtime Match resource type.
+      enum:
+      - downtime_match
+      example: downtime_match
+      type: string
+      x-enum-varnames:
+      - DOWNTIME_MATCH
+    MonitorDowntimeMatchResponse:
+      description: Response for retrieving all downtime matches for a monitor.
+      properties:
+        data:
+          description: An array of downtime matches.
+          items:
+            $ref: '#/components/schemas/MonitorDowntimeMatchResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/DowntimeMeta'
+      type: object
+    MonitorDowntimeMatchResponseAttributes:
+      description: Downtime match details.
+      properties:
+        end:
+          description: The end of the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          nullable: true
+          type: string
+        groups:
+          description: An array of groups associated with the downtime.
+          example:
+          - service:postgres
+          - team:frontend
+          items:
+            description: An array of groups.
+            example: service:postgres
+            type: string
+          type: array
+        scope:
+          $ref: '#/components/schemas/DowntimeScope'
+        start:
+          description: The start of the downtime.
+          example: 2020-01-02 03:04:00+00:00
+          format: date-time
+          type: string
+      type: object
+    MonitorDowntimeMatchResponseData:
+      description: A downtime match.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonitorDowntimeMatchResponseAttributes'
+        id:
+          description: The downtime ID.
+          example: 00000000-0000-1234-0000-000000000000
+          nullable: true
+          type: string
+        type:
+          $ref: '#/components/schemas/MonitorDowntimeMatchResourceType'
+      type: object
     MonitorType:
       description: Attributes from the monitor that triggered the event.
       nullable: true
@@ -11039,19 +11715,23 @@ components:
           description: 'An array of principals. A principal is a subject or group
             of subjects.
 
-            Each principal is formatted as `type:id`. Supported types: `role` and
-            `org`.
+            Each principal is formatted as `type:id`. Supported types: `role`, `team`
+            (beta), `user` (beta), and `org`.
 
-            The org ID can be obtained through the api/v2/current_user API.'
+            The org ID can be obtained through the api/v2/current_user API.
+
+            The user principal type accepts service account IDs.'
           example:
           - role:00000000-0000-1111-0000-000000000000
           items:
             description: 'Subject or group of subjects. Each principal is formatted
               as `type:id`.
 
-              Supported types: `role` and `org`.
+              Supported types: `role`, `team` (beta), `user` (beta), and `org`.
 
-              The org ID can be obtained through the api/v2/current_user API.'
+              The org ID can be obtained through the api/v2/current_user API.
+
+              The user principal type accepts service account IDs.'
             type: string
           type: array
         relation:
@@ -17380,6 +18060,10 @@ paths:
         we support, see the [guide](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).
 
 
+        Pipeline events can be submitted with a timestamp that is up to 18 hours in
+        the past.
+
+
         This API endpoint is in private beta.'
       operationId: CreateCIAppPipelineEvent
       requestBody:
@@ -18173,6 +18857,281 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/downtime:
+    get:
+      description: Get all scheduled downtimes.
+      operationId: ListDowntimes
+      parameters:
+      - description: Only return downtimes that are active when the request is made.
+        in: query
+        name: current_only
+        required: false
+        schema:
+          type: boolean
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          paths are `created_by` and `monitor`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by,monitor
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDowntimesResponse'
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get all downtimes
+      tags:
+      - Downtimes
+      x-menu-order: 1
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Schedule a downtime.
+      operationId: CreateDowntime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DowntimeCreateRequest'
+        description: Schedule a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Schedule a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-given:
+        downtime_v2:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"message\": \"test
+              message\",\n      \"monitor_identifier\": {\n        \"monitor_tags\":
+              [\"cat:hat\"]\n      },\n      \"scope\": \"test:{{ unique_lower_alnum
+              }}\",\n      \"schedule\": {\n        \"start\": null\n      }\n    },\n
+              \   \"type\": \"downtime\"\n  }\n}"
+          step: there is a valid "downtime_v2" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: CancelDowntime
+        parameters:
+        - name: downtime_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/downtime/{downtime_id}:
+    delete:
+      description: Cancel a downtime.
+      operationId: CancelDowntime
+      parameters:
+      - description: ID of the downtime to cancel.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      responses:
+        '204':
+          description: OK
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Cancel a downtime
+      tags:
+      - Downtimes
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    get:
+      description: Get downtime detail by `downtime_id`.
+      operationId: GetDowntime
+      parameters:
+      - description: ID of the downtime to fetch.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00000000-0000-1234-0000-000000000000
+          type: string
+      - description: 'Comma-separated list of resource paths for related resources
+          to include in the response. Supported resource
+
+          paths are `created_by` and `monitor`.'
+        in: query
+        name: include
+        required: false
+        schema:
+          example: created_by,monitor
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Not Found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get a downtime
+      tags:
+      - Downtimes
+      x-menu-order: 5
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Update a downtime by `downtime_id`.
+      operationId: UpdateDowntime
+      parameters:
+      - description: ID of the downtime to update.
+        in: path
+        name: downtime_id
+        required: true
+        schema:
+          example: 00e000000-0000-1234-0000-000000000000
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DowntimeUpdateRequest'
+        description: Update a downtime request body.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DowntimeResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Downtime not found
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_downtime
+      summary: Update a downtime
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events:
     get:
       description: 'List endpoint returns events that match an events search query.
@@ -21602,15 +22561,21 @@ paths:
         required: false
         schema:
           type: string
-      - description: 'For customers with multiple indexes, the indexes to search
+      - description: 'For customers with multiple indexes, the indexes to search.
 
           Defaults to ''*'' which means all indexes'
-        example: main
+        example:
+        - main
+        - web
+        explode: false
         in: query
-        name: filter[index]
+        name: filter[indexes]
         required: false
         schema:
-          type: string
+          items:
+            description: The name of a log index.
+            type: string
+          type: array
       - description: Minimum timestamp for requested logs.
         example: '2019-01-02T09:42:36.320Z'
         in: query
@@ -22648,6 +23613,48 @@ paths:
       x-menu-order: 12
       x-undo:
         type: idempotent
+  /api/v2/monitor/{monitor_id}/downtime_matches:
+    get:
+      description: Get all active downtimes for the specified monitor.
+      operationId: ListMonitorDowntimes
+      parameters:
+      - description: The id of the monitor.
+        in: path
+        name: monitor_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorDowntimeMatchResponse'
+          description: OK
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Monitor Not Found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - monitors_read
+      summary: Get active downtimes for a monitor
+      tags:
+      - Downtimes
+      x-codegen-request-body-name: body
+      x-menu-order: 7
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -26223,8 +27230,10 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/spans/analytics/aggregate:
     post:
-      description: The API endpoint to aggregate spans into buckets and compute metrics
+      description: 'The API endpoint to aggregate spans into buckets and compute metrics
         and timeseries.
+
+        This endpoint is rate limited to `300` requests per hour.'
       operationId: AggregateSpans
       requestBody:
         content:
@@ -26249,7 +27258,7 @@ paths:
       tags:
       - Spans
       x-codegen-request-body-name: body
-      x-menu-order: 2
+      x-menu-order: 3
       x-undo:
         type: safe
   /api/v2/spans/events:
@@ -26259,7 +27268,12 @@ paths:
         [Results are paginated][1].
 
 
-        Use this endpoint to see your latest spans.'
+        Use this endpoint to see your latest spans.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
       operationId: ListSpansGet
       parameters:
       - description: Search query following spans syntax.
@@ -26327,7 +27341,7 @@ paths:
       summary: Get a list of spans
       tags:
       - Spans
-      x-menu-order: 4
+      x-menu-order: 1
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -26342,7 +27356,12 @@ paths:
         [Results are paginated][1].
 
 
-        Use this endpoint to build complex spans filtering and search.'
+        Use this endpoint to build complex spans filtering and search.
+
+        This endpoint is rate limited to `300` requests per hour.
+
+
+        [1]: /logs/guide/collect-multiple-logs-with-pagination?tab=v2api'
       operationId: ListSpans
       requestBody:
         content:
@@ -26369,7 +27388,7 @@ paths:
       tags:
       - Spans
       x-codegen-request-body-name: body
-      x-menu-order: 3
+      x-menu-order: 2
       x-pagination:
         cursorParam: body.data.attributes.page.cursor
         cursorPath: meta.page.after
@@ -28431,6 +29450,18 @@ tags:
 
     organization.'
   name: Dashboard Lists
+- description: '**Note**: Downtime V2 is currently in private beta. To request access,
+    contact [Datadog support](https://docs.datadoghq.com/help/).
+
+
+    [Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives
+
+    you greater control over monitor notifications by allowing you to globally exclude
+
+    scopes from alerting. Downtime settings, which can be scheduled with start and
+
+    end times, prevent all alerting related to specified Datadog tags.'
+  name: Downtimes
 - description: 'The events service allows you to programmatically post events to the
     event stream
 
@@ -28562,10 +29593,11 @@ tags:
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
 
-    (such as editor and viewer) to a set of allowed principals (such as roles). The
-    restriction policy
+    (such as editor and viewer) to a set of allowed principals (such as roles, teams
+    (beta), or users (beta)).
 
-    determines who is authorized to perform what actions on the resource.'
+    The restriction policy determines who is authorized to perform what actions on
+    the resource.'
   name: Restriction Policies
 - description: 'The Roles API is used to create and manage Datadog roles, what
 

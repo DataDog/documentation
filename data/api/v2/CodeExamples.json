@@ -148,6 +148,20 @@
       "description": "Update items of a dashboard list returns \"OK\" response"
     }
   ],
+  "CreateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Schedule a downtime returns \"OK\" response"
+    }
+  ],
+  "UpdateDowntime": [
+    {
+      "group": "downtimes",
+      "suffix": "",
+      "description": "Update a downtime returns \"OK\" response"
+    }
+  ],
   "SearchEvents": [
     {
       "group": "events",

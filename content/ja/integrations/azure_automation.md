@@ -29,7 +29,7 @@ Datadog Azure インテグレーションを使用して、Azure Automation か�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 

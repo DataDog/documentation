@@ -608,11 +608,31 @@ main:
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
     weight: 2
+  - name: Runtime Metrics
+    url: opentelemetry/runtime_metrics
+    identifier: otel_runtime_metrics
+    parent: opentelemetry_top_level
+    weight: 3
+  - name: Java
+    url: opentelemetry/runtime_metrics/java
+    identifier: otel_runtime_metrics_java
+    parent: otel_runtime_metrics
+    weight: 301
+  - name: .NET
+    url: opentelemetry/runtime_metrics/dotnet
+    identifier: otel_runtime_metrics_dotnet
+    parent: otel_runtime_metrics
+    weight: 302
+  - name: Go
+    url: opentelemetry/runtime_metrics/go
+    identifier: otel_runtime_metrics_go
+    parent: otel_runtime_metrics
+    weight: 303
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
     parent: opentelemetry_top_level
-    weight: 3
+    weight: 4
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -4700,9 +4720,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListMonitorDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 7
   - name: Update a downtime
     url: '#update-a-downtime'
@@ -4712,9 +4734,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - UpdateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 6
   - name: Get a downtime
     url: '#get-a-downtime'
@@ -4724,9 +4748,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - GetDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 5
   - name: Cancel a downtime
     url: '#cancel-a-downtime'
@@ -4736,9 +4762,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CancelDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 4
   - name: Cancel downtimes by scope
     url: '#cancel-downtimes-by-scope'
@@ -4760,9 +4788,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - CreateDowntime
-      unstable: []
+      unstable:
+        - v2
       order: 2
   - name: Get all downtimes
     url: '#get-all-downtimes'
@@ -4772,9 +4802,11 @@ api:
     params:
       versions:
         - v1
+        - v2
       operationids:
         - ListDowntimes
-      unstable: []
+      unstable:
+        - v2
       order: 1
   - name: Embeddable Graphs
     url: /api/latest/embeddable-graphs/
@@ -9936,7 +9968,7 @@ api:
       operationids:
         - ListSpans
       unstable: []
-      order: 3
+      order: 2
   - name: Get a list of spans
     url: '#get-a-list-of-spans'
     identifier: spans-get-a-list-of-spans
@@ -9948,7 +9980,7 @@ api:
       operationids:
         - ListSpansGet
       unstable: []
-      order: 4
+      order: 1
   - name: Aggregate spans
     url: '#aggregate-spans'
     identifier: spans-aggregate-spans
@@ -9960,7 +9992,7 @@ api:
       operationids:
         - AggregateSpans
       unstable: []
-      order: 2
+      order: 3
   - name: Spans Metrics
     url: /api/latest/spans-metrics/
     identifier: spans-metrics

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-terraform
 app_uuid: d7240832-9c24-4fc0-9a02-916bc57882c1
 assets:
