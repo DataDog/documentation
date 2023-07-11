@@ -171,49 +171,11 @@ You can extract up to ten variables per test step. Once created, this variable c
 
 Multistep API tests can run:
 
-* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your Multistep API test.
-
-{{< img src="synthetics/api_tests/schedule.png" alt="Run API tests on schedule" style="width:90%;" >}}
-
-* [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers experience.
+* **On a schedule** to ensure your most important endpoints are always accessible to your users. Select the frequency you want Datadog to run your multistep API test.
+* [**Within your CI/CD pipelines**][4] to start shipping without fearing faulty code might impact your customers' experience.
 * **On-demand** to run your tests whenever makes the most sense for your teams.
 
-### Define alert conditions
-
-Set alert conditions to determine the circumstances under which you want a test to fail and trigger an alert.
-
-#### Alerting rule
-
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
-
-* At least one location was in failure (at least one assertion failed) during the last *X* minutes;
-* At one moment during the last *X* minutes, at least *n* locations were in failure.
-
-#### Fast retry
-
-Your test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
-
-Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
-
-### Configure the test monitor
-
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your team.
-
-1. [Similar to monitors][10], select **users and/or services** that should receive notifications either by adding an `@notification` to the message or by searching for team members and connected integrations with the dropdown box.
-
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][11] and supports the following [conditional variables][12]:
-
-    | Conditional Variable       | Description                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | Show when the test alerts.                                          |
-    | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from alert.                             |
-    | `{{^is_recovery}}`         | Show unless the test recovers from alert.                           |
-
-3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-4. Click **Create** to save your test configuration and monitor.
-
-For more information, see [Using Synthetic Test Monitors][13].
+{{% synthetics-alerting-monitoring %}}
 
 {{% synthetics-variables %}}
 

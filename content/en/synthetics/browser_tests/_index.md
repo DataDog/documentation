@@ -138,7 +138,7 @@ You can customize alert conditions to define the circumstances under which you w
 
 A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][5] and supports the following [conditional variables][6]:
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][17]:
 
     | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -211,3 +211,4 @@ You can restrict access to a browser test based on the roles in your organizatio
 [14]: /account_management/rbac/#create-a-custom-role
 [15]: /continuous_testing/testing_tunnel
 [16]: /synthetics/guide/browser-tests-passkeys
+[17]: /monitors/notify/variables/?tab=is_alert#conditional-variables
